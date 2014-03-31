@@ -13,12 +13,12 @@ namespace Nest
 {
 	[DescriptorFor("IndicesClearCache")]
 	public partial class ClearCacheDescriptor : 
-		IndicesOptionalPathDescriptor<ClearCacheDescriptor, ClearCacheQueryString>
-		, IPathInfo<ClearCacheQueryString>
+		IndicesOptionalPathDescriptor<ClearCacheDescriptor, ClearCacheRequestParameters>
+		, IPathInfo<ClearCacheRequestParameters>
 	{
-		ElasticsearchPathInfo<ClearCacheQueryString> IPathInfo<ClearCacheQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<ClearCacheRequestParameters> IPathInfo<ClearCacheRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<ClearCacheQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<ClearCacheRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 
 			return pathInfo;

@@ -13,8 +13,8 @@ namespace Nest
 {
 	[DescriptorFor("Msearch")]
 	public partial class MultiSearchDescriptor 
-		: FixedIndexTypePathDescriptor<MultiSearchDescriptor, MultiSearchQueryString>
-		, IPathInfo<MultiSearchQueryString>
+		: FixedIndexTypePathDescriptor<MultiSearchDescriptor, MultiSearchRequestParameters>
+		, IPathInfo<MultiSearchRequestParameters>
 	{
 
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
@@ -36,9 +36,9 @@ namespace Nest
 			return this.Search(Guid.NewGuid().ToString(), searchSelector);
 		}
 
-		ElasticsearchPathInfo<MultiSearchQueryString> IPathInfo<MultiSearchQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<MultiSearchRequestParameters> IPathInfo<MultiSearchRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<MultiSearchQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<MultiSearchRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			return pathInfo;
 		}

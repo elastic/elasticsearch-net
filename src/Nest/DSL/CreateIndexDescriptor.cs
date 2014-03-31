@@ -11,7 +11,7 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesCreate")]
-	public partial class CreateIndexDescriptor : IPathInfo<CreateIndexQueryString>
+	public partial class CreateIndexDescriptor : IPathInfo<CreateIndexRequestParameters>
 	{
 		internal string _Index { get; set; }
 		internal IndexSettings _IndexSettings = new IndexSettings();
@@ -150,9 +150,9 @@ namespace Nest
 		}
 
 
-		ElasticsearchPathInfo<CreateIndexQueryString> IPathInfo<CreateIndexQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<CreateIndexRequestParameters> IPathInfo<CreateIndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = new ElasticsearchPathInfo<CreateIndexQueryString>();
+			var pathInfo = new ElasticsearchPathInfo<CreateIndexRequestParameters>();
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			pathInfo.Index = this._Index;
 			pathInfo.QueryString = this._QueryString;

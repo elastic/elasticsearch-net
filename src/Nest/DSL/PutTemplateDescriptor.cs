@@ -7,8 +7,8 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[DescriptorFor("IndicesPutTemplate")]
-	public partial class PutTemplateDescriptor : NamePathDescriptor<PutTemplateDescriptor, PutTemplateQueryString>
-		, IPathInfo<PutTemplateQueryString>
+	public partial class PutTemplateDescriptor : NamePathDescriptor<PutTemplateDescriptor, PutTemplateRequestParameters>
+		, IPathInfo<PutTemplateRequestParameters>
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
 
@@ -86,9 +86,9 @@ namespace Nest
 
 		}
 
-		ElasticsearchPathInfo<PutTemplateQueryString> IPathInfo<PutTemplateQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<PutTemplateRequestParameters> IPathInfo<PutTemplateRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<PutTemplateQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<PutTemplateRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
 			pathInfo.Name = this._Name;
 			return pathInfo;

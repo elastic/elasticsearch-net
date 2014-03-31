@@ -13,8 +13,8 @@ namespace Nest
 {
 	[DescriptorFor("IndicesGetAlias")]
 	public partial class GetAliasesDescriptor : 
-		IndicesOptionalPathDescriptor<GetAliasesDescriptor, GetAliasesQueryString>
-		, IPathInfo<GetAliasesQueryString>
+		IndicesOptionalPathDescriptor<GetAliasesDescriptor, GetAliasesRequestParameters>
+		, IPathInfo<GetAliasesRequestParameters>
 	{
 		internal string _Alias { get; set; }
 
@@ -24,9 +24,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<GetAliasesQueryString> IPathInfo<GetAliasesQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<GetAliasesRequestParameters> IPathInfo<GetAliasesRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<GetAliasesQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<GetAliasesRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 			pathInfo.Name = _Alias ?? "*";
 			return pathInfo;

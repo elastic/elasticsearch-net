@@ -13,7 +13,7 @@ namespace Nest
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
 			var descriptor = mappingSelector(new PutMappingDescriptor<T>(_connectionSettings));
-			return this.Dispatch<PutMappingDescriptor<T>, PutMappingQueryString, IndicesResponse>(
+			return this.Dispatch<PutMappingDescriptor<T>, PutMappingRequestParameters, IndicesResponse>(
 				descriptor,
 				(p, d) =>
 				{
@@ -32,7 +32,7 @@ namespace Nest
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
 			var descriptor = mappingSelector(new PutMappingDescriptor<T>(_connectionSettings));
-			return this.DispatchAsync<PutMappingDescriptor<T>, PutMappingQueryString, IndicesResponse, IIndicesResponse>(
+			return this.DispatchAsync<PutMappingDescriptor<T>, PutMappingRequestParameters, IndicesResponse, IIndicesResponse>(
 				descriptor,
 				(p, d) =>
 				{

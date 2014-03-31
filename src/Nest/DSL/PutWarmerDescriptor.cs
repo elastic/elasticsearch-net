@@ -15,8 +15,8 @@ namespace Nest
 	[DescriptorFor("IndicesPutWarmer")]
 	[JsonConverter(typeof(CustomJsonConverter))]
 	public partial class PutWarmerDescriptor :
-		IndicesOptionalTypesNamePathDecriptor<PutWarmerDescriptor, PutWarmerQueryString>
-		, IPathInfo<PutWarmerQueryString>
+		IndicesOptionalTypesNamePathDecriptor<PutWarmerDescriptor, PutWarmerRequestParameters>
+		, IPathInfo<PutWarmerRequestParameters>
 		, IActAsSearchDescriptor
 		, ICustomJson
 	{
@@ -29,9 +29,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<PutWarmerQueryString> IPathInfo<PutWarmerQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<PutWarmerRequestParameters> IPathInfo<PutWarmerRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<PutWarmerQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<PutWarmerRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
 
 			return pathInfo;

@@ -128,7 +128,7 @@
     <Compile Include="Domain\ICustomJson.cs" />
     <Compile Include="Domain\PropertyNameMarker.cs" />
     <Compile Include="Domain\PropertyPathMarker.cs" />
-    <Compile Include="Domain\QueryStringParametersExtensions.Generated.cs" />
+    <Compile Include="Domain\RequestParametersExtensions.Generated.cs" />
     <Compile Include="Domain\Responses\GetAliasesResponse.cs" />
     <Compile Include="Domain\Responses\GetMappingResponse.cs" />
     <Compile Include="Domain\Responses\IMultiSearchResponse.cs" />

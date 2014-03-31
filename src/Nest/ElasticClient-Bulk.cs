@@ -12,7 +12,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector)
 		{
-			return this.Dispatch<BulkDescriptor, BulkQueryString, BulkResponse>(
+			return this.Dispatch<BulkDescriptor, BulkRequestParameters, BulkResponse>(
 				bulkSelector,
 				(p, d) =>
 				{
@@ -25,7 +25,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, BulkDescriptor> bulkSelector)
 		{
-			return this.DispatchAsync<BulkDescriptor, BulkQueryString, BulkResponse, IBulkResponse>(
+			return this.DispatchAsync<BulkDescriptor, BulkRequestParameters, BulkResponse, IBulkResponse>(
 				bulkSelector,
 				(p, d) =>
 				{

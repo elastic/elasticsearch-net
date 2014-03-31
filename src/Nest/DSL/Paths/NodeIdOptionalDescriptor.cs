@@ -20,7 +20,7 @@ namespace Nest
 	/// </summary>
 	public class NodeIdOptionalDescriptor<P, K>
 		where P : NodeIdOptionalDescriptor<P, K> 
-		where K : FluentQueryString<K>, new()
+		where K : FluentRequestParameters<K>, new()
 	{
 		internal string _NodeId { get; set; }
 
@@ -34,7 +34,7 @@ namespace Nest
 		}
 
 		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentQueryString<K>, new()
+			where K : FluentRequestParameters<K>, new()
 		{
 			var pathInfo = new ElasticsearchPathInfo<K>()
 			{

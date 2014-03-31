@@ -13,7 +13,7 @@ namespace Nest
 		public IStatusResponse Status(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<IndicesStatusDescriptor, IndicesStatusQueryString, StatusResponse>(
+			return this.Dispatch<IndicesStatusDescriptor, IndicesStatusRequestParameters, StatusResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesStatusDispatch<StatusResponse>(p)
 			);
@@ -23,7 +23,7 @@ namespace Nest
 		public Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<IndicesStatusDescriptor, IndicesStatusQueryString, StatusResponse, IStatusResponse>(
+			return this.DispatchAsync<IndicesStatusDescriptor, IndicesStatusRequestParameters, StatusResponse, IStatusResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesStatusDispatchAsync<StatusResponse>(p)
 			);

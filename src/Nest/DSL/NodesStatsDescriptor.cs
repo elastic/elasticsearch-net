@@ -11,8 +11,8 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("NodesStats")]
-	public partial class NodesStatsDescriptor : NodeIdOptionalDescriptor<NodesStatsDescriptor, NodesStatsQueryString>
-		, IPathInfo<NodesStatsQueryString>
+	public partial class NodesStatsDescriptor : NodeIdOptionalDescriptor<NodesStatsDescriptor, NodesStatsRequestParameters>
+		, IPathInfo<NodesStatsRequestParameters>
 	{
 		private IEnumerable<NodesStatsMetric> _Metrics { get; set; }
 		private IEnumerable<NodesStatsIndexMetric> _IndexMetrics { get; set; }
@@ -28,9 +28,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<NodesStatsQueryString> IPathInfo<NodesStatsQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<NodesStatsRequestParameters> IPathInfo<NodesStatsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<NodesStatsQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<NodesStatsRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 			if (this._Metrics != null)
 				pathInfo.Metric = this._Metrics.Cast<Enum>().GetStringValue();

@@ -20,7 +20,7 @@ namespace Nest
 	/// </summary>
 	public class IndicesOptionalPathDescriptor<P, K> 
 		where P : IndicesOptionalPathDescriptor<P, K>, new()
-		where K : FluentQueryString<K>, new()
+		where K : FluentRequestParameters<K>, new()
 	{
 		internal IEnumerable<IndexNameMarker> _Indices { get; set; }
 		
@@ -47,7 +47,7 @@ namespace Nest
 		}
 
 		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentQueryString<K>, new()
+			where K : FluentRequestParameters<K>, new()
 		{
 			var index = this._Indices == null ? null : string.Join(",", this._Indices.Select(i => new ElasticInferrer(settings).IndexName(i)));
 

@@ -13,8 +13,8 @@ namespace Nest
 {
 	[DescriptorFor("Mlt")]
 	public partial class MoreLikeThisDescriptor<T> 
-		: DocumentPathDescriptorBase<MoreLikeThisDescriptor<T>, T, MoreLikeThisQueryString>
-		, IPathInfo<MoreLikeThisQueryString> 
+		: DocumentPathDescriptorBase<MoreLikeThisDescriptor<T>, T, MoreLikeThisRequestParameters>
+		, IPathInfo<MoreLikeThisRequestParameters> 
 		where T : class
 	{
 		internal SearchDescriptor<T> _Search { get; set; }
@@ -30,9 +30,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<MoreLikeThisQueryString> IPathInfo<MoreLikeThisQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<MoreLikeThisRequestParameters> IPathInfo<MoreLikeThisRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<MoreLikeThisQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<MoreLikeThisRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = this._Search == null ? PathInfoHttpMethod.GET : PathInfoHttpMethod.POST;
 
 			return pathInfo;

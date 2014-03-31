@@ -145,7 +145,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 						{
 							this.Url.Params = new Dictionary<string, ApiQueryParameters>();
 						}
-						queryStringParamName = this.CsharpMethodName + "QueryString";
+						queryStringParamName = this.CsharpMethodName + "RequestParameters";
 						var paraIndent = "\r\n\t\t///";
 						var explanationOfT =
 							paraIndent + "<para> - If T is of type byte[] deserialization will be shortcircuited</para>"

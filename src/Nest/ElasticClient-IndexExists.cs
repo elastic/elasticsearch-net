@@ -12,7 +12,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IIndexExistsResponse IndexExists(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector)
 		{
-			return this.Dispatch<IndexExistsDescriptor, IndexExistsQueryString, IndexExistsResponse>(
+			return this.Dispatch<IndexExistsDescriptor, IndexExistsRequestParameters, IndexExistsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesExistsDispatch<IndexExistsResponse>(
 					p,
@@ -24,7 +24,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IIndexExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector)
 		{
-			return this.DispatchAsync<IndexExistsDescriptor, IndexExistsQueryString, IndexExistsResponse, IIndexExistsResponse>(
+			return this.DispatchAsync<IndexExistsDescriptor, IndexExistsRequestParameters, IndexExistsResponse, IIndexExistsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesExistsDispatchAsync<IndexExistsResponse>(
 					p,

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using Elasticsearch.Net.Connection;
 
 namespace Elasticsearch.Net
 {
@@ -11,13 +12,28 @@ namespace Elasticsearch.Net
 	/// You can always pass a simple NameValueCollection if you want.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public abstract class FluentQueryString<T> where T : FluentQueryString<T>
+	public abstract class FluentRequestParameters<T> where T : FluentRequestParameters<T>
 	{
 		internal readonly IDictionary<string, object> _QueryStringDictionary = new Dictionary<string, object>();
+		
+		internal object _DeserializationState = null;
+
+		internal IConnectionConfigurationOverrides _RequestConfiguration = null;
 
 		public T Add(string name, object value)
 		{
-			_QueryStringDictionary[name] = value;
+			this._QueryStringDictionary[name] = value;
+			return (T)this;
+		}
+
+		public T RequestConfiguration(IConnectionConfigurationOverrides requestConfiguration)
+		{
+			this._RequestConfiguration = requestConfiguration;
+			return (T)this;
+		}
+		public T DeserializationState(object deserializationState)
+		{
+			_DeserializationState = deserializationState;
 			return (T)this;
 		}
 
@@ -28,7 +44,7 @@ namespace Elasticsearch.Net
 
 	}
 
-	public class FluentQueryString : FluentQueryString<FluentQueryString>
+	public class FluentRequestParameters : FluentRequestParameters<FluentRequestParameters>
 	{
 
 	}

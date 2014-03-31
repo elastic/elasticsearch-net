@@ -21,7 +21,7 @@ namespace Nest
 	public class DocumentPathDescriptorBase<P, T, K>
 		where P : DocumentPathDescriptorBase<P, T, K>, new()
 		where T : class
-		where K : FluentQueryString<K>, new()
+		where K : FluentRequestParameters<K>, new()
 	{
 
 		internal IndexNameMarker _Index { get; set; }
@@ -77,7 +77,7 @@ namespace Nest
 			return (P)this;
 		}
 		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentQueryString<K>, new()
+			where K : FluentRequestParameters<K>, new()
 		{
 			var inferrer = new ElasticInferrer(settings);
 			var index = this._Index != null ? inferrer.IndexName(this._Index) : inferrer.IndexName<T>();

@@ -11,8 +11,8 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("GetSource")]
-	public partial class SourceDescriptor<T> : DocumentPathDescriptorBase<SourceDescriptor<T>,T, SourceQueryString>
-		, IPathInfo<SourceQueryString>
+	public partial class SourceDescriptor<T> : DocumentPathDescriptorBase<SourceDescriptor<T>,T, SourceRequestParameters>
+		, IPathInfo<SourceRequestParameters>
 		where T : class
 	{
 
@@ -27,9 +27,9 @@ namespace Nest
 		}
 		
 		
-		ElasticsearchPathInfo<SourceQueryString> IPathInfo<SourceQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<SourceRequestParameters> IPathInfo<SourceRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = this.ToPathInfo<SourceQueryString>(settings, this._QueryString);
+			var pathInfo = this.ToPathInfo<SourceRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 
 			return pathInfo;

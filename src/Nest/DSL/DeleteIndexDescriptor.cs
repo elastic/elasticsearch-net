@@ -13,12 +13,12 @@ namespace Nest
 {
 	[DescriptorFor("IndicesDelete")]
 	public partial class DeleteIndexDescriptor : 
-		IndicesOptionalPathDescriptor<DeleteIndexDescriptor, DeleteIndexQueryString>
-		, IPathInfo<DeleteIndexQueryString>
+		IndicesOptionalPathDescriptor<DeleteIndexDescriptor, DeleteIndexRequestParameters>
+		, IPathInfo<DeleteIndexRequestParameters>
 	{
-		ElasticsearchPathInfo<DeleteIndexQueryString> IPathInfo<DeleteIndexQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<DeleteIndexRequestParameters> IPathInfo<DeleteIndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<DeleteIndexQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<DeleteIndexRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
 
 			return pathInfo;

@@ -13,11 +13,11 @@ namespace Nest
 {
 	[DescriptorFor("Info")]
 	public partial class InfoDescriptor : 
-		 IPathInfo<InfoQueryString>
+		 IPathInfo<InfoRequestParameters>
 	{
-		ElasticsearchPathInfo<InfoQueryString> IPathInfo<InfoQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<InfoRequestParameters> IPathInfo<InfoRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = new ElasticsearchPathInfo<InfoQueryString>();
+			var pathInfo = new ElasticsearchPathInfo<InfoRequestParameters>();
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 			pathInfo.QueryString = this._QueryString;
 

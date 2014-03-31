@@ -24,7 +24,7 @@ namespace Nest
 			searchSelector.ThrowIfNull("searchSelector");
 			var descriptor = searchSelector(new SearchDescriptor<T>());
 			var pathInfo =
-				((IPathInfo<SearchQueryString>) descriptor).ToPathInfo(_connectionSettings);
+				((IPathInfo<SearchRequestParameters>) descriptor).ToPathInfo(_connectionSettings);
 			var deserializationState = this.CreateCovariantSearchSelector<T, TResult>(descriptor);
 			var status = this.RawDispatch.SearchDispatch<QueryResponse<TResult>>(pathInfo,
 				descriptor, deserializationState);
@@ -48,7 +48,7 @@ namespace Nest
 			searchSelector.ThrowIfNull("searchSelector");
 			var descriptor = searchSelector(new SearchDescriptor<T>());
 			var pathInfo =
-				((IPathInfo<SearchQueryString>) descriptor).ToPathInfo(_connectionSettings);
+				((IPathInfo<SearchRequestParameters>) descriptor).ToPathInfo(_connectionSettings);
 			var deserializationState = this.CreateCovariantSearchSelector<T, TResult>(descriptor);
 			return this.RawDispatch.SearchDispatchAsync<QueryResponse<TResult>>(pathInfo, descriptor, deserializationState)
 				.ContinueWith<IQueryResponse<TResult>>(t => t.Result.Success

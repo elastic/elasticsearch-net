@@ -18,7 +18,7 @@ namespace Nest
 	{
 	
 		
-		internal ElasticsearchResponse<T> BulkDispatch<T>(ElasticsearchPathInfo<BulkQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> BulkDispatch<T>(ElasticsearchPathInfo<BulkRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -51,7 +51,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> BulkDispatchAsync<T>(ElasticsearchPathInfo<BulkQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> BulkDispatchAsync<T>(ElasticsearchPathInfo<BulkRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -84,7 +84,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CatAliasesDispatch<T>(ElasticsearchPathInfo<CatAliasesQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> CatAliasesDispatch<T>(ElasticsearchPathInfo<CatAliasesRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -100,7 +100,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CatAliasesDispatchAsync<T>(ElasticsearchPathInfo<CatAliasesQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> CatAliasesDispatchAsync<T>(ElasticsearchPathInfo<CatAliasesRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -116,7 +116,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CatAllocationDispatch<T>(ElasticsearchPathInfo<CatAllocationQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> CatAllocationDispatch<T>(ElasticsearchPathInfo<CatAllocationRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -132,7 +132,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CatAllocationDispatchAsync<T>(ElasticsearchPathInfo<CatAllocationQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> CatAllocationDispatchAsync<T>(ElasticsearchPathInfo<CatAllocationRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -148,7 +148,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CatCountDispatch<T>(ElasticsearchPathInfo<CatCountQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> CatCountDispatch<T>(ElasticsearchPathInfo<CatCountRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -164,7 +164,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CatCountDispatchAsync<T>(ElasticsearchPathInfo<CatCountQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> CatCountDispatchAsync<T>(ElasticsearchPathInfo<CatCountRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -180,7 +180,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CatHealthDispatch<T>(ElasticsearchPathInfo<CatHealthQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> CatHealthDispatch<T>(ElasticsearchPathInfo<CatHealthRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -193,7 +193,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CatHealthDispatchAsync<T>(ElasticsearchPathInfo<CatHealthQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> CatHealthDispatchAsync<T>(ElasticsearchPathInfo<CatHealthRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -206,7 +206,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CatHelpDispatch<T>(ElasticsearchPathInfo<CatHelpQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> CatHelpDispatch<T>(ElasticsearchPathInfo<CatHelpRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -219,7 +219,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CatHelpDispatchAsync<T>(ElasticsearchPathInfo<CatHelpQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> CatHelpDispatchAsync<T>(ElasticsearchPathInfo<CatHelpRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -232,7 +232,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CatIndicesDispatch<T>(ElasticsearchPathInfo<CatIndicesQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> CatIndicesDispatch<T>(ElasticsearchPathInfo<CatIndicesRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -248,7 +248,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CatIndicesDispatchAsync<T>(ElasticsearchPathInfo<CatIndicesQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> CatIndicesDispatchAsync<T>(ElasticsearchPathInfo<CatIndicesRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -264,7 +264,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CatMasterDispatch<T>(ElasticsearchPathInfo<CatMasterQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> CatMasterDispatch<T>(ElasticsearchPathInfo<CatMasterRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -277,7 +277,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CatMasterDispatchAsync<T>(ElasticsearchPathInfo<CatMasterQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> CatMasterDispatchAsync<T>(ElasticsearchPathInfo<CatMasterRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -290,7 +290,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CatNodesDispatch<T>(ElasticsearchPathInfo<CatNodesQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> CatNodesDispatch<T>(ElasticsearchPathInfo<CatNodesRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -303,7 +303,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CatNodesDispatchAsync<T>(ElasticsearchPathInfo<CatNodesQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> CatNodesDispatchAsync<T>(ElasticsearchPathInfo<CatNodesRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -316,7 +316,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CatPendingTasksDispatch<T>(ElasticsearchPathInfo<CatPendingTasksQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> CatPendingTasksDispatch<T>(ElasticsearchPathInfo<CatPendingTasksRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -329,7 +329,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CatPendingTasksDispatchAsync<T>(ElasticsearchPathInfo<CatPendingTasksQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> CatPendingTasksDispatchAsync<T>(ElasticsearchPathInfo<CatPendingTasksRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -342,7 +342,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CatRecoveryDispatch<T>(ElasticsearchPathInfo<CatRecoveryQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> CatRecoveryDispatch<T>(ElasticsearchPathInfo<CatRecoveryRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -358,7 +358,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CatRecoveryDispatchAsync<T>(ElasticsearchPathInfo<CatRecoveryQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> CatRecoveryDispatchAsync<T>(ElasticsearchPathInfo<CatRecoveryRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -374,7 +374,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CatShardsDispatch<T>(ElasticsearchPathInfo<CatShardsQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> CatShardsDispatch<T>(ElasticsearchPathInfo<CatShardsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -390,7 +390,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CatShardsDispatchAsync<T>(ElasticsearchPathInfo<CatShardsQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> CatShardsDispatchAsync<T>(ElasticsearchPathInfo<CatShardsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -406,7 +406,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CatThreadPoolDispatch<T>(ElasticsearchPathInfo<CatThreadPoolQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> CatThreadPoolDispatch<T>(ElasticsearchPathInfo<CatThreadPoolRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -419,7 +419,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CatThreadPoolDispatchAsync<T>(ElasticsearchPathInfo<CatThreadPoolQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> CatThreadPoolDispatchAsync<T>(ElasticsearchPathInfo<CatThreadPoolRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -432,7 +432,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> ClearScrollDispatch<T>(ElasticsearchPathInfo<ClearScrollQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> ClearScrollDispatch<T>(ElasticsearchPathInfo<ClearScrollRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -447,7 +447,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> ClearScrollDispatchAsync<T>(ElasticsearchPathInfo<ClearScrollQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> ClearScrollDispatchAsync<T>(ElasticsearchPathInfo<ClearScrollRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -462,7 +462,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> ClusterGetSettingsDispatch<T>(ElasticsearchPathInfo<ClusterGetSettingsQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> ClusterGetSettingsDispatch<T>(ElasticsearchPathInfo<ClusterGetSettingsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -475,7 +475,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> ClusterGetSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterGetSettingsQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> ClusterGetSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterGetSettingsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -488,7 +488,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> ClusterHealthDispatch<T>(ElasticsearchPathInfo<ClusterHealthQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> ClusterHealthDispatch<T>(ElasticsearchPathInfo<ClusterHealthRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -504,7 +504,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> ClusterHealthDispatchAsync<T>(ElasticsearchPathInfo<ClusterHealthQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> ClusterHealthDispatchAsync<T>(ElasticsearchPathInfo<ClusterHealthRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -520,7 +520,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> ClusterPendingTasksDispatch<T>(ElasticsearchPathInfo<ClusterPendingTasksQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> ClusterPendingTasksDispatch<T>(ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -533,7 +533,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> ClusterPendingTasksDispatchAsync<T>(ElasticsearchPathInfo<ClusterPendingTasksQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> ClusterPendingTasksDispatchAsync<T>(ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -546,7 +546,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> ClusterPutSettingsDispatch<T>(ElasticsearchPathInfo<ClusterPutSettingsQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> ClusterPutSettingsDispatch<T>(ElasticsearchPathInfo<ClusterPutSettingsRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -561,7 +561,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> ClusterPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterPutSettingsQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> ClusterPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterPutSettingsRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -576,7 +576,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> ClusterRerouteDispatch<T>(ElasticsearchPathInfo<ClusterRerouteQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> ClusterRerouteDispatch<T>(ElasticsearchPathInfo<ClusterRerouteRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -591,7 +591,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> ClusterRerouteDispatchAsync<T>(ElasticsearchPathInfo<ClusterRerouteQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> ClusterRerouteDispatchAsync<T>(ElasticsearchPathInfo<ClusterRerouteRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -606,7 +606,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> ClusterStateDispatch<T>(ElasticsearchPathInfo<ClusterStateQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> ClusterStateDispatch<T>(ElasticsearchPathInfo<ClusterStateRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -625,7 +625,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> ClusterStateDispatchAsync<T>(ElasticsearchPathInfo<ClusterStateQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> ClusterStateDispatchAsync<T>(ElasticsearchPathInfo<ClusterStateRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -644,7 +644,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> ClusterStatsDispatch<T>(ElasticsearchPathInfo<ClusterStatsQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> ClusterStatsDispatch<T>(ElasticsearchPathInfo<ClusterStatsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -660,7 +660,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> ClusterStatsDispatchAsync<T>(ElasticsearchPathInfo<ClusterStatsQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> ClusterStatsDispatchAsync<T>(ElasticsearchPathInfo<ClusterStatsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -676,7 +676,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CountDispatch<T>(ElasticsearchPathInfo<CountQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> CountDispatch<T>(ElasticsearchPathInfo<CountRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -707,7 +707,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CountDispatchAsync<T>(ElasticsearchPathInfo<CountQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> CountDispatchAsync<T>(ElasticsearchPathInfo<CountRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -738,7 +738,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CountPercolateDispatch<T>(ElasticsearchPathInfo<CountPercolateQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> CountPercolateDispatch<T>(ElasticsearchPathInfo<CountPercolateRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -765,7 +765,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CountPercolateDispatchAsync<T>(ElasticsearchPathInfo<CountPercolateQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> CountPercolateDispatchAsync<T>(ElasticsearchPathInfo<CountPercolateRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -792,7 +792,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> DeleteDispatch<T>(ElasticsearchPathInfo<DeleteQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> DeleteDispatch<T>(ElasticsearchPathInfo<DeleteRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -807,7 +807,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> DeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> DeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -822,7 +822,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> DeleteByQueryDispatch<T>(ElasticsearchPathInfo<DeleteByQueryQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> DeleteByQueryDispatch<T>(ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -840,7 +840,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> DeleteByQueryDispatchAsync<T>(ElasticsearchPathInfo<DeleteByQueryQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> DeleteByQueryDispatchAsync<T>(ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -858,7 +858,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> ExistsDispatch<T>(ElasticsearchPathInfo<ExistsQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> ExistsDispatch<T>(ElasticsearchPathInfo<ExistsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -873,7 +873,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> ExistsDispatchAsync<T>(ElasticsearchPathInfo<ExistsQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> ExistsDispatchAsync<T>(ElasticsearchPathInfo<ExistsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -888,7 +888,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> ExplainDispatch<T>(ElasticsearchPathInfo<ExplainQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> ExplainDispatch<T>(ElasticsearchPathInfo<ExplainRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -909,7 +909,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> ExplainDispatchAsync<T>(ElasticsearchPathInfo<ExplainQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> ExplainDispatchAsync<T>(ElasticsearchPathInfo<ExplainRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -930,7 +930,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> GetDispatch<T>(ElasticsearchPathInfo<GetQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> GetDispatch<T>(ElasticsearchPathInfo<GetRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -945,7 +945,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> GetDispatchAsync<T>(ElasticsearchPathInfo<GetQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> GetDispatchAsync<T>(ElasticsearchPathInfo<GetRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -960,7 +960,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> GetSourceDispatch<T>(ElasticsearchPathInfo<SourceQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> GetSourceDispatch<T>(ElasticsearchPathInfo<SourceRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -975,7 +975,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> GetSourceDispatchAsync<T>(ElasticsearchPathInfo<SourceQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> GetSourceDispatchAsync<T>(ElasticsearchPathInfo<SourceRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -990,7 +990,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndexDispatch<T>(ElasticsearchPathInfo<IndexQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> IndexDispatch<T>(ElasticsearchPathInfo<IndexRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1017,7 +1017,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndexDispatchAsync<T>(ElasticsearchPathInfo<IndexQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndexDispatchAsync<T>(ElasticsearchPathInfo<IndexRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1044,7 +1044,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesAnalyzeDispatch<T>(ElasticsearchPathInfo<AnalyzeQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesAnalyzeDispatch<T>(ElasticsearchPathInfo<AnalyzeRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1069,7 +1069,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesAnalyzeDispatchAsync<T>(ElasticsearchPathInfo<AnalyzeQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesAnalyzeDispatchAsync<T>(ElasticsearchPathInfo<AnalyzeRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1094,7 +1094,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesClearCacheDispatch<T>(ElasticsearchPathInfo<ClearCacheQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesClearCacheDispatch<T>(ElasticsearchPathInfo<ClearCacheRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1117,7 +1117,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesClearCacheDispatchAsync<T>(ElasticsearchPathInfo<ClearCacheQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesClearCacheDispatchAsync<T>(ElasticsearchPathInfo<ClearCacheRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1140,7 +1140,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesCloseDispatch<T>(ElasticsearchPathInfo<CloseIndexQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesCloseDispatch<T>(ElasticsearchPathInfo<CloseIndexRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1155,7 +1155,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesCloseDispatchAsync<T>(ElasticsearchPathInfo<CloseIndexQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesCloseDispatchAsync<T>(ElasticsearchPathInfo<CloseIndexRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1170,7 +1170,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesCreateDispatch<T>(ElasticsearchPathInfo<CreateIndexQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesCreateDispatch<T>(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1191,7 +1191,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesCreateDispatchAsync<T>(ElasticsearchPathInfo<CreateIndexQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesCreateDispatchAsync<T>(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1212,7 +1212,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesDeleteDispatch<T>(ElasticsearchPathInfo<DeleteIndexQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesDeleteDispatch<T>(ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1227,7 +1227,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteIndexQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1242,7 +1242,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesDeleteAliasDispatch<T>(ElasticsearchPathInfo<IndicesDeleteAliasQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesDeleteAliasDispatch<T>(ElasticsearchPathInfo<IndicesDeleteAliasRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1257,7 +1257,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteAliasDispatchAsync<T>(ElasticsearchPathInfo<IndicesDeleteAliasQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteAliasDispatchAsync<T>(ElasticsearchPathInfo<IndicesDeleteAliasRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1272,7 +1272,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesDeleteMappingDispatch<T>(ElasticsearchPathInfo<DeleteMappingQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesDeleteMappingDispatch<T>(ElasticsearchPathInfo<DeleteMappingRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1287,7 +1287,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteMappingDispatchAsync<T>(ElasticsearchPathInfo<DeleteMappingQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteMappingDispatchAsync<T>(ElasticsearchPathInfo<DeleteMappingRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1302,7 +1302,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesDeleteTemplateDispatch<T>(ElasticsearchPathInfo<DeleteTemplateQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesDeleteTemplateDispatch<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1317,7 +1317,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteTemplateDispatchAsync<T>(ElasticsearchPathInfo<DeleteTemplateQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteTemplateDispatchAsync<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1332,7 +1332,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesDeleteWarmerDispatch<T>(ElasticsearchPathInfo<DeleteWarmerQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesDeleteWarmerDispatch<T>(ElasticsearchPathInfo<DeleteWarmerRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1347,7 +1347,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteWarmerDispatchAsync<T>(ElasticsearchPathInfo<DeleteWarmerQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteWarmerDispatchAsync<T>(ElasticsearchPathInfo<DeleteWarmerRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1362,7 +1362,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesExistsDispatch<T>(ElasticsearchPathInfo<IndexExistsQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesExistsDispatch<T>(ElasticsearchPathInfo<IndexExistsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1377,7 +1377,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsDispatchAsync<T>(ElasticsearchPathInfo<IndexExistsQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesExistsDispatchAsync<T>(ElasticsearchPathInfo<IndexExistsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1392,7 +1392,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesExistsAliasDispatch<T>(ElasticsearchPathInfo<IndicesExistsAliasQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesExistsAliasDispatch<T>(ElasticsearchPathInfo<IndicesExistsAliasRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1413,7 +1413,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsAliasDispatchAsync<T>(ElasticsearchPathInfo<IndicesExistsAliasQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesExistsAliasDispatchAsync<T>(ElasticsearchPathInfo<IndicesExistsAliasRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1434,7 +1434,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesExistsTemplateDispatch<T>(ElasticsearchPathInfo<IndicesExistsTemplateQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesExistsTemplateDispatch<T>(ElasticsearchPathInfo<IndicesExistsTemplateRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1449,7 +1449,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsTemplateDispatchAsync<T>(ElasticsearchPathInfo<IndicesExistsTemplateQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesExistsTemplateDispatchAsync<T>(ElasticsearchPathInfo<IndicesExistsTemplateRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1464,7 +1464,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesExistsTypeDispatch<T>(ElasticsearchPathInfo<IndicesExistsTypeQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesExistsTypeDispatch<T>(ElasticsearchPathInfo<IndicesExistsTypeRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1479,7 +1479,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsTypeDispatchAsync<T>(ElasticsearchPathInfo<IndicesExistsTypeQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesExistsTypeDispatchAsync<T>(ElasticsearchPathInfo<IndicesExistsTypeRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1494,7 +1494,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesFlushDispatch<T>(ElasticsearchPathInfo<FlushQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesFlushDispatch<T>(ElasticsearchPathInfo<FlushRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1517,7 +1517,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesFlushDispatchAsync<T>(ElasticsearchPathInfo<FlushQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesFlushDispatchAsync<T>(ElasticsearchPathInfo<FlushRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1540,7 +1540,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesGetAliasDispatch<T>(ElasticsearchPathInfo<GetAliasesQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesGetAliasDispatch<T>(ElasticsearchPathInfo<GetAliasesRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1562,7 +1562,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetAliasDispatchAsync<T>(ElasticsearchPathInfo<GetAliasesQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesGetAliasDispatchAsync<T>(ElasticsearchPathInfo<GetAliasesRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1584,7 +1584,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesGetAliasesDispatch<T>(ElasticsearchPathInfo<IndicesGetAliasesQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesGetAliasesDispatch<T>(ElasticsearchPathInfo<IndicesGetAliasesRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1606,7 +1606,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetAliasesDispatchAsync<T>(ElasticsearchPathInfo<IndicesGetAliasesQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesGetAliasesDispatchAsync<T>(ElasticsearchPathInfo<IndicesGetAliasesRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1628,7 +1628,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesGetFieldMappingDispatch<T>(ElasticsearchPathInfo<IndicesGetFieldMappingQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesGetFieldMappingDispatch<T>(ElasticsearchPathInfo<IndicesGetFieldMappingRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1652,7 +1652,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetFieldMappingDispatchAsync<T>(ElasticsearchPathInfo<IndicesGetFieldMappingQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesGetFieldMappingDispatchAsync<T>(ElasticsearchPathInfo<IndicesGetFieldMappingRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1676,7 +1676,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesGetMappingDispatch<T>(ElasticsearchPathInfo<GetMappingQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesGetMappingDispatch<T>(ElasticsearchPathInfo<GetMappingRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1698,7 +1698,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetMappingDispatchAsync<T>(ElasticsearchPathInfo<GetMappingQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesGetMappingDispatchAsync<T>(ElasticsearchPathInfo<GetMappingRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1720,7 +1720,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesGetSettingsDispatch<T>(ElasticsearchPathInfo<GetIndexSettingsQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesGetSettingsDispatch<T>(ElasticsearchPathInfo<GetIndexSettingsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1742,7 +1742,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetSettingsDispatchAsync<T>(ElasticsearchPathInfo<GetIndexSettingsQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesGetSettingsDispatchAsync<T>(ElasticsearchPathInfo<GetIndexSettingsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1764,7 +1764,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesGetTemplateDispatch<T>(ElasticsearchPathInfo<GetTemplateQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesGetTemplateDispatch<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1780,7 +1780,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetTemplateDispatchAsync<T>(ElasticsearchPathInfo<GetTemplateQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesGetTemplateDispatchAsync<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1796,7 +1796,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesGetWarmerDispatch<T>(ElasticsearchPathInfo<GetWarmerQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesGetWarmerDispatch<T>(ElasticsearchPathInfo<GetWarmerRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1821,7 +1821,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetWarmerDispatchAsync<T>(ElasticsearchPathInfo<GetWarmerQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesGetWarmerDispatchAsync<T>(ElasticsearchPathInfo<GetWarmerRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1846,7 +1846,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesOpenDispatch<T>(ElasticsearchPathInfo<OpenIndexQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesOpenDispatch<T>(ElasticsearchPathInfo<OpenIndexRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1861,7 +1861,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesOpenDispatchAsync<T>(ElasticsearchPathInfo<OpenIndexQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesOpenDispatchAsync<T>(ElasticsearchPathInfo<OpenIndexRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1876,7 +1876,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesOptimizeDispatch<T>(ElasticsearchPathInfo<OptimizeQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesOptimizeDispatch<T>(ElasticsearchPathInfo<OptimizeRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1899,7 +1899,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesOptimizeDispatchAsync<T>(ElasticsearchPathInfo<OptimizeQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesOptimizeDispatchAsync<T>(ElasticsearchPathInfo<OptimizeRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1922,7 +1922,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesPutAliasDispatch<T>(ElasticsearchPathInfo<IndicesPutAliasQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesPutAliasDispatch<T>(ElasticsearchPathInfo<IndicesPutAliasRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1949,7 +1949,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutAliasDispatchAsync<T>(ElasticsearchPathInfo<IndicesPutAliasQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesPutAliasDispatchAsync<T>(ElasticsearchPathInfo<IndicesPutAliasRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1976,7 +1976,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesPutMappingDispatch<T>(ElasticsearchPathInfo<PutMappingQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesPutMappingDispatch<T>(ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2003,7 +2003,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutMappingDispatchAsync<T>(ElasticsearchPathInfo<PutMappingQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesPutMappingDispatchAsync<T>(ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2030,7 +2030,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesPutSettingsDispatch<T>(ElasticsearchPathInfo<UpdateSettingsQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesPutSettingsDispatch<T>(ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2048,7 +2048,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<UpdateSettingsQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2066,7 +2066,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesPutTemplateDispatch<T>(ElasticsearchPathInfo<PutTemplateQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesPutTemplateDispatch<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2087,7 +2087,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutTemplateDispatchAsync<T>(ElasticsearchPathInfo<PutTemplateQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesPutTemplateDispatchAsync<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2108,7 +2108,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesPutWarmerDispatch<T>(ElasticsearchPathInfo<PutWarmerQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesPutWarmerDispatch<T>(ElasticsearchPathInfo<PutWarmerRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2141,7 +2141,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutWarmerDispatchAsync<T>(ElasticsearchPathInfo<PutWarmerQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesPutWarmerDispatchAsync<T>(ElasticsearchPathInfo<PutWarmerRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2174,7 +2174,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesRefreshDispatch<T>(ElasticsearchPathInfo<RefreshQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesRefreshDispatch<T>(ElasticsearchPathInfo<RefreshRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2197,7 +2197,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesRefreshDispatchAsync<T>(ElasticsearchPathInfo<RefreshQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesRefreshDispatchAsync<T>(ElasticsearchPathInfo<RefreshRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2220,7 +2220,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesSegmentsDispatch<T>(ElasticsearchPathInfo<SegmentsQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesSegmentsDispatch<T>(ElasticsearchPathInfo<SegmentsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2236,7 +2236,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesSegmentsDispatchAsync<T>(ElasticsearchPathInfo<SegmentsQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesSegmentsDispatchAsync<T>(ElasticsearchPathInfo<SegmentsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2252,7 +2252,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesSnapshotIndexDispatch<T>(ElasticsearchPathInfo<SnapshotQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesSnapshotIndexDispatch<T>(ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2268,7 +2268,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesSnapshotIndexDispatchAsync<T>(ElasticsearchPathInfo<SnapshotQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesSnapshotIndexDispatchAsync<T>(ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2284,7 +2284,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesStatsDispatch<T>(ElasticsearchPathInfo<IndicesStatsQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesStatsDispatch<T>(ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2306,7 +2306,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesStatsDispatchAsync<T>(ElasticsearchPathInfo<IndicesStatsQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesStatsDispatchAsync<T>(ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2328,7 +2328,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesStatusDispatch<T>(ElasticsearchPathInfo<IndicesStatusQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesStatusDispatch<T>(ElasticsearchPathInfo<IndicesStatusRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2344,7 +2344,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesStatusDispatchAsync<T>(ElasticsearchPathInfo<IndicesStatusQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesStatusDispatchAsync<T>(ElasticsearchPathInfo<IndicesStatusRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2360,7 +2360,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesUpdateAliasesDispatch<T>(ElasticsearchPathInfo<AliasQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesUpdateAliasesDispatch<T>(ElasticsearchPathInfo<AliasRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2375,7 +2375,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesUpdateAliasesDispatchAsync<T>(ElasticsearchPathInfo<AliasQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesUpdateAliasesDispatchAsync<T>(ElasticsearchPathInfo<AliasRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2390,7 +2390,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesValidateQueryDispatch<T>(ElasticsearchPathInfo<ValidateQueryQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> IndicesValidateQueryDispatch<T>(ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2421,7 +2421,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesValidateQueryDispatchAsync<T>(ElasticsearchPathInfo<ValidateQueryQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> IndicesValidateQueryDispatchAsync<T>(ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2452,7 +2452,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> InfoDispatch<T>(ElasticsearchPathInfo<InfoQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> InfoDispatch<T>(ElasticsearchPathInfo<InfoRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2465,7 +2465,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> InfoDispatchAsync<T>(ElasticsearchPathInfo<InfoQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> InfoDispatchAsync<T>(ElasticsearchPathInfo<InfoRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2478,7 +2478,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> MgetDispatch<T>(ElasticsearchPathInfo<MultiGetQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> MgetDispatch<T>(ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2509,7 +2509,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> MgetDispatchAsync<T>(ElasticsearchPathInfo<MultiGetQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> MgetDispatchAsync<T>(ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2540,7 +2540,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> MltDispatch<T>(ElasticsearchPathInfo<MoreLikeThisQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> MltDispatch<T>(ElasticsearchPathInfo<MoreLikeThisRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2561,7 +2561,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> MltDispatchAsync<T>(ElasticsearchPathInfo<MoreLikeThisQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> MltDispatchAsync<T>(ElasticsearchPathInfo<MoreLikeThisRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2582,7 +2582,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> MpercolateDispatch<T>(ElasticsearchPathInfo<MpercolateQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> MpercolateDispatch<T>(ElasticsearchPathInfo<MpercolateRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2613,7 +2613,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> MpercolateDispatchAsync<T>(ElasticsearchPathInfo<MpercolateQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> MpercolateDispatchAsync<T>(ElasticsearchPathInfo<MpercolateRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2644,7 +2644,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> MsearchDispatch<T>(ElasticsearchPathInfo<MultiSearchQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> MsearchDispatch<T>(ElasticsearchPathInfo<MultiSearchRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2675,7 +2675,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> MsearchDispatchAsync<T>(ElasticsearchPathInfo<MultiSearchQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> MsearchDispatchAsync<T>(ElasticsearchPathInfo<MultiSearchRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2706,7 +2706,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> MtermvectorsDispatch<T>(ElasticsearchPathInfo<MtermvectorsQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> MtermvectorsDispatch<T>(ElasticsearchPathInfo<MtermvectorsRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2737,7 +2737,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> MtermvectorsDispatchAsync<T>(ElasticsearchPathInfo<MtermvectorsQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> MtermvectorsDispatchAsync<T>(ElasticsearchPathInfo<MtermvectorsRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2768,7 +2768,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> NodesHotThreadsDispatch<T>(ElasticsearchPathInfo<NodesHotThreadsQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> NodesHotThreadsDispatch<T>(ElasticsearchPathInfo<NodesHotThreadsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2784,7 +2784,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> NodesHotThreadsDispatchAsync<T>(ElasticsearchPathInfo<NodesHotThreadsQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> NodesHotThreadsDispatchAsync<T>(ElasticsearchPathInfo<NodesHotThreadsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2800,7 +2800,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> NodesInfoDispatch<T>(ElasticsearchPathInfo<NodesInfoQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> NodesInfoDispatch<T>(ElasticsearchPathInfo<NodesInfoRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2822,7 +2822,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> NodesInfoDispatchAsync<T>(ElasticsearchPathInfo<NodesInfoQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> NodesInfoDispatchAsync<T>(ElasticsearchPathInfo<NodesInfoRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2844,7 +2844,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> NodesShutdownDispatch<T>(ElasticsearchPathInfo<NodesShutdownQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> NodesShutdownDispatch<T>(ElasticsearchPathInfo<NodesShutdownRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2860,7 +2860,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> NodesShutdownDispatchAsync<T>(ElasticsearchPathInfo<NodesShutdownQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> NodesShutdownDispatchAsync<T>(ElasticsearchPathInfo<NodesShutdownRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2876,7 +2876,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> NodesStatsDispatch<T>(ElasticsearchPathInfo<NodesStatsQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> NodesStatsDispatch<T>(ElasticsearchPathInfo<NodesStatsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2904,7 +2904,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> NodesStatsDispatchAsync<T>(ElasticsearchPathInfo<NodesStatsQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> NodesStatsDispatchAsync<T>(ElasticsearchPathInfo<NodesStatsRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2932,7 +2932,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> PercolateDispatch<T>(ElasticsearchPathInfo<PercolateQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> PercolateDispatch<T>(ElasticsearchPathInfo<PercolateRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2959,7 +2959,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> PercolateDispatchAsync<T>(ElasticsearchPathInfo<PercolateQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> PercolateDispatchAsync<T>(ElasticsearchPathInfo<PercolateRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2986,7 +2986,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> PingDispatch<T>(ElasticsearchPathInfo<PingQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> PingDispatch<T>(ElasticsearchPathInfo<PingRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2999,7 +2999,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> PingDispatchAsync<T>(ElasticsearchPathInfo<PingQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> PingDispatchAsync<T>(ElasticsearchPathInfo<PingRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3012,7 +3012,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> ScrollDispatch<T>(ElasticsearchPathInfo<ScrollQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> ScrollDispatch<T>(ElasticsearchPathInfo<ScrollRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3037,7 +3037,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> ScrollDispatchAsync<T>(ElasticsearchPathInfo<ScrollQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> ScrollDispatchAsync<T>(ElasticsearchPathInfo<ScrollRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3062,7 +3062,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SearchDispatch<T>(ElasticsearchPathInfo<SearchQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> SearchDispatch<T>(ElasticsearchPathInfo<SearchRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3093,7 +3093,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SearchDispatchAsync<T>(ElasticsearchPathInfo<SearchQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> SearchDispatchAsync<T>(ElasticsearchPathInfo<SearchRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3124,7 +3124,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SnapshotCreateDispatch<T>(ElasticsearchPathInfo<SnapshotCreateQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> SnapshotCreateDispatch<T>(ElasticsearchPathInfo<SnapshotCreateRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3145,7 +3145,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotCreateDispatchAsync<T>(ElasticsearchPathInfo<SnapshotCreateQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> SnapshotCreateDispatchAsync<T>(ElasticsearchPathInfo<SnapshotCreateRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3166,7 +3166,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SnapshotCreateRepositoryDispatch<T>(ElasticsearchPathInfo<SnapshotCreateRepositoryQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> SnapshotCreateRepositoryDispatch<T>(ElasticsearchPathInfo<SnapshotCreateRepositoryRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3187,7 +3187,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryDispatchAsync<T>(ElasticsearchPathInfo<SnapshotCreateRepositoryQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryDispatchAsync<T>(ElasticsearchPathInfo<SnapshotCreateRepositoryRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3208,7 +3208,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SnapshotDeleteDispatch<T>(ElasticsearchPathInfo<SnapshotDeleteQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> SnapshotDeleteDispatch<T>(ElasticsearchPathInfo<SnapshotDeleteRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3223,7 +3223,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotDeleteDispatchAsync<T>(ElasticsearchPathInfo<SnapshotDeleteQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> SnapshotDeleteDispatchAsync<T>(ElasticsearchPathInfo<SnapshotDeleteRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3238,7 +3238,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SnapshotDeleteRepositoryDispatch<T>(ElasticsearchPathInfo<SnapshotDeleteRepositoryQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> SnapshotDeleteRepositoryDispatch<T>(ElasticsearchPathInfo<SnapshotDeleteRepositoryRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3253,7 +3253,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryDispatchAsync<T>(ElasticsearchPathInfo<SnapshotDeleteRepositoryQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryDispatchAsync<T>(ElasticsearchPathInfo<SnapshotDeleteRepositoryRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3268,7 +3268,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SnapshotGetDispatch<T>(ElasticsearchPathInfo<SnapshotGetQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> SnapshotGetDispatch<T>(ElasticsearchPathInfo<SnapshotGetRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3283,7 +3283,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotGetDispatchAsync<T>(ElasticsearchPathInfo<SnapshotGetQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> SnapshotGetDispatchAsync<T>(ElasticsearchPathInfo<SnapshotGetRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3298,7 +3298,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SnapshotGetRepositoryDispatch<T>(ElasticsearchPathInfo<SnapshotGetRepositoryQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> SnapshotGetRepositoryDispatch<T>(ElasticsearchPathInfo<SnapshotGetRepositoryRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3314,7 +3314,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotGetRepositoryDispatchAsync<T>(ElasticsearchPathInfo<SnapshotGetRepositoryQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> SnapshotGetRepositoryDispatchAsync<T>(ElasticsearchPathInfo<SnapshotGetRepositoryRequestParameters> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3330,7 +3330,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SnapshotRestoreDispatch<T>(ElasticsearchPathInfo<SnapshotRestoreQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> SnapshotRestoreDispatch<T>(ElasticsearchPathInfo<SnapshotRestoreRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3345,7 +3345,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotRestoreDispatchAsync<T>(ElasticsearchPathInfo<SnapshotRestoreQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> SnapshotRestoreDispatchAsync<T>(ElasticsearchPathInfo<SnapshotRestoreRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3360,7 +3360,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SuggestDispatch<T>(ElasticsearchPathInfo<SuggestQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> SuggestDispatch<T>(ElasticsearchPathInfo<SuggestRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3385,7 +3385,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SuggestDispatchAsync<T>(ElasticsearchPathInfo<SuggestQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> SuggestDispatchAsync<T>(ElasticsearchPathInfo<SuggestRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3410,7 +3410,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> TermvectorDispatch<T>(ElasticsearchPathInfo<TermvectorQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> TermvectorDispatch<T>(ElasticsearchPathInfo<TermvectorRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3431,7 +3431,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> TermvectorDispatchAsync<T>(ElasticsearchPathInfo<TermvectorQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> TermvectorDispatchAsync<T>(ElasticsearchPathInfo<TermvectorRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3452,7 +3452,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> UpdateDispatch<T>(ElasticsearchPathInfo<UpdateQueryString> pathInfo , object body, object deserializationState = null)
+		internal ElasticsearchResponse<T> UpdateDispatch<T>(ElasticsearchPathInfo<UpdateRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3467,7 +3467,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> UpdateDispatchAsync<T>(ElasticsearchPathInfo<UpdateQueryString> pathInfo , object body, object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> UpdateDispatchAsync<T>(ElasticsearchPathInfo<UpdateRequestParameters> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{

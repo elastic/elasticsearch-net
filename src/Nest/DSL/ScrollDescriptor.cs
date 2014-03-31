@@ -14,17 +14,17 @@ using Nest.Resolvers;
 namespace Nest
 {
 	public partial class ScrollDescriptor<T> :
-		IPathInfo<ScrollQueryString>,
+		IPathInfo<ScrollRequestParameters>,
 		IHideObjectMembers
 		where T : class
 	{
-		ElasticsearchPathInfo<ScrollQueryString> IPathInfo<ScrollQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<ScrollRequestParameters> IPathInfo<ScrollRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = new ElasticsearchPathInfo<ScrollQueryString>();
+			var pathInfo = new ElasticsearchPathInfo<ScrollRequestParameters>();
 			// force POST scrollId can be quite big
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			pathInfo.ScrollId = this._QueryString._scroll_id;
-			// force scroll id out of querystring (potentially very large)
+			// force scroll id out of RequestParameters (potentially very large)
 			this._QueryString._QueryStringDictionary.Remove("scroll_id");
 			pathInfo.QueryString = this._QueryString;
 			return pathInfo;

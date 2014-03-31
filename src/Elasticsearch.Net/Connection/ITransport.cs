@@ -14,10 +14,8 @@ namespace Elasticsearch.Net.Connection
 			string path, 
 			object data = null, 
 			NameValueCollection queryString = null, 
-			object serializationState = null,
-			int retried = 0, 
-			int? seed = null
-			);
+			object serializationState = null);
+
 		void Sniff(bool fromStartup = false);
 
 		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(
@@ -25,9 +23,7 @@ namespace Elasticsearch.Net.Connection
 			string path, 
 			object data = null, 
 			NameValueCollection queryString = null,
-			object serializationState = null,
-			int retried = 0, 
-			int? seed = null);
+			object serializationState = null);
 	}
 
 	public interface ITransportValues

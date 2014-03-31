@@ -14,12 +14,12 @@ namespace Nest
 {
 	[DescriptorFor("IndicesGetTemplate")]
 	public partial class GetTemplateDescriptor :
-		NamePathDescriptor<GetTemplateDescriptor, GetTemplateQueryString>
-		, IPathInfo<GetTemplateQueryString>
+		NamePathDescriptor<GetTemplateDescriptor, GetTemplateRequestParameters>
+		, IPathInfo<GetTemplateRequestParameters>
 	{
-		ElasticsearchPathInfo<GetTemplateQueryString> IPathInfo<GetTemplateQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<GetTemplateRequestParameters> IPathInfo<GetTemplateRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<GetTemplateQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<GetTemplateRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 
 			return pathInfo;

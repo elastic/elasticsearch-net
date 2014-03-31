@@ -9,7 +9,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IIndicesOperationResponse OpenIndex(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector)
 		{
-			return this.Dispatch<OpenIndexDescriptor, OpenIndexQueryString, IndicesOperationResponse>(
+			return this.Dispatch<OpenIndexDescriptor, OpenIndexRequestParameters, IndicesOperationResponse>(
 				openIndexSelector,
 				(p, d) => this.RawDispatch.IndicesOpenDispatch<IndicesOperationResponse>(p)
 			);
@@ -18,7 +18,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IIndicesOperationResponse> OpenIndexAsync(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector)
 		{
-			return this.DispatchAsync<OpenIndexDescriptor, OpenIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+			return this.DispatchAsync<OpenIndexDescriptor, OpenIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 				openIndexSelector,
 				(p, d) => this.RawDispatch.IndicesOpenDispatchAsync<IndicesOperationResponse>(p)
 			);
@@ -27,7 +27,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IIndicesOperationResponse CloseIndex(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector)
 		{
-			return this.Dispatch<CloseIndexDescriptor, CloseIndexQueryString, IndicesOperationResponse>(
+			return this.Dispatch<CloseIndexDescriptor, CloseIndexRequestParameters, IndicesOperationResponse>(
 				closeIndexSelector,
 				(p, d) => this.RawDispatch.IndicesCloseDispatch<IndicesOperationResponse>(p)
 			);
@@ -38,7 +38,7 @@ namespace Nest
 			Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector)
 		{
 			return this.DispatchAsync
-				<CloseIndexDescriptor, CloseIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				<CloseIndexDescriptor, CloseIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					closeIndexSelector,
 					(p, d) => this.RawDispatch.IndicesCloseDispatchAsync<IndicesOperationResponse>(p)
 				);

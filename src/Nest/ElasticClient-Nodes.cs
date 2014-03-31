@@ -12,7 +12,7 @@ namespace Nest
 		public INodeInfoResponse NodesInfo(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<NodesInfoDescriptor, NodesInfoQueryString, NodeInfoResponse>(
+			return this.Dispatch<NodesInfoDescriptor, NodesInfoRequestParameters, NodeInfoResponse>(
 				selector,
 				(p, d) => this.RawDispatch.NodesInfoDispatch<NodeInfoResponse>(p)
 			);
@@ -22,7 +22,7 @@ namespace Nest
 		public Task<INodeInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<NodesInfoDescriptor, NodesInfoQueryString, NodeInfoResponse, INodeInfoResponse>(
+			return this.DispatchAsync<NodesInfoDescriptor, NodesInfoRequestParameters, NodeInfoResponse, INodeInfoResponse>(
 				selector,
 				(p, d) => this.RawDispatch.NodesInfoDispatchAsync<NodeInfoResponse>(p)
 			);
@@ -32,7 +32,7 @@ namespace Nest
 		public INodeStatsResponse NodesStats(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<NodesStatsDescriptor, NodesStatsQueryString, NodeStatsResponse>(
+			return this.Dispatch<NodesStatsDescriptor, NodesStatsRequestParameters, NodeStatsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.NodesStatsDispatch<NodeStatsResponse>(p)
 			);
@@ -42,7 +42,7 @@ namespace Nest
 		public Task<INodeStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<NodesStatsDescriptor, NodesStatsQueryString, NodeStatsResponse, INodeStatsResponse>(
+			return this.DispatchAsync<NodesStatsDescriptor, NodesStatsRequestParameters, NodeStatsResponse, INodeStatsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.NodesStatsDispatchAsync<NodeStatsResponse>(p)
 			);

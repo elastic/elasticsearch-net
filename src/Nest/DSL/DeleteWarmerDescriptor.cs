@@ -13,12 +13,12 @@ namespace Nest
 {
 	[DescriptorFor("IndicesDeleteWarmer")]
 	public partial class DeleteWarmerDescriptor : 
-		IndicesOptionalTypesNamePathDecriptor<DeleteWarmerDescriptor, DeleteWarmerQueryString>
-		, IPathInfo<DeleteWarmerQueryString>
+		IndicesOptionalTypesNamePathDecriptor<DeleteWarmerDescriptor, DeleteWarmerRequestParameters>
+		, IPathInfo<DeleteWarmerRequestParameters>
 	{
-		ElasticsearchPathInfo<DeleteWarmerQueryString> IPathInfo<DeleteWarmerQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<DeleteWarmerRequestParameters> IPathInfo<DeleteWarmerRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<DeleteWarmerQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<DeleteWarmerRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
 
 			return pathInfo;

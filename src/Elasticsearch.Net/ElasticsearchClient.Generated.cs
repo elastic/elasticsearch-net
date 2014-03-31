@@ -29,13 +29,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Bulk<T>(object body, Func<BulkQueryString, BulkQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Bulk<T>(object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_bulk".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -58,13 +58,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> BulkAsync<T>(object body, Func<BulkQueryString, BulkQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> BulkAsync<T>(object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_bulk".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -88,13 +88,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Bulk(object body, Func<BulkQueryString, BulkQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Bulk(object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null)
 		{
 			var url = "_bulk".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -117,13 +117,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> BulkAsync(object body, Func<BulkQueryString, BulkQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> BulkAsync(object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null)
 		{
 			var url = "_bulk".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -146,14 +146,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Bulk<T>(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Bulk<T>(string index, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -177,14 +177,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> BulkAsync<T>(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> BulkAsync<T>(string index, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -209,14 +209,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Bulk(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Bulk(string index, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -240,14 +240,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> BulkAsync(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> BulkAsync(string index, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -271,7 +271,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Bulk<T>(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Bulk<T>(string index, string type, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -279,7 +279,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -304,7 +304,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> BulkAsync<T>(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> BulkAsync<T>(string index, string type, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -312,7 +312,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -338,7 +338,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Bulk(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Bulk(string index, string type, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -346,7 +346,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -371,7 +371,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> BulkAsync(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> BulkAsync(string index, string type, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -379,7 +379,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -401,13 +401,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> BulkPut<T>(object body, Func<BulkQueryString, BulkQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> BulkPut<T>(object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_bulk".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -430,13 +430,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(object body, Func<BulkQueryString, BulkQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_bulk".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -460,13 +460,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> BulkPut(object body, Func<BulkQueryString, BulkQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> BulkPut(object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null)
 		{
 			var url = "_bulk".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -489,13 +489,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> BulkPutAsync(object body, Func<BulkQueryString, BulkQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> BulkPutAsync(object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null)
 		{
 			var url = "_bulk".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -518,14 +518,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> BulkPut<T>(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> BulkPut<T>(string index, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -549,14 +549,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(string index, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -581,14 +581,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> BulkPut(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> BulkPut(string index, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -612,14 +612,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> BulkPutAsync(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> BulkPutAsync(string index, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -643,7 +643,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> BulkPut<T>(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> BulkPut<T>(string index, string type, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -651,7 +651,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -676,7 +676,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(string index, string type, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -684,7 +684,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -710,7 +710,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> BulkPut(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> BulkPut(string index, string type, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -718,7 +718,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -743,7 +743,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> BulkPutAsync(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> BulkPutAsync(string index, string type, object body, Func<BulkRequestParameters, BulkRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -751,7 +751,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new BulkQueryString());
+				var qs = queryString(new BulkRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -772,13 +772,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatAliases<T>(Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatAliases<T>(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/aliases";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAliasesQueryString());
+				var qs = queryString(new CatAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -800,13 +800,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatAliasesAsync<T>(Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatAliasesAsync<T>(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/aliases";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAliasesQueryString());
+				var qs = queryString(new CatAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -829,13 +829,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatAliases(Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatAliases(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> queryString = null)
 		{
 			var url = "_cat/aliases";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAliasesQueryString());
+				var qs = queryString(new CatAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -857,13 +857,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatAliasesAsync(Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatAliasesAsync(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> queryString = null)
 		{
 			var url = "_cat/aliases";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAliasesQueryString());
+				var qs = queryString(new CatAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -885,14 +885,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatAliases<T>(string name, Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatAliases<T>(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_cat/aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAliasesQueryString());
+				var qs = queryString(new CatAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -915,14 +915,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatAliasesAsync<T>(string name, Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatAliasesAsync<T>(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_cat/aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAliasesQueryString());
+				var qs = queryString(new CatAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -946,14 +946,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatAliases(string name, Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatAliases(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_cat/aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAliasesQueryString());
+				var qs = queryString(new CatAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -976,14 +976,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatAliasesAsync(string name, Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatAliasesAsync(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_cat/aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAliasesQueryString());
+				var qs = queryString(new CatAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1004,13 +1004,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatAllocation<T>(Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatAllocation<T>(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/allocation";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAllocationQueryString());
+				var qs = queryString(new CatAllocationRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1032,13 +1032,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatAllocationAsync<T>(Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatAllocationAsync<T>(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/allocation";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAllocationQueryString());
+				var qs = queryString(new CatAllocationRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1061,13 +1061,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatAllocation(Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatAllocation(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> queryString = null)
 		{
 			var url = "_cat/allocation";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAllocationQueryString());
+				var qs = queryString(new CatAllocationRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1089,13 +1089,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatAllocationAsync(Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatAllocationAsync(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> queryString = null)
 		{
 			var url = "_cat/allocation";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAllocationQueryString());
+				var qs = queryString(new CatAllocationRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1117,14 +1117,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatAllocation<T>(string node_id, Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatAllocation<T>(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cat/allocation/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAllocationQueryString());
+				var qs = queryString(new CatAllocationRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1147,14 +1147,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatAllocationAsync<T>(string node_id, Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatAllocationAsync<T>(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cat/allocation/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAllocationQueryString());
+				var qs = queryString(new CatAllocationRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1178,14 +1178,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatAllocation(string node_id, Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatAllocation(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cat/allocation/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAllocationQueryString());
+				var qs = queryString(new CatAllocationRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1208,14 +1208,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatAllocationAsync(string node_id, Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatAllocationAsync(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cat/allocation/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatAllocationQueryString());
+				var qs = queryString(new CatAllocationRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1236,13 +1236,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatCount<T>(Func<CatCountQueryString, CatCountQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatCount<T>(Func<CatCountRequestParameters, CatCountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/count";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatCountQueryString());
+				var qs = queryString(new CatCountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1264,13 +1264,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatCountAsync<T>(Func<CatCountQueryString, CatCountQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatCountAsync<T>(Func<CatCountRequestParameters, CatCountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/count";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatCountQueryString());
+				var qs = queryString(new CatCountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1293,13 +1293,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatCount(Func<CatCountQueryString, CatCountQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatCount(Func<CatCountRequestParameters, CatCountRequestParameters> queryString = null)
 		{
 			var url = "_cat/count";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatCountQueryString());
+				var qs = queryString(new CatCountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1321,13 +1321,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatCountAsync(Func<CatCountQueryString, CatCountQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatCountAsync(Func<CatCountRequestParameters, CatCountRequestParameters> queryString = null)
 		{
 			var url = "_cat/count";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatCountQueryString());
+				var qs = queryString(new CatCountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1349,14 +1349,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatCount<T>(string index, Func<CatCountQueryString, CatCountQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatCount<T>(string index, Func<CatCountRequestParameters, CatCountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/count/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatCountQueryString());
+				var qs = queryString(new CatCountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1379,14 +1379,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatCountAsync<T>(string index, Func<CatCountQueryString, CatCountQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatCountAsync<T>(string index, Func<CatCountRequestParameters, CatCountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/count/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatCountQueryString());
+				var qs = queryString(new CatCountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1410,14 +1410,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatCount(string index, Func<CatCountQueryString, CatCountQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatCount(string index, Func<CatCountRequestParameters, CatCountRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/count/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatCountQueryString());
+				var qs = queryString(new CatCountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1440,14 +1440,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatCountAsync(string index, Func<CatCountQueryString, CatCountQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatCountAsync(string index, Func<CatCountRequestParameters, CatCountRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/count/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatCountQueryString());
+				var qs = queryString(new CatCountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1468,13 +1468,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatHealth<T>(Func<CatHealthQueryString, CatHealthQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatHealth<T>(Func<CatHealthRequestParameters, CatHealthRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/health";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatHealthQueryString());
+				var qs = queryString(new CatHealthRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1496,13 +1496,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatHealthAsync<T>(Func<CatHealthQueryString, CatHealthQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatHealthAsync<T>(Func<CatHealthRequestParameters, CatHealthRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/health";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatHealthQueryString());
+				var qs = queryString(new CatHealthRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1525,13 +1525,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatHealth(Func<CatHealthQueryString, CatHealthQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatHealth(Func<CatHealthRequestParameters, CatHealthRequestParameters> queryString = null)
 		{
 			var url = "_cat/health";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatHealthQueryString());
+				var qs = queryString(new CatHealthRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1553,13 +1553,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatHealthAsync(Func<CatHealthQueryString, CatHealthQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatHealthAsync(Func<CatHealthRequestParameters, CatHealthRequestParameters> queryString = null)
 		{
 			var url = "_cat/health";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatHealthQueryString());
+				var qs = queryString(new CatHealthRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1580,13 +1580,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatHelp<T>(Func<CatHelpQueryString, CatHelpQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatHelp<T>(Func<CatHelpRequestParameters, CatHelpRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatHelpQueryString());
+				var qs = queryString(new CatHelpRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1608,13 +1608,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatHelpAsync<T>(Func<CatHelpQueryString, CatHelpQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatHelpAsync<T>(Func<CatHelpRequestParameters, CatHelpRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatHelpQueryString());
+				var qs = queryString(new CatHelpRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1637,13 +1637,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatHelp(Func<CatHelpQueryString, CatHelpQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatHelp(Func<CatHelpRequestParameters, CatHelpRequestParameters> queryString = null)
 		{
 			var url = "_cat";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatHelpQueryString());
+				var qs = queryString(new CatHelpRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1665,13 +1665,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatHelpAsync(Func<CatHelpQueryString, CatHelpQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatHelpAsync(Func<CatHelpRequestParameters, CatHelpRequestParameters> queryString = null)
 		{
 			var url = "_cat";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatHelpQueryString());
+				var qs = queryString(new CatHelpRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1692,13 +1692,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatIndices<T>(Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatIndices<T>(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/indices";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatIndicesQueryString());
+				var qs = queryString(new CatIndicesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1720,13 +1720,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatIndicesAsync<T>(Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatIndicesAsync<T>(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/indices";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatIndicesQueryString());
+				var qs = queryString(new CatIndicesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1749,13 +1749,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatIndices(Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatIndices(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> queryString = null)
 		{
 			var url = "_cat/indices";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatIndicesQueryString());
+				var qs = queryString(new CatIndicesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1777,13 +1777,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatIndicesAsync(Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatIndicesAsync(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> queryString = null)
 		{
 			var url = "_cat/indices";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatIndicesQueryString());
+				var qs = queryString(new CatIndicesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1805,14 +1805,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatIndices<T>(string index, Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatIndices<T>(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/indices/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatIndicesQueryString());
+				var qs = queryString(new CatIndicesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1835,14 +1835,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatIndicesAsync<T>(string index, Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatIndicesAsync<T>(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/indices/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatIndicesQueryString());
+				var qs = queryString(new CatIndicesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1866,14 +1866,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatIndices(string index, Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatIndices(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/indices/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatIndicesQueryString());
+				var qs = queryString(new CatIndicesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1896,14 +1896,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatIndicesAsync(string index, Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatIndicesAsync(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/indices/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatIndicesQueryString());
+				var qs = queryString(new CatIndicesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1924,13 +1924,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatMaster<T>(Func<CatMasterQueryString, CatMasterQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatMaster<T>(Func<CatMasterRequestParameters, CatMasterRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/master";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatMasterQueryString());
+				var qs = queryString(new CatMasterRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1952,13 +1952,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatMasterAsync<T>(Func<CatMasterQueryString, CatMasterQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatMasterAsync<T>(Func<CatMasterRequestParameters, CatMasterRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/master";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatMasterQueryString());
+				var qs = queryString(new CatMasterRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -1981,13 +1981,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatMaster(Func<CatMasterQueryString, CatMasterQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatMaster(Func<CatMasterRequestParameters, CatMasterRequestParameters> queryString = null)
 		{
 			var url = "_cat/master";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatMasterQueryString());
+				var qs = queryString(new CatMasterRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2009,13 +2009,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatMasterAsync(Func<CatMasterQueryString, CatMasterQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatMasterAsync(Func<CatMasterRequestParameters, CatMasterRequestParameters> queryString = null)
 		{
 			var url = "_cat/master";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatMasterQueryString());
+				var qs = queryString(new CatMasterRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2036,13 +2036,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatNodes<T>(Func<CatNodesQueryString, CatNodesQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatNodes<T>(Func<CatNodesRequestParameters, CatNodesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/nodes";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatNodesQueryString());
+				var qs = queryString(new CatNodesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2064,13 +2064,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatNodesAsync<T>(Func<CatNodesQueryString, CatNodesQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatNodesAsync<T>(Func<CatNodesRequestParameters, CatNodesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/nodes";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatNodesQueryString());
+				var qs = queryString(new CatNodesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2093,13 +2093,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatNodes(Func<CatNodesQueryString, CatNodesQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatNodes(Func<CatNodesRequestParameters, CatNodesRequestParameters> queryString = null)
 		{
 			var url = "_cat/nodes";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatNodesQueryString());
+				var qs = queryString(new CatNodesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2121,13 +2121,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatNodesAsync(Func<CatNodesQueryString, CatNodesQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatNodesAsync(Func<CatNodesRequestParameters, CatNodesRequestParameters> queryString = null)
 		{
 			var url = "_cat/nodes";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatNodesQueryString());
+				var qs = queryString(new CatNodesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2148,13 +2148,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatPendingTasks<T>(Func<CatPendingTasksQueryString, CatPendingTasksQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatPendingTasks<T>(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/pending_tasks";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatPendingTasksQueryString());
+				var qs = queryString(new CatPendingTasksRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2176,13 +2176,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatPendingTasksAsync<T>(Func<CatPendingTasksQueryString, CatPendingTasksQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatPendingTasksAsync<T>(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/pending_tasks";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatPendingTasksQueryString());
+				var qs = queryString(new CatPendingTasksRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2205,13 +2205,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatPendingTasks(Func<CatPendingTasksQueryString, CatPendingTasksQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatPendingTasks(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> queryString = null)
 		{
 			var url = "_cat/pending_tasks";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatPendingTasksQueryString());
+				var qs = queryString(new CatPendingTasksRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2233,13 +2233,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatPendingTasksAsync(Func<CatPendingTasksQueryString, CatPendingTasksQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatPendingTasksAsync(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> queryString = null)
 		{
 			var url = "_cat/pending_tasks";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatPendingTasksQueryString());
+				var qs = queryString(new CatPendingTasksRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2260,13 +2260,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatRecovery<T>(Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatRecovery<T>(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/recovery";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatRecoveryQueryString());
+				var qs = queryString(new CatRecoveryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2288,13 +2288,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatRecoveryAsync<T>(Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatRecoveryAsync<T>(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/recovery";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatRecoveryQueryString());
+				var qs = queryString(new CatRecoveryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2317,13 +2317,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatRecovery(Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatRecovery(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> queryString = null)
 		{
 			var url = "_cat/recovery";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatRecoveryQueryString());
+				var qs = queryString(new CatRecoveryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2345,13 +2345,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatRecoveryAsync(Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatRecoveryAsync(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> queryString = null)
 		{
 			var url = "_cat/recovery";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatRecoveryQueryString());
+				var qs = queryString(new CatRecoveryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2373,14 +2373,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatRecovery<T>(string index, Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatRecovery<T>(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/recovery/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatRecoveryQueryString());
+				var qs = queryString(new CatRecoveryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2403,14 +2403,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatRecoveryAsync<T>(string index, Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatRecoveryAsync<T>(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/recovery/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatRecoveryQueryString());
+				var qs = queryString(new CatRecoveryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2434,14 +2434,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatRecovery(string index, Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatRecovery(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/recovery/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatRecoveryQueryString());
+				var qs = queryString(new CatRecoveryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2464,14 +2464,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatRecoveryAsync(string index, Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatRecoveryAsync(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/recovery/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatRecoveryQueryString());
+				var qs = queryString(new CatRecoveryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2492,13 +2492,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatShards<T>(Func<CatShardsQueryString, CatShardsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatShards<T>(Func<CatShardsRequestParameters, CatShardsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/shards";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatShardsQueryString());
+				var qs = queryString(new CatShardsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2520,13 +2520,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatShardsAsync<T>(Func<CatShardsQueryString, CatShardsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatShardsAsync<T>(Func<CatShardsRequestParameters, CatShardsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/shards";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatShardsQueryString());
+				var qs = queryString(new CatShardsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2549,13 +2549,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatShards(Func<CatShardsQueryString, CatShardsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatShards(Func<CatShardsRequestParameters, CatShardsRequestParameters> queryString = null)
 		{
 			var url = "_cat/shards";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatShardsQueryString());
+				var qs = queryString(new CatShardsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2577,13 +2577,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatShardsAsync(Func<CatShardsQueryString, CatShardsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatShardsAsync(Func<CatShardsRequestParameters, CatShardsRequestParameters> queryString = null)
 		{
 			var url = "_cat/shards";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatShardsQueryString());
+				var qs = queryString(new CatShardsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2605,14 +2605,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatShards<T>(string index, Func<CatShardsQueryString, CatShardsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatShards<T>(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/shards/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatShardsQueryString());
+				var qs = queryString(new CatShardsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2635,14 +2635,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatShardsAsync<T>(string index, Func<CatShardsQueryString, CatShardsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatShardsAsync<T>(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/shards/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatShardsQueryString());
+				var qs = queryString(new CatShardsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2666,14 +2666,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatShards(string index, Func<CatShardsQueryString, CatShardsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatShards(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/shards/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatShardsQueryString());
+				var qs = queryString(new CatShardsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2696,14 +2696,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatShardsAsync(string index, Func<CatShardsQueryString, CatShardsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatShardsAsync(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/shards/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatShardsQueryString());
+				var qs = queryString(new CatShardsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2724,13 +2724,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CatThreadPool<T>(Func<CatThreadPoolQueryString, CatThreadPoolQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CatThreadPool<T>(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/thread_pool";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatThreadPoolQueryString());
+				var qs = queryString(new CatThreadPoolRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2752,13 +2752,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CatThreadPoolAsync<T>(Func<CatThreadPoolQueryString, CatThreadPoolQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CatThreadPoolAsync<T>(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cat/thread_pool";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatThreadPoolQueryString());
+				var qs = queryString(new CatThreadPoolRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2781,13 +2781,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatThreadPool(Func<CatThreadPoolQueryString, CatThreadPoolQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CatThreadPool(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> queryString = null)
 		{
 			var url = "_cat/thread_pool";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatThreadPoolQueryString());
+				var qs = queryString(new CatThreadPoolRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2809,13 +2809,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatThreadPoolAsync(Func<CatThreadPoolQueryString, CatThreadPoolQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CatThreadPoolAsync(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> queryString = null)
 		{
 			var url = "_cat/thread_pool";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CatThreadPoolQueryString());
+				var qs = queryString(new CatThreadPoolRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2837,14 +2837,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ClearScroll<T>(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> ClearScroll<T>(string scroll_id, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> queryString = null, object deserializationState = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearScrollQueryString());
+				var qs = queryString(new ClearScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2867,14 +2867,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ClearScrollAsync<T>(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ClearScrollAsync<T>(string scroll_id, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> queryString = null, object deserializationState = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearScrollQueryString());
+				var qs = queryString(new ClearScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2898,14 +2898,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ClearScroll(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> ClearScroll(string scroll_id, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> queryString = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearScrollQueryString());
+				var qs = queryString(new ClearScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2928,14 +2928,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ClearScrollAsync(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ClearScrollAsync(string scroll_id, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> queryString = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearScrollQueryString());
+				var qs = queryString(new ClearScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2956,13 +2956,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ClusterGetSettings<T>(Func<ClusterGetSettingsQueryString, ClusterGetSettingsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> ClusterGetSettings<T>(Func<ClusterGetSettingsRequestParameters, ClusterGetSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/settings";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterGetSettingsQueryString());
+				var qs = queryString(new ClusterGetSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -2984,13 +2984,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ClusterGetSettingsAsync<T>(Func<ClusterGetSettingsQueryString, ClusterGetSettingsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ClusterGetSettingsAsync<T>(Func<ClusterGetSettingsRequestParameters, ClusterGetSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/settings";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterGetSettingsQueryString());
+				var qs = queryString(new ClusterGetSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3013,13 +3013,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ClusterGetSettings(Func<ClusterGetSettingsQueryString, ClusterGetSettingsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> ClusterGetSettings(Func<ClusterGetSettingsRequestParameters, ClusterGetSettingsRequestParameters> queryString = null)
 		{
 			var url = "_cluster/settings";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterGetSettingsQueryString());
+				var qs = queryString(new ClusterGetSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3041,13 +3041,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterGetSettingsAsync(Func<ClusterGetSettingsQueryString, ClusterGetSettingsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterGetSettingsAsync(Func<ClusterGetSettingsRequestParameters, ClusterGetSettingsRequestParameters> queryString = null)
 		{
 			var url = "_cluster/settings";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterGetSettingsQueryString());
+				var qs = queryString(new ClusterGetSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3068,13 +3068,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ClusterHealth<T>(Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> ClusterHealth<T>(Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/health";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterHealthQueryString());
+				var qs = queryString(new ClusterHealthRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3096,13 +3096,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ClusterHealthAsync<T>(Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ClusterHealthAsync<T>(Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/health";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterHealthQueryString());
+				var qs = queryString(new ClusterHealthRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3125,13 +3125,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ClusterHealth(Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> ClusterHealth(Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> queryString = null)
 		{
 			var url = "_cluster/health";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterHealthQueryString());
+				var qs = queryString(new ClusterHealthRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3153,13 +3153,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterHealthAsync(Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterHealthAsync(Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> queryString = null)
 		{
 			var url = "_cluster/health";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterHealthQueryString());
+				var qs = queryString(new ClusterHealthRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3181,14 +3181,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ClusterHealth<T>(string index, Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> ClusterHealth<T>(string index, Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cluster/health/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterHealthQueryString());
+				var qs = queryString(new ClusterHealthRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3211,14 +3211,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ClusterHealthAsync<T>(string index, Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ClusterHealthAsync<T>(string index, Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cluster/health/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterHealthQueryString());
+				var qs = queryString(new ClusterHealthRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3242,14 +3242,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ClusterHealth(string index, Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> ClusterHealth(string index, Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cluster/health/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterHealthQueryString());
+				var qs = queryString(new ClusterHealthRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3272,14 +3272,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterHealthAsync(string index, Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterHealthAsync(string index, Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cluster/health/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterHealthQueryString());
+				var qs = queryString(new ClusterHealthRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3300,13 +3300,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ClusterPendingTasks<T>(Func<ClusterPendingTasksQueryString, ClusterPendingTasksQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> ClusterPendingTasks<T>(Func<ClusterPendingTasksRequestParameters, ClusterPendingTasksRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/pending_tasks";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterPendingTasksQueryString());
+				var qs = queryString(new ClusterPendingTasksRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3328,13 +3328,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ClusterPendingTasksAsync<T>(Func<ClusterPendingTasksQueryString, ClusterPendingTasksQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ClusterPendingTasksAsync<T>(Func<ClusterPendingTasksRequestParameters, ClusterPendingTasksRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/pending_tasks";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterPendingTasksQueryString());
+				var qs = queryString(new ClusterPendingTasksRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3357,13 +3357,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ClusterPendingTasks(Func<ClusterPendingTasksQueryString, ClusterPendingTasksQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> ClusterPendingTasks(Func<ClusterPendingTasksRequestParameters, ClusterPendingTasksRequestParameters> queryString = null)
 		{
 			var url = "_cluster/pending_tasks";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterPendingTasksQueryString());
+				var qs = queryString(new ClusterPendingTasksRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3385,13 +3385,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterPendingTasksAsync(Func<ClusterPendingTasksQueryString, ClusterPendingTasksQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterPendingTasksAsync(Func<ClusterPendingTasksRequestParameters, ClusterPendingTasksRequestParameters> queryString = null)
 		{
 			var url = "_cluster/pending_tasks";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterPendingTasksQueryString());
+				var qs = queryString(new ClusterPendingTasksRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3413,13 +3413,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ClusterPutSettings<T>(object body, Func<ClusterPutSettingsQueryString, ClusterPutSettingsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> ClusterPutSettings<T>(object body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/settings".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterPutSettingsQueryString());
+				var qs = queryString(new ClusterPutSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3442,13 +3442,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(object body, Func<ClusterPutSettingsQueryString, ClusterPutSettingsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(object body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/settings".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterPutSettingsQueryString());
+				var qs = queryString(new ClusterPutSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3472,13 +3472,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ClusterPutSettings(object body, Func<ClusterPutSettingsQueryString, ClusterPutSettingsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> ClusterPutSettings(object body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> queryString = null)
 		{
 			var url = "_cluster/settings".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterPutSettingsQueryString());
+				var qs = queryString(new ClusterPutSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3501,13 +3501,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterPutSettingsAsync(object body, Func<ClusterPutSettingsQueryString, ClusterPutSettingsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterPutSettingsAsync(object body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> queryString = null)
 		{
 			var url = "_cluster/settings".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterPutSettingsQueryString());
+				var qs = queryString(new ClusterPutSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3529,13 +3529,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ClusterReroute<T>(object body, Func<ClusterRerouteQueryString, ClusterRerouteQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> ClusterReroute<T>(object body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/reroute".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterRerouteQueryString());
+				var qs = queryString(new ClusterRerouteRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3558,13 +3558,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ClusterRerouteAsync<T>(object body, Func<ClusterRerouteQueryString, ClusterRerouteQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ClusterRerouteAsync<T>(object body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/reroute".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterRerouteQueryString());
+				var qs = queryString(new ClusterRerouteRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3588,13 +3588,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ClusterReroute(object body, Func<ClusterRerouteQueryString, ClusterRerouteQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> ClusterReroute(object body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> queryString = null)
 		{
 			var url = "_cluster/reroute".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterRerouteQueryString());
+				var qs = queryString(new ClusterRerouteRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3617,13 +3617,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterRerouteAsync(object body, Func<ClusterRerouteQueryString, ClusterRerouteQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterRerouteAsync(object body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> queryString = null)
 		{
 			var url = "_cluster/reroute".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterRerouteQueryString());
+				var qs = queryString(new ClusterRerouteRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3644,13 +3644,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ClusterState<T>(Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> ClusterState<T>(Func<ClusterStateRequestParameters, ClusterStateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/state";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStateQueryString());
+				var qs = queryString(new ClusterStateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3672,13 +3672,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ClusterStateAsync<T>(Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ClusterStateAsync<T>(Func<ClusterStateRequestParameters, ClusterStateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/state";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStateQueryString());
+				var qs = queryString(new ClusterStateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3701,13 +3701,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ClusterState(Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> ClusterState(Func<ClusterStateRequestParameters, ClusterStateRequestParameters> queryString = null)
 		{
 			var url = "_cluster/state";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStateQueryString());
+				var qs = queryString(new ClusterStateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3729,13 +3729,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterStateAsync(Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterStateAsync(Func<ClusterStateRequestParameters, ClusterStateRequestParameters> queryString = null)
 		{
 			var url = "_cluster/state";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStateQueryString());
+				var qs = queryString(new ClusterStateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3757,14 +3757,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ClusterState<T>(string metric, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> ClusterState<T>(string metric, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_cluster/state/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStateQueryString());
+				var qs = queryString(new ClusterStateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3787,14 +3787,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ClusterStateAsync<T>(string metric, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ClusterStateAsync<T>(string metric, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_cluster/state/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStateQueryString());
+				var qs = queryString(new ClusterStateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3818,14 +3818,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ClusterState(string metric, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> ClusterState(string metric, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_cluster/state/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStateQueryString());
+				var qs = queryString(new ClusterStateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3848,14 +3848,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterStateAsync(string metric, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterStateAsync(string metric, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_cluster/state/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStateQueryString());
+				var qs = queryString(new ClusterStateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3878,7 +3878,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ClusterState<T>(string metric, string index, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> ClusterState<T>(string metric, string index, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			index.ThrowIfNullOrEmpty("index");
@@ -3886,7 +3886,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStateQueryString());
+				var qs = queryString(new ClusterStateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3910,7 +3910,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ClusterStateAsync<T>(string metric, string index, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ClusterStateAsync<T>(string metric, string index, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			index.ThrowIfNullOrEmpty("index");
@@ -3918,7 +3918,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStateQueryString());
+				var qs = queryString(new ClusterStateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3943,7 +3943,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ClusterState(string metric, string index, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> ClusterState(string metric, string index, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			index.ThrowIfNullOrEmpty("index");
@@ -3951,7 +3951,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStateQueryString());
+				var qs = queryString(new ClusterStateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -3975,7 +3975,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterStateAsync(string metric, string index, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterStateAsync(string metric, string index, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			index.ThrowIfNullOrEmpty("index");
@@ -3983,7 +3983,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStateQueryString());
+				var qs = queryString(new ClusterStateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4004,13 +4004,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ClusterStats<T>(Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> ClusterStats<T>(Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/stats";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStatsQueryString());
+				var qs = queryString(new ClusterStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4032,13 +4032,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ClusterStatsAsync<T>(Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ClusterStatsAsync<T>(Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/stats";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStatsQueryString());
+				var qs = queryString(new ClusterStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4061,13 +4061,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ClusterStats(Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> ClusterStats(Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> queryString = null)
 		{
 			var url = "_cluster/stats";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStatsQueryString());
+				var qs = queryString(new ClusterStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4089,13 +4089,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterStatsAsync(Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterStatsAsync(Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> queryString = null)
 		{
 			var url = "_cluster/stats";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStatsQueryString());
+				var qs = queryString(new ClusterStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4117,14 +4117,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ClusterStats<T>(string node_id, Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> ClusterStats<T>(string node_id, Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/stats/nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStatsQueryString());
+				var qs = queryString(new ClusterStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4147,14 +4147,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ClusterStatsAsync<T>(string node_id, Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ClusterStatsAsync<T>(string node_id, Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/stats/nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStatsQueryString());
+				var qs = queryString(new ClusterStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4178,14 +4178,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ClusterStats(string node_id, Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> ClusterStats(string node_id, Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/stats/nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStatsQueryString());
+				var qs = queryString(new ClusterStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4208,14 +4208,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterStatsAsync(string node_id, Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterStatsAsync(string node_id, Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/stats/nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClusterStatsQueryString());
+				var qs = queryString(new ClusterStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4237,13 +4237,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Count<T>(object body, Func<CountQueryString, CountQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Count<T>(object body, Func<CountRequestParameters, CountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_count".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4266,13 +4266,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountAsync<T>(object body, Func<CountQueryString, CountQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CountAsync<T>(object body, Func<CountRequestParameters, CountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_count".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4296,13 +4296,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Count(object body, Func<CountQueryString, CountQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Count(object body, Func<CountRequestParameters, CountRequestParameters> queryString = null)
 		{
 			var url = "_count".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4325,13 +4325,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountAsync(object body, Func<CountQueryString, CountQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountAsync(object body, Func<CountRequestParameters, CountRequestParameters> queryString = null)
 		{
 			var url = "_count".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4354,14 +4354,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Count<T>(string index, object body, Func<CountQueryString, CountQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Count<T>(string index, object body, Func<CountRequestParameters, CountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4385,14 +4385,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountAsync<T>(string index, object body, Func<CountQueryString, CountQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CountAsync<T>(string index, object body, Func<CountRequestParameters, CountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4417,14 +4417,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Count(string index, object body, Func<CountQueryString, CountQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Count(string index, object body, Func<CountRequestParameters, CountRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4448,14 +4448,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountAsync(string index, object body, Func<CountQueryString, CountQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountAsync(string index, object body, Func<CountRequestParameters, CountRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4479,7 +4479,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Count<T>(string index, string type, object body, Func<CountQueryString, CountQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Count<T>(string index, string type, object body, Func<CountRequestParameters, CountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -4487,7 +4487,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4512,7 +4512,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountAsync<T>(string index, string type, object body, Func<CountQueryString, CountQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CountAsync<T>(string index, string type, object body, Func<CountRequestParameters, CountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -4520,7 +4520,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4546,7 +4546,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Count(string index, string type, object body, Func<CountQueryString, CountQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Count(string index, string type, object body, Func<CountRequestParameters, CountRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -4554,7 +4554,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4579,7 +4579,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountAsync(string index, string type, object body, Func<CountQueryString, CountQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountAsync(string index, string type, object body, Func<CountRequestParameters, CountRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -4587,7 +4587,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4608,13 +4608,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CountGet<T>(Func<CountQueryString, CountQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CountGet<T>(Func<CountRequestParameters, CountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_count";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4636,13 +4636,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountGetAsync<T>(Func<CountQueryString, CountQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CountGetAsync<T>(Func<CountRequestParameters, CountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_count";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4665,13 +4665,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CountGet(Func<CountQueryString, CountQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CountGet(Func<CountRequestParameters, CountRequestParameters> queryString = null)
 		{
 			var url = "_count";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4693,13 +4693,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountGetAsync(Func<CountQueryString, CountQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountGetAsync(Func<CountRequestParameters, CountRequestParameters> queryString = null)
 		{
 			var url = "_count";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4721,14 +4721,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CountGet<T>(string index, Func<CountQueryString, CountQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CountGet<T>(string index, Func<CountRequestParameters, CountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4751,14 +4751,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountGetAsync<T>(string index, Func<CountQueryString, CountQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CountGetAsync<T>(string index, Func<CountRequestParameters, CountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4782,14 +4782,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CountGet(string index, Func<CountQueryString, CountQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CountGet(string index, Func<CountRequestParameters, CountRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4812,14 +4812,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountGetAsync(string index, Func<CountQueryString, CountQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountGetAsync(string index, Func<CountRequestParameters, CountRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4842,7 +4842,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CountGet<T>(string index, string type, Func<CountQueryString, CountQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CountGet<T>(string index, string type, Func<CountRequestParameters, CountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -4850,7 +4850,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4874,7 +4874,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountGetAsync<T>(string index, string type, Func<CountQueryString, CountQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CountGetAsync<T>(string index, string type, Func<CountRequestParameters, CountRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -4882,7 +4882,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4907,7 +4907,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CountGet(string index, string type, Func<CountQueryString, CountQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CountGet(string index, string type, Func<CountRequestParameters, CountRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -4915,7 +4915,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4939,7 +4939,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountGetAsync(string index, string type, Func<CountQueryString, CountQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountGetAsync(string index, string type, Func<CountRequestParameters, CountRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -4947,7 +4947,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountQueryString());
+				var qs = queryString(new CountRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -4970,7 +4970,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -4978,7 +4978,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5002,7 +5002,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5010,7 +5010,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5035,7 +5035,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5043,7 +5043,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5067,7 +5067,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5075,7 +5075,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5099,7 +5099,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, string id, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5108,7 +5108,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5133,7 +5133,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, string id, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5142,7 +5142,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5168,7 +5168,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, string id, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5177,7 +5177,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5202,7 +5202,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, string id, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5211,7 +5211,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5235,7 +5235,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CountPercolate<T>(string index, string type, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CountPercolate<T>(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5243,7 +5243,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5268,7 +5268,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5276,7 +5276,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5302,7 +5302,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5310,7 +5310,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5335,7 +5335,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5343,7 +5343,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5368,7 +5368,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CountPercolate<T>(string index, string type, string id, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> CountPercolate<T>(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5377,7 +5377,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5403,7 +5403,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, string id, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5412,7 +5412,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5439,7 +5439,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, string id, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5448,7 +5448,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5474,7 +5474,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, string id, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5483,7 +5483,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CountPercolateQueryString());
+				var qs = queryString(new CountPercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5507,7 +5507,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Delete<T>(string index, string type, string id, Func<DeleteQueryString, DeleteQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Delete<T>(string index, string type, string id, Func<DeleteRequestParameters, DeleteRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5516,7 +5516,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteQueryString());
+				var qs = queryString(new DeleteRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5541,7 +5541,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> DeleteAsync<T>(string index, string type, string id, Func<DeleteQueryString, DeleteQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> DeleteAsync<T>(string index, string type, string id, Func<DeleteRequestParameters, DeleteRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5550,7 +5550,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteQueryString());
+				var qs = queryString(new DeleteRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5576,7 +5576,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Delete(string index, string type, string id, Func<DeleteQueryString, DeleteQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Delete(string index, string type, string id, Func<DeleteRequestParameters, DeleteRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5585,7 +5585,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteQueryString());
+				var qs = queryString(new DeleteRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5610,7 +5610,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> DeleteAsync(string index, string type, string id, Func<DeleteQueryString, DeleteQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> DeleteAsync(string index, string type, string id, Func<DeleteRequestParameters, DeleteRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5619,7 +5619,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteQueryString());
+				var qs = queryString(new DeleteRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5642,14 +5642,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> DeleteByQuery<T>(string index, object body, Func<DeleteByQueryQueryString, DeleteByQueryQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> DeleteByQuery<T>(string index, object body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteByQueryQueryString());
+				var qs = queryString(new DeleteByQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5673,14 +5673,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, object body, Func<DeleteByQueryQueryString, DeleteByQueryQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, object body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteByQueryQueryString());
+				var qs = queryString(new DeleteByQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5705,14 +5705,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> DeleteByQuery(string index, object body, Func<DeleteByQueryQueryString, DeleteByQueryQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> DeleteByQuery(string index, object body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteByQueryQueryString());
+				var qs = queryString(new DeleteByQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5736,14 +5736,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> DeleteByQueryAsync(string index, object body, Func<DeleteByQueryQueryString, DeleteByQueryQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> DeleteByQueryAsync(string index, object body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteByQueryQueryString());
+				var qs = queryString(new DeleteByQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5767,7 +5767,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> DeleteByQuery<T>(string index, string type, object body, Func<DeleteByQueryQueryString, DeleteByQueryQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> DeleteByQuery<T>(string index, string type, object body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5775,7 +5775,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteByQueryQueryString());
+				var qs = queryString(new DeleteByQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5800,7 +5800,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, string type, object body, Func<DeleteByQueryQueryString, DeleteByQueryQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, string type, object body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5808,7 +5808,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteByQueryQueryString());
+				var qs = queryString(new DeleteByQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5834,7 +5834,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> DeleteByQuery(string index, string type, object body, Func<DeleteByQueryQueryString, DeleteByQueryQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> DeleteByQuery(string index, string type, object body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5842,7 +5842,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteByQueryQueryString());
+				var qs = queryString(new DeleteByQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5867,7 +5867,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> DeleteByQueryAsync(string index, string type, object body, Func<DeleteByQueryQueryString, DeleteByQueryQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> DeleteByQueryAsync(string index, string type, object body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5875,7 +5875,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteByQueryQueryString());
+				var qs = queryString(new DeleteByQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5899,7 +5899,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Exists<T>(string index, string type, string id, Func<ExistsQueryString, ExistsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Exists<T>(string index, string type, string id, Func<ExistsRequestParameters, ExistsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5908,7 +5908,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ExistsQueryString());
+				var qs = queryString(new ExistsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5933,7 +5933,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ExistsAsync<T>(string index, string type, string id, Func<ExistsQueryString, ExistsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ExistsAsync<T>(string index, string type, string id, Func<ExistsRequestParameters, ExistsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5942,7 +5942,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ExistsQueryString());
+				var qs = queryString(new ExistsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -5968,7 +5968,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Exists(string index, string type, string id, Func<ExistsQueryString, ExistsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Exists(string index, string type, string id, Func<ExistsRequestParameters, ExistsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5977,7 +5977,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ExistsQueryString());
+				var qs = queryString(new ExistsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6002,7 +6002,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ExistsAsync(string index, string type, string id, Func<ExistsQueryString, ExistsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ExistsAsync(string index, string type, string id, Func<ExistsRequestParameters, ExistsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6011,7 +6011,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ExistsQueryString());
+				var qs = queryString(new ExistsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6035,7 +6035,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ExplainGet<T>(string index, string type, string id, Func<ExplainQueryString, ExplainQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> ExplainGet<T>(string index, string type, string id, Func<ExplainRequestParameters, ExplainRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6044,7 +6044,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ExplainQueryString());
+				var qs = queryString(new ExplainRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6069,7 +6069,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ExplainGetAsync<T>(string index, string type, string id, Func<ExplainQueryString, ExplainQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ExplainGetAsync<T>(string index, string type, string id, Func<ExplainRequestParameters, ExplainRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6078,7 +6078,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ExplainQueryString());
+				var qs = queryString(new ExplainRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6104,7 +6104,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ExplainGet(string index, string type, string id, Func<ExplainQueryString, ExplainQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> ExplainGet(string index, string type, string id, Func<ExplainRequestParameters, ExplainRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6113,7 +6113,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ExplainQueryString());
+				var qs = queryString(new ExplainRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6138,7 +6138,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ExplainGetAsync(string index, string type, string id, Func<ExplainQueryString, ExplainQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ExplainGetAsync(string index, string type, string id, Func<ExplainRequestParameters, ExplainRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6147,7 +6147,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ExplainQueryString());
+				var qs = queryString(new ExplainRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6172,7 +6172,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Explain<T>(string index, string type, string id, object body, Func<ExplainQueryString, ExplainQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Explain<T>(string index, string type, string id, object body, Func<ExplainRequestParameters, ExplainRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6181,7 +6181,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ExplainQueryString());
+				var qs = queryString(new ExplainRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6207,7 +6207,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ExplainAsync<T>(string index, string type, string id, object body, Func<ExplainQueryString, ExplainQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ExplainAsync<T>(string index, string type, string id, object body, Func<ExplainRequestParameters, ExplainRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6216,7 +6216,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ExplainQueryString());
+				var qs = queryString(new ExplainRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6243,7 +6243,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Explain(string index, string type, string id, object body, Func<ExplainQueryString, ExplainQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Explain(string index, string type, string id, object body, Func<ExplainRequestParameters, ExplainRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6252,7 +6252,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ExplainQueryString());
+				var qs = queryString(new ExplainRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6278,7 +6278,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ExplainAsync(string index, string type, string id, object body, Func<ExplainQueryString, ExplainQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ExplainAsync(string index, string type, string id, object body, Func<ExplainRequestParameters, ExplainRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6287,7 +6287,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ExplainQueryString());
+				var qs = queryString(new ExplainRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6311,7 +6311,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Get<T>(string index, string type, string id, Func<GetQueryString, GetQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Get<T>(string index, string type, string id, Func<GetRequestParameters, GetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6320,7 +6320,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetQueryString());
+				var qs = queryString(new GetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6345,7 +6345,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> GetAsync<T>(string index, string type, string id, Func<GetQueryString, GetQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> GetAsync<T>(string index, string type, string id, Func<GetRequestParameters, GetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6354,7 +6354,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetQueryString());
+				var qs = queryString(new GetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6380,7 +6380,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Get(string index, string type, string id, Func<GetQueryString, GetQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Get(string index, string type, string id, Func<GetRequestParameters, GetRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6389,7 +6389,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetQueryString());
+				var qs = queryString(new GetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6414,7 +6414,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> GetAsync(string index, string type, string id, Func<GetQueryString, GetQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> GetAsync(string index, string type, string id, Func<GetRequestParameters, GetRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6423,7 +6423,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetQueryString());
+				var qs = queryString(new GetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6447,7 +6447,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> GetSource<T>(string index, string type, string id, Func<SourceQueryString, SourceQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> GetSource<T>(string index, string type, string id, Func<SourceRequestParameters, SourceRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6456,7 +6456,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SourceQueryString());
+				var qs = queryString(new SourceRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6481,7 +6481,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> GetSourceAsync<T>(string index, string type, string id, Func<SourceQueryString, SourceQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> GetSourceAsync<T>(string index, string type, string id, Func<SourceRequestParameters, SourceRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6490,7 +6490,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SourceQueryString());
+				var qs = queryString(new SourceRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6516,7 +6516,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> GetSource(string index, string type, string id, Func<SourceQueryString, SourceQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> GetSource(string index, string type, string id, Func<SourceRequestParameters, SourceRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6525,7 +6525,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SourceQueryString());
+				var qs = queryString(new SourceRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6550,7 +6550,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> GetSourceAsync(string index, string type, string id, Func<SourceQueryString, SourceQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> GetSourceAsync(string index, string type, string id, Func<SourceRequestParameters, SourceRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6559,7 +6559,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SourceQueryString());
+				var qs = queryString(new SourceRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6583,7 +6583,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Index<T>(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Index<T>(string index, string type, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6591,7 +6591,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6616,7 +6616,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndexAsync<T>(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndexAsync<T>(string index, string type, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6624,7 +6624,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6650,7 +6650,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Index(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Index(string index, string type, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6658,7 +6658,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6683,7 +6683,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndexAsync(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndexAsync(string index, string type, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6691,7 +6691,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6716,7 +6716,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Index<T>(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Index<T>(string index, string type, string id, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6725,7 +6725,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6751,7 +6751,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndexAsync<T>(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndexAsync<T>(string index, string type, string id, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6760,7 +6760,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6787,7 +6787,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Index(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Index(string index, string type, string id, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6796,7 +6796,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6822,7 +6822,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndexAsync(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndexAsync(string index, string type, string id, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6831,7 +6831,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6855,7 +6855,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndexPut<T>(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndexPut<T>(string index, string type, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6863,7 +6863,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6888,7 +6888,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndexPutAsync<T>(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndexPutAsync<T>(string index, string type, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6896,7 +6896,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6922,7 +6922,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndexPut(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndexPut(string index, string type, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6930,7 +6930,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6955,7 +6955,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndexPutAsync(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndexPutAsync(string index, string type, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6963,7 +6963,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6988,7 +6988,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndexPut<T>(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndexPut<T>(string index, string type, string id, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6997,7 +6997,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7023,7 +7023,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndexPutAsync<T>(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndexPutAsync<T>(string index, string type, string id, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -7032,7 +7032,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7059,7 +7059,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndexPut(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndexPut(string index, string type, string id, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -7068,7 +7068,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7094,7 +7094,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndexPutAsync(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndexPutAsync(string index, string type, string id, object body, Func<IndexRequestParameters, IndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -7103,7 +7103,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexQueryString());
+				var qs = queryString(new IndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7124,13 +7124,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesAnalyzeGetForAll<T>(Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesAnalyzeGetForAll<T>(Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_analyze";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7152,13 +7152,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesAnalyzeGetForAllAsync<T>(Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesAnalyzeGetForAllAsync<T>(Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_analyze";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7181,13 +7181,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesAnalyzeGetForAll(Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesAnalyzeGetForAll(Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null)
 		{
 			var url = "_analyze";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7209,13 +7209,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesAnalyzeGetForAllAsync(Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesAnalyzeGetForAllAsync(Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null)
 		{
 			var url = "_analyze";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7237,14 +7237,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesAnalyzeGet<T>(string index, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesAnalyzeGet<T>(string index, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7267,14 +7267,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesAnalyzeGetAsync<T>(string index, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesAnalyzeGetAsync<T>(string index, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7298,14 +7298,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesAnalyzeGet(string index, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesAnalyzeGet(string index, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7328,14 +7328,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesAnalyzeGetAsync(string index, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesAnalyzeGetAsync(string index, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7357,13 +7357,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesAnalyzeForAll<T>(object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesAnalyzeForAll<T>(object body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_analyze".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7386,13 +7386,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesAnalyzeForAllAsync<T>(object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesAnalyzeForAllAsync<T>(object body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_analyze".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7416,13 +7416,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesAnalyzeForAll(object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesAnalyzeForAll(object body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null)
 		{
 			var url = "_analyze".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7445,13 +7445,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesAnalyzeForAllAsync(object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesAnalyzeForAllAsync(object body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null)
 		{
 			var url = "_analyze".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7474,14 +7474,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesAnalyze<T>(string index, object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesAnalyze<T>(string index, object body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7505,14 +7505,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesAnalyzeAsync<T>(string index, object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesAnalyzeAsync<T>(string index, object body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7537,14 +7537,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesAnalyze(string index, object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesAnalyze(string index, object body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7568,14 +7568,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesAnalyzeAsync(string index, object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesAnalyzeAsync(string index, object body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AnalyzeQueryString());
+				var qs = queryString(new AnalyzeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7596,13 +7596,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesClearCacheForAll<T>(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesClearCacheForAll<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cache/clear";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7624,13 +7624,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesClearCacheForAllAsync<T>(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesClearCacheForAllAsync<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cache/clear";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7653,13 +7653,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesClearCacheForAll(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesClearCacheForAll(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null)
 		{
 			var url = "_cache/clear";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7681,13 +7681,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesClearCacheForAllAsync(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesClearCacheForAllAsync(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null)
 		{
 			var url = "_cache/clear";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7709,14 +7709,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesClearCache<T>(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesClearCache<T>(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7739,14 +7739,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesClearCacheAsync<T>(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesClearCacheAsync<T>(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7770,14 +7770,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesClearCache(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesClearCache(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7800,14 +7800,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesClearCacheAsync(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesClearCacheAsync(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7828,13 +7828,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesClearCacheGetForAll<T>(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesClearCacheGetForAll<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cache/clear";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7856,13 +7856,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesClearCacheGetForAllAsync<T>(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesClearCacheGetForAllAsync<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cache/clear";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7885,13 +7885,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesClearCacheGetForAll(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesClearCacheGetForAll(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null)
 		{
 			var url = "_cache/clear";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7913,13 +7913,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesClearCacheGetForAllAsync(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesClearCacheGetForAllAsync(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null)
 		{
 			var url = "_cache/clear";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7941,14 +7941,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesClearCacheGet<T>(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesClearCacheGet<T>(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -7971,14 +7971,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesClearCacheGetAsync<T>(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesClearCacheGetAsync<T>(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8002,14 +8002,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesClearCacheGet(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesClearCacheGet(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8032,14 +8032,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesClearCacheGetAsync(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesClearCacheGetAsync(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ClearCacheQueryString());
+				var qs = queryString(new ClearCacheRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8061,14 +8061,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesClose<T>(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesClose<T>(string index, Func<CloseIndexRequestParameters, CloseIndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_close".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CloseIndexQueryString());
+				var qs = queryString(new CloseIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8091,14 +8091,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesCloseAsync<T>(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesCloseAsync<T>(string index, Func<CloseIndexRequestParameters, CloseIndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_close".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CloseIndexQueryString());
+				var qs = queryString(new CloseIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8122,14 +8122,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesClose(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesClose(string index, Func<CloseIndexRequestParameters, CloseIndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_close".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CloseIndexQueryString());
+				var qs = queryString(new CloseIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8152,14 +8152,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesCloseAsync(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesCloseAsync(string index, Func<CloseIndexRequestParameters, CloseIndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_close".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CloseIndexQueryString());
+				var qs = queryString(new CloseIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8182,14 +8182,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesCreate<T>(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesCreate<T>(string index, object body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CreateIndexQueryString());
+				var qs = queryString(new CreateIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8213,14 +8213,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesCreateAsync<T>(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesCreateAsync<T>(string index, object body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CreateIndexQueryString());
+				var qs = queryString(new CreateIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8245,14 +8245,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesCreate(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesCreate(string index, object body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CreateIndexQueryString());
+				var qs = queryString(new CreateIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8276,14 +8276,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesCreateAsync(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesCreateAsync(string index, object body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CreateIndexQueryString());
+				var qs = queryString(new CreateIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8306,14 +8306,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesCreatePost<T>(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesCreatePost<T>(string index, object body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CreateIndexQueryString());
+				var qs = queryString(new CreateIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8337,14 +8337,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesCreatePostAsync<T>(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesCreatePostAsync<T>(string index, object body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CreateIndexQueryString());
+				var qs = queryString(new CreateIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8369,14 +8369,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesCreatePost(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesCreatePost(string index, object body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CreateIndexQueryString());
+				var qs = queryString(new CreateIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8400,14 +8400,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesCreatePostAsync(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesCreatePostAsync(string index, object body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new CreateIndexQueryString());
+				var qs = queryString(new CreateIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8429,14 +8429,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesDelete<T>(string index, Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesDelete<T>(string index, Func<DeleteIndexRequestParameters, DeleteIndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteIndexQueryString());
+				var qs = queryString(new DeleteIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8459,14 +8459,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesDeleteAsync<T>(string index, Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesDeleteAsync<T>(string index, Func<DeleteIndexRequestParameters, DeleteIndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteIndexQueryString());
+				var qs = queryString(new DeleteIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8490,14 +8490,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesDelete(string index, Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesDelete(string index, Func<DeleteIndexRequestParameters, DeleteIndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteIndexQueryString());
+				var qs = queryString(new DeleteIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8520,14 +8520,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesDeleteAsync(string index, Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesDeleteAsync(string index, Func<DeleteIndexRequestParameters, DeleteIndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteIndexQueryString());
+				var qs = queryString(new DeleteIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8550,7 +8550,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesDeleteAlias<T>(string index, string name, Func<IndicesDeleteAliasQueryString, IndicesDeleteAliasQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesDeleteAlias<T>(string index, string name, Func<IndicesDeleteAliasRequestParameters, IndicesDeleteAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -8558,7 +8558,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesDeleteAliasQueryString());
+				var qs = queryString(new IndicesDeleteAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8582,7 +8582,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesDeleteAliasAsync<T>(string index, string name, Func<IndicesDeleteAliasQueryString, IndicesDeleteAliasQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesDeleteAliasAsync<T>(string index, string name, Func<IndicesDeleteAliasRequestParameters, IndicesDeleteAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -8590,7 +8590,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesDeleteAliasQueryString());
+				var qs = queryString(new IndicesDeleteAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8615,7 +8615,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesDeleteAlias(string index, string name, Func<IndicesDeleteAliasQueryString, IndicesDeleteAliasQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesDeleteAlias(string index, string name, Func<IndicesDeleteAliasRequestParameters, IndicesDeleteAliasRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -8623,7 +8623,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesDeleteAliasQueryString());
+				var qs = queryString(new IndicesDeleteAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8647,7 +8647,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesDeleteAliasAsync(string index, string name, Func<IndicesDeleteAliasQueryString, IndicesDeleteAliasQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesDeleteAliasAsync(string index, string name, Func<IndicesDeleteAliasRequestParameters, IndicesDeleteAliasRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -8655,7 +8655,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesDeleteAliasQueryString());
+				var qs = queryString(new IndicesDeleteAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8678,7 +8678,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesDeleteMapping<T>(string index, string type, Func<DeleteMappingQueryString, DeleteMappingQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesDeleteMapping<T>(string index, string type, Func<DeleteMappingRequestParameters, DeleteMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -8686,7 +8686,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteMappingQueryString());
+				var qs = queryString(new DeleteMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8710,7 +8710,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesDeleteMappingAsync<T>(string index, string type, Func<DeleteMappingQueryString, DeleteMappingQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesDeleteMappingAsync<T>(string index, string type, Func<DeleteMappingRequestParameters, DeleteMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -8718,7 +8718,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteMappingQueryString());
+				var qs = queryString(new DeleteMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8743,7 +8743,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesDeleteMapping(string index, string type, Func<DeleteMappingQueryString, DeleteMappingQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesDeleteMapping(string index, string type, Func<DeleteMappingRequestParameters, DeleteMappingRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -8751,7 +8751,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteMappingQueryString());
+				var qs = queryString(new DeleteMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8775,7 +8775,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesDeleteMappingAsync(string index, string type, Func<DeleteMappingQueryString, DeleteMappingQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesDeleteMappingAsync(string index, string type, Func<DeleteMappingRequestParameters, DeleteMappingRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -8783,7 +8783,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteMappingQueryString());
+				var qs = queryString(new DeleteMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8805,14 +8805,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesDeleteTemplateForAll<T>(string name, Func<DeleteTemplateQueryString, DeleteTemplateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesDeleteTemplateForAll<T>(string name, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteTemplateQueryString());
+				var qs = queryString(new DeleteTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8835,14 +8835,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesDeleteTemplateForAllAsync<T>(string name, Func<DeleteTemplateQueryString, DeleteTemplateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesDeleteTemplateForAllAsync<T>(string name, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteTemplateQueryString());
+				var qs = queryString(new DeleteTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8866,14 +8866,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesDeleteTemplateForAll(string name, Func<DeleteTemplateQueryString, DeleteTemplateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesDeleteTemplateForAll(string name, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteTemplateQueryString());
+				var qs = queryString(new DeleteTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8896,14 +8896,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesDeleteTemplateForAllAsync(string name, Func<DeleteTemplateQueryString, DeleteTemplateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesDeleteTemplateForAllAsync(string name, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteTemplateQueryString());
+				var qs = queryString(new DeleteTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8926,7 +8926,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesDeleteWarmer<T>(string index, string name, Func<DeleteWarmerQueryString, DeleteWarmerQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesDeleteWarmer<T>(string index, string name, Func<DeleteWarmerRequestParameters, DeleteWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -8934,7 +8934,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteWarmerQueryString());
+				var qs = queryString(new DeleteWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8958,7 +8958,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesDeleteWarmerAsync<T>(string index, string name, Func<DeleteWarmerQueryString, DeleteWarmerQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesDeleteWarmerAsync<T>(string index, string name, Func<DeleteWarmerRequestParameters, DeleteWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -8966,7 +8966,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteWarmerQueryString());
+				var qs = queryString(new DeleteWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -8991,7 +8991,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesDeleteWarmer(string index, string name, Func<DeleteWarmerQueryString, DeleteWarmerQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesDeleteWarmer(string index, string name, Func<DeleteWarmerRequestParameters, DeleteWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -8999,7 +8999,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteWarmerQueryString());
+				var qs = queryString(new DeleteWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9023,7 +9023,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesDeleteWarmerAsync(string index, string name, Func<DeleteWarmerQueryString, DeleteWarmerQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesDeleteWarmerAsync(string index, string name, Func<DeleteWarmerRequestParameters, DeleteWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -9031,7 +9031,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new DeleteWarmerQueryString());
+				var qs = queryString(new DeleteWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9053,14 +9053,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesExists<T>(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesExists<T>(string index, Func<IndexExistsRequestParameters, IndexExistsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexExistsQueryString());
+				var qs = queryString(new IndexExistsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9083,14 +9083,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesExistsAsync<T>(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesExistsAsync<T>(string index, Func<IndexExistsRequestParameters, IndexExistsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexExistsQueryString());
+				var qs = queryString(new IndexExistsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9114,14 +9114,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesExists(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesExists(string index, Func<IndexExistsRequestParameters, IndexExistsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexExistsQueryString());
+				var qs = queryString(new IndexExistsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9144,14 +9144,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsAsync(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsAsync(string index, Func<IndexExistsRequestParameters, IndexExistsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndexExistsQueryString());
+				var qs = queryString(new IndexExistsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9173,14 +9173,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesExistsAliasForAll<T>(string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesExistsAliasForAll<T>(string name, Func<IndicesExistsAliasRequestParameters, IndicesExistsAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsAliasQueryString());
+				var qs = queryString(new IndicesExistsAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9203,14 +9203,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesExistsAliasForAllAsync<T>(string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesExistsAliasForAllAsync<T>(string name, Func<IndicesExistsAliasRequestParameters, IndicesExistsAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsAliasQueryString());
+				var qs = queryString(new IndicesExistsAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9234,14 +9234,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesExistsAliasForAll(string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesExistsAliasForAll(string name, Func<IndicesExistsAliasRequestParameters, IndicesExistsAliasRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsAliasQueryString());
+				var qs = queryString(new IndicesExistsAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9264,14 +9264,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsAliasForAllAsync(string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsAliasForAllAsync(string name, Func<IndicesExistsAliasRequestParameters, IndicesExistsAliasRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsAliasQueryString());
+				var qs = queryString(new IndicesExistsAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9294,7 +9294,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesExistsAlias<T>(string index, string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesExistsAlias<T>(string index, string name, Func<IndicesExistsAliasRequestParameters, IndicesExistsAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -9302,7 +9302,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsAliasQueryString());
+				var qs = queryString(new IndicesExistsAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9326,7 +9326,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesExistsAliasAsync<T>(string index, string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesExistsAliasAsync<T>(string index, string name, Func<IndicesExistsAliasRequestParameters, IndicesExistsAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -9334,7 +9334,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsAliasQueryString());
+				var qs = queryString(new IndicesExistsAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9359,7 +9359,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesExistsAlias(string index, string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesExistsAlias(string index, string name, Func<IndicesExistsAliasRequestParameters, IndicesExistsAliasRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -9367,7 +9367,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsAliasQueryString());
+				var qs = queryString(new IndicesExistsAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9391,7 +9391,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsAliasAsync(string index, string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsAliasAsync(string index, string name, Func<IndicesExistsAliasRequestParameters, IndicesExistsAliasRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -9399,7 +9399,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsAliasQueryString());
+				var qs = queryString(new IndicesExistsAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9421,14 +9421,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesExistsAlias<T>(string index, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesExistsAlias<T>(string index, Func<IndicesExistsAliasRequestParameters, IndicesExistsAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsAliasQueryString());
+				var qs = queryString(new IndicesExistsAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9451,14 +9451,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesExistsAliasAsync<T>(string index, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesExistsAliasAsync<T>(string index, Func<IndicesExistsAliasRequestParameters, IndicesExistsAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsAliasQueryString());
+				var qs = queryString(new IndicesExistsAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9482,14 +9482,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesExistsAlias(string index, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesExistsAlias(string index, Func<IndicesExistsAliasRequestParameters, IndicesExistsAliasRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsAliasQueryString());
+				var qs = queryString(new IndicesExistsAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9512,14 +9512,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsAliasAsync(string index, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsAliasAsync(string index, Func<IndicesExistsAliasRequestParameters, IndicesExistsAliasRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsAliasQueryString());
+				var qs = queryString(new IndicesExistsAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9541,14 +9541,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesExistsTemplateForAll<T>(string name, Func<IndicesExistsTemplateQueryString, IndicesExistsTemplateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesExistsTemplateForAll<T>(string name, Func<IndicesExistsTemplateRequestParameters, IndicesExistsTemplateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsTemplateQueryString());
+				var qs = queryString(new IndicesExistsTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9571,14 +9571,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesExistsTemplateForAllAsync<T>(string name, Func<IndicesExistsTemplateQueryString, IndicesExistsTemplateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesExistsTemplateForAllAsync<T>(string name, Func<IndicesExistsTemplateRequestParameters, IndicesExistsTemplateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsTemplateQueryString());
+				var qs = queryString(new IndicesExistsTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9602,14 +9602,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesExistsTemplateForAll(string name, Func<IndicesExistsTemplateQueryString, IndicesExistsTemplateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesExistsTemplateForAll(string name, Func<IndicesExistsTemplateRequestParameters, IndicesExistsTemplateRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsTemplateQueryString());
+				var qs = queryString(new IndicesExistsTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9632,14 +9632,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsTemplateForAllAsync(string name, Func<IndicesExistsTemplateQueryString, IndicesExistsTemplateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsTemplateForAllAsync(string name, Func<IndicesExistsTemplateRequestParameters, IndicesExistsTemplateRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsTemplateQueryString());
+				var qs = queryString(new IndicesExistsTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9662,7 +9662,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesExistsType<T>(string index, string type, Func<IndicesExistsTypeQueryString, IndicesExistsTypeQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesExistsType<T>(string index, string type, Func<IndicesExistsTypeRequestParameters, IndicesExistsTypeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -9670,7 +9670,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsTypeQueryString());
+				var qs = queryString(new IndicesExistsTypeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9694,7 +9694,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesExistsTypeAsync<T>(string index, string type, Func<IndicesExistsTypeQueryString, IndicesExistsTypeQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesExistsTypeAsync<T>(string index, string type, Func<IndicesExistsTypeRequestParameters, IndicesExistsTypeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -9702,7 +9702,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsTypeQueryString());
+				var qs = queryString(new IndicesExistsTypeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9727,7 +9727,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesExistsType(string index, string type, Func<IndicesExistsTypeQueryString, IndicesExistsTypeQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesExistsType(string index, string type, Func<IndicesExistsTypeRequestParameters, IndicesExistsTypeRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -9735,7 +9735,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsTypeQueryString());
+				var qs = queryString(new IndicesExistsTypeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9759,7 +9759,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsTypeAsync(string index, string type, Func<IndicesExistsTypeQueryString, IndicesExistsTypeQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsTypeAsync(string index, string type, Func<IndicesExistsTypeRequestParameters, IndicesExistsTypeRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -9767,7 +9767,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsTypeQueryString());
+				var qs = queryString(new IndicesExistsTypeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9788,13 +9788,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesFlushForAll<T>(Func<FlushQueryString, FlushQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesFlushForAll<T>(Func<FlushRequestParameters, FlushRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_flush";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9816,13 +9816,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesFlushForAllAsync<T>(Func<FlushQueryString, FlushQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesFlushForAllAsync<T>(Func<FlushRequestParameters, FlushRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_flush";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9845,13 +9845,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesFlushForAll(Func<FlushQueryString, FlushQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesFlushForAll(Func<FlushRequestParameters, FlushRequestParameters> queryString = null)
 		{
 			var url = "_flush";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9873,13 +9873,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushForAllAsync(Func<FlushQueryString, FlushQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushForAllAsync(Func<FlushRequestParameters, FlushRequestParameters> queryString = null)
 		{
 			var url = "_flush";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9901,14 +9901,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesFlush<T>(string index, Func<FlushQueryString, FlushQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesFlush<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9931,14 +9931,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesFlushAsync<T>(string index, Func<FlushQueryString, FlushQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesFlushAsync<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9962,14 +9962,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesFlush(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesFlush(string index, Func<FlushRequestParameters, FlushRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -9992,14 +9992,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushAsync(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushAsync(string index, Func<FlushRequestParameters, FlushRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10020,13 +10020,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesFlushGetForAll<T>(Func<FlushQueryString, FlushQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesFlushGetForAll<T>(Func<FlushRequestParameters, FlushRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_flush";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10048,13 +10048,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesFlushGetForAllAsync<T>(Func<FlushQueryString, FlushQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesFlushGetForAllAsync<T>(Func<FlushRequestParameters, FlushRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_flush";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10077,13 +10077,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesFlushGetForAll(Func<FlushQueryString, FlushQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesFlushGetForAll(Func<FlushRequestParameters, FlushRequestParameters> queryString = null)
 		{
 			var url = "_flush";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10105,13 +10105,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushGetForAllAsync(Func<FlushQueryString, FlushQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushGetForAllAsync(Func<FlushRequestParameters, FlushRequestParameters> queryString = null)
 		{
 			var url = "_flush";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10133,14 +10133,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesFlushGet<T>(string index, Func<FlushQueryString, FlushQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesFlushGet<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10163,14 +10163,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesFlushGetAsync<T>(string index, Func<FlushQueryString, FlushQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesFlushGetAsync<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10194,14 +10194,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesFlushGet(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesFlushGet(string index, Func<FlushRequestParameters, FlushRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10224,14 +10224,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushGetAsync(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushGetAsync(string index, Func<FlushRequestParameters, FlushRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new FlushQueryString());
+				var qs = queryString(new FlushRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10252,13 +10252,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAliasForAll<T>(Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetAliasForAll<T>(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_alias";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10280,13 +10280,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasForAllAsync<T>(Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasForAllAsync<T>(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_alias";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10309,13 +10309,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasForAll(Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasForAll(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null)
 		{
 			var url = "_alias";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10337,13 +10337,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasForAllAsync(Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasForAllAsync(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null)
 		{
 			var url = "_alias";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10365,14 +10365,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAliasForAll<T>(string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetAliasForAll<T>(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10395,14 +10395,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasForAllAsync<T>(string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasForAllAsync<T>(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10426,14 +10426,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasForAll(string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasForAll(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10456,14 +10456,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasForAllAsync(string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasForAllAsync(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10486,7 +10486,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAlias<T>(string index, string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetAlias<T>(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -10494,7 +10494,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10518,7 +10518,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasAsync<T>(string index, string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasAsync<T>(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -10526,7 +10526,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10551,7 +10551,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAlias(string index, string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAlias(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -10559,7 +10559,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10583,7 +10583,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasAsync(string index, string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasAsync(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -10591,7 +10591,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10613,14 +10613,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAlias<T>(string index, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetAlias<T>(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10643,14 +10643,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasAsync<T>(string index, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasAsync<T>(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10674,14 +10674,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAlias(string index, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAlias(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10704,14 +10704,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasAsync(string index, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasAsync(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetAliasesQueryString());
+				var qs = queryString(new GetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10732,13 +10732,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAliasesForAll<T>(Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetAliasesForAll<T>(Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_aliases";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10760,13 +10760,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasesForAllAsync<T>(Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasesForAllAsync<T>(Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_aliases";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10789,13 +10789,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasesForAll(Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasesForAll(Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null)
 		{
 			var url = "_aliases";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10817,13 +10817,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesForAllAsync(Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesForAllAsync(Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null)
 		{
 			var url = "_aliases";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10845,14 +10845,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAliases<T>(string index, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetAliases<T>(string index, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_aliases".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10875,14 +10875,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasesAsync<T>(string index, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasesAsync<T>(string index, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_aliases".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10906,14 +10906,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliases(string index, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliases(string index, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_aliases".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10936,14 +10936,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesAsync(string index, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesAsync(string index, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_aliases".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10966,7 +10966,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAliases<T>(string index, string name, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetAliases<T>(string index, string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -10974,7 +10974,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -10998,7 +10998,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasesAsync<T>(string index, string name, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasesAsync<T>(string index, string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -11006,7 +11006,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11031,7 +11031,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliases(string index, string name, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliases(string index, string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -11039,7 +11039,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11063,7 +11063,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesAsync(string index, string name, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesAsync(string index, string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -11071,7 +11071,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11093,14 +11093,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAliasesForAll<T>(string name, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetAliasesForAll<T>(string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11123,14 +11123,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasesForAllAsync<T>(string name, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasesForAllAsync<T>(string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11154,14 +11154,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasesForAll(string name, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasesForAll(string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11184,14 +11184,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesForAllAsync(string name, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesForAllAsync(string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasesQueryString());
+				var qs = queryString(new IndicesGetAliasesRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11213,14 +11213,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/field/{0}".F(Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11243,14 +11243,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/field/{0}".F(Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11274,14 +11274,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMappingForAll(string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMappingForAll(string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null)
 		{
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/field/{0}".F(Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11304,14 +11304,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingForAllAsync(string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingForAllAsync(string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null)
 		{
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/field/{0}".F(Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11334,7 +11334,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			field.ThrowIfNullOrEmpty("field");
@@ -11342,7 +11342,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11366,7 +11366,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			field.ThrowIfNullOrEmpty("field");
@@ -11374,7 +11374,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11399,7 +11399,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMapping(string index, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMapping(string index, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			field.ThrowIfNullOrEmpty("field");
@@ -11407,7 +11407,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11431,7 +11431,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingAsync(string index, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingAsync(string index, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			field.ThrowIfNullOrEmpty("field");
@@ -11439,7 +11439,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11462,7 +11462,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string type, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
@@ -11470,7 +11470,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11494,7 +11494,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string type, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
@@ -11502,7 +11502,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11527,7 +11527,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMappingForAll(string type, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMappingForAll(string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
@@ -11535,7 +11535,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11559,7 +11559,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingForAllAsync(string type, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingForAllAsync(string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
@@ -11567,7 +11567,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11591,7 +11591,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string type, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -11600,7 +11600,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11625,7 +11625,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string type, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -11634,7 +11634,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11660,7 +11660,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMapping(string index, string type, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMapping(string index, string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -11669,7 +11669,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11694,7 +11694,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingAsync(string index, string type, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingAsync(string index, string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -11703,7 +11703,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetFieldMappingQueryString());
+				var qs = queryString(new IndicesGetFieldMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11724,13 +11724,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetMappingForAll<T>(Func<GetMappingQueryString, GetMappingQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetMappingForAll<T>(Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_mapping";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11752,13 +11752,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetMappingForAllAsync<T>(Func<GetMappingQueryString, GetMappingQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetMappingForAllAsync<T>(Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_mapping";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11781,13 +11781,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetMappingForAll(Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetMappingForAll(Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null)
 		{
 			var url = "_mapping";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11809,13 +11809,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetMappingForAllAsync(Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetMappingForAllAsync(Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null)
 		{
 			var url = "_mapping";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11837,14 +11837,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetMapping<T>(string index, Func<GetMappingQueryString, GetMappingQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetMapping<T>(string index, Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mapping".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11867,14 +11867,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetMappingAsync<T>(string index, Func<GetMappingQueryString, GetMappingQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetMappingAsync<T>(string index, Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mapping".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11898,14 +11898,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetMapping(string index, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetMapping(string index, Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mapping".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11928,14 +11928,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetMappingAsync(string index, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetMappingAsync(string index, Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mapping".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11957,14 +11957,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetMappingForAll<T>(string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetMappingForAll<T>(string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -11987,14 +11987,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetMappingForAllAsync<T>(string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetMappingForAllAsync<T>(string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12018,14 +12018,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetMappingForAll(string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetMappingForAll(string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12048,14 +12048,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetMappingForAllAsync(string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetMappingForAllAsync(string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12078,7 +12078,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetMapping<T>(string index, string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetMapping<T>(string index, string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -12086,7 +12086,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12110,7 +12110,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetMappingAsync<T>(string index, string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetMappingAsync<T>(string index, string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -12118,7 +12118,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12143,7 +12143,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetMapping(string index, string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetMapping(string index, string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -12151,7 +12151,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12175,7 +12175,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetMappingAsync(string index, string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetMappingAsync(string index, string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -12183,7 +12183,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetMappingQueryString());
+				var qs = queryString(new GetMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12204,13 +12204,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetSettingsForAll<T>(Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetSettingsForAll<T>(Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_settings";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12232,13 +12232,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetSettingsForAllAsync<T>(Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetSettingsForAllAsync<T>(Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_settings";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12261,13 +12261,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetSettingsForAll(Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetSettingsForAll(Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null)
 		{
 			var url = "_settings";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12289,13 +12289,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetSettingsForAllAsync(Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetSettingsForAllAsync(Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null)
 		{
 			var url = "_settings";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12317,14 +12317,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetSettings<T>(string index, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetSettings<T>(string index, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12347,14 +12347,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetSettingsAsync<T>(string index, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetSettingsAsync<T>(string index, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12378,14 +12378,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetSettings(string index, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetSettings(string index, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12408,14 +12408,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetSettingsAsync(string index, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetSettingsAsync(string index, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12438,7 +12438,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetSettings<T>(string index, string name, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetSettings<T>(string index, string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -12446,7 +12446,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12470,7 +12470,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetSettingsAsync<T>(string index, string name, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetSettingsAsync<T>(string index, string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -12478,7 +12478,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12503,7 +12503,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetSettings(string index, string name, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetSettings(string index, string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -12511,7 +12511,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12535,7 +12535,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetSettingsAsync(string index, string name, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetSettingsAsync(string index, string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -12543,7 +12543,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12565,14 +12565,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetSettingsForAll<T>(string name, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetSettingsForAll<T>(string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_settings/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12595,14 +12595,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetSettingsForAllAsync<T>(string name, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetSettingsForAllAsync<T>(string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_settings/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12626,14 +12626,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetSettingsForAll(string name, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetSettingsForAll(string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_settings/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12656,14 +12656,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetSettingsForAllAsync(string name, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetSettingsForAllAsync(string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_settings/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetIndexSettingsQueryString());
+				var qs = queryString(new GetIndexSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12684,13 +12684,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(Func<GetTemplateRequestParameters, GetTemplateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_template";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetTemplateQueryString());
+				var qs = queryString(new GetTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12712,13 +12712,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(Func<GetTemplateRequestParameters, GetTemplateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_template";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetTemplateQueryString());
+				var qs = queryString(new GetTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12741,13 +12741,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetTemplateForAll(Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetTemplateForAll(Func<GetTemplateRequestParameters, GetTemplateRequestParameters> queryString = null)
 		{
 			var url = "_template";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetTemplateQueryString());
+				var qs = queryString(new GetTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12769,13 +12769,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetTemplateForAllAsync(Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetTemplateForAllAsync(Func<GetTemplateRequestParameters, GetTemplateRequestParameters> queryString = null)
 		{
 			var url = "_template";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetTemplateQueryString());
+				var qs = queryString(new GetTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12797,14 +12797,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(string name, Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(string name, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetTemplateQueryString());
+				var qs = queryString(new GetTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12827,14 +12827,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(string name, Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(string name, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetTemplateQueryString());
+				var qs = queryString(new GetTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12858,14 +12858,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetTemplateForAll(string name, Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetTemplateForAll(string name, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetTemplateQueryString());
+				var qs = queryString(new GetTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12888,14 +12888,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetTemplateForAllAsync(string name, Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetTemplateForAllAsync(string name, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetTemplateQueryString());
+				var qs = queryString(new GetTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12916,13 +12916,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetWarmerForAll<T>(Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetWarmerForAll<T>(Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_warmer";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12944,13 +12944,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetWarmerForAllAsync<T>(Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetWarmerForAllAsync<T>(Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_warmer";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -12973,13 +12973,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetWarmerForAll(Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetWarmerForAll(Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null)
 		{
 			var url = "_warmer";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13001,13 +13001,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetWarmerForAllAsync(Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetWarmerForAllAsync(Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null)
 		{
 			var url = "_warmer";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13029,14 +13029,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetWarmer<T>(string index, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetWarmer<T>(string index, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_warmer".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13059,14 +13059,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetWarmerAsync<T>(string index, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetWarmerAsync<T>(string index, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_warmer".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13090,14 +13090,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetWarmer(string index, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetWarmer(string index, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_warmer".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13120,14 +13120,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetWarmerAsync(string index, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetWarmerAsync(string index, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_warmer".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13150,7 +13150,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetWarmer<T>(string index, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetWarmer<T>(string index, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -13158,7 +13158,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13182,7 +13182,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetWarmerAsync<T>(string index, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetWarmerAsync<T>(string index, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -13190,7 +13190,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13215,7 +13215,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetWarmer(string index, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetWarmer(string index, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -13223,7 +13223,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13247,7 +13247,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetWarmerAsync(string index, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetWarmerAsync(string index, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -13255,7 +13255,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13277,14 +13277,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetWarmerForAll<T>(string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetWarmerForAll<T>(string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13307,14 +13307,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetWarmerForAllAsync<T>(string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetWarmerForAllAsync<T>(string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13338,14 +13338,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetWarmerForAll(string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetWarmerForAll(string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13368,14 +13368,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetWarmerForAllAsync(string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetWarmerForAllAsync(string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13399,7 +13399,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetWarmer<T>(string index, string type, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesGetWarmer<T>(string index, string type, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -13408,7 +13408,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13433,7 +13433,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetWarmerAsync<T>(string index, string type, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetWarmerAsync<T>(string index, string type, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -13442,7 +13442,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13468,7 +13468,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetWarmer(string index, string type, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetWarmer(string index, string type, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -13477,7 +13477,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13502,7 +13502,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetWarmerAsync(string index, string type, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetWarmerAsync(string index, string type, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -13511,7 +13511,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetWarmerQueryString());
+				var qs = queryString(new GetWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13533,14 +13533,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesOpen<T>(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesOpen<T>(string index, Func<OpenIndexRequestParameters, OpenIndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_open".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OpenIndexQueryString());
+				var qs = queryString(new OpenIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13563,14 +13563,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesOpenAsync<T>(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesOpenAsync<T>(string index, Func<OpenIndexRequestParameters, OpenIndexRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_open".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OpenIndexQueryString());
+				var qs = queryString(new OpenIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13594,14 +13594,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesOpen(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesOpen(string index, Func<OpenIndexRequestParameters, OpenIndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_open".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OpenIndexQueryString());
+				var qs = queryString(new OpenIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13624,14 +13624,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesOpenAsync(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesOpenAsync(string index, Func<OpenIndexRequestParameters, OpenIndexRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_open".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OpenIndexQueryString());
+				var qs = queryString(new OpenIndexRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13652,13 +13652,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesOptimizeForAll<T>(Func<OptimizeQueryString, OptimizeQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesOptimizeForAll<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_optimize";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13680,13 +13680,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesOptimizeForAllAsync<T>(Func<OptimizeQueryString, OptimizeQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesOptimizeForAllAsync<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_optimize";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13709,13 +13709,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesOptimizeForAll(Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesOptimizeForAll(Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null)
 		{
 			var url = "_optimize";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13737,13 +13737,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesOptimizeForAllAsync(Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesOptimizeForAllAsync(Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null)
 		{
 			var url = "_optimize";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13765,14 +13765,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesOptimize<T>(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesOptimize<T>(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13795,14 +13795,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesOptimizeAsync<T>(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesOptimizeAsync<T>(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13826,14 +13826,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesOptimize(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesOptimize(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13856,14 +13856,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesOptimizeAsync(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesOptimizeAsync(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13884,13 +13884,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesOptimizeGetForAll<T>(Func<OptimizeQueryString, OptimizeQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesOptimizeGetForAll<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_optimize";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13912,13 +13912,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesOptimizeGetForAllAsync<T>(Func<OptimizeQueryString, OptimizeQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesOptimizeGetForAllAsync<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_optimize";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13941,13 +13941,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesOptimizeGetForAll(Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesOptimizeGetForAll(Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null)
 		{
 			var url = "_optimize";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13969,13 +13969,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesOptimizeGetForAllAsync(Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesOptimizeGetForAllAsync(Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null)
 		{
 			var url = "_optimize";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -13997,14 +13997,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesOptimizeGet<T>(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesOptimizeGet<T>(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14027,14 +14027,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesOptimizeGetAsync<T>(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesOptimizeGetAsync<T>(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14058,14 +14058,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesOptimizeGet(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesOptimizeGet(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14088,14 +14088,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesOptimizeGetAsync(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesOptimizeGetAsync(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new OptimizeQueryString());
+				var qs = queryString(new OptimizeRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14119,7 +14119,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutAlias<T>(string index, string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutAlias<T>(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -14127,7 +14127,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14152,7 +14152,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutAliasAsync<T>(string index, string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutAliasAsync<T>(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -14160,7 +14160,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14186,7 +14186,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutAlias(string index, string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutAlias(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -14194,7 +14194,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14219,7 +14219,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasAsync(string index, string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasAsync(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -14227,7 +14227,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14250,14 +14250,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutAliasForAll<T>(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutAliasForAll<T>(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14281,14 +14281,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutAliasForAllAsync<T>(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutAliasForAllAsync<T>(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14313,14 +14313,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutAliasForAll(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutAliasForAll(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14344,14 +14344,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasForAllAsync(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasForAllAsync(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14375,7 +14375,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutAliasPost<T>(string index, string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutAliasPost<T>(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -14383,7 +14383,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14408,7 +14408,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutAliasPostAsync<T>(string index, string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutAliasPostAsync<T>(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -14416,7 +14416,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14442,7 +14442,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutAliasPost(string index, string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutAliasPost(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -14450,7 +14450,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14475,7 +14475,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasPostAsync(string index, string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasPostAsync(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -14483,7 +14483,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14506,14 +14506,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutAliasPostForAll<T>(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutAliasPostForAll<T>(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14537,14 +14537,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutAliasPostForAllAsync<T>(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutAliasPostForAllAsync<T>(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14569,14 +14569,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutAliasPostForAll(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutAliasPostForAll(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14600,14 +14600,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasPostForAllAsync(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasPostForAllAsync(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutAliasQueryString());
+				var qs = queryString(new IndicesPutAliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14631,7 +14631,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutMapping<T>(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutMapping<T>(string index, string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -14639,7 +14639,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14664,7 +14664,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutMappingAsync<T>(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutMappingAsync<T>(string index, string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -14672,7 +14672,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14698,7 +14698,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutMapping(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutMapping(string index, string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -14706,7 +14706,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14731,7 +14731,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutMappingAsync(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutMappingAsync(string index, string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -14739,7 +14739,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14762,14 +14762,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutMappingForAll<T>(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutMappingForAll<T>(string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14793,14 +14793,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutMappingForAllAsync<T>(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutMappingForAllAsync<T>(string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14825,14 +14825,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutMappingForAll(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutMappingForAll(string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14856,14 +14856,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutMappingForAllAsync(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutMappingForAllAsync(string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14887,7 +14887,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutMappingPost<T>(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutMappingPost<T>(string index, string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -14895,7 +14895,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14920,7 +14920,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutMappingPostAsync<T>(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutMappingPostAsync<T>(string index, string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -14928,7 +14928,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14954,7 +14954,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutMappingPost(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutMappingPost(string index, string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -14962,7 +14962,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -14987,7 +14987,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutMappingPostAsync(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutMappingPostAsync(string index, string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -14995,7 +14995,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15018,14 +15018,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutMappingPostForAll<T>(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutMappingPostForAll<T>(string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15049,14 +15049,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutMappingPostForAllAsync<T>(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutMappingPostForAllAsync<T>(string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15081,14 +15081,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutMappingPostForAll(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutMappingPostForAll(string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15112,14 +15112,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutMappingPostForAllAsync(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutMappingPostForAllAsync(string type, object body, Func<PutMappingRequestParameters, PutMappingRequestParameters> queryString = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutMappingQueryString());
+				var qs = queryString(new PutMappingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15141,13 +15141,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutSettingsForAll<T>(object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutSettingsForAll<T>(object body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_settings".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new UpdateSettingsQueryString());
+				var qs = queryString(new UpdateSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15170,13 +15170,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutSettingsForAllAsync<T>(object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutSettingsForAllAsync<T>(object body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_settings".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new UpdateSettingsQueryString());
+				var qs = queryString(new UpdateSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15200,13 +15200,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutSettingsForAll(object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutSettingsForAll(object body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> queryString = null)
 		{
 			var url = "_settings".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new UpdateSettingsQueryString());
+				var qs = queryString(new UpdateSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15229,13 +15229,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutSettingsForAllAsync(object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutSettingsForAllAsync(object body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> queryString = null)
 		{
 			var url = "_settings".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new UpdateSettingsQueryString());
+				var qs = queryString(new UpdateSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15258,14 +15258,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutSettings<T>(string index, object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutSettings<T>(string index, object body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new UpdateSettingsQueryString());
+				var qs = queryString(new UpdateSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15289,14 +15289,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutSettingsAsync<T>(string index, object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutSettingsAsync<T>(string index, object body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new UpdateSettingsQueryString());
+				var qs = queryString(new UpdateSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15321,14 +15321,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutSettings(string index, object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutSettings(string index, object body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new UpdateSettingsQueryString());
+				var qs = queryString(new UpdateSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15352,14 +15352,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutSettingsAsync(string index, object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutSettingsAsync(string index, object body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new UpdateSettingsQueryString());
+				var qs = queryString(new UpdateSettingsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15382,14 +15382,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutTemplateForAll<T>(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutTemplateForAll<T>(string name, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutTemplateQueryString());
+				var qs = queryString(new PutTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15413,14 +15413,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutTemplateForAllAsync<T>(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutTemplateForAllAsync<T>(string name, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutTemplateQueryString());
+				var qs = queryString(new PutTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15445,14 +15445,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutTemplateForAll(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutTemplateForAll(string name, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutTemplateQueryString());
+				var qs = queryString(new PutTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15476,14 +15476,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutTemplateForAllAsync(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutTemplateForAllAsync(string name, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutTemplateQueryString());
+				var qs = queryString(new PutTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15506,14 +15506,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutTemplatePostForAll<T>(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutTemplatePostForAll<T>(string name, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutTemplateQueryString());
+				var qs = queryString(new PutTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15537,14 +15537,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutTemplatePostForAllAsync<T>(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutTemplatePostForAllAsync<T>(string name, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutTemplateQueryString());
+				var qs = queryString(new PutTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15569,14 +15569,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutTemplatePostForAll(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutTemplatePostForAll(string name, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutTemplateQueryString());
+				var qs = queryString(new PutTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15600,14 +15600,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutTemplatePostForAllAsync(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutTemplatePostForAllAsync(string name, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutTemplateQueryString());
+				var qs = queryString(new PutTemplateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15630,14 +15630,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutWarmerForAll<T>(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutWarmerForAll<T>(string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15661,14 +15661,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutWarmerForAllAsync<T>(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutWarmerForAllAsync<T>(string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15693,14 +15693,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutWarmerForAll(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutWarmerForAll(string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15724,14 +15724,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutWarmerForAllAsync(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutWarmerForAllAsync(string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15755,7 +15755,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutWarmer<T>(string index, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutWarmer<T>(string index, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -15763,7 +15763,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15788,7 +15788,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutWarmerAsync<T>(string index, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutWarmerAsync<T>(string index, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -15796,7 +15796,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15822,7 +15822,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutWarmer(string index, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutWarmer(string index, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -15830,7 +15830,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15855,7 +15855,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutWarmerAsync(string index, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutWarmerAsync(string index, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -15863,7 +15863,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15888,7 +15888,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutWarmer<T>(string index, string type, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutWarmer<T>(string index, string type, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -15897,7 +15897,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15923,7 +15923,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutWarmerAsync<T>(string index, string type, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutWarmerAsync<T>(string index, string type, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -15932,7 +15932,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15959,7 +15959,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutWarmer(string index, string type, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutWarmer(string index, string type, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -15968,7 +15968,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -15994,7 +15994,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutWarmerAsync(string index, string type, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutWarmerAsync(string index, string type, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -16003,7 +16003,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16026,14 +16026,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutWarmerPostForAll<T>(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutWarmerPostForAll<T>(string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16057,14 +16057,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutWarmerPostForAllAsync<T>(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutWarmerPostForAllAsync<T>(string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16089,14 +16089,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutWarmerPostForAll(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutWarmerPostForAll(string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16120,14 +16120,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutWarmerPostForAllAsync(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutWarmerPostForAllAsync(string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16151,7 +16151,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutWarmerPost<T>(string index, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutWarmerPost<T>(string index, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -16159,7 +16159,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16184,7 +16184,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutWarmerPostAsync<T>(string index, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutWarmerPostAsync<T>(string index, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -16192,7 +16192,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16218,7 +16218,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutWarmerPost(string index, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutWarmerPost(string index, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -16226,7 +16226,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16251,7 +16251,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutWarmerPostAsync(string index, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutWarmerPostAsync(string index, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -16259,7 +16259,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16284,7 +16284,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutWarmerPost<T>(string index, string type, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesPutWarmerPost<T>(string index, string type, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -16293,7 +16293,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16319,7 +16319,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutWarmerPostAsync<T>(string index, string type, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutWarmerPostAsync<T>(string index, string type, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -16328,7 +16328,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16355,7 +16355,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutWarmerPost(string index, string type, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutWarmerPost(string index, string type, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -16364,7 +16364,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16390,7 +16390,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutWarmerPostAsync(string index, string type, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutWarmerPostAsync(string index, string type, string name, object body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -16399,7 +16399,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PutWarmerQueryString());
+				var qs = queryString(new PutWarmerRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16420,13 +16420,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesRefreshForAll<T>(Func<RefreshQueryString, RefreshQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesRefreshForAll<T>(Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_refresh";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16448,13 +16448,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesRefreshForAllAsync<T>(Func<RefreshQueryString, RefreshQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesRefreshForAllAsync<T>(Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_refresh";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16477,13 +16477,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesRefreshForAll(Func<RefreshQueryString, RefreshQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesRefreshForAll(Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null)
 		{
 			var url = "_refresh";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16505,13 +16505,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRefreshForAllAsync(Func<RefreshQueryString, RefreshQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRefreshForAllAsync(Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null)
 		{
 			var url = "_refresh";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16533,14 +16533,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesRefresh<T>(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesRefresh<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16563,14 +16563,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesRefreshAsync<T>(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesRefreshAsync<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16594,14 +16594,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesRefresh(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesRefresh(string index, Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16624,14 +16624,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRefreshAsync(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRefreshAsync(string index, Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16652,13 +16652,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesRefreshGetForAll<T>(Func<RefreshQueryString, RefreshQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesRefreshGetForAll<T>(Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_refresh";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16680,13 +16680,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesRefreshGetForAllAsync<T>(Func<RefreshQueryString, RefreshQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesRefreshGetForAllAsync<T>(Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_refresh";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16709,13 +16709,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesRefreshGetForAll(Func<RefreshQueryString, RefreshQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesRefreshGetForAll(Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null)
 		{
 			var url = "_refresh";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16737,13 +16737,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRefreshGetForAllAsync(Func<RefreshQueryString, RefreshQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRefreshGetForAllAsync(Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null)
 		{
 			var url = "_refresh";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16765,14 +16765,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesRefreshGet<T>(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesRefreshGet<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16795,14 +16795,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesRefreshGetAsync<T>(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesRefreshGetAsync<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16826,14 +16826,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesRefreshGet(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesRefreshGet(string index, Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16856,14 +16856,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRefreshGetAsync(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRefreshGetAsync(string index, Func<RefreshRequestParameters, RefreshRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new RefreshQueryString());
+				var qs = queryString(new RefreshRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16884,13 +16884,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesSegmentsForAll<T>(Func<SegmentsQueryString, SegmentsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesSegmentsForAll<T>(Func<SegmentsRequestParameters, SegmentsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_segments";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SegmentsQueryString());
+				var qs = queryString(new SegmentsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16912,13 +16912,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesSegmentsForAllAsync<T>(Func<SegmentsQueryString, SegmentsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesSegmentsForAllAsync<T>(Func<SegmentsRequestParameters, SegmentsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_segments";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SegmentsQueryString());
+				var qs = queryString(new SegmentsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16941,13 +16941,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesSegmentsForAll(Func<SegmentsQueryString, SegmentsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesSegmentsForAll(Func<SegmentsRequestParameters, SegmentsRequestParameters> queryString = null)
 		{
 			var url = "_segments";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SegmentsQueryString());
+				var qs = queryString(new SegmentsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16969,13 +16969,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesSegmentsForAllAsync(Func<SegmentsQueryString, SegmentsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesSegmentsForAllAsync(Func<SegmentsRequestParameters, SegmentsRequestParameters> queryString = null)
 		{
 			var url = "_segments";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SegmentsQueryString());
+				var qs = queryString(new SegmentsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -16997,14 +16997,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesSegments<T>(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesSegments<T>(string index, Func<SegmentsRequestParameters, SegmentsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_segments".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SegmentsQueryString());
+				var qs = queryString(new SegmentsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17027,14 +17027,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesSegmentsAsync<T>(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesSegmentsAsync<T>(string index, Func<SegmentsRequestParameters, SegmentsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_segments".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SegmentsQueryString());
+				var qs = queryString(new SegmentsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17058,14 +17058,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesSegments(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesSegments(string index, Func<SegmentsRequestParameters, SegmentsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_segments".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SegmentsQueryString());
+				var qs = queryString(new SegmentsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17088,14 +17088,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesSegmentsAsync(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesSegmentsAsync(string index, Func<SegmentsRequestParameters, SegmentsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_segments".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SegmentsQueryString());
+				var qs = queryString(new SegmentsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17116,13 +17116,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesSnapshotIndexForAll<T>(Func<SnapshotQueryString, SnapshotQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesSnapshotIndexForAll<T>(Func<SnapshotRequestParameters, SnapshotRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_gateway/snapshot";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotQueryString());
+				var qs = queryString(new SnapshotRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17144,13 +17144,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesSnapshotIndexForAllAsync<T>(Func<SnapshotQueryString, SnapshotQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesSnapshotIndexForAllAsync<T>(Func<SnapshotRequestParameters, SnapshotRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_gateway/snapshot";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotQueryString());
+				var qs = queryString(new SnapshotRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17173,13 +17173,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesSnapshotIndexForAll(Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesSnapshotIndexForAll(Func<SnapshotRequestParameters, SnapshotRequestParameters> queryString = null)
 		{
 			var url = "_gateway/snapshot";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotQueryString());
+				var qs = queryString(new SnapshotRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17201,13 +17201,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesSnapshotIndexForAllAsync(Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesSnapshotIndexForAllAsync(Func<SnapshotRequestParameters, SnapshotRequestParameters> queryString = null)
 		{
 			var url = "_gateway/snapshot";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotQueryString());
+				var qs = queryString(new SnapshotRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17229,14 +17229,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesSnapshotIndex<T>(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesSnapshotIndex<T>(string index, Func<SnapshotRequestParameters, SnapshotRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_gateway/snapshot".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotQueryString());
+				var qs = queryString(new SnapshotRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17259,14 +17259,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesSnapshotIndexAsync<T>(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesSnapshotIndexAsync<T>(string index, Func<SnapshotRequestParameters, SnapshotRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_gateway/snapshot".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotQueryString());
+				var qs = queryString(new SnapshotRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17290,14 +17290,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesSnapshotIndex(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesSnapshotIndex(string index, Func<SnapshotRequestParameters, SnapshotRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_gateway/snapshot".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotQueryString());
+				var qs = queryString(new SnapshotRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17320,14 +17320,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesSnapshotIndexAsync(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesSnapshotIndexAsync(string index, Func<SnapshotRequestParameters, SnapshotRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_gateway/snapshot".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotQueryString());
+				var qs = queryString(new SnapshotRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17348,13 +17348,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesStatsForAll<T>(Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesStatsForAll<T>(Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_stats";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17376,13 +17376,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesStatsForAllAsync<T>(Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesStatsForAllAsync<T>(Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_stats";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17405,13 +17405,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesStatsForAll(Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesStatsForAll(Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null)
 		{
 			var url = "_stats";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17433,13 +17433,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesStatsForAllAsync(Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesStatsForAllAsync(Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null)
 		{
 			var url = "_stats";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17461,14 +17461,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesStatsForAll<T>(string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesStatsForAll<T>(string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17491,14 +17491,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesStatsForAllAsync<T>(string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesStatsForAllAsync<T>(string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17522,14 +17522,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesStatsForAll(string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesStatsForAll(string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17552,14 +17552,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesStatsForAllAsync(string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesStatsForAllAsync(string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17581,14 +17581,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesStats<T>(string index, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesStats<T>(string index, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_stats".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17611,14 +17611,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesStatsAsync<T>(string index, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesStatsAsync<T>(string index, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_stats".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17642,14 +17642,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesStats(string index, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesStats(string index, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_stats".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17672,14 +17672,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesStatsAsync(string index, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesStatsAsync(string index, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_stats".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17702,7 +17702,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesStats<T>(string index, string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesStats<T>(string index, string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -17710,7 +17710,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17734,7 +17734,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesStatsAsync<T>(string index, string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesStatsAsync<T>(string index, string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -17742,7 +17742,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17767,7 +17767,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesStats(string index, string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesStats(string index, string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -17775,7 +17775,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17799,7 +17799,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesStatsAsync(string index, string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesStatsAsync(string index, string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -17807,7 +17807,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatsQueryString());
+				var qs = queryString(new IndicesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17828,13 +17828,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesStatusForAll<T>(Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesStatusForAll<T>(Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_status";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatusQueryString());
+				var qs = queryString(new IndicesStatusRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17856,13 +17856,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesStatusForAllAsync<T>(Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesStatusForAllAsync<T>(Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_status";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatusQueryString());
+				var qs = queryString(new IndicesStatusRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17885,13 +17885,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesStatusForAll(Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesStatusForAll(Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> queryString = null)
 		{
 			var url = "_status";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatusQueryString());
+				var qs = queryString(new IndicesStatusRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17913,13 +17913,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesStatusForAllAsync(Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesStatusForAllAsync(Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> queryString = null)
 		{
 			var url = "_status";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatusQueryString());
+				var qs = queryString(new IndicesStatusRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17941,14 +17941,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesStatus<T>(string index, Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesStatus<T>(string index, Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_status".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatusQueryString());
+				var qs = queryString(new IndicesStatusRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -17971,14 +17971,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesStatusAsync<T>(string index, Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesStatusAsync<T>(string index, Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_status".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatusQueryString());
+				var qs = queryString(new IndicesStatusRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18002,14 +18002,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesStatus(string index, Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesStatus(string index, Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_status".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatusQueryString());
+				var qs = queryString(new IndicesStatusRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18032,14 +18032,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesStatusAsync(string index, Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesStatusAsync(string index, Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_status".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesStatusQueryString());
+				var qs = queryString(new IndicesStatusRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18061,13 +18061,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesUpdateAliasesForAll<T>(object body, Func<AliasQueryString, AliasQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesUpdateAliasesForAll<T>(object body, Func<AliasRequestParameters, AliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_aliases".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AliasQueryString());
+				var qs = queryString(new AliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18090,13 +18090,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesUpdateAliasesForAllAsync<T>(object body, Func<AliasQueryString, AliasQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesUpdateAliasesForAllAsync<T>(object body, Func<AliasRequestParameters, AliasRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_aliases".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AliasQueryString());
+				var qs = queryString(new AliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18120,13 +18120,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesUpdateAliasesForAll(object body, Func<AliasQueryString, AliasQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesUpdateAliasesForAll(object body, Func<AliasRequestParameters, AliasRequestParameters> queryString = null)
 		{
 			var url = "_aliases".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AliasQueryString());
+				var qs = queryString(new AliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18149,13 +18149,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesUpdateAliasesForAllAsync(object body, Func<AliasQueryString, AliasQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesUpdateAliasesForAllAsync(object body, Func<AliasRequestParameters, AliasRequestParameters> queryString = null)
 		{
 			var url = "_aliases".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new AliasQueryString());
+				var qs = queryString(new AliasRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18176,13 +18176,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesValidateQueryGetForAll<T>(Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesValidateQueryGetForAll<T>(Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_validate/query";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18204,13 +18204,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesValidateQueryGetForAllAsync<T>(Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesValidateQueryGetForAllAsync<T>(Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_validate/query";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18233,13 +18233,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesValidateQueryGetForAll(Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesValidateQueryGetForAll(Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null)
 		{
 			var url = "_validate/query";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18261,13 +18261,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesValidateQueryGetForAllAsync(Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesValidateQueryGetForAllAsync(Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null)
 		{
 			var url = "_validate/query";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18289,14 +18289,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesValidateQueryGet<T>(string index, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesValidateQueryGet<T>(string index, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18319,14 +18319,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesValidateQueryGetAsync<T>(string index, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesValidateQueryGetAsync<T>(string index, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18350,14 +18350,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesValidateQueryGet(string index, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesValidateQueryGet(string index, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18380,14 +18380,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesValidateQueryGetAsync(string index, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesValidateQueryGetAsync(string index, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18410,7 +18410,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesValidateQueryGet<T>(string index, string type, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesValidateQueryGet<T>(string index, string type, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -18418,7 +18418,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18442,7 +18442,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesValidateQueryGetAsync<T>(string index, string type, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesValidateQueryGetAsync<T>(string index, string type, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -18450,7 +18450,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18475,7 +18475,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesValidateQueryGet(string index, string type, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesValidateQueryGet(string index, string type, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -18483,7 +18483,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18507,7 +18507,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesValidateQueryGetAsync(string index, string type, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesValidateQueryGetAsync(string index, string type, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -18515,7 +18515,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18537,13 +18537,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesValidateQueryForAll<T>(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesValidateQueryForAll<T>(object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_validate/query".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18566,13 +18566,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesValidateQueryForAllAsync<T>(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesValidateQueryForAllAsync<T>(object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_validate/query".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18596,13 +18596,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesValidateQueryForAll(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesValidateQueryForAll(object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null)
 		{
 			var url = "_validate/query".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18625,13 +18625,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesValidateQueryForAllAsync(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesValidateQueryForAllAsync(object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null)
 		{
 			var url = "_validate/query".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18654,14 +18654,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesValidateQuery<T>(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesValidateQuery<T>(string index, object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18685,14 +18685,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesValidateQueryAsync<T>(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesValidateQueryAsync<T>(string index, object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18717,14 +18717,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesValidateQuery(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesValidateQuery(string index, object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18748,14 +18748,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesValidateQueryAsync(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesValidateQueryAsync(string index, object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18779,7 +18779,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesValidateQuery<T>(string index, string type, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> IndicesValidateQuery<T>(string index, string type, object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -18787,7 +18787,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18812,7 +18812,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesValidateQueryAsync<T>(string index, string type, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> IndicesValidateQueryAsync<T>(string index, string type, object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -18820,7 +18820,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18846,7 +18846,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesValidateQuery(string index, string type, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesValidateQuery(string index, string type, object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -18854,7 +18854,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18879,7 +18879,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesValidateQueryAsync(string index, string type, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesValidateQueryAsync(string index, string type, object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -18887,7 +18887,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ValidateQueryQueryString());
+				var qs = queryString(new ValidateQueryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18908,13 +18908,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Info<T>(Func<InfoQueryString, InfoQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Info<T>(Func<InfoRequestParameters, InfoRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new InfoQueryString());
+				var qs = queryString(new InfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18936,13 +18936,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> InfoAsync<T>(Func<InfoQueryString, InfoQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> InfoAsync<T>(Func<InfoRequestParameters, InfoRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new InfoQueryString());
+				var qs = queryString(new InfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18965,13 +18965,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Info(Func<InfoQueryString, InfoQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Info(Func<InfoRequestParameters, InfoRequestParameters> queryString = null)
 		{
 			var url = "";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new InfoQueryString());
+				var qs = queryString(new InfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -18993,13 +18993,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> InfoAsync(Func<InfoQueryString, InfoQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> InfoAsync(Func<InfoRequestParameters, InfoRequestParameters> queryString = null)
 		{
 			var url = "";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new InfoQueryString());
+				var qs = queryString(new InfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19020,13 +19020,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MgetGet<T>(Func<MultiGetQueryString, MultiGetQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> MgetGet<T>(Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_mget";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19048,13 +19048,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MgetGetAsync<T>(Func<MultiGetQueryString, MultiGetQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MgetGetAsync<T>(Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_mget";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19077,13 +19077,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MgetGet(Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> MgetGet(Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null)
 		{
 			var url = "_mget";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19105,13 +19105,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MgetGetAsync(Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MgetGetAsync(Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null)
 		{
 			var url = "_mget";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19133,14 +19133,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MgetGet<T>(string index, Func<MultiGetQueryString, MultiGetQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> MgetGet<T>(string index, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19163,14 +19163,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MgetGetAsync<T>(string index, Func<MultiGetQueryString, MultiGetQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MgetGetAsync<T>(string index, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19194,14 +19194,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MgetGet(string index, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> MgetGet(string index, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19224,14 +19224,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MgetGetAsync(string index, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MgetGetAsync(string index, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19254,7 +19254,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MgetGet<T>(string index, string type, Func<MultiGetQueryString, MultiGetQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> MgetGet<T>(string index, string type, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -19262,7 +19262,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19286,7 +19286,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MgetGetAsync<T>(string index, string type, Func<MultiGetQueryString, MultiGetQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MgetGetAsync<T>(string index, string type, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -19294,7 +19294,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19319,7 +19319,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MgetGet(string index, string type, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> MgetGet(string index, string type, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -19327,7 +19327,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19351,7 +19351,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MgetGetAsync(string index, string type, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MgetGetAsync(string index, string type, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -19359,7 +19359,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19381,13 +19381,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mget<T>(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Mget<T>(object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_mget".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19410,13 +19410,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MgetAsync<T>(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MgetAsync<T>(object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_mget".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19440,13 +19440,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mget(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Mget(object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null)
 		{
 			var url = "_mget".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19469,13 +19469,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MgetAsync(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MgetAsync(object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null)
 		{
 			var url = "_mget".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19498,14 +19498,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mget<T>(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Mget<T>(string index, object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19529,14 +19529,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MgetAsync<T>(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MgetAsync<T>(string index, object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19561,14 +19561,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mget(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Mget(string index, object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19592,14 +19592,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MgetAsync(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MgetAsync(string index, object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19623,7 +19623,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mget<T>(string index, string type, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Mget<T>(string index, string type, object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -19631,7 +19631,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19656,7 +19656,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MgetAsync<T>(string index, string type, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MgetAsync<T>(string index, string type, object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -19664,7 +19664,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19690,7 +19690,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mget(string index, string type, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Mget(string index, string type, object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -19698,7 +19698,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19723,7 +19723,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MgetAsync(string index, string type, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MgetAsync(string index, string type, object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -19731,7 +19731,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiGetQueryString());
+				var qs = queryString(new MultiGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19755,7 +19755,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MltGet<T>(string index, string type, string id, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> MltGet<T>(string index, string type, string id, Func<MoreLikeThisRequestParameters, MoreLikeThisRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -19764,7 +19764,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MoreLikeThisQueryString());
+				var qs = queryString(new MoreLikeThisRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19789,7 +19789,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MltGetAsync<T>(string index, string type, string id, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MltGetAsync<T>(string index, string type, string id, Func<MoreLikeThisRequestParameters, MoreLikeThisRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -19798,7 +19798,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MoreLikeThisQueryString());
+				var qs = queryString(new MoreLikeThisRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19824,7 +19824,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MltGet(string index, string type, string id, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> MltGet(string index, string type, string id, Func<MoreLikeThisRequestParameters, MoreLikeThisRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -19833,7 +19833,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MoreLikeThisQueryString());
+				var qs = queryString(new MoreLikeThisRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19858,7 +19858,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MltGetAsync(string index, string type, string id, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MltGetAsync(string index, string type, string id, Func<MoreLikeThisRequestParameters, MoreLikeThisRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -19867,7 +19867,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MoreLikeThisQueryString());
+				var qs = queryString(new MoreLikeThisRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19892,7 +19892,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mlt<T>(string index, string type, string id, object body, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Mlt<T>(string index, string type, string id, object body, Func<MoreLikeThisRequestParameters, MoreLikeThisRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -19901,7 +19901,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MoreLikeThisQueryString());
+				var qs = queryString(new MoreLikeThisRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19927,7 +19927,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MltAsync<T>(string index, string type, string id, object body, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MltAsync<T>(string index, string type, string id, object body, Func<MoreLikeThisRequestParameters, MoreLikeThisRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -19936,7 +19936,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MoreLikeThisQueryString());
+				var qs = queryString(new MoreLikeThisRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19963,7 +19963,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mlt(string index, string type, string id, object body, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Mlt(string index, string type, string id, object body, Func<MoreLikeThisRequestParameters, MoreLikeThisRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -19972,7 +19972,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MoreLikeThisQueryString());
+				var qs = queryString(new MoreLikeThisRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -19998,7 +19998,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MltAsync(string index, string type, string id, object body, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MltAsync(string index, string type, string id, object body, Func<MoreLikeThisRequestParameters, MoreLikeThisRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -20007,7 +20007,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MoreLikeThisQueryString());
+				var qs = queryString(new MoreLikeThisRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20028,13 +20028,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MpercolateGet<T>(Func<MpercolateQueryString, MpercolateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> MpercolateGet<T>(Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_mpercolate";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20056,13 +20056,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(Func<MpercolateQueryString, MpercolateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_mpercolate";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20085,13 +20085,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MpercolateGet(Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> MpercolateGet(Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null)
 		{
 			var url = "_mpercolate";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20113,13 +20113,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null)
 		{
 			var url = "_mpercolate";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20141,14 +20141,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MpercolateGet<T>(string index, Func<MpercolateQueryString, MpercolateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> MpercolateGet<T>(string index, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20171,14 +20171,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, Func<MpercolateQueryString, MpercolateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20202,14 +20202,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MpercolateGet(string index, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> MpercolateGet(string index, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20232,14 +20232,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(string index, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(string index, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20262,7 +20262,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MpercolateGet<T>(string index, string type, Func<MpercolateQueryString, MpercolateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> MpercolateGet<T>(string index, string type, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -20270,7 +20270,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20294,7 +20294,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, string type, Func<MpercolateQueryString, MpercolateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, string type, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -20302,7 +20302,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20327,7 +20327,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MpercolateGet(string index, string type, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> MpercolateGet(string index, string type, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -20335,7 +20335,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20359,7 +20359,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(string index, string type, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(string index, string type, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -20367,7 +20367,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20389,13 +20389,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mpercolate<T>(object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Mpercolate<T>(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_mpercolate".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20418,13 +20418,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_mpercolate".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20448,13 +20448,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mpercolate(object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Mpercolate(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null)
 		{
 			var url = "_mpercolate".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20477,13 +20477,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null)
 		{
 			var url = "_mpercolate".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20506,14 +20506,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mpercolate<T>(string index, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Mpercolate<T>(string index, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20537,14 +20537,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20569,14 +20569,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mpercolate(string index, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Mpercolate(string index, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20600,14 +20600,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(string index, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(string index, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20631,7 +20631,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mpercolate<T>(string index, string type, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Mpercolate<T>(string index, string type, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -20639,7 +20639,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20664,7 +20664,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, string type, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, string type, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -20672,7 +20672,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20698,7 +20698,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mpercolate(string index, string type, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Mpercolate(string index, string type, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -20706,7 +20706,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20731,7 +20731,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(string index, string type, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(string index, string type, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -20739,7 +20739,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MpercolateQueryString());
+				var qs = queryString(new MpercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20760,13 +20760,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MsearchGet<T>(Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> MsearchGet<T>(Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_msearch";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20788,13 +20788,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MsearchGetAsync<T>(Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MsearchGetAsync<T>(Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_msearch";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20817,13 +20817,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MsearchGet(Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> MsearchGet(Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null)
 		{
 			var url = "_msearch";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20845,13 +20845,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MsearchGetAsync(Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MsearchGetAsync(Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null)
 		{
 			var url = "_msearch";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20873,14 +20873,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MsearchGet<T>(string index, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> MsearchGet<T>(string index, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20903,14 +20903,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MsearchGetAsync<T>(string index, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MsearchGetAsync<T>(string index, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20934,14 +20934,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MsearchGet(string index, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> MsearchGet(string index, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20964,14 +20964,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MsearchGetAsync(string index, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MsearchGetAsync(string index, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -20994,7 +20994,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MsearchGet<T>(string index, string type, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> MsearchGet<T>(string index, string type, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -21002,7 +21002,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21026,7 +21026,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MsearchGetAsync<T>(string index, string type, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MsearchGetAsync<T>(string index, string type, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -21034,7 +21034,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21059,7 +21059,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MsearchGet(string index, string type, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> MsearchGet(string index, string type, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -21067,7 +21067,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21091,7 +21091,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MsearchGetAsync(string index, string type, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MsearchGetAsync(string index, string type, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -21099,7 +21099,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21121,13 +21121,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Msearch<T>(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Msearch<T>(object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_msearch".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21150,13 +21150,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_msearch".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21180,13 +21180,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Msearch(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Msearch(object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null)
 		{
 			var url = "_msearch".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21209,13 +21209,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MsearchAsync(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MsearchAsync(object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null)
 		{
 			var url = "_msearch".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21238,14 +21238,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Msearch<T>(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Msearch<T>(string index, object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21269,14 +21269,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(string index, object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21301,14 +21301,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Msearch(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Msearch(string index, object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21332,14 +21332,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MsearchAsync(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MsearchAsync(string index, object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21363,7 +21363,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Msearch<T>(string index, string type, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Msearch<T>(string index, string type, object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -21371,7 +21371,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21396,7 +21396,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(string index, string type, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(string index, string type, object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -21404,7 +21404,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21430,7 +21430,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Msearch(string index, string type, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Msearch(string index, string type, object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -21438,7 +21438,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21463,7 +21463,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MsearchAsync(string index, string type, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MsearchAsync(string index, string type, object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -21471,7 +21471,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MultiSearchQueryString());
+				var qs = queryString(new MultiSearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21492,13 +21492,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MtermvectorsGet<T>(Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> MtermvectorsGet<T>(Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_mtermvectors";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21520,13 +21520,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_mtermvectors";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21549,13 +21549,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MtermvectorsGet(Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> MtermvectorsGet(Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null)
 		{
 			var url = "_mtermvectors";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21577,13 +21577,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsGetAsync(Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsGetAsync(Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null)
 		{
 			var url = "_mtermvectors";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21605,14 +21605,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MtermvectorsGet<T>(string index, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> MtermvectorsGet<T>(string index, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21635,14 +21635,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(string index, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(string index, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21666,14 +21666,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MtermvectorsGet(string index, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> MtermvectorsGet(string index, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21696,14 +21696,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsGetAsync(string index, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsGetAsync(string index, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21726,7 +21726,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MtermvectorsGet<T>(string index, string type, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> MtermvectorsGet<T>(string index, string type, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -21734,7 +21734,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21758,7 +21758,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(string index, string type, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(string index, string type, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -21766,7 +21766,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21791,7 +21791,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MtermvectorsGet(string index, string type, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> MtermvectorsGet(string index, string type, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -21799,7 +21799,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21823,7 +21823,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsGetAsync(string index, string type, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsGetAsync(string index, string type, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -21831,7 +21831,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21853,13 +21853,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mtermvectors<T>(object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Mtermvectors<T>(object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_mtermvectors".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21882,13 +21882,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_mtermvectors".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21912,13 +21912,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mtermvectors(object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Mtermvectors(object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null)
 		{
 			var url = "_mtermvectors".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21941,13 +21941,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsAsync(object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsAsync(object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null)
 		{
 			var url = "_mtermvectors".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -21970,14 +21970,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mtermvectors<T>(string index, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Mtermvectors<T>(string index, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22001,14 +22001,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22033,14 +22033,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mtermvectors(string index, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Mtermvectors(string index, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22064,14 +22064,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsAsync(string index, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsAsync(string index, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22095,7 +22095,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mtermvectors<T>(string index, string type, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Mtermvectors<T>(string index, string type, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -22103,7 +22103,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22128,7 +22128,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, string type, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, string type, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -22136,7 +22136,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22162,7 +22162,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mtermvectors(string index, string type, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Mtermvectors(string index, string type, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -22170,7 +22170,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22195,7 +22195,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsAsync(string index, string type, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsAsync(string index, string type, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -22203,7 +22203,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MtermvectorsQueryString());
+				var qs = queryString(new MtermvectorsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22224,13 +22224,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> NodesHotThreadsForAll<T>(Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> NodesHotThreadsForAll<T>(Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/nodes/hotthreads";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesHotThreadsQueryString());
+				var qs = queryString(new NodesHotThreadsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22252,13 +22252,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> NodesHotThreadsForAllAsync<T>(Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> NodesHotThreadsForAllAsync<T>(Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_cluster/nodes/hotthreads";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesHotThreadsQueryString());
+				var qs = queryString(new NodesHotThreadsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22281,13 +22281,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> NodesHotThreadsForAll(Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> NodesHotThreadsForAll(Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> queryString = null)
 		{
 			var url = "_cluster/nodes/hotthreads";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesHotThreadsQueryString());
+				var qs = queryString(new NodesHotThreadsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22309,13 +22309,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> NodesHotThreadsForAllAsync(Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> NodesHotThreadsForAllAsync(Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> queryString = null)
 		{
 			var url = "_cluster/nodes/hotthreads";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesHotThreadsQueryString());
+				var qs = queryString(new NodesHotThreadsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22337,14 +22337,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> NodesHotThreads<T>(string node_id, Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> NodesHotThreads<T>(string node_id, Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesHotThreadsQueryString());
+				var qs = queryString(new NodesHotThreadsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22367,14 +22367,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> NodesHotThreadsAsync<T>(string node_id, Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> NodesHotThreadsAsync<T>(string node_id, Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesHotThreadsQueryString());
+				var qs = queryString(new NodesHotThreadsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22398,14 +22398,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> NodesHotThreads(string node_id, Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> NodesHotThreads(string node_id, Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesHotThreadsQueryString());
+				var qs = queryString(new NodesHotThreadsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22428,14 +22428,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> NodesHotThreadsAsync(string node_id, Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> NodesHotThreadsAsync(string node_id, Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesHotThreadsQueryString());
+				var qs = queryString(new NodesHotThreadsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22456,13 +22456,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> NodesInfoForAll<T>(Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> NodesInfoForAll<T>(Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_nodes";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22484,13 +22484,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> NodesInfoForAllAsync<T>(Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> NodesInfoForAllAsync<T>(Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_nodes";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22513,13 +22513,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> NodesInfoForAll(Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> NodesInfoForAll(Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null)
 		{
 			var url = "_nodes";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22541,13 +22541,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> NodesInfoForAllAsync(Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> NodesInfoForAllAsync(Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null)
 		{
 			var url = "_nodes";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22569,14 +22569,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> NodesInfo<T>(string node_id, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> NodesInfo<T>(string node_id, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22599,14 +22599,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> NodesInfoAsync<T>(string node_id, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> NodesInfoAsync<T>(string node_id, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22630,14 +22630,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> NodesInfo(string node_id, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> NodesInfo(string node_id, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22660,14 +22660,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> NodesInfoAsync(string node_id, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> NodesInfoAsync(string node_id, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22689,14 +22689,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> NodesInfoForAll<T>(string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> NodesInfoForAll<T>(string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null, object deserializationState = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22719,14 +22719,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> NodesInfoForAllAsync<T>(string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> NodesInfoForAllAsync<T>(string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null, object deserializationState = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22750,14 +22750,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> NodesInfoForAll(string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> NodesInfoForAll(string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22780,14 +22780,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> NodesInfoForAllAsync(string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> NodesInfoForAllAsync(string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22810,7 +22810,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> NodesInfo<T>(string node_id, string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> NodesInfo<T>(string node_id, string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -22818,7 +22818,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22842,7 +22842,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> NodesInfoAsync<T>(string node_id, string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> NodesInfoAsync<T>(string node_id, string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -22850,7 +22850,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22875,7 +22875,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> NodesInfo(string node_id, string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> NodesInfo(string node_id, string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -22883,7 +22883,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22907,7 +22907,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> NodesInfoAsync(string node_id, string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> NodesInfoAsync(string node_id, string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -22915,7 +22915,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesInfoQueryString());
+				var qs = queryString(new NodesInfoRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22936,13 +22936,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> NodesShutdownForAll<T>(Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> NodesShutdownForAll<T>(Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_shutdown";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesShutdownQueryString());
+				var qs = queryString(new NodesShutdownRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22964,13 +22964,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> NodesShutdownForAllAsync<T>(Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> NodesShutdownForAllAsync<T>(Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_shutdown";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesShutdownQueryString());
+				var qs = queryString(new NodesShutdownRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -22993,13 +22993,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> NodesShutdownForAll(Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> NodesShutdownForAll(Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> queryString = null)
 		{
 			var url = "_shutdown";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesShutdownQueryString());
+				var qs = queryString(new NodesShutdownRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23021,13 +23021,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> NodesShutdownForAllAsync(Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> NodesShutdownForAllAsync(Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> queryString = null)
 		{
 			var url = "_shutdown";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesShutdownQueryString());
+				var qs = queryString(new NodesShutdownRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23049,14 +23049,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> NodesShutdown<T>(string node_id, Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> NodesShutdown<T>(string node_id, Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesShutdownQueryString());
+				var qs = queryString(new NodesShutdownRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23079,14 +23079,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> NodesShutdownAsync<T>(string node_id, Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> NodesShutdownAsync<T>(string node_id, Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesShutdownQueryString());
+				var qs = queryString(new NodesShutdownRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23110,14 +23110,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> NodesShutdown(string node_id, Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> NodesShutdown(string node_id, Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesShutdownQueryString());
+				var qs = queryString(new NodesShutdownRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23140,14 +23140,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> NodesShutdownAsync(string node_id, Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> NodesShutdownAsync(string node_id, Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesShutdownQueryString());
+				var qs = queryString(new NodesShutdownRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23168,13 +23168,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> NodesStatsForAll<T>(Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> NodesStatsForAll<T>(Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_nodes/stats";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23196,13 +23196,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> NodesStatsForAllAsync<T>(Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> NodesStatsForAllAsync<T>(Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_nodes/stats";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23225,13 +23225,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> NodesStatsForAll(Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> NodesStatsForAll(Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null)
 		{
 			var url = "_nodes/stats";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23253,13 +23253,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> NodesStatsForAllAsync(Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> NodesStatsForAllAsync(Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null)
 		{
 			var url = "_nodes/stats";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23281,14 +23281,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> NodesStats<T>(string node_id, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> NodesStats<T>(string node_id, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}/stats".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23311,14 +23311,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> NodesStatsAsync<T>(string node_id, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> NodesStatsAsync<T>(string node_id, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}/stats".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23342,14 +23342,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> NodesStats(string node_id, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> NodesStats(string node_id, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}/stats".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23372,14 +23372,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> NodesStatsAsync(string node_id, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> NodesStatsAsync(string node_id, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}/stats".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23401,14 +23401,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> NodesStatsForAll<T>(string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> NodesStatsForAll<T>(string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23431,14 +23431,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> NodesStatsForAllAsync<T>(string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> NodesStatsForAllAsync<T>(string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23462,14 +23462,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> NodesStatsForAll(string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> NodesStatsForAll(string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23492,14 +23492,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> NodesStatsForAllAsync(string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> NodesStatsForAllAsync(string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23522,7 +23522,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> NodesStats<T>(string node_id, string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> NodesStats<T>(string node_id, string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -23530,7 +23530,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23554,7 +23554,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> NodesStatsAsync<T>(string node_id, string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> NodesStatsAsync<T>(string node_id, string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -23562,7 +23562,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23587,7 +23587,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> NodesStats(string node_id, string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> NodesStats(string node_id, string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -23595,7 +23595,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23619,7 +23619,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> NodesStatsAsync(string node_id, string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> NodesStatsAsync(string node_id, string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -23627,7 +23627,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23650,7 +23650,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> NodesStatsForAll<T>(string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> NodesStatsForAll<T>(string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
@@ -23658,7 +23658,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23682,7 +23682,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> NodesStatsForAllAsync<T>(string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> NodesStatsForAllAsync<T>(string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
@@ -23690,7 +23690,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23715,7 +23715,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> NodesStatsForAll(string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> NodesStatsForAll(string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
@@ -23723,7 +23723,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23747,7 +23747,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> NodesStatsForAllAsync(string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> NodesStatsForAllAsync(string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
@@ -23755,7 +23755,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23779,7 +23779,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> NodesStats<T>(string node_id, string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> NodesStats<T>(string node_id, string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -23788,7 +23788,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23813,7 +23813,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> NodesStatsAsync<T>(string node_id, string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> NodesStatsAsync<T>(string node_id, string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null, object deserializationState = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -23822,7 +23822,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23848,7 +23848,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> NodesStats(string node_id, string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> NodesStats(string node_id, string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -23857,7 +23857,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23882,7 +23882,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> NodesStatsAsync(string node_id, string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> NodesStatsAsync(string node_id, string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
@@ -23891,7 +23891,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new NodesStatsQueryString());
+				var qs = queryString(new NodesStatsRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23914,7 +23914,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> PercolateGet<T>(string index, string type, Func<PercolateQueryString, PercolateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> PercolateGet<T>(string index, string type, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -23922,7 +23922,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23946,7 +23946,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> PercolateGetAsync<T>(string index, string type, Func<PercolateQueryString, PercolateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> PercolateGetAsync<T>(string index, string type, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -23954,7 +23954,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -23979,7 +23979,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> PercolateGet(string index, string type, Func<PercolateQueryString, PercolateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> PercolateGet(string index, string type, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -23987,7 +23987,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24011,7 +24011,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> PercolateGetAsync(string index, string type, Func<PercolateQueryString, PercolateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> PercolateGetAsync(string index, string type, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -24019,7 +24019,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24043,7 +24043,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> PercolateGet<T>(string index, string type, string id, Func<PercolateQueryString, PercolateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> PercolateGet<T>(string index, string type, string id, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -24052,7 +24052,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24077,7 +24077,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> PercolateGetAsync<T>(string index, string type, string id, Func<PercolateQueryString, PercolateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> PercolateGetAsync<T>(string index, string type, string id, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -24086,7 +24086,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24112,7 +24112,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> PercolateGet(string index, string type, string id, Func<PercolateQueryString, PercolateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> PercolateGet(string index, string type, string id, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -24121,7 +24121,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24146,7 +24146,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> PercolateGetAsync(string index, string type, string id, Func<PercolateQueryString, PercolateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> PercolateGetAsync(string index, string type, string id, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -24155,7 +24155,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24179,7 +24179,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Percolate<T>(string index, string type, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Percolate<T>(string index, string type, object body, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -24187,7 +24187,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24212,7 +24212,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> PercolateAsync<T>(string index, string type, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> PercolateAsync<T>(string index, string type, object body, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -24220,7 +24220,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24246,7 +24246,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Percolate(string index, string type, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Percolate(string index, string type, object body, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -24254,7 +24254,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24279,7 +24279,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> PercolateAsync(string index, string type, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> PercolateAsync(string index, string type, object body, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -24287,7 +24287,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24312,7 +24312,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Percolate<T>(string index, string type, string id, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Percolate<T>(string index, string type, string id, object body, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -24321,7 +24321,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24347,7 +24347,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> PercolateAsync<T>(string index, string type, string id, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> PercolateAsync<T>(string index, string type, string id, object body, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -24356,7 +24356,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24383,7 +24383,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Percolate(string index, string type, string id, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Percolate(string index, string type, string id, object body, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -24392,7 +24392,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24418,7 +24418,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> PercolateAsync(string index, string type, string id, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> PercolateAsync(string index, string type, string id, object body, Func<PercolateRequestParameters, PercolateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -24427,7 +24427,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PercolateQueryString());
+				var qs = queryString(new PercolateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24448,13 +24448,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Ping<T>(Func<PingQueryString, PingQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Ping<T>(Func<PingRequestParameters, PingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PingQueryString());
+				var qs = queryString(new PingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24476,13 +24476,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> PingAsync<T>(Func<PingQueryString, PingQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> PingAsync<T>(Func<PingRequestParameters, PingRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PingQueryString());
+				var qs = queryString(new PingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24505,13 +24505,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Ping(Func<PingQueryString, PingQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Ping(Func<PingRequestParameters, PingRequestParameters> queryString = null)
 		{
 			var url = "";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PingQueryString());
+				var qs = queryString(new PingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24533,13 +24533,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> PingAsync(Func<PingQueryString, PingQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> PingAsync(Func<PingRequestParameters, PingRequestParameters> queryString = null)
 		{
 			var url = "";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new PingQueryString());
+				var qs = queryString(new PingRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24560,13 +24560,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ScrollGet<T>(Func<ScrollQueryString, ScrollQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> ScrollGet<T>(Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_search/scroll";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24588,13 +24588,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ScrollGetAsync<T>(Func<ScrollQueryString, ScrollQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ScrollGetAsync<T>(Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_search/scroll";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24617,13 +24617,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ScrollGet(Func<ScrollQueryString, ScrollQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> ScrollGet(Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null)
 		{
 			var url = "_search/scroll";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24645,13 +24645,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ScrollGetAsync(Func<ScrollQueryString, ScrollQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ScrollGetAsync(Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null)
 		{
 			var url = "_search/scroll";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24673,14 +24673,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ScrollGet<T>(string scroll_id, Func<ScrollQueryString, ScrollQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> ScrollGet<T>(string scroll_id, Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null, object deserializationState = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24703,14 +24703,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ScrollGetAsync<T>(string scroll_id, Func<ScrollQueryString, ScrollQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ScrollGetAsync<T>(string scroll_id, Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null, object deserializationState = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24734,14 +24734,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ScrollGet(string scroll_id, Func<ScrollQueryString, ScrollQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> ScrollGet(string scroll_id, Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24764,14 +24764,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ScrollGetAsync(string scroll_id, Func<ScrollQueryString, ScrollQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ScrollGetAsync(string scroll_id, Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24793,13 +24793,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Scroll<T>(object body, Func<ScrollQueryString, ScrollQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Scroll<T>(object body, Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_search/scroll".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24822,13 +24822,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ScrollAsync<T>(object body, Func<ScrollQueryString, ScrollQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ScrollAsync<T>(object body, Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_search/scroll".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24852,13 +24852,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Scroll(object body, Func<ScrollQueryString, ScrollQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Scroll(object body, Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null)
 		{
 			var url = "_search/scroll".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24881,13 +24881,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ScrollAsync(object body, Func<ScrollQueryString, ScrollQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ScrollAsync(object body, Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null)
 		{
 			var url = "_search/scroll".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24910,14 +24910,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Scroll<T>(string scroll_id, object body, Func<ScrollQueryString, ScrollQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Scroll<T>(string scroll_id, object body, Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null, object deserializationState = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24941,14 +24941,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ScrollAsync<T>(string scroll_id, object body, Func<ScrollQueryString, ScrollQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> ScrollAsync<T>(string scroll_id, object body, Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null, object deserializationState = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -24973,14 +24973,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Scroll(string scroll_id, object body, Func<ScrollQueryString, ScrollQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Scroll(string scroll_id, object body, Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25004,14 +25004,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ScrollAsync(string scroll_id, object body, Func<ScrollQueryString, ScrollQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ScrollAsync(string scroll_id, object body, Func<ScrollRequestParameters, ScrollRequestParameters> queryString = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new ScrollQueryString());
+				var qs = queryString(new ScrollRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25032,13 +25032,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SearchGet<T>(Func<SearchQueryString, SearchQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> SearchGet<T>(Func<SearchRequestParameters, SearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_search";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25060,13 +25060,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(Func<SearchQueryString, SearchQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(Func<SearchRequestParameters, SearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_search";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25089,13 +25089,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SearchGet(Func<SearchQueryString, SearchQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> SearchGet(Func<SearchRequestParameters, SearchRequestParameters> queryString = null)
 		{
 			var url = "_search";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25117,13 +25117,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SearchGetAsync(Func<SearchQueryString, SearchQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SearchGetAsync(Func<SearchRequestParameters, SearchRequestParameters> queryString = null)
 		{
 			var url = "_search";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25145,14 +25145,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SearchGet<T>(string index, Func<SearchQueryString, SearchQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> SearchGet<T>(string index, Func<SearchRequestParameters, SearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25175,14 +25175,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(string index, Func<SearchQueryString, SearchQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(string index, Func<SearchRequestParameters, SearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25206,14 +25206,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SearchGet(string index, Func<SearchQueryString, SearchQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> SearchGet(string index, Func<SearchRequestParameters, SearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25236,14 +25236,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SearchGetAsync(string index, Func<SearchQueryString, SearchQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SearchGetAsync(string index, Func<SearchRequestParameters, SearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25266,7 +25266,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SearchGet<T>(string index, string type, Func<SearchQueryString, SearchQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> SearchGet<T>(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25274,7 +25274,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25298,7 +25298,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(string index, string type, Func<SearchQueryString, SearchQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25306,7 +25306,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25331,7 +25331,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SearchGet(string index, string type, Func<SearchQueryString, SearchQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> SearchGet(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25339,7 +25339,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25363,7 +25363,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SearchGetAsync(string index, string type, Func<SearchQueryString, SearchQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SearchGetAsync(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25371,7 +25371,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25393,13 +25393,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Search<T>(object body, Func<SearchQueryString, SearchQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Search<T>(object body, Func<SearchRequestParameters, SearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_search".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25422,13 +25422,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SearchAsync<T>(object body, Func<SearchQueryString, SearchQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SearchAsync<T>(object body, Func<SearchRequestParameters, SearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_search".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25452,13 +25452,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Search(object body, Func<SearchQueryString, SearchQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Search(object body, Func<SearchRequestParameters, SearchRequestParameters> queryString = null)
 		{
 			var url = "_search".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25481,13 +25481,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SearchAsync(object body, Func<SearchQueryString, SearchQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SearchAsync(object body, Func<SearchRequestParameters, SearchRequestParameters> queryString = null)
 		{
 			var url = "_search".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25510,14 +25510,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Search<T>(string index, object body, Func<SearchQueryString, SearchQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Search<T>(string index, object body, Func<SearchRequestParameters, SearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25541,14 +25541,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, object body, Func<SearchQueryString, SearchQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, object body, Func<SearchRequestParameters, SearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25573,14 +25573,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Search(string index, object body, Func<SearchQueryString, SearchQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Search(string index, object body, Func<SearchRequestParameters, SearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25604,14 +25604,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SearchAsync(string index, object body, Func<SearchQueryString, SearchQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SearchAsync(string index, object body, Func<SearchRequestParameters, SearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25635,7 +25635,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Search<T>(string index, string type, object body, Func<SearchQueryString, SearchQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Search<T>(string index, string type, object body, Func<SearchRequestParameters, SearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25643,7 +25643,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25668,7 +25668,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, string type, object body, Func<SearchQueryString, SearchQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, string type, object body, Func<SearchRequestParameters, SearchRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25676,7 +25676,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25702,7 +25702,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Search(string index, string type, object body, Func<SearchQueryString, SearchQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Search(string index, string type, object body, Func<SearchRequestParameters, SearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25710,7 +25710,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25735,7 +25735,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SearchAsync(string index, string type, object body, Func<SearchQueryString, SearchQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SearchAsync(string index, string type, object body, Func<SearchRequestParameters, SearchRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25743,7 +25743,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SearchQueryString());
+				var qs = queryString(new SearchRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25767,7 +25767,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotCreate<T>(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> SnapshotCreate<T>(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -25775,7 +25775,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateQueryString());
+				var qs = queryString(new SnapshotCreateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25800,7 +25800,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotCreateAsync<T>(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SnapshotCreateAsync<T>(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -25808,7 +25808,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateQueryString());
+				var qs = queryString(new SnapshotCreateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25834,7 +25834,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotCreate(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotCreate(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -25842,7 +25842,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateQueryString());
+				var qs = queryString(new SnapshotCreateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25867,7 +25867,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateAsync(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateAsync(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -25875,7 +25875,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateQueryString());
+				var qs = queryString(new SnapshotCreateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25899,7 +25899,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotCreatePost<T>(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> SnapshotCreatePost<T>(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -25907,7 +25907,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateQueryString());
+				var qs = queryString(new SnapshotCreateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25932,7 +25932,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotCreatePostAsync<T>(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SnapshotCreatePostAsync<T>(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -25940,7 +25940,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateQueryString());
+				var qs = queryString(new SnapshotCreateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25966,7 +25966,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotCreatePost(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotCreatePost(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -25974,7 +25974,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateQueryString());
+				var qs = queryString(new SnapshotCreateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -25999,7 +25999,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreatePostAsync(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreatePostAsync(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -26007,7 +26007,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateQueryString());
+				var qs = queryString(new SnapshotCreateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26030,14 +26030,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotCreateRepository<T>(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> SnapshotCreateRepository<T>(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateRepositoryQueryString());
+				var qs = queryString(new SnapshotCreateRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26061,14 +26061,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryAsync<T>(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryAsync<T>(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateRepositoryQueryString());
+				var qs = queryString(new SnapshotCreateRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26093,14 +26093,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotCreateRepository(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotCreateRepository(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateRepositoryQueryString());
+				var qs = queryString(new SnapshotCreateRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26124,14 +26124,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateRepositoryAsync(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateRepositoryAsync(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateRepositoryQueryString());
+				var qs = queryString(new SnapshotCreateRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26154,14 +26154,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotCreateRepositoryPost<T>(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> SnapshotCreateRepositoryPost<T>(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateRepositoryQueryString());
+				var qs = queryString(new SnapshotCreateRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26185,14 +26185,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryPostAsync<T>(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryPostAsync<T>(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateRepositoryQueryString());
+				var qs = queryString(new SnapshotCreateRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26217,14 +26217,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotCreateRepositoryPost(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotCreateRepositoryPost(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateRepositoryQueryString());
+				var qs = queryString(new SnapshotCreateRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26248,14 +26248,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateRepositoryPostAsync(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateRepositoryPostAsync(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotCreateRepositoryQueryString());
+				var qs = queryString(new SnapshotCreateRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26278,7 +26278,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotDelete<T>(string repository, string snapshot, Func<SnapshotDeleteQueryString, SnapshotDeleteQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> SnapshotDelete<T>(string repository, string snapshot, Func<SnapshotDeleteRequestParameters, SnapshotDeleteRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -26286,7 +26286,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotDeleteQueryString());
+				var qs = queryString(new SnapshotDeleteRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26310,7 +26310,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotDeleteAsync<T>(string repository, string snapshot, Func<SnapshotDeleteQueryString, SnapshotDeleteQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SnapshotDeleteAsync<T>(string repository, string snapshot, Func<SnapshotDeleteRequestParameters, SnapshotDeleteRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -26318,7 +26318,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotDeleteQueryString());
+				var qs = queryString(new SnapshotDeleteRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26343,7 +26343,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotDelete(string repository, string snapshot, Func<SnapshotDeleteQueryString, SnapshotDeleteQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotDelete(string repository, string snapshot, Func<SnapshotDeleteRequestParameters, SnapshotDeleteRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -26351,7 +26351,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotDeleteQueryString());
+				var qs = queryString(new SnapshotDeleteRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26375,7 +26375,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotDeleteAsync(string repository, string snapshot, Func<SnapshotDeleteQueryString, SnapshotDeleteQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotDeleteAsync(string repository, string snapshot, Func<SnapshotDeleteRequestParameters, SnapshotDeleteRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -26383,7 +26383,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotDeleteQueryString());
+				var qs = queryString(new SnapshotDeleteRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26405,14 +26405,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotDeleteRepository<T>(string repository, Func<SnapshotDeleteRepositoryQueryString, SnapshotDeleteRepositoryQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> SnapshotDeleteRepository<T>(string repository, Func<SnapshotDeleteRepositoryRequestParameters, SnapshotDeleteRepositoryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotDeleteRepositoryQueryString());
+				var qs = queryString(new SnapshotDeleteRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26435,14 +26435,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryAsync<T>(string repository, Func<SnapshotDeleteRepositoryQueryString, SnapshotDeleteRepositoryQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryAsync<T>(string repository, Func<SnapshotDeleteRepositoryRequestParameters, SnapshotDeleteRepositoryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotDeleteRepositoryQueryString());
+				var qs = queryString(new SnapshotDeleteRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26466,14 +26466,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotDeleteRepository(string repository, Func<SnapshotDeleteRepositoryQueryString, SnapshotDeleteRepositoryQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotDeleteRepository(string repository, Func<SnapshotDeleteRepositoryRequestParameters, SnapshotDeleteRepositoryRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotDeleteRepositoryQueryString());
+				var qs = queryString(new SnapshotDeleteRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26496,14 +26496,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotDeleteRepositoryAsync(string repository, Func<SnapshotDeleteRepositoryQueryString, SnapshotDeleteRepositoryQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotDeleteRepositoryAsync(string repository, Func<SnapshotDeleteRepositoryRequestParameters, SnapshotDeleteRepositoryRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotDeleteRepositoryQueryString());
+				var qs = queryString(new SnapshotDeleteRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26526,7 +26526,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotGet<T>(string repository, string snapshot, Func<SnapshotGetQueryString, SnapshotGetQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> SnapshotGet<T>(string repository, string snapshot, Func<SnapshotGetRequestParameters, SnapshotGetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -26534,7 +26534,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotGetQueryString());
+				var qs = queryString(new SnapshotGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26558,7 +26558,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotGetAsync<T>(string repository, string snapshot, Func<SnapshotGetQueryString, SnapshotGetQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SnapshotGetAsync<T>(string repository, string snapshot, Func<SnapshotGetRequestParameters, SnapshotGetRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -26566,7 +26566,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotGetQueryString());
+				var qs = queryString(new SnapshotGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26591,7 +26591,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotGet(string repository, string snapshot, Func<SnapshotGetQueryString, SnapshotGetQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotGet(string repository, string snapshot, Func<SnapshotGetRequestParameters, SnapshotGetRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -26599,7 +26599,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotGetQueryString());
+				var qs = queryString(new SnapshotGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26623,7 +26623,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetAsync(string repository, string snapshot, Func<SnapshotGetQueryString, SnapshotGetQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetAsync(string repository, string snapshot, Func<SnapshotGetRequestParameters, SnapshotGetRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -26631,7 +26631,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotGetQueryString());
+				var qs = queryString(new SnapshotGetRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26652,13 +26652,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotGetRepository<T>(Func<SnapshotGetRepositoryQueryString, SnapshotGetRepositoryQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> SnapshotGetRepository<T>(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_snapshot";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotGetRepositoryQueryString());
+				var qs = queryString(new SnapshotGetRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26680,13 +26680,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(Func<SnapshotGetRepositoryQueryString, SnapshotGetRepositoryQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_snapshot";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotGetRepositoryQueryString());
+				var qs = queryString(new SnapshotGetRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26709,13 +26709,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotGetRepository(Func<SnapshotGetRepositoryQueryString, SnapshotGetRepositoryQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotGetRepository(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> queryString = null)
 		{
 			var url = "_snapshot";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotGetRepositoryQueryString());
+				var qs = queryString(new SnapshotGetRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26737,13 +26737,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetRepositoryAsync(Func<SnapshotGetRepositoryQueryString, SnapshotGetRepositoryQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetRepositoryAsync(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> queryString = null)
 		{
 			var url = "_snapshot";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotGetRepositoryQueryString());
+				var qs = queryString(new SnapshotGetRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26765,14 +26765,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotGetRepository<T>(string repository, Func<SnapshotGetRepositoryQueryString, SnapshotGetRepositoryQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> SnapshotGetRepository<T>(string repository, Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotGetRepositoryQueryString());
+				var qs = queryString(new SnapshotGetRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26795,14 +26795,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(string repository, Func<SnapshotGetRepositoryQueryString, SnapshotGetRepositoryQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(string repository, Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotGetRepositoryQueryString());
+				var qs = queryString(new SnapshotGetRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26826,14 +26826,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotGetRepository(string repository, Func<SnapshotGetRepositoryQueryString, SnapshotGetRepositoryQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotGetRepository(string repository, Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotGetRepositoryQueryString());
+				var qs = queryString(new SnapshotGetRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26856,14 +26856,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetRepositoryAsync(string repository, Func<SnapshotGetRepositoryQueryString, SnapshotGetRepositoryQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetRepositoryAsync(string repository, Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotGetRepositoryQueryString());
+				var qs = queryString(new SnapshotGetRepositoryRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26887,7 +26887,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotRestore<T>(string repository, string snapshot, object body, Func<SnapshotRestoreQueryString, SnapshotRestoreQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> SnapshotRestore<T>(string repository, string snapshot, object body, Func<SnapshotRestoreRequestParameters, SnapshotRestoreRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -26895,7 +26895,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotRestoreQueryString());
+				var qs = queryString(new SnapshotRestoreRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26920,7 +26920,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotRestoreAsync<T>(string repository, string snapshot, object body, Func<SnapshotRestoreQueryString, SnapshotRestoreQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SnapshotRestoreAsync<T>(string repository, string snapshot, object body, Func<SnapshotRestoreRequestParameters, SnapshotRestoreRequestParameters> queryString = null, object deserializationState = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -26928,7 +26928,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotRestoreQueryString());
+				var qs = queryString(new SnapshotRestoreRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26954,7 +26954,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotRestore(string repository, string snapshot, object body, Func<SnapshotRestoreQueryString, SnapshotRestoreQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotRestore(string repository, string snapshot, object body, Func<SnapshotRestoreRequestParameters, SnapshotRestoreRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -26962,7 +26962,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotRestoreQueryString());
+				var qs = queryString(new SnapshotRestoreRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -26987,7 +26987,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotRestoreAsync(string repository, string snapshot, object body, Func<SnapshotRestoreQueryString, SnapshotRestoreQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotRestoreAsync(string repository, string snapshot, object body, Func<SnapshotRestoreRequestParameters, SnapshotRestoreRequestParameters> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -26995,7 +26995,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SnapshotRestoreQueryString());
+				var qs = queryString(new SnapshotRestoreRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27017,13 +27017,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Suggest<T>(object body, Func<SuggestQueryString, SuggestQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Suggest<T>(object body, Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_suggest".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27046,13 +27046,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SuggestAsync<T>(object body, Func<SuggestQueryString, SuggestQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SuggestAsync<T>(object body, Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_suggest".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27076,13 +27076,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Suggest(object body, Func<SuggestQueryString, SuggestQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Suggest(object body, Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null)
 		{
 			var url = "_suggest".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27105,13 +27105,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SuggestAsync(object body, Func<SuggestQueryString, SuggestQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SuggestAsync(object body, Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null)
 		{
 			var url = "_suggest".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27134,14 +27134,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Suggest<T>(string index, object body, Func<SuggestQueryString, SuggestQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Suggest<T>(string index, object body, Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27165,14 +27165,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SuggestAsync<T>(string index, object body, Func<SuggestQueryString, SuggestQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SuggestAsync<T>(string index, object body, Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27197,14 +27197,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Suggest(string index, object body, Func<SuggestQueryString, SuggestQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Suggest(string index, object body, Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27228,14 +27228,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SuggestAsync(string index, object body, Func<SuggestQueryString, SuggestQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SuggestAsync(string index, object body, Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27256,13 +27256,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SuggestGet<T>(Func<SuggestQueryString, SuggestQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> SuggestGet<T>(Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_suggest";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27284,13 +27284,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SuggestGetAsync<T>(Func<SuggestQueryString, SuggestQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SuggestGetAsync<T>(Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null, object deserializationState = null)
 		{
 			var url = "_suggest";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27313,13 +27313,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SuggestGet(Func<SuggestQueryString, SuggestQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> SuggestGet(Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null)
 		{
 			var url = "_suggest";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27341,13 +27341,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SuggestGetAsync(Func<SuggestQueryString, SuggestQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SuggestGetAsync(Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null)
 		{
 			var url = "_suggest";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27369,14 +27369,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SuggestGet<T>(string index, Func<SuggestQueryString, SuggestQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> SuggestGet<T>(string index, Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27399,14 +27399,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SuggestGetAsync<T>(string index, Func<SuggestQueryString, SuggestQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> SuggestGetAsync<T>(string index, Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27430,14 +27430,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SuggestGet(string index, Func<SuggestQueryString, SuggestQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> SuggestGet(string index, Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27460,14 +27460,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SuggestGetAsync(string index, Func<SuggestQueryString, SuggestQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SuggestGetAsync(string index, Func<SuggestRequestParameters, SuggestRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new SuggestQueryString());
+				var qs = queryString(new SuggestRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27491,7 +27491,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> TermvectorGet<T>(string index, string type, string id, Func<TermvectorQueryString, TermvectorQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> TermvectorGet<T>(string index, string type, string id, Func<TermvectorRequestParameters, TermvectorRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -27500,7 +27500,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new TermvectorQueryString());
+				var qs = queryString(new TermvectorRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27525,7 +27525,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> TermvectorGetAsync<T>(string index, string type, string id, Func<TermvectorQueryString, TermvectorQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> TermvectorGetAsync<T>(string index, string type, string id, Func<TermvectorRequestParameters, TermvectorRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -27534,7 +27534,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new TermvectorQueryString());
+				var qs = queryString(new TermvectorRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27560,7 +27560,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> TermvectorGet(string index, string type, string id, Func<TermvectorQueryString, TermvectorQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> TermvectorGet(string index, string type, string id, Func<TermvectorRequestParameters, TermvectorRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -27569,7 +27569,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new TermvectorQueryString());
+				var qs = queryString(new TermvectorRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27594,7 +27594,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> TermvectorGetAsync(string index, string type, string id, Func<TermvectorQueryString, TermvectorQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> TermvectorGetAsync(string index, string type, string id, Func<TermvectorRequestParameters, TermvectorRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -27603,7 +27603,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new TermvectorQueryString());
+				var qs = queryString(new TermvectorRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27628,7 +27628,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Termvector<T>(string index, string type, string id, object body, Func<TermvectorQueryString, TermvectorQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Termvector<T>(string index, string type, string id, object body, Func<TermvectorRequestParameters, TermvectorRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -27637,7 +27637,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new TermvectorQueryString());
+				var qs = queryString(new TermvectorRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27663,7 +27663,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> TermvectorAsync<T>(string index, string type, string id, object body, Func<TermvectorQueryString, TermvectorQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> TermvectorAsync<T>(string index, string type, string id, object body, Func<TermvectorRequestParameters, TermvectorRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -27672,7 +27672,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new TermvectorQueryString());
+				var qs = queryString(new TermvectorRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27699,7 +27699,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Termvector(string index, string type, string id, object body, Func<TermvectorQueryString, TermvectorQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Termvector(string index, string type, string id, object body, Func<TermvectorRequestParameters, TermvectorRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -27708,7 +27708,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new TermvectorQueryString());
+				var qs = queryString(new TermvectorRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27734,7 +27734,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> TermvectorAsync(string index, string type, string id, object body, Func<TermvectorQueryString, TermvectorQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> TermvectorAsync(string index, string type, string id, object body, Func<TermvectorRequestParameters, TermvectorRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -27743,7 +27743,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new TermvectorQueryString());
+				var qs = queryString(new TermvectorRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27768,7 +27768,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Update<T>(string index, string type, string id, object body, Func<UpdateQueryString, UpdateQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> Update<T>(string index, string type, string id, object body, Func<UpdateRequestParameters, UpdateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -27777,7 +27777,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new UpdateQueryString());
+				var qs = queryString(new UpdateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27803,7 +27803,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> UpdateAsync<T>(string index, string type, string id, object body, Func<UpdateQueryString, UpdateQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> UpdateAsync<T>(string index, string type, string id, object body, Func<UpdateRequestParameters, UpdateRequestParameters> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -27812,7 +27812,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new UpdateQueryString());
+				var qs = queryString(new UpdateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27839,7 +27839,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Update(string index, string type, string id, object body, Func<UpdateQueryString, UpdateQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> Update(string index, string type, string id, object body, Func<UpdateRequestParameters, UpdateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -27848,7 +27848,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new UpdateQueryString());
+				var qs = queryString(new UpdateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -27874,7 +27874,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> UpdateAsync(string index, string type, string id, object body, Func<UpdateQueryString, UpdateQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> UpdateAsync(string index, string type, string id, object body, Func<UpdateRequestParameters, UpdateRequestParameters> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -27883,7 +27883,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new UpdateQueryString());
+				var qs = queryString(new UpdateRequestParameters());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 

@@ -22,7 +22,7 @@ namespace Nest
 	/// </summary>
 	public class IndicesOptionalTypesNamePathDecriptor<P, K>
 		where P : IndicesOptionalTypesNamePathDecriptor<P, K>, new()
-		where K : FluentQueryString<K>, new()
+		where K : FluentRequestParameters<K>, new()
 	{
 		internal bool? _AllIndices { get; set; }
 
@@ -115,7 +115,7 @@ namespace Nest
 		}
 
 		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentQueryString<K>, new()
+			where K : FluentRequestParameters<K>, new()
 		{
 			var inferrer = new ElasticInferrer(settings);
 			if (!this._AllIndices.HasValue && this._Indices == null)

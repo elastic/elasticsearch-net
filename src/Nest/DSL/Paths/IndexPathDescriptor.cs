@@ -20,7 +20,7 @@ namespace Nest
 	/// </summary>
 	public class IndexPathDescriptorBase<P, K> 
 		where P : IndexPathDescriptorBase<P, K>, new()
-		where K : FluentQueryString<K>, new()
+		where K : FluentRequestParameters<K>, new()
 	{
 		internal IndexNameMarker _Index { get; set; }
 		
@@ -43,7 +43,7 @@ namespace Nest
 		}
 
 		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentQueryString<K>, new()
+			where K : FluentRequestParameters<K>, new()
 		{
 			if (this._Index == null)
 				throw new DslException("missing call to Index()");

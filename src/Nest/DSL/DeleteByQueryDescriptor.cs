@@ -12,8 +12,8 @@ using Nest.Resolvers;
 namespace Nest
 {
 	public partial class DeleteByQueryDescriptor<T> 
-		: QueryPathDescriptorBase<DeleteByQueryDescriptor<T>, T, DeleteByQueryQueryString>
-		, IPathInfo<DeleteByQueryQueryString> 
+		: QueryPathDescriptorBase<DeleteByQueryDescriptor<T>, T, DeleteByQueryRequestParameters>
+		, IPathInfo<DeleteByQueryRequestParameters> 
 		where T : class
 	{
 		[JsonProperty("query")]
@@ -31,9 +31,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<DeleteByQueryQueryString> IPathInfo<DeleteByQueryQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<DeleteByQueryRequestParameters> IPathInfo<DeleteByQueryRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = this.ToPathInfo<DeleteByQueryQueryString>(settings, this._QueryString);
+			var pathInfo = this.ToPathInfo<DeleteByQueryRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
 			return pathInfo;
 		}

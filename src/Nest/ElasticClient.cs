@@ -63,7 +63,7 @@ namespace Nest
 			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
 			, bool allow404 = false
 			)
-			where Q : FluentQueryString<Q>, new()
+			where Q : FluentRequestParameters<Q>, new()
 			where D : IPathInfo<Q>, new()
 			where R : BaseResponse
 		{
@@ -78,7 +78,7 @@ namespace Nest
 			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
 			, bool allow404 = false
 			)
-			where Q : FluentQueryString<Q>, new()
+			where Q : FluentRequestParameters<Q>, new()
 			where D : IPathInfo<Q>
 			where R : BaseResponse
 		{
@@ -104,7 +104,7 @@ namespace Nest
 			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
 			, bool allow404 = false
 			)
-			where Q : FluentQueryString<Q>, new()
+			where Q : FluentRequestParameters<Q>, new()
 			where D : IPathInfo<Q>, new()
 			where R : BaseResponse, I
 			where I : IResponse
@@ -119,7 +119,7 @@ namespace Nest
 			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
 			, bool allow404 = false
 			) 
-			where Q : FluentQueryString<Q>, new()
+			where Q : FluentRequestParameters<Q>, new()
 			where D : IPathInfo<Q>
 			where R : BaseResponse, I 
 			where I : IResponse

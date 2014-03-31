@@ -49,8 +49,8 @@ namespace Elasticsearch.Net
 				this.Transport.Sniff(fromStartup: true);
 		}
 
-		protected NameValueCollection ToNameValueCollection<TQueryString>(FluentQueryString<TQueryString> qs)
-			where TQueryString : FluentQueryString<TQueryString>
+		protected NameValueCollection ToNameValueCollection<TQueryString>(FluentRequestParameters<TQueryString> qs)
+			where TQueryString : FluentRequestParameters<TQueryString>
 		{
 			if (qs == null)
 				return null;

@@ -13,8 +13,8 @@ namespace Nest
 {
 
 	[DescriptorFor("Mget")]
-	public partial class MultiGetDescriptor : FixedIndexTypePathDescriptor<MultiGetDescriptor, MultiGetQueryString>
-		, IPathInfo<MultiGetQueryString>
+	public partial class MultiGetDescriptor : FixedIndexTypePathDescriptor<MultiGetDescriptor, MultiGetRequestParameters>
+		, IPathInfo<MultiGetRequestParameters>
 	{
 		internal readonly IList<ISimpleGetDescriptor> _GetOperations = new List<ISimpleGetDescriptor>();
 		private readonly IConnectionSettingsValues _settings;
@@ -69,9 +69,9 @@ namespace Nest
 			return this;
 
 		}
-		ElasticsearchPathInfo<MultiGetQueryString> IPathInfo<MultiGetQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<MultiGetRequestParameters> IPathInfo<MultiGetRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = this.ToPathInfo<MultiGetQueryString>(settings, this._QueryString);
+			var pathInfo = this.ToPathInfo<MultiGetRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST; // no data in GETS in the .net world
 			return pathInfo;
 		}

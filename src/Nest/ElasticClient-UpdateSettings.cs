@@ -13,7 +13,7 @@ namespace Nest
 			Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector
 			)
 		{
-			return this.Dispatch<UpdateSettingsDescriptor, UpdateSettingsQueryString, SettingsOperationResponse>(
+			return this.Dispatch<UpdateSettingsDescriptor, UpdateSettingsRequestParameters, SettingsOperationResponse>(
 				updateSettingsSelector,
 				(p, d) => this.RawDispatch.IndicesPutSettingsDispatch<SettingsOperationResponse>(p, d)
 			);
@@ -25,7 +25,7 @@ namespace Nest
 			)
 		{
 			return this.DispatchAsync
-				<UpdateSettingsDescriptor, UpdateSettingsQueryString, SettingsOperationResponse, ISettingsOperationResponse>(
+				<UpdateSettingsDescriptor, UpdateSettingsRequestParameters, SettingsOperationResponse, ISettingsOperationResponse>(
 					updateSettingsSelector,
 					(p, d) => this.RawDispatch.IndicesPutSettingsDispatchAsync<SettingsOperationResponse>(p, d)
 				);

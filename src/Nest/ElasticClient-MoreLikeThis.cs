@@ -11,11 +11,11 @@ namespace Nest
 		public IQueryResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
 			where T : class
 		{
-			return this.Dispatch<MoreLikeThisDescriptor<T>, MoreLikeThisQueryString, QueryResponse<T>>(
+			return this.Dispatch<MoreLikeThisDescriptor<T>, MoreLikeThisRequestParameters, QueryResponse<T>>(
 				mltSelector,
 				(p, d) =>
 				{
-					CopySearchQueryString(d);
+					CopySearchRequestParameters(d);
 					return this.RawDispatch.MltDispatch<QueryResponse<T>>(p, d._Search);
 				}
 			);
@@ -25,17 +25,17 @@ namespace Nest
 		public Task<IQueryResponse<T>> MoreLikeThisAsync<T>(
 			Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector) where T : class
 		{
-			return this.DispatchAsync<MoreLikeThisDescriptor<T>, MoreLikeThisQueryString, QueryResponse<T>, IQueryResponse<T>>(
+			return this.DispatchAsync<MoreLikeThisDescriptor<T>, MoreLikeThisRequestParameters, QueryResponse<T>, IQueryResponse<T>>(
 				mltSelector,
 				(p, d) =>
 				{
-					CopySearchQueryString(d);
+					CopySearchRequestParameters(d);
 					return this.RawDispatch.MltDispatchAsync<QueryResponse<T>>(p, d._Search);
 				}
 			);
 		}
 
-		private static void CopySearchQueryString<T>(MoreLikeThisDescriptor<T> d) where T : class
+		private static void CopySearchRequestParameters<T>(MoreLikeThisDescriptor<T> d) where T : class
 		{
 			if (d._Search == null) return;
 			var searchQs = d._Search._QueryString._QueryStringDictionary;

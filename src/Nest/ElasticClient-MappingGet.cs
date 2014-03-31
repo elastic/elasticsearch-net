@@ -14,7 +14,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IGetMappingResponse GetMapping(Func<GetMappingDescriptor, GetMappingDescriptor> selector)
 		{
-			return this.Dispatch<GetMappingDescriptor, GetMappingQueryString, GetMappingResponse>(
+			return this.Dispatch<GetMappingDescriptor, GetMappingRequestParameters, GetMappingResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesGetMappingDispatch<GetMappingResponse>(
 					p,
@@ -26,7 +26,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IGetMappingResponse> GetMappingAsync(Func<GetMappingDescriptor, GetMappingDescriptor> selector)
 		{
-			return this.DispatchAsync<GetMappingDescriptor, GetMappingQueryString, GetMappingResponse, IGetMappingResponse>(
+			return this.DispatchAsync<GetMappingDescriptor, GetMappingRequestParameters, GetMappingResponse, IGetMappingResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesGetMappingDispatchAsync<GetMappingResponse>(
 					p,

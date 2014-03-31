@@ -10,7 +10,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IShardsOperationResponse Flush(Func<FlushDescriptor, FlushDescriptor> selector)
 		{
-			return this.Dispatch<FlushDescriptor, FlushQueryString, ShardsOperationResponse>(
+			return this.Dispatch<FlushDescriptor, FlushRequestParameters, ShardsOperationResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesFlushDispatch<ShardsOperationResponse>(p)
 			);
@@ -19,7 +19,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IShardsOperationResponse> FlushAsync(Func<FlushDescriptor, FlushDescriptor> selector)
 		{
-			return this.DispatchAsync<FlushDescriptor, FlushQueryString, ShardsOperationResponse, IShardsOperationResponse>(
+			return this.DispatchAsync<FlushDescriptor, FlushRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesFlushDispatchAsync<ShardsOperationResponse>(p)
 			);

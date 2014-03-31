@@ -13,7 +13,7 @@ namespace Nest
 		{
 			var descriptor = getSelector(new SourceDescriptor<T>());
 			var pathInfo =
-				((IPathInfo<SourceQueryString>) descriptor).ToPathInfo(_connectionSettings);
+				((IPathInfo<SourceRequestParameters>) descriptor).ToPathInfo(_connectionSettings);
 			var response = this.RawDispatch.GetSourceDispatch<T>(pathInfo);
 			return response.Response;
 		}
@@ -23,7 +23,7 @@ namespace Nest
 		{
 			var descriptor = getSelector(new SourceDescriptor<T>());
 			var pathInfo =
-				((IPathInfo<SourceQueryString>) descriptor).ToPathInfo(_connectionSettings);
+				((IPathInfo<SourceRequestParameters>) descriptor).ToPathInfo(_connectionSettings);
 			var response = this.RawDispatch.GetSourceDispatchAsync<T>(pathInfo)
 				.ContinueWith(t => t.Result.Response);
 			return response;

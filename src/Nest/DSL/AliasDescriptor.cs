@@ -14,7 +14,7 @@ namespace Nest
 {
 	[DescriptorFor("IndicesUpdateAliases")]
 	public partial class AliasDescriptor : 
-		 IPathInfo<AliasQueryString>
+		 IPathInfo<AliasRequestParameters>
 	{
 		public AliasDescriptor()
 		{
@@ -41,9 +41,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<AliasQueryString> IPathInfo<AliasQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<AliasRequestParameters> IPathInfo<AliasRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = new ElasticsearchPathInfo<AliasQueryString>();
+			var pathInfo = new ElasticsearchPathInfo<AliasRequestParameters>();
 			pathInfo.QueryString = this._QueryString;
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 

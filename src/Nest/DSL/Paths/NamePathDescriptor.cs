@@ -20,7 +20,7 @@ namespace Nest
 	/// </summary>
 	public class NamePathDescriptor<P, K>
 		where P : NamePathDescriptor<P, K> 
-		where K : FluentQueryString<K>, new()
+		where K : FluentRequestParameters<K>, new()
 	{
 		internal string _Name { get; set; }
 
@@ -34,7 +34,7 @@ namespace Nest
 		}
 
 		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentQueryString<K>, new()
+			where K : FluentRequestParameters<K>, new()
 		{
 			if (this._Name.IsNullOrEmpty())
 				throw new DslException("missing Name()");
