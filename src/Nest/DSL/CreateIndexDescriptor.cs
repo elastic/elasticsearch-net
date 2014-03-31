@@ -155,7 +155,7 @@ namespace Nest
 			var pathInfo = new ElasticsearchPathInfo<CreateIndexRequestParameters>();
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			pathInfo.Index = this._Index;
-			pathInfo.QueryString = this._QueryString;
+			pathInfo.RequestParameters = this._QueryString;
 			return pathInfo;
 
 		}

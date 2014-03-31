@@ -43,7 +43,7 @@ namespace Nest
 			{
 				Name = this._Name
 			};
-			pathInfo.QueryString = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new K();
 			return pathInfo;
 		}
 

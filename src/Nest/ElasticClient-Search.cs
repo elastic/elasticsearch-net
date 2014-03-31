@@ -23,11 +23,12 @@ namespace Nest
 		{
 			searchSelector.ThrowIfNull("searchSelector");
 			var descriptor = searchSelector(new SearchDescriptor<T>());
-			var pathInfo =
-				((IPathInfo<SearchRequestParameters>) descriptor).ToPathInfo(_connectionSettings);
 			var deserializationState = this.CreateCovariantSearchSelector<T, TResult>(descriptor);
-			var status = this.RawDispatch.SearchDispatch<QueryResponse<TResult>>(pathInfo,
-				descriptor, deserializationState);
+			var pathInfo =
+				((IPathInfo<SearchRequestParameters>) descriptor).ToPathInfo(_connectionSettings)
+				.DeserializationState(deserializationState);
+
+			var status = this.RawDispatch.SearchDispatch<QueryResponse<TResult>>(pathInfo, descriptor);
 			return status.Success ? status.Response : CreateInvalidInstance<QueryResponse<TResult>>(status);
 		}
 
@@ -47,10 +48,12 @@ namespace Nest
 		{
 			searchSelector.ThrowIfNull("searchSelector");
 			var descriptor = searchSelector(new SearchDescriptor<T>());
-			var pathInfo =
-				((IPathInfo<SearchRequestParameters>) descriptor).ToPathInfo(_connectionSettings);
 			var deserializationState = this.CreateCovariantSearchSelector<T, TResult>(descriptor);
-			return this.RawDispatch.SearchDispatchAsync<QueryResponse<TResult>>(pathInfo, descriptor, deserializationState)
+			var pathInfo =
+				((IPathInfo<SearchRequestParameters>) descriptor).ToPathInfo(_connectionSettings)
+				.DeserializationState(deserializationState);
+
+			return this.RawDispatch.SearchDispatchAsync<QueryResponse<TResult>>(pathInfo, descriptor)
 				.ContinueWith<IQueryResponse<TResult>>(t => t.Result.Success
 					? t.Result.Response
 					: CreateInvalidInstance<QueryResponse<TResult>>(t.Result));

@@ -1064,7 +1064,7 @@ namespace Nest
 				? PathInfoHttpMethod.GET
 				: PathInfoHttpMethod.POST;
 
-			pathInfo.QueryString = this._QueryString;
+			pathInfo.RequestParameters = this._QueryString;
 
 			var inferrer = new ElasticInferrer(settings);
 			string indices;

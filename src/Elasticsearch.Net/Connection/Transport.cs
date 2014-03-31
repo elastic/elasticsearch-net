@@ -23,22 +23,26 @@ namespace Elasticsearch.Net.Connection
 		public string Path { get; private set; }
 		public byte[] PostData { get; private set; }
 		public ElasticsearchResponseTracer<T> Tracer { get; private set; }
-		public object DeserializationState { get; private set; }
 
-		public int Retried { get; set; }
 		public int? Seed { get; set; }
 
+		public IConnectionConfigurationOverrides RequestConfiguration { get; set; }
+		public object DeserializationState { get; private set; }
 
-		public TransportRequestState(ElasticsearchResponseTracer<T> tracer, string method, string path, byte[] postData = null, NameValueCollection queryString = null, object deserializationState = null)
+		public TransportRequestState(ElasticsearchResponseTracer<T> tracer, string method, string path, byte[] postData = null, IRequestParameters requestParameters = null)
 		{
 			this.Method = method;
 			this.Path = path;
 			this.PostData = postData;
-			if (queryString != null) this.Path += queryString.ToQueryString();
-			this.DeserializationState = deserializationState;
-
+			if (requestParameters != null)
+			{
+				if (requestParameters.QueryString != null) this.Path += requestParameters.QueryString.ToQueryString();
+				this.DeserializationState = requestParameters.DeserializationState;
+				this.RequestConfiguration = requestParameters.RequestConfiguration;
+			}
 			this.Tracer = tracer;
 		}
+
 	}
 
 	public class Transport : ITransport
@@ -96,12 +100,12 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		/* SYNC *** */
-		public ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, NameValueCollection queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
 		{
 			using (var tracer = new ElasticsearchResponseTracer<T>(this.Settings.TraceEnabled))
 			{
 				var postData = PostData(data);
-				var requestState = new TransportRequestState<T>(tracer, method, path, postData, queryString, deserializationState);
+				var requestState = new TransportRequestState<T>(tracer, method, path, postData, requestParameters);
 
 				var result = this.DoRequest<T>(requestState);
 				tracer.SetResult(result);
@@ -111,7 +115,7 @@ namespace Elasticsearch.Net.Connection
 
 		private ElasticsearchResponse<T> DoRequest<T>(TransportRequestState<T> requestState, int retried = 0)
 		{
-			SniffIfInformationIsTooOld(requestState.Retried);
+			SniffIfInformationIsTooOld(retried);
 
 			IElasticsearchResponse response = null;
 
@@ -127,7 +131,7 @@ namespace Elasticsearch.Net.Connection
 				if (shouldPingHint && !this._configurationValues.DisablePings)
 					this._connection.Ping(CreateUriToPath(baseUri, ""));
 
-				var streamResponse = _doRequest(requestState.Method, uri, requestState.PostData, null);
+				var streamResponse = _doRequest(requestState.Method, uri, requestState.PostData, requestState.RequestConfiguration);
 				if (streamResponse != null && streamResponse.SuccessOrKnownError)
 				{
 					var typedResponse = this.StreamToTypedResponse<T>(streamResponse, requestState.DeserializationState);
@@ -185,12 +189,12 @@ namespace Elasticsearch.Net.Connection
 
 
 		/* ASYNC *** */
-		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, NameValueCollection queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
 		{
 			using (var tracer = new ElasticsearchResponseTracer<T>(this.Settings.TraceEnabled))
 			{
 				var postData = PostData(data);
-				var requestState = new TransportRequestState<T>(tracer, method, path, postData, queryString, deserializationState);
+				var requestState = new TransportRequestState<T>(tracer, method, path, postData, requestParameters);
 
 				return this.DoRequestAsync<T>(requestState)
 					.ContinueWith(t =>
@@ -223,7 +227,7 @@ namespace Elasticsearch.Net.Connection
 				}
 			}
 			
-			return _doRequestAsync(requestState.Method, uri, requestState.PostData, null).ContinueWith(t =>
+			return _doRequestAsync(requestState.Method, uri, requestState.PostData, requestState.RequestConfiguration).ContinueWith(t =>
 			{
 				if (t.IsCanceled)
 					return null;

@@ -399,7 +399,7 @@ namespace Nest
 		ElasticsearchPathInfo<UpdateSettingsRequestParameters> IPathInfo<UpdateSettingsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = base.ToPathInfo<UpdateSettingsRequestParameters>(settings, this._QueryString);
-			pathInfo.QueryString = this._QueryString;
+			pathInfo.RequestParameters = this._QueryString;
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
 
 			return pathInfo;

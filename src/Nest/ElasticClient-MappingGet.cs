@@ -17,8 +17,7 @@ namespace Nest
 			return this.Dispatch<GetMappingDescriptor, GetMappingRequestParameters, GetMappingResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesGetMappingDispatch<GetMappingResponse>(
-					p,
-					new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, d, s))
+					p.DeserializationState(new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, d, s)))
 				)
 			);
 		}
@@ -29,8 +28,7 @@ namespace Nest
 			return this.DispatchAsync<GetMappingDescriptor, GetMappingRequestParameters, GetMappingResponse, IGetMappingResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesGetMappingDispatchAsync<GetMappingResponse>(
-					p,
-					new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, d, s))
+					p.DeserializationState(new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, d, s)))
 				)
 			);
 		}

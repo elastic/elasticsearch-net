@@ -89,7 +89,7 @@ namespace Nest
 				Type = type,
 				Id = id
 			};
-			pathInfo.QueryString = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new K();
 			return pathInfo;
 		}
 

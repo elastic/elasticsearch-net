@@ -20,7 +20,7 @@ namespace Nest
 				{
 					string json = Serializer.SerializeMultiSearch(d);
 					JsonConverter converter = CreateMultiSearchConverter(d);
-					return this.RawDispatch.MsearchDispatch<MultiSearchResponse>(p, json, converter);
+					return this.RawDispatch.MsearchDispatch<MultiSearchResponse>(p.DeserializationState(converter), json);
 				}
 			);
 		}
@@ -35,7 +35,7 @@ namespace Nest
 				{
 					string json = Serializer.SerializeMultiSearch(d);
 					JsonConverter converter = CreateMultiSearchConverter(d);
-					return this.RawDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, json, converter);
+					return this.RawDispatch.MsearchDispatchAsync<MultiSearchResponse>(p.DeserializationState(converter), json);
 				}
 			);
 		}

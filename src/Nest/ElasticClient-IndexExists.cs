@@ -15,10 +15,10 @@ namespace Nest
 			return this.Dispatch<IndexExistsDescriptor, IndexExistsRequestParameters, IndexExistsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesExistsDispatch<IndexExistsResponse>(
-					p,
-					new IndexExistConverter(DeserializeExistsResponse)
-					), true
-				);
+					p.DeserializationState(new IndexExistConverter(DeserializeExistsResponse))
+				),
+				allow404: true
+			);
 		}
 
 		/// <inheritdoc />
@@ -27,10 +27,10 @@ namespace Nest
 			return this.DispatchAsync<IndexExistsDescriptor, IndexExistsRequestParameters, IndexExistsResponse, IIndexExistsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesExistsDispatchAsync<IndexExistsResponse>(
-					p,
-					new IndexExistConverter(DeserializeExistsResponse)
-					), true
-				);
+					p.DeserializationState(new IndexExistConverter(DeserializeExistsResponse))
+				), 
+				allow404: true
+			);
 		}
 
 		private IndexExistsResponse DeserializeExistsResponse(IElasticsearchResponse response, Stream stream)

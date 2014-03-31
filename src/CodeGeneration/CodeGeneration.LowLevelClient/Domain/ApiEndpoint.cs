@@ -13,7 +13,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 			{
 				var methodArgs = CsharpMethod.Parts
 					.Select(p => (p.Name != "body") ? "pathInfo." + p.Name.ToPascalCase() : "body")
-					.Concat(new[] {"u => pathInfo.QueryString"});
+					.Concat(new[] {"u => pathInfo.RequestParameters"});
 				return methodArgs;
 			}
 		} 
@@ -170,8 +170,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 
 						args = args.Concat(new[] 
 						{ 
-							"Func<"+apiMethod.QueryStringParamName+", " + apiMethod.QueryStringParamName + "> queryString = null",
-							"object deserializationState = null"
+							"Func<"+apiMethod.QueryStringParamName+", " + apiMethod.QueryStringParamName + "> requestParameters = null"
 						}).ToList();
 						apiMethod.Arguments = string.Join(", ", args);
 						yield return apiMethod;
@@ -196,7 +195,6 @@ namespace CodeGeneration.LowLevelClient.Domain
 						yield return apiMethod;
 						
 						//No need for deserialization state when returning dynamicdictionary
-						args = args.Take(args.Count() - 1).ToList();
 
 						var explanationOfDynamic =
 							paraIndent + 

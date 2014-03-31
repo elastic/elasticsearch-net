@@ -42,11 +42,10 @@ namespace Elasticsearch.Net
 			{
 		<text>@Raw("///<param name=\"" + part.Name + "\">")@part.Description@Raw("</param>")</text>
 			}
-		<text>@Raw("///<param name=\"queryString\">Optional function to specify any additional querystring parameters for the request.</param>")</text>
-		if (!string.IsNullOrWhiteSpace(method.ReturnTypeGeneric))
-		{ 
-		<text>@Raw("///<param name=\"deserializationState\">Optional state that will be passed to the deserialization call for the response</param>")</text>
-		}
+		<text>@Raw(@"///<param name=""requestParameters"">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>")</text>
 		<text>@Raw("///<returns>"+method.ReturnDescription)
 		///@Raw("</returns>")</text>
 		<text>public @Raw(method.ReturnType) @(method.FullName)@(Raw(method.ReturnTypeGeneric))(@Raw(method.Arguments))
@@ -63,23 +62,21 @@ namespace Elasticsearch.Net
 		{
 	<text>var url = "@(url)";</text>
 		}
-			NameValueCollection nv = null;
-			if (queryString != null)
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
 			{
-				var qs = queryString(new @(method.QueryStringParamName)());
-				if (qs != null) nv = this.ToNameValueCollection(qs);
+				requestParams = requestParameters(new @(method.QueryStringParamName)());
+				ToNameValueCollection(requestParams);
 			}
 			@{
 			bool isAsync = method.ReturnType.StartsWith("Task<");
 			string requestMethod = isAsync ? "DoRequestAsync" : "DoRequest";
 			bool wrap = method.ReturnTypeGeneric == null;
 		}
-			return @(wrap ? "ElasticsearchResponse.Wrap"+ (isAsync ? "Async" : "") +"("  : "")this.@(requestMethod)@(Raw(method.ReturnTypeGeneric ?? "<Dictionary<string, object>>"))("@method.HttpMethod", url@(method.Parts.Any(pp=>pp.Name == "body") ? ", body" : ", data: null"), 
-				queryString: nv
-			@if(!string.IsNullOrWhiteSpace(method.ReturnTypeGeneric))
-			{
-				<text>, deserializationState: deserializationState</text>
-			}			)@(wrap ? ")" : "");
+			return @(wrap ? "ElasticsearchResponse.Wrap"+ (isAsync ? "Async" : "") +"("  : "")this.@(requestMethod)@(Raw(method.ReturnTypeGeneric ?? "<Dictionary<string, object>>"))(
+				"@method.HttpMethod", url@(method.Parts.Any(pp=>pp.Name == "body") ? ", body" : ", data: null"), 
+				requestParameters: requestParams
+			)@(wrap ? ")" : "");
 		}</text>
 
 		}

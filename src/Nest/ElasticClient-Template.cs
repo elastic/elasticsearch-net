@@ -18,8 +18,9 @@ namespace Nest
 			getTemplateSelector = getTemplateSelector ?? (s => s);
 			return this.Dispatch<GetTemplateDescriptor, GetTemplateRequestParameters, TemplateResponse>(
 				d => getTemplateSelector(d.Name(name)),
-				(p, d) =>
-					RawDispatch.IndicesGetTemplateDispatch<TemplateResponse>(p, (GetTemplateConverter) DeserializeTemplateResponse)
+				(p, d) => RawDispatch.IndicesGetTemplateDispatch<TemplateResponse>(
+					p.DeserializationState((GetTemplateConverter) DeserializeTemplateResponse)
+				)
 			);
 		}
 
@@ -31,7 +32,8 @@ namespace Nest
 			return this.DispatchAsync<GetTemplateDescriptor, GetTemplateRequestParameters, TemplateResponse, ITemplateResponse>(
 				d => getTemplateSelector(d.Name(name)),
 				(p, d) => this.RawDispatch.IndicesGetTemplateDispatchAsync<TemplateResponse>(
-					p, (GetTemplateConverter) DeserializeTemplateResponse)
+					p.DeserializationState((GetTemplateConverter) DeserializeTemplateResponse)
+				)
 			);
 		}
 

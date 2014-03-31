@@ -26,7 +26,7 @@ namespace Nest
 			pathInfo.ScrollId = this._QueryString._scroll_id;
 			// force scroll id out of RequestParameters (potentially very large)
 			this._QueryString._QueryStringDictionary.Remove("scroll_id");
-			pathInfo.QueryString = this._QueryString;
+			pathInfo.RequestParameters = this._QueryString;
 			return pathInfo;
 		}
 	}

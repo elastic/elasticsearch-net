@@ -13,8 +13,7 @@ namespace Elasticsearch.Net.Connection
 			string method, 
 			string path, 
 			object data = null, 
-			NameValueCollection queryString = null, 
-			object serializationState = null);
+			IRequestParameters requestParameters = null);
 
 		void Sniff(bool fromStartup = false);
 
@@ -22,8 +21,7 @@ namespace Elasticsearch.Net.Connection
 			string method, 
 			string path, 
 			object data = null, 
-			NameValueCollection queryString = null,
-			object serializationState = null);
+			IRequestParameters requestParameters = null);
 	}
 
 	public interface ITransportValues

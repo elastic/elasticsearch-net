@@ -66,7 +66,7 @@ namespace Nest
 				Index = index,
 				Type = type
 			};
-			pathInfo.QueryString = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new K();
 			return pathInfo;
 		}
 
