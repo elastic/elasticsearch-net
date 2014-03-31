@@ -48,72 +48,72 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 		}
 
 
-		public virtual Task<ElasticsearchResponse<Stream>> Get(Uri uri, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Get(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
 			return DoAsyncRequest(uri);
 		}
 
-		public virtual ElasticsearchResponse<Stream> GetSync(Uri uri, IConnectionConfigurationOverrides requestSpecificConfig = null) 
+		public virtual ElasticsearchResponse<Stream> GetSync(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null) 
 		{
 			_uriObserver.Observe(uri);
 			return _responseGenerator.Create();
 		}
 
-		public virtual Task<ElasticsearchResponse<Stream>> Head(Uri uri, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Head(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
 			_uriObserver.Observe(uri);
 			return Task.FromResult(_responseGenerator.Create());
 		}
 
-		public virtual ElasticsearchResponse<Stream> HeadSync(Uri uri, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		public virtual ElasticsearchResponse<Stream> HeadSync(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
 			_uriObserver.Observe(uri);
 			return _responseGenerator.Create();
 		}
 
-		public virtual Task<ElasticsearchResponse<Stream>> Post(Uri uri, byte[] data, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Post(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
 			_uriObserver.Observe(uri);
 			return Task.FromResult(_responseGenerator.Create());
 		}
 
-		public virtual ElasticsearchResponse<Stream> PostSync(Uri uri, byte[] data, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		public virtual ElasticsearchResponse<Stream> PostSync(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
 			_uriObserver.Observe(uri);
 			return _responseGenerator.Create();
 		}
 
-		public virtual Task<ElasticsearchResponse<Stream>> Put(Uri uri, byte[] data, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Put(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
 			_uriObserver.Observe(uri);
 			return Task.FromResult(_responseGenerator.Create());
 		}
 
-		public virtual ElasticsearchResponse<Stream> PutSync(Uri uri, byte[] data, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		public virtual ElasticsearchResponse<Stream> PutSync(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
 			_uriObserver.Observe(uri);
 			return _responseGenerator.Create();
 		}
 
-		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
 			_uriObserver.Observe(uri);
 			return Task.FromResult(_responseGenerator.Create());
 		}
 
-		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
 			_uriObserver.Observe(uri);
 			return _responseGenerator.Create();
 		}
 
-		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, byte[] data, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
 			_uriObserver.Observe(uri);
 			return Task.FromResult(_responseGenerator.Create());
 		}
 
-		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, byte[] data, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
 			_uriObserver.Observe(uri);
 			return _responseGenerator.Create();

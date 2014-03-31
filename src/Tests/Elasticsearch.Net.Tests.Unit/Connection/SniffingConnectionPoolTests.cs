@@ -201,7 +201,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 				var seenNodes = new List<Uri>();
 				//var getCall =  FakeResponse.GetSyncCall(fake);
-				var getCall = A.CallTo(() => connection.GetSync(A<Uri>._, A<IConnectionConfigurationOverrides>._));
+				var getCall = A.CallTo(() => connection.GetSync(A<Uri>._, A<IRequestConfiguration>._));
 				getCall.ReturnsNextFromSequence(
 					FakeResponse.Ok(config), //info 1
 					FakeResponse.Bad(config), //info 2
@@ -214,7 +214,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					FakeResponse.Ok(config), //info 8
 					FakeResponse.Ok(config) //info 9
 				);
-				getCall.Invokes((Uri u, IConnectionConfigurationOverrides o) => seenNodes.Add(u));
+				getCall.Invokes((Uri u, IRequestConfiguration o) => seenNodes.Add(u));
 
 				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				var client1 = fake.Resolve<ElasticsearchClient>();

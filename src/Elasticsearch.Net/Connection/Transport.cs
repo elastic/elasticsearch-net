@@ -16,35 +16,6 @@ using PUrify;
 
 namespace Elasticsearch.Net.Connection
 {
-
-	class TransportRequestState<T>
-	{
-		public string Method { get; private set; }
-		public string Path { get; private set; }
-		public byte[] PostData { get; private set; }
-		public ElasticsearchResponseTracer<T> Tracer { get; private set; }
-
-		public int? Seed { get; set; }
-
-		public IConnectionConfigurationOverrides RequestConfiguration { get; set; }
-		public object DeserializationState { get; private set; }
-
-		public TransportRequestState(ElasticsearchResponseTracer<T> tracer, string method, string path, byte[] postData = null, IRequestParameters requestParameters = null)
-		{
-			this.Method = method;
-			this.Path = path;
-			this.PostData = postData;
-			if (requestParameters != null)
-			{
-				if (requestParameters.QueryString != null) this.Path += requestParameters.QueryString.ToQueryString();
-				this.DeserializationState = requestParameters.DeserializationState;
-				this.RequestConfiguration = requestParameters.RequestConfiguration;
-			}
-			this.Tracer = tracer;
-		}
-
-	}
-
 	public class Transport : ITransport
 	{
 		protected static readonly string MaxRetryExceptionMessage = "Unable to perform request: '{0} {1}' on any of the nodes after retrying {2} times.";
@@ -171,7 +142,7 @@ namespace Elasticsearch.Net.Connection
 			return this.DoRequest<T>(requestState, ++retried);
 		}
 
-		private ElasticsearchResponse<Stream> _doRequest(string method, Uri uri, byte[] postData, IConnectionConfigurationOverrides requestSpecificConfig)
+		private ElasticsearchResponse<Stream> _doRequest(string method, Uri uri, byte[] postData, IRequestConfiguration requestSpecificConfig)
 		{
 			switch (method.ToLowerInvariant())
 			{
@@ -261,7 +232,7 @@ namespace Elasticsearch.Net.Connection
 			throw new MaxRetryException(exceptionMessage, e);
 		}
 
-		private Task<ElasticsearchResponse<Stream>> _doRequestAsync(string method, Uri uri, byte[] postData, IConnectionConfigurationOverrides requestSpecificConfig)
+		private Task<ElasticsearchResponse<Stream>> _doRequestAsync(string method, Uri uri, byte[] postData, IRequestConfiguration requestSpecificConfig)
 		{
 			switch (method.ToLowerInvariant())
 			{

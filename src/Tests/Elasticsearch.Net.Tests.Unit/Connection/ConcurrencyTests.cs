@@ -140,7 +140,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				return  _rnd.Next(1, 11) % 3 == 0 ? _uris : _uris2;
 			}
 
-			public override ElasticsearchResponse<Stream> GetSync(Uri uri, IConnectionConfigurationOverrides requestConfigurationOverrides = null)
+			public override ElasticsearchResponse<Stream> GetSync(Uri uri, IRequestConnectionConfiguration requestConfigurationOverrides = null)
 			{
 				var statusCode = _rnd.Next(1, 9) % 3 == 0 ? 503 : 200;
 				if (uri.Port == 9202)

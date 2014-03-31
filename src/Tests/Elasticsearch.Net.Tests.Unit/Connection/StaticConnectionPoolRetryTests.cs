@@ -127,7 +127,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 						.MaximumRetries(7)
 				);
 				var getCall = A.CallTo(() => 
-					fake.Resolve<IConnection>().GetSync(A<Uri>._, A<IConnectionConfigurationOverrides>._));
+					fake.Resolve<IConnection>().GetSync(A<Uri>._, A<IRequestConfiguration>._));
 				getCall.Throws<Exception>();
 				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
 				pingCall.Returns(true);
@@ -158,7 +158,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 						.MaximumRetries(4)
 				);
 				//set up our GET to / to return 4 503's followed by a 200
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._, A<IConnectionConfigurationOverrides>._));
+				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._, A<IRequestConfiguration>._));
 				getCall.ReturnsNextFromSequence(
 					ElasticsearchResponse<Stream>.Create(_config, 503, "GET", "/", null),
 					ElasticsearchResponse<Stream>.Create(_config, 503, "GET", "/", null),
@@ -215,7 +215,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					call.Returns(DateTime.UtcNow.AddSeconds(60));
 				
 				//When we do a GET on / we always recieve a 503
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._, A<IConnectionConfigurationOverrides>._));
+				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._, A<IRequestConfiguration>._));
 				getCall.Returns(
 					ElasticsearchResponse<Stream>.Create(_config, 503, "GET", "/", null)
 				);
@@ -262,7 +262,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 				//fake getsync handler that return a 503 4 times and then a 200
 				//this will cause all 4 nodes to be marked dead on the first client call
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._, A<IConnectionConfigurationOverrides>._));
+				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._, A<IRequestConfiguration>._));
 				getCall.ReturnsNextFromSequence(
 					ElasticsearchResponse<Stream>.Create(_config, 503, "GET", "/", null),
 					ElasticsearchResponse<Stream>.Create(_config, 503, "GET", "/", null),

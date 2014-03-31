@@ -45,7 +45,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 		#region IConnection Members
 
-		public Task<ElasticsearchResponse<Stream>> Get(Uri uri, IConnectionConfigurationOverrides deserializationState = null)
+		public Task<ElasticsearchResponse<Stream>> Get(Uri uri, IRequestConnectionConfiguration deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.GET;
@@ -59,7 +59,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			});
 		}
 	
-		public Task<ElasticsearchResponse<Stream>> Head(Uri uri, IConnectionConfigurationOverrides deserializationState = null)
+		public Task<ElasticsearchResponse<Stream>> Head(Uri uri, IRequestConnectionConfiguration deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.HEAD;
@@ -73,7 +73,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			});
 		}
 
-		public ElasticsearchResponse<Stream> GetSync(Uri uri, IConnectionConfigurationOverrides deserializationState = null)
+		public ElasticsearchResponse<Stream> GetSync(Uri uri, IRequestConnectionConfiguration deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.GET;
@@ -84,7 +84,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			return this.Execute(restRequest, deserializationState);
 		}
 
-		public ElasticsearchResponse<Stream> HeadSync(Uri uri, IConnectionConfigurationOverrides deserializationState = null)
+		public ElasticsearchResponse<Stream> HeadSync(Uri uri, IRequestConnectionConfiguration deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.HEAD;
@@ -95,7 +95,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			return this.Execute(restRequest, deserializationState);
 		}
 
-		public Task<ElasticsearchResponse<Stream>> Post(Uri uri, byte[] data, IConnectionConfigurationOverrides deserializationState = null)
+		public Task<ElasticsearchResponse<Stream>> Post(Uri uri, byte[] data, IRequestConnectionConfiguration deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.POST;
@@ -109,7 +109,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 				return this.Execute(restRequest, deserializationState);
 			});
 		}
-		public Task<ElasticsearchResponse<Stream>> Put(Uri uri, byte[] data, IConnectionConfigurationOverrides deserializationState = null)
+		public Task<ElasticsearchResponse<Stream>> Put(Uri uri, byte[] data, IRequestConnectionConfiguration deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.PUT;
@@ -123,7 +123,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 				return this.Execute(restRequest, deserializationState);
 			});
 		}
-		public Task<ElasticsearchResponse<Stream>> Delete(Uri uri, byte[] data, IConnectionConfigurationOverrides deserializationState = null)
+		public Task<ElasticsearchResponse<Stream>> Delete(Uri uri, byte[] data, IRequestConnectionConfiguration deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
@@ -138,7 +138,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			});
 		}
 
-		public ElasticsearchResponse<Stream> PostSync(Uri uri, byte[] data, IConnectionConfigurationOverrides deserializationState = null)
+		public ElasticsearchResponse<Stream> PostSync(Uri uri, byte[] data, IRequestConnectionConfiguration deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.POST;
@@ -149,7 +149,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest, deserializationState);
 		}
-		public ElasticsearchResponse<Stream> PutSync(Uri uri, byte[] data, IConnectionConfigurationOverrides deserializationState = null)
+		public ElasticsearchResponse<Stream> PutSync(Uri uri, byte[] data, IRequestConnectionConfiguration deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.PUT;
@@ -160,7 +160,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest, deserializationState);
 		}
-		public Task<ElasticsearchResponse<Stream>> Delete(Uri uri, IConnectionConfigurationOverrides deserializationState = null)
+		public Task<ElasticsearchResponse<Stream>> Delete(Uri uri, IRequestConnectionConfiguration deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
@@ -174,7 +174,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			});
 		}
 
-		public ElasticsearchResponse<Stream> DeleteSync(Uri uri, IConnectionConfigurationOverrides deserializationState = null)
+		public ElasticsearchResponse<Stream> DeleteSync(Uri uri, IRequestConnectionConfiguration deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
@@ -184,7 +184,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest, deserializationState);
 		}
-		public ElasticsearchResponse<Stream> DeleteSync(Uri uri, byte[] data, IConnectionConfigurationOverrides deserializationState = null)
+		public ElasticsearchResponse<Stream> DeleteSync(Uri uri, byte[] data, IRequestConnectionConfiguration deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
