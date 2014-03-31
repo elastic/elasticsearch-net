@@ -400,7 +400,7 @@ namespace Elasticsearch.Net.Connection
 				)
 			{
 				tcs.SetResult(cs);
-				return null;
+				return tcs.Task;
 			}
 			var customConverter = deserializationState as Func<IElasticsearchResponse, Stream, T>;
 			if (customConverter != null)

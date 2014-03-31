@@ -49,7 +49,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				);
 				
 				var seenNodes = new List<Uri>();
-				getCall.Invokes((Uri u, object o) => seenNodes.Add(u));
+				getCall.Invokes((Uri u, IConnectionConfigurationOverrides o) => seenNodes.Add(u));
 
 				var pingCall = FakeCalls.Ping(fake);
 				pingCall.Returns(true);
@@ -100,7 +100,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				);
 				
 				var seenNodes = new List<Uri>();
-				getCall.Invokes((Uri u, object o) => seenNodes.Add(u));
+				getCall.Invokes((Uri u, IConnectionConfigurationOverrides o) => seenNodes.Add(u));
 
 				var pingCall = FakeCalls.Ping(fake);
 				pingCall.Returns(true);

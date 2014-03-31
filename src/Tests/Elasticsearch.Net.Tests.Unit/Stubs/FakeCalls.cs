@@ -20,7 +20,7 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 		}
 		public static IReturnValueArgumentValidationConfiguration<Task<ElasticsearchResponse<Stream>>> GetCall(AutoFake fake)
 		{
-			return A.CallTo(() => fake.Resolve<IConnection>().Get(A<Uri>._, A<IConnectionConfigurationOverrides>._));
+			return A.CallTo(() => fake.Resolve<IConnection>().Get(A<Uri>._, null));
 		}
 
 		public static IReturnValueArgumentValidationConfiguration<bool> Ping(AutoFake fake)

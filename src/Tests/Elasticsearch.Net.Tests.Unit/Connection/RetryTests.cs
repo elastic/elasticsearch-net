@@ -108,8 +108,9 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
 				FakeCalls.ProvideDefaultTransport(fake);
 				
-				var getCall = FakeCalls.GetCall(fake); 
-				getCall.Returns(Task.FromResult(FakeResponse.Any(_connectionConfig, 400)));
+				var getCall = FakeCalls.GetCall(fake);
+				var task = Task.FromResult(FakeResponse.Any(_connectionConfig, 400));
+				getCall.Returns(task);
 				
 				var client = fake.Resolve<ElasticsearchClient>();
 
