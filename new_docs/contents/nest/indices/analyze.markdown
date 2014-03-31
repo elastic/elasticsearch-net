@@ -7,7 +7,7 @@ menuitem: analyze
 
 #Analyze 
 
-Performs the analysis process on a text and return the tokens breakdown of the text.
+Performs the analysis process on the specified text and returns the token breakdown for the text.
 
 ## Analyze using default index's default analyzer
 

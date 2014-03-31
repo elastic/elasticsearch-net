@@ -29,14 +29,14 @@ If you want to search across all indices
 	    ...
 	)
 
-Or if you want to search one index (thats not the default index)
+Or if you want to search one index (that is not the default index)
 
 	client.Search<MyObject>(s=>s.
 	    .Index("Index_A")
 	    ...
 	)
 
-Remember since elasticsearch 19.8 you can also specify wildcards on index names
+Remember that since Elasticsearch 19.8 you can also specify wildcards on index names
 
 	client.Search<MyObject>(s=>s
 	    .Index("Index_*")
@@ -60,7 +60,7 @@ Using
 
 	.ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type>)
 
-you can manually specify the type of each hit based on some json value (on dynamic) or on the hit metadata.
+you can manually specify the type of each hit based on some JSON value (on dynamic) or on the hit metadata.
 
 #Routing
 You can specify the routing for the search request using 

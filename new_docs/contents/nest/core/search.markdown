@@ -8,7 +8,7 @@ menuitem: search
 
 # Search
 
-Search is **THE** call you'll probably use the most as it exposes elasticsearch's key functionality: search!
+Search is **THE** call you'll probably use the most as it exposes Elasticsearch's key functionality: search!
 
 **NOTE:** be sure to also read [how to use NEST's Query DSL](/concepts/writing-queries.html)
 
@@ -24,7 +24,7 @@ You can start a search like so,
 
 This will get all the documents on the `my-index` index and `my-type` type. 
 
-`result` is an `IQueryResponse<dynamic>` which has a `Documents` `IEnumerable<dynamic>` property that holds all the results. NOTE: remember in the absent of paging it will default to the first 10). 
+`result` is an `IQueryResponse<dynamic>` which has a `Documents` `IEnumerable<dynamic>` property that holds all the results. NOTE: remember in the absense of paging it will default to the first 10). 
 
 ## Typed results
 

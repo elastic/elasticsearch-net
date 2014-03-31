@@ -6,7 +6,7 @@ menuitem: writing-queries
 ---
 
 # Writing Queries
-One of the most important things to grasp using Nest is how to write queries. Nest offers you several possibilities. By the way all examples on this page assume being wrapped in
+One of the most important things to grasp when using Nest is how to write queries. Nest offers you several possibilities. By the way all examples on this page assume being wrapped in
 
     var result = client.Search<ElasticSearchProject>(s=>s
         .From(0)
@@ -15,30 +15,30 @@ One of the most important things to grasp using Nest is how to write queries. Ne
     );
 
 ## Raw strings
-Although not preffered by me personally many folks like to build their own json strings and just pass that along.
+Although not preferred by me personally, many folks like to build their own JSON strings and just pass that along.
 
     .QueryRaw("\"match_all\" : { }")
     .FilterRaw("\"match_all\" : { }")
 
-Nest does not modify this in anyway and just writes this straight into the json output. 
+Nest does not modify this in anyway and just writes this straight into the JSON output. 
 
 ## Query DSL
-The preffered way to write queries since it gives you alot of cool feautures.
+The preferred way to write queries, since it gives you alot of cool features.
 
 ### Lambda expressions
     .Query(q=>q
         .Term(p=>p.Name, "NEST")
     )
 
-Here you'll see we can use expressions to adres properties in a type safe matter. This also works for `IEnumerable` types i.e
+Here you'll see we can use expressions to address properties in a type safe matter. This also works for `IEnumerable` types e.g.
 
     .Query(q=>q
         .Term(p=>p.Followers.First().FirstName, "NEST")
     )
 
-Because these property lookups are expressions you dont have to do any null checks. The previous would expand to the `followers.firstName` property name. 
+Because these property lookups are expressions you don't have to do any null checks. The previous would expand to the `followers.firstName` property name. 
 
-Of course if you need to pass the property name as string Nest will allow you to do so.
+Of course if you need to pass the property name as string NEST will allow you to do so.
 
     .Query(q=>q
         .Term("followers.firstName", "martijn")
@@ -59,14 +59,14 @@ Sometimes you'll need to resuse a filter or query often. To aid with this you ca
         )
     )
 
-similarly `Filter<T>.[Filter]()` methods exist for filters.
+Similarly `Filter<T>.[Filter]()` methods exist for filters.
 
 ### Boolean queries 
-As can be seen in the previous example writing out boolean queries can turn into a really tedious and verbose effort. Luckily Nest supports bitwise operators and so we can rewrite the previous as such:
+As can be seen in the previous example writing out boolean queries can turn into a really tedious and verbose effort. Luckily NEST supports bitwise operators and so we can rewrite the previous as such:
 
     .Query(q=>q.MatchAll() && termQuery)
 
-Note how we are mixing and matching the lambda and static queries here
+Note how we are mixing and matching the lambda and static queries here.
 
 Similary an `OR` looks like this
 
@@ -82,19 +82,19 @@ Similary an `OR` looks like this
         && !q.Term("name", "Elastica")
     )
 
-This will query for all the php clients except `Elastica`
+This will query for all the php clients except `Elastica`.
 
-You can mix and match this to any complexity until it satisfies your query requirements.
+You can mix and match this to any level of complexity until it satisfies your query requirements.
 
     .Query(q=>q
         (q.Term("language", "php")
             && !q.Term("name", "Elastica")
         )
         ||
-        q.Term("name", "Nest")
+        q.Term("name", "NEST")
     )
 
-will query all php clients except elastica or where the name equals Nest.
+Will query all php clients except 'Elastica` or where the name equals `NEST`.
 
 #### Clean output support
 Normally writing three boolean must clauses looks like this (psuedo code)
@@ -104,7 +104,7 @@ Normally writing three boolean must clauses looks like this (psuedo code)
         clause2
         clause3
 
-A naive implemenation of the bitwise operators would make all the queries sent to elasticsearch look like
+A naive implemenation of the bitwise operators would make all the queries sent to Elasticsearch look like
 
     must
         must
@@ -112,11 +112,11 @@ A naive implemenation of the bitwise operators would make all the queries sent t
             clause2
         clause3
 
-This degrades rather rapidly so and makes inspecting generated queries quite a chore. Nest does it's best to detect these cases and always write them in the first clean form.
+This degrades rather rapidly and makes inspecting generated queries quite a chore. NEST does it's best to detect these cases and will always write them in the first, cleaner form.
 
 ## Conditionless queries
 
-Writing complex boolean queries is one thing but more often then not you'll want to make decisions on how to query based on user input. 
+Writing complex boolean queries is one thing, but more often then not you'll want to make decisions on how to query based on user input. 
 
     public class UserInput
     {
@@ -139,7 +139,7 @@ and then
             return query;
         })
 
-This again turns tedious and verbose rather quickly too. Therefor nest allows you to write the previous query as:
+This again becomes tedious and verbose rather quickly as well. Therefore, NEST allows you to write the previous query as:
 
     .Query(q=>
         q.Term(p=>p.Name, userInput.Name);
@@ -147,11 +147,11 @@ This again turns tedious and verbose rather quickly too. Therefor nest allows yo
         && q.Range(r=>r.OnField(p=>p.Loc).From(userInput.Loc))
     )
 
-If any of the queries would result in an empty query they won't be sent to elasticsearch. 
+If any of the queries would result in an empty query they won't be sent to Elasticsearch. 
 
 So if all the terms are null (or empty string) on `userInput` except `userInput.Loc` it wouldn't even wrap the range query in a boolean query but just issue a plain range query. 
 
-If all of them empty it will result in a `match_all` query. 
+If all of them are empty it will result in a `match_all` query. 
 
 This conditionless behavior is turned on by default but can be turned of like so:
 
@@ -172,7 +172,7 @@ However queries themselves can opt back in or out.
 
 In this example if `userInput.Name` is null or empty it will result in a `DslException`. The range query will use conditionless logic no matter if the SearchDescriptor uses `.Strict()` or not.
 
-Also good to note is that conditionless query logic propagates:
+Please note that conditionless query logic propagates:
 
     q.Strict().Term(p=>p.Name, userInput.Name);
     && q.Term("followers.firstName", userInput.FirstName)
@@ -183,7 +183,7 @@ Also good to note is that conditionless query logic propagates:
         )
     )
 
-If both `userInput.Countries` and `userInput.Loc` are null or empty the entire `filtered` query will be not be issued. 
+If both `userInput.Countries` and `userInput.Loc` are null or empty the entire `filtered` query will not be issued. 
 
 
 

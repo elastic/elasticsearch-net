@@ -7,7 +7,7 @@ menuitem: esnet-building-requests
 
 # Building Requests
 
-This section decribes how to build requests to elasticsearch.
+This section decribes how to build requests to Elasticsearch.
 
 ## Calling an API endpoint
 

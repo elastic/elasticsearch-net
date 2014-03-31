@@ -28,7 +28,7 @@ That we would like to index in elasticsearch
 
 This will index the object to `/my-default-index/person/1`. 
 
-`NEST` is smart enough to infer the index and typename for the `Person` CLR type. It was also able to get the id of `1` by convention of looking for `Id` property on the specified object. Where it will look for the Id can be specified using the `ElasticType` attribute.
+`NEST` is smart enough to infer the index and typename for the `Person` CLR type. It was also able to get the id of `1` by the convention of looking for `Id` property on the specified object. Where it will look for the Id can be specified using the `ElasticType` attribute.
 
 As noted in the [quick start](/nest/quick-start.html) you can always pass **explicit values** for infered ones.
 
@@ -46,7 +46,7 @@ There are a couple of places within NEST where inference comes in to play
 
 ## Index name inference
 
-Whenever an explicit index name is not provided nest will look to see if the type has it's own default index name on the connection settings.
+Whenever an explicit index name is not provided NEST will look to see if the type has it's own default index name on the connection settings.
 
      settings.MapDefaultTypeIndices(d=>d
         .Add(typeof(MyType), "my-type-index")
@@ -63,7 +63,7 @@ Whenever an explicit index name is not provided nest will look to see if the typ
 
 ## Type name inference
 
-Whenever nest needs a type name but is not given one explicitly it will use the given CLR type to infer it's elasticsearch type name.
+Whenever NEST needs a type name but is not given one explicitly it will use the given CLR type to infer it's Elasticsearch type name.
 
     settings.MapDefaultTypeNames(d=>d
         .Add(typeof(MyType), "MY_TYPO")
@@ -75,27 +75,27 @@ Whenever nest needs a type name but is not given one explicitly it will use the 
     // searches in /inferred-index/person/_search
     client.Search<Person>();
 
-Another way of setting an explicit infer value for a type is through setting an attribute
+Another way of setting an explicit inferred value for a type is through setting an attribute
 
     [ElasticType(Name="automobile")]
     public class Car {} 
 
-As you can also see in the search example is that  NEST by default lowercases typenames that due not have a configured infer value.
+As you can also see in the search example, NEST by default lowercases typenames that do not have a configured inferred value.
 
     settings.SetDefaultTypeNameInferrer(t=>t.Name.ToUpperInvariant());
 
-now all type names that have not been explictly specified or have not been explicitly configured will be uppercased.
+Now all type names that have not been explictly specified or have not been explicitly configured will be uppercased.
 
-Prior to NEST 1.0 typenames were by default lowercases AND pluralized, if you want this behaviour back call
+Prior to NEST 1.0 typenames were by default lowercased AND pluralized, if you want this behaviour back use
 
     settings.PluralizeTypeNames();
 
 ## Property name inference
-In many places `NEST` allows you to pass property names and json paths as C# expressions i.e
+In many places `NEST` allows you to pass property names and JSON paths as C# expressions i.e
 
     .Query(q=>q.Term(p=>p.Followers.First().FirstName, "martijn"))
 
-Or while indexing property names need to be translated to json. 
+Or while indexing property names need to be translated to JSON. 
 
 `NEST` by default will camelCase properties. So `followers.firstName` in the previous example.
 
@@ -109,9 +109,9 @@ Properties marked with `[ElasticAttibute(Name="")]` or `[JsonProperty(Name="")]`
 
 ## Id inference
 
-Whenever an object is passed that needs to specify an id (i.e index, bulk operations) the object is inspected to see if it has an `Id` property and if so it's value will be used.
+Whenever an object is passed that needs to specify an id (i.e index, bulk operations) the object is inspected to see if it has an `Id` property and if so, that value will be used.
 
-This inspection happens once per type and the resulting function that given an object of type T returns its id is cached per T throughout the applications lifetime.
+This inspection happens once per type. The result of the function call that returns the id for an object of type T is cached; therfore, it is only called once per object of type T throughout the applications lifetime.
 
 An example of this is at the top of this documentation where the `Index()` call could figure out the object's id was `1`.
 

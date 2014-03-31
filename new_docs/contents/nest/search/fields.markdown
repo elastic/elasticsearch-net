@@ -16,5 +16,5 @@ Using
 
 You can limit the returned fields for each hit.
 
-An overload taking plain strings also exists
+An overload taking plain strings also exists.
 

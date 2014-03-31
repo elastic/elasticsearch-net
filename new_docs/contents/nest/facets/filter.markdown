@@ -19,4 +19,4 @@ A filter facet (not to be confused with a facet filter) allows you to return a c
 		)
 	);
 
-See [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-filter-facet.html) for more information
+See [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-filter-facet.html) for more information.

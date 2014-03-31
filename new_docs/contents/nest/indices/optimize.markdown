@@ -8,7 +8,7 @@ menuitem: optimize
 
 # Optimize 
 
-The optimize API allows to optimize one or more indices through an API. The optimize process basically optimizes the index for faster search operations (and relates to the number of segments a lucene index within each shard). The optimize operation allows to optimize the number of segments to optimize to.
+The optimize API allows you to optimize one or more indices through an API. The optimize process basically optimizes the index for faster search operations (and relates to the number of segments a Lucene index maintains within each shard). The optimize operation allows you to specify the maximum number of segments to use during the optimization.
 
 ## Optimize all
 

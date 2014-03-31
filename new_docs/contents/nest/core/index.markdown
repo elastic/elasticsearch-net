@@ -13,13 +13,13 @@ Indexing is as simple as:
 	var post = new Post() { Id = 12, ... }
 	var status = client.Index<Post>(post);
 
-of course C# is smart enough to infer Post so
+Of course C# is smart enough to infer Post so
 
 	var status = client.Index(post);
 
 is sufficient. this will index post too `/[default index]/posts/12`. The typename`posts` is automatically inferred from the type.
 
-if you need more control there are plenty of overloads, i.e:
+If you need more control there are plenty of overloads, i.e:
 
 	client.Index(post, "index", "type", "id");
 
@@ -47,13 +47,13 @@ Instead of passing `T` just pass an `IEnumerable<T>` to `IndexMany()` or `IndexM
 
 **Note**
 For asynchronous commands there's a special connection setting which automatically semaphores threaded communication
-to ES for you:
+to Elasticsearch for you:
 
 	var elasticSettings = new ConnectionSettings("127.0.0.1.", 9200)
 							  .SetDefaultIndex("mpdreamz")
 							  .SetMaximumAsyncConnections(20);
 
-this ensures that at most there are 20 asynchronous connections to ES others are enqueued until a slot is 
+This ensures that at most there are 20 asynchronous connections to Elasticsearch. All others are enqueued until a slot is 
 available.
 
 ## Aditional parameters

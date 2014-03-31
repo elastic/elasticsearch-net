@@ -38,7 +38,7 @@ Adding more then one facet is also really easy:
         )
 	);
 
-Nest supports all the additional properties you can set on facets 
+NEST supports all the additional properties you can set on facets 
 	
 	var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(s=>s
 		.From(0)
@@ -61,7 +61,7 @@ Nest supports all the additional properties you can set on facets
       )
 	);
 
-Allowing you to take advantage of all the cool facets stuff built in to elasticsearch.
+Allowing you to take advantage of all the cool facets stuff built into Elasticsearch.
 
 ###  Getting to your facet
 
@@ -69,9 +69,9 @@ If you are interested in the facet meta data (such as missing, total) you can us
 
 	var facet = queryResults.Facet<TermFacet>(p=>p.Followers.Select(f=>f.LastName));
 
-this will return a `TermFacet` object which has an `.Items` property holding all the facets.
+This will return a `TermFacet` object which has an `.Items` property holding all the facets.
 
-`queryResult` also holds a `.Facets` dictionary one can use to itterate over the facets returned from the query.
+`queryResult` also holds a `.Facets` dictionary one can use to iterate over the facets returned from the query.
 
 ## Shortcut to facet items
 
@@ -107,6 +107,6 @@ The following lists the elasticsearch facet type and their corresponding NEST st
 
 ***filter*** => [FilterFacet]({{root}}/facets/filter.html)
 
-See also each individual facet's documentation
+See also each individual facet's documentation.
 					
 

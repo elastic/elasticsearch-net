@@ -19,7 +19,7 @@ Elasticsearch allows you to delete over multiple types and indexes, so does NEST
 
 As always `*Async` variants are available too.
 
-You can also delete by query over all the indexes and types:
+You can also delete by query over all the indices and types:
 
 	this.ConnectedClient.DeleteByQuery<ElasticSearchProject>(q => q
 		.AllIndices()

@@ -14,7 +14,7 @@ Each filter allows you specify a name i.e
 
 This will allow you to see on each with which filter applied to it.
 
-Right now I'm waiting on this active elasticsearch issue to complete mapping this functionality
+Right now I'm waiting on this active Elasticsearch issue to complete mapping this functionality
 
 https://github.com/elasticsearch/elasticsearch/issues/3097
 

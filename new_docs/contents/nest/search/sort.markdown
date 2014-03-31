@@ -8,7 +8,7 @@ menuitem: sort
 
 # Sort
 
-Apply a sort over the search results, do note that sorting and boosting are mutually exclusive.
+Apply a sort over the search results. Please note that sorting and boosting are mutually exclusive.
 
 	.SortAscending(p=> p.Name.Suffix("sort"))
 

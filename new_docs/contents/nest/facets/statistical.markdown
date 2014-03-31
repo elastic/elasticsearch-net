@@ -7,7 +7,7 @@ menuitem: statistical
 
 # Statistical Facet
 
-Statistical facet allows to compute statistical data on a numeric fields. The statistical data include count, total, sum of squares, mean (average), minimum, maximum, variance, and standard deviation. Here is an example:
+Statistical faceting allows you to compute statistical data on numeric fields. The statistical data includes count, total, sum of squares, mean (average), minimum, maximum, variance, and standard deviation. Here is an example:
 
 
 	this.ConnectedClient.Search<ElasticSearchProject>(s=>s
@@ -19,5 +19,5 @@ Statistical facet allows to compute statistical data on a numeric fields. The st
 		)
 	);
 
-See [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-statistical-facet.html) for more information
+See [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-statistical-facet.html) for more information.
 

@@ -11,7 +11,7 @@ Get cluster health simple
 
     var r = this._client.Health(HealthLevel.Cluster);
 
-Cluster health just for one (or more) index
+Cluster health for one (or more) indexes
 
     var r = this._client.Health(new[] { Test.Default.DefaultIndex }, HealthLevel.Cluster);
 

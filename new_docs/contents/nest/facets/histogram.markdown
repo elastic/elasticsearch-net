@@ -17,6 +17,6 @@ The histogram facet works with numeric data by building a histogram across inter
 		.FacetHistogram(h => h.OnField(f=>f.LOC).Interval(100))
 	);
 
-See [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-histogram-facet.html) for more information
+See [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-histogram-facet.html) for more information.
 
 

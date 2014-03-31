@@ -7,10 +7,10 @@ menuitem: create-indices
 
 
 # Create index 
-The create index API allows to instantiate an index. ElasticSearch provides support for multiple indices, including executing operations across several indices. Each index created can have specific settings associated with it.
+The create index API allows to instantiate an index. Elasticsearch provides support for multiple indices, including executing operations across several indices. Each index created can have specific settings associated with it.
 
 ## Note 
-When adding settings strip the `index.` prefix when passing settings found for example here:http://www.elasticsearch.org/guide/reference/index-modules/
+When adding settings strip the `index.` prefix. This applies to settings found in the [Index Module](http://www.elasticsearch.org/guide/reference/index-modules/) documentation.
 
 ## Simple example
 

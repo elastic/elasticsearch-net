@@ -30,12 +30,12 @@ If you want a failover client instead of passing a `Uri` pass an `IConnectionPoo
 
 ## Changing the underlying connection 
 
-By default NEST will use HTTP to chat with elasticsearch, alternative implementation of the transport layer can be injected in the constructors optional second parameter
+By default NEST will use HTTP to chat with elasticsearch, alternative implementation of the transport layer can be injected using the constructors optional second parameter
 
 	var client = new ElasticClient(settings, new ThriftConnection(settings));
 
-Nest comes with a Htpp connection `HttpConnection`, Thrift Connection `ThriftConnection` 
-and an in memory connection that nevers hits elasticsearch `InMemoryConnection`.
+NEST comes with an Http Connection `HttpConnection`, Thrift Connection `ThriftConnection` 
+and an In-Memory Connection `InMemoryConnection`, that nevers hits elasticsearch.
 
 ## Settings
 
@@ -50,8 +50,8 @@ The easiest way to pass `IConnectionSettingsValues` is to instantiate `Connectio
         .PluralizeTypeNames();
 
 ####AddContractJsonConverters
-Add a custom JsonConverter to the build in json serialization by passing
-in a predicate for a type.  This way they will be part of the cached Json.net contract for a type.
+Add a custom JsonConverter to the built in JSON serialization by passing
+in a predicate for a type.  This way they will be part of the cached Json.NET contract for a type.
 
     settings.AddContractJsonConverters(t => 
         typeof (Enum).IsAssignableFrom(t) 
@@ -74,15 +74,15 @@ Index to default to when no index is specified.
 ####SetDefaultPropertyNameInferrer
 By default NEST camelCases property names (EmailAddress => emailAddress)
 that do not have an explicit propertyname either via an ElasticProperty attribute
-or because they are part of Dictionary where the keys should be treated verbatim.
+or because they are part of a Dictionary where the keys should be treated verbatim.
 Here you can register a function that transforms propertynames (default
 casing, pre- or suffixing)
 
 ####SetDefaultTypeNameInferrer
-Allows you to override how type names should be reprented, the default will
+Allows you to override how type names should be represented, the default will
 call .ToLowerInvariant() on the type's name.
 
 ####SetJsonSerializerSettingsModifier
-Allows you to update internal the json.net serializer settings to your liking.
-Do not use this to add custom json converters use `AddContractJsonConverters` instead.
+Allows you to update the internal Json.NET Serializer settings to your liking.
+Do not use this to add custom JSON converters use `AddContractJsonConverters` instead.
 
