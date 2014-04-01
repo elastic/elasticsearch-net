@@ -61,10 +61,6 @@ namespace Elasticsearch.Net.Connection
 			get { return _pingDisabled; }
 		}
 
-		public string AcceptsContentType
-		{
-			get { return _acceptsContentType; }
-		}
 
 		public T DisableSniffing(bool? disable = true)
 		{

@@ -41,6 +41,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -71,6 +72,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new BulkRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -105,6 +107,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -137,6 +140,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new BulkRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -171,6 +175,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -203,6 +208,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new BulkRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -239,6 +245,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -273,6 +280,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new BulkRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -309,6 +317,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -343,6 +352,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new BulkRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -381,6 +391,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -418,6 +429,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -449,6 +461,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -479,6 +492,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new BulkRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -513,6 +527,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -545,6 +560,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new BulkRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
@@ -579,6 +595,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -611,6 +628,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new BulkRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -647,6 +665,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -681,6 +700,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new BulkRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
@@ -717,6 +737,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -751,6 +772,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new BulkRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -789,6 +811,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -826,6 +849,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -852,9 +876,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAliasesRequestParameters());
+				requestParams = requestParameters(new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -882,9 +908,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAliasesRequestParameters());
+				requestParams = requestParameters(new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -908,20 +936,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatAliases(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatAliases(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/aliases";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAliasesRequestParameters());
+				requestParams = requestParameters(new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/aliases
@@ -940,20 +970,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatAliasesAsync(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatAliasesAsync(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/aliases";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAliasesRequestParameters());
+				requestParams = requestParameters(new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/aliases/{name}
@@ -978,9 +1010,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAliasesRequestParameters());
+				requestParams = requestParameters(new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -1010,9 +1044,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAliasesRequestParameters());
+				requestParams = requestParameters(new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -1037,21 +1073,23 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatAliases(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatAliases(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_cat/aliases/{0}".F(Encoded(name));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAliasesRequestParameters());
+				requestParams = requestParameters(new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/aliases/{name}
@@ -1071,21 +1109,23 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatAliasesAsync(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatAliasesAsync(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_cat/aliases/{0}".F(Encoded(name));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAliasesRequestParameters());
+				requestParams = requestParameters(new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAliasesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/allocation
@@ -1108,9 +1148,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAllocationRequestParameters());
+				requestParams = requestParameters(new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -1138,9 +1180,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAllocationRequestParameters());
+				requestParams = requestParameters(new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -1164,20 +1208,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatAllocation(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatAllocation(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/allocation";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAllocationRequestParameters());
+				requestParams = requestParameters(new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/allocation
@@ -1196,20 +1242,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatAllocationAsync(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatAllocationAsync(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/allocation";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAllocationRequestParameters());
+				requestParams = requestParameters(new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/allocation/{node_id}
@@ -1234,9 +1282,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAllocationRequestParameters());
+				requestParams = requestParameters(new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -1266,9 +1316,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAllocationRequestParameters());
+				requestParams = requestParameters(new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -1293,21 +1345,23 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatAllocation(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatAllocation(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cat/allocation/{0}".F(Encoded(node_id));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAllocationRequestParameters());
+				requestParams = requestParameters(new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/allocation/{node_id}
@@ -1327,21 +1381,23 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatAllocationAsync(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatAllocationAsync(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cat/allocation/{0}".F(Encoded(node_id));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatAllocationRequestParameters());
+				requestParams = requestParameters(new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatAllocationRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/count
@@ -1364,9 +1420,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatCountRequestParameters());
+				requestParams = requestParameters(new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -1394,9 +1452,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatCountRequestParameters());
+				requestParams = requestParameters(new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -1420,20 +1480,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatCount(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatCount(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/count";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatCountRequestParameters());
+				requestParams = requestParameters(new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/count
@@ -1452,20 +1514,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatCountAsync(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatCountAsync(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/count";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatCountRequestParameters());
+				requestParams = requestParameters(new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/count/{index}
@@ -1490,9 +1554,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatCountRequestParameters());
+				requestParams = requestParameters(new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -1522,9 +1588,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatCountRequestParameters());
+				requestParams = requestParameters(new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -1549,21 +1617,23 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatCount(string index, Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatCount(string index, Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/count/{0}".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatCountRequestParameters());
+				requestParams = requestParameters(new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/count/{index}
@@ -1583,21 +1653,23 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatCountAsync(string index, Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatCountAsync(string index, Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/count/{0}".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatCountRequestParameters());
+				requestParams = requestParameters(new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatCountRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/health
@@ -1620,9 +1692,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatHealthRequestParameters());
+				requestParams = requestParameters(new CatHealthRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatHealthRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -1650,9 +1724,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatHealthRequestParameters());
+				requestParams = requestParameters(new CatHealthRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatHealthRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -1676,20 +1752,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatHealth(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatHealth(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/health";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatHealthRequestParameters());
+				requestParams = requestParameters(new CatHealthRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatHealthRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/health
@@ -1708,20 +1786,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatHealthAsync(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatHealthAsync(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/health";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatHealthRequestParameters());
+				requestParams = requestParameters(new CatHealthRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatHealthRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat
@@ -1744,9 +1824,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatHelpRequestParameters());
+				requestParams = requestParameters(new CatHelpRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatHelpRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -1774,9 +1856,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatHelpRequestParameters());
+				requestParams = requestParameters(new CatHelpRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatHelpRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -1800,20 +1884,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatHelp(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatHelp(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null)
 		{
 			var url = "_cat";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatHelpRequestParameters());
+				requestParams = requestParameters(new CatHelpRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatHelpRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat
@@ -1832,20 +1918,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatHelpAsync(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatHelpAsync(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null)
 		{
 			var url = "_cat";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatHelpRequestParameters());
+				requestParams = requestParameters(new CatHelpRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatHelpRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/indices
@@ -1868,9 +1956,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatIndicesRequestParameters());
+				requestParams = requestParameters(new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -1898,9 +1988,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatIndicesRequestParameters());
+				requestParams = requestParameters(new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -1924,20 +2016,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatIndices(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatIndices(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/indices";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatIndicesRequestParameters());
+				requestParams = requestParameters(new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/indices
@@ -1956,20 +2050,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatIndicesAsync(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatIndicesAsync(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/indices";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatIndicesRequestParameters());
+				requestParams = requestParameters(new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/indices/{index}
@@ -1994,9 +2090,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatIndicesRequestParameters());
+				requestParams = requestParameters(new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -2026,9 +2124,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatIndicesRequestParameters());
+				requestParams = requestParameters(new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -2053,21 +2153,23 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatIndices(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatIndices(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/indices/{0}".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatIndicesRequestParameters());
+				requestParams = requestParameters(new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/indices/{index}
@@ -2087,21 +2189,23 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatIndicesAsync(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatIndicesAsync(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/indices/{0}".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatIndicesRequestParameters());
+				requestParams = requestParameters(new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatIndicesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/master
@@ -2124,9 +2228,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatMasterRequestParameters());
+				requestParams = requestParameters(new CatMasterRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatMasterRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -2154,9 +2260,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatMasterRequestParameters());
+				requestParams = requestParameters(new CatMasterRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatMasterRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -2180,20 +2288,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatMaster(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatMaster(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/master";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatMasterRequestParameters());
+				requestParams = requestParameters(new CatMasterRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatMasterRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/master
@@ -2212,20 +2322,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatMasterAsync(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatMasterAsync(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/master";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatMasterRequestParameters());
+				requestParams = requestParameters(new CatMasterRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatMasterRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/nodes
@@ -2248,9 +2360,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatNodesRequestParameters());
+				requestParams = requestParameters(new CatNodesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatNodesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -2278,9 +2392,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatNodesRequestParameters());
+				requestParams = requestParameters(new CatNodesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatNodesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -2304,20 +2420,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatNodes(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatNodes(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/nodes";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatNodesRequestParameters());
+				requestParams = requestParameters(new CatNodesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatNodesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/nodes
@@ -2336,20 +2454,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatNodesAsync(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatNodesAsync(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/nodes";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatNodesRequestParameters());
+				requestParams = requestParameters(new CatNodesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatNodesRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/pending_tasks
@@ -2372,9 +2492,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatPendingTasksRequestParameters());
+				requestParams = requestParameters(new CatPendingTasksRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatPendingTasksRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -2402,9 +2524,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatPendingTasksRequestParameters());
+				requestParams = requestParameters(new CatPendingTasksRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatPendingTasksRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -2428,20 +2552,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatPendingTasks(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatPendingTasks(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/pending_tasks";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatPendingTasksRequestParameters());
+				requestParams = requestParameters(new CatPendingTasksRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatPendingTasksRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/pending_tasks
@@ -2460,20 +2586,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatPendingTasksAsync(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatPendingTasksAsync(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/pending_tasks";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatPendingTasksRequestParameters());
+				requestParams = requestParameters(new CatPendingTasksRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatPendingTasksRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/recovery
@@ -2496,9 +2624,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatRecoveryRequestParameters());
+				requestParams = requestParameters(new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -2526,9 +2656,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatRecoveryRequestParameters());
+				requestParams = requestParameters(new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -2552,20 +2684,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatRecovery(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatRecovery(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/recovery";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatRecoveryRequestParameters());
+				requestParams = requestParameters(new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/recovery
@@ -2584,20 +2718,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatRecoveryAsync(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatRecoveryAsync(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/recovery";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatRecoveryRequestParameters());
+				requestParams = requestParameters(new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/recovery/{index}
@@ -2622,9 +2758,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatRecoveryRequestParameters());
+				requestParams = requestParameters(new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -2654,9 +2792,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatRecoveryRequestParameters());
+				requestParams = requestParameters(new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -2681,21 +2821,23 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatRecovery(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatRecovery(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/recovery/{0}".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatRecoveryRequestParameters());
+				requestParams = requestParameters(new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/recovery/{index}
@@ -2715,21 +2857,23 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatRecoveryAsync(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatRecoveryAsync(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/recovery/{0}".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatRecoveryRequestParameters());
+				requestParams = requestParameters(new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatRecoveryRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/shards
@@ -2752,9 +2896,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatShardsRequestParameters());
+				requestParams = requestParameters(new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -2782,9 +2928,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatShardsRequestParameters());
+				requestParams = requestParameters(new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -2808,20 +2956,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatShards(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatShards(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/shards";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatShardsRequestParameters());
+				requestParams = requestParameters(new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/shards
@@ -2840,20 +2990,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatShardsAsync(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatShardsAsync(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/shards";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatShardsRequestParameters());
+				requestParams = requestParameters(new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/shards/{index}
@@ -2878,9 +3030,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatShardsRequestParameters());
+				requestParams = requestParameters(new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -2910,9 +3064,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatShardsRequestParameters());
+				requestParams = requestParameters(new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -2937,21 +3093,23 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatShards(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatShards(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/shards/{0}".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatShardsRequestParameters());
+				requestParams = requestParameters(new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/shards/{index}
@@ -2971,21 +3129,23 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatShardsAsync(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatShardsAsync(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/shards/{0}".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatShardsRequestParameters());
+				requestParams = requestParameters(new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatShardsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/thread_pool
@@ -3008,9 +3168,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatThreadPoolRequestParameters());
+				requestParams = requestParameters(new CatThreadPoolRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatThreadPoolRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
@@ -3038,9 +3200,11 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatThreadPoolRequestParameters());
+				requestParams = requestParameters(new CatThreadPoolRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatThreadPoolRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -3064,20 +3228,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CatThreadPool(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<string> CatThreadPool(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/thread_pool";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatThreadPoolRequestParameters());
+				requestParams = requestParameters(new CatThreadPoolRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatThreadPoolRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+
+			return this.DoRequest<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a GET on /_cat/thread_pool
@@ -3096,20 +3262,22 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CatThreadPoolAsync(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<string>> CatThreadPoolAsync(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/thread_pool";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CatThreadPoolRequestParameters());
+				requestParams = requestParameters(new CatThreadPoolRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
 				ToNameValueCollection(requestParams);
 			}
+			else requestParams = new CatThreadPoolRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
 
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+
+			return this.DoRequestAsync<string>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			));
+			);
 		}
 		
 		///<summary>Represents a DELETE on /_search/scroll/{scroll_id}
@@ -3137,6 +3305,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClearScrollRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequest<T>(
 				"DELETE", url, data: null, 
@@ -3169,6 +3338,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClearScrollRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"DELETE", url, data: null, 
@@ -3204,6 +3374,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -3238,6 +3409,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -3268,6 +3440,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -3297,6 +3470,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClusterGetSettingsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -3330,6 +3504,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -3362,6 +3537,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -3392,6 +3568,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -3421,6 +3598,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClusterHealthRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -3454,6 +3632,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -3485,6 +3664,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClusterHealthRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -3518,6 +3698,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -3549,6 +3730,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClusterHealthRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -3584,6 +3766,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -3618,6 +3801,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -3648,6 +3832,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -3677,6 +3862,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClusterPendingTasksRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -3710,6 +3896,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -3742,6 +3929,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -3773,6 +3961,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -3803,6 +3992,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClusterPutSettingsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -3837,6 +4027,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -3870,6 +4061,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -3901,6 +4093,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -3931,6 +4124,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClusterRerouteRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -3965,6 +4159,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -3998,6 +4193,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -4028,6 +4224,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -4057,6 +4254,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClusterStateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -4090,6 +4288,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -4121,6 +4320,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClusterStateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -4154,6 +4354,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -4185,6 +4386,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClusterStateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -4220,6 +4422,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -4253,6 +4456,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClusterStateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -4288,6 +4492,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -4321,6 +4526,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClusterStateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -4358,6 +4564,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -4394,6 +4601,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -4424,6 +4632,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -4453,6 +4662,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClusterStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -4486,6 +4696,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -4517,6 +4728,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClusterStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -4550,6 +4762,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -4581,6 +4794,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClusterStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -4616,6 +4830,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -4650,6 +4865,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -4681,6 +4897,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -4711,6 +4928,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -4745,6 +4963,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -4777,6 +4996,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -4811,6 +5031,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -4843,6 +5064,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -4879,6 +5101,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -4913,6 +5136,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -4949,6 +5173,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -4983,6 +5208,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -5021,6 +5247,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -5058,6 +5285,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -5088,6 +5316,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -5117,6 +5346,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -5150,6 +5380,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -5181,6 +5412,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -5214,6 +5446,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -5245,6 +5478,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -5280,6 +5514,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -5313,6 +5548,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -5348,6 +5584,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -5381,6 +5618,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -5418,6 +5656,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -5454,6 +5693,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -5488,6 +5728,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -5521,6 +5762,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountPercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -5558,6 +5800,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -5593,6 +5836,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountPercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -5630,6 +5874,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -5665,6 +5910,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountPercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -5704,6 +5950,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -5742,6 +5989,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -5777,6 +6025,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -5811,6 +6060,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountPercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -5849,6 +6099,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -5885,6 +6136,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountPercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -5923,6 +6175,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -5959,6 +6212,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CountPercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -5999,6 +6253,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -6038,6 +6293,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -6074,6 +6330,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -6109,6 +6366,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new DeleteRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"DELETE", url, data: null, 
@@ -6148,6 +6406,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -6186,6 +6445,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -6219,6 +6479,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"DELETE", url, body, 
 				requestParameters: requestParams
@@ -6251,6 +6512,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new DeleteByQueryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"DELETE", url, body, 
@@ -6287,6 +6549,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, body, 
 				requestParameters: requestParams
@@ -6321,6 +6584,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new DeleteByQueryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, body, 
@@ -6357,6 +6621,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"DELETE", url, body, 
 				requestParameters: requestParams
@@ -6391,6 +6656,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new DeleteByQueryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"DELETE", url, body, 
@@ -6429,6 +6695,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, body, 
 				requestParameters: requestParams
@@ -6466,6 +6733,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, body, 
 				requestParameters: requestParams
@@ -6502,6 +6770,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -6537,6 +6806,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ExistsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"HEAD", url, data: null, 
@@ -6576,6 +6846,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -6614,6 +6885,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -6650,6 +6922,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -6685,6 +6958,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ExplainRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -6724,6 +6998,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -6762,6 +7037,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -6799,6 +7075,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -6835,6 +7112,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ExplainRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -6875,6 +7153,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -6914,6 +7193,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -6950,6 +7230,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -6985,6 +7266,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -7024,6 +7306,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -7062,6 +7345,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -7098,6 +7382,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -7133,6 +7418,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SourceRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -7172,6 +7458,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -7210,6 +7497,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -7245,6 +7533,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -7279,6 +7568,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndexRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -7317,6 +7607,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -7353,6 +7644,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndexRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -7391,6 +7683,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -7427,6 +7720,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndexRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -7467,6 +7761,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -7506,6 +7801,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -7541,6 +7837,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -7575,6 +7872,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndexRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -7613,6 +7911,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -7649,6 +7948,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndexRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
@@ -7687,6 +7987,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -7723,6 +8024,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndexRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -7763,6 +8065,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -7802,6 +8105,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -7832,6 +8136,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -7861,6 +8166,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new AnalyzeRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -7894,6 +8200,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -7925,6 +8232,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new AnalyzeRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -7958,6 +8266,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -7989,6 +8298,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new AnalyzeRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -8024,6 +8334,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -8058,6 +8369,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -8089,6 +8401,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -8119,6 +8432,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new AnalyzeRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -8153,6 +8467,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -8185,6 +8500,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new AnalyzeRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -8219,6 +8535,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -8251,6 +8568,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new AnalyzeRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -8287,6 +8605,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -8322,6 +8641,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -8352,6 +8672,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -8381,6 +8702,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClearCacheRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, data: null, 
@@ -8414,6 +8736,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -8445,6 +8768,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClearCacheRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
@@ -8478,6 +8802,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -8509,6 +8834,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClearCacheRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, data: null, 
@@ -8544,6 +8870,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -8578,6 +8905,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -8608,6 +8936,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -8637,6 +8966,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClearCacheRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -8670,6 +9000,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -8701,6 +9032,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClearCacheRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -8734,6 +9066,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -8765,6 +9098,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ClearCacheRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -8800,6 +9134,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -8834,6 +9169,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -8866,6 +9202,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -8897,6 +9234,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CloseIndexRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, data: null, 
@@ -8932,6 +9270,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -8966,6 +9305,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -8999,6 +9339,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -9031,6 +9372,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CreateIndexRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -9067,6 +9409,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -9102,6 +9445,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -9135,6 +9479,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -9167,6 +9512,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new CreateIndexRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -9203,6 +9549,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -9238,6 +9585,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -9270,6 +9618,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -9301,6 +9650,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new DeleteIndexRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"DELETE", url, data: null, 
@@ -9336,6 +9686,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -9369,6 +9720,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new DeleteIndexRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
@@ -9404,6 +9756,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -9437,6 +9790,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesDeleteAliasRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"DELETE", url, data: null, 
@@ -9474,6 +9828,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -9510,6 +9865,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -9544,6 +9900,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -9577,6 +9934,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new DeleteMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"DELETE", url, data: null, 
@@ -9614,6 +9972,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -9650,6 +10009,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -9682,6 +10042,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -9713,6 +10074,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new DeleteTemplateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"DELETE", url, data: null, 
@@ -9748,6 +10110,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -9781,6 +10144,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new DeleteTemplateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
@@ -9816,6 +10180,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -9849,6 +10214,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new DeleteWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"DELETE", url, data: null, 
@@ -9886,6 +10252,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -9922,6 +10289,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -9954,6 +10322,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -9985,6 +10354,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndexExistsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"HEAD", url, data: null, 
@@ -10020,6 +10390,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -10054,6 +10425,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -10086,6 +10458,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -10117,6 +10490,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"HEAD", url, data: null, 
@@ -10152,6 +10526,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -10185,6 +10560,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
@@ -10220,6 +10596,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -10253,6 +10630,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"HEAD", url, data: null, 
@@ -10290,6 +10668,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -10326,6 +10705,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -10358,6 +10738,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -10389,6 +10770,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"HEAD", url, data: null, 
@@ -10424,6 +10806,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -10458,6 +10841,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -10490,6 +10874,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -10521,6 +10906,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesExistsTemplateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"HEAD", url, data: null, 
@@ -10556,6 +10942,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -10589,6 +10976,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesExistsTemplateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
@@ -10624,6 +11012,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -10657,6 +11046,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesExistsTypeRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"HEAD", url, data: null, 
@@ -10694,6 +11084,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -10730,6 +11121,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -10760,6 +11152,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -10789,6 +11182,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new FlushRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, data: null, 
@@ -10822,6 +11216,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -10853,6 +11248,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new FlushRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
@@ -10886,6 +11282,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -10917,6 +11314,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new FlushRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, data: null, 
@@ -10952,6 +11350,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -10986,6 +11385,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -11016,6 +11416,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11045,6 +11446,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new FlushRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -11078,6 +11480,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11109,6 +11512,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new FlushRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -11142,6 +11546,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11173,6 +11578,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new FlushRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -11208,6 +11614,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11242,6 +11649,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11272,6 +11680,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11301,6 +11710,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetAliasesRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -11334,6 +11744,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11365,6 +11776,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetAliasesRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -11398,6 +11810,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11429,6 +11842,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetAliasesRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -11464,6 +11878,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11497,6 +11912,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetAliasesRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -11532,6 +11948,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11565,6 +11982,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetAliasesRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -11602,6 +12020,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11638,6 +12057,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11670,6 +12090,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11701,6 +12122,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetAliasesRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -11736,6 +12158,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11770,6 +12193,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11800,6 +12224,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11829,6 +12254,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -11862,6 +12288,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11893,6 +12320,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -11926,6 +12354,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -11957,6 +12386,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -11992,6 +12422,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12025,6 +12456,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -12060,6 +12492,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12093,6 +12526,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -12130,6 +12564,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12166,6 +12601,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12198,6 +12634,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12229,6 +12666,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -12264,6 +12702,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12298,6 +12737,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12330,6 +12770,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12361,6 +12802,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -12396,6 +12838,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12429,6 +12872,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -12464,6 +12908,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12497,6 +12942,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -12534,6 +12980,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12570,6 +13017,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12604,6 +13052,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12637,6 +13086,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -12674,6 +13124,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12709,6 +13160,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -12746,6 +13198,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12781,6 +13234,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -12820,6 +13274,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12858,6 +13313,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12888,6 +13344,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12917,6 +13374,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -12950,6 +13408,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -12981,6 +13440,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -13014,6 +13474,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13045,6 +13506,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -13080,6 +13542,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13114,6 +13577,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13146,6 +13610,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13177,6 +13642,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -13212,6 +13678,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13245,6 +13712,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -13280,6 +13748,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13313,6 +13782,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -13350,6 +13820,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13386,6 +13857,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13416,6 +13888,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13445,6 +13918,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -13478,6 +13952,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13509,6 +13984,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -13542,6 +14018,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13573,6 +14050,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -13608,6 +14086,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13641,6 +14120,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -13676,6 +14156,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13709,6 +14190,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -13746,6 +14228,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13782,6 +14265,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13814,6 +14298,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13845,6 +14330,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -13880,6 +14366,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13914,6 +14401,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13944,6 +14432,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -13973,6 +14462,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetTemplateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -14006,6 +14496,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14037,6 +14528,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetTemplateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -14070,6 +14562,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14101,6 +14594,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetTemplateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -14136,6 +14630,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14170,6 +14665,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14200,6 +14696,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14229,6 +14726,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -14262,6 +14760,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14293,6 +14792,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -14326,6 +14826,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14357,6 +14858,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -14392,6 +14894,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14425,6 +14928,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -14460,6 +14964,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14493,6 +14998,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -14530,6 +15036,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14566,6 +15073,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14598,6 +15106,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14629,6 +15138,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -14664,6 +15174,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14697,6 +15208,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -14734,6 +15246,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14769,6 +15282,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new GetWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -14808,6 +15322,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14846,6 +15361,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -14878,6 +15394,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -14909,6 +15426,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new OpenIndexRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, data: null, 
@@ -14944,6 +15462,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -14978,6 +15497,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -15008,6 +15528,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -15037,6 +15558,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new OptimizeRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, data: null, 
@@ -15070,6 +15592,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -15101,6 +15624,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new OptimizeRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
@@ -15134,6 +15658,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -15165,6 +15690,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new OptimizeRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, data: null, 
@@ -15200,6 +15726,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -15234,6 +15761,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -15264,6 +15792,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -15293,6 +15822,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new OptimizeRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -15326,6 +15856,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -15357,6 +15888,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new OptimizeRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -15390,6 +15922,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -15421,6 +15954,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new OptimizeRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -15456,6 +15990,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -15489,6 +16024,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new OptimizeRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -15525,6 +16061,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -15559,6 +16096,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -15597,6 +16135,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -15634,6 +16173,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -15667,6 +16207,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -15699,6 +16240,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -15735,6 +16277,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -15769,6 +16312,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
@@ -15805,6 +16349,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -15839,6 +16384,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -15877,6 +16423,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -15914,6 +16461,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -15947,6 +16495,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -15979,6 +16528,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -16015,6 +16565,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -16049,6 +16600,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -16085,6 +16637,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -16119,6 +16672,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -16157,6 +16711,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -16194,6 +16749,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -16227,6 +16783,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -16259,6 +16816,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -16295,6 +16853,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -16329,6 +16888,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
@@ -16365,6 +16925,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -16399,6 +16960,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -16437,6 +16999,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -16474,6 +17037,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -16507,6 +17071,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -16539,6 +17104,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutMappingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -16575,6 +17141,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -16610,6 +17177,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -16641,6 +17209,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -16671,6 +17240,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new UpdateSettingsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -16705,6 +17275,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -16737,6 +17308,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new UpdateSettingsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
@@ -16771,6 +17343,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -16803,6 +17376,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new UpdateSettingsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -16839,6 +17413,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -16874,6 +17449,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -16907,6 +17483,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -16939,6 +17516,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutTemplateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -16975,6 +17553,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -17010,6 +17589,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -17043,6 +17623,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -17075,6 +17656,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutTemplateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -17111,6 +17693,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -17146,6 +17729,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -17179,6 +17763,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -17211,6 +17796,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -17247,6 +17833,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -17281,6 +17868,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
@@ -17317,6 +17905,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -17351,6 +17940,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -17389,6 +17979,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -17425,6 +18016,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
@@ -17463,6 +18055,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -17499,6 +18092,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -17539,6 +18133,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -17578,6 +18173,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -17611,6 +18207,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -17643,6 +18240,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -17679,6 +18277,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -17713,6 +18312,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -17749,6 +18349,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -17783,6 +18384,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -17821,6 +18423,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -17857,6 +18460,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -17895,6 +18499,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -17931,6 +18536,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PutWarmerRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -17971,6 +18577,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -18010,6 +18617,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -18040,6 +18648,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -18069,6 +18678,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new RefreshRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, data: null, 
@@ -18102,6 +18712,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -18133,6 +18744,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new RefreshRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
@@ -18166,6 +18778,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -18197,6 +18810,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new RefreshRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, data: null, 
@@ -18232,6 +18846,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -18266,6 +18881,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -18296,6 +18912,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -18325,6 +18942,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new RefreshRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -18358,6 +18976,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -18389,6 +19008,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new RefreshRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -18422,6 +19042,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -18453,6 +19074,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new RefreshRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -18488,6 +19110,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -18522,6 +19145,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -18552,6 +19176,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -18581,6 +19206,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SegmentsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -18614,6 +19240,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -18645,6 +19272,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SegmentsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -18678,6 +19306,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -18709,6 +19338,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SegmentsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -18744,6 +19374,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -18778,6 +19409,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -18808,6 +19440,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -18837,6 +19470,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, data: null, 
@@ -18870,6 +19504,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -18901,6 +19536,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
@@ -18934,6 +19570,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -18965,6 +19602,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, data: null, 
@@ -19000,6 +19638,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -19034,6 +19673,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -19064,6 +19704,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -19093,6 +19734,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -19126,6 +19768,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -19157,6 +19800,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -19190,6 +19834,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -19221,6 +19866,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -19256,6 +19902,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -19290,6 +19937,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -19322,6 +19970,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -19353,6 +20002,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -19388,6 +20038,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -19421,6 +20072,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -19456,6 +20108,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -19489,6 +20142,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -19526,6 +20180,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -19562,6 +20217,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -19592,6 +20248,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -19621,6 +20278,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesStatusRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -19654,6 +20312,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -19685,6 +20344,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesStatusRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -19718,6 +20378,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -19749,6 +20410,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new IndicesStatusRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -19784,6 +20446,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -19818,6 +20481,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -19849,6 +20513,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -19879,6 +20544,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new AliasRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -19913,6 +20579,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -19946,6 +20613,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -19976,6 +20644,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -20005,6 +20674,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -20038,6 +20708,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -20069,6 +20740,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -20102,6 +20774,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -20133,6 +20806,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -20168,6 +20842,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -20201,6 +20876,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -20236,6 +20912,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -20269,6 +20946,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -20306,6 +20984,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -20342,6 +21021,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -20373,6 +21053,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -20403,6 +21084,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -20437,6 +21119,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -20469,6 +21152,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -20503,6 +21187,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -20535,6 +21220,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -20571,6 +21257,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -20605,6 +21292,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -20641,6 +21329,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -20675,6 +21364,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -20713,6 +21403,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -20750,6 +21441,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -20780,6 +21472,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -20809,6 +21502,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new InfoRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -20842,6 +21536,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -20874,6 +21569,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -20904,6 +21600,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -20933,6 +21630,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiGetRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -20966,6 +21664,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -20997,6 +21696,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiGetRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -21030,6 +21730,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -21061,6 +21762,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiGetRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -21096,6 +21798,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -21129,6 +21832,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiGetRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -21164,6 +21868,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -21197,6 +21902,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiGetRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -21234,6 +21940,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -21270,6 +21977,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -21301,6 +22009,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -21331,6 +22040,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiGetRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -21365,6 +22075,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -21397,6 +22108,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiGetRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -21431,6 +22143,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -21463,6 +22176,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiGetRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -21499,6 +22213,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -21533,6 +22248,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiGetRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -21569,6 +22285,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -21603,6 +22320,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiGetRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -21641,6 +22359,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -21678,6 +22397,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -21714,6 +22434,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -21749,6 +22470,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MoreLikeThisRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -21788,6 +22510,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -21826,6 +22549,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -21863,6 +22587,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -21899,6 +22624,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MoreLikeThisRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -21939,6 +22665,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -21978,6 +22705,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -22008,6 +22736,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -22037,6 +22766,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MpercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -22070,6 +22800,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -22101,6 +22832,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MpercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -22134,6 +22866,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -22165,6 +22898,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MpercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -22200,6 +22934,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -22233,6 +22968,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MpercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -22268,6 +23004,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -22301,6 +23038,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MpercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -22338,6 +23076,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -22374,6 +23113,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -22405,6 +23145,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -22435,6 +23176,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MpercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -22469,6 +23211,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -22501,6 +23244,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MpercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -22535,6 +23279,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -22567,6 +23312,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MpercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -22603,6 +23349,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -22637,6 +23384,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MpercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -22673,6 +23421,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -22707,6 +23456,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MpercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -22745,6 +23495,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -22782,6 +23533,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -22812,6 +23564,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -22841,6 +23594,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiSearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -22874,6 +23628,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -22905,6 +23660,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiSearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -22938,6 +23694,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -22969,6 +23726,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiSearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -23004,6 +23762,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -23037,6 +23796,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiSearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -23072,6 +23832,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -23105,6 +23866,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiSearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -23142,6 +23904,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -23178,6 +23941,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -23209,6 +23973,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -23239,6 +24004,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiSearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -23273,6 +24039,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -23305,6 +24072,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiSearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -23339,6 +24107,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -23371,6 +24140,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiSearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -23407,6 +24177,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -23441,6 +24212,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiSearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -23477,6 +24249,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -23511,6 +24284,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MultiSearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -23549,6 +24323,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -23586,6 +24361,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -23616,6 +24392,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -23645,6 +24422,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MtermvectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -23678,6 +24456,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -23709,6 +24488,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MtermvectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -23742,6 +24522,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -23773,6 +24554,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MtermvectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -23808,6 +24590,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -23841,6 +24624,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MtermvectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -23876,6 +24660,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -23909,6 +24694,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MtermvectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -23946,6 +24732,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -23982,6 +24769,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -24013,6 +24801,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -24043,6 +24832,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MtermvectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -24077,6 +24867,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -24109,6 +24900,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MtermvectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -24143,6 +24935,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -24175,6 +24968,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MtermvectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -24211,6 +25005,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -24245,6 +25040,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MtermvectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -24281,6 +25077,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -24315,6 +25112,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new MtermvectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -24353,6 +25151,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -24390,6 +25189,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -24420,6 +25220,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -24449,6 +25250,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesHotThreadsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -24482,6 +25284,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -24513,6 +25316,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesHotThreadsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -24546,6 +25350,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -24577,6 +25382,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesHotThreadsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -24612,6 +25418,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -24646,6 +25453,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -24676,6 +25484,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -24705,6 +25514,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesInfoRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -24738,6 +25548,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -24769,6 +25580,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesInfoRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -24802,6 +25614,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -24833,6 +25646,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesInfoRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -24868,6 +25682,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -24902,6 +25717,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -24934,6 +25750,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -24965,6 +25782,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesInfoRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -25000,6 +25818,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -25033,6 +25852,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesInfoRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -25068,6 +25888,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -25101,6 +25922,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesInfoRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -25138,6 +25960,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -25174,6 +25997,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -25204,6 +26028,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -25233,6 +26058,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesShutdownRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, data: null, 
@@ -25266,6 +26092,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -25297,6 +26124,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesShutdownRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
@@ -25330,6 +26158,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -25361,6 +26190,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesShutdownRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, data: null, 
@@ -25396,6 +26226,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -25430,6 +26261,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
@@ -25460,6 +26292,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -25489,6 +26322,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -25522,6 +26356,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -25553,6 +26388,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -25586,6 +26422,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -25617,6 +26454,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -25652,6 +26490,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -25686,6 +26525,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -25718,6 +26558,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -25749,6 +26590,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -25784,6 +26626,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -25817,6 +26660,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -25852,6 +26696,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -25885,6 +26730,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -25922,6 +26768,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -25958,6 +26805,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -25992,6 +26840,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -26025,6 +26874,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -26062,6 +26912,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -26097,6 +26948,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -26134,6 +26986,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -26169,6 +27022,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new NodesStatsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -26208,6 +27062,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -26246,6 +27101,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -26280,6 +27136,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -26313,6 +27170,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -26350,6 +27208,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -26385,6 +27244,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -26422,6 +27282,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -26457,6 +27318,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -26496,6 +27358,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -26534,6 +27397,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -26569,6 +27433,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -26603,6 +27468,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -26641,6 +27507,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -26677,6 +27544,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -26715,6 +27583,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -26751,6 +27620,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PercolateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -26791,6 +27661,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -26830,6 +27701,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -26860,6 +27732,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -26889,6 +27762,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new PingRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"HEAD", url, data: null, 
@@ -26922,6 +27796,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -26954,6 +27829,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
@@ -26984,6 +27860,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -27013,6 +27890,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ScrollRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -27046,6 +27924,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -27077,6 +27956,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ScrollRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -27110,6 +27990,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -27141,6 +28022,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ScrollRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -27176,6 +28058,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -27210,6 +28093,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -27241,6 +28125,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -27271,6 +28156,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ScrollRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -27305,6 +28191,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -27337,6 +28224,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ScrollRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -27371,6 +28259,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -27403,6 +28292,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new ScrollRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -27439,6 +28329,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -27474,6 +28365,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -27504,6 +28396,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -27533,6 +28426,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -27566,6 +28460,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -27597,6 +28492,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -27630,6 +28526,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -27661,6 +28558,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -27696,6 +28594,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -27729,6 +28628,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -27764,6 +28664,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -27797,6 +28698,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -27834,6 +28736,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -27870,6 +28773,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -27901,6 +28805,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -27931,6 +28836,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -27965,6 +28871,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -27997,6 +28904,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -28031,6 +28939,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -28063,6 +28972,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -28099,6 +29009,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -28133,6 +29044,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -28169,6 +29081,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -28203,6 +29116,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SearchRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -28241,6 +29155,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -28278,6 +29193,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -28313,6 +29229,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -28347,6 +29264,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotCreateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -28385,6 +29303,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -28422,6 +29341,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -28457,6 +29377,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -28491,6 +29412,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotCreateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -28529,6 +29451,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -28566,6 +29489,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -28599,6 +29523,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -28631,6 +29556,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotCreateRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"PUT", url, body, 
@@ -28667,6 +29593,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -28702,6 +29629,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
@@ -28735,6 +29663,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -28767,6 +29696,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotCreateRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -28803,6 +29733,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -28838,6 +29769,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -28872,6 +29804,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -28905,6 +29838,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotDeleteRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"DELETE", url, data: null, 
@@ -28942,6 +29876,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -28978,6 +29913,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -29010,6 +29946,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -29041,6 +29978,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotDeleteRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"DELETE", url, data: null, 
@@ -29076,6 +30014,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
@@ -29109,6 +30048,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotDeleteRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
@@ -29144,6 +30084,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -29177,6 +30118,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotGetRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -29214,6 +30156,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -29250,6 +30193,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -29280,6 +30224,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -29309,6 +30254,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -29342,6 +30288,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -29373,6 +30320,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -29406,6 +30354,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -29437,6 +30386,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -29472,6 +30422,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -29505,6 +30456,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -29541,6 +30493,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -29575,6 +30528,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SnapshotRestoreRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -29613,6 +30567,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -29650,6 +30605,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -29681,6 +30637,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -29711,6 +30668,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SuggestRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -29745,6 +30703,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -29777,6 +30736,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SuggestRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
@@ -29811,6 +30771,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -29843,6 +30804,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SuggestRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -29879,6 +30841,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -29914,6 +30877,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -29944,6 +30908,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -29973,6 +30938,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SuggestRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -30006,6 +30972,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -30037,6 +31004,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SuggestRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -30070,6 +31038,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -30101,6 +31070,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SuggestRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -30136,6 +31106,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -30169,6 +31140,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new SuggestRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
@@ -30206,6 +31178,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -30241,6 +31214,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new TermvectorRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"GET", url, data: null, 
@@ -30280,6 +31254,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -30318,6 +31293,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
@@ -30355,6 +31331,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -30391,6 +31368,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new TermvectorRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -30431,6 +31409,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -30470,6 +31449,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -30507,6 +31487,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return this.DoRequest<T>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -30543,6 +31524,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new UpdateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return this.DoRequestAsync<T>(
 				"POST", url, body, 
@@ -30583,6 +31565,7 @@ namespace Elasticsearch.Net
 				ToNameValueCollection(requestParams);
 			}
 
+
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
@@ -30621,6 +31604,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new UpdateRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
+
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 

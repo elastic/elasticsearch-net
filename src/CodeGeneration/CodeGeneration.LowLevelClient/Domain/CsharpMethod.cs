@@ -6,6 +6,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 	{
 		public string ReturnType { get; set; }
 		public string ReturnTypeGeneric { get; set; }
+		public string CallTypeGeneric { get; set; }
 		public string ReturnDescription { get; set; }
 		public string FullName { get; set; }
 		public string QueryStringParamName { get; set; }

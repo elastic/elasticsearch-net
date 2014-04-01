@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.Remoting.Channels;
@@ -22,7 +23,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 		protected static readonly Version _versionNumber;
 		
 		protected object _body;
-		protected ElasticsearchResponse<DynamicDictionary> _status;
+		protected IElasticsearchResponse _status;
 		protected dynamic _response;
 
 		protected static ElasticsearchResponse<string> _x; 
@@ -49,7 +50,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			_client.IndicesDelete("*");
 		}
 
-		protected void Do(Func<ElasticsearchResponse<DynamicDictionary>> action, string shouldCatch = null)
+		protected void Do(Func<IElasticsearchResponse> action, string shouldCatch = null)
 		{
 			try
 			{
@@ -81,7 +82,11 @@ namespace Elasticsearch.Net.Integration.Yaml
 				Assert.IsTrue(Regex.IsMatch(Encoding.UTF8.GetString(this._status.ResponseRaw), re),
 					"response does not match regex: " + shouldCatch);
 			}
-			this._response = this._status.Response;
+			if (this._status is ElasticsearchResponse<DynamicDictionary>)
+				this._response = (this._status as ElasticsearchResponse<DynamicDictionary>).Response;
+			
+			if (this._status is ElasticsearchResponse<string>)
+				this._response = (this._status as ElasticsearchResponse<string>).Response;
 		}
 
 		protected void Skip(string version, string reason)
@@ -225,6 +230,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			if (o is JArray) o = ((JArray) o).ToObject<object[]>();
 			if (o is JObject) o = ((JToken) o).ToObject<Dictionary<string, object>>();
 			if (o is ElasticsearchResponse<DynamicDictionary>) o = ((ElasticsearchResponse<DynamicDictionary>)o).Response;
+			if (o is ElasticsearchResponse<string>) o = ((ElasticsearchResponse<string>)o).Response;
 			return o;
 		}
 

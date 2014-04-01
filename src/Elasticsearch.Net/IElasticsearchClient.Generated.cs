@@ -555,7 +555,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatAliases(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatAliases(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/aliases
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -574,7 +574,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatAliasesAsync(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatAliasesAsync(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/aliases/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -630,7 +630,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatAliases(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatAliases(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/aliases/{name}
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -650,7 +650,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatAliasesAsync(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatAliasesAsync(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/allocation
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -703,7 +703,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatAllocation(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatAllocation(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/allocation
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -722,7 +722,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatAllocationAsync(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatAllocationAsync(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/allocation/{node_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -778,7 +778,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatAllocation(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatAllocation(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/allocation/{node_id}
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -798,7 +798,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatAllocationAsync(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatAllocationAsync(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/count
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -851,7 +851,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatCount(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatCount(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/count
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -870,7 +870,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatCountAsync(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatCountAsync(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/count/{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -926,7 +926,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatCount(string index, Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatCount(string index, Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/count/{index}
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -946,7 +946,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatCountAsync(string index, Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatCountAsync(string index, Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/health
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -999,7 +999,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatHealth(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatHealth(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/health
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -1018,7 +1018,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatHealthAsync(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatHealthAsync(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -1071,7 +1071,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatHelp(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatHelp(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -1090,7 +1090,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatHelpAsync(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatHelpAsync(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/indices
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -1143,7 +1143,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatIndices(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatIndices(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/indices
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -1162,7 +1162,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatIndicesAsync(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatIndicesAsync(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/indices/{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -1218,7 +1218,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatIndices(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatIndices(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/indices/{index}
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -1238,7 +1238,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatIndicesAsync(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatIndicesAsync(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/master
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -1291,7 +1291,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatMaster(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatMaster(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/master
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -1310,7 +1310,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatMasterAsync(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatMasterAsync(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/nodes
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -1363,7 +1363,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatNodes(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatNodes(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/nodes
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -1382,7 +1382,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatNodesAsync(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatNodesAsync(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/pending_tasks
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -1435,7 +1435,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatPendingTasks(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatPendingTasks(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/pending_tasks
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -1454,7 +1454,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatPendingTasksAsync(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatPendingTasksAsync(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/recovery
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -1507,7 +1507,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatRecovery(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatRecovery(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/recovery
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -1526,7 +1526,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatRecoveryAsync(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatRecoveryAsync(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/recovery/{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -1582,7 +1582,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatRecovery(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatRecovery(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/recovery/{index}
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -1602,7 +1602,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatRecoveryAsync(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatRecoveryAsync(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/shards
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -1655,7 +1655,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatShards(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatShards(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/shards
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -1674,7 +1674,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatShardsAsync(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatShardsAsync(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/shards/{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -1730,7 +1730,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatShards(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatShards(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/shards/{index}
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -1750,7 +1750,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatShardsAsync(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatShardsAsync(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/thread_pool
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -1803,7 +1803,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CatThreadPool(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null);
+		ElasticsearchResponse<string> CatThreadPool(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_cat/thread_pool
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -1822,7 +1822,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CatThreadPoolAsync(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<string>> CatThreadPoolAsync(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a DELETE on /_search/scroll/{scroll_id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.

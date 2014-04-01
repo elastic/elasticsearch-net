@@ -90,7 +90,7 @@ namespace Elasticsearch.Net.Connection
 				.RequestTimeout(pingTimeout)
 				.DisableSniffing();
 			var requestParameters = new FluentRequestParameters()
-				.RequestConfiguration(requestOverrides);
+				.RequestConfiguration(r => requestOverrides);
 			
 			var path = "_nodes/_all/clear?timeout=" + pingTimeout;
 

@@ -10,7 +10,7 @@ namespace Elasticsearch.Net
 		
 		internal object _DeserializationState = null;
 
-		internal IRequestConfiguration _RequestConfiguration = null;
+		internal RequestConfiguration _RequestConfiguration = null;
 		internal NameValueCollection _queryString;
 
 		NameValueCollection IRequestParameters.QueryString { get { return _queryString;}  }

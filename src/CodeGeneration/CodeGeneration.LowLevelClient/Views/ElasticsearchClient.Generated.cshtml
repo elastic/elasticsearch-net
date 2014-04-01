@@ -65,15 +65,20 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new @(method.QueryStringParamName)());
+				requestParams = requestParameters(new @(method.QueryStringParamName)()@(url.StartsWith("_cat") ? Raw(".RequestConfiguration(r=>r.ContentType(\"text/plain\"))") : null));
 				ToNameValueCollection(requestParams);
 			}
+			@if (url.StartsWith("_cat"))
+			{
+<text>			else requestParams = new @(method.QueryStringParamName)().RequestConfiguration(r=>r.ContentType("text/plain")); </text>
+			}
+
 			@{
 			bool isAsync = method.ReturnType.StartsWith("Task<");
 			string requestMethod = isAsync ? "DoRequestAsync" : "DoRequest";
-			bool wrap = method.ReturnTypeGeneric == null;
+			bool wrap = method.CallTypeGeneric == "Dictionary<string, object>";
 		}
-			return @(wrap ? "ElasticsearchResponse.Wrap"+ (isAsync ? "Async" : "") +"("  : "")this.@(requestMethod)@(Raw(method.ReturnTypeGeneric ?? "<Dictionary<string, object>>"))(
+			return @(wrap ? "ElasticsearchResponse.Wrap"+ (isAsync ? "Async" : "") +"("  : "")this.@(requestMethod)@(Raw("<" + method.CallTypeGeneric + ">"))(
 				"@method.HttpMethod", url@(method.Parts.Any(pp=>pp.Name == "body") ? ", body" : ", data: null"), 
 				requestParameters: requestParams
 			)@(wrap ? ")" : "");

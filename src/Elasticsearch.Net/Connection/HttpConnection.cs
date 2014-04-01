@@ -71,46 +71,46 @@ namespace Elasticsearch.Net.Connection
 
 		private ElasticsearchResponse<Stream> HeaderOnlyRequest(Uri uri, string method, IRequestConnectionConfiguration requestSpecificConfig)
 		{
-			var r = this.CreateHttpWebRequest(uri, method);
+			var r = this.CreateHttpWebRequest(uri, method, requestSpecificConfig);
 			return this.DoSynchronousRequest(r, requestSpecificConfig: requestSpecificConfig);
 		}
 
 		private ElasticsearchResponse<Stream> BodyRequest(Uri uri, byte[] data, string method, IRequestConnectionConfiguration requestSpecificConfig)
 		{
-			var r = this.CreateHttpWebRequest(uri, method);
+			var r = this.CreateHttpWebRequest(uri, method, requestSpecificConfig);
 			return this.DoSynchronousRequest(r, data, requestSpecificConfig);
 		}
 
 		public virtual Task<ElasticsearchResponse<Stream>> Get(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
-			var r = this.CreateHttpWebRequest(uri, "GET");
+			var r = this.CreateHttpWebRequest(uri, "GET", requestSpecificConfig);
 			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
 		}
 		public virtual Task<ElasticsearchResponse<Stream>> Head(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
-			var r = this.CreateHttpWebRequest(uri, "HEAD");
+			var r = this.CreateHttpWebRequest(uri, "HEAD", requestSpecificConfig);
 			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
 		}
 		public virtual Task<ElasticsearchResponse<Stream>> Post(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
-			var r = this.CreateHttpWebRequest(uri, "POST");
+			var r = this.CreateHttpWebRequest(uri, "POST", requestSpecificConfig);
 			return this.DoAsyncRequest(r, data, requestSpecificConfig: requestSpecificConfig);
 		}
 
 		public virtual Task<ElasticsearchResponse<Stream>> Put(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
-			var r = this.CreateHttpWebRequest(uri, "PUT");
+			var r = this.CreateHttpWebRequest(uri, "PUT", requestSpecificConfig);
 			return this.DoAsyncRequest(r, data, requestSpecificConfig: requestSpecificConfig);
 		}
 
 		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
-			var r = this.CreateHttpWebRequest(uri, "DELETE");
+			var r = this.CreateHttpWebRequest(uri, "DELETE", requestSpecificConfig);
 			return this.DoAsyncRequest(r, data, requestSpecificConfig: requestSpecificConfig);
 		}
 		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
-			var r = this.CreateHttpWebRequest(uri, "DELETE");
+			var r = this.CreateHttpWebRequest(uri, "DELETE", requestSpecificConfig);
 			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
 		}
 
@@ -127,9 +127,9 @@ namespace Elasticsearch.Net.Connection
 		}
 
 
-		protected virtual HttpWebRequest CreateHttpWebRequest(Uri uri, string method)
+		protected virtual HttpWebRequest CreateHttpWebRequest(Uri uri, string method, IRequestConnectionConfiguration requestSpecificConfig)
 		{
-			var myReq = this.CreateWebRequest(uri, method);
+			var myReq = this.CreateWebRequest(uri, method, requestSpecificConfig);
 			this.SetBasicAuthorizationIfNeeded(myReq);
 			this.SetProxyIfNeeded(myReq);
 			return myReq;
@@ -160,17 +160,19 @@ namespace Elasticsearch.Net.Connection
 			//}
 		}
 
-		protected virtual HttpWebRequest CreateWebRequest(Uri uri, string method)
+		protected virtual HttpWebRequest CreateWebRequest(Uri uri, string method, IRequestConnectionConfiguration requestSpecificConfig)
 		{
 			//TODO append global querystring
 			//var url = this._CreateUriString(path);
 
 			var myReq = (HttpWebRequest)WebRequest.Create(uri);
-			//TODO move this to transport
-			if (!uri.AbsolutePath.StartsWith("_cat"))
+
+			myReq.Accept = "application/json";
+			myReq.ContentType = "application/json";
+			if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.AcceptsContentType))
 			{
-				myReq.Accept = "application/json";
-				myReq.ContentType = "application/json";
+				myReq.Accept = requestSpecificConfig.AcceptsContentType;
+				myReq.ContentType = requestSpecificConfig.AcceptsContentType;
 			}
 			var timeout = this._ConnectionSettings.Timeout;
 			myReq.Timeout = timeout; // 1 minute timeout.

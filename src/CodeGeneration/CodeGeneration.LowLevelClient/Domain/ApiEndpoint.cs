@@ -156,6 +156,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							QueryStringParamName = queryStringParamName,
 							ReturnType = "ElasticsearchResponse<T>",
 							ReturnTypeGeneric = "<T>",
+							CallTypeGeneric = "T",
 							ReturnDescription = 
 								"ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T."
 								+ explanationOfT,
@@ -180,6 +181,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							QueryStringParamName = queryStringParamName,
 							ReturnType = "Task<ElasticsearchResponse<T>>",
 							ReturnTypeGeneric = "<T>",
+							CallTypeGeneric = "T",
 							ReturnDescription = 
 								"A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T."
 								+ explanationOfT,
@@ -204,11 +206,15 @@ namespace CodeGeneration.LowLevelClient.Domain
 							+ paraIndent + 
 								"<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>";
 
+						var defaultBoundGeneric = Url.Path.Contains("_cat") ? "string" : "DynamicDictionary";
+
 						apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,
-							ReturnType = "ElasticsearchResponse<DynamicDictionary>",
+							ReturnType = string.Format("ElasticsearchResponse<{0}>", defaultBoundGeneric),
 							ReturnTypeGeneric = null,
+							CallTypeGeneric = defaultBoundGeneric == "DynamicDictionary" 
+								? "Dictionary<string, object>" : defaultBoundGeneric,
 							ReturnDescription = 
 								"ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary"
 								+ explanationOfDynamic,
@@ -226,8 +232,10 @@ namespace CodeGeneration.LowLevelClient.Domain
 						apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,
-							ReturnType = "Task<ElasticsearchResponse<DynamicDictionary>>",
+							ReturnType = string.Format("Task<ElasticsearchResponse<{0}>>", defaultBoundGeneric),
 							ReturnTypeGeneric = null,
+							CallTypeGeneric = defaultBoundGeneric == "DynamicDictionary" 
+								? "Dictionary<string, object>" : defaultBoundGeneric,
 							ReturnDescription = 
 								"Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary"
 								+ explanationOfDynamic,
