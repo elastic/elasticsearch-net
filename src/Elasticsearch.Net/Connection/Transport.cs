@@ -134,8 +134,13 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Returns either the fixed maximum set on the connection configuration settings or the number of nodes
 		/// </summary>
-		private int GetMaximumRetries()
+		/// <param name="requestState"></param>
+		private int GetMaximumRetries(IRequestConfiguration requestConfiguration)
 		{
+			//if we have a request specific max retry setting use that
+			if (requestConfiguration.MaxRetries.HasValue)
+				return requestConfiguration.MaxRetries.Value;
+
 			return this._configurationValues.MaxRetries.GetValueOrDefault(this._connectionPool.MaxRetries);
 		}
 
@@ -192,7 +197,7 @@ namespace Elasticsearch.Net.Connection
 			}
 			catch (Exception e)
 			{
-				var maxRetries = this.GetMaximumRetries();
+				var maxRetries = this.GetMaximumRetries(requestState.RequestConfiguration);
 				if (maxRetries == 0 && retried == 0)
 					throw;
 				seenError = true;
@@ -221,7 +226,7 @@ namespace Elasticsearch.Net.Connection
 
 		private ElasticsearchResponse<T> RetryRequest<T>(TransportRequestState<T> requestState, Uri baseUri, int retried, Exception e = null)
 		{
-			var maxRetries = this.GetMaximumRetries();
+			var maxRetries = this.GetMaximumRetries(requestState.RequestConfiguration);
 			var exceptionMessage = MaxRetryExceptionMessage.F(requestState.Method, requestState.Path.IsNullOrEmpty() ? "/" : "", retried);
 
 			this._connectionPool.MarkDead(baseUri, this._configurationValues.DeadTimeout, this._configurationValues.MaxDeadTimeout);
@@ -323,7 +328,7 @@ namespace Elasticsearch.Net.Connection
 
 		private Task<ElasticsearchResponse<T>> RetryRequestAsync<T>(TransportRequestState<T> requestState, Uri baseUri, int retried, Exception e = null)
 		{
-			var maxRetries = this.GetMaximumRetries();
+			var maxRetries = this.GetMaximumRetries(requestState.RequestConfiguration);
 			var exceptionMessage = MaxRetryExceptionMessage.F(requestState.Method, requestState.Path, retried);
 
 			this._connectionPool.MarkDead(baseUri, this._configurationValues.DeadTimeout, this._configurationValues.MaxDeadTimeout);
