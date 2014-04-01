@@ -2621,6 +2621,11 @@
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
+        <member name="P:Autofac.Features.OpenGenerics.OpenGenericServiceBinderResources.ImplementorDoesntImplementService">
+            <summary>
+              Looks up a localized string similar to The type &apos;{0}&apos; does not implement the interface &apos;{1}&apos;..
+            </summary>
+        </member>
         <member name="P:Autofac.Features.OpenGenerics.OpenGenericServiceBinderResources.ImplementorMustBeOpenGenericTypeDefinition">
             <summary>
               Looks up a localized string similar to The implementation type &apos;{0}&apos; is not an open generic type definition..
@@ -4303,6 +4308,35 @@
             Provides a programmer-readable description of the identifying feature of the service.
             </summary>
             <value></value>
+        </member>
+        <member name="T:Autofac.Features.Collections.CollectionRegistrationSource">
+            <summary>
+            Registration source providing implicit collection/list/enumerable support.
+            </summary>
+            <remarks>
+            <para>
+            This registration source provides enumerable support to allow resolving
+            the set of all registered services of a given type.
+            </para>
+            <para>
+            What may not be immediately apparent is that it also means any time there
+            are no items of a particular type registered, it will always return an
+            empty set rather than <see langword="null" /> or throwing an exception.
+            This is by design.
+            </para>
+            <para>
+            Consider the [possibly majority] use case where you're resolving a set
+            of message handlers or event handlers from the container. If there aren't
+            any handlers, you want an empty set - not <see langword="null" /> or
+            an exception. It's valid to have no handlers registered.
+            </para>
+            <para>
+            This implicit support means other areas (like MVC support or manual
+            property injection) must take care to only request enumerable values they
+            expect to get something back for. In other words, "Don't ask the container
+            for something you don't expect to resolve."
+            </para>
+            </remarks>
         </member>
         <member name="M:Autofac.Features.Collections.CollectionRegistrationSource.RegistrationsFor(Autofac.Core.Service,System.Func{Autofac.Core.Service,System.Collections.Generic.IEnumerable{Autofac.Core.IComponentRegistration}})">
             <summary>
@@ -6828,6 +6862,11 @@
             <summary>
               Overrides the current thread's CurrentUICulture property for all
               resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Autofac.Features.GeneratedFactories.GeneratedFactoryRegistrationSourceResources.DuplicateTypesInTypeMappedFuncParameterList">
+            <summary>
+              Looks up a localized string similar to Unable to generate a function to return type &apos;{0}&apos; with input parameter types [{1}]. The input parameter type list has duplicate types. Try registering a custom delegate type instead of using a generic Func relationship..
             </summary>
         </member>
         <member name="P:Autofac.Features.GeneratedFactories.GeneratedFactoryRegistrationSourceResources.GeneratedFactoryRegistrationSourceDescription">
