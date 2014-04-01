@@ -20,7 +20,7 @@ namespace Nest.Tests.Integration.Search
 		{
 			Assert.True(queryResponse.IsValid);
 			Assert.NotNull(queryResponse.ConnectionStatus);
-			Assert.Null(queryResponse.ConnectionStatus.Error);
+			Assert.Null(queryResponse.ConnectionStatus.OriginalException);
 			Assert.True(queryResponse.Total > 0, "No hits");
 			Assert.True(queryResponse.Documents.Any());
 			Assert.True(queryResponse.Documents.Count() > 0);
@@ -37,9 +37,8 @@ namespace Nest.Tests.Integration.Search
 				.QueryRaw("here be dragons")
 			);
 			Assert.False(queryResults.IsValid);
-			var error = queryResults.ConnectionStatus.Error;
-			Assert.NotNull(error);
-			Assert.True(error.HttpStatusCode == System.Net.HttpStatusCode.BadRequest, error.HttpStatusCode.ToString());
+			Assert.NotNull(queryResults.ConnectionStatus.HttpStatusCode);
+			Assert.AreEqual(queryResults.ConnectionStatus.HttpStatusCode, 400);
 		}
 
 		[Test]

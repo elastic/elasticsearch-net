@@ -133,11 +133,11 @@ namespace CodeGeneration.LowLevelClient
 				Regex.Replace(method.FullName, m, (a) => a.Index != method.FullName.IndexOf(m) ? "" : m);
 
 			string manualOverride;
-			var key = method.QueryStringParamName.Replace("QueryString", "");
+			var key = method.QueryStringParamName.Replace("RequestParameters", "");
 			if (MethodNameOverrides.TryGetValue(key, out manualOverride))
-				method.QueryStringParamName = manualOverride + "QueryString";
+				method.QueryStringParamName = manualOverride + "RequestParameters";
 
-			method.DescriptorType = method.QueryStringParamName.Replace("QueryString","Descriptor");
+			method.DescriptorType = method.QueryStringParamName.Replace("RequestParameters","Descriptor");
 
 			string generic;
 			if (KnownDescriptors.TryGetValue(method.DescriptorType, out generic))
@@ -195,17 +195,17 @@ namespace CodeGeneration.LowLevelClient
 			File.WriteAllText(targetFile, source);
 		}
 
-		public static void GenerateQueryStringParameters(RestApiSpec model)
+		public static void GenerateRequestParameters(RestApiSpec model)
 		{
-			var targetFile = _esNetFolder + @"Domain\QueryStringParameters.Generated.cs";
-			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"QueryStringParameters.Generated.cshtml"), model).ToString();
+			var targetFile = _esNetFolder + @"Domain\RequestParameters.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"RequestParameters.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 
-		public static void GenerateQueryStringParametersExtensions(RestApiSpec model)
+		public static void GenerateRequestParametersExtensions(RestApiSpec model)
 		{
-			var targetFile = _nestFolder + @"Domain\QueryStringParametersExtensions.Generated.cs";
-			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"QueryStringParametersExtensions.Generated.cshtml"), model).ToString();
+			var targetFile = _nestFolder + @"Domain\RequestParametersExtensions.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"RequestParametersExtensions.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 		public static void GenerateEnums(RestApiSpec model)

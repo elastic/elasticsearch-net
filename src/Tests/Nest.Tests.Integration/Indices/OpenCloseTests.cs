@@ -38,8 +38,9 @@ namespace Nest.Tests.Integration.Indices
 			);
 
 			Assert.False(results.IsValid);
-			Assert.IsNotNull(results.ConnectionStatus.Error);
-			Assert.True(results.ConnectionStatus.Error.HttpStatusCode == System.Net.HttpStatusCode.Forbidden, results.ConnectionStatus.Error.HttpStatusCode.ToString());
+			Assert.IsNotNull(results.ConnectionStatus);
+			var statusCode = results.ConnectionStatus.HttpStatusCode;
+			Assert.AreEqual(statusCode, 403);
 			var result = results.ConnectionStatus.ResponseRaw.Utf8String();
 			Assert.True(result.Contains("ClusterBlockException"));
 			Assert.True(result.Contains("index closed"));

@@ -15,8 +15,8 @@ namespace Nest
 		internal IndexExistsResponse(IElasticsearchResponse connectionStatus)
 		{
 			this.ConnectionStatus = connectionStatus;
-			this.IsValid = connectionStatus.Error == null || connectionStatus.Error.HttpStatusCode == HttpStatusCode.NotFound;
-			this.Exists = connectionStatus.Error == null && connectionStatus.Success;
+			this.IsValid =connectionStatus.Success || connectionStatus.HttpStatusCode == 404;
+			this.Exists = connectionStatus.Success & connectionStatus.HttpStatusCode == 200;
 		}
 
 		public bool Exists { get; internal set; }

@@ -15,7 +15,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IIndicesOperationResponse Alias(Func<AliasDescriptor, AliasDescriptor> aliasSelector)
 		{
-			return this.Dispatch<AliasDescriptor, AliasQueryString, IndicesOperationResponse>(
+			return this.Dispatch<AliasDescriptor, AliasRequestParameters, IndicesOperationResponse>(
 				aliasSelector,
 				(p, d) => this.RawDispatch.IndicesUpdateAliasesDispatch<IndicesOperationResponse>(p, d)
 			);
@@ -24,7 +24,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IIndicesOperationResponse> AliasAsync(Func<AliasDescriptor, AliasDescriptor> aliasSelector)
 		{
-			return this.DispatchAsync<AliasDescriptor, AliasQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+			return this.DispatchAsync<AliasDescriptor, AliasRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 				aliasSelector,
 				(p, d) => this.RawDispatch.IndicesUpdateAliasesDispatchAsync<IndicesOperationResponse>(p, d)
 			);
@@ -33,11 +33,10 @@ namespace Nest
 		/// <inheritdoc />
 		public IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor)
 		{
-			return this.Dispatch<GetAliasesDescriptor, GetAliasesQueryString, GetAliasesResponse>(
+			return this.Dispatch<GetAliasesDescriptor, GetAliasesRequestParameters, GetAliasesResponse>(
 				getAliasesDescriptor,
 				(p, d) => this.RawDispatch.IndicesGetAliasDispatch<GetAliasesResponse>(
-					p,
-					new GetAliasesConverter(DeserializeGetAliasesResponse)
+					p.DeserializationState(new GetAliasesConverter(DeserializeGetAliasesResponse))
 				)
 			);
 		}
@@ -45,11 +44,10 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor)
 		{
-			return this.DispatchAsync<GetAliasesDescriptor, GetAliasesQueryString, GetAliasesResponse, IGetAliasesResponse>(
+			return this.DispatchAsync<GetAliasesDescriptor, GetAliasesRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
 				getAliasesDescriptor,
 				(p, d) => this.RawDispatch.IndicesGetAliasDispatchAsync<GetAliasesResponse>(
-					p,
-					new GetAliasesConverter(DeserializeGetAliasesResponse)
+					p.DeserializationState(new GetAliasesConverter(DeserializeGetAliasesResponse))
 				)
 			);
 		}

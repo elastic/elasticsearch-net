@@ -11,7 +11,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector)
 		{
-			return this.Dispatch<GetIndexSettingsDescriptor, GetIndexSettingsQueryString, IndexSettingsResponse>(
+			return this.Dispatch<GetIndexSettingsDescriptor, GetIndexSettingsRequestParameters, IndexSettingsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesGetSettingsDispatch<IndexSettingsResponse>(p)
 			);
@@ -22,7 +22,7 @@ namespace Nest
 			Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector)
 		{
 			return this.DispatchAsync
-				<GetIndexSettingsDescriptor, GetIndexSettingsQueryString, IndexSettingsResponse, IIndexSettingsResponse>(
+				<GetIndexSettingsDescriptor, GetIndexSettingsRequestParameters, IndexSettingsResponse, IIndexSettingsResponse>(
 					selector,
 					(p, d) => this.RawDispatch.IndicesGetSettingsDispatchAsync<IndexSettingsResponse>(p)
 				);
@@ -31,7 +31,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IIndicesResponse DeleteIndex(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector)
 		{
-			return this.Dispatch<DeleteIndexDescriptor, DeleteIndexQueryString, IndicesResponse>(
+			return this.Dispatch<DeleteIndexDescriptor, DeleteIndexRequestParameters, IndicesResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesDeleteDispatch<IndicesResponse>(p)
 			);
@@ -40,7 +40,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IIndicesResponse> DeleteIndexAsync(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector)
 		{
-			return this.DispatchAsync<DeleteIndexDescriptor, DeleteIndexQueryString, IndicesResponse, IIndicesResponse>(
+			return this.DispatchAsync<DeleteIndexDescriptor, DeleteIndexRequestParameters, IndicesResponse, IIndicesResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesDeleteDispatchAsync<IndicesResponse>(p)
 			);

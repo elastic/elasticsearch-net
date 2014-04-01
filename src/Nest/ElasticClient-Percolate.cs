@@ -12,7 +12,7 @@ namespace Nest
 			Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<UnregisterPercolatorDescriptor, DeleteQueryString, UnregisterPercolateResponse>(
+			return this.Dispatch<UnregisterPercolatorDescriptor, DeleteRequestParameters, UnregisterPercolateResponse>(
 				s => selector(s.Name(name)),
 				(p, d) => this.RawDispatch.DeleteDispatch<UnregisterPercolateResponse>(p), true
 			);
@@ -24,7 +24,7 @@ namespace Nest
 		{
 			selector = selector ?? (s => s);
 			return this.DispatchAsync
-				<UnregisterPercolatorDescriptor, DeleteQueryString, UnregisterPercolateResponse, IUnregisterPercolateResponse>(
+				<UnregisterPercolatorDescriptor, DeleteRequestParameters, UnregisterPercolateResponse, IUnregisterPercolateResponse>(
 					s => selector(s.Name(name)),
 					(p, d) => this.RawDispatch.DeleteDispatchAsync<UnregisterPercolateResponse>(p), true
 				);
@@ -36,7 +36,7 @@ namespace Nest
 			where T : class
 		{
 			percolatorSelector.ThrowIfNull("percolatorSelector");
-			return this.Dispatch<RegisterPercolatorDescriptor<T>, IndexQueryString, RegisterPercolateResponse>(
+			return this.Dispatch<RegisterPercolatorDescriptor<T>, IndexRequestParameters, RegisterPercolateResponse>(
 				s => percolatorSelector(s.Name(name)),
 				(p, d) => this.RawDispatch.IndexDispatch<RegisterPercolateResponse>(p, d._RequestBody)
 			);
@@ -48,7 +48,7 @@ namespace Nest
 		{
 			percolatorSelector.ThrowIfNull("percolatorSelector");
 			return this.DispatchAsync
-				<RegisterPercolatorDescriptor<T>, IndexQueryString, RegisterPercolateResponse, IRegisterPercolateResponse>(
+				<RegisterPercolatorDescriptor<T>, IndexRequestParameters, RegisterPercolateResponse, IRegisterPercolateResponse>(
 					s => percolatorSelector(s.Name(name)),
 					(p, d) => this.RawDispatch.IndexDispatchAsync<RegisterPercolateResponse>(p, d._RequestBody)
 				);
@@ -77,7 +77,7 @@ namespace Nest
 			where K : class
 		{
 			percolateSelector = percolateSelector ?? (s => s);
-			return this.Dispatch<PercolateDescriptor<T, K>, PercolateQueryString, PercolateResponse>(
+			return this.Dispatch<PercolateDescriptor<T, K>, PercolateRequestParameters, PercolateResponse>(
 				s => percolateSelector(s.Object(@object)),
 				(p, d) => this.RawDispatch.PercolateDispatch<PercolateResponse>(p, d)
 			);
@@ -90,7 +90,7 @@ namespace Nest
 			where K : class
 		{
 			percolateSelector = percolateSelector ?? (s => s);
-			return this.DispatchAsync<PercolateDescriptor<T, K>, PercolateQueryString, PercolateResponse, IPercolateResponse>(
+			return this.DispatchAsync<PercolateDescriptor<T, K>, PercolateRequestParameters, PercolateResponse, IPercolateResponse>(
 				s => percolateSelector(s.Object(@object)),
 				(p, d) => this.RawDispatch.PercolateDispatchAsync<PercolateResponse>(p, d)
 			);

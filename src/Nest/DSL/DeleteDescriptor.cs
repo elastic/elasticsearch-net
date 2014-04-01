@@ -13,13 +13,13 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[DescriptorFor("Delete")]
-	public partial class DeleteDescriptor<T> : DocumentPathDescriptorBase<DeleteDescriptor<T>, T, DeleteQueryString>
-		, IPathInfo<DeleteQueryString>
+	public partial class DeleteDescriptor<T> : DocumentPathDescriptorBase<DeleteDescriptor<T>, T, DeleteRequestParameters>
+		, IPathInfo<DeleteRequestParameters>
 		where T : class
 	{
-		ElasticsearchPathInfo<DeleteQueryString> IPathInfo<DeleteQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<DeleteRequestParameters> IPathInfo<DeleteRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<DeleteQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<DeleteRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
 			return pathInfo;
 		}

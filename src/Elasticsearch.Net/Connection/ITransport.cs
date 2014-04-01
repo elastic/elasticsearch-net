@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Serialization;
@@ -13,21 +16,18 @@ namespace Elasticsearch.Net.Connection
 			string method, 
 			string path, 
 			object data = null, 
-			NameValueCollection queryString = null, 
-			object serializationState = null,
-			int retried = 0, 
-			int? seed = null
-			);
-		void Sniff(bool fromStartup = false);
+			IRequestParameters requestParameters = null);
+
+		IList<Uri> Sniff();
+		void SniffClusterState();
+		bool Ping(Uri baseUri);
+		Task<bool> PingAsync(Uri baseUri);
 
 		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(
 			string method, 
 			string path, 
 			object data = null, 
-			NameValueCollection queryString = null,
-			object serializationState = null,
-			int retried = 0, 
-			int? seed = null);
+			IRequestParameters requestParameters = null);
 	}
 
 	public interface ITransportValues

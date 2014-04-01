@@ -12,7 +12,7 @@ namespace Nest
 		public IGlobalStatsResponse IndicesStats(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<IndicesStatsDescriptor, IndicesStatsQueryString, GlobalStatsResponse>(
+			return this.Dispatch<IndicesStatsDescriptor, IndicesStatsRequestParameters, GlobalStatsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesStatsDispatch<GlobalStatsResponse>(p)
 			);
@@ -23,7 +23,7 @@ namespace Nest
 			Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<IndicesStatsDescriptor, IndicesStatsQueryString, GlobalStatsResponse, IGlobalStatsResponse>(
+			return this.DispatchAsync<IndicesStatsDescriptor, IndicesStatsRequestParameters, GlobalStatsResponse, IGlobalStatsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesStatsDispatchAsync<GlobalStatsResponse>(p)
 			);

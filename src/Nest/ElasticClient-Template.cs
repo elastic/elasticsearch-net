@@ -16,10 +16,11 @@ namespace Nest
 			Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null)
 		{
 			getTemplateSelector = getTemplateSelector ?? (s => s);
-			return this.Dispatch<GetTemplateDescriptor, GetTemplateQueryString, TemplateResponse>(
+			return this.Dispatch<GetTemplateDescriptor, GetTemplateRequestParameters, TemplateResponse>(
 				d => getTemplateSelector(d.Name(name)),
-				(p, d) =>
-					RawDispatch.IndicesGetTemplateDispatch<TemplateResponse>(p, (GetTemplateConverter) DeserializeTemplateResponse)
+				(p, d) => RawDispatch.IndicesGetTemplateDispatch<TemplateResponse>(
+					p.DeserializationState((GetTemplateConverter) DeserializeTemplateResponse)
+				)
 			);
 		}
 
@@ -28,10 +29,11 @@ namespace Nest
 			Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null)
 		{
 			getTemplateSelector = getTemplateSelector ?? (s => s);
-			return this.DispatchAsync<GetTemplateDescriptor, GetTemplateQueryString, TemplateResponse, ITemplateResponse>(
+			return this.DispatchAsync<GetTemplateDescriptor, GetTemplateRequestParameters, TemplateResponse, ITemplateResponse>(
 				d => getTemplateSelector(d.Name(name)),
 				(p, d) => this.RawDispatch.IndicesGetTemplateDispatchAsync<TemplateResponse>(
-					p, (GetTemplateConverter) DeserializeTemplateResponse)
+					p.DeserializationState((GetTemplateConverter) DeserializeTemplateResponse)
+				)
 			);
 		}
 
@@ -41,7 +43,7 @@ namespace Nest
 		{
 			putTemplateSelector.ThrowIfNull("putTemplateSelector");
 			var descriptor = putTemplateSelector(new PutTemplateDescriptor(_connectionSettings).Name(name));
-			return this.Dispatch<PutTemplateDescriptor, PutTemplateQueryString, IndicesOperationResponse>(
+			return this.Dispatch<PutTemplateDescriptor, PutTemplateRequestParameters, IndicesOperationResponse>(
 				descriptor,
 				(p, d) => this.RawDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>(p, d._TemplateMapping)
 			);
@@ -54,7 +56,7 @@ namespace Nest
 			putTemplateSelector.ThrowIfNull("putTemplateSelector");
 			var descriptor = putTemplateSelector(new PutTemplateDescriptor(_connectionSettings).Name(name));
 			return this.DispatchAsync
-				<PutTemplateDescriptor, PutTemplateQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				<PutTemplateDescriptor, PutTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					descriptor,
 					(p, d) => this.RawDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>(p, d._TemplateMapping)
 				);
@@ -65,7 +67,7 @@ namespace Nest
 			Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null)
 		{
 			deleteTemplateSelector = deleteTemplateSelector ?? (s => s);
-			return this.Dispatch<DeleteTemplateDescriptor, DeleteTemplateQueryString, IndicesOperationResponse>(
+			return this.Dispatch<DeleteTemplateDescriptor, DeleteTemplateRequestParameters, IndicesOperationResponse>(
 				d => deleteTemplateSelector(d.Name(name)),
 				(p, d) => this.RawDispatch.IndicesDeleteTemplateDispatch<IndicesOperationResponse>(p)
 			);
@@ -77,7 +79,7 @@ namespace Nest
 		{
 			deleteTemplateSelector = deleteTemplateSelector ?? (s => s);
 			return this.DispatchAsync
-				<DeleteTemplateDescriptor, DeleteTemplateQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				<DeleteTemplateDescriptor, DeleteTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					d => deleteTemplateSelector(d.Name(name)),
 					(p, d) => this.RawDispatch.IndicesDeleteTemplateDispatchAsync<IndicesOperationResponse>(p)
 				);

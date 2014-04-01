@@ -22,7 +22,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial class SearchDescriptor<T> :
 		SearchDescriptorBase
-		, IPathInfo<SearchQueryString>
+		, IPathInfo<SearchRequestParameters>
 		where T : class
 	{
 		internal override SearchTypeOptions? _SearchType
@@ -1057,14 +1057,14 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<SearchQueryString> IPathInfo<SearchQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<SearchRequestParameters> IPathInfo<SearchRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = new ElasticsearchPathInfo<SearchQueryString>();
+			var pathInfo = new ElasticsearchPathInfo<SearchRequestParameters>();
 			pathInfo.HttpMethod = this._QueryString.ContainsKey("source")
 				? PathInfoHttpMethod.GET
 				: PathInfoHttpMethod.POST;
 
-			pathInfo.QueryString = this._QueryString;
+			pathInfo.RequestParameters = this._QueryString;
 
 			var inferrer = new ElasticInferrer(settings);
 			string indices;

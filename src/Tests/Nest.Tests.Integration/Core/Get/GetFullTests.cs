@@ -56,7 +56,7 @@ namespace Nest.Tests.Integration.Core.Get
 			result.Fields.Should().NotBeNull();
 			result.Fields.FieldValues.Should().NotBeNull().And.HaveCount(4);
 			result.Fields.FieldValue<ElasticsearchProject, string>(p => p.Name).Should().BeEquivalentTo(new [] {"pyelasticsearch"});
-			result.Fields.FieldValue<ElasticsearchProject, string>(p => p.Id).Should().BeEquivalentTo( new []{1});
+			result.Fields.FieldValue<ElasticsearchProject, int>(p => p.Id).Should().BeEquivalentTo( new []{1});
 			result.Fields.FieldValue<ElasticsearchProject, string>(p => p.DoubleValue).Should().NotBeEquivalentTo(new [] {default(double) });
 
 		}

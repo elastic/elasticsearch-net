@@ -13,13 +13,13 @@ namespace Nest
 {
 	[DescriptorFor("IndicesAnalyze")]
 	public partial class AnalyzeDescriptor : 
-		IndicesOptionalPathDescriptor<AnalyzeDescriptor, AnalyzeQueryString>
-		, IPathInfo<AnalyzeQueryString>
+		IndicesOptionalPathDescriptor<AnalyzeDescriptor, AnalyzeRequestParameters>
+		, IPathInfo<AnalyzeRequestParameters>
 	{
 
-		ElasticsearchPathInfo<AnalyzeQueryString> IPathInfo<AnalyzeQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<AnalyzeRequestParameters> IPathInfo<AnalyzeRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<AnalyzeQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<AnalyzeRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 
 			return pathInfo;

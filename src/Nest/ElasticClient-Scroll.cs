@@ -11,7 +11,7 @@ namespace Nest
 			Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
 			where T : class
 		{
-			return this.Dispatch<ScrollDescriptor<T>, ScrollQueryString, QueryResponse<T>>(
+			return this.Dispatch<ScrollDescriptor<T>, ScrollRequestParameters, QueryResponse<T>>(
 				scrollSelector,
 				(p, d) =>
 				{
@@ -27,7 +27,7 @@ namespace Nest
 			Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
 			where T : class
 		{
-			return this.DispatchAsync<ScrollDescriptor<T>, ScrollQueryString, QueryResponse<T>, IQueryResponse<T>>(
+			return this.DispatchAsync<ScrollDescriptor<T>, ScrollRequestParameters, QueryResponse<T>, IQueryResponse<T>>(
 				scrollSelector,
 				(p, d) =>
 				{

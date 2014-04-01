@@ -14,13 +14,13 @@ namespace Nest
 		/// <inheritdoc />
 		public IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector)
 		{
-			return this.Dispatch<MultiSearchDescriptor, MultiSearchQueryString, MultiSearchResponse>(
+			return this.Dispatch<MultiSearchDescriptor, MultiSearchRequestParameters, MultiSearchResponse>(
 				multiSearchSelector,
 				(p, d) =>
 				{
 					string json = Serializer.SerializeMultiSearch(d);
 					JsonConverter converter = CreateMultiSearchConverter(d);
-					return this.RawDispatch.MsearchDispatch<MultiSearchResponse>(p, json, converter);
+					return this.RawDispatch.MsearchDispatch<MultiSearchResponse>(p.DeserializationState(converter), json);
 				}
 			);
 		}
@@ -29,13 +29,13 @@ namespace Nest
 		public Task<IMultiSearchResponse> MultiSearchAsync(
 			Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector)
 		{
-			return this.DispatchAsync<MultiSearchDescriptor, MultiSearchQueryString, MultiSearchResponse, IMultiSearchResponse>(
+			return this.DispatchAsync<MultiSearchDescriptor, MultiSearchRequestParameters, MultiSearchResponse, IMultiSearchResponse>(
 				multiSearchSelector,
 				(p, d) =>
 				{
 					string json = Serializer.SerializeMultiSearch(d);
 					JsonConverter converter = CreateMultiSearchConverter(d);
-					return this.RawDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, json, converter);
+					return this.RawDispatch.MsearchDispatchAsync<MultiSearchResponse>(p.DeserializationState(converter), json);
 				}
 			);
 		}

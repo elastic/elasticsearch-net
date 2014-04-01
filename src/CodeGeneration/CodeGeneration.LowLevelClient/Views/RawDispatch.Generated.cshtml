@@ -36,7 +36,7 @@ namespace Nest
 		foreach(var gen in generate)
 		{
 		<text>
-		internal @Raw(gen.Returns) @(Raw(gen.Name))(ElasticsearchPathInfo<@peek.QueryStringParamName> pathInfo @if (endpoint.Body != null) {<text>, object body</text>}, object deserializationState = null)
+		internal @Raw(gen.Returns) @(Raw(gen.Name))(ElasticsearchPathInfo<@peek.QueryStringParamName> pathInfo @if (endpoint.Body != null) {<text>, object body</text>})
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -55,18 +55,18 @@ namespace Nest
 					<text>//@method.HttpMethod @method.Path</text>
 					if (i == 0 && !dispatch.IfChecks.Any())
 					{
-					<text>return this.Raw.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)), deserializationState);</text>
+					<text>return this.Raw.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 					}
 					else
 					{
 						if (dispatch.IfChecks.Any())
 						{
 					<text>if (@Raw(string.Join(" && ", dispatch.IfChecks)))
-						return this.Raw.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)), deserializationState);</text>
+						return this.Raw.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 						}
 						else
 						{
-					<text>return this.Raw.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)), deserializationState);</text>
+					<text>return this.Raw.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 						}
 					}
 					if (i == totalDispatches - 1 && allWithIfChecks)

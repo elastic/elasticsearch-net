@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,8 +57,8 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var getCall = FakeCalls.GetCall(fake); 
 
 				//return a started task that throws
-				Func<ElasticsearchResponse<Dictionary<string, object>>> badTask = () => { throw new Exception(); };
-				var t = new Task<ElasticsearchResponse<Dictionary<string, object>>>(badTask);
+				Func<ElasticsearchResponse<Stream>> badTask = () => { throw new Exception(); };
+				var t = new Task<ElasticsearchResponse<Stream>>(badTask);
 				t.Start();
 				getCall.Returns(t);
 				
@@ -68,11 +69,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				{
 					var result = await client.InfoAsync();
 				}
-				catch (AggregateException ae)
-				{
-					Assert.AreEqual(typeof(MaxRetryException), ae.InnerException.GetType());
-				}
-				catch (Exception e)
+				catch (MaxRetryException e)
 				{
 					Assert.AreEqual(typeof(MaxRetryException), e.GetType());
 				}
@@ -107,8 +104,9 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
 				FakeCalls.ProvideDefaultTransport(fake);
 				
-				var getCall = FakeCalls.GetCall(fake); 
-				getCall.Returns(Task.FromResult(FakeResponse.Any(_connectionConfig, 400)));
+				var getCall = FakeCalls.GetCall(fake);
+				var task = Task.FromResult(FakeResponse.Any(_connectionConfig, 400));
+				getCall.Returns(task);
 				
 				var client = fake.Resolve<ElasticsearchClient>();
 
@@ -190,11 +188,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				{
 					var result = await client.InfoAsync();
 				}
-				catch (AggregateException e)
-				{
-					Assert.AreEqual(e.InnerException.GetType(), typeof(MaxRetryException));
-				}
-				catch (Exception e)
+				catch (MaxRetryException e)
 				{
 					Assert.AreEqual(e.GetType(), typeof(MaxRetryException));
 				}

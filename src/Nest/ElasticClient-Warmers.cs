@@ -16,7 +16,7 @@ namespace Nest
 		public IIndicesOperationResponse PutWarmer(string name, Func<PutWarmerDescriptor, PutWarmerDescriptor> selector)
 		{
 			selector.ThrowIfNull("selector");
-			return this.Dispatch<PutWarmerDescriptor, PutWarmerQueryString, IndicesOperationResponse>(
+			return this.Dispatch<PutWarmerDescriptor, PutWarmerRequestParameters, IndicesOperationResponse>(
 				d => selector(d.Name(name).AllIndices()),
 				(p, d) => this.RawDispatch.IndicesPutWarmerDispatch<IndicesOperationResponse>(p, d)
 			);
@@ -27,7 +27,7 @@ namespace Nest
 			Func<PutWarmerDescriptor, PutWarmerDescriptor> selector)
 		{
 			selector.ThrowIfNull("selector");
-			return this.DispatchAsync<PutWarmerDescriptor, PutWarmerQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+			return this.DispatchAsync<PutWarmerDescriptor, PutWarmerRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 				d => selector(d.Name(name).AllIndices()),
 				(p, d) => this.RawDispatch.IndicesPutWarmerDispatchAsync<IndicesOperationResponse>(p, d)
 			);
@@ -37,11 +37,10 @@ namespace Nest
 		public IWarmerResponse GetWarmer(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<GetWarmerDescriptor, GetWarmerQueryString, WarmerResponse>(
+			return this.Dispatch<GetWarmerDescriptor, GetWarmerRequestParameters, WarmerResponse>(
 				d => selector(d.Name(name).AllIndices()),
 				(p, d) => this.RawDispatch.IndicesGetWarmerDispatch<WarmerResponse>(
-					p,
-					new GetWarmerConverter(DeserializeWarmerResponse)
+					p.DeserializationState(new GetWarmerConverter(DeserializeWarmerResponse))
 				)
 			);
 		}
@@ -51,11 +50,10 @@ namespace Nest
 			Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<GetWarmerDescriptor, GetWarmerQueryString, WarmerResponse, IWarmerResponse>(
+			return this.DispatchAsync<GetWarmerDescriptor, GetWarmerRequestParameters, WarmerResponse, IWarmerResponse>(
 				d => selector(d.Name(name).AllIndices()),
 				(p, d) => this.RawDispatch.IndicesGetWarmerDispatchAsync<WarmerResponse>(
-					p,
-					new GetWarmerConverter(DeserializeWarmerResponse)
+					p.DeserializationState(new GetWarmerConverter(DeserializeWarmerResponse))
 				)
 			);
 		}
@@ -65,7 +63,7 @@ namespace Nest
 			Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<DeleteWarmerDescriptor, DeleteWarmerQueryString, IndicesOperationResponse>(
+			return this.Dispatch<DeleteWarmerDescriptor, DeleteWarmerRequestParameters, IndicesOperationResponse>(
 				d => selector(d.Name(name).AllIndices()),
 				(p, d) => this.RawDispatch.IndicesDeleteWarmerDispatch<IndicesOperationResponse>(p)
 			);
@@ -77,7 +75,7 @@ namespace Nest
 		{
 			selector = selector ?? (s => s);
 			return this.DispatchAsync
-				<DeleteWarmerDescriptor, DeleteWarmerQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				<DeleteWarmerDescriptor, DeleteWarmerRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					d => selector(d.Name(name).AllIndices()),
 					(p, d) => this.RawDispatch.IndicesDeleteWarmerDispatchAsync<IndicesOperationResponse>(p)
 				);

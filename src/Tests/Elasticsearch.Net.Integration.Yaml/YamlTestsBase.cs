@@ -3,12 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
-using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Connection.HttpClient;
 using Elasticsearch.Net.JsonNet;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
@@ -21,7 +18,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 		protected static readonly Version _versionNumber;
 		
 		protected object _body;
-		protected ElasticsearchResponse<DynamicDictionary> _status;
+		protected IElasticsearchResponse _status;
 		protected dynamic _response;
 
 		protected static ElasticsearchResponse<string> _x; 
@@ -32,7 +29,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			if (Process.GetProcessesByName("fiddler").Any())
 				host = "ipv4.fiddler";
 			var uri = new Uri("http://"+host+":9200/");
-			var settings = new ConnectionConfiguration(uri).UsePrettyResponses();
+			var settings = new ConnectionConfiguration(uri).ExposeRawResponse();
 
 			var jsonNetSerializer = new ElasticsearchJsonNetSerializer();
 
@@ -48,7 +45,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			_client.IndicesDelete("*");
 		}
 
-		protected void Do(Func<ElasticsearchResponse<DynamicDictionary>> action, string shouldCatch = null)
+		protected void Do(Func<IElasticsearchResponse> action, string shouldCatch = null)
 		{
 			try
 			{
@@ -62,19 +59,16 @@ namespace Elasticsearch.Net.Integration.Yaml
 			}
 			if (shouldCatch == "missing")
 			{
-				Assert.NotNull(this._status.Error, "call specified missing is expected");
-				Assert.AreEqual(this._status.Error.HttpStatusCode,HttpStatusCode.NotFound, "call specified missing (404) is expected");
+				Assert.AreEqual(this._status.HttpStatusCode, 404, "call specified missing (404) is expected");
 			}
 			else if (shouldCatch == "conflict")
 			{
-				Assert.NotNull(this._status.Error, "call specified conflict is expected");
-				Assert.AreEqual(this._status.Error.HttpStatusCode,HttpStatusCode.Conflict, "call specified conflict (409) is expected");
+				Assert.AreEqual(this._status.HttpStatusCode, 409, "call specified conflict (409) is expected");
 				
 			}
 			else if (shouldCatch == "forbidden")
 			{
-				Assert.NotNull(this._status.Error, "call specified forbidden is expected");
-				Assert.AreEqual(this._status.Error.HttpStatusCode,HttpStatusCode.Forbidden, "call specified conflict (403) is expected");
+				Assert.AreEqual(this._status.HttpStatusCode, 403, "call specified conflict (403) is expected");
 				
 			}
 			else if (shouldCatch != null && shouldCatch.StartsWith("/"))
@@ -83,7 +77,11 @@ namespace Elasticsearch.Net.Integration.Yaml
 				Assert.IsTrue(Regex.IsMatch(Encoding.UTF8.GetString(this._status.ResponseRaw), re),
 					"response does not match regex: " + shouldCatch);
 			}
-			this._response = this._status.Response;
+			if (this._status is ElasticsearchResponse<DynamicDictionary>)
+				this._response = (this._status as ElasticsearchResponse<DynamicDictionary>).Response;
+			
+			if (this._status is ElasticsearchResponse<string>)
+				this._response = (this._status as ElasticsearchResponse<string>).Response;
 		}
 
 		protected void Skip(string version, string reason)
@@ -108,9 +106,9 @@ namespace Elasticsearch.Net.Integration.Yaml
 			if (o is IElasticsearchResponse)
 			{
 				var c = o as IElasticsearchResponse;
-				if (c.RequestMethod == "HEAD" && c.Error != null)
+				if (c.RequestMethod == "HEAD" && !c.Success)
 				{
-					Assert.Fail("HEAD request returned status:" + c.Error.HttpStatusCode);
+					Assert.Fail("HEAD request returned status:" + c.HttpStatusCode);
 				}
 				else if (c.RequestMethod == "HEAD") return;
 			}
@@ -160,10 +158,10 @@ namespace Elasticsearch.Net.Integration.Yaml
 			if (o is IElasticsearchResponse)
 			{
 				var c = o as IElasticsearchResponse;
-				if (c.RequestMethod == "HEAD" && c.Error == null)
+				if (c.RequestMethod == "HEAD" && c.Success)
 				{
 					Assert.Fail("HEAD request did not return error status but:" 
-						+ c.Error.HttpStatusCode);
+						+ c.HttpStatusCode);
 				}
 				else if (c.RequestMethod == "HEAD") return;
 			}
@@ -227,6 +225,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			if (o is JArray) o = ((JArray) o).ToObject<object[]>();
 			if (o is JObject) o = ((JToken) o).ToObject<Dictionary<string, object>>();
 			if (o is ElasticsearchResponse<DynamicDictionary>) o = ((ElasticsearchResponse<DynamicDictionary>)o).Response;
+			if (o is ElasticsearchResponse<string>) o = ((ElasticsearchResponse<string>)o).Response;
 			return o;
 		}
 
@@ -322,11 +321,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			else if (o is object[] || o is IList<object>)
 			{
 				var oo = (o as object[]) ?? (o as IList<object>);
-				var json = _client.Serializer.Serialize(value);
-				var otherJson = _client.Serializer.Serialize(oo);
-				var nJson = JArray.Parse(Encoding.UTF8.GetString(json)).ToString();
-				var nOtherJson = JArray.Parse(Encoding.UTF8.GetString(otherJson)).ToString();
-				Assert.AreEqual(nJson, nOtherJson);
+				SerializedArrayJsonEquals(value, oo);
 			}
 			else if (o is IDictionary<string, object>)
 			{
@@ -338,12 +333,34 @@ namespace Elasticsearch.Net.Integration.Yaml
 							x => x.Name, 
 							x => (x.GetGetMethod().Invoke(value, null) ?? ""));
 
-				var equals = DynamicDictionary.Create(d)
-					.SequenceEqual(dd);
+				var ds = new SortedDictionary<string, object>(d);
+				var dds = new SortedDictionary<string, object>(dd);
+
+				var equals = DynamicDictionary.Create(ds).SequenceEqual(dds)
+					|| SerializedJsonEquals(dd,dds);
 				Assert.True(equals, "response did not match expected return");
 
 			}
 			else Assert.Fail(message);
+		}
+
+		private static void SerializedArrayJsonEquals(object value, object oo)
+		{
+			var json = _client.Serializer.Serialize(value);
+			var otherJson = _client.Serializer.Serialize(oo);
+			var nJson = JArray.Parse(Encoding.UTF8.GetString(json)).ToString();
+			var nOtherJson = JArray.Parse(Encoding.UTF8.GetString(otherJson)).ToString();
+			Assert.AreEqual(nJson, nOtherJson);
+		}
+	
+		private static bool SerializedJsonEquals(object value, object oo)
+		{
+			var json = _client.Serializer.Serialize(value);
+			var otherJson = _client.Serializer.Serialize(oo);
+			var nJson = JObject.Parse(Encoding.UTF8.GetString(json)).ToString();
+			var nOtherJson = JObject.Parse(Encoding.UTF8.GetString(otherJson)).ToString();
+			Assert.AreEqual(nJson, nOtherJson);
+			return true;
 		}
 	}
 

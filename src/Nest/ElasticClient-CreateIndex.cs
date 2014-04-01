@@ -16,7 +16,7 @@ namespace Nest
 			createIndexSelector = createIndexSelector ?? (c => c);
 			var descriptor = createIndexSelector(new CreateIndexDescriptor(_connectionSettings));
 			descriptor._Index = index;
-			return this.Dispatch<CreateIndexDescriptor, CreateIndexQueryString, IndicesOperationResponse>(
+			return this.Dispatch<CreateIndexDescriptor, CreateIndexRequestParameters, IndicesOperationResponse>(
 				descriptor,
 				(p, d) => this.RawDispatch.IndicesCreateDispatch<IndicesOperationResponse>(p, d._IndexSettings)
 			);
@@ -31,7 +31,7 @@ namespace Nest
 			var descriptor = createIndexSelector(new CreateIndexDescriptor(_connectionSettings));
 			descriptor._Index = index;
 			return this.DispatchAsync
-				<CreateIndexDescriptor, CreateIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				<CreateIndexDescriptor, CreateIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					descriptor,
 					(p, d) => this.RawDispatch.IndicesCreateDispatchAsync<IndicesOperationResponse>(p, d._IndexSettings)
 				);

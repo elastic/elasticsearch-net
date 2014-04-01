@@ -14,6 +14,7 @@ namespace Nest.Tests.Integration
 	public class IntegrationTests
 	{
 		protected readonly IElasticClient _client = ElasticsearchConfiguration.Client;
+		protected readonly IElasticClient _clientNoRawResponse = ElasticsearchConfiguration.ClientNoRawResponse;
 		protected readonly ElasticClient _thriftClient = ElasticsearchConfiguration.ThriftClient;
 		protected readonly IConnectionSettingsValues _settings = ElasticsearchConfiguration.Settings();
 	

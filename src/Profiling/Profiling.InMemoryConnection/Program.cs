@@ -1,4 +1,5 @@
 ﻿using System;
+using Elasticsearch.Net.Connection;
 using Nest;
 using Elasticsearch.Net;
 

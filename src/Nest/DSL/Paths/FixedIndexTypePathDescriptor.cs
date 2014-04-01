@@ -19,9 +19,9 @@ namespace Nest
 	/// {index} is optional and so is {type} and will NOT fallback to the defaults of <para>T</para>
 	/// type can only be specified in conjuction with index.
 	/// </summary>
-	public class FixedIndexTypePathDescriptor<P, K> 
+	public class FixedIndexTypePathDescriptor<P, K> : BasePathDescriptor<P>
 		where P : FixedIndexTypePathDescriptor<P, K> 
-		where K : FluentQueryString<K>, new()
+		where K : FluentRequestParameters<K>, new()
 	{
 		internal IndexNameMarker _Index { get; set; }
 		internal TypeNameMarker _Type { get; set; }
@@ -53,8 +53,7 @@ namespace Nest
 			return (P) this;
 		}
 		
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentQueryString<K>, new()
+		internal virtual ElasticsearchPathInfo<K> ToPathInfo(IConnectionSettingsValues settings, K queryString)
 		{
 			var inferrer = new ElasticInferrer(settings);
 
@@ -66,7 +65,8 @@ namespace Nest
 				Index = index,
 				Type = type
 			};
-			pathInfo.QueryString = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}
 

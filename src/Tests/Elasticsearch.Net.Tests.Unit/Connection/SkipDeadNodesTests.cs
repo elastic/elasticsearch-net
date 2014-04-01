@@ -49,10 +49,10 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				);
 				
 				var seenNodes = new List<Uri>();
-				getCall.Invokes((Uri u, object o) => seenNodes.Add(u));
+				getCall.Invokes((Uri u, IRequestConnectionConfiguration o) => seenNodes.Add(u));
 
-				var pingCall = FakeCalls.Ping(fake);
-				pingCall.Returns(true);
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(ok);
 
 				var client1 = fake.Resolve<ElasticsearchClient>();
 				client1.Info(); //info call 1
@@ -100,10 +100,10 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				);
 				
 				var seenNodes = new List<Uri>();
-				getCall.Invokes((Uri u, object o) => seenNodes.Add(u));
+				getCall.Invokes((Uri u, IRequestConnectionConfiguration o) => seenNodes.Add(u));
 
-				var pingCall = FakeCalls.Ping(fake);
-				pingCall.Returns(true);
+				var pingCall = FakeCalls.PingAtConnectionLevelAsync(fake);
+				pingCall.Returns(ok);
 
 				var client1 = fake.Resolve<ElasticsearchClient>();
 				await client1.InfoAsync(); //info call 1
@@ -126,10 +126,12 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		private static IConnection ProvideConnection(AutoFake fake, ConnectionConfiguration config)
 		{
 			fake.Provide<IConnectionConfigurationValues>(config);
-			fake.Provide<ITransport>(fake.Resolve<Transport>());
+			var param = new TypedParameter(typeof(IDateTimeProvider), null);
+			var transport = fake.Provide<ITransport, Transport>(param);
 			var connection = fake.Resolve<IConnection>();
 			return connection;
 		}
+
 		private static ConnectionConfiguration ProvideConfiguration(IDateTimeProvider dateTimeProvider)
 		{
 			var connectionPool = new StaticConnectionPool(new[]

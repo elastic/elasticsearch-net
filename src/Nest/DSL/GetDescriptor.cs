@@ -10,8 +10,8 @@ using Nest.Domain;
 
 namespace Nest
 {
-	public partial class GetDescriptor<T> : DocumentPathDescriptorBase<GetDescriptor<T>,T, GetQueryString>
-		, IPathInfo<GetQueryString>
+	public partial class GetDescriptor<T> : DocumentPathDescriptorBase<GetDescriptor<T>,T, GetRequestParameters>
+		, IPathInfo<GetRequestParameters>
 		where T : class
 	{
 
@@ -25,9 +25,9 @@ namespace Nest
 			return this.Preference("_local");
 		}
 
-		ElasticsearchPathInfo<GetQueryString> IPathInfo<GetQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<GetRequestParameters> IPathInfo<GetRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = this.ToPathInfo<GetQueryString>(settings, this._QueryString);
+			var pathInfo = this.ToPathInfo<GetRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 
 			return pathInfo;

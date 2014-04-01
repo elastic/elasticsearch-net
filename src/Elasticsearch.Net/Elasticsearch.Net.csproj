@@ -45,8 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connection\IRequestConfiguration.cs" />
+    <Compile Include="Connection\IRequestConnectionConfiguration.cs" />
+    <Compile Include="Connection\TransportRequestState.cs" />
+    <Compile Include="Domain\BaseRequestParameters.cs" />
     <Compile Include="Domain\IHideObjectMembers.cs" />
+    <Compile Include="Domain\IRequestParameters.cs" />
     <Compile Include="Domain\VoidResponse.cs" />
+    <Compile Include="Extensions\TaskExtensions.cs" />
     <Compile Include="Providers\DateTimeProvider.cs" />
     <Compile Include="Connection\HttpConnection.cs" />
     <Compile Include="Connection\ConnectionError.cs" />
@@ -71,7 +77,7 @@
     <Compile Include="ElasticsearchClient.Generated.cs" />
     <Compile Include="Domain\DynamicDictionary.cs" />
     <Compile Include="Domain\ElasticsearchDynamicValue.cs" />
-    <Compile Include="Exceptions\OutOfNodesException.cs" />
+    <Compile Include="Exceptions\MaxRetryException.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
@@ -81,8 +87,8 @@
     <Compile Include="IElasticsearchClient.Generated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Enums.Generated.cs" />
-    <Compile Include="Domain\FluentQueryString.cs" />
-    <Compile Include="Domain\QueryStringParameters.Generated.cs" />
+    <Compile Include="Domain\FluentRequestParameters.cs" />
+    <Compile Include="Domain\RequestParameters.Generated.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Serialization\IStringifier.cs" />
     <Compile Include="Serialization\ElasticsearchDefaultSerializer.cs" />

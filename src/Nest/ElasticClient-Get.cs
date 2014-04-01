@@ -11,7 +11,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IGetResponse<T> Get<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class
 		{
-			return this.Dispatch<GetDescriptor<T>, GetQueryString, GetResponse<T>>(
+			return this.Dispatch<GetDescriptor<T>, GetRequestParameters, GetResponse<T>>(
 				getSelector,
 				(p, d) => this.RawDispatch.GetDispatch<GetResponse<T>>(p)
 			);
@@ -20,7 +20,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IGetResponse<T>> GetAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class
 		{
-			return this.DispatchAsync<GetDescriptor<T>, GetQueryString, GetResponse<T>, IGetResponse<T>>(
+			return this.DispatchAsync<GetDescriptor<T>, GetRequestParameters, GetResponse<T>, IGetResponse<T>>(
 				getSelector,
 				(p, d) => this.RawDispatch.GetDispatchAsync<GetResponse<T>>(p)
 			);

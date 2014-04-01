@@ -75,7 +75,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dep\Newtonsoft.Json.6.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PUrify">
@@ -128,7 +129,7 @@
     <Compile Include="Domain\ICustomJson.cs" />
     <Compile Include="Domain\PropertyNameMarker.cs" />
     <Compile Include="Domain\PropertyPathMarker.cs" />
-    <Compile Include="Domain\QueryStringParametersExtensions.Generated.cs" />
+    <Compile Include="Domain\RequestParametersExtensions.Generated.cs" />
     <Compile Include="Domain\Responses\GetAliasesResponse.cs" />
     <Compile Include="Domain\Responses\GetMappingResponse.cs" />
     <Compile Include="Domain\Responses\IMultiSearchResponse.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="DSL\ClearCacheDescriptor.cs" />
     <Compile Include="DSL\Facets\Ip4Range.cs" />
     <Compile Include="DSL\Facets\DateExpressionRange.cs" />
+    <Compile Include="DSL\Paths\BasePathDescriptor.cs" />
     <Compile Include="DSL\SourceDescriptor.cs" />
     <Compile Include="DSL\NodesStatsDescriptor.cs" />
     <Compile Include="DSL\NodesInfoDescriptor.cs" />

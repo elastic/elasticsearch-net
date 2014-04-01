@@ -11,7 +11,7 @@ namespace Nest
 		public IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector)
 			where T : class
 		{
-			return this.Dispatch<ValidateQueryDescriptor<T>, ValidateQueryQueryString, ValidateResponse>(
+			return this.Dispatch<ValidateQueryDescriptor<T>, ValidateQueryRequestParameters, ValidateResponse>(
 				querySelector,
 				(p, d) => this.RawDispatch.IndicesValidateQueryDispatch<ValidateResponse>(p, d)
 			);
@@ -22,7 +22,7 @@ namespace Nest
 			Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector)
 			where T : class
 		{
-			return this.DispatchAsync<ValidateQueryDescriptor<T>, ValidateQueryQueryString, ValidateResponse, IValidateResponse>(
+			return this.DispatchAsync<ValidateQueryDescriptor<T>, ValidateQueryRequestParameters, ValidateResponse, IValidateResponse>(
 				querySelector,
 				(p, d) => this.RawDispatch.IndicesValidateQueryDispatchAsync<ValidateResponse>(p, d)
 			);

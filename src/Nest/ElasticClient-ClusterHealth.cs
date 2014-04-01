@@ -13,7 +13,7 @@ namespace Nest
 			Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null)
 		{
 			clusterHealthSelector = clusterHealthSelector ?? (s => s);
-			return this.Dispatch<ClusterHealthDescriptor, ClusterHealthQueryString, HealthResponse>(
+			return this.Dispatch<ClusterHealthDescriptor, ClusterHealthRequestParameters, HealthResponse>(
 				clusterHealthSelector,
 				(p, d) => this.RawDispatch.ClusterHealthDispatch<HealthResponse>(p)
 			);
@@ -24,7 +24,7 @@ namespace Nest
 			Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null)
 		{
 			clusterHealthSelector = clusterHealthSelector ?? (s => s);
-			return this.DispatchAsync<ClusterHealthDescriptor, ClusterHealthQueryString, HealthResponse, IHealthResponse>(
+			return this.DispatchAsync<ClusterHealthDescriptor, ClusterHealthRequestParameters, HealthResponse, IHealthResponse>(
 				clusterHealthSelector,
 				(p, d) => this.RawDispatch.ClusterHealthDispatchAsync<HealthResponse>(p)
 			);

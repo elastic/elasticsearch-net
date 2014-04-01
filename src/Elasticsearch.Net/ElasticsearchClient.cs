@@ -45,25 +45,23 @@ namespace Elasticsearch.Net
 			
 			//neccessary to pass the serializer to ElasticsearchResponse
 			this.Settings.Serializer = this.Transport.Serializer;
-			if (this.Settings.SniffsOnStartup)
-				this.Transport.Sniff(fromStartup: true);
+		
 		}
 
-		protected NameValueCollection ToNameValueCollection<TQueryString>(FluentQueryString<TQueryString> qs)
-			where TQueryString : FluentQueryString<TQueryString>
+		protected void ToNameValueCollection(BaseRequestParameters requestParameters)
 		{
-			if (qs == null)
-				return null;
-			var dict = qs._QueryStringDictionary;
+			if (requestParameters == null)
+				return;
+			var dict = requestParameters._QueryStringDictionary;
 			if (dict == null || dict.Count < 0)
-				return null;
-
+				return;
+			
 			var nv = new NameValueCollection();
 			foreach (var kv in dict.Where(kv => !kv.Key.IsNullOrEmpty()))
 			{
 				nv.Add(kv.Key, this.Stringifier.Stringify(kv.Value));
 			}
-			return nv;
+			requestParameters._queryString = nv;
 		}
 
 		public string Encoded(object o)
@@ -72,15 +70,15 @@ namespace Elasticsearch.Net
 		}
 
 
-		protected ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, NameValueCollection queryString = null, object deserializationState = null)
+		protected ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, BaseRequestParameters requestParameters = null)
 		{
-			return this.Transport.DoRequest<T>(method, path, data, queryString, deserializationState);
+			return this.Transport.DoRequest<T>(method, path, data, requestParameters);
 		}
 
 
-		protected Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, NameValueCollection queryString = null, object deserializationState = null)
+		protected Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, BaseRequestParameters requestParameters = null)
 		{
-			return this.Transport.DoRequestAsync<T>(method, path, data, queryString, deserializationState);
+			return this.Transport.DoRequestAsync<T>(method, path, data, requestParameters);
 		}
 	}
 }

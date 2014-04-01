@@ -9,7 +9,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IAnalyzeResponse Analyze(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector)
 		{
-			return this.Dispatch<AnalyzeDescriptor, AnalyzeQueryString, AnalyzeResponse>(
+			return this.Dispatch<AnalyzeDescriptor, AnalyzeRequestParameters, AnalyzeResponse>(
 				analyzeSelector,
 				(p, d) => this.RawDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, d)
 			);
@@ -18,7 +18,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector)
 		{
-			return this.DispatchAsync<AnalyzeDescriptor, AnalyzeQueryString, AnalyzeResponse, IAnalyzeResponse>(
+			return this.DispatchAsync<AnalyzeDescriptor, AnalyzeRequestParameters, AnalyzeResponse, IAnalyzeResponse>(
 				analyzeSelector,
 				(p, d) => this.RawDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, d)
 			);

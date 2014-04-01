@@ -11,7 +11,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IIndicesResponse DeleteMapping(Func<DeleteMappingDescriptor, DeleteMappingDescriptor> selector)
 		{
-			return this.Dispatch<DeleteMappingDescriptor, DeleteMappingQueryString, IndicesResponse>(
+			return this.Dispatch<DeleteMappingDescriptor, DeleteMappingRequestParameters, IndicesResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatch<IndicesResponse>(p)
 			);
@@ -20,7 +20,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IIndicesResponse> DeleteMappingAsync(Func<DeleteMappingDescriptor, DeleteMappingDescriptor> selector)
 		{
-			return this.DispatchAsync<DeleteMappingDescriptor, DeleteMappingQueryString, IndicesResponse, IIndicesResponse>(
+			return this.DispatchAsync<DeleteMappingDescriptor, DeleteMappingRequestParameters, IndicesResponse, IIndicesResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatchAsync<IndicesResponse>(p)
 			);

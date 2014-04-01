@@ -11,7 +11,7 @@ namespace Nest
 		public IShardsOperationResponse GatewaySnapshot(Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null)
 		{
 			snapshotSelector = snapshotSelector ?? (s => s);
-			return this.Dispatch<SnapshotDescriptor, SnapshotQueryString, ShardsOperationResponse>(
+			return this.Dispatch<SnapshotDescriptor, SnapshotRequestParameters, ShardsOperationResponse>(
 				snapshotSelector,
 				(p, d) => this.RawDispatch.IndicesSnapshotIndexDispatch<ShardsOperationResponse>(p)
 			);
@@ -22,7 +22,7 @@ namespace Nest
 			Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null)
 		{
 			snapshotSelector = snapshotSelector ?? (s => s);
-			return this.DispatchAsync<SnapshotDescriptor, SnapshotQueryString, ShardsOperationResponse, IShardsOperationResponse>(
+			return this.DispatchAsync<SnapshotDescriptor, SnapshotRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
 				snapshotSelector,
 				(p, d) => this.RawDispatch.IndicesSnapshotIndexDispatchAsync<ShardsOperationResponse>(p)
 			);

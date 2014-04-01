@@ -9,13 +9,22 @@ namespace Elasticsearch.Net.ConnectionPool
 {
 	public class StaticConnectionPool : IConnectionPool
 	{
+		private readonly IDateTimeProvider _dateTimeProvider;
+		
 		protected IDictionary<Uri, EndpointState> _uriLookup;
 		protected IList<Uri> _nodeUris;
+		protected int _current = -1;
+		protected bool _hasSeenStartup;
+		private bool _canUpdateNodeList;
 
 		public int MaxRetries { get { return _nodeUris.Count - 1;  } }
-		
-		protected int _current = -1;
-		private readonly IDateTimeProvider _dateTimeProvider;
+
+		public virtual bool AcceptsUpdates { get { return false; } }
+
+		public bool HasSeenStartup
+		{
+			get { return _hasSeenStartup; }
+		}
 
 		public StaticConnectionPool(
 			IEnumerable<Uri> uris, 
@@ -95,9 +104,9 @@ namespace Elasticsearch.Net.ConnectionPool
 			}
 		}
 
-		public virtual void Sniff(IConnection connection, bool fromStartupHint = false)
+		public virtual void UpdateNodeList(IList<Uri> newClusterState, bool fromStartupHint = false)
 		{
-			//NOOP on static connection class
 		}
+
 	}
 }

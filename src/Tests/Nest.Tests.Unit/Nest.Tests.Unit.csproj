@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
@@ -71,18 +71,20 @@
     <Reference Include="AutoPoco">
       <HintPath>..\..\..\dep\AutoPoco.1.0.0.0\lib\AutoPoco.dll</HintPath>
     </Reference>
-    <Reference Include="FakeItEasy, Version=1.15.0.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
+    <Reference Include="FakeItEasy, Version=1.18.0.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\dep\FakeItEasy.1.15.0\lib\net40\FakeItEasy.dll</HintPath>
+      <HintPath>..\..\..\dep\FakeItEasy.1.18.0\lib\net40\FakeItEasy.dll</HintPath>
     </Reference>
-    <Reference Include="FluentAssertions">
-      <HintPath>..\..\..\dep\FluentAssertions.2.2.0.0\lib\net45\FluentAssertions.dll</HintPath>
+    <Reference Include="FluentAssertions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\dep\FluentAssertions.2.2.0.0\lib\net40\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\..\dep\Moq.4.2.1312.1622\lib\net40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\dep\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\dep\Newtonsoft.Json.6.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\..\..\dep\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
@@ -143,6 +145,7 @@
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="Search\Fields\FieldsTests.cs" />
     <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
     <Compile Include="Search\Filter\Modes\FilterModesTests.cs" />
     <Compile Include="Search\Filter\Singles\TermsLookupFilterJson.cs" />
@@ -407,6 +410,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="Search\Fields\FixedCovariantSearchResult.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinTermIntoMustStrictFilter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

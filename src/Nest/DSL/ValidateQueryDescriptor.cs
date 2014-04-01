@@ -7,8 +7,8 @@ namespace Nest
 {
 	[DescriptorFor("IndicesValidateQuery")]
 	public partial class ValidateQueryDescriptor<T> 
-		:	QueryPathDescriptorBase<ValidateQueryDescriptor<T>, T, ValidateQueryQueryString>
-		, IPathInfo<ValidateQueryQueryString> 
+		:	QueryPathDescriptorBase<ValidateQueryDescriptor<T>, T, ValidateQueryRequestParameters>
+		, IPathInfo<ValidateQueryRequestParameters> 
 		where T : class
 	{
 		[JsonProperty("query")]
@@ -20,10 +20,10 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<ValidateQueryQueryString> IPathInfo<ValidateQueryQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<ValidateQueryRequestParameters> IPathInfo<ValidateQueryRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<ValidateQueryQueryString>(settings, this._QueryString);
-			pathInfo.QueryString = this._QueryString;
+			var pathInfo = base.ToPathInfo<ValidateQueryRequestParameters>(settings, this._QueryString);
+			pathInfo.RequestParameters = this._QueryString;
 			var qs = this._QueryString;
 			pathInfo.HttpMethod = (!qs._source.IsNullOrEmpty() || !qs._q.IsNullOrEmpty())
 				? PathInfoHttpMethod.GET

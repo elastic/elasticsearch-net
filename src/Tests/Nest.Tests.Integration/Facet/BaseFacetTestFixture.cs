@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Facet
         {
             Assert.True(queryResponse.IsValid, "response is not valid");
             Assert.NotNull(queryResponse.ConnectionStatus, "connection status is null");
-            Assert.Null(queryResponse.ConnectionStatus.Error, "connection status error is null");
+            Assert.Null(queryResponse.ConnectionStatus.OriginalException, "exception should not be set");
             Assert.True(queryResponse.Total > 0, "Query yielded no results as indicated by total returned from ES");
             Assert.True(queryResponse.Documents.Any(), "documents.any() is false");
             Assert.True(queryResponse.Documents.Count() > 0, "documents.count is 0");

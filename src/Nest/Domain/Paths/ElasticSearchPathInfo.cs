@@ -2,13 +2,13 @@
 
 namespace Nest
 {
-	internal class ElasticsearchPathInfo<T> where T : FluentQueryString<T>, new()
+	internal class ElasticsearchPathInfo<T> where T : FluentRequestParameters<T>, new()
 	{
 		public PathInfoHttpMethod HttpMethod { get; set; }
 		public string Index { get; set; }
 		public string Type { get; set; }
 		public string Id { get; set; }
-		public T QueryString { get; set; }
+		public T RequestParameters { get; set; }
 		public string Name { get; set; }
 		public string Field { get; set; }
 		public string ScrollId { get; set; }
@@ -24,7 +24,13 @@ namespace Nest
 
 		public ElasticsearchPathInfo()
 		{
-			this.QueryString = new T();
+			this.RequestParameters = new T();
+		}
+
+		public ElasticsearchPathInfo<T> DeserializationState(object deserializationState)
+		{
+			this.RequestParameters.DeserializationState(deserializationState);
+			return this;
 		}
 	}
 }

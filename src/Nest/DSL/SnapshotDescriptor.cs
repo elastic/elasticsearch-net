@@ -13,12 +13,12 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[DescriptorFor("IndicesSnapshotIndex")]
-	public partial class SnapshotDescriptor : IndicesOptionalPathDescriptor<SnapshotDescriptor, SnapshotQueryString>
-		, IPathInfo<SnapshotQueryString>
+	public partial class SnapshotDescriptor : IndicesOptionalPathDescriptor<SnapshotDescriptor, SnapshotRequestParameters>
+		, IPathInfo<SnapshotRequestParameters>
 	{
-		ElasticsearchPathInfo<SnapshotQueryString> IPathInfo<SnapshotQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<SnapshotRequestParameters> IPathInfo<SnapshotRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<SnapshotQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<SnapshotRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 
 			return pathInfo;

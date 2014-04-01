@@ -13,8 +13,8 @@ namespace Nest
 {
 	[DescriptorFor("IndicesStats")]
 	public partial class IndicesStatsDescriptor : 
-		IndicesOptionalPathDescriptor<IndicesStatsDescriptor, IndicesStatsQueryString>
-		, IPathInfo<IndicesStatsQueryString>
+		IndicesOptionalPathDescriptor<IndicesStatsDescriptor, IndicesStatsRequestParameters>
+		, IPathInfo<IndicesStatsRequestParameters>
 	{
 		private IEnumerable<TypeNameMarker> _Types { get; set; }
 		private IEnumerable<IndicesStatsMetric> _Metrics { get; set; }
@@ -32,9 +32,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<IndicesStatsQueryString> IPathInfo<IndicesStatsQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<IndicesStatsRequestParameters> IPathInfo<IndicesStatsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<IndicesStatsQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<IndicesStatsRequestParameters>(settings, this._QueryString);
 			if (this._Types.HasAny())
 			{
 				var inferrer = new ElasticInferrer(settings);

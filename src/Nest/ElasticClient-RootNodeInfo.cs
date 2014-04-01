@@ -11,7 +11,7 @@ namespace Nest
 		public IRootInfoResponse RootNodeInfo(Func<InfoDescriptor, InfoDescriptor> selector = null)
 		{
 			selector = selector ?? (i => i);
-			return this.Dispatch<InfoDescriptor, InfoQueryString, RootInfoResponse>(
+			return this.Dispatch<InfoDescriptor, InfoRequestParameters, RootInfoResponse>(
 				selector,
 				(p, d) => this.RawDispatch.InfoDispatch<RootInfoResponse>(p)
 			);
@@ -21,7 +21,7 @@ namespace Nest
 		public Task<IRootInfoResponse> RootNodeInfoAsync(Func<InfoDescriptor, InfoDescriptor> selector = null)
 		{
 			selector = selector ?? (i => i);
-			return this.DispatchAsync<InfoDescriptor, InfoQueryString, RootInfoResponse, IRootInfoResponse>(
+			return this.DispatchAsync<InfoDescriptor, InfoRequestParameters, RootInfoResponse, IRootInfoResponse>(
 				selector,
 				(p, d) => this.RawDispatch.InfoDispatchAsync<RootInfoResponse>(p)
 			);
