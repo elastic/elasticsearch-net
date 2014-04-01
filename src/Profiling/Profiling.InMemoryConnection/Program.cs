@@ -1,4 +1,5 @@
 ﻿using System;
+using Elasticsearch.Net.Connection;
 using Nest;
 using Elasticsearch.Net;
 
@@ -27,6 +28,20 @@ namespace Profiling.InMemoryConnection
 				for (int i = calls; i > 0; i--)
 				{
 					client.Index(new Doc() {Id = "asdasd" + i, Name = "Name"});
+					
+					client.Bulk(b=>b
+						.
+					)
+
+					client.Raw.Bulk("fixed-index","fixed-type", r=>r
+						.Refresh(true)
+						.Consistency(ConsistencyOptions.All)
+						.RequestConfiguration(c=>c
+							.ConnectTimeout(50)
+							.RequestTimeout(50)
+							.DisableSniffing()
+						)
+					)
 				}
 			}
 			Console.WriteLine("done");

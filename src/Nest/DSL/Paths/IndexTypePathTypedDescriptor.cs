@@ -18,7 +18,7 @@ namespace Nest
 	/// </pre>
 	/// if one of the parameters is not explicitly specified this will fall back to the defaults for type <para>T</para>
 	/// </summary>
-	public class IndexTypePathTypedDescriptor<P, K, T> 
+	public class IndexTypePathTypedDescriptor<P, K, T> : BasePathDescriptor<P>
 		where P : IndexTypePathTypedDescriptor<P, K, T>, new()
 		where K : FluentRequestParameters<K>, new()
 		where T : class
@@ -79,6 +79,7 @@ namespace Nest
 				Type = type
 			};
 			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters.RequestConfiguration(this._RequestConfiguration);
 			return pathInfo;
 		}
 

@@ -18,7 +18,7 @@ namespace Nest
 	/// </pre>
 	/// node id is optional
 	/// </summary>
-	public class NodeIdOptionalDescriptor<P, K>
+	public class NodeIdOptionalDescriptor<P, K> : BasePathDescriptor<P>
 		where P : NodeIdOptionalDescriptor<P, K> 
 		where K : FluentRequestParameters<K>, new()
 	{
@@ -41,6 +41,7 @@ namespace Nest
 				NodeId = this._NodeId
 			};
 			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters.RequestConfiguration(this._RequestConfiguration);
 			return pathInfo;
 		}
 

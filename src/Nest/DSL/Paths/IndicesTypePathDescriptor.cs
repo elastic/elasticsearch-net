@@ -18,7 +18,7 @@ namespace Nest
 	/// </pre>
 	/// {indices} is optional and so is {type} and will fallback to default of <para>T</para>
 	/// </summary>
-	public class IndicesTypePathDescriptor<P, K, T> 
+	public class IndicesTypePathDescriptor<P, K, T> : BasePathDescriptor<P>
 		where P : IndicesTypePathDescriptor<P, K, T> 
 		where K : FluentRequestParameters<K>, new()
 		where T : class
@@ -90,6 +90,7 @@ namespace Nest
 				Type = type
 			};
 			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters.RequestConfiguration(this._RequestConfiguration);
 			return pathInfo;
 		}
 

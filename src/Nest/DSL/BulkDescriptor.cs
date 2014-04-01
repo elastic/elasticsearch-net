@@ -130,7 +130,7 @@ namespace Nest
 
 		ElasticsearchPathInfo<BulkRequestParameters> IPathInfo<BulkRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = this.ToPathInfo<BulkRequestParameters>(settings, this._QueryString);
+			var pathInfo = this.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			return pathInfo;
 		}

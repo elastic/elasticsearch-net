@@ -18,7 +18,7 @@ namespace Nest
 	/// </pre>
 	/// all parameters are optional and will default to the defaults for <para>T</para>
 	/// </summary>
-	public class QueryPathDescriptorBase<P, T, K>
+	public class QueryPathDescriptorBase<P, T, K> : BasePathDescriptor<P>
 		where P : QueryPathDescriptorBase<P, T, K>, new()
 		where T : class
 		where K : FluentRequestParameters<K>, new()
@@ -139,6 +139,7 @@ namespace Nest
 
 
 			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters.RequestConfiguration(this._RequestConfiguration);
 			return pathInfo;
 		}
 

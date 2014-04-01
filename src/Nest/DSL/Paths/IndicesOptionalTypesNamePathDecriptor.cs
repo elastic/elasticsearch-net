@@ -20,7 +20,7 @@ namespace Nest
 	/// </pre>
 	/// {types} is optional, {indices} is too but needs an explicit AllIndices().
 	/// </summary>
-	public class IndicesOptionalTypesNamePathDecriptor<P, K>
+	public class IndicesOptionalTypesNamePathDecriptor<P, K> : BasePathDescriptor<P>
 		where P : IndicesOptionalTypesNamePathDecriptor<P, K>, new()
 		where K : FluentRequestParameters<K>, new()
 	{
@@ -140,6 +140,7 @@ namespace Nest
 				Name = this._Name
 			};
 			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters.RequestConfiguration(this._RequestConfiguration);
 			return pathInfo;
 		}
 

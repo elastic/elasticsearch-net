@@ -21,7 +21,12 @@ namespace Elasticsearch.Net
 			return (T)this;
 		}
 
-		public T RequestConfiguration(IRequestConfiguration requestConfiguration)
+		public T RequestConfiguration(Func<RequestConfiguration, IRequestConfiguration> selector)
+		{
+			selector.ThrowIfNull("selector");
+			this._RequestConfiguration = selector(new RequestConfiguration());
+			return (T)this;
+		}public T RequestConfiguration(IRequestConfiguration requestConfiguration)
 		{
 			this._RequestConfiguration = requestConfiguration;
 			return (T)this;

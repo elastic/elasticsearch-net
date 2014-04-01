@@ -19,7 +19,7 @@ namespace Nest
 	/// </pre>
 	/// {indices} is optional but AllIndices() needs to be explicitly called.
 	/// </summary>
-	public class IndicesOptionalExplicitAllPathDescriptor<P, K> 
+	public class IndicesOptionalExplicitAllPathDescriptor<P, K> : BasePathDescriptor<P>
 		where P : IndicesOptionalExplicitAllPathDescriptor<P, K>, new()
 		where K : FluentRequestParameters<K>, new()
 	{
@@ -71,6 +71,7 @@ namespace Nest
 				Index = index,
 			};
 			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters.RequestConfiguration(this._RequestConfiguration);
 			return pathInfo;
 		}
 

@@ -18,7 +18,7 @@ namespace Nest
 	/// </pre>
 	/// name is mandatory.
 	/// </summary>
-	public class NamePathDescriptor<P, K>
+	public class NamePathDescriptor<P, K> : BasePathDescriptor<P>
 		where P : NamePathDescriptor<P, K> 
 		where K : FluentRequestParameters<K>, new()
 	{
@@ -44,6 +44,7 @@ namespace Nest
 				Name = this._Name
 			};
 			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters.RequestConfiguration(this._RequestConfiguration);
 			return pathInfo;
 		}
 
