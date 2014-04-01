@@ -114,14 +114,5 @@ namespace Elasticsearch.Net.Connection.HttpClient
 			throw new NotImplementedException();
 		}
 
-		public bool Ping(Uri uri)
-		{
-			throw new NotImplementedException();
-		}
-
-		public IList<Uri> Sniff(Uri uri)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

@@ -68,6 +68,7 @@ namespace Elasticsearch.Net.Connection
 			return this.BodyRequest(uri, data, "DELETE", requestSpecificConfig);
 		}
 
+
 		private ElasticsearchResponse<Stream> HeaderOnlyRequest(Uri uri, string method, IRequestConnectionConfiguration requestSpecificConfig)
 		{
 			var r = this.CreateHttpWebRequest(uri, method);
@@ -78,33 +79,6 @@ namespace Elasticsearch.Net.Connection
 		{
 			var r = this.CreateHttpWebRequest(uri, method);
 			return this.DoSynchronousRequest(r, data, requestSpecificConfig);
-		}
-
-		public virtual bool Ping(Uri uri)
-		{
-			var request = this.CreateHttpWebRequest(uri, "HEAD");
-			request.Timeout = this._ConnectionSettings.PingTimeout.GetValueOrDefault(50);
-			request.ReadWriteTimeout = this._ConnectionSettings.PingTimeout.GetValueOrDefault(50);
-			using (var response = (HttpWebResponse)request.GetResponse())
-			{
-				return response.StatusCode == HttpStatusCode.OK;
-			}
-		}
-
-		public virtual IList<Uri> Sniff(Uri uri)
-		{
-			uri = new Uri(uri, "_nodes/_all/clear?timeout=" + this._ConnectionSettings.PingTimeout.GetValueOrDefault(50));
-			var request = this.CreateHttpWebRequest(uri, "GET");
-			request.Timeout = this._ConnectionSettings.Timeout;
-			request.ReadWriteTimeout = this._ConnectionSettings.Timeout;
-			using (var response = (HttpWebResponse)request.GetResponse())
-			using (var responseStream = response.GetResponseStream())
-			{
-				if (response.StatusCode != HttpStatusCode.OK)
-					return new List<Uri>();
-				var cs = ElasticsearchResponse<object>.Create(this._ConnectionSettings, (int)response.StatusCode, "GET", uri.AbsolutePath, null);
-				return Sniffer.FromStream(cs, responseStream, this._ConnectionSettings.Serializer);
-			}
 		}
 
 		public virtual Task<ElasticsearchResponse<Stream>> Get(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)

@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Serialization;
@@ -15,7 +18,10 @@ namespace Elasticsearch.Net.Connection
 			object data = null, 
 			IRequestParameters requestParameters = null);
 
-		void Sniff(bool fromStartup = false);
+		IList<Uri> Sniff();
+		void SniffClusterState();
+		bool Ping(Uri baseUri);
+		Task<bool> PingAsync(Uri baseUri);
 
 		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(
 			string method, 

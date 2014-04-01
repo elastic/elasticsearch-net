@@ -7,25 +7,6 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net.Connection
 {
-	public interface IRequestConnectionConfiguration
-	{
-		int RequestTimeout { get; }
-		int ConnectTimeout { get; }
-	}
-
-	public interface IRequestConfiguration : IRequestConnectionConfiguration
-	{
-		/// <summary>
-		/// This will override whatever is set on the connection configuration or whatever default the connectionpool has.
-		/// </summary>
-		int? MaxRetries { get; }
-
-		/// <summary>
-		/// This will force the operation on the specified node, this will bypass any configured connection pool and will no retry.
-		/// </summary>
-		Uri ForceNode { get; set; }
-	}
-
 	public interface IConnection
 	{
 
@@ -46,9 +27,6 @@ namespace Elasticsearch.Net.Connection
 
 		Task<ElasticsearchResponse<Stream>> Delete(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null);
 		ElasticsearchResponse<Stream> DeleteSync(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null);
-
-		bool Ping(Uri uri);
-		IList<Uri> Sniff(Uri uri);
 
 	}
 }

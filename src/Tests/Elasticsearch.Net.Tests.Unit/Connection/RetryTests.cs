@@ -69,11 +69,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				{
 					var result = await client.InfoAsync();
 				}
-				catch (AggregateException ae)
-				{
-					Assert.AreEqual(typeof(MaxRetryException), ae.InnerException.GetType());
-				}
-				catch (Exception e)
+				catch (MaxRetryException e)
 				{
 					Assert.AreEqual(typeof(MaxRetryException), e.GetType());
 				}
@@ -192,11 +188,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				{
 					var result = await client.InfoAsync();
 				}
-				catch (AggregateException e)
-				{
-					Assert.AreEqual(e.InnerException.GetType(), typeof(MaxRetryException));
-				}
-				catch (Exception e)
+				catch (MaxRetryException e)
 				{
 					Assert.AreEqual(e.GetType(), typeof(MaxRetryException));
 				}

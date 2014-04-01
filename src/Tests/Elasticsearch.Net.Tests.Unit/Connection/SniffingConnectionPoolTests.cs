@@ -9,9 +9,11 @@ using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
+using Elasticsearch.Net.Serialization;
 using Elasticsearch.Net.Tests.Unit.Stubs;
 using FakeItEasy;
 using FakeItEasy.Configuration;
+using FakeItEasy.Core;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -27,18 +29,18 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			{
 				//It's recommended to only have on instance of your connection pool
 				//Be sure to register it as Singleton in your IOC
-				var connectionPool = new SniffingConnectionPool(new[] { new Uri("http://localhost:9200") });
+				var uris = new[] { new Uri("http://localhost:9200") };
+				var connectionPool = new SniffingConnectionPool(uris);
 				var config = new ConnectionConfiguration(connectionPool)
+					.DisablePing()
 					.SniffOnStartup();
 				fake.Provide<IConnectionConfigurationValues>(config);
-				var param = new TypedParameter(typeof(IDateTimeProvider), null);
-				fake.Provide<ITransport, Transport>(param);
-				var connection = fake.Resolve<IConnection>();
-				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._));
-				var client1 = fake.Resolve<ElasticsearchClient>(); 
-				var client2 = fake.Resolve<ElasticsearchClient>(); 
-				var client3 = fake.Resolve<ElasticsearchClient>(); 
-				var client4 = fake.Resolve<ElasticsearchClient>(); 
+				var sniffCall = FakeCalls.Sniff(fake, config, uris);
+				var transport = FakeCalls.ProvideDefaultTransport(fake);
+				var client1 = new ElasticsearchClient(config, transport: transport); 
+				var client2 = new ElasticsearchClient(config, transport: transport); 
+				var client3 = new ElasticsearchClient(config, transport: transport); 
+				var client4 = new ElasticsearchClient(config, transport: transport); 
 
 				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
 			}
@@ -61,13 +63,14 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					DateTime.UtcNow.AddMinutes(20), //set now after sniff 4
 					DateTime.UtcNow.AddMinutes(22) //info call 5
 				);
-				var connectionPool = new SniffingConnectionPool(new[] { new Uri("http://localhost:9200") });
+				var uris = new[] { new Uri("http://localhost:9200") };
+				var connectionPool = new SniffingConnectionPool(uris);
 				var config = new ConnectionConfiguration(connectionPool)
 					.SniffLifeSpan(TimeSpan.FromMinutes(4));
 				fake.Provide<IConnectionConfigurationValues>(config);
-				fake.Provide<ITransport>(fake.Resolve<Transport>());
+				var transport = FakeCalls.ProvideDefaultTransport(fake, dateTimeProvider);
 				var connection = fake.Resolve<IConnection>();
-				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._));
+				var sniffCall = FakeCalls.Sniff(fake, config, uris);
 				
 				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.Returns(FakeResponse.Ok(config));
@@ -81,8 +84,6 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 				sniffCall.MustHaveHappened(Repeated.Exactly.Twice);
 				nowCall.MustHaveHappened(Repeated.Exactly.Times(8));
-
-				//var nowCall = A.CallTo(() => fake.Resolve<IDateTimeProvider>().Sniff(A<Uri>._, A<int>._));
 			}
 		}
 		
@@ -102,13 +103,14 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					DateTime.UtcNow.AddMinutes(10), //info call 4
 					DateTime.UtcNow.AddMinutes(12) //info call 5
 				);
-				var connectionPool = new SniffingConnectionPool(new[] { new Uri("http://localhost:9200") });
+				var uris = new[] { new Uri("http://localhost:9200") };
+				var connectionPool = new SniffingConnectionPool(uris);
 				var config = new ConnectionConfiguration(connectionPool)
-					.SniffLifeSpan(TimeSpan.FromMinutes(4));
+					.SniffLifeSpan(TimeSpan.FromMinutes(4))
+					.ExposeRawResponse();
 				fake.Provide<IConnectionConfigurationValues>(config);
-				fake.Provide<ITransport>(fake.Resolve<Transport>());
-				var connection = fake.Resolve<IConnection>();
-				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._));
+				var transport = FakeCalls.ProvideDefaultTransport(fake, dateTimeProvider);
+				var sniffCall = FakeCalls.Sniff(fake, config, uris);
 				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.ReturnsNextFromSequence(
 					FakeResponse.Ok(config), //info 1
@@ -141,14 +143,14 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var dateTimeProvider = fake.Resolve<IDateTimeProvider>();
 				var nowCall = A.CallTo(()=>dateTimeProvider.Now());
 				nowCall.Returns(DateTime.UtcNow);
-
-				var connectionPool = new SniffingConnectionPool(new[] { new Uri("http://localhost:9200") });
+				var nodes = new[] { new Uri("http://localhost:9200") };
+				var connectionPool = new SniffingConnectionPool(nodes);
 				var config = new ConnectionConfiguration(connectionPool)
 					.SniffOnConnectionFault();
 				fake.Provide<IConnectionConfigurationValues>(config);
-				fake.Provide<ITransport>(fake.Resolve<Transport>());
+				var transport = FakeCalls.ProvideDefaultTransport(fake, dateTimeProvider);
 				var connection = fake.Resolve<IConnection>();
-				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._));
+				var sniffCall = FakeCalls.Sniff(fake, config, nodes);
 				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.ReturnsNextFromSequence(
 					
@@ -169,7 +171,6 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
 				nowCall.MustHaveHappened(Repeated.Exactly.Times(7));
 
-				//var nowCall = A.CallTo(() => fake.Resolve<IDateTimeProvider>().Sniff(A<Uri>._, A<int>._));
 			}
 		}
 		[Test]
@@ -189,9 +190,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var config = new ConnectionConfiguration(connectionPool)
 					.SniffOnConnectionFault();
 				fake.Provide<IConnectionConfigurationValues>(config);
-				var connection = fake.Resolve<IConnection>();
-				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._));
-				sniffCall.Returns(new List<Uri>()
+				FakeCalls.ProvideDefaultTransport(fake);
+				FakeCalls.PingAtConnectionLevel(fake)
+					.Returns(FakeResponse.Ok(config));
+				
+				var sniffCall = FakeCalls.Sniff(fake, config, new List<Uri>()
 				{
 					new Uri("http://localhost:9204"),
 					new Uri("http://localhost:9203"),
@@ -199,9 +202,12 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					new Uri("http://localhost:9201")
 				});
 
+				var connection = fake.Resolve<IConnection>();
 				var seenNodes = new List<Uri>();
 				//var getCall =  FakeResponse.GetSyncCall(fake);
-				var getCall = A.CallTo(() => connection.GetSync(A<Uri>._, A<IRequestConfiguration>._));
+				var getCall = A.CallTo(() => connection.GetSync(
+					A<Uri>.That.Not.Matches(u=>u.AbsolutePath.StartsWith("/_nodes")), 
+					A<IRequestConfiguration>._));
 				getCall.ReturnsNextFromSequence(
 					FakeResponse.Ok(config), //info 1
 					FakeResponse.Bad(config), //info 2
@@ -214,9 +220,8 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					FakeResponse.Ok(config), //info 8
 					FakeResponse.Ok(config) //info 9
 				);
-				getCall.Invokes((Uri u, IRequestConfiguration o) => seenNodes.Add(u));
+				getCall.Invokes((Uri u, IRequestConnectionConfiguration o) => seenNodes.Add(u));
 
-				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				var client1 = fake.Resolve<ElasticsearchClient>();
 				client1.Info(); //info call 1
 				client1.Info(); //info call 2
@@ -233,13 +238,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				seenNodes[0].Port.Should().Be(9200);
 				seenNodes[1].Port.Should().Be(9201);
 				//after sniff
-				seenNodes[2].Port.Should().Be(9202);
-				seenNodes[3].Port.Should().Be(9204, string.Join(",", seenNodes.Select(n=>n.Port)));
+				seenNodes[2].Port.Should().Be(9202, string.Join(",", seenNodes.Select(n=>n.Port)));
+				seenNodes[3].Port.Should().Be(9204);
 				seenNodes[4].Port.Should().Be(9203);
 				seenNodes[5].Port.Should().Be(9202);
 				seenNodes[6].Port.Should().Be(9201);
-
-				//var nowCall = A.CallTo(() => fake.Resolve<IDateTimeProvider>().Sniff(A<Uri>._, A<int>._));
 			}
 		}
 	}

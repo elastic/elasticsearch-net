@@ -46,7 +46,13 @@ namespace Elasticsearch.Net
 		public static Task<ElasticsearchResponse<DynamicDictionary>> WrapAsync(Task<ElasticsearchResponse<Dictionary<string, object>>> responseTask)
 		{
 			return responseTask
-				.ContinueWith(t => ToDynamicResponse(t.Result));
+				.ContinueWith(t =>
+				{
+					if (t.IsFaulted)
+						throw t.Exception.Flatten().InnerException;
+
+					return ToDynamicResponse(t.Result);
+				});
 		}
 
 		public static ElasticsearchResponse<DynamicDictionary> Wrap(ElasticsearchResponse<Dictionary<string, object>> response)

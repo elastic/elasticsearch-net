@@ -9,9 +9,10 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 		public static ElasticsearchResponse<Stream> Ok(
 			IConnectionConfigurationValues config, 
 			string method = "GET",
-			string path = "/")
+			string path = "/",
+			Stream response = null)
 		{
-			return ElasticsearchResponse<Stream>.Create(config, 200, method, path, null);
+			return ElasticsearchResponse<Stream>.Create(config, 200, method, path, null, response);
 		}
 		
 		public static ElasticsearchResponse<Stream> Bad(

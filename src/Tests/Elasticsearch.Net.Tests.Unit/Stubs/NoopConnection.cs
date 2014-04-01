@@ -119,16 +119,6 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 			return _responseGenerator.Create();
 		}
 
-		public bool Ping(Uri uri)
-		{
-			return true;
-		}
-
-		public IList<Uri> Sniff(Uri uri)
-		{
-			throw new NotImplementedException();
-		}
-
 		private Task<ElasticsearchResponse<Stream>> DoAsyncRequest(Uri uri)
 		{
 			_uriObserver.Observe(uri);

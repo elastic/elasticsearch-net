@@ -32,18 +32,25 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		private static readonly int _retries = _uris.Count() - 1;
 		private readonly StaticConnectionPool _connectionPool;
 		private readonly ConnectionConfiguration _config;
+		private ElasticsearchResponse<Stream> _ok;
+		private ElasticsearchResponse<Stream> _bad;
+
 
 		public StaticConnectionPoolRetryTests()
 		{
 			_connectionPool = new StaticConnectionPool(_uris);
 			_config = new ConnectionConfiguration(_connectionPool);
+
+			_ok = FakeResponse.Ok(_config);
+			_bad = FakeResponse.Bad(_config);
 		}
 
-		private void ProvideTransport(AutoFake fake)
+		private ITransport ProvideTransport(AutoFake fake)
 		{
 			var param = new TypedParameter(typeof(IDateTimeProvider), null);
-			fake.Provide<ITransport, Transport>(param);
+			return fake.Provide<ITransport, Transport>(param);
 		}
+
 		[Test]
 		public void ThrowsOutOfNodesException_AndRetriesTheSpecifiedTimes()
 		{
@@ -60,8 +67,8 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				//an exception
 				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.Throws<Exception>();
-				var pingCall = FakeCalls.Ping(fake);
-				pingCall.Returns(true);
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(_ok);
 				
 				//create a real ElasticsearchClient with it unspecified dependencies
 				//as fakes
@@ -129,10 +136,10 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var getCall = A.CallTo(() => 
 					fake.Resolve<IConnection>().GetSync(A<Uri>._, A<IRequestConfiguration>._));
 				getCall.Throws<Exception>();
-				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
-				pingCall.Returns(true);
 
-				this.ProvideTransport(fake);
+				var transport = this.ProvideTransport(fake);
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(_ok);
 
 				var client = fake.Resolve<ElasticsearchClient>();
 
@@ -160,16 +167,16 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				//set up our GET to / to return 4 503's followed by a 200
 				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._, A<IRequestConfiguration>._));
 				getCall.ReturnsNextFromSequence(
-					ElasticsearchResponse<Stream>.Create(_config, 503, "GET", "/", null),
-					ElasticsearchResponse<Stream>.Create(_config, 503, "GET", "/", null),
-					ElasticsearchResponse<Stream>.Create(_config, 503, "GET", "/", null),
-					ElasticsearchResponse<Stream>.Create(_config, 503, "GET", "/", null),
-					ElasticsearchResponse<Stream>.Create(_config, 200, "GET", "/", null)
+					_bad,
+					_bad,
+					_bad,
+					_bad,
+					_ok
 				);
-				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
-				pingCall.Returns(true);
+				var transport = this.ProvideTransport(fake);
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(_ok);
 				//setup client
-				this.ProvideTransport(fake);
 				var client = fake.Resolve<ElasticsearchClient>();
 				
 				//Do not throw because by miracle the 4th retry manages to give back a 200
@@ -216,13 +223,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				
 				//When we do a GET on / we always recieve a 503
 				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._, A<IRequestConfiguration>._));
-				getCall.Returns(
-					ElasticsearchResponse<Stream>.Create(_config, 503, "GET", "/", null)
-				);
+				getCall.Returns(_bad);
 				
-				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
-				pingCall.Returns(true);
-				this.ProvideTransport(fake);
+				var transport = this.ProvideTransport(fake);
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(_ok);
 				var client = fake.Resolve<ElasticsearchClient>();
 				
 				//Since we always get a 503 we should see an out of nodes exception
@@ -262,20 +267,19 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 				//fake getsync handler that return a 503 4 times and then a 200
 				//this will cause all 4 nodes to be marked dead on the first client call
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._, A<IRequestConfiguration>._));
+				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.ReturnsNextFromSequence(
-					ElasticsearchResponse<Stream>.Create(_config, 503, "GET", "/", null),
-					ElasticsearchResponse<Stream>.Create(_config, 503, "GET", "/", null),
-					ElasticsearchResponse<Stream>.Create(_config, 503, "GET", "/", null),
-					ElasticsearchResponse<Stream>.Create(_config, 503, "GET", "/", null),
-					ElasticsearchResponse<Stream>.Create(_config, 200, "GET", "/", null)
+					_bad,
+					_bad,
+					_bad,
+					_bad,
+					_ok
 				);
-				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
-				pingCall.Returns(true);
-
-
 				//provide a transport with all the dependencies resolved
-				this.ProvideTransport(fake);
+				var transport = this.ProvideTransport(fake);
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(_ok);
+
 				//instantiate connection with faked dependencies
 				var client = fake.Resolve<ElasticsearchClient>();
 				
@@ -340,11 +344,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					FakeResponse.Ok(config),
 					FakeResponse.Ok(config)
 				);
-				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
-				pingCall.Returns(true);
-				
 				//provide a transport with all the dependencies resolved
-				this.ProvideTransport(fake);
+				var transport = this.ProvideTransport(fake);
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(_ok);
+				
 				//instantiate connection with faked dependencies
 				var client = fake.Resolve<ElasticsearchClient>();
 				

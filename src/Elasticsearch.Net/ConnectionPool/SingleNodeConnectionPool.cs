@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Elasticsearch.Net.Connection;
 
 namespace Elasticsearch.Net.ConnectionPool
@@ -6,8 +7,15 @@ namespace Elasticsearch.Net.ConnectionPool
 	public class SingleNodeConnectionPool : IConnectionPool
 	{
 		private readonly Uri _uri;
-		
+		private bool _hasSeenStartup;
 		public int MaxRetries { get { return 0;  } }
+
+		public bool AcceptsUpdates { get { return false; } }
+
+		public bool HasSeenStartup
+		{
+			get { return _hasSeenStartup; }
+		}
 
 		public SingleNodeConnectionPool(Uri uri)
 		{
@@ -35,9 +43,9 @@ namespace Elasticsearch.Net.ConnectionPool
 			
 		}
 
-		public void Sniff(IConnection connection, bool fromStartupHint = false)
+		public void UpdateNodeList(IList<Uri> newClusterState, bool fromStartupHint = false)
 		{
-			
 		}
+
 	}
 }

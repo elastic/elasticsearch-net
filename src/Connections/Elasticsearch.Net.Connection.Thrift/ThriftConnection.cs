@@ -196,29 +196,6 @@ namespace Elasticsearch.Net.Connection.Thrift
 			return this.Execute(restRequest, deserializationState);
 		}
 
-		public bool Ping(Uri uri)
-		{
-			var restRequest = new RestRequest();
-			restRequest.Method = Method.HEAD;
-			restRequest.Uri = uri;
-			
-			restRequest.Headers = new Dictionary<string, string>();
-			restRequest.Headers.Add("Content-Type", "application/json");
-			var r  = this.Execute(restRequest, null); //TODO VoidResponse
-			return r.Success;
-		}
-
-		public IList<Uri> Sniff(Uri uri)
-		{
-			var restRequest = new RestRequest();
-			restRequest.Method = Method.GET;
-			restRequest.Uri = new Uri(uri,"/_nodes/_all/clear?timeout=" + this._connectionSettings.PingTimeout.GetValueOrDefault(50));
-
-			restRequest.Headers = new Dictionary<string, string>();
-			restRequest.Headers.Add("Content-Type", "application/json");
-			var r  = this.Execute(restRequest, null);
-			return Sniffer.FromStream(r, r.Response, this._connectionSettings.Serializer);
-		}
 
 		#endregion
 
