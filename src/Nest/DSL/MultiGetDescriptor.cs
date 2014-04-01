@@ -71,7 +71,7 @@ namespace Nest
 		}
 		ElasticsearchPathInfo<MultiGetRequestParameters> IPathInfo<MultiGetRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = this.ToPathInfo<MultiGetRequestParameters>(settings, this._QueryString);
+			var pathInfo = this.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST; // no data in GETS in the .net world
 			return pathInfo;
 		}

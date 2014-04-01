@@ -13,13 +13,17 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// This will force the operation on the specified node, this will bypass any configured connection pool and will no retry.
 		/// </summary>
-		Uri ForceNode { get; }
+		Uri ForcedNode { get; }
 
 		/// <summary>
 		/// Forces no sniffing to occur on the request no matter what configuration is in place 
 		/// globally
 		/// </summary>
 		bool? SniffingDisabled { get; }
+
+		bool? PingDisabled { get; }
+
+		string AcceptsContentType { get; }
 
 	}
 
@@ -36,13 +40,15 @@ namespace Elasticsearch.Net.Connection
 		private int? _maxRetries;
 		private Uri _forceNode;
 		private bool? _sniffingDisabled;
+		private bool? _pingDisabled;
+		private string _acceptsContentType;
 
 		int? IRequestConfiguration.MaxRetries
 		{
 			get { return _maxRetries; }
 		}
 
-		Uri IRequestConfiguration.ForceNode
+		Uri IRequestConfiguration.ForcedNode
 		{
 			get { return _forceNode; }
 		}
@@ -52,11 +58,43 @@ namespace Elasticsearch.Net.Connection
 			get { return _sniffingDisabled; }
 		}
 
+		public bool? PingDisabled
+		{
+			get { return _pingDisabled; }
+		}
+
+		public string AcceptsContentType
+		{
+			get { return _acceptsContentType; }
+		}
+
 		public T DisableSniffing(bool? disable = true)
 		{
 			this._sniffingDisabled = disable;
 			return (T)this;
+		}
 
+		public T DisablePing(bool? disable = true)
+		{
+			this._pingDisabled = disable;
+			return (T)this;
+		}
+
+		public T ForceNode(Uri uri)
+		{
+			this._forceNode = uri;
+			return (T)this;
+		}
+		public T Retry(int retry)
+		{
+			this._maxRetries = retry;
+			return (T)this;
+		}
+		
+		public T ContentType(string accepts)
+		{
+			this._acceptsContentType = accepts;
+			return (T)this;
 		}
 	}
 }
