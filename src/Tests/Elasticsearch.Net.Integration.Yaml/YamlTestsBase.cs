@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Connection.HttpClient;
 using Elasticsearch.Net.JsonNet;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
@@ -357,6 +352,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			var nOtherJson = JArray.Parse(Encoding.UTF8.GetString(otherJson)).ToString();
 			Assert.AreEqual(nJson, nOtherJson);
 		}
+	
 		private static bool SerializedJsonEquals(object value, object oo)
 		{
 			var json = _client.Serializer.Serialize(value);
