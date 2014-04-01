@@ -170,7 +170,7 @@ namespace Elasticsearch.Net.Connection
 			IElasticsearchResponse response = null;
 
 			int initialSeed; bool shouldPingHint;
-			var baseUri = this._connectionPool.GetNext(requestState.Seed, out initialSeed, out shouldPingHint);
+			var baseUri = GetNextBaseUri(requestState, out initialSeed, out shouldPingHint);
 			requestState.Seed = initialSeed;
 
 			var uri = CreateUriToPath(baseUri, requestState.Path);
@@ -205,6 +205,18 @@ namespace Elasticsearch.Net.Connection
 					this._connectionPool.MarkAlive(baseUri);
 			}
 			return RetryRequest<T>(requestState, uri, retried);
+		}
+
+		private Uri GetNextBaseUri<T>(TransportRequestState<T> requestState, out int initialSeed, out bool shouldPingHint)
+		{
+			if (requestState.RequestConfiguration != null && requestState.RequestConfiguration.ForcedNode != null)
+			{
+				initialSeed = 0; 
+				shouldPingHint = false;
+				return requestState.RequestConfiguration.ForcedNode;
+			}
+			var baseUri = this._connectionPool.GetNext(requestState.Seed, out initialSeed, out shouldPingHint);
+			return baseUri;
 		}
 
 		private ElasticsearchResponse<T> RetryRequest<T>(TransportRequestState<T> requestState, Uri baseUri, int retried, Exception e = null)
@@ -268,7 +280,7 @@ namespace Elasticsearch.Net.Connection
 			SniffIfInformationIsTooOld(retried);
 		
 			int initialSeed; bool shouldPingHint;
-			var baseUri = this._connectionPool.GetNext(requestState.Seed, out initialSeed, out shouldPingHint);
+			var baseUri = this.GetNextBaseUri(requestState, out initialSeed, out shouldPingHint);
 			requestState.Seed = initialSeed;
 
 			var uri = CreateUriToPath(baseUri, requestState.Path);
