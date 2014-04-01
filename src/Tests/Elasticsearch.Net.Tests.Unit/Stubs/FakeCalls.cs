@@ -31,12 +31,15 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 		public static IReturnValueConfiguration<ElasticsearchResponse<Stream>> PingAtConnectionLevel(AutoFake fake)
 		{
 			return A.CallTo(() => fake.Resolve<IConnection>().HeadSync(
-				A<Uri>.That.Matches(u=>u.AbsolutePath == "/"), A<RequestConnectionConfiguration>._));
+				A<Uri>.That.Matches(IsRoot()), A<RequestConnectionConfiguration>._));
 		}
+
+		
+
 		public static IReturnValueConfiguration<Task<ElasticsearchResponse<Stream>>> PingAtConnectionLevelAsync(AutoFake fake)
 		{
 			return A.CallTo(() => fake.Resolve<IConnection>().Head(
-				A<Uri>.That.Matches(u=>u.AbsolutePath == "/"), A<RequestConnectionConfiguration>._));
+				A<Uri>.That.Matches(IsRoot()), A<RequestConnectionConfiguration>._));
 		}
 		
 		public static IReturnValueConfiguration<ElasticsearchResponse<Stream>> Sniff(
@@ -63,7 +66,15 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 		{
 			return u=>u.AbsolutePath.StartsWith("/_nodes/_all");
 		}
-
+		
+		/// <summary>
+		/// AbsolutePath == "" on .NET 3.5 but "/" thereafter.
+		/// </summary>
+		/// <returns></returns>
+		private static Expression<Func<Uri, bool>> IsRoot()
+		{
+			return u=>u.AbsolutePath == "/" || u.AbsolutePath == "";
+		}
 		public static IReturnValueConfiguration<Task<ElasticsearchResponse<Stream>>> SniffAsync(
 			AutoFake fake, 
 			IConnectionConfigurationValues configurationValues = null,
