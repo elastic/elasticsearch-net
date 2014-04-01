@@ -23,7 +23,6 @@ namespace Elasticsearch.Net.Connection
 
 		bool? PingDisabled { get; }
 
-		string AcceptsContentType { get; }
 
 	}
 
@@ -41,7 +40,6 @@ namespace Elasticsearch.Net.Connection
 		private Uri _forceNode;
 		private bool? _sniffingDisabled;
 		private bool? _pingDisabled;
-		private string _acceptsContentType;
 
 		int? IRequestConfiguration.MaxRetries
 		{
@@ -91,10 +89,6 @@ namespace Elasticsearch.Net.Connection
 			return (T)this;
 		}
 		
-		public T ContentType(string accepts)
-		{
-			this._acceptsContentType = accepts;
-			return (T)this;
-		}
+		
 	}
 }

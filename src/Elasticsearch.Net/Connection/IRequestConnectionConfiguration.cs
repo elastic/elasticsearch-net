@@ -6,6 +6,7 @@ namespace Elasticsearch.Net.Connection
 	{
 		int? TimeoutRequest { get; }
 		int? TimeoutConnect { get; }
+		string AcceptsContentType { get; }
 	}
 	
 
@@ -30,17 +31,28 @@ namespace Elasticsearch.Net.Connection
 		{
 			get { return _timeoutConnection; }
 		}
+		private string _acceptsContentType;
+		public string AcceptsContentType
+		{
+			get { return _acceptsContentType; }
+		}
 
 		public T RequestTimeout(int request)
 		{
 			this._timeoutRequest = request;
 			return (T)this;
 		}
+
 		public T ConnectTimeout(int request)
 		{
 			this._timeoutConnection = request;
 			return (T)this;
+		}		
+		
+		public T ContentType(string accepts)
+		{
+			this._acceptsContentType = accepts;
+			return (T)this;
 		}
-
 	}
 }
