@@ -40,12 +40,12 @@ namespace Elasticsearch.Net.Integration.Yaml.CatShards1
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("index1", "type1", "1", _body, nv=>nv
-					.Add("refresh", @"true")
+					.AddQueryString("refresh", @"true")
 				));
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 				//do cat.shards 
@@ -65,7 +65,7 @@ namespace Elasticsearch.Net.Integration.Yaml.CatShards1
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 				//do cat.shards 

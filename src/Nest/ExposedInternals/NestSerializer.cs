@@ -215,9 +215,7 @@ namespace Nest
 						return "scan";
 				}
 			}
-			return multiSearchDescriptor._QueryString.ContainsKey("search_type")
-				? multiSearchDescriptor._QueryString._QueryStringDictionary["search_type"] as string
-				: null;
+			return multiSearchDescriptor._QueryString.GetQueryStringValue<string>("search_type");
 		}
 
 	}

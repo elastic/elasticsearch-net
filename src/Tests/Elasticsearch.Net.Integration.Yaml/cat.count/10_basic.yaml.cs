@@ -30,7 +30,7 @@ namespace Elasticsearch.Net.Integration.Yaml.CatCount1
 
 				//do cat.count 
 				this.Do(()=> _client.CatCount(nv=>nv
-					.Add("help", @"true")
+					.AddQueryString("help", @"true")
 				));
 
 				//match this._status: 
@@ -61,7 +61,7 @@ namespace Elasticsearch.Net.Integration.Yaml.CatCount1
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("index1", "type1", "1", _body, nv=>nv
-					.Add("refresh", @"true")
+					.AddQueryString("refresh", @"true")
 				));
 
 				//do cat.count 
@@ -76,12 +76,12 @@ namespace Elasticsearch.Net.Integration.Yaml.CatCount1
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("index2", "type2", "1", _body, nv=>nv
-					.Add("refresh", @"true")
+					.AddQueryString("refresh", @"true")
 				));
 
 				//do cat.count 
 				this.Do(()=> _client.CatCount(nv=>nv
-					.Add("h", @"count")
+					.AddQueryString("h", @"count")
 				));
 
 				//match this._status: 
@@ -97,7 +97,7 @@ namespace Elasticsearch.Net.Integration.Yaml.CatCount1
 
 				//do cat.count 
 				this.Do(()=> _client.CatCount("index2", nv=>nv
-					.Add("v", @"true")
+					.AddQueryString("v", @"true")
 				));
 
 				//match this._status: 

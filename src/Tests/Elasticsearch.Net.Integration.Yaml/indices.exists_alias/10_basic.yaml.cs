@@ -62,7 +62,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesExistsAlias1
 
 				//do indices.exists_alias 
 				this.Do(()=> _client.IndicesExistsAliasForAll("test_alias", nv=>nv
-					.Add("local", @"true")
+					.AddQueryString("local", @"true")
 				));
 
 				//is_false this._status; 

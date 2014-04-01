@@ -27,7 +27,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Bulk3
 {""f1"": ""v2"", ""f2"": 47}
 ";
 				this.Do(()=> _client.Bulk(_body, nv=>nv
-					.Add("refresh", @"true")
+					.AddQueryString("refresh", @"true")
 				));
 
 				//do count 

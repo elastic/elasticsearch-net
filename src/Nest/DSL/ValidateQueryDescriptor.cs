@@ -24,8 +24,9 @@ namespace Nest
 		{
 			var pathInfo = base.ToPathInfo<ValidateQueryRequestParameters>(settings, this._QueryString);
 			pathInfo.RequestParameters = this._QueryString;
-			var qs = this._QueryString;
-			pathInfo.HttpMethod = (!qs._source.IsNullOrEmpty() || !qs._q.IsNullOrEmpty())
+			var source = this._QueryString.GetQueryStringValue<string>("source");
+			var q = this._QueryString.GetQueryStringValue<string>("q");
+			pathInfo.HttpMethod = (!source.IsNullOrEmpty() || !q.IsNullOrEmpty())
 				? PathInfoHttpMethod.GET
 				: PathInfoHttpMethod.POST;
 				

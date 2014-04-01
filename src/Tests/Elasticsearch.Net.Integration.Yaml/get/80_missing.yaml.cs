@@ -35,7 +35,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get9
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("ignore", 404)
+					.AddQueryString("ignore", 404)
 				));
 
 			}

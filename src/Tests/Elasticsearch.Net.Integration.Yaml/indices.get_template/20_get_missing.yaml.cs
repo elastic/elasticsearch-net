@@ -19,7 +19,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetTemplate2
 
 				//do indices.delete_template 
 				this.Do(()=> _client.IndicesDeleteTemplateForAll("*", nv=>nv
-					.Add("ignore", 404)
+					.AddQueryString("ignore", 404)
 				));
 
 			}

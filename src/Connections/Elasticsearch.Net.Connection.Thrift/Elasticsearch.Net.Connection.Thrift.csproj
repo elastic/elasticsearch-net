@@ -64,6 +64,12 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>keypair.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="NetReflector, Version=1.1.2009.1214, Culture=neutral, PublicKeyToken=2f4dd8b32acbcd8e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -123,6 +129,7 @@
     <Compile Include="Transport\TTransportFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="keypair.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

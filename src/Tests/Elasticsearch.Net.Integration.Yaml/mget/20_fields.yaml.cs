@@ -28,7 +28,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget6
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 				//do mget 
@@ -118,7 +118,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget6
 					}
 				};
 				this.Do(()=> _client.Mget("test_1", "test", _body, nv=>nv
-					.Add("fields", @"foo")
+					.AddQueryString("fields", @"foo")
 				));
 
 				//match _response.docs[0].fields.foo: 
@@ -181,7 +181,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget6
 					}
 				};
 				this.Do(()=> _client.Mget("test_1", "test", _body, nv=>nv
-					.Add("fields", new [] {
+					.AddQueryString("fields", new [] {
 						@"foo"
 					})
 				));
@@ -246,7 +246,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget6
 					}
 				};
 				this.Do(()=> _client.Mget("test_1", "test", _body, nv=>nv
-					.Add("fields", new [] {
+					.AddQueryString("fields", new [] {
 						@"foo",
 						@"_source"
 					})

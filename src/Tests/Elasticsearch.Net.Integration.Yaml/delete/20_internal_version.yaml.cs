@@ -31,12 +31,12 @@ namespace Elasticsearch.Net.Integration.Yaml.Delete2
 
 				//do delete 
 				this.Do(()=> _client.Delete("test_1", "test", "1", nv=>nv
-					.Add("version", 2)
+					.AddQueryString("version", 2)
 				), shouldCatch: @"conflict");
 
 				//do delete 
 				this.Do(()=> _client.Delete("test_1", "test", "1", nv=>nv
-					.Add("version", 1)
+					.AddQueryString("version", 1)
 				));
 
 				//match _response._version: 

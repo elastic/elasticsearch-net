@@ -33,7 +33,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesAnalyze1
 
 				//do indices.analyze 
 				this.Do(()=> _client.IndicesAnalyzeGetForAll(nv=>nv
-					.Add("text", @"Foo Bar")
+					.AddQueryString("text", @"Foo Bar")
 				));
 
 				//length _response.tokens: 2; 
@@ -57,9 +57,9 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesAnalyze1
 
 				//do indices.analyze 
 				this.Do(()=> _client.IndicesAnalyzeGetForAll(nv=>nv
-					.Add("filters", @"lowercase")
-					.Add("text", @"Foo Bar")
-					.Add("tokenizer", @"keyword")
+					.AddQueryString("filters", @"lowercase")
+					.AddQueryString("text", @"Foo Bar")
+					.AddQueryString("tokenizer", @"keyword")
 				));
 
 				//length _response.tokens: 1; 
@@ -95,13 +95,13 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesAnalyze1
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 				//do indices.analyze 
 				this.Do(()=> _client.IndicesAnalyzeGet("test", nv=>nv
-					.Add("field", @"text")
-					.Add("text", @"Foo Bar!")
+					.AddQueryString("field", @"text")
+					.AddQueryString("text", @"Foo Bar!")
 				));
 
 				//length _response.tokens: 2; 

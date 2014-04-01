@@ -24,5 +24,8 @@ namespace Elasticsearch.Net
 		{
 			get { return _RequestConfiguration; }
 		}
+
+
+
 	}
 }

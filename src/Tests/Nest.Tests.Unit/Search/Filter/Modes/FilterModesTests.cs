@@ -26,13 +26,10 @@ namespace Nest.Tests.Unit.Search.Filter.Modes
 			var mi = MethodInfo.GetCurrentMethod();
 			Assert.DoesNotThrow(() =>
 			{
-				var s = new SearchDescriptor<ElasticsearchProject>()
-					.From(0)
-					.Size(10)
-					.Filter(ff => ff.Verbatim().Term(p => p.Name, ""));
-				Assert.False(s._Filter.IsConditionless);
+				var f = Filter<ElasticsearchProject>.Verbatim().Term(p => p.Name, "");
+				Assert.False(f.IsConditionless);
 				//make sure empty term is not lost on s
-				this.JsonEquals(s, mi);
+				this.JsonEquals(f, mi);
 			});
 
 		}
@@ -41,11 +38,8 @@ namespace Nest.Tests.Unit.Search.Filter.Modes
 		public void ConditionlessIsStillConditionless()
 		{
 			var mi = MethodInfo.GetCurrentMethod();
-			var s = new SearchDescriptor<ElasticsearchProject>()
-					.From(0)
-					.Size(10)
-					.Filter(ff => ff.Term(p => p.Name, ""));
-			Assert.Null(s._Filter);
+			var f = Filter<ElasticsearchProject>.Term(p => p.Name, "");
+			Assert.True(f.IsConditionless);
 			
 		}
 

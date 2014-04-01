@@ -85,7 +85,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetFieldMapping5
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 			}

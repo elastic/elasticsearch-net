@@ -25,7 +25,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Index3
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("op_type", @"create")
+					.AddQueryString("op_type", @"create")
 				));
 
 				//do index 
@@ -33,7 +33,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Index3
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("op_type", @"create")
+					.AddQueryString("op_type", @"create")
 				), shouldCatch: @"conflict");
 
 				//do index 
@@ -41,7 +41,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Index3
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("op_type", @"index")
+					.AddQueryString("op_type", @"index")
 				));
 
 				//match _response._version: 

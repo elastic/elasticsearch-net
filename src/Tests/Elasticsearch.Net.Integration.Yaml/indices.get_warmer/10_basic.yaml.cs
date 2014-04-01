@@ -61,7 +61,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetWarmer1
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 			}
@@ -382,7 +382,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetWarmer1
 
 				//do indices.get_warmer 
 				this.Do(()=> _client.IndicesGetWarmerForAll(nv=>nv
-					.Add("local", @"true")
+					.AddQueryString("local", @"true")
 				));
 
 				//is_true _response.test_1; 

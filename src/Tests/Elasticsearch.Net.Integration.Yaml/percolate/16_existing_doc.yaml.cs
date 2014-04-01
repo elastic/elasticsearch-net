@@ -59,8 +59,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Percolate2
 
 				//do percolate 
 				this.Do(()=> _client.PercolateGet("my_index", "my_type", "1", nv=>nv
-					.Add("percolate_index", @"percolator_index")
-					.Add("percolate_type", @"test_type")
+					.AddQueryString("percolate_index", @"percolator_index")
+					.AddQueryString("percolate_type", @"test_type")
 				));
 
 				//match _response.matches: 
@@ -76,9 +76,9 @@ namespace Elasticsearch.Net.Integration.Yaml.Percolate2
 
 				//do percolate 
 				this.Do(()=> _client.PercolateGet("my_index", "my_type", "1", nv=>nv
-					.Add("version", 2)
-					.Add("percolate_index", @"percolator_index")
-					.Add("percolate_type", @"test_type")
+					.AddQueryString("version", 2)
+					.AddQueryString("percolate_index", @"percolator_index")
+					.AddQueryString("percolate_type", @"test_type")
 				));
 
 				//match _response.matches: 
@@ -88,9 +88,9 @@ namespace Elasticsearch.Net.Integration.Yaml.Percolate2
 
 				//do percolate 
 				this.Do(()=> _client.PercolateGet("my_index", "my_type", "1", nv=>nv
-					.Add("version", 1)
-					.Add("percolate_index", @"percolator_index")
-					.Add("percolate_type", @"test_type")
+					.AddQueryString("version", 1)
+					.AddQueryString("percolate_index", @"percolator_index")
+					.AddQueryString("percolate_type", @"test_type")
 				), shouldCatch: @"conflict");
 
 			}

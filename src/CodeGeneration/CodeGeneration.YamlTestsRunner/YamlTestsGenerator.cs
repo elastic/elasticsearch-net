@@ -51,8 +51,8 @@ namespace CodeGeneration.YamlTestsRunner
 			RegisterView("DispatchSteps");
 			RegisterView("SetupClass");
 			var rawCalls = from l in File.ReadAllLines(_rawClientInterface)
-				where Regex.IsMatch(l, @"\tElasticsearchResponse ")
-				select l.Replace("\t\tElasticsearchResponse", "").Trim();
+				where Regex.IsMatch(l, @"\tElasticsearchResponse<[^>]+> ")
+				select Regex.Replace(l,@"\t\tElasticsearchResponse<[^>]+>", "").Trim();
 			RawElasticCalls = rawCalls.ToList();
 		}
 

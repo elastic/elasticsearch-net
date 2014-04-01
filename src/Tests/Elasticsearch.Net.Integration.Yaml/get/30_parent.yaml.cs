@@ -31,7 +31,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get4
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 				//do index 
@@ -39,7 +39,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get4
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("parent", @"ä¸­æ–‡")
+					.AddQueryString("parent", @"ä¸­æ–‡")
 				));
 
 			}
@@ -55,8 +55,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Get4
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("parent", @"ä¸­æ–‡")
-					.Add("fields", new [] {
+					.AddQueryString("parent", @"ä¸­æ–‡")
+					.AddQueryString("fields", new [] {
 						@"_parent",
 						@"_routing"
 					})

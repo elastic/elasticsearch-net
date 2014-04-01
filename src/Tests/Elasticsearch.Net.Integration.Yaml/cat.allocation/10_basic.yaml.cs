@@ -30,7 +30,7 @@ namespace Elasticsearch.Net.Integration.Yaml.CatAllocation1
 
 				//do cat.allocation 
 				this.Do(()=> _client.CatAllocation(nv=>nv
-					.Add("help", @"true")
+					.AddQueryString("help", @"true")
 				));
 
 				//match this._status: 
@@ -88,8 +88,8 @@ $/
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"green")
-					.Add("timeout", @"1s")
+					.AddQueryString("wait_for_status", @"green")
+					.AddQueryString("timeout", @"1s")
 				));
 
 				//do cat.allocation 
@@ -162,7 +162,7 @@ $/
 
 				//do cat.allocation 
 				this.Do(()=> _client.CatAllocation(nv=>nv
-					.Add("v", @"true")
+					.AddQueryString("v", @"true")
 				));
 
 				//match this._status: 
@@ -201,7 +201,7 @@ $/
 
 				//do cat.allocation 
 				this.Do(()=> _client.CatAllocation(nv=>nv
-					.Add("h", new [] {
+					.AddQueryString("h", new [] {
 						@"disk.percent",
 						@"node"
 					})
@@ -218,11 +218,11 @@ $/
 
 				//do cat.allocation 
 				this.Do(()=> _client.CatAllocation(nv=>nv
-					.Add("h", new [] {
+					.AddQueryString("h", new [] {
 						@"disk.percent",
 						@"node"
 					})
-					.Add("v", @"true")
+					.AddQueryString("v", @"true")
 				));
 
 				//match this._status: 
@@ -250,7 +250,7 @@ $/
 
 				//do cat.allocation 
 				this.Do(()=> _client.CatAllocation(nv=>nv
-					.Add("bytes", @"g")
+					.AddQueryString("bytes", @"g")
 				));
 
 				//match this._status: 

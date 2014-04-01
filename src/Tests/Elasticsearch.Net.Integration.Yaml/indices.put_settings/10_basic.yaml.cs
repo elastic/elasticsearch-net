@@ -32,7 +32,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesPutSettings1
 
 				//do indices.get_settings 
 				this.Do(()=> _client.IndicesGetSettings("test-index", nv=>nv
-					.Add("flat_settings", @"true")
+					.AddQueryString("flat_settings", @"true")
 				));
 
 				//match _response[@"test-index"][@"settings"][@"index.number_of_replicas"]: 
@@ -46,7 +46,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesPutSettings1
 
 				//do indices.get_settings 
 				this.Do(()=> _client.IndicesGetSettingsForAll(nv=>nv
-					.Add("flat_settings", @"false")
+					.AddQueryString("flat_settings", @"false")
 				));
 
 				//match _response[@"test-index"][@"settings"][@"index"][@"number_of_replicas"]: 

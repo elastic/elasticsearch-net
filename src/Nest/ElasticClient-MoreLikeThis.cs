@@ -38,9 +38,7 @@ namespace Nest
 		private static void CopySearchRequestParameters<T>(MoreLikeThisDescriptor<T> d) where T : class
 		{
 			if (d._Search == null) return;
-			var searchQs = d._Search._QueryString._QueryStringDictionary;
-			foreach (var k in searchQs.Keys)
-				d._QueryString._QueryStringDictionary[k] = searchQs[k];
+			d._QueryString.CopyQueryStringValuesFrom(d._Search._QueryString);
 		}
 	}
 }

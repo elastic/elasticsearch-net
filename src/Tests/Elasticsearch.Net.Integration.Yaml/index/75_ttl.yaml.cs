@@ -36,7 +36,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Index11
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 				//do index 
@@ -47,7 +47,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Index11
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields", @"_ttl")
+					.AddQueryString("fields", @"_ttl")
 				));
 
 				//lt _response.fields._ttl: 10000; 
@@ -61,12 +61,12 @@ namespace Elasticsearch.Net.Integration.Yaml.Index11
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("ttl", 100000)
+					.AddQueryString("ttl", 100000)
 				));
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields", @"_ttl")
+					.AddQueryString("fields", @"_ttl")
 				));
 
 				//lt _response.fields._ttl: 100000; 
@@ -80,12 +80,12 @@ namespace Elasticsearch.Net.Integration.Yaml.Index11
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("ttl", @"20s")
+					.AddQueryString("ttl", @"20s")
 				));
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields", @"_ttl")
+					.AddQueryString("fields", @"_ttl")
 				));
 
 				//lt _response.fields._ttl: 20000; 
@@ -99,8 +99,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Index11
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("ttl", @"20s")
-					.Add("timestamp", @"2013-06-23T18:14:40")
+					.AddQueryString("ttl", @"20s")
+					.AddQueryString("timestamp", @"2013-06-23T18:14:40")
 				), shouldCatch: @"/AlreadyExpiredException/");
 
 			}

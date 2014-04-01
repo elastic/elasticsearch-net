@@ -63,7 +63,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mtermvectors1
 					}
 				};
 				this.Do(()=> _client.Mtermvectors(_body, nv=>nv
-					.Add("term_statistics", @"true")
+					.AddQueryString("term_statistics", @"true")
 				));
 
 				//match _response.docs[0].term_vectors.text.terms.brown.term_freq: 
@@ -83,7 +83,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mtermvectors1
 					}
 				};
 				this.Do(()=> _client.Mtermvectors(_body, nv=>nv
-					.Add("term_statistics", @"true")
+					.AddQueryString("term_statistics", @"true")
 				));
 
 				//match _response.docs[0].term_vectors.text.terms.brown.term_freq: 
@@ -102,7 +102,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mtermvectors1
 					}
 				};
 				this.Do(()=> _client.Mtermvectors("testidx", _body, nv=>nv
-					.Add("term_statistics", @"true")
+					.AddQueryString("term_statistics", @"true")
 				));
 
 				//match _response.docs[0].term_vectors.text.terms.brown.term_freq: 
@@ -120,7 +120,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mtermvectors1
 					}
 				};
 				this.Do(()=> _client.Mtermvectors("testidx", "testtype", _body, nv=>nv
-					.Add("term_statistics", @"true")
+					.AddQueryString("term_statistics", @"true")
 				));
 
 				//match _response.docs[0].term_vectors.text.terms.brown.term_freq: 
@@ -131,8 +131,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Mtermvectors1
 
 				//do mtermvectors 
 				this.Do(()=> _client.MtermvectorsGet("testidx", "testtype", nv=>nv
-					.Add("term_statistics", @"true")
-					.Add("ids", new [] {
+					.AddQueryString("term_statistics", @"true")
+					.AddQueryString("ids", new [] {
 						@"testing_document"
 					})
 				));

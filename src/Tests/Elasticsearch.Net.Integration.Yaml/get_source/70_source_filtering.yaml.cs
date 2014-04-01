@@ -32,7 +32,7 @@ namespace Elasticsearch.Net.Integration.Yaml.GetSource7
 
 				//do get_source 
 				this.Do(()=> _client.GetSource("test_1", "test", "1", nv=>nv
-					.Add("_source_include", @"include.field1")
+					.AddQueryString("_source_include", @"include.field1")
 				));
 
 				//match _response.include.field1: 
@@ -43,7 +43,7 @@ namespace Elasticsearch.Net.Integration.Yaml.GetSource7
 
 				//do get_source 
 				this.Do(()=> _client.GetSource("test_1", "test", "1", nv=>nv
-					.Add("_source_include", @"include.field1,include.field2")
+					.AddQueryString("_source_include", @"include.field1,include.field2")
 				));
 
 				//match _response.include.field1: 
@@ -57,8 +57,8 @@ namespace Elasticsearch.Net.Integration.Yaml.GetSource7
 
 				//do get_source 
 				this.Do(()=> _client.GetSource("test_1", "test", "1", nv=>nv
-					.Add("_source_include", @"include")
-					.Add("_source_exclude", @"*.field2")
+					.AddQueryString("_source_include", @"include")
+					.AddQueryString("_source_exclude", @"*.field2")
 				));
 
 				//match _response.include.field1: 

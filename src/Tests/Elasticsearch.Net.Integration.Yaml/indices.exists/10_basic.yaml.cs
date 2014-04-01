@@ -47,7 +47,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesExists1
 
 				//do indices.exists 
 				this.Do(()=> _client.IndicesExists("test_index", nv=>nv
-					.Add("local", @"true")
+					.AddQueryString("local", @"true")
 				));
 
 				//is_false this._status; 

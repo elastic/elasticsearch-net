@@ -119,7 +119,7 @@ namespace Nest
 
 		/// <summary>
 		/// The validate API allows a user to validate a potentially expensive query without executing it.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-validate.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-validate.html
 		/// </summary>
 		/// <typeparam name="T">The type used to describe the query</typeparam>
 		/// <param name="querySelector">A descriptor that describes the query operation</param>
@@ -128,7 +128,7 @@ namespace Nest
 		
 		/// <summary>
 		/// The validate API allows a user to validate a potentially expensive query without executing it.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-validate.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-validate.html
 		/// </summary>
 		/// <typeparam name="T">The type used to describe the query</typeparam>
 		/// <param name="querySelector">A descriptor that describes the query operation</param>
@@ -139,7 +139,7 @@ namespace Nest
 		/// A closed index has almost no overhead on the cluster (except for maintaining its metadata), and is blocked 
 		/// for read/write operations. 
 		/// A closed index can be opened which will then go through the normal recovery process.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html
 		/// </summary>
 		/// <param name="openIndexSelector">A descriptor thata describes the open index operation</param>
 		IIndicesOperationResponse OpenIndex(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector);
@@ -149,7 +149,7 @@ namespace Nest
 		/// A closed index has almost no overhead on the cluster (except for maintaining its metadata), and is blocked 
 		/// for read/write operations. 
 		/// A closed index can be opened which will then go through the normal recovery process.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html
 		/// </summary>
 		/// <param name="openIndexSelector">A descriptor thata describes the open index operation</param>
 		Task<IIndicesOperationResponse> OpenIndexAsync(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector);
@@ -159,9 +159,9 @@ namespace Nest
 		/// A closed index has almost no overhead on the cluster (except for maintaining its metadata), and is blocked 
 		/// for read/write operations. 
 		/// A closed index can be opened which will then go through the normal recovery process.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html
 		/// </summary>
-		/// <param name="openIndexSelector">A descriptor thata describes the close index operation</param>
+		/// <param name="closeIndexSelector">A descriptor thata describes the close index operation</param>
 		IIndicesOperationResponse CloseIndex(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
 		
 		/// <summary>
@@ -169,9 +169,9 @@ namespace Nest
 		/// A closed index has almost no overhead on the cluster (except for maintaining its metadata), and is blocked 
 		/// for read/write operations. 
 		/// A closed index can be opened which will then go through the normal recovery process.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html
 		/// </summary>
-		/// <param name="openIndexSelector">A descriptor thata describes the close index operation</param>
+		/// <param name="closeSelector">A descriptor thata describes the close index operation</param>
 		Task<IIndicesOperationResponse> CloseIndexAsync(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
 		
 		/// <summary>
@@ -180,7 +180,7 @@ namespace Nest
 		/// controlled completely through this API.
 		/// <para>Note, this API only applies when using shared storage gateway implementation, 
 		/// and does not apply when using the (default) local gateway.</para>
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-gateway-snapshot.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-gateway-snapshot.html
 		/// </summary>
 		/// <param name="snapShotSelector">A descriptor that describes the parameters for the gateway snapshot operation</param>
 		IShardsOperationResponse GatewaySnapshot(Func<SnapshotDescriptor, SnapshotDescriptor> snapShotSelector = null);
@@ -191,7 +191,7 @@ namespace Nest
 		/// controlled completely through this API.
 		/// <para>Note, this API only applies when using shared storage gateway implementation, 
 		/// and does not apply when using the (default) local gateway.</para>
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-gateway-snapshot.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-gateway-snapshot.html
 		/// </summary>
 		/// <param name="snapShotSelector">A descriptor that describes the parameters for the gateway snapshot operation</param>
 		Task<IShardsOperationResponse> GatewaySnapshotAsync(Func<SnapshotDescriptor, SnapshotDescriptor> snapShotSelector = null);
@@ -199,7 +199,7 @@ namespace Nest
 		/// <summary>
 		/// The refresh API allows to explicitly refresh one or more index, making all operations performed since the last refresh 
 		/// available for search. The (near) real-time capabilities depend on the index engine used. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-refresh.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-refresh.html
 		/// </summary>
 		/// <param name="refreshSelector">A descriptor that describes the parameters for the refresh operation</param>
 		IShardsOperationResponse Refresh(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null);
@@ -207,7 +207,7 @@ namespace Nest
 		/// <summary>
 		/// The refresh API allows to explicitly refresh one or more index, making all operations performed since the last refresh 
 		/// available for search. The (near) real-time capabilities depend on the index engine used. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-refresh.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-refresh.html
 		/// </summary>
 		/// <param name="refreshSelector">A descriptor that describes the parameters for the refresh operation</param>
 		Task<IShardsOperationResponse> RefreshAsync(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null);
@@ -216,7 +216,7 @@ namespace Nest
 		/// Provide low level segments information that a Lucene index (shard level) is built with. 
 		/// Allows to be used to provide more information on the state of a shard and an index, possibly optimization information,
 		/// data "wasted" on deletes, and so on.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-segments.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-segments.html
 		/// </summary>
 		/// <param name="segmentsSelector">A descriptor that describes the parameters for the segments operation</param>
 		ISegmentsResponse Segments(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null);
@@ -225,21 +225,21 @@ namespace Nest
 		/// Provide low level segments information that a Lucene index (shard level) is built with. 
 		/// Allows to be used to provide more information on the state of a shard and an index, possibly optimization information,
 		/// data "wasted" on deletes, and so on.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-segments.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-segments.html
 		/// </summary>
 		/// <param name="segmentsSelector">A descriptor that describes the parameters for the segments operation</param>
 		Task<ISegmentsResponse> SegmentsAsync(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null);
 		
 		/// <summary>
 		/// The cluster state API allows to get a comprehensive state information of the whole cluster.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-state.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-state.html
 		/// </summary>
 		/// <param name="clusterStateSelector">A descriptor that describes the parameters for the cluster state operation</param>
 		IClusterStateResponse ClusterState(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null);
 
 		/// <summary>
 		/// The cluster state API allows to get a comprehensive state information of the whole cluster.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-state.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-state.html
 		/// </summary>
 		/// <param name="clusterStateSelector">A descriptor that describes the parameters for the cluster state operation</param>
 		Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null);
@@ -248,7 +248,7 @@ namespace Nest
 		/// Allows to put a warmup search request on a specific index (or indices), with the body composing of a regular 
 		/// search request. Types can be provided as part of the URI if the search request is designed to be run only 
 		/// against the specific types.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
 		/// </summary>
 		/// <param name="name">The name for the warmer that you want to register</param>
 		/// <param name="selector">A descriptor that further describes what the warmer should look like</param>
@@ -258,7 +258,7 @@ namespace Nest
 		/// Allows to put a warmup search request on a specific index (or indices), with the body composing of a regular 
 		/// search request. Types can be provided as part of the URI if the search request is designed to be run only 
 		/// against the specific types.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
 		/// </summary>
 		/// <param name="name">The name for the warmer that you want to register</param>
 		/// <param name="selector">A descriptor that further describes what the warmer should look like</param>
@@ -266,7 +266,7 @@ namespace Nest
 		
 		/// <summary>
 		/// Getting a warmer for specific index (or alias, or several indices) based on its name. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
 		/// </summary>
 		/// <param name="name">The name of the warmer to get</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the get warmer operation</param>
@@ -274,7 +274,7 @@ namespace Nest
 		
 		/// <summary>
 		/// Getting a warmer for specific index (or alias, or several indices) based on its name. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
 		/// </summary>
 		/// <param name="name">The name of the warmer to get</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the get warmer operation</param>
@@ -282,7 +282,7 @@ namespace Nest
 
 		/// <summary>
 		/// Deletes a warmer
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
 		/// </summary>
 		/// <param name="name">The name of the warmer to delete</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the delete warmer operation</param>
@@ -290,7 +290,7 @@ namespace Nest
 
 		/// <summary>
 		/// Deletes a warmer
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
 		/// </summary>
 		/// <param name="name">The name of the warmer to delete</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the delete warmer operation</param>
@@ -298,7 +298,7 @@ namespace Nest
 
 		/// <summary>
 		/// Gets an index template
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
 		/// </summary>
 		/// <param name="name">The name of the template to get</param>
 		/// <param name="getTemplateSelector">An optional selector specifying additional parameters for the get template operation</param>
@@ -306,7 +306,7 @@ namespace Nest
 		
 		/// <summary>
 		/// Gets an index template
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
 		/// </summary>
 		/// <param name="name">The name of the template to get</param>
 		/// <param name="getTemplateSelector">An optional selector specifying additional parameters for the get template operation</param>
@@ -316,7 +316,7 @@ namespace Nest
 		/// Index templates allow to define templates that will automatically be applied to new indices created. 
 		/// <para>The templates include both settings and mappings, and a simple pattern template that controls if 
 		/// the template will be applied to the index created. </para>
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
 		/// </summary>
 		/// <param name="name">The name of the template to register</param>
 		/// <param name="putTemplateSelector">An optional selector specifying additional parameters for the put template operation</param>
@@ -326,7 +326,7 @@ namespace Nest
 		/// Index templates allow to define templates that will automatically be applied to new indices created. 
 		/// <para>The templates include both settings and mappings, and a simple pattern template that controls if 
 		/// the template will be applied to the index created. </para>
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
 		/// </summary>
 		/// <param name="name">The name of the template to register</param>
 		/// <param name="putTemplateSelector">An optional selector specifying additional parameters for the put template operation</param>
@@ -334,7 +334,7 @@ namespace Nest
 
 		/// <summary>
 		/// Deletes an index template
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
 		/// </summary>
 		/// <param name="name">The name of the template to delete</param>
 		/// <param name="deleteTemplateSelector">An optional selector specifying additional parameters for the delete template operation</param>
@@ -342,7 +342,7 @@ namespace Nest
 		
 		/// <summary>
 		/// Deletes an index template
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
 		/// </summary>
 		/// <param name="name">The name of the template to delete</param>
 		/// <param name="deleteTemplateSelector">An optional selector specifying additional parameters for the delete template operation</param>
@@ -350,7 +350,7 @@ namespace Nest
 
 		/// <summary>
 		/// Unregister a percolator
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
 		/// </summary>
 		/// <param name="name">The name for the percolator</param>
 		/// <param name="selector">An optional descriptor describing the unregister percolator operation further</param>
@@ -358,7 +358,7 @@ namespace Nest
 
 		/// <summary>
 		/// Unregister a percolator
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
 		/// </summary>
 		/// <param name="name">The name for the percolator</param>
 		/// <param name="selector">An optional descriptor describing the unregister percolator operation further</param>
@@ -366,7 +366,7 @@ namespace Nest
 
 		/// <summary>
 		/// Register a percolator
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
 		/// </summary>
 		/// <typeparam name="T">The type to infer the index/type from, will also be used to strongly type the query</typeparam>
 		/// <param name="name">The name for the percolator</param>
@@ -376,7 +376,7 @@ namespace Nest
 
 		/// <summary>
 		/// Register a percolator
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
 		/// </summary>
 		/// <typeparam name="T">The type to infer the index/type from, will also be used to strongly type the query</typeparam>
 		/// <param name="name">The name for the percolator</param>
@@ -386,7 +386,7 @@ namespace Nest
 
 		/// <summary>
 		/// Percolate a document
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
 		/// </summary>
 		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
 		/// <param name="object">The object to percolator</param>
@@ -396,7 +396,7 @@ namespace Nest
 
 		/// <summary>
 		/// Percolate a document
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
 		/// </summary>
 		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
 		/// <param name="object">The object to percolator</param>
@@ -406,7 +406,7 @@ namespace Nest
 		
 		/// <summary>
 		/// Percolate a document
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
 		/// </summary>
 		/// <typeparam name="T">The type to infer the index/type from</typeparam>
 		/// <typeparam name="K">The type of the object that is being percolated</typeparam>
@@ -418,7 +418,7 @@ namespace Nest
 		
 		/// <summary>
 		/// Percolate a document
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
 		/// </summary>
 		/// <typeparam name="T">The type to infer the index/type from</typeparam>
 		/// <typeparam name="K">The type of the object that is being percolated</typeparam>
@@ -430,7 +430,7 @@ namespace Nest
 
 		/// <summary>
 		/// The put mapping API allows to register specific mapping definition for a specific type.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-put-mapping.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-put-mapping.html
 		/// </summary>
 		/// <typeparam name="T">The type we want to map in elasticsearch</typeparam>
 		/// <param name="mappingSelector">A descriptor to describe the mapping of our type</param>
@@ -439,7 +439,7 @@ namespace Nest
 		
 		/// <summary>
 		/// The put mapping API allows to register specific mapping definition for a specific type.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-put-mapping.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-put-mapping.html
 		/// </summary>
 		/// <typeparam name="T">The type we want to map in elasticsearch</typeparam>
 		/// <param name="mappingSelector">A descriptor to describe the mapping of our type</param>
@@ -448,28 +448,28 @@ namespace Nest
 
 		/// <summary>
 		/// The get mapping API allows to retrieve mapping definitions for an index or index/type.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-mapping.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-mapping.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the get mapping operation</param>
 		IGetMappingResponse GetMapping(Func<GetMappingDescriptor, GetMappingDescriptor> selector);
 		
 		/// <summary>
 		/// The get mapping API allows to retrieve mapping definitions for an index or index/type.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-mapping.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-mapping.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the get mapping operation</param>
 		Task<IGetMappingResponse> GetMappingAsync(Func<GetMappingDescriptor, GetMappingDescriptor> selector);
 		
 		/// <summary>
 		/// Allow to delete a mapping (type) along with its data. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-mapping.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-mapping.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the delete mapping operation</param>
 		IIndicesResponse DeleteMapping(Func<DeleteMappingDescriptor, DeleteMappingDescriptor> selector);
 		
 		/// <summary>
 		/// Allow to delete a mapping (type) along with its data. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-mapping.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-mapping.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the delete mapping operation</param>
 		Task<IIndicesResponse> DeleteMappingAsync(Func<DeleteMappingDescriptor, DeleteMappingDescriptor> selector);
@@ -479,7 +479,7 @@ namespace Nest
 		/// frees memory from the index by flushing data to the index storage and clearing the internal transaction log. 
 		/// By default, Elasticsearch uses memory heuristics in order to automatically trigger 
 		/// flush operations as required in order to clear memory.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-flush.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-flush.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the flush operation</param>
 		IShardsOperationResponse Flush(Func<FlushDescriptor, FlushDescriptor> selector);
@@ -489,49 +489,49 @@ namespace Nest
 		/// frees memory from the index by flushing data to the index storage and clearing the internal transaction log. 
 		/// By default, Elasticsearch uses memory heuristics in order to automatically trigger 
 		/// flush operations as required in order to clear memory.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-flush.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-flush.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the flush operation</param>
 		Task<IShardsOperationResponse> FlushAsync(Func<FlushDescriptor, FlushDescriptor> selector);
 		
 		/// <summary>
 		/// The get settings API allows to retrieve settings of index/indices.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-settings.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-settings.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the get index settings operation</param>
 		IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector);
 
 		/// <summary>
 		/// The get settings API allows to retrieve settings of index/indices.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-settings.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-settings.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the get index settings operation</param>
 		Task<IIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector);
 
 		/// <summary>
 		/// The delete index API allows to delete an existing index.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-index.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-index.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the delete index operation</param>
 		IIndicesResponse DeleteIndex(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector);
 		
 		/// <summary>
 		/// The delete index API allows to delete an existing index.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-index.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-index.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the delete index operation</param>
 		Task<IIndicesResponse> DeleteIndexAsync(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector);
 		
 		/// <summary>
 		/// The clear cache API allows to clear either all caches or specific cached associated with one ore more indices.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-clearcache.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-clearcache.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the clear cache operation</param>
 		IShardsOperationResponse ClearCache(Func<ClearCacheDescriptor, ClearCacheDescriptor> selector = null);
 		
 		/// <summary>
 		/// The clear cache API allows to clear either all caches or specific cached associated with one ore more indices.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-clearcache.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-clearcache.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the clear cache operation</param>
 		Task<IShardsOperationResponse> ClearCacheAsync(Func<ClearCacheDescriptor, ClearCacheDescriptor> selector = null);
@@ -539,7 +539,7 @@ namespace Nest
 		/// <summary>
 		/// The create index API allows to instantiate an index. Elasticsearch provides support for multiple indices, 
 		/// including executing operations across several indices.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
 		/// </summary>
 		/// <param name="index">The name of the index to be created</param>
 		/// <param name="createIndexSelector">A descriptor that further describes the parameters for the create index operation</param>
@@ -548,7 +548,7 @@ namespace Nest
 		/// <summary>
 		/// The create index API allows to instantiate an index. Elasticsearch provides support for multiple indices, 
 		/// including executing operations across several indices.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
 		/// </summary>
 		/// <param name="index">The name of the index to be created</param>
 		/// <param name="createIndexSelector">A descriptor that further describes the parameters for the create index operation</param>
@@ -569,7 +569,7 @@ namespace Nest
 		/// <summary>
 		/// Indices level stats provide statistics on different operations happening on an index. The API provides statistics on 
 		/// the index level scope (though most stats can also be retrieved using node level scope).
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-stats.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-stats.html
 		/// </summary>
 		/// <param name="selector">Optionaly further describe the indices stats operation</param>
 		IGlobalStatsResponse IndicesStats(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null);
@@ -577,56 +577,56 @@ namespace Nest
 		/// <summary>
 		/// Indices level stats provide statistics on different operations happening on an index. The API provides statistics on 
 		/// the index level scope (though most stats can also be retrieved using node level scope).
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-stats.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-stats.html
 		/// </summary>
 		/// <param name="selector">Optionaly further describe the indices stats operation</param>
 		Task<IGlobalStatsResponse> IndicesStatsAsync(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null);
 		
 		/// <summary>
 		/// The cluster nodes info API allows to retrieve one or more (or all) of the cluster nodes information.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
 		/// </summary>
 		/// <param name="selector">An optional descriptor to further describe the nodes info operation</param>
 		INodeInfoResponse NodesInfo(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector = null);
 		
 		/// <summary>
 		/// The cluster nodes info API allows to retrieve one or more (or all) of the cluster nodes information.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
 		/// </summary>
 		/// <param name="selector">An optional descriptor to further describe the nodes info operation</param>
 		Task<INodeInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector = null);
 		
 		/// <summary>
 		/// The cluster nodes stats API allows to retrieve one or more (or all) of the cluster nodes statistics.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html
 		/// </summary>
 		/// <param name="selector">An optional descriptor to further describe the nodes stats operation</param>
 		INodeStatsResponse NodesStats(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null);
 		
 		/// <summary>
 		/// The cluster nodes stats API allows to retrieve one or more (or all) of the cluster nodes statistics.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html
 		/// </summary>
 		/// <param name="selector">An optional descriptor to further describe the nodes stats operation</param>
 		Task<INodeStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null);
 		
 		/// <summary>
 		/// Used to check if the index (indices) exists or not. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the index exist operation</param>
 		IIndexExistsResponse IndexExists(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
 		
 		/// <summary>
 		/// Used to check if the index (indices) exists or not. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the index exist operation</param>
 		Task<IIndexExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
 
 		/// <summary>
 		/// The more like this (mlt) API allows to get documents that are "like" a specified document. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-more-like-this.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-more-like-this.html
 		/// </summary>
 		/// <typeparam name="T">Type used to infer the default index and typename and used to describe the search</typeparam>
 		/// <param name="mltSelector">A descriptor that describes the more like this operation</param>
@@ -635,7 +635,7 @@ namespace Nest
 
 		/// <summary>
 		/// The more like this (mlt) API allows to get documents that are "like" a specified document. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-more-like-this.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-more-like-this.html
 		/// </summary>
 		/// <typeparam name="T">Type used to infer the default index and typename and used to describe the search</typeparam>
 		/// <param name="mltSelector">A descriptor that describes the more like this operation</param>
@@ -644,35 +644,35 @@ namespace Nest
 
 		/// <summary>
 		/// The cluster health API allows to get a very simple status on the health of the cluster.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-health.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-health.html
 		/// </summary>
 		/// <param name="clusterHealthSelector">An optional descriptor to further describe the cluster health operation</param>
 		IHealthResponse ClusterHealth(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null);
 		
 		/// <summary>
 		/// The cluster health API allows to get a very simple status on the health of the cluster.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-health.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-health.html
 		/// </summary>
 		/// <param name="clusterHealthSelector">An optional descriptor to further describe the cluster health operation</param>
 		Task<IHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null);
 		
 		/// <summary>
 		/// Performs the analysis process on a text and return the tokens breakdown of the text.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-analyze.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-analyze.html
 		/// </summary>
 		/// <param name="analyzeSelector">A descriptor that describes the analyze operation</param>
 		IAnalyzeResponse Analyze(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector);
 		
 		/// <summary>
 		/// Performs the analysis process on a text and return the tokens breakdown of the text.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-analyze.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-analyze.html
 		/// </summary>
 		/// <param name="analyzeSelector">A descriptor that describes the analyze operation</param>
 		Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector);
 
 		/// <summary>
 		/// The search API allows to execute a search query and get back search hits that match the query.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-search.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-search.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
@@ -681,7 +681,7 @@ namespace Nest
 
 		/// <summary>
 		/// The search API allows to execute a search query and get back search hits that match the query.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-search.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-search.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <typeparam name="TResult">The type used to describe the strongly typed query</typeparam>
@@ -692,7 +692,7 @@ namespace Nest
 
 		/// <summary>
 		/// The search API allows to execute a search query and get back search hits that match the query.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-search.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-search.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
@@ -701,7 +701,7 @@ namespace Nest
 
 		/// <summary>
 		/// The search API allows to execute a search query and get back search hits that match the query.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-search.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-search.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the index and typename</typeparam>
 		/// <typeparam name="TResult">The type used to describe the strongly typed query</typeparam>
@@ -712,14 +712,14 @@ namespace Nest
 
 		/// <summary>
 		/// The multi search API allows to execute several search requests within the same API.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-multi-search.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-multi-search.html
 		/// </summary>
 		/// <param name="multiSearchSelector">A descriptor that describes the search operations on the multi search api</param>
 		IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector);
 		
 		/// <summary>
 		/// The multi search API allows to execute several search requests within the same API.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-multi-search.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-multi-search.html
 		/// </summary>
 		/// <param name="multiSearchSelector">A descriptor that describes the search operations on the multi search api</param>
 		Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector);
@@ -727,7 +727,7 @@ namespace Nest
 		/// <summary>
 		/// The count API allows to easily execute a query and get the number of matches for that query. 
 		/// It can be executed across one or more indices and across one or more types. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-count.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-count.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename as well as describe the strongly
 		///  typed parts of the query</typeparam>
@@ -738,7 +738,7 @@ namespace Nest
 		/// <summary>
 		/// The count API allows to easily execute a query and get the number of matches for that query. 
 		/// It can be executed across one or more indices and across one or more types. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-count.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-count.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename as well as describe the strongly
 		///  typed parts of the query</typeparam>
@@ -748,7 +748,7 @@ namespace Nest
 
 		/// <summary>
 		/// The delete by query API allows to delete documents from one or more indices and one or more types based on a query.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename as well as describe the strongly
 		///  typed parts of the query</typeparam>
@@ -758,7 +758,7 @@ namespace Nest
 
 		/// <summary>
 		/// The delete by query API allows to delete documents from one or more indices and one or more types based on a query.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename as well as describe the strongly
 		///  typed parts of the query</typeparam>
@@ -770,7 +770,7 @@ namespace Nest
 		/// <summary>
 		/// The bulk API makes it possible to perform many index/delete operations in a single API call. 
 		/// This can greatly increase the indexing speed.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
 		/// </summary>
 		/// <param name="bulkSelector">A descriptor the describe the index/create/delete operation for this bulk operation</param>
 		IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
@@ -778,14 +778,14 @@ namespace Nest
 		/// <summary>
 		/// The bulk API makes it possible to perform many index/delete operations in a single API call. 
 		/// This can greatly increase the indexing speed.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
 		/// </summary>
 		/// <param name="bulkSelector">A descriptor the describe the index/create/delete operation for this bulk operation</param>
 		Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
 		
 		/// <summary>
 		/// Shortcut into the <see cref="Bulk"/> call that deletes the specified objects
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="objects">List of objects to delete</param>
@@ -796,7 +796,7 @@ namespace Nest
 
 		/// <summary>
 		/// Shortcut into the <see cref="Bulk"/> call that deletes the specified objects
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="objects">List of objects to delete</param>
@@ -807,7 +807,7 @@ namespace Nest
 		
 		/// <summary>
 		/// The index API adds or updates a typed JSON document in a specific index, making it searchable. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-index_.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-index_.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="object">The object to be indexed, Id will be inferred (Id property or IdProperty attribute on type)</param>
@@ -817,7 +817,7 @@ namespace Nest
 
 		/// <summary>
 		/// The index API adds or updates a typed JSON document in a specific index, making it searchable. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-index_.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-index_.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="object">The object to be indexed, Id will be inferred (Id property or IdProperty attribute on type)</param>
@@ -827,7 +827,7 @@ namespace Nest
 
 		/// <summary>
 		///The delete API allows to delete a typed JSON document from a specific index based on its id. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="deleteSelector">Describe the delete operation, i.e type/index/id</param>
@@ -836,7 +836,7 @@ namespace Nest
 		
 		/// <summary>
 		///The delete API allows to delete a typed JSON document from a specific index based on its id. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="deleteSelector">Describe the delete operation, i.e type/index/id</param>
@@ -847,7 +847,7 @@ namespace Nest
 		/// Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing). 
 		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document 
 		/// provided by the get API.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
 		/// </summary>
 		/// <param name="multiGetSelector">A descriptor describing which documents should be fetched</param>
 		IMultiGetResponse MultiGet(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector);
@@ -856,7 +856,7 @@ namespace Nest
 		/// Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing). 
 		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document 
 		/// provided by the get API.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
 		/// </summary>
 		/// <param name="multiGetSelector">A descriptor describing which documents should be fetched</param>
 		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector);
@@ -864,7 +864,7 @@ namespace Nest
 		/// <summary>
 		/// Use the /{index}/{type}/{id}/_source endpoint to get just the _source field of the document, 
 		/// without any additional content around it. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html#_source
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html#_source
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="getSelector">A descriptor that describes which document's source to fetch</param>
@@ -874,7 +874,7 @@ namespace Nest
 		/// <summary>
 		/// Use the /{index}/{type}/{id}/_source endpoint to get just the _source field of the document, 
 		/// without any additional content around it. 
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html#_source
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html#_source
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="getSelector">A descriptor that describes which document's source to fetch</param>
@@ -883,7 +883,7 @@ namespace Nest
 		
 		/// <summary>
 		/// The get API allows to get a typed JSON document from the index based on its id.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="getSelector">A descriptor that describes which document to fetch and how</param>
@@ -892,7 +892,7 @@ namespace Nest
 		
 		/// <summary>
 		/// The get API allows to get a typed JSON document from the index based on its id.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="getSelector">A descriptor that describes which document to fetch and how</param>
@@ -905,7 +905,7 @@ namespace Nest
 		/// actual index name.</para><para> An alias can also be mapped to more than one index, and when specifying it, the alias 
 		/// will automatically expand to the aliases indices.i</para><para> An alias can also be associated with a filter that will 
 		/// automatically be applied when searching, and routing values.</para>
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
 		/// </summary>
 		/// <param name="aliasSelector">A desriptor that describes the parameters for the alias operation</param>
 		IIndicesOperationResponse Alias(Func<AliasDescriptor, AliasDescriptor> aliasSelector);
@@ -916,7 +916,7 @@ namespace Nest
 		/// actual index name.</para><para> An alias can also be mapped to more than one index, and when specifying it, the alias 
 		/// will automatically expand to the aliases indices.i</para><para> An alias can also be associated with a filter that will 
 		/// automatically be applied when searching, and routing values.</para>
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
 		/// </summary>
 		/// <param name="aliasSelector">A desriptor that describes the parameters for the alias operation</param>
 		Task<IIndicesOperationResponse> AliasAsync(Func<AliasDescriptor, AliasDescriptor> aliasSelector);
@@ -924,7 +924,7 @@ namespace Nest
 		/// <summary>
 		/// The get index alias api allows to filter by alias name and index name. This api redirects to the master and fetches 
 		/// the requested index aliases, if available. This api only serialises the found index aliases.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-retrieving
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-retrieving
 		/// </summary>
 		/// <param name="getAliasesDescriptor">A descriptor that describes which aliases/indexes we are interested int</param>
 		IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor);
@@ -932,14 +932,14 @@ namespace Nest
 		/// <summary>
 		/// The get index alias api allows to filter by alias name and index name. This api redirects to the master and fetches 
 		/// the requested index aliases, if available. This api only serialises the found index aliases.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-retrieving
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-retrieving
 		/// </summary>
 		/// <param name="getAliasesDescriptor">A descriptor that describes which aliases/indexes we are interested int</param>
 		Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor);
 		
 		/// <summary>
 		/// Shortcut into the <see cref="Bulk"/> call that indexes the specified objects
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
@@ -950,7 +950,7 @@ namespace Nest
 		
 		/// <summary>
 		/// Shortcut into the <see cref="Bulk"/> call that indexes the specified objects
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
@@ -963,7 +963,7 @@ namespace Nest
 		/// The optimize API allows to optimize one or more indices through an API. The optimize process basically optimizes 
 		/// the index for faster search operations (and relates to the number of segments a Lucene index holds within each shard).
 		///  The optimize operation allows to reduce the number of segments by merging them.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-optimize.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-optimize.html
 		/// </summary>
 		/// <param name="optimizeSelector">An optional descriptor that further describes the optimize operation, i.e limit it to one index</param>
 		IShardsOperationResponse Optimize(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null);
@@ -972,21 +972,21 @@ namespace Nest
 		/// The optimize API allows to optimize one or more indices through an API. The optimize process basically optimizes 
 		/// the index for faster search operations (and relates to the number of segments a Lucene index holds within each shard).
 		///  The optimize operation allows to reduce the number of segments by merging them.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-optimize.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-optimize.html
 		/// </summary>
 		/// <param name="optimizeSelector">An optional descriptor that further describes the optimize operation, i.e limit it to one index</param>
 		Task<IShardsOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null);
 		
 		/// <summary>
 		/// The indices status API allows to get a comprehensive status information of one or more indices.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
 		/// </summary>
 		/// <param name="selector">An optional descriptor that further describes the status operation, i.e limiting it to certain indices</param>
 		IStatusResponse Status(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
 		
 		/// <summary>
 		/// The indices status API allows to get a comprehensive status information of one or more indices.
-		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
 		/// </summary>
 		/// <param name="selector">An optional descriptor that further describes the status operation, i.e limiting it to certain indices</param>
 		Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);

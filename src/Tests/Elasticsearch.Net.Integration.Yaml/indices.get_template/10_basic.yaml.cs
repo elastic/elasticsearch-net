@@ -90,7 +90,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetTemplate1
 
 				//do indices.get_template 
 				this.Do(()=> _client.IndicesGetTemplateForAll("test", nv=>nv
-					.Add("local", @"true")
+					.AddQueryString("local", @"true")
 				));
 
 				//is_true _response.test; 

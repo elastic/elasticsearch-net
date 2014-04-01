@@ -1,7 +1,10 @@
 // include Fake lib
 #r @"tools/FAKE/tools/FakeLib.dll"
+#load @"InheritDoc.fsx"
 open Fake 
 open System
+open InheritDoc
+
 
 // Properties
 let buildDir = "build/output/"
@@ -19,6 +22,10 @@ Target "BuildApp" (fun _ ->
     !! "src/**/*.csproj"
       |> Seq.map(fun f -> (f, buildDir + directoryInfo(f).Name.Replace(".csproj", "")))
       |> Seq.iter(fun (f,d) -> MSBuildRelease d "Build" (seq { yield f }) |> ignore)
+    
+    //Scan for xml docs and patch them to replace <inheritdoc /> with the documentation
+    //from their interfaces
+    !! "build/output/Nest/Nest.xml" |> Seq.iter(fun f -> PatchXmlDoc f)
 )
 
 Target "Test" (fun _ ->
@@ -69,7 +76,7 @@ let nugetPack = fun name ->
     CreateDir nugetOutDir
     
     let dir = sprintf "%s/%s/" buildDir name
-    let version = "1.0.0-c2"
+    let version = "1.0.0-c4"
     NuGetPack (fun p ->
       {p with 
         Version = version
@@ -95,8 +102,8 @@ Target "Version" (fun _ ->
   let assemblyVersion = sprintf "%i.%i.0.0" version.Major version.Minor 
 
   trace (sprintf "%s %s" v assemblyVersion)
-
 )
+
 
 Target "Release" (fun _ -> 
     if not <| fileExists keyFile 

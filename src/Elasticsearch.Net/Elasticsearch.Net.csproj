@@ -31,10 +31,13 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Elasticsearch.Net.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>keypair.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PUrify">
-      <HintPath>..\..\dep\Purify - Preview\PUrify.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -90,6 +93,11 @@
     <Compile Include="Domain\FluentRequestParameters.cs" />
     <Compile Include="Domain\RequestParameters.Generated.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
+    <Compile Include="Purify\IPurify.cs" />
+    <Compile Include="Purify\PurifierDotNet.cs" />
+    <Compile Include="Purify\PurifierMono.cs" />
+    <Compile Include="Purify\Purify.cs" />
+    <Compile Include="Purify\UriInfo.cs" />
     <Compile Include="Serialization\IStringifier.cs" />
     <Compile Include="Serialization\ElasticsearchDefaultSerializer.cs" />
     <Compile Include="Serialization\IElasticsearchSerializer.cs" />
@@ -98,6 +106,7 @@
     <Compile Include="Serialization\Stringifier.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="keypair.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

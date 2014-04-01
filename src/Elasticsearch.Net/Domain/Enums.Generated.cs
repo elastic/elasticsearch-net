@@ -290,7 +290,7 @@ namespace Elasticsearch.Net
 	}
 	
 
-	internal static class KnownEnums
+	public static class KnownEnums
 	{
 		public static string Resolve(Enum e)
 		{

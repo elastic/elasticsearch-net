@@ -111,7 +111,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetFieldMapping1
 
 				//do indices.get_field_mapping 
 				this.Do(()=> _client.IndicesGetFieldMapping("test_index", "test_type", "text", nv=>nv
-					.Add("include_defaults", @"true")
+					.AddQueryString("include_defaults", @"true")
 				));
 
 				//match _response.test_index.mappings.test_type.text.mapping.text.type: 

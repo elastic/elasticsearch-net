@@ -38,7 +38,7 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterPendingTasks1
 
 				//do cluster.pending_tasks 
 				this.Do(()=> _client.ClusterPendingTasks(nv=>nv
-					.Add("local", @"true")
+					.AddQueryString("local", @"true")
 				));
 
 				//is_true _response.tasks; 

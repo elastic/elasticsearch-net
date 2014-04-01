@@ -35,7 +35,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Delete8
 
 				//do delete 
 				this.Do(()=> _client.Delete("test_1", "test", "1", nv=>nv
-					.Add("ignore", 404)
+					.AddQueryString("ignore", 404)
 				));
 
 			}
