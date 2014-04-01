@@ -183,7 +183,11 @@ namespace Elasticsearch.Net.Connection
 			
 			try
 			{
-				if (shouldPingHint && !this._configurationValues.DisablePings)
+				if (shouldPingHint 
+					&& !this._configurationValues.DisablePings
+					&& (requestState.RequestConfiguration == null
+						|| !requestState.RequestConfiguration.PingDisabled.GetValueOrDefault(false))
+					)
 					this.Ping(baseUri);
 
 				var streamResponse = _doRequest(requestState.Method, uri, requestState.PostData, requestState.RequestConfiguration);
