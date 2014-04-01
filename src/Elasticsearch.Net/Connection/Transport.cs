@@ -103,7 +103,6 @@ namespace Elasticsearch.Net.Connection
 				using (response.Response)
 				{
 					return Sniffer.FromStream(response, response.Response, this.Serializer);
-					
 				}
 			}
 		}
@@ -138,7 +137,7 @@ namespace Elasticsearch.Net.Connection
 		private int GetMaximumRetries(IRequestConfiguration requestConfiguration)
 		{
 			//if we have a request specific max retry setting use that
-			if (requestConfiguration.MaxRetries.HasValue)
+			if (requestConfiguration != null && requestConfiguration.MaxRetries.HasValue)
 				return requestConfiguration.MaxRetries.Value;
 
 			return this._configurationValues.MaxRetries.GetValueOrDefault(this._connectionPool.MaxRetries);
@@ -259,7 +258,6 @@ namespace Elasticsearch.Net.Connection
 			}
 			throw new Exception("Unknown HTTP method " + method);
 		}
-
 
 		/* ASYNC *** */
 		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
