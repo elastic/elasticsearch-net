@@ -16,7 +16,7 @@ namespace Nest
 				(p, d) => this.RawDispatch.IndicesSnapshotIndexDispatch<ShardsOperationResponse>(p)
 			);
 		}
-
+			
 		/// <inheritdoc />
 		public Task<IShardsOperationResponse> GatewaySnapshotAsync(
 			Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null)

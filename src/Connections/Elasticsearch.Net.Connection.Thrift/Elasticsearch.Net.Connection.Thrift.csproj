@@ -129,7 +129,6 @@
     <Compile Include="Transport\TTransportFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="keypair.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

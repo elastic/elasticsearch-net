@@ -47,6 +47,7 @@ build/tools/*
 !build/*.fsx
 !build/*.fsx
 !build/*.ps1
+!build/*.nuspec
 
 /dep/Newtonsoft.Json.4.0.2
 !new_docs/build

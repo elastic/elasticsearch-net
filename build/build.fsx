@@ -4,6 +4,8 @@
 open Fake 
 open System
 open InheritDoc
+open SemVerHelper
+open AssemblyInfoFile
 
 
 // Properties
@@ -17,7 +19,17 @@ Target "Clean" (fun _ ->
     CleanDir buildDir
 )
 
+
+
 Target "BuildApp" (fun _ ->
+    let binDirs = !! "src/**/bin/**"
+                  |> Seq.map DirectoryName
+                  |> Seq.distinct
+                  |> Seq.filter (fun f -> (f.EndsWith("Debug") || f.EndsWith("Release")) && not (f.Contains "CodeGeneration"))
+
+    CleanDirs binDirs
+
+    //Override the prebuild event because it just calls a fake task BuildApp depends on anyways
     let msbuildProperties = [
       ("Configuration","Release"); 
       ("PreBuildEvent","ECHO"); 
@@ -89,20 +101,24 @@ let validateSignedAssembly = fun name ->
     | (_, t) -> traceFAKE "%s was not signed with the official token: %s but %s" name oficialToken t
 
 let nugetPack = fun name ->
-    
+    let fileVersion = (getBuildParamOrDefault "version" "0.1.0")
     CreateDir nugetOutDir
-    
+    let package = (sprintf @"build\%s.nuspec" name)
+    let packageContents = ReadFileAsString package
+    let re = @"(?<start>\<version\>|""(Elasticsearch.Net|Nest)"" version="")[^""><]+(?<end>\<\/version\>|"")"
+    let replacedContents = regex_replace re (sprintf "${start}%s${end}" fileVersion) packageContents
+    WriteStringToFile false package replacedContents
+
     let dir = sprintf "%s/%s/" buildDir name
-    let version = "1.0.0-c4"
     NuGetPack (fun p ->
       {p with 
-        Version = version
+        Version = fileVersion
         WorkingDir = dir 
         OutputPath = dir
       })
-      (sprintf @"build\%s.nuspec" name)
+      package
 
-    MoveFile nugetOutDir (buildDir + (sprintf "%s/%s.%s.nupkg" name name version)) 
+    MoveFile nugetOutDir (buildDir + (sprintf "%s/%s.%s.nupkg" name name fileVersion)) 
 
 let buildDocs = fun action ->
     let node = @"build\tools\Node.js\node.exe"
@@ -115,11 +131,40 @@ let buildDocs = fun action ->
       (TimeSpan.FromMinutes (if action = "preview" then 300.0 else 5.0))
    
 Target "Version" (fun _ ->
-  let v = (getBuildParamOrDefault "version" "0.1.0")
-  let version = SemVerHelper.parse v
-  let assemblyVersion = sprintf "%i.%i.0.0" version.Major version.Minor 
+  let fileVersion = (getBuildParamOrDefault "version" "0.1.0")
+  let version = SemVerHelper.parse fileVersion
 
-  trace (sprintf "%s %s" v assemblyVersion)
+  let suffix = fun (prerelease: PreRelease) -> sprintf "-%s%i" prerelease.Name prerelease.Number.Value
+  let assemblySuffix = if version.PreRelease.IsSome then suffix version.PreRelease.Value else "";
+  let assemblyVersion = sprintf "%i.0.0%s" version.Major assemblySuffix
+  
+  match (assemblySuffix, version.Minor, version.Patch) with
+  | (s, m, p) when s <> "" && (m <> 0 || p <> 0)  -> failwithf "Cannot create prereleases for minor or major builds!"
+  | ("", _, _) -> traceFAKE "Building fileversion %s for asssembly version %s" fileVersion assemblyVersion
+  | _ -> traceFAKE "Building prerelease %s for major assembly version %s " fileVersion assemblyVersion
+
+  let assemblyDescription = fun (f: string) ->
+    let name = f 
+    match f.ToLowerInvariant() with
+    | f when f = "elasticsearch.net" -> "Elasticsearch.Net - oficial low level elasticsearch client"
+    | f when f = "nest" -> "NEST - oficial high level elasticsearch client"
+    | f when f = "elasticsearch.net.connection.thrift" -> "Elasticsearc.Net.Connection.Thrift - Add thrift support to elasticsearch."
+    | _ -> sprintf "%s" name
+
+  !! "src/**/AssemblyInfo.cs"
+    |> Seq.iter(fun f -> 
+      let name = (directoryInfo f).Parent.Parent.Name
+      CreateCSharpAssemblyInfo f [
+        Attribute.Title name
+        Attribute.Copyright (sprintf "Elasticsearch %i" DateTime.UtcNow.Year)
+        Attribute.Description (assemblyDescription name)
+        Attribute.Company "Elasticsearch"
+        Attribute.Configuration "Release"
+        Attribute.Version assemblyVersion
+        Attribute.FileVersion fileVersion
+        Attribute.InformationalVersion fileVersion
+      ]
+    )
 )
 
 
@@ -134,7 +179,6 @@ Target "Release" (fun _ ->
     validateSignedAssembly("Elasticsearch.Net")
     validateSignedAssembly("Elasticsearch.Net.Connection.Thrift")
     validateSignedAssembly("Nest")
-    
 )
 
 Target "Docs" (fun _ -> buildDocs "build" |> ignore)
@@ -146,6 +190,7 @@ Target "DocsPreview" (fun _ ->
 // Dependencies
 "Clean" 
   ==> "CreateKeysIfAbsent"
+  =?> ("Version", hasBuildParam "version")
   ==> "BuildApp"
   ==> "Test"
   ==> "Build"
@@ -154,6 +199,7 @@ Target "DocsPreview" (fun _ ->
   ==> "Release"
 
 "DocsPreview"
+"BuildApp"
 "CreateKeysIfAbsent"
 "Version"
 // start build
