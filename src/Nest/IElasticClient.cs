@@ -171,7 +171,7 @@ namespace Nest
 		/// A closed index can be opened which will then go through the normal recovery process.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html
 		/// </summary>
-		/// <param name="closeSelector">A descriptor thata describes the close index operation</param>
+		/// <param name="closeIndexSelector">A descriptor thata describes the close index operation</param>
 		Task<IIndicesOperationResponse> CloseIndexAsync(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
 		
 		/// <summary>

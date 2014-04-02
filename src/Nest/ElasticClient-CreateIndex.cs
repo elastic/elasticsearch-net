@@ -20,7 +20,7 @@ namespace Nest
 				descriptor,
 				(p, d) => this.RawDispatch.IndicesCreateDispatch<IndicesOperationResponse>(p, d._IndexSettings)
 			);
-		}
+		} 
 
 		/// <inheritdoc />
 		public Task<IIndicesOperationResponse> CreateIndexAsync(string index,
