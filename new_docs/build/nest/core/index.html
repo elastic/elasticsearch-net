@@ -2,10 +2,10 @@
 <p>Indexing is as simple as:</p>
 <pre><code>var post = new Post() { Id = 12, ... }
 var status = client.Index&lt;Post&gt;(post);
-</code></pre><p>of course C# is smart enough to infer Post so</p>
+</code></pre><p>Of course C# is smart enough to infer Post so</p>
 <pre><code>var status = client.Index(post);
 </code></pre><p>is sufficient. this will index post too <code>/[default index]/posts/12</code>. The typename<code>posts</code> is automatically inferred from the type.</p>
-<p>if you need more control there are plenty of overloads, i.e:</p>
+<p>If you need more control there are plenty of overloads, i.e:</p>
 <pre><code>client.Index(post, &quot;index&quot;, &quot;type&quot;, &quot;id&quot;);
 </code></pre><h2 id="asynchronous">Asynchronous</h2>
 <p>Indexing asynchronously is as easy as:</p>
@@ -20,11 +20,11 @@ var task = client.IndexAsync(post);
 <p>Instead of passing <code>T</code> just pass an <code>IEnumerable&lt;T&gt;</code> to <code>IndexMany()</code> or <code>IndexManyAsync()</code>.</p>
 <p><strong>Note</strong>
 For asynchronous commands there&#39;s a special connection setting which automatically semaphores threaded communication
-to ES for you:</p>
+to Elasticsearch for you:</p>
 <pre><code>var elasticSettings = new ConnectionSettings(&quot;127.0.0.1.&quot;, 9200)
                           .SetDefaultIndex(&quot;mpdreamz&quot;)
                           .SetMaximumAsyncConnections(20);
-</code></pre><p>this ensures that at most there are 20 asynchronous connections to ES others are enqueued until a slot is 
+</code></pre><p>This ensures that at most there are 20 asynchronous connections to Elasticsearch. All others are enqueued until a slot is 
 available.</p>
 <h2 id="aditional-parameters">Aditional parameters</h2>
 <p>Like the overloads just taking a <code>T</code> the <code>IEnumerable&lt;T&gt;</code> has alot of overloads taking in extra parameters. </p>

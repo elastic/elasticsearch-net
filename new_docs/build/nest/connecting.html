@@ -11,10 +11,10 @@ var settings = new ConnectionSettings(uri, defaultIndex: &quot;my-application&qu
  for calls which do not explicitly state an index name. Specifying a default index is optional but <a href="/nest/type-index-inference">very handy</a>.</p>
 <p>If you want a failover client instead of passing a <code>Uri</code> pass an <code>IConnectionPool</code> see the <a href="/elasticsearch-net/cluster-failover.html">Elasticsearch.Net documentation on cluster failover</a> all of its implementations can also be used with NEST.</p>
 <h2 id="changing-the-underlying-connection">Changing the underlying connection</h2>
-<p>By default NEST will use HTTP to chat with elasticsearch, alternative implementation of the transport layer can be injected in the constructors optional second parameter</p>
+<p>By default NEST will use HTTP to chat with elasticsearch, alternative implementation of the transport layer can be injected using the constructors optional second parameter</p>
 <pre><code>var client = new ElasticClient(settings, new ThriftConnection(settings));
-</code></pre><p>Nest comes with a Htpp connection <code>HttpConnection</code>, Thrift Connection <code>ThriftConnection</code> 
-and an in memory connection that nevers hits elasticsearch <code>InMemoryConnection</code>.</p>
+</code></pre><p>NEST comes with an Http Connection <code>HttpConnection</code>, Thrift Connection <code>ThriftConnection</code> 
+and an In-Memory Connection <code>InMemoryConnection</code>, that nevers hits elasticsearch.</p>
 <h2 id="settings">Settings</h2>
 <p>The <code>NEST</code> client can be configured by passing in an <code>IConnectionSettingsValues</code> object, this interface is a subclass of 
 <code>Elasticsearch.Net</code>&#39;s <code>IConnectionConfigurationValues</code> so all the settings that can be used to 
@@ -24,8 +24,8 @@ and an in memory connection that nevers hits elasticsearch <code>InMemoryConnect
 <pre><code>var settings = new ConnectionSettings(myConnectionPool, defaultIndex: &quot;my-application&quot;)
     .PluralizeTypeNames();
 </code></pre><h4 id="addcontractjsonconverters">AddContractJsonConverters</h4>
-<p>Add a custom JsonConverter to the build in json serialization by passing
-in a predicate for a type.  This way they will be part of the cached Json.net contract for a type.</p>
+<p>Add a custom JsonConverter to the built in JSON serialization by passing
+in a predicate for a type.  This way they will be part of the cached Json.NET contract for a type.</p>
 <pre><code>settings.AddContractJsonConverters(t =&gt; 
     typeof (Enum).IsAssignableFrom(t) 
         ? new StringEnumConverter() 
@@ -42,13 +42,13 @@ type names. This used to be the default prior to Nest 1.0</p>
 <h4 id="setdefaultpropertynameinferrer">SetDefaultPropertyNameInferrer</h4>
 <p>By default NEST camelCases property names (EmailAddress =&gt; emailAddress)
 that do not have an explicit propertyname either via an ElasticProperty attribute
-or because they are part of Dictionary where the keys should be treated verbatim.
+or because they are part of a Dictionary where the keys should be treated verbatim.
 Here you can register a function that transforms propertynames (default
 casing, pre- or suffixing)</p>
 <h4 id="setdefaulttypenameinferrer">SetDefaultTypeNameInferrer</h4>
-<p>Allows you to override how type names should be reprented, the default will
+<p>Allows you to override how type names should be represented, the default will
 call .ToLowerInvariant() on the type&#39;s name.</p>
 <h4 id="setjsonserializersettingsmodifier">SetJsonSerializerSettingsModifier</h4>
-<p>Allows you to update internal the json.net serializer settings to your liking.
-Do not use this to add custom json converters use <code>AddContractJsonConverters</code> instead.</p>
+<p>Allows you to update the internal Json.NET Serializer settings to your liking.
+Do not use this to add custom JSON converters use <code>AddContractJsonConverters</code> instead.</p>
 </main></div><aside class="left-sidebar"><aside id="menu"><ul><li><a href="/">Home</a></li></ul><ul id="elasticsearch-net"><h4 class="title">Elasticsearch.Net</h4><ul><li><a href="/elasticsearch-net/quick-start.html">Quick Start</a></li><li><a href="/elasticsearch-net/connecting.html">Connecting</a></li><li><a href="/elasticsearch-net/cluster-failover.html">Cluster failover</a></li><li><a href="/elasticsearch-net/building-requests.html">Building requests</a></li><li><a href="/elasticsearch-net/handling-responses.html">Handling responses</a></li><li><a href="/elasticsearch-net/errors.html">Errors</a></li></ul></ul><ul id="nest"><h4 class="title">NEST</h4><ul><li><a href="/nest/quick-start.html">Quick Start</a></li><li><a href="/nest/connecting.html" class="selected">Connecting</a></li><li><a href="/nest/index-type-inference.html">Type/Index Inference</a></li><li><a href="/nest/handling-responses.html">Handling responses</a></li><li><a href="/nest/writing-queries.html">Writing queries</a></li></ul><li><h4><a href="/nest/core/"><i class="fa fa-chevron-right"></i>Core</a></h4></li><li><h4><a href="/nest/indices/aliases.html"><i class="fa fa-chevron-right"></i>Indices</a></h4></li><li><h4><a href="/nest/cluster/health.html"><i class="fa fa-chevron-right"></i>Cluster</a></h4></li><li><h4><a href="/nest/search/basics.html"><i class="fa fa-chevron-right"></i>Search</a></h4></li><li><h4><a href="/nest/facets/handling.html"><i class="fa fa-chevron-right"></i>Facets</a></h4></li><li><h4><a href="/nest/query/text.html"><i class="fa fa-chevron-right"></i>Query DSL</a></h4></li><li><h4><a href="/nest/filter/and.html"><i class="fa fa-chevron-right"></i>Filter DSL</a></h4></li></ul></aside></aside></div><footer class="footer"></footer></div></body></html>

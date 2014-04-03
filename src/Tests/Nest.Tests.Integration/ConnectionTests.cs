@@ -101,7 +101,7 @@ namespace Nest.Tests.Integration
 			StringAssert.EndsWith(":9200/?pretty=true", result.RequestUrl);
 
 
-			var resultWithQueryString = this._client.Raw.Info(qs => qs.Add("hello", "world"));
+			var resultWithQueryString = this._client.Raw.Info(qs => qs.AddQueryString("hello", "world"));
 			Assert.IsTrue(resultWithQueryString.Success);
 
 			StringAssert.EndsWith(":9200/?hello=world&pretty=true", resultWithQueryString.RequestUrl);

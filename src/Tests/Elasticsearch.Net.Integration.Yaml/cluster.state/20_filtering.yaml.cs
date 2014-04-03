@@ -233,7 +233,7 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterState2
 
 				//do cluster.state 
 				this.Do(()=> _client.ClusterState("metadata", nv=>nv
-					.Add("index_templates", new [] {
+					.AddQueryString("index_templates", new [] {
 						@"test1",
 						@"test2"
 					})

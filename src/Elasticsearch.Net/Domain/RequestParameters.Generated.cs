@@ -26,7 +26,7 @@ namespace Elasticsearch.Net
 		public BulkRequestParameters Consistency(ConsistencyOptions consistency)
 		{
 			this._consistency = consistency;
-			this.Add("consistency", this._consistency);
+			this.AddQueryString("consistency", this._consistency);
 			return this;
 		}
 		
@@ -36,7 +36,7 @@ namespace Elasticsearch.Net
 		public BulkRequestParameters Refresh(bool refresh)
 		{
 			this._refresh = refresh;
-			this.Add("refresh", this._refresh);
+			this.AddQueryString("refresh", this._refresh);
 			return this;
 		}
 		
@@ -46,7 +46,7 @@ namespace Elasticsearch.Net
 		public BulkRequestParameters Replication(ReplicationOptions replication)
 		{
 			this._replication = replication;
-			this.Add("replication", this._replication);
+			this.AddQueryString("replication", this._replication);
 			return this;
 		}
 		
@@ -56,7 +56,7 @@ namespace Elasticsearch.Net
 		public BulkRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -66,7 +66,7 @@ namespace Elasticsearch.Net
 		public BulkRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -76,7 +76,7 @@ namespace Elasticsearch.Net
 		public BulkRequestParameters Type(string type)
 		{
 			this._type = type;
-			this.Add("type", this._type);
+			this.AddQueryString("type", this._type);
 			return this;
 		}
 		
@@ -96,7 +96,7 @@ namespace Elasticsearch.Net
 		public CatAliasesRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -106,7 +106,7 @@ namespace Elasticsearch.Net
 		public CatAliasesRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -116,7 +116,7 @@ namespace Elasticsearch.Net
 		public CatAliasesRequestParameters H(params string[] h)
 		{
 			this._h = h;
-			this.Add("h", this._h);
+			this.AddQueryString("h", this._h);
 			return this;
 		}
 		
@@ -126,7 +126,7 @@ namespace Elasticsearch.Net
 		public CatAliasesRequestParameters Help(bool help)
 		{
 			this._help = help;
-			this.Add("help", this._help);
+			this.AddQueryString("help", this._help);
 			return this;
 		}
 		
@@ -136,7 +136,7 @@ namespace Elasticsearch.Net
 		public CatAliasesRequestParameters V(bool v)
 		{
 			this._v = v;
-			this.Add("v", this._v);
+			this.AddQueryString("v", this._v);
 			return this;
 		}
 		
@@ -156,7 +156,7 @@ namespace Elasticsearch.Net
 		public CatAllocationRequestParameters Bytes(BytesOptions bytes)
 		{
 			this._bytes = bytes;
-			this.Add("bytes", this._bytes);
+			this.AddQueryString("bytes", this._bytes);
 			return this;
 		}
 		
@@ -166,7 +166,7 @@ namespace Elasticsearch.Net
 		public CatAllocationRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -176,7 +176,7 @@ namespace Elasticsearch.Net
 		public CatAllocationRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -186,7 +186,7 @@ namespace Elasticsearch.Net
 		public CatAllocationRequestParameters H(params string[] h)
 		{
 			this._h = h;
-			this.Add("h", this._h);
+			this.AddQueryString("h", this._h);
 			return this;
 		}
 		
@@ -196,7 +196,7 @@ namespace Elasticsearch.Net
 		public CatAllocationRequestParameters Help(bool help)
 		{
 			this._help = help;
-			this.Add("help", this._help);
+			this.AddQueryString("help", this._help);
 			return this;
 		}
 		
@@ -206,7 +206,7 @@ namespace Elasticsearch.Net
 		public CatAllocationRequestParameters V(bool v)
 		{
 			this._v = v;
-			this.Add("v", this._v);
+			this.AddQueryString("v", this._v);
 			return this;
 		}
 		
@@ -226,7 +226,7 @@ namespace Elasticsearch.Net
 		public CatCountRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -236,7 +236,7 @@ namespace Elasticsearch.Net
 		public CatCountRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -246,7 +246,7 @@ namespace Elasticsearch.Net
 		public CatCountRequestParameters H(params string[] h)
 		{
 			this._h = h;
-			this.Add("h", this._h);
+			this.AddQueryString("h", this._h);
 			return this;
 		}
 		
@@ -256,7 +256,7 @@ namespace Elasticsearch.Net
 		public CatCountRequestParameters Help(bool help)
 		{
 			this._help = help;
-			this.Add("help", this._help);
+			this.AddQueryString("help", this._help);
 			return this;
 		}
 		
@@ -266,7 +266,7 @@ namespace Elasticsearch.Net
 		public CatCountRequestParameters V(bool v)
 		{
 			this._v = v;
-			this.Add("v", this._v);
+			this.AddQueryString("v", this._v);
 			return this;
 		}
 		
@@ -286,7 +286,7 @@ namespace Elasticsearch.Net
 		public CatHealthRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -296,7 +296,7 @@ namespace Elasticsearch.Net
 		public CatHealthRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -306,7 +306,7 @@ namespace Elasticsearch.Net
 		public CatHealthRequestParameters H(params string[] h)
 		{
 			this._h = h;
-			this.Add("h", this._h);
+			this.AddQueryString("h", this._h);
 			return this;
 		}
 		
@@ -316,7 +316,7 @@ namespace Elasticsearch.Net
 		public CatHealthRequestParameters Help(bool help)
 		{
 			this._help = help;
-			this.Add("help", this._help);
+			this.AddQueryString("help", this._help);
 			return this;
 		}
 		
@@ -326,7 +326,7 @@ namespace Elasticsearch.Net
 		public CatHealthRequestParameters Ts(bool ts)
 		{
 			this._ts = ts;
-			this.Add("ts", this._ts);
+			this.AddQueryString("ts", this._ts);
 			return this;
 		}
 		
@@ -336,7 +336,7 @@ namespace Elasticsearch.Net
 		public CatHealthRequestParameters V(bool v)
 		{
 			this._v = v;
-			this.Add("v", this._v);
+			this.AddQueryString("v", this._v);
 			return this;
 		}
 		
@@ -356,7 +356,7 @@ namespace Elasticsearch.Net
 		public CatHelpRequestParameters Help(bool help)
 		{
 			this._help = help;
-			this.Add("help", this._help);
+			this.AddQueryString("help", this._help);
 			return this;
 		}
 		
@@ -376,7 +376,7 @@ namespace Elasticsearch.Net
 		public CatIndicesRequestParameters Bytes(BytesOptions bytes)
 		{
 			this._bytes = bytes;
-			this.Add("bytes", this._bytes);
+			this.AddQueryString("bytes", this._bytes);
 			return this;
 		}
 		
@@ -386,7 +386,7 @@ namespace Elasticsearch.Net
 		public CatIndicesRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -396,7 +396,7 @@ namespace Elasticsearch.Net
 		public CatIndicesRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -406,7 +406,7 @@ namespace Elasticsearch.Net
 		public CatIndicesRequestParameters H(params string[] h)
 		{
 			this._h = h;
-			this.Add("h", this._h);
+			this.AddQueryString("h", this._h);
 			return this;
 		}
 		
@@ -416,7 +416,7 @@ namespace Elasticsearch.Net
 		public CatIndicesRequestParameters Help(bool help)
 		{
 			this._help = help;
-			this.Add("help", this._help);
+			this.AddQueryString("help", this._help);
 			return this;
 		}
 		
@@ -426,7 +426,7 @@ namespace Elasticsearch.Net
 		public CatIndicesRequestParameters Pri(bool pri)
 		{
 			this._pri = pri;
-			this.Add("pri", this._pri);
+			this.AddQueryString("pri", this._pri);
 			return this;
 		}
 		
@@ -436,7 +436,7 @@ namespace Elasticsearch.Net
 		public CatIndicesRequestParameters V(bool v)
 		{
 			this._v = v;
-			this.Add("v", this._v);
+			this.AddQueryString("v", this._v);
 			return this;
 		}
 		
@@ -456,7 +456,7 @@ namespace Elasticsearch.Net
 		public CatMasterRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -466,7 +466,7 @@ namespace Elasticsearch.Net
 		public CatMasterRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -476,7 +476,7 @@ namespace Elasticsearch.Net
 		public CatMasterRequestParameters H(params string[] h)
 		{
 			this._h = h;
-			this.Add("h", this._h);
+			this.AddQueryString("h", this._h);
 			return this;
 		}
 		
@@ -486,7 +486,7 @@ namespace Elasticsearch.Net
 		public CatMasterRequestParameters Help(bool help)
 		{
 			this._help = help;
-			this.Add("help", this._help);
+			this.AddQueryString("help", this._help);
 			return this;
 		}
 		
@@ -496,7 +496,7 @@ namespace Elasticsearch.Net
 		public CatMasterRequestParameters V(bool v)
 		{
 			this._v = v;
-			this.Add("v", this._v);
+			this.AddQueryString("v", this._v);
 			return this;
 		}
 		
@@ -516,7 +516,7 @@ namespace Elasticsearch.Net
 		public CatNodesRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -526,7 +526,7 @@ namespace Elasticsearch.Net
 		public CatNodesRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -536,7 +536,7 @@ namespace Elasticsearch.Net
 		public CatNodesRequestParameters H(params string[] h)
 		{
 			this._h = h;
-			this.Add("h", this._h);
+			this.AddQueryString("h", this._h);
 			return this;
 		}
 		
@@ -546,7 +546,7 @@ namespace Elasticsearch.Net
 		public CatNodesRequestParameters Help(bool help)
 		{
 			this._help = help;
-			this.Add("help", this._help);
+			this.AddQueryString("help", this._help);
 			return this;
 		}
 		
@@ -556,7 +556,7 @@ namespace Elasticsearch.Net
 		public CatNodesRequestParameters V(bool v)
 		{
 			this._v = v;
-			this.Add("v", this._v);
+			this.AddQueryString("v", this._v);
 			return this;
 		}
 		
@@ -576,7 +576,7 @@ namespace Elasticsearch.Net
 		public CatPendingTasksRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -586,7 +586,7 @@ namespace Elasticsearch.Net
 		public CatPendingTasksRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -596,7 +596,7 @@ namespace Elasticsearch.Net
 		public CatPendingTasksRequestParameters H(params string[] h)
 		{
 			this._h = h;
-			this.Add("h", this._h);
+			this.AddQueryString("h", this._h);
 			return this;
 		}
 		
@@ -606,7 +606,7 @@ namespace Elasticsearch.Net
 		public CatPendingTasksRequestParameters Help(bool help)
 		{
 			this._help = help;
-			this.Add("help", this._help);
+			this.AddQueryString("help", this._help);
 			return this;
 		}
 		
@@ -616,7 +616,7 @@ namespace Elasticsearch.Net
 		public CatPendingTasksRequestParameters V(bool v)
 		{
 			this._v = v;
-			this.Add("v", this._v);
+			this.AddQueryString("v", this._v);
 			return this;
 		}
 		
@@ -636,7 +636,7 @@ namespace Elasticsearch.Net
 		public CatRecoveryRequestParameters Bytes(BytesOptions bytes)
 		{
 			this._bytes = bytes;
-			this.Add("bytes", this._bytes);
+			this.AddQueryString("bytes", this._bytes);
 			return this;
 		}
 		
@@ -646,7 +646,7 @@ namespace Elasticsearch.Net
 		public CatRecoveryRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -656,7 +656,7 @@ namespace Elasticsearch.Net
 		public CatRecoveryRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -666,7 +666,7 @@ namespace Elasticsearch.Net
 		public CatRecoveryRequestParameters H(params string[] h)
 		{
 			this._h = h;
-			this.Add("h", this._h);
+			this.AddQueryString("h", this._h);
 			return this;
 		}
 		
@@ -676,7 +676,7 @@ namespace Elasticsearch.Net
 		public CatRecoveryRequestParameters Help(bool help)
 		{
 			this._help = help;
-			this.Add("help", this._help);
+			this.AddQueryString("help", this._help);
 			return this;
 		}
 		
@@ -686,7 +686,7 @@ namespace Elasticsearch.Net
 		public CatRecoveryRequestParameters V(bool v)
 		{
 			this._v = v;
-			this.Add("v", this._v);
+			this.AddQueryString("v", this._v);
 			return this;
 		}
 		
@@ -706,7 +706,7 @@ namespace Elasticsearch.Net
 		public CatShardsRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -716,7 +716,7 @@ namespace Elasticsearch.Net
 		public CatShardsRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -726,7 +726,7 @@ namespace Elasticsearch.Net
 		public CatShardsRequestParameters H(params string[] h)
 		{
 			this._h = h;
-			this.Add("h", this._h);
+			this.AddQueryString("h", this._h);
 			return this;
 		}
 		
@@ -736,7 +736,7 @@ namespace Elasticsearch.Net
 		public CatShardsRequestParameters Help(bool help)
 		{
 			this._help = help;
-			this.Add("help", this._help);
+			this.AddQueryString("help", this._help);
 			return this;
 		}
 		
@@ -746,7 +746,7 @@ namespace Elasticsearch.Net
 		public CatShardsRequestParameters V(bool v)
 		{
 			this._v = v;
-			this.Add("v", this._v);
+			this.AddQueryString("v", this._v);
 			return this;
 		}
 		
@@ -766,7 +766,7 @@ namespace Elasticsearch.Net
 		public CatThreadPoolRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -776,7 +776,7 @@ namespace Elasticsearch.Net
 		public CatThreadPoolRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -786,7 +786,7 @@ namespace Elasticsearch.Net
 		public CatThreadPoolRequestParameters H(params string[] h)
 		{
 			this._h = h;
-			this.Add("h", this._h);
+			this.AddQueryString("h", this._h);
 			return this;
 		}
 		
@@ -796,7 +796,7 @@ namespace Elasticsearch.Net
 		public CatThreadPoolRequestParameters Help(bool help)
 		{
 			this._help = help;
-			this.Add("help", this._help);
+			this.AddQueryString("help", this._help);
 			return this;
 		}
 		
@@ -806,7 +806,7 @@ namespace Elasticsearch.Net
 		public CatThreadPoolRequestParameters V(bool v)
 		{
 			this._v = v;
-			this.Add("v", this._v);
+			this.AddQueryString("v", this._v);
 			return this;
 		}
 		
@@ -816,7 +816,7 @@ namespace Elasticsearch.Net
 		public CatThreadPoolRequestParameters FullId(bool full_id)
 		{
 			this._full_id = full_id;
-			this.Add("full_id", this._full_id);
+			this.AddQueryString("full_id", this._full_id);
 			return this;
 		}
 		
@@ -846,7 +846,7 @@ namespace Elasticsearch.Net
 		public ClusterGetSettingsRequestParameters FlatSettings(bool flat_settings)
 		{
 			this._flat_settings = flat_settings;
-			this.Add("flat_settings", this._flat_settings);
+			this.AddQueryString("flat_settings", this._flat_settings);
 			return this;
 		}
 		
@@ -856,7 +856,7 @@ namespace Elasticsearch.Net
 		public ClusterGetSettingsRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -866,7 +866,7 @@ namespace Elasticsearch.Net
 		public ClusterGetSettingsRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -886,7 +886,7 @@ namespace Elasticsearch.Net
 		public ClusterHealthRequestParameters Level(LevelOptions level)
 		{
 			this._level = level;
-			this.Add("level", this._level);
+			this.AddQueryString("level", this._level);
 			return this;
 		}
 		
@@ -896,7 +896,7 @@ namespace Elasticsearch.Net
 		public ClusterHealthRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -906,7 +906,7 @@ namespace Elasticsearch.Net
 		public ClusterHealthRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -916,7 +916,7 @@ namespace Elasticsearch.Net
 		public ClusterHealthRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -926,7 +926,7 @@ namespace Elasticsearch.Net
 		public ClusterHealthRequestParameters WaitForActiveShards(int wait_for_active_shards)
 		{
 			this._wait_for_active_shards = wait_for_active_shards;
-			this.Add("wait_for_active_shards", this._wait_for_active_shards);
+			this.AddQueryString("wait_for_active_shards", this._wait_for_active_shards);
 			return this;
 		}
 		
@@ -936,7 +936,7 @@ namespace Elasticsearch.Net
 		public ClusterHealthRequestParameters WaitForNodes(string wait_for_nodes)
 		{
 			this._wait_for_nodes = wait_for_nodes;
-			this.Add("wait_for_nodes", this._wait_for_nodes);
+			this.AddQueryString("wait_for_nodes", this._wait_for_nodes);
 			return this;
 		}
 		
@@ -946,7 +946,7 @@ namespace Elasticsearch.Net
 		public ClusterHealthRequestParameters WaitForRelocatingShards(int wait_for_relocating_shards)
 		{
 			this._wait_for_relocating_shards = wait_for_relocating_shards;
-			this.Add("wait_for_relocating_shards", this._wait_for_relocating_shards);
+			this.AddQueryString("wait_for_relocating_shards", this._wait_for_relocating_shards);
 			return this;
 		}
 		
@@ -956,7 +956,7 @@ namespace Elasticsearch.Net
 		public ClusterHealthRequestParameters WaitForStatus(WaitForStatusOptions wait_for_status)
 		{
 			this._wait_for_status = wait_for_status;
-			this.Add("wait_for_status", this._wait_for_status);
+			this.AddQueryString("wait_for_status", this._wait_for_status);
 			return this;
 		}
 		
@@ -976,7 +976,7 @@ namespace Elasticsearch.Net
 		public ClusterPendingTasksRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -986,7 +986,7 @@ namespace Elasticsearch.Net
 		public ClusterPendingTasksRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -1006,7 +1006,7 @@ namespace Elasticsearch.Net
 		public ClusterPutSettingsRequestParameters FlatSettings(bool flat_settings)
 		{
 			this._flat_settings = flat_settings;
-			this.Add("flat_settings", this._flat_settings);
+			this.AddQueryString("flat_settings", this._flat_settings);
 			return this;
 		}
 		
@@ -1026,7 +1026,7 @@ namespace Elasticsearch.Net
 		public ClusterRerouteRequestParameters DryRun(bool dry_run)
 		{
 			this._dry_run = dry_run;
-			this.Add("dry_run", this._dry_run);
+			this.AddQueryString("dry_run", this._dry_run);
 			return this;
 		}
 		
@@ -1036,7 +1036,7 @@ namespace Elasticsearch.Net
 		public ClusterRerouteRequestParameters FilterMetadata(bool filter_metadata)
 		{
 			this._filter_metadata = filter_metadata;
-			this.Add("filter_metadata", this._filter_metadata);
+			this.AddQueryString("filter_metadata", this._filter_metadata);
 			return this;
 		}
 		
@@ -1046,7 +1046,7 @@ namespace Elasticsearch.Net
 		public ClusterRerouteRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -1056,7 +1056,7 @@ namespace Elasticsearch.Net
 		public ClusterRerouteRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -1076,7 +1076,7 @@ namespace Elasticsearch.Net
 		public ClusterStateRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -1086,7 +1086,7 @@ namespace Elasticsearch.Net
 		public ClusterStateRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -1096,7 +1096,7 @@ namespace Elasticsearch.Net
 		public ClusterStateRequestParameters IndexTemplates(params string[] index_templates)
 		{
 			this._index_templates = index_templates;
-			this.Add("index_templates", this._index_templates);
+			this.AddQueryString("index_templates", this._index_templates);
 			return this;
 		}
 		
@@ -1106,7 +1106,7 @@ namespace Elasticsearch.Net
 		public ClusterStateRequestParameters FlatSettings(bool flat_settings)
 		{
 			this._flat_settings = flat_settings;
-			this.Add("flat_settings", this._flat_settings);
+			this.AddQueryString("flat_settings", this._flat_settings);
 			return this;
 		}
 		
@@ -1126,7 +1126,7 @@ namespace Elasticsearch.Net
 		public ClusterStatsRequestParameters FlatSettings(bool flat_settings)
 		{
 			this._flat_settings = flat_settings;
-			this.Add("flat_settings", this._flat_settings);
+			this.AddQueryString("flat_settings", this._flat_settings);
 			return this;
 		}
 		
@@ -1136,7 +1136,7 @@ namespace Elasticsearch.Net
 		public ClusterStatsRequestParameters Human(bool human)
 		{
 			this._human = human;
-			this.Add("human", this._human);
+			this.AddQueryString("human", this._human);
 			return this;
 		}
 		
@@ -1156,7 +1156,7 @@ namespace Elasticsearch.Net
 		public CountRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -1166,7 +1166,7 @@ namespace Elasticsearch.Net
 		public CountRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -1176,7 +1176,7 @@ namespace Elasticsearch.Net
 		public CountRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -1186,7 +1186,7 @@ namespace Elasticsearch.Net
 		public CountRequestParameters MinScore(int min_score)
 		{
 			this._min_score = min_score;
-			this.Add("min_score", this._min_score);
+			this.AddQueryString("min_score", this._min_score);
 			return this;
 		}
 		
@@ -1196,7 +1196,7 @@ namespace Elasticsearch.Net
 		public CountRequestParameters Preference(string preference)
 		{
 			this._preference = preference;
-			this.Add("preference", this._preference);
+			this.AddQueryString("preference", this._preference);
 			return this;
 		}
 		
@@ -1206,7 +1206,7 @@ namespace Elasticsearch.Net
 		public CountRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -1216,7 +1216,7 @@ namespace Elasticsearch.Net
 		public CountRequestParameters Source(string source)
 		{
 			this._source = source;
-			this.Add("source", this._source);
+			this.AddQueryString("source", this._source);
 			return this;
 		}
 		
@@ -1236,7 +1236,7 @@ namespace Elasticsearch.Net
 		public CountPercolateRequestParameters Routing(params string[] routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -1246,7 +1246,7 @@ namespace Elasticsearch.Net
 		public CountPercolateRequestParameters Preference(string preference)
 		{
 			this._preference = preference;
-			this.Add("preference", this._preference);
+			this.AddQueryString("preference", this._preference);
 			return this;
 		}
 		
@@ -1256,7 +1256,7 @@ namespace Elasticsearch.Net
 		public CountPercolateRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -1266,7 +1266,7 @@ namespace Elasticsearch.Net
 		public CountPercolateRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -1276,7 +1276,7 @@ namespace Elasticsearch.Net
 		public CountPercolateRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -1286,7 +1286,7 @@ namespace Elasticsearch.Net
 		public CountPercolateRequestParameters PercolateIndex(string percolate_index)
 		{
 			this._percolate_index = percolate_index;
-			this.Add("percolate_index", this._percolate_index);
+			this.AddQueryString("percolate_index", this._percolate_index);
 			return this;
 		}
 		
@@ -1296,7 +1296,7 @@ namespace Elasticsearch.Net
 		public CountPercolateRequestParameters PercolateType(string percolate_type)
 		{
 			this._percolate_type = percolate_type;
-			this.Add("percolate_type", this._percolate_type);
+			this.AddQueryString("percolate_type", this._percolate_type);
 			return this;
 		}
 		
@@ -1306,7 +1306,7 @@ namespace Elasticsearch.Net
 		public CountPercolateRequestParameters Version(int version)
 		{
 			this._version = version;
-			this.Add("version", this._version);
+			this.AddQueryString("version", this._version);
 			return this;
 		}
 		
@@ -1316,7 +1316,7 @@ namespace Elasticsearch.Net
 		public CountPercolateRequestParameters VersionType(VersionTypeOptions version_type)
 		{
 			this._version_type = version_type;
-			this.Add("version_type", this._version_type);
+			this.AddQueryString("version_type", this._version_type);
 			return this;
 		}
 		
@@ -1336,7 +1336,7 @@ namespace Elasticsearch.Net
 		public DeleteRequestParameters Consistency(ConsistencyOptions consistency)
 		{
 			this._consistency = consistency;
-			this.Add("consistency", this._consistency);
+			this.AddQueryString("consistency", this._consistency);
 			return this;
 		}
 		
@@ -1346,7 +1346,7 @@ namespace Elasticsearch.Net
 		public DeleteRequestParameters Parent(string parent)
 		{
 			this._parent = parent;
-			this.Add("parent", this._parent);
+			this.AddQueryString("parent", this._parent);
 			return this;
 		}
 		
@@ -1356,7 +1356,7 @@ namespace Elasticsearch.Net
 		public DeleteRequestParameters Refresh(bool refresh)
 		{
 			this._refresh = refresh;
-			this.Add("refresh", this._refresh);
+			this.AddQueryString("refresh", this._refresh);
 			return this;
 		}
 		
@@ -1366,7 +1366,7 @@ namespace Elasticsearch.Net
 		public DeleteRequestParameters Replication(ReplicationOptions replication)
 		{
 			this._replication = replication;
-			this.Add("replication", this._replication);
+			this.AddQueryString("replication", this._replication);
 			return this;
 		}
 		
@@ -1376,7 +1376,7 @@ namespace Elasticsearch.Net
 		public DeleteRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -1386,7 +1386,7 @@ namespace Elasticsearch.Net
 		public DeleteRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -1396,7 +1396,7 @@ namespace Elasticsearch.Net
 		public DeleteRequestParameters Version(int version)
 		{
 			this._version = version;
-			this.Add("version", this._version);
+			this.AddQueryString("version", this._version);
 			return this;
 		}
 		
@@ -1406,7 +1406,7 @@ namespace Elasticsearch.Net
 		public DeleteRequestParameters VersionType(VersionTypeOptions version_type)
 		{
 			this._version_type = version_type;
-			this.Add("version_type", this._version_type);
+			this.AddQueryString("version_type", this._version_type);
 			return this;
 		}
 		
@@ -1426,7 +1426,7 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters Analyzer(string analyzer)
 		{
 			this._analyzer = analyzer;
-			this.Add("analyzer", this._analyzer);
+			this.AddQueryString("analyzer", this._analyzer);
 			return this;
 		}
 		
@@ -1436,7 +1436,7 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters Consistency(ConsistencyOptions consistency)
 		{
 			this._consistency = consistency;
-			this.Add("consistency", this._consistency);
+			this.AddQueryString("consistency", this._consistency);
 			return this;
 		}
 		
@@ -1446,7 +1446,7 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters DefaultOperator(DefaultOperatorOptions default_operator)
 		{
 			this._default_operator = default_operator;
-			this.Add("default_operator", this._default_operator);
+			this.AddQueryString("default_operator", this._default_operator);
 			return this;
 		}
 		
@@ -1456,7 +1456,7 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters Df(string df)
 		{
 			this._df = df;
-			this.Add("df", this._df);
+			this.AddQueryString("df", this._df);
 			return this;
 		}
 		
@@ -1466,7 +1466,7 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -1476,7 +1476,7 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -1486,7 +1486,7 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -1496,7 +1496,7 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters Replication(ReplicationOptions replication)
 		{
 			this._replication = replication;
-			this.Add("replication", this._replication);
+			this.AddQueryString("replication", this._replication);
 			return this;
 		}
 		
@@ -1506,7 +1506,7 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters Q(string q)
 		{
 			this._q = q;
-			this.Add("q", this._q);
+			this.AddQueryString("q", this._q);
 			return this;
 		}
 		
@@ -1516,7 +1516,7 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -1526,7 +1526,7 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters Source(string source)
 		{
 			this._source = source;
-			this.Add("source", this._source);
+			this.AddQueryString("source", this._source);
 			return this;
 		}
 		
@@ -1536,7 +1536,7 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -1556,7 +1556,7 @@ namespace Elasticsearch.Net
 		public ExistsRequestParameters Parent(string parent)
 		{
 			this._parent = parent;
-			this.Add("parent", this._parent);
+			this.AddQueryString("parent", this._parent);
 			return this;
 		}
 		
@@ -1566,7 +1566,7 @@ namespace Elasticsearch.Net
 		public ExistsRequestParameters Preference(string preference)
 		{
 			this._preference = preference;
-			this.Add("preference", this._preference);
+			this.AddQueryString("preference", this._preference);
 			return this;
 		}
 		
@@ -1576,7 +1576,7 @@ namespace Elasticsearch.Net
 		public ExistsRequestParameters Realtime(bool realtime)
 		{
 			this._realtime = realtime;
-			this.Add("realtime", this._realtime);
+			this.AddQueryString("realtime", this._realtime);
 			return this;
 		}
 		
@@ -1586,7 +1586,7 @@ namespace Elasticsearch.Net
 		public ExistsRequestParameters Refresh(bool refresh)
 		{
 			this._refresh = refresh;
-			this.Add("refresh", this._refresh);
+			this.AddQueryString("refresh", this._refresh);
 			return this;
 		}
 		
@@ -1596,7 +1596,7 @@ namespace Elasticsearch.Net
 		public ExistsRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -1616,7 +1616,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters AnalyzeWildcard(bool analyze_wildcard)
 		{
 			this._analyze_wildcard = analyze_wildcard;
-			this.Add("analyze_wildcard", this._analyze_wildcard);
+			this.AddQueryString("analyze_wildcard", this._analyze_wildcard);
 			return this;
 		}
 		
@@ -1626,7 +1626,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters Analyzer(string analyzer)
 		{
 			this._analyzer = analyzer;
-			this.Add("analyzer", this._analyzer);
+			this.AddQueryString("analyzer", this._analyzer);
 			return this;
 		}
 		
@@ -1636,7 +1636,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters DefaultOperator(DefaultOperatorOptions default_operator)
 		{
 			this._default_operator = default_operator;
-			this.Add("default_operator", this._default_operator);
+			this.AddQueryString("default_operator", this._default_operator);
 			return this;
 		}
 		
@@ -1646,7 +1646,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters Df(string df)
 		{
 			this._df = df;
-			this.Add("df", this._df);
+			this.AddQueryString("df", this._df);
 			return this;
 		}
 		
@@ -1656,7 +1656,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters Fields(params string[] fields)
 		{
 			this._fields = fields.Select(f=>(object)f);
-			this.Add("fields", this._fields);
+			this.AddQueryString("fields", this._fields);
 			return this;
 		}
 		
@@ -1666,7 +1666,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters Lenient(bool lenient)
 		{
 			this._lenient = lenient;
-			this.Add("lenient", this._lenient);
+			this.AddQueryString("lenient", this._lenient);
 			return this;
 		}
 		
@@ -1676,7 +1676,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters LowercaseExpandedTerms(bool lowercase_expanded_terms)
 		{
 			this._lowercase_expanded_terms = lowercase_expanded_terms;
-			this.Add("lowercase_expanded_terms", this._lowercase_expanded_terms);
+			this.AddQueryString("lowercase_expanded_terms", this._lowercase_expanded_terms);
 			return this;
 		}
 		
@@ -1686,7 +1686,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters Parent(string parent)
 		{
 			this._parent = parent;
-			this.Add("parent", this._parent);
+			this.AddQueryString("parent", this._parent);
 			return this;
 		}
 		
@@ -1696,7 +1696,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters Preference(string preference)
 		{
 			this._preference = preference;
-			this.Add("preference", this._preference);
+			this.AddQueryString("preference", this._preference);
 			return this;
 		}
 		
@@ -1706,7 +1706,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters Q(string q)
 		{
 			this._q = q;
-			this.Add("q", this._q);
+			this.AddQueryString("q", this._q);
 			return this;
 		}
 		
@@ -1716,7 +1716,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -1726,7 +1726,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters Source(string source)
 		{
 			this._source = source;
-			this.Add("source", this._source);
+			this.AddQueryString("source", this._source);
 			return this;
 		}
 		
@@ -1736,7 +1736,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters Source(params string[] _source)
 		{
 			this.__source = _source;
-			this.Add("_source", this.__source);
+			this.AddQueryString("_source", this.__source);
 			return this;
 		}
 		
@@ -1746,7 +1746,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters SourceExclude(params string[] _source_exclude)
 		{
 			this.__source_exclude = _source_exclude.Select(f=>(object)f);
-			this.Add("_source_exclude", this.__source_exclude);
+			this.AddQueryString("_source_exclude", this.__source_exclude);
 			return this;
 		}
 		
@@ -1756,7 +1756,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters SourceInclude(params string[] _source_include)
 		{
 			this.__source_include = _source_include.Select(f=>(object)f);
-			this.Add("_source_include", this.__source_include);
+			this.AddQueryString("_source_include", this.__source_include);
 			return this;
 		}
 		
@@ -1776,7 +1776,7 @@ namespace Elasticsearch.Net
 		public GetRequestParameters Fields(params string[] fields)
 		{
 			this._fields = fields.Select(f=>(object)f);
-			this.Add("fields", this._fields);
+			this.AddQueryString("fields", this._fields);
 			return this;
 		}
 		
@@ -1786,7 +1786,7 @@ namespace Elasticsearch.Net
 		public GetRequestParameters Parent(string parent)
 		{
 			this._parent = parent;
-			this.Add("parent", this._parent);
+			this.AddQueryString("parent", this._parent);
 			return this;
 		}
 		
@@ -1796,7 +1796,7 @@ namespace Elasticsearch.Net
 		public GetRequestParameters Preference(string preference)
 		{
 			this._preference = preference;
-			this.Add("preference", this._preference);
+			this.AddQueryString("preference", this._preference);
 			return this;
 		}
 		
@@ -1806,7 +1806,7 @@ namespace Elasticsearch.Net
 		public GetRequestParameters Realtime(bool realtime)
 		{
 			this._realtime = realtime;
-			this.Add("realtime", this._realtime);
+			this.AddQueryString("realtime", this._realtime);
 			return this;
 		}
 		
@@ -1816,7 +1816,7 @@ namespace Elasticsearch.Net
 		public GetRequestParameters Refresh(bool refresh)
 		{
 			this._refresh = refresh;
-			this.Add("refresh", this._refresh);
+			this.AddQueryString("refresh", this._refresh);
 			return this;
 		}
 		
@@ -1826,7 +1826,7 @@ namespace Elasticsearch.Net
 		public GetRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -1836,7 +1836,7 @@ namespace Elasticsearch.Net
 		public GetRequestParameters Source(params string[] _source)
 		{
 			this.__source = _source;
-			this.Add("_source", this.__source);
+			this.AddQueryString("_source", this.__source);
 			return this;
 		}
 		
@@ -1846,7 +1846,7 @@ namespace Elasticsearch.Net
 		public GetRequestParameters SourceExclude(params string[] _source_exclude)
 		{
 			this.__source_exclude = _source_exclude.Select(f=>(object)f);
-			this.Add("_source_exclude", this.__source_exclude);
+			this.AddQueryString("_source_exclude", this.__source_exclude);
 			return this;
 		}
 		
@@ -1856,7 +1856,7 @@ namespace Elasticsearch.Net
 		public GetRequestParameters SourceInclude(params string[] _source_include)
 		{
 			this.__source_include = _source_include.Select(f=>(object)f);
-			this.Add("_source_include", this.__source_include);
+			this.AddQueryString("_source_include", this.__source_include);
 			return this;
 		}
 		
@@ -1866,7 +1866,7 @@ namespace Elasticsearch.Net
 		public GetRequestParameters Version(int version)
 		{
 			this._version = version;
-			this.Add("version", this._version);
+			this.AddQueryString("version", this._version);
 			return this;
 		}
 		
@@ -1876,7 +1876,7 @@ namespace Elasticsearch.Net
 		public GetRequestParameters VersionType(VersionTypeOptions version_type)
 		{
 			this._version_type = version_type;
-			this.Add("version_type", this._version_type);
+			this.AddQueryString("version_type", this._version_type);
 			return this;
 		}
 		
@@ -1896,7 +1896,7 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters Parent(string parent)
 		{
 			this._parent = parent;
-			this.Add("parent", this._parent);
+			this.AddQueryString("parent", this._parent);
 			return this;
 		}
 		
@@ -1906,7 +1906,7 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters Preference(string preference)
 		{
 			this._preference = preference;
-			this.Add("preference", this._preference);
+			this.AddQueryString("preference", this._preference);
 			return this;
 		}
 		
@@ -1916,7 +1916,7 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters Realtime(bool realtime)
 		{
 			this._realtime = realtime;
-			this.Add("realtime", this._realtime);
+			this.AddQueryString("realtime", this._realtime);
 			return this;
 		}
 		
@@ -1926,7 +1926,7 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters Refresh(bool refresh)
 		{
 			this._refresh = refresh;
-			this.Add("refresh", this._refresh);
+			this.AddQueryString("refresh", this._refresh);
 			return this;
 		}
 		
@@ -1936,7 +1936,7 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -1946,7 +1946,7 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters Source(params string[] _source)
 		{
 			this.__source = _source;
-			this.Add("_source", this.__source);
+			this.AddQueryString("_source", this.__source);
 			return this;
 		}
 		
@@ -1956,7 +1956,7 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters SourceExclude(params string[] _source_exclude)
 		{
 			this.__source_exclude = _source_exclude.Select(f=>(object)f);
-			this.Add("_source_exclude", this.__source_exclude);
+			this.AddQueryString("_source_exclude", this.__source_exclude);
 			return this;
 		}
 		
@@ -1966,7 +1966,7 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters SourceInclude(params string[] _source_include)
 		{
 			this.__source_include = _source_include.Select(f=>(object)f);
-			this.Add("_source_include", this.__source_include);
+			this.AddQueryString("_source_include", this.__source_include);
 			return this;
 		}
 		
@@ -1976,7 +1976,7 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters Version(int version)
 		{
 			this._version = version;
-			this.Add("version", this._version);
+			this.AddQueryString("version", this._version);
 			return this;
 		}
 		
@@ -1986,7 +1986,7 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters VersionType(VersionTypeOptions version_type)
 		{
 			this._version_type = version_type;
-			this.Add("version_type", this._version_type);
+			this.AddQueryString("version_type", this._version_type);
 			return this;
 		}
 		
@@ -2006,7 +2006,7 @@ namespace Elasticsearch.Net
 		public IndexRequestParameters Consistency(ConsistencyOptions consistency)
 		{
 			this._consistency = consistency;
-			this.Add("consistency", this._consistency);
+			this.AddQueryString("consistency", this._consistency);
 			return this;
 		}
 		
@@ -2016,7 +2016,7 @@ namespace Elasticsearch.Net
 		public IndexRequestParameters OpType(OpTypeOptions op_type)
 		{
 			this._op_type = op_type;
-			this.Add("op_type", this._op_type);
+			this.AddQueryString("op_type", this._op_type);
 			return this;
 		}
 		
@@ -2026,7 +2026,7 @@ namespace Elasticsearch.Net
 		public IndexRequestParameters Parent(string parent)
 		{
 			this._parent = parent;
-			this.Add("parent", this._parent);
+			this.AddQueryString("parent", this._parent);
 			return this;
 		}
 		
@@ -2036,7 +2036,7 @@ namespace Elasticsearch.Net
 		public IndexRequestParameters Refresh(bool refresh)
 		{
 			this._refresh = refresh;
-			this.Add("refresh", this._refresh);
+			this.AddQueryString("refresh", this._refresh);
 			return this;
 		}
 		
@@ -2046,7 +2046,7 @@ namespace Elasticsearch.Net
 		public IndexRequestParameters Replication(ReplicationOptions replication)
 		{
 			this._replication = replication;
-			this.Add("replication", this._replication);
+			this.AddQueryString("replication", this._replication);
 			return this;
 		}
 		
@@ -2056,7 +2056,7 @@ namespace Elasticsearch.Net
 		public IndexRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -2066,7 +2066,7 @@ namespace Elasticsearch.Net
 		public IndexRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -2076,7 +2076,7 @@ namespace Elasticsearch.Net
 		public IndexRequestParameters Timestamp(string timestamp)
 		{
 			this._timestamp = timestamp;
-			this.Add("timestamp", this._timestamp);
+			this.AddQueryString("timestamp", this._timestamp);
 			return this;
 		}
 		
@@ -2086,7 +2086,7 @@ namespace Elasticsearch.Net
 		public IndexRequestParameters Ttl(string ttl)
 		{
 			this._ttl = ttl;
-			this.Add("ttl", this._ttl);
+			this.AddQueryString("ttl", this._ttl);
 			return this;
 		}
 		
@@ -2096,7 +2096,7 @@ namespace Elasticsearch.Net
 		public IndexRequestParameters Version(int version)
 		{
 			this._version = version;
-			this.Add("version", this._version);
+			this.AddQueryString("version", this._version);
 			return this;
 		}
 		
@@ -2106,7 +2106,7 @@ namespace Elasticsearch.Net
 		public IndexRequestParameters VersionType(VersionTypeOptions version_type)
 		{
 			this._version_type = version_type;
-			this.Add("version_type", this._version_type);
+			this.AddQueryString("version_type", this._version_type);
 			return this;
 		}
 		
@@ -2126,7 +2126,7 @@ namespace Elasticsearch.Net
 		public AnalyzeRequestParameters Analyzer(string analyzer)
 		{
 			this._analyzer = analyzer;
-			this.Add("analyzer", this._analyzer);
+			this.AddQueryString("analyzer", this._analyzer);
 			return this;
 		}
 		
@@ -2136,7 +2136,7 @@ namespace Elasticsearch.Net
 		public AnalyzeRequestParameters Field(string field)
 		{
 			this._field = field;
-			this.Add("field", this._field);
+			this.AddQueryString("field", this._field);
 			return this;
 		}
 		
@@ -2146,7 +2146,7 @@ namespace Elasticsearch.Net
 		public AnalyzeRequestParameters Filters(params string[] filters)
 		{
 			this._filters = filters;
-			this.Add("filters", this._filters);
+			this.AddQueryString("filters", this._filters);
 			return this;
 		}
 		
@@ -2156,7 +2156,7 @@ namespace Elasticsearch.Net
 		public AnalyzeRequestParameters Index(string index)
 		{
 			this._index = index;
-			this.Add("index", this._index);
+			this.AddQueryString("index", this._index);
 			return this;
 		}
 		
@@ -2166,7 +2166,7 @@ namespace Elasticsearch.Net
 		public AnalyzeRequestParameters PreferLocal(bool prefer_local)
 		{
 			this._prefer_local = prefer_local;
-			this.Add("prefer_local", this._prefer_local);
+			this.AddQueryString("prefer_local", this._prefer_local);
 			return this;
 		}
 		
@@ -2176,7 +2176,7 @@ namespace Elasticsearch.Net
 		public AnalyzeRequestParameters Text(string text)
 		{
 			this._text = text;
-			this.Add("text", this._text);
+			this.AddQueryString("text", this._text);
 			return this;
 		}
 		
@@ -2186,7 +2186,7 @@ namespace Elasticsearch.Net
 		public AnalyzeRequestParameters Tokenizer(string tokenizer)
 		{
 			this._tokenizer = tokenizer;
-			this.Add("tokenizer", this._tokenizer);
+			this.AddQueryString("tokenizer", this._tokenizer);
 			return this;
 		}
 		
@@ -2196,7 +2196,7 @@ namespace Elasticsearch.Net
 		public AnalyzeRequestParameters Format(FormatOptions format)
 		{
 			this._format = format;
-			this.Add("format", this._format);
+			this.AddQueryString("format", this._format);
 			return this;
 		}
 		
@@ -2216,7 +2216,7 @@ namespace Elasticsearch.Net
 		public ClearCacheRequestParameters FieldData(bool field_data)
 		{
 			this._field_data = field_data;
-			this.Add("field_data", this._field_data);
+			this.AddQueryString("field_data", this._field_data);
 			return this;
 		}
 		
@@ -2226,7 +2226,7 @@ namespace Elasticsearch.Net
 		public ClearCacheRequestParameters Fielddata(bool fielddata)
 		{
 			this._fielddata = fielddata;
-			this.Add("fielddata", this._fielddata);
+			this.AddQueryString("fielddata", this._fielddata);
 			return this;
 		}
 		
@@ -2236,7 +2236,7 @@ namespace Elasticsearch.Net
 		public ClearCacheRequestParameters Fields(params string[] fields)
 		{
 			this._fields = fields.Select(f=>(object)f);
-			this.Add("fields", this._fields);
+			this.AddQueryString("fields", this._fields);
 			return this;
 		}
 		
@@ -2246,7 +2246,7 @@ namespace Elasticsearch.Net
 		public ClearCacheRequestParameters Filter(bool filter)
 		{
 			this._filter = filter;
-			this.Add("filter", this._filter);
+			this.AddQueryString("filter", this._filter);
 			return this;
 		}
 		
@@ -2256,7 +2256,7 @@ namespace Elasticsearch.Net
 		public ClearCacheRequestParameters FilterCache(bool filter_cache)
 		{
 			this._filter_cache = filter_cache;
-			this.Add("filter_cache", this._filter_cache);
+			this.AddQueryString("filter_cache", this._filter_cache);
 			return this;
 		}
 		
@@ -2266,7 +2266,7 @@ namespace Elasticsearch.Net
 		public ClearCacheRequestParameters FilterKeys(bool filter_keys)
 		{
 			this._filter_keys = filter_keys;
-			this.Add("filter_keys", this._filter_keys);
+			this.AddQueryString("filter_keys", this._filter_keys);
 			return this;
 		}
 		
@@ -2276,7 +2276,7 @@ namespace Elasticsearch.Net
 		public ClearCacheRequestParameters Id(bool id)
 		{
 			this._id = id;
-			this.Add("id", this._id);
+			this.AddQueryString("id", this._id);
 			return this;
 		}
 		
@@ -2286,7 +2286,7 @@ namespace Elasticsearch.Net
 		public ClearCacheRequestParameters IdCache(bool id_cache)
 		{
 			this._id_cache = id_cache;
-			this.Add("id_cache", this._id_cache);
+			this.AddQueryString("id_cache", this._id_cache);
 			return this;
 		}
 		
@@ -2296,7 +2296,7 @@ namespace Elasticsearch.Net
 		public ClearCacheRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -2306,7 +2306,7 @@ namespace Elasticsearch.Net
 		public ClearCacheRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -2316,7 +2316,7 @@ namespace Elasticsearch.Net
 		public ClearCacheRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -2326,7 +2326,7 @@ namespace Elasticsearch.Net
 		public ClearCacheRequestParameters Index(params string[] index)
 		{
 			this._index = index;
-			this.Add("index", this._index);
+			this.AddQueryString("index", this._index);
 			return this;
 		}
 		
@@ -2336,7 +2336,7 @@ namespace Elasticsearch.Net
 		public ClearCacheRequestParameters Recycler(bool recycler)
 		{
 			this._recycler = recycler;
-			this.Add("recycler", this._recycler);
+			this.AddQueryString("recycler", this._recycler);
 			return this;
 		}
 		
@@ -2356,7 +2356,7 @@ namespace Elasticsearch.Net
 		public CloseIndexRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -2366,7 +2366,7 @@ namespace Elasticsearch.Net
 		public CloseIndexRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -2376,7 +2376,7 @@ namespace Elasticsearch.Net
 		public CloseIndexRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -2386,7 +2386,7 @@ namespace Elasticsearch.Net
 		public CloseIndexRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -2396,7 +2396,7 @@ namespace Elasticsearch.Net
 		public CloseIndexRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -2416,7 +2416,7 @@ namespace Elasticsearch.Net
 		public CreateIndexRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -2426,7 +2426,7 @@ namespace Elasticsearch.Net
 		public CreateIndexRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -2446,7 +2446,7 @@ namespace Elasticsearch.Net
 		public DeleteIndexRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -2456,7 +2456,7 @@ namespace Elasticsearch.Net
 		public DeleteIndexRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -2476,7 +2476,7 @@ namespace Elasticsearch.Net
 		public IndicesDeleteAliasRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -2486,7 +2486,7 @@ namespace Elasticsearch.Net
 		public IndicesDeleteAliasRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -2506,7 +2506,7 @@ namespace Elasticsearch.Net
 		public DeleteMappingRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -2526,7 +2526,7 @@ namespace Elasticsearch.Net
 		public DeleteTemplateRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -2536,7 +2536,7 @@ namespace Elasticsearch.Net
 		public DeleteTemplateRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -2556,7 +2556,7 @@ namespace Elasticsearch.Net
 		public DeleteWarmerRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -2576,7 +2576,7 @@ namespace Elasticsearch.Net
 		public IndexExistsRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -2586,7 +2586,7 @@ namespace Elasticsearch.Net
 		public IndexExistsRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -2596,7 +2596,7 @@ namespace Elasticsearch.Net
 		public IndexExistsRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -2606,7 +2606,7 @@ namespace Elasticsearch.Net
 		public IndexExistsRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -2626,7 +2626,7 @@ namespace Elasticsearch.Net
 		public IndicesExistsAliasRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -2636,7 +2636,7 @@ namespace Elasticsearch.Net
 		public IndicesExistsAliasRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -2646,7 +2646,7 @@ namespace Elasticsearch.Net
 		public IndicesExistsAliasRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -2656,7 +2656,7 @@ namespace Elasticsearch.Net
 		public IndicesExistsAliasRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -2676,7 +2676,7 @@ namespace Elasticsearch.Net
 		public IndicesExistsTemplateRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -2696,7 +2696,7 @@ namespace Elasticsearch.Net
 		public IndicesExistsTypeRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -2706,7 +2706,7 @@ namespace Elasticsearch.Net
 		public IndicesExistsTypeRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -2716,7 +2716,7 @@ namespace Elasticsearch.Net
 		public IndicesExistsTypeRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -2726,7 +2726,7 @@ namespace Elasticsearch.Net
 		public IndicesExistsTypeRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -2746,7 +2746,7 @@ namespace Elasticsearch.Net
 		public FlushRequestParameters Force(bool force)
 		{
 			this._force = force;
-			this.Add("force", this._force);
+			this.AddQueryString("force", this._force);
 			return this;
 		}
 		
@@ -2756,7 +2756,7 @@ namespace Elasticsearch.Net
 		public FlushRequestParameters Full(bool full)
 		{
 			this._full = full;
-			this.Add("full", this._full);
+			this.AddQueryString("full", this._full);
 			return this;
 		}
 		
@@ -2766,7 +2766,7 @@ namespace Elasticsearch.Net
 		public FlushRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -2776,7 +2776,7 @@ namespace Elasticsearch.Net
 		public FlushRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -2786,7 +2786,7 @@ namespace Elasticsearch.Net
 		public FlushRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -2806,7 +2806,7 @@ namespace Elasticsearch.Net
 		public GetAliasesRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -2816,7 +2816,7 @@ namespace Elasticsearch.Net
 		public GetAliasesRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -2826,7 +2826,7 @@ namespace Elasticsearch.Net
 		public GetAliasesRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -2836,7 +2836,7 @@ namespace Elasticsearch.Net
 		public GetAliasesRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -2856,7 +2856,7 @@ namespace Elasticsearch.Net
 		public IndicesGetAliasesRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -2866,7 +2866,7 @@ namespace Elasticsearch.Net
 		public IndicesGetAliasesRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -2886,7 +2886,7 @@ namespace Elasticsearch.Net
 		public IndicesGetFieldMappingRequestParameters IncludeDefaults(bool include_defaults)
 		{
 			this._include_defaults = include_defaults;
-			this.Add("include_defaults", this._include_defaults);
+			this.AddQueryString("include_defaults", this._include_defaults);
 			return this;
 		}
 		
@@ -2896,7 +2896,7 @@ namespace Elasticsearch.Net
 		public IndicesGetFieldMappingRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -2906,7 +2906,7 @@ namespace Elasticsearch.Net
 		public IndicesGetFieldMappingRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -2916,7 +2916,7 @@ namespace Elasticsearch.Net
 		public IndicesGetFieldMappingRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -2926,7 +2926,7 @@ namespace Elasticsearch.Net
 		public IndicesGetFieldMappingRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -2946,7 +2946,7 @@ namespace Elasticsearch.Net
 		public GetMappingRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -2956,7 +2956,7 @@ namespace Elasticsearch.Net
 		public GetMappingRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -2966,7 +2966,7 @@ namespace Elasticsearch.Net
 		public GetMappingRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -2976,7 +2976,7 @@ namespace Elasticsearch.Net
 		public GetMappingRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -2996,7 +2996,7 @@ namespace Elasticsearch.Net
 		public GetIndexSettingsRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -3006,7 +3006,7 @@ namespace Elasticsearch.Net
 		public GetIndexSettingsRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -3016,7 +3016,7 @@ namespace Elasticsearch.Net
 		public GetIndexSettingsRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -3026,7 +3026,7 @@ namespace Elasticsearch.Net
 		public GetIndexSettingsRequestParameters FlatSettings(bool flat_settings)
 		{
 			this._flat_settings = flat_settings;
-			this.Add("flat_settings", this._flat_settings);
+			this.AddQueryString("flat_settings", this._flat_settings);
 			return this;
 		}
 		
@@ -3036,7 +3036,7 @@ namespace Elasticsearch.Net
 		public GetIndexSettingsRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -3056,7 +3056,7 @@ namespace Elasticsearch.Net
 		public GetTemplateRequestParameters FlatSettings(bool flat_settings)
 		{
 			this._flat_settings = flat_settings;
-			this.Add("flat_settings", this._flat_settings);
+			this.AddQueryString("flat_settings", this._flat_settings);
 			return this;
 		}
 		
@@ -3066,7 +3066,7 @@ namespace Elasticsearch.Net
 		public GetTemplateRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -3086,7 +3086,7 @@ namespace Elasticsearch.Net
 		public GetWarmerRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -3096,7 +3096,7 @@ namespace Elasticsearch.Net
 		public GetWarmerRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -3106,7 +3106,7 @@ namespace Elasticsearch.Net
 		public GetWarmerRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -3116,7 +3116,7 @@ namespace Elasticsearch.Net
 		public GetWarmerRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -3136,7 +3136,7 @@ namespace Elasticsearch.Net
 		public OpenIndexRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -3146,7 +3146,7 @@ namespace Elasticsearch.Net
 		public OpenIndexRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -3156,7 +3156,7 @@ namespace Elasticsearch.Net
 		public OpenIndexRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -3166,7 +3166,7 @@ namespace Elasticsearch.Net
 		public OpenIndexRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -3176,7 +3176,7 @@ namespace Elasticsearch.Net
 		public OpenIndexRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -3196,7 +3196,7 @@ namespace Elasticsearch.Net
 		public OptimizeRequestParameters Flush(bool flush)
 		{
 			this._flush = flush;
-			this.Add("flush", this._flush);
+			this.AddQueryString("flush", this._flush);
 			return this;
 		}
 		
@@ -3206,7 +3206,7 @@ namespace Elasticsearch.Net
 		public OptimizeRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -3216,7 +3216,7 @@ namespace Elasticsearch.Net
 		public OptimizeRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -3226,7 +3226,7 @@ namespace Elasticsearch.Net
 		public OptimizeRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -3236,7 +3236,7 @@ namespace Elasticsearch.Net
 		public OptimizeRequestParameters MaxNumSegments(int max_num_segments)
 		{
 			this._max_num_segments = max_num_segments;
-			this.Add("max_num_segments", this._max_num_segments);
+			this.AddQueryString("max_num_segments", this._max_num_segments);
 			return this;
 		}
 		
@@ -3246,7 +3246,7 @@ namespace Elasticsearch.Net
 		public OptimizeRequestParameters OnlyExpungeDeletes(bool only_expunge_deletes)
 		{
 			this._only_expunge_deletes = only_expunge_deletes;
-			this.Add("only_expunge_deletes", this._only_expunge_deletes);
+			this.AddQueryString("only_expunge_deletes", this._only_expunge_deletes);
 			return this;
 		}
 		
@@ -3256,7 +3256,7 @@ namespace Elasticsearch.Net
 		public OptimizeRequestParameters OperationThreading(string operation_threading)
 		{
 			this._operation_threading = operation_threading;
-			this.Add("operation_threading", this._operation_threading);
+			this.AddQueryString("operation_threading", this._operation_threading);
 			return this;
 		}
 		
@@ -3266,7 +3266,7 @@ namespace Elasticsearch.Net
 		public OptimizeRequestParameters WaitForMerge(bool wait_for_merge)
 		{
 			this._wait_for_merge = wait_for_merge;
-			this.Add("wait_for_merge", this._wait_for_merge);
+			this.AddQueryString("wait_for_merge", this._wait_for_merge);
 			return this;
 		}
 		
@@ -3286,7 +3286,7 @@ namespace Elasticsearch.Net
 		public IndicesPutAliasRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -3296,7 +3296,7 @@ namespace Elasticsearch.Net
 		public IndicesPutAliasRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -3316,7 +3316,7 @@ namespace Elasticsearch.Net
 		public PutMappingRequestParameters IgnoreConflicts(bool ignore_conflicts)
 		{
 			this._ignore_conflicts = ignore_conflicts;
-			this.Add("ignore_conflicts", this._ignore_conflicts);
+			this.AddQueryString("ignore_conflicts", this._ignore_conflicts);
 			return this;
 		}
 		
@@ -3326,7 +3326,7 @@ namespace Elasticsearch.Net
 		public PutMappingRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -3336,7 +3336,7 @@ namespace Elasticsearch.Net
 		public PutMappingRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -3346,7 +3346,7 @@ namespace Elasticsearch.Net
 		public PutMappingRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -3356,7 +3356,7 @@ namespace Elasticsearch.Net
 		public PutMappingRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -3366,7 +3366,7 @@ namespace Elasticsearch.Net
 		public PutMappingRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -3386,7 +3386,7 @@ namespace Elasticsearch.Net
 		public UpdateSettingsRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -3396,7 +3396,7 @@ namespace Elasticsearch.Net
 		public UpdateSettingsRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -3406,7 +3406,7 @@ namespace Elasticsearch.Net
 		public UpdateSettingsRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -3416,7 +3416,7 @@ namespace Elasticsearch.Net
 		public UpdateSettingsRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -3426,7 +3426,7 @@ namespace Elasticsearch.Net
 		public UpdateSettingsRequestParameters FlatSettings(bool flat_settings)
 		{
 			this._flat_settings = flat_settings;
-			this.Add("flat_settings", this._flat_settings);
+			this.AddQueryString("flat_settings", this._flat_settings);
 			return this;
 		}
 		
@@ -3446,7 +3446,7 @@ namespace Elasticsearch.Net
 		public PutTemplateRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -3456,7 +3456,7 @@ namespace Elasticsearch.Net
 		public PutTemplateRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -3466,7 +3466,7 @@ namespace Elasticsearch.Net
 		public PutTemplateRequestParameters FlatSettings(bool flat_settings)
 		{
 			this._flat_settings = flat_settings;
-			this.Add("flat_settings", this._flat_settings);
+			this.AddQueryString("flat_settings", this._flat_settings);
 			return this;
 		}
 		
@@ -3486,7 +3486,7 @@ namespace Elasticsearch.Net
 		public PutWarmerRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -3496,7 +3496,7 @@ namespace Elasticsearch.Net
 		public PutWarmerRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -3506,7 +3506,7 @@ namespace Elasticsearch.Net
 		public PutWarmerRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -3516,7 +3516,7 @@ namespace Elasticsearch.Net
 		public PutWarmerRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -3536,7 +3536,7 @@ namespace Elasticsearch.Net
 		public RefreshRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -3546,7 +3546,7 @@ namespace Elasticsearch.Net
 		public RefreshRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -3556,7 +3556,7 @@ namespace Elasticsearch.Net
 		public RefreshRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -3566,7 +3566,7 @@ namespace Elasticsearch.Net
 		public RefreshRequestParameters Force(bool force)
 		{
 			this._force = force;
-			this.Add("force", this._force);
+			this.AddQueryString("force", this._force);
 			return this;
 		}
 		
@@ -3576,7 +3576,7 @@ namespace Elasticsearch.Net
 		public RefreshRequestParameters OperationThreading(string operation_threading)
 		{
 			this._operation_threading = operation_threading;
-			this.Add("operation_threading", this._operation_threading);
+			this.AddQueryString("operation_threading", this._operation_threading);
 			return this;
 		}
 		
@@ -3596,7 +3596,7 @@ namespace Elasticsearch.Net
 		public SegmentsRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -3606,7 +3606,7 @@ namespace Elasticsearch.Net
 		public SegmentsRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -3616,7 +3616,7 @@ namespace Elasticsearch.Net
 		public SegmentsRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -3626,7 +3626,7 @@ namespace Elasticsearch.Net
 		public SegmentsRequestParameters Human(bool human)
 		{
 			this._human = human;
-			this.Add("human", this._human);
+			this.AddQueryString("human", this._human);
 			return this;
 		}
 		
@@ -3636,7 +3636,7 @@ namespace Elasticsearch.Net
 		public SegmentsRequestParameters OperationThreading(string operation_threading)
 		{
 			this._operation_threading = operation_threading;
-			this.Add("operation_threading", this._operation_threading);
+			this.AddQueryString("operation_threading", this._operation_threading);
 			return this;
 		}
 		
@@ -3656,7 +3656,7 @@ namespace Elasticsearch.Net
 		public SnapshotRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -3666,7 +3666,7 @@ namespace Elasticsearch.Net
 		public SnapshotRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -3676,7 +3676,7 @@ namespace Elasticsearch.Net
 		public SnapshotRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -3696,7 +3696,7 @@ namespace Elasticsearch.Net
 		public IndicesStatsRequestParameters CompletionFields(params string[] completion_fields)
 		{
 			this._completion_fields = completion_fields.Select(f=>(object)f);
-			this.Add("completion_fields", this._completion_fields);
+			this.AddQueryString("completion_fields", this._completion_fields);
 			return this;
 		}
 		
@@ -3706,7 +3706,7 @@ namespace Elasticsearch.Net
 		public IndicesStatsRequestParameters FielddataFields(params string[] fielddata_fields)
 		{
 			this._fielddata_fields = fielddata_fields.Select(f=>(object)f);
-			this.Add("fielddata_fields", this._fielddata_fields);
+			this.AddQueryString("fielddata_fields", this._fielddata_fields);
 			return this;
 		}
 		
@@ -3716,7 +3716,7 @@ namespace Elasticsearch.Net
 		public IndicesStatsRequestParameters Fields(params string[] fields)
 		{
 			this._fields = fields.Select(f=>(object)f);
-			this.Add("fields", this._fields);
+			this.AddQueryString("fields", this._fields);
 			return this;
 		}
 		
@@ -3726,7 +3726,7 @@ namespace Elasticsearch.Net
 		public IndicesStatsRequestParameters Groups(bool groups)
 		{
 			this._groups = groups;
-			this.Add("groups", this._groups);
+			this.AddQueryString("groups", this._groups);
 			return this;
 		}
 		
@@ -3736,7 +3736,7 @@ namespace Elasticsearch.Net
 		public IndicesStatsRequestParameters Human(bool human)
 		{
 			this._human = human;
-			this.Add("human", this._human);
+			this.AddQueryString("human", this._human);
 			return this;
 		}
 		
@@ -3746,7 +3746,7 @@ namespace Elasticsearch.Net
 		public IndicesStatsRequestParameters Level(LevelOptions level)
 		{
 			this._level = level;
-			this.Add("level", this._level);
+			this.AddQueryString("level", this._level);
 			return this;
 		}
 		
@@ -3756,7 +3756,7 @@ namespace Elasticsearch.Net
 		public IndicesStatsRequestParameters Types(params string[] types)
 		{
 			this._types = types;
-			this.Add("types", this._types);
+			this.AddQueryString("types", this._types);
 			return this;
 		}
 		
@@ -3776,7 +3776,7 @@ namespace Elasticsearch.Net
 		public IndicesStatusRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -3786,7 +3786,7 @@ namespace Elasticsearch.Net
 		public IndicesStatusRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -3796,7 +3796,7 @@ namespace Elasticsearch.Net
 		public IndicesStatusRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -3806,7 +3806,7 @@ namespace Elasticsearch.Net
 		public IndicesStatusRequestParameters Human(bool human)
 		{
 			this._human = human;
-			this.Add("human", this._human);
+			this.AddQueryString("human", this._human);
 			return this;
 		}
 		
@@ -3816,7 +3816,7 @@ namespace Elasticsearch.Net
 		public IndicesStatusRequestParameters OperationThreading(string operation_threading)
 		{
 			this._operation_threading = operation_threading;
-			this.Add("operation_threading", this._operation_threading);
+			this.AddQueryString("operation_threading", this._operation_threading);
 			return this;
 		}
 		
@@ -3826,7 +3826,7 @@ namespace Elasticsearch.Net
 		public IndicesStatusRequestParameters Recovery(bool recovery)
 		{
 			this._recovery = recovery;
-			this.Add("recovery", this._recovery);
+			this.AddQueryString("recovery", this._recovery);
 			return this;
 		}
 		
@@ -3836,7 +3836,7 @@ namespace Elasticsearch.Net
 		public IndicesStatusRequestParameters Snapshot(bool snapshot)
 		{
 			this._snapshot = snapshot;
-			this.Add("snapshot", this._snapshot);
+			this.AddQueryString("snapshot", this._snapshot);
 			return this;
 		}
 		
@@ -3856,7 +3856,7 @@ namespace Elasticsearch.Net
 		public AliasRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -3866,7 +3866,7 @@ namespace Elasticsearch.Net
 		public AliasRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -3886,7 +3886,7 @@ namespace Elasticsearch.Net
 		public ValidateQueryRequestParameters Explain(bool explain)
 		{
 			this._explain = explain;
-			this.Add("explain", this._explain);
+			this.AddQueryString("explain", this._explain);
 			return this;
 		}
 		
@@ -3896,7 +3896,7 @@ namespace Elasticsearch.Net
 		public ValidateQueryRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -3906,7 +3906,7 @@ namespace Elasticsearch.Net
 		public ValidateQueryRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -3916,7 +3916,7 @@ namespace Elasticsearch.Net
 		public ValidateQueryRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -3926,7 +3926,7 @@ namespace Elasticsearch.Net
 		public ValidateQueryRequestParameters OperationThreading(string operation_threading)
 		{
 			this._operation_threading = operation_threading;
-			this.Add("operation_threading", this._operation_threading);
+			this.AddQueryString("operation_threading", this._operation_threading);
 			return this;
 		}
 		
@@ -3936,7 +3936,7 @@ namespace Elasticsearch.Net
 		public ValidateQueryRequestParameters Source(string source)
 		{
 			this._source = source;
-			this.Add("source", this._source);
+			this.AddQueryString("source", this._source);
 			return this;
 		}
 		
@@ -3946,7 +3946,7 @@ namespace Elasticsearch.Net
 		public ValidateQueryRequestParameters Q(string q)
 		{
 			this._q = q;
-			this.Add("q", this._q);
+			this.AddQueryString("q", this._q);
 			return this;
 		}
 		
@@ -3976,7 +3976,7 @@ namespace Elasticsearch.Net
 		public MultiGetRequestParameters Fields(params string[] fields)
 		{
 			this._fields = fields.Select(f=>(object)f);
-			this.Add("fields", this._fields);
+			this.AddQueryString("fields", this._fields);
 			return this;
 		}
 		
@@ -3986,7 +3986,7 @@ namespace Elasticsearch.Net
 		public MultiGetRequestParameters Preference(string preference)
 		{
 			this._preference = preference;
-			this.Add("preference", this._preference);
+			this.AddQueryString("preference", this._preference);
 			return this;
 		}
 		
@@ -3996,7 +3996,7 @@ namespace Elasticsearch.Net
 		public MultiGetRequestParameters Realtime(bool realtime)
 		{
 			this._realtime = realtime;
-			this.Add("realtime", this._realtime);
+			this.AddQueryString("realtime", this._realtime);
 			return this;
 		}
 		
@@ -4006,7 +4006,7 @@ namespace Elasticsearch.Net
 		public MultiGetRequestParameters Refresh(bool refresh)
 		{
 			this._refresh = refresh;
-			this.Add("refresh", this._refresh);
+			this.AddQueryString("refresh", this._refresh);
 			return this;
 		}
 		
@@ -4016,7 +4016,7 @@ namespace Elasticsearch.Net
 		public MultiGetRequestParameters Source(params string[] _source)
 		{
 			this.__source = _source;
-			this.Add("_source", this.__source);
+			this.AddQueryString("_source", this.__source);
 			return this;
 		}
 		
@@ -4026,7 +4026,7 @@ namespace Elasticsearch.Net
 		public MultiGetRequestParameters SourceExclude(params string[] _source_exclude)
 		{
 			this.__source_exclude = _source_exclude.Select(f=>(object)f);
-			this.Add("_source_exclude", this.__source_exclude);
+			this.AddQueryString("_source_exclude", this.__source_exclude);
 			return this;
 		}
 		
@@ -4036,7 +4036,7 @@ namespace Elasticsearch.Net
 		public MultiGetRequestParameters SourceInclude(params string[] _source_include)
 		{
 			this.__source_include = _source_include.Select(f=>(object)f);
-			this.Add("_source_include", this.__source_include);
+			this.AddQueryString("_source_include", this.__source_include);
 			return this;
 		}
 		
@@ -4056,7 +4056,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters BoostTerms(double boost_terms)
 		{
 			this._boost_terms = boost_terms;
-			this.Add("boost_terms", this._boost_terms);
+			this.AddQueryString("boost_terms", this._boost_terms);
 			return this;
 		}
 		
@@ -4066,7 +4066,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters MaxDocFreq(int max_doc_freq)
 		{
 			this._max_doc_freq = max_doc_freq;
-			this.Add("max_doc_freq", this._max_doc_freq);
+			this.AddQueryString("max_doc_freq", this._max_doc_freq);
 			return this;
 		}
 		
@@ -4076,7 +4076,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters MaxQueryTerms(int max_query_terms)
 		{
 			this._max_query_terms = max_query_terms;
-			this.Add("max_query_terms", this._max_query_terms);
+			this.AddQueryString("max_query_terms", this._max_query_terms);
 			return this;
 		}
 		
@@ -4086,7 +4086,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters MaxWordLength(int max_word_length)
 		{
 			this._max_word_length = max_word_length;
-			this.Add("max_word_length", this._max_word_length);
+			this.AddQueryString("max_word_length", this._max_word_length);
 			return this;
 		}
 		
@@ -4096,7 +4096,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters MinDocFreq(int min_doc_freq)
 		{
 			this._min_doc_freq = min_doc_freq;
-			this.Add("min_doc_freq", this._min_doc_freq);
+			this.AddQueryString("min_doc_freq", this._min_doc_freq);
 			return this;
 		}
 		
@@ -4106,7 +4106,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters MinTermFreq(int min_term_freq)
 		{
 			this._min_term_freq = min_term_freq;
-			this.Add("min_term_freq", this._min_term_freq);
+			this.AddQueryString("min_term_freq", this._min_term_freq);
 			return this;
 		}
 		
@@ -4116,7 +4116,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters MinWordLength(int min_word_length)
 		{
 			this._min_word_length = min_word_length;
-			this.Add("min_word_length", this._min_word_length);
+			this.AddQueryString("min_word_length", this._min_word_length);
 			return this;
 		}
 		
@@ -4126,7 +4126,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters MltFields(params string[] mlt_fields)
 		{
 			this._mlt_fields = mlt_fields.Select(f=>(object)f);
-			this.Add("mlt_fields", this._mlt_fields);
+			this.AddQueryString("mlt_fields", this._mlt_fields);
 			return this;
 		}
 		
@@ -4136,7 +4136,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters PercentTermsToMatch(double percent_terms_to_match)
 		{
 			this._percent_terms_to_match = percent_terms_to_match;
-			this.Add("percent_terms_to_match", this._percent_terms_to_match);
+			this.AddQueryString("percent_terms_to_match", this._percent_terms_to_match);
 			return this;
 		}
 		
@@ -4146,7 +4146,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -4156,7 +4156,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters SearchFrom(int search_from)
 		{
 			this._search_from = search_from;
-			this.Add("search_from", this._search_from);
+			this.AddQueryString("search_from", this._search_from);
 			return this;
 		}
 		
@@ -4166,7 +4166,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters SearchIndices(params string[] search_indices)
 		{
 			this._search_indices = search_indices;
-			this.Add("search_indices", this._search_indices);
+			this.AddQueryString("search_indices", this._search_indices);
 			return this;
 		}
 		
@@ -4176,7 +4176,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters SearchQueryHint(string search_query_hint)
 		{
 			this._search_query_hint = search_query_hint;
-			this.Add("search_query_hint", this._search_query_hint);
+			this.AddQueryString("search_query_hint", this._search_query_hint);
 			return this;
 		}
 		
@@ -4186,7 +4186,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters SearchScroll(string search_scroll)
 		{
 			this._search_scroll = search_scroll;
-			this.Add("search_scroll", this._search_scroll);
+			this.AddQueryString("search_scroll", this._search_scroll);
 			return this;
 		}
 		
@@ -4196,7 +4196,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters SearchSize(int search_size)
 		{
 			this._search_size = search_size;
-			this.Add("search_size", this._search_size);
+			this.AddQueryString("search_size", this._search_size);
 			return this;
 		}
 		
@@ -4206,7 +4206,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters SearchSource(string search_source)
 		{
 			this._search_source = search_source;
-			this.Add("search_source", this._search_source);
+			this.AddQueryString("search_source", this._search_source);
 			return this;
 		}
 		
@@ -4216,7 +4216,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters SearchType(string search_type)
 		{
 			this._search_type = search_type;
-			this.Add("search_type", this._search_type);
+			this.AddQueryString("search_type", this._search_type);
 			return this;
 		}
 		
@@ -4226,7 +4226,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters SearchTypes(params string[] search_types)
 		{
 			this._search_types = search_types;
-			this.Add("search_types", this._search_types);
+			this.AddQueryString("search_types", this._search_types);
 			return this;
 		}
 		
@@ -4236,7 +4236,7 @@ namespace Elasticsearch.Net
 		public MoreLikeThisRequestParameters StopWords(params string[] stop_words)
 		{
 			this._stop_words = stop_words;
-			this.Add("stop_words", this._stop_words);
+			this.AddQueryString("stop_words", this._stop_words);
 			return this;
 		}
 		
@@ -4256,7 +4256,7 @@ namespace Elasticsearch.Net
 		public MpercolateRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -4266,7 +4266,7 @@ namespace Elasticsearch.Net
 		public MpercolateRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -4276,7 +4276,7 @@ namespace Elasticsearch.Net
 		public MpercolateRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -4296,7 +4296,7 @@ namespace Elasticsearch.Net
 		public MultiSearchRequestParameters SearchType(SearchTypeOptions search_type)
 		{
 			this._search_type = search_type;
-			this.Add("search_type", this._search_type);
+			this.AddQueryString("search_type", this._search_type);
 			return this;
 		}
 		
@@ -4316,7 +4316,7 @@ namespace Elasticsearch.Net
 		public MtermvectorsRequestParameters Ids(params string[] ids)
 		{
 			this._ids = ids;
-			this.Add("ids", this._ids);
+			this.AddQueryString("ids", this._ids);
 			return this;
 		}
 		
@@ -4326,7 +4326,7 @@ namespace Elasticsearch.Net
 		public MtermvectorsRequestParameters TermStatistics(bool term_statistics)
 		{
 			this._term_statistics = term_statistics;
-			this.Add("term_statistics", this._term_statistics);
+			this.AddQueryString("term_statistics", this._term_statistics);
 			return this;
 		}
 		
@@ -4336,7 +4336,7 @@ namespace Elasticsearch.Net
 		public MtermvectorsRequestParameters FieldStatistics(bool field_statistics)
 		{
 			this._field_statistics = field_statistics;
-			this.Add("field_statistics", this._field_statistics);
+			this.AddQueryString("field_statistics", this._field_statistics);
 			return this;
 		}
 		
@@ -4346,7 +4346,7 @@ namespace Elasticsearch.Net
 		public MtermvectorsRequestParameters Fields(params string[] fields)
 		{
 			this._fields = fields.Select(f=>(object)f);
-			this.Add("fields", this._fields);
+			this.AddQueryString("fields", this._fields);
 			return this;
 		}
 		
@@ -4356,7 +4356,7 @@ namespace Elasticsearch.Net
 		public MtermvectorsRequestParameters Offsets(bool offsets)
 		{
 			this._offsets = offsets;
-			this.Add("offsets", this._offsets);
+			this.AddQueryString("offsets", this._offsets);
 			return this;
 		}
 		
@@ -4366,7 +4366,7 @@ namespace Elasticsearch.Net
 		public MtermvectorsRequestParameters Positions(bool positions)
 		{
 			this._positions = positions;
-			this.Add("positions", this._positions);
+			this.AddQueryString("positions", this._positions);
 			return this;
 		}
 		
@@ -4376,7 +4376,7 @@ namespace Elasticsearch.Net
 		public MtermvectorsRequestParameters Payloads(bool payloads)
 		{
 			this._payloads = payloads;
-			this.Add("payloads", this._payloads);
+			this.AddQueryString("payloads", this._payloads);
 			return this;
 		}
 		
@@ -4386,7 +4386,7 @@ namespace Elasticsearch.Net
 		public MtermvectorsRequestParameters Preference(string preference)
 		{
 			this._preference = preference;
-			this.Add("preference", this._preference);
+			this.AddQueryString("preference", this._preference);
 			return this;
 		}
 		
@@ -4396,7 +4396,7 @@ namespace Elasticsearch.Net
 		public MtermvectorsRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -4406,7 +4406,7 @@ namespace Elasticsearch.Net
 		public MtermvectorsRequestParameters Parent(string parent)
 		{
 			this._parent = parent;
-			this.Add("parent", this._parent);
+			this.AddQueryString("parent", this._parent);
 			return this;
 		}
 		
@@ -4426,7 +4426,7 @@ namespace Elasticsearch.Net
 		public NodesHotThreadsRequestParameters Interval(string interval)
 		{
 			this._interval = interval;
-			this.Add("interval", this._interval);
+			this.AddQueryString("interval", this._interval);
 			return this;
 		}
 		
@@ -4436,7 +4436,7 @@ namespace Elasticsearch.Net
 		public NodesHotThreadsRequestParameters Snapshots(int snapshots)
 		{
 			this._snapshots = snapshots;
-			this.Add("snapshots", this._snapshots);
+			this.AddQueryString("snapshots", this._snapshots);
 			return this;
 		}
 		
@@ -4446,7 +4446,7 @@ namespace Elasticsearch.Net
 		public NodesHotThreadsRequestParameters Threads(int threads)
 		{
 			this._threads = threads;
-			this.Add("threads", this._threads);
+			this.AddQueryString("threads", this._threads);
 			return this;
 		}
 		
@@ -4456,7 +4456,7 @@ namespace Elasticsearch.Net
 		public NodesHotThreadsRequestParameters Type(TypeOptions type)
 		{
 			this._type = type;
-			this.Add("type", this._type);
+			this.AddQueryString("type", this._type);
 			return this;
 		}
 		
@@ -4476,7 +4476,7 @@ namespace Elasticsearch.Net
 		public NodesInfoRequestParameters FlatSettings(bool flat_settings)
 		{
 			this._flat_settings = flat_settings;
-			this.Add("flat_settings", this._flat_settings);
+			this.AddQueryString("flat_settings", this._flat_settings);
 			return this;
 		}
 		
@@ -4486,7 +4486,7 @@ namespace Elasticsearch.Net
 		public NodesInfoRequestParameters Human(bool human)
 		{
 			this._human = human;
-			this.Add("human", this._human);
+			this.AddQueryString("human", this._human);
 			return this;
 		}
 		
@@ -4506,7 +4506,7 @@ namespace Elasticsearch.Net
 		public NodesShutdownRequestParameters Delay(string delay)
 		{
 			this._delay = delay;
-			this.Add("delay", this._delay);
+			this.AddQueryString("delay", this._delay);
 			return this;
 		}
 		
@@ -4516,7 +4516,7 @@ namespace Elasticsearch.Net
 		public NodesShutdownRequestParameters Exit(bool exit)
 		{
 			this._exit = exit;
-			this.Add("exit", this._exit);
+			this.AddQueryString("exit", this._exit);
 			return this;
 		}
 		
@@ -4536,7 +4536,7 @@ namespace Elasticsearch.Net
 		public NodesStatsRequestParameters CompletionFields(params string[] completion_fields)
 		{
 			this._completion_fields = completion_fields.Select(f=>(object)f);
-			this.Add("completion_fields", this._completion_fields);
+			this.AddQueryString("completion_fields", this._completion_fields);
 			return this;
 		}
 		
@@ -4546,7 +4546,7 @@ namespace Elasticsearch.Net
 		public NodesStatsRequestParameters FielddataFields(params string[] fielddata_fields)
 		{
 			this._fielddata_fields = fielddata_fields.Select(f=>(object)f);
-			this.Add("fielddata_fields", this._fielddata_fields);
+			this.AddQueryString("fielddata_fields", this._fielddata_fields);
 			return this;
 		}
 		
@@ -4556,7 +4556,7 @@ namespace Elasticsearch.Net
 		public NodesStatsRequestParameters Fields(params string[] fields)
 		{
 			this._fields = fields.Select(f=>(object)f);
-			this.Add("fields", this._fields);
+			this.AddQueryString("fields", this._fields);
 			return this;
 		}
 		
@@ -4566,7 +4566,7 @@ namespace Elasticsearch.Net
 		public NodesStatsRequestParameters Groups(bool groups)
 		{
 			this._groups = groups;
-			this.Add("groups", this._groups);
+			this.AddQueryString("groups", this._groups);
 			return this;
 		}
 		
@@ -4576,7 +4576,7 @@ namespace Elasticsearch.Net
 		public NodesStatsRequestParameters Human(bool human)
 		{
 			this._human = human;
-			this.Add("human", this._human);
+			this.AddQueryString("human", this._human);
 			return this;
 		}
 		
@@ -4586,7 +4586,7 @@ namespace Elasticsearch.Net
 		public NodesStatsRequestParameters Level(LevelOptions level)
 		{
 			this._level = level;
-			this.Add("level", this._level);
+			this.AddQueryString("level", this._level);
 			return this;
 		}
 		
@@ -4596,7 +4596,7 @@ namespace Elasticsearch.Net
 		public NodesStatsRequestParameters Types(params string[] types)
 		{
 			this._types = types;
-			this.Add("types", this._types);
+			this.AddQueryString("types", this._types);
 			return this;
 		}
 		
@@ -4616,7 +4616,7 @@ namespace Elasticsearch.Net
 		public PercolateRequestParameters Routing(params string[] routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -4626,7 +4626,7 @@ namespace Elasticsearch.Net
 		public PercolateRequestParameters Preference(string preference)
 		{
 			this._preference = preference;
-			this.Add("preference", this._preference);
+			this.AddQueryString("preference", this._preference);
 			return this;
 		}
 		
@@ -4636,7 +4636,7 @@ namespace Elasticsearch.Net
 		public PercolateRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -4646,7 +4646,7 @@ namespace Elasticsearch.Net
 		public PercolateRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -4656,7 +4656,7 @@ namespace Elasticsearch.Net
 		public PercolateRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -4666,7 +4666,7 @@ namespace Elasticsearch.Net
 		public PercolateRequestParameters PercolateIndex(string percolate_index)
 		{
 			this._percolate_index = percolate_index;
-			this.Add("percolate_index", this._percolate_index);
+			this.AddQueryString("percolate_index", this._percolate_index);
 			return this;
 		}
 		
@@ -4676,7 +4676,7 @@ namespace Elasticsearch.Net
 		public PercolateRequestParameters PercolateType(string percolate_type)
 		{
 			this._percolate_type = percolate_type;
-			this.Add("percolate_type", this._percolate_type);
+			this.AddQueryString("percolate_type", this._percolate_type);
 			return this;
 		}
 		
@@ -4686,7 +4686,7 @@ namespace Elasticsearch.Net
 		public PercolateRequestParameters Version(int version)
 		{
 			this._version = version;
-			this.Add("version", this._version);
+			this.AddQueryString("version", this._version);
 			return this;
 		}
 		
@@ -4696,7 +4696,7 @@ namespace Elasticsearch.Net
 		public PercolateRequestParameters VersionType(VersionTypeOptions version_type)
 		{
 			this._version_type = version_type;
-			this.Add("version_type", this._version_type);
+			this.AddQueryString("version_type", this._version_type);
 			return this;
 		}
 		
@@ -4726,7 +4726,7 @@ namespace Elasticsearch.Net
 		public ScrollRequestParameters Scroll(string scroll)
 		{
 			this._scroll = scroll;
-			this.Add("scroll", this._scroll);
+			this.AddQueryString("scroll", this._scroll);
 			return this;
 		}
 		
@@ -4736,7 +4736,7 @@ namespace Elasticsearch.Net
 		public ScrollRequestParameters ScrollId(string scroll_id)
 		{
 			this._scroll_id = scroll_id;
-			this.Add("scroll_id", this._scroll_id);
+			this.AddQueryString("scroll_id", this._scroll_id);
 			return this;
 		}
 		
@@ -4756,7 +4756,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters Analyzer(string analyzer)
 		{
 			this._analyzer = analyzer;
-			this.Add("analyzer", this._analyzer);
+			this.AddQueryString("analyzer", this._analyzer);
 			return this;
 		}
 		
@@ -4766,7 +4766,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters AnalyzeWildcard(bool analyze_wildcard)
 		{
 			this._analyze_wildcard = analyze_wildcard;
-			this.Add("analyze_wildcard", this._analyze_wildcard);
+			this.AddQueryString("analyze_wildcard", this._analyze_wildcard);
 			return this;
 		}
 		
@@ -4776,7 +4776,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters DefaultOperator(DefaultOperatorOptions default_operator)
 		{
 			this._default_operator = default_operator;
-			this.Add("default_operator", this._default_operator);
+			this.AddQueryString("default_operator", this._default_operator);
 			return this;
 		}
 		
@@ -4786,7 +4786,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters Df(string df)
 		{
 			this._df = df;
-			this.Add("df", this._df);
+			this.AddQueryString("df", this._df);
 			return this;
 		}
 		
@@ -4796,7 +4796,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -4806,7 +4806,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -4816,7 +4816,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -4826,7 +4826,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters IndicesBoost(params string[] indices_boost)
 		{
 			this._indices_boost = indices_boost;
-			this.Add("indices_boost", this._indices_boost);
+			this.AddQueryString("indices_boost", this._indices_boost);
 			return this;
 		}
 		
@@ -4836,7 +4836,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters Lenient(bool lenient)
 		{
 			this._lenient = lenient;
-			this.Add("lenient", this._lenient);
+			this.AddQueryString("lenient", this._lenient);
 			return this;
 		}
 		
@@ -4846,7 +4846,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters LowercaseExpandedTerms(bool lowercase_expanded_terms)
 		{
 			this._lowercase_expanded_terms = lowercase_expanded_terms;
-			this.Add("lowercase_expanded_terms", this._lowercase_expanded_terms);
+			this.AddQueryString("lowercase_expanded_terms", this._lowercase_expanded_terms);
 			return this;
 		}
 		
@@ -4856,7 +4856,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters Preference(string preference)
 		{
 			this._preference = preference;
-			this.Add("preference", this._preference);
+			this.AddQueryString("preference", this._preference);
 			return this;
 		}
 		
@@ -4866,7 +4866,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters Routing(params string[] routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -4876,7 +4876,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters Scroll(string scroll)
 		{
 			this._scroll = scroll;
-			this.Add("scroll", this._scroll);
+			this.AddQueryString("scroll", this._scroll);
 			return this;
 		}
 		
@@ -4886,7 +4886,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters SearchType(SearchTypeOptions search_type)
 		{
 			this._search_type = search_type;
-			this.Add("search_type", this._search_type);
+			this.AddQueryString("search_type", this._search_type);
 			return this;
 		}
 		
@@ -4896,7 +4896,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters Source(string source)
 		{
 			this._source = source;
-			this.Add("source", this._source);
+			this.AddQueryString("source", this._source);
 			return this;
 		}
 		
@@ -4906,7 +4906,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters Stats(params string[] stats)
 		{
 			this._stats = stats;
-			this.Add("stats", this._stats);
+			this.AddQueryString("stats", this._stats);
 			return this;
 		}
 		
@@ -4916,7 +4916,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters SuggestField(string suggest_field)
 		{
 			this._suggest_field = suggest_field;
-			this.Add("suggest_field", this._suggest_field);
+			this.AddQueryString("suggest_field", this._suggest_field);
 			return this;
 		}
 		
@@ -4926,7 +4926,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters SuggestMode(SuggestModeOptions suggest_mode)
 		{
 			this._suggest_mode = suggest_mode;
-			this.Add("suggest_mode", this._suggest_mode);
+			this.AddQueryString("suggest_mode", this._suggest_mode);
 			return this;
 		}
 		
@@ -4936,7 +4936,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters SuggestSize(int suggest_size)
 		{
 			this._suggest_size = suggest_size;
-			this.Add("suggest_size", this._suggest_size);
+			this.AddQueryString("suggest_size", this._suggest_size);
 			return this;
 		}
 		
@@ -4946,7 +4946,7 @@ namespace Elasticsearch.Net
 		public SearchRequestParameters SuggestText(string suggest_text)
 		{
 			this._suggest_text = suggest_text;
-			this.Add("suggest_text", this._suggest_text);
+			this.AddQueryString("suggest_text", this._suggest_text);
 			return this;
 		}
 		
@@ -4966,7 +4966,7 @@ namespace Elasticsearch.Net
 		public SnapshotCreateRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -4976,7 +4976,7 @@ namespace Elasticsearch.Net
 		public SnapshotCreateRequestParameters WaitForCompletion(bool wait_for_completion)
 		{
 			this._wait_for_completion = wait_for_completion;
-			this.Add("wait_for_completion", this._wait_for_completion);
+			this.AddQueryString("wait_for_completion", this._wait_for_completion);
 			return this;
 		}
 		
@@ -4996,7 +4996,7 @@ namespace Elasticsearch.Net
 		public SnapshotCreateRepositoryRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -5006,7 +5006,7 @@ namespace Elasticsearch.Net
 		public SnapshotCreateRepositoryRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -5026,7 +5026,7 @@ namespace Elasticsearch.Net
 		public SnapshotDeleteRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -5046,7 +5046,7 @@ namespace Elasticsearch.Net
 		public SnapshotDeleteRepositoryRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -5056,7 +5056,7 @@ namespace Elasticsearch.Net
 		public SnapshotDeleteRepositoryRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -5076,7 +5076,7 @@ namespace Elasticsearch.Net
 		public SnapshotGetRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -5096,7 +5096,7 @@ namespace Elasticsearch.Net
 		public SnapshotGetRepositoryRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -5106,7 +5106,7 @@ namespace Elasticsearch.Net
 		public SnapshotGetRepositoryRequestParameters Local(bool local)
 		{
 			this._local = local;
-			this.Add("local", this._local);
+			this.AddQueryString("local", this._local);
 			return this;
 		}
 		
@@ -5126,7 +5126,7 @@ namespace Elasticsearch.Net
 		public SnapshotRestoreRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
-			this.Add("master_timeout", this._master_timeout);
+			this.AddQueryString("master_timeout", this._master_timeout);
 			return this;
 		}
 		
@@ -5136,7 +5136,7 @@ namespace Elasticsearch.Net
 		public SnapshotRestoreRequestParameters WaitForCompletion(bool wait_for_completion)
 		{
 			this._wait_for_completion = wait_for_completion;
-			this.Add("wait_for_completion", this._wait_for_completion);
+			this.AddQueryString("wait_for_completion", this._wait_for_completion);
 			return this;
 		}
 		
@@ -5156,7 +5156,7 @@ namespace Elasticsearch.Net
 		public SuggestRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
-			this.Add("ignore_unavailable", this._ignore_unavailable);
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
 			return this;
 		}
 		
@@ -5166,7 +5166,7 @@ namespace Elasticsearch.Net
 		public SuggestRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
-			this.Add("allow_no_indices", this._allow_no_indices);
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
 			return this;
 		}
 		
@@ -5176,7 +5176,7 @@ namespace Elasticsearch.Net
 		public SuggestRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
-			this.Add("expand_wildcards", this._expand_wildcards);
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
 			return this;
 		}
 		
@@ -5186,7 +5186,7 @@ namespace Elasticsearch.Net
 		public SuggestRequestParameters Preference(string preference)
 		{
 			this._preference = preference;
-			this.Add("preference", this._preference);
+			this.AddQueryString("preference", this._preference);
 			return this;
 		}
 		
@@ -5196,7 +5196,7 @@ namespace Elasticsearch.Net
 		public SuggestRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -5206,7 +5206,7 @@ namespace Elasticsearch.Net
 		public SuggestRequestParameters Source(string source)
 		{
 			this._source = source;
-			this.Add("source", this._source);
+			this.AddQueryString("source", this._source);
 			return this;
 		}
 		
@@ -5226,7 +5226,7 @@ namespace Elasticsearch.Net
 		public TermvectorRequestParameters TermStatistics(bool term_statistics)
 		{
 			this._term_statistics = term_statistics;
-			this.Add("term_statistics", this._term_statistics);
+			this.AddQueryString("term_statistics", this._term_statistics);
 			return this;
 		}
 		
@@ -5236,7 +5236,7 @@ namespace Elasticsearch.Net
 		public TermvectorRequestParameters FieldStatistics(bool field_statistics)
 		{
 			this._field_statistics = field_statistics;
-			this.Add("field_statistics", this._field_statistics);
+			this.AddQueryString("field_statistics", this._field_statistics);
 			return this;
 		}
 		
@@ -5246,7 +5246,7 @@ namespace Elasticsearch.Net
 		public TermvectorRequestParameters Fields(params string[] fields)
 		{
 			this._fields = fields.Select(f=>(object)f);
-			this.Add("fields", this._fields);
+			this.AddQueryString("fields", this._fields);
 			return this;
 		}
 		
@@ -5256,7 +5256,7 @@ namespace Elasticsearch.Net
 		public TermvectorRequestParameters Offsets(bool offsets)
 		{
 			this._offsets = offsets;
-			this.Add("offsets", this._offsets);
+			this.AddQueryString("offsets", this._offsets);
 			return this;
 		}
 		
@@ -5266,7 +5266,7 @@ namespace Elasticsearch.Net
 		public TermvectorRequestParameters Positions(bool positions)
 		{
 			this._positions = positions;
-			this.Add("positions", this._positions);
+			this.AddQueryString("positions", this._positions);
 			return this;
 		}
 		
@@ -5276,7 +5276,7 @@ namespace Elasticsearch.Net
 		public TermvectorRequestParameters Payloads(bool payloads)
 		{
 			this._payloads = payloads;
-			this.Add("payloads", this._payloads);
+			this.AddQueryString("payloads", this._payloads);
 			return this;
 		}
 		
@@ -5286,7 +5286,7 @@ namespace Elasticsearch.Net
 		public TermvectorRequestParameters Preference(string preference)
 		{
 			this._preference = preference;
-			this.Add("preference", this._preference);
+			this.AddQueryString("preference", this._preference);
 			return this;
 		}
 		
@@ -5296,7 +5296,7 @@ namespace Elasticsearch.Net
 		public TermvectorRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -5306,7 +5306,7 @@ namespace Elasticsearch.Net
 		public TermvectorRequestParameters Parent(string parent)
 		{
 			this._parent = parent;
-			this.Add("parent", this._parent);
+			this.AddQueryString("parent", this._parent);
 			return this;
 		}
 		
@@ -5326,7 +5326,7 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters Consistency(ConsistencyOptions consistency)
 		{
 			this._consistency = consistency;
-			this.Add("consistency", this._consistency);
+			this.AddQueryString("consistency", this._consistency);
 			return this;
 		}
 		
@@ -5336,7 +5336,7 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters Fields(params string[] fields)
 		{
 			this._fields = fields.Select(f=>(object)f);
-			this.Add("fields", this._fields);
+			this.AddQueryString("fields", this._fields);
 			return this;
 		}
 		
@@ -5346,7 +5346,7 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters Lang(string lang)
 		{
 			this._lang = lang;
-			this.Add("lang", this._lang);
+			this.AddQueryString("lang", this._lang);
 			return this;
 		}
 		
@@ -5356,7 +5356,7 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters Parent(string parent)
 		{
 			this._parent = parent;
-			this.Add("parent", this._parent);
+			this.AddQueryString("parent", this._parent);
 			return this;
 		}
 		
@@ -5366,7 +5366,7 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters Refresh(bool refresh)
 		{
 			this._refresh = refresh;
-			this.Add("refresh", this._refresh);
+			this.AddQueryString("refresh", this._refresh);
 			return this;
 		}
 		
@@ -5376,7 +5376,7 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters Replication(ReplicationOptions replication)
 		{
 			this._replication = replication;
-			this.Add("replication", this._replication);
+			this.AddQueryString("replication", this._replication);
 			return this;
 		}
 		
@@ -5386,7 +5386,7 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters RetryOnConflict(int retry_on_conflict)
 		{
 			this._retry_on_conflict = retry_on_conflict;
-			this.Add("retry_on_conflict", this._retry_on_conflict);
+			this.AddQueryString("retry_on_conflict", this._retry_on_conflict);
 			return this;
 		}
 		
@@ -5396,7 +5396,7 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
-			this.Add("routing", this._routing);
+			this.AddQueryString("routing", this._routing);
 			return this;
 		}
 		
@@ -5406,7 +5406,7 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters Script(string script)
 		{
 			this._script = script;
-			this.Add("script", this._script);
+			this.AddQueryString("script", this._script);
 			return this;
 		}
 		
@@ -5416,7 +5416,7 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
-			this.Add("timeout", this._timeout);
+			this.AddQueryString("timeout", this._timeout);
 			return this;
 		}
 		
@@ -5426,7 +5426,7 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters Timestamp(string timestamp)
 		{
 			this._timestamp = timestamp;
-			this.Add("timestamp", this._timestamp);
+			this.AddQueryString("timestamp", this._timestamp);
 			return this;
 		}
 		
@@ -5436,7 +5436,7 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters Ttl(string ttl)
 		{
 			this._ttl = ttl;
-			this.Add("ttl", this._ttl);
+			this.AddQueryString("ttl", this._ttl);
 			return this;
 		}
 		
@@ -5446,7 +5446,7 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters Version(int version)
 		{
 			this._version = version;
-			this.Add("version", this._version);
+			this.AddQueryString("version", this._version);
 			return this;
 		}
 		
@@ -5456,7 +5456,7 @@ namespace Elasticsearch.Net
 		public UpdateRequestParameters VersionType(VersionTypeOptions version_type)
 		{
 			this._version_type = version_type;
-			this.Add("version_type", this._version_type);
+			this.AddQueryString("version_type", this._version_type);
 			return this;
 		}
 		

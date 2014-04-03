@@ -172,6 +172,15 @@ namespace Nest
 		{
 			return new FilterDescriptor<T>().Regexp(regexpSelector);
 		}
+		public static FilterDescriptor<T>  Strict(bool strict = true)
+		{
+			return new FilterDescriptor<T> { IsStrict = strict };
+		}
+		public static FilterDescriptor<T>  Verbatim(bool verbatim = true)
+		{
+			return new FilterDescriptor<T> { IsVerbatim = verbatim, IsStrict = verbatim };
+		}
+		
 	}
 
 }

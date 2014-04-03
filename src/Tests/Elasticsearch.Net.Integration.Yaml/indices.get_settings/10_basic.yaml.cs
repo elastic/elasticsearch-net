@@ -315,7 +315,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetSettings1
 
 				//do indices.get_settings 
 				this.Do(()=> _client.IndicesGetSettingsForAll(nv=>nv
-					.Add("local", @"true")
+					.AddQueryString("local", @"true")
 				));
 
 				//is_true _response.test_1; 

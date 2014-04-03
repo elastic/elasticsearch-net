@@ -33,7 +33,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Exists5
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"green")
+					.AddQueryString("wait_for_status", @"green")
 				));
 
 				//do index 
@@ -44,7 +44,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Exists5
 
 				//do exists 
 				this.Do(()=> _client.Exists("test_1", "test", "1", nv=>nv
-					.Add("realtime", 1)
+					.AddQueryString("realtime", 1)
 				));
 
 				//is_true this._status; 
@@ -52,7 +52,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Exists5
 
 				//do exists 
 				this.Do(()=> _client.Exists("test_1", "test", "1", nv=>nv
-					.Add("realtime", 0)
+					.AddQueryString("realtime", 0)
 				));
 
 				//is_false this._status; 
@@ -60,8 +60,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Exists5
 
 				//do exists 
 				this.Do(()=> _client.Exists("test_1", "test", "1", nv=>nv
-					.Add("realtime", 0)
-					.Add("refresh", 1)
+					.AddQueryString("realtime", 0)
+					.AddQueryString("refresh", 1)
 				));
 
 				//is_true this._status; 

@@ -50,8 +50,8 @@ namespace Nest
 				@Raw("IEnumerable<Expression<Func<T, object>>> ") @mm)
 			where T : class
 		{
-			qs._@(mm) = @mm@Raw(".Select(e=>(PropertyPathMarker)e)");
-			qs.Add("@mm", qs._@mm);
+			var _@(mm) = @mm@Raw(".Select(e=>(PropertyPathMarker)e)");
+			qs.AddQueryString("@mm", _@mm);
 			return qs;
 		}
 		</text>
@@ -66,8 +66,8 @@ namespace Nest
 			where T : class
 		{
 			var p = (PropertyPathMarker)@mm;
-			qs._@(mm) = p;
-			qs.Add("@mm", qs._@mm);
+			var _@(mm) = p;
+			qs.AddQueryString("@mm", _@mm);
 			return qs;
 		}
 		</text>

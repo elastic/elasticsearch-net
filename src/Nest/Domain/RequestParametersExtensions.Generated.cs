@@ -22,8 +22,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  fields)
 			where T : class
 		{
-			qs._fields = fields.Select(e=>(PropertyPathMarker)e);
-			qs.Add("fields", qs._fields);
+			var _fields = fields.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("fields", _fields);
 			return qs;
 		}
 		
@@ -34,8 +34,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  _source_exclude)
 			where T : class
 		{
-			qs.__source_exclude = _source_exclude.Select(e=>(PropertyPathMarker)e);
-			qs.Add("_source_exclude", qs.__source_exclude);
+			var __source_exclude = _source_exclude.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("_source_exclude", __source_exclude);
 			return qs;
 		}
 		
@@ -46,8 +46,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  _source_include)
 			where T : class
 		{
-			qs.__source_include = _source_include.Select(e=>(PropertyPathMarker)e);
-			qs.Add("_source_include", qs.__source_include);
+			var __source_include = _source_include.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("_source_include", __source_include);
 			return qs;
 		}
 		
@@ -58,8 +58,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  fields)
 			where T : class
 		{
-			qs._fields = fields.Select(e=>(PropertyPathMarker)e);
-			qs.Add("fields", qs._fields);
+			var _fields = fields.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("fields", _fields);
 			return qs;
 		}
 		
@@ -70,8 +70,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  _source_exclude)
 			where T : class
 		{
-			qs.__source_exclude = _source_exclude.Select(e=>(PropertyPathMarker)e);
-			qs.Add("_source_exclude", qs.__source_exclude);
+			var __source_exclude = _source_exclude.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("_source_exclude", __source_exclude);
 			return qs;
 		}
 		
@@ -82,8 +82,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  _source_include)
 			where T : class
 		{
-			qs.__source_include = _source_include.Select(e=>(PropertyPathMarker)e);
-			qs.Add("_source_include", qs.__source_include);
+			var __source_include = _source_include.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("_source_include", __source_include);
 			return qs;
 		}
 		
@@ -94,8 +94,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  _source_exclude)
 			where T : class
 		{
-			qs.__source_exclude = _source_exclude.Select(e=>(PropertyPathMarker)e);
-			qs.Add("_source_exclude", qs.__source_exclude);
+			var __source_exclude = _source_exclude.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("_source_exclude", __source_exclude);
 			return qs;
 		}
 		
@@ -106,8 +106,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  _source_include)
 			where T : class
 		{
-			qs.__source_include = _source_include.Select(e=>(PropertyPathMarker)e);
-			qs.Add("_source_include", qs.__source_include);
+			var __source_include = _source_include.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("_source_include", __source_include);
 			return qs;
 		}
 		
@@ -119,8 +119,8 @@ namespace Nest
 			where T : class
 		{
 			var p = (PropertyPathMarker)field;
-			qs._field = p;
-			qs.Add("field", qs._field);
+			var _field = p;
+			qs.AddQueryString("field", _field);
 			return qs;
 		}
 		
@@ -131,8 +131,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  fields)
 			where T : class
 		{
-			qs._fields = fields.Select(e=>(PropertyPathMarker)e);
-			qs.Add("fields", qs._fields);
+			var _fields = fields.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("fields", _fields);
 			return qs;
 		}
 		
@@ -143,8 +143,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  completion_fields)
 			where T : class
 		{
-			qs._completion_fields = completion_fields.Select(e=>(PropertyPathMarker)e);
-			qs.Add("completion_fields", qs._completion_fields);
+			var _completion_fields = completion_fields.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("completion_fields", _completion_fields);
 			return qs;
 		}
 		
@@ -155,8 +155,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  fielddata_fields)
 			where T : class
 		{
-			qs._fielddata_fields = fielddata_fields.Select(e=>(PropertyPathMarker)e);
-			qs.Add("fielddata_fields", qs._fielddata_fields);
+			var _fielddata_fields = fielddata_fields.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("fielddata_fields", _fielddata_fields);
 			return qs;
 		}
 		
@@ -167,8 +167,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  fields)
 			where T : class
 		{
-			qs._fields = fields.Select(e=>(PropertyPathMarker)e);
-			qs.Add("fields", qs._fields);
+			var _fields = fields.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("fields", _fields);
 			return qs;
 		}
 		
@@ -179,8 +179,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  fields)
 			where T : class
 		{
-			qs._fields = fields.Select(e=>(PropertyPathMarker)e);
-			qs.Add("fields", qs._fields);
+			var _fields = fields.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("fields", _fields);
 			return qs;
 		}
 		
@@ -191,8 +191,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  _source_exclude)
 			where T : class
 		{
-			qs.__source_exclude = _source_exclude.Select(e=>(PropertyPathMarker)e);
-			qs.Add("_source_exclude", qs.__source_exclude);
+			var __source_exclude = _source_exclude.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("_source_exclude", __source_exclude);
 			return qs;
 		}
 		
@@ -203,8 +203,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  _source_include)
 			where T : class
 		{
-			qs.__source_include = _source_include.Select(e=>(PropertyPathMarker)e);
-			qs.Add("_source_include", qs.__source_include);
+			var __source_include = _source_include.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("_source_include", __source_include);
 			return qs;
 		}
 		
@@ -215,8 +215,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  mlt_fields)
 			where T : class
 		{
-			qs._mlt_fields = mlt_fields.Select(e=>(PropertyPathMarker)e);
-			qs.Add("mlt_fields", qs._mlt_fields);
+			var _mlt_fields = mlt_fields.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("mlt_fields", _mlt_fields);
 			return qs;
 		}
 		
@@ -227,8 +227,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  fields)
 			where T : class
 		{
-			qs._fields = fields.Select(e=>(PropertyPathMarker)e);
-			qs.Add("fields", qs._fields);
+			var _fields = fields.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("fields", _fields);
 			return qs;
 		}
 		
@@ -239,8 +239,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  completion_fields)
 			where T : class
 		{
-			qs._completion_fields = completion_fields.Select(e=>(PropertyPathMarker)e);
-			qs.Add("completion_fields", qs._completion_fields);
+			var _completion_fields = completion_fields.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("completion_fields", _completion_fields);
 			return qs;
 		}
 		
@@ -251,8 +251,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  fielddata_fields)
 			where T : class
 		{
-			qs._fielddata_fields = fielddata_fields.Select(e=>(PropertyPathMarker)e);
-			qs.Add("fielddata_fields", qs._fielddata_fields);
+			var _fielddata_fields = fielddata_fields.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("fielddata_fields", _fielddata_fields);
 			return qs;
 		}
 		
@@ -263,8 +263,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  fields)
 			where T : class
 		{
-			qs._fields = fields.Select(e=>(PropertyPathMarker)e);
-			qs.Add("fields", qs._fields);
+			var _fields = fields.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("fields", _fields);
 			return qs;
 		}
 		
@@ -276,8 +276,8 @@ namespace Nest
 			where T : class
 		{
 			var p = (PropertyPathMarker)suggest_field;
-			qs._suggest_field = p;
-			qs.Add("suggest_field", qs._suggest_field);
+			var _suggest_field = p;
+			qs.AddQueryString("suggest_field", _suggest_field);
 			return qs;
 		}
 		
@@ -288,8 +288,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  fields)
 			where T : class
 		{
-			qs._fields = fields.Select(e=>(PropertyPathMarker)e);
-			qs.Add("fields", qs._fields);
+			var _fields = fields.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("fields", _fields);
 			return qs;
 		}
 		
@@ -300,8 +300,8 @@ namespace Nest
 				IEnumerable<Expression<Func<T, object>>>  fields)
 			where T : class
 		{
-			qs._fields = fields.Select(e=>(PropertyPathMarker)e);
-			qs.Add("fields", qs._fields);
+			var _fields = fields.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("fields", _fields);
 			return qs;
 		}
 		

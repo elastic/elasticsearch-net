@@ -46,7 +46,7 @@ namespace Elasticsearch.Net
 		public @method.QueryStringParamName @(mm.ToPascalCase())(@kv.Value.CsharpType(mm) @mm)
 		{
 			this._@(mm) = @Raw(setter);
-			this.Add("@mm", this._@mm);
+			this.AddQueryString("@mm", this._@mm);
 			return this;
 		}
 		</text>

@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Integration.Yaml.CatThreadPool1
 
 				//do cat.thread_pool 
 				this.Do(()=> _client.CatThreadPool(nv=>nv
-					.Add("v", @"true")
+					.AddQueryString("v", @"true")
 				));
 
 				//match this._status: 
@@ -47,7 +47,7 @@ namespace Elasticsearch.Net.Integration.Yaml.CatThreadPool1
 
 				//do cat.thread_pool 
 				this.Do(()=> _client.CatThreadPool(nv=>nv
-					.Add("h", @"pid,id,h,i,po")
+					.AddQueryString("h", @"pid,id,h,i,po")
 				));
 
 				//match this._status: 
@@ -56,9 +56,9 @@ namespace Elasticsearch.Net.Integration.Yaml.CatThreadPool1
 
 				//do cat.thread_pool 
 				this.Do(()=> _client.CatThreadPool(nv=>nv
-					.Add("h", @"id,ba,fa,gea,ga,ia,maa,ma,oa,pa")
-					.Add("v", @"true")
-					.Add("full_id", @"true")
+					.AddQueryString("h", @"id,ba,fa,gea,ga,ia,maa,ma,oa,pa")
+					.AddQueryString("v", @"true")
+					.AddQueryString("full_id", @"true")
 				));
 
 				//match this._status: 

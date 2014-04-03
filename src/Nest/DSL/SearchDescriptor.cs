@@ -27,20 +27,21 @@ namespace Nest
 	{
 		internal override SearchTypeOptions? _SearchType
 		{
-			get { return this._QueryString._search_type; }
+			get { return this._QueryString.GetQueryStringValue<SearchTypeOptions?>("search_type");  }
 		}
 		internal override string _Preference
 		{
-			get { return this._QueryString._preference; }
+			get { return this._QueryString.GetQueryStringValue<string>("preference"); }
 		}
 
 		internal override string _Routing
 		{
 			get
 			{
-				return this._QueryString._routing == null
+				var routing = this._QueryString.GetQueryStringValue<string[]>("routing");
+				return routing == null
 					? null
-					: string.Join(",", this._QueryString._routing);
+					: string.Join(",", routing);
 			}
 		}
 

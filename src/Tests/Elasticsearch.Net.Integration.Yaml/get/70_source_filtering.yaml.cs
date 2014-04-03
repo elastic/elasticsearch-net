@@ -32,7 +32,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get8
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("_source", @"false")
+					.AddQueryString("_source", @"false")
 				));
 
 				//match _response._index: 
@@ -49,7 +49,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get8
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("_source", @"true")
+					.AddQueryString("_source", @"true")
 				));
 
 				//match _response._source.include.field1: 
@@ -57,18 +57,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get8
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("_source", @"include.field1")
-				));
-
-				//match _response._source.include.field1: 
-				this.IsMatch(_response._source.include.field1, @"v1");
-
-				//is_false _response._source.include.field2; 
-				this.IsFalse(_response._source.include.field2);
-
-				//do get 
-				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("_source_include", @"include.field1")
+					.AddQueryString("_source", @"include.field1")
 				));
 
 				//match _response._source.include.field1: 
@@ -79,7 +68,18 @@ namespace Elasticsearch.Net.Integration.Yaml.Get8
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("_source_include", @"include.field1,include.field2")
+					.AddQueryString("_source_include", @"include.field1")
+				));
+
+				//match _response._source.include.field1: 
+				this.IsMatch(_response._source.include.field1, @"v1");
+
+				//is_false _response._source.include.field2; 
+				this.IsFalse(_response._source.include.field2);
+
+				//do get 
+				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
+					.AddQueryString("_source_include", @"include.field1,include.field2")
 				));
 
 				//match _response._source.include.field1: 
@@ -93,8 +93,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Get8
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("_source_include", @"include")
-					.Add("_source_exclude", @"*.field2")
+					.AddQueryString("_source_include", @"include")
+					.AddQueryString("_source_exclude", @"*.field2")
 				));
 
 				//match _response._source.include.field1: 
@@ -108,8 +108,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Get8
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields", @"count")
-					.Add("_source", @"true")
+					.AddQueryString("fields", @"count")
+					.AddQueryString("_source", @"true")
 				));
 
 				//match _response._index: 

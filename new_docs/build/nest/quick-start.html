@@ -1,5 +1,5 @@
 <html><head><title>Nest - Quick Start</title><meta http-equiv="cache-control" content="no-cache"/><meta http-equiv="pragma" content="no-cache"/><meta http-equiv="content-type" content="text/html;charset=utf-8"/><meta http-equiv="expires" content="0"/><meta name="description" content="elasticsearch"/><meta name="keywords" content="nest, elasticsearch, .net, client"/><meta name="author" content="martijn laarman"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" type="text/css" href="/styles/normalize.css"/><link rel="stylesheet" type="text/css" href="/styles/layout.css"/><link rel="stylesheet" type="text/css" href="/styles/pygments.css"/><link rel="stylesheet" type="text/css" href="/styles/pygments.css"/><link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"/><link href="//fonts.googleapis.com/css?family=Ubuntu+Mono|Open+Sans" rel="stylesheet" type="text/css"/><link href="/prettify/prettify.css" type="text/css" rel="stylesheet"/><link href="/prettify/sunburst.css" type="text/css" rel="stylesheet"/><script src="//code.jquery.com/jquery.min.js" type="text/javascript"></script><script type="text/javascript" src="/prettify/prettify.js"></script><script type="text/javascript" src="/prettify/fix_code_tags.js"></script></head><body><div class="wrapper"><header class="header"><div class="actions"><iframe src="//ghbtns.com/github-btn.html?user=elasticsearch&amp;repo=elasticsearch-net&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe><iframe src="//ghbtns.com/github-btn.html?user=elasticsearch&amp;repo=elasticsearch-net&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe></div><img src="/images/nest-nuget-icon.png" width="48" height="48"/><h1 class="nest">NEST</h1><p>Documentation</p></header><div class="divide"></div><div class="middle"><div class="container"><main class="content"><h1 id="quick-start">Quick Start</h1>
-<p><code>NEST</code> is a high level <code>elasticsearch</code> client that still maps very close to the original <code>elasticsearch</code> API. 
+<p><code>NEST</code> is a high level <code>elasticsearch</code> client that still maps very closely to the original <code>elasticsearch</code> API. 
 Requests and Responses have been mapped to CLR objects and <code>NEST</code> also comes with a powerful strongly typed query dsl.</p>
 <h2 id="installing">Installing</h2>
 <p>From the package manager console inside visual studio </p>
@@ -26,9 +26,9 @@ var settings = new ConnectionSettings(
     defaultIndex: &quot;my-application&quot;
 );
 var client = new ElasticClient(settings);
-</code></pre><p>Here we create new connection to our <code>node</code> and specify a <code>default index</code> to use when we don&#39;t explictly specify one. 
+</code></pre><p>Here we create new a connection to our <code>node</code> and specify a <code>default index</code> to use when we don&#39;t explictly specify one. 
 This can greatly reduce the places a magic string or constant has to be used.</p>
-<p><strong>NOTE:</strong> specifying defaultIndex is optional but NEST might throw later on if no index is specified. In fact a simple <code>new ElasticClient()</code> is sufficient to chat with
+<p><strong>NOTE:</strong> specifying defaultIndex is optional but NEST might throw an exception later on if no index is specified. In fact a simple <code>new ElasticClient()</code> is sufficient to chat with
 <code>http://localhost:9200</code> but explicitly specifying connection settings is recommended.</p>
 <p><code>node</code> here is a <code>Uri</code> but can also be an <code>IConnectionPool</code> see the 
 <a href="http://localhost:8080/elasticsearch-net/connecting.html">Elasticsearch.net section on connecting</a></p>
@@ -40,7 +40,7 @@ This can greatly reduce the places a magic string or constant has to be used.</p
     public string Firstname { get; set; }
     public string Lastname { get; set; }
 }
-</code></pre><p>That we would like to index in elasticsearch indexing is now as simple as calling.</p>
+</code></pre><p>That we would like to index in elasticsearch. Indexing is now as simple as calling.</p>
 <pre><code>var person = new Person
 {
     Id = &quot;1&quot;,
@@ -48,7 +48,7 @@ This can greatly reduce the places a magic string or constant has to be used.</p
     Lastname = &quot;Laarman&quot;
 };
 var index = client.Index(person);
-</code></pre><p>This will index the object to <code>/my-application/person/1</code>. <code>NEST</code> is smart enough to infer the index and typename for the <code>Person</code> CLR type. It was also able to get the id of <code>1</code> by convention of looking for <code>Id</code> property on the specified object. Where it will look for the Id can be specified using the <code>ElasticType</code> attribute.</p>
+</code></pre><p>This will index the object to <code>/my-application/person/1</code>. <code>NEST</code> is smart enough to infer the index and typename for the <code>Person</code> CLR type. It was also able to get the id of <code>1</code> through convention,  by looking for an <code>Id</code> property on the specified object. Which property it will use for the Id can also be specified using the <code>ElasticType</code> attribute.</p>
 <p>The default index and type names are configurable per type see the <a href="/nest/connecting.html">nest section on connecting</a></p>
 <p>Image you want to override all the defaults for this one call, you should be able to do this with <code>NEST</code> and yes you can. <code>NEST</code> inferring is very powerful but if you want to pass explicit values you can <strong>always</strong> do so.</p>
 <pre><code>var index = client.Index(person, i=&gt;i
@@ -68,9 +68,9 @@ var index = client.Index(person);
          .Term(p=&gt;p.Firstname, &quot;martijn&quot;)
     )
 );
-</code></pre><p><code>searchResults.Documents</code>now holds the first 10 people it knows who&#39;s first name is <code>Martijn</code></p>
-<p>Please see <a href="http://localhost:8080/nest/writing-queries.html">the section on writing queries</a> how NEST helps you write terse elasticsearch queries.</p>
-<p>Again the same inferring rules apply as this will hit <code>/my-application/person/_search</code> and the same rule that inferring can be overruled also applies.</p>
+</code></pre><p><code>searchResults.Documents</code> now holds the first 10 people it knows who&#39;s first name is <code>Martijn</code></p>
+<p>Please see <a href="http://localhost:8080/nest/writing-queries.html">the section on writing queries</a> for details on how NEST helps you write terse elasticsearch queries.</p>
+<p>Again the same inferring rules apply as this will hit <code>/my-application/person/_search</code> and the same rule that inferring can be overridden also applies.</p>
 <pre><code>// uses /other-index/other-type/_search
 var searchResults = client.Search&lt;Person&gt;(s=&gt;s
     .Index(&quot;other-index&quot;)

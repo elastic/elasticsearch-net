@@ -19,7 +19,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesExistsTemplate1
 
 				//do indices.delete_template 
 				this.Do(()=> _client.IndicesDeleteTemplateForAll("test", nv=>nv
-					.Add("ignore", new [] {
+					.AddQueryString("ignore", new [] {
 						@"404"
 					})
 				));
@@ -69,7 +69,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesExistsTemplate1
 
 				//do indices.exists_template 
 				this.Do(()=> _client.IndicesExistsTemplateForAll("test", nv=>nv
-					.Add("local", @"true")
+					.AddQueryString("local", @"true")
 				));
 
 				//is_false this._status; 

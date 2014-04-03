@@ -32,7 +32,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget8
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"green")
+					.AddQueryString("wait_for_status", @"green")
 				));
 
 				//do index 
@@ -40,7 +40,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget8
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("routing", 5)
+					.AddQueryString("routing", 5)
 				));
 
 				//do mget 
@@ -60,7 +60,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget8
 					}
 				};
 				this.Do(()=> _client.Mget("test_1", "test", _body, nv=>nv
-					.Add("fields", new [] {
+					.AddQueryString("fields", new [] {
 						@"_routing"
 					})
 				));

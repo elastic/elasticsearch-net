@@ -90,7 +90,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Search1
 					}
 				};
 				this.Do(()=> _client.Search(_body, nv=>nv
-					.Add("_source_include", @"include.field1")
+					.AddQueryString("_source_include", @"include.field1")
 				));
 
 				//match _response.hits.hits[0]._source.include.field1: 
@@ -106,7 +106,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Search1
 					}
 				};
 				this.Do(()=> _client.Search(_body, nv=>nv
-					.Add("_source_include", @"include.field1")
+					.AddQueryString("_source_include", @"include.field1")
 				));
 
 				//match _response.hits.hits[0]._source.include.field1: 
@@ -122,7 +122,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Search1
 					}
 				};
 				this.Do(()=> _client.Search(_body, nv=>nv
-					.Add("_source_exclude", @"count")
+					.AddQueryString("_source_exclude", @"count")
 				));
 
 				//match _response.hits.hits[0]._source.include: 

@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get6
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"green")
+					.AddQueryString("wait_for_status", @"green")
 				));
 
 				//do index 
@@ -45,15 +45,15 @@ namespace Elasticsearch.Net.Integration.Yaml.Get6
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("parent", 5)
-					.Add("routing", 4)
+					.AddQueryString("parent", 5)
+					.AddQueryString("routing", 4)
 				));
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("parent", 5)
-					.Add("routing", 4)
-					.Add("fields", new [] {
+					.AddQueryString("parent", 5)
+					.AddQueryString("routing", 4)
+					.AddQueryString("fields", new [] {
 						@"_parent",
 						@"_routing"
 					})
@@ -70,12 +70,12 @@ namespace Elasticsearch.Net.Integration.Yaml.Get6
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("parent", 5)
+					.AddQueryString("parent", 5)
 				), shouldCatch: @"missing");
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("routing", 4)
+					.AddQueryString("routing", 4)
 				));
 
 			}

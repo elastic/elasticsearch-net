@@ -15,7 +15,15 @@ namespace Elasticsearch.Net
 		where T : FluentRequestParameters<T>
 	{
 
-		public T Add(string name, object value)
+		public T CopyQueryStringValuesFrom(BaseRequestParameters requestParameters)
+		{
+			var from = requestParameters._QueryStringDictionary;
+			foreach (var k in from.Keys)
+				this._QueryStringDictionary[k] = from[k];
+			return (T)this;
+		}
+
+		public T AddQueryString(string name, object value)
 		{
 			this._QueryStringDictionary[name] = value;
 			return (T)this;
@@ -37,6 +45,22 @@ namespace Elasticsearch.Net
 		public bool ContainsKey(string name)
 		{
 			return this._QueryStringDictionary != null && this._QueryStringDictionary.ContainsKey(name);
+		}
+
+		public T RemoveQueryString(string name)
+		{
+			this._QueryStringDictionary.Remove(name);
+			return (T)this;
+		}
+
+		public TOut GetQueryStringValue<TOut>(string name)
+		{
+			if (!this.ContainsKey(name))
+				return default(TOut);
+			var value = this._QueryStringDictionary[name];
+			if (value == null)
+				return default(TOut);
+			return (TOut)value;
 		}
 
 	}

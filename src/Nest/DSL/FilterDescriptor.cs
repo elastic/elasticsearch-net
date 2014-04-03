@@ -27,7 +27,7 @@ namespace Nest
 		
 
 		private bool _forcedConditionless;
-		internal override bool IsConditionless
+		public override bool IsConditionless
 		{
 			get
 			{
@@ -61,7 +61,7 @@ namespace Nest
 					&& this.RegexpFilter == null
 					;
 			}
-			set
+			internal set
 			{
 				_forcedConditionless = value;
 			}
@@ -176,7 +176,6 @@ namespace Nest
 		public FilterDescriptor<T> Strict(bool strict = true)
 		{
 			return new FilterDescriptor<T> { IsStrict = strict };
-
 		}
 
 		public FilterDescriptor<T> Verbatim(bool verbatim = true)

@@ -381,7 +381,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetAliases1
 
 				//do indices.get_aliases 
 				this.Do(()=> _client.IndicesGetAliasesForAll(nv=>nv
-					.Add("local", @"true")
+					.AddQueryString("local", @"true")
 				));
 
 				//is_true _response.test_index; 

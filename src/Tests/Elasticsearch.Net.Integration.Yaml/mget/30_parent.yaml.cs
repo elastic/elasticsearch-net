@@ -34,7 +34,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget7
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 				//do index 
@@ -42,7 +42,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget7
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("parent", 4)
+					.AddQueryString("parent", 4)
 				));
 
 				//do index 
@@ -50,7 +50,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget7
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "2", _body, nv=>nv
-					.Add("parent", 5)
+					.AddQueryString("parent", 5)
 				));
 
 				//do mget 

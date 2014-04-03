@@ -30,7 +30,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Index9
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 				//do index 
@@ -57,7 +57,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Index9
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "2", _body, nv=>nv
-					.Add("refresh", 1)
+					.AddQueryString("refresh", 1)
 				));
 
 				//do search 

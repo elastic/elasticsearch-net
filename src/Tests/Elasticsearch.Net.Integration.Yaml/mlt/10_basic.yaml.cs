@@ -32,13 +32,13 @@ namespace Elasticsearch.Net.Integration.Yaml.Mlt1
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"green")
-					.Add("timeout", @"1s")
+					.AddQueryString("wait_for_status", @"green")
+					.AddQueryString("timeout", @"1s")
 				));
 
 				//do mlt 
 				this.Do(()=> _client.MltGet("test_1", "test", "1", nv=>nv
-					.Add("mlt_fields", @"title")
+					.AddQueryString("mlt_fields", @"title")
 				));
 
 				//match _response.hits.total: 

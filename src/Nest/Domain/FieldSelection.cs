@@ -34,7 +34,7 @@ namespace Nest.Domain
 		}
 
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, object> FieldValues { get; set; }
+		public IDictionary<string, object> FieldValues { get; internal set; }
 
 		/// <summary>
 		/// As of elasticsearch fields are always returned as an array. except for internal metadata values such as routing.

@@ -91,16 +91,32 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="PUrify">
-      <HintPath>..\..\..\dep\Purify - Preview\PUrify.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\DateExtensions.cs">
+      <Link>LinkedExtensions\DateExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\Extensions.cs">
+      <Link>LinkedExtensions\Extensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\NameValueCollectionExtensions.cs">
+      <Link>LinkedExtensions\NameValueCollectionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\StringExtensions.cs">
+      <Link>LinkedExtensions\StringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\TaskExtensions.cs">
+      <Link>LinkedExtensions\TaskExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\TypeExtensions.cs">
+      <Link>LinkedExtensions\TypeExtensions.cs</Link>
+    </Compile>
     <Compile Include="BaseJsonTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
@@ -137,6 +153,7 @@
     <Compile Include="Core\Validate\ValidateRequestTests.cs" />
     <Compile Include="Core\Versioning\VersioningTests.cs" />
     <Compile Include="Core\Warmers\PutWarmerRequestTests.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\UriExtensionsTests.cs" />

@@ -25,7 +25,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesPutWarmer1
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 				//do indices.put_warmer 

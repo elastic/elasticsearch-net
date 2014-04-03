@@ -25,12 +25,12 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesValidateQuery1
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 				//do indices.validate_query 
 				this.Do(()=> _client.IndicesValidateQueryGetForAll(nv=>nv
-					.Add("q", @"query string")
+					.AddQueryString("q", @"query string")
 				));
 
 				//is_true _response.valid; 

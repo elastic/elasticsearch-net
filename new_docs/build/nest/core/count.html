@@ -2,7 +2,7 @@
 <p>The count API allows to easily execute a query and get the number of matches for that query. It can be executed across one or more indices and across one or more types. The query can either be provided using a simple query string as a parameter, or using the Query DSL defined within the request body. Here is an example:</p>
 <pre><code>var countResults = this._client.CountAll(q=&gt;q.MatchAll());
 Assert.True(countResults.Count &gt; 0);
-</code></pre><p>The above will do a count query across all indices. (The result type here is not)</p>
+</code></pre><p>The above will do a count query across all indices. (The result type here is not limited)</p>
 <p>If you want to limit the scope to just the default index for the type:</p>
 <pre><code>var countResults = this._client.Count&lt;ElasticSearchProject&gt;(q=&gt;q.MatchAll());
 </code></pre><p>This does a match all count query on the default index for <code>ElasticSearchProject</code>, if you need to specify custom indices use:</p>

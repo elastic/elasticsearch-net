@@ -35,7 +35,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Update16
 					}
 				};
 				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
-					.Add("ignore", 404)
+					.AddQueryString("ignore", 404)
 				));
 
 			}
@@ -65,7 +65,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Update16
 					}
 				};
 				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
-					.Add("ignore", 404)
+					.AddQueryString("ignore", 404)
 				));
 
 			}

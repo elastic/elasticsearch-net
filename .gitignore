@@ -34,6 +34,9 @@ _ReSharper*/
 _NCrunch*/
 [Tt]est[Rr]esult*
 
+keypair.snk
+private.snk
+*.snk
 build/keys/private.snk
 build/keys/keypair.snk
 build/*
@@ -41,9 +44,15 @@ build/*
 build/tools/*
 !build/tools/sn
 !build/tools/ilmerge
+!build/*.fsx
+!build/*.fsx
+!build/*.ps1
+!build/*.nuspec
+
 /dep/Newtonsoft.Json.4.0.2
 !new_docs/build
 new_docs/node_modules
+doc/Help
 
 /src/Nest.Tests.Unit/*.ncrunchproject
 *.ncrunchproject

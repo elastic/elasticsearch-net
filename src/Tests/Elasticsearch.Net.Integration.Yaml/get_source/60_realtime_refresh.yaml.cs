@@ -31,7 +31,7 @@ namespace Elasticsearch.Net.Integration.Yaml.GetSource6
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"green")
+					.AddQueryString("wait_for_status", @"green")
 				));
 
 				//do index 
@@ -42,7 +42,7 @@ namespace Elasticsearch.Net.Integration.Yaml.GetSource6
 
 				//do get_source 
 				this.Do(()=> _client.GetSource("test_1", "test", "1", nv=>nv
-					.Add("realtime", 1)
+					.AddQueryString("realtime", 1)
 				));
 
 				//match this._status: 
@@ -52,13 +52,13 @@ namespace Elasticsearch.Net.Integration.Yaml.GetSource6
 
 				//do get_source 
 				this.Do(()=> _client.GetSource("test_1", "test", "1", nv=>nv
-					.Add("realtime", 0)
+					.AddQueryString("realtime", 0)
 				), shouldCatch: @"missing");
 
 				//do get_source 
 				this.Do(()=> _client.GetSource("test_1", "test", "1", nv=>nv
-					.Add("realtime", 0)
-					.Add("refresh", 1)
+					.AddQueryString("realtime", 0)
+					.AddQueryString("refresh", 1)
 				));
 
 				//match this._status: 

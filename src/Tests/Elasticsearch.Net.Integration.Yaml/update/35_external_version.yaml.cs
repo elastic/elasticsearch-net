@@ -30,8 +30,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Update7
 					}
 				};
 				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
-					.Add("version", 2)
-					.Add("version_type", @"external")
+					.AddQueryString("version", 2)
+					.AddQueryString("version_type", @"external")
 				));
 
 				//match _response._version: 
@@ -47,8 +47,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Update7
 					}
 				};
 				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
-					.Add("version", 2)
-					.Add("version_type", @"external")
+					.AddQueryString("version", 2)
+					.AddQueryString("version_type", @"external")
 				), shouldCatch: @"conflict");
 
 				//do update 
@@ -61,8 +61,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Update7
 					}
 				};
 				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
-					.Add("version", 3)
-					.Add("version_type", @"external")
+					.AddQueryString("version", 3)
+					.AddQueryString("version_type", @"external")
 				));
 
 				//match _response._version: 

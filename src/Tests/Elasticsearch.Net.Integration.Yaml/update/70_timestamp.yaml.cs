@@ -35,7 +35,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Update12
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 				//do update 
@@ -51,7 +51,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Update12
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields", @"_timestamp")
+					.AddQueryString("fields", @"_timestamp")
 				));
 
 				//is_true _response.fields._timestamp; 
@@ -67,12 +67,12 @@ namespace Elasticsearch.Net.Integration.Yaml.Update12
 					}
 				};
 				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
-					.Add("timestamp", @"1372011280000")
+					.AddQueryString("timestamp", @"1372011280000")
 				));
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields", @"_timestamp")
+					.AddQueryString("fields", @"_timestamp")
 				));
 
 				//match _response.fields._timestamp: 
@@ -88,12 +88,12 @@ namespace Elasticsearch.Net.Integration.Yaml.Update12
 					}
 				};
 				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
-					.Add("timestamp", @"2013-06-23T18:14:40")
+					.AddQueryString("timestamp", @"2013-06-23T18:14:40")
 				));
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields", @"_timestamp")
+					.AddQueryString("fields", @"_timestamp")
 				));
 
 				//match _response.fields._timestamp: 

@@ -11,7 +11,7 @@ using System.Collections.Concurrent;
 
 namespace Nest.Resolvers.Writers
 {
-	internal class TypeMappingWriter
+	public class TypeMappingWriter
 	{
 		private readonly Type _type;
 		private readonly IConnectionSettingsValues _connectionSettings;
@@ -98,7 +98,7 @@ namespace Nest.Resolvers.Writers
 			using (var ms = new MemoryStream(nestedJson.Utf8Bytes()))
 				return this._elasticSerializer.DeserializeInternal<NestedObjectMapping>(ms);
 		}
-		internal string MapFromAttributes()
+		public string MapFromAttributes()
 		{
 			var sb = new StringBuilder();
 			using (var sw = new StringWriter(sb))

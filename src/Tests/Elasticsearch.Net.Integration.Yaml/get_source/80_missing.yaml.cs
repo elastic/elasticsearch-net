@@ -35,7 +35,7 @@ namespace Elasticsearch.Net.Integration.Yaml.GetSource8
 
 				//do get_source 
 				this.Do(()=> _client.GetSource("test_1", "test", "1", nv=>nv
-					.Add("ignore", 404)
+					.AddQueryString("ignore", 404)
 				));
 
 			}

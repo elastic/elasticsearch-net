@@ -49,10 +49,29 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\DateExtensions.cs">
+      <Link>LinkedExtensions\DateExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\Extensions.cs">
+      <Link>LinkedExtensions\Extensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\NameValueCollectionExtensions.cs">
+      <Link>LinkedExtensions\NameValueCollectionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\StringExtensions.cs">
+      <Link>LinkedExtensions\StringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\TaskExtensions.cs">
+      <Link>LinkedExtensions\TaskExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\TypeExtensions.cs">
+      <Link>LinkedExtensions\TypeExtensions.cs</Link>
+    </Compile>
     <Compile Include="bulk\10_basic.yaml.cs" />
     <Compile Include="bulk\20_list_of_strings.yaml.cs" />
     <Compile Include="bulk\30_big_string.yaml.cs" />
@@ -226,13 +245,13 @@
       <Project>{a69322fd-b874-44ef-abe0-63f4a7b5593e}</Project>
       <Name>Elasticsearch.Net.Connection.HttpClient</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj">
-      <Project>{dd71352d-0eb2-4a02-8ac4-82a17e2a71a8}</Project>
-      <Name>Elasticsearch.Net.JsonNet</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj">
       <Project>{e97ccf40-0ba6-43fe-9f2d-58d454134088}</Project>
       <Name>Elasticsearch.Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj">
+      <Project>{dd71352d-0eb2-4a02-8ac4-82a17e2a71a8}</Project>
+      <Name>Elasticsearch.Net.JsonNet</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

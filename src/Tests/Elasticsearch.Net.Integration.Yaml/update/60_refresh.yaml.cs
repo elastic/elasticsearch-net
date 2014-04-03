@@ -30,7 +30,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Update11
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 				//do update 
@@ -67,7 +67,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Update11
 					}
 				};
 				this.Do(()=> _client.Update("test_1", "test", "2", _body, nv=>nv
-					.Add("refresh", 1)
+					.AddQueryString("refresh", 1)
 				));
 
 				//do search 

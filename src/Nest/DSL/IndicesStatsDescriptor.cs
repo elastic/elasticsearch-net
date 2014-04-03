@@ -39,7 +39,7 @@ namespace Nest
 			{
 				var inferrer = new ElasticInferrer(settings);
 				var types = inferrer.TypeNames(this._Types);
-				this._QueryString.Add("types", string.Join(",", types));
+				this._QueryString.AddQueryString("types", string.Join(",", types));
 			}
 			if (this._Metrics != null)
 				pathInfo.Metric = this._Metrics.Cast<Enum>().GetStringValue();
