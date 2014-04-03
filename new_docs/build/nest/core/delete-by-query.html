@@ -6,7 +6,7 @@
     .Term(f =&gt; f.Name, &quot;elasticsearch.pm&quot;)
 );
 </code></pre><p>As always <code>*Async</code> variants are available too.</p>
-<p>You can also delete by query over all the indexes and types:</p>
+<p>You can also delete by query over all the indices and types:</p>
 <pre><code>this.ConnectedClient.DeleteByQuery&lt;ElasticSearchProject&gt;(q =&gt; q
     .AllIndices()
     .Term(f =&gt; f.Name, &quot;elasticsearch.pm&quot;)

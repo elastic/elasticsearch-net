@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Elasticsearch.Net</id>
-    <version>@version@</version>
+    <version>1.0.0-beta4</version>
     <title>Elasticsearch.Net - official low level elasticsearch client</title>
     <authors>Martijn Laarman and contributors</authors>
     <owners>Martijn Laarman</owners>
@@ -20,5 +20,6 @@
     <file src="output\Elasticsearch.Net\Elasticsearch.Net.dll" target="lib"/> 
     <file src="output\Elasticsearch.Net\Elasticsearch.Net.pdb" target="lib"/> 
     <file src="output\Elasticsearch.Net\Elasticsearch.Net.XML" target="lib"/> 
+    <file src="output\Elasticsearch.Net\init.ps1" target="tools"/> 
   </files>
 </package>

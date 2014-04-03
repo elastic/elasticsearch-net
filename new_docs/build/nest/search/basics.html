@@ -13,12 +13,12 @@
     .AllIndices()
     ...
 )
-</code></pre><p>Or if you want to search one index (thats not the default index)</p>
+</code></pre><p>Or if you want to search one index (that is not the default index)</p>
 <pre><code>client.Search&lt;MyObject&gt;(s=&gt;s.
     .Index(&quot;Index_A&quot;)
     ...
 )
-</code></pre><p>Remember since elasticsearch 19.8 you can also specify wildcards on index names</p>
+</code></pre><p>Remember that since Elasticsearch 19.8 you can also specify wildcards on index names</p>
 <pre><code>client.Search&lt;MyObject&gt;(s=&gt;s
     .Index(&quot;Index_*&quot;)
     ...
@@ -34,7 +34,7 @@
 </code></pre><p>This will search on <code>/yourdefaultindex/products,categories,manufacturers/_search</code> and setup a default <code>ConcreteTypeSelector</code> that understands what type each returned document is.</p>
 <p>Using </p>
 <pre><code>.ConcreteTypeSelector(Func&lt;dynamic, Hit&lt;dynamic&gt;, Type&gt;)
-</code></pre><p>you can manually specify the type of each hit based on some json value (on dynamic) or on the hit metadata.</p>
+</code></pre><p>you can manually specify the type of each hit based on some JSON value (on dynamic) or on the hit metadata.</p>
 <h1 id="routing">Routing</h1>
 <p>You can specify the routing for the search request using </p>
 <pre><code>.Routing(&quot;routevalue&quot;)

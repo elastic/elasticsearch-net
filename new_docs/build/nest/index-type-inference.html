@@ -15,7 +15,7 @@
 };
 var index = client.Index(person);
 </code></pre><p>This will index the object to <code>/my-default-index/person/1</code>. </p>
-<p><code>NEST</code> is smart enough to infer the index and typename for the <code>Person</code> CLR type. It was also able to get the id of <code>1</code> by convention of looking for <code>Id</code> property on the specified object. Where it will look for the Id can be specified using the <code>ElasticType</code> attribute.</p>
+<p><code>NEST</code> is smart enough to infer the index and typename for the <code>Person</code> CLR type. It was also able to get the id of <code>1</code> by the convention of looking for <code>Id</code> property on the specified object. Where it will look for the Id can be specified using the <code>ElasticType</code> attribute.</p>
 <p>As noted in the <a href="/nest/quick-start.html">quick start</a> you can always pass <strong>explicit values</strong> for infered ones.</p>
 <pre><code>var index = client.Index(person, i=&gt;i
     .Index(&quot;another-index&quot;)
@@ -27,7 +27,7 @@ var index = client.Index(person);
 </code></pre><p>This will index the document using <code>/another-index/another-type/1-should-not-be-the-id?refresh=true&amp;&amp;ttl=1m</code> as the url. </p>
 <p>There are a couple of places within NEST where inference comes in to play</p>
 <h2 id="index-name-inference">Index name inference</h2>
-<p>Whenever an explicit index name is not provided nest will look to see if the type has it&#39;s own default index name on the connection settings.</p>
+<p>Whenever an explicit index name is not provided NEST will look to see if the type has it&#39;s own default index name on the connection settings.</p>
 <pre><code> settings.MapDefaultTypeIndices(d=&gt;d
     .Add(typeof(MyType), &quot;my-type-index&quot;)
  );
@@ -40,7 +40,7 @@ var index = client.Index(person);
  client.Search&lt;Person&gt;()
 </code></pre><p><code>MyType</code> defaults to <code>my-type-index</code> because it is explicitly configured but <code>Person</code> will default to the global fallback <code>my-default-index</code>.</p>
 <h2 id="type-name-inference">Type name inference</h2>
-<p>Whenever nest needs a type name but is not given one explicitly it will use the given CLR type to infer it&#39;s elasticsearch type name.</p>
+<p>Whenever NEST needs a type name but is not given one explicitly it will use the given CLR type to infer it&#39;s Elasticsearch type name.</p>
 <pre><code>settings.MapDefaultTypeNames(d=&gt;d
     .Add(typeof(MyType), &quot;MY_TYPO&quot;)
 );
@@ -50,26 +50,26 @@ client.Search&lt;MyType&gt;();
 
 // searches in /inferred-index/person/_search
 client.Search&lt;Person&gt;();
-</code></pre><p>Another way of setting an explicit infer value for a type is through setting an attribute</p>
+</code></pre><p>Another way of setting an explicit inferred value for a type is through setting an attribute</p>
 <pre><code>[ElasticType(Name=&quot;automobile&quot;)]
 public class Car {} 
-</code></pre><p>As you can also see in the search example is that  NEST by default lowercases typenames that due not have a configured infer value.</p>
+</code></pre><p>As you can also see in the search example, NEST by default lowercases typenames that do not have a configured inferred value.</p>
 <pre><code>settings.SetDefaultTypeNameInferrer(t=&gt;t.Name.ToUpperInvariant());
-</code></pre><p>now all type names that have not been explictly specified or have not been explicitly configured will be uppercased.</p>
-<p>Prior to NEST 1.0 typenames were by default lowercases AND pluralized, if you want this behaviour back call</p>
+</code></pre><p>Now all type names that have not been explictly specified or have not been explicitly configured will be uppercased.</p>
+<p>Prior to NEST 1.0 typenames were by default lowercased AND pluralized, if you want this behaviour back use</p>
 <pre><code>settings.PluralizeTypeNames();
 </code></pre><h2 id="property-name-inference">Property name inference</h2>
-<p>In many places <code>NEST</code> allows you to pass property names and json paths as C# expressions i.e</p>
+<p>In many places <code>NEST</code> allows you to pass property names and JSON paths as C# expressions i.e</p>
 <pre><code>.Query(q=&gt;q.Term(p=&gt;p.Followers.First().FirstName, &quot;martijn&quot;))
-</code></pre><p>Or while indexing property names need to be translated to json. </p>
+</code></pre><p>Or while indexing property names need to be translated to JSON. </p>
 <p><code>NEST</code> by default will camelCase properties. So <code>followers.firstName</code> in the previous example.</p>
 <p>This can be configured by setting </p>
 <pre><code>settings.SetDefaultPropertyNameInferrer(p=&gt;p);
 </code></pre><p>This will leave property names untouched.</p>
 <p>Properties marked with <code>[ElasticAttibute(Name=&quot;&quot;)]</code> or <code>[JsonProperty(Name=&quot;&quot;)]</code> will pass the configured name verbatim. </p>
 <h2 id="id-inference">Id inference</h2>
-<p>Whenever an object is passed that needs to specify an id (i.e index, bulk operations) the object is inspected to see if it has an <code>Id</code> property and if so it&#39;s value will be used.</p>
-<p>This inspection happens once per type and the resulting function that given an object of type T returns its id is cached per T throughout the applications lifetime.</p>
+<p>Whenever an object is passed that needs to specify an id (i.e index, bulk operations) the object is inspected to see if it has an <code>Id</code> property and if so, that value will be used.</p>
+<p>This inspection happens once per type. The result of the function call that returns the id for an object of type T is cached; therfore, it is only called once per object of type T throughout the applications lifetime.</p>
 <p>An example of this is at the top of this documentation where the <code>Index()</code> call could figure out the object&#39;s id was <code>1</code>.</p>
 <p>You can control which propery holds the Id:</p>
 <pre><code>[ElasticType(IdProperty=&quot;CrazyGuid&quot;)]
