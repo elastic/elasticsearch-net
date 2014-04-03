@@ -73,6 +73,7 @@ let createKeys = fun _ ->
     ) (TimeSpan.FromMinutes 5.0) |> ignore
 
 Target "CreateKeysIfAbsent" (fun _ ->
+    if not (directoryExists "build/keys") then CreateDir "build/keys"
     if not (fileExists keyFile) then createKeys()
 )
 
