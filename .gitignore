@@ -43,6 +43,7 @@ build/*
 !build/tools
 build/tools/*
 !build/tools/sn
+!build/tools/sn/*
 !build/tools/ilmerge
 !build/*.fsx
 !build/*.fsx
