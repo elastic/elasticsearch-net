@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Facet
     {
         protected string _LookFor = NestTestData.Data.First().Followers.First().LastName;
 
-        protected void TestDefaultAssertions(IQueryResponse<ElasticsearchProject> queryResponse)
+        protected void TestDefaultAssertions(ISearchResponse<ElasticsearchProject> queryResponse)
         {
             Assert.True(queryResponse.IsValid, "response is not valid");
             Assert.NotNull(queryResponse.ConnectionStatus, "connection status is null");

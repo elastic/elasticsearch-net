@@ -23,11 +23,11 @@ namespace Nest.Tests.Integration
 			
 		}
 
-		protected IQueryResponse<T> SearchRaw<T>(string query) where T : class
+		protected ISearchResponse<T> SearchRaw<T>(string query) where T : class
 		{
 			var index = this._client.Infer.IndexName<T>();
 			var typeName = this._client.Infer.TypeName<T>();
-			var connectionStatus = this._client.Raw.Search<QueryResponse<T>>(index, typeName, query);
+			var connectionStatus = this._client.Raw.Search<SearchResponse<T>>(index, typeName, query);
 			var serializer = connectionStatus.Serializer as INestSerializer; 
 			return connectionStatus.Response;
 		} 

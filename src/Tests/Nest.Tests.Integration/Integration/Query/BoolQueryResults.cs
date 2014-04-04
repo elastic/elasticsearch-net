@@ -94,7 +94,7 @@ namespace Nest.Tests.Integration.Integration.Query
 			this.AssertBoolQueryResults(results, expectedCount: 2);
 		}
 
-		private void AssertBoolQueryResults(IQueryResponse<BoolTerm> results, int expectedCount)
+		private void AssertBoolQueryResults(ISearchResponse<BoolTerm> results, int expectedCount)
 		{
 			Assert.True(results.IsValid, results.ConnectionStatus.ResponseRaw.Utf8String());
 			Assert.True(results.ConnectionStatus.Success, results.ConnectionStatus.ResponseRaw.Utf8String());

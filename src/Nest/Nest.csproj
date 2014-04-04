@@ -613,7 +613,7 @@
     <Compile Include="Domain\Responses\ElasticsearchVersionInfo.cs" />
     <Compile Include="Domain\Responses\IndicesOperationResponse.cs" />
     <Compile Include="Domain\Responses\IndicesResponse.cs" />
-    <Compile Include="Domain\Responses\QueryResponse.cs" />
+    <Compile Include="Domain\Responses\SearchResponse.cs" />
     <Compile Include="Domain\Analysis\Analyzers\AnalysisSettings.cs" />
     <Compile Include="Domain\Analysis\Analyzers\CustomAnalyzer.cs" />
     <Compile Include="Domain\Settings\IndexSettings.cs" />

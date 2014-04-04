@@ -51,7 +51,7 @@ namespace Nest.Resolvers.Converters
 			try
 			{
 
-			var hit = new QueryResponse<T>();
+			var hit = new SearchResponse<T>();
 			var reader = tuple.Hit.CreateReader();
 			serializer.Populate(reader, hit);
 

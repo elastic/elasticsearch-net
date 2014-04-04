@@ -32,7 +32,7 @@ namespace Nest
 		/// <typeparam name="T">The type that represents the result hits</typeparam>
 		/// <param name="scrollSelector">A descriptor that describes the scroll operation</param>
 		/// <returns>A query response holding T hits as well as the ScrollId for the next scroll operation</returns>
-		IQueryResponse<T> Scroll<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
+		ISearchResponse<T> Scroll<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
 			where T : class;
 		
 		/// <summary>
@@ -45,7 +45,7 @@ namespace Nest
 		/// <typeparam name="T">The type that represents the result hits</typeparam>
 		/// <param name="scrollSelector">A descriptor that describes the scroll operation</param>
 		/// <returns>A query response holding T hits as well as the ScrollId for the next scroll operation</returns>
-		Task<IQueryResponse<T>> ScrollAsync<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
+		Task<ISearchResponse<T>> ScrollAsync<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
 			where T : class;
 
 		/// <summary>
@@ -630,7 +630,7 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">Type used to infer the default index and typename and used to describe the search</typeparam>
 		/// <param name="mltSelector">A descriptor that describes the more like this operation</param>
-		IQueryResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
+		ISearchResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
 			where T : class;
 
 		/// <summary>
@@ -639,7 +639,7 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">Type used to infer the default index and typename and used to describe the search</typeparam>
 		/// <param name="mltSelector">A descriptor that describes the more like this operation</param>
-		Task<IQueryResponse<T>> MoreLikeThisAsync<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
+		Task<ISearchResponse<T>> MoreLikeThisAsync<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
 			where T : class;
 
 		/// <summary>
@@ -676,7 +676,7 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) 
+		ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) 
 			where T : class;
 
 		/// <summary>
@@ -686,7 +686,7 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <typeparam name="TResult">The type used to describe the strongly typed query</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		IQueryResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+		ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
 			where T : class
 			where TResult : class;
 
@@ -696,7 +696,7 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		Task<IQueryResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) 
+		Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) 
 			where T : class;
 
 		/// <summary>
@@ -706,7 +706,7 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the index and typename</typeparam>
 		/// <typeparam name="TResult">The type used to describe the strongly typed query</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		Task<IQueryResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
 			where T : class
 			where TResult : class;
 

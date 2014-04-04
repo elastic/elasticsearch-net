@@ -16,7 +16,7 @@ namespace Nest.Tests.Integration.Indices
 	[TestFixture]
 	public class IndicesTest : IntegrationTests 
 	{
-		protected void TestDefaultAssertions(QueryResponse<ElasticsearchProject> queryResponse)
+		protected void TestDefaultAssertions(SearchResponse<ElasticsearchProject> queryResponse)
 		{
 			Assert.True(queryResponse.IsValid);
 			Assert.NotNull(queryResponse.ConnectionStatus);

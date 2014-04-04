@@ -18,7 +18,7 @@ namespace Nest
 		/// <param name="client"></param>
 		/// <param name="scrollTime">The time the server should wait for the scroll before closing the scan operation</param>
 		/// <param name="scrollId">The scroll id to continue the scroll operation</param>
-		public static IQueryResponse<T> Scroll<T>(this IElasticClient client, string scrollTime, string scrollId) where T : class
+		public static ISearchResponse<T> Scroll<T>(this IElasticClient client, string scrollTime, string scrollId) where T : class
 		{
 			return client.Scroll<T>(s => s.Scroll(scrollTime).ScrollId(scrollId));
 		}
@@ -34,7 +34,7 @@ namespace Nest
 		/// <param name="client"></param>
 		/// <param name="scrollTime">The time the server should wait for the scroll before closing the scan operation</param>
 		/// <param name="scrollId">The scroll id to continue the scroll operation</param>
-		public static Task<IQueryResponse<T>> ScrollAsync<T>(this IElasticClient client, string scrollTime, string scrollId) where T : class
+		public static Task<ISearchResponse<T>> ScrollAsync<T>(this IElasticClient client, string scrollTime, string scrollId) where T : class
 		{
 			return client.ScrollAsync<T>(s => s.Scroll(scrollTime).ScrollId(scrollId));
 		}

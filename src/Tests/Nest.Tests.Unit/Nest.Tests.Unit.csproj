@@ -289,6 +289,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Cluster\State\ClusterState.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Bulk\BulkOperations.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
