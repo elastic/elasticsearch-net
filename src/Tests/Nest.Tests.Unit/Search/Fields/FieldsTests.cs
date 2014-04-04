@@ -30,12 +30,8 @@ namespace Nest.Tests.Unit.Search.Fields
 		[Test]
 		public void FieldsSelectionIsCovariantAsWell()
 		{
-			var settings = new ConnectionSettings(Test.Default.Uri, "default-index")
-				.ExposeRawResponse();
-			var file = this.GetFileFromMethod(MethodInfo.GetCurrentMethod(), "FixedCovariantSearchResult");
-			var jsonResponse = File.ReadAllText(file);
-			var connection = new InMemoryConnection(this._settings, jsonResponse);
-			var client = new ElasticClient(settings, connection);
+			
+			var client = GetFixedReturnClient(MethodInfo.GetCurrentMethod(), "FixedCovariantSearchResult");
 
 			var results = client.Search<BaseClass>(s => s
 				.Types(typeof(ClassA),typeof(ClassB),typeof(ClassC),typeof(ClassD))
@@ -56,5 +52,6 @@ namespace Nest.Tests.Unit.Search.Fields
 			
 		}
 
+		
 	}
 }
