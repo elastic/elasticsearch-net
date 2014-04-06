@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
@@ -283,6 +284,16 @@ namespace Elasticsearch.Net.Connection.Thrift
 							this._connectionSettings, (int)result.Status, method, path, requestData, new MemoryStream(result.Body));
 						return response;
 					}
+				}
+				catch (SocketException)
+				{
+					client.InputProtocol.Transport.Close();
+					throw;
+				}
+				catch (IOException)
+				{
+					client.InputProtocol.Transport.Close();
+					throw;
 				}
 				finally
 				{
