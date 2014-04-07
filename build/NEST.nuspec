@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NEST</id>
-    <version>0.1.0</version>
+    <version>1.0.0-beta1</version>
     <title>NEST - Elasticsearch Client</title>
     <authors>Martijn Laarman and contributors</authors>
     <owners>Martijn Laarman</owners>
@@ -13,7 +13,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Elasticsearch client, strongly typed interface to Elasticsearch. Fluent request builder, mapped responses and powerful query dsl. Uses and exposes Elasticsearch.Net</description>
     <dependencies>
-      <dependency id="Elasticsearch.Net" version="0.1.0"/>
+      <dependency id="Elasticsearch.Net" version="1.0.0-beta1"/>
       <dependency id="Newtonsoft.Json" version="6.0.1" />
     </dependencies>
     <tags>elasticsearch elastic search lucene nest</tags>
@@ -22,6 +22,5 @@
     <file src="output\Nest\Nest.dll" target="lib"/> 
     <file src="output\Nest\Nest.pdb" target="lib"/> 
     <file src="output\Nest\Nest.XML" target="lib"/> 
-    <file src="output\Nest\init.ps1" target="tools"/> 
   </files>
 </package>

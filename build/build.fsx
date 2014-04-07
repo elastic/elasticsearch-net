@@ -44,7 +44,6 @@ Target "BuildApp" (fun _ ->
     //from their interfaces
     !! "build/output/Nest/Nest.xml" |> Seq.iter(fun f -> PatchXmlDoc f)
 
-    CopyFile "build/output/Nest/init.ps1" "build/nest-init.ps1" 
     CopyFile "build/output/Elasticsearch.Net/init.ps1" "build/elasticsearch-init.ps1"
 
 )
