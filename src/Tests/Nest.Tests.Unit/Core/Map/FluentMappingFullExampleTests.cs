@@ -118,6 +118,11 @@ namespace Nest.Tests.Unit.Core.Map
 					)
 				)
 				.Properties(props => props
+					.String(s=>s
+						.Name("_all")
+						.IndexAnalyzer("nGram_analyzer")
+						.SearchAnalyzer("whitespace_analyzer")
+					)
 					.String(s => s
 						.Name(p => p.Name)
 						.IndexName("my_crazy_name_i_want_in_lucene")
