@@ -4,7 +4,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class AliasAddCreateIndexDescriptor 
+	public class CreateAliasDescriptor 
 	{
 
 		[JsonProperty("filter")]
@@ -16,22 +16,22 @@ namespace Nest
 		[JsonProperty("search_routing")]
 		internal string _SearchRouting { get; set; }
 		
-		public AliasAddCreateIndexDescriptor Routing(string routing)
+		public CreateAliasDescriptor Routing(string routing)
 		{
 			this._Routing = routing;
 			return this;
 		}
-		public AliasAddCreateIndexDescriptor IndexRouting(string indexRouting)
+		public CreateAliasDescriptor IndexRouting(string indexRouting)
 		{
 			this._IndexRouting = indexRouting;
 			return this;
 		}
-		public AliasAddCreateIndexDescriptor SearchRouting(string searchRouting)
+		public CreateAliasDescriptor SearchRouting(string searchRouting)
 		{
 			this._SearchRouting = searchRouting;
 			return this;
 		}
-		public AliasAddCreateIndexDescriptor Filter<T>(Func<FilterDescriptor<T>, FilterBase> filterSelector)
+		public CreateAliasDescriptor Filter<T>(Func<FilterDescriptor<T>, FilterBase> filterSelector)
 			where T : class
 		{
 			filterSelector.ThrowIfNull("filterSelector");
@@ -39,5 +39,6 @@ namespace Nest
 			this._Filter = filterSelector(new FilterDescriptor<T>());
 			return this;
 		}
+
 	}
 }

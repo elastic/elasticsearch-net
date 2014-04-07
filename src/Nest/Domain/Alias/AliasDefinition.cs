@@ -7,9 +7,9 @@ namespace Nest
 
 		public string Name { get; set; }
 
-		//[JsonProperty("filter")]
-		//internal FilterBase Filter { get; set; }
-		
+		[JsonProperty("filter")]
+		internal FilterBase Filter { get; set; }
+	
 		[JsonProperty("routing")]
 		public string Routing { get; internal set; }
 		[JsonProperty("index_routing")]

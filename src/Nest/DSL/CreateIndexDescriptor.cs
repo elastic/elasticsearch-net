@@ -89,14 +89,14 @@ namespace Nest
 		/// <summary>
 		/// Add an alias for this index upon index creation
 		/// </summary>
-		public CreateIndexDescriptor AddAlias(string aliasName, Func<AliasAddCreateIndexDescriptor, AliasAddCreateIndexDescriptor> addAliasSelector = null)
+		public CreateIndexDescriptor AddAlias(string aliasName, Func<CreateAliasDescriptor, CreateAliasDescriptor> addAliasSelector = null)
 		{
 			aliasName.ThrowIfNullOrEmpty("aliasName");
 			addAliasSelector = addAliasSelector ?? (a => a);
-			var alias = addAliasSelector(new AliasAddCreateIndexDescriptor());
+			var alias = addAliasSelector(new CreateAliasDescriptor());
 
 			if (this._IndexSettings.Aliases == null)
-				this._IndexSettings.Aliases = new Dictionary<string, AliasAddCreateIndexDescriptor>();
+				this._IndexSettings.Aliases = new Dictionary<string, CreateAliasDescriptor>();
 
 			this._IndexSettings.Aliases.Add(aliasName, alias);
 

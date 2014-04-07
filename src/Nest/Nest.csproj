@@ -113,7 +113,7 @@
     <Compile Include="Domain\Aggregations\RangeItem.cs" />
     <Compile Include="Domain\Aggregations\StatsMetric.cs" />
     <Compile Include="Domain\Aggregations\ValueMetric.cs" />
-    <Compile Include="Domain\Alias\AliasAddCreateIndexDescriptor.cs" />
+    <Compile Include="Domain\Alias\CreateAliasDescriptor.cs" />
     <Compile Include="Domain\Alias\AliasAddDescriptor.cs" />
     <Compile Include="Domain\Alias\AliasAddOperation.cs" />
     <Compile Include="Domain\Alias\AliasDefinition.cs" />

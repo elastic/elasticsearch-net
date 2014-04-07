@@ -54,7 +54,7 @@ namespace Nest
 		public IList<RootObjectMapping> Mappings { get; internal set; }
 
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		protected internal Dictionary<string, AliasAddCreateIndexDescriptor> Aliases { get; internal set; }
+		protected internal Dictionary<string, CreateAliasDescriptor> Aliases { get; internal set; }
 			
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public Dictionary<string, WarmerMapping> Warmers { get; internal set; }
