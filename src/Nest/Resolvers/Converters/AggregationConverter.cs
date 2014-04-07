@@ -61,6 +61,19 @@ namespace Nest.Resolvers.Converters
 			var docCount = (reader.Value as long?).GetValueOrDefault(0);
 			var bucket = new SingleBucket() {DocCount = docCount};
 			reader.Read();
+			if (reader.TokenType == JsonToken.PropertyName
+				&& ((string)reader.Value) == "buckets"
+				)
+			{
+				var b = this.GetBucketAggregation(reader, serializer) as Bucket;
+				return new BucketWithDocCount()
+				{
+					DocCount = docCount,
+					Items = b.Items
+
+				};
+			}
+
 			bucket.Aggregations = this.GetNestedAggregations(reader, serializer);
 
 			return bucket;
@@ -144,9 +157,36 @@ namespace Nest.Resolvers.Converters
 			var docCount = reader.Value as long?;
 			keyItem.DocCount = docCount.GetValueOrDefault(0);
 			reader.Read();
+
+			var nextProperty = reader.Value as string;
+			if (nextProperty == "score")
+			{
+				return GetSignificantTermItem(reader, serializer, keyItem);
+			}
+
+
 			keyItem.Aggregations = this.GetNestedAggregations(reader, serializer);
 			return keyItem;
 
+		}
+
+		private IAggregation GetSignificantTermItem(JsonReader reader, JsonSerializer serializer, KeyItem keyItem)
+		{
+			reader.Read();
+			var score = reader.Value as double?;
+			reader.Read();
+			reader.Read();
+			var bgCount = reader.Value as long?;
+			var significantTermItem = new SignificantTermItem()
+			{
+				Key = keyItem.Key,
+				DocCount = keyItem.DocCount,
+				BgCount = bgCount.GetValueOrDefault(0),
+				Score = score.GetValueOrDefault(0)
+			};
+			reader.Read();
+			significantTermItem.Aggregations = this.GetNestedAggregations(reader, serializer);
+			return significantTermItem;
 		}
 
 		private IDictionary<string, IAggregation> GetNestedAggregations(JsonReader reader, JsonSerializer serializer)

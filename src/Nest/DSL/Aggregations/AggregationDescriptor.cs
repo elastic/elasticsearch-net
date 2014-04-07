@@ -151,6 +151,13 @@ namespace Nest
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a._Terms = d);
 		}
+		
+		[JsonProperty("significant_terms")]
+		internal SignificantTermsAggregationDescriptor<T> _SignificantTerms { get; set; }
+		public AggregationDescriptor<T> SignificantTerms(string name, Func<SignificantTermsAggregationDescriptor<T>, SignificantTermsAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a._SignificantTerms = d);
+		}
 
 		[JsonProperty("value_count")]
 		internal ValueCountAggregationDescriptor<T> _ValueCount { get; set; }

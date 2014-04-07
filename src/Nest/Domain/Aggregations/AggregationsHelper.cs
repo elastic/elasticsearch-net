@@ -82,6 +82,15 @@ namespace Nest
 			return this.TryGet<SingleBucket>(key);
 		}
 
+		public BucketWithDocCount<SignificantTermItem> SignificantTerms(string key)
+		{
+			var bucket = this.TryGet<BucketWithDocCount>(key);
+			var b = new BucketWithDocCount<SignificantTermItem>();
+			b.DocCount = bucket.DocCount;
+			b.Items = bucket.Items.OfType<SignificantTermItem>().ToList();
+			return b;
+		}
+
 		public Bucket<KeyItem> Terms(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);

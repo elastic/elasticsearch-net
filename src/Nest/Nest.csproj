@@ -107,9 +107,11 @@
     <Compile Include="Domain\Aggregations\IAggration.cs" />
     <Compile Include="Domain\Aggregations\IBucketAggregation.cs" />
     <Compile Include="Domain\Aggregations\IBucketItem.cs" />
+    <Compile Include="Domain\Aggregations\IBucketWithCountAggregation.cs" />
     <Compile Include="Domain\Aggregations\IMetricAggregation.cs" />
+    <Compile Include="Domain\Aggregations\SignificantTermItem.cs" />
     <Compile Include="Domain\Aggregations\KeyItem.cs" />
-    <Compile Include="Domain\Aggregations\NestedBucket.cs" />
+    <Compile Include="Domain\Aggregations\SingleBucket.cs" />
     <Compile Include="Domain\Aggregations\RangeItem.cs" />
     <Compile Include="Domain\Aggregations\StatsMetric.cs" />
     <Compile Include="Domain\Aggregations\ValueMetric.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="DSL\Aggregations\MinAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\HistogramAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\MissingAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\SignificantTermsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\TermsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ValueCountAggregationDescriptor.cs" />
     <Compile Include="DSL\CloseIndexDescriptor.cs" />

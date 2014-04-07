@@ -11,4 +11,18 @@ namespace Nest
 	{
 		public IEnumerable<IAggregation> Items { get; set; }
 	}
+	
+	public class BucketWithDocCount<TBucketItem> : BucketAggregationBase, IBucketWithCountAggregation
+		where TBucketItem : IBucketItem
+	{
+		public IList<TBucketItem> Items { get; set; }
+
+		public long DocCount { get; internal set; }
+	}
+
+	public class BucketWithDocCount : IAggregation
+	{
+		public long DocCount { get; set; }
+		public IEnumerable<IAggregation> Items { get; set; }
+	}
 }
