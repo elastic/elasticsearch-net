@@ -57,6 +57,9 @@ namespace Nest.Tests.Integration.Aggregations
 				{
 					sigTerm.BgCount.Should().BeGreaterThan(0);
 					sigTerm.Score.Should().BeGreaterThan(0);
+					var sigTermTerms = sigTerm.Terms("country");
+					sigTermTerms.Should().NotBeNull();
+					sigTermTerms.Items.Should().NotBeEmpty();
 				}
 			}
 
@@ -78,6 +81,54 @@ namespace Nest.Tests.Integration.Aggregations
 			var bucket = results.Aggs.Histogram("bucket_agg");
 			bucket.Items.Should().NotBeEmpty();
 		}
+
+		[Test]
+		public void Percentiles()
+		{
+			var results = this._client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.Percentiles("bucket_agg", m => m
+						.Field(p => p.IntValues)
+					)
+
+				)
+			);
+			results.IsValid.Should().BeTrue();
+			var metric = results.Aggs.Percentiles("bucket_agg");
+			metric.Should().NotBeNull();
+			metric.Items.Should().NotBeEmpty();
+
+			var lastPercentile = metric.Items.Last();
+			lastPercentile.Percentile.Should().Be(99.0);
+			lastPercentile.Value.Should().BeGreaterThan(1);
+			
+		}
+		
+		[Test]
+		public void PercentilesCustom()
+		{
+			var results = this._client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.Percentiles("bucket_agg", m => m
+						.Field(p => p.IntValues)
+						.Percentages(97,99,99.9)
+					)
+
+				)
+			);
+			results.IsValid.Should().BeTrue();
+			var metric = results.Aggs.Percentiles("bucket_agg");
+			metric.Should().NotBeNull();
+			metric.Items.Should().NotBeEmpty().And.HaveCount(3);
+
+			var lastPercentile = metric.Items.Last();
+			lastPercentile.Percentile.Should().Be(99.9);
+			lastPercentile.Value.Should().BeGreaterThan(1.5);
+			
+		}
+
 		[Test]
 		public void GeoHash()
 		{

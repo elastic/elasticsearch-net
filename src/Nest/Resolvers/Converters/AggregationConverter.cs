@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
@@ -12,6 +13,8 @@ namespace Nest.Resolvers.Converters
 
 	public class AggregationConverter : JsonConverter
 	{
+		private static Regex _numeric = new Regex(@"^[\d.]+$"); 
+
 		public override bool CanWrite
 		{
 			get { return false; }
@@ -32,6 +35,9 @@ namespace Nest.Resolvers.Converters
 				return null;
 
 			var property = reader.Value as string; 
+			if (_numeric.IsMatch(property))
+				return GetPercentilesMetricAggregation(reader, serializer);
+
 			switch (property)
 			{
 				case "value":
@@ -53,6 +59,26 @@ namespace Nest.Resolvers.Converters
 					return null; 
 
 			}
+		}
+
+		private IAggregation GetPercentilesMetricAggregation(JsonReader reader, JsonSerializer serializer)
+		{
+			var metric = new PercentilesMetric();
+			var percentileItems = new List<PercentileItem>();
+			while (reader.TokenType != JsonToken.EndObject)
+			{
+				var percentile = double.Parse(reader.Value as string);
+				reader.Read();
+				var value = reader.Value as double?;
+				percentileItems.Add(new PercentileItem()
+				{
+					Percentile = percentile,
+					Value = value.GetValueOrDefault(0)
+				});
+				reader.Read();
+			}
+			metric.Items = percentileItems;
+			return metric;
 		}
 
 		private IAggregation GetSingleBucketAggregation(JsonReader reader, JsonSerializer serializer)

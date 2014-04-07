@@ -61,7 +61,10 @@ namespace Nest
 		{
 			return this.TryGet<ExtendedStatsMetric>(key);
 		}
-
+		public PercentilesMetric Percentiles(string key)
+		{
+			return this.TryGet<PercentilesMetric>(key);
+		}
 		public SingleBucket Global(string key)
 		{
 			return this.TryGet<SingleBucket>(key);
@@ -106,6 +109,7 @@ namespace Nest
 			b.Items = bucket.Items.OfType<KeyItem>().ToList();
 			return b;
 		}
+	
 
 		public Bucket<KeyItem> GeoHash(string key)
 		{

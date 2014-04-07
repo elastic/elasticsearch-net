@@ -31,6 +31,14 @@ namespace Nest
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a._DateHistogram = d);
 		}
+		
+		[JsonProperty("percentiles")]
+		internal PercentilesAggregationDescriptor<T> _Percentiles { get; set; }
+		public AggregationDescriptor<T> Percentiles(string name,
+			Func<PercentilesAggregationDescriptor<T>, PercentilesAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a._Percentiles = d);
+		}
 
 		[JsonProperty("date_range")]
 		internal DateRangeAggregationDescriptor<T> _DateRange { get; set; }
