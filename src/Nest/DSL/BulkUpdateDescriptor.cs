@@ -164,6 +164,9 @@ namespace Nest
 				case Nest.VersionType.Internal:
 					this._VersionType = "internal";
 					break;
+				case Nest.VersionType.Force:
+					this._VersionType = "force";
+					break;
 			}
 			return this;
 		}
