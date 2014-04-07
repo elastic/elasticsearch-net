@@ -78,6 +78,10 @@ namespace Elasticsearch.Net.Connection.Thrift.Transport
 			{
 				outputBuffer.Close();
 			}
+			if (transport != null)
+			{
+				transport.Close();
+			}
 		}
 
 		public override int Read(byte[] buf, int off, int len)

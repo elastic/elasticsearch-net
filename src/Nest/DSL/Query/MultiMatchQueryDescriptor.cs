@@ -138,6 +138,7 @@ namespace Nest
 			return this;
 		}
 
+        [Obsolete("Use type:best_fields or type:most_fields instead")]
 		public MultiMatchQueryDescriptor<T> UseDisMax(bool useDismax)
 		{
 			this._UseDisMax = useDismax;
