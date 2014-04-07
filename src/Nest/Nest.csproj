@@ -113,6 +113,7 @@
     <Compile Include="Domain\Aggregations\KeyItem.cs" />
     <Compile Include="Domain\Aggregations\SingleBucket.cs" />
     <Compile Include="Domain\Aggregations\RangeItem.cs" />
+    <Compile Include="Domain\Aggregations\PercentilesMetric.cs" />
     <Compile Include="Domain\Aggregations\StatsMetric.cs" />
     <Compile Include="Domain\Aggregations\ValueMetric.cs" />
     <Compile Include="Domain\Alias\CreateAliasDescriptor.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="DSL\Aggregations\FilterAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\GeoHashAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\GlobalAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\PercentilesAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\Ip4RangeAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ExtendedStatsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\IAggregationDescriptor.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="DSL\Aggregations\RangeAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\StatsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\AverageAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\CardinalityAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\SumAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\MaxAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\MinAggregationDescriptor.cs" />

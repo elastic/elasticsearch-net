@@ -20,8 +20,7 @@ namespace Nest.Tests.Integration.Cluster
 					NodesInfoMetric.Network,
 					NodesInfoMetric.Os,
 					NodesInfoMetric.Process,
-					NodesInfoMetric.Settings,
-					NodesInfoMetric.Plugin
+					NodesInfoMetric.Settings
 				)
 			);
 			Assert.True(r.IsValid);

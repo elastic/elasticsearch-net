@@ -144,23 +144,7 @@ namespace Nest.Tests.Integration.Search
 			Assert.True(queryResults.Documents.First().Followers.First().FirstName != this._LookFor);
 		}
 
-		[Test]
-		public void ScoringQuery()
-		{
-			var queryResults = this.SearchRaw<ElasticsearchProject>(
-				@" { ""query"" : {
-						""custom_score"" : {
-							""query"" : {
-								""term"" : {
-									""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
-								}
-							},
-							""script"" : ""_score * 2""
-						}
-					} }"
-			);
-			this.TestDefaultAssertions(queryResults);
-		}
+		
 		[Test]
 		public void ConstantScoreQuery()
 		{
