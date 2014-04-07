@@ -86,6 +86,24 @@ namespace Nest
 			return this.RemoveMapping(marker);
 		}
 
+		/// <summary>
+		/// Add an alias for this index upon index creation
+		/// </summary>
+		public CreateIndexDescriptor AddAlias(string aliasName, Func<AliasAddCreateIndexDescriptor, AliasAddCreateIndexDescriptor> addAliasSelector = null)
+		{
+			aliasName.ThrowIfNullOrEmpty("aliasName");
+			addAliasSelector = addAliasSelector ?? (a => a);
+			var alias = addAliasSelector(new AliasAddCreateIndexDescriptor());
+
+			if (this._IndexSettings.Aliases == null)
+				this._IndexSettings.Aliases = new Dictionary<string, AliasAddCreateIndexDescriptor>();
+
+			this._IndexSettings.Aliases.Add(aliasName, alias);
+
+			return this;
+		}
+			
+
 		private CreateIndexDescriptor RemoveMapping(TypeNameMarker marker)
 		{
 			this._IndexSettings.Mappings = this._IndexSettings.Mappings.Where(m => m.Type != marker).ToList();

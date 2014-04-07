@@ -41,12 +41,12 @@ namespace Nest
 		}
 		public AliasAddDescriptor IndexRouting(string indexRouting)
 		{
-			this.Add.Index = indexRouting;
+			this.Add.IndexRouting = indexRouting;
 			return this;
 		}
 		public AliasAddDescriptor SearchRouting(string searchRouting)
 		{
-			this.Add.Index = searchRouting;
+			this.Add.SearchRouting = searchRouting;
 			return this;
 		}
 		public AliasAddDescriptor Filter<T>(Func<FilterDescriptor<T>, FilterBase> filterSelector)

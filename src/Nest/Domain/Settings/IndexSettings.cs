@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ServiceModel.Channels;
 using Newtonsoft.Json;
 using System;
 using Nest.Resolvers.Converters;
@@ -52,6 +53,9 @@ namespace Nest
 
 		public IList<RootObjectMapping> Mappings { get; internal set; }
 
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		protected internal Dictionary<string, AliasAddCreateIndexDescriptor> Aliases { get; internal set; }
+			
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public Dictionary<string, WarmerMapping> Warmers { get; internal set; }
 

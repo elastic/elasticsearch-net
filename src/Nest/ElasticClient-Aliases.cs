@@ -8,7 +8,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	using GetAliasesConverter = Func<IElasticsearchResponse, Stream, GetAliasesResponse>;
-	using CrazyAliasesResponse = Dictionary<string, Dictionary<string, Dictionary<string, object>>>;
+	using CrazyAliasesResponse = Dictionary<string, Dictionary<string, Dictionary<string, AliasDefinition>>>;
 
 	public partial class ElasticClient
 	{
@@ -60,17 +60,22 @@ namespace Nest
 
 			var dict = this.Serializer.DeserializeInternal<CrazyAliasesResponse>(stream);
 
-			var d = new Dictionary<string, IList<string>>();
+			var d = new Dictionary<string, IList<AliasDefinition>>();
 
 			foreach (var kv in dict)
 			{
 				var indexDict = kv.Key;
-				var aliases = new List<string>();
+				var aliases = new List<AliasDefinition>();
 				if (kv.Value != null && kv.Value.ContainsKey("aliases"))
 				{
 					var aliasDict = kv.Value["aliases"];
 					if (aliasDict != null)
-						aliases = aliasDict.Select(kva => kva.Key).ToList();
+						aliases = aliasDict.Select(kva =>
+						{
+							var alias = kva.Value;
+							alias.Name = kva.Key;
+							return alias;
+						}).ToList();
 				}
 
 				d.Add(indexDict, aliases);

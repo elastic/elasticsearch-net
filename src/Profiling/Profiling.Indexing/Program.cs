@@ -23,8 +23,10 @@ namespace Profiling.Indexing
 			var process = Process.GetCurrentProcess();
 			var baseThreadCount = process.Threads.Count;
 			var baseMemorySize = process.VirtualMemorySize64;
-			
-			var client = new ElasticClient(new ConnectionSettings(new Uri("http://ipv4.fiddler:9200"), "nest-default-index"));
+			var host = "localhost";
+			if (Process.GetProcessesByName("fiddler").Any())
+				host = "ipv4.fiddler";
+			var client = new ElasticClient(new ConnectionSettings(new Uri("http://"+host+":9200"), "nest-default-index"));
 			//warmer
 			RunTest<HttpTester>(HTTP_PORT, 10);
 

@@ -87,6 +87,7 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConvenienceExtensions\AliasExtensions.cs" />
     <Compile Include="ConvenienceExtensions\CountExtensions.cs" />
     <Compile Include="ConvenienceExtensions\DeleteExtensions.cs" />
     <Compile Include="ConvenienceExtensions\DeleteMappingExtensions.cs" />
@@ -112,8 +113,10 @@
     <Compile Include="Domain\Aggregations\RangeItem.cs" />
     <Compile Include="Domain\Aggregations\StatsMetric.cs" />
     <Compile Include="Domain\Aggregations\ValueMetric.cs" />
+    <Compile Include="Domain\Alias\AliasAddCreateIndexDescriptor.cs" />
     <Compile Include="Domain\Alias\AliasAddDescriptor.cs" />
     <Compile Include="Domain\Alias\AliasAddOperation.cs" />
+    <Compile Include="Domain\Alias\AliasDefinition.cs" />
     <Compile Include="Domain\Alias\AliasRemoveDescriptor.cs" />
     <Compile Include="Domain\Alias\AliasRemoveOperation.cs" />
     <Compile Include="Domain\Alias\IAliasAction.cs" />
