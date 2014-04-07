@@ -61,6 +61,11 @@ namespace Nest
 			this._Mapping.IndexOptions = indexOptions;
 			return this;
 		}
+		public StringMappingDescriptor<T> Analyzer(string analyzer)
+		{
+			this._Mapping.Analyzer = analyzer;
+			return this;
+		}
 		public StringMappingDescriptor<T> IndexAnalyzer(string indexAnalyzer)
 		{
 			this._Mapping.IndexAnalyzer = indexAnalyzer;
