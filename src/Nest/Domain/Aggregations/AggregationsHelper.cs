@@ -41,7 +41,10 @@ namespace Nest
 		{
 			return this.TryGet<ValueMetric>(key);
 		}
-
+		public ValueMetric Cardinality(string key)
+		{
+			return this.TryGet<ValueMetric>(key);
+		}
 		public ValueMetric Average(string key)
 		{
 			return this.TryGet<ValueMetric>(key);

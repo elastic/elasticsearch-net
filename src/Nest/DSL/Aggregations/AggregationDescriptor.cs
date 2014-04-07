@@ -117,7 +117,14 @@ namespace Nest
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a._Min = d);
 		}
-	
+		
+		[JsonProperty("cardinality")]
+		internal CardinalityAggregationDescriptor<T> _Cardinality { get; set; }
+		public AggregationDescriptor<T> Cardinality(string name, Func<CardinalityAggregationDescriptor<T>, CardinalityAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a._Cardinality = d);
+		}
+
 		[JsonProperty("missing")]
 		internal MissingAggregationDescriptor<T> _Missing { get; set; }
 		public AggregationDescriptor<T> Missing(string name, Func<MissingAggregationDescriptor<T>, MissingAggregationDescriptor<T>> selector)

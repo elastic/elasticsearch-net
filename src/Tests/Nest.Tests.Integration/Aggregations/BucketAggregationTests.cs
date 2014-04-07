@@ -128,7 +128,7 @@ namespace Nest.Tests.Integration.Aggregations
 			lastPercentile.Value.Should().BeGreaterThan(1.5);
 			
 		}
-
+		
 		[Test]
 		public void GeoHash()
 		{
