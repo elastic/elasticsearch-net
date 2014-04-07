@@ -45,6 +45,9 @@ namespace Nest
 		[JsonProperty("boundary_chars")]
 		internal string _BoundaryChars { get; set; }
 
+		[JsonProperty("type")]
+		internal string _Type { get; set; }
+
 		public HighlightFieldDescriptor<T> OnField(string field)
 		{
 			this._Field = field;
@@ -64,7 +67,11 @@ namespace Nest
 			this._TagsSchema = schema;
 			return this;
 		}
-
+		public HighlightFieldDescriptor<T> Type(string type)
+		{
+			this._Type = type;
+			return this;
+		}
 		public HighlightFieldDescriptor<T> PreTags(string preTags)
 		{
 			this._PreTags = new[] { preTags };
