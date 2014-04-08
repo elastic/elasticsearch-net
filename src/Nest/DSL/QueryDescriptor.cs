@@ -69,6 +69,8 @@ namespace Nest
 		[JsonProperty(PropertyName = "terms")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<PropertyPathMarker, object> TermsQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "simple_query_string")]
+		internal SimpleQueryStringQueryDescriptor<T> SimpleQueryStringDescriptor { get; set; }
 		[JsonProperty(PropertyName = "query_string")]
 		internal QueryStringDescriptor<T> QueryStringDescriptor { get; set; }
 		[JsonProperty(PropertyName = "regexp")]
@@ -160,6 +162,20 @@ namespace Nest
 			selector(query);
 			return this.New(query, q => q.QueryStringDescriptor = query);
 		}
+
+		/// <summary>
+		/// A query that uses the SimpleQueryParser to parse its context. 
+		/// Unlike the regular query_string query, the simple_query_string query will 
+		/// never throw an exception, and discards invalid parts of the query. 
+		/// </summary>
+		public BaseQuery SimpleQueryString(Action<SimpleQueryStringQueryDescriptor<T>> selector)
+		{
+			var query = new SimpleQueryStringQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.SimpleQueryStringDescriptor = query);
+		}
+		
+		
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>

@@ -130,6 +130,11 @@ namespace Nest
 			return new QueryDescriptor<T>().Prefix(field, value, Boost);
 		}
 
+		public static BaseQuery SimpleQueryString(Action<SimpleQueryStringQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().SimpleQueryString(selector);
+		}
+
 		public static BaseQuery QueryString(Action<QueryStringDescriptor<T>> selector)
 		{
 			return new QueryDescriptor<T>().QueryString(selector);
