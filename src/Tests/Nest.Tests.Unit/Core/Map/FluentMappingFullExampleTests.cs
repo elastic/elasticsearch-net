@@ -36,7 +36,12 @@ namespace Nest.Tests.Unit.Core.Map
 				//Allows us to map the exceptions to the rule and be less verbose.
 				.MapFromAttributes()
 				.SetParent<Person>() //makes no sense but i needed a type :)
-				.DisableAllField(false)
+				.AllField(a=>a
+					.Enabled() 
+					.IndexAnalyzer("nGram_analyzer")
+					.SearchAnalyzer("whitespace_analyzer")
+					.TermVector(TermVectorOption.with_positions_offsets)
+				)
 				.DisableIndexField(false)
 				.DisableSizeField(false)
 				.Dynamic()
@@ -87,6 +92,7 @@ namespace Nest.Tests.Unit.Core.Map
 					.Add("attr1", "value1")
 					.Add("attr2", new { attr3 = "value3" })
 				)
+				
 				.DynamicTemplates(d=>d
 					.Add(t=>t
 						.Name("template_1")
@@ -118,14 +124,8 @@ namespace Nest.Tests.Unit.Core.Map
 					)
 				)
 				.Properties(props => props
-					.String(s=>s
-						.Name("_all")
-						.IndexAnalyzer("nGram_analyzer")
-						.SearchAnalyzer("whitespace_analyzer")
-					)
 					.String(s => s
 						.Name(p => p.Name)
-						
 						.IndexName("my_crazy_name_i_want_in_lucene")
 						.IncludeInAll()
 						.Index(FieldIndexOption.analyzed)
