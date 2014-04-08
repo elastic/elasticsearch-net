@@ -1548,12 +1548,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
-	public class ExistsRequestParameters : FluentRequestParameters<ExistsRequestParameters> 
+	public class DocumentExistsRequestParameters : FluentRequestParameters<DocumentExistsRequestParameters> 
 	{
 		
 		internal string _parent { get; set; }
 		///<summary>The ID of the parent document</summary>
-		public ExistsRequestParameters Parent(string parent)
+		public DocumentExistsRequestParameters Parent(string parent)
 		{
 			this._parent = parent;
 			this.AddQueryString("parent", this._parent);
@@ -1563,7 +1563,7 @@ namespace Elasticsearch.Net
 		
 		internal string _preference { get; set; }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public ExistsRequestParameters Preference(string preference)
+		public DocumentExistsRequestParameters Preference(string preference)
 		{
 			this._preference = preference;
 			this.AddQueryString("preference", this._preference);
@@ -1573,7 +1573,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _realtime { get; set; }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public ExistsRequestParameters Realtime(bool realtime)
+		public DocumentExistsRequestParameters Realtime(bool realtime)
 		{
 			this._realtime = realtime;
 			this.AddQueryString("realtime", this._realtime);
@@ -1583,7 +1583,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _refresh { get; set; }
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public ExistsRequestParameters Refresh(bool refresh)
+		public DocumentExistsRequestParameters Refresh(bool refresh)
 		{
 			this._refresh = refresh;
 			this.AddQueryString("refresh", this._refresh);
@@ -1593,7 +1593,7 @@ namespace Elasticsearch.Net
 		
 		internal string _routing { get; set; }
 		///<summary>Specific routing value</summary>
-		public ExistsRequestParameters Routing(string routing)
+		public DocumentExistsRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
 			this.AddQueryString("routing", this._routing);

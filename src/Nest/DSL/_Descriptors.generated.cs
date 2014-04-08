@@ -1365,13 +1365,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
-	public partial class ExistsDescriptor
+	public partial class DocumentExistsDescriptor<T>
 	{
-		internal ExistsRequestParameters _QueryString = new ExistsRequestParameters(); 
+		internal DocumentExistsRequestParameters _QueryString = new DocumentExistsRequestParameters(); 
 
 
 		///<summary>The ID of the parent document</summary>
-		public ExistsDescriptor Parent(string parent)
+		public DocumentExistsDescriptor<T> Parent(string parent)
 		{
 			this._QueryString.Parent(parent);
 			return this;
@@ -1379,7 +1379,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public ExistsDescriptor Preference(string preference)
+		public DocumentExistsDescriptor<T> Preference(string preference)
 		{
 			this._QueryString.Preference(preference);
 			return this;
@@ -1387,7 +1387,7 @@ namespace Nest
 		
 
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public ExistsDescriptor Realtime(bool realtime = true)
+		public DocumentExistsDescriptor<T> Realtime(bool realtime = true)
 		{
 			this._QueryString.Realtime(realtime);
 			return this;
@@ -1395,7 +1395,7 @@ namespace Nest
 		
 
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public ExistsDescriptor Refresh(bool refresh = true)
+		public DocumentExistsDescriptor<T> Refresh(bool refresh = true)
 		{
 			this._QueryString.Refresh(refresh);
 			return this;
@@ -1403,7 +1403,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value</summary>
-		public ExistsDescriptor Routing(string routing)
+		public DocumentExistsDescriptor<T> Routing(string routing)
 		{
 			this._QueryString.Routing(routing);
 			return this;

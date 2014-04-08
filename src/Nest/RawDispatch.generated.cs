@@ -858,7 +858,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> ExistsDispatch<T>(ElasticsearchPathInfo<ExistsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> ExistsDispatch<T>(ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -873,7 +873,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> ExistsDispatchAsync<T>(ElasticsearchPathInfo<ExistsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ExistsDispatchAsync<T>(ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{

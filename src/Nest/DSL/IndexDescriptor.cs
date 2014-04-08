@@ -12,15 +12,15 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	[DescriptorFor("Index")]
-	public partial class IndexDescriptor<T> : DocumentPathDescriptorBase<IndexDescriptor<T>, T, IndexRequestParameters>
-		, IPathInfo<IndexRequestParameters>
+	[DescriptorFor("Exists")]
+	public partial class DocumentExistsDescriptor<T> : DocumentPathDescriptorBase<DocumentExistsDescriptor<T>, T, DocumentExistsRequestParameters>
+		, IPathInfo<DocumentExistsRequestParameters>
 		where T : class
 	{
-		ElasticsearchPathInfo<IndexRequestParameters> IPathInfo<IndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<DocumentExistsRequestParameters> IPathInfo<DocumentExistsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<IndexRequestParameters>(settings, this._QueryString);
-			pathInfo.HttpMethod = this._Id.IsNullOrEmpty() ? PathInfoHttpMethod.POST : PathInfoHttpMethod.PUT;
+			var pathInfo = base.ToPathInfo<DocumentExistsRequestParameters>(settings, this._QueryString);
+			pathInfo.HttpMethod = PathInfoHttpMethod.HEAD;
 			return pathInfo;
 		}
 	}

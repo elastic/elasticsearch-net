@@ -6757,7 +6757,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Exists<T>(string index, string type, string id, Func<ExistsRequestParameters, ExistsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Exists<T>(string index, string type, string id, Func<DocumentExistsRequestParameters, DocumentExistsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6766,7 +6766,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new ExistsRequestParameters());
+				requestParams = requestParameters(new DocumentExistsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6794,7 +6794,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ExistsAsync<T>(string index, string type, string id, Func<ExistsRequestParameters, ExistsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> ExistsAsync<T>(string index, string type, string id, Func<DocumentExistsRequestParameters, DocumentExistsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6803,7 +6803,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new ExistsRequestParameters());
+				requestParams = requestParameters(new DocumentExistsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6833,7 +6833,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Exists(string index, string type, string id, Func<ExistsRequestParameters, ExistsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> Exists(string index, string type, string id, Func<DocumentExistsRequestParameters, DocumentExistsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6842,7 +6842,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new ExistsRequestParameters());
+				requestParams = requestParameters(new DocumentExistsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6872,7 +6872,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ExistsAsync(string index, string type, string id, Func<ExistsRequestParameters, ExistsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ExistsAsync(string index, string type, string id, Func<DocumentExistsRequestParameters, DocumentExistsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6881,7 +6881,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new ExistsRequestParameters());
+				requestParams = requestParameters(new DocumentExistsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 

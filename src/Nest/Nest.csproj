@@ -167,6 +167,7 @@
     <Compile Include="DSL\Aggregations\TermsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ValueCountAggregationDescriptor.cs" />
     <Compile Include="DSL\ClearScrollDescriptor.cs" />
+    <Compile Include="DSL\DocumentExistsDescriptor.cs" />
     <Compile Include="DSL\PercolateCountDescriptor.cs" />
     <Compile Include="DSL\SuggestDescriptor.cs" />
     <Compile Include="DSL\CloseIndexDescriptor.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="DSL\ScrollDescriptor.cs" />
     <Compile Include="DSL\UpdateSettingsDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalPathDescriptor.cs" />
+    <Compile Include="ElasticClient-Exists.cs" />
     <Compile Include="ElasticClient-Suggest.cs" />
     <Compile Include="ElasticClient-RootNodeInfo.cs" />
     <Compile Include="ElasticClient-UpdateSettings.cs" />
