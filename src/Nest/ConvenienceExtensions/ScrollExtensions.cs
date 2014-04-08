@@ -56,7 +56,7 @@ namespace Nest
 		/// <param name="selector">Specify the scroll id as well as request specific configuration</param>
 		public static Task<IEmptyResponse> ClearScrollAsync(this IElasticClient client, string scrollId) 
 		{
-			return client.ClearScroll(s => s.ScrollId(scrollId));
+			return client.ClearScrollAsync(s => s.ScrollId(scrollId));
 		}
 	}
 }
