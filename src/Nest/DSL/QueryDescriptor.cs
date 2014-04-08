@@ -66,6 +66,9 @@ namespace Nest
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		[JsonProperty(PropertyName = "fuzzy")]
 		internal IDictionary<PropertyPathMarker, object> FuzzyQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "geo_shape")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		internal IDictionary<PropertyPathMarker, object> GeoShapeQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "terms")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<PropertyPathMarker, object> TermsQueryDescriptor { get; set; }
@@ -433,6 +436,23 @@ namespace Nest
 
 			return this.New(query, q => q.MoreLikeThisDescriptor = query);
 		}
+		
+		/// <summary>
+		/// The geo_shape Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the query shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
+		public BaseQuery GeoShape(Action<GeoShapeQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapeQueryDescriptor<T>();
+			selector(query);
+			var shape = new Dictionary<PropertyPathMarker, object>
+			{
+				{ query._Field, query }
+			};
+			return this.New(query, q => q.GeoShapeQueryDescriptor = shape);
+		}
+
 		/// <summary>
 		/// The has_child query works the same as the has_child filter, by automatically wrapping the filter with a 
 		/// constant_score.

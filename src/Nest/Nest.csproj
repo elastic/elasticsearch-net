@@ -170,6 +170,7 @@
     <Compile Include="DSL\Facets\Ip4Range.cs" />
     <Compile Include="DSL\Facets\DateExpressionRange.cs" />
     <Compile Include="DSL\Paths\BasePathDescriptor.cs" />
+    <Compile Include="DSL\Query\GeoShapeQueryDescriptor.cs" />
     <Compile Include="DSL\Query\SimpeQueryStringQueryDescriptor.cs" />
     <Compile Include="DSL\SourceDescriptor.cs" />
     <Compile Include="DSL\NodesStatsDescriptor.cs" />

@@ -134,7 +134,11 @@ namespace Nest
 		{
 			return new QueryDescriptor<T>().SimpleQueryString(selector);
 		}
-
+		
+		public static BaseQuery GeoShape(Action<GeoShapeQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().GeoShape(selector);
+		}
 		public static BaseQuery QueryString(Action<QueryStringDescriptor<T>> selector)
 		{
 			return new QueryDescriptor<T>().QueryString(selector);
