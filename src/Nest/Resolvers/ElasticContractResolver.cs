@@ -72,6 +72,9 @@ namespace Nest.Resolvers
 			if (objectType == typeof(PropertyPathMarker))
 				contract.Converter = new PropertyPathMarkerConverter(this.ConnectionSettings);
 
+			if (objectType == typeof(SuggestResponse))
+				contract.Converter = new SuggestResponseConverter();
+
 			if (objectType == typeof(MultiSearchResponse))
 				contract.Converter = new MultiSearchConverter();
 

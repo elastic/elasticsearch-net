@@ -964,6 +964,24 @@ namespace Nest
 		/// <param name="selector">An optional descriptor that further describes the status operation, i.e limiting it to certain indices</param>
 		Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
 
+		/// <summary>
+		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester. 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
+		/// </summary>
+		/// <typeparam name="T">The type used to strongly type parts of the suggest operation</typeparam>
+		/// <param name="selector">The suggesters to use this operation (can be multiple)</param>
+		ISuggestResponse Suggest<T>(Func<SuggestDescriptor<T>, SuggestDescriptor<T>> selector)
+			where T : class;
+
+		/// <summary>
+		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester. 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
+		/// </summary>
+		/// <typeparam name="T">The type used to strongly type parts of the suggest operation</typeparam>
+		/// <param name="selector">The suggesters to use this operation (can be multiple)</param>
+		Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, SuggestDescriptor<T>> selector)
+			where T : class;
+
 		/// <inheritdoc />
 		IEmptyResponse ClearScroll(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector);
 

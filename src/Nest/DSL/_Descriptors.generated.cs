@@ -4788,13 +4788,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
 	///</pre>
 	///</summary>
-	public partial class SuggestDescriptor
+	public partial class SuggestDescriptor<T>
 	{
 		internal SuggestRequestParameters _QueryString = new SuggestRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SuggestDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public SuggestDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this._QueryString.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -4802,7 +4802,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SuggestDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public SuggestDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this._QueryString.AllowNoIndices(allow_no_indices);
 			return this;
@@ -4810,7 +4810,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SuggestDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SuggestDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._QueryString.ExpandWildcards(expand_wildcards);
 			return this;
@@ -4818,7 +4818,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SuggestDescriptor Preference(string preference)
+		public SuggestDescriptor<T> Preference(string preference)
 		{
 			this._QueryString.Preference(preference);
 			return this;
@@ -4826,7 +4826,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value</summary>
-		public SuggestDescriptor Routing(string routing)
+		public SuggestDescriptor<T> Routing(string routing)
 		{
 			this._QueryString.Routing(routing);
 			return this;
@@ -4834,7 +4834,7 @@ namespace Nest
 		
 
 		///<summary>The URL-encoded request definition (instead of using request body)</summary>
-		public SuggestDescriptor Source(string source)
+		public SuggestDescriptor<T> Source(string source)
 		{
 			this._QueryString.Source(source);
 			return this;
