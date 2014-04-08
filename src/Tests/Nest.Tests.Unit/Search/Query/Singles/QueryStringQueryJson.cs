@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					.QueryString(qs => qs
 						.OnField(f=>f.Name)
 						.Query("this that thus")
-						.Operator(Operator.and)
+						.DefaultOperator(Operator.and)
 						.Analyzer("my_analyzer")
 						.AllowLeadingWildcard(true)
 						.LowercaseExpendedTerms(true)

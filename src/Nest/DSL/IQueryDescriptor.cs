@@ -8,7 +8,9 @@ namespace Nest
 		BaseQuery Bool(Action<BoolQueryDescriptor<T>> booleanQuery);
 		BaseQuery Boosting(Action<BoostingQueryDescriptor<T>> boostingQuery);
 		BaseQuery ConstantScore(Action<ConstantScoreQueryDescriptor<T>> selector);
+		[Obsolete("Custom boost factor has been removed in 1.1")]
 		BaseQuery CustomBoostFactor(Action<CustomBoostFactorQueryDescriptor<T>> selector);
+		[Obsolete("Custom score has been removed in 1.1")]
 		BaseQuery CustomScore(Action<CustomScoreQueryDescriptor<T>> customScoreQuery);
 		BaseQuery Dismax(Action<DismaxQueryDescriptor<T>> selector);
 		BaseQuery Filtered(Action<FilteredQueryDescriptor<T>> selector);

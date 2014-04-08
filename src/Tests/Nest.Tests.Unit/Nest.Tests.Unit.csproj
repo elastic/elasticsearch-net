@@ -175,6 +175,7 @@
     <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />
     <Compile Include="Search\Query\Modes\ConditionlessQueryJson.cs" />
     <Compile Include="Search\Query\Singles\FunctionScoreQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\SimpleQueryString\SimpleQueryStringQueryJson.cs" />
     <Compile Include="Search\Query\Singles\RegexpQueryJson.cs" />
     <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
     <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
@@ -501,6 +502,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\Modes\VerbatimDoesNotThrowOnEmptyTerm.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\SimpleQueryString\SimpleQueryStringFull.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\Singles\Terms\TermsQueryDescriptorUsingExternalField.json">

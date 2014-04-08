@@ -33,11 +33,13 @@ namespace Nest
 			return new QueryDescriptor<T>().ConstantScore(selector);
 		}
 
+		[Obsolete("Custom boost factor has been removed in 1.1")]
 		public static BaseQuery CustomBoostFactor(Action<CustomBoostFactorQueryDescriptor<T>> selector)
 		{
 			return new QueryDescriptor<T>().CustomBoostFactor(selector);
 		}
 
+		[Obsolete("Custom score has been removed in 1.1")]
 		public static BaseQuery CustomScore(Action<CustomScoreQueryDescriptor<T>> customScoreQuery)
 		{
 			return new QueryDescriptor<T>().CustomScore(customScoreQuery);
@@ -128,6 +130,15 @@ namespace Nest
 			return new QueryDescriptor<T>().Prefix(field, value, Boost);
 		}
 
+		public static BaseQuery SimpleQueryString(Action<SimpleQueryStringQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().SimpleQueryString(selector);
+		}
+		
+		public static BaseQuery GeoShape(Action<GeoShapeQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().GeoShape(selector);
+		}
 		public static BaseQuery QueryString(Action<QueryStringDescriptor<T>> selector)
 		{
 			return new QueryDescriptor<T>().QueryString(selector);

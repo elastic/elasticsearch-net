@@ -28,6 +28,7 @@ namespace Nest.Tests.Integration.Integration
 					.OnField(e => e.Content)
 					.PreTags("<em>")
 					.PostTags("</em>")
+					
 				)
 			  )
 			);

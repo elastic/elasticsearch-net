@@ -66,9 +66,14 @@ namespace Nest
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		[JsonProperty(PropertyName = "fuzzy")]
 		internal IDictionary<PropertyPathMarker, object> FuzzyQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "geo_shape")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		internal IDictionary<PropertyPathMarker, object> GeoShapeQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "terms")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<PropertyPathMarker, object> TermsQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "simple_query_string")]
+		internal SimpleQueryStringQueryDescriptor<T> SimpleQueryStringDescriptor { get; set; }
 		[JsonProperty(PropertyName = "query_string")]
 		internal QueryStringDescriptor<T> QueryStringDescriptor { get; set; }
 		[JsonProperty(PropertyName = "regexp")]
@@ -160,6 +165,20 @@ namespace Nest
 			selector(query);
 			return this.New(query, q => q.QueryStringDescriptor = query);
 		}
+
+		/// <summary>
+		/// A query that uses the SimpleQueryParser to parse its context. 
+		/// Unlike the regular query_string query, the simple_query_string query will 
+		/// never throw an exception, and discards invalid parts of the query. 
+		/// </summary>
+		public BaseQuery SimpleQueryString(Action<SimpleQueryStringQueryDescriptor<T>> selector)
+		{
+			var query = new SimpleQueryStringQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.SimpleQueryStringDescriptor = query);
+		}
+		
+		
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
@@ -417,6 +436,23 @@ namespace Nest
 
 			return this.New(query, q => q.MoreLikeThisDescriptor = query);
 		}
+		
+		/// <summary>
+		/// The geo_shape Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the query shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
+		public BaseQuery GeoShape(Action<GeoShapeQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapeQueryDescriptor<T>();
+			selector(query);
+			var shape = new Dictionary<PropertyPathMarker, object>
+			{
+				{ query._Field, query }
+			};
+			return this.New(query, q => q.GeoShapeQueryDescriptor = shape);
+		}
+
 		/// <summary>
 		/// The has_child query works the same as the has_child filter, by automatically wrapping the filter with a 
 		/// constant_score.
@@ -493,6 +529,7 @@ namespace Nest
 		/// This can sometimes be desired since boost value set on specific queries gets normalized, while this 
 		/// query boost factor does not.
 		/// </summary>
+		[Obsolete("Custom boost factor has been removed in 1.1")]
 		public BaseQuery CustomBoostFactor(Action<CustomBoostFactorQueryDescriptor<T>> selector)
 		{
 			var query = new CustomBoostFactorQueryDescriptor<T>();
@@ -504,6 +541,7 @@ namespace Nest
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
 		/// computation derived from other field values in the doc (numeric ones) using script expression
 		/// </summary>
+		[Obsolete("Custom score has been removed in 1.1")]
 		public BaseQuery CustomScore(Action<CustomScoreQueryDescriptor<T>> customScoreQuery)
 		{
 			var query = new CustomScoreQueryDescriptor<T>();

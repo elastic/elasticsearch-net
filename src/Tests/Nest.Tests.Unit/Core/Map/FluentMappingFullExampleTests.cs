@@ -125,6 +125,7 @@ namespace Nest.Tests.Unit.Core.Map
 					)
 					.String(s => s
 						.Name(p => p.Name)
+						
 						.IndexName("my_crazy_name_i_want_in_lucene")
 						.IncludeInAll()
 						.Index(FieldIndexOption.analyzed)
