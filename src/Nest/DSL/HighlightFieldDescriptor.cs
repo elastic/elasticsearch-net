@@ -48,6 +48,9 @@ namespace Nest
 		[JsonProperty("type")]
 		internal string _Type { get; set; }
 
+		[JsonProperty("force_source")]
+		internal bool? _ForceSource { get; set; }
+		
 		public HighlightFieldDescriptor<T> OnField(string field)
 		{
 			this._Field = field;
@@ -65,6 +68,11 @@ namespace Nest
 		public HighlightFieldDescriptor<T> TagsSchema(string schema = "styled")
 		{
 			this._TagsSchema = schema;
+			return this;
+		}
+		public HighlightFieldDescriptor<T> ForceSource(bool force = true)
+		{
+			this._ForceSource = force;
 			return this;
 		}
 		public HighlightFieldDescriptor<T> Type(string type)

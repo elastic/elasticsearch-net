@@ -493,6 +493,7 @@ namespace Nest
 		/// This can sometimes be desired since boost value set on specific queries gets normalized, while this 
 		/// query boost factor does not.
 		/// </summary>
+		[Obsolete("Custom boost factor has been removed in 1.1")]
 		public BaseQuery CustomBoostFactor(Action<CustomBoostFactorQueryDescriptor<T>> selector)
 		{
 			var query = new CustomBoostFactorQueryDescriptor<T>();
@@ -504,6 +505,7 @@ namespace Nest
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
 		/// computation derived from other field values in the doc (numeric ones) using script expression
 		/// </summary>
+		[Obsolete("Custom score has been removed in 1.1")]
 		public BaseQuery CustomScore(Action<CustomScoreQueryDescriptor<T>> customScoreQuery)
 		{
 			var query = new CustomScoreQueryDescriptor<T>();
