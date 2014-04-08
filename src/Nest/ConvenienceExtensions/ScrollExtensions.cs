@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Nest
 {
@@ -37,6 +37,26 @@ namespace Nest
 		public static Task<ISearchResponse<T>> ScrollAsync<T>(this IElasticClient client, string scrollTime, string scrollId) where T : class
 		{
 			return client.ScrollAsync<T>(s => s.Scroll(scrollTime).ScrollId(scrollId));
+		}
+		
+		/// <summary>
+		/// Deletes a registered scroll request on the cluster 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html
+		/// </summary>
+		/// <param name="selector">Specify the scroll id as well as request specific configuration</param>
+		public static IEmptyResponse ClearScroll(this IElasticClient client, string scrollId) 
+		{
+			return client.ClearScroll(s => s.ScrollId(scrollId));
+		}
+		
+		/// <summary>
+		/// Deletes a registered scroll request on the cluster 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html
+		/// </summary>
+		/// <param name="selector">Specify the scroll id as well as request specific configuration</param>
+		public static Task<IEmptyResponse> ClearScrollAsync(this IElasticClient client, string scrollId) 
+		{
+			return client.ClearScroll(s => s.ScrollId(scrollId));
 		}
 	}
 }
