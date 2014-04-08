@@ -138,6 +138,8 @@
     <Compile Include="Domain\Bulk\BulkUpdateBody.cs" />
     <Compile Include="Domain\Alias\IndexAliases.cs" />
     <Compile Include="Domain\Responses\IShardsOperationResponse.cs" />
+    <Compile Include="Domain\Responses\EmptyResponse.cs" />
+    <Compile Include="Domain\Responses\SuggestResponse.cs" />
     <Compile Include="DSL\Aggregations\AggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\BucketAggregationBaseDescriptor.cs" />
     <Compile Include="DSL\Aggregations\DateHistogramAggregationDescriptor.cs" />
@@ -164,6 +166,8 @@
     <Compile Include="DSL\Aggregations\SignificantTermsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\TermsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ValueCountAggregationDescriptor.cs" />
+    <Compile Include="DSL\ClearScrollDescriptor.cs" />
+    <Compile Include="DSL\SuggestDescriptor.cs" />
     <Compile Include="DSL\CloseIndexDescriptor.cs" />
     <Compile Include="DSL\ClusterStateDescriptor.cs" />
     <Compile Include="DSL\ClearCacheDescriptor.cs" />
@@ -220,6 +224,7 @@
     <Compile Include="DSL\ScrollDescriptor.cs" />
     <Compile Include="DSL\UpdateSettingsDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalPathDescriptor.cs" />
+    <Compile Include="ElasticClient-Suggest.cs" />
     <Compile Include="ElasticClient-RootNodeInfo.cs" />
     <Compile Include="ElasticClient-UpdateSettings.cs" />
     <Compile Include="DSL\ISimpleGetDescriptor.cs" />
@@ -668,6 +673,7 @@
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
     <Compile Include="Resolvers\Converters\AggregationConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsResponseConverter.cs" />
+    <Compile Include="Resolvers\Converters\SuggestResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\PropertyPathMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />
     <Compile Include="Resolvers\Converters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />

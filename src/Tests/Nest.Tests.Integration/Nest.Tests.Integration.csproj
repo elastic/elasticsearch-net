@@ -99,6 +99,8 @@
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
+    <Compile Include="Core\ClearScroll\ClearScrollTests.cs" />
+    <Compile Include="Core\Suggest\SuggestTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
     <Compile Include="DebugTests\MemoryUsageTests.cs" />
     <Compile Include="ElasticsearchConfiguration.cs" />
