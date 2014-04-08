@@ -20,33 +20,6 @@ namespace Nest
 		/// <returns>An IObservable you can subscribe to to listen to the progress of the reindexation process</returns>
 		IObservable<IReindexResponse<T>> Reindex<T>(Func<ReindexDescriptor<T>, ReindexDescriptor<T>> reindexSelector)
 			where T : class;
-		
-		/// <summary>
-		/// A search request can be scrolled by specifying the scroll parameter. 
-		/// <para>The scroll parameter is a time value parameter (for example: scroll=5m), 
-		/// indicating for how long the nodes that participate in the search will maintain relevant resources in
-		/// order to continue and support it.</para><para> 
-		/// This is very similar in its idea to opening a cursor against a database.</para>
-		/// <para> </para><para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html</para>
-		/// </summary>
-		/// <typeparam name="T">The type that represents the result hits</typeparam>
-		/// <param name="scrollSelector">A descriptor that describes the scroll operation</param>
-		/// <returns>A query response holding T hits as well as the ScrollId for the next scroll operation</returns>
-		ISearchResponse<T> Scroll<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
-			where T : class;
-		
-		/// <summary>
-		/// A search request can be scrolled by specifying the scroll parameter. 
-		/// <para>The scroll parameter is a time value parameter (for example: scroll=5m), 
-		/// indicating for how long the nodes that participate in the search will maintain relevant resources in
-		/// order to continue and support it.</para><para> 
-		/// This is very similar in its idea to opening a cursor against a database.</para>
-		/// </summary>
-		/// <typeparam name="T">The type that represents the result hits</typeparam>
-		/// <param name="scrollSelector">A descriptor that describes the scroll operation</param>
-		/// <returns>A query response holding T hits as well as the ScrollId for the next scroll operation</returns>
-		Task<ISearchResponse<T>> ScrollAsync<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
-			where T : class;
 
 		/// <summary>
 		/// The update API allows to update a document based on a script provided. 
@@ -990,5 +963,11 @@ namespace Nest
 		/// </summary>
 		/// <param name="selector">An optional descriptor that further describes the status operation, i.e limiting it to certain indices</param>
 		Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
+
+		/// <inheritdoc />
+		IEmptyResponse ClearScroll(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector);
+
+		/// <inheritdoc />
+		Task<IEmptyResponse> ClearScrollAsync(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector);
 	}
 }
