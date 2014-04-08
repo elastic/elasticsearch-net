@@ -167,6 +167,7 @@
     <Compile Include="DSL\Aggregations\TermsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ValueCountAggregationDescriptor.cs" />
     <Compile Include="DSL\ClearScrollDescriptor.cs" />
+    <Compile Include="DSL\PercolateCountDescriptor.cs" />
     <Compile Include="DSL\SuggestDescriptor.cs" />
     <Compile Include="DSL\CloseIndexDescriptor.cs" />
     <Compile Include="DSL\ClusterStateDescriptor.cs" />

@@ -3205,7 +3205,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/{type}/_percolate/count
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -3224,7 +3224,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/{type}/_percolate/count
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -3245,7 +3245,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/{type}/_percolate/count
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -3266,7 +3266,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate/count
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -3286,7 +3286,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate/count
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -3306,7 +3306,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate/count
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -3328,7 +3328,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate/count
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -3350,7 +3350,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/{type}/_percolate/count
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -3370,7 +3370,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> CountPercolate<T>(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> CountPercolate<T>(string index, string type, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/{type}/_percolate/count
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -3390,7 +3390,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/{type}/_percolate/count
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -3412,7 +3412,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/{type}/_percolate/count
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -3434,7 +3434,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate/count
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -3455,7 +3455,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> CountPercolate<T>(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> CountPercolate<T>(string index, string type, string id, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate/count
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -3476,7 +3476,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, string id, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate/count
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -3499,7 +3499,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, string id, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate/count
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -3522,7 +3522,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, string id, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a DELETE on /{index}/{type}/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.

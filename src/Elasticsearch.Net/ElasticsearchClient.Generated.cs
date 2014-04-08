@@ -5716,7 +5716,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5724,7 +5724,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -5751,7 +5751,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5759,7 +5759,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -5788,7 +5788,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5796,7 +5796,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -5825,7 +5825,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5833,7 +5833,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -5861,7 +5861,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5870,7 +5870,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -5898,7 +5898,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5907,7 +5907,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -5937,7 +5937,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5946,7 +5946,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -5976,7 +5976,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5985,7 +5985,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6013,7 +6013,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CountPercolate<T>(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> CountPercolate<T>(string index, string type, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6021,7 +6021,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6049,7 +6049,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6057,7 +6057,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6087,7 +6087,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6095,7 +6095,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6125,7 +6125,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6133,7 +6133,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6162,7 +6162,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CountPercolate<T>(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> CountPercolate<T>(string index, string type, string id, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6171,7 +6171,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6200,7 +6200,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, string id, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6209,7 +6209,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6240,7 +6240,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, string id, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6249,7 +6249,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6280,7 +6280,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, string id, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6289,7 +6289,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 

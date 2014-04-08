@@ -1094,13 +1094,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
-	public partial class CountPercolateDescriptor
+	public partial class PercolateCountDescriptor<T,K>
 	{
-		internal CountPercolateRequestParameters _QueryString = new CountPercolateRequestParameters(); 
+		internal PercolateCountRequestParameters _QueryString = new PercolateCountRequestParameters(); 
 
 
 		///<summary>A comma-separated list of specific routing values</summary>
-		public CountPercolateDescriptor Routing(params string[] routing)
+		public PercolateCountDescriptor<T,K> Routing(params string[] routing)
 		{
 			this._QueryString.Routing(routing);
 			return this;
@@ -1108,7 +1108,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public CountPercolateDescriptor Preference(string preference)
+		public PercolateCountDescriptor<T,K> Preference(string preference)
 		{
 			this._QueryString.Preference(preference);
 			return this;
@@ -1116,7 +1116,7 @@ namespace Nest
 		
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public CountPercolateDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public PercolateCountDescriptor<T,K> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this._QueryString.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -1124,7 +1124,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public CountPercolateDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public PercolateCountDescriptor<T,K> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this._QueryString.AllowNoIndices(allow_no_indices);
 			return this;
@@ -1132,7 +1132,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CountPercolateDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PercolateCountDescriptor<T,K> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._QueryString.ExpandWildcards(expand_wildcards);
 			return this;
@@ -1140,7 +1140,7 @@ namespace Nest
 		
 
 		///<summary>The index to count percolate the document into. Defaults to index.</summary>
-		public CountPercolateDescriptor PercolateIndex(string percolate_index)
+		public PercolateCountDescriptor<T,K> PercolateIndex(string percolate_index)
 		{
 			this._QueryString.PercolateIndex(percolate_index);
 			return this;
@@ -1148,7 +1148,7 @@ namespace Nest
 		
 
 		///<summary>The type to count percolate document into. Defaults to type.</summary>
-		public CountPercolateDescriptor PercolateType(string percolate_type)
+		public PercolateCountDescriptor<T,K> PercolateType(string percolate_type)
 		{
 			this._QueryString.PercolateType(percolate_type);
 			return this;
@@ -1156,7 +1156,7 @@ namespace Nest
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public CountPercolateDescriptor Version(int version)
+		public PercolateCountDescriptor<T,K> Version(int version)
 		{
 			this._QueryString.Version(version);
 			return this;
@@ -1164,7 +1164,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public CountPercolateDescriptor VersionType(VersionTypeOptions version_type)
+		public PercolateCountDescriptor<T,K> VersionType(VersionTypeOptions version_type)
 		{
 			this._QueryString.VersionType(version_type);
 			return this;

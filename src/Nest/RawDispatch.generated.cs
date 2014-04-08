@@ -738,7 +738,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CountPercolateDispatch<T>(ElasticsearchPathInfo<CountPercolateRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> CountPercolateDispatch<T>(ElasticsearchPathInfo<PercolateCountRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -765,7 +765,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CountPercolateDispatchAsync<T>(ElasticsearchPathInfo<CountPercolateRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> CountPercolateDispatchAsync<T>(ElasticsearchPathInfo<PercolateCountRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{

@@ -1228,12 +1228,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
-	public class CountPercolateRequestParameters : FluentRequestParameters<CountPercolateRequestParameters> 
+	public class PercolateCountRequestParameters : FluentRequestParameters<PercolateCountRequestParameters> 
 	{
 		
 		internal  string[] _routing { get; set; }
 		///<summary>A comma-separated list of specific routing values</summary>
-		public CountPercolateRequestParameters Routing(params string[] routing)
+		public PercolateCountRequestParameters Routing(params string[] routing)
 		{
 			this._routing = routing;
 			this.AddQueryString("routing", this._routing);
@@ -1243,7 +1243,7 @@ namespace Elasticsearch.Net
 		
 		internal string _preference { get; set; }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public CountPercolateRequestParameters Preference(string preference)
+		public PercolateCountRequestParameters Preference(string preference)
 		{
 			this._preference = preference;
 			this.AddQueryString("preference", this._preference);
@@ -1253,7 +1253,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _ignore_unavailable { get; set; }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public CountPercolateRequestParameters IgnoreUnavailable(bool ignore_unavailable)
+		public PercolateCountRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
 			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
@@ -1263,7 +1263,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _allow_no_indices { get; set; }
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public CountPercolateRequestParameters AllowNoIndices(bool allow_no_indices)
+		public PercolateCountRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
 			this.AddQueryString("allow_no_indices", this._allow_no_indices);
@@ -1273,7 +1273,7 @@ namespace Elasticsearch.Net
 		
 		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CountPercolateRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PercolateCountRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -1283,7 +1283,7 @@ namespace Elasticsearch.Net
 		
 		internal string _percolate_index { get; set; }
 		///<summary>The index to count percolate the document into. Defaults to index.</summary>
-		public CountPercolateRequestParameters PercolateIndex(string percolate_index)
+		public PercolateCountRequestParameters PercolateIndex(string percolate_index)
 		{
 			this._percolate_index = percolate_index;
 			this.AddQueryString("percolate_index", this._percolate_index);
@@ -1293,7 +1293,7 @@ namespace Elasticsearch.Net
 		
 		internal string _percolate_type { get; set; }
 		///<summary>The type to count percolate document into. Defaults to type.</summary>
-		public CountPercolateRequestParameters PercolateType(string percolate_type)
+		public PercolateCountRequestParameters PercolateType(string percolate_type)
 		{
 			this._percolate_type = percolate_type;
 			this.AddQueryString("percolate_type", this._percolate_type);
@@ -1303,7 +1303,7 @@ namespace Elasticsearch.Net
 		
 		internal int _version { get; set; }
 		///<summary>Explicit version number for concurrency control</summary>
-		public CountPercolateRequestParameters Version(int version)
+		public PercolateCountRequestParameters Version(int version)
 		{
 			this._version = version;
 			this.AddQueryString("version", this._version);
@@ -1313,7 +1313,7 @@ namespace Elasticsearch.Net
 		
 		internal VersionTypeOptions _version_type { get; set; }
 		///<summary>Specific version type</summary>
-		public CountPercolateRequestParameters VersionType(VersionTypeOptions version_type)
+		public PercolateCountRequestParameters VersionType(VersionTypeOptions version_type)
 		{
 			this._version_type = version_type;
 			this.AddQueryString("version_type", this._version_type);

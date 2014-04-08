@@ -55,24 +55,21 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public IPercolateResponse Percolate<T>(T @object,
-			Func<PercolateDescriptor<T, T>, PercolateDescriptor<T, T>> percolateSelector = null)
+		public IPercolateResponse Percolate<T>(T @object, Func<PercolateDescriptor<T, T>, PercolateDescriptor<T, T>> percolateSelector = null)
 			where T : class
 		{
 			return this.Percolate<T, T>(@object, percolateSelector);
 		}
 
 		/// <inheritdoc />
-		public Task<IPercolateResponse> PercolateAsync<T>(T @object,
-			Func<PercolateDescriptor<T, T>, PercolateDescriptor<T, T>> percolateSelector = null)
+		public Task<IPercolateResponse> PercolateAsync<T>(T @object, Func<PercolateDescriptor<T, T>, PercolateDescriptor<T, T>> percolateSelector = null)
 			where T : class
 		{
 			return this.PercolateAsync<T, T>(@object, percolateSelector);
 		}
 
 		/// <inheritdoc />
-		public IPercolateResponse Percolate<T, K>(K @object,
-			Func<PercolateDescriptor<T, K>, PercolateDescriptor<T, K>> percolateSelector = null)
+		public IPercolateResponse Percolate<T, K>(K @object, Func<PercolateDescriptor<T, K>, PercolateDescriptor<T, K>> percolateSelector = null)
 			where T : class
 			where K : class
 		{
@@ -84,8 +81,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IPercolateResponse> PercolateAsync<T, K>(K @object,
-			Func<PercolateDescriptor<T, K>, PercolateDescriptor<T, K>> percolateSelector = null)
+		public Task<IPercolateResponse> PercolateAsync<T, K>(K @object, Func<PercolateDescriptor<T, K>, PercolateDescriptor<T, K>> percolateSelector = null)
 			where T : class
 			where K : class
 		{
@@ -93,6 +89,44 @@ namespace Nest
 			return this.DispatchAsync<PercolateDescriptor<T, K>, PercolateRequestParameters, PercolateResponse, IPercolateResponse>(
 				s => percolateSelector(s.Object(@object)),
 				(p, d) => this.RawDispatch.PercolateDispatchAsync<PercolateResponse>(p, d)
+			);
+		}
+
+		/// <inheritdoc />
+		public IPercolateCountResponse PercolateCount<T>(T @object, Func<PercolateCountDescriptor<T, T>, PercolateCountDescriptor<T, T>> percolateSelector = null)
+			where T : class
+		{
+			return this.PercolateCount<T, T>(@object, percolateSelector);
+		}
+
+		/// <inheritdoc />
+		public Task<IPercolateCountResponse> PercolateCountAsync<T>(T @object, Func<PercolateCountDescriptor<T, T>, PercolateCountDescriptor<T, T>> percolateSelector = null)
+			where T : class
+		{
+			return this.PercolateCountAsync<T, T>(@object, percolateSelector);
+		}
+		
+		/// <inheritdoc />
+		public IPercolateCountResponse PercolateCount<T, K>(K @object, Func<PercolateCountDescriptor<T, K>, PercolateCountDescriptor<T, K>> percolateSelector = null)
+			where T : class
+			where K : class
+		{
+			percolateSelector = percolateSelector ?? (s => s);
+			return this.Dispatch<PercolateCountDescriptor<T, K>, PercolateCountRequestParameters, PercolateCountResponse>(
+				s => percolateSelector(s.Object(@object)),
+				(p, d) => this.RawDispatch.CountPercolateDispatch<PercolateCountResponse>(p, d)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IPercolateCountResponse> PercolateCountAsync<T, K>(K @object, Func<PercolateCountDescriptor<T, K>, PercolateCountDescriptor<T, K>> percolateSelector = null)
+			where T : class
+			where K : class
+		{
+			percolateSelector = percolateSelector ?? (s => s);
+			return this.DispatchAsync<PercolateCountDescriptor<T, K>, PercolateCountRequestParameters, PercolateCountResponse, IPercolateCountResponse>(
+				s => percolateSelector(s.Object(@object)),
+				(p, d) => this.RawDispatch.CountPercolateDispatchAsync<PercolateCountResponse>(p, d)
 			);
 		}
 	}
