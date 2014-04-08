@@ -13,7 +13,7 @@ namespace Nest
 {
 	[DescriptorFor("Suggest")]
 	public partial class SuggestDescriptor<T> : 
-		IndicesOptionalPathDescriptor<SuggestDescriptor<T>, SuggestRequestParameters>
+		IndicesOptionalExplicitAllPathDescriptor<SuggestDescriptor<T>, SuggestRequestParameters>
 		, IPathInfo<SuggestRequestParameters>
 		where T : class
 	{
