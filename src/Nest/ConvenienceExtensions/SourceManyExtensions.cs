@@ -45,7 +45,7 @@ namespace Nest
 		/// <param name="ids">A list of ids as int</param>
 		/// <param name="index">Optionally override the default inferred indexname for T</param>
 		/// <param name="type">Optionally override the default inferred indexname for T</param>
-		public static IEnumerable<T> SourceMany<T>(this IElasticClient client, IEnumerable<int> ids, string index = null, string type = null)
+		public static IEnumerable<T> SourceMany<T>(this IElasticClient client, IEnumerable<long> ids, string index = null, string type = null)
 			where T : class
 		{
 			return client.SourceMany<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), index, type);
@@ -86,7 +86,7 @@ namespace Nest
 		/// <param name="ids">A list of ids as int</param>
 		/// <param name="index">Optionally override the default inferred indexname for T</param>
 		/// <param name="type">Optionally override the default inferred indexname for T</param>
-		public static Task<IEnumerable<T>> SourceManyAsync<T>(this IElasticClient client, IEnumerable<int> ids, string index = null, string type = null)
+		public static Task<IEnumerable<T>> SourceManyAsync<T>(this IElasticClient client, IEnumerable<long> ids, string index = null, string type = null)
 			where T : class
 		{
 			return client.SourceManyAsync<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), index, type);

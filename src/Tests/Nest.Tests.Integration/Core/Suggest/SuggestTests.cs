@@ -17,6 +17,7 @@ namespace Nest.Tests.Integration.Core.Suggest
 			var wrongCountry = country + "x";
 
 			var suggestResults = _client.Suggest<ElasticsearchProject>(s => s
+				.Index<ElasticsearchProject>()
 				.Term("mySuggest", m => m
 					.SuggestMode(SuggestMode.Always)
 					.Text(wrongCountry)

@@ -75,7 +75,7 @@ namespace Nest
 		/// <summary>
 		/// Manually set the id for the newly created object
 		/// </summary>
-		public BulkUpdateDescriptor<T, K> Id(int id)
+		public BulkUpdateDescriptor<T, K> Id(long id)
 		{
 			return this.Id(id.ToString(CultureInfo.InvariantCulture));
 		}

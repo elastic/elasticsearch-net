@@ -4,7 +4,7 @@ namespace Nest
 {
 	/// <summary>
 	/// Provides convenience extension methods that make it easier to get the _source for 
-	/// a given document given a string or int id.
+	/// a given document given a string or long id.
 	/// </summary>
 	public static class SourceExtensions
 	{
@@ -34,7 +34,7 @@ namespace Nest
 		/// <param name="id">id as int of the document we want the _source from</param>
 		/// <param name="index">Optionally override the inferred index name for T</param>
 		/// <param name="type">Optionally override the inferred type name for T</param>
-		public static T Source<T>(this IElasticClient client, int id, string index = null, string type = null)
+		public static T Source<T>(this IElasticClient client, long id, string index = null, string type = null)
 			where T : class
 		{
 			return client.Source<T>(s => s.Id(id).Index(index).Type(type));
@@ -66,7 +66,7 @@ namespace Nest
 		/// <param name="id">id as int of the document we want the _source from</param>
 		/// <param name="index">Optionally override the inferred index name for T</param>
 		/// <param name="type">Optionally override the inferred type name for T</param>
-		public static Task<T> SourceAsync<T>(this IElasticClient client, int id, string index = null, string type = null)
+		public static Task<T> SourceAsync<T>(this IElasticClient client, long id, string index = null, string type = null)
 			where T : class
 		{
 			return client.SourceAsync<T>(s => s.Id(id).Index(index).Type(type));

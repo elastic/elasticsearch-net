@@ -36,7 +36,7 @@ namespace Nest
 			this._Id = id;
 			return this;
 		}
-		public ExternalFieldDeclarationDescriptor<T> Id(int id)
+		public ExternalFieldDeclarationDescriptor<T> Id(long id)
 		{
 			this._Id = id.ToString(CultureInfo.InvariantCulture);
 			return this;

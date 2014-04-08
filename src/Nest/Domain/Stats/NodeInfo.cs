@@ -103,7 +103,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "refresh_interval")]
 		public int RefreshInterval { get; internal set; }
 		[JsonProperty(PropertyName = "id")]
-		public int Id { get; internal set; }
+		public long Id { get; internal set; }
 		[JsonProperty(PropertyName = "max_file_descriptors")]
 		public int MaxFileDescriptors { get; internal set; }
 	}
