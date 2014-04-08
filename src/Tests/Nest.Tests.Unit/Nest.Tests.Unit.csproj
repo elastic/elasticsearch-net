@@ -175,6 +175,7 @@
     <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />
     <Compile Include="Search\Query\Modes\ConditionlessQueryJson.cs" />
     <Compile Include="Search\Query\Singles\FunctionScoreQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeQueryJson.cs" />
     <Compile Include="Search\Query\Singles\SimpleQueryString\SimpleQueryStringQueryJson.cs" />
     <Compile Include="Search\Query\Singles\RegexpQueryJson.cs" />
     <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
@@ -496,6 +497,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\QueriesInQueries\FilteredQueryConditionless.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeFull.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json">
