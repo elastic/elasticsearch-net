@@ -10907,7 +10907,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesSnapshotIndexForAll<T>(Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesSnapshotIndexForAll<T>(Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_gateway/snapshot
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -10924,7 +10924,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesSnapshotIndexForAllAsync<T>(Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesSnapshotIndexForAllAsync<T>(Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_gateway/snapshot
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -10943,7 +10943,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesSnapshotIndexForAll(Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesSnapshotIndexForAll(Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_gateway/snapshot
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -10962,7 +10962,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesSnapshotIndexForAllAsync(Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesSnapshotIndexForAllAsync(Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_gateway/snapshot
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -10980,7 +10980,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesSnapshotIndex<T>(string index, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesSnapshotIndex<T>(string index, Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_gateway/snapshot
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -10998,7 +10998,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesSnapshotIndexAsync<T>(string index, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesSnapshotIndexAsync<T>(string index, Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_gateway/snapshot
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -11018,7 +11018,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesSnapshotIndex(string index, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesSnapshotIndex(string index, Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_gateway/snapshot
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -11038,7 +11038,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesSnapshotIndexAsync(string index, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesSnapshotIndexAsync(string index, Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_stats
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -16418,7 +16418,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> SnapshotCreate<T>(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> SnapshotCreate<T>(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -16438,7 +16438,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> SnapshotCreateAsync<T>(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> SnapshotCreateAsync<T>(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -16460,7 +16460,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> SnapshotCreate(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> SnapshotCreate(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -16482,7 +16482,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateAsync(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateAsync(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -16502,7 +16502,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> SnapshotCreatePost<T>(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> SnapshotCreatePost<T>(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -16522,7 +16522,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> SnapshotCreatePostAsync<T>(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> SnapshotCreatePostAsync<T>(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -16544,7 +16544,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> SnapshotCreatePost(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> SnapshotCreatePost(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -16566,7 +16566,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreatePostAsync(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreatePostAsync(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -16585,7 +16585,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> SnapshotCreateRepository<T>(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> SnapshotCreateRepository<T>(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -16604,7 +16604,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryAsync<T>(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryAsync<T>(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -16625,7 +16625,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> SnapshotCreateRepository(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> SnapshotCreateRepository(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -16646,7 +16646,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateRepositoryAsync(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateRepositoryAsync(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_snapshot/{repository}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -16665,7 +16665,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> SnapshotCreateRepositoryPost<T>(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> SnapshotCreateRepositoryPost<T>(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_snapshot/{repository}
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -16684,7 +16684,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryPostAsync<T>(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryPostAsync<T>(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_snapshot/{repository}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -16705,7 +16705,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> SnapshotCreateRepositoryPost(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> SnapshotCreateRepositoryPost(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_snapshot/{repository}
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -16726,7 +16726,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateRepositoryPostAsync(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateRepositoryPostAsync(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a DELETE on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -16824,7 +16824,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> SnapshotDeleteRepository<T>(string repository, Func<SnapshotDeleteRepositoryRequestParameters, SnapshotDeleteRepositoryRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> SnapshotDeleteRepository<T>(string repository, Func<DeleteRepositoryRequestParameters, DeleteRepositoryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a DELETE on /_snapshot/{repository}
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -16842,7 +16842,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryAsync<T>(string repository, Func<SnapshotDeleteRepositoryRequestParameters, SnapshotDeleteRepositoryRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryAsync<T>(string repository, Func<DeleteRepositoryRequestParameters, DeleteRepositoryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a DELETE on /_snapshot/{repository}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -16862,7 +16862,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> SnapshotDeleteRepository(string repository, Func<SnapshotDeleteRepositoryRequestParameters, SnapshotDeleteRepositoryRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> SnapshotDeleteRepository(string repository, Func<DeleteRepositoryRequestParameters, DeleteRepositoryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a DELETE on /_snapshot/{repository}
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -16882,7 +16882,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> SnapshotDeleteRepositoryAsync(string repository, Func<SnapshotDeleteRepositoryRequestParameters, SnapshotDeleteRepositoryRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> SnapshotDeleteRepositoryAsync(string repository, Func<DeleteRepositoryRequestParameters, DeleteRepositoryRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.

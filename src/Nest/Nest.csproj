@@ -131,6 +131,17 @@
     <Compile Include="Domain\ICustomJson.cs" />
     <Compile Include="Domain\PropertyNameMarker.cs" />
     <Compile Include="Domain\PropertyPathMarker.cs" />
+    <Compile Include="Domain\Repository\Snapshot.cs" />
+    <Compile Include="Domain\Responses\SnapshotResponse.cs" />
+    <Compile Include="DSL\SnapshotDescriptor.cs" />
+    <Compile Include="DSL\DeleteRepositoryDescriptor.cs" />
+    <Compile Include="DSL\Paths\RepositorySnapshotPathDescriptor.cs" />
+    <Compile Include="DSL\Repository\HdfsRepositoryDescriptor.cs" />
+    <Compile Include="DSL\Repository\AzureRepositoryDescriptor.cs" />
+    <Compile Include="DSL\Repository\S3RepositoryDescriptor.cs" />
+    <Compile Include="DSL\Repository\FileSystemRepositoryDescriptor.cs" />
+    <Compile Include="Domain\Repository\IRepository.cs" />
+    <Compile Include="DSL\Repository\ReadOnlyUrlRepositoryDescriptor.cs" />
     <Compile Include="Domain\RequestParametersExtensions.Generated.cs" />
     <Compile Include="Domain\Responses\GetAliasesResponse.cs" />
     <Compile Include="Domain\Responses\GetMappingResponse.cs" />
@@ -167,7 +178,9 @@
     <Compile Include="DSL\Aggregations\TermsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ValueCountAggregationDescriptor.cs" />
     <Compile Include="DSL\ClearScrollDescriptor.cs" />
+    <Compile Include="DSL\CreateRepositoryDescriptor.cs" />
     <Compile Include="DSL\DocumentExistsDescriptor.cs" />
+    <Compile Include="DSL\Paths\RepositoryPathDescriptor.cs" />
     <Compile Include="DSL\PercolateCountDescriptor.cs" />
     <Compile Include="DSL\Query\CommonTermsQueryDescriptor.cs" />
     <Compile Include="DSL\SuggestDescriptor.cs" />
@@ -219,7 +232,7 @@
     <Compile Include="DSL\SegmentsDescriptor.cs" />
     <Compile Include="DSL\RefreshDescriptor.cs" />
     <Compile Include="DSL\OptimizeDescriptor.cs" />
-    <Compile Include="DSL\SnapshotDescriptor.cs" />
+    <Compile Include="DSL\GatewaySnapshotDescriptor.cs" />
     <Compile Include="DSL\IActAsQuery.cs" />
     <Compile Include="DSL\OpenIndexDescriptor.cs" />
     <Compile Include="DSL\FluentDictionary.cs" />
@@ -228,6 +241,7 @@
     <Compile Include="DSL\UpdateSettingsDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalPathDescriptor.cs" />
     <Compile Include="ElasticClient-Exists.cs" />
+    <Compile Include="ElasticClient-Repository.cs" />
     <Compile Include="ElasticClient-Suggest.cs" />
     <Compile Include="ElasticClient-RootNodeInfo.cs" />
     <Compile Include="ElasticClient-UpdateSettings.cs" />
@@ -608,7 +622,7 @@
     <Compile Include="Domain\Stats\StatsContainer.cs" />
     <Compile Include="Domain\Stats\Stats.cs" />
     <Compile Include="ElasticClient-Stats.cs" />
-    <Compile Include="Domain\Responses\SettingsOperationResponse.cs" />
+    <Compile Include="Domain\Responses\AcknowledgedResponse.cs" />
     <Compile Include="Domain\Responses\IndexSettingsResponse.cs" />
     <Compile Include="ElasticClient-MappingIndex.cs" />
     <Compile Include="ElasticClient-ClearCache.cs" />
@@ -773,6 +787,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

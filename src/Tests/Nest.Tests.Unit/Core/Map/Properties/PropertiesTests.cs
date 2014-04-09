@@ -81,7 +81,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Boolean(s => s
-						.Name(p => p.BoolValue) //reminder .Name(string) exists too!
+						.Name(p => p.BoolValue) //reminder .Repository(string) exists too!
 						.Boost(1.4)
 						.IncludeInAll()
 						.Index()

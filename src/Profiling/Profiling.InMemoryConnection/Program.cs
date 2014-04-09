@@ -27,7 +27,7 @@ namespace Profiling.InMemoryConnection
 			{
 				for (int i = calls; i > 0; i--)
 				{
-					client.Index(new Doc() {Id = "asdasd" + i, Name = "Name"});
+					client.Index(new Doc() {Id = "asdasd" + i, Name = "Repository"});
 				}
 			}
 			Console.WriteLine("done");

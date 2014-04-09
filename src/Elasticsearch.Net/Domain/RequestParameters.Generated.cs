@@ -3648,12 +3648,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-gateway-snapshot.html
 	///</pre>
 	///</summary>
-	public class SnapshotRequestParameters : FluentRequestParameters<SnapshotRequestParameters> 
+	public class GatewaySnapshotRequestParameters : FluentRequestParameters<GatewaySnapshotRequestParameters> 
 	{
 		
 		internal bool _ignore_unavailable { get; set; }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SnapshotRequestParameters IgnoreUnavailable(bool ignore_unavailable)
+		public GatewaySnapshotRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
 			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
@@ -3663,7 +3663,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _allow_no_indices { get; set; }
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SnapshotRequestParameters AllowNoIndices(bool allow_no_indices)
+		public GatewaySnapshotRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
 			this.AddQueryString("allow_no_indices", this._allow_no_indices);
@@ -3673,7 +3673,7 @@ namespace Elasticsearch.Net
 		
 		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SnapshotRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GatewaySnapshotRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -4958,12 +4958,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class SnapshotCreateRequestParameters : FluentRequestParameters<SnapshotCreateRequestParameters> 
+	public class SnapshotRequestParameters : FluentRequestParameters<SnapshotRequestParameters> 
 	{
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotCreateRequestParameters MasterTimeout(string master_timeout)
+		public SnapshotRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
 			this.AddQueryString("master_timeout", this._master_timeout);
@@ -4973,7 +4973,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _wait_for_completion { get; set; }
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public SnapshotCreateRequestParameters WaitForCompletion(bool wait_for_completion)
+		public SnapshotRequestParameters WaitForCompletion(bool wait_for_completion)
 		{
 			this._wait_for_completion = wait_for_completion;
 			this.AddQueryString("wait_for_completion", this._wait_for_completion);
@@ -4988,12 +4988,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class SnapshotCreateRepositoryRequestParameters : FluentRequestParameters<SnapshotCreateRepositoryRequestParameters> 
+	public class CreateRepositoryRequestParameters : FluentRequestParameters<CreateRepositoryRequestParameters> 
 	{
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotCreateRepositoryRequestParameters MasterTimeout(string master_timeout)
+		public CreateRepositoryRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
 			this.AddQueryString("master_timeout", this._master_timeout);
@@ -5003,7 +5003,7 @@ namespace Elasticsearch.Net
 		
 		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
-		public SnapshotCreateRepositoryRequestParameters Timeout(string timeout)
+		public CreateRepositoryRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
 			this.AddQueryString("timeout", this._timeout);
@@ -5038,12 +5038,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class SnapshotDeleteRepositoryRequestParameters : FluentRequestParameters<SnapshotDeleteRepositoryRequestParameters> 
+	public class DeleteRepositoryRequestParameters : FluentRequestParameters<DeleteRepositoryRequestParameters> 
 	{
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotDeleteRepositoryRequestParameters MasterTimeout(string master_timeout)
+		public DeleteRepositoryRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
 			this.AddQueryString("master_timeout", this._master_timeout);
@@ -5053,7 +5053,7 @@ namespace Elasticsearch.Net
 		
 		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
-		public SnapshotDeleteRepositoryRequestParameters Timeout(string timeout)
+		public DeleteRepositoryRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
 			this.AddQueryString("timeout", this._timeout);

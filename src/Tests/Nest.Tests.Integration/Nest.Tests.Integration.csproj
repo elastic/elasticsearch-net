@@ -99,6 +99,7 @@
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
+    <Compile Include="Core\Repository\CreateRepositoryTests.cs" />
     <Compile Include="Core\ClearScroll\ClearScrollTests.cs" />
     <Compile Include="Core\Exists\DocumentExistsTests.cs" />
     <Compile Include="Core\Suggest\SuggestTests.cs" />

@@ -108,14 +108,14 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html
 		/// </summary>
 		/// <param name="updateSettingsSelector">A descriptor that strongly types all the updateable settings</param>
-		ISettingsOperationResponse UpdateSettings( Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector); 
+		IAcknowledgedResponse UpdateSettings( Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector); 
 		
 		/// <summary>
 		/// Change specific index level settings in real time. Note not all index settings CAN be updated.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html
 		/// </summary>
 		/// <param name="updateSettingsSelector">A descriptor that strongly types all the updateable settings</param>
-		Task<ISettingsOperationResponse> UpdateSettingsAsync(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector);
+		Task<IAcknowledgedResponse> UpdateSettingsAsync(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector);
 
 		/// <summary>
 		/// The validate API allows a user to validate a potentially expensive query without executing it.
@@ -183,7 +183,7 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-gateway-snapshot.html
 		/// </summary>
 		/// <param name="snapShotSelector">A descriptor that describes the parameters for the gateway snapshot operation</param>
-		IShardsOperationResponse GatewaySnapshot(Func<SnapshotDescriptor, SnapshotDescriptor> snapShotSelector = null);
+		IShardsOperationResponse GatewaySnapshot(Func<GatewaySnapshotDescriptor, GatewaySnapshotDescriptor> snapShotSelector = null);
 		
 		/// <summary>
 		/// The gateway snapshot API allows to explicitly perform a snapshot through the gateway of one or more indices (backup them). 
@@ -194,7 +194,7 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-gateway-snapshot.html
 		/// </summary>
 		/// <param name="snapShotSelector">A descriptor that describes the parameters for the gateway snapshot operation</param>
-		Task<IShardsOperationResponse> GatewaySnapshotAsync(Func<SnapshotDescriptor, SnapshotDescriptor> snapShotSelector = null);
+		Task<IShardsOperationResponse> GatewaySnapshotAsync(Func<GatewaySnapshotDescriptor, GatewaySnapshotDescriptor> snapShotSelector = null);
 		
 		/// <summary>
 		/// The refresh API allows to explicitly refresh one or more index, making all operations performed since the last refresh 
@@ -1074,5 +1074,20 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IExistsResponse> DocumentExistsAsync<T>(Func<DocumentExistsDescriptor<T>, DocumentExistsDescriptor<T>> existsSelector)
 			where T : class;
+
+		/// <inheritdoc />
+		IAcknowledgedResponse CreateRepository(string name, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
+
+		/// <inheritdoc />
+		Task<IAcknowledgedResponse> CreateRepositoryAsync(string name, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
+
+		/// <inheritdoc />
+		IAcknowledgedResponse DeleteRepository(string name, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IAcknowledgedResponse> DeleteRepositoryAsync(string name, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
+
+		ISnapshotResponse Snapshot(string name, string repository, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
+		Task<ISnapshotResponse> SnapshotAsync(string name, string repository, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
 	}
 }

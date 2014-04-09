@@ -12,36 +12,46 @@ using Nest.Resolvers;
 namespace Nest
 {
 	/// <summary>
-	/// Provides a base for descriptors that need to describe a path in the form of 
+	/// Provides a base for descriptors that need to describe a path that contains a
 	/// <pre>
-	///	/{name}
+	///	{repository}
 	/// </pre>
-	/// name is mandatory.
+	/// routing value
 	/// </summary>
-	public class NamePathDescriptor<P, K> : BasePathDescriptor<P>
-		where P : NamePathDescriptor<P, K> 
+	public class RepositorySnapshotPathDescriptor<P, K> : BasePathDescriptor<P>
+		where P : RepositorySnapshotPathDescriptor<P, K> 
 		where K : FluentRequestParameters<K>, new()
 	{
-		internal string _Name { get; set; }
+		internal string _Repository { get; set; }
+		internal string _Snapshot { get; set; }
 
 		/// <summary>
-		/// Specify the {name} part of the operation
+		/// Specify the name of the repository we are targeting
 		/// </summary>
-		public P Name(string name)
+		public P Repository(string repositoryName)
 		{
-			this._Name = name;
+			this._Repository = repositoryName;
 			return (P)this;
 		}
 
+		public P Snapshot(string snapshotName)
+		{
+			this._Snapshot = snapshotName;
+			return (P)this;
+		}
 		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
 			where K : FluentRequestParameters<K>, new()
 		{
-			if (this._Name.IsNullOrEmpty())
+			if (this._Repository.IsNullOrEmpty())
 				throw new DslException("missing Repository()");
+			if (this._Snapshot.IsNullOrEmpty())
+				throw new DslException("missing Snapshot()");
 
 			var pathInfo = new ElasticsearchPathInfo<K>()
 			{
-				Name = this._Name
+				Repository = this._Repository,
+				Snapshot = this._Snapshot
+
 			};
 			pathInfo.RequestParameters = queryString ?? new K();
 			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);

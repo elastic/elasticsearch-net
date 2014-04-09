@@ -3328,13 +3328,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-gateway-snapshot.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotDescriptor
+	public partial class GatewaySnapshotDescriptor
 	{
-		internal SnapshotRequestParameters _QueryString = new SnapshotRequestParameters(); 
+		internal GatewaySnapshotRequestParameters _QueryString = new GatewaySnapshotRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SnapshotDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public GatewaySnapshotDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this._QueryString.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -3342,7 +3342,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SnapshotDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public GatewaySnapshotDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
 			this._QueryString.AllowNoIndices(allow_no_indices);
 			return this;
@@ -3350,7 +3350,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SnapshotDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GatewaySnapshotDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._QueryString.ExpandWildcards(expand_wildcards);
 			return this;
@@ -4601,13 +4601,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotCreateDescriptor
+	public partial class SnapshotDescriptor
 	{
-		internal SnapshotCreateRequestParameters _QueryString = new SnapshotCreateRequestParameters(); 
+		internal SnapshotRequestParameters _QueryString = new SnapshotRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotCreateDescriptor MasterTimeout(string master_timeout)
+		public SnapshotDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
@@ -4615,7 +4615,7 @@ namespace Nest
 		
 
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public SnapshotCreateDescriptor WaitForCompletion(bool wait_for_completion = true)
+		public SnapshotDescriptor WaitForCompletion(bool wait_for_completion = true)
 		{
 			this._QueryString.WaitForCompletion(wait_for_completion);
 			return this;
@@ -4630,13 +4630,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotCreateRepositoryDescriptor
+	public partial class CreateRepositoryDescriptor
 	{
-		internal SnapshotCreateRepositoryRequestParameters _QueryString = new SnapshotCreateRepositoryRequestParameters(); 
+		internal CreateRepositoryRequestParameters _QueryString = new CreateRepositoryRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotCreateRepositoryDescriptor MasterTimeout(string master_timeout)
+		public CreateRepositoryDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
@@ -4644,7 +4644,7 @@ namespace Nest
 		
 
 		///<summary>Explicit operation timeout</summary>
-		public SnapshotCreateRepositoryDescriptor Timeout(string timeout)
+		public CreateRepositoryDescriptor Timeout(string timeout)
 		{
 			this._QueryString.Timeout(timeout);
 			return this;
@@ -4680,13 +4680,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotDeleteRepositoryDescriptor
+	public partial class DeleteRepositoryDescriptor
 	{
-		internal SnapshotDeleteRepositoryRequestParameters _QueryString = new SnapshotDeleteRepositoryRequestParameters(); 
+		internal DeleteRepositoryRequestParameters _QueryString = new DeleteRepositoryRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotDeleteRepositoryDescriptor MasterTimeout(string master_timeout)
+		public DeleteRepositoryDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
@@ -4694,7 +4694,7 @@ namespace Nest
 		
 
 		///<summary>Explicit operation timeout</summary>
-		public SnapshotDeleteRepositoryDescriptor Timeout(string timeout)
+		public DeleteRepositoryDescriptor Timeout(string timeout)
 		{
 			this._QueryString.Timeout(timeout);
 			return this;

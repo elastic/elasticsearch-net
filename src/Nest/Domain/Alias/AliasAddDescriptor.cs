@@ -49,7 +49,7 @@ namespace Nest
 			this.Add.SearchRouting = searchRouting;
 			return this;
 		}
-		public AliasAddDescriptor Filter<T>(Func<FilterDescriptor<T>, FilterBase> filterSelector)
+		public AliasAddDescriptor Filter<T>(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
 			where T : class
 		{
 			filterSelector.ThrowIfNull("filterSelector");
