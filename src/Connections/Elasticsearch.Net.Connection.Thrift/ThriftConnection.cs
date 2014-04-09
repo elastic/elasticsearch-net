@@ -274,13 +274,13 @@ namespace Elasticsearch.Net.Connection.Thrift
 					if (result.Status == Status.OK || result.Status == Status.CREATED || result.Status == Status.ACCEPTED)
 					{
 						var response = ElasticsearchResponse<Stream>.Create(
-							this._connectionSettings, (int)result.Status, method, path, requestData, new MemoryStream(result.Body));
+							this._connectionSettings, (int)result.Status, method, path, requestData, new MemoryStream(result.Body ?? new byte[0]));
 						return response;
 					}
 					else
 					{
 						var response = ElasticsearchResponse<Stream>.Create(
-							this._connectionSettings, (int)result.Status, method, path, requestData, new MemoryStream(result.Body));
+							this._connectionSettings, (int)result.Status, method, path, requestData, new MemoryStream(result.Body ?? new byte[0]));
 						return response;
 					}
 				}
