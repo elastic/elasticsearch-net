@@ -70,7 +70,7 @@ namespace Nest.Tests.Integration.Reproduce
 			var maxNest = timings.Max(t => t.NestTook);
 
 			maxElasticsearch.Should().BeLessThan(20);
-			maxNest.Should().BeLessThan(30);
+			maxNest.Should().BeLessThan(50);
 
 			var plotElasticsearch = timings.Select(p => p.ElasticsearchTook).ToArray();
 			var plotNest = timings.Select(p => p.NestTook).ToArray();
