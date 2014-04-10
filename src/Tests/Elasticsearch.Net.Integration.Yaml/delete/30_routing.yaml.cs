@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 
 
-namespace Elasticsearch.Net.Integration.Yaml.Delete4
+namespace Elasticsearch.Net.Integration.Yaml.Delete6
 {
-	public partial class Delete4YamlTests
+	public partial class Delete6YamlTests
 	{	
 
 

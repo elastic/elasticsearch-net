@@ -35,6 +35,11 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetFieldMapping2
 				};
 				this.Do(()=> _client.IndicesCreate("test_index", _body));
 
+				//do cluster.health 
+				this.Do(()=> _client.ClusterHealth(nv=>nv
+					.AddQueryString("wait_for_status", @"yellow")
+				));
+
 				//do indices.get_field_mapping 
 				this.Do(()=> _client.IndicesGetFieldMapping("test_index", "test_type", "not_existent"));
 
