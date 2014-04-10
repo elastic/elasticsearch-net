@@ -133,6 +133,8 @@ namespace CodeGeneration.YamlTestsRunner
 			//needs some recursive regex love perhaps in the future
 			anon = Regex.Replace(anon, @"(index|discovery)\.([^=]+)=([^\r\n,]+)", " { \"$1.$2\", $3 }", RegexOptions.Multiline);
 			anon = Regex.Replace(anon, @"new \{(\r\n\s+\{ "")(index|discovery)", "new Dictionary<string, object> {$1$2", RegexOptions.Multiline);
+			
+			anon = Regex.Replace(anon, @"= (""?$)(.+)(""| )", "= $1", RegexOptions.Multiline);
 			return anon;
 		}
 

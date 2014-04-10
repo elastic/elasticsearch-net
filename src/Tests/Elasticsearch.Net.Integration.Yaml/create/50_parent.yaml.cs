@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 
 
-namespace Elasticsearch.Net.Integration.Yaml.Create6
+namespace Elasticsearch.Net.Integration.Yaml.Create8
 {
-	public partial class Create6YamlTests
+	public partial class Create8YamlTests
 	{	
 
 

@@ -277,6 +277,13 @@ namespace Elasticsearch.Net.Integration.Yaml
 				var v = Convert.ToDecimal(value);
 				Assert.AreEqual(v,i);
 			}
+			else if (o is bool)
+			{
+				bool vb;
+				if (!bool.TryParse(value.ToString().ToCamelCase(), out vb))
+					Assert.Fail(value.ToString() + " is not a bool");
+				Assert.AreEqual(o, vb);
+			}
 			else if (o is double)
 			{
 				var i = (double)o;
@@ -313,8 +320,9 @@ namespace Elasticsearch.Net.Integration.Yaml
 				else if (v.StartsWith("/"))
 				{
 					var re = Regex.Replace(v, @"(^[\s\r\n]*?\/|\/[\s\r\n]*?$)", "");
-					var r = Encoding.UTF8.GetString(this._status.ResponseRaw);
-					Assert.IsTrue(Regex.IsMatch(r, re, RegexOptions.IgnorePatternWhitespace));
+					if (value is byte[])
+						s = Encoding.UTF8.GetString(this._status.ResponseRaw);
+					Assert.IsTrue(Regex.IsMatch(s, re, RegexOptions.IgnorePatternWhitespace));
 				}
 				else Assert.AreEqual(s, v);
 			}

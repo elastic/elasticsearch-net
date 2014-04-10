@@ -18,22 +18,22 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetAlias1
 			{	
 
 				//do indices.create 
-				this.Do(()=> _client.IndicesCreate("test_index", null));
+				_body = new {
+					aliases= new {
+						test_alias= new {},
+						test_blias= new {}
+					}
+				};
+				this.Do(()=> _client.IndicesCreate("test_index", _body));
 
 				//do indices.create 
-				this.Do(()=> _client.IndicesCreate("test_index_2", null));
-
-				//do indices.put_alias 
-				this.Do(()=> _client.IndicesPutAlias("test_index", "test_alias", null));
-
-				//do indices.put_alias 
-				this.Do(()=> _client.IndicesPutAlias("test_index", "test_blias", null));
-
-				//do indices.put_alias 
-				this.Do(()=> _client.IndicesPutAlias("test_index_2", "test_alias", null));
-
-				//do indices.put_alias 
-				this.Do(()=> _client.IndicesPutAlias("test_index_2", "test_blias", null));
+				_body = new {
+					aliases= new {
+						test_alias= new {},
+						test_blias= new {}
+					}
+				};
+				this.Do(()=> _client.IndicesCreate("test_index_2", _body));
 
 			}
 		}
