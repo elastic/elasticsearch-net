@@ -58,7 +58,7 @@ namespace Nest.Tests.Integration.Reproduce
 
 			var minElasticsearch = timings.Min(t => t.ElasticsearchTook);
 			var minNest = timings.Min(t => t.NestTook);
-
+				
 			//elasticsearch is fast! min should absolutely be below 2ms
 			minElasticsearch.Should().BeLessThan(10);
 			

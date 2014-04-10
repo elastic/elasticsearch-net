@@ -24,8 +24,8 @@ namespace CodeGeneration.YamlTestsRunner
 	using YamlTestSuite = Dictionary<string, object>;
 	public static class YamlTestsGenerator
 	{
-		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/v1.0.0/rest-api-spec/test";
-		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/v1.0.0/rest-api-spec/test/";
+		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/v1.1.0/rest-api-spec/test";
+		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/v1.1.0/rest-api-spec/test/";
 		private readonly static string _testProjectFolder = @"..\..\..\..\..\src\Tests\Elasticsearch.Net.Integration.Yaml\";
 		private readonly static string _rawClientInterface = @"..\..\..\..\..\src\Elasticsearch.Net\IElasticsearchClient.generated.cs";
 		private readonly static string _viewFolder = @"..\..\Views\";
