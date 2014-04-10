@@ -54,8 +54,12 @@ namespace Nest.Tests.Integration.Core.Repository
 				.Index(indexName)
 				.IgnoreUnavailable(true));
 
-			restoreResponse.IsValid.Should().BeTrue();
 			var restoredIndexName = indexName.Replace(d +  "_", d + "_restored_");
+			restoreResponse.IsValid.Should().BeTrue();
+			restoreResponse.Snapshot.Should().NotBeNull();
+			restoreResponse.Snapshot.Name.Should().Be(backupName);
+			restoreResponse.Snapshot.Indices.Should().Equal(new string[] { restoredIndexName });
+
 			var indexExistsResponse = this._client.IndexExists(f => f.Index(restoredIndexName));
 			indexExistsResponse.Exists.Should().BeTrue();
 

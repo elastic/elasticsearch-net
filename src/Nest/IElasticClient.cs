@@ -1176,7 +1176,7 @@ namespace Nest
 		/// <param name="repository">The repository name that holds our snapshot</param>
 		/// <param name="snapshotName">The name of the snapshot that we want to restore</param>
 		/// <param name="selector">Optionally further describe the restore operation</param>
-		IAcknowledgedResponse Restore(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
+		IRestoreResponse Restore(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
 
 		/// <summary>
 		/// Restore a snapshot
@@ -1185,6 +1185,6 @@ namespace Nest
 		/// <param name="repository">The repository name that holds our snapshot</param>
 		/// <param name="snapshotName">The name of the snapshot that we want to restore</param>
 		/// <param name="selector">Optionally further describe the restore operation</param>
-		Task<IAcknowledgedResponse> RestoreAsync(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
+		Task<IRestoreResponse> RestoreAsync(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
 	}
 }

@@ -10,26 +10,26 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IAcknowledgedResponse Restore(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null)
+		public IRestoreResponse Restore(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null)
 		{
 			snapshotName.ThrowIfNullOrEmpty("name");
 			repository.ThrowIfNullOrEmpty("repository");
 			selector = selector ?? (s => s);
-			return this.Dispatch<RestoreDescriptor, RestoreRequestParameters, AcknowledgedResponse>(
+			return this.Dispatch<RestoreDescriptor, RestoreRequestParameters, RestoreResponse>(
 				s => selector(s.Snapshot(snapshotName).Repository(repository)),
-				(p, d) => this.RawDispatch.SnapshotRestoreDispatch<AcknowledgedResponse>(p, d)
+				(p, d) => this.RawDispatch.SnapshotRestoreDispatch<RestoreResponse>(p, d)
 			);
 		}
 
 		/// <inheritdoc />
-		public Task<IAcknowledgedResponse> RestoreAsync(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null)
+		public Task<IRestoreResponse> RestoreAsync(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null)
 		{
 			snapshotName.ThrowIfNullOrEmpty("name");
 			repository.ThrowIfNullOrEmpty("repository");
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<RestoreDescriptor, RestoreRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+			return this.DispatchAsync<RestoreDescriptor, RestoreRequestParameters, RestoreResponse, IRestoreResponse>(
 				s => selector(s.Snapshot(snapshotName).Repository(repository)),
-				(p, d) => this.RawDispatch.SnapshotRestoreDispatchAsync<AcknowledgedResponse>(p, d)
+				(p, d) => this.RawDispatch.SnapshotRestoreDispatchAsync<RestoreResponse>(p, d)
 			);
 		}
 	}
