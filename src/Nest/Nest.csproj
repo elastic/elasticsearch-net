@@ -132,7 +132,11 @@
     <Compile Include="Domain\PropertyNameMarker.cs" />
     <Compile Include="Domain\PropertyPathMarker.cs" />
     <Compile Include="Domain\Repository\Snapshot.cs" />
+    <Compile Include="Domain\Responses\GetSnapshotResponse.cs" />
     <Compile Include="Domain\Responses\SnapshotResponse.cs" />
+    <Compile Include="DSL\DeleteSnapshotDescriptor.cs" />
+    <Compile Include="DSL\GetSnapshotDescriptor.cs" />
+    <Compile Include="DSL\RestoreDescriptor.cs" />
     <Compile Include="DSL\SnapshotDescriptor.cs" />
     <Compile Include="DSL\DeleteRepositoryDescriptor.cs" />
     <Compile Include="DSL\Paths\RepositorySnapshotPathDescriptor.cs" />

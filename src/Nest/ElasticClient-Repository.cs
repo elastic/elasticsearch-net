@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Deployment.Internal;
 using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
@@ -68,6 +69,66 @@ namespace Nest
 			return this.DispatchAsync<SnapshotDescriptor, SnapshotRequestParameters, SnapshotResponse, ISnapshotResponse>(
 				s => selector(s.Snapshot(name).Repository(repository)),
 				(p, d) => this.RawDispatch.SnapshotCreateDispatchAsync<SnapshotResponse>(p, d)
+			);
+		}
+		public IGetSnapshotResponse GetSnapshot(string name, string repository, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null)
+		{
+			name.ThrowIfNullOrEmpty("name");
+			repository.ThrowIfNullOrEmpty("repository");
+			selector = selector ?? (s => s);
+			return this.Dispatch<GetSnapshotDescriptor, GetSnapshotRequestParameters, GetSnapshotResponse>(
+				s => selector(s.Snapshot(name).Repository(repository)),
+				(p, d) => this.RawDispatch.SnapshotGetDispatch<GetSnapshotResponse>(p)
+			);
+		}
+		public Task<IGetSnapshotResponse> GetSnapshotAsync(string name, string repository, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null)
+		{
+			name.ThrowIfNullOrEmpty("name");
+			repository.ThrowIfNullOrEmpty("repository");
+			selector = selector ?? (s => s);
+			return this.DispatchAsync<GetSnapshotDescriptor, GetSnapshotRequestParameters, GetSnapshotResponse, IGetSnapshotResponse>(
+				s => selector(s.Snapshot(name).Repository(repository)),
+				(p, d) => this.RawDispatch.SnapshotGetDispatchAsync<GetSnapshotResponse>(p)
+			);
+		}
+		public IAcknowledgedResponse DeleteSnapshot(string name, string repository, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null)
+		{
+			name.ThrowIfNullOrEmpty("name");
+			repository.ThrowIfNullOrEmpty("repository");
+			selector = selector ?? (s => s);
+			return this.Dispatch<DeleteSnapshotDescriptor, DeleteSnapshotRequestParameters, AcknowledgedResponse>(
+				s => selector(s.Snapshot(name).Repository(repository)),
+				(p, d) => this.RawDispatch.SnapshotDeleteDispatch<AcknowledgedResponse>(p)
+			);
+		}
+		public Task<IAcknowledgedResponse> DeleteSnapshotAsync(string name, string repository, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null)
+		{
+			name.ThrowIfNullOrEmpty("name");
+			repository.ThrowIfNullOrEmpty("repository");
+			selector = selector ?? (s => s);
+			return this.DispatchAsync<DeleteSnapshotDescriptor, DeleteSnapshotRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+				s => selector(s.Snapshot(name).Repository(repository)),
+				(p, d) => this.RawDispatch.SnapshotDeleteDispatchAsync<AcknowledgedResponse>(p)
+			);
+		}
+		public IAcknowledgedResponse Restore(string name, string repository, Func<RestoreDescriptor, RestoreDescriptor> selector = null)
+		{
+			name.ThrowIfNullOrEmpty("name");
+			repository.ThrowIfNullOrEmpty("repository");
+			selector = selector ?? (s => s);
+			return this.Dispatch<RestoreDescriptor, RestoreRequestParameters, AcknowledgedResponse>(
+				s => selector(s.Snapshot(name).Repository(repository)),
+				(p, d) => this.RawDispatch.SnapshotRestoreDispatch<AcknowledgedResponse>(p, d)
+			);
+		}
+		public Task<IAcknowledgedResponse> RestoreAsync(string name, string repository, Func<RestoreDescriptor, RestoreDescriptor> selector = null)
+		{
+			name.ThrowIfNullOrEmpty("name");
+			repository.ThrowIfNullOrEmpty("repository");
+			selector = selector ?? (s => s);
+			return this.DispatchAsync<RestoreDescriptor, RestoreRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+				s => selector(s.Snapshot(name).Repository(repository)),
+				(p, d) => this.RawDispatch.SnapshotRestoreDispatchAsync<AcknowledgedResponse>(p, d)
 			);
 		}
 	}

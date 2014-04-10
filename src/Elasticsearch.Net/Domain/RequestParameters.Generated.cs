@@ -5018,12 +5018,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class SnapshotDeleteRequestParameters : FluentRequestParameters<SnapshotDeleteRequestParameters> 
+	public class DeleteSnapshotRequestParameters : FluentRequestParameters<DeleteSnapshotRequestParameters> 
 	{
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotDeleteRequestParameters MasterTimeout(string master_timeout)
+		public DeleteSnapshotRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
 			this.AddQueryString("master_timeout", this._master_timeout);
@@ -5068,12 +5068,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class SnapshotGetRequestParameters : FluentRequestParameters<SnapshotGetRequestParameters> 
+	public class GetSnapshotRequestParameters : FluentRequestParameters<GetSnapshotRequestParameters> 
 	{
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotGetRequestParameters MasterTimeout(string master_timeout)
+		public GetSnapshotRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
 			this.AddQueryString("master_timeout", this._master_timeout);
@@ -5118,12 +5118,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class SnapshotRestoreRequestParameters : FluentRequestParameters<SnapshotRestoreRequestParameters> 
+	public class RestoreRequestParameters : FluentRequestParameters<RestoreRequestParameters> 
 	{
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotRestoreRequestParameters MasterTimeout(string master_timeout)
+		public RestoreRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
 			this.AddQueryString("master_timeout", this._master_timeout);
@@ -5133,7 +5133,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _wait_for_completion { get; set; }
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public SnapshotRestoreRequestParameters WaitForCompletion(bool wait_for_completion)
+		public RestoreRequestParameters WaitForCompletion(bool wait_for_completion)
 		{
 			this._wait_for_completion = wait_for_completion;
 			this.AddQueryString("wait_for_completion", this._wait_for_completion);

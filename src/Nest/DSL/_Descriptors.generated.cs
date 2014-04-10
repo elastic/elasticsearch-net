@@ -4659,13 +4659,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotDeleteDescriptor
+	public partial class DeleteSnapshotDescriptor
 	{
-		internal SnapshotDeleteRequestParameters _QueryString = new SnapshotDeleteRequestParameters(); 
+		internal DeleteSnapshotRequestParameters _QueryString = new DeleteSnapshotRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotDeleteDescriptor MasterTimeout(string master_timeout)
+		public DeleteSnapshotDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
@@ -4709,13 +4709,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotGetDescriptor
+	public partial class GetSnapshotDescriptor
 	{
-		internal SnapshotGetRequestParameters _QueryString = new SnapshotGetRequestParameters(); 
+		internal GetSnapshotRequestParameters _QueryString = new GetSnapshotRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotGetDescriptor MasterTimeout(string master_timeout)
+		public GetSnapshotDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
@@ -4759,13 +4759,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotRestoreDescriptor
+	public partial class RestoreDescriptor
 	{
-		internal SnapshotRestoreRequestParameters _QueryString = new SnapshotRestoreRequestParameters(); 
+		internal RestoreRequestParameters _QueryString = new RestoreRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotRestoreDescriptor MasterTimeout(string master_timeout)
+		public RestoreDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
@@ -4773,7 +4773,7 @@ namespace Nest
 		
 
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public SnapshotRestoreDescriptor WaitForCompletion(bool wait_for_completion = true)
+		public RestoreDescriptor WaitForCompletion(bool wait_for_completion = true)
 		{
 			this._QueryString.WaitForCompletion(wait_for_completion);
 			return this;

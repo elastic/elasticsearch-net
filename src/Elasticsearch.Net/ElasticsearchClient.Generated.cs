@@ -29792,7 +29792,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotDelete<T>(string repository, string snapshot, Func<SnapshotDeleteRequestParameters, SnapshotDeleteRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotDelete<T>(string repository, string snapshot, Func<DeleteSnapshotRequestParameters, DeleteSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29800,7 +29800,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotDeleteRequestParameters());
+				requestParams = requestParameters(new DeleteSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29827,7 +29827,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotDeleteAsync<T>(string repository, string snapshot, Func<SnapshotDeleteRequestParameters, SnapshotDeleteRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> SnapshotDeleteAsync<T>(string repository, string snapshot, Func<DeleteSnapshotRequestParameters, DeleteSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29835,7 +29835,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotDeleteRequestParameters());
+				requestParams = requestParameters(new DeleteSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29864,7 +29864,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotDelete(string repository, string snapshot, Func<SnapshotDeleteRequestParameters, SnapshotDeleteRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotDelete(string repository, string snapshot, Func<DeleteSnapshotRequestParameters, DeleteSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29872,7 +29872,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotDeleteRequestParameters());
+				requestParams = requestParameters(new DeleteSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29901,7 +29901,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotDeleteAsync(string repository, string snapshot, Func<SnapshotDeleteRequestParameters, SnapshotDeleteRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotDeleteAsync(string repository, string snapshot, Func<DeleteSnapshotRequestParameters, DeleteSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29909,7 +29909,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotDeleteRequestParameters());
+				requestParams = requestParameters(new DeleteSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30072,7 +30072,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotGet<T>(string repository, string snapshot, Func<SnapshotGetRequestParameters, SnapshotGetRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotGet<T>(string repository, string snapshot, Func<GetSnapshotRequestParameters, GetSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30080,7 +30080,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRequestParameters());
+				requestParams = requestParameters(new GetSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30107,7 +30107,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotGetAsync<T>(string repository, string snapshot, Func<SnapshotGetRequestParameters, SnapshotGetRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> SnapshotGetAsync<T>(string repository, string snapshot, Func<GetSnapshotRequestParameters, GetSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30115,7 +30115,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRequestParameters());
+				requestParams = requestParameters(new GetSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30144,7 +30144,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotGet(string repository, string snapshot, Func<SnapshotGetRequestParameters, SnapshotGetRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotGet(string repository, string snapshot, Func<GetSnapshotRequestParameters, GetSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30152,7 +30152,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRequestParameters());
+				requestParams = requestParameters(new GetSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30181,7 +30181,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetAsync(string repository, string snapshot, Func<SnapshotGetRequestParameters, SnapshotGetRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetAsync(string repository, string snapshot, Func<GetSnapshotRequestParameters, GetSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30189,7 +30189,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRequestParameters());
+				requestParams = requestParameters(new GetSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30481,7 +30481,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotRestore<T>(string repository, string snapshot, object body, Func<SnapshotRestoreRequestParameters, SnapshotRestoreRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotRestore<T>(string repository, string snapshot, object body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30489,7 +30489,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRestoreRequestParameters());
+				requestParams = requestParameters(new RestoreRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30517,7 +30517,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotRestoreAsync<T>(string repository, string snapshot, object body, Func<SnapshotRestoreRequestParameters, SnapshotRestoreRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> SnapshotRestoreAsync<T>(string repository, string snapshot, object body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30525,7 +30525,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRestoreRequestParameters());
+				requestParams = requestParameters(new RestoreRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30555,7 +30555,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotRestore(string repository, string snapshot, object body, Func<SnapshotRestoreRequestParameters, SnapshotRestoreRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotRestore(string repository, string snapshot, object body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30563,7 +30563,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRestoreRequestParameters());
+				requestParams = requestParameters(new RestoreRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30593,7 +30593,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotRestoreAsync(string repository, string snapshot, object body, Func<SnapshotRestoreRequestParameters, SnapshotRestoreRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotRestoreAsync(string repository, string snapshot, object body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30601,7 +30601,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRestoreRequestParameters());
+				requestParams = requestParameters(new RestoreRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 

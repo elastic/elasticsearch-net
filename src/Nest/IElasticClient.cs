@@ -1089,5 +1089,11 @@ namespace Nest
 
 		ISnapshotResponse Snapshot(string name, string repository, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
 		Task<ISnapshotResponse> SnapshotAsync(string name, string repository, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
+		IAcknowledgedResponse DeleteSnapshot(string name, string repository, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
+		Task<IAcknowledgedResponse> DeleteSnapshotAsync(string name, string repository, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
+		IGetSnapshotResponse GetSnapshot(string name, string repository, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
+		Task<IGetSnapshotResponse> GetSnapshotAsync(string name, string repository, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
+		IAcknowledgedResponse Restore(string name, string repository, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
+		Task<IAcknowledgedResponse> RestoreAsync(string name, string repository, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
 	}
 }

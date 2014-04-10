@@ -34,10 +34,20 @@ namespace Nest.Tests.Integration.Core.Repository
 			snapshotResponse.IsValid.Should().BeTrue();
 			snapshotResponse.Accepted.Should().BeTrue();
 			snapshotResponse.Snapshot.Should().NotBeNull();
-			snapshotResponse.Snapshot.DurationInMilliseconds.Should().BeGreaterThan(0);
 			snapshotResponse.Snapshot.EndTimeInMilliseconds.Should().BeGreaterThan(0);
 			snapshotResponse.Snapshot.StartTime.Should().BeAfter(DateTime.UtcNow.AddDays(-1));
 
+			var getSnapshotResponse = this._client.GetSnapshot(backupName, repositoryName);
+			getSnapshotResponse.IsValid.Should().BeTrue();
+			getSnapshotResponse.Snapshots.Should().NotBeEmpty();
+			var snapShot = getSnapshotResponse.Snapshots.First();
+			snapShot.StartTime.Should().BeAfter(DateTime.UtcNow.AddDays(-1));
+			
+			var getAllSnapshotResponse = this._client.GetSnapshot("_all", repositoryName);
+			getAllSnapshotResponse.IsValid.Should().BeTrue();
+			getAllSnapshotResponse.Snapshots.Should().NotBeEmpty();
+			getAllSnapshotResponse.Snapshots.Count().Should().BeGreaterOrEqualTo(1);
+			
 			var deleteReposResult = this._client.DeleteRepository(repositoryName);
 			deleteReposResult.IsValid.Should().BeTrue();
 			deleteReposResult.Acknowledged.Should().BeTrue();
@@ -65,6 +75,9 @@ namespace Nest.Tests.Integration.Core.Repository
 			snapshotResponse.IsValid.Should().BeTrue();
 			snapshotResponse.Accepted.Should().BeTrue();
 			snapshotResponse.Snapshot.Should().BeNull();
+
+			var deleteSnapshotReponse = this._client.DeleteSnapshot(backupName, repositoryName);
+			deleteSnapshotReponse.IsValid.Should().BeTrue();
 
 			var deleteReposResult = this._client.DeleteRepository(repositoryName);
 			deleteReposResult.IsValid.Should().BeTrue();
