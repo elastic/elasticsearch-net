@@ -5,9 +5,9 @@
     <version>1.0.0-beta1</version>
     <title>Elasticsearch.Net - official low level elasticsearch client</title>
     <authors>Martijn Laarman and contributors</authors>
-    <owners>Martijn Laarman</owners>
+    <owners>Elasticsearch Inc.</owners>
     <iconUrl>http://nest.azurewebsites.net/images/elasticsearch-net-nuget-icon.png</iconUrl>
-    <licenseUrl>http://mpdreamz.mit-license.org/</licenseUrl>
+    <licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>
     <projectUrl>https://github.com/elasticsearch/elasticsearch-net</projectUrl>
     <summary>Exposes all the api endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.
     </summary>
