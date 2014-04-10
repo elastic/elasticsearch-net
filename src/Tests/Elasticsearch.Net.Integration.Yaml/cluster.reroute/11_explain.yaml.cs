@@ -77,7 +77,7 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterReroute2
 							cancel= new {
 								index= "test_index",
 								shard= "9",
-								node= "$node_id"
+								node= node_id
 							}
 						}
 					}
@@ -94,7 +94,7 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterReroute2
 				this.IsMatch(_response.explanations[0].parameters, new {
 					index= "test_index",
 					shard= "9",
-					node= "$node_id",
+					node= node_id,
 					allow_primary= "false"
 				});
 
