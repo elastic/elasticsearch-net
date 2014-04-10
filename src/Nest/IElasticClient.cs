@@ -1066,34 +1066,125 @@ namespace Nest
 		/// <param name="selector">Specify the scroll id as well as request specific configuration</param>
 		Task<IEmptyResponse> ClearScrollAsync(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector);
 
-
-		/// <inheritdoc />
+		/// <summary>
+		/// Check if a document exists without returning its contents
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="existsSelector">Describe what document we are looking for</param>
 		IExistsResponse DocumentExists<T>(Func<DocumentExistsDescriptor<T>, DocumentExistsDescriptor<T>> existsSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <summary>
+		/// Check if a document exists without returning its contents
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="existsSelector">Describe what document we are looking for</param>
 		Task<IExistsResponse> DocumentExistsAsync<T>(Func<DocumentExistsDescriptor<T>, DocumentExistsDescriptor<T>> existsSelector)
 			where T : class;
 
-		/// <inheritdoc />
-		IAcknowledgedResponse CreateRepository(string name, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
+		/// <summary>
+		/// Before any snapshot or restore operation can be performed a snapshot repository should be registered in Elasticsearch. 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_repositories
+		/// </summary>
+		/// <param name="repository">The name for the repository</param>
+		/// <param name="selector">describe what the repository looks like</param>
+		IAcknowledgedResponse CreateRepository(string repository, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
 
-		/// <inheritdoc />
-		Task<IAcknowledgedResponse> CreateRepositoryAsync(string name, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
+		/// <summary>
+		/// Before any snapshot or restore operation can be performed a snapshot repository should be registered in Elasticsearch. 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_repositories
+		/// </summary>
+		/// <param name="repository">The name for the repository</param>
+		/// <param name="selector">describe what the repository looks like</param>
+		Task<IAcknowledgedResponse> CreateRepositoryAsync(string repository, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
 
-		/// <inheritdoc />
-		IAcknowledgedResponse DeleteRepository(string name, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
+		/// <summary>
+		/// Delete a repository, if you have ongoing restore operations be sure to delete the indices being restored into first.
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_repositories
+		/// </summary>
+		/// <param name="repository">The name of the repository</param>
+		/// <param name="selector">Optionaly provide the delete operation with more details</param>>
+		IAcknowledgedResponse DeleteRepository(string repository, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
 
-		/// <inheritdoc />
-		Task<IAcknowledgedResponse> DeleteRepositoryAsync(string name, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
+		/// <summary>
+		/// Delete a repository, if you have ongoing restore operations be sure to delete the indices being restored into first.
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_repositories
+		/// </summary>
+		/// <param name="repository">The name of the repository</param>
+		/// <param name="selector">Optionaly provide the delete operation with more details</param>>
+		Task<IAcknowledgedResponse> DeleteRepositoryAsync(string repository, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
+		
+		/// <summary>
+		/// A repository can contain multiple snapshots of the same cluster. Snapshot are identified by unique names within the cluster. 
+		/// </summary>
+		/// <param name="repository">The name of the repository we want to create a snapshot in</param>
+		/// <param name="snapshotName">The name of the snapshot</param>
+		/// <param name="selector">Optionally provide more details about the snapshot operation</param>
+		ISnapshotResponse Snapshot(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
 
-		ISnapshotResponse Snapshot(string name, string repository, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
-		Task<ISnapshotResponse> SnapshotAsync(string name, string repository, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
-		IAcknowledgedResponse DeleteSnapshot(string name, string repository, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
-		Task<IAcknowledgedResponse> DeleteSnapshotAsync(string name, string repository, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
-		IGetSnapshotResponse GetSnapshot(string name, string repository, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
-		Task<IGetSnapshotResponse> GetSnapshotAsync(string name, string repository, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
-		IAcknowledgedResponse Restore(string name, string repository, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
-		Task<IAcknowledgedResponse> RestoreAsync(string name, string repository, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
+		/// <summary>
+		/// A repository can contain multiple snapshots of the same cluster. Snapshot are identified by unique names within the cluster. 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
+		/// </summary>
+		/// <param name="repository">The name of the repository we want to create a snapshot in</param>
+		/// <param name="snapshotName">The name of the snapshot</param>
+		/// <param name="selector">Optionally provide more details about the snapshot operation</param>
+		Task<ISnapshotResponse> SnapshotAsync(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
+		
+		/// <summary>
+		/// Delete a snapshot
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
+		/// </summary>
+		/// <param name="repository">The repository name under which the snapshot we want to delete lives</param>
+		/// <param name="snapshotName">The name of the snapshot that we want to delete</param>
+		/// <param name="selector">Optionally further describe the delete snapshot operation</param>
+		IAcknowledgedResponse DeleteSnapshot(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
+
+		/// <summary>
+		/// Delete a snapshot
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
+		/// </summary>
+		/// <param name="repository">The repository name under which the snapshot we want to delete lives</param>
+		/// <param name="snapshotName">The name of the snapshot that we want to delete</param>
+		/// <param name="selector">Optionally further describe the delete snapshot operation</param>
+		Task<IAcknowledgedResponse> DeleteSnapshotAsync(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
+		
+		/// <summary>
+		/// Gets information about one or more snapshots
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
+		/// </summary>
+		/// <param name="repository">The repository name under which the snapshots live</param>
+		/// <param name="snapshotName">The names of the snapshots we want information from (can be _all or wildcards)</param>
+		/// <param name="selector">Optionally further describe the get snapshot operation</param>
+		IGetSnapshotResponse GetSnapshot(string repository, string snapshotName, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
+
+		/// <summary>
+		/// Gets information about one or more snapshots
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
+		/// </summary>
+		/// <param name="repository">The repository name under which the snapshots live</param>
+		/// <param name="snapshotName">The names of the snapshots we want information from (can be _all or wildcards)</param>
+		/// <param name="selector">Optionally further describe the get snapshot operation</param>
+		Task<IGetSnapshotResponse> GetSnapshotAsync(string repository, string snapshotName, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
+		
+		/// <summary>
+		/// Restore a snapshot
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_restore
+		/// </summary>
+		/// <param name="repository">The repository name that holds our snapshot</param>
+		/// <param name="snapshotName">The name of the snapshot that we want to restore</param>
+		/// <param name="selector">Optionally further describe the restore operation</param>
+		IAcknowledgedResponse Restore(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
+
+		/// <summary>
+		/// Restore a snapshot
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_restore
+		/// </summary>
+		/// <param name="repository">The repository name that holds our snapshot</param>
+		/// <param name="snapshotName">The name of the snapshot that we want to restore</param>
+		/// <param name="selector">Optionally further describe the restore operation</param>
+		Task<IAcknowledgedResponse> RestoreAsync(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
 	}
 }

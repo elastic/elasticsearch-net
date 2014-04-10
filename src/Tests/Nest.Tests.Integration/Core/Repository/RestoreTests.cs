@@ -35,12 +35,11 @@ namespace Nest.Tests.Integration.Core.Repository
 			createReposResult.Acknowledged.Should().BeTrue();
 
 			var backupName = ElasticsearchConfiguration.NewUniqueIndexName();
-			var snapshotResponse = this._client.Snapshot(backupName, repositoryName, f => f
+			var snapshotResponse = this._client.Snapshot(repositoryName, backupName, selector: f => f
 				.Index(indexName)
 				.WaitForCompletion(true)
 				.IgnoreUnavailable()
-				.Partial()
-			);
+				.Partial());
 			snapshotResponse.IsValid.Should().BeTrue();
 			snapshotResponse.Accepted.Should().BeTrue();
 			snapshotResponse.Snapshot.Should().NotBeNull();
@@ -48,13 +47,12 @@ namespace Nest.Tests.Integration.Core.Repository
 			snapshotResponse.Snapshot.StartTime.Should().BeAfter(DateTime.UtcNow.AddDays(-1));
 
 			var d = ElasticsearchConfiguration.DefaultIndex;
-			var restoreResponse = this._client.Restore(backupName, repositoryName, r => r
+			var restoreResponse = this._client.Restore(repositoryName, backupName, r => r
 				.WaitForCompletion(true)
 				.RenamePattern(d + "_(.+)")
 				.RenameReplacement(d + "_restored_$1")
 				.Index(indexName)
-				.IgnoreUnavailable(true)
-			);
+				.IgnoreUnavailable(true));
 
 			restoreResponse.IsValid.Should().BeTrue();
 			var restoredIndexName = indexName.Replace(d +  "_", d + "_restored_");

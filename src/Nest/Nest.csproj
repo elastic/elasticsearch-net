@@ -245,6 +245,8 @@
     <Compile Include="DSL\UpdateSettingsDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalPathDescriptor.cs" />
     <Compile Include="ElasticClient-Exists.cs" />
+    <Compile Include="ElasticClient-Snapshot.cs" />
+    <Compile Include="ElasticClient-Restore.cs" />
     <Compile Include="ElasticClient-Repository.cs" />
     <Compile Include="ElasticClient-Suggest.cs" />
     <Compile Include="ElasticClient-RootNodeInfo.cs" />
