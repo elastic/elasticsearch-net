@@ -93,7 +93,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Boolean(s => s
-						.Name(p => p.BoolValue) //reminder .Name(string) exists too!
+						.Name(p => p.BoolValue) //reminder .Repository(string) exists too!
 						.Boost(1.4)
 						//.IncludeInAll() //makes no sense 
 						//.Index() //since 0.90.5 this will throw an exception on elasticsearch.

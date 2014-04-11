@@ -2,6 +2,10 @@ aside#menu
 	ul
 		li
 			a(class=(page.metadata.menuitem == 'introduction')? "selected" : "",href='/') Home
+			a(class=(page.metadata.menuitem == 'contributing')? "selected" : "",href='/contributing.html') Contributing
+			a(class=(page.metadata.menuitem == 'building')? "selected" : "",href='/building.html') Building
+			a(class=(page.metadata.menuitem == 'breaking-changes')? "selected" : "",href='/breaking-changes.html') 1.0 Breaking Changes
+			a(class=(page.metadata.menuitem == 'release-notes')? "selected" : "",href='https://github.com/elasticsearch/elasticsearch-net/releases') Release Notes
 
 	ul#elasticsearch-net
 		h4.title Elasticsearch.Net

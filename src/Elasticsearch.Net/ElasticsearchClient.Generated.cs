@@ -2604,6 +2604,138 @@ namespace Elasticsearch.Net
 			);
 		}
 		
+		///<summary>Represents a GET on /_cat/plugins
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-plugins.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> CatPlugins<T>(Func<CatPluginsRequestParameters, CatPluginsRequestParameters> requestParameters = null)
+		{
+			var url = "_cat/plugins";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new CatPluginsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
+				ToNameValueCollection(requestParams);
+			}
+			else requestParams = new CatPluginsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
+
+			return this.DoRequest<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_cat/plugins
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-plugins.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> CatPluginsAsync<T>(Func<CatPluginsRequestParameters, CatPluginsRequestParameters> requestParameters = null)
+		{
+			var url = "_cat/plugins";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new CatPluginsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
+				ToNameValueCollection(requestParams);
+			}
+			else requestParams = new CatPluginsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
+
+			return this.DoRequestAsync<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_cat/plugins
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-plugins.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<string> CatPlugins(Func<CatPluginsRequestParameters, CatPluginsRequestParameters> requestParameters = null)
+		{
+			var url = "_cat/plugins";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new CatPluginsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
+				ToNameValueCollection(requestParams);
+			}
+			else requestParams = new CatPluginsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
+
+			return this.DoRequest<string>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_cat/plugins
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-plugins.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<string>> CatPluginsAsync(Func<CatPluginsRequestParameters, CatPluginsRequestParameters> requestParameters = null)
+		{
+			var url = "_cat/plugins";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new CatPluginsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")));
+				ToNameValueCollection(requestParams);
+			}
+			else requestParams = new CatPluginsRequestParameters().RequestConfiguration(r=>r.ContentType("text/plain")); 
+
+
+			return this.DoRequestAsync<string>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
 		///<summary>Represents a GET on /_cat/recovery
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
@@ -5716,7 +5848,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5724,7 +5856,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -5751,7 +5883,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5759,7 +5891,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -5788,7 +5920,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5796,7 +5928,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -5825,7 +5957,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5833,7 +5965,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -5861,7 +5993,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5870,7 +6002,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -5898,7 +6030,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5907,7 +6039,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -5937,7 +6069,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> CountPercolateGet(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5946,7 +6078,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -5976,7 +6108,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, string id, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateGetAsync(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -5985,7 +6117,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6013,7 +6145,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CountPercolate<T>(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> CountPercolate<T>(string index, string type, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6021,7 +6153,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6049,7 +6181,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6057,7 +6189,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6087,7 +6219,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6095,7 +6227,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6125,7 +6257,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6133,7 +6265,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6162,7 +6294,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> CountPercolate<T>(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> CountPercolate<T>(string index, string type, string id, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6171,7 +6303,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6200,7 +6332,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, string id, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6209,7 +6341,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6240,7 +6372,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> CountPercolate(string index, string type, string id, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6249,7 +6381,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6280,7 +6412,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, string id, object body, Func<CountPercolateRequestParameters, CountPercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> CountPercolateAsync(string index, string type, string id, object body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6289,7 +6421,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new CountPercolateRequestParameters());
+				requestParams = requestParameters(new PercolateCountRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6757,7 +6889,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Exists<T>(string index, string type, string id, Func<ExistsRequestParameters, ExistsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Exists<T>(string index, string type, string id, Func<DocumentExistsRequestParameters, DocumentExistsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6766,7 +6898,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new ExistsRequestParameters());
+				requestParams = requestParameters(new DocumentExistsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6794,7 +6926,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ExistsAsync<T>(string index, string type, string id, Func<ExistsRequestParameters, ExistsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> ExistsAsync<T>(string index, string type, string id, Func<DocumentExistsRequestParameters, DocumentExistsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6803,7 +6935,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new ExistsRequestParameters());
+				requestParams = requestParameters(new DocumentExistsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6833,7 +6965,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Exists(string index, string type, string id, Func<ExistsRequestParameters, ExistsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> Exists(string index, string type, string id, Func<DocumentExistsRequestParameters, DocumentExistsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6842,7 +6974,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new ExistsRequestParameters());
+				requestParams = requestParameters(new DocumentExistsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -6872,7 +7004,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ExistsAsync(string index, string type, string id, Func<ExistsRequestParameters, ExistsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ExistsAsync(string index, string type, string id, Func<DocumentExistsRequestParameters, DocumentExistsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6881,7 +7013,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new ExistsRequestParameters());
+				requestParams = requestParameters(new DocumentExistsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -18624,6 +18756,270 @@ namespace Elasticsearch.Net
 			));
 		}
 		
+		///<summary>Represents a GET on /_recovery
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> IndicesRecoveryForAll<T>(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		{
+			var url = "_recovery";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequest<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_recovery
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> IndicesRecoveryForAllAsync<T>(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		{
+			var url = "_recovery";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequestAsync<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_recovery
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> IndicesRecoveryForAll(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		{
+			var url = "_recovery";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /_recovery
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRecoveryForAllAsync(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		{
+			var url = "_recovery";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /{index}/_recovery
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> IndicesRecovery<T>(string index, Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			var url = "{0}/_recovery".F(Encoded(index));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequest<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /{index}/_recovery
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> IndicesRecoveryAsync<T>(string index, Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			var url = "{0}/_recovery".F(Encoded(index));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequestAsync<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /{index}/_recovery
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> IndicesRecovery(string index, Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			var url = "{0}/_recovery".F(Encoded(index));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /{index}/_recovery
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRecoveryAsync(string index, Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			var url = "{0}/_recovery".F(Encoded(index));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
 		///<summary>Represents a POST on /_refresh
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
@@ -19430,13 +19826,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesSnapshotIndexForAll<T>(Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesSnapshotIndexForAll<T>(Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null)
 		{
 			var url = "_gateway/snapshot";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRequestParameters());
+				requestParams = requestParameters(new GatewaySnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -19461,13 +19857,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesSnapshotIndexForAllAsync<T>(Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesSnapshotIndexForAllAsync<T>(Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null)
 		{
 			var url = "_gateway/snapshot";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRequestParameters());
+				requestParams = requestParameters(new GatewaySnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -19494,13 +19890,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesSnapshotIndexForAll(Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesSnapshotIndexForAll(Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null)
 		{
 			var url = "_gateway/snapshot";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRequestParameters());
+				requestParams = requestParameters(new GatewaySnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -19527,13 +19923,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesSnapshotIndexForAllAsync(Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesSnapshotIndexForAllAsync(Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null)
 		{
 			var url = "_gateway/snapshot";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRequestParameters());
+				requestParams = requestParameters(new GatewaySnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -19559,14 +19955,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesSnapshotIndex<T>(string index, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesSnapshotIndex<T>(string index, Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_gateway/snapshot".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRequestParameters());
+				requestParams = requestParameters(new GatewaySnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -19592,14 +19988,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesSnapshotIndexAsync<T>(string index, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesSnapshotIndexAsync<T>(string index, Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_gateway/snapshot".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRequestParameters());
+				requestParams = requestParameters(new GatewaySnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -19627,14 +20023,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesSnapshotIndex(string index, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesSnapshotIndex(string index, Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_gateway/snapshot".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRequestParameters());
+				requestParams = requestParameters(new GatewaySnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -19662,14 +20058,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesSnapshotIndexAsync(string index, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesSnapshotIndexAsync(string index, Func<GatewaySnapshotRequestParameters, GatewaySnapshotRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_gateway/snapshot".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRequestParameters());
+				requestParams = requestParameters(new GatewaySnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29200,6 +29596,834 @@ namespace Elasticsearch.Net
 			));
 		}
 		
+		///<summary>Represents a GET on /_search/template
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> SearchTemplateGet<T>(Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			var url = "_search/template";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequest<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_search/template
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> SearchTemplateGetAsync<T>(Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			var url = "_search/template";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequestAsync<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_search/template
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> SearchTemplateGet(Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			var url = "_search/template";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /_search/template
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> SearchTemplateGetAsync(Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			var url = "_search/template";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /{index}/_search/template
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> SearchTemplateGet<T>(string index, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			var url = "{0}/_search/template".F(Encoded(index));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequest<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /{index}/_search/template
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> SearchTemplateGetAsync<T>(string index, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			var url = "{0}/_search/template".F(Encoded(index));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequestAsync<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /{index}/_search/template
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> SearchTemplateGet(string index, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			var url = "{0}/_search/template".F(Encoded(index));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /{index}/_search/template
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> SearchTemplateGetAsync(string index, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			var url = "{0}/_search/template".F(Encoded(index));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /{index}/{type}/_search/template
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> SearchTemplateGet<T>(string index, string type, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequest<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /{index}/{type}/_search/template
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> SearchTemplateGetAsync<T>(string index, string type, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequestAsync<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /{index}/{type}/_search/template
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> SearchTemplateGet(string index, string type, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /{index}/{type}/_search/template
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> SearchTemplateGetAsync(string index, string type, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a POST on /_search/template
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="body">The search definition template and its params</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> SearchTemplate<T>(object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			var url = "_search/template".F();
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequest<T>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a POST on /_search/template
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="body">The search definition template and its params</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			var url = "_search/template".F();
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequestAsync<T>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a POST on /_search/template
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="body">The search definition template and its params</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> SearchTemplate(object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			var url = "_search/template".F();
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a POST on /_search/template
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="body">The search definition template and its params</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> SearchTemplateAsync(object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			var url = "_search/template".F();
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a POST on /{index}/_search/template
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="body">The search definition template and its params</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> SearchTemplate<T>(string index, object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			var url = "{0}/_search/template".F(Encoded(index));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequest<T>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a POST on /{index}/_search/template
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="body">The search definition template and its params</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(string index, object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			var url = "{0}/_search/template".F(Encoded(index));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequestAsync<T>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a POST on /{index}/_search/template
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="body">The search definition template and its params</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> SearchTemplate(string index, object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			var url = "{0}/_search/template".F(Encoded(index));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a POST on /{index}/_search/template
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="body">The search definition template and its params</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> SearchTemplateAsync(string index, object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			var url = "{0}/_search/template".F(Encoded(index));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a POST on /{index}/{type}/_search/template
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+		///<param name="body">The search definition template and its params</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> SearchTemplate<T>(string index, string type, object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequest<T>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a POST on /{index}/{type}/_search/template
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+		///<param name="body">The search definition template and its params</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(string index, string type, object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequestAsync<T>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a POST on /{index}/{type}/_search/template
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+		///<param name="body">The search definition template and its params</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> SearchTemplate(string index, string type, object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a POST on /{index}/{type}/_search/template
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+		///<param name="body">The search definition template and its params</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> SearchTemplateAsync(string index, string type, object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SearchTemplateRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
 		///<summary>Represents a PUT on /_snapshot/{repository}/{snapshot}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
@@ -29217,7 +30441,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotCreate<T>(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotCreate<T>(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29225,7 +30449,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRequestParameters());
+				requestParams = requestParameters(new SnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29253,7 +30477,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotCreateAsync<T>(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> SnapshotCreateAsync<T>(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29261,7 +30485,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRequestParameters());
+				requestParams = requestParameters(new SnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29291,7 +30515,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotCreate(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotCreate(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29299,7 +30523,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRequestParameters());
+				requestParams = requestParameters(new SnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29329,7 +30553,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateAsync(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateAsync(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29337,7 +30561,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRequestParameters());
+				requestParams = requestParameters(new SnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29365,7 +30589,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotCreatePost<T>(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotCreatePost<T>(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29373,7 +30597,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRequestParameters());
+				requestParams = requestParameters(new SnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29401,7 +30625,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotCreatePostAsync<T>(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> SnapshotCreatePostAsync<T>(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29409,7 +30633,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRequestParameters());
+				requestParams = requestParameters(new SnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29439,7 +30663,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotCreatePost(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotCreatePost(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29447,7 +30671,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRequestParameters());
+				requestParams = requestParameters(new SnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29477,7 +30701,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreatePostAsync(string repository, string snapshot, object body, Func<SnapshotCreateRequestParameters, SnapshotCreateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreatePostAsync(string repository, string snapshot, object body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29485,7 +30709,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRequestParameters());
+				requestParams = requestParameters(new SnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29512,14 +30736,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotCreateRepository<T>(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotCreateRepository<T>(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRepositoryRequestParameters());
+				requestParams = requestParameters(new CreateRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29546,14 +30770,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryAsync<T>(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryAsync<T>(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRepositoryRequestParameters());
+				requestParams = requestParameters(new CreateRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29582,14 +30806,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotCreateRepository(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotCreateRepository(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRepositoryRequestParameters());
+				requestParams = requestParameters(new CreateRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29618,14 +30842,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateRepositoryAsync(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateRepositoryAsync(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRepositoryRequestParameters());
+				requestParams = requestParameters(new CreateRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29652,14 +30876,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotCreateRepositoryPost<T>(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotCreateRepositoryPost<T>(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRepositoryRequestParameters());
+				requestParams = requestParameters(new CreateRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29686,14 +30910,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryPostAsync<T>(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryPostAsync<T>(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRepositoryRequestParameters());
+				requestParams = requestParameters(new CreateRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29722,14 +30946,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotCreateRepositoryPost(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotCreateRepositoryPost(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRepositoryRequestParameters());
+				requestParams = requestParameters(new CreateRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29758,14 +30982,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateRepositoryPostAsync(string repository, object body, Func<SnapshotCreateRepositoryRequestParameters, SnapshotCreateRepositoryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotCreateRepositoryPostAsync(string repository, object body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotCreateRepositoryRequestParameters());
+				requestParams = requestParameters(new CreateRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29792,7 +31016,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotDelete<T>(string repository, string snapshot, Func<SnapshotDeleteRequestParameters, SnapshotDeleteRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotDelete<T>(string repository, string snapshot, Func<DeleteSnapshotRequestParameters, DeleteSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29800,7 +31024,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotDeleteRequestParameters());
+				requestParams = requestParameters(new DeleteSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29827,7 +31051,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotDeleteAsync<T>(string repository, string snapshot, Func<SnapshotDeleteRequestParameters, SnapshotDeleteRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> SnapshotDeleteAsync<T>(string repository, string snapshot, Func<DeleteSnapshotRequestParameters, DeleteSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29835,7 +31059,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotDeleteRequestParameters());
+				requestParams = requestParameters(new DeleteSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29864,7 +31088,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotDelete(string repository, string snapshot, Func<SnapshotDeleteRequestParameters, SnapshotDeleteRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotDelete(string repository, string snapshot, Func<DeleteSnapshotRequestParameters, DeleteSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29872,7 +31096,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotDeleteRequestParameters());
+				requestParams = requestParameters(new DeleteSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29901,7 +31125,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotDeleteAsync(string repository, string snapshot, Func<SnapshotDeleteRequestParameters, SnapshotDeleteRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotDeleteAsync(string repository, string snapshot, Func<DeleteSnapshotRequestParameters, DeleteSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -29909,7 +31133,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotDeleteRequestParameters());
+				requestParams = requestParameters(new DeleteSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29935,14 +31159,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotDeleteRepository<T>(string repository, Func<SnapshotDeleteRepositoryRequestParameters, SnapshotDeleteRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotDeleteRepository<T>(string repository, Func<DeleteRepositoryRequestParameters, DeleteRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotDeleteRepositoryRequestParameters());
+				requestParams = requestParameters(new DeleteRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -29968,14 +31192,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryAsync<T>(string repository, Func<SnapshotDeleteRepositoryRequestParameters, SnapshotDeleteRepositoryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryAsync<T>(string repository, Func<DeleteRepositoryRequestParameters, DeleteRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotDeleteRepositoryRequestParameters());
+				requestParams = requestParameters(new DeleteRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30003,14 +31227,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotDeleteRepository(string repository, Func<SnapshotDeleteRepositoryRequestParameters, SnapshotDeleteRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotDeleteRepository(string repository, Func<DeleteRepositoryRequestParameters, DeleteRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotDeleteRepositoryRequestParameters());
+				requestParams = requestParameters(new DeleteRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30038,14 +31262,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotDeleteRepositoryAsync(string repository, Func<SnapshotDeleteRepositoryRequestParameters, SnapshotDeleteRepositoryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotDeleteRepositoryAsync(string repository, Func<DeleteRepositoryRequestParameters, DeleteRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotDeleteRepositoryRequestParameters());
+				requestParams = requestParameters(new DeleteRepositoryRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30072,7 +31296,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotGet<T>(string repository, string snapshot, Func<SnapshotGetRequestParameters, SnapshotGetRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotGet<T>(string repository, string snapshot, Func<GetSnapshotRequestParameters, GetSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30080,7 +31304,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRequestParameters());
+				requestParams = requestParameters(new GetSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30107,7 +31331,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotGetAsync<T>(string repository, string snapshot, Func<SnapshotGetRequestParameters, SnapshotGetRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> SnapshotGetAsync<T>(string repository, string snapshot, Func<GetSnapshotRequestParameters, GetSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30115,7 +31339,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRequestParameters());
+				requestParams = requestParameters(new GetSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30144,7 +31368,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotGet(string repository, string snapshot, Func<SnapshotGetRequestParameters, SnapshotGetRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotGet(string repository, string snapshot, Func<GetSnapshotRequestParameters, GetSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30152,7 +31376,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRequestParameters());
+				requestParams = requestParameters(new GetSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30181,7 +31405,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetAsync(string repository, string snapshot, Func<SnapshotGetRequestParameters, SnapshotGetRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetAsync(string repository, string snapshot, Func<GetSnapshotRequestParameters, GetSnapshotRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30189,7 +31413,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRequestParameters());
+				requestParams = requestParameters(new GetSnapshotRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30481,7 +31705,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotRestore<T>(string repository, string snapshot, object body, Func<SnapshotRestoreRequestParameters, SnapshotRestoreRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotRestore<T>(string repository, string snapshot, object body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30489,7 +31713,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRestoreRequestParameters());
+				requestParams = requestParameters(new RestoreRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30517,7 +31741,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotRestoreAsync<T>(string repository, string snapshot, object body, Func<SnapshotRestoreRequestParameters, SnapshotRestoreRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> SnapshotRestoreAsync<T>(string repository, string snapshot, object body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30525,7 +31749,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRestoreRequestParameters());
+				requestParams = requestParameters(new RestoreRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30555,7 +31779,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotRestore(string repository, string snapshot, object body, Func<SnapshotRestoreRequestParameters, SnapshotRestoreRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotRestore(string repository, string snapshot, object body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30563,7 +31787,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRestoreRequestParameters());
+				requestParams = requestParameters(new RestoreRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -30593,7 +31817,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotRestoreAsync(string repository, string snapshot, object body, Func<SnapshotRestoreRequestParameters, SnapshotRestoreRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotRestoreAsync(string repository, string snapshot, object body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
@@ -30601,13 +31825,421 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotRestoreRequestParameters());
+				requestParams = requestParameters(new RestoreRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /_snapshot/_status
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> SnapshotStatus<T>(Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
+		{
+			var url = "_snapshot/_status";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SnapshotStatusRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequest<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_snapshot/_status
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> SnapshotStatusAsync<T>(Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
+		{
+			var url = "_snapshot/_status";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SnapshotStatusRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequestAsync<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_snapshot/_status
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> SnapshotStatus(Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
+		{
+			var url = "_snapshot/_status";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SnapshotStatusRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /_snapshot/_status
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotStatusAsync(Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
+		{
+			var url = "_snapshot/_status";
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SnapshotStatusRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /_snapshot/{repository}/_status
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+	    ///</summary>
+		///<param name="repository">A repository name</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> SnapshotStatus<T>(string repository, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
+		{
+			repository.ThrowIfNullOrEmpty("repository");
+			var url = "_snapshot/{0}/_status".F(Encoded(repository));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SnapshotStatusRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequest<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_snapshot/{repository}/_status
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+	    ///</summary>
+		///<param name="repository">A repository name</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> SnapshotStatusAsync<T>(string repository, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
+		{
+			repository.ThrowIfNullOrEmpty("repository");
+			var url = "_snapshot/{0}/_status".F(Encoded(repository));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SnapshotStatusRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequestAsync<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_snapshot/{repository}/_status
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+	    ///</summary>
+		///<param name="repository">A repository name</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> SnapshotStatus(string repository, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
+		{
+			repository.ThrowIfNullOrEmpty("repository");
+			var url = "_snapshot/{0}/_status".F(Encoded(repository));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SnapshotStatusRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /_snapshot/{repository}/_status
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+	    ///</summary>
+		///<param name="repository">A repository name</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotStatusAsync(string repository, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
+		{
+			repository.ThrowIfNullOrEmpty("repository");
+			var url = "_snapshot/{0}/_status".F(Encoded(repository));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SnapshotStatusRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot}/_status
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+	    ///</summary>
+		///<param name="repository">A repository name</param>
+		///<param name="snapshot">A comma-separated list of snapshot names</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> SnapshotStatus<T>(string repository, string snapshot, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
+		{
+			repository.ThrowIfNullOrEmpty("repository");
+			snapshot.ThrowIfNullOrEmpty("snapshot");
+			var url = "_snapshot/{0}/{1}/_status".F(Encoded(repository), Encoded(snapshot));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SnapshotStatusRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequest<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot}/_status
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+	    ///</summary>
+		///<param name="repository">A repository name</param>
+		///<param name="snapshot">A comma-separated list of snapshot names</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> SnapshotStatusAsync<T>(string repository, string snapshot, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
+		{
+			repository.ThrowIfNullOrEmpty("repository");
+			snapshot.ThrowIfNullOrEmpty("snapshot");
+			var url = "_snapshot/{0}/{1}/_status".F(Encoded(repository), Encoded(snapshot));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SnapshotStatusRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return this.DoRequestAsync<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot}/_status
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+	    ///</summary>
+		///<param name="repository">A repository name</param>
+		///<param name="snapshot">A comma-separated list of snapshot names</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> SnapshotStatus(string repository, string snapshot, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
+		{
+			repository.ThrowIfNullOrEmpty("repository");
+			snapshot.ThrowIfNullOrEmpty("snapshot");
+			var url = "_snapshot/{0}/{1}/_status".F(Encoded(repository), Encoded(snapshot));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SnapshotStatusRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot}/_status
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+	    ///</summary>
+		///<param name="repository">A repository name</param>
+		///<param name="snapshot">A comma-separated list of snapshot names</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotStatusAsync(string repository, string snapshot, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
+		{
+			repository.ThrowIfNullOrEmpty("repository");
+			snapshot.ThrowIfNullOrEmpty("snapshot");
+			var url = "_snapshot/{0}/{1}/_status".F(Encoded(repository), Encoded(snapshot));
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new SnapshotStatusRequestParameters());
+				ToNameValueCollection(requestParams);
+			}
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"GET", url, data: null, 
 				requestParameters: requestParams
 			));
 		}

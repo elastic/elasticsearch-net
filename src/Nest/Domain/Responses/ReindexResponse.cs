@@ -11,7 +11,7 @@ namespace Nest
 	public class ReindexResponse<T> : IReindexResponse<T> where T : class
 	{
 		public IBulkResponse BulkResponse { get; internal set; }
-		public IQueryResponse<T> QueryResponse { get; internal set; }
+		public ISearchResponse<T> SearchResponse { get; internal set; }
 
 		public int Scroll { get; internal set; }
 
@@ -20,7 +20,7 @@ namespace Nest
 			get
 			{
 				return (this.BulkResponse != null && this.BulkResponse.IsValid
-					&& this.QueryResponse != null && this.QueryResponse.IsValid);
+					&& this.SearchResponse != null && this.SearchResponse.IsValid);
 			}
 		}
 	}

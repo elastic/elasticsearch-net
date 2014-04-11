@@ -95,7 +95,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		}
 		
 
-		private void AssertTermResults(IQueryResponse<ElasticsearchProject> results)
+		private void AssertTermResults(ISearchResponse<ElasticsearchProject> results)
 		{
 			Assert.True(results.IsValid, results.ConnectionStatus.ResponseRaw.Utf8String());
 			Assert.True(results.ConnectionStatus.Success, results.ConnectionStatus.ResponseRaw.Utf8String());

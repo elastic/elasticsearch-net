@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using NUnit.Framework;
 using Nest.Resolvers;
 
@@ -12,6 +13,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		{
 			public Guid Guid { get; set; }
 		}
+		internal class LongIdClass { public long Id { get; set; } }
 		internal class DoubleIdClass { public double Id { get; set; } }
 		internal class IntIdClass { public int Id { get; set; } }
 		internal class DecimalIdClass { public decimal Id { get; set; } }
@@ -42,28 +44,36 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		{
 			var expected = 12;
 			var id = new IdResolver().GetIdFor(new IntIdClass { Id = expected });
-			StringAssert.AreEqualIgnoringCase(expected.ToString(), id);
+			StringAssert.AreEqualIgnoringCase(expected.ToString(CultureInfo.InvariantCulture), id);
 		}
 		[Test]
 		public void TestDecimalLookup()
 		{
 			var expected = 12m;
 			var id = new IdResolver().GetIdFor(new DecimalIdClass { Id = expected });
-			StringAssert.AreEqualIgnoringCase(expected.ToString(), id);
+			StringAssert.AreEqualIgnoringCase(expected.ToString(CultureInfo.InvariantCulture), id);
 		}
 		[Test]
 		public void TestFloatLookup()
 		{
 			var expected = 12f;
 			var id = new IdResolver().GetIdFor(new FloatIdClass { Id = expected });
-			StringAssert.AreEqualIgnoringCase(expected.ToString(), id);
+			StringAssert.AreEqualIgnoringCase(expected.ToString(CultureInfo.InvariantCulture), id);
 		}
+		[Test]
+		public void TestLongLookup()
+		{
+			var expected = long.MaxValue;
+			var id = new IdResolver().GetIdFor(new LongIdClass { Id = expected });
+			StringAssert.AreEqualIgnoringCase(expected.ToString(CultureInfo.InvariantCulture), id);
+		}
+		
 		[Test]
 		public void TestDoubleLookup()
 		{
 			var expected = 12d;
 			var id = new IdResolver().GetIdFor(new DoubleIdClass { Id = expected });
-			StringAssert.AreEqualIgnoringCase(expected.ToString(), id);
+			StringAssert.AreEqualIgnoringCase(expected.ToString(CultureInfo.InvariantCulture), id);
 		}
 		[Test]
 		public void TestCustomLookup()

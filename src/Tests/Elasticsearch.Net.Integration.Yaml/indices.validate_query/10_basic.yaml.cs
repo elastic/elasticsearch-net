@@ -21,7 +21,12 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesValidateQuery1
 			{	
 
 				//do indices.create 
-				this.Do(()=> _client.IndicesCreate("testing", null));
+				_body = new {
+					settings= new {
+						number_of_replicas= "0"
+					}
+				};
+				this.Do(()=> _client.IndicesCreate("testing", _body));
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv

@@ -23,9 +23,15 @@ namespace Profiling.Indexing
 			var process = Process.GetCurrentProcess();
 			var baseThreadCount = process.Threads.Count;
 			var baseMemorySize = process.VirtualMemorySize64;
-			
+			var host = "localhost";
+			if (Process.GetProcessesByName("fiddler").Any())
+				host = "ipv4.fiddler";
+			var client = new ElasticClient(new ConnectionSettings(new Uri("http://"+host+":9200"), "nest-default-index"));
 			//warmer
 			RunTest<HttpTester>(HTTP_PORT, 10);
+
+			client.Refresh();
+
 			Console.WriteLine("Warmed up caches press any key to index {0} messages", NUM_MESSAGES);
 			Console.ReadLine();
 			ConsoleKeyInfo key;
@@ -36,7 +42,6 @@ namespace Profiling.Indexing
 
 			RunIndex(baseThreadCount, baseMemorySize);
 
-			var client = new ElasticClient(new ConnectionSettings(new Uri("http://localhost:9200"), "nest-default-index"));
 			client.DeleteIndex(d => d.Index(INDEX_PREFIX + "*"));
 
 		}

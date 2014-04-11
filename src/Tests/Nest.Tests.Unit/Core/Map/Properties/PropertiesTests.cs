@@ -81,7 +81,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Boolean(s => s
-						.Name(p => p.BoolValue) //reminder .Name(string) exists too!
+						.Name(p => p.BoolValue) //reminder .Repository(string) exists too!
 						.Boost(1.4)
 						.IncludeInAll()
 						.Index()
@@ -201,20 +201,20 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
 		}
 
-	    public class Foo
-	    {
-	        public int Id { get; set; }
-            [ElasticProperty(AddSortField = true, SortAnalyzer = "simple")]
-	        public string Name { get; set; }
-	    }
+		public class Foo
+		{
+			public int Id { get; set; }
+			[ElasticProperty(AddSortField = true, SortAnalyzer = "simple")]
+			public string Name { get; set; }
+		}
 
-	    [Test]
-	    public void SortAnalyzeryReadFromAttribute()
-	    {
-            var result = _client.Map<Foo>(m => m.MapFromAttributes());
-            this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
-	        
-	    }
+		[Test]
+		public void SortAnalyzeryReadFromAttribute()
+		{
+			var result = _client.Map<Foo>(m => m.MapFromAttributes());
+			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
+
+		}
 
 		[Test]
 		public void GeoPointProperty()

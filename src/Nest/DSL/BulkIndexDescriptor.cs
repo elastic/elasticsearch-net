@@ -56,7 +56,7 @@ namespace Nest
 		/// <summary>
 		/// Manually set the id for the newly created object
 		/// </summary>
-		public BulkIndexDescriptor<T> Id(int id)
+		public BulkIndexDescriptor<T> Id(long id)
 		{
 			return this.Id(id.ToString(CultureInfo.InvariantCulture));
 		}
@@ -101,6 +101,9 @@ namespace Nest
 					break;
 				case Nest.VersionType.Internal:
 					this._VersionType = "internal";
+					break;
+				case Nest.VersionType.Force:
+					this._VersionType = "force";
 					break;
 			}
 			return this;

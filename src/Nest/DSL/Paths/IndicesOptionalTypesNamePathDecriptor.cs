@@ -121,7 +121,7 @@ namespace Nest
 			if (!this._AllIndices.HasValue && this._Indices == null)
 				this._Indices = new[] {(IndexNameMarker)inferrer.DefaultIndex};
 			if (this._Name.IsNullOrEmpty())
-				throw new DslException("missing Name()");
+				throw new DslException("missing Repository()");
 
 			var indices = this._Indices.HasAny()
 				? inferrer.IndexNames(this._Indices)

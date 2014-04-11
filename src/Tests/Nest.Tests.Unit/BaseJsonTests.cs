@@ -43,7 +43,16 @@ namespace Nest.Tests.Unit
 			//Lazy programmers for the win!
 			throw new Exception(s);
 		}
-
+		protected ElasticClient GetFixedReturnClient(MethodBase methodInfo, string fileName)
+		{
+			var settings = new ConnectionSettings(Test.Default.Uri, "default-index")
+				.ExposeRawResponse();
+			var file = this.GetFileFromMethod(methodInfo, fileName);
+			var jsonResponse = File.ReadAllText(file);
+			var connection = new InMemoryConnection(this._settings, jsonResponse);
+			var client = new ElasticClient(settings, connection);
+			return client;
+		}
 		protected void JsonEquals(object o, MethodBase method, string fileName = null)
 		{
 			if (o is byte[])

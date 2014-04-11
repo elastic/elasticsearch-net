@@ -120,6 +120,7 @@
     <Compile Include="BaseJsonTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
+    <Compile Include="Cluster\State\StateTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUrlTests.cs" />
     <Compile Include="Core\Map\MappingBehaviourTests.cs" />
@@ -175,6 +176,9 @@
     <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />
     <Compile Include="Search\Query\Modes\ConditionlessQueryJson.cs" />
     <Compile Include="Search\Query\Singles\FunctionScoreQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\CommonTerms\CommonTermsTests.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\SimpleQueryString\SimpleQueryStringQueryJson.cs" />
     <Compile Include="Search\Query\Singles\RegexpQueryJson.cs" />
     <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
     <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
@@ -289,6 +293,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Cluster\State\ClusterState.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Bulk\BulkOperations.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -497,10 +504,19 @@
     <None Include="Search\Query\QueriesInQueries\FilteredQueryConditionless.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Search\Query\Singles\CommonTerms\CommonTermsFull.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeFull.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\Modes\VerbatimDoesNotThrowOnEmptyTerm.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\SimpleQueryString\SimpleQueryStringFull.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\Singles\Terms\TermsQueryDescriptorUsingExternalField.json">

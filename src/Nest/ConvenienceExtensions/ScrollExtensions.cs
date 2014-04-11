@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Nest
 {
@@ -18,7 +18,7 @@ namespace Nest
 		/// <param name="client"></param>
 		/// <param name="scrollTime">The time the server should wait for the scroll before closing the scan operation</param>
 		/// <param name="scrollId">The scroll id to continue the scroll operation</param>
-		public static IQueryResponse<T> Scroll<T>(this IElasticClient client, string scrollTime, string scrollId) where T : class
+		public static ISearchResponse<T> Scroll<T>(this IElasticClient client, string scrollTime, string scrollId) where T : class
 		{
 			return client.Scroll<T>(s => s.Scroll(scrollTime).ScrollId(scrollId));
 		}
@@ -34,9 +34,29 @@ namespace Nest
 		/// <param name="client"></param>
 		/// <param name="scrollTime">The time the server should wait for the scroll before closing the scan operation</param>
 		/// <param name="scrollId">The scroll id to continue the scroll operation</param>
-		public static Task<IQueryResponse<T>> ScrollAsync<T>(this IElasticClient client, string scrollTime, string scrollId) where T : class
+		public static Task<ISearchResponse<T>> ScrollAsync<T>(this IElasticClient client, string scrollTime, string scrollId) where T : class
 		{
 			return client.ScrollAsync<T>(s => s.Scroll(scrollTime).ScrollId(scrollId));
+		}
+		
+		/// <summary>
+		/// Deletes a registered scroll request on the cluster 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html
+		/// </summary>
+		/// <param name="selector">Specify the scroll id as well as request specific configuration</param>
+		public static IEmptyResponse ClearScroll(this IElasticClient client, string scrollId) 
+		{
+			return client.ClearScroll(s => s.ScrollId(scrollId));
+		}
+		
+		/// <summary>
+		/// Deletes a registered scroll request on the cluster 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html
+		/// </summary>
+		/// <param name="selector">Specify the scroll id as well as request specific configuration</param>
+		public static Task<IEmptyResponse> ClearScrollAsync(this IElasticClient client, string scrollId) 
+		{
+			return client.ClearScrollAsync(s => s.ScrollId(scrollId));
 		}
 	}
 }

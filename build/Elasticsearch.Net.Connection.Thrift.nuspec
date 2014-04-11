@@ -2,18 +2,18 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Elasticsearch.Net.Connection.Thrift</id>
-    <version>0.1.0</version>
+    <version>1.0.0-beta1</version>
     <title>Elasticsearch.Net.Connection.Thrift - Thrift support for Elasticsearch.Net</title>
-    <authors>Martijn Laarman and contributors</authors>
-    <owners>Martijn Laarman</owners>
+    <authors>Elasticsearch Inc. and contributors</authors>
+    <owners>Elasticsearch Inc.</owners>
     <iconUrl>http://nest.azurewebsites.net/images/elasticsearch-net-nuget-icon.png</iconUrl>
-    <licenseUrl>http://mpdreamz.mit-license.org/</licenseUrl>
-    <projectUrl>https://github.com/Mpdreamz/NEST</projectUrl>
+    <licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>
+    <projectUrl>https://github.com/elasticsearch/elasticsearch-net</projectUrl>
     <summary>An IConnection implementation that utilizes Apache Thrift to talk with elasticsearch</summary>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>An IConnection implementation that utilizes Apache Thrift to talk with elasticsearch</description>
     <dependencies>
-      <dependency id="Elasticsearch.Net" version="0.1.0"/>
+      <dependency id="Elasticsearch.Net" version="1.0.0-beta1"/>
       <dependency id="NetReflector" />
     </dependencies>
     <tags>elasticsearch elastic search lucene thrift nest</tags>

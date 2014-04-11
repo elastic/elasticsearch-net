@@ -32,7 +32,7 @@ namespace Nest
 		/// <typeparam name="T">The type that represents the result hits</typeparam>
 		/// <param name="scrollSelector">A descriptor that describes the scroll operation</param>
 		/// <returns>A query response holding T hits as well as the ScrollId for the next scroll operation</returns>
-		IQueryResponse<T> Scroll<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
+		ISearchResponse<T> Scroll<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
 			where T : class;
 		
 		/// <summary>
@@ -45,7 +45,7 @@ namespace Nest
 		/// <typeparam name="T">The type that represents the result hits</typeparam>
 		/// <param name="scrollSelector">A descriptor that describes the scroll operation</param>
 		/// <returns>A query response holding T hits as well as the ScrollId for the next scroll operation</returns>
-		Task<IQueryResponse<T>> ScrollAsync<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
+		Task<ISearchResponse<T>> ScrollAsync<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
 			where T : class;
 
 		/// <summary>
@@ -108,14 +108,14 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html
 		/// </summary>
 		/// <param name="updateSettingsSelector">A descriptor that strongly types all the updateable settings</param>
-		ISettingsOperationResponse UpdateSettings( Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector); 
+		IAcknowledgedResponse UpdateSettings( Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector); 
 		
 		/// <summary>
 		/// Change specific index level settings in real time. Note not all index settings CAN be updated.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html
 		/// </summary>
 		/// <param name="updateSettingsSelector">A descriptor that strongly types all the updateable settings</param>
-		Task<ISettingsOperationResponse> UpdateSettingsAsync(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector);
+		Task<IAcknowledgedResponse> UpdateSettingsAsync(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector);
 
 		/// <summary>
 		/// The validate API allows a user to validate a potentially expensive query without executing it.
@@ -183,7 +183,7 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-gateway-snapshot.html
 		/// </summary>
 		/// <param name="snapShotSelector">A descriptor that describes the parameters for the gateway snapshot operation</param>
-		IShardsOperationResponse GatewaySnapshot(Func<SnapshotDescriptor, SnapshotDescriptor> snapShotSelector = null);
+		IShardsOperationResponse GatewaySnapshot(Func<GatewaySnapshotDescriptor, GatewaySnapshotDescriptor> snapShotSelector = null);
 		
 		/// <summary>
 		/// The gateway snapshot API allows to explicitly perform a snapshot through the gateway of one or more indices (backup them). 
@@ -194,7 +194,7 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-gateway-snapshot.html
 		/// </summary>
 		/// <param name="snapShotSelector">A descriptor that describes the parameters for the gateway snapshot operation</param>
-		Task<IShardsOperationResponse> GatewaySnapshotAsync(Func<SnapshotDescriptor, SnapshotDescriptor> snapShotSelector = null);
+		Task<IShardsOperationResponse> GatewaySnapshotAsync(Func<GatewaySnapshotDescriptor, GatewaySnapshotDescriptor> snapShotSelector = null);
 		
 		/// <summary>
 		/// The refresh API allows to explicitly refresh one or more index, making all operations performed since the last refresh 
@@ -429,6 +429,49 @@ namespace Nest
 			where K : class;
 
 		/// <summary>
+		/// Percolate a document but only return the number of matches not the matches itself
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
+		/// </summary>
+		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
+		/// <param name="object">The object to percolator</param>
+		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
+		IPercolateCountResponse PercolateCount<T>(T @object, Func<PercolateCountDescriptor<T, T>, PercolateCountDescriptor<T, T>> percolateSelector = null)
+			where T : class;
+
+		/// <summary>
+		/// Percolate a document but only return the number of matches not the matches itself
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
+		/// </summary>
+		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
+		/// <param name="object">The object to percolator</param>
+		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
+		Task<IPercolateCountResponse> PercolateCountAsync<T>(T @object, Func<PercolateCountDescriptor<T, T>, PercolateCountDescriptor<T, T>> percolateSelector = null)
+			where T : class;
+
+		/// <summary>
+		/// Percolate a document but only return the number of matches not the matches itself
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
+		/// </summary>
+		/// <typeparam name="T">The type to infer the index/type from</typeparam>
+		/// <typeparam name="K">The type of the object that is being percolated</typeparam>
+		/// <param name="object">The object to percolator</param>
+		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
+		IPercolateCountResponse PercolateCount<T, K>(K @object, Func<PercolateCountDescriptor<T, K>, PercolateCountDescriptor<T, K>> percolateSelector = null)
+			where T : class
+			where K : class;
+
+		/// <summary>
+		/// Percolate a document but only return the number of matches not the matches itself
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
+		/// </summary>
+		/// <typeparam name="T">The type to infer the index/type from</typeparam>
+		/// <typeparam name="K">The type of the object that is being percolated</typeparam>
+		/// <param name="object">The object to percolator</param>
+		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
+		Task<IPercolateCountResponse> PercolateCountAsync<T, K>(K @object, Func<PercolateCountDescriptor<T, K>, PercolateCountDescriptor<T, K>> percolateSelector = null)
+			where T : class
+			where K : class;
+		/// <summary>
 		/// The put mapping API allows to register specific mapping definition for a specific type.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-put-mapping.html
 		/// </summary>
@@ -615,14 +658,14 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the index exist operation</param>
-		IIndexExistsResponse IndexExists(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
+		IExistsResponse IndexExists(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
 		
 		/// <summary>
 		/// Used to check if the index (indices) exists or not. 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the index exist operation</param>
-		Task<IIndexExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
+		Task<IExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
 
 		/// <summary>
 		/// The more like this (mlt) API allows to get documents that are "like" a specified document. 
@@ -630,7 +673,7 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">Type used to infer the default index and typename and used to describe the search</typeparam>
 		/// <param name="mltSelector">A descriptor that describes the more like this operation</param>
-		IQueryResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
+		ISearchResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
 			where T : class;
 
 		/// <summary>
@@ -639,7 +682,7 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">Type used to infer the default index and typename and used to describe the search</typeparam>
 		/// <param name="mltSelector">A descriptor that describes the more like this operation</param>
-		Task<IQueryResponse<T>> MoreLikeThisAsync<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
+		Task<ISearchResponse<T>> MoreLikeThisAsync<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
 			where T : class;
 
 		/// <summary>
@@ -676,7 +719,7 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) 
+		ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) 
 			where T : class;
 
 		/// <summary>
@@ -686,7 +729,7 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <typeparam name="TResult">The type used to describe the strongly typed query</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		IQueryResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+		ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
 			where T : class
 			where TResult : class;
 
@@ -696,7 +739,7 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		Task<IQueryResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) 
+		Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) 
 			where T : class;
 
 		/// <summary>
@@ -706,7 +749,7 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the index and typename</typeparam>
 		/// <typeparam name="TResult">The type used to describe the strongly typed query</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		Task<IQueryResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
 			where T : class
 			where TResult : class;
 
@@ -990,5 +1033,158 @@ namespace Nest
 		/// </summary>
 		/// <param name="selector">An optional descriptor that further describes the status operation, i.e limiting it to certain indices</param>
 		Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
+
+		/// <summary>
+		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester. 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
+		/// </summary>
+		/// <typeparam name="T">The type used to strongly type parts of the suggest operation</typeparam>
+		/// <param name="selector">The suggesters to use this operation (can be multiple)</param>
+		ISuggestResponse Suggest<T>(Func<SuggestDescriptor<T>, SuggestDescriptor<T>> selector)
+			where T : class;
+
+		/// <summary>
+		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester. 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
+		/// </summary>
+		/// <typeparam name="T">The type used to strongly type parts of the suggest operation</typeparam>
+		/// <param name="selector">The suggesters to use this operation (can be multiple)</param>
+		Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, SuggestDescriptor<T>> selector)
+			where T : class;
+
+		/// <summary>
+		/// Deletes a registered scroll request on the cluster 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html
+		/// </summary>
+		/// <param name="selector">Specify the scroll id as well as request specific configuration</param>
+		IEmptyResponse ClearScroll(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector);
+
+		/// <summary>
+		/// Deletes a registered scroll request on the cluster 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html
+		/// </summary>
+		/// <param name="selector">Specify the scroll id as well as request specific configuration</param>
+		Task<IEmptyResponse> ClearScrollAsync(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector);
+
+		/// <summary>
+		/// Check if a document exists without returning its contents
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="existsSelector">Describe what document we are looking for</param>
+		IExistsResponse DocumentExists<T>(Func<DocumentExistsDescriptor<T>, DocumentExistsDescriptor<T>> existsSelector)
+			where T : class;
+
+		/// <summary>
+		/// Check if a document exists without returning its contents
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="existsSelector">Describe what document we are looking for</param>
+		Task<IExistsResponse> DocumentExistsAsync<T>(Func<DocumentExistsDescriptor<T>, DocumentExistsDescriptor<T>> existsSelector)
+			where T : class;
+
+		/// <summary>
+		/// Before any snapshot or restore operation can be performed a snapshot repository should be registered in Elasticsearch. 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_repositories
+		/// </summary>
+		/// <param name="repository">The name for the repository</param>
+		/// <param name="selector">describe what the repository looks like</param>
+		IAcknowledgedResponse CreateRepository(string repository, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
+
+		/// <summary>
+		/// Before any snapshot or restore operation can be performed a snapshot repository should be registered in Elasticsearch. 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_repositories
+		/// </summary>
+		/// <param name="repository">The name for the repository</param>
+		/// <param name="selector">describe what the repository looks like</param>
+		Task<IAcknowledgedResponse> CreateRepositoryAsync(string repository, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
+
+		/// <summary>
+		/// Delete a repository, if you have ongoing restore operations be sure to delete the indices being restored into first.
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_repositories
+		/// </summary>
+		/// <param name="repository">The name of the repository</param>
+		/// <param name="selector">Optionaly provide the delete operation with more details</param>>
+		IAcknowledgedResponse DeleteRepository(string repository, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
+
+		/// <summary>
+		/// Delete a repository, if you have ongoing restore operations be sure to delete the indices being restored into first.
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_repositories
+		/// </summary>
+		/// <param name="repository">The name of the repository</param>
+		/// <param name="selector">Optionaly provide the delete operation with more details</param>>
+		Task<IAcknowledgedResponse> DeleteRepositoryAsync(string repository, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
+		
+		/// <summary>
+		/// A repository can contain multiple snapshots of the same cluster. Snapshot are identified by unique names within the cluster. 
+		/// </summary>
+		/// <param name="repository">The name of the repository we want to create a snapshot in</param>
+		/// <param name="snapshotName">The name of the snapshot</param>
+		/// <param name="selector">Optionally provide more details about the snapshot operation</param>
+		ISnapshotResponse Snapshot(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
+
+		/// <summary>
+		/// A repository can contain multiple snapshots of the same cluster. Snapshot are identified by unique names within the cluster. 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
+		/// </summary>
+		/// <param name="repository">The name of the repository we want to create a snapshot in</param>
+		/// <param name="snapshotName">The name of the snapshot</param>
+		/// <param name="selector">Optionally provide more details about the snapshot operation</param>
+		Task<ISnapshotResponse> SnapshotAsync(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
+		
+		/// <summary>
+		/// Delete a snapshot
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
+		/// </summary>
+		/// <param name="repository">The repository name under which the snapshot we want to delete lives</param>
+		/// <param name="snapshotName">The name of the snapshot that we want to delete</param>
+		/// <param name="selector">Optionally further describe the delete snapshot operation</param>
+		IAcknowledgedResponse DeleteSnapshot(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
+
+		/// <summary>
+		/// Delete a snapshot
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
+		/// </summary>
+		/// <param name="repository">The repository name under which the snapshot we want to delete lives</param>
+		/// <param name="snapshotName">The name of the snapshot that we want to delete</param>
+		/// <param name="selector">Optionally further describe the delete snapshot operation</param>
+		Task<IAcknowledgedResponse> DeleteSnapshotAsync(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
+		
+		/// <summary>
+		/// Gets information about one or more snapshots
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
+		/// </summary>
+		/// <param name="repository">The repository name under which the snapshots live</param>
+		/// <param name="snapshotName">The names of the snapshots we want information from (can be _all or wildcards)</param>
+		/// <param name="selector">Optionally further describe the get snapshot operation</param>
+		IGetSnapshotResponse GetSnapshot(string repository, string snapshotName, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
+
+		/// <summary>
+		/// Gets information about one or more snapshots
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
+		/// </summary>
+		/// <param name="repository">The repository name under which the snapshots live</param>
+		/// <param name="snapshotName">The names of the snapshots we want information from (can be _all or wildcards)</param>
+		/// <param name="selector">Optionally further describe the get snapshot operation</param>
+		Task<IGetSnapshotResponse> GetSnapshotAsync(string repository, string snapshotName, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
+		
+		/// <summary>
+		/// Restore a snapshot
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_restore
+		/// </summary>
+		/// <param name="repository">The repository name that holds our snapshot</param>
+		/// <param name="snapshotName">The name of the snapshot that we want to restore</param>
+		/// <param name="selector">Optionally further describe the restore operation</param>
+		IRestoreResponse Restore(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
+
+		/// <summary>
+		/// Restore a snapshot
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_restore
+		/// </summary>
+		/// <param name="repository">The repository name that holds our snapshot</param>
+		/// <param name="snapshotName">The name of the snapshot that we want to restore</param>
+		/// <param name="selector">Optionally further describe the restore operation</param>
+		Task<IRestoreResponse> RestoreAsync(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
 	}
 }

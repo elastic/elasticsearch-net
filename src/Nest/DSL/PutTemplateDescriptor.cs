@@ -85,7 +85,19 @@ namespace Nest
 			return this;
 
 		}
+		
+		public PutTemplateDescriptor AddAlias(string aliasName, Func<CreateAliasDescriptor, CreateAliasDescriptor> addAliasDescriptor = null)
+		{
+			aliasName.ThrowIfNull("aliasName");
+			addAliasDescriptor = addAliasDescriptor ?? (a=>a);
+			var alias = addAliasDescriptor(new CreateAliasDescriptor());
+			if (this._TemplateMapping.Aliases == null)
+				this._TemplateMapping.Aliases = new Dictionary<string, CreateAliasDescriptor>();
 
+			this._TemplateMapping.Aliases[aliasName] = alias;
+			return this;
+
+		}
 		ElasticsearchPathInfo<PutTemplateRequestParameters> IPathInfo<PutTemplateRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = base.ToPathInfo<PutTemplateRequestParameters>(settings, this._QueryString);

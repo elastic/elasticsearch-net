@@ -53,7 +53,7 @@ namespace Nest
 			where K : FluentRequestParameters<K>, new()
 		{
 			if (this._Name == null)
-				throw new DslException("missing Name()");
+				throw new DslException("missing Repository()");
 			var inferrer = new ElasticInferrer(settings);
 			var index = inferrer.IndexName(this._Index) ?? inferrer.DefaultIndex; 
 			var pathInfo = new ElasticsearchPathInfo<K>()

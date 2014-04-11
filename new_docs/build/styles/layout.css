@@ -188,6 +188,9 @@ ul#nest h4.title {
 	background:#eeeeee;
 }
 
+li {
+	list-style:inherit;
+}
 
 /* responsiveness */
 @media (max-width: 1040px) {

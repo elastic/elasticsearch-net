@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration.Core
 			var response = this._client.Index<ElasticsearchProject>(doc, i => i.OpType(OpTypeOptions.Create));
 
 			// Make sure the index request failed with HTTP status 409 since document with same id already exists.
-			Assert.False(response.OK);
+			Assert.False(response.Created);
 			Assert.AreEqual(409, response.ConnectionStatus.HttpStatusCode);
 		}
 		
@@ -78,7 +78,7 @@ namespace Nest.Tests.Integration.Core
 			var response = this._clientNoRawResponse.Index<ElasticsearchProject>(doc, i => i.OpType(OpTypeOptions.Create));
 
 			// Make sure the index request failed with HTTP status 409 since document with same id already exists.
-			Assert.False(response.OK);
+			Assert.False(response.Created);
 			Assert.AreEqual(409, response.ConnectionStatus.HttpStatusCode);
 		}
 	}

@@ -342,6 +342,32 @@ namespace Nest
 		}
 		
 		
+		internal ElasticsearchResponse<T> CatPluginsDispatch<T>(ElasticsearchPathInfo<CatPluginsRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/plugins
+					return this.Raw.CatPlugins<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatPlugins() into any of the following paths: \r\n - /_cat/plugins");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> CatPluginsDispatchAsync<T>(ElasticsearchPathInfo<CatPluginsRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/plugins
+					return this.Raw.CatPluginsAsync<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatPlugins() into any of the following paths: \r\n - /_cat/plugins");
+		}
+		
+		
 		internal ElasticsearchResponse<T> CatRecoveryDispatch<T>(ElasticsearchPathInfo<CatRecoveryRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
@@ -738,7 +764,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> CountPercolateDispatch<T>(ElasticsearchPathInfo<CountPercolateRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> CountPercolateDispatch<T>(ElasticsearchPathInfo<PercolateCountRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -765,7 +791,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> CountPercolateDispatchAsync<T>(ElasticsearchPathInfo<CountPercolateRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> CountPercolateDispatchAsync<T>(ElasticsearchPathInfo<PercolateCountRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -858,7 +884,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> ExistsDispatch<T>(ElasticsearchPathInfo<ExistsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> ExistsDispatch<T>(ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -873,7 +899,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> ExistsDispatchAsync<T>(ElasticsearchPathInfo<ExistsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ExistsDispatchAsync<T>(ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2174,6 +2200,38 @@ namespace Nest
 		}
 		
 		
+		internal ElasticsearchResponse<T> IndicesRecoveryDispatch<T>(ElasticsearchPathInfo<IndicesRecoveryRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/_recovery
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesRecovery<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_recovery
+					return this.Raw.IndicesRecoveryForAll<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesRecovery() into any of the following paths: \r\n - /_recovery\r\n - /{index}/_recovery");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> IndicesRecoveryDispatchAsync<T>(ElasticsearchPathInfo<IndicesRecoveryRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/_recovery
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesRecoveryAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_recovery
+					return this.Raw.IndicesRecoveryForAllAsync<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesRecovery() into any of the following paths: \r\n - /_recovery\r\n - /{index}/_recovery");
+		}
+		
+		
 		internal ElasticsearchResponse<T> IndicesRefreshDispatch<T>(ElasticsearchPathInfo<RefreshRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
@@ -2252,7 +2310,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesSnapshotIndexDispatch<T>(ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesSnapshotIndexDispatch<T>(ElasticsearchPathInfo<GatewaySnapshotRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2268,7 +2326,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesSnapshotIndexDispatchAsync<T>(ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesSnapshotIndexDispatchAsync<T>(ElasticsearchPathInfo<GatewaySnapshotRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3124,7 +3182,69 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SnapshotCreateDispatch<T>(ElasticsearchPathInfo<SnapshotCreateRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> SearchTemplateDispatch<T>(ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/_search/template
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.SearchTemplateGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+					//GET /{index}/_search/template
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.SearchTemplateGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_search/template
+					return this.Raw.SearchTemplateGet<T>(u => pathInfo.RequestParameters);
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/_search/template
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.SearchTemplate<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+					//POST /{index}/_search/template
+					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
+						return this.Raw.SearchTemplate<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
+					//POST /_search/template
+					if (body != null)
+						return this.Raw.SearchTemplate<T>(body,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SearchTemplate() into any of the following paths: \r\n - /_search/template\r\n - /{index}/_search/template\r\n - /{index}/{type}/_search/template");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> SearchTemplateDispatchAsync<T>(ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/_search/template
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.SearchTemplateGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+					//GET /{index}/_search/template
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.SearchTemplateGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_search/template
+					return this.Raw.SearchTemplateGetAsync<T>(u => pathInfo.RequestParameters);
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/_search/template
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.SearchTemplateAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+					//POST /{index}/_search/template
+					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
+						return this.Raw.SearchTemplateAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
+					//POST /_search/template
+					if (body != null)
+						return this.Raw.SearchTemplateAsync<T>(body,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SearchTemplate() into any of the following paths: \r\n - /_search/template\r\n - /{index}/_search/template\r\n - /{index}/{type}/_search/template");
+		}
+		
+		
+		internal ElasticsearchResponse<T> SnapshotCreateDispatch<T>(ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3145,7 +3265,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotCreateDispatchAsync<T>(ElasticsearchPathInfo<SnapshotCreateRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> SnapshotCreateDispatchAsync<T>(ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3166,7 +3286,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SnapshotCreateRepositoryDispatch<T>(ElasticsearchPathInfo<SnapshotCreateRepositoryRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> SnapshotCreateRepositoryDispatch<T>(ElasticsearchPathInfo<CreateRepositoryRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3187,7 +3307,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryDispatchAsync<T>(ElasticsearchPathInfo<SnapshotCreateRepositoryRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryDispatchAsync<T>(ElasticsearchPathInfo<CreateRepositoryRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3208,7 +3328,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SnapshotDeleteDispatch<T>(ElasticsearchPathInfo<SnapshotDeleteRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> SnapshotDeleteDispatch<T>(ElasticsearchPathInfo<DeleteSnapshotRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3223,7 +3343,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotDeleteDispatchAsync<T>(ElasticsearchPathInfo<SnapshotDeleteRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SnapshotDeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteSnapshotRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3238,7 +3358,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SnapshotDeleteRepositoryDispatch<T>(ElasticsearchPathInfo<SnapshotDeleteRepositoryRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> SnapshotDeleteRepositoryDispatch<T>(ElasticsearchPathInfo<DeleteRepositoryRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3253,7 +3373,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryDispatchAsync<T>(ElasticsearchPathInfo<SnapshotDeleteRepositoryRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryDispatchAsync<T>(ElasticsearchPathInfo<DeleteRepositoryRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3268,7 +3388,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SnapshotGetDispatch<T>(ElasticsearchPathInfo<SnapshotGetRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> SnapshotGetDispatch<T>(ElasticsearchPathInfo<GetSnapshotRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3283,7 +3403,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotGetDispatchAsync<T>(ElasticsearchPathInfo<SnapshotGetRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SnapshotGetDispatchAsync<T>(ElasticsearchPathInfo<GetSnapshotRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3330,7 +3450,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SnapshotRestoreDispatch<T>(ElasticsearchPathInfo<SnapshotRestoreRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> SnapshotRestoreDispatch<T>(ElasticsearchPathInfo<RestoreRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3345,7 +3465,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotRestoreDispatchAsync<T>(ElasticsearchPathInfo<SnapshotRestoreRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> SnapshotRestoreDispatchAsync<T>(ElasticsearchPathInfo<RestoreRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3357,6 +3477,44 @@ namespace Nest
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.SnapshotRestore() into any of the following paths: \r\n - /_snapshot/{repository}/{snapshot}/_restore");
+		}
+		
+		
+		internal ElasticsearchResponse<T> SnapshotStatusDispatch<T>(ElasticsearchPathInfo<SnapshotStatusRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_snapshot/{repository}/{snapshot}/_status
+					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty())
+						return this.Raw.SnapshotStatus<T>(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.RequestParameters);
+					//GET /_snapshot/{repository}/_status
+					if (!pathInfo.Repository.IsNullOrEmpty())
+						return this.Raw.SnapshotStatus<T>(pathInfo.Repository,u => pathInfo.RequestParameters);
+					//GET /_snapshot/_status
+					return this.Raw.SnapshotStatus<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotStatus() into any of the following paths: \r\n - /_snapshot/_status\r\n - /_snapshot/{repository}/_status\r\n - /_snapshot/{repository}/{snapshot}/_status");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> SnapshotStatusDispatchAsync<T>(ElasticsearchPathInfo<SnapshotStatusRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_snapshot/{repository}/{snapshot}/_status
+					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty())
+						return this.Raw.SnapshotStatusAsync<T>(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.RequestParameters);
+					//GET /_snapshot/{repository}/_status
+					if (!pathInfo.Repository.IsNullOrEmpty())
+						return this.Raw.SnapshotStatusAsync<T>(pathInfo.Repository,u => pathInfo.RequestParameters);
+					//GET /_snapshot/_status
+					return this.Raw.SnapshotStatusAsync<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotStatus() into any of the following paths: \r\n - /_snapshot/_status\r\n - /_snapshot/{repository}/_status\r\n - /_snapshot/{repository}/{snapshot}/_status");
 		}
 		
 		

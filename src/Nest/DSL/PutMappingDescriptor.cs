@@ -95,9 +95,9 @@ namespace Nest
 			return this;
 		}
 
-		public PutMappingDescriptor<T> DisableAllField(bool disabled = true)
+		public PutMappingDescriptor<T> AllField(Func<AllFieldMapping, AllFieldMapping> allFieldSelector)
 		{
-			this._Mapping.AllFieldMapping = new AllFieldMapping().SetDisabled(disabled);
+			this._Mapping.AllFieldMapping = allFieldSelector(new AllFieldMapping());
 			return this;
 		}
 

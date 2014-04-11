@@ -58,7 +58,7 @@ namespace Nest.Tests.Integration.Reproduce
 
 			var minElasticsearch = timings.Min(t => t.ElasticsearchTook);
 			var minNest = timings.Min(t => t.NestTook);
-
+				
 			//elasticsearch is fast! min should absolutely be below 2ms
 			minElasticsearch.Should().BeLessThan(10);
 			
@@ -70,7 +70,7 @@ namespace Nest.Tests.Integration.Reproduce
 			var maxNest = timings.Max(t => t.NestTook);
 
 			maxElasticsearch.Should().BeLessThan(20);
-			maxNest.Should().BeLessThan(30);
+			maxNest.Should().BeLessThan(50);
 
 			var plotElasticsearch = timings.Select(p => p.ElasticsearchTook).ToArray();
 			var plotNest = timings.Select(p => p.NestTook).ToArray();

@@ -8,29 +8,29 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IQueryResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
+		public ISearchResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
 			where T : class
 		{
-			return this.Dispatch<MoreLikeThisDescriptor<T>, MoreLikeThisRequestParameters, QueryResponse<T>>(
+			return this.Dispatch<MoreLikeThisDescriptor<T>, MoreLikeThisRequestParameters, SearchResponse<T>>(
 				mltSelector,
 				(p, d) =>
 				{
 					CopySearchRequestParameters(d);
-					return this.RawDispatch.MltDispatch<QueryResponse<T>>(p, d._Search);
+					return this.RawDispatch.MltDispatch<SearchResponse<T>>(p, d._Search);
 				}
 			);
 		}
 
 		/// <inheritdoc />
-		public Task<IQueryResponse<T>> MoreLikeThisAsync<T>(
+		public Task<ISearchResponse<T>> MoreLikeThisAsync<T>(
 			Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector) where T : class
 		{
-			return this.DispatchAsync<MoreLikeThisDescriptor<T>, MoreLikeThisRequestParameters, QueryResponse<T>, IQueryResponse<T>>(
+			return this.DispatchAsync<MoreLikeThisDescriptor<T>, MoreLikeThisRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
 				mltSelector,
 				(p, d) =>
 				{
 					CopySearchRequestParameters(d);
-					return this.RawDispatch.MltDispatchAsync<QueryResponse<T>>(p, d._Search);
+					return this.RawDispatch.MltDispatchAsync<SearchResponse<T>>(p, d._Search);
 				}
 			);
 		}

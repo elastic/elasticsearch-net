@@ -83,12 +83,24 @@ namespace Nest
 			where R : BaseResponse
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			Func<ElasticsearchResponse<R>, D, R> resultSelector = 
-				((c, d) => c.Success || allow404 && c.HttpStatusCode == 404  ? c.Response : CreateInvalidInstance<R>(c));
 			var response = dispatch(pathInfo, descriptor);
-			return resultSelector(response, descriptor);
+			return ResultsSelector<D, Q, R>(response, descriptor, allow404);
 		}
 
+		private static R ResultsSelector<D, Q, R>(ElasticsearchResponse<R> c, D descriptor, bool allow404)
+			where Q : FluentRequestParameters<Q>, new()
+			where D : IPathInfo<Q>
+			where R : BaseResponse
+		{
+			if (c.Success || allow404 && c.HttpStatusCode == 404)
+			{
+				c.Response.IsValid = true;
+				return c.Response;
+			}
+			var badResponse = CreateInvalidInstance<R>(c);
+			return badResponse;
+
+		}
 
 
 		private static R CreateInvalidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
@@ -125,10 +137,8 @@ namespace Nest
 			where I : IResponse
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			Func<ElasticsearchResponse<R>, D, R> resultSelector =
-				((c, d) => c.Success || allow404 && c.HttpStatusCode == 404  ? c.Response : CreateInvalidInstance<R>(c));
 			return dispatch(pathInfo, descriptor)
-				.ContinueWith<I>(r => resultSelector(r.Result, descriptor));
+				.ContinueWith<I>(r => ResultsSelector<D, Q, R>(r.Result, descriptor, allow404));
 		}
 
 

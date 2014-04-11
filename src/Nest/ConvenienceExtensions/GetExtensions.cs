@@ -28,10 +28,10 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
-		/// <param name="id">The int id of the document we want the fetch</param>
+		/// <param name="id">The long id of the document we want the fetch</param>
 		/// <param name="index">Optionally override the inferred index name for T</param>
 		/// <param name="type">Optionally override the inferred typename for T</param>
-		public static IGetResponse<T> Get<T>(this IElasticClient client, int id, string index = null, string type = null)
+		public static IGetResponse<T> Get<T>(this IElasticClient client, long id, string index = null, string type = null)
 			where T : class
 		{
 			return client.Get<T>(s => s.Id(id).Index(index).Type(type));
@@ -58,10 +58,10 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
-		/// <param name="id">The int id of the document we want the fetch</param>
+		/// <param name="id">The long id of the document we want the fetch</param>
 		/// <param name="index">Optionally override the inferred index name for T</param>
 		/// <param name="type">Optionally override the inferred typename for T</param>
-		public static Task<IGetResponse<T>> GetAsync<T>(this IElasticClient client, int id, string index = null, string type = null)
+		public static Task<IGetResponse<T>> GetAsync<T>(this IElasticClient client, long id, string index = null, string type = null)
 			where T : class
 		{
 			return client.GetAsync<T>(s => s.Id(id).Index(index).Type(type));

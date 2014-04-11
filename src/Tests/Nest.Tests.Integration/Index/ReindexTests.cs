@@ -57,7 +57,7 @@ namespace Nest.Tests.Integration.Index
 			var observer = new ReindexObserver<object>(
 				onNext: (r) =>
 				{
-					var scrollResults = r.QueryResponse;
+					var scrollResults = r.SearchResponse;
 					var bulkResults = r.BulkResponse;
 
 					Assert.NotNull(scrollResults);

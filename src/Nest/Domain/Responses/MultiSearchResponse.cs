@@ -19,15 +19,15 @@ namespace Nest
 
 		public int TotalResponses { get { return this._Responses.HasAny() ? this._Responses.Count() : 0 ; } }
 
-		public IEnumerable<QueryResponse<T>> GetResponses<T>() where T : class
+		public IEnumerable<SearchResponse<T>> GetResponses<T>() where T : class
 		{
-			return this._Responses.Values.OfType<QueryResponse<T>>();
+			return this._Responses.Values.OfType<SearchResponse<T>>();
 		}
-		public QueryResponse<T> GetResponse<T>(string name) where T : class
+		public SearchResponse<T> GetResponse<T>(string name) where T : class
 		{
 			object response = null;
 			this._Responses.TryGetValue(name, out response);
-			return response as QueryResponse<T>;
+			return response as SearchResponse<T>;
 		}
 	}
 }

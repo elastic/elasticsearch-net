@@ -39,7 +39,7 @@ namespace Nest
 		/// <param name="ids">IEnumerable of ids as ints for the documents to fetch</param>
 		/// <param name="index">Optionally override the default inferred index name for T</param>
 		/// <param name="type">Optionally overiide the default inferred typename for T</param>
-		public static IEnumerable<IMultiGetHit<T>> GetMany<T>(this IElasticClient client, IEnumerable<int> ids, string index = null, string type = null)
+		public static IEnumerable<IMultiGetHit<T>> GetMany<T>(this IElasticClient client, IEnumerable<long> ids, string index = null, string type = null)
 			where T : class
 		{
 			return client.GetMany<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), index, type);
@@ -74,7 +74,7 @@ namespace Nest
 		/// <param name="ids">IEnumerable of ids as ints for the documents to fetch</param>
 		/// <param name="index">Optionally override the default inferred index name for T</param>
 		/// <param name="type">Optionally overiide the default inferred typename for T</param>
-		public static Task<IEnumerable<IMultiGetHit<T>>> GetManyAsync<T>(this IElasticClient client, IEnumerable<int> ids, string index = null, string type = null)
+		public static Task<IEnumerable<IMultiGetHit<T>>> GetManyAsync<T>(this IElasticClient client, IEnumerable<long> ids, string index = null, string type = null)
 			where T : class
 		{
 			return client.GetManyAsync<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), index, type);

@@ -40,10 +40,9 @@ namespace Elasticsearch.Net
 		byte[] ResponseRaw { get; }
 	}
 
-	internal static class ElasticsearchResponse
+	public static class ElasticsearchResponse
 	{
-
-		public static Task<ElasticsearchResponse<DynamicDictionary>> WrapAsync(Task<ElasticsearchResponse<Dictionary<string, object>>> responseTask)
+		internal static Task<ElasticsearchResponse<DynamicDictionary>> WrapAsync(Task<ElasticsearchResponse<Dictionary<string, object>>> responseTask)
 		{
 			return responseTask
 				.ContinueWith(t =>
@@ -55,7 +54,7 @@ namespace Elasticsearch.Net
 				});
 		}
 
-		public static ElasticsearchResponse<DynamicDictionary> Wrap(ElasticsearchResponse<Dictionary<string, object>> response)
+		internal static ElasticsearchResponse<DynamicDictionary> Wrap(ElasticsearchResponse<Dictionary<string, object>> response)
 		{
 			return ToDynamicResponse(response);
 		}

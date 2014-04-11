@@ -41,7 +41,10 @@ namespace Nest
 		{
 			return this.TryGet<ValueMetric>(key);
 		}
-
+		public ValueMetric Cardinality(string key)
+		{
+			return this.TryGet<ValueMetric>(key);
+		}
 		public ValueMetric Average(string key)
 		{
 			return this.TryGet<ValueMetric>(key);
@@ -61,7 +64,10 @@ namespace Nest
 		{
 			return this.TryGet<ExtendedStatsMetric>(key);
 		}
-
+		public PercentilesMetric Percentiles(string key)
+		{
+			return this.TryGet<PercentilesMetric>(key);
+		}
 		public SingleBucket Global(string key)
 		{
 			return this.TryGet<SingleBucket>(key);
@@ -82,6 +88,15 @@ namespace Nest
 			return this.TryGet<SingleBucket>(key);
 		}
 
+		public BucketWithDocCount<SignificantTermItem> SignificantTerms(string key)
+		{
+			var bucket = this.TryGet<BucketWithDocCount>(key);
+			var b = new BucketWithDocCount<SignificantTermItem>();
+			b.DocCount = bucket.DocCount;
+			b.Items = bucket.Items.OfType<SignificantTermItem>().ToList();
+			return b;
+		}
+
 		public Bucket<KeyItem> Terms(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
@@ -97,6 +112,7 @@ namespace Nest
 			b.Items = bucket.Items.OfType<KeyItem>().ToList();
 			return b;
 		}
+	
 
 		public Bucket<KeyItem> GeoHash(string key)
 		{

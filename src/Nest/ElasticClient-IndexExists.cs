@@ -5,16 +5,16 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	using IndexExistConverter = Func<IElasticsearchResponse, Stream, IndexExistsResponse>;
+	using IndexExistConverter = Func<IElasticsearchResponse, Stream, ExistsResponse>;
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IIndexExistsResponse IndexExists(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector)
+		public IExistsResponse IndexExists(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector)
 		{
-			return this.Dispatch<IndexExistsDescriptor, IndexExistsRequestParameters, IndexExistsResponse>(
+			return this.Dispatch<IndexExistsDescriptor, IndexExistsRequestParameters, ExistsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesExistsDispatch<IndexExistsResponse>(
+				(p, d) => this.RawDispatch.IndicesExistsDispatch<ExistsResponse>(
 					p.DeserializationState(new IndexExistConverter(DeserializeExistsResponse))
 				),
 				allow404: true
@@ -22,20 +22,20 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IIndexExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector)
+		public Task<IExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector)
 		{
-			return this.DispatchAsync<IndexExistsDescriptor, IndexExistsRequestParameters, IndexExistsResponse, IIndexExistsResponse>(
+			return this.DispatchAsync<IndexExistsDescriptor, IndexExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesExistsDispatchAsync<IndexExistsResponse>(
+				(p, d) => this.RawDispatch.IndicesExistsDispatchAsync<ExistsResponse>(
 					p.DeserializationState(new IndexExistConverter(DeserializeExistsResponse))
 				), 
 				allow404: true
 			);
 		}
 
-		private IndexExistsResponse DeserializeExistsResponse(IElasticsearchResponse response, Stream stream)
+		private ExistsResponse DeserializeExistsResponse(IElasticsearchResponse response, Stream stream)
 		{
-			return new IndexExistsResponse(response);
+			return new ExistsResponse(response);
 		}
 	}
 }

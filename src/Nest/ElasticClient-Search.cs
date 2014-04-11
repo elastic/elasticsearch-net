@@ -11,13 +11,13 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) where T : class
+		public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) where T : class
 		{
 			return this.Search<T, T>(searchSelector);
 		}
 
 		/// <inheritdoc />
-		public IQueryResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+		public ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
 			where T : class
 			where TResult : class
 		{
@@ -28,20 +28,20 @@ namespace Nest
 				((IPathInfo<SearchRequestParameters>) descriptor).ToPathInfo(_connectionSettings)
 				.DeserializationState(deserializationState);
 
-			var status = this.RawDispatch.SearchDispatch<QueryResponse<TResult>>(pathInfo, descriptor);
-			return status.Success ? status.Response : CreateInvalidInstance<QueryResponse<TResult>>(status);
+			var status = this.RawDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, descriptor);
+			return status.Success ? status.Response : CreateInvalidInstance<SearchResponse<TResult>>(status);
 		}
 
 
 		/// <inheritdoc />
-		public Task<IQueryResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+		public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
 			where T : class
 		{
 			return this.SearchAsync<T, T>(searchSelector);
 		}
 
 		/// <inheritdoc />
-		public Task<IQueryResponse<TResult>> SearchAsync<T, TResult>(
+		public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(
 			Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
 			where T : class
 			where TResult : class
@@ -53,10 +53,10 @@ namespace Nest
 				((IPathInfo<SearchRequestParameters>) descriptor).ToPathInfo(_connectionSettings)
 				.DeserializationState(deserializationState);
 
-			return this.RawDispatch.SearchDispatchAsync<QueryResponse<TResult>>(pathInfo, descriptor)
-				.ContinueWith<IQueryResponse<TResult>>(t => t.Result.Success
+			return this.RawDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, descriptor)
+				.ContinueWith<ISearchResponse<TResult>>(t => t.Result.Success
 					? t.Result.Response
-					: CreateInvalidInstance<QueryResponse<TResult>>(t.Result));
+					: CreateInvalidInstance<SearchResponse<TResult>>(t.Result));
 		}
 
 		private JsonConverter CreateCovariantSearchSelector<T, TResult>(SearchDescriptor<T> originalSearchDescriptor)

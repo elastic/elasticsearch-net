@@ -17,7 +17,7 @@ namespace Nest
 		/// <param name="client"></param>
 		/// <param name="id">The id as int of the document you want to delete</param>
 		/// <param name="selector">An optional descriptor to further describe the delete operation</param>
-		public static IDeleteResponse Delete<T>(this IElasticClient client, int id, Func<DeleteDescriptor<T>, DeleteDescriptor<T>> selector = null) where T : class
+		public static IDeleteResponse Delete<T>(this IElasticClient client, long id, Func<DeleteDescriptor<T>, DeleteDescriptor<T>> selector = null) where T : class
 		{
 			selector = selector ?? (s => s);
 			return client.Delete<T>(s => selector(s.Id(id)));
@@ -45,7 +45,7 @@ namespace Nest
 		/// <param name="client"></param>
 		/// <param name="id">The id as int of the document you want to delete</param>
 		/// <param name="selector">An optional descriptor to further describe the delete operation</param>
-		public static Task<IDeleteResponse> DeleteAsync<T>(this IElasticClient client, int id, Func<DeleteDescriptor<T>, DeleteDescriptor<T>> selector = null) where T : class
+		public static Task<IDeleteResponse> DeleteAsync<T>(this IElasticClient client, long id, Func<DeleteDescriptor<T>, DeleteDescriptor<T>> selector = null) where T : class
 		{
 			selector = selector ?? (s => s);
 			return client.DeleteAsync<T>(s => selector(s.Id(id)));

@@ -16,7 +16,7 @@ namespace Nest.Tests.Integration.Search
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 
 
-		protected void TestDefaultAssertions(IQueryResponse<ElasticsearchProject> queryResponse)
+		protected void TestDefaultAssertions(ISearchResponse<ElasticsearchProject> queryResponse)
 		{
 			Assert.True(queryResponse.IsValid);
 			Assert.NotNull(queryResponse.ConnectionStatus);
@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Search
 		public void BogusQuery()
 		{
 			var client = this._client;
-			IQueryResponse<ElasticsearchProject> queryResults = client.Search<ElasticsearchProject>(s => s
+			ISearchResponse<ElasticsearchProject> queryResults = client.Search<ElasticsearchProject>(s => s
 				.QueryRaw("here be dragons")
 			);
 			Assert.False(queryResults.IsValid);
@@ -144,23 +144,7 @@ namespace Nest.Tests.Integration.Search
 			Assert.True(queryResults.Documents.First().Followers.First().FirstName != this._LookFor);
 		}
 
-		[Test]
-		public void ScoringQuery()
-		{
-			var queryResults = this.SearchRaw<ElasticsearchProject>(
-				@" { ""query"" : {
-						""custom_score"" : {
-							""query"" : {
-								""term"" : {
-									""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
-								}
-							},
-							""script"" : ""_score * 2""
-						}
-					} }"
-			);
-			this.TestDefaultAssertions(queryResults);
-		}
+		
 		[Test]
 		public void ConstantScoreQuery()
 		{

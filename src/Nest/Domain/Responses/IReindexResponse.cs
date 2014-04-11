@@ -13,7 +13,7 @@
 		/// <summary>
 		/// The scroll result
 		/// </summary>
-		IQueryResponse<T> QueryResponse { get; }
+		ISearchResponse<T> SearchResponse { get; }
 
 		/// <summary>
 		/// The no of scroll this result represents

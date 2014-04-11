@@ -62,7 +62,7 @@ namespace Nest
 			this._Type = typeof(TAlternative);
 			return (P)this;
 		}
-		public P Id(int id)
+		public P Id(long id)
 		{
 			return this.Id(id.ToString());
 		}

@@ -53,7 +53,7 @@ namespace Nest
 
 		}
 
-		public MultiGetDescriptor GetMany<K>(IEnumerable<int> ids, Func<SimpleGetDescriptor<K>, int, SimpleGetDescriptor<K>> getSelector=null) where K : class
+		public MultiGetDescriptor GetMany<K>(IEnumerable<long> ids, Func<SimpleGetDescriptor<K>, long, SimpleGetDescriptor<K>> getSelector=null) where K : class
 		{
 			getSelector = getSelector ?? ((sg, s) => sg);
 			foreach (var sg in ids.Select(id => getSelector(new SimpleGetDescriptor<K>().Id(id), id)))

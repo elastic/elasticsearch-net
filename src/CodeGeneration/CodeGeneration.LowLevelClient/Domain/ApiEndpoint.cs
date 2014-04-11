@@ -104,7 +104,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 					//  /_cluster/nodes/{node_id}/hotthreads vs  /_cluster/nodes/{node_id}/hot_threads
 					foreach (var path in Extensions.DistinctBy(this.Url.Paths, p => p.Replace("_", "")))
 					{
-						var parts = this.Url.Parts
+						var parts = (this.Url.Parts ?? new Dictionary<string, ApiUrlPart>())
 							.Where(p => path.Contains("{" + p.Key + "}"))
 							.OrderBy(p => path.IndexOf("{" + p.Key, System.StringComparison.Ordinal))
 							.Select(p =>

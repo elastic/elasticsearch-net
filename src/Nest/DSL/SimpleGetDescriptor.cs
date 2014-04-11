@@ -46,7 +46,7 @@ namespace Nest
 			return this;
 		}
 
-		public SimpleGetDescriptor<T> Id(int id)
+		public SimpleGetDescriptor<T> Id(long id)
 		{
 			return this.Id(id.ToString(CultureInfo.InvariantCulture));
 		}

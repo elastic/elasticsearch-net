@@ -74,7 +74,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					{
 						for(var i=0;i<10000;i++)
 						{
-							client.Info();
+							client.Info<VoidResponse>();
 							Interlocked.Increment(ref seen);
 						}
 					};

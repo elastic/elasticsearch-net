@@ -37,7 +37,7 @@ namespace Nest
 			where K : FluentRequestParameters<K>, new()
 		{
 			if (this._Name.IsNullOrEmpty())
-				throw new DslException("missing Name()");
+				throw new DslException("missing Repository()");
 
 			var pathInfo = new ElasticsearchPathInfo<K>()
 			{

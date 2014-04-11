@@ -33,5 +33,9 @@ namespace Nest
 		[JsonProperty("warmers")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public Dictionary<string, WarmerMapping> Warmers { get; set; }
+		
+		[JsonProperty("aliases")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		public Dictionary<string, CreateAliasDescriptor> Aliases { get; set; }
 	}
 }
