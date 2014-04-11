@@ -4,7 +4,7 @@
     <id>Elasticsearch.Net</id>
     <version>1.0.0-beta1</version>
     <title>Elasticsearch.Net - official low level elasticsearch client</title>
-    <authors>Martijn Laarman and contributors</authors>
+    <authors>Elasticsearch Inc. and contributors</authors>
     <owners>Elasticsearch Inc.</owners>
     <iconUrl>http://nest.azurewebsites.net/images/elasticsearch-net-nuget-icon.png</iconUrl>
     <licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>

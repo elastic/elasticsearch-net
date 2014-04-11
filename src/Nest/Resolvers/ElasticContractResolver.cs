@@ -69,6 +69,7 @@ namespace Nest.Resolvers
 
 			if (objectType == typeof(PropertyNameMarker))
 				contract.Converter = new PropertyNameMarkerConverter(this.ConnectionSettings);
+			
 			if (objectType == typeof(PropertyPathMarker))
 				contract.Converter = new PropertyPathMarkerConverter(this.ConnectionSettings);
 
