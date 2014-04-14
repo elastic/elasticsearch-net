@@ -9,7 +9,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(CustomJsonConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SpanTerm : Term, ISpanQuery
+	public class SpanTerm : Term, ISpanSubQuery
 	{
 	}
 }

@@ -3,20 +3,20 @@ using NUnit.Framework;
 
 namespace Nest.Tests.Unit.Search.Sort
 {
-    [TestFixture]
-    internal class FunctionScoreTests : BaseJsonTests
-    {
-        [Test]
-        public void TestRandomSortWithoutSeed()
-        {
-            var s = new SearchDescriptor<ElasticsearchProject>()
-                .Query(q => q.FunctionScore(
-                        fs => fs.RandomScore()
-                    )
-                )
-                .Take(2);
-            var json = TestElasticClient.Serialize(s);
-            var expected = @"
+	[TestFixture]
+	internal class FunctionScoreTests : BaseJsonTests
+	{
+		[Test]
+		public void TestRandomSortWithoutSeed()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.Query(q => q.FunctionScore(
+						fs => fs.RandomScore()
+					)
+				)
+				.Take(2);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"
                 {
                     size: 2,
                       query: {
@@ -25,45 +25,45 @@ namespace Nest.Tests.Unit.Search.Sort
                         }
                       }
                     }";
-            Assert.True(json.JsonEquals(expected), json);
-        }
+			Assert.True(json.JsonEquals(expected), json);
+		}
 
-        [Test]
-        public void TestRandomSortWithSeed()
-        {
-            var seed = 222222;
-            var s = new SearchDescriptor<ElasticsearchProject>()
-                .Query(q => q.FunctionScore(
-                        fs => fs.RandomScore(seed)
-                    )
-                )
-                .Take(2);
-            var json = TestElasticClient.Serialize(s);
-            var expected = @"
+		[Test]
+		public void TestRandomSortWithSeed()
+		{
+			var seed = 222222;
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.Query(q => q.FunctionScore(
+						fs => fs.RandomScore(seed)
+					)
+				)
+				.Take(2);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"
                 {
                     size: 2,
                       query: {
                         function_score: {
                           random_score: {
-                            seed: "+seed+@"
+                            seed: " + seed + @"
                           }
                         }
                       }
                     }";
-            Assert.True(json.JsonEquals(expected), json);
-        }
+			Assert.True(json.JsonEquals(expected), json);
+		}
 
-        [Test]
-        public void TestScriptScore()
-        {
-            var s = new SearchDescriptor<ElasticsearchProject>()
-                .Query(q => q.FunctionScore(
-                        fs => fs.ScriptScore(ss => ss.Script("_score / pow(param1, param2)").Params(p => p.Add("param1", 1.75).Add("param2", 4)).Lang(Lang.mvel)
-                        )
-                    )
-                );
-            var json = TestElasticClient.Serialize(s);
-            var expected = @"{
+		[Test]
+		public void TestScriptScore()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.Query(q => q.FunctionScore(
+						fs => fs.ScriptScore(ss => ss.Script("_score / pow(param1, param2)").Params(p => p.Add("param1", 1.75).Add("param2", 4)).Lang(Lang.mvel)
+						)
+					)
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{
                           query: {
                             function_score: {
                               script_score: {
@@ -78,28 +78,31 @@ namespace Nest.Tests.Unit.Search.Sort
                           }
                         }";
 
-            Assert.True(json.JsonEquals(expected), json);
-        }
+			Assert.True(json.JsonEquals(expected), json);
+		}
 
-        [Test]
-        public void TestScriptScoreWithFilter()
-        {
-            var s = new SearchDescriptor<ElasticsearchProject>()
-                .Query(q => q.FunctionScore(
-                        fs => fs.Functions(
-                                func=> func.ScriptScore( 
-                                    ss => ss.Script("_score / pow(param1, param2)")
-                                        .Params(
-                                            p => p.Add("param1", 1.75).Add("param2", 4)
-                                        ).Lang(Lang.mvel) 
-                                    ).Filter(
-                                        filter => filter.Term("term1", "termValue") 
-                                    )
-                            )
-                    )
-                );
-            var json = TestElasticClient.Serialize(s);
-            var expected = @"{
+		[Test]
+		public void TestScriptScoreWithFilter()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.Query(q => q
+					.FunctionScore(fs => fs
+						.Functions(func => func
+							.ScriptScore(ss => ss
+								.Script("_score / pow(param1, param2)")
+								.Params(p => p
+									.Add("param1", 1.75)
+									.Add("param2", 4)
+								)
+								.Lang(Lang.mvel)
+							).Filter(filter => filter
+								.Term("term1", "termValue")
+							)
+						)
+					)
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{
                           query: {
                             function_score: {
                               functions : [
@@ -123,24 +126,24 @@ namespace Nest.Tests.Unit.Search.Sort
                           }
                         }";
 
-            Assert.True(json.JsonEquals(expected), json);
-        }
+			Assert.True(json.JsonEquals(expected), json);
+		}
 
-        [Test]
-        public void TestBoostFactorWithFilter()
-        {
-            var s = new SearchDescriptor<ElasticsearchProject>().Query(
-                q => q.FunctionScore(
-                    fs => fs.Functions(
-                        f=>f.BoostFactor(2)
-                            .Filter(
-                                filter => filter.Term("term1", "termValue") 
-                            )
-                    )
-                )
-            );
-            var json = TestElasticClient.Serialize(s);
-            var expected = @"{
+		[Test]
+		public void TestBoostFactorWithFilter()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>().Query(
+				q => q.FunctionScore(
+					fs => fs.Functions(
+						f => f.BoostFactor(2)
+							.Filter(
+								filter => filter.Term("term1", "termValue")
+							)
+					)
+				)
+			);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{
                           query: {
                             function_score: {
                               functions : [
@@ -157,8 +160,8 @@ namespace Nest.Tests.Unit.Search.Sort
                           }
                         }";
 
-            Assert.True(json.JsonEquals(expected), json);
-        }
+			Assert.True(json.JsonEquals(expected), json);
+		}
 
-    }
+	}
 }

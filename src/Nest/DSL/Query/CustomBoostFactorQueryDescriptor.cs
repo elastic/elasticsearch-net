@@ -7,20 +7,29 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class CustomBoostFactorQueryDescriptor<T> : IQuery where T : class
+	public interface ICustomBoostFactorQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		internal BaseQuery _Query { get; set; }
+		BaseQuery _Query { get; set; }
 
 		[JsonProperty(PropertyName = "boost_factor")]
-		internal double? _BoostFactor { get; set; }
+		double? _BoostFactor { get; set; }
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class CustomBoostFactorQueryDescriptor<T> : IQuery, ICustomBoostFactorQuery where T : class
+	{
+		[JsonProperty(PropertyName = "query")]
+		BaseQuery ICustomBoostFactorQuery._Query { get; set; }
+
+		[JsonProperty(PropertyName = "boost_factor")]
+		double? ICustomBoostFactorQuery._BoostFactor { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._Query == null || this._Query.IsConditionless;
+				return ((ICustomBoostFactorQuery)this)._Query == null || ((ICustomBoostFactorQuery)this)._Query.IsConditionless;
 			}
 		}
 
@@ -31,13 +40,13 @@ namespace Nest
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
-			this._Query = q;
+			((ICustomBoostFactorQuery)this)._Query = q;
 			return this;
 		}
 
 		public CustomBoostFactorQueryDescriptor<T> BoostFactor(double boostFactor)
 		{
-			this._BoostFactor = boostFactor;
+			((ICustomBoostFactorQuery)this)._BoostFactor = boostFactor;
 			return this;
 		}
 	}

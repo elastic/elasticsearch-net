@@ -9,53 +9,65 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers;
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class FuzzyDateQueryDescriptor<T> : IQuery where T : class
+	public interface IFuzzyDateQuery
 	{
-		internal PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker _Field { get; set; }
+
 		[JsonProperty(PropertyName = "boost")]
-		internal double? _Boost { get; set; }
+		double? _Boost { get; set; }
+
 		[JsonProperty(PropertyName = "min_similarity")]
-		internal string _MinSimilarity { get; set; }
+		string _MinSimilarity { get; set; }
+
 		[JsonProperty(PropertyName = "value")]
-		internal DateTime? _Value { get; set; }
+		DateTime? _Value { get; set; }
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class FuzzyDateQueryDescriptor<T> : IQuery, IFuzzyDateQuery where T : class
+	{
+		PropertyPathMarker IFuzzyDateQuery._Field { get; set; }
+		
+		[JsonProperty(PropertyName = "boost")]
+		double? IFuzzyDateQuery._Boost { get; set; }
+		
+		[JsonProperty(PropertyName = "min_similarity")]
+		string IFuzzyDateQuery._MinSimilarity { get; set; }
+		
+		[JsonProperty(PropertyName = "value")]
+		DateTime? IFuzzyDateQuery._Value { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._Field.IsConditionless() || this._Value == null;
+				return ((IFuzzyDateQuery)this)._Field.IsConditionless() || ((IFuzzyDateQuery)this)._Value == null;
 			}
 		}
 
 		public FuzzyDateQueryDescriptor<T> OnField(string field)
 		{
-			this._Field = field;
+			((IFuzzyDateQuery)this)._Field = field;
 			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			((IFuzzyDateQuery)this)._Field = objectPath;
 			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> Boost(double boost)
 		{
-			this._Boost = boost;
+			((IFuzzyDateQuery)this)._Boost = boost;
 			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> MinSimilarity(string minSimilarity)
 		{
-			this._MinSimilarity = minSimilarity;
-			return this;
-		}
-		public FuzzyDateQueryDescriptor<T> Value(DateTime value)
-		{
-			this._Value = value;
+			((IFuzzyDateQuery)this)._MinSimilarity = minSimilarity;
 			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> Value(DateTime? value)
 		{
-			this._Value = value;
+			((IFuzzyDateQuery)this)._Value = value;
 			return this;
 		}
 	}

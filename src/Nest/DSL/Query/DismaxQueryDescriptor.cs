@@ -8,26 +8,35 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class DismaxQueryDescriptor<T> : IQuery where T : class
+	public interface IDismaxQuery
 	{
 		[JsonProperty(PropertyName = "tie_breaker")]
-		internal double? _TieBreaker { get; set; }
+		double? _TieBreaker { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
-		internal double? _Boost { get; set; }
+		double? _Boost { get; set; }
 
 		[JsonProperty(PropertyName = "queries")]
-		internal IEnumerable<BaseQuery> _Queries { get; set; }
+		IEnumerable<BaseQuery> _Queries { get; set; }
+	}
 
-		public bool IsStrict { get; private set; }
-		public DismaxQueryDescriptor<T> Strict(bool strict = true) { this.IsStrict = strict; return this; }
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class DismaxQueryDescriptor<T> : IQuery, IDismaxQuery where T : class
+	{
+		[JsonProperty(PropertyName = "tie_breaker")]
+		double? IDismaxQuery._TieBreaker { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? IDismaxQuery._Boost { get; set; }
+
+		[JsonProperty(PropertyName = "queries")]
+		IEnumerable<BaseQuery> IDismaxQuery._Queries { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return !this._Queries.HasAny() || this._Queries.All(q => q.IsConditionless);
+				return !((IDismaxQuery)this)._Queries.HasAny() || ((IDismaxQuery)this)._Queries.All(q => q.IsConditionless);
 			}
 		}
 
@@ -40,18 +49,18 @@ namespace Nest
 				var q = selector(query);
 				queries.Add(q);
 			}
-			this._Queries = queries;
+			((IDismaxQuery)this)._Queries = queries;
 			return this;
 		}
 
 		public DismaxQueryDescriptor<T> Boost(double boost)
 		{
-			this._Boost = boost;
+			((IDismaxQuery)this)._Boost = boost;
 			return this;
 		}
 		public DismaxQueryDescriptor<T> TieBreaker(double tieBreaker)
 		{
-			this._TieBreaker = tieBreaker;
+			((IDismaxQuery)this)._TieBreaker = tieBreaker;
 			return this;
 		}
 	}

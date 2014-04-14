@@ -11,55 +11,74 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class FuzzyQueryDescriptor<T> : IQuery where T : class
+
+	public interface IFuzzyQuery 
 	{
-		internal PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker _Field { get; set; }
+
 		[JsonProperty(PropertyName = "boost")]
-		internal double? _Boost { get; set; }
+		double? _Boost { get; set; }
+
 		[JsonProperty(PropertyName = "min_similarity")]
-		internal double? _MinSimilarity { get; set; }
+		double? _MinSimilarity { get; set; }
+
 		[JsonProperty(PropertyName = "prefix_length")]
-		internal int? _PrefixLength { get; set; }
+		int? _PrefixLength { get; set; }
+
 		[JsonProperty(PropertyName = "value")]
-		internal string _Value { get; set; }
+		string Value { get; set; }
+
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptOut)]
+	public class FuzzyQueryDescriptor<T> : IQuery, IFuzzyQuery where T : class
+	{
+		PropertyPathMarker IFuzzyQuery._Field { get; set; }
+		[JsonProperty(PropertyName = "boost")]
+		double? IFuzzyQuery._Boost { get; set; }
+		[JsonProperty(PropertyName = "min_similarity")]
+		double? IFuzzyQuery._MinSimilarity { get; set; }
+		[JsonProperty(PropertyName = "prefix_length")]
+		int? IFuzzyQuery._PrefixLength { get; set; }
+		[JsonProperty(PropertyName = "value")]
+		string IFuzzyQuery.Value { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._Field.IsConditionless() || this._Value.IsNullOrEmpty();
+				return ((IFuzzyQuery)this)._Field.IsConditionless() || ((IFuzzyQuery)this).Value.IsNullOrEmpty();
 			}
 		}
 
 		public FuzzyQueryDescriptor<T> OnField(string field)
 		{
-			this._Field = field;
+			((IFuzzyQuery)this)._Field = field;
 			return this;
 		}
 		public FuzzyQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			((IFuzzyQuery)this)._Field = objectPath;
 			return this;
 		}
 		public FuzzyQueryDescriptor<T> Boost(double boost)
 		{
-			this._Boost = boost;
+			((IFuzzyQuery)this)._Boost = boost;
 			return this;
 		}
 		public FuzzyQueryDescriptor<T> MinSimilarity(double minSimilarity)
 		{
-			this._MinSimilarity = minSimilarity;
+			((IFuzzyQuery)this)._MinSimilarity = minSimilarity;
 			return this;
 		}
 		public FuzzyQueryDescriptor<T> PrefixLength(int prefixLength)
 		{
-			this._PrefixLength = prefixLength;
+			((IFuzzyQuery)this)._PrefixLength = prefixLength;
 			return this;
 		}
 		public FuzzyQueryDescriptor<T> Value(string value)
 		{
-			this._Value = value;
+			((IFuzzyQuery)this).Value = value;
 			return this;
 		}
 	}

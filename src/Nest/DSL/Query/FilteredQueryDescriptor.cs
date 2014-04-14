@@ -7,26 +7,35 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class FilteredQueryDescriptor<T> : IQuery where T : class
+	public interface IFilteredQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		internal BaseQuery _Query { get; set; }
+		BaseQuery _Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		internal BaseFilter _Filter { get; set; }
+		BaseFilter _Filter { get; set; }
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class FilteredQueryDescriptor<T> : IQuery, IFilteredQuery where T : class
+	{
+		[JsonProperty(PropertyName = "query")]
+		BaseQuery IFilteredQuery._Query { get; set; }
+
+		[JsonProperty(PropertyName = "filter")]
+		BaseFilter IFilteredQuery._Filter { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				if (this._Query == null && this._Filter == null)
+				if (((IFilteredQuery)this)._Query == null && ((IFilteredQuery)this)._Filter == null)
 					return true;
-				if (this._Filter == null && this._Query != null)
-					return this._Query.IsConditionless;
-				if (this._Filter != null && this._Query == null)
-					return this._Filter.IsConditionless;
-				return this._Query.IsConditionless && this._Filter.IsConditionless;
+				if (((IFilteredQuery)this)._Filter == null && ((IFilteredQuery)this)._Query != null)
+					return ((IFilteredQuery)this)._Query.IsConditionless;
+				if (((IFilteredQuery)this)._Filter != null && ((IFilteredQuery)this)._Query == null)
+					return ((IFilteredQuery)this)._Filter.IsConditionless;
+				return ((IFilteredQuery)this)._Query.IsConditionless && ((IFilteredQuery)this)._Filter.IsConditionless;
 			}
 		}
 
@@ -36,7 +45,7 @@ namespace Nest
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
-			this._Query = q;
+			((IFilteredQuery)this)._Query = q;
 			return this;
 		}
 
@@ -46,7 +55,7 @@ namespace Nest
 			var filter = new FilterDescriptor<T>();
 			var f = filterSelector(filter);
 
-			this._Filter = f;
+			((IFilteredQuery)this)._Filter = f;
 			return this;
 		}
 	}

@@ -16,7 +16,7 @@ namespace Nest
 		BaseQuery Filtered(Action<FilteredQueryDescriptor<T>> selector);
 		BaseQuery Fuzzy(Action<FuzzyQueryDescriptor<T>> selector);
 		BaseQuery FuzzyDate(Action<FuzzyDateQueryDescriptor<T>> selector);
-		BaseQuery FuzzyLikeThis(Action<FuzzyLikeThisDescriptor<T>> selector);
+		BaseQuery FuzzyLikeThis(Action<FuzzyLikeThisQueryDescriptor<T>> selector);
 		BaseQuery FuzzyNumeric(Action<FuzzyNumericQueryDescriptor<T>> selector);
 		BaseQuery HasChild<K>(Action<HasChildQueryDescriptor<K>> selector) where K : class;
 		BaseQuery HasParent<K>(Action<HasParentQueryDescriptor<K>> selector) where K : class;
@@ -29,11 +29,11 @@ namespace Nest
 		BaseQuery Nested(Action<NestedQueryDescriptor<T>> selector);
 		BaseQuery Prefix(System.Linq.Expressions.Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null);
 		BaseQuery Prefix(string field, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null);
-		BaseQuery QueryString(Action<QueryStringDescriptor<T>> selector);
+		BaseQuery QueryString(Action<QueryStringQueryDescriptor<T>> selector);
 		BaseQuery Range(Action<RangeQueryDescriptor<T>> selector);
 		BaseQuery SpanFirst(Action<SpanFirstQueryDescriptor<T>> selector);
-		BaseQuery SpanNear(Action<SpanNearQueryDescriptor<T>> selector);
-		BaseQuery SpanNot(Action<SpanNotQueryDescriptor<T>> selector);
+		BaseQuery SpanNear(Action<SpanNearQuery<T>> selector);
+		BaseQuery SpanNot(Action<SpanNotQuery<T>> selector);
 		BaseQuery SpanOr(Action<SpanOrQueryDescriptor<T>> selector);
 		BaseQuery SpanTerm(System.Linq.Expressions.Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null);
 		BaseQuery SpanTerm(string field, string value, double? Boost = null);

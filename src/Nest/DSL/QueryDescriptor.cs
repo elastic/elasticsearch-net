@@ -50,7 +50,7 @@ namespace Nest
 		internal CustomScoreQueryDescriptor<T> CustomScoreQueryDescriptor { get; set; }
 		
 		[JsonProperty(PropertyName = "custom_filters_score")]
-		internal CustomFiltersScoreDescriptor<T> CustomFiltersScoreQueryDescriptor { get; set; }
+		internal CustomFiltersScoreQueryDescriptor<T> CustomFiltersScoreQueryDescriptor { get; set; }
 
 		[JsonProperty(PropertyName = "custom_boost_factor")]
 		internal CustomBoostFactorQueryDescriptor<T> CustomBoostFactorQueryDescriptor { get; set; }
@@ -95,14 +95,14 @@ namespace Nest
 		internal SimpleQueryStringQueryDescriptor<T> SimpleQueryStringDescriptor { get; set; }
 		
 		[JsonProperty(PropertyName = "query_string")]
-		internal QueryStringDescriptor<T> QueryStringDescriptor { get; set; }
+		internal QueryStringQueryDescriptor<T> QueryStringDescriptor { get; set; }
 		
 		[JsonProperty(PropertyName = "regexp")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<PropertyPathMarker, object> RegexpQueryDescriptor { get; set; }
 
 		[JsonProperty(PropertyName = "flt")]
-		internal FuzzyLikeThisDescriptor<T> FuzzyLikeThisDescriptor { get; set; }
+		internal FuzzyLikeThisQueryDescriptor<T> FuzzyLikeThisDescriptor { get; set; }
 		
 		[JsonProperty(PropertyName = "has_child")]
 		internal object HasChildQueryDescriptor { get; set; }
@@ -127,10 +127,10 @@ namespace Nest
 		internal SpanOrQueryDescriptor<T> SpanOrQueryDescriptor { get; set; }
 		
 		[JsonProperty(PropertyName = "span_near")]
-		internal SpanNearQueryDescriptor<T> SpanNearQueryDescriptor { get; set; }
+		internal SpanNearQuery<T> SpanNearQuery { get; set; }
 		
 		[JsonProperty(PropertyName = "span_not")]
-		internal SpanNotQueryDescriptor<T> SpanNotQueryDescriptor { get; set; }
+		internal SpanNotQuery<T> SpanNotQuery { get; set; }
 
 		[JsonProperty(PropertyName = "top_children")]
 		internal object TopChildrenQueryDescriptor { get; set; }
@@ -190,9 +190,9 @@ namespace Nest
 		/// <summary>
 		/// A query that uses a query parser in order to parse its content.
 		/// </summary>
-		public BaseQuery QueryString(Action<QueryStringDescriptor<T>> selector)
+		public BaseQuery QueryString(Action<QueryStringQueryDescriptor<T>> selector)
 		{
-			var query = new QueryStringDescriptor<T>();
+			var query = new QueryStringQueryDescriptor<T>();
 			selector(query);
 			return this.New(query, q => q.QueryStringDescriptor = query);
 		}
@@ -259,26 +259,26 @@ namespace Nest
 
 			var termsQueryDescriptor = new Dictionary<PropertyPathMarker, object>();
 
-			if (query._ExternalField == null)
+			if (((ITermsQuery)query)._ExternalField == null)
 			{
-				termsQueryDescriptor.Add(query._Field, query._Terms);
+				termsQueryDescriptor.Add(((ITermsQuery)query)._Field, ((ITermsQuery)query)._Terms);
 			}
 			else
 			{
-				termsQueryDescriptor.Add(query._Field, query._ExternalField);
+				termsQueryDescriptor.Add(((ITermsQuery)query)._Field, ((ITermsQuery)query)._ExternalField);
 			}
 
-			if (query._MinMatch.HasValue)
+			if (((ITermsQuery)query)._MinMatch.HasValue)
 			{
-				termsQueryDescriptor.Add("minimum_match", query._MinMatch);
+				termsQueryDescriptor.Add("minimum_match", ((ITermsQuery)query)._MinMatch);
 			}
-			if (query._DisableCord)
+			if (((ITermsQuery)query)._DisableCord)
 			{
-				termsQueryDescriptor.Add("disable_coord", query._DisableCord);
+				termsQueryDescriptor.Add("disable_coord", ((ITermsQuery)query)._DisableCord);
 			}
-			if (!query._CacheKey.IsNullOrEmpty())
+			if (!((ITermsQuery)query)._CacheKey.IsNullOrEmpty())
 			{
-				termsQueryDescriptor.Add("_cache_key", query._CacheKey);
+				termsQueryDescriptor.Add("_cache_key", ((ITermsQuery)query)._CacheKey);
 			}
 			return this.New(query, q => q.TermsQueryDescriptor = termsQueryDescriptor);
 		}
@@ -293,12 +293,12 @@ namespace Nest
 		{
 			var query = new FuzzyQueryDescriptor<T>();
 			selector(query);
-			if (query._Field.IsConditionless())
+			if (((IFuzzyQuery)query)._Field.IsConditionless())
 				throw new DslException("Field name not set for fuzzy query");
 
 			var fuzzy = new Dictionary<PropertyPathMarker, object>() 
 			{
-				{ query._Field, query}
+				{ ((IFuzzyQuery)query)._Field, query}
 			};
 			return this.New(query, q => q.FuzzyQueryDescriptor = fuzzy);
 		}
@@ -312,7 +312,7 @@ namespace Nest
 
 			var fuzzy = new Dictionary<PropertyPathMarker, object>() 
 			{
-				{ query._Field, query}
+				{ ((IFuzzyNumericQuery)query)._Field, query}
 			};
 			return this.New(query, q => q.FuzzyQueryDescriptor = fuzzy);
 		}
@@ -327,7 +327,7 @@ namespace Nest
 
 			var fuzzy = new Dictionary<PropertyPathMarker, object>() 
 			{
-				{ query._Field, query}
+				{ ((IFuzzyDateQuery)query)._Field, query}
 			};
 			return this.New(query, q => q.FuzzyQueryDescriptor = fuzzy);
 		}
@@ -344,7 +344,7 @@ namespace Nest
 
 			var match = new Dictionary<PropertyPathMarker, object>() 
 			{
-				{ query._Field, query}
+				{ ((IMatchQuery)query)._Field, query}
 			};
 			return this.New(query, q => q.MatchQueryDescriptor = match);
 		}
@@ -359,7 +359,7 @@ namespace Nest
 
 			var match = new Dictionary<PropertyPathMarker, object>() 
 			{
-				{ query._Field, query}
+				{ ((IMatchQuery)query)._Field, query}
 			};
 			return this.New(query, q => q.MatchQueryDescriptor = match);
 		}
@@ -375,7 +375,7 @@ namespace Nest
 
 			var match = new Dictionary<PropertyPathMarker, object>() 
 			{
-				{ query._Field, query}
+				{ ((IMatchQuery)query)._Field, query}
 			};
 			return this.New(query, q => q.MatchQueryDescriptor = match);
 		}
@@ -443,16 +443,16 @@ namespace Nest
 
 			var range = new Dictionary<PropertyPathMarker, object>() 
 			{
-				{ query._Field, query}
+				{ ((IRangeQuery)query)._Field, query}
 			};
 			return this.New(query, q => q.RangeQueryDescriptor = range);
 		}
 		/// <summary>
 		/// Fuzzy like this query find documents that are “like” provided text by running it against one or more fields.
 		/// </summary>
-		public BaseQuery FuzzyLikeThis(Action<FuzzyLikeThisDescriptor<T>> selector)
+		public BaseQuery FuzzyLikeThis(Action<FuzzyLikeThisQueryDescriptor<T>> selector)
 		{
-			var query = new FuzzyLikeThisDescriptor<T>();
+			var query = new FuzzyLikeThisQueryDescriptor<T>();
 			selector(query);
 
 			return this.New(query, q => q.FuzzyLikeThisDescriptor = query);
@@ -479,7 +479,7 @@ namespace Nest
 			selector(query);
 			var shape = new Dictionary<PropertyPathMarker, object>
 			{
-				{ query._Field, query }
+				{ ((IGeoShapeQuery)query)._Field, query }
 			};
 			return this.New(query, q => q.GeoShapeQueryDescriptor = shape);
 		}
@@ -599,9 +599,9 @@ namespace Nest
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
 		/// computation derived from other field values in the doc (numeric ones) using script or boost expression
 		/// </summary>
-		public BaseQuery CustomFiltersScore(Action<CustomFiltersScoreDescriptor<T>> customFiltersScoreQuery)
+		public BaseQuery CustomFiltersScore(Action<CustomFiltersScoreQueryDescriptor<T>> customFiltersScoreQuery)
 		{
-			var query = new CustomFiltersScoreDescriptor<T>();
+			var query = new CustomFiltersScoreQueryDescriptor<T>();
 			customFiltersScoreQuery(query);
 
 			return this.New(query, q => q.CustomFiltersScoreQueryDescriptor = query);
@@ -788,13 +788,13 @@ namespace Nest
 		/// intervening unmatched positions, as well as whether matches are required to be in-order.
 		/// The span near query maps to Lucene SpanNearQuery.
 		/// </summary>
-		public BaseQuery SpanNear(Action<SpanNearQueryDescriptor<T>> selector)
+		public BaseQuery SpanNear(Action<SpanNearQuery<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
-			var span = new SpanNearQueryDescriptor<T>();
+			var span = new SpanNearQuery<T>();
 			selector(span);
 
-			return this.New(span, q => q.SpanNearQueryDescriptor = span);
+			return this.New(span, q => q.SpanNearQuery = span);
 		}
 
 		/// <summary>
@@ -814,13 +814,13 @@ namespace Nest
 		/// Removes matches which overlap with another span query. 
 		/// The span not query maps to Lucene SpanNotQuery.
 		/// </summary>
-		public BaseQuery SpanNot(Action<SpanNotQueryDescriptor<T>> selector)
+		public BaseQuery SpanNot(Action<SpanNotQuery<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
-			var span = new SpanNotQueryDescriptor<T>();
+			var span = new SpanNotQuery<T>();
 			selector(span);
 
-			return this.New(span, q => q.SpanNotQueryDescriptor = span);
+			return this.New(span, q => q.SpanNotQuery = span);
 		}
 
 		/// <summary>
@@ -834,7 +834,7 @@ namespace Nest
 
 			var regexp = new Dictionary<PropertyPathMarker, object>() 
 			{
-				{ query._Field, query}
+				{ ((IRegexpQuery)query)._Field, query}
 			};
 			return this.New(query, q => q.RegexpQueryDescriptor = regexp);
 		}

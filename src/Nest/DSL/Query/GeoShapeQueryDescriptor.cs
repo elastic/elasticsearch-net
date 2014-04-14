@@ -9,44 +9,54 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class GeoShapeQueryDescriptor<T> : IQuery 
-		where T : class
+	public interface IGeoShapeQuery
 	{
-		internal PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker _Field { get; set; }
+
+		[JsonProperty("shape")]
+		GeoShapeVector _Shape { get; set; }
+	}
+
+	public class GeoShapeQueryDescriptor<T> : IQuery, IGeoShapeQuery where T : class
+	{
+		PropertyPathMarker IGeoShapeQuery._Field { get; set; }
+		
+		[JsonProperty("shape")]
+		GeoShapeVector IGeoShapeQuery._Shape { get; set; }
+		
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._Field.IsConditionless() || (this._Shape == null || !this._Shape.Coordinates.HasAny());
+				return ((IGeoShapeQuery)this)._Field.IsConditionless() || (((IGeoShapeQuery)this)._Shape == null || !((IGeoShapeQuery)this)._Shape.Coordinates.HasAny());
 			}
 
 		}
 		public GeoShapeQueryDescriptor<T> OnField(string field)
 		{
-			this._Field = field;
+			((IGeoShapeQuery)this)._Field = field;
 			return this;
 		}
 		public GeoShapeQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			((IGeoShapeQuery)this)._Field = objectPath;
 			return this;
 		}
-		[JsonProperty("shape")]
-		internal GeoShapeVector _Shape { get; set; }
+		
 
 		public GeoShapeQueryDescriptor<T> Type(string type)
 		{
-			if (this._Shape == null)
-				this._Shape = new GeoShapeVector();
-			this._Shape.Type = type;
+			if (((IGeoShapeQuery)this)._Shape == null)
+				((IGeoShapeQuery)this)._Shape = new GeoShapeVector();
+			((IGeoShapeQuery)this)._Shape.Type = type;
 			return this;
 		}
 
 		public GeoShapeQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<double>> coordinates)
 		{
-			if (this._Shape == null)
-				this._Shape = new GeoShapeVector();
-			this._Shape.Coordinates = coordinates;
+			if (((IGeoShapeQuery)this)._Shape == null)
+				((IGeoShapeQuery)this)._Shape = new GeoShapeVector();
+			((IGeoShapeQuery)this)._Shape.Coordinates = coordinates;
 			return this;
 		}
 

@@ -70,7 +70,7 @@ namespace Nest
 			return new QueryDescriptor<T>().FuzzyDate(selector);
 		}
 
-		public static BaseQuery FuzzyLikeThis(Action<FuzzyLikeThisDescriptor<T>> selector)
+		public static BaseQuery FuzzyLikeThis(Action<FuzzyLikeThisQueryDescriptor<T>> selector)
 		{
 			return new QueryDescriptor<T>().FuzzyLikeThis(selector);
 		}
@@ -142,7 +142,7 @@ namespace Nest
 		{
 			return new QueryDescriptor<T>().GeoShape(selector);
 		}
-		public static BaseQuery QueryString(Action<QueryStringDescriptor<T>> selector)
+		public static BaseQuery QueryString(Action<QueryStringQueryDescriptor<T>> selector)
 		{
 			return new QueryDescriptor<T>().QueryString(selector);
 		}
@@ -157,12 +157,12 @@ namespace Nest
 			return new QueryDescriptor<T>().SpanFirst(selector);
 		}
 
-		public static BaseQuery SpanNear(Action<SpanNearQueryDescriptor<T>> selector)
+		public static BaseQuery SpanNear(Action<SpanNearQuery<T>> selector)
 		{
 			return new QueryDescriptor<T>().SpanNear(selector);
 		}
 
-		public static BaseQuery SpanNot(Action<SpanNotQueryDescriptor<T>> selector)
+		public static BaseQuery SpanNot(Action<SpanNotQuery<T>> selector)
 		{
 			return new QueryDescriptor<T>().SpanNot(selector);
 		}

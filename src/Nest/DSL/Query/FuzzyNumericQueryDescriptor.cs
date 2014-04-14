@@ -9,54 +9,67 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers;
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class FuzzyNumericQueryDescriptor<T> : IQuery where T : class
+	public interface IFuzzyNumericQuery
 	{
-		internal PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker _Field { get; set; }
+
 		[JsonProperty(PropertyName = "boost")]
-		internal double? _Boost { get; set; }
+		double? _Boost { get; set; }
+
 		[JsonProperty(PropertyName = "min_similarity")]
-		internal double? _MinSimilarity { get; set; }
+		double? _MinSimilarity { get; set; }
+
 		[JsonProperty(PropertyName = "value")]
-		internal double? _Value { get; set; }
+		double? _Value { get; set; }
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class FuzzyNumericQueryDescriptor<T> : IQuery, IFuzzyNumericQuery where T : class
+	{
+		PropertyPathMarker IFuzzyNumericQuery._Field { get; set; }
+		
+		[JsonProperty(PropertyName = "boost")]
+		double? IFuzzyNumericQuery._Boost { get; set; }
+	
+		[JsonProperty(PropertyName = "min_similarity")]
+		double? IFuzzyNumericQuery._MinSimilarity { get; set; }
+	
+		[JsonProperty(PropertyName = "value")]
+		double? IFuzzyNumericQuery._Value { get; set; }
 
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._Field.IsConditionless() || this._Value == null;
+				return ((IFuzzyNumericQuery)this)._Field.IsConditionless() || ((IFuzzyNumericQuery)this)._Value == null;
 			}
 		}
 
 		public FuzzyNumericQueryDescriptor<T> OnField(string field)
 		{
-			this._Field = field;
+			((IFuzzyNumericQuery)this)._Field = field;
 			return this;
 		}
 		public FuzzyNumericQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			((IFuzzyNumericQuery)this)._Field = objectPath;
 			return this;
 		}
 		public FuzzyNumericQueryDescriptor<T> Boost(double boost)
 		{
-			this._Boost = boost;
+			((IFuzzyNumericQuery)this)._Boost = boost;
 			return this;
 		}
 		public FuzzyNumericQueryDescriptor<T> MinSimilarity(double minSimilarity)
 		{
-			this._MinSimilarity = minSimilarity;
+			((IFuzzyNumericQuery)this)._MinSimilarity = minSimilarity;
 			return this;
 		}
-		public FuzzyNumericQueryDescriptor<T> Value(int value)
-		{
-			this._Value = value;
-			return this;
-		}
+	
 		public FuzzyNumericQueryDescriptor<T> Value(int? value)
 		{
-			this._Value = value;
+			((IFuzzyNumericQuery)this)._Value = value;
 			return this;
 		}
 	}

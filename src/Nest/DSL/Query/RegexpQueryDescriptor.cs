@@ -10,52 +10,66 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class RegexpQueryDescriptor<T> : IQuery where T : class
+	public interface IRegexpQuery
 	{
 		[JsonProperty("value")]
-		internal string _Value { get; set; }
+		string _Value { get; set; }
 
 		[JsonProperty("flags")]
-		internal string _Flags { get; set; }
+		string _Flags { get; set; }
 
-		internal PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker _Field { get; set; }
 
 		[JsonProperty("boost")]
-		public double? _Boost { get; set; }
+		double? _Boost { get; set; }
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class RegexpQueryDescriptor<T> : IQuery, IRegexpQuery where T : class
+	{
+		[JsonProperty("value")]
+		string IRegexpQuery._Value { get; set; }
+
+		[JsonProperty("flags")]
+		string IRegexpQuery._Flags { get; set; }
+
+		PropertyPathMarker IRegexpQuery._Field { get; set; }
+
+		[JsonProperty("boost")]
+		double? IRegexpQuery._Boost { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._Field.IsConditionless() || this._Value.IsNullOrEmpty();
+				return ((IRegexpQuery)this)._Field.IsConditionless() || ((IRegexpQuery)this)._Value.IsNullOrEmpty();
 			}
 		}
 
 		public RegexpQueryDescriptor<T> Value(string regex)
 		{
-			this._Value = regex;
+			((IRegexpQuery)this)._Value = regex;
 			return this;
 		}
 		public RegexpQueryDescriptor<T> Flags(string flags)
 		{
-			this._Flags = flags;
+			((IRegexpQuery)this)._Flags = flags;
 			return this;
 		}
 		public RegexpQueryDescriptor<T> OnField(string path)
 		{
-			this._Field = path;
+			((IRegexpQuery)this)._Field = path;
 			return this;
 		}
 		public RegexpQueryDescriptor<T> Boost(double boost)
 		{
-			this._Boost = boost;
+			((IRegexpQuery)this)._Boost = boost;
 			return this;
 		}
 
 		public RegexpQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			((IRegexpQuery)this)._Field = objectPath;
 			return this;
 		}
 

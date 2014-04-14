@@ -10,115 +10,169 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class MatchQueryDescriptor<T> : IQuery where T : class
+	public interface IMatchQuery
 	{
 		[JsonProperty(PropertyName = "type")]
-		internal virtual string _Type { get { return null; } }
+		string _Type { get; }
 
 		[JsonProperty(PropertyName = "query")]
-		internal string _Query { get; set; }
+		string _Query { get; set; }
 
 		[JsonProperty(PropertyName = "analyzer")]
-		internal string _Analyzer { get; set; }
+		string _Analyzer { get; set; }
+
+		[JsonProperty(PropertyName = "rewrite")]
+		[JsonConverter(typeof (StringEnumConverter))]
+		RewriteMultiTerm? _Rewrite { get; set; }
+
+		[JsonProperty(PropertyName = "fuzziness")]
+		double? _Fuzziness { get; set; }
+
+		[JsonProperty(PropertyName = "cutoff_frequency")]
+		double? _CutoffFrequency { get; set; }
+
+		[JsonProperty(PropertyName = "prefix_length")]
+		int? _PrefixLength { get; set; }
+
+		[JsonProperty(PropertyName = "max_expansions")]
+		int? _MaxExpansions { get; set; }
+
+		[JsonProperty(PropertyName = "slop")]
+		int? _Slop { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? _Boost { get; set; }
+
+		[JsonProperty(PropertyName = "lenient")]
+		bool? _Lenient { get; set; }
+		
+		[JsonProperty(PropertyName = "operator")]
+		[JsonConverter(typeof (StringEnumConverter))]
+		Operator? _Operator { get; set; }
+
+		PropertyPathMarker _Field { get; set; }
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class MatchQueryDescriptor<T> : IQuery, IMatchQuery where T : class
+	{
+		protected virtual string _type { get { return null; } }
+
+		[JsonProperty(PropertyName = "type")]
+		string IMatchQuery._Type { get { return _type; } }
+
+		[JsonProperty(PropertyName = "query")]
+		string IMatchQuery._Query { get; set; }
+
+		[JsonProperty(PropertyName = "analyzer")]
+		string IMatchQuery._Analyzer { get; set; }
 
 		[JsonProperty(PropertyName = "rewrite")]
 		[JsonConverter(typeof(StringEnumConverter))]
-		internal RewriteMultiTerm? _Rewrite { get; set; }
+		RewriteMultiTerm? IMatchQuery._Rewrite { get; set; }
 
 		[JsonProperty(PropertyName = "fuzziness")]
-		internal double? _Fuzziness { get; set; }
+		double? IMatchQuery._Fuzziness { get; set; }
 
 		[JsonProperty(PropertyName = "cutoff_frequency")]
-		internal double? _CutoffFrequency { get; set; }
+		double? IMatchQuery._CutoffFrequency { get; set; }
 
 		[JsonProperty(PropertyName = "prefix_length")]
-		internal int? _PrefixLength { get; set; }
+		int? IMatchQuery._PrefixLength { get; set; }
 
 		[JsonProperty(PropertyName = "max_expansions")]
-		internal int? _MaxExpansions { get; set; }
+		int? IMatchQuery._MaxExpansions { get; set; }
 
 		[JsonProperty(PropertyName = "slop")]
-		internal int? _Slop { get; set; }
+		int? IMatchQuery._Slop { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
-		internal double? _Boost { get; set; }
+		double? IMatchQuery._Boost { get; set; }
 
+		[JsonProperty(PropertyName = "lenient")]
+		bool? IMatchQuery._Lenient { get; set; }
+		
 		[JsonProperty(PropertyName = "operator")]
 		[JsonConverter(typeof(StringEnumConverter))]
-		internal Operator? _Operator { get; set; }
+		Operator? IMatchQuery._Operator { get; set; }
+
+		PropertyPathMarker IMatchQuery._Field { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._Field.IsConditionless() || this._Query.IsNullOrEmpty();
+				return ((IMatchQuery)this)._Field.IsConditionless() || ((IMatchQuery)this)._Query.IsNullOrEmpty();
 			}
 		}
 
 
-		internal PropertyPathMarker _Field { get; set; }
 		public MatchQueryDescriptor<T> OnField(string field)
 		{
-			this._Field = field;
+			((IMatchQuery)this)._Field = field;
 			return this;
 		}
 		public MatchQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			((IMatchQuery)this)._Field = objectPath;
 			return this;
 		}
 
 		public MatchQueryDescriptor<T> Query(string query)
 		{
-			this._Query = query;
+			((IMatchQuery)this)._Query = query;
+			return this;
+		}
+		public MatchQueryDescriptor<T> Lenient(bool lenient = true)
+		{
+			((IMatchQuery)this)._Lenient = lenient;
 			return this;
 		}
 		public MatchQueryDescriptor<T> Analyzer(string analyzer)
 		{
-			this._Analyzer = analyzer;
+			((IMatchQuery)this)._Analyzer = analyzer;
 			return this;
 		}
 		public MatchQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
-			this._Fuzziness = fuzziness;
+			((IMatchQuery)this)._Fuzziness = fuzziness;
 			return this;
 		}
 		public MatchQueryDescriptor<T> CutoffFrequency(double cutoffFrequency)
 		{
-			this._CutoffFrequency = cutoffFrequency;
+			((IMatchQuery)this)._CutoffFrequency = cutoffFrequency;
 			return this;
 		}
 
 		public MatchQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
 		{
-			this._Rewrite = rewrite;
+			((IMatchQuery)this)._Rewrite = rewrite;
 			return this;
 		}
 
 		public MatchQueryDescriptor<T> Boost(double boost)
 		{
-			this._Boost = boost;
+			((IMatchQuery)this)._Boost = boost;
 			return this;
 		}
 		public MatchQueryDescriptor<T> PrefixLength(int prefixLength)
 		{
-			this._PrefixLength = prefixLength;
+			((IMatchQuery)this)._PrefixLength = prefixLength;
 			return this;
 		}
 		public MatchQueryDescriptor<T> MaxExpansions(int maxExpansions)
 		{
-			this._MaxExpansions = maxExpansions;
+			((IMatchQuery)this)._MaxExpansions = maxExpansions;
 			return this;
 		}
 		public MatchQueryDescriptor<T> Slop(int slop)
 		{
-			this._Slop = slop;
+			((IMatchQuery)this)._Slop = slop;
 			return this;
 		}
 		public MatchQueryDescriptor<T> Operator(Operator op)
 		{
-			this._Operator = op;
+			((IMatchQuery)this)._Operator = op;
 			return this;
 		}
 	}

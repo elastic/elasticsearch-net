@@ -8,36 +8,52 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SpanNearQueryDescriptor<T> : ISpanQuery, IQuery where T : class
+	public interface ISpanNearQuery 
 	{
 		[JsonProperty(PropertyName = "clauses")]
-		internal IEnumerable<SpanQueryDescriptor<T>> _SpanQueryDescriptors { get; set; }
+		IEnumerable<ISpanQuery> _SpanQueryDescriptors { get; set; }
 
 		[JsonProperty(PropertyName = "slop")]
-		internal int? _Slop { get; set; }
+		int? _Slop { get; set; }
 
 		[JsonProperty(PropertyName = "in_order")]
-		internal bool? _InOrder { get; set; }
+		bool? _InOrder { get; set; }
 
 		[JsonProperty(PropertyName = "collect_payloads")]
-		internal bool? _CollectPayloads { get; set; }
+		bool? _CollectPayloads { get; set; }
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class SpanNearQuery<T> : ISpanSubQuery, IQuery, ISpanNearQuery where T : class
+	{
+		[JsonProperty(PropertyName = "clauses")]
+		IEnumerable<ISpanQuery> ISpanNearQuery._SpanQueryDescriptors { get; set; }
+
+		[JsonProperty(PropertyName = "slop")]
+		int? ISpanNearQuery._Slop { get; set; }
+
+		[JsonProperty(PropertyName = "in_order")]
+		bool? ISpanNearQuery._InOrder { get; set; }
+
+		[JsonProperty(PropertyName = "collect_payloads")]
+		bool? ISpanNearQuery._CollectPayloads { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return !_SpanQueryDescriptors.HasAny() || _SpanQueryDescriptors.Cast<IQuery>().All(q => q.IsConditionless);
+				return !((ISpanNearQuery)this)._SpanQueryDescriptors.HasAny() 
+					|| ((ISpanNearQuery)this)._SpanQueryDescriptors.Cast<IQuery>().All(q => q.IsConditionless);
 			}
 		}
 
-		public SpanNearQueryDescriptor<T> Clauses(params Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>>[] selectors)
+		public SpanNearQuery<T> Clauses(params Func<SpanQuery<T>, SpanQuery<T>>[] selectors)
 		{
 			selectors.ThrowIfNull("selector");
-			var descriptors = new List<SpanQueryDescriptor<T>>();
+			var descriptors = new List<SpanQuery<T>>();
 			foreach (var selector in selectors)
 			{
-				var x = new SpanQueryDescriptor<T>();
+				var x = new SpanQuery<T>();
 				var q = selector(x);
 				if ((q as IQuery).IsConditionless)
 					continue;
@@ -45,22 +61,22 @@ namespace Nest
 				descriptors.Add(q);
 
 			}
-			this._SpanQueryDescriptors = descriptors.HasAny() ? descriptors : null;
+			((ISpanNearQuery)this)._SpanQueryDescriptors = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
-		public SpanNearQueryDescriptor<T> Slop(int slop)
+		public SpanNearQuery<T> Slop(int slop)
 		{
-			this._Slop = slop;
+			((ISpanNearQuery)this)._Slop = slop;
 			return this;
 		}
-		public SpanNearQueryDescriptor<T> InOrder(bool inOrder)
+		public SpanNearQuery<T> InOrder(bool inOrder)
 		{
-			this._InOrder = inOrder;
+			((ISpanNearQuery)this)._InOrder = inOrder;
 			return this;
 		}
-		public SpanNearQueryDescriptor<T> CollectPayloads(bool collectPayloads)
+		public SpanNearQuery<T> CollectPayloads(bool collectPayloads)
 		{
-			this._CollectPayloads = collectPayloads;
+			((ISpanNearQuery)this)._CollectPayloads = collectPayloads;
 			return this;
 		}
 	}

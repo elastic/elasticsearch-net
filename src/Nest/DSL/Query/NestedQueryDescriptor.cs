@@ -9,54 +9,69 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class NestedQueryDescriptor<T> : IQuery where T : class
+	public interface INestedQuery
 	{
-		[JsonProperty("score_mode"), JsonConverter(typeof(StringEnumConverter))]
-		internal NestedScore? _Score { get; set; }
+		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
+		NestedScore? _Score { get; set; }
 
 		[JsonProperty("query")]
-		internal BaseQuery _QueryDescriptor { get; set; }
+		BaseQuery _QueryDescriptor { get; set; }
 
 		[JsonProperty("path")]
-		internal PropertyPathMarker _Path { get; set; }
+		PropertyPathMarker _Path { get; set; }
 
 		[JsonProperty("_scope")]
-		internal string _Scope { get; set; }
+		string _Scope { get; set; }
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class NestedQueryDescriptor<T> : IQuery, INestedQuery where T : class
+	{
+		[JsonProperty("score_mode"), JsonConverter(typeof(StringEnumConverter))]
+		NestedScore? INestedQuery._Score { get; set; }
+
+		[JsonProperty("query")]
+		BaseQuery INestedQuery._QueryDescriptor { get; set; }
+
+		[JsonProperty("path")]
+		PropertyPathMarker INestedQuery._Path { get; set; }
+
+		[JsonProperty("_scope")]
+		string INestedQuery._Scope { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._QueryDescriptor == null || this._QueryDescriptor.IsConditionless;
+				return ((INestedQuery)this)._QueryDescriptor == null || ((INestedQuery)this)._QueryDescriptor.IsConditionless;
 			}
 		}
 
 		public NestedQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			this._QueryDescriptor = querySelector(q);
+			((INestedQuery)this)._QueryDescriptor = querySelector(q);
 			return this;
 		}
 
 		public NestedQueryDescriptor<T> Score(NestedScore score)
 		{
-			this._Score = score;
+			((INestedQuery)this)._Score = score;
 			return this;
 		}
 		public NestedQueryDescriptor<T> Path(string path)
 		{
-			this._Path = path;
+			((INestedQuery)this)._Path = path;
 			return this;
 		}
 		public NestedQueryDescriptor<T> Path(Expression<Func<T, object>> objectPath)
 		{
-			this._Path = objectPath;
+			((INestedQuery)this)._Path = objectPath;
 			return this;
 		}
 		public NestedQueryDescriptor<T> Scope(string scope)
 		{
-			this._Scope = scope;
+			((INestedQuery)this)._Scope = scope;
 			return this;
 		}
 	}

@@ -9,62 +9,74 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class HasChildQueryDescriptor<T> : IQuery where T : class
+	public interface IHasChildQuery
 	{
+		[JsonProperty("type")]
+		TypeNameMarker _Type { get; set; }
+
+		[JsonProperty("_scope")]
+		string _Scope { get; set; }
+
+		[JsonProperty("score_type")]
+		[JsonConverter(typeof (StringEnumConverter))]
+		ChildScoreType? _ScoreType { get; set; }
+
+		[JsonProperty("query")]
+		BaseQuery _QueryDescriptor { get; set; }
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class HasChildQueryDescriptor<T> : IQuery, IHasChildQuery where T : class
+	{
+		[JsonProperty("type")]
+		TypeNameMarker IHasChildQuery._Type { get; set; }
+
+		[JsonProperty("_scope")]
+		string IHasChildQuery._Scope { get; set; }
+
+		[JsonProperty("score_type")]
+		[JsonConverter(typeof(StringEnumConverter))]
+		ChildScoreType? IHasChildQuery._ScoreType { get; set; }
+
+		[JsonProperty("query")]
+		BaseQuery IHasChildQuery._QueryDescriptor { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._QueryDescriptor == null || this._QueryDescriptor.IsConditionless;
+				return ((IHasChildQuery)this)._QueryDescriptor == null || ((IHasChildQuery)this)._QueryDescriptor.IsConditionless;
 			}
 		}
 
 		public HasChildQueryDescriptor()
 		{
-			this._Type = TypeNameMarker.Create<T>();
+			((IHasChildQuery)this)._Type = TypeNameMarker.Create<T>();
 		}
-		[JsonProperty("type")]
-		internal TypeNameMarker _Type { get; set; }
-
-		[JsonProperty("_scope")]
-		internal string _Scope { get; set; }
-
-		[JsonProperty("score_type")]
-		[JsonConverter(typeof(StringEnumConverter))]
-		internal ChildScoreType? _ScoreType { get; set; }
-
-		[JsonProperty("query")]
-		internal BaseQuery _QueryDescriptor { get; set; }
+	
 
 		public HasChildQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			this._QueryDescriptor = querySelector(q);
+			((IHasChildQuery)this)._QueryDescriptor = querySelector(q);
 			return this;
 		}
 		public HasChildQueryDescriptor<T> Scope(string scope)
 		{
-			this._Scope = scope;
+			((IHasChildQuery)this)._Scope = scope;
 			return this;
 		}
 		public HasChildQueryDescriptor<T> Type(string type)
 		{
-			this._Type = type;
+			((IHasChildQuery)this)._Type = type;
 			return this;
 		}
 
 		public HasChildQueryDescriptor<T> Score(ChildScoreType? scoreType)
 		{
-			this._ScoreType = scoreType;
+			((IHasChildQuery)this)._ScoreType = scoreType;
 			return this;
 		}
 
-
-		[JsonProperty(PropertyName = "_cache")]
-		internal bool? _Cache { get; set; }
-
-		[JsonProperty(PropertyName = "_name")]
-		internal string _Name { get; set; }
 	}
 }
