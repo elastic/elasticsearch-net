@@ -271,7 +271,7 @@ namespace Nest
 		internal RescoreDescriptor<T> _Rescore { get; set; }
 
 		internal string _RawQuery { get; set; }
-		internal BaseQuery _Query { get; set; }
+		internal IQueryDescriptor _Query { get; set; }
 
 		internal string _RawFilter { get; set; }
 		internal BaseFilter _Filter { get; set; }
@@ -929,12 +929,12 @@ namespace Nest
 		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> query)
 		{
 			query.ThrowIfNull("query");
-			var q = new QueryDescriptor<T>() { IsStrict = this._Strict };
-
+			var q = new QueryDescriptor<T>();
+			((IQueryDescriptor)q).IsStrict = this._Strict;
 			var bq = query(q);
 			return this.Query(bq);
-
 		}
+
 		/// <summary>
 		/// Describe the query to perform using the static Query class
 		/// </summary>

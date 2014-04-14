@@ -11,6 +11,7 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ICommonTermsQuery
 	{
 		[JsonProperty(PropertyName = "query")]
@@ -46,35 +47,23 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class CommonTermsQueryDescriptor<T> : IQuery, ICommonTermsQuery where T : class
 	{
-		[JsonProperty(PropertyName = "query")]
 		string ICommonTermsQuery._QueryString { get; set; }
 
-		[JsonProperty(PropertyName = "field")]
 		PropertyPathMarker ICommonTermsQuery._Field { get; set; }
 		
-		[JsonProperty(PropertyName = "cutoff_frequency")]
 		double? ICommonTermsQuery._CutoffFrequency { get; set; }
 		
-		[JsonProperty(PropertyName = "low_freq_operator")]
-		[JsonConverter(typeof(StringEnumConverter))]
 		Operator? ICommonTermsQuery._LowFrequencyOperator { get; set; }
 		
-		[JsonProperty(PropertyName = "high_freq_operator")]
-		[JsonConverter(typeof(StringEnumConverter))]
 		Operator? ICommonTermsQuery._HighFrequencyOperator { get; set; }
 
-		[JsonProperty(PropertyName = "minimum_should_match")]
 		int? ICommonTermsQuery._MinimumShouldMatch { get; set; }
 		
-		[JsonProperty(PropertyName = "boost")]
 		double? ICommonTermsQuery._Boost { get; set; }
 		
-		[JsonProperty(PropertyName = "analyzer")]
 		string ICommonTermsQuery._Analyzer { get; set; }
 		
-		[JsonProperty(PropertyName = "disable_coord")]
 		bool? ICommonTermsQuery._DisableCoord { get; set; }
-
 
 		bool IQuery.IsConditionless
 		{

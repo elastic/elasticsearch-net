@@ -7,6 +7,7 @@ using Elasticsearch.Net;
 
 namespace Nest.DSL.Query
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IFilterScoreQuery
 	{
 		[JsonProperty(PropertyName = "filter")]
@@ -24,13 +25,10 @@ namespace Nest.DSL.Query
 	{
 		bool IQuery.IsConditionless { get { return ((IFilterScoreQuery)this)._Filter == null; } }
 
-		[JsonProperty(PropertyName = "filter")]
 		BaseFilter IFilterScoreQuery._Filter { get; set; }
 
-		[JsonProperty(PropertyName = "script")]
 		string IFilterScoreQuery._Script { get; set; }
 
-		[JsonProperty(PropertyName = "boost")]
 		float? IFilterScoreQuery._Boost { get; set; }
 
 		public FilterScoreQueryDescriptor<T> Boost(float boost)

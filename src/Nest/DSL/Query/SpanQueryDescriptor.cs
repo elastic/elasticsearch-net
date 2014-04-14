@@ -11,6 +11,7 @@ namespace Nest
 {
 	public interface ISpanSubQuery {}
 
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ISpanQuery 
 	{
 		[JsonProperty(PropertyName = "span_term")]
@@ -32,20 +33,14 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SpanQuery<T> : IQuery, ISpanQuery where T : class
 	{
-		
-		[JsonProperty(PropertyName = "span_term")]
 		SpanTerm ISpanQuery.SpanTermQuery { get; set; }
 
-		[JsonProperty(PropertyName = "span_first")]
 		ISpanFirstQuery ISpanQuery.SpanFirstQueryDescriptor { get; set; }
 
-		[JsonProperty(PropertyName = "span_near")]
 		ISpanNearQuery ISpanQuery.SpanNearQuery { get; set; }
 
-		[JsonProperty(PropertyName = "span_or")]
 		ISpanOrQuery ISpanQuery.SpanOrQueryDescriptor { get; set; }
 
-		[JsonProperty(PropertyName = "span_not")]
 		ISpanNotQuery ISpanQuery.SpanNotQuery { get; set; }
 
 		bool IQuery.IsConditionless

@@ -10,10 +10,11 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ICustomFiltersScoreQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		BaseQuery _Query { get; set; }
+		IQueryDescriptor _Query { get; set; }
 
 		[JsonProperty(PropertyName = "filters")]
 		List<IFilterScoreQuery> _Filters { get; set; }
@@ -36,24 +37,16 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class CustomFiltersScoreQueryDescriptor<T> : IQuery, ICustomFiltersScoreQuery where T : class
 	{
-		[JsonProperty(PropertyName = "query")]
-		BaseQuery ICustomFiltersScoreQuery._Query { get; set; }
+		IQueryDescriptor ICustomFiltersScoreQuery._Query { get; set; }
 
-		[JsonProperty(PropertyName = "filters")]
 		List<IFilterScoreQuery> ICustomFiltersScoreQuery._Filters { get; set; }
 
-		[JsonProperty(PropertyName = "score_mode")]
-		[JsonConverter(typeof(StringEnumConverter))]
 		ScoreMode ICustomFiltersScoreQuery._ScoreMode { get; set; }
 
-		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		Dictionary<string, object> ICustomFiltersScoreQuery._Params { get; set; }
 
-		[JsonProperty(PropertyName = "lang")]
 		string ICustomFiltersScoreQuery._Lang { get; set; }
 
-		[JsonProperty(PropertyName = "max_boost")]
 		string ICustomFiltersScoreQuery._MaxBoost { get; set; }
 
 		bool IQuery.IsConditionless

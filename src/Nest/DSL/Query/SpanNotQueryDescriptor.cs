@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ISpanNotQuery
 	{
 		[JsonProperty(PropertyName = "include")]
@@ -19,9 +20,8 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SpanNotQuery<T> : ISpanSubQuery, IQuery, ISpanNotQuery where T : class
 	{
-		[JsonProperty(PropertyName = "include")]
 		ISpanQuery ISpanNotQuery._Include { get; set; }
-		[JsonProperty(PropertyName = "exclude")]
+
 		ISpanQuery ISpanNotQuery._Exclude { get; set; }
 
 		bool IQuery.IsConditionless

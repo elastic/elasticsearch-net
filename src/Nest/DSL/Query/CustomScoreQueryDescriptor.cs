@@ -8,6 +8,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ICustomScoreQuery
 	{
 		[JsonProperty(PropertyName = "lang")]
@@ -21,24 +22,19 @@ namespace Nest
 		Dictionary<string, object> _Params { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
-		BaseQuery _Query { get; set; }
+		IQueryDescriptor _Query { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class CustomScoreQueryDescriptor<T> : IQuery, ICustomScoreQuery where T : class
 	{
-		[JsonProperty(PropertyName = "lang")]
 		string ICustomScoreQuery._Lang { get; set; }
 
-		[JsonProperty(PropertyName = "script")]
 		string ICustomScoreQuery._Script { get; set; }
 
-		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		Dictionary<string, object> ICustomScoreQuery._Params { get; set; }
 
-		[JsonProperty(PropertyName = "query")]
-		BaseQuery ICustomScoreQuery._Query { get; set; }
+		IQueryDescriptor ICustomScoreQuery._Query { get; set; }
 
 		bool IQuery.IsConditionless
 		{

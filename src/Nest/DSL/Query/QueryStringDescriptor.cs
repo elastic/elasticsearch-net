@@ -11,6 +11,7 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IQueryStringQuery
 	{
 		[JsonProperty(PropertyName = "query")]
@@ -76,65 +77,43 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class QueryStringQueryDescriptor<T> : IQuery, IQueryStringQuery where T : class
 	{
-		[JsonProperty(PropertyName = "query")]
 		string IQueryStringQuery._QueryString { get; set; }
 
-		[JsonProperty(PropertyName = "default_field")]
 		PropertyPathMarker IQueryStringQuery._Field { get; set; }
 
-		[JsonProperty(PropertyName = "fields")]
 		IEnumerable<PropertyPathMarker> IQueryStringQuery._Fields { get; set; }
 	
-		[JsonProperty(PropertyName = "default_operator")]
-		[JsonConverter(typeof(StringEnumConverter))]
 		Operator? IQueryStringQuery._DefaultOperator { get; set; }
 		
-		[JsonProperty(PropertyName = "analyzer")]
 		string IQueryStringQuery._Analyzer { get; set; }
 		
-		[JsonProperty(PropertyName = "allow_leading_wildcard")]
 		bool? IQueryStringQuery._AllowLeadingWildcard { get; set; }
 		
-		[JsonProperty(PropertyName = "lowercase_expanded_terms")]
 		bool? IQueryStringQuery._LowercaseExpendedTerms { get; set; }
 		
-		[JsonProperty(PropertyName = "enable_position_increments")]
 		bool? IQueryStringQuery._EnablePositionIncrements { get; set; }
 		
-		[JsonProperty(PropertyName = "fuzzy_prefix_length")]
 		int? IQueryStringQuery._FuzzyPrefixLength { get; set; }
 		
-		[JsonProperty(PropertyName = "fuzzy_min_sim")]
 		double? IQueryStringQuery._FuzzyMinimumSimilarity { get; set; }
 		
-		[JsonProperty(PropertyName = "phrase_slop")]
 		double? IQueryStringQuery._PhraseSlop { get; set; }
 		
-		[JsonProperty(PropertyName = "boost")]
 		double? IQueryStringQuery._Boost { get; set; }
 		
-		[JsonProperty(PropertyName = "lenient")]
 		bool? IQueryStringQuery._Lenient { get; set; }
 		
-		[JsonProperty(PropertyName = "analyze_wildcard")]
 		bool? IQueryStringQuery._AnalyzeWildcard { get; set; }
 		
-		[JsonProperty(PropertyName = "auto_generate_phrase_queries")]
 		bool? IQueryStringQuery._AutoGeneratePhraseQueries { get; set; }
 		
-		[JsonProperty(PropertyName = "minimum_should_match")]
 		string IQueryStringQuery._MinimumShouldMatchPercentage { get; set; }
 		
-		[JsonProperty(PropertyName = "use_dis_max")]
 		bool? IQueryStringQuery._UseDismax { get; set; }
 		
-		[JsonProperty(PropertyName = "tie_breaker")]
 		double? IQueryStringQuery._TieBreaker { get; set; }
 		
-		[JsonProperty(PropertyName = "rewrite")]
-		[JsonConverter(typeof(StringEnumConverter))]
 		RewriteMultiTerm? IQueryStringQuery._Rewrite { get; set; }
-
 
 		bool IQuery.IsConditionless
 		{

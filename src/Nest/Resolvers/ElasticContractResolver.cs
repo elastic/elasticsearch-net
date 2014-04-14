@@ -106,6 +106,26 @@ namespace Nest.Resolvers
 			return contract;
 		}
 
+		protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
+		{
+			var defaultProperties = base.CreateProperties(type, memberSerialization);
+			var lookup = defaultProperties.ToLookup(p => p.PropertyName);
+
+			if (!typeof(IQuery).IsAssignableFrom(type)) return defaultProperties;
+			var jsonProperties = (
+				from i in type.GetInterfaces()
+				where i != typeof(IQuery) 
+				select base.CreateProperties(i, memberSerialization)
+				)
+				.SelectMany(interfaceProps => interfaceProps)
+				.Where(p=>!lookup.Contains(p.PropertyName));
+			foreach (var p in jsonProperties)
+			{
+				defaultProperties.Add(p);
+			}
+			return defaultProperties;
+		}
+
 		protected override string ResolvePropertyName(string propertyName)
 		{
 			if (this.ConnectionSettings.DefaultPropertyNameInferrer != null)

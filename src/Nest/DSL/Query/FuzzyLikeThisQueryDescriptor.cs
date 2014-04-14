@@ -10,6 +10,7 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IFuzzyLikeThisQuery
 	{
 		[JsonProperty(PropertyName = "fields")]
@@ -40,28 +41,20 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class FuzzyLikeThisQueryDescriptor<T> : IQuery, IFuzzyLikeThisQuery where T : class
 	{
-		[JsonProperty(PropertyName = "fields")]
 		IEnumerable<PropertyPathMarker> IFuzzyLikeThisQuery._Fields { get; set; }
 		
-		[JsonProperty(PropertyName = "like_text")]
 		string IFuzzyLikeThisQuery._LikeText { get; set; }
 		
-		[JsonProperty(PropertyName = "ignore_tf")]
 		bool? IFuzzyLikeThisQuery._IgnoreTermFrequency { get; set; }
 		
-		[JsonProperty(PropertyName = "max_query_terms")]
 		int? IFuzzyLikeThisQuery._MaxQueryTerms { get; set; }
 		
-		[JsonProperty(PropertyName = "min_similarity")]
 		double? IFuzzyLikeThisQuery._MinSimilarity { get; set; }
 		
-		[JsonProperty(PropertyName = "prefix_length")]
 		int? IFuzzyLikeThisQuery._PrefixLength { get; set; }
 		
-		[JsonProperty(PropertyName = "boost")]
 		double? IFuzzyLikeThisQuery._Boost { get; set; }
 		
-		[JsonProperty(PropertyName = "analyzer")]
 		string IFuzzyLikeThisQuery._Analyzer { get; set; }
 
 		bool IQuery.IsConditionless

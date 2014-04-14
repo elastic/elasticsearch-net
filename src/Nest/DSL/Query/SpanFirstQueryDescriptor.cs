@@ -9,6 +9,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ISpanFirstQuery
 	{
 		[JsonProperty(PropertyName = "match")]
@@ -21,10 +22,8 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SpanFirstQueryDescriptor<T> : ISpanSubQuery, IQuery, ISpanFirstQuery where T : class
 	{
-		[JsonProperty(PropertyName = "match")]
 		ISpanQuery ISpanFirstQuery.SpanQuery { get; set; }
 
-		[JsonProperty(PropertyName = "end")]
 		int? ISpanFirstQuery._End { get; set; }
 
 		bool IQuery.IsConditionless

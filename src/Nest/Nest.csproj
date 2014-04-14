@@ -252,7 +252,6 @@
     <Compile Include="DSL\RefreshDescriptor.cs" />
     <Compile Include="DSL\OptimizeDescriptor.cs" />
     <Compile Include="DSL\GatewaySnapshotDescriptor.cs" />
-    <Compile Include="DSL\IActAsQuery.cs" />
     <Compile Include="DSL\OpenIndexDescriptor.cs" />
     <Compile Include="DSL\FluentDictionary.cs" />
     <Compile Include="DSL\Paths\IndexPathDescriptor.cs" />
@@ -332,7 +331,7 @@
     <Compile Include="Domain\State\ClusterState.cs" />
     <Compile Include="DSL\BulkUpdateDescriptor.cs" />
     <Compile Include="DSL\Filter\HasParentFilterDescriptor.cs" />
-    <Compile Include="DSL\Query\ChildScoreType.cs" />
+    <Compile Include="Domain\DSL\ChildScoreType.cs" />
     <Compile Include="DSL\Query\HasParentQueryDescriptor.cs" />
     <Compile Include="Domain\DSL\ParentScoreType.cs" />
     <Compile Include="DSL\RegisterPercolatorDescriptor.cs" />
@@ -511,7 +510,6 @@
     <Compile Include="Domain\DSL\BaseQuery.cs" />
     <Compile Include="Domain\DSL\BaseFilter.cs" />
     <Compile Include="DSL\IFilterDescriptor.cs" />
-    <Compile Include="DSL\IQueryDescriptor.cs" />
     <Compile Include="DSL\Query\TermsQueryDescriptor.cs" />
     <Compile Include="DSL\UpdateDescriptor.cs" />
     <Compile Include="ElasticClient-Update.cs" />

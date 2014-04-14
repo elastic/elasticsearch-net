@@ -9,6 +9,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoShapeQuery
 	{
 		PropertyPathMarker _Field { get; set; }
@@ -17,11 +18,11 @@ namespace Nest
 		GeoShapeVector _Shape { get; set; }
 	}
 
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class GeoShapeQueryDescriptor<T> : IQuery, IGeoShapeQuery where T : class
 	{
 		PropertyPathMarker IGeoShapeQuery._Field { get; set; }
 		
-		[JsonProperty("shape")]
 		GeoShapeVector IGeoShapeQuery._Shape { get; set; }
 		
 		bool IQuery.IsConditionless

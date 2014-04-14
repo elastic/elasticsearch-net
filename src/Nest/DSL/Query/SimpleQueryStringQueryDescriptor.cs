@@ -11,6 +11,7 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ISimpleQueryStringQuery
 	{
 		[JsonProperty(PropertyName = "query")]
@@ -42,22 +43,20 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SimpleQueryStringQueryDescriptor<T> : IQuery, ISimpleQueryStringQuery where T : class
 	{
-		[JsonProperty(PropertyName = "query")]
 		string ISimpleQueryStringQuery._QueryString { get; set; }
-		[JsonProperty(PropertyName = "default_field")]
+		
 		PropertyPathMarker ISimpleQueryStringQuery._Field { get; set; }
-		[JsonProperty(PropertyName = "fields")]
+		
 		IEnumerable<PropertyPathMarker> ISimpleQueryStringQuery._Fields { get; set; }
-		[JsonProperty(PropertyName = "default_operator")]
-		[JsonConverter(typeof(StringEnumConverter))]
+		
 		Operator? ISimpleQueryStringQuery._DefaultOperator { get; set; }
-		[JsonProperty(PropertyName = "analyzer")]
+		
 		string ISimpleQueryStringQuery._Analyzer { get; set; }
-		[JsonProperty(PropertyName = "lowercase_expanded_terms")]
+		
 		bool? ISimpleQueryStringQuery._LowercaseExpendedTerms { get; set; }
-		[JsonProperty(PropertyName = "flags")]
+		
 		string ISimpleQueryStringQuery._Flags { get; set; }
-		[JsonProperty(PropertyName = "locale")]
+		
 		string ISimpleQueryStringQuery._Locale { get; set; }
 
 

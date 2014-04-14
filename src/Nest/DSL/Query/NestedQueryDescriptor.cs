@@ -9,13 +9,14 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface INestedQuery
 	{
 		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
 		NestedScore? _Score { get; set; }
 
 		[JsonProperty("query")]
-		BaseQuery _QueryDescriptor { get; set; }
+		IQueryDescriptor _QueryDescriptor { get; set; }
 
 		[JsonProperty("path")]
 		PropertyPathMarker _Path { get; set; }
@@ -27,16 +28,12 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class NestedQueryDescriptor<T> : IQuery, INestedQuery where T : class
 	{
-		[JsonProperty("score_mode"), JsonConverter(typeof(StringEnumConverter))]
 		NestedScore? INestedQuery._Score { get; set; }
 
-		[JsonProperty("query")]
-		BaseQuery INestedQuery._QueryDescriptor { get; set; }
+		IQueryDescriptor INestedQuery._QueryDescriptor { get; set; }
 
-		[JsonProperty("path")]
 		PropertyPathMarker INestedQuery._Path { get; set; }
 
-		[JsonProperty("_scope")]
 		string INestedQuery._Scope { get; set; }
 
 		bool IQuery.IsConditionless

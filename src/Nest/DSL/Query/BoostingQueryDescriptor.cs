@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IBoostingQuery
 	{
 		[JsonProperty("positive")]
@@ -22,13 +23,10 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class BoostingQueryDescriptor<T> : IQuery, IBoostingQuery where T : class
 	{
-		[JsonProperty("positive")]
 		BaseQuery IBoostingQuery._PositiveQuery { get; set; }
 
-		[JsonProperty("negative")]
 		BaseQuery IBoostingQuery._NegativeQuery { get; set; }
 
-		[JsonProperty("negative_boost")]
 		double? IBoostingQuery._NegativeBoost { get; set; }
 
 		bool IQuery.IsConditionless

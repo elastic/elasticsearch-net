@@ -24,8 +24,6 @@ namespace Nest
 		internal string _CacheKey { get; set; }
 		internal bool? _Cache { get; set; }
 
-		
-
 		private bool _forcedConditionless;
 		public override bool IsConditionless
 		{

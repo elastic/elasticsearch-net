@@ -12,13 +12,14 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	//More info about it http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/query-dsl-function-score-query.html
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IFunctionScoreQuery
 	{
 		[JsonProperty(PropertyName = "functions")]
 		IEnumerable<IFunctionScoreFunction> _Functions { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
-		BaseQuery _Query { get; set; }
+		IQueryDescriptor _Query { get; set; }
 
 		[JsonProperty(PropertyName = "score_mode")]
 		[JsonConverter(typeof (StringEnumConverter))]
@@ -38,24 +39,16 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class FunctionScoreQueryDescriptor<T> : IQuery, IFunctionScoreQuery where T : class
 	{
-		[JsonProperty(PropertyName = "functions")]
 		IEnumerable<IFunctionScoreFunction> IFunctionScoreQuery._Functions { get; set; }
 
-		[JsonProperty(PropertyName = "query")]
-		BaseQuery IFunctionScoreQuery._Query { get; set; }
+		IQueryDescriptor IFunctionScoreQuery._Query { get; set; }
 
-		[JsonProperty(PropertyName = "score_mode")]
-		[JsonConverter(typeof(StringEnumConverter))]
 		FunctionScoreMode? IFunctionScoreQuery._ScoreMode { get; set; }
 
-		[JsonProperty(PropertyName = "boost_mode")]
-		[JsonConverter(typeof(StringEnumConverter))]
 		FunctionBoostMode? IFunctionScoreQuery._BoostMode { get; set; }
 
-		[JsonProperty(PropertyName = "random_score")]
 		RandomScoreFunction IFunctionScoreQuery._RandomScore { get; set; }
 
-		[JsonProperty(PropertyName = "script_score")]
 		ScriptFilterDescriptor IFunctionScoreQuery._ScriptScore { get; set; }
 
 		bool IQuery.IsConditionless

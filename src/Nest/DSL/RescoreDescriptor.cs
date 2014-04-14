@@ -18,7 +18,7 @@ namespace Nest.DSL.Descriptors
 		internal bool _Strict { get; set; }
 		internal bool _Verbatim { get; set; }
 		internal string _RawQuery { get; set; }
-		internal BaseQuery _Query { get; set; }
+		internal IQueryDescriptor _Query { get; set; }
 
 
 		[JsonProperty("rescore_query")]

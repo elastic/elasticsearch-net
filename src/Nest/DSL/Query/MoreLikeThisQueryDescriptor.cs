@@ -10,6 +10,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IMoreLikeThisQuery
 	{
 		[JsonProperty(PropertyName = "fields")]
@@ -55,43 +56,30 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class MoreLikeThisQueryDescriptor<T> : IQuery, IMoreLikeThisQuery where T : class
 	{
-		[JsonProperty(PropertyName = "fields")]
 		IEnumerable<PropertyPathMarker> IMoreLikeThisQuery._Fields { get; set; }
 		
-		[JsonProperty(PropertyName = "like_text")]
 		string IMoreLikeThisQuery._LikeText { get; set; }
 
-		[JsonProperty(PropertyName = "percent_terms_to_match")]
 		double? IMoreLikeThisQuery._TermMatchPercentage { get; set; }
 	
-		[JsonProperty(PropertyName = "stop_words")]
 		IEnumerable<string> IMoreLikeThisQuery._StopWords { get; set; }
 		
-		[JsonProperty(PropertyName = "min_term_freq")]
 		int? IMoreLikeThisQuery._MinTermFrequency { get; set; }
 		
-		[JsonProperty(PropertyName = "max_query_terms")]
 		int? IMoreLikeThisQuery._MaxQueryTerms { get; set; }
 		
-		[JsonProperty(PropertyName = "min_doc_freq")]
 		int? IMoreLikeThisQuery._MinDocumentFrequency { get; set; }
 		
-		[JsonProperty(PropertyName = "max_doc_freq")]
 		int? IMoreLikeThisQuery._MaxDocumentFrequency { get; set; }
 		
-		[JsonProperty(PropertyName = "min_word_len")]
 		int? IMoreLikeThisQuery._MinWordLength { get; set; }
 		
-		[JsonProperty(PropertyName = "max_word_len")]
 		int? IMoreLikeThisQuery._MaxWordLength { get; set; }
 		
-		[JsonProperty(PropertyName = "boost_terms")]
 		double? IMoreLikeThisQuery._BoostTerms { get; set; }
 		
-		[JsonProperty(PropertyName = "boost")]
 		double? IMoreLikeThisQuery._Boost { get; set; }
 		
-		[JsonProperty(PropertyName = "analyzer")]
 		string IMoreLikeThisQuery._Analyzer { get; set; }
 
 		bool IQuery.IsConditionless

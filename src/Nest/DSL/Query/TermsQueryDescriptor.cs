@@ -9,6 +9,7 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers;
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ITermsQuery
 	{
 		PropertyPathMarker _Field { get; set; }

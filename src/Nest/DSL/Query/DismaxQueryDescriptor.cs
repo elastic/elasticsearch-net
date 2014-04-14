@@ -8,6 +8,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IDismaxQuery
 	{
 		[JsonProperty(PropertyName = "tie_breaker")]
@@ -23,13 +24,10 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class DismaxQueryDescriptor<T> : IQuery, IDismaxQuery where T : class
 	{
-		[JsonProperty(PropertyName = "tie_breaker")]
 		double? IDismaxQuery._TieBreaker { get; set; }
 
-		[JsonProperty(PropertyName = "boost")]
 		double? IDismaxQuery._Boost { get; set; }
 
-		[JsonProperty(PropertyName = "queries")]
 		IEnumerable<BaseQuery> IDismaxQuery._Queries { get; set; }
 
 		bool IQuery.IsConditionless

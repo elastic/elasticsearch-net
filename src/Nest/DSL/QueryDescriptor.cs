@@ -11,11 +11,136 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public class QueryDescriptor : QueryDescriptor<dynamic>
+	[JsonObject(MemberSerialization.OptIn)]
+	public interface IQueryDescriptor
 	{
+		[JsonProperty(PropertyName = "bool")]
+		BoolBaseQueryDescriptor BoolQueryDescriptor { get; set; }
 
+		bool IsConditionless { get; set; }
+		bool IsStrict { get; set; }
+		bool IsVerbatim { get; set; }
+
+		[JsonProperty(PropertyName = "match_all")]
+		MatchAll MatchAllQuery { get; set; }
+
+		[JsonProperty(PropertyName = "term")]
+		Term TermQuery { get; set; }
+
+		[JsonProperty(PropertyName = "wildcard")]
+		Wildcard WildcardQuery { get; set; }
+
+		[JsonProperty(PropertyName = "prefix")]
+		Prefix PrefixQuery { get; set; }
+
+		[JsonProperty(PropertyName = "boosting")]
+		IBoostingQuery BoostingQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "ids")]
+		IdsQuery IdsQuery { get; set; }
+
+		[JsonProperty(PropertyName = "custom_score")]
+		ICustomScoreQuery CustomScoreQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "custom_filters_score")]
+		ICustomFiltersScoreQuery CustomFiltersScoreQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "custom_boost_factor")]
+		ICustomBoostFactorQuery CustomBoostFactorQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "constant_score")]
+		IConstantScoreQuery ConstantScoreQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "dis_max")]
+		IDismaxQuery DismaxQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "filtered")]
+		IFilteredQuery FilteredQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "multi_match")]
+		IMultiMatchQuery MultiMatchQueryDescriptor { get; set; }
+
+
+
+
+		[JsonProperty(PropertyName = "match")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<PropertyPathMarker, object> MatchQueryDescriptor { get; set; }
+
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonProperty(PropertyName = "fuzzy")]
+		IDictionary<PropertyPathMarker, object> FuzzyQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "geo_shape")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<PropertyPathMarker, object> GeoShapeQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "common_terms")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<PropertyPathMarker, object> CommonTermsQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "terms")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<PropertyPathMarker, object> TermsQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "range")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<PropertyPathMarker, object> RangeQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "regexp")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<PropertyPathMarker, object> RegexpQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "has_child")]
+		IHasChildQuery HasChildQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "has_parent")]
+		IHasParentQuery HasParentQueryDescriptor { get; set; }
+		
+		[JsonProperty(PropertyName = "span_term")]
+		SpanTerm SpanTermQuery { get; set; }
+
+		
+		[JsonProperty(PropertyName = "flt")]
+		IFuzzyLikeThisQuery FuzzyLikeThisDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "simple_query_string")]
+		ISimpleQueryStringQuery SimpleQueryStringDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "query_string")]
+		IQueryStringQuery QueryStringDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "mlt")]
+		IMoreLikeThisQuery MoreLikeThisDescriptor { get; set; }
+
+
+		[JsonProperty(PropertyName = "span_first")]
+		ISpanFirstQuery SpanFirstQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "span_or")]
+		ISpanOrQuery SpanOrQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "span_near")]
+		ISpanNearQuery SpanNearQuery { get; set; }
+
+		[JsonProperty(PropertyName = "span_not")]
+		ISpanNotQuery SpanNotQuery { get; set; }
+
+		[JsonProperty(PropertyName = "top_children")]
+		ITopChildrenQuery TopChildrenQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "nested")]
+		INestedQuery NestedQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "indices")]
+		IIndicesQuery IndicesQueryDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "function_score")]
+		IFunctionScoreQuery FunctionScoreQueryDescriptor { get; set; }
 	}
-	public class QueryDescriptor<T> : BaseQuery, IQueryDescriptor<T> where T : class
+
+	[JsonObject(MemberSerialization.OptIn)]
+	public class QueryDescriptor<T> : BaseQuery where T : class
 	{
 		private readonly bool _forceConditionless;
 
@@ -25,133 +150,22 @@ namespace Nest
 
 		internal QueryDescriptor(bool forceConditionless)
 		{
-			this.IsConditionless = forceConditionless;
+			((IQueryDescriptor)this).IsConditionless = forceConditionless;
 		}
-
-		[JsonProperty(PropertyName = "match_all")]
-		internal MatchAll MatchAllQuery { get; set; }
-		
-		[JsonProperty(PropertyName = "term")]
-		internal Term TermQuery { get; set; }
-		
-		[JsonProperty(PropertyName = "wildcard")]
-		internal Wildcard WildcardQuery { get; set; }
-		
-		[JsonProperty(PropertyName = "prefix")]
-		internal Prefix PrefixQuery { get; set; }
-
-		[JsonProperty(PropertyName = "boosting")]
-		internal BoostingQueryDescriptor<T> BoostingQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "ids")]
-		internal IdsQuery IdsQuery { get; set; }
-		
-		[JsonProperty(PropertyName = "custom_score")]
-		internal CustomScoreQueryDescriptor<T> CustomScoreQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "custom_filters_score")]
-		internal CustomFiltersScoreQueryDescriptor<T> CustomFiltersScoreQueryDescriptor { get; set; }
-
-		[JsonProperty(PropertyName = "custom_boost_factor")]
-		internal CustomBoostFactorQueryDescriptor<T> CustomBoostFactorQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "constant_score")]
-		internal ConstantScoreQueryDescriptor<T> ConstantScoreQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "dis_max")]
-		internal DismaxQueryDescriptor<T> DismaxQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "filtered")]
-		internal FilteredQueryDescriptor<T> FilteredQueryDescriptor { get; set; }
-
-		[JsonProperty(PropertyName = "text")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<PropertyPathMarker, object> TextQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "multi_match")]
-		internal MultiMatchQueryDescriptor<T> MultiMatchQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "match")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<PropertyPathMarker, object> MatchQueryDescriptor { get; set; }
-		
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		[JsonProperty(PropertyName = "fuzzy")]
-		internal IDictionary<PropertyPathMarker, object> FuzzyQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "geo_shape")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<PropertyPathMarker, object> GeoShapeQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "common_terms")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<PropertyPathMarker, object> CommonTermsQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "terms")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<PropertyPathMarker, object> TermsQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "simple_query_string")]
-		internal SimpleQueryStringQueryDescriptor<T> SimpleQueryStringDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "query_string")]
-		internal QueryStringQueryDescriptor<T> QueryStringDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "regexp")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<PropertyPathMarker, object> RegexpQueryDescriptor { get; set; }
-
-		[JsonProperty(PropertyName = "flt")]
-		internal FuzzyLikeThisQueryDescriptor<T> FuzzyLikeThisDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "has_child")]
-		internal object HasChildQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "has_parent")]
-		internal object HasParentQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "mlt")]
-		internal MoreLikeThisQueryDescriptor<T> MoreLikeThisDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "range")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<PropertyPathMarker, object> RangeQueryDescriptor { get; set; }
-
-		[JsonProperty(PropertyName = "span_term")]
-		internal SpanTerm SpanTermQuery { get; set; }
-		
-		[JsonProperty(PropertyName = "span_first")]
-		internal SpanFirstQueryDescriptor<T> SpanFirstQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "span_or")]
-		internal SpanOrQueryDescriptor<T> SpanOrQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "span_near")]
-		internal SpanNearQuery<T> SpanNearQuery { get; set; }
-		
-		[JsonProperty(PropertyName = "span_not")]
-		internal SpanNotQuery<T> SpanNotQuery { get; set; }
-
-		[JsonProperty(PropertyName = "top_children")]
-		internal object TopChildrenQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "nested")]
-		internal NestedQueryDescriptor<T> NestedQueryDescriptor { get; set; }
-		
-		[JsonProperty(PropertyName = "indices")]
-		internal IndicesQueryDescriptor<T> IndicesQueryDescriptor { get; set; }
-
-		[JsonProperty(PropertyName = "function_score")]
-		internal FunctionScoreQueryDescriptor<T> FunctionScoreQueryDescriptor { get; set; }
 
 		public QueryDescriptor<T> Strict(bool strict = true)
 		{
-			return new QueryDescriptor<T> { IsStrict = strict };
+			var q = new QueryDescriptor<T>();
+			((IQueryDescriptor)q).IsStrict = strict;
+			return q;
 		}
 
 		public QueryDescriptor<T> Verbatim(bool verbatim = true)
 		{
-			return new QueryDescriptor<T> { IsVerbatim = verbatim, IsStrict = verbatim };
+			var q = new QueryDescriptor<T>();
+			((IQueryDescriptor)q).IsStrict = verbatim;
+			((IQueryDescriptor)q).IsVerbatim = verbatim;
+			return q;
 		}
 
 		private QueryDescriptor<T> CreateConditionlessQueryDescriptor(IQuery query)
@@ -166,7 +180,7 @@ namespace Nest
 			return new QueryDescriptor<T>(forceConditionless: true);
 		}
 
-		private QueryDescriptor<T> New(IQuery query, Action<QueryDescriptor<T>> fillProperty)
+		private QueryDescriptor<T> New(IQuery query, Action<IQueryDescriptor> fillProperty)
 		{
 			if (query.IsConditionless && !this.IsVerbatim)
 				return CreateConditionlessQueryDescriptor(query);
@@ -180,11 +194,10 @@ namespace Nest
 
 		protected virtual QueryDescriptor<T> Clone()
 		{
-			return new QueryDescriptor<T>
-			{
-				IsStrict = this.IsStrict,
-				IsVerbatim = this.IsVerbatim
-			};
+			var q = new QueryDescriptor<T>();
+			((IQueryDescriptor)q).IsStrict = this.IsStrict;
+			((IQueryDescriptor)q).IsVerbatim = this.IsVerbatim;
+			return q;
 		}
 
 		/// <summary>
@@ -194,7 +207,7 @@ namespace Nest
 		{
 			var query = new QueryStringQueryDescriptor<T>();
 			selector(query);
-			return this.New(query, q => q.QueryStringDescriptor = query);
+			return this.New(query, q => ((IQueryDescriptor)q).QueryStringDescriptor = query);
 		}
 
 		/// <summary>
@@ -206,7 +219,7 @@ namespace Nest
 		{
 			var query = new SimpleQueryStringQueryDescriptor<T>();
 			selector(query);
-			return this.New(query, q => q.SimpleQueryStringDescriptor = query);
+			return this.New(query, q => ((IQueryDescriptor)q).SimpleQueryStringDescriptor = query);
 		}
 		
 		
@@ -280,7 +293,7 @@ namespace Nest
 			{
 				termsQueryDescriptor.Add("_cache_key", ((ITermsQuery)query)._CacheKey);
 			}
-			return this.New(query, q => q.TermsQueryDescriptor = termsQueryDescriptor);
+			return this.New(query, q => ((IQueryDescriptor)q).TermsQueryDescriptor = termsQueryDescriptor);
 		}
 
 
@@ -494,7 +507,7 @@ namespace Nest
 			selector(query);
 			var commonTerms = new Dictionary<PropertyPathMarker, object>
 			{
-				{ query._Field, query }
+				{ ((ICommonTermsQuery)query)._Field, query }
 			};
 			return this.New(query, q => q.CommonTermsQueryDescriptor = commonTerms);
 		}

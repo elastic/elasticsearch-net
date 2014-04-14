@@ -16,6 +16,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					.Match(t=>t
 						.OnField(f=>f.Name)
 						.Query("this is a test")
+						.Rewrite(RewriteMultiTerm.constant_score_default)
 					)
 			);
 				
@@ -24,7 +25,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				query : {
 					match: {
 						name : { 
-							query : ""this is a test""
+							query : ""this is a test"",
+							rewrite: ""constant_score_default""
 						}
 					}
 				}

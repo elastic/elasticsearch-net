@@ -7,6 +7,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IConstantScoreQuery
 	{
 		[JsonProperty(PropertyName = "query")]
@@ -22,13 +23,10 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class ConstantScoreQueryDescriptor<T> : IQuery, IConstantScoreQuery where T : class
 	{
-		[JsonProperty(PropertyName = "query")]
 		BaseQuery IConstantScoreQuery._Query { get; set; }
 
-		[JsonProperty(PropertyName = "filter")]
 		BaseFilter IConstantScoreQuery._Filter { get; set; }
 
-		[JsonProperty(PropertyName = "boost")]
 		double? IConstantScoreQuery._Boost { get; set; }
 
 		bool IQuery.IsConditionless

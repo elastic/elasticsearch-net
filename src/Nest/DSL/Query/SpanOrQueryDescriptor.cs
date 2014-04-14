@@ -8,6 +8,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ISpanOrQuery
 	{
 		[JsonProperty(PropertyName = "clauses")]
@@ -17,7 +18,6 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SpanOrQueryDescriptor<T> : ISpanSubQuery, IQuery, ISpanOrQuery where T : class
 	{
-		[JsonProperty(PropertyName = "clauses")]
 		IEnumerable<ISpanQuery> ISpanOrQuery._SpanQueryDescriptors { get; set; }
 
 		bool IQuery.IsConditionless

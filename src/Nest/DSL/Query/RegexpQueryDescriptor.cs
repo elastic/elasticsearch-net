@@ -10,6 +10,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IRegexpQuery
 	{
 		[JsonProperty("value")]
@@ -27,15 +28,12 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class RegexpQueryDescriptor<T> : IQuery, IRegexpQuery where T : class
 	{
-		[JsonProperty("value")]
 		string IRegexpQuery._Value { get; set; }
 
-		[JsonProperty("flags")]
 		string IRegexpQuery._Flags { get; set; }
 
 		PropertyPathMarker IRegexpQuery._Field { get; set; }
 
-		[JsonProperty("boost")]
 		double? IRegexpQuery._Boost { get; set; }
 
 		bool IQuery.IsConditionless

@@ -9,6 +9,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IRangeQuery
 	{
 		[JsonProperty("from")]
@@ -38,19 +39,18 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class RangeQueryDescriptor<T> : IQuery, IRangeQuery where T : class
 	{
-		[JsonProperty("from")]
 		object IRangeQuery._From { get; set; }
-		[JsonProperty("to")]
+	
 		object IRangeQuery._To { get; set; }
-		[JsonProperty("include_lower")]
+		
 		bool? IRangeQuery._FromInclusive { get; set; }
-		[JsonProperty("include_upper")]
+		
 		bool? IRangeQuery._ToInclusive { get; set; }
-		[JsonProperty(PropertyName = "boost")]
+		
 		double? IRangeQuery._Boost { get; set; }
-		[JsonProperty(PropertyName = "_cache")]
+		
 		bool? IRangeQuery._Cache { get; set; }
-		[JsonProperty(PropertyName = "_name")]
+		
 		string IRangeQuery._Name { get; set; }
 
 		PropertyPathMarker IRangeQuery._Field { get; set; }

@@ -18,7 +18,7 @@ namespace Nest
 		where K : class
 	{
 		[JsonProperty(PropertyName = "query")]
-		internal BaseQuery _Query { get; set; }
+		internal IQueryDescriptor _Query { get; set; }
 
 		[JsonProperty(PropertyName = "doc")]
 		internal K _Document { get; set; }

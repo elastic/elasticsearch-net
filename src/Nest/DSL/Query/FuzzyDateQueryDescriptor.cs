@@ -9,6 +9,7 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers;
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IFuzzyDateQuery
 	{
 		PropertyPathMarker _Field { get; set; }
@@ -28,13 +29,10 @@ namespace Nest
 	{
 		PropertyPathMarker IFuzzyDateQuery._Field { get; set; }
 		
-		[JsonProperty(PropertyName = "boost")]
 		double? IFuzzyDateQuery._Boost { get; set; }
 		
-		[JsonProperty(PropertyName = "min_similarity")]
 		string IFuzzyDateQuery._MinSimilarity { get; set; }
 		
-		[JsonProperty(PropertyName = "value")]
 		DateTime? IFuzzyDateQuery._Value { get; set; }
 
 		bool IQuery.IsConditionless

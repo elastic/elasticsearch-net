@@ -30,7 +30,7 @@ namespace Nest
 		internal string _Scope { get; set;}
 		
 		[JsonProperty("query")]
-		internal BaseQuery _QueryDescriptor { get; set; }
+		internal IQueryDescriptor _QueryDescriptor { get; set; }
 
 		public HasParentFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{

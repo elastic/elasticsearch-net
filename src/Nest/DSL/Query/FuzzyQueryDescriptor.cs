@@ -12,6 +12,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IFuzzyQuery 
 	{
 		PropertyPathMarker _Field { get; set; }
@@ -30,17 +31,17 @@ namespace Nest
 
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptOut)]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class FuzzyQueryDescriptor<T> : IQuery, IFuzzyQuery where T : class
 	{
 		PropertyPathMarker IFuzzyQuery._Field { get; set; }
-		[JsonProperty(PropertyName = "boost")]
+		
 		double? IFuzzyQuery._Boost { get; set; }
-		[JsonProperty(PropertyName = "min_similarity")]
+		
 		double? IFuzzyQuery._MinSimilarity { get; set; }
-		[JsonProperty(PropertyName = "prefix_length")]
+		
 		int? IFuzzyQuery._PrefixLength { get; set; }
-		[JsonProperty(PropertyName = "value")]
+		
 		string IFuzzyQuery.Value { get; set; }
 
 		bool IQuery.IsConditionless

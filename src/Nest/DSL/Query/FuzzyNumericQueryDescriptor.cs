@@ -9,6 +9,7 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers;
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IFuzzyNumericQuery
 	{
 		PropertyPathMarker _Field { get; set; }
@@ -28,13 +29,10 @@ namespace Nest
 	{
 		PropertyPathMarker IFuzzyNumericQuery._Field { get; set; }
 		
-		[JsonProperty(PropertyName = "boost")]
 		double? IFuzzyNumericQuery._Boost { get; set; }
 	
-		[JsonProperty(PropertyName = "min_similarity")]
 		double? IFuzzyNumericQuery._MinSimilarity { get; set; }
 	
-		[JsonProperty(PropertyName = "value")]
 		double? IFuzzyNumericQuery._Value { get; set; }
 
 

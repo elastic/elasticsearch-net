@@ -7,10 +7,11 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IFilteredQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		BaseQuery _Query { get; set; }
+		IQueryDescriptor _Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
 		BaseFilter _Filter { get; set; }
@@ -19,10 +20,8 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class FilteredQueryDescriptor<T> : IQuery, IFilteredQuery where T : class
 	{
-		[JsonProperty(PropertyName = "query")]
-		BaseQuery IFilteredQuery._Query { get; set; }
+		IQueryDescriptor IFilteredQuery._Query { get; set; }
 
-		[JsonProperty(PropertyName = "filter")]
 		BaseFilter IFilteredQuery._Filter { get; set; }
 
 		bool IQuery.IsConditionless

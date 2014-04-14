@@ -9,6 +9,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IIndicesQuery
 	{
 		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
@@ -27,16 +28,12 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class IndicesQueryDescriptor<T> : IQuery, IIndicesQuery where T : class
 	{
-		[JsonProperty("score_mode"), JsonConverter(typeof(StringEnumConverter))]
 		NestedScore? IIndicesQuery._Score { get; set; }
 
-		[JsonProperty("query")]
 		object IIndicesQuery._QueryDescriptor { get; set; }
 
-		[JsonProperty("no_match_query")]
 		object IIndicesQuery._NoMatchQueryDescriptor { get; set; }
 
-		[JsonProperty("indices")]
 		IEnumerable<string> IIndicesQuery._Indices { get; set; }
 
 		bool IQuery.IsConditionless
@@ -90,7 +87,7 @@ namespace Nest
 			((IIndicesQuery)this)._NoMatchQueryDescriptor = d.Descriptor;
 			return this;
 		}
-		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryDescriptor<K>, BaseQuery> querySelector) where K : class
+		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryDescriptor<K>, IQueryDescriptor> querySelector) where K : class
 		{
 			var qd = new QueryDescriptor<K>();
 			var q = querySelector(qd);

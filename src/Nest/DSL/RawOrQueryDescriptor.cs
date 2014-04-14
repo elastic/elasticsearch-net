@@ -11,7 +11,7 @@ namespace Nest
 	public class RawOrQueryDescriptor<T> : ICustomJson where T : class
 	{
 		public string Raw { get; set; }
-		public BaseQuery Descriptor { get; set; }
+		public IQueryDescriptor Descriptor { get; set; }
 	
 		object ICustomJson.GetCustomJson()
 		{

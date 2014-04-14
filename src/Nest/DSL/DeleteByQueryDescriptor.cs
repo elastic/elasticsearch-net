@@ -17,7 +17,7 @@ namespace Nest
 		where T : class
 	{
 		[JsonProperty("query")]
-		internal BaseQuery _Query { get; set; }
+		internal IQueryDescriptor _Query { get; set; }
 
 		public DeleteByQueryDescriptor<T> MatchAll()
 		{

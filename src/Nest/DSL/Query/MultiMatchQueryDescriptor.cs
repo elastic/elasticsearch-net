@@ -10,6 +10,7 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IMultiMatchQuery
 	{
 		[JsonProperty(PropertyName = "type")]
@@ -60,47 +61,33 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class MultiMatchQueryDescriptor<T> : IQuery, IMultiMatchQuery where T : class
 	{
-		[JsonProperty(PropertyName = "type")]
 		string IMultiMatchQuery._Type { get; set; }
 
-		[JsonProperty(PropertyName = "query")]
 		string IMultiMatchQuery._Query { get; set; }
 
-		[JsonProperty(PropertyName = "analyzer")]
 		string IMultiMatchQuery._Analyzer { get; set; }
 
-		[JsonProperty(PropertyName = "rewrite")]
-		[JsonConverter(typeof(StringEnumConverter))]
 		RewriteMultiTerm? IMultiMatchQuery._Rewrite { get; set; }
 
-		[JsonProperty(PropertyName = "fuzziness")]
 		double? IMultiMatchQuery._Fuzziness { get; set; }
 
-		[JsonProperty(PropertyName = "cutoff_frequency")]
 		double? IMultiMatchQuery._CutoffFrequency { get; set; }
 
-		[JsonProperty(PropertyName = "prefix_length")]
 		int? IMultiMatchQuery._PrefixLength { get; set; }
 
-		[JsonProperty(PropertyName = "max_expansions")]
 		int? IMultiMatchQuery._MaxExpansions { get; set; }
 
-		[JsonProperty(PropertyName = "slop")]
 		int? IMultiMatchQuery._Slop { get; set; }
 
-		[JsonProperty(PropertyName = "boost")]
 		double? IMultiMatchQuery._Boost { get; set; }
 
-		[JsonProperty(PropertyName = "use_dis_max")]
 		bool? IMultiMatchQuery._UseDisMax { get; set; }
 
-		[JsonProperty(PropertyName = "tie_breaker")]
 		double? IMultiMatchQuery._TieBreaker { get; set; }
 
-
-		[JsonProperty(PropertyName = "operator")]
-		[JsonConverter(typeof(StringEnumConverter))]
 		Operator? IMultiMatchQuery._Operator { get; set; }
+
+		IEnumerable<PropertyPathMarker> IMultiMatchQuery._Fields { get; set; }
 
 		bool IQuery.IsConditionless
 		{
@@ -110,8 +97,6 @@ namespace Nest
 			}
 		}
 
-		[JsonProperty(PropertyName = "fields")]
-		IEnumerable<PropertyPathMarker> IMultiMatchQuery._Fields { get; set; }
 
 		public MultiMatchQueryDescriptor<T> OnFields(IEnumerable<string> fields)
 		{

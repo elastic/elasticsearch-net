@@ -9,6 +9,7 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ITopChildrenQuery
 	{
 		[JsonProperty("type")]
@@ -27,7 +28,7 @@ namespace Nest
 		int? _IncrementalFactor { get; set; }
 
 		[JsonProperty("query")]
-		BaseQuery _QueryDescriptor { get; set; }
+		IQueryDescriptor _QueryDescriptor { get; set; }
 
 		[JsonProperty(PropertyName = "_cache")]
 		bool? _Cache { get; set; }
@@ -59,28 +60,20 @@ namespace Nest
 			
 		}
 
-		[JsonProperty("type")]
 		TypeNameMarker ITopChildrenQuery._Type { get; set; }
 
-		[JsonProperty("_scope")]
 		string ITopChildrenQuery._Scope { get; set; }
 
-		[JsonProperty("score"), JsonConverter(typeof(StringEnumConverter))]
 		TopChildrenScore? ITopChildrenQuery._Score { get; set; }
 
-		[JsonProperty("factor")]
 		int? ITopChildrenQuery._Factor { get; set; }
 
-		[JsonProperty("incremental_factor")]
 		int? ITopChildrenQuery._IncrementalFactor { get; set; }
 
-		[JsonProperty("query")]
-		BaseQuery ITopChildrenQuery._QueryDescriptor { get; set; }
+		IQueryDescriptor ITopChildrenQuery._QueryDescriptor { get; set; }
 
-		[JsonProperty(PropertyName = "_cache")]
 		bool? ITopChildrenQuery._Cache { get; set; }
 
-		[JsonProperty(PropertyName = "_name")]
 		string ITopChildrenQuery._Name { get; set; }
 
 		/// <summary>

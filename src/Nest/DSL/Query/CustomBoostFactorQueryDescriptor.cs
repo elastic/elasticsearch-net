@@ -7,10 +7,11 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ICustomBoostFactorQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		BaseQuery _Query { get; set; }
+		IQueryDescriptor _Query { get; set; }
 
 		[JsonProperty(PropertyName = "boost_factor")]
 		double? _BoostFactor { get; set; }
@@ -19,10 +20,8 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class CustomBoostFactorQueryDescriptor<T> : IQuery, ICustomBoostFactorQuery where T : class
 	{
-		[JsonProperty(PropertyName = "query")]
-		BaseQuery ICustomBoostFactorQuery._Query { get; set; }
+		IQueryDescriptor ICustomBoostFactorQuery._Query { get; set; }
 
-		[JsonProperty(PropertyName = "boost_factor")]
 		double? ICustomBoostFactorQuery._BoostFactor { get; set; }
 
 		bool IQuery.IsConditionless

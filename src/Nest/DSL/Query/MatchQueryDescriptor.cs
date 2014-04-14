@@ -10,6 +10,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IMatchQuery
 	{
 		[JsonProperty(PropertyName = "type")]
@@ -58,38 +59,26 @@ namespace Nest
 	{
 		protected virtual string _type { get { return null; } }
 
-		[JsonProperty(PropertyName = "type")]
 		string IMatchQuery._Type { get { return _type; } }
 
-		[JsonProperty(PropertyName = "query")]
 		string IMatchQuery._Query { get; set; }
 
-		[JsonProperty(PropertyName = "analyzer")]
 		string IMatchQuery._Analyzer { get; set; }
 
-		[JsonProperty(PropertyName = "rewrite")]
-		[JsonConverter(typeof(StringEnumConverter))]
 		RewriteMultiTerm? IMatchQuery._Rewrite { get; set; }
 
-		[JsonProperty(PropertyName = "fuzziness")]
 		double? IMatchQuery._Fuzziness { get; set; }
 
-		[JsonProperty(PropertyName = "cutoff_frequency")]
 		double? IMatchQuery._CutoffFrequency { get; set; }
 
-		[JsonProperty(PropertyName = "prefix_length")]
 		int? IMatchQuery._PrefixLength { get; set; }
 
-		[JsonProperty(PropertyName = "max_expansions")]
 		int? IMatchQuery._MaxExpansions { get; set; }
 
-		[JsonProperty(PropertyName = "slop")]
 		int? IMatchQuery._Slop { get; set; }
 
-		[JsonProperty(PropertyName = "boost")]
 		double? IMatchQuery._Boost { get; set; }
 
-		[JsonProperty(PropertyName = "lenient")]
 		bool? IMatchQuery._Lenient { get; set; }
 		
 		[JsonProperty(PropertyName = "operator")]

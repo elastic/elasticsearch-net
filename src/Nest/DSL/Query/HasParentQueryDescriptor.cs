@@ -9,6 +9,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IHasParentQuery
 	{
 		[JsonProperty("type")]
@@ -22,25 +23,20 @@ namespace Nest
 		ParentScoreType? _ScoreType { get; set; }
 
 		[JsonProperty("query")]
-		BaseQuery _QueryDescriptor { get; set; }
+		IQueryDescriptor _QueryDescriptor { get; set; }
 
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class HasParentQueryDescriptor<T> : IQuery, IHasParentQuery where T : class
 	{
-		[JsonProperty("type")]
 		TypeNameMarker IHasParentQuery._Type { get; set; }
 
-		[JsonProperty("_scope")]
 		string IHasParentQuery._Scope { get; set; }
 
-		[JsonProperty("score_type")]
-		[JsonConverter(typeof(StringEnumConverter))]
 		ParentScoreType? IHasParentQuery._ScoreType { get; set; }
 
-		[JsonProperty("query")]
-		BaseQuery IHasParentQuery._QueryDescriptor { get; set; }
+		IQueryDescriptor IHasParentQuery._QueryDescriptor { get; set; }
 
 		bool IQuery.IsConditionless
 		{

@@ -16,7 +16,7 @@ namespace Nest
 		internal NestedScore? _Score { get; set; }
 
 		[JsonProperty("query")]
-		internal BaseQuery _QueryDescriptor { get; set; }
+		internal IQueryDescriptor _QueryDescriptor { get; set; }
 
 		[JsonProperty("path")]
 		internal PropertyPathMarker _Path { get; set; }

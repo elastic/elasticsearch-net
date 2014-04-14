@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ISpanNearQuery 
 	{
 		[JsonProperty(PropertyName = "clauses")]
@@ -26,16 +27,12 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SpanNearQuery<T> : ISpanSubQuery, IQuery, ISpanNearQuery where T : class
 	{
-		[JsonProperty(PropertyName = "clauses")]
 		IEnumerable<ISpanQuery> ISpanNearQuery._SpanQueryDescriptors { get; set; }
 
-		[JsonProperty(PropertyName = "slop")]
 		int? ISpanNearQuery._Slop { get; set; }
 
-		[JsonProperty(PropertyName = "in_order")]
 		bool? ISpanNearQuery._InOrder { get; set; }
 
-		[JsonProperty(PropertyName = "collect_payloads")]
 		bool? ISpanNearQuery._CollectPayloads { get; set; }
 
 		bool IQuery.IsConditionless

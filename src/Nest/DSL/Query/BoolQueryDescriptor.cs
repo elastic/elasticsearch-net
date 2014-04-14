@@ -26,11 +26,11 @@ namespace Nest
 
 		internal static IEnumerable<BaseQuery> MergeShouldQueries(this BaseQuery lbq, BaseQuery rbq)
 		{
-			var lBoolDescriptor = lbq.BoolQueryDescriptor;
+			var lBoolDescriptor = ((IQueryDescriptor)lbq).BoolQueryDescriptor;
 			var lHasShouldQueries = lBoolDescriptor != null &&
 			  lBoolDescriptor._ShouldQueries.HasAny();
 
-			var rBoolDescriptor = rbq.BoolQueryDescriptor;
+			var rBoolDescriptor = ((IQueryDescriptor)rbq).BoolQueryDescriptor;
 			var rHasShouldQueries = rBoolDescriptor != null &&
 			  rBoolDescriptor._ShouldQueries.HasAny();
 
