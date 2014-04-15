@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Query.Behaviour;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Nest.Resolvers;
@@ -13,65 +14,69 @@ namespace Nest
 	public interface IRangeQuery
 	{
 		[JsonProperty("from")]
-		object _From { get; set; }
+		object From { get; set; }
 
 		[JsonProperty("to")]
-		object _To { get; set; }
+		object To { get; set; }
 
 		[JsonProperty("include_lower")]
-		bool? _FromInclusive { get; set; }
+		bool? FromInclusive { get; set; }
 
 		[JsonProperty("include_upper")]
-		bool? _ToInclusive { get; set; }
+		bool? ToInclusive { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
-		double? _Boost { get; set; }
+		double? Boost { get; set; }
 
 		[JsonProperty(PropertyName = "_cache")]
-		bool? _Cache { get; set; }
+		bool? Cache { get; set; }
 
 		[JsonProperty(PropertyName = "_name")]
-		string _Name { get; set; }
+		string Name { get; set; }
 
-		PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker Field { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class RangeQueryDescriptor<T> : IQuery, IRangeQuery where T : class
+	public class RangeQueryDescriptor<T> : IFieldNameQuery, IRangeQuery where T : class
 	{
-		object IRangeQuery._From { get; set; }
+		object IRangeQuery.From { get; set; }
 	
-		object IRangeQuery._To { get; set; }
+		object IRangeQuery.To { get; set; }
 		
-		bool? IRangeQuery._FromInclusive { get; set; }
+		bool? IRangeQuery.FromInclusive { get; set; }
 		
-		bool? IRangeQuery._ToInclusive { get; set; }
+		bool? IRangeQuery.ToInclusive { get; set; }
 		
-		double? IRangeQuery._Boost { get; set; }
+		double? IRangeQuery.Boost { get; set; }
 		
-		bool? IRangeQuery._Cache { get; set; }
+		bool? IRangeQuery.Cache { get; set; }
 		
-		string IRangeQuery._Name { get; set; }
+		string IRangeQuery.Name { get; set; }
 
-		PropertyPathMarker IRangeQuery._Field { get; set; }
+		PropertyPathMarker IRangeQuery.Field { get; set; }
 		
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((IRangeQuery)this)._Field.IsConditionless() || (((IRangeQuery)this)._From == null && ((IRangeQuery)this)._To == null);
+				return ((IRangeQuery)this).Field.IsConditionless() || (((IRangeQuery)this).From == null && ((IRangeQuery)this).To == null);
 			}
+		}
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return ((IRangeQuery)this).Field;
 		}
 
 
 		public RangeQueryDescriptor<T> OnField(string field)
 		{
-			((IRangeQuery)this)._Field = field;
+			((IRangeQuery)this).Field = field;
 			return this;
 		}
 		public RangeQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((IRangeQuery)this)._Field = objectPath;
+			((IRangeQuery)this).Field = objectPath;
 			return this;
 		}
 		/// <summary>
@@ -79,7 +84,7 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> ToExclusive()
 		{
-			((IRangeQuery)this)._ToInclusive = false;
+			((IRangeQuery)this).ToInclusive = false;
 			return this;
 		}
 		/// <summary>
@@ -87,7 +92,7 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> FromExclusive()
 		{
-			((IRangeQuery)this)._FromInclusive = false;
+			((IRangeQuery)this).FromInclusive = false;
 			return this;
 		}
 		
@@ -97,7 +102,7 @@ namespace Nest
 		/// <param name="boost">Boost factor</param>
 		public RangeQueryDescriptor<T> Boost(double boost)
 		{
-			((IRangeQuery)this)._Boost = boost;
+			((IRangeQuery)this).Boost = boost;
 			return this;
 		}
 
@@ -108,7 +113,7 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> To(int? to)
 		{
-			((IRangeQuery)this)._To = to;
+			((IRangeQuery)this).To = to;
 			return this;
 		}
 		/// <summary>
@@ -117,7 +122,7 @@ namespace Nest
 		/// <returns></returns>
 		public RangeQueryDescriptor<T> From(int? from)
 		{
-			((IRangeQuery)this)._From = from;
+			((IRangeQuery)this).From = from;
 			return this;
 		}
 
@@ -126,8 +131,8 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> Greater(int? from)
 		{
-			((IRangeQuery)this)._From = from;
-			((IRangeQuery)this)._FromInclusive = false;
+			((IRangeQuery)this).From = from;
+			((IRangeQuery)this).FromInclusive = false;
 			return this;
 		}
 		/// <summary>
@@ -135,8 +140,8 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> GreaterOrEquals(int? from)
 		{
-			((IRangeQuery)this)._From = from;
-			((IRangeQuery)this)._FromInclusive = from.HasValue ? new Nullable<bool>(true) : null;
+			((IRangeQuery)this).From = from;
+			((IRangeQuery)this).FromInclusive = from.HasValue ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		/// <summary>
@@ -144,8 +149,8 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> Lower(int? to)
 		{
-			((IRangeQuery)this)._To = to;
-			((IRangeQuery)this)._ToInclusive = to.HasValue ? new Nullable<bool>(false) : null;
+			((IRangeQuery)this).To = to;
+			((IRangeQuery)this).ToInclusive = to.HasValue ? new Nullable<bool>(false) : null;
 			return this;
 		}
 		/// <summary>
@@ -153,8 +158,8 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> LowerOrEquals(int? to)
 		{
-			((IRangeQuery)this)._To = to;
-			((IRangeQuery)this)._ToInclusive = to.HasValue ? new Nullable<bool>(true) : null;
+			((IRangeQuery)this).To = to;
+			((IRangeQuery)this).ToInclusive = to.HasValue ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		#endregion
@@ -165,7 +170,7 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> To(double? to)
 		{
-			((IRangeQuery)this)._To = to;
+			((IRangeQuery)this).To = to;
 			return this;
 		}
 		/// <summary>
@@ -174,7 +179,7 @@ namespace Nest
 		/// <returns></returns>
 		public RangeQueryDescriptor<T> From(double? from)
 		{
-			((IRangeQuery)this)._From = from;
+			((IRangeQuery)this).From = from;
 			return this;
 		}
 
@@ -183,8 +188,8 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> Greater(double? from)
 		{
-			((IRangeQuery)this)._From = from;
-			((IRangeQuery)this)._FromInclusive = from.HasValue ? new Nullable<bool>(false) : null;
+			((IRangeQuery)this).From = from;
+			((IRangeQuery)this).FromInclusive = from.HasValue ? new Nullable<bool>(false) : null;
 			return this;
 		}
 		/// <summary>
@@ -192,8 +197,8 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> GreaterOrEquals(double? from)
 		{
-			((IRangeQuery)this)._From = from;
-			((IRangeQuery)this)._FromInclusive = from.HasValue ? new Nullable<bool>(true) : null;
+			((IRangeQuery)this).From = from;
+			((IRangeQuery)this).FromInclusive = from.HasValue ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		/// <summary>
@@ -201,8 +206,8 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> Lower(double? to)
 		{
-			((IRangeQuery)this)._To = to;
-			((IRangeQuery)this)._ToInclusive = to.HasValue ? new Nullable<bool>(false) : null;
+			((IRangeQuery)this).To = to;
+			((IRangeQuery)this).ToInclusive = to.HasValue ? new Nullable<bool>(false) : null;
 			return this;
 		}
 		/// <summary>
@@ -210,8 +215,8 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> LowerOrEquals(double? to)
 		{
-			((IRangeQuery)this)._To = to;
-			((IRangeQuery)this)._ToInclusive = to.HasValue ? new Nullable<bool>(true) : null;
+			((IRangeQuery)this).To = to;
+			((IRangeQuery)this).ToInclusive = to.HasValue ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		#endregion
@@ -222,7 +227,7 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> To(string to)
 		{
-			((IRangeQuery)this)._To = to;
+			((IRangeQuery)this).To = to;
 			return this;
 		}
 		/// <summary>
@@ -231,7 +236,7 @@ namespace Nest
 		/// <returns></returns>
 		public RangeQueryDescriptor<T> From(string from)
 		{
-			((IRangeQuery)this)._From = from;
+			((IRangeQuery)this).From = from;
 			return this;
 		}
 
@@ -240,8 +245,8 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> Greater(string from)
 		{
-			((IRangeQuery)this)._From = from;
-			((IRangeQuery)this)._FromInclusive = !from.IsNullOrEmpty() ? new Nullable<bool>(false) : null;
+			((IRangeQuery)this).From = from;
+			((IRangeQuery)this).FromInclusive = !from.IsNullOrEmpty() ? new Nullable<bool>(false) : null;
 			return this;
 		}
 		/// <summary>
@@ -249,8 +254,8 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> GreaterOrEquals(string from)
 		{
-			((IRangeQuery)this)._From = from;
-			((IRangeQuery)this)._FromInclusive = !from.IsNullOrEmpty() ? new Nullable<bool>(true) : null;
+			((IRangeQuery)this).From = from;
+			((IRangeQuery)this).FromInclusive = !from.IsNullOrEmpty() ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		/// <summary>
@@ -258,8 +263,8 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> Lower(string to)
 		{
-			((IRangeQuery)this)._To = to;
-			((IRangeQuery)this)._ToInclusive = !to.IsNullOrEmpty() ? new Nullable<bool>(false) : null;
+			((IRangeQuery)this).To = to;
+			((IRangeQuery)this).ToInclusive = !to.IsNullOrEmpty() ? new Nullable<bool>(false) : null;
 			return this;
 		}
 		/// <summary>
@@ -267,8 +272,8 @@ namespace Nest
 		/// </summary>
 		public RangeQueryDescriptor<T> LowerOrEquals(string to)
 		{
-			((IRangeQuery)this)._To = to;
-			((IRangeQuery)this)._ToInclusive = !to.IsNullOrEmpty() ? new Nullable<bool>(true) : null;
+			((IRangeQuery)this).To = to;
+			((IRangeQuery)this).ToInclusive = !to.IsNullOrEmpty() ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		#endregion
@@ -281,7 +286,7 @@ namespace Nest
 		{
 			if (!to.HasValue)
 				return this;
-			((IRangeQuery)this)._To = to.Value.ToString(format);
+			((IRangeQuery)this).To = to.Value.ToString(format);
 			return this;
 		}
 		/// <summary>
@@ -293,7 +298,7 @@ namespace Nest
 			if (!from.HasValue)
 				return this;
 
-			((IRangeQuery)this)._From = from.Value.ToString(format);
+			((IRangeQuery)this).From = from.Value.ToString(format);
 			return this;
 		}
 
@@ -305,8 +310,8 @@ namespace Nest
 			if (!from.HasValue)
 				return this;
 
-			((IRangeQuery)this)._From = from.Value.ToString(format);
-			((IRangeQuery)this)._FromInclusive = false;
+			((IRangeQuery)this).From = from.Value.ToString(format);
+			((IRangeQuery)this).FromInclusive = false;
 			return this;
 		}
 		/// <summary>
@@ -317,8 +322,8 @@ namespace Nest
 			if (!from.HasValue)
 				return this;
 
-			((IRangeQuery)this)._From = from.Value.ToString(format);
-			((IRangeQuery)this)._FromInclusive = true;
+			((IRangeQuery)this).From = from.Value.ToString(format);
+			((IRangeQuery)this).FromInclusive = true;
 			return this;
 		}
 		/// <summary>
@@ -329,8 +334,8 @@ namespace Nest
 			if (!to.HasValue)
 				return this;
 
-			((IRangeQuery)this)._To = to.Value.ToString(format);
-			((IRangeQuery)this)._ToInclusive = false;
+			((IRangeQuery)this).To = to.Value.ToString(format);
+			((IRangeQuery)this).ToInclusive = false;
 			return this;
 		}
 		/// <summary>
@@ -341,8 +346,8 @@ namespace Nest
 			if (!to.HasValue)
 				return this;
 
-			((IRangeQuery)this)._To = to.Value.ToString(format);
-			((IRangeQuery)this)._ToInclusive = true;
+			((IRangeQuery)this).To = to.Value.ToString(format);
+			((IRangeQuery)this).ToInclusive = true;
 			return this;
 		}
 		#endregion

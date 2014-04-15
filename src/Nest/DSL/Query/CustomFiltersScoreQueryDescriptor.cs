@@ -14,46 +14,46 @@ namespace Nest
 	public interface ICustomFiltersScoreQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		IQueryDescriptor _Query { get; set; }
+		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty(PropertyName = "filters")]
-		List<IFilterScoreQuery> _Filters { get; set; }
+		List<IFilterScoreQuery> Filters { get; set; }
 
 		[JsonProperty(PropertyName = "score_mode")]
 		[JsonConverter(typeof(StringEnumConverter))]
-		ScoreMode _ScoreMode { get; set; }
+		ScoreMode ScoreMode { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		Dictionary<string, object> _Params { get; set; }
+		Dictionary<string, object> Params { get; set; }
 
 		[JsonProperty(PropertyName = "lang")]
-		string _Lang { get; set; }
+		string Lang { get; set; }
 
 		[JsonProperty(PropertyName = "max_boost")]
-		string _MaxBoost { get; set; }
+		string MaxBoost { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class CustomFiltersScoreQueryDescriptor<T> : IQuery, ICustomFiltersScoreQuery where T : class
 	{
-		IQueryDescriptor ICustomFiltersScoreQuery._Query { get; set; }
+		IQueryDescriptor ICustomFiltersScoreQuery.Query { get; set; }
 
-		List<IFilterScoreQuery> ICustomFiltersScoreQuery._Filters { get; set; }
+		List<IFilterScoreQuery> ICustomFiltersScoreQuery.Filters { get; set; }
 
-		ScoreMode ICustomFiltersScoreQuery._ScoreMode { get; set; }
+		ScoreMode ICustomFiltersScoreQuery.ScoreMode { get; set; }
 
-		Dictionary<string, object> ICustomFiltersScoreQuery._Params { get; set; }
+		Dictionary<string, object> ICustomFiltersScoreQuery.Params { get; set; }
 
-		string ICustomFiltersScoreQuery._Lang { get; set; }
+		string ICustomFiltersScoreQuery.Lang { get; set; }
 
-		string ICustomFiltersScoreQuery._MaxBoost { get; set; }
+		string ICustomFiltersScoreQuery.MaxBoost { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((ICustomFiltersScoreQuery)this)._Query == null || ((ICustomFiltersScoreQuery)this)._Query.IsConditionless;
+				return ((ICustomFiltersScoreQuery)this).Query == null || ((ICustomFiltersScoreQuery)this).Query.IsConditionless;
 			}
 		}
 
@@ -63,13 +63,13 @@ namespace Nest
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
-			((ICustomFiltersScoreQuery)this)._Query = q;
+			((ICustomFiltersScoreQuery)this).Query = q;
 			return this;
 		}
 
 		public CustomFiltersScoreQueryDescriptor<T> ScoreMode(ScoreMode scoreMode)
 		{
-			((ICustomFiltersScoreQuery)this)._ScoreMode = scoreMode;
+			((ICustomFiltersScoreQuery)this).ScoreMode = scoreMode;
 			return this;
 		}
 
@@ -77,13 +77,13 @@ namespace Nest
 		{
 			filterSelectors.ThrowIfNull("filterSelectors");
 
-			((ICustomFiltersScoreQuery)this)._Filters = new List<IFilterScoreQuery>();
+			((ICustomFiltersScoreQuery)this).Filters = new List<IFilterScoreQuery>();
 
 			foreach (var filterSelector in filterSelectors)
 			{
 				var filter = new FilterScoreQueryDescriptor<T>();
 				filterSelector.ThrowIfNull("filterSelector");
-				((ICustomFiltersScoreQuery)this)._Filters.Add(filterSelector(filter));
+				((ICustomFiltersScoreQuery)this).Filters.Add(filterSelector(filter));
 			}
 
 			return this;
@@ -92,19 +92,19 @@ namespace Nest
 		public CustomFiltersScoreQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
-			((ICustomFiltersScoreQuery)this)._Params = paramDictionary(new FluentDictionary<string, object>());
+			((ICustomFiltersScoreQuery)this).Params = paramDictionary(new FluentDictionary<string, object>());
 			return this;
 		}
 
 		public CustomFiltersScoreQueryDescriptor<T> Language(string language)
 		{
-			((ICustomFiltersScoreQuery)this)._Lang = language;
+			((ICustomFiltersScoreQuery)this).Lang = language;
 			return this;
 		}
 
 		public CustomFiltersScoreQueryDescriptor<T> MaxBoost(string maxBoost)
 		{
-			((ICustomFiltersScoreQuery)this)._MaxBoost = maxBoost;
+			((ICustomFiltersScoreQuery)this).MaxBoost = maxBoost;
 			return this;
 		}
 	}

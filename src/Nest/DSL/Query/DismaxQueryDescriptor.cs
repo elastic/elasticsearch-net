@@ -9,36 +9,36 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDismaxQuery
+	public interface IDisMaxQuery
 	{
 		[JsonProperty(PropertyName = "tie_breaker")]
-		double? _TieBreaker { get; set; }
+		double? TieBreaker { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
-		double? _Boost { get; set; }
+		double? Boost { get; set; }
 
 		[JsonProperty(PropertyName = "queries")]
-		IEnumerable<BaseQuery> _Queries { get; set; }
+		IEnumerable<BaseQuery> Queries { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class DismaxQueryDescriptor<T> : IQuery, IDismaxQuery where T : class
+	public class DisMaxQueryDescriptor<T> : IQuery, IDisMaxQuery where T : class
 	{
-		double? IDismaxQuery._TieBreaker { get; set; }
+		double? IDisMaxQuery.TieBreaker { get; set; }
 
-		double? IDismaxQuery._Boost { get; set; }
+		double? IDisMaxQuery.Boost { get; set; }
 
-		IEnumerable<BaseQuery> IDismaxQuery._Queries { get; set; }
+		IEnumerable<BaseQuery> IDisMaxQuery.Queries { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return !((IDismaxQuery)this)._Queries.HasAny() || ((IDismaxQuery)this)._Queries.All(q => q.IsConditionless);
+				return !((IDisMaxQuery)this).Queries.HasAny() || ((IDisMaxQuery)this).Queries.All(q => q.IsConditionless);
 			}
 		}
 
-		public DismaxQueryDescriptor<T> Queries(params Func<QueryDescriptor<T>, BaseQuery>[] querySelectors)
+		public DisMaxQueryDescriptor<T> Queries(params Func<QueryDescriptor<T>, BaseQuery>[] querySelectors)
 		{
 			var queries = new List<BaseQuery>();
 			foreach (var selector in querySelectors)
@@ -47,18 +47,18 @@ namespace Nest
 				var q = selector(query);
 				queries.Add(q);
 			}
-			((IDismaxQuery)this)._Queries = queries;
+			((IDisMaxQuery)this).Queries = queries;
 			return this;
 		}
 
-		public DismaxQueryDescriptor<T> Boost(double boost)
+		public DisMaxQueryDescriptor<T> Boost(double boost)
 		{
-			((IDismaxQuery)this)._Boost = boost;
+			((IDisMaxQuery)this).Boost = boost;
 			return this;
 		}
-		public DismaxQueryDescriptor<T> TieBreaker(double tieBreaker)
+		public DisMaxQueryDescriptor<T> TieBreaker(double tieBreaker)
 		{
-			((IDismaxQuery)this)._TieBreaker = tieBreaker;
+			((IDisMaxQuery)this).TieBreaker = tieBreaker;
 			return this;
 		}
 	}

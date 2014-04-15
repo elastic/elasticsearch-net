@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using FluentAssertions;
+using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Unit.Search.Query.Properties
@@ -9,7 +11,7 @@ namespace Nest.Tests.Unit.Search.Query.Properties
 		[Test]
 		public void TopChildrenQuery()
 		{
-			var s = new SearchDescriptor<ElasticsearchProject>()
+			ISearchDescriptor s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Take(10)
 				.Query(q => q
@@ -19,10 +21,17 @@ namespace Nest.Tests.Unit.Search.Query.Properties
 					)
 				)
 			);
-
+			s._Query.Should().NotBeNull();
+			s._Query.TopChildren.Should().NotBeNull();
+			s._Query.TopChildren.Query.Should().NotBeNull();
+			var boolQuery =s._Query.TopChildren.Query.Bool;
+			boolQuery.Should().NotBeNull();
 			
+			boolQuery.Should.Should().NotBeEmpty().And.HaveCount(2);
+			var firstTerm = boolQuery.Should.First().TermQueryDescriptor;
 
-			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
+			firstTerm.Value.Should().Be("foo");
+
 		}
 
 	}

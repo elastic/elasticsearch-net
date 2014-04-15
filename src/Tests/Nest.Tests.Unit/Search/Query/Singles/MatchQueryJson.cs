@@ -32,6 +32,19 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				}
 			}";
 			Assert.True(json.JsonEquals(expected), json);		
+			s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q=>q
+					.Match(t=>t
+						.OnField(f=>f.Name)
+						.Query("this is a test")
+						.Rewrite(RewriteMultiTerm.constant_score_default)
+					)
+			);
+				
+			json = TestElasticClient.Serialize(s);
+			Assert.True(json.JsonEquals(expected), json);		
 		}
 		
 		[Test]

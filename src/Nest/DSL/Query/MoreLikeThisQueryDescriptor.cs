@@ -14,152 +14,152 @@ namespace Nest
 	public interface IMoreLikeThisQuery
 	{
 		[JsonProperty(PropertyName = "fields")]
-		IEnumerable<PropertyPathMarker> _Fields { get; set; }
+		IEnumerable<PropertyPathMarker> Fields { get; set; }
 
 		[JsonProperty(PropertyName = "like_text")]
-		string _LikeText { get; set; }
+		string LikeText { get; set; }
 
 		[JsonProperty(PropertyName = "percent_terms_to_match")]
-		double? _TermMatchPercentage { get; set; }
+		double? TermMatchPercentage { get; set; }
 
 		[JsonProperty(PropertyName = "stop_words")]
-		IEnumerable<string> _StopWords { get; set; }
+		IEnumerable<string> StopWords { get; set; }
 
 		[JsonProperty(PropertyName = "min_term_freq")]
-		int? _MinTermFrequency { get; set; }
+		int? MinTermFrequency { get; set; }
 
 		[JsonProperty(PropertyName = "max_query_terms")]
-		int? _MaxQueryTerms { get; set; }
+		int? MaxQueryTerms { get; set; }
 
 		[JsonProperty(PropertyName = "min_doc_freq")]
-		int? _MinDocumentFrequency { get; set; }
+		int? MinDocumentFrequency { get; set; }
 
 		[JsonProperty(PropertyName = "max_doc_freq")]
-		int? _MaxDocumentFrequency { get; set; }
+		int? MaxDocumentFrequency { get; set; }
 
 		[JsonProperty(PropertyName = "min_word_len")]
-		int? _MinWordLength { get; set; }
+		int? MinWordLength { get; set; }
 
 		[JsonProperty(PropertyName = "max_word_len")]
-		int? _MaxWordLength { get; set; }
+		int? MaxWordLength { get; set; }
 
 		[JsonProperty(PropertyName = "boost_terms")]
-		double? _BoostTerms { get; set; }
+		double? BoostTerms { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
-		double? _Boost { get; set; }
+		double? Boost { get; set; }
 
 		[JsonProperty(PropertyName = "analyzer")]
-		string _Analyzer { get; set; }
+		string Analyzer { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class MoreLikeThisQueryDescriptor<T> : IQuery, IMoreLikeThisQuery where T : class
 	{
-		IEnumerable<PropertyPathMarker> IMoreLikeThisQuery._Fields { get; set; }
+		IEnumerable<PropertyPathMarker> IMoreLikeThisQuery.Fields { get; set; }
 		
-		string IMoreLikeThisQuery._LikeText { get; set; }
+		string IMoreLikeThisQuery.LikeText { get; set; }
 
-		double? IMoreLikeThisQuery._TermMatchPercentage { get; set; }
+		double? IMoreLikeThisQuery.TermMatchPercentage { get; set; }
 	
-		IEnumerable<string> IMoreLikeThisQuery._StopWords { get; set; }
+		IEnumerable<string> IMoreLikeThisQuery.StopWords { get; set; }
 		
-		int? IMoreLikeThisQuery._MinTermFrequency { get; set; }
+		int? IMoreLikeThisQuery.MinTermFrequency { get; set; }
 		
-		int? IMoreLikeThisQuery._MaxQueryTerms { get; set; }
+		int? IMoreLikeThisQuery.MaxQueryTerms { get; set; }
 		
-		int? IMoreLikeThisQuery._MinDocumentFrequency { get; set; }
+		int? IMoreLikeThisQuery.MinDocumentFrequency { get; set; }
 		
-		int? IMoreLikeThisQuery._MaxDocumentFrequency { get; set; }
+		int? IMoreLikeThisQuery.MaxDocumentFrequency { get; set; }
 		
-		int? IMoreLikeThisQuery._MinWordLength { get; set; }
+		int? IMoreLikeThisQuery.MinWordLength { get; set; }
 		
-		int? IMoreLikeThisQuery._MaxWordLength { get; set; }
+		int? IMoreLikeThisQuery.MaxWordLength { get; set; }
 		
-		double? IMoreLikeThisQuery._BoostTerms { get; set; }
+		double? IMoreLikeThisQuery.BoostTerms { get; set; }
 		
-		double? IMoreLikeThisQuery._Boost { get; set; }
+		double? IMoreLikeThisQuery.Boost { get; set; }
 		
-		string IMoreLikeThisQuery._Analyzer { get; set; }
+		string IMoreLikeThisQuery.Analyzer { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((IMoreLikeThisQuery)this)._LikeText.IsNullOrEmpty();
+				return ((IMoreLikeThisQuery)this).LikeText.IsNullOrEmpty();
 			}
 		}
 
 		public MoreLikeThisQueryDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
-			((IMoreLikeThisQuery)this)._Fields = fields.Select(f=>(PropertyPathMarker)f);
+			((IMoreLikeThisQuery)this).Fields = fields.Select(f=>(PropertyPathMarker)f);
 			return this;
 		}
 		public MoreLikeThisQueryDescriptor<T> OnFields(
 			params Expression<Func<T, object>>[] objectPaths)
 		{
-			((IMoreLikeThisQuery)this)._Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
+			((IMoreLikeThisQuery)this).Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
 			return this;
 		}
 		public MoreLikeThisQueryDescriptor<T> LikeText(string likeText)
 		{
-			((IMoreLikeThisQuery)this)._LikeText = likeText;
+			((IMoreLikeThisQuery)this).LikeText = likeText;
 			return this;
 		}
 		public MoreLikeThisQueryDescriptor<T> StopWords(IEnumerable<string> stopWords)
 		{
-			((IMoreLikeThisQuery)this)._StopWords = stopWords;
+			((IMoreLikeThisQuery)this).StopWords = stopWords;
 			return this;
 		}
 		
 		public MoreLikeThisQueryDescriptor<T> MaxQueryTerms(int maxQueryTerms)
 		{
-			((IMoreLikeThisQuery)this)._MaxQueryTerms = maxQueryTerms;
+			((IMoreLikeThisQuery)this).MaxQueryTerms = maxQueryTerms;
 			return this;
 		}
 		public MoreLikeThisQueryDescriptor<T> MinTermFrequency(int minTermFrequency)
 		{
-			((IMoreLikeThisQuery)this)._MinTermFrequency = minTermFrequency;
+			((IMoreLikeThisQuery)this).MinTermFrequency = minTermFrequency;
 			return this;
 		}
 		public MoreLikeThisQueryDescriptor<T> MinDocumentFrequency(int minDocumentFrequency)
 		{
-			((IMoreLikeThisQuery)this)._MinDocumentFrequency = minDocumentFrequency;
+			((IMoreLikeThisQuery)this).MinDocumentFrequency = minDocumentFrequency;
 			return this;
 		}
 		public MoreLikeThisQueryDescriptor<T> MaxDocumentFrequency(int maxDocumentFrequency)
 		{
-			((IMoreLikeThisQuery)this)._MaxDocumentFrequency = maxDocumentFrequency;
+			((IMoreLikeThisQuery)this).MaxDocumentFrequency = maxDocumentFrequency;
 			return this;
 		}
 		public MoreLikeThisQueryDescriptor<T> MinWordLength(int minWordLength)
 		{
-			((IMoreLikeThisQuery)this)._MinWordLength = minWordLength;
+			((IMoreLikeThisQuery)this).MinWordLength = minWordLength;
 			return this;
 		}
 		public MoreLikeThisQueryDescriptor<T> MaxWordLength(int maxWordLength)
 		{
-			((IMoreLikeThisQuery)this)._MaxWordLength = maxWordLength;
+			((IMoreLikeThisQuery)this).MaxWordLength = maxWordLength;
 			return this;
 		}
 		public MoreLikeThisQueryDescriptor<T> BoostTerms(double boostTerms)
 		{
-			((IMoreLikeThisQuery)this)._BoostTerms = boostTerms;
+			((IMoreLikeThisQuery)this).BoostTerms = boostTerms;
 			return this;
 		}
 		public MoreLikeThisQueryDescriptor<T> TermMatchPercentage(double termMatchPercentage)
 		{
-			((IMoreLikeThisQuery)this)._TermMatchPercentage = termMatchPercentage;
+			((IMoreLikeThisQuery)this).TermMatchPercentage = termMatchPercentage;
 			return this;
 		}
 		public MoreLikeThisQueryDescriptor<T> Boost(double boost)
 		{
-			((IMoreLikeThisQuery)this)._Boost = boost;
+			((IMoreLikeThisQuery)this).Boost = boost;
 			return this;
 		}
 		public MoreLikeThisQueryDescriptor<T> Analyzer(string analyzer)
 		{
-			((IMoreLikeThisQuery)this)._Analyzer = analyzer;
+			((IMoreLikeThisQuery)this).Analyzer = analyzer;
 			return this;
 		}
 	

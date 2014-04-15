@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Query.Behaviour;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
@@ -15,115 +16,118 @@ namespace Nest
 	public interface ICommonTermsQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		string _QueryString { get; set; }
+		string QueryString { get; set; }
 
 		[JsonProperty(PropertyName = "field")]
-		PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker Field { get; set; }
 
 		[JsonProperty(PropertyName = "cutoff_frequency")]
-		double? _CutoffFrequency { get; set; }
+		double? CutoffFrequency { get; set; }
 
 		[JsonProperty(PropertyName = "low_freq_operator")]
 		[JsonConverter(typeof (StringEnumConverter))]
-		Operator? _LowFrequencyOperator { get; set; }
+		Operator? LowFrequencyOperator { get; set; }
 
 		[JsonProperty(PropertyName = "high_freq_operator")]
 		[JsonConverter(typeof (StringEnumConverter))]
-		Operator? _HighFrequencyOperator { get; set; }
+		Operator? HighFrequencyOperator { get; set; }
 
 		[JsonProperty(PropertyName = "minimum_should_match")]
-		int? _MinimumShouldMatch { get; set; }
+		int? MinimumShouldMatch { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
-		double? _Boost { get; set; }
+		double? Boost { get; set; }
 
 		[JsonProperty(PropertyName = "analyzer")]
-		string _Analyzer { get; set; }
+		string Analyzer { get; set; }
 
 		[JsonProperty(PropertyName = "disable_coord")]
-		bool? _DisableCoord { get; set; }
+		bool? DisableCoord { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class CommonTermsQueryDescriptor<T> : IQuery, ICommonTermsQuery where T : class
+	public class CommonTermsQueryDescriptor<T> : IFieldNameQuery, ICommonTermsQuery where T : class
 	{
-		string ICommonTermsQuery._QueryString { get; set; }
+		string ICommonTermsQuery.QueryString { get; set; }
 
-		PropertyPathMarker ICommonTermsQuery._Field { get; set; }
+		PropertyPathMarker ICommonTermsQuery.Field { get; set; }
 		
-		double? ICommonTermsQuery._CutoffFrequency { get; set; }
+		double? ICommonTermsQuery.CutoffFrequency { get; set; }
 		
-		Operator? ICommonTermsQuery._LowFrequencyOperator { get; set; }
+		Operator? ICommonTermsQuery.LowFrequencyOperator { get; set; }
 		
-		Operator? ICommonTermsQuery._HighFrequencyOperator { get; set; }
+		Operator? ICommonTermsQuery.HighFrequencyOperator { get; set; }
 
-		int? ICommonTermsQuery._MinimumShouldMatch { get; set; }
+		int? ICommonTermsQuery.MinimumShouldMatch { get; set; }
 		
-		double? ICommonTermsQuery._Boost { get; set; }
+		double? ICommonTermsQuery.Boost { get; set; }
 		
-		string ICommonTermsQuery._Analyzer { get; set; }
+		string ICommonTermsQuery.Analyzer { get; set; }
 		
-		bool? ICommonTermsQuery._DisableCoord { get; set; }
+		bool? ICommonTermsQuery.DisableCoord { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((ICommonTermsQuery)this)._Field.IsConditionless() || ((ICommonTermsQuery)this)._QueryString.IsNullOrEmpty();
+				return ((ICommonTermsQuery)this).Field.IsConditionless() || ((ICommonTermsQuery)this).QueryString.IsNullOrEmpty();
 			}
 		}
-
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return ((ICommonTermsQuery)this).Field;
+		}
 
 		public CommonTermsQueryDescriptor<T> OnField(string field)
 		{
-			((ICommonTermsQuery)this)._Field = field;
+			((ICommonTermsQuery)this).Field = field;
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((ICommonTermsQuery)this)._Field = objectPath;
+			((ICommonTermsQuery)this).Field = objectPath;
 			return this;
 		}
 
 		public CommonTermsQueryDescriptor<T> Query(string query)
 		{
-			((ICommonTermsQuery)this)._QueryString = query;
+			((ICommonTermsQuery)this).QueryString = query;
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> LowFrequencyOperator(Operator op)
 		{
-			((ICommonTermsQuery)this)._LowFrequencyOperator = op;
+			((ICommonTermsQuery)this).LowFrequencyOperator = op;
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> HighFrequencyOperator(Operator op)
 		{
-			((ICommonTermsQuery)this)._HighFrequencyOperator = op;
+			((ICommonTermsQuery)this).HighFrequencyOperator = op;
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> Analyzer(string analyzer)
 		{
-			((ICommonTermsQuery)this)._Analyzer = analyzer;
+			((ICommonTermsQuery)this).Analyzer = analyzer;
 			return this;
 		}
 		
 		public CommonTermsQueryDescriptor<T> CutOffFrequency(double cutOffFrequency)
 		{
-			((ICommonTermsQuery)this)._CutoffFrequency = cutOffFrequency;
+			((ICommonTermsQuery)this).CutoffFrequency = cutOffFrequency;
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> MinumumShouldMatch(int minimumShouldMatch)
 		{
-			((ICommonTermsQuery)this)._MinimumShouldMatch = minimumShouldMatch;
+			((ICommonTermsQuery)this).MinimumShouldMatch = minimumShouldMatch;
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> Boost(double boost)
 		{
-			((ICommonTermsQuery)this)._Boost = boost;
+			((ICommonTermsQuery)this).Boost = boost;
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> DisableCoord(bool disable = true)
 		{
-			((ICommonTermsQuery)this)._DisableCoord = disable;
+			((ICommonTermsQuery)this).DisableCoord = disable;
 			return this;
 		}
 

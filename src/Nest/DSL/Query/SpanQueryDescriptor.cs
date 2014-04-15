@@ -15,33 +15,33 @@ namespace Nest
 	public interface ISpanQuery 
 	{
 		[JsonProperty(PropertyName = "span_term")]
-		SpanTerm SpanTermQuery { get; set; }
+		ITermQuery SpanTermQueryDescriptor { get; set; }
 
 		[JsonProperty(PropertyName = "span_first")]
-		ISpanFirstQuery SpanFirstQueryDescriptor { get; set; }
+		ISpanFirstQuery SpanFirst { get; set; }
 
 		[JsonProperty(PropertyName = "span_near")]
-		ISpanNearQuery SpanNearQuery { get; set; }
+		ISpanNearQuery SpanNear { get; set; }
 
 		[JsonProperty(PropertyName = "span_or")]
-		ISpanOrQuery SpanOrQueryDescriptor { get; set; }
+		ISpanOrQuery SpanOr { get; set; }
 
 		[JsonProperty(PropertyName = "span_not")]
-		ISpanNotQuery SpanNotQuery { get; set; }
+		ISpanNotQuery SpanNot { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SpanQuery<T> : IQuery, ISpanQuery where T : class
 	{
-		SpanTerm ISpanQuery.SpanTermQuery { get; set; }
+		ITermQuery ISpanQuery.SpanTermQueryDescriptor { get; set; }
 
-		ISpanFirstQuery ISpanQuery.SpanFirstQueryDescriptor { get; set; }
+		ISpanFirstQuery ISpanQuery.SpanFirst { get; set; }
 
-		ISpanNearQuery ISpanQuery.SpanNearQuery { get; set; }
+		ISpanNearQuery ISpanQuery.SpanNear { get; set; }
 
-		ISpanOrQuery ISpanQuery.SpanOrQueryDescriptor { get; set; }
+		ISpanOrQuery ISpanQuery.SpanOr { get; set; }
 
-		ISpanNotQuery ISpanQuery.SpanNotQuery { get; set; }
+		ISpanNotQuery ISpanQuery.SpanNot { get; set; }
 
 		bool IQuery.IsConditionless
 		{
@@ -49,11 +49,11 @@ namespace Nest
 			{
 				var queries = new[]
 				{
-					((ISpanQuery)this).SpanTermQuery as IQuery,
-					((ISpanQuery)this).SpanFirstQueryDescriptor as IQuery,
-					((ISpanQuery)this).SpanNearQuery as IQuery,
-					((ISpanQuery)this).SpanOrQueryDescriptor as IQuery,
-					((ISpanQuery)this).SpanNotQuery as IQuery
+					((ISpanQuery)this).SpanTermQueryDescriptor as IQuery,
+					((ISpanQuery)this).SpanFirst as IQuery,
+					((ISpanQuery)this).SpanNear as IQuery,
+					((ISpanQuery)this).SpanOr as IQuery,
+					((ISpanQuery)this).SpanNot as IQuery
 				};
 				return queries.All(q => q == null || q.IsConditionless);
 			}
@@ -66,8 +66,11 @@ namespace Nest
 			if (fieldDescriptor == null || value.IsNullOrEmpty())
 				return this;
 
-			var spanTerm = new SpanTerm() { Field = fieldDescriptor, Value = value, Boost = Boost};
-			return CreateQuery(spanTerm, (sq) => ((ISpanQuery)sq).SpanTermQuery = spanTerm);
+			var spanTerm = new SpanTermQueryDescriptor<T>();
+			((ITermQuery)spanTerm).Field = fieldDescriptor;
+			((ITermQuery)spanTerm).Value = value;
+			((ITermQuery)spanTerm).Boost = Boost;
+			return CreateQuery(spanTerm, (sq) => ((ISpanQuery)sq).SpanTermQueryDescriptor = spanTerm);
 		}
 		
 		public SpanQuery<T> SpanTerm(string field, string value, double? Boost = null)
@@ -75,8 +78,11 @@ namespace Nest
 			if (field.IsNullOrEmpty() || value.IsNullOrEmpty())
 				return this;
 
-			var spanTerm = new SpanTerm() { Field = field, Value = value, Boost = Boost};
-			return CreateQuery(spanTerm, (sq) => ((ISpanQuery)sq).SpanTermQuery = spanTerm);
+			var spanTerm = new SpanTermQueryDescriptor<T>();
+			((ITermQuery)spanTerm).Field = field;
+			((ITermQuery)spanTerm).Value = value;
+			((ITermQuery)spanTerm).Boost = Boost;
+			return CreateQuery(spanTerm, (sq) => ((ISpanQuery)sq).SpanTermQueryDescriptor = spanTerm);
 
 		}
 		
@@ -84,26 +90,26 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var q = selector(new SpanFirstQueryDescriptor<T>());
-			return CreateQuery(q, (sq) => ((ISpanQuery)sq).SpanFirstQueryDescriptor = q);
+			return CreateQuery(q, (sq) => ((ISpanQuery)sq).SpanFirst = q);
 		}
 		
 		public SpanQuery<T> SpanNear(Func<SpanNearQuery<T>, SpanNearQuery<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			var q = selector(new SpanNearQuery<T>());
-			return CreateQuery(q, (sq) => ((ISpanQuery)sq).SpanNearQuery = q);
+			return CreateQuery(q, (sq) => ((ISpanQuery)sq).SpanNear = q);
 		}
 		public SpanQuery<T> SpanOr(Func<SpanOrQueryDescriptor<T>, SpanOrQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			var q = selector(new SpanOrQueryDescriptor<T>());
-			return CreateQuery(q, (sq) => ((ISpanQuery)sq).SpanOrQueryDescriptor = q);
+			return CreateQuery(q, (sq) => ((ISpanQuery)sq).SpanOr = q);
 		}
 		public SpanQuery<T> SpanNot(Func<SpanNotQuery<T>, SpanNotQuery<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			var q = selector(new SpanNotQuery<T>());
-			return CreateQuery(q, (sq) => ((ISpanQuery)sq).SpanNotQuery = q);
+			return CreateQuery(q, (sq) => ((ISpanQuery)sq).SpanNot = q);
 		}
 
 		private SpanQuery<T> CreateQuery<K>(K query, Action<SpanQuery<T>> setProperty) where K : ISpanSubQuery

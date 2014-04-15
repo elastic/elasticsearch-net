@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Query.Behaviour;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
@@ -10,62 +11,72 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IFuzzyDateQuery
+	public interface IFuzzyDateQuery : IFuzzyQuery
 	{
-		PropertyPathMarker _Field { get; set; }
-
-		[JsonProperty(PropertyName = "boost")]
-		double? _Boost { get; set; }
-
-		[JsonProperty(PropertyName = "min_similarity")]
-		string _MinSimilarity { get; set; }
-
 		[JsonProperty(PropertyName = "value")]
-		DateTime? _Value { get; set; }
+		DateTime? Value { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class FuzzyDateQueryDescriptor<T> : IQuery, IFuzzyDateQuery where T : class
+	public class FuzzyDateQueryDescriptor<T> : IFuzzyDateQuery where T : class
 	{
-		PropertyPathMarker IFuzzyDateQuery._Field { get; set; }
+		PropertyPathMarker IFuzzyQuery.Field { get; set; }
 		
-		double? IFuzzyDateQuery._Boost { get; set; }
+		double? IFuzzyQuery.Boost { get; set; }
 		
-		string IFuzzyDateQuery._MinSimilarity { get; set; }
+		int? IFuzzyQuery.MaxExpansions { get; set; }
 		
-		DateTime? IFuzzyDateQuery._Value { get; set; }
+		object IFuzzyQuery.Fuzziness { get; set; }
+		
+		DateTime? IFuzzyDateQuery.Value { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((IFuzzyDateQuery)this)._Field.IsConditionless() || ((IFuzzyDateQuery)this)._Value == null;
+				return ((IFuzzyDateQuery)this).Field.IsConditionless() || ((IFuzzyDateQuery)this).Value == null;
 			}
 		}
-
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return ((IFuzzyQuery)this).Field;
+		}
+		
 		public FuzzyDateQueryDescriptor<T> OnField(string field)
 		{
-			((IFuzzyDateQuery)this)._Field = field;
+			((IFuzzyDateQuery)this).Field = field;
 			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((IFuzzyDateQuery)this)._Field = objectPath;
+			((IFuzzyDateQuery)this).Field = objectPath;
 			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> Boost(double boost)
 		{
-			((IFuzzyDateQuery)this)._Boost = boost;
+			((IFuzzyDateQuery)this).Boost = boost;
 			return this;
 		}
-		public FuzzyDateQueryDescriptor<T> MinSimilarity(string minSimilarity)
+			
+		public FuzzyDateQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
-			((IFuzzyDateQuery)this)._MinSimilarity = minSimilarity;
+			((IFuzzyQuery)this).Fuzziness = fuzziness;
+			return this;
+		}
+		public FuzzyDateQueryDescriptor<T> Fuzziness(string fuzziness)
+		{
+			((IFuzzyQuery)this).Fuzziness = fuzziness;
+			return this;
+		}
+		
+		public FuzzyDateQueryDescriptor<T> MaxExpansions(int maxExpansions)
+		{
+			((IFuzzyQuery)this).MaxExpansions = maxExpansions;
 			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> Value(DateTime? value)
 		{
-			((IFuzzyDateQuery)this)._Value = value;
+			((IFuzzyDateQuery)this).Value = value;
 			return this;
 		}
 	}

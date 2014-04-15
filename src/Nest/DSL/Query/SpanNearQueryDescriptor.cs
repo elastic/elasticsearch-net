@@ -12,35 +12,35 @@ namespace Nest
 	public interface ISpanNearQuery 
 	{
 		[JsonProperty(PropertyName = "clauses")]
-		IEnumerable<ISpanQuery> _SpanQueryDescriptors { get; set; }
+		IEnumerable<ISpanQuery> Clauses { get; set; }
 
 		[JsonProperty(PropertyName = "slop")]
-		int? _Slop { get; set; }
+		int? Slop { get; set; }
 
 		[JsonProperty(PropertyName = "in_order")]
-		bool? _InOrder { get; set; }
+		bool? InOrder { get; set; }
 
 		[JsonProperty(PropertyName = "collect_payloads")]
-		bool? _CollectPayloads { get; set; }
+		bool? CollectPayloads { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SpanNearQuery<T> : ISpanSubQuery, IQuery, ISpanNearQuery where T : class
 	{
-		IEnumerable<ISpanQuery> ISpanNearQuery._SpanQueryDescriptors { get; set; }
+		IEnumerable<ISpanQuery> ISpanNearQuery.Clauses { get; set; }
 
-		int? ISpanNearQuery._Slop { get; set; }
+		int? ISpanNearQuery.Slop { get; set; }
 
-		bool? ISpanNearQuery._InOrder { get; set; }
+		bool? ISpanNearQuery.InOrder { get; set; }
 
-		bool? ISpanNearQuery._CollectPayloads { get; set; }
+		bool? ISpanNearQuery.CollectPayloads { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return !((ISpanNearQuery)this)._SpanQueryDescriptors.HasAny() 
-					|| ((ISpanNearQuery)this)._SpanQueryDescriptors.Cast<IQuery>().All(q => q.IsConditionless);
+				return !((ISpanNearQuery)this).Clauses.HasAny() 
+					|| ((ISpanNearQuery)this).Clauses.Cast<IQuery>().All(q => q.IsConditionless);
 			}
 		}
 
@@ -58,22 +58,22 @@ namespace Nest
 				descriptors.Add(q);
 
 			}
-			((ISpanNearQuery)this)._SpanQueryDescriptors = descriptors.HasAny() ? descriptors : null;
+			((ISpanNearQuery)this).Clauses = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 		public SpanNearQuery<T> Slop(int slop)
 		{
-			((ISpanNearQuery)this)._Slop = slop;
+			((ISpanNearQuery)this).Slop = slop;
 			return this;
 		}
 		public SpanNearQuery<T> InOrder(bool inOrder)
 		{
-			((ISpanNearQuery)this)._InOrder = inOrder;
+			((ISpanNearQuery)this).InOrder = inOrder;
 			return this;
 		}
 		public SpanNearQuery<T> CollectPayloads(bool collectPayloads)
 		{
-			((ISpanNearQuery)this)._CollectPayloads = collectPayloads;
+			((ISpanNearQuery)this).CollectPayloads = collectPayloads;
 			return this;
 		}
 	}

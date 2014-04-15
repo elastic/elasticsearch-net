@@ -139,7 +139,6 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						""bool"": {
-							boost: 2.0,
 						
 							""must"": [
 								{
@@ -161,7 +160,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 								}
 							],
 							minimum_number_should_match: 1,
-
+							boost: 2.0
 						}
 					}
 			}";

@@ -11,36 +11,36 @@ namespace Nest.DSL.Query
 	public interface IFilterScoreQuery
 	{
 		[JsonProperty(PropertyName = "filter")]
-		BaseFilter _Filter { get; set; }
+		BaseFilter Filter { get; set; }
 
 		[JsonProperty(PropertyName = "script")]
-		string _Script { get; set; }
+		string Script { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
-		float? _Boost { get; set; }
+		float? Boost { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class FilterScoreQueryDescriptor<T> : IQuery, IFilterScoreQuery where T : class
 	{
-		bool IQuery.IsConditionless { get { return ((IFilterScoreQuery)this)._Filter == null; } }
+		bool IQuery.IsConditionless { get { return ((IFilterScoreQuery)this).Filter == null; } }
 
-		BaseFilter IFilterScoreQuery._Filter { get; set; }
+		BaseFilter IFilterScoreQuery.Filter { get; set; }
 
-		string IFilterScoreQuery._Script { get; set; }
+		string IFilterScoreQuery.Script { get; set; }
 
-		float? IFilterScoreQuery._Boost { get; set; }
+		float? IFilterScoreQuery.Boost { get; set; }
 
 		public FilterScoreQueryDescriptor<T> Boost(float boost)
 		{
-			((IFilterScoreQuery)this)._Boost = boost;
+			((IFilterScoreQuery)this).Boost = boost;
 
 			return this;
 		}
 
 		public FilterScoreQueryDescriptor<T> Script(string script)
 		{
-			((IFilterScoreQuery)this)._Script = script;
+			((IFilterScoreQuery)this).Script = script;
 
 			return this;
 		}
@@ -49,7 +49,7 @@ namespace Nest.DSL.Query
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 			var filter = new FilterDescriptor<T>();
-			((IFilterScoreQuery)this)._Filter = filterSelector(filter);
+			((IFilterScoreQuery)this).Filter = filterSelector(filter);
 
 			return this;
 		}

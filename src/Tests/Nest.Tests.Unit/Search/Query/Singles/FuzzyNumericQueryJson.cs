@@ -16,12 +16,12 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					.FuzzyNumeric(fz => fz
 						.OnField(f=>f.LOC)
 						.Value(200)
-						.MinSimilarity(12)
+						.Fuzziness(12)
 					)
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
-			{ fuzzy: { loc : { min_similarity: 12.0, value : 200.0 } }}}";
+			{ fuzzy: { loc : { value : 200.0, fuzziness: 12.0 } }}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
 		[Test]
@@ -35,15 +35,15 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						.OnField(f => f.LOC)
 						.Value(200)
 						.Boost(2.0)
-						.MinSimilarity(0.6)
+						.Fuzziness(0.6)
 					)
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ fuzzy: { loc : { 
-				boost: 2.0,
-				min_similarity: 0.6,
 				value : 200.0, 
+				boost: 2.0,
+				fuzziness: 0.6
 			}}}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}

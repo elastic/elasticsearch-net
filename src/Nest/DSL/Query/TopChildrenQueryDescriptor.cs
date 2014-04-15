@@ -13,28 +13,28 @@ namespace Nest
 	public interface ITopChildrenQuery
 	{
 		[JsonProperty("type")]
-		TypeNameMarker _Type { get; set; }
+		TypeNameMarker Type { get; set; }
 
 		[JsonProperty("_scope")]
-		string _Scope { get; set; }
+		string Scope { get; set; }
 
 		[JsonProperty("score"), JsonConverter(typeof (StringEnumConverter))]
-		TopChildrenScore? _Score { get; set; }
+		TopChildrenScore? Score { get; set; }
 
 		[JsonProperty("factor")]
-		int? _Factor { get; set; }
+		int? Factor { get; set; }
 
 		[JsonProperty("incremental_factor")]
-		int? _IncrementalFactor { get; set; }
+		int? IncrementalFactor { get; set; }
 
 		[JsonProperty("query")]
-		IQueryDescriptor _QueryDescriptor { get; set; }
+		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty(PropertyName = "_cache")]
-		bool? _Cache { get; set; }
+		bool? Cache { get; set; }
 
 		[JsonProperty(PropertyName = "_name")]
-		string _Name { get; set; }
+		string Name { get; set; }
 	}
 
 	/// <summary>
@@ -50,31 +50,31 @@ namespace Nest
 		{
 			get
 			{
-				return ((ITopChildrenQuery)this)._QueryDescriptor == null || ((ITopChildrenQuery)this)._QueryDescriptor.IsConditionless;
+				return ((ITopChildrenQuery)this).Query == null || ((ITopChildrenQuery)this).Query.IsConditionless;
 			}
 		}
 
 		public TopChildrenQueryDescriptor()
 		{
-			((ITopChildrenQuery)this)._Type = TypeNameMarker.Create<T>();
+			((ITopChildrenQuery)this).Type = TypeNameMarker.Create<T>();
 			
 		}
 
-		TypeNameMarker ITopChildrenQuery._Type { get; set; }
+		TypeNameMarker ITopChildrenQuery.Type { get; set; }
 
-		string ITopChildrenQuery._Scope { get; set; }
+		string ITopChildrenQuery.Scope { get; set; }
 
-		TopChildrenScore? ITopChildrenQuery._Score { get; set; }
+		TopChildrenScore? ITopChildrenQuery.Score { get; set; }
 
-		int? ITopChildrenQuery._Factor { get; set; }
+		int? ITopChildrenQuery.Factor { get; set; }
 
-		int? ITopChildrenQuery._IncrementalFactor { get; set; }
+		int? ITopChildrenQuery.IncrementalFactor { get; set; }
 
-		IQueryDescriptor ITopChildrenQuery._QueryDescriptor { get; set; }
+		IQueryDescriptor ITopChildrenQuery.Query { get; set; }
 
-		bool? ITopChildrenQuery._Cache { get; set; }
+		bool? ITopChildrenQuery.Cache { get; set; }
 
-		string ITopChildrenQuery._Name { get; set; }
+		string ITopChildrenQuery.Name { get; set; }
 
 		/// <summary>
 		/// Provide a child query for the top_children query
@@ -83,7 +83,7 @@ namespace Nest
 		public TopChildrenQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			((ITopChildrenQuery)this)._QueryDescriptor = querySelector(q);
+			((ITopChildrenQuery)this).Query = querySelector(q);
 			return this;
 		}
 		
@@ -94,7 +94,7 @@ namespace Nest
 		/// <param name="scope">The name of the scope</param>
 		public TopChildrenQueryDescriptor<T> Scope(string scope)
 		{
-			((ITopChildrenQuery)this)._Scope = scope;
+			((ITopChildrenQuery)this).Scope = scope;
 			return this;
 		}
 		
@@ -104,7 +104,7 @@ namespace Nest
 		/// <param name="factor">The factor that controls how many hits are asked for</param>
 		public TopChildrenQueryDescriptor<T> Factor(int factor)
 		{
-			((ITopChildrenQuery)this)._Factor = factor;
+			((ITopChildrenQuery)this).Factor = factor;
 			return this;
 		}
 		
@@ -114,7 +114,7 @@ namespace Nest
 		/// <param name="score">max, sum or avg</param>
 		public TopChildrenQueryDescriptor<T> Score(TopChildrenScore score)
 		{
-			((ITopChildrenQuery)this)._Score = score;
+			((ITopChildrenQuery)this).Score = score;
 			return this;
 		}
 		
@@ -125,7 +125,7 @@ namespace Nest
 		/// <param name="factor">Multiplier for the original factor parameter</param>
 		public TopChildrenQueryDescriptor<T> IncrementalFactor(int factor)
 		{
-			((ITopChildrenQuery)this)._IncrementalFactor = factor;
+			((ITopChildrenQuery)this).IncrementalFactor = factor;
 			return this;
 		}
 		
@@ -135,7 +135,7 @@ namespace Nest
 		/// </summary>
 		public TopChildrenQueryDescriptor<T> Type(string type)
 		{
-			((ITopChildrenQuery)this)._Type = type;
+			((ITopChildrenQuery)this).Type = type;
 			return this;
 		}
 	}

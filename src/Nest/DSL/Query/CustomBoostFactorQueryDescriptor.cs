@@ -11,24 +11,24 @@ namespace Nest
 	public interface ICustomBoostFactorQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		IQueryDescriptor _Query { get; set; }
+		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty(PropertyName = "boost_factor")]
-		double? _BoostFactor { get; set; }
+		double? BoostFactor { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class CustomBoostFactorQueryDescriptor<T> : IQuery, ICustomBoostFactorQuery where T : class
 	{
-		IQueryDescriptor ICustomBoostFactorQuery._Query { get; set; }
+		IQueryDescriptor ICustomBoostFactorQuery.Query { get; set; }
 
-		double? ICustomBoostFactorQuery._BoostFactor { get; set; }
+		double? ICustomBoostFactorQuery.BoostFactor { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((ICustomBoostFactorQuery)this)._Query == null || ((ICustomBoostFactorQuery)this)._Query.IsConditionless;
+				return ((ICustomBoostFactorQuery)this).Query == null || ((ICustomBoostFactorQuery)this).Query.IsConditionless;
 			}
 		}
 
@@ -39,13 +39,13 @@ namespace Nest
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
-			((ICustomBoostFactorQuery)this)._Query = q;
+			((ICustomBoostFactorQuery)this).Query = q;
 			return this;
 		}
 
 		public CustomBoostFactorQueryDescriptor<T> BoostFactor(double boostFactor)
 		{
-			((ICustomBoostFactorQuery)this)._BoostFactor = boostFactor;
+			((ICustomBoostFactorQuery)this).BoostFactor = boostFactor;
 			return this;
 		}
 	}

@@ -50,7 +50,7 @@ namespace Nest
 			return new QueryDescriptor<T>().Conditionless(conditionlessQuery);
 		}
 
-		public static BaseQuery Dismax(Action<DismaxQueryDescriptor<T>> selector)
+		public static BaseQuery Dismax(Action<DisMaxQueryDescriptor<T>> selector)
 		{
 			return new QueryDescriptor<T>().Dismax(selector);
 		}

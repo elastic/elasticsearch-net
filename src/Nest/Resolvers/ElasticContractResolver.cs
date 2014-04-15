@@ -111,14 +111,21 @@ namespace Nest.Resolvers
 			var defaultProperties = base.CreateProperties(type, memberSerialization);
 			var lookup = defaultProperties.ToLookup(p => p.PropertyName);
 
-			if (!typeof(IQuery).IsAssignableFrom(type)) return defaultProperties;
+			defaultProperties = PropertiesOf<IQuery>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IQueryDescriptor>(type, memberSerialization, defaultProperties, lookup);
+			return defaultProperties;
+		}
+
+		private IList<JsonProperty> PropertiesOf<T>(Type type, MemberSerialization memberSerialization, IList<JsonProperty> defaultProperties, ILookup<string, JsonProperty> lookup)
+		{
+			if (!typeof (T).IsAssignableFrom(type)) return defaultProperties;
 			var jsonProperties = (
 				from i in type.GetInterfaces()
-				where i != typeof(IQuery) 
+				//where i != typeof (T)
 				select base.CreateProperties(i, memberSerialization)
 				)
 				.SelectMany(interfaceProps => interfaceProps)
-				.Where(p=>!lookup.Contains(p.PropertyName));
+				.Where(p => !lookup.Contains(p.PropertyName));
 			foreach (var p in jsonProperties)
 			{
 				defaultProperties.Add(p);

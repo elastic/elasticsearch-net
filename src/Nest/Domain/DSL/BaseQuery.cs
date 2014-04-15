@@ -16,120 +16,77 @@ namespace Nest
 	{
 		private static readonly IEnumerable<BaseQuery> Empty = Enumerable.Empty<BaseQuery>();
 
-		[JsonProperty(PropertyName = "bool")]
-		BoolBaseQueryDescriptor IQueryDescriptor.BoolQueryDescriptor { get; set; }
+		IBoolQuery IQueryDescriptor.Bool { get; set; }
 		
-		[JsonProperty(PropertyName = "match_all")]
-		MatchAll IQueryDescriptor.MatchAllQuery { get; set; }
+		MatchAll IQueryDescriptor.MatchAll { get; set; }
 		
-		[JsonProperty(PropertyName = "term")]
-		Term IQueryDescriptor.TermQuery { get; set; }
+		ITermQuery IQueryDescriptor.TermQueryDescriptor { get; set; }
 		
-		[JsonProperty(PropertyName = "wildcard")]
-		Wildcard IQueryDescriptor.WildcardQuery { get; set; }
+		IWildcardQuery IQueryDescriptor.Wildcard { get; set; }
 		
-		[JsonProperty(PropertyName = "prefix")]
-		Prefix IQueryDescriptor.PrefixQuery { get; set; }
+		IPrefixQuery IQueryDescriptor.Prefix { get; set; }
 
-		[JsonProperty(PropertyName = "boosting")]
-		IBoostingQuery IQueryDescriptor.BoostingQueryDescriptor { get; set; }
+		IBoostingQuery IQueryDescriptor.Boosting { get; set; }
 		
-		[JsonProperty(PropertyName = "ids")]
-		IdsQuery IQueryDescriptor.IdsQuery { get; set; }
+		IdsQuery IQueryDescriptor.Ids { get; set; }
 		
-		[JsonProperty(PropertyName = "custom_score")]
-		ICustomScoreQuery IQueryDescriptor.CustomScoreQueryDescriptor { get; set; }
+		ICustomScoreQuery IQueryDescriptor.CustomScore { get; set; }
 		
-		[JsonProperty(PropertyName = "custom_filters_score")]
-		ICustomFiltersScoreQuery IQueryDescriptor.CustomFiltersScoreQueryDescriptor { get; set; }
+		ICustomFiltersScoreQuery IQueryDescriptor.CustomFiltersScore { get; set; }
 
-		[JsonProperty(PropertyName = "custom_boost_factor")]
-		ICustomBoostFactorQuery IQueryDescriptor.CustomBoostFactorQueryDescriptor { get; set; }
+		ICustomBoostFactorQuery IQueryDescriptor.CustomBoostFactor { get; set; }
 		
-		[JsonProperty(PropertyName = "constant_score")]
-		IConstantScoreQuery IQueryDescriptor.ConstantScoreQueryDescriptor { get; set; }
+		IConstantScoreQuery IQueryDescriptor.ConstantScore { get; set; }
 		
-		[JsonProperty(PropertyName = "dis_max")]
-		IDismaxQuery IQueryDescriptor.DismaxQueryDescriptor { get; set; }
+		IDisMaxQuery IQueryDescriptor.DisMax { get; set; }
 		
-		[JsonProperty(PropertyName = "filtered")]
-		IFilteredQuery IQueryDescriptor.FilteredQueryDescriptor { get; set; }
+		IFilteredQuery IQueryDescriptor.Filtered { get; set; }
 
-		[JsonProperty(PropertyName = "multi_match")]
-		IMultiMatchQuery IQueryDescriptor.MultiMatchQueryDescriptor { get; set; }
+		IMultiMatchQuery IQueryDescriptor.MultiMatch { get; set; }
 		
-		[JsonProperty(PropertyName = "match")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<PropertyPathMarker, object> IQueryDescriptor.MatchQueryDescriptor { get; set; }
+		IMatchQuery IQueryDescriptor.Match { get; set; }
 		
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		[JsonProperty(PropertyName = "fuzzy")]
-		IDictionary<PropertyPathMarker, object> IQueryDescriptor.FuzzyQueryDescriptor { get; set; }
+		IFuzzyQuery IQueryDescriptor.Fuzzy { get; set; }
 		
-		[JsonProperty(PropertyName = "geo_shape")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<PropertyPathMarker, object> IQueryDescriptor.GeoShapeQueryDescriptor { get; set; }
+		IGeoShapeQuery IQueryDescriptor.GeoShape { get; set; }
 		
-		[JsonProperty(PropertyName = "common_terms")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<PropertyPathMarker, object> IQueryDescriptor.CommonTermsQueryDescriptor { get; set; }
+		ICommonTermsQuery IQueryDescriptor.CommonTerms { get; set; }
 		
-		[JsonProperty(PropertyName = "terms")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<PropertyPathMarker, object> IQueryDescriptor.TermsQueryDescriptor { get; set; }
+		ITermsQuery IQueryDescriptor.Terms { get; set; }
 		
-		[JsonProperty(PropertyName = "simple_query_string")]
-		ISimpleQueryStringQuery IQueryDescriptor.SimpleQueryStringDescriptor { get; set; }
+		IQueryStringQuery IQueryDescriptor.QueryString { get; set; }
 		
-		[JsonProperty(PropertyName = "query_string")]
-		IQueryStringQuery IQueryDescriptor.QueryStringDescriptor { get; set; }
+		ISimpleQueryStringQuery IQueryDescriptor.SimpleQueryString { get; set; }
 		
-		[JsonProperty(PropertyName = "regexp")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<PropertyPathMarker, object> IQueryDescriptor.RegexpQueryDescriptor { get; set; }
+		IRegexpQuery IQueryDescriptor.Regexp { get; set; }
 
-		[JsonProperty(PropertyName = "flt")]
-		IFuzzyLikeThisQuery IQueryDescriptor.FuzzyLikeThisDescriptor { get; set; }
+		IFuzzyLikeThisQuery IQueryDescriptor.FuzzyLikeThis { get; set; }
 		
-		[JsonProperty(PropertyName = "has_child")]
-		IHasChildQuery IQueryDescriptor.HasChildQueryDescriptor { get; set; }
+		IHasChildQuery IQueryDescriptor.HasChild { get; set; }
 		
-		[JsonProperty(PropertyName = "has_parent")]
-		IHasParentQuery IQueryDescriptor.HasParentQueryDescriptor { get; set; }
+		IHasParentQuery IQueryDescriptor.HasParent { get; set; }
 		
-		[JsonProperty(PropertyName = "mlt")]
-		IMoreLikeThisQuery IQueryDescriptor.MoreLikeThisDescriptor { get; set; }
+		IMoreLikeThisQuery IQueryDescriptor.MoreLikeThis { get; set; }
 		
-		[JsonProperty(PropertyName = "range")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<PropertyPathMarker, object> IQueryDescriptor.RangeQueryDescriptor { get; set; }
+		IRangeQuery IQueryDescriptor.Range { get; set; }
 
-		[JsonProperty(PropertyName = "span_term")]
-		SpanTerm IQueryDescriptor.SpanTermQuery { get; set; }
+		ITermQuery IQueryDescriptor.SpanTerm { get; set; }
 		
-		[JsonProperty(PropertyName = "span_first")]
-		ISpanFirstQuery IQueryDescriptor.SpanFirstQueryDescriptor { get; set; }
+		ISpanFirstQuery IQueryDescriptor.SpanFirst { get; set; }
 		
-		[JsonProperty(PropertyName = "span_or")]
-		ISpanOrQuery IQueryDescriptor.SpanOrQueryDescriptor { get; set; }
+		ISpanOrQuery IQueryDescriptor.SpanOr { get; set; }
 		
-		[JsonProperty(PropertyName = "span_near")]
-		ISpanNearQuery IQueryDescriptor.SpanNearQuery { get; set; }
+		ISpanNotQuery IQueryDescriptor.SpanNot { get; set; }
 		
-		[JsonProperty(PropertyName = "span_not")]
-		ISpanNotQuery IQueryDescriptor.SpanNotQuery { get; set; }
+		ISpanNearQuery IQueryDescriptor.SpanNear { get; set; }
 
-		[JsonProperty(PropertyName = "top_children")]
-		ITopChildrenQuery IQueryDescriptor.TopChildrenQueryDescriptor { get; set; }
+		ITopChildrenQuery IQueryDescriptor.TopChildren { get; set; }
 		
-		[JsonProperty(PropertyName = "nested")]
-		INestedQuery IQueryDescriptor.NestedQueryDescriptor { get; set; }
+		INestedQuery IQueryDescriptor.Nested { get; set; }
 		
-		[JsonProperty(PropertyName = "indices")]
-		IIndicesQuery IQueryDescriptor.IndicesQueryDescriptor { get; set; }
+		IIndicesQuery IQueryDescriptor.Indices { get; set; }
 
-		[JsonProperty(PropertyName = "function_score")]
-		IFunctionScoreQuery IQueryDescriptor.FunctionScoreQueryDescriptor { get; set; }
+		IFunctionScoreQuery IQueryDescriptor.FunctionScore { get; set; }
 		
 		bool IQueryDescriptor.IsConditionless { get; set; }
 
@@ -196,34 +153,34 @@ namespace Nest
 			if (combined.Any(bf => ((IQueryDescriptor)bf).IsConditionless))
 				return combined.FirstOrDefault(bf => !((IQueryDescriptor)bf).IsConditionless) ?? defaultQuery;
 
-			var leftBoolQuery = ((IQueryDescriptor)leftQuery).BoolQueryDescriptor;
-			var rightBoolQuery = ((IQueryDescriptor)rightQuery).BoolQueryDescriptor;
+			var leftBoolQuery = ((IQueryDescriptor)leftQuery).Bool;
+			var rightBoolQuery = ((IQueryDescriptor)rightQuery).Bool;
 
 
 			var f = new BaseQuery();
 			var fq = new BoolBaseQueryDescriptor();
-			fq._ShouldQueries = new[] { leftQuery, rightQuery };
-			((IQueryDescriptor)f).BoolQueryDescriptor = fq;
+			((IBoolQuery)fq).Should = new[] { leftQuery, rightQuery };
+			((IQueryDescriptor)f).Bool = fq;
 
-			var mergeLeft = !((IQueryDescriptor)leftQuery).IsStrict && (leftBoolQuery == null || leftBoolQuery._MinimumNumberShouldMatches == null);
-			var mergeRight = !((IQueryDescriptor)rightQuery).IsStrict && (rightBoolQuery == null || rightBoolQuery._MinimumNumberShouldMatches == null);
+			var mergeLeft = !((IQueryDescriptor)leftQuery).IsStrict && (leftBoolQuery == null || ((IBoolQuery)leftBoolQuery).MinimumNumberShouldMatches == null);
+			var mergeRight = !((IQueryDescriptor)rightQuery).IsStrict && (rightBoolQuery == null || ((IBoolQuery)rightBoolQuery).MinimumNumberShouldMatches == null);
 
 			//if neither the left nor the right side represent a bool query join them
-			if (((IQueryDescriptor)leftQuery).BoolQueryDescriptor == null && ((IQueryDescriptor)rightQuery).BoolQueryDescriptor == null)
+			if (((IQueryDescriptor)leftQuery).Bool == null && ((IQueryDescriptor)rightQuery).Bool == null)
 			{
-				fq._ShouldQueries = leftQuery.MergeShouldQueries(rightQuery);
+				((IBoolQuery)fq).Should = leftQuery.MergeShouldQueries(rightQuery);
 				return f;
 			}
 			//if the left or right sight already is a bool query join the non bool query side of the 
 			//of the operation onto the other.
-			if (((IQueryDescriptor)leftQuery).BoolQueryDescriptor != null 
-				&& ((IQueryDescriptor)rightQuery).BoolQueryDescriptor == null
+			if (((IQueryDescriptor)leftQuery).Bool != null 
+				&& ((IQueryDescriptor)rightQuery).Bool == null
 				&& mergeLeft)
 			{
 				JoinShouldOnSide(leftQuery, rightQuery, fq);
 			}
-			else if (((IQueryDescriptor)rightQuery).BoolQueryDescriptor != null 
-				&& ((IQueryDescriptor)leftQuery).BoolQueryDescriptor == null
+			else if (((IQueryDescriptor)rightQuery).Bool != null 
+				&& ((IQueryDescriptor)leftQuery).Bool == null
 				&& mergeRight)
 			{
 				JoinShouldOnSide(rightQuery, leftQuery, fq);
@@ -235,10 +192,10 @@ namespace Nest
 				if (mergeLeft && mergeRight
 					&& leftBoolQuery.CanJoinShould()
 					&& rightBoolQuery.CanJoinShould())
-					fq._ShouldQueries = leftQuery.MergeShouldQueries(rightQuery);
+					((IBoolQuery)fq).Should = leftQuery.MergeShouldQueries(rightQuery);
 				else
 					//create a new nested bool with two separate should bool sections
-					fq._ShouldQueries = new[] { leftQuery, rightQuery };
+					((IBoolQuery)fq).Should = new[] { leftQuery, rightQuery };
 			}
 			return f;
 		}
@@ -254,9 +211,9 @@ namespace Nest
 
 			var f = new BaseQuery();
 			var fq = new BoolBaseQueryDescriptor();
-			fq._MustNotQueries = new[] { lbq };
+			((IBoolQuery)fq).MustNot = new[] { lbq };
 
-			((IQueryDescriptor)f).BoolQueryDescriptor = fq;
+			((IQueryDescriptor)f).Bool = fq;
 			return f;
 		}
 
@@ -272,7 +229,7 @@ namespace Nest
 
 		private static void JoinShouldOnSide(BaseQuery lbq, BaseQuery rbq, BoolBaseQueryDescriptor bq)
 		{
-			bq._ShouldQueries = lbq.MergeShouldQueries(rbq);
+			((IBoolQuery)bq).Should = lbq.MergeShouldQueries(rbq);
 		}
 
 		private static BaseQuery CombineIfNoMergeIsNecessary(
@@ -280,14 +237,14 @@ namespace Nest
 			BaseQuery rightQuery,
 			BaseQuery[] combined)
 		{
-			var leftBoolQuery = ((IQueryDescriptor)leftQuery).BoolQueryDescriptor;
-			var rightBoolQuery = ((IQueryDescriptor)rightQuery).BoolQueryDescriptor;
+			var leftBoolQuery = ((IQueryDescriptor)leftQuery).Bool;
+			var rightBoolQuery = ((IQueryDescriptor)rightQuery).Bool;
 			//if neither side is already a boolquery 
 			//  or if all boolqueries are strict.
 			//  or if one side is strict and the other is null
 
-			var mergeLeft = !((IQueryDescriptor)leftQuery).IsStrict && (leftBoolQuery == null || leftBoolQuery._MinimumNumberShouldMatches == null);
-			var mergeRight = !((IQueryDescriptor)rightQuery).IsStrict && (rightBoolQuery == null || rightBoolQuery._MinimumNumberShouldMatches == null);
+			var mergeLeft = !((IQueryDescriptor)leftQuery).IsStrict && (leftBoolQuery == null || ((IBoolQuery)leftBoolQuery).MinimumNumberShouldMatches == null);
+			var mergeRight = !((IQueryDescriptor)rightQuery).IsStrict && (rightBoolQuery == null || ((IBoolQuery)rightBoolQuery).MinimumNumberShouldMatches == null);
 
 			//no merging is needed just return the combination
 			if (
@@ -297,7 +254,7 @@ namespace Nest
 				|| (((IQueryDescriptor)rightQuery).IsStrict && leftBoolQuery == null)
 				)
 			{
-				return CreateReturnQuery((returnQuery, returnBoolQuery) => returnBoolQuery._MustQueries = combined);
+				return CreateReturnQuery((returnQuery, returnBoolQuery) => ((IBoolQuery)returnBoolQuery).Must = combined);
 			}
 			return null;
 		}
@@ -307,24 +264,24 @@ namespace Nest
 			//if the target is not strict return
 			if (!((IQueryDescriptor)targetQuery).IsStrict) return null;
 
-			var mergeBoolQuery = ((IQueryDescriptor)mergeQuery).BoolQueryDescriptor;
+			var mergeBoolQuery = ((IQueryDescriptor)mergeQuery).Bool;
 
 			return CreateReturnQuery((returnQuery, returnBoolQuery) =>
 			{
-				if (mergeBoolQuery._MustNotQueries.HasAny())
+				if (((IBoolQuery)mergeBoolQuery).MustNot.HasAny())
 				{
-					returnBoolQuery._MustNotQueries = mergeBoolQuery._MustNotQueries;
-					mergeBoolQuery._MustNotQueries = null;
+					((IBoolQuery)returnBoolQuery).MustNot = ((IBoolQuery)mergeBoolQuery).MustNot;
+					((IBoolQuery)mergeBoolQuery).MustNot = null;
 				}
 
-				returnBoolQuery._MustQueries = new[] { targetQuery }.Concat(mergeBoolQuery._MustQueries ?? Empty);
+				((IBoolQuery)returnBoolQuery).Must = new[] { targetQuery }.Concat(((IBoolQuery)mergeBoolQuery).Must ?? Empty);
 			});
 		}
 
 		private static BaseQuery SingleSideAndMerge(BaseQuery targetQuery, BaseQuery mergeQuery)
 		{
-			var targetBoolQuery = ((IQueryDescriptor)targetQuery).BoolQueryDescriptor;
-			var mergeBoolQuery = ((IQueryDescriptor)mergeQuery).BoolQueryDescriptor;
+			var targetBoolQuery = ((IQueryDescriptor)targetQuery).Bool;
+			var mergeBoolQuery = ((IQueryDescriptor)mergeQuery).Bool;
 
 			if (targetBoolQuery == null) return null;
 
@@ -333,18 +290,18 @@ namespace Nest
 			{
 				if (!targetBoolQuery.CanMergeMustAndMustNots() || !mergeBoolQuery.CanMergeMustAndMustNots())
 				{
-					returnBoolQuery._MustQueries = combined;
+					((IBoolQuery)returnBoolQuery).Must = combined;
 					return;
 				}
 
-				returnBoolQuery._MustQueries = (targetBoolQuery._MustQueries ?? Empty)
+				((IBoolQuery)returnBoolQuery).Must = (((IBoolQuery)targetBoolQuery).Must ?? Empty)
 					.Concat(mergeBoolQuery != null
-						? (mergeBoolQuery._MustQueries ?? Empty)
+						? (((IBoolQuery)mergeBoolQuery).Must ?? Empty)
 						: new[] { mergeQuery })
 					.NullIfEmpty();
-				returnBoolQuery._MustNotQueries = (targetBoolQuery._MustNotQueries ?? Empty)
+				((IBoolQuery)returnBoolQuery).MustNot = (((IBoolQuery)targetBoolQuery).MustNot ?? Empty)
 					.Concat(mergeBoolQuery != null
-						? (mergeBoolQuery._MustNotQueries ?? Empty)
+						? (((IBoolQuery)mergeBoolQuery).MustNot ?? Empty)
 						: Empty
 					).NullIfEmpty();
 
@@ -355,7 +312,7 @@ namespace Nest
 		{
 			var returnQuery = new BaseQuery();
 			var returnBoolQuery = new BoolBaseQueryDescriptor() { };
-			((IQueryDescriptor)returnQuery).BoolQueryDescriptor = returnBoolQuery;
+			((IQueryDescriptor)returnQuery).Bool = returnBoolQuery;
 			if (modify != null)
 			{
 				modify(returnQuery, returnBoolQuery);

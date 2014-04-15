@@ -12,20 +12,20 @@ namespace Nest
 	public interface ISpanOrQuery
 	{
 		[JsonProperty(PropertyName = "clauses")]
-		IEnumerable<ISpanQuery> _SpanQueryDescriptors { get; set; }
+		IEnumerable<ISpanQuery> Clauses { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SpanOrQueryDescriptor<T> : ISpanSubQuery, IQuery, ISpanOrQuery where T : class
 	{
-		IEnumerable<ISpanQuery> ISpanOrQuery._SpanQueryDescriptors { get; set; }
+		IEnumerable<ISpanQuery> ISpanOrQuery.Clauses { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return !((ISpanOrQuery)this)._SpanQueryDescriptors.HasAny() 
-					|| ((ISpanOrQuery)this)._SpanQueryDescriptors.Cast<IQuery>().All(q => q.IsConditionless);
+				return !((ISpanOrQuery)this).Clauses.HasAny() 
+					|| ((ISpanOrQuery)this).Clauses.Cast<IQuery>().All(q => q.IsConditionless);
 			}
 		}
 
@@ -39,7 +39,7 @@ namespace Nest
 				where !(q as IQuery).IsConditionless 
 				select q
 			).ToList();
-			((ISpanOrQuery)this)._SpanQueryDescriptors = descriptors.HasAny() ? descriptors : null;
+			((ISpanOrQuery)this).Clauses = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 	}

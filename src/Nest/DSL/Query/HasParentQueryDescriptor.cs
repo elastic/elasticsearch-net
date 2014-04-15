@@ -13,65 +13,65 @@ namespace Nest
 	public interface IHasParentQuery
 	{
 		[JsonProperty("type")]
-		TypeNameMarker _Type { get; set; }
+		TypeNameMarker Type { get; set; }
 
 		[JsonProperty("_scope")]
-		string _Scope { get; set; }
+		string Scope { get; set; }
 
 		[JsonProperty("score_type")]
 		[JsonConverter(typeof (StringEnumConverter))]
-		ParentScoreType? _ScoreType { get; set; }
+		ParentScoreType? ScoreType { get; set; }
 
 		[JsonProperty("query")]
-		IQueryDescriptor _QueryDescriptor { get; set; }
+		IQueryDescriptor QueryDescriptor { get; set; }
 
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class HasParentQueryDescriptor<T> : IQuery, IHasParentQuery where T : class
 	{
-		TypeNameMarker IHasParentQuery._Type { get; set; }
+		TypeNameMarker IHasParentQuery.Type { get; set; }
 
-		string IHasParentQuery._Scope { get; set; }
+		string IHasParentQuery.Scope { get; set; }
 
-		ParentScoreType? IHasParentQuery._ScoreType { get; set; }
+		ParentScoreType? IHasParentQuery.ScoreType { get; set; }
 
-		IQueryDescriptor IHasParentQuery._QueryDescriptor { get; set; }
+		IQueryDescriptor IHasParentQuery.QueryDescriptor { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((IHasParentQuery)this)._QueryDescriptor == null || ((IHasParentQuery)this)._QueryDescriptor.IsConditionless;
+				return ((IHasParentQuery)this).QueryDescriptor == null || ((IHasParentQuery)this).QueryDescriptor.IsConditionless;
 			}
 		}
 
 		public HasParentQueryDescriptor()
 		{
-			((IHasParentQuery)this)._Type = TypeNameMarker.Create<T>();
+			((IHasParentQuery)this).Type = TypeNameMarker.Create<T>();
 		}
 		
 
 		public HasParentQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			((IHasParentQuery)this)._QueryDescriptor = querySelector(q);
+			((IHasParentQuery)this).QueryDescriptor = querySelector(q);
 			return this;
 		}
 		public HasParentQueryDescriptor<T> Scope(string scope)
 		{
-			((IHasParentQuery)this)._Scope = scope;
+			((IHasParentQuery)this).Scope = scope;
 			return this;
 		}
 		public HasParentQueryDescriptor<T> Type(string type)
 		{
-			((IHasParentQuery)this)._Type = type;
+			((IHasParentQuery)this).Type = type;
 			return this;
 		}
 
 		public HasParentQueryDescriptor<T> Score(ParentScoreType? scoreType = ParentScoreType.score)
 		{
-			((IHasParentQuery)this)._ScoreType = scoreType;
+			((IHasParentQuery)this).ScoreType = scoreType;
 			return this;
 		}
 

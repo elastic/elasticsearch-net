@@ -11,38 +11,38 @@ namespace Nest
 	public interface IBoostingQuery
 	{
 		[JsonProperty("positive")]
-		BaseQuery _PositiveQuery { get; set; }
+		BaseQuery PositiveQuery { get; set; }
 
 		[JsonProperty("negative")]
-		BaseQuery _NegativeQuery { get; set; }
+		BaseQuery NegativeQuery { get; set; }
 
 		[JsonProperty("negative_boost")]
-		double? _NegativeBoost { get; set; }
+		double? NegativeBoost { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class BoostingQueryDescriptor<T> : IQuery, IBoostingQuery where T : class
 	{
-		BaseQuery IBoostingQuery._PositiveQuery { get; set; }
+		BaseQuery IBoostingQuery.PositiveQuery { get; set; }
 
-		BaseQuery IBoostingQuery._NegativeQuery { get; set; }
+		BaseQuery IBoostingQuery.NegativeQuery { get; set; }
 
-		double? IBoostingQuery._NegativeBoost { get; set; }
+		double? IBoostingQuery.NegativeBoost { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				if (((IBoostingQuery)this)._NegativeQuery == null && ((IBoostingQuery)this)._PositiveQuery == null)
+				if (((IBoostingQuery)this).NegativeQuery == null && ((IBoostingQuery)this).PositiveQuery == null)
 					return true;
-				return ((IBoostingQuery)this)._PositiveQuery == null && ((IBoostingQuery)this)._NegativeQuery.IsConditionless
-					|| ((IBoostingQuery)this)._NegativeQuery == null && ((IBoostingQuery)this)._PositiveQuery.IsConditionless;
+				return ((IBoostingQuery)this).PositiveQuery == null && ((IBoostingQuery)this).NegativeQuery.IsConditionless
+					|| ((IBoostingQuery)this).NegativeQuery == null && ((IBoostingQuery)this).PositiveQuery.IsConditionless;
 			}
 		}
 
 		public BoostingQueryDescriptor<T> NegativeBoost(double boost)
 		{
-			((IBoostingQuery)this)._NegativeBoost = boost;
+			((IBoostingQuery)this).NegativeBoost = boost;
 			return this;
 		}
 
@@ -50,14 +50,14 @@ namespace Nest
 		{
 			var query = new QueryDescriptor<T>();
 			var q = selector(query);
-			((IBoostingQuery)this)._PositiveQuery = q;
+			((IBoostingQuery)this).PositiveQuery = q;
 			return this;
 		}
 		public BoostingQueryDescriptor<T> Negative(Func<QueryDescriptor<T>, BaseQuery> selector)
 		{
 			var query = new QueryDescriptor<T>();
 			var q = selector(query);
-			((IBoostingQuery)this)._NegativeQuery = q;
+			((IBoostingQuery)this).NegativeQuery = q;
 			return this;
 		}
 	}

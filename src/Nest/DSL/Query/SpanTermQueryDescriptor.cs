@@ -9,7 +9,8 @@ namespace Nest
 {
 	[JsonConverter(typeof(CustomJsonConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SpanTerm : Term, ISpanSubQuery
+	public class SpanTermQueryDescriptor<T> : TermQueryDescriptorBase<SpanTermQueryDescriptor<T>, T>, ISpanSubQuery
+		where T : class
 	{
 	}
 }

@@ -14,6 +14,11 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	public interface ISearchDescriptor
+	{
+		IQueryDescriptor _Query { get; set; }
+	}
+
 	/// <summary>
 	/// A descriptor wich describes a search operation for _search and _msearch
 	/// </summary>
@@ -22,8 +27,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial class SearchDescriptor<T> :
 		SearchDescriptorBase
-		, IPathInfo<SearchRequestParameters>
-		where T : class
+		, IPathInfo<SearchRequestParameters>, ISearchDescriptor where T : class
 	{
 		internal override SearchTypeOptions? _SearchType
 		{
@@ -239,12 +243,12 @@ namespace Nest
 		{
 			get
 			{
-				if (this._RawQuery == null && this._Query == null)
+				if (this._RawQuery == null && ((ISearchDescriptor)this)._Query == null)
 					return null;
 				return new RawOrQueryDescriptor<T>
 				{
 					Raw = this._RawQuery,
-					Descriptor = this._Query
+					Descriptor = ((ISearchDescriptor)this)._Query
 				};
 			}
 		}
@@ -271,7 +275,7 @@ namespace Nest
 		internal RescoreDescriptor<T> _Rescore { get; set; }
 
 		internal string _RawQuery { get; set; }
-		internal IQueryDescriptor _Query { get; set; }
+		IQueryDescriptor ISearchDescriptor._Query { get; set; }
 
 		internal string _RawFilter { get; set; }
 		internal BaseFilter _Filter { get; set; }
@@ -948,7 +952,7 @@ namespace Nest
 
 			else if (query.IsConditionless)
 				return this;
-			this._Query = query;
+			((ISearchDescriptor)this)._Query = query;
 			return this;
 
 		}
@@ -965,7 +969,7 @@ namespace Nest
 				bq = q.MatchAll();
 			else
 				bq = q.QueryString(qs => qs.Query(userInput));
-			this._Query = bq;
+			((ISearchDescriptor)this)._Query = bq;
 			return this;
 		}
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Query.Behaviour;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
@@ -13,73 +14,101 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IFuzzyQuery 
+	public interface IFuzzyQuery : IFieldNameQuery
 	{
-		PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker Field { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
-		double? _Boost { get; set; }
+		double? Boost { get; set; }
+		
+		[JsonProperty(PropertyName = "fuzziness")]
+		object Fuzziness { get; set; }
 
-		[JsonProperty(PropertyName = "min_similarity")]
-		double? _MinSimilarity { get; set; }
-
-		[JsonProperty(PropertyName = "prefix_length")]
-		int? _PrefixLength { get; set; }
-
-		[JsonProperty(PropertyName = "value")]
-		string Value { get; set; }
-
+		[JsonProperty(PropertyName = "max_expansions")]
+		int? MaxExpansions { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class FuzzyQueryDescriptor<T> : IQuery, IFuzzyQuery where T : class
+	public interface IStringFuzzyQuery : IFuzzyQuery
 	{
-		PropertyPathMarker IFuzzyQuery._Field { get; set; }
+		[JsonProperty(PropertyName = "prefix_length")]
+		int? PrefixLength { get; set; }
 		
-		double? IFuzzyQuery._Boost { get; set; }
-		
-		double? IFuzzyQuery._MinSimilarity { get; set; }
-		
-		int? IFuzzyQuery._PrefixLength { get; set; }
-		
-		string IFuzzyQuery.Value { get; set; }
+		[JsonProperty(PropertyName = "value")]
+		string Value { get; set; }
+	}
 
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class FuzzyQueryDescriptor<T> : IStringFuzzyQuery where T : class
+	{
+		PropertyPathMarker IFuzzyQuery.Field { get; set; }
+		
+		double? IFuzzyQuery.Boost { get; set; }
+		
+		object IFuzzyQuery.Fuzziness { get; set; }
+		
+		string IStringFuzzyQuery.Value { get; set; }
+		
+		int? IStringFuzzyQuery.PrefixLength { get; set; }
+
+		int? IFuzzyQuery.MaxExpansions { get; set; }
+		
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((IFuzzyQuery)this)._Field.IsConditionless() || ((IFuzzyQuery)this).Value.IsNullOrEmpty();
+				return ((IFuzzyQuery)this).Field.IsConditionless() || ((IStringFuzzyQuery)this).Value.IsNullOrEmpty();
 			}
 		}
-
+		
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return ((IFuzzyQuery)this).Field;
+		}
+		
 		public FuzzyQueryDescriptor<T> OnField(string field)
 		{
-			((IFuzzyQuery)this)._Field = field;
+			((IFuzzyQuery)this).Field = field;
 			return this;
 		}
+
 		public FuzzyQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((IFuzzyQuery)this)._Field = objectPath;
+			((IFuzzyQuery)this).Field = objectPath;
 			return this;
 		}
+		
 		public FuzzyQueryDescriptor<T> Boost(double boost)
 		{
-			((IFuzzyQuery)this)._Boost = boost;
+			((IFuzzyQuery)this).Boost = boost;
 			return this;
 		}
-		public FuzzyQueryDescriptor<T> MinSimilarity(double minSimilarity)
+		
+		public FuzzyQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
-			((IFuzzyQuery)this)._MinSimilarity = minSimilarity;
+			((IFuzzyQuery)this).Fuzziness = fuzziness;
+			return this;
+		}
+		public FuzzyQueryDescriptor<T> Fuzziness(string fuzziness)
+		{
+			((IFuzzyQuery)this).Fuzziness = fuzziness;
+			return this;
+		}
+		
+		public FuzzyQueryDescriptor<T> MaxExpansions(int maxExpansions)
+		{
+			((IFuzzyQuery)this).MaxExpansions = maxExpansions;
 			return this;
 		}
 		public FuzzyQueryDescriptor<T> PrefixLength(int prefixLength)
 		{
-			((IFuzzyQuery)this)._PrefixLength = prefixLength;
+			((IStringFuzzyQuery)this).PrefixLength = prefixLength;
 			return this;
 		}
+		
 		public FuzzyQueryDescriptor<T> Value(string value)
 		{
-			((IFuzzyQuery)this).Value = value;
+			((IStringFuzzyQuery)this).Value = value;
 			return this;
 		}
 	}

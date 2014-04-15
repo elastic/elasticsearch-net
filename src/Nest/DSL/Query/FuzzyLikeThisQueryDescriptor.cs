@@ -14,101 +14,101 @@ namespace Nest
 	public interface IFuzzyLikeThisQuery
 	{
 		[JsonProperty(PropertyName = "fields")]
-		IEnumerable<PropertyPathMarker> _Fields { get; set; }
+		IEnumerable<PropertyPathMarker> Fields { get; set; }
 
 		[JsonProperty(PropertyName = "like_text")]
-		string _LikeText { get; set; }
+		string LikeText { get; set; }
 
 		[JsonProperty(PropertyName = "ignore_tf")]
-		bool? _IgnoreTermFrequency { get; set; }
+		bool? IgnoreTermFrequency { get; set; }
 
 		[JsonProperty(PropertyName = "max_query_terms")]
-		int? _MaxQueryTerms { get; set; }
+		int? MaxQueryTerms { get; set; }
 
 		[JsonProperty(PropertyName = "min_similarity")]
-		double? _MinSimilarity { get; set; }
+		double? MinSimilarity { get; set; }
 
 		[JsonProperty(PropertyName = "prefix_length")]
-		int? _PrefixLength { get; set; }
+		int? PrefixLength { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
-		double? _Boost { get; set; }
+		double? Boost { get; set; }
 
 		[JsonProperty(PropertyName = "analyzer")]
-		string _Analyzer { get; set; }
+		string Analyzer { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class FuzzyLikeThisQueryDescriptor<T> : IQuery, IFuzzyLikeThisQuery where T : class
 	{
-		IEnumerable<PropertyPathMarker> IFuzzyLikeThisQuery._Fields { get; set; }
+		IEnumerable<PropertyPathMarker> IFuzzyLikeThisQuery.Fields { get; set; }
 		
-		string IFuzzyLikeThisQuery._LikeText { get; set; }
+		string IFuzzyLikeThisQuery.LikeText { get; set; }
 		
-		bool? IFuzzyLikeThisQuery._IgnoreTermFrequency { get; set; }
+		bool? IFuzzyLikeThisQuery.IgnoreTermFrequency { get; set; }
 		
-		int? IFuzzyLikeThisQuery._MaxQueryTerms { get; set; }
+		int? IFuzzyLikeThisQuery.MaxQueryTerms { get; set; }
 		
-		double? IFuzzyLikeThisQuery._MinSimilarity { get; set; }
+		double? IFuzzyLikeThisQuery.MinSimilarity { get; set; }
 		
-		int? IFuzzyLikeThisQuery._PrefixLength { get; set; }
+		int? IFuzzyLikeThisQuery.PrefixLength { get; set; }
 		
-		double? IFuzzyLikeThisQuery._Boost { get; set; }
+		double? IFuzzyLikeThisQuery.Boost { get; set; }
 		
-		string IFuzzyLikeThisQuery._Analyzer { get; set; }
+		string IFuzzyLikeThisQuery.Analyzer { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((IFuzzyLikeThisQuery)this)._LikeText.IsNullOrEmpty();
+				return ((IFuzzyLikeThisQuery)this).LikeText.IsNullOrEmpty();
 			}
 		}
 
 		public FuzzyLikeThisQueryDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
-			((IFuzzyLikeThisQuery)this)._Fields = fields.Select(f=>(PropertyPathMarker)f);
+			((IFuzzyLikeThisQuery)this).Fields = fields.Select(f=>(PropertyPathMarker)f);
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> OnFields(
 			params Expression<Func<T, object>>[] objectPaths)
 		{
-			((IFuzzyLikeThisQuery)this)._Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
+			((IFuzzyLikeThisQuery)this).Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> LikeText(string likeText)
 		{
-			((IFuzzyLikeThisQuery)this)._LikeText = likeText;
+			((IFuzzyLikeThisQuery)this).LikeText = likeText;
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> IgnoreTermFrequency(bool ignore)
 		{
-			((IFuzzyLikeThisQuery)this)._IgnoreTermFrequency = ignore;
+			((IFuzzyLikeThisQuery)this).IgnoreTermFrequency = ignore;
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> MinimumSimilarity(double minSimilarity)
 		{
-			((IFuzzyLikeThisQuery)this)._MinSimilarity = minSimilarity;
+			((IFuzzyLikeThisQuery)this).MinSimilarity = minSimilarity;
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> MaxQueryTerms(int maxQueryTerms)
 		{
-			((IFuzzyLikeThisQuery)this)._MaxQueryTerms = maxQueryTerms;
+			((IFuzzyLikeThisQuery)this).MaxQueryTerms = maxQueryTerms;
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> PrefixLength(int prefixLength)
 		{
-			((IFuzzyLikeThisQuery)this)._PrefixLength = prefixLength;
+			((IFuzzyLikeThisQuery)this).PrefixLength = prefixLength;
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> Boost(double boost)
 		{
-			((IFuzzyLikeThisQuery)this)._Boost = boost;
+			((IFuzzyLikeThisQuery)this).Boost = boost;
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> Analyzer(string analyzer)
 		{
-			((IFuzzyLikeThisQuery)this)._Analyzer = analyzer;
+			((IFuzzyLikeThisQuery)this).Analyzer = analyzer;
 			return this;
 		}
 	

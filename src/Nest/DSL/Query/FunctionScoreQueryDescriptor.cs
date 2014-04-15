@@ -16,49 +16,49 @@ namespace Nest
 	public interface IFunctionScoreQuery
 	{
 		[JsonProperty(PropertyName = "functions")]
-		IEnumerable<IFunctionScoreFunction> _Functions { get; set; }
+		IEnumerable<IFunctionScoreFunction> Functions { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
-		IQueryDescriptor _Query { get; set; }
+		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty(PropertyName = "score_mode")]
 		[JsonConverter(typeof (StringEnumConverter))]
-		FunctionScoreMode? _ScoreMode { get; set; }
+		FunctionScoreMode? ScoreMode { get; set; }
 
 		[JsonProperty(PropertyName = "boost_mode")]
 		[JsonConverter(typeof (StringEnumConverter))]
-		FunctionBoostMode? _BoostMode { get; set; }
+		FunctionBoostMode? BoostMode { get; set; }
 
 		[JsonProperty(PropertyName = "random_score")]
-		RandomScoreFunction _RandomScore { get; set; }
+		RandomScoreFunction RandomScore { get; set; }
 
 		[JsonProperty(PropertyName = "script_score")]
-		ScriptFilterDescriptor _ScriptScore { get; set; }
+		ScriptFilterDescriptor ScriptScore { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class FunctionScoreQueryDescriptor<T> : IQuery, IFunctionScoreQuery where T : class
 	{
-		IEnumerable<IFunctionScoreFunction> IFunctionScoreQuery._Functions { get; set; }
+		IEnumerable<IFunctionScoreFunction> IFunctionScoreQuery.Functions { get; set; }
 
-		IQueryDescriptor IFunctionScoreQuery._Query { get; set; }
+		IQueryDescriptor IFunctionScoreQuery.Query { get; set; }
 
-		FunctionScoreMode? IFunctionScoreQuery._ScoreMode { get; set; }
+		FunctionScoreMode? IFunctionScoreQuery.ScoreMode { get; set; }
 
-		FunctionBoostMode? IFunctionScoreQuery._BoostMode { get; set; }
+		FunctionBoostMode? IFunctionScoreQuery.BoostMode { get; set; }
 
-		RandomScoreFunction IFunctionScoreQuery._RandomScore { get; set; }
+		RandomScoreFunction IFunctionScoreQuery.RandomScore { get; set; }
 
-		ScriptFilterDescriptor IFunctionScoreQuery._ScriptScore { get; set; }
+		ScriptFilterDescriptor IFunctionScoreQuery.ScriptScore { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return (((IFunctionScoreQuery)this)._Query == null || ((IFunctionScoreQuery)this)._Query.IsConditionless) 
-					&& ((IFunctionScoreQuery)this)._RandomScore == null 
-					&& ((IFunctionScoreQuery)this)._ScriptScore == null 
-					&& !((IFunctionScoreQuery)this)._Functions.HasAny();
+				return (((IFunctionScoreQuery)this).Query == null || ((IFunctionScoreQuery)this).Query.IsConditionless) 
+					&& ((IFunctionScoreQuery)this).RandomScore == null 
+					&& ((IFunctionScoreQuery)this).ScriptScore == null 
+					&& !((IFunctionScoreQuery)this).Functions.HasAny();
 			}
 		}
 
@@ -68,7 +68,7 @@ namespace Nest
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
-			((IFunctionScoreQuery)this)._Query = q;
+			((IFunctionScoreQuery)this).Query = q;
 			return this;
 		}
 
@@ -81,29 +81,29 @@ namespace Nest
 				f(descriptor);
 			}
 
-			((IFunctionScoreQuery)this)._Functions = descriptor;
+			((IFunctionScoreQuery)this).Functions = descriptor;
 
 			return this;
 		}
 
 		public FunctionScoreQueryDescriptor<T> ScoreMode(FunctionScoreMode mode)
 		{
-			((IFunctionScoreQuery)this)._ScoreMode = mode;
+			((IFunctionScoreQuery)this).ScoreMode = mode;
 			return this;
 		}
 
 		public FunctionScoreQueryDescriptor<T> BoostMode(FunctionBoostMode mode)
 		{
-			((IFunctionScoreQuery)this)._BoostMode = mode;
+			((IFunctionScoreQuery)this).BoostMode = mode;
 			return this;
 		}
 
 		public FunctionScoreQueryDescriptor<T> RandomScore(int? seed = null)
 		{
-			((IFunctionScoreQuery)this)._RandomScore = new RandomScoreFunction();
+			((IFunctionScoreQuery)this).RandomScore = new RandomScoreFunction();
 			if (seed.HasValue)
 			{
-				((IFunctionScoreQuery)this)._RandomScore._Seed = seed.Value;
+				((IFunctionScoreQuery)this).RandomScore._Seed = seed.Value;
 			}
 			return this;
 		}
@@ -114,7 +114,7 @@ namespace Nest
 			if (scriptSelector != null)
 				scriptSelector(descriptor);
 
-			((IFunctionScoreQuery)this)._ScriptScore = descriptor;
+			((IFunctionScoreQuery)this).ScriptScore = descriptor;
 
 			return this;
 		}

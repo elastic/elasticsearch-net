@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using Nest.DSL.Query.Behaviour;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
@@ -12,52 +13,57 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoShapeQuery
 	{
-		PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker Field { get; set; }
 
 		[JsonProperty("shape")]
-		GeoShapeVector _Shape { get; set; }
+		GeoShapeVector Shape { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class GeoShapeQueryDescriptor<T> : IQuery, IGeoShapeQuery where T : class
+	public class GeoShapeQueryDescriptor<T> : IFieldNameQuery, IGeoShapeQuery where T : class
 	{
-		PropertyPathMarker IGeoShapeQuery._Field { get; set; }
+		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
 		
-		GeoShapeVector IGeoShapeQuery._Shape { get; set; }
+		GeoShapeVector IGeoShapeQuery.Shape { get; set; }
 		
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((IGeoShapeQuery)this)._Field.IsConditionless() || (((IGeoShapeQuery)this)._Shape == null || !((IGeoShapeQuery)this)._Shape.Coordinates.HasAny());
+				return ((IGeoShapeQuery)this).Field.IsConditionless() || (((IGeoShapeQuery)this).Shape == null || !((IGeoShapeQuery)this).Shape.Coordinates.HasAny());
 			}
 
 		}
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return ((IGeoShapeQuery)this).Field;
+		}
+		
 		public GeoShapeQueryDescriptor<T> OnField(string field)
 		{
-			((IGeoShapeQuery)this)._Field = field;
+			((IGeoShapeQuery)this).Field = field;
 			return this;
 		}
 		public GeoShapeQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((IGeoShapeQuery)this)._Field = objectPath;
+			((IGeoShapeQuery)this).Field = objectPath;
 			return this;
 		}
 		
 
 		public GeoShapeQueryDescriptor<T> Type(string type)
 		{
-			if (((IGeoShapeQuery)this)._Shape == null)
-				((IGeoShapeQuery)this)._Shape = new GeoShapeVector();
-			((IGeoShapeQuery)this)._Shape.Type = type;
+			if (((IGeoShapeQuery)this).Shape == null)
+				((IGeoShapeQuery)this).Shape = new GeoShapeVector();
+			((IGeoShapeQuery)this).Shape.Type = type;
 			return this;
 		}
 
 		public GeoShapeQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<double>> coordinates)
 		{
-			if (((IGeoShapeQuery)this)._Shape == null)
-				((IGeoShapeQuery)this)._Shape = new GeoShapeVector();
-			((IGeoShapeQuery)this)._Shape.Coordinates = coordinates;
+			if (((IGeoShapeQuery)this).Shape == null)
+				((IGeoShapeQuery)this).Shape = new GeoShapeVector();
+			((IGeoShapeQuery)this).Shape.Coordinates = coordinates;
 			return this;
 		}
 
