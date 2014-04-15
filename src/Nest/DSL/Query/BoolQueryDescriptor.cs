@@ -42,7 +42,7 @@ namespace Nest
 	}
 
 
-	public interface IBoolQuery
+	public interface IBoolQuery : IQuery
 	{
 		[JsonProperty("must")]
 		IEnumerable<IQueryDescriptor> Must { get; set; }
@@ -64,7 +64,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class BoolBaseQueryDescriptor : IBoolQuery, IQuery
+	public class BoolBaseQueryDescriptor : IBoolQuery
 	{
 		[JsonProperty("must")]
 		IEnumerable<IQueryDescriptor> IBoolQuery.Must { get; set; }

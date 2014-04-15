@@ -11,7 +11,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IFuzzyLikeThisQuery
+	public interface IFuzzyLikeThisQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "fields")]
 		IEnumerable<PropertyPathMarker> Fields { get; set; }
@@ -39,7 +39,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class FuzzyLikeThisQueryDescriptor<T> : IQuery, IFuzzyLikeThisQuery where T : class
+	public class FuzzyLikeThisQueryDescriptor<T> : IFuzzyLikeThisQuery where T : class
 	{
 		IEnumerable<PropertyPathMarker> IFuzzyLikeThisQuery.Fields { get; set; }
 		

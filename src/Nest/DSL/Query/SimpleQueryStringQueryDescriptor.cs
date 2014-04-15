@@ -12,7 +12,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISimpleQueryStringQuery
+	public interface ISimpleQueryStringQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
 		string Query { get; set; }
@@ -41,7 +41,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SimpleQueryStringQueryDescriptor<T> : IQuery, ISimpleQueryStringQuery where T : class
+	public class SimpleQueryStringQueryDescriptor<T> : ISimpleQueryStringQuery where T : class
 	{
 		string ISimpleQueryStringQuery.Query { get; set; }
 		

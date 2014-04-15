@@ -10,7 +10,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IIndicesQuery
+	public interface IIndicesQuery : IQuery
 	{
 		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
 		NestedScore? Score { get; set; }
@@ -26,7 +26,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class IndicesQueryDescriptor<T> : IQuery, IIndicesQuery where T : class
+	public class IndicesQueryDescriptor<T> : IIndicesQuery where T : class
 	{
 		NestedScore? IIndicesQuery.Score { get; set; }
 

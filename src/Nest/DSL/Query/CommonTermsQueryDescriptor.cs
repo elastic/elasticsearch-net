@@ -13,7 +13,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICommonTermsQuery
+	public interface ICommonTermsQuery : IFieldNameQuery
 	{
 		[JsonProperty(PropertyName = "query")]
 		string QueryString { get; set; }
@@ -46,7 +46,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class CommonTermsQueryDescriptor<T> : IFieldNameQuery, ICommonTermsQuery where T : class
+	public class CommonTermsQueryDescriptor<T> : ICommonTermsQuery where T : class
 	{
 		string ICommonTermsQuery.QueryString { get; set; }
 

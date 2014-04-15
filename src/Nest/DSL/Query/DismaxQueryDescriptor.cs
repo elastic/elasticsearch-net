@@ -9,7 +9,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDisMaxQuery
+	public interface IDisMaxQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "tie_breaker")]
 		double? TieBreaker { get; set; }
@@ -22,7 +22,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class DisMaxQueryDescriptor<T> : IQuery, IDisMaxQuery where T : class
+	public class DisMaxQueryDescriptor<T> : IDisMaxQuery where T : class
 	{
 		double? IDisMaxQuery.TieBreaker { get; set; }
 

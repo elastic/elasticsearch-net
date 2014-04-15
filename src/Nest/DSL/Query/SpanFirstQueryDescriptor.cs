@@ -10,7 +10,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISpanFirstQuery
+	public interface ISpanFirstQuery : ISpanSubQuery
 	{
 		[JsonProperty(PropertyName = "match")]
 		ISpanQuery Match { get; set; }
@@ -20,7 +20,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SpanFirstQueryDescriptor<T> : ISpanSubQuery, IQuery, ISpanFirstQuery where T : class
+	public class SpanFirstQueryDescriptor<T> : ISpanFirstQuery where T : class
 	{
 		ISpanQuery ISpanFirstQuery.Match { get; set; }
 

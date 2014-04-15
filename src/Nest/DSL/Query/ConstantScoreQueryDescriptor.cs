@@ -8,7 +8,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IConstantScoreQuery
+	public interface IConstantScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
 		BaseQuery Query { get; set; }
@@ -21,7 +21,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class ConstantScoreQueryDescriptor<T> : IQuery, IConstantScoreQuery where T : class
+	public class ConstantScoreQueryDescriptor<T> : IConstantScoreQuery where T : class
 	{
 		BaseQuery IConstantScoreQuery.Query { get; set; }
 

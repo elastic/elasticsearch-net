@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICustomBoostFactorQuery
+	public interface ICustomBoostFactorQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
 		IQueryDescriptor Query { get; set; }
@@ -18,7 +18,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class CustomBoostFactorQueryDescriptor<T> : IQuery, ICustomBoostFactorQuery where T : class
+	public class CustomBoostFactorQueryDescriptor<T> : ICustomBoostFactorQuery where T : class
 	{
 		IQueryDescriptor ICustomBoostFactorQuery.Query { get; set; }
 

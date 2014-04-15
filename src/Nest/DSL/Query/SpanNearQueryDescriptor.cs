@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISpanNearQuery 
+	public interface ISpanNearQuery : ISpanSubQuery
 	{
 		[JsonProperty(PropertyName = "clauses")]
 		IEnumerable<ISpanQuery> Clauses { get; set; }
@@ -25,7 +25,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SpanNearQuery<T> : ISpanSubQuery, IQuery, ISpanNearQuery where T : class
+	public class SpanNearQuery<T> : ISpanNearQuery where T : class
 	{
 		IEnumerable<ISpanQuery> ISpanNearQuery.Clauses { get; set; }
 

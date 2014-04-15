@@ -17,14 +17,14 @@ namespace Nest.Tests.Unit.Search.Query.Properties
 				.Query(q => q
 				.TopChildren<Person>(tcq => tcq
 					.Query(qq =>
-					qq.Term(f => f.FirstName, "foo") || qq.Term(f => f.FirstName, "bar")
+						qq.Term(f => f.FirstName, "foo") || qq.Term(f => f.FirstName, "bar")
 					)
 				)
 			);
-			s._Query.Should().NotBeNull();
-			s._Query.TopChildren.Should().NotBeNull();
-			s._Query.TopChildren.Query.Should().NotBeNull();
-			var boolQuery =s._Query.TopChildren.Query.Bool;
+			s.Query.Should().NotBeNull();
+			s.Query.TopChildren.Should().NotBeNull();
+			s.Query.TopChildren.Query.Should().NotBeNull();
+			var boolQuery =s.Query.TopChildren.Query.Bool;
 			boolQuery.Should().NotBeNull();
 			
 			boolQuery.Should.Should().NotBeEmpty().And.HaveCount(2);

@@ -13,7 +13,7 @@ namespace Nest
 {
 	//More info about it http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/query-dsl-function-score-query.html
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IFunctionScoreQuery
+	public interface IFunctionScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "functions")]
 		IEnumerable<IFunctionScoreFunction> Functions { get; set; }
@@ -37,7 +37,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class FunctionScoreQueryDescriptor<T> : IQuery, IFunctionScoreQuery where T : class
+	public class FunctionScoreQueryDescriptor<T> : IFunctionScoreQuery where T : class
 	{
 		IEnumerable<IFunctionScoreFunction> IFunctionScoreQuery.Functions { get; set; }
 

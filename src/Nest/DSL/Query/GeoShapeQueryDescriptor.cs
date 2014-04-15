@@ -11,7 +11,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGeoShapeQuery
+	public interface IGeoShapeQuery : IFieldNameQuery
 	{
 		PropertyPathMarker Field { get; set; }
 
@@ -20,7 +20,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class GeoShapeQueryDescriptor<T> : IFieldNameQuery, IGeoShapeQuery where T : class
+	public class GeoShapeQueryDescriptor<T> : IGeoShapeQuery where T : class
 	{
 		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
 		

@@ -16,7 +16,7 @@ namespace Nest
 {
 	public interface ISearchDescriptor
 	{
-		IQueryDescriptor _Query { get; set; }
+		IQueryDescriptor Query { get; set; }
 	}
 
 	/// <summary>
@@ -243,12 +243,12 @@ namespace Nest
 		{
 			get
 			{
-				if (this._RawQuery == null && ((ISearchDescriptor)this)._Query == null)
+				if (this._RawQuery == null && ((ISearchDescriptor)this).Query == null)
 					return null;
 				return new RawOrQueryDescriptor<T>
 				{
 					Raw = this._RawQuery,
-					Descriptor = ((ISearchDescriptor)this)._Query
+					Descriptor = ((ISearchDescriptor)this).Query
 				};
 			}
 		}
@@ -275,7 +275,7 @@ namespace Nest
 		internal RescoreDescriptor<T> _Rescore { get; set; }
 
 		internal string _RawQuery { get; set; }
-		IQueryDescriptor ISearchDescriptor._Query { get; set; }
+		IQueryDescriptor ISearchDescriptor.Query { get; set; }
 
 		internal string _RawFilter { get; set; }
 		internal BaseFilter _Filter { get; set; }
@@ -952,7 +952,7 @@ namespace Nest
 
 			else if (query.IsConditionless)
 				return this;
-			((ISearchDescriptor)this)._Query = query;
+			((ISearchDescriptor)this).Query = query;
 			return this;
 
 		}
@@ -969,7 +969,7 @@ namespace Nest
 				bq = q.MatchAll();
 			else
 				bq = q.QueryString(qs => qs.Query(userInput));
-			((ISearchDescriptor)this)._Query = bq;
+			((ISearchDescriptor)this).Query = bq;
 			return this;
 		}
 

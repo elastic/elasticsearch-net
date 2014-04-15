@@ -8,7 +8,7 @@ using Elasticsearch.Net;
 namespace Nest.DSL.Query
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IFilterScoreQuery
+	public interface IFilterScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "filter")]
 		BaseFilter Filter { get; set; }
@@ -21,7 +21,7 @@ namespace Nest.DSL.Query
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class FilterScoreQueryDescriptor<T> : IQuery, IFilterScoreQuery where T : class
+	public class FilterScoreQueryDescriptor<T> : IFilterScoreQuery where T : class
 	{
 		bool IQuery.IsConditionless { get { return ((IFilterScoreQuery)this).Filter == null; } }
 

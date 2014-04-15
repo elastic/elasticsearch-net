@@ -11,7 +11,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMoreLikeThisQuery
+	public interface IMoreLikeThisQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "fields")]
 		IEnumerable<PropertyPathMarker> Fields { get; set; }
@@ -54,7 +54,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class MoreLikeThisQueryDescriptor<T> : IQuery, IMoreLikeThisQuery where T : class
+	public class MoreLikeThisQueryDescriptor<T> : IMoreLikeThisQuery where T : class
 	{
 		IEnumerable<PropertyPathMarker> IMoreLikeThisQuery.Fields { get; set; }
 		

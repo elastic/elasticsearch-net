@@ -10,7 +10,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ITopChildrenQuery
+	public interface ITopChildrenQuery : IQuery
 	{
 		[JsonProperty("type")]
 		TypeNameMarker Type { get; set; }
@@ -44,7 +44,7 @@ namespace Nest
 	/// </summary>
 	/// <typeparam name="T">Type used to strongly type parts of this query</typeparam>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class TopChildrenQueryDescriptor<T> : IQuery, ITopChildrenQuery where T : class
+	public class TopChildrenQueryDescriptor<T> : ITopChildrenQuery where T : class
 	{
 		bool IQuery.IsConditionless
 		{

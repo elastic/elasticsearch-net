@@ -8,7 +8,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IFilteredQuery
+	public interface IFilteredQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
 		IQueryDescriptor Query { get; set; }
@@ -18,7 +18,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class FilteredQueryDescriptor<T> : IQuery, IFilteredQuery where T : class
+	public class FilteredQueryDescriptor<T> : IFilteredQuery where T : class
 	{
 		IQueryDescriptor IFilteredQuery.Query { get; set; }
 

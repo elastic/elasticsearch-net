@@ -11,7 +11,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ITermsQuery
+	public interface ITermsQuery : IQuery
 	{
 		PropertyPathMarker Field { get; set; }
 		int? MinMatch { get; set; }
@@ -28,7 +28,7 @@ namespace Nest
 	/// <typeparam name="T">The type that represents the expected hit type</typeparam>
 	/// <typeparam name="K">The type of the field that we want to specfify terms for</typeparam>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class TermsQueryDescriptor<T, K> : IQuery, ITermsQuery, ICustomJson where T : class
+	public class TermsQueryDescriptor<T, K> : ITermsQuery, ICustomJson where T : class
 	{
 		PropertyPathMarker ITermsQuery.Field { get; set; }
 		int? ITermsQuery.MinMatch { get; set; }

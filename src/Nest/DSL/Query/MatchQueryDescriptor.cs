@@ -12,7 +12,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMatchQuery
+	public interface IMatchQuery : IFieldNameQuery 
 	{
 		[JsonProperty(PropertyName = "type")]
 		string Type { get; }
@@ -56,7 +56,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class MatchQueryDescriptor<T> : IFieldNameQuery, IMatchQuery where T : class
+	public class MatchQueryDescriptor<T> : IMatchQuery where T : class
 	{
 		protected virtual string _type { get { return null; } }
 

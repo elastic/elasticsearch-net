@@ -9,10 +9,8 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public interface ISpanSubQuery {}
-
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISpanQuery 
+	public interface ISpanQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "span_term")]
 		ITermQuery SpanTermQueryDescriptor { get; set; }
@@ -31,7 +29,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SpanQuery<T> : IQuery, ISpanQuery where T : class
+	public class SpanQuery<T> : ISpanQuery where T : class
 	{
 		ITermQuery ISpanQuery.SpanTermQueryDescriptor { get; set; }
 

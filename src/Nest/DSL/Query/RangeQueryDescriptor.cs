@@ -11,7 +11,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IRangeQuery
+	public interface IRangeQuery : IFieldNameQuery
 	{
 		[JsonProperty("from")]
 		object From { get; set; }
@@ -38,7 +38,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class RangeQueryDescriptor<T> : IFieldNameQuery, IRangeQuery where T : class
+	public class RangeQueryDescriptor<T> : IRangeQuery where T : class
 	{
 		object IRangeQuery.From { get; set; }
 	

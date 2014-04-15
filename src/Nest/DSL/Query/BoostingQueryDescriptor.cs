@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IBoostingQuery
+	public interface IBoostingQuery : IQuery
 	{
 		[JsonProperty("positive")]
 		BaseQuery PositiveQuery { get; set; }
@@ -21,7 +21,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class BoostingQueryDescriptor<T> : IQuery, IBoostingQuery where T : class
+	public class BoostingQueryDescriptor<T> : IBoostingQuery where T : class
 	{
 		BaseQuery IBoostingQuery.PositiveQuery { get; set; }
 

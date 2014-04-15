@@ -12,7 +12,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IRegexpQuery
+	public interface IRegexpQuery : IFieldNameQuery
 	{
 		[JsonProperty("value")]
 		string Value { get; set; }
@@ -27,7 +27,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class RegexpQueryDescriptor<T> : IFieldNameQuery, IRegexpQuery where T : class
+	public class RegexpQueryDescriptor<T> : IRegexpQuery where T : class
 	{
 		string IRegexpQuery.Value { get; set; }
 

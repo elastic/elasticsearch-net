@@ -10,7 +10,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IHasParentQuery
+	public interface IHasParentQuery : IQuery
 	{
 		[JsonProperty("type")]
 		TypeNameMarker Type { get; set; }
@@ -28,7 +28,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class HasParentQueryDescriptor<T> : IQuery, IHasParentQuery where T : class
+	public class HasParentQueryDescriptor<T> : IHasParentQuery where T : class
 	{
 		TypeNameMarker IHasParentQuery.Type { get; set; }
 

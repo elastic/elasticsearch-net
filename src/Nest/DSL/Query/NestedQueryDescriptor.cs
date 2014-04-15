@@ -10,7 +10,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface INestedQuery
+	public interface INestedQuery : IQuery
 	{
 		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
 		NestedScore? Score { get; set; }
@@ -26,7 +26,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class NestedQueryDescriptor<T> : IQuery, INestedQuery where T : class
+	public class NestedQueryDescriptor<T> : INestedQuery where T : class
 	{
 		NestedScore? INestedQuery.Score { get; set; }
 

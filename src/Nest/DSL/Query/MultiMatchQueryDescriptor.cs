@@ -11,7 +11,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMultiMatchQuery
+	public interface IMultiMatchQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "type")]
 		string Type { get; set; }
@@ -59,7 +59,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class MultiMatchQueryDescriptor<T> : IQuery, IMultiMatchQuery where T : class
+	public class MultiMatchQueryDescriptor<T> : IMultiMatchQuery where T : class
 	{
 		string IMultiMatchQuery.Type { get; set; }
 

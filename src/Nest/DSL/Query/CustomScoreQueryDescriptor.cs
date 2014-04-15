@@ -9,7 +9,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICustomScoreQuery
+	public interface ICustomScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "lang")]
 		string Lang { get; set; }
@@ -26,7 +26,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class CustomScoreQueryDescriptor<T> : IQuery, ICustomScoreQuery where T : class
+	public class CustomScoreQueryDescriptor<T> : ICustomScoreQuery where T : class
 	{
 		string ICustomScoreQuery.Lang { get; set; }
 

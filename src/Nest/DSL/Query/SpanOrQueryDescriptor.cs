@@ -9,14 +9,14 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISpanOrQuery
+	public interface ISpanOrQuery : ISpanSubQuery
 	{
 		[JsonProperty(PropertyName = "clauses")]
 		IEnumerable<ISpanQuery> Clauses { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SpanOrQueryDescriptor<T> : ISpanSubQuery, IQuery, ISpanOrQuery where T : class
+	public class SpanOrQueryDescriptor<T> : ISpanOrQuery where T : class
 	{
 		IEnumerable<ISpanQuery> ISpanOrQuery.Clauses { get; set; }
 

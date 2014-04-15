@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISpanNotQuery
+	public interface ISpanNotQuery : ISpanSubQuery
 	{
 		[JsonProperty(PropertyName = "include")]
 		ISpanQuery Include { get; set; }
@@ -18,7 +18,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SpanNotQuery<T> : ISpanSubQuery, IQuery, ISpanNotQuery where T : class
+	public class SpanNotQuery<T> : ISpanNotQuery where T : class
 	{
 		ISpanQuery ISpanNotQuery.Include { get; set; }
 
