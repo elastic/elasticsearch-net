@@ -14,146 +14,160 @@ using System.Collections;
 
 namespace Nest
 {
-	/* Adding a new filter:
-	 *   - make sure it calls in to New() or SetDictionary() for immutable sake
-	 *   - add a null check to IsConditionless
-	 */
-	public class FilterDescriptor<T> : BaseFilter, IFilterDescriptor<T> where T : class
+	public interface IFilter
 	{
-		internal string _Name { get; set; }
-		internal string _CacheKey { get; set; }
-		internal bool? _Cache { get; set; }
-
-		private bool _forcedConditionless;
-		public override bool IsConditionless
-		{
-			get
-			{
-				if (_forcedConditionless)
-					return true;
-				return this.ExistsFilter == null
-					&& this.MissingFilter == null
-					&& this.IdsFilter == null
-					&& this.BoolFilterDescriptor == null
-					&& this.GeoBoundingBoxFilter == null
-					&& this.GeoDistanceFilter == null
-					&& this.GeoDistanceRangeFilter == null
-					&& this.GeoPolygonFilter == null
-					&& this.GeoShapeFilter == null
-					&& this.LimitFilter == null
-					&& this.TypeFilter == null
-					&& this.MatchAllFilter == null
-					&& this.HasChildFilter == null
-					&& this.HasParentFilter == null
-					&& this.NumericRangeFilter == null
-					&& this.RangeFilter == null
-					&& this.PrefixFilter == null
-					&& this.TermFilter == null
-					&& this.TermsFilter == null
-					&& this.QueryFilter == null
-					&& this.AndFilter == null
-					&& this.OrFilter == null
-					&& this.NotFilter == null
-					&& this.ScriptFilter == null
-					&& this.NestedFilter == null
-					&& this.RegexpFilter == null
-					;
-			}
-			internal set
-			{
-				_forcedConditionless = value;
-			}
-		}
-
+		string _Name { get; set; }
+		string _CacheKey { get; set; }
+		bool? _Cache { get; set; }
+		bool IsConditionless { get; }
 
 		[JsonProperty(PropertyName = "exists")]
-		internal ExistsFilter ExistsFilter { get; set; }
+		IExistsFilter ExistsFilter { get; set; }
 
 		[JsonProperty(PropertyName = "missing")]
-		internal MissingFilter MissingFilter { get; set; }
+		IMissingFilter MissingFilter { get; set; }
 
 		[JsonProperty(PropertyName = "ids")]
-		internal IdsFilter IdsFilter { get; set; }
+		IIdsFilter IdsFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_bounding_box")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<PropertyPathMarker, object> GeoBoundingBoxFilter { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IGeoBoundingBoxFilter GeoBoundingBoxFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_distance")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<PropertyPathMarker, object> GeoDistanceFilter { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IGeoDistanceFilter GeoDistanceFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_distance_range")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<PropertyPathMarker, object> GeoDistanceRangeFilter { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IGeoDistanceRangeFilter GeoDistanceRangeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_polygon")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<PropertyPathMarker, object> GeoPolygonFilter { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IGeoPolygonFilter GeoPolygonFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_shape")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<PropertyPathMarker, object> GeoShapeFilter { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IGeoShapeFilter GeoShapeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "limit")]
-		internal LimitFilter LimitFilter { get; set; }
+		ILimitFilter LimitFilter { get; set; }
 
 		[JsonProperty(PropertyName = "type")]
-		internal TypeFilter TypeFilter { get; set; }
+		ITypeFilter TypeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "match_all")]
-		internal MatchAllFilter MatchAllFilter { get; set; }
+		IMatchAllFilter MatchAllFilter { get; set; }
 
 		[JsonProperty(PropertyName = "has_child")]
-		internal object HasChildFilter { get; set; }
+		IHasChildFilter HasChildFilter { get; set; }
 
 		[JsonProperty(PropertyName = "has_parent")]
-		internal object HasParentFilter { get; set; }
+		IHasParentFilter HasParentFilter { get; set; }
 
 		[JsonProperty(PropertyName = "numeric_range")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<PropertyPathMarker, object> NumericRangeFilter { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		INumericRangeFilter NumericRangeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "range")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<PropertyPathMarker, object> RangeFilter { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IRangeFilter RangeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "prefix")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<PropertyPathMarker, object> PrefixFilter { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IPrefixFilter PrefixFilter { get; set; }
 
 		[JsonProperty(PropertyName = "term")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<PropertyPathMarker, object> TermFilter { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		ITermFilter TermFilter { get; set; }
 
 		[JsonProperty(PropertyName = "terms")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<PropertyPathMarker, object> TermsFilter { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		ITermsFilter TermsFilter { get; set; }
 
 		[JsonProperty(PropertyName = "fquery")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<PropertyPathMarker, object> QueryFilter { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IQueryFilter QueryFilter { get; set; }
 
 		[JsonProperty(PropertyName = "and")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<PropertyPathMarker, object> AndFilter { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IAndFilter AndFilter { get; set; }
 
 		[JsonProperty(PropertyName = "or")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<PropertyPathMarker, object> OrFilter { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IOrFilter OrFilter { get; set; }
 
 		[JsonProperty(PropertyName = "not")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<PropertyPathMarker, object> NotFilter { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		INotFilter NotFilter { get; set; }
 
 		[JsonProperty(PropertyName = "script")]
-		internal ScriptFilterDescriptor ScriptFilter { get; set; }
+		IScriptFilter ScriptFilter { get; set; }
 
 		[JsonProperty(PropertyName = "nested")]
-		internal NestedFilterDescriptor<T> NestedFilter { get; set; }
+		INestedFilter NestedFilter { get; set; }
 
 		[JsonProperty(PropertyName = "regexp")]
-		internal Dictionary<PropertyPathMarker, object> RegexpFilter { get; set; }
+		IRegexpFilter RegexpFilter { get; set; }
+	}
+
+	public class FilterDescriptor<T> : BaseFilter, IFilterDescriptor<T>, IFilter where T : class
+	{
+		public string _Name { get; set; }
+		public string _CacheKey { get; set; }
+		public bool? _Cache { get; set; }
+
+		public override bool IsConditionless { get; internal set; }
+
+		IExistsFilter IFilter.ExistsFilter { get; set; }
+
+		IMissingFilter IFilter.MissingFilter { get; set; }
+
+		IIdsFilter IFilter.IdsFilter { get; set; }
+
+		IGeoBoundingBoxFilter IFilter.GeoBoundingBoxFilter { get; set; }
+
+		IGeoDistanceFilter IFilter.GeoDistanceFilter { get; set; }
+
+		IGeoDistanceRangeFilter IFilter.GeoDistanceRangeFilter { get; set; }
+
+		IGeoPolygonFilter IFilter.GeoPolygonFilter { get; set; }
+
+		IGeoShapeFilter IFilter.GeoShapeFilter { get; set; }
+
+		ILimitFilter IFilter.LimitFilter { get; set; }
+
+		ITypeFilter IFilter.TypeFilter { get; set; }
+
+		IMatchAllFilter IFilter.MatchAllFilter { get; set; }
+
+		IHasChildFilter IFilter.HasChildFilter { get; set; }
+
+		IHasParentFilter IFilter.HasParentFilter { get; set; }
+
+		INumericRangeFilter IFilter.NumericRangeFilter { get; set; }
+
+		IRangeFilter IFilter.RangeFilter { get; set; }
+
+		IPrefixFilter IFilter.PrefixFilter { get; set; }
+
+		ITermFilter IFilter.TermFilter { get; set; }
+
+		ITermsFilter IFilter.TermsFilter { get; set; }
+
+		IQueryFilter IFilter.QueryFilter { get; set; }
+
+		IAndFiter IFilter.AndFilter { get; set; }
+
+		IOrFilter IFilter.OrFilter { get; set; }
+
+		INotFilter IFilter.NotFilter { get; set; }
+
+		IScriptFilter IFilter.ScriptFilter { get; set; }
+
+		INestedFilter IFilter.NestedFilter { get; set; }
+
+		IRegexpFilter IFilter.RegexpFilter { get; set; }
 
 		public FilterDescriptor<T> Name(string name)
 		{
@@ -181,7 +195,6 @@ namespace Nest
 			return new FilterDescriptor<T> { IsVerbatim = verbatim, IsStrict = verbatim };
 		}
 
-		
 		/// <summary>
 		/// A thin wrapper allowing fined grained control what should happen if a filter is conditionless
 		/// if you need to fallback to something other than a match_all query
@@ -199,7 +212,8 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Exists(Expression<Func<T, object>> fieldDescriptor)
 		{
-			var filter = new ExistsFilter { Field = fieldDescriptor };
+			var filter = new ExistsFilter();
+			((IExistsFilter)filter).Field = fieldDescriptor;
 			this.SetCacheAndName(filter);
 			return this.New(filter, f => f.ExistsFilter = filter);
 		}
@@ -208,7 +222,8 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Exists(string field)
 		{
-			var filter = new ExistsFilter { Field = field };
+			var filter = new ExistsFilter();
+			((IExistsFilter)filter).Field = field;
 			this.SetCacheAndName(filter);
 			return this.New(filter, f => f.ExistsFilter = filter);
 		}
@@ -217,7 +232,8 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Missing(Expression<Func<T, object>> fieldDescriptor)
 		{
-			var filter = new MissingFilter { Field = fieldDescriptor };
+			var filter = new MissingFilter();
+			((IMissingFilter)filter).Field = fieldDescriptor;
 			this.SetCacheAndName(filter);
 			return  this.New(filter, f => f.MissingFilter = filter);
 		}
@@ -226,7 +242,8 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Missing(string field)
 		{
-			var filter = new MissingFilter { Field = field };
+			var filter = new MissingFilter();
+			((IMissingFilter)filter).Field = field;
 			this.SetCacheAndName(filter);
 			return  this.New(filter, f => f.MissingFilter = filter);
 		}
@@ -236,7 +253,8 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Ids(IEnumerable<string> values)
 		{
-			var filter = new IdsFilter { Values = values };
+			var filter = new IdsFilter();
+			((IIdsFilter)filter).Values = values;
 			this.SetCacheAndName(filter);
 			return this.New(filter, f => f.IdsFilter = filter);
 		}
@@ -249,7 +267,9 @@ namespace Nest
 			if (type.IsNullOrEmpty())
 				return CreateConditionlessFilterDescriptor("ids", null);
 
-			var filter = new IdsFilter { Values = values, Type = new[] { type } };
+			var filter = new IdsFilter();
+			((IIdsFilter)filter).Values = values;
+			((IIdsFilter)filter).Type = new [] { type };
 
 			this.SetCacheAndName(filter);
 			return this.New(filter, f => f.IdsFilter = filter);
@@ -262,8 +282,10 @@ namespace Nest
 		{
 			if (!types.HasAny() || types.All(t=>t.IsNullOrEmpty()))
 				return CreateConditionlessFilterDescriptor("ids", null);
-			
-			var filter = new IdsFilter { Values = values, Type = types };
+
+			var filter = new IdsFilter();
+			((IIdsFilter)filter).Values = values;
+			((IIdsFilter)filter).Type = types;
 			
 			this.SetCacheAndName(filter);
 			return  this.New(filter, f => f.IdsFilter = filter);
@@ -272,7 +294,7 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
 		/// </summary>
-		public BaseFilter GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? Type = null)
+		public BaseFilter GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? type = null)
 		{
 			var c = CultureInfo.InvariantCulture;
 			topLeftX.ThrowIfNull("topLeftX");
@@ -281,12 +303,12 @@ namespace Nest
 			bottomRightY.ThrowIfNull("bottomRightY");
 			var geoHashTopLeft = "{0}, {1}".F(topLeftX.ToString(c), topLeftY.ToString(c));
 			var geoHashBottomRight = "{0}, {1}".F(bottomRightX.ToString(c), bottomRightY.ToString(c));
-			return this.GeoBoundingBox(fieldDescriptor, geoHashTopLeft, geoHashBottomRight, Type);
+			return this.GeoBoundingBox(fieldDescriptor, geoHashTopLeft, geoHashBottomRight, type);
 		}
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
 		/// </summary>
-		public BaseFilter GeoBoundingBox(string fieldName, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? Type = null)
+		public BaseFilter GeoBoundingBox(string fieldName, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? type = null)
 		{
 			var c = CultureInfo.InvariantCulture;
 			topLeftX.ThrowIfNull("topLeftX");
@@ -295,31 +317,44 @@ namespace Nest
 			bottomRightY.ThrowIfNull("bottomRightY");
 			var geoHashTopLeft = "{0}, {1}".F(topLeftX.ToString(c), topLeftY.ToString(c));
 			var geoHashBottomRight = "{0}, {1}".F(bottomRightX.ToString(c), bottomRightY.ToString(c));
-			return this.GeoBoundingBox(fieldName, geoHashTopLeft, geoHashBottomRight, Type);
+			return this.GeoBoundingBox(fieldName, geoHashTopLeft, geoHashBottomRight, type);
 		}
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
 		/// </summary>
-		public BaseFilter GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? Type = null)
+		public BaseFilter GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? type = null)
 		{
-			var filter = new GeoBoundingBoxFilter { TopLeft = geoHashTopLeft, BottomRight = geoHashBottomRight };
-			return this.SetDictionary("geo_bounding_box", fieldDescriptor, filter, (d, b) =>
-			{
-				if (Type.HasValue) d.Add("type", Enum.GetName(typeof(GeoExecution), Type.Value));
-				b.GeoBoundingBoxFilter = d;
-			});
+			var filter = new GeoBoundingBoxFilter();
+			((IGeoBoundingBoxFilter)filter).TopLeft = geoHashTopLeft;
+			((IGeoBoundingBoxFilter)filter).BottomRight = geoHashBottomRight;
+			((IGeoBoundingBoxFilter)filter).GeoExecution = type;
+			((IGeoBoundingBoxFilter)filter).Field = fieldDescriptor;
+			((IFilter)this).GeoBoundingBoxFilter = filter;
+			return this;
+
+			//return this.SetDictionary("geo_bounding_box", fieldDescriptor, filter, (d, b) =>
+			//{
+			//	if (type.HasValue) d.Add("type", Enum.GetName(typeof(GeoExecution), type.Value));
+			//	b.GeoBoundingBoxFilter = d;
+			//});
 		}
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
 		/// </summary>
-		public BaseFilter GeoBoundingBox(string fieldName, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? Type = null)
+		public BaseFilter GeoBoundingBox(string fieldName, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? type = null)
 		{
-			var filter = new GeoBoundingBoxFilter { TopLeft = geoHashTopLeft, BottomRight = geoHashBottomRight };
-			return this.SetDictionary("geo_bounding_box", fieldName, filter, (d, b) =>
-			{
-				if (Type.HasValue) d.Add("type", Enum.GetName(typeof(GeoExecution), Type.Value));
-				b.GeoBoundingBoxFilter = d;
-			});
+			var filter = new GeoBoundingBoxFilter();
+			((IGeoBoundingBoxFilter)filter).TopLeft = geoHashTopLeft;
+			((IGeoBoundingBoxFilter)filter).BottomRight = geoHashBottomRight;
+			((IGeoBoundingBoxFilter)filter).GeoExecution = type;
+			((IGeoBoundingBoxFilter)filter).Field = field;
+			((IFilter)this).GeoBoundingBoxFilter = filter;
+			return this;
+			//return this.SetDictionary("geo_bounding_box", fieldName, filter, (d, b) =>
+			//{
+			//	if (type.HasValue) d.Add("type", Enum.GetName(typeof(GeoExecution), type.Value));
+			//	b.GeoBoundingBoxFilter = d;
+			//});
 		}
 
 		/// <summary>
@@ -833,9 +868,9 @@ namespace Nest
 			return new FilterDescriptor<T> { IsConditionless = true, IsVerbatim = this.IsVerbatim, IsStrict = this.IsStrict };
 		}
 
-		private FilterDescriptor<T> New(FilterBase filter, Action<FilterDescriptor<T>> fillProperty)
+		private FilterDescriptor<T> New(FilterBase filter, Action<IFilter> fillProperty)
 		{
-			if (filter.IsConditionless && !this.IsVerbatim)
+			if (((IFilterBase)filter).IsConditionless && !this.IsVerbatim)
 				return CreateConditionlessFilterDescriptor(filter);
 
 			this.SetCacheAndName(filter);
@@ -870,7 +905,7 @@ namespace Nest
 			string type,
 			PropertyPathMarker key,
 			object value,
-			Action<Dictionary<PropertyPathMarker, object>, FilterDescriptor<T>> setter
+			Action<Dictionary<PropertyPathMarker, object>, IFilter> setter
 		)
 		{
 			setter.ThrowIfNull("setter");

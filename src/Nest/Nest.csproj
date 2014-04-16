@@ -138,7 +138,7 @@
     <Compile Include="Domain\Responses\SnapshotResponse.cs" />
     <Compile Include="DSL\DeleteSnapshotDescriptor.cs" />
     <Compile Include="DSL\GetSnapshotDescriptor.cs" />
-    <Compile Include="DSL\IQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\IQueryDescriptor.cs" />
     <Compile Include="DSL\Query\Behaviour\IFieldNameQuery.cs" />
     <Compile Include="DSL\Query\Functions\BoostFactorFunction.cs" />
     <Compile Include="DSL\Query\Functions\ExpFunction.cs" />
@@ -153,6 +153,7 @@
     <Compile Include="DSL\Query\Functions\GaussFunction.cs" />
     <Compile Include="DSL\Query\Functions\LinearFunction.cs" />
     <Compile Include="DSL\Query\Functions\ScriptScoreFunction.cs" />
+    <Compile Include="DSL\Query\SubDescriptors\ISpanSubQuery.cs" />
     <Compile Include="DSL\RestoreDescriptor.cs" />
     <Compile Include="DSL\SnapshotDescriptor.cs" />
     <Compile Include="DSL\DeleteRepositoryDescriptor.cs" />
@@ -296,7 +297,7 @@
     <Compile Include="Domain\Status\IndexStatus.cs" />
     <Compile Include="Domain\Stats\TranslogStats.cs" />
     <Compile Include="DSL\Filter\ConditionlessFilterDescriptor.cs" />
-    <Compile Include="DSL\Filter\Term.cs" />
+    <Compile Include="DSL\Filter\TermFilter.cs" />
     <Compile Include="DSL\Filter\TermsLookupFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoIndexedShapeFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeFilterDescriptor.cs" />
@@ -508,9 +509,9 @@
     <Compile Include="Domain\DSL\Query.cs" />
     <Compile Include="ElasticClient-Bulk.cs" />
     <Compile Include="Domain\Responses\UpdateResponse.cs" />
-    <Compile Include="Domain\DSL\BaseQuery.cs" />
-    <Compile Include="Domain\DSL\BaseFilter.cs" />
-    <Compile Include="DSL\IFilterDescriptor.cs" />
+    <Compile Include="DSL\Query\BaseQuery.cs" />
+    <Compile Include="DSL\Filter\BaseFilter.cs" />
+    <Compile Include="DSL\Filter\IFilterDescriptor.cs" />
     <Compile Include="DSL\Query\TermsQueryDescriptor.cs" />
     <Compile Include="DSL\UpdateDescriptor.cs" />
     <Compile Include="ElasticClient-Update.cs" />
@@ -519,7 +520,7 @@
     <Compile Include="DSL\HighlightFieldDescriptor.cs" />
     <Compile Include="DSL\Paths\QueryPathDescriptor.cs" />
     <Compile Include="DSL\Facets\BaseFacetDescriptor.cs" />
-    <Compile Include="DSL\FilterDescriptor.cs" />
+    <Compile Include="DSL\Filter\FilterDescriptor.cs" />
     <Compile Include="DSL\Filter\NestedFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\RangeFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\HasChildFilterDescriptor.cs" />
@@ -607,15 +608,15 @@
     <Compile Include="DSL\Filter\LimitFilter.cs" />
     <Compile Include="DSL\Filter\IdsFilter.cs" />
     <Compile Include="DSL\Filter\ExistsFilter.cs" />
-    <Compile Include="DSL\RawOrFilterDescriptor.cs" />
-    <Compile Include="DSL\RawOrQueryDescriptor.cs" />
+    <Compile Include="DSL\Filter\RawOrFilterDescriptor.cs" />
+    <Compile Include="DSL\Query\RawOrQueryDescriptor.cs" />
     <Compile Include="DSL\Facets\TermFacetDescriptor.cs" />
     <Compile Include="Domain\Facets\FilterFacet.cs" />
     <Compile Include="Domain\Mapping\ParentTypeMapping.cs" />
     <Compile Include="Domain\Responses\PercolateResponse.cs" />
     <Compile Include="Domain\Responses\UnregisterPercolateResponse.cs" />
     <Compile Include="Domain\Responses\RegisterPercolateResponse.cs" />
-    <Compile Include="DSL\QueryDescriptor.cs" />
+    <Compile Include="DSL\Query\QueryDescriptor.cs" />
     <Compile Include="DSL\SearchDescriptor.cs" />
     <Compile Include="ElasticClient-Percolate.cs" />
     <Compile Include="Domain\Hit\IndexSegment.cs" />
@@ -709,6 +710,7 @@
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
     <Compile Include="Resolvers\Converters\AggregationConverter.cs" />
+    <Compile Include="Resolvers\Converters\FieldNameFilterConverter.cs" />
     <Compile Include="Resolvers\Converters\FieldNameQueryConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\SuggestResponseConverter.cs" />

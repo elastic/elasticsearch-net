@@ -9,19 +9,24 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class GeoIndexedShapeFilterDescriptor : FilterBase
+	public interface IGeoIndexedShapeFilter : IFilterBase
 	{
-		internal override bool IsConditionless
+		[JsonProperty("indexed_shape")]
+		GeoIndexedShapeVector _Shape { get; set; }
+	}
+
+	public class GeoIndexedShapeFilterDescriptor : FilterBase, IGeoIndexedShapeFilter
+	{
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return this._Shape == null || this._Shape.Id.IsNullOrEmpty();
+				return ((IGeoIndexedShapeFilter)this)._Shape == null || ((IGeoIndexedShapeFilter)this)._Shape.Id.IsNullOrEmpty();
 			}
 
 		}
 
-		[JsonProperty("indexed_shape")]
-		internal GeoIndexedShapeVector _Shape { get; set; }
+		GeoIndexedShapeVector IGeoIndexedShapeFilter._Shape { get; set; }
 
 
 		public GeoIndexedShapeFilterDescriptor Lookup<T>(string field, string id, string index = null, string type = null)
@@ -31,7 +36,7 @@ namespace Nest
 
 		private GeoIndexedShapeFilterDescriptor _SetShape<T>(PropertyPathMarker field, string id, string index, string type)
 		{
-			this._Shape = new GeoIndexedShapeVector
+			((IGeoIndexedShapeFilter)this)._Shape = new GeoIndexedShapeVector
 			{
 				Field = field,
 				Id = id,

@@ -6,18 +6,23 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class LimitFilter : FilterBase
+	public interface ILimitFilter : IFilterBase
 	{
-		internal override bool IsConditionless
+		[JsonProperty(PropertyName = "value")]
+		int? Value { get; set; }
+	}
+
+	public class LimitFilter : FilterBase, ILimitFilter
+	{
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return !this.Value.HasValue;
+				return !((ILimitFilter)this).Value.HasValue;
 			}
 
 		}
 
-		[JsonProperty(PropertyName = "value")]
-		public int? Value { get; set;}
+		int? ILimitFilter.Value { get; set;}
 	}
 }

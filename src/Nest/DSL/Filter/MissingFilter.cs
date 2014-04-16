@@ -7,18 +7,23 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class MissingFilter : FilterBase
+	public interface IMissingFilter : IFilterBase
 	{
-		internal override bool IsConditionless
+		[JsonProperty(PropertyName = "field")]
+		PropertyPathMarker Field { get; set; }
+	}
+
+	public class MissingFilter : FilterBase, IMissingFilter
+	{
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return this.Field.IsConditionless();
+				return ((IMissingFilter)this).Field.IsConditionless();
 			}
 
 		}
 
-		[JsonProperty(PropertyName = "field")]
-		public PropertyPathMarker Field { get; set;}
+		PropertyPathMarker IMissingFilter.Field { get; set;}
 	}
 }

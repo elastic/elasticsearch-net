@@ -10,43 +10,52 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class RegexpFilterDescriptor<T> : FilterBase where T : class
+	public interface IRegexpFilter : IFilterBase
 	{
 		[JsonProperty("value")]
-		internal string _Value { get; set; }
+		string _Value { get; set; }
 
 		[JsonProperty("flags")]
-		internal string _Flags { get; set; }
+		string _Flags { get; set; }
 
-		internal PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker _Field { get; set; }
+	}
 
-		internal override bool IsConditionless
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class RegexpFilterDescriptor<T> : FilterBase, IRegexpFilter where T : class
+	{
+		string IRegexpFilter._Value { get; set; }
+
+		string IRegexpFilter._Flags { get; set; }
+
+		PropertyPathMarker IRegexpFilter._Field { get; set; }
+
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return this._Field.IsConditionless() || this._Value.IsNullOrEmpty();
+				return ((IRegexpFilter)this)._Field.IsConditionless() || ((IRegexpFilter)this)._Value.IsNullOrEmpty();
 			}
 		}
 
 		public RegexpFilterDescriptor<T> Value(string regex)
 		{
-			this._Value = regex;
+			((IRegexpFilter)this)._Value = regex;
 			return this;
 		}
 		public RegexpFilterDescriptor<T> Flags(string flags)
 		{
-			this._Flags = flags;
+			((IRegexpFilter)this)._Flags = flags;
 			return this;
 		}
 		public RegexpFilterDescriptor<T> OnField(string path)
 		{
-			this._Field = path;
+			((IRegexpFilter)this)._Field = path;
 			return this;
 		}
 		public RegexpFilterDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			((IRegexpFilter)this)._Field = objectPath;
 			return this;
 		}
 

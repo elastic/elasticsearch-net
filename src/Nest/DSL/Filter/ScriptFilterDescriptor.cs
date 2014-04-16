@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,28 +9,37 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+	public interface IScriptFilter : IFilterBase
+	{
+		[JsonProperty(PropertyName = "script")]
+		string _Script { get; set; }
+
+		[JsonProperty(PropertyName = "params")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		Dictionary<string, object> _Params { get; set; }
+
+		[JsonProperty(PropertyName = "lang")]
+		[JsonConverter(typeof (StringEnumConverter))]
+		Lang? _Lang { get; set; }
+	}
+
 	/// <summary>
 	/// A filter allowing to define scripts as filters.
 	/// Ex: "doc['num1'].value > 1"
 	/// </summary>
-	public class ScriptFilterDescriptor : FilterBase
+	public class ScriptFilterDescriptor : FilterBase, IScriptFilter
 	{
-		[JsonProperty(PropertyName = "script")]
-		internal string _Script { get; set; }
+		string IScriptFilter._Script { get; set; }
 
-		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> _Params { get; set; }
+		Dictionary<string, object> IScriptFilter._Params { get; set; }
 
-		[JsonProperty(PropertyName = "lang")]
-		[JsonConverter(typeof(StringEnumConverter))]
-		internal Lang? _Lang { get; set; }
+		Lang? IScriptFilter._Lang { get; set; }
 
-		internal override bool IsConditionless
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return this._Script.IsNullOrEmpty();
+				return ((IScriptFilter)this)._Script.IsNullOrEmpty();
 			}
 		}
 
@@ -40,7 +50,7 @@ namespace Nest
 		/// <returns>this</returns>
 		public ScriptFilterDescriptor Script(string script)
 		{
-			this._Script = script;
+			((IScriptFilter)this)._Script = script;
 			return this;
 		}
 
@@ -57,7 +67,7 @@ namespace Nest
 		public ScriptFilterDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
-			this._Params = paramDictionary(new FluentDictionary<string, object>());
+			((IScriptFilter)this)._Params = paramDictionary(new FluentDictionary<string, object>());
 			return this;
 		}
 
@@ -69,7 +79,7 @@ namespace Nest
 		public ScriptFilterDescriptor Lang(Lang lang)
 		{
 			lang.ThrowIfNull("lang");
-			this._Lang = lang;
+			((IScriptFilter)this)._Lang = lang;
 			return this;
 		}
 	}

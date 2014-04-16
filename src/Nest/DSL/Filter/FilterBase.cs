@@ -6,17 +6,37 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public abstract class FilterBase {
-
-		internal abstract bool IsConditionless { get; }
+	public interface IFilterBase
+	{
+		bool IsConditionless { get; }
 
 		[JsonProperty(PropertyName = "_cache")]
-		internal bool? _Cache { get; set; }
+		bool? _Cache { get; set; }
 
 		[JsonProperty(PropertyName = "_name")]
-		internal string _Name { get; set; }
+		string _Name { get; set; }
 
 		[JsonProperty(PropertyName = "_cache_key")]
-		internal string _CacheKey { get; set; }
+		string _CacheKey { get; set; }
+	}
+
+	public interface IFieldNameFilter : IFilterBase
+	{
+		string GetFieldName();
+	}
+
+	public abstract class FilterBase : IFilterBase
+	{
+
+		bool IFilterBase.IsConditionless { get { throw new NotImplementedException();} }
+
+		[JsonProperty(PropertyName = "_cache")]
+		bool? IFilterBase._Cache { get; set; }
+
+		[JsonProperty(PropertyName = "_name")]
+		string IFilterBase._Name { get; set; }
+
+		[JsonProperty(PropertyName = "_cache_key")]
+		string IFilterBase._CacheKey { get; set; }
 	}
 }

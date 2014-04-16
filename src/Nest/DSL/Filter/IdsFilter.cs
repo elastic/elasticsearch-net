@@ -7,20 +7,28 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class IdsFilter : FilterBase
+	public interface IIdsFilter : IFilterBase
 	{
-		internal override bool IsConditionless
+		[JsonProperty(PropertyName = "type")]
+		IEnumerable<string> Type { get; set; }
+
+		[JsonProperty(PropertyName = "values")]
+		IEnumerable<string> Values { get; set; }
+	}
+
+	public class IdsFilter : FilterBase, IIdsFilter
+	{
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return !this.Values.HasAny() || this.Values.All(v=>v.IsNullOrEmpty());
+				return !((IIdsFilter)this).Values.HasAny() || ((IIdsFilter)this).Values.All(v=>v.IsNullOrEmpty());
 			}
 
 		}
 
-		[JsonProperty(PropertyName = "type")]
-		public IEnumerable<string> Type { get; set; }
-		[JsonProperty(PropertyName = "values")]
-		public IEnumerable<string> Values { get; set; }
+		IEnumerable<string> IIdsFilter.Type { get; set; }
+
+		IEnumerable<string> IIdsFilter.Values { get; set; }
 	}
 }

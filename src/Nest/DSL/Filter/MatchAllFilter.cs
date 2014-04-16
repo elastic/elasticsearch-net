@@ -6,9 +6,13 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class MatchAllFilter : FilterBase
+	public interface IMatchAllFilter : IFilterBase
 	{
-		internal override bool IsConditionless
+	}
+
+	public class MatchAllFilter : FilterBase, IMatchAllFilter
+	{
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{

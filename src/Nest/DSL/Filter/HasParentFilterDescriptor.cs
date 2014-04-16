@@ -8,45 +8,59 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class HasParentFilterDescriptor<T> : FilterBase where T : class
+	public interface IHasParentFilter : IFilterBase
 	{
-		public HasParentFilterDescriptor()
-		{
-			this._Type = TypeNameMarker.Create<T>();
-		}
-		internal override bool IsConditionless
+		[JsonProperty("type")]
+		TypeNameMarker _Type { get; set; }
+
+		[JsonProperty("_scope")]
+		string _Scope { get; set; }
+
+		[JsonProperty("query")]
+		IQueryDescriptor _QueryDescriptor { get; set; }
+	}
+
+	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
+	public class HasParentFilterDescriptor<T> : FilterBase, IHasParentFilter where T : class
+	{
+		TypeNameMarker IHasParentFilter._Type { get; set; }
+
+		string IHasParentFilter._Scope { get; set;}
+		
+		IQueryDescriptor IHasParentFilter._QueryDescriptor { get; set; }
+
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return this._QueryDescriptor == null || this._QueryDescriptor.IsConditionless || this._Type.IsNullOrEmpty();
+				var pf = ((IHasParentFilter)this);
+				return pf._QueryDescriptor == null 
+					|| pf._QueryDescriptor.IsConditionless 
+					|| pf._Type.IsNullOrEmpty();
 			}
 		}
 
-		[JsonProperty("type")]
-		internal TypeNameMarker _Type { get; set; }
-
-		[JsonProperty("_scope")]
-		internal string _Scope { get; set;}
-		
-		[JsonProperty("query")]
-		internal IQueryDescriptor _QueryDescriptor { get; set; }
+		public HasParentFilterDescriptor()
+		{
+			((IHasParentFilter)this)._Type = TypeNameMarker.Create<T>();
+		}
 
 		public HasParentFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			this._QueryDescriptor = querySelector(q);
+			((IHasParentFilter)this)._QueryDescriptor = querySelector(q);
 			return this;
 		}
 
 		public HasParentFilterDescriptor<T> Scope(string scope)
 		{
-			this._Scope = scope;
+			((IHasParentFilter)this)._Scope = scope;
 			return this;
 		}
+
 		public HasParentFilterDescriptor<T> Type(string type)
 		{
-			this._Type = type;
+			((IHasParentFilter)this)._Type = type;
 			return this;
 		}
 	}

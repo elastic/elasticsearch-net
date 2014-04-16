@@ -55,7 +55,7 @@ namespace Nest
 		[JsonProperty("should")]
 		internal IEnumerable<BaseFilter> _ShouldFilters { get; set; }
 
-		internal override bool IsConditionless
+		public override bool IsConditionless
 		{
 			get
 			{

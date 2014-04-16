@@ -7,34 +7,39 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class GeoShapeFilterDescriptor : FilterBase
+	public interface IGeoShapeFilter : IFilterBase
 	{
-		internal override bool IsConditionless
+		[JsonProperty("shape")]
+		GeoShapeVector _Shape { get; set; }
+	}
+
+	public class GeoShapeFilterDescriptor : FilterBase, IGeoShapeFilter
+	{
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return this._Shape == null || !this._Shape.Coordinates.HasAny();
+				return ((IGeoShapeFilter)this)._Shape == null || !((IGeoShapeFilter)this)._Shape.Coordinates.HasAny();
 			}
 
 		}
 
-		[JsonProperty("shape")]
-		internal GeoShapeVector _Shape { get; set; }
+		GeoShapeVector IGeoShapeFilter._Shape { get; set; }
 
 
 		public GeoShapeFilterDescriptor Type(string type)
 		{
-			if (this._Shape == null)
-				this._Shape = new GeoShapeVector();
-			this._Shape.Type = type;
+			if (((IGeoShapeFilter)this)._Shape == null)
+				((IGeoShapeFilter)this)._Shape = new GeoShapeVector();
+			((IGeoShapeFilter)this)._Shape.Type = type;
 			return this;
 		}
 
 		public GeoShapeFilterDescriptor Coordinates(IEnumerable<IEnumerable<double>> coordinates)
 		{
-			if (this._Shape == null)
-				this._Shape = new GeoShapeVector();
-			this._Shape.Coordinates = coordinates;
+			if (((IGeoShapeFilter)this)._Shape == null)
+				((IGeoShapeFilter)this)._Shape = new GeoShapeVector();
+			((IGeoShapeFilter)this)._Shape.Coordinates = coordinates;
 			return this;
 		}
 

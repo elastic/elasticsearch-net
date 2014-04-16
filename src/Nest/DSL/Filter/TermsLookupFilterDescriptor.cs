@@ -9,34 +9,52 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public interface ITermsLookupFilterDescriptor : IFilterBase
+	{
+		[JsonProperty("id")]
+		string _Id { get; set; }
+
+		[JsonProperty("type")]
+		TypeNameMarker _Type { get; set; }
+
+		[JsonProperty("index")]
+		IndexNameMarker _Index { get; set; }
+
+		[JsonProperty("path")]
+		PropertyPathMarker _Path { get; set; }
+
+		[JsonProperty("routing")]
+		string _Routing { get; set; }
+	}
+
 	/// <summary>
 	/// http://www.elasticsearch.org/blog/terms-filter-lookup/
 	/// </summary>
-	public class TermsLookupFilterDescriptor : FilterBase
+	public class TermsLookupFilterDescriptor : FilterBase, ITermsLookupFilterDescriptor
 	{
-		internal override bool IsConditionless
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return this._Type == null || this._Index == null || this._Id.IsNullOrEmpty() 
-					|| this._Path.IsConditionless();
+				return ((ITermsLookupFilterDescriptor)this)._Type == null || ((ITermsLookupFilterDescriptor)this)._Index == null || ((ITermsLookupFilterDescriptor)this)._Id.IsNullOrEmpty() 
+					|| ((ITermsLookupFilterDescriptor)this)._Path.IsConditionless();
 			}
 		}
 
 		[JsonProperty("id")]
-		internal string _Id { get; set; }
+		string ITermsLookupFilterDescriptor._Id { get; set; }
 
 		[JsonProperty("type")]
-		internal TypeNameMarker _Type { get; set; }
+		TypeNameMarker ITermsLookupFilterDescriptor._Type { get; set; }
 
 		[JsonProperty("index")]
-		internal IndexNameMarker _Index { get; set; }
+		IndexNameMarker ITermsLookupFilterDescriptor._Index { get; set; }
 
 		[JsonProperty("path")]
-		internal PropertyPathMarker _Path { get; set; }
+		PropertyPathMarker ITermsLookupFilterDescriptor._Path { get; set; }
 
 		[JsonProperty("routing")]
-		internal string _Routing { get; set; }
+		string ITermsLookupFilterDescriptor._Routing { get; set; }
 
 
 		public TermsLookupFilterDescriptor Lookup<T>(string field, string id, string index = null, string type = null)
@@ -46,10 +64,10 @@ namespace Nest
 
 		private TermsLookupFilterDescriptor _Lookup<T>(PropertyPathMarker field, string id, string index, string type)
 		{
-			this._Path = field;
-			this._Id = id;
-			this._Type = type ?? new TypeNameMarker {Type = typeof (T)};
-			this._Index = index ?? new IndexNameMarker {Type = typeof (T)};
+			((ITermsLookupFilterDescriptor)this)._Path = field;
+			((ITermsLookupFilterDescriptor)this)._Id = id;
+			((ITermsLookupFilterDescriptor)this)._Type = type ?? new TypeNameMarker {Type = typeof (T)};
+			((ITermsLookupFilterDescriptor)this)._Index = index ?? new IndexNameMarker {Type = typeof (T)};
 			return this;
 		}
 
@@ -63,7 +81,7 @@ namespace Nest
 		/// </summary>
 		public TermsLookupFilterDescriptor Type(string type)
 		{
-			this._Type = type;
+			((ITermsLookupFilterDescriptor)this)._Type = type;
 			return this;
 		}
 
@@ -72,7 +90,7 @@ namespace Nest
 		/// </summary>
 		public TermsLookupFilterDescriptor Index(string index)
 		{
-			this._Index = index;
+			((ITermsLookupFilterDescriptor)this)._Index = index;
 			return this;
 		}
 
@@ -81,7 +99,7 @@ namespace Nest
 		/// </summary>
 		public TermsLookupFilterDescriptor Routing(string routing)
 		{
-			this._Routing = routing;
+			((ITermsLookupFilterDescriptor)this)._Routing = routing;
 			return this;
 		}
 	}

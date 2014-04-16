@@ -10,18 +10,26 @@ using System;
 
 namespace Nest
 {
-	public class GeoDistanceFilterDescriptor : FilterBase
+	public interface IGeoDistanceFilter : IFilterBase
 	{
-		internal string _Location { get; set; }
-		internal object _Distance { get; set; }
-		internal string _GeoUnit { get; set; }
-		internal string _GeoOptimizeBBox { get; set; }
+		string _Location { get; set; }
+		object _Distance { get; set; }
+		string _GeoUnit { get; set; }
+		string _GeoOptimizeBBox { get; set; }
+	}
 
-		internal override bool IsConditionless
+	public class GeoDistanceFilterDescriptor : FilterBase, IGeoDistanceFilter
+	{
+		string IGeoDistanceFilter._Location { get; set; }
+		object IGeoDistanceFilter._Distance { get; set; }
+		string IGeoDistanceFilter._GeoUnit { get; set; }
+		string IGeoDistanceFilter._GeoOptimizeBBox { get; set; }
+
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return this._Location.IsNullOrEmpty() || this._Distance == null;
+				return ((IGeoDistanceFilter)this)._Location.IsNullOrEmpty() || ((IGeoDistanceFilter)this)._Distance == null;
 			}
 
 		}
@@ -29,28 +37,28 @@ namespace Nest
 		public GeoDistanceFilterDescriptor Location(double Lat, double Lon)
 		{
 			var c = CultureInfo.InvariantCulture;
-			this._Location = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
+			((IGeoDistanceFilter)this)._Location = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
 			return this;
 		}
 		public GeoDistanceFilterDescriptor Location(string geoHash)
 		{
-			this._Location = geoHash;
+			((IGeoDistanceFilter)this)._Location = geoHash;
 			return this;
 		}
 		public GeoDistanceFilterDescriptor Distance(string distance)
 		{
-			this._Distance = distance;
+			((IGeoDistanceFilter)this)._Distance = distance;
 			return this;
 		}
 		public GeoDistanceFilterDescriptor Distance(double distance, GeoUnit unit)
 		{
-			this._Distance = distance;
-			this._GeoUnit = Enum.GetName(typeof(GeoUnit), unit);
+			((IGeoDistanceFilter)this)._Distance = distance;
+			((IGeoDistanceFilter)this)._GeoUnit = Enum.GetName(typeof(GeoUnit), unit);
 			return this;
 		}
 		public GeoDistanceFilterDescriptor Optimize(GeoOptimizeBBox optimize)
 		{
-			this._GeoOptimizeBBox = Enum.GetName(typeof(GeoOptimizeBBox), optimize);
+			((IGeoDistanceFilter)this)._GeoOptimizeBBox = Enum.GetName(typeof(GeoOptimizeBBox), optimize);
 			return this;
 		}
 	}

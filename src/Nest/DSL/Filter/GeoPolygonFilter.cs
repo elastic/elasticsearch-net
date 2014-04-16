@@ -7,19 +7,25 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class GeoPolygonFilter : FilterBase
+	public interface IGeoPolygonFilter : IFilterBase
 	{
-		internal override bool IsConditionless
+		[JsonProperty("points")]
+		IEnumerable<string> Points { get; set; }
+	}
+
+	public class GeoPolygonFilter : FilterBase, IGeoPolygonFilter
+	{
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return !this.Points.HasAny() || this.Points.All(p=>p.IsNullOrEmpty());
+				var gf = ((IGeoPolygonFilter)this);
+				return !gf.Points.HasAny() || gf.Points.All(p => p.IsNullOrEmpty());
 			}
 
 		}
 
-		[JsonProperty("points")]
-		public IEnumerable<string> Points { get; set; }
+		IEnumerable<string> IGeoPolygonFilter.Points { get; set; }
 
 	}
 }

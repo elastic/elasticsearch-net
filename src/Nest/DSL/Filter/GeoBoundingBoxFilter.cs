@@ -2,26 +2,43 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class GeoBoundingBoxFilter : FilterBase
+	public interface IGeoBoundingBoxFilter : IFilterBase
 	{
-		internal override bool IsConditionless
+		PropertyPathMarker Field { get; set; }
+		
+		[JsonProperty("top_left")]
+		string TopLeft { get; set; }
+
+		[JsonProperty("bottom_right")]
+		string BottomRight { get; set; }
+		
+		[JsonProperty("type")]
+		GeoExecution? GeoExecution { get; set; }
+	}
+
+	public class GeoBoundingBoxFilter : FilterBase, IGeoBoundingBoxFilter
+	{
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return this.TopLeft.IsNullOrEmpty() || this.BottomRight.IsNullOrEmpty();
+				return ((IGeoBoundingBoxFilter)this).TopLeft.IsNullOrEmpty() || ((IGeoBoundingBoxFilter)this).BottomRight.IsNullOrEmpty();
 			}
-
 		}
 
-		[JsonProperty("top_left")]
-		public string TopLeft { get; set; }
-		[JsonProperty("bottom_right")]
-		public string BottomRight { get; set; }
+		PropertyPathMarker IGeoBoundingBoxFilter.Field { get; set; }
+
+		string IGeoBoundingBoxFilter.TopLeft { get; set; }
+
+		string IGeoBoundingBoxFilter.BottomRight { get; set; }
+
+		GeoExecution? IGeoBoundingBoxFilter.GeoExecution { get; set; }
 
 	}
 }

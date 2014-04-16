@@ -7,18 +7,24 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class TypeFilter : FilterBase
+	public interface ITypeFilter : IFilterBase
 	{
-		internal override bool IsConditionless
+		[JsonProperty(PropertyName = "value")]
+		TypeNameMarker Value { get; set; }
+	}
+
+	public class TypeFilter : FilterBase, ITypeFilter
+	{
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return this.Value.IsConditionless();
+				return ((ITypeFilter)this).Value.IsConditionless();
 			}
 
 		}
 
 		[JsonProperty(PropertyName = "value")]
-		public TypeNameMarker Value { get; set; }
+		TypeNameMarker ITypeFilter.Value { get; set; }
 	}
 }

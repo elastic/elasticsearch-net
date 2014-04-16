@@ -8,44 +8,57 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class HasChildFilterDescriptor<T> : FilterBase where T : class
+	public interface IHasChildFilter : IFilterBase
 	{
-		public HasChildFilterDescriptor()
-		{
-			this._Type = TypeNameMarker.Create<T>();
-		}
-		internal override bool IsConditionless
+		[JsonProperty("type")]
+		TypeNameMarker _Type { get; set; }
+
+		[JsonProperty("_scope")]
+		string _Scope { get; set; }
+
+		[JsonProperty("query")]
+		IQueryDescriptor _QueryDescriptor { get; set; }
+	}
+
+	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
+	public class HasChildFilterDescriptor<T> : FilterBase, IHasChildFilter where T : class
+	{
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return this._QueryDescriptor == null || this._QueryDescriptor.IsConditionless || this._Type.IsNullOrEmpty();
+				var hf = ((IHasChildFilter)this);
+				return hf._QueryDescriptor == null || hf._QueryDescriptor.IsConditionless || hf._Type.IsNullOrEmpty();
 			}
 		}
 
-		[JsonProperty("type")]
-		internal TypeNameMarker _Type { get; set; }
+		TypeNameMarker IHasChildFilter._Type { get; set; }
 
-		[JsonProperty("_scope")]
-		internal string _Scope { get; set;}
+		string IHasChildFilter._Scope { get; set;}
 		
-		[JsonProperty("query")]
-		internal IQueryDescriptor _QueryDescriptor { get; set; }
+		IQueryDescriptor IHasChildFilter._QueryDescriptor { get; set; }
+
+		public HasChildFilterDescriptor()
+		{
+			((IHasChildFilter)this)._Type = TypeNameMarker.Create<T>();
+		}
 
 		public HasChildFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			this._QueryDescriptor = querySelector(q);
+			((IHasChildFilter)this)._QueryDescriptor = querySelector(q);
 			return this;
 		}
+		
 		public HasChildFilterDescriptor<T> Scope(string scope)
 		{
-			this._Scope = scope;
+			((IHasChildFilter)this)._Scope = scope;
 			return this;
 		}
+
 		public HasChildFilterDescriptor<T> Type(string type)
 		{
-			this._Type = type;
+			((IHasChildFilter)this)._Type = type;
 			return this;
 		}
 	}
