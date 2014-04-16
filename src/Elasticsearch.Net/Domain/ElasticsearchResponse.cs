@@ -196,12 +196,19 @@ namespace Elasticsearch.Net
 			else if (typeof(T) == typeof(byte[]))
 				response = (this.Response as byte[]).Utf8String();
 
+			string requestJson = null;
+		    
+            if (r.Request != null)
+            {
+                requestJson = r.Request.Utf8String();
+            }
+				
 			var print = _printFormat.F(
 			  Environment.NewLine,
 			  r.HttpStatusCode.HasValue ? r.HttpStatusCode.Value.ToString(CultureInfo.InvariantCulture) : "-1",
 			  r.RequestMethod,
 			  r.RequestUrl,
-			  r.Request,
+			  requestJson,
 			  response
 			);
 			if (!this.Success && e != null)
