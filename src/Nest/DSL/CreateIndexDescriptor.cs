@@ -118,7 +118,16 @@ namespace Nest
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
 			var d = typeMappingDescriptor(new PutMappingDescriptor<T>(this._connectionSettings));
 			var typeMapping = d._Mapping;
-			typeMapping.Name = typeof (T);
+
+			if (d._Type != null)
+			{
+				typeMapping.Name = d._Type.Name != null ? (PropertyNameMarker)d._Type.Name : d._Type.Type;
+			}
+			else
+			{
+				typeMapping.Name = typeof(T);
+			}
+
 			this._IndexSettings.Mappings.Add(typeMapping);
 
 			return this;
@@ -133,7 +142,16 @@ namespace Nest
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
 			var d = typeMappingDescriptor(new PutMappingDescriptor<T>(this._connectionSettings) { _Mapping = rootObjectMapping,});
 			var typeMapping = d._Mapping;
-			typeMapping.Name = typeof (T);
+
+			if (d._Type != null)
+			{
+				typeMapping.Name = d._Type.Name != null ? (PropertyNameMarker)d._Type.Name : d._Type.Type;
+			}
+			else
+			{
+				typeMapping.Name = typeof (T);
+			}
+
 			this._IndexSettings.Mappings.Add(typeMapping);
 
 			return this;
