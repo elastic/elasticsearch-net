@@ -29,8 +29,10 @@ namespace Nest.Resolvers
 
 			if (defaultIndices == null)
 				return this._connectionSettings.DefaultIndex;
-			if (defaultIndices.ContainsKey(type) && !string.IsNullOrWhiteSpace(defaultIndices[type]))
-				return defaultIndices[type];
+
+			string value;
+			if (defaultIndices.TryGetValue(type, out value) && !string.IsNullOrWhiteSpace(value))
+				return value;
 			return this._connectionSettings.DefaultIndex;
 		}
 
