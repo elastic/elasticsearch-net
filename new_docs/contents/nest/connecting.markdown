@@ -14,10 +14,6 @@ This section describes how to instantiate a client and have it connect to the se
 `NEST` follows pretty much the same design as `Elasticsearch.Net` when it comes to choosing 
 the right [connection strategy](/elasticsearch-net/connecting.html)
 
-    new ElasticClient();
-
-will create a non failover client that talks to `http://localhost:9200`.
-
     var uri = new Uri("http://mynode.somewhere.com/");
     var settings = new ConnectionSettings(uri, defaultIndex: "my-application");
 
