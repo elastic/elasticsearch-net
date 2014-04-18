@@ -60,7 +60,6 @@ namespace Nest.Tests.Unit.Search.Suggest
 
 			var expected = @"{
                               ""fuzzy"": {
-                                ""fuzziness"": ""auto""
                               },
                               ""field"": ""suggest""
                             }";
@@ -183,7 +182,6 @@ namespace Nest.Tests.Unit.Search.Suggest
 						text: ""n"",
 						completion: {
 							fuzzy: {
-								fuzziness: ""auto""
 							},
 							field: ""name""
 						}

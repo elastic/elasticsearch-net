@@ -10,7 +10,7 @@ namespace Nest.DSL.Suggest
 
 		public FuzzinessSuggestDescriptor()
 		{
-			this._Fuzziness = "auto";
+			this._Fuzziness = null;
 		}
 
 		public FuzzinessSuggestDescriptor<T> Fuzziness(string fuzziness)
