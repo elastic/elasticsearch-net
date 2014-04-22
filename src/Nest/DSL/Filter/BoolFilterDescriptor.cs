@@ -24,7 +24,7 @@ namespace Nest
 				);
 		}
 		
-		internal static IEnumerable<BaseFilter> MergeShouldFilters(this BaseFilter lbq, BaseFilter rbq)
+		internal static IEnumerable<IFilterDescriptor> MergeShouldFilters(this IFilterDescriptor lbq, IFilterDescriptor rbq)
 		{
 			var lBoolDescriptor = lbq.BoolFilterDescriptor;
 			var lHasShouldFilters = lBoolDescriptor != null &&
@@ -44,18 +44,18 @@ namespace Nest
 
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class BoolBaseFilterDescriptor : FilterBase
+	public class BoolBaseFilterDescriptor : FilterBase , IFilterBase
 	{
 		[JsonProperty("must")]
-		internal IEnumerable<BaseFilter> _MustFilters { get; set; }
+		internal IEnumerable<IFilterDescriptor> _MustFilters { get; set; }
 
 		[JsonProperty("must_not")]
-		internal IEnumerable<BaseFilter> _MustNotFilters { get; set; }
+		internal IEnumerable<IFilterDescriptor> _MustNotFilters { get; set; }
 
 		[JsonProperty("should")]
-		internal IEnumerable<BaseFilter> _ShouldFilters { get; set; }
+		internal IEnumerable<IFilterDescriptor> _ShouldFilters { get; set; }
 
-		public override bool IsConditionless
+		bool IFilterBase.IsConditionless
 		{
 			get
 			{
@@ -71,12 +71,12 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class BoolFilterDescriptor<T> : BoolBaseFilterDescriptor where T : class
 	{
-		public BoolFilterDescriptor<T> Must(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
+		public BoolFilterDescriptor<T> Must(params Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor>[] filters)
 		{
-			var descriptors = new List<BaseFilter>();
+			var descriptors = new List<BaseFilterDescriptor>();
 			foreach (var selector in filters)
 			{
-				var filter = new FilterDescriptor<T>();
+				var filter = new FilterDescriptorDescriptor<T>();
 				var f = selector(filter);
 				if (f.IsConditionless)
 					continue;
@@ -86,10 +86,10 @@ namespace Nest
 			return this;
 		}
 
-		public BoolFilterDescriptor<T> Must(params BaseFilter[] filters)
+		public BoolFilterDescriptor<T> Must(params BaseFilterDescriptor[] filtersDescriptor)
 		{
-			var descriptors = new List<BaseFilter>();
-			foreach (var f in filters)
+			var descriptors = new List<BaseFilterDescriptor>();
+			foreach (var f in filtersDescriptor)
 			{
 				if (f.IsConditionless)
 					continue;
@@ -99,12 +99,12 @@ namespace Nest
 			return this;
 		}
 
-		public BoolFilterDescriptor<T> MustNot(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
+		public BoolFilterDescriptor<T> MustNot(params Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor>[] filters)
 		{
-			var descriptors = new List<BaseFilter>();
+			var descriptors = new List<BaseFilterDescriptor>();
 			foreach (var selector in filters)
 			{
-				var filter = new FilterDescriptor<T>();
+				var filter = new FilterDescriptorDescriptor<T>();
 				var f = selector(filter);
 				if (f.IsConditionless)
 					continue;
@@ -114,10 +114,10 @@ namespace Nest
 			return this;
 		}
 
-		public BoolFilterDescriptor<T> MustNot(params BaseFilter[] filters)
+		public BoolFilterDescriptor<T> MustNot(params BaseFilterDescriptor[] filtersDescriptor)
 		{
-			var descriptors = new List<BaseFilter>();
-			foreach (var f in filters)
+			var descriptors = new List<BaseFilterDescriptor>();
+			foreach (var f in filtersDescriptor)
 			{
 				if (f.IsConditionless)
 					continue;
@@ -127,12 +127,12 @@ namespace Nest
 			return this;
 		}
 	
-		public BoolFilterDescriptor<T> Should(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
+		public BoolFilterDescriptor<T> Should(params Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor>[] filters)
 		{
-			var descriptors = new List<BaseFilter>();
+			var descriptors = new List<BaseFilterDescriptor>();
 			foreach (var selector in filters)
 			{
-				var filter = new FilterDescriptor<T>();
+				var filter = new FilterDescriptorDescriptor<T>();
 				var f = selector(filter);
 				if (f.IsConditionless)
 					continue;
@@ -142,10 +142,10 @@ namespace Nest
 			return this;
 		}
 
-		public BoolFilterDescriptor<T> Should(params BaseFilter[] filters)
+		public BoolFilterDescriptor<T> Should(params BaseFilterDescriptor[] filtersDescriptor)
 		{
-			var descriptors = new List<BaseFilter>();
-			foreach (var f in filters)
+			var descriptors = new List<BaseFilterDescriptor>();
+			foreach (var f in filtersDescriptor)
 			{
 				if (f.IsConditionless)
 					continue;

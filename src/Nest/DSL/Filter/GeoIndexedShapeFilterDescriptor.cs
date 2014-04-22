@@ -9,7 +9,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IGeoIndexedShapeFilter : IFilterBase
+	public interface IGeoIndexedShapeFilter : IGeoShapeBaseFilter
 	{
 		[JsonProperty("indexed_shape")]
 		GeoIndexedShapeVector _Shape { get; set; }

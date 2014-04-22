@@ -46,6 +46,8 @@ namespace Nest.Tests.Integration.Index
 			};
 			var response = client.Index(newProduct);
 
+			client.Index("", f => f.Index("blah"));
+
 			var productInElasticsearch = client.Source<Product>(id);
 			Assert.NotNull(productInElasticsearch);
 			Assert.AreEqual(productInElasticsearch.Id, id);

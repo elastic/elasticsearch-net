@@ -14,7 +14,7 @@ namespace Nest
 		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		BaseFilter Filter { get; set; }
+		BaseFilterDescriptor FilterDescriptor { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -22,19 +22,19 @@ namespace Nest
 	{
 		IQueryDescriptor IFilteredQuery.Query { get; set; }
 
-		BaseFilter IFilteredQuery.Filter { get; set; }
+		BaseFilterDescriptor IFilteredQuery.FilterDescriptor { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				if (((IFilteredQuery)this).Query == null && ((IFilteredQuery)this).Filter == null)
+				if (((IFilteredQuery)this).Query == null && ((IFilteredQuery)this).FilterDescriptor == null)
 					return true;
-				if (((IFilteredQuery)this).Filter == null && ((IFilteredQuery)this).Query != null)
+				if (((IFilteredQuery)this).FilterDescriptor == null && ((IFilteredQuery)this).Query != null)
 					return ((IFilteredQuery)this).Query.IsConditionless;
-				if (((IFilteredQuery)this).Filter != null && ((IFilteredQuery)this).Query == null)
-					return ((IFilteredQuery)this).Filter.IsConditionless;
-				return ((IFilteredQuery)this).Query.IsConditionless && ((IFilteredQuery)this).Filter.IsConditionless;
+				if (((IFilteredQuery)this).FilterDescriptor != null && ((IFilteredQuery)this).Query == null)
+					return ((IFilteredQuery)this).FilterDescriptor.IsConditionless;
+				return ((IFilteredQuery)this).Query.IsConditionless && ((IFilteredQuery)this).FilterDescriptor.IsConditionless;
 			}
 		}
 
@@ -48,13 +48,13 @@ namespace Nest
 			return this;
 		}
 
-		public FilteredQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
+		public FilteredQueryDescriptor<T> Filter(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
-			var filter = new FilterDescriptor<T>();
+			var filter = new FilterDescriptorDescriptor<T>();
 			var f = filterSelector(filter);
 
-			((IFilteredQuery)this).Filter = f;
+			((IFilteredQuery)this).FilterDescriptor = f;
 			return this;
 		}
 	}

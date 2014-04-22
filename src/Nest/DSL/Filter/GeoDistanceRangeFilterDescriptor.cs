@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers;
 using Newtonsoft.Json;
 using System.Globalization;
 using Elasticsearch.Net;
@@ -10,6 +11,7 @@ namespace Nest
 {
 	public interface IGeoDistanceRangeFilter : IFilterBase
 	{
+		PropertyPathMarker Field { get; set; }
 		string _Location { get; set; }
 		object _FromDistance { get; set; }
 		object _ToDistance { get; set; }
@@ -19,6 +21,7 @@ namespace Nest
 
 	public class GeoDistanceRangeFilterDescriptor : FilterBase, IGeoDistanceRangeFilter
 	{
+		PropertyPathMarker IGeoDistanceRangeFilter.Field { get; set; }
 		string IGeoDistanceRangeFilter._Location { get; set; }
 		object IGeoDistanceRangeFilter._FromDistance { get; set; }
 		object IGeoDistanceRangeFilter._ToDistance { get; set; }

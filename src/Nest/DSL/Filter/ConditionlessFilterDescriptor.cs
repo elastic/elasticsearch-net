@@ -10,34 +10,34 @@ namespace Nest
 {
 	public class ConditionlessFilterDescriptor<T> where T : class
 	{
-		internal BaseFilter _Filter { get; set; }
+		internal BaseFilterDescriptor FilterDescriptor { get; set; }
 
-		internal BaseFilter _Fallback { get; set; }
+		internal BaseFilterDescriptor _Fallback { get; set; }
 
 		internal bool IsConditionless
 		{
 			get
 			{
-				return (this._Filter == null || this._Filter.IsConditionless)
+				return (this.FilterDescriptor == null || this.FilterDescriptor.IsConditionless)
 					   && (this._Fallback == null || this._Fallback.IsConditionless);
 
 			}
 		}
 
-		public ConditionlessFilterDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
+		public ConditionlessFilterDescriptor<T> Filter(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
-			var filter = new FilterDescriptor<T>();
+			var filter = new FilterDescriptorDescriptor<T>();
 			var f = filterSelector(filter);
 
-			this._Filter = f;
+			this.FilterDescriptor = f;
 			return this;
 		}
 
-		public ConditionlessFilterDescriptor<T> Fallback(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
+		public ConditionlessFilterDescriptor<T> Fallback(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
-			var filter = new FilterDescriptor<T>();
+			var filter = new FilterDescriptorDescriptor<T>();
 			var f = filterSelector(filter);
 
 			this._Fallback = f;

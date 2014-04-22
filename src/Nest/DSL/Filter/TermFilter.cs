@@ -11,7 +11,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface ITermFilter : IFilterBase
+	[JsonConverter(typeof(CustomJsonConverter))]
+	public interface ITermFilter : IFilterBase, ICustomJson
 	{
 		PropertyPathMarker Field { get; set; }
 		object Value { get; set; }
@@ -20,7 +21,7 @@ namespace Nest
 
 	[JsonConverter(typeof(CustomJsonConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class TermFilter : FilterBase, ICustomJson, ITermFilter
+	public class TermFilter : FilterBase, ITermFilter
 	{
 		PropertyPathMarker ITermFilter.Field { get; set; }
 		object ITermFilter.Value { get; set; }
@@ -41,11 +42,7 @@ namespace Nest
 			return new Dictionary<object, object>
 			{
 				{
-					tf.Field, new Dictionary<string, object>
-					{
-						{ "value", tf.Value },
-						{ "boost", tf.Boost },
-					}
+					tf.Field,  tf.Value 
 				}
 			};
 		}

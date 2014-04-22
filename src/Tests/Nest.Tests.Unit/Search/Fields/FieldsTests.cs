@@ -37,7 +37,6 @@ namespace Nest.Tests.Unit.Search.Fields
 				.Types(typeof(ClassA),typeof(ClassB),typeof(ClassC),typeof(ClassD))
 				.Fields(p=>p.Lang)
 			);
-
 			results.Total.Should().Be(1605);
 
 			results.Hits.Should().NotBeNull().And.HaveCount(10);
@@ -48,6 +47,11 @@ namespace Nest.Tests.Unit.Search.Fields
 			classAHit.Fields.Should().NotBeNull();
 			var lang = classAHit.Fields.FieldValue<ClassA, string>(p => p.Lang).FirstOrDefault();
 			lang.Should().NotBeNullOrEmpty();
+			var lang2 = classAHit.Fields.FieldValue<string[]>("lang").FirstOrDefault();
+			lang2.Should().NotBeNullOrEmpty();
+
+			
+			 client.IndexExists(i=>i.IgnoreUnavailable())
 
 			
 		}

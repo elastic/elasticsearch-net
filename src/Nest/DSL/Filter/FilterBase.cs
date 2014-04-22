@@ -8,6 +8,7 @@ namespace Nest
 {
 	public interface IFilterBase
 	{
+		[JsonIgnore]
 		bool IsConditionless { get; }
 
 		[JsonProperty(PropertyName = "_cache")]
@@ -28,6 +29,7 @@ namespace Nest
 	public abstract class FilterBase : IFilterBase
 	{
 
+		[JsonIgnore]
 		bool IFilterBase.IsConditionless { get { throw new NotImplementedException();} }
 
 		[JsonProperty(PropertyName = "_cache")]

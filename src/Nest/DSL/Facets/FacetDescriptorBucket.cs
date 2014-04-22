@@ -37,7 +37,7 @@ namespace Nest
     public BaseQuery Query { get; set; }
 
     [JsonProperty(PropertyName = "filter")]
-    public BaseFilter Filter { get; set; }
+    public BaseFilterDescriptor FilterDescriptor { get; set; }
 
     [JsonProperty(PropertyName = "statistical")]
     public StatisticalFacetDescriptor<T> Statistical { get; set; }
@@ -49,6 +49,6 @@ namespace Nest
     public GeoDistanceFacetDescriptor<T> GeoDistance { get; set; }
 
     [JsonProperty(PropertyName = "facet_filter")]
-    public BaseFilter FacetFilter { get; set; }
+    public BaseFilterDescriptor FacetFilterDescriptor { get; set; }
   }
 }

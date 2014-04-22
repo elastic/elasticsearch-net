@@ -113,6 +113,8 @@ namespace Nest.Resolvers
 
 			defaultProperties = PropertiesOf<IQuery>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IQueryDescriptor>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IFilterBase>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IFilterDescriptor>(type, memberSerialization, defaultProperties, lookup);
 			return defaultProperties;
 		}
 

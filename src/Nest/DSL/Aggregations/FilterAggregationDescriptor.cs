@@ -10,18 +10,18 @@ namespace Nest
 		, ICustomJson
 		where T : class
 	{
-		internal BaseFilter _Filter { get; set; }
+		internal BaseFilterDescriptor FilterDescriptor { get; set; }
 
-		public FilterAggregationDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> selector)
+		public FilterAggregationDescriptor<T> Filter(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> selector)
 		{
-			this._Filter = selector(new FilterDescriptor<T>());
+			this.FilterDescriptor = selector(new FilterDescriptorDescriptor<T>());
 			return this;
 		}
 
 
 		object ICustomJson.GetCustomJson()
 		{
-			return _Filter;
+			return FilterDescriptor;
 		}
 	}
 }

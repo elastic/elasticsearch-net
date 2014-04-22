@@ -21,7 +21,7 @@ namespace Nest
 		internal string _Nested { get; set; }
 		internal string _Scope { get; set; }
 		internal bool? _IsGlobal { get; set; }
-		internal BaseFilter _FacetFilter { get; set; }
+		internal BaseFilterDescriptor FacetFilterDescriptor { get; set; }
 		internal string _PinLocation { get; set; }
 		internal PropertyPathMarker _Field { get; set; }
 		internal PropertyPathMarker _ValueField { get; set; }

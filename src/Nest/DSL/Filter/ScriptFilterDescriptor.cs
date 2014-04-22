@@ -9,6 +9,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+
 	public interface IScriptFilter : IFilterBase
 	{
 		[JsonProperty(PropertyName = "script")]

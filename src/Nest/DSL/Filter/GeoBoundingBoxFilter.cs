@@ -8,6 +8,30 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public interface IPrefixFilter : IFilterBase
+	{
+		PropertyPathMarker Field { get; set; }
+		string Prefix { get; set; }
+	}
+	public class PrefixFilter : FilterBase, IPrefixFilter
+	{
+		bool IFilterBase.IsConditionless { get { return ((IPrefixFilter)this).Field.IsConditionless() || ((IPrefixFilter)this).Prefix.IsNullOrEmpty(); } }
+
+		PropertyPathMarker IPrefixFilter.Field { get; set; }
+		string IPrefixFilter.Prefix { get; set; }
+	} 
+
+	public interface IQueryFilter : IFilterBase
+	{
+		
+	}
+	public class QueryFilter : FilterBase, IQueryFilter
+	{
+		
+	}
+
+
+
 	public interface IGeoBoundingBoxFilter : IFilterBase
 	{
 		PropertyPathMarker Field { get; set; }

@@ -14,12 +14,20 @@ using System.Collections;
 
 namespace Nest
 {
-	public interface IFilter
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IFilterDescriptor
 	{
+		[JsonIgnore]
 		string _Name { get; set; }
+		[JsonIgnore]
 		string _CacheKey { get; set; }
+		[JsonIgnore]
 		bool? _Cache { get; set; }
+		[JsonIgnore]
 		bool IsConditionless { get; }
+
+		[JsonProperty(PropertyName = "bool")]
+		BoolBaseFilterDescriptor BoolFilterDescriptor { get; set; }
 
 		[JsonProperty(PropertyName = "exists")]
 		IExistsFilter ExistsFilter { get; set; }
@@ -31,24 +39,19 @@ namespace Nest
 		IIdsFilter IdsFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_bounding_box")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IGeoBoundingBoxFilter GeoBoundingBoxFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_distance")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IGeoDistanceFilter GeoDistanceFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_distance_range")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IGeoDistanceRangeFilter GeoDistanceRangeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_polygon")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IGeoPolygonFilter GeoPolygonFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_shape")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IGeoShapeFilter GeoShapeFilter { get; set; }
+		IGeoShapeBaseFilter GeoShapeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "limit")]
 		ILimitFilter LimitFilter { get; set; }
@@ -66,151 +69,88 @@ namespace Nest
 		IHasParentFilter HasParentFilter { get; set; }
 
 		[JsonProperty(PropertyName = "numeric_range")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		INumericRangeFilter NumericRangeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "range")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IRangeFilter RangeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "prefix")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IPrefixFilter PrefixFilter { get; set; }
 
 		[JsonProperty(PropertyName = "term")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		ITermFilter TermFilter { get; set; }
 
 		[JsonProperty(PropertyName = "terms")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		ITermsFilter TermsFilter { get; set; }
+		ITermsBaseFilter TermsFilter { get; set; }
 
 		[JsonProperty(PropertyName = "fquery")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IQueryFilter QueryFilter { get; set; }
+		IQueryDescriptor QueryFilter { get; set; }
 
 		[JsonProperty(PropertyName = "and")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IAndFilter AndFilter { get; set; }
+		IList<IFilterDescriptor> AndFilter { get; set; }
 
 		[JsonProperty(PropertyName = "or")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IOrFilter OrFilter { get; set; }
+		IList<IFilterDescriptor> OrFilter { get; set; }
 
 		[JsonProperty(PropertyName = "not")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		INotFilter NotFilter { get; set; }
+		IFilterDescriptor NotFilterDescriptor { get; set; }
 
 		[JsonProperty(PropertyName = "script")]
 		IScriptFilter ScriptFilter { get; set; }
 
 		[JsonProperty(PropertyName = "nested")]
-		INestedFilter NestedFilter { get; set; }
+		INestedFilterDescriptor NestedFilter { get; set; }
 
 		[JsonProperty(PropertyName = "regexp")]
 		IRegexpFilter RegexpFilter { get; set; }
 	}
 
-	public class FilterDescriptor<T> : BaseFilter, IFilterDescriptor<T>, IFilter where T : class
+	public class FilterDescriptorDescriptor<T> : BaseFilterDescriptor, IFilterDescriptor<T>
+		where T : class
 	{
-		public string _Name { get; set; }
-		public string _CacheKey { get; set; }
-		public bool? _Cache { get; set; }
 
-		public override bool IsConditionless { get; internal set; }
-
-		IExistsFilter IFilter.ExistsFilter { get; set; }
-
-		IMissingFilter IFilter.MissingFilter { get; set; }
-
-		IIdsFilter IFilter.IdsFilter { get; set; }
-
-		IGeoBoundingBoxFilter IFilter.GeoBoundingBoxFilter { get; set; }
-
-		IGeoDistanceFilter IFilter.GeoDistanceFilter { get; set; }
-
-		IGeoDistanceRangeFilter IFilter.GeoDistanceRangeFilter { get; set; }
-
-		IGeoPolygonFilter IFilter.GeoPolygonFilter { get; set; }
-
-		IGeoShapeFilter IFilter.GeoShapeFilter { get; set; }
-
-		ILimitFilter IFilter.LimitFilter { get; set; }
-
-		ITypeFilter IFilter.TypeFilter { get; set; }
-
-		IMatchAllFilter IFilter.MatchAllFilter { get; set; }
-
-		IHasChildFilter IFilter.HasChildFilter { get; set; }
-
-		IHasParentFilter IFilter.HasParentFilter { get; set; }
-
-		INumericRangeFilter IFilter.NumericRangeFilter { get; set; }
-
-		IRangeFilter IFilter.RangeFilter { get; set; }
-
-		IPrefixFilter IFilter.PrefixFilter { get; set; }
-
-		ITermFilter IFilter.TermFilter { get; set; }
-
-		ITermsFilter IFilter.TermsFilter { get; set; }
-
-		IQueryFilter IFilter.QueryFilter { get; set; }
-
-		IAndFiter IFilter.AndFilter { get; set; }
-
-		IOrFilter IFilter.OrFilter { get; set; }
-
-		INotFilter IFilter.NotFilter { get; set; }
-
-		IScriptFilter IFilter.ScriptFilter { get; set; }
-
-		INestedFilter IFilter.NestedFilter { get; set; }
-
-		IRegexpFilter IFilter.RegexpFilter { get; set; }
-
-		public FilterDescriptor<T> Name(string name)
+		public FilterDescriptorDescriptor<T> Name(string name)
 		{
 			this._Name = name;
 			return this;
 		}
-		public FilterDescriptor<T> CacheKey(string cacheKey)
+		public FilterDescriptorDescriptor<T> CacheKey(string cacheKey)
 		{
 			this._CacheKey = cacheKey;
 			return this;
 		}
-		public FilterDescriptor<T> Cache(bool cache)
+		public FilterDescriptorDescriptor<T> Cache(bool cache)
 		{
 			this._Cache = cache;
 			return this;
 		}
 
-		public FilterDescriptor<T> Strict(bool strict = true)
+		public FilterDescriptorDescriptor<T> Strict(bool strict = true)
 		{
-			return new FilterDescriptor<T> { IsStrict = strict };
+			return new FilterDescriptorDescriptor<T> { IsStrict = strict };
 		}
 
-		public FilterDescriptor<T> Verbatim(bool verbatim = true)
+		public FilterDescriptorDescriptor<T> Verbatim(bool verbatim = true)
 		{
-			return new FilterDescriptor<T> { IsVerbatim = verbatim, IsStrict = verbatim };
+			return new FilterDescriptorDescriptor<T> { IsVerbatim = verbatim, IsStrict = verbatim };
 		}
 
 		/// <summary>
 		/// A thin wrapper allowing fined grained control what should happen if a filter is conditionless
 		/// if you need to fallback to something other than a match_all query
 		/// </summary>
-		public BaseFilter Conditionless(Action<ConditionlessFilterDescriptor<T>> selector)
+		public BaseFilterDescriptor Conditionless(Action<ConditionlessFilterDescriptor<T>> selector)
 		{
 			var filter = new ConditionlessFilterDescriptor<T>();
 			selector(filter);
 
-			return (filter._Filter == null || filter._Filter.IsConditionless) ? filter._Fallback : filter._Filter;
+			return (filter.FilterDescriptor == null || filter.FilterDescriptor.IsConditionless) ? filter._Fallback : filter.FilterDescriptor;
 		}
 
 		/// <summary>
 		/// Filters documents where a specific field has a value in them.
 		/// </summary>
-		public BaseFilter Exists(Expression<Func<T, object>> fieldDescriptor)
+		public BaseFilterDescriptor Exists(Expression<Func<T, object>> fieldDescriptor)
 		{
 			var filter = new ExistsFilter();
 			((IExistsFilter)filter).Field = fieldDescriptor;
@@ -220,7 +160,7 @@ namespace Nest
 		/// <summary>
 		/// Filters documents where a specific field has a value in them.
 		/// </summary>
-		public BaseFilter Exists(string field)
+		public BaseFilterDescriptor Exists(string field)
 		{
 			var filter = new ExistsFilter();
 			((IExistsFilter)filter).Field = field;
@@ -230,7 +170,7 @@ namespace Nest
 		/// <summary>
 		/// Filters documents where a specific field has no value in them.
 		/// </summary>
-		public BaseFilter Missing(Expression<Func<T, object>> fieldDescriptor)
+		public BaseFilterDescriptor Missing(Expression<Func<T, object>> fieldDescriptor)
 		{
 			var filter = new MissingFilter();
 			((IMissingFilter)filter).Field = fieldDescriptor;
@@ -240,7 +180,7 @@ namespace Nest
 		/// <summary>
 		/// Filters documents where a specific field has no value in them.
 		/// </summary>
-		public BaseFilter Missing(string field)
+		public BaseFilterDescriptor Missing(string field)
 		{
 			var filter = new MissingFilter();
 			((IMissingFilter)filter).Field = field;
@@ -251,7 +191,7 @@ namespace Nest
 		/// Filters documents that only have the provided ids. 
 		/// Note, this filter does not require the _id field to be indexed since it works using the _uid field.
 		/// </summary>
-		public BaseFilter Ids(IEnumerable<string> values)
+		public BaseFilterDescriptor Ids(IEnumerable<string> values)
 		{
 			var filter = new IdsFilter();
 			((IIdsFilter)filter).Values = values;
@@ -262,7 +202,7 @@ namespace Nest
 		/// Filters documents that only have the provided ids. 
 		/// Note, this filter does not require the _id field to be indexed since it works using the _uid field.
 		/// </summary>
-		public BaseFilter Ids(string type, IEnumerable<string> values)
+		public BaseFilterDescriptor Ids(string type, IEnumerable<string> values)
 		{
 			if (type.IsNullOrEmpty())
 				return CreateConditionlessFilterDescriptor("ids", null);
@@ -278,7 +218,7 @@ namespace Nest
 		/// Filters documents that only have the provided ids. 
 		/// Note, this filter does not require the _id field to be indexed since it works using the _uid field.
 		/// </summary>
-		public BaseFilter Ids(IEnumerable<string> types, IEnumerable<string> values)
+		public BaseFilterDescriptor Ids(IEnumerable<string> types, IEnumerable<string> values)
 		{
 			if (!types.HasAny() || types.All(t=>t.IsNullOrEmpty()))
 				return CreateConditionlessFilterDescriptor("ids", null);
@@ -294,7 +234,7 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
 		/// </summary>
-		public BaseFilter GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? type = null)
+		public BaseFilterDescriptor GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? type = null)
 		{
 			var c = CultureInfo.InvariantCulture;
 			topLeftX.ThrowIfNull("topLeftX");
@@ -308,7 +248,7 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
 		/// </summary>
-		public BaseFilter GeoBoundingBox(string fieldName, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? type = null)
+		public BaseFilterDescriptor GeoBoundingBox(string fieldName, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? type = null)
 		{
 			var c = CultureInfo.InvariantCulture;
 			topLeftX.ThrowIfNull("topLeftX");
@@ -322,45 +262,32 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
 		/// </summary>
-		public BaseFilter GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? type = null)
+		public BaseFilterDescriptor GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? type = null)
 		{
-			var filter = new GeoBoundingBoxFilter();
-			((IGeoBoundingBoxFilter)filter).TopLeft = geoHashTopLeft;
-			((IGeoBoundingBoxFilter)filter).BottomRight = geoHashBottomRight;
-			((IGeoBoundingBoxFilter)filter).GeoExecution = type;
-			((IGeoBoundingBoxFilter)filter).Field = fieldDescriptor;
-			((IFilter)this).GeoBoundingBoxFilter = filter;
-			return this;
-
-			//return this.SetDictionary("geo_bounding_box", fieldDescriptor, filter, (d, b) =>
-			//{
-			//	if (type.HasValue) d.Add("type", Enum.GetName(typeof(GeoExecution), type.Value));
-			//	b.GeoBoundingBoxFilter = d;
-			//});
+			IGeoBoundingBoxFilter filter = new GeoBoundingBoxFilter();
+			filter.TopLeft = geoHashTopLeft;
+			filter.BottomRight = geoHashBottomRight;
+			filter.GeoExecution = type;
+			filter.Field = fieldDescriptor;
+			return this.New(filter, f => f.GeoBoundingBoxFilter = filter);
 		}
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
 		/// </summary>
-		public BaseFilter GeoBoundingBox(string fieldName, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? type = null)
+		public BaseFilterDescriptor GeoBoundingBox(string fieldName, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? type = null)
 		{
-			var filter = new GeoBoundingBoxFilter();
-			((IGeoBoundingBoxFilter)filter).TopLeft = geoHashTopLeft;
-			((IGeoBoundingBoxFilter)filter).BottomRight = geoHashBottomRight;
-			((IGeoBoundingBoxFilter)filter).GeoExecution = type;
-			((IGeoBoundingBoxFilter)filter).Field = field;
-			((IFilter)this).GeoBoundingBoxFilter = filter;
-			return this;
-			//return this.SetDictionary("geo_bounding_box", fieldName, filter, (d, b) =>
-			//{
-			//	if (type.HasValue) d.Add("type", Enum.GetName(typeof(GeoExecution), type.Value));
-			//	b.GeoBoundingBoxFilter = d;
-			//});
+			IGeoBoundingBoxFilter filter = new GeoBoundingBoxFilter();
+			filter.TopLeft = geoHashTopLeft;
+			filter.BottomRight = geoHashBottomRight;
+			filter.GeoExecution = type;
+			filter.Field = fieldName;
+			return this.New(filter, f => f.GeoBoundingBoxFilter = filter);
 		}
 
 		/// <summary>
 		/// Filters documents that include only hits that exists within a specific distance from a geo point. 
 		/// </summary>
-		public BaseFilter GeoDistance(Expression<Func<T, object>> fieldDescriptor, Action<GeoDistanceFilterDescriptor> filterDescriptor)
+		public BaseFilterDescriptor GeoDistance(Expression<Func<T, object>> fieldDescriptor, Action<GeoDistanceFilterDescriptor> filterDescriptor)
 		{
 			return _GeoDistance(fieldDescriptor, filterDescriptor);
 		}
@@ -368,124 +295,100 @@ namespace Nest
 		/// <summary>
 		/// Filters documents that include only hits that exists within a specific distance from a geo point. 
 		/// </summary>
-		public BaseFilter GeoDistance(string field, Action<GeoDistanceFilterDescriptor> filterDescriptor)
+		public BaseFilterDescriptor GeoDistance(string field, Action<GeoDistanceFilterDescriptor> filterDescriptor)
 		{
 			return _GeoDistance(field, filterDescriptor);
 		}
 
-		private BaseFilter _GeoDistance(PropertyPathMarker field, Action<GeoDistanceFilterDescriptor> filterDescriptor)
+		private BaseFilterDescriptor _GeoDistance(PropertyPathMarker field, Action<GeoDistanceFilterDescriptor> filterDescriptor)
 		{
 			var filter = new GeoDistanceFilterDescriptor();
 			if (filterDescriptor != null)
 				filterDescriptor(filter);
 
-			return this.SetDictionary("geo_distance", field, filter, (d, b) =>
-			{
-				var dd = new Dictionary<PropertyPathMarker, object>();
-				dd.Add("distance", filter._Distance);
-
-				if (!string.IsNullOrWhiteSpace(filter._GeoUnit))
-					dd.Add("unit", filter._GeoUnit);
-
-				if (!string.IsNullOrWhiteSpace(filter._GeoOptimizeBBox))
-					dd.Add("optimize_bbox", filter._GeoOptimizeBBox);
-
-				d.ForEachWithIndex((kv, i) => dd.Add(kv.Key, kv.Value));
-				dd[field] = filter._Location;
-				b.GeoDistanceFilter = dd;
-			});
+			IGeoDistanceFilter ff = filter;
+			ff.Field = field;
+			return this.New(filter, f => f.GeoDistanceFilter = filter);
 		}
 
 		/// <summary>
 		/// Filters documents that exists within a range from a specific point:
 		/// </summary>
-		public BaseFilter GeoDistanceRange(Expression<Func<T, object>> fieldDescriptor, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
+		public BaseFilterDescriptor GeoDistanceRange(Expression<Func<T, object>> fieldDescriptor, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
 		{
 			return _GeoDistanceRange(fieldDescriptor, filterDescriptor);
 		}
 		/// <summary>
 		/// Filters documents that exists within a range from a specific point:
 		/// </summary>
-		public BaseFilter GeoDistanceRange(string field, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
+		public BaseFilterDescriptor GeoDistanceRange(string field, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
 		{
 			return _GeoDistanceRange(field, filterDescriptor);
 		}
 
-		private BaseFilter _GeoDistanceRange(PropertyPathMarker field, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
+		private BaseFilterDescriptor _GeoDistanceRange(PropertyPathMarker field, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
 		{
 			var filter = new GeoDistanceRangeFilterDescriptor();
 			if (filterDescriptor != null)
 				filterDescriptor(filter);
 
-			return this.SetDictionary("geo_distance_range", field, filter, (d, b) =>
-			{
-				var dd = new Dictionary<PropertyPathMarker, object>();
-				dd.Add("from", filter._FromDistance);
-				dd.Add("to", filter._ToDistance);
-				if (!string.IsNullOrWhiteSpace(filter._GeoUnit))
-					dd.Add("distance_type", filter._GeoUnit);
-
-				if (!string.IsNullOrWhiteSpace(filter._GeoOptimizeBBox))
-					dd.Add("optimize_bbox", filter._GeoOptimizeBBox);
-
-				d.ForEachWithIndex((kv, i) => dd.Add(kv.Key, kv.Value));
-				dd[field] = filter._Location;
-				b.GeoDistanceRangeFilter = dd;
-			});
+			IGeoDistanceRangeFilter ff = filter;
+			ff.Field = field;
+			return this.New(ff, f => f.GeoDistanceRangeFilter = ff);
 		}
 
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
-		public BaseFilter GeoShape(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapeFilterDescriptor> filterDescriptor)
+		public BaseFilterDescriptor GeoShape(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapeFilterDescriptor> filterDescriptor)
 		{
 			return _GeoShape(fieldDescriptor, filterDescriptor);
 		}
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
-		public BaseFilter GeoShape(string field, Action<GeoShapeFilterDescriptor> filterDescriptor)
+		public BaseFilterDescriptor GeoShape(string field, Action<GeoShapeFilterDescriptor> filterDescriptor)
 		{
 			return _GeoShape(field, filterDescriptor);
 		}
 
-		private BaseFilter _GeoShape(PropertyPathMarker field, Action<GeoShapeFilterDescriptor> filterDescriptor)
+		private BaseFilterDescriptor _GeoShape(PropertyPathMarker field, Action<GeoShapeFilterDescriptor> filterDescriptor)
 		{
 			var filter = new GeoShapeFilterDescriptor();
 			if (filterDescriptor != null)
 				filterDescriptor(filter);
 
-			return this.SetDictionary("geo_shape", field, filter, (d, b) => { b.GeoShapeFilter = d; });
+			return this.New(filter, f => f.GeoShapeFilter = filter);
 		}
 
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
-		public BaseFilter GeoIndexedShape(Expression<Func<T, object>> fieldDescriptor, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
+		public BaseFilterDescriptor GeoIndexedShape(Expression<Func<T, object>> fieldDescriptor, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
 		{
 			return this._GeoIndexedShape(fieldDescriptor, filterDescriptor);
 		}
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
-		public BaseFilter GeoIndexedShape(string field, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
+		public BaseFilterDescriptor GeoIndexedShape(string field, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
 		{
 			return _GeoIndexedShape(field, filterDescriptor);
 		}
 
-		private BaseFilter _GeoIndexedShape(PropertyPathMarker field, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
+		private BaseFilterDescriptor _GeoIndexedShape(PropertyPathMarker field, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
 		{
 			var filter = new GeoIndexedShapeFilterDescriptor();
 			if (filterDescriptor != null)
 				filterDescriptor(filter);
 
-			return this.SetDictionary("geo_shape", field, filter, (d, b) => { b.GeoShapeFilter = d; });
+			return this.New(filter, f => f.GeoShapeFilter = filter);
 		}
 
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
 		/// </summary>
-		public BaseFilter GeoPolygon(Expression<Func<T, object>> fieldDescriptor, IEnumerable<Tuple<double, double>> points)
+		public BaseFilterDescriptor GeoPolygon(Expression<Func<T, object>> fieldDescriptor, IEnumerable<Tuple<double, double>> points)
 		{
 			var c = CultureInfo.InvariantCulture;
 			return this._GeoPolygon(fieldDescriptor, points.Select(p => "{0}, {1}".F(p.Item1.ToString(c), p.Item2.ToString(c))).ToArray());
@@ -493,7 +396,7 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
 		/// </summary>
-		public BaseFilter GeoPolygon(string field, IEnumerable<Tuple<double, double>> points)
+		public BaseFilterDescriptor GeoPolygon(string field, IEnumerable<Tuple<double, double>> points)
 		{
 			var c = CultureInfo.InvariantCulture;
 			return this.GeoPolygon(field, points.Select(p => "{0}, {1}".F(p.Item1.ToString(c), p.Item2.ToString(c))).ToArray());
@@ -501,22 +404,23 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
 		/// </summary>
-		public BaseFilter GeoPolygon(Expression<Func<T, object>> fieldDescriptor, params string[] points)
+		public BaseFilterDescriptor GeoPolygon(Expression<Func<T, object>> fieldDescriptor, params string[] points)
 		{
 			return this._GeoPolygon(fieldDescriptor, points);
 		}
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
 		/// </summary>
-		public BaseFilter GeoPolygon(string fieldName, params string[] points)
+		public BaseFilterDescriptor GeoPolygon(string fieldName, params string[] points)
 		{
 			return _GeoPolygon(fieldName, points);
 		}
 
-		private BaseFilter _GeoPolygon(PropertyPathMarker fieldName, string[] points)
+		private BaseFilterDescriptor _GeoPolygon(PropertyPathMarker fieldName, string[] points)
 		{
-			var filter = new GeoPolygonFilter {Points = points};
-			return this.SetDictionary("geo_polygon", fieldName, filter, (d, b) => { b.GeoPolygonFilter = d; });
+			IGeoPolygonFilter filter = new GeoPolygonFilter();
+			filter.Points = points;
+			return this.New(filter, f => f.GeoPolygonFilter = filter);
 		}
 
 		/// <summary>
@@ -524,7 +428,7 @@ namespace Nest
 		/// and results in parent documents that have child docs matching the query.
 		/// </summary>
 		/// <typeparam name="K">Type of the child</typeparam>
-		public BaseFilter HasChild<K>(Action<HasChildFilterDescriptor<K>> filterSelector) where K : class
+		public BaseFilterDescriptor HasChild<K>(Action<HasChildFilterDescriptor<K>> filterSelector) where K : class
 		{
 			var filter = new HasChildFilterDescriptor<K>();
 			if (filterSelector != null)
@@ -538,7 +442,7 @@ namespace Nest
 		/// and results in parent documents that have child docs matching the query.
 		/// </summary>
 		/// <typeparam name="K">Type of the child</typeparam>
-		public BaseFilter HasParent<K>(Action<HasParentFilterDescriptor<K>> filterSelector) where K : class
+		public BaseFilterDescriptor HasParent<K>(Action<HasParentFilterDescriptor<K>> filterSelector) where K : class
 		{
 			var filter = new HasParentFilterDescriptor<K>();
 			if (filterSelector != null)
@@ -550,9 +454,10 @@ namespace Nest
 		/// <summary>
 		/// A limit filter limits the number of documents (per shard) to execute on.
 		/// </summary>
-		public BaseFilter Limit(int? limit)
+		public BaseFilterDescriptor Limit(int? limit)
 		{
-			var filter = new LimitFilter { Value = limit };
+			ILimitFilter filter = new LimitFilter {};
+			filter.Value = limit;
 
 			return  this.New(filter, f => f.LimitFilter = filter);
 		}
@@ -561,9 +466,10 @@ namespace Nest
 		/// Note, this filter can work even when the _type field is not indexed 
 		/// (using the _uid field).
 		/// </summary>
-		public BaseFilter Type(string type)
+		public BaseFilterDescriptor Type(string type)
 		{
-			var filter = new TypeFilter { Value = type };
+			ITypeFilter filter = new TypeFilter {};
+			filter.Value = type;
 			return  this.New(filter, f => f.TypeFilter = filter);
 		}
 
@@ -572,16 +478,17 @@ namespace Nest
 		/// Note, this filter can work even when the _type field is not indexed 
 		/// (using the _uid field).
 		/// </summary>
-		public BaseFilter Type(Type type)
+		public BaseFilterDescriptor Type(Type type)
 		{
-			var filter = new TypeFilter { Value = type };
+			ITypeFilter filter = new TypeFilter {};
+			filter.Value = type;
 			return this.New(filter, f=> f.TypeFilter = filter);
 		}
 
 		/// <summary>
 		/// A filter that matches on all documents.
 		/// </summary>
-		public BaseFilter MatchAll()
+		public BaseFilterDescriptor MatchAll()
 		{
 			var filter = new MatchAllFilter { };
 			return this.New(filter, f=> f.MatchAllFilter = filter);
@@ -591,38 +498,31 @@ namespace Nest
 		/// Similar to range filter, except that it works only with numeric values, 
 		/// and the filter execution works differently.
 		/// </summary>
-		public BaseFilter NumericRange(Action<NumericRangeFilterDescriptor<T>> numericRangeSelector)
+		public BaseFilterDescriptor NumericRange(Action<NumericRangeFilterDescriptor<T>> numericRangeSelector)
 		{
 			var filter = new NumericRangeFilterDescriptor<T>();
 			if (numericRangeSelector != null)
 				numericRangeSelector(filter);
-			
-			return this.SetDictionary("numeric_range", filter._Field, filter, (d, b) =>
-			{
-				b.NumericRangeFilter = d;
-			});
+
+			return this.New(filter, f=>f.NumericRangeFilter = filter);
 
 		}
 		/// <summary>
 		/// Filters documents with fields that have terms within a certain range. 
 		/// Similar to range query, except that it acts as a filter. 
 		/// </summary>
-		public BaseFilter Range(Action<RangeFilterDescriptor<T>> rangeSelector)
+		public BaseFilterDescriptor Range(Action<RangeFilterDescriptor<T>> rangeSelector)
 		{
 			var filter = new RangeFilterDescriptor<T>();
 			if (rangeSelector != null)
 				rangeSelector(filter);
 			
-			return this.SetDictionary("range", filter._Field, filter, (d, b) =>
-			{
-				b.RangeFilter = d;
-			});
-
+			return this.New(filter, f=>f.RangeFilter = filter);
 		}
 		/// <summary>
 		/// A filter allowing to define scripts as filters. 
 		/// </summary>
-		public BaseFilter Script(Action<ScriptFilterDescriptor> scriptSelector)
+		public BaseFilterDescriptor Script(Action<ScriptFilterDescriptor> scriptSelector)
 		{
 			var descriptor = new ScriptFilterDescriptor();
 			if (scriptSelector != null)
@@ -634,132 +534,145 @@ namespace Nest
 		/// Filters documents that have fields containing terms with a specified prefix 
 		/// (not analyzed). Similar to phrase query, except that it acts as a filter. 
 		/// </summary>
-		public BaseFilter Prefix(Expression<Func<T, object>> fieldDescriptor, string prefix)
+		public BaseFilterDescriptor Prefix(Expression<Func<T, object>> fieldDescriptor, string prefix)
 		{
-			return this.SetDictionary("prefix", fieldDescriptor, prefix, (d, b) => { b.PrefixFilter = d; });
+			IPrefixFilter filter = new PrefixFilter();
+			filter.Field = fieldDescriptor;
+			filter.Prefix = prefix;
+			return this.New(filter, f=>f.PrefixFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents that have fields containing terms with a specified prefix 
 		/// (not analyzed). Similar to phrase query, except that it acts as a filter. 
 		/// </summary>
-		public BaseFilter Prefix(string field, string prefix)
+		public BaseFilterDescriptor Prefix(string field, string prefix)
 		{
-			return this.SetDictionary("prefix", field, prefix, (d, b) => { b.PrefixFilter = d; });
-
+			IPrefixFilter filter = new PrefixFilter();
+			filter.Field = field;
+			filter.Prefix = prefix;
+			return this.New(filter, f=>f.PrefixFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents that have fields that contain a term (not analyzed). 
 		/// Similar to term query, except that it acts as a filter
 		/// </summary>
-		public BaseFilter Term<K>(Expression<Func<T, K>> fieldDescriptor, K term)
+		public BaseFilterDescriptor Term<K>(Expression<Func<T, K>> fieldDescriptor, K term)
 		{
-			var t = new TermFilter() { Field = fieldDescriptor, Value = term };
-			return this.SetDictionary("term", fieldDescriptor, term, (d, b) => { b.TermFilter = d; });
+			ITermFilter filter = new TermFilter();
+			filter.Field = fieldDescriptor;
+			filter.Value = term;
+			return this.New(filter, f=>f.TermFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents that have fields that contain a term (not analyzed). 
 		/// Similar to term query, except that it acts as a filter
 		/// </summary>
-		public BaseFilter Term(Expression<Func<T, object>> fieldDescriptor, object term)
+		public BaseFilterDescriptor Term(Expression<Func<T, object>> fieldDescriptor, object term)
 		{
-			var t = new TermFilter() { Field = fieldDescriptor, Value = term };
-			return this.SetDictionary("term", fieldDescriptor, term, (d, b) => { b.TermFilter = d; });
+			ITermFilter filter = new TermFilter();
+			filter.Field = fieldDescriptor;
+			filter.Value = term;
+			return this.New(filter, f=>f.TermFilter = filter);
 		}
 	
 		/// <summary>
 		/// Filters documents that have fields that contain a term (not analyzed).
 		/// Similar to term query, except that it acts as a filter
 		/// </summary>
-		public BaseFilter Term(string field, object term)
+		public BaseFilterDescriptor Term(string field, object term)
 		{
-			var t = new TermFilter() { Field = field, Value = term };
-			return this.SetDictionary("term", field, term, (d, b) => { b.TermFilter = d; });
+
+
+			ITermFilter filter = new TermFilter();
+			filter.Field = field;
+			filter.Value = term;
+			return this.New(filter, f=>f.TermFilter = filter);
 
 		}
 		/// <summary>
 		/// Filters documents that have fields that match any of the provided terms (not analyzed). 
 		/// </summary>
-		public BaseFilter Terms<K>(Expression<Func<T, K>> fieldDescriptor, IEnumerable<K> terms, TermsExecution? Execution = null)
+		public BaseFilterDescriptor Terms<K>(Expression<Func<T, K>> fieldDescriptor, IEnumerable<K> terms, TermsExecution? Execution = null)
 		{
-			return this.SetDictionary("terms", fieldDescriptor, terms, (d, b) =>
-			{
-				if (Execution.HasValue) d.Add("execution", Enum.GetName(typeof(TermsExecution), Execution));
-				b.TermsFilter = d;
-			});
+			ITermsFilter filter = new TermsFilter();
+			filter.Field = fieldDescriptor;
+			filter.Terms = terms.Cast<object>();
+			return this.New(filter, f=>f.TermsFilter = filter);
 		}	
 		
 		/// <summary>
 		/// Filters documents that have fields that match any of the provided terms (not analyzed). 
 		/// </summary>
-		public BaseFilter Terms(Expression<Func<T, object>> fieldDescriptor, IEnumerable<string> terms, TermsExecution? Execution = null)
+		public BaseFilterDescriptor Terms(Expression<Func<T, object>> fieldDescriptor, IEnumerable<string> terms, TermsExecution? Execution = null)
 		{
-			return this.SetDictionary("terms", fieldDescriptor, terms, (d, b) =>
-			{
-				if (Execution.HasValue) d.Add("execution", Enum.GetName(typeof(TermsExecution), Execution));
-				b.TermsFilter = d;
-			});
+			ITermsFilter filter = new TermsFilter();
+			filter.Field = fieldDescriptor;
+			filter.Terms = terms;
+			return this.New(filter, f=>f.TermsFilter = filter);
 		}
 
 		/// <summary>
 		/// Filters documents that have fields that match any of the provided terms (not analyzed). 
 		/// </summary>
-		public BaseFilter Terms(string field, IEnumerable<string> terms, TermsExecution? Execution = null)
+		public BaseFilterDescriptor Terms(string field, IEnumerable<string> terms, TermsExecution? Execution = null)
 		{
-			return this.SetDictionary("terms", field, terms, (d, b) =>
-			{
-				if (Execution.HasValue) d.Add("execution", Enum.GetName(typeof(TermsExecution), Execution));
-				b.TermsFilter = d;
-			});
+			ITermsFilter filter = new TermsFilter();
+			filter.Field = field;
+			filter.Terms = terms.Cast<object>();
+			return this.New(filter, f=>f.TermsFilter = filter);
 		}
 
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
-		public BaseFilter TermsLookup(Expression<Func<T, object>> fieldDescriptor, Action<TermsLookupFilterDescriptor> filterDescriptor)
+		public BaseFilterDescriptor TermsLookup(Expression<Func<T, object>> fieldDescriptor, Action<TermsLookupFilterDescriptor> filterDescriptor)
 		{
 			var filter = new TermsLookupFilterDescriptor();
 			if (filterDescriptor != null)
 				filterDescriptor(filter);
-			return this.SetDictionary("terms", fieldDescriptor, filter, (d, b) => { b.TermsFilter = d; });
+
+			((ITermsBaseFilter)filter).Field = fieldDescriptor;
+			return this.New(filter, f=>f.TermsFilter = filter);
 		}
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
-		public BaseFilter TermsLookup(string field, Action<TermsLookupFilterDescriptor> filterDescriptor)
+		public BaseFilterDescriptor TermsLookup(string field, Action<TermsLookupFilterDescriptor> filterDescriptor)
 		{
 			var filter = new TermsLookupFilterDescriptor();
 			if (filterDescriptor != null)
 				filterDescriptor(filter);
-			return this.SetDictionary("terms", field, filter, (d, b) => { b.TermsFilter = d; });
-		}
 
+			((ITermsBaseFilter)filter).Field = field;
+			return this.New(filter, f=>f.TermsFilter = filter);
+		}
 
 		/// <summary>
 		/// A filter that matches documents using AND boolean operator on other queries. 
 		/// This filter is more performant then bool filter. 
 		/// </summary>
-		public BaseFilter And(params Func<FilterDescriptor<T>, BaseFilter>[] selectors)
+		public BaseFilterDescriptor And(params Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor>[] selectors)
 		{
 			return this.And((from selector in selectors 
-							 let filter = new FilterDescriptor<T>() 
+							 let filter = new FilterDescriptorDescriptor<T>() 
 							 select selector(filter)).ToArray());
 		}
 		/// <summary>
 		/// A filter that matches documents using AND boolean operator on other queries. 
 		/// This filter is more performant then bool filter. 
 		/// </summary>
-		public BaseFilter And(params BaseFilter[] filters)
+		public BaseFilterDescriptor And(params BaseFilterDescriptor[] filtersDescriptor)
 		{
-			return this.SetDictionary("and", "filters", filters.ToList(), (d, b) => b.AndFilter = d);
+			return this.New(filter, f=>f.AndFilter = filtersDescriptor.Cast<IFilterDescriptor>().ToList());
 		}
 		/// <summary>
 		/// A filter that matches documents using OR boolean operator on other queries. 
 		/// This filter is more performant then bool filter
 		/// </summary>
-		public BaseFilter Or(params Func<FilterDescriptor<T>, BaseFilter>[] selectors)
+		public BaseFilterDescriptor Or(params Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor>[] selectors)
 		{
 			var descriptors = (from selector in selectors 
-							   let filter = new FilterDescriptor<T>() 
+							   let filter = new FilterDescriptorDescriptor<T>() 
 							   select selector(filter)
 							  ).ToArray();
 			return this.Or(descriptors);
@@ -769,28 +682,23 @@ namespace Nest
 		/// A filter that matches documents using OR boolean operator on other queries. 
 		/// This filter is more performant then bool filter
 		/// </summary>
-		public BaseFilter Or(params BaseFilter[] filters)
+		public BaseFilterDescriptor Or(params BaseFilterDescriptor[] filtersDescriptor)
 		{
-			return this.SetDictionary("or", "filters", filters.ToList(), (d, b) =>
-			{
-				b.OrFilter = d;
-			});
+			return this.New(filter, f=>f.OrFilter = filtersDescriptor.Cast<IFilterDescriptor>().ToList());
+			
 		}
 		/// <summary>
 		/// A filter that filters out matched documents using a query. 
 		/// This filter is more performant then bool filter. 
 		/// </summary>
-		public BaseFilter Not(Func<FilterDescriptor<T>, BaseFilter> selector)
+		public BaseFilterDescriptor Not(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> selector)
 		{
-			var filter = new FilterDescriptor<T>();
-			BaseFilter bf = filter;
+			var filter = new FilterDescriptorDescriptor<T>();
+			BaseFilterDescriptor bf = filter;
 			if (selector != null)
 				bf = selector(filter);
 
-			return this.SetDictionary("not", "filter", bf, (d, b) =>
-			{
-				b.NotFilter = d;
-			});
+			return this.New(bf, f=>f.NotFilterDescriptor = filter);
 
 		}
 		/// <summary>
@@ -798,19 +706,19 @@ namespace Nest
 		/// A filter that matches documents matching boolean combinations of other queries.
 		/// Similar in concept to Boolean query, except that the clauses are other filters. 
 		/// </summary>
-		public BaseFilter Bool(Action<BoolFilterDescriptor<T>> booleanFilter)
+		public BaseFilterDescriptor Bool(Action<BoolFilterDescriptor<T>> booleanFilter)
 		{
 			var filter = new BoolFilterDescriptor<T>();
 			if (booleanFilter != null)
 				booleanFilter(filter);
 
-			return this.New(filter, f => f.BoolFilterDescriptor = filter);
+			return this.New(filter, f=>f.BoolFilterDescriptor = filter);
 
 		}
 		/// <summary>
 		/// Wraps any query to be used as a filter. 
 		/// </summary>
-		public BaseFilter Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public BaseFilterDescriptor Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 
 			var descriptor = new QueryDescriptor<T>();
@@ -818,10 +726,7 @@ namespace Nest
 			if (querySelector != null)
 				bq = querySelector(descriptor);
 
-			return this.SetDictionary("query", "query", bq, (d, b) =>
-			{
-				b.QueryFilter = d;
-			});
+			return this.New(, f=>f.NestedFilter = filter);
 		}
 
 
@@ -831,7 +736,7 @@ namespace Nest
 		///  (set _cache to true), and have it named (set the _name value). 
 		/// </summary>
 		/// <param name="selector"></param>
-		public BaseFilter Nested(Action<NestedFilterDescriptor<T>> selector)
+		public BaseFilterDescriptor Nested(Action<NestedFilterDescriptor<T>> selector)
 		{
 			var filter = new NestedFilterDescriptor<T>();
 			if (selector != null)
@@ -844,19 +749,16 @@ namespace Nest
 		///  The regexp filter allows you to use regular expression term queries. 
 		/// </summary>
 		/// <param name="selector"></param>
-		public BaseFilter Regexp(Action<RegexpFilterDescriptor<T>> selector)
+		public BaseFilterDescriptor Regexp(Action<RegexpFilterDescriptor<T>> selector)
 		{
 			var filter = new RegexpFilterDescriptor<T>();
 			if (selector != null)
 				selector(filter);
 
-			return this.SetDictionary("regexp", filter._Field, filter, (d, b) =>
-			{
-				b.RegexpFilter = d;
-			});
+			return this.New(filter, f=>f.RegexpFilter = filter);
 		}
 
-		private FilterDescriptor<T> CreateConditionlessFilterDescriptor(object filter, string type = null)
+		private FilterDescriptorDescriptor<T> CreateConditionlessFilterDescriptor(object filter, string type = null)
 		{
 			if (this.IsStrict && !this.IsVerbatim)
 				throw new DslException("Filter resulted in a conditionless '{1}' filter (json by approx):\n{0}"
@@ -865,17 +767,17 @@ namespace Nest
 						, type ?? filter.GetType().Name.Replace("Descriptor", "").Replace("`1", "")
 					)
 				);
-			return new FilterDescriptor<T> { IsConditionless = true, IsVerbatim = this.IsVerbatim, IsStrict = this.IsStrict };
+			return new FilterDescriptorDescriptor<T> { IsConditionless = true, IsVerbatim = this.IsVerbatim, IsStrict = this.IsStrict };
 		}
 
-		private FilterDescriptor<T> New(FilterBase filter, Action<IFilter> fillProperty)
+		private FilterDescriptorDescriptor<T> New(IFilterBase filter, Action<IFilterDescriptor> fillProperty)
 		{
 			if (((IFilterBase)filter).IsConditionless && !this.IsVerbatim)
 				return CreateConditionlessFilterDescriptor(filter);
 
 			this.SetCacheAndName(filter);
 
-			var f = new FilterDescriptor<T> { IsStrict = this.IsStrict, IsVerbatim = this.IsVerbatim };
+			var f = new FilterDescriptorDescriptor<T> { IsStrict = this.IsStrict, IsVerbatim = this.IsVerbatim };
 
 			if (fillProperty != null)
 				fillProperty(f);
@@ -891,7 +793,7 @@ namespace Nest
 			this._Name = null;
 		}
 
-		private void SetCacheAndName(FilterBase filter)
+		private void SetCacheAndName(IFilterBase filter)
 		{
 			if (this._Cache.HasValue)
 				filter._Cache = this._Cache;
@@ -899,90 +801,6 @@ namespace Nest
 				filter._Name = this._Name;
 			if (!string.IsNullOrWhiteSpace(this._CacheKey))
 				filter._CacheKey = this._Name;
-		}
-
-		private BaseFilter SetDictionary(
-			string type,
-			PropertyPathMarker key,
-			object value,
-			Action<Dictionary<PropertyPathMarker, object>, IFilter> setter
-		)
-		{
-			setter.ThrowIfNull("setter");
-			var dictionary = new Dictionary<PropertyPathMarker, object>();
-
-			if (key.IsConditionless())
-				return CreateConditionlessFilterDescriptor(dictionary, type);
-
-			dictionary.Add(key, value);
-			if (this._Cache.HasValue)
-				dictionary.Add("_cache", this._Cache);
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				dictionary.Add("_name", this._Name);
-			if (!string.IsNullOrWhiteSpace(this._CacheKey))
-				dictionary.Add("_cache_key", this._CacheKey);
-
-			this.ResetCache();
-
-			var bucket = new FilterDescriptor<T> { IsStrict = this.IsStrict, IsVerbatim = this.IsVerbatim };
-			setter(dictionary, bucket);
-			if (this.IsVerbatim)
-				return bucket;
-			
-			//find out if we are conditionless
-
-			if (value == null)
-				return CreateConditionlessFilterDescriptor(dictionary, type);
-			else if (value is string)
-			{
-				if (string.IsNullOrEmpty(value.ToString()))
-					return CreateConditionlessFilterDescriptor(value, type);
-			}
-			else if (value is IEnumerable<BaseFilter>)
-			{
-				var l = (IEnumerable<object>)value;
-				var baseFilters = l.OfType<BaseFilter>().ToList();
-				var allBaseFiltersConditionless = baseFilters.All(b => b.IsConditionless);
-				if (!baseFilters.HasAny() || allBaseFiltersConditionless)
-					return CreateConditionlessFilterDescriptor(dictionary, type);
-			}
-			else if (value is IEnumerable<string>)
-			{
-				var l = (IEnumerable<string>)value;
-				var strings = l.ToList();
-				var allStringsNullOrEmpty = strings.All(s => s.IsNullOrEmpty());
-				if (!strings.HasAny() || allStringsNullOrEmpty)
-					return CreateConditionlessFilterDescriptor(dictionary, type);
-			}
-			else if (value is IEnumerable<object>)
-			{
-				var l = (IEnumerable<object>)value;
-				if (!l.HasAny())
-					return CreateConditionlessFilterDescriptor(dictionary, type);
-			}
-			else if (value is FilterBase)
-			{
-				var bf = (FilterBase)value;
-				if (bf.IsConditionless)
-					return CreateConditionlessFilterDescriptor(bf, type);
-			}
-			else if (value is FilterDescriptor<T>)
-			{
-				var bf = (FilterDescriptor<T>)value;
-				if (bf.IsConditionless)
-					return CreateConditionlessFilterDescriptor(bf, type);
-			}
-			else if (value is BaseQuery)
-			{
-				var bf = (BaseQuery)value;
-				if (bf.IsConditionless)
-					return CreateConditionlessFilterDescriptor(bf, type);
-			}
-
-			if (key.IsConditionless())
-				return CreateConditionlessFilterDescriptor(value, type);
-
-			return bucket;
 		}
 
 

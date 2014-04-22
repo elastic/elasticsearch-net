@@ -14,7 +14,7 @@ namespace Nest
 		BaseQuery Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		BaseFilter Filter { get; set; }
+		BaseFilterDescriptor FilterDescriptor { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
 		double? Boost { get; set; }
@@ -25,7 +25,7 @@ namespace Nest
 	{
 		BaseQuery IConstantScoreQuery.Query { get; set; }
 
-		BaseFilter IConstantScoreQuery.Filter { get; set; }
+		BaseFilterDescriptor IConstantScoreQuery.FilterDescriptor { get; set; }
 
 		double? IConstantScoreQuery.Boost { get; set; }
 
@@ -33,12 +33,12 @@ namespace Nest
 		{
 			get
 			{
-				if (((IConstantScoreQuery)this).Query == null && ((IConstantScoreQuery)this).Filter == null)
+				if (((IConstantScoreQuery)this).Query == null && ((IConstantScoreQuery)this).FilterDescriptor == null)
 					return true;
-				if (((IConstantScoreQuery)this).Filter == null && ((IConstantScoreQuery)this).Query != null)
+				if (((IConstantScoreQuery)this).FilterDescriptor == null && ((IConstantScoreQuery)this).Query != null)
 					return ((IConstantScoreQuery)this).Query.IsConditionless;
-				if (((IConstantScoreQuery)this).Filter != null && ((IConstantScoreQuery)this).Query == null)
-					return ((IConstantScoreQuery)this).Filter.IsConditionless;
+				if (((IConstantScoreQuery)this).FilterDescriptor != null && ((IConstantScoreQuery)this).Query == null)
+					return ((IConstantScoreQuery)this).FilterDescriptor.IsConditionless;
 				return false;
 			}
 		}
@@ -46,7 +46,7 @@ namespace Nest
 		public ConstantScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
-			((IConstantScoreQuery)this).Filter = null;
+			((IConstantScoreQuery)this).FilterDescriptor = null;
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
@@ -54,14 +54,14 @@ namespace Nest
 			return this;
 		}
 
-		public ConstantScoreQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
+		public ConstantScoreQueryDescriptor<T> Filter(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 			((IConstantScoreQuery)this).Query = null;
-			var filter = new FilterDescriptor<T>();
+			var filter = new FilterDescriptorDescriptor<T>();
 			var f = filterSelector(filter);
 
-			((IConstantScoreQuery)this).Filter = f;
+			((IConstantScoreQuery)this).FilterDescriptor = f;
 			return this;
 		}
 

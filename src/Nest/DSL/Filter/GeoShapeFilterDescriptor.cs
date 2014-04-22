@@ -7,7 +7,12 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IGeoShapeFilter : IFilterBase
+	public interface IGeoShapeBaseFilter : IFilterBase
+	{
+		
+	}
+
+	public interface IGeoShapeFilter : IGeoShapeBaseFilter
 	{
 		[JsonProperty("shape")]
 		GeoShapeVector _Shape { get; set; }

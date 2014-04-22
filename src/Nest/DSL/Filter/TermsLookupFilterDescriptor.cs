@@ -9,7 +9,25 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface ITermsLookupFilterDescriptor : IFilterBase
+	public interface ITermsBaseFilter : IFilterBase
+	{
+		PropertyPathMarker Field { get; set; }
+	}
+
+	public interface ITermsFilter : ITermsBaseFilter
+	{
+		IEnumerable<object> Terms { get; set; }
+	}
+	
+	public class TermsFilter : FilterBase, ITermsFilter
+	{
+		bool IFilterBase.IsConditionless { get { return ((ITermsBaseFilter)this).Field.IsConditionless() || !((ITermsFilter)this).Terms.HasAny(); } }
+
+		PropertyPathMarker ITermsBaseFilter.Field { get; set; }
+		IEnumerable<object> ITermsFilter.Terms { get; set; }
+	} 
+	
+	public interface ITermsLookupFilterDescriptor : ITermsBaseFilter
 	{
 		[JsonProperty("id")]
 		string _Id { get; set; }
@@ -32,6 +50,7 @@ namespace Nest
 	/// </summary>
 	public class TermsLookupFilterDescriptor : FilterBase, ITermsLookupFilterDescriptor
 	{
+		PropertyPathMarker ITermsBaseFilter.Field { get; set; }
 		bool IFilterBase.IsConditionless
 		{
 			get

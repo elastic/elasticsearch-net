@@ -49,12 +49,12 @@ namespace Nest
 			this.Add.SearchRouting = searchRouting;
 			return this;
 		}
-		public AliasAddDescriptor Filter<T>(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
+		public AliasAddDescriptor Filter<T>(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> filterSelector)
 			where T : class
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 
-			this.Add.Filter = filterSelector(new FilterDescriptor<T>());
+			this.Add.FilterDescriptor = filterSelector(new FilterDescriptorDescriptor<T>());
 			return this;
 		}
 	}

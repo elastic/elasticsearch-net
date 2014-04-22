@@ -112,7 +112,7 @@ namespace Nest.Tests.Integration.Facet
           .Size(10)
         )
       );
-
+	  
       var tf = results.Facet<TermFacet>(p => p.Name);
       Assert.AreEqual(0, tf.Missing);
       Assert.Greater(tf.Other, 0);
