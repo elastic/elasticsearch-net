@@ -6,11 +6,11 @@ namespace Nest.DSL.Suggest
 	public class FuzzinessSuggestDescriptor<T> : IFuzzySuggestDescriptor<T> where T : class 
 	{
 		[JsonProperty(PropertyName = "fuzziness")]
-		internal object _Fuzziness { get; set; }
+		internal object _Fuzziness { get; private set; }
 
 		public FuzzinessSuggestDescriptor()
 		{
-			this._Fuzziness = null;
+			this._Fuzziness = new object();
 		}
 
 		public FuzzinessSuggestDescriptor<T> Fuzziness(string fuzziness)
