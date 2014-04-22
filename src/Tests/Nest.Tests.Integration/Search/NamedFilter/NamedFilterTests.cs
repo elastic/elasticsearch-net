@@ -39,7 +39,7 @@ namespace Nest.Tests.Integration.Search.NamedFilter
 		/// https://github.com/elasticsearch/elasticsearch-net/issues/606
 		/// </summary>
 		[Test]		
-		public void Search_WithFieldsRemoved_ReturnsDocuments_ButAllDocumentsAreNull()
+		public void Search_WithFieldsRemoved_ReturnsDocuments_ResultingArrayOfDocsShouldNotBeNull()
 		{
 		  // Left in followers + contributors will cause a leaf node exception, so good test victims
 		  var fields = typeof(ElasticsearchProject).GetProperties()
