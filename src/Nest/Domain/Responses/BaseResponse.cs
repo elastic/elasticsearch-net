@@ -22,6 +22,19 @@ namespace Nest
 		public virtual bool IsValid { get; internal set; }
 		public IElasticsearchResponse ConnectionStatus { get; internal set; }
 		public ElasticInferrer _infer;
+		
+		protected IConnectionSettingsValues Settings
+		{
+			get
+			{
+				if (this.ConnectionStatus == null)
+					return null;
+
+				var settings = this.ConnectionStatus.Settings as IConnectionSettingsValues;
+				return settings;
+			}
+		}
+
 
 		public ElasticInferrer Infer
 		{
@@ -29,10 +42,8 @@ namespace Nest
 			{
 				if (this._infer != null)
 					return this._infer;
-				if (this.ConnectionStatus == null)
-					return null;
 
-				var settings = this.ConnectionStatus.Settings as IConnectionSettingsValues;
+				var settings = this.Settings;
 				if (settings == null)
 					return null;
 				this._infer = new ElasticInferrer(settings);

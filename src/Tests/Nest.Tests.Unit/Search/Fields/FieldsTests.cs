@@ -41,12 +41,20 @@ namespace Nest.Tests.Unit.Search.Fields
 			results.Total.Should().Be(1605);
 
 			results.Hits.Should().NotBeNull().And.HaveCount(10);
+
+			//ugly way to get a hold of the fields
 			var classAHits = results.Hits.OfType<Hit<ClassA>>();
 			classAHits.Should().NotBeNull().And.HaveCount(3);
 
 			var classAHit = classAHits.First();
 			classAHit.Fields.Should().NotBeNull();
-			var lang = classAHit.Fields.FieldValue<ClassA, string>(p => p.Lang).FirstOrDefault();
+			var lang = classAHit.Fields.FieldValues<ClassA, string>(p => p.Lang).FirstOrDefault();
+			lang.Should().NotBeNullOrEmpty();
+
+			//prettier way to get a hold of the fields
+			results.FieldSelections.Should().NotBeEmpty();
+			var firstHit = results.FieldSelections.First();
+			lang = firstHit.FieldValues(p => p.Lang).FirstOrDefault();
 			lang.Should().NotBeNullOrEmpty();
 
 			

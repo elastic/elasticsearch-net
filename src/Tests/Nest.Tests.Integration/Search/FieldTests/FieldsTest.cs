@@ -1,4 +1,7 @@
-﻿namespace Nest.Tests.Integration.Search.FieldTests
+﻿using System.Data.Common;
+using FluentAssertions;
+
+namespace Nest.Tests.Integration.Search.FieldTests
 {
 	using System.Collections.Generic;
 	using System.Linq;
@@ -30,8 +33,27 @@
 
 			Assert.True(queryResults.IsValid);
 
-			foreach (var d in queryResults.Documents)
-				Assert.IsNotNull(d);
+			queryResults.Documents.Should().BeEmpty();
+			
+			foreach (var doc in queryResults.FieldSelections)
+			{
+				// "content" is a string
+				var content = doc.FieldValues(p => p.Content).First();
+				content.Should().NotBeEmpty();
+
+				// intValues is a List<int>
+				// the string overload needs to be typed as int[]
+				// because elasticsearch will return special fields such as _routing, _parent
+				// as string not string[] return [] would make this unreachable
+				var intValues = doc.FieldValues<int[]>("intValues");
+				intValues.Should().NotBeEmpty().And.OnlyContain(i => i !=  0);
+				
+				//functionally equivalent, we need to flatten the expression with First()
+				//so that the returned type is int[] and not List<int>[];
+				intValues = doc.FieldValues(p => p.IntValues.First());
+				intValues.Should().NotBeEmpty().And.OnlyContain(i => i !=  0);
+			}
+
 		}
 	}
 }
