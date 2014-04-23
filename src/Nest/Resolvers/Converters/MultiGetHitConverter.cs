@@ -47,7 +47,7 @@ namespace Nest.Resolvers.Converters
 			var source = tuple.Hit["fields"];
 			if (source != null)
 			{
-				f.FieldValues = serializer.Deserialize<Dictionary<string, object>>( source.CreateReader());
+				((IFieldSelection<T>)f).FieldValuesDictionary = serializer.Deserialize<Dictionary<string, object>>( source.CreateReader());
 				hit.FieldSelection = f;
 			}
 

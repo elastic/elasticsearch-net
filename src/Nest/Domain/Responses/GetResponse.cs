@@ -74,13 +74,13 @@ namespace Nest
 			where TBindTo : class
 		{
 			if (this.Fields == null) return default(K[]);
-			return this.Fields.FieldValue<TBindTo,K>(objectPath);
+			return this.Fields.FieldValues<TBindTo,K>(objectPath);
 		}
 
 		public K FieldValue<K>(string path)
 		{
 			if (this.Fields == null) return default(K);
-			return this.Fields.FieldValue<K>(path);
+			return this.Fields.FieldValues<K>(path);
 		}
 
 	}
