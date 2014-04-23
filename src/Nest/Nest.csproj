@@ -127,6 +127,11 @@
     <Compile Include="Domain\Bulk\BulkUpdateBody.cs" />
     <Compile Include="Domain\Alias\IndexAliases.cs" />
     <Compile Include="Domain\Responses\IShardsOperationResponse.cs" />
+    <Compile Include="Domain\Responses\TermVectorResponse.cs" />
+    <Compile Include="Domain\TermVector\FieldStatistics.cs" />
+    <Compile Include="Domain\TermVector\TermVector.cs" />
+    <Compile Include="Domain\TermVector\TermVectorTerm.cs" />
+    <Compile Include="Domain\TermVector\Token.cs" />
     <Compile Include="DSL\Aggregations\AggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\BucketAggregationBaseDescriptor.cs" />
     <Compile Include="DSL\Aggregations\DateHistogramAggregationDescriptor.cs" />
@@ -182,6 +187,7 @@
     <Compile Include="DSL\Paths\IndexTypePathTypedDescriptor.cs" />
     <Compile Include="DSL\SearchDescriptorBase.cs" />
     <Compile Include="DSL\Search\SourceDescriptor.cs" />
+    <Compile Include="DSL\TermVectorDescriptor.cs" />
     <Compile Include="DSL\UnregisterPercolatorDescriptor.cs" />
     <Compile Include="DSL\DeleteTemplateDescriptor.cs" />
     <Compile Include="DSL\GetTemplateDescriptor.cs" />
@@ -203,6 +209,7 @@
     <Compile Include="DSL\UpdateSettingsDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalPathDescriptor.cs" />
     <Compile Include="ElasticClient-RootNodeInfo.cs" />
+    <Compile Include="ElasticClient-TermVector.cs" />
     <Compile Include="ElasticClient-UpdateSettings.cs" />
     <Compile Include="DSL\ISimpleGetDescriptor.cs" />
     <Compile Include="DSL\DeleteByQueryDescriptor.cs" />

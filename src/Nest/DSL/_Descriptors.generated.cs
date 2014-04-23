@@ -4761,13 +4761,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html
 	///</pre>
 	///</summary>
-	public partial class TermvectorDescriptor
+	public partial class TermvectorDescriptor<T>
 	{
 		internal TermvectorQueryString _QueryString = new TermvectorQueryString(); 
 
 
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
-		public TermvectorDescriptor TermStatistics(bool term_statistics = true)
+		public TermvectorDescriptor<T> TermStatistics(bool term_statistics = true)
 		{
 			this._QueryString.TermStatistics(term_statistics);
 			return this;
@@ -4775,7 +4775,7 @@ namespace Nest
 		
 
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
-		public TermvectorDescriptor FieldStatistics(bool field_statistics = true)
+		public TermvectorDescriptor<T> FieldStatistics(bool field_statistics = true)
 		{
 			this._QueryString.FieldStatistics(field_statistics);
 			return this;
@@ -4783,7 +4783,7 @@ namespace Nest
 		
 
 		///<summary>A comma-separated list of fields to return.</summary>
-		public TermvectorDescriptor Fields(params string[] fields)
+		public TermvectorDescriptor<T> Fields(params string[] fields)
 		{
 			this._QueryString.Fields(fields);
 			return this;
@@ -4791,7 +4791,7 @@ namespace Nest
 		
 			
 		///<summary>A comma-separated list of fields to return.</summary>
-		public TermvectorDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public TermvectorDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
@@ -4802,7 +4802,7 @@ namespace Nest
 			
 
 		///<summary>Specifies if term offsets should be returned.</summary>
-		public TermvectorDescriptor Offsets(bool offsets = true)
+		public TermvectorDescriptor<T> Offsets(bool offsets = true)
 		{
 			this._QueryString.Offsets(offsets);
 			return this;
@@ -4810,7 +4810,7 @@ namespace Nest
 		
 
 		///<summary>Specifies if term positions should be returned.</summary>
-		public TermvectorDescriptor Positions(bool positions = true)
+		public TermvectorDescriptor<T> Positions(bool positions = true)
 		{
 			this._QueryString.Positions(positions);
 			return this;
@@ -4818,7 +4818,7 @@ namespace Nest
 		
 
 		///<summary>Specifies if term payloads should be returned.</summary>
-		public TermvectorDescriptor Payloads(bool payloads = true)
+		public TermvectorDescriptor<T> Payloads(bool payloads = true)
 		{
 			this._QueryString.Payloads(payloads);
 			return this;
@@ -4826,7 +4826,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
-		public TermvectorDescriptor Preference(string preference)
+		public TermvectorDescriptor<T> Preference(string preference)
 		{
 			this._QueryString.Preference(preference);
 			return this;
@@ -4834,7 +4834,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value.</summary>
-		public TermvectorDescriptor Routing(string routing)
+		public TermvectorDescriptor<T> Routing(string routing)
 		{
 			this._QueryString.Routing(routing);
 			return this;
@@ -4842,7 +4842,7 @@ namespace Nest
 		
 
 		///<summary>Parent id of documents.</summary>
-		public TermvectorDescriptor Parent(string parent)
+		public TermvectorDescriptor<T> Parent(string parent)
 		{
 			this._QueryString.Parent(parent);
 			return this;
