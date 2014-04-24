@@ -204,7 +204,7 @@ namespace Elasticsearch.Net.Connection
 				if (maxRetries == 0 && retried == 0)
 					throw;
 				seenError = true;
-				return RetryRequest<T>(requestState, uri, retried, e);
+				return RetryRequest<T>(requestState, baseUri, retried, e);
 			}
 			finally
 			{
@@ -212,7 +212,7 @@ namespace Elasticsearch.Net.Connection
 				if (!seenError && response != null && response.SuccessOrKnownError)
 					this._connectionPool.MarkAlive(baseUri);
 			}
-			return RetryRequest<T>(requestState, uri, retried);
+			return RetryRequest<T>(requestState, baseUri, retried);
 		}
 
 		private Uri GetNextBaseUri<T>(TransportRequestState<T> requestState, out int initialSeed, out bool shouldPingHint)
@@ -233,6 +233,7 @@ namespace Elasticsearch.Net.Connection
 			var exceptionMessage = MaxRetryExceptionMessage.F(requestState.Method, requestState.Path.IsNullOrEmpty() ? "/" : "", retried);
 
 			this._connectionPool.MarkDead(baseUri, this._configurationValues.DeadTimeout, this._configurationValues.MaxDeadTimeout);
+
 			if (!SniffingDisabled(requestState.RequestConfiguration)
 				&& this._configurationValues.SniffsOnConnectionFault 
 				&& retried == 0)
