@@ -29,7 +29,6 @@ namespace Nest
 		public ConnectionSettings(Uri uri = null, string defaultIndex = null) 
 			: base(uri, defaultIndex)
 		{
-			uri.ThrowIfNull("uri");
 		}
 
 		/// <summary>
