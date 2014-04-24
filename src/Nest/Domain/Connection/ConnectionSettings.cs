@@ -85,7 +85,7 @@ namespace Nest
 		private ReadOnlyCollection<Func<Type, JsonConverter>> _contractConverters;
 		ReadOnlyCollection<Func<Type, JsonConverter>> IConnectionSettingsValues.ContractConverters { get { return _contractConverters; } }
 
-		public ConnectionSettings(IConnectionPool uri, string defaultIndex) : base(uri)
+		public ConnectionSettings(IConnectionPool connectionPool, string defaultIndex) : base(connectionPool)
 		{
 			if (!defaultIndex.IsNullOrEmpty())
 				this.SetDefaultIndex(defaultIndex);
