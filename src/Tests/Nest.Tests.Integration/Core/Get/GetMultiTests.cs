@@ -92,8 +92,8 @@ namespace Nest.Tests.Integration.Core.Get
 
 			var fieldSelection = personHit.FieldSelection;
 			fieldSelection.Should().NotBeNull();
-			fieldSelection.FieldValue<Person, int>(p=>p.Id).Should().BeEquivalentTo(new []{authorId});
-			fieldSelection.FieldValue<Person, string>(p => p.FirstName)
+			fieldSelection.FieldValues<Person, int>(p=>p.Id).Should().BeEquivalentTo(new []{authorId});
+			fieldSelection.FieldValues<Person, string>(p => p.FirstName)
 				.Should().NotBeEmpty();
 
 		}
@@ -122,15 +122,15 @@ namespace Nest.Tests.Integration.Core.Get
 			//personHit.FieldSelection would work too
 			var personFieldSelection = result.GetFieldSelection<Person>(authorId);
 			personFieldSelection.Should().NotBeNull();
-			personFieldSelection.FieldValue<Person, int>(p => p.Id).Should().BeEquivalentTo(new []{authorId});
-			personFieldSelection.FieldValue<Person, string>(p => p.FirstName)
+			personFieldSelection.FieldValues<Person, int>(p => p.Id).Should().BeEquivalentTo(new []{authorId});
+			personFieldSelection.FieldValues<Person, string>(p => p.FirstName)
 				.Should().NotBeEmpty();
 
 			var projectFieldSelection = result.GetFieldSelection<ElasticsearchProject>(projectId);
 			projectFieldSelection.Should().NotBeNull();
-			projectFieldSelection.FieldValue<ElasticsearchProject, int>(p => p.Id)
+			projectFieldSelection.FieldValues<ElasticsearchProject, int>(p => p.Id)
 				.Should().BeEquivalentTo(new []{projectId});
-			projectFieldSelection.FieldValue<ElasticsearchProject, string>(p => p.Followers.First().FirstName)
+			projectFieldSelection.FieldValues<ElasticsearchProject, string>(p => p.Followers.First().FirstName)
 				.Should().NotBeEmpty();
 
 		}

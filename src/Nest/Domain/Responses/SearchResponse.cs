@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Nest.Domain;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
@@ -20,8 +21,21 @@ namespace Nest
 		string ScrollId { get; }
 		long Total { get; }
 		double MaxScore { get; }
+		/// <summary>
+		/// Returns a view on the documents inside the hits that are returned. 
+		/// <para>NOTE: if you use Fields() on the search descriptor .Documents will be empty use 
+		/// .Fields instead or try the 'source filtering' feature introduced in Elasticsearch 1.0 
+		/// using .Source() on the search descriptor to get Documents of type T with only certain parts selected
+		/// </para>
+		/// </summary>
 		IEnumerable<T> Documents { get; }
 		IEnumerable<IHit<T>> Hits { get; }
+
+		/// <summary>
+		/// Will return the field selections inside the hits when the search descriptor specified .Fields.
+		/// Otherwise this will always be an empty collection.
+		/// </summary>
+		IEnumerable<FieldSelection<T>> FieldSelections { get; }
 		HighlightDocumentDictionary Highlights { get; }
 		F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet;
 		F Facet<F>(string fieldName) where F : class, IFacet;
@@ -54,7 +68,7 @@ namespace Nest
 		public IDictionary<string, IAggregation> Aggregations { get; internal set; }
 		
 		private AggregationsHelper _agg = null;
-
+		[JsonIgnore]
 		public AggregationsHelper Aggs
 		{
 			get { return _agg ?? (_agg = new AggregationsHelper(this.Aggregations)); }
@@ -72,54 +86,45 @@ namespace Nest
 		[JsonProperty(PropertyName = "_scroll_id")]
 		public string ScrollId { get; internal set; }
 
-		public long Total
-		{
-			get
-			{
-				if (this.HitsMetaData == null)
-				{
-					return 0;
-				}
-				return this.HitsMetaData.Total;
-			}
-		}
+		[JsonIgnore]
+		public long Total { get { return this.HitsMetaData == null ? 0 : this.HitsMetaData.Total; } }
 
-		public double MaxScore
-		{
-			get
-			{
-				if (this.HitsMetaData == null)
-				{
-					return 0;
-				}
-				return this.HitsMetaData.MaxScore;
-			}
-		}
+		[JsonIgnore]
+		public double MaxScore { get { return this.HitsMetaData == null ? 0 : this.HitsMetaData.MaxScore; } }
 
 		private IList<T> _documents; 
+		/// <inheritdoc />
+		[JsonIgnore]
 		public IEnumerable<T> Documents
 		{
 			get
 			{
-				if (this.HitsMetaData != null && this._documents == null)
-					this._documents = this.HitsMetaData.Hits.Select(h => h.Source).ToList();
-				return this._documents ?? Enumerable.Empty<T>();
+				return this._documents ?? (this._documents = this.Hits
+					.Select(h => h.Source)
+					.Where(d => d != null)
+					.ToList());
 			}
 		}
 		
 		[JsonIgnore]
 		public IEnumerable<IHit<T>> Hits
 		{
-			get
-			{
-				if (this.HitsMetaData != null)
-				{
-					return this.HitsMetaData.Hits;
-				}
+			get { return this.HitsMetaData != null ? (IEnumerable<IHit<T>>) this.HitsMetaData.Hits : new List<Hit<T>>(); }
+		}
 
-				return new List<Hit<T>>();
+		/// <inheritdoc />
+		[JsonIgnore]
+		public IEnumerable<FieldSelection<T>> FieldSelections
+		{
+			get 
+			{ 
+				return this.Hits
+					.Select(h => h.Fields)
+					.Where(f=>f != null)
+					.Select(f => new FieldSelection<T>(this.Settings, f.FieldValuesDictionary)); 
 			}
 		}
+
 
 		public F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet
 		{

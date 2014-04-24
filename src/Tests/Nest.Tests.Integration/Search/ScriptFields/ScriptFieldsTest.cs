@@ -30,7 +30,7 @@ namespace Nest.Tests.Integration.Search.ScriptFields
 			);
 			Assert.True(queryResults.IsValid);
 			Assert.True(queryResults.Hits.Any());
-			Assert.True(queryResults.Hits.All(h=>h.Fields.FieldValue<int[]>("locscriptfield").HasAny()));
+			Assert.True(queryResults.Hits.All(h=>h.Fields.FieldValues<int[]>("locscriptfield").HasAny()));
 		}
 	}
 }
