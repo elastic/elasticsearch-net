@@ -38,6 +38,15 @@ to `PutMappingDescriptor<T>`
 
 IResponse.Error.Exception no longer exists, it is inlined to IResponse.OriginalException. The Error property did not hold any information that was not available on IResponse.ConnectionStatus.
 
+### Response shortcuts
+
+Prior to 1.0 some calls directly returned a bool or value instead of the full envelopped Elasticsearch response.
+
+i.e `client.IndexExists("myIndexName")` used to return a bool but should now be called like this:
+
+     client.IndexExists(i => i.Index("myIndexName")).Exists
+
+
 ### Removed MapFromAttributes()
 
 Attributes are to limited in what they can specify so `[ElasticType()]` can now only specify the type name and the id property.
