@@ -48,8 +48,8 @@ namespace Nest.Tests.Integration.Core.Bulk
 		public void DoubleCreateReturnsOneError()
 		{
 			var result = this._client.Bulk(b => b
-				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 123123 }))
-				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 123123 }))
+				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 12315555 }))
+				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 12315555 }))
 			);
 
 			result.IsValid.Should().BeFalse();

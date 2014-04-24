@@ -34,7 +34,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			_dateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
 			var rnd = new Random();
 			uris.ThrowIfEmpty("uris");
-			_nodeUris = uris.ToList();
+			_nodeUris = uris.Distinct().ToList();
 			if (randomizeOnStartup)
 				_nodeUris = _nodeUris.OrderBy((item) => rnd.Next()).ToList();
 			_uriLookup = _nodeUris.ToDictionary(k=>k, v=> new EndpointState());
