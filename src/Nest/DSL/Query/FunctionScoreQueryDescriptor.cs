@@ -39,7 +39,7 @@ namespace Nest
         {
             get
             {
-                return (this._Query == null || this._Query.IsConditionless) && _RandomScore == null && _ScriptScore == null && (_Functions == null || _Functions.Count() == 0);
+                return (this._Query == null || this._Query.IsConditionless) && _RandomScore == null && _ScriptScore == null && (_Functions == null || !_Functions.Any());
             }
         }
 
