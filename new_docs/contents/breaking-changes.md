@@ -34,6 +34,10 @@ The fact that `client.Search<T>()` returns a `QueryResponse<T>` and not a `Searc
 
 to `PutMappingDescriptor<T>`
 
+### Removed IResponse.Error
+
+IResponse.Error.Exception no longer exists, it is inlined to IResponse.OriginalException. The Error property did not hold any information that was not available on IResponse.ConnectionStatus.
+
 ### Removed MapFromAttributes()
 
 Attributes are to limited in what they can specify so `[ElasticType()]` can now only specify the type name and the id property.
