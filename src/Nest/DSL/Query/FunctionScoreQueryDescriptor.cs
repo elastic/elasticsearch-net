@@ -49,7 +49,7 @@ namespace Nest
             var query = new QueryDescriptor<T>();
             var q = querySelector(query);
 
-            this._Query = q;
+            this._Query = q.IsConditionless ? null : q;
             return this;
         }
 
