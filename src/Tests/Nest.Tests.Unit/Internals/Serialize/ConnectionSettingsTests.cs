@@ -34,6 +34,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
 				.SetDefaultPropertyNameInferrer(p=>p)
 				.SetJsonSerializerSettingsModifier(s =>
 				{
+					s.DateFormatHandling = DateFormatHandling.IsoDateFormat;
 					s.DateTimeZoneHandling = handling;
 				});
 			var client = new ElasticClient(settings);

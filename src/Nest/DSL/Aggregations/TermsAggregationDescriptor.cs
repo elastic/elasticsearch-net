@@ -100,7 +100,7 @@ namespace Nest
 		{
 			this._Include = new Dictionary<string, string> { {"pattern", includePattern}};
 			if (!regexFlags.IsNullOrEmpty())
-				this._Include.Add("pattern", regexFlags);
+				this._Include.Add("flags", regexFlags);
 			return this;
 		}
 		
@@ -111,7 +111,7 @@ namespace Nest
 		{
 			this._Exclude = new Dictionary<string, string> { {"pattern", excludePattern}};
 			if (!regexFlags.IsNullOrEmpty())
-				this._Exclude.Add("pattern", regexFlags);
+				this._Exclude.Add("flags", regexFlags);
 			return this;
 		}
 	}
