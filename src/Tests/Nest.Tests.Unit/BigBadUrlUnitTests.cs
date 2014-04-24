@@ -43,8 +43,8 @@ namespace Nest.Tests.Unit.Cluster
 		public void TestAllTheUrls()
 		{
 			Do("POST", "/_aliases", c => c.Alias(a => a));
-			Do("GET", "/_analyze", c => c.Analyze(a => a));
-			Do("GET", "/myindex/_analyze", c => c.Analyze(a => a.Index("myindex")));
+			Do("POST", "/_analyze", c => c.Analyze(a => a.Text("blah")));
+			Do("POST", "/myindex/_analyze", c => c.Analyze(a => a.Index("myindex").Text("blah")));
 			Do("POST", "/myindex/_bulk", c => c.Bulk(b => b.FixedPath("myindex").Index<Doc>(ib => ib.Object(new Doc { Id = "1" }))));
 			Do("POST", "/myindex/mytype/_bulk", c => c.Bulk(b => b.FixedPath("myindex", "mytype").Index<Doc>(ib => ib.Object(new Doc { Id = "1" }))));
 			Do("POST", "/myindex/_bulk", c => c.Bulk(b => b.FixedPath("myindex").Index<Doc>(ib => ib.Object(new Doc { Id = "1" }))));
