@@ -158,6 +158,7 @@
     <Compile Include="Integration\Filter\BoolFilterTests.cs" />
     <Compile Include="Integration\HighlightTests.cs" />
     <Compile Include="Integration\Query\TermQueryDynamic.cs" />
+    <Compile Include="LowLevel\DynamicNullTests.cs" />
     <Compile Include="Mapping\NotAnalyzedTest.cs" />
     <Compile Include="RawCalls\ReturnTypesTest.cs" />
     <Compile Include="Reproduce\Reproduce487Tests.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Reproduce\Reproduce319Tests.cs" />
     <Compile Include="Reproduce\Reproduce211Tests.cs" />
     <Compile Include="Reproduce\ReproduceConnectionStallsTests.cs" />
+    <Compile Include="Search\FieldTests\FieldsTest.cs" />
     <Compile Include="Search\NamedFilter\NamedFilterTests.cs" />
     <Compile Include="Search\PercolateTests.cs" />
     <Compile Include="Search\CountTests.cs" />
