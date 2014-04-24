@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Connection;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Nest.Resolvers;
@@ -18,18 +19,17 @@ namespace Nest
 		private IConnectionSettingsValues _connectionSettings;
 
 
+		public CreateIndexDescriptor(IConnectionSettingsValues connectionSettings)
+		{
+			this._connectionSettings = connectionSettings;
+		}
+
 		/// <summary>
 		/// Initialize the descriptor using the values from for instance a previous Get Index Settings call.
 		/// </summary>
 		public CreateIndexDescriptor InitializeUsing(IndexSettings indexSettings)
 		{
 			this._IndexSettings = indexSettings;
-			return this;
-		}
-
-		internal CreateIndexDescriptor SetConnectionSettings(IConnectionSettingsValues connectionSettings)
-		{
-			this._connectionSettings = connectionSettings;
 			return this;
 		}
 

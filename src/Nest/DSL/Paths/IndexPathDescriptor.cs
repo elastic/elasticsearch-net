@@ -19,7 +19,7 @@ namespace Nest
 	/// index is not optional 
 	/// </summary>
 	public class IndexPathDescriptorBase<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor> 
-		where TDescriptor : IndexPathDescriptorBase<TDescriptor, TParameters>, new()
+		where TDescriptor : IndexPathDescriptorBase<TDescriptor, TParameters>
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		internal IndexNameMarker _Index { get; set; }

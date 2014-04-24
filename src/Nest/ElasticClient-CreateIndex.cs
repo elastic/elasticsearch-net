@@ -11,8 +11,9 @@ namespace Nest
 		/// <inheritdoc />
 		public IIndicesOperationResponse CreateIndex(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector)
 		{
+			var descriptor = createIndexSelector(new CreateIndexDescriptor(this._connectionSettings)); 
 			return this.Dispatch<CreateIndexDescriptor, CreateIndexRequestParameters, IndicesOperationResponse>(
-				c => createIndexSelector(new CreateIndexDescriptor().SetConnectionSettings(this._connectionSettings)),
+				descriptor,
 				(p, d) => this.RawDispatch.IndicesCreateDispatch<IndicesOperationResponse>(p, d._IndexSettings)
 			);
 		} 
@@ -20,9 +21,10 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IIndicesOperationResponse> CreateIndexAsync(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector)
 		{
+			var descriptor = createIndexSelector(new CreateIndexDescriptor(this._connectionSettings)); 
 			return this.DispatchAsync
 				<CreateIndexDescriptor, CreateIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
-					c => createIndexSelector(new CreateIndexDescriptor().SetConnectionSettings(this._connectionSettings)),
+					descriptor,
 					(p, d) => this.RawDispatch.IndicesCreateDispatchAsync<IndicesOperationResponse>(p, d._IndexSettings)
 				);
 		}
