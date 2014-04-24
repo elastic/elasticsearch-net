@@ -94,6 +94,7 @@
     <Compile Include="ConvenienceExtensions\GetExtensions.cs" />
     <Compile Include="ConvenienceExtensions\GetManyExtensions.cs" />
     <Compile Include="ConvenienceExtensions\GetMappingExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\CreateIndexExtensions.cs" />
     <Compile Include="ConvenienceExtensions\OpenCloseIndexExtensions.cs" />
     <Compile Include="ConvenienceExtensions\ScrollExtensions.cs" />
     <Compile Include="ConvenienceExtensions\SerializerExtensions.cs" />

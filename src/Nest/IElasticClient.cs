@@ -584,18 +584,16 @@ namespace Nest
 		/// including executing operations across several indices.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
 		/// </summary>
-		/// <param name="index">The name of the index to be created</param>
-		/// <param name="createIndexSelector">A descriptor that further describes the parameters for the create index operation</param>
-		IIndicesOperationResponse CreateIndex(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector = null);
+		/// <param name="createIndexSelector">A descriptor that describes the parameters for the create index operation</param>
+		IIndicesOperationResponse CreateIndex(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
 
 		/// <summary>
 		/// The create index API allows to instantiate an index. Elasticsearch provides support for multiple indices, 
 		/// including executing operations across several indices.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
 		/// </summary>
-		/// <param name="index">The name of the index to be created</param>
-		/// <param name="createIndexSelector">A descriptor that further describes the parameters for the create index operation</param>
-		Task<IIndicesOperationResponse> CreateIndexAsync(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
+		/// <param name="createIndexSelector">A descriptor that describes the parameters for the create index operation</param>
+		Task<IIndicesOperationResponse> CreateIndexAsync(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
 		
 		/// <summary>
 		/// Does a request to the root of an elasticsearch node

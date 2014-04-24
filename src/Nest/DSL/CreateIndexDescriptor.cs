@@ -11,16 +11,13 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesCreate")]
-	public partial class CreateIndexDescriptor : IPathInfo<CreateIndexRequestParameters>
+	public partial class CreateIndexDescriptor : IndexPathDescriptorBase<CreateIndexDescriptor, CreateIndexRequestParameters>,
+		IPathInfo<CreateIndexRequestParameters>
 	{
 		internal string _Index { get; set; }
 		internal IndexSettings _IndexSettings = new IndexSettings();
 		private readonly IConnectionSettingsValues _connectionSettings;
 
-		public CreateIndexDescriptor(IConnectionSettingsValues connectionSettings)
-		{
-			this._connectionSettings = connectionSettings;
-		}
 
 		/// <summary>
 		/// Initialize the descriptor using the values from for instance a previous Get Index Settings call.
@@ -170,12 +167,9 @@ namespace Nest
 
 		ElasticsearchPathInfo<CreateIndexRequestParameters> IPathInfo<CreateIndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = new ElasticsearchPathInfo<CreateIndexRequestParameters>();
+			var pathInfo = base.ToPathInfo<CreateIndexRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			pathInfo.Index = this._Index;
-			pathInfo.RequestParameters = this._QueryString;
 			return pathInfo;
-
 		}
 
 	}
