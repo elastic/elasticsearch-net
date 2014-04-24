@@ -30,6 +30,10 @@ Similarily `GetMany()` is now called `SourceMany()`.
 
 The fact that `client.Search<T>()` returns a `QueryResponse<T>` and not a `SearchResponse<T>` never felt right to me, NEST 1.0 therefor renamed `QueryResponse<T>` to `SearchResponse<T>`
 
+### Renamed RootObjectMappingDescriptor
+
+to `PutMappingDescriptor<T>`
+
 ### Removed MapFromAttributes()
 
 Attributes are to limited in what they can specify so `[ElasticType()]` can now only specify the type name and the id property.
