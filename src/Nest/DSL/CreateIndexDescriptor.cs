@@ -16,7 +16,7 @@ namespace Nest
 	{
 		internal string _Index { get; set; }
 		internal IndexSettings _IndexSettings = new IndexSettings();
-		private readonly IConnectionSettingsValues _connectionSettings;
+		private IConnectionSettingsValues _connectionSettings;
 
 
 		/// <summary>
@@ -25,6 +25,12 @@ namespace Nest
 		public CreateIndexDescriptor InitializeUsing(IndexSettings indexSettings)
 		{
 			this._IndexSettings = indexSettings;
+			return this;
+		}
+
+		internal CreateIndexDescriptor SetConnectionSettings(IConnectionSettingsValues connectionSettings)
+		{
+			this._connectionSettings = connectionSettings;
 			return this;
 		}
 

@@ -12,7 +12,7 @@ namespace Nest
 		public IIndicesOperationResponse CreateIndex(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector)
 		{
 			return this.Dispatch<CreateIndexDescriptor, CreateIndexRequestParameters, IndicesOperationResponse>(
-				createIndexSelector,
+				c => createIndexSelector(new CreateIndexDescriptor().SetConnectionSettings(this._connectionSettings)),
 				(p, d) => this.RawDispatch.IndicesCreateDispatch<IndicesOperationResponse>(p, d._IndexSettings)
 			);
 		} 
@@ -22,7 +22,7 @@ namespace Nest
 		{
 			return this.DispatchAsync
 				<CreateIndexDescriptor, CreateIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
-					createIndexSelector,
+					c => createIndexSelector(new CreateIndexDescriptor().SetConnectionSettings(this._connectionSettings)),
 					(p, d) => this.RawDispatch.IndicesCreateDispatchAsync<IndicesOperationResponse>(p, d._IndexSettings)
 				);
 		}
