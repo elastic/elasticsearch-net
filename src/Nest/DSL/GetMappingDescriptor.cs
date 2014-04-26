@@ -13,12 +13,12 @@ namespace Nest
 {
 	[DescriptorFor("IndicesGetMapping")]
 	public partial class GetMappingDescriptor : 
-		IndexTypePathDescriptor<GetMappingDescriptor, GetMappingQueryString>
-		, IPathInfo<GetMappingQueryString>
+		IndexTypePathDescriptor<GetMappingDescriptor, GetMappingRequestParameters>
+		, IPathInfo<GetMappingRequestParameters>
 	{
-		ElasticsearchPathInfo<GetMappingQueryString> IPathInfo<GetMappingQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<GetMappingRequestParameters> IPathInfo<GetMappingRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<GetMappingQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<GetMappingRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 
 			return pathInfo;

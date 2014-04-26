@@ -25,7 +25,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesOptimize1
 
 				//do indices.optimize 
 				this.Do(()=> _client.IndicesOptimize("testing", nv=>nv
-					.Add("max_num_segments", 1)
+					.AddQueryString("max_num_segments", 1)
 				));
 
 			}

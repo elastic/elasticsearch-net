@@ -39,8 +39,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Scroll1
 					}
 				};
 				this.Do(()=> _client.Search("test_scroll", _body, nv=>nv
-					.Add("search_type", @"scan")
-					.Add("scroll", @"1m")
+					.AddQueryString("search_type", @"scan")
+					.AddQueryString("scroll", @"1m")
 				));
 
 				//set scroll_id = _response._scroll_id; 

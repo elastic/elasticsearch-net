@@ -6,36 +6,42 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
+		/// <inheritdoc />
 		public IIndicesOperationResponse OpenIndex(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector)
 		{
-			return this.Dispatch<OpenIndexDescriptor, OpenIndexQueryString, IndicesOperationResponse>(
+			return this.Dispatch<OpenIndexDescriptor, OpenIndexRequestParameters, IndicesOperationResponse>(
 				openIndexSelector,
-				(p, d) => this.RawDispatch.IndicesOpenDispatch(p)
+				(p, d) => this.RawDispatch.IndicesOpenDispatch<IndicesOperationResponse>(p)
 			);
 		}
 
+		/// <inheritdoc />
 		public Task<IIndicesOperationResponse> OpenIndexAsync(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector)
 		{
-			return this.DispatchAsync<OpenIndexDescriptor, OpenIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+			return this.DispatchAsync<OpenIndexDescriptor, OpenIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 				openIndexSelector,
-				(p, d) => this.RawDispatch.IndicesOpenDispatchAsync(p)
+				(p, d) => this.RawDispatch.IndicesOpenDispatchAsync<IndicesOperationResponse>(p)
 			);
 		}
 
+		/// <inheritdoc />
 		public IIndicesOperationResponse CloseIndex(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector)
 		{
-			return this.Dispatch<CloseIndexDescriptor, CloseIndexQueryString, IndicesOperationResponse>(
+			return this.Dispatch<CloseIndexDescriptor, CloseIndexRequestParameters, IndicesOperationResponse>(
 				closeIndexSelector,
-				(p, d) => this.RawDispatch.IndicesCloseDispatch(p)
+				(p, d) => this.RawDispatch.IndicesCloseDispatch<IndicesOperationResponse>(p)
 			);
 		}
 
-		public Task<IIndicesOperationResponse> CloseIndexAsync(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector)
+		/// <inheritdoc />
+		public Task<IIndicesOperationResponse> CloseIndexAsync(
+			Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector)
 		{
-			return this.DispatchAsync<CloseIndexDescriptor, CloseIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
-				closeIndexSelector,
-				(p, d) => this.RawDispatch.IndicesCloseDispatchAsync(p)
-			);
+			return this.DispatchAsync
+				<CloseIndexDescriptor, CloseIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+					closeIndexSelector,
+					(p, d) => this.RawDispatch.IndicesCloseDispatchAsync<IndicesOperationResponse>(p)
+				);
 		}
 	}
 }

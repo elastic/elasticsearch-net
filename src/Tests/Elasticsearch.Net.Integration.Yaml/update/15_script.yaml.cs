@@ -36,7 +36,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Update2
 					}
 				};
 				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
-					.Add("script", 1)
+					.AddQueryString("script", 1)
 				));
 
 				//match _response._index: 
@@ -62,8 +62,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Update2
 
 				//do update 
 				this.Do(()=> _client.Update("test_1", "test", "1", null, nv=>nv
-					.Add("lang", @"mvel")
-					.Add("script", @"ctx._source.foo = 'yyy'")
+					.AddQueryString("lang", @"mvel")
+					.AddQueryString("script", @"ctx._source.foo = 'yyy'")
 				));
 
 				//match _response._index: 
@@ -99,8 +99,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Update2
 
 				//do update 
 				this.Do(()=> _client.Update("test_1", "test", "1", null, nv=>nv
-					.Add("lang", @"doesnotexist")
-					.Add("script", 1)
+					.AddQueryString("lang", @"doesnotexist")
+					.AddQueryString("script", 1)
 				), shouldCatch: @"/script_lang not supported \[doesnotexist\]/");
 
 			}

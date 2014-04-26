@@ -13,7 +13,7 @@ namespace Nest
 		[JsonProperty("alias")]
 		public string Alias { get; set; }
 		[JsonProperty("filter")]
-		public FilterBase Filter { get; set; }
+		public BaseFilter Filter { get; set; }
 		[JsonProperty("routing")]
 		public string Routing { get; set; }
 		[JsonProperty("index_routing")]

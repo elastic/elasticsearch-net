@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using Elasticsearch.Net;
 
 namespace Nest.Tests.Unit.Search.SearchOptions
 {
@@ -117,7 +118,9 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.Size(10)
 				.ExecuteOnNode("somenode");
 			var result = this._client.Search<ElasticsearchProject>(ss=>s);
-			StringAssert.Contains("preference=_only_node%3Asomenode", result.ConnectionStatus.RequestUrl);
+			//normalize difference between .NET 4.5 and prior
+			var url = result.ConnectionStatus.RequestUrl.Replace("%3A", ":");
+			StringAssert.Contains("preference=_only_node:somenode", url);
 		}
 		[Test]
 		public void TestExecuteOnPreferredNode()
@@ -127,7 +130,9 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.Size(10)
 				.ExecuteOnPreferredNode("somenode");
 			var result = this._client.Search<ElasticsearchProject>(ss=>s);
-			StringAssert.Contains("preference=_prefer_node%3Asomenode", result.ConnectionStatus.RequestUrl);
+			//normalize difference between .NET 4.5 and prior
+			var url = result.ConnectionStatus.RequestUrl.Replace("%3A", ":");
+			StringAssert.Contains("preference=_prefer_node:somenode", url);
 		}
 		[Test]
 		public void TestFields()

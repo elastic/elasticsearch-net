@@ -23,9 +23,19 @@ namespace Nest.Tests.Integration.Core.Bulk
 
 			unknownIndexResult.Exists.Should().BeFalse();
 
-			unknownIndexResult.ConnectionStatus.Error.Should().NotBeNull();
-			unknownIndexResult.ConnectionStatus.Error.HttpStatusCode.Should().Be(HttpStatusCode.NotFound);
+			unknownIndexResult.ConnectionStatus.HttpStatusCode.Should().Be(404);
 
+		}
+
+		[Test]
+		public void EmptyResponseShouldNotThrowError()
+		{
+			var isValidThriftConnection = this._thriftClient.RootNodeInfo().IsValid;
+			isValidThriftConnection.Should().BeTrue();
+
+			var result = this._thriftClient.Connection.HeadSync(ElasticsearchConfiguration.CreateBaseUri(9500));
+			result.Success.Should().BeTrue();
+			result.OriginalException.Should().BeNull();
 		}
 	}
 }

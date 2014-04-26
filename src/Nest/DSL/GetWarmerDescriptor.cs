@@ -13,12 +13,12 @@ namespace Nest
 {
 	[DescriptorFor("IndicesGetWarmer")]
 	public partial class GetWarmerDescriptor : 
-		IndicesOptionalTypesNamePathDecriptor<GetWarmerDescriptor, GetWarmerQueryString>
-		, IPathInfo<GetWarmerQueryString>
+		IndicesOptionalTypesNamePathDecriptor<GetWarmerDescriptor, GetWarmerRequestParameters>
+		, IPathInfo<GetWarmerRequestParameters>
 	{
-		ElasticsearchPathInfo<GetWarmerQueryString> IPathInfo<GetWarmerQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<GetWarmerRequestParameters> IPathInfo<GetWarmerRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<GetWarmerQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<GetWarmerRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 
 			return pathInfo;

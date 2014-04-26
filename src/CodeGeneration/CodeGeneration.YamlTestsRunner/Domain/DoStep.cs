@@ -120,7 +120,7 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 			{
 				var nv = "nv=>nv\r\n";
 				nv += queryStringKeys.Aggregate("",
-					(current, k) => current + string.Format("\t\t\t\t\t.Add(\"{0}\", {1})\r\n", k, this.GetQueryStringValue(k)));
+					(current, k) => current + string.Format("\t\t\t\t\t.AddQueryString(\"{0}\", {1})\r\n", k, this.GetQueryStringValue(k)));
 				nv += "\t\t\t\t";
 				args.Add(nv);
 			}

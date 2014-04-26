@@ -12,8 +12,8 @@ using Nest.Resolvers;
 namespace Nest
 {
 
-	public class RegisterPercolatorDescriptor<T> : IndexNamePathDescriptor<RegisterPercolatorDescriptor<T>, IndexQueryString>
- 		, IPathInfo<IndexQueryString> 
+	public class RegisterPercolatorDescriptor<T> : IndexNamePathDescriptor<RegisterPercolatorDescriptor<T>, IndexRequestParameters>
+ 		, IPathInfo<IndexRequestParameters> 
 		where T : class
 	{
 		internal FluentDictionary<string, object> _RequestBody
@@ -52,13 +52,13 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<IndexQueryString> IPathInfo<IndexQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<IndexRequestParameters> IPathInfo<IndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			//registering a percolator in elasticsearch < 1.0 is actually indexing a document in a 
 			//special _percolator index where the passed index is actually a type
 			//the name is actually the id, we rectify that here
 
-			var pathInfo = base.ToPathInfo<IndexQueryString>(settings, new IndexQueryString());
+			var pathInfo = base.ToPathInfo<IndexRequestParameters>(settings, new IndexRequestParameters());
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			pathInfo.Index = pathInfo.Index;
 			pathInfo.Id = pathInfo.Name;

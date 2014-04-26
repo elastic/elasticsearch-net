@@ -18,7 +18,7 @@ namespace Nest
 	///</summary>
 	public partial class BulkDescriptor
 	{
-		internal BulkQueryString _QueryString = new BulkQueryString(); 
+		internal BulkRequestParameters _QueryString = new BulkRequestParameters(); 
 
 
 		///<summary>Explicit write consistency setting for the operation</summary>
@@ -79,7 +79,7 @@ namespace Nest
 	///</summary>
 	public partial class CatAliasesDescriptor
 	{
-		internal CatAliasesQueryString _QueryString = new CatAliasesQueryString(); 
+		internal CatAliasesRequestParameters _QueryString = new CatAliasesRequestParameters(); 
 
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -132,7 +132,7 @@ namespace Nest
 	///</summary>
 	public partial class CatAllocationDescriptor
 	{
-		internal CatAllocationQueryString _QueryString = new CatAllocationQueryString(); 
+		internal CatAllocationRequestParameters _QueryString = new CatAllocationRequestParameters(); 
 
 
 		///<summary>The unit in which to display byte values</summary>
@@ -193,7 +193,7 @@ namespace Nest
 	///</summary>
 	public partial class CatCountDescriptor
 	{
-		internal CatCountQueryString _QueryString = new CatCountQueryString(); 
+		internal CatCountRequestParameters _QueryString = new CatCountRequestParameters(); 
 
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -246,7 +246,7 @@ namespace Nest
 	///</summary>
 	public partial class CatHealthDescriptor
 	{
-		internal CatHealthQueryString _QueryString = new CatHealthQueryString(); 
+		internal CatHealthRequestParameters _QueryString = new CatHealthRequestParameters(); 
 
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -307,7 +307,7 @@ namespace Nest
 	///</summary>
 	public partial class CatHelpDescriptor
 	{
-		internal CatHelpQueryString _QueryString = new CatHelpQueryString(); 
+		internal CatHelpRequestParameters _QueryString = new CatHelpRequestParameters(); 
 
 
 		///<summary>Return help information</summary>
@@ -328,7 +328,7 @@ namespace Nest
 	///</summary>
 	public partial class CatIndicesDescriptor
 	{
-		internal CatIndicesQueryString _QueryString = new CatIndicesQueryString(); 
+		internal CatIndicesRequestParameters _QueryString = new CatIndicesRequestParameters(); 
 
 
 		///<summary>The unit in which to display byte values</summary>
@@ -397,7 +397,7 @@ namespace Nest
 	///</summary>
 	public partial class CatMasterDescriptor
 	{
-		internal CatMasterQueryString _QueryString = new CatMasterQueryString(); 
+		internal CatMasterRequestParameters _QueryString = new CatMasterRequestParameters(); 
 
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -450,7 +450,7 @@ namespace Nest
 	///</summary>
 	public partial class CatNodesDescriptor
 	{
-		internal CatNodesQueryString _QueryString = new CatNodesQueryString(); 
+		internal CatNodesRequestParameters _QueryString = new CatNodesRequestParameters(); 
 
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -503,7 +503,7 @@ namespace Nest
 	///</summary>
 	public partial class CatPendingTasksDescriptor
 	{
-		internal CatPendingTasksQueryString _QueryString = new CatPendingTasksQueryString(); 
+		internal CatPendingTasksRequestParameters _QueryString = new CatPendingTasksRequestParameters(); 
 
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -549,6 +549,59 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for CatPlugins
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-plugins.html
+	///</pre>
+	///</summary>
+	public partial class CatPluginsDescriptor
+	{
+		internal CatPluginsRequestParameters _QueryString = new CatPluginsRequestParameters(); 
+
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public CatPluginsDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public CatPluginsDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatPluginsDescriptor H(params string[] h)
+		{
+			this._QueryString.H(h);
+			return this;
+		}
+		
+
+		///<summary>Return help information</summary>
+		public CatPluginsDescriptor Help(bool help = true)
+		{
+			this._QueryString.Help(help);
+			return this;
+		}
+		
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatPluginsDescriptor V(bool v = true)
+		{
+			this._QueryString.V(v);
+			return this;
+		}
+		
+		
+	}
+	
+	
 	///<summary>descriptor for CatRecovery
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html
@@ -556,21 +609,13 @@ namespace Nest
 	///</summary>
 	public partial class CatRecoveryDescriptor
 	{
-		internal CatRecoveryQueryString _QueryString = new CatRecoveryQueryString(); 
+		internal CatRecoveryRequestParameters _QueryString = new CatRecoveryRequestParameters(); 
 
 
 		///<summary>The unit in which to display byte values</summary>
 		public CatRecoveryDescriptor Bytes(BytesOptions bytes)
 		{
 			this._QueryString.Bytes(bytes);
-			return this;
-		}
-		
-
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatRecoveryDescriptor Local(bool local = true)
-		{
-			this._QueryString.Local(local);
 			return this;
 		}
 		
@@ -617,7 +662,7 @@ namespace Nest
 	///</summary>
 	public partial class CatShardsDescriptor
 	{
-		internal CatShardsQueryString _QueryString = new CatShardsQueryString(); 
+		internal CatShardsRequestParameters _QueryString = new CatShardsRequestParameters(); 
 
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -670,7 +715,7 @@ namespace Nest
 	///</summary>
 	public partial class CatThreadPoolDescriptor
 	{
-		internal CatThreadPoolQueryString _QueryString = new CatThreadPoolQueryString(); 
+		internal CatThreadPoolRequestParameters _QueryString = new CatThreadPoolRequestParameters(); 
 
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -731,7 +776,7 @@ namespace Nest
 	///</summary>
 	public partial class ClearScrollDescriptor
 	{
-		internal ClearScrollQueryString _QueryString = new ClearScrollQueryString(); 
+		internal ClearScrollRequestParameters _QueryString = new ClearScrollRequestParameters(); 
 
 		
 	}
@@ -744,7 +789,7 @@ namespace Nest
 	///</summary>
 	public partial class ClusterGetSettingsDescriptor
 	{
-		internal ClusterGetSettingsQueryString _QueryString = new ClusterGetSettingsQueryString(); 
+		internal ClusterGetSettingsRequestParameters _QueryString = new ClusterGetSettingsRequestParameters(); 
 
 
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -781,7 +826,7 @@ namespace Nest
 	///</summary>
 	public partial class ClusterHealthDescriptor
 	{
-		internal ClusterHealthQueryString _QueryString = new ClusterHealthQueryString(); 
+		internal ClusterHealthRequestParameters _QueryString = new ClusterHealthRequestParameters(); 
 
 
 		///<summary>Specify the level of detail for returned information</summary>
@@ -858,7 +903,7 @@ namespace Nest
 	///</summary>
 	public partial class ClusterPendingTasksDescriptor
 	{
-		internal ClusterPendingTasksQueryString _QueryString = new ClusterPendingTasksQueryString(); 
+		internal ClusterPendingTasksRequestParameters _QueryString = new ClusterPendingTasksRequestParameters(); 
 
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -887,7 +932,7 @@ namespace Nest
 	///</summary>
 	public partial class ClusterPutSettingsDescriptor
 	{
-		internal ClusterPutSettingsQueryString _QueryString = new ClusterPutSettingsQueryString(); 
+		internal ClusterPutSettingsRequestParameters _QueryString = new ClusterPutSettingsRequestParameters(); 
 
 
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -908,13 +953,21 @@ namespace Nest
 	///</summary>
 	public partial class ClusterRerouteDescriptor
 	{
-		internal ClusterRerouteQueryString _QueryString = new ClusterRerouteQueryString(); 
+		internal ClusterRerouteRequestParameters _QueryString = new ClusterRerouteRequestParameters(); 
 
 
 		///<summary>Simulate the operation only and return the resulting state</summary>
 		public ClusterRerouteDescriptor DryRun(bool dry_run = true)
 		{
 			this._QueryString.DryRun(dry_run);
+			return this;
+		}
+		
+
+		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
+		public ClusterRerouteDescriptor Explain(bool explain = true)
+		{
+			this._QueryString.Explain(explain);
 			return this;
 		}
 		
@@ -953,7 +1006,7 @@ namespace Nest
 	///</summary>
 	public partial class ClusterStateDescriptor
 	{
-		internal ClusterStateQueryString _QueryString = new ClusterStateQueryString(); 
+		internal ClusterStateRequestParameters _QueryString = new ClusterStateRequestParameters(); 
 
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -998,7 +1051,7 @@ namespace Nest
 	///</summary>
 	public partial class ClusterStatsDescriptor
 	{
-		internal ClusterStatsQueryString _QueryString = new ClusterStatsQueryString(); 
+		internal ClusterStatsRequestParameters _QueryString = new ClusterStatsRequestParameters(); 
 
 
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -1027,7 +1080,7 @@ namespace Nest
 	///</summary>
 	public partial class CountDescriptor<T>
 	{
-		internal CountQueryString _QueryString = new CountQueryString(); 
+		internal CountRequestParameters _QueryString = new CountRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1094,13 +1147,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
-	public partial class CountPercolateDescriptor
+	public partial class PercolateCountDescriptor<T,K>
 	{
-		internal CountPercolateQueryString _QueryString = new CountPercolateQueryString(); 
+		internal PercolateCountRequestParameters _QueryString = new PercolateCountRequestParameters(); 
 
 
 		///<summary>A comma-separated list of specific routing values</summary>
-		public CountPercolateDescriptor Routing(params string[] routing)
+		public PercolateCountDescriptor<T,K> Routing(params string[] routing)
 		{
 			this._QueryString.Routing(routing);
 			return this;
@@ -1108,7 +1161,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public CountPercolateDescriptor Preference(string preference)
+		public PercolateCountDescriptor<T,K> Preference(string preference)
 		{
 			this._QueryString.Preference(preference);
 			return this;
@@ -1116,7 +1169,7 @@ namespace Nest
 		
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public CountPercolateDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public PercolateCountDescriptor<T,K> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this._QueryString.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -1124,7 +1177,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public CountPercolateDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public PercolateCountDescriptor<T,K> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this._QueryString.AllowNoIndices(allow_no_indices);
 			return this;
@@ -1132,7 +1185,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CountPercolateDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PercolateCountDescriptor<T,K> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._QueryString.ExpandWildcards(expand_wildcards);
 			return this;
@@ -1140,7 +1193,7 @@ namespace Nest
 		
 
 		///<summary>The index to count percolate the document into. Defaults to index.</summary>
-		public CountPercolateDescriptor PercolateIndex(string percolate_index)
+		public PercolateCountDescriptor<T,K> PercolateIndex(string percolate_index)
 		{
 			this._QueryString.PercolateIndex(percolate_index);
 			return this;
@@ -1148,7 +1201,7 @@ namespace Nest
 		
 
 		///<summary>The type to count percolate document into. Defaults to type.</summary>
-		public CountPercolateDescriptor PercolateType(string percolate_type)
+		public PercolateCountDescriptor<T,K> PercolateType(string percolate_type)
 		{
 			this._QueryString.PercolateType(percolate_type);
 			return this;
@@ -1156,7 +1209,7 @@ namespace Nest
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public CountPercolateDescriptor Version(int version)
+		public PercolateCountDescriptor<T,K> Version(int version)
 		{
 			this._QueryString.Version(version);
 			return this;
@@ -1164,7 +1217,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public CountPercolateDescriptor VersionType(VersionTypeOptions version_type)
+		public PercolateCountDescriptor<T,K> VersionType(VersionTypeOptions version_type)
 		{
 			this._QueryString.VersionType(version_type);
 			return this;
@@ -1181,7 +1234,7 @@ namespace Nest
 	///</summary>
 	public partial class DeleteDescriptor<T>
 	{
-		internal DeleteQueryString _QueryString = new DeleteQueryString(); 
+		internal DeleteRequestParameters _QueryString = new DeleteRequestParameters(); 
 
 
 		///<summary>Specific write consistency setting for the operation</summary>
@@ -1258,7 +1311,7 @@ namespace Nest
 	///</summary>
 	public partial class DeleteByQueryDescriptor<T>
 	{
-		internal DeleteByQueryQueryString _QueryString = new DeleteByQueryQueryString(); 
+		internal DeleteByQueryRequestParameters _QueryString = new DeleteByQueryRequestParameters(); 
 
 
 		///<summary>The analyzer to use for the query string</summary>
@@ -1365,13 +1418,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
-	public partial class ExistsDescriptor
+	public partial class DocumentExistsDescriptor<T>
 	{
-		internal ExistsQueryString _QueryString = new ExistsQueryString(); 
+		internal DocumentExistsRequestParameters _QueryString = new DocumentExistsRequestParameters(); 
 
 
 		///<summary>The ID of the parent document</summary>
-		public ExistsDescriptor Parent(string parent)
+		public DocumentExistsDescriptor<T> Parent(string parent)
 		{
 			this._QueryString.Parent(parent);
 			return this;
@@ -1379,7 +1432,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public ExistsDescriptor Preference(string preference)
+		public DocumentExistsDescriptor<T> Preference(string preference)
 		{
 			this._QueryString.Preference(preference);
 			return this;
@@ -1387,7 +1440,7 @@ namespace Nest
 		
 
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public ExistsDescriptor Realtime(bool realtime = true)
+		public DocumentExistsDescriptor<T> Realtime(bool realtime = true)
 		{
 			this._QueryString.Realtime(realtime);
 			return this;
@@ -1395,7 +1448,7 @@ namespace Nest
 		
 
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public ExistsDescriptor Refresh(bool refresh = true)
+		public DocumentExistsDescriptor<T> Refresh(bool refresh = true)
 		{
 			this._QueryString.Refresh(refresh);
 			return this;
@@ -1403,7 +1456,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value</summary>
-		public ExistsDescriptor Routing(string routing)
+		public DocumentExistsDescriptor<T> Routing(string routing)
 		{
 			this._QueryString.Routing(routing);
 			return this;
@@ -1420,7 +1473,7 @@ namespace Nest
 	///</summary>
 	public partial class ExplainDescriptor
 	{
-		internal ExplainQueryString _QueryString = new ExplainQueryString(); 
+		internal ExplainRequestParameters _QueryString = new ExplainRequestParameters(); 
 
 
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
@@ -1545,6 +1598,17 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public ExplainDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceExclude(typedPathLookups);
+			return this;
+		}
+			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public ExplainDescriptor SourceInclude(params string[] _source_include)
@@ -1553,6 +1617,17 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public ExplainDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceInclude(typedPathLookups);
+			return this;
+		}
+			
 		
 	}
 	
@@ -1564,7 +1639,7 @@ namespace Nest
 	///</summary>
 	public partial class GetDescriptor<T>
 	{
-		internal GetQueryString _QueryString = new GetQueryString(); 
+		internal GetRequestParameters _QueryString = new GetRequestParameters(); 
 
 
 		///<summary>A comma-separated list of fields to return in the response</summary>
@@ -1641,6 +1716,17 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceExclude(typedPathLookups);
+			return this;
+		}
+			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public GetDescriptor<T> SourceInclude(params string[] _source_include)
@@ -1649,6 +1735,17 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceInclude(typedPathLookups);
+			return this;
+		}
+			
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public GetDescriptor<T> Version(int version)
@@ -1674,13 +1771,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
-	public partial class GetSourceDescriptor
+	public partial class SourceDescriptor<T>
 	{
-		internal GetSourceQueryString _QueryString = new GetSourceQueryString(); 
+		internal SourceRequestParameters _QueryString = new SourceRequestParameters(); 
 
 
 		///<summary>The ID of the parent document</summary>
-		public GetSourceDescriptor Parent(string parent)
+		public SourceDescriptor<T> Parent(string parent)
 		{
 			this._QueryString.Parent(parent);
 			return this;
@@ -1688,7 +1785,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public GetSourceDescriptor Preference(string preference)
+		public SourceDescriptor<T> Preference(string preference)
 		{
 			this._QueryString.Preference(preference);
 			return this;
@@ -1696,7 +1793,7 @@ namespace Nest
 		
 
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public GetSourceDescriptor Realtime(bool realtime = true)
+		public SourceDescriptor<T> Realtime(bool realtime = true)
 		{
 			this._QueryString.Realtime(realtime);
 			return this;
@@ -1704,7 +1801,7 @@ namespace Nest
 		
 
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public GetSourceDescriptor Refresh(bool refresh = true)
+		public SourceDescriptor<T> Refresh(bool refresh = true)
 		{
 			this._QueryString.Refresh(refresh);
 			return this;
@@ -1712,7 +1809,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value</summary>
-		public GetSourceDescriptor Routing(string routing)
+		public SourceDescriptor<T> Routing(string routing)
 		{
 			this._QueryString.Routing(routing);
 			return this;
@@ -1720,7 +1817,7 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public GetSourceDescriptor Source(params string[] _source)
+		public SourceDescriptor<T> Source(params string[] _source)
 		{
 			this._QueryString.Source(_source);
 			return this;
@@ -1728,23 +1825,45 @@ namespace Nest
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetSourceDescriptor SourceExclude(params string[] _source_exclude)
+		public SourceDescriptor<T> SourceExclude(params string[] _source_exclude)
 		{
 			this._QueryString.SourceExclude(_source_exclude);
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceExclude(typedPathLookups);
+			return this;
+		}
+			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetSourceDescriptor SourceInclude(params string[] _source_include)
+		public SourceDescriptor<T> SourceInclude(params string[] _source_include)
 		{
 			this._QueryString.SourceInclude(_source_include);
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceInclude(typedPathLookups);
+			return this;
+		}
+			
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public GetSourceDescriptor Version(int version)
+		public SourceDescriptor<T> Version(int version)
 		{
 			this._QueryString.Version(version);
 			return this;
@@ -1752,7 +1871,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public GetSourceDescriptor VersionType(VersionTypeOptions version_type)
+		public SourceDescriptor<T> VersionType(VersionTypeOptions version_type)
 		{
 			this._QueryString.VersionType(version_type);
 			return this;
@@ -1769,7 +1888,7 @@ namespace Nest
 	///</summary>
 	public partial class IndexDescriptor<T>
 	{
-		internal IndexQueryString _QueryString = new IndexQueryString(); 
+		internal IndexRequestParameters _QueryString = new IndexRequestParameters(); 
 
 
 		///<summary>Explicit write consistency setting for the operation</summary>
@@ -1870,7 +1989,7 @@ namespace Nest
 	///</summary>
 	public partial class AnalyzeDescriptor
 	{
-		internal AnalyzeQueryString _QueryString = new AnalyzeQueryString(); 
+		internal AnalyzeRequestParameters _QueryString = new AnalyzeRequestParameters(); 
 
 
 		///<summary>The name of the analyzer to use</summary>
@@ -1956,7 +2075,7 @@ namespace Nest
 	///</summary>
 	public partial class ClearCacheDescriptor
 	{
-		internal ClearCacheQueryString _QueryString = new ClearCacheQueryString(); 
+		internal ClearCacheRequestParameters _QueryString = new ClearCacheRequestParameters(); 
 
 
 		///<summary>Clear field data</summary>
@@ -2084,7 +2203,7 @@ namespace Nest
 	///</summary>
 	public partial class CloseIndexDescriptor
 	{
-		internal CloseIndexQueryString _QueryString = new CloseIndexQueryString(); 
+		internal CloseIndexRequestParameters _QueryString = new CloseIndexRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout</summary>
@@ -2137,7 +2256,7 @@ namespace Nest
 	///</summary>
 	public partial class CreateIndexDescriptor
 	{
-		internal CreateIndexQueryString _QueryString = new CreateIndexQueryString(); 
+		internal CreateIndexRequestParameters _QueryString = new CreateIndexRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout</summary>
@@ -2166,7 +2285,7 @@ namespace Nest
 	///</summary>
 	public partial class DeleteIndexDescriptor
 	{
-		internal DeleteIndexQueryString _QueryString = new DeleteIndexQueryString(); 
+		internal DeleteIndexRequestParameters _QueryString = new DeleteIndexRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout</summary>
@@ -2195,7 +2314,7 @@ namespace Nest
 	///</summary>
 	public partial class IndicesDeleteAliasDescriptor
 	{
-		internal IndicesDeleteAliasQueryString _QueryString = new IndicesDeleteAliasQueryString(); 
+		internal IndicesDeleteAliasRequestParameters _QueryString = new IndicesDeleteAliasRequestParameters(); 
 
 
 		///<summary>Explicit timestamp for the document</summary>
@@ -2224,7 +2343,7 @@ namespace Nest
 	///</summary>
 	public partial class DeleteMappingDescriptor
 	{
-		internal DeleteMappingQueryString _QueryString = new DeleteMappingQueryString(); 
+		internal DeleteMappingRequestParameters _QueryString = new DeleteMappingRequestParameters(); 
 
 
 		///<summary>Specify timeout for connection to master</summary>
@@ -2245,7 +2364,7 @@ namespace Nest
 	///</summary>
 	public partial class DeleteTemplateDescriptor
 	{
-		internal DeleteTemplateQueryString _QueryString = new DeleteTemplateQueryString(); 
+		internal DeleteTemplateRequestParameters _QueryString = new DeleteTemplateRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout</summary>
@@ -2274,7 +2393,7 @@ namespace Nest
 	///</summary>
 	public partial class DeleteWarmerDescriptor
 	{
-		internal DeleteWarmerQueryString _QueryString = new DeleteWarmerQueryString(); 
+		internal DeleteWarmerRequestParameters _QueryString = new DeleteWarmerRequestParameters(); 
 
 
 		///<summary>Specify timeout for connection to master</summary>
@@ -2295,7 +2414,7 @@ namespace Nest
 	///</summary>
 	public partial class IndexExistsDescriptor
 	{
-		internal IndexExistsQueryString _QueryString = new IndexExistsQueryString(); 
+		internal IndexExistsRequestParameters _QueryString = new IndexExistsRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2340,7 +2459,7 @@ namespace Nest
 	///</summary>
 	public partial class IndicesExistsAliasDescriptor
 	{
-		internal IndicesExistsAliasQueryString _QueryString = new IndicesExistsAliasQueryString(); 
+		internal IndicesExistsAliasRequestParameters _QueryString = new IndicesExistsAliasRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2385,7 +2504,7 @@ namespace Nest
 	///</summary>
 	public partial class IndicesExistsTemplateDescriptor
 	{
-		internal IndicesExistsTemplateQueryString _QueryString = new IndicesExistsTemplateQueryString(); 
+		internal IndicesExistsTemplateRequestParameters _QueryString = new IndicesExistsTemplateRequestParameters(); 
 
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -2406,7 +2525,7 @@ namespace Nest
 	///</summary>
 	public partial class IndicesExistsTypeDescriptor
 	{
-		internal IndicesExistsTypeQueryString _QueryString = new IndicesExistsTypeQueryString(); 
+		internal IndicesExistsTypeRequestParameters _QueryString = new IndicesExistsTypeRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2451,7 +2570,7 @@ namespace Nest
 	///</summary>
 	public partial class FlushDescriptor
 	{
-		internal FlushQueryString _QueryString = new FlushQueryString(); 
+		internal FlushRequestParameters _QueryString = new FlushRequestParameters(); 
 
 
 		///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
@@ -2504,7 +2623,7 @@ namespace Nest
 	///</summary>
 	public partial class GetAliasesDescriptor
 	{
-		internal GetAliasesQueryString _QueryString = new GetAliasesQueryString(); 
+		internal GetAliasesRequestParameters _QueryString = new GetAliasesRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2549,7 +2668,7 @@ namespace Nest
 	///</summary>
 	public partial class IndicesGetAliasesDescriptor
 	{
-		internal IndicesGetAliasesQueryString _QueryString = new IndicesGetAliasesQueryString(); 
+		internal IndicesGetAliasesRequestParameters _QueryString = new IndicesGetAliasesRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout</summary>
@@ -2578,7 +2697,7 @@ namespace Nest
 	///</summary>
 	public partial class IndicesGetFieldMappingDescriptor
 	{
-		internal IndicesGetFieldMappingQueryString _QueryString = new IndicesGetFieldMappingQueryString(); 
+		internal IndicesGetFieldMappingRequestParameters _QueryString = new IndicesGetFieldMappingRequestParameters(); 
 
 
 		///<summary>Whether the default mapping values should be returned as well</summary>
@@ -2631,7 +2750,7 @@ namespace Nest
 	///</summary>
 	public partial class GetMappingDescriptor
 	{
-		internal GetMappingQueryString _QueryString = new GetMappingQueryString(); 
+		internal GetMappingRequestParameters _QueryString = new GetMappingRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2676,7 +2795,7 @@ namespace Nest
 	///</summary>
 	public partial class GetIndexSettingsDescriptor
 	{
-		internal GetIndexSettingsQueryString _QueryString = new GetIndexSettingsQueryString(); 
+		internal GetIndexSettingsRequestParameters _QueryString = new GetIndexSettingsRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2729,7 +2848,7 @@ namespace Nest
 	///</summary>
 	public partial class GetTemplateDescriptor
 	{
-		internal GetTemplateQueryString _QueryString = new GetTemplateQueryString(); 
+		internal GetTemplateRequestParameters _QueryString = new GetTemplateRequestParameters(); 
 
 
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -2758,7 +2877,7 @@ namespace Nest
 	///</summary>
 	public partial class GetWarmerDescriptor
 	{
-		internal GetWarmerQueryString _QueryString = new GetWarmerQueryString(); 
+		internal GetWarmerRequestParameters _QueryString = new GetWarmerRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2803,7 +2922,7 @@ namespace Nest
 	///</summary>
 	public partial class OpenIndexDescriptor
 	{
-		internal OpenIndexQueryString _QueryString = new OpenIndexQueryString(); 
+		internal OpenIndexRequestParameters _QueryString = new OpenIndexRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout</summary>
@@ -2856,7 +2975,7 @@ namespace Nest
 	///</summary>
 	public partial class OptimizeDescriptor
 	{
-		internal OptimizeQueryString _QueryString = new OptimizeQueryString(); 
+		internal OptimizeRequestParameters _QueryString = new OptimizeRequestParameters(); 
 
 
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
@@ -2922,6 +3041,14 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Force a merge operation to run, even if there is a single segment in the index (default: false)</summary>
+		public OptimizeDescriptor Force(bool force = true)
+		{
+			this._QueryString.Force(force);
+			return this;
+		}
+		
 		
 	}
 	
@@ -2933,7 +3060,7 @@ namespace Nest
 	///</summary>
 	public partial class IndicesPutAliasDescriptor
 	{
-		internal IndicesPutAliasQueryString _QueryString = new IndicesPutAliasQueryString(); 
+		internal IndicesPutAliasRequestParameters _QueryString = new IndicesPutAliasRequestParameters(); 
 
 
 		///<summary>Explicit timestamp for the document</summary>
@@ -2962,7 +3089,7 @@ namespace Nest
 	///</summary>
 	public partial class PutMappingDescriptor<T>
 	{
-		internal PutMappingQueryString _QueryString = new PutMappingQueryString(); 
+		internal PutMappingRequestParameters _QueryString = new PutMappingRequestParameters(); 
 
 
 		///<summary>Specify whether to ignore conflicts while updating the mapping (default: false)</summary>
@@ -3023,7 +3150,7 @@ namespace Nest
 	///</summary>
 	public partial class UpdateSettingsDescriptor
 	{
-		internal UpdateSettingsQueryString _QueryString = new UpdateSettingsQueryString(); 
+		internal UpdateSettingsRequestParameters _QueryString = new UpdateSettingsRequestParameters(); 
 
 
 		///<summary>Specify timeout for connection to master</summary>
@@ -3076,7 +3203,7 @@ namespace Nest
 	///</summary>
 	public partial class PutTemplateDescriptor
 	{
-		internal PutTemplateQueryString _QueryString = new PutTemplateQueryString(); 
+		internal PutTemplateRequestParameters _QueryString = new PutTemplateRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout</summary>
@@ -3113,7 +3240,7 @@ namespace Nest
 	///</summary>
 	public partial class PutWarmerDescriptor
 	{
-		internal PutWarmerQueryString _QueryString = new PutWarmerQueryString(); 
+		internal PutWarmerRequestParameters _QueryString = new PutWarmerRequestParameters(); 
 
 
 		///<summary>Specify timeout for connection to master</summary>
@@ -3151,6 +3278,43 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for IndicesRecoveryForAll
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html
+	///</pre>
+	///</summary>
+	public partial class IndicesRecoveryDescriptor
+	{
+		internal IndicesRecoveryRequestParameters _QueryString = new IndicesRecoveryRequestParameters(); 
+
+
+		///<summary>Whether to display detailed information about shard recovery</summary>
+		public IndicesRecoveryDescriptor Detailed(bool detailed = true)
+		{
+			this._QueryString.Detailed(detailed);
+			return this;
+		}
+		
+
+		///<summary>Display only those recoveries that are currently on-going</summary>
+		public IndicesRecoveryDescriptor ActiveOnly(bool active_only = true)
+		{
+			this._QueryString.ActiveOnly(active_only);
+			return this;
+		}
+		
+
+		///<summary>Whether to return time and byte values in human-readable format.</summary>
+		public IndicesRecoveryDescriptor Human(bool human = true)
+		{
+			this._QueryString.Human(human);
+			return this;
+		}
+		
+		
+	}
+	
+	
 	///<summary>descriptor for IndicesRefreshForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html
@@ -3158,7 +3322,7 @@ namespace Nest
 	///</summary>
 	public partial class RefreshDescriptor
 	{
-		internal RefreshQueryString _QueryString = new RefreshQueryString(); 
+		internal RefreshRequestParameters _QueryString = new RefreshRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3211,7 +3375,7 @@ namespace Nest
 	///</summary>
 	public partial class SegmentsDescriptor
 	{
-		internal SegmentsQueryString _QueryString = new SegmentsQueryString(); 
+		internal SegmentsRequestParameters _QueryString = new SegmentsRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3262,13 +3426,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-gateway-snapshot.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotDescriptor
+	public partial class GatewaySnapshotDescriptor
 	{
-		internal SnapshotQueryString _QueryString = new SnapshotQueryString(); 
+		internal GatewaySnapshotRequestParameters _QueryString = new GatewaySnapshotRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SnapshotDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public GatewaySnapshotDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this._QueryString.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -3276,7 +3440,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SnapshotDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public GatewaySnapshotDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
 			this._QueryString.AllowNoIndices(allow_no_indices);
 			return this;
@@ -3284,7 +3448,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SnapshotDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GatewaySnapshotDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._QueryString.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3301,7 +3465,7 @@ namespace Nest
 	///</summary>
 	public partial class IndicesStatsDescriptor
 	{
-		internal IndicesStatsQueryString _QueryString = new IndicesStatsQueryString(); 
+		internal IndicesStatsRequestParameters _QueryString = new IndicesStatsRequestParameters(); 
 
 
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
@@ -3403,7 +3567,7 @@ namespace Nest
 	///</summary>
 	public partial class IndicesStatusDescriptor
 	{
-		internal IndicesStatusQueryString _QueryString = new IndicesStatusQueryString(); 
+		internal IndicesStatusRequestParameters _QueryString = new IndicesStatusRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3472,7 +3636,7 @@ namespace Nest
 	///</summary>
 	public partial class AliasDescriptor
 	{
-		internal AliasQueryString _QueryString = new AliasQueryString(); 
+		internal AliasRequestParameters _QueryString = new AliasRequestParameters(); 
 
 
 		///<summary>Request timeout</summary>
@@ -3501,7 +3665,7 @@ namespace Nest
 	///</summary>
 	public partial class ValidateQueryDescriptor<T>
 	{
-		internal ValidateQueryQueryString _QueryString = new ValidateQueryQueryString(); 
+		internal ValidateQueryRequestParameters _QueryString = new ValidateQueryRequestParameters(); 
 
 
 		///<summary>Return detailed information about the error</summary>
@@ -3570,7 +3734,7 @@ namespace Nest
 	///</summary>
 	public partial class InfoDescriptor
 	{
-		internal InfoQueryString _QueryString = new InfoQueryString(); 
+		internal InfoRequestParameters _QueryString = new InfoRequestParameters(); 
 
 		
 	}
@@ -3583,7 +3747,7 @@ namespace Nest
 	///</summary>
 	public partial class MultiGetDescriptor
 	{
-		internal MultiGetQueryString _QueryString = new MultiGetQueryString(); 
+		internal MultiGetRequestParameters _QueryString = new MultiGetRequestParameters(); 
 
 
 		///<summary>A comma-separated list of fields to return in the response</summary>
@@ -3644,6 +3808,17 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceExclude(typedPathLookups);
+			return this;
+		}
+			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public MultiGetDescriptor SourceInclude(params string[] _source_include)
@@ -3652,6 +3827,17 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceInclude(typedPathLookups);
+			return this;
+		}
+			
 		
 	}
 	
@@ -3663,7 +3849,7 @@ namespace Nest
 	///</summary>
 	public partial class MoreLikeThisDescriptor<T>
 	{
-		internal MoreLikeThisQueryString _QueryString = new MoreLikeThisQueryString(); 
+		internal MoreLikeThisRequestParameters _QueryString = new MoreLikeThisRequestParameters(); 
 
 
 		///<summary>The boost factor</summary>
@@ -3839,7 +4025,7 @@ namespace Nest
 	///</summary>
 	public partial class MpercolateDescriptor
 	{
-		internal MpercolateQueryString _QueryString = new MpercolateQueryString(); 
+		internal MpercolateRequestParameters _QueryString = new MpercolateRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3876,7 +4062,7 @@ namespace Nest
 	///</summary>
 	public partial class MultiSearchDescriptor
 	{
-		internal MultiSearchQueryString _QueryString = new MultiSearchQueryString(); 
+		internal MultiSearchRequestParameters _QueryString = new MultiSearchRequestParameters(); 
 
 
 		///<summary>Search operation type</summary>
@@ -3897,7 +4083,7 @@ namespace Nest
 	///</summary>
 	public partial class MtermvectorsDescriptor
 	{
-		internal MtermvectorsQueryString _QueryString = new MtermvectorsQueryString(); 
+		internal MtermvectorsRequestParameters _QueryString = new MtermvectorsRequestParameters(); 
 
 
 		///<summary>A comma-separated list of documents ids. You must define ids as parameter or set &quot;ids&quot; or &quot;docs&quot; in the request body</summary>
@@ -4001,7 +4187,7 @@ namespace Nest
 	///</summary>
 	public partial class NodesHotThreadsDescriptor
 	{
-		internal NodesHotThreadsQueryString _QueryString = new NodesHotThreadsQueryString(); 
+		internal NodesHotThreadsRequestParameters _QueryString = new NodesHotThreadsRequestParameters(); 
 
 
 		///<summary>The interval for the second sampling of threads</summary>
@@ -4046,7 +4232,7 @@ namespace Nest
 	///</summary>
 	public partial class NodesInfoDescriptor
 	{
-		internal NodesInfoQueryString _QueryString = new NodesInfoQueryString(); 
+		internal NodesInfoRequestParameters _QueryString = new NodesInfoRequestParameters(); 
 
 
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -4075,7 +4261,7 @@ namespace Nest
 	///</summary>
 	public partial class NodesShutdownDescriptor
 	{
-		internal NodesShutdownQueryString _QueryString = new NodesShutdownQueryString(); 
+		internal NodesShutdownRequestParameters _QueryString = new NodesShutdownRequestParameters(); 
 
 
 		///<summary>Set the delay for the operation (default: 1s)</summary>
@@ -4104,7 +4290,7 @@ namespace Nest
 	///</summary>
 	public partial class NodesStatsDescriptor
 	{
-		internal NodesStatsQueryString _QueryString = new NodesStatsQueryString(); 
+		internal NodesStatsRequestParameters _QueryString = new NodesStatsRequestParameters(); 
 
 
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
@@ -4206,7 +4392,7 @@ namespace Nest
 	///</summary>
 	public partial class PercolateDescriptor<T,K>
 	{
-		internal PercolateQueryString _QueryString = new PercolateQueryString(); 
+		internal PercolateRequestParameters _QueryString = new PercolateRequestParameters(); 
 
 
 		///<summary>A comma-separated list of specific routing values</summary>
@@ -4291,7 +4477,7 @@ namespace Nest
 	///</summary>
 	public partial class PingDescriptor
 	{
-		internal PingQueryString _QueryString = new PingQueryString(); 
+		internal PingRequestParameters _QueryString = new PingRequestParameters(); 
 
 		
 	}
@@ -4304,7 +4490,7 @@ namespace Nest
 	///</summary>
 	public partial class ScrollDescriptor<T>
 	{
-		internal ScrollQueryString _QueryString = new ScrollQueryString(); 
+		internal ScrollRequestParameters _QueryString = new ScrollRequestParameters(); 
 
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
@@ -4333,7 +4519,7 @@ namespace Nest
 	///</summary>
 	public partial class SearchDescriptor<T>
 	{
-		internal SearchQueryString _QueryString = new SearchQueryString(); 
+		internal SearchRequestParameters _QueryString = new SearchRequestParameters(); 
 
 
 		///<summary>The analyzer to use for the query string</summary>
@@ -4508,18 +4694,31 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for SearchTemplateGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-search.html
+	///</pre>
+	///</summary>
+	public partial class SearchTemplateDescriptor
+	{
+		internal SearchTemplateRequestParameters _QueryString = new SearchTemplateRequestParameters(); 
+
+		
+	}
+	
+	
 	///<summary>descriptor for SnapshotCreate
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotCreateDescriptor
+	public partial class SnapshotDescriptor
 	{
-		internal SnapshotCreateQueryString _QueryString = new SnapshotCreateQueryString(); 
+		internal SnapshotRequestParameters _QueryString = new SnapshotRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotCreateDescriptor MasterTimeout(string master_timeout)
+		public SnapshotDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
@@ -4527,7 +4726,7 @@ namespace Nest
 		
 
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public SnapshotCreateDescriptor WaitForCompletion(bool wait_for_completion = true)
+		public SnapshotDescriptor WaitForCompletion(bool wait_for_completion = true)
 		{
 			this._QueryString.WaitForCompletion(wait_for_completion);
 			return this;
@@ -4542,13 +4741,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotCreateRepositoryDescriptor
+	public partial class CreateRepositoryDescriptor
 	{
-		internal SnapshotCreateRepositoryQueryString _QueryString = new SnapshotCreateRepositoryQueryString(); 
+		internal CreateRepositoryRequestParameters _QueryString = new CreateRepositoryRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotCreateRepositoryDescriptor MasterTimeout(string master_timeout)
+		public CreateRepositoryDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
@@ -4556,7 +4755,7 @@ namespace Nest
 		
 
 		///<summary>Explicit operation timeout</summary>
-		public SnapshotCreateRepositoryDescriptor Timeout(string timeout)
+		public CreateRepositoryDescriptor Timeout(string timeout)
 		{
 			this._QueryString.Timeout(timeout);
 			return this;
@@ -4571,13 +4770,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotDeleteDescriptor
+	public partial class DeleteSnapshotDescriptor
 	{
-		internal SnapshotDeleteQueryString _QueryString = new SnapshotDeleteQueryString(); 
+		internal DeleteSnapshotRequestParameters _QueryString = new DeleteSnapshotRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotDeleteDescriptor MasterTimeout(string master_timeout)
+		public DeleteSnapshotDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
@@ -4592,13 +4791,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotDeleteRepositoryDescriptor
+	public partial class DeleteRepositoryDescriptor
 	{
-		internal SnapshotDeleteRepositoryQueryString _QueryString = new SnapshotDeleteRepositoryQueryString(); 
+		internal DeleteRepositoryRequestParameters _QueryString = new DeleteRepositoryRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotDeleteRepositoryDescriptor MasterTimeout(string master_timeout)
+		public DeleteRepositoryDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
@@ -4606,7 +4805,7 @@ namespace Nest
 		
 
 		///<summary>Explicit operation timeout</summary>
-		public SnapshotDeleteRepositoryDescriptor Timeout(string timeout)
+		public DeleteRepositoryDescriptor Timeout(string timeout)
 		{
 			this._QueryString.Timeout(timeout);
 			return this;
@@ -4621,13 +4820,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotGetDescriptor
+	public partial class GetSnapshotDescriptor
 	{
-		internal SnapshotGetQueryString _QueryString = new SnapshotGetQueryString(); 
+		internal GetSnapshotRequestParameters _QueryString = new GetSnapshotRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotGetDescriptor MasterTimeout(string master_timeout)
+		public GetSnapshotDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
@@ -4644,7 +4843,7 @@ namespace Nest
 	///</summary>
 	public partial class SnapshotGetRepositoryDescriptor
 	{
-		internal SnapshotGetRepositoryQueryString _QueryString = new SnapshotGetRepositoryQueryString(); 
+		internal SnapshotGetRepositoryRequestParameters _QueryString = new SnapshotGetRepositoryRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -4671,13 +4870,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotRestoreDescriptor
+	public partial class RestoreDescriptor
 	{
-		internal SnapshotRestoreQueryString _QueryString = new SnapshotRestoreQueryString(); 
+		internal RestoreRequestParameters _QueryString = new RestoreRequestParameters(); 
 
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotRestoreDescriptor MasterTimeout(string master_timeout)
+		public RestoreDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
@@ -4685,9 +4884,30 @@ namespace Nest
 		
 
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public SnapshotRestoreDescriptor WaitForCompletion(bool wait_for_completion = true)
+		public RestoreDescriptor WaitForCompletion(bool wait_for_completion = true)
 		{
 			this._QueryString.WaitForCompletion(wait_for_completion);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for SnapshotStatus
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html
+	///</pre>
+	///</summary>
+	public partial class SnapshotStatusDescriptor
+	{
+		internal SnapshotStatusRequestParameters _QueryString = new SnapshotStatusRequestParameters(); 
+
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public SnapshotStatusDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -4700,13 +4920,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
 	///</pre>
 	///</summary>
-	public partial class SuggestDescriptor
+	public partial class SuggestDescriptor<T>
 	{
-		internal SuggestQueryString _QueryString = new SuggestQueryString(); 
+		internal SuggestRequestParameters _QueryString = new SuggestRequestParameters(); 
 
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SuggestDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public SuggestDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this._QueryString.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -4714,7 +4934,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SuggestDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public SuggestDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this._QueryString.AllowNoIndices(allow_no_indices);
 			return this;
@@ -4722,7 +4942,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SuggestDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SuggestDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
 		{
 			this._QueryString.ExpandWildcards(expand_wildcards);
 			return this;
@@ -4730,7 +4950,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SuggestDescriptor Preference(string preference)
+		public SuggestDescriptor<T> Preference(string preference)
 		{
 			this._QueryString.Preference(preference);
 			return this;
@@ -4738,7 +4958,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value</summary>
-		public SuggestDescriptor Routing(string routing)
+		public SuggestDescriptor<T> Routing(string routing)
 		{
 			this._QueryString.Routing(routing);
 			return this;
@@ -4746,7 +4966,7 @@ namespace Nest
 		
 
 		///<summary>The URL-encoded request definition (instead of using request body)</summary>
-		public SuggestDescriptor Source(string source)
+		public SuggestDescriptor<T> Source(string source)
 		{
 			this._QueryString.Source(source);
 			return this;
@@ -4763,7 +4983,7 @@ namespace Nest
 	///</summary>
 	public partial class TermvectorDescriptor<T>
 	{
-		internal TermvectorQueryString _QueryString = new TermvectorQueryString(); 
+		internal TermvectorRequestParameters _QueryString = new TermvectorRequestParameters(); 
 
 
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
@@ -4859,7 +5079,7 @@ namespace Nest
 	///</summary>
 	public partial class UpdateDescriptor<T,K>
 	{
-		internal UpdateQueryString _QueryString = new UpdateQueryString(); 
+		internal UpdateRequestParameters _QueryString = new UpdateRequestParameters(); 
 
 
 		///<summary>Explicit write consistency setting for the operation</summary>

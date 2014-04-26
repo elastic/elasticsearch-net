@@ -16,18 +16,18 @@ namespace Profiling.Indexing.Serializer
 		{
 		}
 
-		public override T Deserialize<T>(byte[] bytes)
-		{
-			JsConfig.EmitCamelCaseNames = true;
-			return Encoding.UTF8.GetString(bytes).FromJson<T>();
-		}
+		//public override T Deserialize<T>(Str)
+		//{
+		//	JsConfig.EmitCamelCaseNames = true;
+		//	return Encoding.UTF8.GetString(bytes).FromJson<T>();
+		//}
 
-		public override byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented)
-		{
-			if (formatting == SerializationFormatting.None)
-				return base.Serialize(data, formatting);
-			JsConfig.EmitCamelCaseNames = true;
-			return Encoding.UTF8.GetBytes(data.ToJson());
-		}
+		//public override byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented)
+		//{
+		//	if (formatting == SerializationFormatting.None)
+		//		return base.Serialize(data, formatting);
+		//	JsConfig.EmitCamelCaseNames = true;
+		//	return Encoding.UTF8.GetBytes(data.ToJson());
+		//}
 	}
 }

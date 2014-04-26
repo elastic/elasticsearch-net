@@ -31,6 +31,11 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetFieldMapping1
 				};
 				this.Do(()=> _client.IndicesCreate("test_index", _body));
 
+				//do cluster.health 
+				this.Do(()=> _client.ClusterHealth(nv=>nv
+					.AddQueryString("wait_for_status", @"yellow")
+				));
+
 			}
 		}
 
@@ -111,7 +116,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetFieldMapping1
 
 				//do indices.get_field_mapping 
 				this.Do(()=> _client.IndicesGetFieldMapping("test_index", "test_type", "text", nv=>nv
-					.Add("include_defaults", @"true")
+					.AddQueryString("include_defaults", @"true")
 				));
 
 				//match _response.test_index.mappings.test_type.text.mapping.text.type: 

@@ -4,17 +4,22 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IPercolateResponse : IResponse
+	public interface IPercolateCountResponse : IResponse
 	{
 		int Took { get; }
 		long Total { get; }
+	}
+
+
+	public interface IPercolateResponse : IPercolateCountResponse
+	{
 		IEnumerable<PercolatorMatch> Matches { get; }
 	}
 
 	[JsonObject]
-	public class PercolateResponse : BaseResponse, IPercolateResponse
+	public class PercolateCountResponse : BaseResponse, IPercolateCountResponse
 	{
-		public PercolateResponse()
+		public PercolateCountResponse()
 		{
 			this.IsValid = true;
 		}
@@ -23,6 +28,12 @@ namespace Nest
 		public int Took { get; internal set; }
 		[JsonProperty(PropertyName = "total")]
 		public long Total { get; internal set; }
+	
+	}
+
+	[JsonObject]
+	public class PercolateResponse : PercolateCountResponse, IPercolateResponse
+	{
 		[JsonProperty(PropertyName = "matches")]
 		public IEnumerable<PercolatorMatch> Matches { get; internal set; }
 	}

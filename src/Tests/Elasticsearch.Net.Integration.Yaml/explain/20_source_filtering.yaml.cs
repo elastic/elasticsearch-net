@@ -40,7 +40,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Explain2
 					}
 				};
 				this.Do(()=> _client.Explain("test_1", "test", "1", _body, nv=>nv
-					.Add("_source", @"false")
+					.AddQueryString("_source", @"false")
 				));
 
 				//match _response._index: 
@@ -62,7 +62,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Explain2
 					}
 				};
 				this.Do(()=> _client.Explain("test_1", "test", "1", _body, nv=>nv
-					.Add("_source", @"true")
+					.AddQueryString("_source", @"true")
 				));
 
 				//match _response.get._source.include.field1: 
@@ -75,23 +75,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Explain2
 					}
 				};
 				this.Do(()=> _client.Explain("test_1", "test", "1", _body, nv=>nv
-					.Add("_source", @"include.field1")
-				));
-
-				//match _response.get._source.include.field1: 
-				this.IsMatch(_response.get._source.include.field1, @"v1");
-
-				//is_false _response.get._source.include.field2; 
-				this.IsFalse(_response.get._source.include.field2);
-
-				//do explain 
-				_body = new {
-					query= new {
-						match_all= new {}
-					}
-				};
-				this.Do(()=> _client.Explain("test_1", "test", "1", _body, nv=>nv
-					.Add("_source_include", @"include.field1")
+					.AddQueryString("_source", @"include.field1")
 				));
 
 				//match _response.get._source.include.field1: 
@@ -107,7 +91,23 @@ namespace Elasticsearch.Net.Integration.Yaml.Explain2
 					}
 				};
 				this.Do(()=> _client.Explain("test_1", "test", "1", _body, nv=>nv
-					.Add("_source_include", @"include.field1,include.field2")
+					.AddQueryString("_source_include", @"include.field1")
+				));
+
+				//match _response.get._source.include.field1: 
+				this.IsMatch(_response.get._source.include.field1, @"v1");
+
+				//is_false _response.get._source.include.field2; 
+				this.IsFalse(_response.get._source.include.field2);
+
+				//do explain 
+				_body = new {
+					query= new {
+						match_all= new {}
+					}
+				};
+				this.Do(()=> _client.Explain("test_1", "test", "1", _body, nv=>nv
+					.AddQueryString("_source_include", @"include.field1,include.field2")
 				));
 
 				//match _response.get._source.include.field1: 
@@ -126,8 +126,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Explain2
 					}
 				};
 				this.Do(()=> _client.Explain("test_1", "test", "1", _body, nv=>nv
-					.Add("_source_include", @"include")
-					.Add("_source_exclude", @"*.field2")
+					.AddQueryString("_source_include", @"include")
+					.AddQueryString("_source_exclude", @"*.field2")
 				));
 
 				//match _response.get._source.include.field1: 

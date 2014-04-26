@@ -27,7 +27,7 @@ namespace Nest
 		where T : class
 	{
 		//[JsonProperty(PropertyName = "fields")]
-		public FieldSelection<T> FieldSelection { get; internal set; }
+		public IFieldSelection<T> FieldSelection { get; internal set; }
 
 		[JsonProperty(PropertyName = "_source")]
 		public T Source { get; internal set; }

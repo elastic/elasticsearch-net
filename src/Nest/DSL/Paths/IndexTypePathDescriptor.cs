@@ -19,9 +19,9 @@ namespace Nest
 	/// </pre>
 	/// Where neither parameter is optional
 	/// </summary>
-	public class IndexTypePathDescriptor<P, K> 
+	public class IndexTypePathDescriptor<P, K> : BasePathDescriptor<P>
 		where P : IndexTypePathDescriptor<P, K>, new()
-		where K : FluentQueryString<K>, new()
+		where K : FluentRequestParameters<K>, new()
 	{
 		internal IndexNameMarker _Index { get; set; }
 		internal TypeNameMarker _Type { get; set; }
@@ -63,7 +63,7 @@ namespace Nest
 		}
 		
 		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentQueryString<K>, new()
+			where K : FluentRequestParameters<K>, new()
 		{
 			var inferrer = new ElasticInferrer(settings);
 			if (this._Index == null)
@@ -78,7 +78,8 @@ namespace Nest
 				Index = index,
 				Type = type
 			};
-			pathInfo.QueryString = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}
 

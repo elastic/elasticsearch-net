@@ -18,9 +18,9 @@ namespace Nest
 	/// </pre>
 	/// neither parameter is optional 
 	/// </summary>
-	public class IndexNamePathDescriptor<P, K> 
+	public class IndexNamePathDescriptor<P, K> : BasePathDescriptor<P>
 		where P : IndexNamePathDescriptor<P, K>, new()
-		where K : FluentQueryString<K>, new()
+		where K : FluentRequestParameters<K>, new()
 	{
 		internal IndexNameMarker _Index { get; set; }
 		internal string _Name { get; set; }
@@ -50,10 +50,10 @@ namespace Nest
 		}
 
 		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentQueryString<K>, new()
+			where K : FluentRequestParameters<K>, new()
 		{
 			if (this._Name == null)
-				throw new DslException("missing Name()");
+				throw new DslException("missing Repository()");
 			var inferrer = new ElasticInferrer(settings);
 			var index = inferrer.IndexName(this._Index) ?? inferrer.DefaultIndex; 
 			var pathInfo = new ElasticsearchPathInfo<K>()
@@ -61,7 +61,8 @@ namespace Nest
 				Index = index,
 				Name = this._Name
 			};
-			pathInfo.QueryString = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}
 

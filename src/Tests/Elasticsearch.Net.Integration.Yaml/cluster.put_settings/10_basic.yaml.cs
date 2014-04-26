@@ -27,7 +27,7 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterPutSettings1
 					}
 				};
 				this.Do(()=> _client.ClusterPutSettings(_body, nv=>nv
-					.Add("flat_settings", @"true")
+					.AddQueryString("flat_settings", @"true")
 				));
 
 				//match _response.transient: 
@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterPutSettings1
 
 				//do cluster.get_settings 
 				this.Do(()=> _client.ClusterGetSettings(nv=>nv
-					.Add("flat_settings", @"true")
+					.AddQueryString("flat_settings", @"true")
 				));
 
 				//match _response.transient: 

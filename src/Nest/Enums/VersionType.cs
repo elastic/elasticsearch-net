@@ -8,6 +8,7 @@ namespace Nest
 	public enum VersionType
 	{
 		Internal, //default in ES
-		External
+		External,
+		Force
 	}
 }

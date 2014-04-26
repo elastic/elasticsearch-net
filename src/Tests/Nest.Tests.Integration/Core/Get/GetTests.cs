@@ -21,7 +21,7 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void SimpleMultiGet()
 		{
-			var elasticSearchProjects = this._client.SourceMany<ElasticsearchProject>(new [] { 4, 5 });
+			var elasticSearchProjects = this._client.SourceMany<ElasticsearchProject>(new long[] { 4, 5 });
 
 			Assert.NotNull(elasticSearchProjects);
 			Assert.IsNotEmpty(elasticSearchProjects);
@@ -30,17 +30,7 @@ namespace Nest.Tests.Integration.Core.Get
 				Assert.IsNotNullOrEmpty(e.Name);
 			}
 		}
-		[Test]
-		public void GetWithFields()
-		{
-			var elasticSearchProject = this._client.SourceFields<ElasticsearchProject>(g=>g
-				.Id(4)
-				.Fields(f=>f.Name)
-			);
-
-			Assert.NotNull(elasticSearchProject);
-			Assert.IsNotEmpty(elasticSearchProject.FieldValue(p=>p.Name));
-		}
+		
 		[Test]
 		public void GetWithFieldsDeep()
 		{
@@ -50,9 +40,9 @@ namespace Nest.Tests.Integration.Core.Get
 			).Fields;
 
 			Assert.NotNull(fieldSelection);
-			var name = fieldSelection.FieldValue(f => f.Name);
+			var name = fieldSelection.FieldValue<ElasticsearchProject, string>(f => f.Name);
 			Assert.IsNotEmpty(name);
-			var list = fieldSelection.FieldValue(f=>f.Followers.First().FirstName);
+			var list = fieldSelection.FieldValue<ElasticsearchProject, string>(f=>f.Followers.First().FirstName);
 			Assert.NotNull(list);
 			Assert.IsNotEmpty(list);
 			

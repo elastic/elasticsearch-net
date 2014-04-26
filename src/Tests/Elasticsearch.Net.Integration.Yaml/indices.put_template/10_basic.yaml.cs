@@ -44,6 +44,56 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesPutTemplate1
 
 			}
 		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class PutTemplateWithAliases2Tests : YamlTestsBase
+		{
+			[Test]
+			public void PutTemplateWithAliases2Test()
+			{	
+
+				//do indices.put_template 
+				_body = new {
+					template= "test-*",
+					aliases= new {
+						test_alias= new {},
+						test_blias= new {
+							routing= "b"
+						},
+						test_clias= new {
+							filter= new {
+								term= new {
+									user= "kimchy"
+								}
+							}
+						}
+					}
+				};
+				this.Do(()=> _client.IndicesPutTemplateForAll("test", _body));
+
+				//do indices.get_template 
+				this.Do(()=> _client.IndicesGetTemplateForAll("test"));
+
+				//match _response.test.template: 
+				this.IsMatch(_response.test.template, @"test-*");
+
+				//length _response.test.aliases: 3; 
+				this.IsLength(_response.test.aliases, 3);
+
+				//is_true _response.test.aliases.test_alias; 
+				this.IsTrue(_response.test.aliases.test_alias);
+
+				//match _response.test.aliases.test_blias.index_routing: 
+				this.IsMatch(_response.test.aliases.test_blias.index_routing, @"b");
+
+				//match _response.test.aliases.test_blias.search_routing: 
+				this.IsMatch(_response.test.aliases.test_blias.search_routing, @"b");
+
+				//match _response.test.aliases.test_clias.filter.term.user: 
+				this.IsMatch(_response.test.aliases.test_clias.filter.term.user, @"kimchy");
+
+			}
+		}
 	}
 }
 

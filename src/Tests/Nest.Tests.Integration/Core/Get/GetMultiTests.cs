@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Tests.MockData;
 using NUnit.Framework;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -17,19 +18,21 @@ namespace Nest.Tests.Integration.Core.Get
 	[TestFixture]
 	public class GetMultiTests : IntegrationTests
 	{
+
+
 		[Test]
 		public void GetMultiSimple()
 		{
 			var result = this._client.MultiGet(a => a
-				.Get<ElasticsearchProject>(g=>g.Id(1))
-				.Get<Person>(g => g.Id(100))
+				.Get<ElasticsearchProject>(g=>g.Id(NestTestData.Data[1].Id))
+				.Get<Person>(g => g.Id(NestTestData.People[1].Id))
 			);
 			var objects = result.Documents;
 
 			objects.Should().NotBeNull().And.HaveCount(2);
 
 
-			var person = result.Source<Person>(100);
+			var person = result.Source<Person>(NestTestData.People[1].Id);
 			person.Should().NotBeNull();
 			person.FirstName.Should().NotBeNullOrEmpty();
 
@@ -38,24 +41,28 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetMultiSimpleWithMissingItem()
 		{
+			var project = -200;
+			var frank = -204;
+			var lewisId = NestTestData.People[5].Id;
+
 			var result = this._client.MultiGet(a => a
-				.Get<ElasticsearchProject>(g => g.Id(1))
-				.Get<Person>(g => g.Id(100000))
-				.Get<Person>(g => g.Id(105))
+				.Get<Person>(g => g.Id(project))
+				.Get<Person>(g => g.Id(frank))
+				.Get<Person>(g => g.Id(lewisId))
 			);
 			var objects = result.Documents;
 
 			objects.Should().NotBeNull()
 				.And.HaveCount(3);
 
-			var missingPerson = result.Get<Person>(100000);
+			var missingPerson = result.Get<Person>(project);
 			missingPerson.Should().NotBeNull();
 			missingPerson.Found.Should().BeFalse();
 
-			var missingPersonDirect = result.Source<Person>(100000);
+			var missingPersonDirect = result.Source<Person>(frank);
 			missingPersonDirect.Should().BeNull();
 
-			var lewis = result.Source<Person>(105);
+			var lewis = result.Source<Person>(lewisId);
 			lewis.Should().NotBeNull();
 			lewis.FirstName.Should().NotBeNullOrEmpty();
 		}
@@ -63,9 +70,12 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetMultiWithMetaData()
 		{
+			var projectId = NestTestData.Data[14].Id;
+			var authorId = NestTestData.People[11].Id;
+
 			var result = this._client.MultiGet(a => a
-				.Get<ElasticsearchProject>(g => g.Id(1).Fields(p=>p.Id, p=>p.Followers.First().FirstName))
-				.Get<Person>(g => g.Id(100).Type("person").Index(ElasticsearchConfiguration.DefaultIndex).Fields(p => p.Id, p => p.FirstName))
+				.Get<ElasticsearchProject>(g => g.Id(projectId).Fields(p=>p.Id, p=>p.Followers.First().FirstName))
+				.Get<Person>(g => g.Id(authorId).Type("person").Index(ElasticsearchConfiguration.DefaultIndex).Fields(p => p.Id, p => p.FirstName))
 			);
 
 			var objects = result.Documents;
@@ -75,15 +85,15 @@ namespace Nest.Tests.Integration.Core.Get
 			var people = objects.OfType<MultiGetHit<Person>>();
 			people.Should().HaveCount(1);
 
-			var personHit = people.FirstOrDefault(p => p.Id == "100");
+			var personHit = people.FirstOrDefault(p => p.Id == authorId.ToString());
 			personHit.Should().NotBeNull();
 			personHit.Found.Should().BeTrue();
 			personHit.Version.Should().NotBeNullOrEmpty().And.Match("1");
 
-			var person = personHit.FieldSelection;
-			person.Should().NotBeNull();
-			person.FieldValue(p=>p.Id).Should().BeEquivalentTo(new []{100});
-			person.FieldValue(p => p.FirstName)
+			var fieldSelection = personHit.FieldSelection;
+			fieldSelection.Should().NotBeNull();
+			fieldSelection.FieldValue<Person, int>(p=>p.Id).Should().BeEquivalentTo(new []{authorId});
+			fieldSelection.FieldValue<Person, string>(p => p.FirstName)
 				.Should().NotBeEmpty();
 
 		}
@@ -91,32 +101,36 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetMultiWithMetaDataUsingCleanApi()
 		{
+			var projectId = NestTestData.Data[8].Id;
+			var authorId = NestTestData.People[5].Id;
+
 			var result = this._client.MultiGet(a => a
-				.Get<ElasticsearchProject>(g => g.Id(1).Fields(p => p.Id, p => p.Followers.First().FirstName))
+				.Get<ElasticsearchProject>(g => g.Id(projectId).Fields(p => p.Id, p => p.Followers.First().FirstName))
 				.Get<Person>(g => g
-					.Id(100)
+					.Id(authorId)
 					.Type("person")
 					.Index(ElasticsearchConfiguration.DefaultIndex)
 					.Fields(p => p.Id, p => p.FirstName)
 				)
 			);
 
-			var personHit = result.Get<Person>(100);
+			var personHit = result.Get<Person>(authorId);
 			personHit.Should().NotBeNull();
 			personHit.Found.Should().BeTrue();
 			personHit.Version.Should().NotBeNullOrEmpty().And.Match("1");
 
 			//personHit.FieldSelection would work too
-			var personFieldSelection = result.GetFieldSelection<Person>(100);
+			var personFieldSelection = result.GetFieldSelection<Person>(authorId);
 			personFieldSelection.Should().NotBeNull();
-			personFieldSelection.FieldValue(p => p.Id).Should().BeEquivalentTo(new []{100});
-			personFieldSelection.FieldValue(p => p.FirstName)
+			personFieldSelection.FieldValue<Person, int>(p => p.Id).Should().BeEquivalentTo(new []{authorId});
+			personFieldSelection.FieldValue<Person, string>(p => p.FirstName)
 				.Should().NotBeEmpty();
 
-			var projectFieldSelection = result.GetFieldSelection<ElasticsearchProject>(1);
+			var projectFieldSelection = result.GetFieldSelection<ElasticsearchProject>(projectId);
 			projectFieldSelection.Should().NotBeNull();
-			projectFieldSelection.FieldValue(p => p.Id).Should().BeEquivalentTo(new []{1});
-			projectFieldSelection.FieldValue(p => p.Followers.First().FirstName)
+			projectFieldSelection.FieldValue<ElasticsearchProject, int>(p => p.Id)
+				.Should().BeEquivalentTo(new []{projectId});
+			projectFieldSelection.FieldValue<ElasticsearchProject, string>(p => p.Followers.First().FirstName)
 				.Should().NotBeEmpty();
 
 		}

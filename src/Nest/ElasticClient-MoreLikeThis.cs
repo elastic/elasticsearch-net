@@ -1,45 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
-		public IQueryResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector) where T : class
+		/// <inheritdoc />
+		public ISearchResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
+			where T : class
 		{
-			return this.Dispatch<MoreLikeThisDescriptor<T>, MoreLikeThisQueryString, QueryResponse<T>>(
+			return this.Dispatch<MoreLikeThisDescriptor<T>, MoreLikeThisRequestParameters, SearchResponse<T>>(
 				mltSelector,
 				(p, d) =>
 				{
-					CopySearchQueryString(d);
-					return this.RawDispatch.MltDispatch(p, d._Search);
+					CopySearchRequestParameters(d);
+					return this.RawDispatch.MltDispatch<SearchResponse<T>>(p, d._Search);
 				}
-
 			);
 		}
-		public Task<IQueryResponse<T>> MoreLikeThisAsync<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector) where T : class
+
+		/// <inheritdoc />
+		public Task<ISearchResponse<T>> MoreLikeThisAsync<T>(
+			Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector) where T : class
 		{
-			return this.DispatchAsync<MoreLikeThisDescriptor<T>, MoreLikeThisQueryString, QueryResponse<T>, IQueryResponse<T>>(
+			return this.DispatchAsync<MoreLikeThisDescriptor<T>, MoreLikeThisRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
 				mltSelector,
 				(p, d) =>
 				{
-					CopySearchQueryString(d);
-					return this.RawDispatch.MltDispatchAsync(p, d._Search);
-				});
+					CopySearchRequestParameters(d);
+					return this.RawDispatch.MltDispatchAsync<SearchResponse<T>>(p, d._Search);
+				}
+			);
 		}
 
-		private static void CopySearchQueryString<T>(MoreLikeThisDescriptor<T> d) where T : class
+		private static void CopySearchRequestParameters<T>(MoreLikeThisDescriptor<T> d) where T : class
 		{
-			if (d._Search != null)
-			{
-				var searchQs = d._Search._QueryString._QueryStringDictionary;
-				foreach (var k in searchQs.Keys)
-					d._QueryString._QueryStringDictionary[k] = searchQs[k];
-			}
+			if (d._Search == null) return;
+			d._QueryString.CopyQueryStringValuesFrom(d._Search._QueryString);
 		}
 	}
 }

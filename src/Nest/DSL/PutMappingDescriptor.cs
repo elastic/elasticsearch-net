@@ -9,8 +9,8 @@ namespace Nest
 {
 	[DescriptorFor("IndicesPutMapping")]
 	public partial class PutMappingDescriptor<T> 
-		: IndicesTypePathDescriptor<PutMappingDescriptor<T>, PutMappingQueryString, T>
-		, IPathInfo<PutMappingQueryString> 
+		: IndicesTypePathDescriptor<PutMappingDescriptor<T>, PutMappingRequestParameters, T>
+		, IPathInfo<PutMappingRequestParameters> 
 		where T : class
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
@@ -95,9 +95,9 @@ namespace Nest
 			return this;
 		}
 
-		public PutMappingDescriptor<T> DisableAllField(bool disabled = true)
+		public PutMappingDescriptor<T> AllField(Func<AllFieldMapping, AllFieldMapping> allFieldSelector)
 		{
-			this._Mapping.AllFieldMapping = new AllFieldMapping().SetDisabled(disabled);
+			this._Mapping.AllFieldMapping = allFieldSelector(new AllFieldMapping());
 			return this;
 		}
 
@@ -231,9 +231,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<PutMappingQueryString> IPathInfo<PutMappingQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<PutMappingRequestParameters> IPathInfo<PutMappingRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<PutMappingQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<PutMappingRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
 
 			return pathInfo;

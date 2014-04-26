@@ -12,8 +12,8 @@ namespace Nest
 {
 	[DescriptorFor("IndicesPutSettings")]
 	public partial class UpdateSettingsDescriptor
-		: IndexOptionalPathDescriptorBase<UpdateSettingsDescriptor, UpdateSettingsQueryString>
-		, IPathInfo<UpdateSettingsQueryString>
+		: IndexOptionalPathDescriptorBase<UpdateSettingsDescriptor, UpdateSettingsRequestParameters>
+		, IPathInfo<UpdateSettingsRequestParameters>
 	{
 		[JsonProperty("index.number_of_replicas")]
 		internal int? _NumberOfReplicas { get; set; }
@@ -396,10 +396,10 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<UpdateSettingsQueryString> IPathInfo<UpdateSettingsQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<UpdateSettingsRequestParameters> IPathInfo<UpdateSettingsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<UpdateSettingsQueryString>(settings, this._QueryString);
-			pathInfo.QueryString = this._QueryString;
+			var pathInfo = base.ToPathInfo<UpdateSettingsRequestParameters>(settings, this._QueryString);
+			pathInfo.RequestParameters = this._QueryString;
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
 
 			return pathInfo;

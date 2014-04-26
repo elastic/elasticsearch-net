@@ -30,7 +30,7 @@ namespace Elasticsearch.Net.Integration.Yaml.CatAliases1
 
 				//do cat.aliases 
 				this.Do(()=> _client.CatAliases(nv=>nv
-					.Add("help", @"true")
+					.AddQueryString("help", @"true")
 				));
 
 				//match this._status: 
@@ -184,7 +184,7 @@ $/
 
 				//do cat.aliases 
 				this.Do(()=> _client.CatAliases(nv=>nv
-					.Add("v", @"true")
+					.AddQueryString("v", @"true")
 				));
 
 				//match this._status: 
@@ -220,7 +220,7 @@ $/
 
 				//do cat.aliases 
 				this.Do(()=> _client.CatAliases(nv=>nv
-					.Add("h", new [] {
+					.AddQueryString("h", new [] {
 						@"index",
 						@"alias"
 					})
@@ -231,11 +231,11 @@ $/
 
 				//do cat.aliases 
 				this.Do(()=> _client.CatAliases(nv=>nv
-					.Add("h", new [] {
+					.AddQueryString("h", new [] {
 						@"index",
 						@"alias"
 					})
-					.Add("v", @"true")
+					.AddQueryString("v", @"true")
 				));
 
 				//match this._status: 

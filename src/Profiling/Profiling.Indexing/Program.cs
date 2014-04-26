@@ -19,23 +19,46 @@ namespace Profiling.Indexing
 
 		static void Main(string[] args)
 		{
+
 			var process = Process.GetCurrentProcess();
+			var baseThreadCount = process.Threads.Count;
+			var baseMemorySize = process.VirtualMemorySize64;
+			var host = "localhost";
+			if (Process.GetProcessesByName("fiddler").Any())
+				host = "ipv4.fiddler";
+			var client = new ElasticClient(new ConnectionSettings(new Uri("http://"+host+":9200"), "nest-default-index"));
 			//warmer
 			RunTest<HttpTester>(HTTP_PORT, 10);
 
+			client.Refresh();
+
+			Console.WriteLine("Warmed up caches press any key to index {0} messages", NUM_MESSAGES);
+			Console.ReadLine();
+			ConsoleKeyInfo key;
+			do
+			{
+				key = RunIndex(baseThreadCount, baseMemorySize);
+			} while (key.KeyChar == 'r');
+
+			RunIndex(baseThreadCount, baseMemorySize);
+
+			client.DeleteIndex(d => d.Index(INDEX_PREFIX + "*"));
+
+		}
+
+		private static ConsoleKeyInfo RunIndex(int baseThreadCount, long baseMemorySize)
+		{
+			var process = Process.GetCurrentProcess();
 			double httpRate = RunTest<HttpTester>(HTTP_PORT);
 			var threadCountHttp = process.Threads.Count;
 			var memorySizeHttp = process.VirtualMemorySize64;
-			
+
 			Console.WriteLine();
-			Console.WriteLine("HTTP (IndexManyAsync): {0:0,0}/s {1} Threads {2} Virual memory"
-				, httpRate, threadCountHttp, memorySizeHttp);
+			Console.WriteLine("HTTP (IndexManyAsync): {0:0,0}/s\r (Before:After) {1}:{2} Threads {3}:{4} Virtual memory"
+				, httpRate, baseThreadCount, threadCountHttp, baseMemorySize, memorySizeHttp);
 
-			Console.ReadLine();
-
-			var client = new ElasticClient(new ConnectionSettings(new Uri("http://localhost:9200"), "nest-default-index"));
-			client.DeleteIndex(d => d.Index(INDEX_PREFIX + "*"));
-
+			Console.WriteLine("Press r to index again or any other key to delete indices created by this tool.");
+			return Console.ReadKey();
 		}
 
 		private static double RunTest<T>(int port, int? messages = null) where T : ITester

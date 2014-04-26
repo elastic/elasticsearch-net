@@ -4,12 +4,14 @@ using System.Collections.Specialized;
 namespace Elasticsearch.Net.Connection
 {
 	public interface IConnectionConfiguration : 
-		IConnectionConfiguration<IConnectionConfiguration>
+		IConnectionConfiguration<IConnectionConfiguration>,
+		IHideObjectMembers
 	{
 		
 	}
 
-	public interface IConnectionConfiguration<out T> where T : IConnectionConfiguration<T>
+	public interface IConnectionConfiguration<out T> : IHideObjectMembers
+		where T : IConnectionConfiguration<T>
 	{
 
 	
@@ -25,7 +27,7 @@ namespace Elasticsearch.Net.Connection
 		/// <returns></returns>
 		T SetGlobalQueryStringParameters(NameValueCollection queryStringParameters);	/// <summary>
 	
-		/// Timeout in milliseconds when the .NET webrquest should abort the request, note that you can set this to a high value here,
+		/// Timeout in milliseconds when the .NET webrequest should abort the request, note that you can set this to a high value here,
 		/// and specify the timeout in various calls on Elasticsearch's side.
 		/// </summary>
 		/// <param name="timeout">time out in milliseconds</param>
@@ -44,6 +46,13 @@ namespace Elasticsearch.Net.Connection
 		T UsePrettyResponses(bool b = true);
 		
 		/// <summary>
+		/// Make sure the reponse bytes are always available on the ElasticsearchResponse object
+		/// <para>Note: that depending on the registered serializer this may cause the respond to be read in memory first</para>
+		/// </summary>
+		/// <returns></returns>
+		T ExposeRawResponse(bool b = true);
+		
+		/// <summary>
 		/// Semaphore asynchronous connections automatically by giving
 		/// it a maximum concurrent connections. Great to prevent 
 		/// out of memory exceptions
@@ -55,6 +64,6 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Global callback for every response that NEST receives, useful for custom logging.
 		/// </summary>
-		T SetConnectionStatusHandler(Action<ElasticsearchResponse> handler);
+		T SetConnectionStatusHandler(Action<IElasticsearchResponse> handler);
 	}
 }

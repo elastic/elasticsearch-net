@@ -6,24 +6,26 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-
 	public partial class ElasticClient
 	{
+		/// <inheritdoc />
 		public IGlobalStatsResponse IndicesStats(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<IndicesStatsDescriptor, IndicesStatsQueryString, GlobalStatsResponse>(
+			return this.Dispatch<IndicesStatsDescriptor, IndicesStatsRequestParameters, GlobalStatsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesStatsDispatch(p)
+				(p, d) => this.RawDispatch.IndicesStatsDispatch<GlobalStatsResponse>(p)
 			);
 		}
 
-		public Task<IGlobalStatsResponse> IndicesStatsAsync(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null)
+		/// <inheritdoc />
+		public Task<IGlobalStatsResponse> IndicesStatsAsync(
+			Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<IndicesStatsDescriptor, IndicesStatsQueryString, GlobalStatsResponse, IGlobalStatsResponse>(
+			return this.DispatchAsync<IndicesStatsDescriptor, IndicesStatsRequestParameters, GlobalStatsResponse, IGlobalStatsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesStatsDispatchAsync(p)
+				(p, d) => this.RawDispatch.IndicesStatsDispatchAsync<GlobalStatsResponse>(p)
 			);
 		}
 	}

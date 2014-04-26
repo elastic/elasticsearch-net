@@ -32,7 +32,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Update8
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"green")
+					.AddQueryString("wait_for_status", @"green")
 				));
 
 				//do update 
@@ -45,13 +45,13 @@ namespace Elasticsearch.Net.Integration.Yaml.Update8
 					}
 				};
 				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
-					.Add("routing", 5)
+					.AddQueryString("routing", 5)
 				));
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("routing", 5)
-					.Add("fields", @"_routing")
+					.AddQueryString("routing", 5)
+					.AddQueryString("fields", @"_routing")
 				));
 
 				//match _response.fields._routing: 
@@ -72,8 +72,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Update8
 					}
 				};
 				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
-					.Add("routing", 5)
-					.Add("fields", @"foo")
+					.AddQueryString("routing", 5)
+					.AddQueryString("fields", @"foo")
 				));
 
 				//match _response.get.fields.foo: 

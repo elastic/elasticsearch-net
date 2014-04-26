@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
@@ -9,49 +8,43 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		public INodeInfoResponse NodesInfo(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector=null)
+		/// <inheritdoc />
+		public INodeInfoResponse NodesInfo(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<NodesInfoDescriptor, NodesInfoQueryString, NodeInfoResponse>(
+			return this.Dispatch<NodesInfoDescriptor, NodesInfoRequestParameters, NodeInfoResponse>(
 				selector,
-				(p, d)=> this.RawDispatch.NodesInfoDispatch(p)
+				(p, d) => this.RawDispatch.NodesInfoDispatch<NodeInfoResponse>(p)
 			);
 		}
 
+		/// <inheritdoc />
 		public Task<INodeInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<NodesInfoDescriptor, NodesInfoQueryString, NodeInfoResponse, INodeInfoResponse>(
+			return this.DispatchAsync<NodesInfoDescriptor, NodesInfoRequestParameters, NodeInfoResponse, INodeInfoResponse>(
 				selector,
-				(p, d)=> this.RawDispatch.NodesInfoDispatchAsync(p)
+				(p, d) => this.RawDispatch.NodesInfoDispatchAsync<NodeInfoResponse>(p)
 			);
 		}
 
-		/// <summary>
-		/// The cluster nodes stats API allows to retrieve one or more (or all) of the cluster nodes statistics.
-		///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
-		/// </summary>
-		/// <param name="selector">limit the results on stats type or indices/nodes, defaults to all types and all indices/nodes</param>
+		/// <inheritdoc />
 		public INodeStatsResponse NodesStats(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<NodesStatsDescriptor, NodesStatsQueryString, NodeStatsResponse>(
+			return this.Dispatch<NodesStatsDescriptor, NodesStatsRequestParameters, NodeStatsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.NodesStatsDispatch(p)
+				(p, d) => this.RawDispatch.NodesStatsDispatch<NodeStatsResponse>(p)
 			);
 		}
-		
-		/// <summary>
-		/// The cluster nodes stats API allows to retrieve one or more (or all) of the cluster nodes statistics.
-		///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
-		/// </summary>
-		/// <param name="selector">limit the results on stats type or indices/nodes, defaults to all types and all indices/nodes</param>
+
+		/// <inheritdoc />
 		public Task<INodeStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<NodesStatsDescriptor, NodesStatsQueryString, NodeStatsResponse, INodeStatsResponse>(
+			return this.DispatchAsync<NodesStatsDescriptor, NodesStatsRequestParameters, NodeStatsResponse, INodeStatsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.NodesStatsDispatchAsync(p)
+				(p, d) => this.RawDispatch.NodesStatsDispatchAsync<NodeStatsResponse>(p)
 			);
 		}
 	}

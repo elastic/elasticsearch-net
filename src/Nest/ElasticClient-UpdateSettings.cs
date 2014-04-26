@@ -1,37 +1,34 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Text.RegularExpressions;
-using System.IO;
-using System.Text;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
-		public ISettingsOperationResponse UpdateSettings(
+		/// <inheritdoc />
+		public IAcknowledgedResponse UpdateSettings(
 			Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector
-		)
+			)
 		{
-			return this.Dispatch<UpdateSettingsDescriptor, UpdateSettingsQueryString, SettingsOperationResponse>(
+			return this.Dispatch<UpdateSettingsDescriptor, UpdateSettingsRequestParameters, AcknowledgedResponse>(
 				updateSettingsSelector,
-				(p, d) => this.RawDispatch.IndicesPutSettingsDispatch(p, d)
+				(p, d) => this.RawDispatch.IndicesPutSettingsDispatch<AcknowledgedResponse>(p, d)
 			);
 		}
 
-		public Task<ISettingsOperationResponse> UpdateSettingsAsync(
+		/// <inheritdoc />
+		public Task<IAcknowledgedResponse> UpdateSettingsAsync(
 			Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector
-		)
+			)
 		{
-			return this.DispatchAsync<UpdateSettingsDescriptor, UpdateSettingsQueryString, SettingsOperationResponse, ISettingsOperationResponse>(
-				updateSettingsSelector,
-				(p, d) => this.RawDispatch.IndicesPutSettingsDispatchAsync(p, d)
-			);
+			return this.DispatchAsync
+				<UpdateSettingsDescriptor, UpdateSettingsRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+					updateSettingsSelector,
+					(p, d) => this.RawDispatch.IndicesPutSettingsDispatchAsync<AcknowledgedResponse>(p, d)
+				);
 		}
-
 	}
 }

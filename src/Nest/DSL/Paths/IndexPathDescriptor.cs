@@ -18,9 +18,9 @@ namespace Nest
 	/// </pre>
 	/// index is not optional 
 	/// </summary>
-	public class IndexPathDescriptorBase<P, K> 
+	public class IndexPathDescriptorBase<P, K> : BasePathDescriptor<P> 
 		where P : IndexPathDescriptorBase<P, K>, new()
-		where K : FluentQueryString<K>, new()
+		where K : FluentRequestParameters<K>, new()
 	{
 		internal IndexNameMarker _Index { get; set; }
 		
@@ -43,7 +43,7 @@ namespace Nest
 		}
 
 		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentQueryString<K>, new()
+			where K : FluentRequestParameters<K>, new()
 		{
 			if (this._Index == null)
 				throw new DslException("missing call to Index()");
@@ -53,7 +53,8 @@ namespace Nest
 			{
 				Index = index,
 			};
-			pathInfo.QueryString = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}
 

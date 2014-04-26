@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 
 
-namespace Elasticsearch.Net.Integration.Yaml.Index10
+namespace Elasticsearch.Net.Integration.Yaml.Index12
 {
-	public partial class Index10YamlTests
+	public partial class Index12YamlTests
 	{	
 
 
@@ -35,7 +35,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Index10
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 				//do index 
@@ -46,7 +46,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Index10
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields", @"_timestamp")
+					.AddQueryString("fields", @"_timestamp")
 				));
 
 				//is_true _response.fields._timestamp; 
@@ -57,12 +57,12 @@ namespace Elasticsearch.Net.Integration.Yaml.Index10
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("timestamp", @"1372011280000")
+					.AddQueryString("timestamp", @"1372011280000")
 				));
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields", @"_timestamp")
+					.AddQueryString("fields", @"_timestamp")
 				));
 
 				//match _response.fields._timestamp: 
@@ -73,12 +73,12 @@ namespace Elasticsearch.Net.Integration.Yaml.Index10
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("timestamp", @"2013-06-23T18:14:40")
+					.AddQueryString("timestamp", @"2013-06-23T18:14:40")
 				));
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields", @"_timestamp")
+					.AddQueryString("fields", @"_timestamp")
 				));
 
 				//match _response.fields._timestamp: 

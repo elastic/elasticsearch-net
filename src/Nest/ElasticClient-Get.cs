@@ -3,33 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-
 	public partial class ElasticClient
 	{
-
+		/// <inheritdoc />
 		public IGetResponse<T> Get<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class
 		{
-			return this.Dispatch<GetDescriptor<T>, GetQueryString, GetResponse<T>>(
+			return this.Dispatch<GetDescriptor<T>, GetRequestParameters, GetResponse<T>>(
 				getSelector,
-				(p, d) => this.RawDispatch.GetDispatch(p)
+				(p, d) => this.RawDispatch.GetDispatch<GetResponse<T>>(p)
 			);
 		}
-		
+
+		/// <inheritdoc />
 		public Task<IGetResponse<T>> GetAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class
 		{
-			return this.DispatchAsync<GetDescriptor<T>, GetQueryString, GetResponse<T>, IGetResponse<T>>(
+			return this.DispatchAsync<GetDescriptor<T>, GetRequestParameters, GetResponse<T>, IGetResponse<T>>(
 				getSelector,
-				(p, d) => this.RawDispatch.GetDispatchAsync(p)
+				(p, d) => this.RawDispatch.GetDispatchAsync<GetResponse<T>>(p)
 			);
 		}
-	
-		
 	}
 }

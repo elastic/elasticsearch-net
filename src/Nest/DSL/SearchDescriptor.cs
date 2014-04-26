@@ -22,25 +22,26 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial class SearchDescriptor<T> :
 		SearchDescriptorBase
-		, IPathInfo<SearchQueryString>
+		, IPathInfo<SearchRequestParameters>
 		where T : class
 	{
 		internal override SearchTypeOptions? _SearchType
 		{
-			get { return this._QueryString._search_type; }
+			get { return this._QueryString.GetQueryStringValue<SearchTypeOptions?>("search_type");  }
 		}
 		internal override string _Preference
 		{
-			get { return this._QueryString._preference; }
+			get { return this._QueryString.GetQueryStringValue<string>("preference"); }
 		}
 
 		internal override string _Routing
 		{
 			get
 			{
-				return this._QueryString._routing == null
+				var routing = this._QueryString.GetQueryStringValue<string[]>("routing");
+				return routing == null
 					? null
-					: string.Join(",", this._QueryString._routing);
+					: string.Join(",", routing);
 			}
 		}
 
@@ -305,9 +306,9 @@ namespace Nest
 			return this;
 		}
 
-		public SearchDescriptor<T> Source(Func<SourceDescriptor<T>, SourceDescriptor<T>> sourceSelector)
+		public SearchDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector)
 		{
-			this._Source = sourceSelector(new SourceDescriptor<T>());
+			this._Source = sourceSelector(new SearchSourceDescriptor<T>());
 			return this;
 		}
 		/// <summary>
@@ -869,7 +870,6 @@ namespace Nest
 			return this;
 		}
 
-
 		/// <summary>
 		/// The term suggester suggests terms based on edit distance. The provided suggest text is analyzed before terms are suggested. 
 		/// The suggested terms are provided per analyzed suggest text token. The term suggester doesn’t take the query into account that is part of request.
@@ -1057,14 +1057,14 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<SearchQueryString> IPathInfo<SearchQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<SearchRequestParameters> IPathInfo<SearchRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = new ElasticsearchPathInfo<SearchQueryString>();
+			var pathInfo = new ElasticsearchPathInfo<SearchRequestParameters>();
 			pathInfo.HttpMethod = this._QueryString.ContainsKey("source")
 				? PathInfoHttpMethod.GET
 				: PathInfoHttpMethod.POST;
 
-			pathInfo.QueryString = this._QueryString;
+			pathInfo.RequestParameters = this._QueryString;
 
 			var inferrer = new ElasticInferrer(settings);
 			string indices;

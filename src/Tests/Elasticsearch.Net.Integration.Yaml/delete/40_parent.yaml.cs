@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 
 
-namespace Elasticsearch.Net.Integration.Yaml.Delete5
+namespace Elasticsearch.Net.Integration.Yaml.Delete7
 {
-	public partial class Delete5YamlTests
+	public partial class Delete7YamlTests
 	{	
 
 
@@ -34,7 +34,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Delete5
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 				//do index 
@@ -42,17 +42,17 @@ namespace Elasticsearch.Net.Integration.Yaml.Delete5
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("parent", 5)
+					.AddQueryString("parent", 5)
 				));
 
 				//do delete 
 				this.Do(()=> _client.Delete("test_1", "test", "1", nv=>nv
-					.Add("parent", 1)
+					.AddQueryString("parent", 1)
 				), shouldCatch: @"missing");
 
 				//do delete 
 				this.Do(()=> _client.Delete("test_1", "test", "1", nv=>nv
-					.Add("parent", 5)
+					.AddQueryString("parent", 5)
 				));
 
 			}

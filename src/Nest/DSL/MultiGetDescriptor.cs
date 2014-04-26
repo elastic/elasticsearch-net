@@ -13,8 +13,8 @@ namespace Nest
 {
 
 	[DescriptorFor("Mget")]
-	public partial class MultiGetDescriptor : FixedIndexTypePathDescriptor<MultiGetDescriptor, MultiGetQueryString>
-		, IPathInfo<MultiGetQueryString>
+	public partial class MultiGetDescriptor : FixedIndexTypePathDescriptor<MultiGetDescriptor, MultiGetRequestParameters>
+		, IPathInfo<MultiGetRequestParameters>
 	{
 		internal readonly IList<ISimpleGetDescriptor> _GetOperations = new List<ISimpleGetDescriptor>();
 		private readonly IConnectionSettingsValues _settings;
@@ -53,7 +53,7 @@ namespace Nest
 
 		}
 
-		public MultiGetDescriptor GetMany<K>(IEnumerable<int> ids, Func<SimpleGetDescriptor<K>, int, SimpleGetDescriptor<K>> getSelector=null) where K : class
+		public MultiGetDescriptor GetMany<K>(IEnumerable<long> ids, Func<SimpleGetDescriptor<K>, long, SimpleGetDescriptor<K>> getSelector=null) where K : class
 		{
 			getSelector = getSelector ?? ((sg, s) => sg);
 			foreach (var sg in ids.Select(id => getSelector(new SimpleGetDescriptor<K>().Id(id), id)))
@@ -69,9 +69,9 @@ namespace Nest
 			return this;
 
 		}
-		ElasticsearchPathInfo<MultiGetQueryString> IPathInfo<MultiGetQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<MultiGetRequestParameters> IPathInfo<MultiGetRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = this.ToPathInfo<MultiGetQueryString>(settings, this._QueryString);
+			var pathInfo = this.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST; // no data in GETS in the .net world
 			return pathInfo;
 		}

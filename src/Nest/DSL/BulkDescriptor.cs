@@ -15,8 +15,8 @@ namespace Nest
 {
 	
 	public partial class BulkDescriptor :
-		FixedIndexTypePathDescriptor<BulkDescriptor, BulkQueryString>
-		, IPathInfo<BulkQueryString>
+		FixedIndexTypePathDescriptor<BulkDescriptor, BulkRequestParameters>
+		, IPathInfo<BulkRequestParameters>
 	{
 		internal IList<BaseBulkOperation> _Operations = new SynchronizedCollection<BaseBulkOperation>();
 
@@ -107,7 +107,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="ids">Enumerable of int ids to delete</param>
 		/// <param name="bulkDeleteSelector">A func called on each ids to describe the individual delete operation</param>
-		public BulkDescriptor DeleteMany<T>(IEnumerable<int> ids, Func<BulkDeleteDescriptor<T>, string, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class
+		public BulkDescriptor DeleteMany<T>(IEnumerable<long> ids, Func<BulkDeleteDescriptor<T>, string, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class
 		{
 			return this.DeleteMany(ids.Select(i=>i.ToString(CultureInfo.InvariantCulture)), bulkDeleteSelector);
 		}
@@ -128,9 +128,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<BulkQueryString> IPathInfo<BulkQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<BulkRequestParameters> IPathInfo<BulkRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = this.ToPathInfo<BulkQueryString>(settings, this._QueryString);
+			var pathInfo = this.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			return pathInfo;
 		}

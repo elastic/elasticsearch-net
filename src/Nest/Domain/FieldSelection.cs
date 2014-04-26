@@ -18,6 +18,9 @@ namespace Nest.Domain
 		/// </summary>
 		/// <typeparam name="K">The type to return the value as, remember that if your field is a string K should be string[]</typeparam>
 		K FieldValue<K>(string path);
+		
+		K[] FieldValue<TBindTo, K>(Expression<Func<TBindTo, object>> objectPath)
+			where TBindTo : class;
 
 	}
 
@@ -31,31 +34,33 @@ namespace Nest.Domain
 		}
 
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, object> FieldValues { get; set; }
-
-		/// <summary>
-		/// As of elasticsearch fields are always returned as an array. except for internal metadata values such as routing.
-		/// </summary>
-		public K[] FieldValue<K>(Expression<Func<T, K>> objectPath)
-		{
-			var path = this.Infer.PropertyPath(objectPath);
-			return this.FieldValue<K[]>(path);
-		}
-
-		/// <summary>
-		/// As of elasticsearch fields are always returned as an array. except for internal metadata values such as routing.
-		/// </summary>
-		public K[] FieldValue<K>(Expression<Func<T, object>> objectPath)
-		{
-			var path = this.Infer.PropertyPath(objectPath);
-			return this.FieldValue<K[]>(path);
-		}
+		public IDictionary<string, object> FieldValues { get; internal set; }
 
 		/// <summary>
 		/// As of elasticsearch fields are always returned as an array. except for internal metadata values such as routing.
 		/// </summary>
 		/// <typeparam name="K">The type to return the value as, remember that if your field is a string K should be string[]</typeparam>
 		public K FieldValue<K>(string path)
+		{
+			return this.FieldArray<K>(path);
+		}
+
+		/// <summary>
+		/// As of elasticsearch fields are always returned as an array. 
+		/// except for internal metadata values such as routing.
+		/// </summary>
+		public K[] FieldValue<TBindTo, K>(Expression<Func<TBindTo, object>> objectPath)
+			where TBindTo : class
+		{
+			var path = this.Infer.PropertyPath(objectPath);
+			return this.FieldArray<K[]>(path);
+		}
+
+		/// <summary>
+		/// As of elasticsearch fields are always returned as an array. except for internal metadata values such as routing.
+		/// </summary>
+		/// <typeparam name="K">The type to return the value as, remember that if your field is a string K should be string[]</typeparam>
+		private K FieldArray<K>(string path)
 		{
 			object o;
 			if (FieldValues.TryGetValue(path, out o))

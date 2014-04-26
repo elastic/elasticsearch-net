@@ -54,7 +54,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Termvector1
 
 				//do termvector 
 				this.Do(()=> _client.TermvectorGet("testidx", "testtype", "testing_document", nv=>nv
-					.Add("term_statistics", @"true")
+					.AddQueryString("term_statistics", @"true")
 				));
 
 				//match _response.term_vectors.text.field_statistics.sum_doc_freq: 

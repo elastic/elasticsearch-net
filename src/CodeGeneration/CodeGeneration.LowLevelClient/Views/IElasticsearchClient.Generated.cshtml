@@ -20,9 +20,9 @@ namespace Elasticsearch.Net
 	///</summary>
 	public interface IElasticsearchClient
 	{	
-		IConnection Connection { get; }
-		IConnectionConfigurationValues Settings { get; }
-		IElasticsearchSerializer Serializer { get; }
+		//IConnection Connection { get; }
+		//IConnectionConfigurationValues Settings { get; }
+		//IElasticsearchSerializer Serializer { get; }
 
 		@foreach(var kv in Model.Endpoints)
 		{
@@ -31,14 +31,22 @@ namespace Elasticsearch.Net
 			foreach(var method in endpoint.GetCsharpMethods()) 
 			{
 
-		<text>///<summary>@method.HttpMethod @method.Path
-		///<pre>@method.Documentation</pre>	
+		<text>///<summary>Represents a @method.HttpMethod on @method.Path
+		///<para></para>Returns: @Raw(method.ReturnDescription)
+		///<para>See also: @method.Documentation</para>	
 		///</summary>
 			@foreach (var part in method.Parts)
 			{
 		<text>@Raw("///<param name=\""+part.Name+"\">")@part.Description@Raw("</param>")</text>
 			}
-		@Raw(method.ReturnType) @(method.FullName)(@Raw(method.Arguments));
+		@Raw(@"///<param name=""requestParameters"">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>")
+		@Raw("///<returns>"+method.ReturnDescription)
+		///@Raw("</returns>")
+		
+		@Raw(method.ReturnType) @(method.FullName)@(Raw(method.ReturnTypeGeneric))(@Raw(method.Arguments));
 		</text>
 			}
 		}

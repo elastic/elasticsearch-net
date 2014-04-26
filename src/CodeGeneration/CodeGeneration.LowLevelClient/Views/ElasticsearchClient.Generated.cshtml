@@ -34,14 +34,21 @@ namespace Elasticsearch.Net
 			var patchedUrl = Regex.Replace(url, @"{\w+}", (m) => "{" + (++i).ToString(CultureInfo.InvariantCulture) +"}");
 			
 		<text>
-		///<summary>@method.HttpMethod @method.Path
-	    ///<pre>@method.Documentation</pre>	
+		///<summary>Represents a @method.HttpMethod on @method.Path
+		///<para></para>Returns: @Raw(method.ReturnDescription)
+	    ///<para>See also: @method.Documentation</para>	
 	    ///</summary></text>
 			foreach (var part in method.Parts)
 			{
 		<text>@Raw("///<param name=\"" + part.Name + "\">")@part.Description@Raw("</param>")</text>
 			}
-		<text>public @Raw(method.ReturnType) @(method.FullName)(@Raw(method.Arguments))
+		<text>@Raw(@"///<param name=""requestParameters"">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>")</text>
+		<text>@Raw("///<returns>"+method.ReturnDescription)
+		///@Raw("</returns>")</text>
+		<text>public @Raw(method.ReturnType) @(method.FullName)@(Raw(method.ReturnTypeGeneric))(@Raw(method.Arguments))
 		{
 		@foreach (ApiUrlPart part in method.Parts.Where(p=>p.Name != "body").ToList())
 		{
@@ -49,22 +56,32 @@ namespace Elasticsearch.Net
 		}
 		@if (method.Parts.Any())
 		{
-	<text>		var url = "@(patchedUrl)".F(@string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> "Encoded(" + p.Name +")" )));</text>
+	<text>var url = "@(patchedUrl)".F(@string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> "Encoded(" + p.Name +")" )));</text>
 		}
 		else
 		{
 	<text>var url = "@(url)";</text>
 		}
-			NameValueCollection nv = null;
-			if (queryString != null)
+			BaseRequestParameters requestParams = null;
+			if (requestParameters != null)
 			{
-				var qs = queryString(new @(method.QueryStringParamName)());
-				if (qs != null) nv = this.ToNameValueCollection(qs);
+				requestParams = requestParameters(new @(method.QueryStringParamName)()@(url.StartsWith("_cat") ? Raw(".RequestConfiguration(r=>r.ContentType(\"text/plain\"))") : null));
+				ToNameValueCollection(requestParams);
 			}
-		@{
-			string requestMethod = method.ReturnType.StartsWith("Task<") ? "DoRequestAsync" : "DoRequest";
+			@if (url.StartsWith("_cat"))
+			{
+<text>			else requestParams = new @(method.QueryStringParamName)().RequestConfiguration(r=>r.ContentType("text/plain")); </text>
+			}
+
+			@{
+			bool isAsync = method.ReturnType.StartsWith("Task<");
+			string requestMethod = isAsync ? "DoRequestAsync" : "DoRequest";
+			bool wrap = method.CallTypeGeneric == "Dictionary<string, object>";
 		}
-			return this.@(requestMethod)("@method.HttpMethod", url@(method.Parts.Any(pp=>pp.Name == "body") ? ", body" : ", data: null"), queryString: nv);
+			return @(wrap ? "ElasticsearchResponse.Wrap"+ (isAsync ? "Async" : "") +"("  : "")this.@(requestMethod)@(Raw("<" + method.CallTypeGeneric + ">"))(
+				"@method.HttpMethod", url@(method.Parts.Any(pp=>pp.Name == "body") ? ", body" : ", data: null"), 
+				requestParameters: requestParams
+			)@(wrap ? ")" : "");
 		}</text>
 
 		}

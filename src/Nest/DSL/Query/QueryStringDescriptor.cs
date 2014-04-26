@@ -106,7 +106,7 @@ namespace Nest
 			this._QueryString = query;
 			return this;
 		}
-		public QueryStringDescriptor<T> Operator(Operator op)
+		public QueryStringDescriptor<T> DefaultOperator(Operator op)
 		{
 			this._DefaultOperator = op;
 			return this;

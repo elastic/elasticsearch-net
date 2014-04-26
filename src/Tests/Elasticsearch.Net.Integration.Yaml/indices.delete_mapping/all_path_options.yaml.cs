@@ -318,7 +318,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesDeleteMapping2
 
 				//do indices.delete_mapping 
 				this.Do(()=> _client.IndicesDeleteMapping("", "", nv=>nv
-					.Add("name", @"test_type1")
+					.AddQueryString("name", @"test_type1")
 				), shouldCatch: @"param");
 
 				//do indices.delete_mapping 

@@ -13,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>True</DebugSymbols>
@@ -31,6 +33,7 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <WarningLevel>4</WarningLevel>
     <Optimize>False</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>bin\Release\</OutputPath>
@@ -48,6 +51,7 @@
     <CodeAnalysisRuleDirectories>;d:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Generator|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -61,42 +65,62 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoPoco">
       <HintPath>..\..\..\dep\AutoPoco.1.0.0.0\lib\AutoPoco.dll</HintPath>
     </Reference>
-    <Reference Include="FakeItEasy, Version=1.15.0.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
+    <Reference Include="FakeItEasy, Version=1.18.0.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\dep\FakeItEasy.1.15.0\lib\net40\FakeItEasy.dll</HintPath>
+      <HintPath>..\..\..\dep\FakeItEasy.1.18.0\lib\net40\FakeItEasy.dll</HintPath>
     </Reference>
-    <Reference Include="FluentAssertions">
-      <HintPath>..\..\..\dep\FluentAssertions.2.0.0.1\lib\net40\FluentAssertions.dll</HintPath>
+    <Reference Include="FluentAssertions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\dep\FluentAssertions.2.2.0.0\lib\net40\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\..\dep\Moq.4.2.1312.1622\lib\net40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\dep\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\dep\Newtonsoft.Json.6.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\..\dep\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\..\..\dep\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="PUrify">
-      <HintPath>..\..\..\dep\Purify - Preview\PUrify.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\DateExtensions.cs">
+      <Link>LinkedExtensions\DateExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\Extensions.cs">
+      <Link>LinkedExtensions\Extensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\NameValueCollectionExtensions.cs">
+      <Link>LinkedExtensions\NameValueCollectionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\StringExtensions.cs">
+      <Link>LinkedExtensions\StringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\TaskExtensions.cs">
+      <Link>LinkedExtensions\TaskExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Elasticsearch.Net\Extensions\TypeExtensions.cs">
+      <Link>LinkedExtensions\TypeExtensions.cs</Link>
+    </Compile>
     <Compile Include="BaseJsonTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
+    <Compile Include="Cluster\State\StateTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUrlTests.cs" />
     <Compile Include="Core\Map\MappingBehaviourTests.cs" />
@@ -130,6 +154,7 @@
     <Compile Include="Core\Validate\ValidateRequestTests.cs" />
     <Compile Include="Core\Versioning\VersioningTests.cs" />
     <Compile Include="Core\Warmers\PutWarmerRequestTests.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\UriExtensionsTests.cs" />
@@ -138,6 +163,8 @@
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="Reproduce\Reproduce579Tests.cs" />
+    <Compile Include="Search\Fields\FieldsTests.cs" />
     <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
     <Compile Include="Search\Filter\Modes\FilterModesTests.cs" />
     <Compile Include="Search\Filter\Singles\TermsLookupFilterJson.cs" />
@@ -149,6 +176,9 @@
     <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />
     <Compile Include="Search\Query\Modes\ConditionlessQueryJson.cs" />
     <Compile Include="Search\Query\Singles\FunctionScoreQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\CommonTerms\CommonTermsTests.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\SimpleQueryString\SimpleQueryStringQueryJson.cs" />
     <Compile Include="Search\Query\Singles\RegexpQueryJson.cs" />
     <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
     <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
@@ -263,13 +293,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Cluster\State\ClusterState.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Bulk\BulkOperations.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Bulk\BulkUpdateDetails.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Core\Indices\Analysis\Tokenizers\TestTokenizers.json" />
+    <None Include="Core\Indices\Analysis\Tokenizers\TestTokenizers.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Map\AnalyzerField\AnalyzerFieldUsingExpression.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -316,6 +351,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Map\Properties\NumberProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\SortAnalyzeryReadFromAttribute.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Map\Properties\StringProperty.json">
@@ -397,6 +435,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="Reproduce\Issue579.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Fields\FixedCovariantSearchResult.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinTermIntoMustStrictFilter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -406,7 +450,9 @@
     <None Include="Search\Filter\FilterCalls\CacheSettingsDoNotSurviceBoolOpNew.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Filter\Modes\VerbatimDoesNotThrowOnEmptyTerm.json" />
+    <None Include="Search\Filter\Modes\VerbatimDoesNotThrowOnEmptyTerm.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinMustNotIntoMustStrictQueryInverse.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -455,16 +501,45 @@
     <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinMustNotIntoMustStrictFilterInverse.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Query\QueriesInQueries\FilteredQueryConditionless.json" />
-    <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json" />
-    <None Include="Search\Query\Modes\VerbatimDoesNotThrowOnEmptyTerm.json" />
-    <None Include="Search\Query\Singles\Terms\TermsQueryDescriptorUsingExternalField.json" />
-    <None Include="Search\Query\Singles\Term\DateTimeWithCustomStringValue.json" />
-    <None Include="Search\Query\Singles\Term\DateTimeToStringTest.json" />
-    <None Include="Search\Query\Singles\Term\LongToStringTest.json" />
-    <None Include="Search\Query\Singles\Term\FloatToStringTest.json" />
-    <None Include="Search\Query\Singles\Term\DoubleToStringTest.json" />
-    <None Include="Search\Query\Singles\Term\IntToStringTest.json" />
+    <None Include="Search\Query\QueriesInQueries\FilteredQueryConditionless.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\CommonTerms\CommonTermsFull.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeFull.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Modes\VerbatimDoesNotThrowOnEmptyTerm.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\SimpleQueryString\SimpleQueryStringFull.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\Terms\TermsQueryDescriptorUsingExternalField.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\Term\DateTimeWithCustomStringValue.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\Term\DateTimeToStringTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\Term\LongToStringTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\Term\FloatToStringTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\Term\DoubleToStringTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\Term\IntToStringTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Rescore\RescoreSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -555,16 +630,36 @@
     <None Include="Search\Filter\Bool\StaticBoolTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Filter\ConditionlessBool\Combination1.json" />
-    <None Include="Search\Filter\ConditionlessBool\Combination2.json" />
-    <None Include="Search\Filter\ConditionlessBool\Combination3.json" />
-    <None Include="Search\Filter\ConditionlessBool\MatchAll.json" />
-    <None Include="Search\Filter\ConditionlessBool\MyTerm.json" />
-    <None Include="Search\Filter\ConditionlessBool\MyTermNot.json" />
-    <None Include="Search\Filter\ConditionlessBool\MyTermsAnd.json" />
-    <None Include="Search\Filter\ConditionlessBool\MyTermsNot.json" />
-    <None Include="Search\Filter\ConditionlessBool\MyTermsOr.json" />
-    <None Include="Search\Filter\ConditionLess\MatchAll.json" />
+    <None Include="Search\Filter\ConditionlessBool\Combination1.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\ConditionlessBool\Combination2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\ConditionlessBool\Combination3.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\ConditionlessBool\MatchAll.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\ConditionlessBool\MyTerm.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\ConditionlessBool\MyTermNot.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\ConditionlessBool\MyTermsAnd.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\ConditionlessBool\MyTermsNot.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\ConditionlessBool\MyTermsOr.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\ConditionLess\MatchAll.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Filter\FilterCalls\AndFilterCombines.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -580,7 +675,9 @@
     <None Include="Search\Filter\FilterCalls\OrFilterMultipleCombines.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Filter\FiltersInQueries\ConstantScoreQueryCombines.json" />
+    <None Include="Search\Filter\FiltersInQueries\ConstantScoreQueryCombines.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Filter\FiltersInQueries\FilteredQueryCombines.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -656,22 +753,48 @@
     <None Include="Search\Query\Bool\StaticBoolTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Query\ConditionlessBool\Combination1.json" />
-    <None Include="Search\Query\ConditionlessBool\Combination2.json" />
-    <None Include="Search\Query\ConditionlessBool\Combination3.json" />
-    <None Include="Search\Query\ConditionlessBool\MyTermsNot.json" />
-    <None Include="Search\Query\ConditionlessBool\MyTermsOr.json" />
-    <None Include="Search\Query\ConditionlessBool\MyTermsAnd.json" />
-    <None Include="Search\Query\ConditionlessBool\MyTermNot.json" />
-    <None Include="Search\Query\ConditionlessBool\MyTerm.json" />
-    <None Include="Search\Query\ConditionlessBool\MatchAll.json" />
+    <None Include="Search\Query\ConditionlessBool\Combination1.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\ConditionlessBool\Combination2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\ConditionlessBool\Combination3.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\ConditionlessBool\MyTermsNot.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\ConditionlessBool\MyTermsOr.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\ConditionlessBool\MyTermsAnd.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\ConditionlessBool\MyTermNot.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\ConditionlessBool\MyTerm.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\ConditionlessBool\MatchAll.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Query\ConditionLess\MatchAll.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Query\ConditionLessStrict\MatchAll.json" />
-    <None Include="Search\Query\InsideBoolCalls\InsideMust.json" />
-    <None Include="Search\Query\InsideBoolCalls\InsideMustNot.json" />
-    <None Include="Search\Query\InsideBoolCalls\InsideShould.json" />
+    <None Include="Search\Query\ConditionLessStrict\MatchAll.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\InsideBoolCalls\InsideMust.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\InsideBoolCalls\InsideMustNot.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\InsideBoolCalls\InsideShould.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Query\QueriesInQueries\CustomBoostFactorQuery.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -730,7 +853,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Test.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Search\Query\Singles\Terms\TermsOfTypeInt.json" />
+    <None Include="Search\Query\Singles\Terms\TermsOfTypeInt.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj">

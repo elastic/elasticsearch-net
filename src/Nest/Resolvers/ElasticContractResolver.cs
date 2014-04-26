@@ -52,6 +52,9 @@ namespace Nest.Resolvers
 			if (objectType == typeof(Facet))
 				contract.Converter = new FacetConverter();
 			
+			if (objectType == typeof(Uri))
+				contract.Converter = new UriJsonConverter();
+			
 			if (objectType == typeof(IAggregation))
 				contract.Converter = new AggregationConverter();
 			
@@ -66,8 +69,12 @@ namespace Nest.Resolvers
 
 			if (objectType == typeof(PropertyNameMarker))
 				contract.Converter = new PropertyNameMarkerConverter(this.ConnectionSettings);
+			
 			if (objectType == typeof(PropertyPathMarker))
 				contract.Converter = new PropertyPathMarkerConverter(this.ConnectionSettings);
+
+			if (objectType == typeof(SuggestResponse))
+				contract.Converter = new SuggestResponseConverter();
 
 			if (objectType == typeof(MultiSearchResponse))
 				contract.Converter = new MultiSearchConverter();

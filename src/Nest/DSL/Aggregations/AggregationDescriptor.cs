@@ -31,6 +31,14 @@ namespace Nest
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a._DateHistogram = d);
 		}
+		
+		[JsonProperty("percentiles")]
+		internal PercentilesAggregationDescriptor<T> _Percentiles { get; set; }
+		public AggregationDescriptor<T> Percentiles(string name,
+			Func<PercentilesAggregationDescriptor<T>, PercentilesAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a._Percentiles = d);
+		}
 
 		[JsonProperty("date_range")]
 		internal DateRangeAggregationDescriptor<T> _DateRange { get; set; }
@@ -109,7 +117,14 @@ namespace Nest
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a._Min = d);
 		}
-	
+		
+		[JsonProperty("cardinality")]
+		internal CardinalityAggregationDescriptor<T> _Cardinality { get; set; }
+		public AggregationDescriptor<T> Cardinality(string name, Func<CardinalityAggregationDescriptor<T>, CardinalityAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a._Cardinality = d);
+		}
+
 		[JsonProperty("missing")]
 		internal MissingAggregationDescriptor<T> _Missing { get; set; }
 		public AggregationDescriptor<T> Missing(string name, Func<MissingAggregationDescriptor<T>, MissingAggregationDescriptor<T>> selector)
@@ -150,6 +165,13 @@ namespace Nest
 		public AggregationDescriptor<T> Terms(string name, Func<TermsAggregationDescriptor<T>, TermsAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a._Terms = d);
+		}
+		
+		[JsonProperty("significant_terms")]
+		internal SignificantTermsAggregationDescriptor<T> _SignificantTerms { get; set; }
+		public AggregationDescriptor<T> SignificantTerms(string name, Func<SignificantTermsAggregationDescriptor<T>, SignificantTermsAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a._SignificantTerms = d);
 		}
 
 		[JsonProperty("value_count")]

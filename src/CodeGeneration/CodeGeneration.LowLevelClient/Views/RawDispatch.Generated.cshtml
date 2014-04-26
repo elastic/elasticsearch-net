@@ -30,13 +30,13 @@ namespace Nest
 			continue;
 		}
 		var generate = new [] {
-			new { Name = endpoint.CsharpMethodName + "Dispatch", Returns = "ElasticsearchResponse" , Async = false},
-			new { Name = endpoint.CsharpMethodName + "DispatchAsync", Returns = "Task<ElasticsearchResponse>", Async = true },
+			new { Name = endpoint.CsharpMethodName + "Dispatch<T>", Returns = "ElasticsearchResponse<T>" , Async = false},
+			new { Name = endpoint.CsharpMethodName + "DispatchAsync<T>", Returns = "Task<ElasticsearchResponse<T>>", Async = true },
 		};
 		foreach(var gen in generate)
 		{
 		<text>
-		internal @Raw(gen.Returns) @(gen.Name)(ElasticsearchPathInfo<@peek.QueryStringParamName> pathInfo @if (endpoint.Body != null) {<text>, object body</text>})
+		internal @Raw(gen.Returns) @(Raw(gen.Name))(ElasticsearchPathInfo<@peek.QueryStringParamName> pathInfo @if (endpoint.Body != null) {<text>, object body</text>})
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -51,22 +51,22 @@ namespace Nest
 				@foreach (var dispatch in dispatches)
 				{
 					var method = dispatch.CsharpMethod;
-					var name = method.FullName + ((gen.Async) ? "Async" : "");
+					var name = method.FullName + ((gen.Async) ? "Async<T>" : "<T>");
 					<text>//@method.HttpMethod @method.Path</text>
 					if (i == 0 && !dispatch.IfChecks.Any())
 					{
-					<text>return this.Raw.@(name)(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
+					<text>return this.Raw.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 					}
 					else
 					{
 						if (dispatch.IfChecks.Any())
 						{
 					<text>if (@Raw(string.Join(" && ", dispatch.IfChecks)))
-						return this.Raw.@(name)(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
+						return this.Raw.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 						}
 						else
 						{
-					<text>return this.Raw.@(name)(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
+					<text>return this.Raw.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 						}
 					}
 					if (i == totalDispatches - 1 && allWithIfChecks)

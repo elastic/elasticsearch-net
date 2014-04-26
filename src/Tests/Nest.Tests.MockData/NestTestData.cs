@@ -13,9 +13,9 @@ namespace Nest.Tests.MockData
 {
 	public static class NestTestData
 	{
-		private static IEnumerable<Person> _People { get; set; }
-		private static IEnumerable<BoolTerm> _BoolTerms { get; set; }
-		private static IEnumerable<ElasticsearchProject> _Data { get; set; }
+		private static IList<Person> _People { get; set; }
+		private static IList<BoolTerm> _BoolTerms { get; set; }
+		private static IList<ElasticsearchProject> _Data { get; set; }
 		public static IGenerationSession _Session { get; set; }
 		public static IGenerationSession Session
 		{
@@ -69,7 +69,7 @@ namespace Nest.Tests.MockData
 			}
 		}
 
-		public static IEnumerable<Person> People
+		public static IList<Person> People
 		{
 			get
 			{
@@ -81,7 +81,7 @@ namespace Nest.Tests.MockData
 			}
 		}
 
-		public static IEnumerable<BoolTerm> BoolTerms
+		public static IList<BoolTerm> BoolTerms
 		{
 			get
 			{
@@ -93,7 +93,7 @@ namespace Nest.Tests.MockData
 			}
 		}
 
-		public static IEnumerable<ElasticsearchProject> Data
+		public static IList<ElasticsearchProject> Data
 		{
 			get
 			{

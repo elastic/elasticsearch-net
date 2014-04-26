@@ -1,0 +1,1 @@
+$DTE.ItemOperations.Navigate("http://nest.azurewebsites.net/nuget-install.html")

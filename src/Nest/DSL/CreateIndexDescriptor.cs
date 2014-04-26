@@ -11,7 +11,7 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesCreate")]
-	public partial class CreateIndexDescriptor : IPathInfo<CreateIndexQueryString>
+	public partial class CreateIndexDescriptor : IPathInfo<CreateIndexRequestParameters>
 	{
 		internal string _Index { get; set; }
 		internal IndexSettings _IndexSettings = new IndexSettings();
@@ -86,6 +86,24 @@ namespace Nest
 			return this.RemoveMapping(marker);
 		}
 
+		/// <summary>
+		/// Add an alias for this index upon index creation
+		/// </summary>
+		public CreateIndexDescriptor AddAlias(string aliasName, Func<CreateAliasDescriptor, CreateAliasDescriptor> addAliasSelector = null)
+		{
+			aliasName.ThrowIfNullOrEmpty("aliasName");
+			addAliasSelector = addAliasSelector ?? (a => a);
+			var alias = addAliasSelector(new CreateAliasDescriptor());
+
+			if (this._IndexSettings.Aliases == null)
+				this._IndexSettings.Aliases = new Dictionary<string, CreateAliasDescriptor>();
+
+			this._IndexSettings.Aliases.Add(aliasName, alias);
+
+			return this;
+		}
+			
+
 		private CreateIndexDescriptor RemoveMapping(TypeNameMarker marker)
 		{
 			this._IndexSettings.Mappings = this._IndexSettings.Mappings.Where(m => m.Type != marker).ToList();
@@ -150,12 +168,12 @@ namespace Nest
 		}
 
 
-		ElasticsearchPathInfo<CreateIndexQueryString> IPathInfo<CreateIndexQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<CreateIndexRequestParameters> IPathInfo<CreateIndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = new ElasticsearchPathInfo<CreateIndexQueryString>();
+			var pathInfo = new ElasticsearchPathInfo<CreateIndexRequestParameters>();
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			pathInfo.Index = this._Index;
-			pathInfo.QueryString = this._QueryString;
+			pathInfo.RequestParameters = this._QueryString;
 			return pathInfo;
 
 		}

@@ -47,8 +47,9 @@
     <Reference Include="CsQuery">
       <HintPath>..\..\..\dep\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\dep\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\dep\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ShellProgressBar">
       <HintPath>..\..\..\dep\ShellProgressBar.1.0.0.0\lib\NET4\ShellProgressBar.dll</HintPath>
@@ -87,12 +88,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Views\QueryStringParametersExtensions.Generated.cshtml" />
+    <None Include="Views\RequestParametersExtensions.Generated.cshtml" />
     <None Include="Views\_Descriptors.Generated.cshtml" />
     <None Include="Views\RawDispatch.Generated.cshtml" />
     <None Include="Views\ElasticsearchClient.Generated.cshtml" />
     <None Include="Views\Enums.Generated.cshtml" />
-    <None Include="Views\QueryStringParameters.Generated.cshtml" />
+    <None Include="Views\RequestParameters.Generated.cshtml" />
     <None Include="Views\IElasticsearchClient.Generated.cshtml" />
   </ItemGroup>
   <ItemGroup>

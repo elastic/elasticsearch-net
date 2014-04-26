@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 
 
-namespace Elasticsearch.Net.Integration.Yaml.Delete8
+namespace Elasticsearch.Net.Integration.Yaml.Delete10
 {
-	public partial class Delete8YamlTests
+	public partial class Delete10YamlTests
 	{	
 
 
@@ -35,7 +35,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Delete8
 
 				//do delete 
 				this.Do(()=> _client.Delete("test_1", "test", "1", nv=>nv
-					.Add("ignore", 404)
+					.AddQueryString("ignore", 404)
 				));
 
 			}

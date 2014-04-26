@@ -77,6 +77,13 @@ namespace Nest
 			this._Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
 			return this;
 		}
+        public MultiMatchQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<Expression<Func<T, object>>, double?>> boostableSelector)
+        {
+            var d = new FluentDictionary<Expression<Func<T, object>>, double?>();
+            boostableSelector(d);
+            this._Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
+            return this;
+        }
 
 		public MultiMatchQueryDescriptor<T> Query(string query)
 		{
@@ -131,6 +138,7 @@ namespace Nest
 			return this;
 		}
 
+        [Obsolete("Use type:best_fields or type:most_fields instead")]
 		public MultiMatchQueryDescriptor<T> UseDisMax(bool useDismax)
 		{
 			this._UseDisMax = useDismax;

@@ -13,16 +13,16 @@ using Nest.Resolvers;
 namespace Nest
 {
 	public partial class UnregisterPercolatorDescriptor 
-		: IndexNamePathDescriptor<UnregisterPercolatorDescriptor, DeleteQueryString>
-		, IPathInfo<DeleteQueryString>
+		: IndexNamePathDescriptor<UnregisterPercolatorDescriptor, DeleteRequestParameters>
+		, IPathInfo<DeleteRequestParameters>
 	{
-		ElasticsearchPathInfo<DeleteQueryString> IPathInfo<DeleteQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<DeleteRequestParameters> IPathInfo<DeleteRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			//deleting a percolator in elasticsearch < 1.0 is actually deleting a document in a 
 			//special _percolator index where the passed index is actually a type
 			//the name is actually the id, we rectify that here
 
-			var pathInfo = base.ToPathInfo<DeleteQueryString>(settings, new DeleteQueryString());
+			var pathInfo = base.ToPathInfo<DeleteRequestParameters>(settings, new DeleteRequestParameters());
 			pathInfo.Index = pathInfo.Index;
 			pathInfo.Id = pathInfo.Name;
 			pathInfo.Type = ".percolator";

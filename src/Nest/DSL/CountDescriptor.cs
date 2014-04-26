@@ -7,8 +7,8 @@ namespace Nest
 {
 	[DescriptorFor("Count")]
 	public partial class CountDescriptor<T> 
-		:	QueryPathDescriptorBase<CountDescriptor<T>, T, CountQueryString>
-		, IPathInfo<CountQueryString> 
+		:	QueryPathDescriptorBase<CountDescriptor<T>, T, CountRequestParameters>
+		, IPathInfo<CountRequestParameters> 
 		where T : class
 	{
 		[JsonProperty("query")]
@@ -20,11 +20,11 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<CountQueryString> IPathInfo<CountQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<CountRequestParameters> IPathInfo<CountRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<CountQueryString>(settings, this._QueryString);
-			var qs = this._QueryString;
-			pathInfo.HttpMethod = !qs._source.IsNullOrEmpty() 
+			var pathInfo = base.ToPathInfo<CountRequestParameters>(settings, this._QueryString);
+			var source = this._QueryString.GetQueryStringValue<string>("source");
+			pathInfo.HttpMethod = !source.IsNullOrEmpty() 
 				? PathInfoHttpMethod.GET
 				: PathInfoHttpMethod.POST;
 				

@@ -10,6 +10,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+
 	public class BaseFilter
 	{
 		[JsonProperty(PropertyName = "bool")]
@@ -17,9 +18,12 @@ namespace Nest
 
 		private static readonly IEnumerable<BaseFilter> Empty = Enumerable.Empty<BaseFilter>();
 
-		internal virtual bool IsConditionless { get; set; }
-		internal bool IsStrict { get; set; }
-		internal bool IsVerbatim { get; set; }
+		[JsonIgnore]
+		public virtual bool IsConditionless { get; internal set; }
+		[JsonIgnore]
+		public bool IsStrict { get; internal set; }
+		[JsonIgnore]
+		public bool IsVerbatim { get; internal set; }
 		
 		/// <summary>
 		/// AND's two BaseFilters

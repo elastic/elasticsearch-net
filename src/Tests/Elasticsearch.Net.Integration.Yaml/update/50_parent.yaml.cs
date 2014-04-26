@@ -31,7 +31,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Update9
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 			}
@@ -66,13 +66,13 @@ namespace Elasticsearch.Net.Integration.Yaml.Update9
 					}
 				};
 				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
-					.Add("parent", 5)
+					.AddQueryString("parent", 5)
 				));
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("parent", 5)
-					.Add("fields", new [] {
+					.AddQueryString("parent", 5)
+					.AddQueryString("fields", new [] {
 						@"_parent",
 						@"_routing"
 					})
@@ -91,8 +91,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Update9
 					}
 				};
 				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
-					.Add("parent", 5)
-					.Add("fields", @"foo")
+					.AddQueryString("parent", 5)
+					.AddQueryString("fields", @"foo")
 				));
 
 				//match _response.get.fields.foo: 
@@ -115,7 +115,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Update9
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("parent", 5)
+					.AddQueryString("parent", 5)
 				));
 
 				//do update 

@@ -13,12 +13,12 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[DescriptorFor("IndicesSegments")]
-	public partial class SegmentsDescriptor : IndicesOptionalPathDescriptor<SegmentsDescriptor, SegmentsQueryString>
-		, IPathInfo<SegmentsQueryString>
+	public partial class SegmentsDescriptor : IndicesOptionalPathDescriptor<SegmentsDescriptor, SegmentsRequestParameters>
+		, IPathInfo<SegmentsRequestParameters>
 	{
-		ElasticsearchPathInfo<SegmentsQueryString> IPathInfo<SegmentsQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<SegmentsRequestParameters> IPathInfo<SegmentsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<SegmentsQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<SegmentsRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 			
 			return pathInfo;

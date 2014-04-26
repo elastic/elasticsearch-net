@@ -28,7 +28,7 @@ namespace Profiling.Indexing
 			if (!result.IsValid)
 			{
 				Console.Error.WriteLine("Could not connect to {0}:\r\n{1}",
-					result.ConnectionStatus.RequestUrl, result.ConnectionStatus.Error.OriginalException.Message);
+					result.ConnectionStatus.RequestUrl, result.ConnectionStatus);
 				Console.Read();
 			}
 		}

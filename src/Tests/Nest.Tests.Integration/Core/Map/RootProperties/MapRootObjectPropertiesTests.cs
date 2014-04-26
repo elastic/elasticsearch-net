@@ -20,7 +20,7 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 				.DateDetection(true)
 				.NumericDetection(true)
 				.SetParent<Person>() //makes no sense but i needed a type :)
-				.DisableAllField(true)
+				.AllField(a=>a.Enabled(false))
 				.DisableIndexField(true)
 				.DisableSizeField(true)
 				.Dynamic()

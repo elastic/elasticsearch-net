@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 
 
-namespace Elasticsearch.Net.Integration.Yaml.Index6
+namespace Elasticsearch.Net.Integration.Yaml.Index8
 {
-	public partial class Index6YamlTests
+	public partial class Index8YamlTests
 	{	
 
 
@@ -32,7 +32,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Index6
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"green")
+					.AddQueryString("wait_for_status", @"green")
 				));
 
 				//do index 
@@ -40,13 +40,13 @@ namespace Elasticsearch.Net.Integration.Yaml.Index6
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("routing", 5)
+					.AddQueryString("routing", 5)
 				));
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("routing", 5)
-					.Add("fields", new [] {
+					.AddQueryString("routing", 5)
+					.AddQueryString("fields", new [] {
 						@"_routing"
 					})
 				));

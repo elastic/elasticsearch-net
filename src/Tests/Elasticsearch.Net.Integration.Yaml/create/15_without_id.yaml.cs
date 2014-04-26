@@ -25,7 +25,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Create2
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", _body, nv=>nv
-					.Add("op_type", @"create")
+					.AddQueryString("op_type", @"create")
 				));
 
 				//is_true _response._id; 

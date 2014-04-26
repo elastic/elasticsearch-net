@@ -11,13 +11,6 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-
-	public class QueryPathDescriptor<T> : QueryPathDescriptorBase<QueryPathDescriptor<T>, T, BulkQueryString>
-		where T : class
-	{
-
-	}
-
 	/// <summary>
 	/// Provides a base for descriptors that need to describe a path in the form of 
 	/// <pre>
@@ -25,10 +18,10 @@ namespace Nest
 	/// </pre>
 	/// all parameters are optional and will default to the defaults for <para>T</para>
 	/// </summary>
-	public class QueryPathDescriptorBase<P, T, K>
+	public class QueryPathDescriptorBase<P, T, K> : BasePathDescriptor<P>
 		where P : QueryPathDescriptorBase<P, T, K>, new()
 		where T : class
-		where K : FluentQueryString<K>, new()
+		where K : FluentRequestParameters<K>, new()
 	{
 		internal IEnumerable<IndexNameMarker> _Indices { get; set; }
 		internal IEnumerable<TypeNameMarker> _Types { get; set; }
@@ -118,7 +111,7 @@ namespace Nest
 		}
 
 		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentQueryString<K>, new()
+			where K : FluentRequestParameters<K>, new()
 		{
 			//start out with defaults
 			var inferrer = new ElasticInferrer(settings);
@@ -145,7 +138,8 @@ namespace Nest
 
 
 
-			pathInfo.QueryString = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}
 

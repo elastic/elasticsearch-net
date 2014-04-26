@@ -2,6 +2,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using Elasticsearch.Net;
 using Nest.Domain;
 using Newtonsoft.Json;
@@ -42,7 +44,17 @@ namespace Nest
 		}
 
 	}
-
+	internal class FieldsSetter
+	{
+		//This method is used through reflection (cached though)
+		// do not remove
+		private static void SetFields<TFieldsType>(
+			Hit<TFieldsType> hit, FieldSelection<TFieldsType> fieldSelection)
+			where TFieldsType : class
+		{
+			hit.Fields = fieldSelection;
+		}
+	}
 
 	internal class ConcreteTypeConverter<T> : JsonConverter where T : class
 	{
@@ -54,6 +66,15 @@ namespace Nest
 
 		public ConcreteTypeConverter() {}
 
+		private static ConcurrentDictionary<Type, Action<object, object>> 
+			FieldDelegates = new ConcurrentDictionary<Type, Action<object, object>>();
+
+		private static ConcurrentDictionary<Type, Type> TypeToFieldTypes = 
+			new ConcurrentDictionary<Type, Type>();
+
+
+		private static MethodInfo MakeDelegateMethodInfo = 
+			typeof(FieldsSetter).GetMethod("SetFields", BindingFlags.Static | BindingFlags.NonPublic);
 
 		public ConcreteTypeConverter(Func<dynamic, Hit<dynamic>, Type> concreteTypeSelector)
 		{
@@ -83,12 +104,25 @@ namespace Nest
 		private static object GetUsingConcreteTypeConverter(JsonReader reader, JsonSerializer serializer, ConcreteTypeConverter<T> realConcreteConverter)
 		{
 			var jObject = CreateIntermediateJObject(reader);
-			var concreteType = GetConcreteTypeUsingSelector(serializer, realConcreteConverter, jObject);
+			object fieldSelection;
+			var concreteType = GetConcreteTypeUsingSelector(serializer, realConcreteConverter, jObject, out fieldSelection);
 			var hit = GetHitTypeInstance(concreteType);
 			PopulateHit(serializer, jObject.CreateReader(), hit);
 
+			Action<object, object> cachedLookup;
+			if (FieldDelegates.TryGetValue(concreteType, out cachedLookup))
+			{
+				cachedLookup(hit, fieldSelection);
+				return hit;
+			}
+			
+			var generic = MakeDelegateMethodInfo.MakeGenericMethod(concreteType);
+			cachedLookup = (h, f) => generic.Invoke(null, new[] { h, f });
+			cachedLookup(hit, fieldSelection);
+			FieldDelegates.TryAdd(concreteType, cachedLookup);
 			return hit;
 		}
+
 
 		private static void PopulateHit(JsonSerializer serializer, JsonReader reader, object hit) {
 			serializer.Populate(reader, hit);
@@ -108,21 +142,23 @@ namespace Nest
 
 
 		private static dynamic GetConcreteTypeUsingSelector(
-			JsonSerializer serializer,
-			ConcreteTypeConverter<T> realConcreteConverter,
-			JObject jObject)
+			JsonSerializer serializer, 
+			ConcreteTypeConverter<T> realConcreteConverter, 
+			JObject jObject, out object selection)
 		{
 			var elasticContractResolver = serializer.ContractResolver as ElasticContractResolver;
 			var baseType = realConcreteConverter._baseType;
 			var selector = realConcreteConverter._concreteTypeSelector;
 
-			Hit<dynamic> hitDynamic = new Hit<dynamic>();
+			//Hit<dynamic> hitDynamic = new Hit<dynamic>();
 			dynamic d = jObject;
 			var fields = jObject["fields"];
-			var fieldSelection = fields != null ? fields.ToObject<IDictionary<string, object>>() : null;
+			var fieldSelectionData = fields != null ? fields.ToObject<IDictionary<string, object>>() : null;
+			var sel = new FieldSelection<T>(elasticContractResolver.ConnectionSettings, fieldSelectionData);
+			var hitDynamic = new Hit<dynamic>();
 			//favor manual mapping over doing Populate twice.
-			hitDynamic._fields = fieldSelection;
-			hitDynamic.Fields = new FieldSelection<dynamic>(elasticContractResolver.ConnectionSettings, fieldSelection);
+			hitDynamic._fields = fieldSelectionData;
+			hitDynamic.Fields = sel;
 			hitDynamic.Source = d._source;
 			hitDynamic.Index = d._index;
 			hitDynamic.Score = (d._score is double) ? d._score : default(double);
@@ -132,8 +168,16 @@ namespace Nest
 			hitDynamic.Sorts = d.sort;
 			hitDynamic._Highlight = d.highlight is Dictionary<string, List<string>> ? d.highlight : null;
 			hitDynamic.Explanation = d._explanation is Explanation ? d._explanation : null;
-			object o = hitDynamic.Source ?? ElasticsearchDynamic.Create(fieldSelection) ?? new object {};
+			object o = d._source ?? DynamicDictionary.Create(fieldSelectionData) ?? new object {};
 			var concreteType = selector(o, hitDynamic);
+			
+			Type fieldSelectionType;
+			if (!TypeToFieldTypes.TryGetValue(concreteType, out fieldSelectionType))
+			{
+				fieldSelectionType = typeof(FieldSelection<>).MakeGenericType(concreteType);
+				TypeToFieldTypes.TryAdd(concreteType, fieldSelectionType);
+			}
+			selection = fieldSelectionType.CreateInstance(elasticContractResolver.ConnectionSettings, fieldSelectionData);
 			return concreteType;
 		}
 

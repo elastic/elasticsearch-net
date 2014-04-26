@@ -2,24 +2,25 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NEST</id>
-    <version>0.9.0.0</version>
+    <version>1.0.0-beta1</version>
     <title>NEST - Elasticsearch Client</title>
-    <authors>Martijn Laarman and contributors</authors>
-    <owners>Martijn Laarman</owners>
-    <iconUrl>http://nest.azurewebsites.net/images/nuget-icon.png</iconUrl>
-    <licenseUrl>http://mpdreamz.mit-license.org/</licenseUrl>
-    <projectUrl>https://github.com/Mpdreamz/NEST</projectUrl>
-    <summary>Elasticsearch client, strongly typed interface to Elasticsearch but also comes with great low level support.</summary>
+    <authors>Elasticsearch Inc. and contributors</authors>
+    <owners>Elasticsearch Inc.</owners>
+    <iconUrl>http://nest.azurewebsites.net/images/nest-nuget-icon.png</iconUrl>
+    <licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>
+    <projectUrl>https://github.com/elasticsearch/elasticsearch-net</projectUrl>
+    <summary>Strongly typed interface to Elasticsearch. Fluent request builder, mapped responses and powerful query dsl. Uses and exposes Elasticsearch.Net</summary>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Elasticsearch client, strongly typed interface to Elasticsearch but also comes with great low level support.</description>
+    <description>Elasticsearch client, strongly typed interface to Elasticsearch. Fluent request builder, mapped responses and powerful query dsl. Uses and exposes Elasticsearch.Net</description>
     <dependencies>
-      <dependency id="Newtonsoft.Json" />
+      <dependency id="Elasticsearch.Net" version="1.0.0-beta1"/>
+      <dependency id="Newtonsoft.Json" version="6.0.1" />
     </dependencies>
     <tags>elasticsearch elastic search lucene nest</tags>
   </metadata>
   <files>
-  <file src="lib\**\Nest.dll" target="lib"/> 
-  <file src="lib\**\Nest.pdb" target="lib"/> 
-  <file src="lib\**\Nest.XML" target="lib"/> 
+    <file src="output\Nest\Nest.dll" target="lib"/> 
+    <file src="output\Nest\Nest.pdb" target="lib"/> 
+    <file src="output\Nest\Nest.XML" target="lib"/> 
   </files>
 </package>

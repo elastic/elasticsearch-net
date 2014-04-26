@@ -132,7 +132,7 @@ namespace Nest.Tests.Integration.Warmers
 			Assert.Pass("1.0 GA has a bug that does not return a 404 for missing warmers see #5155");
 
 			warmerResponse.IsValid.Should().BeFalse();
-			warmerResponse.ConnectionStatus.Error.HttpStatusCode.Should().Be(HttpStatusCode.NotFound);
+			warmerResponse.ConnectionStatus.HttpStatusCode.Should().Be(404);
 		}
 
 	}

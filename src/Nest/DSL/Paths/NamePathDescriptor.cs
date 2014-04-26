@@ -18,9 +18,9 @@ namespace Nest
 	/// </pre>
 	/// name is mandatory.
 	/// </summary>
-	public class NamePathDescriptor<P, K>
+	public class NamePathDescriptor<P, K> : BasePathDescriptor<P>
 		where P : NamePathDescriptor<P, K> 
-		where K : FluentQueryString<K>, new()
+		where K : FluentRequestParameters<K>, new()
 	{
 		internal string _Name { get; set; }
 
@@ -34,16 +34,17 @@ namespace Nest
 		}
 
 		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentQueryString<K>, new()
+			where K : FluentRequestParameters<K>, new()
 		{
 			if (this._Name.IsNullOrEmpty())
-				throw new DslException("missing Name()");
+				throw new DslException("missing Repository()");
 
 			var pathInfo = new ElasticsearchPathInfo<K>()
 			{
 				Name = this._Name
 			};
-			pathInfo.QueryString = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}
 

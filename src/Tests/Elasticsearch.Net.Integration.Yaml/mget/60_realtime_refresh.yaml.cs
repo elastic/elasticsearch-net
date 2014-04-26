@@ -33,7 +33,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget10
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"green")
+					.AddQueryString("wait_for_status", @"green")
 				));
 
 				//do index 
@@ -49,7 +49,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget10
 					}
 				};
 				this.Do(()=> _client.Mget("test_1", "test", _body, nv=>nv
-					.Add("realtime", 0)
+					.AddQueryString("realtime", 0)
 				));
 
 				//is_false _response.docs[0].found; 
@@ -62,7 +62,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget10
 					}
 				};
 				this.Do(()=> _client.Mget("test_1", "test", _body, nv=>nv
-					.Add("realtime", 1)
+					.AddQueryString("realtime", 1)
 				));
 
 				//is_true _response.docs[0].found; 
@@ -75,8 +75,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget10
 					}
 				};
 				this.Do(()=> _client.Mget("test_1", "test", _body, nv=>nv
-					.Add("realtime", 0)
-					.Add("refresh", 1)
+					.AddQueryString("realtime", 0)
+					.AddQueryString("refresh", 1)
 				));
 
 				//is_true _response.docs[0].found; 

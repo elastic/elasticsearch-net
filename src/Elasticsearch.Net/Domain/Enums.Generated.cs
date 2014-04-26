@@ -81,7 +81,11 @@ namespace Elasticsearch.Net
 		  [EnumMember(Value = "internal")]
 		Internal,
 		[EnumMember(Value = "external")]
-		External
+		External,
+		[EnumMember(Value = "external_gte")]
+		ExternalGte,
+		[EnumMember(Value = "force")]
+		Force
 	}
 	
 	
@@ -162,7 +166,11 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "nodes")]
 		Nodes,
 		[EnumMember(Value = "routing_table")]
-		RoutingTable
+		RoutingTable,
+		[EnumMember(Value = "master_node")]
+		MasterNode,
+		[EnumMember(Value = "version")]
+		Version
 	}
 	
 	
@@ -221,8 +229,8 @@ namespace Elasticsearch.Net
 		Transport,
 		[EnumMember(Value = "http")]
 		Http,
-		[EnumMember(Value = "plugin")]
-		Plugin
+		[EnumMember(Value = "plugins")]
+		Plugins
 	}
 	
 	
@@ -290,7 +298,7 @@ namespace Elasticsearch.Net
 	}
 	
 
-	internal static class KnownEnums
+	public static class KnownEnums
 	{
 		public static string Resolve(Enum e)
 		{
@@ -366,6 +374,8 @@ namespace Elasticsearch.Net
 				{
 					case VersionTypeOptions.Internal: return "internal";
 					case VersionTypeOptions.External: return "external";
+					case VersionTypeOptions.ExternalGte: return "external_gte";
+					case VersionTypeOptions.Force: return "force";
 				}
 			}
 			
@@ -445,6 +455,8 @@ namespace Elasticsearch.Net
 					case ClusterStateMetric.Metadata: return "metadata";
 					case ClusterStateMetric.Nodes: return "nodes";
 					case ClusterStateMetric.RoutingTable: return "routing_table";
+					case ClusterStateMetric.MasterNode: return "master_node";
+					case ClusterStateMetric.Version: return "version";
 				}
 			}
 			
@@ -485,7 +497,7 @@ namespace Elasticsearch.Net
 					case NodesInfoMetric.Network: return "network";
 					case NodesInfoMetric.Transport: return "transport";
 					case NodesInfoMetric.Http: return "http";
-					case NodesInfoMetric.Plugin: return "plugin";
+					case NodesInfoMetric.Plugins: return "plugins";
 				}
 			}
 			

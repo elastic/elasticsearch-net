@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Elasticsearch.Net;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -15,11 +16,11 @@ namespace Nest.Tests.Integration.Search
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 
 
-		protected void TestDefaultAssertions(IQueryResponse<ElasticsearchProject> queryResponse)
+		protected void TestDefaultAssertions(ISearchResponse<ElasticsearchProject> queryResponse)
 		{
 			Assert.True(queryResponse.IsValid);
 			Assert.NotNull(queryResponse.ConnectionStatus);
-			Assert.Null(queryResponse.ConnectionStatus.Error);
+			Assert.Null(queryResponse.ConnectionStatus.OriginalException);
 			Assert.True(queryResponse.Total > 0, "No hits");
 			Assert.True(queryResponse.Documents.Any());
 			Assert.True(queryResponse.Documents.Count() > 0);
@@ -32,13 +33,12 @@ namespace Nest.Tests.Integration.Search
 		public void BogusQuery()
 		{
 			var client = this._client;
-			IQueryResponse<ElasticsearchProject> queryResults = client.Search<ElasticsearchProject>(s => s
+			ISearchResponse<ElasticsearchProject> queryResults = client.Search<ElasticsearchProject>(s => s
 				.QueryRaw("here be dragons")
 			);
 			Assert.False(queryResults.IsValid);
-			var error = queryResults.ConnectionStatus.Error;
-			Assert.NotNull(error);
-			Assert.True(error.HttpStatusCode == System.Net.HttpStatusCode.BadRequest, error.HttpStatusCode.ToString());
+			Assert.NotNull(queryResults.ConnectionStatus.HttpStatusCode);
+			Assert.AreEqual(queryResults.ConnectionStatus.HttpStatusCode, 400);
 		}
 
 		[Test]
@@ -144,23 +144,7 @@ namespace Nest.Tests.Integration.Search
 			Assert.True(queryResults.Documents.First().Followers.First().FirstName != this._LookFor);
 		}
 
-		[Test]
-		public void ScoringQuery()
-		{
-			var queryResults = this.SearchRaw<ElasticsearchProject>(
-				@" { ""query"" : {
-						""custom_score"" : {
-							""query"" : {
-								""term"" : {
-									""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
-								}
-							},
-							""script"" : ""_score * 2""
-						}
-					} }"
-			);
-			this.TestDefaultAssertions(queryResults);
-		}
+		
 		[Test]
 		public void ConstantScoreQuery()
 		{
@@ -516,7 +500,7 @@ namespace Nest.Tests.Integration.Search
 			var result = this._client.Raw.Search(request);
 			Assert.NotNull(result);
 			Assert.True(result.Success);
-			Assert.IsNotEmpty(result.Result);
+			Assert.IsNotEmpty(result.ResponseRaw.Utf8String());
 		}
 
 		

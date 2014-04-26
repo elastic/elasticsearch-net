@@ -1,0 +1,17 @@
+ {
+  "from": 0,
+  "size": 10,
+  "query": {
+    "simple_query_string": {
+      "query": "\"fried eggs\" +(eggplant | potato) -frittata",
+      "fields": [
+        "name^2",
+        "country^5"
+      ],
+      "default_operator": "and",
+      "lowercase_expanded_terms": true,
+      "flags": "ALL",
+      "locale": "ROOT"
+    }
+  }
+}

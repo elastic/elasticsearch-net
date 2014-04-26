@@ -19,6 +19,9 @@ namespace Nest.DSL.Descriptors
 		[JsonProperty("order")]
 		internal string _Order { get; set; }
 
+        [JsonProperty("mode")]
+        internal string _Mode { get; set; }
+
 		[JsonProperty("nested_filter")]
 		internal BaseFilter _NestedFilter { get; set; }
 
@@ -70,6 +73,31 @@ namespace Nest.DSL.Descriptors
 			this._Order = "desc";
 			return this;
 		}
+
+        public virtual SortDescriptor<T> NestedMin()
+        {
+            this._Mode = "min";
+            return this;
+        }
+
+        public virtual SortDescriptor<T> NestedMax()
+        {
+            this._Mode = "max";
+            return this;
+        }
+
+        public virtual SortDescriptor<T> NestedSum()
+        {
+            this._Mode = "sum";
+            return this;
+        }
+
+        public virtual SortDescriptor<T> NestedAvg()
+        {
+            this._Mode = "avg";
+            return this;
+        }
+
 		public virtual SortDescriptor<T> NestedFilter(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");

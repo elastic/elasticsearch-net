@@ -29,7 +29,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get3
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields", @"foo")
+					.AddQueryString("fields", @"foo")
 				));
 
 				//match _response._index: 
@@ -51,7 +51,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get3
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields", new [] {
+					.AddQueryString("fields", new [] {
 						@"foo",
 						@"count"
 					})
@@ -72,7 +72,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get3
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields", new [] {
+					.AddQueryString("fields", new [] {
 						@"foo",
 						@"count",
 						@"_source"

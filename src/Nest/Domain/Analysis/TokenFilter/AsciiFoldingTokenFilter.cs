@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -15,5 +16,7 @@ namespace Nest
 
 		}
 
+		[JsonProperty("preserve_original")]
+		public bool? PreserveOriginal { get; set; }
 	}
 }

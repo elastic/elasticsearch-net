@@ -13,12 +13,12 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[DescriptorFor("IndicesClose")]
-	public partial class CloseIndexDescriptor : IndexPathDescriptorBase<CloseIndexDescriptor, CloseIndexQueryString>
-		, IPathInfo<CloseIndexQueryString>
+	public partial class CloseIndexDescriptor : IndexPathDescriptorBase<CloseIndexDescriptor, CloseIndexRequestParameters>
+		, IPathInfo<CloseIndexRequestParameters>
 	{
-		ElasticsearchPathInfo<CloseIndexQueryString> IPathInfo<CloseIndexQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<CloseIndexRequestParameters> IPathInfo<CloseIndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<CloseIndexQueryString>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo<CloseIndexRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 
 			return pathInfo;

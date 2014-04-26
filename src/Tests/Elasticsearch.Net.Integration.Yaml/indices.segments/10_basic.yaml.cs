@@ -22,7 +22,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesSegments1
 
 				//do indices.segments 
 				this.Do(()=> _client.IndicesSegmentsForAll(nv=>nv
-					.Add("allow_no_indices", @"true")
+					.AddQueryString("allow_no_indices", @"true")
 				));
 
 			}

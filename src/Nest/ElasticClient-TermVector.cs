@@ -12,18 +12,18 @@ namespace Nest
         public ITermVectorResponse TermVector<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector)
             where T : class
         {
-            return this.Dispatch<TermvectorDescriptor<T>, TermvectorQueryString, TermVectorResponse>(
-                termVectorSelector,
-                (p, d) => this.RawDispatch.TermvectorDispatch(p, d)
+            return this.Dispatch<TermvectorDescriptor<T>, TermvectorRequestParameters, TermVectorResponse>(
+                termVectorSelector, 
+                (p, d) => this.RawDispatch.TermvectorDispatch<TermVectorResponse>(p, d)
             );
         }
 
         public Task<ITermVectorResponse> TermVectorAsync<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector)
             where T : class
         {
-            return this.DispatchAsync<TermvectorDescriptor<T>, TermvectorQueryString, TermVectorResponse, ITermVectorResponse>(
+            return this.DispatchAsync<TermvectorDescriptor<T>, TermvectorRequestParameters, TermVectorResponse, ITermVectorResponse>(
                 termVectorSelector,
-                (p, d) => this.RawDispatch.TermvectorDispatchAsync(p, d)
+                (p, d) => this.RawDispatch.TermvectorDispatchAsync<TermVectorResponse>(p, d)
             );
         }
     }

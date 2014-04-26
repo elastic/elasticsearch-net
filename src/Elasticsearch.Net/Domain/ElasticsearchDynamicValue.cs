@@ -239,7 +239,10 @@ namespace Elasticsearch.Net
 				return false;
 			}
 
-			if (ReferenceEquals(this, compareValue))
+			if (ReferenceEquals(this, compareValue)
+				|| ReferenceEquals(this.value, compareValue)
+				|| Equals(this.value, compareValue)
+				)
 			{
 				return true;
 			}
@@ -675,6 +678,7 @@ namespace Elasticsearch.Net
 		}
 
 		#endregion
+
 	}
 }
 

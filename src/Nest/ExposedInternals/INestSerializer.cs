@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -17,9 +18,9 @@ namespace Nest
 {
 	public interface INestSerializer : IElasticsearchSerializer
 	{
-		IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ElasticsearchResponse status, SearchDescriptor<T> originalSearchDescriptor)
-			where TResult : class
-			where T : class;
+		//IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ElasticsearchResponse status, SearchDescriptor<T> originalSearchDescriptor)
+		//	where TResult : class
+		//	where T : class;
 
 		string SerializeBulkDescriptor(BulkDescriptor bulkDescriptor);
 
@@ -28,19 +29,24 @@ namespace Nest
 		/// </summary>
 		string SerializeMultiSearch(MultiSearchDescriptor multiSearchDescriptor);
 
-		TemplateResponse DeserializeTemplateResponse(ElasticsearchResponse c, GetTemplateDescriptor d);
-		GetMappingResponse DeserializeGetMappingResponse(ElasticsearchResponse c);
-		MultiGetResponse DeserializeMultiGetResponse(ElasticsearchResponse c, MultiGetDescriptor d);
-		MultiSearchResponse DeserializeMultiSearchResponse(ElasticsearchResponse c, MultiSearchDescriptor d);
-		WarmerResponse DeserializeWarmerResponse(ElasticsearchResponse connectionStatus, GetWarmerDescriptor getWarmerDescriptor);
 
 		/// <summary>
-		/// Returns a response of type R based on the connection status by trying parsing status.Result into R
+		/// Deserialize to type T bypassing checks for custom deserialization state and or BaseResponse return types.
 		/// </summary>
-		R ToParsedResponse<R>(
-			ElasticsearchResponse status, 
-			bool notFoundIsAValidResponse = false,
-			JsonConverter piggyBackJsonConverter = null
-			) where R : BaseResponse;
+		T DeserializeInternal<T>(Stream stream);
+		//TemplateResponse DeserializeTemplateResponse(ElasticsearchResponse c, GetTemplateDescriptor d);
+		//GetMappingResponse DeserializeGetMappingResponse(ElasticsearchResponse c);
+		//MultiGetResponse DeserializeMultiGetResponse(ElasticsearchResponse c, MultiGetDescriptor d);
+		//MultiSearchResponse DeserializeMultiSearchResponse(ElasticsearchResponse c, MultiSearchDescriptor d);
+		//WarmerResponse DeserializeWarmerResponse(ElasticsearchResponse connectionStatus, GetWarmerDescriptor getWarmerDescriptor);
+
+		///// <summary>
+		///// Returns a response of type R based on the connection status by trying parsing status.Result into R
+		///// </summary>
+		//R ToParsedResponse<R>(
+		//	ElasticsearchResponse status, 
+		//	bool notFoundIsAValidResponse = false,
+		//	JsonConverter piggyBackJsonConverter = null
+		//	) where R : BaseResponse;
 	}
 }

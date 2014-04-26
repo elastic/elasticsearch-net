@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 
 
-namespace Elasticsearch.Net.Integration.Yaml.Create5
+namespace Elasticsearch.Net.Integration.Yaml.Create7
 {
-	public partial class Create5YamlTests
+	public partial class Create7YamlTests
 	{	
 
 
@@ -32,7 +32,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Create5
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"green")
+					.AddQueryString("wait_for_status", @"green")
 				));
 
 				//do create 
@@ -40,14 +40,14 @@ namespace Elasticsearch.Net.Integration.Yaml.Create5
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("routing", 5)
-					.Add("op_type", @"create")
+					.AddQueryString("routing", 5)
+					.AddQueryString("op_type", @"create")
 				));
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("routing", 5)
-					.Add("fields", new [] {
+					.AddQueryString("routing", 5)
+					.AddQueryString("fields", new [] {
 						@"_routing"
 					})
 				));

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 
 
-namespace Elasticsearch.Net.Integration.Yaml.Create6
+namespace Elasticsearch.Net.Integration.Yaml.Create8
 {
-	public partial class Create6YamlTests
+	public partial class Create8YamlTests
 	{	
 
 
@@ -34,7 +34,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Create6
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.Add("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"yellow")
 				));
 
 				//do create 
@@ -42,7 +42,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Create6
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("op_type", @"create")
+					.AddQueryString("op_type", @"create")
 				), shouldCatch: @"/RoutingMissingException/");
 
 				//do create 
@@ -50,14 +50,14 @@ namespace Elasticsearch.Net.Integration.Yaml.Create6
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("parent", 5)
-					.Add("op_type", @"create")
+					.AddQueryString("parent", 5)
+					.AddQueryString("op_type", @"create")
 				));
 
 				//do get 
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
-					.Add("parent", 5)
-					.Add("fields", new [] {
+					.AddQueryString("parent", 5)
+					.AddQueryString("fields", new [] {
 						@"_parent",
 						@"_routing"
 					})

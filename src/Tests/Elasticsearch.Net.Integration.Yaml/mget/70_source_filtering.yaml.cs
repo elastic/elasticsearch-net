@@ -228,7 +228,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget11
 					}
 				};
 				this.Do(()=> _client.Mget("test_1", _body, nv=>nv
-					.Add("_source", @"false")
+					.AddQueryString("_source", @"false")
 				));
 
 				//is_false _response.docs[0]._source; 
@@ -245,7 +245,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget11
 					}
 				};
 				this.Do(()=> _client.Mget("test_1", _body, nv=>nv
-					.Add("_source", @"true")
+					.AddQueryString("_source", @"true")
 				));
 
 				//is_true _response.docs[0]._source; 
@@ -272,7 +272,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget11
 					}
 				};
 				this.Do(()=> _client.Mget("test_1", _body, nv=>nv
-					.Add("_source", @"include.field1")
+					.AddQueryString("_source", @"include.field1")
 				));
 
 				//match _response.docs[0]._source: 
@@ -307,7 +307,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget11
 					}
 				};
 				this.Do(()=> _client.Mget("test_1", _body, nv=>nv
-					.Add("_source_include", @"include.field1,count")
+					.AddQueryString("_source_include", @"include.field1,count")
 				));
 
 				//match _response.docs[0]._source: 
@@ -344,8 +344,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget11
 					}
 				};
 				this.Do(()=> _client.Mget("test_1", _body, nv=>nv
-					.Add("_source_include", @"include")
-					.Add("_source_exclude", @"*.field2")
+					.AddQueryString("_source_include", @"include")
+					.AddQueryString("_source_exclude", @"*.field2")
 				));
 
 				//match _response.docs[0]._source: 

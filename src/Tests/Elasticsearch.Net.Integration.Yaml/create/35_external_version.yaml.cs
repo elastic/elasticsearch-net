@@ -25,9 +25,9 @@ namespace Elasticsearch.Net.Integration.Yaml.Create4
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("version_type", @"external")
-					.Add("version", 5)
-					.Add("op_type", @"create")
+					.AddQueryString("version_type", @"external")
+					.AddQueryString("version", 5)
+					.AddQueryString("op_type", @"create")
 				));
 
 				//match _response._version: 
@@ -38,9 +38,9 @@ namespace Elasticsearch.Net.Integration.Yaml.Create4
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("version_type", @"external")
-					.Add("version", 5)
-					.Add("op_type", @"create")
+					.AddQueryString("version_type", @"external")
+					.AddQueryString("version", 5)
+					.AddQueryString("op_type", @"create")
 				), shouldCatch: @"conflict");
 
 				//do create 
@@ -48,9 +48,9 @@ namespace Elasticsearch.Net.Integration.Yaml.Create4
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.Add("version_type", @"external")
-					.Add("version", 6)
-					.Add("op_type", @"create")
+					.AddQueryString("version_type", @"external")
+					.AddQueryString("version", 6)
+					.AddQueryString("op_type", @"create")
 				), shouldCatch: @"conflict");
 
 			}

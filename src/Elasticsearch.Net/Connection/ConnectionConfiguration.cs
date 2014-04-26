@@ -1,21 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net.Connection
 {
+	/// <summary>
+	/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
+	/// to elasticsearch
+	/// </summary>
 	public class ConnectionConfiguration : 
 		ConnectionConfiguration<ConnectionConfiguration>, 
-		IConnectionConfiguration<ConnectionConfiguration>
+		IConnectionConfiguration<ConnectionConfiguration>, 
+		IHideObjectMembers
 	{
+		/// <summary>
+		/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
+		/// to elasticsearch
+		/// </summary>
+		/// <param name="uri">The root of the elasticsearch node we want to connect to. Defaults to http://localhost:9200</param>
 		public ConnectionConfiguration(Uri uri = null)
 			: base(uri)
 		{
 
 		}
+
+		/// <summary>
+		/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
+		/// to elasticsearch
+		/// </summary>
+		/// <param name="connectionPool">A connection pool implementation that'll tell the client what nodes are available</param>
 		public ConnectionConfiguration(IConnectionPool connectionPool)
 			: base(connectionPool)
 		{
@@ -24,7 +41,9 @@ namespace Elasticsearch.Net.Connection
 	}
 
 
-	public class ConnectionConfiguration<T> : IConnectionConfigurationValues
+	[Browsable(false)]
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public class ConnectionConfiguration<T> : IConnectionConfigurationValues, IHideObjectMembers
 		where T : ConnectionConfiguration<T>
 	{
 		private IConnectionPool _connectionPool;
@@ -48,12 +67,15 @@ namespace Elasticsearch.Net.Connection
 		private string _proxyAddress;
 		string IConnectionConfigurationValues.ProxyAddress { get{ return _proxyAddress; } }
 
+		private bool _usePrettyResponses;
+		bool IConnectionConfigurationValues.UsesPrettyResponses { get{ return _usePrettyResponses; } }
+		private bool _keepRawResponse;
+		bool IConnectionConfigurationValues.KeepRawResponse { get{ return _keepRawResponse; } }
+
 		private int _maximumAsyncConnections;
 		int IConnectionConfigurationValues.MaximumAsyncConnections { get{ return _maximumAsyncConnections; } }
 		private int? _maxRetries;
 		int? IConnectionConfigurationValues.MaxRetries { get{ return _maxRetries; } }
-		private bool _usePrettyResponses;
-		bool IConnectionConfigurationValues.UsesPrettyResponses { get{ return _usePrettyResponses; } }
 		private bool _sniffOnStartup;
 		bool IConnectionConfigurationValues.SniffsOnStartup { get{ return _sniffOnStartup; } }
 		private bool _sniffOnConectionFault;
@@ -62,8 +84,8 @@ namespace Elasticsearch.Net.Connection
 		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan { get{ return _sniffLifeSpan; } }
 		private bool _traceEnabled;
 		bool IConnectionConfigurationValues.TraceEnabled { get{ return _traceEnabled; } }
-		private Action<ElasticsearchResponse> _connectionStatusHandler;
-		Action<ElasticsearchResponse> IConnectionConfigurationValues.ConnectionStatusHandler { get{ return _connectionStatusHandler; } }
+		private Action<IElasticsearchResponse> _connectionStatusHandler;
+		Action<IElasticsearchResponse> IConnectionConfigurationValues.ConnectionStatusHandler { get{ return _connectionStatusHandler; } }
 		private NameValueCollection _queryString;
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters { get{ return _queryString; } }
 
@@ -84,7 +106,7 @@ namespace Elasticsearch.Net.Connection
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")))
 		{
 			//this.Host = uri.Host;
-			//this.Port = uri.Port;
+			//this.Port = uri.Port
 		}
 
 		public T MaximumRetries(int maxRetries)
@@ -142,7 +164,7 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		/// <summary>
-		/// Timeout in milliseconds when the .NET webrquest should abort the request, note that you can set this to a high value here,
+		/// Timeout in milliseconds when the .NET webrequest should abort the request, note that you can set this to a high value here,
 		/// and specify the timeout in various calls on Elasticsearch's side.
 		/// </summary>
 		/// <param name="timeout">time out in milliseconds</param>
@@ -216,7 +238,16 @@ namespace Elasticsearch.Net.Connection
 			return (T) this;
 		}
 
-		protected void ConnectionStatusDefaultHandler(ElasticsearchResponse status)
+		/// <summary>
+		/// Make sure the reponse bytes are always available on the ElasticsearchResponse object
+		/// <para>Note: that depending on the registered serializer this may cause the respond to be read in memory first</para>
+		/// </summary>
+		public T ExposeRawResponse(bool b = true)
+		{
+			this._keepRawResponse = b;
+			return (T) this;
+		}
+		protected void ConnectionStatusDefaultHandler(IElasticsearchResponse status)
 		{
 			return;
 		}
@@ -224,7 +255,7 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Global callback for every response that NEST receives, useful for custom logging.
 		/// </summary>
-		public T SetConnectionStatusHandler(Action<ElasticsearchResponse> handler)
+		public T SetConnectionStatusHandler(Action<IElasticsearchResponse> handler)
 		{
 			handler.ThrowIfNull("handler");
 			this._connectionStatusHandler = handler;

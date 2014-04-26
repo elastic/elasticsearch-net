@@ -4,7 +4,9 @@ namespace Nest
 {
     public enum TextQueryType
     {
-        BOOLEAN,
+        BEST_FIELDS,
+        MOST_FIELDS,
+        CROSS_FIELDS,
         PHRASE,
         PHRASE_PREFIX
     }

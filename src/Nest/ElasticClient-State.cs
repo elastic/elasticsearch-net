@@ -7,23 +7,26 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		public IClusterStateResponse ClusterState(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null)
+		/// <inheritdoc />
+		public IClusterStateResponse ClusterState(
+			Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null)
 		{
 			clusterStateSelector = clusterStateSelector ?? (s => s);
-			return this.Dispatch<ClusterStateDescriptor, ClusterStateQueryString, ClusterStateResponse>(
+			return this.Dispatch<ClusterStateDescriptor, ClusterStateRequestParameters, ClusterStateResponse>(
 				clusterStateSelector,
-				(p, d) => this.RawDispatch.ClusterStateDispatch(p)
+				(p, d) => this.RawDispatch.ClusterStateDispatch<ClusterStateResponse>(p)
 			);
 		}
-		
-		public Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null)
+
+		/// <inheritdoc />
+		public Task<IClusterStateResponse> ClusterStateAsync(
+			Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null)
 		{
 			clusterStateSelector = clusterStateSelector ?? (s => s);
-			return this
-				.DispatchAsync<ClusterStateDescriptor, ClusterStateQueryString, ClusterStateResponse, IClusterStateResponse>(
-					clusterStateSelector,
-					(p, d) => this.RawDispatch.ClusterStateDispatchAsync(p)
-				);
+			return this.DispatchAsync<ClusterStateDescriptor, ClusterStateRequestParameters, ClusterStateResponse, IClusterStateResponse>(
+				clusterStateSelector,
+				(p, d) => this.RawDispatch.ClusterStateDispatchAsync<ClusterStateResponse>(p)
+			);
 		}
 	}
 }

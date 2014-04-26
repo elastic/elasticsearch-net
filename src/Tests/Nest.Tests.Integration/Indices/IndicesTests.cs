@@ -16,11 +16,11 @@ namespace Nest.Tests.Integration.Indices
 	[TestFixture]
 	public class IndicesTest : IntegrationTests 
 	{
-		protected void TestDefaultAssertions(QueryResponse<ElasticsearchProject> queryResponse)
+		protected void TestDefaultAssertions(SearchResponse<ElasticsearchProject> queryResponse)
 		{
 			Assert.True(queryResponse.IsValid);
 			Assert.NotNull(queryResponse.ConnectionStatus);
-			Assert.Null(queryResponse.ConnectionStatus.Error);
+			Assert.Null(queryResponse.ConnectionStatus.OriginalException);
 			Assert.True(queryResponse.Total > 0, "No hits");
 			Assert.True(queryResponse.Documents.Any());
 			Assert.True(queryResponse.Documents.Count() > 0);

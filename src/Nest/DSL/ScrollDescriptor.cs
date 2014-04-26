@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
+using Nest.Domain;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
@@ -13,18 +14,19 @@ using Nest.Resolvers;
 namespace Nest
 {
 	public partial class ScrollDescriptor<T> :
-		IPathInfo<ScrollQueryString>
+		IPathInfo<ScrollRequestParameters>,
+		IHideObjectMembers
 		where T : class
 	{
-		ElasticsearchPathInfo<ScrollQueryString> IPathInfo<ScrollQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		ElasticsearchPathInfo<ScrollRequestParameters> IPathInfo<ScrollRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = new ElasticsearchPathInfo<ScrollQueryString>();
+			var pathInfo = new ElasticsearchPathInfo<ScrollRequestParameters>();
 			// force POST scrollId can be quite big
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			pathInfo.ScrollId = this._QueryString._scroll_id;
-			// force scroll id out of querystring (potentially very large)
-			this._QueryString._QueryStringDictionary.Remove("scroll_id");
-			pathInfo.QueryString = this._QueryString;
+			pathInfo.ScrollId = this._QueryString.GetQueryStringValue<string>("scroll_id");
+			// force scroll id out of RequestParameters (potentially very large)
+			this._QueryString.RemoveQueryString("scroll_id");
+			pathInfo.RequestParameters = this._QueryString;
 			return pathInfo;
 		}
 	}

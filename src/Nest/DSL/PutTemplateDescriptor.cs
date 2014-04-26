@@ -7,8 +7,8 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[DescriptorFor("IndicesPutTemplate")]
-	public partial class PutTemplateDescriptor : NamePathDescriptor<PutTemplateDescriptor, PutTemplateQueryString>
-		, IPathInfo<PutTemplateQueryString>
+	public partial class PutTemplateDescriptor : NamePathDescriptor<PutTemplateDescriptor, PutTemplateRequestParameters>
+		, IPathInfo<PutTemplateRequestParameters>
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
 
@@ -85,10 +85,22 @@ namespace Nest
 			return this;
 
 		}
-
-		ElasticsearchPathInfo<PutTemplateQueryString> IPathInfo<PutTemplateQueryString>.ToPathInfo(IConnectionSettingsValues settings)
+		
+		public PutTemplateDescriptor AddAlias(string aliasName, Func<CreateAliasDescriptor, CreateAliasDescriptor> addAliasDescriptor = null)
 		{
-			var pathInfo = base.ToPathInfo<PutTemplateQueryString>(settings, this._QueryString);
+			aliasName.ThrowIfNull("aliasName");
+			addAliasDescriptor = addAliasDescriptor ?? (a=>a);
+			var alias = addAliasDescriptor(new CreateAliasDescriptor());
+			if (this._TemplateMapping.Aliases == null)
+				this._TemplateMapping.Aliases = new Dictionary<string, CreateAliasDescriptor>();
+
+			this._TemplateMapping.Aliases[aliasName] = alias;
+			return this;
+
+		}
+		ElasticsearchPathInfo<PutTemplateRequestParameters> IPathInfo<PutTemplateRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		{
+			var pathInfo = base.ToPathInfo<PutTemplateRequestParameters>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
 			pathInfo.Name = this._Name;
 			return pathInfo;

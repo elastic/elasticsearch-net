@@ -1,4 +1,4 @@
-*.userprefs
+	*.userprefs
 *.local.xml
 *.sln.docstates
 *.obj
@@ -20,8 +20,9 @@
 *.ilk
 *.log
 *.nupkg
+*.ncrunchsolution
 [Bb]in
-[Dd]ebug*/
+[Dd]ebug/
 test-results
 test-results/*
 *.lib
@@ -32,14 +33,27 @@ obj/
 _ReSharper*/
 _NCrunch*/
 [Tt]est[Rr]esult*
-build/tmp
-build/tmp/*
-build/_out/*
+
+keypair.snk
+private.snk
+*.snk
 build/keys/private.snk
 build/keys/keypair.snk
-!build/tools/*
-!build/tools/scriptcs/*
+build/*
+!build/tools
+build/tools/*
+!build/tools/sn
+!build/tools/sn/*
+!build/tools/ilmerge
+!build/*.fsx
+!build/*.fsx
+!build/*.ps1
+!build/*.nuspec
+
 /dep/Newtonsoft.Json.4.0.2
+!new_docs/build
+new_docs/node_modules
+doc/Help
 
 /src/Nest.Tests.Unit/*.ncrunchproject
 *.ncrunchproject

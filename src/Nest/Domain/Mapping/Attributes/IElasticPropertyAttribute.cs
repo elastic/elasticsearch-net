@@ -16,6 +16,7 @@
         string Analyzer { get; set; }
         string IndexAnalyzer { get; set; }
         string SearchAnalyzer { get; set; }
+        string SortAnalyzer { get; set; }
         string NullValue { get; set; }
 
         bool OmitNorms { get; set; }

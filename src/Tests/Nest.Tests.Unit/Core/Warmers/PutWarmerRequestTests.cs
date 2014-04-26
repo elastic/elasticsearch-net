@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Elasticsearch.Net;
 using NUnit.Framework;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -26,7 +27,7 @@ namespace Nest.Tests.Unit.Core.Template
 				.Search<ElasticsearchProject>(s => s));
 			Assert.NotNull(result, "PutWarmer result should not be null");
 			var status = result.ConnectionStatus;
-			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
+			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.ResponseRaw.Utf8String());
 			StringAssert.EndsWith("/nest_test_data/elasticsearchprojects/_warmer/warmer_pathwithtype", status.RequestUrl);
 			StringAssert.AreEqualIgnoringCase("PUT", status.RequestMethod);
 		}
@@ -39,7 +40,7 @@ namespace Nest.Tests.Unit.Core.Template
 				.Search<dynamic>(s => s));
 			Assert.NotNull(result, "PutWarmer result should not be null");
 			var status = result.ConnectionStatus;
-			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
+			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.ResponseRaw.Utf8String());
 			StringAssert.EndsWith("/my_index/_warmer/warmer_pathwithdynamic", status.RequestUrl);
 			StringAssert.AreEqualIgnoringCase("PUT", status.RequestMethod);
 		}
@@ -52,7 +53,7 @@ namespace Nest.Tests.Unit.Core.Template
 				.Search<dynamic>(s => s));
 			Assert.NotNull(result, "PutWarmer result should not be null");
 			var status = result.ConnectionStatus;
-			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
+			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.ResponseRaw.Utf8String());
 			StringAssert.EndsWith("/_all/_warmer/warmer_pathwithallindices", status.RequestUrl);
 			StringAssert.AreEqualIgnoringCase("PUT", status.RequestMethod);
 		}

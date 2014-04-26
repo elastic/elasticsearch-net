@@ -80,7 +80,7 @@ namespace Nest
 			observer.OnCompleted();
 		}
 
-		public IBulkResponse IndexSearchResults(IQueryResponse<T> searchResult,IObserver<IReindexResponse<T>> observer, string toIndex, int page)
+		public IBulkResponse IndexSearchResults(ISearchResponse<T> searchResult,IObserver<IReindexResponse<T>> observer, string toIndex, int page)
 		{
 			if (!searchResult.IsValid)
 				throw new ReindexException(searchResult.ConnectionStatus, "reindex failed on scroll #" + page);
@@ -99,7 +99,7 @@ namespace Nest
 			observer.OnNext(new ReindexResponse<T>()
 			{
 				BulkResponse = indexResult,
-				QueryResponse = searchResult,
+				SearchResponse = searchResult,
 				Scroll = page
 			});
 			return indexResult;

@@ -4,7 +4,6 @@ namespace Nest
 {
 	public interface IUpdateResponse : IResponse
 	{
-		bool OK { get; }
 		ShardsMetaData ShardsHit { get; }
 		string Index { get; }
 		string Type { get; }
@@ -15,9 +14,6 @@ namespace Nest
 	[JsonObject]
 	public class UpdateResponse : BaseResponse, IUpdateResponse
 	{
-		[JsonProperty(PropertyName = "ok")]
-		public bool OK { get; private set; }
-
 		[JsonProperty(PropertyName = "_shards")]
 		public ShardsMetaData ShardsHit { get; private set; }
 

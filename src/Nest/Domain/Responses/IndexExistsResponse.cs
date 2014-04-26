@@ -4,19 +4,24 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IIndexExistsResponse : IResponse
+	public interface IExistsResponse : IResponse
 	{
 		bool Exists { get; }
 	}
 
 	[JsonObject]
-	public class IndexExistsResponse : BaseResponse, IIndexExistsResponse
+	public class ExistsResponse : BaseResponse, IExistsResponse
 	{
-		internal IndexExistsResponse(ElasticsearchResponse connectionStatus)
+		internal ExistsResponse(IElasticsearchResponse connectionStatus)
 		{
 			this.ConnectionStatus = connectionStatus;
-			this.IsValid = connectionStatus.Error == null || connectionStatus.Error.HttpStatusCode == HttpStatusCode.NotFound;
-			this.Exists = connectionStatus.Error == null && connectionStatus.Success;
+			this.IsValid =connectionStatus.Success || connectionStatus.HttpStatusCode == 404;
+			this.Exists = connectionStatus.Success & connectionStatus.HttpStatusCode == 200;
+		}
+		public ExistsResponse()
+		{
+			this.IsValid = false;
+			this.Exists = false;
 		}
 
 		public bool Exists { get; internal set; }

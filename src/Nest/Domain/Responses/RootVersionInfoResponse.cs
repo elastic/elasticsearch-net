@@ -4,7 +4,7 @@ namespace Nest
 {
 	public interface IRootInfoResponse : IResponse
 	{
-		bool OK { get; }
+		int Status { get; }
 		string Name { get; }
 		string Tagline { get;  }
 		ElasticsearchVersionInfo Version { get;  }
@@ -18,8 +18,8 @@ namespace Nest
 			this.IsValid = true;
 		}
 
-		[JsonProperty(PropertyName = "ok")]
-		public bool OK { get; internal set; }
+		[JsonProperty(PropertyName = "status")]
+		public int Status { get; internal set; }
 
 		[JsonProperty(PropertyName = "name")]
 		public string Name { get; internal set; }

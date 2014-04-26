@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Exceptions;
 using NUnit.Framework;
 using Nest;
 
@@ -23,7 +24,7 @@ namespace Nest.Tests.Integration
 		{
 			var rootNodeInfo = _client.RootNodeInfo();
 			Assert.True(rootNodeInfo.IsValid);
-			Assert.Null(rootNodeInfo.ConnectionStatus.Error);
+			Assert.True(rootNodeInfo.ConnectionStatus.Success);
 		}
 		[Test]
 		public void construct_client_with_null()
@@ -60,14 +61,17 @@ namespace Nest.Tests.Integration
 		{
 			IRootInfoResponse result = null;
 
-			Assert.DoesNotThrow(() =>
+			//this test will fail if fiddler is enabled since the proxy 
+			//will report a statuscode of 502 instead of -1
+			Assert.Throws<MaxRetryException>(() =>
 			{
 				var settings = new ConnectionSettings(new Uri("http://youdontownthis.domain.do.you"), "index");
 				var client = new ElasticClient(settings);
 				result = client.RootNodeInfo();
+				Assert.False(result.IsValid);
+				Assert.NotNull(result.ConnectionStatus);
 			});
-			Assert.False(result.IsValid);
-			Assert.NotNull(result.ConnectionStatus);
+		
 		}
 		[Test]
 		public void TestConnectSuccessWithUri()
@@ -77,7 +81,7 @@ namespace Nest.Tests.Integration
 			var result = client.RootNodeInfo();
 
 			Assert.True(result.IsValid);
-			Assert.Null(result.ConnectionStatus.Error);
+			Assert.NotNull(result.ConnectionStatus.HttpStatusCode);
 		}
 		[Test]
 		public void construct_client_with_null_uri()
@@ -97,7 +101,7 @@ namespace Nest.Tests.Integration
 			StringAssert.EndsWith(":9200/?pretty=true", result.RequestUrl);
 
 
-			var resultWithQueryString = this._client.Raw.Info(qs => qs.Add("hello", "world"));
+			var resultWithQueryString = this._client.Raw.Info(qs => qs.AddQueryString("hello", "world"));
 			Assert.IsTrue(resultWithQueryString.Success);
 
 			StringAssert.EndsWith(":9200/?hello=world&pretty=true", resultWithQueryString.RequestUrl);

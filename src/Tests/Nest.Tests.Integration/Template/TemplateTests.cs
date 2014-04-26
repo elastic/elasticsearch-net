@@ -65,7 +65,7 @@ namespace Nest.Tests.Integration.Template
 				.Template("donotinfluencothertests")
 				.AddMapping<dynamic>(s=>s
 					.Type("mytype")
-					.DisableAllField()
+					.AllField(a=>a.Enabled(false))
 				)
 			);
 			Assert.IsTrue(putResponse.Acknowledged);
@@ -80,7 +80,7 @@ namespace Nest.Tests.Integration.Template
 
 			Assert.IsTrue(mappings.ContainsKey("mytype"), "put-template-with-mappings template should have a `mytype` mapping");
 			Assert.NotNull(mappings["mytype"].AllFieldMapping, "`mytype` mapping should contain the _all field mapping");
-			Assert.AreEqual(false, mappings["mytype"].AllFieldMapping.Enabled, "_all { enabled } should be set to false");
+			Assert.AreEqual(false, mappings["mytype"].AllFieldMapping._Enabled, "_all { enabled } should be set to false");
 		}
 
 		[Test]

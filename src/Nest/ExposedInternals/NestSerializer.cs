@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Serialization;
 using Nest.Resolvers;
@@ -21,40 +24,6 @@ namespace Nest
 			this._serializationSettings = this.CreateSettings();
 		}
 
-		/// <summary>
-		/// Returns a response of type R based on the connection status by trying parsing status.Result into R
-		/// </summary>
-		/// <returns></returns>
-		public virtual R ToParsedResponse<R>(
-			ElasticsearchResponse status, 
-			bool notFoundIsAValidResponse = false,
-			JsonConverter piggyBackJsonConverter = null
-			) where R : BaseResponse
-		{
-			var jsonSettings =piggyBackJsonConverter != null
-				? this.CreateSettings(piggyBackJsonConverter)
-				: this._serializationSettings;
-			
-			var isValid =
-				(notFoundIsAValidResponse)
-					? (status.Error == null
-					   || status.Error.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
-					: (status.Error == null);
-
-			R r;
-			if (!isValid)
-				r = (R)typeof (R).CreateInstance();
-			else
-				r = JsonConvert.DeserializeObject<R>(status.Result, jsonSettings);
-
-			var baseResponse = r as BaseResponse;
-			if (baseResponse == null)
-				return null;
-			baseResponse.IsValid = isValid;
-			baseResponse.ConnectionStatus = status;
-			return r;
-		}
-	
 		public virtual byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
 			var format = formatting == SerializationFormatting.None ? Formatting.None : Formatting.Indented;
@@ -65,41 +34,64 @@ namespace Nest
 		/// <summary>
 		/// Deserialize an object 
 		/// </summary>
-		/// <param name="notFoundIsValid">When deserializing a ConnectionStatus to a BaseResponse type this controls whether a 404 is a valid response</param>
-		public virtual T Deserialize<T>(byte[] bytes) where T : class
+		/// <typeparam name="T">The type you want to deserialize too</typeparam>
+		/// <param name="response">If the type you want is a Nest Response you have to pass a response object</param>
+		/// <param name="stream">The stream to deserialize off</param>
+		/// <param name="deserializationState">Optional deserialization state</param>
+		public virtual T Deserialize<T>(IElasticsearchResponse response, Stream stream, object deserializationState = null) 
 		{
-			if (bytes == null) return null;
-			return JsonConvert.DeserializeObject<T>(bytes.Utf8String(), this._serializationSettings);
-		}
-		
-		public IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ElasticsearchResponse status, SearchDescriptor<T> originalSearchDescriptor)
-			where TResult : class
-			where T : class
-		{
-			var types = (originalSearchDescriptor._Types ?? Enumerable.Empty<TypeNameMarker>())
-				.Where(t => t.Type != null);
-			if (originalSearchDescriptor._ConcreteTypeSelector == null && types.Any(t => t.Type != typeof(TResult)))
+			var settings = this._serializationSettings;
+			var customConverter = deserializationState as Func<IElasticsearchResponse, Stream, T>;
+			if (customConverter != null)
 			{
-				var inferrer = new ElasticInferrer(this._settings);
-				var typeDictionary = types
-					.ToDictionary(inferrer.TypeName, t => t.Type);
-
-				originalSearchDescriptor._ConcreteTypeSelector = (o, h) =>
-				{
-					Type t;
-					if (!typeDictionary.TryGetValue(h.Type, out t))
-						return typeof(TResult);
-					return t;
-				};
+				var t = customConverter(response, stream);
+				return t;
 			}
 
-			if (originalSearchDescriptor._ConcreteTypeSelector == null)
-				return this.ToParsedResponse<QueryResponse<TResult>>(status, piggyBackJsonConverter: null, notFoundIsAValidResponse: true);
+			var state = deserializationState as JsonConverter;
+			if (state != null)
+				settings = this.CreateSettings(state);
 
-			var concreteTypeConverter = new ConcreteTypeConverter<TResult>(originalSearchDescriptor._ConcreteTypeSelector);
-			return this.ToParsedResponse<QueryResponse<TResult>>(status, piggyBackJsonConverter: concreteTypeConverter, notFoundIsAValidResponse: true);
+			return _Deserialize<T>(response, stream, settings);
 		}
 
+		/// <summary>
+		/// Deserialize to type T bypassing checks for custom deserialization state and or BaseResponse return types.
+		/// </summary>
+		public T DeserializeInternal<T>(Stream stream)
+		{
+			var serializer = JsonSerializer.Create(this._serializationSettings);
+			var jsonTextReader = new JsonTextReader(new StreamReader(stream));
+			var t = (T) serializer.Deserialize(jsonTextReader, typeof (T));
+			return t;
+			
+		}
+
+		protected internal  T _Deserialize<T>(IElasticsearchResponse response, Stream stream, JsonSerializerSettings settings = null)
+		{
+			settings = settings ?? _serializationSettings;
+			var serializer = JsonSerializer.Create(settings);
+			var jsonTextReader = new JsonTextReader(new StreamReader(stream));
+			var t = (T) serializer.Deserialize(jsonTextReader, typeof (T));
+			var r = t as BaseResponse;
+			if (r != null)
+			{
+				r.ConnectionStatus = response;
+			}
+			return t;
+		}
+
+		public virtual Task<T> DeserializeAsync<T>(IElasticsearchResponse response, Stream stream, object deserializationState = null)
+		{
+			//TODO sadly json .net async does not read the stream async so 
+			//figure out wheter reading the stream async on our own might be beneficial 
+			//over memory possible memory usage
+			var tcs = new TaskCompletionSource<T>();
+			var r = this.Deserialize<T>(response, stream, deserializationState);
+			tcs.SetResult(r);
+			return tcs.Task;
+		}
+		
 		internal JsonSerializerSettings CreateSettings(JsonConverter piggyBackJsonConverter = null)
 		{
 			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
@@ -202,73 +194,6 @@ namespace Nest
 			return json;
 		}
 
-		public TemplateResponse DeserializeTemplateResponse(ElasticsearchResponse c, GetTemplateDescriptor d)
-		{
-			if (!c.Success) return new TemplateResponse { ConnectionStatus = c, IsValid = false };
-
-			var dict = c.Deserialize<Dictionary<string, TemplateMapping>>();
-			if (dict.Count == 0)
-				throw new DslException("Could not deserialize TemplateMapping");
-
-			return new TemplateResponse
-			{
-				ConnectionStatus = c,
-				IsValid = true,
-				Name = dict.First().Key,
-				TemplateMapping = dict.First().Value
-			};
-		}
-
-		public GetMappingResponse DeserializeGetMappingResponse(ElasticsearchResponse c)
-		{
-			var dict = c.Success
-				? c.Deserialize<GetRootObjectMappingWrapping>()
-				: null;
-			return new GetMappingResponse(c, dict);
-
-		}
-
-		public MultiGetResponse DeserializeMultiGetResponse(ElasticsearchResponse c, MultiGetDescriptor d)
-		{
-			var multiGetHitConverter = new MultiGetHitConverter(d);
-			var multiGetResponse = this.ToParsedResponse<MultiGetResponse>(c, piggyBackJsonConverter: multiGetHitConverter);
-			return multiGetResponse;
-		}
-
-		public MultiSearchResponse DeserializeMultiSearchResponse(ElasticsearchResponse c, MultiSearchDescriptor d)
-		{
-			var multiSearchConverter = new MultiSearchConverter(this._settings, d);
-			var multiSearchResponse = this.ToParsedResponse<MultiSearchResponse>(c, piggyBackJsonConverter: multiSearchConverter);
-			return multiSearchResponse;
-		}
-
-		public WarmerResponse DeserializeWarmerResponse(ElasticsearchResponse connectionStatus, GetWarmerDescriptor getWarmerDescriptor)
-		{
-			if (!connectionStatus.Success)
-				return new WarmerResponse() { ConnectionStatus = connectionStatus, IsValid = false };
-
-			var dict = connectionStatus.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, WarmerMapping>>>>();
-			var indices = new Dictionary<string, Dictionary<string, WarmerMapping>>();
-			foreach (var kv in dict)
-			{
-				var indexDict = kv.Value;
-				Dictionary<string, WarmerMapping> warmers;
-				if (indexDict == null || !indexDict.TryGetValue("warmers", out warmers) || warmers == null)
-					continue;
-				foreach (var kvW in warmers)
-				{
-					kvW.Value.Name = kvW.Key;
-				}
-				indices.Add(kv.Key, warmers);
-			}
-
-			return new WarmerResponse
-			{
-				ConnectionStatus = connectionStatus,
-				IsValid = true,
-				Indices = indices
-			};
-		}
 		
 		protected string GetSearchType(SearchDescriptorBase descriptor, MultiSearchDescriptor multiSearchDescriptor)
 		{
@@ -290,9 +215,7 @@ namespace Nest
 						return "scan";
 				}
 			}
-			return multiSearchDescriptor._QueryString.ContainsKey("search_type")
-				? multiSearchDescriptor._QueryString._QueryStringDictionary["search_type"] as string
-				: null;
+			return multiSearchDescriptor._QueryString.GetQueryStringValue<string>("search_type");
 		}
 
 	}

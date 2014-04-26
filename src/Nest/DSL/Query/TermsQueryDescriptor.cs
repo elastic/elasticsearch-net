@@ -9,6 +9,12 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers;
 namespace Nest
 {
+	/// <summary>
+	/// A query that match on any (configurable) of the provided terms. 
+	/// This is a simpler syntax query for using a bool query with several term queries in the should clauses.
+	/// </summary>
+	/// <typeparam name="T">The type that represents the expected hit type</typeparam>
+	/// <typeparam name="K">The type of the field that we want to specfify terms for</typeparam>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class TermsQueryDescriptor<T, K> : IQuery where T : class
 	{
