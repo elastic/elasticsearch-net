@@ -4081,13 +4081,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html
 	///</pre>
 	///</summary>
-	public partial class MtermvectorsDescriptor
+	public partial class MtermvectorsDescriptor<T>
 	{
 		internal MtermvectorsRequestParameters _QueryString = new MtermvectorsRequestParameters(); 
 
 
 		///<summary>A comma-separated list of documents ids. You must define ids as parameter or set &quot;ids&quot; or &quot;docs&quot; in the request body</summary>
-		public MtermvectorsDescriptor Ids(params string[] ids)
+		public MtermvectorsDescriptor<T> Ids(params string[] ids)
 		{
 			this._QueryString.Ids(ids);
 			return this;
@@ -4095,7 +4095,7 @@ namespace Nest
 		
 
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsDescriptor TermStatistics(bool term_statistics = true)
+		public MtermvectorsDescriptor<T> TermStatistics(bool term_statistics = true)
 		{
 			this._QueryString.TermStatistics(term_statistics);
 			return this;
@@ -4103,7 +4103,7 @@ namespace Nest
 		
 
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsDescriptor FieldStatistics(bool field_statistics = true)
+		public MtermvectorsDescriptor<T> FieldStatistics(bool field_statistics = true)
 		{
 			this._QueryString.FieldStatistics(field_statistics);
 			return this;
@@ -4111,7 +4111,7 @@ namespace Nest
 		
 
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsDescriptor Fields(params string[] fields)
+		public MtermvectorsDescriptor<T> Fields(params string[] fields)
 		{
 			this._QueryString.Fields(fields);
 			return this;
@@ -4119,7 +4119,7 @@ namespace Nest
 		
 			
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public MtermvectorsDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
@@ -4130,7 +4130,7 @@ namespace Nest
 			
 
 		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsDescriptor Offsets(bool offsets = true)
+		public MtermvectorsDescriptor<T> Offsets(bool offsets = true)
 		{
 			this._QueryString.Offsets(offsets);
 			return this;
@@ -4138,7 +4138,7 @@ namespace Nest
 		
 
 		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsDescriptor Positions(bool positions = true)
+		public MtermvectorsDescriptor<T> Positions(bool positions = true)
 		{
 			this._QueryString.Positions(positions);
 			return this;
@@ -4146,7 +4146,7 @@ namespace Nest
 		
 
 		///<summary>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsDescriptor Payloads(bool payloads = true)
+		public MtermvectorsDescriptor<T> Payloads(bool payloads = true)
 		{
 			this._QueryString.Payloads(payloads);
 			return this;
@@ -4154,7 +4154,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsDescriptor Preference(string preference)
+		public MtermvectorsDescriptor<T> Preference(string preference)
 		{
 			this._QueryString.Preference(preference);
 			return this;
@@ -4162,7 +4162,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsDescriptor Routing(string routing)
+		public MtermvectorsDescriptor<T> Routing(string routing)
 		{
 			this._QueryString.Routing(routing);
 			return this;
@@ -4170,7 +4170,7 @@ namespace Nest
 		
 
 		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsDescriptor Parent(string parent)
+		public MtermvectorsDescriptor<T> Parent(string parent)
 		{
 			this._QueryString.Parent(parent);
 			return this;

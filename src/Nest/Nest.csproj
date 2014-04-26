@@ -134,10 +134,12 @@
     <Compile Include="Domain\Repository\Snapshot.cs" />
     <Compile Include="Domain\Repository\SnapshotRestore.cs" />
     <Compile Include="Domain\Responses\GetSnapshotResponse.cs" />
+    <Compile Include="Domain\Responses\MultiTermVectorResponse.cs" />
     <Compile Include="Domain\Responses\RestoreResponse.cs" />
     <Compile Include="Domain\Responses\SnapshotResponse.cs" />
     <Compile Include="DSL\DeleteSnapshotDescriptor.cs" />
     <Compile Include="DSL\GetSnapshotDescriptor.cs" />
+    <Compile Include="DSL\MultiTermVectorsDescriptor.cs" />
     <Compile Include="DSL\RestoreDescriptor.cs" />
     <Compile Include="DSL\SnapshotDescriptor.cs" />
     <Compile Include="DSL\DeleteRepositoryDescriptor.cs" />
@@ -253,6 +255,7 @@
     <Compile Include="DSL\UpdateSettingsDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalPathDescriptor.cs" />
     <Compile Include="ElasticClient-Exists.cs" />
+    <Compile Include="ElasticClient-MultiTermVectors.cs" />
     <Compile Include="ElasticClient-Snapshot.cs" />
     <Compile Include="ElasticClient-Restore.cs" />
     <Compile Include="ElasticClient-Repository.cs" />
