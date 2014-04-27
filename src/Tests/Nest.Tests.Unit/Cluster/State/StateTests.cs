@@ -20,7 +20,7 @@ namespace Nest.Tests.Unit.Cluster.State
 		[Test]
 		public void ClusterStatePerIndex()
 		{
-			var r = this._client.ClusterState(h=>h.Index(Test.Default.DefaultIndex).FlatSettings());
+			var r = this._client.ClusterState(h=>h.Index(UnitTestDefaults.DefaultIndex).FlatSettings());
 			var u = new Uri(r.ConnectionStatus.RequestUrl);
 			u.AbsolutePath.Should().StartWith("/_cluster/state");
 			u.Query.Should().Contain("flat_settings=true");

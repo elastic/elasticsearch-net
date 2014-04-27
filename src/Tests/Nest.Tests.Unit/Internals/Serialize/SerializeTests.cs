@@ -52,21 +52,20 @@ namespace Nest.Tests.Unit.Internals.Serialize
 		[Test]
 		public void SerializingSearchIsFastEnough()
 		{
-			//Do a serialize once, give json.net a fair fighting chance to cache
-			var data = this._client.Serializer.Serialize(new SearchDescriptor<ElasticsearchProject>()
-				   .From(0)
-				   .Size(10)
-				   .Fields(f => f.Id, f => f.Country)
-				   .SortAscending(f => f.LOC)
-				   .SortDescending(f => f.Country)
-				   .Query(q => q
-					   .MatchAll()
-				   )
-			   );
-            Assert.NotNull(data);
-			var sw = Stopwatch.StartNew();
+			//seraialize once to build cache
+			var randomDeserialize = this._client.Serializer.Serialize(new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Fields(f => f.Id, f => f.Country)
+				.SortAscending(f => f.LOC)
+				.SortDescending(f => f.Country)
+				.Query(q => q
+					.MatchAll()
+				)
+			);
 
-			data = this._client.Serializer.Serialize(new SearchDescriptor<ElasticsearchProject>()
+			var sw = Stopwatch.StartNew();
+			var data = this._client.Serializer.Serialize(new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Fields(f => f.Id, f => f.Country)
@@ -77,7 +76,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
 				)
 			);
 			Assert.LessOrEqual(sw.ElapsedMilliseconds, 10);
-            Assert.NotNull(data);
+			Assert.NotNull(data);
 
 		}
 	}

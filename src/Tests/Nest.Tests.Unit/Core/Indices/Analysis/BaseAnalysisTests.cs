@@ -11,7 +11,7 @@ namespace Nest.Tests.Unit.Core.Indices.Analysis.Tokenizers
 	{
 		public IIndicesOperationResponse Analysis(Func<AnalysisDescriptor, AnalysisDescriptor> analysisSelector)
 		{
-			var result = this._client.CreateIndex(Test.Default.DefaultIndex, c => c
+			var result = this._client.CreateIndex(UnitTestDefaults.DefaultIndex, c => c
 				.Analysis(analysisSelector)
 			);
 			result.Should().NotBeNull();

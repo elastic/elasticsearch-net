@@ -47,6 +47,7 @@ namespace Nest.Tests.Integration.Reproduce
 			//Search once so that caches are sure to exist.
 			var timing = this.Search();
 
+
 			var timings = new List<Timings>();
 			for (var i = 0; i < 1000; i++)
 			{
