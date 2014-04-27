@@ -68,6 +68,11 @@ namespace Nest.Resolvers.Writers {
                 this._jsonWriter.WritePropertyName("search_analyzer");
                 this._jsonWriter.WriteValue(att.SearchAnalyzer);
             }
+            if (!att.DateFormat.IsNullOrEmpty())
+            {
+                this._jsonWriter.WritePropertyName("format");
+                this._jsonWriter.WriteValue(att.DateFormat);
+            }
             if (att.Index != FieldIndexOption.analyzed)
             {
                 this._jsonWriter.WritePropertyName("index");
