@@ -18,6 +18,7 @@ namespace Nest
         public TermVectorResponse()
         {
             IsValid = true;
+            TermVectors = new Dictionary<string, TermVector>();
         }
 
         [JsonProperty("found")]

@@ -9,6 +9,11 @@ namespace Nest
     [JsonObject]
     public class TermVectorTerm
     {
+        public TermVectorTerm()
+        {
+            Tokens = new List<Token>();
+        }
+
         [JsonProperty("doc_freq")]
         public int DocumentFrequency { get; internal set; }
 

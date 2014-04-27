@@ -9,6 +9,11 @@ namespace Nest
     [JsonObject]
     public class TermVector
     {
+        public TermVector()
+        {
+            Terms = new Dictionary<string, TermVectorTerm>();
+        }
+
         [JsonProperty("field_statistics")]
         public FieldStatistics FieldStatistics { get; internal set; }
 

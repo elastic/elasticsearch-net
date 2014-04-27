@@ -17,6 +17,7 @@ namespace Nest
         public MultiTermVectorResponse()
         {
             IsValid = true;
+            Documents = new List<TermVectorResponse>();
         }
 
         [JsonProperty("docs")]
