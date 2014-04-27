@@ -1032,6 +1032,44 @@ namespace Nest
 		/// <param name="selector">An optional descriptor that further describes the status operation, i.e limiting it to certain indices</param>
 		Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
 
+        /// <summary>
+        /// Returns information and statistics on terms in the fields of a particular document as stored in the index.
+        /// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-termvectors.html
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="termVectorSelector"></param>
+        /// <returns></returns>
+		ITermVectorResponse TermVector<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector) 
+            where T : class;
+
+        /// <summary>
+        /// Returns information and statistics on terms in the fields of a particular document as stored in the index.
+        /// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-termvectors.html
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="termVectorSelector"></param>
+        /// <returns></returns>
+        Task<ITermVectorResponse> TermVectorAsync<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector) 
+            where T : class;
+
+        /// <summary>
+        /// Multi termvectors API allows to get multiple termvectors based on an index, type and id.
+        /// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-termvectors.html
+        /// </summary>
+        /// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+        /// <param name="multiTermVectorsSelector">The descriptor describing the multi termvectors operation</param>
+        IMultiTermVectorResponse MultiTermVectors<T>(Func<MtermvectorsDescriptor<T>, MtermvectorsDescriptor<T>> multiTermVectorsSelector)
+            where T : class;
+
+        /// <summary>
+        /// Multi termvectors API allows to get multiple termvectors based on an index, type and id.
+        /// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-termvectors.html
+        /// </summary>
+        /// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+        /// <param name="multiTermVectorsSelector">The descriptor describing the multi termvectors operation</param>
+        Task<IMultiTermVectorResponse> MultiTermVectorsAsync<T>(Func<MtermvectorsDescriptor<T>, MtermvectorsDescriptor<T>> multiTermVectorsSelector)
+            where T : class;
+		
 		/// <summary>
 		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester. 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
