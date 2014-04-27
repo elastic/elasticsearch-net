@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.DSL.Suggest;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Text;
 namespace Nest
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class FuzzySuggestDescriptor<T> where T : class
+    public class FuzzySuggestDescriptor<T> : IFuzzySuggestDescriptor<T> where T : class 
     {
         [JsonProperty(PropertyName="edit_distance")]
         internal int _EditDistance { get; set; }
