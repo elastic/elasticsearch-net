@@ -2,20 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonConverter(typeof(CustomJsonConverter))]
 	public interface IGeoShapeBaseFilter : IFilterBase
 	{
-		
+		PropertyPathMarker Field { get; set; }
 	}
 
-	public interface IGeoShapeFilter : IGeoShapeBaseFilter
+	[JsonConverter(typeof(CustomJsonConverter))]
+	public interface IGeoShapeFilter : IGeoShapeBaseFilter, ICustomJson
 	{
 		[JsonProperty("shape")]
-		GeoShapeVector _Shape { get; set; }
+		GeoShapeVector Shape { get; set; }
 	}
 
 	public class GeoShapeFilterDescriptor : FilterBase, IGeoShapeFilter
@@ -24,30 +28,37 @@ namespace Nest
 		{
 			get
 			{
-				return ((IGeoShapeFilter)this)._Shape == null || !((IGeoShapeFilter)this)._Shape.Coordinates.HasAny();
+				return ((IGeoShapeFilter)this).Shape == null || !((IGeoShapeFilter)this).Shape.Coordinates.HasAny();
 			}
-
 		}
 
-		GeoShapeVector IGeoShapeFilter._Shape { get; set; }
+		PropertyPathMarker IGeoShapeBaseFilter.Field { get; set; }
+		GeoShapeVector IGeoShapeFilter.Shape { get; set; }
 
 
 		public GeoShapeFilterDescriptor Type(string type)
 		{
-			if (((IGeoShapeFilter)this)._Shape == null)
-				((IGeoShapeFilter)this)._Shape = new GeoShapeVector();
-			((IGeoShapeFilter)this)._Shape.Type = type;
+			if (((IGeoShapeFilter)this).Shape == null)
+				((IGeoShapeFilter)this).Shape = new GeoShapeVector();
+			((IGeoShapeFilter)this).Shape.Type = type;
 			return this;
 		}
 
 		public GeoShapeFilterDescriptor Coordinates(IEnumerable<IEnumerable<double>> coordinates)
 		{
-			if (((IGeoShapeFilter)this)._Shape == null)
-				((IGeoShapeFilter)this)._Shape = new GeoShapeVector();
-			((IGeoShapeFilter)this)._Shape.Coordinates = coordinates;
+			if (((IGeoShapeFilter)this).Shape == null)
+				((IGeoShapeFilter)this).Shape = new GeoShapeVector();
+			((IGeoShapeFilter)this).Shape.Coordinates = coordinates;
 			return this;
 		}
-
+		
+		object ICustomJson.GetCustomJson()
+		{
+			var f = (IGeoShapeFilter)this;
+			var shape = new { shape = f.Shape };
+			return this.FieldNameAsKeyFormat(f.Field, shape);
+		}
+	
 	}
 
 }

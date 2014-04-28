@@ -137,6 +137,12 @@
     <Compile Include="Domain\Responses\RestoreResponse.cs" />
     <Compile Include="Domain\Responses\SnapshotResponse.cs" />
     <Compile Include="DSL\DeleteSnapshotDescriptor.cs" />
+    <Compile Include="DSL\Filter\INotFilter.cs" />
+    <Compile Include="DSL\Filter\QueryFilter.cs" />
+    <Compile Include="DSL\Filter\OrFilter.cs" />
+    <Compile Include="DSL\Filter\AndFilter.cs" />
+    <Compile Include="DSL\Filter\PrefixFilter.cs" />
+    <Compile Include="DSL\Filter\TermsFilter.cs" />
     <Compile Include="DSL\GetSnapshotDescriptor.cs" />
     <Compile Include="DSL\Query\IQueryDescriptor.cs" />
     <Compile Include="DSL\Query\Behaviour\IFieldNameQuery.cs" />

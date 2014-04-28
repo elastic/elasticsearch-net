@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
@@ -10,54 +11,62 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IRegexpFilter : IFilterBase
+	[JsonConverter(typeof(CustomJsonConverter))]
+	public interface IRegexpFilter : IFilterBase, ICustomJson
 	{
 		[JsonProperty("value")]
-		string _Value { get; set; }
+		string Value { get; set; }
 
 		[JsonProperty("flags")]
-		string _Flags { get; set; }
+		string Flags { get; set; }
 
-		PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker Field { get; set; }
 	}
 
+	[JsonConverter(typeof(CustomJsonConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class RegexpFilterDescriptor<T> : FilterBase, IRegexpFilter where T : class
 	{
-		string IRegexpFilter._Value { get; set; }
+		string IRegexpFilter.Value { get; set; }
 
-		string IRegexpFilter._Flags { get; set; }
+		string IRegexpFilter.Flags { get; set; }
 
-		PropertyPathMarker IRegexpFilter._Field { get; set; }
+		PropertyPathMarker IRegexpFilter.Field { get; set; }
 
 		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return ((IRegexpFilter)this)._Field.IsConditionless() || ((IRegexpFilter)this)._Value.IsNullOrEmpty();
+				return ((IRegexpFilter)this).Field.IsConditionless() || ((IRegexpFilter)this).Value.IsNullOrEmpty();
 			}
 		}
 
 		public RegexpFilterDescriptor<T> Value(string regex)
 		{
-			((IRegexpFilter)this)._Value = regex;
+			((IRegexpFilter)this).Value = regex;
 			return this;
 		}
 		public RegexpFilterDescriptor<T> Flags(string flags)
 		{
-			((IRegexpFilter)this)._Flags = flags;
+			((IRegexpFilter)this).Flags = flags;
 			return this;
 		}
 		public RegexpFilterDescriptor<T> OnField(string path)
 		{
-			((IRegexpFilter)this)._Field = path;
+			((IRegexpFilter)this).Field = path;
 			return this;
 		}
 		public RegexpFilterDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((IRegexpFilter)this)._Field = objectPath;
+			((IRegexpFilter)this).Field = objectPath;
 			return this;
 		}
 
+		object ICustomJson.GetCustomJson()
+		{
+			var tf = ((IRegexpFilter)this);
+			var rf = new { value = tf.Value, flags = tf.Flags };
+			return this.FieldNameAsKeyFormat(tf.Field, rf);
+		}
 	}
 }

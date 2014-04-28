@@ -34,7 +34,6 @@ namespace Nest.Tests.Integration.Aggregations
 				.Aggregations(a => a
 					.Terms("my_terms_agg", t => t
 						.Field(p => p.Name)
-						.Aggregations()
 					)
 					
 				)

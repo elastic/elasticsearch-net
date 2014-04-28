@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Nest.Resolvers;
@@ -9,57 +10,71 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface INumericRangeFilter : IFilterBase
+	[JsonConverter(typeof(CustomJsonConverter))]
+	public interface INumericRangeFilter : IFilterBase, ICustomJson
 	{
 		[JsonProperty("from")]
-		object _From { get; set; }
+		object From { get; set; }
 
 		[JsonProperty("to")]
-		object _To { get; set; }
+		object To { get; set; }
 
 		[JsonProperty("include_lower")]
-		bool? _FromInclusive { get; set; }
+		bool? IncludeLower { get; set; }
 
 		[JsonProperty("include_upper")]
-		bool? _ToInclusive { get; set; }
+		bool? IncludeUpper { get; set; }
 
-		PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker Field { get; set; }
 	}
 
 	/// <summary>
 	/// Filters documents with fields that have values within a certain numeric range. Similar to range filter, except that it works only with numeric values
 	/// </summary>
 	/// <typeparam name="T">Type of document</typeparam>
+	[JsonConverter(typeof(CustomJsonConverter))]
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
 	public class NumericRangeFilterDescriptor<T> : FilterBase, INumericRangeFilter where T : class
 	{
-		object INumericRangeFilter._From { get; set;}
+		object INumericRangeFilter.From { get; set;}
 		
-		object INumericRangeFilter._To { get; set; }
+		object INumericRangeFilter.To { get; set; }
 		
-		bool? INumericRangeFilter._FromInclusive { get; set; }
+		bool? INumericRangeFilter.IncludeLower { get; set; }
 		
-		bool? INumericRangeFilter._ToInclusive { get; set; }
+		bool? INumericRangeFilter.IncludeUpper { get; set; }
 
-		PropertyPathMarker INumericRangeFilter._Field { get; set; }
+		PropertyPathMarker INumericRangeFilter.Field { get; set; }
 
 		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return ((INumericRangeFilter)this)._Field.IsConditionless() || (((INumericRangeFilter)this)._From == null && ((INumericRangeFilter)this)._To == null);
+				return ((INumericRangeFilter)this).Field.IsConditionless() || (((INumericRangeFilter)this).From == null && ((INumericRangeFilter)this).To == null);
 			}
 		}
-
+		
+		object ICustomJson.GetCustomJson()
+		{
+			var f = (INumericRangeFilter)this;
+			var rf = new
+			{
+				from = f.From,
+				to = f.To,
+				include_lower = f.IncludeLower,
+				include_upper = f.IncludeUpper
+			};
+			return this.FieldNameAsKeyFormat(f.Field, rf);
+		}
 
 		public NumericRangeFilterDescriptor<T> OnField(string field)
 		{
-			((INumericRangeFilter)this)._Field = field;
+			((INumericRangeFilter)this).Field = field;
 			return this;
 		}
 		public NumericRangeFilterDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((INumericRangeFilter)this)._Field = objectPath;
+			((INumericRangeFilter)this).Field = objectPath;
 			return this;
 		}
 
@@ -68,7 +83,7 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> FromExclusive()
 		{
-			((INumericRangeFilter)this)._FromInclusive = false;
+			((INumericRangeFilter)this).IncludeLower = false;
 			return this;
 		}
 
@@ -77,7 +92,7 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> ToExclusive()
 		{
-			((INumericRangeFilter)this)._ToInclusive = false;
+			((INumericRangeFilter)this).IncludeUpper = false;
 			return this;
 		}
 
@@ -87,7 +102,7 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> To(int? to)
 		{
-			((INumericRangeFilter)this)._To = to;
+			((INumericRangeFilter)this).To = to;
 			return this;
 		}
 		/// <summary>
@@ -96,7 +111,7 @@ namespace Nest
 		/// <returns></returns>
 		public NumericRangeFilterDescriptor<T> From(int? from)
 		{
-			((INumericRangeFilter)this)._From = from;
+			((INumericRangeFilter)this).From = from;
 			return this;
 		}
 
@@ -105,8 +120,8 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> Greater(int? from)
 		{
-			((INumericRangeFilter)this)._From = from;
-			((INumericRangeFilter)this)._FromInclusive = false;
+			((INumericRangeFilter)this).From = from;
+			((INumericRangeFilter)this).IncludeLower = false;
 			return this;
 		}
 		/// <summary>
@@ -114,8 +129,8 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> GreaterOrEquals(int? from)
 		{
-			((INumericRangeFilter)this)._From = from;
-			((INumericRangeFilter)this)._FromInclusive = from.HasValue ? new Nullable<bool>(true) : null; 
+			((INumericRangeFilter)this).From = from;
+			((INumericRangeFilter)this).IncludeLower = from.HasValue ? new Nullable<bool>(true) : null; 
 			return this;
 		}
 		/// <summary>
@@ -123,8 +138,8 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> Lower(int? to)
 		{
-			((INumericRangeFilter)this)._To = to;
-			((INumericRangeFilter)this)._ToInclusive = to.HasValue ? new Nullable<bool>(false) : null; 
+			((INumericRangeFilter)this).To = to;
+			((INumericRangeFilter)this).IncludeUpper = to.HasValue ? new Nullable<bool>(false) : null; 
 			return this;
 		}
 		/// <summary>
@@ -132,8 +147,8 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> LowerOrEquals(int? to)
 		{
-			((INumericRangeFilter)this)._To = to;
-			((INumericRangeFilter)this)._ToInclusive = to.HasValue ? new Nullable<bool>(true) : null;
+			((INumericRangeFilter)this).To = to;
+			((INumericRangeFilter)this).IncludeUpper = to.HasValue ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		#endregion
@@ -144,7 +159,7 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> To(double? to)
 		{
-			((INumericRangeFilter)this)._To = to;
+			((INumericRangeFilter)this).To = to;
 			return this;
 		}
 		/// <summary>
@@ -153,7 +168,7 @@ namespace Nest
 		/// <returns></returns>
 		public NumericRangeFilterDescriptor<T> From(double? from)
 		{
-			((INumericRangeFilter)this)._From = from;
+			((INumericRangeFilter)this).From = from;
 			return this;
 		}
 
@@ -162,8 +177,8 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> Greater(double? from)
 		{
-			((INumericRangeFilter)this)._From = from;
-			((INumericRangeFilter)this)._FromInclusive = from.HasValue ? new Nullable<bool>(false) : null;
+			((INumericRangeFilter)this).From = from;
+			((INumericRangeFilter)this).IncludeLower = from.HasValue ? new Nullable<bool>(false) : null;
 			return this;
 		}
 		/// <summary>
@@ -171,8 +186,8 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> GreaterOrEquals(double? from)
 		{
-			((INumericRangeFilter)this)._From = from;
-			((INumericRangeFilter)this)._FromInclusive = from.HasValue ? new Nullable<bool>(true) : null;
+			((INumericRangeFilter)this).From = from;
+			((INumericRangeFilter)this).IncludeLower = from.HasValue ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		/// <summary>
@@ -180,8 +195,8 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> Lower(double? to)
 		{
-			((INumericRangeFilter)this)._To = to;
-			((INumericRangeFilter)this)._ToInclusive = to.HasValue ? new Nullable<bool>(false) : null;
+			((INumericRangeFilter)this).To = to;
+			((INumericRangeFilter)this).IncludeUpper = to.HasValue ? new Nullable<bool>(false) : null;
 			return this;
 		}
 		/// <summary>
@@ -189,8 +204,8 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> LowerOrEquals(double? to)
 		{
-			((INumericRangeFilter)this)._To = to;
-			((INumericRangeFilter)this)._ToInclusive = to.HasValue ? new Nullable<bool>(true) : null;
+			((INumericRangeFilter)this).To = to;
+			((INumericRangeFilter)this).IncludeUpper = to.HasValue ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		#endregion
@@ -201,7 +216,7 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> To(string to)
 		{
-			((INumericRangeFilter)this)._To = to;
+			((INumericRangeFilter)this).To = to;
 			return this;
 		}
 		/// <summary>
@@ -210,7 +225,7 @@ namespace Nest
 		/// <returns></returns>
 		public NumericRangeFilterDescriptor<T> From(string from)
 		{
-			((INumericRangeFilter)this)._From = from;
+			((INumericRangeFilter)this).From = from;
 			return this;
 		}
 
@@ -219,8 +234,8 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> Greater(string from)
 		{
-			((INumericRangeFilter)this)._From = from;
-			((INumericRangeFilter)this)._FromInclusive = !from.IsNullOrEmpty() ? new Nullable<bool>(false) : null; 
+			((INumericRangeFilter)this).From = from;
+			((INumericRangeFilter)this).IncludeLower = !from.IsNullOrEmpty() ? new Nullable<bool>(false) : null; 
 			return this;
 		}
 		/// <summary>
@@ -228,8 +243,8 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> GreaterOrEquals(string from)
 		{
-			((INumericRangeFilter)this)._From = from;
-			((INumericRangeFilter)this)._FromInclusive = !from.IsNullOrEmpty() ? new Nullable<bool>(true) : null; 
+			((INumericRangeFilter)this).From = from;
+			((INumericRangeFilter)this).IncludeLower = !from.IsNullOrEmpty() ? new Nullable<bool>(true) : null; 
 			return this;
 		}
 		/// <summary>
@@ -237,8 +252,8 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> Lower(string to)
 		{
-			((INumericRangeFilter)this)._To = to;
-			((INumericRangeFilter)this)._ToInclusive = !to.IsNullOrEmpty() ? new Nullable<bool>(false) : null;
+			((INumericRangeFilter)this).To = to;
+			((INumericRangeFilter)this).IncludeUpper = !to.IsNullOrEmpty() ? new Nullable<bool>(false) : null;
 			return this;
 		}
 		/// <summary>
@@ -246,8 +261,8 @@ namespace Nest
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> LowerOrEquals(string to)
 		{
-			((INumericRangeFilter)this)._To = to;
-			((INumericRangeFilter)this)._ToInclusive = !to.IsNullOrEmpty() ? new Nullable<bool>(true) : null; 
+			((INumericRangeFilter)this).To = to;
+			((INumericRangeFilter)this).IncludeUpper = !to.IsNullOrEmpty() ? new Nullable<bool>(true) : null; 
 			return this;
 		}
 		#endregion
@@ -260,7 +275,7 @@ namespace Nest
 		{
 			if (!to.HasValue)
 				return this;
-			((INumericRangeFilter)this)._To = to.Value.ToString(format);
+			((INumericRangeFilter)this).To = to.Value.ToString(format);
 			return this;
 		}
 		/// <summary>
@@ -272,7 +287,7 @@ namespace Nest
 			if (!from.HasValue)
 				return this;
 
-			((INumericRangeFilter)this)._From = from.Value.ToString(format);
+			((INumericRangeFilter)this).From = from.Value.ToString(format);
 			return this;
 		}
 
@@ -284,8 +299,8 @@ namespace Nest
 			if (!from.HasValue)
 				return this;
 
-			((INumericRangeFilter)this)._From = from.Value.ToString(format);
-			((INumericRangeFilter)this)._FromInclusive = false;
+			((INumericRangeFilter)this).From = from.Value.ToString(format);
+			((INumericRangeFilter)this).IncludeLower = false;
 			return this;
 		}
 		/// <summary>
@@ -296,8 +311,8 @@ namespace Nest
 			if (!from.HasValue)
 				return this;
 
-			((INumericRangeFilter)this)._From = from.Value.ToString(format);
-			((INumericRangeFilter)this)._FromInclusive = true;
+			((INumericRangeFilter)this).From = from.Value.ToString(format);
+			((INumericRangeFilter)this).IncludeLower = true;
 			return this;
 		}
 		/// <summary>
@@ -308,8 +323,8 @@ namespace Nest
 			if (!to.HasValue)
 				return this;
 
-			((INumericRangeFilter)this)._To = to.Value.ToString(format);
-			((INumericRangeFilter)this)._ToInclusive = false;
+			((INumericRangeFilter)this).To = to.Value.ToString(format);
+			((INumericRangeFilter)this).IncludeUpper = false;
 			return this;
 		}
 		/// <summary>
@@ -320,8 +335,8 @@ namespace Nest
 			if (!to.HasValue)
 				return this;
 
-			((INumericRangeFilter)this)._To = to.Value.ToString(format);
-			((INumericRangeFilter)this)._ToInclusive = true;
+			((INumericRangeFilter)this).To = to.Value.ToString(format);
+			((INumericRangeFilter)this).IncludeUpper = true;
 			return this;
 		}
 		#endregion

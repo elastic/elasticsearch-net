@@ -3,36 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Nest.Resolvers;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	public interface IPrefixFilter : IFilterBase
-	{
-		PropertyPathMarker Field { get; set; }
-		string Prefix { get; set; }
-	}
-	public class PrefixFilter : FilterBase, IPrefixFilter
-	{
-		bool IFilterBase.IsConditionless { get { return ((IPrefixFilter)this).Field.IsConditionless() || ((IPrefixFilter)this).Prefix.IsNullOrEmpty(); } }
 
-		PropertyPathMarker IPrefixFilter.Field { get; set; }
-		string IPrefixFilter.Prefix { get; set; }
-	} 
-
-	public interface IQueryFilter : IFilterBase
-	{
-		
-	}
-	public class QueryFilter : FilterBase, IQueryFilter
-	{
-		
-	}
-
-
-
-	public interface IGeoBoundingBoxFilter : IFilterBase
+	[JsonConverter(typeof(CustomJsonConverter))]
+	public interface IGeoBoundingBoxFilter : IFilterBase, ICustomJson
 	{
 		PropertyPathMarker Field { get; set; }
 		
@@ -46,13 +26,15 @@ namespace Nest
 		GeoExecution? GeoExecution { get; set; }
 	}
 
+	[JsonConverter(typeof(CustomJsonConverter))]
 	public class GeoBoundingBoxFilter : FilterBase, IGeoBoundingBoxFilter
 	{
 		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return ((IGeoBoundingBoxFilter)this).TopLeft.IsNullOrEmpty() || ((IGeoBoundingBoxFilter)this).BottomRight.IsNullOrEmpty();
+				var f = ((IGeoBoundingBoxFilter)this);
+				return f.Field.IsConditionless() || f.TopLeft.IsNullOrEmpty() || f.BottomRight.IsNullOrEmpty();
 			}
 		}
 
@@ -64,5 +46,12 @@ namespace Nest
 
 		GeoExecution? IGeoBoundingBoxFilter.GeoExecution { get; set; }
 
+		object ICustomJson.GetCustomJson()
+		{
+			var gbf = (IGeoBoundingBoxFilter)this;
+			var location = new { top_left = gbf.TopLeft, bottom_right = gbf.BottomRight };
+			var dict = this.FieldNameAsKeyFormat(gbf.Field, location, d=>d.Add("type", gbf.GeoExecution));
+			return dict;
+		}
 	}
 }

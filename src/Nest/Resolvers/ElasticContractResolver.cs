@@ -113,12 +113,12 @@ namespace Nest.Resolvers
 
 			defaultProperties = PropertiesOf<IQuery>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IQueryDescriptor>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IFilterBase>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IFilterBase>(type, memberSerialization, defaultProperties, lookup, append: true);
 			defaultProperties = PropertiesOf<IFilterDescriptor>(type, memberSerialization, defaultProperties, lookup);
 			return defaultProperties;
 		}
 
-		private IList<JsonProperty> PropertiesOf<T>(Type type, MemberSerialization memberSerialization, IList<JsonProperty> defaultProperties, ILookup<string, JsonProperty> lookup)
+		private IList<JsonProperty> PropertiesOf<T>(Type type, MemberSerialization memberSerialization, IList<JsonProperty> defaultProperties, ILookup<string, JsonProperty> lookup, bool append = false)
 		{
 			if (!typeof (T).IsAssignableFrom(type)) return defaultProperties;
 			var jsonProperties = (
@@ -128,11 +128,15 @@ namespace Nest.Resolvers
 				)
 				.SelectMany(interfaceProps => interfaceProps)
 				.Where(p => !lookup.Contains(p.PropertyName));
-			foreach (var p in jsonProperties)
+			if (!append)
 			{
-				defaultProperties.Add(p);
+				foreach (var p in jsonProperties)
+				{
+					defaultProperties.Add(p);
+				}
+				return defaultProperties;
 			}
-			return defaultProperties;
+			return jsonProperties.Concat(defaultProperties).ToList();
 		}
 
 		protected override string ResolvePropertyName(string propertyName)

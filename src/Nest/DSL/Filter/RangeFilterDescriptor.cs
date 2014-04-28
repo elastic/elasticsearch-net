@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Nest.Resolvers;
@@ -9,53 +10,68 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IRangeFilter : IFilterBase
+	[JsonConverter(typeof(CustomJsonConverter))]
+	public interface IRangeFilter : IFilterBase, ICustomJson
 	{
 		[JsonProperty("from")]
-		object _From { get; set; }
+		object From { get; set; }
 
 		[JsonProperty("to")]
-		object _To { get; set; }
+		object To { get; set; }
 
 		[JsonProperty("include_lower")]
-		bool? _FromInclusive { get; set; }
+		bool? IncludeLower { get; set; }
 
 		[JsonProperty("include_upper")]
-		bool? _ToInclusive { get; set; }
+		bool? IncludeUpper { get; set; }
 
-		PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker Field { get; set; }
 	}
 
+	[JsonConverter(typeof(CustomJsonConverter))]
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
 	public class RangeFilterDescriptor<T> : FilterBase, IRangeFilter where T : class
 	{
-		object IRangeFilter._From { get; set;}
+		object IRangeFilter.From { get; set;}
 		
-		object IRangeFilter._To { get; set; }
+		object IRangeFilter.To { get; set; }
 		
-		bool? IRangeFilter._FromInclusive { get; set; }
+		bool? IRangeFilter.IncludeLower { get; set; }
 		
-		bool? IRangeFilter._ToInclusive { get; set; }
+		bool? IRangeFilter.IncludeUpper { get; set; }
 
-		PropertyPathMarker IRangeFilter._Field { get; set; }
+		PropertyPathMarker IRangeFilter.Field { get; set; }
 
 		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return ((IRangeFilter)this)._Field.IsConditionless() || (((IRangeFilter)this)._From == null && ((IRangeFilter)this)._To == null);
+				return ((IRangeFilter)this).Field.IsConditionless() || (((IRangeFilter)this).From == null && ((IRangeFilter)this).To == null);
 			}
 
 		}
-
+		
+		object ICustomJson.GetCustomJson()
+		{
+			var f = (IRangeFilter)this;
+			var rf = new
+			{
+				from = f.From,
+				to = f.To,
+				include_lower = f.IncludeLower,
+				include_upper = f.IncludeUpper
+			};
+			return this.FieldNameAsKeyFormat(f.Field, rf);
+		}
+		
 		public RangeFilterDescriptor<T> OnField(string field)
 		{
-			((IRangeFilter)this)._Field = field;
+			((IRangeFilter)this).Field = field;
 			return this;
 		}
 		public RangeFilterDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((IRangeFilter)this)._Field = objectPath;
+			((IRangeFilter)this).Field = objectPath;
 			return this;
 		}
 		/// <summary>
@@ -63,7 +79,7 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> FromExclusive()
 		{
-			((IRangeFilter)this)._FromInclusive = false;
+			((IRangeFilter)this).IncludeLower = false;
 			return this;
 		}
 		/// <summary>
@@ -71,7 +87,7 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> ToExclusive()
 		{
-			((IRangeFilter)this)._ToInclusive = false;
+			((IRangeFilter)this).IncludeUpper = false;
 			return this;
 		}
 
@@ -81,7 +97,7 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> To(int? to)
 		{
-			((IRangeFilter)this)._To = to;
+			((IRangeFilter)this).To = to;
 			return this;
 		}
 		/// <summary>
@@ -90,7 +106,7 @@ namespace Nest
 		/// <returns></returns>
 		public RangeFilterDescriptor<T> From(int? from)
 		{
-			((IRangeFilter)this)._From = from;
+			((IRangeFilter)this).From = from;
 			return this;
 		}
 
@@ -99,8 +115,8 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> Greater(int? from)
 		{
-			((IRangeFilter)this)._From = from;
-			((IRangeFilter)this)._FromInclusive = false;
+			((IRangeFilter)this).From = from;
+			((IRangeFilter)this).IncludeLower = false;
 			return this;
 		}
 		/// <summary>
@@ -108,8 +124,8 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> GreaterOrEquals(int? from)
 		{
-			((IRangeFilter)this)._From = from;
-			((IRangeFilter)this)._FromInclusive = from.HasValue ? new Nullable<bool>(true) : null;
+			((IRangeFilter)this).From = from;
+			((IRangeFilter)this).IncludeLower = from.HasValue ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		/// <summary>
@@ -117,8 +133,8 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> Lower(int? to)
 		{
-			((IRangeFilter)this)._To = to;
-			((IRangeFilter)this)._ToInclusive = to.HasValue ? new Nullable<bool>(false) : null;
+			((IRangeFilter)this).To = to;
+			((IRangeFilter)this).IncludeUpper = to.HasValue ? new Nullable<bool>(false) : null;
 			return this;
 		}
 		/// <summary>
@@ -126,8 +142,8 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> LowerOrEquals(int? to)
 		{
-			((IRangeFilter)this)._To = to;
-			((IRangeFilter)this)._ToInclusive = to.HasValue ? new Nullable<bool>(true) : null;
+			((IRangeFilter)this).To = to;
+			((IRangeFilter)this).IncludeUpper = to.HasValue ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		#endregion
@@ -138,7 +154,7 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> To(double? to)
 		{
-			((IRangeFilter)this)._To = to;
+			((IRangeFilter)this).To = to;
 			return this;
 		}
 		/// <summary>
@@ -147,7 +163,7 @@ namespace Nest
 		/// <returns></returns>
 		public RangeFilterDescriptor<T> From(double? from)
 		{
-			((IRangeFilter)this)._From = from;
+			((IRangeFilter)this).From = from;
 			return this;
 		}
 
@@ -156,8 +172,8 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> Greater(double? from)
 		{
-			((IRangeFilter)this)._From = from;
-			((IRangeFilter)this)._FromInclusive = from.HasValue ? new Nullable<bool>(false) : null;
+			((IRangeFilter)this).From = from;
+			((IRangeFilter)this).IncludeLower = from.HasValue ? new Nullable<bool>(false) : null;
 			return this;
 		}
 		/// <summary>
@@ -165,8 +181,8 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> GreaterOrEquals(double? from)
 		{
-			((IRangeFilter)this)._From = from;
-			((IRangeFilter)this)._FromInclusive = from.HasValue ? new Nullable<bool>(true) : null;
+			((IRangeFilter)this).From = from;
+			((IRangeFilter)this).IncludeLower = from.HasValue ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		/// <summary>
@@ -174,8 +190,8 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> Lower(double? to)
 		{
-			((IRangeFilter)this)._To = to;
-			((IRangeFilter)this)._ToInclusive = to.HasValue ? new Nullable<bool>(false) : null;
+			((IRangeFilter)this).To = to;
+			((IRangeFilter)this).IncludeUpper = to.HasValue ? new Nullable<bool>(false) : null;
 			return this;
 		}
 		/// <summary>
@@ -183,8 +199,8 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> LowerOrEquals(double? to)
 		{
-			((IRangeFilter)this)._To = to;
-			((IRangeFilter)this)._ToInclusive = to.HasValue ? new Nullable<bool>(true) : null;
+			((IRangeFilter)this).To = to;
+			((IRangeFilter)this).IncludeUpper = to.HasValue ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		#endregion
@@ -195,7 +211,7 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> To(string to)
 		{
-			((IRangeFilter)this)._To = to;
+			((IRangeFilter)this).To = to;
 			return this;
 		}
 		/// <summary>
@@ -204,7 +220,7 @@ namespace Nest
 		/// <returns></returns>
 		public RangeFilterDescriptor<T> From(string from)
 		{
-			((IRangeFilter)this)._From = from;
+			((IRangeFilter)this).From = from;
 			return this;
 		}
 
@@ -213,8 +229,8 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> Greater(string from)
 		{
-			((IRangeFilter)this)._From = from;
-			((IRangeFilter)this)._FromInclusive = !from.IsNullOrEmpty() ? new Nullable<bool>(false) : null;
+			((IRangeFilter)this).From = from;
+			((IRangeFilter)this).IncludeLower = !from.IsNullOrEmpty() ? new Nullable<bool>(false) : null;
 			return this;
 		}
 		/// <summary>
@@ -222,8 +238,8 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> GreaterOrEquals(string from)
 		{
-			((IRangeFilter)this)._From = from;
-			((IRangeFilter)this)._FromInclusive = !from.IsNullOrEmpty() ? new Nullable<bool>(true) : null;
+			((IRangeFilter)this).From = from;
+			((IRangeFilter)this).IncludeLower = !from.IsNullOrEmpty() ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		/// <summary>
@@ -231,8 +247,8 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> Lower(string to)
 		{
-			((IRangeFilter)this)._To = to;
-			((IRangeFilter)this)._ToInclusive = !to.IsNullOrEmpty() ? new Nullable<bool>(false) : null;
+			((IRangeFilter)this).To = to;
+			((IRangeFilter)this).IncludeUpper = !to.IsNullOrEmpty() ? new Nullable<bool>(false) : null;
 			return this;
 		}
 		/// <summary>
@@ -240,8 +256,8 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> LowerOrEquals(string to)
 		{
-			((IRangeFilter)this)._To = to;
-			((IRangeFilter)this)._ToInclusive = !to.IsNullOrEmpty() ? new Nullable<bool>(true) : null;
+			((IRangeFilter)this).To = to;
+			((IRangeFilter)this).IncludeUpper = !to.IsNullOrEmpty() ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		#endregion
@@ -254,7 +270,7 @@ namespace Nest
 		{
 			if (!to.HasValue)
 				return this;
-			((IRangeFilter)this)._To = to.Value.ToString(format);
+			((IRangeFilter)this).To = to.Value.ToString(format);
 			return this;
 		}
 		/// <summary>
@@ -266,7 +282,7 @@ namespace Nest
 			if (!from.HasValue)
 				return this;
 
-			((IRangeFilter)this)._From = from.Value.ToString(format);
+			((IRangeFilter)this).From = from.Value.ToString(format);
 			return this;
 		}
 
@@ -278,8 +294,8 @@ namespace Nest
 			if (!from.HasValue)
 				return this;
 
-			((IRangeFilter)this)._From = from.Value.ToString(format);
-			((IRangeFilter)this)._FromInclusive = false;
+			((IRangeFilter)this).From = from.Value.ToString(format);
+			((IRangeFilter)this).IncludeLower = false;
 			return this;
 		}
 		/// <summary>
@@ -290,8 +306,8 @@ namespace Nest
 			if (!from.HasValue)
 				return this;
 
-			((IRangeFilter)this)._From = from.Value.ToString(format);
-			((IRangeFilter)this)._FromInclusive = true;
+			((IRangeFilter)this).From = from.Value.ToString(format);
+			((IRangeFilter)this).IncludeLower = true;
 			return this;
 		}
 		/// <summary>
@@ -302,8 +318,8 @@ namespace Nest
 			if (!to.HasValue)
 				return this;
 
-			((IRangeFilter)this)._To = to.Value.ToString(format);
-			((IRangeFilter)this)._ToInclusive = false;
+			((IRangeFilter)this).To = to.Value.ToString(format);
+			((IRangeFilter)this).IncludeUpper = false;
 			return this;
 		}
 		/// <summary>
@@ -314,8 +330,8 @@ namespace Nest
 			if (!to.HasValue)
 				return this;
 
-			((IRangeFilter)this)._To = to.Value.ToString(format);
-			((IRangeFilter)this)._ToInclusive = true;
+			((IRangeFilter)this).To = to.Value.ToString(format);
+			((IRangeFilter)this).IncludeUpper = true;
 			return this;
 		}
 		#endregion

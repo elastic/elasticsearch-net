@@ -60,13 +60,13 @@ namespace Nest
 
 		ITermsBaseFilter IFilterDescriptor.TermsFilter { get; set; }
 
-		IQueryDescriptor IFilterDescriptor.QueryFilter { get; set; }
+		IQueryFilter IFilterDescriptor.QueryFilter { get; set; }
 
-		IList<IFilterDescriptor> IFilterDescriptor.AndFilter { get; set; }
+		IAndFilter IFilterDescriptor.AndFilter { get; set; }
 
-		IList<IFilterDescriptor> IFilterDescriptor.OrFilter { get; set; }
+		IOrFilter IFilterDescriptor.OrFilter { get; set; }
 
-		IFilterDescriptor IFilterDescriptor.NotFilterDescriptor { get; set; }
+		INotFilter IFilterDescriptor.NotFilter{ get; set; }
 
 		IScriptFilter IFilterDescriptor.ScriptFilter { get; set; }
 

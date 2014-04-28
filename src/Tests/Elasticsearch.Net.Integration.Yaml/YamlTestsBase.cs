@@ -34,7 +34,6 @@ namespace Elasticsearch.Net.Integration.Yaml
 			var jsonNetSerializer = new ElasticsearchJsonNetSerializer();
 
 			_client = new ElasticsearchClient(settings);
-			_client.Search("","")
 			//_client = new ElasticsearchClient(settings, serializer: jsonNetSerializer);
 			var infoResponse = _client.Info();
 			dynamic info = infoResponse.Response;

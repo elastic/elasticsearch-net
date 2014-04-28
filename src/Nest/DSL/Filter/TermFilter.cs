@@ -39,12 +39,7 @@ namespace Nest
 		object ICustomJson.GetCustomJson()
 		{
 			var tf = ((ITermFilter)this);
-			return new Dictionary<object, object>
-			{
-				{
-					tf.Field,  tf.Value 
-				}
-			};
+			return this.FieldNameAsKeyFormat(tf.Field, tf.Value);
 		}
 	}
 }

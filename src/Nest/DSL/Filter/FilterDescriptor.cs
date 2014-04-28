@@ -84,16 +84,16 @@ namespace Nest
 		ITermsBaseFilter TermsFilter { get; set; }
 
 		[JsonProperty(PropertyName = "fquery")]
-		IQueryDescriptor QueryFilter { get; set; }
+		IQueryFilter QueryFilter { get; set; }
 
 		[JsonProperty(PropertyName = "and")]
-		IList<IFilterDescriptor> AndFilter { get; set; }
+		IAndFilter AndFilter { get; set; }
 
 		[JsonProperty(PropertyName = "or")]
-		IList<IFilterDescriptor> OrFilter { get; set; }
+		IOrFilter OrFilter { get; set; }
 
 		[JsonProperty(PropertyName = "not")]
-		IFilterDescriptor NotFilterDescriptor { get; set; }
+		INotFilter NotFilter { get; set; }
 
 		[JsonProperty(PropertyName = "script")]
 		IScriptFilter ScriptFilter { get; set; }
@@ -357,7 +357,7 @@ namespace Nest
 			var filter = new GeoShapeFilterDescriptor();
 			if (filterDescriptor != null)
 				filterDescriptor(filter);
-
+			((IGeoShapeFilter)filter).Field = field;
 			return this.New(filter, f => f.GeoShapeFilter = filter);
 		}
 
@@ -381,7 +381,7 @@ namespace Nest
 			var filter = new GeoIndexedShapeFilterDescriptor();
 			if (filterDescriptor != null)
 				filterDescriptor(filter);
-
+			((IGeoIndexedShapeFilter)filter).Field = field;
 			return this.New(filter, f => f.GeoShapeFilter = filter);
 		}
 
@@ -420,6 +420,7 @@ namespace Nest
 		{
 			IGeoPolygonFilter filter = new GeoPolygonFilter();
 			filter.Points = points;
+			filter.Field = fieldName;
 			return this.New(filter, f => f.GeoPolygonFilter = filter);
 		}
 
@@ -597,6 +598,7 @@ namespace Nest
 			ITermsFilter filter = new TermsFilter();
 			filter.Field = fieldDescriptor;
 			filter.Terms = terms.Cast<object>();
+			filter.Execution = Execution;
 			return this.New(filter, f=>f.TermsFilter = filter);
 		}	
 		
@@ -618,7 +620,7 @@ namespace Nest
 		{
 			ITermsFilter filter = new TermsFilter();
 			filter.Field = field;
-			filter.Terms = terms.Cast<object>();
+			filter.Terms = terms ?? Enumerable.Empty<string>();
 			return this.New(filter, f=>f.TermsFilter = filter);
 		}
 
@@ -654,7 +656,7 @@ namespace Nest
 		public BaseFilterDescriptor And(params Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor>[] selectors)
 		{
 			return this.And((from selector in selectors 
-							 let filter = new FilterDescriptorDescriptor<T>() 
+							 let filter = new FilterDescriptorDescriptor<T>() { IsConditionless = true}
 							 select selector(filter)).ToArray());
 		}
 		/// <summary>
@@ -663,7 +665,9 @@ namespace Nest
 		/// </summary>
 		public BaseFilterDescriptor And(params BaseFilterDescriptor[] filtersDescriptor)
 		{
-			return this.New(filter, f=>f.AndFilter = filtersDescriptor.Cast<IFilterDescriptor>().ToList());
+			var andFilter = new AndFilter();
+			((IAndFilter)andFilter).Filters = filtersDescriptor.Cast<IFilterDescriptor>().ToList();
+			return this.New(andFilter, f=>f.AndFilter = andFilter);
 		}
 		/// <summary>
 		/// A filter that matches documents using OR boolean operator on other queries. 
@@ -672,7 +676,7 @@ namespace Nest
 		public BaseFilterDescriptor Or(params Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor>[] selectors)
 		{
 			var descriptors = (from selector in selectors 
-							   let filter = new FilterDescriptorDescriptor<T>() 
+							   let filter = new FilterDescriptorDescriptor<T>() { IsConditionless = true}
 							   select selector(filter)
 							  ).ToArray();
 			return this.Or(descriptors);
@@ -684,7 +688,9 @@ namespace Nest
 		/// </summary>
 		public BaseFilterDescriptor Or(params BaseFilterDescriptor[] filtersDescriptor)
 		{
-			return this.New(filter, f=>f.OrFilter = filtersDescriptor.Cast<IFilterDescriptor>().ToList());
+			var orFilter = new OrFilter();
+			((IOrFilter)orFilter).Filters = filtersDescriptor.Cast<IFilterDescriptor>().ToList();
+			return this.New(orFilter, f=> f.OrFilter = orFilter);
 			
 		}
 		/// <summary>
@@ -693,12 +699,16 @@ namespace Nest
 		/// </summary>
 		public BaseFilterDescriptor Not(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> selector)
 		{
-			var filter = new FilterDescriptorDescriptor<T>();
+
+			var notFilter = new NotFilter();
+
+			var filter = new FilterDescriptorDescriptor<T>() { IsConditionless = true };
 			BaseFilterDescriptor bf = filter;
 			if (selector != null)
 				bf = selector(filter);
 
-			return this.New(bf, f=>f.NotFilterDescriptor = filter);
+			((INotFilter)notFilter).Filter = bf;
+			return this.New(notFilter, f=>f.NotFilter = notFilter);
 
 		}
 		/// <summary>
@@ -720,13 +730,14 @@ namespace Nest
 		/// </summary>
 		public BaseFilterDescriptor Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
-
+			var filter = new QueryFilter();
 			var descriptor = new QueryDescriptor<T>();
 			BaseQuery bq = descriptor;
 			if (querySelector != null)
 				bq = querySelector(descriptor);
 
-			return this.New(, f=>f.NestedFilter = filter);
+			((IQueryFilter)filter).Query = bq;
+			return this.New(filter, f=>f.QueryFilter = filter);
 		}
 
 
@@ -770,10 +781,15 @@ namespace Nest
 			return new FilterDescriptorDescriptor<T> { IsConditionless = true, IsVerbatim = this.IsVerbatim, IsStrict = this.IsStrict };
 		}
 
+
+
 		private FilterDescriptorDescriptor<T> New(IFilterBase filter, Action<IFilterDescriptor> fillProperty)
 		{
 			if (((IFilterBase)filter).IsConditionless && !this.IsVerbatim)
+			{
+				this.ResetCache();
 				return CreateConditionlessFilterDescriptor(filter);
+			}
 
 			this.SetCacheAndName(filter);
 
@@ -800,7 +816,7 @@ namespace Nest
 			if (!string.IsNullOrWhiteSpace(this._Name))
 				filter._Name = this._Name;
 			if (!string.IsNullOrWhiteSpace(this._CacheKey))
-				filter._CacheKey = this._Name;
+				filter._CacheKey = this._CacheKey;
 		}
 
 

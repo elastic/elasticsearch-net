@@ -26,10 +26,10 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 					geo_distance: {
+						origin: ""40, -70"",
 						distance: 12.0,
 						unit: ""km"",
 						optimize_bbox: ""memory"",
-						origin: ""40, -70"",
 						_cache: true,
 						_name: ""my_geo_filter""
 					}

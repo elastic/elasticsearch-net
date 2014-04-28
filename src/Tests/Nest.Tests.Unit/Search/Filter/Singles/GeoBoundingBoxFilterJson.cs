@@ -55,10 +55,9 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 								top_left: ""40.73, -74.1"",
 								bottom_right: ""40.717, -73.99""
 							},
+							type: ""indexed"",
 							_cache : true,
-							_name : ""my_geo_filter"",
-							type: ""indexed""
-
+							_name : ""my_geo_filter""
 						}
 					}
 			}";

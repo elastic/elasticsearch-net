@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IGeoPolygonFilter : IFilterBase
+	[JsonConverter(typeof(CustomJsonConverter))]
+	public interface IGeoPolygonFilter : IFilterBase, ICustomJson
 	{
+		PropertyPathMarker Field { get; set; }
+
 		[JsonProperty("points")]
 		IEnumerable<string> Points { get; set; }
 	}
 
+	[JsonConverter(typeof(CustomJsonConverter))]
 	public class GeoPolygonFilter : FilterBase, IGeoPolygonFilter
 	{
 		bool IFilterBase.IsConditionless
@@ -25,7 +31,14 @@ namespace Nest
 
 		}
 
+		PropertyPathMarker IGeoPolygonFilter.Field { get; set; }
 		IEnumerable<string> IGeoPolygonFilter.Points { get; set; }
 
+		object ICustomJson.GetCustomJson()
+		{
+			var f = (IGeoPolygonFilter)this;
+			var shape = new { points = f.Points };
+			return this.FieldNameAsKeyFormat(f.Field, shape);
+		}
 	}
 }

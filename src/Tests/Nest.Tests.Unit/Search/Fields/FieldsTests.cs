@@ -51,8 +51,6 @@ namespace Nest.Tests.Unit.Search.Fields
 			lang2.Should().NotBeNullOrEmpty();
 
 			
-			 client.IndexExists(i=>i.IgnoreUnavailable())
-
 			
 		}
 
