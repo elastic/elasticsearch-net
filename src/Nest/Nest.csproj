@@ -235,6 +235,8 @@
     <Compile Include="DSL\SearchDescriptorBase.cs" />
     <Compile Include="DSL\Search\SourceDescriptor.cs" />
     <Compile Include="DSL\TermVectorDescriptor.cs" />
+    <Compile Include="DSL\Suggest\FuzzinessSuggestDescriptor.cs" />
+    <Compile Include="DSL\Suggest\IFuzzySuggestDescriptor.cs" />
     <Compile Include="DSL\UnregisterPercolatorDescriptor.cs" />
     <Compile Include="DSL\DeleteTemplateDescriptor.cs" />
     <Compile Include="DSL\GetTemplateDescriptor.cs" />

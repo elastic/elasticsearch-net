@@ -323,6 +323,11 @@ namespace Elasticsearch.Net.Connection.Thrift
 					client.InputProtocol.Transport.Close();
 					throw;
 				}
+				catch (TTransportException)
+				{
+					client.InputProtocol.Transport.Close();
+					throw;
+				}
 				finally
 				{
 					//make sure we make the client available again.

@@ -259,6 +259,10 @@ namespace Nest.Tests.Integration.Indices
 				.AddMapping<Person>(m => m
 					.MapFromAttributes()
 				)
+				.AddMapping<Person>(m => m
+					.MapFromAttributes()
+					.Type("override")
+				)
 				.Analysis(a=>a
 					.Analyzers(an=>an
 						.Add("standard", new StandardAnalyzer()

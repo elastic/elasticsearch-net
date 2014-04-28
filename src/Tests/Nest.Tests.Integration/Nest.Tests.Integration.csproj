@@ -105,6 +105,8 @@
     <Compile Include="Core\Exists\DocumentExistsTests.cs" />
     <Compile Include="Core\Suggest\SuggestTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
+    <Compile Include="Core\TermVectors\MultiTermVectorsTests.cs" />
+    <Compile Include="Core\TermVectors\TermVectorTests.cs" />
     <Compile Include="DebugTests\MemoryUsageTests.cs" />
     <Compile Include="ElasticsearchConfiguration.cs" />
     <Compile Include="Core\IndexTests.cs" />
