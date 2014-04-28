@@ -24,7 +24,10 @@ namespace Nest.Tests.Integration
 			var createIndexResult = client.CreateIndex(ElasticsearchConfiguration.DefaultIndex, c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
-				.AddMapping<ElasticsearchProject>(m => m.MapFromAttributes())
+				.AddMapping<ElasticsearchProject>(m => m
+                    .MapFromAttributes()
+                    .Properties(p => p
+                        .String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.with_positions_offsets_payloads))))
 				.AddMapping<Person>(m => m.MapFromAttributes())
 				.AddMapping<BoolTerm>(m => m.Properties(pp=>pp
 					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.not_analyzed))
@@ -35,7 +38,10 @@ namespace Nest.Tests.Integration
 			var createAntotherIndexResult = client.CreateIndex(ElasticsearchConfiguration.DefaultIndex + "_clone", c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
-				.AddMapping<ElasticsearchProject>(m => m.MapFromAttributes())
+                .AddMapping<ElasticsearchProject>(m => m
+                    .MapFromAttributes()
+                    .Properties(p => p
+                        .String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.with_positions_offsets_payloads))))
 				.AddMapping<Person>(m => m.MapFromAttributes())
 				.AddMapping<BoolTerm>(m => m.Properties(pp => pp
 					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.not_analyzed))
@@ -54,8 +60,8 @@ namespace Nest.Tests.Integration
 		[TearDown]
 		public static void TearDown()
 		{
-			var client = ElasticsearchConfiguration.Client;
-			client.DeleteIndex(di=>di.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_*"));
+            var client = ElasticsearchConfiguration.Client;
+            client.DeleteIndex(di => di.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_*"));
 		}
 	}
 }
