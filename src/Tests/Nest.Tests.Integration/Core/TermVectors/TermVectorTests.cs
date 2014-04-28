@@ -9,97 +9,97 @@ using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Integration.Core.TermVectors
 {
-    [TestFixture]
-    public class TermVectorTests : IntegrationTests
-    {
-        [Test]
-        public void TermVectorDefaultsTest()
-        {
-            var result = _client.TermVector<ElasticsearchProject>(s => s
-                .Id("1")
-                .Fields(ep => ep.Content));
+	[TestFixture]
+	public class TermVectorTests : IntegrationTests
+	{
+		[Test]
+		public void TermVectorDefaultsTest()
+		{
+			var result = _client.TermVector<ElasticsearchProject>(s => s
+				.Id("1")
+				.Fields(ep => ep.Content));
 
-            result.IsValid.Should().BeTrue();
-            result.Found.Should().BeTrue();
-            result.TermVectors.Count().Should().Be(1);
+			result.IsValid.Should().BeTrue();
+			result.Found.Should().BeTrue();
+			result.TermVectors.Count().Should().Be(1);
 
-            var contentTermVector = result.TermVectors["content"];
-            contentTermVector.FieldStatistics.Should().NotBeNull();
-            contentTermVector.FieldStatistics.DocumentCount.Should().BeGreaterOrEqualTo(1);
-            contentTermVector.FieldStatistics.SumOfDocumentFrequencies.Should().BeGreaterOrEqualTo(1);
-            contentTermVector.FieldStatistics.SumOfTotalTermFrequencies.Should().BeGreaterOrEqualTo(1);
+			var contentTermVector = result.TermVectors["content"];
+			contentTermVector.FieldStatistics.Should().NotBeNull();
+			contentTermVector.FieldStatistics.DocumentCount.Should().BeGreaterOrEqualTo(1);
+			contentTermVector.FieldStatistics.SumOfDocumentFrequencies.Should().BeGreaterOrEqualTo(1);
+			contentTermVector.FieldStatistics.SumOfTotalTermFrequencies.Should().BeGreaterOrEqualTo(1);
 
-            contentTermVector.Terms.Count.Should().BeGreaterOrEqualTo(1);
+			contentTermVector.Terms.Count.Should().BeGreaterOrEqualTo(1);
 
-            var firstTerm = contentTermVector.Terms.First().Value;
-            firstTerm.Tokens.Should().NotBeNull();
-            firstTerm.TotalTermFrequency.Should().Be(0);
-            firstTerm.DocumentFrequency.Should().Be(0);
-        }
+			var firstTerm = contentTermVector.Terms.First().Value;
+			firstTerm.Tokens.Should().NotBeNull();
+			firstTerm.TotalTermFrequency.Should().Be(0);
+			firstTerm.DocumentFrequency.Should().Be(0);
+		}
 
-        [Test]
-        public void TermVectorDefaultsWithTermStatisticsTest()
-        {
-            var result = _client.TermVector<ElasticsearchProject>(s => s
-                .Id("1")
-                .Fields(ep => ep.Content)
-                .TermStatistics(true));
+		[Test]
+		public void TermVectorDefaultsWithTermStatisticsTest()
+		{
+			var result = _client.TermVector<ElasticsearchProject>(s => s
+				.Id("1")
+				.Fields(ep => ep.Content)
+				.TermStatistics(true));
 
-            result.IsValid.Should().BeTrue();
-            result.Found.Should().BeTrue();
-            result.TermVectors.Count().Should().Be(1);
+			result.IsValid.Should().BeTrue();
+			result.Found.Should().BeTrue();
+			result.TermVectors.Count().Should().Be(1);
 
-            var contentTermVector = result.TermVectors["content"];
-            contentTermVector.FieldStatistics.Should().NotBeNull();
-            contentTermVector.FieldStatistics.DocumentCount.Should().BeGreaterOrEqualTo(1);
-            contentTermVector.FieldStatistics.SumOfDocumentFrequencies.Should().BeGreaterOrEqualTo(1);
-            contentTermVector.FieldStatistics.SumOfTotalTermFrequencies.Should().BeGreaterOrEqualTo(1);
-            
-            contentTermVector.Terms.Count.Should().BeGreaterOrEqualTo(1);
+			var contentTermVector = result.TermVectors["content"];
+			contentTermVector.FieldStatistics.Should().NotBeNull();
+			contentTermVector.FieldStatistics.DocumentCount.Should().BeGreaterOrEqualTo(1);
+			contentTermVector.FieldStatistics.SumOfDocumentFrequencies.Should().BeGreaterOrEqualTo(1);
+			contentTermVector.FieldStatistics.SumOfTotalTermFrequencies.Should().BeGreaterOrEqualTo(1);
 
-            var firstTerm = contentTermVector.Terms.First().Value;
-            firstTerm.Tokens.Should().NotBeNull();
-            firstTerm.TotalTermFrequency.Should().BeGreaterOrEqualTo(1);
-            firstTerm.DocumentFrequency.Should().BeGreaterOrEqualTo(1);
-        }
+			contentTermVector.Terms.Count.Should().BeGreaterOrEqualTo(1);
 
-        [Test]
-        public void TermVectorNoFieldStatisticsTest()
-        {
-            var result = _client.TermVector<ElasticsearchProject>(s => s
-                .Id("1")
-                .Fields(ep => ep.Content)
-                .FieldStatistics(false));
+			var firstTerm = contentTermVector.Terms.First().Value;
+			firstTerm.Tokens.Should().NotBeNull();
+			firstTerm.TotalTermFrequency.Should().BeGreaterOrEqualTo(1);
+			firstTerm.DocumentFrequency.Should().BeGreaterOrEqualTo(1);
+		}
 
-            result.IsValid.Should().BeTrue();
-            result.Found.Should().BeTrue();
-            result.TermVectors.Count().Should().Be(1);
+		[Test]
+		public void TermVectorNoFieldStatisticsTest()
+		{
+			var result = _client.TermVector<ElasticsearchProject>(s => s
+				.Id("1")
+				.Fields(ep => ep.Content)
+				.FieldStatistics(false));
 
-            var contentTermVector = result.TermVectors["content"];
-            contentTermVector.FieldStatistics.Should().BeNull();
-        }
+			result.IsValid.Should().BeTrue();
+			result.Found.Should().BeTrue();
+			result.TermVectors.Count().Should().Be(1);
 
-        [Test]
-        public void TermVectorNonMappedFieldTest()
-        {
-            var result = _client.TermVector<ElasticsearchProject>(s => s
-                .Id("1")
-                .Fields(ep => ep.Name));
+			var contentTermVector = result.TermVectors["content"];
+			contentTermVector.FieldStatistics.Should().BeNull();
+		}
 
-            result.IsValid.Should().BeTrue();
-            result.TermVectors.Count().ShouldBeEquivalentTo(0);
-        }
+		[Test]
+		public void TermVectorNonMappedFieldTest()
+		{
+			var result = _client.TermVector<ElasticsearchProject>(s => s
+				.Id("1")
+				.Fields(ep => ep.Name));
 
-        [Test]
-        public void TermVectorNonExistentIdTest()
-        {
-            var result = _client.TermVector<ElasticsearchProject>(s => s
-                .Id("thisiddoesnotexist")
-                .Fields(ep => ep.Name));
+			result.IsValid.Should().BeTrue();
+			result.TermVectors.Count().ShouldBeEquivalentTo(0);
+		}
 
-            result.IsValid.Should().Be(true);
-            result.Found.Should().Be(false);
-            result.TermVectors.Count.Should().Be(0);
-        }
-    }
+		[Test]
+		public void TermVectorNonExistentIdTest()
+		{
+			var result = _client.TermVector<ElasticsearchProject>(s => s
+				.Id("thisiddoesnotexist")
+				.Fields(ep => ep.Name));
+
+			result.IsValid.Should().Be(true);
+			result.Found.Should().Be(false);
+			result.TermVectors.Count.Should().Be(0);
+		}
+	}
 }

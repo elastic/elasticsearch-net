@@ -105,8 +105,6 @@
     <Compile Include="Core\Exists\DocumentExistsTests.cs" />
     <Compile Include="Core\Suggest\SuggestTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
-    <Compile Include="Core\TermVectors\MultiTermVectorsTests.cs" />
-    <Compile Include="Core\TermVectors\TermVectorTests.cs" />
     <Compile Include="DebugTests\MemoryUsageTests.cs" />
     <Compile Include="ElasticsearchConfiguration.cs" />
     <Compile Include="Core\IndexTests.cs" />
@@ -163,6 +161,7 @@
     <Compile Include="RawCalls\DynamicNullTests.cs" />
     <Compile Include="Mapping\NotAnalyzedTest.cs" />
     <Compile Include="RawCalls\ReturnTypesTest.cs" />
+    <Compile Include="Reproduce\Reproduce628Tests.cs" />
     <Compile Include="Reproduce\Reproduce487Tests.cs" />
     <Compile Include="Reproduce\Reproduce437Tests.cs" />
     <Compile Include="Reproduce\Reproduce450Tests.cs" />

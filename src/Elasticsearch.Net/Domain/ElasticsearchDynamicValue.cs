@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Dynamic;
 using System.Globalization;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -85,11 +84,6 @@ namespace Elasticsearch.Net
 				if (l != null && l.Count -1 >= i)
 				{
 					return new ElasticsearchDynamicValue(l[i]);
-				}
-				var d = this.Value as IDictionary<string, object>;
-				if (d != null && d.Count -1 >= i)
-				{
-					return new ElasticsearchDynamicValue(d.Values.ToList()[i]);
 				}
 				return new ElasticsearchDynamicValue(null);
 			}
