@@ -11,7 +11,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CustomJsonConverter))]
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<TermFilter>,CustomJsonConverter>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ITermFilter : IFilterBase, ICustomJson
 	{
 		PropertyPathMarker Field { get; set; }
@@ -19,9 +20,7 @@ namespace Nest
 		double? Boost { get; set; }
 	}
 
-	[JsonConverter(typeof(CustomJsonConverter))]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class TermFilter : FilterBase, ITermFilter
+	public class TermFilter : FilterBase, ITermFilter, ICustomJsonReader<TermFilter>
 	{
 		PropertyPathMarker ITermFilter.Field { get; set; }
 		object ITermFilter.Value { get; set; }
@@ -40,6 +39,18 @@ namespace Nest
 		{
 			var tf = ((ITermFilter)this);
 			return this.FieldNameAsKeyFormat(tf.Field, tf.Value);
+		}
+
+		public TermFilter FromJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			var filter = new TermFilter();
+			var dict = base.ReadToDict(reader, serializer, filter);
+			if (dict.Count == 0) return filter;
+
+			var firstProp = dict.First();
+			((ITermFilter)filter).Field = firstProp.Key;
+			((ITermFilter)filter).Value = firstProp.Value;
+			return filter;
 		}
 	}
 }

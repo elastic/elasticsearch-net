@@ -16,6 +16,7 @@ namespace Nest
 {
 	public interface ISearchDescriptor
 	{
+		IFilterDescriptor Filter { get; set; }
 		IQueryDescriptor Query { get; set; }
 	}
 
@@ -253,20 +254,6 @@ namespace Nest
 			}
 		}
 
-		[JsonProperty(PropertyName = "filter")]
-		internal RawOrFilterDescriptor<T> _FilterOrRaw
-		{
-			get
-			{
-				if (this._RawFilter == null && this.FilterDescriptor == null)
-					return null;
-				return new RawOrFilterDescriptor<T>
-				{
-					Raw = this._RawFilter,
-					Descriptor = this.FilterDescriptor
-				};
-			}
-		}
 
 		[JsonProperty(PropertyName = "highlight")]
 		internal HighlightDescriptor<T> _Highlight { get; set; }
@@ -277,8 +264,10 @@ namespace Nest
 		internal string _RawQuery { get; set; }
 		IQueryDescriptor ISearchDescriptor.Query { get; set; }
 
-		internal string _RawFilter { get; set; }
-		internal IFilterDescriptor FilterDescriptor { get; set; }
+		[JsonProperty(PropertyName = "filter")]
+		[JsonConverter(typeof(CustomJsonConverter))]
+		BaseFilterDescriptor _Filter { get; set;}
+		IFilterDescriptor ISearchDescriptor.Filter { get { return this._Filter; } set { this._Filter = value as BaseFilterDescriptor;  } }
 
 		[JsonProperty(PropertyName = "fields")]
 		internal IList<PropertyPathMarker> _Fields { get; set; }
@@ -289,7 +278,6 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "_source")]
 		internal object _Source { get; set; }
-
 
 		[JsonProperty(PropertyName = "aggs")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
@@ -1001,7 +989,7 @@ namespace Nest
 				return this;
 
 
-			this.FilterDescriptor = bf;
+			((ISearchDescriptor)this).Filter = bf;
 			return this;
 		}
 		/// <summary>
@@ -1010,7 +998,7 @@ namespace Nest
 		public SearchDescriptor<T> Filter(BaseFilterDescriptor filterDescriptor)
 		{
 			filterDescriptor.ThrowIfNull("filter");
-			this.FilterDescriptor = filterDescriptor;
+			((ISearchDescriptor)this).Filter = filterDescriptor;
 			return this;
 		}
 
@@ -1020,7 +1008,7 @@ namespace Nest
 		public SearchDescriptor<T> FilterRaw(string rawFilter)
 		{
 			rawFilter.ThrowIfNull("rawFilter");
-			this._RawFilter = rawFilter;
+			((ISearchDescriptor)this).Filter = new FilterDescriptorDescriptor<T>().Raw(rawFilter);
 			return this;
 		}
 

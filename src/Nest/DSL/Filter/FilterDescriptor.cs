@@ -15,7 +15,8 @@ using System.Collections;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IFilterDescriptor
+	[JsonConverter(typeof(ReadAsTypeConverter<BaseFilterDescriptor>))]
+	public interface IFilterDescriptor 
 	{
 		[JsonIgnore]
 		string _Name { get; set; }
@@ -26,8 +27,11 @@ namespace Nest
 		[JsonIgnore]
 		bool IsConditionless { get; }
 
+		[JsonIgnore]
+		string RawFilter { get; set; }
+		
 		[JsonProperty(PropertyName = "bool")]
-		BoolBaseFilterDescriptor BoolFilterDescriptor { get; set; }
+		IBoolFilter BoolFilterDescriptor { get; set; }
 
 		[JsonProperty(PropertyName = "exists")]
 		IExistsFilter ExistsFilter { get; set; }
@@ -124,6 +128,7 @@ namespace Nest
 			this._Cache = cache;
 			return this;
 		}
+		
 
 		public FilterDescriptorDescriptor<T> Strict(bool strict = true)
 		{
@@ -145,6 +150,13 @@ namespace Nest
 			selector(filter);
 
 			return (filter.FilterDescriptor == null || filter.FilterDescriptor.IsConditionless) ? filter._Fallback : filter.FilterDescriptor;
+		}
+
+		internal BaseFilterDescriptor Raw(string rawJson)
+		{
+			var f = new FilterDescriptorDescriptor<T> { IsStrict = this.IsStrict, IsVerbatim = this.IsVerbatim };
+			((IFilterDescriptor)f).RawFilter = rawJson;
+			return f;
 		}
 
 		/// <summary>
@@ -812,11 +824,11 @@ namespace Nest
 		private void SetCacheAndName(IFilterBase filter)
 		{
 			if (this._Cache.HasValue)
-				filter._Cache = this._Cache;
+				filter.Cache = this._Cache;
 			if (!string.IsNullOrWhiteSpace(this._Name))
-				filter._Name = this._Name;
+				filter.CacheName = this._Name;
 			if (!string.IsNullOrWhiteSpace(this._CacheKey))
-				filter._CacheKey = this._CacheKey;
+				filter.CacheKey = this._CacheKey;
 		}
 
 

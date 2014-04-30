@@ -44,9 +44,29 @@ namespace Nest.Resolvers
 				return this.Name.GetHashCode();
 			return this.Type != null ? this.Type.GetHashCode() : 0;
 		}
-		public bool Equals(PropertyPathMarker other)
+
+		bool IEquatable<PropertyPathMarker>.Equals(PropertyPathMarker other)
+		{
+			return Equals(other);
+		}
+
+		public override bool Equals(object obj)
+		{
+			var s = obj as string;
+			if (!s.IsNullOrEmpty()) return this.EqualsString(s);
+			var pp = obj as PropertyPathMarker;
+			if (pp != null) return this.EqualsMarker(pp);
+
+			return base.Equals(obj);
+		}
+
+		public bool EqualsMarker(PropertyPathMarker other)
 		{
 			return other != null && this.GetHashCode() == other.GetHashCode();
+		}
+		public bool EqualsString(string other)
+		{
+			return !other.IsNullOrEmpty() && other == this.Name;
 		}
 	}
 

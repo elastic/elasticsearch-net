@@ -163,6 +163,8 @@
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="QueryParsers\BaseParserTests.cs" />
+    <Compile Include="QueryParsers\Filter\ParseFilterTests.cs" />
     <Compile Include="Reproduce\Reproduce579Tests.cs" />
     <Compile Include="Search\Fields\FieldsTests.cs" />
     <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
@@ -436,6 +438,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="QueryParsers\Filter\Term.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Reproduce\Issue579.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

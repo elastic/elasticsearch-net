@@ -137,6 +137,8 @@
     <Compile Include="Domain\Responses\RestoreResponse.cs" />
     <Compile Include="Domain\Responses\SnapshotResponse.cs" />
     <Compile Include="DSL\DeleteSnapshotDescriptor.cs" />
+    <Compile Include="Resolvers\Converters\CompositeJsonConverter.cs" />
+    <Compile Include="Domain\DSL\ICustomJsonReader.cs" />
     <Compile Include="DSL\Filter\INotFilter.cs" />
     <Compile Include="DSL\Filter\QueryFilter.cs" />
     <Compile Include="DSL\Filter\OrFilter.cs" />
@@ -614,7 +616,7 @@
     <Compile Include="DSL\Filter\LimitFilter.cs" />
     <Compile Include="DSL\Filter\IdsFilter.cs" />
     <Compile Include="DSL\Filter\ExistsFilter.cs" />
-    <Compile Include="DSL\Filter\RawOrFilterDescriptor.cs" />
+    <Compile Include="Resolvers\Converters\ReadAsTypeConverter.cs" />
     <Compile Include="DSL\Query\RawOrQueryDescriptor.cs" />
     <Compile Include="DSL\Facets\TermFacetDescriptor.cs" />
     <Compile Include="Domain\Facets\FilterFacet.cs" />

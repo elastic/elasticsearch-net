@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 using Nest.Resolvers;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using Nest.Resolvers.Converters;
@@ -11,6 +12,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeConverter<AndFilter>))]
 	public interface IAndFilter : IFilterBase
 	{
 		[JsonProperty("filters")]
@@ -20,7 +22,6 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class AndFilter : FilterBase, IAndFilter
 	{
-
 		IEnumerable<IFilterDescriptor> IAndFilter.Filters { get; set; }
 
 		bool IFilterBase.IsConditionless
