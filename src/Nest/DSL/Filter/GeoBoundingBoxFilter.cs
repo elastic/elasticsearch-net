@@ -11,7 +11,8 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 
-	[JsonConverter(typeof(CustomJsonConverter))]
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<GeoBoundingBoxFilter>, CustomJsonConverter>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoBoundingBoxFilter : IFilterBase, ICustomJson
 	{
 		PropertyPathMarker Field { get; set; }
@@ -26,7 +27,6 @@ namespace Nest
 		GeoExecution? GeoExecution { get; set; }
 	}
 
-	[JsonConverter(typeof(CustomJsonConverter))]
 	public class GeoBoundingBoxFilter : FilterBase, IGeoBoundingBoxFilter
 	{
 		bool IFilterBase.IsConditionless

@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeConverter<HasParentFilterDescriptor<object>>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IHasParentFilter : IFilterBase
 	{
 		[JsonProperty("type")]
@@ -20,7 +23,6 @@ namespace Nest
 		IQueryDescriptor _QueryDescriptor { get; set; }
 	}
 
-	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
 	public class HasParentFilterDescriptor<T> : FilterBase, IHasParentFilter where T : class
 	{
 		TypeNameMarker IHasParentFilter._Type { get; set; }

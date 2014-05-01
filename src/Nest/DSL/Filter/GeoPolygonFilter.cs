@@ -9,7 +9,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CustomJsonConverter))]
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<GeoPolygonFilter>, CustomJsonConverter>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoPolygonFilter : IFilterBase, ICustomJson
 	{
 		PropertyPathMarker Field { get; set; }
@@ -18,7 +19,6 @@ namespace Nest
 		IEnumerable<string> Points { get; set; }
 	}
 
-	[JsonConverter(typeof(CustomJsonConverter))]
 	public class GeoPolygonFilter : FilterBase, IGeoPolygonFilter
 	{
 		bool IFilterBase.IsConditionless

@@ -10,7 +10,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CustomJsonConverter))]
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<GeoDistanceRangeFilterDescriptor>, CustomJsonConverter>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoDistanceRangeFilter : IFilterBase, ICustomJson
 	{
 		PropertyPathMarker Field { get; set; }
@@ -26,7 +27,6 @@ namespace Nest
 		string OptimizeBoundingBox { get; set; }
 	}
 
-	[JsonConverter(typeof(CustomJsonConverter))]
 	public class GeoDistanceRangeFilterDescriptor : FilterBase, IGeoDistanceRangeFilter
 	{
 		PropertyPathMarker IGeoDistanceRangeFilter.Field { get; set; }

@@ -11,7 +11,8 @@ using Elasticsearch.Net;
 namespace Nest
 {
 
-	[JsonConverter(typeof(CustomJsonConverter))]
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<TermsLookupFilterDescriptor>,CustomJsonConverter>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ITermsLookupFilterDescriptor : ITermsBaseFilter, ICustomJson
 	{
 		[JsonProperty("id")]
@@ -30,10 +31,6 @@ namespace Nest
 		string Routing { get; set; }
 	}
 
-	/// <summary>
-	/// http://www.elasticsearch.org/blog/terms-filter-lookup/
-	/// </summary>
-	[JsonConverter(typeof(CustomJsonConverter))]
 	public class TermsLookupFilterDescriptor : FilterBase, ITermsLookupFilterDescriptor
 	{
 		PropertyPathMarker ITermsBaseFilter.Field { get; set; }

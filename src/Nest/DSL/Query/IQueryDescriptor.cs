@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<BaseQuery>))]
 	public interface IQueryDescriptor
 	{
 		[JsonProperty(PropertyName = "bool")]

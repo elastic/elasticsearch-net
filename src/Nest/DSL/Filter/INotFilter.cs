@@ -11,13 +11,14 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeConverter<NotFilter>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface INotFilter : IFilterBase
 	{
 		[JsonProperty("filter")]
 		IFilterDescriptor Filter { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class NotFilter : FilterBase, INotFilter
 	{
 

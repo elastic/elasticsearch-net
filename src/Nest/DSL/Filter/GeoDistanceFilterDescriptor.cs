@@ -10,7 +10,8 @@ using System;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CustomJsonConverter))]
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<GeoDistanceFilterDescriptor>, CustomJsonConverter>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoDistanceFilter : IFilterBase, ICustomJson
 	{
 		PropertyPathMarker Field { get; set; }
@@ -26,7 +27,6 @@ namespace Nest
 		string OptimizeBoundingBox { get; set; }
 	}
 
-	[JsonConverter(typeof(CustomJsonConverter))]
 	public class GeoDistanceFilterDescriptor : FilterBase, IGeoDistanceFilter
 	{
 		PropertyPathMarker IGeoDistanceFilter.Field { get; set; }

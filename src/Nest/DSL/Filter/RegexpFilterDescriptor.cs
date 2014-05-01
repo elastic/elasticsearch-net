@@ -11,7 +11,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CustomJsonConverter))]
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<RegexpFilterDescriptor<object>>,CustomJsonConverter>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IRegexpFilter : IFilterBase, ICustomJson
 	{
 		[JsonProperty("value")]
@@ -23,8 +24,6 @@ namespace Nest
 		PropertyPathMarker Field { get; set; }
 	}
 
-	[JsonConverter(typeof(CustomJsonConverter))]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class RegexpFilterDescriptor<T> : FilterBase, IRegexpFilter where T : class
 	{
 		string IRegexpFilter.Value { get; set; }

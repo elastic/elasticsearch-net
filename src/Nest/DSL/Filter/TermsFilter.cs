@@ -11,7 +11,8 @@ namespace Nest
 		PropertyPathMarker Field { get; set; }
 	}
 
-	[JsonConverter(typeof(CustomJsonConverter))]
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<TermsFilter>, CustomJsonConverter>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ITermsFilter : ITermsBaseFilter, ICustomJson
 	{
 		IEnumerable<object> Terms { get; set; }
@@ -19,17 +20,17 @@ namespace Nest
 		[JsonProperty("execution")]
 		TermsExecution? Execution { get; set; }
 	}
-	[JsonConverter(typeof(CustomJsonConverter))]
+
 	public class TermsFilter : FilterBase, ITermsFilter
 	{
 		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return ((ITermsBaseFilter) this).Field.IsConditionless() 
-				       || !((ITermsFilter) this).Terms.HasAny()
-				       || ((ITermsFilter) this).Terms.OfType<string>().All(s=>s.IsNullOrEmpty())
-				       || ((ITermsFilter) this).Terms.All(t => t == null);
+				return ((ITermsBaseFilter)this).Field.IsConditionless()
+					   || !((ITermsFilter)this).Terms.HasAny()
+					   || ((ITermsFilter)this).Terms.OfType<string>().All(s => s.IsNullOrEmpty())
+					   || ((ITermsFilter)this).Terms.All(t => t == null);
 			}
 		}
 
@@ -40,7 +41,7 @@ namespace Nest
 		object ICustomJson.GetCustomJson()
 		{
 			var tf = ((ITermsFilter)this);
-			return this.FieldNameAsKeyFormat(tf.Field, tf.Terms, d=>d
+			return this.FieldNameAsKeyFormat(tf.Field, tf.Terms, d => d
 				.Add("execution", tf.Execution)
 			);
 		}

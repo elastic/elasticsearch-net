@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 using Newtonsoft.Json.Converters;
@@ -10,6 +11,8 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 
+	[JsonConverter(typeof(ReadAsTypeConverter<ScriptFilterDescriptor>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IScriptFilter : IFilterBase
 	{
 		[JsonProperty(PropertyName = "script")]

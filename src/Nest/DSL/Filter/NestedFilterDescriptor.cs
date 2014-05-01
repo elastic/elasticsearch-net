@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
@@ -9,6 +10,8 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeConverter<NestedFilterDescriptor<object>>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface INestedFilterDescriptor : IFilterBase
 	{
 		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
@@ -24,7 +27,6 @@ namespace Nest
 		string _Scope { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class NestedFilterDescriptor<T> : FilterBase, INestedFilterDescriptor where T : class
 	{
 		NestedScore? INestedFilterDescriptor._Score { get; set; }

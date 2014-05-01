@@ -10,7 +10,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CustomJsonConverter))]
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<NumericRangeFilterDescriptor<object>>,CustomJsonConverter>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface INumericRangeFilter : IFilterBase, ICustomJson
 	{
 		[JsonProperty("from")]
@@ -32,8 +33,6 @@ namespace Nest
 	/// Filters documents with fields that have values within a certain numeric range. Similar to range filter, except that it works only with numeric values
 	/// </summary>
 	/// <typeparam name="T">Type of document</typeparam>
-	[JsonConverter(typeof(CustomJsonConverter))]
-	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
 	public class NumericRangeFilterDescriptor<T> : FilterBase, INumericRangeFilter where T : class
 	{
 		object INumericRangeFilter.From { get; set;}

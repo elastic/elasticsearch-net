@@ -9,13 +9,13 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CustomJsonConverter))]
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<GeoShapeFilterDescriptor>, CustomJsonConverter>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoShapeBaseFilter : IFilterBase
 	{
 		PropertyPathMarker Field { get; set; }
 	}
 
-	[JsonConverter(typeof(CustomJsonConverter))]
 	public interface IGeoShapeFilter : IGeoShapeBaseFilter, ICustomJson
 	{
 		[JsonProperty("shape")]

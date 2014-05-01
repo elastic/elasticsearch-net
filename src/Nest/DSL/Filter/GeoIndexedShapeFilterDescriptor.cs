@@ -10,7 +10,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CustomJsonConverter))]
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<GeoIndexedShapeFilterDescriptor>, CustomJsonConverter>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoIndexedShapeFilter : IGeoShapeBaseFilter, ICustomJson
 	{
 
@@ -18,7 +19,6 @@ namespace Nest
 		GeoIndexedShapeVector IndexedShape { get; set; }
 	}
 
-	[JsonConverter(typeof(CustomJsonConverter))]
 	public class GeoIndexedShapeFilterDescriptor : FilterBase, IGeoIndexedShapeFilter
 	{
 		bool IFilterBase.IsConditionless

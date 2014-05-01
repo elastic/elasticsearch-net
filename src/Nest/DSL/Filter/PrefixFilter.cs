@@ -5,13 +5,13 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	
-	[JsonConverter(typeof(CustomJsonConverter))]
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<PrefixFilter>,CustomJsonConverter>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IPrefixFilter : IFilterBase, ICustomJson
 	{
 		PropertyPathMarker Field { get; set; }
 		string Prefix { get; set; }
 	}
-	[JsonConverter(typeof(CustomJsonConverter))]
 	public class PrefixFilter : FilterBase, IPrefixFilter
 	{
 		bool IFilterBase.IsConditionless { get { return ((IPrefixFilter)this).Field.IsConditionless() || ((IPrefixFilter)this).Prefix.IsNullOrEmpty(); } }

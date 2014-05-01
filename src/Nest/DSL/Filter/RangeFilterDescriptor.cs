@@ -10,7 +10,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CustomJsonConverter))]
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<RangeFilterDescriptor<object>>,CustomJsonConverter>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IRangeFilter : IFilterBase, ICustomJson
 	{
 		[JsonProperty("from")]
@@ -28,8 +29,6 @@ namespace Nest
 		PropertyPathMarker Field { get; set; }
 	}
 
-	[JsonConverter(typeof(CustomJsonConverter))]
-	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
 	public class RangeFilterDescriptor<T> : FilterBase, IRangeFilter where T : class
 	{
 		object IRangeFilter.From { get; set;}
