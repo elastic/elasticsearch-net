@@ -124,6 +124,7 @@
     <Compile Include="Domain\Alias\AliasRemoveDescriptor.cs" />
     <Compile Include="Domain\Alias\AliasRemoveOperation.cs" />
     <Compile Include="Domain\Alias\IAliasAction.cs" />
+    <Compile Include="Domain\Analysis\CharFilter\PatternReplaceCharFilter.cs" />
     <Compile Include="Domain\Bulk\MultiGetDoc.cs" />
     <Compile Include="Domain\Connection\ConnectionSettings.cs" />
     <Compile Include="Domain\Connection\IConnectionSettings.cs" />
