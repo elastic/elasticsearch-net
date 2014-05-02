@@ -13,7 +13,7 @@ namespace Nest
 
 	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<GeoBoundingBoxFilter>, CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGeoBoundingBoxFilter : IFilterBase, ICustomJson
+	public interface IGeoBoundingBoxFilter : IFilterBase, ICustomJson, ICustomJsonReader<GeoBoundingBoxFilter>
 	{
 		PropertyPathMarker Field { get; set; }
 		
@@ -52,6 +52,17 @@ namespace Nest
 			var location = new { top_left = gbf.TopLeft, bottom_right = gbf.BottomRight };
 			var dict = this.FieldNameAsKeyFormat(gbf.Field, location, d=>d.Add("type", gbf.GeoExecution));
 			return dict;
+		}
+
+		public GeoBoundingBoxFilter FromJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			var filter = new GeoBoundingBoxFilter();
+			var dict = base.ReadToDict(reader, serializer, filter);
+			if (dict.Count == 0) return filter;
+			var kv = dict.First();
+			var f = filter as IGeoBoundingBoxFilter;
+			f.Field = kv.Key;
+			return filter;
 		}
 	}
 }

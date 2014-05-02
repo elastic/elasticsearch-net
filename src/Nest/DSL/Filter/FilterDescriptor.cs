@@ -31,82 +31,82 @@ namespace Nest
 		string RawFilter { get; set; }
 		
 		[JsonProperty(PropertyName = "bool")]
-		IBoolFilter BoolFilterDescriptor { get; set; }
+		IBoolFilter Bool { get; set; }
 
 		[JsonProperty(PropertyName = "exists")]
-		IExistsFilter ExistsFilter { get; set; }
+		IExistsFilter Exists { get; set; }
 
 		[JsonProperty(PropertyName = "missing")]
-		IMissingFilter MissingFilter { get; set; }
+		IMissingFilter Missing { get; set; }
 
 		[JsonProperty(PropertyName = "ids")]
-		IIdsFilter IdsFilter { get; set; }
+		IIdsFilter Ids { get; set; }
 
 		[JsonProperty(PropertyName = "geo_bounding_box")]
-		IGeoBoundingBoxFilter GeoBoundingBoxFilter { get; set; }
+		IGeoBoundingBoxFilter GeoBoundingBox { get; set; }
 
 		[JsonProperty(PropertyName = "geo_distance")]
-		IGeoDistanceFilter GeoDistanceFilter { get; set; }
+		IGeoDistanceFilter GeoDistance { get; set; }
 
 		[JsonProperty(PropertyName = "geo_distance_range")]
-		IGeoDistanceRangeFilter GeoDistanceRangeFilter { get; set; }
+		IGeoDistanceRangeFilter GeoDistanceRange { get; set; }
 
 		[JsonProperty(PropertyName = "geo_polygon")]
-		IGeoPolygonFilter GeoPolygonFilter { get; set; }
+		IGeoPolygonFilter GeoPolygon { get; set; }
 
 		[JsonProperty(PropertyName = "geo_shape")]
-		IGeoShapeBaseFilter GeoShapeFilter { get; set; }
+		IGeoShapeBaseFilter GeoShape { get; set; }
 
 		[JsonProperty(PropertyName = "limit")]
-		ILimitFilter LimitFilter { get; set; }
+		ILimitFilter Limit { get; set; }
 
 		[JsonProperty(PropertyName = "type")]
-		ITypeFilter TypeFilter { get; set; }
+		ITypeFilter Type { get; set; }
 
 		[JsonProperty(PropertyName = "match_all")]
-		IMatchAllFilter MatchAllFilter { get; set; }
+		IMatchAllFilter MatchAll { get; set; }
 
 		[JsonProperty(PropertyName = "has_child")]
-		IHasChildFilter HasChildFilter { get; set; }
+		IHasChildFilter HasChild { get; set; }
 
 		[JsonProperty(PropertyName = "has_parent")]
-		IHasParentFilter HasParentFilter { get; set; }
+		IHasParentFilter HasParent { get; set; }
 
 		[JsonProperty(PropertyName = "numeric_range")]
-		INumericRangeFilter NumericRangeFilter { get; set; }
+		INumericRangeFilter NumericRange { get; set; }
 
 		[JsonProperty(PropertyName = "range")]
-		IRangeFilter RangeFilter { get; set; }
+		IRangeFilter Range { get; set; }
 
 		[JsonProperty(PropertyName = "prefix")]
-		IPrefixFilter PrefixFilter { get; set; }
+		IPrefixFilter Prefix { get; set; }
 
 		[JsonProperty(PropertyName = "term")]
-		ITermFilter TermFilter { get; set; }
+		ITermFilter Term { get; set; }
 
 		[JsonProperty(PropertyName = "terms")]
-		ITermsBaseFilter TermsFilter { get; set; }
+		ITermsBaseFilter Terms { get; set; }
 
 		[JsonProperty(PropertyName = "fquery")]
-		IQueryFilter QueryFilter { get; set; }
+		IQueryFilter Query { get; set; }
 
 		[JsonProperty(PropertyName = "and")]
-		IAndFilter AndFilter { get; set; }
+		IAndFilter And { get; set; }
 
 		[JsonProperty(PropertyName = "or")]
-		IOrFilter OrFilter { get; set; }
+		IOrFilter Or { get; set; }
 
 		[JsonProperty(PropertyName = "not")]
-		INotFilter NotFilter { get; set; }
+		INotFilter Not { get; set; }
 
 		[JsonProperty(PropertyName = "script")]
-		IScriptFilter ScriptFilter { get; set; }
+		IScriptFilter Script { get; set; }
 
 		[JsonProperty(PropertyName = "nested")]
-		INestedFilterDescriptor NestedFilter { get; set; }
+		INestedFilterDescriptor Nested { get; set; }
 
 		[JsonProperty(PropertyName = "regexp")]
-		IRegexpFilter RegexpFilter { get; set; }
+		IRegexpFilter Regexp { get; set; }
 	}
 
 	public class FilterDescriptorDescriptor<T> : BaseFilterDescriptor, IFilterDescriptor<T>
@@ -167,7 +167,7 @@ namespace Nest
 			var filter = new ExistsFilter();
 			((IExistsFilter)filter).Field = fieldDescriptor;
 			this.SetCacheAndName(filter);
-			return this.New(filter, f => f.ExistsFilter = filter);
+			return this.New(filter, f => f.Exists = filter);
 		}
 		/// <summary>
 		/// Filters documents where a specific field has a value in them.
@@ -177,7 +177,7 @@ namespace Nest
 			var filter = new ExistsFilter();
 			((IExistsFilter)filter).Field = field;
 			this.SetCacheAndName(filter);
-			return this.New(filter, f => f.ExistsFilter = filter);
+			return this.New(filter, f => f.Exists = filter);
 		}
 		/// <summary>
 		/// Filters documents where a specific field has no value in them.
@@ -187,7 +187,7 @@ namespace Nest
 			var filter = new MissingFilter();
 			((IMissingFilter)filter).Field = fieldDescriptor;
 			this.SetCacheAndName(filter);
-			return  this.New(filter, f => f.MissingFilter = filter);
+			return  this.New(filter, f => f.Missing = filter);
 		}
 		/// <summary>
 		/// Filters documents where a specific field has no value in them.
@@ -197,7 +197,7 @@ namespace Nest
 			var filter = new MissingFilter();
 			((IMissingFilter)filter).Field = field;
 			this.SetCacheAndName(filter);
-			return  this.New(filter, f => f.MissingFilter = filter);
+			return  this.New(filter, f => f.Missing = filter);
 		}
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
@@ -208,7 +208,7 @@ namespace Nest
 			var filter = new IdsFilter();
 			((IIdsFilter)filter).Values = values;
 			this.SetCacheAndName(filter);
-			return this.New(filter, f => f.IdsFilter = filter);
+			return this.New(filter, f => f.Ids = filter);
 		}
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
@@ -224,7 +224,7 @@ namespace Nest
 			((IIdsFilter)filter).Type = new [] { type };
 
 			this.SetCacheAndName(filter);
-			return this.New(filter, f => f.IdsFilter = filter);
+			return this.New(filter, f => f.Ids = filter);
 		}
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
@@ -240,7 +240,7 @@ namespace Nest
 			((IIdsFilter)filter).Type = types;
 			
 			this.SetCacheAndName(filter);
-			return  this.New(filter, f => f.IdsFilter = filter);
+			return  this.New(filter, f => f.Ids = filter);
 		}
 
 		/// <summary>
@@ -281,7 +281,7 @@ namespace Nest
 			filter.BottomRight = geoHashBottomRight;
 			filter.GeoExecution = type;
 			filter.Field = fieldDescriptor;
-			return this.New(filter, f => f.GeoBoundingBoxFilter = filter);
+			return this.New(filter, f => f.GeoBoundingBox = filter);
 		}
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
@@ -293,7 +293,7 @@ namespace Nest
 			filter.BottomRight = geoHashBottomRight;
 			filter.GeoExecution = type;
 			filter.Field = fieldName;
-			return this.New(filter, f => f.GeoBoundingBoxFilter = filter);
+			return this.New(filter, f => f.GeoBoundingBox = filter);
 		}
 
 		/// <summary>
@@ -320,7 +320,7 @@ namespace Nest
 
 			IGeoDistanceFilter ff = filter;
 			ff.Field = field;
-			return this.New(filter, f => f.GeoDistanceFilter = filter);
+			return this.New(filter, f => f.GeoDistance = filter);
 		}
 
 		/// <summary>
@@ -346,7 +346,7 @@ namespace Nest
 
 			IGeoDistanceRangeFilter ff = filter;
 			ff.Field = field;
-			return this.New(ff, f => f.GeoDistanceRangeFilter = ff);
+			return this.New(ff, f => f.GeoDistanceRange = ff);
 		}
 
 		/// <summary>
@@ -370,7 +370,7 @@ namespace Nest
 			if (filterDescriptor != null)
 				filterDescriptor(filter);
 			((IGeoShapeFilter)filter).Field = field;
-			return this.New(filter, f => f.GeoShapeFilter = filter);
+			return this.New(filter, f => f.GeoShape = filter);
 		}
 
 		/// <summary>
@@ -394,7 +394,7 @@ namespace Nest
 			if (filterDescriptor != null)
 				filterDescriptor(filter);
 			((IGeoIndexedShapeFilter)filter).Field = field;
-			return this.New(filter, f => f.GeoShapeFilter = filter);
+			return this.New(filter, f => f.GeoShape = filter);
 		}
 
 		/// <summary>
@@ -433,7 +433,7 @@ namespace Nest
 			IGeoPolygonFilter filter = new GeoPolygonFilter();
 			filter.Points = points;
 			filter.Field = fieldName;
-			return this.New(filter, f => f.GeoPolygonFilter = filter);
+			return this.New(filter, f => f.GeoPolygon = filter);
 		}
 
 		/// <summary>
@@ -447,7 +447,7 @@ namespace Nest
 			if (filterSelector != null)
 				filterSelector(filter);
 
-			return this.New(filter, f => f.HasChildFilter = filter);
+			return this.New(filter, f => f.HasChild = filter);
 		}
 
 		/// <summary>
@@ -461,7 +461,7 @@ namespace Nest
 			if (filterSelector != null)
 				filterSelector(filter);
 
-			return this.New(filter, f => f.HasParentFilter = filter);
+			return this.New(filter, f => f.HasParent = filter);
 		}
 
 		/// <summary>
@@ -472,7 +472,7 @@ namespace Nest
 			ILimitFilter filter = new LimitFilter {};
 			filter.Value = limit;
 
-			return  this.New(filter, f => f.LimitFilter = filter);
+			return  this.New(filter, f => f.Limit = filter);
 		}
 		/// <summary>
 		/// Filters documents matching the provided document / mapping type. 
@@ -483,7 +483,7 @@ namespace Nest
 		{
 			ITypeFilter filter = new TypeFilter {};
 			filter.Value = type;
-			return  this.New(filter, f => f.TypeFilter = filter);
+			return  this.New(filter, f => f.Type = filter);
 		}
 
 		/// <summary>
@@ -495,7 +495,7 @@ namespace Nest
 		{
 			ITypeFilter filter = new TypeFilter {};
 			filter.Value = type;
-			return this.New(filter, f=> f.TypeFilter = filter);
+			return this.New(filter, f=> f.Type = filter);
 		}
 
 		/// <summary>
@@ -504,7 +504,7 @@ namespace Nest
 		public BaseFilterDescriptor MatchAll()
 		{
 			var filter = new MatchAllFilter { };
-			return this.New(filter, f=> f.MatchAllFilter = filter);
+			return this.New(filter, f=> f.MatchAll = filter);
 		}
 		/// <summary>
 		/// Filters documents with fields that have values within a certain numeric range. 
@@ -517,7 +517,7 @@ namespace Nest
 			if (numericRangeSelector != null)
 				numericRangeSelector(filter);
 
-			return this.New(filter, f=>f.NumericRangeFilter = filter);
+			return this.New(filter, f=>f.NumericRange = filter);
 
 		}
 		/// <summary>
@@ -530,7 +530,7 @@ namespace Nest
 			if (rangeSelector != null)
 				rangeSelector(filter);
 			
-			return this.New(filter, f=>f.RangeFilter = filter);
+			return this.New(filter, f=>f.Range = filter);
 		}
 		/// <summary>
 		/// A filter allowing to define scripts as filters. 
@@ -541,7 +541,7 @@ namespace Nest
 			if (scriptSelector != null)
 				scriptSelector(descriptor);
 
-			return this.New(descriptor, f=>f.ScriptFilter = descriptor);
+			return this.New(descriptor, f=>f.Script = descriptor);
 		}
 		/// <summary>
 		/// Filters documents that have fields containing terms with a specified prefix 
@@ -552,7 +552,7 @@ namespace Nest
 			IPrefixFilter filter = new PrefixFilter();
 			filter.Field = fieldDescriptor;
 			filter.Prefix = prefix;
-			return this.New(filter, f=>f.PrefixFilter = filter);
+			return this.New(filter, f=>f.Prefix = filter);
 		}
 		/// <summary>
 		/// Filters documents that have fields containing terms with a specified prefix 
@@ -563,7 +563,7 @@ namespace Nest
 			IPrefixFilter filter = new PrefixFilter();
 			filter.Field = field;
 			filter.Prefix = prefix;
-			return this.New(filter, f=>f.PrefixFilter = filter);
+			return this.New(filter, f=>f.Prefix = filter);
 		}
 		/// <summary>
 		/// Filters documents that have fields that contain a term (not analyzed). 
@@ -574,7 +574,7 @@ namespace Nest
 			ITermFilter filter = new TermFilter();
 			filter.Field = fieldDescriptor;
 			filter.Value = term;
-			return this.New(filter, f=>f.TermFilter = filter);
+			return this.New(filter, f=>f.Term = filter);
 		}
 		/// <summary>
 		/// Filters documents that have fields that contain a term (not analyzed). 
@@ -585,7 +585,7 @@ namespace Nest
 			ITermFilter filter = new TermFilter();
 			filter.Field = fieldDescriptor;
 			filter.Value = term;
-			return this.New(filter, f=>f.TermFilter = filter);
+			return this.New(filter, f=>f.Term = filter);
 		}
 	
 		/// <summary>
@@ -599,7 +599,7 @@ namespace Nest
 			ITermFilter filter = new TermFilter();
 			filter.Field = field;
 			filter.Value = term;
-			return this.New(filter, f=>f.TermFilter = filter);
+			return this.New(filter, f=>f.Term = filter);
 
 		}
 		/// <summary>
@@ -611,7 +611,7 @@ namespace Nest
 			filter.Field = fieldDescriptor;
 			filter.Terms = terms.Cast<object>();
 			filter.Execution = Execution;
-			return this.New(filter, f=>f.TermsFilter = filter);
+			return this.New(filter, f=>f.Terms = filter);
 		}	
 		
 		/// <summary>
@@ -622,7 +622,7 @@ namespace Nest
 			ITermsFilter filter = new TermsFilter();
 			filter.Field = fieldDescriptor;
 			filter.Terms = terms;
-			return this.New(filter, f=>f.TermsFilter = filter);
+			return this.New(filter, f=>f.Terms = filter);
 		}
 
 		/// <summary>
@@ -633,7 +633,7 @@ namespace Nest
 			ITermsFilter filter = new TermsFilter();
 			filter.Field = field;
 			filter.Terms = terms ?? Enumerable.Empty<string>();
-			return this.New(filter, f=>f.TermsFilter = filter);
+			return this.New(filter, f=>f.Terms = filter);
 		}
 
 		/// <summary>
@@ -646,7 +646,7 @@ namespace Nest
 				filterDescriptor(filter);
 
 			((ITermsBaseFilter)filter).Field = fieldDescriptor;
-			return this.New(filter, f=>f.TermsFilter = filter);
+			return this.New(filter, f=>f.Terms = filter);
 		}
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
@@ -658,7 +658,7 @@ namespace Nest
 				filterDescriptor(filter);
 
 			((ITermsBaseFilter)filter).Field = field;
-			return this.New(filter, f=>f.TermsFilter = filter);
+			return this.New(filter, f=>f.Terms = filter);
 		}
 
 		/// <summary>
@@ -679,7 +679,7 @@ namespace Nest
 		{
 			var andFilter = new AndFilter();
 			((IAndFilter)andFilter).Filters = filtersDescriptor.Cast<IFilterDescriptor>().ToList();
-			return this.New(andFilter, f=>f.AndFilter = andFilter);
+			return this.New(andFilter, f=>f.And = andFilter);
 		}
 		/// <summary>
 		/// A filter that matches documents using OR boolean operator on other queries. 
@@ -702,7 +702,7 @@ namespace Nest
 		{
 			var orFilter = new OrFilter();
 			((IOrFilter)orFilter).Filters = filtersDescriptor.Cast<IFilterDescriptor>().ToList();
-			return this.New(orFilter, f=> f.OrFilter = orFilter);
+			return this.New(orFilter, f=> f.Or = orFilter);
 			
 		}
 		/// <summary>
@@ -720,7 +720,7 @@ namespace Nest
 				bf = selector(filter);
 
 			((INotFilter)notFilter).Filter = bf;
-			return this.New(notFilter, f=>f.NotFilter = notFilter);
+			return this.New(notFilter, f=>f.Not = notFilter);
 
 		}
 		/// <summary>
@@ -734,7 +734,7 @@ namespace Nest
 			if (booleanFilter != null)
 				booleanFilter(filter);
 
-			return this.New(filter, f=>f.BoolFilterDescriptor = filter);
+			return this.New(filter, f=>f.Bool = filter);
 
 		}
 		/// <summary>
@@ -749,7 +749,7 @@ namespace Nest
 				bq = querySelector(descriptor);
 
 			((IQueryFilter)filter).Query = bq;
-			return this.New(filter, f=>f.QueryFilter = filter);
+			return this.New(filter, f=>f.Query = filter);
 		}
 
 
@@ -765,7 +765,7 @@ namespace Nest
 			if (selector != null)
 				selector(filter);
 
-			return this.New(filter, f=>f.NestedFilter = filter);
+			return this.New(filter, f=>f.Nested = filter);
 		}
 
 		/// <summary>
@@ -778,7 +778,7 @@ namespace Nest
 			if (selector != null)
 				selector(filter);
 
-			return this.New(filter, f=>f.RegexpFilter = filter);
+			return this.New(filter, f=>f.Regexp = filter);
 		}
 
 		private FilterDescriptorDescriptor<T> CreateConditionlessFilterDescriptor(object filter, string type = null)

@@ -15,62 +15,62 @@ namespace Nest
 	public interface INestedFilterDescriptor : IFilterBase
 	{
 		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
-		NestedScore? _Score { get; set; }
+		NestedScore? Score { get; set; }
 
 		[JsonProperty("query")]
-		IQueryDescriptor _QueryDescriptor { get; set; }
+		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty("path")]
-		PropertyPathMarker _Path { get; set; }
+		PropertyPathMarker Path { get; set; }
 
 		[JsonProperty("_scope")]
-		string _Scope { get; set; }
+		string Scope { get; set; }
 	}
 
 	public class NestedFilterDescriptor<T> : FilterBase, INestedFilterDescriptor where T : class
 	{
-		NestedScore? INestedFilterDescriptor._Score { get; set; }
+		NestedScore? INestedFilterDescriptor.Score { get; set; }
 
-		IQueryDescriptor INestedFilterDescriptor._QueryDescriptor { get; set; }
+		IQueryDescriptor INestedFilterDescriptor.Query { get; set; }
 
-		PropertyPathMarker INestedFilterDescriptor._Path { get; set; }
+		PropertyPathMarker INestedFilterDescriptor.Path { get; set; }
 
-		string INestedFilterDescriptor._Scope { get; set; }
+		string INestedFilterDescriptor.Scope { get; set; }
 
 		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return ((INestedFilterDescriptor)this)._QueryDescriptor == null 
-					|| ((INestedFilterDescriptor)this)._QueryDescriptor.IsConditionless;
+				return ((INestedFilterDescriptor)this).Query == null 
+					|| ((INestedFilterDescriptor)this).Query.IsConditionless;
 			}
 		}
 
 		public NestedFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			((INestedFilterDescriptor)this)._QueryDescriptor = querySelector(q);
+			((INestedFilterDescriptor)this).Query = querySelector(q);
 			return this;
 		}
 
 		public NestedFilterDescriptor<T> Score(NestedScore score)
 		{
-			((INestedFilterDescriptor)this)._Score = score;
+			((INestedFilterDescriptor)this).Score = score;
 			return this;
 		}
 		public NestedFilterDescriptor<T> Path(string path)
 		{
-			((INestedFilterDescriptor)this)._Path = path;
+			((INestedFilterDescriptor)this).Path = path;
 			return this;
 		}
 		public NestedFilterDescriptor<T> Path(Expression<Func<T, object>> objectPath)
 		{
-			((INestedFilterDescriptor)this)._Path = objectPath;
+			((INestedFilterDescriptor)this).Path = objectPath;
 			return this;
 		}
 		public NestedFilterDescriptor<T> Scope(string scope)
 		{
-			((INestedFilterDescriptor)this)._Scope = scope;
+			((INestedFilterDescriptor)this).Scope = scope;
 			return this;
 		}
 	}

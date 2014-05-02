@@ -14,55 +14,55 @@ namespace Nest
 	public interface IHasParentFilter : IFilterBase
 	{
 		[JsonProperty("type")]
-		TypeNameMarker _Type { get; set; }
+		TypeNameMarker Type { get; set; }
 
 		[JsonProperty("_scope")]
-		string _Scope { get; set; }
+		string Scope { get; set; }
 
 		[JsonProperty("query")]
-		IQueryDescriptor _QueryDescriptor { get; set; }
+		IQueryDescriptor Query { get; set; }
 	}
 
 	public class HasParentFilterDescriptor<T> : FilterBase, IHasParentFilter where T : class
 	{
-		TypeNameMarker IHasParentFilter._Type { get; set; }
+		TypeNameMarker IHasParentFilter.Type { get; set; }
 
-		string IHasParentFilter._Scope { get; set;}
+		string IHasParentFilter.Scope { get; set;}
 		
-		IQueryDescriptor IHasParentFilter._QueryDescriptor { get; set; }
+		IQueryDescriptor IHasParentFilter.Query { get; set; }
 
 		bool IFilterBase.IsConditionless
 		{
 			get
 			{
 				var pf = ((IHasParentFilter)this);
-				return pf._QueryDescriptor == null 
-					|| pf._QueryDescriptor.IsConditionless 
-					|| pf._Type.IsNullOrEmpty();
+				return pf.Query == null 
+					|| pf.Query.IsConditionless 
+					|| pf.Type.IsNullOrEmpty();
 			}
 		}
 
 		public HasParentFilterDescriptor()
 		{
-			((IHasParentFilter)this)._Type = TypeNameMarker.Create<T>();
+			((IHasParentFilter)this).Type = TypeNameMarker.Create<T>();
 		}
 
 		public HasParentFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			((IHasParentFilter)this)._QueryDescriptor = querySelector(q);
+			((IHasParentFilter)this).Query = querySelector(q);
 			return this;
 		}
 
 		public HasParentFilterDescriptor<T> Scope(string scope)
 		{
-			((IHasParentFilter)this)._Scope = scope;
+			((IHasParentFilter)this).Scope = scope;
 			return this;
 		}
 
 		public HasParentFilterDescriptor<T> Type(string type)
 		{
-			((IHasParentFilter)this)._Type = type;
+			((IHasParentFilter)this).Type = type;
 			return this;
 		}
 	}

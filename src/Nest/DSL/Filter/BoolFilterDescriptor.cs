@@ -28,11 +28,11 @@ namespace Nest
 		
 		internal static IEnumerable<IFilterDescriptor> MergeShouldFilters(this IFilterDescriptor lbq, IFilterDescriptor rbq)
 		{
-			var lBoolDescriptor = lbq.BoolFilterDescriptor;
+			var lBoolDescriptor = lbq.Bool;
 			var lHasShouldFilters = lBoolDescriptor != null &&
 			  ((IBoolFilter)lBoolDescriptor).Should.HasAny();
 
-			var rBoolDescriptor = rbq.BoolFilterDescriptor;
+			var rBoolDescriptor = rbq.Bool;
 			var rHasShouldFilters = rBoolDescriptor != null &&
 			  ((IBoolFilter)rBoolDescriptor).Should.HasAny();
 

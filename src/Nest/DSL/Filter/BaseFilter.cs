@@ -23,57 +23,57 @@ namespace Nest
 		[JsonIgnore]
 		public virtual bool IsConditionless { get; internal set; }
 		
-		IBoolFilter IFilterDescriptor.BoolFilterDescriptor { get; set; }
+		IBoolFilter IFilterDescriptor.Bool { get; set; }
 		
-		IExistsFilter IFilterDescriptor.ExistsFilter { get; set; }
+		IExistsFilter IFilterDescriptor.Exists { get; set; }
 
-		IMissingFilter IFilterDescriptor.MissingFilter { get; set; }
+		IMissingFilter IFilterDescriptor.Missing { get; set; }
 
-		IIdsFilter IFilterDescriptor.IdsFilter { get; set; }
+		IIdsFilter IFilterDescriptor.Ids { get; set; }
 
-		IGeoBoundingBoxFilter IFilterDescriptor.GeoBoundingBoxFilter { get; set; }
+		IGeoBoundingBoxFilter IFilterDescriptor.GeoBoundingBox { get; set; }
 
-		IGeoDistanceFilter IFilterDescriptor.GeoDistanceFilter { get; set; }
+		IGeoDistanceFilter IFilterDescriptor.GeoDistance { get; set; }
 
-		IGeoDistanceRangeFilter IFilterDescriptor.GeoDistanceRangeFilter { get; set; }
+		IGeoDistanceRangeFilter IFilterDescriptor.GeoDistanceRange { get; set; }
 
-		IGeoPolygonFilter IFilterDescriptor.GeoPolygonFilter { get; set; }
+		IGeoPolygonFilter IFilterDescriptor.GeoPolygon { get; set; }
 
-		IGeoShapeBaseFilter IFilterDescriptor.GeoShapeFilter { get; set; }
+		IGeoShapeBaseFilter IFilterDescriptor.GeoShape { get; set; }
 
-		ILimitFilter IFilterDescriptor.LimitFilter { get; set; }
+		ILimitFilter IFilterDescriptor.Limit { get; set; }
 
-		ITypeFilter IFilterDescriptor.TypeFilter { get; set; }
+		ITypeFilter IFilterDescriptor.Type { get; set; }
 
-		IMatchAllFilter IFilterDescriptor.MatchAllFilter { get; set; }
+		IMatchAllFilter IFilterDescriptor.MatchAll { get; set; }
 
-		IHasChildFilter IFilterDescriptor.HasChildFilter { get; set; }
+		IHasChildFilter IFilterDescriptor.HasChild { get; set; }
 
-		IHasParentFilter IFilterDescriptor.HasParentFilter { get; set; }
+		IHasParentFilter IFilterDescriptor.HasParent { get; set; }
 
-		INumericRangeFilter IFilterDescriptor.NumericRangeFilter { get; set; }
+		INumericRangeFilter IFilterDescriptor.NumericRange { get; set; }
 
-		IRangeFilter IFilterDescriptor.RangeFilter { get; set; }
+		IRangeFilter IFilterDescriptor.Range { get; set; }
 
-		IPrefixFilter IFilterDescriptor.PrefixFilter { get; set; }
+		IPrefixFilter IFilterDescriptor.Prefix { get; set; }
 
-		ITermFilter IFilterDescriptor.TermFilter { get; set; }
+		ITermFilter IFilterDescriptor.Term { get; set; }
 
-		ITermsBaseFilter IFilterDescriptor.TermsFilter { get; set; }
+		ITermsBaseFilter IFilterDescriptor.Terms { get; set; }
 
-		IQueryFilter IFilterDescriptor.QueryFilter { get; set; }
+		IQueryFilter IFilterDescriptor.Query { get; set; }
 
-		IAndFilter IFilterDescriptor.AndFilter { get; set; }
+		IAndFilter IFilterDescriptor.And { get; set; }
 
-		IOrFilter IFilterDescriptor.OrFilter { get; set; }
+		IOrFilter IFilterDescriptor.Or { get; set; }
 
-		INotFilter IFilterDescriptor.NotFilter{ get; set; }
+		INotFilter IFilterDescriptor.Not{ get; set; }
 
-		IScriptFilter IFilterDescriptor.ScriptFilter { get; set; }
+		IScriptFilter IFilterDescriptor.Script { get; set; }
 
-		INestedFilterDescriptor IFilterDescriptor.NestedFilter { get; set; }
+		INestedFilterDescriptor IFilterDescriptor.Nested { get; set; }
 
-		IRegexpFilter IFilterDescriptor.RegexpFilter { get; set; }
+		IRegexpFilter IFilterDescriptor.Regexp { get; set; }
 		private static readonly IEnumerable<BaseFilterDescriptor> Empty = Enumerable.Empty<BaseFilterDescriptor>();
 
 		
@@ -138,29 +138,29 @@ namespace Nest
 			if (combined.Any(bf => bf.IsConditionless))
 				return combined.FirstOrDefault(bf => !bf.IsConditionless) ?? defaultFilter;
 
-			var leftBoolFilter = ((IFilterDescriptor)leftFilterDescriptor).BoolFilterDescriptor;
-			var rightBoolFilter = ((IFilterDescriptor)rightFilterDescriptor).BoolFilterDescriptor;
+			var leftBoolFilter = ((IFilterDescriptor)leftFilterDescriptor).Bool;
+			var rightBoolFilter = ((IFilterDescriptor)rightFilterDescriptor).Bool;
 		
 
 			var f = new BaseFilterDescriptor();
 			var fq = new BoolBaseFilterDescriptor();
 			var bfq = (IBoolFilter)fq;
 			bfq.Should = new[] { leftFilterDescriptor, rightFilterDescriptor };
-			((IFilterDescriptor)f).BoolFilterDescriptor = fq;
+			((IFilterDescriptor)f).Bool = fq;
 
 			//if neither the left nor the right side represent a bool filter join them
-			if (((IFilterDescriptor)leftFilterDescriptor).BoolFilterDescriptor == null && ((IFilterDescriptor)rightFilterDescriptor).BoolFilterDescriptor == null)
+			if (((IFilterDescriptor)leftFilterDescriptor).Bool == null && ((IFilterDescriptor)rightFilterDescriptor).Bool == null)
 			{
 				bfq.Should = leftFilterDescriptor.MergeShouldFilters(rightFilterDescriptor);
 				return f;
 			}
 			//if the left or right sight already is a bool filter determine join the non bool query side of the 
 			//of the operation onto the other.
-			if (((IFilterDescriptor)leftFilterDescriptor).BoolFilterDescriptor != null && ((IFilterDescriptor)rightFilterDescriptor).BoolFilterDescriptor == null && !leftFilterDescriptor.IsStrict)
+			if (((IFilterDescriptor)leftFilterDescriptor).Bool != null && ((IFilterDescriptor)rightFilterDescriptor).Bool == null && !leftFilterDescriptor.IsStrict)
 			{
 				JoinShouldOnSide(leftFilterDescriptor, rightFilterDescriptor, fq);
 			}
-			else if (((IFilterDescriptor)rightFilterDescriptor).BoolFilterDescriptor != null && ((IFilterDescriptor)leftFilterDescriptor).BoolFilterDescriptor == null && !rightFilterDescriptor.IsStrict)
+			else if (((IFilterDescriptor)rightFilterDescriptor).Bool != null && ((IFilterDescriptor)leftFilterDescriptor).Bool == null && !rightFilterDescriptor.IsStrict)
 			{
 				JoinShouldOnSide(rightFilterDescriptor, leftFilterDescriptor, fq);
 			}
@@ -188,7 +188,7 @@ namespace Nest
 			var fq = new BoolBaseFilterDescriptor();
 			((IBoolFilter)fq).MustNot = new[] { lbq };
 
-			((IFilterDescriptor)f).BoolFilterDescriptor = fq;
+			((IFilterDescriptor)f).Bool = fq;
 			return f;
 		}
 
@@ -212,8 +212,8 @@ namespace Nest
 			BaseFilterDescriptor rightFilterDescriptor, 
 			BaseFilterDescriptor[] combined)
 		{
-			var leftBoolFilter = ((IFilterDescriptor)leftFilterDescriptor).BoolFilterDescriptor;
-			var rightBoolFilter = ((IFilterDescriptor)rightFilterDescriptor).BoolFilterDescriptor;
+			var leftBoolFilter = ((IFilterDescriptor)leftFilterDescriptor).Bool;
+			var rightBoolFilter = ((IFilterDescriptor)rightFilterDescriptor).Bool;
 			//if neither side is already a boolfilter 
 			//  or if all boolfilters are strict.
 			//  or if one side is strict and the other is null
@@ -234,7 +234,7 @@ namespace Nest
 			//if the target is not strict return
 			if (!targetFilterDescriptor.IsStrict) return null;
 
-			IBoolFilter mergeBoolFilter = ((IFilterDescriptor)mergeFilterDescriptor).BoolFilterDescriptor;
+			IBoolFilter mergeBoolFilter = ((IFilterDescriptor)mergeFilterDescriptor).Bool;
 
 			return CreateReturnFilter((returnFilter, returnBoolFilter) =>
 			{
@@ -250,8 +250,8 @@ namespace Nest
 
 		private static BaseFilterDescriptor SingleSideAndMerge(BaseFilterDescriptor targetFilterDescriptor, BaseFilterDescriptor mergeFilterDescriptor)
 		{
-			var targetBoolFilter = ((IFilterDescriptor)targetFilterDescriptor).BoolFilterDescriptor;
-			var mergeBoolFilter = ((IFilterDescriptor)mergeFilterDescriptor).BoolFilterDescriptor;
+			var targetBoolFilter = ((IFilterDescriptor)targetFilterDescriptor).Bool;
+			var mergeBoolFilter = ((IFilterDescriptor)mergeFilterDescriptor).Bool;
 
 			if (targetBoolFilter == null) return null;
 
@@ -282,7 +282,7 @@ namespace Nest
 		{
 			var returnFilter = new BaseFilterDescriptor();
 			var returnBoolFilter = new BoolBaseFilterDescriptor() { };
-			((IFilterDescriptor)returnFilter).BoolFilterDescriptor = returnBoolFilter;
+			((IFilterDescriptor)returnFilter).Bool = returnBoolFilter;
 			if (modify != null)
 			{
 				modify(returnFilter, returnBoolFilter);
