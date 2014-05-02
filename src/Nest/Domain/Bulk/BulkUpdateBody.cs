@@ -18,5 +18,8 @@ namespace Nest
 		
 		[JsonProperty(PropertyName = "upsert")]
 		internal object _Upsert { get; set; }
+
+		[JsonProperty(PropertyName = "doc_as_upsert")]
+		public bool? _DocAsUpsert { get; set; }
 	}
 }

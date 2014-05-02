@@ -41,8 +41,8 @@ namespace Elasticsearch.Net.Connection
 					"NEST {0} {1} ({2}):\r\n{3}"
 					, _result.RequestMethod
 					, _result.RequestUrl
-					, _stopwatch.Elapsed.ToString()
-					, _result.ToString()
+					, _stopwatch.Elapsed
+					, _result
 				);
 			}
 			else

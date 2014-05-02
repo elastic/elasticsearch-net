@@ -20,7 +20,7 @@ namespace Nest
 		internal string _Script { get; set; }
 		internal Dictionary<string, object> _Params { get; set; }
 		internal object _Upsert { get; set; }
-
+		internal bool? _DocAsUpsert { get; set; }
 
 		internal override object GetBody()
 		{
@@ -29,7 +29,8 @@ namespace Nest
 				_Document = this._Document,
 				_Script = this._Script,
 				_Params = this._Params,
-				_Upsert = this._Upsert
+				_Upsert = this._Upsert,
+				_DocAsUpsert = this._DocAsUpsert
 			};
 		}
 
@@ -106,7 +107,11 @@ namespace Nest
 			this._Document = @object;
 			return this;
 		}
-
+		public BulkUpdateDescriptor<T, K> DocAsUpsert(bool docAsUpsert = true)
+		{
+			this._DocAsUpsert = docAsUpsert;
+			return this;
+		}
 		public BulkUpdateDescriptor<T, K> Script(string script)
 		{
 			script.ThrowIfNull("script");
