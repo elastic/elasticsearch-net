@@ -83,7 +83,7 @@ namespace Nest.Tests.Unit.Search.Suggest
 			var json = TestElasticClient.Serialize(completionSuggestDescriptor);
 
 			var expected = @"{
-                              fuzzy"": {
+                              ""fuzzy"": {
                                 edit_distance: 2,
                                 transpositions: false,
                                 min_length: 5,

@@ -59,37 +59,37 @@ namespace Nest.Tests.Integration.Reproduce
 
 		}
 
-        [Test]
-        public void IndexWithDashesAreNotStripped()
-        {
-            var index = ElasticsearchConfiguration.NewUniqueIndexName() + "-dashes";
-            var x = this._client.CreateIndex(index);
-            x.Acknowledged.Should().BeTrue();
-            var alias = ElasticsearchConfiguration.NewUniqueIndexName() + "-dashes-alias";
-            var aliasResult = this._client.Alias(a => a.Add(aa => aa.Index(index).Alias(alias)));
-            aliasResult.IsValid.Should().BeTrue();
-            aliasResult.Acknowledged.Should().BeTrue();
+		[Test]
+		public void IndexWithDashesAreNotStripped()
+		{
+			var index = ElasticsearchConfiguration.NewUniqueIndexName() + "-dashes";
+			var x = this._client.CreateIndex(index);
+			x.Acknowledged.Should().BeTrue();
+			var alias = ElasticsearchConfiguration.NewUniqueIndexName() + "-dashes-alias";
+			var aliasResult = this._client.Alias(a => a.Add(aa => aa.Index(index).Alias(alias)));
+			aliasResult.IsValid.Should().BeTrue();
+			aliasResult.Acknowledged.Should().BeTrue();
 
-            var elasticsearchClient = new ElasticsearchClient(ElasticsearchConfiguration.Settings());
-            var dynamicResult = elasticsearchClient.IndicesGetAliasForAll(alias);
-            dynamicResult.Response.ContainsKey(index).Should().BeTrue();
-        }
+			var elasticsearchClient = new ElasticsearchClient(ElasticsearchConfiguration.Settings());
+			var dynamicResult = elasticsearchClient.IndicesGetAliasForAll(alias);
+			dynamicResult.Response.ContainsKey(index).Should().BeTrue();
+		}
 
-        [Test]
-        public void IndexWithDashesAreNotStripped2()
-        {
-            var index = ElasticsearchConfiguration.NewUniqueIndexName() + "-dashes";
-            var x = this._client.CreateIndex(index);
-            x.Acknowledged.Should().BeTrue();
-            var alias = ElasticsearchConfiguration.NewUniqueIndexName() + "-dashes-alias";
-            var aliasResult = this._client.Alias(a => a.Add(aa => aa.Index(index).Alias(alias)));
-            aliasResult.IsValid.Should().BeTrue();
-            aliasResult.Acknowledged.Should().BeTrue();
+		[Test]
+		public void IndexWithDashesAreNotStripped2()
+		{
+			var index = ElasticsearchConfiguration.NewUniqueIndexName() + "-dashes";
+			var x = this._client.CreateIndex(index);
+			x.Acknowledged.Should().BeTrue();
+			var alias = ElasticsearchConfiguration.NewUniqueIndexName() + "-dashes-alias";
+			var aliasResult = this._client.Alias(a => a.Add(aa => aa.Index(index).Alias(alias)));
+			aliasResult.IsValid.Should().BeTrue();
+			aliasResult.Acknowledged.Should().BeTrue();
 
-            var elasticsearchClient = new ElasticsearchClient(ElasticsearchConfiguration.Settings());
-            var dynamicResult = elasticsearchClient.IndicesGetAlias(alias);
-            dynamicResult.Response.ContainsKey(index).Should().BeTrue();
-        }
+			var elasticsearchClient = new ElasticsearchClient(ElasticsearchConfiguration.Settings());
+			var dynamicResult = elasticsearchClient.IndicesGetAlias(alias);
+			dynamicResult.Response.ContainsKey(index).Should().BeTrue();
+		}
 
 
 	}
