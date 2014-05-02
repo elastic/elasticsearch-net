@@ -36,7 +36,7 @@ namespace Nest.Resolvers.Writers {
             {
                 this._jsonWriter.WritePropertyName("type");
                 string numericType = Enum.GetName(typeof (NumericType), att.NumericType);
-                this._jsonWriter.WriteValue(numericType.ToLower());
+                this._jsonWriter.WriteValue(numericType.ToLowerInvariant());
             }
             else
             {
@@ -129,7 +129,7 @@ namespace Nest.Resolvers.Writers {
                 {
                     this._jsonWriter.WritePropertyName("type");
                     string numericType = Enum.GetName(typeof (NumericType), att.NumericType);
-                    this._jsonWriter.WriteValue(numericType.ToLower());
+                    this._jsonWriter.WriteValue(numericType.ToLowerInvariant());
                 }
                 else
                 {

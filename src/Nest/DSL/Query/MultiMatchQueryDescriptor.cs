@@ -153,7 +153,7 @@ namespace Nest
 
 		public MultiMatchQueryDescriptor<T> Type(TextQueryType type)
 		{
-			this._Type = type.ToString().ToLower();
+			this._Type = type.ToString().ToLowerInvariant();
 			return this;
 		}
 	}

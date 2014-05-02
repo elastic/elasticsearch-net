@@ -36,7 +36,7 @@ namespace Nest.Resolvers.Converters
 			if (v == null)
 				return null;
 
-			var sv = v.ToString().ToLower();
+			var sv = v.ToString().ToLowerInvariant();
 			switch (sv)
 			{
 				case "false":

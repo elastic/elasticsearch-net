@@ -18,7 +18,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 				case "list":
 					return "params string[]";
 				case "number":
-					return new [] {"boost", "percen"}.Any(s=>paramName.ToLower().Contains(s)) 
+					return new [] {"boost", "percen"}.Any(s=>paramName.ToLowerInvariant().Contains(s)) 
 						? "double" : "int";
 				case "time":
 				case "duration":

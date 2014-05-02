@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Search
 						""query"" : {
 						  ""fuzzy"" : { 
 							""followers.firstName"" : {
-								""value"" : """ + this._LookFor.ToLower() + @"x"",
+								""value"" : """ + this._LookFor.ToLowerInvariant() + @"x"",
 								""boost"" : 1.0,
 								""min_similarity"" : 0.5,
 								""prefix_length"" : 0

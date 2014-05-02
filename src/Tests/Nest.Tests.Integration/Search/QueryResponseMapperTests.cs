@@ -89,7 +89,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void BoolQuery()
 		{
-			var lookFor = this._LookFor.ToLower();
+			var lookFor = this._LookFor.ToLowerInvariant();
 			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						""bool"" : {
@@ -122,7 +122,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void BoostingQuery()
 		{
-			var boost2nd = NestTestData.Data.ToList()[2].Followers.First().FirstName.ToLower();
+			var boost2nd = NestTestData.Data.ToList()[2].Followers.First().FirstName.ToLowerInvariant();
 			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						""boosting"" : {
@@ -133,7 +133,7 @@ namespace Nest.Tests.Integration.Search
 							},
 							""negative"" : {
 								""term"" : {
-									""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
+									""followers.firstName"" : """ + this._LookFor.ToLowerInvariant() + @"""
 								}
 							},
 							""negative_boost"" : 0.2
@@ -153,7 +153,7 @@ namespace Nest.Tests.Integration.Search
 						""constant_score"" : {
 							""filter"" : {
 								""term"" : {
-									""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
+									""followers.firstName"" : """ + this._LookFor.ToLowerInvariant() + @"""
 								}
 							},
 							""boost"" : 1.2
@@ -165,7 +165,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void DismaxQuery()
 		{
-			var boost2nd = NestTestData.Data.ToList()[2].Followers.First().FirstName.ToLower();
+			var boost2nd = NestTestData.Data.ToList()[2].Followers.First().FirstName.ToLowerInvariant();
 
 
 			var queryResults = this.SearchRaw<ElasticsearchProject>(
@@ -181,7 +181,7 @@ namespace Nest.Tests.Integration.Search
 								},
 								{
 									""term"" : {
-										""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
+										""followers.firstName"" : """ + this._LookFor.ToLowerInvariant() + @"""
 									}
 								}
 							]
@@ -199,7 +199,7 @@ namespace Nest.Tests.Integration.Search
 						""filtered"" : {
 							""query"" : {
 								""term"" : {
-									""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
+									""followers.firstName"" : """ + this._LookFor.ToLowerInvariant() + @"""
 								}
 							},
 							""filter"" : {
@@ -219,7 +219,7 @@ namespace Nest.Tests.Integration.Search
 				@" { ""query"" : {
 						""fuzzy_like_this"" : {
 							""fields"" : [""_all""],
-							""like_text"" : """ + this._LookFor.ToLower() + @"x"",
+							""like_text"" : """ + this._LookFor.ToLowerInvariant() + @"x"",
 							""max_query_terms"" : 12
 						}
 					} }"
@@ -233,7 +233,7 @@ namespace Nest.Tests.Integration.Search
 				@" { ""query"" : {
 						 ""fuzzy_like_this_field"" : {
 							""followers.firstName"" : {
-								""like_text"" : """ + this._LookFor.ToLower() + @"x"",
+								""like_text"" : """ + this._LookFor.ToLowerInvariant() + @"x"",
 								""max_query_terms"" : 12
 							}
 						}
@@ -247,7 +247,7 @@ namespace Nest.Tests.Integration.Search
 			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""fuzzy"" : {
-							""followers.firstName"" : """ + this._LookFor.ToLower() + @"x""
+							""followers.firstName"" : """ + this._LookFor.ToLowerInvariant() + @"x""
 						}
 					} }"
 			);
@@ -262,7 +262,7 @@ namespace Nest.Tests.Integration.Search
 				@" { ""query"" : {
 						  ""fuzzy"" : { 
 							""followers.firstName"" : {
-								""value"" : """ + this._LookFor.ToLower() + @"x"",
+								""value"" : """ + this._LookFor.ToLowerInvariant() + @"x"",
 								""boost"" : 1.0,
 								""min_similarity"" : 0.5,
 								""prefix_length"" : 0
@@ -295,7 +295,7 @@ namespace Nest.Tests.Integration.Search
 				@" { ""query"" : {
 						""more_like_this"" : {
 							""fields"" : [""_all""],
-							""like_text"" : """ + this._LookFor.ToLower() + @""",
+							""like_text"" : """ + this._LookFor.ToLowerInvariant() + @""",
 							""max_query_terms"" : 12,
 							""min_doc_freq"" : 1,
 							""min_term_freq"" : 1
@@ -311,7 +311,7 @@ namespace Nest.Tests.Integration.Search
 				@" { ""query"" : {
 						 ""more_like_this_field"" : {
 							""followers.firstName"" : {
-								""like_text"" : """ + this._LookFor.ToLower() + @""",
+								""like_text"" : """ + this._LookFor.ToLowerInvariant() + @""",
 								""min_doc_freq"" : 1,
 								""min_term_freq"" : 1,
 								""max_query_terms"" : 12
@@ -327,7 +327,7 @@ namespace Nest.Tests.Integration.Search
 			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""prefix"" : {
-							""followers.firstName"" : """ + this._LookFor.ToLower().Substring(0, 4) + @"""
+							""followers.firstName"" : """ + this._LookFor.ToLowerInvariant().Substring(0, 4) + @"""
 						}
 					} }"
 			);
@@ -339,7 +339,7 @@ namespace Nest.Tests.Integration.Search
 			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""prefix"" : {
-							""followers.firstName"" : { ""value"" : """ + this._LookFor.ToLower().Substring(0, 4) + @""", ""boost"" : 1.2 }
+							""followers.firstName"" : { ""value"" : """ + this._LookFor.ToLowerInvariant().Substring(0, 4) + @""", ""boost"" : 1.2 }
 						}
 					} }"
 			);
@@ -403,7 +403,7 @@ namespace Nest.Tests.Integration.Search
 			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""term"" : {
-							""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
+							""followers.firstName"" : """ + this._LookFor.ToLowerInvariant() + @"""
 						}
 					} }"
 			);
@@ -417,7 +417,7 @@ namespace Nest.Tests.Integration.Search
 			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""term"" : {
-							""followers.firstName"" : { ""value"" : """ + this._LookFor.ToLower() + @""", ""boost"" : 2.0 }
+							""followers.firstName"" : { ""value"" : """ + this._LookFor.ToLowerInvariant() + @""", ""boost"" : 2.0 }
 						}
 					} }"
 			);
@@ -429,8 +429,8 @@ namespace Nest.Tests.Integration.Search
 		public void TermsQuery()
 		{
 			var firstFollower = NestTestData.Data.First().Followers.First();
-			var firstName = firstFollower.FirstName.ToLower();
-			var lastName = firstFollower.LastName.ToLower();
+			var firstName = firstFollower.FirstName.ToLowerInvariant();
+			var lastName = firstFollower.LastName.ToLowerInvariant();
 
 			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
@@ -448,7 +448,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void WildcardQuery()
 		{
-			var wildcard = this._LookFor.ToLower().Substring(0, this._LookFor.Length - 1).Replace("a", "?") + "*";
+			var wildcard = this._LookFor.ToLowerInvariant().Substring(0, this._LookFor.Length - 1).Replace("a", "?") + "*";
 			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""wildcard"" : {
@@ -463,7 +463,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void WildcardExtendedQuery()
 		{
-			var wildcard = this._LookFor.ToLower().Substring(0, this._LookFor.Length - 1).Replace("a", "?") + "*";
+			var wildcard = this._LookFor.ToLowerInvariant().Substring(0, this._LookFor.Length - 1).Replace("a", "?") + "*";
 			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""wildcard"" : {
@@ -480,7 +480,7 @@ namespace Nest.Tests.Integration.Search
 		{
 			//arrange
 			var firstFollower = NestTestData.Data.First().Followers.First();
-			var firstName = firstFollower.FirstName.ToLower();
+			var firstName = firstFollower.FirstName.ToLowerInvariant();
 			string query = "{\"query\":{\"query_string\":{\"default_field\":\"_all\",\"query\":\"pork\"}},\"highlight\":{\"pre_tags\":[\"<span class=\\\"searchTerm\\\">\"],\"post_tags\":[\"</span>\"],\"fields\":{\"content\":{\"fragment_size\":150,\"number_of_fragments\":3}}}}";
 
 			//act

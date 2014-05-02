@@ -111,7 +111,7 @@ namespace Nest.Tests.Integration.Indices
 				Assert.True(r.Settings.Analysis.Analyzers.ContainsKey("swedishlanguage"));
 				var languageAnalyser = r.Settings.Analysis.Analyzers["swedishlanguage"] as LanguageAnalyzer;
 				Assert.NotNull(languageAnalyser);
-				Assert.AreEqual(Language.Swedish.ToString().ToLower(), languageAnalyser.Type);
+				Assert.AreEqual(Language.Swedish.ToString().ToLowerInvariant(), languageAnalyser.Type);
 				Assert.NotNull(languageAnalyser.StopWords);
 				Assert.AreEqual(2, languageAnalyser.StopWords.Count());
 				Assert.True(languageAnalyser.StopWords.Contains("word1"));

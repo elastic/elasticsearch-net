@@ -182,7 +182,7 @@ namespace Elasticsearch.Net.Connection
 			//WebRequest won't send Content-Length: 0 for empty bodies
 			//which goes against RFC's and might break i.e IIS when used as a proxy.
 			//see: https://github.com/elasticsearch/elasticsearch-net/issues/562
-			var m = method.ToLower();
+			var m = method.ToLowerInvariant();
 			if (m != "head" && m != "get" && (data == null || data.Length == 0))
 				myReq.ContentLength = 0;
 

@@ -67,7 +67,7 @@ namespace Nest
 
 		public TermSuggestDescriptor<T> SuggestMode(SuggestMode mode)
 		{
-			this._SuggestMode = Enum.GetName(typeof(SuggestMode), mode).ToLower();
+			this._SuggestMode = Enum.GetName(typeof(SuggestMode), mode).ToLowerInvariant();
 			return this;
 		}
 

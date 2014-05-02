@@ -63,7 +63,7 @@ namespace Profiling.Indexing
 
 		private static double RunTest<T>(int port, int? messages = null) where T : ITester
 		{
-			string type = typeof(T).Name.ToLower();
+			string type = typeof(T).Name.ToLowerInvariant();
 			Console.WriteLine("Starting {0} test", type);
 
 			// Recreate index up-front, so this process doesn't interfere with perf figures

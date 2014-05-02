@@ -90,7 +90,7 @@ namespace Nest
 			if (!defaultIndex.IsNullOrEmpty())
 				this.SetDefaultIndex(defaultIndex);
 			
-			this._defaultTypeNameInferrer = (t => t.Name.ToLower()); 
+			this._defaultTypeNameInferrer = (t => t.Name.ToLowerInvariant()); 
 			this._defaultPropertyNameInferrer = (p => p.ToCamelCase()); 
 			this._defaultIndices = new FluentDictionary<Type, string>();
 			this._defaultTypeNames = new FluentDictionary<Type, string>();
@@ -150,7 +150,7 @@ namespace Nest
 		private string LowerCaseAndPluralizeTypeNameInferrer(Type type)
 		{
 			type.ThrowIfNull("type");
-			return Inflector.MakePlural(type.Name).ToLower();
+			return Inflector.MakePlural(type.Name).ToLowerInvariant();
 		}
 
 		/// <summary>

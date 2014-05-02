@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration.Core
 			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""fuzzy"" : {
-							""followers.firstName"" : """ + NestTestData.Data.First().Followers.First().FirstName.ToLower() + @"x""
+							""followers.firstName"" : """ + NestTestData.Data.First().Followers.First().FirstName.ToLowerInvariant() + @"x""
 						}
 					} }"
 			);
