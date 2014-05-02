@@ -54,7 +54,7 @@ namespace Nest.Tests.Integration.Indices
 
 			settings.Analysis.CharFilters.Add("char1", new HtmlStripCharFilter());
 			settings.Analysis.CharFilters.Add("char2", new MappingCharFilter{ Mappings = new []{"ph=>f", "qu=>q"}});
-
+            settings.Analysis.CharFilters.Add("char3", new PatternReplaceCharFilter { Pattern = "sample(.*)", Replacement = "replacedSample $1" });
 			settings.Analysis.TokenFilters.Add("tokenfilter1", new EdgeNGramTokenFilter());
 			settings.Analysis.TokenFilters.Add("tokenfilter2", new SnowballTokenFilter());
 
@@ -121,7 +121,7 @@ namespace Nest.Tests.Integration.Indices
 				Assert.True(languageAnalyser.StemExclusionList.Contains("stem2"));
 			}
 
-			Assert.AreEqual(2, r.Settings.Analysis.CharFilters.Count);
+			Assert.AreEqual(3, r.Settings.Analysis.CharFilters.Count);
 			{ // assert char filters
 				Assert.True(r.Settings.Analysis.CharFilters.ContainsKey("char1"));
 				var filter1 = r.Settings.Analysis.CharFilters["char1"] as HtmlStripCharFilter;
@@ -132,6 +132,10 @@ namespace Nest.Tests.Integration.Indices
 				Assert.AreEqual(2, filter2.Mappings.Count());
 				Assert.True(filter2.Mappings.Contains("ph=>f"));
 				Assert.True(filter2.Mappings.Contains("qu=>q"));
+                var filter3 = r.Settings.Analysis.CharFilters["char3"] as PatternReplaceCharFilter;
+                Assert.NotNull(filter3);
+                Assert.AreEqual("sample(.*)", filter3.Pattern);
+                Assert.AreEqual("replacedSample $1", filter3.Replacement);
 			}
 
 			Assert.AreEqual(2, r.Settings.Analysis.TokenFilters.Count);
