@@ -110,8 +110,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>IF NOT EXIST "$(SolutionDir)..\build\keys\keypair.snk" (CD "$(SolutionDir).." &amp;&amp; "build.bat" CreateKeysIfAbsent &amp;&amp; CD %25~dp0)
-</PreBuildEvent>
+    <!--<PreBuildEvent>IF NOT EXIST "$(SolutionDir)..\build\keys\keypair.snk" (CD "$(SolutionDir).." &amp;&amp; "build.bat" CreateKeysIfAbsent &amp;&amp; CD %25~dp0)
+</PreBuildEvent>-->
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
