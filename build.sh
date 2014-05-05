@@ -1,7 +1,8 @@
 NUGET="build/tools/nuget/nuget.exe"
 FAKE="build/tools/FAKE/tools/Fake.exe"
 NUNIT="build/tools/NUnit.Runners/tools/nunit-console.exe"
-
+FSHARPCLI="build/tools/Fsharp.Formatting.CommandTool/Fsharp.Formatting.CommandTool.nupkg"
+SOURCELINK="build/tools/SourceLink.Fake/SourceLink.Fake.nupkg"
 
 #we need nuget to install tools locally
 if [[ ! -f "$NUGET" ]]; then
@@ -22,33 +23,15 @@ if [[ ! -f "$NUNIT" ]]; then
     mono --runtime=v4.0 "$NUGET" "install" "NUnit.Runners" "-OutputDirectory" "build/tools" "-ExcludeVersion" "-Prerelease"
 fi
 
-# we need wintersmith to build our documentation which in turn needs npm/node
-# installing and calling this locally so that yours and CI's systems do not need to be configured prior to running build.bat
-#if not exist build\tools\Node.js\node.exe (
-#    ECHO Local node not found.. Installing..
-#    "build\tools\nuget\nuget.exe" "install" "node.js" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
-#)
-#if not exist build\tools\Npm\node_modules\npm\cli.js (
-#    ECHO Local npm not found.. Installing..
-#    "build\tools\nuget\nuget.exe" "install" "npm" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
-#)
-#if not exist build\tools\node_modules\wintersmith\bin\wintersmith (
-#    ECHO wintersmith not found.. Installing.. 
-#    cd build\tools
-#
-#    "Node.js\node.exe" "Npm\node_modules\npm\cli.js" install wintersmith
-#
-#    cd ..\..
-#)
+if [[ ! -f "$FSHARPCLI" ]]; then
+    echo Fsharp formatting commandtool not found... Installing..
+    mono --runtime=v4.0 "$NUGET" install FSharp.Formatting.CommandTool -OutputDirectory build/tools -ExcludeVersion -Prerelease 
+fi
+if [[ ! -f "$SOURCELINK" ]]; then
+    echo SourceLink not found.. installing
+    mono --runtime=v4.0 "$NUGET" install SourceLink.Fake -OutputDirectory build/tools -ExcludeVersion 
+fi
 
-
-#SET TARGET="Build"
-#SET VERSION="0.1.0"
-#IF NOT [%1]==[] (set TARGET="%1")
-#IF NOT [%2]==[] (set VERSION="%2")
-
-mono --runtime=v4.0 "$NUGET" install FSharp.Formatting.CommandTool -OutputDirectory build/tools -ExcludeVersion -Prerelease 
-mono --runtime=v4.0 "$NUGET" install SourceLink.Fake -OutputDirectory build/tools -ExcludeVersion 
 #workaround assembly resolution issues in build.fsx
 export FSHARPI=`which fsharpi`
 cat - > fsharpi <<"EOF"

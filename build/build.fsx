@@ -19,8 +19,6 @@ Target "Clean" (fun _ ->
     CleanDir buildDir
 )
 
-
-
 Target "BuildApp" (fun _ ->
     let binDirs = !! "src/**/bin/**"
                   |> Seq.map DirectoryName
