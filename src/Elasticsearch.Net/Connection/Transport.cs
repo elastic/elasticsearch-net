@@ -230,7 +230,7 @@ namespace Elasticsearch.Net.Connection
 		private ElasticsearchResponse<T> RetryRequest<T>(TransportRequestState<T> requestState, Uri baseUri, int retried, Exception e = null)
 		{
 			var maxRetries = this.GetMaximumRetries(requestState.RequestConfiguration);
-			var exceptionMessage = MaxRetryExceptionMessage.F(requestState.Method, requestState.Path.IsNullOrEmpty() ? "/" : "", retried);
+			var exceptionMessage = MaxRetryExceptionMessage.F(requestState.Method, requestState.Path.IsNullOrEmpty() ? "/" : requestState.Path, retried);
 
 			this._connectionPool.MarkDead(baseUri, this._configurationValues.DeadTimeout, this._configurationValues.MaxDeadTimeout);
 
