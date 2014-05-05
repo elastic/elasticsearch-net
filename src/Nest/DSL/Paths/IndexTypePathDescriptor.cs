@@ -70,8 +70,8 @@ namespace Nest
 			if (this._Type == null)
 				throw new DslException("Type() not specified");
 
-			var index = new ElasticInferrer(settings).IndexName(this._Index); 
-			var type = new ElasticInferrer(settings).TypeName(this._Type); 
+			var index = inferrer.IndexName(this._Index); 
+			var type = inferrer.TypeName(this._Type); 
 			var pathInfo = new ElasticsearchPathInfo<TParameters>()
 			{
 				Index = index,
