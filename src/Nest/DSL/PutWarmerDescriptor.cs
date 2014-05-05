@@ -31,7 +31,7 @@ namespace Nest
 
 		ElasticsearchPathInfo<PutWarmerRequestParameters> IPathInfo<PutWarmerRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<PutWarmerRequestParameters>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
 
 			return pathInfo;

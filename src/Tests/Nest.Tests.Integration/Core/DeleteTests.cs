@@ -12,7 +12,7 @@ namespace Nest.Tests.Integration.Core
 	[TestFixture]
 	public class DeleteTests : IntegrationTests
 	{
-		private void ResetIndexes()
+		protected override void ResetIndexes()
 		{
 			IntegrationSetup.TearDown();
 			IntegrationSetup.Setup();

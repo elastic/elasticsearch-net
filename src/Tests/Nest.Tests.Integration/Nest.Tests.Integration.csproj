@@ -82,9 +82,6 @@
     <Compile Include="..\..\Elasticsearch.Net\Extensions\StringExtensions.cs">
       <Link>LinkedExtensions\StringExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\Elasticsearch.Net\Extensions\TaskExtensions.cs">
-      <Link>LinkedExtensions\TaskExtensions.cs</Link>
-    </Compile>
     <Compile Include="..\..\Elasticsearch.Net\Extensions\TypeExtensions.cs">
       <Link>LinkedExtensions\TypeExtensions.cs</Link>
     </Compile>

@@ -22,7 +22,7 @@ namespace Nest
 
 		ElasticsearchPathInfo<CountRequestParameters> IPathInfo<CountRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<CountRequestParameters>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			var source = this._QueryString.GetQueryStringValue<string>("source");
 			pathInfo.HttpMethod = !source.IsNullOrEmpty() 
 				? PathInfoHttpMethod.GET

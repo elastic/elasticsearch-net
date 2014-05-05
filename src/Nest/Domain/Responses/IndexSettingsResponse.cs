@@ -9,7 +9,7 @@ namespace Nest
 {
 	public interface IIndexSettingsResponse : IResponse
 	{
-		IndexSettings Settings { get; }
+		IndexSettings IndexSettings { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
@@ -17,7 +17,7 @@ namespace Nest
 	public class IndexSettingsResponse : BaseResponse, IIndexSettingsResponse
 	{
 		[JsonIgnore]
-		public IndexSettings Settings
+		public IndexSettings IndexSettings
 		{
 			get { return Nodes.HasAny() ? Nodes.First().Value : null; }
 		}

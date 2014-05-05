@@ -18,29 +18,28 @@ namespace Nest
 	/// </pre>
 	/// node id is optional
 	/// </summary>
-	public class NodeIdOptionalDescriptor<P, K> : BasePathDescriptor<P>
-		where P : NodeIdOptionalDescriptor<P, K> 
-		where K : FluentRequestParameters<K>, new()
+	public class NodeIdOptionalDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+		where TDescriptor : NodeIdOptionalDescriptor<TDescriptor, TParameters> 
+		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		internal string _NodeId { get; set; }
 
 		/// <summary>
 		/// Specify the {name} part of the operation
 		/// </summary>
-		public P NodeId(string nodeId)
+		public TDescriptor NodeId(string nodeId)
 		{
 			this._NodeId = nodeId;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentRequestParameters<K>, new()
+		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
 		{
-			var pathInfo = new ElasticsearchPathInfo<K>()
+			var pathInfo = new ElasticsearchPathInfo<TParameters>()
 			{
 				NodeId = this._NodeId
 			};
-			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new TParameters();
 			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}

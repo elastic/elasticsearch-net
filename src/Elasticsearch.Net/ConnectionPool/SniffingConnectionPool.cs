@@ -12,7 +12,6 @@ namespace Elasticsearch.Net.ConnectionPool
 		private readonly ReaderWriterLockSlim _readerWriter = new ReaderWriterLockSlim();
 
 		private bool _seenStartup = false;
-		private bool _canUpdateNodeList;
 
 		public override bool AcceptsUpdates { get { return true; } }
 

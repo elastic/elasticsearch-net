@@ -27,7 +27,7 @@ namespace Nest
 
 		ElasticsearchPathInfo<GetRequestParameters> IPathInfo<GetRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = this.ToPathInfo<GetRequestParameters>(settings, this._QueryString);
+			var pathInfo = this.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 
 			return pathInfo;

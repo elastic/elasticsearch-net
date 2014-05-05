@@ -19,7 +19,7 @@ namespace Nest
 	{
 		ElasticsearchPathInfo<DeleteRequestParameters> IPathInfo<DeleteRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<DeleteRequestParameters>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
 			return pathInfo;
 		}

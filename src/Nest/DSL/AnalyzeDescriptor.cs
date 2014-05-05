@@ -19,7 +19,7 @@ namespace Nest
 
 		ElasticsearchPathInfo<AnalyzeRequestParameters> IPathInfo<AnalyzeRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<AnalyzeRequestParameters>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 
 			return pathInfo;

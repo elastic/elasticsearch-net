@@ -18,44 +18,43 @@ namespace Nest
 	/// </pre>
 	/// {indices} is optional 
 	/// </summary>
-	public class IndicesOptionalPathDescriptor<P, K> : BasePathDescriptor<P>
-		where P : IndicesOptionalPathDescriptor<P, K>, new()
-		where K : FluentRequestParameters<K>, new()
+	public class IndicesOptionalPathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+		where TDescriptor : IndicesOptionalPathDescriptor<TDescriptor, TParameters>, new()
+		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		internal IEnumerable<IndexNameMarker> _Indices { get; set; }
 		
-		public P Index(string index)
+		public TDescriptor Index(string index)
 		{
 			return this.Indices(index);
 		}
 	
-		public P Index<T>() where T : class
+		public TDescriptor Index<TAlternative>() where TAlternative : class
 		{
-			return this.Indices(typeof(T));
+			return this.Indices(typeof(TAlternative));
 		}
 			
-		public P Indices(params string[] indices)
+		public TDescriptor Indices(params string[] indices)
 		{
 			this._Indices = indices.Select(s=>(IndexNameMarker)s);
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		public P Indices(params Type[] indicesTypes)
+		public TDescriptor Indices(params Type[] indicesTypes)
 		{
 			this._Indices = indicesTypes.Select(s=>(IndexNameMarker)s);
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentRequestParameters<K>, new()
+		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
 		{
 			var index = this._Indices == null ? null : string.Join(",", this._Indices.Select(i => new ElasticInferrer(settings).IndexName(i)));
 
-			var pathInfo = new ElasticsearchPathInfo<K>()
+			var pathInfo = new ElasticsearchPathInfo<TParameters>()
 			{
 				Index = index,
 			};
-			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new TParameters();
 			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}

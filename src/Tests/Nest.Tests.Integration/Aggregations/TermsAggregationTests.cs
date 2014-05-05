@@ -75,7 +75,7 @@ namespace Nest.Tests.Integration.Aggregations
 			foreach (var term in termBucket.Items)
 			{
 				var country = term.Key;
-				country.Should().NotBeBlank();
+				country.Should().NotBeNullOrWhiteSpace();
 
 				var noop = term.Terms("noop");
 				noop.Should().NotBeNull();

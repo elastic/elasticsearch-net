@@ -22,7 +22,7 @@ namespace Nest
 
 		ElasticsearchPathInfo<ValidateQueryRequestParameters> IPathInfo<ValidateQueryRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<ValidateQueryRequestParameters>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.RequestParameters = this._QueryString;
 			var source = this._QueryString.GetQueryStringValue<string>("source");
 			var q = this._QueryString.GetQueryStringValue<string>("q");

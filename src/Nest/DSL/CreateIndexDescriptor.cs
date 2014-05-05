@@ -14,7 +14,6 @@ namespace Nest
 	public partial class CreateIndexDescriptor : IndexPathDescriptorBase<CreateIndexDescriptor, CreateIndexRequestParameters>,
 		IPathInfo<CreateIndexRequestParameters>
 	{
-		internal string _Index { get; set; }
 		internal IndexSettings _IndexSettings = new IndexSettings();
 		private IConnectionSettingsValues _connectionSettings;
 
@@ -191,7 +190,7 @@ namespace Nest
 
 		ElasticsearchPathInfo<CreateIndexRequestParameters> IPathInfo<CreateIndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<CreateIndexRequestParameters>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			return pathInfo;
 		}

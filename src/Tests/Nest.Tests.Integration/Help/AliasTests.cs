@@ -27,6 +27,8 @@ namespace Nest.Tests.Integration.Indices
 				.Query(q =>q
 					.Boosting(bq=>bq
 						.Positive(pq=>pq
+							//disabling obsolete message in this test
+							#pragma warning disable 0618
 							.CustomScore(cbf=>cbf
 								.Query(cbfq=>cbfq
 									.QueryString(qs => qs
@@ -39,6 +41,7 @@ namespace Nest.Tests.Integration.Indices
 								)
 								.Script("_score + doc['year'].value")
 							)
+							#pragma warning restore 0618
 						)
 						.Negative(nq=>nq
 							.Filtered(nfq=>nfq

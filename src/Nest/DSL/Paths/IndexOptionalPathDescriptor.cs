@@ -18,40 +18,39 @@ namespace Nest
 	/// </pre>
 	/// index is optional but AllIndices() needs to be explicitly specified for it to be optional
 	/// </summary>
-	public class IndexOptionalPathDescriptorBase<P, K> : BasePathDescriptor<P>
-		where P : IndexOptionalPathDescriptorBase<P, K>, new()
-		where K : FluentRequestParameters<K>, new()
+	public class IndexOptionalPathDescriptorBase<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+		where TDescriptor : IndexOptionalPathDescriptorBase<TDescriptor, TParameters>, new()
+		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		internal IndexNameMarker _Index { get; set; }
 		
 		internal bool? _AllIndices { get; set; }
 
-		public P AllIndices(bool allIndices = true)
+		public TDescriptor AllIndices(bool allIndices = true)
 		{
 			this._AllIndices = allIndices;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 		
-		public P Index<T>() where T : class
+		public TDescriptor Index<TAlternative>() where TAlternative : class
 		{
-			this._Index = typeof(T);
-			return (P)this;
+			this._Index = typeof(TAlternative);
+			return (TDescriptor)this;
 		}
 			
-		public P Index(string indexType)
+		public TDescriptor Index(string indexType)
 		{
 			this._Index = indexType;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		public P Index(Type indexType)
+		public TDescriptor Index(Type indexType)
 		{
 			this._Index = indexType;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentRequestParameters<K>, new()
+		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
 		{
 			var inferrer = new ElasticInferrer(settings);
 			if (!this._AllIndices.HasValue && this._Index == null)
@@ -61,11 +60,11 @@ namespace Nest
 			if (!this._AllIndices.GetValueOrDefault(false))
 				index = inferrer.IndexName(this._Index);
 
-			var pathInfo = new ElasticsearchPathInfo<K>()
+			var pathInfo = new ElasticsearchPathInfo<TParameters>()
 			{
 				Index = index,
 			};
-			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new TParameters();
 			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}

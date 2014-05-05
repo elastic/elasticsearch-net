@@ -25,7 +25,7 @@ namespace Nest
 		}
 		ElasticsearchPathInfo<ClusterStateRequestParameters> IPathInfo<ClusterStateRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<ClusterStateRequestParameters>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 			if (this._Metrics != null)
 				pathInfo.Metric = this._Metrics.Cast<Enum>().GetStringValue();

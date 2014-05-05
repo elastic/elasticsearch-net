@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-
 using Nest.Resolvers;
 
 namespace Nest
@@ -18,52 +14,51 @@ namespace Nest
 	/// </pre>
 	/// if one of the parameters is not explicitly specified this will fall back to the defaults for type <para>T</para>
 	/// </summary>
-	public class IndexTypePathTypedDescriptor<P, K, T> : BasePathDescriptor<P>
-		where P : IndexTypePathTypedDescriptor<P, K, T>, new()
-		where K : FluentRequestParameters<K>, new()
+	public class IndexTypePathTypedDescriptor<TDescriptor, TParameter, T> : BasePathDescriptor<TDescriptor>
+		where TDescriptor : IndexTypePathTypedDescriptor<TDescriptor, TParameter, T>, new()
+		where TParameter : FluentRequestParameters<TParameter>, new()
 		where T : class
 	{
 		internal IndexNameMarker _Index { get; set; }
 		internal TypeNameMarker _Type { get; set; }
 		
-		public P Index<T>() 
+		public TDescriptor Index<TAlternative>() 
 		{
-			this._Index = typeof(T);
-			return (P)this;
+			this._Index = typeof(TAlternative);
+			return (TDescriptor)this;
 		}
 			
-		public P Index(string index)
+		public TDescriptor Index(string index)
 		{
 			this._Index = index;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		public P Index(Type indexType)
+		public TDescriptor Index(Type indexType)
 		{
 			this._Index = indexType;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 		
-		public P Type<T>() 
+		public TDescriptor Type<TAlternative>() 
 		{
-			this._Type = typeof(T);
-			return (P)this;
+			this._Type = typeof(TAlternative);
+			return (TDescriptor)this;
 		}
 			
-		public P Type(string type)
+		public TDescriptor Type(string type)
 		{
 			this._Type = type;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		public P Type(Type type)
+		public TDescriptor Type(Type type)
 		{
 			this._Type = type;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 		
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentRequestParameters<K>, new()
+		internal virtual ElasticsearchPathInfo<TParameter> ToPathInfo(IConnectionSettingsValues settings, TParameter queryString)
 		{
 			var inferrer = new ElasticInferrer(settings);
 			if (this._Index == null)
@@ -73,12 +68,12 @@ namespace Nest
 
 			var index = new ElasticInferrer(settings).IndexName(this._Index); 
 			var type = new ElasticInferrer(settings).TypeName(this._Type); 
-			var pathInfo = new ElasticsearchPathInfo<K>()
+			var pathInfo = new ElasticsearchPathInfo<TParameter>()
 			{
 				Index = index,
 				Type = type
 			};
-			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new TParameter();
 			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}

@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -18,32 +13,31 @@ namespace Nest
 	/// </pre>
 	/// routing value
 	/// </summary>
-	public class RepositoryPathDescriptor<P, K> : BasePathDescriptor<P>
-		where P : RepositoryPathDescriptor<P, K> 
-		where K : FluentRequestParameters<K>, new()
+	public class RepositoryPathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+		where TDescriptor : RepositoryPathDescriptor<TDescriptor, TParameters> 
+		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		internal string _RepositoryName { get; set; }
 
 		/// <summary>
 		/// Specify the name of the repository we are targeting
 		/// </summary>
-		public P Repository(string repositoryName)
+		public TDescriptor Repository(string repositoryName)
 		{
 			this._RepositoryName = repositoryName;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentRequestParameters<K>, new()
+		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
 		{
 			if (this._RepositoryName.IsNullOrEmpty())
 				throw new DslException("missing Repository()");
 
-			var pathInfo = new ElasticsearchPathInfo<K>()
+			var pathInfo = new ElasticsearchPathInfo<TParameters>()
 			{
 				Repository = this._RepositoryName
 			};
-			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new TParameters();
 			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}

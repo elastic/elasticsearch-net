@@ -135,24 +135,8 @@ namespace Nest.Tests.Integration.Reproduce
 
 		public abstract class Entity
 		{
-			private int? _oldHashCode;
-
 			public virtual int Id { get; protected set; }
 
-			public virtual bool Equals(Entity other)
-			{
-				return this == other;
-			}
-
-			public static bool operator ==(Entity left, Entity right)
-			{
-				return Equals(left, right);
-			}
-
-			public static bool operator !=(Entity left, Entity right)
-			{
-				return !Equals(left, right);
-			}
 		}
 	}
 }

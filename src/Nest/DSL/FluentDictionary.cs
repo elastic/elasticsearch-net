@@ -7,12 +7,12 @@ namespace Nest
 {
 	public class FluentFieldList<T> : List<PropertyPathMarker> where T : class
 	{
-		public new FluentFieldList<T> Add(Expression<Func<T, object>> k)
+		public FluentFieldList<T> Add(Expression<Func<T, object>> k)
 		{
 			base.Add(k);
 			return this;
 		}
-		public new FluentFieldList<T> Add(string k)
+		public FluentFieldList<T> Add(string k)
 		{
 			base.Add(k);
 			return this;
