@@ -48,9 +48,6 @@ namespace Nest.Resolvers.Converters
 		)
 			where T : class
 		{
-			try
-			{
-
 			var hit = new SearchResponse<T>();
 			var reader = tuple.Hit.CreateReader();
 			serializer.Populate(reader, hit);
@@ -69,13 +66,6 @@ namespace Nest.Resolvers.Converters
 			}
 
 			collection.Add(tuple.Descriptor.Key, hit);
-			}
-			catch (Exception e)
-			{
-
-				throw;
-			}
-
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

@@ -73,7 +73,6 @@ namespace Nest
 
 		private static IList<string> IndicesPointingToAlias(string aliasName, IGetAliasesResponse aliasesResponse)
 		{
-			IList<AliasDefinition> aliases;
 			if (!aliasesResponse.IsValid
 			    || !aliasesResponse.Indices.HasAny())
 				return new string[] {};
