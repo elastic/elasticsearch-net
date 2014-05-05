@@ -57,7 +57,7 @@
     <Compile Include="Domain\VoidResponse.cs" />
     <Compile Include="Providers\DateTimeProvider.cs" />
     <Compile Include="Connection\HttpConnection.cs" />
-    <Compile Include="Connection\ConnectionError.cs" />
+    <Compile Include="Connection\ElasticsearchServerException.cs" />
     <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Connection\ConnectionConfiguration.cs" />
     <Compile Include="ConnectionPool\EndpointState.cs" />

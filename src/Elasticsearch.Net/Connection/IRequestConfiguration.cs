@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -23,6 +26,8 @@ namespace Elasticsearch.Net.Connection
 
 		bool? PingDisabled { get; }
 
+		IEnumerable<int> AllowedStatusCodes { get; }
+
 
 	}
 
@@ -40,6 +45,7 @@ namespace Elasticsearch.Net.Connection
 		private Uri _forceNode;
 		private bool? _sniffingDisabled;
 		private bool? _pingDisabled;
+		private IEnumerable<int> _allowedStatusCodes;
 
 		int? IRequestConfiguration.MaxRetries
 		{
@@ -56,11 +62,27 @@ namespace Elasticsearch.Net.Connection
 			get { return _sniffingDisabled; }
 		}
 
-		public bool? PingDisabled
+		bool? IRequestConfiguration.PingDisabled
 		{
 			get { return _pingDisabled; }
 		}
 
+		IEnumerable<int> IRequestConfiguration.AllowedStatusCodes
+		{
+			get { return _allowedStatusCodes ?? Enumerable.Empty<int>();  }
+		}
+		
+		public T AllowStatusCodes(IEnumerable<int> codes)
+		{
+			this._allowedStatusCodes = codes;
+			return (T)this;
+		}
+
+		public T AllowStatusCodes(params int[] codes)
+		{
+			this._allowedStatusCodes = codes;
+			return (T)this;
+		}
 
 		public T DisableSniffing(bool? disable = true)
 		{

@@ -58,7 +58,7 @@ namespace Nest
 			if (!connectionStatus.Success)
 				return new GetAliasesResponse() {ConnectionStatus = connectionStatus, IsValid = false};
 
-			var dict = this.Serializer.DeserializeInternal<CrazyAliasesResponse>(stream);
+			var dict = this.Serializer.Deserialize<CrazyAliasesResponse>(stream);
 
 			var d = new Dictionary<string, IList<AliasDefinition>>();
 

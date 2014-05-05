@@ -20,7 +20,7 @@ namespace Nest.SerializationExtensions
 		public static T Deserialize<T>(this IElasticClient client, string data)
 		{
 			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(data)))
-				return client.Serializer.Deserialize<T>(null, ms, null);
+				return client.Serializer.Deserialize<T>(ms);
 		}
 		
 	}

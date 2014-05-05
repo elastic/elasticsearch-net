@@ -30,7 +30,6 @@ namespace Nest.Tests.Unit.Search.Fields
 		[Test]
 		public void FieldsSelectionIsCovariantAsWell()
 		{
-			
 			var client = GetFixedReturnClient(MethodInfo.GetCurrentMethod(), "FixedCovariantSearchResult");
 
 			var results = client.Search<BaseClass>(s => s

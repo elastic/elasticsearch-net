@@ -91,7 +91,7 @@ namespace Nest
 		{
 			if (!response.Success) return new TemplateResponse {ConnectionStatus = response, IsValid = false};
 
-			var dict = this.Serializer.DeserializeInternal<Dictionary<string, TemplateMapping>>(stream);
+			var dict = this.Serializer.Deserialize<Dictionary<string, TemplateMapping>>(stream);
 			if (dict.Count == 0)
 				throw new DslException("Could not deserialize TemplateMapping");
 

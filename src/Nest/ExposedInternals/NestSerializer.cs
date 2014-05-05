@@ -38,56 +38,48 @@ namespace Nest
 		/// <param name="response">If the type you want is a Nest Response you have to pass a response object</param>
 		/// <param name="stream">The stream to deserialize off</param>
 		/// <param name="deserializationState">Optional deserialization state</param>
-		public virtual T Deserialize<T>(IElasticsearchResponse response, Stream stream, object deserializationState = null) 
+		public virtual T Deserialize<T>(Stream stream) 
 		{
 			var settings = this._serializationSettings;
-			var customConverter = deserializationState as Func<IElasticsearchResponse, Stream, T>;
-			if (customConverter != null)
-			{
-				var t = customConverter(response, stream);
-				return t;
-			}
 
-			var state = deserializationState as JsonConverter;
-			if (state != null)
-				settings = this.CreateSettings(state);
-
-			return _Deserialize<T>(response, stream, settings);
+			return _Deserialize<T>(stream, settings);
 		}
 
 		/// <summary>
 		/// Deserialize to type T bypassing checks for custom deserialization state and or BaseResponse return types.
 		/// </summary>
-		public T DeserializeInternal<T>(Stream stream)
+		public T DeserializeInternal<T>(Stream stream, JsonConverter converter)
 		{
-			var serializer = JsonSerializer.Create(this._serializationSettings);
+			if (converter == null) return this.Deserialize<T>(stream);
+
+			var serializer = JsonSerializer.Create(this.CreateSettings(converter));
 			var jsonTextReader = new JsonTextReader(new StreamReader(stream));
 			var t = (T) serializer.Deserialize(jsonTextReader, typeof (T));
 			return t;
 			
 		}
 
-		protected internal  T _Deserialize<T>(IElasticsearchResponse response, Stream stream, JsonSerializerSettings settings = null)
+		protected internal  T _Deserialize<T>(Stream stream, JsonSerializerSettings settings = null)
 		{
 			settings = settings ?? _serializationSettings;
 			var serializer = JsonSerializer.Create(settings);
 			var jsonTextReader = new JsonTextReader(new StreamReader(stream));
 			var t = (T) serializer.Deserialize(jsonTextReader, typeof (T));
-			var r = t as BaseResponse;
-			if (r != null)
-			{
-				r.ConnectionStatus = response;
-			}
+			//var r = t as BaseResponse;
+			//if (r != null)
+			//{
+			//	r.ConnectionStatus = response;
+			//}
 			return t;
 		}
 
-		public virtual Task<T> DeserializeAsync<T>(IElasticsearchResponse response, Stream stream, object deserializationState = null)
+		public virtual Task<T> DeserializeAsync<T>(Stream stream)
 		{
 			//TODO sadly json .net async does not read the stream async so 
 			//figure out wheter reading the stream async on our own might be beneficial 
 			//over memory possible memory usage
 			var tcs = new TaskCompletionSource<T>();
-			var r = this.Deserialize<T>(response, stream, deserializationState);
+			var r = this.Deserialize<T>(stream);
 			tcs.SetResult(r);
 			return tcs.Task;
 		}

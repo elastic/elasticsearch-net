@@ -16,37 +16,14 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
+
+	//TODO It would be very nice if we can get rid of this interface
 	public interface INestSerializer : IElasticsearchSerializer
 	{
-		//IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ElasticsearchResponse status, SearchDescriptor<T> originalSearchDescriptor)
-		//	where TResult : class
-		//	where T : class;
-
 		string SerializeBulkDescriptor(BulkDescriptor bulkDescriptor);
 
-		/// <summary>
-		/// _msearch needs a specialized json format in the body
-		/// </summary>
 		string SerializeMultiSearch(MultiSearchDescriptor multiSearchDescriptor);
 
-
-		/// <summary>
-		/// Deserialize to type T bypassing checks for custom deserialization state and or BaseResponse return types.
-		/// </summary>
-		T DeserializeInternal<T>(Stream stream);
-		//TemplateResponse DeserializeTemplateResponse(ElasticsearchResponse c, GetTemplateDescriptor d);
-		//GetMappingResponse DeserializeGetMappingResponse(ElasticsearchResponse c);
-		//MultiGetResponse DeserializeMultiGetResponse(ElasticsearchResponse c, MultiGetDescriptor d);
-		//MultiSearchResponse DeserializeMultiSearchResponse(ElasticsearchResponse c, MultiSearchDescriptor d);
-		//WarmerResponse DeserializeWarmerResponse(ElasticsearchResponse connectionStatus, GetWarmerDescriptor getWarmerDescriptor);
-
-		///// <summary>
-		///// Returns a response of type R based on the connection status by trying parsing status.Result into R
-		///// </summary>
-		//R ToParsedResponse<R>(
-		//	ElasticsearchResponse status, 
-		//	bool notFoundIsAValidResponse = false,
-		//	JsonConverter piggyBackJsonConverter = null
-		//	) where R : BaseResponse;
+		T DeserializeInternal<T>(Stream stream, JsonConverter converter);
 	}
 }

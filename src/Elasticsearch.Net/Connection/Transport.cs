@@ -192,6 +192,15 @@ namespace Elasticsearch.Net.Connection
 				var streamResponse = _doRequest(requestState.Method, uri, requestState.PostData, requestState.RequestConfiguration);
 				if (streamResponse != null && streamResponse.SuccessOrKnownError)
 				{
+					if (!streamResponse.Success
+						&& requestState.RequestConfiguration == null
+						|| (requestState.RequestConfiguration != null
+							&& requestState.RequestConfiguration.AllowedStatusCodes.All(i => i != streamResponse.HttpStatusCode)))
+					{
+						var deserialized = this.Serializer.Deserialize<ElasticsearchServerException>(streamResponse.Response);
+						throw deserialized;
+					}
+
 					var typedResponse = this.StreamToTypedResponse<T>(streamResponse, requestState.DeserializationState);
 					typedResponse.NumberOfRetries = retried;
 					response = typedResponse;
@@ -412,7 +421,7 @@ namespace Elasticsearch.Net.Connection
 			if (typeof(Stream).IsAssignableFrom(typeof(T)))
 				return streamResponse as ElasticsearchResponse<T>;
 
-			ElasticsearchResponse<T> cs = ElasticsearchResponse.CloneFrom<T>(streamResponse, default(T));
+			var cs = ElasticsearchResponse.CloneFrom<T>(streamResponse, default(T));
 			using (streamResponse.Response)
 			using (var memoryStream = new MemoryStream())
 			{
@@ -512,7 +521,7 @@ namespace Elasticsearch.Net.Connection
 					return cs;
 				}
 			}
-			var deserialized = this.Serializer.Deserialize<T>(cs, response, deserializationState);
+			var deserialized = this.Serializer.Deserialize<T>(response);
 			cs.Response = deserialized;
 			return cs;
 		}
@@ -539,7 +548,7 @@ namespace Elasticsearch.Net.Connection
 					return tcs.Task;
 				}
 			}
-			return this.Serializer.DeserializeAsync<T>(cs, response, deserializationState)
+			return this.Serializer.DeserializeAsync<T>(response)
 				.ContinueWith(t =>
 				{
 					cs.Response = t.Result;

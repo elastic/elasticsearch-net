@@ -57,12 +57,7 @@ namespace Nest.Resolvers.Converters
 			{
 				hit.IsValid = false;
 				//TODO es 1.0 will return statuscode pass that into exception
-				//var exception = new ConnectionException(500);
-				//var reponse = ElasticsearchResponse.CreateError()
-				//hit.ConnectionStatus = new NestElasticsearchResponse(settings, new ConnectionException(
-				//	msg: errorProperty.Value.ToString(),
-				//	response: errorProperty.Value.ToString()
-				//));
+				
 			}
 
 			collection.Add(tuple.Descriptor.Key, hit);

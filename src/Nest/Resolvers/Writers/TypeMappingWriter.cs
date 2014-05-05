@@ -80,7 +80,7 @@ namespace Nest.Resolvers.Writers
 
 			var nestedJson = json.Properties().First().Value.ToString();
 			using (var ms = new MemoryStream(nestedJson.Utf8Bytes()))
-				return this._elasticSerializer.DeserializeInternal<RootObjectMapping>(ms);
+				return this._elasticSerializer.Deserialize<RootObjectMapping>(ms);
 		}
 		internal ObjectMapping ObjectMappingFromAttributes()
 		{
@@ -88,7 +88,7 @@ namespace Nest.Resolvers.Writers
 
 			var nestedJson = json.Properties().First().Value.ToString();
 			using (var ms = new MemoryStream(nestedJson.Utf8Bytes()))
-				return this._elasticSerializer.DeserializeInternal<ObjectMapping>(ms);
+				return this._elasticSerializer.Deserialize<ObjectMapping>(ms);
 		}
 		internal NestedObjectMapping NestedObjectMappingFromAttributes()
 		{
@@ -96,7 +96,7 @@ namespace Nest.Resolvers.Writers
 
 			var nestedJson = json.Properties().First().Value.ToString();
 			using (var ms = new MemoryStream(nestedJson.Utf8Bytes()))
-				return this._elasticSerializer.DeserializeInternal<NestedObjectMapping>(ms);
+				return this._elasticSerializer.Deserialize<NestedObjectMapping>(ms);
 		}
 		public string MapFromAttributes()
 		{

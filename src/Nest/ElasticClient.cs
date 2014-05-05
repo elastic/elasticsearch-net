@@ -95,6 +95,7 @@ namespace Nest
 			if (c.Success || allow404 && c.HttpStatusCode == 404)
 			{
 				c.Response.IsValid = true;
+				c.Response.ConnectionStatus = c;
 				return c.Response;
 			}
 			var badResponse = CreateInvalidInstance<R>(c);

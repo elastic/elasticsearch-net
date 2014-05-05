@@ -12,7 +12,7 @@ namespace Nest
 		IElasticsearchResponse ConnectionStatus { get; }
 		ElasticInferrer Infer { get; }
 	}
-
+		
 	public class BaseResponse : IResponse
 	{
 		public BaseResponse()
