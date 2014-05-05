@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Reproduce
 			var getSettingsResponse = this._client.GetIndexSettings(i=>i.Index(indexName));
 			Assert.IsTrue(getSettingsResponse.IsValid, getSettingsResponse.ConnectionStatus.ToString());
 
-			bool readOnly = getSettingsResponse.Settings._.index.blocks.read_only;
+			bool readOnly = getSettingsResponse.IndexSettings._.index.blocks.read_only;
 			readOnly.Should().BeTrue();
 
 

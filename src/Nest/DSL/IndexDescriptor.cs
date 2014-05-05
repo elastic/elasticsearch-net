@@ -19,7 +19,7 @@ namespace Nest
 	{
 		ElasticsearchPathInfo<DocumentExistsRequestParameters> IPathInfo<DocumentExistsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<DocumentExistsRequestParameters>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.HEAD;
 			return pathInfo;
 		}

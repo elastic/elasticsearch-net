@@ -19,44 +19,43 @@ namespace Nest
 	/// </pre>
 	/// {indices} is optional but AllIndices() needs to be explicitly called.
 	/// </summary>
-	public class IndicesOptionalExplicitAllPathDescriptor<P, K> : BasePathDescriptor<P>
-		where P : IndicesOptionalExplicitAllPathDescriptor<P, K>, new()
-		where K : FluentRequestParameters<K>, new()
+	public class IndicesOptionalExplicitAllPathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+		where TDescriptor : IndicesOptionalExplicitAllPathDescriptor<TDescriptor, TParameters>, new()
+		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		internal IEnumerable<IndexNameMarker> _Indices { get; set; }
 		
 		internal bool? _AllIndices { get; set; }
 
-		public P AllIndices(bool allIndices = true)
+		public TDescriptor AllIndices(bool allIndices = true)
 		{
 			this._AllIndices = allIndices;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 			
-		public P Index(string index)
+		public TDescriptor Index(string index)
 		{
 			return this.Indices(index);
 		}
 	
-		public P Index<T>() where T : class
+		public TDescriptor Index<TAlternative>() where TAlternative : class
 		{
-			return this.Indices(typeof(T));
+			return this.Indices(typeof(TAlternative));
 		}
 			
-		public P Indices(params string[] indices)
+		public TDescriptor Indices(params string[] indices)
 		{
 			this._Indices = indices.Select(s=>(IndexNameMarker)s);
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		public P Indices(params Type[] indicesTypes)
+		public TDescriptor Indices(params Type[] indicesTypes)
 		{
 			this._Indices = indicesTypes.Select(s=>(IndexNameMarker)s);
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentRequestParameters<K>, new()
+		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
 		{
 			var inferrer = new ElasticInferrer(settings);
 			if (!this._AllIndices.HasValue && this._Indices == null)
@@ -66,11 +65,11 @@ namespace Nest
 			if (!this._AllIndices.GetValueOrDefault(false))
 				index = string.Join(",", this._Indices.Select(inferrer.IndexName));
 
-			var pathInfo = new ElasticsearchPathInfo<K>()
+			var pathInfo = new ElasticsearchPathInfo<TParameters>()
 			{
 				Index = index,
 			};
-			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new TParameters();
 			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}

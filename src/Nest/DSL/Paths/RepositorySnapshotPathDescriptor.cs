@@ -18,9 +18,9 @@ namespace Nest
 	/// </pre>
 	/// routing value
 	/// </summary>
-	public class RepositorySnapshotPathDescriptor<P, K> : BasePathDescriptor<P>
-		where P : RepositorySnapshotPathDescriptor<P, K> 
-		where K : FluentRequestParameters<K>, new()
+	public class RepositorySnapshotPathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+		where TDescriptor : RepositorySnapshotPathDescriptor<TDescriptor, TParameters> 
+		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		internal string _Repository { get; set; }
 		internal string _Snapshot { get; set; }
@@ -28,32 +28,31 @@ namespace Nest
 		/// <summary>
 		/// Specify the name of the repository we are targeting
 		/// </summary>
-		public P Repository(string repositoryName)
+		public TDescriptor Repository(string repositoryName)
 		{
 			this._Repository = repositoryName;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		public P Snapshot(string snapshotName)
+		public TDescriptor Snapshot(string snapshotName)
 		{
 			this._Snapshot = snapshotName;
-			return (P)this;
+			return (TDescriptor)this;
 		}
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentRequestParameters<K>, new()
+		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
 		{
 			if (this._Repository.IsNullOrEmpty())
 				throw new DslException("missing Repository()");
 			if (this._Snapshot.IsNullOrEmpty())
 				throw new DslException("missing Snapshot()");
 
-			var pathInfo = new ElasticsearchPathInfo<K>()
+			var pathInfo = new ElasticsearchPathInfo<TParameters>()
 			{
 				Repository = this._Repository,
 				Snapshot = this._Snapshot
 
 			};
-			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new TParameters();
 			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}

@@ -20,9 +20,9 @@ namespace Nest
 	/// </pre>
 	/// {types} is optional, {indices} is too but needs an explicit AllIndices().
 	/// </summary>
-	public class IndicesOptionalTypesNamePathDecriptor<P, K> : BasePathDescriptor<P>
-		where P : IndicesOptionalTypesNamePathDecriptor<P, K>, new()
-		where K : FluentRequestParameters<K>, new()
+	public class IndicesOptionalTypesNamePathDecriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+		where TDescriptor : IndicesOptionalTypesNamePathDecriptor<TDescriptor, TParameters>, new()
+		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		internal bool? _AllIndices { get; set; }
 
@@ -30,92 +30,91 @@ namespace Nest
 		internal IEnumerable<TypeNameMarker> _Types { get; set; }
 		internal string _Name { get; set; }
 
-		public P AllIndices(bool allIndices = true)
+		public TDescriptor AllIndices(bool allIndices = true)
 		{
 			this._AllIndices = allIndices;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 		/// <summary>
 		/// Specify multiple indices by string 
 		/// </summary>
-		public P Indices(params string[] indices)
+		public TDescriptor Indices(params string[] indices)
 		{
 			indices = indices ?? new string[]{};
 			this._Indices = indices.Select(s=>(IndexNameMarker)s);
-			return (P) this;
+			return (TDescriptor) this;
 		}
 
 		/// <summary>
 		/// Specify multiple indices by stating the types you are searching on. 
 		/// Each type will be asked for their default index and dedupped. 
 		/// </summary>
-		public P Indices(params Type[] indices)
+		public TDescriptor Indices(params Type[] indices)
 		{
 			indices = indices ?? new Type[] {};
 			this._Indices = indices.Select(s=>(IndexNameMarker)s);
-			return (P) this;
+			return (TDescriptor) this;
 		}
 		
 		/// <summary>
 		/// Use the default index of T
 		/// </summary>
-		public P Index<T>() where T : class
+		public TDescriptor Index<TAlternative>() where TAlternative : class
 		{
-			return this.Indices(new[] {typeof (T)});
+			return this.Indices(new[] {typeof (TAlternative)});
 		}
 		/// <summary>
 		/// Use the default index of T
 		/// </summary>
-		public P Index(Type index) 
+		public TDescriptor Index(Type index) 
 		{
 			return this.Indices(new[] { index });
 		}
 		/// <summary>
 		/// Use the default index of T
 		/// </summary>
-		public P Index(string index) 
+		public TDescriptor Index(string index) 
 		{
 			return this.Indices(new[] { index });
 		}
 		/// <summary>
 		/// limit the types to operate on by specifiying them by string
 		/// </summary>
-		public P Types(params string[] types)
+		public TDescriptor Types(params string[] types)
 		{
 			types = types ?? new string[]{};
 			this._Types = types.Select(t=>(TypeNameMarker)t);
-			return (P)this;
+			return (TDescriptor)this;
 		}
 		
 		/// <summary>
 		/// limit the types to operate on by specifying the CLR types, the type names will be inferred.
 		/// </summary>
-		public P Types(params Type[] types)
+		public TDescriptor Types(params Type[] types)
 		{
 			types = types ?? new Type[]{};
 			this._Types = types.Select(t=>(TypeNameMarker)t);
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
 		/// <summary>
 		/// Limit the operation on type T
 		/// </summary>
-		public P Type<T>() where T : class
+		public TDescriptor Type<TAlternative>() where TAlternative : class
 		{
-			return this.Types(new Type[] {typeof (T)});
+			return this.Types(new Type[] {typeof (TAlternative)});
 		}
 
 		/// <summary>
 		/// Specify the {name} part of the operation
 		/// </summary>
-		public P Name(string name)
+		public TDescriptor Name(string name)
 		{
 			this._Name = name;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentRequestParameters<K>, new()
+		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
 		{
 			var inferrer = new ElasticInferrer(settings);
 			if (!this._AllIndices.HasValue && this._Indices == null)
@@ -133,13 +132,13 @@ namespace Nest
 				? inferrer.TypeNames(this._Types)
 				: null;
 
-			var pathInfo = new ElasticsearchPathInfo<K>()
+			var pathInfo = new ElasticsearchPathInfo<TParameters>()
 			{
 				Index = indices,
 				Type = types,
 				Name = this._Name
 			};
-			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new TParameters();
 			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}

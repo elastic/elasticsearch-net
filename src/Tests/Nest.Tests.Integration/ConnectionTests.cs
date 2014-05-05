@@ -39,7 +39,6 @@ namespace Nest.Tests.Integration
 		{
 			Assert.Throws<UriFormatException>(() =>
 			{
-				string host = null;
 				var settings = new ConnectionSettings(new Uri("http://:80"), "index");
 			});
 			Assert.Throws<UriFormatException>(() =>

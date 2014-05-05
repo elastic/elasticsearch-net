@@ -54,9 +54,8 @@ namespace Nest.Resolvers
 				IdDelegates.TryAdd(type, cachedLookup);
 				return cachedLookup(@object);
 			}
-			catch (Exception e)
+			catch 
 			{
-
 				var value = idProperty.GetValue(@object, null);
 				return value.ToString();
 			}

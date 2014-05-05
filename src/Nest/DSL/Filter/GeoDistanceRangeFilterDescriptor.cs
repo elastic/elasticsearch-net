@@ -51,7 +51,7 @@ namespace Nest
 			this._FromDistance = From;
 			this._ToDistance = To;
 			this._GeoUnit = Enum.GetName(typeof(GeoUnit), Unit);
-			this.IsValidDistance = From != null && To != null;
+			this.IsValidDistance = true;
 			return this;
 		}
 		public GeoDistanceRangeFilterDescriptor Optimize(GeoOptimizeBBox optimize)

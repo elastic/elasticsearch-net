@@ -45,7 +45,7 @@ namespace Nest
 
 		ElasticsearchPathInfo<PercolateCountRequestParameters> IPathInfo<PercolateCountRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<PercolateCountRequestParameters>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			//.NET does not like sending data using get so we use POST
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			return pathInfo;

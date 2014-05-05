@@ -11,10 +11,13 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Query(q=>q
+					//disabling obsolete message in this test
+					#pragma warning disable 0618
 					.CustomScore(cs=>cs
 						.Script("doc['num1'].value > 1")
 						.Query(qq=>qq.MatchAll())
 					)
+					#pragma warning restore 0618
 			);
 				
 			var json = TestElasticClient.Serialize(s);
@@ -33,11 +36,14 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Query(q => q
+					//disabling obsolete message in this test
+					#pragma warning disable 0618
 					.CustomScore(cs => cs
 						.Script("doc['num1'].value > myvar")
 						.Params(p=>p.Add("myvar", 1.0))
 						.Query(qq => qq.MatchAll())
 					)
+					#pragma warning restore 0618
 			);
 
 			var json = TestElasticClient.Serialize(s);

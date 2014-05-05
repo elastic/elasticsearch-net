@@ -46,7 +46,7 @@ namespace Nest
 				this._reindexDescriptor._CreateIndexSelector ?? ((ci) => ci);
 
 			var createIndexResponse = this.CurrentClient.CreateIndex(
-				toIndex, (c) => settings(c.InitializeUsing(indexSettings.Settings)));
+				toIndex, (c) => settings(c.InitializeUsing(indexSettings.IndexSettings)));
 			if (!createIndexResponse.IsValid)
 				throw new ReindexException(createIndexResponse.ConnectionStatus);
 

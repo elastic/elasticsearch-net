@@ -1,6 +1,7 @@
-﻿namespace Nest {
-    public interface IElasticPropertyVisitor
-    {
-        void Visit(ElasticPropertyAttribute attribute);
-    }
+﻿namespace Nest
+{
+	public interface IElasticPropertyVisitor
+	{
+		void Visit(ElasticPropertyAttribute attribute);
+	}
 }

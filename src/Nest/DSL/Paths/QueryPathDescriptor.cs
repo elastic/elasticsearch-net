@@ -18,106 +18,105 @@ namespace Nest
 	/// </pre>
 	/// all parameters are optional and will default to the defaults for <para>T</para>
 	/// </summary>
-	public class QueryPathDescriptorBase<P, T, K> : BasePathDescriptor<P>
-		where P : QueryPathDescriptorBase<P, T, K>, new()
+	public class QueryPathDescriptorBase<TDescriptor, T, TParameters> : BasePathDescriptor<TDescriptor>
+		where TDescriptor : QueryPathDescriptorBase<TDescriptor, T, TParameters>, new()
 		where T : class
-		where K : FluentRequestParameters<K>, new()
+		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		internal IEnumerable<IndexNameMarker> _Indices { get; set; }
 		internal IEnumerable<TypeNameMarker> _Types { get; set; }
 		internal bool _AllIndices { get; set; }
 		internal bool _AllTypes { get; set; }
-		public P Indices(params Type[] indices)
+		public TDescriptor Indices(params Type[] indices)
 		{
-			if (indices == null) return (P)this;
+			if (indices == null) return (TDescriptor)this;
 			this._Indices = indices.Select(s => (IndexNameMarker)s);
-			return (P)this;
+			return (TDescriptor)this;
 		}
-		public P Indices(params string[] indices)
+		public TDescriptor Indices(params string[] indices)
 		{
-			if (indices == null) return (P)this;
+			if (indices == null) return (TDescriptor)this;
 			this._Indices = indices.Select(s => (IndexNameMarker)s);
-			return (P)this;
+			return (TDescriptor)this;
 		}
-		public P Indices(IEnumerable<Type> indices)
+		public TDescriptor Indices(IEnumerable<Type> indices)
 		{
-			if (indices == null) return (P)this;
+			if (indices == null) return (TDescriptor)this;
 			this._Indices = indices.Select(s => (IndexNameMarker)s);
-			return (P)this;
+			return (TDescriptor)this;
 		}
-		public P Indices(IEnumerable<string> indices)
+		public TDescriptor Indices(IEnumerable<string> indices)
 		{
-			if (indices == null) return (P)this;
+			if (indices == null) return (TDescriptor)this;
 			this._Indices = indices.Select(s => (IndexNameMarker)s);
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		public P Index<TAlternative>() where TAlternative : class
+		public TDescriptor Index<TAlternative>() where TAlternative : class
 		{
 			return this.Indices(typeof(TAlternative));
 		}
 
-		public P Index(Type index)
+		public TDescriptor Index(Type index)
 		{
 			return this.Indices(index);
 		}
-		public P Index(string index)
+		public TDescriptor Index(string index)
 		{
 			return this.Indices(index);
 		}
-		public P Types(IEnumerable<string> types)
+		public TDescriptor Types(IEnumerable<string> types)
 		{
-			if (types == null) return (P)this;
+			if (types == null) return (TDescriptor)this;
 			this._Types = types.Select(s => (TypeNameMarker)s); ;
-			return (P)this;
+			return (TDescriptor)this;
 		}
-		public P Types(params string[] types)
+		public TDescriptor Types(params string[] types)
 		{
-			if (types == null) return (P)this;
+			if (types == null) return (TDescriptor)this;
 			return this.Types((IEnumerable<string>)types);
 		}
-		public P Types(IEnumerable<Type> types)
+		public TDescriptor Types(IEnumerable<Type> types)
 		{
-			if (types == null) return (P)this;
+			if (types == null) return (TDescriptor)this;
 			this._Types = types.Select(t => (TypeNameMarker)t);
-			return (P)this;
+			return (TDescriptor)this;
 		}
-		public P Types(params Type[] types)
+		public TDescriptor Types(params Type[] types)
 		{
-			if (types == null) return (P)this;
+			if (types == null) return (TDescriptor)this;
 			return this.Types((IEnumerable<Type>)types);
 		}
-		public P Type(string type)
+		public TDescriptor Type(string type)
 		{
 			return this.Types(type);
 		}
-		public P Type(Type type)
+		public TDescriptor Type(Type type)
 		{
 			return this.Types(type);
 		}
-		public P Type<TAlternative>() where TAlternative : class
+		public TDescriptor Type<TAlternative>() where TAlternative : class
 		{
 			return this.Types(typeof(TAlternative));
 		}
-		public P AllIndices()
+		public TDescriptor AllIndices()
 		{
 			this._AllIndices = true;
-			return (P)this;
+			return (TDescriptor)this;
 		}
-		public P AllTypes()
+		public TDescriptor AllTypes()
 		{
 			this._AllTypes = true;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentRequestParameters<K>, new()
+		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
 		{
 			//start out with defaults
 			var inferrer = new ElasticInferrer(settings);
 			var index = inferrer.IndexName<T>();
 			var type = inferrer.TypeName<T>();
-			var pathInfo = new ElasticsearchPathInfo<K>()
+			var pathInfo = new ElasticsearchPathInfo<TParameters>()
 			{
 				Index = index,
 				Type = type
@@ -136,9 +135,7 @@ namespace Nest
 			else
 				pathInfo.Index = this._AllIndices ? null : inferrer.IndexName<T>();
 
-
-
-			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new TParameters();
 			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}

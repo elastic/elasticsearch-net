@@ -233,7 +233,7 @@ namespace Nest
 
 		ElasticsearchPathInfo<PutMappingRequestParameters> IPathInfo<PutMappingRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<PutMappingRequestParameters>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
 
 			return pathInfo;

@@ -17,8 +17,6 @@ namespace Nest
 	}
 	public class QueryDescriptor<T> : BaseQuery, IQueryDescriptor<T> where T : class
 	{
-		private readonly bool _forceConditionless;
-
 		public QueryDescriptor()
 		{
 		}

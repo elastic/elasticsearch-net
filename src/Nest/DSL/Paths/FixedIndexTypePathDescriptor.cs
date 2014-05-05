@@ -19,53 +19,53 @@ namespace Nest
 	/// {index} is optional and so is {type} and will NOT fallback to the defaults of <para>T</para>
 	/// type can only be specified in conjuction with index.
 	/// </summary>
-	public class FixedIndexTypePathDescriptor<P, K> : BasePathDescriptor<P>
-		where P : FixedIndexTypePathDescriptor<P, K> 
-		where K : FluentRequestParameters<K>, new()
+	public class FixedIndexTypePathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+		where TDescriptor : FixedIndexTypePathDescriptor<TDescriptor, TParameters> 
+		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		internal IndexNameMarker _Index { get; set; }
 		internal TypeNameMarker _Type { get; set; }
 
-		public P FixedPath(string index, string type = null)
+		public TDescriptor FixedPath(string index, string type = null)
 		{
 			this._Index = index;
 			this._Type = type;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		public P FixedPath(Type index, Type type = null)
+		public TDescriptor FixedPath(Type index, Type type = null)
 		{
 			this._Index = index;
 			this._Type = type;
-			return (P)this;
+			return (TDescriptor)this;
 		}
-		public P FixedPath<T>(bool fixateType = false)
+		public TDescriptor FixedPath<TAlternative>(bool fixateType = false)
 		{
-			this._Index = typeof (T);
+			this._Index = typeof (TAlternative);
 			if (fixateType)
-				this._Type = typeof(T);
-			return (P) this;
+				this._Type = typeof(TAlternative);
+			return (TDescriptor) this;
 		}
-		public P FixedPath<TIndex,TType>()
+		public TDescriptor FixedPath<TIndex,TType>()
 		{
 			this._Index = typeof (TIndex);
 			this._Type = typeof(TType);
-			return (P) this;
+			return (TDescriptor) this;
 		}
 		
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo(IConnectionSettingsValues settings, K queryString)
+		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
 		{
 			var inferrer = new ElasticInferrer(settings);
 
 			var index = inferrer.IndexName(this._Index); 
 			var type = inferrer.TypeName(this._Type); 
 		
-			var pathInfo = new ElasticsearchPathInfo<K>()
+			var pathInfo = new ElasticsearchPathInfo<TParameters>()
 			{
 				Index = index,
 				Type = type
 			};
-			pathInfo.RequestParameters = queryString ?? new K();
+			pathInfo.RequestParameters = queryString ?? new TParameters();
 			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}

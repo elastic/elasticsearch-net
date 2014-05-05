@@ -107,11 +107,13 @@ namespace Nest
 			this._Document = @object;
 			return this;
 		}
+
 		public BulkUpdateDescriptor<T, K> DocAsUpsert(bool docAsUpsert = true)
 		{
 			this._DocAsUpsert = docAsUpsert;
 			return this;
 		}
+		
 		public BulkUpdateDescriptor<T, K> Script(string script)
 		{
 			script.ThrowIfNull("script");

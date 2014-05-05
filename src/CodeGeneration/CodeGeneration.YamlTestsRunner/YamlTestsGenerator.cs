@@ -164,19 +164,12 @@ namespace CodeGeneration.YamlTestsRunner
 			foreach (var test in tests.Where(t=>!t.IsNullOrEmpty()))
 			{
 				++i;
-				try
+				using (var tx = new StringReader(test))
 				{
-					using (var tx = new StringReader(test))
-					{
-						var parsed = deserializer.Deserialize<YamlTestSuite>(tx);
-						var suite = TestSuite.CreateFrom(parsed, yaml);
-						suite.Description += i;
-						r.Add(suite);
-					}
-				}
-				catch (Exception exception)
-				{
-					throw;
+					var parsed = deserializer.Deserialize<YamlTestSuite>(tx);
+					var suite = TestSuite.CreateFrom(parsed, yaml);
+					suite.Description += i;
+					r.Add(suite);
 				}
 			}
 			return r;

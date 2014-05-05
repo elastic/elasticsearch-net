@@ -13,13 +13,13 @@ namespace Nest
 {
 	[JsonConverter(typeof(CustomJsonConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class TermFilter : BaseFilter, ICustomJson
+	public class TermFilter : FilterBase, ICustomJson
 	{
 		internal PropertyPathMarker Field { get; set; }
 		internal object Value { get; set; }
 		internal double? Boost { get; set; }
 
-		internal bool IsConditionless { get { return this.Value == null || this.Value.ToString().IsNullOrEmpty() || this.Field.IsConditionless(); } }	
+		internal override bool IsConditionless { get { return this.Value == null || this.Value.ToString().IsNullOrEmpty() || this.Field.IsConditionless(); } }	
 		object ICustomJson.GetCustomJson()
 		{
 			return new Dictionary<object, object>

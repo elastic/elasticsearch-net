@@ -35,9 +35,9 @@ namespace Nest.Tests.Integration.Indices
 		{
 			var r = this._client.GetIndexSettings(i=>i.Index<ElasticsearchProject>());
 			Assert.True(r.IsValid);
-			Assert.NotNull(r.Settings);
-			Assert.GreaterOrEqual(r.Settings.NumberOfReplicas, 0);
-			Assert.GreaterOrEqual(r.Settings.NumberOfShards, 1);
+			Assert.NotNull(r.IndexSettings);
+			Assert.GreaterOrEqual(r.IndexSettings.NumberOfReplicas, 0);
+			Assert.GreaterOrEqual(r.IndexSettings.NumberOfShards, 1);
 		}
 
 		[Test]
@@ -86,30 +86,30 @@ namespace Nest.Tests.Integration.Indices
 
 			var r = this._client.GetIndexSettings(i=>i.Index(index));
 			Assert.True(r.IsValid);
-			Assert.NotNull(r.Settings.Settings.Count);
-			Assert.AreEqual(r.Settings.NumberOfReplicas, 4);
-			Assert.AreEqual(r.Settings.NumberOfShards, 8);
+			Assert.NotNull(r.IndexSettings.Settings.Count);
+			Assert.AreEqual(r.IndexSettings.NumberOfReplicas, 4);
+			Assert.AreEqual(r.IndexSettings.NumberOfShards, 8);
 			//Assert.Greater(r.Setttings, 0);
-			Assert.NotNull(r.Settings._.merge.policy.merge_factor);
-			Assert.AreEqual(10, r.Settings._.merge.policy.merge_factor);
+			Assert.NotNull(r.IndexSettings._.merge.policy.merge_factor);
+			Assert.AreEqual(10, r.IndexSettings._.merge.policy.merge_factor);
 			
-			Assert.AreEqual(3, r.Settings.Analysis.Analyzers.Count);
+			Assert.AreEqual(3, r.IndexSettings.Analysis.Analyzers.Count);
 			{ // assert analyzers
-				Assert.True(r.Settings.Analysis.Analyzers.ContainsKey("snowball"));
-				var snoballAnalyser = r.Settings.Analysis.Analyzers["snowball"] as SnowballAnalyzer;
+				Assert.True(r.IndexSettings.Analysis.Analyzers.ContainsKey("snowball"));
+				var snoballAnalyser = r.IndexSettings.Analysis.Analyzers["snowball"] as SnowballAnalyzer;
 				Assert.NotNull(snoballAnalyser);
 				Assert.AreEqual("English", snoballAnalyser.Language);
 
-				Assert.True(r.Settings.Analysis.Analyzers.ContainsKey("standard"));
-				var standardAnalyser = r.Settings.Analysis.Analyzers["standard"] as StandardAnalyzer;
+				Assert.True(r.IndexSettings.Analysis.Analyzers.ContainsKey("standard"));
+				var standardAnalyser = r.IndexSettings.Analysis.Analyzers["standard"] as StandardAnalyzer;
 				Assert.NotNull(standardAnalyser);
 				Assert.NotNull(standardAnalyser.StopWords);
 				Assert.AreEqual(2, standardAnalyser.StopWords.Count());
 				Assert.True(standardAnalyser.StopWords.Contains("word1"));
 				Assert.True(standardAnalyser.StopWords.Contains("word2"));
 
-				Assert.True(r.Settings.Analysis.Analyzers.ContainsKey("swedishlanguage"));
-				var languageAnalyser = r.Settings.Analysis.Analyzers["swedishlanguage"] as LanguageAnalyzer;
+				Assert.True(r.IndexSettings.Analysis.Analyzers.ContainsKey("swedishlanguage"));
+				var languageAnalyser = r.IndexSettings.Analysis.Analyzers["swedishlanguage"] as LanguageAnalyzer;
 				Assert.NotNull(languageAnalyser);
 				Assert.AreEqual(Language.Swedish.ToString().ToLowerInvariant(), languageAnalyser.Type);
 				Assert.NotNull(languageAnalyser.StopWords);
@@ -121,49 +121,49 @@ namespace Nest.Tests.Integration.Indices
 				Assert.True(languageAnalyser.StemExclusionList.Contains("stem2"));
 			}
 
-			Assert.AreEqual(3, r.Settings.Analysis.CharFilters.Count);
+			Assert.AreEqual(3, r.IndexSettings.Analysis.CharFilters.Count);
 			{ // assert char filters
-				Assert.True(r.Settings.Analysis.CharFilters.ContainsKey("char1"));
-				var filter1 = r.Settings.Analysis.CharFilters["char1"] as HtmlStripCharFilter;
+				Assert.True(r.IndexSettings.Analysis.CharFilters.ContainsKey("char1"));
+				var filter1 = r.IndexSettings.Analysis.CharFilters["char1"] as HtmlStripCharFilter;
 				Assert.NotNull(filter1);
-				Assert.True(r.Settings.Analysis.CharFilters.ContainsKey("char2"));
-				var filter2 = r.Settings.Analysis.CharFilters["char2"] as MappingCharFilter;
+				Assert.True(r.IndexSettings.Analysis.CharFilters.ContainsKey("char2"));
+				var filter2 = r.IndexSettings.Analysis.CharFilters["char2"] as MappingCharFilter;
 				Assert.NotNull(filter2);
 				Assert.AreEqual(2, filter2.Mappings.Count());
 				Assert.True(filter2.Mappings.Contains("ph=>f"));
 				Assert.True(filter2.Mappings.Contains("qu=>q"));
-                var filter3 = r.Settings.Analysis.CharFilters["char3"] as PatternReplaceCharFilter;
+                var filter3 = r.IndexSettings.Analysis.CharFilters["char3"] as PatternReplaceCharFilter;
                 Assert.NotNull(filter3);
                 Assert.AreEqual("sample(.*)", filter3.Pattern);
                 Assert.AreEqual("replacedSample $1", filter3.Replacement);
 			}
 
-			Assert.AreEqual(2, r.Settings.Analysis.TokenFilters.Count);
+			Assert.AreEqual(2, r.IndexSettings.Analysis.TokenFilters.Count);
 			{ // assert token filters
-				Assert.True(r.Settings.Analysis.TokenFilters.ContainsKey("tokenfilter1"));
-				var filter1 = r.Settings.Analysis.TokenFilters["tokenfilter1"] as EdgeNGramTokenFilter;
+				Assert.True(r.IndexSettings.Analysis.TokenFilters.ContainsKey("tokenfilter1"));
+				var filter1 = r.IndexSettings.Analysis.TokenFilters["tokenfilter1"] as EdgeNGramTokenFilter;
 				Assert.NotNull(filter1);
-				Assert.True(r.Settings.Analysis.TokenFilters.ContainsKey("tokenfilter2"));
-				var filter2 = r.Settings.Analysis.TokenFilters["tokenfilter2"] as SnowballTokenFilter;
+				Assert.True(r.IndexSettings.Analysis.TokenFilters.ContainsKey("tokenfilter2"));
+				var filter2 = r.IndexSettings.Analysis.TokenFilters["tokenfilter2"] as SnowballTokenFilter;
 				Assert.NotNull(filter2);
 			}
 
-			Assert.AreEqual(2, r.Settings.Analysis.Tokenizers.Count);
+			Assert.AreEqual(2, r.IndexSettings.Analysis.Tokenizers.Count);
 			{ // assert tokenizers
-				Assert.True(r.Settings.Analysis.Tokenizers.ContainsKey("token1"));
-				var tokenizer1 = r.Settings.Analysis.Tokenizers["token1"] as KeywordTokenizer;
+				Assert.True(r.IndexSettings.Analysis.Tokenizers.ContainsKey("token1"));
+				var tokenizer1 = r.IndexSettings.Analysis.Tokenizers["token1"] as KeywordTokenizer;
 				Assert.NotNull(tokenizer1);
-				Assert.True(r.Settings.Analysis.Tokenizers.ContainsKey("token2"));
-				var tokenizer2 = r.Settings.Analysis.Tokenizers["token2"] as PathHierarchyTokenizer;
+				Assert.True(r.IndexSettings.Analysis.Tokenizers.ContainsKey("token2"));
+				var tokenizer2 = r.IndexSettings.Analysis.Tokenizers["token2"] as PathHierarchyTokenizer;
 				Assert.NotNull(tokenizer2);
 			}
 
 
-			Assert.NotNull(r.Settings.Similarity);
-			Assert.NotNull(r.Settings.Similarity.CustomSimilarities);
-			Assert.AreEqual(2, r.Settings.Similarity.CustomSimilarities.Count);
+			Assert.NotNull(r.IndexSettings.Similarity);
+			Assert.NotNull(r.IndexSettings.Similarity.CustomSimilarities);
+			Assert.AreEqual(2, r.IndexSettings.Similarity.CustomSimilarities.Count);
 			{ // assert similarity
-				var similarity1 = r.Settings.Similarity.CustomSimilarities.FirstOrDefault(x => x.Name.Equals("test1", StringComparison.InvariantCultureIgnoreCase));
+				var similarity1 = r.IndexSettings.Similarity.CustomSimilarities.FirstOrDefault(x => x.Name.Equals("test1", StringComparison.InvariantCultureIgnoreCase));
 				Assert.NotNull(similarity1);
 				Assert.AreEqual("DFR", similarity1.Type);
 				Assert.AreEqual(4, similarity1.SimilarityParameters.Count);
@@ -172,7 +172,7 @@ namespace Nest.Tests.Integration.Indices
 				Assert.True(similarity1.SimilarityParameters.Any(x => x.Key.Equals("normalization") && x.Value.ToString().Equals("h2")));
 				Assert.True(similarity1.SimilarityParameters.Any(x => x.Key.Equals("normalization.h2")));
 
-				var similarity2 = r.Settings.Similarity.CustomSimilarities.FirstOrDefault(x => x.Name.Equals("test2", StringComparison.InvariantCultureIgnoreCase));
+				var similarity2 = r.IndexSettings.Similarity.CustomSimilarities.FirstOrDefault(x => x.Name.Equals("test2", StringComparison.InvariantCultureIgnoreCase));
 				Assert.NotNull(similarity2);
 				Assert.AreEqual("IB", similarity2.Type);
 				Assert.AreEqual(3, similarity2.SimilarityParameters.Count);
@@ -204,7 +204,7 @@ namespace Nest.Tests.Integration.Indices
 			Assert.True(r.IsValid);
 			Assert.True(r.Acknowledged);
 			var getResponse = this._client.GetIndexSettings(i=>i.Index(index));
-			Assert.AreEqual(getResponse.Settings.Settings["refresh_interval"], "-1");
+			Assert.AreEqual(getResponse.IndexSettings.Settings["refresh_interval"], "-1");
 
 			this._client.DeleteIndex(i=>i.Index(index));
 		}
