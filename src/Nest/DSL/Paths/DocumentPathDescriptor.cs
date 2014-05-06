@@ -27,7 +27,7 @@ namespace Nest
 
 		internal override ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
 		{
-			var pathInfo = base.ToPathInfo(queryString);
+			var pathInfo = base.ToPathInfo(settings, queryString);
 			
 			pathInfo.Index.ThrowIfNullOrEmpty("index");
 			pathInfo.Type.ThrowIfNullOrEmpty("type");
