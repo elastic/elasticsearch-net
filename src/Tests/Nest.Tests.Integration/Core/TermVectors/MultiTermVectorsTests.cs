@@ -32,6 +32,29 @@ namespace Nest.Tests.Integration.Core.TermVectors
 				document.TermVectors.First().Key.Should().Be("content");
 			}
 		}
+		
+		[Test]
+		public void MultiTermVectorsTest_DocumentsInBody()
+		{
+			var result = _client.MultiTermVectors<ElasticsearchProject>(s => s
+				.Fields(ep => ep.Content)
+				.Documents(
+					m=>m.Id(1).TermStatistics(),
+					m=>m.Id(2).FieldStatistics().Offsets(false)
+				)
+			);
+
+			result.IsValid.Should().BeTrue();
+
+			result.Documents.Should().NotBeNull();
+			result.Documents.Count().Should().Be(2);
+
+			foreach (var document in result.Documents)
+			{
+				document.TermVectors.Count().Should().Be(1);
+				document.TermVectors.First().Key.Should().Be("content");
+			}
+		}
 
 		[Test]
 		public void MultiTermVectorsNonExistentIdTest()

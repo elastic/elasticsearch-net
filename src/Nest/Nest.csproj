@@ -142,6 +142,7 @@
     <Compile Include="DSL\DeleteSnapshotDescriptor.cs" />
     <Compile Include="DSL\GetSnapshotDescriptor.cs" />
     <Compile Include="DSL\MultiTermVectorsDescriptor.cs" />
+    <Compile Include="DSL\Paths\DocumentOptionalPathDescriptor.cs" />
     <Compile Include="DSL\RestoreDescriptor.cs" />
     <Compile Include="DSL\SnapshotDescriptor.cs" />
     <Compile Include="DSL\DeleteRepositoryDescriptor.cs" />
