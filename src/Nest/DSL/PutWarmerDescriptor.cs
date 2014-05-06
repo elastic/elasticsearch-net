@@ -17,15 +17,14 @@ namespace Nest
 	public partial class PutWarmerDescriptor :
 		IndicesOptionalTypesNamePathDecriptor<PutWarmerDescriptor, PutWarmerRequestParameters>
 		, IPathInfo<PutWarmerRequestParameters>
-		, IActAsSearchDescriptor
 		, ICustomJson
 	{
-		SearchDescriptorBase IActAsSearchDescriptor._SearchDescriptor { get; set; }
+		private SearchDescriptorBase _searchDescriptor { get; set; }
 
 		public PutWarmerDescriptor Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> selector)
 			where T : class
 		{
-			((IActAsSearchDescriptor)this)._SearchDescriptor = selector(new SearchDescriptor<T>());
+			this._searchDescriptor = selector(new SearchDescriptor<T>());
 			return this;
 		}
 
@@ -38,7 +37,7 @@ namespace Nest
 		}
 		object ICustomJson.GetCustomJson()
 		{
-			return ((IActAsSearchDescriptor)this)._SearchDescriptor;
+			return this._searchDescriptor;
 		}
 	}
 }

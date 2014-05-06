@@ -242,7 +242,6 @@
     <Compile Include="DSL\DeleteTemplateDescriptor.cs" />
     <Compile Include="DSL\GetTemplateDescriptor.cs" />
     <Compile Include="DSL\DeleteWarmerDescriptor.cs" />
-    <Compile Include="DSL\IActAsSearchDescriptor.cs" />
     <Compile Include="Domain\DSL\IPathInfo.cs" />
     <Compile Include="DSL\Paths\IndexNamePathDescriptor.cs" />
     <Compile Include="DSL\Paths\NamePathDescriptor.cs" />
@@ -251,7 +250,6 @@
     <Compile Include="DSL\RefreshDescriptor.cs" />
     <Compile Include="DSL\OptimizeDescriptor.cs" />
     <Compile Include="DSL\GatewaySnapshotDescriptor.cs" />
-    <Compile Include="DSL\IActAsQuery.cs" />
     <Compile Include="DSL\OpenIndexDescriptor.cs" />
     <Compile Include="DSL\FluentDictionary.cs" />
     <Compile Include="DSL\Paths\IndexPathDescriptor.cs" />
