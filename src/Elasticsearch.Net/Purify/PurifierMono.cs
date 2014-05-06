@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Text;
 using Purify;
 
-namespace PUrify
+namespace PurifyNet
 {
-    class PurifierMono : IPurifier
+    internal class PurifierMono : IPurifier
     {
         private static Type uriType = typeof(Uri);
         private static FieldInfo mono_sourceField;

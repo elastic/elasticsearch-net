@@ -11,7 +11,7 @@ namespace Elasticsearch.Net.Connection
 		private readonly bool _enabled;
 		private Stopwatch _stopwatch;
 
-		public ElasticsearchResponse<T> _result { get; set; }
+		private ElasticsearchResponse<T> _result;
 
 		public ElasticsearchResponseTracer(bool enabled)
 		{

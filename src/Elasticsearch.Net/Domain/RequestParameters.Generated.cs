@@ -2280,17 +2280,6 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
-		
-		internal bool _fielddata { get; set; }
-		///<summary>Clear field data</summary>
-		public ClearCacheRequestParameters Fielddata(bool fielddata)
-		{
-			this._fielddata = fielddata;
-			this.AddQueryString("fielddata", this._fielddata);
-			return this;
-		}
-		
-		
 		internal IEnumerable<object> _fields { get; set; }
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		public ClearCacheRequestParameters Fields(params string[] fields)

@@ -138,7 +138,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				if (uri.Port == 9202)
 					statusCode = 200;
 
-				return ElasticsearchResponse<Stream>.Create(this._ConnectionSettings, statusCode, "GET", "/", null);
+				return ElasticsearchResponse<Stream>.Create(this.ConnectionSettings, statusCode, "GET", "/", null);
 			
 			}
 		}

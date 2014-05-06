@@ -7,7 +7,7 @@ namespace Elasticsearch.Net.ConnectionPool
 {
 	public class EndpointState
 	{
-		public int _attempts = -1;
-		public DateTime date = new DateTime();
+		public int Attemps = -1;
+		public DateTime Date = new DateTime();
 	}
 }

@@ -1,9 +1,9 @@
 using System;
 using System.Reflection;
 
-namespace PUrify
+namespace PurifyNet
 {
-    public static class Purifier
+    internal static class Purifier
     {
 
         private static readonly bool hasBrokenDotNetUri;

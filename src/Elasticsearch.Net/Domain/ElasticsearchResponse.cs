@@ -86,8 +86,8 @@ namespace Elasticsearch.Net
 
 	public class ElasticsearchResponse<T> : IElasticsearchResponse
 	{
-		protected static readonly string _printFormat;
-		protected static readonly string _errorFormat;
+		private static readonly string _printFormat;
+		private static readonly string _errorFormat;
 
 		public bool Success { get; protected internal set; }
 

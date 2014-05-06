@@ -516,6 +516,7 @@ namespace Elasticsearch.Net
 		/// An 8-bit signed integer equivalent to the value of this instance.
 		/// </returns>
 		/// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
+		[CLSCompliant(false)]
 		public sbyte ToSByte(IFormatProvider provider)
 		{
 			return Convert.ToSByte(value, provider);
@@ -552,6 +553,7 @@ namespace Elasticsearch.Net
 		/// An 16-bit unsigned integer equivalent to the value of this instance.
 		/// </returns>
 		/// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
+		[CLSCompliant(false)]
 		public ushort ToUInt16(IFormatProvider provider)
 		{
 			return Convert.ToUInt16(value, provider);
@@ -576,6 +578,7 @@ namespace Elasticsearch.Net
 		/// An 32-bit unsigned integer equivalent to the value of this instance.
 		/// </returns>
 		/// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
+		[CLSCompliant(false)]
 		public uint ToUInt32(IFormatProvider provider)
 		{
 			return Convert.ToUInt32(value, provider);
@@ -600,6 +603,7 @@ namespace Elasticsearch.Net
 		/// An 64-bit unsigned integer equivalent to the value of this instance.
 		/// </returns>
 		/// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information. </param><filterpriority>2</filterpriority>
+		[CLSCompliant(false)]
 		public ulong ToUInt64(IFormatProvider provider)
 		{
 			return Convert.ToUInt64(value, provider);

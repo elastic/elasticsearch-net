@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Providers;
-using PUrify;
+using PurifyNet;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -17,8 +17,8 @@ namespace Elasticsearch.Net.Connection
 	{
 		const int BUFFER_SIZE = 1024;
 
-		protected IConnectionConfigurationValues _ConnectionSettings { get; set; }
-		private Semaphore _ResourceLock;
+		protected IConnectionConfigurationValues ConnectionSettings { get; set; }
+		private readonly Semaphore _resourceLock;
 		private readonly bool _enableTrace;
 
 		static HttpConnection()
@@ -33,11 +33,11 @@ namespace Elasticsearch.Net.Connection
 			if (settings == null)
 				throw new ArgumentNullException("settings");
 
-			this._ConnectionSettings = settings;
+			this.ConnectionSettings = settings;
 			if (settings.MaximumAsyncConnections > 0)
 			{
 				var semaphore = Math.Max(1, settings.MaximumAsyncConnections);
-				this._ResourceLock = new Semaphore(semaphore, semaphore);
+				this._resourceLock = new Semaphore(semaphore, semaphore);
 			}
 			this._enableTrace = settings.TraceEnabled;
 		}
@@ -137,11 +137,11 @@ namespace Elasticsearch.Net.Connection
 
 		private void SetProxyIfNeeded(HttpWebRequest myReq)
 		{
-			if (!string.IsNullOrEmpty(this._ConnectionSettings.ProxyAddress))
+			if (!string.IsNullOrEmpty(this.ConnectionSettings.ProxyAddress))
 			{
 				var proxy = new WebProxy();
-				var uri = new Uri(this._ConnectionSettings.ProxyAddress);
-				var credentials = new NetworkCredential(this._ConnectionSettings.ProxyUsername, this._ConnectionSettings.ProxyPassword);
+				var uri = new Uri(this.ConnectionSettings.ProxyAddress);
+				var credentials = new NetworkCredential(this.ConnectionSettings.ProxyUsername, this.ConnectionSettings.ProxyPassword);
 				proxy.Address = uri;
 				proxy.Credentials = credentials;
 				myReq.Proxy = proxy;
@@ -174,7 +174,7 @@ namespace Elasticsearch.Net.Connection
 				myReq.Accept = requestSpecificConfig.AcceptsContentType;
 				myReq.ContentType = requestSpecificConfig.AcceptsContentType;
 			}
-			var timeout = this._ConnectionSettings.Timeout;
+			var timeout = this.ConnectionSettings.Timeout;
 			myReq.Timeout = timeout; // 1 minute timeout.
 			myReq.ReadWriteTimeout = timeout; // 1 minute timeout.
 			myReq.Method = method;
@@ -226,13 +226,13 @@ namespace Elasticsearch.Net.Connection
 				cs = WebToElasticsearchResponse(data, httpEx.GetResponseStream(), httpEx, method, path);
 				return cs;
 			}
-			cs = ElasticsearchResponse<Stream>.CreateError(this._ConnectionSettings, webException, method, path, data);
+			cs = ElasticsearchResponse<Stream>.CreateError(this.ConnectionSettings, webException, method, path, data);
 			return cs;
 		}
 
 		private ElasticsearchResponse<Stream> WebToElasticsearchResponse(byte[] data, Stream responseStream, HttpWebResponse response, string method, string path)
 		{
-			ElasticsearchResponse<Stream> cs = ElasticsearchResponse<Stream>.Create(this._ConnectionSettings, (int)response.StatusCode, method, path, data);
+			ElasticsearchResponse<Stream> cs = ElasticsearchResponse<Stream>.Create(this.ConnectionSettings, (int)response.StatusCode, method, path, data);
 			cs.Response = responseStream;
 			return cs;
 		}
@@ -240,18 +240,18 @@ namespace Elasticsearch.Net.Connection
 		protected virtual Task<ElasticsearchResponse<Stream>> DoAsyncRequest(HttpWebRequest request, byte[] data = null, IRequestConnectionConfiguration requestSpecificConfig = null)
 		{
 			var tcs = new TaskCompletionSource<ElasticsearchResponse<Stream>>();
-			if (this._ConnectionSettings.MaximumAsyncConnections <= 0
-			  || this._ResourceLock == null)
+			if (this.ConnectionSettings.MaximumAsyncConnections <= 0
+			  || this._resourceLock == null)
 				return this.CreateIterateTask(request, data, requestSpecificConfig, tcs);
 
-			var timeout = this._ConnectionSettings.Timeout;
+			var timeout = this.ConnectionSettings.Timeout;
 			var path = request.RequestUri.ToString();
 			var method = request.Method;
-			if (!this._ResourceLock.WaitOne(timeout))
+			if (!this._resourceLock.WaitOne(timeout))
 			{
 				var m = "Could not start the operation before the timeout of " + timeout +
 				  "ms completed while waiting for the semaphore";
-				var cs = ElasticsearchResponse<Stream>.CreateError(this._ConnectionSettings, new TimeoutException(m), method, path, data);
+				var cs = ElasticsearchResponse<Stream>.CreateError(this.ConnectionSettings, new TimeoutException(m), method, path, data);
 				tcs.SetResult(cs);
 				return tcs.Task;
 			}
@@ -261,7 +261,7 @@ namespace Elasticsearch.Net.Connection
 			}
 			finally
 			{
-				this._ResourceLock.Release();
+				this._resourceLock.Release();
 			}
 		}
 
@@ -273,7 +273,7 @@ namespace Elasticsearch.Net.Connection
 
 		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs, byte[] data, object requestSpecificConfig)
 		{
-			var timeout = this._ConnectionSettings.Timeout;
+			var timeout = this.ConnectionSettings.Timeout;
 
 			var state = new ConnectionState { Connection = request };
 
@@ -309,7 +309,7 @@ namespace Elasticsearch.Net.Connection
 			//Since we expose the stream we let closing the stream determining when to close the connection
 			var response = (HttpWebResponse)getResponse.Result;
 			var responseStream = response.GetResponseStream();
-			var cs = ElasticsearchResponse<Stream>.Create(this._ConnectionSettings, (int)response.StatusCode, method, path, data);
+			var cs = ElasticsearchResponse<Stream>.Create(this.ConnectionSettings, (int)response.StatusCode, method, path, data);
 			cs.Response = responseStream;
 			tcs.TrySetResult(cs);
 		}
@@ -332,7 +332,7 @@ namespace Elasticsearch.Net.Connection
 						var path = request.RequestUri.ToString();
 						var method = request.Method;
 
-						var response = ElasticsearchResponse<T>.CreateError(this._ConnectionSettings, exception, method, path, data);
+						var response = ElasticsearchResponse<T>.CreateError(this.ConnectionSettings, exception, method, path, data);
 						tcs.SetResult(response);
 					}
 					else

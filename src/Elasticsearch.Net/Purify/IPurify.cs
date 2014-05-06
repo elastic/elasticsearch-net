@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PUrify
+namespace PurifyNet
 {
-    interface IPurifier
+    internal interface IPurifier
     {
         void Purify(Uri uri);
     }

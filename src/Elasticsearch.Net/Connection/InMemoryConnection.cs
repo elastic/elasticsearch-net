@@ -33,7 +33,7 @@ namespace Elasticsearch.Net.Connection
 			var method = request.Method;
 			var path = request.RequestUri.ToString();
 
-			var cs = ElasticsearchResponse<Stream>.Create(this._ConnectionSettings, 200, method, path, data);
+			var cs = ElasticsearchResponse<Stream>.Create(this.ConnectionSettings, 200, method, path, data);
 			cs.Response = new MemoryStream(_fixedResultBytes);
 			return cs;
 		}

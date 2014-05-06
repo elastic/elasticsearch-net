@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Text;
 using Purify;
 
-namespace PUrify
+namespace PurifyNet
 {
-    class PurifierDotNet : IPurifier
+    internal class PurifierDotNet : IPurifier
     {
         private static FieldInfo flagsField;
         private static FieldInfo infoField;

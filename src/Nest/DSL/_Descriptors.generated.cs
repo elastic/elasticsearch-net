@@ -2086,14 +2086,6 @@ namespace Nest
 		}
 		
 
-		///<summary>Clear field data</summary>
-		public ClearCacheDescriptor Fielddata(bool fielddata = true)
-		{
-			this._QueryString.Fielddata(fielddata);
-			return this;
-		}
-		
-
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		public ClearCacheDescriptor Fields(params string[] fields)
 		{

@@ -16,13 +16,13 @@ using Nest.Tests.MockData.Domain;
 using System.Reflection;
 using System.IO;
 using Moq;
-using PUrify;
+using PurifyNet;
 
 namespace Nest.Tests.Unit
 {
 	public static class UnitTestDefaults
 	{
-		public static readonly Uri Uri = new Uri("http://localhost:9200").Purify();
+		public static readonly Uri Uri = new Uri("http://localhost:9200");
 		public static readonly string DefaultIndex = "nest_test_data";
 	}
 
