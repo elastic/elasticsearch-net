@@ -21,5 +21,8 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "doc_as_upsert")]
 		public bool? _DocAsUpsert { get; set; }
+
+		[JsonProperty(PropertyName = "lang")]
+		public string _Lang { get; set; }
 	}
 }

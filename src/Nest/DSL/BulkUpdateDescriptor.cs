@@ -15,7 +15,7 @@ namespace Nest
 		internal override string _Operation { get { return "update"; } }
 		internal override object _Object { get; set; }
 
-		
+		internal string _Lang { get; set; }
 		internal K _Document { get; set; }
 		internal string _Script { get; set; }
 		internal Dictionary<string, object> _Params { get; set; }
@@ -28,6 +28,7 @@ namespace Nest
 			{
 				_Document = this._Document,
 				_Script = this._Script,
+				_Lang = this._Lang,
 				_Params = this._Params,
 				_Upsert = this._Upsert,
 				_DocAsUpsert = this._DocAsUpsert
@@ -114,6 +115,12 @@ namespace Nest
 			return this;
 		}
 		
+		public BulkUpdateDescriptor<T, K> Lang(string lang)
+		{
+			this._Lang = lang;
+			return this;
+		}
+
 		public BulkUpdateDescriptor<T, K> Script(string script)
 		{
 			script.ThrowIfNull("script");

@@ -15,6 +15,8 @@ namespace Nest
 		where K : class
 	{
 
+
+
 		[JsonProperty(PropertyName = "script")]
 		internal string _Script { get; set; }
 
@@ -31,6 +33,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "doc")]
 		internal K _Document { get; set; }
 
+		
 		public UpdateDescriptor<T, K> Script(string script)
 		{
 			script.ThrowIfNull("script");
