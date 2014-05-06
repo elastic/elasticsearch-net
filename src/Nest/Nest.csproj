@@ -128,7 +128,6 @@
     <Compile Include="Domain\Analysis\CharFilter\PatternReplaceCharFilter.cs" />
     <Compile Include="Domain\Bulk\MultiGetDoc.cs" />
     <Compile Include="Domain\Connection\ConnectionSettings.cs" />
-    <Compile Include="Domain\Connection\IConnectionSettings.cs" />
     <Compile Include="Domain\Connection\IConnectionSettingsValues.cs" />
     <Compile Include="Domain\DSL\DescriptorForAttribute.cs" />
     <Compile Include="Domain\ICustomJson.cs" />

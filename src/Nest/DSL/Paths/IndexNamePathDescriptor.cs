@@ -51,13 +51,9 @@ namespace Nest
 				throw new DslException("missing Repository()");
 			var inferrer = new ElasticInferrer(settings);
 			var index = inferrer.IndexName(this._Index) ?? inferrer.DefaultIndex; 
-			var pathInfo = new ElasticsearchPathInfo<TParameters>()
-			{
-				Index = index,
-				Name = this._Name
-			};
-			pathInfo.RequestParameters = queryString ?? new TParameters();
-			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
+			var pathInfo = base.ToPathInfo(queryString);
+			pathInfo.Index = index;
+			pathInfo.Name = this._Name;
 			return pathInfo;
 		}
 

@@ -48,12 +48,8 @@ namespace Nest
 				throw new DslException("missing call to Index()");
 
 			var index = new ElasticInferrer(settings).IndexName(this._Index); 
-			var pathInfo = new ElasticsearchPathInfo<TParameters>()
-			{
-				Index = index,
-			};
-			pathInfo.RequestParameters = queryString ?? new TParameters();
-			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
+			var pathInfo = base.ToPathInfo(queryString);
+			pathInfo.Index = index;
 			return pathInfo;
 		}
 

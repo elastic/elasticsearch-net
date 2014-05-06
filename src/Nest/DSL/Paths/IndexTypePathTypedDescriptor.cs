@@ -66,15 +66,12 @@ namespace Nest
 			if (this._Type == null)
 				this._Type = inferrer.TypeName<T>();
 
-			var index = new ElasticInferrer(settings).IndexName(this._Index); 
-			var type = new ElasticInferrer(settings).TypeName(this._Type); 
-			var pathInfo = new ElasticsearchPathInfo<TParameter>()
-			{
-				Index = index,
-				Type = type
-			};
-			pathInfo.RequestParameters = queryString ?? new TParameter();
-			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
+			var index = inferrer.IndexName(this._Index); 
+			var type = inferrer.TypeName(this._Type); 
+
+			var pathInfo = base.ToPathInfo(queryString);
+			pathInfo.Index = index;
+			pathInfo.Type = type;
 			return pathInfo;
 		}
 

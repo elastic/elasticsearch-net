@@ -33,12 +33,8 @@ namespace Nest
 			if (this._Name.IsNullOrEmpty())
 				throw new DslException("missing Repository()");
 
-			var pathInfo = new ElasticsearchPathInfo<TParameters>()
-			{
-				Name = this._Name
-			};
-			pathInfo.RequestParameters = queryString ?? new TParameters();
-			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
+			var pathInfo = base.ToPathInfo(queryString);
+			pathInfo.Name = this._Name;
 			return pathInfo;
 		}
 

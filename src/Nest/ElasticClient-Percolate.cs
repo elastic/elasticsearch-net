@@ -13,8 +13,8 @@ namespace Nest
 		{
 			selector = selector ?? (s => s);
 			return this.Dispatch<UnregisterPercolatorDescriptor, DeleteRequestParameters, UnregisterPercolateResponse>(
-				s => selector(s.Name(name)),
-				(p, d) => this.RawDispatch.DeleteDispatch<UnregisterPercolateResponse>(p), true
+				s => selector(s.Name(name).RequestConfiguration(r=>r.AllowStatusCodes(404))),
+				(p, d) => this.RawDispatch.DeleteDispatch<UnregisterPercolateResponse>(p)
 			);
 		}
 
@@ -25,8 +25,8 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.DispatchAsync
 				<UnregisterPercolatorDescriptor, DeleteRequestParameters, UnregisterPercolateResponse, IUnregisterPercolateResponse>(
-					s => selector(s.Name(name)),
-					(p, d) => this.RawDispatch.DeleteDispatchAsync<UnregisterPercolateResponse>(p), true
+					s => selector(s.Name(name).RequestConfiguration(r=>r.AllowStatusCodes(404))),
+					(p, d) => this.RawDispatch.DeleteDispatchAsync<UnregisterPercolateResponse>(p)
 				);
 		}
 

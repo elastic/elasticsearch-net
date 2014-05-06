@@ -192,17 +192,25 @@ namespace Elasticsearch.Net.Connection
 				var streamResponse = _doRequest(requestState.Method, uri, requestState.PostData, requestState.RequestConfiguration);
 				if (streamResponse != null && streamResponse.SuccessOrKnownError)
 				{
+					ElasticsearchServerError error = null;
 					if (!streamResponse.Success
 						&& requestState.RequestConfiguration == null
-						|| (requestState.RequestConfiguration != null
+						|| (!streamResponse.Success
+							&& requestState.RequestConfiguration != null
 							&& requestState.RequestConfiguration.AllowedStatusCodes.All(i => i != streamResponse.HttpStatusCode)))
 					{
-						var deserialized = this.Serializer.Deserialize<ElasticsearchServerException>(streamResponse.Response);
-						throw deserialized;
+						error = this.Serializer.Deserialize<ElasticsearchServerError>(streamResponse.Response);
+						if (this.Settings.ThrowOnElasticsearchServerExceptions)
+							throw new ElasticsearchServerException(error);
 					}
 
 					var typedResponse = this.StreamToTypedResponse<T>(streamResponse, requestState.DeserializationState);
 					typedResponse.NumberOfRetries = retried;
+					if (error != null)
+					{
+						typedResponse.Success = false;
+						typedResponse.OriginalException = new ElasticsearchServerException(error);
+					}
 					response = typedResponse;
 					return typedResponse;
 				}

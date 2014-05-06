@@ -116,11 +116,9 @@ namespace Nest
 			var inferrer = new ElasticInferrer(settings);
 			var index = inferrer.IndexName<T>();
 			var type = inferrer.TypeName<T>();
-			var pathInfo = new ElasticsearchPathInfo<TParameters>()
-			{
-				Index = index,
-				Type = type
-			};
+			var pathInfo = base.ToPathInfo(queryString);
+			pathInfo.Index = index;
+			pathInfo.Type = type;
 
 			if (this._Types.HasAny())
 				pathInfo.Type = inferrer.TypeNames(this._Types);
@@ -135,8 +133,6 @@ namespace Nest
 			else
 				pathInfo.Index = this._AllIndices ? null : inferrer.IndexName<T>();
 
-			pathInfo.RequestParameters = queryString ?? new TParameters();
-			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}
 

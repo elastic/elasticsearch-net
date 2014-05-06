@@ -65,12 +65,8 @@ namespace Nest
 			if (!this._AllIndices.GetValueOrDefault(false))
 				index = string.Join(",", this._Indices.Select(inferrer.IndexName));
 
-			var pathInfo = new ElasticsearchPathInfo<TParameters>()
-			{
-				Index = index,
-			};
-			pathInfo.RequestParameters = queryString ?? new TParameters();
-			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
+			var pathInfo = base.ToPathInfo(queryString);
+			pathInfo.Index = index;
 			return pathInfo;
 		}
 

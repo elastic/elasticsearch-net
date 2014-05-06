@@ -132,14 +132,10 @@ namespace Nest
 				? inferrer.TypeNames(this._Types)
 				: null;
 
-			var pathInfo = new ElasticsearchPathInfo<TParameters>()
-			{
-				Index = indices,
-				Type = types,
-				Name = this._Name
-			};
-			pathInfo.RequestParameters = queryString ?? new TParameters();
-			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
+			var pathInfo = base.ToPathInfo(queryString);
+			pathInfo.Index = indices;
+			pathInfo.Type = types;
+			pathInfo.Name = this._Name;
 			return pathInfo;
 		}
 

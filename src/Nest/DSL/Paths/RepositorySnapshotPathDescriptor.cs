@@ -46,14 +46,10 @@ namespace Nest
 			if (this._Snapshot.IsNullOrEmpty())
 				throw new DslException("missing Snapshot()");
 
-			var pathInfo = new ElasticsearchPathInfo<TParameters>()
-			{
-				Repository = this._Repository,
-				Snapshot = this._Snapshot
+			var pathInfo = base.ToPathInfo(queryString);
+			pathInfo.Repository = this._Repository;
+			pathInfo.Snapshot = this._Snapshot;
 
-			};
-			pathInfo.RequestParameters = queryString ?? new TParameters();
-			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}
 

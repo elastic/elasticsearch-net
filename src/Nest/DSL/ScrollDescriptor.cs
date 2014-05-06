@@ -13,7 +13,7 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public partial class ScrollDescriptor<T> :
+	public partial class ScrollDescriptor<T> : BasePathDescriptor<ScrollDescriptor<T>>,
 		IPathInfo<ScrollRequestParameters>,
 		IHideObjectMembers
 		where T : class

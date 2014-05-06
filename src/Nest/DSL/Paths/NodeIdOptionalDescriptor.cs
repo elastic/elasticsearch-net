@@ -35,12 +35,8 @@ namespace Nest
 
 		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
 		{
-			var pathInfo = new ElasticsearchPathInfo<TParameters>()
-			{
-				NodeId = this._NodeId
-			};
-			pathInfo.RequestParameters = queryString ?? new TParameters();
-			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
+			var pathInfo = base.ToPathInfo(queryString);
+			pathInfo.NodeId = this._NodeId;
 			return pathInfo;
 		}
 

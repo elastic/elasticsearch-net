@@ -51,44 +51,60 @@ namespace Elasticsearch.Net.Connection
 
 		private int _timeout;
 		int IConnectionConfigurationValues.Timeout { get { return _timeout; }}
+		
 		private int? _pingTimeout;
 		int? IConnectionConfigurationValues.PingTimeout { get{ return _pingTimeout; } }
 
 		private int? _deadTimeout;
 		int? IConnectionConfigurationValues.DeadTimeout { get{ return _deadTimeout; } }
+		
 		private int? _maxDeadTimeout;
 		int? IConnectionConfigurationValues.MaxDeadTimeout { get{ return _maxDeadTimeout; } }
+	
 		private string _proxyUsername;
 		string IConnectionConfigurationValues.ProxyUsername { get{ return _proxyUsername; } }
+		
 		private string _proxyPassword;
 		string IConnectionConfigurationValues.ProxyPassword { get{ return _proxyPassword; } }
+		
 		private bool _disablePings;
 		bool IConnectionConfigurationValues.DisablePings { get{ return _disablePings; } }
+		
 		private string _proxyAddress;
 		string IConnectionConfigurationValues.ProxyAddress { get{ return _proxyAddress; } }
 
 		private bool _usePrettyResponses;
 		bool IConnectionConfigurationValues.UsesPrettyResponses { get{ return _usePrettyResponses; } }
+
 		private bool _keepRawResponse;
 		bool IConnectionConfigurationValues.KeepRawResponse { get{ return _keepRawResponse; } }
 
 		private int _maximumAsyncConnections;
 		int IConnectionConfigurationValues.MaximumAsyncConnections { get{ return _maximumAsyncConnections; } }
+
 		private int? _maxRetries;
 		int? IConnectionConfigurationValues.MaxRetries { get{ return _maxRetries; } }
+
 		private bool _sniffOnStartup;
 		bool IConnectionConfigurationValues.SniffsOnStartup { get{ return _sniffOnStartup; } }
+
 		private bool _sniffOnConectionFault;
 		bool IConnectionConfigurationValues.SniffsOnConnectionFault { get{ return _sniffOnConectionFault; } }
+
 		private TimeSpan? _sniffLifeSpan;
 		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan { get{ return _sniffLifeSpan; } }
+
 		private bool _traceEnabled;
 		bool IConnectionConfigurationValues.TraceEnabled { get{ return _traceEnabled; } }
+
+		private bool _throwOnServerExceptions;
+		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions { get{ return _throwOnServerExceptions; } }
+
 		private Action<IElasticsearchResponse> _connectionStatusHandler;
 		Action<IElasticsearchResponse> IConnectionConfigurationValues.ConnectionStatusHandler { get{ return _connectionStatusHandler; } }
+		
 		private NameValueCollection _queryString;
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters { get{ return _queryString; } }
-
 
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer { get; set; }
 
@@ -140,6 +156,16 @@ namespace Elasticsearch.Net.Connection
 			return (T) this;
 		}
 
+		/// <summary>
+		/// Instead of following a c/go like error checking on response.IsValid always throw an ElasticsearchServerException
+		/// on the client when a call resulted in an exception on the elasticsearch server. 
+		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions</para>
+		/// </summary>
+		public T ThrowOnElasticsearchServerExceptions(bool alwaysThrow = true)
+		{
+			this._throwOnServerExceptions = alwaysThrow;
+			return (T) this;
+		}
 		/// <summary>
 		/// When a node is used for the very first time or when it's used for the first time after it has been marked dead
 		/// a ping with a very low timeout is send to the node to make sure that when it's still dead it reports it as fast as possible.
