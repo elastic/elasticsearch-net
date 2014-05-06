@@ -18,7 +18,7 @@ namespace Nest.Tests.Integration.RawCalls
 
 			e.Status.Should().Be(400);
 			e.ExceptionType.Should().Be("SearchPhaseExecutionException");
-			e.Error.Should().Contain("Failed to parse source");
+			e.Message.Should().Contain("Failed to parse source");
 		}
 		
 		[Test]
@@ -30,7 +30,7 @@ namespace Nest.Tests.Integration.RawCalls
 
 			e.Status.Should().Be(400);
 			e.ExceptionType.Should().Be("SearchPhaseExecutionException");
-			e.Error.Should().Contain("Failed to parse source");
+			e.Message.Should().Contain("Failed to parse source");
 		}
 	}
 }

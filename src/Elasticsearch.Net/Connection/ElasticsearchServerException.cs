@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -12,28 +13,33 @@ namespace Elasticsearch.Net.Connection
 	{
 		public int Status { get; set; }
 		public string Error { get; set; }
+		public string ExceptionType { get; set; }
 	
 	}
 
 	public class ElasticsearchServerException : Exception
 	{
-		private static Regex ExceptionSplitter = new Regex(@"^([^\[]*?)\[(.*)\]", RegexOptions.Singleline);
+		private static readonly Regex ExceptionSplitter = new Regex(@"^([^\[]*?)\[(.*)\]", RegexOptions.Singleline);
+		private static readonly string _couldNotParseServerException = "Could not parse server exception";
 
 		public int Status { get; set; }
-		public string Error { get; set; }
 		public string ExceptionType { get; set; }
-		public ElasticsearchServerException(ElasticsearchServerError error)
+		public ElasticsearchServerException(ElasticsearchServerError error) : base(ParseError(error))
 		{
-			if (error == null) return;
 			this.Status = error.Status;
-			if (error.Error.IsNullOrEmpty()) return;
+			this.ExceptionType = error.ExceptionType;
+		}
+		//iffy side effect assignment to exceptionType needed so that we simply return message to the 
+		//base constructor.
+		private static string ParseError(ElasticsearchServerError error)
+		{
+			if (error == null) return _couldNotParseServerException;
+			if (error.Error.IsNullOrEmpty()) return _couldNotParseServerException;
 			var matches = ExceptionSplitter.Match(error.Error);
-			if (matches.Groups.Count == 3)
-			{
-				this.Error = matches.Groups[2].Value;
-				this.ExceptionType = matches.Groups[1].Value;
-			}
-			else this.Error = error.Error;
+			if (matches.Groups.Count != 3) return _couldNotParseServerException;
+
+			error.ExceptionType = matches.Groups[1].Value;
+			return matches.Groups[2].Value;
 		}
 	}
 }
