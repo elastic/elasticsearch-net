@@ -10,20 +10,20 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		///<inheritdoc />
-		public IMultiTermVectorResponse MultiTermVectors<T>(Func<MtermvectorsDescriptor<T>, MtermvectorsDescriptor<T>> multiTermVectorsSelector)
+		public IMultiTermVectorResponse MultiTermVectors<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
 			where T : class
 		{
-			return this.Dispatch<MtermvectorsDescriptor<T>, MtermvectorsRequestParameters, MultiTermVectorResponse>(
+			return this.Dispatch<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, MultiTermVectorResponse>(
 				multiTermVectorsSelector,
 				(p, d) => this.RawDispatch.MtermvectorsDispatch<MultiTermVectorResponse>(p, d)
 			);
 		}
 
 		///<inheritdoc />
-		public Task<IMultiTermVectorResponse> MultiTermVectorsAsync<T>(Func<MtermvectorsDescriptor<T>, MtermvectorsDescriptor<T>> multiTermVectorsSelector)
+		public Task<IMultiTermVectorResponse> MultiTermVectorsAsync<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
 			where T : class
 		{
-			return this.DispatchAsync<MtermvectorsDescriptor<T>, MtermvectorsRequestParameters, MultiTermVectorResponse, IMultiTermVectorResponse>(
+			return this.DispatchAsync<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, MultiTermVectorResponse, IMultiTermVectorResponse>(
 				multiTermVectorsSelector,
 				(p, d) => this.RawDispatch.MtermvectorsDispatchAsync<MultiTermVectorResponse>(p, d)
 			);

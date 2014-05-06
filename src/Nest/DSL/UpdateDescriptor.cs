@@ -82,6 +82,9 @@ namespace Nest
 
 		ElasticsearchPathInfo<UpdateRequestParameters> IPathInfo<UpdateRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
+			if (this._Document != null && this._Id == null)
+				this._Id = new ElasticInferrer(settings).Id(this._Document);
+
 			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.RequestParameters = this._QueryString;
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;

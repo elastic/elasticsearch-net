@@ -83,6 +83,11 @@ namespace Nest
 			var index = this._Index != null ? inferrer.IndexName(this._Index) : inferrer.IndexName<T>();
 			var type = this._Type != null ? inferrer.TypeName(this._Type) : inferrer.TypeName<T>();
 			var id = this._Id ?? inferrer.Id(this._Object);
+			
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
+
 
 			var pathInfo = base.ToPathInfo(queryString);
 			pathInfo.Index = index;

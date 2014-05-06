@@ -17,7 +17,9 @@ namespace Nest.Tests.Integration.Core.TermVectors
 		{
 			var result = _client.MultiTermVectors<ElasticsearchProject>(s => s
 				.Fields(ep => ep.Content)
-				.Ids("1", "2"));
+				.Ids("1", "2")
+			);
+
 
 			result.IsValid.Should().BeTrue();
 
@@ -35,7 +37,8 @@ namespace Nest.Tests.Integration.Core.TermVectors
 		public void MultiTermVectorsNonExistentIdTest()
 		{
 			var result = _client.MultiTermVectors<ElasticsearchProject>(s => s
-				.Ids("thisiddoesnotexist"));
+				.Ids("thisiddoesnotexist")
+			);
 
 			result.IsValid.Should().BeTrue();
 			result.Documents.Count().Should().Be(1);

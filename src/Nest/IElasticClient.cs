@@ -1060,7 +1060,7 @@ namespace Nest
         /// </summary>
         /// <typeparam name="T">The type used to infer the default index and typename</typeparam>
         /// <param name="multiTermVectorsSelector">The descriptor describing the multi termvectors operation</param>
-        IMultiTermVectorResponse MultiTermVectors<T>(Func<MtermvectorsDescriptor<T>, MtermvectorsDescriptor<T>> multiTermVectorsSelector)
+        IMultiTermVectorResponse MultiTermVectors<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
             where T : class;
 
         /// <summary>
@@ -1069,7 +1069,7 @@ namespace Nest
         /// </summary>
         /// <typeparam name="T">The type used to infer the default index and typename</typeparam>
         /// <param name="multiTermVectorsSelector">The descriptor describing the multi termvectors operation</param>
-        Task<IMultiTermVectorResponse> MultiTermVectorsAsync<T>(Func<MtermvectorsDescriptor<T>, MtermvectorsDescriptor<T>> multiTermVectorsSelector)
+        Task<IMultiTermVectorResponse> MultiTermVectorsAsync<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
             where T : class;
 		
 		/// <summary>

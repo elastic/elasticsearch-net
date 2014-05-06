@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Core
 		[Test]
 		public void TestUpdate()
 		{
-			var project = this._client.Source<ElasticsearchProject>(s=>s.Id(1));
+			var project = this._client.Source<ElasticsearchProject>(s => s.Id(1));
 			Assert.NotNull(project);
 			Assert.Greater(project.LOC, 0);
 			var loc = project.LOC;
@@ -19,7 +19,24 @@ namespace Nest.Tests.Integration.Core
 			  .RetryOnConflict(5)
 			  .Refresh()
 			);
-			project = this._client.Source<ElasticsearchProject>(s=>s.Id(1));
+			project = this._client.Source<ElasticsearchProject>(s => s.Id(1));
+			Assert.AreEqual(project.LOC, loc + 10);
+			Assert.AreNotEqual(project.Version, "1");
+		}
+
+		[Test]
+		public void DocAsUpsert()
+		{
+			var project = this._client.Source<ElasticsearchProject>(s => s.Id(1));
+			Assert.NotNull(project);
+			Assert.Greater(project.LOC, 0);
+			var loc = project.LOC;
+			this._client.Update<ElasticsearchProject>(u => u
+				.Document(project)
+				.DocAsUpsert()
+				.Refresh()
+			);
+			project = this._client.Source<ElasticsearchProject>(s => s.Id(1));
 			Assert.AreEqual(project.LOC, loc + 10);
 			Assert.AreNotEqual(project.Version, "1");
 		}

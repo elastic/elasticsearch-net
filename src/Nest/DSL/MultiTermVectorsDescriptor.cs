@@ -6,15 +6,16 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-    public partial class MtermvectorsDescriptor<T> : DocumentPathDescriptorBase<MtermvectorsDescriptor<T>, T, MtermvectorsRequestParameters>
-        , IPathInfo<MtermvectorsRequestParameters> where T : class
-    {
-        ElasticsearchPathInfo<MtermvectorsRequestParameters> IPathInfo<MtermvectorsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
-        {
-            var pathInfo = base.ToPathInfo(settings, this._QueryString);
-            pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+	[DescriptorFor("Mtermvectors")]
+	public partial class MultiTermVectorsDescriptor<T> : IndexTypePathTypedDescriptor<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, T>
+		, IPathInfo<MultiTermVectorsRequestParameters> where T : class
+	{
+		ElasticsearchPathInfo<MultiTermVectorsRequestParameters> IPathInfo<MultiTermVectorsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		{
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 
-            return pathInfo;
-        }
-    }
+			return pathInfo;
+		}
+	}
 }
