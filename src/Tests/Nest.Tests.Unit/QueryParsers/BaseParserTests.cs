@@ -17,7 +17,7 @@ namespace Nest.Tests.Unit.QueryParsers
 			var json = this._client.Serializer.Serialize(descriptor);
 			using (var ms = new MemoryStream(json))
 			{
-				ISearchDescriptor d = this._client.Serializer.DeserializeInternal<SearchDescriptor<ElasticsearchProject>>(ms);
+				ISearchDescriptor d = this._client.Serializer.Deserialize<SearchDescriptor<ElasticsearchProject>>(ms);
 				d.Should().NotBeNull();
 				d.Filter.Should().NotBeNull();
 				return d;
@@ -29,7 +29,7 @@ namespace Nest.Tests.Unit.QueryParsers
 			var json = this.ReadMethodJson(method, fileName);
 			using (var stream = new MemoryStream(json.Utf8Bytes()))
 			{
-				return this._client.Serializer.DeserializeInternal<T>(stream);
+				return this._client.Serializer.Deserialize<T>(stream);
 			}
 		}
 		

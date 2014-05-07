@@ -76,7 +76,6 @@ namespace Nest.Tests.Unit.Internals.Serialize
 				   )
 			   );
 			Assert.NotNull(data);
-			var sw = Stopwatch.StartNew();
 
 			data = this._client.Serializer.Serialize(new SearchDescriptor<ElasticsearchProject>()
 				.From(0)

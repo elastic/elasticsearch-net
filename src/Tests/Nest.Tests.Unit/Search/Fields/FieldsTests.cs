@@ -54,7 +54,7 @@ namespace Nest.Tests.Unit.Search.Fields
 			var firstHit = results.FieldSelections.First();
 			lang = firstHit.FieldValues(p => p.Lang).FirstOrDefault();
 			lang.Should().NotBeNullOrEmpty();
-			var lang2 = classAHit.Fields.FieldValue<string[]>("lang").FirstOrDefault();
+			var lang2 = classAHit.Fields.FieldValues<string[]>("lang").FirstOrDefault();
 			lang2.Should().NotBeNullOrEmpty();
 
 			
