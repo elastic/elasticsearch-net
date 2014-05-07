@@ -40,6 +40,9 @@ namespace Nest
 		[JsonProperty("null_value")]
 		public double? NullValue { get; set; }
 
+		[JsonProperty("doc_values")]
+		public bool? DocValues { get; set; }
+
 		[JsonProperty("include_in_all")]
 		public bool? IncludeInAll { get; set; }
 

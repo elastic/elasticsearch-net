@@ -76,6 +76,11 @@ namespace Nest
 			this._Mapping.SearchAnalyzer = searchAnalyzer;
 			return this;
 		}
+		public StringMappingDescriptor<T> DocValues(bool docValues = true)
+		{
+			this._Mapping.DocValues = docValues;
+			return this;
+		}
 		public StringMappingDescriptor<T> IncludeInAll(bool includeInAll = true)
 		{
 			this._Mapping.IncludeInAll = includeInAll;
