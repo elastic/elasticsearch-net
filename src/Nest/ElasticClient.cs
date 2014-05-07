@@ -45,7 +45,7 @@ namespace Nest
 			this.Connection = connection ?? new HttpConnection(settings);
 
 			this.Serializer = serializer ?? new NestSerializer(this._connectionSettings);
-			var stringifier = new NestStringifier(settings);
+			var stringifier = new NestStringifier(this._connectionSettings);
 			this.Raw = new ElasticsearchClient(
 				this._connectionSettings, 
 				this.Connection, 

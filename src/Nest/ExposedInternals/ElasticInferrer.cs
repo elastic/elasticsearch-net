@@ -25,6 +25,7 @@ namespace Nest
 				return (this._connectionSettings == null) ? string.Empty : this._connectionSettings.DefaultIndex;
 			}
 		}
+
 		public ElasticInferrer(IConnectionSettingsValues connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
