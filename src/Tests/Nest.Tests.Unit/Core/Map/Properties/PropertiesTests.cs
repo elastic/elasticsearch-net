@@ -248,5 +248,30 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
 		}
 
+		public class DocValuesFoo
+		{
+			public int Id { get; set; }
+			[ElasticProperty(DocValues=true)]
+			public int Value { get; set; }
+		}
+
+		[Test]
+		public void DocValuesProperty()
+		{
+			var result = this._client.Map<DocValuesFoo>(m => m.MapFromAttributes());
+			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
+
+			var result2 = this._client.Map<DocValuesFoo>(m => m
+				.Properties(props => props
+					.Number(nmd => nmd
+						.Name("id")
+						.Type(NumberType.integer))
+					.Number(nmd => nmd
+						.Name("value")
+						.Type(NumberType.integer)
+						.DocValues())));
+			this.JsonEquals(result2.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
+		}
+
 	}
 }
