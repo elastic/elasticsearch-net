@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 using Newtonsoft.Json.Converters;
@@ -11,7 +12,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 
-	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<GeoBoundingBoxFilter>, CustomJsonConverter>))]
+	[JsonConverter(typeof(CompositeJsonConverter<GeoBoundingFilterJsonReader, CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoBoundingBoxFilter : IFilterBase, ICustomJson, ICustomJsonReader<GeoBoundingBoxFilter>
 	{

@@ -90,12 +90,45 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 				f=>f.GeoBoundingBox,
 				f=>f.GeoBoundingBox(p=>p.Origin, 0.1, 0.2, 0.3, 0.4, GeoExecution.memory)
 			);
-
+			
 			geoBoundingBox.Field.Should().Be("origin");
 			geoBoundingBox.GeoExecution.Should().Be(GeoExecution.memory);
 			geoBoundingBox.TopLeft.Should().Be("0.1, 0.2");
+			geoBoundingBox.BottomRight.Should().Be("0.3, 0.4");
+		}
+
+		[Test]
+		public void GeoBoundingBox_Array_Deserializes()
+		{
+			//nest will always generate top_left: ""; but while parsing it will need to handle top_left: [] as well
+			var filter = this.CreateSearchDesriptor(f => f.GeoBoundingBox, MethodBase.GetCurrentMethod(), @"GeoBoundingBox\Array");
+			filter.Field.Should().Be("origin");
+			filter.GeoExecution.Should().Be(GeoExecution.memory);
+			filter.TopLeft.Should().Be("0.1, 0.2");
+			filter.BottomRight.Should().Be("0.3, 0.4");
 		}
 		
+		[Test]
+		public void GeoBoudingBox_Vertices_Serializes()
+		{
+			//nest will always generate top_left: ""; but while parsing it will need to handle top: left: right: bottom: as well
+			var filter = this.CreateSearchDesriptor(f => f.GeoBoundingBox, MethodBase.GetCurrentMethod(), @"GeoBoundingBox\Vertices");
+			filter.Field.Should().Be("origin");
+			filter.GeoExecution.Should().Be(GeoExecution.memory);
+			filter.TopLeft.Should().Be("-74.1, 40.73");
+			filter.BottomRight.Should().Be("-71.12, 40.01");
+		}
+
+		[Test]
+		public void GeoBoudingBox_LatLon_Serializes()
+		{
+			//nest will always generate top_left: ""; but while parsing it will need to handle top: left: right: bottom: as well
+			var filter = this.CreateSearchDesriptor(f => f.GeoBoundingBox, MethodBase.GetCurrentMethod(), @"GeoBoundingBox\LatLon");
+			filter.Field.Should().Be("origin");
+			filter.GeoExecution.Should().Be(GeoExecution.memory);
+			filter.TopLeft.Should().Be("-74.1, 40.73");
+			filter.BottomRight.Should().Be("-71.12, 40.01");
+		}
 		[Test]
 		[TestCase("cacheName", "cacheKey", true)]
 		public void GeoDistance_Deserializes(string cacheName, string cacheKey, bool cache)
@@ -104,14 +137,14 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 				f=>f.GeoDistance,
 				f=>f.GeoDistance(p=>p.Origin, gd=>gd
 					.Distance(1.0, GeoUnit.km)
-					.Location(2.0, 4.0)
+					.Location(2.1, 4.1)
 					.Optimize(GeoOptimizeBBox.indexed)
 				)
 			);
 
 			geoDistanceFilter.Field.Should().Be("origin");
-			geoDistanceFilter.Location.Should().Be("2.0, 4.0");
-			geoDistanceFilter.OptimizeBoundingBox.Should().Be("indexed");
+			geoDistanceFilter.Location.Should().Be("2.1, 4.1");
+			geoDistanceFilter.OptimizeBoundingBox.Should().Be(GeoOptimizeBBox.indexed);
 		}
 		
 		[Test]
@@ -123,13 +156,39 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 				f=>f.GeoDistanceRange(p=>p.Origin, d=>d
 					.Location(Lat: 40, Lon: -70)
 					.Distance(From: 12, To: 200, Unit: GeoUnit.km)
+					.FromExclusive()
+					.ToExclusive()
+					.DistanceType(GeoDistanceType.arc)
 					.Optimize(GeoOptimizeBBox.memory)
 				)
 			);
 
 			geoDistanceRangeFilter.Field.Should().Be("origin");
-			geoDistanceRangeFilter.DistanceType.Should().Be("km");
-			geoDistanceRangeFilter.DistanceType.Should().Be("km");
+
+			var from = (double)(geoDistanceRangeFilter.From);
+			from.Should().Be(12);
+			geoDistanceRangeFilter.Unit.Should().Be(GeoUnit.km);
+			geoDistanceRangeFilter.DistanceType.Should().Be(GeoDistanceType.arc);
+		}
+		[Test]
+		[TestCase("cacheName", "cacheKey", true)]
+		public void GeoDistanceRange_FromString_Deserializes(string cacheName, string cacheKey, bool cache)
+		{
+			var geoDistanceRangeFilter = this.TestBaseFilterProperties(cacheName, cacheKey, cache, 
+				f=>f.GeoDistanceRange,
+				f=>f.GeoDistanceRange(p=>p.Origin, d=>d
+					.Location(Lat: 40, Lon: -70)
+					.Distance(From: "12km", To:"15km")
+					.FromExclusive()
+					.ToExclusive()
+					.DistanceType(GeoDistanceType.arc)
+					.Optimize(GeoOptimizeBBox.memory)
+				)
+			);
+			geoDistanceRangeFilter.Field.Should().Be("origin");
+			var from = (string)(geoDistanceRangeFilter.From);
+			from.Should().Be("12km");
+			geoDistanceRangeFilter.DistanceType.Should().Be(GeoDistanceType.arc);
 		}
 		
 		[Test]
@@ -423,7 +482,15 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			);
 			typeFilter.Value.Should().Be("my-type");
 		}
-
+		
+		private T CreateSearchDesriptor<T>(Func<IFilterDescriptor, T> filterBaseSelector, MethodBase method, string fileName = null)
+			where T : IFilterBase
+		{
+			var descriptor = this.DeserializeInto<SearchDescriptor<ElasticsearchProject>>(method, fileName);
+			var filter = filterBaseSelector(((ISearchDescriptor)descriptor).Filter);
+			filter.Should().NotBeNull();
+			return filter;
+		}
 		
 		private T TestBaseFilterProperties<T>(string cacheName, string cacheKey, bool cache, 
 			Func<IFilterDescriptor, T> filterBaseSelector,

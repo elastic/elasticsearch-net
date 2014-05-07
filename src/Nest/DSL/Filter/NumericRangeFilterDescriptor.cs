@@ -33,7 +33,8 @@ namespace Nest
 	/// Filters documents with fields that have values within a certain numeric range. Similar to range filter, except that it works only with numeric values
 	/// </summary>
 	/// <typeparam name="T">Type of document</typeparam>
-	public class NumericRangeFilterDescriptor<T> : FilterBase, INumericRangeFilter where T : class
+	public class NumericRangeFilterDescriptor<T> : FilterBase, INumericRangeFilter
+		where T : class
 	{
 		object INumericRangeFilter.From { get; set;}
 		

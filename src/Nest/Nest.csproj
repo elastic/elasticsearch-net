@@ -630,6 +630,10 @@
     <Compile Include="DSL\Filter\LimitFilter.cs" />
     <Compile Include="DSL\Filter\IdsFilter.cs" />
     <Compile Include="DSL\Filter\ExistsFilter.cs" />
+    <Compile Include="Resolvers\Converters\Filters\GeoDistanceRangeFilterJsonReader.cs" />
+    <Compile Include="Resolvers\Converters\Filters\GeoDistanceFilterJsonReader.cs" />
+    <Compile Include="Resolvers\Converters\Filters\GeoBoundingFilterJsonReader.cs" />
+    <Compile Include="Domain\DSL\LatLon.cs" />
     <Compile Include="Resolvers\Converters\ReadAsTypeConverter.cs" />
     <Compile Include="DSL\Query\RawOrQueryDescriptor.cs" />
     <Compile Include="DSL\Facets\TermFacetDescriptor.cs" />

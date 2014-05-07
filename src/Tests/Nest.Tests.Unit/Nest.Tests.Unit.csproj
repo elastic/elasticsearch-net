@@ -431,6 +431,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="QueryParsers\Filter\GeoBoundingBox\LatLon.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryParsers\Filter\GeoBoundingBox\Vertices.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryParsers\Filter\GeoBoundingBox\Array.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="QueryParsers\Filter\Term.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -4,27 +4,36 @@ using System.Linq;
 using System.Text;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
 using System.Globalization;
 using System;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<GeoDistanceFilterDescriptor>, CustomJsonConverter>))]
+	[JsonConverter(typeof(CompositeJsonConverter<GeoDistanceFilterJsonReader, CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoDistanceFilter : IFilterBase, ICustomJson
 	{
 		PropertyPathMarker Field { get; set; }
+
 		string Location { get; set; }
 		
 		[JsonProperty("distance")]
 		object Distance { get; set; }
 		
 		[JsonProperty("unit")]
-		string Unit { get; set; }
+		[JsonConverter(typeof(StringEnumConverter))]
+		GeoUnit? Unit { get; set; }
 	
 		[JsonProperty("optimize_bbox")]
-		string OptimizeBoundingBox { get; set; }
+		[JsonConverter(typeof(StringEnumConverter))]
+		GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
+
+		[JsonProperty("distance_type")]
+		[JsonConverter(typeof(StringEnumConverter))]
+		GeoDistanceType? DistanceType { get; set; }
 	}
 
 	public class GeoDistanceFilterDescriptor : FilterBase, IGeoDistanceFilter
@@ -32,8 +41,9 @@ namespace Nest
 		PropertyPathMarker IGeoDistanceFilter.Field { get; set; }
 		string IGeoDistanceFilter.Location { get; set; }
 		object IGeoDistanceFilter.Distance { get; set; }
-		string IGeoDistanceFilter.Unit { get; set; }
-		string IGeoDistanceFilter.OptimizeBoundingBox { get; set; }
+		GeoUnit? IGeoDistanceFilter.Unit { get; set; }
+		GeoDistanceType? IGeoDistanceFilter.DistanceType { get; set; }
+		GeoOptimizeBBox? IGeoDistanceFilter.OptimizeBoundingBox { get; set; }
 
 		bool IFilterBase.IsConditionless
 		{
@@ -62,15 +72,19 @@ namespace Nest
 		public GeoDistanceFilterDescriptor Distance(double distance, GeoUnit unit)
 		{
 			((IGeoDistanceFilter)this).Distance = distance;
-			((IGeoDistanceFilter)this).Unit = Enum.GetName(typeof(GeoUnit), unit);
+			((IGeoDistanceFilter)this).Unit = unit;
 			return this;
 		}
 		public GeoDistanceFilterDescriptor Optimize(GeoOptimizeBBox optimize)
 		{
-			((IGeoDistanceFilter)this).OptimizeBoundingBox = Enum.GetName(typeof(GeoOptimizeBBox), optimize);
+			((IGeoDistanceFilter)this).OptimizeBoundingBox = optimize;
 			return this;
 		}
-		
+		public GeoDistanceFilterDescriptor DistanceType(GeoDistanceType type)
+		{
+			((IGeoDistanceFilter)this).DistanceType = type;
+			return this;
+		}
 		object ICustomJson.GetCustomJson()
 		{
 			var gbf = (IGeoDistanceFilter)this;
@@ -81,6 +95,6 @@ namespace Nest
 			);
 			return dict;
 		}
-	
+
 	}
 }
