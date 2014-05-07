@@ -18,7 +18,7 @@ namespace Nest
 	{
 		ElasticsearchPathInfo<DeleteWarmerRequestParameters> IPathInfo<DeleteWarmerRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<DeleteWarmerRequestParameters>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
 
 			return pathInfo;

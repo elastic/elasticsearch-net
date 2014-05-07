@@ -11,16 +11,12 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesCreate")]
-	public partial class CreateIndexDescriptor : IPathInfo<CreateIndexRequestParameters>
+	public partial class CreateIndexDescriptor : IndexPathDescriptorBase<CreateIndexDescriptor, CreateIndexRequestParameters>,
+		IPathInfo<CreateIndexRequestParameters>
 	{
-		internal string _Index { get; set; }
 		internal IndexSettings _IndexSettings = new IndexSettings();
-		private readonly IConnectionSettingsValues _connectionSettings;
+		private IConnectionSettingsValues _connectionSettings;
 
-		public CreateIndexDescriptor(IConnectionSettingsValues connectionSettings)
-		{
-			this._connectionSettings = connectionSettings;
-		}
 
 		/// <summary>
 		/// Initialize the descriptor using the values from for instance a previous Get Index Settings call.
@@ -28,6 +24,12 @@ namespace Nest
 		public CreateIndexDescriptor InitializeUsing(IndexSettings indexSettings)
 		{
 			this._IndexSettings = indexSettings;
+			return this;
+		}
+
+		internal CreateIndexDescriptor SetConnectionSettings(IConnectionSettingsValues connectionSettings)
+		{
+			this._connectionSettings = connectionSettings;
 			return this;
 		}
 
@@ -118,7 +120,16 @@ namespace Nest
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
 			var d = typeMappingDescriptor(new PutMappingDescriptor<T>(this._connectionSettings));
 			var typeMapping = d._Mapping;
-			typeMapping.Name = typeof (T);
+
+			if (d._Type != null)
+			{
+				typeMapping.Name = d._Type.Name != null ? (PropertyNameMarker)d._Type.Name : d._Type.Type;
+			}
+			else
+			{
+				typeMapping.Name = typeof(T);
+			}
+
 			this._IndexSettings.Mappings.Add(typeMapping);
 
 			return this;
@@ -133,7 +144,16 @@ namespace Nest
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
 			var d = typeMappingDescriptor(new PutMappingDescriptor<T>(this._connectionSettings) { _Mapping = rootObjectMapping,});
 			var typeMapping = d._Mapping;
-			typeMapping.Name = typeof (T);
+
+			if (d._Type != null)
+			{
+				typeMapping.Name = d._Type.Name != null ? (PropertyNameMarker)d._Type.Name : d._Type.Type;
+			}
+			else
+			{
+				typeMapping.Name = typeof (T);
+			}
+
 			this._IndexSettings.Mappings.Add(typeMapping);
 
 			return this;
@@ -170,12 +190,9 @@ namespace Nest
 
 		ElasticsearchPathInfo<CreateIndexRequestParameters> IPathInfo<CreateIndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = new ElasticsearchPathInfo<CreateIndexRequestParameters>();
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			pathInfo.Index = this._Index;
-			pathInfo.RequestParameters = this._QueryString;
 			return pathInfo;
-
 		}
 
 	}

@@ -54,7 +54,7 @@ namespace Nest.Tests.Integration.Reproduce
 			var guid = Guid.NewGuid();
 			var o = new IndexableEvent() {Id = "this-is-not-the-id", ContentGUID = guid};
 			var id = _client.Infer.Id(o);
-			id.Should().NotBeBlank().And.Be(o.IndexId);
+			id.Should().NotBeNullOrWhiteSpace().And.Be(o.IndexId);
 		}
 
 		[Test]
@@ -64,7 +64,7 @@ namespace Nest.Tests.Integration.Reproduce
 			var guid = Guid.NewGuid();
 			var o = new MyOtherIndexableEvent() {Id = "this-is-not-the-id", ContentGUID = guid};
 			var id = _client.Infer.Id(o);
-			id.Should().NotBeBlank().And.Be(o.ContentGUID.ToString("D"));
+			id.Should().NotBeNullOrWhiteSpace().And.Be(o.ContentGUID.ToString("D"));
 		}
 	}
 

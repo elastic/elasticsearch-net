@@ -30,6 +30,39 @@ Similarily `GetMany()` is now called `SourceMany()`.
 
 The fact that `client.Search<T>()` returns a `QueryResponse<T>` and not a `SearchResponse<T>` never felt right to me, NEST 1.0 therefor renamed `QueryResponse<T>` to `SearchResponse<T>`
 
+### Renamed RootObjectMappingDescriptor
+
+to `PutMappingDescriptor<T>`
+
+### Removed IResponse.Error
+
+IResponse.Error.Exception no longer exists, it is inlined to IResponse.OriginalException. The Error property did not hold any information that was not available on IResponse.ConnectionStatus.
+
+### Response shortcuts
+
+Prior to 1.0 some calls directly returned a bool or value instead of the full envelopped Elasticsearch response.
+
+i.e `client.IndexExists("myIndexName")` used to return a bool but should now be called like this:
+
+     client.IndexExists(i => i.Index("myIndexName")).Exists
+
+
+### Removed MapFromAttributes()
+
+Attributes are to limited in what they can specify so `[ElasticType()]` can now only specify the type name and the id property.
+All the other anotations have been removed from `[ElasticType()]`. The properties on `[ElasticProperty()]` still exists an can be applied like this:
+
+    var x = this._client.CreateIndex(index, s => s
+        .AddMapping<ElasticsearchProject>(m => m
+             .MapFromAttributes()
+             .DateDetection()
+             .IndexAnalyzer())
+    );
+
+Or in a separate put mapping call:
+
+    var response = this._client.Map<ElasticsearchProject>(m=>m.MapFromAttributes()......);
+
 #### Alias helpers
 
 NEST 0.12.0 had some alias helpers, `SwapAlias()`, `GetIndicesPointingToAlias()` these have been removed in favor of just `Alias()` and `GetAliases()`. Especially the later could benefit from some extension methods that make the common use cases a bit easier to program with. These did not make the beta release.

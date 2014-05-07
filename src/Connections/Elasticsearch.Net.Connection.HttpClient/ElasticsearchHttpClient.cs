@@ -25,7 +25,7 @@ namespace Elasticsearch.Net.Connection.HttpClient
 			HttpContent content = null;
 			if (data != null)
 				content = new ByteArrayContent(data);
-			switch (method.ToLower())
+			switch (method.ToLowerInvariant())
 			{
 				case "head":
 					response = client.SendAsync(new HttpRequestMessage(HttpMethod.Head, uri)).Result;

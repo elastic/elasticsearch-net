@@ -32,6 +32,19 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 			uri.AbsolutePath.Should().Be("/myindex/_msearch");
 		}
 		[Test]
+		public void ShouldNotThrowWhenTypeIsSpecified()
+		{
+			// see: https://github.com/elasticsearch/elasticsearch-net/issues/523
+			var indexName = "multisearch-with-type-name-error";
+			var typeName = "product";
+			Assert.DoesNotThrow(() =>
+			{
+				var result = this._client.MultiSearch(b => b
+					.Search<ElasticsearchProject>("name", s=>s.Index(indexName).Type(typeName).MatchAll())
+				);
+			});
+		}
+		[Test]
 		public void MultiSearchFixedIndexAndType()
 		{
 			var result = this._client.MultiSearch(b => b
@@ -65,7 +78,6 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 
 			StringAssert.Contains(first, status.Request.Utf8String());
 			StringAssert.Contains(second, status.Request.Utf8String());
-
 
 		}
 

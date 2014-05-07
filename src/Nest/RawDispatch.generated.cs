@@ -2764,7 +2764,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> MtermvectorsDispatch<T>(ElasticsearchPathInfo<MtermvectorsRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> MtermvectorsDispatch<T>(ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2795,7 +2795,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> MtermvectorsDispatchAsync<T>(ElasticsearchPathInfo<MtermvectorsRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> MtermvectorsDispatchAsync<T>(ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{

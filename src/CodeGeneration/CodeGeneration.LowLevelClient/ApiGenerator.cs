@@ -156,7 +156,7 @@ namespace CodeGeneration.LowLevelClient
 					.ToDictionary(k => k.Key, v => v.Value);
 			}
 // ReSharper disable once EmptyGeneralCatchClause
-			catch (Exception e)
+			catch 
 			{
 			}
 

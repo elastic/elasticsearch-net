@@ -87,7 +87,7 @@ namespace Nest
 			if (!connectionStatus.Success)
 				return new WarmerResponse {ConnectionStatus = connectionStatus, IsValid = false};
 
-			var dict = this.Serializer.DeserializeInternal<CrazyWarmerResponse>(stream);
+			var dict = this.Serializer.Deserialize<CrazyWarmerResponse>(stream);
 			var indices = new Dictionary<string, Dictionary<string, WarmerMapping>>();
 			foreach (var kv in dict)
 			{

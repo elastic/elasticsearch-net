@@ -41,6 +41,7 @@ namespace Nest
 		/// indicating for how long the nodes that participate in the search will maintain relevant resources in
 		/// order to continue and support it.</para><para> 
 		/// This is very similar in its idea to opening a cursor against a database.</para>
+		/// <para> </para><para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html</para>
 		/// </summary>
 		/// <typeparam name="T">The type that represents the result hits</typeparam>
 		/// <param name="scrollSelector">A descriptor that describes the scroll operation</param>
@@ -248,7 +249,7 @@ namespace Nest
 		/// Allows to put a warmup search request on a specific index (or indices), with the body composing of a regular 
 		/// search request. Types can be provided as part of the URI if the search request is designed to be run only 
 		/// against the specific types.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html#warmer-adding
 		/// </summary>
 		/// <param name="name">The name for the warmer that you want to register</param>
 		/// <param name="selector">A descriptor that further describes what the warmer should look like</param>
@@ -258,7 +259,7 @@ namespace Nest
 		/// Allows to put a warmup search request on a specific index (or indices), with the body composing of a regular 
 		/// search request. Types can be provided as part of the URI if the search request is designed to be run only 
 		/// against the specific types.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html#warmer-adding
 		/// </summary>
 		/// <param name="name">The name for the warmer that you want to register</param>
 		/// <param name="selector">A descriptor that further describes what the warmer should look like</param>
@@ -266,7 +267,7 @@ namespace Nest
 		
 		/// <summary>
 		/// Getting a warmer for specific index (or alias, or several indices) based on its name. 
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html#warmer-retrieving
 		/// </summary>
 		/// <param name="name">The name of the warmer to get</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the get warmer operation</param>
@@ -274,7 +275,7 @@ namespace Nest
 		
 		/// <summary>
 		/// Getting a warmer for specific index (or alias, or several indices) based on its name. 
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html#warmer-retrieving
 		/// </summary>
 		/// <param name="name">The name of the warmer to get</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the get warmer operation</param>
@@ -282,7 +283,7 @@ namespace Nest
 
 		/// <summary>
 		/// Deletes a warmer
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html#removing
 		/// </summary>
 		/// <param name="name">The name of the warmer to delete</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the delete warmer operation</param>
@@ -290,7 +291,7 @@ namespace Nest
 
 		/// <summary>
 		/// Deletes a warmer
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html#removing
 		/// </summary>
 		/// <param name="name">The name of the warmer to delete</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the delete warmer operation</param>
@@ -298,7 +299,7 @@ namespace Nest
 
 		/// <summary>
 		/// Gets an index template
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html#getting
 		/// </summary>
 		/// <param name="name">The name of the template to get</param>
 		/// <param name="getTemplateSelector">An optional selector specifying additional parameters for the get template operation</param>
@@ -306,7 +307,7 @@ namespace Nest
 		
 		/// <summary>
 		/// Gets an index template
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html#getting
 		/// </summary>
 		/// <param name="name">The name of the template to get</param>
 		/// <param name="getTemplateSelector">An optional selector specifying additional parameters for the get template operation</param>
@@ -334,7 +335,7 @@ namespace Nest
 
 		/// <summary>
 		/// Deletes an index template
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html#delete
 		/// </summary>
 		/// <param name="name">The name of the template to delete</param>
 		/// <param name="deleteTemplateSelector">An optional selector specifying additional parameters for the delete template operation</param>
@@ -342,7 +343,7 @@ namespace Nest
 		
 		/// <summary>
 		/// Deletes an index template
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html#delete
 		/// </summary>
 		/// <param name="name">The name of the template to delete</param>
 		/// <param name="deleteTemplateSelector">An optional selector specifying additional parameters for the delete template operation</param>
@@ -471,6 +472,7 @@ namespace Nest
 		Task<IPercolateCountResponse> PercolateCountAsync<T, K>(K @object, Func<PercolateCountDescriptor<T, K>, PercolateCountDescriptor<T, K>> percolateSelector = null)
 			where T : class
 			where K : class;
+
 		/// <summary>
 		/// The put mapping API allows to register specific mapping definition for a specific type.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-put-mapping.html
@@ -584,18 +586,16 @@ namespace Nest
 		/// including executing operations across several indices.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
 		/// </summary>
-		/// <param name="index">The name of the index to be created</param>
-		/// <param name="createIndexSelector">A descriptor that further describes the parameters for the create index operation</param>
-		IIndicesOperationResponse CreateIndex(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector = null);
+		/// <param name="createIndexSelector">A descriptor that describes the parameters for the create index operation</param>
+		IIndicesOperationResponse CreateIndex(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
 
 		/// <summary>
 		/// The create index API allows to instantiate an index. Elasticsearch provides support for multiple indices, 
 		/// including executing operations across several indices.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
 		/// </summary>
-		/// <param name="index">The name of the index to be created</param>
-		/// <param name="createIndexSelector">A descriptor that further describes the parameters for the create index operation</param>
-		Task<IIndicesOperationResponse> CreateIndexAsync(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
+		/// <param name="createIndexSelector">A descriptor that describes the parameters for the create index operation</param>
+		Task<IIndicesOperationResponse> CreateIndexAsync(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
 		
 		/// <summary>
 		/// Does a request to the root of an elasticsearch node
@@ -1034,9 +1034,47 @@ namespace Nest
 		/// <param name="selector">An optional descriptor that further describes the status operation, i.e limiting it to certain indices</param>
 		Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
 
+        /// <summary>
+        /// Returns information and statistics on terms in the fields of a particular document as stored in the index.
+        /// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-termvectors.html
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="termVectorSelector"></param>
+        /// <returns></returns>
+		ITermVectorResponse TermVector<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector) 
+            where T : class;
+
+        /// <summary>
+        /// Returns information and statistics on terms in the fields of a particular document as stored in the index.
+        /// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-termvectors.html
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="termVectorSelector"></param>
+        /// <returns></returns>
+        Task<ITermVectorResponse> TermVectorAsync<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector) 
+            where T : class;
+
+        /// <summary>
+        /// Multi termvectors API allows to get multiple termvectors based on an index, type and id.
+        /// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-termvectors.html
+        /// </summary>
+        /// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+        /// <param name="multiTermVectorsSelector">The descriptor describing the multi termvectors operation</param>
+        IMultiTermVectorResponse MultiTermVectors<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
+            where T : class;
+
+        /// <summary>
+        /// Multi termvectors API allows to get multiple termvectors based on an index, type and id.
+        /// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-termvectors.html
+        /// </summary>
+        /// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+        /// <param name="multiTermVectorsSelector">The descriptor describing the multi termvectors operation</param>
+        Task<IMultiTermVectorResponse> MultiTermVectorsAsync<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
+            where T : class;
+		
 		/// <summary>
 		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester. 
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters.html
 		/// </summary>
 		/// <typeparam name="T">The type used to strongly type parts of the suggest operation</typeparam>
 		/// <param name="selector">The suggesters to use this operation (can be multiple)</param>
@@ -1045,7 +1083,7 @@ namespace Nest
 
 		/// <summary>
 		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester. 
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters.html
 		/// </summary>
 		/// <typeparam name="T">The type used to strongly type parts of the suggest operation</typeparam>
 		/// <param name="selector">The suggesters to use this operation (can be multiple)</param>
@@ -1117,7 +1155,8 @@ namespace Nest
 		Task<IAcknowledgedResponse> DeleteRepositoryAsync(string repository, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
 		
 		/// <summary>
-		/// A repository can contain multiple snapshots of the same cluster. Snapshot are identified by unique names within the cluster. 
+		/// A repository can contain multiple snapshots of the same cluster. Snapshot are identified by unique names within the cluster.
+		/// /// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
 		/// </summary>
 		/// <param name="repository">The name of the repository we want to create a snapshot in</param>
 		/// <param name="snapshotName">The name of the snapshot</param>
@@ -1125,7 +1164,7 @@ namespace Nest
 		ISnapshotResponse Snapshot(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
 
 		/// <summary>
-		/// A repository can contain multiple snapshots of the same cluster. Snapshot are identified by unique names within the cluster. 
+		/// A repository can contain multiple snapshots of the same cluster. Snapshot are identified by unique names within the cluster.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
 		/// </summary>
 		/// <param name="repository">The name of the repository we want to create a snapshot in</param>

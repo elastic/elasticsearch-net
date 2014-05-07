@@ -323,7 +323,7 @@ namespace Elasticsearch.Net
 
 		private static string GetNeutralKey(string key)
 		{
-			return key.Replace("-", string.Empty);
+			return key;
 		}
 	}
 }

@@ -21,14 +21,10 @@ namespace Elasticsearch.Net.Connection.Thrift.Protocol
 {
 	public interface TBase
 	{
-		///
-		/// Reads the TObject from the given input protocol.
-		///
+		///<summary>Reads the TObject from the given input protocol.</summary>
 		void Read(TProtocol tProtocol);
 
-		///
-		/// Writes the objects out to the protocol
-		///
+		///<summary>Writes the objects out to the protocol.</summary>
 		void Write(TProtocol tProtocol);
 	}
 }

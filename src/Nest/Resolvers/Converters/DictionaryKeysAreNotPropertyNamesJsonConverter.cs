@@ -41,8 +41,10 @@ namespace Nest
 					continue;
 				string key;
 				var pp = entry.Key as PropertyPathMarker;
-				var pn = entry.Key as PropertyNameMarker; 
-				if (pp != null)
+				var pn = entry.Key as PropertyNameMarker;
+				if (contract == null)
+					key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);
+				else if (pp != null)
 					key = contract.Infer.PropertyPath(pp);
 				else if (pn != null)
 					key = contract.Infer.PropertyName(pn);

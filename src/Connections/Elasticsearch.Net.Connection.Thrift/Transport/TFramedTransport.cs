@@ -41,7 +41,7 @@ namespace Elasticsearch.Net.Connection.Thrift.Transport
 			if (socketSettings == null)
 				throw new ArgumentNullException("socketSettings");
 
-			if (host.ToLower() == "localhost")
+			if (host.ToLowerInvariant() == "localhost")
 			{
 				host = "127.0.0.1";
 			}

@@ -80,6 +80,8 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Overrides\Descriptors\DeleteWarmerDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\PutTemplateDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\ClearCacheDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\MultiTermVectorsDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\SearchDescriptorOverrides.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -158,13 +158,19 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 		[Test]
 		public void CustomBoostFactor()
 		{
+			//disabling obsolete message in this test
+			#pragma warning disable 0618
 			this.DoConditionlessQuery(q => q.CustomBoostFactor(cbfq => cbfq.Query(qff => qff.Terms(p => p.Name, this._c.Name1))));
+			#pragma warning restore 0618
 		}
 
 		[Test]
 		public void CustomScore()
 		{
+			//disabling obsolete message in this test
+			#pragma warning disable 0618
 			this.DoConditionlessQuery(q => q.CustomScore(csq => csq.Query(qff => qff.Terms(p => p.Name, this._c.Name1))));
+			#pragma warning restore 0618
 		}
 
 		[Test]

@@ -40,19 +40,20 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterReroute2
 		{
 			[Test]
 			public void ExplainApiWithEmptyCommandList2Test()
-			{	
+			{
 
 				//do cluster.reroute 
-				_body = new {
-					commands= new string[] {}
+				_body = new
+				{
+					commands = new string[] { }
 				};
-				this.Do(()=> _client.ClusterReroute(_body, nv=>nv
+				this.Do(() => _client.ClusterReroute(_body, nv => nv
 					.AddQueryString("explain", @"true")
 					.AddQueryString("dry_run", @"true")
 				));
 
 				//match _response.explanations: 
-				this.IsMatch(_response.explanations, new string[] {});
+				this.IsMatch(_response.explanations, new string[] { });
 
 			}
 		}
@@ -68,7 +69,7 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterReroute2
 				this.Do(()=> _client.ClusterState("master_node"));
 
 				//set node_id = _response.master_node; 
-				var node_id = _response.master_node;
+				string node_id = _response.master_node;
 
 				//do cluster.reroute 
 				_body = new {

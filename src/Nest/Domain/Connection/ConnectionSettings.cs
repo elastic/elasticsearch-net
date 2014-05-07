@@ -29,7 +29,6 @@ namespace Nest
 		public ConnectionSettings(Uri uri = null, string defaultIndex = null) 
 			: base(uri, defaultIndex)
 		{
-			uri.ThrowIfNull("uri");
 		}
 
 		/// <summary>
@@ -86,12 +85,12 @@ namespace Nest
 		private ReadOnlyCollection<Func<Type, JsonConverter>> _contractConverters;
 		ReadOnlyCollection<Func<Type, JsonConverter>> IConnectionSettingsValues.ContractConverters { get { return _contractConverters; } }
 
-		public ConnectionSettings(IConnectionPool uri, string defaultIndex) : base(uri)
+		public ConnectionSettings(IConnectionPool connectionPool, string defaultIndex) : base(connectionPool)
 		{
 			if (!defaultIndex.IsNullOrEmpty())
 				this.SetDefaultIndex(defaultIndex);
 			
-			this._defaultTypeNameInferrer = (t => t.Name.ToLower()); 
+			this._defaultTypeNameInferrer = (t => t.Name.ToLowerInvariant()); 
 			this._defaultPropertyNameInferrer = (p => p.ToCamelCase()); 
 			this._defaultIndices = new FluentDictionary<Type, string>();
 			this._defaultTypeNames = new FluentDictionary<Type, string>();
@@ -151,7 +150,7 @@ namespace Nest
 		private string LowerCaseAndPluralizeTypeNameInferrer(Type type)
 		{
 			type.ThrowIfNull("type");
-			return Inflector.MakePlural(type.Name).ToLower();
+			return Inflector.MakePlural(type.Name).ToLowerInvariant();
 		}
 
 		/// <summary>

@@ -4,6 +4,9 @@ using Elasticsearch.Net;
 
 namespace Nest.Tests.Unit.Search.SearchOptions
 {
+	using System.Collections.Generic;
+	using System.Linq;
+
 	[TestFixture]
 	public class SearchOptionTests : BaseJsonTests
 	{
@@ -159,6 +162,48 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				fields: [""id"", ""name""]
 				}";
 			Assert.True(json.JsonEquals(expected));
+		}
+
+		[Test]
+		public void TestFieldsWithExclusionsByProperty()
+		{
+		  var fields = typeof(ElasticsearchProject).GetProperties()
+			.Select(x => x.Name.ToCamelCase())
+			.Except(new List<string> { "followers", "contributors", "nestedFollowers", "myGeoShape" }).ToList();
+
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Fields(fields.ConvertAll(x => x.ToCamelCase()).ToArray());
+
+		  var json = TestElasticClient.Serialize(s);
+
+		  const string expected = @"{
+		  from: 0,
+		  size: 10,
+		  fields: [
+			""id"",
+			""name"",
+			""version"",
+			""country"",
+			""content"",
+			""lOC"",
+			""origin"",
+			""startedOn"",
+			""pingIP"",
+			""longValue"",
+			""floatValue"",
+			""doubleValue"",
+			""boolValue"",
+			""intValues"",
+			""floatValues"",
+			""locScriptField"",
+			""stupidIntIWantAsLong"",
+			""myAttachment"",
+			""myBinaryField""
+		  ]
+		}";
+		  Assert.True(json.JsonEquals(expected));
 		}
 
 		[Test]

@@ -222,8 +222,8 @@ namespace Nest
 		
 		
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-			internal static MtermvectorsRequestParameters _Fields<T>(
-				this MtermvectorsRequestParameters qs,
+			internal static MultiTermVectorsRequestParameters _Fields<T>(
+				this MultiTermVectorsRequestParameters qs,
 				IEnumerable<Expression<Func<T, object>>>  fields)
 			where T : class
 		{

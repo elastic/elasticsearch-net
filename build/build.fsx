@@ -19,8 +19,6 @@ Target "Clean" (fun _ ->
     CleanDir buildDir
 )
 
-
-
 Target "BuildApp" (fun _ ->
     let binDirs = !! "src/**/bin/**"
                   |> Seq.map DirectoryName
@@ -60,7 +58,7 @@ Target "Test" (fun _ ->
 let keyFile = "build/keys/keypair.snk"
 
 let createKeys = fun _ ->
-    let sn = "build/tools/sn/sn.exe"
+    let sn = if isMono then "sn" else "build/tools/sn/sn.exe"
     ExecProcess(fun p ->
       p.FileName <- sn
       p.Arguments <- sprintf @"-k %s" keyFile
@@ -77,7 +75,7 @@ Target "CreateKeysIfAbsent" (fun _ ->
 )
 
 let validateSignedAssembly = fun name ->
-    let sn = "build/tools/sn/sn.exe"
+    let sn = if isMono then "sn" else "build/tools/sn/sn.exe"
     let out = (ExecProcessAndReturnMessages(fun p ->
                 p.FileName <- sn
                 p.Arguments <- sprintf @"-v build\output\%s\%s.dll" name name

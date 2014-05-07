@@ -15,6 +15,8 @@ namespace Nest
 		where K : class
 	{
 
+
+
 		[JsonProperty(PropertyName = "script")]
 		internal string _Script { get; set; }
 
@@ -31,6 +33,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "doc")]
 		internal K _Document { get; set; }
 
+		
 		public UpdateDescriptor<T, K> Script(string script)
 		{
 			script.ThrowIfNull("script");
@@ -82,7 +85,10 @@ namespace Nest
 
 		ElasticsearchPathInfo<UpdateRequestParameters> IPathInfo<UpdateRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<UpdateRequestParameters>(settings, this._QueryString);
+			if (this._Document != null && this._Id == null)
+				this._Id = new ElasticInferrer(settings).Id(this._Document);
+
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.RequestParameters = this._QueryString;
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			

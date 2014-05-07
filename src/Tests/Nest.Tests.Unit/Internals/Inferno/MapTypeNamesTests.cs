@@ -22,7 +22,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		[Test]
 		public void ResolveToSepcifiedTypeNames()
 		{
-			var clientSettings = new ConnectionSettings(Test.Default.Uri, "mydefaultindex")
+			var clientSettings = new ConnectionSettings(UnitTestDefaults.Uri, "mydefaultindex")
 				.MapDefaultTypeNames(p => p
 					.Add(typeof(Car), "automobile")
 					.Add(typeof(Person), "human")
@@ -61,7 +61,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		[Test]
 		public void DefaultTypeNamesTakePrecedenceOverCustomTypeNameInferrer()
 		{
-			var clientSettings = new ConnectionSettings(Test.Default.Uri, "mydefaultindex")
+			var clientSettings = new ConnectionSettings(UnitTestDefaults.Uri, "mydefaultindex")
 				.MapDefaultTypeNames(p => p
 					.Add(typeof(Developer), "codemonkey")
 				)
@@ -81,7 +81,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		[Test]
 		public void AttributeTypeNamesTakePrecedenceOverDefaultTypeNameInferrer()
 		{
-			var clientSettings = new ConnectionSettings(Test.Default.Uri, "mydefaultindex")
+			var clientSettings = new ConnectionSettings(UnitTestDefaults.Uri, "mydefaultindex")
 				.SetDefaultTypeNameInferrer(t => t.Name.ToUpperInvariant())
 				;
 
@@ -94,7 +94,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		[Test]
 		public void MapTypeIndicesTakesPrecedenceOverAttributeName()
 		{
-			var clientSettings = new ConnectionSettings(Test.Default.Uri,"mydefaultindex")
+			var clientSettings = new ConnectionSettings(UnitTestDefaults.Uri,"mydefaultindex")
 				.MapDefaultTypeNames(dt=>dt
 					.Add(typeof(MyCustomAtrributeName), "micutype")
 				)

@@ -67,8 +67,7 @@ namespace Nest
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
-
-			((IFunctionScoreQuery)this).Query = q;
+			((IFunctionScoreQuery)this).Query = q.IsConditionless ? null :q;
 			return this;
 		}
 

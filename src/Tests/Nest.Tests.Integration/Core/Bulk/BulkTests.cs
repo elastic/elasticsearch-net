@@ -44,7 +44,19 @@ namespace Nest.Tests.Integration.Core.Bulk
 			indexResponses.First().Index.Should().BeEquivalentTo(ElasticsearchConfiguration.DefaultIndex);
 			indexResponses.First().Type.Should().BeEquivalentTo(this._client.Infer.TypeName<ElasticsearchProject>());
 		}
+		[Test]
+		public void DoubleCreateReturnsOneError()
+		{
+			var result = this._client.Bulk(b => b
+				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 12315555 }))
+				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 12315555 }))
+			);
 
+			result.IsValid.Should().BeFalse();
+			result.Errors.Should().BeTrue();
+			result.ItemsWithErrors.Should().NotBeEmpty().And.HaveCount(1);
+
+		}
 		[Test]
 		public void BulkWithFixedIndex()
 		{

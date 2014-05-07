@@ -2281,16 +2281,6 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal bool _fielddata { get; set; }
-		///<summary>Clear field data</summary>
-		public ClearCacheRequestParameters Fielddata(bool fielddata)
-		{
-			this._fielddata = fielddata;
-			this.AddQueryString("fielddata", this._fielddata);
-			return this;
-		}
-		
-		
 		internal IEnumerable<object> _fields { get; set; }
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		public ClearCacheRequestParameters Fields(params string[] fields)
@@ -4418,12 +4408,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html
 	///</pre>
 	///</summary>
-	public class MtermvectorsRequestParameters : FluentRequestParameters<MtermvectorsRequestParameters> 
+	public class MultiTermVectorsRequestParameters : FluentRequestParameters<MultiTermVectorsRequestParameters> 
 	{
 		
 		internal  string[] _ids { get; set; }
 		///<summary>A comma-separated list of documents ids. You must define ids as parameter or set &quot;ids&quot; or &quot;docs&quot; in the request body</summary>
-		public MtermvectorsRequestParameters Ids(params string[] ids)
+		public MultiTermVectorsRequestParameters Ids(params string[] ids)
 		{
 			this._ids = ids;
 			this.AddQueryString("ids", this._ids);
@@ -4433,7 +4423,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _term_statistics { get; set; }
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsRequestParameters TermStatistics(bool term_statistics)
+		public MultiTermVectorsRequestParameters TermStatistics(bool term_statistics)
 		{
 			this._term_statistics = term_statistics;
 			this.AddQueryString("term_statistics", this._term_statistics);
@@ -4443,7 +4433,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _field_statistics { get; set; }
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsRequestParameters FieldStatistics(bool field_statistics)
+		public MultiTermVectorsRequestParameters FieldStatistics(bool field_statistics)
 		{
 			this._field_statistics = field_statistics;
 			this.AddQueryString("field_statistics", this._field_statistics);
@@ -4453,7 +4443,7 @@ namespace Elasticsearch.Net
 		
 		internal IEnumerable<object> _fields { get; set; }
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsRequestParameters Fields(params string[] fields)
+		public MultiTermVectorsRequestParameters Fields(params string[] fields)
 		{
 			this._fields = fields.Select(f=>(object)f);
 			this.AddQueryString("fields", this._fields);
@@ -4463,7 +4453,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _offsets { get; set; }
 		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsRequestParameters Offsets(bool offsets)
+		public MultiTermVectorsRequestParameters Offsets(bool offsets)
 		{
 			this._offsets = offsets;
 			this.AddQueryString("offsets", this._offsets);
@@ -4473,7 +4463,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _positions { get; set; }
 		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsRequestParameters Positions(bool positions)
+		public MultiTermVectorsRequestParameters Positions(bool positions)
 		{
 			this._positions = positions;
 			this.AddQueryString("positions", this._positions);
@@ -4483,7 +4473,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _payloads { get; set; }
 		///<summary>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsRequestParameters Payloads(bool payloads)
+		public MultiTermVectorsRequestParameters Payloads(bool payloads)
 		{
 			this._payloads = payloads;
 			this.AddQueryString("payloads", this._payloads);
@@ -4493,7 +4483,7 @@ namespace Elasticsearch.Net
 		
 		internal string _preference { get; set; }
 		///<summary>Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsRequestParameters Preference(string preference)
+		public MultiTermVectorsRequestParameters Preference(string preference)
 		{
 			this._preference = preference;
 			this.AddQueryString("preference", this._preference);
@@ -4503,7 +4493,7 @@ namespace Elasticsearch.Net
 		
 		internal string _routing { get; set; }
 		///<summary>Specific routing value. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsRequestParameters Routing(string routing)
+		public MultiTermVectorsRequestParameters Routing(string routing)
 		{
 			this._routing = routing;
 			this.AddQueryString("routing", this._routing);
@@ -4513,7 +4503,7 @@ namespace Elasticsearch.Net
 		
 		internal string _parent { get; set; }
 		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MtermvectorsRequestParameters Parent(string parent)
+		public MultiTermVectorsRequestParameters Parent(string parent)
 		{
 			this._parent = parent;
 			this.AddQueryString("parent", this._parent);

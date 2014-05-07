@@ -32,7 +32,7 @@ namespace Nest
 
 		ElasticsearchPathInfo<MoreLikeThisRequestParameters> IPathInfo<MoreLikeThisRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<MoreLikeThisRequestParameters>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = this._Search == null ? PathInfoHttpMethod.GET : PathInfoHttpMethod.POST;
 
 			return pathInfo;

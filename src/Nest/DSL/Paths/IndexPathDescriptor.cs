@@ -18,43 +18,38 @@ namespace Nest
 	/// </pre>
 	/// index is not optional 
 	/// </summary>
-	public class IndexPathDescriptorBase<P, K> : BasePathDescriptor<P> 
-		where P : IndexPathDescriptorBase<P, K>, new()
-		where K : FluentRequestParameters<K>, new()
+	public class IndexPathDescriptorBase<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor> 
+		where TDescriptor : IndexPathDescriptorBase<TDescriptor, TParameters>, new()
+		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		internal IndexNameMarker _Index { get; set; }
 		
-		public P Index<T>() where T : class
+		public TDescriptor Index<TAlternative>() where TAlternative : class
 		{
-			this._Index = typeof(T);
-			return (P)this;
+			this._Index = typeof(TAlternative);
+			return (TDescriptor)this;
 		}
 			
-		public P Index(string indexType)
+		public TDescriptor Index(string indexType)
 		{
 			this._Index = indexType;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		public P Index(Type indexType)
+		public TDescriptor Index(Type indexType)
 		{
 			this._Index = indexType;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentRequestParameters<K>, new()
+		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
 		{
 			if (this._Index == null)
 				throw new DslException("missing call to Index()");
 
 			var index = new ElasticInferrer(settings).IndexName(this._Index); 
-			var pathInfo = new ElasticsearchPathInfo<K>()
-			{
-				Index = index,
-			};
-			pathInfo.RequestParameters = queryString ?? new K();
-			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
+			var pathInfo = base.ToPathInfo(queryString);
+			pathInfo.Index = index;
 			return pathInfo;
 		}
 

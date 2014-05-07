@@ -11,7 +11,13 @@ namespace Nest
 		{
 			return this.Dispatch<AnalyzeDescriptor, AnalyzeRequestParameters, AnalyzeResponse>(
 				analyzeSelector,
-				(p, d) => this.RawDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, d)
+				(p, d) =>
+				{
+					var text = d._QueryString.GetQueryStringValue<string>("text");
+					d._QueryString.RemoveQueryString("text");
+					text.ThrowIfNullOrEmpty("No text specified to analyze");
+					return this.RawDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, text);
+				}
 			);
 		}
 
@@ -20,7 +26,13 @@ namespace Nest
 		{
 			return this.DispatchAsync<AnalyzeDescriptor, AnalyzeRequestParameters, AnalyzeResponse, IAnalyzeResponse>(
 				analyzeSelector,
-				(p, d) => this.RawDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, d)
+				(p, d) =>
+				{
+					var text = d._QueryString.GetQueryStringValue<string>("text");
+					d._QueryString.RemoveQueryString("text");
+					text.ThrowIfNullOrEmpty("No text specified to analyze");
+					return this.RawDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, text);
+				}
 			);
 		}
 	}

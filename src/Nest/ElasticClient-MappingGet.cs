@@ -37,7 +37,7 @@ namespace Nest
 			Stream stream)
 		{
 			var dict = response.Success
-				? Serializer.DeserializeInternal<GetRootObjectMappingWrapping>(stream)
+				? Serializer.Deserialize<GetRootObjectMappingWrapping>(stream)
 				: null;
 			return new GetMappingResponse(response, dict);
 		}

@@ -13,7 +13,7 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesUpdateAliases")]
-	public partial class AliasDescriptor : 
+	public partial class AliasDescriptor : BasePathDescriptor<AliasDescriptor>,
 		 IPathInfo<AliasRequestParameters>
 	{
 		public AliasDescriptor()

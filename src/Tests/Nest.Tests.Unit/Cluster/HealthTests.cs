@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void ClusterHealthPerIndex()
 		{
-			var r = this._client.ClusterHealth(h=>h.Index(Test.Default.DefaultIndex).Level(LevelOptions.Cluster));
+			var r = this._client.ClusterHealth(h=>h.Index(UnitTestDefaults.DefaultIndex).Level(LevelOptions.Cluster));
 			var u = new Uri(r.ConnectionStatus.RequestUrl);
 			u.AbsolutePath.Should().StartWith("/_cluster/health/nest_test_data");
 			u.Query.Should().Contain("level=cluster");

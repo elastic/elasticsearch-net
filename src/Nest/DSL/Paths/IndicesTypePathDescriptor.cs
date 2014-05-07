@@ -18,60 +18,59 @@ namespace Nest
 	/// </pre>
 	/// {indices} is optional and so is {type} and will fallback to default of <para>T</para>
 	/// </summary>
-	public class IndicesTypePathDescriptor<P, K, T> : BasePathDescriptor<P>
-		where P : IndicesTypePathDescriptor<P, K, T> 
-		where K : FluentRequestParameters<K>, new()
+	public class IndicesTypePathDescriptor<TDescriptor, TParameters, T> : BasePathDescriptor<TDescriptor>
+		where TDescriptor : IndicesTypePathDescriptor<TDescriptor, TParameters, T> 
+		where TParameters : FluentRequestParameters<TParameters>, new()
 		where T : class
 	{
 		internal bool? _AllIndices { get; set; }
 		internal IEnumerable<IndexNameMarker> _Indices { get; set; }
 		internal TypeNameMarker _Type { get; set; }
 		
-		public P AllIndices(bool allIndices = true)
+		public TDescriptor AllIndices(bool allIndices = true)
 		{
 			this._AllIndices = allIndices;
-			return (P)this;
+			return (TDescriptor)this;
 		}
-		public P Index<T>()
+		public TDescriptor Index<TAlternative>()
 		{
-			return this.Indices(typeof (T));
+			return this.Indices(typeof (TAlternative));
 		}
-		public P Index(string index)
+		public TDescriptor Index(string index)
 		{
 			return this.Indices(index);
 		}
-		public P Indices(params string[] indices)
+		public TDescriptor Indices(params string[] indices)
 		{
 			this._Indices = indices.Select(s=>(IndexNameMarker)s);
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		public P Indices(params Type[] indices)
+		public TDescriptor Indices(params Type[] indices)
 		{
 			this._Indices = indices.Select(s=>(IndexNameMarker)s);
-			return (P)this;
+			return (TDescriptor)this;
 		}
 		
-		public P Type<T>() 
+		public TDescriptor Type<TAlternative>() 
 		{
-			this._Type = typeof(T);
-			return (P)this;
+			this._Type = typeof(TAlternative);
+			return (TDescriptor)this;
 		}
 			
-		public P Type(string type)
+		public TDescriptor Type(string type)
 		{
 			this._Type = type;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		public P Type(Type type)
+		public TDescriptor Type(Type type)
 		{
 			this._Type = type;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 		
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentRequestParameters<K>, new()
+		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
 		{
 			var inferrer = new ElasticInferrer(settings);
 			if (this._Type == null)
@@ -84,13 +83,9 @@ namespace Nest
 				index = "_all";
 
 			var type = new ElasticInferrer(settings).TypeName(this._Type); 
-			var pathInfo = new ElasticsearchPathInfo<K>()
-			{
-				Index = index,
-				Type = type
-			};
-			pathInfo.RequestParameters = queryString ?? new K();
-			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
+			var pathInfo = base.ToPathInfo(queryString);
+			pathInfo.Index = index;
+			pathInfo.Type = type;
 			return pathInfo;
 		}
 

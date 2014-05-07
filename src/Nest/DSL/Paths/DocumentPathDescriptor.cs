@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
@@ -18,79 +19,20 @@ namespace Nest
 	/// </pre>
 	/// if one of the parameters is not explicitly specified this will fall back to the defaults for type <para>T</para>
 	/// </summary>
-	public class DocumentPathDescriptorBase<P, T, K> : BasePathDescriptor<P>
-		where P : DocumentPathDescriptorBase<P, T, K>, new()
+	public class DocumentPathDescriptorBase<TDescriptor, T, TParameters> : DocumentOptionalPathDescriptorBase<TDescriptor, T, TParameters>
+		where TDescriptor : DocumentPathDescriptorBase<TDescriptor, T, TParameters>, new()
 		where T : class
-		where K : FluentRequestParameters<K>, new()
+		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 
-		internal IndexNameMarker _Index { get; set; }
-		internal TypeNameMarker _Type { get; set; }
-		internal string _Id { get; set; }
-		internal T _Object { get; set; }
+		internal override ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
+		{
+			var pathInfo = base.ToPathInfo(settings, queryString);
+			
+			pathInfo.Index.ThrowIfNullOrEmpty("index");
+			pathInfo.Type.ThrowIfNullOrEmpty("type");
+			pathInfo.Id.ThrowIfNullOrEmpty("id");
 
-		public P Index(string index)
-		{
-			this._Index = index;
-			return (P)this;
-		}
-
-		public P Index(Type index)
-		{
-			this._Index = index;
-			return (P)this;
-		}
-
-		public P Index<TAlternative>() where TAlternative : class
-		{
-			this._Index = typeof(T);
-			return (P)this;
-		}
-
-		public P Type(string type)
-		{
-			this._Type = type;
-			return (P)this;
-		}
-		public P Type(Type type)
-		{
-			this._Type = type;
-			return (P)this;
-		}
-		public P Type<TAlternative>() where TAlternative : class
-		{
-			this._Type = typeof(TAlternative);
-			return (P)this;
-		}
-		public P Id(long id)
-		{
-			return this.Id(id.ToString());
-		}
-		public P Id(string id)
-		{
-			this._Id = id;
-			return (P)this;
-		}
-		public P Object(T @object)
-		{
-			this._Object = @object;
-			return (P)this;
-		}
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentRequestParameters<K>, new()
-		{
-			var inferrer = new ElasticInferrer(settings);
-			var index = this._Index != null ? inferrer.IndexName(this._Index) : inferrer.IndexName<T>();
-			var type = this._Type != null ? inferrer.TypeName(this._Type) : inferrer.TypeName<T>();
-			var id = this._Id ?? inferrer.Id(this._Object);
-			var pathInfo = new ElasticsearchPathInfo<K>()
-			{
-				Index = index,
-				Type = type,
-				Id = id
-			};
-			pathInfo.RequestParameters = queryString ?? new K();
-			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
 			return pathInfo;
 		}
 

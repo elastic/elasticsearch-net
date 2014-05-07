@@ -12,22 +12,22 @@ using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
 using Elasticsearch.Net.Serialization;
-using PUrify;
+using PurifyNet;
 
 namespace Elasticsearch.Net.Connection
 {
 	public class Transport : ITransport
 	{
 		protected static readonly string MaxRetryExceptionMessage = "Unable to perform request: '{0} {1}' on any of the nodes after retrying {2} times.";
-		protected internal readonly IConnectionConfigurationValues _configurationValues;
-		protected internal readonly IConnection _connection;
-		protected internal readonly IElasticsearchSerializer _serializer;
+		protected internal readonly IConnectionConfigurationValues ConfigurationValues;
+		protected internal readonly IConnection Connection;
+		private readonly IElasticsearchSerializer _serializer;
 
 		private readonly IConnectionPool _connectionPool;
 		private readonly IDateTimeProvider _dateTimeProvider;
 		private DateTime? _lastSniff;
 
-		public IConnectionConfigurationValues Settings { get { return _configurationValues; } }
+		public IConnectionConfigurationValues Settings { get { return ConfigurationValues; } }
 		public IElasticsearchSerializer Serializer { get { return _serializer; } }
 
 		public Transport(
@@ -37,10 +37,10 @@ namespace Elasticsearch.Net.Connection
 			IDateTimeProvider dateTimeProvider = null
 			)
 		{
-			this._configurationValues = configurationValues;
-			this._connection = connection ?? new HttpConnection(configurationValues);
+			this.ConfigurationValues = configurationValues;
+			this.Connection = connection ?? new HttpConnection(configurationValues);
 			this._serializer = serializer ?? new ElasticsearchDefaultSerializer();
-			this._connectionPool = this._configurationValues.ConnectionPool;
+			this._connectionPool = this.ConfigurationValues.ConnectionPool;
 
 			this._dateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
 
@@ -58,7 +58,7 @@ namespace Elasticsearch.Net.Connection
 			var requestOverrides = new RequestConnectionConfiguration()
 				.ConnectTimeout(pingTimeout)
 				.RequestTimeout(pingTimeout);
-			var response = this._connection.HeadSync(CreateUriToPath(baseUri, ""), requestOverrides);
+			var response = this.Connection.HeadSync(CreateUriToPath(baseUri, ""), requestOverrides);
 			if (response.Response == null) return false;
 			using(response.Response)
 				return response.Success;
@@ -71,7 +71,7 @@ namespace Elasticsearch.Net.Connection
 				.ConnectTimeout(pingTimeout)
 				.RequestTimeout(pingTimeout);
 
-			return this._connection.Head(CreateUriToPath(baseUri, ""), requestOverrides)
+			return this.Connection.Head(CreateUriToPath(baseUri, ""), requestOverrides)
 				.ContinueWith(t=>
 				{
 					var response = t.Result;
@@ -123,7 +123,7 @@ namespace Elasticsearch.Net.Connection
 
 		private void SniffIfInformationIsTooOld(int retried)
 		{
-			var sniffLifeSpan = this._configurationValues.SniffInformationLifeSpan;
+			var sniffLifeSpan = this.ConfigurationValues.SniffInformationLifeSpan;
 			var now = this._dateTimeProvider.Now();
 			if (retried == 0 && this._lastSniff.HasValue &&
 				sniffLifeSpan.HasValue && sniffLifeSpan.Value < (now - this._lastSniff.Value))
@@ -140,7 +140,7 @@ namespace Elasticsearch.Net.Connection
 			if (requestConfiguration != null && requestConfiguration.MaxRetries.HasValue)
 				return requestConfiguration.MaxRetries.Value;
 
-			return this._configurationValues.MaxRetries.GetValueOrDefault(this._connectionPool.MaxRetries);
+			return this.ConfigurationValues.MaxRetries.GetValueOrDefault(this._connectionPool.MaxRetries);
 		}
 
 		private bool SniffingDisabled(IRequestConfiguration requestConfiguration)
@@ -183,7 +183,7 @@ namespace Elasticsearch.Net.Connection
 			try
 			{
 				if (shouldPingHint 
-					&& !this._configurationValues.DisablePings
+					&& !this.ConfigurationValues.DisablePings
 					&& (requestState.RequestConfiguration == null
 						|| !requestState.RequestConfiguration.PingDisabled.GetValueOrDefault(false))
 					)
@@ -192,8 +192,25 @@ namespace Elasticsearch.Net.Connection
 				var streamResponse = _doRequest(requestState.Method, uri, requestState.PostData, requestState.RequestConfiguration);
 				if (streamResponse != null && streamResponse.SuccessOrKnownError)
 				{
+					ElasticsearchServerError error = null;
+					if (!streamResponse.Success
+						&& requestState.RequestConfiguration == null
+						|| (!streamResponse.Success
+							&& requestState.RequestConfiguration != null
+							&& requestState.RequestConfiguration.AllowedStatusCodes.All(i => i != streamResponse.HttpStatusCode)))
+					{
+						error = this.Serializer.Deserialize<ElasticsearchServerError>(streamResponse.Response);
+						if (this.Settings.ThrowOnElasticsearchServerExceptions)
+							throw new ElasticsearchServerException(error);
+					}
+
 					var typedResponse = this.StreamToTypedResponse<T>(streamResponse, requestState.DeserializationState);
 					typedResponse.NumberOfRetries = retried;
+					if (error != null)
+					{
+						typedResponse.Success = false;
+						typedResponse.OriginalException = new ElasticsearchServerException(error);
+					}
 					response = typedResponse;
 					return typedResponse;
 				}
@@ -204,7 +221,7 @@ namespace Elasticsearch.Net.Connection
 				if (maxRetries == 0 && retried == 0)
 					throw;
 				seenError = true;
-				return RetryRequest<T>(requestState, uri, retried, e);
+				return RetryRequest<T>(requestState, baseUri, retried, e);
 			}
 			finally
 			{
@@ -212,7 +229,7 @@ namespace Elasticsearch.Net.Connection
 				if (!seenError && response != null && response.SuccessOrKnownError)
 					this._connectionPool.MarkAlive(baseUri);
 			}
-			return RetryRequest<T>(requestState, uri, retried);
+			return RetryRequest<T>(requestState, baseUri, retried);
 		}
 
 		private Uri GetNextBaseUri<T>(TransportRequestState<T> requestState, out int initialSeed, out bool shouldPingHint)
@@ -232,9 +249,10 @@ namespace Elasticsearch.Net.Connection
 			var maxRetries = this.GetMaximumRetries(requestState.RequestConfiguration);
 			var exceptionMessage = MaxRetryExceptionMessage.F(requestState.Method, requestState.Path.IsNullOrEmpty() ? "/" : "", retried);
 
-			this._connectionPool.MarkDead(baseUri, this._configurationValues.DeadTimeout, this._configurationValues.MaxDeadTimeout);
+			this._connectionPool.MarkDead(baseUri, this.ConfigurationValues.DeadTimeout, this.ConfigurationValues.MaxDeadTimeout);
+
 			if (!SniffingDisabled(requestState.RequestConfiguration)
-				&& this._configurationValues.SniffsOnConnectionFault 
+				&& this.ConfigurationValues.SniffsOnConnectionFault 
 				&& retried == 0)
 				this.SniffClusterState();
 
@@ -247,14 +265,14 @@ namespace Elasticsearch.Net.Connection
 		{
 			switch (method.ToLowerInvariant())
 			{
-				case "post": return this._connection.PostSync(uri, postData, requestSpecificConfig);
-				case "put": return this._connection.PutSync(uri, postData, requestSpecificConfig);
-				case "head": return this._connection.HeadSync(uri, requestSpecificConfig);
-				case "get": return this._connection.GetSync(uri, requestSpecificConfig);
+				case "post": return this.Connection.PostSync(uri, postData, requestSpecificConfig);
+				case "put": return this.Connection.PutSync(uri, postData, requestSpecificConfig);
+				case "head": return this.Connection.HeadSync(uri, requestSpecificConfig);
+				case "get": return this.Connection.GetSync(uri, requestSpecificConfig);
 				case "delete":
 					return postData == null || postData.Length == 0
-						? this._connection.DeleteSync(uri, requestSpecificConfig)
-						: this._connection.DeleteSync(uri, postData, requestSpecificConfig);
+						? this.Connection.DeleteSync(uri, requestSpecificConfig)
+						: this.Connection.DeleteSync(uri, postData, requestSpecificConfig);
 			}
 			throw new Exception("Unknown HTTP method " + method);
 		}
@@ -292,7 +310,7 @@ namespace Elasticsearch.Net.Connection
 
 			var uri = CreateUriToPath(baseUri, requestState.Path);
 			
-			if (shouldPingHint && !this._configurationValues.DisablePings)
+			if (shouldPingHint && !this.ConfigurationValues.DisablePings)
 			{
 				return this.PingAsync(baseUri)
 					.ContinueWith(t =>
@@ -333,9 +351,9 @@ namespace Elasticsearch.Net.Connection
 			var maxRetries = this.GetMaximumRetries(requestState.RequestConfiguration);
 			var exceptionMessage = MaxRetryExceptionMessage.F(requestState.Method, requestState.Path, retried);
 
-			this._connectionPool.MarkDead(baseUri, this._configurationValues.DeadTimeout, this._configurationValues.MaxDeadTimeout);
+			this._connectionPool.MarkDead(baseUri, this.ConfigurationValues.DeadTimeout, this.ConfigurationValues.MaxDeadTimeout);
 
-			if (this._configurationValues.SniffsOnConnectionFault && retried == 0)
+			if (this.ConfigurationValues.SniffsOnConnectionFault && retried == 0)
 				this.SniffClusterState();
 
 			if (retried < maxRetries)
@@ -348,14 +366,14 @@ namespace Elasticsearch.Net.Connection
 		{
 			switch (method.ToLowerInvariant())
 			{
-				case "head": return this._connection.Head(uri, requestSpecificConfig);
-				case "get": return this._connection.Get(uri, requestSpecificConfig);
-				case "post": return this._connection.Post(uri, postData, requestSpecificConfig);
-				case "put": return this._connection.Put(uri, postData, requestSpecificConfig);
+				case "head": return this.Connection.Head(uri, requestSpecificConfig);
+				case "get": return this.Connection.Get(uri, requestSpecificConfig);
+				case "post": return this.Connection.Post(uri, postData, requestSpecificConfig);
+				case "put": return this.Connection.Put(uri, postData, requestSpecificConfig);
 				case "delete":
 					return postData == null || postData.Length == 0
-						? this._connection.Delete(uri, requestSpecificConfig)
-						: this._connection.Delete(uri, postData, requestSpecificConfig);
+						? this.Connection.Delete(uri, requestSpecificConfig)
+						: this.Connection.Delete(uri, postData, requestSpecificConfig);
 			}
 			throw new Exception("Unknown HTTP method " + method);
 		}
@@ -411,7 +429,7 @@ namespace Elasticsearch.Net.Connection
 			if (typeof(Stream).IsAssignableFrom(typeof(T)))
 				return streamResponse as ElasticsearchResponse<T>;
 
-			ElasticsearchResponse<T> cs = ElasticsearchResponse.CloneFrom<T>(streamResponse, default(T));
+			var cs = ElasticsearchResponse.CloneFrom<T>(streamResponse, default(T));
 			using (streamResponse.Response)
 			using (var memoryStream = new MemoryStream())
 			{
@@ -511,7 +529,7 @@ namespace Elasticsearch.Net.Connection
 					return cs;
 				}
 			}
-			var deserialized = this.Serializer.Deserialize<T>(cs, response, deserializationState);
+			var deserialized = this.Serializer.Deserialize<T>(response);
 			cs.Response = deserialized;
 			return cs;
 		}
@@ -538,7 +556,7 @@ namespace Elasticsearch.Net.Connection
 					return tcs.Task;
 				}
 			}
-			return this.Serializer.DeserializeAsync<T>(cs, response, deserializationState)
+			return this.Serializer.DeserializeAsync<T>(response)
 				.ContinueWith(t =>
 				{
 					cs.Response = t.Result;

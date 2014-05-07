@@ -36,11 +36,11 @@ namespace Nest.Tests.Unit.Core.Update
 		[Test]
 		public void NotEnoughInfoThrows()
 		{
-			Assert.Throws<DispatchException>(() =>
+			Assert.Throws<ArgumentNullException>(() =>
 			{
 				var result = this._client.Update<ElasticsearchProject>(u => u
 					.Index("myindex")
-					);
+				);
 			});
 		}
 		[Test]

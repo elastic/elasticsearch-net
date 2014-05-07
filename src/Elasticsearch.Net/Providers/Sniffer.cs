@@ -31,7 +31,7 @@ namespace Elasticsearch.Net.Providers
 		}
 		public static IList<Uri> FromStream(IElasticsearchResponse response, Stream stream, IElasticsearchSerializer serializer)
 		{
-				var result = serializer.Deserialize<NodeInfoResponse>(response, stream, null);
+				var result = serializer.Deserialize<NodeInfoResponse>(stream);
 				var l = new List<Uri>();
 				foreach(var kv in result.nodes.Values)
 				{

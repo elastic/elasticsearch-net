@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -65,9 +65,6 @@
     </Compile>
     <Compile Include="..\..\Elasticsearch.Net\Extensions\StringExtensions.cs">
       <Link>LinkedExtensions\StringExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Elasticsearch.Net\Extensions\TaskExtensions.cs">
-      <Link>LinkedExtensions\TaskExtensions.cs</Link>
     </Compile>
     <Compile Include="..\..\Elasticsearch.Net\Extensions\TypeExtensions.cs">
       <Link>LinkedExtensions\TypeExtensions.cs</Link>
@@ -252,10 +249,6 @@
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj">
-      <Project>{a69322fd-b874-44ef-abe0-63f4a7b5593e}</Project>
-      <Name>Elasticsearch.Net.Connection.HttpClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj">
       <Project>{e97ccf40-0ba6-43fe-9f2d-58d454134088}</Project>
       <Name>Elasticsearch.Net</Name>

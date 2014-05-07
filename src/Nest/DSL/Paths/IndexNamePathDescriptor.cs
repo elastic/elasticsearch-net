@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-
 using Nest.Resolvers;
 
 namespace Nest
@@ -18,51 +14,46 @@ namespace Nest
 	/// </pre>
 	/// neither parameter is optional 
 	/// </summary>
-	public class IndexNamePathDescriptor<P, K> : BasePathDescriptor<P>
-		where P : IndexNamePathDescriptor<P, K>, new()
-		where K : FluentRequestParameters<K>, new()
+	public class IndexNamePathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+		where TDescriptor : IndexNamePathDescriptor<TDescriptor, TParameters>, new()
+		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		internal IndexNameMarker _Index { get; set; }
 		internal string _Name { get; set; }
 		
-		public P Index<T>() where T : class
+		public TDescriptor Index<TAlternative>() where TAlternative : class
 		{
-			this._Index = typeof(T);
-			return (P)this;
+			this._Index = typeof(TAlternative);
+			return (TDescriptor)this;
 		}
 			
-		public P Index(string indexType)
+		public TDescriptor Index(string indexType)
 		{
 			this._Index = indexType;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		public P Index(Type indexType)
+		public TDescriptor Index(Type indexType)
 		{
 			this._Index = indexType;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 		
-		public P Name(string name)
+		public TDescriptor Name(string name)
 		{
 			this._Name = name;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentRequestParameters<K>, new()
+		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
 		{
 			if (this._Name == null)
 				throw new DslException("missing Repository()");
 			var inferrer = new ElasticInferrer(settings);
 			var index = inferrer.IndexName(this._Index) ?? inferrer.DefaultIndex; 
-			var pathInfo = new ElasticsearchPathInfo<K>()
-			{
-				Index = index,
-				Name = this._Name
-			};
-			pathInfo.RequestParameters = queryString ?? new K();
-			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
+			var pathInfo = base.ToPathInfo(queryString);
+			pathInfo.Index = index;
+			pathInfo.Name = this._Name;
 			return pathInfo;
 		}
 

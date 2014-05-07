@@ -100,7 +100,7 @@ namespace Nest
 		}
 		ElasticsearchPathInfo<PutTemplateRequestParameters> IPathInfo<PutTemplateRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<PutTemplateRequestParameters>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
 			pathInfo.Name = this._Name;
 			return pathInfo;

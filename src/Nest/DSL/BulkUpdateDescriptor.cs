@@ -15,12 +15,12 @@ namespace Nest
 		internal override string _Operation { get { return "update"; } }
 		internal override object _Object { get; set; }
 
-		
+		internal string _Lang { get; set; }
 		internal K _Document { get; set; }
 		internal string _Script { get; set; }
 		internal Dictionary<string, object> _Params { get; set; }
 		internal object _Upsert { get; set; }
-
+		internal bool? _DocAsUpsert { get; set; }
 
 		internal override object GetBody()
 		{
@@ -28,8 +28,10 @@ namespace Nest
 			{
 				_Document = this._Document,
 				_Script = this._Script,
+				_Lang = this._Lang,
 				_Params = this._Params,
-				_Upsert = this._Upsert
+				_Upsert = this._Upsert,
+				_DocAsUpsert = this._DocAsUpsert
 			};
 		}
 
@@ -104,6 +106,18 @@ namespace Nest
 		public BulkUpdateDescriptor<T, K> Document(K @object)
 		{
 			this._Document = @object;
+			return this;
+		}
+
+		public BulkUpdateDescriptor<T, K> DocAsUpsert(bool docAsUpsert = true)
+		{
+			this._DocAsUpsert = docAsUpsert;
+			return this;
+		}
+		
+		public BulkUpdateDescriptor<T, K> Lang(string lang)
+		{
+			this._Lang = lang;
 			return this;
 		}
 

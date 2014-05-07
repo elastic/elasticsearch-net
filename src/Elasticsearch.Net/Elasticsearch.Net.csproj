@@ -55,10 +55,9 @@
     <Compile Include="Domain\IHideObjectMembers.cs" />
     <Compile Include="Domain\IRequestParameters.cs" />
     <Compile Include="Domain\VoidResponse.cs" />
-    <Compile Include="Extensions\TaskExtensions.cs" />
     <Compile Include="Providers\DateTimeProvider.cs" />
     <Compile Include="Connection\HttpConnection.cs" />
-    <Compile Include="Connection\ConnectionError.cs" />
+    <Compile Include="Connection\ElasticsearchServerException.cs" />
     <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Connection\ConnectionConfiguration.cs" />
     <Compile Include="ConnectionPool\EndpointState.cs" />
@@ -110,7 +109,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>IF NOT EXIST "$(SolutionDir)..\build\keys\keypair.snk" (CD "$(SolutionDir).." &amp;&amp; "build.bat" CreateKeysIfAbsent &amp;&amp; CD %25~dp0)
+    <PreBuildEvent Condition=" '$(OS)' != 'Unix' ">IF NOT EXIST "$(SolutionDir)..\build\keys\keypair.snk" (CD "$(SolutionDir).." &amp;&amp; "build.bat" CreateKeysIfAbsent &amp;&amp; CD %25~dp0)
 </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

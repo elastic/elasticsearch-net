@@ -20,25 +20,20 @@ namespace Elasticsearch.Net.JsonNet
 		/// <summary>
 		/// Deserialize an object 
 		/// </summary>
-		public virtual T Deserialize<T>(IElasticsearchResponse response, Stream stream, object deserializationState = null) 
+		public virtual T Deserialize<T>(Stream stream) 
 		{
 			var settings = this._settings;
-			var customConverter = deserializationState as Func<IElasticsearchResponse, Stream, T>;
-			if (customConverter != null)
-			{
-				var t = customConverter(response, stream);
-				return t;
-			}
+		
 
-			return _Deserialize<T>(response, stream, settings);
+			return _Deserialize<T>(stream, settings);
 		}
-		public virtual Task<T> DeserializeAsync<T>(IElasticsearchResponse response, Stream stream, object deserializationState = null)
+		public virtual Task<T> DeserializeAsync<T>(Stream stream)
 		{
 			//TODO sadly json .net async does not read the stream async so 
 			//figure out wheter reading the stream async on our own might be beneficial 
 			//over memory possible memory usage
 			var tcs = new TaskCompletionSource<T>();
-			var r = this.Deserialize<T>(response, stream, deserializationState);
+			var r = this.Deserialize<T>(stream);
 			tcs.SetResult(r);
 			return tcs.Task;
 		}
@@ -52,7 +47,7 @@ namespace Elasticsearch.Net.JsonNet
 			return settings;
 		}
 
-		protected internal  T _Deserialize<T>(IElasticsearchResponse response, Stream stream, JsonSerializerSettings settings = null)
+		protected internal  T _Deserialize<T>(Stream stream, JsonSerializerSettings settings = null)
 		{
 			settings = settings ?? this._settings;
 			var serializer = JsonSerializer.Create(settings);

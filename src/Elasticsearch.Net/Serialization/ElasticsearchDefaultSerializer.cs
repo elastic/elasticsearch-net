@@ -13,7 +13,7 @@ namespace Elasticsearch.Net.Serialization
 		{
 			return SimpleJson.DeserializeObject<T>(bytes.Utf8String());
 		}
-		public T Deserialize<T>(IElasticsearchResponse response, Stream stream, object deserializeState)
+		public T Deserialize<T>(Stream stream)
 		{
 			var ms = stream as MemoryStream;
 			//if (ms != null)
@@ -28,7 +28,7 @@ namespace Elasticsearch.Net.Serialization
 				return SimpleJson.DeserializeObject<T>(buffer.Utf8String());
 			}
 		}
-		public Task<T> DeserializeAsync<T>(IElasticsearchResponse response, Stream stream, object deserializeState)
+		public Task<T> DeserializeAsync<T>(Stream stream)
 		{
 			var tcs = new TaskCompletionSource<T>();
 			T r;

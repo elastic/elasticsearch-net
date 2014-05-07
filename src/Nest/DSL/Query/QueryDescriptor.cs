@@ -13,8 +13,6 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class QueryDescriptor<T> : BaseQuery where T : class
 	{
-		private readonly bool _forceConditionless;
-
 		public QueryDescriptor()
 		{
 		}

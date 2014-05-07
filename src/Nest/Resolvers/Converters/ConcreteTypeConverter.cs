@@ -56,6 +56,7 @@ namespace Nest
 		}
 	}
 
+
 	internal class ConcreteTypeConverter<T> : JsonConverter where T : class
 	{
 		internal readonly Type _baseType;
@@ -66,15 +67,6 @@ namespace Nest
 
 		public ConcreteTypeConverter() {}
 
-		private static ConcurrentDictionary<Type, Action<object, object>> 
-			FieldDelegates = new ConcurrentDictionary<Type, Action<object, object>>();
-
-		private static ConcurrentDictionary<Type, Type> TypeToFieldTypes = 
-			new ConcurrentDictionary<Type, Type>();
-
-
-		private static MethodInfo MakeDelegateMethodInfo = 
-			typeof(FieldsSetter).GetMethod("SetFields", BindingFlags.Static | BindingFlags.NonPublic);
 
 		public ConcreteTypeConverter(Func<dynamic, Hit<dynamic>, Type> concreteTypeSelector)
 		{
@@ -92,7 +84,7 @@ namespace Nest
 			{
 				var realConcreteConverter = elasticContractResolver.PiggyBackState.ActualJsonConverter as ConcreteTypeConverter<T>;
 				if (realConcreteConverter != null)
-					return GetUsingConcreteTypeConverter(reader, serializer, realConcreteConverter);
+					return ConcreteTypeConverter.GetUsingConcreteTypeConverter<T>(reader, serializer, realConcreteConverter);
 			}
 
 			var instance = (Hit<T>)(typeof(Hit<T>).CreateInstance());
@@ -101,7 +93,33 @@ namespace Nest
 			return instance;
 		}
 
-		private static object GetUsingConcreteTypeConverter(JsonReader reader, JsonSerializer serializer, ConcreteTypeConverter<T> realConcreteConverter)
+
+	
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override bool CanConvert(Type objectType)
+		{
+			return typeof(IHit<object>).IsAssignableFrom(objectType);
+		}
+	}
+
+	internal static class ConcreteTypeConverter 
+	{
+		internal static ConcurrentDictionary<Type, Action<object, object>> 
+			FieldDelegates = new ConcurrentDictionary<Type, Action<object, object>>();
+
+		internal static ConcurrentDictionary<Type, Type> TypeToFieldTypes = 
+			new ConcurrentDictionary<Type, Type>();
+
+		internal static MethodInfo MakeDelegateMethodInfo = 
+			typeof(FieldsSetter).GetMethod("SetFields", BindingFlags.Static | BindingFlags.NonPublic);
+
+		internal static object GetUsingConcreteTypeConverter<T>(
+			JsonReader reader, JsonSerializer serializer, ConcreteTypeConverter<T> realConcreteConverter)
+			where T : class
 		{
 			var jObject = CreateIntermediateJObject(reader);
 			object fieldSelection;
@@ -110,24 +128,21 @@ namespace Nest
 			PopulateHit(serializer, jObject.CreateReader(), hit);
 
 			Action<object, object> cachedLookup;
-			if (FieldDelegates.TryGetValue(concreteType, out cachedLookup))
+			if (ConcreteTypeConverter.FieldDelegates.TryGetValue(concreteType, out cachedLookup))
 			{
 				cachedLookup(hit, fieldSelection);
 				return hit;
 			}
 			
-			var generic = MakeDelegateMethodInfo.MakeGenericMethod(concreteType);
+			var generic = ConcreteTypeConverter.MakeDelegateMethodInfo.MakeGenericMethod(concreteType);
 			cachedLookup = (h, f) => generic.Invoke(null, new[] { h, f });
 			cachedLookup(hit, fieldSelection);
-			FieldDelegates.TryAdd(concreteType, cachedLookup);
+			ConcreteTypeConverter.FieldDelegates.TryAdd(concreteType, cachedLookup);
 			return hit;
 		}
-
-
 		private static void PopulateHit(JsonSerializer serializer, JsonReader reader, object hit) {
 			serializer.Populate(reader, hit);
 		}
-
 		private static JObject CreateIntermediateJObject(JsonReader reader)
 		{
 			JObject jObject = JObject.Load(reader);
@@ -140,11 +155,11 @@ namespace Nest
 			return hitType.CreateInstance();
 		}
 
-
-		private static dynamic GetConcreteTypeUsingSelector(
+		internal static Type GetConcreteTypeUsingSelector<T>(
 			JsonSerializer serializer, 
 			ConcreteTypeConverter<T> realConcreteConverter, 
 			JObject jObject, out object selection)
+			where T: class
 		{
 			var elasticContractResolver = serializer.ContractResolver as ElasticContractResolver;
 			var baseType = realConcreteConverter._baseType;
@@ -172,23 +187,13 @@ namespace Nest
 			var concreteType = selector(o, hitDynamic);
 			
 			Type fieldSelectionType;
-			if (!TypeToFieldTypes.TryGetValue(concreteType, out fieldSelectionType))
+			if (!ConcreteTypeConverter.TypeToFieldTypes.TryGetValue(concreteType, out fieldSelectionType))
 			{
 				fieldSelectionType = typeof(FieldSelection<>).MakeGenericType(concreteType);
-				TypeToFieldTypes.TryAdd(concreteType, fieldSelectionType);
+				ConcreteTypeConverter.TypeToFieldTypes.TryAdd(concreteType, fieldSelectionType);
 			}
 			selection = fieldSelectionType.CreateInstance(elasticContractResolver.ConnectionSettings, fieldSelectionData);
 			return concreteType;
-		}
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			throw new NotImplementedException();
-		}
-
-		public override bool CanConvert(Type objectType)
-		{
-			return typeof(IHit<object>).IsAssignableFrom(objectType);
 		}
 	}
 }

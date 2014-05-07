@@ -86,8 +86,8 @@ namespace Elasticsearch.Net
 
 	public class ElasticsearchResponse<T> : IElasticsearchResponse
 	{
-		protected static readonly string _printFormat;
-		protected static readonly string _errorFormat;
+		private static readonly string _printFormat;
+		private static readonly string _errorFormat;
 
 		public bool Success { get; protected internal set; }
 
@@ -196,12 +196,19 @@ namespace Elasticsearch.Net
 			else if (typeof(T) == typeof(byte[]))
 				response = (this.Response as byte[]).Utf8String();
 
+			string requestJson = null;
+		    
+            if (r.Request != null)
+            {
+                requestJson = r.Request.Utf8String();
+            }
+				
 			var print = _printFormat.F(
 			  Environment.NewLine,
 			  r.HttpStatusCode.HasValue ? r.HttpStatusCode.Value.ToString(CultureInfo.InvariantCulture) : "-1",
 			  r.RequestMethod,
 			  r.RequestUrl,
-			  r.Request,
+			  requestJson,
 			  response
 			);
 			if (!this.Success && e != null)

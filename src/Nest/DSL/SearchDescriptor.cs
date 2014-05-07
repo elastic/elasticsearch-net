@@ -65,6 +65,7 @@ namespace Nest
 			if (indices == null) return this;
 			return this.Indices(indices.ToArray());
 		}
+		
 		/// <summary>
 		/// The indices to execute the search on. Defaults to the default index
 		/// </summary>
@@ -73,6 +74,7 @@ namespace Nest
 			if (indices == null) return this;
 			return this.Indices(indices.ToArray());
 		}
+		
 		/// <summary>
 		/// The indices to execute the search on. Defaults to the default index
 		/// </summary>
@@ -82,6 +84,7 @@ namespace Nest
 			this._Indices = indices.Select(s => (IndexNameMarker)s);
 			return this;
 		}
+		
 		/// <summary>
 		/// The indices to execute the search on. Defaults to the default index
 		/// </summary>
@@ -91,6 +94,7 @@ namespace Nest
 			this._Indices = indices.Select(s => (IndexNameMarker)s);
 			return this;
 		}
+		
 		/// <summary>
 		/// The index to execute the search on. Defaults to the default index
 		/// </summary>

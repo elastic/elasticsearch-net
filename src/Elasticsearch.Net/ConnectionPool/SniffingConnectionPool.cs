@@ -11,9 +11,6 @@ namespace Elasticsearch.Net.ConnectionPool
 	{
 		private readonly ReaderWriterLockSlim _readerWriter = new ReaderWriterLockSlim();
 
-		private bool _seenStartup = false;
-		private bool _canUpdateNodeList;
-
 		public override bool AcceptsUpdates { get { return true; } }
 
 		public SniffingConnectionPool(
@@ -26,14 +23,11 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public override void UpdateNodeList(IList<Uri> newClusterState, bool fromStartupHint = false)
 		{
-			if (fromStartupHint)
-				this._seenStartup = true;
-
 			try
 			{
 				this._readerWriter.EnterWriteLock();
-				this._nodeUris = newClusterState;
-				this._uriLookup = newClusterState.ToDictionary(k => k, v => new EndpointState());
+				this.NodeUris = newClusterState;
+				this.UriLookup = newClusterState.ToDictionary(k => k, v => new EndpointState());
 			}
 			finally
 			{

@@ -11,7 +11,7 @@ namespace Elasticsearch.Net.Connection
 		private readonly bool _enabled;
 		private Stopwatch _stopwatch;
 
-		public ElasticsearchResponse<T> _result { get; set; }
+		private ElasticsearchResponse<T> _result;
 
 		public ElasticsearchResponseTracer(bool enabled)
 		{
@@ -41,8 +41,8 @@ namespace Elasticsearch.Net.Connection
 					"NEST {0} {1} ({2}):\r\n{3}"
 					, _result.RequestMethod
 					, _result.RequestUrl
-					, _stopwatch.Elapsed.ToString()
-					, _result.ToString()
+					, _stopwatch.Elapsed
+					, _result
 				);
 			}
 			else

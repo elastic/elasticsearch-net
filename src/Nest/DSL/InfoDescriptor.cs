@@ -12,7 +12,7 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("Info")]
-	public partial class InfoDescriptor : 
+	public partial class InfoDescriptor : BasePathDescriptor<InfoDescriptor>,
 		 IPathInfo<InfoRequestParameters>
 	{
 		ElasticsearchPathInfo<InfoRequestParameters> IPathInfo<InfoRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)

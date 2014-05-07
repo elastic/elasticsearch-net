@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Linq;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using Nest.Resolvers.Converters;
 
@@ -7,6 +8,19 @@ namespace Nest
 	[JsonObject]
 	public class BulkResponse : BaseResponse, IBulkResponse
 	{
+		private bool _isValid;
+		public override bool IsValid
+		{
+			get
+			{
+				return this._isValid && !this.Errors && !this.ItemsWithErrors.HasAny();
+			}
+			internal set
+			{
+				this._isValid = value;
+			}
+		}
+
 		[JsonProperty("took")]
 		public int Took { get; internal set; }
 
@@ -15,5 +29,14 @@ namespace Nest
 
 		[JsonProperty("items")]
 		public IEnumerable<BulkOperationResponseItem> Items { get; internal set; }
+
+		[JsonIgnore]
+		public IEnumerable<BulkOperationResponseItem> ItemsWithErrors
+		{
+			get
+			{
+				return !this.Items.HasAny() ? Enumerable.Empty<BulkOperationResponseItem>() : this.Items.Where(i => !i.IsValid);
+			}
+		}
 	}
 }

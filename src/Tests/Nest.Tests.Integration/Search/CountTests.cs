@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Search
 			var countResults = this._client.Count<ElasticsearchProject>(c => c
 			.Query(q => q
 				.Fuzzy(fq => fq
-					.Value(this._LookFor.ToLower())
+					.Value(this._LookFor.ToLowerInvariant())
 					.OnField(f => f.Followers.First().FirstName)
 				)
 			));
@@ -42,7 +42,7 @@ namespace Nest.Tests.Integration.Search
 				.Fuzzy(fq => fq
 					.PrefixLength(4)
 					.OnField(f => f.Followers.First().FirstName)
-					.Value(this._LookFor.ToLower())
+					.Value(this._LookFor.ToLowerInvariant())
 				)
 			));
 			countResults.Count.Should().BeGreaterThan(0);
@@ -61,7 +61,7 @@ namespace Nest.Tests.Integration.Search
 					.Fuzzy(fq => fq
 						.PrefixLength(4)
 						.OnField(f => f.Followers.First().FirstName)
-						.Value(this._LookFor.ToLower())
+						.Value(this._LookFor.ToLowerInvariant())
 					)
 				)
 			);

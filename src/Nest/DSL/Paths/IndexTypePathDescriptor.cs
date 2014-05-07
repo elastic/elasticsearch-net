@@ -19,51 +19,50 @@ namespace Nest
 	/// </pre>
 	/// Where neither parameter is optional
 	/// </summary>
-	public class IndexTypePathDescriptor<P, K> : BasePathDescriptor<P>
-		where P : IndexTypePathDescriptor<P, K>, new()
-		where K : FluentRequestParameters<K>, new()
+	public class IndexTypePathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+		where TDescriptor : IndexTypePathDescriptor<TDescriptor, TParameters>, new()
+		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		internal IndexNameMarker _Index { get; set; }
 		internal TypeNameMarker _Type { get; set; }
 		
-		public P Index<T>() where T : class
+		public TDescriptor Index<TAlternative>() where TAlternative : class
 		{
-			this._Index = typeof(T);
-			return (P)this;
+			this._Index = typeof(TAlternative);
+			return (TDescriptor)this;
 		}
 			
-		public P Index(string index)
+		public TDescriptor Index(string index)
 		{
 			this._Index = index;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		public P Index(Type indexType)
+		public TDescriptor Index(Type indexType)
 		{
 			this._Index = indexType;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 		
-		public P Type<T>() where T : class
+		public TDescriptor Type<TAlternative>() where TAlternative : class
 		{
-			this._Type = typeof(T);
-			return (P)this;
+			this._Type = typeof(TAlternative);
+			return (TDescriptor)this;
 		}
 			
-		public P Type(string type)
+		public TDescriptor Type(string type)
 		{
 			this._Type = type;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 
-		public P Type(Type type)
+		public TDescriptor Type(Type type)
 		{
 			this._Type = type;
-			return (P)this;
+			return (TDescriptor)this;
 		}
 		
-		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettingsValues settings, K queryString)
-			where K : FluentRequestParameters<K>, new()
+		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
 		{
 			var inferrer = new ElasticInferrer(settings);
 			if (this._Index == null)
@@ -71,15 +70,12 @@ namespace Nest
 			if (this._Type == null)
 				throw new DslException("Type() not specified");
 
-			var index = new ElasticInferrer(settings).IndexName(this._Index); 
-			var type = new ElasticInferrer(settings).TypeName(this._Type); 
-			var pathInfo = new ElasticsearchPathInfo<K>()
-			{
-				Index = index,
-				Type = type
-			};
-			pathInfo.RequestParameters = queryString ?? new K();
-			pathInfo.RequestParameters.RequestConfiguration(r=>this._RequestConfiguration);
+			var index = inferrer.IndexName(this._Index); 
+			var type = inferrer.TypeName(this._Type); 
+
+			var pathInfo = base.ToPathInfo(queryString);
+			pathInfo.Index = index;
+			pathInfo.Type = type;
 			return pathInfo;
 		}
 

@@ -84,7 +84,7 @@ namespace Nest.Tests.Integration.Facet
 		{
 			ISearchResponse<ElasticsearchProject> queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
-							""term"" : { ""followers.lastName"" : """ + this._LookFor.ToLower() +
+							""term"" : { ""followers.lastName"" : """ + this._LookFor.ToLowerInvariant() +
 				@""" }
 					},
 					""facets"" : {
@@ -100,7 +100,7 @@ namespace Nest.Tests.Integration.Facet
 			Assert.IsInstanceOf<TermFacet>(facet);
 
 			var tf = (TermFacet) facet;
-			Assert.IsTrue(tf.Items.Any(f => f.Term == this._LookFor.ToLower()));
+			Assert.IsTrue(tf.Items.Any(f => f.Term == this._LookFor.ToLowerInvariant()));
 		}
     [Test]
     public void TestWithDSL()

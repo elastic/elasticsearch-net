@@ -8,16 +8,15 @@ namespace Elasticsearch.Net.Connection
 	public interface IConnectionConfigurationValues
 	{
 		IConnectionPool ConnectionPool { get; }
-		//Uri Uri { get; }
+		
 		int MaximumAsyncConnections { get; }
-		//string Host { get; }
-		//int Port { get; }
 		int Timeout { get; }
 		int? PingTimeout { get; }
 		int? DeadTimeout { get; }
 		int? MaxDeadTimeout { get; }
 		int? MaxRetries { get; }
 		bool DisablePings { get; }
+		
 		string ProxyAddress { get; }
 		string ProxyUsername { get; }
 		string ProxyPassword { get; }
@@ -25,6 +24,13 @@ namespace Elasticsearch.Net.Connection
 		bool TraceEnabled { get; }
 		bool UsesPrettyResponses { get; }
 		bool KeepRawResponse { get; }
+
+		/// <summary>
+		/// Instead of following a c/go like error checking on response.IsValid always throw an ElasticsearchServerException
+		/// on the client when a call resulted in an exception on the elasticsearch server. 
+		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions</para>
+		/// </summary>
+		bool ThrowOnElasticsearchServerExceptions { get;  }
 
 		/// <summary>
 		/// Sniff the cluster state immediatly on startup
@@ -41,7 +47,6 @@ namespace Elasticsearch.Net.Connection
 		/// the specified timespan
 		/// </summary>
 		TimeSpan? SniffInformationLifeSpan { get; }
-		
 
 		/// <summary>
 		/// Append these query string parameters automatically to every request

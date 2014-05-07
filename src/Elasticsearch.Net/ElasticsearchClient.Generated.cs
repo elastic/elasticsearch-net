@@ -24778,13 +24778,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MtermvectorsGet<T>(Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> MtermvectorsGet<T>(Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -24809,13 +24809,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -24842,13 +24842,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MtermvectorsGet(Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> MtermvectorsGet(Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -24875,13 +24875,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsGetAsync(Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsGetAsync(Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors";
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -24907,14 +24907,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MtermvectorsGet<T>(string index, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> MtermvectorsGet<T>(string index, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -24940,14 +24940,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(string index, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(string index, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -24975,14 +24975,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MtermvectorsGet(string index, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> MtermvectorsGet(string index, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25010,14 +25010,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsGetAsync(string index, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsGetAsync(string index, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25044,7 +25044,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MtermvectorsGet<T>(string index, string type, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> MtermvectorsGet<T>(string index, string type, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25052,7 +25052,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25079,7 +25079,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(string index, string type, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(string index, string type, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25087,7 +25087,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25116,7 +25116,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MtermvectorsGet(string index, string type, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> MtermvectorsGet(string index, string type, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25124,7 +25124,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25153,7 +25153,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsGetAsync(string index, string type, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsGetAsync(string index, string type, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25161,7 +25161,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25187,13 +25187,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mtermvectors<T>(object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Mtermvectors<T>(object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors".F();
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25219,13 +25219,13 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors".F();
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25253,13 +25253,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mtermvectors(object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> Mtermvectors(object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors".F();
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25287,13 +25287,13 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsAsync(object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsAsync(object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors".F();
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25320,14 +25320,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mtermvectors<T>(string index, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Mtermvectors<T>(string index, object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25354,14 +25354,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25390,14 +25390,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mtermvectors(string index, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> Mtermvectors(string index, object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25426,14 +25426,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsAsync(string index, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsAsync(string index, object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25461,7 +25461,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mtermvectors<T>(string index, string type, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Mtermvectors<T>(string index, string type, object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25469,7 +25469,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25497,7 +25497,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, string type, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, string type, object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25505,7 +25505,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25535,7 +25535,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mtermvectors(string index, string type, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> Mtermvectors(string index, string type, object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25543,7 +25543,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 
@@ -25573,7 +25573,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsAsync(string index, string type, object body, Func<MtermvectorsRequestParameters, MtermvectorsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsAsync(string index, string type, object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25581,7 +25581,7 @@ namespace Elasticsearch.Net
 			BaseRequestParameters requestParams = null;
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MtermvectorsRequestParameters());
+				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 

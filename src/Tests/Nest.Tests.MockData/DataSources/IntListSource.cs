@@ -14,7 +14,7 @@ namespace Nest.Tests.MockData.DataSources
 		IntSource intSource = new IntSource();
 		public override List<int> Next(IGenerationSession session)
 		{
-			var count = Math.Abs(intSource.Next(session)) % 3;
+			var count = (Math.Abs(intSource.Next(session)) % 3) +1;
 
 			var values = new List<int>();
 			for (var i = 0; i < count; i++ )

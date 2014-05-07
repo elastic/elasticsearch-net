@@ -13,13 +13,13 @@ namespace Nest
 {
 	[DescriptorFor("IndicesStatus")]
 	public partial class IndicesStatusDescriptor : 
-		IndicesOptionalPathDescriptor<IndicesStatusDescriptor, IndicesStatsRequestParameters>
+		IndicesOptionalPathDescriptor<IndicesStatusDescriptor, IndicesStatusRequestParameters>
 		, IPathInfo<IndicesStatusRequestParameters>
 	{
 		
 		ElasticsearchPathInfo<IndicesStatusRequestParameters> IPathInfo<IndicesStatusRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<IndicesStatusRequestParameters>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 
 			return pathInfo;

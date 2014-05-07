@@ -1,4 +1,5 @@
-﻿using Nest.Resolvers;
+﻿using Nest.DSL.Suggest;
+using Nest.Resolvers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,13 @@ namespace Nest
 	public class CompletionSuggestDescriptor<T> : BaseSuggestDescriptor<T> where T : class
 	{
 		[JsonProperty(PropertyName = "fuzzy")]
-		internal FuzzySuggestDescriptor<T> _Fuzzy { get; set; }
+		internal IFuzzySuggestDescriptor<T> _Fuzzy { get; set; }
 
 		public CompletionSuggestDescriptor<T> Size(int size)
 		{
 			this._Size = size;
 			return this;
-		} 
+		}
 
 		public CompletionSuggestDescriptor<T> Text(string text)
 		{
@@ -49,5 +50,17 @@ namespace Nest
 			this._Fuzzy = new FuzzySuggestDescriptor<T>();
 			return this;
 		}
+
+		public CompletionSuggestDescriptor<T> Fuzziness(Func<FuzzinessSuggestDescriptor<T>, FuzzinessSuggestDescriptor<T>> fuzzinessDescriptor)
+		{
+			this._Fuzzy = fuzzinessDescriptor(new FuzzinessSuggestDescriptor<T>());
+			return this;
+		}
+
+		public CompletionSuggestDescriptor<T> Fuzziness()
+		{
+			this._Fuzzy = new FuzzinessSuggestDescriptor<T>();
+			return this;
+		} 
 	}
 }

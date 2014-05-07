@@ -16,9 +16,16 @@ using Nest.Tests.MockData.Domain;
 using System.Reflection;
 using System.IO;
 using Moq;
+using PurifyNet;
 
 namespace Nest.Tests.Unit
 {
+	public static class UnitTestDefaults
+	{
+		public static readonly Uri Uri = new Uri("http://localhost:9200");
+		public static readonly string DefaultIndex = "nest_test_data";
+	}
+
 	public class BaseJsonTests
 	{
 		protected readonly IConnectionSettingsValues _settings;
@@ -30,7 +37,7 @@ namespace Nest.Tests.Unit
 
 		public BaseJsonTests()
 		{
-			this._settings = new ConnectionSettings(Test.Default.Uri, Test.Default.DefaultIndex)
+			this._settings = new ConnectionSettings(UnitTestDefaults.Uri, UnitTestDefaults.DefaultIndex)
 				.ExposeRawResponse();
 			this._connection = new InMemoryConnection(this._settings);
 			this._client = new ElasticClient(this._settings, this._connection);
@@ -45,7 +52,7 @@ namespace Nest.Tests.Unit
 		}
 		protected ElasticClient GetFixedReturnClient(MethodBase methodInfo, string fileName)
 		{
-			var settings = new ConnectionSettings(Test.Default.Uri, "default-index")
+			var settings = new ConnectionSettings(UnitTestDefaults.Uri, UnitTestDefaults.DefaultIndex)
 				.ExposeRawResponse();
 			var file = this.GetFileFromMethod(methodInfo, fileName);
 			var jsonResponse = File.ReadAllText(file);

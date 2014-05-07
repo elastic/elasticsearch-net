@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -10,13 +11,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection.Thrift.Protocol;
 using Elasticsearch.Net.Connection.Thrift.Transport;
+using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Providers;
 
 namespace Elasticsearch.Net.Connection.Thrift
 {
 	public class ThriftConnection : IConnection, IDisposable
 	{
-		private readonly ConcurrentQueue<Rest.Client> _clients = new ConcurrentQueue<Rest.Client>();
+		private readonly ConcurrentDictionary<Uri, ConcurrentQueue<Rest.Client>> _clients =
+			new ConcurrentDictionary<Uri, ConcurrentQueue<Rest.Client>>();
 		private readonly Semaphore _resourceLock;
 		private readonly int _timeout;
 		private readonly int _poolSize;
@@ -27,20 +30,36 @@ namespace Elasticsearch.Net.Connection.Thrift
 		{
 			this._connectionSettings = connectionSettings;
 			this._timeout = connectionSettings.Timeout;
-			this._poolSize = Math.Max(1, connectionSettings.MaximumAsyncConnections);
-
+			var connectionPool = this._connectionSettings.ConnectionPool;
+			var maximumConnections = Math.Max(1, connectionSettings.MaximumAsyncConnections);
+			var maximumUrls = connectionPool.MaxRetries + 1;
+			this._poolSize = maximumConnections;
 			this._resourceLock = new Semaphore(_poolSize, _poolSize);
-			int seed; bool shouldPingHint;
-			for (var i = 0; i <= connectionSettings.MaximumAsyncConnections; i++)
+
+			int seed; int initialSeed = 0; bool shouldPingHint;
+
+			for (var i = 0; i < maximumUrls; i++)
 			{
-				var uri = this._connectionSettings.ConnectionPool.GetNext(null, out seed, out shouldPingHint);
-				var host = uri.Host;
-				var port = uri.Port;
-				var tsocket = new TSocket(host, port);
-				var transport = new TBufferedTransport(tsocket, 1024);
-				var protocol = new TBinaryProtocol(transport);
-				var client = new Rest.Client(protocol);
-				_clients.Enqueue(client);
+				var uri = connectionPool.GetNext(initialSeed, out seed, out shouldPingHint);
+				var queue = new ConcurrentQueue<Rest.Client>();
+				for (var c = 0; c < maximumConnections; c++)
+				{
+					var host = uri.Host;
+					var port = uri.Port;
+					var tsocket = new TSocket(host, port);
+					var transport = new TBufferedTransport(tsocket, 1024);
+					var protocol = new TBinaryProtocol(transport);
+					var client = new Rest.Client(protocol);
+					tsocket.Timeout = this._connectionSettings.Timeout;
+					tsocket.TcpClient.SendTimeout = this._connectionSettings.Timeout;
+					tsocket.TcpClient.ReceiveTimeout = this._connectionSettings.Timeout;
+					//tsocket.TcpClient.NoDelay = true;
+
+					queue.Enqueue(client);
+
+					initialSeed = seed;
+				}
+				_clients.TryAdd(uri, queue);
 			}
 		}
 
@@ -59,7 +78,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 				return this.Execute(restRequest, deserializationState);
 			});
 		}
-	
+
 		public Task<ElasticsearchResponse<Stream>> Head(Uri uri, IRequestConnectionConfiguration deserializationState = null)
 		{
 			var restRequest = new RestRequest();
@@ -68,7 +87,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return Task.Factory.StartNew<ElasticsearchResponse<Stream>>(()=> 
+			return Task.Factory.StartNew<ElasticsearchResponse<Stream>>(() =>
 			{
 				return this.Execute(restRequest, deserializationState);
 			});
@@ -219,15 +238,13 @@ namespace Elasticsearch.Net.Connection.Thrift
 		protected virtual void Dispose(bool disposing)
 		{
 			if (_disposed)
-			{
 				return;
-			}
 
-			foreach (var c in this._clients)
+			foreach (var c in this._clients.SelectMany(c=>c.Value))
 			{
-				if (c != null 
-					&& c.InputProtocol != null 
-					&& c.InputProtocol.Transport != null 
+				if (c != null
+					&& c.InputProtocol != null
+					&& c.InputProtocol.Transport != null
 					&& c.InputProtocol.Transport.IsOpen)
 					c.InputProtocol.Transport.Close();
 			}
@@ -249,8 +266,10 @@ namespace Elasticsearch.Net.Connection.Thrift
 		{
 			//RestResponse result = GetClient().execute(restRequest);
 			//
-			var method = Enum.GetName(typeof (Method), restRequest.Method);
-			var path = restRequest.Uri.ToString();
+			var method = Enum.GetName(typeof(Method), restRequest.Method);
+			var uri = restRequest.Uri;
+			var path = uri.ToString();
+			var baseUri = new Uri(string.Format("{0}://{1}:{2}", uri.Scheme, uri.Host, uri.Port));
 			var requestData = restRequest.Body;
 			if (!this._resourceLock.WaitOne(this._timeout))
 			{
@@ -259,8 +278,17 @@ namespace Elasticsearch.Net.Connection.Thrift
 			}
 			try
 			{
-				Rest.Client client = null;
-				if (!this._clients.TryDequeue(out client))
+				ConcurrentQueue<Rest.Client> queue;
+				if (!this._clients.TryGetValue(baseUri,out queue))
+				{
+					var m = string.Format("Could dequeue a thrift client from internal socket pool of size {0}", this._poolSize);
+					var status = ElasticsearchResponse<Stream>.CreateError(this._connectionSettings, new Exception(m), method, path, requestData);
+					return status;
+				}
+
+
+				Rest.Client client;
+				if (!queue.TryDequeue(out client))
 				{
 					var m = string.Format("Could dequeue a thrift client from internal socket pool of size {0}", this._poolSize);
 					var status = ElasticsearchResponse<Stream>.CreateError(this._connectionSettings, new Exception(m), method, path, requestData);
@@ -295,10 +323,16 @@ namespace Elasticsearch.Net.Connection.Thrift
 					client.InputProtocol.Transport.Close();
 					throw;
 				}
+				catch (TTransportException)
+				{
+					client.InputProtocol.Transport.Close();
+					throw;
+				}
 				finally
 				{
 					//make sure we make the client available again.
-					this._clients.Enqueue(client);
+					if (queue != null && client != null)
+						queue.Enqueue(client);
 				}
 
 			}

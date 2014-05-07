@@ -11,7 +11,7 @@ namespace Nest.Tests.Unit
 		public static ConnectionSettings Settings;
 		static TestElasticClient()
 		{
-			Settings = new ConnectionSettings(Test.Default.Uri,"nest_test_data");
+			Settings = new ConnectionSettings(UnitTestDefaults.Uri, UnitTestDefaults.DefaultIndex);
 
 			Client = new ElasticClient(Settings);
 		}

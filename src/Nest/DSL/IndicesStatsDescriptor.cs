@@ -34,7 +34,7 @@ namespace Nest
 
 		ElasticsearchPathInfo<IndicesStatsRequestParameters> IPathInfo<IndicesStatsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
-			var pathInfo = base.ToPathInfo<IndicesStatsRequestParameters>(settings, this._QueryString);
+			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			if (this._Types.HasAny())
 			{
 				var inferrer = new ElasticInferrer(settings);

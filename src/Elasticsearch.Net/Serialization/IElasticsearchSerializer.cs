@@ -7,8 +7,8 @@ namespace Elasticsearch.Net.Serialization
 {
 	public interface IElasticsearchSerializer
 	{
-		T Deserialize<T>(IElasticsearchResponse response, Stream stream, object deserializeState);
-		Task<T> DeserializeAsync<T>(IElasticsearchResponse reponse, Stream stream, object deserializeState);
+		T Deserialize<T>(Stream stream);
+		Task<T> DeserializeAsync<T>(Stream stream);
 		byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented);
 	}
 }

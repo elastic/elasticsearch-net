@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
@@ -61,45 +62,50 @@ namespace Nest
 		private R Dispatch<D, Q, R>(
 			Func<D, D> selector
 			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
-			, bool allow404 = false
 			)
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IPathInfo<Q>, new()
+			where D : IPathDescriptor, IPathInfo<Q>,  new()
 			where R : BaseResponse
 		{
 			selector.ThrowIfNull("selector");
 			var descriptor = selector(new D());
-			return this.Dispatch<D, Q, R>(descriptor, dispatch, allow404);
+			return this.Dispatch<D, Q, R>(descriptor, dispatch);
 		}
-
 
 		private R Dispatch<D, Q, R>(
 			D descriptor
 			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
-			, bool allow404 = false
 			)
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IPathInfo<Q>
+			where D : IPathDescriptor, IPathInfo<Q>
 			where R : BaseResponse
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
 			var response = dispatch(pathInfo, descriptor);
-			return ResultsSelector<D, Q, R>(response, descriptor, allow404);
+			return ResultsSelector<D, Q, R>(response, descriptor);
 		}
 
-		private static R ResultsSelector<D, Q, R>(ElasticsearchResponse<R> c, D descriptor, bool allow404)
+		private static R ResultsSelector<D, Q, R>(
+			ElasticsearchResponse<R> c, 
+			D descriptor
+			)
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IPathInfo<Q>
+			where D : IPathDescriptor, IPathInfo<Q>
 			where R : BaseResponse
 		{
-			if (c.Success || allow404 && c.HttpStatusCode == 404)
+			var config = descriptor.RequestConfiguration as IRequestConfiguration;
+			var statusCodeAllowed = config == null 
+				|| (config.AllowedStatusCodes.HasAny() 
+				&& config.AllowedStatusCodes.Any(i=>i==c.HttpStatusCode));
+
+			if (c.Success || statusCodeAllowed)
 			{
 				c.Response.IsValid = true;
+				c.Response.ConnectionStatus = c;
 				return c.Response;
 			}
 			var badResponse = CreateInvalidInstance<R>(c);
 			return badResponse;
-
 		}
 
 
@@ -114,31 +120,29 @@ namespace Nest
 		internal Task<I> DispatchAsync<D, Q, R, I>(
 			Func<D, D> selector
 			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
-			, bool allow404 = false
 			)
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IPathInfo<Q>, new()
+			where D : IPathDescriptor, IPathInfo<Q>, new()
 			where R : BaseResponse, I
 			where I : IResponse
 		{
 			selector.ThrowIfNull("selector");
 			var descriptor = selector(new D());
-			return this.DispatchAsync<D, Q, R, I>(descriptor, dispatch,  allow404);
+			return this.DispatchAsync<D, Q, R, I>(descriptor, dispatch);
 		}
 
 		private Task<I> DispatchAsync<D, Q, R, I>(
 			D descriptor 
 			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
-			, bool allow404 = false
 			) 
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IPathInfo<Q>
+			where D : IPathDescriptor, IPathInfo<Q>
 			where R : BaseResponse, I 
 			where I : IResponse
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
 			return dispatch(pathInfo, descriptor)
-				.ContinueWith<I>(r => ResultsSelector<D, Q, R>(r.Result, descriptor, allow404));
+				.ContinueWith<I>(r => ResultsSelector<D, Q, R>(r.Result, descriptor));
 		}
 
 

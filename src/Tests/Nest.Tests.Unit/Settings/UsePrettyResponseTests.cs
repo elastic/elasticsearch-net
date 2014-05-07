@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Settings
 		[Test]
 		public void UsePrettyResponsesShouldSurviveUrlModififications()
 		{
-			var settings = new ConnectionSettings(Test.Default.Uri, Test.Default.DefaultIndex)
+			var settings = new ConnectionSettings(UnitTestDefaults.Uri, UnitTestDefaults.DefaultIndex)
 				.UsePrettyResponses();
 			var connection = new InMemoryConnection(settings);
 			var client = new ElasticClient(settings, connection);
