@@ -2,7 +2,7 @@
     public interface IElasticPropertyAttribute
     {
         bool AddSortField { get; set; }
-		
+        
         bool OptOut { get; set; }
         string Name { get; set; }
 
