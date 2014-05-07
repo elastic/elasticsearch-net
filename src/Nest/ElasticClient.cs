@@ -101,7 +101,6 @@ namespace Nest
 			if (c.Success || statusCodeAllowed)
 			{
 				c.Response.IsValid = true;
-				c.Response.ConnectionStatus = c;
 				return c.Response;
 			}
 			var badResponse = CreateInvalidInstance<R>(c);
@@ -112,7 +111,7 @@ namespace Nest
 		private static R CreateInvalidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
 		{
 			var r = (R)typeof(R).CreateInstance();
-			r.ConnectionStatus = response;
+			((IResponseWithRequestInformation)r).RequestInformation = response;
 			r.IsValid = false;
 			return r;
 		}

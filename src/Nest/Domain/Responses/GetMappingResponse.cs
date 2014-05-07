@@ -24,7 +24,6 @@ namespace Nest
 
 		internal GetMappingResponse(IElasticsearchResponse status, GetRootObjectMappingWrapping dict)
 		{
-			this.ConnectionStatus = status;
 			this.IsValid = status.Success && dict != null && dict.Count > 0;
 			if (!this.IsValid) return;
 			var firstNode = dict.First();

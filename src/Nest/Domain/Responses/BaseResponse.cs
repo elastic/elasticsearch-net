@@ -6,7 +6,7 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public interface IResponse
+	public interface IResponse : IResponseWithRequestInformation
 	{
 		bool IsValid { get; }
 		IElasticsearchResponse ConnectionStatus { get; }
@@ -20,7 +20,11 @@ namespace Nest
 			this.IsValid = true;
 		}
 		public virtual bool IsValid { get; internal set; }
-		public IElasticsearchResponse ConnectionStatus { get; internal set; }
+		
+		IElasticsearchResponse IResponseWithRequestInformation.RequestInformation { get; set; }
+
+		public IElasticsearchResponse ConnectionStatus { get { return ((IResponseWithRequestInformation)this).RequestInformation;  } }
+		
 		public ElasticInferrer _infer;
 		
 		protected IConnectionSettingsValues Settings
@@ -50,5 +54,6 @@ namespace Nest
 				return this._infer;
 			}
 		}
+
 	}
 }

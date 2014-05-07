@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration
 			var typeName = this._client.Infer.TypeName<T>();
 
 			var connectionStatus = this._client.Raw.Search<SearchResponse<T>>(index, typeName, query);
-			var serializer = connectionStatus.Serializer as INestSerializer; 
+			var serializer = connectionStatus.Serializer as INestSerializer;
 			return connectionStatus.Response;
 		}
 

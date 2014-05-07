@@ -89,7 +89,7 @@ namespace Nest
 			IElasticsearchResponse response,
 			Stream stream)
 		{
-			if (!response.Success) return new TemplateResponse {ConnectionStatus = response, IsValid = false};
+			if (!response.Success) return new TemplateResponse {IsValid = false};
 
 			var dict = this.Serializer.Deserialize<Dictionary<string, TemplateMapping>>(stream);
 			if (dict.Count == 0)
@@ -97,7 +97,6 @@ namespace Nest
 
 			return new TemplateResponse
 			{
-				ConnectionStatus = response,
 				IsValid = true,
 				Name = dict.First().Key,
 				TemplateMapping = dict.First().Value

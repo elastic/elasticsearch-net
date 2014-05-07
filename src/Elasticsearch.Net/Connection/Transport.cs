@@ -161,6 +161,9 @@ namespace Elasticsearch.Net.Connection
 				var requestState = new TransportRequestState<T>(tracer, method, path, postData, requestParameters);
 
 				var result = this.DoRequest<T>(requestState);
+				var objectNeedsResponseRef = result.Response as IResponseWithRequestInformation;
+				if (objectNeedsResponseRef != null)
+					objectNeedsResponseRef.RequestInformation = result;
 				tracer.SetResult(result);
 				return result;
 			}
@@ -292,7 +295,12 @@ namespace Elasticsearch.Net.Connection
 						if (t.Exception != null)
 							tcs.SetException(t.Exception.Flatten());
 						else
+						{
+							var objectNeedsResponseRef = t.Result.Response as IResponseWithRequestInformation;
+							if (objectNeedsResponseRef != null)
+								objectNeedsResponseRef.RequestInformation = t.Result;
 							tcs.SetResult(t.Result);
+						}
 
 						requestState.Tracer.SetResult(t.Result);
 						return tcs.Task;

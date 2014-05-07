@@ -31,7 +31,6 @@ namespace Nest
 				));
 
 			var status = this.RawDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, descriptor);
-			status.Response.ConnectionStatus = status;
 			return status.Success ? status.Response : CreateInvalidInstance<SearchResponse<TResult>>(status);
 		}
 
@@ -68,12 +67,9 @@ namespace Nest
 				.DeserializationState(deserializationState);
 
 			return this.RawDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, descriptor)
-				.ContinueWith<ISearchResponse<TResult>>(t => {
-					t.Result.Response.ConnectionStatus = t.Result;
-					return t.Result.Success
-						? t.Result.Response
-						: CreateInvalidInstance<SearchResponse<TResult>>(t.Result);
-			});
+				.ContinueWith<ISearchResponse<TResult>>(t => t.Result.Success
+					? t.Result.Response
+					: CreateInvalidInstance<SearchResponse<TResult>>(t.Result));
 		}
 
 		private JsonConverter CreateCovariantSearchSelector<T, TResult>(SearchDescriptor<T> originalSearchDescriptor)
