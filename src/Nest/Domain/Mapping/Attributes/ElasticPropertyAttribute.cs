@@ -25,6 +25,8 @@ namespace Nest
 		public string NullValue { get; set; }
 		public string Similarity { get; set; }
 
+        public bool DocValues { get; set; }
+
 		public bool OmitNorms { get; set; }
 		public bool OmitTermFrequencyAndPositions { get; set; }
 		public bool IncludeInAll { get; set; }

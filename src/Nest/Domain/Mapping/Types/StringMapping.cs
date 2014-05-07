@@ -55,6 +55,9 @@ namespace Nest
 		[JsonProperty("search_analyzer")]
 		public string SearchAnalyzer { get; set; }
 
+		[JsonProperty("doc_values")]
+		public bool? DocValues { get; set; }
+
 		[JsonProperty("include_in_all")]
 		public bool? IncludeInAll { get; set; }
 

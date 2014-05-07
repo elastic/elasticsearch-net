@@ -24,6 +24,8 @@
         bool IncludeInAll { get; set; }
         bool Store { get; set; }
 
+        bool DocValues { get; set; }
+
         string Similarity { get; set; }
 
         /// <summary>
