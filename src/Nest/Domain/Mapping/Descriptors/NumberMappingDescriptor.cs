@@ -60,6 +60,12 @@ namespace Nest
 			return this;
 		}
 
+		public NumberMappingDescriptor<T> DocValues(bool docValues = true)
+		{
+			this._Mapping.DocValues = docValues;
+			return this;
+		}
+
 		public NumberMappingDescriptor<T> IncludeInAll(bool includeInAll = true)
 		{
 			this._Mapping.IncludeInAll = includeInAll;

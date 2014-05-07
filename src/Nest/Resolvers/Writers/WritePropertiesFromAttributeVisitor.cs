@@ -88,6 +88,11 @@ namespace Nest.Resolvers.Writers {
                 this._jsonWriter.WritePropertyName("omit_norms");
                 this._jsonWriter.WriteValue("true");
             }
+            if (att.DocValues)
+            {
+                this._jsonWriter.WritePropertyName("doc_values");
+                this._jsonWriter.WriteValue("true");
+            }
             if (att.OmitTermFrequencyAndPositions)
             {
                 this._jsonWriter.WritePropertyName("omit_term_freq_and_positions");

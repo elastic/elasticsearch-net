@@ -2,7 +2,7 @@
     public interface IElasticPropertyAttribute
     {
         bool AddSortField { get; set; }
-		
+        
         bool OptOut { get; set; }
         string Name { get; set; }
 
@@ -23,6 +23,8 @@
         bool OmitTermFrequencyAndPositions { get; set; }
         bool IncludeInAll { get; set; }
         bool Store { get; set; }
+
+        bool DocValues { get; set; }
 
         string Similarity { get; set; }
 
