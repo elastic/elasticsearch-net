@@ -141,6 +141,8 @@
     <Compile Include="Domain\Responses\SnapshotResponse.cs" />
     <Compile Include="DSL\DeleteSnapshotDescriptor.cs" />
     <Compile Include="DSL\GetSnapshotDescriptor.cs" />
+    <Compile Include="Domain\TermVector\MultiTermVectorDocument.cs" />
+    <Compile Include="DSL\MultiTermVectorDocumentDescriptor.cs" />
     <Compile Include="DSL\MultiTermVectorsDescriptor.cs" />
     <Compile Include="DSL\Paths\DocumentOptionalPathDescriptor.cs" />
     <Compile Include="DSL\RestoreDescriptor.cs" />

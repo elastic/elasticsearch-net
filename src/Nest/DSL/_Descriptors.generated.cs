@@ -4078,14 +4078,6 @@ namespace Nest
 		internal MultiTermVectorsRequestParameters _QueryString = new MultiTermVectorsRequestParameters(); 
 
 
-		///<summary>A comma-separated list of documents ids. You must define ids as parameter or set &quot;ids&quot; or &quot;docs&quot; in the request body</summary>
-		public MultiTermVectorsDescriptor<T> Ids(params string[] ids)
-		{
-			this._QueryString.Ids(ids);
-			return this;
-		}
-		
-
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor<T> TermStatistics(bool term_statistics = true)
 		{
