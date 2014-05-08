@@ -364,27 +364,6 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 		
 		[Test]
 		[TestCase("cacheName", "cacheKey", true)]
-		public void NumericRange_Deserializes(string cacheName, string cacheKey, bool cache)
-		{
-			var numericRangeFilter = this.TestBaseFilterProperties(cacheName, cacheKey, cache, 
-				f=>f.NumericRange,
-				f=>f.NumericRange(n=>n
-						.OnField(p=>p.LOC)
-						.From(10)
-						.To(20)
-						.FromExclusive()
-					)
-			);
-
-			numericRangeFilter.Field.Should().Be("loc");
-			numericRangeFilter.From.Should().Be(10);
-			numericRangeFilter.To.Should().Be(20);
-			numericRangeFilter.IncludeUpper.Should().Be(true);
-			numericRangeFilter.IncludeLower.Should().Be(false);
-		}
-		
-		[Test]
-		[TestCase("cacheName", "cacheKey", true)]
 		public void Or_Deserializes(string cacheName, string cacheKey, bool cache)
 		{
 			var orFilter = this.TestBaseFilterProperties(cacheName, cacheKey, cache, 
@@ -436,13 +415,64 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			);
 
 			rangeFilter.Field.Should().Be("loc");
-			rangeFilter.From.Should().Be(10);
-			rangeFilter.To.Should().Be(20);
+			rangeFilter.From.Should().Be("10");
+			rangeFilter.To.Should().Be("20");
 			rangeFilter.IncludeLower.Should().Be(false);
-			rangeFilter.IncludeUpper.Should().Be(true);
+			rangeFilter.IncludeUpper.Should().Be(null);
 
 		}
+
+		[Test]
+		[TestCase("cacheName", "cacheKey", true)]
+		public void Range_Long_Deserializes(string cacheName, string cacheKey, bool cache)
+		{
+			var rangeFilter = this.TestBaseFilterProperties(cacheName, cacheKey, cache, 
+				f=>f.Range,
+				f=>f.Range(n => n
+						.OnField(p=>p.LOC)
+						.From(10)
+						.To(20)
+					)
+			);
+
+			rangeFilter.From.Should().Be(10);
+			rangeFilter.To.Should().Be(20);
+		}
 		
+		[Test]
+		[TestCase("cacheName", "cacheKey", true)]
+		public void Range_DateTime_Deserializes(string cacheName, string cacheKey, bool cache)
+		{
+			var dateFrom = DateTime.UtcNow.AddDays(-1);
+			var dateTo = DateTime.UtcNow.AddDays(1);
+			var rangeFilter = this.TestBaseFilterProperties(cacheName, cacheKey, cache, 
+				f=>f.Range,
+				f=>f.Range(n => n
+						.OnField(p=>p.LOC)
+						.From(dateFrom)
+						.To(dateTo)
+					)
+			);
+			rangeFilter.From.Should().Be(dateFrom);
+			rangeFilter.To.Should().Be(dateTo);
+		}
+		
+		[Test]
+		[TestCase("cacheName", "cacheKey", true)]
+		public void Range_Double_Deserializes(string cacheName, string cacheKey, bool cache)
+		{
+			var rangeFilter = this.TestBaseFilterProperties(cacheName, cacheKey, cache, 
+				f=>f.Range,
+				f=>f.Range(n => n
+						.OnField(p=>p.LOC)
+						.From(20.1)
+						.To(20.22)
+					)
+			);
+			rangeFilter.From.Should().Be(20.1);
+			rangeFilter.To.Should().Be(20.22);
+		}
+
 		[Test]
 		[TestCase("cacheName", "cacheKey", true)]
 		public void Regexp_Deserializes(string cacheName, string cacheKey, bool cache)

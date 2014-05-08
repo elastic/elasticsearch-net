@@ -282,7 +282,7 @@ namespace Nest
 		/// <summary>
 		/// The upper bound. Defaults to unbounded.
 		/// </summary>
-		public RangeQueryDescriptor<T> To(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		public RangeQueryDescriptor<T> To(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!to.HasValue)
 				return this;
@@ -293,7 +293,7 @@ namespace Nest
 		/// The lower bound. Defaults to start from the first.
 		/// </summary>
 		/// <returns></returns>
-		public RangeQueryDescriptor<T> From(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		public RangeQueryDescriptor<T> From(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!from.HasValue)
 				return this;
@@ -305,7 +305,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting from and include_lower to false.
 		/// </summary>
-		public RangeQueryDescriptor<T> Greater(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		public RangeQueryDescriptor<T> Greater(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!from.HasValue)
 				return this;
@@ -317,7 +317,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting from and include_lower to true.
 		/// </summary>
-		public RangeQueryDescriptor<T> GreaterOrEquals(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		public RangeQueryDescriptor<T> GreaterOrEquals(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!from.HasValue)
 				return this;
@@ -329,7 +329,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting to and include_upper to false.
 		/// </summary>
-		public RangeQueryDescriptor<T> Lower(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		public RangeQueryDescriptor<T> Lower(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!to.HasValue)
 				return this;
@@ -341,7 +341,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting to and include_upper to true.
 		/// </summary>
-		public RangeQueryDescriptor<T> LowerOrEquals(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		public RangeQueryDescriptor<T> LowerOrEquals(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!to.HasValue)
 				return this;

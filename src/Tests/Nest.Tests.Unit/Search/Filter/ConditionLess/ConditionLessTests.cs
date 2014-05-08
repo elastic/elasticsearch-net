@@ -158,19 +158,6 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 		}
 
 
-		[Test]
-		public void NumericRangeTest()
-		{
-			this.DoConditionlessFilter(f => f.NumericRange(null));
-			this.DoConditionlessFilter(f => f.NumericRange(nrf=>nrf.From(string.Empty)));
-			int? nullInt = null;
-			this.DoConditionlessFilter(f => f.NumericRange(nrf => nrf.From(nullInt)));
-			double? nullDouble = null;
-			this.DoConditionlessFilter(f => f.NumericRange(nrf => nrf.From(nullDouble)));
-			DateTime? nullDate = null;
-			this.DoConditionlessFilter(f => f.NumericRange(nrf => nrf.From(nullDate)));
-		}
-
 
 		[Test]
 		public void OrTest()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Nest.Resolvers;
@@ -10,7 +11,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<RangeFilterDescriptor<object>>,CustomJsonConverter>))]
+	[JsonConverter(typeof(CompositeJsonConverter<RangeFilterJsonReader,CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IRangeFilter : IFilterBase, ICustomJson
 	{
@@ -73,6 +74,7 @@ namespace Nest
 			((IRangeFilter)this).Field = objectPath;
 			return this;
 		}
+
 		/// <summary>
 		/// Forces the 'From()' to be exclusive (which is inclusive by default).
 		/// </summary>
@@ -81,6 +83,7 @@ namespace Nest
 			((IRangeFilter)this).IncludeLower = false;
 			return this;
 		}
+
 		/// <summary>
 		/// Forces the 'To()' to be exclusive (which is inclusive by default).
 		/// </summary>
@@ -90,11 +93,11 @@ namespace Nest
 			return this;
 		}
 
-		#region int
+		#region long
 		/// <summary>
 		/// The upper bound. Defaults to unbounded.
 		/// </summary>
-		public RangeFilterDescriptor<T> To(int? to)
+		public RangeFilterDescriptor<T> To(long? to)
 		{
 			((IRangeFilter)this).To = to;
 			return this;
@@ -103,7 +106,7 @@ namespace Nest
 		/// The lower bound. Defaults to start from the first.
 		/// </summary>
 		/// <returns></returns>
-		public RangeFilterDescriptor<T> From(int? from)
+		public RangeFilterDescriptor<T> From(long? from)
 		{
 			((IRangeFilter)this).From = from;
 			return this;
@@ -112,7 +115,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting from and include_lower to false.
 		/// </summary>
-		public RangeFilterDescriptor<T> Greater(int? from)
+		public RangeFilterDescriptor<T> Greater(long? from)
 		{
 			((IRangeFilter)this).From = from;
 			((IRangeFilter)this).IncludeLower = false;
@@ -121,7 +124,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting from and include_lower to true.
 		/// </summary>
-		public RangeFilterDescriptor<T> GreaterOrEquals(int? from)
+		public RangeFilterDescriptor<T> GreaterOrEquals(long? from)
 		{
 			((IRangeFilter)this).From = from;
 			((IRangeFilter)this).IncludeLower = from.HasValue ? new Nullable<bool>(true) : null;
@@ -130,7 +133,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting to and include_upper to false.
 		/// </summary>
-		public RangeFilterDescriptor<T> Lower(int? to)
+		public RangeFilterDescriptor<T> Lower(long? to)
 		{
 			((IRangeFilter)this).To = to;
 			((IRangeFilter)this).IncludeUpper = to.HasValue ? new Nullable<bool>(false) : null;
@@ -139,7 +142,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting to and include_upper to true.
 		/// </summary>
-		public RangeFilterDescriptor<T> LowerOrEquals(int? to)
+		public RangeFilterDescriptor<T> LowerOrEquals(long? to)
 		{
 			((IRangeFilter)this).To = to;
 			((IRangeFilter)this).IncludeUpper = to.HasValue ? new Nullable<bool>(true) : null;
@@ -265,7 +268,7 @@ namespace Nest
 		/// <summary>
 		/// The upper bound. Defaults to unbounded.
 		/// </summary>
-		public RangeFilterDescriptor<T> To(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		public RangeFilterDescriptor<T> To(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!to.HasValue)
 				return this;
@@ -276,7 +279,7 @@ namespace Nest
 		/// The lower bound. Defaults to start from the first.
 		/// </summary>
 		/// <returns></returns>
-		public RangeFilterDescriptor<T> From(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		public RangeFilterDescriptor<T> From(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!from.HasValue)
 				return this;
@@ -288,7 +291,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting from and include_lower to false.
 		/// </summary>
-		public RangeFilterDescriptor<T> Greater(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		public RangeFilterDescriptor<T> Greater(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!from.HasValue)
 				return this;
@@ -300,7 +303,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting from and include_lower to true.
 		/// </summary>
-		public RangeFilterDescriptor<T> GreaterOrEquals(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		public RangeFilterDescriptor<T> GreaterOrEquals(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!from.HasValue)
 				return this;
@@ -312,7 +315,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting to and include_upper to false.
 		/// </summary>
-		public RangeFilterDescriptor<T> Lower(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		public RangeFilterDescriptor<T> Lower(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!to.HasValue)
 				return this;
@@ -324,7 +327,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting to and include_upper to true.
 		/// </summary>
-		public RangeFilterDescriptor<T> LowerOrEquals(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		public RangeFilterDescriptor<T> LowerOrEquals(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!to.HasValue)
 				return this;

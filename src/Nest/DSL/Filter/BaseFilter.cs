@@ -51,8 +51,6 @@ namespace Nest
 
 		IHasParentFilter IFilterDescriptor.HasParent { get; set; }
 
-		INumericRangeFilter IFilterDescriptor.NumericRange { get; set; }
-
 		IRangeFilter IFilterDescriptor.Range { get; set; }
 
 		IPrefixFilter IFilterDescriptor.Prefix { get; set; }

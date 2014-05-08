@@ -218,7 +218,6 @@
     <Compile Include="Search\Filter\Singles\MissingFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\NestedFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\NotFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\NumericRangeFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\OrFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\PrefixFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\QueryFilterJson.cs" />

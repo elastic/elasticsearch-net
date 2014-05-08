@@ -152,8 +152,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				query : {
 						range: {
 							""startedOn"": {
-								from: """ + lowerBound.ToString("yyyy-MM-dd'T'HH:mm:ss") + @""",
-								to: """ + upperBound.ToString("yyyy-MM-dd'T'HH:mm:ss") + @""",
+								from: """ + lowerBound.ToString("yyyy-MM-dd'T'HH:mm:ss.fff") + @""",
+								to: """ + upperBound.ToString("yyyy-MM-dd'T'HH:mm:ss.fff") + @""",
 								include_lower: false
 							}
 						}

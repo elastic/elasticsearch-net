@@ -72,9 +72,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "has_parent")]
 		IHasParentFilter HasParent { get; set; }
 
-		[JsonProperty(PropertyName = "numeric_range")]
-		INumericRangeFilter NumericRange { get; set; }
-
 		[JsonProperty(PropertyName = "range")]
 		IRangeFilter Range { get; set; }
 
@@ -506,20 +503,7 @@ namespace Nest
 			var filter = new MatchAllFilter { };
 			return this.New(filter, f=> f.MatchAll = filter);
 		}
-		/// <summary>
-		/// Filters documents with fields that have values within a certain numeric range. 
-		/// Similar to range filter, except that it works only with numeric values, 
-		/// and the filter execution works differently.
-		/// </summary>
-		public BaseFilterDescriptor NumericRange(Action<NumericRangeFilterDescriptor<T>> numericRangeSelector)
-		{
-			var filter = new NumericRangeFilterDescriptor<T>();
-			if (numericRangeSelector != null)
-				numericRangeSelector(filter);
-
-			return this.New(filter, f=>f.NumericRange = filter);
-
-		}
+		
 		/// <summary>
 		/// Filters documents with fields that have terms within a certain range. 
 		/// Similar to range query, except that it acts as a filter. 

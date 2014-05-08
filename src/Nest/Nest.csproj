@@ -622,7 +622,6 @@
     <Compile Include="DSL\Filter\GeoBoundingBoxFilter.cs" />
     <Compile Include="DSL\Filter\FilterBase.cs" />
     <Compile Include="DSL\Filter\ScriptFilterDescriptor.cs" />
-    <Compile Include="DSL\Filter\NumericRangeFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\MissingFilter.cs" />
     <Compile Include="DSL\Filter\MatchAllFilter.cs" />
     <Compile Include="Enums\TermsExecution.cs" />
@@ -630,6 +629,8 @@
     <Compile Include="DSL\Filter\LimitFilter.cs" />
     <Compile Include="DSL\Filter\IdsFilter.cs" />
     <Compile Include="DSL\Filter\ExistsFilter.cs" />
+    <Compile Include="Resolvers\Converters\Filters\RangeFilterJsonReader.cs" />
+    <Compile Include="Resolvers\Converters\Filters\RegexpFilterJsonReader.cs" />
     <Compile Include="Resolvers\Converters\Filters\TermsFilterJsonReader.cs" />
     <Compile Include="Resolvers\Converters\Filters\GeoShapeFilterJsonReader.cs" />
     <Compile Include="Resolvers\Converters\Filters\GeoPolygonFilterJsonReader.cs" />

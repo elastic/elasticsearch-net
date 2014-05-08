@@ -120,10 +120,6 @@ namespace Nest
 		{
 			return new FilterDescriptorDescriptor<T>().Not(selector);
 		}
-		public static BaseFilterDescriptor NumericRange(Action<NumericRangeFilterDescriptor<T>> numericRangeSelector)
-		{
-			return new FilterDescriptorDescriptor<T>().NumericRange(numericRangeSelector);
-		}
 		public static BaseFilterDescriptor Or(params Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor>[] filters)
 		{
 			return new FilterDescriptorDescriptor<T>().Or(filters);

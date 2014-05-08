@@ -34,7 +34,6 @@ namespace Nest
 		FilterDescriptorDescriptor<T> Name(string name);
 		BaseFilterDescriptor Nested(Action<NestedFilterDescriptor<T>> selector);
 		BaseFilterDescriptor Not(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> selector);
-		BaseFilterDescriptor NumericRange(Action<NumericRangeFilterDescriptor<T>> numericRangeSelector);
 		BaseFilterDescriptor Or(params Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor>[] filters);
 		BaseFilterDescriptor Prefix(Expression<Func<T, object>> fieldDescriptor, string prefix);
 		BaseFilterDescriptor Prefix(string field, string prefix);
