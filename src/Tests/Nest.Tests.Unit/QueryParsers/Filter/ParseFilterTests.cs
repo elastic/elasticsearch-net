@@ -204,7 +204,7 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			);
 
 			geoPolygonFilter.Field.Should().Be("origin");
-			geoPolygonFilter.Points.Should().BeEquivalentTo(new []{"30.0, -80.0", "20.0, -90.0"});
+			geoPolygonFilter.Points.Should().BeEquivalentTo(new []{"30, -80", "20, -90"});
 		}
 		
 		[Test]
@@ -222,7 +222,28 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			var geoShapeFilter = geoBaseShapeFilter as IGeoShapeFilter;
 			geoShapeFilter.Should().NotBeNull();
 			geoShapeFilter.Shape.Should().NotBeNull();
-			geoShapeFilter.Shape.Type.Should().Be("origin");
+			geoShapeFilter.Shape.Type.Should().Be("envelope");
+
+		}
+		
+		[Test]
+		[TestCase("cacheName", "cacheKey", true)]
+		public void GeoIndexShape_Deserializes(string cacheName, string cacheKey, bool cache)
+		{
+			var geoBaseShapeFilter = this.TestBaseFilterProperties(cacheName, cacheKey, cache, 
+				f=>f.GeoShape,
+				f=>f.GeoIndexedShape(p=>p.Origin, d=>d
+						.Lookup<ElasticsearchProject>(p=>p.Origin, "1337", index: "myindex", type:"mytype")
+					)
+			);
+			geoBaseShapeFilter.Field.Should().Be("origin");
+			var geoShapeFilter = geoBaseShapeFilter as IGeoIndexedShapeFilter;
+			geoShapeFilter.Should().NotBeNull();
+			geoShapeFilter.IndexedShape.Should().NotBeNull();
+			geoShapeFilter.IndexedShape.Field.Should().Be("origin");
+			geoShapeFilter.IndexedShape.Id.Should().Be("1337");
+			geoShapeFilter.IndexedShape.Index.Should().Be("myindex");
+			geoShapeFilter.IndexedShape.Type.Should().Be("mytype");
 
 		}
 		
@@ -455,6 +476,25 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			scriptFilter._Params.Should().NotBeEmpty().And.HaveCount(1);
 			var keyValuePair = scriptFilter._Params.First();
 			keyValuePair.Key.Should().Be("param1");
+		}
+		
+		[Test]
+		[TestCase("cacheName", "cacheKey", true)]
+		public void TermsFilterLookup_Deserializes(string cacheName, string cacheKey, bool cache)
+		{
+			var termsBaseFilter = this.TestBaseFilterProperties(cacheName, cacheKey, cache, 
+				f=>f.Terms,
+				f=>f.TermsLookup(p => p.Name, l=>l
+					.Lookup<ElasticsearchProject>(p=>p.NestedFollowers.First().FirstName, "1347", "idx", "tpe")
+				)
+			);
+			termsBaseFilter.Field.Should().Be("name");
+			var termsFilter = termsBaseFilter as ITermsLookupFilter;
+			termsFilter.Should().NotBeNull();
+			termsFilter.Id.Should().Be("1347");
+			termsFilter.Index.Should().Be("idx");
+			termsFilter.Type.Should().Be("tpe");
+			termsFilter.Path.Should().Be("nestedFollowers.firstName");
 		}
 		
 		[Test]

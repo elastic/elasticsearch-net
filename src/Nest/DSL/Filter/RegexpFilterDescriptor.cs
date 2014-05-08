@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
@@ -11,7 +12,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<RegexpFilterDescriptor<object>>,CustomJsonConverter>))]
+	[JsonConverter(typeof(CompositeJsonConverter<RegexpFilterJsonReader,CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IRegexpFilter : IFilterBase, ICustomJson
 	{

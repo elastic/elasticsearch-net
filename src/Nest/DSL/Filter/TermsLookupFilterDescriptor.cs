@@ -5,15 +5,16 @@ using System.Linq.Expressions;
 using System.Text;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 
 namespace Nest
 {
 
-	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<TermsLookupFilterDescriptor>,CustomJsonConverter>))]
+	[JsonConverter(typeof(CompositeJsonConverter<TermsFilterJsonReader,CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ITermsLookupFilterDescriptor : ITermsBaseFilter, ICustomJson
+	public interface ITermsLookupFilter : ITermsBaseFilter, ICustomJson
 	{
 		[JsonProperty("id")]
 		string Id { get; set; }
@@ -31,36 +32,33 @@ namespace Nest
 		string Routing { get; set; }
 	}
 
-	public class TermsLookupFilterDescriptor : FilterBase, ITermsLookupFilterDescriptor
+	public class TermsLookupFilterDescriptor : FilterBase, ITermsLookupFilter
 	{
 		PropertyPathMarker ITermsBaseFilter.Field { get; set; }
 		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return ((ITermsLookupFilterDescriptor)this).Type == null || ((ITermsLookupFilterDescriptor)this).Index == null || ((ITermsLookupFilterDescriptor)this).Id.IsNullOrEmpty() 
-					|| ((ITermsLookupFilterDescriptor)this).Path.IsConditionless();
+				return ((ITermsLookupFilter)this).Type == null || ((ITermsLookupFilter)this).Index == null || ((ITermsLookupFilter)this).Id.IsNullOrEmpty() 
+					|| ((ITermsLookupFilter)this).Path.IsConditionless();
 			}
 		}
 
-		[JsonProperty("id")]
-		string ITermsLookupFilterDescriptor.Id { get; set; }
+		string ITermsLookupFilter.Id { get; set; }
 
-		[JsonProperty("type")]
-		TypeNameMarker ITermsLookupFilterDescriptor.Type { get; set; }
+		TypeNameMarker ITermsLookupFilter.Type { get; set; }
 
-		[JsonProperty("index")]
-		IndexNameMarker ITermsLookupFilterDescriptor.Index { get; set; }
+		IndexNameMarker ITermsLookupFilter.Index { get; set; }
 
-		[JsonProperty("path")]
-		PropertyPathMarker ITermsLookupFilterDescriptor.Path { get; set; }
+		PropertyPathMarker ITermsLookupFilter.Path { get; set; }
 
-		[JsonProperty("routing")]
-		string ITermsLookupFilterDescriptor.Routing { get; set; }
+		string ITermsLookupFilter.Routing { get; set; }
+		
+		TermsExecution? ITermsBaseFilter.Execution { get; set; }
 		
 		object ICustomJson.GetCustomJson()
 		{
-			var tf = ((ITermsLookupFilterDescriptor)this);
+			var tf = ((ITermsLookupFilter)this);
 			var f = new
 			{
 				id = tf.Id,
@@ -79,10 +77,10 @@ namespace Nest
 
 		private TermsLookupFilterDescriptor _Lookup<T>(PropertyPathMarker field, string id, string index, string type)
 		{
-			((ITermsLookupFilterDescriptor)this).Path = field;
-			((ITermsLookupFilterDescriptor)this).Id = id;
-			((ITermsLookupFilterDescriptor)this).Type = type ?? new TypeNameMarker {Type = typeof (T)};
-			((ITermsLookupFilterDescriptor)this).Index = index ?? new IndexNameMarker {Type = typeof (T)};
+			((ITermsLookupFilter)this).Path = field;
+			((ITermsLookupFilter)this).Id = id;
+			((ITermsLookupFilter)this).Type = type ?? new TypeNameMarker {Type = typeof (T)};
+			((ITermsLookupFilter)this).Index = index ?? new IndexNameMarker {Type = typeof (T)};
 			return this;
 		}
 
@@ -96,7 +94,7 @@ namespace Nest
 		/// </summary>
 		public TermsLookupFilterDescriptor Type(string type)
 		{
-			((ITermsLookupFilterDescriptor)this).Type = type;
+			((ITermsLookupFilter)this).Type = type;
 			return this;
 		}
 
@@ -105,7 +103,7 @@ namespace Nest
 		/// </summary>
 		public TermsLookupFilterDescriptor Index(string index)
 		{
-			((ITermsLookupFilterDescriptor)this).Index = index;
+			((ITermsLookupFilter)this).Index = index;
 			return this;
 		}
 
@@ -114,7 +112,19 @@ namespace Nest
 		/// </summary>
 		public TermsLookupFilterDescriptor Routing(string routing)
 		{
-			((ITermsLookupFilterDescriptor)this).Routing = routing;
+			((ITermsLookupFilter)this).Routing = routing;
+			return this;
+		}
+		
+		/// <summary>
+		/// The way terms filter executes is by iterating over the terms provided and 
+		/// finding matches docs (loading into a bitset) and caching it. Sometimes, 
+		/// we want a different execution model that can still be achieved by building more complex 
+		/// queries in the DSL, but we can support them in the more compact model that terms filter provides.
+		/// </summary>
+		public TermsLookupFilterDescriptor Routing(TermsExecution execution)
+		{
+			((ITermsLookupFilter)this).Execution = execution;
 			return this;
 		}
 	}

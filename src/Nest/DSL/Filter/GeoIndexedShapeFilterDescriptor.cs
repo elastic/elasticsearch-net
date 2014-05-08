@@ -5,12 +5,13 @@ using System.Linq.Expressions;
 using System.Text;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<GeoIndexedShapeFilterDescriptor>, CustomJsonConverter>))]
+	[JsonConverter(typeof(CompositeJsonConverter<GeoShapeFilterJsonReader, CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoIndexedShapeFilter : IGeoShapeBaseFilter, ICustomJson
 	{
