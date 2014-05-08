@@ -21,7 +21,13 @@ namespace Nest
 			this._Documents = documentSelectors.Select(s => s(new MultiTermVectorDocumentDescriptor<T>()).GetDocument()).Where(d=>d!= null).ToList();
 			return this;
 		}
-		
+
+		public MultiTermVectorsDescriptor<T> Documents(IEnumerable<MultiTermVectorDocument> documents)
+		{
+			this._Documents = documents;
+			return this;
+		}
+
 		ElasticsearchPathInfo<MultiTermVectorsRequestParameters> IPathInfo<MultiTermVectorsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = base.ToPathInfo(settings, this._QueryString);
