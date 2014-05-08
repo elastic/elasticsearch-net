@@ -161,6 +161,7 @@
     <Compile Include="RawCalls\DynamicNullTests.cs" />
     <Compile Include="Mapping\NotAnalyzedTest.cs" />
     <Compile Include="RawCalls\ReturnTypesTest.cs" />
+    <Compile Include="Reproduce\Reproduce643Tests.cs" />
     <Compile Include="Reproduce\Reproduce628Tests.cs" />
     <Compile Include="Reproduce\Reproduce487Tests.cs" />
     <Compile Include="Reproduce\Reproduce437Tests.cs" />
