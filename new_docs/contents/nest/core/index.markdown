@@ -21,7 +21,9 @@ is sufficient. this will index post too `/[default index]/posts/12`. The typenam
 
 If you need more control there are plenty of overloads, i.e:
 
-	client.Index(post, "index", "type", "id");
+	 IIndexResponse result = _client.Index(post, i => i.Index(index)
+														.Type(type)
+										                .Id(post.Id));
 
 ## Asynchronous
 
