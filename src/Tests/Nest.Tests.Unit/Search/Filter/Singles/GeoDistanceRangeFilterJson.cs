@@ -29,7 +29,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 						origin: ""40, -70"",
 						from: 12.0,
 						to: 200.0,
-						distance_type: ""km"",
+						unit: ""km"",
 						optimize_bbox: ""memory"",
 						_cache: true,
 						_name: ""my_geo_filter""

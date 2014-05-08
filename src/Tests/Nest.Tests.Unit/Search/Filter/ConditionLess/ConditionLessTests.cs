@@ -190,13 +190,13 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 		public void RangeTest()
 		{
 			this.DoConditionlessFilter(f => f.Range(null));
-			this.DoConditionlessFilter(f => f.Range(nrf => nrf.From(string.Empty)));
+			this.DoConditionlessFilter(f => f.Range(nrf => nrf.Greater(string.Empty)));
 			int? nullInt = null;
-			this.DoConditionlessFilter(f => f.Range(nrf => nrf.From(nullInt)));
+			this.DoConditionlessFilter(f => f.Range(nrf => nrf.Greater(nullInt)));
 			double? nullDouble = null;
-			this.DoConditionlessFilter(f => f.Range(nrf => nrf.From(nullDouble)));
+			this.DoConditionlessFilter(f => f.Range(nrf => nrf.Greater(nullDouble)));
 			DateTime? nullDate = null;
-			this.DoConditionlessFilter(f => f.Range(nrf => nrf.From(nullDate)));
+			this.DoConditionlessFilter(f => f.Range(nrf => nrf.Greater(nullDate)));
 		}
 
 

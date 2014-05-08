@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -408,17 +409,14 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 				f=>f.Range,
 				f=>f.Range(n => n
 						.OnField(p=>p.LOC)
-						.From("10")
-						.To("20")
-						.FromExclusive()
+						.GreaterOrEquals("10")
+						.LowerOrEquals("20")
 					)
 			);
 
 			rangeFilter.Field.Should().Be("loc");
-			rangeFilter.From.Should().Be("10");
-			rangeFilter.To.Should().Be("20");
-			rangeFilter.IncludeLower.Should().Be(false);
-			rangeFilter.IncludeUpper.Should().Be(null);
+			rangeFilter.GreaterThanOrEqualTo.Should().Be("10");
+			rangeFilter.LowerThanOrEqualTo.Should().Be("20");
 
 		}
 
@@ -430,13 +428,13 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 				f=>f.Range,
 				f=>f.Range(n => n
 						.OnField(p=>p.LOC)
-						.From(10)
-						.To(20)
+						.GreaterOrEquals(10)
+						.LowerOrEquals(20)
 					)
 			);
 
-			rangeFilter.From.Should().Be(10);
-			rangeFilter.To.Should().Be(20);
+			rangeFilter.GreaterThanOrEqualTo.Should().Be("10");
+			rangeFilter.LowerThanOrEqualTo.Should().Be("20");
 		}
 		
 		[Test]
@@ -449,12 +447,12 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 				f=>f.Range,
 				f=>f.Range(n => n
 						.OnField(p=>p.LOC)
-						.From(dateFrom)
-						.To(dateTo)
+						.GreaterOrEquals(dateFrom)
+						.LowerOrEquals(dateTo)
 					)
 			);
-			rangeFilter.From.Should().Be(dateFrom);
-			rangeFilter.To.Should().Be(dateTo);
+			rangeFilter.GreaterThanOrEqualTo.Should().Be(dateFrom.ToString("yyyy-MM-dd'T'HH:mm:ss.fff", CultureInfo.InvariantCulture));
+			rangeFilter.LowerThanOrEqualTo.Should().Be(dateTo.ToString("yyyy-MM-dd'T'HH:mm:ss.fff", CultureInfo.InvariantCulture));
 		}
 		
 		[Test]
@@ -465,12 +463,12 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 				f=>f.Range,
 				f=>f.Range(n => n
 						.OnField(p=>p.LOC)
-						.From(20.1)
-						.To(20.22)
+						.GreaterOrEquals(20.1)
+						.LowerOrEquals(20.22)
 					)
 			);
-			rangeFilter.From.Should().Be(20.1);
-			rangeFilter.To.Should().Be(20.22);
+			rangeFilter.GreaterThanOrEqualTo.Should().Be("20.1");
+			rangeFilter.LowerThanOrEqualTo.Should().Be("20.22");
 		}
 
 		[Test]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
@@ -41,18 +42,36 @@ namespace Nest.Resolvers.Converters.Filters
 						break;
 					default:
 						filter.Field = jv.Key;
-						var from = jv.Value["from"];
-						if (from != null)
-							filter.From = from.Value<string>();
-						var to = jv.Value["to"];
-						if (to != null)
-							filter.To = to.Value<string>();
+					
+						var gte = jv.Value["gte"];
+						if (gte != null)
+							filter.GreaterThanOrEqualTo = ToString(gte);
+						
+						var gt = jv.Value["gt"];
+						if (gt != null)
+							filter.GreaterThanOrEqualTo = ToString(gt);
+
+						var lte = jv.Value["lte"];
+						if (lte != null)
+							filter.LowerThanOrEqualTo = ToString(lte);
+							
+						var lt = jv.Value["lt"];
+						if (lt != null)
+							filter.LowerThanOrEqualTo = ToString(lt);
+						
 						break;
 				}
 			}
 
 			return filter;
 
+		}
+
+		private static string ToString(JToken token)
+		{
+			if (token.Type == JTokenType.Date)
+				return token.Value<DateTime>().ToString("yyyy-MM-dd'T'HH:mm:ss.fff", CultureInfo.InvariantCulture);
+			return token.Value<string>();
 		}
 	}
 	
