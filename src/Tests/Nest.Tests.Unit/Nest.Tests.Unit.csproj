@@ -323,7 +323,9 @@
     <None Include="Core\Map\Properties\AttachmentProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Core\Map\Properties\DocValuesProperty.json" />
+    <None Include="Core\Map\Properties\DocValuesProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Map\Properties\GeoShapeProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

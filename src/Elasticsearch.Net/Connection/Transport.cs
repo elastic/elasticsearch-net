@@ -202,7 +202,13 @@ namespace Elasticsearch.Net.Connection
 							&& requestState.RequestConfiguration != null
 							&& requestState.RequestConfiguration.AllowedStatusCodes.All(i => i != streamResponse.HttpStatusCode)))
 					{
-						error = this.Serializer.Deserialize<ElasticsearchServerError>(streamResponse.Response);
+						if (streamResponse.Response != null)
+							error = this.Serializer.Deserialize<ElasticsearchServerError>(streamResponse.Response);
+						else
+							error = new ElasticsearchServerError
+							{
+								Status = streamResponse.HttpStatusCode.GetValueOrDefault(-1)
+							};
 						if (this.Settings.ThrowOnElasticsearchServerExceptions)
 							throw new ElasticsearchServerException(error);
 					}
