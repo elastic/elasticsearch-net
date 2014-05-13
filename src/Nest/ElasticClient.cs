@@ -94,9 +94,7 @@ namespace Nest
 			where R : BaseResponse
 		{
 			var config = descriptor.RequestConfiguration as IRequestConfiguration;
-			var statusCodeAllowed = config == null 
-				|| (config.AllowedStatusCodes.HasAny() 
-				&& config.AllowedStatusCodes.Any(i=>i==c.HttpStatusCode));
+			var statusCodeAllowed = config != null ? config.AllowedStatusCodes.Any(i => i == c.HttpStatusCode) : false;
 
 			if (c.Success || statusCodeAllowed)
 			{
