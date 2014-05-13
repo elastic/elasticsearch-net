@@ -10,7 +10,7 @@ namespace Nest
     {
 		public UaxEmailUrlTokenizer()
         {
-			Type = "uax_url_email ";
+			Type = "uax_url_email";
         }
 
 		/// <summary>
