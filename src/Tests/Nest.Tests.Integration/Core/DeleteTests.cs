@@ -17,7 +17,15 @@ namespace Nest.Tests.Integration.Core
 			IntegrationSetup.TearDown();
 			IntegrationSetup.Setup();
 		}
-
+		
+		[Test]
+		public void ShouldNotThrowOnIdOverload()
+		{
+			Assert.Throws<DispatchException>(() =>
+			{
+				this._client.Delete("id", d=>d.Index("someindex").Type("sometype"));
+			});
+		}
 
 		[Test]
 		public void ShouldThowOnNullId()
