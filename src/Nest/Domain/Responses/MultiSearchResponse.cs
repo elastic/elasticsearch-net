@@ -21,12 +21,17 @@ namespace Nest
 
 		public IEnumerable<SearchResponse<T>> GetResponses<T>() where T : class
 		{
+			foreach (var r in this._Responses.Values.OfType<IResponseWithRequestInformation>())
+				r.RequestInformation = this.ConnectionStatus;
 			return this._Responses.Values.OfType<SearchResponse<T>>();
 		}
 		public SearchResponse<T> GetResponse<T>(string name) where T : class
 		{
 			object response = null;
 			this._Responses.TryGetValue(name, out response);
+			var r = response as IResponseWithRequestInformation;
+			if (r != null)
+				r.RequestInformation = this.ConnectionStatus;
 			return response as SearchResponse<T>;
 		}
 	}

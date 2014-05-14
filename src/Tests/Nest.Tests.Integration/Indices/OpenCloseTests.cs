@@ -1,4 +1,5 @@
 ﻿using Elasticsearch.Net;
+using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
@@ -41,9 +42,12 @@ namespace Nest.Tests.Integration.Indices
 			Assert.IsNotNull(results.ConnectionStatus);
 			var statusCode = results.ConnectionStatus.HttpStatusCode;
 			Assert.AreEqual(statusCode, 403);
-			var result = results.ConnectionStatus.ResponseRaw.Utf8String();
-			Assert.True(result.Contains("ClusterBlockException"));
-			Assert.True(result.Contains("index closed"));
+
+			var error = results.GetServerException();
+			error.Should().NotBeNull();
+			error.ExceptionType.Should().Be("ClusterBlockException");
+			error.Error.Should().Contain("index closed");
+
 			r = this._client.OpenIndex(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);

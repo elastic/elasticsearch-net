@@ -95,7 +95,7 @@ namespace Nest
 		{
 			var config = descriptor.RequestConfiguration as IRequestConfiguration;
 			var statusCodeAllowed = config != null && config.AllowedStatusCodes.HasAny(i => i == c.HttpStatusCode);
-
+			
 			if (c.Success || statusCodeAllowed)
 			{
 				c.Response.IsValid = true;
@@ -106,6 +106,13 @@ namespace Nest
 		}
 
 
+		private static R CreateValidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
+		{
+			var r = (R)typeof(R).CreateInstance();
+			((IResponseWithRequestInformation)r).RequestInformation = response;
+			r.IsValid = true;
+			return r;
+		}
 		private static R CreateInvalidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
 		{
 			var r = (R)typeof(R).CreateInstance();

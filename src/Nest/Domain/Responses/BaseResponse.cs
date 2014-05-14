@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Connection;
 using Nest.Resolvers;
 
 namespace Nest
@@ -11,6 +12,8 @@ namespace Nest
 		bool IsValid { get; }
 		IElasticsearchResponse ConnectionStatus { get; }
 		ElasticInferrer Infer { get; }
+
+		ElasticsearchServerError GetServerException();
 	}
 		
 	public class BaseResponse : IResponse
@@ -25,6 +28,21 @@ namespace Nest
 
 		public IElasticsearchResponse ConnectionStatus { get { return ((IResponseWithRequestInformation)this).RequestInformation;  } }
 		
+		public ElasticsearchServerError GetServerException()
+		{
+			if (this.IsValid || this.ConnectionStatus == null || this.ConnectionStatus.OriginalException == null)
+				return null;
+			var e = this.ConnectionStatus.OriginalException as ElasticsearchServerException;
+			if (e == null)
+				return null;
+			return new ElasticsearchServerError
+			{
+				Status = e.Status,
+				Error = e.Message,
+				ExceptionType = e.ExceptionType
+			};
+		}
+
 		public ElasticInferrer _infer;
 		
 		protected IConnectionSettingsValues Settings

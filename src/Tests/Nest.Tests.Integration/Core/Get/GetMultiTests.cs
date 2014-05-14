@@ -31,7 +31,6 @@ namespace Nest.Tests.Integration.Core.Get
 
 			objects.Should().NotBeNull().And.HaveCount(2);
 
-
 			var person = result.Source<Person>(NestTestData.People[1].Id);
 			person.Should().NotBeNull();
 			person.FirstName.Should().NotBeNullOrEmpty();
