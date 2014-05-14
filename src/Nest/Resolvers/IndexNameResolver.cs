@@ -14,7 +14,7 @@ namespace Nest.Resolvers
 
 		public IndexNameResolver(IConnectionSettingsValues connectionSettings)
 		{
-			connectionSettings.ThrowIfNull("hasDefaultIndices");
+			connectionSettings.ThrowIfNull("connectionSettings");
 			this._connectionSettings = connectionSettings;
 		}
 

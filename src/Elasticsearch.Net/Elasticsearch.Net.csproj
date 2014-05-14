@@ -52,6 +52,7 @@
     <Compile Include="Connection\IRequestConnectionConfiguration.cs" />
     <Compile Include="Connection\TransportRequestState.cs" />
     <Compile Include="Domain\BaseRequestParameters.cs" />
+    <Compile Include="Domain\IElasticsearchResponse.cs" />
     <Compile Include="Domain\IHideObjectMembers.cs" />
     <Compile Include="Domain\IRequestParameters.cs" />
     <Compile Include="Domain\VoidResponse.cs" />

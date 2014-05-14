@@ -56,7 +56,7 @@ namespace Nest
 		private GetAliasesResponse DeserializeGetAliasesResponse(IElasticsearchResponse connectionStatus, Stream stream)
 		{
 			if (!connectionStatus.Success)
-				return new GetAliasesResponse() {ConnectionStatus = connectionStatus, IsValid = false};
+				return new GetAliasesResponse() { IsValid = false};
 
 			var dict = this.Serializer.Deserialize<CrazyAliasesResponse>(stream);
 
@@ -83,7 +83,6 @@ namespace Nest
 
 			return new GetAliasesResponse()
 			{
-				ConnectionStatus = connectionStatus,
 				IsValid = true,
 				Indices = d
 			};

@@ -7,6 +7,7 @@ using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using CodeGeneration.LowLevelClient.Domain;
+using CodeGeneration.LowLevelClient.Overrides.Allow404;
 using CodeGeneration.LowLevelClient.Overrides.Descriptors;
 using CsQuery;
 using Newtonsoft.Json;
@@ -120,7 +121,6 @@ namespace CodeGeneration.LowLevelClient
 			Func<string, bool> mc = (s) => method.FullName.Contains(s);
 			Func<string, bool> pc = (s) => method.Path.Contains(s);
 
-
 			if (ms("Indices") && !pc("{index}"))
 				method.FullName = (method.FullName + "ForAll").Replace("AsyncForAll", "ForAllAsync");
 			
@@ -139,6 +139,8 @@ namespace CodeGeneration.LowLevelClient
 
 			method.DescriptorType = method.QueryStringParamName.Replace("RequestParameters","Descriptor");
 
+			method.Allow404 = ApiEndpointsThatAllow404.Endpoints.Contains(method.DescriptorType.Replace("Descriptor", ""));
+			
 			string generic;
 			if (KnownDescriptors.TryGetValue(method.DescriptorType, out generic))
 				method.DescriptorTypeGeneric = generic;

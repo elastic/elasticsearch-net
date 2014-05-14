@@ -2,7 +2,6 @@
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -19,26 +18,6 @@ using Elasticsearch.Net.Serialization;
 namespace Elasticsearch.Net
 {
 	//TODO document and possibly rename some of the properties
-
-	public interface IElasticsearchResponse
-	{
-		bool Success { get; }
-		bool SuccessOrKnownError { get; }
-		IConnectionConfigurationValues Settings { get; }
-		Exception OriginalException { get; }
-		string RequestMethod { get; }
-		string RequestUrl { get; }
-		[DebuggerDisplay("{Request != null ? System.Text.Encoding.UTF8.GetString(Request) : null,nq}")]
-		byte[] Request { get; }
-		int? HttpStatusCode { get; }
-		int NumberOfRetries { get; }
-
-		/// <summary>
-		/// The raw byte response, only set when IncludeRawResponse() is set on Connection configuration
-		/// </summary>
-		[DebuggerDisplay("{ResponseRaw != null ? System.Text.Encoding.UTF8.GetString(ResponseRaw) : null,nq}")]
-		byte[] ResponseRaw { get; }
-	}
 
 	public static class ElasticsearchResponse
 	{
@@ -73,7 +52,7 @@ namespace Elasticsearch.Net
 				Serializer = from.Settings.Serializer,
 				Settings = from.Settings,
 				Success = from.Success
-				
+
 			};
 		}
 
@@ -197,12 +176,12 @@ namespace Elasticsearch.Net
 				response = (this.Response as byte[]).Utf8String();
 
 			string requestJson = null;
-		    
-            if (r.Request != null)
-            {
-                requestJson = r.Request.Utf8String();
-            }
-				
+
+			if (r.Request != null)
+			{
+				requestJson = r.Request.Utf8String();
+			}
+
 			var print = _printFormat.F(
 			  Environment.NewLine,
 			  r.HttpStatusCode.HasValue ? r.HttpStatusCode.Value.ToString(CultureInfo.InvariantCulture) : "-1",

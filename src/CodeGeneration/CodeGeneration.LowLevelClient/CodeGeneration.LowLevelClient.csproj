@@ -78,6 +78,7 @@
     <Compile Include="Domain\ApiUrlPart.cs" />
     <Compile Include="Domain\CsharpMethod.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Overrides\Allow404\ApiEndpointsThatAllow404.cs" />
     <Compile Include="Overrides\Descriptors\DeleteWarmerDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\PutTemplateDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\ClearCacheDescriptorOverrides.cs" />

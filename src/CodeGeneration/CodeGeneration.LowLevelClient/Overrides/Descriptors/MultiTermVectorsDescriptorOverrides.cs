@@ -14,6 +14,7 @@ namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 			{
 				return new string[]
 				{
+					"ids"
 				};
 			}
 		}

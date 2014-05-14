@@ -74,6 +74,7 @@ namespace Nest.Tests.Unit.Cluster
 			Do("DELETE", "/customindex/doc/_query", c => c.DeleteByQuery<Doc>(q => q.Index("customindex").MatchAll()));
 			Do("DELETE", "/_all/doc/_query", c => c.DeleteByQuery<Doc>(q => q.AllIndices().MatchAll()));
 			Do("DELETE", "/mydefaultindex/_query", c => c.DeleteByQuery<Doc>(q => q.AllTypes().MatchAll()));
+			Do("DELETE", "/custom-index/_query", c => c.DeleteByQuery<Doc>(q => q.Index("custom-index").AllTypes().MatchAll()));
 			Do("DELETE", "/mydefaultindex", c => c.DeleteIndex(i => i.Index<Doc>()));
 			Do("DELETE", "/a%2Cb", c => c.DeleteIndex(i => i.Indices("a", "b")));
 			Do("POST", "/_bulk", c => c.DeleteMany(Enumerable.Range(0, 10).Select(i => new Doc { Id = i.ToString() })));

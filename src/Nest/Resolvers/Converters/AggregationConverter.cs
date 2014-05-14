@@ -170,15 +170,15 @@ namespace Nest.Resolvers.Converters
 		private IAggregation GetKeyedBucketItem(JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
-			var key = reader.Value as string;
+			var key = reader.Value;
 			reader.Read();
 			var property = reader.Value as string;
 			if (property == "from" || property == "to")
-				return GetRangeAggregation(reader, serializer, key);
+				return GetRangeAggregation(reader, serializer, key.ToString());
 
 
 			var keyItem = new KeyItem();
-			keyItem.Key = key;
+			keyItem.Key = key.ToString();
 			reader.Read(); //doc_count;
 			var docCount = reader.Value as long?;
 			keyItem.DocCount = docCount.GetValueOrDefault(0);

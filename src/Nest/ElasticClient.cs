@@ -45,7 +45,7 @@ namespace Nest
 			this.Connection = connection ?? new HttpConnection(settings);
 
 			this.Serializer = serializer ?? new NestSerializer(this._connectionSettings);
-			var stringifier = new NestStringifier(settings);
+			var stringifier = new NestStringifier(this._connectionSettings);
 			this.Raw = new ElasticsearchClient(
 				this._connectionSettings, 
 				this.Connection, 
@@ -94,14 +94,11 @@ namespace Nest
 			where R : BaseResponse
 		{
 			var config = descriptor.RequestConfiguration as IRequestConfiguration;
-			var statusCodeAllowed = config == null 
-				|| (config.AllowedStatusCodes.HasAny() 
-				&& config.AllowedStatusCodes.Any(i=>i==c.HttpStatusCode));
+			var statusCodeAllowed = config != null && config.AllowedStatusCodes.HasAny(i => i == c.HttpStatusCode);
 
 			if (c.Success || statusCodeAllowed)
 			{
 				c.Response.IsValid = true;
-				c.Response.ConnectionStatus = c;
 				return c.Response;
 			}
 			var badResponse = CreateInvalidInstance<R>(c);
@@ -112,7 +109,7 @@ namespace Nest
 		private static R CreateInvalidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
 		{
 			var r = (R)typeof(R).CreateInstance();
-			r.ConnectionStatus = response;
+			((IResponseWithRequestInformation)r).RequestInformation = response;
 			r.IsValid = false;
 			return r;
 		}

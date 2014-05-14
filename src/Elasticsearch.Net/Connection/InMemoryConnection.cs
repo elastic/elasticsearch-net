@@ -10,7 +10,11 @@ namespace Elasticsearch.Net.Connection
 	public class InMemoryConnection : HttpConnection
 	{
 		private byte[] _fixedResultBytes = Encoding.UTF8.GetBytes("{ \"USING NEST IN MEMORY CONNECTION\"  : null }");
-
+		public InMemoryConnection()
+			: base(new ConnectionConfiguration())
+		{
+			
+		}
 		public InMemoryConnection(IConnectionConfigurationValues settings)
 			: base(settings)
 		{

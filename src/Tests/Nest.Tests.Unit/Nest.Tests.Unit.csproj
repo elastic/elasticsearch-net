@@ -163,6 +163,7 @@
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="QueryParsers\BaseParserTests.cs" />
     <Compile Include="QueryParsers\Filter\ParseFilterTests.cs" />
+    <Compile Include="Reproduce\Reproduce646Tests.cs" />
     <Compile Include="Reproduce\Reproduce579Tests.cs" />
     <Compile Include="Search\Fields\FieldsTests.cs" />
     <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
@@ -322,6 +323,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Map\Properties\AttachmentProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\DocValuesProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Map\Properties\GeoShapeProperty.json">

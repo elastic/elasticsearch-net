@@ -14,7 +14,6 @@ namespace Nest
 	{
 		internal ExistsResponse(IElasticsearchResponse connectionStatus)
 		{
-			this.ConnectionStatus = connectionStatus;
 			this.IsValid =connectionStatus.Success || connectionStatus.HttpStatusCode == 404;
 			this.Exists = connectionStatus.Success & connectionStatus.HttpStatusCode == 200;
 		}

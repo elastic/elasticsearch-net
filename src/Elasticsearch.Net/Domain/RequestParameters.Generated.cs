@@ -4411,16 +4411,6 @@ namespace Elasticsearch.Net
 	public class MultiTermVectorsRequestParameters : FluentRequestParameters<MultiTermVectorsRequestParameters> 
 	{
 		
-		internal  string[] _ids { get; set; }
-		///<summary>A comma-separated list of documents ids. You must define ids as parameter or set &quot;ids&quot; or &quot;docs&quot; in the request body</summary>
-		public MultiTermVectorsRequestParameters Ids(params string[] ids)
-		{
-			this._ids = ids;
-			this.AddQueryString("ids", this._ids);
-			return this;
-		}
-		
-		
 		internal bool _term_statistics { get; set; }
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsRequestParameters TermStatistics(bool term_statistics)

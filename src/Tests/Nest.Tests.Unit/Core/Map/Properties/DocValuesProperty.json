@@ -1,0 +1,13 @@
+﻿{
+  "docvaluesfoo": {
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "value": {
+        "type": "integer",
+        "doc_values": true
+      }
+    }
+  }
+}

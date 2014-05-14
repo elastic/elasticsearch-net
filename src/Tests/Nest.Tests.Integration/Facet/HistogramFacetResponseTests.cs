@@ -32,20 +32,29 @@ namespace Nest.Tests.Integration.Facet
 				}"
 			);
 
-		    var facet = queryResults.Facets["loc"];
 			this.TestDefaultAssertions(queryResults);
+
+			var facet = queryResults.Facets["loc"];
+			Assert.IsInstanceOf<HistogramFacet>(facet);
+			var hf = (HistogramFacet)facet;
+			Assert.Greater(hf.Items.Count(), 0);
+
+			foreach (var entry in hf.Items)
+			{
+				Assert.Greater(entry.Count, 0);
+				Assert.Greater(entry.Key, 0);
+			}
 			
-            Assert.IsInstanceOf<HistogramFacet>(facet);
+			facet = queryResults.Facet<HistogramFacet>(p=>p.LOC);
+			Assert.IsInstanceOf<HistogramFacet>(facet);
+			hf = (HistogramFacet)facet;
+			Assert.Greater(hf.Items.Count(), 0);
 
-		    var hf = (HistogramFacet) facet;
-
-            Assert.Greater(hf.Items.Count(), 0);
-
-		    foreach (var entry in hf.Items)
-		    {
-		        Assert.Greater(entry.Count, 0);
-                Assert.Greater(entry.Key, 0);
-		    }
+			foreach (var entry in hf.Items)
+			{
+				Assert.Greater(entry.Count, 0);
+				Assert.Greater(entry.Key, 0);
+			}
 		}
 		[Test]
 		public void DateHistogramFacet()
@@ -68,33 +77,33 @@ namespace Nest.Tests.Integration.Facet
 				}"
 			);
 
-            var facet = queryResults.Facets["dob"];
-            this.TestDefaultAssertions(queryResults);
+			var facet = queryResults.Facets["dob"];
+			this.TestDefaultAssertions(queryResults);
 
-            Assert.IsInstanceOf<DateHistogramFacet>(facet);
+			Assert.IsInstanceOf<DateHistogramFacet>(facet);
 
-            var dhf = (DateHistogramFacet)facet;
+			var dhf = (DateHistogramFacet)facet;
 
-            Assert.Greater(dhf.Items.Count(), 0);
+			Assert.Greater(dhf.Items.Count(), 0);
 
-            foreach (var entry in dhf.Items)
-            {
-                Assert.Greater(entry.Count, 0);
-                Assert.Greater(entry.Time, DateTime.MinValue);
-            }
+			foreach (var entry in dhf.Items)
+			{
+				Assert.Greater(entry.Count, 0);
+				Assert.Greater(entry.Time, DateTime.MinValue);
+			}
 		}
 		[Test]
 		public void DateHistogramFacetCleanSyntax()
 		{
-			var queryResults = this._client.Search<ElasticsearchProject>(s=>s
+			var queryResults = this._client.Search<ElasticsearchProject>(s => s
 				.MatchAll()
-				.FacetDateHistogram(f=>f
-					.OnField(ff=>ff.Followers.First().DateOfBirth)
+				.FacetDateHistogram(f => f
+					.OnField(ff => ff.Followers.First().DateOfBirth)
 					.Interval(DateInterval.Day)
 				)
 			);
-				
-			var facet = queryResults.Facet<DateHistogramFacet>(f=>f.Followers.First().DateOfBirth);
+
+			var facet = queryResults.Facet<DateHistogramFacet>(f => f.Followers.First().DateOfBirth);
 			this.TestDefaultAssertions(queryResults);
 
 			Assert.IsInstanceOf<DateHistogramFacet>(facet);

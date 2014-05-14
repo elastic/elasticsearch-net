@@ -165,6 +165,8 @@
     <Compile Include="DSL\Query\Functions\LinearFunction.cs" />
     <Compile Include="DSL\Query\Functions\ScriptScoreFunction.cs" />
     <Compile Include="DSL\Query\SubDescriptors\ISpanSubQuery.cs" />
+    <Compile Include="Domain\TermVector\MultiTermVectorDocument.cs" />
+    <Compile Include="DSL\MultiTermVectorDocumentDescriptor.cs" />
     <Compile Include="DSL\MultiTermVectorsDescriptor.cs" />
     <Compile Include="DSL\Paths\DocumentOptionalPathDescriptor.cs" />
     <Compile Include="DSL\RestoreDescriptor.cs" />
@@ -311,7 +313,6 @@
     <Compile Include="Domain\DSL\GeoShapeVector.cs" />
     <Compile Include="Domain\Mapping\Descriptors\CompletionMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Types\CompletionMapping.cs" />
-    <Compile Include="Domain\Parameters\StatusParams.cs" />
     <Compile Include="Domain\Responses\RootVersionInfoResponse.cs" />
     <Compile Include="Domain\Responses\StatusResponse.cs" />
     <Compile Include="Domain\Stats\IndexSizeStats.cs" />
@@ -453,7 +454,6 @@
     <Compile Include="DSL\CreateIndexDescriptor.cs" />
     <Compile Include="Domain\Analysis\Analyzers\AnalyzerBase.cs" />
     <Compile Include="ElasticClient-CreateIndex.cs" />
-    <Compile Include="Domain\Parameters\HealthParams.cs" />
     <Compile Include="Domain\Responses\HealthResponse.cs" />
     <Compile Include="Domain\Responses\NodeInfoResponse.cs" />
     <Compile Include="Domain\Responses\NodeStatsResponse.cs" />
@@ -658,7 +658,6 @@
     <Compile Include="Domain\Responses\SegmentsResponse.cs" />
     <Compile Include="Domain\Responses\IndexExistsResponse.cs" />
     <Compile Include="ElasticClient-IndexExists.cs" />
-    <Compile Include="Domain\Parameters\StatsParams.cs" />
     <Compile Include="Domain\Responses\GlobalStatsResponse.cs" />
     <Compile Include="Domain\Stats\TypeStats.cs" />
     <Compile Include="Domain\Stats\RefreshStats.cs" />
@@ -684,14 +683,6 @@
     <Compile Include="Domain\Mapping\Types\RootObjectMapping.cs" />
     <Compile Include="Domain\Mapping\Types\GenericMapping.cs" />
     <Compile Include="Domain\Mapping\SpecialFields\IdFieldMapping.cs" />
-    <Compile Include="Domain\Parameters\AliasParams.cs" />
-    <Compile Include="Domain\Parameters\AnalyzeParams.cs" />
-    <Compile Include="Domain\Parameters\BaseParameters.cs" />
-    <Compile Include="Domain\Parameters\BulkParameters.cs" />
-    <Compile Include="Domain\Parameters\DeleteByQueryParameters.cs" />
-    <Compile Include="Domain\Parameters\DeleteParameters.cs" />
-    <Compile Include="Domain\Parameters\IndexParameters.cs" />
-    <Compile Include="Domain\Parameters\OptimizeParams.cs" />
     <Compile Include="Domain\Responses\AnalyzeResponse.cs" />
     <Compile Include="Domain\Responses\CountResponse.cs" />
     <Compile Include="Domain\Responses\ElasticsearchVersionInfo.cs" />
@@ -839,7 +830,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Domain\Parameters\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>

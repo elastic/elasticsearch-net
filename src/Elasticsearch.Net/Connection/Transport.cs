@@ -161,6 +161,9 @@ namespace Elasticsearch.Net.Connection
 				var requestState = new TransportRequestState<T>(tracer, method, path, postData, requestParameters);
 
 				var result = this.DoRequest<T>(requestState);
+				var objectNeedsResponseRef = result.Response as IResponseWithRequestInformation;
+				if (objectNeedsResponseRef != null)
+					objectNeedsResponseRef.RequestInformation = result;
 				tracer.SetResult(result);
 				return result;
 			}
@@ -192,25 +195,11 @@ namespace Elasticsearch.Net.Connection
 				var streamResponse = _doRequest(requestState.Method, uri, requestState.PostData, requestState.RequestConfiguration);
 				if (streamResponse != null && streamResponse.SuccessOrKnownError)
 				{
-					ElasticsearchServerError error = null;
-					if (!streamResponse.Success
-						&& requestState.RequestConfiguration == null
-						|| (!streamResponse.Success
-							&& requestState.RequestConfiguration != null
-							&& requestState.RequestConfiguration.AllowedStatusCodes.All(i => i != streamResponse.HttpStatusCode)))
-					{
-						error = this.Serializer.Deserialize<ElasticsearchServerError>(streamResponse.Response);
-						if (this.Settings.ThrowOnElasticsearchServerExceptions)
-							throw new ElasticsearchServerException(error);
-					}
+					var error = ThrowOrGetErrorFromStreamResponse(requestState, streamResponse);
 
 					var typedResponse = this.StreamToTypedResponse<T>(streamResponse, requestState.DeserializationState);
 					typedResponse.NumberOfRetries = retried;
-					if (error != null)
-					{
-						typedResponse.Success = false;
-						typedResponse.OriginalException = new ElasticsearchServerException(error);
-					}
+					this.SetErrorDiagnosticsAndPatchSuccess(requestState, error, typedResponse, streamResponse);
 					response = typedResponse;
 					return typedResponse;
 				}
@@ -232,6 +221,44 @@ namespace Elasticsearch.Net.Connection
 			return RetryRequest<T>(requestState, baseUri, retried);
 		}
 
+		private void SetErrorDiagnosticsAndPatchSuccess<T>(TransportRequestState<T> requestState,
+			ElasticsearchServerError error, ElasticsearchResponse<T> typedResponse, ElasticsearchResponse<Stream> streamResponse)
+		{
+			if (error != null)
+			{
+				typedResponse.Success = false;
+				typedResponse.OriginalException = new ElasticsearchServerException(error);
+			}
+			if (!typedResponse.Success
+			    && requestState.RequestConfiguration != null
+			    && requestState.RequestConfiguration.AllowedStatusCodes.HasAny(i => i == streamResponse.HttpStatusCode))
+			{
+				typedResponse.Success = true;
+			}
+		}
+
+		private ElasticsearchServerError ThrowOrGetErrorFromStreamResponse<T>(TransportRequestState<T> requestState,
+			ElasticsearchResponse<Stream> streamResponse)
+		{
+			ElasticsearchServerError error = null;
+			if ((!streamResponse.Success && requestState.RequestConfiguration == null)
+			    || (!streamResponse.Success
+			        && requestState.RequestConfiguration != null
+			        && requestState.RequestConfiguration.AllowedStatusCodes.All(i => i != streamResponse.HttpStatusCode)))
+			{
+				if (streamResponse.Response != null)
+					error = this.Serializer.Deserialize<ElasticsearchServerError>(streamResponse.Response);
+				else
+					error = new ElasticsearchServerError
+					{
+						Status = streamResponse.HttpStatusCode.GetValueOrDefault(-1)
+					};
+				if (this.Settings.ThrowOnElasticsearchServerExceptions)
+					throw new ElasticsearchServerException(error);
+			}
+			return error;
+		}
+
 		private Uri GetNextBaseUri<T>(TransportRequestState<T> requestState, out int initialSeed, out bool shouldPingHint)
 		{
 			if (requestState.RequestConfiguration != null && requestState.RequestConfiguration.ForcedNode != null)
@@ -247,7 +274,7 @@ namespace Elasticsearch.Net.Connection
 		private ElasticsearchResponse<T> RetryRequest<T>(TransportRequestState<T> requestState, Uri baseUri, int retried, Exception e = null)
 		{
 			var maxRetries = this.GetMaximumRetries(requestState.RequestConfiguration);
-			var exceptionMessage = MaxRetryExceptionMessage.F(requestState.Method, requestState.Path.IsNullOrEmpty() ? "/" : "", retried);
+			var exceptionMessage = MaxRetryExceptionMessage.F(requestState.Method, requestState.Path.IsNullOrEmpty() ? "/" : requestState.Path, retried);
 
 			this._connectionPool.MarkDead(baseUri, this.ConfigurationValues.DeadTimeout, this.ConfigurationValues.MaxDeadTimeout);
 
@@ -292,7 +319,12 @@ namespace Elasticsearch.Net.Connection
 						if (t.Exception != null)
 							tcs.SetException(t.Exception.Flatten());
 						else
+						{
+							var objectNeedsResponseRef = t.Result.Response as IResponseWithRequestInformation;
+							if (objectNeedsResponseRef != null)
+								objectNeedsResponseRef.RequestInformation = t.Result;
 							tcs.SetResult(t.Result);
+						}
 
 						requestState.Tracer.SetResult(t.Result);
 						return tcs.Task;
@@ -336,12 +368,16 @@ namespace Elasticsearch.Net.Connection
 					if (t.IsFaulted)
 						return this.RetryRequestAsync<T>(requestState, baseUri, retried, t.Exception);
 					if (t.Result.SuccessOrKnownError)
+					{
+						var error = ThrowOrGetErrorFromStreamResponse(requestState, t.Result);
 						return this.StreamToTypedResponseAsync<T>(t.Result, requestState.DeserializationState)
 							.ContinueWith(tt =>
 							{
 								tt.Result.NumberOfRetries = retried;
+								this.SetErrorDiagnosticsAndPatchSuccess(requestState, error, tt.Result, t.Result);
 								return tt;
 							}).Unwrap();
+					}
 					return this.RetryRequestAsync<T>(requestState, baseUri, retried);
 				}).Unwrap();
 		}

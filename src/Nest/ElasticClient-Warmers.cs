@@ -85,7 +85,7 @@ namespace Nest
 		private WarmerResponse DeserializeWarmerResponse(IElasticsearchResponse connectionStatus, Stream stream)
 		{
 			if (!connectionStatus.Success)
-				return new WarmerResponse {ConnectionStatus = connectionStatus, IsValid = false};
+				return new WarmerResponse { IsValid = false};
 
 			var dict = this.Serializer.Deserialize<CrazyWarmerResponse>(stream);
 			var indices = new Dictionary<string, Dictionary<string, WarmerMapping>>();
@@ -104,7 +104,6 @@ namespace Nest
 
 			return new WarmerResponse
 			{
-				ConnectionStatus = connectionStatus,
 				IsValid = true,
 				Indices = indices
 			};
