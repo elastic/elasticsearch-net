@@ -40,7 +40,7 @@ namespace Elasticsearch.Net
 
 		public static ElasticsearchResponse<TTo> CloneFrom<TTo>(IElasticsearchResponse from, TTo to)
 		{
-			return new ElasticsearchResponse<TTo>(from.Settings)
+			var response = new ElasticsearchResponse<TTo>(from.Settings)
 			{
 				OriginalException = from.OriginalException,
 				HttpStatusCode = from.HttpStatusCode,
@@ -52,8 +52,11 @@ namespace Elasticsearch.Net
 				Serializer = from.Settings.Serializer,
 				Settings = from.Settings,
 				Success = from.Success
-
 			};
+			var tt = to as IResponseWithRequestInformation;
+			if (tt != null)
+				tt.RequestInformation = response;
+ 			return response;
 		}
 
 		private static ElasticsearchResponse<DynamicDictionary> ToDynamicResponse(ElasticsearchResponse<Dictionary<string, object>> response)

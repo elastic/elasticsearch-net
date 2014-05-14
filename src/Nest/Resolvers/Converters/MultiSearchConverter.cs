@@ -78,7 +78,8 @@ namespace Nest.Resolvers.Converters
 				if (realConverter == null)
 					return new MultiSearchResponse { IsValid = false };
 
-				return realConverter.ReadJson(reader, objectType, existingValue, serializer);
+				var mr = realConverter.ReadJson(reader, objectType, existingValue, serializer) as MultiSearchResponse;
+				return mr;
 			}
 
 
@@ -139,9 +140,8 @@ namespace Nest.Resolvers.Converters
 					}
 				}
 				generic.Invoke(null, new object[] { m, serializer, response._Responses, this._settings });
-				
 			}
-
+			
 			return response;
 		}
 

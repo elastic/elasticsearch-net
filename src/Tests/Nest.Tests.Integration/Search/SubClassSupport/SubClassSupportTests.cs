@@ -174,14 +174,15 @@ namespace Nest.Tests.Integration.Search.SearchType
 			);
 			Assert.True(queryResults.IsValid);
 			var firstResult = queryResults.GetResponse<MyBaseClass>("using_types");
-
-			Assert.True(firstResult.Documents.Any());
+			firstResult.Should().NotBeNull();
+			firstResult.FieldSelections.Should().NotBeNull().And.NotBeEmpty();
+			Assert.True(firstResult.FieldSelections.HasAny());
 			firstResult.Hits.OfType<Hit<ClassA>>().Any().Should().BeTrue();
 			firstResult.Hits.OfType<Hit<ClassB>>().Any().Should().BeTrue();
 
 			var secondResult = queryResults.GetResponse<MyBaseClass>("using_selector");
 
-			Assert.True(secondResult.Documents.Any());
+			Assert.True(secondResult.FieldSelections.HasAny());
 			secondResult.Hits.OfType<Hit<ClassA>>().Any().Should().BeTrue();
 			secondResult.Hits.OfType<Hit<ClassB>>().Any().Should().BeTrue();
 

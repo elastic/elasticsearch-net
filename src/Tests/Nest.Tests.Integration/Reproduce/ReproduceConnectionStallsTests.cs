@@ -8,6 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System.Diagnostics;
 using FluentAssertions;
@@ -42,6 +43,7 @@ namespace Nest.Tests.Integration.Reproduce
 
 
 		[Test]
+		[Ignore]
 		public void SearchShouldNotHaveBlips()
 		{
 			//Search once so that caches are sure to exist.

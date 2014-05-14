@@ -24,8 +24,8 @@ namespace Nest.Tests.Integration.Search
 			);
 			Assert.NotNull(results);
 			Assert.True(results.IsValid);
-			Assert.NotNull(results.Documents);
-			Assert.GreaterOrEqual(results.Documents.Count(), 10);
+			Assert.NotNull(results.FieldSelections);
+			Assert.GreaterOrEqual(results.FieldSelections.Count(), 10);
 
 		}
 		[Test]
@@ -60,8 +60,8 @@ namespace Nest.Tests.Integration.Search
 			);
 			Assert.NotNull(results);
 			Assert.True(results.IsValid);
-			Assert.NotNull(results.Documents);
-			Assert.GreaterOrEqual(results.Documents.Count(), 1);
+			Assert.NotNull(results.FieldSelections);
+			Assert.GreaterOrEqual(results.FieldSelections.Count(), 1);
 		}
 		[Test]
 		public void TestWildcardQuery()
@@ -78,8 +78,8 @@ namespace Nest.Tests.Integration.Search
 			);
 			Assert.NotNull(results);
 			Assert.True(results.IsValid);
-			Assert.NotNull(results.Documents);
-			Assert.GreaterOrEqual(results.Documents.Count(), 1);
+			Assert.NotNull(results.FieldSelections);
+			Assert.GreaterOrEqual(results.FieldSelections.Count(), 1);
 		}
 		[Test]
 		public void TestWildcardQueryBoostAndRewrite()
@@ -96,8 +96,8 @@ namespace Nest.Tests.Integration.Search
 			);
 			Assert.NotNull(results);
 			Assert.True(results.IsValid);
-			Assert.NotNull(results.Documents);
-			Assert.GreaterOrEqual(results.Documents.Count(), 1);
+			Assert.NotNull(results.FieldSelections);
+			Assert.GreaterOrEqual(results.FieldSelections.Count(), 1);
 		}
 		[Test]
 		public void TestPrefixQuery()
@@ -114,8 +114,8 @@ namespace Nest.Tests.Integration.Search
 			);
 			Assert.NotNull(results);
 			Assert.True(results.IsValid);
-			Assert.NotNull(results.Documents);
-			Assert.GreaterOrEqual(results.Documents.Count(), 1);
+			Assert.NotNull(results.FieldSelections);
+			Assert.GreaterOrEqual(results.FieldSelections.Count(), 1);
 		}
 		[Test]
 		public void TestTermFacet()
