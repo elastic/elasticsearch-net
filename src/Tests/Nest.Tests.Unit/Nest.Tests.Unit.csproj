@@ -163,6 +163,7 @@
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="QueryParsers\BaseParserTests.cs" />
     <Compile Include="QueryParsers\Filter\ParseFilterTests.cs" />
+    <Compile Include="QueryParsers\Queries\ParseQueryTests.cs" />
     <Compile Include="Reproduce\Reproduce646Tests.cs" />
     <Compile Include="Reproduce\Reproduce579Tests.cs" />
     <Compile Include="Search\Fields\FieldsTests.cs" />

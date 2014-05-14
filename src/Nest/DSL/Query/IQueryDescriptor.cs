@@ -3,17 +3,25 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<BaseQuery>))]
 	public interface IQueryDescriptor
 	{
 		[JsonProperty(PropertyName = "bool")]
 		IBoolQuery Bool { get; set; }
 
+		[JsonIgnore]
 		bool IsConditionless { get; set; }
-		bool IsStrict { get; set; }
-		bool IsVerbatim { get; set; }
 
+		[JsonIgnore]
+		bool IsStrict { get; set; }
+
+		[JsonIgnore]
+		bool IsVerbatim { get; set; }
+		
+		[JsonIgnore]
+		string RawQuery { get; set; }
+		
 		[JsonProperty(PropertyName = "match_all")]
 		MatchAll MatchAll { get; set; }
 

@@ -566,7 +566,7 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			)
 			where T : IFilterBase
 		{
-			var descriptor = this.GetSearchDescriptor(s=>s
+			var descriptor = this.GetSearchDescriptorForFilter(s=>s
 				.Filter(f=>create(f
 					.Name(cacheName)
 					.CacheKey(cacheKey)

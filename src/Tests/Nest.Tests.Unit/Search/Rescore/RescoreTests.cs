@@ -30,7 +30,6 @@ namespace Nest.Tests.Unit.Search.Rescore
 						.QueryWeight(1.0)
 						.RescoreQueryWeight(2.0)
 						.Query(q=>q.Term(p=>p.Name, "nest"))
-					
 					)
 				);
 			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());

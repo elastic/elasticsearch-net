@@ -1,9 +1,6 @@
 {
   "from": 0,
   "size": 10,
-  "query": {
-    "match_all": {}
-  },
   "rescore": {
     "window_size": 500,
     "query": {
@@ -17,5 +14,8 @@
       "query_weight": 1.0,
       "rescore_query_weight": 2.0
     }
-  }
+  },
+  "query": {
+    "match_all": {}
+  },
 }

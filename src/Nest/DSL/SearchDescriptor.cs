@@ -243,21 +243,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "suggest")]
 		internal IDictionary<string, object> _Suggest { get; set; }
 
-		[JsonProperty(PropertyName = "query")]
-		internal RawOrQueryDescriptor<T> _QueryOrRaw
-		{
-			get
-			{
-				if (this._RawQuery == null && ((ISearchDescriptor)this).Query == null)
-					return null;
-				return new RawOrQueryDescriptor<T>
-				{
-					Raw = this._RawQuery,
-					Descriptor = ((ISearchDescriptor)this).Query
-				};
-			}
-		}
-
 
 		[JsonProperty(PropertyName = "highlight")]
 		internal HighlightDescriptor<T> _Highlight { get; set; }
@@ -265,8 +250,10 @@ namespace Nest
 		[JsonProperty(PropertyName = "rescore")]
 		internal RescoreDescriptor<T> _Rescore { get; set; }
 
-		internal string _RawQuery { get; set; }
-		IQueryDescriptor ISearchDescriptor.Query { get; set; }
+		[JsonProperty(PropertyName = "query")]
+		[JsonConverter(typeof(CustomJsonConverter))]
+		BaseQuery _Query { get; set;}
+		IQueryDescriptor ISearchDescriptor.Query { get { return this._Query; } set { this._Query = value as BaseQuery;  } }
 
 		[JsonProperty(PropertyName = "filter")]
 		[JsonConverter(typeof(CustomJsonConverter))]
@@ -970,8 +957,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> QueryRaw(string rawQuery)
 		{
-			rawQuery.ThrowIfNull("rawQuery");
-			this._RawQuery = rawQuery;
+			((ISearchDescriptor)this).Query = new QueryDescriptor<T>().Raw(rawQuery);
 			return this;
 		}
 
@@ -1011,7 +997,6 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> FilterRaw(string rawFilter)
 		{
-			rawFilter.ThrowIfNull("rawFilter");
 			((ISearchDescriptor)this).Filter = new FilterDescriptorDescriptor<T>().Raw(rawFilter);
 			return this;
 		}

@@ -68,6 +68,15 @@ namespace Nest
 			((IQueryDescriptor)q).IsVerbatim = this.IsVerbatim;
 			return q;
 		}
+		
+		internal BaseQuery Raw(string rawJson)
+		{
+			var f = new QueryDescriptor<T>();
+			((IQueryDescriptor)f).IsStrict = this.IsStrict;
+			((IQueryDescriptor)f).IsVerbatim = this.IsVerbatim;
+			((IQueryDescriptor)f).RawQuery = rawJson;
+			return f;
+		}
 
 		/// <summary>
 		/// A query that uses a query parser in order to parse its content.

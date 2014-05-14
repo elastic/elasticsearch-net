@@ -12,12 +12,14 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public class BaseQuery : IQueryDescriptor
+	public class BaseQuery : IQueryDescriptor, ICustomJson
 	{
 		private static readonly IEnumerable<BaseQuery> Empty = Enumerable.Empty<BaseQuery>();
 
 		IBoolQuery IQueryDescriptor.Bool { get; set; }
-		
+
+		string IQueryDescriptor.RawQuery { get; set; }
+
 		MatchAll IQueryDescriptor.MatchAll { get; set; }
 		
 		ITermQuery IQueryDescriptor.TermQueryDescriptor { get; set; }
@@ -318,6 +320,13 @@ namespace Nest
 				modify(returnQuery, returnBoolQuery);
 			}
 			return returnQuery;
+		}
+
+		public object GetCustomJson()
+		{	
+			var f = ((IQueryDescriptor)this);
+			if (f.RawQuery.IsNullOrEmpty()) return f; 
+			return new RawJson(f.RawQuery);
 		}
 	}
 }
