@@ -67,9 +67,14 @@ namespace Nest
 				.DeserializationState(deserializationState);
 
 			return this.RawDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, descriptor)
-				.ContinueWith<ISearchResponse<TResult>>(t => t.Result.Success
-					? t.Result.Response
-					: CreateInvalidInstance<SearchResponse<TResult>>(t.Result));
+				.ContinueWith<ISearchResponse<TResult>>(t => {
+					if (t.IsFaulted)
+						throw t.Exception.Flatten().InnerException;
+					
+					return t.Result.Success
+						? t.Result.Response
+						: CreateInvalidInstance<SearchResponse<TResult>>(t.Result);
+				});
 		}
 
 		private JsonConverter CreateCovariantSearchSelector<T, TResult>(SearchDescriptor<T> originalSearchDescriptor)

@@ -52,7 +52,7 @@ namespace Elasticsearch.Net
 				Serializer = from.Settings.Serializer,
 				Settings = from.Settings,
 				Success = from.Success
-				
+
 			};
 		}
 
@@ -176,12 +176,12 @@ namespace Elasticsearch.Net
 				response = (this.Response as byte[]).Utf8String();
 
 			string requestJson = null;
-		    
-            if (r.Request != null)
-            {
-                requestJson = r.Request.Utf8String();
-            }
-				
+
+			if (r.Request != null)
+			{
+				requestJson = r.Request.Utf8String();
+			}
+
 			var print = _printFormat.F(
 			  Environment.NewLine,
 			  r.HttpStatusCode.HasValue ? r.HttpStatusCode.Value.ToString(CultureInfo.InvariantCulture) : "-1",
