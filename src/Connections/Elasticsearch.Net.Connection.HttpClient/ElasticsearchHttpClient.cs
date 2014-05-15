@@ -10,10 +10,9 @@ namespace Elasticsearch.Net.Connection.HttpClient
     /// <summary>
     /// IConnection implemented using <see cref="System.Net.Http.HttpClient"/>
     /// </summary>
-    public class ElasticsearchHttpClient : IConnection
+    public class ElasticsearchHttpClient : IConnection, IDisposable
     {
         private readonly IConnectionConfigurationValues _settings;
-        private readonly HttpClientHandler _innerHandler;
 
         static ElasticsearchHttpClient()
         {
@@ -33,20 +32,24 @@ namespace Elasticsearch.Net.Connection.HttpClient
         public ElasticsearchHttpClient(IConnectionConfigurationValues settings, HttpClientHandler handler = null)
         {
             _settings = settings;
-
-            _innerHandler = handler ?? new WebRequestHandler();
-
             DefaultContentType = "application/json";
 
-            if (_innerHandler.SupportsProxy && !string.IsNullOrWhiteSpace(_settings.ProxyAddress))
+            var innerHandler = handler ?? new WebRequestHandler();
+
+            if (innerHandler.SupportsProxy && !string.IsNullOrWhiteSpace(_settings.ProxyAddress))
             {
-                _innerHandler.Proxy = new WebProxy(_settings.ProxyAddress)
+                innerHandler.Proxy = new WebProxy(_settings.ProxyAddress)
                 {
                     Credentials = new NetworkCredential(_settings.ProxyUsername, _settings.ProxyPassword),
                 };
 
-                _innerHandler.UseProxy = true;
+                innerHandler.UseProxy = true;
             }
+
+            Client = new System.Net.Http.HttpClient(new ElasticsearchHttpMessageHandler(innerHandler), false)
+            {
+                Timeout = TimeSpan.FromMilliseconds(_settings.Timeout)
+            };
         }
 
         /// <summary>
@@ -54,6 +57,18 @@ namespace Elasticsearch.Net.Connection.HttpClient
         /// </summary>
         /// <value>The default type of the content.</value>
         public string DefaultContentType { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is disposed.
+        /// </summary>
+        /// <value><c>true</c> if this instance is disposed; otherwise, <c>false</c>.</value>
+        public bool IsDisposed { get; private set; }
+
+        /// <summary>
+        /// Gets the client.
+        /// </summary>
+        /// <value>The client.</value>
+        public System.Net.Http.HttpClient Client { get; private set; }
 
         /// <summary>
         /// Wraps the DoRequest to run synchronously
@@ -65,6 +80,8 @@ namespace Elasticsearch.Net.Connection.HttpClient
         /// <returns>ElasticsearchResponse&lt;Stream&gt;.</returns>
         public ElasticsearchResponse<Stream> DoRequestSync(HttpMethod method, Uri uri, byte[] data = null, IRequestConnectionConfiguration requestSpecificConfig = null)
         {
+            ThrowIfDisposed();
+
             var requestTask = DoRequest(method, uri, data, requestSpecificConfig);
 
             try
@@ -92,6 +109,8 @@ namespace Elasticsearch.Net.Connection.HttpClient
         /// <returns>Task&lt;ElasticsearchResponse&lt;Stream&gt;&gt;.</returns>
         public async Task<ElasticsearchResponse<Stream>> DoRequest(HttpMethod method, Uri uri, byte[] data = null, IRequestConnectionConfiguration requestSpecificConfig = null)
         {
+            ThrowIfDisposed();
+
             try
             {
                 var request = new HttpRequestMessage(method, uri);
@@ -102,11 +121,11 @@ namespace Elasticsearch.Net.Connection.HttpClient
 
                     if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.AcceptsContentType))
                     {
-                        request.Content.Headers.Allow.Add(requestSpecificConfig.AcceptsContentType);
+                        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestSpecificConfig.AcceptsContentType));
                     }
                     else if (!string.IsNullOrWhiteSpace(DefaultContentType))
                     {
-                        request.Content.Headers.Allow.Add(DefaultContentType);
+                        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(DefaultContentType));
                     }
 
                     if (!string.IsNullOrWhiteSpace(DefaultContentType))
@@ -115,27 +134,16 @@ namespace Elasticsearch.Net.Connection.HttpClient
                     }
                 }
 
-                using (var client = new System.Net.Http.HttpClient(new ElasticsearchHttpMessageHandler(_innerHandler), false))
+                var response = await Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+
+                if (method == HttpMethod.Head || response.Content == null || !response.Content.Headers.ContentLength.HasValue || response.Content.Headers.ContentLength.Value <= 0)
                 {
-                    if (requestSpecificConfig != null && requestSpecificConfig.TimeoutRequest.HasValue)
-                    {
-                        client.Timeout = TimeSpan.FromMilliseconds(requestSpecificConfig.TimeoutRequest.Value);
-                    }
-                    else
-                    {
-                        client.Timeout = TimeSpan.FromMilliseconds(_settings.Timeout);
-                    }
-
-                    var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-
-                    if (method == HttpMethod.Head || response.Content == null || !response.Content.Headers.ContentLength.HasValue || response.Content.Headers.ContentLength.Value <= 0)
-                    {
-                        return ElasticsearchResponse<Stream>.Create(_settings, (int) response.StatusCode, method.ToString().ToLowerInvariant(), uri.ToString(), data);
-                    }
-
-                    var responseStream = await response.Content.ReadAsStreamAsync();
-                    return ElasticsearchResponse<Stream>.Create(_settings, (int) response.StatusCode, method.ToString().ToLowerInvariant(), uri.ToString(), data, responseStream);
+                    return ElasticsearchResponse<Stream>.Create(_settings, (int)response.StatusCode, method.ToString().ToLowerInvariant(), uri.ToString(), data);
                 }
+
+                var responseStream = await response.Content.ReadAsStreamAsync();
+                return ElasticsearchResponse<Stream>.Create(_settings, (int)response.StatusCode, method.ToString().ToLowerInvariant(), uri.ToString(), data, responseStream);
+
             }
             catch (Exception ex)
             {
@@ -201,6 +209,42 @@ namespace Elasticsearch.Net.Connection.HttpClient
         ElasticsearchResponse<Stream> IConnection.DeleteSync(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig)
         {
             return DoRequestSync(HttpMethod.Delete, uri, data, requestSpecificConfig);
+        }
+
+        private void ThrowIfDisposed()
+        {
+            if (IsDisposed)
+            {
+                throw new ObjectDisposedException(GetType().Name);
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~ElasticsearchHttpClient()
+        {
+            Dispose(false);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (IsDisposed)
+                return;
+
+            if (disposing)
+            {
+                if (Client != null)
+                {
+                    Client.Dispose();
+                    Client = null;
+                }
+            }
+
+            IsDisposed = true;
         }
     }
 }
