@@ -76,6 +76,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -84,9 +85,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HttpSSTextTester .cs" />
+    <Compile Include="HttpClientTester.cs" />
     <Compile Include="HttpTester.cs" />
-    <Compile Include="ITester.cs" />
     <Compile Include="MessageGenerator.cs" />
     <Compile Include="PartitionExtension.cs" />
     <Compile Include="Program.cs" />
@@ -119,6 +119,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj">
+      <Project>{a69322fd-b874-44ef-abe0-63f4a7b5593e}</Project>
+      <Name>Elasticsearch.Net.Connection.HttpClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj">
       <Project>{e97ccf40-0ba6-43fe-9f2d-58d454134088}</Project>
       <Name>Elasticsearch.Net</Name>
