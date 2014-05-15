@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using Elasticsearch.Net.Connection.HttpClient;
 using Elasticsearch.Net.Connection.Thrift;
 using Elasticsearch.Net;
 
@@ -32,7 +31,6 @@ namespace Nest.Tests.Integration
 		public static readonly ElasticClient ClientNoRawResponse = new ElasticClient(Settings().ExposeRawResponse(false));
 		public static readonly ElasticClient ClientThatTrows = new ElasticClient(Settings().ThrowOnElasticsearchServerExceptions());
 		public static readonly ElasticClient ThriftClient = new ElasticClient(Settings(9500), new ThriftConnection(Settings(9500)));
-	    public static readonly ElasticClient HttpClientClient = new ElasticClient(Settings(), new ElasticsearchHttpClient(Settings()));
 		public static string NewUniqueIndexName()
 		{
 			return DefaultIndex + "_" + Guid.NewGuid().ToString();
