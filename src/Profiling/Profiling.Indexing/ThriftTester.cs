@@ -5,29 +5,14 @@ using Nest;
 
 namespace Profiling.Indexing
 {
-	internal class ThriftTester : Tester, ITester
+	public class ThriftTester : Tester
 	{
-
-
-		public void Run(string indexName, int port, int numMessages, int bufferSize)
+		public override IElasticClient CreateClient(string indexName)
 		{
 			var settings = this.CreateSettings(indexName, 9500);
 			settings.SetMaximumAsyncConnections(25);
 			var client = new ElasticClient(settings, new ThriftConnection(settings));
-
-			Connect(client, settings);
-
-			GenerateAndIndex(client, indexName, numMessages, bufferSize);
-		}
-
-		public void SearchUsingSingleClient(string indexName, int port, int numberOfSearches)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void SearchUsingMultipleClients(string indexName, int port, int numberOfSearches)
-		{
-			throw new NotImplementedException();
+			return client;
 		}
 	}
 }

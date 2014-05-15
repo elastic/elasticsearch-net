@@ -42,7 +42,7 @@ namespace Nest
 			INestSerializer serializer = null)
 		{
 			this._connectionSettings = settings ?? new ConnectionSettings();
-			this.Connection = connection ?? new HttpConnection(settings);
+			this.Connection = connection ?? new HttpConnection(this._connectionSettings);
 
 			this.Serializer = serializer ?? new NestSerializer(this._connectionSettings);
 			var stringifier = new NestStringifier(this._connectionSettings);

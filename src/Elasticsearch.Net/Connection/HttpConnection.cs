@@ -340,7 +340,7 @@ namespace Elasticsearch.Net.Connection
 				}
 				else if (enumerator.MoveNext())
 				{
-					enumerator.Current.ContinueWith(recursiveBody);
+					enumerator.Current.ContinueWith(recursiveBody, TaskContinuationOptions.ExecuteSynchronously);
 				}
 				else enumerator.Dispose();
 			};
