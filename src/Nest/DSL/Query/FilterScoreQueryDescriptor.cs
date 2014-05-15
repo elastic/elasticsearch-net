@@ -12,12 +12,19 @@ namespace Nest.DSL.Query
 	{
 		[JsonProperty(PropertyName = "filter")]
 		BaseFilterDescriptor FilterDescriptor { get; set; }
-
+		
+		[JsonProperty(PropertyName = "lang")]
+		string Lang { get; set; }
+		
 		[JsonProperty(PropertyName = "script")]
 		string Script { get; set; }
 
+		[JsonProperty(PropertyName = "params")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		Dictionary<string, object> Params { get; set; }
+
 		[JsonProperty(PropertyName = "boost")]
-		float? Boost { get; set; }
+		double? Boost { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -29,9 +36,13 @@ namespace Nest.DSL.Query
 
 		string IFilterScoreQuery.Script { get; set; }
 
-		float? IFilterScoreQuery.Boost { get; set; }
+		string IFilterScoreQuery.Lang { get; set; }
 
-		public FilterScoreQueryDescriptor<T> Boost(float boost)
+		double? IFilterScoreQuery.Boost { get; set; }
+
+		Dictionary<string, object> IFilterScoreQuery.Params { get; set; }
+
+		public FilterScoreQueryDescriptor<T> Boost(double boost)
 		{
 			((IFilterScoreQuery)this).Boost = boost;
 
@@ -44,7 +55,19 @@ namespace Nest.DSL.Query
 
 			return this;
 		}
+		public FilterScoreQueryDescriptor<T> Lang(string lang)
+		{
+			((IFilterScoreQuery)this).Lang = lang;
 
+			return this;
+		}
+
+		public FilterScoreQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
+		{
+			paramDictionary.ThrowIfNull("paramDictionary");
+			((IFilterScoreQuery)this).Params = paramDictionary(new FluentDictionary<string, object>());
+			return this;
+		}
 		public FilterScoreQueryDescriptor<T> Filter(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
