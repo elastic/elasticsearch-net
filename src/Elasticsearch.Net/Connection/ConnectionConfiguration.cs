@@ -82,6 +82,9 @@ namespace Elasticsearch.Net.Connection
 #endif
 		bool IConnectionConfigurationValues.KeepRawResponse { get{ return _keepRawResponse; } }
 
+        private bool _automatixProxyDetection;
+        bool IConnectionConfigurationValues.AutomaticProxyDetection { get { return _automatixProxyDetection} }
+
 		private int _maximumAsyncConnections;
 		int IConnectionConfigurationValues.MaximumAsyncConnections { get{ return _maximumAsyncConnections; } }
 
@@ -290,6 +293,17 @@ namespace Elasticsearch.Net.Connection
 			this._connectionStatusHandler = handler;
 			return (T) this;
 		}
+
+        /// <summary>
+        /// Sometimes automatic proxydection can be very slow when there is no proxy that can be detected.
+        /// </summary>
+        /// <param name="enabled">defaults to true</param>
+        /// <returns></returns>
+        public T AutomatixProxyDetection(bool b = true)
+        {
+            this._automatixProxyDetection = b;
+            return (T)this;
+        }
 	}
 }
 
