@@ -35,7 +35,7 @@ namespace Nest
 			var jo = firstProp.Value.Value<JObject>();
 			if (jo == null) return null;
 
-			ISpanTermQuery fq = null;
+			ISpanTermQuery fq = new SpanTermQueryDescriptor<object>();
 			fq.Field = field;
 			fq.Boost = GetPropValue<double?>(jo, "boost");
 			fq.Value = GetPropValue<string>(jo, "value");

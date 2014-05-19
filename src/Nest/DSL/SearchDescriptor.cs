@@ -921,7 +921,7 @@ namespace Nest
 		/// <summary>
 		/// Describe the query to perform using the static Query class
 		/// </summary>
-		public SearchDescriptor<T> Query(BaseQuery query)
+		public SearchDescriptor<T> Query(IQueryDescriptor query)
 		{
 			if (query == null)
 				return this;

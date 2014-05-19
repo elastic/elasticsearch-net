@@ -72,7 +72,7 @@ namespace Nest
 		
 		IRangeQuery IQueryDescriptor.Range { get; set; }
 
-		ITermQuery IQueryDescriptor.SpanTerm { get; set; }
+		ISpanTermQuery IQueryDescriptor.SpanTerm { get; set; }
 		
 		ISpanFirstQuery IQueryDescriptor.SpanFirst { get; set; }
 		

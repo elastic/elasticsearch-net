@@ -32,7 +32,7 @@ namespace Nest
 		FunctionBoostMode? BoostMode { get; set; }
 
 		[JsonProperty(PropertyName = "random_score")]
-		RandomScoreFunction RandomScore { get; set; }
+		IRandomScoreFunction RandomScore { get; set; }
 
 		[JsonProperty(PropertyName = "script_score")]
 		IScriptFilter ScriptScore { get; set; }
@@ -49,7 +49,7 @@ namespace Nest
 
 		FunctionBoostMode? IFunctionScoreQuery.BoostMode { get; set; }
 
-		RandomScoreFunction IFunctionScoreQuery.RandomScore { get; set; }
+		IRandomScoreFunction IFunctionScoreQuery.RandomScore { get; set; }
 
 		IScriptFilter IFunctionScoreQuery.ScriptScore { get; set; }
 
@@ -104,7 +104,7 @@ namespace Nest
 			((IFunctionScoreQuery)this).RandomScore = new RandomScoreFunction();
 			if (seed.HasValue)
 			{
-				((IFunctionScoreQuery)this).RandomScore._Seed = seed.Value;
+				((IFunctionScoreQuery)this).RandomScore.Seed = seed.Value;
 			}
 			return this;
 		}

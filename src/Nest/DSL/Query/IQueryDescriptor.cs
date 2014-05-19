@@ -99,7 +99,7 @@ namespace Nest
 		IHasParentQuery HasParent { get; set; }
 		
 		[JsonProperty(PropertyName = "span_term")]
-		ITermQuery SpanTerm { get; set; }
+		ISpanTermQuery SpanTerm { get; set; }
 
 		[JsonProperty(PropertyName = "flt")]
 		IFuzzyLikeThisQuery FuzzyLikeThis { get; set; }
