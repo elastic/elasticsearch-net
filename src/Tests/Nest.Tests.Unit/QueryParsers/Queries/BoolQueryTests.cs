@@ -19,8 +19,9 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Boost(1.1)
 					.DisableCoord()
 					.MinimumShouldMatch(2)
-					)
-				);
+				)
+			);
+
 			q.Boost.Should().Be(1.1);
 			q.DisableCoord.Should().BeTrue();
 			q.MinimumShouldMatch.Should().Be("2");

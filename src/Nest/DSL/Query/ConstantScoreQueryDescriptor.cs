@@ -13,7 +13,7 @@ namespace Nest
 	public interface IConstantScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		BaseQuery Query { get; set; }
+		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
 		IFilterDescriptor Filter { get; set; }
@@ -25,7 +25,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class ConstantScoreQueryDescriptor<T> : IConstantScoreQuery where T : class
 	{
-		BaseQuery IConstantScoreQuery.Query { get; set; }
+		IQueryDescriptor IConstantScoreQuery.Query { get; set; }
 
 		IFilterDescriptor IConstantScoreQuery.Filter { get; set; }
 
