@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Visitor;
 using Newtonsoft.Json;
 
-using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using System.Linq.Expressions;
 using System.Globalization;
@@ -104,6 +104,8 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "regexp")]
 		IRegexpFilter Regexp { get; set; }
+
+		void Accept(IQueryVisitor visitor);
 	}
 
 	public class FilterDescriptorDescriptor<T> : BaseFilterDescriptor, IFilterDescriptor<T>

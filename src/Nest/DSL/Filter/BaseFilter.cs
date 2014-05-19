@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Visitor;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
@@ -72,6 +73,16 @@ namespace Nest
 		INestedFilterDescriptor IFilterDescriptor.Nested { get; set; }
 
 		IRegexpFilter IFilterDescriptor.Regexp { get; set; }
+		
+		
+		public void Accept(IQueryVisitor visitor)
+		{
+			var walker = new QueryFilterWalker();
+			walker.Walk(this, visitor);
+
+			
+		}
+
 		private static readonly IEnumerable<BaseFilterDescriptor> Empty = Enumerable.Empty<BaseFilterDescriptor>();
 
 		

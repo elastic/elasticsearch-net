@@ -1,5 +1,5 @@
+using Nest.DSL.Visitor;
 using Nest.Resolvers.Converters;
-using Nest.Resolvers.Converters.Queries;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -136,5 +136,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "function_score")]
 		IFunctionScoreQuery FunctionScore { get; set; }
+
+		void Accept(IQueryVisitor visitor);
 	}
 }

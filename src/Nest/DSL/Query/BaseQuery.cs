@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Visitor;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -90,6 +91,15 @@ namespace Nest
 
 		IFunctionScoreQuery IQueryDescriptor.FunctionScore { get; set; }
 		
+
+
+		public void Accept(IQueryVisitor visitor)
+		{
+			var walker = new QueryFilterWalker();
+			walker.Walk(this, visitor);
+			
+		}
+
 		bool IQueryDescriptor.IsConditionless { get; set; }
 
 		public bool IsConditionless { get { return ((IQueryDescriptor)this).IsConditionless; } }

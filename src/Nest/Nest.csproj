@@ -140,6 +140,8 @@
     <Compile Include="Domain\Responses\RestoreResponse.cs" />
     <Compile Include="Domain\Responses\SnapshotResponse.cs" />
     <Compile Include="DSL\DeleteSnapshotDescriptor.cs" />
+    <Compile Include="DSL\Visitor\QueryFilterWalker.cs" />
+    <Compile Include="DSL\Visitor\QueryVisitor.cs" />
     <Compile Include="Resolvers\Converters\CompositeJsonConverter.cs" />
     <Compile Include="Domain\DSL\ICustomJsonReader.cs" />
     <Compile Include="DSL\Filter\INotFilter.cs" />
