@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 using Nest.Resolvers;
@@ -10,10 +11,11 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<SpanQuery<object>>))]
 	public interface ISpanQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "span_term")]
-		ITermQuery SpanTermQueryDescriptor { get; set; }
+		ISpanTermQuery SpanTermQueryDescriptor { get; set; }
 
 		[JsonProperty(PropertyName = "span_first")]
 		ISpanFirstQuery SpanFirst { get; set; }
@@ -31,7 +33,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SpanQuery<T> : ISpanQuery where T : class
 	{
-		ITermQuery ISpanQuery.SpanTermQueryDescriptor { get; set; }
+		ISpanTermQuery ISpanQuery.SpanTermQueryDescriptor { get; set; }
 
 		ISpanFirstQuery ISpanQuery.SpanFirst { get; set; }
 

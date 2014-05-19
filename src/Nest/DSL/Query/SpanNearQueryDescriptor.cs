@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<SpanNearQuery<object>>))]
 	public interface ISpanNearQuery : ISpanSubQuery
 	{
 		[JsonProperty(PropertyName = "clauses")]

@@ -7,9 +7,15 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CustomJsonConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SpanTermQueryDescriptor<T> : TermQueryDescriptorBase<SpanTermQueryDescriptor<T>, T>, ISpanSubQuery
+	[JsonConverter(typeof(SpanTermQueryConverter))]
+	public interface ISpanTermQuery : ITermQuery, ISpanSubQuery
+	{
+		
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class SpanTermQueryDescriptor<T> : TermQueryDescriptorBase<SpanTermQueryDescriptor<T>, T>, ISpanTermQuery
 		where T : class
 	{
 	}

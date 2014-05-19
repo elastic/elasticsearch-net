@@ -638,6 +638,8 @@
     <Compile Include="Resolvers\Converters\Filters\GeoDistanceFilterJsonReader.cs" />
     <Compile Include="Resolvers\Converters\Filters\GeoBoundingFilterJsonReader.cs" />
     <Compile Include="Domain\DSL\LatLon.cs" />
+    <Compile Include="Resolvers\Converters\Queries\SpanTermQueryConverter.cs" />
+    <Compile Include="Resolvers\Converters\Queries\MatchQueryJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\Queries\FuzzyQueryJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\Queries\TermsQueryJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\ReadAsTypeConverter.cs" />

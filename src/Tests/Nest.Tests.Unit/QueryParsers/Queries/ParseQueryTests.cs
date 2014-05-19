@@ -830,6 +830,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				)
 			);
 			q.End.Should().Be(3);
+			q.Match.Should().NotBeNull();
 		}
 		[Test]
 		public void SpanNear_Deserializes()
@@ -888,6 +889,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Value("query")
 				)
 			);
+			q.Boost.Should().Be(2.3);
+			q.Field.Should().Be("name");
+			q.Value.Should().Be("query");
+
 		}
 		[Test]
 		public void Terms_Deserializes()
