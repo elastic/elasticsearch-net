@@ -24,6 +24,7 @@ namespace Nest
 		Dictionary<string, object> Params { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryDescriptor Query { get; set; }
 	}
 

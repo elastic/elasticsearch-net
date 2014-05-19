@@ -18,6 +18,7 @@ namespace Nest
 		NestedScore? Score { get; set; }
 
 		[JsonProperty("query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty("no_match_query")]
@@ -32,10 +33,7 @@ namespace Nest
 	{
 		NestedScore? IIndicesQuery.Score { get; set; }
 
-		[JsonProperty(PropertyName = "query")]
-		[JsonConverter(typeof(CustomJsonConverter))]
-		BaseQuery _Query { get; set;}
-		IQueryDescriptor IIndicesQuery.Query { get { return this._Query; } set { this._Query = value as BaseQuery;  } }
+		IQueryDescriptor IIndicesQuery.Query { get; set; }
 
 		IQueryDescriptor IIndicesQuery.NoMatchQuery { get; set; }
 

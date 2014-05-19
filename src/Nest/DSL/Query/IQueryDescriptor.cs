@@ -6,7 +6,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<BaseQuery>))]
-	public interface IQueryDescriptor
+	public interface IQueryDescriptor : ICustomJson
 	{
 		[JsonProperty(PropertyName = "bool")]
 		IBoolQuery Bool { get; set; }

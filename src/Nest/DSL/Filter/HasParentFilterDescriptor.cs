@@ -20,6 +20,7 @@ namespace Nest
 		string Scope { get; set; }
 
 		[JsonProperty("query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryDescriptor Query { get; set; }
 	}
 

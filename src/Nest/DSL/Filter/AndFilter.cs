@@ -16,7 +16,8 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IAndFilter : IFilterBase
 	{
-		[JsonProperty("filters")]
+		[JsonProperty("filters", 
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseFilterDescriptor>, CustomJsonConverter>))]
 		IEnumerable<IFilterDescriptor> Filters { get; set; }
 	}
 

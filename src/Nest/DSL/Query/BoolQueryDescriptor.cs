@@ -48,13 +48,16 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IBoolQuery : IQuery
 	{
-		[JsonProperty("must")]
+		[JsonProperty("must",
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseQuery>, CustomJsonConverter>))]
 		IEnumerable<IQueryDescriptor> Must { get; set; }
 
-		[JsonProperty("must_not")]
+		[JsonProperty("must_not",
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseQuery>, CustomJsonConverter>))]
 		IEnumerable<IQueryDescriptor> MustNot { get; set; }
 
-		[JsonProperty("should")]
+		[JsonProperty("should",
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseQuery>, CustomJsonConverter>))]
 		IEnumerable<IQueryDescriptor> Should { get; set; }
 
 		[JsonProperty("minimum_should_match")]

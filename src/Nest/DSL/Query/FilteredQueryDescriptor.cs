@@ -13,10 +13,12 @@ namespace Nest
 	public interface IFilteredQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		BaseFilterDescriptor Filter { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseFilterDescriptor>, CustomJsonConverter>))]
+		IFilterDescriptor Filter { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -24,7 +26,7 @@ namespace Nest
 	{
 		IQueryDescriptor IFilteredQuery.Query { get; set; }
 
-		BaseFilterDescriptor IFilteredQuery.Filter { get; set; }
+		IFilterDescriptor IFilteredQuery.Filter { get; set; }
 
 		bool IQuery.IsConditionless
 		{

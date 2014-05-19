@@ -251,14 +251,12 @@ namespace Nest
 		internal RescoreDescriptor<T> _Rescore { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
-		[JsonConverter(typeof(CustomJsonConverter))]
-		BaseQuery _Query { get; set;}
-		IQueryDescriptor ISearchDescriptor.Query { get { return this._Query; } set { this._Query = value as BaseQuery;  } }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		IQueryDescriptor ISearchDescriptor.Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		[JsonConverter(typeof(CustomJsonConverter))]
-		BaseFilterDescriptor _Filter { get; set;}
-		IFilterDescriptor ISearchDescriptor.Filter { get { return this._Filter; } set { this._Filter = value as BaseFilterDescriptor;  } }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseFilterDescriptor>, CustomJsonConverter>))]
+		IFilterDescriptor ISearchDescriptor.Filter { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
 		internal IList<PropertyPathMarker> _Fields { get; set; }

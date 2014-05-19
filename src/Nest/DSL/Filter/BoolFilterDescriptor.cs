@@ -48,13 +48,16 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IBoolFilter : IFilterBase
 	{
-		[JsonProperty("must")]
+		[JsonProperty("must",
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseFilterDescriptor>, CustomJsonConverter>))]
 		IEnumerable<IFilterDescriptor> Must { get; set; }
 
-		[JsonProperty("must_not")]
+		[JsonProperty("must_not",
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseFilterDescriptor>, CustomJsonConverter>))]
 		IEnumerable<IFilterDescriptor> MustNot { get; set; }
 
-		[JsonProperty("should")]
+		[JsonProperty("should",
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseFilterDescriptor>, CustomJsonConverter>))]
 		IEnumerable<IFilterDescriptor> Should { get; set; }
 	}
 

@@ -15,6 +15,7 @@ namespace Nest
 	public interface ICustomFiltersScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty(PropertyName = "filters")]

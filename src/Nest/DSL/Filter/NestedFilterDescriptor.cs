@@ -18,6 +18,7 @@ namespace Nest
 		NestedScore? Score { get; set; }
 
 		[JsonProperty("query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty("path")]

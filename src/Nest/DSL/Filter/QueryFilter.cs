@@ -16,6 +16,7 @@ namespace Nest
 	public interface IQueryFilter : IFilterBase
 	{
 		[JsonProperty("query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryDescriptor Query { get; set; }
 	}
 

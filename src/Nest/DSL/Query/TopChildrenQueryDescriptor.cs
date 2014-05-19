@@ -30,6 +30,7 @@ namespace Nest
 		int? IncrementalFactor { get; set; }
 
 		[JsonProperty("query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty(PropertyName = "_cache")]

@@ -16,6 +16,7 @@ namespace Nest
 	public interface INotFilter : IFilterBase
 	{
 		[JsonProperty("filter")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseFilterDescriptor>, CustomJsonConverter>))]
 		IFilterDescriptor Filter { get; set; }
 	}
 

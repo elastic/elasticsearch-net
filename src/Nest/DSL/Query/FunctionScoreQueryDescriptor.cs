@@ -21,6 +21,7 @@ namespace Nest
 		IEnumerable<IFunctionScoreFunction> Functions { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty(PropertyName = "score_mode")]

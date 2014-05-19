@@ -13,6 +13,7 @@ namespace Nest
 	public interface ICustomBoostFactorQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty(PropertyName = "boost_factor")]

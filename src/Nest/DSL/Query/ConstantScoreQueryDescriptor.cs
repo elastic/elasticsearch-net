@@ -13,9 +13,11 @@ namespace Nest
 	public interface IConstantScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseFilterDescriptor>, CustomJsonConverter>))]
 		IFilterDescriptor Filter { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
