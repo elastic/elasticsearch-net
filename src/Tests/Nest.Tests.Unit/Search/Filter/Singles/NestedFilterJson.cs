@@ -17,7 +17,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 					.Name("nesty")
 					.Nested(n=>n
 						.Path(f=>f.Followers[0])
-						.Query(q=>q.Term(f=>f.Followers[0].FirstName,"elasticsearch.pm"))
+						.Filter(q=>q.Term(f=>f.Followers[0].FirstName,"elasticsearch.pm"))
 					)
 				);
 				
@@ -25,9 +25,9 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 					nested: {
-						query: {
+						filter: {
 							term: {
-								""followers.firstName"": { value: ""elasticsearch.pm"" }
+								""followers.firstName"": ""elasticsearch.pm""
 							}
 						},
 						path: ""followers"",

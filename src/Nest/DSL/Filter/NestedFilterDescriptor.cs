@@ -15,8 +15,8 @@ namespace Nest
 		[JsonProperty("score_mode"), JsonConverter(typeof(StringEnumConverter))]
 		internal NestedScore? _Score { get; set; }
 
-		[JsonProperty("query")]
-		internal BaseQuery _QueryDescriptor { get; set; }
+		[JsonProperty("filter")]
+		internal BaseFilter _FilterDescriptor { get; set; }
 
 		[JsonProperty("path")]
 		internal PropertyPathMarker _Path { get; set; }
@@ -28,14 +28,14 @@ namespace Nest
 		{
 			get
 			{
-				return this._QueryDescriptor == null || this._QueryDescriptor.IsConditionless;
+				return this._FilterDescriptor == null || this._FilterDescriptor.IsConditionless;
 			}
 		}
 
-		public NestedFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public NestedFilterDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
 		{
-			var q = new QueryDescriptor<T>();
-			this._QueryDescriptor = querySelector(q);
+			var q = new FilterDescriptor<T>();
+			this._FilterDescriptor = filterSelector(q);
 			return this;
 		}
 
