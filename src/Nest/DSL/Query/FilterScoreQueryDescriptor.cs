@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,11 @@ using Elasticsearch.Net;
 namespace Nest.DSL.Query
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<FilterScoreQueryDescriptor<object>>))]
 	public interface IFilterScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "filter")]
-		BaseFilterDescriptor FilterDescriptor { get; set; }
+		BaseFilterDescriptor Filter { get; set; }
 		
 		[JsonProperty(PropertyName = "lang")]
 		string Lang { get; set; }
@@ -30,9 +32,9 @@ namespace Nest.DSL.Query
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class FilterScoreQueryDescriptor<T> : IFilterScoreQuery where T : class
 	{
-		bool IQuery.IsConditionless { get { return ((IFilterScoreQuery)this).FilterDescriptor == null; } }
+		bool IQuery.IsConditionless { get { return ((IFilterScoreQuery)this).Filter == null; } }
 
-		BaseFilterDescriptor IFilterScoreQuery.FilterDescriptor { get; set; }
+		BaseFilterDescriptor IFilterScoreQuery.Filter { get; set; }
 
 		string IFilterScoreQuery.Script { get; set; }
 
@@ -72,7 +74,7 @@ namespace Nest.DSL.Query
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 			var filter = new FilterDescriptorDescriptor<T>();
-			((IFilterScoreQuery)this).FilterDescriptor = filterSelector(filter);
+			((IFilterScoreQuery)this).Filter = filterSelector(filter);
 
 			return this;
 		}

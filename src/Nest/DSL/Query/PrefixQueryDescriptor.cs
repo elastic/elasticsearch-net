@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Query.Behaviour;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 using Nest.Resolvers.Converters;
@@ -10,6 +11,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IPrefixQuery : ITermQuery
 	{
 		[JsonProperty(PropertyName = "rewrite")]
@@ -17,9 +19,8 @@ namespace Nest
 		RewriteMultiTerm? Rewrite { get; set; }
 	}
 
-	[JsonConverter(typeof(CustomJsonConverter))]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class PrefixQueryDescriptor<T> : TermQueryDescriptorBase<PrefixQueryDescriptor<T>, T>, ICustomJson, IPrefixQuery where T : class
+	public class PrefixQueryDescriptor<T> : TermQueryDescriptorBase<PrefixQueryDescriptor<T>, T>, 
+		IPrefixQuery where T : class
 	{
 		RewriteMultiTerm? IPrefixQuery.Rewrite { get; set; }
 
@@ -28,21 +29,6 @@ namespace Nest
 			((IPrefixQuery)this).Rewrite = rewrite;
 			return this;
 		}
-
-		object ICustomJson.GetCustomJson()
-		{
-			var pq = ((IPrefixQuery)this);
-			return new Dictionary<object, object>
-			{
-				{
-					pq.Field, new Dictionary<string, object>
-					{
-						{ "value", pq.Value },
-						{ "boost", pq.Boost },
-						{ "rewrite", pq.Rewrite },
-					}
-				}
-			};
-		}
+		
 	}
 }

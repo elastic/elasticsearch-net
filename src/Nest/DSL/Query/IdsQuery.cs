@@ -7,6 +7,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	//todo interface!
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class IdsQuery : IQuery
 	{

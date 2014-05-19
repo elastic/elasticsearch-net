@@ -28,7 +28,7 @@ namespace Nest.Tests.Unit.Search.Query.Properties
 			boolQuery.Should().NotBeNull();
 			
 			boolQuery.Should.Should().NotBeEmpty().And.HaveCount(2);
-			var firstTerm = boolQuery.Should.First().TermQueryDescriptor;
+			var firstTerm = boolQuery.Should.First().Term;
 
 			firstTerm.Value.Should().Be("foo");
 

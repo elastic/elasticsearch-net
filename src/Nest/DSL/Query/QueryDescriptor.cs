@@ -69,7 +69,13 @@ namespace Nest
 			return q;
 		}
 		
-		internal BaseQuery Raw(string rawJson)
+		/// <summary>
+		/// Insert raw query json at this position of the query
+		/// <para>Be sure to start your json with '{'</para>
+		/// </summary>
+		/// <param name="rawJson"></param>
+		/// <returns></returns>
+		public BaseQuery Raw(string rawJson)
 		{
 			var f = new QueryDescriptor<T>();
 			((IQueryDescriptor)f).IsStrict = this.IsStrict;
@@ -100,11 +106,10 @@ namespace Nest
 			return this.New(query, q => ((IQueryDescriptor)q).SimpleQueryString = query);
 		}
 		
-		
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public BaseQuery Terms(string field, params string[] terms)
+		public BaseQuery Terms(string field, IEnumerable<string> terms)
 		{
 			return this.TermsDescriptor(t => t
 				.OnField(field)
@@ -114,7 +119,7 @@ namespace Nest
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public BaseQuery Terms<K>(Expression<Func<T, K>> objectPath, params K[] terms)
+		public BaseQuery Terms<K>(Expression<Func<T, K>> objectPath, IEnumerable<K> terms)
 		{
 			return this.TermsDescriptor<K>(t => t
 				.OnField(objectPath)
@@ -124,7 +129,7 @@ namespace Nest
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public BaseQuery Terms(Expression<Func<T, object>> objectPath, params string[] terms)
+		public BaseQuery Terms(Expression<Func<T, object>> objectPath, IEnumerable<string> terms)
 		{
 			return this.TermsDescriptor(t => t
 				.OnField(objectPath)
@@ -526,7 +531,7 @@ namespace Nest
 		{
 			var termQuery = new TermQueryDescriptor<T>();
 			termSelector(termQuery);
-			return this.New(termQuery, q => q.TermQueryDescriptor = termQuery);
+			return this.New(termQuery, q => q.Term = termQuery);
 		}
 		/// <summary>
 		/// Matches documents that have fields matching a wildcard expression (not analyzed). 

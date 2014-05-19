@@ -51,9 +51,7 @@ namespace Nest.Resolvers.Converters.Filters
 						break;
 					default:
 						f.Field = property;
-						//reader.Read();
 						ReadBox(f, reader);
-						//reader.Read();
 						break;
 				}
 			}

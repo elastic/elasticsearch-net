@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Nest.DSL.Query.Behaviour;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
@@ -16,9 +17,8 @@ namespace Nest
 	public interface ICommonTermsQuery : IFieldNameQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		string QueryString { get; set; }
+		string Query { get; set; }
 
-		[JsonProperty(PropertyName = "field")]
 		PropertyPathMarker Field { get; set; }
 
 		[JsonProperty(PropertyName = "cutoff_frequency")]
@@ -48,7 +48,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class CommonTermsQueryDescriptor<T> : ICommonTermsQuery where T : class
 	{
-		string ICommonTermsQuery.QueryString { get; set; }
+		string ICommonTermsQuery.Query { get; set; }
 
 		PropertyPathMarker ICommonTermsQuery.Field { get; set; }
 		
@@ -70,8 +70,12 @@ namespace Nest
 		{
 			get
 			{
-				return ((ICommonTermsQuery)this).Field.IsConditionless() || ((ICommonTermsQuery)this).QueryString.IsNullOrEmpty();
+				return ((ICommonTermsQuery)this).Field.IsConditionless() || ((ICommonTermsQuery)this).Query.IsNullOrEmpty();
 			}
+		}
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			((ICommonTermsQuery)this).Field = fieldName;
 		}
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
@@ -91,7 +95,7 @@ namespace Nest
 
 		public CommonTermsQueryDescriptor<T> Query(string query)
 		{
-			((ICommonTermsQuery)this).QueryString = query;
+			((ICommonTermsQuery)this).Query = query;
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> LowFrequencyOperator(Operator op)

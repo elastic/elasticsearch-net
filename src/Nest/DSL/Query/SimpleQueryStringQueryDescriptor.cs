@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
@@ -12,6 +13,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<SimpleQueryStringQueryDescriptor<object>>))]
 	public interface ISimpleQueryStringQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
@@ -69,12 +71,12 @@ namespace Nest
 		}
 
 
-		public SimpleQueryStringQueryDescriptor<T> OnField(string field)
+		public SimpleQueryStringQueryDescriptor<T> DefaultField(string field)
 		{
 			((ISimpleQueryStringQuery)this).DefaultField = field;
 			return this;
 		}
-		public SimpleQueryStringQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
+		public SimpleQueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> objectPath)
 		{
 			((ISimpleQueryStringQuery)this).DefaultField = objectPath;
 			return this;
@@ -125,7 +127,7 @@ namespace Nest
 			((ISimpleQueryStringQuery)this).Flags = flags;
 			return this;
 		}
-		public SimpleQueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms)
+		public SimpleQueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms= true)
 		{
 			((ISimpleQueryStringQuery)this).LowercaseExpendedTerms = lowercaseExpendedTerms;
 			return this;

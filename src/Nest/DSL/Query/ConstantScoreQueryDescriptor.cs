@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<ConstantScoreQueryDescriptor<object>>))]
 	public interface IConstantScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
 		BaseQuery Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		BaseFilterDescriptor FilterDescriptor { get; set; }
+		IFilterDescriptor Filter { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
 		double? Boost { get; set; }
@@ -25,7 +27,7 @@ namespace Nest
 	{
 		BaseQuery IConstantScoreQuery.Query { get; set; }
 
-		BaseFilterDescriptor IConstantScoreQuery.FilterDescriptor { get; set; }
+		IFilterDescriptor IConstantScoreQuery.Filter { get; set; }
 
 		double? IConstantScoreQuery.Boost { get; set; }
 
@@ -33,12 +35,12 @@ namespace Nest
 		{
 			get
 			{
-				if (((IConstantScoreQuery)this).Query == null && ((IConstantScoreQuery)this).FilterDescriptor == null)
+				if (((IConstantScoreQuery)this).Query == null && ((IConstantScoreQuery)this).Filter == null)
 					return true;
-				if (((IConstantScoreQuery)this).FilterDescriptor == null && ((IConstantScoreQuery)this).Query != null)
+				if (((IConstantScoreQuery)this).Filter == null && ((IConstantScoreQuery)this).Query != null)
 					return ((IConstantScoreQuery)this).Query.IsConditionless;
-				if (((IConstantScoreQuery)this).FilterDescriptor != null && ((IConstantScoreQuery)this).Query == null)
-					return ((IConstantScoreQuery)this).FilterDescriptor.IsConditionless;
+				if (((IConstantScoreQuery)this).Filter != null && ((IConstantScoreQuery)this).Query == null)
+					return ((IConstantScoreQuery)this).Filter.IsConditionless;
 				return false;
 			}
 		}
@@ -46,7 +48,7 @@ namespace Nest
 		public ConstantScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
-			((IConstantScoreQuery)this).FilterDescriptor = null;
+			((IConstantScoreQuery)this).Filter = null;
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
@@ -61,7 +63,7 @@ namespace Nest
 			var filter = new FilterDescriptorDescriptor<T>();
 			var f = filterSelector(filter);
 
-			((IConstantScoreQuery)this).FilterDescriptor = f;
+			((IConstantScoreQuery)this).Filter = f;
 			return this;
 		}
 

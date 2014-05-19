@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
@@ -12,6 +13,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<QueryStringQueryDescriptor<object>>))]
 	public interface IQueryStringQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
@@ -124,12 +126,12 @@ namespace Nest
 		}
 
 
-		public QueryStringQueryDescriptor<T> OnField(string field)
+		public QueryStringQueryDescriptor<T> DefaultField(string field)
 		{
 			((IQueryStringQuery)this).DefaultField = field;
 			return this;
 		}
-		public QueryStringQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
+		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> objectPath)
 		{
 			((IQueryStringQuery)this).DefaultField = objectPath;
 			return this;
@@ -175,17 +177,17 @@ namespace Nest
 			((IQueryStringQuery)this).Analyzer = analyzer;
 			return this;
 		}
-		public QueryStringQueryDescriptor<T> AllowLeadingWildcard(bool allowLeadingWildcard)
+		public QueryStringQueryDescriptor<T> AllowLeadingWildcard(bool allowLeadingWildcard = true)
 		{
 			((IQueryStringQuery)this).AllowLeadingWildcard = allowLeadingWildcard;
 			return this;
 		}
-		public QueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms)
+		public QueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms = true)
 		{
 			((IQueryStringQuery)this).LowercaseExpendedTerms = lowercaseExpendedTerms;
 			return this;
 		}
-		public QueryStringQueryDescriptor<T> EnablePositionIncrements(bool enablePositionIncrements)
+		public QueryStringQueryDescriptor<T> EnablePositionIncrements(bool enablePositionIncrements = true)
 		{
 			((IQueryStringQuery)this).EnablePositionIncrements = enablePositionIncrements;
 			return this;
@@ -215,17 +217,17 @@ namespace Nest
 			((IQueryStringQuery)this).Rewrite = rewriteMultiTerm;
 			return this;
 		}
-		public QueryStringQueryDescriptor<T> Lenient(bool lenient)
+		public QueryStringQueryDescriptor<T> Lenient(bool lenient = true)
 		{
 			((IQueryStringQuery)this).Lenient = lenient;
 			return this;
 		}
-		public QueryStringQueryDescriptor<T> AnalyzeWildcard(bool analyzeWildcard)
+		public QueryStringQueryDescriptor<T> AnalyzeWildcard(bool analyzeWildcard = true)
 		{
 			((IQueryStringQuery)this).AnalyzeWildcard = analyzeWildcard;
 			return this;
 		}
-		public QueryStringQueryDescriptor<T> AutoGeneratePhraseQueries(bool autoGeneratePhraseQueries)
+		public QueryStringQueryDescriptor<T> AutoGeneratePhraseQueries(bool autoGeneratePhraseQueries = true)
 		{
 			((IQueryStringQuery)this).AutoGeneratePhraseQueries = autoGeneratePhraseQueries;
 			return this;
@@ -235,7 +237,7 @@ namespace Nest
 			((IQueryStringQuery)this).MinimumShouldMatchPercentage = "{0}%".F(minimumShouldMatchPercentage);
 			return this;
 		}
-		public QueryStringQueryDescriptor<T> UseDisMax(bool useDismax)
+		public QueryStringQueryDescriptor<T> UseDisMax(bool useDismax = true)
 		{
 			((IQueryStringQuery)this).UseDismax = useDismax;
 			return this;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
@@ -10,16 +11,17 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<IndicesQueryDescriptor<object>>))]
 	public interface IIndicesQuery : IQuery
 	{
 		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
 		NestedScore? Score { get; set; }
 
 		[JsonProperty("query")]
-		object QueryDescriptor { get; set; }
+		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty("no_match_query")]
-		object NoMatchQueryDescriptor { get; set; }
+		IQueryDescriptor NoMatchQuery { get; set; }
 
 		[JsonProperty("indices")]
 		IEnumerable<string> Indices { get; set; }
@@ -30,9 +32,9 @@ namespace Nest
 	{
 		NestedScore? IIndicesQuery.Score { get; set; }
 
-		object IIndicesQuery.QueryDescriptor { get; set; }
+		IQueryDescriptor IIndicesQuery.Query { get; set; }
 
-		object IIndicesQuery.NoMatchQueryDescriptor { get; set; }
+		IQueryDescriptor IIndicesQuery.NoMatchQuery { get; set; }
 
 		IEnumerable<string> IIndicesQuery.Indices { get; set; }
 
@@ -40,7 +42,7 @@ namespace Nest
 		{
 			get
 			{
-				return ((IIndicesQuery)this).NoMatchQueryDescriptor == null && ((IIndicesQuery)this).QueryDescriptor == null;
+				return ((IIndicesQuery)this).NoMatchQuery == null && ((IIndicesQuery)this).Query == null;
 			}
 		}
 
@@ -54,7 +56,7 @@ namespace Nest
 
 			var d = new RawOrQueryDescriptor<T> { Descriptor = q };
 
-			((IIndicesQuery)this).QueryDescriptor = d.Descriptor;
+			((IIndicesQuery)this).Query = d.Descriptor;
 			return this;
 		}
 		public IndicesQueryDescriptor<T> Query<K>(Func<QueryDescriptor<K>, BaseQuery> querySelector) where K : class
@@ -66,15 +68,10 @@ namespace Nest
 
 			var d = new RawOrQueryDescriptor<K> { Descriptor = q };
 
-			((IIndicesQuery)this).QueryDescriptor = d.Descriptor;
+			((IIndicesQuery)this).Query = d.Descriptor;
 			return this;
 		}
-		public IndicesQueryDescriptor<T> Query(string rawQuery)
-		{
-			var d = new RawOrQueryDescriptor<T> { Raw = rawQuery };
-			((IIndicesQuery)this).QueryDescriptor = d;
-			return this;
-		}
+		
 		public IndicesQueryDescriptor<T> NoMatchQuery(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var qd = new QueryDescriptor<T>();
@@ -84,7 +81,7 @@ namespace Nest
 
 			var d = new RawOrQueryDescriptor<T> { Descriptor = q };
 
-			((IIndicesQuery)this).NoMatchQueryDescriptor = d.Descriptor;
+			((IIndicesQuery)this).NoMatchQuery = d.Descriptor;
 			return this;
 		}
 		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryDescriptor<K>, IQueryDescriptor> querySelector) where K : class
@@ -96,13 +93,7 @@ namespace Nest
 
 			var d = new RawOrQueryDescriptor<K> { Descriptor = q };
 
-			((IIndicesQuery)this).NoMatchQueryDescriptor = d.Descriptor;
-			return this;
-		}
-		public IndicesQueryDescriptor<T> NoMatchQuery(string rawQuery)
-		{
-			var d = new RawOrQueryDescriptor<T> { Raw = rawQuery };
-			((IIndicesQuery)this).QueryDescriptor = d;
+			((IIndicesQuery)this).NoMatchQuery = d.Descriptor;
 			return this;
 		}
 		public IndicesQueryDescriptor<T> Indices(IEnumerable<string> indices)

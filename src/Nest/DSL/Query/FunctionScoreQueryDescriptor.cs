@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using Elasticsearch.Net;
 using Nest.Resolvers;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -13,6 +14,7 @@ namespace Nest
 {
 	//More info about it http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/query-dsl-function-score-query.html
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<FunctionScoreQueryDescriptor<object>>))]
 	public interface IFunctionScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "functions")]
@@ -33,7 +35,7 @@ namespace Nest
 		RandomScoreFunction RandomScore { get; set; }
 
 		[JsonProperty(PropertyName = "script_score")]
-		ScriptFilterDescriptor ScriptScore { get; set; }
+		IScriptFilter ScriptScore { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -49,7 +51,7 @@ namespace Nest
 
 		RandomScoreFunction IFunctionScoreQuery.RandomScore { get; set; }
 
-		ScriptFilterDescriptor IFunctionScoreQuery.ScriptScore { get; set; }
+		IScriptFilter IFunctionScoreQuery.ScriptScore { get; set; }
 
 		bool IQuery.IsConditionless
 		{

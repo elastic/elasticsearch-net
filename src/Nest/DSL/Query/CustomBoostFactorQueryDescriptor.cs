@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<CustomBoostFactorQueryDescriptor<object>>))]
 	public interface ICustomBoostFactorQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]

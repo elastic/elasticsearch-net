@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using FakeItEasy;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
@@ -33,7 +34,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Terms
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Query(ff => ff.Terms(f => f.Name, "elasticsearch.pm", "nest")
+				.Query(ff => ff.Terms(f => f.Name, new [] {"elasticsearch.pm", "nest"})
 				);
 
 			var json = TestElasticClient.Serialize(s);
@@ -54,8 +55,9 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Terms
 				.Size(10)
 				.Query(ff => ff.
 					TermsDescriptor(tq => tq
-						.OnField(f=>f.Name).Terms("elasticsearch.pm", "nest")
-						.MinimumMatch(2)
+						.OnField(f=>f.Name)
+						.Terms(new [] {"elasticsearch.pm", "nest"})
+						.MinimumShouldMatch(2)
 						.DisableCoord()
 					)
 				);
@@ -82,14 +84,12 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Terms
 				.Query(ff => ff.
 					TermsDescriptor(tq => tq
 						.OnField(p=>p.IntValues)
-						.MinimumMatch(2)
+						.MinimumShouldMatch(2)
 						.DisableCoord()
 						.OnExternalField<Person>(ef=>ef
 							.Path(p=>p.Id)
 							.Id(4)
 						)
-						.CacheKey("user_4_key")
-
 					)
 				);
 
@@ -105,11 +105,9 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Terms
 				.Query(ff => ff.
 					TermsDescriptor<int>(tq => tq
 						.OnField(p=>p.LOC)
-						.MinimumMatch(2)
+						.MinimumShouldMatch(2)
 						.DisableCoord()
-						.Terms(1,2,3,4)
-						.CacheKey("user_4_key")
-
+						.Terms(new [] {1,2,3,4 })
 					)
 				);
 

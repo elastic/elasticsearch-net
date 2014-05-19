@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<FilteredQueryDescriptor<object>>))]
 	public interface IFilteredQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
 		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		BaseFilterDescriptor FilterDescriptor { get; set; }
+		BaseFilterDescriptor Filter { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -22,19 +24,19 @@ namespace Nest
 	{
 		IQueryDescriptor IFilteredQuery.Query { get; set; }
 
-		BaseFilterDescriptor IFilteredQuery.FilterDescriptor { get; set; }
+		BaseFilterDescriptor IFilteredQuery.Filter { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				if (((IFilteredQuery)this).Query == null && ((IFilteredQuery)this).FilterDescriptor == null)
+				if (((IFilteredQuery)this).Query == null && ((IFilteredQuery)this).Filter == null)
 					return true;
-				if (((IFilteredQuery)this).FilterDescriptor == null && ((IFilteredQuery)this).Query != null)
+				if (((IFilteredQuery)this).Filter == null && ((IFilteredQuery)this).Query != null)
 					return ((IFilteredQuery)this).Query.IsConditionless;
-				if (((IFilteredQuery)this).FilterDescriptor != null && ((IFilteredQuery)this).Query == null)
-					return ((IFilteredQuery)this).FilterDescriptor.IsConditionless;
-				return ((IFilteredQuery)this).Query.IsConditionless && ((IFilteredQuery)this).FilterDescriptor.IsConditionless;
+				if (((IFilteredQuery)this).Filter != null && ((IFilteredQuery)this).Query == null)
+					return ((IFilteredQuery)this).Filter.IsConditionless;
+				return ((IFilteredQuery)this).Query.IsConditionless && ((IFilteredQuery)this).Filter.IsConditionless;
 			}
 		}
 
@@ -54,7 +56,7 @@ namespace Nest
 			var filter = new FilterDescriptorDescriptor<T>();
 			var f = filterSelector(filter);
 
-			((IFilteredQuery)this).FilterDescriptor = f;
+			((IFilteredQuery)this).Filter = f;
 			return this;
 		}
 	}

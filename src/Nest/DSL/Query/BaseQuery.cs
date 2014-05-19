@@ -22,7 +22,7 @@ namespace Nest
 
 		MatchAll IQueryDescriptor.MatchAll { get; set; }
 		
-		ITermQuery IQueryDescriptor.TermQueryDescriptor { get; set; }
+		ITermQuery IQueryDescriptor.Term { get; set; }
 		
 		IWildcardQuery IQueryDescriptor.Wildcard { get; set; }
 		

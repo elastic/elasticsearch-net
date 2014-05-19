@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Elasticsearch.Net;
@@ -11,10 +12,12 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<MultiMatchQueryDescriptor<object>>))]
 	public interface IMultiMatchQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "type")]
-		string Type { get; set; }
+		[JsonConverter(typeof(StringEnumConverter))]
+		TextQueryType? Type { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
 		string Query { get; set; }
@@ -61,7 +64,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class MultiMatchQueryDescriptor<T> : IMultiMatchQuery where T : class
 	{
-		string IMultiMatchQuery.Type { get; set; }
+		TextQueryType? IMultiMatchQuery.Type { get; set; }
 
 		string IMultiMatchQuery.Query { get; set; }
 
@@ -185,7 +188,7 @@ namespace Nest
 
 		public MultiMatchQueryDescriptor<T> Type(TextQueryType type)
 		{
-			((IMultiMatchQuery)this).Type = type.ToString().ToLowerInvariant();
+			((IMultiMatchQuery)this).Type = type;
 			return this;
 		}
 	}

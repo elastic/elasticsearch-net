@@ -11,6 +11,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<CustomFiltersScoreQueryDescriptor<object>>))]
 	public interface ICustomFiltersScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]

@@ -63,6 +63,10 @@ namespace Nest
 				return ((IRangeQuery)this).Field.IsConditionless() || (((IRangeQuery)this).From == null && ((IRangeQuery)this).To == null);
 			}
 		}
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			((IRangeQuery)this).Field = fieldName;
+		}
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return ((IRangeQuery)this).Field;

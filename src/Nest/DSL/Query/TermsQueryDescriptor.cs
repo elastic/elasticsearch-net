@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
 using Nest.DSL.Query.Behaviour;
+using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Queries;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
@@ -11,14 +13,15 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(TermsQueryJsonConverter))]
 	public interface ITermsQuery : IQuery
 	{
 		PropertyPathMarker Field { get; set; }
-		int? MinMatch { get; set; }
-		bool DisableCord { get; set; }
+		double? MinimumShouldMatch { get; set; }
+		bool? DisableCoord { get; set; }
 		IEnumerable<object> Terms { get; set; }
 		IExternalFieldDeclarationDescriptor ExternalField { get; set; }
-		string CacheKey { get; set; }
+		double? Boost { get; set; }
 	}
 
 	/// <summary>
@@ -27,36 +30,37 @@ namespace Nest
 	/// </summary>
 	/// <typeparam name="T">The type that represents the expected hit type</typeparam>
 	/// <typeparam name="K">The type of the field that we want to specfify terms for</typeparam>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class TermsQueryDescriptor<T, K> : ITermsQuery, ICustomJson where T : class
+	public class TermsQueryDescriptor<T, K> : ITermsQuery where T : class
 	{
 		PropertyPathMarker ITermsQuery.Field { get; set; }
-		int? ITermsQuery.MinMatch { get; set; }
-		bool ITermsQuery.DisableCord { get; set; }
+		double? ITermsQuery.MinimumShouldMatch { get; set; }
+		bool? ITermsQuery.DisableCoord { get; set; }
 		IEnumerable<object> ITermsQuery.Terms { get; set; }
 		IExternalFieldDeclarationDescriptor ITermsQuery.ExternalField { get; set; }
-		string ITermsQuery.CacheKey { get; set; }
+		double? ITermsQuery.Boost { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((ITermsQuery)this).Field.IsConditionless() 
-					|| 
-					(!((ITermsQuery)this).Terms.HasAny() && ((ITermsQuery)this).ExternalField == null);
+				var termsQuery = ((ITermsQuery)this);
+				return termsQuery.Field.IsConditionless() 
+					|| (!termsQuery.Terms.HasAny() && termsQuery.ExternalField == null);
 			}
 		}
 	
-		public TermsQueryDescriptor<T, K> CacheKey(string cacheKey)
+		public TermsQueryDescriptor<T, K> Boost(double boost)
 		{
-			((ITermsQuery)this).CacheKey = cacheKey;
+			((ITermsQuery)this).Boost = boost;
 			return this;
 		}
+
 		public TermsQueryDescriptor<T, K> OnField(string field)
 		{
 			((ITermsQuery)this).Field = field;
 			return this;
 		}
+
 		public TermsQueryDescriptor<T, K> OnField(Expression<Func<T, K>> objectPath)
 		{
 			((ITermsQuery)this).Field = objectPath;
@@ -75,11 +79,20 @@ namespace Nest
 		}
 
 
-		public TermsQueryDescriptor<T, K> MinimumMatch(int minMatch)
+		public TermsQueryDescriptor<T, K> MinimumShouldMatch(int minMatch)
 		{
-			((ITermsQuery)this).MinMatch = minMatch;
+			((ITermsQuery)this).MinimumShouldMatch = minMatch;
 			return this;
 		}
+
+
+		public TermsQueryDescriptor<T, K> DisableCoord()
+		{
+			((ITermsQuery)this).DisableCoord = true;
+			return this;
+		}
+
+		
 		public TermsQueryDescriptor<T, K> Terms(IEnumerable<string> terms)
 		{
 			if (terms.HasAny())
@@ -88,22 +101,7 @@ namespace Nest
 			((ITermsQuery)this).Terms = terms;
 			return this;
 		}
-		public TermsQueryDescriptor<T, K> DisableCoord()
-		{
-			((ITermsQuery)this).DisableCord = true;
-			return this;
-		}
-
-		public TermsQueryDescriptor<T, K> Terms(params string[] terms)
-		{
-			if (terms.HasAny())
-				terms = terms.Where(t => !t.IsNullOrEmpty()).ToArray();
-
-			((ITermsQuery)this).Terms = terms;
-			return this;
-		}	
-		
-		public TermsQueryDescriptor<T, K> Terms(params K[] terms)
+		public TermsQueryDescriptor<T, K> Terms(IEnumerable<K> terms)
 		{
 			if (terms.HasAny())
 				terms = terms.Where(t => t != null).ToArray();
@@ -112,32 +110,5 @@ namespace Nest
 			return this;
 		}
 
-		object ICustomJson.GetCustomJson()
-		{
-			var termsQueryDescriptor = new Dictionary<PropertyPathMarker, object>();
-
-			if (((ITermsQuery)this).ExternalField == null)
-			{
-				termsQueryDescriptor.Add(((ITermsQuery)this).Field, ((ITermsQuery)this).Terms);
-			}
-			else
-			{
-				termsQueryDescriptor.Add(((ITermsQuery)this).Field, ((ITermsQuery)this).ExternalField);
-			}
-
-			if (((ITermsQuery)this).MinMatch.HasValue)
-			{
-				termsQueryDescriptor.Add("minimum_match", ((ITermsQuery)this).MinMatch);
-			}
-			if (((ITermsQuery)this).DisableCord)
-			{
-				termsQueryDescriptor.Add("disable_coord", ((ITermsQuery)this).DisableCord);
-			}
-			if (!((ITermsQuery)this).CacheKey.IsNullOrEmpty())
-			{
-				termsQueryDescriptor.Add("_cache_key", ((ITermsQuery)this).CacheKey);
-			}
-			return termsQueryDescriptor;
-		}
 	}
 }

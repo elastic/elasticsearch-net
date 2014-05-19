@@ -45,6 +45,10 @@ namespace Nest
 			}
 		}
 
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			((IRegexpQuery)this).Field = fieldName;
+		}
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return ((IRegexpQuery)this).Field;

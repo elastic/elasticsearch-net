@@ -1,4 +1,5 @@
 using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Queries;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -26,12 +27,15 @@ namespace Nest
 		MatchAll MatchAll { get; set; }
 
 		[JsonProperty(PropertyName = "term")]
-		ITermQuery TermQueryDescriptor { get; set; }
+		[JsonConverter(typeof (FieldNameQueryConverter<TermQueryDescriptor<object>>))]
+		ITermQuery Term { get; set; }
 
 		[JsonProperty(PropertyName = "wildcard")]
+		[JsonConverter(typeof (FieldNameQueryConverter<WildcardQueryDescriptor<object>>))]
 		IWildcardQuery Wildcard { get; set; }
 
 		[JsonProperty(PropertyName = "prefix")]
+		[JsonConverter(typeof (FieldNameQueryConverter<PrefixQueryDescriptor<object>>))]
 		IPrefixQuery Prefix { get; set; }
 
 		[JsonProperty(PropertyName = "boosting")]
@@ -62,31 +66,30 @@ namespace Nest
 		IMultiMatchQuery MultiMatch { get; set; }
 
 		[JsonProperty(PropertyName = "match")]
-		[JsonConverter(typeof (FieldNameQueryConverter))]
+		[JsonConverter(typeof (FieldNameQueryConverter<MatchQueryDescriptor<object>>))]
 		IMatchQuery Match { get; set; }
 
-		[JsonConverter(typeof (FieldNameQueryConverter))]
 		[JsonProperty(PropertyName = "fuzzy")]
+		[JsonConverter(typeof(FuzzyQueryJsonConverter))]
 		IFuzzyQuery Fuzzy { get; set; }
 
 		[JsonProperty(PropertyName = "geo_shape")]
-		[JsonConverter(typeof (FieldNameQueryConverter))]
+		[JsonConverter(typeof (FieldNameQueryConverter<GeoShapeQueryDescriptor<object>>))]
 		IGeoShapeQuery GeoShape { get; set; }
 
 		[JsonProperty(PropertyName = "common_terms")]
-		[JsonConverter(typeof (FieldNameQueryConverter))]
+		[JsonConverter(typeof (FieldNameQueryConverter<CommonTermsQueryDescriptor<object>>))]
 		ICommonTermsQuery CommonTerms { get; set; }
 
 		[JsonProperty(PropertyName = "terms")]
-		[JsonConverter(typeof (CustomJsonConverter))]
 		ITermsQuery Terms { get; set; }
 
 		[JsonProperty(PropertyName = "range")]
-		[JsonConverter(typeof (FieldNameQueryConverter))]
+		[JsonConverter(typeof (FieldNameQueryConverter<RangeQueryDescriptor<object>>))]
 		IRangeQuery Range { get; set; }
 
 		[JsonProperty(PropertyName = "regexp")]
-		[JsonConverter(typeof (FieldNameQueryConverter))]
+		[JsonConverter(typeof (FieldNameQueryConverter<RegexpQueryDescriptor<object>>))]
 		IRegexpQuery Regexp { get; set; }
 
 		[JsonProperty(PropertyName = "has_child")]

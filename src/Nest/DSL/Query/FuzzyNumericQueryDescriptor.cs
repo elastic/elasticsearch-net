@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Configuration;
 using System.Text;
 using Nest.DSL.Query.Behaviour;
 using Newtonsoft.Json;
@@ -26,9 +27,15 @@ namespace Nest
 		
 		int? IFuzzyQuery.MaxExpansions { get; set; }
 		
-		object IFuzzyQuery.Fuzziness { get; set; }
+		string IFuzzyQuery.Fuzziness { get; set; }
 	
 		double? IFuzzyNumericQuery.Value { get; set; }
+
+		bool? IFuzzyQuery.Transpositions { get; set; }
+
+		bool? IFuzzyQuery.UnicodeAware { get; set; }
+
+		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
 
 		bool IQuery.IsConditionless
 		{
@@ -36,6 +43,10 @@ namespace Nest
 			{
 				return ((IFuzzyNumericQuery)this).Field.IsConditionless() || ((IFuzzyNumericQuery)this).Value == null;
 			}
+		}
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			((IFuzzyQuery)this).Field = fieldName;
 		}
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
@@ -59,7 +70,7 @@ namespace Nest
 		}
 		public FuzzyNumericQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
-			((IFuzzyQuery)this).Fuzziness = fuzziness;
+			((IFuzzyQuery)this).Fuzziness = fuzziness.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
 		public FuzzyNumericQueryDescriptor<T> Fuzziness(string fuzziness)
@@ -74,6 +85,21 @@ namespace Nest
 			return this;
 		}
 	
+		public FuzzyNumericQueryDescriptor<T> Transpositions(bool enable = true)
+		{
+			((IFuzzyQuery)this).Transpositions = enable;
+			return this;
+		}
+		public FuzzyNumericQueryDescriptor<T> UnicodeAware(bool enable = true)
+		{
+			((IFuzzyQuery)this).UnicodeAware = enable;
+			return this;
+		}
+		public FuzzyNumericQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
+		{
+			((IFuzzyQuery)this).Rewrite = rewrite;
+			return this;
+		}
 		public FuzzyNumericQueryDescriptor<T> Value(int? value)
 		{
 			((IFuzzyNumericQuery)this).Value = value;

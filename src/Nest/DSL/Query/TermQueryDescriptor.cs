@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
+using Nest.DSL.Query.Behaviour;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters.Queries;
 using Newtonsoft.Json.Serialization;
@@ -12,9 +13,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CompositeJsonConverter<TermQueryJsonReader, CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ITermQuery : IQuery
+	public interface ITermQuery : IFieldNameQuery
 	{
 		PropertyPathMarker Field { get; set; }
 		[JsonProperty("value")]
@@ -23,7 +23,7 @@ namespace Nest
 		double? Boost { get; set; }
 	}
 
-	public class TermQueryDescriptorBase<TDescriptor, T> : ITermQuery, ICustomJson
+	public class TermQueryDescriptorBase<TDescriptor, T> : ITermQuery
 		where TDescriptor : TermQueryDescriptorBase<TDescriptor, T>
 		where T : class
 	{
@@ -66,25 +66,18 @@ namespace Nest
 			return (TDescriptor)this;
 		}
 
-		object ICustomJson.GetCustomJson()
+		public PropertyPathMarker GetFieldName()
 		{
-			var tq = ((ITermQuery)this);
-			return new Dictionary<object, object>
-			{
-				{
-					tq.Field, new Dictionary<string, object>
-					{
-						{ "value", tq.Value },
-						{ "boost", tq.Boost },
-					}
-				}
-			};
+			return ((ITermQuery)this).Field;
+		}
+
+		public void SetFieldName(string fieldName)
+		{
+			((ITermQuery)this).Field = fieldName;
 		}
 	}
 
 
-	[JsonConverter(typeof(CustomJsonConverter))]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class TermQueryDescriptor<T> : TermQueryDescriptorBase<TermQueryDescriptor<T>, T>
 		where T : class
 	{

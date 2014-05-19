@@ -34,7 +34,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 					.Script(sc => sc
 						.Script("doc['num1'].value > param1")
 						.Params(p => p.Add("param1", 12))
-						.Lang(Lang.mvel)
+						.Lang("mvel")
 					)
 			);
 

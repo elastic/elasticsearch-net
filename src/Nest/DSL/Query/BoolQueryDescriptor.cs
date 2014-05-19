@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
@@ -41,7 +43,9 @@ namespace Nest
 		}
 	}
 
-
+	
+	[JsonConverter(typeof(ReadAsTypeConverter<BoolBaseQueryDescriptor>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IBoolQuery : IQuery
 	{
 		[JsonProperty("must")]
@@ -54,7 +58,7 @@ namespace Nest
 		IEnumerable<IQueryDescriptor> Should { get; set; }
 
 		[JsonProperty("minimum_number_should_match")]
-		object MinimumNumberShouldMatches { get; set; }
+		string MinimumNumberShouldMatches { get; set; }
 
 		[JsonProperty("disable_coord")]
 		bool? DisableCoord { get; set; }
@@ -76,7 +80,7 @@ namespace Nest
 		IEnumerable<IQueryDescriptor> IBoolQuery.Should { get; set; }
 
 		[JsonProperty("minimum_number_should_match")]
-		object IBoolQuery.MinimumNumberShouldMatches { get; set; }
+		string IBoolQuery.MinimumNumberShouldMatches { get; set; }
 		
 		[JsonProperty("disable_coord")]
 		bool? IBoolQuery.DisableCoord { get; set; }
@@ -102,14 +106,11 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class BoolQueryDescriptor<T> : BoolBaseQueryDescriptor where T : class
 	{
-
 		public BoolQueryDescriptor<T> DisableCoord()
 		{
 			((IBoolQuery)this).DisableCoord = true;
 			return this;
 		}
-
-		
 
 		/// <summary>
 		/// Specifies a minimum number of the optional BooleanClauses which must be satisfied.
@@ -118,7 +119,7 @@ namespace Nest
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> MinimumNumberShouldMatch(int minimumShouldMatches)
 		{
-			((IBoolQuery)this).MinimumNumberShouldMatches = minimumShouldMatches;
+			((IBoolQuery)this).MinimumNumberShouldMatches = minimumShouldMatches.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
 		/// <summary>

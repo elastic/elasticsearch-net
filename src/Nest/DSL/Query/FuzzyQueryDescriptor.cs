@@ -14,7 +14,7 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IFuzzyQuery : IFieldNameQuery
+	public interface IFuzzyQuery : IFieldNameQuery 
 	{
 		PropertyPathMarker Field { get; set; }
 
@@ -22,10 +22,19 @@ namespace Nest
 		double? Boost { get; set; }
 		
 		[JsonProperty(PropertyName = "fuzziness")]
-		object Fuzziness { get; set; }
+		string Fuzziness { get; set; }
+
+		[JsonProperty(PropertyName = "rewrite")]
+		RewriteMultiTerm? Rewrite { get; set; }
 
 		[JsonProperty(PropertyName = "max_expansions")]
 		int? MaxExpansions { get; set; }
+
+		[JsonProperty(PropertyName = "transpositions")]
+		bool? Transpositions { get; set; }
+
+		[JsonProperty(PropertyName = "unicode_aware")]
+		bool? UnicodeAware { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -45,13 +54,19 @@ namespace Nest
 		
 		double? IFuzzyQuery.Boost { get; set; }
 		
-		object IFuzzyQuery.Fuzziness { get; set; }
+		string IFuzzyQuery.Fuzziness { get; set; }
 		
 		string IStringFuzzyQuery.Value { get; set; }
 		
 		int? IStringFuzzyQuery.PrefixLength { get; set; }
 
 		int? IFuzzyQuery.MaxExpansions { get; set; }
+
+		bool? IFuzzyQuery.Transpositions { get; set; }
+
+		bool? IFuzzyQuery.UnicodeAware { get; set; }
+
+		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
 		
 		bool IQuery.IsConditionless
 		{
@@ -61,6 +76,10 @@ namespace Nest
 			}
 		}
 		
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			((IFuzzyQuery)this).Field = fieldName;
+		}
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return ((IFuzzyQuery)this).Field;
@@ -86,7 +105,7 @@ namespace Nest
 		
 		public FuzzyQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
-			((IFuzzyQuery)this).Fuzziness = fuzziness;
+			((IFuzzyQuery)this).Fuzziness = fuzziness.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
 		public FuzzyQueryDescriptor<T> Fuzziness(string fuzziness)
@@ -105,7 +124,24 @@ namespace Nest
 			((IStringFuzzyQuery)this).PrefixLength = prefixLength;
 			return this;
 		}
+
+		public FuzzyQueryDescriptor<T> Transpositions(bool enable = true)
+		{
+			((IFuzzyQuery)this).Transpositions = enable;
+			return this;
+		}
+
+		public FuzzyQueryDescriptor<T> UnicodeAware(bool enable = true)
+		{
+			((IFuzzyQuery)this).UnicodeAware = enable;
+			return this;
+		}
 		
+		public FuzzyQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
+		{
+			((IFuzzyQuery)this).Rewrite = rewrite;
+			return this;
+		}
 		public FuzzyQueryDescriptor<T> Value(string value)
 		{
 			((IStringFuzzyQuery)this).Value = value;

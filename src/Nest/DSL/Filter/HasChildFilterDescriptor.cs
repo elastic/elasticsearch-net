@@ -9,8 +9,8 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<HasChildFilterDescriptor<object>>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<HasChildFilterDescriptor<object>>))]
 	public interface IHasChildFilter : IFilterBase
 	{
 		[JsonProperty("type")]

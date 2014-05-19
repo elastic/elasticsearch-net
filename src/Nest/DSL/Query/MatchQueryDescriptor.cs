@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Nest.DSL.Query.Behaviour;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
@@ -12,6 +13,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<MatchQueryDescriptor<object>>))]
 	public interface IMatchQuery : IFieldNameQuery 
 	{
 		[JsonProperty(PropertyName = "type")]
@@ -92,6 +94,10 @@ namespace Nest
 			{
 				return ((IMatchQuery)this).Field.IsConditionless() || ((IMatchQuery)this).Query.IsNullOrEmpty();
 			}
+		}
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			((IMatchQuery)this).Field = fieldName;
 		}
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{

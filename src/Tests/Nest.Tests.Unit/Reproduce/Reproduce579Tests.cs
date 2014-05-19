@@ -38,7 +38,7 @@ namespace Nest.Tests.Unit.Reproduce
 		{
 			return filter.Bool(c => c
 				.Should(
-					s => s.Terms(p => p.AssignedUsers, usersToSearch),
+					s => s.Terms(p => p.AssignedUsers.First(), usersToSearch),
 					s => s.Term(p => p.OverrideUsers, CurrentUserId),	
 					s => s.Term(p => p.Unassigned, "true"),
 					s => s.Term(p => p.Global, "true")

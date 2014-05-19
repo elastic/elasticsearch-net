@@ -16,15 +16,14 @@ namespace Nest
 	public interface IScriptFilter : IFilterBase
 	{
 		[JsonProperty(PropertyName = "script")]
-		string _Script { get; set; }
+		string Script { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		Dictionary<string, object> _Params { get; set; }
+		Dictionary<string, object> Params { get; set; }
 
 		[JsonProperty(PropertyName = "lang")]
-		[JsonConverter(typeof (StringEnumConverter))]
-		Lang? _Lang { get; set; }
+		string Lang { get; set; }
 	}
 
 	/// <summary>
@@ -33,17 +32,17 @@ namespace Nest
 	/// </summary>
 	public class ScriptFilterDescriptor : FilterBase, IScriptFilter
 	{
-		string IScriptFilter._Script { get; set; }
+		string IScriptFilter.Script { get; set; }
 
-		Dictionary<string, object> IScriptFilter._Params { get; set; }
+		Dictionary<string, object> IScriptFilter.Params { get; set; }
 
-		Lang? IScriptFilter._Lang { get; set; }
+		string IScriptFilter.Lang { get; set; }
 
 		bool IFilterBase.IsConditionless
 		{
 			get
 			{
-				return ((IScriptFilter)this)._Script.IsNullOrEmpty();
+				return ((IScriptFilter)this).Script.IsNullOrEmpty();
 			}
 		}
 
@@ -54,7 +53,7 @@ namespace Nest
 		/// <returns>this</returns>
 		public ScriptFilterDescriptor Script(string script)
 		{
-			((IScriptFilter)this)._Script = script;
+			((IScriptFilter)this).Script = script;
 			return this;
 		}
 
@@ -71,7 +70,7 @@ namespace Nest
 		public ScriptFilterDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
-			((IScriptFilter)this)._Params = paramDictionary(new FluentDictionary<string, object>());
+			((IScriptFilter)this).Params = paramDictionary(new FluentDictionary<string, object>());
 			return this;
 		}
 
@@ -80,10 +79,10 @@ namespace Nest
 		/// </summary>
 		/// <param name="lang">language</param>
 		/// <returns>this</returns>
-		public ScriptFilterDescriptor Lang(Lang lang)
+		public ScriptFilterDescriptor Lang(string lang)
 		{
 			lang.ThrowIfNull("lang");
-			((IScriptFilter)this)._Lang = lang;
+			((IScriptFilter)this).Lang = lang;
 			return this;
 		}
 	}

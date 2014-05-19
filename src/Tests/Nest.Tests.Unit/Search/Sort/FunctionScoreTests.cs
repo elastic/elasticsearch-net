@@ -58,7 +58,7 @@ namespace Nest.Tests.Unit.Search.Sort
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Query(q => q.FunctionScore(
-						fs => fs.ScriptScore(ss => ss.Script("_score / pow(param1, param2)").Params(p => p.Add("param1", 1.75).Add("param2", 4)).Lang(Lang.mvel)
+						fs => fs.ScriptScore(ss => ss.Script("_score / pow(param1, param2)").Params(p => p.Add("param1", 1.75).Add("param2", 4)).Lang("mvel")
 						)
 					)
 				);
@@ -94,7 +94,7 @@ namespace Nest.Tests.Unit.Search.Sort
 									.Add("param1", 1.75)
 									.Add("param2", 4)
 								)
-								.Lang(Lang.mvel)
+								.Lang("mvel")
 							).Filter(filter => filter
 								.Term("term1", "termValue")
 							)

@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Query.Behaviour;
+using Nest.Resolvers;
 using Newtonsoft.Json;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	public interface IWildcardQuery : ITermQuery
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IWildcardQuery : ITermQuery, IFieldNameQuery
 	{
 		[JsonProperty(PropertyName = "rewrite")]
 		[JsonConverter(typeof (StringEnumConverter))]
 		RewriteMultiTerm? Rewrite { get; set; }
 	}
 
-	[JsonConverter(typeof(CustomJsonConverter))]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class WildcardQueryDescriptor<T> : TermQueryDescriptorBase<WildcardQueryDescriptor<T>, T>, ICustomJson, IWildcardQuery 
+	public class WildcardQueryDescriptor<T> : 
+		TermQueryDescriptorBase<WildcardQueryDescriptor<T>, T>, 
+		IWildcardQuery 
 		where T : class
 	{
 		RewriteMultiTerm? IWildcardQuery.Rewrite { get; set; }
@@ -28,20 +31,14 @@ namespace Nest
 			return this;
 		}
 
-		object ICustomJson.GetCustomJson()
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
-			var wq = ((IWildcardQuery)this);
-			return new Dictionary<object, object>
-			{
-				{
-					wq.Field, new Dictionary<string, object>
-					{
-						{ "value", wq.Value },
-						{ "boost", wq.Boost },
-						{ "rewrite", wq.Rewrite },
-					}
-				}
-			};
+			return ((IWildcardQuery)this).Field;
+		}
+
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			((IWildcardQuery)this).Field = fieldName;
 		}
 	}
 }

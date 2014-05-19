@@ -41,7 +41,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(q => q
 					.QueryString(qs => qs
-						.OnField(f=>f.Name)
+						.DefaultField(f=>f.Name)
 						.Query("this that thus")
 						.DefaultOperator(Operator.and)
 						.Analyzer("my_analyzer")

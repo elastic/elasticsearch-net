@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
@@ -11,6 +12,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<FuzzyLikeThisQueryDescriptor<object>>))]
 	public interface IFuzzyLikeThisQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "fields")]
@@ -81,7 +83,7 @@ namespace Nest
 			((IFuzzyLikeThisQuery)this).LikeText = likeText;
 			return this;
 		}
-		public FuzzyLikeThisQueryDescriptor<T> IgnoreTermFrequency(bool ignore)
+		public FuzzyLikeThisQueryDescriptor<T> IgnoreTermFrequency(bool ignore = true)
 		{
 			((IFuzzyLikeThisQuery)this).IgnoreTermFrequency = ignore;
 			return this;

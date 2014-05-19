@@ -1,7 +1,10 @@
 ﻿using Nest.Resolvers;
+using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeConverter<ExternalFieldDeclarationDescriptor<object>>))]
 	public interface IExternalFieldDeclarationDescriptor
 	{
 		IndexNameMarker _Index { get; set; }

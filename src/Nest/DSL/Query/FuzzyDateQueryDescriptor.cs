@@ -26,9 +26,15 @@ namespace Nest
 		
 		int? IFuzzyQuery.MaxExpansions { get; set; }
 		
-		object IFuzzyQuery.Fuzziness { get; set; }
+		string IFuzzyQuery.Fuzziness { get; set; }
 		
 		DateTime? IFuzzyDateQuery.Value { get; set; }
+
+		bool? IFuzzyQuery.Transpositions { get; set; }
+
+		bool? IFuzzyQuery.UnicodeAware { get; set; }
+
+		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
 
 		bool IQuery.IsConditionless
 		{
@@ -36,6 +42,10 @@ namespace Nest
 			{
 				return ((IFuzzyDateQuery)this).Field.IsConditionless() || ((IFuzzyDateQuery)this).Value == null;
 			}
+		}
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			((IFuzzyQuery)this).Field = fieldName;
 		}
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
@@ -60,7 +70,7 @@ namespace Nest
 			
 		public FuzzyDateQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
-			((IFuzzyQuery)this).Fuzziness = fuzziness;
+			((IFuzzyQuery)this).Fuzziness = fuzziness.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> Fuzziness(string fuzziness)
@@ -68,12 +78,29 @@ namespace Nest
 			((IFuzzyQuery)this).Fuzziness = fuzziness;
 			return this;
 		}
+		public FuzzyDateQueryDescriptor<T> Transpositions(bool enable = true)
+		{
+			((IFuzzyQuery)this).Transpositions = enable;
+			return this;
+		}
+		public FuzzyDateQueryDescriptor<T> UnicodeAware(bool enable = true)
+		{
+			((IFuzzyQuery)this).UnicodeAware = enable;
+			return this;
+		}
 		
+		public FuzzyDateQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
+		{
+			((IFuzzyQuery)this).Rewrite = rewrite;
+			return this;
+		}
+
 		public FuzzyDateQueryDescriptor<T> MaxExpansions(int maxExpansions)
 		{
 			((IFuzzyQuery)this).MaxExpansions = maxExpansions;
 			return this;
 		}
+
 		public FuzzyDateQueryDescriptor<T> Value(DateTime? value)
 		{
 			((IFuzzyDateQuery)this).Value = value;

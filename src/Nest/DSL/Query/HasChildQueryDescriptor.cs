@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Nest.Resolvers;
@@ -10,6 +11,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<HasChildQueryDescriptor<object>>))]
 	public interface IHasChildQuery : IQuery
 	{
 		[JsonProperty("type")]
@@ -23,7 +25,7 @@ namespace Nest
 		ChildScoreType? ScoreType { get; set; }
 
 		[JsonProperty("query")]
-		IQueryDescriptor QueryDescriptor { get; set; }
+		IQueryDescriptor Query { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -35,13 +37,13 @@ namespace Nest
 
 		ChildScoreType? IHasChildQuery.ScoreType { get; set; }
 
-		IQueryDescriptor IHasChildQuery.QueryDescriptor { get; set; }
+		IQueryDescriptor IHasChildQuery.Query { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((IHasChildQuery)this).QueryDescriptor == null || ((IHasChildQuery)this).QueryDescriptor.IsConditionless;
+				return ((IHasChildQuery)this).Query == null || ((IHasChildQuery)this).Query.IsConditionless;
 			}
 		}
 
@@ -54,7 +56,7 @@ namespace Nest
 		public HasChildQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			((IHasChildQuery)this).QueryDescriptor = querySelector(q);
+			((IHasChildQuery)this).Query = querySelector(q);
 			return this;
 		}
 		public HasChildQueryDescriptor<T> Scope(string scope)

@@ -46,13 +46,7 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			AssertIsTermFilter(this.Filter2, andFilter.Filters.Last().Term);
 		}
 
-		private static void AssertIsTermFilter(BaseFilterDescriptor compareTo, ITermFilter firstTermFilter)
-		{
-			var c = (IFilterDescriptor)compareTo;
-			firstTermFilter.Should().NotBeNull();
-			firstTermFilter.Field.Should().Be(c.Term.Field);
-			firstTermFilter.Value.Should().Be(c.Term.Value);
-		}
+		
 
 		[Test]
 		[TestCase("cacheName", "cacheKey", true)]
@@ -263,7 +257,7 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			hasChildFilter._Scope.Should().Be("my_scope");
 			var query = hasChildFilter._QueryDescriptor;
 			query.Should().NotBeNull();
-			query.TermQueryDescriptor.Field.Should().Be("firstName");
+			query.Term.Field.Should().Be("firstName");
 		}
 		
 		[Test]
@@ -280,7 +274,7 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			hasParentFilter.Scope.Should().Be("my_scope");
 			var query = hasParentFilter.Query;
 			query.Should().NotBeNull();
-			query.TermQueryDescriptor.Field.Should().Be("country");
+			query.Term.Field.Should().Be("country");
 		}
 		
 		[Test]
@@ -347,7 +341,7 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			nestedFilter.Score.Should().Be(NestedScore.max);
 			var query = nestedFilter.Query;
 			query.Should().NotBeNull();
-			var termQuery = query.TermQueryDescriptor;
+			var termQuery = query.Term;
 			termQuery.Field.Should().Be("followers.firstName");
 			termQuery.Value.Should().Be("elasticsearch.pm");
 		}
@@ -497,12 +491,12 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 				f=>f.Script(sc => sc
 						.Script("doc['num1'].value > param1")
 						.Params(p => p.Add("param1", 12))
-						.Lang(Lang.mvel)
+						.Lang("mvel")
 					)
 			);
-			scriptFilter._Script.Should().Be("doc['num1'].value > param1");
-			scriptFilter._Params.Should().NotBeEmpty().And.HaveCount(1);
-			var keyValuePair = scriptFilter._Params.First();
+			scriptFilter.Script.Should().Be("doc['num1'].value > param1");
+			scriptFilter.Params.Should().NotBeEmpty().And.HaveCount(1);
+			var keyValuePair = scriptFilter.Params.First();
 			keyValuePair.Key.Should().Be("param1");
 		}
 		

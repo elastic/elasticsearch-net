@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+
+	//todo interface!
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class MatchAll : IQuery
 	{

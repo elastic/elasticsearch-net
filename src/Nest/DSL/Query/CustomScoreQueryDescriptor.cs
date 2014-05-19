@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using Elasticsearch.Net;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<CustomScoreQueryDescriptor<object>>))]
 	public interface ICustomScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "lang")]

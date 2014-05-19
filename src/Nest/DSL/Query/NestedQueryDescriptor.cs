@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
@@ -10,19 +11,21 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<NestedQueryDescriptor<object>>))]
 	public interface INestedQuery : IQuery
 	{
 		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
 		NestedScore? Score { get; set; }
 
 		[JsonProperty("query")]
-		IQueryDescriptor QueryDescriptor { get; set; }
+		IQueryDescriptor Query { get; set; }
 
 		[JsonProperty("path")]
 		PropertyPathMarker Path { get; set; }
 
 		[JsonProperty("_scope")]
 		string Scope { get; set; }
+
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -30,7 +33,7 @@ namespace Nest
 	{
 		NestedScore? INestedQuery.Score { get; set; }
 
-		IQueryDescriptor INestedQuery.QueryDescriptor { get; set; }
+		IQueryDescriptor INestedQuery.Query { get; set; }
 
 		PropertyPathMarker INestedQuery.Path { get; set; }
 
@@ -40,14 +43,14 @@ namespace Nest
 		{
 			get
 			{
-				return ((INestedQuery)this).QueryDescriptor == null || ((INestedQuery)this).QueryDescriptor.IsConditionless;
+				return ((INestedQuery)this).Query == null || ((INestedQuery)this).Query.IsConditionless;
 			}
 		}
 
 		public NestedQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			((INestedQuery)this).QueryDescriptor = querySelector(q);
+			((INestedQuery)this).Query = querySelector(q);
 			return this;
 		}
 
