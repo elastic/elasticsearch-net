@@ -212,8 +212,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			  .FacetDateHistogram("CreateDate2", fd => fd.OnField("CreateDate2").Interval(DateInterval.Hour))
 			  .Query(query => query.Range(r => r
 				  .OnField("CreateDate2")
-				  .From(DateTime.UtcNow.AddYears(-1))
-
+				  .Greater(DateTime.UtcNow.AddYears(-1))
 				)
 			  )
 			);

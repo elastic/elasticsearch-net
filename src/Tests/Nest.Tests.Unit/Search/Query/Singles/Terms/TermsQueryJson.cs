@@ -67,8 +67,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Terms
 				query : {
 						terms: {
 							""name"": [""elasticsearch.pm"", ""nest""],
-							minimum_match: 2,
-							disable_coord : true
+							disable_coord : true,
+							minimum_should_match: 2
 						}
 					}
 			}";

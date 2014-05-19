@@ -30,6 +30,20 @@ namespace Nest.Resolvers.Converters.Queries
 
 			writer.WriteStartObject();
 			{
+				if (t.Terms.HasAny())
+				{
+					writer.WritePropertyName(field);
+					serializer.Serialize(writer, t.Terms);
+					//writer.WriteStartArray();
+					//foreach(var term in t.Terms)
+					//	writer.WriteValue(term);
+					//writer.WriteEndArray();
+				}
+				else if (t.ExternalField != null)
+				{
+					writer.WritePropertyName(field);
+					serializer.Serialize(writer, t.ExternalField);
+				}
 				if (t.DisableCoord.HasValue)
 				{
 					writer.WritePropertyName("disable_coord");
@@ -45,20 +59,7 @@ namespace Nest.Resolvers.Converters.Queries
 					writer.WritePropertyName("boost");
 					writer.WriteValue(t.Boost.Value);
 				}
-				if (t.Terms.HasAny())
-				{
-					writer.WritePropertyName(field);
-					serializer.Serialize(writer, t.Terms);
-					//writer.WriteStartArray();
-					//foreach(var term in t.Terms)
-					//	writer.WriteValue(term);
-					//writer.WriteEndArray();
-				}
-				else if (t.ExternalField != null)
-				{
-					writer.WritePropertyName(field);
-					serializer.Serialize(writer, t.ExternalField);
-				}
+				
 			}
 			writer.WriteEndObject();
 		}
@@ -81,7 +82,7 @@ namespace Nest.Resolvers.Converters.Queries
 						break;
 					case "minimum_should_match":
 						reader.Read();
-						f.MinimumShouldMatch = reader.Value as double?;
+						f.MinimumShouldMatch = reader.Value as int?;
 						break;
 					case "boost":
 						reader.Read();

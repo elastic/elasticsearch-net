@@ -17,7 +17,7 @@ namespace Nest
 	public interface ITermsQuery : IQuery
 	{
 		PropertyPathMarker Field { get; set; }
-		double? MinimumShouldMatch { get; set; }
+		int? MinimumShouldMatch { get; set; }
 		bool? DisableCoord { get; set; }
 		IEnumerable<object> Terms { get; set; }
 		IExternalFieldDeclarationDescriptor ExternalField { get; set; }
@@ -33,7 +33,7 @@ namespace Nest
 	public class TermsQueryDescriptor<T, K> : ITermsQuery where T : class
 	{
 		PropertyPathMarker ITermsQuery.Field { get; set; }
-		double? ITermsQuery.MinimumShouldMatch { get; set; }
+		int? ITermsQuery.MinimumShouldMatch { get; set; }
 		bool? ITermsQuery.DisableCoord { get; set; }
 		IEnumerable<object> ITermsQuery.Terms { get; set; }
 		IExternalFieldDeclarationDescriptor ITermsQuery.ExternalField { get; set; }

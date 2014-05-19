@@ -5,7 +5,6 @@
     "common_terms": {
       "content": {
         "query": "This is the most awful stopwords query ever",
-        "field": "content",
         "cutoff_frequency": 0.01,
         "low_freq_operator": "or",
         "high_freq_operator": "and",

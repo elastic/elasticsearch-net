@@ -9,9 +9,8 @@
         "id": "4",
         "path": "id"
       },
-      "minimum_match": 2,
       "disable_coord": true,
-      "_cache_key": "user_4_key"
+      "minimum_should_match": 2
     }
   }
 }
