@@ -17,6 +17,10 @@ namespace Nest
 		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
 		NestedScore? Score { get; set; }
 
+		[JsonProperty("filter")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterDescriptorDescriptor<object>>, CustomJsonConverter>))]
+		IFilterDescriptor Filter { get; set; }
+
 		[JsonProperty("query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryDescriptor Query { get; set; }
@@ -31,6 +35,8 @@ namespace Nest
 	public class NestedFilterDescriptor<T> : FilterBase, INestedFilterDescriptor where T : class
 	{
 		NestedScore? INestedFilterDescriptor.Score { get; set; }
+
+		IFilterDescriptor INestedFilterDescriptor.Filter { get; set; }
 
 		IQueryDescriptor INestedFilterDescriptor.Query { get; set; }
 
@@ -47,6 +53,12 @@ namespace Nest
 			}
 		}
 
+		public NestedFilterDescriptor<T> Filter(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> filterSelector)
+		{
+			var q = new FilterDescriptorDescriptor<T>();
+			((INestedFilterDescriptor)this).Filter = filterSelector(q);
+			return this;
+		}
 		public NestedFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var q = new QueryDescriptor<T>();

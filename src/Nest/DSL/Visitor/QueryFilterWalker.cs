@@ -165,6 +165,7 @@ namespace Nest.DSL.Visitor
 				visitor.Visit((IQuery)qd.Nested);
 				visitor.Visit(qd.Nested);
 				this.Accept(visitor, qd.Nested.Query);
+				this.Accept(visitor, qd.Nested.Filter);
 			}
 			if (qd.Prefix != null)
 			{
@@ -244,7 +245,6 @@ namespace Nest.DSL.Visitor
 			}
 		}
 
-
 		public void Walk(IFilterDescriptor fd, IQueryVisitor visitor)
 		{
 			visitor.Visit(fd);
@@ -252,11 +252,15 @@ namespace Nest.DSL.Visitor
 			{
 				visitor.Visit((IFilterBase)fd.And);
 				visitor.Visit(fd.And);
+				this.Accept(visitor, fd.And.Filters);
 			}
 			if (fd.Bool != null)
 			{
 				visitor.Visit((IFilterBase)fd.Bool);
 				visitor.Visit(fd.Bool);
+				this.Accept(visitor, fd.Bool.Must);
+				this.Accept(visitor, fd.Bool.MustNot);
+				this.Accept(visitor, fd.Bool.Should);
 			}
 			if (fd.Exists != null)
 			{
@@ -292,11 +296,13 @@ namespace Nest.DSL.Visitor
 			{
 				visitor.Visit((IFilterBase)fd.HasChild);
 				visitor.Visit(fd.HasChild);
+				this.Accept(visitor, fd.HasChild.Query);
 			}
 			if (fd.HasParent != null)
 			{
 				visitor.Visit((IFilterBase)fd.HasParent);
 				visitor.Visit(fd.HasParent);
+				this.Accept(visitor, fd.HasParent.Query);
 			}
 			if (fd.Ids != null)
 			{
@@ -322,16 +328,20 @@ namespace Nest.DSL.Visitor
 			{
 				visitor.Visit((IFilterBase)fd.Nested);
 				visitor.Visit(fd.Nested);
+				this.Accept(visitor, fd.Nested.Query);
+				this.Accept(visitor, fd.Nested.Filter);
 			}
 			if (fd.Not != null)
 			{
 				visitor.Visit((IFilterBase)fd.Not);
 				visitor.Visit(fd.Not);
+				this.Accept(visitor, fd.Not.Filter);
 			}
 			if (fd.Or != null)
 			{
 				visitor.Visit((IFilterBase)fd.Or);
 				visitor.Visit(fd.Or);
+				this.Accept(visitor, fd.Or.Filters);
 			}
 			if (fd.Prefix != null)
 			{
@@ -342,6 +352,7 @@ namespace Nest.DSL.Visitor
 			{
 				visitor.Visit((IFilterBase)fd.Query);
 				visitor.Visit(fd.Query);
+				this.Accept(visitor, fd.Query.Query);
 			}
 			if (fd.Range != null)
 			{
@@ -377,7 +388,6 @@ namespace Nest.DSL.Visitor
 				visitor.Visit((IFilterBase)fd.Type);
 				visitor.Visit(fd.Type);
 			}
-			throw new NotImplementedException();
 		}
 	}
 }
