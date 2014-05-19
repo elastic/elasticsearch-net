@@ -19,8 +19,8 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 					)
 				);
 
-			hasChildFilter._Scope.Should().Be("my_scope");
-			var query = hasChildFilter._QueryDescriptor;
+			hasChildFilter.Scope.Should().Be("my_scope");
+			var query = hasChildFilter.Query;
 			query.Should().NotBeNull();
 			query.Term.Field.Should().Be("firstName");
 		}
