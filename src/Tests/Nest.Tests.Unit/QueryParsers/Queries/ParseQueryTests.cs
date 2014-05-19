@@ -41,12 +41,12 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.MustNot(Query3)
 					.Boost(1.1)
 					.DisableCoord()
-					.MinimumNumberShouldMatch(2)
+					.MinimumShouldMatch(2)
 				)
 			);
 			q.Boost.Should().Be(1.1);
 			q.DisableCoord.Should().BeTrue();
-			q.MinimumNumberShouldMatches.Should().Be("2");
+			q.MinimumShouldMatch.Should().Be("2");
 			q.Must.Should().NotBeEmpty().And.HaveCount(1);
 			q.Should.Should().NotBeEmpty().And.HaveCount(1);
 			q.MustNot.Should().NotBeEmpty().And.HaveCount(1);
@@ -85,7 +85,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.DisableCoord()
 					.HighFrequencyOperator(Operator.or)
 					.LowFrequencyOperator(Operator.and)
-					.MinumumShouldMatch(2)
+					.MinimumShouldMatch(2)
 					.OnField(p=>p.Name)
 					.Query("query")
 				)
@@ -96,7 +96,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.DisableCoord.Should().BeTrue();
 			q.HighFrequencyOperator.Should().Be(Operator.or);
 			q.LowFrequencyOperator.Should().Be(Operator.and);
-			q.MinimumShouldMatch.Should().Be(2);
+			q.MinimumShouldMatch.Should().Be("2");
 			q.Field.Should().Be("name");
 			q.Query.Should().Be("query");
 		}
@@ -921,7 +921,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Boost.Should().Be(1.2);
 			q.Field.Should().Be("name");
 			q.DisableCoord.Should().BeTrue();
-			q.MinimumShouldMatch.Should().Be(2);
+			q.MinimumShouldMatch.Should().Be("2");
 			q.ExternalField.Should().NotBeNull();
 			q.ExternalField._Id.Should().Be("1");
 			q.ExternalField._Index.Should().Be("index");

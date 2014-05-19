@@ -44,7 +44,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				prefix_length: 2,
 				value : ""elasticsearcc"", 
 				boost: 2.0,
-				fuzziness: 0.6
+				fuzziness: ""0.6""
 			}}}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}

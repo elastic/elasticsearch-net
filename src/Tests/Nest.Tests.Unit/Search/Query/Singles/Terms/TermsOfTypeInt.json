@@ -5,7 +5,7 @@
     "terms": {
       "loc":[1,2,3,4],
       "disable_coord": true,
-      "minimum_should_match": 2
+      "minimum_should_match": "2"
     }
   }
 }

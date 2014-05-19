@@ -32,7 +32,10 @@ namespace Nest
 	{
 		NestedScore? IIndicesQuery.Score { get; set; }
 
-		IQueryDescriptor IIndicesQuery.Query { get; set; }
+		[JsonProperty(PropertyName = "query")]
+		[JsonConverter(typeof(CustomJsonConverter))]
+		BaseQuery _Query { get; set;}
+		IQueryDescriptor IIndicesQuery.Query { get { return this._Query; } set { this._Query = value as BaseQuery;  } }
 
 		IQueryDescriptor IIndicesQuery.NoMatchQuery { get; set; }
 
@@ -46,7 +49,6 @@ namespace Nest
 			}
 		}
 
-
 		public IndicesQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var qd = new QueryDescriptor<T>();
@@ -59,6 +61,7 @@ namespace Nest
 			((IIndicesQuery)this).Query = d.Descriptor;
 			return this;
 		}
+
 		public IndicesQueryDescriptor<T> Query<K>(Func<QueryDescriptor<K>, BaseQuery> querySelector) where K : class
 		{
 			var qd = new QueryDescriptor<K>();

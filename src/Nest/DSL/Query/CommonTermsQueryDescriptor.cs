@@ -33,7 +33,7 @@ namespace Nest
 		Operator? HighFrequencyOperator { get; set; }
 
 		[JsonProperty(PropertyName = "minimum_should_match")]
-		int? MinimumShouldMatch { get; set; }
+		string MinimumShouldMatch { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
 		double? Boost { get; set; }
@@ -58,7 +58,7 @@ namespace Nest
 		
 		Operator? ICommonTermsQuery.HighFrequencyOperator { get; set; }
 
-		int? ICommonTermsQuery.MinimumShouldMatch { get; set; }
+		string ICommonTermsQuery.MinimumShouldMatch { get; set; }
 		
 		double? ICommonTermsQuery.Boost { get; set; }
 		
@@ -119,9 +119,14 @@ namespace Nest
 			((ICommonTermsQuery)this).CutoffFrequency = cutOffFrequency;
 			return this;
 		}
-		public CommonTermsQueryDescriptor<T> MinumumShouldMatch(int minimumShouldMatch)
+		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch)
 		{
 			((ICommonTermsQuery)this).MinimumShouldMatch = minimumShouldMatch;
+			return this;
+		}
+		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatch)
+		{
+			((ICommonTermsQuery)this).MinimumShouldMatch = minimumShouldMatch.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> Boost(double boost)

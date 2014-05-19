@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.Reproduce
 					s => s.Term(p => p.Unassigned, "true"),
 					s => s.Term(p => p.Global, "true")
 				)
-				.MinimumNumberShouldMatch(1)
+				.MinimumShouldMatch(1)
 			);
 		}
 

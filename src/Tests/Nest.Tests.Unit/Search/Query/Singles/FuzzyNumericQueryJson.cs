@@ -21,7 +21,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
-			{ fuzzy: { loc : { value : 200.0, fuzziness: 12.0 } }}}";
+			{ fuzzy: { loc : { value : 200.0, fuzziness: ""12"" } }}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
 		[Test]
@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			{ fuzzy: { loc : { 
 				value : 200.0, 
 				boost: 2.0,
-				fuzziness: 0.6
+				fuzziness: ""0.6""
 			}}}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}

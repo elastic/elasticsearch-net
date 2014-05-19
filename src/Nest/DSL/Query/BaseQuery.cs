@@ -164,8 +164,8 @@ namespace Nest
 			((IBoolQuery)fq).Should = new[] { leftQuery, rightQuery };
 			((IQueryDescriptor)f).Bool = fq;
 
-			var mergeLeft = !((IQueryDescriptor)leftQuery).IsStrict && (leftBoolQuery == null || ((IBoolQuery)leftBoolQuery).MinimumNumberShouldMatches == null);
-			var mergeRight = !((IQueryDescriptor)rightQuery).IsStrict && (rightBoolQuery == null || ((IBoolQuery)rightBoolQuery).MinimumNumberShouldMatches == null);
+			var mergeLeft = !((IQueryDescriptor)leftQuery).IsStrict && (leftBoolQuery == null || ((IBoolQuery)leftBoolQuery).MinimumShouldMatch == null);
+			var mergeRight = !((IQueryDescriptor)rightQuery).IsStrict && (rightBoolQuery == null || ((IBoolQuery)rightBoolQuery).MinimumShouldMatch == null);
 
 			//if neither the left nor the right side represent a bool query join them
 			if (((IQueryDescriptor)leftQuery).Bool == null && ((IQueryDescriptor)rightQuery).Bool == null)
@@ -245,8 +245,8 @@ namespace Nest
 			//  or if all boolqueries are strict.
 			//  or if one side is strict and the other is null
 
-			var mergeLeft = !((IQueryDescriptor)leftQuery).IsStrict && (leftBoolQuery == null || ((IBoolQuery)leftBoolQuery).MinimumNumberShouldMatches == null);
-			var mergeRight = !((IQueryDescriptor)rightQuery).IsStrict && (rightBoolQuery == null || ((IBoolQuery)rightBoolQuery).MinimumNumberShouldMatches == null);
+			var mergeLeft = !((IQueryDescriptor)leftQuery).IsStrict && (leftBoolQuery == null || ((IBoolQuery)leftBoolQuery).MinimumShouldMatch == null);
+			var mergeRight = !((IQueryDescriptor)rightQuery).IsStrict && (rightBoolQuery == null || ((IBoolQuery)rightBoolQuery).MinimumShouldMatch == null);
 
 			//no merging is needed just return the combination
 			if (

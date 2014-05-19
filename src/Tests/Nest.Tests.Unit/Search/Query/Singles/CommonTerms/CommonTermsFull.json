@@ -8,7 +8,7 @@
         "cutoff_frequency": 0.01,
         "low_freq_operator": "or",
         "high_freq_operator": "and",
-        "minimum_should_match": 1,
+        "minimum_should_match": "1",
         "boost": 1.2,
         "analyzer": "myAnalyzer",
         "disable_coord": false

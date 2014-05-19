@@ -49,10 +49,10 @@ namespace Nest.Resolvers.Converters.Queries
 					writer.WritePropertyName("disable_coord");
 					writer.WriteValue(t.DisableCoord.Value);
 				}
-				if (t.MinimumShouldMatch.HasValue)
+				if (!t.MinimumShouldMatch.IsNullOrEmpty())
 				{
 					writer.WritePropertyName("minimum_should_match");
-					writer.WriteValue(t.MinimumShouldMatch.Value);
+					writer.WriteValue(t.MinimumShouldMatch);
 				}
 				if (t.Boost.HasValue)
 				{
@@ -81,8 +81,7 @@ namespace Nest.Resolvers.Converters.Queries
 						f.DisableCoord = reader.Value as bool?;
 						break;
 					case "minimum_should_match":
-						reader.Read();
-						f.MinimumShouldMatch = reader.Value as int?;
+						f.MinimumShouldMatch = reader.ReadAsString();	
 						break;
 					case "boost":
 						reader.Read();

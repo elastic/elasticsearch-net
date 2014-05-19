@@ -57,8 +57,8 @@ namespace Nest
 		[JsonProperty("should")]
 		IEnumerable<IQueryDescriptor> Should { get; set; }
 
-		[JsonProperty("minimum_number_should_match")]
-		string MinimumNumberShouldMatches { get; set; }
+		[JsonProperty("minimum_should_match")]
+		string MinimumShouldMatch { get; set; }
 
 		[JsonProperty("disable_coord")]
 		bool? DisableCoord { get; set; }
@@ -79,8 +79,8 @@ namespace Nest
 		[JsonProperty("should")]
 		IEnumerable<IQueryDescriptor> IBoolQuery.Should { get; set; }
 
-		[JsonProperty("minimum_number_should_match")]
-		string IBoolQuery.MinimumNumberShouldMatches { get; set; }
+		[JsonProperty("minimum_should_match")]
+		string IBoolQuery.MinimumShouldMatch { get; set; }
 		
 		[JsonProperty("disable_coord")]
 		bool? IBoolQuery.DisableCoord { get; set; }
@@ -117,9 +117,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="minimumShouldMatches"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> MinimumNumberShouldMatch(int minimumShouldMatches)
+		public BoolQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatches)
 		{
-			((IBoolQuery)this).MinimumNumberShouldMatches = minimumShouldMatches.ToString(CultureInfo.InvariantCulture);
+			((IBoolQuery)this).MinimumShouldMatch = minimumShouldMatches.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
 		/// <summary>
@@ -127,9 +127,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="minimumShouldMatches"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> MinimumNumberShouldMatch(string minimumShouldMatches)
+		public BoolQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatches)
 		{
-			((IBoolQuery)this).MinimumNumberShouldMatches = minimumShouldMatches;
+			((IBoolQuery)this).MinimumShouldMatch = minimumShouldMatches;
 			return this;
 		}
 
@@ -178,7 +178,8 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document. The minimum number of should clauses to match can be set using minimum_number_should_match parameter.
+		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document. 
+		/// The minimum number of should clauses to match can be set using minimum_should_match parameter.
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
@@ -197,7 +198,8 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document. The minimum number of should clauses to match can be set using minimum_number_should_match parameter.
+		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document.
+		///  The minimum number of should clauses to match can be set using minimum_should_match parameter.
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>

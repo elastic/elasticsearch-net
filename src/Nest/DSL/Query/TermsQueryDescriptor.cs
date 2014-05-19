@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
@@ -17,7 +18,7 @@ namespace Nest
 	public interface ITermsQuery : IQuery
 	{
 		PropertyPathMarker Field { get; set; }
-		int? MinimumShouldMatch { get; set; }
+		string MinimumShouldMatch { get; set; }
 		bool? DisableCoord { get; set; }
 		IEnumerable<object> Terms { get; set; }
 		IExternalFieldDeclarationDescriptor ExternalField { get; set; }
@@ -33,7 +34,7 @@ namespace Nest
 	public class TermsQueryDescriptor<T, K> : ITermsQuery where T : class
 	{
 		PropertyPathMarker ITermsQuery.Field { get; set; }
-		int? ITermsQuery.MinimumShouldMatch { get; set; }
+		string ITermsQuery.MinimumShouldMatch { get; set; }
 		bool? ITermsQuery.DisableCoord { get; set; }
 		IEnumerable<object> ITermsQuery.Terms { get; set; }
 		IExternalFieldDeclarationDescriptor ITermsQuery.ExternalField { get; set; }
@@ -78,10 +79,14 @@ namespace Nest
 			return this;
 		}
 
-
-		public TermsQueryDescriptor<T, K> MinimumShouldMatch(int minMatch)
+		public TermsQueryDescriptor<T, K> MinimumShouldMatch(string minMatch)
 		{
 			((ITermsQuery)this).MinimumShouldMatch = minMatch;
+			return this;
+		}
+		public TermsQueryDescriptor<T, K> MinimumShouldMatch(int minMatch)
+		{
+			((ITermsQuery)this).MinimumShouldMatch = minMatch.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
 
