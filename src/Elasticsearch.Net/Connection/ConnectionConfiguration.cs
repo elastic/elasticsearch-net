@@ -82,8 +82,8 @@ namespace Elasticsearch.Net.Connection
 #endif
 		bool IConnectionConfigurationValues.KeepRawResponse { get{ return _keepRawResponse; } }
 
-        private bool _automatixProxyDetection;
-        bool IConnectionConfigurationValues.AutomaticProxyDetection { get { return _automatixProxyDetection} }
+        private bool _automaticProxyDetection = true;
+        bool IConnectionConfigurationValues.AutomaticProxyDetection { get { return _automaticProxyDetection; } }
 
 		private int _maximumAsyncConnections;
 		int IConnectionConfigurationValues.MaximumAsyncConnections { get{ return _maximumAsyncConnections; } }
@@ -287,21 +287,10 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Global callback for every response that NEST receives, useful for custom logging.
 		/// </summary>
-		public T SetConnectionStatusHandler(Action<IElasticsearchResponse> handler)
-		{
-			handler.ThrowIfNull("handler");
-			this._connectionStatusHandler = handler;
-			return (T) this;
-		}
-
-        /// <summary>
-        /// Sometimes automatic proxydection can be very slow when there is no proxy that can be detected.
-        /// </summary>
-        /// <param name="enabled">defaults to true</param>
-        /// <returns></returns>
-        public T AutomatixProxyDetection(bool b = true)
+        public T SetConnectionStatusHandler(Action<IElasticsearchResponse> handler)
         {
-            this._automatixProxyDetection = b;
+            handler.ThrowIfNull("handler");
+            this._connectionStatusHandler = handler;
             return (T)this;
         }
 	}

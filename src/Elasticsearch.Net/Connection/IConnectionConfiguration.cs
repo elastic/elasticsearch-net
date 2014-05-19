@@ -66,11 +66,5 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		T SetConnectionStatusHandler(Action<IElasticsearchResponse> handler);
 
-        /// <summary>
-        /// Sometimes automatic proxydection can be very slow when there is no proxy that can be detected.
-        /// </summary>
-        /// <param name="enabled">defaults to true</param>
-        /// <returns></returns>
-        T AutomatixProxyDetection(bool enabled = true)
 	}
 }
