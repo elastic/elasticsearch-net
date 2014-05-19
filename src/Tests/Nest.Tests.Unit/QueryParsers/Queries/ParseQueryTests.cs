@@ -471,13 +471,13 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			var q = this.TestBaseQueryProperties(
 				f=>f.Match,
 				f=>f.Match(m=>m
+					.OnField(p=>p.Name)
 					.Analyzer("my-analyzer")
 					.Boost(2.1)
 					.CutoffFrequency(1.31)
 					.Fuzziness(2.3)
 					.Lenient()
 					.MaxExpansions(2)
-					.OnField(p=>p.Name)
 					.Operator(Operator.and)
 					.PrefixLength(2)
 					.Query("querytext")
@@ -507,13 +507,13 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			var q = this.TestBaseQueryProperties(
 				f=>f.Match,
 				f=>f.MatchPhrasePrefix(m=>m
+					.OnField(p=>p.Name)
 					.Analyzer("my-analyzer")
 					.Boost(2.1)
 					.CutoffFrequency(1.31)
 					.Fuzziness(2.3)
 					.Lenient()
 					.MaxExpansions(2)
-					.OnField(p=>p.Name)
 					.Operator(Operator.and)
 					.PrefixLength(2)
 					.Query("querytext")
@@ -542,13 +542,13 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			var q = this.TestBaseQueryProperties(
 				f=>f.Match,
 				f=>f.MatchPhrase(m=>m
+					.OnField(p=>p.Name)
 					.Analyzer("my-analyzer")
 					.Boost(2.1)
 					.CutoffFrequency(1.31)
 					.Fuzziness(2.3)
 					.Lenient()
 					.MaxExpansions(2)
-					.OnField(p=>p.Name)
 					.Operator(Operator.and)
 					.PrefixLength(2)
 					.Query("querytext")
@@ -563,7 +563,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Fuzziness.Should().Be(2.3);
 			q.Lenient.Should().BeTrue();
 			q.MaxExpansions.Should().Be(2);
-			q.Field.Should().Be("field");
+			q.Field.Should().Be("name");
 			q.Operator.Should().Be(Operator.and);
 			q.PrefixLength.Should().Be(2);
 			q.Query.Should().Be("querytext");
