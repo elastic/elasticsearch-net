@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Nest.Tests.Unit.QueryParsers.Filter

@@ -26,9 +26,7 @@ namespace Nest
 	/// <remarks>Doesn't inherit from QueryPathDescriptorBase because it already needs an untyped supperclass 
 	/// that has specifics that we can push to QueryPathDescriptorBase</remarks>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial class SearchDescriptor<T> :
-		SearchDescriptorBase
-		, IPathInfo<SearchRequestParameters>, ISearchDescriptor where T : class
+	public partial class SearchDescriptor<T> : SearchDescriptorBase , IPathInfo<SearchRequestParameters>, ISearchDescriptor where T : class
 	{
 		internal override SearchTypeOptions? _SearchType
 		{
