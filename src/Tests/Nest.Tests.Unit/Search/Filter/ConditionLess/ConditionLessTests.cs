@@ -145,7 +145,7 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 		[Test]
 		public void NestedTest()
 		{
-			this.DoConditionlessFilter(f => f.Nested(nf=>nf.Query(q=>q.Term(string.Empty, string.Empty))));
+			this.DoConditionlessFilter(f => f.Nested(nf=>nf.Filter(q=>q.Term(string.Empty, string.Empty))));
 			this.DoConditionlessFilter(f => f.Nested(null));
 		}
 
