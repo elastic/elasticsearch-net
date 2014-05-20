@@ -91,13 +91,11 @@ namespace Nest
 
 		IFunctionScoreQuery IQueryDescriptor.FunctionScore { get; set; }
 		
-
-
 		public void Accept(IQueryVisitor visitor)
 		{
 			var walker = new QueryFilterWalker();
+			if (visitor.Scope == VisitorScope.Unknown) visitor.Scope = VisitorScope.Query;
 			walker.Walk(this, visitor);
-			
 		}
 
 		bool IQueryDescriptor.IsConditionless { get; set; }

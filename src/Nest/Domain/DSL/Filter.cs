@@ -169,12 +169,16 @@ namespace Nest
 			return new FilterDescriptorDescriptor<T>().Regexp(regexpSelector);
 		}
 		public static FilterDescriptorDescriptor<T>  Strict(bool strict = true)
-		{
-			return new FilterDescriptorDescriptor<T> { IsStrict = strict };
+		{	
+			var f = new FilterDescriptorDescriptor<T>();
+			((IFilterDescriptor)f).IsStrict = true;
+			return f;
 		}
 		public static FilterDescriptorDescriptor<T>  Verbatim(bool verbatim = true)
 		{
-			return new FilterDescriptorDescriptor<T> { IsVerbatim = verbatim, IsStrict = verbatim };
+			var f = new FilterDescriptorDescriptor<T>();
+			((IFilterDescriptor)f).IsVerbatim = true;
+			return f;
 		}
 		
 	}

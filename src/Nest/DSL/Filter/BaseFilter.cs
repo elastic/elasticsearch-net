@@ -24,6 +24,12 @@ namespace Nest
 		[JsonIgnore]
 		public virtual bool IsConditionless { get; internal set; }
 		
+		[JsonIgnore]
+		bool IFilterDescriptor.IsStrict { get; set; }
+
+		[JsonIgnore]
+		bool IFilterDescriptor.IsVerbatim { get; set; }
+		
 		IBoolFilter IFilterDescriptor.Bool { get; set; }
 		
 		IExistsFilter IFilterDescriptor.Exists { get; set; }
@@ -78,6 +84,7 @@ namespace Nest
 		public void Accept(IQueryVisitor visitor)
 		{
 			var walker = new QueryFilterWalker();
+			if (visitor.Scope == VisitorScope.Unknown) visitor.Scope = VisitorScope.Filter;
 			walker.Walk(this, visitor);
 
 			
@@ -86,10 +93,7 @@ namespace Nest
 		private static readonly IEnumerable<BaseFilterDescriptor> Empty = Enumerable.Empty<BaseFilterDescriptor>();
 
 		
-		[JsonIgnore]
-		public bool IsStrict { get; internal set; }
-		[JsonIgnore]
-		public bool IsVerbatim { get; internal set; }
+		
 		object ICustomJson.GetCustomJson()
 		{
 			var f = ((IFilterDescriptor)this);
@@ -147,8 +151,10 @@ namespace Nest
 			if (combined.Any(bf => bf.IsConditionless))
 				return combined.FirstOrDefault(bf => !bf.IsConditionless) ?? defaultFilter;
 
-			var leftBoolFilter = ((IFilterDescriptor)leftFilterDescriptor).Bool;
-			var rightBoolFilter = ((IFilterDescriptor)rightFilterDescriptor).Bool;
+			var leftDescriptor = ((IFilterDescriptor)leftFilterDescriptor);
+			var leftBoolFilter = leftDescriptor.Bool;
+			var rightDescriptor = ((IFilterDescriptor)rightFilterDescriptor);
+			var rightBoolFilter = rightDescriptor.Bool;
 		
 
 			var f = new BaseFilterDescriptor();
@@ -158,18 +164,18 @@ namespace Nest
 			((IFilterDescriptor)f).Bool = fq;
 
 			//if neither the left nor the right side represent a bool filter join them
-			if (((IFilterDescriptor)leftFilterDescriptor).Bool == null && ((IFilterDescriptor)rightFilterDescriptor).Bool == null)
+			if (leftDescriptor.Bool == null && rightDescriptor.Bool == null)
 			{
 				bfq.Should = leftFilterDescriptor.MergeShouldFilters(rightFilterDescriptor);
 				return f;
 			}
 			//if the left or right sight already is a bool filter determine join the non bool query side of the 
 			//of the operation onto the other.
-			if (((IFilterDescriptor)leftFilterDescriptor).Bool != null && ((IFilterDescriptor)rightFilterDescriptor).Bool == null && !leftFilterDescriptor.IsStrict)
+			if (leftDescriptor.Bool != null && rightDescriptor.Bool == null && !leftDescriptor.IsStrict)
 			{
 				JoinShouldOnSide(leftFilterDescriptor, rightFilterDescriptor, fq);
 			}
-			else if (((IFilterDescriptor)rightFilterDescriptor).Bool != null && ((IFilterDescriptor)leftFilterDescriptor).Bool == null && !rightFilterDescriptor.IsStrict)
+			else if (rightDescriptor.Bool != null && leftDescriptor.Bool == null && !rightDescriptor.IsStrict)
 			{
 				JoinShouldOnSide(rightFilterDescriptor, leftFilterDescriptor, fq);
 			}
@@ -177,7 +183,7 @@ namespace Nest
 			else
 			{
 				//both sides report that we may merge the shoulds
-				if (!leftFilterDescriptor.IsStrict && !rightFilterDescriptor.IsStrict
+				if (!leftDescriptor.IsStrict && !rightDescriptor.IsStrict
 					&& leftBoolFilter.CanJoinShould()
 					&& rightBoolFilter.CanJoinShould())
 					bfq.Should = leftFilterDescriptor.MergeShouldFilters(rightFilterDescriptor);
@@ -217,12 +223,12 @@ namespace Nest
 		}
 
 		private static BaseFilterDescriptor CombineIfNoMergeIsNecessary(
-			BaseFilterDescriptor leftFilterDescriptor, 
-			BaseFilterDescriptor rightFilterDescriptor, 
-			BaseFilterDescriptor[] combined)
+			IFilterDescriptor leftFilterDescriptor, 
+			IFilterDescriptor rightFilterDescriptor, 
+			IEnumerable<BaseFilterDescriptor> combined)
 		{
-			var leftBoolFilter = ((IFilterDescriptor)leftFilterDescriptor).Bool;
-			var rightBoolFilter = ((IFilterDescriptor)rightFilterDescriptor).Bool;
+			var leftBoolFilter = leftFilterDescriptor.Bool;
+			var rightBoolFilter = rightFilterDescriptor.Bool;
 			//if neither side is already a boolfilter 
 			//  or if all boolfilters are strict.
 			//  or if one side is strict and the other is null
@@ -238,12 +244,12 @@ namespace Nest
 			return null;
 		}
 
-		private static BaseFilterDescriptor StrictSingleSideAndMerge(BaseFilterDescriptor targetFilterDescriptor, BaseFilterDescriptor mergeFilterDescriptor)
+		private static BaseFilterDescriptor StrictSingleSideAndMerge(IFilterDescriptor targetFilterDescriptor, IFilterDescriptor mergeFilterDescriptor)
 		{
 			//if the target is not strict return
 			if (!targetFilterDescriptor.IsStrict) return null;
 
-			IBoolFilter mergeBoolFilter = ((IFilterDescriptor)mergeFilterDescriptor).Bool;
+			var mergeBoolFilter = mergeFilterDescriptor.Bool;
 
 			return CreateReturnFilter((returnFilter, returnBoolFilter) =>
 			{
@@ -257,30 +263,31 @@ namespace Nest
 			});
 		}
 
-		private static BaseFilterDescriptor SingleSideAndMerge(BaseFilterDescriptor targetFilterDescriptor, BaseFilterDescriptor mergeFilterDescriptor)
+		private static BaseFilterDescriptor SingleSideAndMerge(IFilterDescriptor targetFilterDescriptor, IFilterDescriptor mergeFilterDescriptor)
 		{
-			var targetBoolFilter = ((IFilterDescriptor)targetFilterDescriptor).Bool;
-			var mergeBoolFilter = ((IFilterDescriptor)mergeFilterDescriptor).Bool;
+			var targetBoolFilter = targetFilterDescriptor.Bool;
+			var mergeBoolFilter = mergeFilterDescriptor.Bool;
 
 			if (targetBoolFilter == null) return null;
 
 			var combined = new[] { targetFilterDescriptor, mergeFilterDescriptor };
 			return CreateReturnFilter((returnFilter, returnBoolFilter) =>
 			{
+				var boolFilter = ((IBoolFilter)returnBoolFilter);
 				if (!targetBoolFilter.CanMergeMustAndMustNots() || !mergeBoolFilter.CanMergeMustAndMustNots())
 				{
-					((IBoolFilter)returnBoolFilter).Must = combined;
+					boolFilter.Must = combined;
 					return;
 				}
 
-				((IBoolFilter)returnBoolFilter).Must = (((IBoolFilter)targetBoolFilter).Must ?? Empty)
+				boolFilter.Must = (targetBoolFilter.Must ?? Empty)
 					.Concat(mergeBoolFilter != null
-						? (((IBoolFilter)mergeBoolFilter).Must ?? Empty)
+						? (mergeBoolFilter.Must ?? Empty)
 						: new[] {mergeFilterDescriptor})
 					.NullIfEmpty();
-				((IBoolFilter)returnBoolFilter).MustNot = (((IBoolFilter)targetBoolFilter).MustNot ?? Empty)
+				boolFilter.MustNot = (targetBoolFilter.MustNot ?? Empty)
 					.Concat(mergeBoolFilter != null
-						? (((IBoolFilter)mergeBoolFilter).MustNot ?? Empty)
+						? (mergeBoolFilter.MustNot ?? Empty)
 						: Empty
 					).NullIfEmpty();
 					

@@ -44,8 +44,8 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				);
 			q.Field.Should().Be("name");
 			q.Boost.Should().Be(2.1);
-			q.GreaterThan.Should().Be("2014-05-19");
-			q.LowerThan.Should().Be("2014-05-21T00:00:00.000");
+			q.GreaterThan.Should().Be(from.ToString("yyyy-MM-dd"));
+			q.LowerThan.Should().Be(to.ToString("yyyy-MM-dd'T'HH:mm:ss.fff"));
 		}
 	}
 }

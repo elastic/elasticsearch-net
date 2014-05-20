@@ -16,6 +16,7 @@ namespace Nest.DSL.Visitor
 		private void Accept(IQueryVisitor visitor, IFilterDescriptor filter, VisitorScope scope = VisitorScope.Filter)
 		{
 			if (filter == null) return;
+			visitor.Scope = scope;
 			filter.Accept(visitor);
 		}
 

@@ -8,6 +8,7 @@ namespace Nest.DSL.Visitor
 	
 	public enum VisitorScope
 	{
+		Unknown,
 		Filter,
 		Query,
 		Must,
@@ -31,83 +32,99 @@ namespace Nest.DSL.Visitor
 		/// </summary>
 		VisitorScope Scope { get; set; }
 
-		void Visit(IQueryDescriptor baseQuery);
-		void Visit(IBoolQuery baseQuery);
-		void Visit(IBoostingQuery baseQuery);
-		void Visit(ICommonTermsQuery commonTerms);
-		void Visit(IConstantScoreQuery constantScore);
-		void Visit(ICustomBoostFactorQuery customBoostFactor);
-		void Visit(ICustomFiltersScoreQuery customFiltersScore);
-		void Visit(ICustomScoreQuery customFiltersScore);
-		void Visit(IDisMaxQuery customFiltersScore);
-		void Visit(IFilteredQuery customFiltersScore);
-		void Visit(IFunctionScoreQuery customFiltersScore);
-		void Visit(IFuzzyQuery customFiltersScore);
-		void Visit(IFuzzyLikeThisQuery customFiltersScore);
-		void Visit(IGeoShapeQuery customFiltersScore);
-		void Visit(IHasChildQuery customFiltersScore);
-		void Visit(IHasParentQuery customFiltersScore);
-		void Visit(IdsQuery customFiltersScore);
-		void Visit(IIndicesQuery customFiltersScore);
-		void Visit(IMatchQuery customFiltersScore);
-		void Visit(MatchAll customFiltersScore);
-		void Visit(IMoreLikeThisQuery customFiltersScore);
-		void Visit(IMultiMatchQuery customFiltersScore);
-		void Visit(INestedQuery customFiltersScore);
-		void Visit(IPrefixQuery customFiltersScore);
-		void Visit(IQueryStringQuery customFiltersScore);
-		void Visit(IRangeQuery customFiltersScore);
-		void Visit(IRegexpQuery customFiltersScore);
-		void Visit(ISimpleQueryStringQuery customFiltersScore);
-		void Visit(ISpanFirstQuery customFiltersScore);
-		void Visit(ISpanNearQuery customFiltersScore);
-		void Visit(ISpanNotQuery customFiltersScore);
-		void Visit(ISpanOrQuery customFiltersScore);
-		void Visit(ISpanTermQuery customFiltersScore);
-		void Visit(ITermQuery customFiltersScore);
-		void Visit(IWildcardQuery customFiltersScore);
-		void Visit(ITermsQuery customFiltersScore);
-		void Visit(ITopChildrenQuery customFiltersScore);
+		/// <summary>
+		/// Visit the query container just before we dispatch into the query it holds
+		/// </summary>
+		/// <param name="queryDescriptor"></param>
+		void Visit(IQueryDescriptor queryDescriptor);		
+		
 		/// <summary>
 		/// Visit every query item just before they are visited by their specialized Visit() implementation
 		/// </summary>
 		/// <param name="query">The IQuery object that will be visited</param>
 		void Visit(IQuery query);
+		
+		/// <summary>
+		/// Visit the filter container just before we dispatch into the filter it holds
+		/// </summary>
+		/// <param name="filterDescriptor"></param>
+		void Visit(IFilterDescriptor filterDescriptor);
 
-		void Visit(BaseFilterDescriptor customFiltersScore);
-		//void Visit(IFilterBase customFiltersScore);
-		void Visit(ITypeFilter customFiltersScore);
-		void Visit(ITermsBaseFilter customFiltersScore);
-		void Visit(ITermFilter customFiltersScore);
-		void Visit(IScriptFilter customFiltersScore);
-		void Visit(IRegexpFilter customFiltersScore);
-		void Visit(IRangeFilter customFiltersScore);
-		void Visit(IQueryFilter customFiltersScore);
-		void Visit(IPrefixFilter customFiltersScore);
-		void Visit(IOrFilter customFiltersScore);
-		void Visit(INotFilter customFiltersScore);
-		void Visit(INestedFilterDescriptor customFiltersScore);
-		void Visit(IMissingFilter customFiltersScore);
-		void Visit(IMatchAllFilter customFiltersScore);
-		void Visit(ILimitFilter customFiltersScore);
-		void Visit(IIdsFilter customFiltersScore);
-		void Visit(IHasParentFilter customFiltersScore);
-		void Visit(IHasChildFilter customFiltersScore);
-		void Visit(IGeoShapeBaseFilter customFiltersScore);
-		void Visit(IGeoPolygonFilter customFiltersScore);
-		void Visit(IGeoDistanceRangeFilter customFiltersScore);
-		void Visit(IGeoDistanceFilter customFiltersScore);
-		void Visit(IGeoBoundingBoxFilter customFiltersScore);
-		void Visit(IExistsFilter customFiltersScore);
-		void Visit(IBoolFilter customFiltersScore);
-		void Visit(IAndFilter customFiltersScore);
-		void Visit(IFilterBase customFiltersScore);
-		void Visit(IFilterDescriptor customFiltersScore);
+		/// <summary>
+		/// Visit every filer item just before they are visited by their specialized Visit() implementation
+		/// </summary>
+		/// <param name="filter">The IFilterBase object that will be visited</param>
+		void Visit(IFilterBase filter);
+	
+		void Visit(IBoolQuery query);
+		void Visit(IBoostingQuery query);
+		void Visit(ICommonTermsQuery query);
+		void Visit(IConstantScoreQuery query);
+		void Visit(ICustomBoostFactorQuery query);
+		void Visit(ICustomFiltersScoreQuery query);
+		void Visit(ICustomScoreQuery query);
+		void Visit(IDisMaxQuery query);
+		void Visit(IFilteredQuery query);
+		void Visit(IFunctionScoreQuery query);
+		void Visit(IFuzzyQuery query);
+		void Visit(IFuzzyLikeThisQuery query);
+		void Visit(IGeoShapeQuery query);
+		void Visit(IHasChildQuery query);
+		void Visit(IHasParentQuery query);
+		void Visit(IdsQuery query);
+		void Visit(IIndicesQuery query);
+		void Visit(IMatchQuery query);
+		void Visit(MatchAll query);
+		void Visit(IMoreLikeThisQuery query);
+		void Visit(IMultiMatchQuery query);
+		void Visit(INestedQuery query);
+		void Visit(IPrefixQuery query);
+		void Visit(IQueryStringQuery query);
+		void Visit(IRangeQuery query);
+		void Visit(IRegexpQuery query);
+		void Visit(ISimpleQueryStringQuery query);
+		void Visit(ISpanFirstQuery query);
+		void Visit(ISpanNearQuery query);
+		void Visit(ISpanNotQuery query);
+		void Visit(ISpanOrQuery query);
+		void Visit(ISpanTermQuery query);
+		void Visit(ITermQuery query);
+		void Visit(IWildcardQuery query);
+		void Visit(ITermsQuery query);
+		void Visit(ITopChildrenQuery query);
+
+
+		void Visit(ITypeFilter filter);
+		void Visit(ITermsBaseFilter filter);
+		void Visit(ITermFilter filter);
+		void Visit(IScriptFilter filter);
+		void Visit(IRegexpFilter filter);
+		void Visit(IRangeFilter filter);
+		void Visit(IQueryFilter filter);
+		void Visit(IPrefixFilter filter);
+		void Visit(IOrFilter filter);
+		void Visit(INotFilter filter);
+		void Visit(INestedFilterDescriptor filter);
+		void Visit(IMissingFilter filter);
+		void Visit(IMatchAllFilter filter);
+		void Visit(ILimitFilter filter);
+		void Visit(IIdsFilter filter);
+		void Visit(IHasParentFilter filter);
+		void Visit(IHasChildFilter filter);
+		void Visit(IGeoShapeBaseFilter filter);
+		void Visit(IGeoPolygonFilter filter);
+		void Visit(IGeoDistanceRangeFilter filter);
+		void Visit(IGeoDistanceFilter filter);
+		void Visit(IGeoBoundingBoxFilter filter);
+		void Visit(IExistsFilter filter);
+		void Visit(IBoolFilter filter);
+		void Visit(IAndFilter filter);
+
 	}
 
 	public class QueryVisitor : IQueryVisitor
 	{
-	
+		
 		public int Depth { get; set; }
 
 		public VisitorScope Scope { get; set; }
@@ -120,6 +137,20 @@ namespace Nest.DSL.Visitor
 		{
 		}
 
+		public virtual void Visit(IQuery query)
+		{
+		}
+
+		public virtual void Visit(IFilterDescriptor customFiltersScore)
+		{
+		}
+
+		public virtual void Visit(IFilterBase customFiltersScore)
+		{
+		}
+
+		
+	
 		public virtual void Visit(IBoolQuery baseQuery)
 		{
 		}
@@ -264,13 +295,7 @@ namespace Nest.DSL.Visitor
 		{
 		}
 
-		public virtual void Visit(IQuery query)
-		{
-		}
-
-		public virtual void Visit(BaseFilterDescriptor customFiltersScore)
-		{
-		}
+		
 
 		public virtual void Visit(ITypeFilter customFiltersScore)
 		{
@@ -372,12 +397,6 @@ namespace Nest.DSL.Visitor
 		{
 		}
 
-		public virtual void Visit(IFilterBase customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IFilterDescriptor customFiltersScore)
-		{
-		}
+	
 	}
 }

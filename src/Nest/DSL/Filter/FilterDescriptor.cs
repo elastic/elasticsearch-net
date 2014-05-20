@@ -24,12 +24,19 @@ namespace Nest
 		string _CacheKey { get; set; }
 		[JsonIgnore]
 		bool? _Cache { get; set; }
+
 		[JsonIgnore]
 		bool IsConditionless { get; }
 
 		[JsonIgnore]
 		string RawFilter { get; set; }
-		
+
+		[JsonIgnore]
+		bool IsStrict { get; set; }
+
+		[JsonIgnore]
+		bool IsVerbatim { get; set; }
+
 		[JsonProperty(PropertyName = "bool")]
 		IBoolFilter Bool { get; set; }
 
@@ -105,6 +112,8 @@ namespace Nest
 		[JsonProperty(PropertyName = "regexp")]
 		IRegexpFilter Regexp { get; set; }
 
+
+
 		void Accept(IQueryVisitor visitor);
 	}
 
@@ -131,12 +140,18 @@ namespace Nest
 
 		public FilterDescriptorDescriptor<T> Strict(bool strict = true)
 		{
-			return new FilterDescriptorDescriptor<T> { IsStrict = strict };
+			var f = new FilterDescriptorDescriptor<T>();
+			((IFilterDescriptor)f).IsStrict = ((IFilterDescriptor)this).IsStrict;
+			((IFilterDescriptor)f).IsVerbatim = ((IFilterDescriptor)this).IsVerbatim;
+			return f;
 		}
 
 		public FilterDescriptorDescriptor<T> Verbatim(bool verbatim = true)
 		{
-			return new FilterDescriptorDescriptor<T> { IsVerbatim = verbatim, IsStrict = verbatim };
+			var f = new FilterDescriptorDescriptor<T>();
+			((IFilterDescriptor)f).IsStrict = ((IFilterDescriptor)this).IsStrict;
+			((IFilterDescriptor)f).IsVerbatim = ((IFilterDescriptor)this).IsVerbatim;
+			return f;
 		}
 
 		/// <summary>
@@ -153,7 +168,9 @@ namespace Nest
 
 		internal BaseFilterDescriptor Raw(string rawJson)
 		{
-			var f = new FilterDescriptorDescriptor<T> { IsStrict = this.IsStrict, IsVerbatim = this.IsVerbatim };
+			var f = new FilterDescriptorDescriptor<T>();
+			((IFilterDescriptor)f).IsStrict = ((IFilterDescriptor)this).IsStrict;
+			((IFilterDescriptor)f).IsVerbatim = ((IFilterDescriptor)this).IsVerbatim;
 			((IFilterDescriptor)f).RawFilter = rawJson;
 			return f;
 		}
@@ -769,29 +786,36 @@ namespace Nest
 
 		private FilterDescriptorDescriptor<T> CreateConditionlessFilterDescriptor(object filter, string type = null)
 		{
-			if (this.IsStrict && !this.IsVerbatim)
+			var self = ((IFilterDescriptor)this);
+			if (self.IsStrict && !self.IsVerbatim)
 				throw new DslException("Filter resulted in a conditionless '{1}' filter (json by approx):\n{0}"
 					.F(
 						JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore })
 						, type ?? filter.GetType().Name.Replace("Descriptor", "").Replace("`1", "")
 					)
 				);
-			return new FilterDescriptorDescriptor<T> { IsConditionless = true, IsVerbatim = this.IsVerbatim, IsStrict = this.IsStrict };
+			var f = new FilterDescriptorDescriptor<T>();
+			((IFilterDescriptor)f).IsStrict = self.IsStrict;
+			((IFilterDescriptor)f).IsVerbatim = self.IsVerbatim;
+			f.IsConditionless = true;
+			return f;
 		}
 
 
 
 		private FilterDescriptorDescriptor<T> New(IFilterBase filter, Action<IFilterDescriptor> fillProperty)
 		{
-			if (((IFilterBase)filter).IsConditionless && !this.IsVerbatim)
+			var self = ((IFilterDescriptor)this);
+			if (filter.IsConditionless && !self.IsVerbatim)
 			{
 				this.ResetCache();
 				return CreateConditionlessFilterDescriptor(filter);
 			}
 
 			this.SetCacheAndName(filter);
-
-			var f = new FilterDescriptorDescriptor<T> { IsStrict = this.IsStrict, IsVerbatim = this.IsVerbatim };
+			var f = new FilterDescriptorDescriptor<T>();
+			((IFilterDescriptor)f).IsStrict = self.IsStrict;
+			((IFilterDescriptor)f).IsVerbatim = self.IsVerbatim;
 
 			if (fillProperty != null)
 				fillProperty(f);
