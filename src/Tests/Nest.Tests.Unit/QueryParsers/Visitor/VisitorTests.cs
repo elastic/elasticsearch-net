@@ -23,6 +23,7 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 			var visitor = A.Fake<IQueryVisitor>();
 			var visitQuery = A.CallTo(() => visitor.Visit(A<IQuery>._));
 			var visitFilter = A.CallTo(() => visitor.Visit(A<IFilterBase>._));
+			var visitBoolQuery = A.CallTo(() => visitor.Visit(A<IBoolQuery>._));
 			var query = NewQuery(q =>
 				q.Filtered(qf => qf
 					.Filter(qff => qff
@@ -41,6 +42,7 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 			visitQuery.MustHaveHappened(Repeated.Exactly.Times(3));
 			//and + 3 term filters
 			visitFilter.MustHaveHappened(Repeated.Exactly.Times(4));
+			visitBoolQuery.MustHaveHappened(Repeated.Exactly.Once);
 
 		}
 	}

@@ -5,9 +5,32 @@ using System.Text;
 
 namespace Nest.DSL.Visitor
 {
+	
+	public enum VisitorScope
+	{
+		Filter,
+		Query,
+		Must,
+		MustNot,
+		Should,
+		PositiveQuery,
+		NegativeQuery,
+		NoMatchQuery,
+
+	}
 
 	public interface IQueryVisitor
 	{
+		/// <summary>
+		/// The current depth of the node being visited
+		/// </summary>
+		int Depth { get; set; }
+		
+		/// <summary>
+		/// Hints the relation with the parent, i,e queries inside a Must clause will have VisitorScope.Must set.
+		/// </summary>
+		VisitorScope Scope { get; set; }
+
 		void Visit(IQueryDescriptor baseQuery);
 		void Visit(IBoolQuery baseQuery);
 		void Visit(IBoostingQuery baseQuery);
@@ -84,6 +107,11 @@ namespace Nest.DSL.Visitor
 
 	public class QueryVisitor : IQueryVisitor
 	{
+	
+		public int Depth { get; set; }
+
+		public VisitorScope Scope { get; set; }
+
 		public virtual void Visit(IQueryVisitor visitor)
 		{
 		}
