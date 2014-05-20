@@ -13,7 +13,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public class BaseQuery : IQueryDescriptor, ICustomJson
+	public class BaseQuery : IQueryDescriptor
 	{
 		private static readonly IEnumerable<BaseQuery> Empty = Enumerable.Empty<BaseQuery>();
 
@@ -21,7 +21,7 @@ namespace Nest
 
 		string IQueryDescriptor.RawQuery { get; set; }
 
-		MatchAll IQueryDescriptor.MatchAll { get; set; }
+		IMatchAll IQueryDescriptor.MatchAll { get; set; }
 		
 		ITermQuery IQueryDescriptor.Term { get; set; }
 		

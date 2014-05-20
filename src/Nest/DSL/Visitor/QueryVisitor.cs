@@ -5,21 +5,6 @@ using System.Text;
 
 namespace Nest.DSL.Visitor
 {
-	
-	public enum VisitorScope
-	{
-		Unknown,
-		Filter,
-		Query,
-		Must,
-		MustNot,
-		Should,
-		PositiveQuery,
-		NegativeQuery,
-		NoMatchQuery,
-
-	}
-
 	public interface IQueryVisitor
 	{
 		/// <summary>
@@ -74,7 +59,7 @@ namespace Nest.DSL.Visitor
 		void Visit(IdsQuery query);
 		void Visit(IIndicesQuery query);
 		void Visit(IMatchQuery query);
-		void Visit(MatchAll query);
+		void Visit(IMatchAll query);
 		void Visit(IMoreLikeThisQuery query);
 		void Visit(IMultiMatchQuery query);
 		void Visit(INestedQuery query);
@@ -223,7 +208,7 @@ namespace Nest.DSL.Visitor
 		{
 		}
 
-		public virtual void Visit(MatchAll customFiltersScore)
+		public virtual void Visit(IMatchAll customFiltersScore)
 		{
 		}
 

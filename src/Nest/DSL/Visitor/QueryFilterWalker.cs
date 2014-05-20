@@ -58,7 +58,6 @@ namespace Nest.DSL.Visitor
 		public void Walk(IQueryDescriptor qd, IQueryVisitor visitor)
 		{
 			visitor.Visit(qd);
-			AcceptQuery(qd.Match, visitor, (v, d) => v.Visit(d));
 			AcceptQuery(qd.MatchAll, visitor, (v, d) => v.Visit(d));
 			AcceptQuery(qd.MoreLikeThis, visitor, (v, d) => v.Visit(d));
 			AcceptQuery(qd.MultiMatch, visitor, (v, d) => v.Visit(d));
@@ -80,6 +79,7 @@ namespace Nest.DSL.Visitor
 			AcceptQuery(qd.Term, visitor, (v, d) => v.Visit(d));
 			AcceptQuery(qd.Terms, visitor, (v, d) => v.Visit(d));
 			AcceptQuery(qd.Wildcard, visitor, (v, d) => v.Visit(d));
+			AcceptQuery(qd.Match, visitor, (v, d) => v.Visit(d));
 			AcceptQuery(qd.Bool, visitor, (v, d) =>
 			{
 				v.Visit(d);

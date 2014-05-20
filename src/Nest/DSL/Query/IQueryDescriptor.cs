@@ -24,7 +24,7 @@ namespace Nest
 		string RawQuery { get; set; }
 		
 		[JsonProperty(PropertyName = "match_all")]
-		MatchAll MatchAll { get; set; }
+		IMatchAll MatchAll { get; set; }
 
 		[JsonProperty(PropertyName = "term")]
 		[JsonConverter(typeof (FieldNameQueryConverter<TermQueryDescriptor<object>>))]
