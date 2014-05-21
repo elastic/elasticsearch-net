@@ -50,7 +50,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 		[Test]
 		public void InitializerTypedTests()
 		{
-			QueryContainer wildcardQuery =
+			QueryContainer boolQuery =
 				new WildcardQuery<ElasticsearchProject>(p => p.Name)
 				{
 					Value = "value",
@@ -63,7 +63,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				};
 			var searchRequest = new SearchRequest()
 			{
-				Query = wildcardQuery
+				Query = boolQuery
 			};
 
 			var search = this._client.Search<ElasticsearchProject>(searchRequest);
