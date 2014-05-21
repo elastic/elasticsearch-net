@@ -35,7 +35,7 @@ namespace Nest
 		public FilterDescriptorDescriptor<T> Strict(bool strict = true)
 		{
 			var f = new FilterDescriptorDescriptor<T>();
-			((IFilterDescriptor)f).IsStrict = ((IFilterDescriptor)this).IsStrict;
+			((IFilterDescriptor)f).IsStrict = strict;
 			((IFilterDescriptor)f).IsVerbatim = ((IFilterDescriptor)this).IsVerbatim;
 			return f;
 		}
@@ -44,7 +44,7 @@ namespace Nest
 		{
 			var f = new FilterDescriptorDescriptor<T>();
 			((IFilterDescriptor)f).IsStrict = ((IFilterDescriptor)this).IsStrict;
-			((IFilterDescriptor)f).IsVerbatim = ((IFilterDescriptor)this).IsVerbatim;
+			((IFilterDescriptor)f).IsVerbatim = verbatim;
 			return f;
 		}
 
