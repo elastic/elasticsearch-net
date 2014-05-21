@@ -54,7 +54,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			{
 				Value = "value",
 				Rewrite = RewriteMultiTerm.constant_score_boolean
-			} & new WildcardQuery { Field = "my_other_prefix_fied", Value = "value"};
+			} && new WildcardQuery { Field = "my_other_prefix_field", Value = "value"};
 			var searchRequest = new SearchRequest()
 			{
 				Query = wildcardQuery
@@ -64,6 +64,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 
 			var request = search.RequestInformation.Request.Utf8String();
 			request.Should().Contain("name");
+			request.Should().Contain("my_other_prefix_field");
 			Assert.Pass(request);
 		}
 	}

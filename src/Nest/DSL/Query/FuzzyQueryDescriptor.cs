@@ -68,7 +68,6 @@ namespace Nest
 		public string Value { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class FuzzyQueryDescriptor<T> : IStringFuzzyQuery where T : class
 	{
 		PropertyPathMarker IFuzzyQuery.Field { get; set; }

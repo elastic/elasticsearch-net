@@ -45,12 +45,12 @@ namespace Nest
 		}
 
 		bool IQuery.IsConditionless { get { return false; } }
-		public PropertyPathMarker GetFieldName()
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return this.Field;
 		}
 
-		public void SetFieldName(string fieldName)
+		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
 			this.Field = fieldName;
 		}

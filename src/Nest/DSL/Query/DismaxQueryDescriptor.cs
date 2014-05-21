@@ -35,7 +35,6 @@ namespace Nest
 		public IEnumerable<QueryContainer> Queries { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class DisMaxQueryDescriptor<T> : IDisMaxQuery where T : class
 	{
 		double? IDisMaxQuery.TieBreaker { get; set; }

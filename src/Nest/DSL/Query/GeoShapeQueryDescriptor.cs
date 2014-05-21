@@ -42,7 +42,6 @@ namespace Nest
 		public GeoShapeVector Shape { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class GeoShapeQueryDescriptor<T> : IGeoShapeQuery where T : class
 	{
 		PropertyPathMarker IGeoShapeQuery.Field { get; set; }

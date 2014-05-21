@@ -11,14 +11,28 @@
 		{
 			return false;
 		}
-		public static QueryContainer operator &(PlainQuery leftQuery, PlainQuery rightQuery)
+		public static PlainQuery operator &(PlainQuery leftQuery, PlainQuery rightQuery)
 		{
 			var lc = new QueryContainer();
 			leftQuery.WrapInContainer(lc);
 			var rc = new QueryContainer();
-			leftQuery.WrapInContainer(rc);
-			return (lc && rc);
+			rightQuery.WrapInContainer(rc);
+			var query = ((lc && rc) as IQueryContainer).Bool;
+			return new BoolQuery()
+			{
+				Must = query.Must,
+				MustNot = query.MustNot,
+				Should = query.Should
+			};
 		}
+		//public static QueryContainer operator &(PlainQuery leftQuery, PlainQuery rightQuery)
+		//{
+		//	var lc = new QueryContainer();
+		//	leftQuery.WrapInContainer(lc);
+		//	var rc = new QueryContainer();
+		//	leftQuery.WrapInContainer(rc);
+		//	return (lc && rc);
+		//}
 		public static implicit operator QueryContainer(PlainQuery query)
 		{
 			if (query == null) return null;

@@ -37,7 +37,6 @@ namespace Nest
 		public DateTime? Value { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class FuzzyDateQueryDescriptor<T> : IFuzzyDateQuery where T : class
 	{
 		PropertyPathMarker IFuzzyQuery.Field { get; set; }

@@ -43,7 +43,6 @@ namespace Nest
 		public IQueryContainer Query { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class HasChildQueryDescriptor<T> : IHasChildQuery where T : class
 	{
 		TypeNameMarker IHasChildQuery.Type { get; set; }

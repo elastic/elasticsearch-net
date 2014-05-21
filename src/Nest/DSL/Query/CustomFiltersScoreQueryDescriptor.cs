@@ -36,7 +36,6 @@ namespace Nest
 		string MaxBoost { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class CustomFiltersScoreQueryDescriptor<T> : ICustomFiltersScoreQuery where T : class
 	{
 		IQueryContainer ICustomFiltersScoreQuery.Query { get; set; }

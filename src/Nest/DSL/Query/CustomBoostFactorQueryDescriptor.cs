@@ -32,7 +32,6 @@ namespace Nest
 		public double? BoostFactor { get; set; }
 	}
 
-
 	public class CustomBoostFactorQueryDescriptor<T> : ICustomBoostFactorQuery where T : class
 	{
 		IQueryContainer ICustomBoostFactorQuery.Query { get; set; }

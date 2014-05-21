@@ -58,7 +58,6 @@ namespace Nest
 		public string Analyzer { get; set; }
 	}
 
-
 	public class FuzzyLikeThisQueryDescriptor<T> : IFuzzyLikeThisQuery where T : class
 	{
 		IEnumerable<PropertyPathMarker> IFuzzyLikeThisQuery.Fields { get; set; }
