@@ -651,7 +651,6 @@
     <Compile Include="Resolvers\Converters\Queries\FuzzyQueryJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\Queries\TermsQueryJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\ReadAsTypeConverter.cs" />
-    <Compile Include="DSL\Query\RawOrQueryDescriptor.cs" />
     <Compile Include="DSL\Facets\TermFacetDescriptor.cs" />
     <Compile Include="Domain\Facets\FilterFacet.cs" />
     <Compile Include="Domain\Mapping\ParentTypeMapping.cs" />

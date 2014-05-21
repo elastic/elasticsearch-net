@@ -67,9 +67,8 @@ namespace Nest
 			if (q.IsConditionless)
 				return this;
 
-			var d = new RawOrQueryDescriptor<T> { Descriptor = q };
 
-			((IIndicesQuery)this).Query = d.Descriptor;
+			((IIndicesQuery)this).Query = q;
 			return this;
 		}
 
@@ -80,9 +79,7 @@ namespace Nest
 			if (q.IsConditionless)
 				return this;
 
-			var d = new RawOrQueryDescriptor<K> { Descriptor = q };
-
-			((IIndicesQuery)this).Query = d.Descriptor;
+			((IIndicesQuery)this).Query = q;
 			return this;
 		}
 		
@@ -93,9 +90,7 @@ namespace Nest
 			if (q.IsConditionless)
 				return this;
 
-			var d = new RawOrQueryDescriptor<T> { Descriptor = q };
-
-			((IIndicesQuery)this).NoMatchQuery = d.Descriptor;
+			((IIndicesQuery)this).NoMatchQuery = q;
 			return this;
 		}
 		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryDescriptor<K>, IQueryContainer> querySelector) where K : class
@@ -105,9 +100,7 @@ namespace Nest
 			if (q.IsConditionless)
 				return this;
 
-			var d = new RawOrQueryDescriptor<K> { Descriptor = q };
-
-			((IIndicesQuery)this).NoMatchQuery = d.Descriptor;
+			((IIndicesQuery)this).NoMatchQuery = q;
 			return this;
 		}
 		public IndicesQueryDescriptor<T> Indices(IEnumerable<string> indices)

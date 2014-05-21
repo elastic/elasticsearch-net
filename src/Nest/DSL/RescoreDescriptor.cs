@@ -17,24 +17,9 @@ namespace Nest.DSL.Descriptors
 		/// </summary>
 		internal bool _Strict { get; set; }
 		internal bool _Verbatim { get; set; }
-		internal string _RawQuery { get; set; }
-		internal IQueryContainer _Query { get; set; }
-
 
 		[JsonProperty("rescore_query")]
-		internal RawOrQueryDescriptor<T> _QueryOrRaw
-		{
-			get
-			{
-				if (this._RawQuery == null && this._Query == null)
-					return null;
-				return new RawOrQueryDescriptor<T>
-				{
-					Raw = this._RawQuery,
-					Descriptor = this._Query
-				};
-			}
-		}
+		internal IQueryContainer _Query { get; set; }
 
 		[JsonProperty("query_weight")]
 		internal double? _QueryWeight { get; set; }
@@ -80,16 +65,6 @@ namespace Nest.DSL.Descriptors
 			return this;
 		}
 
-		/// <summary>
-		/// Describe the query to perform as a raw json string
-		/// </summary>
-		public virtual RescoreQueryDescriptor<T> QueryRaw(string rawQuery)
-		{
-			rawQuery.ThrowIfNull("rawQuery");
-			this._RawQuery = rawQuery;
-			return this;
-		}
-		
 		/// <summary>
 		/// When strict is set, conditionless queries are treated as an exception. 
 		/// </summary>
