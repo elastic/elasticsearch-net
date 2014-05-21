@@ -7,26 +7,26 @@ namespace Nest.DSL.Visitor
 {
 	public class QueryFilterWalker
 	{
-		private void Accept(IQueryVisitor visitor, IEnumerable<IFilterDescriptor> filters, VisitorScope scope = VisitorScope.Filter)
+		private void Accept(IQueryVisitor visitor, IEnumerable<IFilterContainer> filters, VisitorScope scope = VisitorScope.Filter)
 		{
 			if (!filters.HasAny()) return;
 			foreach (var f in filters) this.Accept(visitor, f, scope);
 		}
 
-		private void Accept(IQueryVisitor visitor, IFilterDescriptor filter, VisitorScope scope = VisitorScope.Filter)
+		private void Accept(IQueryVisitor visitor, IFilterContainer filter, VisitorScope scope = VisitorScope.Filter)
 		{
 			if (filter == null) return;
 			visitor.Scope = scope;
 			filter.Accept(visitor);
 		}
 
-		private void Accept(IQueryVisitor visitor, IEnumerable<IQueryDescriptor> queries, VisitorScope scope = VisitorScope.Query)
+		private void Accept(IQueryVisitor visitor, IEnumerable<IQueryContainer> queries, VisitorScope scope = VisitorScope.Query)
 		{
 			if (!queries.HasAny()) return;
 			foreach (var q in queries) this.Accept(visitor, q, scope);
 		}
 
-		private void Accept(IQueryVisitor visitor, IQueryDescriptor query, VisitorScope scope = VisitorScope.Query)
+		private void Accept(IQueryVisitor visitor, IQueryContainer query, VisitorScope scope = VisitorScope.Query)
 		{
 			if (query == null) return;
 			visitor.Scope = scope;
@@ -45,7 +45,7 @@ namespace Nest.DSL.Visitor
 		}
 
 		private static void AcceptFilter<T>(T fd, IQueryVisitor visitor, Action<IQueryVisitor, T> scoped)
-			where T : class, IFilterBase
+			where T : class, IFilter
 		{
 			if (fd == null) return;
 
@@ -55,7 +55,7 @@ namespace Nest.DSL.Visitor
 			visitor.Depth = visitor.Depth - 1;
 		}
 
-		public void Walk(IQueryDescriptor qd, IQueryVisitor visitor)
+		public void Walk(IQueryContainer qd, IQueryVisitor visitor)
 		{
 			visitor.Visit(qd);
 			AcceptQuery(qd.MatchAll, visitor, (v, d) => v.Visit(d));
@@ -161,7 +161,7 @@ namespace Nest.DSL.Visitor
 			});
 		}
 
-		public void Walk(IFilterDescriptor fd, IQueryVisitor visitor)
+		public void Walk(IFilterContainer fd, IQueryVisitor visitor)
 		{
 			visitor.Visit(fd);
 			AcceptFilter(fd.Range, visitor, (v, d) => v.Visit(d));

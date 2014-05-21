@@ -14,7 +14,7 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
-		IQueryDescriptor Query { get; set; }
+		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "boost_factor")]
 		double? BoostFactor { get; set; }
@@ -23,7 +23,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class CustomBoostFactorQueryDescriptor<T> : ICustomBoostFactorQuery where T : class
 	{
-		IQueryDescriptor ICustomBoostFactorQuery.Query { get; set; }
+		IQueryContainer ICustomBoostFactorQuery.Query { get; set; }
 
 		double? ICustomBoostFactorQuery.BoostFactor { get; set; }
 
@@ -36,7 +36,7 @@ namespace Nest
 		}
 
 
-		public CustomBoostFactorQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public CustomBoostFactorQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();

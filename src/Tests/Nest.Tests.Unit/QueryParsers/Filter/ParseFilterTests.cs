@@ -14,12 +14,12 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 	[TestFixture]
 	public class ParseFilterTestsBase : BaseParserTests
 	{
-		protected BaseFilterDescriptor Filter1 = Filter<object>.Term("w", "x");
-		protected BaseFilterDescriptor Filter2 = Filter<object>.Term("y", "z");
-		protected BaseFilterDescriptor Filter3 = Filter<object>.Term("a", "b");
+		protected FilterContainer Filter1 = Filter<object>.Term("w", "x");
+		protected FilterContainer Filter2 = Filter<object>.Term("y", "z");
+		protected FilterContainer Filter3 = Filter<object>.Term("a", "b");
 		
-		protected T ParseSearchDescriptorFromFile<T>(Func<IFilterDescriptor, T> filterBaseSelector, MethodBase method, string fileName = null)
-			where T : IFilterBase
+		protected T ParseSearchDescriptorFromFile<T>(Func<IFilterContainer, T> filterBaseSelector, MethodBase method, string fileName = null)
+			where T : IFilter
 		{
 			var descriptor = this.DeserializeInto<SearchDescriptor<ElasticsearchProject>>(method, fileName);
 			var filter = filterBaseSelector(((ISearchDescriptor)descriptor).Filter);
@@ -28,10 +28,10 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 		}
 		
 		protected T SerializeThenDeserialize<T>(string cacheName, string cacheKey, bool cache, 
-			Func<IFilterDescriptor, T> filterBaseSelector,
-			Func<FilterDescriptorDescriptor<ElasticsearchProject>, BaseFilterDescriptor> create
+			Func<IFilterContainer, T> filterBaseSelector,
+			Func<FilterDescriptor<ElasticsearchProject>, FilterContainer> create
 			)
-			where T : IFilterBase
+			where T : IFilter
 		{
 			var descriptor = this.GetSearchDescriptorForFilter(s=>s
 				.Filter(f=>create(f

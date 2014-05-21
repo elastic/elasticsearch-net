@@ -13,7 +13,7 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 	public class VisitorTests
 	{
 
-		public IQueryDescriptor NewQuery(Func<QueryDescriptor<object>, BaseQuery> selector)
+		public IQueryContainer NewQuery(Func<QueryDescriptor<object>, QueryContainer> selector)
 		{
 			return selector(new QueryDescriptor<object>());
 		}
@@ -23,7 +23,7 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 		{
 			var visitor = A.Fake<IQueryVisitor>();
 			var visitQuery = A.CallTo(() => visitor.Visit(A<IQuery>._));
-			var visitFilter = A.CallTo(() => visitor.Visit(A<IFilterBase>._));
+			var visitFilter = A.CallTo(() => visitor.Visit(A<IFilter>._));
 			var visitBoolQuery = A.CallTo(() => visitor.Visit(A<IBoolQuery>._));
 			var query = NewQuery(q =>
 				q.Filtered(qf => qf
@@ -51,7 +51,7 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 		{
 			var visitor = A.Fake<IQueryVisitor>();
 			var visitQuery = A.CallTo(() => visitor.Visit(A<IQuery>._));
-			var visitFilter = A.CallTo(() => visitor.Visit(A<IFilterBase>._));
+			var visitFilter = A.CallTo(() => visitor.Visit(A<IFilter>._));
 
 			var seenDepths = new List<int>();
 			var seenScopes = new List<VisitorScope>();

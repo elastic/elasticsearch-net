@@ -12,7 +12,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(CompositeJsonConverter<GeoPolygonFilterJsonReader, CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGeoPolygonFilter : IFilterBase, ICustomJson
+	public interface IGeoPolygonFilter : IFilter, ICustomJson
 	{
 		PropertyPathMarker Field { get; set; }
 
@@ -22,7 +22,7 @@ namespace Nest
 
 	public class GeoPolygonFilter : FilterBase, IGeoPolygonFilter
 	{
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

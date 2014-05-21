@@ -18,7 +18,7 @@ namespace Nest.DSL.Descriptors
 		internal bool _Strict { get; set; }
 		internal bool _Verbatim { get; set; }
 		internal string _RawQuery { get; set; }
-		internal IQueryDescriptor _Query { get; set; }
+		internal IQueryContainer _Query { get; set; }
 
 
 		[JsonProperty("rescore_query")]
@@ -54,7 +54,7 @@ namespace Nest.DSL.Descriptors
 			return this;
 		}
 
-		public virtual RescoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> query)
+		public virtual RescoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> query)
 		{
 			query.ThrowIfNull("query");
 			var q = new QueryDescriptor<T>().Strict(this._Strict);
@@ -71,7 +71,7 @@ namespace Nest.DSL.Descriptors
 		/// <summary>
 		/// Describe the query to perform using the static Query class
 		/// </summary>
-		public virtual RescoreQueryDescriptor<T> Query(BaseQuery query)
+		public virtual RescoreQueryDescriptor<T> Query(QueryContainer query)
 		{
 			query.ThrowIfNull("query");
 			if (query.IsConditionless && !this._Verbatim)

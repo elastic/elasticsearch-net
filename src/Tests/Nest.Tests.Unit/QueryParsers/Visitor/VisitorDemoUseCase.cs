@@ -14,7 +14,7 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 	public class VisitorDemoUseCase
 	{
 
-		public IQueryDescriptor NewQuery(Func<QueryDescriptor<ElasticsearchProject>, BaseQuery> selector)
+		public IQueryContainer NewQuery(Func<QueryDescriptor<ElasticsearchProject>, QueryContainer> selector)
 		{
 			return selector(new QueryDescriptor<ElasticsearchProject>());
 		}

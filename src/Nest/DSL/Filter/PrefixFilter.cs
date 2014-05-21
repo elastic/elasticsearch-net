@@ -9,14 +9,14 @@ namespace Nest
 	
 	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<PrefixFilter>,CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPrefixFilter : IFilterBase, ICustomJson
+	public interface IPrefixFilter : IFilter, ICustomJson
 	{
 		PropertyPathMarker Field { get; set; }
 		string Prefix { get; set; }
 	}
 	public class PrefixFilter : FilterBase, IPrefixFilter, ICustomJsonReader<PrefixFilter>
 	{
-		bool IFilterBase.IsConditionless { get { return ((IPrefixFilter)this).Field.IsConditionless() || ((IPrefixFilter)this).Prefix.IsNullOrEmpty(); } }
+		bool IFilter.IsConditionless { get { return ((IPrefixFilter)this).Field.IsConditionless() || ((IPrefixFilter)this).Prefix.IsNullOrEmpty(); } }
 
 		PropertyPathMarker IPrefixFilter.Field { get; set; }
 		string IPrefixFilter.Prefix { get; set; }

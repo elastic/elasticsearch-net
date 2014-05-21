@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 	[TestFixture]
 	public class ConditionLessTests : BaseJsonTests
 	{
-		private readonly BaseFilterDescriptor[] _emptyQuery = Enumerable.Empty<BaseFilterDescriptor>().ToArray();
+		private readonly FilterContainer[] _emptyQuery = Enumerable.Empty<FilterContainer>().ToArray();
 		
 		public class Criteria
 		{
@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 			public DateTime? Date { get; set; }
 		}
 
-		private void DoConditionlessFilter(Func<FilterDescriptorDescriptor<ElasticsearchProject>, BaseFilterDescriptor> filter)
+		private void DoConditionlessFilter(Func<FilterDescriptor<ElasticsearchProject>, FilterContainer> filter)
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
@@ -28,7 +28,7 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 
 			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod(), "MatchAll");
 		}
-		private void DoNonConditionlessFilter(Func<FilterDescriptorDescriptor<ElasticsearchProject>, BaseFilterDescriptor> filter)
+		private void DoNonConditionlessFilter(Func<FilterDescriptor<ElasticsearchProject>, FilterContainer> filter)
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)

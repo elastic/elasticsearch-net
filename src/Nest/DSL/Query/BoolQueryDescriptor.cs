@@ -26,7 +26,7 @@ namespace Nest
 				);
 		}
 
-		internal static IEnumerable<IQueryDescriptor> MergeShouldQueries(this IQueryDescriptor lbq, IQueryDescriptor rbq)
+		internal static IEnumerable<IQueryContainer> MergeShouldQueries(this IQueryContainer lbq, IQueryContainer rbq)
 		{
 			var lBoolDescriptor = lbq.Bool;
 			var lHasShouldQueries = lBoolDescriptor != null &&
@@ -49,16 +49,16 @@ namespace Nest
 	public interface IBoolQuery : IQuery
 	{
 		[JsonProperty("must",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseQuery>, CustomJsonConverter>))]
-		IEnumerable<IQueryDescriptor> Must { get; set; }
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		IEnumerable<IQueryContainer> Must { get; set; }
 
 		[JsonProperty("must_not",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseQuery>, CustomJsonConverter>))]
-		IEnumerable<IQueryDescriptor> MustNot { get; set; }
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		IEnumerable<IQueryContainer> MustNot { get; set; }
 
 		[JsonProperty("should",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseQuery>, CustomJsonConverter>))]
-		IEnumerable<IQueryDescriptor> Should { get; set; }
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		IEnumerable<IQueryContainer> Should { get; set; }
 
 		[JsonProperty("minimum_should_match")]
 		string MinimumShouldMatch { get; set; }
@@ -74,13 +74,13 @@ namespace Nest
 	public class BoolBaseQueryDescriptor : IBoolQuery
 	{
 		[JsonProperty("must")]
-		IEnumerable<IQueryDescriptor> IBoolQuery.Must { get; set; }
+		IEnumerable<IQueryContainer> IBoolQuery.Must { get; set; }
 
 		[JsonProperty("must_not")]
-		IEnumerable<IQueryDescriptor> IBoolQuery.MustNot { get; set; }
+		IEnumerable<IQueryContainer> IBoolQuery.MustNot { get; set; }
 
 		[JsonProperty("should")]
-		IEnumerable<IQueryDescriptor> IBoolQuery.Should { get; set; }
+		IEnumerable<IQueryContainer> IBoolQuery.Should { get; set; }
 
 		[JsonProperty("minimum_should_match")]
 		string IBoolQuery.MinimumShouldMatch { get; set; }
@@ -149,9 +149,9 @@ namespace Nest
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
-		public BoolQueryDescriptor<T> Must(params Func<QueryDescriptor<T>, BaseQuery>[] queries)
+		public BoolQueryDescriptor<T> Must(params Func<QueryDescriptor<T>, QueryContainer>[] queries)
 		{
-			var descriptors = new List<BaseQuery>();
+			var descriptors = new List<QueryContainer>();
 			foreach (var selector in queries)
 			{
 				var filter = new QueryDescriptor<T>();
@@ -167,9 +167,9 @@ namespace Nest
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
-		public BoolQueryDescriptor<T> Must(params BaseQuery[] queries)
+		public BoolQueryDescriptor<T> Must(params QueryContainer[] queries)
 		{
-			var descriptors = new List<BaseQuery>();
+			var descriptors = new List<QueryContainer>();
 			foreach (var q in queries)
 			{
 				if (q.IsConditionless)
@@ -186,9 +186,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> MustNot(params Func<QueryDescriptor<T>, BaseQuery>[] queries)
+		public BoolQueryDescriptor<T> MustNot(params Func<QueryDescriptor<T>, QueryContainer>[] queries)
 		{
-			var descriptors = new List<BaseQuery>();
+			var descriptors = new List<QueryContainer>();
 			foreach (var selector in queries)
 			{
 				var filter = new QueryDescriptor<T>();
@@ -206,9 +206,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> MustNot(params BaseQuery[] queries)
+		public BoolQueryDescriptor<T> MustNot(params QueryContainer[] queries)
 		{
-			var descriptors = new List<BaseQuery>();
+			var descriptors = new List<QueryContainer>();
 			foreach (var q in queries)
 			{
 				if (q.IsConditionless)
@@ -223,9 +223,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> Should(params Func<QueryDescriptor<T>, BaseQuery>[] queries)
+		public BoolQueryDescriptor<T> Should(params Func<QueryDescriptor<T>, QueryContainer>[] queries)
 		{
-			var descriptors = new List<BaseQuery>();
+			var descriptors = new List<QueryContainer>();
 			foreach (var selector in queries)
 			{
 				var filter = new QueryDescriptor<T>();
@@ -243,9 +243,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> Should(params BaseQuery[] queries)
+		public BoolQueryDescriptor<T> Should(params QueryContainer[] queries)
 		{
-			var descriptors = new List<BaseQuery>();
+			var descriptors = new List<QueryContainer>();
 			foreach (var q in queries)
 			{
 				if (q.IsConditionless)

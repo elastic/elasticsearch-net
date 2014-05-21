@@ -9,13 +9,13 @@ namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeConverter<MatchAllFilter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMatchAllFilter : IFilterBase
+	public interface IMatchAllFilter : IFilter
 	{
 	}
 
 	public class MatchAllFilter : FilterBase, IMatchAllFilter
 	{
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

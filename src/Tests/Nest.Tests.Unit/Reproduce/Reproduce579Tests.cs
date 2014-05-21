@@ -29,7 +29,7 @@ namespace Nest.Tests.Unit.Reproduce
 
 		}
 
-		private static BaseQuery CreatePermissionsFilter(
+		private static QueryContainer CreatePermissionsFilter(
 			Guid CurrentUserId, 
 			List<Guid> usersToSearch, 
 			bool searchUnassigned, 

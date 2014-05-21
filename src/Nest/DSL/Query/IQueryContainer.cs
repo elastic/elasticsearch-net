@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<BaseQuery>))]
-	public interface IQueryDescriptor : ICustomJson
+	[JsonConverter(typeof(ReadAsTypeConverter<QueryContainer>))]
+	public interface IQueryContainer : ICustomJson
 	{
 		[JsonProperty(PropertyName = "bool")]
 		IBoolQuery Bool { get; set; }

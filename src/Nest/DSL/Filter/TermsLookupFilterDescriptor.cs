@@ -35,7 +35,7 @@ namespace Nest
 	public class TermsLookupFilterDescriptor : FilterBase, ITermsLookupFilter
 	{
 		PropertyPathMarker ITermsBaseFilter.Field { get; set; }
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

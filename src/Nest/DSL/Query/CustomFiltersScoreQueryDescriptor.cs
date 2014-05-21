@@ -16,7 +16,7 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
-		IQueryDescriptor Query { get; set; }
+		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "filters")]
 		List<IFilterScoreQuery> Filters { get; set; }
@@ -39,7 +39,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class CustomFiltersScoreQueryDescriptor<T> : ICustomFiltersScoreQuery where T : class
 	{
-		IQueryDescriptor ICustomFiltersScoreQuery.Query { get; set; }
+		IQueryContainer ICustomFiltersScoreQuery.Query { get; set; }
 
 		List<IFilterScoreQuery> ICustomFiltersScoreQuery.Filters { get; set; }
 
@@ -59,7 +59,7 @@ namespace Nest
 			}
 		}
 
-		public CustomFiltersScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public CustomFiltersScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();

@@ -10,17 +10,17 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 {
 	public abstract class ParseQueryTestsBase : BaseParserTests
 	{
-		protected BaseQuery Query1 = Query<object>.Term("w", "x");
-		protected BaseQuery Query2 = Query<object>.Term("y", "z");
-		protected BaseQuery Query3 = Query<object>.Term("a", "b");
+		protected QueryContainer Query1 = Query<object>.Term("w", "x");
+		protected QueryContainer Query2 = Query<object>.Term("y", "z");
+		protected QueryContainer Query3 = Query<object>.Term("a", "b");
 		
-		protected BaseFilterDescriptor Filter1 = Filter<object>.Term("w", "x");
-		protected BaseFilterDescriptor Filter2 = Filter<object>.Term("y", "z");
-		protected BaseFilterDescriptor Filter3 = Filter<object>.Term("a", "b");
+		protected FilterContainer Filter1 = Filter<object>.Term("w", "x");
+		protected FilterContainer Filter2 = Filter<object>.Term("y", "z");
+		protected FilterContainer Filter3 = Filter<object>.Term("a", "b");
 		
 		protected T SerializeThenDeserialize<T>(
-			Func<IQueryDescriptor, T> queryBaseDescriptor,
-			Func<QueryDescriptor<ElasticsearchProject>, BaseQuery> create
+			Func<IQueryContainer, T> queryBaseDescriptor,
+			Func<QueryDescriptor<ElasticsearchProject>, QueryContainer> create
 			)
 			where T : IQuery
 		{

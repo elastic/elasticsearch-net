@@ -10,7 +10,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeConverter<ExistsFilter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IExistsFilter : IFilterBase
+	public interface IExistsFilter : IFilter
 	{
 		[JsonProperty(PropertyName = "field")]
 		PropertyPathMarker Field { get; set; }
@@ -18,7 +18,7 @@ namespace Nest
 
 	public class ExistsFilter : FilterBase, IExistsFilter
 	{
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

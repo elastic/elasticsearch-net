@@ -12,18 +12,18 @@ namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeConverter<NestedFilterDescriptor<object>>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface INestedFilterDescriptor : IFilterBase
+	public interface INestedFilterDescriptor : IFilter
 	{
 		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
 		NestedScore? Score { get; set; }
 
 		[JsonProperty("filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterDescriptorDescriptor<object>>, CustomJsonConverter>))]
-		IFilterDescriptor Filter { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterDescriptor<object>>, CustomJsonConverter>))]
+		IFilterContainer Filter { get; set; }
 
 		[JsonProperty("query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
-		IQueryDescriptor Query { get; set; }
+		IQueryContainer Query { get; set; }
 
 		[JsonProperty("path")]
 		PropertyPathMarker Path { get; set; }
@@ -36,15 +36,15 @@ namespace Nest
 	{
 		NestedScore? INestedFilterDescriptor.Score { get; set; }
 
-		IFilterDescriptor INestedFilterDescriptor.Filter { get; set; }
+		IFilterContainer INestedFilterDescriptor.Filter { get; set; }
 
-		IQueryDescriptor INestedFilterDescriptor.Query { get; set; }
+		IQueryContainer INestedFilterDescriptor.Query { get; set; }
 
 		PropertyPathMarker INestedFilterDescriptor.Path { get; set; }
 
 		string INestedFilterDescriptor.Scope { get; set; }
 
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{
@@ -53,13 +53,13 @@ namespace Nest
 			}
 		}
 
-		public NestedFilterDescriptor<T> Filter(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> filterSelector)
+		public NestedFilterDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
-			var q = new FilterDescriptorDescriptor<T>();
+			var q = new FilterDescriptor<T>();
 			((INestedFilterDescriptor)this).Filter = filterSelector(q);
 			return this;
 		}
-		public NestedFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public NestedFilterDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
 			((INestedFilterDescriptor)this).Query = querySelector(q);

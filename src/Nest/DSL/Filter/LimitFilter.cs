@@ -9,7 +9,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeConverter<LimitFilter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ILimitFilter : IFilterBase
+	public interface ILimitFilter : IFilter
 	{
 		[JsonProperty(PropertyName = "value")]
 		int? Value { get; set; }
@@ -17,7 +17,7 @@ namespace Nest
 
 	public class LimitFilter : FilterBase, ILimitFilter
 	{
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

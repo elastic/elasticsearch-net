@@ -19,10 +19,10 @@ namespace Nest
 
 		[JsonProperty("query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
-		IQueryDescriptor Query { get; set; }
+		IQueryContainer Query { get; set; }
 
 		[JsonProperty("no_match_query")]
-		IQueryDescriptor NoMatchQuery { get; set; }
+		IQueryContainer NoMatchQuery { get; set; }
 
 		[JsonProperty("indices")]
 		IEnumerable<string> Indices { get; set; }
@@ -33,9 +33,9 @@ namespace Nest
 	{
 		NestedScore? IIndicesQuery.Score { get; set; }
 
-		IQueryDescriptor IIndicesQuery.Query { get; set; }
+		IQueryContainer IIndicesQuery.Query { get; set; }
 
-		IQueryDescriptor IIndicesQuery.NoMatchQuery { get; set; }
+		IQueryContainer IIndicesQuery.NoMatchQuery { get; set; }
 
 		IEnumerable<string> IIndicesQuery.Indices { get; set; }
 
@@ -47,7 +47,7 @@ namespace Nest
 			}
 		}
 
-		public IndicesQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public IndicesQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var qd = new QueryDescriptor<T>();
 			var q = querySelector(qd);
@@ -60,7 +60,7 @@ namespace Nest
 			return this;
 		}
 
-		public IndicesQueryDescriptor<T> Query<K>(Func<QueryDescriptor<K>, BaseQuery> querySelector) where K : class
+		public IndicesQueryDescriptor<T> Query<K>(Func<QueryDescriptor<K>, QueryContainer> querySelector) where K : class
 		{
 			var qd = new QueryDescriptor<K>();
 			var q = querySelector(qd);
@@ -73,7 +73,7 @@ namespace Nest
 			return this;
 		}
 		
-		public IndicesQueryDescriptor<T> NoMatchQuery(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public IndicesQueryDescriptor<T> NoMatchQuery(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var qd = new QueryDescriptor<T>();
 			var q = querySelector(qd);
@@ -85,7 +85,7 @@ namespace Nest
 			((IIndicesQuery)this).NoMatchQuery = d.Descriptor;
 			return this;
 		}
-		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryDescriptor<K>, IQueryDescriptor> querySelector) where K : class
+		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryDescriptor<K>, IQueryContainer> querySelector) where K : class
 		{
 			var qd = new QueryDescriptor<K>();
 			var q = querySelector(qd);

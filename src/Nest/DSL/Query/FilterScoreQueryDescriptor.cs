@@ -13,7 +13,7 @@ namespace Nest.DSL.Query
 	public interface IFilterScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "filter")]
-		BaseFilterDescriptor Filter { get; set; }
+		FilterContainer Filter { get; set; }
 		
 		[JsonProperty(PropertyName = "lang")]
 		string Lang { get; set; }
@@ -34,7 +34,7 @@ namespace Nest.DSL.Query
 	{
 		bool IQuery.IsConditionless { get { return ((IFilterScoreQuery)this).Filter == null; } }
 
-		BaseFilterDescriptor IFilterScoreQuery.Filter { get; set; }
+		FilterContainer IFilterScoreQuery.Filter { get; set; }
 
 		string IFilterScoreQuery.Script { get; set; }
 
@@ -70,10 +70,10 @@ namespace Nest.DSL.Query
 			((IFilterScoreQuery)this).Params = paramDictionary(new FluentDictionary<string, object>());
 			return this;
 		}
-		public FilterScoreQueryDescriptor<T> Filter(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> filterSelector)
+		public FilterScoreQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
-			var filter = new FilterDescriptorDescriptor<T>();
+			var filter = new FilterDescriptor<T>();
 			((IFilterScoreQuery)this).Filter = filterSelector(filter);
 
 			return this;

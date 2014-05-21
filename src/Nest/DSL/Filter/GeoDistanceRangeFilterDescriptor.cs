@@ -13,7 +13,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(CompositeJsonConverter<GeoDistanceRangeFilterJsonReader, CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGeoDistanceRangeFilter : IFilterBase, ICustomJson
+	public interface IGeoDistanceRangeFilter : IFilter, ICustomJson
 	{
 		PropertyPathMarker Field { get; set; }
 		string Location { get; set; }
@@ -55,7 +55,7 @@ namespace Nest
 		private bool IsValidDistance { get; set; }
 		private IGeoDistanceRangeFilter _ { get { return this; }}
 
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

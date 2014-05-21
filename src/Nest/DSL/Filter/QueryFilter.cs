@@ -13,19 +13,19 @@ namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeConverter<QueryFilter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IQueryFilter : IFilterBase
+	public interface IQueryFilter : IFilter
 	{
 		[JsonProperty("query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
-		IQueryDescriptor Query { get; set; }
+		IQueryContainer Query { get; set; }
 	}
 
 	public class QueryFilter : FilterBase, IQueryFilter
 	{
 
-		IQueryDescriptor IQueryFilter.Query { get; set; }
+		IQueryContainer IQueryFilter.Query { get; set; }
 
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

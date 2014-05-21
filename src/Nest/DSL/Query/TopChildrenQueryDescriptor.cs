@@ -31,7 +31,7 @@ namespace Nest
 
 		[JsonProperty("query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
-		IQueryDescriptor Query { get; set; }
+		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "_cache")]
 		bool? Cache { get; set; }
@@ -73,7 +73,7 @@ namespace Nest
 
 		int? ITopChildrenQuery.IncrementalFactor { get; set; }
 
-		IQueryDescriptor ITopChildrenQuery.Query { get; set; }
+		IQueryContainer ITopChildrenQuery.Query { get; set; }
 
 		bool? ITopChildrenQuery.Cache { get; set; }
 
@@ -83,7 +83,7 @@ namespace Nest
 		/// Provide a child query for the top_children query
 		/// </summary>
 		/// <param name="querySelector">Describe the child query to be executed</param>
-		public TopChildrenQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public TopChildrenQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
 			((ITopChildrenQuery)this).Query = querySelector(q);

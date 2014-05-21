@@ -38,7 +38,7 @@ namespace Nest.Tests.Unit.QueryParsers
 			}
 		}
 		
-		protected static void AssertIsTermFilter(IFilterDescriptor f1, IFilterDescriptor f2)
+		protected static void AssertIsTermFilter(IFilterContainer f1, IFilterContainer f2)
 		{
 			f1.Should().NotBeNull();
 			f2.Should().NotBeNull();
@@ -47,13 +47,13 @@ namespace Nest.Tests.Unit.QueryParsers
 
 			f1.Term.Field.Should().Be(f2.Term.Field);
 			f1.Term.Value.Should().Be(f2.Term.Value);
-		}protected static void AssertIsTermFilter(BaseFilterDescriptor filter1, BaseFilterDescriptor filter2)
+		}protected static void AssertIsTermFilter(FilterContainer filter1, FilterContainer filter2)
 		{
 			filter1.Should().NotBeNull();
 			filter2.Should().NotBeNull();
 
-			IFilterDescriptor f1 = filter1;
-			IFilterDescriptor f2 = filter2;
+			IFilterContainer f1 = filter1;
+			IFilterContainer f2 = filter2;
 
 			f1.Should().NotBeNull();
 			f2.Should().NotBeNull();
@@ -63,14 +63,14 @@ namespace Nest.Tests.Unit.QueryParsers
 			f1.Term.Field.Should().Be(f2.Term.Field);
 			f1.Term.Value.Should().Be(f2.Term.Value);
 		}
-		protected static void AssertIsTermFilter(BaseFilterDescriptor compareTo, ITermFilter firstTermFilter)
+		protected static void AssertIsTermFilter(FilterContainer compareTo, ITermFilter firstTermFilter)
 		{
-			var c = (IFilterDescriptor)compareTo;
+			var c = (IFilterContainer)compareTo;
 			firstTermFilter.Should().NotBeNull();
 			firstTermFilter.Field.Should().Be(c.Term.Field);
 			firstTermFilter.Value.Should().Be(c.Term.Value);
 		}
-		protected static void AssertIsTermQuery(IQueryDescriptor query1, IQueryDescriptor query2)
+		protected static void AssertIsTermQuery(IQueryContainer query1, IQueryContainer query2)
 		{
 			query1.Term.Should().NotBeNull();
 			query2.Term.Should().NotBeNull();

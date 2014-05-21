@@ -13,7 +13,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<TermFilter>,CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ITermFilter : IFilterBase, ICustomJson
+	public interface ITermFilter : IFilter, ICustomJson
 	{
 		PropertyPathMarker Field { get; set; }
 		object Value { get; set; }
@@ -26,7 +26,7 @@ namespace Nest
 		object ITermFilter.Value { get; set; }
 		double? ITermFilter.Boost { get; set; }
 
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

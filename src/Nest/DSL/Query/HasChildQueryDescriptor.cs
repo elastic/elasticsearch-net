@@ -26,7 +26,7 @@ namespace Nest
 
 		[JsonProperty("query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
-		IQueryDescriptor Query { get; set; }
+		IQueryContainer Query { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -38,7 +38,7 @@ namespace Nest
 
 		ChildScoreType? IHasChildQuery.ScoreType { get; set; }
 
-		IQueryDescriptor IHasChildQuery.Query { get; set; }
+		IQueryContainer IHasChildQuery.Query { get; set; }
 
 		bool IQuery.IsConditionless
 		{
@@ -54,7 +54,7 @@ namespace Nest
 		}
 	
 
-		public HasChildQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public HasChildQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
 			((IHasChildQuery)this).Query = querySelector(q);

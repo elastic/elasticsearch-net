@@ -11,7 +11,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeConverter<HasParentFilterDescriptor<object>>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IHasParentFilter : IFilterBase
+	public interface IHasParentFilter : IFilter
 	{
 		[JsonProperty("type")]
 		TypeNameMarker Type { get; set; }
@@ -21,7 +21,7 @@ namespace Nest
 
 		[JsonProperty("query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
-		IQueryDescriptor Query { get; set; }
+		IQueryContainer Query { get; set; }
 	}
 
 	public class HasParentFilterDescriptor<T> : FilterBase, IHasParentFilter where T : class
@@ -30,9 +30,9 @@ namespace Nest
 
 		string IHasParentFilter.Scope { get; set;}
 		
-		IQueryDescriptor IHasParentFilter.Query { get; set; }
+		IQueryContainer IHasParentFilter.Query { get; set; }
 
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{
@@ -48,7 +48,7 @@ namespace Nest
 			((IHasParentFilter)this).Type = TypeNameMarker.Create<T>();
 		}
 
-		public HasParentFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public HasParentFilterDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
 			((IHasParentFilter)this).Query = querySelector(q);

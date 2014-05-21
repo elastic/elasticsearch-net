@@ -10,7 +10,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeConverter<TypeFilter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ITypeFilter : IFilterBase
+	public interface ITypeFilter : IFilter
 	{
 		[JsonProperty(PropertyName = "value")]
 		TypeNameMarker Value { get; set; }
@@ -18,7 +18,7 @@ namespace Nest
 
 	public class TypeFilter : FilterBase, ITypeFilter
 	{
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

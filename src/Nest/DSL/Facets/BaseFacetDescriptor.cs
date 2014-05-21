@@ -21,11 +21,11 @@ namespace Nest
 			return (TFacetDescriptor) this;
 		}
 
-		BaseFilterDescriptor IFacetDescriptor.FacetFilterDescriptor { get; set; }
-		public TFacetDescriptor FacetFilter(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> facetFilter)
+		FilterContainer IFacetDescriptor.FacetFilterDescriptor { get; set; }
+		public TFacetDescriptor FacetFilter(Func<FilterDescriptor<T>, FilterContainer> facetFilter)
 		{
 			facetFilter.ThrowIfNull("facetFilter");
-			var filter = facetFilter(new FilterDescriptorDescriptor<T>());
+			var filter = facetFilter(new FilterDescriptor<T>());
 			if (filter.IsConditionless)
 				filter = null;
 			((IFacetDescriptor) this).FacetFilterDescriptor = filter;

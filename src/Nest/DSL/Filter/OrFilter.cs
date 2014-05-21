@@ -13,19 +13,19 @@ namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeConverter<OrFilter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IOrFilter : IFilterBase
+	public interface IOrFilter : IFilter
 	{
 		[JsonProperty("filters",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseFilterDescriptor>, CustomJsonConverter>))]
-		IEnumerable<IFilterDescriptor> Filters { get; set; }
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
+		IEnumerable<IFilterContainer> Filters { get; set; }
 	}
 
 	public class OrFilter : FilterBase, IOrFilter
 	{
 
-		IEnumerable<IFilterDescriptor> IOrFilter.Filters { get; set; }
+		IEnumerable<IFilterContainer> IOrFilter.Filters { get; set; }
 
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

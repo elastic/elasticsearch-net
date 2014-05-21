@@ -16,8 +16,8 @@ namespace Nest
 {
 	public interface ISearchDescriptor
 	{
-		IFilterDescriptor Filter { get; set; }
-		IQueryDescriptor Query { get; set; }
+		IFilterContainer Filter { get; set; }
+		IQueryContainer Query { get; set; }
 	}
 
 	/// <summary>
@@ -250,11 +250,11 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
-		IQueryDescriptor ISearchDescriptor.Query { get; set; }
+		IQueryContainer ISearchDescriptor.Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseFilterDescriptor>, CustomJsonConverter>))]
-		IFilterDescriptor ISearchDescriptor.Filter { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
+		IFilterContainer ISearchDescriptor.Filter { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
 		internal IList<PropertyPathMarker> _Fields { get; set; }
@@ -805,7 +805,7 @@ namespace Nest
 		/// A facet query allows to return a count of the hits matching 
 		/// the facet query. The query itself can be expressed using the Query DSL.
 		/// </summary>
-		public SearchDescriptor<T> FacetQuery(string name, Func<QueryDescriptor<T>, BaseQuery> querySelector, bool? Global = null)
+		public SearchDescriptor<T> FacetQuery(string name, Func<QueryDescriptor<T>, QueryContainer> querySelector, bool? Global = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			querySelector.ThrowIfNull("query");
@@ -823,7 +823,7 @@ namespace Nest
 		/// its matching the filter. The filter itself can be expressed using the Query DSL.
 		/// Note, filter facet filters are faster than query facet when using native filters (non query wrapper ones).
 		/// </summary>
-		public SearchDescriptor<T> FacetFilter(string name, Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> filterSelector)
+		public SearchDescriptor<T> FacetFilter(string name, Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			filterSelector.ThrowIfNull("filterSelector");
@@ -831,7 +831,7 @@ namespace Nest
 			if (this._Facets == null)
 				this._Facets = new Dictionary<PropertyPathMarker, FacetDescriptorsBucket<T>>();
 
-			var filter = new FilterDescriptorDescriptor<T>();
+			var filter = new FilterDescriptor<T>();
 			var f = filterSelector(filter);
 			this._Facets.Add(name, new FacetDescriptorsBucket<T> { FilterDescriptor = f });
 
@@ -905,11 +905,11 @@ namespace Nest
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda
 		/// </summary>
-		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> query)
+		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> query)
 		{
 			query.ThrowIfNull("query");
 			var q = new QueryDescriptor<T>();
-			((IQueryDescriptor)q).IsStrict = this._Strict;
+			((IQueryContainer)q).IsStrict = this._Strict;
 			var bq = query(q);
 			return this.Query(bq);
 		}
@@ -917,7 +917,7 @@ namespace Nest
 		/// <summary>
 		/// Describe the query to perform using the static Query class
 		/// </summary>
-		public SearchDescriptor<T> Query(IQueryDescriptor query)
+		public SearchDescriptor<T> Query(IQueryContainer query)
 		{
 			if (query == null)
 				return this;
@@ -939,7 +939,7 @@ namespace Nest
 		public SearchDescriptor<T> QueryString(string userInput)
 		{
 			var q = new QueryDescriptor<T>();
-			BaseQuery bq;
+			QueryContainer bq;
 			if (userInput.IsNullOrEmpty())
 				bq = q.MatchAll();
 			else
@@ -960,10 +960,10 @@ namespace Nest
 		/// <summary>
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
-		public SearchDescriptor<T> Filter(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> filter)
+		public SearchDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filter)
 		{
 			filter.ThrowIfNull("filter");
-			var f = new FilterDescriptorDescriptor<T>().Strict(this._Strict);
+			var f = new FilterDescriptor<T>().Strict(this._Strict);
 
 			var bf = filter(f);
 			if (bf == null)
@@ -981,7 +981,7 @@ namespace Nest
 		/// <summary>
 		/// Filter search
 		/// </summary>
-		public SearchDescriptor<T> Filter(BaseFilterDescriptor filterDescriptor)
+		public SearchDescriptor<T> Filter(FilterContainer filterDescriptor)
 		{
 			filterDescriptor.ThrowIfNull("filter");
 			((ISearchDescriptor)this).Filter = filterDescriptor;
@@ -993,7 +993,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> FilterRaw(string rawFilter)
 		{
-			((ISearchDescriptor)this).Filter = new FilterDescriptorDescriptor<T>().Raw(rawFilter);
+			((ISearchDescriptor)this).Filter = new FilterDescriptor<T>().Raw(rawFilter);
 			return this;
 		}
 

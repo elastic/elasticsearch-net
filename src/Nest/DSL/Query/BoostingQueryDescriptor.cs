@@ -13,10 +13,10 @@ namespace Nest
 	public interface IBoostingQuery : IQuery
 	{
 		[JsonProperty("positive")]
-		BaseQuery PositiveQuery { get; set; }
+		QueryContainer PositiveQuery { get; set; }
 
 		[JsonProperty("negative")]
-		BaseQuery NegativeQuery { get; set; }
+		QueryContainer NegativeQuery { get; set; }
 
 		[JsonProperty("negative_boost")]
 		double? NegativeBoost { get; set; }
@@ -25,9 +25,9 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class BoostingQueryDescriptor<T> : IBoostingQuery where T : class
 	{
-		BaseQuery IBoostingQuery.PositiveQuery { get; set; }
+		QueryContainer IBoostingQuery.PositiveQuery { get; set; }
 
-		BaseQuery IBoostingQuery.NegativeQuery { get; set; }
+		QueryContainer IBoostingQuery.NegativeQuery { get; set; }
 
 		double? IBoostingQuery.NegativeBoost { get; set; }
 
@@ -48,14 +48,14 @@ namespace Nest
 			return this;
 		}
 
-		public BoostingQueryDescriptor<T> Positive(Func<QueryDescriptor<T>, BaseQuery> selector)
+		public BoostingQueryDescriptor<T> Positive(Func<QueryDescriptor<T>, QueryContainer> selector)
 		{
 			var query = new QueryDescriptor<T>();
 			var q = selector(query);
 			((IBoostingQuery)this).PositiveQuery = q;
 			return this;
 		}
-		public BoostingQueryDescriptor<T> Negative(Func<QueryDescriptor<T>, BaseQuery> selector)
+		public BoostingQueryDescriptor<T> Negative(Func<QueryDescriptor<T>, QueryContainer> selector)
 		{
 			var query = new QueryDescriptor<T>();
 			var q = selector(query);

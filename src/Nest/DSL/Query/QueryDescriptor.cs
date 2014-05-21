@@ -11,7 +11,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public class QueryDescriptor<T> : BaseQuery where T : class
+	public class QueryDescriptor<T> : QueryContainer where T : class
 	{
 		public QueryDescriptor()
 		{
@@ -19,21 +19,21 @@ namespace Nest
 
 		internal QueryDescriptor(bool forceConditionless)
 		{
-			((IQueryDescriptor)this).IsConditionless = forceConditionless;
+			((IQueryContainer)this).IsConditionless = forceConditionless;
 		}
 
 		public QueryDescriptor<T> Strict(bool strict = true)
 		{
 			var q = new QueryDescriptor<T>();
-			((IQueryDescriptor)q).IsStrict = strict;
+			((IQueryContainer)q).IsStrict = strict;
 			return q;
 		}
 
 		public QueryDescriptor<T> Verbatim(bool verbatim = true)
 		{
 			var q = new QueryDescriptor<T>();
-			((IQueryDescriptor)q).IsStrict = verbatim;
-			((IQueryDescriptor)q).IsVerbatim = verbatim;
+			((IQueryContainer)q).IsStrict = verbatim;
+			((IQueryContainer)q).IsVerbatim = verbatim;
 			return q;
 		}
 
@@ -49,7 +49,7 @@ namespace Nest
 			return new QueryDescriptor<T>(forceConditionless: true);
 		}
 
-		private QueryDescriptor<T> New(IQuery query, Action<IQueryDescriptor> fillProperty)
+		private QueryDescriptor<T> New(IQuery query, Action<IQueryContainer> fillProperty)
 		{
 			if (query.IsConditionless && !this.IsVerbatim)
 				return CreateConditionlessQueryDescriptor(query);
@@ -64,8 +64,8 @@ namespace Nest
 		protected virtual QueryDescriptor<T> Clone()
 		{
 			var q = new QueryDescriptor<T>();
-			((IQueryDescriptor)q).IsStrict = this.IsStrict;
-			((IQueryDescriptor)q).IsVerbatim = this.IsVerbatim;
+			((IQueryContainer)q).IsStrict = this.IsStrict;
+			((IQueryContainer)q).IsVerbatim = this.IsVerbatim;
 			return q;
 		}
 		
@@ -75,23 +75,23 @@ namespace Nest
 		/// </summary>
 		/// <param name="rawJson"></param>
 		/// <returns></returns>
-		public BaseQuery Raw(string rawJson)
+		public QueryContainer Raw(string rawJson)
 		{
 			var f = new QueryDescriptor<T>();
-			((IQueryDescriptor)f).IsStrict = this.IsStrict;
-			((IQueryDescriptor)f).IsVerbatim = this.IsVerbatim;
-			((IQueryDescriptor)f).RawQuery = rawJson;
+			((IQueryContainer)f).IsStrict = this.IsStrict;
+			((IQueryContainer)f).IsVerbatim = this.IsVerbatim;
+			((IQueryContainer)f).RawQuery = rawJson;
 			return f;
 		}
 
 		/// <summary>
 		/// A query that uses a query parser in order to parse its content.
 		/// </summary>
-		public BaseQuery QueryString(Action<QueryStringQueryDescriptor<T>> selector)
+		public QueryContainer QueryString(Action<QueryStringQueryDescriptor<T>> selector)
 		{
 			var query = new QueryStringQueryDescriptor<T>();
 			selector(query);
-			return this.New(query, q => ((IQueryDescriptor)q).QueryString = query);
+			return this.New(query, q => ((IQueryContainer)q).QueryString = query);
 		}
 
 		/// <summary>
@@ -99,17 +99,17 @@ namespace Nest
 		/// Unlike the regular query_string query, the simple_query_string query will 
 		/// never throw an exception, and discards invalid parts of the query. 
 		/// </summary>
-		public BaseQuery SimpleQueryString(Action<SimpleQueryStringQueryDescriptor<T>> selector)
+		public QueryContainer SimpleQueryString(Action<SimpleQueryStringQueryDescriptor<T>> selector)
 		{
 			var query = new SimpleQueryStringQueryDescriptor<T>();
 			selector(query);
-			return this.New(query, q => ((IQueryDescriptor)q).SimpleQueryString = query);
+			return this.New(query, q => ((IQueryContainer)q).SimpleQueryString = query);
 		}
 		
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public BaseQuery Terms(string field, IEnumerable<string> terms)
+		public QueryContainer Terms(string field, IEnumerable<string> terms)
 		{
 			return this.TermsDescriptor(t => t
 				.OnField(field)
@@ -119,7 +119,7 @@ namespace Nest
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public BaseQuery Terms<K>(Expression<Func<T, K>> objectPath, IEnumerable<K> terms)
+		public QueryContainer Terms<K>(Expression<Func<T, K>> objectPath, IEnumerable<K> terms)
 		{
 			return this.TermsDescriptor<K>(t => t
 				.OnField(objectPath)
@@ -129,7 +129,7 @@ namespace Nest
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public BaseQuery Terms(Expression<Func<T, object>> objectPath, IEnumerable<string> terms)
+		public QueryContainer Terms(Expression<Func<T, object>> objectPath, IEnumerable<string> terms)
 		{
 			return this.TermsDescriptor(t => t
 				.OnField(objectPath)
@@ -140,7 +140,7 @@ namespace Nest
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public BaseQuery TermsDescriptor(Action<TermsQueryDescriptor<T, object>> selector)
+		public QueryContainer TermsDescriptor(Action<TermsQueryDescriptor<T, object>> selector)
 		{
 			return this.TermsDescriptor<object>(selector);
 
@@ -148,7 +148,7 @@ namespace Nest
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public BaseQuery TermsDescriptor<K>(Action<TermsQueryDescriptor<T, K>> selector)
+		public QueryContainer TermsDescriptor<K>(Action<TermsQueryDescriptor<T, K>> selector)
 		{
 			var query = new TermsQueryDescriptor<T, K>();
 			selector(query);
@@ -162,7 +162,7 @@ namespace Nest
 		/// Warning: this query is not very scalable with its default prefix length of 0 – in this case,
 		/// every term will be enumerated and cause an edit score calculation or max_expansions is not set.
 		/// </summary>
-		public BaseQuery Fuzzy(Action<FuzzyQueryDescriptor<T>> selector)
+		public QueryContainer Fuzzy(Action<FuzzyQueryDescriptor<T>> selector)
 		{
 			var query = new FuzzyQueryDescriptor<T>();
 			selector(query);
@@ -172,7 +172,7 @@ namespace Nest
 		/// <summary>
 		/// fuzzy query on a numeric field will result in a range query “around” the value using the min_similarity value
 		/// </summary>
-		public BaseQuery FuzzyNumeric(Action<FuzzyNumericQueryDescriptor<T>> selector)
+		public QueryContainer FuzzyNumeric(Action<FuzzyNumericQueryDescriptor<T>> selector)
 		{
 			var query = new FuzzyNumericQueryDescriptor<T>();
 			selector(query);
@@ -183,7 +183,7 @@ namespace Nest
 		/// fuzzy query on a numeric field will result in a range query “around” the value using the min_similarity value
 		/// </summary>
 		/// <param name="selector"></param>
-		public BaseQuery FuzzyDate(Action<FuzzyDateQueryDescriptor<T>> selector)
+		public QueryContainer FuzzyDate(Action<FuzzyDateQueryDescriptor<T>> selector)
 		{
 			var query = new FuzzyDateQueryDescriptor<T>();
 			selector(query);
@@ -196,7 +196,7 @@ namespace Nest
 		/// The default text query is of type boolean. It means that the text provided is analyzed and the analysis 
 		/// process constructs a boolean query from the provided text.
 		/// </summary>
-		public BaseQuery Match(Action<MatchQueryDescriptor<T>> selector)
+		public QueryContainer Match(Action<MatchQueryDescriptor<T>> selector)
 		{
 			var query = new MatchQueryDescriptor<T>();
 			selector(query);
@@ -207,7 +207,7 @@ namespace Nest
 		/// <summary>
 		/// The text_phrase query analyzes the text and creates a phrase query out of the analyzed text. 
 		/// </summary>
-		public BaseQuery MatchPhrase(Action<MatchPhraseQueryDescriptor<T>> selector)
+		public QueryContainer MatchPhrase(Action<MatchPhraseQueryDescriptor<T>> selector)
 		{
 			var query = new MatchPhraseQueryDescriptor<T>();
 			selector(query);
@@ -219,7 +219,7 @@ namespace Nest
 		/// The text_phrase_prefix is the same as text_phrase, expect it allows for prefix matches on the last term 
 		/// in the text
 		/// </summary>
-		public BaseQuery MatchPhrasePrefix(Action<MatchPhrasePrefixQueryDescriptor<T>> selector)
+		public QueryContainer MatchPhrasePrefix(Action<MatchPhrasePrefixQueryDescriptor<T>> selector)
 		{
 			var query = new MatchPhrasePrefixQueryDescriptor<T>();
 			selector(query);
@@ -232,7 +232,7 @@ namespace Nest
 		//The idea here is to allow to more easily build a concise match type query over multiple fields instead of using a 
 		//relatively more expressive query by using multiple match queries within a bool query.
 		/// </summary>
-		public BaseQuery MultiMatch(Action<MultiMatchQueryDescriptor<T>> selector)
+		public QueryContainer MultiMatch(Action<MultiMatchQueryDescriptor<T>> selector)
 		{
 			var query = new MultiMatchQueryDescriptor<T>();
 			selector(query);
@@ -245,7 +245,7 @@ namespace Nest
 		/// nested objects / docs as if they were indexed as separate docs (they are, internally) and resulting in the
 		/// root parent doc (or parent nested mapping).
 		/// </summary>
-		public BaseQuery Nested(Action<NestedQueryDescriptor<T>> selector)
+		public QueryContainer Nested(Action<NestedQueryDescriptor<T>> selector)
 		{
 			var query = new NestedQueryDescriptor<T>();
 			selector(query);
@@ -257,7 +257,7 @@ namespace Nest
 		/// A thin wrapper allowing fined grained control what should happen if a query is conditionless
 		/// if you need to fallback to something other than a match_all query
 		/// </summary>
-		public BaseQuery Conditionless(Action<ConditionlessQueryDescriptor<T>> selector)
+		public QueryContainer Conditionless(Action<ConditionlessQueryDescriptor<T>> selector)
 		{
 			var query = new ConditionlessQueryDescriptor<T>();
 			selector(query);
@@ -271,7 +271,7 @@ namespace Nest
 		/// only when executed on an index that matches a specific list of indices, and another query that executes 
 		/// when it is executed on an index that does not match the listed indices.
 		/// </summary>
-		public BaseQuery Indices(Action<IndicesQueryDescriptor<T>> selector)
+		public QueryContainer Indices(Action<IndicesQueryDescriptor<T>> selector)
 		{
 			var query = new IndicesQueryDescriptor<T>();
 			selector(query);
@@ -283,7 +283,7 @@ namespace Nest
 		/// on the field type, for string fields, the TermRangeQuery, while for number/date fields, the query is
 		/// a NumericRangeQuery
 		/// </summary>
-		public BaseQuery Range(Action<RangeQueryDescriptor<T>> selector)
+		public QueryContainer Range(Action<RangeQueryDescriptor<T>> selector)
 		{
 			var query = new RangeQueryDescriptor<T>();
 			selector(query);
@@ -293,7 +293,7 @@ namespace Nest
 		/// <summary>
 		/// Fuzzy like this query find documents that are “like” provided text by running it against one or more fields.
 		/// </summary>
-		public BaseQuery FuzzyLikeThis(Action<FuzzyLikeThisQueryDescriptor<T>> selector)
+		public QueryContainer FuzzyLikeThis(Action<FuzzyLikeThisQueryDescriptor<T>> selector)
 		{
 			var query = new FuzzyLikeThisQueryDescriptor<T>();
 			selector(query);
@@ -303,7 +303,7 @@ namespace Nest
 		/// <summary>
 		/// More like this query find documents that are “like” provided text by running it against one or more fields.
 		/// </summary>
-		public BaseQuery MoreLikeThis(Action<MoreLikeThisQueryDescriptor<T>> selector)
+		public QueryContainer MoreLikeThis(Action<MoreLikeThisQueryDescriptor<T>> selector)
 		{
 			var query = new MoreLikeThisQueryDescriptor<T>();
 			selector(query);
@@ -316,7 +316,7 @@ namespace Nest
 		/// that have a shape that intersects with the query shape. 
 		/// It will also use the same PrefixTree configuration as defined for the field mapping.
 		/// </summary>
-		public BaseQuery GeoShape(Action<GeoShapeQueryDescriptor<T>> selector)
+		public QueryContainer GeoShape(Action<GeoShapeQueryDescriptor<T>> selector)
 		{
 			var query = new GeoShapeQueryDescriptor<T>();
 			selector(query);
@@ -327,7 +327,7 @@ namespace Nest
 		/// The common terms query is a modern alternative to stopwords which improves the precision and recall 
 		/// of search results (by taking stopwords into account), without sacrificing performance.
 		/// </summary>
-		public BaseQuery CommonTerms(Action<CommonTermsQueryDescriptor<T>> selector)
+		public QueryContainer CommonTerms(Action<CommonTermsQueryDescriptor<T>> selector)
 		{
 			var query = new CommonTermsQueryDescriptor<T>();
 			selector(query);
@@ -340,7 +340,7 @@ namespace Nest
 		/// constant_score.
 		/// </summary>
 		/// <typeparam name="K">Type of the child</typeparam>
-		public BaseQuery HasChild<K>(Action<HasChildQueryDescriptor<K>> selector) where K : class
+		public QueryContainer HasChild<K>(Action<HasChildQueryDescriptor<K>> selector) where K : class
 		{
 			var query = new HasChildQueryDescriptor<K>();
 			selector(query);
@@ -352,7 +352,7 @@ namespace Nest
 		/// constant_score.
 		/// </summary>
 		/// <typeparam name="K">Type of the child</typeparam>
-		public BaseQuery HasParent<K>(Action<HasParentQueryDescriptor<K>> selector) where K : class
+		public QueryContainer HasParent<K>(Action<HasParentQueryDescriptor<K>> selector) where K : class
 		{
 			var query = new HasParentQueryDescriptor<K>();
 			selector(query);
@@ -365,7 +365,7 @@ namespace Nest
 		/// then it is run again with a wider (more hits) search.
 		/// </summary>
 		/// <typeparam name="K">Type of the child</typeparam>
-		public BaseQuery TopChildren<K>(Action<TopChildrenQueryDescriptor<K>> selector) where K : class
+		public QueryContainer TopChildren<K>(Action<TopChildrenQueryDescriptor<K>> selector) where K : class
 		{
 			var query = new TopChildrenQueryDescriptor<K>();
 			selector(query);
@@ -375,7 +375,7 @@ namespace Nest
 		/// <summary>
 		/// A query that applies a filter to the results of another query. This query maps to Lucene FilteredQuery.
 		/// </summary>
-		public BaseQuery Filtered(Action<FilteredQueryDescriptor<T>> selector)
+		public QueryContainer Filtered(Action<FilteredQueryDescriptor<T>> selector)
 		{
 			var query = new FilteredQueryDescriptor<T>();
 			selector(query);
@@ -388,7 +388,7 @@ namespace Nest
 		/// with the maximum score for that document as produced by any subquery, plus a tie breaking increment for 
 		/// any additional matching subqueries.
 		/// </summary>
-		public BaseQuery Dismax(Action<DisMaxQueryDescriptor<T>> selector)
+		public QueryContainer Dismax(Action<DisMaxQueryDescriptor<T>> selector)
 		{
 			var query = new DisMaxQueryDescriptor<T>();
 			selector(query);
@@ -399,7 +399,7 @@ namespace Nest
 		/// A query that wraps a filter or another query and simply returns a constant score equal to the query boost 
 		/// for every document in the filter. Maps to Lucene ConstantScoreQuery.
 		/// </summary>
-		public BaseQuery ConstantScore(Action<ConstantScoreQueryDescriptor<T>> selector)
+		public QueryContainer ConstantScore(Action<ConstantScoreQueryDescriptor<T>> selector)
 		{
 			var query = new ConstantScoreQueryDescriptor<T>();
 			selector(query);
@@ -412,7 +412,7 @@ namespace Nest
 		/// query boost factor does not.
 		/// </summary>
 		[Obsolete("Custom boost factor has been removed in 1.1")]
-		public BaseQuery CustomBoostFactor(Action<CustomBoostFactorQueryDescriptor<T>> selector)
+		public QueryContainer CustomBoostFactor(Action<CustomBoostFactorQueryDescriptor<T>> selector)
 		{
 			var query = new CustomBoostFactorQueryDescriptor<T>();
 			selector(query);
@@ -424,7 +424,7 @@ namespace Nest
 		/// computation derived from other field values in the doc (numeric ones) using script expression
 		/// </summary>
 		[Obsolete("Custom score has been removed in 1.1")]
-		public BaseQuery CustomScore(Action<CustomScoreQueryDescriptor<T>> customScoreQuery)
+		public QueryContainer CustomScore(Action<CustomScoreQueryDescriptor<T>> customScoreQuery)
 		{
 			var query = new CustomScoreQueryDescriptor<T>();
 			customScoreQuery(query);
@@ -435,7 +435,7 @@ namespace Nest
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
 		/// computation derived from other field values in the doc (numeric ones) using script or boost expression
 		/// </summary>
-		public BaseQuery CustomFiltersScore(Action<CustomFiltersScoreQueryDescriptor<T>> customFiltersScoreQuery)
+		public QueryContainer CustomFiltersScore(Action<CustomFiltersScoreQueryDescriptor<T>> customFiltersScoreQuery)
 		{
 			var query = new CustomFiltersScoreQueryDescriptor<T>();
 			customFiltersScoreQuery(query);
@@ -447,7 +447,7 @@ namespace Nest
 		/// Lucene BooleanQuery. 
 		/// It is built using one or more boolean clauses, each clause with a typed occurrence
 		/// </summary>
-		public BaseQuery Bool(Action<BoolQueryDescriptor<T>> booleanQuery)
+		public QueryContainer Bool(Action<BoolQueryDescriptor<T>> booleanQuery)
 		{
 			var query = new BoolQueryDescriptor<T>();
 			booleanQuery(query);
@@ -459,7 +459,7 @@ namespace Nest
 		/// undesirable terms, but reduces their overall score.
 		/// </summary>
 		/// <param name="boostingQuery"></param>
-		public BaseQuery Boosting(Action<BoostingQueryDescriptor<T>> boostingQuery)
+		public QueryContainer Boosting(Action<BoostingQueryDescriptor<T>> boostingQuery)
 		{
 			var query = new BoostingQueryDescriptor<T>();
 			boostingQuery(query);
@@ -475,7 +475,7 @@ namespace Nest
 		/// boosting into account, the norms_field needs to be provided in order to explicitly specify which
 		/// field the boosting will be done on (Note, this will result in slower execution time).
 		/// </param>
-		public BaseQuery MatchAll(double? Boost = null, string NormField = null)
+		public QueryContainer MatchAll(double? Boost = null, string NormField = null)
 		{
 			var query = new MatchAll() { NormField = NormField };
 			if (Boost.HasValue)
@@ -488,7 +488,7 @@ namespace Nest
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
 		/// </summary>
-		public BaseQuery Term<K>(Expression<Func<T, K>> fieldDescriptor, K value, double? Boost = null)
+		public QueryContainer Term<K>(Expression<Func<T, K>> fieldDescriptor, K value, double? Boost = null)
 		{
 			return this.Term(t =>
 			{
@@ -501,7 +501,7 @@ namespace Nest
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
 		/// </summary>
-		public BaseQuery Term(Expression<Func<T, object>> fieldDescriptor, object value, double? Boost = null)
+		public QueryContainer Term(Expression<Func<T, object>> fieldDescriptor, object value, double? Boost = null)
 		{
 			return this.Term(t =>
 			{
@@ -514,7 +514,7 @@ namespace Nest
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
 		/// </summary>
-		public BaseQuery Term(string field, object value, double? Boost = null)
+		public QueryContainer Term(string field, object value, double? Boost = null)
 		{
 			return this.Term(t =>
 			{
@@ -527,7 +527,7 @@ namespace Nest
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
 		/// </summary>
-		public BaseQuery Term(Action<TermQueryDescriptor<T>> termSelector)
+		public QueryContainer Term(Action<TermQueryDescriptor<T>> termSelector)
 		{
 			var termQuery = new TermQueryDescriptor<T>();
 			termSelector(termQuery);
@@ -540,7 +540,7 @@ namespace Nest
 		/// over many terms. In order to prevent extremely slow wildcard queries, a wildcard term should 
 		/// not start with one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
-		public BaseQuery Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
+		public QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
 		{
 			return this.Wildcard(t =>
 			{
@@ -556,7 +556,7 @@ namespace Nest
 		/// In order to prevent extremely slow wildcard queries, a wildcard term should not start with 
 		/// one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
-		public BaseQuery Wildcard(string field, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
+		public QueryContainer Wildcard(string field, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
 		{
 			return this.Wildcard(t =>
 			{
@@ -573,7 +573,7 @@ namespace Nest
 		/// In order to prevent extremely slow wildcard queries, a wildcard term should not start with 
 		/// one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
-		public BaseQuery Wildcard(Action<WildcardQueryDescriptor<T>> wildcardSelector)
+		public QueryContainer Wildcard(Action<WildcardQueryDescriptor<T>> wildcardSelector)
 		{
 			var wildcardQuery = new WildcardQueryDescriptor<T>();
 			wildcardSelector(wildcardQuery);
@@ -583,7 +583,7 @@ namespace Nest
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
 		/// The prefix query maps to Lucene PrefixQuery. 
 		/// </summary>
-		public BaseQuery Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
+		public QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
 		{
 			return this.Prefix(t =>
 			{
@@ -597,7 +597,7 @@ namespace Nest
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
 		/// The prefix query maps to Lucene PrefixQuery. 
 		/// </summary>	
-		public BaseQuery Prefix(string field, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
+		public QueryContainer Prefix(string field, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
 		{
 			return this.Prefix(t =>
 			{
@@ -611,7 +611,7 @@ namespace Nest
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
 		/// The prefix query maps to Lucene PrefixQuery. 
 		/// </summary>	
-		public BaseQuery Prefix(Action<PrefixQueryDescriptor<T>> prefixSelector)
+		public QueryContainer Prefix(Action<PrefixQueryDescriptor<T>> prefixSelector)
 		{
 			var prefixQuery = new PrefixQueryDescriptor<T>();
 			prefixSelector(prefixQuery);
@@ -621,7 +621,7 @@ namespace Nest
 		/// Filters documents that only have the provided ids. Note, this filter does not require 
 		/// the _id field to be indexed since it works using the _uid field.
 		/// </summary>
-		public BaseQuery Ids(IEnumerable<string> values)
+		public QueryContainer Ids(IEnumerable<string> values)
 		{
 			var ids = new IdsQuery { Values = values };
 			return this.New(ids, q => q.Ids = ids);
@@ -632,7 +632,7 @@ namespace Nest
 		/// Note, this filter does not require the _id field to be indexed since
 		/// it works using the _uid field.
 		/// </summary>
-		public BaseQuery Ids(string type, IEnumerable<string> values)
+		public QueryContainer Ids(string type, IEnumerable<string> values)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var ids = new IdsQuery { Values = values, Type = new[] { type } };
@@ -644,7 +644,7 @@ namespace Nest
 		/// Note, this filter does not require the _id field to be indexed since 
 		/// it works using the _uid field.
 		/// </summary>
-		public BaseQuery Ids(IEnumerable<string> types, IEnumerable<string> values)
+		public QueryContainer Ids(IEnumerable<string> types, IEnumerable<string> values)
 		{
 			var ids = new IdsQuery { Values = values, Type = types };
 			return this.New(ids, q => q.Ids = ids);
@@ -653,7 +653,7 @@ namespace Nest
 		/// <summary>
 		/// Matches spans containing a term. The span term query maps to Lucene SpanTermQuery. 
 		/// </summary>
-		public BaseQuery SpanTerm(Expression<Func<T, object>> fieldDescriptor , string value , double? Boost = null)
+		public QueryContainer SpanTerm(Expression<Func<T, object>> fieldDescriptor , string value , double? Boost = null)
 		{
 			return this.SpanTerm(t =>
 			{
@@ -665,7 +665,7 @@ namespace Nest
 		/// <summary>
 		/// Matches spans containing a term. The span term query maps to Lucene SpanTermQuery. 
 		/// </summary>
-		public BaseQuery SpanTerm(string field, string value, double? Boost = null)
+		public QueryContainer SpanTerm(string field, string value, double? Boost = null)
 		{
 			return this.SpanTerm(t =>
 			{
@@ -677,7 +677,7 @@ namespace Nest
 		/// <summary>
 		/// Matches spans containing a term. The span term query maps to Lucene SpanTermQuery. 
 		/// </summary>
-		public BaseQuery SpanTerm(Action<SpanTermQueryDescriptor<T>> spanTermSelector)
+		public QueryContainer SpanTerm(Action<SpanTermQueryDescriptor<T>> spanTermSelector)
 		{
 			var spanTerm = new SpanTermQueryDescriptor<T>();
 			spanTermSelector(spanTerm);
@@ -686,7 +686,7 @@ namespace Nest
 		/// <summary>
 		/// Matches spans near the beginning of a field. The span first query maps to Lucene SpanFirstQuery. 
 		/// </summary>
-		public BaseQuery SpanFirst(Action<SpanFirstQueryDescriptor<T>> selector)
+		public QueryContainer SpanFirst(Action<SpanFirstQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			var span = new SpanFirstQueryDescriptor<T>();
@@ -699,7 +699,7 @@ namespace Nest
 		/// intervening unmatched positions, as well as whether matches are required to be in-order.
 		/// The span near query maps to Lucene SpanNearQuery.
 		/// </summary>
-		public BaseQuery SpanNear(Action<SpanNearQuery<T>> selector)
+		public QueryContainer SpanNear(Action<SpanNearQuery<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			var span = new SpanNearQuery<T>();
@@ -712,7 +712,7 @@ namespace Nest
 		/// Matches the union of its span clauses. 
 		/// The span or query maps to Lucene SpanOrQuery. 
 		/// </summary>
-		public BaseQuery SpanOr(Action<SpanOrQueryDescriptor<T>> selector)
+		public QueryContainer SpanOr(Action<SpanOrQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			var span = new SpanOrQueryDescriptor<T>();
@@ -725,7 +725,7 @@ namespace Nest
 		/// Removes matches which overlap with another span query. 
 		/// The span not query maps to Lucene SpanNotQuery.
 		/// </summary>
-		public BaseQuery SpanNot(Action<SpanNotQuery<T>> selector)
+		public QueryContainer SpanNot(Action<SpanNotQuery<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			var span = new SpanNotQuery<T>();
@@ -738,7 +738,7 @@ namespace Nest
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
 		/// computation derived from other field values in the doc (numeric ones) using script or boost expression
 		/// </summary>
-		public BaseQuery Regexp(Action<RegexpQueryDescriptor<T>> regexpSelector)
+		public QueryContainer Regexp(Action<RegexpQueryDescriptor<T>> regexpSelector)
 		{
 			var query = new RegexpQueryDescriptor<T>();
 			regexpSelector(query);
@@ -749,7 +749,7 @@ namespace Nest
 		/// Function score query
 		/// </summary>
 		/// <returns></returns>
-		public BaseQuery FunctionScore(Action<FunctionScoreQueryDescriptor<T>> functionScoreQuery)
+		public QueryContainer FunctionScore(Action<FunctionScoreQueryDescriptor<T>> functionScoreQuery)
 		{
 			var query = new FunctionScoreQueryDescriptor<T>();
 			functionScoreQuery(query);

@@ -22,7 +22,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
-		IQueryDescriptor Query { get; set; }
+		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "score_mode")]
 		[JsonConverter(typeof (StringEnumConverter))]
@@ -44,7 +44,7 @@ namespace Nest
 	{
 		IEnumerable<IFunctionScoreFunction> IFunctionScoreQuery.Functions { get; set; }
 
-		IQueryDescriptor IFunctionScoreQuery.Query { get; set; }
+		IQueryContainer IFunctionScoreQuery.Query { get; set; }
 
 		FunctionScoreMode? IFunctionScoreQuery.ScoreMode { get; set; }
 
@@ -65,7 +65,7 @@ namespace Nest
 			}
 		}
 
-		public FunctionScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public FunctionScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();

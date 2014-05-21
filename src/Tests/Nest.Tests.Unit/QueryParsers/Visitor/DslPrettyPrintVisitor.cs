@@ -41,7 +41,7 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 		protected bool IsConditionless { get; set; }
 		protected bool IsStrict { get; set; }
 		
-		public virtual void Visit(IQueryDescriptor baseQuery)
+		public virtual void Visit(IQueryContainer baseQuery)
 		{
 			this.IsConditionless = baseQuery.IsConditionless;
 			this.IsStrict = baseQuery.IsStrict;
@@ -51,13 +51,13 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 		{
 			//Write("");
 		}
-		public virtual void Visit(IFilterDescriptor filter)
+		public virtual void Visit(IFilterContainer filter)
 		{
 			this.IsConditionless = filter.IsConditionless;
 			this.IsStrict = filter.IsStrict;
 			this.IsVerbatim = filter.IsVerbatim;
 		}
-		public virtual void Visit(IFilterBase filter)
+		public virtual void Visit(IFilter filter)
 		{
 		}
 		

@@ -16,7 +16,7 @@ namespace Nest
   public interface IFacetDescriptor
   {
 	  bool? IsGlobal { get; set; }
-	  BaseFilterDescriptor FacetFilterDescriptor { get; set; }
+	  FilterContainer FacetFilterDescriptor { get; set; }
 	  string Scope { get; set; }
 	  PropertyPathMarker Nested { get; set; }
   }

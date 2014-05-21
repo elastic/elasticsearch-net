@@ -23,7 +23,7 @@ namespace Nest.DSL.Descriptors
         internal string _Mode { get; set; }
 
 		[JsonProperty("nested_filter")]
-		internal BaseFilterDescriptor NestedFilterDescriptor { get; set; }
+		internal FilterContainer NestedFilterDescriptor { get; set; }
 
 		[JsonProperty("nested_path")]
 		internal PropertyPathMarker _NestedPath { get; set; }
@@ -98,11 +98,11 @@ namespace Nest.DSL.Descriptors
             return this;
         }
 
-		public virtual SortDescriptor<T> NestedFilter(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> filterSelector)
+		public virtual SortDescriptor<T> NestedFilter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 
-			var filter = new FilterDescriptorDescriptor<T>();
+			var filter = new FilterDescriptor<T>();
 			NestedFilterDescriptor = filterSelector(filter);
 			return this;
 		}

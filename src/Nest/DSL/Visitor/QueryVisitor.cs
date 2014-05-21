@@ -21,7 +21,7 @@ namespace Nest.DSL.Visitor
 		/// Visit the query container just before we dispatch into the query it holds
 		/// </summary>
 		/// <param name="queryDescriptor"></param>
-		void Visit(IQueryDescriptor queryDescriptor);		
+		void Visit(IQueryContainer queryDescriptor);		
 		
 		/// <summary>
 		/// Visit every query item just before they are visited by their specialized Visit() implementation
@@ -33,13 +33,13 @@ namespace Nest.DSL.Visitor
 		/// Visit the filter container just before we dispatch into the filter it holds
 		/// </summary>
 		/// <param name="filterDescriptor"></param>
-		void Visit(IFilterDescriptor filterDescriptor);
+		void Visit(IFilterContainer filterDescriptor);
 
 		/// <summary>
 		/// Visit every filer item just before they are visited by their specialized Visit() implementation
 		/// </summary>
 		/// <param name="filter">The IFilterBase object that will be visited</param>
-		void Visit(IFilterBase filter);
+		void Visit(IFilter filter);
 	
 		void Visit(IBoolQuery query);
 		void Visit(IBoostingQuery query);
@@ -118,7 +118,7 @@ namespace Nest.DSL.Visitor
 		{
 		}
 
-		public virtual void Visit(IQueryDescriptor baseQuery)
+		public virtual void Visit(IQueryContainer baseQuery)
 		{
 		}
 
@@ -126,11 +126,11 @@ namespace Nest.DSL.Visitor
 		{
 		}
 
-		public virtual void Visit(IFilterDescriptor customFiltersScore)
+		public virtual void Visit(IFilterContainer customFiltersScore)
 		{
 		}
 
-		public virtual void Visit(IFilterBase customFiltersScore)
+		public virtual void Visit(IFilter customFiltersScore)
 		{
 		}
 

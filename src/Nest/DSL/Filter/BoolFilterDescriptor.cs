@@ -26,7 +26,7 @@ namespace Nest
 				);
 		}
 		
-		internal static IEnumerable<IFilterDescriptor> MergeShouldFilters(this IFilterDescriptor lbq, IFilterDescriptor rbq)
+		internal static IEnumerable<IFilterContainer> MergeShouldFilters(this IFilterContainer lbq, IFilterContainer rbq)
 		{
 			var lBoolDescriptor = lbq.Bool;
 			var lHasShouldFilters = lBoolDescriptor != null &&
@@ -46,31 +46,31 @@ namespace Nest
 
 	[JsonConverter(typeof(ReadAsTypeConverter<BoolBaseFilterDescriptor>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IBoolFilter : IFilterBase
+	public interface IBoolFilter : IFilter
 	{
 		[JsonProperty("must",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseFilterDescriptor>, CustomJsonConverter>))]
-		IEnumerable<IFilterDescriptor> Must { get; set; }
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
+		IEnumerable<IFilterContainer> Must { get; set; }
 
 		[JsonProperty("must_not",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseFilterDescriptor>, CustomJsonConverter>))]
-		IEnumerable<IFilterDescriptor> MustNot { get; set; }
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
+		IEnumerable<IFilterContainer> MustNot { get; set; }
 
 		[JsonProperty("should",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseFilterDescriptor>, CustomJsonConverter>))]
-		IEnumerable<IFilterDescriptor> Should { get; set; }
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
+		IEnumerable<IFilterContainer> Should { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class BoolBaseFilterDescriptor : FilterBase , IBoolFilter
 	{
-		IEnumerable<IFilterDescriptor> IBoolFilter.Must { get; set; }
+		IEnumerable<IFilterContainer> IBoolFilter.Must { get; set; }
 
-		IEnumerable<IFilterDescriptor> IBoolFilter.MustNot { get; set; }
+		IEnumerable<IFilterContainer> IBoolFilter.MustNot { get; set; }
 
-		IEnumerable<IFilterDescriptor> IBoolFilter.Should { get; set; }
+		IEnumerable<IFilterContainer> IBoolFilter.Should { get; set; }
 
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{
@@ -87,12 +87,12 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class BoolFilterDescriptor<T> : BoolBaseFilterDescriptor where T : class
 	{
-		public BoolFilterDescriptor<T> Must(params Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor>[] filters)
+		public BoolFilterDescriptor<T> Must(params Func<FilterDescriptor<T>, FilterContainer>[] filters)
 		{
-			var descriptors = new List<BaseFilterDescriptor>();
+			var descriptors = new List<FilterContainer>();
 			foreach (var selector in filters)
 			{
-				var filter = new FilterDescriptorDescriptor<T>();
+				var filter = new FilterDescriptor<T>();
 				var f = selector(filter);
 				if (f.IsConditionless)
 					continue;
@@ -102,9 +102,9 @@ namespace Nest
 			return this;
 		}
 
-		public BoolFilterDescriptor<T> Must(params BaseFilterDescriptor[] filtersDescriptor)
+		public BoolFilterDescriptor<T> Must(params FilterContainer[] filtersDescriptor)
 		{
-			var descriptors = new List<BaseFilterDescriptor>();
+			var descriptors = new List<FilterContainer>();
 			foreach (var f in filtersDescriptor)
 			{
 				if (f.IsConditionless)
@@ -115,12 +115,12 @@ namespace Nest
 			return this;
 		}
 
-		public BoolFilterDescriptor<T> MustNot(params Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor>[] filters)
+		public BoolFilterDescriptor<T> MustNot(params Func<FilterDescriptor<T>, FilterContainer>[] filters)
 		{
-			var descriptors = new List<BaseFilterDescriptor>();
+			var descriptors = new List<FilterContainer>();
 			foreach (var selector in filters)
 			{
-				var filter = new FilterDescriptorDescriptor<T>();
+				var filter = new FilterDescriptor<T>();
 				var f = selector(filter);
 				if (f.IsConditionless)
 					continue;
@@ -130,9 +130,9 @@ namespace Nest
 			return this;
 		}
 
-		public BoolFilterDescriptor<T> MustNot(params BaseFilterDescriptor[] filtersDescriptor)
+		public BoolFilterDescriptor<T> MustNot(params FilterContainer[] filtersDescriptor)
 		{
-			var descriptors = new List<BaseFilterDescriptor>();
+			var descriptors = new List<FilterContainer>();
 			foreach (var f in filtersDescriptor)
 			{
 				if (f.IsConditionless)
@@ -143,12 +143,12 @@ namespace Nest
 			return this;
 		}
 	
-		public BoolFilterDescriptor<T> Should(params Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor>[] filters)
+		public BoolFilterDescriptor<T> Should(params Func<FilterDescriptor<T>, FilterContainer>[] filters)
 		{
-			var descriptors = new List<BaseFilterDescriptor>();
+			var descriptors = new List<FilterContainer>();
 			foreach (var selector in filters)
 			{
-				var filter = new FilterDescriptorDescriptor<T>();
+				var filter = new FilterDescriptor<T>();
 				var f = selector(filter);
 				if (f.IsConditionless)
 					continue;
@@ -158,9 +158,9 @@ namespace Nest
 			return this;
 		}
 
-		public BoolFilterDescriptor<T> Should(params BaseFilterDescriptor[] filtersDescriptor)
+		public BoolFilterDescriptor<T> Should(params FilterContainer[] filtersDescriptor)
 		{
-			var descriptors = new List<BaseFilterDescriptor>();
+			var descriptors = new List<FilterContainer>();
 			foreach (var f in filtersDescriptor)
 			{
 				if (f.IsConditionless)

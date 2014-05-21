@@ -14,7 +14,7 @@ namespace Nest
 
 	[JsonConverter(typeof(CompositeJsonConverter<GeoBoundingFilterJsonReader, CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGeoBoundingBoxFilter : IFilterBase, ICustomJson, ICustomJsonReader<GeoBoundingBoxFilter>
+	public interface IGeoBoundingBoxFilter : IFilter, ICustomJson, ICustomJsonReader<GeoBoundingBoxFilter>
 	{
 		PropertyPathMarker Field { get; set; }
 		
@@ -30,7 +30,7 @@ namespace Nest
 
 	public class GeoBoundingBoxFilter : FilterBase, IGeoBoundingBoxFilter
 	{
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

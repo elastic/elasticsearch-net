@@ -14,18 +14,18 @@ namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeConverter<AndFilter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IAndFilter : IFilterBase
+	public interface IAndFilter : IFilter
 	{
 		[JsonProperty("filters", 
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseFilterDescriptor>, CustomJsonConverter>))]
-		IEnumerable<IFilterDescriptor> Filters { get; set; }
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
+		IEnumerable<IFilterContainer> Filters { get; set; }
 	}
 
 	public class AndFilter : FilterBase, IAndFilter
 	{
-		IEnumerable<IFilterDescriptor> IAndFilter.Filters { get; set; }
+		IEnumerable<IFilterContainer> IAndFilter.Filters { get; set; }
 
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

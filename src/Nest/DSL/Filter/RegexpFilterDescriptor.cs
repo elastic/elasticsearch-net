@@ -14,7 +14,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(CompositeJsonConverter<RegexpFilterJsonReader,CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IRegexpFilter : IFilterBase, ICustomJson
+	public interface IRegexpFilter : IFilter, ICustomJson
 	{
 		[JsonProperty("value")]
 		string Value { get; set; }
@@ -33,7 +33,7 @@ namespace Nest
 
 		PropertyPathMarker IRegexpFilter.Field { get; set; }
 
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

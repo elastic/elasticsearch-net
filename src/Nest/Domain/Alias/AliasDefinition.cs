@@ -7,7 +7,7 @@ namespace Nest
 		public string Name { get; set; }
 
 		[JsonProperty("filter")]
-		public IFilterDescriptor Filter { get; internal set; }
+		public IFilterContainer Filter { get; internal set; }
 	
 		[JsonProperty("routing")]
 		public string Routing { get; internal set; }

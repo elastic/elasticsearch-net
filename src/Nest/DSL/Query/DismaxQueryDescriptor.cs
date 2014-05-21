@@ -20,7 +20,7 @@ namespace Nest
 		double? Boost { get; set; }
 
 		[JsonProperty(PropertyName = "queries")]
-		IEnumerable<BaseQuery> Queries { get; set; }
+		IEnumerable<QueryContainer> Queries { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -30,7 +30,7 @@ namespace Nest
 
 		double? IDisMaxQuery.Boost { get; set; }
 
-		IEnumerable<BaseQuery> IDisMaxQuery.Queries { get; set; }
+		IEnumerable<QueryContainer> IDisMaxQuery.Queries { get; set; }
 
 		bool IQuery.IsConditionless
 		{
@@ -40,9 +40,9 @@ namespace Nest
 			}
 		}
 
-		public DisMaxQueryDescriptor<T> Queries(params Func<QueryDescriptor<T>, BaseQuery>[] querySelectors)
+		public DisMaxQueryDescriptor<T> Queries(params Func<QueryDescriptor<T>, QueryContainer>[] querySelectors)
 		{
-			var queries = new List<BaseQuery>();
+			var queries = new List<QueryContainer>();
 			foreach (var selector in querySelectors)
 			{
 				var query = new QueryDescriptor<T>();

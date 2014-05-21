@@ -13,7 +13,7 @@ namespace Nest
 
 	[JsonConverter(typeof(ReadAsTypeConverter<ScriptFilterDescriptor>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IScriptFilter : IFilterBase
+	public interface IScriptFilter : IFilter
 	{
 		[JsonProperty(PropertyName = "script")]
 		string Script { get; set; }
@@ -38,7 +38,7 @@ namespace Nest
 
 		string IScriptFilter.Lang { get; set; }
 
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

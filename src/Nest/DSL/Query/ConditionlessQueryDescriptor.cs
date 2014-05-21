@@ -11,9 +11,9 @@ namespace Nest
 {
 	public class ConditionlessQueryDescriptor<T> : IQuery where T : class
 	{
-		internal BaseQuery _Query { get; set; }
+		internal QueryContainer _Query { get; set; }
 
-		internal BaseQuery _Fallback { get; set; }
+		internal QueryContainer _Fallback { get; set; }
 
 		bool IQuery.IsConditionless
 		{
@@ -25,7 +25,7 @@ namespace Nest
 			}
 		}
 
-		public ConditionlessQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public ConditionlessQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();
@@ -35,7 +35,7 @@ namespace Nest
 			return this;
 		}
 
-		public ConditionlessQueryDescriptor<T> Fallback(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public ConditionlessQueryDescriptor<T> Fallback(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();

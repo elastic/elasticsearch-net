@@ -140,6 +140,8 @@
     <Compile Include="Domain\Responses\RestoreResponse.cs" />
     <Compile Include="Domain\Responses\SnapshotResponse.cs" />
     <Compile Include="DSL\DeleteSnapshotDescriptor.cs" />
+    <Compile Include="DSL\Filter\IFieldNameFilter.cs" />
+    <Compile Include="DSL\Filter\IFilter.cs" />
     <Compile Include="DSL\Visitor\DslPrettyPrintVisitor.cs" />
     <Compile Include="DSL\Visitor\QueryFilterWalker.cs" />
     <Compile Include="DSL\Visitor\QueryVisitor.cs" />
@@ -535,8 +537,8 @@
     <Compile Include="Domain\DSL\Query.cs" />
     <Compile Include="ElasticClient-Bulk.cs" />
     <Compile Include="Domain\Responses\UpdateResponse.cs" />
-    <Compile Include="DSL\Query\BaseQuery.cs" />
-    <Compile Include="DSL\Filter\BaseFilter.cs" />
+    <Compile Include="DSL\Query\QueryContainer.cs" />
+    <Compile Include="DSL\Filter\FilterDescriptorBase.cs" />
     <Compile Include="DSL\Filter\IFilterDescriptor.cs" />
     <Compile Include="DSL\Query\TermsQueryDescriptor.cs" />
     <Compile Include="DSL\UpdateDescriptor.cs" />

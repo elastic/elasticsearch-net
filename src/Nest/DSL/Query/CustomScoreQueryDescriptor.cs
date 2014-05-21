@@ -25,7 +25,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
-		IQueryDescriptor Query { get; set; }
+		IQueryContainer Query { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -37,7 +37,7 @@ namespace Nest
 
 		Dictionary<string, object> ICustomScoreQuery.Params { get; set; }
 
-		IQueryDescriptor ICustomScoreQuery.Query { get; set; }
+		IQueryContainer ICustomScoreQuery.Query { get; set; }
 
 		bool IQuery.IsConditionless
 		{
@@ -53,7 +53,7 @@ namespace Nest
 			return this;
 		}
 
-		public CustomScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public CustomScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();

@@ -12,7 +12,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(CompositeJsonConverter<GeoShapeFilterJsonReader, CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGeoShapeBaseFilter : IFilterBase
+	public interface IGeoShapeBaseFilter : IFilter
 	{
 		PropertyPathMarker Field { get; set; }
 	}
@@ -25,7 +25,7 @@ namespace Nest
 
 	public class GeoShapeFilterDescriptor : FilterBase, IGeoShapeFilter
 	{
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

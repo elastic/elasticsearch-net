@@ -11,40 +11,40 @@ using System.Collections;
 
 namespace Nest
 {
-	public class FilterDescriptorDescriptor<T> : BaseFilterDescriptor, IFilterDescriptor<T>
+	public class FilterDescriptor<T> : FilterContainer
 		where T : class
 	{
 
-		public FilterDescriptorDescriptor<T> Name(string name)
+		public FilterDescriptor<T> Name(string name)
 		{
 			this._Name = name;
 			return this;
 		}
-		public FilterDescriptorDescriptor<T> CacheKey(string cacheKey)
+		public FilterDescriptor<T> CacheKey(string cacheKey)
 		{
 			this._CacheKey = cacheKey;
 			return this;
 		}
-		public FilterDescriptorDescriptor<T> Cache(bool cache)
+		public FilterDescriptor<T> Cache(bool cache)
 		{
 			this._Cache = cache;
 			return this;
 		}
 		
 
-		public FilterDescriptorDescriptor<T> Strict(bool strict = true)
+		public FilterDescriptor<T> Strict(bool strict = true)
 		{
-			var f = new FilterDescriptorDescriptor<T>();
-			((IFilterDescriptor)f).IsStrict = strict;
-			((IFilterDescriptor)f).IsVerbatim = ((IFilterDescriptor)this).IsVerbatim;
+			var f = new FilterDescriptor<T>();
+			((IFilterContainer)f).IsStrict = strict;
+			((IFilterContainer)f).IsVerbatim = ((IFilterContainer)this).IsVerbatim;
 			return f;
 		}
 
-		public FilterDescriptorDescriptor<T> Verbatim(bool verbatim = true)
+		public FilterDescriptor<T> Verbatim(bool verbatim = true)
 		{
-			var f = new FilterDescriptorDescriptor<T>();
-			((IFilterDescriptor)f).IsStrict = ((IFilterDescriptor)this).IsStrict;
-			((IFilterDescriptor)f).IsVerbatim = verbatim;
+			var f = new FilterDescriptor<T>();
+			((IFilterContainer)f).IsStrict = ((IFilterContainer)this).IsStrict;
+			((IFilterContainer)f).IsVerbatim = verbatim;
 			return f;
 		}
 
@@ -52,7 +52,7 @@ namespace Nest
 		/// A thin wrapper allowing fined grained control what should happen if a filter is conditionless
 		/// if you need to fallback to something other than a match_all query
 		/// </summary>
-		public BaseFilterDescriptor Conditionless(Action<ConditionlessFilterDescriptor<T>> selector)
+		public FilterContainer Conditionless(Action<ConditionlessFilterDescriptor<T>> selector)
 		{
 			var filter = new ConditionlessFilterDescriptor<T>();
 			selector(filter);
@@ -60,19 +60,19 @@ namespace Nest
 			return (filter.FilterDescriptor == null || filter.FilterDescriptor.IsConditionless) ? filter._Fallback : filter.FilterDescriptor;
 		}
 
-		internal BaseFilterDescriptor Raw(string rawJson)
+		internal FilterContainer Raw(string rawJson)
 		{
-			var f = new FilterDescriptorDescriptor<T>();
-			((IFilterDescriptor)f).IsStrict = ((IFilterDescriptor)this).IsStrict;
-			((IFilterDescriptor)f).IsVerbatim = ((IFilterDescriptor)this).IsVerbatim;
-			((IFilterDescriptor)f).RawFilter = rawJson;
+			var f = new FilterDescriptor<T>();
+			((IFilterContainer)f).IsStrict = ((IFilterContainer)this).IsStrict;
+			((IFilterContainer)f).IsVerbatim = ((IFilterContainer)this).IsVerbatim;
+			((IFilterContainer)f).RawFilter = rawJson;
 			return f;
 		}
 
 		/// <summary>
 		/// Filters documents where a specific field has a value in them.
 		/// </summary>
-		public BaseFilterDescriptor Exists(Expression<Func<T, object>> fieldDescriptor)
+		public FilterContainer Exists(Expression<Func<T, object>> fieldDescriptor)
 		{
 			var filter = new ExistsFilter();
 			((IExistsFilter)filter).Field = fieldDescriptor;
@@ -82,7 +82,7 @@ namespace Nest
 		/// <summary>
 		/// Filters documents where a specific field has a value in them.
 		/// </summary>
-		public BaseFilterDescriptor Exists(string field)
+		public FilterContainer Exists(string field)
 		{
 			var filter = new ExistsFilter();
 			((IExistsFilter)filter).Field = field;
@@ -92,7 +92,7 @@ namespace Nest
 		/// <summary>
 		/// Filters documents where a specific field has no value in them.
 		/// </summary>
-		public BaseFilterDescriptor Missing(Expression<Func<T, object>> fieldDescriptor)
+		public FilterContainer Missing(Expression<Func<T, object>> fieldDescriptor)
 		{
 			var filter = new MissingFilter();
 			((IMissingFilter)filter).Field = fieldDescriptor;
@@ -102,7 +102,7 @@ namespace Nest
 		/// <summary>
 		/// Filters documents where a specific field has no value in them.
 		/// </summary>
-		public BaseFilterDescriptor Missing(string field)
+		public FilterContainer Missing(string field)
 		{
 			var filter = new MissingFilter();
 			((IMissingFilter)filter).Field = field;
@@ -113,7 +113,7 @@ namespace Nest
 		/// Filters documents that only have the provided ids. 
 		/// Note, this filter does not require the _id field to be indexed since it works using the _uid field.
 		/// </summary>
-		public BaseFilterDescriptor Ids(IEnumerable<string> values)
+		public FilterContainer Ids(IEnumerable<string> values)
 		{
 			var filter = new IdsFilter();
 			((IIdsFilter)filter).Values = values;
@@ -124,7 +124,7 @@ namespace Nest
 		/// Filters documents that only have the provided ids. 
 		/// Note, this filter does not require the _id field to be indexed since it works using the _uid field.
 		/// </summary>
-		public BaseFilterDescriptor Ids(string type, IEnumerable<string> values)
+		public FilterContainer Ids(string type, IEnumerable<string> values)
 		{
 			if (type.IsNullOrEmpty())
 				return CreateConditionlessFilterDescriptor("ids", null);
@@ -140,7 +140,7 @@ namespace Nest
 		/// Filters documents that only have the provided ids. 
 		/// Note, this filter does not require the _id field to be indexed since it works using the _uid field.
 		/// </summary>
-		public BaseFilterDescriptor Ids(IEnumerable<string> types, IEnumerable<string> values)
+		public FilterContainer Ids(IEnumerable<string> types, IEnumerable<string> values)
 		{
 			if (!types.HasAny() || types.All(t=>t.IsNullOrEmpty()))
 				return CreateConditionlessFilterDescriptor("ids", null);
@@ -156,7 +156,7 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
 		/// </summary>
-		public BaseFilterDescriptor GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? type = null)
+		public FilterContainer GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? type = null)
 		{
 			var c = CultureInfo.InvariantCulture;
 			topLeftX.ThrowIfNull("topLeftX");
@@ -170,7 +170,7 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
 		/// </summary>
-		public BaseFilterDescriptor GeoBoundingBox(string fieldName, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? type = null)
+		public FilterContainer GeoBoundingBox(string fieldName, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? type = null)
 		{
 			var c = CultureInfo.InvariantCulture;
 			topLeftX.ThrowIfNull("topLeftX");
@@ -184,7 +184,7 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
 		/// </summary>
-		public BaseFilterDescriptor GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? type = null)
+		public FilterContainer GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? type = null)
 		{
 			IGeoBoundingBoxFilter filter = new GeoBoundingBoxFilter();
 			filter.TopLeft = geoHashTopLeft;
@@ -196,7 +196,7 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
 		/// </summary>
-		public BaseFilterDescriptor GeoBoundingBox(string fieldName, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? type = null)
+		public FilterContainer GeoBoundingBox(string fieldName, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? type = null)
 		{
 			IGeoBoundingBoxFilter filter = new GeoBoundingBoxFilter();
 			filter.TopLeft = geoHashTopLeft;
@@ -209,7 +209,7 @@ namespace Nest
 		/// <summary>
 		/// Filters documents that include only hits that exists within a specific distance from a geo point. 
 		/// </summary>
-		public BaseFilterDescriptor GeoDistance(Expression<Func<T, object>> fieldDescriptor, Action<GeoDistanceFilterDescriptor> filterDescriptor)
+		public FilterContainer GeoDistance(Expression<Func<T, object>> fieldDescriptor, Action<GeoDistanceFilterDescriptor> filterDescriptor)
 		{
 			return _GeoDistance(fieldDescriptor, filterDescriptor);
 		}
@@ -217,12 +217,12 @@ namespace Nest
 		/// <summary>
 		/// Filters documents that include only hits that exists within a specific distance from a geo point. 
 		/// </summary>
-		public BaseFilterDescriptor GeoDistance(string field, Action<GeoDistanceFilterDescriptor> filterDescriptor)
+		public FilterContainer GeoDistance(string field, Action<GeoDistanceFilterDescriptor> filterDescriptor)
 		{
 			return _GeoDistance(field, filterDescriptor);
 		}
 
-		private BaseFilterDescriptor _GeoDistance(PropertyPathMarker field, Action<GeoDistanceFilterDescriptor> filterDescriptor)
+		private FilterContainer _GeoDistance(PropertyPathMarker field, Action<GeoDistanceFilterDescriptor> filterDescriptor)
 		{
 			var filter = new GeoDistanceFilterDescriptor();
 			if (filterDescriptor != null)
@@ -236,19 +236,19 @@ namespace Nest
 		/// <summary>
 		/// Filters documents that exists within a range from a specific point:
 		/// </summary>
-		public BaseFilterDescriptor GeoDistanceRange(Expression<Func<T, object>> fieldDescriptor, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
+		public FilterContainer GeoDistanceRange(Expression<Func<T, object>> fieldDescriptor, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
 		{
 			return _GeoDistanceRange(fieldDescriptor, filterDescriptor);
 		}
 		/// <summary>
 		/// Filters documents that exists within a range from a specific point:
 		/// </summary>
-		public BaseFilterDescriptor GeoDistanceRange(string field, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
+		public FilterContainer GeoDistanceRange(string field, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
 		{
 			return _GeoDistanceRange(field, filterDescriptor);
 		}
 
-		private BaseFilterDescriptor _GeoDistanceRange(PropertyPathMarker field, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
+		private FilterContainer _GeoDistanceRange(PropertyPathMarker field, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
 		{
 			var filter = new GeoDistanceRangeFilterDescriptor();
 			if (filterDescriptor != null)
@@ -262,19 +262,19 @@ namespace Nest
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
-		public BaseFilterDescriptor GeoShape(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapeFilterDescriptor> filterDescriptor)
+		public FilterContainer GeoShape(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapeFilterDescriptor> filterDescriptor)
 		{
 			return _GeoShape(fieldDescriptor, filterDescriptor);
 		}
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
-		public BaseFilterDescriptor GeoShape(string field, Action<GeoShapeFilterDescriptor> filterDescriptor)
+		public FilterContainer GeoShape(string field, Action<GeoShapeFilterDescriptor> filterDescriptor)
 		{
 			return _GeoShape(field, filterDescriptor);
 		}
 
-		private BaseFilterDescriptor _GeoShape(PropertyPathMarker field, Action<GeoShapeFilterDescriptor> filterDescriptor)
+		private FilterContainer _GeoShape(PropertyPathMarker field, Action<GeoShapeFilterDescriptor> filterDescriptor)
 		{
 			var filter = new GeoShapeFilterDescriptor();
 			if (filterDescriptor != null)
@@ -286,19 +286,19 @@ namespace Nest
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
-		public BaseFilterDescriptor GeoIndexedShape(Expression<Func<T, object>> fieldDescriptor, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
+		public FilterContainer GeoIndexedShape(Expression<Func<T, object>> fieldDescriptor, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
 		{
 			return this._GeoIndexedShape(fieldDescriptor, filterDescriptor);
 		}
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
-		public BaseFilterDescriptor GeoIndexedShape(string field, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
+		public FilterContainer GeoIndexedShape(string field, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
 		{
 			return _GeoIndexedShape(field, filterDescriptor);
 		}
 
-		private BaseFilterDescriptor _GeoIndexedShape(PropertyPathMarker field, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
+		private FilterContainer _GeoIndexedShape(PropertyPathMarker field, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
 		{
 			var filter = new GeoIndexedShapeFilterDescriptor();
 			if (filterDescriptor != null)
@@ -310,7 +310,7 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
 		/// </summary>
-		public BaseFilterDescriptor GeoPolygon(Expression<Func<T, object>> fieldDescriptor, IEnumerable<Tuple<double, double>> points)
+		public FilterContainer GeoPolygon(Expression<Func<T, object>> fieldDescriptor, IEnumerable<Tuple<double, double>> points)
 		{
 			var c = CultureInfo.InvariantCulture;
 			return this._GeoPolygon(fieldDescriptor, points.Select(p => "{0}, {1}".F(p.Item1.ToString(c), p.Item2.ToString(c))).ToArray());
@@ -318,7 +318,7 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
 		/// </summary>
-		public BaseFilterDescriptor GeoPolygon(string field, IEnumerable<Tuple<double, double>> points)
+		public FilterContainer GeoPolygon(string field, IEnumerable<Tuple<double, double>> points)
 		{
 			var c = CultureInfo.InvariantCulture;
 			return this.GeoPolygon(field, points.Select(p => "{0}, {1}".F(p.Item1.ToString(c), p.Item2.ToString(c))).ToArray());
@@ -326,19 +326,19 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
 		/// </summary>
-		public BaseFilterDescriptor GeoPolygon(Expression<Func<T, object>> fieldDescriptor, params string[] points)
+		public FilterContainer GeoPolygon(Expression<Func<T, object>> fieldDescriptor, params string[] points)
 		{
 			return this._GeoPolygon(fieldDescriptor, points);
 		}
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
 		/// </summary>
-		public BaseFilterDescriptor GeoPolygon(string fieldName, params string[] points)
+		public FilterContainer GeoPolygon(string fieldName, params string[] points)
 		{
 			return _GeoPolygon(fieldName, points);
 		}
 
-		private BaseFilterDescriptor _GeoPolygon(PropertyPathMarker fieldName, string[] points)
+		private FilterContainer _GeoPolygon(PropertyPathMarker fieldName, string[] points)
 		{
 			IGeoPolygonFilter filter = new GeoPolygonFilter();
 			filter.Points = points;
@@ -351,7 +351,7 @@ namespace Nest
 		/// and results in parent documents that have child docs matching the query.
 		/// </summary>
 		/// <typeparam name="K">Type of the child</typeparam>
-		public BaseFilterDescriptor HasChild<K>(Action<HasChildFilterDescriptor<K>> filterSelector) where K : class
+		public FilterContainer HasChild<K>(Action<HasChildFilterDescriptor<K>> filterSelector) where K : class
 		{
 			var filter = new HasChildFilterDescriptor<K>();
 			if (filterSelector != null)
@@ -365,7 +365,7 @@ namespace Nest
 		/// and results in parent documents that have child docs matching the query.
 		/// </summary>
 		/// <typeparam name="K">Type of the child</typeparam>
-		public BaseFilterDescriptor HasParent<K>(Action<HasParentFilterDescriptor<K>> filterSelector) where K : class
+		public FilterContainer HasParent<K>(Action<HasParentFilterDescriptor<K>> filterSelector) where K : class
 		{
 			var filter = new HasParentFilterDescriptor<K>();
 			if (filterSelector != null)
@@ -377,7 +377,7 @@ namespace Nest
 		/// <summary>
 		/// A limit filter limits the number of documents (per shard) to execute on.
 		/// </summary>
-		public BaseFilterDescriptor Limit(int? limit)
+		public FilterContainer Limit(int? limit)
 		{
 			ILimitFilter filter = new LimitFilter {};
 			filter.Value = limit;
@@ -389,7 +389,7 @@ namespace Nest
 		/// Note, this filter can work even when the _type field is not indexed 
 		/// (using the _uid field).
 		/// </summary>
-		public BaseFilterDescriptor Type(string type)
+		public FilterContainer Type(string type)
 		{
 			ITypeFilter filter = new TypeFilter {};
 			filter.Value = type;
@@ -401,7 +401,7 @@ namespace Nest
 		/// Note, this filter can work even when the _type field is not indexed 
 		/// (using the _uid field).
 		/// </summary>
-		public BaseFilterDescriptor Type(Type type)
+		public FilterContainer Type(Type type)
 		{
 			ITypeFilter filter = new TypeFilter {};
 			filter.Value = type;
@@ -411,7 +411,7 @@ namespace Nest
 		/// <summary>
 		/// A filter that matches on all documents.
 		/// </summary>
-		public BaseFilterDescriptor MatchAll()
+		public FilterContainer MatchAll()
 		{
 			var filter = new MatchAllFilter { };
 			return this.New(filter, f=> f.MatchAll = filter);
@@ -421,7 +421,7 @@ namespace Nest
 		/// Filters documents with fields that have terms within a certain range. 
 		/// Similar to range query, except that it acts as a filter. 
 		/// </summary>
-		public BaseFilterDescriptor Range(Action<RangeFilterDescriptor<T>> rangeSelector)
+		public FilterContainer Range(Action<RangeFilterDescriptor<T>> rangeSelector)
 		{
 			var filter = new RangeFilterDescriptor<T>();
 			if (rangeSelector != null)
@@ -432,7 +432,7 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to define scripts as filters. 
 		/// </summary>
-		public BaseFilterDescriptor Script(Action<ScriptFilterDescriptor> scriptSelector)
+		public FilterContainer Script(Action<ScriptFilterDescriptor> scriptSelector)
 		{
 			var descriptor = new ScriptFilterDescriptor();
 			if (scriptSelector != null)
@@ -444,7 +444,7 @@ namespace Nest
 		/// Filters documents that have fields containing terms with a specified prefix 
 		/// (not analyzed). Similar to phrase query, except that it acts as a filter. 
 		/// </summary>
-		public BaseFilterDescriptor Prefix(Expression<Func<T, object>> fieldDescriptor, string prefix)
+		public FilterContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string prefix)
 		{
 			IPrefixFilter filter = new PrefixFilter();
 			filter.Field = fieldDescriptor;
@@ -455,7 +455,7 @@ namespace Nest
 		/// Filters documents that have fields containing terms with a specified prefix 
 		/// (not analyzed). Similar to phrase query, except that it acts as a filter. 
 		/// </summary>
-		public BaseFilterDescriptor Prefix(string field, string prefix)
+		public FilterContainer Prefix(string field, string prefix)
 		{
 			IPrefixFilter filter = new PrefixFilter();
 			filter.Field = field;
@@ -466,7 +466,7 @@ namespace Nest
 		/// Filters documents that have fields that contain a term (not analyzed). 
 		/// Similar to term query, except that it acts as a filter
 		/// </summary>
-		public BaseFilterDescriptor Term<K>(Expression<Func<T, K>> fieldDescriptor, K term)
+		public FilterContainer Term<K>(Expression<Func<T, K>> fieldDescriptor, K term)
 		{
 			ITermFilter filter = new TermFilter();
 			filter.Field = fieldDescriptor;
@@ -477,7 +477,7 @@ namespace Nest
 		/// Filters documents that have fields that contain a term (not analyzed). 
 		/// Similar to term query, except that it acts as a filter
 		/// </summary>
-		public BaseFilterDescriptor Term(Expression<Func<T, object>> fieldDescriptor, object term)
+		public FilterContainer Term(Expression<Func<T, object>> fieldDescriptor, object term)
 		{
 			ITermFilter filter = new TermFilter();
 			filter.Field = fieldDescriptor;
@@ -489,7 +489,7 @@ namespace Nest
 		/// Filters documents that have fields that contain a term (not analyzed).
 		/// Similar to term query, except that it acts as a filter
 		/// </summary>
-		public BaseFilterDescriptor Term(string field, object term)
+		public FilterContainer Term(string field, object term)
 		{
 
 
@@ -502,7 +502,7 @@ namespace Nest
 		/// <summary>
 		/// Filters documents that have fields that match any of the provided terms (not analyzed). 
 		/// </summary>
-		public BaseFilterDescriptor Terms<K>(Expression<Func<T, K>> fieldDescriptor, IEnumerable<K> terms, TermsExecution? Execution = null)
+		public FilterContainer Terms<K>(Expression<Func<T, K>> fieldDescriptor, IEnumerable<K> terms, TermsExecution? Execution = null)
 		{
 			ITermsFilter filter = new TermsFilter();
 			filter.Field = fieldDescriptor;
@@ -514,7 +514,7 @@ namespace Nest
 		/// <summary>
 		/// Filters documents that have fields that match any of the provided terms (not analyzed). 
 		/// </summary>
-		public BaseFilterDescriptor Terms(Expression<Func<T, object>> fieldDescriptor, IEnumerable<string> terms, TermsExecution? Execution = null)
+		public FilterContainer Terms(Expression<Func<T, object>> fieldDescriptor, IEnumerable<string> terms, TermsExecution? Execution = null)
 		{
 			ITermsFilter filter = new TermsFilter();
 			filter.Field = fieldDescriptor;
@@ -525,7 +525,7 @@ namespace Nest
 		/// <summary>
 		/// Filters documents that have fields that match any of the provided terms (not analyzed). 
 		/// </summary>
-		public BaseFilterDescriptor Terms(string field, IEnumerable<string> terms, TermsExecution? Execution = null)
+		public FilterContainer Terms(string field, IEnumerable<string> terms, TermsExecution? Execution = null)
 		{
 			ITermsFilter filter = new TermsFilter();
 			filter.Field = field;
@@ -536,7 +536,7 @@ namespace Nest
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
-		public BaseFilterDescriptor TermsLookup(Expression<Func<T, object>> fieldDescriptor, Action<TermsLookupFilterDescriptor> filterDescriptor)
+		public FilterContainer TermsLookup(Expression<Func<T, object>> fieldDescriptor, Action<TermsLookupFilterDescriptor> filterDescriptor)
 		{
 			var filter = new TermsLookupFilterDescriptor();
 			if (filterDescriptor != null)
@@ -548,7 +548,7 @@ namespace Nest
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
-		public BaseFilterDescriptor TermsLookup(string field, Action<TermsLookupFilterDescriptor> filterDescriptor)
+		public FilterContainer TermsLookup(string field, Action<TermsLookupFilterDescriptor> filterDescriptor)
 		{
 			var filter = new TermsLookupFilterDescriptor();
 			if (filterDescriptor != null)
@@ -562,30 +562,30 @@ namespace Nest
 		/// A filter that matches documents using AND boolean operator on other queries. 
 		/// This filter is more performant then bool filter. 
 		/// </summary>
-		public BaseFilterDescriptor And(params Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor>[] selectors)
+		public FilterContainer And(params Func<FilterDescriptor<T>, FilterContainer>[] selectors)
 		{
 			return this.And((from selector in selectors 
-							 let filter = new FilterDescriptorDescriptor<T>() { IsConditionless = true}
+							 let filter = new FilterDescriptor<T>() { IsConditionless = true}
 							 select selector(filter)).ToArray());
 		}
 		/// <summary>
 		/// A filter that matches documents using AND boolean operator on other queries. 
 		/// This filter is more performant then bool filter. 
 		/// </summary>
-		public BaseFilterDescriptor And(params BaseFilterDescriptor[] filtersDescriptor)
+		public FilterContainer And(params FilterContainer[] filtersDescriptor)
 		{
 			var andFilter = new AndFilter();
-			((IAndFilter)andFilter).Filters = filtersDescriptor.Cast<IFilterDescriptor>().ToList();
+			((IAndFilter)andFilter).Filters = filtersDescriptor.Cast<IFilterContainer>().ToList();
 			return this.New(andFilter, f=>f.And = andFilter);
 		}
 		/// <summary>
 		/// A filter that matches documents using OR boolean operator on other queries. 
 		/// This filter is more performant then bool filter
 		/// </summary>
-		public BaseFilterDescriptor Or(params Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor>[] selectors)
+		public FilterContainer Or(params Func<FilterDescriptor<T>, FilterContainer>[] selectors)
 		{
 			var descriptors = (from selector in selectors 
-							   let filter = new FilterDescriptorDescriptor<T>() { IsConditionless = true}
+							   let filter = new FilterDescriptor<T>() { IsConditionless = true}
 							   select selector(filter)
 							  ).ToArray();
 			return this.Or(descriptors);
@@ -595,10 +595,10 @@ namespace Nest
 		/// A filter that matches documents using OR boolean operator on other queries. 
 		/// This filter is more performant then bool filter
 		/// </summary>
-		public BaseFilterDescriptor Or(params BaseFilterDescriptor[] filtersDescriptor)
+		public FilterContainer Or(params FilterContainer[] filtersDescriptor)
 		{
 			var orFilter = new OrFilter();
-			((IOrFilter)orFilter).Filters = filtersDescriptor.Cast<IFilterDescriptor>().ToList();
+			((IOrFilter)orFilter).Filters = filtersDescriptor.Cast<IFilterContainer>().ToList();
 			return this.New(orFilter, f=> f.Or = orFilter);
 			
 		}
@@ -606,13 +606,13 @@ namespace Nest
 		/// A filter that filters out matched documents using a query. 
 		/// This filter is more performant then bool filter. 
 		/// </summary>
-		public BaseFilterDescriptor Not(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> selector)
+		public FilterContainer Not(Func<FilterDescriptor<T>, FilterContainer> selector)
 		{
 
 			var notFilter = new NotFilter();
 
-			var filter = new FilterDescriptorDescriptor<T>() { IsConditionless = true };
-			BaseFilterDescriptor bf = filter;
+			var filter = new FilterDescriptor<T>() { IsConditionless = true };
+			FilterContainer bf = filter;
 			if (selector != null)
 				bf = selector(filter);
 
@@ -625,7 +625,7 @@ namespace Nest
 		/// A filter that matches documents matching boolean combinations of other queries.
 		/// Similar in concept to Boolean query, except that the clauses are other filters. 
 		/// </summary>
-		public BaseFilterDescriptor Bool(Action<BoolFilterDescriptor<T>> booleanFilter)
+		public FilterContainer Bool(Action<BoolFilterDescriptor<T>> booleanFilter)
 		{
 			var filter = new BoolFilterDescriptor<T>();
 			if (booleanFilter != null)
@@ -637,11 +637,11 @@ namespace Nest
 		/// <summary>
 		/// Wraps any query to be used as a filter. 
 		/// </summary>
-		public BaseFilterDescriptor Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public FilterContainer Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var filter = new QueryFilter();
 			var descriptor = new QueryDescriptor<T>();
-			BaseQuery bq = descriptor;
+			QueryContainer bq = descriptor;
 			if (querySelector != null)
 				bq = querySelector(descriptor);
 
@@ -656,7 +656,7 @@ namespace Nest
 		///  (set _cache to true), and have it named (set the _name value). 
 		/// </summary>
 		/// <param name="selector"></param>
-		public BaseFilterDescriptor Nested(Action<NestedFilterDescriptor<T>> selector)
+		public FilterContainer Nested(Action<NestedFilterDescriptor<T>> selector)
 		{
 			var filter = new NestedFilterDescriptor<T>();
 			if (selector != null)
@@ -669,7 +669,7 @@ namespace Nest
 		///  The regexp filter allows you to use regular expression term queries. 
 		/// </summary>
 		/// <param name="selector"></param>
-		public BaseFilterDescriptor Regexp(Action<RegexpFilterDescriptor<T>> selector)
+		public FilterContainer Regexp(Action<RegexpFilterDescriptor<T>> selector)
 		{
 			var filter = new RegexpFilterDescriptor<T>();
 			if (selector != null)
@@ -678,9 +678,9 @@ namespace Nest
 			return this.New(filter, f=>f.Regexp = filter);
 		}
 
-		private FilterDescriptorDescriptor<T> CreateConditionlessFilterDescriptor(object filter, string type = null)
+		private FilterDescriptor<T> CreateConditionlessFilterDescriptor(object filter, string type = null)
 		{
-			var self = ((IFilterDescriptor)this);
+			var self = ((IFilterContainer)this);
 			if (self.IsStrict && !self.IsVerbatim)
 				throw new DslException("Filter resulted in a conditionless '{1}' filter (json by approx):\n{0}"
 					.F(
@@ -688,16 +688,16 @@ namespace Nest
 						, type ?? filter.GetType().Name.Replace("Descriptor", "").Replace("`1", "")
 					)
 				);
-			var f = new FilterDescriptorDescriptor<T>();
-			((IFilterDescriptor)f).IsStrict = self.IsStrict;
-			((IFilterDescriptor)f).IsVerbatim = self.IsVerbatim;
+			var f = new FilterDescriptor<T>();
+			((IFilterContainer)f).IsStrict = self.IsStrict;
+			((IFilterContainer)f).IsVerbatim = self.IsVerbatim;
 			f.IsConditionless = true;
 			return f;
 		}
 
-		private FilterDescriptorDescriptor<T> New(IFilterBase filter, Action<IFilterDescriptor> fillProperty)
+		private FilterDescriptor<T> New(IFilter filter, Action<IFilterContainer> fillProperty)
 		{
-			var self = ((IFilterDescriptor)this);
+			var self = ((IFilterContainer)this);
 			if (filter.IsConditionless && !self.IsVerbatim)
 			{
 				this.ResetCache();
@@ -705,9 +705,9 @@ namespace Nest
 			}
 
 			this.SetCacheAndName(filter);
-			var f = new FilterDescriptorDescriptor<T>();
-			((IFilterDescriptor)f).IsStrict = self.IsStrict;
-			((IFilterDescriptor)f).IsVerbatim = self.IsVerbatim;
+			var f = new FilterDescriptor<T>();
+			((IFilterContainer)f).IsStrict = self.IsStrict;
+			((IFilterContainer)f).IsVerbatim = self.IsVerbatim;
 
 			if (fillProperty != null)
 				fillProperty(f);
@@ -723,7 +723,7 @@ namespace Nest
 			this._Name = null;
 		}
 
-		private void SetCacheAndName(IFilterBase filter)
+		private void SetCacheAndName(IFilter filter)
 		{
 			if (this._Cache.HasValue)
 				filter.Cache = this._Cache;

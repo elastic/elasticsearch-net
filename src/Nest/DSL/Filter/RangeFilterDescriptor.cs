@@ -14,7 +14,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(CompositeJsonConverter<RangeFilterJsonReader,CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IRangeFilter : IFilterBase, ICustomJson
+	public interface IRangeFilter : IFilter, ICustomJson
 	{
 		[JsonProperty("gte")]
 		string GreaterThanOrEqualTo { get; set; }
@@ -45,7 +45,7 @@ namespace Nest
 
 		private IRangeFilter _ { get { return this;  } }
 
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

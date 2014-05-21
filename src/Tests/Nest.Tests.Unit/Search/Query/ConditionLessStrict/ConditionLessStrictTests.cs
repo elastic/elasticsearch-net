@@ -8,7 +8,7 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 	[TestFixture]
 	public class ConditionLessStrictTests : BaseJsonTests
 	{
-        private readonly BaseQuery[] _emptyQuery = Enumerable.Empty<BaseQuery>().ToArray();
+        private readonly QueryContainer[] _emptyQuery = Enumerable.Empty<QueryContainer>().ToArray();
         
 		public class Criteria
 		{
@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 		}
 		private readonly Criteria _c = new Criteria();
 
-		private void DoConditionlessQuery(Func<QueryDescriptor<ElasticsearchProject>, BaseQuery> query)
+		private void DoConditionlessQuery(Func<QueryDescriptor<ElasticsearchProject>, QueryContainer> query)
 		{
 			Assert.Throws<DslException>(() =>
 			{

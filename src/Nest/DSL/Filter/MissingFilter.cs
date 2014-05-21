@@ -10,7 +10,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeConverter<MissingFilter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMissingFilter : IFilterBase
+	public interface IMissingFilter : IFilter
 	{
 		[JsonProperty(PropertyName = "field")]
 		PropertyPathMarker Field { get; set; }
@@ -18,7 +18,7 @@ namespace Nest
 
 	public class MissingFilter : FilterBase, IMissingFilter
 	{
-		bool IFilterBase.IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{

@@ -14,11 +14,11 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
-		IQueryDescriptor Query { get; set; }
+		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<BaseFilterDescriptor>, CustomJsonConverter>))]
-		IFilterDescriptor Filter { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
+		IFilterContainer Filter { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
 		double? Boost { get; set; }
@@ -27,9 +27,9 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class ConstantScoreQueryDescriptor<T> : IConstantScoreQuery where T : class
 	{
-		IQueryDescriptor IConstantScoreQuery.Query { get; set; }
+		IQueryContainer IConstantScoreQuery.Query { get; set; }
 
-		IFilterDescriptor IConstantScoreQuery.Filter { get; set; }
+		IFilterContainer IConstantScoreQuery.Filter { get; set; }
 
 		double? IConstantScoreQuery.Boost { get; set; }
 
@@ -47,7 +47,7 @@ namespace Nest
 			}
 		}
 
-		public ConstantScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public ConstantScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			((IConstantScoreQuery)this).Filter = null;
@@ -58,11 +58,11 @@ namespace Nest
 			return this;
 		}
 
-		public ConstantScoreQueryDescriptor<T> Filter(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> filterSelector)
+		public ConstantScoreQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 			((IConstantScoreQuery)this).Query = null;
-			var filter = new FilterDescriptorDescriptor<T>();
+			var filter = new FilterDescriptor<T>();
 			var f = filterSelector(filter);
 
 			((IConstantScoreQuery)this).Filter = f;

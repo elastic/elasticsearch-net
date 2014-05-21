@@ -7,12 +7,12 @@ namespace Nest
 	public class FunctionScoreFilteredFunction<T> : FunctionScoreFunction<T> where T : class
 	{
 		[JsonProperty(PropertyName = "filter")]
-		internal BaseFilterDescriptor FilterDescriptor { get; set; }
+		internal FilterContainer FilterDescriptor { get; set; }
 
-		public FunctionScoreFunction<T> Filter(Func<FilterDescriptorDescriptor<T>, BaseFilterDescriptor> filterSelector)
+		public FunctionScoreFunction<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
-			var filter = new FilterDescriptorDescriptor<T>();
+			var filter = new FilterDescriptor<T>();
 			var f = filterSelector(filter);
 
 			this.FilterDescriptor = f;
