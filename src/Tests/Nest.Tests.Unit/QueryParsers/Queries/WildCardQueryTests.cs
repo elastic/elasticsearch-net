@@ -12,11 +12,11 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 		public void WildCard_Deserializes()
 		{
 			var q = this.SerializeThenDeserialize(
-				f=>f.Wildcard,
-				f=>f.Wildcard(wq=>wq
+				f => f.Wildcard,
+				f => f.Wildcard(wq => wq
 					.Boost(1.1)
 					.Rewrite(RewriteMultiTerm.constant_score_boolean)
-					.OnField(p=>p.Name)
+					.OnField(p => p.Name)
 					.Value("wild*")
 					)
 				);
@@ -46,15 +46,21 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			request.Should().Contain("my_prefix_field");
 			Assert.Pass(request);
 		}
-		
+
 		[Test]
 		public void InitializerTypedTests()
 		{
-			QueryContainer wildcardQuery = new WildcardQuery<ElasticsearchProject>(p => p.Name)
-			{
-				Value = "value",
-				Rewrite = RewriteMultiTerm.constant_score_boolean
-			} && new WildcardQuery { Field = "my_other_prefix_field", Value = "value"};
+			QueryContainer wildcardQuery =
+				new WildcardQuery<ElasticsearchProject>(p => p.Name)
+				{
+					Value = "value",
+					Rewrite = RewriteMultiTerm.constant_score_boolean
+				}
+				&& new WildcardQuery
+				{
+					Field = "my_other_prefix_field", 
+					Value = "value"
+				};
 			var searchRequest = new SearchRequest()
 			{
 				Query = wildcardQuery
