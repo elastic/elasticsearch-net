@@ -37,7 +37,33 @@ namespace Nest
 
 		PropertyPathMarker Field { get; set; }
 	}
+	public class RangeQuery : PlainQuery, IRangeQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Range = this;
+		}
 
+		bool IQuery.IsConditionless { get { return false; } }
+		public PropertyPathMarker GetFieldName()
+		{
+			return this.Field;
+		}
+
+		public void SetFieldName(string fieldName)
+		{
+			this.Field = fieldName;
+		}
+
+		public string GreaterThanOrEqualTo { get; set; }
+		public string LowerThanOrEqualTo { get; set; }
+		public string GreaterThan { get; set; }
+		public string LowerThan { get; set; }
+		public double? Boost { get; set; }
+		public bool? Cache { get; set; }
+		public string Name { get; set; }
+		public PropertyPathMarker Field { get; set; }
+	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class RangeQueryDescriptor<T> : IRangeQuery where T : class
 	{

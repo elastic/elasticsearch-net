@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Connection;
 using Nest.DSL.Search;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -14,11 +15,44 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	public interface IRequest 
+	{
+		
+	}
+
 	public interface ISearchDescriptor
 	{
 		IFilterContainer Filter { get; set; }
 		IQueryContainer Query { get; set; }
 	}
+
+	public class SearchRequest : ISearchDescriptor, IPathInfo<SearchRequestParameters>
+	{
+		public string Index { get; set; }
+		public string Type { get; set; }
+
+		public IFilterContainer Filter { get; set; }
+		public IQueryContainer Query { get; set; }
+
+		public SearchRequestParameters RequestParameters { get; set; }
+
+		ElasticsearchPathInfo<SearchRequestParameters> IPathInfo<SearchRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		{
+			var pathInfo = new ElasticsearchPathInfo<SearchRequestParameters>();
+			//pathInfo.HttpMethod = this._QueryString.ContainsKey("source")
+			//	? PathInfoHttpMethod.GET
+			//	: PathInfoHttpMethod.POST;
+
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.RequestParameters = this.RequestParameters;
+			pathInfo.Index = this.Index;
+			pathInfo.Type = this.Type;
+
+			//pathInfo.RequestParameters = this._QueryString;
+			return pathInfo;
+		}
+	}
+
 
 	/// <summary>
 	/// A descriptor wich describes a search operation for _search and _msearch
@@ -912,6 +946,11 @@ namespace Nest
 			((IQueryContainer)q).IsStrict = this._Strict;
 			var bq = query(q);
 			return this.Query(bq);
+		}
+
+		public SearchDescriptor<T> Query(QueryContainer query)
+		{
+			return this.Query((IQueryContainer)query);
 		}
 
 		/// <summary>

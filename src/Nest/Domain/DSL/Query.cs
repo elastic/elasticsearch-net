@@ -157,7 +157,7 @@ namespace Nest
 			return new QueryDescriptor<T>().SpanFirst(selector);
 		}
 
-		public static QueryContainer SpanNear(Action<SpanNearQuery<T>> selector)
+		public static QueryContainer SpanNear(Action<SpanNearQueryDescriptor<T>> selector)
 		{
 			return new QueryDescriptor<T>().SpanNear(selector);
 		}

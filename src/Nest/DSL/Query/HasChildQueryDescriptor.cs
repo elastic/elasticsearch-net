@@ -28,6 +28,20 @@ namespace Nest
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 	}
+	
+	public class HasChildQuery : PlainQuery, IHasChildQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.HasChild = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public TypeNameMarker Type { get; set; }
+		public string Scope { get; set; }
+		public ChildScoreType? ScoreType { get; set; }
+		public IQueryContainer Query { get; set; }
+	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class HasChildQueryDescriptor<T> : IHasChildQuery where T : class

@@ -28,7 +28,20 @@ namespace Nest
 		IQueryContainer Query { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class CustomScoreQuery : PlainQuery, ICustomScoreQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.CustomScore = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public string Lang { get; set; }
+		public string Script { get; set; }
+		public Dictionary<string, object> Params { get; set; }
+		public IQueryContainer Query { get; set; }
+	}
+
 	public class CustomScoreQueryDescriptor<T> : ICustomScoreQuery where T : class
 	{
 		string ICustomScoreQuery.Lang { get; set; }

@@ -25,6 +25,22 @@ namespace Nest
 		double? Boost { get; set; }
 	}
 
+	public class TermsQuery : PlainQuery, ITermsQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Terms = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public PropertyPathMarker Field { get; set; }
+		public string MinimumShouldMatch { get; set; }
+		public bool? DisableCoord { get; set; }
+		public IEnumerable<object> Terms { get; set; }
+		public IExternalFieldDeclarationDescriptor ExternalField { get; set; }
+		public double? Boost { get; set; }
+	}
+
 	/// <summary>
 	/// A query that match on any (configurable) of the provided terms. 
 	/// This is a simpler syntax query for using a bool query with several term queries in the should clauses.

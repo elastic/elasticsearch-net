@@ -23,6 +23,29 @@ namespace Nest
 		double? Boost { get; set; }
 	}
 
+	public class TermQuery : PlainQuery, ITermQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Term = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return this.Field;
+		}
+
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			this.Field = fieldName;
+		}
+
+		public PropertyPathMarker Field { get; set; }
+		public object Value { get; set; }
+		public double? Boost { get; set; }
+	}
+
 	public class TermQueryDescriptorBase<TDescriptor, T> : ITermQuery
 		where TDescriptor : TermQueryDescriptorBase<TDescriptor, T>
 		where T : class

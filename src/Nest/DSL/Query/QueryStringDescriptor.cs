@@ -76,6 +76,35 @@ namespace Nest
 		RewriteMultiTerm? Rewrite { get; set; }
 	}
 
+	public class QueryStringQuery : PlainQuery, IQueryStringQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.QueryString = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public string Query { get; set; }
+		public PropertyPathMarker DefaultField { get; set; }
+		public IEnumerable<PropertyPathMarker> Fields { get; set; }
+		public Operator? DefaultOperator { get; set; }
+		public string Analyzer { get; set; }
+		public bool? AllowLeadingWildcard { get; set; }
+		public bool? LowercaseExpendedTerms { get; set; }
+		public bool? EnablePositionIncrements { get; set; }
+		public int? FuzzyPrefixLength { get; set; }
+		public double? FuzzyMinimumSimilarity { get; set; }
+		public double? PhraseSlop { get; set; }
+		public double? Boost { get; set; }
+		public bool? Lenient { get; set; }
+		public bool? AnalyzeWildcard { get; set; }
+		public bool? AutoGeneratePhraseQueries { get; set; }
+		public string MinimumShouldMatchPercentage { get; set; }
+		public bool? UseDismax { get; set; }
+		public double? TieBreaker { get; set; }
+		public RewriteMultiTerm? Rewrite { get; set; }
+	}
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class QueryStringQueryDescriptor<T> : IQueryStringQuery where T : class
 	{

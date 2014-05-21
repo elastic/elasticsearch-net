@@ -7,6 +7,8 @@ using Nest.Resolvers.Converters;
 
 namespace Nest
 {
+
+	//TODO Remove!
 	[JsonConverter(typeof(CustomJsonConverter))]
 	public class RawOrQueryDescriptor<T> : ICustomJson where T : class
 	{

@@ -40,7 +40,25 @@ namespace Nest
 		string Analyzer { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class FuzzyLikeThisQuery : PlainQuery, IFuzzyLikeThisQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.FuzzyLikeThis = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public IEnumerable<PropertyPathMarker> Fields { get; set; }
+		public string LikeText { get; set; }
+		public bool? IgnoreTermFrequency { get; set; }
+		public int? MaxQueryTerms { get; set; }
+		public double? MinSimilarity { get; set; }
+		public int? PrefixLength { get; set; }
+		public double? Boost { get; set; }
+		public string Analyzer { get; set; }
+	}
+
+
 	public class FuzzyLikeThisQueryDescriptor<T> : IFuzzyLikeThisQuery where T : class
 	{
 		IEnumerable<PropertyPathMarker> IFuzzyLikeThisQuery.Fields { get; set; }

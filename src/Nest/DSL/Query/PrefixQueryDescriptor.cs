@@ -19,6 +19,30 @@ namespace Nest
 		RewriteMultiTerm? Rewrite { get; set; }
 	}
 
+	public class PrefixQuery : PlainQuery, IPrefixQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Prefix = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public PropertyPathMarker GetFieldName()
+		{
+			return this.Field;
+		}
+
+		public void SetFieldName(string fieldName)
+		{
+			this.Field = fieldName;
+		}
+
+		public PropertyPathMarker Field { get; set; }
+		public object Value { get; set; }
+		public double? Boost { get; set; }
+		public RewriteMultiTerm? Rewrite { get; set; }
+	}
+
 	public class PrefixQueryDescriptor<T> : TermQueryDescriptorBase<PrefixQueryDescriptor<T>, T>, 
 		IPrefixQuery where T : class
 	{

@@ -21,7 +21,19 @@ namespace Nest
 		int? End { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class SpanFirstQuery : PlainQuery, ISpanFirstQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.SpanFirst = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+
+		public ISpanQuery Match { get; set; }
+		public int? End { get; set; }
+	}
+
 	public class SpanFirstQueryDescriptor<T> : ISpanFirstQuery where T : class
 	{
 		ISpanQuery ISpanFirstQuery.Match { get; set; }

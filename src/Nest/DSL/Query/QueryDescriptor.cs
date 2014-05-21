@@ -623,7 +623,7 @@ namespace Nest
 		/// </summary>
 		public QueryContainer Ids(IEnumerable<string> values)
 		{
-			var ids = new IdsQuery { Values = values };
+			var ids = new IdsQueryDescriptor { Values = values };
 			return this.New(ids, q => q.Ids = ids);
 		}
 
@@ -635,7 +635,7 @@ namespace Nest
 		public QueryContainer Ids(string type, IEnumerable<string> values)
 		{
 			type.ThrowIfNullOrEmpty("type");
-			var ids = new IdsQuery { Values = values, Type = new[] { type } };
+			var ids = new IdsQueryDescriptor { Values = values, Type = new[] { type } };
 			return this.New(ids, q => q.Ids = ids);
 		}
 
@@ -646,7 +646,7 @@ namespace Nest
 		/// </summary>
 		public QueryContainer Ids(IEnumerable<string> types, IEnumerable<string> values)
 		{
-			var ids = new IdsQuery { Values = values, Type = types };
+			var ids = new IdsQueryDescriptor { Values = values, Type = types };
 			return this.New(ids, q => q.Ids = ids);
 		}
 
@@ -699,10 +699,10 @@ namespace Nest
 		/// intervening unmatched positions, as well as whether matches are required to be in-order.
 		/// The span near query maps to Lucene SpanNearQuery.
 		/// </summary>
-		public QueryContainer SpanNear(Action<SpanNearQuery<T>> selector)
+		public QueryContainer SpanNear(Action<SpanNearQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
-			var span = new SpanNearQuery<T>();
+			var span = new SpanNearQueryDescriptor<T>();
 			selector(span);
 
 			return this.New(span, q => q.SpanNear = span);

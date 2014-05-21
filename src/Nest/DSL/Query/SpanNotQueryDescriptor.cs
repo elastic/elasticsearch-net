@@ -19,7 +19,18 @@ namespace Nest
 		ISpanQuery Exclude { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class SpanNotQuery : PlainQuery, ISpanNotQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.SpanNot = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public ISpanQuery Include { get; set; }
+		public ISpanQuery Exclude { get; set; }
+	}
+
 	public class SpanNotQuery<T> : ISpanNotQuery where T : class
 	{
 		ISpanQuery ISpanNotQuery.Include { get; set; }

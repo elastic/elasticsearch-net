@@ -20,7 +20,19 @@ namespace Nest
 		double? BoostFactor { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class CustomBoostFactorQuery : PlainQuery, ICustomBoostFactorQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.CustomBoostFactor = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public IQueryContainer Query { get; set; }
+		public double? BoostFactor { get; set; }
+	}
+
+
 	public class CustomBoostFactorQueryDescriptor<T> : ICustomBoostFactorQuery where T : class
 	{
 		IQueryContainer ICustomBoostFactorQuery.Query { get; set; }

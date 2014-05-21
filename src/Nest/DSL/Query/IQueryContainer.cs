@@ -42,7 +42,7 @@ namespace Nest
 		IBoostingQuery Boosting { get; set; }
 
 		[JsonProperty(PropertyName = "ids")]
-		IdsQuery Ids { get; set; }
+		IIdsQuery Ids { get; set; }
 
 		[JsonProperty(PropertyName = "custom_score")]
 		ICustomScoreQuery CustomScore { get; set; }

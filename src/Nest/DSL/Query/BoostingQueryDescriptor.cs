@@ -22,7 +22,19 @@ namespace Nest
 		double? NegativeBoost { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class BoostingQuery : PlainQuery, IBoostingQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Boosting = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public QueryContainer PositiveQuery { get; set; }
+		public QueryContainer NegativeQuery { get; set; }
+		public double? NegativeBoost { get; set; }
+	}
+
 	public class BoostingQueryDescriptor<T> : IBoostingQuery where T : class
 	{
 		QueryContainer IBoostingQuery.PositiveQuery { get; set; }

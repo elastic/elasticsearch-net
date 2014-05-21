@@ -18,7 +18,17 @@ namespace Nest
 		IEnumerable<ISpanQuery> Clauses { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class SpanOrQuery : PlainQuery, ISpanOrQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.SpanOr = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public IEnumerable<ISpanQuery> Clauses { get; set; }
+	}
+
 	public class SpanOrQueryDescriptor<T> : ISpanOrQuery where T : class
 	{
 		IEnumerable<ISpanQuery> ISpanOrQuery.Clauses { get; set; }

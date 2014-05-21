@@ -33,6 +33,22 @@ namespace Nest
 			var status = this.RawDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, descriptor);
 			return status.Success ? status.Response : CreateInvalidInstance<SearchResponse<TResult>>(status);
 		}
+		
+		public ISearchResponse<T> Search<T>(ISearchDescriptor request)
+			where T : class
+		{
+			return this.Search<T, T>(request);
+		}
+
+		public ISearchResponse<TResult> Search<T, TResult>(ISearchDescriptor request)
+			where T : class
+			where TResult : class
+		{
+			var pathInfo = ((IPathInfo<SearchRequestParameters>)request).ToPathInfo(_connectionSettings);
+
+			var status = this.RawDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, request);
+			return status.Success ? status.Response : CreateInvalidInstance<SearchResponse<TResult>>(status);
+		}
 
 		private SearchResponse<TResult> FieldsSearchDeserializer<T, TResult>(
 			IElasticsearchResponse response, Stream stream, SearchDescriptor<T> d)

@@ -29,7 +29,16 @@ namespace Nest.DSL.Query
 		double? Boost { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class FilterScoreQuery : IFilterScoreQuery
+	{
+		bool IQuery.IsConditionless { get { return false; } }
+		public FilterContainer Filter { get; set; }
+		public string Lang { get; set; }
+		public string Script { get; set; }
+		public Dictionary<string, object> Params { get; set; }
+		public double? Boost { get; set; }
+	}
+
 	public class FilterScoreQueryDescriptor<T> : IFilterScoreQuery where T : class
 	{
 		bool IQuery.IsConditionless { get { return ((IFilterScoreQuery)this).Filter == null; } }

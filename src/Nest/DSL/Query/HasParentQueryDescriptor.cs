@@ -30,6 +30,20 @@ namespace Nest
 
 	}
 
+	public class HasParentQuery : PlainQuery, IHasParentQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.HasParent = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public TypeNameMarker Type { get; set; }
+		public string Scope { get; set; }
+		public ParentScoreType? ScoreType { get; set; }
+		public IQueryContainer Query { get; set; }
+	}
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class HasParentQueryDescriptor<T> : IHasParentQuery where T : class
 	{

@@ -56,7 +56,7 @@ namespace Nest.DSL.Visitor
 		void Visit(IGeoShapeQuery query);
 		void Visit(IHasChildQuery query);
 		void Visit(IHasParentQuery query);
-		void Visit(IdsQuery query);
+		void Visit(IIdsQuery query);
 		void Visit(IIndicesQuery query);
 		void Visit(IMatchQuery query);
 		void Visit(IMatchAll query);
@@ -196,7 +196,7 @@ namespace Nest.DSL.Visitor
 		{
 		}
 
-		public virtual void Visit(IdsQuery customFiltersScore)
+		public virtual void Visit(IIdsQuery customFiltersScore)
 		{
 		}
 

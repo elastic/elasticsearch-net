@@ -5,8 +5,6 @@ using System.Text;
 using System.Linq.Expressions;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
-using Elasticsearch.Net;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -30,7 +28,16 @@ namespace Nest
 		ISpanNotQuery SpanNot { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class SpanQuery : ISpanQuery
+	{
+		bool IQuery.IsConditionless { get { return false; } }
+		public ISpanTermQuery SpanTermQueryDescriptor { get; set; }
+		public ISpanFirstQuery SpanFirst { get; set; }
+		public ISpanNearQuery SpanNear { get; set; }
+		public ISpanOrQuery SpanOr { get; set; }
+		public ISpanNotQuery SpanNot { get; set; }
+	}
+
 	public class SpanQuery<T> : ISpanQuery where T : class
 	{
 		ISpanTermQuery ISpanQuery.SpanTermQueryDescriptor { get; set; }
@@ -93,10 +100,10 @@ namespace Nest
 			return CreateQuery(q, (sq) => ((ISpanQuery)sq).SpanFirst = q);
 		}
 		
-		public SpanQuery<T> SpanNear(Func<SpanNearQuery<T>, SpanNearQuery<T>> selector)
+		public SpanQuery<T> SpanNear(Func<SpanNearQueryDescriptor<T>, SpanNearQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
-			var q = selector(new SpanNearQuery<T>());
+			var q = selector(new SpanNearQueryDescriptor<T>());
 			return CreateQuery(q, (sq) => ((ISpanQuery)sq).SpanNear = q);
 		}
 		public SpanQuery<T> SpanOr(Func<SpanOrQueryDescriptor<T>, SpanOrQueryDescriptor<T>> selector)

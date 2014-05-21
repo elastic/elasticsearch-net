@@ -146,7 +146,7 @@ namespace Nest.DSL.Visitor
 			Write("has_parent");
 		}
 
-		public virtual void Visit(IdsQuery query)
+		public virtual void Visit(IIdsQuery query)
 		{
 			Write("ids");
 		}

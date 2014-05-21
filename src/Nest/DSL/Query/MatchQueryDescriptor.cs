@@ -56,6 +56,40 @@ namespace Nest
 
 		PropertyPathMarker Field { get; set; }
 	}
+	
+	public class MatchQuery : PlainQuery, IMatchQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Match = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public PropertyPathMarker GetFieldName()
+		{
+			return this.Field;
+		}
+
+		public void SetFieldName(string fieldName)
+		{
+			this.Field = fieldName;
+		}
+
+		public string Type { get; set; }
+		public string Query { get; set; }
+		public string Analyzer { get; set; }
+		public RewriteMultiTerm? Rewrite { get; set; }
+		public double? Fuzziness { get; set; }
+		public double? CutoffFrequency { get; set; }
+		public int? PrefixLength { get; set; }
+		public int? MaxExpansions { get; set; }
+		public int? Slop { get; set; }
+		public double? Boost { get; set; }
+		public bool? Lenient { get; set; }
+		public Operator? Operator { get; set; }
+		public PropertyPathMarker Field { get; set; }
+	}
+
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class MatchQueryDescriptor<T> : IMatchQuery where T : class

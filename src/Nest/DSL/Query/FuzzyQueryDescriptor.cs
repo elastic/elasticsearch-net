@@ -47,6 +47,27 @@ namespace Nest
 		string Value { get; set; }
 	}
 
+	public class FuzzyStringQuery : PlainQuery, IStringFuzzyQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Fuzzy = this;
+		}
+		bool IQuery.IsConditionless { get { return false; } }
+		PropertyPathMarker IFieldNameQuery.GetFieldName() { return this.Field; }
+		void IFieldNameQuery.SetFieldName(string fieldName) { this.Field = fieldName; }
+
+		public PropertyPathMarker Field { get; set; }
+		public double? Boost { get; set; }
+		public string Fuzziness { get; set; }
+		public RewriteMultiTerm? Rewrite { get; set; }
+		public int? MaxExpansions { get; set; }
+		public bool? Transpositions { get; set; }
+		public bool? UnicodeAware { get; set; }
+		public int? PrefixLength { get; set; }
+		public string Value { get; set; }
+	}
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class FuzzyQueryDescriptor<T> : IStringFuzzyQuery where T : class
 	{

@@ -26,7 +26,30 @@ namespace Nest
 		double? Boost { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class RegexpQuery : PlainQuery, IRegexpQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Regexp = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return this.Field;
+		}
+
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			this.Field = fieldName;
+		}
+
+		public string Value { get; set; }
+		public string Flags { get; set; }
+		public PropertyPathMarker Field { get; set; }
+		public double? Boost { get; set; }
+	}
+
 	public class RegexpQueryDescriptor<T> : IRegexpQuery where T : class
 	{
 		string IRegexpQuery.Value { get; set; }

@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<SpanNearQuery<object>>))]
+	[JsonConverter(typeof(ReadAsTypeConverter<SpanNearQueryDescriptor<object>>))]
 	public interface ISpanNearQuery : ISpanSubQuery
 	{
 		[JsonProperty(PropertyName = "clauses")]
@@ -26,8 +26,21 @@ namespace Nest
 		bool? CollectPayloads { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SpanNearQuery<T> : ISpanNearQuery where T : class
+	public class SpanNearQuery : PlainQuery, ISpanNearQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.SpanNear = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public IEnumerable<ISpanQuery> Clauses { get; set; }
+		public int? Slop { get; set; }
+		public bool? InOrder { get; set; }
+		public bool? CollectPayloads { get; set; }
+	}
+
+	public class SpanNearQueryDescriptor<T> : ISpanNearQuery where T : class
 	{
 		IEnumerable<ISpanQuery> ISpanNearQuery.Clauses { get; set; }
 
@@ -46,7 +59,7 @@ namespace Nest
 			}
 		}
 
-		public SpanNearQuery<T> Clauses(params Func<SpanQuery<T>, SpanQuery<T>>[] selectors)
+		public SpanNearQueryDescriptor<T> Clauses(params Func<SpanQuery<T>, SpanQuery<T>>[] selectors)
 		{
 			selectors.ThrowIfNull("selector");
 			var descriptors = new List<SpanQuery<T>>();
@@ -63,17 +76,17 @@ namespace Nest
 			((ISpanNearQuery)this).Clauses = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
-		public SpanNearQuery<T> Slop(int slop)
+		public SpanNearQueryDescriptor<T> Slop(int slop)
 		{
 			((ISpanNearQuery)this).Slop = slop;
 			return this;
 		}
-		public SpanNearQuery<T> InOrder(bool inOrder)
+		public SpanNearQueryDescriptor<T> InOrder(bool inOrder)
 		{
 			((ISpanNearQuery)this).InOrder = inOrder;
 			return this;
 		}
-		public SpanNearQuery<T> CollectPayloads(bool collectPayloads)
+		public SpanNearQueryDescriptor<T> CollectPayloads(bool collectPayloads)
 		{
 			((ISpanNearQuery)this).CollectPayloads = collectPayloads;
 			return this;

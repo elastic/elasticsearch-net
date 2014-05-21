@@ -28,7 +28,20 @@ namespace Nest
 		IEnumerable<string> Indices { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class IndicesQuery : PlainQuery, IIndicesQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Indices = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public NestedScore? Score { get; set; }
+		public IQueryContainer Query { get; set; }
+		public IQueryContainer NoMatchQuery { get; set; }
+		public IEnumerable<string> Indices { get; set; }
+	}
+
 	public class IndicesQueryDescriptor<T> : IIndicesQuery where T : class
 	{
 		NestedScore? IIndicesQuery.Score { get; set; }

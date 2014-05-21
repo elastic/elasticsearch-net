@@ -21,7 +21,18 @@ namespace Nest
 		IFilterContainer Filter { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class FilteredQuery : PlainQuery, IFilteredQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Filtered = this;
+		}
+
+		bool IQuery.IsConditionless { get {return false;}}
+		public IQueryContainer Query { get; set; }
+		public IFilterContainer Filter { get; set; }
+	}
+
 	public class FilteredQueryDescriptor<T> : IFilteredQuery where T : class
 	{
 		IQueryContainer IFilteredQuery.Query { get; set; }

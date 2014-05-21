@@ -33,6 +33,21 @@ namespace Nest
 
 	}
 
+	public class NestedQuery : PlainQuery, INestedQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Nested = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public NestedScore? Score { get; set; }
+		public IFilterContainer Filter { get; set; }
+		public IQueryContainer Query { get; set; }
+		public PropertyPathMarker Path { get; set; }
+		public string Scope { get; set; }
+	}
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class NestedQueryDescriptor<T> : INestedQuery where T : class
 	{

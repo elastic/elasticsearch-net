@@ -45,7 +45,35 @@ namespace Nest
 		bool? DisableCoord { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class CommonTermsQuery : PlainQuery, ICommonTermsQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.CommonTerms = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return this.Field;
+		}
+
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			this.Field = fieldName;
+		}
+
+		public string Query { get; set; }
+		public PropertyPathMarker Field { get; set; }
+		public double? CutoffFrequency { get; set; }
+		public Operator? LowFrequencyOperator { get; set; }
+		public Operator? HighFrequencyOperator { get; set; }
+		public string MinimumShouldMatch { get; set; }
+		public double? Boost { get; set; }
+		public string Analyzer { get; set; }
+		public bool? DisableCoord { get; set; }
+	}
+
 	public class CommonTermsQueryDescriptor<T> : ICommonTermsQuery where T : class
 	{
 		string ICommonTermsQuery.Query { get; set; }

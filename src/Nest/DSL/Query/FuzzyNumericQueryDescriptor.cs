@@ -18,6 +18,26 @@ namespace Nest
 		double? Value { get; set; }
 	}
 
+	public class FuzzyNumericQuery : PlainQuery, IFuzzyNumericQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Fuzzy = this;
+		}
+		bool IQuery.IsConditionless { get { return false; } }
+		PropertyPathMarker IFieldNameQuery.GetFieldName() { return this.Field; }
+		void IFieldNameQuery.SetFieldName(string fieldName) { this.Field = fieldName; }
+
+		public PropertyPathMarker Field { get; set; }
+		public double? Boost { get; set; }
+		public string Fuzziness { get; set; }
+		public RewriteMultiTerm? Rewrite { get; set; }
+		public int? MaxExpansions { get; set; }
+		public bool? Transpositions { get; set; }
+		public bool? UnicodeAware { get; set; }
+		public double? Value { get; set; }
+	}
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class FuzzyNumericQueryDescriptor<T> : IFuzzyNumericQuery where T : class
 	{

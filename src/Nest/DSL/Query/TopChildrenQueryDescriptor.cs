@@ -40,13 +40,30 @@ namespace Nest
 		string Name { get; set; }
 	}
 
+	public class TopChildrenQuery : PlainQuery, ITopChildrenQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.TopChildren = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public TypeNameMarker Type { get; set; }
+		public string Scope { get; set; }
+		public TopChildrenScore? Score { get; set; }
+		public int? Factor { get; set; }
+		public int? IncrementalFactor { get; set; }
+		public IQueryContainer Query { get; set; }
+		public bool? Cache { get; set; }
+		public string Name { get; set; }
+	}
+
 	/// <summary>
 	/// The top_children query runs the child query with an estimated hits size, and out of the hit docs, 
 	/// aggregates it into parent docs. If there aren’t enough parent docs matching the 
 	/// requested from/size search request, then it is run again with a wider (more hits) search.
 	/// </summary>
 	/// <typeparam name="T">Type used to strongly type parts of this query</typeparam>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class TopChildrenQueryDescriptor<T> : ITopChildrenQuery where T : class
 	{
 		bool IQuery.IsConditionless

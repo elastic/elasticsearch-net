@@ -39,7 +39,22 @@ namespace Nest
 		IScriptFilter ScriptScore { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class FunctionScoreQuery : PlainQuery, IFunctionScoreQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.FunctionScore = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public IEnumerable<IFunctionScoreFunction> Functions { get; set; }
+		public IQueryContainer Query { get; set; }
+		public FunctionScoreMode? ScoreMode { get; set; }
+		public FunctionBoostMode? BoostMode { get; set; }
+		public IRandomScoreFunction RandomScore { get; set; }
+		public IScriptFilter ScriptScore { get; set; }
+	}
+
 	public class FunctionScoreQueryDescriptor<T> : IFunctionScoreQuery where T : class
 	{
 		IEnumerable<IFunctionScoreFunction> IFunctionScoreQuery.Functions { get; set; }

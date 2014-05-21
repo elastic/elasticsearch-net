@@ -55,7 +55,31 @@ namespace Nest
 		string Analyzer { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+
+	public class MoreLikeThisQuery : PlainQuery, IMoreLikeThisQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.MoreLikeThis = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public IEnumerable<PropertyPathMarker> Fields { get; set; }
+		public string LikeText { get; set; }
+		public double? TermMatchPercentage { get; set; }
+		public IEnumerable<string> StopWords { get; set; }
+		public int? MinTermFrequency { get; set; }
+		public int? MaxQueryTerms { get; set; }
+		public int? MinDocumentFrequency { get; set; }
+		public int? MaxDocumentFrequency { get; set; }
+		public int? MinWordLength { get; set; }
+		public int? MaxWordLength { get; set; }
+		public double? BoostTerms { get; set; }
+		public double? Boost { get; set; }
+		public string Analyzer { get; set; }
+	}
+
+
 	public class MoreLikeThisQueryDescriptor<T> : IMoreLikeThisQuery where T : class
 	{
 		IEnumerable<PropertyPathMarker> IMoreLikeThisQuery.Fields { get; set; }

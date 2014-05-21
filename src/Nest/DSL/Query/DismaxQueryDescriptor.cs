@@ -6,7 +6,6 @@ using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 
-
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -21,6 +20,19 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "queries")]
 		IEnumerable<QueryContainer> Queries { get; set; }
+	}
+
+	public class DismaxQuery : PlainQuery, IDisMaxQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.DisMax = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public double? TieBreaker { get; set; }
+		public double? Boost { get; set; }
+		public IEnumerable<QueryContainer> Queries { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]

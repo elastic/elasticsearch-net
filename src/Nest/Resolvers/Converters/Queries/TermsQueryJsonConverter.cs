@@ -34,10 +34,6 @@ namespace Nest.Resolvers.Converters.Queries
 				{
 					writer.WritePropertyName(field);
 					serializer.Serialize(writer, t.Terms);
-					//writer.WriteStartArray();
-					//foreach(var term in t.Terms)
-					//	writer.WriteValue(term);
-					//writer.WriteEndArray();
 				}
 				else if (t.ExternalField != null)
 				{

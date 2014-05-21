@@ -10,40 +10,6 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	internal static class BoolBaseQueryDescriptorExtensions
-	{
-		internal static bool CanMergeMustAndMustNots(this IBoolQuery bq)
-		{
-			return bq == null || !bq.Should.HasAny();
-		}
-
-		internal static bool CanJoinShould(this IBoolQuery bq)
-		{
-			return bq == null
-				|| (
-					(bq.Should.HasAny() && !bq.Must.HasAny() && !bq.MustNot.HasAny())
-					|| !bq.Should.HasAny()
-				);
-		}
-
-		internal static IEnumerable<IQueryContainer> MergeShouldQueries(this IQueryContainer lbq, IQueryContainer rbq)
-		{
-			var lBoolDescriptor = lbq.Bool;
-			var lHasShouldQueries = lBoolDescriptor != null &&
-			  lBoolDescriptor.Should.HasAny();
-
-			var rBoolDescriptor = rbq.Bool;
-			var rHasShouldQueries = rBoolDescriptor != null &&
-			  rBoolDescriptor.Should.HasAny();
-
-			var lq = lHasShouldQueries ? lBoolDescriptor.Should : new[] { lbq };
-			var rq = rHasShouldQueries ? rBoolDescriptor.Should : new[] { rbq };
-
-			return lq.Concat(rq);
-		}
-	}
-
-	
 	[JsonConverter(typeof(ReadAsTypeConverter<BoolBaseQueryDescriptor>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IBoolQuery : IQuery
@@ -70,7 +36,24 @@ namespace Nest
 		double? Boost { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class BoolQuery : PlainQuery, IBoolQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Bool = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+
+		public IEnumerable<IQueryContainer> Must { get; set; }
+		public IEnumerable<IQueryContainer> MustNot { get; set; }
+		public IEnumerable<IQueryContainer> Should { get; set; }
+		public string MinimumShouldMatch { get; set; }
+		public bool? DisableCoord { get; set; }
+		public double? Boost { get; set; }
+	}
+
+
 	public class BoolBaseQueryDescriptor : IBoolQuery
 	{
 		[JsonProperty("must")]
@@ -106,7 +89,6 @@ namespace Nest
 		}
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class BoolQueryDescriptor<T> : BoolBaseQueryDescriptor where T : class
 	{
 		public BoolQueryDescriptor<T> DisableCoord()

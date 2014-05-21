@@ -142,6 +142,8 @@
     <Compile Include="DSL\DeleteSnapshotDescriptor.cs" />
     <Compile Include="DSL\Filter\IFieldNameFilter.cs" />
     <Compile Include="DSL\Filter\IFilter.cs" />
+    <Compile Include="DSL\Query\BoolQueryExtensions.cs" />
+    <Compile Include="DSL\Query\PlainQuery.cs" />
     <Compile Include="DSL\Visitor\DslPrettyPrintVisitor.cs" />
     <Compile Include="DSL\Visitor\QueryFilterWalker.cs" />
     <Compile Include="DSL\Visitor\QueryVisitor.cs" />
@@ -155,7 +157,7 @@
     <Compile Include="DSL\Filter\PrefixFilter.cs" />
     <Compile Include="DSL\Filter\TermsFilter.cs" />
     <Compile Include="DSL\GetSnapshotDescriptor.cs" />
-    <Compile Include="DSL\Query\IQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\IQueryContainer.cs" />
     <Compile Include="DSL\Query\Behaviour\IFieldNameQuery.cs" />
     <Compile Include="DSL\Query\Functions\BoostFactorFunction.cs" />
     <Compile Include="DSL\Query\Functions\ExpFunction.cs" />
@@ -538,8 +540,8 @@
     <Compile Include="ElasticClient-Bulk.cs" />
     <Compile Include="Domain\Responses\UpdateResponse.cs" />
     <Compile Include="DSL\Query\QueryContainer.cs" />
-    <Compile Include="DSL\Filter\FilterDescriptorBase.cs" />
-    <Compile Include="DSL\Filter\IFilterDescriptor.cs" />
+    <Compile Include="DSL\Filter\FilterContainer.cs" />
+    <Compile Include="DSL\Filter\IFilterContainer.cs" />
     <Compile Include="DSL\Query\TermsQueryDescriptor.cs" />
     <Compile Include="DSL\UpdateDescriptor.cs" />
     <Compile Include="ElasticClient-Update.cs" />
@@ -578,7 +580,7 @@
     <Compile Include="DSL\Query\CustomScoreQueryDescriptor.cs" />
     <Compile Include="DSL\Query\DisMaxQueryDescriptor.cs" />
     <Compile Include="DSL\Query\FilteredQueryDescriptor.cs" />
-    <Compile Include="DSL\Query\IdsQuery.cs" />
+    <Compile Include="DSL\Query\IdsQueryDescriptor.cs" />
     <Compile Include="DSL\SortDescriptor.cs" />
     <Compile Include="DSL\SortGeoDistanceDescriptor.cs" />
     <Compile Include="DSL\SortScriptDescriptor.cs" />

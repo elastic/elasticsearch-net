@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using System.Linq;
+using Elasticsearch.Net;
 using FluentAssertions;
+using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
 namespace Nest.Tests.Unit.QueryParsers.Queries
@@ -32,6 +35,29 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			AssertIsTermQuery(q.Must.First(), Query1);
 			AssertIsTermQuery(q.Should.First(), Query2);
 			AssertIsTermQuery(q.MustNot.First(), Query3);
+		}
+
+		[Test]
+		public void Bool_PlainSyntax()
+		{
+			QueryContainer wildcardQuery = new BoolQuery
+			{
+				Must = new List<QueryContainer>
+				{
+					new WildcardQuery() { Field = "myprefix_field", Value = "value"},
+					new WildcardQuery() { Field = "my_prefix_field", Value = "value"}
+				}
+			};
+			var searchRequest = new SearchRequest()
+			{
+				Query = wildcardQuery
+			};
+
+			var search = this._client.Search<ElasticsearchProject>(searchRequest);
+
+			var request = search.RequestInformation.Request.Utf8String();
+			request.Should().Contain("my_prefix_field");
+			Assert.Pass(request);
 		}
 
 	}

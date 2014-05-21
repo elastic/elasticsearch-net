@@ -31,7 +31,7 @@ namespace Nest
 
 		IBoostingQuery IQueryContainer.Boosting { get; set; }
 		
-		IdsQuery IQueryContainer.Ids { get; set; }
+		IIdsQuery IQueryContainer.Ids { get; set; }
 		
 		ICustomScoreQuery IQueryContainer.CustomScore { get; set; }
 		

@@ -42,7 +42,24 @@ namespace Nest
 		string Locale { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class SimpleQueryStringQuery : PlainQuery, ISimpleQueryStringQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.SimpleQueryString = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public string Query { get; set; }
+		public PropertyPathMarker DefaultField { get; set; }
+		public IEnumerable<PropertyPathMarker> Fields { get; set; }
+		public Operator? DefaultOperator { get; set; }
+		public string Analyzer { get; set; }
+		public bool? LowercaseExpendedTerms { get; set; }
+		public string Flags { get; set; }
+		public string Locale { get; set; }
+	}
+
 	public class SimpleQueryStringQueryDescriptor<T> : ISimpleQueryStringQuery where T : class
 	{
 		string ISimpleQueryStringQuery.Query { get; set; }

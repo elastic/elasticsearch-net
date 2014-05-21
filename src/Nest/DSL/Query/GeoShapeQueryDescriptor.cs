@@ -19,6 +19,29 @@ namespace Nest
 		GeoShapeVector Shape { get; set; }
 	}
 
+	public class GeoShapeQuery : PlainQuery, IGeoShapeQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.GeoShape = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return this.Field;
+		}
+
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			this.Field = fieldName;
+		}
+
+		public PropertyPathMarker Field { get; set; }
+		public GeoShapeVector Shape { get; set; }
+	}
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class GeoShapeQueryDescriptor<T> : IGeoShapeQuery where T : class
 	{

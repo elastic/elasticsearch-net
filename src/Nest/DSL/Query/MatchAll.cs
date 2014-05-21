@@ -19,7 +19,7 @@ namespace Nest
 		string NormField { get; }
 	}
 
-	public class MatchAll : IMatchAll
+	public class MatchAll : PlainQuery, IMatchAll
 	{
 		public double? Boost { get; internal set; }
 
@@ -27,5 +27,9 @@ namespace Nest
 
 		bool IQuery.IsConditionless { get { return false; } }
 
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.MatchAll = this;
+		}
 	}
 }
