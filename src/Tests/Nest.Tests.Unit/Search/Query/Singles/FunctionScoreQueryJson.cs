@@ -1,6 +1,5 @@
-﻿using NUnit.Framework;
-using Nest.DSL.Query;
-using Nest.Tests.MockData.Domain;
+﻿using Nest.Tests.MockData.Domain;
+using NUnit.Framework;
 
 namespace Nest.Tests.Unit.Search.Query.Singles
 {
@@ -19,7 +18,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 							f => f.Linear(x => x.FloatValue, d => d.Scale("0.3")),
 							f => f.Exp(x => x.DoubleValue, d => d.Scale("0.5")),
 							f => f.BoostFactor(2.0),
-							f => f.FieldValueFactor(op => op.Field(ff=>ff.DoubleValue).Factor(2.5).Modifier(FieldValueFactorModifier.sqrt))
+							f => f.FieldValueFactor(op => op.Field(ff => ff.DoubleValue).Factor(2.5).Modifier(FieldValueFactorModifier.sqrt))
 						)
 						.ScoreMode(FunctionScoreMode.sum)
 						.BoostMode(FunctionBoostMode.replace)
@@ -47,7 +46,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
-		
+
 		[Test]
 		public void FunctionScoreQueryConditionless()
 		{
@@ -60,10 +59,10 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 							f => f.Linear(x => x.FloatValue, d => d.Scale("0.3")),
 							f => f.Exp(x => x.DoubleValue, d => d.Scale("0.5")),
 							f => f.BoostFactor(2),
-							f => f.FieldValueFactor(db=>db.Field(fa=>fa.DoubleValue).Factor(3.4).Modifier(FieldValueFactorModifier.ln))
+							f => f.FieldValueFactor(db => db.Field(fa => fa.DoubleValue).Factor(3.4).Modifier(FieldValueFactorModifier.ln))
 						)
 						.ScoreMode(FunctionScoreMode.sum)
-                        .BoostMode(FunctionBoostMode.replace)
+						.BoostMode(FunctionBoostMode.replace)
 					)
 				).Fields(x => x.Content);
 
