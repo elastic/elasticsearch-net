@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Nest.Resolvers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using Elasticsearch.Net;
-using Nest.Resolvers;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
@@ -158,7 +156,14 @@ namespace Nest
             return fn;
         }
 
-        public ScriptScoreFunction<T> ScriptScore(Action<ScriptFilterDescriptor> scriptSelector)
+		public FieldValueFactor<T> FieldValueFactor(Action<FieldValueFactorDescriptor<T>> db)
+		{
+			var fn = new FieldValueFactor<T>(db);
+			this._Functions.Add(fn);
+			return fn;
+		}
+
+	    public ScriptScoreFunction<T> ScriptScore(Action<ScriptFilterDescriptor> scriptSelector)
         {
             var fn = new ScriptScoreFunction<T>(scriptSelector);
             this._Functions.Add(fn);
@@ -176,10 +181,43 @@ namespace Nest
         }
     }
 
-    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class FunctionScoreFunction<T>
     {
     }
+
+
+	public class FieldValueFactorDescriptor<T>
+	{
+		[JsonProperty("field")]
+		internal PropertyPathMarker _Field { get; set; }
+
+		[JsonProperty("factor")]
+		internal double _Factor { get; set; }
+
+		[JsonProperty("modifier")]
+		[JsonConverter(typeof(StringEnumConverter))]
+        
+		internal FieldValueFactorModifier _Modifier { get; set; }
+
+		public FieldValueFactorDescriptor<T> Field(Expression<Func<T, object>> field)
+		{
+			this._Field = field;
+			return this;
+		}
+
+		public FieldValueFactorDescriptor<T> Factor(double factor)
+		{
+			this._Factor = factor;
+			return this;
+		}
+
+		public FieldValueFactorDescriptor<T> Modifier(FieldValueFactorModifier modifier)
+		{
+			this._Modifier = modifier;
+			return this;
+		} 
+	}
 
     public class FunctionScoreDecayFieldDescriptor
     {
@@ -305,7 +343,36 @@ namespace Nest
         }
     }
 
-    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class FieldValueFactor<T> : FunctionScoreFilteredFunction<T> where T : class
+	{
+		[JsonProperty(PropertyName = "field_value_factor")]
+		internal FieldValueFactorDescriptor<T> _FieldValueFactor { get; set; }
+
+		public FieldValueFactor(Action<FieldValueFactorDescriptor<T>> descriptorBuilder)
+		{
+			var descriptor = new FieldValueFactorDescriptor<T>();
+			descriptorBuilder(descriptor);
+
+			this._FieldValueFactor = descriptor;
+		}
+	}
+
+	public enum FieldValueFactorModifier
+	{
+		none, 
+		log, 
+		log1p, 
+		log2p, 
+		ln, 
+		ln1p, 
+		ln2p, 
+		square, 
+		sqrt, 
+		reciprocal
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ScriptScoreFunction<T> : FunctionScoreFilteredFunction<T> where T : class
     {
         [JsonProperty(PropertyName = "script_score")]
