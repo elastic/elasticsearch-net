@@ -21,6 +21,9 @@ namespace Nest
 		[JsonProperty("fragment_size")]
 		internal int? _FragmentSize { get; set; }
 
+        [JsonProperty("no_match_size")]
+        internal int? _NoMatchSize { get; set; }
+
 		[JsonProperty("number_of_fragments")]
 		internal int? _NumberOfFragments { get; set; }
 
@@ -105,6 +108,11 @@ namespace Nest
 			this._FragmentSize = fragmentSize;
 			return this;
 		}
+        public HighlightFieldDescriptor<T> NoMatchSize(int noMatchSize)
+        {
+            this._NoMatchSize = noMatchSize;
+            return this;
+        }
 		public HighlightFieldDescriptor<T> NumberOfFragments(int numberOfFragments)
 		{
 			this._NumberOfFragments = numberOfFragments;
