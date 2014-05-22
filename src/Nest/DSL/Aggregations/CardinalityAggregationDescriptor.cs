@@ -13,12 +13,12 @@ namespace Nest
 		where T : class
 	{
 
-		[JsonProperty("precision_treshold")]
-		internal int? _PrecisionTreshold { get; set; }
+		[JsonProperty("precision_threshold")]
+		internal int? _PrecisionThreshold { get; set; }
 
-		public CardinalityAggregationDescriptor<T> PrecisionTreshold(int precisionTreshold)
+		public CardinalityAggregationDescriptor<T> PrecisionThreshold(int precisionThreshold)
 		{
-			this._PrecisionTreshold = precisionTreshold;
+			this._PrecisionThreshold = precisionThreshold;
 			return this;
 		}
 
