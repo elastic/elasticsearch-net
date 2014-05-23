@@ -358,6 +358,8 @@ namespace Nest
 		{
 			var descriptor = new FieldValueFactorDescriptor<T>();
 			descriptorBuilder(descriptor);
+			if (descriptor._Field.IsConditionless())
+				throw new DslException("Field name not set for field value factor function");
 
 			this._FieldValueFactor = descriptor;
 		}

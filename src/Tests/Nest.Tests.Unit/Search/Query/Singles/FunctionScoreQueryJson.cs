@@ -86,5 +86,18 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
+
+		[Test]
+		public void ConditionlessFieldValueFactor()
+		{
+			Assert.Throws<DslException>(() => new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
+				.Query(q => q
+					.FunctionScore(fs => fs
+						.Query(qq => qq.Term("", ""))
+						.Functions(
+							f => f.FieldValueFactor(db => db.Factor(3.4).Modifier(FieldValueFactorModifier.ln))
+						))
+				));
+		}
 	}
 }
