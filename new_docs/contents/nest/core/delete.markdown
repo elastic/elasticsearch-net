@@ -13,20 +13,27 @@ The delete API allows to delete a typed JSON document from a specific index base
 
 ## By Id
 
-            this.ConnectedClient.DeleteById<ElasticSearchProject>(searchProject.Id);
-            this.ConnectedClient.DeleteByIdAsync<ElasticSearchProject>(searchProject.Id, c => /* called later */);
+	this.ConnectedClient.Delete<ElasticSearchProject>(searchProject.Id);
+	this.ConnectedClient.DeleteAsync<ElasticSearchProject>(searchProject.Id);
+
+## Delete with custom parameters
+
+	_client.Delete(request.Id, s => s
+		.Type("users")
+		.Index("myindex")
+	);
 
 ## By object (T)
 
 Id property is inferred (can be any value type (int, string, float ...))
 
-            this.ConnectedClient.Delete(searchProject);
-            this.ConnectedClient.DeleteAsync(searchProject);
+	this.ConnectedClient.Delete(searchProject);
+	this.ConnectedClient.DeleteAsync(searchProject);
 
 ## By IEnumerable<T>
 
-            this.ConnectedClient.DeleteMany(searchProjects);
-            this.ConnectedClient.DeleteManyAsync(searchProjects);
+	this.ConnectedClient.DeleteMany(searchProjects);
+	this.ConnectedClient.DeleteManyAsync(searchProjects);
 
 ## By IEnumerable<T> using bulkparameters
 

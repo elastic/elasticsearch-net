@@ -42,7 +42,7 @@ namespace Nest
 			INestSerializer serializer = null)
 		{
 			this._connectionSettings = settings ?? new ConnectionSettings();
-			this.Connection = connection ?? new HttpConnection(settings);
+			this.Connection = connection ?? new HttpConnection(this._connectionSettings);
 
 			this.Serializer = serializer ?? new NestSerializer(this._connectionSettings);
 			var stringifier = new NestStringifier(this._connectionSettings);
@@ -94,10 +94,8 @@ namespace Nest
 			where R : BaseResponse
 		{
 			var config = descriptor.RequestConfiguration as IRequestConfiguration;
-			var statusCodeAllowed = config == null 
-				|| (config.AllowedStatusCodes.HasAny() 
-				&& config.AllowedStatusCodes.Any(i=>i==c.HttpStatusCode));
-
+			var statusCodeAllowed = config != null && config.AllowedStatusCodes.HasAny(i => i == c.HttpStatusCode);
+			
 			if (c.Success || statusCodeAllowed)
 			{
 				c.Response.IsValid = true;
@@ -108,6 +106,13 @@ namespace Nest
 		}
 
 
+		private static R CreateValidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
+		{
+			var r = (R)typeof(R).CreateInstance();
+			((IResponseWithRequestInformation)r).RequestInformation = response;
+			r.IsValid = true;
+			return r;
+		}
 		private static R CreateInvalidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
 		{
 			var r = (R)typeof(R).CreateInstance();

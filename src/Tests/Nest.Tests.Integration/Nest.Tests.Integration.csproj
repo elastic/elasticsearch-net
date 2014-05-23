@@ -172,6 +172,8 @@
     <Compile Include="Reproduce\Reproduce308Tests.cs" />
     <Compile Include="Reproduce\Reproduce319Tests.cs" />
     <Compile Include="Reproduce\Reproduce211Tests.cs" />
+    <Compile Include="Reproduce\Reproduce654Tests.cs" />
+    <Compile Include="Reproduce\Reproduce659Tests.cs" />
     <Compile Include="Reproduce\ReproduceConnectionStallsTests.cs" />
     <Compile Include="Search\FieldTests\FieldsTest.cs" />
     <Compile Include="Search\NamedFilter\NamedFilterTests.cs" />

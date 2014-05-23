@@ -1,3 +1,4 @@
+@using System.Collections.Generic
 @using System.Globalization
 @using System.Linq
 @using System.Text.RegularExpressions
@@ -63,14 +64,33 @@ namespace Elasticsearch.Net
 	<text>var url = "@(url)";</text>
 		}
 			BaseRequestParameters requestParams = null;
+			@if (url.StartsWith("_cat") || method.Allow404)
+			{
+				var config = new List<string>();
+				if (url.StartsWith("_cat"))
+				{
+					config.Add("ContentType(\"text/plain\")");
+				}
+				if (method.Allow404)
+				{
+					config.Add("AllowStatusCodes(404)");
+				}
+				<text>
+			requestParameters = requestParameters ?? (s => s);
+			requestParams = requestParameters(new @(method.QueryStringParamName)());
+			(requestParams as @method.QueryStringParamName).RequestConfiguration(r=>r.@Raw(string.Join(".", config)));
+			ToNameValueCollection(requestParams);
+			</text>
+			}
+			else
+			{
+				<text>
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new @(method.QueryStringParamName)()@(url.StartsWith("_cat") ? Raw(".RequestConfiguration(r=>r.ContentType(\"text/plain\"))") : null));
+				requestParams = requestParameters(new @(method.QueryStringParamName)());
 				ToNameValueCollection(requestParams);
 			}
-			@if (url.StartsWith("_cat"))
-			{
-<text>			else requestParams = new @(method.QueryStringParamName)().RequestConfiguration(r=>r.ContentType("text/plain")); </text>
+				</text>
 			}
 
 			@{

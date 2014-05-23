@@ -75,8 +75,11 @@ namespace Elasticsearch.Net.Connection
 
 		private bool _usePrettyResponses;
 		bool IConnectionConfigurationValues.UsesPrettyResponses { get{ return _usePrettyResponses; } }
-
-		private bool _keepRawResponse;
+#if DEBUG
+		private bool _keepRawResponse = true;
+#else
+		private bool _keepRawResponse = false;
+#endif
 		bool IConnectionConfigurationValues.KeepRawResponse { get{ return _keepRawResponse; } }
 
 		private int _maximumAsyncConnections;
