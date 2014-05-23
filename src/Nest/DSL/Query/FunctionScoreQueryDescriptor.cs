@@ -197,11 +197,11 @@ namespace Nest
 		internal PropertyPathMarker _Field { get; set; }
 
 		[JsonProperty("factor")]
-		internal double _Factor { get; set; }
+		internal double? _Factor { get; set; }
 
 		[JsonProperty("modifier")]
 		[JsonConverter(typeof (StringEnumConverter))]
-		internal FieldValueFactorModifier _Modifier { get; set; }
+		internal FieldValueFactorModifier? _Modifier { get; set; }
 
 		public FieldValueFactorDescriptor<T> Field(Expression<Func<T, object>> field)
 		{
