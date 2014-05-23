@@ -66,8 +66,7 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var v = value as IFieldNameQuery;
-			if (v == null )
-				return;
+			if (v == null) return;
 
 			var fieldName = v.GetFieldName();
 			if (fieldName == null)

@@ -25,8 +25,6 @@ namespace Nest.Resolvers.Converters
 			var o = new ShardsSegment();
 			serializer.Populate(reader, o);
 			return o;
-
-			//throw new NotImplementedException();
 		}
 
 		public override bool CanConvert(Type objectType)

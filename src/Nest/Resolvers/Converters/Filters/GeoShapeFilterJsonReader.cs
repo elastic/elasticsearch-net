@@ -83,7 +83,7 @@ namespace Nest.Resolvers.Converters.Filters
 			filter.Field = field;
 			filter.Cache = cache;
 			filter.CacheKey = cacheKey;
-			filter.CacheName = cacheName;
+			filter.FilterName = cacheName;
 			return filter;
 
 		}

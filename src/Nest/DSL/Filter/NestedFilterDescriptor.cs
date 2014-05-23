@@ -12,7 +12,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeConverter<NestedFilterDescriptor<object>>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface INestedFilterDescriptor : IFilter
+	public interface INestedFilter : IFilter
 	{
 		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
 		NestedScore? Score { get; set; }
@@ -32,58 +32,72 @@ namespace Nest
 		string Scope { get; set; }
 	}
 
-	public class NestedFilterDescriptor<T> : FilterBase, INestedFilterDescriptor where T : class
+	public class NestedFilter : PlainFilter, INestedFilter
 	{
-		NestedScore? INestedFilterDescriptor.Score { get; set; }
+		protected override void WrapInContainer(IFilterContainer container)
+		{
+			container.Nested = this;
+		}
 
-		IFilterContainer INestedFilterDescriptor.Filter { get; set; }
+		public NestedScore? Score { get; set; }
+		public IFilterContainer Filter { get; set; }
+		public IQueryContainer Query { get; set; }
+		public PropertyPathMarker Path { get; set; }
+		public string Scope { get; set; }
+	}
 
-		IQueryContainer INestedFilterDescriptor.Query { get; set; }
+	public class NestedFilterDescriptor<T> : FilterBase, INestedFilter where T : class
+	{
+		NestedScore? INestedFilter.Score { get; set; }
 
-		PropertyPathMarker INestedFilterDescriptor.Path { get; set; }
+		IFilterContainer INestedFilter.Filter { get; set; }
 
-		string INestedFilterDescriptor.Scope { get; set; }
+		IQueryContainer INestedFilter.Query { get; set; }
+
+		PropertyPathMarker INestedFilter.Path { get; set; }
+
+		string INestedFilter.Scope { get; set; }
 
 		bool IFilter.IsConditionless
 		{
 			get
 			{
-				return ((INestedFilterDescriptor)this).Query == null 
-					|| ((INestedFilterDescriptor)this).Query.IsConditionless;
+				return ((INestedFilter)this).Query == null 
+					|| ((INestedFilter)this).Query.IsConditionless;
 			}
 		}
 
 		public NestedFilterDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
 			var q = new FilterDescriptor<T>();
-			((INestedFilterDescriptor)this).Filter = filterSelector(q);
+			((INestedFilter)this).Filter = filterSelector(q);
 			return this;
 		}
 		public NestedFilterDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			((INestedFilterDescriptor)this).Query = querySelector(q);
+			((INestedFilter)this).Query = querySelector(q);
 			return this;
 		}
 
 		public NestedFilterDescriptor<T> Score(NestedScore score)
 		{
-			((INestedFilterDescriptor)this).Score = score;
+			((INestedFilter)this).Score = score;
 			return this;
 		}
 		public NestedFilterDescriptor<T> Path(string path)
 		{
-			((INestedFilterDescriptor)this).Path = path;
+			((INestedFilter)this).Path = path;
 			return this;
 		}
 		public NestedFilterDescriptor<T> Path(Expression<Func<T, object>> objectPath)
 		{
-			((INestedFilterDescriptor)this).Path = objectPath;
+			((INestedFilter)this).Path = objectPath;
 			return this;
 		}
 		public NestedFilterDescriptor<T> Scope(string scope)
 		{
-			((INestedFilterDescriptor)this).Scope = scope;
+			((INestedFilter)this).Scope = scope;
 			return this;
 		}
 	}

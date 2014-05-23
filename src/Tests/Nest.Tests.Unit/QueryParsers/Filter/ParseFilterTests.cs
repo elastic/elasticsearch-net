@@ -42,7 +42,7 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			);
 			var filter = filterBaseSelector(descriptor.Filter);
 			filter.Should().NotBeNull();
-			filter.CacheName.Should().Be(cacheName);
+			filter.FilterName.Should().Be(cacheName);
 			filter.Cache.Should().Be(cache);
 			filter.CacheKey.Should().Be(cacheKey);
 			return filter;

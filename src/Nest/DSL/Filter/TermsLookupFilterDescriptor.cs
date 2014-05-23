@@ -12,9 +12,8 @@ using Elasticsearch.Net;
 namespace Nest
 {
 
-	[JsonConverter(typeof(CompositeJsonConverter<TermsFilterJsonReader,CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ITermsLookupFilter : ITermsBaseFilter, ICustomJson
+	public interface ITermsLookupFilter : ITermsBaseFilter
 	{
 		[JsonProperty("id")]
 		string Id { get; set; }
@@ -30,6 +29,28 @@ namespace Nest
 
 		[JsonProperty("routing")]
 		string Routing { get; set; }
+
+		[JsonProperty("cache")]
+		bool? CacheLookup { get; set; }
+	}
+
+	public class TermsLookupFilter : PlainFilter, ITermsLookupFilter
+	{
+		protected override void WrapInContainer(IFilterContainer container)
+		{
+			container.Terms = this;
+		}
+
+		public PropertyPathMarker Field { get; set; }
+		public TermsExecution? Execution { get; set; }
+	
+
+		public string Id { get; set; }
+		public TypeNameMarker Type { get; set; }
+		public IndexNameMarker Index { get; set; }
+		public PropertyPathMarker Path { get; set; }
+		public string Routing { get; set; }
+		public bool? CacheLookup { get; set; }
 	}
 
 	public class TermsLookupFilterDescriptor : FilterBase, ITermsLookupFilter
@@ -55,21 +76,9 @@ namespace Nest
 		string ITermsLookupFilter.Routing { get; set; }
 		
 		TermsExecution? ITermsBaseFilter.Execution { get; set; }
-		
-		object ICustomJson.GetCustomJson()
-		{
-			var tf = ((ITermsLookupFilter)this);
-			var f = new
-			{
-				id = tf.Id,
-				type= tf.Type, 
-				index = tf.Index,
-				path = tf.Path, 
-				routing = tf.Routing
-			};
-			return this.FieldNameAsKeyFormat(tf.Field, f);
-		}
 
+		bool? ITermsLookupFilter.CacheLookup { get; set; }
+		
 		public TermsLookupFilterDescriptor Lookup<T>(string field, string id, string index = null, string type = null)
 		{
 			return _Lookup<T>(field, id, index, type);
@@ -107,6 +116,15 @@ namespace Nest
 			return this;
 		}
 
+		/// <summary>
+		/// Whether to cache the filter built from the retrieved document (true - default) or whether to fetch and 
+		/// rebuild the filter on every request (false).
+		/// </summary>
+		public TermsLookupFilterDescriptor CacheLookup(bool cache = true)
+		{
+			((ITermsLookupFilter)this).CacheLookup = cache;
+			return this;
+		}
 		/// <summary>
 		/// A custom routing value to be used when retrieving the external terms doc.
 		/// </summary>

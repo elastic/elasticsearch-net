@@ -11,7 +11,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<NotFilter>))]
+	[JsonConverter(typeof(ReadAsTypeConverter<NotFilterDescriptor>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface INotFilter : IFilter
 	{
@@ -19,8 +19,18 @@ namespace Nest
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
 		IFilterContainer Filter { get; set; }
 	}
+	
+	public class NotFilter : PlainFilter, INotFilter
+	{
+		protected override void WrapInContainer(IFilterContainer container)
+		{
+			container.Not = this;
+		}
 
-	public class NotFilter : FilterBase, INotFilter
+		public IFilterContainer Filter { get; set; }
+	}
+
+	public class NotFilterDescriptor : FilterBase, INotFilter
 	{
 
 		IFilterContainer INotFilter.Filter { get; set; }

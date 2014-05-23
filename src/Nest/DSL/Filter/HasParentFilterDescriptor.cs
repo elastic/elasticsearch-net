@@ -24,6 +24,18 @@ namespace Nest
 		IQueryContainer Query { get; set; }
 	}
 
+	public class HasParentFilter : PlainFilter, IHasParentFilter
+	{
+		protected override void WrapInContainer(IFilterContainer container)
+		{
+			container.HasParent = this;
+		}
+
+		public TypeNameMarker Type { get; set; }
+		public string Scope { get; set; }
+		public IQueryContainer Query { get; set; }
+	}
+
 	public class HasParentFilterDescriptor<T> : FilterBase, IHasParentFilter where T : class
 	{
 		TypeNameMarker IHasParentFilter.Type { get; set; }

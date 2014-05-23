@@ -1,7 +1,9 @@
+using Nest.Resolvers;
+
 namespace Nest
 {
 	public interface IFieldNameFilter : IFilter
 	{
-		string GetFieldName();
+		PropertyPathMarker Field { get; set; }
 	}
 }

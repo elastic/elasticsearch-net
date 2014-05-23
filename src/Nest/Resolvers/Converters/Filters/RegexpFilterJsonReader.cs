@@ -37,7 +37,7 @@ namespace Nest.Resolvers.Converters.Filters
 						filter.CacheKey = jv.Value.Value<string>();
 						break;
 					case "_name":
-						filter.CacheName = jv.Value.Value<string>();
+						filter.FilterName = jv.Value.Value<string>();
 						break;
 					default:
 						filter.Field = jv.Key;

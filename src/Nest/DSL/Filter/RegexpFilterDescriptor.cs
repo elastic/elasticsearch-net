@@ -12,9 +12,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CompositeJsonConverter<RegexpFilterJsonReader,CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IRegexpFilter : IFilter, ICustomJson
+	public interface IRegexpFilter : IFieldNameFilter
 	{
 		[JsonProperty("value")]
 		string Value { get; set; }
@@ -22,7 +21,18 @@ namespace Nest
 		[JsonProperty("flags")]
 		string Flags { get; set; }
 
-		PropertyPathMarker Field { get; set; }
+	}
+
+	public class RegexpFilter : PlainFilter, IRegexpFilter
+	{
+		protected override void WrapInContainer(IFilterContainer container)
+		{
+			container.Regexp = this;
+		}
+
+		public string Value { get; set; }
+		public string Flags { get; set; }
+		public PropertyPathMarker Field { get; set; }
 	}
 
 	public class RegexpFilterDescriptor<T> : FilterBase, IRegexpFilter where T : class
@@ -31,7 +41,7 @@ namespace Nest
 
 		string IRegexpFilter.Flags { get; set; }
 
-		PropertyPathMarker IRegexpFilter.Field { get; set; }
+		PropertyPathMarker IFieldNameFilter.Field { get; set; }
 
 		bool IFilter.IsConditionless
 		{
@@ -62,11 +72,5 @@ namespace Nest
 			return this;
 		}
 
-		object ICustomJson.GetCustomJson()
-		{
-			var tf = ((IRegexpFilter)this);
-			var rf = new { value = tf.Value, flags = tf.Flags };
-			return this.FieldNameAsKeyFormat(tf.Field, rf);
-		}
 	}
 }

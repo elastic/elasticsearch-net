@@ -477,11 +477,11 @@ namespace Nest
 		/// </param>
 		public QueryContainer MatchAll(double? Boost = null, string NormField = null)
 		{
-			var query = new MatchAll() { NormField = NormField };
+			var query = new MatchAllQuery() { NormField = NormField };
 			if (Boost.HasValue)
 				query.Boost = Boost.Value;
 
-			return this.New(query, q => q.MatchAll = query);
+			return this.New(query, q => q.MatchAllQuery = query);
 		}
 
 		/// <summary>

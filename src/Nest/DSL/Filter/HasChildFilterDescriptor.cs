@@ -22,6 +22,18 @@ namespace Nest
 		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }
 	}
+	
+	public class HasChildFilter : PlainFilter, IHasChildFilter
+	{
+		protected override void WrapInContainer(IFilterContainer container)
+		{
+			container.HasChild = this;
+		}
+
+		public TypeNameMarker Type { get; set; }
+		public string Scope { get; set; }
+		public IQueryContainer Query { get; set; }
+	}
 
 	public class HasChildFilterDescriptor<T> : FilterBase, IHasChildFilter where T : class
 	{

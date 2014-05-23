@@ -17,7 +17,7 @@ namespace Nest
 
 		public FilterDescriptor<T> Name(string name)
 		{
-			this._Name = name;
+			this._FilterName = name;
 			return this;
 		}
 		public FilterDescriptor<T> CacheKey(string cacheKey)
@@ -74,7 +74,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Exists(Expression<Func<T, object>> fieldDescriptor)
 		{
-			var filter = new ExistsFilter();
+			var filter = new ExistsFilterDescriptor();
 			((IExistsFilter)filter).Field = fieldDescriptor;
 			this.SetCacheAndName(filter);
 			return this.New(filter, f => f.Exists = filter);
@@ -84,7 +84,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Exists(string field)
 		{
-			var filter = new ExistsFilter();
+			var filter = new ExistsFilterDescriptor();
 			((IExistsFilter)filter).Field = field;
 			this.SetCacheAndName(filter);
 			return this.New(filter, f => f.Exists = filter);
@@ -94,7 +94,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Missing(Expression<Func<T, object>> fieldDescriptor)
 		{
-			var filter = new MissingFilter();
+			var filter = new MissingFilterDescriptor();
 			((IMissingFilter)filter).Field = fieldDescriptor;
 			this.SetCacheAndName(filter);
 			return  this.New(filter, f => f.Missing = filter);
@@ -104,7 +104,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Missing(string field)
 		{
-			var filter = new MissingFilter();
+			var filter = new MissingFilterDescriptor();
 			((IMissingFilter)filter).Field = field;
 			this.SetCacheAndName(filter);
 			return  this.New(filter, f => f.Missing = filter);
@@ -115,7 +115,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Ids(IEnumerable<string> values)
 		{
-			var filter = new IdsFilter();
+			var filter = new IdsFilterDescriptor();
 			((IIdsFilter)filter).Values = values;
 			this.SetCacheAndName(filter);
 			return this.New(filter, f => f.Ids = filter);
@@ -126,10 +126,10 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Ids(string type, IEnumerable<string> values)
 		{
+			var filter = new IdsFilterDescriptor();
 			if (type.IsNullOrEmpty())
-				return CreateConditionlessFilterDescriptor("ids", null);
+				return CreateConditionlessFilterDescriptor(filter, null);
 
-			var filter = new IdsFilter();
 			((IIdsFilter)filter).Values = values;
 			((IIdsFilter)filter).Type = new [] { type };
 
@@ -142,10 +142,10 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Ids(IEnumerable<string> types, IEnumerable<string> values)
 		{
+			var filter = new IdsFilterDescriptor();
 			if (!types.HasAny() || types.All(t=>t.IsNullOrEmpty()))
-				return CreateConditionlessFilterDescriptor("ids", null);
+				return CreateConditionlessFilterDescriptor(filter, null);
 
-			var filter = new IdsFilter();
 			((IIdsFilter)filter).Values = values;
 			((IIdsFilter)filter).Type = types;
 			
@@ -186,7 +186,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? type = null)
 		{
-			IGeoBoundingBoxFilter filter = new GeoBoundingBoxFilter();
+			IGeoBoundingBoxFilter filter = new GeoBoundingBoxFilterDescriptor();
 			filter.TopLeft = geoHashTopLeft;
 			filter.BottomRight = geoHashBottomRight;
 			filter.GeoExecution = type;
@@ -198,7 +198,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer GeoBoundingBox(string fieldName, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? type = null)
 		{
-			IGeoBoundingBoxFilter filter = new GeoBoundingBoxFilter();
+			IGeoBoundingBoxFilter filter = new GeoBoundingBoxFilterDescriptor();
 			filter.TopLeft = geoHashTopLeft;
 			filter.BottomRight = geoHashBottomRight;
 			filter.GeoExecution = type;
@@ -340,7 +340,7 @@ namespace Nest
 
 		private FilterContainer _GeoPolygon(PropertyPathMarker fieldName, string[] points)
 		{
-			IGeoPolygonFilter filter = new GeoPolygonFilter();
+			IGeoPolygonFilter filter = new GeoPolygonFilterDescriptor();
 			filter.Points = points;
 			filter.Field = fieldName;
 			return this.New(filter, f => f.GeoPolygon = filter);
@@ -379,7 +379,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Limit(int? limit)
 		{
-			ILimitFilter filter = new LimitFilter {};
+			ILimitFilter filter = new LimitFilterDescriptor {};
 			filter.Value = limit;
 
 			return  this.New(filter, f => f.Limit = filter);
@@ -391,7 +391,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Type(string type)
 		{
-			ITypeFilter filter = new TypeFilter {};
+			ITypeFilter filter = new TypeFilterDescriptor {};
 			filter.Value = type;
 			return  this.New(filter, f => f.Type = filter);
 		}
@@ -403,7 +403,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Type(Type type)
 		{
-			ITypeFilter filter = new TypeFilter {};
+			ITypeFilter filter = new TypeFilterDescriptor {};
 			filter.Value = type;
 			return this.New(filter, f=> f.Type = filter);
 		}
@@ -413,7 +413,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer MatchAll()
 		{
-			var filter = new MatchAllFilter { };
+			var filter = new MatchAllFilterDescriptor { };
 			return this.New(filter, f=> f.MatchAll = filter);
 		}
 		
@@ -446,7 +446,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string prefix)
 		{
-			IPrefixFilter filter = new PrefixFilter();
+			IPrefixFilter filter = new PrefixFilterDescriptor();
 			filter.Field = fieldDescriptor;
 			filter.Prefix = prefix;
 			return this.New(filter, f=>f.Prefix = filter);
@@ -457,7 +457,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Prefix(string field, string prefix)
 		{
-			IPrefixFilter filter = new PrefixFilter();
+			IPrefixFilter filter = new PrefixFilterDescriptor();
 			filter.Field = field;
 			filter.Prefix = prefix;
 			return this.New(filter, f=>f.Prefix = filter);
@@ -468,7 +468,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Term<K>(Expression<Func<T, K>> fieldDescriptor, K term)
 		{
-			ITermFilter filter = new TermFilter();
+			ITermFilter filter = new TermFilterDescriptor();
 			filter.Field = fieldDescriptor;
 			filter.Value = term;
 			return this.New(filter, f=>f.Term = filter);
@@ -479,7 +479,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Term(Expression<Func<T, object>> fieldDescriptor, object term)
 		{
-			ITermFilter filter = new TermFilter();
+			ITermFilter filter = new TermFilterDescriptor();
 			filter.Field = fieldDescriptor;
 			filter.Value = term;
 			return this.New(filter, f=>f.Term = filter);
@@ -493,7 +493,7 @@ namespace Nest
 		{
 
 
-			ITermFilter filter = new TermFilter();
+			ITermFilter filter = new TermFilterDescriptor();
 			filter.Field = field;
 			filter.Value = term;
 			return this.New(filter, f=>f.Term = filter);
@@ -504,7 +504,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Terms<K>(Expression<Func<T, K>> fieldDescriptor, IEnumerable<K> terms, TermsExecution? Execution = null)
 		{
-			ITermsFilter filter = new TermsFilter();
+			ITermsFilter filter = new TermsFilterDescriptor();
 			filter.Field = fieldDescriptor;
 			filter.Terms = terms.Cast<object>();
 			filter.Execution = Execution;
@@ -516,7 +516,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Terms(Expression<Func<T, object>> fieldDescriptor, IEnumerable<string> terms, TermsExecution? Execution = null)
 		{
-			ITermsFilter filter = new TermsFilter();
+			ITermsFilter filter = new TermsFilterDescriptor();
 			filter.Field = fieldDescriptor;
 			filter.Terms = terms;
 			return this.New(filter, f=>f.Terms = filter);
@@ -527,7 +527,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Terms(string field, IEnumerable<string> terms, TermsExecution? Execution = null)
 		{
-			ITermsFilter filter = new TermsFilter();
+			ITermsFilter filter = new TermsFilterDescriptor();
 			filter.Field = field;
 			filter.Terms = terms ?? Enumerable.Empty<string>();
 			return this.New(filter, f=>f.Terms = filter);
@@ -574,7 +574,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer And(params FilterContainer[] filtersDescriptor)
 		{
-			var andFilter = new AndFilter();
+			var andFilter = new AndFilterDescriptor();
 			((IAndFilter)andFilter).Filters = filtersDescriptor.Cast<IFilterContainer>().ToList();
 			return this.New(andFilter, f=>f.And = andFilter);
 		}
@@ -597,7 +597,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Or(params FilterContainer[] filtersDescriptor)
 		{
-			var orFilter = new OrFilter();
+			var orFilter = new OrFilterDescriptor();
 			((IOrFilter)orFilter).Filters = filtersDescriptor.Cast<IFilterContainer>().ToList();
 			return this.New(orFilter, f=> f.Or = orFilter);
 			
@@ -609,7 +609,7 @@ namespace Nest
 		public FilterContainer Not(Func<FilterDescriptor<T>, FilterContainer> selector)
 		{
 
-			var notFilter = new NotFilter();
+			var notFilter = new NotFilterDescriptor();
 
 			var filter = new FilterDescriptor<T>() { IsConditionless = true };
 			FilterContainer bf = filter;
@@ -639,7 +639,7 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
-			var filter = new QueryFilter();
+			var filter = new QueryFilterDescriptor();
 			var descriptor = new QueryDescriptor<T>();
 			QueryContainer bq = descriptor;
 			if (querySelector != null)
@@ -678,7 +678,7 @@ namespace Nest
 			return this.New(filter, f=>f.Regexp = filter);
 		}
 
-		private FilterDescriptor<T> CreateConditionlessFilterDescriptor(object filter, string type = null)
+		private FilterDescriptor<T> CreateConditionlessFilterDescriptor(IFilter filter, string type = null)
 		{
 			var self = ((IFilterContainer)this);
 			if (self.IsStrict && !self.IsVerbatim)
@@ -720,15 +720,19 @@ namespace Nest
 		{
 			this._Cache = null;
 			this._CacheKey = null;
-			this._Name = null;
+			this._FilterName = null;
 		}
 
 		private void SetCacheAndName(IFilter filter)
 		{
+			var self = ((IFilterContainer)this);
+			filter.IsStrict = self.IsStrict;
+			filter.IsVerbatim = self.IsVerbatim;
+
 			if (this._Cache.HasValue)
 				filter.Cache = this._Cache;
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				filter.CacheName = this._Name;
+			if (!string.IsNullOrWhiteSpace(this._FilterName))
+				filter.FilterName = this._FilterName;
 			if (!string.IsNullOrWhiteSpace(this._CacheKey))
 				filter.CacheKey = this._CacheKey;
 		}

@@ -21,7 +21,7 @@ namespace Nest
 
 		string IQueryContainer.RawQuery { get; set; }
 
-		IMatchAll IQueryContainer.MatchAll { get; set; }
+		IMatchAllQuery IQueryContainer.MatchAllQuery { get; set; }
 		
 		ITermQuery IQueryContainer.Term { get; set; }
 		

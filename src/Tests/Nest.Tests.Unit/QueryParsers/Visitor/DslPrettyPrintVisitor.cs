@@ -167,7 +167,7 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 			Write("match", query.Field);
 		}
 
-		public virtual void Visit(IMatchAll query)
+		public virtual void Visit(IMatchAllQuery query)
 		{
 			Write("match_all");
 		}
@@ -310,7 +310,7 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 			Write("not");
 		}
 
-		public virtual void Visit(INestedFilterDescriptor filter)
+		public virtual void Visit(INestedFilter filter)
 		{
 			Write("nested");
 		}

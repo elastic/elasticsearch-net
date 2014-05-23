@@ -11,11 +11,17 @@ namespace Nest
 		[JsonIgnore]
 		bool IFilter.IsConditionless { get { throw new NotImplementedException();} }
 
+		[JsonIgnore]
+		bool IFilter.IsVerbatim { get ; set; }
+
+		[JsonIgnore]
+		bool IFilter.IsStrict { get; set; }
+
 		[JsonProperty(PropertyName = "_cache")]
 		bool? IFilter.Cache { get; set; }
 
 		[JsonProperty(PropertyName = "_name")]
-		string IFilter.CacheName { get; set; }
+		string IFilter.FilterName { get; set; }
 
 		[JsonProperty(PropertyName = "_cache_key")]
 		string IFilter.CacheKey { get; set; }
@@ -30,7 +36,7 @@ namespace Nest
 
 			var fb = (IFilter)this;
 			if (fb.Cache.HasValue) dict.Add("_cache", fb.Cache);
-			if (!fb.CacheName.IsNullOrEmpty()) dict.Add("_name", fb.CacheName);
+			if (!fb.FilterName.IsNullOrEmpty()) dict.Add("_name", fb.FilterName);
 			if (!fb.CacheKey.IsNullOrEmpty()) dict.Add("_cache_key", fb.CacheKey);
 			return dict;
 		}
@@ -49,7 +55,7 @@ namespace Nest
 				filter.CacheKey = cacheKey as string;
 
 			if (dict.TryGetValue("_name", out cacheName))
-				filter.CacheName = cacheName as string;
+				filter.FilterName = cacheName as string;
 
 			dict.Remove("_cache");
 			dict.Remove("_cache_key");

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Nest.DSL.Visitor;
 using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -12,7 +13,7 @@ namespace Nest
 	public interface IFilterContainer 
 	{
 		[JsonIgnore]
-		string _Name { get; set; }
+		string _FilterName { get; set; }
 		[JsonIgnore]
 		string _CacheKey { get; set; }
 		[JsonIgnore]
@@ -43,18 +44,23 @@ namespace Nest
 		IIdsFilter Ids { get; set; }
 
 		[JsonProperty(PropertyName = "geo_bounding_box")]
+		[JsonConverter(typeof(GeoBoundingFilterConverter))]
 		IGeoBoundingBoxFilter GeoBoundingBox { get; set; }
 
 		[JsonProperty(PropertyName = "geo_distance")]
+		[JsonConverter(typeof(GeoDistanceFilterConverter))]
 		IGeoDistanceFilter GeoDistance { get; set; }
 
 		[JsonProperty(PropertyName = "geo_distance_range")]
+		[JsonConverter(typeof(GeoDistanceRangeFilterConverter))]
 		IGeoDistanceRangeFilter GeoDistanceRange { get; set; }
 
 		[JsonProperty(PropertyName = "geo_polygon")]
+		[JsonConverter(typeof(CompositeJsonConverter<GeoPolygonFilterJsonReader, FieldNameFilterConverter<GeoPolygonFilter>>))]
 		IGeoPolygonFilter GeoPolygon { get; set; }
 
 		[JsonProperty(PropertyName = "geo_shape")]
+		[JsonConverter(typeof(CompositeJsonConverter<GeoShapeFilterJsonReader,FieldNameFilterConverter<GeoShapeFilter>>))]
 		IGeoShapeBaseFilter GeoShape { get; set; }
 
 		[JsonProperty(PropertyName = "limit")]
@@ -73,12 +79,15 @@ namespace Nest
 		IHasParentFilter HasParent { get; set; }
 
 		[JsonProperty(PropertyName = "range")]
+		[JsonConverter(typeof(FieldNameFilterConverter<RangeFilter>))]
 		IRangeFilter Range { get; set; }
 
 		[JsonProperty(PropertyName = "prefix")]
+		[JsonConverter(typeof(PrefixFilterConverter))]
 		IPrefixFilter Prefix { get; set; }
 
 		[JsonProperty(PropertyName = "term")]
+		[JsonConverter(typeof (TermFilterConverter))]
 		ITermFilter Term { get; set; }
 
 		[JsonProperty(PropertyName = "terms")]
@@ -100,9 +109,10 @@ namespace Nest
 		IScriptFilter Script { get; set; }
 
 		[JsonProperty(PropertyName = "nested")]
-		INestedFilterDescriptor Nested { get; set; }
+		INestedFilter Nested { get; set; }
 
 		[JsonProperty(PropertyName = "regexp")]
+		[JsonConverter(typeof(FieldNameFilterConverter<RegexpFilter>))]
 		IRegexpFilter Regexp { get; set; }
 
 		void Accept(IQueryVisitor visitor);

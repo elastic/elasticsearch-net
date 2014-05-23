@@ -11,9 +11,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CompositeJsonConverter<GeoDistanceRangeFilterJsonReader, CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGeoDistanceRangeFilter : IFilter, ICustomJson
+	public interface IGeoDistanceRangeFilter : IFilter
 	{
 		PropertyPathMarker Field { get; set; }
 		string Location { get; set; }
@@ -38,6 +37,24 @@ namespace Nest
 
 		[JsonProperty("include_upper")]
 		bool? IncludeUpper { get; set; }
+	}
+
+	public class GeoDistanceRangeFilter : PlainFilter, IGeoDistanceRangeFilter
+	{
+		protected override void WrapInContainer(IFilterContainer container)
+		{
+			container.GeoDistanceRange = this;
+		}
+
+		public PropertyPathMarker Field { get; set; }
+		public string Location { get; set; }
+		public object From { get; set; }
+		public object To { get; set; }
+		public GeoUnit? Unit { get; set; }
+		public GeoDistanceType? DistanceType { get; set; }
+		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
+		public bool? IncludeLower { get; set; }
+		public bool? IncludeUpper { get; set; }
 	}
 
 	public class GeoDistanceRangeFilterDescriptor : FilterBase, IGeoDistanceRangeFilter
@@ -123,19 +140,5 @@ namespace Nest
 			return this;
 		}
 
-		object ICustomJson.GetCustomJson()
-		{
-			var f = (IGeoDistanceRangeFilter)this;
-			var dict = this.FieldNameAsKeyFormat(f.Field, f.Location, d=>d
-				.Add("from", f.From)
-				.Add("to", f.To)
-				.Add("unit", f.Unit)
-				.Add("include_lower", f.IncludeLower)
-				.Add("include_upper", f.IncludeUpper)
-				.Add("distance_type", f.DistanceType)
-				.Add("optimize_bbox", f.OptimizeBoundingBox)
-			);
-			return dict;
-		}
 	}
 }

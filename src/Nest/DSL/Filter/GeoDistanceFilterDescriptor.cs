@@ -12,9 +12,8 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CompositeJsonConverter<GeoDistanceFilterJsonReader, CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGeoDistanceFilter : IFilter, ICustomJson
+	public interface IGeoDistanceFilter : IFilter
 	{
 		PropertyPathMarker Field { get; set; }
 
@@ -34,6 +33,21 @@ namespace Nest
 		[JsonProperty("distance_type")]
 		[JsonConverter(typeof(StringEnumConverter))]
 		GeoDistanceType? DistanceType { get; set; }
+	}
+
+	public class GeoDistanceFilter : PlainFilter, IGeoDistanceFilter
+	{
+		protected override void WrapInContainer(IFilterContainer container)
+		{
+			container.GeoDistance = this;
+		}
+
+		public PropertyPathMarker Field { get; set; }
+		public string Location { get; set; }
+		public object Distance { get; set; }
+		public GeoUnit? Unit { get; set; }
+		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
+		public GeoDistanceType? DistanceType { get; set; }
 	}
 
 	public class GeoDistanceFilterDescriptor : FilterBase, IGeoDistanceFilter
@@ -85,16 +99,5 @@ namespace Nest
 			((IGeoDistanceFilter)this).DistanceType = type;
 			return this;
 		}
-		object ICustomJson.GetCustomJson()
-		{
-			var gbf = (IGeoDistanceFilter)this;
-			var dict = this.FieldNameAsKeyFormat(gbf.Field, gbf.Location, d => d
-				.Add("distance", gbf.Distance)
-				.Add("unit", gbf.Unit)
-				.Add("optimize_bbox", gbf.OptimizeBoundingBox)
-			);
-			return dict;
-		}
-
 	}
 }

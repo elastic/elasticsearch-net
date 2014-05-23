@@ -59,8 +59,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 							routing: ""dot_net_clients""
 						},
 						_cache:true,
-						_name: ""terms_filter"",
-						_cache_key: ""NEST_TERMS""
+						_cache_key: ""NEST_TERMS"",
+						_name: ""terms_filter""
 					}
 				}
 			}";

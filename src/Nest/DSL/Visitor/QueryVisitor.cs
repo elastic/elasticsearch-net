@@ -59,7 +59,7 @@ namespace Nest.DSL.Visitor
 		void Visit(IIdsQuery query);
 		void Visit(IIndicesQuery query);
 		void Visit(IMatchQuery query);
-		void Visit(IMatchAll query);
+		void Visit(IMatchAllQuery query);
 		void Visit(IMoreLikeThisQuery query);
 		void Visit(IMultiMatchQuery query);
 		void Visit(INestedQuery query);
@@ -89,7 +89,7 @@ namespace Nest.DSL.Visitor
 		void Visit(IPrefixFilter filter);
 		void Visit(IOrFilter filter);
 		void Visit(INotFilter filter);
-		void Visit(INestedFilterDescriptor filter);
+		void Visit(INestedFilter filter);
 		void Visit(IMissingFilter filter);
 		void Visit(IMatchAllFilter filter);
 		void Visit(ILimitFilter filter);
@@ -208,7 +208,7 @@ namespace Nest.DSL.Visitor
 		{
 		}
 
-		public virtual void Visit(IMatchAll customFiltersScore)
+		public virtual void Visit(IMatchAllQuery customFiltersScore)
 		{
 		}
 
@@ -322,7 +322,7 @@ namespace Nest.DSL.Visitor
 		{
 		}
 
-		public virtual void Visit(INestedFilterDescriptor customFiltersScore)
+		public virtual void Visit(INestedFilter customFiltersScore)
 		{
 		}
 

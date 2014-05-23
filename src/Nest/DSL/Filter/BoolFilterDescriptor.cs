@@ -9,41 +9,6 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	internal static class BoolBaseFilterDescriptorExtensions
-	{
-		internal static bool CanMergeMustAndMustNots(this IBoolFilter bq)
-		{
-			return bq == null || !((IBoolFilter)bq).Should.HasAny();
-		}
-
-		internal static bool CanJoinShould(this IBoolFilter bq)
-		{
-			var bf = (IBoolFilter)bq;
-			return bq == null 
-				|| (
-					(bf.Should.HasAny() && !bf.Must.HasAny() && !bf.MustNot.HasAny())
-					|| !bf.Should.HasAny()
-				);
-		}
-		
-		internal static IEnumerable<IFilterContainer> MergeShouldFilters(this IFilterContainer lbq, IFilterContainer rbq)
-		{
-			var lBoolDescriptor = lbq.Bool;
-			var lHasShouldFilters = lBoolDescriptor != null &&
-			  ((IBoolFilter)lBoolDescriptor).Should.HasAny();
-
-			var rBoolDescriptor = rbq.Bool;
-			var rHasShouldFilters = rBoolDescriptor != null &&
-			  ((IBoolFilter)rBoolDescriptor).Should.HasAny();
-
-
-			var lq = lHasShouldFilters ? ((IBoolFilter)lBoolDescriptor).Should : new[] { lbq };
-			var rq = rHasShouldFilters ? ((IBoolFilter)rBoolDescriptor).Should : new[] { rbq };
-
-			return lq.Concat(rq);
-		}
-	}
-
 	[JsonConverter(typeof(ReadAsTypeConverter<BoolBaseFilterDescriptor>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IBoolFilter : IFilter
@@ -61,7 +26,18 @@ namespace Nest
 		IEnumerable<IFilterContainer> Should { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class BoolFilter : PlainFilter, IBoolFilter
+	{
+		protected override void WrapInContainer(IFilterContainer container)
+		{
+			container.Bool = this;
+		}
+
+		public IEnumerable<IFilterContainer> Must { get; set; }
+		public IEnumerable<IFilterContainer> MustNot { get; set; }
+		public IEnumerable<IFilterContainer> Should { get; set; }
+	}
+
 	public class BoolBaseFilterDescriptor : FilterBase , IBoolFilter
 	{
 		IEnumerable<IFilterContainer> IBoolFilter.Must { get; set; }
@@ -84,7 +60,6 @@ namespace Nest
 		}
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class BoolFilterDescriptor<T> : BoolBaseFilterDescriptor where T : class
 	{
 		public BoolFilterDescriptor<T> Must(params Func<FilterDescriptor<T>, FilterContainer>[] filters)

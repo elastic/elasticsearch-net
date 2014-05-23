@@ -13,7 +13,7 @@ namespace Nest
 {
 	public class FilterContainer : IFilterContainer, ICustomJson
 	{
-		public string _Name { get; set; }
+		public string _FilterName { get; set; }
 		
 		public string _CacheKey { get; set; }
 		
@@ -76,7 +76,7 @@ namespace Nest
 
 		IScriptFilter IFilterContainer.Script { get; set; }
 
-		INestedFilterDescriptor IFilterContainer.Nested { get; set; }
+		INestedFilter IFilterContainer.Nested { get; set; }
 
 		IRegexpFilter IFilterContainer.Regexp { get; set; }
 		

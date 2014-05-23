@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 		public void MatchAll_Deserializes()
 		{
 			var q = this.SerializeThenDeserialize(
-				f=>f.MatchAll,
+				f=>f.MatchAllQuery,
 				f=>f.MatchAll(1.0, "normField")
 				);
 			q.Boost.Should().Be(1.0);

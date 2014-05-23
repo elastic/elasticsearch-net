@@ -22,8 +22,8 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 				);
 
 			rangeFilter.Field.Should().Be("loc");
-			rangeFilter.GreaterThanOrEqualTo.Should().Be("10");
 			rangeFilter.LowerThanOrEqualTo.Should().Be("20");
+			rangeFilter.GreaterThanOrEqualTo.Should().Be("10");
 
 		}
 

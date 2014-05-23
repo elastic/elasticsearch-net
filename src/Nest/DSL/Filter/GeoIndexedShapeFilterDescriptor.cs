@@ -11,13 +11,24 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CompositeJsonConverter<GeoShapeFilterJsonReader, CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGeoIndexedShapeFilter : IGeoShapeBaseFilter, ICustomJson
+	public interface IGeoIndexedShapeFilter : IGeoShapeBaseFilter
 	{
 
 		[JsonProperty("indexed_shape")]
 		GeoIndexedShapeVector IndexedShape { get; set; }
+	}
+
+	public class GeoIndexedShapeFilter : PlainFilter, IGeoIndexedShapeFilter
+	{
+		protected override void WrapInContainer(IFilterContainer container)
+		{
+			container.GeoShape = this;
+		}
+
+		public PropertyPathMarker Field { get; set; }
+
+		public GeoIndexedShapeVector IndexedShape { get; set; }
 	}
 
 	public class GeoIndexedShapeFilterDescriptor : FilterBase, IGeoIndexedShapeFilter
@@ -31,9 +42,8 @@ namespace Nest
 
 		}
 
-		PropertyPathMarker IGeoShapeBaseFilter.Field { get; set; }
+		PropertyPathMarker IFieldNameFilter.Field { get; set; }
 		GeoIndexedShapeVector IGeoIndexedShapeFilter.IndexedShape { get; set; }
-
 
 		public GeoIndexedShapeFilterDescriptor Lookup<T>(string field, string id, string index = null, string type = null)
 		{
@@ -57,12 +67,6 @@ namespace Nest
 			return _SetShape<T>(field, id, index, type);
 		}
 		
-		object ICustomJson.GetCustomJson()
-		{
-			var f = (IGeoIndexedShapeFilter)this;
-			var shape = new { indexed_shape = f.IndexedShape };
-			return this.FieldNameAsKeyFormat(f.Field, shape);
-		}
 	}
 
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Nest.Resolvers.Converters;
 using Nest.Resolvers.Converters.Filters;
@@ -12,23 +13,37 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CompositeJsonConverter<RangeFilterJsonReader,CustomJsonConverter>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IRangeFilter : IFilter, ICustomJson
+	public interface IRangeFilter : IFieldNameFilter
 	{
 		[JsonProperty("gte")]
+		[JsonConverter(typeof(ForceStringReader))]
 		string GreaterThanOrEqualTo { get; set; }
 
 		[JsonProperty("lte")]
+		[JsonConverter(typeof(ForceStringReader))]
 		string LowerThanOrEqualTo { get; set; }
 
 		[JsonProperty("gt")]
+		[JsonConverter(typeof(ForceStringReader))]
 		string GreaterThan { get; set; }
 
 		[JsonProperty("lt")]
+		[JsonConverter(typeof(ForceStringReader))]
 		string LowerThan { get; set; }
+	}
 
-		PropertyPathMarker Field { get; set; }
+	public class RangeFilter : PlainFilter, IRangeFilter
+	{
+		protected override void WrapInContainer(IFilterContainer container)
+		{
+			container.Range = this;
+		}
+		public string GreaterThanOrEqualTo { get; set; }
+		public string LowerThanOrEqualTo { get; set; }
+		public string GreaterThan { get; set; }
+		public string LowerThan { get; set; }
+		public PropertyPathMarker Field { get; set; }
 	}
 
 	public class RangeFilterDescriptor<T> : FilterBase, IRangeFilter where T : class
@@ -41,7 +56,7 @@ namespace Nest
 		
 		string IRangeFilter.LowerThan { get; set; }
 
-		PropertyPathMarker IRangeFilter.Field { get; set; }
+		PropertyPathMarker IFieldNameFilter.Field { get; set; }
 
 		private IRangeFilter _ { get { return this;  } }
 
@@ -56,19 +71,6 @@ namespace Nest
 					&& _.GreaterThan.IsNullOrEmpty()
 				);
 			}
-		}
-		
-		object ICustomJson.GetCustomJson()
-		{
-			var f = (IRangeFilter)this;
-			var rf = new
-			{
-				gte = f.GreaterThanOrEqualTo,
-				lte = f.LowerThanOrEqualTo,
-				gt = f.GreaterThan,
-				lt = f.LowerThan
-			};
-			return this.FieldNameAsKeyFormat(f.Field, rf);
 		}
 		
 		public RangeFilterDescriptor<T> OnField(string field)

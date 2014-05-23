@@ -26,6 +26,18 @@ namespace Nest
 		string Lang { get; set; }
 	}
 
+	public class ScriptFilter : PlainFilter, IScriptFilter
+	{
+		protected override void WrapInContainer(IFilterContainer container)
+		{
+			container.Script = this;
+		}
+
+		public string Script { get; set; }
+		public Dictionary<string, object> Params { get; set; }
+		public string Lang { get; set; }
+	}
+
 	/// <summary>
 	/// A filter allowing to define scripts as filters.
 	/// Ex: "doc['num1'].value > 1"
