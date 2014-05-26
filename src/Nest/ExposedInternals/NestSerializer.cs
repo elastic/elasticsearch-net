@@ -151,25 +151,11 @@ namespace Nest
 			var inferrer = new ElasticInferrer(this._settings);
 			foreach (var operation in multiSearchDescriptor._Operations.Values)
 			{
-				var indices = inferrer.IndexNames(operation._Indices);
-				if (operation._AllIndices.GetValueOrDefault(false))
-					indices = "_all";
-
-				var index = indices 
-				            ?? inferrer.IndexName(multiSearchDescriptor._Index)
-				            ?? inferrer.IndexName(operation._ClrType);
-
-				var types = inferrer.TypeNames(operation._Types);
-				var typeName = types
-				               ?? inferrer.TypeName(multiSearchDescriptor._Type)
-				               ?? inferrer.TypeName(operation._ClrType);
-				if (operation._AllTypes.GetValueOrDefault(false))
-					typeName = null; //force empty typename so we'll query all types.
-
+				var path = operation.ToPathInfo(this._settings);
 				var op = new
 				{
-					index = index,
-					type = typeName,
+					index = path.Index,
+					type = path.Type,
 					search_type = this.GetSearchType(operation, multiSearchDescriptor),
 					preference = operation._Preference,
 					routing = operation._Routing
@@ -187,7 +173,7 @@ namespace Nest
 		}
 
 		
-		protected string GetSearchType(SearchDescriptorBase descriptor, MultiSearchDescriptor multiSearchDescriptor)
+		protected string GetSearchType(ISearchRequest descriptor, MultiSearchDescriptor multiSearchDescriptor)
 		{
 			if (descriptor._SearchType != null)
 			{

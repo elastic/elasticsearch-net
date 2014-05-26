@@ -22,7 +22,7 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			where T : IFilter
 		{
 			var descriptor = this.DeserializeInto<SearchDescriptor<ElasticsearchProject>>(method, fileName);
-			var filter = filterBaseSelector(((ISearchDescriptor)descriptor).Filter);
+			var filter = filterBaseSelector(((ISearchRequest)descriptor).Filter);
 			filter.Should().NotBeNull();
 			return filter;
 		}

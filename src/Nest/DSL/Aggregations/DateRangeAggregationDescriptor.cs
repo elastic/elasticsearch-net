@@ -3,44 +3,67 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Nest.Resolvers;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class DateRangeAggregationDescriptor<T> : BucketAggregationBaseDescriptor<DateRangeAggregationDescriptor<T>, T>
-		where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<DateRangeAggregator>))]
+	public interface IDateRangeAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		internal PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker Field { get; set; }
+
+		[JsonProperty("format")]
+		string Format { get; set; }
+
+		[JsonProperty(PropertyName = "ranges")]
+		IEnumerable<DateExpressionRange> Ranges { get; set; }
+	}
+
+	public class DateRangeAggregator : BucketAggregator, IDateRangeAggregator
+	{
+		public PropertyPathMarker Field { get; set; }
+		public string Format { get; set; }
+		public IEnumerable<DateExpressionRange> Ranges { get; set; }
+	}
+
+	public class DateRangeAggregationDescriptor<T> : BucketAggregationBaseDescriptor<DateRangeAggregationDescriptor<T>, T>, IDateRangeAggregator where T : class
+	{
+		private IDateRangeAggregator Self { get { return this; } }
+
+		[JsonProperty("field")]
+		PropertyPathMarker IDateRangeAggregator.Field { get; set; }
+		
+		[JsonProperty("format")]
+		string IDateRangeAggregator.Format { get; set; }
+
+		[JsonProperty(PropertyName = "ranges")]
+		IEnumerable<DateExpressionRange> IDateRangeAggregator.Ranges { get; set; }
 		
 		public DateRangeAggregationDescriptor<T> Field(string field)
 		{
-			this._Field = field;
+			Self.Field = field;
 			return this;
 		}
 
 		public DateRangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
 		{
-			this._Field = field;
+			Self.Field = field;
 			return this;
 		}
-
-		[JsonProperty("format")]
-		internal string _Format { get; set; }
 
 		public DateRangeAggregationDescriptor<T> Format(string format)
 		{
-			this._Format = format;
+			Self.Format = format;
 			return this;
 		}
 
-		[JsonProperty(PropertyName = "ranges")]
-		internal IEnumerable<DateExpressionRange> _Ranges { get; set; }
-		
 		public DateRangeAggregationDescriptor<T> Ranges(params Func<DateExpressionRange, DateExpressionRange>[] ranges)
 		{
 			var newRanges = from range in ranges let r = new DateExpressionRange() select range(r);
-			this._Ranges = newRanges;
+			Self.Ranges = newRanges;
 			return this;
 		}
 	}

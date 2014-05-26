@@ -721,7 +721,7 @@ namespace Nest
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
 		ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) 
 			where T : class;
-		ISearchResponse<T> Search<T>(ISearchDescriptor request) 
+		ISearchResponse<T> Search<T>(ISearchRequest request) 
 			where T : class;
 
 		/// <summary>
@@ -734,7 +734,7 @@ namespace Nest
 		ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
 			where T : class
 			where TResult : class;
-		ISearchResponse<TResult> Search<T, TResult>(ISearchDescriptor request)
+		ISearchResponse<TResult> Search<T, TResult>(ISearchRequest request)
 			where T : class
 			where TResult : class;
 

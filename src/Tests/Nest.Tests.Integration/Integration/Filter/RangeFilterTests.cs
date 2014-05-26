@@ -59,9 +59,9 @@ namespace Nest.Tests.Integration.Integration.Filter
 
 			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).LowerOrEquals("aaa")), _LookFor, false);
 
-			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).GreaterOrEquals(name)), _LookFor, false);
+			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).GreaterOrEquals(name)), _LookFor, true);
 
-			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).LowerOrEquals(name)), _LookFor, false);
+			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).LowerOrEquals(name)), _LookFor, true);
 
 		}
 	}

@@ -11,27 +11,27 @@ namespace Nest.Tests.Unit.QueryParsers
 	[TestFixture]
 	public class BaseParserTests : BaseJsonTests
 	{
-		public ISearchDescriptor GetSearchDescriptorForQuery(Func<SearchDescriptor<ElasticsearchProject>, SearchDescriptor<ElasticsearchProject>> create)
+		public ISearchRequest GetSearchDescriptorForQuery(Func<SearchDescriptor<ElasticsearchProject>, SearchDescriptor<ElasticsearchProject>> create)
 		{
 			var descriptor = create(new SearchDescriptor<ElasticsearchProject>());
 			var json = this._client.Serializer.Serialize(descriptor);
 			Console.WriteLine(json.Utf8String());
 			using (var ms = new MemoryStream(json))
 			{
-				ISearchDescriptor d = this._client.Serializer.Deserialize<SearchDescriptor<ElasticsearchProject>>(ms);
+				ISearchRequest d = this._client.Serializer.Deserialize<SearchDescriptor<ElasticsearchProject>>(ms);
 				d.Should().NotBeNull();
 				d.Query.Should().NotBeNull();
 				return d;
 			}
 		}
-		public ISearchDescriptor GetSearchDescriptorForFilter(Func<SearchDescriptor<ElasticsearchProject>, SearchDescriptor<ElasticsearchProject>> create)
+		public ISearchRequest GetSearchDescriptorForFilter(Func<SearchDescriptor<ElasticsearchProject>, SearchDescriptor<ElasticsearchProject>> create)
 		{
 			var descriptor = create(new SearchDescriptor<ElasticsearchProject>());
 			var json = this._client.Serializer.Serialize(descriptor);
 			Console.WriteLine(json.Utf8String());
 			using (var ms = new MemoryStream(json))
 			{
-				ISearchDescriptor d = this._client.Serializer.Deserialize<SearchDescriptor<ElasticsearchProject>>(ms);
+				ISearchRequest d = this._client.Serializer.Deserialize<SearchDescriptor<ElasticsearchProject>>(ms);
 				d.Should().NotBeNull();
 				d.Filter.Should().NotBeNull();
 				return d;

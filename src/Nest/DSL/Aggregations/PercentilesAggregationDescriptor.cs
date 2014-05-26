@@ -3,61 +3,88 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
 using Nest.Resolvers;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class PercentilesAggregationDescriptor<T> : BucketAggregationBaseDescriptor<PercentilesAggregationDescriptor<T>, T>
-		where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<PercentilesAggregator>))]
+	public interface IPercentilesAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		internal PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker Field { get; set; }
+
+		[JsonProperty("script")]
+		string Script { get; set; }
+
+		[JsonProperty("params")]
+		IDictionary<string, object> Params { get; set; }
+
+		[JsonProperty("percents")]
+		IEnumerable<double> Percentages { get; set; }
+
+		[JsonProperty("compression")]
+		int? Compression { get; set; }
+	}
+
+	public class PercentilesAggregator : BucketAggregator, IPercentilesAggregator
+	{
+		public PropertyPathMarker Field { get; set; }
+		public string Script { get; set; }
+		public IDictionary<string, object> Params { get; set; }
+		public IEnumerable<double> Percentages { get; set; }
+		public int? Compression { get; set; }
+	}
+
+	public class PercentilesAggregationDescriptor<T> : BucketAggregationBaseDescriptor<PercentilesAggregationDescriptor<T>, T>, IPercentilesAggregator 
+		where T : class
+	{
+		private IPercentilesAggregator Self { get { return this; } }
+
+		PropertyPathMarker IPercentilesAggregator.Field { get; set; }
 		
+		string IPercentilesAggregator.Script { get; set; }
+
+		IDictionary<string, object> IPercentilesAggregator.Params { get; set; }
+
+		IEnumerable<double> IPercentilesAggregator.Percentages { get; set; }
+
+		int? IPercentilesAggregator.Compression { get; set; }
+
 		public PercentilesAggregationDescriptor<T> Field(string field)
 		{
-			this._Field = field;
+			Self.Field = field;
 			return this;
 		}
 
 		public PercentilesAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
 		{
-			this._Field = field;
+			Self.Field = field;
 			return this;
 		}
-
-		[JsonProperty("script")]
-		internal string _Script { get; set; }
 
 		public PercentilesAggregationDescriptor<T> Script(string script)
 		{
-			this._Script = script;
+			Self.Script = script;
 			return this;
 		}
-
-		[JsonProperty("params")]
-		internal FluentDictionary<string, object> _Params { get; set; }
 
 		public PercentilesAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector)
 		{
-			this._Params = paramSelector(new FluentDictionary<string, object>());
+			Self.Params = paramSelector(new FluentDictionary<string, object>());
 			return this;
 		}
-
-		[JsonProperty("percents")]
-		internal IEnumerable<double> _Percentages { get; set; }
 
 		public PercentilesAggregationDescriptor<T> Percentages(params double[] percentages)
 		{
-			this._Percentages = percentages;
+			Self.Percentages = percentages;
 			return this;
 		}
 		
-		[JsonProperty("compression")]
-		internal int? _Compression { get; set; }
-
 		public PercentilesAggregationDescriptor<T> Compression(int compression)
 		{
-			this._Compression = compression;
+			Self.Compression = compression;
 			return this;
 		}
 	}

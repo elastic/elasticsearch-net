@@ -11,7 +11,7 @@ namespace Nest.Tests.Unit.Search.Query.Properties
 		[Test]
 		public void TopChildrenQuery()
 		{
-			ISearchDescriptor s = new SearchDescriptor<ElasticsearchProject>()
+			ISearchRequest s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Take(10)
 				.Query(q => q

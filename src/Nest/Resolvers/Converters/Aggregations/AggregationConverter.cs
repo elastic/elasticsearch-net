@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
-using System.Threading;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace Nest.Resolvers.Converters
+namespace Nest.Resolvers.Converters.Aggregations
 {
 
 	public class AggregationConverter : JsonConverter

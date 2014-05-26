@@ -28,6 +28,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ 
                 from: 0, size: 10, 
+                fields: [""content""],
 				query : {
                     function_score : { 
                         functions: [
@@ -40,8 +41,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
                         score_mode: 'sum',
                         boost_mode: 'replace',
 					}
-				},
-                fields: [""content""]
+				}
 			}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
@@ -67,6 +67,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ 
                 from: 0, size: 10, 
+                fields: [""content""],
 				query : {
                     function_score : { 
                         functions: [
@@ -78,8 +79,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
                         score_mode: 'sum',
                         boost_mode: 'replace',
 					}
-				},
-                fields: [""content""]
+				}
 			}";
 			Assert.True(json.JsonEquals(expected), json);
 		}

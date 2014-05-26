@@ -10,44 +10,47 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public interface IFacetDescriptor<out T> : IFacetRequest { }
+
 	public class BaseFacetDescriptor<TFacetDescriptor, T> : IFacetDescriptor<T> 
 		where TFacetDescriptor : BaseFacetDescriptor<TFacetDescriptor, T> 
 		where T : class 
 	{
-		bool? IFacetDescriptor.IsGlobal { get; set; }
+		bool? IFacetRequest.Global { get; set; }
 		public TFacetDescriptor Global(bool global = true)
 		{
-			((IFacetDescriptor)this).IsGlobal = global;
+			((IFacetRequest)this).Global = global;
 			return (TFacetDescriptor) this;
 		}
 
-		FilterContainer IFacetDescriptor.FacetFilterDescriptor { get; set; }
+		FilterContainer IFacetRequest.FacetFilter { get; set; }
 		public TFacetDescriptor FacetFilter(Func<FilterDescriptor<T>, FilterContainer> facetFilter)
 		{
 			facetFilter.ThrowIfNull("facetFilter");
 			var filter = facetFilter(new FilterDescriptor<T>());
 			if (filter.IsConditionless)
 				filter = null;
-			((IFacetDescriptor) this).FacetFilterDescriptor = filter;
+			((IFacetRequest) this).FacetFilter = filter;
 			return (TFacetDescriptor) this;
 		}
 
-		string IFacetDescriptor.Scope { get; set;}
+		string IFacetRequest.Scope { get; set;}
 		public TFacetDescriptor Scope(string scope)
 		{
-			((IFacetDescriptor)this).Scope = scope;
+			((IFacetRequest)this).Scope = scope;
 			return (TFacetDescriptor) this;
 		}
 		
-		PropertyPathMarker IFacetDescriptor.Nested { get; set; }
+		PropertyPathMarker IFacetRequest.Nested { get; set; }
+
 		public TFacetDescriptor Nested(string nested)
 		{
-			((IFacetDescriptor)this).Nested = nested;
+			((IFacetRequest)this).Nested = nested;
 			return (TFacetDescriptor) this;
 		}
 		public TFacetDescriptor Nested(Expression<Func<T, object>> objectPath)
 		{
-			((IFacetDescriptor)this).Nested = objectPath;
+			((IFacetRequest)this).Nested = objectPath;
 			return (TFacetDescriptor) this;
 		}
 	}

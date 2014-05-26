@@ -131,6 +131,7 @@
     <Compile Include="Domain\Connection\IConnectionSettingsValues.cs" />
     <Compile Include="Domain\DSL\DescriptorForAttribute.cs" />
     <Compile Include="Domain\ICustomJson.cs" />
+    <Compile Include="Domain\Property.cs" />
     <Compile Include="Domain\PropertyNameMarker.cs" />
     <Compile Include="Domain\PropertyPathMarker.cs" />
     <Compile Include="Domain\Repository\Snapshot.cs" />
@@ -139,7 +140,9 @@
     <Compile Include="Domain\Responses\MultiTermVectorResponse.cs" />
     <Compile Include="Domain\Responses\RestoreResponse.cs" />
     <Compile Include="Domain\Responses\SnapshotResponse.cs" />
+    <Compile Include="Domain\Aggregations\TermsIncludeExclude.cs" />
     <Compile Include="DSL\DeleteSnapshotDescriptor.cs" />
+    <Compile Include="DSL\Facets\FacetRequest.cs" />
     <Compile Include="DSL\Filter\BoolFilterExtensions.cs" />
     <Compile Include="DSL\Filter\IFieldNameFilter.cs" />
     <Compile Include="DSL\Filter\IFilter.cs" />
@@ -149,10 +152,12 @@
     <Compile Include="DSL\Filter\RawFilter.cs" />
     <Compile Include="DSL\Query\BoolQueryExtensions.cs" />
     <Compile Include="DSL\Query\PlainQuery.cs" />
+    <Compile Include="DSL\RescoreQueryDescriptor.cs" />
     <Compile Include="DSL\Visitor\DslPrettyPrintVisitor.cs" />
     <Compile Include="DSL\Visitor\QueryFilterWalker.cs" />
     <Compile Include="DSL\Visitor\QueryVisitor.cs" />
     <Compile Include="DSL\Visitor\VisitorScope.cs" />
+    <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\CompositeJsonConverter.cs" />
     <Compile Include="Domain\DSL\ICustomJsonReader.cs" />
     <Compile Include="DSL\Filter\INotFilter.cs" />
@@ -624,9 +629,8 @@
     <Compile Include="DSL\Facets\HistogramFacetDescriptor.cs" />
     <Compile Include="DSL\Facets\Range.cs" />
     <Compile Include="DSL\Facets\RangeFacetDescriptor.cs" />
-    <Compile Include="DSL\Facets\FacetDescriptorBucket.cs" />
+    <Compile Include="DSL\Facets\FacetContainer.cs" />
     <Compile Include="DSL\Facets\TermsOrder.cs" />
-    <Compile Include="DSL\Facets\IFacetDescriptor.cs" />
     <Compile Include="DSL\Facets\EsRegexFlags.cs" />
     <Compile Include="DSL\Filter\BoolFilterDescriptor.cs" />
     <Compile Include="Enums\GeoExecution.cs" />
@@ -647,9 +651,9 @@
     <Compile Include="Resolvers\Converters\Filters\TermsFilterConverter.cs" />
     <Compile Include="Resolvers\Converters\Filters\GeoShapeFilterJsonReader.cs" />
     <Compile Include="Resolvers\Converters\Filters\GeoPolygonFilterJsonReader.cs" />
-    <Compile Include="Resolvers\Converters\Filters\GeoDistanceRangeFilterJsonReader.cs" />
-    <Compile Include="Resolvers\Converters\Filters\GeoDistanceFilterJsonReader.cs" />
-    <Compile Include="Resolvers\Converters\Filters\GeoBoundingFilterJsonReader.cs" />
+    <Compile Include="Resolvers\Converters\Filters\GeoDistanceRangeFilterConverter.cs" />
+    <Compile Include="Resolvers\Converters\Filters\GeoDistanceFilterConverter.cs" />
+    <Compile Include="Resolvers\Converters\Filters\GeoBoundingFilterConverter.cs" />
     <Compile Include="Domain\DSL\LatLon.cs" />
     <Compile Include="Resolvers\Converters\Queries\SpanTermQueryConverter.cs" />
     <Compile Include="Resolvers\Converters\Queries\MatchQueryJsonConverter.cs" />
@@ -746,7 +750,7 @@
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
-    <Compile Include="Resolvers\Converters\AggregationConverter.cs" />
+    <Compile Include="Resolvers\Converters\Aggregations\AggregationConverter.cs" />
     <Compile Include="Resolvers\Converters\FieldNameFilterConverter.cs" />
     <Compile Include="Resolvers\Converters\FieldNameQueryConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsResponseConverter.cs" />

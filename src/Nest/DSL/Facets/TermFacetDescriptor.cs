@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
@@ -10,108 +11,165 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class TermFacetDescriptor<T> : BaseFacetDescriptor<TermFacetDescriptor<T>,T> where T : class
+	[JsonConverter(typeof(ReadAsTypeConverter<TermFacetRequest>))]
+	public interface ITermFacetRequest : IFacetRequest
 	{
 		[JsonProperty(PropertyName = "field")]
-		internal PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker Field { get; set; }
+
 		[JsonProperty(PropertyName = "fields")]
-		internal IEnumerable<PropertyPathMarker> _Fields { get; set; }
+		IEnumerable<PropertyPathMarker> Fields { get; set; }
+
 		[JsonProperty(PropertyName = "size")]
-		internal int? _Size { get; set; }
+		int? Size { get; set; }
+
 		[JsonProperty(PropertyName = "shard_size")]
-		internal int? _ShardSize { get; set; }
-		[JsonConverter(typeof(StringEnumConverter))]
+		int? ShardSize { get; set; }
+
+		[JsonConverter(typeof (StringEnumConverter))]
 		[JsonProperty(PropertyName = "order")]
-		internal TermsOrder? _FacetOrder { get; set; }
+		TermsOrder? Order { get; set; }
+
 		[JsonProperty(PropertyName = "all_terms")]
-		internal bool? _AllTerms { get; set; }
+		bool? AllTerms { get; set; }
+
 		[JsonProperty(PropertyName = "exclude")]
-		internal IEnumerable<string> _Exclude { get; set; }
+		IEnumerable<string> Exclude { get; set; }
 
 		[JsonProperty(PropertyName = "execution_hint")]
-		internal string _ExecutionHint { get; set; }
+		string ExecutionHint { get; set; }
 
 		[JsonProperty(PropertyName = "regex")]
-		internal string _Regex { get; set; }
+		string Regex { get; set; }
 
-		[JsonConverter(typeof(StringEnumConverter))]
+		[JsonConverter(typeof (StringEnumConverter))]
 		[JsonProperty(PropertyName = "regex_flags")]
-		internal EsRegexFlags? _RegexFlags { get; set; }
+		EsRegexFlags? RegexFlags { get; set; }
 
 		[JsonProperty(PropertyName = "script")]
-		internal string _Script { get; set; }
+		string Script { get; set; }
+
 		[JsonProperty(PropertyName = "script_field")]
-		internal string _ScriptField { get; set; }
+		string ScriptField { get; set; }
+	}
+
+	public class TermFacetRequest : FacetRequest, ITermFacetRequest
+	{
+		public PropertyPathMarker Field { get; set; }
+		public IEnumerable<PropertyPathMarker> Fields { get; set; }
+		public int? Size { get; set; }
+		public int? ShardSize { get; set; }
+		public TermsOrder? Order { get; set; }
+		public bool? AllTerms { get; set; }
+		public IEnumerable<string> Exclude { get; set; }
+		public string ExecutionHint { get; set; }
+		public string Regex { get; set; }
+		public EsRegexFlags? RegexFlags { get; set; }
+		public string Script { get; set; }
+		public string ScriptField { get; set; }
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class TermFacetDescriptor<T> : BaseFacetDescriptor<TermFacetDescriptor<T>,T>, ITermFacetRequest where T : class
+	{
+		protected ITermFacetRequest Self { get { return this; } }
+
+		PropertyPathMarker ITermFacetRequest.Field { get; set; }
+
+		IEnumerable<PropertyPathMarker> ITermFacetRequest.Fields { get; set; }
+		
+		int? ITermFacetRequest.Size { get; set; }
+		
+		int? ITermFacetRequest.ShardSize { get; set; }
+		
+		TermsOrder? ITermFacetRequest.Order { get; set; }
+		
+		bool? ITermFacetRequest.AllTerms { get; set; }
+		
+		IEnumerable<string> ITermFacetRequest.Exclude { get; set; }
+
+		string ITermFacetRequest.ExecutionHint { get; set; }
+
+		string ITermFacetRequest.Regex { get; set; }
+
+		EsRegexFlags? ITermFacetRequest.RegexFlags { get; set; }
+
+		string ITermFacetRequest.Script { get; set; }
+
+		string ITermFacetRequest.ScriptField { get; set; }
 
 		public TermFacetDescriptor<T> OnField(string field)
 		{
-			this._Fields = null;
-			this._Field = field;
+			Self.Fields = null;
+			Self.Field = field;
 			return this;
 		}
 		public TermFacetDescriptor<T> OnFields(params string[] fields)
 		{
-			this._Field = null;
-			this._Fields = fields.Select(f=>(PropertyPathMarker)f);
+			Self.Field = null;
+			Self.Fields = fields.Select(f=>(PropertyPathMarker)f);
 			return this;
 		}
 		public TermFacetDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Fields = null;
-			this._Field = objectPath;
+			Self.Fields = null;
+			Self.Field = objectPath;
 			return this;
 		}
 		public TermFacetDescriptor<T> OnFields(params Expression<Func<T, object>>[] objectPaths)
 		{
-			this._Field = null;
-			this._Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
+			Self.Field = null;
+			Self.Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
 			return this;
 		}
 		public TermFacetDescriptor<T> Size(int size)
 		{
-			this._Size = size;
+			Self.Size = size;
 			return this;
 		}
 		public TermFacetDescriptor<T> ShardSize(int shardSize)
 		{
-			this._ShardSize = shardSize;
+			Self.ShardSize = shardSize;
 			return this;
 		}
 		public TermFacetDescriptor<T> Order(TermsOrder order)
 		{
-			this._FacetOrder = order;
+			Self.Order = order;
 			return this;
 		}
 		public TermFacetDescriptor<T> Exclude(params string[] args)
 		{
-			this._Exclude = args;
+			Self.Exclude = args;
 			return this;
 		}
 		public TermFacetDescriptor<T> AllTerms()
 		{
-			this._AllTerms = true;
+			Self.AllTerms = true;
 			return this;
 		}
 		public TermFacetDescriptor<T> Regex(string regex, EsRegexFlags? Flags = null)
 		{
-			this._Regex = regex;
-			this._RegexFlags = Flags;
+			Self.Regex = regex;
+			Self.RegexFlags = Flags;
 			return this;
 		}
+
 		[Obsolete("execution_hint is an undocumented elasticsearch property")]
 		public TermFacetDescriptor<T> ExecutionHint(string executionHint)
 		{
-			this._ExecutionHint = executionHint;
+			Self.ExecutionHint = executionHint;
 			return this;
 		}
+
 		public TermFacetDescriptor<T> Script(string script)
 		{
-			this._Script = script;
+			Self.Script = script;
 			return this;
 		}
+
 		public TermFacetDescriptor<T> ScriptField(string scriptField)
 		{
-			this._ScriptField = scriptField;
+			Self.ScriptField = scriptField;
 			return this;
 		}
 

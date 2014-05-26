@@ -8,149 +8,202 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class DateHistogramAggregationDescriptor<T> : BucketAggregationBaseDescriptor<DateHistogramAggregationDescriptor<T>, T>
-		where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<DateHistogramAggregator>))]
+	public interface IDateHistogramAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		internal PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker Field { get; set; }
+
+		[JsonProperty("script")]
+		string Script { get; set; }
+
+		[JsonProperty("params")]
+		IDictionary<string, object> Params { get; set; }
+
+		[JsonProperty("interval")]
+		string Interval { get; set; }
+
+		[JsonProperty("format")]
+		string Format { get; set; }
+
+		[JsonProperty("min_doc_count")]
+		int? MinimumDocumentCount { get; set; }
+
+		[JsonProperty("pre_zone")]
+		string PreZone { get; set; }
+
+		[JsonProperty("post_zone")]
+		string PostZone { get; set; }
+
+		[JsonProperty("time_zone")]
+		string TimeZone { get; set; }
+
+		[JsonProperty("pre_zone_adjust_large_interval")]
+		bool? PreZoneAdjustLargeInterval { get; set; }
+
+		[JsonProperty("factor")]
+		int? Factor { get; set; }
+
+		[JsonProperty("pre_offset")]
+		string PreOffset { get; set; }
+
+		[JsonProperty("post_offset")]
+		string PostOffset { get; set; }
+
+		[JsonProperty("order")]
+		IDictionary<string, string> Order { get; set; }
+	}
+
+	public class DateHistogramAggregator : BucketAggregator, IDateHistogramAggregator
+	{
+		public PropertyPathMarker Field { get; set; }
+		public string Script { get; set; }
+		public IDictionary<string, object> Params { get; set; }
+		public string Interval { get; set; }
+		public string Format { get; set; }
+		public int? MinimumDocumentCount { get; set; }
+		public string PreZone { get; set; }
+		public string PostZone { get; set; }
+		public string TimeZone { get; set; }
+		public bool? PreZoneAdjustLargeInterval { get; set; }
+		public int? Factor { get; set; }
+		public string PreOffset { get; set; }
+		public string PostOffset { get; set; }
+		public IDictionary<string, string> Order { get; set; }
+	}
+
+	public class DateHistogramAggregationDescriptor<T> : BucketAggregationBaseDescriptor<DateHistogramAggregationDescriptor<T>, T>, IDateHistogramAggregator where T : class
+	{
+		private IDateHistogramAggregator Self { get { return this; } }
+
+		PropertyPathMarker IDateHistogramAggregator.Field { get; set; }
+
+		string IDateHistogramAggregator.Script { get; set; }
+		
+		IDictionary<string, object> IDateHistogramAggregator.Params { get; set; }
+
+		string IDateHistogramAggregator.Interval { get; set; }
+
+		string IDateHistogramAggregator.Format { get; set; }
+
+		int? IDateHistogramAggregator.MinimumDocumentCount { get; set; }
+
+		string IDateHistogramAggregator.PreZone { get; set; }
+
+		string IDateHistogramAggregator.PostZone { get; set; }
+
+		string IDateHistogramAggregator.TimeZone { get; set; }
+
+		bool? IDateHistogramAggregator.PreZoneAdjustLargeInterval { get; set; }
+
+		int? IDateHistogramAggregator.Factor { get; set; }
+
+		string IDateHistogramAggregator.PreOffset { get; set; }
+
+		string IDateHistogramAggregator.PostOffset { get; set; }
+
+		IDictionary<string, string> IDateHistogramAggregator.Order { get; set; }
 
 		public DateHistogramAggregationDescriptor()
 		{
 			this.Format("yyyy-MM-dd");
 		}
 
-
 		public DateHistogramAggregationDescriptor<T> Field(string field)
 		{
-			this._Field = field;
+			Self.Field = field;
 			return this;
 		}
 
 		public DateHistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
 		{
-			this._Field = field;
+			Self.Field = field;
 			return this;
 		}
-
-		[JsonProperty("script")]
-		internal string _Script { get; set; }
 
 		public DateHistogramAggregationDescriptor<T> Script(string script)
 		{
-			this._Script = script;
+			Self.Script = script;
 			return this;
 		}
-
-		[JsonProperty("params")]
-		internal FluentDictionary<string, object> _Params { get; set; }
 
 		public DateHistogramAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector)
 		{
-			this._Params = paramSelector(new FluentDictionary<string, object>());
+			Self.Params = paramSelector(new FluentDictionary<string, object>());
 			return this;
 		}
-
-		[JsonProperty("interval")]
-		internal string _Interval { get; set; }
 
 		public DateHistogramAggregationDescriptor<T> Interval(string interval)
 		{
-			this._Interval = interval;
+			Self.Interval = interval;
 			return this;
 		}
 	
-		[JsonProperty("format")]
-		internal string _Format { get; set; }
-
 		public DateHistogramAggregationDescriptor<T> Format(string format)
 		{
 			if (format.IsNullOrEmpty())
 				return this;
-			this._Format = format;
+			Self.Format = format;
 			return this;
 		}
 			
-		[JsonProperty("min_doc_count")]
-		internal int? _MinimumDocumentCount { get; set; }
-
 		public DateHistogramAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount)
 		{
-			this._MinimumDocumentCount = minimumDocumentCount;
+			Self.MinimumDocumentCount = minimumDocumentCount;
 			return this;
 		}
 		
-		[JsonProperty("pre_zone")]
-		internal string _PreZone { get; set; }
-
 		public DateHistogramAggregationDescriptor<T> PreZone(string preZone)
 		{
-			this._PreZone = preZone;
+			Self.PreZone = preZone;
 			return this;
 		}
-
-		[JsonProperty("post_zone")]
-		internal string _PostZone { get; set; }
 
 		public DateHistogramAggregationDescriptor<T> PostZone(string postZone)
 		{
-			this._PostZone = postZone;
+			Self.PostZone = postZone;
 			return this;
 		}
-
-		[JsonProperty("time_zone")]
-		internal string _TimeZone { get; set; }
 
 		public DateHistogramAggregationDescriptor<T> TimeZone(string timeZone)
 		{
-			this._TimeZone = timeZone;
+			Self.TimeZone = timeZone;
 			return this;
 		}
-		[JsonProperty("pre_zone_adjust_large_interval")]
-		internal bool? _PreZoneAdjustLargeInterval { get; set; }
-
+		
 		public DateHistogramAggregationDescriptor<T> PreZoneAdjustLargeInterval(bool adjustLargeInterval = true)
 		{
-			this._PreZoneAdjustLargeInterval = adjustLargeInterval;
+			Self.PreZoneAdjustLargeInterval = adjustLargeInterval;
 			return this;
 		}
-		[JsonProperty("factor")]
-		internal int? _Factor { get; set; }
-
+		
 		public DateHistogramAggregationDescriptor<T> Interval(int factor)
 		{
-			this._Factor = factor;
+			Self.Factor = factor;
 			return this;
 		}
-
-		[JsonProperty("pre_offset")]
-		internal string _PreOffset { get; set; }
 
 		public DateHistogramAggregationDescriptor<T> PreOffset(string preOffset)
 		{
-			this._PreOffset = preOffset;
+			Self.PreOffset = preOffset;
 			return this;
 		}
-		[JsonProperty("post_offset")]
-		internal string _PostOffset { get; set; }
-
 		public DateHistogramAggregationDescriptor<T> PostOffset(string postOffset)
 		{
-			this._PostOffset = postOffset;
+			Self.PostOffset = postOffset;
 			return this;
 		}
 	
-		[JsonProperty("order")]
-		internal IDictionary<string, string> _Order { get; set; }
-
 		public DateHistogramAggregationDescriptor<T> OrderAscending(string key)
 		{
-			this._Order = new Dictionary<string, string> { {key, "asc"}};
+			Self.Order = new Dictionary<string, string> { {key, "asc"}};
 			return this;
 		}
 	
 		public DateHistogramAggregationDescriptor<T> OrderDescending(string key)
 		{
-			this._Order = new Dictionary<string, string> { {key, "asc"}};
+			Self.Order = new Dictionary<string, string> { {key, "asc"}};
 			return this;
 		}
 
