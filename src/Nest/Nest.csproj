@@ -88,6 +88,7 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Analysis\TokenFilter\DelimitedPayloadTokenFilter.cs" />
     <Compile Include="ConvenienceExtensions\AliasExtensions.cs" />
     <Compile Include="ConvenienceExtensions\CountExtensions.cs" />
     <Compile Include="ConvenienceExtensions\DeleteExtensions.cs" />
