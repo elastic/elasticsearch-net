@@ -13,6 +13,9 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class QueryDescriptor<T> : QueryContainer where T : class
 	{
+		
+
+
 		public QueryDescriptor()
 		{
 		}

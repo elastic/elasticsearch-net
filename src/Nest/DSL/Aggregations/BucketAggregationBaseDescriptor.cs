@@ -9,12 +9,12 @@ namespace Nest
 
 	public interface IBucketAggregator
 	{
-		IDictionary<string, IAggregationContainer> NestedAggregations { get; set; }
+		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 	}
 
 	public abstract class BucketAggregator : IBucketAggregator
 	{
-		public IDictionary<string, IAggregationContainer> NestedAggregations { get; set; }
+		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 	}
 
 	public abstract class BucketAggregationBaseDescriptor<TBucketAggregation, T> 
@@ -22,13 +22,13 @@ namespace Nest
 		where TBucketAggregation : BucketAggregationBaseDescriptor<TBucketAggregation, T>
 		where T : class
 	{
-		IDictionary<string, IAggregationContainer> IBucketAggregator.NestedAggregations { get; set; }
+		IDictionary<string, IAggregationContainer> IBucketAggregator.Aggregations { get; set; }
 
 		public TBucketAggregation Aggregations(Func<AggregationDescriptor<T>, AggregationDescriptor<T>> selector)
 		{	
 			var aggs = selector(new AggregationDescriptor<T>());
 			if (aggs == null) return (TBucketAggregation)this;
-			((IBucketAggregator)this).NestedAggregations = aggs._Aggregations;
+			((IBucketAggregator)this).Aggregations = ((IAggregationContainer)aggs).Aggregations;
 			return (TBucketAggregation)this;
 		}
 	}

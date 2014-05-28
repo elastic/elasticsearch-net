@@ -33,6 +33,12 @@
 		//	leftQuery.WrapInContainer(rc);
 		//	return (lc && rc);
 		//}
+
+		public QueryContainer ToContainer()
+		{
+			return this;
+		}
+
 		public static implicit operator QueryContainer(PlainQuery query)
 		{
 			if (query == null) return null;

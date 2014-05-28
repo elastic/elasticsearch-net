@@ -237,6 +237,7 @@
     <Compile Include="Search\Filter\Singles\GeoIndexedShapeFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\GeoShapeFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\RegexpFilterJson.cs" />
+    <Compile Include="Search\InitializerSyntax\InitializerExample.cs" />
     <Compile Include="Search\Query\BoolQueryMerges\BoolQueryMergesTests.cs" />
     <Compile Include="Search\Filter\BoolFilterMerges\BoolFilterMergesTests.cs" />
     <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />

@@ -406,7 +406,7 @@ namespace Nest
 		{
 			var aggs = aggregationsSelector(new AggregationDescriptor<T>());
 			if (aggs == null) return this;
-			Self.Aggregations = aggs._Aggregations;
+			Self.Aggregations = ((IAggregationContainer)aggs).Aggregations;
 			return this;
 		}
 

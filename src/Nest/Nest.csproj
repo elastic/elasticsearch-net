@@ -547,7 +547,7 @@
     <Compile Include="Domain\DSL\Query.cs" />
     <Compile Include="ElasticClient-Bulk.cs" />
     <Compile Include="Domain\Responses\UpdateResponse.cs" />
-    <Compile Include="DSL\Query\QueryContainer.cs" />
+    <Compile Include="DSL\Query\QueryContainerBase.cs" />
     <Compile Include="DSL\Filter\FilterContainer.cs" />
     <Compile Include="DSL\Filter\IFilterContainer.cs" />
     <Compile Include="DSL\Query\TermsQueryDescriptor.cs" />
