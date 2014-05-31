@@ -18,7 +18,7 @@ namespace Nest
 
 	public class ExistsFilter : PlainFilter, IExistsFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.Exists = this;
 		}

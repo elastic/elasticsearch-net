@@ -22,7 +22,7 @@ namespace Nest
 
 	public class OrFilter : PlainFilter, IOrFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.Or = this;
 		}

@@ -252,7 +252,7 @@
     <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
     <Compile Include="Search\Query\Modes\QueryModesTests.cs" />
     <Compile Include="Search\Query\Singles\Term\TermToStringJson.cs" />
-    <Compile Include="Search\Rescore\RescoreTests.cs" />
+    <Compile Include="Search\Rescoring\RescoreTests.cs" />
     <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
     <Compile Include="Search\Facets\FacetJson.cs" />
     <Compile Include="Search\Facets\FilterFacetJson.cs" />
@@ -344,8 +344,8 @@
     <Compile Include="Search\SearchOptions\SearchOptionTests.cs" />
     <Compile Include="Search\SearchType\ScriptFieldTests.cs" />
     <Compile Include="Internals\Serialize\SerializeTests.cs" />
-    <Compile Include="Search\Sort\FunctionScoreTests.cs" />
-    <Compile Include="Search\Sort\SortTests.cs" />
+    <Compile Include="Search\Sorting\FunctionScoreTests.cs" />
+    <Compile Include="Search\Sorting\SortTests.cs" />
     <Compile Include="Search\Suggest\CompletionSuggestTests.cs" />
     <Compile Include="Search\Suggest\PhraseSuggestTests.cs" />
     <Compile Include="Search\Suggest\TermSuggestTests.cs" />
@@ -617,7 +617,7 @@
     <None Include="Search\Query\Singles\Term\IntToStringTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Rescore\RescoreSerializes.json">
+    <None Include="Search\Rescoring\RescoreSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Filter\BoolCombinations\CombineNotAnd.json">
@@ -923,7 +923,7 @@
     <None Include="Internals\Serialize\SimpleClassUsesCamelCase.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Sort\RandomScriptSort.json">
+    <None Include="Search\Sorting\RandomScriptSort.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\Singles\Terms\TermsOfTypeInt.json">

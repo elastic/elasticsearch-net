@@ -12,7 +12,7 @@ using Nest.Resolvers.Converters;
 using Nest.Tests.MockData.Domain;
 using Nest.Resolvers;
 
-namespace Nest.Tests.Unit.Search.Rescore
+namespace Nest.Tests.Unit.Search.Rescoring
 {
 	[TestFixture]
 	public class RescoreTests : BaseJsonTests

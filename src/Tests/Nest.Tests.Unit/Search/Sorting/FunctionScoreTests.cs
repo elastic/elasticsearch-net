@@ -1,7 +1,7 @@
 ﻿using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
-namespace Nest.Tests.Unit.Search.Sort
+namespace Nest.Tests.Unit.Search.Sorting
 {
 	[TestFixture]
 	internal class FunctionScoreTests : BaseJsonTests

@@ -85,28 +85,125 @@ namespace Nest
 
 	public class AggregationContainer : IAggregationContainer
 	{
+		private IDateHistogramAggregator _dateHistogram;
+		private IPercentilesAggregator _percentiles;
+		private IDateRangeAggregator _dateRange;
+		private IFilterAggregator _filter;
+		private IGeoDistanceAggregator _geoDistance;
+		private IGeoHashAggregator _geoHash;
+		private IHistogramAggregator _histogram;
+		private IGlobalAggregator _global;
+		private IIp4RangeAggregator _ipRange;
+		private ICardinalityAggregator _cardinality;
+		private IMissingAggregator _missing;
+		private INestedAggregator _nested;
+		private IRangeAggregator _range;
+		private ITermsAggregator _terms;
+		private ISignificantTermsAggregator _significantTerms;
 		public IAverageAggregator Average { get; set; }
-		public IDateHistogramAggregator DateHistogram { get; set; }
-		public IPercentilesAggregator Percentiles { get; set; }
-		public IDateRangeAggregator DateRange { get; set; }
-		public IExtendedStatsAggregator ExtendedStats { get; set; }
-		public IFilterAggregator Filter { get; set; }
-		public IGeoDistanceAggregator GeoDistance { get; set; }
-		public IGeoHashAggregator GeoHash { get; set; }
-		public IHistogramAggregator Histogram { get; set; }
-		public IGlobalAggregator Global { get; set; }
-		public IIp4RangeAggregator IpRange { get; set; }
+		public IValueCountAggregator ValueCount { get; set; }
 		public IMaxAggregator Max { get; set; }
 		public IMinAggregator Min { get; set; }
-		public ICardinalityAggregator Cardinality { get; set; }
-		public IMissingAggregator Missing { get; set; }
-		public INestedAggregator Nested { get; set; }
-		public IRangeAggregator Range { get; set; }
 		public IStatsAggregator Stats { get; set; }
 		public ISumAggregator Sum { get; set; }
-		public ITermsAggregator Terms { get; set; }
-		public ISignificantTermsAggregator SignificantTerms { get; set; }
-		public IValueCountAggregator ValueCount { get; set; }
+		public IExtendedStatsAggregator ExtendedStats { get; set; }
+
+		public IDateHistogramAggregator DateHistogram
+		{
+			get { return _dateHistogram; }
+			set { _dateHistogram = value; }
+		}
+
+		public IPercentilesAggregator Percentiles
+		{
+			get { return _percentiles; }
+			set { _percentiles = value; }
+		}
+
+		public IDateRangeAggregator DateRange
+		{
+			get { return _dateRange; }
+			set { _dateRange = value; }
+		}
+
+		public IFilterAggregator Filter
+		{
+			get { return _filter; }
+			set { _filter = value; }
+		}
+
+		public IGeoDistanceAggregator GeoDistance
+		{
+			get { return _geoDistance; }
+			set { _geoDistance = value; }
+		}
+
+		public IGeoHashAggregator GeoHash
+		{
+			get { return _geoHash; }
+			set { _geoHash = value; }
+		}
+
+		public IHistogramAggregator Histogram
+		{
+			get { return _histogram; }
+			set { _histogram = value; }
+		}
+
+		public IGlobalAggregator Global
+		{
+			get { return _global; }
+			set { _global = value; }
+		}
+
+		public IIp4RangeAggregator IpRange
+		{
+			get { return _ipRange; }
+			set { _ipRange = value; }
+		}
+
+		public ICardinalityAggregator Cardinality
+		{
+			get { return _cardinality; }
+			set { _cardinality = value; }
+		}
+
+		public IMissingAggregator Missing
+		{
+			get { return _missing; }
+			set { _missing = value; }
+		}
+
+		public INestedAggregator Nested
+		{
+			get { return _nested; }
+			set { _nested = value; }
+		}
+
+		public IRangeAggregator Range
+		{
+			get { return _range; }
+			set { _range = value; }
+		}
+
+		public ITermsAggregator Terms
+		{
+			get { return _terms; }
+			set { _terms = value; }
+		}
+
+		public ISignificantTermsAggregator SignificantTerms
+		{
+			get { return _significantTerms; }
+			set { _significantTerms = value; }
+		}
+
+		private void LiftAggregations(IBucketAggregator bucket)
+		{
+			if (bucket == null) return;
+			this.Aggregations = bucket.Aggregations;
+		}
+
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 	}
 

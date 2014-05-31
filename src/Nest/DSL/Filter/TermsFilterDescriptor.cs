@@ -25,7 +25,7 @@ namespace Nest
 
 	public class TermsFilter : PlainFilter, ITermsFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.Terms = this;
 		}

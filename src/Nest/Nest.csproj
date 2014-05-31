@@ -152,7 +152,10 @@
     <Compile Include="DSL\Filter\RawFilter.cs" />
     <Compile Include="DSL\Query\BoolQueryExtensions.cs" />
     <Compile Include="DSL\Query\PlainQuery.cs" />
+    <Compile Include="DSL\Query\QueryContainer.cs" />
     <Compile Include="DSL\RescoreQueryDescriptor.cs" />
+    <Compile Include="DSL\Suggest\Fuzziness.cs" />
+    <Compile Include="DSL\Suggest\IFuzziness.cs" />
     <Compile Include="DSL\Visitor\DslPrettyPrintVisitor.cs" />
     <Compile Include="DSL\Visitor\QueryFilterWalker.cs" />
     <Compile Include="DSL\Visitor\QueryVisitor.cs" />
@@ -279,8 +282,6 @@
     <Compile Include="DSL\SearchDescriptorBase.cs" />
     <Compile Include="DSL\Search\SourceDescriptor.cs" />
     <Compile Include="DSL\TermVectorDescriptor.cs" />
-    <Compile Include="DSL\Suggest\FuzzinessSuggestDescriptor.cs" />
-    <Compile Include="DSL\Suggest\IFuzzySuggestDescriptor.cs" />
     <Compile Include="DSL\UnregisterPercolatorDescriptor.cs" />
     <Compile Include="DSL\DeleteTemplateDescriptor.cs" />
     <Compile Include="DSL\GetTemplateDescriptor.cs" />
@@ -356,11 +357,9 @@
     <Compile Include="DSL\ReindexDescriptor.cs" />
     <Compile Include="DSL\Suggest\BaseSuggestDescriptor.cs" />
     <Compile Include="DSL\Suggest\DirectGeneratorDescriptor.cs" />
-    <Compile Include="DSL\Suggest\ISuggestDescriptor.cs" />
     <Compile Include="DSL\Suggest\PhraseSuggestDescriptor.cs" />
-    <Compile Include="DSL\Suggest\SuggestDescriptorBucket.cs" />
+    <Compile Include="DSL\Suggest\SuggestBucket.cs" />
     <Compile Include="DSL\Suggest\TermSuggestDescriptor.cs" />
-    <Compile Include="Enums\SuggestMode.cs" />
     <Compile Include="Exception\ReindexException.cs" />
     <Compile Include="Domain\Responses\ReindexObservable.cs" />
     <Compile Include="Domain\Responses\ReindexObserver.cs" />
@@ -547,7 +546,6 @@
     <Compile Include="Domain\DSL\Query.cs" />
     <Compile Include="ElasticClient-Bulk.cs" />
     <Compile Include="Domain\Responses\UpdateResponse.cs" />
-    <Compile Include="DSL\Query\QueryContainerBase.cs" />
     <Compile Include="DSL\Filter\FilterContainer.cs" />
     <Compile Include="DSL\Filter\IFilterContainer.cs" />
     <Compile Include="DSL\Query\TermsQueryDescriptor.cs" />
@@ -589,9 +587,9 @@
     <Compile Include="DSL\Query\DisMaxQueryDescriptor.cs" />
     <Compile Include="DSL\Query\FilteredQueryDescriptor.cs" />
     <Compile Include="DSL\Query\IdsQueryDescriptor.cs" />
-    <Compile Include="DSL\SortDescriptor.cs" />
-    <Compile Include="DSL\SortGeoDistanceDescriptor.cs" />
-    <Compile Include="DSL\SortScriptDescriptor.cs" />
+    <Compile Include="DSL\Search\SortFieldDescriptor.cs" />
+    <Compile Include="DSL\Search\SortGeoDistanceDescriptor.cs" />
+    <Compile Include="DSL\Search\SortScriptDescriptor.cs" />
     <Compile Include="Enums\ComparatorType.cs" />
     <Compile Include="Enums\RewriteMultiTerm.cs" />
     <Compile Include="Enums\HealthLevel.cs" />
@@ -644,6 +642,7 @@
     <Compile Include="DSL\Filter\LimitFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\IdsFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\ExistsFilterDescriptor.cs" />
+    <Compile Include="Resolvers\Converters\FuzzinessConverter.cs" />
     <Compile Include="Resolvers\Converters\Filters\RangeFilterJsonReader.cs" />
     <Compile Include="Resolvers\Converters\Filters\RegexpFilterJsonReader.cs" />
     <Compile Include="Resolvers\Converters\Filters\PrefixFilterConverter.cs" />

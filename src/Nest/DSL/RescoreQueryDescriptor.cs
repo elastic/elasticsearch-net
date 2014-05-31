@@ -2,7 +2,7 @@
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
-namespace Nest.DSL.Descriptors
+namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<RescoreQuery>))]

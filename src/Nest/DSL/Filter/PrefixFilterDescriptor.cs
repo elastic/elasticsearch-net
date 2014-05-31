@@ -15,7 +15,7 @@ namespace Nest
 
 	public class PrefixFilter : PlainFilter, IPrefixFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.Prefix = this;
 		}

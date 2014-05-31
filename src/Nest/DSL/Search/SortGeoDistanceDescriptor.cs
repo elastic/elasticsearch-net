@@ -13,22 +13,51 @@ using Elasticsearch.Net;
 namespace Nest.DSL.Descriptors
 {
 	[JsonConverter(typeof(CustomJsonConverter))]
-	public class SortGeoDistanceDescriptor<T> : ICustomJson where T : class
+	public interface IGeoDistanceSort : ISort, ICustomJson
 	{
-		internal PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker Field { get; set; }
+		string PinLocation { get; set; }
+		GeoUnit? GeoUnit { get; set; }
+	}
 
-		internal string _Missing { get; set; }
+	public class GeoDistanceSort : IGeoDistanceSort
+	{
+		public string Missing { get; set; }
+		public SortOrder? Order { get; set; }
+		public PropertyPathMarker Field { get; set; }
+		public string PinLocation { get; set; }
+		public GeoUnit? GeoUnit { get; set; }
+		
+		object ICustomJson.GetCustomJson()
+		{
+			return new Dictionary<object, object>
+			{
+				{ this.Field, this.PinLocation },
+				{ "missing", this.Missing },
+				{ "order", this.Order },
+				{ "unit", this.GeoUnit }
+			};
+		}
+	}
 
-		internal string _Order { get; set; }
+	public class SortGeoDistanceDescriptor<T> : IGeoDistanceSort where T : class
+	{
+		private IGeoDistanceSort Self { get { return this; } }
 
-		internal string _PinLocation { get; set; }
+		PropertyPathMarker IGeoDistanceSort.Field { get; set; }
 
-		internal GeoUnit? _GeoUnit { get; set; }
+		string ISort.Missing { get; set; }
+
+		SortOrder? ISort.Order { get; set; }
+
+		string IGeoDistanceSort.PinLocation { get; set; }
+
+		GeoUnit? IGeoDistanceSort.GeoUnit { get; set; }
 	
 		public SortGeoDistanceDescriptor<T> PinTo(string geoLocationHash)
 		{
 			geoLocationHash.ThrowIfNullOrEmpty("geoLocationHash");
-			this._PinLocation = geoLocationHash;
+			Self.PinLocation = geoLocationHash;
 			return this;
 		}
 		public SortGeoDistanceDescriptor<T> PinTo(double Lat, double Lon)
@@ -36,50 +65,50 @@ namespace Nest.DSL.Descriptors
 			var c = CultureInfo.InvariantCulture;
 			Lat.ThrowIfNull("Lat");
 			Lon.ThrowIfNull("Lon");
-			this._PinLocation = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
+			Self.PinLocation = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
 			return this;
 		}
 		public SortGeoDistanceDescriptor<T> Unit(GeoUnit unit)
 		{
 			unit.ThrowIfNull("unit");
-			this._GeoUnit = unit;
+			Self.GeoUnit = unit;
 			return this;
 		}
 
 		public SortGeoDistanceDescriptor<T> OnField(string field)
 		{
-			this._Field = field;
+			Self.Field = field;
 			return this;
 		}
 		public SortGeoDistanceDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			Self.Field = objectPath;
 			return this;
 		}
 
 		public SortGeoDistanceDescriptor<T> MissingLast()
 		{
-			this._Missing = "_last";
+			Self.Missing = "_last";
 			return this;
 		}
 		public SortGeoDistanceDescriptor<T> MissingFirst()
 		{
-			this._Missing = "_first";
+			Self.Missing = "_first";
 			return this;
 		}
 		public SortGeoDistanceDescriptor<T> MissingValue(string value)
 		{
-			this._Missing = value;
+			Self.Missing = value;
 			return this;
 		}
 		public SortGeoDistanceDescriptor<T> Ascending()
 		{
-			this._Order = "asc";
+			Self.Order = SortOrder.Ascending;
 			return this;
 		}
 		public SortGeoDistanceDescriptor<T> Descending()
 		{
-			this._Order = "desc";
+			Self.Order = SortOrder.Descending;
 			return this;
 		}
 		/// <summary>
@@ -87,7 +116,7 @@ namespace Nest.DSL.Descriptors
 		/// </summary>
 		public SortGeoDistanceDescriptor<T> ToggleSort(bool ascending)
 		{
-			this._Order = ascending ? "asc" : "desc";
+			Self.Order = ascending ? SortOrder.Ascending : SortOrder.Descending;
 			return this;
 		}
 
@@ -95,10 +124,10 @@ namespace Nest.DSL.Descriptors
 		{
 			return new Dictionary<object, object>
 			{
-				{ _Field, _PinLocation },
-				{ "missing", _Missing },
-				{ "order", _Order },
-				{ "unit", _GeoUnit }
+				{ Self.Field, Self.PinLocation },
+				{ "missing", Self.Missing },
+				{ "order", Self.Order },
+				{ "unit", Self.GeoUnit }
 			};
 		}
 	}

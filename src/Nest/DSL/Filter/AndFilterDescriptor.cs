@@ -23,7 +23,7 @@ namespace Nest
 	
 	public class AndFilter : PlainFilter, IAndFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.And = this;
 		}

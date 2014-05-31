@@ -34,11 +34,25 @@
 		}
 		public static implicit operator FilterContainer(PlainFilter filter)
 		{
+			return ToContainer(filter);
+		}
+		public FilterContainer ToContainer()
+		{
+			return PlainFilter.ToContainer(this);
+		}
+
+		public static FilterContainer ToContainer(PlainFilter filter, FilterContainer filterContainer = null)
+		{
 			if (filter == null) return null;
-			var c = new FilterContainer();
+			var c = filterContainer ?? new FilterContainer();
+			IFilterContainer fc = c;
 			filter.WrapInContainer(c);
+			fc._Cache = filter.Cache;
+			fc._CacheKey = filter.CacheKey;
+			fc._FilterName = filter.FilterName;
 			return c;
 		}
-		protected abstract void WrapInContainer(IFilterContainer container);
+
+		protected internal abstract void WrapInContainer(IFilterContainer container);
 	}
 }

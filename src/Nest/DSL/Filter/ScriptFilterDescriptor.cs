@@ -28,7 +28,7 @@ namespace Nest
 
 	public class ScriptFilter : PlainFilter, IScriptFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.Script = this;
 		}

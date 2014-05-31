@@ -18,7 +18,7 @@ namespace Nest
 
 	public class MissingFilter : PlainFilter, IMissingFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.Missing = this;
 		}

@@ -17,7 +17,7 @@ namespace Nest
 	
 	public class LimitFilter : PlainFilter, ILimitFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.Limit = this;
 		}

@@ -35,7 +35,7 @@ namespace Nest
 
 	public class RangeFilter : PlainFilter, IRangeFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.Range = this;
 		}

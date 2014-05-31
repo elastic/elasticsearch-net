@@ -1,109 +1,144 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Elasticsearch.Net;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Nest.Resolvers;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class TermSuggestDescriptor<T> : BaseSuggestDescriptor<T> where T : class
+	[JsonObject(MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<TermSuggester>))]
+	public interface ITermSuggester : ISuggester
 	{
 		[JsonProperty(PropertyName = "prefix_len")]
-		internal int? _PrefixLen { get; set; }
+		int? PrefixLen { get; set; }
 
 		[JsonProperty(PropertyName = "suggest_mode")]
-		internal string _SuggestMode { get; set; }
+		[JsonConverter(typeof(StringEnumConverter))]
+		SuggestModeOptions? SuggestMode { get; set; }
 
 		[JsonProperty(PropertyName = "min_word_len")]
-		internal int? _MinWordLen { get; set; }
+		int? MinWordLen { get; set; }
 
 		[JsonProperty(PropertyName = "max_edits")]
-		internal int? _MaxEdits { get; set; }
+		int? MaxEdits { get; set; }
 
 		[JsonProperty(PropertyName = "max_inspections")]
-		internal int? _MaxInspections { get; set; }
+		int? MaxInspections { get; set; }
 
 		[JsonProperty(PropertyName = "min_doc_freq")]
-		internal decimal? _MinDocFrequency { get; set; }
+		decimal? MinDocFrequency { get; set; }
 
 		[JsonProperty(PropertyName = "max_term_freq")]
-		internal decimal? _MaxTermFrequency { get; set; }
+		decimal? MaxTermFrequency { get; set; }
+	}
+
+	public class TermSuggester : Suggester, ITermSuggester
+	{
+		public int? PrefixLen { get; set; }
+		public SuggestModeOptions? SuggestMode { get; set; }
+		public int? MinWordLen { get; set; }
+		public int? MaxEdits { get; set; }
+		public int? MaxInspections { get; set; }
+		public decimal? MinDocFrequency { get; set; }
+		public decimal? MaxTermFrequency { get; set; }
+	}
+
+	public class TermSuggestDescriptor<T> : BaseSuggestDescriptor<T>, ITermSuggester where T : class
+	{
+		private ITermSuggester Self { get { return this; } }
+
+		int? ITermSuggester.PrefixLen { get; set; }
+
+		SuggestModeOptions? ITermSuggester.SuggestMode { get; set; }
+
+		int? ITermSuggester.MinWordLen { get; set; }
+
+		int? ITermSuggester.MaxEdits { get; set; }
+
+		int? ITermSuggester.MaxInspections { get; set; }
+
+		decimal? ITermSuggester.MinDocFrequency { get; set; }
+
+		decimal? ITermSuggester.MaxTermFrequency { get; set; }
 
 		public TermSuggestDescriptor<T> Text(string text)
 		{
-			this._Text = text;
+			Self._Text = text;
 			return this;
 		}
 
 		public TermSuggestDescriptor<T> OnField(string field)
 		{
-			this._Field = field;
+			Self.Field = field;
 			return this;
 		}
 
 		public TermSuggestDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			Self.Field = objectPath;
 			return this;
 		}
 
 		public TermSuggestDescriptor<T> Analyzer(string analyzer)
 		{
-			this._Analyzer = analyzer;
+			Self.Analyzer = analyzer;
 			return this;
 		}
 
 		public TermSuggestDescriptor<T> Size(int size)
 		{
-			this._Size = size;
+			Self.Size = size;
 			return this;
 		}
 		
 		public TermSuggestDescriptor<T> ShardSize(int size)
 		{
-			this._ShardSize = size;
+			Self.ShardSize = size;
 			return this;
 		}
 
-		public TermSuggestDescriptor<T> SuggestMode(SuggestMode mode)
+		public TermSuggestDescriptor<T> SuggestMode(SuggestModeOptions mode)
 		{
-			this._SuggestMode = Enum.GetName(typeof(SuggestMode), mode).ToLowerInvariant();
+			Self.SuggestMode = mode;
 			return this;
 		}
 
 		public TermSuggestDescriptor<T> MinWordLength(int length)
 		{
-			this._MinWordLen = length;
+			Self.MinWordLen = length;
 			return this;
 		}
 
 		public TermSuggestDescriptor<T> PrefixLength(int length)
 		{
-			this._PrefixLen = length;
+			Self.PrefixLen = length;
 			return this;
 		}
 
 		public TermSuggestDescriptor<T> MaxEdits(int maxEdits)
 		{
-			this._MaxEdits = maxEdits;
+			Self.MaxEdits = maxEdits;
 			return this;
 		}
 
 		public TermSuggestDescriptor<T> MaxInspections(int maxInspections)
 		{
-			this._MaxInspections = maxInspections;
+			Self.MaxInspections = maxInspections;
 			return this;
 		}
 
 		public TermSuggestDescriptor<T> MinDocFrequency(decimal frequency)
 		{
-			this._MinDocFrequency = frequency;
+			Self.MinDocFrequency = frequency;
 			return this;
 		}
 
 		public TermSuggestDescriptor<T> MaxTermFrequency(decimal frequency)
 		{
-			this._MaxTermFrequency = frequency;
+			Self.MaxTermFrequency = frequency;
 			return this;
 		}
 

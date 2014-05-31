@@ -25,7 +25,7 @@ namespace Nest
 
 	public class RegexpFilter : PlainFilter, IRegexpFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.Regexp = this;
 		}

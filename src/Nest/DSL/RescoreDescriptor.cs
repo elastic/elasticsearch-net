@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using Elasticsearch.Net;
 using Nest.Resolvers;
 
-namespace Nest.DSL.Descriptors
+namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<Rescore>))]

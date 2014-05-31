@@ -22,7 +22,7 @@ namespace Nest
 	
 	public class NotFilter : PlainFilter, INotFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.Not = this;
 		}

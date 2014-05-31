@@ -91,12 +91,27 @@ namespace Nest
 
 		IFunctionScoreQuery IQueryContainer.FunctionScore { get; set; }
 		
+		public QueryContainer() {}
+		
+		public QueryContainer(PlainQuery query)
+		{
+			PlainQuery.ToContainer(query, this);
+		}
+		
+		public static QueryContainer From(PlainQuery query)
+		{
+			return PlainQuery.ToContainer(query);
+		}
+
 		public void Accept(IQueryVisitor visitor)
 		{
 			var walker = new QueryFilterWalker();
 			if (visitor.Scope == VisitorScope.Unknown) visitor.Scope = VisitorScope.Query;
 			walker.Walk(this, visitor);
 		}
+
+
+
 
 		bool IQueryContainer.IsConditionless { get; set; }
 

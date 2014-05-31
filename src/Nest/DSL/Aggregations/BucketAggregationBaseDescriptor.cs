@@ -14,7 +14,7 @@ namespace Nest
 
 	public abstract class BucketAggregator : IBucketAggregator
 	{
-		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
+		IDictionary<string, IAggregationContainer> IBucketAggregator.Aggregations { get; set; }
 	}
 
 	public abstract class BucketAggregationBaseDescriptor<TBucketAggregation, T> 

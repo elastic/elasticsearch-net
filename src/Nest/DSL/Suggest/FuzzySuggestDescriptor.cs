@@ -1,4 +1,4 @@
-﻿using Nest.DSL.Suggest;
+﻿using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,51 +7,86 @@ using System.Text;
 
 namespace Nest
 {
-    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class FuzzySuggestDescriptor<T> : IFuzzySuggestDescriptor<T> where T : class 
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<FuzzySuggester>))]
+	public interface IFuzzySuggester
+	{
+		[JsonProperty(PropertyName = "transpositions")]
+		bool? Transpositions { get; set; }
+
+		[JsonProperty(PropertyName = "min_length")]
+		int? MinLength { get; set; }
+
+		[JsonProperty(PropertyName = "prefix_length")]
+		int? PrefixLength { get; set; }
+		
+		[JsonProperty(PropertyName = "fuzziness")]
+		IFuzziness Fuzziness { get; set; }
+
+		[JsonProperty(PropertyName = "unicode_aware")]
+		bool? UnicodeAware { get; set; }
+	}
+
+	public class FuzzySuggester : IFuzzySuggester
+	{
+		public bool? Transpositions { get; set; }
+		public int? MinLength { get; set; }
+		public int? PrefixLength { get; set; }
+		public IFuzziness Fuzziness { get; set; }
+		public bool? UnicodeAware { get; set; }
+	}
+
+	public class FuzzySuggestDescriptor<T> : IFuzzySuggester where T : class 
     {
-        [JsonProperty(PropertyName="edit_distance")]
-        internal int _EditDistance { get; set; }
+		protected IFuzzySuggester Self { get { return this; } }
 
-        [JsonProperty(PropertyName = "transpositions")]
-        internal bool _Transpositions { get; set; }
+        bool? IFuzzySuggester.Transpositions { get; set; }
 
-        [JsonProperty(PropertyName = "min_length")]
-        internal int _MinLength { get; set; }
+        int? IFuzzySuggester.MinLength { get; set; }
 
-        [JsonProperty(PropertyName = "prefix_length")]
-        internal int _PrefixLength { get; set; }
+        int? IFuzzySuggester.PrefixLength { get; set; }
 
-        public FuzzySuggestDescriptor()
+        IFuzziness IFuzzySuggester.Fuzziness { get; set; }
+
+        bool? IFuzzySuggester.UnicodeAware { get; set; }
+		
+		public FuzzySuggestDescriptor<T> Fuzziness()
+		{
+			Self.Fuzziness = Nest.Fuzziness.Auto;
+			return this;
+		}
+		public FuzzySuggestDescriptor<T> Fuzziness(int editDistance)
+		{
+			Self.Fuzziness = Nest.Fuzziness.EditDistance(editDistance);
+			return this;
+		}
+		public FuzzySuggestDescriptor<T> Fuzziness(double ratio)
+		{
+			Self.Fuzziness = Nest.Fuzziness.Ratio(ratio);
+			return this;
+		}
+
+        public FuzzySuggestDescriptor<T> UnicodeAware(bool aware = true)
         {
-            // Default values
-            this._EditDistance = 1;
-            this._Transpositions = true;
-            this._MinLength = 3;
-            this._PrefixLength = 1;
-        }
-
-        public FuzzySuggestDescriptor<T> EditDistance(int distance)
-        {
-            this._EditDistance = distance;
+            Self.UnicodeAware = aware;
             return this;
         }
 
         public FuzzySuggestDescriptor<T> Transpositions(bool transpositions)
         {
-            this._Transpositions = transpositions;
+            Self.Transpositions = transpositions;
             return this;
         }
 
         public FuzzySuggestDescriptor<T> MinLength(int length)
         {
-            this._MinLength = length;
+            Self.MinLength = length;
             return this;
         }
 
         public FuzzySuggestDescriptor<T> PrefixLength(int length)
         {
-            this._PrefixLength = length;
+            Self.PrefixLength = length;
             return this;
         }
     }

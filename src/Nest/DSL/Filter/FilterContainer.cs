@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using Nest.DSL.Visitor;
 using Newtonsoft.Json;
@@ -13,13 +14,15 @@ namespace Nest
 {
 	public class FilterContainer : IFilterContainer, ICustomJson
 	{
-		public string _FilterName { get; set; }
+		private static readonly IEnumerable<FilterContainer> Empty = Enumerable.Empty<FilterContainer>();
+
+		string IFilterContainer._FilterName { get; set; }
 		
-		public string _CacheKey { get; set; }
+		string IFilterContainer._CacheKey { get; set; }
 		
-		public bool? _Cache { get; set; }
+		bool? IFilterContainer._Cache { get; set; }
 		
-		public string RawFilter { get; set; }
+		string IFilterContainer.RawFilter { get; set; }
 		
 		[JsonIgnore]
 		public virtual bool IsConditionless { get; internal set; }
@@ -80,7 +83,15 @@ namespace Nest
 
 		IRegexpFilter IFilterContainer.Regexp { get; set; }
 		
-		
+		public FilterContainer() {}
+		public FilterContainer(PlainFilter filter)
+		{
+			PlainFilter.ToContainer(filter, this);
+		}
+		public static FilterContainer From(PlainFilter filter)
+		{
+			return PlainFilter.ToContainer(filter);
+		}
 		public void Accept(IQueryVisitor visitor)
 		{
 			var walker = new QueryFilterWalker();
@@ -90,9 +101,7 @@ namespace Nest
 			
 		}
 
-		private static readonly IEnumerable<FilterContainer> Empty = Enumerable.Empty<FilterContainer>();
 
-		
 		
 		object ICustomJson.GetCustomJson()
 		{

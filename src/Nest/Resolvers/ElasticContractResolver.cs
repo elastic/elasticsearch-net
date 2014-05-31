@@ -38,11 +38,6 @@ namespace Nest.Resolvers
 			this.Infer = new ElasticInferrer(this.ConnectionSettings);
 		}
 
-		protected override JsonConverter ResolveContractConverter(Type objectType)
-		{
-			return base.ResolveContractConverter(objectType);
-		}
-
 		protected override JsonContract CreateContract(Type objectType)
 		{
 			JsonContract contract = base.CreateContract(objectType);
@@ -127,6 +122,11 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IAggregationContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IMetricAggregator>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IBucketAggregator>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ISort>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ISuggestBucket>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ISuggester>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IFuzzySuggester>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IDirectGenerator>(type, memberSerialization, defaultProperties, lookup);
 			return defaultProperties;
 		}
 

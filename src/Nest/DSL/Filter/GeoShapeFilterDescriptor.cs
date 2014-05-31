@@ -23,7 +23,7 @@ namespace Nest
 
 	public class GeoShapeFilter : PlainFilter, IGeoShapeFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.GeoShape = this;
 		}

@@ -21,7 +21,7 @@ namespace Nest
 	
 	public class IdsFilter : PlainFilter, IIdsFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.Ids = this;
 		}

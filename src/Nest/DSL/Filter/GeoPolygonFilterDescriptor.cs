@@ -19,7 +19,7 @@ namespace Nest
 
 	public class GeoPolygonFilter : PlainFilter, IGeoPolygonFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.GeoPolygon = this;
 		}

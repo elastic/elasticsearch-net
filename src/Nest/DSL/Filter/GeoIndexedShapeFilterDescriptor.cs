@@ -21,7 +21,7 @@ namespace Nest
 
 	public class GeoIndexedShapeFilter : PlainFilter, IGeoIndexedShapeFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.GeoShape = this;
 		}

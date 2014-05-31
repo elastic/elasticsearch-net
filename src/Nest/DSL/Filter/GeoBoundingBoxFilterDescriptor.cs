@@ -29,7 +29,7 @@ namespace Nest
 	
 	public class GeoBoundingBoxFilter : PlainFilter, IGeoBoundingBoxFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.GeoBoundingBox = this;
 		}

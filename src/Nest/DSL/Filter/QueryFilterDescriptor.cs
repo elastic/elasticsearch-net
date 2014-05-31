@@ -22,7 +22,7 @@ namespace Nest
 
 	public class QueryFilter : PlainFilter, IQueryFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.Query = this;
 		}

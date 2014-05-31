@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Nest.Resolvers;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -23,7 +20,7 @@ namespace Nest
 			return (TFacetDescriptor) this;
 		}
 
-		FilterContainer IFacetRequest.FacetFilter { get; set; }
+		IFilterContainer IFacetRequest.FacetFilter { get; set; }
 		public TFacetDescriptor FacetFilter(Func<FilterDescriptor<T>, FilterContainer> facetFilter)
 		{
 			facetFilter.ThrowIfNull("facetFilter");

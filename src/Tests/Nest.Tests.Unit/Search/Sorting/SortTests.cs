@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
-namespace Nest.Tests.Unit.Search.Sort
+namespace Nest.Tests.Unit.Search.Sorting
 {
 	[TestFixture]
 	public class SortTests : BaseJsonTests
@@ -26,9 +26,9 @@ namespace Nest.Tests.Unit.Search.Sort
                   size: 10,
                   sort: {
                     country: {
+					  ignore_unmapped: true,
                       missing: ""_last"",
-                      order: ""desc"",
-					  ignore_unmapped: true
+                      order: ""desc""
                     }
                   }
                 }";
@@ -79,8 +79,8 @@ namespace Nest.Tests.Unit.Search.Sort
                   size: 10,
                   sort: {
                     ""contributors.age"": {
-                        ""order"": ""desc"",
-                        ""mode"": ""max""
+                        ""mode"": ""max"",
+                        ""order"": ""desc""
                     }
                   }
                 }";
@@ -100,7 +100,7 @@ namespace Nest.Tests.Unit.Search.Sort
                   from: 0,
                   size: 10,
                   sort: {
-                    country : ""asc""
+                    country : { order: ""asc"" }
                     }          
                 }";
 			Assert.True(json.JsonEquals(expected), json);
@@ -119,7 +119,7 @@ namespace Nest.Tests.Unit.Search.Sort
                   from: 0,
                   size: 10,
                   sort: {
-                    country : ""desc""
+                    country : { order: ""desc"" }
                     }          
                 }";
 			Assert.True(json.JsonEquals(expected), json);
@@ -138,7 +138,7 @@ namespace Nest.Tests.Unit.Search.Sort
                   from: 0,
                   size: 10,
                   sort: {
-                    ""name.sort"" : ""asc""
+                    ""name.sort"" : { order: ""asc"" }
                     }          
                 }";
 			Assert.True(json.JsonEquals(expected), json);
@@ -157,7 +157,7 @@ namespace Nest.Tests.Unit.Search.Sort
                   from: 0,
                   size: 10,
                   sort: {
-                    ""name.sort"" : ""desc""
+                    ""name.sort"" : { order: ""desc"" }
                     }          
                 }";
 			Assert.True(json.JsonEquals(expected), json);
@@ -215,13 +215,13 @@ namespace Nest.Tests.Unit.Search.Sort
                   size: 10,
                   sort: {
                     _script: {
-                      missing: ""_last"",
-                      order: ""desc"",
                       type: ""number"",
                       script: ""doc['field_name'].value * factor"",
                       params: {
                         factor: 1.1
-                      }
+                      },
+                      missing: ""_last"",
+                      order: ""desc""
                     }
                   }
                 }";

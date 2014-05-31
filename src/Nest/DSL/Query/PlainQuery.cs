@@ -36,8 +36,18 @@
 
 		public QueryContainer ToContainer()
 		{
-			return this;
+			return PlainQuery.ToContainer(this);
 		}
+
+		public static QueryContainer ToContainer(PlainQuery query, QueryContainer queryContainer = null)
+		{
+			if (query == null) return null;
+			var c = queryContainer ?? new QueryContainer();
+			IQueryContainer fc = c;
+			query.WrapInContainer(c);
+			return c;
+		}
+		
 
 		public static implicit operator QueryContainer(PlainQuery query)
 		{

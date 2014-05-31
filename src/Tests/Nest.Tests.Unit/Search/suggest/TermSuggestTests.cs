@@ -16,16 +16,16 @@ namespace Nest.Tests.Unit.Search.Suggest
 		        .MaxInspections(17)
 		        .OnField("field1")
 		        .Size(3)
-		        .SuggestMode(SuggestMode.Missing);
+		        .SuggestMode(SuggestModeOptions.Missing);
 
             var json = TestElasticClient.Serialize(termSuggestDescriptor);
 
             var expected = @"{
+                              ""field"": ""field1"",
+                              ""size"": 3,
                               ""suggest_mode"": ""missing"",
                               ""max_edits"": 3,
-                              ""max_inspections"": 17,
-                              ""field"": ""field1"",
-                              ""size"": 3
+                              ""max_inspections"": 17
                             }";
 
             Assert.True(json.JsonEquals(expected), json);
@@ -41,7 +41,7 @@ namespace Nest.Tests.Unit.Search.Suggest
 					.MaxInspections(17)
 					.OnField("field1")
 					.Size(3)
-					.SuggestMode(SuggestMode.Missing)
+					.SuggestMode(SuggestModeOptions.Missing)
 				)
 			);
 
@@ -50,11 +50,11 @@ namespace Nest.Tests.Unit.Search.Suggest
 					mytermsuggest: {
 						text: ""n"",
 						term: {
+							field: ""field1"",
+							size: 3,
 							suggest_mode: ""missing"",
 							max_edits: 3,
-							max_inspections: 17,
-							field: ""field1"",
-							size: 3
+							max_inspections: 17
 
 						}
 					}

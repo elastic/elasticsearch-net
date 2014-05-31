@@ -14,20 +14,21 @@ namespace Nest
 	public class FilterDescriptor<T> : FilterContainer
 		where T : class
 	{
+		internal IFilterContainer Self { get { return this; } }
 
 		public FilterDescriptor<T> Name(string name)
 		{
-			this._FilterName = name;
+			Self._FilterName = name;
 			return this;
 		}
 		public FilterDescriptor<T> CacheKey(string cacheKey)
 		{
-			this._CacheKey = cacheKey;
+			Self._CacheKey = cacheKey;
 			return this;
 		}
 		public FilterDescriptor<T> Cache(bool cache)
 		{
-			this._Cache = cache;
+			Self._Cache = cache;
 			return this;
 		}
 		
@@ -35,16 +36,16 @@ namespace Nest
 		public FilterDescriptor<T> Strict(bool strict = true)
 		{
 			var f = new FilterDescriptor<T>();
-			((IFilterContainer)f).IsStrict = strict;
-			((IFilterContainer)f).IsVerbatim = ((IFilterContainer)this).IsVerbatim;
+			f.Self.IsStrict = strict;
+			f.Self.IsVerbatim = Self.IsVerbatim;
 			return f;
 		}
 
 		public FilterDescriptor<T> Verbatim(bool verbatim = true)
 		{
 			var f = new FilterDescriptor<T>();
-			((IFilterContainer)f).IsStrict = ((IFilterContainer)this).IsStrict;
-			((IFilterContainer)f).IsVerbatim = verbatim;
+			f.Self.IsStrict = Self.IsStrict;
+			f.Self.IsVerbatim = verbatim;
 			return f;
 		}
 
@@ -63,9 +64,9 @@ namespace Nest
 		internal FilterContainer Raw(string rawJson)
 		{
 			var f = new FilterDescriptor<T>();
-			((IFilterContainer)f).IsStrict = ((IFilterContainer)this).IsStrict;
-			((IFilterContainer)f).IsVerbatim = ((IFilterContainer)this).IsVerbatim;
-			((IFilterContainer)f).RawFilter = rawJson;
+			f.Self.IsStrict = Self.IsStrict;
+			f.Self.IsVerbatim = Self.IsVerbatim;
+			f.Self.RawFilter = rawJson;
 			return f;
 		}
 
@@ -74,8 +75,8 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Exists(Expression<Func<T, object>> fieldDescriptor)
 		{
-			var filter = new ExistsFilterDescriptor();
-			((IExistsFilter)filter).Field = fieldDescriptor;
+			IExistsFilter filter = new ExistsFilterDescriptor();
+			filter.Field = fieldDescriptor;
 			this.SetCacheAndName(filter);
 			return this.New(filter, f => f.Exists = filter);
 		}
@@ -84,8 +85,8 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Exists(string field)
 		{
-			var filter = new ExistsFilterDescriptor();
-			((IExistsFilter)filter).Field = field;
+			IExistsFilter filter = new ExistsFilterDescriptor();
+			filter.Field = field;
 			this.SetCacheAndName(filter);
 			return this.New(filter, f => f.Exists = filter);
 		}
@@ -94,8 +95,8 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Missing(Expression<Func<T, object>> fieldDescriptor)
 		{
-			var filter = new MissingFilterDescriptor();
-			((IMissingFilter)filter).Field = fieldDescriptor;
+			IMissingFilter filter = new MissingFilterDescriptor();
+			filter.Field = fieldDescriptor;
 			this.SetCacheAndName(filter);
 			return  this.New(filter, f => f.Missing = filter);
 		}
@@ -104,8 +105,8 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Missing(string field)
 		{
-			var filter = new MissingFilterDescriptor();
-			((IMissingFilter)filter).Field = field;
+			IMissingFilter filter = new MissingFilterDescriptor();
+			filter.Field = field;
 			this.SetCacheAndName(filter);
 			return  this.New(filter, f => f.Missing = filter);
 		}
@@ -115,8 +116,8 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Ids(IEnumerable<string> values)
 		{
-			var filter = new IdsFilterDescriptor();
-			((IIdsFilter)filter).Values = values;
+			IIdsFilter filter = new IdsFilterDescriptor();
+			filter.Values = values;
 			this.SetCacheAndName(filter);
 			return this.New(filter, f => f.Ids = filter);
 		}
@@ -126,12 +127,12 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Ids(string type, IEnumerable<string> values)
 		{
-			var filter = new IdsFilterDescriptor();
+			IIdsFilter filter = new IdsFilterDescriptor();
 			if (type.IsNullOrEmpty())
 				return CreateConditionlessFilterDescriptor(filter, null);
 
-			((IIdsFilter)filter).Values = values;
-			((IIdsFilter)filter).Type = new [] { type };
+			filter.Values = values;
+			filter.Type = new [] { type };
 
 			this.SetCacheAndName(filter);
 			return this.New(filter, f => f.Ids = filter);
@@ -142,12 +143,12 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Ids(IEnumerable<string> types, IEnumerable<string> values)
 		{
-			var filter = new IdsFilterDescriptor();
+			IIdsFilter filter = new IdsFilterDescriptor();
 			if (!types.HasAny() || types.All(t=>t.IsNullOrEmpty()))
 				return CreateConditionlessFilterDescriptor(filter, null);
 
-			((IIdsFilter)filter).Values = values;
-			((IIdsFilter)filter).Type = types;
+			filter.Values = values;
+			filter.Type = types;
 			
 			this.SetCacheAndName(filter);
 			return  this.New(filter, f => f.Ids = filter);
@@ -680,7 +681,7 @@ namespace Nest
 
 		private FilterDescriptor<T> CreateConditionlessFilterDescriptor(IFilter filter, string type = null)
 		{
-			var self = ((IFilterContainer)this);
+			var self = Self;
 			if (self.IsStrict && !self.IsVerbatim)
 				throw new DslException("Filter resulted in a conditionless '{1}' filter (json by approx):\n{0}"
 					.F(
@@ -689,15 +690,15 @@ namespace Nest
 					)
 				);
 			var f = new FilterDescriptor<T>();
-			((IFilterContainer)f).IsStrict = self.IsStrict;
-			((IFilterContainer)f).IsVerbatim = self.IsVerbatim;
+			f.Self.IsStrict = self.IsStrict;
+			f.Self.IsVerbatim = self.IsVerbatim;
 			f.IsConditionless = true;
 			return f;
 		}
 
 		private FilterDescriptor<T> New(IFilter filter, Action<IFilterContainer> fillProperty)
 		{
-			var self = ((IFilterContainer)this);
+			var self = Self;
 			if (filter.IsConditionless && !self.IsVerbatim)
 			{
 				this.ResetCache();
@@ -706,8 +707,8 @@ namespace Nest
 
 			this.SetCacheAndName(filter);
 			var f = new FilterDescriptor<T>();
-			((IFilterContainer)f).IsStrict = self.IsStrict;
-			((IFilterContainer)f).IsVerbatim = self.IsVerbatim;
+			f.Self.IsStrict = self.IsStrict;
+			f.Self.IsVerbatim = self.IsVerbatim;
 
 			if (fillProperty != null)
 				fillProperty(f);
@@ -718,23 +719,23 @@ namespace Nest
 
 		private void ResetCache()
 		{
-			this._Cache = null;
-			this._CacheKey = null;
-			this._FilterName = null;
+			Self._Cache = null;
+			Self._CacheKey = null;
+			Self._FilterName = null;
 		}
 
 		private void SetCacheAndName(IFilter filter)
 		{
-			var self = ((IFilterContainer)this);
+			var self = Self;
 			filter.IsStrict = self.IsStrict;
 			filter.IsVerbatim = self.IsVerbatim;
 
-			if (this._Cache.HasValue)
-				filter.Cache = this._Cache;
-			if (!string.IsNullOrWhiteSpace(this._FilterName))
-				filter.FilterName = this._FilterName;
-			if (!string.IsNullOrWhiteSpace(this._CacheKey))
-				filter.CacheKey = this._CacheKey;
+			if (Self._Cache.HasValue)
+				filter.Cache = Self._Cache;
+			if (!string.IsNullOrWhiteSpace(Self._FilterName))
+				filter.FilterName = Self._FilterName;
+			if (!string.IsNullOrWhiteSpace(Self._CacheKey))
+				filter.CacheKey = Self._CacheKey;
 		}
 
 

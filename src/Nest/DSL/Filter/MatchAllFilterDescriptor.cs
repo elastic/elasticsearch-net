@@ -15,7 +15,7 @@ namespace Nest
 	
 	public class MatchAllFilter : PlainFilter, IMatchAllFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.MatchAll = this;
 		}

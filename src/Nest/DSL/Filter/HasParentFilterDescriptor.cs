@@ -26,7 +26,7 @@ namespace Nest
 
 	public class HasParentFilter : PlainFilter, IHasParentFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.HasParent = this;
 		}

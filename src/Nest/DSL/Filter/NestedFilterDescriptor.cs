@@ -34,7 +34,7 @@ namespace Nest
 
 	public class NestedFilter : PlainFilter, INestedFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.Nested = this;
 		}

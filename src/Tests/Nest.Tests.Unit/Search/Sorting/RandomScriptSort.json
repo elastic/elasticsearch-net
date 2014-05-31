@@ -3,12 +3,12 @@
   "size": 10,
   "sort": {
     "_script": {
-      "order": "asc",
       "type": "number",
       "script": "(doc['_id'].stringValue + salt).hashCode()",
       "params": {
         "salt": "some_random_string"
-      }
+      },
+      "order": "asc"
     }
   }
 }

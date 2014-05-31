@@ -18,7 +18,7 @@ namespace Nest
 
 	public class TypeFilter : PlainFilter, ITypeFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.Type = this;
 		}

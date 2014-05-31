@@ -41,7 +41,7 @@ namespace Nest
 
 	public class GeoDistanceRangeFilter : PlainFilter, IGeoDistanceRangeFilter
 	{
-		protected override void WrapInContainer(IFilterContainer container)
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
 			container.GeoDistanceRange = this;
 		}
