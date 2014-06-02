@@ -88,7 +88,6 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\Analysis\TokenFilter\DelimitedPayloadTokenFilter.cs" />
     <Compile Include="ConvenienceExtensions\AliasExtensions.cs" />
     <Compile Include="ConvenienceExtensions\CountExtensions.cs" />
     <Compile Include="ConvenienceExtensions\DeleteExtensions.cs" />
@@ -127,6 +126,15 @@
     <Compile Include="Domain\Alias\AliasRemoveOperation.cs" />
     <Compile Include="Domain\Alias\IAliasAction.cs" />
     <Compile Include="Domain\Analysis\CharFilter\PatternReplaceCharFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\DelimitedPayloadTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\CommonGramsTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\KeywordRepeatTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\HunspellTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\LimitTokenCountTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\PatternCaptureTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\KeepWordsTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\StemmerOverrideTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\UppercaseTokenFilter.cs" />
     <Compile Include="Domain\Bulk\MultiGetDoc.cs" />
     <Compile Include="Domain\Connection\ConnectionSettings.cs" />
     <Compile Include="Domain\Connection\IConnectionSettingsValues.cs" />

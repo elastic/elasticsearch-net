@@ -14,5 +14,7 @@ namespace Nest
 
         }
 
+        [JsonProperty("language")]
+        public string Language { get; set; }
     }
 }
