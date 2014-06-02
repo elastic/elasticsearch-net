@@ -18,10 +18,10 @@ namespace Nest.Tests.Integration
 			var uri = new UriBuilder("http", host, port.GetValueOrDefault(9200)).Uri;
 			return uri;
 		}
-		public static ConnectionSettings Settings(int? port = null)
+		public static ConnectionSettings Settings(int? port = null, Uri hostOverride = null)
 		{
 
-			return new ConnectionSettings(CreateBaseUri(port), ElasticsearchConfiguration.DefaultIndex)
+			return new ConnectionSettings(hostOverride ?? CreateBaseUri(port), ElasticsearchConfiguration.DefaultIndex)
 				.SetMaximumAsyncConnections(Test.Default.MaximumAsyncConnections)
 				.UsePrettyResponses()
 				.ExposeRawResponse();

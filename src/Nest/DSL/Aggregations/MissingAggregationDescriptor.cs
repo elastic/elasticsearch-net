@@ -3,25 +3,37 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
 using Nest.Resolvers;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class MissingAggregationDescriptor<T> : BucketAggregationBaseDescriptor<MissingAggregationDescriptor<T>, T>
-		where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<MissingAggregator>))]
+	public interface IMissingAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		internal PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker Field { get; set; }
+	}
+
+	public class MissingAggregator : BucketAggregator, IMissingAggregator
+	{
+		public PropertyPathMarker Field { get; set; }
+	}
+
+	public class MissingAggregationDescriptor<T> : BucketAggregationBaseDescriptor<MissingAggregationDescriptor<T>, T>, IMissingAggregator where T : class
+	{
+		PropertyPathMarker IMissingAggregator.Field { get; set; }
 		
 		public MissingAggregationDescriptor<T> Field(string field)
 		{
-			this._Field = field;
+			((IMissingAggregator)this).Field = field;
 			return this;
 		}
 
 		public MissingAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
 		{
-			this._Field = field;
+			((IMissingAggregator)this).Field = field;
 			return this;
 		}
 	}

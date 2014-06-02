@@ -18,7 +18,7 @@ namespace Nest
 		public IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector)
 		{
 			return this.Dispatch<MultiSearchDescriptor, MultiSearchRequestParameters, MultiSearchResponse>(
-				multiSearchSelector,
+				multiSearchSelector(new MultiSearchDescriptor(this.Infer)),
 				(p, d) =>
 				{
 					var json = Serializer.SerializeMultiSearch(d);
@@ -34,7 +34,7 @@ namespace Nest
 			Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector)
 		{
 			return this.DispatchAsync<MultiSearchDescriptor, MultiSearchRequestParameters, MultiSearchResponse, IMultiSearchResponse>(
-				multiSearchSelector,
+				multiSearchSelector(new MultiSearchDescriptor(this.Infer)),
 				(p, d) =>
 				{
 					var json = Serializer.SerializeMultiSearch(d);

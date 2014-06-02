@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Integration.Filter
 				true);
 
 			this.DoFilterTest(
-				f => f.Script(s => s.Script("doc['id'].value == param1").Params(p => p.Add("param1", _LookFor.Id)).Lang(Lang.mvel)),
+				f => f.Script(s => s.Script("doc['id'].value == param1").Params(p => p.Add("param1", _LookFor.Id)).Lang("mvel")),
 				_LookFor,
 				true);
 

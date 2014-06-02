@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using Elasticsearch.Net.Connection;
 using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
@@ -24,8 +26,8 @@ namespace Nest.Tests.Integration.RawCalls
 		[Test]
 		public void Calling_A_Null_Field_Should_Not_Throw_With_ElasticsearchNet_Serializer()
 		{
-			var client = new ElasticsearchClient();
-			var result = client.Search("{ size: 10}");
+			var client = new ElasticsearchClient(new ConnectionConfiguration(ElasticsearchConfiguration.CreateBaseUri()));
+			var result = client.Search("_all","elasticsearchprojects","{ size: 10}");
 			var hit = result.Response["hits"]["hits"][0];
 				
 			Assert.DoesNotThrow(() => { var x = hit["testfield"]; });
@@ -37,8 +39,8 @@ namespace Nest.Tests.Integration.RawCalls
 
 			var source = hit["_source"];
 			((object) source).Should().NotBeNull();
-			Assert.DoesNotThrow(() => { var x = source["name"]; });
-			string field = source["name"];
+			Assert.DoesNotThrow(() => { var x = source["country"]; });
+			string field = source["country"];
 
 			field.Should().NotBeNullOrWhiteSpace();
 		}

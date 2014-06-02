@@ -6,37 +6,33 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CustomJsonConverter))]
-	public class NestedAggregationDescriptor<T> : BucketAggregationBaseDescriptor<NestedAggregationDescriptor<T>, T>
-		, ICustomJson
-		where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<NestedAggregator>))]
+	public interface INestedAggregator : IBucketAggregator
 	{
-		internal class NestedAgg
-		{
-			[JsonProperty("path")] 
-			internal PropertyPathMarker _Path;
-		}
+		[JsonProperty("path")] 
+		PropertyPathMarker Path { get; set;}
+	}
 
-		internal NestedAgg _Nested;
+	public class NestedAggregator : BucketAggregator, INestedAggregator
+	{
+		public PropertyPathMarker Path { get; set; }
+	}
 
-
+	public class NestedAggregationDescriptor<T> : BucketAggregationBaseDescriptor<NestedAggregationDescriptor<T>, T>, INestedAggregator where T : class
+	{
+		PropertyPathMarker INestedAggregator.Path { get; set; }
+		
 		public NestedAggregationDescriptor<T> Path(string path)
 		{
-			this._Nested = new NestedAgg();
-			this._Nested._Path = path;
+			((INestedAggregator)this).Path = path;
 			return this;
 		}
 
 		public NestedAggregationDescriptor<T> Path(Expression<Func<T, object>> path)
 		{
-			this._Nested = new NestedAgg();
-			this._Nested._Path = path;
+			((INestedAggregator)this).Path = path;
 			return this;
-		}
-
-		object ICustomJson.GetCustomJson()
-		{
-			return this._Nested;
 		}
 	}
 }

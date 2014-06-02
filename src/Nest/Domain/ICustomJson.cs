@@ -2,9 +2,8 @@
 
 namespace Nest
 {
-
 	//If an object implements this then it can handle its own json representation
-	internal interface ICustomJson
+	public interface ICustomJson
 	{
 		object GetCustomJson();
 	}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Query.Behaviour;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
@@ -10,52 +11,118 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class FuzzyDateQueryDescriptor<T> : IQuery where T : class
+	public interface IFuzzyDateQuery : IFuzzyQuery
 	{
-		internal PropertyPathMarker _Field { get; set; }
-		[JsonProperty(PropertyName = "boost")]
-		internal double? _Boost { get; set; }
-		[JsonProperty(PropertyName = "min_similarity")]
-		internal string _MinSimilarity { get; set; }
 		[JsonProperty(PropertyName = "value")]
-		internal DateTime? _Value { get; set; }
+		DateTime? Value { get; set; }
+	}
+	
+	public class FuzzyDateQuery : PlainQuery, IFuzzyDateQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Fuzzy = this;
+		}
+		bool IQuery.IsConditionless { get { return false; } }
+		PropertyPathMarker IFieldNameQuery.GetFieldName() { return this.Field; }
+		void IFieldNameQuery.SetFieldName(string fieldName) { this.Field = fieldName; }
+
+		public PropertyPathMarker Field { get; set; }
+		public double? Boost { get; set; }
+		public string Fuzziness { get; set; }
+		public RewriteMultiTerm? Rewrite { get; set; }
+		public int? MaxExpansions { get; set; }
+		public bool? Transpositions { get; set; }
+		public bool? UnicodeAware { get; set; }
+		public DateTime? Value { get; set; }
+	}
+
+	public class FuzzyDateQueryDescriptor<T> : IFuzzyDateQuery where T : class
+	{
+		PropertyPathMarker IFuzzyQuery.Field { get; set; }
+		
+		double? IFuzzyQuery.Boost { get; set; }
+		
+		int? IFuzzyQuery.MaxExpansions { get; set; }
+		
+		string IFuzzyQuery.Fuzziness { get; set; }
+		
+		DateTime? IFuzzyDateQuery.Value { get; set; }
+
+		bool? IFuzzyQuery.Transpositions { get; set; }
+
+		bool? IFuzzyQuery.UnicodeAware { get; set; }
+
+		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._Field.IsConditionless() || this._Value == null;
+				return ((IFuzzyDateQuery)this).Field.IsConditionless() || ((IFuzzyDateQuery)this).Value == null;
 			}
 		}
-
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			((IFuzzyQuery)this).Field = fieldName;
+		}
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return ((IFuzzyQuery)this).Field;
+		}
+		
 		public FuzzyDateQueryDescriptor<T> OnField(string field)
 		{
-			this._Field = field;
+			((IFuzzyDateQuery)this).Field = field;
 			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			((IFuzzyDateQuery)this).Field = objectPath;
 			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> Boost(double boost)
 		{
-			this._Boost = boost;
+			((IFuzzyDateQuery)this).Boost = boost;
 			return this;
 		}
-		public FuzzyDateQueryDescriptor<T> MinSimilarity(string minSimilarity)
+			
+		public FuzzyDateQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
-			this._MinSimilarity = minSimilarity;
+			((IFuzzyQuery)this).Fuzziness = fuzziness.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
-		public FuzzyDateQueryDescriptor<T> Value(DateTime value)
+		public FuzzyDateQueryDescriptor<T> Fuzziness(string fuzziness)
 		{
-			this._Value = value;
+			((IFuzzyQuery)this).Fuzziness = fuzziness;
 			return this;
 		}
+		public FuzzyDateQueryDescriptor<T> Transpositions(bool enable = true)
+		{
+			((IFuzzyQuery)this).Transpositions = enable;
+			return this;
+		}
+		public FuzzyDateQueryDescriptor<T> UnicodeAware(bool enable = true)
+		{
+			((IFuzzyQuery)this).UnicodeAware = enable;
+			return this;
+		}
+		
+		public FuzzyDateQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
+		{
+			((IFuzzyQuery)this).Rewrite = rewrite;
+			return this;
+		}
+
+		public FuzzyDateQueryDescriptor<T> MaxExpansions(int maxExpansions)
+		{
+			((IFuzzyQuery)this).MaxExpansions = maxExpansions;
+			return this;
+		}
+
 		public FuzzyDateQueryDescriptor<T> Value(DateTime? value)
 		{
-			this._Value = value;
+			((IFuzzyDateQuery)this).Value = value;
 			return this;
 		}
 	}

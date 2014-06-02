@@ -2,62 +2,89 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class ConstantScoreQueryDescriptor<T> : IQuery where T : class
+	[JsonConverter(typeof(ReadAsTypeConverter<ConstantScoreQueryDescriptor<object>>))]
+	public interface IConstantScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		internal BaseQuery _Query { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		internal BaseFilter _Filter { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
+		IFilterContainer Filter { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
-		internal double? _Boost { get; set; }
+		double? Boost { get; set; }
+	}
+
+	public class ConstantScoreQuery : PlainQuery, ICustomScoreQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.CustomScore = this;
+		}
+
+		public bool IsConditionless { get { return false; } }
+		public string Lang { get; set; }
+		public string Script { get; set; }
+		public Dictionary<string, object> Params { get; set; }
+		public IQueryContainer Query { get; set; }
+	}
+
+	public class ConstantScoreQueryDescriptor<T> : IConstantScoreQuery where T : class
+	{
+		IQueryContainer IConstantScoreQuery.Query { get; set; }
+
+		IFilterContainer IConstantScoreQuery.Filter { get; set; }
+
+		double? IConstantScoreQuery.Boost { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				if (this._Query == null && this._Filter == null)
+				if (((IConstantScoreQuery)this).Query == null && ((IConstantScoreQuery)this).Filter == null)
 					return true;
-				if (this._Filter == null && this._Query != null)
-					return this._Query.IsConditionless;
-				if (this._Filter != null && this._Query == null)
-					return this._Filter.IsConditionless;
+				if (((IConstantScoreQuery)this).Filter == null && ((IConstantScoreQuery)this).Query != null)
+					return ((IConstantScoreQuery)this).Query.IsConditionless;
+				if (((IConstantScoreQuery)this).Filter != null && ((IConstantScoreQuery)this).Query == null)
+					return ((IConstantScoreQuery)this).Filter.IsConditionless;
 				return false;
 			}
 		}
 
-		public ConstantScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public ConstantScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
-			this._Filter = null;
+			((IConstantScoreQuery)this).Filter = null;
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
-			this._Query = q;
+			((IConstantScoreQuery)this).Query = q;
 			return this;
 		}
 
-		public ConstantScoreQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
+		public ConstantScoreQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
-			this._Query = null;
+			((IConstantScoreQuery)this).Query = null;
 			var filter = new FilterDescriptor<T>();
 			var f = filterSelector(filter);
 
-			this._Filter = f;
+			((IConstantScoreQuery)this).Filter = f;
 			return this;
 		}
 
 		public ConstantScoreQueryDescriptor<T> Boost(double boost)
 		{
-			this._Boost = boost;
+			((IConstantScoreQuery)this).Boost = boost;
 			return this;
 		}
 	}

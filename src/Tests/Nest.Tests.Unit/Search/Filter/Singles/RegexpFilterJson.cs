@@ -77,8 +77,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 								""flags"": ""INTERSECTION|COMPLEMENT|EMPTY""
 							},
 							_cache:true,
-							_name : ""regexp_filter"",
-							_cache_key:""2problems""
+							_cache_key:""2problems"",
+							_name : ""regexp_filter""
 						}
 					}
 			}";

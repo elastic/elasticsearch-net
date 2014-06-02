@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
@@ -11,95 +12,126 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class TermsStatsFacetDescriptor<T> : BaseFacetDescriptor<TermsStatsFacetDescriptor<T>,T> where T : class
+	[JsonConverter(typeof(ReadAsTypeConverter<TermsStatsFacetRequest>))]
+	public interface ITermsStatsFacetRequest : IFacetRequest
 	{
-		[JsonProperty(PropertyName = "fields")]
-		internal IEnumerable<string> _Fields { get; set; }
-
 		[JsonProperty(PropertyName = "key_field")]
-		internal PropertyPathMarker _KeyField { get; set; }
+		PropertyPathMarker KeyField { get; set; }
 
 		[JsonProperty(PropertyName = "value_field")]
-		internal PropertyPathMarker _ValueField { get; set; }
+		PropertyPathMarker ValueField { get; set; }
 
 		[JsonProperty(PropertyName = "key_script")]
-		internal string _KeyScript { get; set; }
+		string KeyScript { get; set; }
 
 		[JsonProperty(PropertyName = "value_script")]
-		internal string _ValueScript { get; set; }
+		string ValueScript { get; set; }
 
 		[JsonProperty(PropertyName = "order")]
-		[JsonConverter(typeof(StringEnumConverter))]
-		internal TermsStatsOrder? _Order { get; set; }
+		[JsonConverter(typeof (StringEnumConverter))]
+		TermsStatsOrder? Order { get; set; }
 
 		[JsonProperty(PropertyName = "lang")]
-		internal string _Lang { get; set; }
+		string Lang { get; set; }
 
 		[JsonProperty(PropertyName = "size")]
-		internal int? _Size { get; set; }
+		int? Size { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> _Params { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		Dictionary<string, object> Params { get; set; }
+	}
+
+	public class TermsStatsFacetRequest : FacetRequest, ITermsStatsFacetRequest
+	{
+		public PropertyPathMarker KeyField { get; set; }
+		public PropertyPathMarker ValueField { get; set; }
+		public string KeyScript { get; set; }
+		public string ValueScript { get; set; }
+		public TermsStatsOrder? Order { get; set; }
+		public string Lang { get; set; }
+		public int? Size { get; set; }
+		public Dictionary<string, object> Params { get; set; }
+	}
+
+	public class TermsStatsFacetDescriptor<T> : BaseFacetDescriptor<TermsStatsFacetDescriptor<T>,T>, ITermsStatsFacetRequest where T : class
+	{
+		public ITermsStatsFacetRequest Self { get { return this; } }
+
+		PropertyPathMarker ITermsStatsFacetRequest.KeyField { get; set; }
+
+		PropertyPathMarker ITermsStatsFacetRequest.ValueField { get; set; }
+
+		string ITermsStatsFacetRequest.KeyScript { get; set; }
+
+		string ITermsStatsFacetRequest.ValueScript { get; set; }
+
+		TermsStatsOrder? ITermsStatsFacetRequest.Order { get; set; }
+
+		string ITermsStatsFacetRequest.Lang { get; set; }
+
+		int? ITermsStatsFacetRequest.Size { get; set; }
+
+		Dictionary<string, object> ITermsStatsFacetRequest.Params { get; set; }
 
 		public TermsStatsFacetDescriptor<T> KeyField(Expression<Func<T, object>> objectPath)
 		{
 			objectPath.ThrowIfNull("objectPath");
-			this._KeyField = objectPath;
+			Self.KeyField = objectPath;
 			return this;
 		}
 		public TermsStatsFacetDescriptor<T> KeyField(string keyField)
 		{
 			keyField.ThrowIfNull("keyField");
-			this._KeyField = keyField;
+			Self.KeyField = keyField;
 			return this;
 		}
 		public TermsStatsFacetDescriptor<T> KeyScript(string keyScript)
 		{
 			keyScript.ThrowIfNull("keyScript");
-			this._KeyScript = keyScript;
+			Self.KeyScript = keyScript;
 			return this;
 		}
 		public TermsStatsFacetDescriptor<T> ValueField(Expression<Func<T, object>> objectPath)
 		{
 			objectPath.ThrowIfNull("objectPath");
-			this._ValueField = objectPath;
+			Self.ValueField = objectPath;
 			return this;
 		}
 		public TermsStatsFacetDescriptor<T> ValueField(string valueField)
 		{
 			valueField.ThrowIfNull("valueField");
-			this._ValueField = valueField;
+			Self.ValueField = valueField;
 			return this;
 		}
 		public TermsStatsFacetDescriptor<T> ValueScript(string valueScript)
 		{
 			valueScript.ThrowIfNull("valueScript");
-			this._ValueScript = valueScript;
+			Self.ValueScript = valueScript;
 			return this;
 		}
 		public TermsStatsFacetDescriptor<T> Language(string language)
 		{
 			language.ThrowIfNull("language");
-			this._Lang = language;
+			Self.Lang = language;
 			return this;
 		}
 		public TermsStatsFacetDescriptor<T> Size(int size)
 		{
 			size.ThrowIfNull("size");
-			this._Size = size;
+			Self.Size = size;
 			return this;
 		}
 		public TermsStatsFacetDescriptor<T> Order(TermsStatsOrder order)
 		{
-			this._Order = order;
+			Self.Order = order;
 			return this;
 		}
 
 		public TermsStatsFacetDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
-			this._Params = paramDictionary(new FluentDictionary<string, object>());
+			Self.Params = paramDictionary(new FluentDictionary<string, object>());
 			return this;
 		}
 	}

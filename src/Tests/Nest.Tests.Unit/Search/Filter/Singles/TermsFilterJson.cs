@@ -42,9 +42,9 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				filter : {
 						terms: {
 							""name"": [""elasticsearch.pm""],
+							execution: ""bool"",
 							_cache:false,
-							_name: ""terms_filter"",
-							execution: ""bool""
+							_name: ""terms_filter""
 						}
 
 					}

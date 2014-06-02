@@ -34,7 +34,7 @@ namespace Nest.Tests.Integration.Core
 		[Test]
 		public void DocAsUpsert()
 		{
-			var project = this._client.Source<ElasticsearchProject>(s => s.Id(2));
+			var project = this._client.Source<ElasticsearchProject>(s => s.Id(1));
 			Assert.NotNull(project);
 			Assert.Greater(project.LOC, 0);
 			var loc = project.LOC;
@@ -47,7 +47,7 @@ namespace Nest.Tests.Integration.Core
 				.DocAsUpsert()
 				.Refresh()
 			);
-			project = this._client.Source<ElasticsearchProject>(s => s.Id(2));
+			project = this._client.Source<ElasticsearchProject>(s => s.Id(1));
 			Assert.AreEqual(project.LOC, loc + 10);
 			Assert.AreNotEqual(project.Version, "1");
 		}

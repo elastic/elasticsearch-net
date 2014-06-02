@@ -3,46 +3,74 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SpanNotQueryDescriptor<T> : ISpanQuery, IQuery where T : class
+	[JsonConverter(typeof(ReadAsTypeConverter<SpanNotQuery<object>>))]
+	public interface ISpanNotQuery : ISpanSubQuery
 	{
 		[JsonProperty(PropertyName = "include")]
-		internal SpanQueryDescriptor<T> _Include { get; set; }
+		ISpanQuery Include { get; set; }
+
 		[JsonProperty(PropertyName = "exclude")]
-		internal SpanQueryDescriptor<T> _Exclude { get; set; }
+		ISpanQuery Exclude { get; set; }
+	}
+
+	public class SpanNotQuery : PlainQuery, ISpanNotQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.SpanNot = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public ISpanQuery Include { get; set; }
+		public ISpanQuery Exclude { get; set; }
+	}
+
+	public class SpanNotQuery<T> : ISpanNotQuery where T : class
+	{
+		ISpanQuery ISpanNotQuery.Include { get; set; }
+
+		ISpanQuery ISpanNotQuery.Exclude { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._Include == null && this._Exclude == null
-					|| (this._Include != null && (this._Include as IQuery).IsConditionless)
-					|| (this._Exclude != null && (this._Exclude as IQuery).IsConditionless);
+				var excludeQuery = ((ISpanNotQuery)this).Exclude as IQuery;
+				var includeQuery = ((ISpanNotQuery)this).Include as IQuery;
+
+				return excludeQuery == null && includeQuery == null
+					|| (includeQuery == null && excludeQuery.IsConditionless)
+					|| (excludeQuery == null && includeQuery.IsConditionless)
+					|| (excludeQuery != null && excludeQuery.IsConditionless && includeQuery != null && includeQuery.IsConditionless);
 			}
 		}
 
-		public SpanNotQueryDescriptor<T> Include(Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>> selector)
+
+
+		public SpanNotQuery<T> Include(Func<SpanQuery<T>, SpanQuery<T>> selector)
 		{
 			if (selector == null)
 				return this;
-			var descriptors = new List<SpanQueryDescriptor<T>>();
-			var span = new SpanQueryDescriptor<T>();
+			var descriptors = new List<SpanQuery<T>>();
+			var span = new SpanQuery<T>();
 			var q = selector(span);
-			this._Include = q;
+			((ISpanNotQuery)this).Include = q;
 			return this;
 		}
-		public SpanNotQueryDescriptor<T> Exclude(Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>> selector)
+		public SpanNotQuery<T> Exclude(Func<SpanQuery<T>, SpanQuery<T>> selector)
 		{
 			if (selector == null)
 				return this;
-			var descriptors = new List<SpanQueryDescriptor<T>>();
-			var span = new SpanQueryDescriptor<T>();
+			var descriptors = new List<SpanQuery<T>>();
+			var span = new SpanQuery<T>();
 			var q = selector(span);
-			this._Exclude = q;
+			((ISpanNotQuery)this).Exclude = q;
 			return this;
 		}
 	}

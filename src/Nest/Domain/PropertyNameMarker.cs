@@ -44,6 +44,19 @@ namespace Nest
 		{
 			return type == null ? null : new PropertyNameMarker { Type = type };
 		}
+		
+		bool IEquatable<PropertyNameMarker>.Equals(PropertyNameMarker other)
+		{
+			return Equals(other);
+		}
+		public override bool Equals(object obj)
+		{
+			var s = obj as string;
+			if (!s.IsNullOrEmpty()) return this.EqualsString(s);
+			var pp = obj as PropertyNameMarker;
+			if (pp != null) return this.EqualsMarker(pp);
+			return base.Equals(obj);
+		}
 
 		public override int GetHashCode()
 		{
@@ -51,9 +64,13 @@ namespace Nest
 				return this.Name.GetHashCode();
 			return this.Expression != null ? this.Expression.GetHashCode() : 0;
 		}
-		public bool Equals(PropertyNameMarker other)
+		public bool EqualsMarker(PropertyNameMarker other)
 		{
 			return other != null && this.GetHashCode() == other.GetHashCode();
+		}
+		public bool EqualsString(string other)
+		{
+			return !other.IsNullOrEmpty() && other == this.Name;
 		}
 	}
 	public static class PropertyNameMarkerExtensions

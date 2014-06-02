@@ -1,4 +1,4 @@
-{
+  {
   "query": {
     "bool": {
       "must": [
@@ -11,11 +11,9 @@
                     {
                       "terms": {
                         "assignedUsers": [
-                          [
-                            "6625c0bf-5414-4985-880c-3b34152e9453",
-                            "7ff7bc06-c75e-4ed1-9732-f3c6c9743670",
-                            "e4c48ebf-7602-43a3-b82f-1a83e2ae1c0b"
-                          ]
+                          "6625c0bf-5414-4985-880c-3b34152e9453",
+                          "7ff7bc06-c75e-4ed1-9732-f3c6c9743670",
+                          "e4c48ebf-7602-43a3-b82f-1a83e2ae1c0b"
                         ]
                       }
                     },
@@ -41,7 +39,7 @@
                       }
                     }
                   ],
-                  "minimum_number_should_match": 1
+                  "minimum_should_match": "1"
                 }
               },
               {

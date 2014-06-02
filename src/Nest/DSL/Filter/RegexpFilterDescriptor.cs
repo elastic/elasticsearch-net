@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
@@ -11,42 +13,62 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class RegexpFilterDescriptor<T> : FilterBase where T : class
+	public interface IRegexpFilter : IFieldNameFilter
 	{
 		[JsonProperty("value")]
-		internal string _Value { get; set; }
+		string Value { get; set; }
 
 		[JsonProperty("flags")]
-		internal string _Flags { get; set; }
+		string Flags { get; set; }
 
-		internal PropertyPathMarker _Field { get; set; }
+	}
 
-		internal override bool IsConditionless
+	public class RegexpFilter : PlainFilter, IRegexpFilter
+	{
+		protected internal override void WrapInContainer(IFilterContainer container)
+		{
+			container.Regexp = this;
+		}
+
+		public string Value { get; set; }
+		public string Flags { get; set; }
+		public PropertyPathMarker Field { get; set; }
+	}
+
+	public class RegexpFilterDescriptor<T> : FilterBase, IRegexpFilter where T : class
+	{
+		string IRegexpFilter.Value { get; set; }
+
+		string IRegexpFilter.Flags { get; set; }
+
+		PropertyPathMarker IFieldNameFilter.Field { get; set; }
+
+		bool IFilter.IsConditionless
 		{
 			get
 			{
-				return this._Field.IsConditionless() || this._Value.IsNullOrEmpty();
+				return ((IRegexpFilter)this).Field.IsConditionless() || ((IRegexpFilter)this).Value.IsNullOrEmpty();
 			}
 		}
 
 		public RegexpFilterDescriptor<T> Value(string regex)
 		{
-			this._Value = regex;
+			((IRegexpFilter)this).Value = regex;
 			return this;
 		}
 		public RegexpFilterDescriptor<T> Flags(string flags)
 		{
-			this._Flags = flags;
+			((IRegexpFilter)this).Flags = flags;
 			return this;
 		}
 		public RegexpFilterDescriptor<T> OnField(string path)
 		{
-			this._Field = path;
+			((IRegexpFilter)this).Field = path;
 			return this;
 		}
 		public RegexpFilterDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			((IRegexpFilter)this).Field = objectPath;
 			return this;
 		}
 

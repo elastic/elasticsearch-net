@@ -4,7 +4,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	internal class ElasticsearchPathInfo<T> where T : FluentRequestParameters<T>, new()
+	public class ElasticsearchPathInfo<T> where T : FluentRequestParameters<T>, new()
 	{
 		public PathInfoHttpMethod HttpMethod { get; set; }
 		public string Index { get; set; }

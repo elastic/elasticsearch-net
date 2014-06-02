@@ -15,7 +15,6 @@ namespace Nest
 	/// <typeparam name="T">Type of document</typeparam>
 	public class MatchPhrasePrefixQueryDescriptor<T> : MatchQueryDescriptor<T> where T : class
 	{
-		[JsonProperty(PropertyName = "type")]
-		internal override string _Type { get { return "phrase_prefix"; } }
+		protected override string _type { get { return "phrase_prefix"; } }
 	}
 }

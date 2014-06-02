@@ -67,6 +67,7 @@ namespace Nest.Tests.Integration.Search
 			this.RegisterPercolateTest(); // I feel a little dirty.
 			var c = this._client;
 			var name = "mypercolator";
+
 			var r = c.Percolate<ElasticsearchProject>(new ElasticsearchProject()
 			{
 				Name = "elasticsearch.pm",

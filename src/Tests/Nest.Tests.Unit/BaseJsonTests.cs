@@ -76,6 +76,9 @@ namespace Nest.Tests.Unit
 			var file = this.GetFileFromMethod(method, fileName);
 
 			var expected = File.ReadAllText(file);
+			//Assert.AreEqual(expected, json);
+
+
 			Assert.True(json.JsonEquals(expected), this.PrettyPrint(json));
 		}
 
@@ -85,10 +88,16 @@ namespace Nest.Tests.Unit
 			this.JsonNotEquals(json, method, fileName);
 		}
 
+		protected string ReadMethodJson(MethodBase method, string fileName = null)
+		{
+			var file = this.GetFileFromMethod(method, fileName);
+			var expected = File.ReadAllText(file);
+			return expected;
+		}
+
 		protected void JsonNotEquals(string json, MethodBase method, string fileName = null)
 		{
 			var file = this.GetFileFromMethod(method, fileName);
-
 			var expected = File.ReadAllText(file);
 			Assert.False(json.JsonEquals(expected), this.PrettyPrint(json));
 		}

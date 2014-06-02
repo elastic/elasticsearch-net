@@ -20,11 +20,11 @@ namespace Nest.Tests.Unit.Search.Suggest
             var json = TestElasticClient.Serialize(phraseSuggestDescriptor);
 
             var expected = @"{
-                              ""gram_size"": 2,
-                              ""max_errors"": 0.5,
                               ""field"": ""bigram"",
                               ""analyzer"": ""body"",
-                              ""size"": 1
+                              ""size"": 1,
+                              ""gram_size"": 2,
+                              ""max_errors"": 0.5,
                             }";
 
             Assert.True(json.JsonEquals(expected), json);
@@ -35,11 +35,12 @@ namespace Nest.Tests.Unit.Search.Suggest
         {
             var phraseSuggestDescriptor = new PhraseSuggestDescriptor<ElasticsearchProject>()
                 .Analyzer("body")
-                .DirectGenerator(m => m.OnField("body").SuggestMode(SuggestMode.Always).MinWordLength(3));
+                .DirectGenerator(m => m.OnField("body").SuggestMode(SuggestModeOptions.Always).MinWordLength(3));
 
             var json = TestElasticClient.Serialize(phraseSuggestDescriptor);
 
             var expected = @"{
+                              ""analyzer"": ""body"",
                               ""direct_generator"": [
                                 {
                                   ""field"": ""body"",
@@ -47,7 +48,6 @@ namespace Nest.Tests.Unit.Search.Suggest
                                   ""min_word_len"": 3
                                 }
                               ],
-                              ""analyzer"": ""body""
                             }";
 
             Assert.True(json.JsonEquals(expected), json);
@@ -57,7 +57,6 @@ namespace Nest.Tests.Unit.Search.Suggest
 		public void PhraseSuggestOnSearchTest()
 		{
 			var search = this._client.Search<ElasticsearchProject>(s => s
-				.SuggestGlobalText("glob")
 				.SuggestPhrase("myphrasesuggest", ts => ts
 					.Text("n")
 					.Analyzer("body")
@@ -70,15 +69,14 @@ namespace Nest.Tests.Unit.Search.Suggest
 
 			var expected = @"{
 				suggest: {
-					text: ""glob"",
 					myphrasesuggest: {
 						text: ""n"",
 						phrase: {
-							  ""gram_size"": 2,
-                              ""max_errors"": 0.5,
                               ""field"": ""bigram"",
                               ""analyzer"": ""body"",
-                              ""size"": 1
+                              ""size"": 1,
+							  ""gram_size"": 2,
+                              ""max_errors"": 0.5
 						}
 					}
 				}

@@ -18,7 +18,7 @@ namespace Nest
 		where K : class
 	{
 		[JsonProperty(PropertyName = "query")]
-		internal BaseQuery _Query { get; set; }
+		internal IQueryContainer _Query { get; set; }
 
 		[JsonProperty(PropertyName = "doc")]
 		internal K _Document { get; set; }
@@ -35,7 +35,7 @@ namespace Nest
 		/// <summary>
 		/// Optionally specify more search options such as facets, from/to etcetera.
 		/// </summary>
-		public PercolateCountDescriptor<T, K> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public PercolateCountDescriptor<T, K> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var d = querySelector(new QueryDescriptor<T>());

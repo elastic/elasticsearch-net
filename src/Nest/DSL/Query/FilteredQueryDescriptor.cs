@@ -2,51 +2,74 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class FilteredQueryDescriptor<T> : IQuery where T : class
+	[JsonConverter(typeof(ReadAsTypeConverter<FilteredQueryDescriptor<object>>))]
+	public interface IFilteredQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		internal BaseQuery _Query { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		internal BaseFilter _Filter { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
+		IFilterContainer Filter { get; set; }
+	}
+
+	public class FilteredQuery : PlainQuery, IFilteredQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Filtered = this;
+		}
+
+		bool IQuery.IsConditionless { get {return false;}}
+		public IQueryContainer Query { get; set; }
+		public IFilterContainer Filter { get; set; }
+	}
+
+	public class FilteredQueryDescriptor<T> : IFilteredQuery where T : class
+	{
+		IQueryContainer IFilteredQuery.Query { get; set; }
+
+		IFilterContainer IFilteredQuery.Filter { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				if (this._Query == null && this._Filter == null)
+				if (((IFilteredQuery)this).Query == null && ((IFilteredQuery)this).Filter == null)
 					return true;
-				if (this._Filter == null && this._Query != null)
-					return this._Query.IsConditionless;
-				if (this._Filter != null && this._Query == null)
-					return this._Filter.IsConditionless;
-				return this._Query.IsConditionless && this._Filter.IsConditionless;
+				if (((IFilteredQuery)this).Filter == null && ((IFilteredQuery)this).Query != null)
+					return ((IFilteredQuery)this).Query.IsConditionless;
+				if (((IFilteredQuery)this).Filter != null && ((IFilteredQuery)this).Query == null)
+					return ((IFilteredQuery)this).Filter.IsConditionless;
+				return ((IFilteredQuery)this).Query.IsConditionless && ((IFilteredQuery)this).Filter.IsConditionless;
 			}
 		}
 
-		public FilteredQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public FilteredQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
-			this._Query = q;
+			((IFilteredQuery)this).Query = q;
 			return this;
 		}
 
-		public FilteredQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
+		public FilteredQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 			var filter = new FilterDescriptor<T>();
 			var f = filterSelector(filter);
 
-			this._Filter = f;
+			((IFilteredQuery)this).Filter = f;
 			return this;
 		}
 	}

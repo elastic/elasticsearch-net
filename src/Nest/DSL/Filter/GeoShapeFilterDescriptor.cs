@@ -2,42 +2,66 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers;
+using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class GeoShapeFilterDescriptor : FilterBase
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IGeoShapeBaseFilter : IFieldNameFilter
 	{
-		internal override bool IsConditionless
+	}
+
+	public interface IGeoShapeFilter : IGeoShapeBaseFilter
+	{
+		[JsonProperty("shape")]
+		GeoShapeVector Shape { get; set; }
+	}
+
+	public class GeoShapeFilter : PlainFilter, IGeoShapeFilter
+	{
+		protected internal override void WrapInContainer(IFilterContainer container)
+		{
+			container.GeoShape = this;
+		}
+
+		public PropertyPathMarker Field { get; set; }
+
+		public GeoShapeVector Shape { get; set; }
+	}
+
+	public class GeoShapeFilterDescriptor : FilterBase, IGeoShapeFilter
+	{
+		bool IFilter.IsConditionless
 		{
 			get
 			{
-				return this._Shape == null || !this._Shape.Coordinates.HasAny();
+				return ((IGeoShapeFilter)this).Shape == null || !((IGeoShapeFilter)this).Shape.Coordinates.HasAny();
 			}
-
 		}
 
-		[JsonProperty("shape")]
-		internal GeoShapeVector _Shape { get; set; }
-
+		PropertyPathMarker IFieldNameFilter.Field { get; set; }
+		GeoShapeVector IGeoShapeFilter.Shape { get; set; }
 
 		public GeoShapeFilterDescriptor Type(string type)
 		{
-			if (this._Shape == null)
-				this._Shape = new GeoShapeVector();
-			this._Shape.Type = type;
+			if (((IGeoShapeFilter)this).Shape == null)
+				((IGeoShapeFilter)this).Shape = new GeoShapeVector();
+			((IGeoShapeFilter)this).Shape.Type = type;
 			return this;
 		}
 
 		public GeoShapeFilterDescriptor Coordinates(IEnumerable<IEnumerable<double>> coordinates)
 		{
-			if (this._Shape == null)
-				this._Shape = new GeoShapeVector();
-			this._Shape.Coordinates = coordinates;
+			if (((IGeoShapeFilter)this).Shape == null)
+				((IGeoShapeFilter)this).Shape = new GeoShapeVector();
+			((IGeoShapeFilter)this).Shape.Coordinates = coordinates;
 			return this;
 		}
-
+	
 	}
 
 }

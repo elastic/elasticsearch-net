@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	internal enum PathInfoHttpMethod
+	public enum PathInfoHttpMethod
 	{
 		GET,
 		POST,

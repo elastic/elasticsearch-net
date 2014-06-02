@@ -1,110 +1,100 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
 
 namespace Nest
 {
-	internal static class BoolBaseQueryDescriptorExtensions
-	{
-		internal static bool CanMergeMustAndMustNots(this BoolBaseQueryDescriptor bq)
-		{
-			return bq == null || !bq._ShouldQueries.HasAny();
-		}
-
-		internal static bool CanJoinShould(this BoolBaseQueryDescriptor bq)
-		{
-			return bq == null
-				|| (
-					(bq._ShouldQueries.HasAny() && !bq._MustQueries.HasAny() && !bq._MustNotQueries.HasAny())
-					|| !bq._ShouldQueries.HasAny()
-				);
-		}
-
-		internal static IEnumerable<BaseQuery> MergeShouldQueries(this BaseQuery lbq, BaseQuery rbq)
-		{
-			var lBoolDescriptor = lbq.BoolQueryDescriptor;
-			var lHasShouldQueries = lBoolDescriptor != null &&
-			  lBoolDescriptor._ShouldQueries.HasAny();
-
-			var rBoolDescriptor = rbq.BoolQueryDescriptor;
-			var rHasShouldQueries = rBoolDescriptor != null &&
-			  rBoolDescriptor._ShouldQueries.HasAny();
-
-
-			var lq = lHasShouldQueries ? lBoolDescriptor._ShouldQueries : new[] { lbq };
-			var rq = rHasShouldQueries ? rBoolDescriptor._ShouldQueries : new[] { rbq };
-
-			return lq.Concat(rq);
-		}
-	}
-
-
+	[JsonConverter(typeof(ReadAsTypeConverter<BoolBaseQueryDescriptor>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class BoolBaseQueryDescriptor
+	public interface IBoolQuery : IQuery
 	{
-		[JsonProperty("must")]
-		internal IEnumerable<BaseQuery> _MustQueries { get; set; }
+		[JsonProperty("must",
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		IEnumerable<IQueryContainer> Must { get; set; }
 
-		[JsonProperty("must_not")]
-		internal IEnumerable<BaseQuery> _MustNotQueries { get; set; }
+		[JsonProperty("must_not",
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		IEnumerable<IQueryContainer> MustNot { get; set; }
 
-		[JsonProperty("should")]
-		internal IEnumerable<BaseQuery> _ShouldQueries { get; set; }
+		[JsonProperty("should",
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		IEnumerable<IQueryContainer> Should { get; set; }
 
-		[JsonProperty("minimum_number_should_match")]
-		internal object _MinimumNumberShouldMatches { get; set; }
+		[JsonProperty("minimum_should_match")]
+		string MinimumShouldMatch { get; set; }
 
-		internal bool _HasOnlyMustNot()
-		{
-			return _MustNotQueries.HasAny() && !_ShouldQueries.HasAny() && !_MustQueries.HasAny();
-		}
-
-		internal bool _CanJoinMust()
-		{
-			return !_ShouldQueries.HasAny();
-		}
-		internal bool _CanJoinShould()
-		{
-			return (_ShouldQueries.HasAny() && !_MustQueries.HasAny() && !_MustNotQueries.HasAny())
-				|| !_ShouldQueries.HasAny();
-		}
-		internal bool _CanJoinMustNot()
-		{
-			return !_ShouldQueries.HasAny();
-		}
-	}
-
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class BoolQueryDescriptor<T> : BoolBaseQueryDescriptor, IQuery where T : class
-	{
 		[JsonProperty("disable_coord")]
-		internal bool? _DisableCoord { get; set; }
-
-		public BoolQueryDescriptor<T> DisableCoord()
-		{
-			this._DisableCoord = true;
-			return this;
-		}
-
-		
+		bool? DisableCoord { get; set; }
 
 		[JsonProperty("boost")]
-		internal double? _Boost { get; set; }
+		double? Boost { get; set; }
+	}
 
+	public class BoolQuery : PlainQuery, IBoolQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Bool = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+
+		public IEnumerable<IQueryContainer> Must { get; set; }
+		public IEnumerable<IQueryContainer> MustNot { get; set; }
+		public IEnumerable<IQueryContainer> Should { get; set; }
+		public string MinimumShouldMatch { get; set; }
+		public bool? DisableCoord { get; set; }
+		public double? Boost { get; set; }
+	}
+
+
+	public class BoolBaseQueryDescriptor : IBoolQuery
+	{
+		[JsonProperty("must")]
+		IEnumerable<IQueryContainer> IBoolQuery.Must { get; set; }
+
+		[JsonProperty("must_not")]
+		IEnumerable<IQueryContainer> IBoolQuery.MustNot { get; set; }
+
+		[JsonProperty("should")]
+		IEnumerable<IQueryContainer> IBoolQuery.Should { get; set; }
+
+		[JsonProperty("minimum_should_match")]
+		string IBoolQuery.MinimumShouldMatch { get; set; }
+		
+		[JsonProperty("disable_coord")]
+		bool? IBoolQuery.DisableCoord { get; set; }
+		
+		[JsonProperty("boost")]
+		double? IBoolQuery.Boost { get; set; }
+		
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				if (!this._MustQueries.HasAny() && !this._ShouldQueries.HasAny() && !this._MustNotQueries.HasAny())
+				var bq = ((IBoolQuery)this);
+
+				if (!bq.Must.HasAny() && !bq.Should.HasAny() && !bq.MustNot.HasAny())
 					return true;
-				return (this._MustNotQueries.HasAny() && this._MustNotQueries.All(q => q.IsConditionless))
-					|| (this._ShouldQueries.HasAny() && this._ShouldQueries.All(q => q.IsConditionless))
-					|| (this._MustQueries.HasAny() && this._MustQueries.All(q => q.IsConditionless));
+				return (bq.MustNot.HasAny() && bq.MustNot.All(q => q.IsConditionless))
+					|| (bq.Should.HasAny() && bq.Should.All(q => q.IsConditionless))
+					|| (bq.Must.HasAny() && bq.Must.All(q => q.IsConditionless));
 			}
+		}
+	}
+
+	public class BoolQueryDescriptor<T> : BoolBaseQueryDescriptor where T : class
+	{
+		public BoolQueryDescriptor<T> DisableCoord()
+		{
+			((IBoolQuery)this).DisableCoord = true;
+			return this;
 		}
 
 		/// <summary>
@@ -112,9 +102,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="minimumShouldMatches"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> MinimumNumberShouldMatch(int minimumShouldMatches)
+		public BoolQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatches)
 		{
-			this._MinimumNumberShouldMatches = minimumShouldMatches;
+			((IBoolQuery)this).MinimumShouldMatch = minimumShouldMatches.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
 		/// <summary>
@@ -122,9 +112,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="minimumShouldMatches"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> MinimumNumberShouldMatch(string minimumShouldMatches)
+		public BoolQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatches)
 		{
-			this._MinimumNumberShouldMatches = minimumShouldMatches;
+			((IBoolQuery)this).MinimumShouldMatch = minimumShouldMatches;
 			return this;
 		}
 
@@ -134,16 +124,16 @@ namespace Nest
 		/// <param name="boost"></param>
 		public BoolQueryDescriptor<T> Boost(double boost)
 		{
-			this._Boost = boost;
+			((IBoolQuery)this).Boost = boost;
 			return this;
 		}
 
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
-		public BoolQueryDescriptor<T> Must(params Func<QueryDescriptor<T>, BaseQuery>[] queries)
+		public BoolQueryDescriptor<T> Must(params Func<QueryDescriptor<T>, QueryContainer>[] queries)
 		{
-			var descriptors = new List<BaseQuery>();
+			var descriptors = new List<QueryContainer>();
 			foreach (var selector in queries)
 			{
 				var filter = new QueryDescriptor<T>();
@@ -152,34 +142,35 @@ namespace Nest
 					continue;
 				descriptors.Add(q);
 			}
-			this._MustQueries = descriptors.HasAny() ? descriptors : null;
+			((IBoolQuery)this).Must = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
-		public BoolQueryDescriptor<T> Must(params BaseQuery[] queries)
+		public BoolQueryDescriptor<T> Must(params QueryContainer[] queries)
 		{
-			var descriptors = new List<BaseQuery>();
+			var descriptors = new List<QueryContainer>();
 			foreach (var q in queries)
 			{
 				if (q.IsConditionless)
 					continue;
 				descriptors.Add(q);
 			}
-			this._MustQueries = descriptors.HasAny() ? descriptors : null;
+			((IBoolQuery)this).Must = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 
 		/// <summary>
-		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document. The minimum number of should clauses to match can be set using minimum_number_should_match parameter.
+		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document. 
+		/// The minimum number of should clauses to match can be set using minimum_should_match parameter.
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> MustNot(params Func<QueryDescriptor<T>, BaseQuery>[] queries)
+		public BoolQueryDescriptor<T> MustNot(params Func<QueryDescriptor<T>, QueryContainer>[] queries)
 		{
-			var descriptors = new List<BaseQuery>();
+			var descriptors = new List<QueryContainer>();
 			foreach (var selector in queries)
 			{
 				var filter = new QueryDescriptor<T>();
@@ -188,24 +179,25 @@ namespace Nest
 					continue;
 				descriptors.Add(q);
 			}
-			this._MustNotQueries = descriptors.HasAny() ? descriptors : null;
+			((IBoolQuery)this).MustNot = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 		/// <summary>
-		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document. The minimum number of should clauses to match can be set using minimum_number_should_match parameter.
+		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document.
+		///  The minimum number of should clauses to match can be set using minimum_should_match parameter.
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> MustNot(params BaseQuery[] queries)
+		public BoolQueryDescriptor<T> MustNot(params QueryContainer[] queries)
 		{
-			var descriptors = new List<BaseQuery>();
+			var descriptors = new List<QueryContainer>();
 			foreach (var q in queries)
 			{
 				if (q.IsConditionless)
 					continue;
 				descriptors.Add(q);
 			}
-			this._MustNotQueries = descriptors.HasAny() ? descriptors : null;
+			((IBoolQuery)this).MustNot = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 		/// <summary>
@@ -213,9 +205,9 @@ namespace Nest
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> Should(params Func<QueryDescriptor<T>, BaseQuery>[] queries)
+		public BoolQueryDescriptor<T> Should(params Func<QueryDescriptor<T>, QueryContainer>[] queries)
 		{
-			var descriptors = new List<BaseQuery>();
+			var descriptors = new List<QueryContainer>();
 			foreach (var selector in queries)
 			{
 				var filter = new QueryDescriptor<T>();
@@ -224,7 +216,7 @@ namespace Nest
 					continue;
 				descriptors.Add(q);
 			}
-			this._ShouldQueries = descriptors.HasAny() ? descriptors : null;
+			((IBoolQuery)this).Should = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 
@@ -233,16 +225,16 @@ namespace Nest
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> Should(params BaseQuery[] queries)
+		public BoolQueryDescriptor<T> Should(params QueryContainer[] queries)
 		{
-			var descriptors = new List<BaseQuery>();
+			var descriptors = new List<QueryContainer>();
 			foreach (var q in queries)
 			{
 				if (q.IsConditionless)
 					continue;
 				descriptors.Add(q);
 			}
-			this._ShouldQueries = descriptors.HasAny() ? descriptors : null;
+			((IBoolQuery)this).Should = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 	}

@@ -8,7 +8,7 @@ namespace Nest
 	{
 
 		[JsonProperty("filter")]
-		internal BaseFilter _Filter { get; set; }
+		internal FilterContainer FilterDescriptor { get; set; }
 		[JsonProperty("routing")]
 		internal string _Routing { get; set; }
 		[JsonProperty("index_routing")]
@@ -31,12 +31,12 @@ namespace Nest
 			this._SearchRouting = searchRouting;
 			return this;
 		}
-		public CreateAliasDescriptor Filter<T>(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
+		public CreateAliasDescriptor Filter<T>(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 			where T : class
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 
-			this._Filter = filterSelector(new FilterDescriptor<T>());
+			this.FilterDescriptor = filterSelector(new FilterDescriptor<T>());
 			return this;
 		}
 

@@ -150,7 +150,7 @@ namespace Nest.Tests.Unit.Search.Query.Bool
 		[Test]
 		public void BranchLambdaTestConditional()
 		{
-			BaseQuery query = null;
+			QueryContainer query = null;
 			if (1 == 1)
 				query |= Query<ElasticsearchProject>.Term(f => f.Name, "foo2");
 			if (1 == 1)

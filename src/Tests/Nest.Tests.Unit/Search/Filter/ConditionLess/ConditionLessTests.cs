@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 	[TestFixture]
 	public class ConditionLessTests : BaseJsonTests
 	{
-		private readonly BaseFilter[] _emptyQuery = Enumerable.Empty<BaseFilter>().ToArray();
+		private readonly FilterContainer[] _emptyQuery = Enumerable.Empty<FilterContainer>().ToArray();
 		
 		public class Criteria
 		{
@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 			public DateTime? Date { get; set; }
 		}
 
-		private void DoConditionlessFilter(Func<FilterDescriptor<ElasticsearchProject>, BaseFilter> filter)
+		private void DoConditionlessFilter(Func<FilterDescriptor<ElasticsearchProject>, FilterContainer> filter)
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
@@ -28,7 +28,7 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 
 			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod(), "MatchAll");
 		}
-		private void DoNonConditionlessFilter(Func<FilterDescriptor<ElasticsearchProject>, BaseFilter> filter)
+		private void DoNonConditionlessFilter(Func<FilterDescriptor<ElasticsearchProject>, FilterContainer> filter)
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
@@ -158,19 +158,6 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 		}
 
 
-		[Test]
-		public void NumericRangeTest()
-		{
-			this.DoConditionlessFilter(f => f.NumericRange(null));
-			this.DoConditionlessFilter(f => f.NumericRange(nrf=>nrf.From(string.Empty)));
-			int? nullInt = null;
-			this.DoConditionlessFilter(f => f.NumericRange(nrf => nrf.From(nullInt)));
-			double? nullDouble = null;
-			this.DoConditionlessFilter(f => f.NumericRange(nrf => nrf.From(nullDouble)));
-			DateTime? nullDate = null;
-			this.DoConditionlessFilter(f => f.NumericRange(nrf => nrf.From(nullDate)));
-		}
-
 
 		[Test]
 		public void OrTest()
@@ -203,13 +190,13 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 		public void RangeTest()
 		{
 			this.DoConditionlessFilter(f => f.Range(null));
-			this.DoConditionlessFilter(f => f.Range(nrf => nrf.From(string.Empty)));
+			this.DoConditionlessFilter(f => f.Range(nrf => nrf.Greater(string.Empty)));
 			int? nullInt = null;
-			this.DoConditionlessFilter(f => f.Range(nrf => nrf.From(nullInt)));
+			this.DoConditionlessFilter(f => f.Range(nrf => nrf.Greater(nullInt)));
 			double? nullDouble = null;
-			this.DoConditionlessFilter(f => f.Range(nrf => nrf.From(nullDouble)));
+			this.DoConditionlessFilter(f => f.Range(nrf => nrf.Greater(nullDouble)));
 			DateTime? nullDate = null;
-			this.DoConditionlessFilter(f => f.Range(nrf => nrf.From(nullDate)));
+			this.DoConditionlessFilter(f => f.Range(nrf => nrf.Greater(nullDate)));
 		}
 
 

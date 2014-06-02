@@ -130,7 +130,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						.Must(q => q.MatchAll())
 						.MustNot(q => q.Term(p => p.Name, "elasticsearch.pm"))
 						.Should(q => q.Term(p => p.Name, "elasticflume"))
-						.MinimumNumberShouldMatch(1)
+						.MinimumShouldMatch(1)
 						.Boost(2.0)
 					)
 				);
@@ -139,7 +139,6 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						""bool"": {
-							boost: 2.0,
 						
 							""must"": [
 								{
@@ -160,8 +159,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 									}
 								}
 							],
-							minimum_number_should_match: 1,
-
+							minimum_should_match: ""1"",
+							boost: 2.0
 						}
 					}
 			}";

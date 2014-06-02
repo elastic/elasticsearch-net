@@ -3,41 +3,63 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class CustomBoostFactorQueryDescriptor<T> : IQuery where T : class
+	[JsonConverter(typeof(ReadAsTypeConverter<CustomBoostFactorQueryDescriptor<object>>))]
+	public interface ICustomBoostFactorQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		internal BaseQuery _Query { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "boost_factor")]
-		internal double? _BoostFactor { get; set; }
+		double? BoostFactor { get; set; }
+	}
+
+	public class CustomBoostFactorQuery : PlainQuery, ICustomBoostFactorQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.CustomBoostFactor = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public IQueryContainer Query { get; set; }
+		public double? BoostFactor { get; set; }
+	}
+
+	public class CustomBoostFactorQueryDescriptor<T> : ICustomBoostFactorQuery where T : class
+	{
+		IQueryContainer ICustomBoostFactorQuery.Query { get; set; }
+
+		double? ICustomBoostFactorQuery.BoostFactor { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._Query == null || this._Query.IsConditionless;
+				return ((ICustomBoostFactorQuery)this).Query == null || ((ICustomBoostFactorQuery)this).Query.IsConditionless;
 			}
 		}
 
 
-		public CustomBoostFactorQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public CustomBoostFactorQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
-			this._Query = q;
+			((ICustomBoostFactorQuery)this).Query = q;
 			return this;
 		}
 
 		public CustomBoostFactorQueryDescriptor<T> BoostFactor(double boostFactor)
 		{
-			this._BoostFactor = boostFactor;
+			((ICustomBoostFactorQuery)this).BoostFactor = boostFactor;
 			return this;
 		}
 	}

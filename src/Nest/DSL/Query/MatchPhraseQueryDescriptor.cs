@@ -12,9 +12,11 @@ namespace Nest
 	/// A Query that matches documents containing a particular sequence of terms. A PhraseQuery is built by QueryParser for input like "new york".
 	/// </summary>
 	/// <typeparam name="T">Type of document</typeparam>
-	public class MatchPhraseQueryDescriptor<T> : MatchQueryDescriptor<T> where T : class
+	public class MatchPhraseQueryDescriptor<T> : MatchQueryDescriptor<T>
+		where T : class
 	{
-		[JsonProperty(PropertyName = "type")]
-		internal override string _Type { get { return "phrase"; } }
+
+		protected override string _type { get { return "phrase"; } }
+		
 	}
 }

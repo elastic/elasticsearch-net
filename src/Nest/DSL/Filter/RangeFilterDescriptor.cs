@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Nest.Resolvers;
@@ -9,157 +13,116 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class RangeFilterDescriptor<T> : FilterBase where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IRangeFilter : IFieldNameFilter
 	{
-		[JsonProperty("from")]
-		internal object _From { get; set;}
-		[JsonProperty("to")]
-		internal object _To { get; set; }
-		[JsonProperty("include_lower")]
-		internal bool? _FromInclusive { get; set; }
-		[JsonProperty("include_upper")]
-		internal bool? _ToInclusive { get; set; }
+		[JsonProperty("gte")]
+		[JsonConverter(typeof(ForceStringReader))]
+		string GreaterThanOrEqualTo { get; set; }
 
-		internal PropertyPathMarker _Field { get; set; }
+		[JsonProperty("lte")]
+		[JsonConverter(typeof(ForceStringReader))]
+		string LowerThanOrEqualTo { get; set; }
 
-		internal override bool IsConditionless
+		[JsonProperty("gt")]
+		[JsonConverter(typeof(ForceStringReader))]
+		string GreaterThan { get; set; }
+
+		[JsonProperty("lt")]
+		[JsonConverter(typeof(ForceStringReader))]
+		string LowerThan { get; set; }
+	}
+
+	public class RangeFilter : PlainFilter, IRangeFilter
+	{
+		protected internal override void WrapInContainer(IFilterContainer container)
+		{
+			container.Range = this;
+		}
+		public string GreaterThanOrEqualTo { get; set; }
+		public string LowerThanOrEqualTo { get; set; }
+		public string GreaterThan { get; set; }
+		public string LowerThan { get; set; }
+		public PropertyPathMarker Field { get; set; }
+	}
+
+	public class RangeFilterDescriptor<T> : FilterBase, IRangeFilter where T : class
+	{
+		string IRangeFilter.GreaterThanOrEqualTo { get; set;  }
+		
+		string IRangeFilter.LowerThanOrEqualTo { get; set; }
+		
+		string IRangeFilter.GreaterThan { get; set; }
+		
+		string IRangeFilter.LowerThan { get; set; }
+
+		PropertyPathMarker IFieldNameFilter.Field { get; set; }
+
+		private IRangeFilter _ { get { return this;  } }
+
+		bool IFilter.IsConditionless
 		{
 			get
 			{
-				return this._Field.IsConditionless() || (this._From == null && this._To == null);
+				return _.Field.IsConditionless() || 
+				(	_.GreaterThanOrEqualTo.IsNullOrEmpty() 
+					&& _.LowerThanOrEqualTo.IsNullOrEmpty()
+					&& _.LowerThan.IsNullOrEmpty()
+					&& _.GreaterThan.IsNullOrEmpty()
+				);
 			}
-
 		}
-
+		
 		public RangeFilterDescriptor<T> OnField(string field)
 		{
-			this._Field = field;
+			_.Field = field;
 			return this;
 		}
 		public RangeFilterDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
-			return this;
-		}
-		/// <summary>
-		/// Forces the 'From()' to be exclusive (which is inclusive by default).
-		/// </summary>
-		public RangeFilterDescriptor<T> FromExclusive()
-		{
-			this._FromInclusive = false;
-			return this;
-		}
-		/// <summary>
-		/// Forces the 'To()' to be exclusive (which is inclusive by default).
-		/// </summary>
-		public RangeFilterDescriptor<T> ToExclusive()
-		{
-			this._ToInclusive = false;
+			_.Field = objectPath;
 			return this;
 		}
 
-		#region int
-		/// <summary>
-		/// The upper bound. Defaults to unbounded.
-		/// </summary>
-		public RangeFilterDescriptor<T> To(int? to)
+		public RangeFilterDescriptor<T> Greater(long? from)
 		{
-			this._To = to;
+			_.GreaterThan = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
-		/// <summary>
-		/// The lower bound. Defaults to start from the first.
-		/// </summary>
-		/// <returns></returns>
-		public RangeFilterDescriptor<T> From(int? from)
+	
+		public RangeFilterDescriptor<T> GreaterOrEquals(long? from)
 		{
-			this._From = from;
+			_.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
-
-		/// <summary>
-		/// Same as setting from and include_lower to false.
-		/// </summary>
-		public RangeFilterDescriptor<T> Greater(int? from)
+	
+		public RangeFilterDescriptor<T> Lower(long? to)
 		{
-			this._From = from;
-			this._FromInclusive = false;
-			return this;
-		}
-		/// <summary>
-		/// Same as setting from and include_lower to true.
-		/// </summary>
-		public RangeFilterDescriptor<T> GreaterOrEquals(int? from)
-		{
-			this._From = from;
-			this._FromInclusive = from.HasValue ? new Nullable<bool>(true) : null;
-			return this;
-		}
-		/// <summary>
-		/// Same as setting to and include_upper to false.
-		/// </summary>
-		public RangeFilterDescriptor<T> Lower(int? to)
-		{
-			this._To = to;
-			this._ToInclusive = to.HasValue ? new Nullable<bool>(false) : null;
-			return this;
-		}
-		/// <summary>
-		/// Same as setting to and include_upper to true.
-		/// </summary>
-		public RangeFilterDescriptor<T> LowerOrEquals(int? to)
-		{
-			this._To = to;
-			this._ToInclusive = to.HasValue ? new Nullable<bool>(true) : null;
-			return this;
-		}
-		#endregion
-
-		#region double
-		/// <summary>
-		/// The upper bound. Defaults to unbounded.
-		/// </summary>
-		public RangeFilterDescriptor<T> To(double? to)
-		{
-			this._To = to;
-			return this;
-		}
-		/// <summary>
-		/// The lower bound. Defaults to start from the first.
-		/// </summary>
-		/// <returns></returns>
-		public RangeFilterDescriptor<T> From(double? from)
-		{
-			this._From = from;
+			_.LowerThan = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 
-		/// <summary>
-		/// Same as setting from and include_lower to false.
-		/// </summary>
+		public RangeFilterDescriptor<T> LowerOrEquals(long? to)
+		{
+			_.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
+			return this;
+		}
+
 		public RangeFilterDescriptor<T> Greater(double? from)
 		{
-			this._From = from;
-			this._FromInclusive = from.HasValue ? new Nullable<bool>(false) : null;
+			_.GreaterThan = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
-		/// <summary>
-		/// Same as setting from and include_lower to true.
-		/// </summary>
+		
 		public RangeFilterDescriptor<T> GreaterOrEquals(double? from)
 		{
-			this._From = from;
-			this._FromInclusive = from.HasValue ? new Nullable<bool>(true) : null;
+			_.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
-		/// <summary>
-		/// Same as setting to and include_upper to false.
-		/// </summary>
+		
 		public RangeFilterDescriptor<T> Lower(double? to)
 		{
-			this._To = to;
-			this._ToInclusive = to.HasValue ? new Nullable<bool>(false) : null;
+			_.LowerThan = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 		/// <summary>
@@ -167,142 +130,62 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> LowerOrEquals(double? to)
 		{
-			this._To = to;
-			this._ToInclusive = to.HasValue ? new Nullable<bool>(true) : null;
+			_.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
-		#endregion
+		
 
-		#region string
-		/// <summary>
-		/// The upper bound. Defaults to unbounded.
-		/// </summary>
-		public RangeFilterDescriptor<T> To(string to)
-		{
-			this._To = to;
-			return this;
-		}
-		/// <summary>
-		/// The lower bound. Defaults to start from the first.
-		/// </summary>
-		/// <returns></returns>
-		public RangeFilterDescriptor<T> From(string from)
-		{
-			this._From = from;
-			return this;
-		}
-
-		/// <summary>
-		/// Same as setting from and include_lower to false.
-		/// </summary>
 		public RangeFilterDescriptor<T> Greater(string from)
 		{
-			this._From = from;
-			this._FromInclusive = !from.IsNullOrEmpty() ? new Nullable<bool>(false) : null;
+			_.GreaterThan = from;
 			return this;
 		}
-		/// <summary>
-		/// Same as setting from and include_lower to true.
-		/// </summary>
+
 		public RangeFilterDescriptor<T> GreaterOrEquals(string from)
 		{
-			this._From = from;
-			this._FromInclusive = !from.IsNullOrEmpty() ? new Nullable<bool>(true) : null;
+			_.GreaterThanOrEqualTo = from;
 			return this;
 		}
-		/// <summary>
-		/// Same as setting to and include_upper to false.
-		/// </summary>
+
 		public RangeFilterDescriptor<T> Lower(string to)
 		{
-			this._To = to;
-			this._ToInclusive = !to.IsNullOrEmpty() ? new Nullable<bool>(false) : null;
+			_.LowerThan = to;
 			return this;
 		}
-		/// <summary>
-		/// Same as setting to and include_upper to true.
-		/// </summary>
+
 		public RangeFilterDescriptor<T> LowerOrEquals(string to)
 		{
-			this._To = to;
-			this._ToInclusive = !to.IsNullOrEmpty() ? new Nullable<bool>(true) : null;
+			_.LowerThanOrEqualTo = to;
 			return this;
 		}
-		#endregion
 
-		#region DateTime
-		/// <summary>
-		/// The upper bound. Defaults to unbounded.
-		/// </summary>
-		public RangeFilterDescriptor<T> To(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		public RangeFilterDescriptor<T> Greater(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			if (!to.HasValue)
-				return this;
-			this._To = to.Value.ToString(format);
+			if (!from.HasValue) return this;
+			_.GreaterThan = from.Value.ToString(format, CultureInfo.InvariantCulture);
 			return this;
 		}
-		/// <summary>
-		/// The lower bound. Defaults to start from the first.
-		/// </summary>
-		/// <returns></returns>
-		public RangeFilterDescriptor<T> From(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		
+		public RangeFilterDescriptor<T> GreaterOrEquals(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			if (!from.HasValue)
-				return this;
-
-			this._From = from.Value.ToString(format);
+			if (!from.HasValue) return this;
+			_.GreaterThanOrEqualTo = from.Value.ToString(format, CultureInfo.InvariantCulture);
 			return this;
 		}
 
-		/// <summary>
-		/// Same as setting from and include_lower to false.
-		/// </summary>
-		public RangeFilterDescriptor<T> Greater(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		public RangeFilterDescriptor<T> Lower(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			if (!from.HasValue)
-				return this;
-
-			this._From = from.Value.ToString(format);
-			this._FromInclusive = false;
+			if (!to.HasValue) return this;
+			_.LowerThan = to.Value.ToString(format, CultureInfo.InvariantCulture);
 			return this;
 		}
-		/// <summary>
-		/// Same as setting from and include_lower to true.
-		/// </summary>
-		public RangeFilterDescriptor<T> GreaterOrEquals(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss")
+
+		public RangeFilterDescriptor<T> LowerOrEquals(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			if (!from.HasValue)
-				return this;
-
-			this._From = from.Value.ToString(format);
-			this._FromInclusive = true;
+			if (!to.HasValue) return this;
+			_.LowerThanOrEqualTo = to.Value.ToString(format, CultureInfo.InvariantCulture);
 			return this;
 		}
-		/// <summary>
-		/// Same as setting to and include_upper to false.
-		/// </summary>
-		public RangeFilterDescriptor<T> Lower(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss")
-		{
-			if (!to.HasValue)
-				return this;
-
-			this._To = to.Value.ToString(format);
-			this._ToInclusive = false;
-			return this;
-		}
-		/// <summary>
-		/// Same as setting to and include_upper to true.
-		/// </summary>
-		public RangeFilterDescriptor<T> LowerOrEquals(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss")
-		{
-			if (!to.HasValue)
-				return this;
-
-			this._To = to.Value.ToString(format);
-			this._ToInclusive = true;
-			return this;
-		}
-		#endregion
 	
 	}
 }

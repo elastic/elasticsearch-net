@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration
 			return connectionStatus.Response;
 		}
 
-		public void DoFilterTest(Func<FilterDescriptor<ElasticsearchProject>, Nest.BaseFilter> filter, ElasticsearchProject project, bool queryMustHaveResults)
+		public void DoFilterTest(Func<FilterDescriptor<ElasticsearchProject>, FilterContainer> filter, ElasticsearchProject project, bool queryMustHaveResults)
 		{
 			var filterId = Filter<ElasticsearchProject>.Term(e => e.Id, project.Id);
 
