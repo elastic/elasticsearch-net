@@ -10,7 +10,6 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 		[Test]
 		public void RangeEquals_Deserializes()
 		{
-			//todo simplify range query like the range filter to only support gt gte lt lte
 			var q = this.SerializeThenDeserialize(
 				f=>f.Range,
 				f=>f.Range(r=>r
@@ -32,7 +31,6 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			var from = DateTime.UtcNow.Date;
 			var to = from.AddDays(2);
 
-			//todo simplify range query like the range filter to only support gt gte lt lte
 			var q = this.SerializeThenDeserialize(
 				f=>f.Range,
 				f=>f.Range(r=>r
