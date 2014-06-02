@@ -15,36 +15,35 @@ namespace Nest
 	public interface ICardinalityAggregator : IMetricAggregator
 	{
 		[JsonProperty("precision_threshold")]
-		int? _PrecisionThreshold { get; set; }
+		int? PrecisionThreshold { get; set; }
 
 		[JsonProperty("rehash")]
-		bool? _Rehash { get; set; }
+		bool? Rehash { get; set; }
 	}
 
 	public class CardinalityAggregator : MetricAggregator, ICardinalityAggregator
 	{
-		public int? _PrecisionTreshold { get; set; }
-		public bool? _Rehash { get; set; }
+		public int? PrecisionThreshold { get; set; }
+		public bool? Rehash { get; set; }
 	}
 
 	public class CardinalityAggregationDescriptor<T> : MetricAggregationBaseDescriptor<CardinalityAggregationDescriptor<T>, T>, ICardinalityAggregator where T : class
 	{
 		private ICardinalityAggregator Self { get { return this; } }
 
-		int? ICardinalityAggregator._PrecisionThreshold { get; set; }
+		int? ICardinalityAggregator.PrecisionThreshold { get; set; }
 
-		public CardinalityAggregationDescriptor<T> PrecisionThreshold(int precisionTreshold)
+		bool? ICardinalityAggregator.Rehash { get; set; }
+
+		public CardinalityAggregationDescriptor<T> PrecisionThreshold(int precisionThreshold)
 		{
-			this._PrecisionTreshold = precisionThreshold;
-			Self._PrecisionTreshold = precisionThreshold;
+			Self.PrecisionThreshold = precisionThreshold;
 			return this;
 		}
 
-		bool? ICardinalityAggregator._Rehash { get; set; }
-
 		public CardinalityAggregationDescriptor<T> Rehash(bool rehash = true)
 		{
-			Self._Rehash = rehash;
+			Self.Rehash = rehash;
 			return this;
 		}
 
