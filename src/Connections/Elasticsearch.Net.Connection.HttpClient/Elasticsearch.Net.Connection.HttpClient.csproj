@@ -7,7 +7,7 @@
     <ProjectGuid>{A69322FD-B874-44EF-ABE0-63F4A7B5593E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Elasticsearch.Net.Connection.HttpClient</RootNamespace>
+    <RootNamespace>Elasticsearch.Net.Connection</RootNamespace>
     <AssemblyName>Elasticsearch.Net.Connection.HttpClient</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -44,8 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ElasticsearchHttpClient.cs" />
-    <Compile Include="ElasticsearchRequestHandler.cs" />
+    <Compile Include="HttpClientConnection.cs" />
+    <Compile Include="InternalHttpMessageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

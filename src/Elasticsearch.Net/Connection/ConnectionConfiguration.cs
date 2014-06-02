@@ -82,6 +82,9 @@ namespace Elasticsearch.Net.Connection
 #endif
 		bool IConnectionConfigurationValues.KeepRawResponse { get{ return _keepRawResponse; } }
 
+        private bool _automaticProxyDetection = true;
+        bool IConnectionConfigurationValues.AutomaticProxyDetection { get { return _automaticProxyDetection; } }
+
 		private int _maximumAsyncConnections;
 		int IConnectionConfigurationValues.MaximumAsyncConnections { get{ return _maximumAsyncConnections; } }
 
@@ -284,12 +287,12 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Global callback for every response that NEST receives, useful for custom logging.
 		/// </summary>
-		public T SetConnectionStatusHandler(Action<IElasticsearchResponse> handler)
-		{
-			handler.ThrowIfNull("handler");
-			this._connectionStatusHandler = handler;
-			return (T) this;
-		}
+        public T SetConnectionStatusHandler(Action<IElasticsearchResponse> handler)
+        {
+            handler.ThrowIfNull("handler");
+            this._connectionStatusHandler = handler;
+            return (T)this;
+        }
 	}
 }
 

@@ -14,8 +14,8 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeConverter<CardinalityAggregator>))]
 	public interface ICardinalityAggregator : IMetricAggregator
 	{
-		[JsonProperty("precision_treshold")]
-		int? _PrecisionTreshold { get; set; }
+		[JsonProperty("precision_threshold")]
+		int? _PrecisionThreshold { get; set; }
 
 		[JsonProperty("rehash")]
 		bool? _Rehash { get; set; }
@@ -31,11 +31,12 @@ namespace Nest
 	{
 		private ICardinalityAggregator Self { get { return this; } }
 
-		int? ICardinalityAggregator._PrecisionTreshold { get; set; }
+		int? ICardinalityAggregator._PrecisionThreshold { get; set; }
 
-		public CardinalityAggregationDescriptor<T> PrecisionTreshold(int precisionTreshold)
+		public CardinalityAggregationDescriptor<T> PrecisionThreshold(int precisionTreshold)
 		{
-			Self._PrecisionTreshold = precisionTreshold;
+			this._PrecisionTreshold = precisionThreshold;
+			Self._PrecisionTreshold = precisionThreshold;
 			return this;
 		}
 
