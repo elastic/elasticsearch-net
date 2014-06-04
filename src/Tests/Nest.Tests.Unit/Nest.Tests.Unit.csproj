@@ -161,6 +161,73 @@
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\ConnectionSettingsTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="QueryParsers\BaseParserTests.cs" />
+    <Compile Include="QueryParsers\Filter\AndFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\BoolFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\ExistsFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\GeoBoundingBoxFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\GeoDistanceFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\GeoDistanceRangeFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\GeoIndexShapeFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\GeoPolygonFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\GeoShapeFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\HasChildFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\HasParentFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\IdsFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\LimitFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\MatchAllFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\MissingFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\NestedFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\NotFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\OrFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\ParseFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\PrefixFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\QueryFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\RangeFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\RegexpFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\ScriptFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\TermFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\TermsFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\TypeFilterTests.cs" />
+    <Compile Include="QueryParsers\Queries\BoolQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\BoostingQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\CommonTermsQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\ConstantScoreQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\CustomBoostFactorQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\CustomFiltersScoreQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\CustomScoreQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\DisMaxQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\FilteredQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\FunctionScoreQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\FuzzyLikeThisQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\FuzzyQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\GeoShapeQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\HasChildQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\HasParentQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\IdsQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\IndicesQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\MatchAllQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\MatchQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\MoreLikeThisQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\MultiMatchQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\NestedQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\ParseQueryTestsBase.cs" />
+    <Compile Include="QueryParsers\Queries\PrefixQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\QueryStringQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\RangeQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\RegexpQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\SimpleQueryStringQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\SpanFirstQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\SpanNearQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\SpanNotQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\SpanOrQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\SpanTermQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\TermQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\TermsQueryTests.cs" />
+    <Compile Include="QueryParsers\Queries\WildCardQueryTests.cs" />
+    <Compile Include="QueryParsers\Visitor\DslPrettyPrintVisitor.cs" />
+    <Compile Include="QueryParsers\Visitor\VisitorDemoUseCase.cs" />
+    <Compile Include="QueryParsers\Visitor\VisitorTests.cs" />
     <Compile Include="Reproduce\Reproduce646Tests.cs" />
     <Compile Include="Reproduce\Reproduce579Tests.cs" />
     <Compile Include="Search\Fields\FieldsTests.cs" />
@@ -170,10 +237,12 @@
     <Compile Include="Search\Filter\Singles\GeoIndexedShapeFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\GeoShapeFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\RegexpFilterJson.cs" />
+    <Compile Include="Search\InitializerSyntax\InitializerExample.cs" />
     <Compile Include="Search\Query\BoolQueryMerges\BoolQueryMergesTests.cs" />
     <Compile Include="Search\Filter\BoolFilterMerges\BoolFilterMergesTests.cs" />
     <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />
     <Compile Include="Search\Query\Modes\ConditionlessQueryJson.cs" />
+    <Compile Include="Search\Query\Properties\PropertiesTests.cs" />
     <Compile Include="Search\Query\Singles\FunctionScoreQueryJson.cs" />
     <Compile Include="Search\Query\Singles\CommonTerms\CommonTermsTests.cs" />
     <Compile Include="Search\Query\Singles\GeoShape\GeoShapeQueryJson.cs" />
@@ -183,7 +252,7 @@
     <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
     <Compile Include="Search\Query\Modes\QueryModesTests.cs" />
     <Compile Include="Search\Query\Singles\Term\TermToStringJson.cs" />
-    <Compile Include="Search\Rescore\RescoreTests.cs" />
+    <Compile Include="Search\Rescoring\RescoreTests.cs" />
     <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
     <Compile Include="Search\Facets\FacetJson.cs" />
     <Compile Include="Search\Facets\FilterFacetJson.cs" />
@@ -216,7 +285,6 @@
     <Compile Include="Search\Filter\Singles\MissingFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\NestedFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\NotFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\NumericRangeFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\OrFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\PrefixFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\QueryFilterJson.cs" />
@@ -276,8 +344,8 @@
     <Compile Include="Search\SearchOptions\SearchOptionTests.cs" />
     <Compile Include="Search\SearchType\ScriptFieldTests.cs" />
     <Compile Include="Internals\Serialize\SerializeTests.cs" />
-    <Compile Include="Search\Sort\FunctionScoreTests.cs" />
-    <Compile Include="Search\Sort\SortTests.cs" />
+    <Compile Include="Search\Sorting\FunctionScoreTests.cs" />
+    <Compile Include="Search\Sorting\SortTests.cs" />
     <Compile Include="Search\Suggest\CompletionSuggestTests.cs" />
     <Compile Include="Search\Suggest\PhraseSuggestTests.cs" />
     <Compile Include="Search\Suggest\TermSuggestTests.cs" />
@@ -432,6 +500,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="QueryParsers\Filter\GeoBoundingBox\LatLon.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryParsers\Filter\GeoBoundingBox\Vertices.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryParsers\Filter\GeoBoundingBox\Array.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryParsers\Filter\Term.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Reproduce\Issue579.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -537,7 +617,7 @@
     <None Include="Search\Query\Singles\Term\IntToStringTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Rescore\RescoreSerializes.json">
+    <None Include="Search\Rescoring\RescoreSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Filter\BoolCombinations\CombineNotAnd.json">
@@ -843,7 +923,7 @@
     <None Include="Internals\Serialize\SimpleClassUsesCamelCase.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Sort\RandomScriptSort.json">
+    <None Include="Search\Sorting\RandomScriptSort.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\Singles\Terms\TermsOfTypeInt.json">

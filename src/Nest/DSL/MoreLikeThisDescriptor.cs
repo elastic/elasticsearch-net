@@ -17,7 +17,7 @@ namespace Nest
 		, IPathInfo<MoreLikeThisRequestParameters> 
 		where T : class
 	{
-		internal SearchDescriptor<T> _Search { get; set; }
+		internal ISearchRequest _Search { get; set; }
 		
 		/// <summary>
 		/// Optionally specify more search options such as facets, from/to etcetera.

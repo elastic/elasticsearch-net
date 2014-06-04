@@ -66,6 +66,18 @@ namespace Nest.Tests.Unit.Internals.Serialize
 
 			var sw = Stopwatch.StartNew();
 			var data = this._client.Serializer.Serialize(new SearchDescriptor<ElasticsearchProject>()
+				   .From(0)
+				   .Size(10)
+				   .Fields(f => f.Id, f => f.Country)
+				   .SortAscending(f => f.LOC)
+				   .SortDescending(f => f.Country)
+				   .Query(q => q
+					   .MatchAll()
+				   )
+			   );
+			Assert.NotNull(data);
+
+			data = this._client.Serializer.Serialize(new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Fields(f => f.Id, f => f.Country)

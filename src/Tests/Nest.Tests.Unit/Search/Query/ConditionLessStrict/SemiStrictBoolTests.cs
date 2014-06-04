@@ -16,7 +16,7 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 		}
 		private readonly Criteria _c = new Criteria();
 
-		private void DoSemiStrictBoolQuery(Func<QueryDescriptor<ElasticsearchProject>, BaseQuery> query)
+		private void DoSemiStrictBoolQuery(Func<QueryDescriptor<ElasticsearchProject>, QueryContainer> query)
 		{
 			Assert.Throws<DslException>(() =>
 			{
@@ -28,7 +28,7 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 				this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod(), "MatchAll");
 			});
 		}
-		private void DoValidSemiStrictBoolQuery(Func<QueryDescriptor<ElasticsearchProject>, BaseQuery> query)
+		private void DoValidSemiStrictBoolQuery(Func<QueryDescriptor<ElasticsearchProject>, QueryContainer> query)
 		{
 			Assert.DoesNotThrow(() =>
 			{
@@ -40,7 +40,7 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 				this.JsonNotEquals(s, System.Reflection.MethodInfo.GetCurrentMethod(), "MatchAll");
 			});
 		}
-		private void DoValidSemiStrictBoolQueryStatic(BaseQuery query)
+		private void DoValidSemiStrictBoolQueryStatic(QueryContainer query)
 		{
 			Assert.DoesNotThrow(() =>
 			{

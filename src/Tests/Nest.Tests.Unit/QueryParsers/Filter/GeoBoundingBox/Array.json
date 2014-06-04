@@ -1,0 +1,14 @@
+{
+  "filter": {
+    "geo_bounding_box": {
+      "origin": {
+        "top_left": [0.1, 0.2],
+        "bottom_right": [0.3, 0.4]
+      },
+      "type": "memory",
+      "_cache": true,
+      "_name": "cacheName",
+      "_cache_key": "cacheKey"
+    }
+  }
+}

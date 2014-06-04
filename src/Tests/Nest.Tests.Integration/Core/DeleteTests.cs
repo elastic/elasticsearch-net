@@ -18,10 +18,11 @@ namespace Nest.Tests.Integration.Core
 			IntegrationSetup.Setup();
 		}
 		
+		
 		[Test]
 		public void ShouldNotThrowOnIdOverload()
 		{
-			Assert.Throws<DispatchException>(() =>
+			Assert.Throws<ArgumentNullException>(() =>
 			{
 				this._client.Delete("id", d=>d.Index("someindex").Type("sometype"));
 			});
@@ -30,7 +31,7 @@ namespace Nest.Tests.Integration.Core
 		[Test]
 		public void ShouldThowOnNullId()
 		{
-			Assert.Throws<DispatchException>(() =>
+			Assert.Throws<ArgumentNullException>(() =>
 			{
 				this._client.Delete<object>(d=>d.Index("someindex").Type("sometype").Id(null));
 			});

@@ -33,6 +33,22 @@ namespace Nest
 			var status = this.RawDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, descriptor);
 			return status.Success ? status.Response : CreateInvalidInstance<SearchResponse<TResult>>(status);
 		}
+		
+		public ISearchResponse<T> Search<T>(ISearchRequest request)
+			where T : class
+		{
+			return this.Search<T, T>(request);
+		}
+
+		public ISearchResponse<TResult> Search<T, TResult>(ISearchRequest request)
+			where T : class
+			where TResult : class
+		{
+			var pathInfo = ((IPathInfo<SearchRequestParameters>)request).ToPathInfo(_connectionSettings);
+
+			var status = this.RawDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, request);
+			return status.Success ? status.Response : CreateInvalidInstance<SearchResponse<TResult>>(status);
+		}
 
 		private SearchResponse<TResult> FieldsSearchDeserializer<T, TResult>(
 			IElasticsearchResponse response, Stream stream, SearchDescriptor<T> d)
@@ -67,31 +83,22 @@ namespace Nest
 				.DeserializationState(deserializationState);
 
 			return this.RawDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, descriptor)
-				.ContinueWith<ISearchResponse<TResult>>(t => t.Result.Success
-					? t.Result.Response
-					: CreateInvalidInstance<SearchResponse<TResult>>(t.Result));
+				.ContinueWith<ISearchResponse<TResult>>(t => {
+					if (t.IsFaulted)
+						throw t.Exception.Flatten().InnerException;
+					
+					return t.Result.Success
+						? t.Result.Response
+						: CreateInvalidInstance<SearchResponse<TResult>>(t.Result);
+				});
 		}
 
 		private JsonConverter CreateCovariantSearchSelector<T, TResult>(SearchDescriptor<T> originalSearchDescriptor)
 			where T : class
 			where TResult : class
 		{
-			var types =
-				(originalSearchDescriptor._Types ?? Enumerable.Empty<TypeNameMarker>()).Where(t => t.Type != null);
-			if (originalSearchDescriptor._ConcreteTypeSelector != null || !types.Any(t => t.Type != typeof (TResult)))
-				return originalSearchDescriptor._ConcreteTypeSelector == null
-					? null
-					: new ConcreteTypeConverter<TResult>(originalSearchDescriptor._ConcreteTypeSelector);
-			
-			var typeDictionary = types.ToDictionary(Infer.TypeName, t => t.Type);
-			originalSearchDescriptor._ConcreteTypeSelector = (o, h) =>
-			{
-				Type t;
-				return !typeDictionary.TryGetValue(h.Type, out t) ? typeof (TResult) : t;
-			};
-			return originalSearchDescriptor._ConcreteTypeSelector == null 
-				? null 
-				: new ConcreteTypeConverter<TResult>(originalSearchDescriptor._ConcreteTypeSelector);
+			var selector = originalSearchDescriptor.CreateCovarianceSelector<TResult>(this.Infer);
+			return selector == null ? null : new ConcreteTypeConverter<TResult>(selector);
 		}
 	}
 }

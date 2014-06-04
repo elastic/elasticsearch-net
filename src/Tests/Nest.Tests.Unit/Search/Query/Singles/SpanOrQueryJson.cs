@@ -16,9 +16,10 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					.SpanOr(sn => sn
 						.Clauses(
 							c => c.SpanTerm(f => f.Name, "elasticsearch.pm", 1.1),
-							c => c.SpanFirst(sf => sf
-								.MatchTerm(f => f.Name, "elasticsearch.pm", 1.1)
-								.End(3)
+							c => c
+								.SpanFirst(sf => sf
+									.MatchTerm(f => f.Name, "elasticsearch.pm", 1.1)
+									.End(3)
 							)
 						)
 					)

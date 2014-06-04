@@ -152,7 +152,6 @@
     <Compile Include="Integration\Filter\RangeFilterTests.cs" />
     <Compile Include="Integration\Query\BoolQueryResults.cs" />
     <Compile Include="Integration\Query\TermToString.cs" />
-    <Compile Include="Integration\Filter\NumericRangeFilterTests.cs" />
     <Compile Include="Core\UpdateTests.cs" />
     <Compile Include="Integration\Filter\BoolFilterTests.cs" />
     <Compile Include="Integration\HighlightTests.cs" />
@@ -172,6 +171,8 @@
     <Compile Include="Reproduce\Reproduce308Tests.cs" />
     <Compile Include="Reproduce\Reproduce319Tests.cs" />
     <Compile Include="Reproduce\Reproduce211Tests.cs" />
+    <Compile Include="Reproduce\Reproduce654Tests.cs" />
+    <Compile Include="Reproduce\Reproduce659Tests.cs" />
     <Compile Include="Reproduce\ReproduceConnectionStallsTests.cs" />
     <Compile Include="Search\FieldTests\FieldsTest.cs" />
     <Compile Include="Search\NamedFilter\NamedFilterTests.cs" />

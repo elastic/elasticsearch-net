@@ -3,50 +3,79 @@ using System.Collections.Generic;
 using Elasticsearch.Net;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class CustomScoreQueryDescriptor<T> : IQuery where T : class
+	[JsonConverter(typeof(ReadAsTypeConverter<CustomScoreQueryDescriptor<object>>))]
+	public interface ICustomScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "lang")]
-		internal string _Lang { get; set; }
+		string Lang { get; set; }
 
 		[JsonProperty(PropertyName = "script")]
-		internal string _Script { get; set; }
+		string Script { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> _Params { get; set; }
+		Dictionary<string, object> Params { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
-		internal BaseQuery _Query { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		IQueryContainer Query { get; set; }
+	}
+
+	public class CustomScoreQuery : PlainQuery, ICustomScoreQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.CustomScore = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public string Lang { get; set; }
+		public string Script { get; set; }
+		public Dictionary<string, object> Params { get; set; }
+		public IQueryContainer Query { get; set; }
+	}
+
+	public class CustomScoreQueryDescriptor<T> : ICustomScoreQuery where T : class
+	{
+		string ICustomScoreQuery.Lang { get; set; }
+
+		string ICustomScoreQuery.Script { get; set; }
+
+		Dictionary<string, object> ICustomScoreQuery.Params { get; set; }
+
+		IQueryContainer ICustomScoreQuery.Query { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._Query == null || this._Query.IsConditionless;
+				return ((ICustomScoreQuery)this).Query == null || ((ICustomScoreQuery)this).Query.IsConditionless;
 			}
 		}
 
 		public CustomScoreQueryDescriptor<T> Lang(string lang)
 		{
-			this._Lang = lang;
+			((ICustomScoreQuery)this).Lang = lang;
 			return this;
 		}
 
-		public CustomScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public CustomScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
-			this._Query = q;
+			((ICustomScoreQuery)this).Query = q;
 			return this;
 		}
+
 		/// <summary>
 		/// Scripts are cached for faster execution. If the script has parameters that it needs to take into account, it is preferable to use the same script, and provide parameters to it:
 		/// </summary>
@@ -54,13 +83,14 @@ namespace Nest
 		/// <returns></returns>
 		public CustomScoreQueryDescriptor<T> Script(string script)
 		{
-			this._Script = script;
+			((ICustomScoreQuery)this).Script = script;
 			return this;
 		}
+
 		public CustomScoreQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
-			this._Params = paramDictionary(new FluentDictionary<string, object>());
+			((ICustomScoreQuery)this).Params = paramDictionary(new FluentDictionary<string, object>());
 			return this;
 		}
 	}

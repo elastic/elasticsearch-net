@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NUnit.Framework;
 
 namespace Nest.Tests.Unit
 {
@@ -12,6 +13,7 @@ namespace Nest.Tests.Unit
 		{
 			var nJson = JObject.Parse(json).ToString();
 			var nOtherJson = JObject.Parse(otherjson).ToString();
+			//Assert.AreEqual(nOtherJson, nJson);
 			return nJson == nOtherJson;
 		}
 	}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
@@ -8,6 +9,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	using MultiGetConverter = Func<IElasticsearchResponse, Stream, MultiGetResponse>;
+	
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
@@ -16,9 +19,10 @@ namespace Nest
 			multiGetSelector.ThrowIfNull("multiGetSelector");
 			var descriptor = multiGetSelector(new MultiGetDescriptor(_connectionSettings));
 			var converter = CreateCovariantMultiGetConverter(descriptor);
+			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
 			return this.Dispatch<MultiGetDescriptor, MultiGetRequestParameters, MultiGetResponse>(
 				descriptor,
-				(p, d) => this.RawDispatch.MgetDispatch<MultiGetResponse>(p.DeserializationState(converter), d)
+				(p, d) => this.RawDispatch.MgetDispatch<MultiGetResponse>(p.DeserializationState(customCreator), d)
 			);
 		}
 
@@ -28,12 +32,16 @@ namespace Nest
 			multiGetSelector.ThrowIfNull("multiGetSelector");
 			var descriptor = multiGetSelector(new MultiGetDescriptor(_connectionSettings));
 			var converter = CreateCovariantMultiGetConverter(descriptor);
+			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
 			return this.DispatchAsync<MultiGetDescriptor, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
 				descriptor,
-				(p, d) => this.RawDispatch.MgetDispatchAsync<MultiGetResponse>(p.DeserializationState(converter), d)
+				(p, d) => this.RawDispatch.MgetDispatchAsync<MultiGetResponse>(p.DeserializationState(customCreator), d)
 			);
 		}
-
+		private MultiGetResponse DeserializeMultiGetResponse(IElasticsearchResponse response, Stream stream, JsonConverter converter)
+		{
+			return this.Serializer.DeserializeInternal<MultiGetResponse>(stream, converter);
+		}
 		private JsonConverter CreateCovariantMultiGetConverter(MultiGetDescriptor descriptor)
 		{
 			var multiGetHitConverter = new MultiGetHitConverter(descriptor);

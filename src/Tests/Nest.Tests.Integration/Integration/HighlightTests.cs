@@ -16,7 +16,7 @@ namespace Nest.Tests.Integration.Integration
 			  .Size(10)
 			  .Query(q => q
 				.QueryString(qs => qs
-				  .OnField(e => e.Content)
+				  .DefaultField(e => e.Content)
 				  .Query("null or null*")
 				)
 			  )

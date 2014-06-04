@@ -8,10 +8,11 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-  public enum GeoOptimizeBBox
-  {
-   memory,
-   indexed,
-   none
-  }
+	[JsonConverter(typeof(StringEnumConverter))]
+	public enum GeoOptimizeBBox
+	{
+		memory,
+		indexed,
+		none
+	}
 }

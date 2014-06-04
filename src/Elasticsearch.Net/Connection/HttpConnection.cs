@@ -146,7 +146,10 @@ namespace Elasticsearch.Net.Connection
 				proxy.Credentials = credentials;
 				myReq.Proxy = proxy;
 			}
-			//myReq.Proxy = null;
+            if(!this.ConnectionSettings.AutomaticProxyDetection)
+            {
+                myReq.Proxy = null;
+            }
 		}
 
 		private void SetBasicAuthorizationIfNeeded(HttpWebRequest myReq)
@@ -314,7 +317,7 @@ namespace Elasticsearch.Net.Connection
 			tcs.TrySetResult(cs);
 		}
 
-		public void Iterate<T>(HttpWebRequest request, byte[] data, IEnumerable<Task> asyncIterator, TaskCompletionSource<ElasticsearchResponse<T>> tcs)
+		public void Iterate(HttpWebRequest request, byte[] data, IEnumerable<Task> asyncIterator, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs)
 		{
 			var enumerator = asyncIterator.GetEnumerator();
 			Action<Task> recursiveBody = null;
@@ -331,8 +334,7 @@ namespace Elasticsearch.Net.Connection
 					{
 						var path = request.RequestUri.ToString();
 						var method = request.Method;
-
-						var response = ElasticsearchResponse<T>.CreateError(this.ConnectionSettings, exception, method, path, data);
+						var response = this.HandleWebException(data, exception as WebException, method, path);
 						tcs.SetResult(response);
 					}
 					else
@@ -341,7 +343,7 @@ namespace Elasticsearch.Net.Connection
 				}
 				else if (enumerator.MoveNext())
 				{
-					enumerator.Current.ContinueWith(recursiveBody);
+					enumerator.Current.ContinueWith(recursiveBody, TaskContinuationOptions.ExecuteSynchronously);
 				}
 				else enumerator.Dispose();
 			};

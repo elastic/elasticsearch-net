@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
@@ -12,178 +13,267 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class QueryStringDescriptor<T> : IQuery where T : class
+	[JsonConverter(typeof(ReadAsTypeConverter<QueryStringQueryDescriptor<object>>))]
+	public interface IQueryStringQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		internal string _QueryString { get; set; }
-		[JsonProperty(PropertyName = "default_field")]
-		internal PropertyPathMarker _Field { get; set; }
-		[JsonProperty(PropertyName = "fields")]
-		internal IEnumerable<PropertyPathMarker> _Fields { get; set; }
-		[JsonProperty(PropertyName = "default_operator")]
-		[JsonConverter(typeof(StringEnumConverter))]
-		internal Operator? _DefaultOperator { get; set; }
-		[JsonProperty(PropertyName = "analyzer")]
-		internal string _Analyzer { get; set; }
-		[JsonProperty(PropertyName = "allow_leading_wildcard")]
-		internal bool? _AllowLeadingWildcard { get; set; }
-		[JsonProperty(PropertyName = "lowercase_expanded_terms")]
-		internal bool? _LowercaseExpendedTerms { get; set; }
-		[JsonProperty(PropertyName = "enable_position_increments")]
-		internal bool? _EnablePositionIncrements { get; set; }
-		[JsonProperty(PropertyName = "fuzzy_prefix_length")]
-		internal int? _FuzzyPrefixLength { get; set; }
-		[JsonProperty(PropertyName = "fuzzy_min_sim")]
-		internal double? _FuzzyMinimumSimilarity { get; set; }
-		[JsonProperty(PropertyName = "phrase_slop")]
-		internal double? _PhraseSlop { get; set; }
-		[JsonProperty(PropertyName = "boost")]
-		internal double? _Boost { get; set; }
-		[JsonProperty(PropertyName = "lenient")]
-		internal bool? _Lenient { get; set; }
-		[JsonProperty(PropertyName = "analyze_wildcard")]
-		internal bool? _AnalyzeWildcard { get; set; }
-		[JsonProperty(PropertyName = "auto_generate_phrase_queries")]
-		internal bool? _AutoGeneratePhraseQueries { get; set; }
-		[JsonProperty(PropertyName = "minimum_should_match")]
-		internal string _MinimumShouldMatchPercentage { get; set; }
-		[JsonProperty(PropertyName = "use_dis_max")]
-		internal bool? _UseDismax { get; set; }
-		[JsonProperty(PropertyName = "tie_breaker")]
-		internal double? _TieBreaker { get; set; }
-		[JsonProperty(PropertyName = "rewrite")]
-		[JsonConverter(typeof(StringEnumConverter))]
-		internal RewriteMultiTerm? _Rewrite { get; set; }
+		string Query { get; set; }
 
+		[JsonProperty(PropertyName = "default_field")]
+		PropertyPathMarker DefaultField { get; set; }
+
+		[JsonProperty(PropertyName = "fields")]
+		IEnumerable<PropertyPathMarker> Fields { get; set; }
+
+		[JsonProperty(PropertyName = "default_operator")]
+		[JsonConverter(typeof (StringEnumConverter))]
+		Operator? DefaultOperator { get; set; }
+
+		[JsonProperty(PropertyName = "analyzer")]
+		string Analyzer { get; set; }
+
+		[JsonProperty(PropertyName = "allow_leading_wildcard")]
+		bool? AllowLeadingWildcard { get; set; }
+
+		[JsonProperty(PropertyName = "lowercase_expanded_terms")]
+		bool? LowercaseExpendedTerms { get; set; }
+
+		[JsonProperty(PropertyName = "enable_position_increments")]
+		bool? EnablePositionIncrements { get; set; }
+
+		[JsonProperty(PropertyName = "fuzzy_prefix_length")]
+		int? FuzzyPrefixLength { get; set; }
+
+		[JsonProperty(PropertyName = "fuzzy_min_sim")]
+		double? FuzzyMinimumSimilarity { get; set; }
+
+		[JsonProperty(PropertyName = "phrase_slop")]
+		double? PhraseSlop { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
+
+		[JsonProperty(PropertyName = "lenient")]
+		bool? Lenient { get; set; }
+
+		[JsonProperty(PropertyName = "analyze_wildcard")]
+		bool? AnalyzeWildcard { get; set; }
+
+		[JsonProperty(PropertyName = "auto_generate_phrase_queries")]
+		bool? AutoGeneratePhraseQueries { get; set; }
+
+		[JsonProperty(PropertyName = "minimum_should_match")]
+		string MinimumShouldMatchPercentage { get; set; }
+
+		[JsonProperty(PropertyName = "use_dis_max")]
+		bool? UseDismax { get; set; }
+
+		[JsonProperty(PropertyName = "tie_breaker")]
+		double? TieBreaker { get; set; }
+
+		[JsonProperty(PropertyName = "rewrite")]
+		[JsonConverter(typeof (StringEnumConverter))]
+		RewriteMultiTerm? Rewrite { get; set; }
+	}
+
+	public class QueryStringQuery : PlainQuery, IQueryStringQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.QueryString = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public string Query { get; set; }
+		public PropertyPathMarker DefaultField { get; set; }
+		public IEnumerable<PropertyPathMarker> Fields { get; set; }
+		public Operator? DefaultOperator { get; set; }
+		public string Analyzer { get; set; }
+		public bool? AllowLeadingWildcard { get; set; }
+		public bool? LowercaseExpendedTerms { get; set; }
+		public bool? EnablePositionIncrements { get; set; }
+		public int? FuzzyPrefixLength { get; set; }
+		public double? FuzzyMinimumSimilarity { get; set; }
+		public double? PhraseSlop { get; set; }
+		public double? Boost { get; set; }
+		public bool? Lenient { get; set; }
+		public bool? AnalyzeWildcard { get; set; }
+		public bool? AutoGeneratePhraseQueries { get; set; }
+		public string MinimumShouldMatchPercentage { get; set; }
+		public bool? UseDismax { get; set; }
+		public double? TieBreaker { get; set; }
+		public RewriteMultiTerm? Rewrite { get; set; }
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class QueryStringQueryDescriptor<T> : IQueryStringQuery where T : class
+	{
+		string IQueryStringQuery.Query { get; set; }
+
+		PropertyPathMarker IQueryStringQuery.DefaultField { get; set; }
+
+		IEnumerable<PropertyPathMarker> IQueryStringQuery.Fields { get; set; }
+	
+		Operator? IQueryStringQuery.DefaultOperator { get; set; }
+		
+		string IQueryStringQuery.Analyzer { get; set; }
+		
+		bool? IQueryStringQuery.AllowLeadingWildcard { get; set; }
+		
+		bool? IQueryStringQuery.LowercaseExpendedTerms { get; set; }
+		
+		bool? IQueryStringQuery.EnablePositionIncrements { get; set; }
+		
+		int? IQueryStringQuery.FuzzyPrefixLength { get; set; }
+		
+		double? IQueryStringQuery.FuzzyMinimumSimilarity { get; set; }
+		
+		double? IQueryStringQuery.PhraseSlop { get; set; }
+		
+		double? IQueryStringQuery.Boost { get; set; }
+		
+		bool? IQueryStringQuery.Lenient { get; set; }
+		
+		bool? IQueryStringQuery.AnalyzeWildcard { get; set; }
+		
+		bool? IQueryStringQuery.AutoGeneratePhraseQueries { get; set; }
+		
+		string IQueryStringQuery.MinimumShouldMatchPercentage { get; set; }
+		
+		bool? IQueryStringQuery.UseDismax { get; set; }
+		
+		double? IQueryStringQuery.TieBreaker { get; set; }
+		
+		RewriteMultiTerm? IQueryStringQuery.Rewrite { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._QueryString.IsNullOrEmpty();
+				return ((IQueryStringQuery)this).Query.IsNullOrEmpty();
 			}
 		}
 
 
-		public QueryStringDescriptor<T> OnField(string field)
+		public QueryStringQueryDescriptor<T> DefaultField(string field)
 		{
-			this._Field = field;
+			((IQueryStringQuery)this).DefaultField = field;
 			return this;
 		}
-		public QueryStringDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
+		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			((IQueryStringQuery)this).DefaultField = objectPath;
 			return this;
 		}
-		public QueryStringDescriptor<T> OnFields(IEnumerable<string> fields)
+		public QueryStringQueryDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
-			this._Fields = fields.Select(f=>(PropertyPathMarker)f);
+			((IQueryStringQuery)this).Fields = fields.Select(f=>(PropertyPathMarker)f);
 			return this;
 		}
-		public QueryStringDescriptor<T> OnFields(
+		public QueryStringQueryDescriptor<T> OnFields(
 			params Expression<Func<T, object>>[] objectPaths)
 		{
-			this._Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
+			((IQueryStringQuery)this).Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
 			return this;
 		}
-		public QueryStringDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<Expression<Func<T, object>>, double?>> boostableSelector)
+		public QueryStringQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<Expression<Func<T, object>>, double?>> boostableSelector)
 		{
 			var d = new FluentDictionary<Expression<Func<T, object>>, double?>();
 			boostableSelector(d);
-			this._Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
+			((IQueryStringQuery)this).Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
 			return this;
 		}
-		public QueryStringDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<string, double?>> boostableSelector) 
+		public QueryStringQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<string, double?>> boostableSelector) 
 		{
 			var d = new FluentDictionary<string, double?>();
 			boostableSelector(d);
-			this._Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
+			((IQueryStringQuery)this).Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
 			return this;
 		}
 
-		public QueryStringDescriptor<T> Query(string query)
+		public QueryStringQueryDescriptor<T> Query(string query)
 		{
-			this._QueryString = query;
+			((IQueryStringQuery)this).Query = query;
 			return this;
 		}
-		public QueryStringDescriptor<T> DefaultOperator(Operator op)
+		public QueryStringQueryDescriptor<T> DefaultOperator(Operator op)
 		{
-			this._DefaultOperator = op;
+			((IQueryStringQuery)this).DefaultOperator = op;
 			return this;
 		}
-		public QueryStringDescriptor<T> Analyzer(string analyzer)
+		public QueryStringQueryDescriptor<T> Analyzer(string analyzer)
 		{
-			this._Analyzer = analyzer;
+			((IQueryStringQuery)this).Analyzer = analyzer;
 			return this;
 		}
-		public QueryStringDescriptor<T> AllowLeadingWildcard(bool allowLeadingWildcard)
+		public QueryStringQueryDescriptor<T> AllowLeadingWildcard(bool allowLeadingWildcard = true)
 		{
-			this._AllowLeadingWildcard = allowLeadingWildcard;
+			((IQueryStringQuery)this).AllowLeadingWildcard = allowLeadingWildcard;
 			return this;
 		}
-		public QueryStringDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms)
+		public QueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms = true)
 		{
-			this._LowercaseExpendedTerms = lowercaseExpendedTerms;
+			((IQueryStringQuery)this).LowercaseExpendedTerms = lowercaseExpendedTerms;
 			return this;
 		}
-		public QueryStringDescriptor<T> EnablePositionIncrements(bool enablePositionIncrements)
+		public QueryStringQueryDescriptor<T> EnablePositionIncrements(bool enablePositionIncrements = true)
 		{
-			this._EnablePositionIncrements = enablePositionIncrements;
+			((IQueryStringQuery)this).EnablePositionIncrements = enablePositionIncrements;
 			return this;
 		}
-		public QueryStringDescriptor<T> FuzzyPrefixLength(int fuzzyPrefixLength)
+		public QueryStringQueryDescriptor<T> FuzzyPrefixLength(int fuzzyPrefixLength)
 		{
-			this._FuzzyPrefixLength = fuzzyPrefixLength;
+			((IQueryStringQuery)this).FuzzyPrefixLength = fuzzyPrefixLength;
 			return this;
 		}
-		public QueryStringDescriptor<T> FuzzyMinimumSimilarity(double fuzzyMinimumSimilarity)
+		public QueryStringQueryDescriptor<T> FuzzyMinimumSimilarity(double fuzzyMinimumSimilarity)
 		{
-			this._FuzzyMinimumSimilarity = fuzzyMinimumSimilarity;
+			((IQueryStringQuery)this).FuzzyMinimumSimilarity = fuzzyMinimumSimilarity;
 			return this;
 		}
-		public QueryStringDescriptor<T> PhraseSlop(double phraseSlop)
+		public QueryStringQueryDescriptor<T> PhraseSlop(double phraseSlop)
 		{
-			this._PhraseSlop = phraseSlop;
+			((IQueryStringQuery)this).PhraseSlop = phraseSlop;
 			return this;
 		}
-		public QueryStringDescriptor<T> Boost(double boost)
+		public QueryStringQueryDescriptor<T> Boost(double boost)
 		{
-			this._Boost = boost;
+			((IQueryStringQuery)this).Boost = boost;
 			return this;
 		}
-		public QueryStringDescriptor<T> Rewrite(RewriteMultiTerm rewriteMultiTerm)
+		public QueryStringQueryDescriptor<T> Rewrite(RewriteMultiTerm rewriteMultiTerm)
 		{
-			this._Rewrite = rewriteMultiTerm;
+			((IQueryStringQuery)this).Rewrite = rewriteMultiTerm;
 			return this;
 		}
-		public QueryStringDescriptor<T> Lenient(bool lenient)
+		public QueryStringQueryDescriptor<T> Lenient(bool lenient = true)
 		{
-			this._Lenient = lenient;
+			((IQueryStringQuery)this).Lenient = lenient;
 			return this;
 		}
-		public QueryStringDescriptor<T> AnalyzeWildcard(bool analyzeWildcard)
+		public QueryStringQueryDescriptor<T> AnalyzeWildcard(bool analyzeWildcard = true)
 		{
-			this._AnalyzeWildcard = analyzeWildcard;
+			((IQueryStringQuery)this).AnalyzeWildcard = analyzeWildcard;
 			return this;
 		}
-		public QueryStringDescriptor<T> AutoGeneratePhraseQueries(bool autoGeneratePhraseQueries)
+		public QueryStringQueryDescriptor<T> AutoGeneratePhraseQueries(bool autoGeneratePhraseQueries = true)
 		{
-			this._AutoGeneratePhraseQueries = autoGeneratePhraseQueries;
+			((IQueryStringQuery)this).AutoGeneratePhraseQueries = autoGeneratePhraseQueries;
 			return this;
 		}
-		public QueryStringDescriptor<T> MinimumShouldMatchPercentage(int minimumShouldMatchPercentage)
+		public QueryStringQueryDescriptor<T> MinimumShouldMatchPercentage(int minimumShouldMatchPercentage)
 		{
-			this._MinimumShouldMatchPercentage = "{0}%".F(minimumShouldMatchPercentage);
+			((IQueryStringQuery)this).MinimumShouldMatchPercentage = "{0}%".F(minimumShouldMatchPercentage);
 			return this;
 		}
-		public QueryStringDescriptor<T> UseDisMax(bool useDismax)
+		public QueryStringQueryDescriptor<T> UseDisMax(bool useDismax = true)
 		{
-			this._UseDismax = useDismax;
+			((IQueryStringQuery)this).UseDismax = useDismax;
 			return this;
 		}
-		public QueryStringDescriptor<T> TieBreaker(double tieBreaker)
+		public QueryStringQueryDescriptor<T> TieBreaker(double tieBreaker)
 		{
-			this._TieBreaker = tieBreaker;
+			((IQueryStringQuery)this).TieBreaker = tieBreaker;
 			return this;
 		}
 

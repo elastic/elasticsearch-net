@@ -4,11 +4,10 @@ namespace Nest
 {
 	public class AliasDefinition
 	{
-
 		public string Name { get; set; }
 
 		[JsonProperty("filter")]
-		internal FilterBase Filter { get; set; }
+		public IFilterContainer Filter { get; internal set; }
 	
 		[JsonProperty("routing")]
 		public string Routing { get; internal set; }

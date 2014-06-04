@@ -2,55 +2,101 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers;
+using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
-
-using Elasticsearch.Net;
 using System.Globalization;
 using System;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	public class GeoDistanceFilterDescriptor : FilterBase
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IGeoDistanceFilter : IFilter
 	{
-		internal string _Location { get; set; }
-		internal object _Distance { get; set; }
-		internal string _GeoUnit { get; set; }
-		internal string _GeoOptimizeBBox { get; set; }
+		PropertyPathMarker Field { get; set; }
 
-		internal override bool IsConditionless
+		string Location { get; set; }
+		
+		[JsonProperty("distance")]
+		object Distance { get; set; }
+		
+		[JsonProperty("unit")]
+		[JsonConverter(typeof(StringEnumConverter))]
+		GeoUnit? Unit { get; set; }
+	
+		[JsonProperty("optimize_bbox")]
+		[JsonConverter(typeof(StringEnumConverter))]
+		GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
+
+		[JsonProperty("distance_type")]
+		[JsonConverter(typeof(StringEnumConverter))]
+		GeoDistanceType? DistanceType { get; set; }
+	}
+
+	public class GeoDistanceFilter : PlainFilter, IGeoDistanceFilter
+	{
+		protected internal override void WrapInContainer(IFilterContainer container)
+		{
+			container.GeoDistance = this;
+		}
+
+		public PropertyPathMarker Field { get; set; }
+		public string Location { get; set; }
+		public object Distance { get; set; }
+		public GeoUnit? Unit { get; set; }
+		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
+		public GeoDistanceType? DistanceType { get; set; }
+	}
+
+	public class GeoDistanceFilterDescriptor : FilterBase, IGeoDistanceFilter
+	{
+		PropertyPathMarker IGeoDistanceFilter.Field { get; set; }
+		string IGeoDistanceFilter.Location { get; set; }
+		object IGeoDistanceFilter.Distance { get; set; }
+		GeoUnit? IGeoDistanceFilter.Unit { get; set; }
+		GeoDistanceType? IGeoDistanceFilter.DistanceType { get; set; }
+		GeoOptimizeBBox? IGeoDistanceFilter.OptimizeBoundingBox { get; set; }
+
+		bool IFilter.IsConditionless
 		{
 			get
 			{
-				return this._Location.IsNullOrEmpty() || this._Distance == null;
+				return ((IGeoDistanceFilter)this).Location.IsNullOrEmpty() || ((IGeoDistanceFilter)this).Distance == null;
 			}
-
 		}
 
 		public GeoDistanceFilterDescriptor Location(double Lat, double Lon)
 		{
 			var c = CultureInfo.InvariantCulture;
-			this._Location = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
+			((IGeoDistanceFilter)this).Location = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
 			return this;
 		}
 		public GeoDistanceFilterDescriptor Location(string geoHash)
 		{
-			this._Location = geoHash;
+			((IGeoDistanceFilter)this).Location = geoHash;
 			return this;
 		}
 		public GeoDistanceFilterDescriptor Distance(string distance)
 		{
-			this._Distance = distance;
+			((IGeoDistanceFilter)this).Distance = distance;
 			return this;
 		}
 		public GeoDistanceFilterDescriptor Distance(double distance, GeoUnit unit)
 		{
-			this._Distance = distance;
-			this._GeoUnit = Enum.GetName(typeof(GeoUnit), unit);
+			((IGeoDistanceFilter)this).Distance = distance;
+			((IGeoDistanceFilter)this).Unit = unit;
 			return this;
 		}
 		public GeoDistanceFilterDescriptor Optimize(GeoOptimizeBBox optimize)
 		{
-			this._GeoOptimizeBBox = Enum.GetName(typeof(GeoOptimizeBBox), optimize);
+			((IGeoDistanceFilter)this).OptimizeBoundingBox = optimize;
+			return this;
+		}
+		public GeoDistanceFilterDescriptor DistanceType(GeoDistanceType type)
+		{
+			((IGeoDistanceFilter)this).DistanceType = type;
 			return this;
 		}
 	}

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Linq;
+using Elasticsearch.Net;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 using Nest.Tests.MockData;
@@ -24,8 +25,8 @@ namespace Nest.Tests.Integration.Search
 			);
 			Assert.NotNull(results);
 			Assert.True(results.IsValid);
-			Assert.NotNull(results.Documents);
-			Assert.GreaterOrEqual(results.Documents.Count(), 10);
+			Assert.NotNull(results.FieldSelections);
+			Assert.GreaterOrEqual(results.FieldSelections.Count(), 10);
 
 		}
 		[Test]
@@ -60,8 +61,8 @@ namespace Nest.Tests.Integration.Search
 			);
 			Assert.NotNull(results);
 			Assert.True(results.IsValid);
-			Assert.NotNull(results.Documents);
-			Assert.GreaterOrEqual(results.Documents.Count(), 1);
+			Assert.NotNull(results.FieldSelections);
+			Assert.GreaterOrEqual(results.FieldSelections.Count(), 1);
 		}
 		[Test]
 		public void TestWildcardQuery()
@@ -78,8 +79,8 @@ namespace Nest.Tests.Integration.Search
 			);
 			Assert.NotNull(results);
 			Assert.True(results.IsValid);
-			Assert.NotNull(results.Documents);
-			Assert.GreaterOrEqual(results.Documents.Count(), 1);
+			Assert.NotNull(results.FieldSelections);
+			Assert.GreaterOrEqual(results.FieldSelections.Count(), 1);
 		}
 		[Test]
 		public void TestWildcardQueryBoostAndRewrite()
@@ -96,8 +97,8 @@ namespace Nest.Tests.Integration.Search
 			);
 			Assert.NotNull(results);
 			Assert.True(results.IsValid);
-			Assert.NotNull(results.Documents);
-			Assert.GreaterOrEqual(results.Documents.Count(), 1);
+			Assert.NotNull(results.FieldSelections);
+			Assert.GreaterOrEqual(results.FieldSelections.Count(), 1);
 		}
 		[Test]
 		public void TestPrefixQuery()
@@ -114,8 +115,8 @@ namespace Nest.Tests.Integration.Search
 			);
 			Assert.NotNull(results);
 			Assert.True(results.IsValid);
-			Assert.NotNull(results.Documents);
-			Assert.GreaterOrEqual(results.Documents.Count(), 1);
+			Assert.NotNull(results.FieldSelections);
+			Assert.GreaterOrEqual(results.FieldSelections.Count(), 1);
 		}
 		[Test]
 		public void TestTermFacet()
@@ -142,7 +143,7 @@ namespace Nest.Tests.Integration.Search
 
 			var results = this._client.Search<ElasticsearchProject>(s => s
 				.Query(q => q.MatchAll())
-				.SuggestTerm("mySuggest", m => m.SuggestMode(SuggestMode.Always).Text(wrongCountry).Size(1).OnField("country"))
+				.SuggestTerm("mySuggest", m => m.SuggestMode(SuggestModeOptions.Always).Text(wrongCountry).Size(1).OnField("country"))
 			);
 
 			Assert.NotNull(results);

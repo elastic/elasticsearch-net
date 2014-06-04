@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net.Connection;
@@ -36,9 +37,9 @@ namespace Elasticsearch.Net
 			return (T)this;
 		}
 		
-		public T DeserializationState(object deserializationState)
+		public T DeserializationState(object customObjectCreator)
 		{
-			_DeserializationState = deserializationState;
+			_DeserializationState = customObjectCreator;
 			return (T)this;
 		}
 

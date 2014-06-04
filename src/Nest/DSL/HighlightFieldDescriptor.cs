@@ -3,62 +3,122 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Nest.Resolvers;
 
 namespace Nest
 {
-	public class HighlightFieldDescriptor<T> where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<HighlightField>))]
+	public interface IHighlightField
 	{
-		internal PropertyPathMarker _Field { get; set; }
-		
+		PropertyPathMarker Field { get; set; }
+
 		[JsonProperty("pre_tags")]
-		internal IEnumerable<string> _PreTags { get; set; }
+		IEnumerable<string> PreTags { get; set; }
 
 		[JsonProperty("post_tags")]
-		internal IEnumerable<string> _PostTags { get; set; }
+		IEnumerable<string> PostTags { get; set; }
 
 		[JsonProperty("fragment_size")]
-		internal int? _FragmentSize { get; set; }
+		int? FragmentSize { get; set; }
+
+        [JsonProperty("no_match_size")]
+        int? NoMatchSize { get; set; }
 
 		[JsonProperty("number_of_fragments")]
-		internal int? _NumberOfFragments { get; set; }
+		int? NumberOfFragments { get; set; }
 
 		[JsonProperty("fragment_offset")]
-		internal int? _FragmentOffset { get; set; }
+		int? FragmentOffset { get; set; }
 
 		[JsonProperty("boundary_max_size")]
-		internal int? _BoundaryMaxSize { get; set; }
+		int? BoundaryMaxSize { get; set; }
 
 		[JsonProperty("encoder")]
-		internal string _Encoder { get; set; }
+		string Encoder { get; set; }
 
 		[JsonProperty("order")]
-		internal string _Order { get; set; }
+		string Order { get; set; }
 
 		[JsonProperty("tags_schema")]
-		internal string _TagsSchema { get; set; }
+		string TagsSchema { get; set; }
 
 		[JsonProperty("require_field_match")]
-		internal bool? _RequireFieldMatch { get; set; }
+		bool? RequireFieldMatch { get; set; }
 
 		[JsonProperty("boundary_chars")]
-		internal string _BoundaryChars { get; set; }
+		string BoundaryChars { get; set; }
 
 		[JsonProperty("type")]
-		internal string _Type { get; set; }
+		string Type { get; set; }
 
 		[JsonProperty("force_source")]
-		internal bool? _ForceSource { get; set; }
+		bool? ForceSource { get; set; }
+	}
+
+	public class HighlightField : IHighlightField
+	{
+		public PropertyPathMarker Field { get; set; }
+		public IEnumerable<string> PreTags { get; set; }
+		public IEnumerable<string> PostTags { get; set; }
+		public int? FragmentSize { get; set; }
+		public int? NoMatchSize { get; set; }
+		public int? NumberOfFragments { get; set; }
+		public int? FragmentOffset { get; set; }
+		public int? BoundaryMaxSize { get; set; }
+		public string Encoder { get; set; }
+		public string Order { get; set; }
+		public string TagsSchema { get; set; }
+		public bool? RequireFieldMatch { get; set; }
+		public string BoundaryChars { get; set; }
+		public string Type { get; set; }
+		public bool? ForceSource { get; set; }
+	}
+
+	public class HighlightFieldDescriptor<T> : IHighlightField where T : class
+	{
+		protected IHighlightField Self { get { return this; } }
+
+		PropertyPathMarker IHighlightField.Field { get; set; }
+		
+		IEnumerable<string> IHighlightField.PreTags { get; set; }
+
+		IEnumerable<string> IHighlightField.PostTags { get; set; }
+
+		int? IHighlightField.FragmentSize { get; set; }
+
+		int? IHighlightField.NoMatchSize { get; set; }
+
+		int? IHighlightField.NumberOfFragments { get; set; }
+
+		int? IHighlightField.FragmentOffset { get; set; }
+
+		int? IHighlightField.BoundaryMaxSize { get; set; }
+
+		string IHighlightField.Encoder { get; set; }
+
+		string IHighlightField.Order { get; set; }
+
+		string IHighlightField.TagsSchema { get; set; }
+
+		bool? IHighlightField.RequireFieldMatch { get; set; }
+
+		string IHighlightField.BoundaryChars { get; set; }
+
+		string IHighlightField.Type { get; set; }
+
+		bool? IHighlightField.ForceSource { get; set; }
 		
 		public HighlightFieldDescriptor<T> OnField(string field)
 		{
-			this._Field = field;
+			Self.Field = field;
 			return this;
 		}
 		public HighlightFieldDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			Self.Field = objectPath;
 			return this;
 		}
 		public HighlightFieldDescriptor<T> OnAll()
@@ -67,77 +127,82 @@ namespace Nest
 		}
 		public HighlightFieldDescriptor<T> TagsSchema(string schema = "styled")
 		{
-			this._TagsSchema = schema;
+			Self.TagsSchema = schema;
 			return this;
 		}
 		public HighlightFieldDescriptor<T> ForceSource(bool force = true)
 		{
-			this._ForceSource = force;
+			Self.ForceSource = force;
 			return this;
 		}
 		public HighlightFieldDescriptor<T> Type(string type)
 		{
-			this._Type = type;
+			Self.Type = type;
 			return this;
 		}
 		public HighlightFieldDescriptor<T> PreTags(string preTags)
 		{
-			this._PreTags = new[] { preTags };
+			Self.PreTags = new[] { preTags };
 			return this;
 		}
 		public HighlightFieldDescriptor<T> PostTags(string postTags)
 		{
-			this._PostTags = new[] { postTags };
+			Self.PostTags = new[] { postTags };
 			return this;
 		}
 		public HighlightFieldDescriptor<T> PreTags(IEnumerable<string> preTags)
 		{
-			this._PreTags = preTags;
+			Self.PreTags = preTags;
 			return this;
 		}
 		public HighlightFieldDescriptor<T> PostTags(IEnumerable<string> postTags)
 		{
-			this._PostTags = postTags;
+			Self.PostTags = postTags;
 			return this;
 		}
 		public HighlightFieldDescriptor<T> FragmentSize(int fragmentSize)
 		{
-			this._FragmentSize = fragmentSize;
+			Self.FragmentSize = fragmentSize;
 			return this;
 		}
+        public HighlightFieldDescriptor<T> NoMatchSize(int noMatchSize)
+        {
+            Self.NoMatchSize = noMatchSize;
+            return this;
+        }
 		public HighlightFieldDescriptor<T> NumberOfFragments(int numberOfFragments)
 		{
-			this._NumberOfFragments = numberOfFragments;
+			Self.NumberOfFragments = numberOfFragments;
 			return this;
 		}
 		public HighlightFieldDescriptor<T> FragmentOffset(int fragmentOffset)
 		{
-			this._FragmentOffset = fragmentOffset;
+			Self.FragmentOffset = fragmentOffset;
 			return this;
 		}
 		public HighlightFieldDescriptor<T> Encoder(string encoder)
 		{
-			this._Encoder = encoder;
+			Self.Encoder = encoder;
 			return this;
 		}
 		public HighlightFieldDescriptor<T> Order(string order)
 		{
-			this._Order = order;
+			Self.Order = order;
 			return this;
 		}
 		public HighlightFieldDescriptor<T> RequireFieldMatch(bool requireFieldMatch)
 		{
-			this._RequireFieldMatch = requireFieldMatch;
+			Self.RequireFieldMatch = requireFieldMatch;
 			return this;
 		}
 		public HighlightFieldDescriptor<T> BoundaryCharacters(string boundaryCharacters)
 		{
-			this._BoundaryChars = boundaryCharacters;
+			Self.BoundaryChars = boundaryCharacters;
 			return this;
 		}
 		public HighlightFieldDescriptor<T> BoundaryMaxSize(int boundaryMaxSize)
 		{
-			this._BoundaryMaxSize = boundaryMaxSize;
+			Self.BoundaryMaxSize = boundaryMaxSize;
 			return this;
 		}
 	}

@@ -16,9 +16,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				.Filter(ff=>ff
 					.Range(n => n
 						.OnField(f=>f.LOC)
-						.From("10")
-						.To("20")
-						.FromExclusive()
+						.GreaterOrEquals("10")
+						.Lower("20")
 					)
 				);
 				
@@ -27,9 +26,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				filter : {
 						range: {
 							""loc"": {
-								from: ""10"",
-								to: ""20"",
-								include_lower: false
+								gte: ""10"",
+								lt: ""20"",
 							}
 						}
 
@@ -57,10 +55,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				filter : {
 						range: {
 							""loc"": {
-								from: ""10"",
-								to: ""20"",
-								include_lower: true,
-								include_upper: true
+								gte: ""10"",
+								lte: ""20"",
 							},
 							_cache: true,
 							_name : ""my_name""
@@ -80,9 +76,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				.Filter(ff => ff
 					.Range(n => n
 						.OnField(f => f.LOC)
-						.From(10)
-						.To(20)
-						.FromExclusive()
+						.GreaterOrEquals(10)
+						.Lower(20)
 					)
 				);
 
@@ -91,9 +86,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				filter : {
 						range: {
 							""loc"": {
-								from: 10,
-								to: 20,
-								include_lower: false
+								gte: ""10"",
+								lt: ""20"",
 							}
 						}
 
@@ -111,9 +105,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				.Filter(ff => ff
 					.Range(n => n
 						.OnField(f => f.LOC)
-						.From(10.0)
-						.To(20.0)
-						.FromExclusive()
+						.GreaterOrEquals(10.3)
+						.LowerOrEquals(20.4)
 					)
 				);
 
@@ -122,9 +115,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				filter : {
 						range: {
 							""loc"": {
-								from: 10.0,
-								to: 20.0,
-								include_lower: false
+								gte: ""10.3"",
+								lte: ""20.4"",
 							}
 						}
 
@@ -145,9 +137,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				.Filter(ff => ff
 					.Range(n => n
 						.OnField(f => f.StartedOn)
-						.From(lowerBound, format)
-						.To(upperBound, format)
-						.FromExclusive()
+						.GreaterOrEquals(lowerBound, format)
+						.Lower(upperBound, format)
 					)
 				);
 
@@ -156,9 +147,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				filter : {
 						range: {
 							""startedOn"": {
-								from: """ + lowerBound.ToString(format) + @""",
-								to: """ + upperBound.ToString(format) + @""",
-								include_lower: false
+								gte: """ + lowerBound.ToString(format) + @""",
+								lt: """ + upperBound.ToString(format) + @""",
 							}
 						}
 

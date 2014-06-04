@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
@@ -9,59 +10,100 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<TopChildrenQueryDescriptor<object>>))]
+	public interface ITopChildrenQuery : IQuery
+	{
+		[JsonProperty("type")]
+		TypeNameMarker Type { get; set; }
+
+		[JsonProperty("_scope")]
+		string Scope { get; set; }
+
+		[JsonProperty("score"), JsonConverter(typeof (StringEnumConverter))]
+		TopChildrenScore? Score { get; set; }
+
+		[JsonProperty("factor")]
+		int? Factor { get; set; }
+
+		[JsonProperty("incremental_factor")]
+		int? IncrementalFactor { get; set; }
+
+		[JsonProperty("query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		IQueryContainer Query { get; set; }
+
+		[JsonProperty(PropertyName = "_cache")]
+		bool? Cache { get; set; }
+
+		[JsonProperty(PropertyName = "_name")]
+		string Name { get; set; }
+	}
+
+	public class TopChildrenQuery : PlainQuery, ITopChildrenQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.TopChildren = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public TypeNameMarker Type { get; set; }
+		public string Scope { get; set; }
+		public TopChildrenScore? Score { get; set; }
+		public int? Factor { get; set; }
+		public int? IncrementalFactor { get; set; }
+		public IQueryContainer Query { get; set; }
+		public bool? Cache { get; set; }
+		public string Name { get; set; }
+	}
+
 	/// <summary>
 	/// The top_children query runs the child query with an estimated hits size, and out of the hit docs, 
 	/// aggregates it into parent docs. If there aren’t enough parent docs matching the 
 	/// requested from/size search request, then it is run again with a wider (more hits) search.
 	/// </summary>
 	/// <typeparam name="T">Type used to strongly type parts of this query</typeparam>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class TopChildrenQueryDescriptor<T> : IQuery where T : class
+	public class TopChildrenQueryDescriptor<T> : ITopChildrenQuery where T : class
 	{
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._QueryDescriptor == null || this._QueryDescriptor.IsConditionless;
+				return ((ITopChildrenQuery)this).Query == null || ((ITopChildrenQuery)this).Query.IsConditionless;
 			}
 		}
 
 		public TopChildrenQueryDescriptor()
 		{
-			this._Type = TypeNameMarker.Create<T>();
+			((ITopChildrenQuery)this).Type = TypeNameMarker.Create<T>();
+			
 		}
-		[JsonProperty("type")]
-		internal TypeNameMarker _Type { get; set; }
 
-		[JsonProperty("_scope")]
-		internal string _Scope { get; set; }
+		TypeNameMarker ITopChildrenQuery.Type { get; set; }
 
-		[JsonProperty("score"), JsonConverter(typeof(StringEnumConverter))]
-		internal TopChildrenScore? _Score { get; set; }
+		string ITopChildrenQuery.Scope { get; set; }
 
-		[JsonProperty("factor")]
-		internal int? _Factor { get; set; }
+		TopChildrenScore? ITopChildrenQuery.Score { get; set; }
 
-		[JsonProperty("incremental_factor")]
-		internal int? _IncrementalFactor { get; set; }
+		int? ITopChildrenQuery.Factor { get; set; }
 
-		[JsonProperty("query")]
-		internal BaseQuery _QueryDescriptor { get; set; }
+		int? ITopChildrenQuery.IncrementalFactor { get; set; }
 
-		[JsonProperty(PropertyName = "_cache")]
-		internal bool? _Cache { get; set; }
+		IQueryContainer ITopChildrenQuery.Query { get; set; }
 
-		[JsonProperty(PropertyName = "_name")]
-		internal string _Name { get; set; }
+		bool? ITopChildrenQuery.Cache { get; set; }
+
+		string ITopChildrenQuery.Name { get; set; }
 
 		/// <summary>
 		/// Provide a child query for the top_children query
 		/// </summary>
 		/// <param name="querySelector">Describe the child query to be executed</param>
-		public TopChildrenQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public TopChildrenQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			this._QueryDescriptor = querySelector(q);
+			((ITopChildrenQuery)this).Query = querySelector(q);
 			return this;
 		}
 		
@@ -72,7 +114,7 @@ namespace Nest
 		/// <param name="scope">The name of the scope</param>
 		public TopChildrenQueryDescriptor<T> Scope(string scope)
 		{
-			this._Scope = scope;
+			((ITopChildrenQuery)this).Scope = scope;
 			return this;
 		}
 		
@@ -82,7 +124,7 @@ namespace Nest
 		/// <param name="factor">The factor that controls how many hits are asked for</param>
 		public TopChildrenQueryDescriptor<T> Factor(int factor)
 		{
-			this._Factor = factor;
+			((ITopChildrenQuery)this).Factor = factor;
 			return this;
 		}
 		
@@ -92,7 +134,7 @@ namespace Nest
 		/// <param name="score">max, sum or avg</param>
 		public TopChildrenQueryDescriptor<T> Score(TopChildrenScore score)
 		{
-			this._Score = score;
+			((ITopChildrenQuery)this).Score = score;
 			return this;
 		}
 		
@@ -103,7 +145,7 @@ namespace Nest
 		/// <param name="factor">Multiplier for the original factor parameter</param>
 		public TopChildrenQueryDescriptor<T> IncrementalFactor(int factor)
 		{
-			this._IncrementalFactor = factor;
+			((ITopChildrenQuery)this).IncrementalFactor = factor;
 			return this;
 		}
 		
@@ -113,7 +155,7 @@ namespace Nest
 		/// </summary>
 		public TopChildrenQueryDescriptor<T> Type(string type)
 		{
-			this._Type = type;
+			((ITopChildrenQuery)this).Type = type;
 			return this;
 		}
 	}

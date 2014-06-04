@@ -10,6 +10,26 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	public static class Infer
+	{
+		public static IndexNameMarker Index<T>()
+		{
+			return typeof(T);
+		}
+		public static IndexNameMarker Index(Type t)
+		{
+			return t;
+		}
+		public static TypeNameMarker Type<T>()
+		{
+			return typeof(T);
+		}
+		public static TypeNameMarker Type(Type t)
+		{
+			return t;
+		}
+	}
+
 	public class ElasticInferrer
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;

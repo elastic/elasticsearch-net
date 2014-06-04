@@ -8,9 +8,10 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-  public enum GeoExecution
-  {
-   memory,
-   indexed
-  }
+	[JsonConverter(typeof(StringEnumConverter))]
+	public enum GeoExecution
+	{
+		memory,
+		indexed
+	}
 }

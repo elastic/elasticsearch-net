@@ -1,6 +1,4 @@
-﻿using Nest.DSL.Suggest;
-using Nest.Resolvers;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,57 +8,58 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class CompletionSuggestDescriptor<T> : BaseSuggestDescriptor<T> where T : class
+	public interface ICompletionSuggester : ISuggester
 	{
 		[JsonProperty(PropertyName = "fuzzy")]
-		internal IFuzzySuggestDescriptor<T> _Fuzzy { get; set; }
+		IFuzzySuggester Fuzzy { get; set; }
+	}
+
+	public class CompletionSuggester : Suggester, ICompletionSuggester
+	{
+		public IFuzzySuggester Fuzzy { get; set; }
+	}
+
+	public class CompletionSuggestDescriptor<T> : BaseSuggestDescriptor<T>, ICompletionSuggester where T : class
+	{
+		public ICompletionSuggester Self { get { return this; } }
+
+		IFuzzySuggester ICompletionSuggester.Fuzzy { get; set; }
 
 		public CompletionSuggestDescriptor<T> Size(int size)
 		{
-			this._Size = size;
+			Self.Size = size;
 			return this;
 		}
 
 		public CompletionSuggestDescriptor<T> Text(string text)
 		{
-			this._Text = text;
+			Self._Text = text;
 			return this;
 		}
 
 		public CompletionSuggestDescriptor<T> OnField(string field)
 		{
-			this._Field = field;
+			Self.Field = field;
 			return this;
 		}
 
 		public CompletionSuggestDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			Self.Field = objectPath;
 			return this;
 		}
 
-		public CompletionSuggestDescriptor<T> Fuzzy(Func<FuzzySuggestDescriptor<T>, FuzzySuggestDescriptor<T>> fuzzyDescriptor)
+		public CompletionSuggestDescriptor<T> Fuzzy(Func<FuzzySuggestDescriptor<T>, FuzzySuggestDescriptor<T>> fuzzyDescriptor = null)
 		{
-			this._Fuzzy = fuzzyDescriptor(new FuzzySuggestDescriptor<T>());
+			if (fuzzyDescriptor == null)
+			{
+				Self.Fuzzy = new FuzzySuggester();
+				return this;
+			}
+			Self.Fuzzy = fuzzyDescriptor(new FuzzySuggestDescriptor<T>());
 			return this;
 		}
 
-		public CompletionSuggestDescriptor<T> Fuzzy()
-		{
-			this._Fuzzy = new FuzzySuggestDescriptor<T>();
-			return this;
-		}
-
-		public CompletionSuggestDescriptor<T> Fuzziness(Func<FuzzinessSuggestDescriptor<T>, FuzzinessSuggestDescriptor<T>> fuzzinessDescriptor)
-		{
-			this._Fuzzy = fuzzinessDescriptor(new FuzzinessSuggestDescriptor<T>());
-			return this;
-		}
-
-		public CompletionSuggestDescriptor<T> Fuzziness()
-		{
-			this._Fuzzy = new FuzzinessSuggestDescriptor<T>();
-			return this;
-		} 
+		
 	}
 }

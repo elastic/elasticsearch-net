@@ -16,6 +16,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 		public string Documentation { get; set; }
 		public string Path { get; set; }
 		public string Arguments { get; set; }
+		public bool Allow404 { get; set; }
 		public IEnumerable<ApiUrlPart> Parts { get; set; }
 		public ApiUrl Url { get; set; }
 	}

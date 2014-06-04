@@ -38,7 +38,8 @@ namespace Nest
 			suggest.ThrowIfNull("suggest");
 			var desc = new TermSuggestDescriptor<T>();
 			var item = suggest(desc);
-			var bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, TermSuggest = item };
+			ITermSuggester i = item;
+			var bucket = new SuggestBucket { Text = i._Text, Term = item };
 			this._Suggest.Add(name, bucket);
 			return this;
 		}
@@ -56,7 +57,8 @@ namespace Nest
 
 			var desc = new PhraseSuggestDescriptor<T>();
 			var item = suggest(desc);
-			var bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, PhraseSuggest = item };
+			IPhraseSuggester i = item;
+			var bucket = new SuggestBucket { Text = i._Text, Phrase = item };
 			this._Suggest.Add(name, bucket);
 			return this;
 		}
@@ -74,7 +76,8 @@ namespace Nest
 
 			var desc = new CompletionSuggestDescriptor<T>();
 			var item = suggest(desc);
-			var bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, CompletionSuggest = item };
+			ICompletionSuggester i = item;
+			var bucket = new SuggestBucket { Text = i._Text, Completion = item };
 			this._Suggest.Add(name, bucket);
 			return this;
 		}

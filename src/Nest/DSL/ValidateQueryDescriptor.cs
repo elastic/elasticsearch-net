@@ -12,9 +12,9 @@ namespace Nest
 		where T : class
 	{
 		[JsonProperty("query")]
-		public BaseQuery _Query { get; set; }
+		public QueryContainer _Query { get; set; }
 
-		public ValidateQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public ValidateQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			this._Query = querySelector(new QueryDescriptor<T>());
 			return this;

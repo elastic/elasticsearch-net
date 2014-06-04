@@ -24,6 +24,7 @@ namespace Elasticsearch.Net.Connection
 		bool TraceEnabled { get; }
 		bool UsesPrettyResponses { get; }
 		bool KeepRawResponse { get; }
+        bool AutomaticProxyDetection { get; }
 
 		/// <summary>
 		/// Instead of following a c/go like error checking on response.IsValid always throw an ElasticsearchServerException

@@ -26,7 +26,7 @@ namespace Nest.Tests.Unit.Search.Suggest
 		}
 
 		[Test]
-		public void CompletionSuggestDescriptorDefaultFuzzyTest()
+		public void CompletionSuggestDescriptorDefaultFuzzinessTest()
 		{
 			var completionSuggestDescriptor = new CompletionSuggestDescriptor<ElasticsearchProject>()
 				.OnField("suggest")
@@ -36,33 +36,8 @@ namespace Nest.Tests.Unit.Search.Suggest
 			var json = TestElasticClient.Serialize(completionSuggestDescriptor);
 
 			var expected = @"{
-                              fuzzy: {
-                                edit_distance: 1,
-                                transpositions: true,
-                                min_length: 3,
-                                prefix_length: 1
-                              },
-                              field: ""suggest""
-                            }";
-
-			Assert.IsTrue(json.JsonEquals(expected), json);
-		}
-
-		[Test]
-		public void CompletionSuggestDescriptorDefaultFuzzinessTest()
-		{
-			var completionSuggestDescriptor = new CompletionSuggestDescriptor<ElasticsearchProject>()
-				.OnField("suggest")
-				.Text("n")
-				.Fuzziness();
-
-			var json = TestElasticClient.Serialize(completionSuggestDescriptor);
-
-			var expected = @"{
-                              fuzzy: {
-								fuzziness: {}
-                              },
-                              field: ""suggest""
+                              field: ""suggest"",
+                              fuzzy: {},
                             }";
 
 			Assert.IsTrue(json.JsonEquals(expected), json);
@@ -75,7 +50,6 @@ namespace Nest.Tests.Unit.Search.Suggest
 				.OnField("suggest")
 				.Text("n")
 				.Fuzzy(f => f
-					.EditDistance(2)
 					.Transpositions(false)
 					.MinLength(5)
 					.PrefixLength(4));
@@ -83,13 +57,12 @@ namespace Nest.Tests.Unit.Search.Suggest
 			var json = TestElasticClient.Serialize(completionSuggestDescriptor);
 
 			var expected = @"{
+                              field: ""suggest"",
                               ""fuzzy"": {
-                                edit_distance: 2,
                                 transpositions: false,
                                 min_length: 5,
                                 prefix_length: 4
-                              },
-                              field: ""suggest""
+                              }
                             }";
 
 			Assert.IsTrue(json.JsonEquals(expected), json);
@@ -101,15 +74,15 @@ namespace Nest.Tests.Unit.Search.Suggest
 			var completionSuggestDescriptor = new CompletionSuggestDescriptor<ElasticsearchProject>()
 				.OnField("suggest")
 				.Text("n")
-				.Fuzziness(f => f.Fuzziness(1));
+				.Fuzzy(f => f.Fuzziness(1));
 
 			var json = TestElasticClient.Serialize(completionSuggestDescriptor);
 
 			var expected = @"{
+                              field: ""suggest"",
                               fuzzy: {
                                 fuzziness: 1
-                              },
-                              field: ""suggest""
+                              }
                             }";
 
 			Assert.IsTrue(json.JsonEquals(expected), json);
@@ -121,15 +94,15 @@ namespace Nest.Tests.Unit.Search.Suggest
 			var completionSuggestDescriptor = new CompletionSuggestDescriptor<ElasticsearchProject>()
 				.OnField("suggest")
 				.Text("n")
-				.Fuzziness(f => f.Fuzziness(0.4));
+				.Fuzzy(f => f.Fuzziness(0.4));
 
 			var json = TestElasticClient.Serialize(completionSuggestDescriptor);
 
 			var expected = @"{
+                              field: ""suggest"",
                               fuzzy: {
                                 fuzziness: 0.4
-                              },
-                              field: ""suggest""
+                              }
                             }";
 
 			Assert.IsTrue(json.JsonEquals(expected), json);
@@ -151,13 +124,8 @@ namespace Nest.Tests.Unit.Search.Suggest
 					mycompletionsuggest: {
 						text: ""n"",
 						completion: {
-							fuzzy: {
-								edit_distance: 1,
-								transpositions: true,
-								min_length: 3,
-								prefix_length: 1
-							},
-							field: ""name""
+							field: ""name"",
+							fuzzy: {}
 						}
 					}
 				}
@@ -173,7 +141,7 @@ namespace Nest.Tests.Unit.Search.Suggest
 				.SuggestCompletion("mycompletionsuggest", ts => ts
 					.Text("n")
 					.OnField(p => p.Name)
-					.Fuzziness()
+					.Fuzzy()
 				)
 			);
 
@@ -182,10 +150,8 @@ namespace Nest.Tests.Unit.Search.Suggest
 					mycompletionsuggest: {
 						text: ""n"",
 						completion: {
-							fuzzy: {
-								fuzziness: {}
-							},
-							field: ""name""
+							field: ""name"",
+							fuzzy: {},
 						}
 					}
 				}

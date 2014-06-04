@@ -23,6 +23,19 @@ namespace Nest.Resolvers
 			return new IndexNameMarker { Type = type };
 		}
 
+		bool IEquatable<IndexNameMarker>.Equals(IndexNameMarker other)
+		{
+			return Equals(other);
+		}
+
+		public override bool Equals(object obj)
+		{
+			var s = obj as string;
+			if (!s.IsNullOrEmpty()) return this.EqualsString(s);
+			var pp = obj as IndexNameMarker;
+			if (pp != null) return this.EqualsMarker(pp);
+			return base.Equals(obj);
+		}
 
 		public override int GetHashCode()
 		{
@@ -32,7 +45,13 @@ namespace Nest.Resolvers
 				return this.Type.GetHashCode();
 			return 0;
 		}
-		public bool Equals(IndexNameMarker other)
+
+		public bool EqualsString(string other)
+		{
+			return !other.IsNullOrEmpty() && other == this.Name;
+		}
+
+		public bool EqualsMarker(IndexNameMarker other)
 		{
 			return other != null && this.GetHashCode() == other.GetHashCode();
 		}

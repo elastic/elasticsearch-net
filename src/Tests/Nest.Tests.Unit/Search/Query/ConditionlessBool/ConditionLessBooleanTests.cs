@@ -16,7 +16,7 @@ namespace Nest.Tests.Unit.Search.Query.ConditionlessBool
 		}
 		private readonly Criteria _c = new Criteria();
 
-		private void DoSemiConditionlessQuery(Func<QueryDescriptor<ElasticsearchProject>, BaseQuery> query, string Filename= "MatchAll")
+		private void DoSemiConditionlessQuery(Func<QueryDescriptor<ElasticsearchProject>, QueryContainer> query, string Filename= "MatchAll")
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
 			 .From(0)

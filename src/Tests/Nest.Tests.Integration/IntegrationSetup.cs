@@ -15,7 +15,10 @@ namespace Nest.Tests.Integration
 		[SetUp]
 		public static void Setup()
 		{
-			var client = ElasticsearchConfiguration.Client;
+			var client = new ElasticClient(ElasticsearchConfiguration.Settings(hostOverride: new Uri("http://localhost:9200")));
+
+			//uncomment the next line if you want to see the setup in fiddler too
+			//var client = ElasticsearchConfiguration.Client;
 
 			var projects = NestTestData.Data;
 			var people = NestTestData.People;
@@ -25,9 +28,9 @@ namespace Nest.Tests.Integration
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
 				.AddMapping<ElasticsearchProject>(m => m
-                    .MapFromAttributes()
-                    .Properties(p => p
-                        .String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.with_positions_offsets_payloads))))
+				.MapFromAttributes()
+				.Properties(p => p
+				.String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.with_positions_offsets_payloads))))
 				.AddMapping<Person>(m => m.MapFromAttributes())
 				.AddMapping<BoolTerm>(m => m.Properties(pp=>pp
 					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.not_analyzed))
@@ -38,10 +41,10 @@ namespace Nest.Tests.Integration
 			var createAntotherIndexResult = client.CreateIndex(ElasticsearchConfiguration.DefaultIndex + "_clone", c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
-                .AddMapping<ElasticsearchProject>(m => m
-                    .MapFromAttributes()
-                    .Properties(p => p
-                        .String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.with_positions_offsets_payloads))))
+				.AddMapping<ElasticsearchProject>(m => m
+				.MapFromAttributes()
+				.Properties(p => p
+				.String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.with_positions_offsets_payloads))))
 				.AddMapping<Person>(m => m.MapFromAttributes())
 				.AddMapping<BoolTerm>(m => m.Properties(pp => pp
 					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.not_analyzed))

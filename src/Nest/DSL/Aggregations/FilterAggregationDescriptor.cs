@@ -1,27 +1,33 @@
 using System;
 using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Aggregations;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CustomJsonConverter))]
-	public class FilterAggregationDescriptor<T> 
-		: BucketAggregationBaseDescriptor<FilterAggregationDescriptor<T>, T>
-		, ICustomJson
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(FilterAggregatorConverter))]
+	public interface IFilterAggregator : IBucketAggregator
+	{
+		IFilterContainer Filter { get; set; }
+	}
+
+	public class FilterAggregator : BucketAggregator, IFilterAggregator
+	{
+		public IFilterContainer Filter { get; set; }
+	}
+
+	public class FilterAggregationDescriptor<T> : BucketAggregationBaseDescriptor<FilterAggregationDescriptor<T>, T> , IFilterAggregator 
 		where T : class
 	{
-		internal BaseFilter _Filter { get; set; }
+		IFilterContainer IFilterAggregator.Filter { get; set; }
 
-		public FilterAggregationDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> selector)
+		public FilterAggregationDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> selector)
 		{
-			this._Filter = selector(new FilterDescriptor<T>());
+			((IFilterAggregator)this).Filter = selector(new FilterDescriptor<T>());
 			return this;
 		}
 
 
-		object ICustomJson.GetCustomJson()
-		{
-			return _Filter;
-		}
 	}
 }
