@@ -77,11 +77,10 @@ Target "CreateKeysIfAbsent" (fun _ ->
 
 let getFileVersion = fun _ ->
     let assemblyFileContents = ReadFileAsString @"src\NEST\Properties\AssemblyInfo.cs"
-    let re = @"\[assembly\: AssemblyVersionAttribute\(""(?<version>[^""]+)""\)\]"
+    let re = @"\[assembly\: AssemblyVersionAttribute\(""([^""]+)""\)\]"
     let matches = Regex.Matches(assemblyFileContents,re)
-    let defaultVersion = matches.Item(0).Value;
+    let defaultVersion = regex_replace re "$1" (matches.Item(0).Captures.Item(0).Value)
     let timestampedVersion = (sprintf "%s-ci%s" defaultVersion (DateTime.UtcNow.ToString("yyyyMMddHHmmss")))
-    // (sprintf "${version}" fileVersion) packageContents
     let fileVersion = (getBuildParamOrDefault "version" timestampedVersion)
     fileVersion
 
@@ -212,8 +211,8 @@ Target "Nightly" (fun _ ->
 
 "CreateKeysIfAbsent"
   ==> "Version"
-  ==> "Build"
-  ==> "Nightly"
+//  ==> "Build"
+//  ==> "Nightly"
 
 
 "Build"
