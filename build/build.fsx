@@ -210,10 +210,10 @@ Target "Nightly" (fun _ ->
   ==> "Test"
   ==> "Build"
 
-"Nightly"
-  ==> "CreateKeysIfAbsent"
+"CreateKeysIfAbsent"
   ==> "Version"
   ==> "Build"
+  ==> "Nightly"
 
 
 "Build"
