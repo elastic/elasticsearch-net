@@ -211,8 +211,8 @@ Target "Nightly" (fun _ ->
 
 "CreateKeysIfAbsent"
   ==> "Version"
-//  ==> "Build"
-//  ==> "Nightly"
+  ==> "Release"
+  ==> "Nightly"
 
 
 "Build"
