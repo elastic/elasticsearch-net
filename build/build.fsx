@@ -6,7 +6,8 @@ open System
 open InheritDoc
 open SemVerHelper
 open AssemblyInfoFile
-
+open System.Text.RegularExpressions
+open System.Linq
 
 // Properties
 let buildDir = "build/output/"
@@ -74,6 +75,18 @@ Target "CreateKeysIfAbsent" (fun _ ->
     if not (fileExists keyFile) then createKeys()
 )
 
+let getFileVersion = fun _ ->
+    let assemblyFileContents = ReadFileAsString @"src\NEST\Properties\AssemblyInfo.cs"
+    let re = @"\[assembly\: AssemblyVersionAttribute\(""(?<version>[^""]+)""\)\]"
+    let matches = Regex.Matches(assemblyFileContents,re)
+    let defaultVersion = matches.Item(0).Value;
+    let timestampedVersion = (sprintf "%s-ci%s" defaultVersion (DateTime.UtcNow.ToString("yyyyMMddHHmmss")))
+    // (sprintf "${version}" fileVersion) packageContents
+    let fileVersion = (getBuildParamOrDefault "version" timestampedVersion)
+    fileVersion
+
+let fileVersion = getFileVersion()
+
 let validateSignedAssembly = fun name ->
     let sn = if isMono then "sn" else "build/tools/sn/sn.exe"
     let out = (ExecProcessAndReturnMessages(fun p ->
@@ -103,7 +116,6 @@ let validateSignedAssembly = fun name ->
     | (_, t) -> traceFAKE "%s was not signed with the official token: %s but %s" name oficialToken t
 
 let nugetPack = fun name ->
-    let fileVersion = (getBuildParamOrDefault "version" "0.1.0")
     CreateDir nugetOutDir
     let package = (sprintf @"build\%s.nuspec" name)
     let packageContents = ReadFileAsString package
@@ -133,7 +145,6 @@ let buildDocs = fun action ->
       (TimeSpan.FromMinutes (if action = "preview" then 300.0 else 5.0))
    
 Target "Version" (fun _ ->
-  let fileVersion = (getBuildParamOrDefault "version" "0.1.0")
   let version = SemVerHelper.parse fileVersion
 
   let suffix = fun (prerelease: PreRelease) -> sprintf "-%s%i" prerelease.Name prerelease.Number.Value
@@ -196,6 +207,12 @@ Target "DocsPreview" (fun _ ->
   ==> "BuildApp"
   ==> "Test"
   ==> "Build"
+
+"Nightly"
+  ==> "CreateKeysIfAbsent"
+  ==> "Version"
+  ==> "Build"
+
 
 "Build"
   ==> "Docs"
