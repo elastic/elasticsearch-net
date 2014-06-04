@@ -144,6 +144,7 @@ let buildDocs = fun action ->
       (TimeSpan.FromMinutes (if action = "preview" then 300.0 else 5.0))
    
 Target "Version" (fun _ ->
+  trace fileVersion
   let version = SemVerHelper.parse fileVersion
 
   let suffix = fun (prerelease: PreRelease) -> sprintf "-%s%i" prerelease.Name prerelease.Number.Value

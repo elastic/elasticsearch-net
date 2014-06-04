@@ -39,7 +39,7 @@ if not exist build\tools\node_modules\wintersmith\bin\wintersmith (
 
 
 SET TARGET="Build"
-SET VERSION=""
+SET VERSION=
 
 IF NOT [%1]==[] (set TARGET="%1")
 
