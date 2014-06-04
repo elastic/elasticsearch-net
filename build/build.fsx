@@ -199,7 +199,9 @@ Target "DocsPreview" (fun _ ->
   buildDocs "plugin install livereload" |> ignore
   buildDocs "preview" |> ignore
 )
-
+Target "Nightly" (fun _ -> 
+    trace "build nightly"
+)
 // Dependencies
 "Clean" 
   ==> "CreateKeysIfAbsent"
