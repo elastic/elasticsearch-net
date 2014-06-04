@@ -81,8 +81,11 @@ let getFileVersion = fun _ ->
     let matches = Regex.Matches(assemblyFileContents,re)
     let defaultVersion = regex_replace re "$1" (matches.Item(0).Captures.Item(0).Value)
     let timestampedVersion = (sprintf "%s-ci%s" defaultVersion (DateTime.UtcNow.ToString("yyyyMMddHHmmss")))
+    trace ("timestamped: " + timestampedVersion)
     let fileVersion = (getBuildParamOrDefault "version" timestampedVersion)
-    fileVersion
+    let fv = if isNullOrEmpty fileVersion then timestampedVersion else fileVersion
+    trace ("fileVersion: " + fv)
+    fv
 
 let fileVersion = getFileVersion()
 
