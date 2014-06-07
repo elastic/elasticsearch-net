@@ -22,7 +22,7 @@ namespace Nest.Resolvers.Converters.Filters
 			var f = value as ITermFilter;
 			if (f == null || (f.IsConditionless && !f.IsVerbatim)) return;
 			
-			var contract = serializer.ContractResolver as ElasticContractResolver;
+			var contract = serializer.ContractResolver as SettingsContractResolver;
 			if (contract == null)
 				return;
 			

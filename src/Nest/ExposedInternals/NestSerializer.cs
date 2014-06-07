@@ -89,13 +89,15 @@ namespace Nest
 			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
 			var settings = new JsonSerializerSettings()
 			{
-				ContractResolver = new ElasticContractResolver(this._settings) { PiggyBackState = piggyBackState },
+				ContractResolver = new ElasticContractResolver(this._settings),
 				DefaultValueHandling = DefaultValueHandling.Include,
 				NullValueHandling = NullValueHandling.Ignore
 			};
 
 			if (_settings.ModifyJsonSerializerSettings != null)
 				_settings.ModifyJsonSerializerSettings(settings);
+
+			settings.ContractResolver = new SettingsContractResolver(settings.ContractResolver, this._settings) { PiggyBackState = piggyBackState };
 
 			return settings;
 		}
@@ -111,11 +113,11 @@ namespace Nest
 			{
 				var command = operation._Operation;
 				var index = operation._Index
-				            ?? inferrer.IndexName(bulkDescriptor._Index)
-				            ?? inferrer.IndexName(operation._ClrType);
+							?? inferrer.IndexName(bulkDescriptor._Index)
+							?? inferrer.IndexName(operation._ClrType);
 				var typeName = operation._Type
-				               ?? inferrer.TypeName(bulkDescriptor._Type)
-				               ?? inferrer.TypeName(operation._ClrType);
+							   ?? inferrer.TypeName(bulkDescriptor._Type)
+							   ?? inferrer.TypeName(operation._ClrType);
 
 				var id = operation.GetIdForObject(inferrer);
 				operation._Index = index;

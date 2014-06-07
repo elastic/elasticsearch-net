@@ -62,7 +62,7 @@ namespace Nest
 			var sq = value as ISpanTermQuery;
 			if (sq == null) return;
 
-			var contract = serializer.ContractResolver as ElasticContractResolver;
+			var contract = serializer.ContractResolver as SettingsContractResolver;
 			if (contract == null)
 				return;
 

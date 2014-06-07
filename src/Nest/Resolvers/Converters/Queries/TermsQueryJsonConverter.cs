@@ -24,7 +24,7 @@ namespace Nest.Resolvers.Converters.Queries
 
 			string field = null;
 
-			var contract = serializer.ContractResolver as ElasticContractResolver;
+			var contract = serializer.ContractResolver as SettingsContractResolver;
 			if (contract != null && contract.ConnectionSettings != null)
 				field = contract.Infer.PropertyPath(t.Field);
 

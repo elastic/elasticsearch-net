@@ -67,7 +67,7 @@ namespace Nest.Resolvers.Converters
 		{
 			if (this._settings == null)
 			{
-				var elasticContractResolver = serializer.ContractResolver as ElasticContractResolver;
+				var elasticContractResolver = serializer.ContractResolver as SettingsContractResolver;
 				if (elasticContractResolver == null)
 					return new MultiSearchResponse { IsValid = false };
 				var piggyBackState = elasticContractResolver.PiggyBackState;
