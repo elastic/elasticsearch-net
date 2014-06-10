@@ -207,5 +207,14 @@ namespace Nest
 			return this;
 		}
 
+		[JsonProperty("extended_bounds")]
+		internal IDictionary<string, object> _ExtendedBounds { get; set; }
+
+		public DateHistogramAggregationDescriptor<T> ExtendedBounds(string min, string max)
+		{
+			this._ExtendedBounds = new Dictionary<string, object> { { "min", min }, { "max", max } };
+			return this;
+		}
+
 	}
 }

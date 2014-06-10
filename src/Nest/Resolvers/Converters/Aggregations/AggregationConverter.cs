@@ -30,12 +30,16 @@ namespace Nest.Resolvers.Converters.Aggregations
 			if (reader.TokenType != JsonToken.PropertyName)
 				return null;
 
-			var property = reader.Value as string; 
+			var property = reader.Value as string;
+
+			// Is this still needed?
 			if (_numeric.IsMatch(property))
 				return GetPercentilesMetricAggregation(reader, serializer);
 
 			switch (property)
 			{
+				case "values":
+					return GetPercentilesMetricAggregation(reader, serializer);
 				case "value":
 					return GetValueMetricOrAggregation(reader, serializer);
 				case "buckets":
@@ -59,6 +63,9 @@ namespace Nest.Resolvers.Converters.Aggregations
 
 		private IAggregation GetPercentilesMetricAggregation(JsonReader reader, JsonSerializer serializer)
 		{
+			reader.Read(); // JsonToken.PropertyName "values"
+			reader.Read(); // JsonToken.StartObject
+
 			var metric = new PercentilesMetric();
 			var percentileItems = new List<PercentileItem>();
 			while (reader.TokenType != JsonToken.EndObject)
