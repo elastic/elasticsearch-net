@@ -46,6 +46,7 @@ namespace Nest.Tests.Unit.Search.Fields
 
 			var classAHit = classAHits.First();
 			classAHit.Fields.Should().NotBeNull();
+
 			var lang = classAHit.Fields.FieldValues<ClassA, string>(p => p.Lang).FirstOrDefault();
 			lang.Should().NotBeNullOrEmpty();
 
