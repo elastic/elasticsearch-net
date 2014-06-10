@@ -23,9 +23,10 @@ namespace Nest.DSL.Search
 		public IEnumerable<PropertyPathMarker> Exclude { get; set; }
 	}
 
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SearchSourceDescriptor<T> : ISourceFilter where T : class 
  	{
-		public ISourceFilter Self { get { return this; } }
+		private ISourceFilter Self { get { return this; } }
 
 		[JsonProperty("include")]
 		IEnumerable<PropertyPathMarker> ISourceFilter.Include { get; set; } 

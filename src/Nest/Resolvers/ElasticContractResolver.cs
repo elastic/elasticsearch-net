@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Nest.DSL.Descriptors;
+using Nest.DSL.Search;
 using Nest.Resolvers.Converters.Aggregations;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -127,6 +128,7 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<ISuggester>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IFuzzySuggester>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IDirectGenerator>(type, memberSerialization, defaultProperties, lookup);
+			//defaultProperties = PropertiesOf<ISourceFilter>(type, memberSerialization, defaultProperties, lookup);
 			return defaultProperties;
 		}
 
