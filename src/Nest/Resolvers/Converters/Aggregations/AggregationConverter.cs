@@ -9,7 +9,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 
 	public class AggregationConverter : JsonConverter
 	{
-		private static Regex _numeric = new Regex(@"^[\d.]+$"); 
+		private static Regex _numeric = new Regex(@"^[\d.]+(\.[\d.]+)?$"); 
 
 		public override bool CanWrite
 		{
@@ -36,6 +36,8 @@ namespace Nest.Resolvers.Converters.Aggregations
 
 			switch (property)
 			{
+				case "values":
+					return GetPercentilesMetricAggregation(reader, serializer);
 				case "value":
 					return GetValueMetricOrAggregation(reader, serializer);
 				case "buckets":
@@ -61,6 +63,8 @@ namespace Nest.Resolvers.Converters.Aggregations
 		{
 			var metric = new PercentilesMetric();
 			var percentileItems = new List<PercentileItem>();
+			if (reader.TokenType == JsonToken.StartObject)
+				reader.Read();
 			while (reader.TokenType != JsonToken.EndObject)
 			{
 				var percentile = double.Parse(reader.Value as string);
@@ -156,7 +160,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 			var docCount = (reader.Value as long?).GetValueOrDefault(0);
 			reader.Read();
 
-			var dateHistogram = new DateHistogramItem() {Key = key, KeyAsString = keyAsString, DocCount = docCount};
+			var dateHistogram = new HistogramItem() {Key = key, KeyAsString = keyAsString, DocCount = docCount};
 			dateHistogram.Aggregations = this.GetNestedAggregations(reader, serializer);
 			return dateHistogram;
 

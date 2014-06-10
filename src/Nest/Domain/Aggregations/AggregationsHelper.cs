@@ -105,11 +105,11 @@ namespace Nest
 			return b;
 		}
 
-		public Bucket<KeyItem> Histogram(string key)
+		public Bucket<HistogramItem> Histogram(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			var b = new Bucket<KeyItem>();
-			b.Items = bucket.Items.OfType<KeyItem>().ToList();
+			var b = new Bucket<HistogramItem>();
+			b.Items = bucket.Items.OfType<HistogramItem>().ToList();
 			return b;
 		}
 	
@@ -154,11 +154,11 @@ namespace Nest
 			return b;
 		}
 
-		public Bucket<DateHistogramItem> DateHistogram(string key)
+		public Bucket<HistogramItem> DateHistogram(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			var b = new Bucket<DateHistogramItem>();
-			b.Items = bucket.Items.OfType<DateHistogramItem>().ToList();
+			var b = new Bucket<HistogramItem>();
+			b.Items = bucket.Items.OfType<HistogramItem>().ToList();
 			return b;
 		}
 

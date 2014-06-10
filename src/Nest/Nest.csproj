@@ -104,7 +104,7 @@
     <Compile Include="Domain\Aggregations\AggregationsHelper.cs" />
     <Compile Include="Domain\Aggregations\Bucket.cs" />
     <Compile Include="Domain\Aggregations\BucketAggregationBase.cs" />
-    <Compile Include="Domain\Aggregations\DateHistogramItem.cs" />
+    <Compile Include="Domain\Aggregations\HistogramItem.cs" />
     <Compile Include="Domain\Aggregations\ExtendedStatsMetric.cs" />
     <Compile Include="Domain\Aggregations\IAggration.cs" />
     <Compile Include="Domain\Aggregations\IBucketAggregation.cs" />

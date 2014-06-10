@@ -26,7 +26,6 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 				.Dynamic()
 				.Enabled()
 				.IncludeInAll()
-				.Path("full")
 			);
 			this.DefaultResponseAssertations(result);
 		}

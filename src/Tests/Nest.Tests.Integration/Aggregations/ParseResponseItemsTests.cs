@@ -100,7 +100,7 @@ namespace Nest.Tests.Integration.Aggregations
 	        var firstAgg = results.Aggregations.First().Value as Bucket;
 		    firstAgg.Should().NotBeNull();
 		    firstAgg.Items.Should().NotBeEmpty();
-			var grams = firstAgg.Items.OfType<DateHistogramItem>();
+			var grams = firstAgg.Items.OfType<HistogramItem>();
 			grams.Should().NotBeEmpty();
 	    }
 		

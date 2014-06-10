@@ -236,6 +236,7 @@ namespace Nest.Tests.Integration.Aggregations
 			results.IsValid.Should().BeTrue();
 			var bucket = results.Aggs.DateHistogram("bucket_agg");
 			bucket.Items.Should().NotBeEmpty();
+			var item = bucket.Items.First();
 		}
 
 	}
