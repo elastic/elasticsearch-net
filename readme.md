@@ -1,5 +1,6 @@
 Repository for both the offical low level client `Elasticsearch.Net` as the high level opiniated `NEST` client.
 
+
 #[Elasticsearch.Net](src/Elasticsearch.Net)
 
 * One-to-one mapping with REST API and the other official clients
@@ -19,3 +20,9 @@ Repository for both the offical low level client `Elasticsearch.Net` as the high
 * All calls have async variants
 
 [Read more here](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest#nest-)
+
+#Build statuses
+
+[![Build Status](http://teamcity.codebetter.com/app/rest/builds/buildType:%28id:bt993%29/statusIcon)](http://teamcity.codebetter.com/viewType.html?buildTypeId=bt993&guest=1)
+
+[![elasticsearch-net MyGet Build Status](https://www.myget.org/BuildSource/Badge/elasticsearch-net?identifier=624cebb3-a461-466f-9bac-7026c8ba615a)](https://www.myget.org/)
