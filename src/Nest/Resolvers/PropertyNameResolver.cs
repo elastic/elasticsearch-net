@@ -77,7 +77,7 @@ namespace Nest.Resolvers
 				return null;
 
 			var name = info.Name;
-			var resolvedName = name.ToCamelCase();
+			var resolvedName = _settings.DefaultPropertyNameInferrer(name);
 			var att = ElasticAttributes.Property(info);
 			if (att != null && !att.Name.IsNullOrEmpty())
 				resolvedName = att.Name;
