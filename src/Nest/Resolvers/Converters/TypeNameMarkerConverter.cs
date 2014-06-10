@@ -22,7 +22,7 @@ namespace Nest.Resolvers.Converters
 				writer.WriteNull();
 				return;
 			}
-			var contract = serializer.ContractResolver as ElasticContractResolver;
+			var contract = serializer.ContractResolver as SettingsContractResolver;
 			if (contract != null && contract.ConnectionSettings != null)
 			{
 				var typeName = contract.Infer.TypeName(marker);

@@ -98,7 +98,7 @@ namespace Nest
 			if (fieldName == null)
 				return;
 
-			var contract = serializer.ContractResolver as ElasticContractResolver;
+			var contract = serializer.ContractResolver as SettingsContractResolver;
 			if (contract == null)
 				return;
 

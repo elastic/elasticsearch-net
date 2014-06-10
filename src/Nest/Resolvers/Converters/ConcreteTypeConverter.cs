@@ -78,7 +78,7 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var elasticContractResolver = serializer.ContractResolver as ElasticContractResolver;
+			var elasticContractResolver = serializer.ContractResolver as SettingsContractResolver;
 			if (elasticContractResolver != null && elasticContractResolver.PiggyBackState != null
 				&& elasticContractResolver.PiggyBackState.ActualJsonConverter != null)
 			{
@@ -161,7 +161,7 @@ namespace Nest
 			JObject jObject, out object selection)
 			where T: class
 		{
-			var elasticContractResolver = serializer.ContractResolver as ElasticContractResolver;
+			var elasticContractResolver = serializer.ContractResolver as SettingsContractResolver;
 			var baseType = realConcreteConverter._baseType;
 			var selector = realConcreteConverter._concreteTypeSelector;
 

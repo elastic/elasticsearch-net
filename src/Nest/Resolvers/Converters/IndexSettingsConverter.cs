@@ -72,7 +72,7 @@ namespace Nest.Resolvers.Converters
 		private static void WriteMappings(JsonWriter writer, JsonSerializer serializer, IndexSettings indexSettings)
 		{
 			if (indexSettings.Mappings.Count <= 0) return;
-			var contract = serializer.ContractResolver as ElasticContractResolver;
+			var contract = serializer.ContractResolver as SettingsContractResolver;
 			if (contract == null || contract.ConnectionSettings == null) return;
 			
 			writer.WritePropertyName("mappings");

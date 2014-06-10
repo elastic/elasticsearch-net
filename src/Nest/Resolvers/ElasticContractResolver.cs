@@ -24,19 +24,10 @@ namespace Nest.Resolvers
 		/// </summary>
 		public IConnectionSettingsValues ConnectionSettings { get; private set; }
 
-		public ElasticInferrer Infer { get; private set; }
-
-		/// <summary>
-		/// Signals to custom converter that it can get serialization state from one of the converters
-		/// Ugly but massive performance gain
-		/// </summary>
-		internal JsonConverterPiggyBackState PiggyBackState { get; set; }
-
 		public ElasticContractResolver(IConnectionSettingsValues connectionSettings)
 			: base(true)
 		{
 			this.ConnectionSettings = connectionSettings;
-			this.Infer = new ElasticInferrer(this.ConnectionSettings);
 		}
 
 		protected override JsonContract CreateContract(Type objectType)

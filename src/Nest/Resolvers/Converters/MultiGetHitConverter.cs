@@ -41,7 +41,7 @@ namespace Nest.Resolvers.Converters
 			var reader = tuple.Hit.CreateReader();	
 			serializer.Populate(reader, hit);
 
-			var contract = serializer.ContractResolver as ElasticContractResolver;
+			var contract = serializer.ContractResolver as SettingsContractResolver;
 			var settings = contract.ConnectionSettings;
 			var f = new FieldSelection<T>(settings);
 			var source = tuple.Hit["fields"];
@@ -59,7 +59,7 @@ namespace Nest.Resolvers.Converters
 		{
 			if (this._descriptor == null)
 			{
-				var elasticContractResolver = serializer.ContractResolver as ElasticContractResolver;
+				var elasticContractResolver = serializer.ContractResolver as SettingsContractResolver;
 				if (elasticContractResolver == null)
 					return new MultiGetResponse { IsValid = false };
 				var piggyBackState = elasticContractResolver.PiggyBackState;

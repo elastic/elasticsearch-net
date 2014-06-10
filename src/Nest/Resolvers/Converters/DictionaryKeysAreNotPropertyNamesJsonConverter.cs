@@ -30,7 +30,7 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var contract = serializer.ContractResolver as ElasticContractResolver;
+			var contract = serializer.ContractResolver as SettingsContractResolver;
 
 			IDictionary dictionary = (IDictionary) value;
 			writer.WriteStartObject();
