@@ -302,7 +302,6 @@
     <Compile Include="DSL\SegmentsDescriptor.cs" />
     <Compile Include="DSL\RefreshDescriptor.cs" />
     <Compile Include="DSL\OptimizeDescriptor.cs" />
-    <Compile Include="DSL\GatewaySnapshotDescriptor.cs" />
     <Compile Include="DSL\OpenIndexDescriptor.cs" />
     <Compile Include="DSL\FluentDictionary.cs" />
     <Compile Include="DSL\Paths\IndexPathDescriptor.cs" />
@@ -724,7 +723,6 @@
     <Compile Include="ElasticClient-Analyze.cs" />
     <Compile Include="ElasticClient-Aliases.cs" />
     <Compile Include="ElasticClient-Optimize.cs" />
-    <Compile Include="ElasticClient-GatewaySnapshot.cs" />
     <Compile Include="ElasticClient-Flush.cs" />
     <Compile Include="ElasticClient-OpenClose.cs" />
     <Compile Include="ElasticClient-Refresh.cs" />

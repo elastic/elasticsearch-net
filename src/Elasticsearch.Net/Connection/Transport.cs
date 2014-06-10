@@ -174,7 +174,7 @@ namespace Elasticsearch.Net.Connection
 			if (!SniffingDisabled(requestState.RequestConfiguration))
 				SniffIfInformationIsTooOld(retried);
 
-			IElasticsearchResponse response = null;
+			var aliveResponse = false;
 
 			int initialSeed; bool shouldPingHint;
 			var baseUri = GetNextBaseUri(requestState, out initialSeed, out shouldPingHint);
@@ -200,7 +200,7 @@ namespace Elasticsearch.Net.Connection
 					var typedResponse = this.StreamToTypedResponse<T>(streamResponse, requestState.DeserializationState);
 					typedResponse.NumberOfRetries = retried;
 					this.SetErrorDiagnosticsAndPatchSuccess(requestState, error, typedResponse, streamResponse);
-					response = typedResponse;
+					aliveResponse = typedResponse.SuccessOrKnownError;
 					return typedResponse;
 				}
 			}
@@ -215,7 +215,7 @@ namespace Elasticsearch.Net.Connection
 			finally
 			{
 				//make sure we always call markalive on the uri if the connection was succesful
-				if (!seenError && response != null && response.SuccessOrKnownError)
+				if (!seenError && aliveResponse)
 					this._connectionPool.MarkAlive(baseUri);
 			}
 			return RetryRequest<T>(requestState, baseUri, retried);
@@ -237,27 +237,6 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		private ElasticsearchServerError ThrowOrGetErrorFromStreamResponse<T>(TransportRequestState<T> requestState,
-			ElasticsearchResponse<Stream> streamResponse)
-		{
-			ElasticsearchServerError error = null;
-			if ((!streamResponse.Success && requestState.RequestConfiguration == null)
-			    || (!streamResponse.Success
-			        && requestState.RequestConfiguration != null
-			        && requestState.RequestConfiguration.AllowedStatusCodes.All(i => i != streamResponse.HttpStatusCode)))
-			{
-				if (streamResponse.Response != null)
-					error = this.Serializer.Deserialize<ElasticsearchServerError>(streamResponse.Response);
-				else
-					error = new ElasticsearchServerError
-					{
-						Status = streamResponse.HttpStatusCode.GetValueOrDefault(-1)
-					};
-				if (this.Settings.ThrowOnElasticsearchServerExceptions)
-					throw new ElasticsearchServerException(error);
-			}
-			return error;
-		}
 
 		private Uri GetNextBaseUri<T>(TransportRequestState<T> requestState, out int initialSeed, out bool shouldPingHint)
 		{
@@ -375,6 +354,8 @@ namespace Elasticsearch.Net.Connection
 							{
 								tt.Result.NumberOfRetries = retried;
 								this.SetErrorDiagnosticsAndPatchSuccess(requestState, error, tt.Result, t.Result);
+								if (tt.Result.SuccessOrKnownError)
+									this._connectionPool.MarkAlive(baseUri);
 								return tt;
 							}).Unwrap();
 					}
@@ -459,7 +440,46 @@ namespace Elasticsearch.Net.Connection
 			response.Response = rawResponse;
 		}
 
-		private ElasticsearchResponse<T> StreamToTypedResponse<T>(ElasticsearchResponse<Stream> streamResponse, object deserializationState)
+		private ElasticsearchServerError ThrowOrGetErrorFromStreamResponse<T>(
+			TransportRequestState<T> requestState,
+			ElasticsearchResponse<Stream> streamResponse)
+		{
+			ElasticsearchServerError error = null;
+			if ((!streamResponse.Success && requestState.RequestConfiguration == null)
+			    || (!streamResponse.Success
+			        && requestState.RequestConfiguration != null
+			        && requestState.RequestConfiguration.AllowedStatusCodes.All(i => i != streamResponse.HttpStatusCode)))
+			{
+
+				if (streamResponse.Response != null && !this.Settings.KeepRawResponse)
+				{
+					var e =this.Serializer.Deserialize<OneToOneServerException>(streamResponse.Response);
+					error = ElasticsearchServerError.Create(e);
+				}
+				else if (streamResponse.Response != null && this.Settings.KeepRawResponse)
+				{
+					var ms = new MemoryStream();
+						streamResponse.Response.CopyTo(ms);
+						ms.Position = 0;
+						streamResponse.ResponseRaw = ms.ToArray();
+						var e =this.Serializer.Deserialize<OneToOneServerException>(ms);
+						error = ElasticsearchServerError.Create(e);
+						ms.Position = 0;
+						streamResponse.Response = ms;
+				}
+				else
+					error = new ElasticsearchServerError
+					{
+						Status = streamResponse.HttpStatusCode.GetValueOrDefault(-1)
+					};
+				if (this.Settings.ThrowOnElasticsearchServerExceptions)
+					throw new ElasticsearchServerException(error);
+			}
+			return error;
+		}
+		private ElasticsearchResponse<T> StreamToTypedResponse<T>(
+			ElasticsearchResponse<Stream> streamResponse, 
+			object deserializationState)
 		{
 			//if the user explicitly wants a stream returned the undisposed stream
 			if (typeof(Stream).IsAssignableFrom(typeof(T)))

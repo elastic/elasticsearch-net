@@ -176,28 +176,6 @@ namespace Nest
 		Task<IIndicesOperationResponse> CloseIndexAsync(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
 		
 		/// <summary>
-		/// The gateway snapshot API allows to explicitly perform a snapshot through the gateway of one or more indices (backup them). 
-		/// By default, each index gateway periodically snapshot changes, though it can be disabled and be
-		/// controlled completely through this API.
-		/// <para>Note, this API only applies when using shared storage gateway implementation, 
-		/// and does not apply when using the (default) local gateway.</para>
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-gateway-snapshot.html
-		/// </summary>
-		/// <param name="snapShotSelector">A descriptor that describes the parameters for the gateway snapshot operation</param>
-		IShardsOperationResponse GatewaySnapshot(Func<GatewaySnapshotDescriptor, GatewaySnapshotDescriptor> snapShotSelector = null);
-		
-		/// <summary>
-		/// The gateway snapshot API allows to explicitly perform a snapshot through the gateway of one or more indices (backup them). 
-		/// By default, each index gateway periodically snapshot changes, though it can be disabled and be
-		/// controlled completely through this API.
-		/// <para>Note, this API only applies when using shared storage gateway implementation, 
-		/// and does not apply when using the (default) local gateway.</para>
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-gateway-snapshot.html
-		/// </summary>
-		/// <param name="snapShotSelector">A descriptor that describes the parameters for the gateway snapshot operation</param>
-		Task<IShardsOperationResponse> GatewaySnapshotAsync(Func<GatewaySnapshotDescriptor, GatewaySnapshotDescriptor> snapShotSelector = null);
-		
-		/// <summary>
 		/// The refresh API allows to explicitly refresh one or more index, making all operations performed since the last refresh 
 		/// available for search. The (near) real-time capabilities depend on the index engine used. 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-refresh.html

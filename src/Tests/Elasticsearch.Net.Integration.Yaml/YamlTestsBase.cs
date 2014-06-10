@@ -106,7 +106,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			if (o is IElasticsearchResponse)
 			{
 				var c = o as IElasticsearchResponse;
-				if (c.RequestMethod == "HEAD" && !c.Success)
+				if (c.RequestMethod == "HEAD" && c.HttpStatusCode != 200)
 				{
 					Assert.Fail("HEAD request returned status:" + c.HttpStatusCode);
 				}
@@ -158,7 +158,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			if (o is IElasticsearchResponse)
 			{
 				var c = o as IElasticsearchResponse;
-				if (c.RequestMethod == "HEAD" && c.Success)
+				if (c.RequestMethod == "HEAD" && c.HttpStatusCode != 404)
 				{
 					Assert.Fail("HEAD request did not return error status but:" 
 						+ c.HttpStatusCode);

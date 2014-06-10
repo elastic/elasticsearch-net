@@ -21,7 +21,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesSnapshotIndex1
 			{	
 
 				//do indices.snapshot_index 
-				this.Do(()=> _client.IndicesSnapshotIndexForAll());
+				
 
 			}
 		}

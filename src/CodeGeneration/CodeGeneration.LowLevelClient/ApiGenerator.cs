@@ -17,8 +17,8 @@ namespace CodeGeneration.LowLevelClient
 {
 	public static class ApiGenerator
 	{
-		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/v1.1.0/rest-api-spec/api";
-		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/v1.1.0/rest-api-spec/api/";
+		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/v1.2.0/rest-api-spec/api";
+		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/v1.2.0/rest-api-spec/api/";
 		private readonly static string _nestFolder = @"..\..\..\..\..\src\Nest\";
 		private readonly static string _esNetFolder = @"..\..\..\..\..\src\Elasticsearch.Net\";
 		private readonly static string _viewFolder = @"..\..\Views\";

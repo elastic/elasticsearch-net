@@ -39,8 +39,24 @@ namespace Nest
 		{
 			return this.Dispatch<ClearScrollDescriptor, ClearScrollRequestParameters, EmptyResponse>(
 				clearScrollSelector,
-				(p, d) => this.RawDispatch.ClearScrollDispatch<EmptyResponse>(p)
-			);
+				(p, d) =>
+				{
+					var body = PatchClearScroll(p);
+					return this.RawDispatch.ClearScrollDispatch<EmptyResponse>(p, body);
+				}
+				);
+		}
+
+		private static string PatchClearScroll(ElasticsearchPathInfo<ClearScrollRequestParameters> p)
+		{
+			string body = null;
+			var scrollId = p.ScrollId;
+			if (scrollId != null && scrollId != "_all")
+			{
+				p.ScrollId = null;
+				body = scrollId;
+			}
+			return body;
 		}
 
 		/// <inheritdoc />
@@ -48,7 +64,11 @@ namespace Nest
 		{
 			return this.DispatchAsync<ClearScrollDescriptor, ClearScrollRequestParameters, EmptyResponse, IEmptyResponse>(
 				clearScrollSelector,
-				(p, d) => this.RawDispatch.ClearScrollDispatchAsync<EmptyResponse>(p)
+				(p, d) =>
+				{
+					var body = PatchClearScroll(p);
+					return this.RawDispatch.ClearScrollDispatchAsync<EmptyResponse>(p, body);
+				}
 			);
 		}
 

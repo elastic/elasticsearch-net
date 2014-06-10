@@ -13,7 +13,8 @@ namespace CodeGeneration.LowLevelClient.Overrides.Allow404
 		{
 			"DocumentExists",
 			"Delete",
-			"IndexExists"
+			"IndexExists",
+			"Exists"
 		};
 	}
 }

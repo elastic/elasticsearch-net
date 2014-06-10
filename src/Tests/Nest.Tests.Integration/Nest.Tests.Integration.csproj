@@ -193,7 +193,6 @@
     <Compile Include="Indices\AnalyzeTests.cs" />
     <Compile Include="Indices\OptimizeTests.cs" />
     <Compile Include="Indices\FlushTests.cs" />
-    <Compile Include="Indices\GatewaySnapshotTests.cs" />
     <Compile Include="Indices\OpenCloseTests.cs" />
     <Compile Include="Indices\RefreshTests.cs" />
     <Compile Include="Mapping\MapTests.cs" />

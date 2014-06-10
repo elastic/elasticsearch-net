@@ -18,6 +18,36 @@ namespace Nest
 	{
 	
 		
+		internal ElasticsearchResponse<T> AbortBenchmarkDispatch<T>(ElasticsearchPathInfo<AbortBenchmarkRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.POST:
+					//POST /_bench/abort/{name}
+					if (!pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.AbortBenchmark<T>(pathInfo.Name,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.AbortBenchmark() into any of the following paths: \r\n - /_bench/abort/{name}");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> AbortBenchmarkDispatchAsync<T>(ElasticsearchPathInfo<AbortBenchmarkRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.POST:
+					//POST /_bench/abort/{name}
+					if (!pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.AbortBenchmarkAsync<T>(pathInfo.Name,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.AbortBenchmark() into any of the following paths: \r\n - /_bench/abort/{name}");
+		}
+		
+		
 		internal ElasticsearchResponse<T> BulkDispatch<T>(ElasticsearchPathInfo<BulkRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
@@ -177,6 +207,32 @@ namespace Nest
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatCount() into any of the following paths: \r\n - /_cat/count\r\n - /_cat/count/{index}");
+		}
+		
+		
+		internal ElasticsearchResponse<T> CatFielddataDispatch<T>(ElasticsearchPathInfo<CatFielddataRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/fielddata
+					return this.Raw.CatFielddata<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatFielddata() into any of the following paths: \r\n - /_cat/fielddata");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> CatFielddataDispatchAsync<T>(ElasticsearchPathInfo<CatFielddataRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/fielddata
+					return this.Raw.CatFielddataAsync<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatFielddata() into any of the following paths: \r\n - /_cat/fielddata");
 		}
 		
 		
@@ -458,33 +514,39 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> ClearScrollDispatch<T>(ElasticsearchPathInfo<ClearScrollRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> ClearScrollDispatch<T>(ElasticsearchPathInfo<ClearScrollRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /_search/scroll/{scroll_id}
-					if (!pathInfo.ScrollId.IsNullOrEmpty())
-						return this.Raw.ClearScroll<T>(pathInfo.ScrollId,u => pathInfo.RequestParameters);
+					if (!pathInfo.ScrollId.IsNullOrEmpty() && body != null)
+						return this.Raw.ClearScroll<T>(pathInfo.ScrollId,body,u => pathInfo.RequestParameters);
+					//DELETE /_search/scroll
+					if (body != null)
+						return this.Raw.ClearScroll<T>(body,u => pathInfo.RequestParameters);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.ClearScroll() into any of the following paths: \r\n - /_search/scroll/{scroll_id}");
+			throw new DispatchException("Could not dispatch IElasticClient.ClearScroll() into any of the following paths: \r\n - /_search/scroll/{scroll_id}\r\n - /_search/scroll");
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> ClearScrollDispatchAsync<T>(ElasticsearchPathInfo<ClearScrollRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ClearScrollDispatchAsync<T>(ElasticsearchPathInfo<ClearScrollRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /_search/scroll/{scroll_id}
-					if (!pathInfo.ScrollId.IsNullOrEmpty())
-						return this.Raw.ClearScrollAsync<T>(pathInfo.ScrollId,u => pathInfo.RequestParameters);
+					if (!pathInfo.ScrollId.IsNullOrEmpty() && body != null)
+						return this.Raw.ClearScrollAsync<T>(pathInfo.ScrollId,body,u => pathInfo.RequestParameters);
+					//DELETE /_search/scroll
+					if (body != null)
+						return this.Raw.ClearScrollAsync<T>(body,u => pathInfo.RequestParameters);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.ClearScroll() into any of the following paths: \r\n - /_search/scroll/{scroll_id}");
+			throw new DispatchException("Could not dispatch IElasticClient.ClearScroll() into any of the following paths: \r\n - /_search/scroll/{scroll_id}\r\n - /_search/scroll");
 		}
 		
 		
@@ -2310,38 +2372,6 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesSnapshotIndexDispatch<T>(ElasticsearchPathInfo<GatewaySnapshotRequestParameters> pathInfo )
-		{
-			switch(pathInfo.HttpMethod)
-			{
-				case PathInfoHttpMethod.POST:
-					//POST /{index}/_gateway/snapshot
-					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesSnapshotIndex<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					//POST /_gateway/snapshot
-					return this.Raw.IndicesSnapshotIndexForAll<T>(u => pathInfo.RequestParameters);
-
-			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesSnapshotIndex() into any of the following paths: \r\n - /_gateway/snapshot\r\n - /{index}/_gateway/snapshot");
-		}
-		
-		
-		internal Task<ElasticsearchResponse<T>> IndicesSnapshotIndexDispatchAsync<T>(ElasticsearchPathInfo<GatewaySnapshotRequestParameters> pathInfo )
-		{
-			switch(pathInfo.HttpMethod)
-			{
-				case PathInfoHttpMethod.POST:
-					//POST /{index}/_gateway/snapshot
-					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesSnapshotIndexAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					//POST /_gateway/snapshot
-					return this.Raw.IndicesSnapshotIndexForAllAsync<T>(u => pathInfo.RequestParameters);
-
-			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesSnapshotIndex() into any of the following paths: \r\n - /_gateway/snapshot\r\n - /{index}/_gateway/snapshot");
-		}
-		
-		
 		internal ElasticsearchResponse<T> IndicesStatsDispatch<T>(ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
@@ -2533,6 +2563,44 @@ namespace Nest
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Info() into any of the following paths: \r\n - /");
+		}
+		
+		
+		internal ElasticsearchResponse<T> ListBenchmarksDispatch<T>(ElasticsearchPathInfo<ListBenchmarksRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/_bench
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.ListBenchmarks<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+					//GET /{index}/_bench
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.ListBenchmarks<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_bench
+					return this.Raw.ListBenchmarks<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.ListBenchmarks() into any of the following paths: \r\n - /_bench\r\n - /{index}/_bench\r\n - /{index}/{type}/_bench");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> ListBenchmarksDispatchAsync<T>(ElasticsearchPathInfo<ListBenchmarksRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/_bench
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.ListBenchmarksAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+					//GET /{index}/_bench
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.ListBenchmarksAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_bench
+					return this.Raw.ListBenchmarksAsync<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.ListBenchmarks() into any of the following paths: \r\n - /_bench\r\n - /{index}/_bench\r\n - /{index}/{type}/_bench");
 		}
 		
 		
@@ -3179,6 +3247,64 @@ namespace Nest
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Search() into any of the following paths: \r\n - /_search\r\n - /{index}/_search\r\n - /{index}/{type}/_search");
+		}
+		
+		
+		internal ElasticsearchResponse<T> SearchShardsDispatch<T>(ElasticsearchPathInfo<SearchShardsRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/_search_shards
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.SearchShardsGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+					//GET /{index}/_search_shards
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.SearchShardsGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_search_shards
+					return this.Raw.SearchShardsGet<T>(u => pathInfo.RequestParameters);
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/_search_shards
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.SearchShards<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+					//POST /{index}/_search_shards
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.SearchShards<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//POST /_search_shards
+					return this.Raw.SearchShards<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SearchShards() into any of the following paths: \r\n - /_search_shards\r\n - /{index}/_search_shards\r\n - /{index}/{type}/_search_shards");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> SearchShardsDispatchAsync<T>(ElasticsearchPathInfo<SearchShardsRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/_search_shards
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.SearchShardsGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+					//GET /{index}/_search_shards
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.SearchShardsGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_search_shards
+					return this.Raw.SearchShardsGetAsync<T>(u => pathInfo.RequestParameters);
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/_search_shards
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.SearchShardsAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+					//POST /{index}/_search_shards
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.SearchShardsAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//POST /_search_shards
+					return this.Raw.SearchShardsAsync<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SearchShards() into any of the following paths: \r\n - /_search_shards\r\n - /{index}/_search_shards\r\n - /{index}/{type}/_search_shards");
 		}
 		
 		

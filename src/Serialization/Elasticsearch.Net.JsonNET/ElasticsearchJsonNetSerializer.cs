@@ -42,7 +42,7 @@ namespace Elasticsearch.Net.JsonNet
 			var settings = new JsonSerializerSettings()
 			{
 				DefaultValueHandling = DefaultValueHandling.Include,
-				NullValueHandling = NullValueHandling.Ignore
+				NullValueHandling = NullValueHandling.Ignore,
 			};
 			return settings;
 		}
