@@ -2,56 +2,76 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
-
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class DismaxQueryDescriptor<T> : IQuery where T : class
+	[JsonConverter(typeof(ReadAsTypeConverter<DisMaxQueryDescriptor<object>>))]
+	public interface IDisMaxQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "tie_breaker")]
-		internal double? _TieBreaker { get; set; }
+		double? TieBreaker { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
-		internal double? _Boost { get; set; }
+		double? Boost { get; set; }
 
 		[JsonProperty(PropertyName = "queries")]
-		internal IEnumerable<BaseQuery> _Queries { get; set; }
+		IEnumerable<QueryContainer> Queries { get; set; }
+	}
 
-		public bool IsStrict { get; private set; }
-		public DismaxQueryDescriptor<T> Strict(bool strict = true) { this.IsStrict = strict; return this; }
+	public class DismaxQuery : PlainQuery, IDisMaxQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.DisMax = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public double? TieBreaker { get; set; }
+		public double? Boost { get; set; }
+		public IEnumerable<QueryContainer> Queries { get; set; }
+	}
+
+	public class DisMaxQueryDescriptor<T> : IDisMaxQuery where T : class
+	{
+		double? IDisMaxQuery.TieBreaker { get; set; }
+
+		double? IDisMaxQuery.Boost { get; set; }
+
+		IEnumerable<QueryContainer> IDisMaxQuery.Queries { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return !this._Queries.HasAny() || this._Queries.All(q => q.IsConditionless);
+				return !((IDisMaxQuery)this).Queries.HasAny() || ((IDisMaxQuery)this).Queries.All(q => q.IsConditionless);
 			}
 		}
 
-		public DismaxQueryDescriptor<T> Queries(params Func<QueryDescriptor<T>, BaseQuery>[] querySelectors)
+		public DisMaxQueryDescriptor<T> Queries(params Func<QueryDescriptor<T>, QueryContainer>[] querySelectors)
 		{
-			var queries = new List<BaseQuery>();
+			var queries = new List<QueryContainer>();
 			foreach (var selector in querySelectors)
 			{
 				var query = new QueryDescriptor<T>();
 				var q = selector(query);
 				queries.Add(q);
 			}
-			this._Queries = queries;
+			((IDisMaxQuery)this).Queries = queries;
 			return this;
 		}
 
-		public DismaxQueryDescriptor<T> Boost(double boost)
+		public DisMaxQueryDescriptor<T> Boost(double boost)
 		{
-			this._Boost = boost;
+			((IDisMaxQuery)this).Boost = boost;
 			return this;
 		}
-		public DismaxQueryDescriptor<T> TieBreaker(double tieBreaker)
+		public DisMaxQueryDescriptor<T> TieBreaker(double tieBreaker)
 		{
-			this._TieBreaker = tieBreaker;
+			((IDisMaxQuery)this).TieBreaker = tieBreaker;
 			return this;
 		}
 	}

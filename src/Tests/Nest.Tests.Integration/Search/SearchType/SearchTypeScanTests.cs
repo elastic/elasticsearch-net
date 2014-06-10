@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Connection;
+using FluentAssertions;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -22,7 +24,9 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.SearchType(SearchTypeOptions.Scan)
 			);
 			Assert.False(queryResults.IsValid);
-			StringAssert.Contains("Scroll must be provided when scanning", queryResults.ConnectionStatus.ResponseRaw.Utf8String());
+			var e = queryResults.ConnectionStatus.OriginalException as ElasticsearchServerException;
+			e.Should().NotBeNull();
+			e.Message.Should().Contain("Scroll must be provided when scanning");
 		}
 		[Test]
 		public void SearchTypeScan()

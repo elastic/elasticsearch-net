@@ -9,7 +9,7 @@ namespace Nest
 		internal string _FromIndexName { get; set; }
 		internal string _Scroll { get; set; }
 		
-		internal Func<QueryDescriptor<T>, BaseQuery> _QuerySelector { get; set; }
+		internal Func<QueryDescriptor<T>, QueryContainer> _QuerySelector { get; set; }
 
 		internal Func<CreateIndexDescriptor, CreateIndexDescriptor> _CreateIndexSelector { get; set; }
 
@@ -48,7 +48,7 @@ namespace Nest
 		/// <summary>
 		/// A query to optionally limit the documents to use for the reindex operation.  
 		/// </summary>
-		public ReindexDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public ReindexDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			this._QuerySelector = querySelector;

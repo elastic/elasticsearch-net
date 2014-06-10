@@ -26,6 +26,7 @@ namespace Nest.Tests.Unit.Search.Highlight
 					.OnFields(
 					f => f
 						.OnAll()
+                        .NoMatchSize(200)
 						.PreTags("<em>")
 						.PostTags("</em>")
 					)
@@ -46,7 +47,8 @@ namespace Nest.Tests.Unit.Search.Highlight
 			fields: {
 			  _all: {
 				pre_tags: [""<em>""],
-				post_tags: [""</em>""]
+				post_tags: [""</em>""],
+				no_match_size: 200
 			  }
 			},
 			require_field_match: true,

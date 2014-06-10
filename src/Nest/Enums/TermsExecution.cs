@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+	[JsonConverter(typeof(StringEnumConverter))]
 	public enum TermsExecution
 	{
 		plain,

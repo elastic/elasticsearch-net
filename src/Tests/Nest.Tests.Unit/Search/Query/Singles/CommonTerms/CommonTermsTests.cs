@@ -22,7 +22,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.CommonTerms
 						.DisableCoord(false)
 						.HighFrequencyOperator(Operator.and)
 						.LowFrequencyOperator(Operator.or)
-						.MinumumShouldMatch(1)
+						.MinimumShouldMatch(1)
 						.Query("This is the most awful stopwords query ever")
 					)
 			);

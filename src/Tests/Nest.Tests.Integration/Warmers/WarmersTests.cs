@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Text;
+using FluentAssertions;
 using Nest.Resolvers;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -17,7 +18,7 @@ namespace Nest.Tests.Integration.Warmers
 				.Type<ElasticsearchProject>()
 				.Search<ElasticsearchProject>(s => s
 					.Query(q => q
-						.Terms(p => p.Name, "strange-value")
+						.Terms(p => p.Name, new [] {"strange-value"})
 					)
 				//.Filter(filter => filter)  // this is why there is a search descriptor
 				)
@@ -49,7 +50,7 @@ namespace Nest.Tests.Integration.Warmers
 				.Index<ElasticsearchProject>()
 				.Search<ElasticsearchProject>(s => s
 					.Query(q => q
-						.Terms(p => p.Name, "strange-value")
+						.Terms(p => p.Name, new [] {"strange-value"})
 					)
 				//.Filter(filter => filter)  // this is why there is a search descriptor
 				)
@@ -77,7 +78,7 @@ namespace Nest.Tests.Integration.Warmers
 			var putResponse = this._client.PutWarmer("warmer_puttodefaultindex", wd => wd
 				.Search<ElasticsearchProject>(s => s
 					.Query(q => q
-						.Terms(p => p.Name, "strange-value")
+						.Terms(p => p.Name, new [] {"strange-value"})
 					)
 				)
 			);
@@ -107,7 +108,7 @@ namespace Nest.Tests.Integration.Warmers
 				.AllIndices()
 				.Search<ElasticsearchProject>(s => s
 					.Query(q => q
-						.Terms(p => p.Name, "strange-value")
+						.Terms(p => p.Name, new [] {"strange-value"})
 					)
 				)
 			);

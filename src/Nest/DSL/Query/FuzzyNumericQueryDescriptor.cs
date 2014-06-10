@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Configuration;
 using System.Text;
+using Nest.DSL.Query.Behaviour;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
@@ -10,53 +12,116 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class FuzzyNumericQueryDescriptor<T> : IQuery where T : class
+	public interface IFuzzyNumericQuery : IFuzzyQuery
 	{
-		internal PropertyPathMarker _Field { get; set; }
-		[JsonProperty(PropertyName = "boost")]
-		internal double? _Boost { get; set; }
-		[JsonProperty(PropertyName = "min_similarity")]
-		internal double? _MinSimilarity { get; set; }
 		[JsonProperty(PropertyName = "value")]
-		internal double? _Value { get; set; }
+		double? Value { get; set; }
+	}
 
+	public class FuzzyNumericQuery : PlainQuery, IFuzzyNumericQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Fuzzy = this;
+		}
+		bool IQuery.IsConditionless { get { return false; } }
+		PropertyPathMarker IFieldNameQuery.GetFieldName() { return this.Field; }
+		void IFieldNameQuery.SetFieldName(string fieldName) { this.Field = fieldName; }
+
+		public PropertyPathMarker Field { get; set; }
+		public double? Boost { get; set; }
+		public string Fuzziness { get; set; }
+		public RewriteMultiTerm? Rewrite { get; set; }
+		public int? MaxExpansions { get; set; }
+		public bool? Transpositions { get; set; }
+		public bool? UnicodeAware { get; set; }
+		public double? Value { get; set; }
+	}
+
+	public class FuzzyNumericQueryDescriptor<T> : IFuzzyNumericQuery where T : class
+	{
+		PropertyPathMarker IFuzzyQuery.Field { get; set; }
+		
+		double? IFuzzyQuery.Boost { get; set; }
+		
+		int? IFuzzyQuery.MaxExpansions { get; set; }
+		
+		string IFuzzyQuery.Fuzziness { get; set; }
+	
+		double? IFuzzyNumericQuery.Value { get; set; }
+
+		bool? IFuzzyQuery.Transpositions { get; set; }
+
+		bool? IFuzzyQuery.UnicodeAware { get; set; }
+
+		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._Field.IsConditionless() || this._Value == null;
+				return ((IFuzzyNumericQuery)this).Field.IsConditionless() || ((IFuzzyNumericQuery)this).Value == null;
 			}
 		}
-
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			((IFuzzyQuery)this).Field = fieldName;
+		}
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return ((IFuzzyQuery)this).Field;
+		}
+		
 		public FuzzyNumericQueryDescriptor<T> OnField(string field)
 		{
-			this._Field = field;
+			((IFuzzyNumericQuery)this).Field = field;
 			return this;
 		}
 		public FuzzyNumericQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			((IFuzzyNumericQuery)this).Field = objectPath;
 			return this;
 		}
 		public FuzzyNumericQueryDescriptor<T> Boost(double boost)
 		{
-			this._Boost = boost;
+			((IFuzzyNumericQuery)this).Boost = boost;
 			return this;
 		}
-		public FuzzyNumericQueryDescriptor<T> MinSimilarity(double minSimilarity)
+		public FuzzyNumericQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
-			this._MinSimilarity = minSimilarity;
+			((IFuzzyQuery)this).Fuzziness = fuzziness.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
-		public FuzzyNumericQueryDescriptor<T> Value(int value)
+		public FuzzyNumericQueryDescriptor<T> Fuzziness(string fuzziness)
 		{
-			this._Value = value;
+			((IFuzzyQuery)this).Fuzziness = fuzziness;
+			return this;
+		}
+		
+		public FuzzyNumericQueryDescriptor<T> MaxExpansions(int maxExpansions)
+		{
+			((IFuzzyQuery)this).MaxExpansions = maxExpansions;
+			return this;
+		}
+	
+		public FuzzyNumericQueryDescriptor<T> Transpositions(bool enable = true)
+		{
+			((IFuzzyQuery)this).Transpositions = enable;
+			return this;
+		}
+		public FuzzyNumericQueryDescriptor<T> UnicodeAware(bool enable = true)
+		{
+			((IFuzzyQuery)this).UnicodeAware = enable;
+			return this;
+		}
+		public FuzzyNumericQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
+		{
+			((IFuzzyQuery)this).Rewrite = rewrite;
 			return this;
 		}
 		public FuzzyNumericQueryDescriptor<T> Value(int? value)
 		{
-			this._Value = value;
+			((IFuzzyNumericQuery)this).Value = value;
 			return this;
 		}
 	}

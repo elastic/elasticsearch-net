@@ -15,7 +15,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Query(q => q
 					.Indices(fz => fz
 						.Indices(new[] { "elasticsearchprojects", "people", "randomindex" })
-						.Query("{ match_all : {} }")
+						.Query(qq=>qq.Raw("{ match_all : {} }"))
 						.NoMatchQuery(qq => qq.MatchAll())
 					)
 				);

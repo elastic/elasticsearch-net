@@ -721,6 +721,8 @@ namespace Nest
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
 		ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) 
 			where T : class;
+		ISearchResponse<T> Search<T>(ISearchRequest request) 
+			where T : class;
 
 		/// <summary>
 		/// The search API allows to execute a search query and get back search hits that match the query.
@@ -730,6 +732,9 @@ namespace Nest
 		/// <typeparam name="TResult">The type used to describe the strongly typed query</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
 		ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+			where T : class
+			where TResult : class;
+		ISearchResponse<TResult> Search<T, TResult>(ISearchRequest request)
 			where T : class
 			where TResult : class;
 

@@ -2,190 +2,385 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Elasticsearch.Net;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class AggregationDescriptor<T>
-		where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<AggregationContainer>))]
+	public interface IAggregationContainer 
 	{
-		internal readonly IDictionary<string, AggregationDescriptor<T>> _Aggregations =
-			new Dictionary<string, AggregationDescriptor<T>>();
-
-		[JsonProperty("aggs", Order = 100)] 
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, AggregationDescriptor<T>> _NestedAggregations;
-
-
 		[JsonProperty("avg")]
-		internal AverageAggregationDescriptor<T> _Average { get; set; }
-		public AggregationDescriptor<T> Average(string name, Func<AverageAggregationDescriptor<T>, AverageAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._Average = d);
-		}
+		IAverageAggregator Average { get; set; }
 
 		[JsonProperty("date_histogram")]
-		internal DateHistogramAggregationDescriptor<T> _DateHistogram { get; set; }
+		IDateHistogramAggregator DateHistogram { get; set; }
+
+		[JsonProperty("percentiles")]
+		IPercentilesAggregator Percentiles { get; set; }
+
+		[JsonProperty("date_range")]
+		IDateRangeAggregator DateRange { get; set; }
+
+		[JsonProperty("extended_stats")]
+		IExtendedStatsAggregator ExtendedStats { get; set; }
+
+		[JsonProperty("filter")]
+		IFilterAggregator Filter { get; set; }
+
+		[JsonProperty("geo_distance")]
+		IGeoDistanceAggregator GeoDistance { get; set; }
+
+		[JsonProperty("geohash_grid")]
+		IGeoHashAggregator GeoHash { get; set; }
+
+		[JsonProperty("histogram")]
+		IHistogramAggregator Histogram { get; set; }
+
+		[JsonProperty("global")]
+		IGlobalAggregator Global { get; set; }
+
+		[JsonProperty("ip_range")]
+		IIp4RangeAggregator IpRange { get; set; }
+
+		[JsonProperty("max")]
+		IMaxAggregator Max { get; set; }
+
+		[JsonProperty("min")]
+		IMinAggregator Min { get; set; }
+
+		[JsonProperty("cardinality")]
+		ICardinalityAggregator Cardinality { get; set; }
+
+		[JsonProperty("missing")]
+		IMissingAggregator Missing { get; set; }
+
+		[JsonProperty("nested")]
+		INestedAggregator Nested { get; set; }
+
+		[JsonProperty("range")]
+		IRangeAggregator Range { get; set; }
+
+		[JsonProperty("stats")]
+		IStatsAggregator Stats { get; set; }
+
+		[JsonProperty("sum")]
+		ISumAggregator Sum { get; set; }
+
+		[JsonProperty("terms")]
+		ITermsAggregator Terms { get; set; }
+
+		[JsonProperty("significant_terms")]
+		ISignificantTermsAggregator SignificantTerms { get; set; }
+
+		[JsonProperty("value_count")]
+		IValueCountAggregator ValueCount { get; set; }
+
+		[JsonProperty("aggs")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
+	}
+
+
+	public class AggregationContainer : IAggregationContainer
+	{
+		private IDateHistogramAggregator _dateHistogram;
+		private IPercentilesAggregator _percentiles;
+		private IDateRangeAggregator _dateRange;
+		private IFilterAggregator _filter;
+		private IGeoDistanceAggregator _geoDistance;
+		private IGeoHashAggregator _geoHash;
+		private IHistogramAggregator _histogram;
+		private IGlobalAggregator _global;
+		private IIp4RangeAggregator _ipRange;
+		private ICardinalityAggregator _cardinality;
+		private IMissingAggregator _missing;
+		private INestedAggregator _nested;
+		private IRangeAggregator _range;
+		private ITermsAggregator _terms;
+		private ISignificantTermsAggregator _significantTerms;
+		public IAverageAggregator Average { get; set; }
+		public IValueCountAggregator ValueCount { get; set; }
+		public IMaxAggregator Max { get; set; }
+		public IMinAggregator Min { get; set; }
+		public IStatsAggregator Stats { get; set; }
+		public ISumAggregator Sum { get; set; }
+		public IExtendedStatsAggregator ExtendedStats { get; set; }
+
+		public IDateHistogramAggregator DateHistogram
+		{
+			get { return _dateHistogram; }
+			set { _dateHistogram = value; }
+		}
+
+		public IPercentilesAggregator Percentiles
+		{
+			get { return _percentiles; }
+			set { _percentiles = value; }
+		}
+
+		public IDateRangeAggregator DateRange
+		{
+			get { return _dateRange; }
+			set { _dateRange = value; }
+		}
+
+		public IFilterAggregator Filter
+		{
+			get { return _filter; }
+			set { _filter = value; }
+		}
+
+		public IGeoDistanceAggregator GeoDistance
+		{
+			get { return _geoDistance; }
+			set { _geoDistance = value; }
+		}
+
+		public IGeoHashAggregator GeoHash
+		{
+			get { return _geoHash; }
+			set { _geoHash = value; }
+		}
+
+		public IHistogramAggregator Histogram
+		{
+			get { return _histogram; }
+			set { _histogram = value; }
+		}
+
+		public IGlobalAggregator Global
+		{
+			get { return _global; }
+			set { _global = value; }
+		}
+
+		public IIp4RangeAggregator IpRange
+		{
+			get { return _ipRange; }
+			set { _ipRange = value; }
+		}
+
+		public ICardinalityAggregator Cardinality
+		{
+			get { return _cardinality; }
+			set { _cardinality = value; }
+		}
+
+		public IMissingAggregator Missing
+		{
+			get { return _missing; }
+			set { _missing = value; }
+		}
+
+		public INestedAggregator Nested
+		{
+			get { return _nested; }
+			set { _nested = value; }
+		}
+
+		public IRangeAggregator Range
+		{
+			get { return _range; }
+			set { _range = value; }
+		}
+
+		public ITermsAggregator Terms
+		{
+			get { return _terms; }
+			set { _terms = value; }
+		}
+
+		public ISignificantTermsAggregator SignificantTerms
+		{
+			get { return _significantTerms; }
+			set { _significantTerms = value; }
+		}
+
+		private void LiftAggregations(IBucketAggregator bucket)
+		{
+			if (bucket == null) return;
+			this.Aggregations = bucket.Aggregations;
+		}
+
+		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
+	}
+
+	public class AggregationDescriptor<T> : IAggregationContainer
+		where T : class
+	{
+		IDictionary<string, IAggregationContainer> IAggregationContainer.Aggregations { get; set; }
+
+		IAverageAggregator IAggregationContainer.Average { get; set; }
+
+		IDateHistogramAggregator IAggregationContainer.DateHistogram { get; set; }
+		
+		IPercentilesAggregator IAggregationContainer.Percentiles { get; set; }
+		
+		IDateRangeAggregator IAggregationContainer.DateRange { get; set; }
+		
+		IExtendedStatsAggregator IAggregationContainer.ExtendedStats { get; set; }
+		
+		IFilterAggregator IAggregationContainer.Filter { get; set; }
+		
+		IGeoDistanceAggregator IAggregationContainer.GeoDistance { get; set; }
+		
+		IGeoHashAggregator IAggregationContainer.GeoHash { get; set; }
+		
+		IHistogramAggregator IAggregationContainer.Histogram { get; set; }
+		
+		IGlobalAggregator IAggregationContainer.Global { get; set; }
+		
+		IIp4RangeAggregator IAggregationContainer.IpRange { get; set; }
+		
+		IMaxAggregator IAggregationContainer.Max { get; set; }
+		
+		IMinAggregator IAggregationContainer.Min { get; set; }
+		
+		ICardinalityAggregator IAggregationContainer.Cardinality { get; set; }
+		
+		IMissingAggregator IAggregationContainer.Missing { get; set; }
+		
+		INestedAggregator IAggregationContainer.Nested { get; set; }
+	
+		IRangeAggregator IAggregationContainer.Range { get; set; }
+		
+		IStatsAggregator IAggregationContainer.Stats { get; set; }
+		
+		ISumAggregator IAggregationContainer.Sum { get; set; }
+		
+		IValueCountAggregator IAggregationContainer.ValueCount { get; set; }
+		
+		ISignificantTermsAggregator IAggregationContainer.SignificantTerms { get; set; }
+		
+		ITermsAggregator IAggregationContainer.Terms { get; set; }
+		
+		public AggregationDescriptor<T> Average(string name, Func<AverageAggregationDescriptor<T>, AverageAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a.Average = d);
+		}
+
 		public AggregationDescriptor<T> DateHistogram(string name,
 			Func<DateHistogramAggregationDescriptor<T>, DateHistogramAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._DateHistogram = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.DateHistogram = d);
 		}
 		
-		[JsonProperty("percentiles")]
-		internal PercentilesAggregationDescriptor<T> _Percentiles { get; set; }
 		public AggregationDescriptor<T> Percentiles(string name,
 			Func<PercentilesAggregationDescriptor<T>, PercentilesAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._Percentiles = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.Percentiles = d);
 		}
 
-		[JsonProperty("date_range")]
-		internal DateRangeAggregationDescriptor<T> _DateRange { get; set; }
 		public AggregationDescriptor<T> DateRange(string name,
 			Func<DateRangeAggregationDescriptor<T>, DateRangeAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._DateRange = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.DateRange = d);
 		}
 
-		[JsonProperty("extended_stats")]
-		internal ExtendedStatsAggregationDescriptor<T> _ExtendedStats { get; set; }
 		public AggregationDescriptor<T> ExtendedStats(string name,
 			Func<ExtendedStatsAggregationDescriptor<T>, ExtendedStatsAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._ExtendedStats = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.ExtendedStats = d);
 		}
 	
-		[JsonProperty("filter")]
-		internal FilterAggregationDescriptor<T> _Filter { get; set; }
 		public AggregationDescriptor<T> Filter(string name,
 			Func<FilterAggregationDescriptor<T>, FilterAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._Filter = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.Filter = d);
 		}
 		
-		[JsonProperty("geo_distance")]
-		internal GeoDistanceAggregationDescriptor<T> _GeoDistance { get; set; }
 		public AggregationDescriptor<T> GeoDistance(string name,
 			Func<GeoDistanceAggregationDescriptor<T>, GeoDistanceAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._GeoDistance = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.GeoDistance = d);
 		}
 
-		[JsonProperty("geohash_grid")]
-		internal GeoHashAggregationDescriptor<T> _GeoHash { get; set; }
 		public AggregationDescriptor<T> GeoHash(string name,
 			Func<GeoHashAggregationDescriptor<T>, GeoHashAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._GeoHash = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.GeoHash = d);
 		}
 
-		[JsonProperty("histogram")]
-		internal HistogramAggregationDescriptor<T> _Histogram { get; set; }
 		public AggregationDescriptor<T> Histogram(string name,
 			Func<HistogramAggregationDescriptor<T>, HistogramAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._Histogram = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.Histogram = d);
 		}
 		
-		[JsonProperty("global")]
-		internal GlobalAggregationDescriptor<T> _Global { get; set; }
 		public AggregationDescriptor<T> Global(string name,
 			Func<GlobalAggregationDescriptor<T>, GlobalAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._Global = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.Global = d);
 		}
 
-		[JsonProperty("ip_range")]
-		internal Ip4RangeAggregationDescriptor<T> _IpRange { get; set; }
 		public AggregationDescriptor<T> IpRange(string name,
 			Func<Ip4RangeAggregationDescriptor<T>, Ip4RangeAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._IpRange = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.IpRange = d);
 		}
 
-		[JsonProperty("max")]
-		internal MaxAggregationDescriptor<T> _Max { get; set; }
 		public AggregationDescriptor<T> Max(string name, Func<MaxAggregationDescriptor<T>, MaxAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._Max = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.Max = d);
 		}
 
-		[JsonProperty("min")]
-		internal MinAggregationDescriptor<T> _Min { get; set; }
 		public AggregationDescriptor<T> Min(string name, Func<MinAggregationDescriptor<T>, MinAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._Min = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.Min = d);
 		}
 		
-		[JsonProperty("cardinality")]
-		internal CardinalityAggregationDescriptor<T> _Cardinality { get; set; }
 		public AggregationDescriptor<T> Cardinality(string name, Func<CardinalityAggregationDescriptor<T>, CardinalityAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._Cardinality = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.Cardinality = d);
 		}
 
-		[JsonProperty("missing")]
-		internal MissingAggregationDescriptor<T> _Missing { get; set; }
 		public AggregationDescriptor<T> Missing(string name, Func<MissingAggregationDescriptor<T>, MissingAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._Missing = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.Missing = d);
 		}
 
-		[JsonProperty("nested")]
-		internal NestedAggregationDescriptor<T> _Nested { get; set; }
 		public AggregationDescriptor<T> Nested(string name, Func<NestedAggregationDescriptor<T>, NestedAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._Nested = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.Nested = d);
 		}
 
-		[JsonProperty("range")]
-		internal RangeAggregationDescriptor<T> _Range { get; set; }
 		public AggregationDescriptor<T> Range(string name, Func<RangeAggregationDescriptor<T>, RangeAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._Range = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.Range = d);
 		}
 
-		[JsonProperty("stats")]
-		internal StatsAggregationDescriptor<T> _Stats { get; set; }
 		public AggregationDescriptor<T> Stats(string name, Func<StatsAggregationDescriptor<T>, StatsAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._Stats = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.Stats = d);
 		}
 
-		[JsonProperty("sum")]
-		internal SumAggregationDescriptor<T> _Sum { get; set; }
 		public AggregationDescriptor<T> Sum(string name, Func<SumAggregationDescriptor<T>, SumAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._Sum = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.Sum = d);
 		}
 
-		[JsonProperty("terms")]
-		internal TermsAggregationDescriptor<T> _Terms { get; set; }
 		public AggregationDescriptor<T> Terms(string name, Func<TermsAggregationDescriptor<T>, TermsAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._Terms = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.Terms = d);
 		}
 		
-		[JsonProperty("significant_terms")]
-		internal SignificantTermsAggregationDescriptor<T> _SignificantTerms { get; set; }
 		public AggregationDescriptor<T> SignificantTerms(string name, Func<SignificantTermsAggregationDescriptor<T>, SignificantTermsAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._SignificantTerms = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.SignificantTerms = d);
 		}
 
-		[JsonProperty("value_count")]
-		internal ValueCountAggregationDescriptor<T> _ValueCount { get; set; }
 		public AggregationDescriptor<T> ValueCount(string name,
 			Func<ValueCountAggregationDescriptor<T>, ValueCountAggregationDescriptor<T>> selector)
 		{
-			return _SetInnerAggregation(name, selector, (a, d) => a._ValueCount = d);
+			return _SetInnerAggregation(name, selector, (a, d) => a.ValueCount = d);
 		}
 
 		private AggregationDescriptor<T> _SetInnerAggregation<TAggregation>(
 			string key,
 			Func<TAggregation, TAggregation> selector
-			, Action<AggregationDescriptor<T>, TAggregation> setter 
+			, Action<IAggregationContainer, TAggregation> setter 
 			)
 			where TAggregation : IAggregationDescriptor, new()
 
@@ -193,16 +388,17 @@ namespace Nest
 			var innerDescriptor = selector(new TAggregation());
 			var descriptor = new AggregationDescriptor<T>();
 			setter(descriptor, innerDescriptor);
-			var bucket = innerDescriptor as IBucketAggregationDescriptor<T>;
-			if (bucket != null && bucket.NestedAggregations.HasAny())
+			var bucket = innerDescriptor as IBucketAggregator;
+			IAggregationContainer self = this;
+			if (self.Aggregations == null) self.Aggregations = new Dictionary<string, IAggregationContainer>();
+
+			if (bucket != null && bucket.Aggregations.HasAny())
 			{
-				descriptor._NestedAggregations = bucket.NestedAggregations;
+				IAggregationContainer d = descriptor;
+				d.Aggregations = bucket.Aggregations;
 			}
-			this._Aggregations[key] = descriptor;
+			self.Aggregations[key] = descriptor;
 			return this;
-
 		}
-
-
 	}
 }

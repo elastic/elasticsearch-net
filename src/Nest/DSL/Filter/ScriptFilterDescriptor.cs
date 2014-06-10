@@ -1,35 +1,60 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+
+	[JsonConverter(typeof(ReadAsTypeConverter<ScriptFilterDescriptor>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IScriptFilter : IFilter
+	{
+		[JsonProperty(PropertyName = "script")]
+		string Script { get; set; }
+
+		[JsonProperty(PropertyName = "params")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		Dictionary<string, object> Params { get; set; }
+
+		[JsonProperty(PropertyName = "lang")]
+		string Lang { get; set; }
+	}
+
+	public class ScriptFilter : PlainFilter, IScriptFilter
+	{
+		protected internal override void WrapInContainer(IFilterContainer container)
+		{
+			container.Script = this;
+		}
+
+		public string Script { get; set; }
+		public Dictionary<string, object> Params { get; set; }
+		public string Lang { get; set; }
+	}
+
 	/// <summary>
 	/// A filter allowing to define scripts as filters.
 	/// Ex: "doc['num1'].value > 1"
 	/// </summary>
-	public class ScriptFilterDescriptor : FilterBase
+	public class ScriptFilterDescriptor : FilterBase, IScriptFilter
 	{
-		[JsonProperty(PropertyName = "script")]
-		internal string _Script { get; set; }
+		string IScriptFilter.Script { get; set; }
 
-		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> _Params { get; set; }
+		Dictionary<string, object> IScriptFilter.Params { get; set; }
 
-		[JsonProperty(PropertyName = "lang")]
-		[JsonConverter(typeof(StringEnumConverter))]
-		internal Lang? _Lang { get; set; }
+		string IScriptFilter.Lang { get; set; }
 
-		internal override bool IsConditionless
+		bool IFilter.IsConditionless
 		{
 			get
 			{
-				return this._Script.IsNullOrEmpty();
+				return ((IScriptFilter)this).Script.IsNullOrEmpty();
 			}
 		}
 
@@ -40,7 +65,7 @@ namespace Nest
 		/// <returns>this</returns>
 		public ScriptFilterDescriptor Script(string script)
 		{
-			this._Script = script;
+			((IScriptFilter)this).Script = script;
 			return this;
 		}
 
@@ -57,7 +82,7 @@ namespace Nest
 		public ScriptFilterDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
-			this._Params = paramDictionary(new FluentDictionary<string, object>());
+			((IScriptFilter)this).Params = paramDictionary(new FluentDictionary<string, object>());
 			return this;
 		}
 
@@ -66,10 +91,10 @@ namespace Nest
 		/// </summary>
 		/// <param name="lang">language</param>
 		/// <returns>this</returns>
-		public ScriptFilterDescriptor Lang(Lang lang)
+		public ScriptFilterDescriptor Lang(string lang)
 		{
 			lang.ThrowIfNull("lang");
-			this._Lang = lang;
+			((IScriptFilter)this).Lang = lang;
 			return this;
 		}
 	}

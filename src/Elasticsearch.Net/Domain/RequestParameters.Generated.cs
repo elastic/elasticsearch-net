@@ -971,9 +971,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _wait_for_active_shards { get; set; }
+		internal long _wait_for_active_shards { get; set; }
 		///<summary>Wait until the specified number of shards is active</summary>
-		public ClusterHealthRequestParameters WaitForActiveShards(int wait_for_active_shards)
+		public ClusterHealthRequestParameters WaitForActiveShards(long wait_for_active_shards)
 		{
 			this._wait_for_active_shards = wait_for_active_shards;
 			this.AddQueryString("wait_for_active_shards", this._wait_for_active_shards);
@@ -991,9 +991,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _wait_for_relocating_shards { get; set; }
+		internal long _wait_for_relocating_shards { get; set; }
 		///<summary>Wait until the specified number of relocating shards is finished</summary>
-		public ClusterHealthRequestParameters WaitForRelocatingShards(int wait_for_relocating_shards)
+		public ClusterHealthRequestParameters WaitForRelocatingShards(long wait_for_relocating_shards)
 		{
 			this._wait_for_relocating_shards = wait_for_relocating_shards;
 			this.AddQueryString("wait_for_relocating_shards", this._wait_for_relocating_shards);
@@ -1241,9 +1241,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _min_score { get; set; }
+		internal long _min_score { get; set; }
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public CountRequestParameters MinScore(int min_score)
+		public CountRequestParameters MinScore(long min_score)
 		{
 			this._min_score = min_score;
 			this.AddQueryString("min_score", this._min_score);
@@ -1361,9 +1361,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _version { get; set; }
+		internal long _version { get; set; }
 		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateCountRequestParameters Version(int version)
+		public PercolateCountRequestParameters Version(long version)
 		{
 			this._version = version;
 			this.AddQueryString("version", this._version);
@@ -1451,9 +1451,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _version { get; set; }
+		internal long _version { get; set; }
 		///<summary>Explicit version number for concurrency control</summary>
-		public DeleteRequestParameters Version(int version)
+		public DeleteRequestParameters Version(long version)
 		{
 			this._version = version;
 			this.AddQueryString("version", this._version);
@@ -1921,9 +1921,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _version { get; set; }
+		internal long _version { get; set; }
 		///<summary>Explicit version number for concurrency control</summary>
-		public GetRequestParameters Version(int version)
+		public GetRequestParameters Version(long version)
 		{
 			this._version = version;
 			this.AddQueryString("version", this._version);
@@ -2031,9 +2031,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _version { get; set; }
+		internal long _version { get; set; }
 		///<summary>Explicit version number for concurrency control</summary>
-		public SourceRequestParameters Version(int version)
+		public SourceRequestParameters Version(long version)
 		{
 			this._version = version;
 			this.AddQueryString("version", this._version);
@@ -2151,9 +2151,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _version { get; set; }
+		internal long _version { get; set; }
 		///<summary>Explicit version number for concurrency control</summary>
-		public IndexRequestParameters Version(int version)
+		public IndexRequestParameters Version(long version)
 		{
 			this._version = version;
 			this.AddQueryString("version", this._version);
@@ -3281,9 +3281,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _max_num_segments { get; set; }
+		internal long _max_num_segments { get; set; }
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public OptimizeRequestParameters MaxNumSegments(int max_num_segments)
+		public OptimizeRequestParameters MaxNumSegments(long max_num_segments)
 		{
 			this._max_num_segments = max_num_segments;
 			this.AddQueryString("max_num_segments", this._max_num_segments);
@@ -4161,9 +4161,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _max_doc_freq { get; set; }
+		internal long _max_doc_freq { get; set; }
 		///<summary>The word occurrence frequency as count: words with higher occurrence in the corpus will be ignored</summary>
-		public MoreLikeThisRequestParameters MaxDocFreq(int max_doc_freq)
+		public MoreLikeThisRequestParameters MaxDocFreq(long max_doc_freq)
 		{
 			this._max_doc_freq = max_doc_freq;
 			this.AddQueryString("max_doc_freq", this._max_doc_freq);
@@ -4171,9 +4171,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _max_query_terms { get; set; }
+		internal long _max_query_terms { get; set; }
 		///<summary>The maximum query terms to be included in the generated query</summary>
-		public MoreLikeThisRequestParameters MaxQueryTerms(int max_query_terms)
+		public MoreLikeThisRequestParameters MaxQueryTerms(long max_query_terms)
 		{
 			this._max_query_terms = max_query_terms;
 			this.AddQueryString("max_query_terms", this._max_query_terms);
@@ -4181,9 +4181,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _max_word_length { get; set; }
+		internal long _max_word_length { get; set; }
 		///<summary>The minimum length of the word: longer words will be ignored</summary>
-		public MoreLikeThisRequestParameters MaxWordLength(int max_word_length)
+		public MoreLikeThisRequestParameters MaxWordLength(long max_word_length)
 		{
 			this._max_word_length = max_word_length;
 			this.AddQueryString("max_word_length", this._max_word_length);
@@ -4191,9 +4191,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _min_doc_freq { get; set; }
+		internal long _min_doc_freq { get; set; }
 		///<summary>The word occurrence frequency as count: words with lower occurrence in the corpus will be ignored</summary>
-		public MoreLikeThisRequestParameters MinDocFreq(int min_doc_freq)
+		public MoreLikeThisRequestParameters MinDocFreq(long min_doc_freq)
 		{
 			this._min_doc_freq = min_doc_freq;
 			this.AddQueryString("min_doc_freq", this._min_doc_freq);
@@ -4201,9 +4201,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _min_term_freq { get; set; }
+		internal long _min_term_freq { get; set; }
 		///<summary>The term frequency as percent: terms with lower occurence in the source document will be ignored</summary>
-		public MoreLikeThisRequestParameters MinTermFreq(int min_term_freq)
+		public MoreLikeThisRequestParameters MinTermFreq(long min_term_freq)
 		{
 			this._min_term_freq = min_term_freq;
 			this.AddQueryString("min_term_freq", this._min_term_freq);
@@ -4211,9 +4211,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _min_word_length { get; set; }
+		internal long _min_word_length { get; set; }
 		///<summary>The minimum length of the word: shorter words will be ignored</summary>
-		public MoreLikeThisRequestParameters MinWordLength(int min_word_length)
+		public MoreLikeThisRequestParameters MinWordLength(long min_word_length)
 		{
 			this._min_word_length = min_word_length;
 			this.AddQueryString("min_word_length", this._min_word_length);
@@ -4251,9 +4251,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _search_from { get; set; }
+		internal long _search_from { get; set; }
 		///<summary>The offset from which to return results</summary>
-		public MoreLikeThisRequestParameters SearchFrom(int search_from)
+		public MoreLikeThisRequestParameters SearchFrom(long search_from)
 		{
 			this._search_from = search_from;
 			this.AddQueryString("search_from", this._search_from);
@@ -4291,9 +4291,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _search_size { get; set; }
+		internal long _search_size { get; set; }
 		///<summary>The number of documents to return (default: 10)</summary>
-		public MoreLikeThisRequestParameters SearchSize(int search_size)
+		public MoreLikeThisRequestParameters SearchSize(long search_size)
 		{
 			this._search_size = search_size;
 			this.AddQueryString("search_size", this._search_size);
@@ -4411,16 +4411,6 @@ namespace Elasticsearch.Net
 	public class MultiTermVectorsRequestParameters : FluentRequestParameters<MultiTermVectorsRequestParameters> 
 	{
 		
-		internal  string[] _ids { get; set; }
-		///<summary>A comma-separated list of documents ids. You must define ids as parameter or set &quot;ids&quot; or &quot;docs&quot; in the request body</summary>
-		public MultiTermVectorsRequestParameters Ids(params string[] ids)
-		{
-			this._ids = ids;
-			this.AddQueryString("ids", this._ids);
-			return this;
-		}
-		
-		
 		internal bool _term_statistics { get; set; }
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsRequestParameters TermStatistics(bool term_statistics)
@@ -4531,9 +4521,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _snapshots { get; set; }
+		internal long _snapshots { get; set; }
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
-		public NodesHotThreadsRequestParameters Snapshots(int snapshots)
+		public NodesHotThreadsRequestParameters Snapshots(long snapshots)
 		{
 			this._snapshots = snapshots;
 			this.AddQueryString("snapshots", this._snapshots);
@@ -4541,9 +4531,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _threads { get; set; }
+		internal long _threads { get; set; }
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
-		public NodesHotThreadsRequestParameters Threads(int threads)
+		public NodesHotThreadsRequestParameters Threads(long threads)
 		{
 			this._threads = threads;
 			this.AddQueryString("threads", this._threads);
@@ -4781,9 +4771,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _version { get; set; }
+		internal long _version { get; set; }
 		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateRequestParameters Version(int version)
+		public PercolateRequestParameters Version(long version)
 		{
 			this._version = version;
 			this.AddQueryString("version", this._version);
@@ -5031,9 +5021,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _suggest_size { get; set; }
+		internal long _suggest_size { get; set; }
 		///<summary>How many suggestions to return in response</summary>
-		public SearchRequestParameters SuggestSize(int suggest_size)
+		public SearchRequestParameters SuggestSize(long suggest_size)
 		{
 			this._suggest_size = suggest_size;
 			this.AddQueryString("suggest_size", this._suggest_size);
@@ -5511,9 +5501,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _retry_on_conflict { get; set; }
+		internal long _retry_on_conflict { get; set; }
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public UpdateRequestParameters RetryOnConflict(int retry_on_conflict)
+		public UpdateRequestParameters RetryOnConflict(long retry_on_conflict)
 		{
 			this._retry_on_conflict = retry_on_conflict;
 			this.AddQueryString("retry_on_conflict", this._retry_on_conflict);
@@ -5571,9 +5561,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal int _version { get; set; }
+		internal long _version { get; set; }
 		///<summary>Explicit version number for concurrency control</summary>
-		public UpdateRequestParameters Version(int version)
+		public UpdateRequestParameters Version(long version)
 		{
 			this._version = version;
 			this.AddQueryString("version", this._version);

@@ -89,13 +89,15 @@ namespace Nest
 			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
 			var settings = new JsonSerializerSettings()
 			{
-				ContractResolver = new ElasticContractResolver(this._settings) { PiggyBackState = piggyBackState },
+				ContractResolver = new ElasticContractResolver(this._settings),
 				DefaultValueHandling = DefaultValueHandling.Include,
 				NullValueHandling = NullValueHandling.Ignore
 			};
 
 			if (_settings.ModifyJsonSerializerSettings != null)
 				_settings.ModifyJsonSerializerSettings(settings);
+
+			settings.ContractResolver = new SettingsContractResolver(settings.ContractResolver, this._settings) { PiggyBackState = piggyBackState };
 
 			return settings;
 		}
@@ -111,11 +113,11 @@ namespace Nest
 			{
 				var command = operation._Operation;
 				var index = operation._Index
-				            ?? inferrer.IndexName(bulkDescriptor._Index)
-				            ?? inferrer.IndexName(operation._ClrType);
+							?? inferrer.IndexName(bulkDescriptor._Index)
+							?? inferrer.IndexName(operation._ClrType);
 				var typeName = operation._Type
-				               ?? inferrer.TypeName(bulkDescriptor._Type)
-				               ?? inferrer.TypeName(operation._ClrType);
+							   ?? inferrer.TypeName(bulkDescriptor._Type)
+							   ?? inferrer.TypeName(operation._ClrType);
 
 				var id = operation.GetIdForObject(inferrer);
 				operation._Index = index;
@@ -151,25 +153,11 @@ namespace Nest
 			var inferrer = new ElasticInferrer(this._settings);
 			foreach (var operation in multiSearchDescriptor._Operations.Values)
 			{
-				var indices = inferrer.IndexNames(operation._Indices);
-				if (operation._AllIndices.GetValueOrDefault(false))
-					indices = "_all";
-
-				var index = indices 
-				            ?? inferrer.IndexName(multiSearchDescriptor._Index)
-				            ?? inferrer.IndexName(operation._ClrType);
-
-				var types = inferrer.TypeNames(operation._Types);
-				var typeName = types
-				               ?? inferrer.TypeName(multiSearchDescriptor._Type)
-				               ?? inferrer.TypeName(operation._ClrType);
-				if (operation._AllTypes.GetValueOrDefault(false))
-					typeName = null; //force empty typename so we'll query all types.
-
+				var path = operation.ToPathInfo(this._settings);
 				var op = new
 				{
-					index = index,
-					type = typeName,
+					index = path.Index,
+					type = path.Type,
 					search_type = this.GetSearchType(operation, multiSearchDescriptor),
 					preference = operation._Preference,
 					routing = operation._Routing
@@ -187,7 +175,7 @@ namespace Nest
 		}
 
 		
-		protected string GetSearchType(SearchDescriptorBase descriptor, MultiSearchDescriptor multiSearchDescriptor)
+		protected string GetSearchType(ISearchRequest descriptor, MultiSearchDescriptor multiSearchDescriptor)
 		{
 			if (descriptor._SearchType != null)
 			{

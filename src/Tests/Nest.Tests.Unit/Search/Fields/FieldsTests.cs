@@ -36,7 +36,6 @@ namespace Nest.Tests.Unit.Search.Fields
 				.Types(typeof(ClassA),typeof(ClassB),typeof(ClassC),typeof(ClassD))
 				.Fields(p=>p.Lang)
 			);
-
 			results.Total.Should().Be(1605);
 
 			results.Hits.Should().NotBeNull().And.HaveCount(10);
@@ -47,6 +46,7 @@ namespace Nest.Tests.Unit.Search.Fields
 
 			var classAHit = classAHits.First();
 			classAHit.Fields.Should().NotBeNull();
+
 			var lang = classAHit.Fields.FieldValues<ClassA, string>(p => p.Lang).FirstOrDefault();
 			lang.Should().NotBeNullOrEmpty();
 
@@ -55,7 +55,10 @@ namespace Nest.Tests.Unit.Search.Fields
 			var firstHit = results.FieldSelections.First();
 			lang = firstHit.FieldValues(p => p.Lang).FirstOrDefault();
 			lang.Should().NotBeNullOrEmpty();
+			var lang2 = classAHit.Fields.FieldValues<string[]>("lang").FirstOrDefault();
+			lang2.Should().NotBeNullOrEmpty();
 
+			
 			
 		}
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Elasticsearch.Net;
@@ -11,149 +12,207 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class MultiMatchQueryDescriptor<T> : IQuery where T : class
+	[JsonConverter(typeof(ReadAsTypeConverter<MultiMatchQueryDescriptor<object>>))]
+	public interface IMultiMatchQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "type")]
-		internal virtual string _Type { get; set; }
+		[JsonConverter(typeof(StringEnumConverter))]
+		TextQueryType? Type { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
-		internal string _Query { get; set; }
+		string Query { get; set; }
 
 		[JsonProperty(PropertyName = "analyzer")]
-		internal string _Analyzer { get; set; }
+		string Analyzer { get; set; }
 
 		[JsonProperty(PropertyName = "rewrite")]
 		[JsonConverter(typeof(StringEnumConverter))]
-		internal RewriteMultiTerm? _Rewrite { get; set; }
+		RewriteMultiTerm? Rewrite { get; set; }
 
 		[JsonProperty(PropertyName = "fuzziness")]
-		internal double? _Fuzziness { get; set; }
+		double? Fuzziness { get; set; }
 
 		[JsonProperty(PropertyName = "cutoff_frequency")]
-		internal double? _CutoffFrequency { get; set; }
+		double? CutoffFrequency { get; set; }
 
 		[JsonProperty(PropertyName = "prefix_length")]
-		internal int? _PrefixLength { get; set; }
+		int? PrefixLength { get; set; }
 
 		[JsonProperty(PropertyName = "max_expansions")]
-		internal int? _MaxExpansions { get; set; }
+		int? MaxExpansions { get; set; }
 
 		[JsonProperty(PropertyName = "slop")]
-		internal int? _Slop { get; set; }
+		int? Slop { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
-		internal double? _Boost { get; set; }
+		double? Boost { get; set; }
 
 		[JsonProperty(PropertyName = "use_dis_max")]
-		internal bool? _UseDisMax { get; set; }
+		bool? UseDisMax { get; set; }
 
 		[JsonProperty(PropertyName = "tie_breaker")]
-		internal double? _TieBreaker { get; set; }
-
+		double? TieBreaker { get; set; }
 
 		[JsonProperty(PropertyName = "operator")]
 		[JsonConverter(typeof(StringEnumConverter))]
-		internal Operator? _Operator { get; set; }
+		Operator? Operator { get; set; }
+
+		[JsonProperty(PropertyName = "fields")]
+		IEnumerable<PropertyPathMarker> Fields { get; set; }
+	}
+
+	public class MultiMatchQuery : PlainQuery, IMultiMatchQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.MultiMatch = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public TextQueryType? Type { get; set; }
+		public string Query { get; set; }
+		public string Analyzer { get; set; }
+		public RewriteMultiTerm? Rewrite { get; set; }
+		public double? Fuzziness { get; set; }
+		public double? CutoffFrequency { get; set; }
+		public int? PrefixLength { get; set; }
+		public int? MaxExpansions { get; set; }
+		public int? Slop { get; set; }
+		public double? Boost { get; set; }
+		public bool? UseDisMax { get; set; }
+		public double? TieBreaker { get; set; }
+		public Operator? Operator { get; set; }
+		public IEnumerable<PropertyPathMarker> Fields { get; set; }
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class MultiMatchQueryDescriptor<T> : IMultiMatchQuery where T : class
+	{
+		TextQueryType? IMultiMatchQuery.Type { get; set; }
+
+		string IMultiMatchQuery.Query { get; set; }
+
+		string IMultiMatchQuery.Analyzer { get; set; }
+
+		RewriteMultiTerm? IMultiMatchQuery.Rewrite { get; set; }
+
+		double? IMultiMatchQuery.Fuzziness { get; set; }
+
+		double? IMultiMatchQuery.CutoffFrequency { get; set; }
+
+		int? IMultiMatchQuery.PrefixLength { get; set; }
+
+		int? IMultiMatchQuery.MaxExpansions { get; set; }
+
+		int? IMultiMatchQuery.Slop { get; set; }
+
+		double? IMultiMatchQuery.Boost { get; set; }
+
+		bool? IMultiMatchQuery.UseDisMax { get; set; }
+
+		double? IMultiMatchQuery.TieBreaker { get; set; }
+
+		Operator? IMultiMatchQuery.Operator { get; set; }
+
+		IEnumerable<PropertyPathMarker> IMultiMatchQuery.Fields { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return !this._Fields.HasAny() || this._Fields.All(f=>f.IsConditionless()) || this._Query.IsNullOrEmpty();
+				return !((IMultiMatchQuery)this).Fields.HasAny() || ((IMultiMatchQuery)this).Fields.All(f => f.IsConditionless()) || ((IMultiMatchQuery)this).Query.IsNullOrEmpty();
 			}
 		}
 
-		[JsonProperty(PropertyName = "fields")]
-		internal IEnumerable<PropertyPathMarker> _Fields { get; set; }
 
 		public MultiMatchQueryDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
-			this._Fields = fields.Select(f=>(PropertyPathMarker)f);
+			((IMultiMatchQuery)this).Fields = fields.Select(f => (PropertyPathMarker)f);
 			return this;
 		}
 		public MultiMatchQueryDescriptor<T> OnFields(
 			params Expression<Func<T, object>>[] objectPaths)
 		{
-			this._Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
+			((IMultiMatchQuery)this).Fields = objectPaths.Select(e => (PropertyPathMarker)e);
 			return this;
 		}
-        public MultiMatchQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<Expression<Func<T, object>>, double?>> boostableSelector)
-        {
-            var d = new FluentDictionary<Expression<Func<T, object>>, double?>();
-            boostableSelector(d);
-            this._Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
-            return this;
-        }
+		public MultiMatchQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<Expression<Func<T, object>>, double?>> boostableSelector)
+		{
+			var d = new FluentDictionary<Expression<Func<T, object>>, double?>();
+			boostableSelector(d);
+			((IMultiMatchQuery)this).Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
+			return this;
+		}
 
 		public MultiMatchQueryDescriptor<T> Query(string query)
 		{
-			this._Query = query;
+			((IMultiMatchQuery)this).Query = query;
 			return this;
 		}
 		public MultiMatchQueryDescriptor<T> Analyzer(string analyzer)
 		{
-			this._Analyzer = analyzer;
+			((IMultiMatchQuery)this).Analyzer = analyzer;
 			return this;
 		}
 		public MultiMatchQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
-			this._Fuzziness = fuzziness;
+			((IMultiMatchQuery)this).Fuzziness = fuzziness;
 			return this;
 		}
 		public MultiMatchQueryDescriptor<T> CutoffFrequency(double cutoffFrequency)
 		{
-			this._CutoffFrequency = cutoffFrequency;
+			((IMultiMatchQuery)this).CutoffFrequency = cutoffFrequency;
 			return this;
 		}
 
 		public MultiMatchQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
 		{
-			this._Rewrite = rewrite;
+			((IMultiMatchQuery)this).Rewrite = rewrite;
 			return this;
 		}
 
 		public MultiMatchQueryDescriptor<T> Boost(double boost)
 		{
-			this._Boost = boost;
+			((IMultiMatchQuery)this).Boost = boost;
 			return this;
 		}
 		public MultiMatchQueryDescriptor<T> PrefixLength(int prefixLength)
 		{
-			this._PrefixLength = prefixLength;
+			((IMultiMatchQuery)this).PrefixLength = prefixLength;
 			return this;
 		}
 		public MultiMatchQueryDescriptor<T> MaxExpansions(int maxExpansions)
 		{
-			this._MaxExpansions = maxExpansions;
+			((IMultiMatchQuery)this).MaxExpansions = maxExpansions;
 			return this;
 		}
 		public MultiMatchQueryDescriptor<T> Slop(int slop)
 		{
-			this._Slop = slop;
+			((IMultiMatchQuery)this).Slop = slop;
 			return this;
 		}
 		public MultiMatchQueryDescriptor<T> Operator(Operator op)
 		{
-			this._Operator = op;
+			((IMultiMatchQuery)this).Operator = op;
 			return this;
 		}
 
-        [Obsolete("Use type:best_fields or type:most_fields instead")]
+		[Obsolete("Use type:best_fields or type:most_fields instead")]
 		public MultiMatchQueryDescriptor<T> UseDisMax(bool useDismax)
 		{
-			this._UseDisMax = useDismax;
+			((IMultiMatchQuery)this).UseDisMax = useDismax;
 			return this;
 		}
 
 		public MultiMatchQueryDescriptor<T> TieBreaker(double tieBreaker)
 		{
-			this._TieBreaker = tieBreaker;
+			((IMultiMatchQuery)this).TieBreaker = tieBreaker;
 			return this;
 		}
 
 		public MultiMatchQueryDescriptor<T> Type(TextQueryType type)
 		{
-			this._Type = type.ToString().ToLowerInvariant();
+			((IMultiMatchQuery)this).Type = type;
 			return this;
 		}
 	}

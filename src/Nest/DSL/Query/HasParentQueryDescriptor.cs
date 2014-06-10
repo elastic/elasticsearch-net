@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Nest.Resolvers;
@@ -10,57 +11,85 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class HasParentQueryDescriptor<T> : IQuery where T : class
+	[JsonConverter(typeof(ReadAsTypeConverter<HasParentQueryDescriptor<object>>))]
+	public interface IHasParentQuery : IQuery
 	{
+		[JsonProperty("type")]
+		TypeNameMarker Type { get; set; }
+
+		[JsonProperty("_scope")]
+		string Scope { get; set; }
+
+		[JsonProperty("score_type")]
+		[JsonConverter(typeof (StringEnumConverter))]
+		ParentScoreType? ScoreType { get; set; }
+
+		[JsonProperty("query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		IQueryContainer Query { get; set; }
+
+	}
+
+	public class HasParentQuery : PlainQuery, IHasParentQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.HasParent = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public TypeNameMarker Type { get; set; }
+		public string Scope { get; set; }
+		public ParentScoreType? ScoreType { get; set; }
+		public IQueryContainer Query { get; set; }
+	}
+
+	public class HasParentQueryDescriptor<T> : IHasParentQuery where T : class
+	{
+		TypeNameMarker IHasParentQuery.Type { get; set; }
+
+		string IHasParentQuery.Scope { get; set; }
+
+		ParentScoreType? IHasParentQuery.ScoreType { get; set; }
+
+		IQueryContainer IHasParentQuery.Query { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._QueryDescriptor == null || this._QueryDescriptor.IsConditionless;
+				return ((IHasParentQuery)this).Query == null || ((IHasParentQuery)this).Query.IsConditionless;
 			}
 		}
 
 		public HasParentQueryDescriptor()
 		{
-			this._Type = TypeNameMarker.Create<T>();
+			((IHasParentQuery)this).Type = TypeNameMarker.Create<T>();
 		}
-		[JsonProperty("type")]
-		internal TypeNameMarker _Type { get; set; }
+		
 
-		[JsonProperty("_scope")]
-		internal string _Scope { get; set; }
-
-		[JsonProperty("score_type")]
-		[JsonConverter(typeof(StringEnumConverter))]
-		internal ParentScoreType? _ScoreType { get; set; }
-
-		[JsonProperty("query")]
-		internal BaseQuery _QueryDescriptor { get; set; }
-
-		public HasParentQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public HasParentQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			this._QueryDescriptor = querySelector(q);
+			((IHasParentQuery)this).Query = querySelector(q);
 			return this;
 		}
 		public HasParentQueryDescriptor<T> Scope(string scope)
 		{
-			this._Scope = scope;
+			((IHasParentQuery)this).Scope = scope;
 			return this;
 		}
 		public HasParentQueryDescriptor<T> Type(string type)
 		{
-			this._Type = type;
+			((IHasParentQuery)this).Type = type;
 			return this;
 		}
 
 		public HasParentQueryDescriptor<T> Score(ParentScoreType? scoreType = ParentScoreType.score)
 		{
-			_ScoreType = scoreType;
+			((IHasParentQuery)this).ScoreType = scoreType;
 			return this;
 		}
 
-		[JsonProperty(PropertyName = "_name")]
-		internal string _Name { get; set; }
 	}
 }

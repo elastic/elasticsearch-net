@@ -41,9 +41,30 @@ namespace Nest.Resolvers
 				return this.Name.GetHashCode();
 			return this.Type != null ? this.Type.GetHashCode() : 0;
 		}
-		public bool Equals(TypeNameMarker other)
+
+		bool IEquatable<TypeNameMarker>.Equals(TypeNameMarker other)
+		{
+			return Equals(other);
+		}
+
+		public override bool Equals(object obj)
+		{
+			var s = obj as string;
+			if (!s.IsNullOrEmpty()) return this.EqualsString(s);
+			var pp = obj as TypeNameMarker;
+			if (pp != null) return this.EqualsMarker(pp);
+
+			return base.Equals(obj);
+		}
+
+		public bool EqualsMarker(TypeNameMarker other)
 		{
 			return other != null && this.GetHashCode() == other.GetHashCode();
+		}
+
+		public bool EqualsString(string other)
+		{
+			return !other.IsNullOrEmpty() && other == this.Name;
 		}
 	}
 }

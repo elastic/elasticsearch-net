@@ -2,102 +2,124 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Nest.Resolvers;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class PhraseSuggestDescriptor<T> : BaseSuggestDescriptor<T> where T : class
+	[JsonConverter(typeof(ReadAsTypeConverter<PhraseSuggester>))]
+	public interface IPhraseSuggester : ISuggester
 	{
 		[JsonProperty(PropertyName = "gram_size")]
-		internal int? _GramSize { get; set; }
+		int? GramSize { get; set; }
 
 		[JsonProperty(PropertyName = "real_word_error_likelihood")]
-		internal decimal? _RealWordErrorLikelyhood { get; set; }
+		decimal? RealWordErrorLikelihood { get; set; }
 
 		[JsonProperty(PropertyName = "confidence")]
-		internal decimal? _Confidence { get; set; }
+		decimal? Confidence { get; set; }
 
 		[JsonProperty(PropertyName = "max_errors")]
-		internal decimal? _MaxErrors { get; set; }
+		decimal? MaxErrors { get; set; }
 
 		[JsonProperty(PropertyName = "separator")]
-		internal char? _Separator { get; set; }
+		char? Separator { get; set; }
 
 		[JsonProperty(PropertyName = "direct_generator")]
-		internal DirectGeneratorDescriptor<T>[] _DirectGenerator { get; set; }
+		IEnumerable<IDirectGenerator> DirectGenerator { get; set; }
+	}
+
+	public class PhraseSuggester : Suggester, IPhraseSuggester
+	{
+		public int? GramSize { get; set; }
+		public decimal? RealWordErrorLikelihood { get; set; }
+		public decimal? Confidence { get; set; }
+		public decimal? MaxErrors { get; set; }
+		public char? Separator { get; set; }
+		public IEnumerable<IDirectGenerator> DirectGenerator { get; set; }
+	}
+
+	public class PhraseSuggestDescriptor<T> : BaseSuggestDescriptor<T>, IPhraseSuggester where T : class
+	{
+		protected IPhraseSuggester Self { get { return this; } }
+
+		int? IPhraseSuggester.GramSize { get; set; }
+
+		decimal? IPhraseSuggester.RealWordErrorLikelihood { get; set; }
+
+		decimal? IPhraseSuggester.Confidence { get; set; }
+
+		decimal? IPhraseSuggester.MaxErrors { get; set; }
+
+		char? IPhraseSuggester.Separator { get; set; }
+
+		IEnumerable<IDirectGenerator> IPhraseSuggester.DirectGenerator { get; set; }
 
 		public PhraseSuggestDescriptor<T> Text(string text)
 		{
-			this._Text = text;
+			Self._Text = text;
 			return this;
 		}
 
 		public PhraseSuggestDescriptor<T> OnField(string field)
 		{
-			this._Field = field;
+			Self.Field = field;
 			return this;
 		}
 
 		public PhraseSuggestDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this._Field = objectPath;
+			Self.Field = objectPath;
 			return this;
 		}
 
 		public PhraseSuggestDescriptor<T> Analyzer(string analyzer)
 		{
-			this._Analyzer = analyzer;
+			Self.Analyzer = analyzer;
 			return this;
 		}
 
 		public PhraseSuggestDescriptor<T> Size(int size)
 		{
-			this._Size = size;
+			Self.Size = size;
 			return this;
 		}
 
 		public PhraseSuggestDescriptor<T> ShardSize(int size)
 		{
-			this._ShardSize = size;
+			Self.ShardSize = size;
 			return this;
 		}
 
 		public PhraseSuggestDescriptor<T> GramSize(int gramSize)
 		{
-			this._GramSize = gramSize;
+			Self.GramSize = gramSize;
 			return this;
 		}
 
 		public PhraseSuggestDescriptor<T> Confidence(decimal confidence)
 		{
-			this._Confidence = confidence;
+			Self.Confidence = confidence;
 			return this;
 		}
 
 		public PhraseSuggestDescriptor<T> MaxErrors(decimal maxErrors)
 		{
-			this._MaxErrors = maxErrors;
+			Self.MaxErrors = maxErrors;
 			return this;
 		}
 
 		public PhraseSuggestDescriptor<T> Separator(char separator)
 		{
-			this._Separator = separator;
+			Self.Separator = separator;
 			return this;
 		}
 
 		public PhraseSuggestDescriptor<T> DirectGenerator(params Func<DirectGeneratorDescriptor<T>, DirectGeneratorDescriptor<T>>[] generators)
 		{
-			List<DirectGeneratorDescriptor<T>> gens = new List<DirectGeneratorDescriptor<T>>();
-			foreach (var generator in generators)
-			{
-				DirectGeneratorDescriptor<T> gen = new DirectGeneratorDescriptor<T>();
-				gen = generator(gen);
-				gens.Add(gen);
-			}
-			this._DirectGenerator = gens.ToArray();
+			Self.DirectGenerator = generators.Select(g => g(new DirectGeneratorDescriptor<T>())).ToList();
 			return this;
 		}
 	}

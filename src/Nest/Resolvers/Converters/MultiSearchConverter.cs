@@ -16,7 +16,7 @@ namespace Nest.Resolvers.Converters
 		private class MultiHitTuple
 		{
 			public JToken Hit { get; set; }
-			public KeyValuePair<string, SearchDescriptorBase> Descriptor { get; set; }
+			public KeyValuePair<string, ISearchRequest> Descriptor { get; set; }
 		}
 
 		private readonly MultiSearchDescriptor _descriptor;
@@ -67,7 +67,7 @@ namespace Nest.Resolvers.Converters
 		{
 			if (this._settings == null)
 			{
-				var elasticContractResolver = serializer.ContractResolver as ElasticContractResolver;
+				var elasticContractResolver = serializer.ContractResolver as SettingsContractResolver;
 				if (elasticContractResolver == null)
 					return new MultiSearchResponse { IsValid = false };
 				var piggyBackState = elasticContractResolver.PiggyBackState;
@@ -78,7 +78,8 @@ namespace Nest.Resolvers.Converters
 				if (realConverter == null)
 					return new MultiSearchResponse { IsValid = false };
 
-				return realConverter.ReadJson(reader, objectType, existingValue, serializer);
+				var mr = realConverter.ReadJson(reader, objectType, existingValue, serializer) as MultiSearchResponse;
+				return mr;
 			}
 
 
@@ -97,25 +98,9 @@ namespace Nest.Resolvers.Converters
 			foreach (var m in withMeta)
 			{
 				var descriptor = m.Descriptor.Value;
-				var concreteTypeSelector = descriptor._ConcreteTypeSelector;
+				var concreteTypeSelector = descriptor.TypeSelector;
 				var baseType = m.Descriptor.Value._ClrType;
-				var types = m.Descriptor.Value._Types.EmptyIfNull().ToList();
-
-				//if we dont already have a concrete type converter but we have selected more types then
-				//just the base return type automagically create our own concrete type converter
-				if (concreteTypeSelector == null
-					&& types.HasAny() 
-					&& types.Count() > types.Count(x => x.Type == baseType))
-				{
-					var inferrer = new ElasticInferrer(this._settings);
-					var typeDict = types.ToDictionary(inferrer.TypeName, t => t.Type);
-					concreteTypeSelector = (o, h) =>
-					{
-						Type t;
-						return !typeDict.TryGetValue(h.Type, out t) ? baseType : t;
-					};
-						
-				}
+				
 				var generic = MakeDelegateMethodInfo.MakeGenericMethod(baseType);
 
 				if (concreteTypeSelector != null)
@@ -139,9 +124,8 @@ namespace Nest.Resolvers.Converters
 					}
 				}
 				generic.Invoke(null, new object[] { m, serializer, response._Responses, this._settings });
-				
 			}
-
+			
 			return response;
 		}
 

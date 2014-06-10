@@ -32,7 +32,7 @@ namespace Nest.Tests.Unit.Search.Query.BoolQueryMerges
 							qq => qq.Term(f => f.Name, "foo2"),
 							qq => qq.Term(f => f.Name, "bar2")
 						)
-						.MinimumNumberShouldMatch(2)
+						.MinimumShouldMatch(2)
 					)
 					|| q.Term(f => f.Name, "blah2")
 			  );
@@ -48,7 +48,7 @@ namespace Nest.Tests.Unit.Search.Query.BoolQueryMerges
 							qq => qq.Term(f => f.Name, "foo2"),
 							qq => qq.Term(f => f.Name, "bar2")
 						)
-						.MinimumNumberShouldMatch("50%")
+						.MinimumShouldMatch("50%")
 					)
 					|| q.Term(f => f.Name, "blah2")
 			  );

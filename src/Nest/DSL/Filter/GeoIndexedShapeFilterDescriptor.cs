@@ -4,25 +4,46 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Nest.Resolvers;
+using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class GeoIndexedShapeFilterDescriptor : FilterBase
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IGeoIndexedShapeFilter : IGeoShapeBaseFilter
 	{
-		internal override bool IsConditionless
+
+		[JsonProperty("indexed_shape")]
+		GeoIndexedShapeVector IndexedShape { get; set; }
+	}
+
+	public class GeoIndexedShapeFilter : PlainFilter, IGeoIndexedShapeFilter
+	{
+		protected internal override void WrapInContainer(IFilterContainer container)
+		{
+			container.GeoShape = this;
+		}
+
+		public PropertyPathMarker Field { get; set; }
+
+		public GeoIndexedShapeVector IndexedShape { get; set; }
+	}
+
+	public class GeoIndexedShapeFilterDescriptor : FilterBase, IGeoIndexedShapeFilter
+	{
+		bool IFilter.IsConditionless
 		{
 			get
 			{
-				return this._Shape == null || this._Shape.Id.IsNullOrEmpty();
+				return ((IGeoIndexedShapeFilter)this).IndexedShape == null || ((IGeoIndexedShapeFilter)this).IndexedShape.Id.IsNullOrEmpty();
 			}
 
 		}
 
-		[JsonProperty("indexed_shape")]
-		internal GeoIndexedShapeVector _Shape { get; set; }
-
+		PropertyPathMarker IFieldNameFilter.Field { get; set; }
+		GeoIndexedShapeVector IGeoIndexedShapeFilter.IndexedShape { get; set; }
 
 		public GeoIndexedShapeFilterDescriptor Lookup<T>(string field, string id, string index = null, string type = null)
 		{
@@ -31,7 +52,7 @@ namespace Nest
 
 		private GeoIndexedShapeFilterDescriptor _SetShape<T>(PropertyPathMarker field, string id, string index, string type)
 		{
-			this._Shape = new GeoIndexedShapeVector
+			((IGeoIndexedShapeFilter)this).IndexedShape = new GeoIndexedShapeVector
 			{
 				Field = field,
 				Id = id,
@@ -45,7 +66,7 @@ namespace Nest
 		{
 			return _SetShape<T>(field, id, index, type);
 		}
-
+		
 	}
 
 }

@@ -40,7 +40,7 @@ namespace Elasticsearch.Net
 
 		public static ElasticsearchResponse<TTo> CloneFrom<TTo>(IElasticsearchResponse from, TTo to)
 		{
-			return new ElasticsearchResponse<TTo>(from.Settings)
+			var response = new ElasticsearchResponse<TTo>(from.Settings)
 			{
 				OriginalException = from.OriginalException,
 				HttpStatusCode = from.HttpStatusCode,
@@ -52,8 +52,11 @@ namespace Elasticsearch.Net
 				Serializer = from.Settings.Serializer,
 				Settings = from.Settings,
 				Success = from.Success
-				
 			};
+			var tt = to as IResponseWithRequestInformation;
+			if (tt != null)
+				tt.RequestInformation = response;
+ 			return response;
 		}
 
 		private static ElasticsearchResponse<DynamicDictionary> ToDynamicResponse(ElasticsearchResponse<Dictionary<string, object>> response)
@@ -176,12 +179,12 @@ namespace Elasticsearch.Net
 				response = (this.Response as byte[]).Utf8String();
 
 			string requestJson = null;
-		    
-            if (r.Request != null)
-            {
-                requestJson = r.Request.Utf8String();
-            }
-				
+
+			if (r.Request != null)
+			{
+				requestJson = r.Request.Utf8String();
+			}
+
 			var print = _printFormat.F(
 			  Environment.NewLine,
 			  r.HttpStatusCode.HasValue ? r.HttpStatusCode.Value.ToString(CultureInfo.InvariantCulture) : "-1",

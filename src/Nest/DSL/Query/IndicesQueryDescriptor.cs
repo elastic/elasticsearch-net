@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
@@ -10,92 +11,101 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class IndicesQueryDescriptor<T> : IQuery where T : class
+	[JsonConverter(typeof(ReadAsTypeConverter<IndicesQueryDescriptor<object>>))]
+	public interface IIndicesQuery : IQuery
 	{
-		[JsonProperty("score_mode"), JsonConverter(typeof(StringEnumConverter))]
-		internal NestedScore? _Score { get; set; }
+		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
+		NestedScore? Score { get; set; }
 
 		[JsonProperty("query")]
-		internal object _QueryDescriptor { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		IQueryContainer Query { get; set; }
 
 		[JsonProperty("no_match_query")]
-		internal object _NoMatchQueryDescriptor { get; set; }
+		IQueryContainer NoMatchQuery { get; set; }
 
 		[JsonProperty("indices")]
-		internal IEnumerable<string> _Indices { get; set; }
+		IEnumerable<string> Indices { get; set; }
+	}
+
+	public class IndicesQuery : PlainQuery, IIndicesQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Indices = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+		public NestedScore? Score { get; set; }
+		public IQueryContainer Query { get; set; }
+		public IQueryContainer NoMatchQuery { get; set; }
+		public IEnumerable<string> Indices { get; set; }
+	}
+
+	public class IndicesQueryDescriptor<T> : IIndicesQuery where T : class
+	{
+		NestedScore? IIndicesQuery.Score { get; set; }
+
+		IQueryContainer IIndicesQuery.Query { get; set; }
+
+		IQueryContainer IIndicesQuery.NoMatchQuery { get; set; }
+
+		IEnumerable<string> IIndicesQuery.Indices { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return (this._NoMatchQueryDescriptor == null && this._QueryDescriptor == null);
+				return ((IIndicesQuery)this).NoMatchQuery == null && ((IIndicesQuery)this).Query == null;
 			}
 		}
 
-
-		public IndicesQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public IndicesQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var qd = new QueryDescriptor<T>();
 			var q = querySelector(qd);
 			if (q.IsConditionless)
 				return this;
 
-			var d = new RawOrQueryDescriptor<T> { Descriptor = q };
 
-			this._QueryDescriptor = d.Descriptor;
+			((IIndicesQuery)this).Query = q;
 			return this;
 		}
-		public IndicesQueryDescriptor<T> Query<K>(Func<QueryDescriptor<K>, BaseQuery> querySelector) where K : class
+
+		public IndicesQueryDescriptor<T> Query<K>(Func<QueryDescriptor<K>, QueryContainer> querySelector) where K : class
 		{
 			var qd = new QueryDescriptor<K>();
 			var q = querySelector(qd);
 			if (q.IsConditionless)
 				return this;
 
-			var d = new RawOrQueryDescriptor<K> { Descriptor = q };
-
-			this._QueryDescriptor = d.Descriptor;
+			((IIndicesQuery)this).Query = q;
 			return this;
 		}
-		public IndicesQueryDescriptor<T> Query(string rawQuery)
-		{
-			var d = new RawOrQueryDescriptor<T> { Raw = rawQuery };
-			this._QueryDescriptor = d;
-			return this;
-		}
-		public IndicesQueryDescriptor<T> NoMatchQuery(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		
+		public IndicesQueryDescriptor<T> NoMatchQuery(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var qd = new QueryDescriptor<T>();
 			var q = querySelector(qd);
 			if (q.IsConditionless)
 				return this;
 
-			var d = new RawOrQueryDescriptor<T> { Descriptor = q };
-
-			this._NoMatchQueryDescriptor = d.Descriptor;
+			((IIndicesQuery)this).NoMatchQuery = q;
 			return this;
 		}
-		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryDescriptor<K>, BaseQuery> querySelector) where K : class
+		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryDescriptor<K>, IQueryContainer> querySelector) where K : class
 		{
 			var qd = new QueryDescriptor<K>();
 			var q = querySelector(qd);
 			if (q.IsConditionless)
 				return this;
 
-			var d = new RawOrQueryDescriptor<K> { Descriptor = q };
-
-			this._NoMatchQueryDescriptor = d.Descriptor;
-			return this;
-		}
-		public IndicesQueryDescriptor<T> NoMatchQuery(string rawQuery)
-		{
-			var d = new RawOrQueryDescriptor<T> { Raw = rawQuery };
-			this._QueryDescriptor = d;
+			((IIndicesQuery)this).NoMatchQuery = q;
 			return this;
 		}
 		public IndicesQueryDescriptor<T> Indices(IEnumerable<string> indices)
 		{
-			this._Indices = indices;
+			((IIndicesQuery)this).Indices = indices;
 			return this;
 		}
 	}

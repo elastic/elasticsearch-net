@@ -2,51 +2,80 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Nest.Resolvers;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class HasParentFilterDescriptor<T> : FilterBase where T : class
+	[JsonConverter(typeof(ReadAsTypeConverter<HasParentFilterDescriptor<object>>))]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IHasParentFilter : IFilter
 	{
-		public HasParentFilterDescriptor()
+		[JsonProperty("type")]
+		TypeNameMarker Type { get; set; }
+
+		[JsonProperty("_scope")]
+		string Scope { get; set; }
+
+		[JsonProperty("query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		IQueryContainer Query { get; set; }
+	}
+
+	public class HasParentFilter : PlainFilter, IHasParentFilter
+	{
+		protected internal override void WrapInContainer(IFilterContainer container)
 		{
-			this._Type = TypeNameMarker.Create<T>();
+			container.HasParent = this;
 		}
-		internal override bool IsConditionless
+
+		public TypeNameMarker Type { get; set; }
+		public string Scope { get; set; }
+		public IQueryContainer Query { get; set; }
+	}
+
+	public class HasParentFilterDescriptor<T> : FilterBase, IHasParentFilter where T : class
+	{
+		TypeNameMarker IHasParentFilter.Type { get; set; }
+
+		string IHasParentFilter.Scope { get; set;}
+		
+		IQueryContainer IHasParentFilter.Query { get; set; }
+
+		bool IFilter.IsConditionless
 		{
 			get
 			{
-				return this._QueryDescriptor == null || this._QueryDescriptor.IsConditionless || this._Type.IsNullOrEmpty();
+				var pf = ((IHasParentFilter)this);
+				return pf.Query == null 
+					|| pf.Query.IsConditionless 
+					|| pf.Type.IsNullOrEmpty();
 			}
 		}
 
-		[JsonProperty("type")]
-		internal TypeNameMarker _Type { get; set; }
+		public HasParentFilterDescriptor()
+		{
+			((IHasParentFilter)this).Type = TypeNameMarker.Create<T>();
+		}
 
-		[JsonProperty("_scope")]
-		internal string _Scope { get; set;}
-		
-		[JsonProperty("query")]
-		internal BaseQuery _QueryDescriptor { get; set; }
-
-		public HasParentFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public HasParentFilterDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			this._QueryDescriptor = querySelector(q);
+			((IHasParentFilter)this).Query = querySelector(q);
 			return this;
 		}
 
 		public HasParentFilterDescriptor<T> Scope(string scope)
 		{
-			this._Scope = scope;
+			((IHasParentFilter)this).Scope = scope;
 			return this;
 		}
+
 		public HasParentFilterDescriptor<T> Type(string type)
 		{
-			this._Type = type;
+			((IHasParentFilter)this).Type = type;
 			return this;
 		}
 	}

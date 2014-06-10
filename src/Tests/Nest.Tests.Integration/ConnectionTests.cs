@@ -27,14 +27,6 @@ namespace Nest.Tests.Integration
 			Assert.True(rootNodeInfo.ConnectionStatus.Success);
 		}
 		[Test]
-		public void construct_client_with_null()
-		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
-				var client = new ElasticClient(null);
-			});
-		}
-		[Test]
 		public void construct_client_with_null_or_empy_settings()
 		{
 			Assert.Throws<UriFormatException>(() =>
@@ -81,15 +73,6 @@ namespace Nest.Tests.Integration
 
 			Assert.True(result.IsValid);
 			Assert.NotNull(result.ConnectionStatus.HttpStatusCode);
-		}
-		[Test]
-		public void construct_client_with_null_uri()
-		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
-				Uri uri = null;
-				var settings = new ConnectionSettings(uri, "index");
-			});
 		}
 
 		[Test]

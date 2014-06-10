@@ -16,9 +16,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Query(ff => ff
 					.Range(n => n
 						.OnField(f=>f.LOC)
-						.From("10")
-						.To("20")
-						.FromExclusive()
+						.GreaterOrEquals("10")
+						.Lower("20")
 					)
 				);
 				
@@ -27,9 +26,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				query : {
 						range: {
 							""loc"": {
-								from: ""10"",
-								to: ""20"",
-								include_lower: false
+								gte: ""10"",
+								lt: ""20"",
 							}
 						}
 
@@ -47,9 +45,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Query(ff => ff
 					.Range(n => n
 						.OnField(f => f.LOC)
-						.From(10)
-						.To(20)
-						.FromExclusive()
+						.GreaterOrEquals(10)
+						.Lower(20)
 					)
 				);
 
@@ -58,9 +55,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				query : {
 						range: {
 							""loc"": {
-								from: 10,
-								to: 20,
-								include_lower: false
+								gte: ""10"",
+								lt: ""20"",
 							}
 						}
 
@@ -78,9 +74,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Query(ff => ff
 					.Range(n => n
 						.OnField(f => f.LOC)
-						.From(10.0)
-						.To(20.0)
-						.FromExclusive()
+						.GreaterOrEquals(10.1)
+						.LowerOrEquals(20.1)
 					)
 				);
 
@@ -89,39 +84,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				query : {
 						range: {
 							""loc"": {
-								from: 10.0,
-								to: 20.0,
-								include_lower: false
-							}
-						}
-
-					}
-			}";
-			Assert.True(json.JsonEquals(expected), json);
-		}
-		[Test]
-		public void RangeFloats()
-		{
-			var s = new SearchDescriptor<ElasticsearchProject>()
-				.From(0)
-				.Size(10)
-				.Query(ff => ff
-					.Range(n => n
-						.OnField(f => f.LOC)
-						.From(10.0F)
-						.To(20.0F)
-						.FromExclusive()
-					)
-				);
-
-			var json = TestElasticClient.Serialize(s);
-			var expected = @"{ from: 0, size: 10, 
-				query : {
-						range: {
-							""loc"": {
-								from: 10.0,
-								to: 20.0,
-								include_lower: false
+								gte: ""10.1"",
+								lte: ""20.1"",
 							}
 						}
 
@@ -141,9 +105,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Query(ff => ff
 					.Range(n => n
 						.OnField(f => f.StartedOn)
-						.From(lowerBound)
-						.To(upperBound)
-						.FromExclusive()
+						.Greater(lowerBound)
+						.Lower(upperBound)
 					)
 				);
 
@@ -152,9 +115,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				query : {
 						range: {
 							""startedOn"": {
-								from: """ + lowerBound.ToString("yyyy-MM-dd'T'HH:mm:ss") + @""",
-								to: """ + upperBound.ToString("yyyy-MM-dd'T'HH:mm:ss") + @""",
-								include_lower: false
+								gt: """ + lowerBound.ToString("yyyy-MM-dd'T'HH:mm:ss.fff") + @""",
+								lt: """ + upperBound.ToString("yyyy-MM-dd'T'HH:mm:ss.fff") + @"""
 							}
 						}
 
@@ -174,9 +136,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Query(ff => ff
 					.Range(n => n
 						.OnField(f => f.StartedOn)
-						.From(lowerBound, format)
-						.To(upperBound, format)
-						.FromExclusive()
+						.GreaterOrEquals(lowerBound, format)
+						.Lower(upperBound, format)
 					)
 				);
 
@@ -185,9 +146,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				query : {
 						range: {
 							""startedOn"": {
-								from: """ + lowerBound.ToString(format) + @""",
-								to: """ + upperBound.ToString(format) + @""",
-								include_lower: false
+								gte: """ + lowerBound.ToString(format) + @""",
+								lt: """ + upperBound.ToString(format) + @"""
 							}
 						}
 

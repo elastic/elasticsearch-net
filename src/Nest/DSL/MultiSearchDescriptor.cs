@@ -16,9 +16,15 @@ namespace Nest
 		: FixedIndexTypePathDescriptor<MultiSearchDescriptor, MultiSearchRequestParameters>
 		, IPathInfo<MultiSearchRequestParameters>
 	{
+		private readonly ElasticInferrer _inferrer;
+
+		public MultiSearchDescriptor(ElasticInferrer inferrer)
+		{
+			_inferrer = inferrer;
+		}
 
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, SearchDescriptorBase> _Operations = new Dictionary<string, SearchDescriptorBase>();
+		internal IDictionary<string, ISearchRequest> _Operations = new Dictionary<string, ISearchRequest>();
 
 		public MultiSearchDescriptor Search<T>(string name, Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) where T : class
 		{
@@ -27,6 +33,7 @@ namespace Nest
 			var descriptor = searchSelector(new SearchDescriptor<T>().Index(this._Index).Type(this._Type));
 			if (descriptor == null)
 				return this;
+			descriptor.CreateCovarianceSelector<T>(_inferrer);
 			this._Operations.Add(name, descriptor);
 			return this;
 		}

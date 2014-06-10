@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nest.DSL.Descriptors;
+using Nest.DSL.Search;
+using Nest.Resolvers.Converters.Aggregations;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
@@ -21,24 +24,10 @@ namespace Nest.Resolvers
 		/// </summary>
 		public IConnectionSettingsValues ConnectionSettings { get; private set; }
 
-		public ElasticInferrer Infer { get; private set; }
-
-		/// <summary>
-		/// Signals to custom converter that it can get serialization state from one of the converters
-		/// Ugly but massive performance gain
-		/// </summary>
-		internal JsonConverterPiggyBackState PiggyBackState { get; set; }
-
 		public ElasticContractResolver(IConnectionSettingsValues connectionSettings)
 			: base(true)
 		{
 			this.ConnectionSettings = connectionSettings;
-			this.Infer = new ElasticInferrer(this.ConnectionSettings);
-		}
-
-		protected override JsonConverter ResolveContractConverter(Type objectType)
-		{
-			return base.ResolveContractConverter(objectType);
 		}
 
 		protected override JsonContract CreateContract(Type objectType)
@@ -63,7 +52,7 @@ namespace Nest.Resolvers
 
 			if (typeof(IHit<object>).IsAssignableFrom(objectType))
 				contract.Converter = new DefaultHitConverter();
-			
+
 			if (objectType == typeof(MultiGetResponse))
 				contract.Converter = new MultiGetHitConverter();
 
@@ -104,6 +93,55 @@ namespace Nest.Resolvers
 			}
 
 			return contract;
+		}
+
+		protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
+		{
+			var defaultProperties = base.CreateProperties(type, memberSerialization);
+			var lookup = defaultProperties.ToLookup(p => p.PropertyName);
+
+			defaultProperties = PropertiesOf<IQuery>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IQueryContainer>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ISearchRequest>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IFilter>(type, memberSerialization, defaultProperties, lookup, append: true);
+			defaultProperties = PropertiesOf<IFilterContainer>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IRandomScoreFunction>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IFacetRequest>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IHighlightRequest>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IHighlightField>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IRescore>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IRescoreQuery>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IAggregationContainer>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IMetricAggregator>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IBucketAggregator>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ISort>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ISuggestBucket>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ISuggester>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IFuzzySuggester>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IDirectGenerator>(type, memberSerialization, defaultProperties, lookup);
+			//defaultProperties = PropertiesOf<ISourceFilter>(type, memberSerialization, defaultProperties, lookup);
+			return defaultProperties;
+		}
+
+		private IList<JsonProperty> PropertiesOf<T>(Type type, MemberSerialization memberSerialization, IList<JsonProperty> defaultProperties, ILookup<string, JsonProperty> lookup, bool append = false)
+		{
+			if (!typeof (T).IsAssignableFrom(type)) return defaultProperties;
+			var jsonProperties = (
+				from i in type.GetInterfaces()
+				//where i != typeof (T)
+				select base.CreateProperties(i, memberSerialization)
+				)
+				.SelectMany(interfaceProps => interfaceProps)
+				.Where(p => !lookup.Contains(p.PropertyName));
+			if (!append)
+			{
+				foreach (var p in jsonProperties)
+				{
+					defaultProperties.Add(p);
+				}
+				return defaultProperties;
+			}
+			return jsonProperties.Concat(defaultProperties).ToList();
 		}
 
 		protected override string ResolvePropertyName(string propertyName)

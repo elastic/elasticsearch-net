@@ -12,13 +12,13 @@ namespace Nest
         public string PrimarySize { get; set; }
 
         [JsonProperty(PropertyName = "primary_size_in_bytes")]
-        public int PrimarySizeInBytes { get; set; }
+        public long PrimarySizeInBytes { get; set; }
 
         [JsonProperty(PropertyName = "size")]
         public string Size { get; set; }
 
         [JsonProperty(PropertyName = "size_in_bytes")]
-        public int SizeInBytes { get; set; }
+        public long SizeInBytes { get; set; }
 
     }
 }

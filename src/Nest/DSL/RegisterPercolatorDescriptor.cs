@@ -25,7 +25,7 @@ namespace Nest
 				return body;
 			}
 		}
-		internal BaseQuery _Query { get; set; }
+		internal QueryContainer _Query { get; set; }
 
 		internal FluentDictionary<string, object> _Metadata { get; set; } 
 		
@@ -44,7 +44,7 @@ namespace Nest
 		/// <summary>
 		/// The query to perform the percolation
 		/// </summary>
-		public RegisterPercolatorDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public RegisterPercolatorDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var d = querySelector(new QueryDescriptor<T>());

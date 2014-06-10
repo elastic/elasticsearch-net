@@ -6,7 +6,8 @@ open System
 open InheritDoc
 open SemVerHelper
 open AssemblyInfoFile
-
+open System.Text.RegularExpressions
+open System.Linq
 
 // Properties
 let buildDir = "build/output/"
@@ -40,9 +41,9 @@ Target "BuildApp" (fun _ ->
     
     //Scan for xml docs and patch them to replace <inheritdoc /> with the documentation
     //from their interfaces
-    !! "build/output/Nest/Nest.xml" |> Seq.iter(fun f -> PatchXmlDoc f)
+    //!! "build/output/Nest/Nest.xml" |> Seq.iter(fun f -> PatchXmlDoc f)
 
-    CopyFile "build/output/Elasticsearch.Net/init.ps1" "build/elasticsearch-init.ps1"
+    CopyFile "build/output/Elasticsearch.Net/install.ps1" "build/elasticsearch-init.ps1"
 
 )
 
@@ -74,6 +75,20 @@ Target "CreateKeysIfAbsent" (fun _ ->
     if not (fileExists keyFile) then createKeys()
 )
 
+let getFileVersion = fun _ ->
+    let assemblyFileContents = ReadFileAsString @"src\NEST\Properties\AssemblyInfo.cs"
+    let re = @"\[assembly\: AssemblyVersionAttribute\(""([^""]+)""\)\]"
+    let matches = Regex.Matches(assemblyFileContents,re)
+    let defaultVersion = regex_replace re "$1" (matches.Item(0).Captures.Item(0).Value)
+    let timestampedVersion = (sprintf "%s-ci%s" defaultVersion (DateTime.UtcNow.ToString("yyyyMMddHHmmss")))
+    trace ("timestamped: " + timestampedVersion)
+    let fileVersion = (getBuildParamOrDefault "version" timestampedVersion)
+    let fv = if isNullOrEmpty fileVersion then timestampedVersion else fileVersion
+    trace ("fileVersion: " + fv)
+    fv
+
+let fileVersion = getFileVersion()
+
 let validateSignedAssembly = fun name ->
     let sn = if isMono then "sn" else "build/tools/sn/sn.exe"
     let out = (ExecProcessAndReturnMessages(fun p ->
@@ -103,7 +118,6 @@ let validateSignedAssembly = fun name ->
     | (_, t) -> traceFAKE "%s was not signed with the official token: %s but %s" name oficialToken t
 
 let nugetPack = fun name ->
-    let fileVersion = (getBuildParamOrDefault "version" "0.1.0")
     CreateDir nugetOutDir
     let package = (sprintf @"build\%s.nuspec" name)
     let packageContents = ReadFileAsString package
@@ -131,19 +145,26 @@ let buildDocs = fun action ->
         p.Arguments <- sprintf "\"%s\" %s" wintersmith action
       ) 
       (TimeSpan.FromMinutes (if action = "preview" then 300.0 else 5.0))
-   
-Target "Version" (fun _ ->
-  let fileVersion = (getBuildParamOrDefault "version" "0.1.0")
-  let version = SemVerHelper.parse fileVersion
 
-  let suffix = fun (prerelease: PreRelease) -> sprintf "-%s%i" prerelease.Name prerelease.Number.Value
-  let assemblySuffix = if version.PreRelease.IsSome then suffix version.PreRelease.Value else "";
-  let assemblyVersion = sprintf "%i.0.0%s" version.Major assemblySuffix
+let getAssemblyVersion = (fun _ ->
+    let version = SemVerHelper.parse fileVersion
+
+    let suffix = fun (prerelease: PreRelease) -> sprintf "-%s%i" prerelease.Name prerelease.Number.Value
+    let assemblySuffix = if version.PreRelease.IsSome then suffix version.PreRelease.Value else "";
+    let assemblyVersion = sprintf "%i.0.0%s" version.Major assemblySuffix
   
-  match (assemblySuffix, version.Minor, version.Patch) with
-  | (s, m, p) when s <> "" && (m <> 0 || p <> 0)  -> failwithf "Cannot create prereleases for minor or major builds!"
-  | ("", _, _) -> traceFAKE "Building fileversion %s for asssembly version %s" fileVersion assemblyVersion
-  | _ -> traceFAKE "Building prerelease %s for major assembly version %s " fileVersion assemblyVersion
+    match (assemblySuffix, version.Minor, version.Patch) with
+    | (s, m, p) when s <> "" && (m <> 0 || p <> 0)  -> failwithf "Cannot create prereleases for minor or major builds!"
+    | ("", _, _) -> traceFAKE "Building fileversion %s for asssembly version %s" fileVersion assemblyVersion
+    | _ -> traceFAKE "Building prerelease %s for major assembly version %s " fileVersion assemblyVersion
+
+    assemblyVersion
+)
+
+
+Target "Version" (fun _ ->
+  trace fileVersion
+  let assemblyVersion = if fileVersion.Contains("-ci") then fileVersion else getAssemblyVersion()
 
   let assemblyDescription = fun (f: string) ->
     let name = f 
@@ -188,7 +209,9 @@ Target "DocsPreview" (fun _ ->
   buildDocs "plugin install livereload" |> ignore
   buildDocs "preview" |> ignore
 )
-
+Target "Nightly" (fun _ -> 
+    trace "build nightly"
+)
 // Dependencies
 "Clean" 
   ==> "CreateKeysIfAbsent"
@@ -196,6 +219,12 @@ Target "DocsPreview" (fun _ ->
   ==> "BuildApp"
   ==> "Test"
   ==> "Build"
+
+"CreateKeysIfAbsent"
+  ==> "Version"
+  ==> "Release"
+  ==> "Nightly"
+
 
 "Build"
   ==> "Docs"

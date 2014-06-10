@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using Elasticsearch.Net;
 using Nest.DSL.Search;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using System.Linq.Expressions;
 using Nest.DSL.Descriptors;
@@ -14,27 +12,187 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	public interface IRequest 
+	{
+		
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface ISearchRequest: IRequest, IPathInfo<SearchRequestParameters>
+	{
+		Type _ClrType { get; }
+
+		[JsonProperty(PropertyName = "timeout")]
+		string Timeout { get; set; }
+
+		[JsonProperty(PropertyName = "from")]
+		int? From { get; set; }
+
+		[JsonProperty(PropertyName = "size")]
+		int? Size { get; set; }
+
+		[JsonProperty(PropertyName = "explain")]
+		bool? Explain { get; set; }
+
+		[JsonProperty(PropertyName = "version")]
+		bool? Version { get; set; }
+
+		[JsonProperty(PropertyName = "track_scores")]
+		bool? TrackScores { get; set; }
+
+		[JsonProperty(PropertyName = "min_score")]
+		double? MinScore { get; set; }
+
+		[JsonProperty(PropertyName = "indices_boost")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
+
+		[JsonProperty(PropertyName = "sort")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<PropertyPathMarker, ISort> Sort { get; set; }
+
+		[JsonProperty(PropertyName = "facets")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
+
+		[JsonProperty(PropertyName = "suggest")]
+		IDictionary<string, ISuggestBucket> Suggest { get; set; }
+
+		[JsonProperty(PropertyName = "highlight")]
+		IHighlightRequest Highlight { get; set; }
+
+		[JsonProperty(PropertyName = "rescore")]
+		IRescore Rescore { get; set; }
+
+		[JsonProperty(PropertyName = "fields")]
+		IList<PropertyPathMarker> Fields { get; set; }
+
+		[JsonProperty(PropertyName = "script_fields")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<string, IScriptFilter> ScriptFields { get; set; }
+
+		[JsonProperty(PropertyName = "_source")]
+		ISourceFilter Source { get; set; }
+
+		[JsonProperty(PropertyName = "aggs")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
+
+		[JsonProperty(PropertyName = "query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		IQueryContainer Query { get; set; }
+
+		[JsonProperty(PropertyName = "filter")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
+		IFilterContainer Filter { get; set; }
+
+		string _Preference { get; }
+		
+		string _Routing { get; }
+		
+		SearchTypeOptions? _SearchType { get;  }
+		
+		Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set;}
+		
+		SearchRequestParameters QueryString { get; set; }
+
+	}
+
+	public class SearchRequest : ISearchRequest
+	{
+		public string Index { get; set; }
+		public string Type { get; set; }
+
+		protected internal Type _clrType { get; set; }
+		Type ISearchRequest._ClrType { get { return _clrType; } }
+
+		public string Timeout { get; set; }
+		public int? From { get; set; }
+		public int? Size { get; set; }
+		public bool? Explain { get; set; }
+		public bool? Version { get; set; }
+		public bool? TrackScores { get; set; }
+		public double? MinScore { get; set; }
+		public IList<PropertyPathMarker> Fields { get; set; }
+		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
+		public ISourceFilter Source { get; set; }
+		public IDictionary<PropertyPathMarker, ISort> Sort { get; set; }
+		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
+		public IFilterContainer Filter { get; set; }
+		public IQueryContainer Query { get; set; }
+		public IRescore Rescore { get; set; }
+		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
+		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
+		public IHighlightRequest Highlight { get; set; }
+		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
+
+		SearchTypeOptions? ISearchRequest._SearchType
+		{
+			get { return this.QueryString.GetQueryStringValue<SearchTypeOptions?>("search_type");  }
+		}
+
+		string ISearchRequest._Preference
+		{
+			get { return this.QueryString.GetQueryStringValue<string>("preference"); }
+		}
+
+		string ISearchRequest._Routing
+		{
+			get
+			{
+				var routing = this.QueryString.GetQueryStringValue<string[]>("routing");
+				return routing == null
+					? null
+					: string.Join(",", routing);
+			}
+		}
+		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
+
+		public SearchRequestParameters QueryString { get; set; }
+
+		ElasticsearchPathInfo<SearchRequestParameters> IPathInfo<SearchRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		{
+			var pathInfo = new ElasticsearchPathInfo<SearchRequestParameters>();
+			//pathInfo.HttpMethod = this._QueryString.ContainsKey("source")
+			//	? PathInfoHttpMethod.GET
+			//	: PathInfoHttpMethod.POST;
+
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.RequestParameters = this.QueryString;
+			pathInfo.Index = this.Index;
+			pathInfo.Type = this.Type;
+
+			//pathInfo.RequestParameters = this._QueryString;
+			return pathInfo;
+		}
+	}
+
 	/// <summary>
 	/// A descriptor wich describes a search operation for _search and _msearch
 	/// </summary>
 	/// <remarks>Doesn't inherit from QueryPathDescriptorBase because it already needs an untyped supperclass 
 	/// that has specifics that we can push to QueryPathDescriptorBase</remarks>
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial class SearchDescriptor<T> :
-		SearchDescriptorBase
-		, IPathInfo<SearchRequestParameters>
-		where T : class
+	public partial class SearchDescriptor<T> : SearchDescriptorBase , IPathInfo<SearchRequestParameters>, ISearchRequest where T : class
 	{
-		internal override SearchTypeOptions? _SearchType
+		private ISearchRequest Self { get { return this; } }
+
+		SearchTypeOptions? ISearchRequest._SearchType
 		{
 			get { return this._QueryString.GetQueryStringValue<SearchTypeOptions?>("search_type");  }
 		}
-		internal override string _Preference
+
+		SearchRequestParameters ISearchRequest.QueryString
+		{
+			get { return this._QueryString;  }
+			set { this._QueryString = value;  }
+		}
+
+		string ISearchRequest._Preference
 		{
 			get { return this._QueryString.GetQueryStringValue<string>("preference"); }
 		}
 
-		internal override string _Routing
+		string ISearchRequest._Routing
 		{
 			get
 			{
@@ -45,12 +203,46 @@ namespace Nest
 			}
 		}
 
-		internal override Type _ClrType { get { return typeof(T); } }
+		Type ISearchRequest._ClrType { get { return typeof(T); } }
 
 		/// <summary>
 		/// Whether conditionless queries are allowed or not
 		/// </summary>
 		internal bool _Strict { get; set; }
+
+		string ISearchRequest.Timeout { get; set; }
+		int? ISearchRequest.From { get; set; }
+		int? ISearchRequest.Size { get; set; }
+		bool? ISearchRequest.Explain { get; set; }
+		bool? ISearchRequest.Version { get; set; }
+		bool? ISearchRequest.TrackScores { get; set; }
+		double? ISearchRequest.MinScore { get; set; }
+
+		IDictionary<IndexNameMarker, double> ISearchRequest.IndicesBoost { get; set; }
+
+		IDictionary<PropertyPathMarker, ISort> ISearchRequest.Sort { get; set; }
+
+		IDictionary<PropertyPathMarker, IFacetContainer> ISearchRequest.Facets { get; set; }
+
+		IDictionary<string, ISuggestBucket> ISearchRequest.Suggest { get; set; }
+
+		IHighlightRequest ISearchRequest.Highlight { get; set; }
+
+		IRescore ISearchRequest.Rescore { get; set; }
+
+		IQueryContainer ISearchRequest.Query { get; set; }
+
+		IFilterContainer ISearchRequest.Filter { get; set; }
+
+		IList<PropertyPathMarker> ISearchRequest.Fields { get; set; }
+
+		IDictionary<string, IScriptFilter> ISearchRequest.ScriptFields { get; set; }
+
+		ISourceFilter ISearchRequest.Source { get; set; }
+
+		IDictionary<string, IAggregationContainer> ISearchRequest.Aggregations { get; set; }
+
+		Func<dynamic, Hit<dynamic>, Type> ISearchRequest.TypeSelector { get; set; }
 
 		/// <summary>
 		/// The indices to execute the search on. Defaults to the default index
@@ -207,112 +399,32 @@ namespace Nest
 			return this;
 		}
 
-		[JsonProperty(PropertyName = "timeout")]
-		internal string _Timeout { get; set; }
-		[JsonProperty(PropertyName = "from")]
-		internal int? _From { get; set; }
-		[JsonProperty(PropertyName = "size")]
-		internal int? _Size { get; set; }
-		[JsonProperty(PropertyName = "explain")]
-		internal bool? _Explain { get; set; }
-		[JsonProperty(PropertyName = "version")]
-		internal bool? _Version { get; set; }
-		[JsonProperty(PropertyName = "track_scores")]
-		internal bool? _TrackScores { get; set; }
-
-		[JsonProperty(PropertyName = "min_score")]
-		internal double? _MinScore { get; set; }
-
-		[JsonProperty(PropertyName = "indices_boost")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, double> _IndicesBoost { get; set; }
-
-		[JsonProperty(PropertyName = "sort")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<PropertyPathMarker, object> _Sort { get; set; }
-
-		[JsonProperty(PropertyName = "facets")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<PropertyPathMarker, FacetDescriptorsBucket<T>> _Facets { get; set; }
-
-		[JsonProperty(PropertyName = "suggest")]
-		internal IDictionary<string, object> _Suggest { get; set; }
-
-		[JsonProperty(PropertyName = "query")]
-		internal RawOrQueryDescriptor<T> _QueryOrRaw
-		{
-			get
-			{
-				if (this._RawQuery == null && this._Query == null)
-					return null;
-				return new RawOrQueryDescriptor<T>
-				{
-					Raw = this._RawQuery,
-					Descriptor = this._Query
-				};
-			}
-		}
-
-		[JsonProperty(PropertyName = "filter")]
-		internal RawOrFilterDescriptor<T> _FilterOrRaw
-		{
-			get
-			{
-				if (this._RawFilter == null && this._Filter == null)
-					return null;
-				return new RawOrFilterDescriptor<T>
-				{
-					Raw = this._RawFilter,
-					Descriptor = this._Filter
-				};
-			}
-		}
-
-		[JsonProperty(PropertyName = "highlight")]
-		internal HighlightDescriptor<T> _Highlight { get; set; }
-
-		[JsonProperty(PropertyName = "rescore")]
-		internal RescoreDescriptor<T> _Rescore { get; set; }
-
-		internal string _RawQuery { get; set; }
-		internal BaseQuery _Query { get; set; }
-
-		internal string _RawFilter { get; set; }
-		internal BaseFilter _Filter { get; set; }
-
-		[JsonProperty(PropertyName = "fields")]
-		internal IList<PropertyPathMarker> _Fields { get; set; }
-
-		[JsonProperty(PropertyName = "script_fields")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal FluentDictionary<string, ScriptFilterDescriptor> _ScriptFields { get; set; }
-
-		[JsonProperty(PropertyName = "_source")]
-		internal object _Source { get; set; }
-
-
-		[JsonProperty(PropertyName = "aggs")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, AggregationDescriptor<T>> _Aggregations { get; set; }
 
 		public SearchDescriptor<T> Aggregations(Func<AggregationDescriptor<T>, AggregationDescriptor<T>> aggregationsSelector)
 		{
 			var aggs = aggregationsSelector(new AggregationDescriptor<T>());
 			if (aggs == null) return this;
-			this._Aggregations = aggs._Aggregations;
+			Self.Aggregations = ((IAggregationContainer)aggs).Aggregations;
 			return this;
 		}
 
 
 		public SearchDescriptor<T> Source(bool include = true)
 		{
-			this._Source = include;
+			if (!include)
+			{
+				Self.Source = new SourceFilter
+				{
+					Exclude = new PropertyPathMarker[] {"*"}
+				};
+			}
+			else Self.Source = null;
 			return this;
 		}
 
 		public SearchDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector)
 		{
-			this._Source = sourceSelector(new SearchSourceDescriptor<T>());
+			Self.Source = sourceSelector(new SearchSourceDescriptor<T>());
 			return this;
 		}
 		/// <summary>
@@ -321,7 +433,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Size(int size)
 		{
-			this._Size = size;
+			Self.Size = size;
 			return this;
 		}
 		/// <summary>
@@ -336,7 +448,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> From(int from)
 		{
-			this._From = from;
+			Self.From = from;
 			return this;
 		}
 		/// <summary>
@@ -353,7 +465,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Timeout(string timeout)
 		{
-			this._Timeout = timeout;
+			Self.Timeout = timeout;
 			return this;
 		}
 		/// <summary>
@@ -362,7 +474,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Explain(bool explain = true)
 		{
-			this._Explain = explain;
+			Self.Explain = explain;
 			return this;
 		}
 		/// <summary>
@@ -370,7 +482,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Version(bool version = true)
 		{
-			this._Version = version;
+			Self.Version = version;
 			return this;
 		}
 		/// <summary>
@@ -378,7 +490,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> TrackScores(bool trackscores = true)
 		{
-			this._TrackScores = trackscores;
+			Self.TrackScores = trackscores;
 			return this;
 		}
 		/// <summary>
@@ -386,7 +498,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> MinScore(double minScore)
 		{
-			this._MinScore = minScore;
+			Self.MinScore = minScore;
 			return this;
 		}
 
@@ -465,10 +577,10 @@ namespace Nest
 		/// matter more than hits coming from another index (think social graph where each user has an index).
 		/// </summary>
 		public SearchDescriptor<T> IndicesBoost(
-			Func<FluentDictionary<string, double>, FluentDictionary<string, double>> boost)
+			Func<FluentDictionary<IndexNameMarker, double>, FluentDictionary<IndexNameMarker, double>> boost)
 		{
 			boost.ThrowIfNull("boost");
-			this._IndicesBoost = boost(new FluentDictionary<string, double>());
+			Self.IndicesBoost = boost(new FluentDictionary<IndexNameMarker, double>());
 			return this;
 		}
 		/// <summary>
@@ -477,7 +589,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions)
 		{
-			this._Fields = expressions.Select(e => (PropertyPathMarker)e).ToList();
+			Self.Fields = expressions.Select(e => (PropertyPathMarker)e).ToList();
 			return this;
 		}
 		
@@ -487,7 +599,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Fields(Func<FluentFieldList<T>, FluentFieldList<T>> properties)
 		{
-			this._Fields = properties(new FluentFieldList<T>()).ToList();
+			Self.Fields = properties(new FluentFieldList<T>()).ToList();
 			return this;
 		}
 		/// <summary>
@@ -496,7 +608,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Fields(params string[] fields)
 		{
-			this._Fields = fields.Select(f => (PropertyPathMarker)f).ToList();
+			Self.Fields = fields.Select(f => (PropertyPathMarker)f).ToList();
 			return this;
 		}
 
@@ -508,15 +620,15 @@ namespace Nest
 			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>());
 			if (scriptFieldDescriptors == null || scriptFieldDescriptors.All(d => d.Value == null))
 			{
-				this._ScriptFields = null;
+				Self.ScriptFields = null;
 				return this;
 			}
-			this._ScriptFields = new FluentDictionary<string, ScriptFilterDescriptor>();
+			Self.ScriptFields = new FluentDictionary<string, IScriptFilter>();
 			foreach (var d in scriptFieldDescriptors)
 			{
 				if (d.Value == null)
 					continue;
-				this._ScriptFields.Add(d.Key, d.Value(new ScriptFilterDescriptor()));
+				Self.ScriptFields.Add(d.Key, d.Value(new ScriptFilterDescriptor()));
 			}
 			return this;
 		}
@@ -532,12 +644,12 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
 		{
-			if (this._Sort == null)
-				this._Sort = new Dictionary<PropertyPathMarker, object>();
+			if (Self.Sort == null) Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
 
-			this._Sort.Add(objectPath, "asc");
+			Self.Sort.Add(objectPath, new Sort() { Order = SortOrder.Ascending});
 			return this;
 		}
+
 		/// <summary>
 		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
 		/// The sort is defined on a per field level, with special field name for _score to sort by score.
@@ -548,12 +660,12 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
 		{
-			if (this._Sort == null)
-				this._Sort = new Dictionary<PropertyPathMarker, object>();
+			if (Self.Sort == null) Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
 
-			this._Sort.Add(objectPath, "desc");
+			Self.Sort.Add(objectPath, new Sort() { Order = SortOrder.Descending});
 			return this;
 		}
+
 		/// <summary>
 		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
 		/// The sort is defined on a per field level, with special field name for _score to sort by score.
@@ -564,11 +676,11 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> SortAscending(string field)
 		{
-			if (this._Sort == null)
-				this._Sort = new Dictionary<PropertyPathMarker, object>();
-			this._Sort.Add(field, "asc");
+			if (Self.Sort == null) Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
+			Self.Sort.Add(field, new Sort() { Order = SortOrder.Ascending });
 			return this;
 		}
+
 		/// <summary>
 		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
 		/// The sort is defined on a per field level, with special field name for _score to sort by score.
@@ -579,72 +691,73 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> SortDescending(string field)
 		{
-			if (this._Sort == null)
-				this._Sort = new Dictionary<PropertyPathMarker, object>();
+			if (Self.Sort == null)
+				Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
 
-			this._Sort.Add(field, "desc");
+			Self.Sort.Add(field, new Sort() { Order = SortOrder.Descending});
 			return this;
 		}
+
 		/// <summary>
 		/// <para>Sort() allows you to fully describe your sort unlike the SortAscending and SortDescending aliases.
 		/// </para>
 		/// </summary>
-		public SearchDescriptor<T> Sort(Func<SortDescriptor<T>, SortDescriptor<T>> sortSelector)
+		public SearchDescriptor<T> Sort(Func<SortFieldDescriptor<T>, SortFieldDescriptor<T>> sortSelector)
 		{
-			if (this._Sort == null)
-				this._Sort = new Dictionary<PropertyPathMarker, object>();
+			if (Self.Sort == null)
+				Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
 
 			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = new SortDescriptor<T>();
-			sortSelector(descriptor);
-			this._Sort.Add(descriptor._Field, descriptor);
+			var descriptor = sortSelector(new SortFieldDescriptor<T>());
+			Self.Sort.Add(descriptor.Field, descriptor);
 			return this;
 		}
+
 		/// <summary>
 		/// <para>SortGeoDistance() allows you to sort by a distance from a geo point.
 		/// </para>
 		/// </summary>
 		public SearchDescriptor<T> SortGeoDistance(Func<SortGeoDistanceDescriptor<T>, SortGeoDistanceDescriptor<T>> sortSelector)
 		{
-			if (this._Sort == null)
-				this._Sort = new Dictionary<PropertyPathMarker, object>();
+			if (Self.Sort == null)
+				Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
 
 			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = new SortGeoDistanceDescriptor<T>();
-			sortSelector(descriptor);
-			this._Sort.Add("_geo_distance", descriptor);
+			var descriptor = sortSelector(new SortGeoDistanceDescriptor<T>());
+			Self.Sort.Add("_geo_distance", descriptor);
 			return this;
 		}
+
 		/// <summary>
 		/// <para>SortScript() allows you to sort by a distance from a geo point.
 		/// </para>
 		/// </summary>
 		public SearchDescriptor<T> SortScript(Func<SortScriptDescriptor<T>, SortScriptDescriptor<T>> sortSelector)
 		{
-			if (this._Sort == null)
-				this._Sort = new Dictionary<PropertyPathMarker, object>();
+			if (Self.Sort == null)
+				Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
 
 			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = new SortScriptDescriptor<T>();
-			sortSelector(descriptor);
-			this._Sort.Add("_script", descriptor);
+			var descriptor = sortSelector(new SortScriptDescriptor<T>());
+			Self.Sort.Add("_script", descriptor);
 			return this;
 		}
 
-		private SearchDescriptor<T> _Facet<F>(
+		private SearchDescriptor<T> _Facet<F, FI>(
 			string name,
 			Func<F, F> facet,
-			Func<F, PropertyPathMarker> inferedFieldNameSelector,
-			Action<FacetDescriptorsBucket<T>, F> fillBucket
+			Func<FI, PropertyPathMarker> inferedFieldNameSelector,
+			Action<FacetContainer, F> fillBucket
 			)
-			where F : IFacetDescriptor, new()
+			where F : IFacetRequest, FI, new()
+			
 		{
 			facet.ThrowIfNull("facet");
 			inferedFieldNameSelector.ThrowIfNull("inferedFieldNameSelector");
 			fillBucket.ThrowIfNull("fillBucket");
 
-			if (this._Facets == null)
-				this._Facets = new Dictionary<PropertyPathMarker, FacetDescriptorsBucket<T>>();
+			if (Self.Facets == null)
+				Self.Facets = new Dictionary<PropertyPathMarker, IFacetContainer>();
 
 			var descriptor = new F();
 			var f = facet(descriptor);
@@ -655,13 +768,14 @@ namespace Nest
 					"Couldn't infer name for facet of type {0}".F(typeof(F).Name)
 				);
 			}
-			var bucket = new FacetDescriptorsBucket<T>();
-			bucket.Global = f.IsGlobal;
+			var bucket = new FacetContainer();
+			bucket.Global = f.Global;
 			bucket.FacetFilter = f.FacetFilter;
+			f.FacetFilter = null;
 			bucket.Nested = f.Nested;
 			bucket.Scope = f.Scope;
 			fillBucket(bucket, descriptor);
-			this._Facets.Add(key, bucket);
+			Self.Facets.Add(key, bucket);
 
 			return this;
 		}
@@ -680,10 +794,10 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> FacetTerm(Func<TermFacetDescriptor<T>, TermFacetDescriptor<T>> facet, string Name = null)
 		{
-			return this._Facet<TermFacetDescriptor<T>>(
+			return this._Facet<TermFacetDescriptor<T>, ITermFacetRequest>(
 				Name,
 				facet,
-				(d) => d._Field,
+				(d) => d.Field,
 				(b, d) => b.Terms = d
 			);
 		}
@@ -704,10 +818,10 @@ namespace Nest
 		/// <typeparam name="K">struct, (int, double, string, DateTime)</typeparam>
 		public SearchDescriptor<T> FacetRange<K>(Func<RangeFacetDescriptor<T, K>, RangeFacetDescriptor<T, K>> facet, string Name = null) where K : struct
 		{
-			return this._Facet<RangeFacetDescriptor<T, K>>(
+			return this._Facet<RangeFacetDescriptor<T, K>, IRangeFacetRequest<K>>(
 				Name,
 				facet,
-				(d) => d._Field,
+				(d) => d.Field,
 				(b, d) => b.Range = d
 			);
 		}
@@ -727,10 +841,10 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> FacetHistogram(Func<HistogramFacetDescriptor<T>, HistogramFacetDescriptor<T>> facet, string Name = null)
 		{
-			return this._Facet<HistogramFacetDescriptor<T>>(
+			return this._Facet<HistogramFacetDescriptor<T>, IHistogramFacetRequest>(
 				Name,
 				facet,
-				(d) => d._Field,
+				(d) => d.Field,
 				(b, d) => b.Histogram = d
 			);
 		}
@@ -746,10 +860,10 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> FacetDateHistogram(Func<DateHistogramFacetDescriptor<T>, DateHistogramFacetDescriptor<T>> facet, string Name = null)
 		{
-			return this._Facet<DateHistogramFacetDescriptor<T>>(
+			return this._Facet<DateHistogramFacetDescriptor<T>, IDateHistogramFacetRequest>(
 				Name,
 				facet,
-				(d) => d._Field,
+				(d) => d.Field,
 				(b, d) => b.DateHistogram = d
 			);
 		}
@@ -771,10 +885,10 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> FacetStatistical(Func<StatisticalFacetDescriptor<T>, StatisticalFacetDescriptor<T>> facet, string Name = null)
 		{
-			return this._Facet<StatisticalFacetDescriptor<T>>(
+			return this._Facet<StatisticalFacetDescriptor<T>, IStatisticalFacetRequest>(
 				Name,
 				facet,
-				(d) => d._Field,
+				(d) => d.Field,
 				(b, d) => b.Statistical = d
 			);
 		}
@@ -794,10 +908,10 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> FacetTermsStats(Func<TermsStatsFacetDescriptor<T>, TermsStatsFacetDescriptor<T>> facet, string Name = null)
 		{
-			return this._Facet<TermsStatsFacetDescriptor<T>>(
+			return this._Facet<TermsStatsFacetDescriptor<T>, ITermsStatsFacetRequest>(
 				Name,
 				facet,
-				(d) => d._KeyField,
+				(d) => d.KeyField,
 				(b, d) => b.TermsStats = d
 			);
 		}
@@ -818,10 +932,10 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> FacetGeoDistance(Func<GeoDistanceFacetDescriptor<T>, GeoDistanceFacetDescriptor<T>> facet, string Name = null)
 		{
-			return this._Facet<GeoDistanceFacetDescriptor<T>>(
+			return this._Facet<GeoDistanceFacetDescriptor<T>, IGeoDistanceFacetRequest>(
 					Name,
 					facet,
-					(d) => d._ValueField ?? d._Field,
+					(d) => d.ValueField ?? d.Field,
 					(b, d) => b.GeoDistance = d
 				);
 		}
@@ -830,16 +944,16 @@ namespace Nest
 		/// A facet query allows to return a count of the hits matching 
 		/// the facet query. The query itself can be expressed using the Query DSL.
 		/// </summary>
-		public SearchDescriptor<T> FacetQuery(string name, Func<QueryDescriptor<T>, BaseQuery> querySelector, bool? Global = null)
+		public SearchDescriptor<T> FacetQuery(string name, Func<QueryDescriptor<T>, QueryContainer> querySelector, bool? Global = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			querySelector.ThrowIfNull("query");
-			if (this._Facets == null)
-				this._Facets = new Dictionary<PropertyPathMarker, FacetDescriptorsBucket<T>>();
+			if (Self.Facets == null)
+				Self.Facets = new Dictionary<PropertyPathMarker, IFacetContainer>();
 
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
-			this._Facets.Add(name, new FacetDescriptorsBucket<T> { Query = q });
+			Self.Facets.Add(name, new FacetContainer { Query = q });
 
 			return this;
 		}
@@ -848,31 +962,31 @@ namespace Nest
 		/// its matching the filter. The filter itself can be expressed using the Query DSL.
 		/// Note, filter facet filters are faster than query facet when using native filters (non query wrapper ones).
 		/// </summary>
-		public SearchDescriptor<T> FacetFilter(string name, Func<FilterDescriptor<T>, BaseFilter> filterSelector)
+		public SearchDescriptor<T> FacetFilter(string name, Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			filterSelector.ThrowIfNull("filterSelector");
 
-			if (this._Facets == null)
-				this._Facets = new Dictionary<PropertyPathMarker, FacetDescriptorsBucket<T>>();
+			if (Self.Facets == null)
+				Self.Facets = new Dictionary<PropertyPathMarker, IFacetContainer>();
 
 			var filter = new FilterDescriptor<T>();
 			var f = filterSelector(filter);
-			this._Facets.Add(name, new FacetDescriptorsBucket<T> { Filter = f });
+			Self.Facets.Add(name, new FacetContainer { Filter = f });
 
 			return this;
 		}
 
-		/// <summary>
-		/// To avoid repetition of the suggest text, it is possible to define a global text.
-		/// </summary>
-		public SearchDescriptor<T> SuggestGlobalText(string globalSuggestText)
-		{
-			if (this._Suggest == null)
-				this._Suggest = new Dictionary<string, object>();
-			this._Suggest.Add("text", globalSuggestText);
-			return this;
-		}
+		///// <summary>
+		///// To avoid repetition of the suggest text, it is possible to define a global text.
+		///// </summary>
+		//public SearchDescriptor<T> SuggestGlobalText(string globalSuggestText)
+		//{
+		//	if (Self.Suggest == null)
+		//		Self.Suggest = new Dictionary<string, ISuggester>();
+		//	Self.Suggest.Add("text", globalSuggestText);
+		//	return this;
+		//}
 
 		/// <summary>
 		/// The term suggester suggests terms based on edit distance. The provided suggest text is analyzed before terms are suggested. 
@@ -882,12 +996,13 @@ namespace Nest
 		{
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
-			if (this._Suggest == null)
-				this._Suggest = new Dictionary<string, object>();
+			if (Self.Suggest == null)
+				Self.Suggest = new Dictionary<string, ISuggestBucket>();
 			var desc = new TermSuggestDescriptor<T>();
 			var item = suggest(desc);
-			var bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, TermSuggest = item };
-			this._Suggest.Add(name, bucket);
+			ITermSuggester i = item;
+			var bucket = new SuggestBucket { Text = i._Text, Term = item };
+			Self.Suggest.Add(name, bucket);
 			return this;
 		}
 
@@ -899,13 +1014,14 @@ namespace Nest
 		{
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
-			if (this._Suggest == null)
-				this._Suggest = new Dictionary<string, object>();
+			if (Self.Suggest == null)
+				Self.Suggest = new Dictionary<string, ISuggestBucket>();
 
 			var desc = new PhraseSuggestDescriptor<T>();
 			var item = suggest(desc);
-			var bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, PhraseSuggest = item };
-			this._Suggest.Add(name, bucket);
+			IPhraseSuggester i = item;
+			var bucket = new SuggestBucket { Text = i._Text, Phrase = item };
+			Self.Suggest.Add(name, bucket);
 			return this;
 		}
 
@@ -917,32 +1033,38 @@ namespace Nest
 		{
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
-			if (this._Suggest == null)
-				this._Suggest = new Dictionary<string, object>();
+			if (Self.Suggest == null)
+				Self.Suggest = new Dictionary<string, ISuggestBucket>();
 
 			var desc = new CompletionSuggestDescriptor<T>();
 			var item = suggest(desc);
-			var bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, CompletionSuggest = item };
-			this._Suggest.Add(name, bucket);
+			ICompletionSuggester i = item;
+			var bucket = new SuggestBucket { Text = i._Text, Completion = item };
+			Self.Suggest.Add(name, bucket);
 			return this;
 		}
 
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda
 		/// </summary>
-		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> query)
+		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> query)
 		{
 			query.ThrowIfNull("query");
-			var q = new QueryDescriptor<T>() { IsStrict = this._Strict };
-
+			var q = new QueryDescriptor<T>();
+			((IQueryContainer)q).IsStrict = this._Strict;
 			var bq = query(q);
 			return this.Query(bq);
-
 		}
+
+		public SearchDescriptor<T> Query(QueryContainer query)
+		{
+			return this.Query((IQueryContainer)query);
+		}
+
 		/// <summary>
 		/// Describe the query to perform using the static Query class
 		/// </summary>
-		public SearchDescriptor<T> Query(BaseQuery query)
+		public SearchDescriptor<T> Query(IQueryContainer query)
 		{
 			if (query == null)
 				return this;
@@ -952,7 +1074,7 @@ namespace Nest
 
 			else if (query.IsConditionless)
 				return this;
-			this._Query = query;
+			((ISearchRequest)this).Query = query;
 			return this;
 
 		}
@@ -964,12 +1086,12 @@ namespace Nest
 		public SearchDescriptor<T> QueryString(string userInput)
 		{
 			var q = new QueryDescriptor<T>();
-			BaseQuery bq;
+			QueryContainer bq;
 			if (userInput.IsNullOrEmpty())
 				bq = q.MatchAll();
 			else
 				bq = q.QueryString(qs => qs.Query(userInput));
-			this._Query = bq;
+			((ISearchRequest)this).Query = bq;
 			return this;
 		}
 
@@ -978,15 +1100,14 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> QueryRaw(string rawQuery)
 		{
-			rawQuery.ThrowIfNull("rawQuery");
-			this._RawQuery = rawQuery;
+			Self.Query = new QueryDescriptor<T>().Raw(rawQuery);
 			return this;
 		}
 
 		/// <summary>
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
-		public SearchDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> filter)
+		public SearchDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filter)
 		{
 			filter.ThrowIfNull("filter");
 			var f = new FilterDescriptor<T>().Strict(this._Strict);
@@ -1001,16 +1122,16 @@ namespace Nest
 				return this;
 
 
-			this._Filter = bf;
+			((ISearchRequest)this).Filter = bf;
 			return this;
 		}
 		/// <summary>
 		/// Filter search
 		/// </summary>
-		public SearchDescriptor<T> Filter(BaseFilter filter)
+		public SearchDescriptor<T> Filter(FilterContainer filterDescriptor)
 		{
-			filter.ThrowIfNull("filter");
-			this._Filter = filter;
+			filterDescriptor.ThrowIfNull("filter");
+			((ISearchRequest)this).Filter = filterDescriptor;
 			return this;
 		}
 
@@ -1019,8 +1140,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> FilterRaw(string rawFilter)
 		{
-			rawFilter.ThrowIfNull("rawFilter");
-			this._RawFilter = rawFilter;
+			((ISearchRequest)this).Filter = new FilterDescriptor<T>().Raw(rawFilter);
 			return this;
 		}
 
@@ -1031,8 +1151,9 @@ namespace Nest
 		public SearchDescriptor<T> Highlight(Action<HighlightDescriptor<T>> highlightDescriptor)
 		{
 			highlightDescriptor.ThrowIfNull("highlightDescriptor");
-			this._Highlight = new HighlightDescriptor<T>();
-			highlightDescriptor(this._Highlight);
+			var d = new HighlightDescriptor<T>();
+			highlightDescriptor(d);
+			Self.Highlight = d;
 			return this;
 		}
 
@@ -1042,8 +1163,9 @@ namespace Nest
 		public SearchDescriptor<T> Rescore(Action<RescoreDescriptor<T>> rescoreSelector)
 		{
 			rescoreSelector.ThrowIfNull("rescoreSelector");
-			this._Rescore = new RescoreDescriptor<T>();
-			rescoreSelector(this._Rescore);
+			var d = new RescoreDescriptor<T>();
+			rescoreSelector(d);
+			Self.Rescore = d;
 			return this;
 		}
 
@@ -1057,8 +1179,33 @@ namespace Nest
 
 		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector)
 		{
-			this._ConcreteTypeSelector = typeSelector;
+			Self.TypeSelector = typeSelector;
 			return this;
+		}
+
+		/// <summary>
+		/// Based on the type information present in this descriptor create method that takes
+		/// the returned _source and hit and returns the ClrType it should deserialize too.
+		/// This is so that Documents[A] can contain actual instances of subclasses B, C as well.
+		/// If you specify types using .Types(typeof(B), typeof(C)) then NEST can automagically
+		/// create a TypeSelector based on the hits _type property.
+		/// </summary>
+		/// <param name="infer"></param>
+		/// <returns></returns>
+		internal Func<dynamic, Hit<dynamic>, Type> CreateCovarianceSelector<TResult>(ElasticInferrer infer)
+			where TResult : class
+		{
+			var types = (this._Types ?? Enumerable.Empty<TypeNameMarker>()).Where(t => t.Type != null).ToList();
+			if (Self.TypeSelector != null || !types.HasAny(t => t.Type != typeof(TResult)))
+				return Self.TypeSelector;
+			
+			var typeDictionary = types.ToDictionary(infer.TypeName, t => t.Type);
+			Self.TypeSelector = (o, h) =>
+			{
+				Type t;
+				return !typeDictionary.TryGetValue(h.Type, out t) ? typeof (TResult) : t;
+			};
+			return Self.TypeSelector;
 		}
 
 		ElasticsearchPathInfo<SearchRequestParameters> IPathInfo<SearchRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)

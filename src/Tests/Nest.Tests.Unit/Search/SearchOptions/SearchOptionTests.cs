@@ -71,7 +71,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				}
 
 			}";
-			Assert.True(json.JsonEquals(expected));
+			Assert.True(json.JsonEquals(expected), json);
 		}
 		[Test]
 		public void TestPreference()
@@ -217,7 +217,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 					sort: {
-						""loc.sort"": ""asc""
+						""loc.sort"": { order: ""asc"" }
 					},
 					fields: [""id"", ""name""]
 				}";
@@ -235,8 +235,8 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 					sort: {
-						""loc.sort"": ""asc"",
-						""name.sort"": ""desc""
+						""loc.sort"": { order: ""asc"" },
+						""name.sort"": { order: ""desc"" }
 					},
 					fields: [""id"", ""name""]
 				}";
@@ -277,7 +277,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.FilterRaw(@"{ raw : ""query""}");
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, filter : { raw : ""query""}}";
-			Assert.True(json.JsonEquals(expected));
+			Assert.True(json.JsonEquals(expected), json);
 		}
 		[Test]
 		public void TestRawFilterAndQuery()
@@ -291,5 +291,6 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 			var expected = @"{ from: 0, size: 10, query : { raw : ""query""}, filter : { raw : ""query""}}";
 			Assert.True(json.JsonEquals(expected));
 		}
+		
 	}
 }

@@ -862,7 +862,7 @@ namespace Nest
 		
 
 		///<summary>Wait until the specified number of shards is active</summary>
-		public ClusterHealthDescriptor WaitForActiveShards(int wait_for_active_shards)
+		public ClusterHealthDescriptor WaitForActiveShards(long wait_for_active_shards)
 		{
 			this._QueryString.WaitForActiveShards(wait_for_active_shards);
 			return this;
@@ -878,7 +878,7 @@ namespace Nest
 		
 
 		///<summary>Wait until the specified number of relocating shards is finished</summary>
-		public ClusterHealthDescriptor WaitForRelocatingShards(int wait_for_relocating_shards)
+		public ClusterHealthDescriptor WaitForRelocatingShards(long wait_for_relocating_shards)
 		{
 			this._QueryString.WaitForRelocatingShards(wait_for_relocating_shards);
 			return this;
@@ -1108,7 +1108,7 @@ namespace Nest
 		
 
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public CountDescriptor<T> MinScore(int min_score)
+		public CountDescriptor<T> MinScore(long min_score)
 		{
 			this._QueryString.MinScore(min_score);
 			return this;
@@ -1209,7 +1209,7 @@ namespace Nest
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateCountDescriptor<T,K> Version(int version)
+		public PercolateCountDescriptor<T,K> Version(long version)
 		{
 			this._QueryString.Version(version);
 			return this;
@@ -1286,7 +1286,7 @@ namespace Nest
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public DeleteDescriptor<T> Version(int version)
+		public DeleteDescriptor<T> Version(long version)
 		{
 			this._QueryString.Version(version);
 			return this;
@@ -1748,7 +1748,7 @@ namespace Nest
 			
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public GetDescriptor<T> Version(int version)
+		public GetDescriptor<T> Version(long version)
 		{
 			this._QueryString.Version(version);
 			return this;
@@ -1863,7 +1863,7 @@ namespace Nest
 			
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public SourceDescriptor<T> Version(int version)
+		public SourceDescriptor<T> Version(long version)
 		{
 			this._QueryString.Version(version);
 			return this;
@@ -1964,7 +1964,7 @@ namespace Nest
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public IndexDescriptor<T> Version(int version)
+		public IndexDescriptor<T> Version(long version)
 		{
 			this._QueryString.Version(version);
 			return this;
@@ -3003,7 +3003,7 @@ namespace Nest
 		
 
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public OptimizeDescriptor MaxNumSegments(int max_num_segments)
+		public OptimizeDescriptor MaxNumSegments(long max_num_segments)
 		{
 			this._QueryString.MaxNumSegments(max_num_segments);
 			return this;
@@ -3853,7 +3853,7 @@ namespace Nest
 		
 
 		///<summary>The word occurrence frequency as count: words with higher occurrence in the corpus will be ignored</summary>
-		public MoreLikeThisDescriptor<T> MaxDocFreq(int max_doc_freq)
+		public MoreLikeThisDescriptor<T> MaxDocFreq(long max_doc_freq)
 		{
 			this._QueryString.MaxDocFreq(max_doc_freq);
 			return this;
@@ -3861,7 +3861,7 @@ namespace Nest
 		
 
 		///<summary>The maximum query terms to be included in the generated query</summary>
-		public MoreLikeThisDescriptor<T> MaxQueryTerms(int max_query_terms)
+		public MoreLikeThisDescriptor<T> MaxQueryTerms(long max_query_terms)
 		{
 			this._QueryString.MaxQueryTerms(max_query_terms);
 			return this;
@@ -3869,7 +3869,7 @@ namespace Nest
 		
 
 		///<summary>The minimum length of the word: longer words will be ignored</summary>
-		public MoreLikeThisDescriptor<T> MaxWordLength(int max_word_length)
+		public MoreLikeThisDescriptor<T> MaxWordLength(long max_word_length)
 		{
 			this._QueryString.MaxWordLength(max_word_length);
 			return this;
@@ -3877,7 +3877,7 @@ namespace Nest
 		
 
 		///<summary>The word occurrence frequency as count: words with lower occurrence in the corpus will be ignored</summary>
-		public MoreLikeThisDescriptor<T> MinDocFreq(int min_doc_freq)
+		public MoreLikeThisDescriptor<T> MinDocFreq(long min_doc_freq)
 		{
 			this._QueryString.MinDocFreq(min_doc_freq);
 			return this;
@@ -3885,7 +3885,7 @@ namespace Nest
 		
 
 		///<summary>The term frequency as percent: terms with lower occurence in the source document will be ignored</summary>
-		public MoreLikeThisDescriptor<T> MinTermFreq(int min_term_freq)
+		public MoreLikeThisDescriptor<T> MinTermFreq(long min_term_freq)
 		{
 			this._QueryString.MinTermFreq(min_term_freq);
 			return this;
@@ -3893,7 +3893,7 @@ namespace Nest
 		
 
 		///<summary>The minimum length of the word: shorter words will be ignored</summary>
-		public MoreLikeThisDescriptor<T> MinWordLength(int min_word_length)
+		public MoreLikeThisDescriptor<T> MinWordLength(long min_word_length)
 		{
 			this._QueryString.MinWordLength(min_word_length);
 			return this;
@@ -3936,7 +3936,7 @@ namespace Nest
 		
 
 		///<summary>The offset from which to return results</summary>
-		public MoreLikeThisDescriptor<T> SearchFrom(int search_from)
+		public MoreLikeThisDescriptor<T> SearchFrom(long search_from)
 		{
 			this._QueryString.SearchFrom(search_from);
 			return this;
@@ -3968,7 +3968,7 @@ namespace Nest
 		
 
 		///<summary>The number of documents to return (default: 10)</summary>
-		public MoreLikeThisDescriptor<T> SearchSize(int search_size)
+		public MoreLikeThisDescriptor<T> SearchSize(long search_size)
 		{
 			this._QueryString.SearchSize(search_size);
 			return this;
@@ -4078,14 +4078,6 @@ namespace Nest
 		internal MultiTermVectorsRequestParameters _QueryString = new MultiTermVectorsRequestParameters(); 
 
 
-		///<summary>A comma-separated list of documents ids. You must define ids as parameter or set &quot;ids&quot; or &quot;docs&quot; in the request body</summary>
-		public MultiTermVectorsDescriptor<T> Ids(params string[] ids)
-		{
-			this._QueryString.Ids(ids);
-			return this;
-		}
-		
-
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor<T> TermStatistics(bool term_statistics = true)
 		{
@@ -4191,7 +4183,7 @@ namespace Nest
 		
 
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
-		public NodesHotThreadsDescriptor Snapshots(int snapshots)
+		public NodesHotThreadsDescriptor Snapshots(long snapshots)
 		{
 			this._QueryString.Snapshots(snapshots);
 			return this;
@@ -4199,7 +4191,7 @@ namespace Nest
 		
 
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
-		public NodesHotThreadsDescriptor Threads(int threads)
+		public NodesHotThreadsDescriptor Threads(long threads)
 		{
 			this._QueryString.Threads(threads);
 			return this;
@@ -4444,7 +4436,7 @@ namespace Nest
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateDescriptor<T,K> Version(int version)
+		public PercolateDescriptor<T,K> Version(long version)
 		{
 			this._QueryString.Version(version);
 			return this;
@@ -4668,7 +4660,7 @@ namespace Nest
 		
 
 		///<summary>How many suggestions to return in response</summary>
-		public SearchDescriptor<T> SuggestSize(int suggest_size)
+		public SearchDescriptor<T> SuggestSize(long suggest_size)
 		{
 			this._QueryString.SuggestSize(suggest_size);
 			return this;
@@ -5134,7 +5126,7 @@ namespace Nest
 		
 
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public UpdateDescriptor<T,K> RetryOnConflict(int retry_on_conflict)
+		public UpdateDescriptor<T,K> RetryOnConflict(long retry_on_conflict)
 		{
 			this._QueryString.RetryOnConflict(retry_on_conflict);
 			return this;
@@ -5182,7 +5174,7 @@ namespace Nest
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public UpdateDescriptor<T,K> Version(int version)
+		public UpdateDescriptor<T,K> Version(long version)
 		{
 			this._QueryString.Version(version);
 			return this;

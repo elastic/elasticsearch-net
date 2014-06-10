@@ -25,7 +25,12 @@ namespace Nest
 			var pathInfo =
 				((IPathInfo<SourceRequestParameters>) descriptor).ToPathInfo(_connectionSettings);
 			var response = this.RawDispatch.GetSourceDispatchAsync<T>(pathInfo)
-				.ContinueWith(t => t.Result.Response);
+				.ContinueWith(t =>
+				{
+					if (t.IsFaulted)
+						throw t.Exception.Flatten().InnerException;
+					return t.Result.Response;
+				});
 			return response;
 		}
 	}

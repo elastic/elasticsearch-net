@@ -3,76 +3,106 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
 using Nest.Resolvers;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class HistogramAggregationDescriptor<T> : BucketAggregationBaseDescriptor<HistogramAggregationDescriptor<T>, T>
-		where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<HistogramAggregator>))]
+	public interface IHistogramAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		internal PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker Field { get; set; }
+
+		[JsonProperty("script")]
+		string Script { get; set; }
+
+		[JsonProperty("params")]
+		FluentDictionary<string, object> Params { get; set; }
+
+		[JsonProperty("interval")]
+		double? Interval { get; set; }
+
+		[JsonProperty("min_doc_count")]
+		int? MinimumDocumentCount { get; set; }
+
+		[JsonProperty("order")]
+		IDictionary<string, string> Order { get; set; }
+	}
+
+	public class HistogramAggregator : BucketAggregator, IHistogramAggregator
+	{
+		public PropertyPathMarker Field { get; set; }
+		public string Script { get; set; }
+		public FluentDictionary<string, object> Params { get; set; }
+		public double? Interval { get; set; }
+		public int? MinimumDocumentCount { get; set; }
+		public IDictionary<string, string> Order { get; set; }
+	}
+
+	public class HistogramAggregationDescriptor<T> : BucketAggregationBaseDescriptor<HistogramAggregationDescriptor<T>, T>, IHistogramAggregator 
+		where T : class
+	{
+		private IHistogramAggregator Self { get { return this; } }
+
+		PropertyPathMarker IHistogramAggregator.Field { get; set; }
 		
+		string IHistogramAggregator.Script { get; set; }
+
+		FluentDictionary<string, object> IHistogramAggregator.Params { get; set; }
+
+		double? IHistogramAggregator.Interval { get; set; }
+
+		int? IHistogramAggregator.MinimumDocumentCount { get; set; }
+
+		IDictionary<string, string> IHistogramAggregator.Order { get; set; }
+
 		public HistogramAggregationDescriptor<T> Field(string field)
 		{
-			this._Field = field;
+			Self.Field = field;
 			return this;
 		}
 
 		public HistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
 		{
-			this._Field = field;
+			Self.Field = field;
 			return this;
 		}
-
-		[JsonProperty("script")]
-		internal string _Script { get; set; }
 
 		public HistogramAggregationDescriptor<T> Script(string script)
 		{
-			this._Script = script;
+			Self.Script = script;
 			return this;
 		}
-
-		[JsonProperty("params")]
-		internal FluentDictionary<string, object> _Params { get; set; }
 
 		public HistogramAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector)
 		{
-			this._Params = paramSelector(new FluentDictionary<string, object>());
+			Self.Params = paramSelector(new FluentDictionary<string, object>());
 			return this;
 		}
-
-		[JsonProperty("interval")]
-		internal double? _Interval { get; set; }
 
 		public HistogramAggregationDescriptor<T> Interval(double interval)
 		{
-			this._Interval = interval;
+			Self.Interval = interval;
 			return this;
 		}
 		
-		[JsonProperty("min_doc_count")]
-		internal int? _MinimumDocumentCount { get; set; }
-
 		public HistogramAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount)
 		{
-			this._MinimumDocumentCount = minimumDocumentCount;
+			Self.MinimumDocumentCount = minimumDocumentCount;
 			return this;
 		}
 		
-		[JsonProperty("order")]
-		internal IDictionary<string, string> _Order { get; set; }
-
 		public HistogramAggregationDescriptor<T> OrderAscending(string key)
 		{
-			this._Order = new Dictionary<string, string> { {key, "asc"}};
+			Self.Order = new Dictionary<string, string> { {key, "asc"}};
 			return this;
 		}
 	
 		public HistogramAggregationDescriptor<T> OrderDescending(string key)
 		{
-			this._Order = new Dictionary<string, string> { {key, "asc"}};
+			Self.Order = new Dictionary<string, string> { {key, "asc"}};
 			return this;
 		}
 

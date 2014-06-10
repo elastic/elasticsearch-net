@@ -63,6 +63,10 @@ namespace Nest
 			if (!@object.Any())
 				throw new ArgumentException("Argument can not be an empty collection", parameterName);
 		}
+		internal static bool HasAny<T>(this IEnumerable<T> list, Func<T, bool> predicate)
+		{
+			return list != null && list.Any(predicate);
+		}
 		internal static bool HasAny<T>(this IEnumerable<T> list)
 		{
 			return list != null && list.Any();

@@ -8,7 +8,7 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLess
 	[TestFixture]
 	public class ConditionLessTests : BaseJsonTests
 	{
-		private readonly BaseQuery[] _emptyQuery = Enumerable.Empty<BaseQuery>().ToArray();
+		private readonly QueryContainer[] _emptyQuery = Enumerable.Empty<QueryContainer>().ToArray();
 		
 		public class Criteria
 		{
@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLess
 		}
 		private readonly Criteria _c = new Criteria();
 
-		private void DoConditionlessQuery(Func<QueryDescriptor<ElasticsearchProject>, BaseQuery> query)
+		private void DoConditionlessQuery(Func<QueryDescriptor<ElasticsearchProject>, QueryContainer> query)
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				//.Strict()
@@ -39,15 +39,19 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLess
 		[Test]
 		public void Terms()
 		{
-			this.DoConditionlessQuery(q => q.Terms(p => p.Name, new string[] { this._c.Name1 }));
-			this.DoConditionlessQuery(q => q.Terms(p => p.Name, this._c.Name1, this._c.Name2));
+			this.DoConditionlessQuery(q => q
+				.Terms(p => p.Name, new string[] { this._c.Name1 }));
+			this.DoConditionlessQuery(q => q
+				.Terms(p => p.Name, new [] {this._c.Name1, this._c.Name2 }));
 		}
 
 
 		[Test]
 		public void TermsDescriptor()
 		{
-			this.DoConditionlessQuery(q => q.TermsDescriptor(qs => qs.OnField(p => p.Name).Terms(this._c.Name1)));
+			this.DoConditionlessQuery(q => q.TermsDescriptor(qs => qs
+				.OnField(p => p.Name)
+				.Terms(new [] {this._c.Name1 })));
 		}
 
 		[Test]
@@ -91,14 +95,14 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLess
 			this.DoConditionlessQuery(q => q
 			  .Indices(iq => iq
 				.Indices(new[] { "_all" })
-				.Query(tq => tq.Terms(p => p.Name, this._c.Name1))
+				.Query(tq => tq.Terms(p => p.Name, new [] {this._c.Name1 }))
 			  )
 			);
 			this.DoConditionlessQuery(q => q
 			  .Indices(iq => iq
 				.Indices(new[] { "_all" })
-				.Query(tq => tq.Terms(p => p.Name, this._c.Name1))
-				.NoMatchQuery(tq => tq.Terms(p => p.Name, this._c.Name1))
+				.Query(tq => tq.Terms(p => p.Name, new [] {this._c.Name1 }))
+				.NoMatchQuery(tq => tq.Terms(p => p.Name, new [] {this._c.Name1 }))
 			  )
 			);
 		}
@@ -107,7 +111,7 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLess
 		public void Range()
 		{
 			//From and to are allowed to be null only field is not not
-			this.DoConditionlessQuery(q => q.Range(rq => rq.OnField(string.Empty).From(0).To(1)));
+			this.DoConditionlessQuery(q => q.Range(rq => rq.OnField(string.Empty).Greater(0).Lower(1)));
 		}
 
 		[Test]
@@ -125,31 +129,61 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLess
 		[Test]
 		public void HasChild()
 		{
-			this.DoConditionlessQuery(q => q.HasChild<Person>(hcq => hcq.Query(qq => qq.Terms(p => p.FirstName, this._c.Name1))));
+			this.DoConditionlessQuery(q => q
+				.HasChild<Person>(hcq => hcq
+					.Query(qq => qq
+						.Terms(p => p.FirstName, new [] {this._c.Name1})
+					)
+				)
+			);
 		}
 
 		[Test]
 		public void TopChildren()
 		{
-			this.DoConditionlessQuery(q => q.TopChildren<Person>(hcq => hcq.Query(qq => qq.Terms(p => p.FirstName, this._c.Name1))));
+			this.DoConditionlessQuery(q => q
+				.TopChildren<Person>(hcq => hcq
+					.Query(qq => qq
+						.Terms(p => p.FirstName, new [] {this._c.Name1 })
+					)
+				)
+			);
 		}
 
 		[Test]
 		public void Filtered()
 		{
-			this.DoConditionlessQuery(q => q.Filtered(fq => fq.Query(qff => qff.Terms(p => p.Name, this._c.Name1))));
+			this.DoConditionlessQuery(q => q
+				.Filtered(fq => fq
+					.Query(qff => qff
+						.Terms(p => p.Name, new [] {this._c.Name1 })
+					)
+				)
+			);
 		}
 
 		[Test]
 		public void Dismax()
 		{
-			this.DoConditionlessQuery(q => q.Dismax(dq => dq.Queries(qff => qff.Terms(p => p.Name, this._c.Name1))));
+			this.DoConditionlessQuery(q => q
+				.Dismax(dq => dq
+					.Queries(qff => qff
+						.Terms(p => p.Name, new [] {this._c.Name1 })
+					)
+				)
+			);
 		}
 
 		[Test]
 		public void ConstantScore()
 		{
-			this.DoConditionlessQuery(q => q.ConstantScore(cq => cq.Query(qff => qff.Terms(p => p.Name, this._c.Name1))));
+			this.DoConditionlessQuery(q => q
+				.ConstantScore(cq => cq
+					.Query(qff => qff
+						.Terms(p => p.Name, new [] {this._c.Name1 })
+					)
+				)
+			);
 		}
 
 		[Test]
@@ -157,7 +191,13 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLess
 		{
 			//disabling obsolete message in this test
 			#pragma warning disable 0618
-			this.DoConditionlessQuery(q => q.CustomBoostFactor(cbfq => cbfq.Query(qff => qff.Terms(p => p.Name, this._c.Name1))));
+			this.DoConditionlessQuery(q => q
+				.CustomBoostFactor(cbfq => cbfq
+					.Query(qff => qff
+						.Terms(p => p.Name, new [] {this._c.Name1 })
+					)
+				)
+			);
 			#pragma warning restore 0618
 		}
 
@@ -166,7 +206,13 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLess
 		{
 			//disabling obsolete message in this test
 			#pragma warning disable 0618
-			this.DoConditionlessQuery(q => q.CustomScore(csq => csq.Query(qff => qff.Terms(p => p.Name, this._c.Name1))));
+			this.DoConditionlessQuery(q => q
+				.CustomScore(csq => csq
+					.Query(qff => qff
+						.Terms(p => p.Name, new [] {this._c.Name1})
+					)
+				)
+			);
 			#pragma warning restore 0618
 		}
 
@@ -190,17 +236,26 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLess
 		public void BoolConditionlessQueries()
 		{
 			this.DoConditionlessQuery(q => q.Bool(b => b
-				.Must(mq => mq.Term(p => p.Name, this._c.Name1), mq => mq.Term(p => p.Name, this._c.Name2))
-				.MustNot(mq => mq.Terms(p => p.Name, this._c.Name1), mq => mq.Terms(p => p.Name, this._c.Name2))
-				.Should(mq => mq.Terms(p => p.Name, this._c.Name1), mq => mq.Terms(p => p.Name, this._c.Name2))
+				.Must(
+					mq => mq.Term(p => p.Name, this._c.Name1), 
+					mq => mq.Term(p => p.Name, this._c.Name2)
+				)
+				.MustNot(
+					mq => mq.Term(p => p.Name, this._c.Name1), 
+					mq => mq.Term(p => p.Name, this._c.Name2)
+				)
+				.Should(
+					mq => mq.Term(p => p.Name, this._c.Name1), 
+					mq => mq.Term(p => p.Name, this._c.Name2)
+				)
 			));
 		}
 
 		[Test]
 		public void Boosting()
 		{
-			this.DoConditionlessQuery(q => q.Boosting(bq => bq.Positive(qff => qff.Terms(p => p.Name, this._c.Name1))));
-			this.DoConditionlessQuery(q => q.Boosting(bq => bq.Negative(qff => qff.Terms(p => p.Name, this._c.Name1))));
+			this.DoConditionlessQuery(q => q.Boosting(bq => bq.Positive(qff => qff.Term(p => p.Name, this._c.Name1))));
+			this.DoConditionlessQuery(q => q.Boosting(bq => bq.Negative(qff => qff.Term(p => p.Name, this._c.Name1))));
 		}
 
 

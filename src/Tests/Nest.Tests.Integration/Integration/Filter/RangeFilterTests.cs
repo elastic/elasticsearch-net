@@ -37,9 +37,9 @@ namespace Nest.Tests.Integration.Integration.Filter
 		{
 			var name = _LookFor.Name;
 
-			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).From(name).To(name)), _LookFor, true);
+			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).GreaterOrEquals(name).LowerOrEquals(name)), _LookFor, true);
 
-			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).From("aaa").To("zzz").FromExclusive().ToExclusive()), _LookFor, true);
+			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).GreaterOrEquals("aaa").LowerOrEquals("zzz")), _LookFor, true);
 
 			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).GreaterOrEquals(name)), _LookFor, true);
 
@@ -55,13 +55,13 @@ namespace Nest.Tests.Integration.Integration.Filter
 		{
 			var name = _LookFor.Name;
 
-			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).From("zzz")), _LookFor, false);
+			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).GreaterOrEquals("zzz")), _LookFor, false);
 
-			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).To("aaa")), _LookFor, false);
+			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).LowerOrEquals("aaa")), _LookFor, false);
 
-			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).From(name).FromExclusive()), _LookFor, false);
+			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).GreaterOrEquals(name)), _LookFor, true);
 
-			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).To(name).ToExclusive()), _LookFor, false);
+			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).LowerOrEquals(name)), _LookFor, true);
 
 		}
 	}

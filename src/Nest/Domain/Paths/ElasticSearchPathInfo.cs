@@ -1,8 +1,10 @@
-﻿using Elasticsearch.Net;
+﻿using System;
+using System.IO;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	internal class ElasticsearchPathInfo<T> where T : FluentRequestParameters<T>, new()
+	public class ElasticsearchPathInfo<T> where T : FluentRequestParameters<T>, new()
 	{
 		public PathInfoHttpMethod HttpMethod { get; set; }
 		public string Index { get; set; }
@@ -27,9 +29,9 @@ namespace Nest
 			this.RequestParameters = new T();
 		}
 
-		public ElasticsearchPathInfo<T> DeserializationState(object deserializationState)
+		public ElasticsearchPathInfo<T> DeserializationState(object customObjectCreation)
 		{
-			this.RequestParameters.DeserializationState(deserializationState);
+			this.RequestParameters.DeserializationState(customObjectCreation);
 			return this;
 		}
 	}

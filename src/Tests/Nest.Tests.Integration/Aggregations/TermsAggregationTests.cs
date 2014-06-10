@@ -35,6 +35,7 @@ namespace Nest.Tests.Integration.Aggregations
 					.Terms("my_terms_agg", t => t
 						.Field(p => p.Name)
 					)
+					
 				)
 			);
 			results.IsValid.Should().BeTrue();

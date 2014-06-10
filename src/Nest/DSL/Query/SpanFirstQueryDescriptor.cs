@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Nest.Resolvers;
 using Elasticsearch.Net;
@@ -10,19 +11,41 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SpanFirstQueryDescriptor<T> : ISpanQuery, IQuery where T : class
+	[JsonConverter(typeof(ReadAsTypeConverter<SpanFirstQueryDescriptor<object>>))]
+	public interface ISpanFirstQuery : ISpanSubQuery
 	{
 		[JsonProperty(PropertyName = "match")]
-		internal SpanQueryDescriptor<T> _SpanQueryDescriptor { get; set; }
+		ISpanQuery Match { get; set; }
 
 		[JsonProperty(PropertyName = "end")]
-		internal int? _End { get; set; }
+		int? End { get; set; }
+	}
+
+	public class SpanFirstQuery : PlainQuery, ISpanFirstQuery
+	{
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.SpanFirst = this;
+		}
+
+		bool IQuery.IsConditionless { get { return false; } }
+
+		public ISpanQuery Match { get; set; }
+		public int? End { get; set; }
+	}
+
+	public class SpanFirstQueryDescriptor<T> : ISpanFirstQuery where T : class
+	{
+		ISpanQuery ISpanFirstQuery.Match { get; set; }
+
+		int? ISpanFirstQuery.End { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._SpanQueryDescriptor == null || (_SpanQueryDescriptor as IQuery).IsConditionless;
+				var query = ((ISpanFirstQuery)this).Match as IQuery;
+				return query != null && (((ISpanFirstQuery)this).Match == null || query.IsConditionless);
 			}
 		}
 
@@ -30,27 +53,27 @@ namespace Nest
 			, string value
 			, double? Boost = null)
 		{
-			var span = new SpanQueryDescriptor<T>(true);
+			var span = new SpanQuery<T>();
 			span = span.SpanTerm(fieldDescriptor, value, Boost);
-			this._SpanQueryDescriptor = span;
+			((ISpanFirstQuery)this).Match = span;
 			return this;
 		}
 		public SpanFirstQueryDescriptor<T> MatchTerm(string field, string value, double? Boost = null)
 		{
-			var span = new SpanQueryDescriptor<T>(true);
+			var span = new SpanQuery<T>();
 			span = span.SpanTerm(field, value, Boost);
-			this._SpanQueryDescriptor = span;
+			((ISpanFirstQuery)this).Match = span;
 			return this;
 		}
-		public SpanFirstQueryDescriptor<T> Match(Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>> selector)
+		public SpanFirstQueryDescriptor<T> Match(Func<SpanQuery<T>, SpanQuery<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
-			this._SpanQueryDescriptor = selector(new SpanQueryDescriptor<T>());
+			((ISpanFirstQuery)this).Match = selector(new SpanQuery<T>());
 			return this;
 		}
 		public SpanFirstQueryDescriptor<T> End(int end)
 		{
-			this._End = end;
+			((ISpanFirstQuery)this).End = end;
 			return this;
 		}
 
