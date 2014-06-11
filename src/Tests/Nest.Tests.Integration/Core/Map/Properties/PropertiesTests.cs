@@ -195,6 +195,43 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 			);
 			this.DefaultResponseAssertations(result);
 		}
+
+        [Test]
+        public void MultiFieldPropertyWithFullNamePath()
+        {
+            var result = this._client.Map<ElasticsearchProject>(m => m
+                .Properties(props => props
+                    .MultiField(s => s
+                        .Path(MultiFieldMappingPath.Full)
+                        .Name(p => p.Name)
+                        .Fields(pprops => pprops
+                            .String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
+                            .String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.analyzed))
+                        )
+                    )
+                )
+            );
+            this.DefaultResponseAssertations(result);
+        }
+
+        [Test]
+        public void MultiFieldPropertyWithJustNamePath()
+        {
+            var result = this._client.Map<ElasticsearchProject>(m => m
+                .Properties(props => props
+                    .MultiField(s => s
+                        .Path(MultiFieldMappingPath.JustName)
+                        .Name(p => p.Name)
+                        .Fields(pprops => pprops
+                            .String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
+                            .String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.analyzed))
+                        )
+                    )
+                )
+            );
+            this.DefaultResponseAssertations(result);
+        }
+
 		[Test]
 		public void IPProperty()
 		{

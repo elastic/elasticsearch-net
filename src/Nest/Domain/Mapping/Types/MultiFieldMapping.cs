@@ -21,6 +21,9 @@ namespace Nest
 			set { _typeOverride = value; }
 		}
 
+        [JsonProperty("path")]
+        public string Path { get; set; }
+
 		[JsonProperty("similarity")]
 		public string Similarity { get; set; }
 
@@ -36,4 +39,35 @@ namespace Nest
 			this.Fields = new Dictionary<PropertyNameMarker, IElasticCoreType>();
 		}
 	}
+
+    public class MultiFieldMappingPath
+    {
+        public MultiFieldMappingPath()
+        {
+
+        }
+
+        public MultiFieldMappingPath(string customValue)
+        {
+            Value = customValue;
+        }
+
+        public string Value { get; private set; }
+
+        public static MultiFieldMappingPath Full
+        {
+            get
+            {
+                return new MultiFieldMappingPath("full");
+            }
+        }
+
+        public static MultiFieldMappingPath JustName
+        {
+            get
+            {
+                return new MultiFieldMappingPath("just_name");
+            }
+        }
+    }
 }

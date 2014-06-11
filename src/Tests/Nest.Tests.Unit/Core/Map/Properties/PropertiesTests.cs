@@ -181,6 +181,43 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
 		}
+
+        [Test]
+        public void MultiFieldPropertyWithFullPath()
+        {
+            var result = this._client.Map<ElasticsearchProject>(m => m
+                .Properties(props => props
+                    .MultiField(s => s
+                        .Name(p => p.Name)
+                        .Path(MultiFieldMappingPath.Full)
+                        .Fields(pprops => pprops
+                            .String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
+                            .String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.analyzed))
+                        )
+                    )
+                )
+            );
+            this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
+        }
+
+        [Test]
+        public void MultiFieldPropertyWithJustNamePath()
+        {
+            var result = this._client.Map<ElasticsearchProject>(m => m
+                .Properties(props => props
+                    .MultiField(s => s
+                        .Name(p => p.Name)
+                        .Path(MultiFieldMappingPath.JustName)
+                        .Fields(pprops => pprops
+                            .String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
+                            .String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.analyzed))
+                        )
+                    )
+                )
+            );
+            this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
+        }
+
 		[Test]
 		public void IPProperty()
 		{
