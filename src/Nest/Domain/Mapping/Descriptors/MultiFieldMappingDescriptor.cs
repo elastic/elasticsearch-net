@@ -15,6 +15,12 @@ namespace Nest
 			return this;
 		}
 
+        public MultiFieldMappingDescriptor<T> Path(MultiFieldMappingPath path)
+        {
+            this._Mapping.Path = path.Value;
+            return this;
+        }
+
 		public MultiFieldMappingDescriptor<T> Name(Expression<Func<T, object>> objectPath)
 		{
 			this._Mapping.Name = objectPath;
@@ -37,4 +43,6 @@ namespace Nest
 		}
 		
 	}
+
+    
 }
