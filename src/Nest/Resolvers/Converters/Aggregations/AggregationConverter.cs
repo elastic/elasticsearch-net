@@ -37,6 +37,8 @@ namespace Nest.Resolvers.Converters.Aggregations
 			switch (property)
 			{
 				case "values":
+					reader.Read();
+					reader.Read();
 					return GetPercentilesMetricAggregation(reader, serializer);
 				case "value":
 					return GetValueMetricOrAggregation(reader, serializer);
@@ -105,7 +107,6 @@ namespace Nest.Resolvers.Converters.Aggregations
 			return bucket;
 		}
 
-
 		private IAggregation GetStatsAggregation(JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
@@ -165,7 +166,6 @@ namespace Nest.Resolvers.Converters.Aggregations
 			return dateHistogram;
 
 		}
-
 
 		private IAggregation GetKeyedBucketItem(JsonReader reader, JsonSerializer serializer)
 		{
@@ -260,7 +260,6 @@ namespace Nest.Resolvers.Converters.Aggregations
 			return bucket;
 		}
 
-
 		private IAggregation GetValueMetricOrAggregation(JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
@@ -273,7 +272,6 @@ namespace Nest.Resolvers.Converters.Aggregations
 			reader.Read();	
 			return metric;
 		}
-
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
