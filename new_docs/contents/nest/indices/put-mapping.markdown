@@ -85,3 +85,20 @@ You can also create mappings on the fly:
 
 	typeMapping.Properties.Add("name", property);
 	this.ConnectedClient.Map(typeMapping);
+
+## Multifield Mapping
+To create multifield type you can use following example. 
+
+	var result = this._client.Map<ElasticsearchProject>(m => m
+		.Properties(props => props
+		.MultiField(s => s
+		.Name(p => p.Name)
+		.Path(MultiFieldMappingPath.Full)
+		.Fields(pprops => pprops
+			.String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
+			.String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.analyzed))
+		)
+		))
+	);
+
+	
