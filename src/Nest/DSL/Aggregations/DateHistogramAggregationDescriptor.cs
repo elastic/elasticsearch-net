@@ -53,6 +53,9 @@ namespace Nest
 
 		[JsonProperty("order")]
 		IDictionary<string, string> Order { get; set; }
+
+		[JsonProperty("extended_bounds")]
+		IDictionary<string, object> ExtendedBounds { get; set; }
 	}
 
 	public class DateHistogramAggregator : BucketAggregator, IDateHistogramAggregator
@@ -71,6 +74,7 @@ namespace Nest
 		public string PreOffset { get; set; }
 		public string PostOffset { get; set; }
 		public IDictionary<string, string> Order { get; set; }
+		public IDictionary<string, object> ExtendedBounds { get; set; }
 	}
 
 	public class DateHistogramAggregationDescriptor<T> : BucketAggregationBaseDescriptor<DateHistogramAggregationDescriptor<T>, T>, IDateHistogramAggregator where T : class
@@ -104,6 +108,8 @@ namespace Nest
 		string IDateHistogramAggregator.PostOffset { get; set; }
 
 		IDictionary<string, string> IDateHistogramAggregator.Order { get; set; }
+
+		IDictionary<string, object> IDateHistogramAggregator.ExtendedBounds { get; set; }
 
 		public DateHistogramAggregationDescriptor()
 		{
@@ -207,12 +213,10 @@ namespace Nest
 			return this;
 		}
 
-		[JsonProperty("extended_bounds")]
-		internal IDictionary<string, object> _ExtendedBounds { get; set; }
 
 		public DateHistogramAggregationDescriptor<T> ExtendedBounds(string min, string max)
 		{
-			this._ExtendedBounds = new Dictionary<string, object> { { "min", min }, { "max", max } };
+			Self.ExtendedBounds = new Dictionary<string, object> { { "min", min }, { "max", max } };
 			return this;
 		}
 
