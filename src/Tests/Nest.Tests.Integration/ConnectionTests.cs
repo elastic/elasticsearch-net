@@ -54,7 +54,7 @@ namespace Nest.Tests.Integration
 
 			//this test will fail if fiddler is enabled since the proxy 
 			//will report a statuscode of 502 instead of -1
-			Assert.Throws<MaxRetryException>(() =>
+			Assert.DoesNotThrow(() =>
 			{
 				var settings = new ConnectionSettings(new Uri("http://youdontownthis.domain.do.you"), "index");
 				var client = new ElasticClient(settings);
