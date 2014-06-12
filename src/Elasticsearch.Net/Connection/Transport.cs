@@ -182,7 +182,7 @@ namespace Elasticsearch.Net.Connection
 
 			var uri = CreateUriToPath(baseUri, requestState.Path);
 			bool seenError = false;
-			
+			var maxRetries = this.GetMaximumRetries(requestState.RequestConfiguration);
 			try
 			{
 				if (shouldPingHint 
@@ -193,7 +193,7 @@ namespace Elasticsearch.Net.Connection
 					this.Ping(baseUri);
 
 				var streamResponse = _doRequest(requestState.Method, uri, requestState.PostData, requestState.RequestConfiguration);
-				if (streamResponse != null && streamResponse.SuccessOrKnownError)
+				if (streamResponse != null && ((maxRetries == 0 && retried == 0) || streamResponse.SuccessOrKnownError))
 				{
 					var error = ThrowOrGetErrorFromStreamResponse(requestState, streamResponse);
 
@@ -206,7 +206,6 @@ namespace Elasticsearch.Net.Connection
 			}
 			catch (Exception e)
 			{
-				var maxRetries = this.GetMaximumRetries(requestState.RequestConfiguration);
 				if (maxRetries == 0 && retried == 0)
 					throw;
 				seenError = true;
@@ -230,8 +229,8 @@ namespace Elasticsearch.Net.Connection
 				typedResponse.OriginalException = new ElasticsearchServerException(error);
 			}
 			if (!typedResponse.Success
-			    && requestState.RequestConfiguration != null
-			    && requestState.RequestConfiguration.AllowedStatusCodes.HasAny(i => i == streamResponse.HttpStatusCode))
+				&& requestState.RequestConfiguration != null
+				&& requestState.RequestConfiguration.AllowedStatusCodes.HasAny(i => i == streamResponse.HttpStatusCode))
 			{
 				typedResponse.Success = true;
 			}
@@ -344,9 +343,14 @@ namespace Elasticsearch.Net.Connection
 				{
 					if (t.IsCanceled)
 						return null;
+					var maxRetries = this.GetMaximumRetries(requestState.RequestConfiguration);
 					if (t.IsFaulted)
-						return this.RetryRequestAsync<T>(requestState, baseUri, retried, t.Exception);
-					if (t.Result.SuccessOrKnownError)
+					{
+						if (maxRetries == 0 && retried == 0)
+							throw t.Exception;
+						return this.RetryRequestAsync<T>(requestState, baseUri, retried, t.Exception);				        
+					}
+					if ((maxRetries == 0 && retried == 0) || t.Result.SuccessOrKnownError)
 					{
 						var error = ThrowOrGetErrorFromStreamResponse(requestState, t.Result);
 						return this.StreamToTypedResponseAsync<T>(t.Result, requestState.DeserializationState)
@@ -446,9 +450,9 @@ namespace Elasticsearch.Net.Connection
 		{
 			ElasticsearchServerError error = null;
 			if ((!streamResponse.Success && requestState.RequestConfiguration == null)
-			    || (!streamResponse.Success
-			        && requestState.RequestConfiguration != null
-			        && requestState.RequestConfiguration.AllowedStatusCodes.All(i => i != streamResponse.HttpStatusCode)))
+				|| (!streamResponse.Success
+					&& requestState.RequestConfiguration != null
+					&& requestState.RequestConfiguration.AllowedStatusCodes.All(i => i != streamResponse.HttpStatusCode)))
 			{
 
 				if (streamResponse.Response != null && !this.Settings.KeepRawResponse)

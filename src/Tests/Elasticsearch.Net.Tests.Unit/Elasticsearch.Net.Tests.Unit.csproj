@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connection\NoRetryTests.cs" />
     <Compile Include="Stubs\FakeCalls.cs" />
     <Compile Include="Stubs\FakeResponse.cs" />
     <Compile Include="Connection\SkipDeadNodesTests.cs" />

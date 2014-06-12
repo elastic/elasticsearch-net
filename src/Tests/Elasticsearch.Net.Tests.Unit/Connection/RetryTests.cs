@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Autofac;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Exceptions;
-using Elasticsearch.Net.Providers;
 using Elasticsearch.Net.Tests.Unit.Stubs;
 using FakeItEasy;
 using FluentAssertions;
@@ -36,45 +31,38 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.Throws<Exception>();
-				
+
 				var client = fake.Resolve<ElasticsearchClient>();
 
 				client.Settings.MaxRetries.Should().Be(_retries);
 
-				Assert.Throws<MaxRetryException>(()=> client.Info());
+				Assert.Throws<MaxRetryException>(() => client.Info());
 				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 
 			}
 		}
-		
+
 		[Test]
-		public async void ThrowsOutOfNodesException_AndRetriesTheSpecifiedTimes_Async()
+		public void ThrowsOutOfNodesException_AndRetriesTheSpecifiedTimes_Async()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
 				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
 				FakeCalls.ProvideDefaultTransport(fake);
-				var getCall = FakeCalls.GetCall(fake); 
+				var getCall = FakeCalls.GetCall(fake);
 
 				//return a started task that throws
 				Func<ElasticsearchResponse<Stream>> badTask = () => { throw new Exception(); };
 				var t = new Task<ElasticsearchResponse<Stream>>(badTask);
 				t.Start();
 				getCall.Returns(t);
-				
+
 				var client = fake.Resolve<ElasticsearchClient>();
 
 				client.Settings.MaxRetries.Should().Be(_retries);
-				try
-				{
-					var result = await client.InfoAsync();
-				}
-				catch (MaxRetryException e)
-				{
-					Assert.AreEqual(typeof(MaxRetryException), e.GetType());
-				}
-				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 
+				Assert.Throws<MaxRetryException>(async () => await client.InfoAsync());
+				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 			}
 		}
 
@@ -86,16 +74,17 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
 				FakeCalls.ProvideDefaultTransport(fake);
 
-				var getCall = FakeCalls.GetSyncCall(fake); 
+				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.Returns(FakeResponse.Any(_connectionConfig, 400));
-				
+
 				var client = fake.Resolve<ElasticsearchClient>();
 
-				Assert.DoesNotThrow(()=> client.Info());
+				Assert.DoesNotThrow(() => client.Info());
 				getCall.MustHaveHappened(Repeated.Exactly.Once);
 
 			}
 		}
+
 		[Test]
 		public async void ShouldNotRetryOn400_Async()
 		{
@@ -103,11 +92,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			{
 				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
 				FakeCalls.ProvideDefaultTransport(fake);
-				
+
 				var getCall = FakeCalls.GetCall(fake);
 				var task = Task.FromResult(FakeResponse.Any(_connectionConfig, 400));
 				getCall.Returns(task);
-				
+
 				var client = fake.Resolve<ElasticsearchClient>();
 
 				var result = await client.InfoAsync();
@@ -115,6 +104,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 			}
 		}
+
 		[Test]
 		public void ShouldNotRetryOn500()
 		{
@@ -124,16 +114,16 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				FakeCalls.ProvideDefaultTransport(fake);
 
 				var getCall = FakeCalls.GetSyncCall(fake);
-				getCall.Returns(FakeResponse.Any(_connectionConfig, 400));
-				
+				getCall.Returns(FakeResponse.Any(_connectionConfig, 500));
+
 				var client = fake.Resolve<ElasticsearchClient>();
 
-				Assert.DoesNotThrow(()=> client.Info());
+				Assert.DoesNotThrow(() => client.Info());
 				getCall.MustHaveHappened(Repeated.Exactly.Once);
 
 			}
 		}
-		
+
 		[Test]
 		public void ShouldNotRetryOn201()
 		{
@@ -141,18 +131,18 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			{
 				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
 				FakeCalls.ProvideDefaultTransport(fake);
-				
+
 				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.Returns(FakeResponse.Any(_connectionConfig, 201));
-				
+
 				var client = fake.Resolve<ElasticsearchClient>();
 
-				Assert.DoesNotThrow(()=> client.Info());
+				Assert.DoesNotThrow(() => client.Info());
 				getCall.MustHaveHappened(Repeated.Exactly.Once);
 
 			}
 		}
-		
+
 		[Test]
 		public void ShouldRetryOn503()
 		{
@@ -160,41 +150,35 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			{
 				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
 				FakeCalls.ProvideDefaultTransport(fake);
-				
+
 				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.Returns(FakeResponse.Bad(_connectionConfig));
-				
+
 				var client = fake.Resolve<ElasticsearchClient>();
 
-				Assert.Throws<MaxRetryException>(()=> client.Info());
+				Assert.Throws<MaxRetryException>(() => client.Info());
 				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 
 			}
 		}
-		
+
 		[Test]
-		public async void ShouldRetryOn503_Async()
+		public void ShouldRetryOn503_Async()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
 				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
 				FakeCalls.ProvideDefaultTransport(fake);
-				
+
 				var getCall = FakeCalls.GetCall(fake);
 				getCall.Returns(Task.FromResult(FakeResponse.Bad(_connectionConfig)));
-				
-				var client = fake.Resolve<ElasticsearchClient>();
-				try
-				{
-					var result = await client.InfoAsync();
-				}
-				catch (MaxRetryException e)
-				{
-					Assert.AreEqual(e.GetType(), typeof(MaxRetryException));
-				}
-				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 
+				var client = fake.Resolve<ElasticsearchClient>();
+
+				Assert.Throws<MaxRetryException>(async () => await client.InfoAsync());
+				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 			}
 		}
+
 	}
 }
