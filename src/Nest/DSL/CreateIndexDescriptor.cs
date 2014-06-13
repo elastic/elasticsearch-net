@@ -187,6 +187,16 @@ namespace Nest
 			return this;
 		}
 
+    /// <summary>
+    /// Set up similarity
+    /// </summary>
+    /// <param name="similaritySettings">similarity settings</param>
+    /// <returns>create index descriptor</returns>
+    public CreateIndexDescriptor SetSimilarity(SimilaritySettings similaritySettings)
+    {
+      this._IndexSettings.Similarity = similaritySettings;
+      return this;
+    }
 
 		ElasticsearchPathInfo<CreateIndexRequestParameters> IPathInfo<CreateIndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
