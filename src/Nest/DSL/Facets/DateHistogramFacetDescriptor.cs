@@ -115,7 +115,33 @@ namespace Nest
 			Self.Field = objectPath;
 			return this;
 		}
-		public DateHistogramFacetDescriptor<T> Interval(DateInterval interval)
+        /// <summary>
+        /// Added to support custom date intervals on date histogram facet. Eg: "5s" for 5 seconds interval.
+        /// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-date-histogram-facet.html#_interval
+        /// </summary>
+        /// <param name="interval">Custom interval string</param>
+        /// <returns></returns>
+        public DateHistogramFacetDescriptor<T> Interval(string interval)
+        {
+            var intervalString = interval.ToLowerInvariant();
+            Self.Interval = intervalString;
+            return this;
+        }
+        /// <summary>
+        /// Added to support custom date intervals on date histogram facet. Eg: "5s" for 5 seconds interval.
+        /// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-date-histogram-facet.html#_interval
+        /// </summary>
+        /// <param name="interval">Custom interval string</param>
+        /// <param name="dateRounding">Date rounding type</param>
+        /// <returns></returns>
+        public DateHistogramFacetDescriptor<T> Interval(string interval, DateRounding dateRounding)
+        {
+            var intervalString = interval.ToLowerInvariant();
+            var roundingString = Enum.GetName(typeof(DateRounding), dateRounding).ToLowerInvariant();
+            Self.Interval = intervalString + ":" + roundingString;
+            return this;
+        }
+        public DateHistogramFacetDescriptor<T> Interval(DateInterval interval)
 		{
 			var intervalString = Enum.GetName(typeof(DateInterval), interval).ToLowerInvariant();
 			Self.Interval = intervalString;
