@@ -31,15 +31,7 @@ namespace Elasticsearch.Net.Serialization
 		public Task<T> DeserializeAsync<T>(Stream stream)
 		{
 			var tcs = new TaskCompletionSource<T>();
-			T r;
-			var ms = stream as MemoryStream;
-			if (ms != null)
-			{
-				r = SimpleJson.DeserializeObject<T>(ms.GetBuffer().Utf8String());
-				tcs.SetResult(r);
-				return tcs.Task;
-			}
-			using (ms = new MemoryStream())
+			using (var ms = new MemoryStream())
 			{
 				// return a task that reads the stream asynchronously 
 				// and finally deserializes the result to T.

@@ -565,7 +565,6 @@ namespace Elasticsearch.Net.Connection
 
 			var cs = ElasticsearchResponse.CloneFrom<T>(streamResponse, default(T));
 
-			var memoryStream = new MemoryStream();
 			if (typeof(T) == typeof(VoidResponse))
 			{
 				tcs.SetResult(cs);
@@ -574,10 +573,10 @@ namespace Elasticsearch.Net.Connection
 				return tcs.Task;
 			}
 
-			var type = typeof(T);
-			if (!(this.Settings.KeepRawResponse || type == typeof(string) || type == typeof(byte[])))
+			if (!(this.Settings.KeepRawResponse || this.TypeOfResponseCopiesDirectly<T>()))
 				return _deserializeAsyncToResponse(streamResponse.Response, deserializationState, cs);
 
+			var memoryStream = new MemoryStream();
 			return this.Iterate(this.ReadStreamAsync(streamResponse.Response, memoryStream), memoryStream)
 				.ContinueWith(t =>
 				{
@@ -585,6 +584,8 @@ namespace Elasticsearch.Net.Connection
 					readStream.Position = 0;
 					var bytes = readStream.ToArray();
 					cs.ResponseRaw = this.Settings.KeepRawResponse ? bytes : null;
+					
+					var type = typeof(T);
 					if (type == typeof(string))
 					{
 						this.SetStringResult(cs as ElasticsearchResponse<string>, bytes);
