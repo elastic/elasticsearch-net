@@ -30,17 +30,19 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 		public static ElasticsearchResponse<Stream> Bad(
 			IConnectionConfigurationValues config, 
 			string method = "GET",
-			string path = "/")
+			string path = "/",
+			Stream response = null)
 		{
-			return ElasticsearchResponse<Stream>.Create(config, 503, method, path, null);
+			return ElasticsearchResponse<Stream>.Create(config, 503, method, path, null, response);
 		}
 		
 		public static Task<ElasticsearchResponse<Stream>> BadAsync(
 			IConnectionConfigurationValues config, 
 			string method = "GET",
-			string path = "/")
+			string path = "/",
+			Stream response = null)
 		{
-			return Task.FromResult(ElasticsearchResponse<Stream>.Create(config, 503, method, path, null));
+			return Task.FromResult(ElasticsearchResponse<Stream>.Create(config, 503, method, path, null, response));
 		}
 
 		public static ElasticsearchResponse<Stream> Any(

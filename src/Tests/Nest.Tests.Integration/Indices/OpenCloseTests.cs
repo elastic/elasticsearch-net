@@ -43,7 +43,7 @@ namespace Nest.Tests.Integration.Indices
 			var statusCode = results.ConnectionStatus.HttpStatusCode;
 			Assert.AreEqual(statusCode, 403);
 
-			var error = results.GetServerException();
+			var error = results.ServerError;
 			error.Should().NotBeNull();
 			error.ExceptionType.Should().Be("ClusterBlockException");
 			error.Error.Should().Contain("index closed");

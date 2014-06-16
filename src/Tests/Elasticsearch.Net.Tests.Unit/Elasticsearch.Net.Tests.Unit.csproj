@@ -58,6 +58,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connection\BuildInResponseTests.cs" />
+    <Compile Include="Connection\ElasticsearchServerExceptions.cs" />
     <Compile Include="Connection\NoRetryTests.cs" />
     <Compile Include="Stubs\FakeCalls.cs" />
     <Compile Include="Stubs\FakeResponse.cs" />

@@ -75,6 +75,24 @@ namespace Elasticsearch.Net
 
 		public Exception OriginalException { get; protected internal set; }
 
+		/// <summary>
+		/// This property returns the mapped elasticsearch server exception
+		/// </summary>
+		public ElasticsearchServerError ServerError
+		{
+			get
+			{
+				var esException = this.OriginalException as ElasticsearchServerException;
+				if (esException == null) return null;
+				return new ElasticsearchServerError
+				{
+					Error = esException.Message,
+					ExceptionType = esException.ExceptionType,
+					Status = esException.Status
+				};
+			}
+		}
+
 		public string RequestMethod { get; protected internal set; }
 
 		public string RequestUrl { get; protected internal set; }

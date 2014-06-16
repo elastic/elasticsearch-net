@@ -13,7 +13,7 @@ namespace Nest
 		IElasticsearchResponse ConnectionStatus { get; }
 		ElasticInferrer Infer { get; }
 
-		ElasticsearchServerError GetServerException();
+		ElasticsearchServerError ServerError { get; }
 	}
 		
 	public class BaseResponse : IResponse
@@ -28,19 +28,22 @@ namespace Nest
 
 		public IElasticsearchResponse ConnectionStatus { get { return ((IResponseWithRequestInformation)this).RequestInformation;  } }
 		
-		public ElasticsearchServerError GetServerException()
+		public ElasticsearchServerError ServerError
 		{
-			if (this.IsValid || this.ConnectionStatus == null || this.ConnectionStatus.OriginalException == null)
-				return null;
-			var e = this.ConnectionStatus.OriginalException as ElasticsearchServerException;
-			if (e == null)
-				return null;
-			return new ElasticsearchServerError
+			get
 			{
-				Status = e.Status,
-				Error = e.Message,
-				ExceptionType = e.ExceptionType
-			};
+				if (this.IsValid || this.ConnectionStatus == null || this.ConnectionStatus.OriginalException == null)
+					return null;
+				var e = this.ConnectionStatus.OriginalException as ElasticsearchServerException;
+				if (e == null)
+					return null;
+				return new ElasticsearchServerError
+				{
+					Status = e.Status,
+					Error = e.Message,
+					ExceptionType = e.ExceptionType
+				};
+			}
 		}
 
 		public ElasticInferrer _infer;
