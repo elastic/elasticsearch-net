@@ -10,7 +10,7 @@ namespace Profiling.Indexing
 	{
 		static IEnumerable<Tester> Testers()
 		{
-			yield return new ThriftTester();
+			//yield return new ThriftTester();
 			yield return new HttpTester();
 			yield return new HttpClientTester();
 		} 

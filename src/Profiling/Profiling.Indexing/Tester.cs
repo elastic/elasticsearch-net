@@ -122,12 +122,27 @@ namespace Profiling.Indexing
 
 		protected IndexResults GenerateAndIndex(int numMessages, int bufferSize)
 		{
+
+			//settings from  http://benchmarks.elasticsearch.org/
+	
 			var msgGenerator = new MessageGenerator();
 			var partitionedMessages = msgGenerator.Generate(numMessages).Partition(bufferSize);
 			this.Client.CreateIndex(this.IndexName, c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
-				.Settings(s => s.Add("refresh_interval", "-1"))
+				.Settings(s => s
+					.Add("refresh_interval", "30s")
+					.Add("index.store.type", "mmapfs")
+					.Add("index.store.throttle.type", "none")
+					.Add("indices.store.throttle.type", "none") 
+					.Add("index.number_of_shards", 6)
+					.Add("index.number_of_replicas", 0)
+					.Add("indices.memory.index_buffer_size", "10%")
+					.Add("index.translog.flush_threshold_size", "4g")
+					.Add("index.translog.flush_threshold_ops", 500000)
+					.Add("index.merge.scheduler.max_thread_count", 3)
+					.Add("index.merge.scheduler.max_merge_count", 6)
+				)
 				.AddMapping<Message>(p=>p.MapFromAttributes())
 			);
 			var sw = Stopwatch.StartNew();
