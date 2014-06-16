@@ -193,7 +193,10 @@ namespace Elasticsearch.Net.Connection
 					this.Ping(baseUri);
 
 				var streamResponse = _doRequest(requestState.Method, uri, requestState.PostData, requestState.RequestConfiguration);
-				if (streamResponse != null && ((maxRetries == 0 && retried == 0) || streamResponse.SuccessOrKnownError))
+				if (streamResponse.SuccessOrKnownError 
+					|| (
+						maxRetries == 0 && retried == 0 && !SniffOnFaultDiscoveredMoreNodes(requestState, retried, streamResponse))
+					)
 				{
 					var error = ThrowOrGetErrorFromStreamResponse(requestState, streamResponse);
 
@@ -218,6 +221,14 @@ namespace Elasticsearch.Net.Connection
 					this._connectionPool.MarkAlive(baseUri);
 			}
 			return RetryRequest<T>(requestState, baseUri, retried);
+		}
+
+		private bool SniffOnFaultDiscoveredMoreNodes<T>(TransportRequestState<T> requestState, int retried,
+			ElasticsearchResponse<Stream> streamResponse)
+		{
+			if (retried != 0 || streamResponse.SuccessOrKnownError) return false;
+			SniffOnConnectionFailure(requestState, retried);
+			return this.GetMaximumRetries(requestState.RequestConfiguration) > 0;
 		}
 
 		private void SetErrorDiagnosticsAndPatchSuccess<T>(TransportRequestState<T> requestState,
@@ -256,14 +267,22 @@ namespace Elasticsearch.Net.Connection
 
 			this._connectionPool.MarkDead(baseUri, this.ConfigurationValues.DeadTimeout, this.ConfigurationValues.MaxDeadTimeout);
 
-			if (!SniffingDisabled(requestState.RequestConfiguration)
-				&& this.ConfigurationValues.SniffsOnConnectionFault 
-				&& retried == 0)
-				this.SniffClusterState();
+			SniffOnConnectionFailure(requestState, retried);
 
 			if (retried >= maxRetries) throw new MaxRetryException(exceptionMessage, e);
 
 			return this.DoRequest<T>(requestState, ++retried);
+		}
+
+		private void SniffOnConnectionFailure<T>(TransportRequestState<T> requestState, int retried)
+		{
+			if (requestState.SniffedOnConnectionFailure 
+				|| SniffingDisabled(requestState.RequestConfiguration)
+				|| !this.ConfigurationValues.SniffsOnConnectionFault 
+				|| retried != 0) return;
+
+			this.SniffClusterState();
+			requestState.SniffedOnConnectionFailure = true;
 		}
 
 		private ElasticsearchResponse<Stream> _doRequest(string method, Uri uri, byte[] postData, IRequestConfiguration requestSpecificConfig)
@@ -350,7 +369,11 @@ namespace Elasticsearch.Net.Connection
 							throw t.Exception;
 						return this.RetryRequestAsync<T>(requestState, baseUri, retried, t.Exception);				        
 					}
-					if ((maxRetries == 0 && retried == 0) || t.Result.SuccessOrKnownError)
+					
+					if (t.Result.SuccessOrKnownError 
+					|| (
+						maxRetries == 0 && retried == 0 && !SniffOnFaultDiscoveredMoreNodes(requestState, retried, t.Result))
+					)
 					{
 						var error = ThrowOrGetErrorFromStreamResponse(requestState, t.Result);
 						return this.StreamToTypedResponseAsync<T>(t.Result, requestState.DeserializationState)
@@ -374,8 +397,7 @@ namespace Elasticsearch.Net.Connection
 
 			this._connectionPool.MarkDead(baseUri, this.ConfigurationValues.DeadTimeout, this.ConfigurationValues.MaxDeadTimeout);
 
-			if (this.ConfigurationValues.SniffsOnConnectionFault && retried == 0)
-				this.SniffClusterState();
+			this.SniffOnConnectionFailure(requestState, retried);
 
 			if (retried < maxRetries)
 				return this.DoRequestAsync<T>(requestState, ++retried);

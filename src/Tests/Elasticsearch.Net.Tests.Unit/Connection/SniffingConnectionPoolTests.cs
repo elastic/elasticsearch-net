@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -142,6 +143,10 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			{
 				var dateTimeProvider = fake.Resolve<IDateTimeProvider>();
 				var nowCall = A.CallTo(()=>dateTimeProvider.Now());
+				nowCall.Invokes(() =>
+				{
+
+				});
 				nowCall.Returns(DateTime.UtcNow);
 				var nodes = new[] { new Uri("http://localhost:9200") };
 				var connectionPool = new SniffingConnectionPool(nodes);
@@ -150,7 +155,13 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				fake.Provide<IConnectionConfigurationValues>(config);
 				var transport = FakeCalls.ProvideDefaultTransport(fake, dateTimeProvider);
 				var connection = fake.Resolve<IConnection>();
-				var sniffCall = FakeCalls.Sniff(fake, config, nodes);
+
+				var sniffNewNodes = new[]
+				{
+					new Uri("http://localhost:9200"),
+					new Uri("http://localhost:9201")
+				};
+				var sniffCall = FakeCalls.Sniff(fake, config, sniffNewNodes);
 				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.ReturnsNextFromSequence(
 					
@@ -169,8 +180,83 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				Assert.Throws<MaxRetryException>(()=>client1.Info()); //info call 5
 
 				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
-				nowCall.MustHaveHappened(Repeated.Exactly.Times(7));
+				nowCall.MustHaveHappened(Repeated.Exactly.Times(8));
 
+			}
+		}
+
+		[Test]
+		public async void HostsReturnedBySniffAreVisited_Async()
+		{
+			using (var fake = new AutoFake())
+			{
+				var dateTimeProvider = fake.Resolve<IDateTimeProvider>();
+				var nowCall = A.CallTo(()=>dateTimeProvider.Now());
+				nowCall.Returns(DateTime.UtcNow);
+
+				var connectionPool = new SniffingConnectionPool(new[]
+				{
+					new Uri("http://localhost:9200"),
+					new Uri("http://localhost:9201")
+				}, randomizeOnStartup: false);
+				var config = new ConnectionConfiguration(connectionPool)
+					.SniffOnConnectionFault();
+				fake.Provide<IConnectionConfigurationValues>(config);
+				FakeCalls.ProvideDefaultTransport(fake);
+				FakeCalls.PingAtConnectionLevelAsync(fake)
+					.ReturnsLazily(()=>
+						FakeResponse.OkAsync(config)
+					);
+				
+				var sniffCall = FakeCalls.Sniff(fake, config, new List<Uri>()
+				{
+					new Uri("http://localhost:9204"),
+					new Uri("http://localhost:9203"),
+					new Uri("http://localhost:9202"),
+					new Uri("http://localhost:9201")
+				});
+
+				var connection = fake.Resolve<IConnection>();
+				var seenNodes = new List<Uri>();
+				//var getCall =  FakeResponse.GetSyncCall(fake);
+				var getCall = A.CallTo(() => connection.Get(
+					A<Uri>.That.Not.Matches(u=>u.AbsolutePath.StartsWith("/_nodes")), 
+					A<IRequestConfiguration>._));
+				getCall.ReturnsNextFromSequence(
+					FakeResponse.OkAsync(config), //info 1
+					FakeResponse.BadAsync(config), //info 2
+					FakeResponse.OkAsync(config), //info 2 retry
+					FakeResponse.OkAsync(config), //info 3
+					FakeResponse.OkAsync(config), //info 4
+					FakeResponse.OkAsync(config), //info 5
+					FakeResponse.OkAsync(config), //info 6
+					FakeResponse.OkAsync(config), //info 7
+					FakeResponse.OkAsync(config), //info 8
+					FakeResponse.OkAsync(config) //info 9
+				);
+				getCall.Invokes((Uri u, IRequestConnectionConfiguration o) => seenNodes.Add(u));
+
+				var client1 = fake.Resolve<ElasticsearchClient>();
+				await client1.InfoAsync(); //info call 1
+				await client1.InfoAsync(); //info call 2
+				await client1.InfoAsync(); //info call 3
+				await client1.InfoAsync(); //info call 4
+				await client1.InfoAsync(); //info call 5
+				await client1.InfoAsync(); //info call 6
+				await client1.InfoAsync(); //info call 7
+				await client1.InfoAsync(); //info call 8
+				await client1.InfoAsync(); //info call 9
+
+				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
+				seenNodes.Should().NotBeEmpty().And.HaveCount(10);
+				seenNodes[0].Port.Should().Be(9200);
+				seenNodes[1].Port.Should().Be(9201);
+				//after sniff
+				seenNodes[2].Port.Should().Be(9202, string.Join(",", seenNodes.Select(n=>n.Port)));
+				seenNodes[3].Port.Should().Be(9204);
+				seenNodes[4].Port.Should().Be(9203);
+				seenNodes[5].Port.Should().Be(9202);
+				seenNodes[6].Port.Should().Be(9201);
 			}
 		}
 		[Test]

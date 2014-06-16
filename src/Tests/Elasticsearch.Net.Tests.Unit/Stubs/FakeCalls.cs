@@ -34,7 +34,6 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 				A<Uri>.That.Matches(IsRoot()), A<RequestConnectionConfiguration>._));
 		}
 
-		
 
 		public static IReturnValueConfiguration<Task<ElasticsearchResponse<Stream>>> PingAtConnectionLevelAsync(AutoFake fake)
 		{

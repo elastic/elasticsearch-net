@@ -12,6 +12,8 @@ namespace Elasticsearch.Net.Connection
 		public IRequestConfiguration RequestConfiguration { get; set; }
 		public object DeserializationState { get; private set; }
 
+		internal bool SniffedOnConnectionFailure { get; set; }
+
 		public TransportRequestState(ElasticsearchResponseTracer<T> tracer, string method, string path, byte[] postData = null, IRequestParameters requestParameters = null)
 		{
 			this.Method = method;
