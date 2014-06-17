@@ -19,3 +19,7 @@ indent_size = 4
 [*.markdown]
 indent_style = spaces
 indent_size = 2
+
+[*.json]
+indent_style = spaces
+indent_size = 2
