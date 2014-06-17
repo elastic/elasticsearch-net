@@ -1,11 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using FluentAssertions;
-using NUnit.Framework;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
+using NUnit.Framework;
+using Shared.Extensions;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Nest.Tests.Integration.Integration.Filter
 {

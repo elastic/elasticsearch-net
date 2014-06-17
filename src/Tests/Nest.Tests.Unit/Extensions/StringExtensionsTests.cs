@@ -1,5 +1,6 @@
-﻿using NUnit.Framework;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
+using NUnit.Framework;
+using Shared.Extensions;
 
 namespace Nest.Tests.Unit.Extensions
 {

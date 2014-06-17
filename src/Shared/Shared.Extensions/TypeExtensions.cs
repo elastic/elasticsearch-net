@@ -5,11 +5,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Elasticsearch.Net.Connection;
 
-namespace Elasticsearch.Net
+namespace Shared.Extensions
 {
-	internal static class TypeExtensions
+	public static class TypeExtensions
 	{
 		private static MethodInfo GetActivatorMethodInfo = typeof(TypeExtensions).GetMethod("GetActivator", BindingFlags.Static | BindingFlags.NonPublic);
 
@@ -17,9 +16,8 @@ namespace Elasticsearch.Net
 		private static ConcurrentDictionary<string, Type> _cachedGenericClosedTypes = new ConcurrentDictionary<string, Type>();
 
 		public delegate T ObjectActivator<out T>(params object[] args);
-		
 
-		internal static object CreateGenericInstance(this Type t, Type closeOver, params object[] args)
+		public static object CreateGenericInstance(this Type t, Type closeOver, params object[] args)
 		{
 			var key = t.FullName + "--" + closeOver.FullName;
 			Type closedType;
@@ -31,7 +29,7 @@ namespace Elasticsearch.Net
 			return closedType.CreateInstance(args);
 		}
 
-		internal static object CreateInstance(this Type t, params object[] args)
+		public static object CreateInstance(this Type t, params object[] args)
 		{
 			ObjectActivator<object> activator;
 			var argLength = args.Count();

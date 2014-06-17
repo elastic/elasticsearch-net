@@ -2,6 +2,7 @@
 using Nest.Tests.MockData.Domain;
 using System.Linq;
 using Elasticsearch.Net;
+using Shared.Extensions;
 
 namespace Nest.Tests.Integration.Core
 {

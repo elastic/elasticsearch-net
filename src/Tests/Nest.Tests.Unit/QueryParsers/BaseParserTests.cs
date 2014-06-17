@@ -1,10 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using Shared.Extensions;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace Nest.Tests.Unit.QueryParsers 
 {

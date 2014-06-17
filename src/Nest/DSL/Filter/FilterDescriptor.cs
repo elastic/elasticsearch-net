@@ -8,6 +8,7 @@ using System.Globalization;
 using Elasticsearch.Net;
 using Nest.Resolvers;
 using System.Collections;
+using Shared.Extensions;
 
 namespace Nest
 {

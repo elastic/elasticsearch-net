@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using Shared.Extensions;
 
 namespace Nest.Tests.Unit.QueryParsers.Queries
 {

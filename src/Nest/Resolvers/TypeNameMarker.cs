@@ -1,4 +1,5 @@
 ﻿using System;
+using Shared.Extensions;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 

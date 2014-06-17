@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using Newtonsoft.Json;
+using Shared.Extensions;
 using Elasticsearch.Net;
 
-namespace Nest.Resolvers.Writers {
+namespace Nest.Resolvers.Writers 
+{
     public class WritePropertiesFromAttributeVisitor : IElasticPropertyVisitor
     {
         private readonly JsonWriter _jsonWriter;

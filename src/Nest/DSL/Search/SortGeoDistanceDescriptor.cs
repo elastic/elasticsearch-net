@@ -9,6 +9,7 @@ using System.Globalization;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Elasticsearch.Net;
+using Shared.Extensions;
 
 namespace Nest.DSL.Descriptors
 {

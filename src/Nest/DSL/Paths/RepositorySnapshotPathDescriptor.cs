@@ -8,6 +8,7 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using System.Linq.Expressions;
 using Nest.Resolvers;
+using Shared.Extensions;
 
 namespace Nest
 {

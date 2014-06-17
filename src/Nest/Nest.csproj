@@ -329,9 +329,7 @@
     <Compile Include="ExposedInternals\JsonConverterPiggyBackState.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="ExposedInternals\Stringifier.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\SuffixExtensions.cs" />
-    <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="RawDispatch.generated.cs" />
     <Compile Include="RawDispatch.cs" />
     <Compile Include="Domain\DSL\GeoIndexedShapeVector.cs" />
@@ -786,7 +784,6 @@
     <Compile Include="ElasticClient-Source.cs" />
     <Compile Include="ElasticClient-Index.cs" />
     <Compile Include="ElasticClient.cs" />
-    <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="DSL\Query\IQuery.cs" />
     <Compile Include="DSL\Query\MatchAllQuery.cs" />
     <Compile Include="DSL\Query\PrefixQueryDescriptor.cs" />

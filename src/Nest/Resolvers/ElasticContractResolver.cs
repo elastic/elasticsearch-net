@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Elasticsearch.Net;
 using Nest.DSL.Descriptors;
 using Nest.DSL.Search;
-using Nest.Resolvers.Converters.Aggregations;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json;
-
-using Newtonsoft.Json.Linq;
-using System.Linq;
-using Elasticsearch.Net;
-using System.Reflection;
-using System.Globalization;
-using System.Collections;
 using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Aggregations;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
+using Shared.Extensions;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
 
 namespace Nest.Resolvers
 {

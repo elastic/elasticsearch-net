@@ -1,7 +1,8 @@
-﻿using System.Linq;
+﻿using Elasticsearch.Net;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
-using Elasticsearch.Net;
+using Shared.Extensions;
+using System.Linq;
 
 namespace Nest.Tests.Integration.Indices
 {

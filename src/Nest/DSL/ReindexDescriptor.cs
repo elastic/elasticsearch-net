@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Elasticsearch.Net;
+using Shared.Extensions;
+using System;
 
-using Elasticsearch.Net;
 namespace Nest
 {
 	public class ReindexDescriptor<T> where T : class

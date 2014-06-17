@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using Shared.Extensions;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Serialization;
 

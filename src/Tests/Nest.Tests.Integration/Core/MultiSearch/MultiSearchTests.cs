@@ -1,9 +1,10 @@
-﻿using System.Linq;
+﻿using Elasticsearch.Net;
 using FluentAssertions;
-using NUnit.Framework;
-using Nest.Tests.MockData.Domain;
 using Nest.Resolvers;
-using Elasticsearch.Net;
+using Nest.Tests.MockData.Domain;
+using NUnit.Framework;
+using Shared.Extensions;
+using System.Linq;
 
 namespace Nest.Tests.Integration.Core.MultiSearch
 {

@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using FluentAssertions;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using Shared.Extensions;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using FluentAssertions;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Nest.Tests.Integration.Reproduce
 {

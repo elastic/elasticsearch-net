@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
+using Shared.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
-using Nest.Resolvers;
+using System.Text;
 
 namespace Nest
 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using Elasticsearch.Net;
+using Shared.Extensions;
 
 namespace Nest
 {

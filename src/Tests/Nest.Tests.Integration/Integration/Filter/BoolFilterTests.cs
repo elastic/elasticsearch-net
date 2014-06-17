@@ -1,6 +1,7 @@
 ﻿using Elasticsearch.Net;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using Shared.Extensions;
 
 namespace Nest.Tests.Integration.Integration.Filter
 {

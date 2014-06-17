@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using FluentAssertions;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using Shared.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Nest.Tests.Integration.Core
 {

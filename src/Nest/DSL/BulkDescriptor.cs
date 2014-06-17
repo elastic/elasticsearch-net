@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Elasticsearch.Net;
+using Nest.Domain;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Shared.Extensions;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
-using Elasticsearch.Net;
-using Nest.Domain;
-using System.Collections.Concurrent;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-
+using System.Text;
 
 namespace Nest
 {

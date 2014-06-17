@@ -10,6 +10,7 @@ using System.Globalization;
 using Nest.Resolvers;
 using System.Runtime.Serialization;
 using Nest.Resolvers.Converters;
+using Shared.Extensions;
 
 namespace Nest
 {

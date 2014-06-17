@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shared.Extensions;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Serialization;

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Elasticsearch.Net;
+using Shared.Extensions;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Collections.Concurrent;
 using System.Reflection;
-using Elasticsearch.Net;
+using System.Text;
 
 namespace Nest.Resolvers
 {

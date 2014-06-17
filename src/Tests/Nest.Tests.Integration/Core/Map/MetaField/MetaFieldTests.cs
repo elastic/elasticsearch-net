@@ -1,6 +1,7 @@
 ﻿using Elasticsearch.Net;
-using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using NUnit.Framework;
+using Shared.Extensions;
 using System.Reflection;
 
 namespace Nest.Tests.Integration.Core.Map.MetaField

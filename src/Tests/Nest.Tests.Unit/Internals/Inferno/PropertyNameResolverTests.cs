@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Remoting.Channels;
-using Elasticsearch.Net;
-using NUnit.Framework;
-using System.Linq.Expressions;
+﻿using Elasticsearch.Net;
 using Nest.Resolvers;
 using Newtonsoft.Json;
+using NUnit.Framework;
+using Shared.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Runtime.Remoting.Channels;
 
 namespace Nest.Tests.Unit.Internals.Inferno
 {
