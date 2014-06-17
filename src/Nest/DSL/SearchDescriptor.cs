@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
+using Nest.DSL.Facets;
 using Nest.DSL.Search;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using System.Linq.Expressions;
 using Nest.DSL.Descriptors;
@@ -941,6 +943,23 @@ namespace Nest
 		}
 
 		/// <summary>
+		/// The geo_cluster facet is a facet providing information for geo points clusters
+		/// </summary>
+		public SearchDescriptor<T> FacetGeoCluster(string name, Func<GeoClusterFacetDescriptor<T>, GeoClusterFacetDescriptor<T>> facet)
+		{
+			return this.FacetGeoCluster(facet, Name: name);
+		}
+
+		/// <summary>
+		/// The geo_cluster facet is a facet providing information for geo points clusters
+		/// </summary>
+		public SearchDescriptor<T> FacetGeoCluster(Func<GeoClusterFacetDescriptor<T>, GeoClusterFacetDescriptor<T>> facet, string Name = null)
+		{
+			return this._Facet<GeoClusterFacetDescriptor<T>, IGeoClusterFacetRequest>(
+				Name, facet, (d) => d.Field, (b, d) => b.GeoCluster = d);
+		}
+
+		/// <summary>
 		/// A facet query allows to return a count of the hits matching 
 		/// the facet query. The query itself can be expressed using the Query DSL.
 		/// </summary>
@@ -1182,6 +1201,9 @@ namespace Nest
 			Self.TypeSelector = typeSelector;
 			return this;
 		}
+
+
+
 
 		/// <summary>
 		/// Based on the type information present in this descriptor create method that takes

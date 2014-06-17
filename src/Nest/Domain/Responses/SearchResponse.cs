@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Nest.Domain;
+using Nest.Domain.Facets;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
@@ -177,6 +178,9 @@ namespace Nest
 
 			if (facet is TermStatsFacet)
 				return ((TermStatsFacet)facet).Items.Cast<F>();
+
+			if (facet is GeoClusterFacet)
+				return ((GeoClusterFacet) facet).Items.Cast<F>();
 
 			return Enumerable.Empty<F>();
 		}
