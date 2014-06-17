@@ -138,6 +138,7 @@ namespace Nest.Tests.Unit.Core.Map
 						.Store()
 						.TermVector(TermVectorOption.with_positions_offsets)
 						.Boost(1.1)
+						.CopyTo(p => p.Content)
 					)
 					.Number(s => s
 						.Name(p => p.LOC)

@@ -28,6 +28,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.Store()
 						.TermVector(TermVectorOption.with_positions_offsets)
 						.Boost(1.1)
+						.CopyTo(p => p.Content, p => p.Country)
 					)
 				)
 			);
@@ -88,6 +89,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.IndexName("bool_name_in_lucene_index")
 						.NullValue(false)
 						.Store()
+						.CopyTo(p => p.Content)
 					)
 				)
 			);
@@ -101,6 +103,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 					.Binary(s => s
 						.Name(p => p.MyBinaryField)
 						.IndexName("binz")
+						.CopyTo("another_field")
 					)
 				)
 			);

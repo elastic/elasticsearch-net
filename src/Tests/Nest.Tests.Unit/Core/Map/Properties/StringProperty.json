@@ -1,21 +1,22 @@
-  {
-  "elasticsearchprojects": {
-    "properties": {
-      "name": {
-        "type": "string",
-        "index_name": "my_crazy_name_i_want_in_lucene",
-        "store": "yes",
-        "index": "analyzed",
-        "term_vector": "with_positions_offsets",
-        "boost": 1.1,
-        "null_value": "my_special_null_value",
-        "omit_norms": true,
-        "index_options": "positions",
-        "index_analyzer": "standard",
-        "search_analyzer": "standard",
-        "include_in_all": true,
-        "position_offset_gap": 1
-      }
-    }
-  }
+{
+	"elasticsearchprojects": {
+		"properties": {
+			"name": {
+				"type": "string",
+				"index_name": "my_crazy_name_i_want_in_lucene",
+				"store": "yes",
+				"index": "analyzed",
+				"term_vector": "with_positions_offsets",
+				"boost": 1.1,
+				"null_value": "my_special_null_value",
+				"omit_norms": true,
+				"index_options": "positions",
+				"index_analyzer": "standard",
+				"search_analyzer": "standard",
+				"include_in_all": true,
+				"position_offset_gap": 1,
+				"copy_to": [ "content", "country" ]
+			}
+		}
+	}
 }

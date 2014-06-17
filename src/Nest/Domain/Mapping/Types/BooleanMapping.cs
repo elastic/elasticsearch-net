@@ -40,5 +40,7 @@ namespace Nest
 		[JsonProperty("include_in_all")]
 		public bool? IncludeInAll { get; set; }
 
+		[JsonProperty("copy_to")]
+		public IEnumerable<PropertyPathMarker> CopyTo { get; set; }
 	}
 }

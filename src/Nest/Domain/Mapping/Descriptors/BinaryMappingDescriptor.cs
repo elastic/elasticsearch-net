@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using Nest.Resolvers;
 
@@ -25,5 +26,16 @@ namespace Nest
 			return this;
 		}
 
+		public BinaryMappingDescriptor<T> CopyTo(params string[] fields)
+		{
+			this._Mapping.CopyTo = fields.Select(f => (PropertyPathMarker)f);
+			return this;
+		}
+
+		public BinaryMappingDescriptor<T> CopyTo(params Expression<Func<T, object>>[] objectPaths)
+		{
+			this._Mapping.CopyTo = objectPaths.Select(e => (PropertyPathMarker)e);
+			return this;
+		}
 	}
 }
