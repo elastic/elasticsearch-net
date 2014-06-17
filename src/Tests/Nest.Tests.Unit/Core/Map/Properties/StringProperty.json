@@ -14,7 +14,8 @@
         "index_analyzer": "standard",
         "search_analyzer": "standard",
         "include_in_all": true,
-        "position_offset_gap": 1
+        "position_offset_gap": 1,
+		"copy_to" :  ["content", "country"]
       }
     }
   }

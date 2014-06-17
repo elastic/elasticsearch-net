@@ -24,5 +24,8 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("index_name")]
 		public string IndexName { get; set; }
+
+		[JsonProperty("copy_to")]
+		public IEnumerable<PropertyPathMarker> CopyTo { get; set; }
 	}
 }

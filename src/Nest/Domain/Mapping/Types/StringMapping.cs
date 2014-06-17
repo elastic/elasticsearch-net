@@ -64,5 +64,7 @@ namespace Nest
 		[JsonProperty("position_offset_gap")]
 		public int? PositionOffsetGap { get; set; }
 
+		[JsonProperty("copy_to")]
+		public IEnumerable<PropertyPathMarker> CopyTo { get; set; }
 	}
 }

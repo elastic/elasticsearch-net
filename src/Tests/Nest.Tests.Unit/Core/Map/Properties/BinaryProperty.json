@@ -3,7 +3,8 @@
     "properties": {
       "myBinaryField": {
         "type": "binary",
-        "index_name": "binz"
+        "index_name": "binz",
+		"copy_to":  ["another_field"]
       }
     }
   }
