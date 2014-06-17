@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nest.Tests.Integration</RootNamespace>
+    <AssemblyName>Nest.Tests.Integration</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoPoco">
+      <HintPath>..\..\dep\autopoco\AutoPoco.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\..\dep\FluentAssertions.2.0.0.1\lib\net40\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dep\Newtonsoft.Json.6.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\dep\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
+    <Compile Include="Core\Bulk\BulkPercolateTests.cs" />
+    <Compile Include="Core\Bulk\BulkTests.cs" />
+    <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
+    <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
+    <Compile Include="ElasticsearchConfiguration.cs" />
+    <Compile Include="Core\IndexTests.cs" />
+    <Compile Include="Help\AliasTests.cs" />
+    <Compile Include="Index\ReindexTests.cs" />
+    <Compile Include="Index\IndexUsingUrlIdTests.cs" />
+    <Compile Include="Indices\Analysis\Analyzers\AnalyzerTest.cs" />
+    <Compile Include="Indices\Analysis\Analyzers\AnalyzerTestResult.cs" />
+    <Compile Include="Indices\Analysis\Analyzers\AnalyzerTests.cs" />
+    <Compile Include="Cluster\StateTests.cs" />
+    <Compile Include="Indices\StatusTests.cs" />
+    <Compile Include="IntegrationTests.cs" />
+    <Compile Include="Cluster\HealthTests.cs" />
+    <Compile Include="Cluster\NodeTests.cs" />
+    <Compile Include="ConnectionTests.cs" />
+    <Compile Include="IntegrationSetup.cs" />
+    <Compile Include="Core\Get\GetFullTests.cs" />
+    <Compile Include="Core\Get\GetMultiTests.cs" />
+    <Compile Include="Core\Map\AnalyzerField\AnalyzerFieldTests.cs" />
+    <Compile Include="Core\Map\BoostField\BoostFieldTests.cs" />
+    <Compile Include="Core\Map\DynamicTemplates\DynamicTemplatesTests.cs" />
+    <Compile Include="Core\Map\BaseMappingTests.cs" />
+    <Compile Include="Core\Map\IdField\IdFieldTests.cs" />
+    <Compile Include="Core\Map\MetaField\MetaFieldTests.cs" />
+    <Compile Include="Core\Map\Properties\PropertiesTests.cs" />
+    <Compile Include="Core\Map\RootProperties\MapRootObjectPropertiesTests.cs" />
+    <Compile Include="Core\Map\RoutingField\RoutingFieldTests.cs" />
+    <Compile Include="Core\Map\SourceField\SourceFieldTests.cs" />
+    <Compile Include="Core\Map\TimestampField\TimestampFieldTests.cs" />
+    <Compile Include="Core\Map\TtlField\TtlFieldTests.cs" />
+    <Compile Include="Core\Map\TypeField\TypeFieldTests.cs" />
+    <Compile Include="Core\MoreLikeThis\MltSearchBodyTests.cs" />
+    <Compile Include="Core\ValidateTests.cs" />
+    <Compile Include="Core\Get\GetTests.cs" />
+    <Compile Include="Index\GetIdFromElasticsearchTests.cs" />
+    <Compile Include="Index\IndexDefaultValueTests.cs" />
+    <Compile Include="Indices\ClearCacheTests.cs" />
+    <Compile Include="Indices\SegmentsTests.cs" />
+    <Compile Include="Indices\ExistsTests.cs" />
+    <Compile Include="Indices\StatsTests.cs" />
+    <Compile Include="Core\AsyncTests.cs" />
+    <Compile Include="Integration\Filter\AndOrNotFilterTests.cs" />
+    <Compile Include="Integration\Filter\ScriptFilterTests.cs" />
+    <Compile Include="Integration\Filter\MissingExistsFilterTests.cs" />
+    <Compile Include="Integration\Filter\PrefixFilterTests.cs" />
+    <Compile Include="Integration\Filter\RangeFilterTests.cs" />
+    <Compile Include="Integration\Query\BoolQueryResults.cs" />
+    <Compile Include="Integration\Query\TermToString.cs" />
+    <Compile Include="Integration\Query\TextPhraseQueryTests.cs" />
+    <Compile Include="Integration\Query\TextPhrasePrefixQueryTests.cs" />
+    <Compile Include="Integration\Filter\NumericRangeFilterTests.cs" />
+    <Compile Include="Core\UpdateTests.cs" />
+    <Compile Include="Integration\Filter\BoolFilterTests.cs" />
+    <Compile Include="Integration\HighlightTests.cs" />
+    <Compile Include="Integration\Query\TermQueryDynamic.cs" />
+    <Compile Include="Mapping\NotAnalyzedTest.cs" />
+    <Compile Include="Reproduce\Reproduce450Tests.cs" />
+    <Compile Include="Reproduce\Reproduce389Tests.cs" />
+    <Compile Include="Reproduce\Reproduce346Tests.cs" />
+    <Compile Include="Reproduce\Reproduce325Tests.cs" />
+    <Compile Include="Reproduce\Reproduce308Tests.cs" />
+    <Compile Include="Reproduce\Reproduce319Tests.cs" />
+    <Compile Include="Reproduce\Reproduce211Tests.cs" />
+    <Compile Include="Search\NamedFilter\NamedFilterTests.cs" />
+    <Compile Include="Search\PercolateTests.cs" />
+    <Compile Include="Search\CountTests.cs" />
+    <Compile Include="Facet\GeoDistanceFacetResponseTests.cs" />
+    <Compile Include="Facet\TermFacetResponseTests.cs" />
+    <Compile Include="Facet\TermStatsFacetResponseTests.cs" />
+    <Compile Include="Facet\StatisticalFacetResponseTests.cs" />
+    <Compile Include="Facet\HistogramFacetResponseTests.cs" />
+    <Compile Include="Facet\RangeFacetResponseTests.cs" />
+    <Compile Include="Facet\BaseFacetTestFixture.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\DeleteTests.cs" />
+    <Compile Include="Indices\IndicesTests.cs" />
+    <Compile Include="Indices\AliasTests.cs" />
+    <Compile Include="Indices\AnalyzeTests.cs" />
+    <Compile Include="Indices\OptimizeTests.cs" />
+    <Compile Include="Indices\FlushTests.cs" />
+    <Compile Include="Indices\SnapshotTests.cs" />
+    <Compile Include="Indices\OpenCloseTests.cs" />
+    <Compile Include="Indices\RefreshTests.cs" />
+    <Compile Include="Mapping\MapTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\QueryDSLTests.cs" />
+    <Compile Include="Search\QueryResponseMapperTests.cs" />
+    <Compile Include="Search\ScriptFields\ScriptFieldsTest.cs" />
+    <Compile Include="Search\Scroll\ScrollTests.cs" />
+    <Compile Include="Search\SearchType\SearchTypeScanTests.cs" />
+    <Compile Include="Search\SearchType\SearchTypeCountTests.cs" />
+    <Compile Include="Search\SearchType\SearchTypeTests.cs" />
+    <Compile Include="Search\SubClassSupport\SubClassSupportTests.cs" />
+    <Compile Include="Search\VersionTests.cs" />
+    <Compile Include="Search\ExplainTests.cs" />
+    <Compile Include="Template\TemplateTests.cs" />
+    <Compile Include="Test.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Test.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Warmers\IndicesWarmersTests.cs" />
+    <Compile Include="Warmers\WarmersTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nest.Connection.Thrift\Nest.Connection.Thrift.csproj">
+      <Project>{704EF910-C4E7-413E-B21F-296EFE732FCF}</Project>
+      <Name>Nest.Connection.Thrift</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Nest\Nest.csproj">
+      <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
+      <Name>Nest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Nest.Tests.MockData\Nest.Tests.MockData.csproj">
+      <Project>{27143A05-5655-447C-ADAF-405E1CF43741}</Project>
+      <Name>Nest.Tests.MockData</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Test.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Test.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
