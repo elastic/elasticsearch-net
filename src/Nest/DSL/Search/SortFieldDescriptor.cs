@@ -173,7 +173,7 @@ namespace Nest
 		/// </summary>
 		public virtual SortFieldDescriptor<T> ToggleSort(bool ascending)
 		{
-			Self.Order = ascending ? SortOrder.Descending : SortOrder.Ascending;
+			Self.Order = ascending ? SortOrder.Ascending : SortOrder.Descending;
 			return this;
 		}
 	}
