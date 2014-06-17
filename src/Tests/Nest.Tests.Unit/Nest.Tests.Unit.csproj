@@ -121,7 +121,9 @@
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUrlTests.cs" />
     <Compile Include="Core\Map\MappingBehaviourTests.cs" />
-    <Content Include="Core\Map\Properties\MultiFieldPropertyWithJustNamePath.json" />
+    <None Include="Core\Map\Properties\MultiFieldPropertyWithJustNamePath.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Compile Include="Core\Scroll\ScrollRequestTests.cs" />
     <Compile Include="Core\Domain\Connection\ConnectionTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
