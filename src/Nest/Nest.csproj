@@ -814,7 +814,6 @@
     <Compile Include="Enums\Consistency.cs" />
     <Compile Include="Enums\FacetTypes.cs" />
     <Compile Include="Enums\Replication.cs" />
-    <Compile Include="Enums\VersionType.cs" />
     <Compile Include="Exception\DslException.cs" />
     <Compile Include="Enums\FieldType.cs" />
     <Compile Include="Enums\NamingConvention.cs" />

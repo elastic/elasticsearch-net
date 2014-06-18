@@ -14,11 +14,18 @@ namespace Nest.Tests.Unit.Core.Bulk
 		public void BulkOperations()
 		{
 			var result = this._client.Bulk(b => b
-				.Index<ElasticsearchProject>(i => i.Object(new ElasticsearchProject {Id = 2}))
-				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 3 }))
-				.Delete<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 4 }))
+				.Index<ElasticsearchProject>(i => i
+					.Object(new ElasticsearchProject {Id = 2})
+					.VersionType(VersionTypeOptions.Force))
+				.Create<ElasticsearchProject>(i => i
+					.Object(new ElasticsearchProject { Id = 3 })
+					.VersionType(VersionTypeOptions.Internal))
+				.Delete<ElasticsearchProject>(i => i
+					.Object(new ElasticsearchProject { Id = 4 })
+					.VersionType(VersionTypeOptions.ExternalGte))
 				.Update<ElasticsearchProject, object>(i => i
 					.Object(new ElasticsearchProject { Id = 3 })
+					.VersionType(VersionTypeOptions.External)
 					.Document(new { name = "NEST"})
 				)
 			);

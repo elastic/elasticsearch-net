@@ -168,20 +168,9 @@ namespace Nest
 		}
 
 
-		public BulkUpdateDescriptor<T, K> VersionType(VersionType versionType)
+		public BulkUpdateDescriptor<T, K> VersionType(VersionTypeOptions versionType)
 		{
-			switch (versionType)
-			{
-				case Nest.VersionType.External:
-					this._VersionType = "external";
-					break;
-				case Nest.VersionType.Internal:
-					this._VersionType = "internal";
-					break;
-				case Nest.VersionType.Force:
-					this._VersionType = "force";
-					break;
-			}
+			this._VersionType = versionType.GetStringValue();
 			return this;
 		}
 
