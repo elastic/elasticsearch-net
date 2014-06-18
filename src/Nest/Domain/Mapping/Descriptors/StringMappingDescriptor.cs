@@ -20,6 +20,12 @@ namespace Nest
 			return this;
 		}
 
+		public StringMappingDescriptor<T> Similarity(string similarity)
+		{
+			this._Mapping.Similarity = similarity;
+			return this;
+		}
+
 		public StringMappingDescriptor<T> IndexName(string indexName)
 		{
 			this._Mapping.IndexName = indexName;

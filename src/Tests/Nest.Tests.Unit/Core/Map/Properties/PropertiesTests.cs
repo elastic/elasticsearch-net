@@ -16,6 +16,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 				.Properties(props => props
 					.String(s => s
 						.Name(p => p.Name)
+						.Similarity("mysimilarity")
 						.IndexName("my_crazy_name_i_want_in_lucene")
 						.IncludeInAll()
 						.Index(FieldIndexOption.analyzed)
