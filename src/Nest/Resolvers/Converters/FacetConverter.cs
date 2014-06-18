@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using Nest.Domain.Facets;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -60,6 +60,8 @@ namespace Nest.Resolvers.Converters
 						return serializer.Deserialize(o.CreateReader(), typeof(FilterFacet));
 					case "query":
 						return serializer.Deserialize(o.CreateReader(), typeof(QueryFacet));
+                    case "geo_cluster":
+                        return serializer.Deserialize(o.CreateReader(), typeof(GeoClusterFacet));
 				}
 			}
 

@@ -11,10 +11,6 @@
     <RootNamespace>Nest.Tests.Integration</RootNamespace>
     <AssemblyName>Nest.Tests.Integration</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -24,7 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,81 +28,37 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Generator|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug - Generator\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoPoco">
-      <HintPath>..\..\..\dep\AutoPoco.1.0.0.0\lib\AutoPoco.dll</HintPath>
+      <HintPath>..\..\dep\autopoco\AutoPoco.dll</HintPath>
     </Reference>
-    <Reference Include="FluentAssertions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\dep\FluentAssertions.2.2.0.0\lib\net45\FluentAssertions.dll</HintPath>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\..\dep\FluentAssertions.2.0.0.1\lib\net40\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\dep\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\..\..\dep\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\..\dep\Newtonsoft.Json.6.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\dep\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Elasticsearch.Net\Extensions\DateExtensions.cs">
-      <Link>LinkedExtensions\DateExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Elasticsearch.Net\Extensions\Extensions.cs">
-      <Link>LinkedExtensions\Extensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Elasticsearch.Net\Extensions\NameValueCollectionExtensions.cs">
-      <Link>LinkedExtensions\NameValueCollectionExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Elasticsearch.Net\Extensions\StringExtensions.cs">
-      <Link>LinkedExtensions\StringExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Elasticsearch.Net\Extensions\TypeExtensions.cs">
-      <Link>LinkedExtensions\TypeExtensions.cs</Link>
-    </Compile>
-    <Compile Include="Aggregations\NestedBucketAggregationTests.cs" />
-    <Compile Include="Aggregations\BucketAggregationTests.cs" />
-    <Compile Include="Aggregations\SingleBucketAggregationTests.cs" />
-    <Compile Include="Aggregations\StatsAggregationTests.cs" />
-    <Compile Include="Aggregations\MetricAggregationTests.cs" />
-    <Compile Include="Aggregations\TermsAggregationTests.cs" />
-    <Compile Include="Aggregations\ParseResponseItemsTests.cs" />
-    <Compile Include="Connection\Failover\SniffTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
+    <Compile Include="Core\Bulk\BulkPercolateTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
-    <Compile Include="Core\Repository\RestoreTests.cs" />
-    <Compile Include="Core\Repository\CreateRepositoryTests.cs" />
-    <Compile Include="Core\ClearScroll\ClearScrollTests.cs" />
-    <Compile Include="Core\Exists\DocumentExistsTests.cs" />
-    <Compile Include="Core\Suggest\SuggestTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
-    <Compile Include="Core\TermVectors\MultiTermVectorsTests.cs" />
-    <Compile Include="Core\TermVectors\TermVectorTests.cs" />
-    <Compile Include="DebugTests\MemoryUsageTests.cs" />
     <Compile Include="ElasticsearchConfiguration.cs" />
     <Compile Include="Core\IndexTests.cs" />
-    <Compile Include="Facet\GeoClusterFacetResponseTests.cs" />
     <Compile Include="Help\AliasTests.cs" />
     <Compile Include="Index\ReindexTests.cs" />
     <Compile Include="Index\IndexUsingUrlIdTests.cs" />
@@ -153,18 +104,14 @@
     <Compile Include="Integration\Filter\RangeFilterTests.cs" />
     <Compile Include="Integration\Query\BoolQueryResults.cs" />
     <Compile Include="Integration\Query\TermToString.cs" />
+    <Compile Include="Integration\Query\TextPhraseQueryTests.cs" />
+    <Compile Include="Integration\Query\TextPhrasePrefixQueryTests.cs" />
+    <Compile Include="Integration\Filter\NumericRangeFilterTests.cs" />
     <Compile Include="Core\UpdateTests.cs" />
     <Compile Include="Integration\Filter\BoolFilterTests.cs" />
     <Compile Include="Integration\HighlightTests.cs" />
     <Compile Include="Integration\Query\TermQueryDynamic.cs" />
-    <Compile Include="RawCalls\HasUsefultServerExceptionTests.cs" />
-    <Compile Include="RawCalls\DynamicNullTests.cs" />
     <Compile Include="Mapping\NotAnalyzedTest.cs" />
-    <Compile Include="RawCalls\ReturnTypesTest.cs" />
-    <Compile Include="Reproduce\Reproduce643Tests.cs" />
-    <Compile Include="Reproduce\Reproduce628Tests.cs" />
-    <Compile Include="Reproduce\Reproduce487Tests.cs" />
-    <Compile Include="Reproduce\Reproduce437Tests.cs" />
     <Compile Include="Reproduce\Reproduce450Tests.cs" />
     <Compile Include="Reproduce\Reproduce389Tests.cs" />
     <Compile Include="Reproduce\Reproduce346Tests.cs" />
@@ -172,10 +119,6 @@
     <Compile Include="Reproduce\Reproduce308Tests.cs" />
     <Compile Include="Reproduce\Reproduce319Tests.cs" />
     <Compile Include="Reproduce\Reproduce211Tests.cs" />
-    <Compile Include="Reproduce\Reproduce654Tests.cs" />
-    <Compile Include="Reproduce\Reproduce659Tests.cs" />
-    <Compile Include="Reproduce\ReproduceConnectionStallsTests.cs" />
-    <Compile Include="Search\FieldTests\FieldsTest.cs" />
     <Compile Include="Search\NamedFilter\NamedFilterTests.cs" />
     <Compile Include="Search\PercolateTests.cs" />
     <Compile Include="Search\CountTests.cs" />
@@ -194,6 +137,7 @@
     <Compile Include="Indices\AnalyzeTests.cs" />
     <Compile Include="Indices\OptimizeTests.cs" />
     <Compile Include="Indices\FlushTests.cs" />
+    <Compile Include="Indices\SnapshotTests.cs" />
     <Compile Include="Indices\OpenCloseTests.cs" />
     <Compile Include="Indices\RefreshTests.cs" />
     <Compile Include="Mapping\MapTests.cs" />
@@ -218,15 +162,11 @@
     <Compile Include="Warmers\WarmersTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj">
-      <Project>{e97ccf40-0ba6-43fe-9f2d-58d454134088}</Project>
-      <Name>Elasticsearch.Net</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj">
+    <ProjectReference Include="..\Nest.Connection.Thrift\Nest.Connection.Thrift.csproj">
       <Project>{704EF910-C4E7-413E-B21F-296EFE732FCF}</Project>
-      <Name>Elasticsearch.Net.Connection.Thrift</Name>
+      <Name>Nest.Connection.Thrift</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Nest\Nest.csproj">
+    <ProjectReference Include="..\Nest\Nest.csproj">
       <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
       <Name>Nest</Name>
     </ProjectReference>
@@ -245,11 +185,8 @@
       <LastGenOutput>Test.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LowLevel\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

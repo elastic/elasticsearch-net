@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Facets;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
@@ -52,6 +53,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "facet_filter")]
 		IFilterContainer FacetFilter { get; set; }
+
+		[JsonProperty(PropertyName = "geo_cluster")]
+		IGeoClusterFacetRequest GeoCluster { get; set; }
 	}
 
 	public class FacetContainer : IFacetContainer 
@@ -94,5 +98,8 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "facet_filter")]
 		public IFilterContainer FacetFilter { get; set; }
+
+		[JsonProperty(PropertyName = "geo_cluster")]
+		public IGeoClusterFacetRequest GeoCluster { get; set; }
 	}
 }
