@@ -3,6 +3,7 @@
 		"properties": {
 			"name": {
 				"type": "string",
+				"similarity": "mysimilarity",
 				"index_name": "my_crazy_name_i_want_in_lucene",
 				"store": "yes",
 				"index": "analyzed",
