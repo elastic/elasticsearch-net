@@ -25,5 +25,8 @@ namespace Nest
 
         [JsonProperty("char_filter")]
         public IList<string> CharFilter { get; set; }
+
+		[JsonProperty("alias")]
+		public IList<string> Alias { get; set; }
     }
 }
