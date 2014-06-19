@@ -1,0 +1,13 @@
+﻿{
+	"settings": {
+		"index": {
+			"analysis": {
+				"analyzer": {
+					"keyword": {
+						"type": "keyword"
+					}
+				}
+			}
+		}
+	}
+}
