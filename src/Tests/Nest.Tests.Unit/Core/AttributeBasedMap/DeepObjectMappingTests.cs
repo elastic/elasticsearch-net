@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Nest.Tests.Unit.Core.AttributeBasedMap
 {
@@ -29,6 +30,12 @@ namespace Nest.Tests.Unit.Core.AttributeBasedMap
 			public string Name { get; set; }
 			public NestedRecursiveMapParent Parent { get; set; }
 		}
+		private class RecursiveMapCollection
+		{
+			public string Name { get; set; }
+			public IEnumerable<RecursiveMapCollection> Items { get; set; }
+		}
+
 		[Test]
 		public void TestDeepObjectWriter()
 		{ 
@@ -40,6 +47,11 @@ namespace Nest.Tests.Unit.Core.AttributeBasedMap
 		{
 			//make sure we dont stackoverflow because of a never ending recursion
 		  Assert.DoesNotThrow(() => this.CreateMapFor<NestedRecursiveMapParent>() );
+		}
+		[Test]
+		public void TestRecursiveCollectionWriter()
+		{
+			Assert.DoesNotThrow(() => this.CreateMapFor<RecursiveMapCollection>());
 		}
 	}
 }

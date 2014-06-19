@@ -155,7 +155,7 @@ namespace Nest.Resolvers.Writers
 					if (type == "object" || type == "nested")
 					{
 
-						var deepType = p.PropertyType;
+						var deepType = GetUnderlyingType(p.PropertyType);
 						var deepTypeName = this.Infer.TypeName(deepType);
 						var seenTypes = new ConcurrentDictionary<Type, int>(this.SeenTypes);
 						seenTypes.AddOrUpdate(deepType, 0, (t, i) => ++i);
