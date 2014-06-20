@@ -25,19 +25,19 @@ REM installing and calling this locally so that yours and CI's systems do not ne
 REM if not exist build\tools\Node.js\node.exe (
 REM    ECHO Local node not found.. Installing..
 REM    "build\tools\nuget\nuget.exe" "install" "node.js" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
-REM)
-REMif not exist build\tools\Npm\node_modules\npm\cli.js (
+REM )
+REM if not exist build\tools\Npm\node_modules\npm\cli.js (
 REM    ECHO Local npm not found.. Installing..
 REM    "build\tools\nuget\nuget.exe" "install" "npm" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
-REM)
-REMif not exist build\tools\node_modules\wintersmith\bin\wintersmith (
+REM )
+REM if not exist build\tools\node_modules\wintersmith\bin\wintersmith (
 REM    ECHO wintersmith not found.. Installing.. 
 REM    cd build\tools
 REM
 REM    "Node.js\node.exe" "Npm\node_modules\npm\cli.js" install wintersmith
 REM
 REM    cd ..\..
-REM)
+REM )
 
 
 SET TARGET="Build"
