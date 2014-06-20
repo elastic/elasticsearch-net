@@ -50,4 +50,4 @@ IF NOT [%2]==[] (set VERSION="%2")
 shift
 shift
 
-"build\tools\FAKE\tools\Fake.exe" "build\build.fsx" "target=%TARGET%" "version=%VERSION%"
+"build\tools\FAKE\tools\Fake.exe" "build\\build.fsx" "target=%TARGET%" "version=%VERSION%"

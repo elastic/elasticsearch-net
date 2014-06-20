@@ -125,13 +125,27 @@
     <None Include="Core\Indices\Analysis\Analyzers\CustomAnalyzerTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Core\Indices\Analysis\Analyzers\StopAnalyzerTest.json" />
-    <None Include="Core\Indices\Analysis\Analyzers\LanguageAnalyzerTest.json" />
-    <None Include="Core\Indices\Analysis\Analyzers\WhitespaceAnalyzerTest.json" />
-    <None Include="Core\Indices\Analysis\Analyzers\StandardAnalyzerTest.json" />
-    <None Include="Core\Indices\Analysis\Analyzers\SnowballAnalyzerTest.json" />
-    <None Include="Core\Indices\Analysis\Analyzers\SimpleAnalyzerTest.json" />
-    <None Include="Core\Indices\Analysis\Analyzers\PatternAnalyzerTest.json" />
+    <None Include="Core\Indices\Analysis\Analyzers\StopAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\LanguageAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\WhitespaceAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\StandardAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\SnowballAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\SimpleAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\PatternAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Map\Properties\MultiFieldPropertyWithJustNamePath.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -973,7 +987,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Core\Indices\Analysis\Analyzers\KeywordAnalyzerTest.json" />
+    <None Include="Core\Indices\Analysis\Analyzers\KeywordAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
