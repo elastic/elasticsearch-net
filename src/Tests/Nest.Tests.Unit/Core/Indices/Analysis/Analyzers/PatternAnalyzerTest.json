@@ -1,0 +1,16 @@
+﻿{
+	"settings": {
+		"index": {
+			"analysis": {
+				"analyzer": {
+					"whitespace": {
+						"lowercase": false,
+						"pattern": "\\\\s+",
+						"flags": "g",
+						"type": "pattern"
+					}
+				}
+			}
+		}
+	}
+}

@@ -63,8 +63,7 @@ namespace Nest.Tests.Integration.Template
 			this._client.DeleteTemplate("put-template-with-mappings");
 			var putResponse = this._client.PutTemplate("put-template-with-mappings",t => t
 				.Template("donotinfluencothertests")
-				.AddMapping<dynamic>(s=>s
-					.Type("mytype")
+				.AddMapping<ElasticsearchProject>(s=>s
 					.AllField(a=>a.Enabled(false))
 				)
 			);
@@ -78,9 +77,9 @@ namespace Nest.Tests.Integration.Template
 
 			var mappings = templateResponse.TemplateMapping.Mappings;
 
-			Assert.IsTrue(mappings.ContainsKey("mytype"), "put-template-with-mappings template should have a `mytype` mapping");
-			Assert.NotNull(mappings["mytype"].AllFieldMapping, "`mytype` mapping should contain the _all field mapping");
-			Assert.AreEqual(false, mappings["mytype"].AllFieldMapping._Enabled, "_all { enabled } should be set to false");
+			Assert.IsTrue(mappings.ContainsKey("elasticsearchprojects"), "put-template-with-mappings template should have a `mytype` mapping");
+			Assert.NotNull(mappings["elasticsearchprojects"].AllFieldMapping, "`mytype` mapping should contain the _all field mapping");
+			Assert.AreEqual(false, mappings["elasticsearchprojects"].AllFieldMapping._Enabled, "_all { enabled } should be set to false");
 		}
 
 		[Test]
