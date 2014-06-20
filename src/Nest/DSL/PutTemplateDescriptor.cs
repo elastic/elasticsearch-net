@@ -54,16 +54,15 @@ namespace Nest
 			where T : class
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
-			var rootObjectMappingDescriptor = mappingSelector(new PutMappingDescriptor<T>(this._connectionSettings));
-			rootObjectMappingDescriptor.ThrowIfNull("rootObjectMappingDescriptor");
+			var putMappingDescriptor = mappingSelector(new PutMappingDescriptor<T>(this._connectionSettings));
+			putMappingDescriptor.ThrowIfNull("rootObjectMappingDescriptor");
 
 			var inferrer = new ElasticInferrer(this._connectionSettings);
-			var typeName = inferrer.TypeName(rootObjectMappingDescriptor._Type);
+			var typeName = inferrer.TypeName(putMappingDescriptor._Type ?? typeof(T));
 			if (typeName == null)
 				return this;
-			this._TemplateMapping.Mappings[typeName] = rootObjectMappingDescriptor._Mapping;
+			this._TemplateMapping.Mappings[typeName] = putMappingDescriptor._Mapping;
 			return this;
-
 		}
 
 		public PutTemplateDescriptor AddWarmer<T>(Func<CreateWarmerDescriptor, CreateWarmerDescriptor> warmerSelector)
