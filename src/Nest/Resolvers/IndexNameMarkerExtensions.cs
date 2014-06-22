@@ -1,5 +1,6 @@
-﻿using Nest.Resolvers;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
+using Nest.Resolvers;
+using Shared.Extensions;
 
 namespace Nest
 {

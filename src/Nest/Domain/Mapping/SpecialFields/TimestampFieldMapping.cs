@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
+using Shared.Extensions;
 using Nest.Resolvers;
 using Elasticsearch.Net;
 

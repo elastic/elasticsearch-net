@@ -1,6 +1,7 @@
 ﻿using System;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
+using Shared.Extensions;
 using Nest.Resolvers.Converters;
 
 namespace Nest

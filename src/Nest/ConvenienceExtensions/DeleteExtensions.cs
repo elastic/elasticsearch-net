@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Elasticsearch.Net;
+using Shared.Extensions;
+using System;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {

@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Nest.Resolvers.Converters.Filters;
-using Newtonsoft.Json;
+using Shared.Extensions;
 
 namespace Nest
 {

@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shared.Extensions;
 
 ///Generated File Please Do Not Edit Manually
 	
@@ -23211,7 +23212,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new InfoRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
-				 
+				
 
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(

@@ -99,21 +99,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Elasticsearch.Net\Extensions\DateExtensions.cs">
-      <Link>LinkedExtensions\DateExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Elasticsearch.Net\Extensions\Extensions.cs">
-      <Link>LinkedExtensions\Extensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Elasticsearch.Net\Extensions\NameValueCollectionExtensions.cs">
-      <Link>LinkedExtensions\NameValueCollectionExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Elasticsearch.Net\Extensions\StringExtensions.cs">
-      <Link>LinkedExtensions\StringExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Elasticsearch.Net\Extensions\TypeExtensions.cs">
-      <Link>LinkedExtensions\TypeExtensions.cs</Link>
-    </Compile>
     <Compile Include="BaseJsonTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />

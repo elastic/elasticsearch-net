@@ -8,11 +8,12 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
+using PurifyNet;
+using Shared.Extensions;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
 using Elasticsearch.Net.Serialization;
-using PurifyNet;
 
 namespace Elasticsearch.Net.Connection
 {

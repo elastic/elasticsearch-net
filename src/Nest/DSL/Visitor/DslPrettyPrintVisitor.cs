@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Nest.Resolvers;
+using Shared.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Nest.Resolvers;
 
 namespace Nest.DSL.Visitor
 {

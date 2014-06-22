@@ -1,6 +1,7 @@
 ﻿using Elasticsearch.Net;
-using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using NUnit.Framework;
+using Shared.Extensions;
 
 namespace Nest.Tests.Unit.Search.Suggest
 {

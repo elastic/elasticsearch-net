@@ -1,8 +1,9 @@
-﻿using System;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using FluentAssertions;
-using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using NUnit.Framework;
+using Shared.Extensions;
+using System;
 
 namespace Nest.Tests.Integration.Core.Map
 {

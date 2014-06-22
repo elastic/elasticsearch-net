@@ -1,12 +1,13 @@
+using Elasticsearch.Net;
+using Nest.DSL.Query;
+using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Shared.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
-using Nest.DSL.Query;
-using Newtonsoft.Json.Converters;
-using Elasticsearch.Net;
 
 namespace Nest
 {

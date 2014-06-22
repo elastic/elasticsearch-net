@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Elasticsearch.Net;
+using FluentAssertions;
+using Nest.Tests.MockData;
+using Nest.Tests.MockData.Domain;
+using Newtonsoft.Json;
+using NUnit.Framework;
+using Shared.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.Remoting.Channels;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using Nest.Tests.MockData;
-using Nest.Tests.MockData.Domain;
-using Newtonsoft.Json;
-using NUnit.Framework;
-using System.Diagnostics;
-using FluentAssertions;
-using Elasticsearch.Net;
 
 namespace Nest.Tests.Integration.Reproduce
 {

@@ -1,9 +1,10 @@
-﻿using System.Runtime.Remoting.Channels;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using NUnit.Framework;
+using Shared.Extensions;
 using System;
 using System.Collections.Specialized;
+using System.Runtime.Remoting.Channels;
 
 namespace Nest.Tests.Unit.Domain.Connection
 {

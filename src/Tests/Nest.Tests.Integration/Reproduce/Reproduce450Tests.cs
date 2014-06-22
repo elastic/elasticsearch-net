@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Channels;
+﻿using Elasticsearch.Net;
+using FluentAssertions;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using Shared.Extensions;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using FluentAssertions;
-using Elasticsearch.Net;
+using System.Linq;
+using System.Runtime.Remoting.Channels;
 
 namespace Nest.Tests.Integration.Reproduce
 {

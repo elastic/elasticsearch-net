@@ -1,7 +1,8 @@
-﻿using System;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using Shared.Extensions;
+using System;
 
 namespace Nest.Tests.Unit.Core.Scroll
 {

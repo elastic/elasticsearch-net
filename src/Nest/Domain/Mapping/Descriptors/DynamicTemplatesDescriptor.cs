@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Elasticsearch.Net;
+using Nest.Resolvers;
+using Shared.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Nest.Resolvers;
-using Elasticsearch.Net;
 
 namespace Nest
 {

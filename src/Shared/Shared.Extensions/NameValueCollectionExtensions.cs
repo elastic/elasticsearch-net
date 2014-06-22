@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Specialized;
 
-namespace Elasticsearch.Net
+namespace Shared.Extensions
 {
-	internal static class NameValueCollectionExtensions
+	public static class NameValueCollectionExtensions
 	{
-		internal static void CopyKeyValues(this NameValueCollection source, NameValueCollection dest)
+		public static void CopyKeyValues(this NameValueCollection source, NameValueCollection dest)
 		{
 			foreach (var key in source.AllKeys)
 			{
@@ -15,7 +15,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		internal static string ToQueryString(this NameValueCollection self, string prefix = "?")
+		public static string ToQueryString(this NameValueCollection self, string prefix = "?")
 		{
 			if (self.AllKeys.Length == 0) return string.Empty;
 

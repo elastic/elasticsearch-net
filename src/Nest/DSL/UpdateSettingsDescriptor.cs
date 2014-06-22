@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
+using Shared.Extensions;
+using Elasticsearch.Net;
 using Nest.Resolvers;
 
 namespace Nest

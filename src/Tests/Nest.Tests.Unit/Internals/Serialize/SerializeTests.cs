@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Elasticsearch.Net;
+using Nest.Tests.MockData.Domain;
+using Newtonsoft.Json;
+using NUnit.Framework;
+using Shared.Extensions;
+using Shared.Extensions;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-using NUnit.Framework;
-using Nest.Tests.MockData.Domain;
-using Elasticsearch.Net;
-using Newtonsoft.Json;
 
 namespace Nest.Tests.Unit.Internals.Serialize
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Shared.Extensions;
 using Elasticsearch.Net.Connection;
 
 namespace Elasticsearch.Net

@@ -1,9 +1,10 @@
-﻿using System;
-using System.Linq;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using Shared.Extensions;
+using System;
+using System.Linq;
 
 namespace Nest.Tests.Integration.Search
 {

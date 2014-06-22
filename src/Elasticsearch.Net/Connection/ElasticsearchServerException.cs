@@ -6,6 +6,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using Shared.Extensions;
 
 namespace Elasticsearch.Net.Connection
 {

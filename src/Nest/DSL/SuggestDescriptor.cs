@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using Elasticsearch.Net;
-using Newtonsoft.Json;
 using System.Linq.Expressions;
-using Nest.Resolvers;
+using System.Text;
+using Newtonsoft.Json;
+using Elasticsearch.Net;
 using Nest.Domain;
+using Nest.Resolvers;
+using Shared.Extensions;
 
 namespace Nest
 {

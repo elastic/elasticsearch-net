@@ -1,7 +1,8 @@
-﻿using System;
-using System.Diagnostics;
+﻿using Elasticsearch.Net;
 using Elasticsearch.Net.Connection.Thrift;
-using Elasticsearch.Net;
+using Shared.Extensions;
+using System;
+using System.Diagnostics;
 
 namespace Nest.Tests.Integration
 {

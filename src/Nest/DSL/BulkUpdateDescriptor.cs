@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Elasticsearch.Net;
+using Nest.Resolvers;
+using Nest.Resolvers.Converters;
+using Shared.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Nest.Resolvers;
-using Elasticsearch.Net;
-using Nest.Resolvers.Converters;
 
 namespace Nest
 {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Shared.Extensions;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Nest

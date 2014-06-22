@@ -1,13 +1,14 @@
-﻿using System.Data.Common;
-using FluentAssertions;
+﻿using FluentAssertions;
+using Shared.Extensions;
+using System.Data.Common;
 
 namespace Nest.Tests.Integration.Search.FieldTests
 {
-	using System.Collections.Generic;
-	using System.Linq;
 	using Elasticsearch.Net;
 	using Nest.Tests.MockData.Domain;
 	using NUnit.Framework;
+	using System.Collections.Generic;
+	using System.Linq;
 
 	[TestFixture]
 	public class FieldsTest : IntegrationTests

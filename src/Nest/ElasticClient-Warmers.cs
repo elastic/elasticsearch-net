@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Elasticsearch.Net;
+using Shared.Extensions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
-	using GetWarmerConverter = Func<IElasticsearchResponse, Stream, WarmerResponse>;
 	using CrazyWarmerResponse = Dictionary<string, Dictionary<string, Dictionary<string, WarmerMapping>>>;
+	using GetWarmerConverter = Func<IElasticsearchResponse, Stream, WarmerResponse>;
 
 	public partial class ElasticClient
 	{

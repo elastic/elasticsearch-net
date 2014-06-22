@@ -1,3 +1,5 @@
+using Shared.Extensions;
+
 namespace Elasticsearch.Net.Connection
 {
 	class TransportRequestState<T>

@@ -1,7 +1,8 @@
-﻿using System.Linq;
-using NUnit.Framework;
+﻿using Elasticsearch.Net;
 using Nest.Tests.MockData.Domain;
-using Elasticsearch.Net;
+using NUnit.Framework;
+using Shared.Extensions;
+using System.Linq;
 
 namespace Nest.Tests.Integration.Integration
 {

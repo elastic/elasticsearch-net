@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Shared.Extensions;
 using Elasticsearch.Net;
 using Nest.DSL.Query.Behaviour;
+using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Nest.Resolvers.Converters.Queries;
-using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers;
+
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]

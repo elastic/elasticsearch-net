@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Shared.Extensions;
 
 ///Generated File Please Do Not Edit Manually
 

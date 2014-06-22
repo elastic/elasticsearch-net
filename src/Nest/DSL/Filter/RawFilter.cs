@@ -7,6 +7,7 @@ using Nest.Resolvers;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using Nest.Resolvers.Converters;
+using Shared.Extensions;
 
 namespace Nest
 {

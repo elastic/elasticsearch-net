@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using Nest.Domain;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Shared.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Nest.Resolvers.Converters

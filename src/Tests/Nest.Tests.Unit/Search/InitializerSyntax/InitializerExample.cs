@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using FakeItEasy;
 using Nest;
 using Nest.DSL.Descriptors;
@@ -10,6 +6,11 @@ using Nest.DSL.Search;
 using Nest.Resolvers;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using Shared.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Nest.Tests.Unit.Search.InitializerSyntax
 {
