@@ -157,6 +157,7 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/mydefaultindex/_validate/query", c => c.Validate<Doc>(v => v.AllTypes()));
 			Do("POST", "/_validate/query", c => c.Validate<Doc>(v => v.AllIndices().AllTypes()));
 			Do("PUT", "/_cluster/settings", c => c.ClusterSettings(v => v.Transient(p => p)));
+			Do("GET", "/_cluster/settings", c => c.ClusterGetSettings());
 		}
 
 	}

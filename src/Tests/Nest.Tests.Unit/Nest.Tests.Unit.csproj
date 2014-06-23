@@ -115,6 +115,7 @@
       <Link>LinkedExtensions\TypeExtensions.cs</Link>
     </Compile>
     <Compile Include="BaseJsonTests.cs" />
+    <Compile Include="Cluster\PutSettings\PutSettingsTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
     <Compile Include="Cluster\State\StateTests.cs" />
@@ -122,6 +123,9 @@
     <Compile Include="Core\Bulk\BulkUrlTests.cs" />
     <Compile Include="Core\Indices\Analysis\Analyzers\AnalyzerTests.cs" />
     <Compile Include="Core\Map\MappingBehaviourTests.cs" />
+    <None Include="Cluster\PutSettings\PutSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Indices\Analysis\Analyzers\CustomAnalyzerTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -9,8 +9,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IClusterPutSettingsResponse ClusterSettings(
-			Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> selector = null)
+		public IClusterPutSettingsResponse ClusterSettings(Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> selector)
 		{
 			selector = selector ?? (s => s);
 			return this.Dispatch<ClusterSettingsDescriptor, ClusterSettingsRequestParameters, ClusterPutSettingsResponse>(
@@ -20,8 +19,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IClusterPutSettingsResponse > ClusterSettingsAsync(
-			Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> selector = null)
+		public Task<IClusterPutSettingsResponse> ClusterSettingsAsync(Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> selector)
 		{
 			selector = selector ?? (s => s);
 			return this.DispatchAsync<ClusterSettingsDescriptor, ClusterSettingsRequestParameters, ClusterPutSettingsResponse, IClusterPutSettingsResponse >(
@@ -40,11 +38,49 @@ namespace Nest
 		}
 		
 		/// <inheritdoc />
-		public Task<IClusterPutSettingsResponse > ClusterSettingsAsync(IClusterSettingsRequest clusterSettingsRequest)
+		public Task<IClusterPutSettingsResponse> ClusterSettingsAsync(IClusterSettingsRequest clusterSettingsRequest)
 		{
 			return this.DispatchAsync<IClusterSettingsRequest, ClusterSettingsRequestParameters, ClusterPutSettingsResponse, IClusterPutSettingsResponse >(
 				clusterSettingsRequest,
 				(p, d) => this.RawDispatch.ClusterPutSettingsDispatchAsync<ClusterPutSettingsResponse>(p, d)
+			);
+		}
+		
+		/// <inheritdoc />
+		public IClusterGetSettingsResponse ClusterGetSettings(Func<ClusterGetSettingsDescriptor, ClusterGetSettingsDescriptor> selector = null)
+		{
+			selector = selector ?? (s => s);
+			return this.Dispatch<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse>(
+				selector,
+				(p, d) => this.RawDispatch.ClusterGetSettingsDispatch<ClusterGetSettingsResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(Func<ClusterGetSettingsDescriptor, ClusterGetSettingsDescriptor> selector)
+		{
+			selector = selector ?? (s => s);
+			return this.DispatchAsync<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse, IClusterGetSettingsResponse>(
+				selector,
+				(p, d) => this.RawDispatch.ClusterGetSettingsDispatchAsync<ClusterGetSettingsResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public IClusterGetSettingsResponse ClusterGetSettings(IClusterGetSettingsRequest clusterSettingsRequest)
+		{
+			return this.Dispatch<IClusterGetSettingsRequest, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse>(
+				clusterSettingsRequest ?? new ClusterGetSettingsRequest(),
+				(p, d) => this.RawDispatch.ClusterGetSettingsDispatch<ClusterGetSettingsResponse>(p)
+			);
+		}
+		
+		/// <inheritdoc />
+		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest clusterSettingsRequest = null)
+		{
+			return this.DispatchAsync<IClusterGetSettingsRequest, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse, IClusterGetSettingsResponse>(
+				clusterSettingsRequest ?? new ClusterGetSettingsRequest(),
+				(p, d) => this.RawDispatch.ClusterGetSettingsDispatchAsync<ClusterGetSettingsResponse>(p)
 			);
 		}
 	}

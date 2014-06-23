@@ -970,7 +970,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
 	///</pre>
 	///</summary>
-	public partial class ClusterGetSettingsDescriptor  : BaseRequest<ClusterGetSettingsRequestParameters>
+	public partial class ClusterGetSettingsDescriptor 
 	{
 		
 	
@@ -996,12 +996,6 @@ namespace Nest
 		{
 			this.Request.RequestParameters.Timeout(timeout);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterGetSettingsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
