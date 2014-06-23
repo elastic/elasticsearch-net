@@ -1208,5 +1208,19 @@ namespace Nest
 		/// <param name="snapshotName">The name of the snapshot that we want to restore</param>
 		/// <param name="selector">Optionally further describe the restore operation</param>
 		Task<IRestoreResponse> RestoreAsync(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
+
+		/// <inheritdoc />
+		IIndicesResponse ClusterSettings(
+			Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> clusterHealthSelector = null);
+
+		/// <inheritdoc />
+		Task<IIndicesResponse> ClusterSettingsAsync(
+			Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> clusterHealthSelector = null);
+
+		/// <inheritdoc />
+		IIndicesResponse ClusterSettings(IClusterSettingsRequest clusterSettingsRequest);
+
+		/// <inheritdoc />
+		Task<IIndicesResponse> ClusterSettingsAsync(IClusterSettingsRequest clusterSettingsRequest);
 	}
 }

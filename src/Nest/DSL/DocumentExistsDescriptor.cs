@@ -13,15 +13,12 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[DescriptorFor("Exists")]
-	public partial class IndexDescriptor<T> : DocumentOptionalPathDescriptorBase<IndexDescriptor<T>, T, IndexRequestParameters>
+	public partial class DocumentExistsDescriptor<T> : DocumentPathDescriptorBase<DocumentExistsDescriptor<T>, T, DocumentExistsRequestParameters>
 		where T : class
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo)
 		{
-			pathInfo.Index.ThrowIfNull("index");
-			pathInfo.Type.ThrowIfNull("type");
-			var id = this._Id;
-			pathInfo.HttpMethod = id != null && id.IsNullOrEmpty() ? PathInfoHttpMethod.POST : PathInfoHttpMethod.PUT;
+			pathInfo.HttpMethod = PathInfoHttpMethod.HEAD;
 		}
 	}
 }

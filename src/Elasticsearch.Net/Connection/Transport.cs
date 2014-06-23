@@ -258,6 +258,8 @@ namespace Elasticsearch.Net.Connection
 				if (objectNeedsResponseRef != null)
 					objectNeedsResponseRef.RequestInformation = result;
 				tracer.SetResult(result);
+				if (this.Settings.ConnectionStatusHandler != null)
+					this.Settings.ConnectionStatusHandler(result);
 				return result;
 			}
 		}
@@ -369,6 +371,8 @@ namespace Elasticsearch.Net.Connection
 						}
 
 						requestState.Tracer.SetResult(t.Result);
+						if (this.Settings.ConnectionStatusHandler != null)
+							this.Settings.ConnectionStatusHandler(t.Result);
 						return tcs.Task;
 					}).Unwrap();
 			}

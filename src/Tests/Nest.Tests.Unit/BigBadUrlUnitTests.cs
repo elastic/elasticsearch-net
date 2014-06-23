@@ -100,8 +100,9 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/mycustomindex/_warmer/mywarmer", c => c.GetWarmer("mywarmer", g => g.Index("mycustomindex")));
 			Do("GET", "/_cluster/health?level=indices", c => c.ClusterHealth(h => h.Level(LevelOptions.Indices)));
 			Do("GET", "/_cluster/health", c => c.ClusterHealth());
-			Do("POST", "/mydefaultindex/doc/2", c => c.Index(new Doc { Id = "2" }));
-			Do("POST", "/customindex/customtype/2?refresh=true", c => c.Index(new Doc { Id = "2" }, i => i.Index("customindex").Type("customtype").Refresh()));
+			Do("PUT", "/mydefaultindex/doc/2", c => c.Index(new Doc { Id = "2" }));
+			Do("POST", "/mydefaultindex/doc", c => c.Index(new Doc { Name = "2" }));
+			Do("PUT", "/customindex/customtype/2?refresh=true", c => c.Index(new Doc { Id = "2" }, i => i.Index("customindex").Type("customtype").Refresh()));
 			Do("HEAD", "/mydefaultindex", c => c.IndexExists(h => h.Index<Doc>()));
 			Do("POST", "/_bulk", c => c.IndexMany(Enumerable.Range(0, 10).Select(i => new Doc { Id = i.ToString() })));
 			Do("POST", "/customindex/customtype/_bulk", c => c.IndexMany(Enumerable.Range(0, 10).Select(i => new Doc { Id = i.ToString() }), index: "customindex", type: "customtype"));
@@ -155,6 +156,7 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/mydefaultindex/doc/_validate/query", c => c.Validate<Doc>(v => v.Query(q => q.MatchAll())));
 			Do("POST", "/mydefaultindex/_validate/query", c => c.Validate<Doc>(v => v.AllTypes()));
 			Do("POST", "/_validate/query", c => c.Validate<Doc>(v => v.AllIndices().AllTypes()));
+			Do("PUT", "/_cluster/settings", c => c.ClusterSettings(v => v.Transient(p => p)));
 		}
 
 	}
