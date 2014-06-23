@@ -1210,17 +1210,15 @@ namespace Nest
 		Task<IRestoreResponse> RestoreAsync(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
 
 		/// <inheritdoc />
-		IIndicesResponse ClusterSettings(
-			Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> clusterHealthSelector = null);
+		IClusterPutSettingsResponse ClusterSettings(Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> clusterHealthSelector = null);
 
 		/// <inheritdoc />
-		Task<IIndicesResponse> ClusterSettingsAsync(
-			Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> clusterHealthSelector = null);
+		Task<IClusterPutSettingsResponse > ClusterSettingsAsync(Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> clusterHealthSelector = null);
 
 		/// <inheritdoc />
-		IIndicesResponse ClusterSettings(IClusterSettingsRequest clusterSettingsRequest);
+		IClusterPutSettingsResponse ClusterSettings(IClusterSettingsRequest clusterSettingsRequest);
 
 		/// <inheritdoc />
-		Task<IIndicesResponse> ClusterSettingsAsync(IClusterSettingsRequest clusterSettingsRequest);
+		Task<IClusterPutSettingsResponse > ClusterSettingsAsync(IClusterSettingsRequest clusterSettingsRequest);
 	}
 }

@@ -9,42 +9,42 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IIndicesResponse ClusterSettings(
+		public IClusterPutSettingsResponse ClusterSettings(
 			Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<ClusterSettingsDescriptor, ClusterSettingsRequestParameters, IndicesResponse>(
+			return this.Dispatch<ClusterSettingsDescriptor, ClusterSettingsRequestParameters, ClusterPutSettingsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.ClusterPutSettingsDispatch<IndicesResponse>(p, d)
+				(p, d) => this.RawDispatch.ClusterPutSettingsDispatch<ClusterPutSettingsResponse>(p, d)
 			);
 		}
 
 		/// <inheritdoc />
-		public Task<IIndicesResponse> ClusterSettingsAsync(
+		public Task<IClusterPutSettingsResponse > ClusterSettingsAsync(
 			Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<ClusterSettingsDescriptor, ClusterSettingsRequestParameters, IndicesResponse, IIndicesResponse>(
+			return this.DispatchAsync<ClusterSettingsDescriptor, ClusterSettingsRequestParameters, ClusterPutSettingsResponse, IClusterPutSettingsResponse >(
 				selector,
-				(p, d) => this.RawDispatch.ClusterPutSettingsDispatchAsync<IndicesResponse>(p, d)
+				(p, d) => this.RawDispatch.ClusterPutSettingsDispatchAsync<ClusterPutSettingsResponse>(p, d)
 			);
 		}
 
 		/// <inheritdoc />
-		public IIndicesResponse ClusterSettings(IClusterSettingsRequest clusterSettingsRequest)
+		public IClusterPutSettingsResponse ClusterSettings(IClusterSettingsRequest clusterSettingsRequest)
 		{
-			return this.Dispatch<IClusterSettingsRequest, ClusterSettingsRequestParameters, IndicesResponse>(
+			return this.Dispatch<IClusterSettingsRequest, ClusterSettingsRequestParameters, ClusterPutSettingsResponse>(
 				clusterSettingsRequest,
-				(p, d) => this.RawDispatch.ClusterPutSettingsDispatch<IndicesResponse>(p, d)
+				(p, d) => this.RawDispatch.ClusterPutSettingsDispatch<ClusterPutSettingsResponse>(p, d)
 			);
 		}
 		
 		/// <inheritdoc />
-		public Task<IIndicesResponse> ClusterSettingsAsync(IClusterSettingsRequest clusterSettingsRequest)
+		public Task<IClusterPutSettingsResponse > ClusterSettingsAsync(IClusterSettingsRequest clusterSettingsRequest)
 		{
-			return this.DispatchAsync<IClusterSettingsRequest, ClusterSettingsRequestParameters, IndicesResponse, IIndicesResponse>(
+			return this.DispatchAsync<IClusterSettingsRequest, ClusterSettingsRequestParameters, ClusterPutSettingsResponse, IClusterPutSettingsResponse >(
 				clusterSettingsRequest,
-				(p, d) => this.RawDispatch.ClusterPutSettingsDispatchAsync<IndicesResponse>(p, d)
+				(p, d) => this.RawDispatch.ClusterPutSettingsDispatchAsync<ClusterPutSettingsResponse>(p, d)
 			);
 		}
 	}
