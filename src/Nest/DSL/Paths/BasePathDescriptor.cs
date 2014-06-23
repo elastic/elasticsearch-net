@@ -1,6 +1,7 @@
 ﻿using System;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -9,11 +10,13 @@ namespace Nest
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		protected IRequest<TParameters> Request { get { return this; } }
-
+		
+		[JsonIgnore]
 		RequestConfiguration IRequest<TParameters>.RequestConfiguration { get; set; }
 
 		private TParameters _requestParameters = new TParameters();
 
+		[JsonIgnore]
 		TParameters IRequest<TParameters>.RequestParameters  
 		{ 
 			get { return _requestParameters; }

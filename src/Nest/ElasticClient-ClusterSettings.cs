@@ -10,22 +10,22 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public IIndicesResponse ClusterSettings(
-			Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> clusterHealthSelector = null)
+			Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> selector = null)
 		{
-			clusterHealthSelector = clusterHealthSelector ?? (s => s);
+			selector = selector ?? (s => s);
 			return this.Dispatch<ClusterSettingsDescriptor, ClusterSettingsRequestParameters, IndicesResponse>(
-				clusterHealthSelector,
+				selector,
 				(p, d) => this.RawDispatch.ClusterPutSettingsDispatch<IndicesResponse>(p, d)
 			);
 		}
 
 		/// <inheritdoc />
 		public Task<IIndicesResponse> ClusterSettingsAsync(
-			Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> clusterHealthSelector = null)
+			Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> selector = null)
 		{
-			clusterHealthSelector = clusterHealthSelector ?? (s => s);
+			selector = selector ?? (s => s);
 			return this.DispatchAsync<ClusterSettingsDescriptor, ClusterSettingsRequestParameters, IndicesResponse, IIndicesResponse>(
-				clusterHealthSelector,
+				selector,
 				(p, d) => this.RawDispatch.ClusterPutSettingsDispatchAsync<IndicesResponse>(p, d)
 			);
 		}

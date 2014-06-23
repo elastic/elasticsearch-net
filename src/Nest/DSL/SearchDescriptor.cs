@@ -13,7 +13,11 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public interface IRequest<TParameters> : IPathInfo<TParameters>
+	/// <summary>
+	/// </summary>
+	public interface IRequest {}
+
+	public interface IRequest<TParameters> : IPathInfo<TParameters>, IRequest
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		/// <summary>

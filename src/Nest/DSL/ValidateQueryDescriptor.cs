@@ -6,6 +6,7 @@ using Nest.Resolvers.Converters;
 namespace Nest
 {
 	[DescriptorFor("IndicesValidateQuery")]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial class ValidateQueryDescriptor<T> : QueryPathDescriptorBase<ValidateQueryDescriptor<T>, T, ValidateQueryRequestParameters>
 		where T : class
 	{

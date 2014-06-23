@@ -11,6 +11,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[DescriptorFor("IndicesPutSettings")]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial class UpdateSettingsDescriptor : IndexOptionalPathDescriptorBase<UpdateSettingsDescriptor, UpdateSettingsRequestParameters>
 	{
 		[JsonProperty("index.number_of_replicas")]

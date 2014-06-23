@@ -9,6 +9,7 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial class UpdateDescriptor<T,K> : DocumentPathDescriptorBase<UpdateDescriptor<T, K>, T, UpdateRequestParameters> 
 		where T : class 
 		where K : class
