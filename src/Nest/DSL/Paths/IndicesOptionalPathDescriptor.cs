@@ -18,7 +18,7 @@ namespace Nest
 	/// </pre>
 	/// {indices} is optional 
 	/// </summary>
-	public class IndicesOptionalPathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+	public abstract class IndicesOptionalPathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor, TParameters>
 		where TDescriptor : IndicesOptionalPathDescriptor<TDescriptor, TParameters>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
@@ -46,13 +46,11 @@ namespace Nest
 			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
 			var index = this._Indices == null ? null : string.Join(",", this._Indices.Select(i => new ElasticInferrer(settings).IndexName(i)));
 
-			var pathInfo = base.ToPathInfo(queryString);
 			pathInfo.Index = index;
-			return pathInfo;
 		}
 
 	}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Connection;
 using Nest.DSL.Search;
 using Newtonsoft.Json;
 using Nest.Resolvers.Converters;
@@ -12,13 +13,23 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public interface IRequest 
+	public interface IRequest<TParameters> : IPathInfo<TParameters>
+		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-		
+		/// <summary>
+		/// Used to describe request parameters not part of the body. e.q query string or 
+		/// connection configuration overrides
+		/// </summary>
+		TParameters RequestParameters { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		RequestConfiguration RequestConfiguration { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISearchRequest: IRequest, IPathInfo<SearchRequestParameters>
+	public interface ISearchRequest: IRequest<SearchRequestParameters>
 	{
 		Type _ClrType { get; }
 
@@ -98,7 +109,7 @@ namespace Nest
 
 	}
 
-	public class SearchRequest : ISearchRequest
+	public class SearchRequest : BaseRequest<SearchRequestParameters>, ISearchRequest
 	{
 		public string Index { get; set; }
 		public string Type { get; set; }
@@ -150,21 +161,19 @@ namespace Nest
 
 		public SearchRequestParameters QueryString { get; set; }
 
-		ElasticsearchPathInfo<SearchRequestParameters> IPathInfo<SearchRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo)
 		{
-			var pathInfo = new ElasticsearchPathInfo<SearchRequestParameters>();
-			//pathInfo.HttpMethod = this._QueryString.ContainsKey("source")
-			//	? PathInfoHttpMethod.GET
-			//	: PathInfoHttpMethod.POST;
+			ISearchRequest self = this;
+			pathInfo.HttpMethod = self.RequestParameters.ContainsKey("source")
+				? PathInfoHttpMethod.GET
+				: PathInfoHttpMethod.POST;
 
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			pathInfo.RequestParameters = this.QueryString;
 			pathInfo.Index = this.Index;
 			pathInfo.Type = this.Type;
 
-			//pathInfo.RequestParameters = this._QueryString;
-			return pathInfo;
 		}
+
 	}
 
 	/// <summary>
@@ -172,31 +181,32 @@ namespace Nest
 	/// </summary>
 	/// <remarks>Doesn't inherit from QueryPathDescriptorBase because it already needs an untyped supperclass 
 	/// that has specifics that we can push to QueryPathDescriptorBase</remarks>
-	public partial class SearchDescriptor<T> : SearchDescriptorBase , IPathInfo<SearchRequestParameters>, ISearchRequest where T : class
+	public partial class SearchDescriptor<T> : BasePathDescriptor<SearchDescriptor<T>, SearchRequestParameters>, ISearchRequest 
+		where T : class
 	{
 		private ISearchRequest Self { get { return this; } }
 
 		SearchTypeOptions? ISearchRequest._SearchType
 		{
-			get { return this._QueryString.GetQueryStringValue<SearchTypeOptions?>("search_type");  }
+			get { return this.Request.RequestParameters.GetQueryStringValue<SearchTypeOptions?>("search_type");  }
 		}
 
 		SearchRequestParameters ISearchRequest.QueryString
 		{
-			get { return this._QueryString;  }
-			set { this._QueryString = value;  }
+			get { return this.Request.RequestParameters;  }
+			set { this.Request.RequestParameters = value;  }
 		}
 
 		string ISearchRequest._Preference
 		{
-			get { return this._QueryString.GetQueryStringValue<string>("preference"); }
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); }
 		}
 
 		string ISearchRequest._Routing
 		{
 			get
 			{
-				var routing = this._QueryString.GetQueryStringValue<string[]>("routing");
+				var routing = this.Request.RequestParameters.GetQueryStringValue<string[]>("routing");
 				return routing == null
 					? null
 					: string.Join(",", routing);
@@ -209,6 +219,11 @@ namespace Nest
 		/// Whether conditionless queries are allowed or not
 		/// </summary>
 		internal bool _Strict { get; set; }
+
+		internal IEnumerable<TypeNameMarker> _Types;
+		internal bool? _AllIndices { get; set; }
+		internal bool? _AllTypes { get; set; }
+		internal IEnumerable<IndexNameMarker> _Indices { get; set; }
 
 		string ISearchRequest.Timeout { get; set; }
 		int? ISearchRequest.From { get; set; }
@@ -281,7 +296,8 @@ namespace Nest
 			this._Indices = indices.Select(s => (IndexNameMarker)s);
 			return this;
 		}
-		
+
+
 		/// <summary>
 		/// The index to execute the search on. Defaults to the default index
 		/// </summary>
@@ -382,6 +398,8 @@ namespace Nest
 			this._AllIndices = true;
 			return this;
 		}
+
+
 		/// <summary>
 		/// Execute search over all types
 		/// </summary>
@@ -390,6 +408,7 @@ namespace Nest
 			this._AllTypes = true;
 			return this;
 		}
+
 
 		/// <summary>
 		/// When strict is set, conditionless queries are treated as an exception. 
@@ -1208,14 +1227,13 @@ namespace Nest
 			return Self.TypeSelector;
 		}
 
-		ElasticsearchPathInfo<SearchRequestParameters> IPathInfo<SearchRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo)
 		{
-			var pathInfo = new ElasticsearchPathInfo<SearchRequestParameters>();
-			pathInfo.HttpMethod = this._QueryString.ContainsKey("source")
+			pathInfo.HttpMethod = this.Request.RequestParameters.ContainsKey("source")
 				? PathInfoHttpMethod.GET
 				: PathInfoHttpMethod.POST;
 
-			pathInfo.RequestParameters = this._QueryString;
+			pathInfo.RequestParameters = this.Request.RequestParameters;
 
 			var inferrer = new ElasticInferrer(settings);
 			string indices;
@@ -1236,8 +1254,7 @@ namespace Nest
 
 			pathInfo.Index = indices;
 			pathInfo.Type = types;
-
-			return pathInfo;
 		}
+
 	}
 }

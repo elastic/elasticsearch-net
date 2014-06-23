@@ -13,8 +13,7 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesUpdateAliases")]
-	public partial class AliasDescriptor : BasePathDescriptor<AliasDescriptor>,
-		 IPathInfo<AliasRequestParameters>
+	public partial class AliasDescriptor : BasePathDescriptor<AliasDescriptor, AliasRequestParameters>
 	{
 		public AliasDescriptor()
 		{
@@ -41,13 +40,11 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<AliasRequestParameters> IPathInfo<AliasRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
-		{
-			var pathInfo = new ElasticsearchPathInfo<AliasRequestParameters>();
-			pathInfo.RequestParameters = this._QueryString;
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 
-			return pathInfo;
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<AliasRequestParameters> pathInfo)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 		}
+
 	}
 }

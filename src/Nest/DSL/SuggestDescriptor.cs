@@ -12,9 +12,7 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("Suggest")]
-	public partial class SuggestDescriptor<T> : 
-		IndicesOptionalExplicitAllPathDescriptor<SuggestDescriptor<T>, SuggestRequestParameters>
-		, IPathInfo<SuggestRequestParameters>
+	public partial class SuggestDescriptor<T> : IndicesOptionalExplicitAllPathDescriptor<SuggestDescriptor<T>, SuggestRequestParameters>
 		where T : class
 	{
 		internal IDictionary<string, object> _Suggest = new Dictionary<string, object>();
@@ -81,13 +79,10 @@ namespace Nest
 			this._Suggest.Add(name, bucket);
 			return this;
 		}
-			
-		ElasticsearchPathInfo<SuggestRequestParameters> IPathInfo<SuggestRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
-		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 
-			return pathInfo;
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SuggestRequestParameters> pathInfo)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 		}
 	}
 }

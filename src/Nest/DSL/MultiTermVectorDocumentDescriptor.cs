@@ -6,7 +6,10 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public class MultiTermVectorDocumentDescriptor<T> : DocumentOptionalPathDescriptorBase<MultiTermVectorDocumentDescriptor<T>, T, MultiTermVectorsRequestParameters>, IMultiTermVectorDocumentDescriptor where T : class
+	public class MultiTermVectorDocumentDescriptor<T> : 
+		DocumentOptionalPathDescriptorBase<MultiTermVectorDocumentDescriptor<T>, T, MultiTermVectorsRequestParameters>, 
+		IMultiTermVectorDocumentDescriptor 
+		where T : class
 	{
 
 		MultiTermVectorDocument IMultiTermVectorDocumentDescriptor.Document { get; set; }
@@ -61,6 +64,10 @@ namespace Nest
 		public MultiTermVectorDocumentDescriptor<T> FieldStatistics (bool fieldStatistics = true)
 		{
 			return this.SetDocValue(d => d.Document.FieldStatistics = fieldStatistics);
+		}
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo)
+		{
 		}
 	}
 }

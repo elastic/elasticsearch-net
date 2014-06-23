@@ -19,7 +19,7 @@ namespace Nest
 	/// </pre>
 	/// Where neither parameter is optional
 	/// </summary>
-	public class IndexTypePathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+	public abstract class IndexTypePathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor, TParameters>
 		where TDescriptor : IndexTypePathDescriptor<TDescriptor, TParameters>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
@@ -61,8 +61,8 @@ namespace Nest
 			this._Type = type;
 			return (TDescriptor)this;
 		}
-		
-		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
+
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
 			var inferrer = new ElasticInferrer(settings);
 			if (this._Index == null)
@@ -73,10 +73,8 @@ namespace Nest
 			var index = inferrer.IndexName(this._Index); 
 			var type = inferrer.TypeName(this._Type); 
 
-			var pathInfo = base.ToPathInfo(queryString);
 			pathInfo.Index = index;
 			pathInfo.Type = type;
-			return pathInfo;
 		}
 
 	}

@@ -14,14 +14,11 @@ namespace Nest
 {
 	[DescriptorFor("Exists")]
 	public partial class DocumentExistsDescriptor<T> : DocumentPathDescriptorBase<DocumentExistsDescriptor<T>, T, DocumentExistsRequestParameters>
-		, IPathInfo<DocumentExistsRequestParameters>
 		where T : class
 	{
-		ElasticsearchPathInfo<DocumentExistsRequestParameters> IPathInfo<DocumentExistsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.HEAD;
-			return pathInfo;
 		}
 	}
 }

@@ -14,16 +14,14 @@ namespace Nest
 {
 	[DescriptorFor("Exists")]
 	public partial class IndexDescriptor<T> : DocumentOptionalPathDescriptorBase<IndexDescriptor<T>, T, IndexRequestParameters>
-		, IPathInfo<IndexRequestParameters>
 		where T : class
 	{
-		ElasticsearchPathInfo<IndexRequestParameters> IPathInfo<IndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.Index.ThrowIfNull("index");
 			pathInfo.Type.ThrowIfNull("type");
-			pathInfo.HttpMethod = this._Id.IsNullOrEmpty() ? PathInfoHttpMethod.POST : PathInfoHttpMethod.PUT;
-			return pathInfo;
+			var id = this._Id;
+			pathInfo.HttpMethod = id != null && id.IsNullOrEmpty() ? PathInfoHttpMethod.POST : PathInfoHttpMethod.PUT;
 		}
 	}
 }

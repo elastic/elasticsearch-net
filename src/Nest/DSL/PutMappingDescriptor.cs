@@ -8,9 +8,7 @@ using Nest.Resolvers.Writers;
 namespace Nest
 {
 	[DescriptorFor("IndicesPutMapping")]
-	public partial class PutMappingDescriptor<T> 
-		: IndicesTypePathDescriptor<PutMappingDescriptor<T>, PutMappingRequestParameters, T>
-		, IPathInfo<PutMappingRequestParameters> 
+	public partial class PutMappingDescriptor<T> : IndicesTypePathDescriptor<PutMappingDescriptor<T>, PutMappingRequestParameters, T>
 		where T : class
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
@@ -231,12 +229,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<PutMappingRequestParameters> IPathInfo<PutMappingRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
-
-			return pathInfo;
 		}
 	}
 }

@@ -12,16 +12,11 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesDeleteWarmer")]
-	public partial class DeleteWarmerDescriptor : 
-		IndicesOptionalTypesNamePathDecriptor<DeleteWarmerDescriptor, DeleteWarmerRequestParameters>
-		, IPathInfo<DeleteWarmerRequestParameters>
+	public partial class DeleteWarmerDescriptor : IndicesOptionalTypesNamePathDecriptor<DeleteWarmerDescriptor, DeleteWarmerRequestParameters>
 	{
-		ElasticsearchPathInfo<DeleteWarmerRequestParameters> IPathInfo<DeleteWarmerRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteWarmerRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
-
-			return pathInfo;
 		}
 	}
 }

@@ -18,7 +18,7 @@ namespace Nest
 	/// </pre>
 	/// node id is optional
 	/// </summary>
-	public class NodeIdOptionalDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+	public abstract class NodeIdOptionalDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor, TParameters>
 		where TDescriptor : NodeIdOptionalDescriptor<TDescriptor, TParameters> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
@@ -33,11 +33,9 @@ namespace Nest
 			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(queryString);
 			pathInfo.NodeId = this._NodeId;
-			return pathInfo;
 		}
 
 	}

@@ -12,9 +12,7 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesStats")]
-	public partial class IndicesStatsDescriptor : 
-		IndicesOptionalPathDescriptor<IndicesStatsDescriptor, IndicesStatsRequestParameters>
-		, IPathInfo<IndicesStatsRequestParameters>
+	public partial class IndicesStatsDescriptor : IndicesOptionalPathDescriptor<IndicesStatsDescriptor, IndicesStatsRequestParameters>
 	{
 		private IEnumerable<TypeNameMarker> _Types { get; set; }
 		private IEnumerable<IndicesStatsMetric> _Metrics { get; set; }
@@ -32,20 +30,17 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<IndicesStatsRequestParameters> IPathInfo<IndicesStatsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			if (this._Types.HasAny())
 			{
 				var inferrer = new ElasticInferrer(settings);
 				var types = inferrer.TypeNames(this._Types);
-				this._QueryString.AddQueryString("types", string.Join(",", types));
+				this.Request.RequestParameters.AddQueryString("types", string.Join(",", types));
 			}
 			if (this._Metrics != null)
 				pathInfo.Metric = this._Metrics.Cast<Enum>().GetStringValue();
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
-
-			return pathInfo;
 		}
 	}
 }

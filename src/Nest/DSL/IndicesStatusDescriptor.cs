@@ -12,17 +12,11 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesStatus")]
-	public partial class IndicesStatusDescriptor : 
-		IndicesOptionalPathDescriptor<IndicesStatusDescriptor, IndicesStatusRequestParameters>
-		, IPathInfo<IndicesStatusRequestParameters>
+	public partial class IndicesStatusDescriptor : IndicesOptionalPathDescriptor<IndicesStatusDescriptor, IndicesStatusRequestParameters>
 	{
-		
-		ElasticsearchPathInfo<IndicesStatusRequestParameters> IPathInfo<IndicesStatusRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatusRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
-
-			return pathInfo;
 		}
 	}
 }

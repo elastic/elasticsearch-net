@@ -14,14 +14,10 @@ namespace Nest
 {
 	[DescriptorFor("IndicesClose")]
 	public partial class CloseIndexDescriptor : IndexPathDescriptorBase<CloseIndexDescriptor, CloseIndexRequestParameters>
-		, IPathInfo<CloseIndexRequestParameters>
 	{
-		ElasticsearchPathInfo<CloseIndexRequestParameters> IPathInfo<CloseIndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CloseIndexRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-
-			return pathInfo;
 		}
 	}
 }

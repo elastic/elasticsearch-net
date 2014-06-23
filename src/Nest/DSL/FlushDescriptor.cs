@@ -12,16 +12,11 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesFlush")]
-	public partial class FlushDescriptor : 
-		IndicesOptionalExplicitAllPathDescriptor<FlushDescriptor, FlushRequestParameters>
-		, IPathInfo<FlushRequestParameters>
+	public partial class FlushDescriptor : IndicesOptionalExplicitAllPathDescriptor<FlushDescriptor, FlushRequestParameters>
 	{
-		ElasticsearchPathInfo<FlushRequestParameters> IPathInfo<FlushRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<FlushRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-
-			return pathInfo;
 		}
 	}
 }

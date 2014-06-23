@@ -12,16 +12,11 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesDelete")]
-	public partial class DeleteIndexDescriptor : 
-		IndicesOptionalPathDescriptor<DeleteIndexDescriptor, DeleteIndexRequestParameters>
-		, IPathInfo<DeleteIndexRequestParameters>
+	public partial class DeleteIndexDescriptor : IndicesOptionalPathDescriptor<DeleteIndexDescriptor, DeleteIndexRequestParameters>
 	{
-		ElasticsearchPathInfo<DeleteIndexRequestParameters> IPathInfo<DeleteIndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
-
-			return pathInfo;
 		}
 	}
 }

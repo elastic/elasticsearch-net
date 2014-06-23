@@ -150,6 +150,7 @@
     <Compile Include="Domain\Responses\RestoreResponse.cs" />
     <Compile Include="Domain\Responses\SnapshotResponse.cs" />
     <Compile Include="Domain\Aggregations\TermsIncludeExclude.cs" />
+    <Compile Include="DSL\ClusterSettingsDescriptor.cs" />
     <Compile Include="DSL\DeleteSnapshotDescriptor.cs" />
     <Compile Include="DSL\Facets\FacetRequest.cs" />
     <Compile Include="DSL\Filter\BoolFilterExtensions.cs" />
@@ -162,13 +163,14 @@
     <Compile Include="DSL\Query\BoolQueryExtensions.cs" />
     <Compile Include="DSL\Query\PlainQuery.cs" />
     <Compile Include="DSL\Query\QueryContainer.cs" />
-    <Compile Include="DSL\RescoreQueryDescriptor.cs" />
+    <Compile Include="DSL\Rescore\RescoreQueryDescriptor.cs" />
     <Compile Include="DSL\Suggest\Fuzziness.cs" />
     <Compile Include="DSL\Suggest\IFuzziness.cs" />
     <Compile Include="DSL\Visitor\DslPrettyPrintVisitor.cs" />
     <Compile Include="DSL\Visitor\QueryFilterWalker.cs" />
     <Compile Include="DSL\Visitor\QueryVisitor.cs" />
     <Compile Include="DSL\Visitor\VisitorScope.cs" />
+    <Compile Include="ElasticClient-ClusterSettings.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\CompositeJsonConverter.cs" />
     <Compile Include="Domain\DSL\ICustomJsonReader.cs" />
@@ -288,7 +290,6 @@
     <Compile Include="DSL\Paths\IndexTypePathDescriptor.cs" />
     <Compile Include="DSL\Paths\IndicesTypePathDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexTypePathTypedDescriptor.cs" />
-    <Compile Include="DSL\SearchDescriptorBase.cs" />
     <Compile Include="DSL\Search\SourceDescriptor.cs" />
     <Compile Include="DSL\TermVectorDescriptor.cs" />
     <Compile Include="DSL\UnregisterPercolatorDescriptor.cs" />
@@ -303,7 +304,7 @@
     <Compile Include="DSL\RefreshDescriptor.cs" />
     <Compile Include="DSL\OptimizeDescriptor.cs" />
     <Compile Include="DSL\OpenIndexDescriptor.cs" />
-    <Compile Include="DSL\FluentDictionary.cs" />
+    <Compile Include="DSL\Paths\FluentDictionary.cs" />
     <Compile Include="DSL\Paths\IndexPathDescriptor.cs" />
     <Compile Include="DSL\ScrollDescriptor.cs" />
     <Compile Include="DSL\UpdateSettingsDescriptor.cs" />
@@ -317,10 +318,10 @@
     <Compile Include="ElasticClient-RootNodeInfo.cs" />
     <Compile Include="ElasticClient-TermVector.cs" />
     <Compile Include="ElasticClient-UpdateSettings.cs" />
-    <Compile Include="DSL\ISimpleGetDescriptor.cs" />
+    <Compile Include="DSL\MultiGet\ISimpleGetDescriptor.cs" />
     <Compile Include="DSL\DeleteByQueryDescriptor.cs" />
     <Compile Include="DSL\Paths\DocumentPathDescriptor.cs" />
-    <Compile Include="DSL\SimpleGetDescriptor.cs" />
+    <Compile Include="DSL\MultiGet\SimpleGetDescriptor.cs" />
     <Compile Include="DSL\_Descriptors.generated.cs" />
     <Compile Include="Enums\ExecutionHint.cs" />
     <Compile Include="Enums\GeoDistanceType.cs" />
@@ -362,7 +363,7 @@
     <Compile Include="Domain\Responses\IReindexResponse.cs" />
     <Compile Include="Domain\Suggest\Suggest.cs" />
     <Compile Include="Domain\Suggest\SuggestOption.cs" />
-    <Compile Include="DSL\ReindexDescriptor.cs" />
+    <Compile Include="DSL\Reindex\ReindexDescriptor.cs" />
     <Compile Include="DSL\Suggest\BaseSuggestDescriptor.cs" />
     <Compile Include="DSL\Suggest\DirectGeneratorDescriptor.cs" />
     <Compile Include="DSL\Suggest\PhraseSuggestDescriptor.cs" />
@@ -378,7 +379,7 @@
     <Compile Include="Domain\Responses\ClusterStateResponse.cs" />
     <Compile Include="Domain\Responses\BulkUpdateResponseItem.cs" />
     <Compile Include="Domain\State\ClusterState.cs" />
-    <Compile Include="DSL\BulkUpdateDescriptor.cs" />
+    <Compile Include="DSL\Bulk\BulkUpdateDescriptor.cs" />
     <Compile Include="DSL\Filter\HasParentFilterDescriptor.cs" />
     <Compile Include="Domain\DSL\ChildScoreType.cs" />
     <Compile Include="DSL\Query\HasParentQueryDescriptor.cs" />
@@ -402,8 +403,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Domain\Settings\CustomSimilaritySettings.cs" />
-    <Compile Include="DSL\RescoreDescriptor.cs" />
-    <Compile Include="DSL\CreateWarmerDescriptor.cs" />
+    <Compile Include="DSL\Rescore\RescoreDescriptor.cs" />
+    <Compile Include="DSL\Termplates\CreateWarmerDescriptor.cs" />
     <Compile Include="DSL\PutWarmerDescriptor.cs" />
     <Compile Include="DSL\GetWarmerDescriptor.cs" />
     <Compile Include="DSL\Query\MatchPhrasePrefixQueryDescriptor.cs" />
@@ -426,10 +427,10 @@
     <Compile Include="DSL\PutTemplateDescriptor.cs" />
     <Compile Include="ElasticClient-Template.cs" />
     <Compile Include="Domain\Bulk\BaseBulkOperation.cs" />
-    <Compile Include="DSL\BulkCreateDescriptor.cs" />
+    <Compile Include="DSL\Bulk\BulkCreateDescriptor.cs" />
     <Compile Include="DSL\BulkDescriptor.cs" />
-    <Compile Include="DSL\BulkIndexDescriptor.cs" />
-    <Compile Include="DSL\BulkDeleteDescriptor.cs" />
+    <Compile Include="DSL\Bulk\BulkIndexDescriptor.cs" />
+    <Compile Include="DSL\Bulk\BulkDeleteDescriptor.cs" />
     <Compile Include="ElasticClient-DeleteByQuery.cs" />
     <Compile Include="ElasticClient-DeleteMany.cs" />
     <Compile Include="Domain\Analysis\Analyzers\Language.cs" />
@@ -473,7 +474,7 @@
     <Compile Include="Domain\Analysis\Tokenizer\KeywordTokenizer.cs" />
     <Compile Include="Domain\Analysis\Tokenizer\TokenizerBase.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\EdgeNgramTokenFilter.cs" />
-    <Compile Include="DSL\AnalysisDescriptor.cs" />
+    <Compile Include="DSL\Mapping\AnalysisDescriptor.cs" />
     <Compile Include="DSL\CreateIndexDescriptor.cs" />
     <Compile Include="Domain\Analysis\Analyzers\AnalyzerBase.cs" />
     <Compile Include="ElasticClient-CreateIndex.cs" />
@@ -560,8 +561,8 @@
     <Compile Include="DSL\UpdateDescriptor.cs" />
     <Compile Include="ElasticClient-Update.cs" />
     <Compile Include="Domain\Facets\QueryFacet.cs" />
-    <Compile Include="DSL\HighlightDescriptor.cs" />
-    <Compile Include="DSL\HighlightFieldDescriptor.cs" />
+    <Compile Include="DSL\Search\HighlightDescriptor.cs" />
+    <Compile Include="DSL\Search\HighlightFieldDescriptor.cs" />
     <Compile Include="DSL\Paths\QueryPathDescriptor.cs" />
     <Compile Include="DSL\Facets\BaseFacetDescriptor.cs" />
     <Compile Include="DSL\Filter\FilterDescriptor.cs" />
@@ -858,6 +859,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Domain\Parameters\" />
+    <Folder Include="DSL\TermVector\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

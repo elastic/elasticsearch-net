@@ -6,9 +6,7 @@ using Nest.Resolvers.Converters;
 namespace Nest
 {
 	[DescriptorFor("IndicesValidateQuery")]
-	public partial class ValidateQueryDescriptor<T> 
-		:	QueryPathDescriptorBase<ValidateQueryDescriptor<T>, T, ValidateQueryRequestParameters>
-		, IPathInfo<ValidateQueryRequestParameters> 
+	public partial class ValidateQueryDescriptor<T> : QueryPathDescriptorBase<ValidateQueryDescriptor<T>, T, ValidateQueryRequestParameters>
 		where T : class
 	{
 		[JsonProperty("query")]
@@ -20,17 +18,13 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<ValidateQueryRequestParameters> IPathInfo<ValidateQueryRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.RequestParameters = this._QueryString;
-			var source = this._QueryString.GetQueryStringValue<string>("source");
-			var q = this._QueryString.GetQueryStringValue<string>("q");
+			var source = this.Request.RequestParameters.GetQueryStringValue<string>("source");
+			var q = this.Request.RequestParameters.GetQueryStringValue<string>("q");
 			pathInfo.HttpMethod = (!source.IsNullOrEmpty() || !q.IsNullOrEmpty())
 				? PathInfoHttpMethod.GET
 				: PathInfoHttpMethod.POST;
-				
-			return pathInfo;
 		}
 	}
 }

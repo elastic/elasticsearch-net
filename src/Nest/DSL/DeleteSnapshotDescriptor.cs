@@ -9,17 +9,11 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[DescriptorFor("SnapshotDelete")]
-	public partial class DeleteSnapshotDescriptor :
-		RepositorySnapshotPathDescriptor<DeleteSnapshotDescriptor, DeleteSnapshotRequestParameters>
-		, IPathInfo<DeleteSnapshotRequestParameters>
+	public partial class DeleteSnapshotDescriptor : RepositorySnapshotPathDescriptor<DeleteSnapshotDescriptor, DeleteSnapshotRequestParameters>
 	{
-
-		ElasticsearchPathInfo<DeleteSnapshotRequestParameters> IPathInfo<DeleteSnapshotRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteSnapshotRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
-			
-			return pathInfo;
 		}
 
 	}
