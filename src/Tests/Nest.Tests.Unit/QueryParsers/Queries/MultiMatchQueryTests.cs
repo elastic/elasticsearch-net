@@ -24,7 +24,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Rewrite(RewriteMultiTerm.top_terms_N)
 					.Slop(2)
 					.TieBreaker(2.0)
-					.Type(TextQueryType.BEST_FIELDS)
+					.Type(TextQueryType.best_fields)
 					)
 				);
 			q.Analyzer.Should().Be("my-analyzer");
@@ -39,7 +39,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Rewrite.Should().Be(RewriteMultiTerm.top_terms_N);
 			q.Slop.Should().Be(2);
 			q.TieBreaker.Should().Be(2.0);
-			q.Type.Should().Be(TextQueryType.BEST_FIELDS);
+			q.Type.Should().Be(TextQueryType.best_fields);
 		}
 	}
 }

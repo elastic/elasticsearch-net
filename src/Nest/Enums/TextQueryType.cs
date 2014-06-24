@@ -4,11 +4,11 @@ namespace Nest
 {
     public enum TextQueryType
     {
-        BEST_FIELDS,
-        MOST_FIELDS,
-        CROSS_FIELDS,
-        PHRASE,
-        PHRASE_PREFIX
+        best_fields,
+        most_fields,
+        cross_fields,
+        phrase,
+        phrase_prefix
     }
 }
 // ReSharper restore CheckNamespace
