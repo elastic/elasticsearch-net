@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+	[JsonConverter(typeof(StringEnumConverter))]
 	public enum NestedScore
 	{
 		[EnumMember(Value = "avg")]
