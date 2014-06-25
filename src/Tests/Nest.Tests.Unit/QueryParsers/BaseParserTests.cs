@@ -47,7 +47,9 @@ namespace Nest.Tests.Unit.QueryParsers
 
 			f1.Term.Field.Should().Be(f2.Term.Field);
 			f1.Term.Value.Should().Be(f2.Term.Value);
-		}protected static void AssertIsTermFilter(FilterContainer filter1, FilterContainer filter2)
+		}
+		
+		protected static void AssertIsTermFilter(FilterContainer filter1, FilterContainer filter2)
 		{
 			filter1.Should().NotBeNull();
 			filter2.Should().NotBeNull();
