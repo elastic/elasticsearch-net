@@ -39,10 +39,10 @@ namespace Nest.Tests.Unit.Search.Facets
           .OnField(f => f.Country)
           .Size(20)
           .ShardSize(100)
-          .Order(TermsOrder.reverse_count)
+          .Order(TermsOrder.ReverseCount)
           .Exclude("term1", "term2")
           .AllTerms()
-          .Regex(@"\s+", EsRegexFlags.DOTALL)
+          .Regex(@"\s+", "DOTALL")
           .Script("term + 'aaa'")
           .ScriptField("_source.my_field")
         );
@@ -81,7 +81,7 @@ namespace Nest.Tests.Unit.Search.Facets
           .FacetTerm(t => t
             .OnFields(f => f.Country, f => f.LOC)
             .Size(20)
-            .Order(TermsOrder.reverse_count)
+            .Order(TermsOrder.ReverseCount)
             .Exclude("term1", "term2")
             .AllTerms()
             .Regex(@"\s+", "DOTALL")
@@ -97,7 +97,7 @@ namespace Nest.Tests.Unit.Search.Facets
         .FacetTerm("i_bet_this_crazy_facet_actually_works", t => t
           .OnFields(f => f.Country, f => f.LOC)
           .Size(20)
-          .Order(TermsOrder.reverse_count)
+          .Order(TermsOrder.ReverseCount)
           .Exclude("term1", "term2")
           .AllTerms()
           .Regex(@"\s+","DOTALL")

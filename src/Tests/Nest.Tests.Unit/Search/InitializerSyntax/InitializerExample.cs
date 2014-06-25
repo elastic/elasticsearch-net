@@ -134,7 +134,7 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 						{
 							Field = Property.Path<ElasticsearchProject>(p=>p.Name),
 							Size = 10,
-							ExecutionHint = TermsAggregationExecutionHint.ordinals,
+							ExecutionHint = TermsAggregationExecutionHint.Ordinals,
 						},
 						Aggregations = new Dictionary<string, IAggregationContainer>
 						{

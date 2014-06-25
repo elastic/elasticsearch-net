@@ -137,7 +137,7 @@ namespace Nest.Tests.Integration.Aggregations
 				.Aggregations(a => a
 					.GeoHash("bucket_agg", m => m
 						.Field(p => p.Origin)
-						.GeoHashPrecision(GeoHashPrecision.precision_2)
+						.GeoHashPrecision(GeoHashPrecision.Precision2)
 					)
 				)
 			);

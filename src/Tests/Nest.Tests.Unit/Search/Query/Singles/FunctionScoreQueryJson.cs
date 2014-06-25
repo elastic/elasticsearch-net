@@ -18,10 +18,10 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 							f => f.Linear(x => x.FloatValue, d => d.Scale("0.3")),
 							f => f.Exp(x => x.DoubleValue, d => d.Scale("0.5")),
 							f => f.BoostFactor(2.0),
-							f => f.FieldValueFactor(op => op.Field(ff => ff.DoubleValue).Factor(2.5).Modifier(FieldValueFactorModifier.sqrt))
+							f => f.FieldValueFactor(op => op.Field(ff => ff.DoubleValue).Factor(2.5).Modifier(FieldValueFactorModifier.SquareRoot))
 						)
-						.ScoreMode(FunctionScoreMode.sum)
-						.BoostMode(FunctionBoostMode.replace)
+						.ScoreMode(FunctionScoreMode.Sum)
+						.BoostMode(FunctionBoostMode.Replace)
 					)
 				).Fields(x => x.Content);
 
@@ -59,10 +59,10 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 							f => f.Linear(x => x.FloatValue, d => d.Scale("0.3")),
 							f => f.Exp(x => x.DoubleValue, d => d.Scale("0.5")),
 							f => f.BoostFactor(2),
-							f => f.FieldValueFactor(db => db.Field(fa => fa.DoubleValue).Factor(3.4).Modifier(FieldValueFactorModifier.ln))
+							f => f.FieldValueFactor(db => db.Field(fa => fa.DoubleValue).Factor(3.4).Modifier(FieldValueFactorModifier.Ln))
 						)
-						.ScoreMode(FunctionScoreMode.sum)
-						.BoostMode(FunctionBoostMode.replace)
+						.ScoreMode(FunctionScoreMode.Sum)
+						.BoostMode(FunctionBoostMode.Replace)
 					)
 				).Fields(x => x.Content);
 
@@ -95,7 +95,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					.FunctionScore(fs => fs
 						.Query(qq => qq.Term("", ""))
 						.Functions(
-							f => f.FieldValueFactor(db => db.Factor(3.4).Modifier(FieldValueFactorModifier.ln))
+							f => f.FieldValueFactor(db => db.Factor(3.4).Modifier(FieldValueFactorModifier.Ln))
 						))
 				));
 		}

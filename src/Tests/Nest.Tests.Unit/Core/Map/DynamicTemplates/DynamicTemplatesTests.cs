@@ -68,7 +68,7 @@ namespace Nest.Tests.Unit.Core.Map.DynamicTemplates
 						.Name("string")
 						.Match("str_*")
 						.MatchMappingType("string")
-						.Mapping(tm => tm.String(sm=>sm.Index(FieldIndexOption.not_analyzed)))
+						.Mapping(tm => tm.String(sm=>sm.Index(FieldIndexOption.NotAnalyzed)))
 					)
 					.Add(t => t
 						.Name("numbers")

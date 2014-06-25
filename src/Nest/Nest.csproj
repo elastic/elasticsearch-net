@@ -175,6 +175,7 @@
     <Compile Include="DSL\Visitor\QueryVisitor.cs" />
     <Compile Include="DSL\Visitor\VisitorScope.cs" />
     <Compile Include="ElasticClient-ClusterSettings.cs" />
+    <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\CompositeJsonConverter.cs" />
     <Compile Include="Domain\DSL\ICustomJsonReader.cs" />
@@ -328,7 +329,6 @@
     <Compile Include="DSL\MultiGet\SimpleGetDescriptor.cs" />
     <Compile Include="DSL\_Descriptors.generated.cs" />
     <Compile Include="Enums\TermsAggregationExecutionHint.cs" />
-    <Compile Include="Enums\GeoDistanceType.cs" />
     <Compile Include="Enums\GeoHashPrecision.cs" />
     <Compile Include="Exception\DispatchException.cs" />
     <Compile Include="ExposedInternals\JsonConverterPiggyBackState.cs" />
