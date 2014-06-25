@@ -1,10 +1,13 @@
 ﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	/// <summary>
 	/// Controls how elasticsearch handles dynamic mapping changes when a new document present new fields
 	/// </summary>
+	[JsonConverter(typeof(StringEnumConverter))]
 	public enum DynamicMappingOption
 	{
 		/// <summary>
