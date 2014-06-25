@@ -17,7 +17,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Analyzer("my-analyzer")
 					.AutoGeneratePhraseQueries()
 					.Boost(1.1)
-					.DefaultOperator(Operator.and)
+					.DefaultOperator(Operator.And)
 					.EnablePositionIncrements()
 					.FuzzyMinimumSimilarity(2.1)
 					.FuzzyPrefixLength(2)
@@ -28,7 +28,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.OnFields(p=>p.Name, p=>p.Origin)
 					.PhraseSlop(2.1)
 					.Query("q")
-					.Rewrite(RewriteMultiTerm.constant_score_default)
+					.Rewrite(RewriteMultiTerm.ConstantScoreDefault)
 					.TieBreaker(4.1)
 					.UseDisMax()
 					)
@@ -38,7 +38,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Analyzer.Should().Be("my-analyzer");
 			q.AutoGeneratePhraseQueries.Should().BeTrue();
 			q.Boost.Should().Be(1.1);
-			q.DefaultOperator.Should().Be(Operator.and);
+			q.DefaultOperator.Should().Be(Operator.And);
 			q.EnablePositionIncrements.Should().BeTrue();
 			q.FuzzyMinimumSimilarity.Should().Be(2.1);
 			q.FuzzyPrefixLength.Should().Be(2);
@@ -49,7 +49,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Fields.Should().BeEquivalentTo(new []{"name", "origin"});
 			q.PhraseSlop.Should().Be(2.1);
 			q.Query.Should().Be("q");
-			q.Rewrite.Should().Be(RewriteMultiTerm.constant_score_default);
+			q.Rewrite.Should().Be(RewriteMultiTerm.ConstantScoreDefault);
 			q.TieBreaker.Should().Be(4.1);
 			q.UseDismax.Should().BeTrue();
 		}

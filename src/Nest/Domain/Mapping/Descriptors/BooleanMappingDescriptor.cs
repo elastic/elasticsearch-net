@@ -25,7 +25,7 @@ namespace Nest
 			this._Mapping.IndexName = indexName;
 			return this;
 		}
-		public BooleanMappingDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.analyzed)
+		public BooleanMappingDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.Analyzed)
 		{
 			this._Mapping.Index = index;
 			return this;

@@ -41,7 +41,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.From(0)
 				.Size(10)
 				.Query(q => q
-					.Prefix(f => f.Name, "el", 1.2, RewriteMultiTerm.constant_score_default)
+					.Prefix(f => f.Name, "el", 1.2, RewriteMultiTerm.ConstantScoreDefault)
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 

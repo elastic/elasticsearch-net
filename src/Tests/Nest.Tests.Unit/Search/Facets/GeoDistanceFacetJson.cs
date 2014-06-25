@@ -81,7 +81,7 @@ namespace Nest.Tests.Unit.Search.Facets
           .OnField(f => f.Origin)
           .OnValueField(f => f.Origin)
           .PinTo("drm3btev3e86")
-          .Unit(GeoUnit.mi)
+          .Unit(GeoUnit.Miles)
           .DistanceType(GeoDistance.arc)
         );
       var json = TestElasticClient.Serialize(s);
@@ -111,7 +111,7 @@ namespace Nest.Tests.Unit.Search.Facets
           .OnValueScript("doc['num1'].value * factor")
           .Params(p=>p.Add("factor", 5))
           .PinTo(40, -70)
-          .Unit(GeoUnit.mi)
+          .Unit(GeoUnit.Miles)
           .DistanceType(GeoDistance.arc)
         );
       var json = TestElasticClient.Serialize(s);

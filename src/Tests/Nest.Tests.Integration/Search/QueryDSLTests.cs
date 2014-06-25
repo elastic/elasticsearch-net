@@ -92,7 +92,7 @@ namespace Nest.Tests.Integration.Search
 				.SortAscending(f => f.LOC)
 				.SortDescending(f => f.Name)
 				.Query(q => q
-					.Wildcard(f => f.Name, "elasticsearch.*", Boost: 1.0, Rewrite: RewriteMultiTerm.scoring_boolean)
+					.Wildcard(f => f.Name, "elasticsearch.*", Boost: 1.0, Rewrite: RewriteMultiTerm.ScoringBoolean)
 				)
 			);
 			Assert.NotNull(results);

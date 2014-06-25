@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public enum NonStringIndexOption
 	{
-		no,
-		analyzed,
-		not_analyzed 
+		[EnumMember(Value = "no")]
+		No,
+		[EnumMember(Value = "analyzed")]
+		Analyzed,
+		[EnumMember(Value = "not_analyzed")]
+		NotAnalyzed 
 	}
-
-	
 }

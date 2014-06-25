@@ -30,7 +30,7 @@ namespace Nest.Tests.Integration
 				.AddMapping<ElasticsearchProject>(m => m
 				.MapFromAttributes()
 				.Properties(p => p
-				.String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.with_positions_offsets_payloads))))
+				.String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))))
 				.AddMapping<Person>(m => m.MapFromAttributes())
 				.AddMapping<BoolTerm>(m => m.Properties(pp=>pp
 					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.not_analyzed))
@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration
 				.AddMapping<ElasticsearchProject>(m => m
 				.MapFromAttributes()
 				.Properties(p => p
-				.String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.with_positions_offsets_payloads))))
+				.String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))))
 				.AddMapping<Person>(m => m.MapFromAttributes())
 				.AddMapping<BoolTerm>(m => m.Properties(pp => pp
 					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.not_analyzed))

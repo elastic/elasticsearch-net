@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public enum Operator
 	{
-		and,
-		or
+		[EnumMember(Value = "and")]
+		And,
+		[EnumMember(Value = "or")]
+		Or
 	}
-
-	
 }

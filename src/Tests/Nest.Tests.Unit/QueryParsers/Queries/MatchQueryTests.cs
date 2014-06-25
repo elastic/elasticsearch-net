@@ -19,10 +19,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Fuzziness(2.3)
 					.Lenient()
 					.MaxExpansions(2)
-					.Operator(Operator.and)
+					.Operator(Operator.And)
 					.PrefixLength(2)
 					.Query("querytext")
-					.Rewrite(RewriteMultiTerm.constant_score_boolean)
+					.Rewrite(RewriteMultiTerm.ConstantScoreBoolean)
 					.Slop(2)
 					)
 				);
@@ -35,10 +35,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Lenient.Should().BeTrue();
 			q.MaxExpansions.Should().Be(2);
 			q.Field.Should().Be("name");
-			q.Operator.Should().Be(Operator.and);
+			q.Operator.Should().Be(Operator.And);
 			q.PrefixLength.Should().Be(2);
 			q.Query.Should().Be("querytext");
-			q.Rewrite.Should().Be(RewriteMultiTerm.constant_score_boolean);
+			q.Rewrite.Should().Be(RewriteMultiTerm.ConstantScoreBoolean);
 			q.Slop.Should().Be(2);
 		}
 
@@ -55,10 +55,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Fuzziness(2.3)
 					.Lenient()
 					.MaxExpansions(2)
-					.Operator(Operator.and)
+					.Operator(Operator.And)
 					.PrefixLength(2)
 					.Query("querytext")
-					.Rewrite(RewriteMultiTerm.constant_score_boolean)
+					.Rewrite(RewriteMultiTerm.ConstantScoreBoolean)
 					.Slop(2)
 					)
 				);
@@ -70,10 +70,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Lenient.Should().BeTrue();
 			q.MaxExpansions.Should().Be(2);
 			q.Field.Should().Be("name");
-			q.Operator.Should().Be(Operator.and);
+			q.Operator.Should().Be(Operator.And);
 			q.PrefixLength.Should().Be(2);
 			q.Query.Should().Be("querytext");
-			q.Rewrite.Should().Be(RewriteMultiTerm.constant_score_boolean);
+			q.Rewrite.Should().Be(RewriteMultiTerm.ConstantScoreBoolean);
 			q.Slop.Should().Be(2);
 		}
 
@@ -90,10 +90,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Fuzziness(2.3)
 					.Lenient()
 					.MaxExpansions(2)
-					.Operator(Operator.and)
+					.Operator(Operator.And)
 					.PrefixLength(2)
 					.Query("querytext")
-					.Rewrite(RewriteMultiTerm.constant_score_boolean)
+					.Rewrite(RewriteMultiTerm.ConstantScoreBoolean)
 					.Slop(2)
 					)
 				);
@@ -105,10 +105,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Lenient.Should().BeTrue();
 			q.MaxExpansions.Should().Be(2);
 			q.Field.Should().Be("name");
-			q.Operator.Should().Be(Operator.and);
+			q.Operator.Should().Be(Operator.And);
 			q.PrefixLength.Should().Be(2);
 			q.Query.Should().Be("querytext");
-			q.Rewrite.Should().Be(RewriteMultiTerm.constant_score_boolean);
+			q.Rewrite.Should().Be(RewriteMultiTerm.ConstantScoreBoolean);
 			q.Slop.Should().Be(2);
 		}
 

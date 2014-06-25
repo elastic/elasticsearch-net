@@ -209,7 +209,7 @@ namespace Nest.Tests.Integration.Aggregations
 					.GeoDistance("bucket_agg", dh => dh
 						.Field(p => p.Origin)
 						.Origin(28.0, 28.0)
-						.Unit(GeoUnit.km)
+						.Unit(GeoUnit.Kilometers)
 						.Ranges(
 							r => r.To(1),
 							r => r.From(1).To(100)

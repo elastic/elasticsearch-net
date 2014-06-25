@@ -21,13 +21,13 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.IncludeInAll()
 						.Index(FieldIndexOption.analyzed)
 						.IndexAnalyzer("standard")
-						.IndexOptions(IndexOptions.positions)
+						.IndexOptions(IndexOptions.Positions)
 						.NullValue("my_special_null_value")
 						.OmitNorms()
 						.PositionOffsetGap(1)
 						.SearchAnalyzer("standard")
 						.Store()
-						.TermVector(TermVectorOption.with_positions_offsets)
+						.TermVector(TermVectorOption.WithPositionsOffsets)
 						.Boost(1.1)
 						.CopyTo(p => p.Content, p => p.Country)
 					)
@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 					.Number(s => s
 						.Name(p => p.LOC)
 						.IndexName("lines_of_code")
-						.Type(NumberType.@integer)
+						.Type(NumberType.Integer)
 						.NullValue(0)
 						.Boost(2.0)
 						.IgnoreMalformed()
@@ -280,7 +280,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 				.Properties(props => props
 					.GeoShape(s => s
 						.Name(p => p.MyGeoShape)
-						.Tree(GeoTree.geohash)
+						.Tree(GeoTree.Geohash)
 						.TreeLevels(2)
 						.DistanceErrorPercentage(0.025)
 					)
@@ -306,10 +306,10 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 				.Properties(props => props
 					.Number(nmd => nmd
 						.Name("id")
-						.Type(NumberType.integer))
+						.Type(NumberType.Integer))
 					.Number(nmd => nmd
 						.Name("value")
-						.Type(NumberType.integer)
+						.Type(NumberType.Integer)
 						.DocValues())));
 			this.JsonEquals(result2.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
 		}

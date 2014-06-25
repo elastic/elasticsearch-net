@@ -23,13 +23,13 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 						.IncludeInAll()
 						.Index(FieldIndexOption.analyzed)
 						.IndexAnalyzer("standard")
-						.IndexOptions(IndexOptions.positions)
+						.IndexOptions(IndexOptions.Positions)
 						.NullValue("my_special_null_value")
 						.OmitNorms()
 						.PositionOffsetGap(1)
 						.SearchAnalyzer("standard")
 						.Store()
-						.TermVector(TermVectorOption.with_positions_offsets)
+						.TermVector(TermVectorOption.WithPositionsOffsets)
 						.Boost(1.1)
 					)
 				)
@@ -53,7 +53,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 					.Number(s => s
 						.Name(p => p.LOC)
 						.IndexName("lines_of_code")
-						.Type(NumberType.@integer)
+						.Type(NumberType.Integer)
 						.NullValue(0)
 						.Boost(2.0)
 						.IgnoreMalformed()
@@ -275,7 +275,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 				.Properties(props => props
 					.GeoShape(s => s
 						.Name(p => p.MyGeoShape)
-						.Tree(GeoTree.geohash)
+						.Tree(GeoTree.Geohash)
 						.TreeLevels(2)
 						.DistanceErrorPercentage(0.025)
 					)

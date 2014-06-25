@@ -17,7 +17,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 					.Name("my_geo_filter")
 					.GeoDistanceRange(f=>f.Origin, d=>d
 						.Location(Lat: 40, Lon: -70)
-						.Distance(From: 12, To: 200, Unit: GeoUnit.km)
+						.Distance(From: 12, To: 200, Unit: GeoUnit.Kilometers)
 						.Optimize(GeoOptimizeBBox.memory)
 					)
 				);
