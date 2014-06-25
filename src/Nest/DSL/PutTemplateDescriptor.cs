@@ -8,7 +8,6 @@ namespace Nest
 {
 	[DescriptorFor("IndicesPutTemplate")]
 	public partial class PutTemplateDescriptor : NamePathDescriptor<PutTemplateDescriptor, PutTemplateRequestParameters>
-		, IPathInfo<PutTemplateRequestParameters>
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
 
@@ -97,12 +96,11 @@ namespace Nest
 			return this;
 
 		}
-		ElasticsearchPathInfo<PutTemplateRequestParameters> IPathInfo<PutTemplateRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
 			pathInfo.Name = this._Name;
-			return pathInfo;
 		}
 
 	}

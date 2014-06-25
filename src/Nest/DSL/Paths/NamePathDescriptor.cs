@@ -13,7 +13,7 @@ namespace Nest
 	/// </pre>
 	/// name is mandatory.
 	/// </summary>
-	public class NamePathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+	public abstract class NamePathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor, TParameters>
 		where TDescriptor : NamePathDescriptor<TDescriptor, TParameters> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
@@ -28,14 +28,12 @@ namespace Nest
 			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
 			if (this._Name.IsNullOrEmpty())
 				throw new DslException("missing Repository()");
 
-			var pathInfo = base.ToPathInfo(queryString);
 			pathInfo.Name = this._Name;
-			return pathInfo;
 		}
 
 	}

@@ -9,9 +9,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[DescriptorFor("SnapshotCreate")]
-	public partial class SnapshotDescriptor :
-		RepositorySnapshotPathDescriptor<SnapshotDescriptor, SnapshotRequestParameters>
-		, IPathInfo<SnapshotRequestParameters>
+	public partial class SnapshotDescriptor : RepositorySnapshotPathDescriptor<SnapshotDescriptor, SnapshotRequestParameters>
 	{
 		[JsonProperty("indices")]
 		internal IEnumerable<IndexNameMarker> _Indices { get; set; }
@@ -59,12 +57,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<SnapshotRequestParameters> IPathInfo<SnapshotRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
-			
-			return pathInfo;
 		}
 
 	}

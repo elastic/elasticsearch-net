@@ -2508,7 +2508,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> ClusterPutSettings<T>(object body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> ClusterPutSettings<T>(object body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a PUT on /_cluster/settings
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -2526,7 +2526,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(object body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(object body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a PUT on /_cluster/settings
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -2546,7 +2546,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> ClusterPutSettings(object body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> ClusterPutSettings(object body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a PUT on /_cluster/settings
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -2566,7 +2566,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> ClusterPutSettingsAsync(object body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> ClusterPutSettingsAsync(object body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_cluster/reroute
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.

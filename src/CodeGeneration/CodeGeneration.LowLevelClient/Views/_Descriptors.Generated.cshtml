@@ -24,10 +24,10 @@ namespace Nest
 	///@method.Documentation
 	///</pre>
 	///</summary>
-	public partial class @Raw(type)
+	public partial class @Raw(type) @(Raw(!method.Unmapped ? "" : string.Format(" : BaseRequest<{0}>", method.QueryStringParamName)))
 	{
-		internal @method.QueryStringParamName _QueryString = new @(method.QueryStringParamName)(); 
-</text>
+		
+	</text>
 	  foreach (KeyValuePair<string, ApiQueryParameters> kv 
 				in method.Url.Params)
 	  {
@@ -42,7 +42,7 @@ namespace Nest
 		///<summary>@kv.Value.Description</summary>
 		public @Raw(type) @(mm)(@t @kv.Key@tSuffix)
 		{
-			this._QueryString.@(m)(@kv.Key);
+			this.Request.RequestParameters.@(m)(@kv.Key);
 			return this;
 		}
 		</text>
@@ -55,7 +55,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._@(mm)(typedPathLookups);
+			this.Request.RequestParameters._@(mm)(typedPathLookups);
 			return this;
 		}
 			</text>
@@ -68,14 +68,25 @@ namespace Nest
 		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<T, object>>") typedPathLookup) @Raw(typed ? "" : "where T : class")
 		{
 			typedPathLookup.ThrowIfNull("typedPathLookup");
-			this._QueryString._@(mm)(typedPathLookup);
+			this.Request.RequestParameters._@(mm)(typedPathLookup);
 			return this;
 		}
 			</text>
 
 		 }
+		 
+		
 	}
-	<text>	
+	if (method.Unmapped)
+	{
+		<text>
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, @Raw(string.Format("ElasticsearchPathInfo<{0}>", method.QueryStringParamName)) pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		</text>
+	}	
+	<text>
 	}
 	</text>
 }

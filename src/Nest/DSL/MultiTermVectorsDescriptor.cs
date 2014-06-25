@@ -9,9 +9,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[DescriptorFor("Mtermvectors")]
-	public partial class MultiTermVectorsDescriptor<T> : 
-		IndexTypePathTypedDescriptor<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, T>
-		, IPathInfo<MultiTermVectorsRequestParameters> where T : class
+	public partial class MultiTermVectorsDescriptor<T> : IndexTypePathTypedDescriptor<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, T>
+		where T : class
 	{
 		[JsonProperty("docs")]
 		internal IEnumerable<MultiTermVectorDocument> _Documents { get; set;}
@@ -49,12 +48,9 @@ namespace Nest
 			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id.ToString(CultureInfo.InvariantCulture) }));
 		}
 
-		ElasticsearchPathInfo<MultiTermVectorsRequestParameters> IPathInfo<MultiTermVectorsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-
-			return pathInfo;
 		}
 	}
 

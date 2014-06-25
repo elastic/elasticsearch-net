@@ -102,7 +102,8 @@ namespace Nest.Resolvers
 
 			defaultProperties = PropertiesOf<IQuery>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IQueryContainer>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<ISearchRequest>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IRequest>(type, memberSerialization, defaultProperties, lookup);
+			//defaultProperties = PropertiesOf<ISearchRequest>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IFilter>(type, memberSerialization, defaultProperties, lookup, append: true);
 			defaultProperties = PropertiesOf<IFilterContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRandomScoreFunction>(type, memberSerialization, defaultProperties, lookup);
@@ -141,7 +142,7 @@ namespace Nest.Resolvers
 				}
 				return defaultProperties;
 			}
-			return jsonProperties.Concat(defaultProperties).ToList();
+			return jsonProperties.Concat(defaultProperties).GroupBy(p=>p.PropertyName).Select(g=>g.First()).ToList();
 		}
 
 		protected override string ResolvePropertyName(string propertyName)

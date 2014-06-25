@@ -12,9 +12,7 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public partial class ClusterStateDescriptor : 
-		IndicesOptionalPathDescriptor<ClusterStateDescriptor, ClusterStateRequestParameters>
-		, IPathInfo<ClusterStateRequestParameters>
+	public partial class ClusterStateDescriptor : IndicesOptionalPathDescriptor<ClusterStateDescriptor, ClusterStateRequestParameters>
 	{
 		
 		private IEnumerable<ClusterStateMetric> _Metrics { get; set; }
@@ -23,13 +21,12 @@ namespace Nest
 			this._Metrics = metrics;
 			return this;
 		}
-		ElasticsearchPathInfo<ClusterStateRequestParameters> IPathInfo<ClusterStateRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterStateRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 			if (this._Metrics != null)
 				pathInfo.Metric = this._Metrics.Cast<Enum>().GetStringValue();
-			return pathInfo;
 		}
 	}
 }

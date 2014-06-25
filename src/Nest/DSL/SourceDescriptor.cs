@@ -12,7 +12,6 @@ namespace Nest
 {
 	[DescriptorFor("GetSource")]
 	public partial class SourceDescriptor<T> : DocumentPathDescriptorBase<SourceDescriptor<T>,T, SourceRequestParameters>
-		, IPathInfo<SourceRequestParameters>
 		where T : class
 	{
 
@@ -25,15 +24,11 @@ namespace Nest
 		{
 			return this.Preference("_local");
 		}
-		
-		
-		ElasticsearchPathInfo<SourceRequestParameters> IPathInfo<SourceRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SourceRequestParameters> pathInfo)
 		{
-			var pathInfo = this.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
-
-			return pathInfo;
-
 		}
 	}
 }

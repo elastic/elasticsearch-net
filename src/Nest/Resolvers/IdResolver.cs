@@ -49,7 +49,7 @@ namespace Nest.Resolvers
 				{
 					T obj = (T)o;
 					var v = func(obj);
-					return v.ToString();
+					return v != null ? v.ToString() : null;
 				};
 				IdDelegates.TryAdd(type, cachedLookup);
 				return cachedLookup(@object);

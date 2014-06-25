@@ -12,7 +12,6 @@ using Nest.Resolvers;
 namespace Nest
 {
 	public partial class PercolateDescriptor<T,K> : IndexTypePathTypedDescriptor<PercolateDescriptor<T, K>, PercolateRequestParameters, T> 
-		, IPathInfo<PercolateRequestParameters> 
 		where T : class
 		where K : class
 	{
@@ -42,12 +41,10 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<PercolateRequestParameters> IPathInfo<PercolateRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PercolateRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			//.NET does not like sending data using get so we use POST
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			return pathInfo;
 		}
 	}
 }

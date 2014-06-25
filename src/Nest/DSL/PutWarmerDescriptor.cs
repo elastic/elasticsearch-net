@@ -14,12 +14,10 @@ namespace Nest
 {
 	[DescriptorFor("IndicesPutWarmer")]
 	[JsonConverter(typeof(CustomJsonConverter))]
-	public partial class PutWarmerDescriptor :
-		IndicesOptionalTypesNamePathDecriptor<PutWarmerDescriptor, PutWarmerRequestParameters>
-		, IPathInfo<PutWarmerRequestParameters>
+	public partial class PutWarmerDescriptor : IndicesOptionalTypesNamePathDecriptor<PutWarmerDescriptor, PutWarmerRequestParameters>
 		, ICustomJson
 	{
-		private SearchDescriptorBase _searchDescriptor { get; set; }
+		private ISearchRequest _searchDescriptor { get; set; }
 
 		public PutWarmerDescriptor Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> selector)
 			where T : class
@@ -28,12 +26,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<PutWarmerRequestParameters> IPathInfo<PutWarmerRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutWarmerRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
-
-			return pathInfo;
 		}
 		object ICustomJson.GetCustomJson()
 		{

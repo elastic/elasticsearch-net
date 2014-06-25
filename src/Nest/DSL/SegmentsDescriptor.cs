@@ -14,14 +14,10 @@ namespace Nest
 {
 	[DescriptorFor("IndicesSegments")]
 	public partial class SegmentsDescriptor : IndicesOptionalPathDescriptor<SegmentsDescriptor, SegmentsRequestParameters>
-		, IPathInfo<SegmentsRequestParameters>
 	{
-		ElasticsearchPathInfo<SegmentsRequestParameters> IPathInfo<SegmentsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SegmentsRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
-			
-			return pathInfo;
 		}
 	}
 }

@@ -7,9 +7,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[DescriptorFor("SnapshotCreateRepository")]
-	public partial class CreateRepositoryDescriptor :
-		RepositoryPathDescriptor<CreateRepositoryDescriptor, CreateRepositoryRequestParameters>
-		, IPathInfo<CreateRepositoryRequestParameters>
+	public partial class CreateRepositoryDescriptor : RepositoryPathDescriptor<CreateRepositoryDescriptor, CreateRepositoryRequestParameters>
 	{
 		internal IRepository _Repository { get; private set; } 
 
@@ -78,12 +76,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<CreateRepositoryRequestParameters> IPathInfo<CreateRepositoryRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateRepositoryRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
-			
-			return pathInfo;
 		}
 
 	}

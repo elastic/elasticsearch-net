@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -18,7 +13,7 @@ namespace Nest
 	/// </pre>
 	/// routing value
 	/// </summary>
-	public class RepositorySnapshotPathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+	public abstract class RepositorySnapshotPathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor, TParameters>
 		where TDescriptor : RepositorySnapshotPathDescriptor<TDescriptor, TParameters> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
@@ -39,18 +34,16 @@ namespace Nest
 			this._Snapshot = snapshotName;
 			return (TDescriptor)this;
 		}
-		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
+
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
 			if (this._Repository.IsNullOrEmpty())
 				throw new DslException("missing Repository()");
 			if (this._Snapshot.IsNullOrEmpty())
 				throw new DslException("missing Snapshot()");
 
-			var pathInfo = base.ToPathInfo(queryString);
 			pathInfo.Repository = this._Repository;
 			pathInfo.Snapshot = this._Snapshot;
-
-			return pathInfo;
 		}
 
 	}

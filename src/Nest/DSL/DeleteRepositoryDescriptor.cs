@@ -7,18 +7,13 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[DescriptorFor("SnapshotDeleteRepository")]
-	public partial class DeleteRepositoryDescriptor :
-		RepositoryPathDescriptor<DeleteRepositoryDescriptor, DeleteRepositoryRequestParameters>
-		, IPathInfo<DeleteRepositoryRequestParameters>
+	public partial class DeleteRepositoryDescriptor : RepositoryPathDescriptor<DeleteRepositoryDescriptor, DeleteRepositoryRequestParameters>
 	{
-		internal IRepository _Repository { get; private set; } 
+		internal IRepository _Repository { get; private set; }
 
-		ElasticsearchPathInfo<DeleteRepositoryRequestParameters> IPathInfo<DeleteRepositoryRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRepositoryRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
-			
-			return pathInfo;
 		}
 
 	}

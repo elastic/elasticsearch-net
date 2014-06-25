@@ -9,8 +9,8 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial class UpdateDescriptor<T,K> : DocumentPathDescriptorBase<UpdateDescriptor<T, K>, T, UpdateRequestParameters> 
-		, IPathInfo<UpdateRequestParameters> 
 		where T : class 
 		where K : class
 	{
@@ -83,16 +83,12 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<UpdateRequestParameters> IPathInfo<UpdateRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
 		{
 			if (this._Document != null && this._Id == null)
 				this._Id = new ElasticInferrer(settings).Id(this._Document);
 
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.RequestParameters = this._QueryString;
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			
-			return pathInfo;
 		}
 	}
 }

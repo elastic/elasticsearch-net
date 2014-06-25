@@ -12,9 +12,7 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesGetAlias")]
-	public partial class GetAliasesDescriptor : 
-		IndicesOptionalPathDescriptor<GetAliasesDescriptor, GetAliasesRequestParameters>
-		, IPathInfo<GetAliasesRequestParameters>
+	public partial class GetAliasesDescriptor : IndicesOptionalPathDescriptor<GetAliasesDescriptor, GetAliasesRequestParameters>
 	{
 		internal string _Alias { get; set; }
 
@@ -24,12 +22,10 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<GetAliasesRequestParameters> IPathInfo<GetAliasesRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetAliasesRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 			pathInfo.Name = _Alias ?? "*";
-			return pathInfo;
 		}
 	}
 }

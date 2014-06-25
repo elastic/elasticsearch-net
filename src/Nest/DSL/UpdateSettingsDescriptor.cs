@@ -11,9 +11,8 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[DescriptorFor("IndicesPutSettings")]
-	public partial class UpdateSettingsDescriptor
-		: IndexOptionalPathDescriptorBase<UpdateSettingsDescriptor, UpdateSettingsRequestParameters>
-		, IPathInfo<UpdateSettingsRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial class UpdateSettingsDescriptor : IndexOptionalPathDescriptorBase<UpdateSettingsDescriptor, UpdateSettingsRequestParameters>
 	{
 		[JsonProperty("index.number_of_replicas")]
 		internal int? _NumberOfReplicas { get; set; }
@@ -396,13 +395,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<UpdateSettingsRequestParameters> IPathInfo<UpdateSettingsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.RequestParameters = this._QueryString;
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
-
-			return pathInfo;
 		}
 
 	}
