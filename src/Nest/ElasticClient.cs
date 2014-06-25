@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using Nest.Resolvers.Converters;
+using Nest.SerializationExtensions;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Nest.Resolvers;
@@ -105,14 +108,6 @@ namespace Nest
 			return badResponse;
 		}
 
-
-		private static R CreateValidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
-		{
-			var r = (R)typeof(R).CreateInstance();
-			((IResponseWithRequestInformation)r).RequestInformation = response;
-			r.IsValid = true;
-			return r;
-		}
 		private static R CreateInvalidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
 		{
 			var r = (R)typeof(R).CreateInstance();
@@ -149,6 +144,15 @@ namespace Nest
 				.ContinueWith<I>(r => ResultsSelector<D, Q, R>(r.Result, descriptor));
 		}
 
+
+		public static void Warmup()
+		{
+			var client = new ElasticClient(connection: new InMemoryConnection());
+			var stream = new MemoryStream("{}".Utf8Bytes());
+			client.Serializer.Serialize(new SearchDescriptor<object>());
+			client.Serializer.Deserialize<SearchDescriptor<object>>(stream);
+			//client.RootNodeInfo();
+		}
 
 	}
 }

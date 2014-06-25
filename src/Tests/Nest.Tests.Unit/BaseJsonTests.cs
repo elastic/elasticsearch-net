@@ -32,7 +32,7 @@ namespace Nest.Tests.Unit
 		/// <summary>
 		/// In memory client that never hits elasticsearch
 		/// </summary>
-		protected readonly IElasticClient _client;
+		protected IElasticClient _client;
 		protected readonly IConnection _connection;
 
 		public BaseJsonTests()

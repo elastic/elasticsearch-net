@@ -46,6 +46,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AppDomainToolkit">
+      <HintPath>..\..\..\dep\AppDomainToolkit.1.0.4.1\lib\net\AppDomainToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="AutoPoco">
       <HintPath>..\..\..\dep\AutoPoco.1.0.0.0\lib\AutoPoco.dll</HintPath>
     </Reference>
@@ -92,9 +95,9 @@
     <Compile Include="Aggregations\MetricAggregationTests.cs" />
     <Compile Include="Aggregations\TermsAggregationTests.cs" />
     <Compile Include="Aggregations\ParseResponseItemsTests.cs" />
-
     <Compile Include="Cluster\GetSettingsTests.cs" />
-    <Compile Include="Cluster\PutSettingsTests.cs" />    <Compile Include="Connection\Failover\SniffTests.cs" />
+    <Compile Include="Cluster\PutSettingsTests.cs" />
+    <Compile Include="Connection\Failover\SniffTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
@@ -209,12 +212,8 @@
     <Compile Include="Search\SubClassSupport\SubClassSupportTests.cs" />
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />
+    <Compile Include="Startup\StartupTests.cs" />
     <Compile Include="Template\TemplateTests.cs" />
-    <Compile Include="Test.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Test.settings</DependentUpon>
-    </Compile>
     <Compile Include="Warmers\IndicesWarmersTests.cs" />
     <Compile Include="Warmers\WarmersTests.cs" />
   </ItemGroup>
@@ -241,10 +240,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Test.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Test.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="LowLevel\" />

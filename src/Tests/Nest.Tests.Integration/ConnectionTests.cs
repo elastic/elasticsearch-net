@@ -16,7 +16,7 @@ namespace Nest.Tests.Integration
 		public void TestSettings()
 		{
 			Assert.AreEqual(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex);
-			Assert.AreEqual(this._settings.MaximumAsyncConnections, Test.Default.MaximumAsyncConnections);
+			Assert.AreEqual(this._settings.MaximumAsyncConnections, 20);
 		}
 		
 		[Test]
@@ -67,7 +67,7 @@ namespace Nest.Tests.Integration
 		[Test]
 		public void TestConnectSuccessWithUri()
 		{
-			var settings = new ConnectionSettings(Test.Default.Uri, "index");
+			var settings = new ConnectionSettings(ElasticsearchConfiguration.CreateBaseUri(), "index");
 			var client = new ElasticClient(settings);
 			var result = client.RootNodeInfo();
 
