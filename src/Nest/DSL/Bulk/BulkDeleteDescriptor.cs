@@ -92,7 +92,7 @@ namespace Nest
 			return this;
 		}
 
-		public BulkDeleteDescriptor<T> VersionType(VersionTypeOptions versionType)
+		public BulkDeleteDescriptor<T> VersionType(VersionType versionType)
 		{
 			this._VersionType = versionType.GetStringValue();
 			return this;

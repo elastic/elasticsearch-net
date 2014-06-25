@@ -92,9 +92,9 @@
     <Compile Include="Aggregations\MetricAggregationTests.cs" />
     <Compile Include="Aggregations\TermsAggregationTests.cs" />
     <Compile Include="Aggregations\ParseResponseItemsTests.cs" />
-
     <Compile Include="Cluster\GetSettingsTests.cs" />
-    <Compile Include="Cluster\PutSettingsTests.cs" />    <Compile Include="Connection\Failover\SniffTests.cs" />
+    <Compile Include="Cluster\PutSettingsTests.cs" />
+    <Compile Include="Connection\Failover\SniffTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
@@ -203,9 +203,9 @@
     <Compile Include="Search\QueryResponseMapperTests.cs" />
     <Compile Include="Search\ScriptFields\ScriptFieldsTest.cs" />
     <Compile Include="Search\Scroll\ScrollTests.cs" />
-    <Compile Include="Search\SearchType\SearchTypeScanTests.cs" />
-    <Compile Include="Search\SearchType\SearchTypeCountTests.cs" />
-    <Compile Include="Search\SearchType\SearchTypeTests.cs" />
+    <Compile Include="Search\SearchTypeTests\SearchTypeScanTests.cs" />
+    <Compile Include="Search\SearchTypeTests\SearchTypeCountTests.cs" />
+    <Compile Include="Search\SearchTypeTests\SearchTypeTests.cs" />
     <Compile Include="Search\SubClassSupport\SubClassSupportTests.cs" />
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />

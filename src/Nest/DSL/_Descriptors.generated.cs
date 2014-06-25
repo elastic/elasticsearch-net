@@ -41,7 +41,7 @@ namespace Nest
 	
 
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public BulkDescriptor Consistency(ConsistencyOptions consistency)
+		public BulkDescriptor Consistency(Consistency consistency)
 		{
 			this.Request.RequestParameters.Consistency(consistency);
 			return this;
@@ -57,7 +57,7 @@ namespace Nest
 		
 
 		///<summary>Explicitely set the replication type</summary>
-		public BulkDescriptor Replication(ReplicationOptions replication)
+		public BulkDescriptor Replication(Replication replication)
 		{
 			this.Request.RequestParameters.Replication(replication);
 			return this;
@@ -161,7 +161,7 @@ namespace Nest
 	
 
 		///<summary>The unit in which to display byte values</summary>
-		public CatAllocationDescriptor Bytes(BytesOptions bytes)
+		public CatAllocationDescriptor Bytes(Bytes bytes)
 		{
 			this.Request.RequestParameters.Bytes(bytes);
 			return this;
@@ -287,7 +287,7 @@ namespace Nest
 	
 
 		///<summary>The unit in which to display byte values</summary>
-		public CatFielddataDescriptor Bytes(BytesOptions bytes)
+		public CatFielddataDescriptor Bytes(Bytes bytes)
 		{
 			this.Request.RequestParameters.Bytes(bytes);
 			return this;
@@ -467,7 +467,7 @@ namespace Nest
 	
 
 		///<summary>The unit in which to display byte values</summary>
-		public CatIndicesDescriptor Bytes(BytesOptions bytes)
+		public CatIndicesDescriptor Bytes(Bytes bytes)
 		{
 			this.Request.RequestParameters.Bytes(bytes);
 			return this;
@@ -778,7 +778,7 @@ namespace Nest
 	
 
 		///<summary>The unit in which to display byte values</summary>
-		public CatRecoveryDescriptor Bytes(BytesOptions bytes)
+		public CatRecoveryDescriptor Bytes(Bytes bytes)
 		{
 			this.Request.RequestParameters.Bytes(bytes);
 			return this;
@@ -1013,7 +1013,7 @@ namespace Nest
 	
 
 		///<summary>Specify the level of detail for returned information</summary>
-		public ClusterHealthDescriptor Level(LevelOptions level)
+		public ClusterHealthDescriptor Level(Level level)
 		{
 			this.Request.RequestParameters.Level(level);
 			return this;
@@ -1069,7 +1069,7 @@ namespace Nest
 		
 
 		///<summary>Wait until cluster is in a specific state</summary>
-		public ClusterHealthDescriptor WaitForStatus(WaitForStatusOptions wait_for_status)
+		public ClusterHealthDescriptor WaitForStatus(WaitForStatus wait_for_status)
 		{
 			this.Request.RequestParameters.WaitForStatus(wait_for_status);
 			return this;
@@ -1293,7 +1293,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CountDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public CountDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -1378,7 +1378,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateCountDescriptor<T,K> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PercolateCountDescriptor<T,K> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -1410,7 +1410,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public PercolateCountDescriptor<T,K> VersionType(VersionTypeOptions version_type)
+		public PercolateCountDescriptor<T,K> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;
@@ -1431,7 +1431,7 @@ namespace Nest
 	
 
 		///<summary>Specific write consistency setting for the operation</summary>
-		public DeleteDescriptor<T> Consistency(ConsistencyOptions consistency)
+		public DeleteDescriptor<T> Consistency(Consistency consistency)
 		{
 			this.Request.RequestParameters.Consistency(consistency);
 			return this;
@@ -1455,7 +1455,7 @@ namespace Nest
 		
 
 		///<summary>Specific replication type</summary>
-		public DeleteDescriptor<T> Replication(ReplicationOptions replication)
+		public DeleteDescriptor<T> Replication(Replication replication)
 		{
 			this.Request.RequestParameters.Replication(replication);
 			return this;
@@ -1487,7 +1487,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public DeleteDescriptor<T> VersionType(VersionTypeOptions version_type)
+		public DeleteDescriptor<T> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;
@@ -1516,7 +1516,7 @@ namespace Nest
 		
 
 		///<summary>Specific write consistency setting for the operation</summary>
-		public DeleteByQueryDescriptor<T> Consistency(ConsistencyOptions consistency)
+		public DeleteByQueryDescriptor<T> Consistency(Consistency consistency)
 		{
 			this.Request.RequestParameters.Consistency(consistency);
 			return this;
@@ -1524,7 +1524,7 @@ namespace Nest
 		
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperatorOptions default_operator)
+		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator)
 		{
 			this.Request.RequestParameters.DefaultOperator(default_operator);
 			return this;
@@ -1556,7 +1556,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -1564,7 +1564,7 @@ namespace Nest
 		
 
 		///<summary>Specific replication type</summary>
-		public DeleteByQueryDescriptor<T> Replication(ReplicationOptions replication)
+		public DeleteByQueryDescriptor<T> Replication(Replication replication)
 		{
 			this.Request.RequestParameters.Replication(replication);
 			return this;
@@ -1686,7 +1686,7 @@ namespace Nest
 		
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ExplainDescriptor DefaultOperator(DefaultOperatorOptions default_operator)
+		public ExplainDescriptor DefaultOperator(DefaultOperator default_operator)
 		{
 			this.Request.RequestParameters.DefaultOperator(default_operator);
 			return this;
@@ -1955,7 +1955,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public GetDescriptor<T> VersionType(VersionTypeOptions version_type)
+		public GetDescriptor<T> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;
@@ -2070,7 +2070,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public SourceDescriptor<T> VersionType(VersionTypeOptions version_type)
+		public SourceDescriptor<T> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;
@@ -2091,7 +2091,7 @@ namespace Nest
 	
 
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public IndexDescriptor<T> Consistency(ConsistencyOptions consistency)
+		public IndexDescriptor<T> Consistency(Consistency consistency)
 		{
 			this.Request.RequestParameters.Consistency(consistency);
 			return this;
@@ -2099,7 +2099,7 @@ namespace Nest
 		
 
 		///<summary>Explicit operation type</summary>
-		public IndexDescriptor<T> OpType(OpTypeOptions op_type)
+		public IndexDescriptor<T> OpType(OpType op_type)
 		{
 			this.Request.RequestParameters.OpType(op_type);
 			return this;
@@ -2123,7 +2123,7 @@ namespace Nest
 		
 
 		///<summary>Specific replication type</summary>
-		public IndexDescriptor<T> Replication(ReplicationOptions replication)
+		public IndexDescriptor<T> Replication(Replication replication)
 		{
 			this.Request.RequestParameters.Replication(replication);
 			return this;
@@ -2171,7 +2171,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public IndexDescriptor<T> VersionType(VersionTypeOptions version_type)
+		public IndexDescriptor<T> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;
@@ -2265,7 +2265,7 @@ namespace Nest
 		
 
 		///<summary>Format of the output</summary>
-		public AnalyzeDescriptor Format(FormatOptions format)
+		public AnalyzeDescriptor Format(Format format)
 		{
 			this.Request.RequestParameters.Format(format);
 			return this;
@@ -2369,7 +2369,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ClearCacheDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public ClearCacheDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2438,7 +2438,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CloseIndexDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public CloseIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2639,7 +2639,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndexExistsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndexExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2684,7 +2684,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesExistsAliasDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesExistsAliasDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2762,7 +2762,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesExistsTypeDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesExistsTypeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2829,7 +2829,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FlushDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public FlushDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2866,7 +2866,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetAliasesDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetAliasesDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2954,7 +2954,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesGetFieldMappingDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesGetFieldMappingDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3005,7 +3005,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetMappingDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetMappingDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3050,7 +3050,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetIndexSettingsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3132,7 +3132,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetWarmerDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetWarmerDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3193,7 +3193,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public OpenIndexDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public OpenIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3238,7 +3238,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public OptimizeDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public OptimizeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3374,7 +3374,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3419,7 +3419,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpdateSettingsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public UpdateSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3509,7 +3509,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both, in the search request to warm.</summary>
-		public PutWarmerDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PutWarmerDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3589,7 +3589,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public RefreshDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public RefreshDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3642,7 +3642,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SegmentsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SegmentsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3752,7 +3752,7 @@ namespace Nest
 		
 
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
-		public IndicesStatsDescriptor Level(LevelOptions level)
+		public IndicesStatsDescriptor Level(Level level)
 		{
 			this.Request.RequestParameters.Level(level);
 			return this;
@@ -3797,7 +3797,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesStatusDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesStatusDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3903,7 +3903,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -4274,7 +4274,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public MpercolateDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public MpercolateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -4301,7 +4301,7 @@ namespace Nest
 	
 
 		///<summary>Search operation type</summary>
-		public MultiSearchDescriptor SearchType(SearchTypeOptions search_type)
+		public MultiSearchDescriptor SearchType(SearchType search_type)
 		{
 			this.Request.RequestParameters.SearchType(search_type);
 			return this;
@@ -4442,9 +4442,9 @@ namespace Nest
 		
 
 		///<summary>The type to sample (default: cpu)</summary>
-		public NodesHotThreadsDescriptor TypeQueryString(TypeOptions type)
+		public NodesHotThreadsDescriptor ThreadType(ThreadType thread_type)
 		{
-			this.Request.RequestParameters.Type(type);
+			this.Request.RequestParameters.ThreadType(thread_type);
 			return this;
 		}
 		
@@ -4606,7 +4606,7 @@ namespace Nest
 		
 
 		///<summary>Return indices stats aggregated at node, index or shard level</summary>
-		public NodesStatsDescriptor Level(LevelOptions level)
+		public NodesStatsDescriptor Level(Level level)
 		{
 			this.Request.RequestParameters.Level(level);
 			return this;
@@ -4667,7 +4667,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateDescriptor<T,K> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PercolateDescriptor<T,K> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -4699,7 +4699,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public PercolateDescriptor<T,K> VersionType(VersionTypeOptions version_type)
+		public PercolateDescriptor<T,K> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;
@@ -4784,7 +4784,7 @@ namespace Nest
 		
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchDescriptor<T> DefaultOperator(DefaultOperatorOptions default_operator)
+		public SearchDescriptor<T> DefaultOperator(DefaultOperator default_operator)
 		{
 			this.Request.RequestParameters.DefaultOperator(default_operator);
 			return this;
@@ -4816,7 +4816,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SearchDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -4872,7 +4872,7 @@ namespace Nest
 		
 
 		///<summary>Search operation type</summary>
-		public SearchDescriptor<T> SearchType(SearchTypeOptions search_type)
+		public SearchDescriptor<T> SearchType(SearchType search_type)
 		{
 			this.Request.RequestParameters.SearchType(search_type);
 			return this;
@@ -4913,7 +4913,7 @@ namespace Nest
 			
 
 		///<summary>Specify suggest mode</summary>
-		public SearchDescriptor<T> SuggestMode(SuggestModeOptions suggest_mode)
+		public SearchDescriptor<T> SuggestMode(SuggestMode suggest_mode)
 		{
 			this.Request.RequestParameters.SuggestMode(suggest_mode);
 			return this;
@@ -4990,7 +4990,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchShardsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SearchShardsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -5033,7 +5033,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchTemplateDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SearchTemplateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -5065,7 +5065,7 @@ namespace Nest
 		
 
 		///<summary>Search operation type</summary>
-		public SearchTemplateDescriptor SearchType(SearchTypeOptions search_type)
+		public SearchTemplateDescriptor SearchType(SearchType search_type)
 		{
 			this.Request.RequestParameters.SearchType(search_type);
 			return this;
@@ -5328,7 +5328,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SuggestDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SuggestDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -5469,7 +5469,7 @@ namespace Nest
 	
 
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public UpdateDescriptor<T,K> Consistency(ConsistencyOptions consistency)
+		public UpdateDescriptor<T,K> Consistency(Consistency consistency)
 		{
 			this.Request.RequestParameters.Consistency(consistency);
 			return this;
@@ -5520,7 +5520,7 @@ namespace Nest
 		
 
 		///<summary>Specific replication type</summary>
-		public UpdateDescriptor<T,K> Replication(ReplicationOptions replication)
+		public UpdateDescriptor<T,K> Replication(Replication replication)
 		{
 			this.Request.RequestParameters.Replication(replication);
 			return this;
@@ -5584,7 +5584,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public UpdateDescriptor<T,K> VersionType(VersionTypeOptions version_type)
+		public UpdateDescriptor<T,K> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;

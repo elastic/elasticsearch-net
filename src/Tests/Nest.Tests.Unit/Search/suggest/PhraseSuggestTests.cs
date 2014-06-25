@@ -35,7 +35,7 @@ namespace Nest.Tests.Unit.Search.Suggest
         {
             var phraseSuggestDescriptor = new PhraseSuggestDescriptor<ElasticsearchProject>()
                 .Analyzer("body")
-                .DirectGenerator(m => m.OnField("body").SuggestMode(SuggestModeOptions.Always).MinWordLength(3));
+                .DirectGenerator(m => m.OnField("body").SuggestMode(SuggestMode.Always).MinWordLength(3));
 
             var json = TestElasticClient.Serialize(phraseSuggestDescriptor);
 

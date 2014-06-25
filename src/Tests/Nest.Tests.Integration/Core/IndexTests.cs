@@ -27,7 +27,7 @@ namespace Nest.Tests.Integration.Core
 			};
 
 			// Index the document
-			var indexResult = this._client.Index<ElasticsearchProject>(doc, i => i.OpType(OpTypeOptions.Create));
+			var indexResult = this._client.Index<ElasticsearchProject>(doc, i => i.OpType(OpType.Create));
 			indexResult.IsValid.Should().BeTrue();
 
 			// Grab the indexed document.
@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.AreEqual(doc.Name, foundDoc.Name);
 
 			// Now try to index the document again while using the Create Flag
-			var response = this._client.Index<ElasticsearchProject>(doc, i => i.OpType(OpTypeOptions.Create));
+			var response = this._client.Index<ElasticsearchProject>(doc, i => i.OpType(OpType.Create));
 
 			// Make sure the index request failed with HTTP status 409 since document with same id already exists.
 			Assert.False(response.Created);
@@ -61,7 +61,7 @@ namespace Nest.Tests.Integration.Core
 			};
 
 			// Index the document
-			var indexResult = this._clientNoRawResponse.Index<ElasticsearchProject>(doc, i => i.OpType(OpTypeOptions.Create));
+			var indexResult = this._clientNoRawResponse.Index<ElasticsearchProject>(doc, i => i.OpType(OpType.Create));
 			indexResult.IsValid.Should().BeTrue();
 
 			// Grab the indexed document.
@@ -75,7 +75,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.AreEqual(doc.Name, foundDoc.Name);
 
 			// Now try to index the document again while using the Create Flag
-			var response = this._clientNoRawResponse.Index<ElasticsearchProject>(doc, i => i.OpType(OpTypeOptions.Create));
+			var response = this._clientNoRawResponse.Index<ElasticsearchProject>(doc, i => i.OpType(OpType.Create));
 
 			// Make sure the index request failed with HTTP status 409 since document with same id already exists.
 			Assert.False(response.Created);

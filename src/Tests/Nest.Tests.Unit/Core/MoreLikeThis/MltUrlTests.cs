@@ -71,7 +71,7 @@ namespace Nest.Tests.Unit.Core.MoreLikeThis
 				.Id(1)
 				.MltFields(p => p.Country, p => p.Content)
 				.Search(s => s
-					.SearchType(SearchTypeOptions.DfsQueryAndFetch)
+					.SearchType(SearchType.DfsQueryAndFetch)
 					.Scroll("5m")
 				)
 			);

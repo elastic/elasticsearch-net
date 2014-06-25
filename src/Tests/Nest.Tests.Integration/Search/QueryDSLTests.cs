@@ -143,7 +143,7 @@ namespace Nest.Tests.Integration.Search
 
 			var results = this._client.Search<ElasticsearchProject>(s => s
 				.Query(q => q.MatchAll())
-				.SuggestTerm("mySuggest", m => m.SuggestMode(SuggestModeOptions.Always).Text(wrongCountry).Size(1).OnField("country"))
+				.SuggestTerm("mySuggest", m => m.SuggestMode(SuggestMode.Always).Text(wrongCountry).Size(1).OnField("country"))
 			);
 
 			Assert.NotNull(results);

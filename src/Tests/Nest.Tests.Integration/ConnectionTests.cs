@@ -93,7 +93,7 @@ namespace Nest.Tests.Integration
 		public void ConnectUsingRawClientComplexCall()
 		{
 			var result = this._client.Raw.ClusterHealth(s => s
-				.Level(LevelOptions.Indices)
+				.Level(Level.Indices)
 				.Local(true)
 				.WaitForActiveShards(1)
 			);
