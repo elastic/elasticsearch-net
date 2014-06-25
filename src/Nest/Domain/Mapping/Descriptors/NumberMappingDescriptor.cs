@@ -21,7 +21,7 @@ namespace Nest
 
 		public NumberMappingDescriptor<T> Type(NumberType type)
 		{
-			var stringType = Enum.GetName(typeof (NumberType), type);
+			var stringType = type.GetStringValue();
 			this._Mapping.Type = stringType;
 			return this;
 		}

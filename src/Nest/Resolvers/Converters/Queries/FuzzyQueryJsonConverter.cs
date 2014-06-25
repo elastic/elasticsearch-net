@@ -58,7 +58,7 @@ namespace Nest
 			fq.Transpositions = GetPropValue<bool?>(jo, "transpositions");
 			var rewriteString = GetPropValue<string>(jo, "rewrite");
 			if (!rewriteString.IsNullOrEmpty())
-				fq.Rewrite = Enum.Parse(typeof(RewriteMultiTerm), rewriteString) as RewriteMultiTerm?;
+				fq.Rewrite = rewriteString.ToEnum<RewriteMultiTerm>();
 			
 			if (fq is IStringFuzzyQuery)
 			{

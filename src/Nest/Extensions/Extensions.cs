@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -13,6 +14,8 @@ namespace Nest
 {
 	internal static class Extensions
 	{
+		internal static INestSerializer Serializer = new NestSerializer(new ConnectionSettings());
+
 		internal static string GetStringValue(this Enum enumValue)
 		{
 			var type = enumValue.GetType();
@@ -25,11 +28,23 @@ namespace Nest
 				return string.Empty;
 		}
 
+		
+		public static T? ToEnum<T>(this string str) where T : struct
+		{
+			var enumType = typeof(T);
+			foreach (var name in Enum.GetNames(enumType))
+			{
+				var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
+				if (enumMemberAttribute.Value == str) return (T)Enum.Parse(enumType, name);
+			}
+			//throw exception or whatever handling you want or
+			return null;
+		}
 		internal static string Utf8String(this byte[] bytes)
 		{
 			return bytes == null ? null : Encoding.UTF8.GetString(bytes);
 		}
-	
+
 		internal static byte[] Utf8Bytes(this string s)
 		{
 			return s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
@@ -101,7 +116,7 @@ namespace Nest
 		{
 			return string.IsNullOrEmpty(value);
 		}
-		
+
 
 		internal static void ForEachWithIndex<T>(this IEnumerable<T> enumerable, Action<T, int> handler)
 		{
@@ -110,7 +125,7 @@ namespace Nest
 				handler(item, idx++);
 		}
 
-		
+
 		internal static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> xs)
 		{
 			if (xs == null)
