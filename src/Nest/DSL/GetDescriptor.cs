@@ -11,7 +11,6 @@ using Nest.Domain;
 namespace Nest
 {
 	public partial class GetDescriptor<T> : DocumentPathDescriptorBase<GetDescriptor<T>,T, GetRequestParameters>
-		, IPathInfo<GetRequestParameters>
 		where T : class
 	{
 
@@ -25,13 +24,9 @@ namespace Nest
 			return this.Preference("_local");
 		}
 
-		ElasticsearchPathInfo<GetRequestParameters> IPathInfo<GetRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetRequestParameters> pathInfo)
 		{
-			var pathInfo = this.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
-
-			return pathInfo;
-
 		}
 	}
 }

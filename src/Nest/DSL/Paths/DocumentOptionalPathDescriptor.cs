@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
 using Nest.Resolvers;
 
 namespace Nest
@@ -20,7 +15,7 @@ namespace Nest
 	/// if one of the parameters is not explicitly specified this will fall back to the defaults for type 
 	/// this version won't throw if any of the parts are inferred to be empty<para>T</para>
 	/// </summary>
-	public class DocumentOptionalPathDescriptorBase<TDescriptor, T, TParameters> : BasePathDescriptor<TDescriptor>
+	public abstract class DocumentOptionalPathDescriptorBase<TDescriptor, T, TParameters> : BasePathDescriptor<TDescriptor, TParameters>
 		where TDescriptor : DocumentOptionalPathDescriptorBase<TDescriptor, T, TParameters>, new()
 		where T : class
 		where TParameters : FluentRequestParameters<TParameters>, new()
@@ -78,19 +73,18 @@ namespace Nest
 			this._Object = @object;
 			return (TDescriptor)this;
 		}
-		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
-		{
+
+		protected override void SetRouteParameters(
+			IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		{	
 			var inferrer = new ElasticInferrer(settings);
 			var index = this._Index != null ? inferrer.IndexName(this._Index) : inferrer.IndexName<T>();
 			var type = this._Type != null ? inferrer.TypeName(this._Type) : inferrer.TypeName<T>();
 			var id = this._Id ?? inferrer.Id(this._Object);
-			
-			var pathInfo = base.ToPathInfo(queryString);
+		
 			pathInfo.Index = index;
 			pathInfo.Type = type;
 			pathInfo.Id = id;
-			return pathInfo;
 		}
-
 	}
 }

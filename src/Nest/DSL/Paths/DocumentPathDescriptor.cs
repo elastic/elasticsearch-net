@@ -19,21 +19,17 @@ namespace Nest
 	/// </pre>
 	/// if one of the parameters is not explicitly specified this will fall back to the defaults for type <para>T</para>
 	/// </summary>
-	public class DocumentPathDescriptorBase<TDescriptor, T, TParameters> : DocumentOptionalPathDescriptorBase<TDescriptor, T, TParameters>
+	public abstract class DocumentPathDescriptorBase<TDescriptor, T, TParameters> : DocumentOptionalPathDescriptorBase<TDescriptor, T, TParameters>
 		where TDescriptor : DocumentPathDescriptorBase<TDescriptor, T, TParameters>, new()
 		where T : class
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-
-		internal override ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, queryString);
-			
+			base.SetRouteParameters(settings, pathInfo);
 			pathInfo.Index.ThrowIfNullOrEmpty("index");
 			pathInfo.Type.ThrowIfNullOrEmpty("type");
 			pathInfo.Id.ThrowIfNullOrEmpty("id");
-
-			return pathInfo;
 		}
 
 	}

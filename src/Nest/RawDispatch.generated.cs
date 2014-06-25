@@ -634,7 +634,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> ClusterPutSettingsDispatch<T>(ElasticsearchPathInfo<ClusterPutSettingsRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> ClusterPutSettingsDispatch<T>(ElasticsearchPathInfo<ClusterSettingsRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -649,7 +649,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> ClusterPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterPutSettingsRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> ClusterPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterSettingsRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{

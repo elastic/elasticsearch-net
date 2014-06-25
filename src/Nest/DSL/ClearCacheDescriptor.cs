@@ -12,16 +12,12 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesClearCache")]
-	public partial class ClearCacheDescriptor : 
-		IndicesOptionalPathDescriptor<ClearCacheDescriptor, ClearCacheRequestParameters>
-		, IPathInfo<ClearCacheRequestParameters>
+	public partial class ClearCacheDescriptor : IndicesOptionalPathDescriptor<ClearCacheDescriptor, ClearCacheRequestParameters>
 	{
-		ElasticsearchPathInfo<ClearCacheRequestParameters> IPathInfo<ClearCacheRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
-		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 
-			return pathInfo;
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClearCacheRequestParameters> pathInfo)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 		}
 	}
 }

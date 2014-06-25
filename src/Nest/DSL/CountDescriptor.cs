@@ -6,9 +6,7 @@ using Nest.Resolvers.Converters;
 namespace Nest
 {
 	[DescriptorFor("Count")]
-	public partial class CountDescriptor<T> 
-		:	QueryPathDescriptorBase<CountDescriptor<T>, T, CountRequestParameters>
-		, IPathInfo<CountRequestParameters> 
+	public partial class CountDescriptor<T> :QueryPathDescriptorBase<CountDescriptor<T>, T, CountRequestParameters>
 		where T : class
 	{
 		[JsonProperty("query")]
@@ -20,15 +18,12 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<CountRequestParameters> IPathInfo<CountRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			var source = this._QueryString.GetQueryStringValue<string>("source");
+			var source = this.Request.RequestParameters.GetQueryStringValue<string>("source");
 			pathInfo.HttpMethod = !source.IsNullOrEmpty() 
 				? PathInfoHttpMethod.GET
 				: PathInfoHttpMethod.POST;
-				
-			return pathInfo;
 		}
 	}
 }

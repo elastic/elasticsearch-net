@@ -144,6 +144,7 @@ namespace CodeGeneration.LowLevelClient
 			string generic;
 			if (KnownDescriptors.TryGetValue(method.DescriptorType, out generic))
 				method.DescriptorTypeGeneric = generic;
+			else method.Unmapped = true;
 
 			try
 			{

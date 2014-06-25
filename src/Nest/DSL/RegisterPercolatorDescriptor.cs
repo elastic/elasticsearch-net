@@ -13,7 +13,6 @@ namespace Nest
 {
 
 	public class RegisterPercolatorDescriptor<T> : IndexNamePathDescriptor<RegisterPercolatorDescriptor<T>, IndexRequestParameters>
- 		, IPathInfo<IndexRequestParameters> 
 		where T : class
 	{
 		internal FluentDictionary<string, object> _RequestBody
@@ -52,19 +51,16 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<IndexRequestParameters> IPathInfo<IndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
 		{
 			//registering a percolator in elasticsearch < 1.0 is actually indexing a document in a 
 			//special _percolator index where the passed index is actually a type
 			//the name is actually the id, we rectify that here
 
-			var pathInfo = base.ToPathInfo(settings, new IndexRequestParameters());
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			pathInfo.Index = pathInfo.Index;
 			pathInfo.Id = pathInfo.Name;
 			pathInfo.Type = ".percolator";
-
-			return pathInfo;
 		}
 	}
 }

@@ -13,8 +13,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[DescriptorFor("ClearScroll")]
-	public partial class ClearScrollDescriptor : BasePathDescriptor<ClearScrollDescriptor>
-		, IPathInfo<ClearScrollRequestParameters>
+	public partial class ClearScrollDescriptor : BasePathDescriptor<ClearScrollDescriptor, ClearScrollRequestParameters>
 	{
 		internal string _ScrollId { get; set; }
 
@@ -27,17 +26,14 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<ClearScrollRequestParameters> IPathInfo<ClearScrollRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClearScrollRequestParameters> pathInfo)
 		{
 			if (this._ScrollId.IsNullOrEmpty())
 				throw new DslException("missing ScrollId()");
 
-			var pathInfo = new ElasticsearchPathInfo<ClearScrollRequestParameters>();
-			pathInfo.RequestParameters = this._QueryString;
 			pathInfo.ScrollId = this._ScrollId;
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
 			
-			return pathInfo;
 		}
 	}
 }

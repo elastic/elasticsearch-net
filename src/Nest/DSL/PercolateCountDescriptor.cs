@@ -13,7 +13,6 @@ namespace Nest
 {
 	[DescriptorFor("CountPercolate")]
 	public partial class PercolateCountDescriptor<T,K> : IndexTypePathTypedDescriptor<PercolateCountDescriptor<T, K>, PercolateCountRequestParameters, T> 
-		, IPathInfo<PercolateCountRequestParameters> 
 		where T : class
 		where K : class
 	{
@@ -43,12 +42,10 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<PercolateCountRequestParameters> IPathInfo<PercolateCountRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PercolateCountRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			//.NET does not like sending data using get so we use POST
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			return pathInfo;
 		}
 	}
 }

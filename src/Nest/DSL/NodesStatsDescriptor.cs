@@ -12,7 +12,6 @@ namespace Nest
 {
 	[DescriptorFor("NodesStats")]
 	public partial class NodesStatsDescriptor : NodeIdOptionalDescriptor<NodesStatsDescriptor, NodesStatsRequestParameters>
-		, IPathInfo<NodesStatsRequestParameters>
 	{
 		private IEnumerable<NodesStatsMetric> _Metrics { get; set; }
 		private IEnumerable<NodesStatsIndexMetric> _IndexMetrics { get; set; }
@@ -28,15 +27,13 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<NodesStatsRequestParameters> IPathInfo<NodesStatsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesStatsRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 			if (this._Metrics != null)
 				pathInfo.Metric = this._Metrics.Cast<Enum>().GetStringValue();
 			if (this._IndexMetrics != null)
 				pathInfo.IndexMetric = this._IndexMetrics.Cast<Enum>().GetStringValue();
-			return pathInfo;
 		}
 
 	}

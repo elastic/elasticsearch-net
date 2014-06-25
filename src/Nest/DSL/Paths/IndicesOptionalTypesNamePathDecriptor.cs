@@ -20,7 +20,7 @@ namespace Nest
 	/// </pre>
 	/// {types} is optional, {indices} is too but needs an explicit AllIndices().
 	/// </summary>
-	public class IndicesOptionalTypesNamePathDecriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+	public abstract class IndicesOptionalTypesNamePathDecriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor, TParameters>
 		where TDescriptor : IndicesOptionalTypesNamePathDecriptor<TDescriptor, TParameters>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
@@ -114,7 +114,7 @@ namespace Nest
 			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
 			var inferrer = new ElasticInferrer(settings);
 			if (!this._AllIndices.HasValue && this._Indices == null)
@@ -132,11 +132,9 @@ namespace Nest
 				? inferrer.TypeNames(this._Types)
 				: null;
 
-			var pathInfo = base.ToPathInfo(queryString);
 			pathInfo.Index = indices;
 			pathInfo.Type = types;
 			pathInfo.Name = this._Name;
-			return pathInfo;
 		}
 
 	}

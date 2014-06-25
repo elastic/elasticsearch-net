@@ -18,7 +18,7 @@ namespace Nest
 	/// </pre>
 	/// index is optional but AllIndices() needs to be explicitly specified for it to be optional
 	/// </summary>
-	public class IndexOptionalPathDescriptorBase<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+	public abstract class IndexOptionalPathDescriptorBase<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor, TParameters>
 		where TDescriptor : IndexOptionalPathDescriptorBase<TDescriptor, TParameters>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
@@ -50,7 +50,7 @@ namespace Nest
 			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
 			var inferrer = new ElasticInferrer(settings);
 			if (!this._AllIndices.HasValue && this._Index == null)
@@ -60,9 +60,7 @@ namespace Nest
 			if (!this._AllIndices.GetValueOrDefault(false))
 				index = inferrer.IndexName(this._Index);
 
-			var pathInfo = base.ToPathInfo(queryString);
 			pathInfo.Index = index;
-			return pathInfo;
 		}
 
 	}

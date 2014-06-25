@@ -15,7 +15,7 @@ namespace Nest
 		internal IEnumerable<TypeNameMarker> _Types { get; set; }
 		internal string _WarmerName { get; set; }
 
-		internal SearchDescriptorBase _SearchDescriptor { get; set; }
+		internal ISearchRequest _SearchDescriptor { get; set; }
 
 		/// <summary>
 		/// The name of the warmer

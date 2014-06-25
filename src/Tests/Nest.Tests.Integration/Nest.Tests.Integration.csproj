@@ -92,12 +92,9 @@
     <Compile Include="Aggregations\MetricAggregationTests.cs" />
     <Compile Include="Aggregations\TermsAggregationTests.cs" />
     <Compile Include="Aggregations\ParseResponseItemsTests.cs" />
-<<<<<<< HEAD
-=======
+
     <Compile Include="Cluster\GetSettingsTests.cs" />
-    <Compile Include="Cluster\PutSettingsTests.cs" />
->>>>>>> 1362591... added download nuget script to the solution
-    <Compile Include="Connection\Failover\SniffTests.cs" />
+    <Compile Include="Cluster\PutSettingsTests.cs" />    <Compile Include="Connection\Failover\SniffTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />

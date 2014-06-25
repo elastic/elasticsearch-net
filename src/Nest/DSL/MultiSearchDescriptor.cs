@@ -12,9 +12,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[DescriptorFor("Msearch")]
-	public partial class MultiSearchDescriptor 
-		: FixedIndexTypePathDescriptor<MultiSearchDescriptor, MultiSearchRequestParameters>
-		, IPathInfo<MultiSearchRequestParameters>
+	public partial class MultiSearchDescriptor : FixedIndexTypePathDescriptor<MultiSearchDescriptor, MultiSearchRequestParameters>
 	{
 		private readonly ElasticInferrer _inferrer;
 
@@ -43,11 +41,9 @@ namespace Nest
 			return this.Search(Guid.NewGuid().ToString(), searchSelector);
 		}
 
-		ElasticsearchPathInfo<MultiSearchRequestParameters> IPathInfo<MultiSearchRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiSearchRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			return pathInfo;
 		}
 	}
 }

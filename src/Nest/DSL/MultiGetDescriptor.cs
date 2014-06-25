@@ -14,7 +14,6 @@ namespace Nest
 
 	[DescriptorFor("Mget")]
 	public partial class MultiGetDescriptor : FixedIndexTypePathDescriptor<MultiGetDescriptor, MultiGetRequestParameters>
-		, IPathInfo<MultiGetRequestParameters>
 	{
 		internal readonly IList<ISimpleGetDescriptor> _GetOperations = new List<ISimpleGetDescriptor>();
 		private readonly IConnectionSettingsValues _settings;
@@ -69,11 +68,10 @@ namespace Nest
 			return this;
 
 		}
-		ElasticsearchPathInfo<MultiGetRequestParameters> IPathInfo<MultiGetRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo)
 		{
-			var pathInfo = this.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST; // no data in GETS in the .net world
-			return pathInfo;
 		}
 	}
 }

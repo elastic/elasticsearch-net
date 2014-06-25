@@ -2,6 +2,7 @@
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IAcknowledgedResponse : IResponse
 	{
 		bool Acknowledged { get; }

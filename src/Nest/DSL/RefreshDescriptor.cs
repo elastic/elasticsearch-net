@@ -14,14 +14,10 @@ namespace Nest
 {
 	[DescriptorFor("IndicesRefresh")]
 	public partial class RefreshDescriptor : IndicesOptionalPathDescriptor<RefreshDescriptor, RefreshRequestParameters>
-		, IPathInfo<RefreshRequestParameters>
 	{
-		ElasticsearchPathInfo<RefreshRequestParameters> IPathInfo<RefreshRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<RefreshRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			
-			return pathInfo;
 		}
 	}
 }

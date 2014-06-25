@@ -4591,14 +4591,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> ClusterPutSettings<T>(object body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> ClusterPutSettings<T>(object body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/settings".F();
 			BaseRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new ClusterPutSettingsRequestParameters());
+				requestParams = requestParameters(new ClusterSettingsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 				
@@ -4625,14 +4625,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(object body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(object body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/settings".F();
 			BaseRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new ClusterPutSettingsRequestParameters());
+				requestParams = requestParameters(new ClusterSettingsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 				
@@ -4661,14 +4661,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> ClusterPutSettings(object body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> ClusterPutSettings(object body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/settings".F();
 			BaseRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new ClusterPutSettingsRequestParameters());
+				requestParams = requestParameters(new ClusterSettingsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 				
@@ -4697,14 +4697,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterPutSettingsAsync(object body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterPutSettingsAsync(object body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/settings".F();
 			BaseRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new ClusterPutSettingsRequestParameters());
+				requestParams = requestParameters(new ClusterSettingsRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
 				
@@ -23211,7 +23211,7 @@ namespace Elasticsearch.Net
 				requestParams = requestParameters(new InfoRequestParameters());
 				ToNameValueCollection(requestParams);
 			}
-				 
+				
 
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(

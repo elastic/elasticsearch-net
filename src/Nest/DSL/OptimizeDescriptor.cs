@@ -14,14 +14,10 @@ namespace Nest
 {
 	[DescriptorFor("IndicesOptimize")]
 	public partial class OptimizeDescriptor : IndicesOptionalPathDescriptor<OptimizeDescriptor, OptimizeRequestParameters>
-		, IPathInfo<OptimizeRequestParameters>
 	{
-		ElasticsearchPathInfo<OptimizeRequestParameters> IPathInfo<OptimizeRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<OptimizeRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			
-			return pathInfo;
 		}
 	}
 }

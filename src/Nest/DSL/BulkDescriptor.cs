@@ -14,9 +14,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	
-	public partial class BulkDescriptor :
-		FixedIndexTypePathDescriptor<BulkDescriptor, BulkRequestParameters>
-		, IPathInfo<BulkRequestParameters>
+	public partial class BulkDescriptor : FixedIndexTypePathDescriptor<BulkDescriptor, BulkRequestParameters>
 	{
 		internal IList<BaseBulkOperation> _Operations = new SynchronizedCollection<BaseBulkOperation>();
 
@@ -128,11 +126,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<BulkRequestParameters> IPathInfo<BulkRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<BulkRequestParameters> pathInfo)
 		{
-			var pathInfo = this.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			return pathInfo;
 		}
 	}
 }

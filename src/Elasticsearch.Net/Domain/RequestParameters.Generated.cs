@@ -1138,12 +1138,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
 	///</pre>
 	///</summary>
-	public class ClusterPutSettingsRequestParameters : FluentRequestParameters<ClusterPutSettingsRequestParameters> 
+	public class ClusterSettingsRequestParameters : FluentRequestParameters<ClusterSettingsRequestParameters> 
 	{
 		
 		internal bool _flat_settings { get; set; }
 		///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterPutSettingsRequestParameters FlatSettings(bool flat_settings)
+		public ClusterSettingsRequestParameters FlatSettings(bool flat_settings)
 		{
 			this._flat_settings = flat_settings;
 			this.AddQueryString("flat_settings", this._flat_settings);

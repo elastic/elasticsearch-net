@@ -12,9 +12,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[DescriptorFor("Mlt")]
-	public partial class MoreLikeThisDescriptor<T> 
-		: DocumentPathDescriptorBase<MoreLikeThisDescriptor<T>, T, MoreLikeThisRequestParameters>
-		, IPathInfo<MoreLikeThisRequestParameters> 
+	public partial class MoreLikeThisDescriptor<T> : DocumentPathDescriptorBase<MoreLikeThisDescriptor<T>, T, MoreLikeThisRequestParameters>
 		where T : class
 	{
 		internal ISearchRequest _Search { get; set; }
@@ -30,12 +28,9 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<MoreLikeThisRequestParameters> IPathInfo<MoreLikeThisRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MoreLikeThisRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = this._Search == null ? PathInfoHttpMethod.GET : PathInfoHttpMethod.POST;
-
-			return pathInfo;
 		}
 	}
 }
