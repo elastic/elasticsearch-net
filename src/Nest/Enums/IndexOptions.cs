@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Runtime.Serialization;
 
 namespace Nest
 {
 	public enum IndexOptions
 	{
-		docs,
-		freqs,
-		positions
+		[EnumMember(Value="docs")]
+		Docs,
+		[EnumMember(Value = "freqs")]
+		Freqs,
+		[EnumMember(Value = "positions")]
+		Positions
 	}
-
-	
 }

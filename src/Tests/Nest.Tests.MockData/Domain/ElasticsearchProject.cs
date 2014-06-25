@@ -46,7 +46,7 @@ namespace Nest.Tests.MockData.Domain
 
 		public int LocScriptField { get; set; }
 
-		[ElasticProperty(NumericType=NumericType.Long)]
+		[ElasticProperty(NumericType=NumberType.Long)]
 		public int StupidIntIWantAsLong { get; set; }
 
 		public string MyAttachment { get; set; }

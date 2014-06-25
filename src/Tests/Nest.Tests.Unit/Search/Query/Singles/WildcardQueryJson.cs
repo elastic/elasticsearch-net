@@ -41,7 +41,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.From(0)
 				.Size(10)
 				.Query(q => q
-					.Wildcard(f => f.Name, "elasticsearch.*", Boost: 1.2, Rewrite: RewriteMultiTerm.scoring_boolean)
+					.Wildcard(f => f.Name, "elasticsearch.*", Boost: 1.2, Rewrite: RewriteMultiTerm.ScoringBoolean)
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 

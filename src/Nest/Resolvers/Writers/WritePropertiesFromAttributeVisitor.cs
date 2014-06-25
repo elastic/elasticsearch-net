@@ -32,10 +32,10 @@ namespace Nest.Resolvers.Writers {
                 this._jsonWriter.WritePropertyName(this._propertyName);
                 this._jsonWriter.WriteStartObject();
             }
-            if (att.NumericType != NumericType.Default)
+            if (att.NumericType != NumberType.Default)
             {
                 this._jsonWriter.WritePropertyName("type");
-                string numericType = Enum.GetName(typeof (NumericType), att.NumericType);
+                string numericType = Enum.GetName(typeof (NumberType), att.NumericType);
                 this._jsonWriter.WriteValue(numericType.ToLowerInvariant());
             }
             else
@@ -78,7 +78,7 @@ namespace Nest.Resolvers.Writers {
                 this._jsonWriter.WritePropertyName("index");
                 this._jsonWriter.WriteValue(Enum.GetName(typeof (FieldIndexOption), att.Index));
             }
-            if (att.TermVector != TermVectorOption.no)
+            if (att.TermVector != TermVectorOption.No)
             {
                 this._jsonWriter.WritePropertyName("term_vector");
                 this._jsonWriter.WriteValue(Enum.GetName(typeof (TermVectorOption), att.TermVector));
@@ -130,10 +130,10 @@ namespace Nest.Resolvers.Writers {
                 this._jsonWriter.WritePropertyName("sort");
                 this._jsonWriter.WriteStartObject();
 
-                if (att.NumericType != NumericType.Default)
+                if (att.NumericType != NumberType.Default)
                 {
                     this._jsonWriter.WritePropertyName("type");
-                    string numericType = Enum.GetName(typeof (NumericType), att.NumericType);
+                    string numericType = Enum.GetName(typeof (NumberType), att.NumericType);
                     this._jsonWriter.WriteValue(numericType.ToLowerInvariant());
                 }
                 else

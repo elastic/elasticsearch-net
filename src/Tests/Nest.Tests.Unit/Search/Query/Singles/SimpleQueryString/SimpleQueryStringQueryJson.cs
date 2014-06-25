@@ -21,7 +21,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.SimpleQueryString
 							.Add(f=>f.Country, 5.0)
 						)
 						.Flags("ALL")
-						.DefaultOperator(Operator.and)
+						.DefaultOperator(Operator.And)
 						.LowercaseExpendedTerms(true)
 						.Locale("ROOT")
 					)

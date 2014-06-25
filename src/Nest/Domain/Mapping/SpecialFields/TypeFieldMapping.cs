@@ -12,7 +12,7 @@ namespace Nest
 		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
 		public bool? Store { get; internal set; }
 
-		public TypeFieldMapping SetIndexed(NonStringIndexOption index = NonStringIndexOption.analyzed)
+		public TypeFieldMapping SetIndexed(NonStringIndexOption index = NonStringIndexOption.Analyzed)
 		{
 			this.Index = index;
 			return this;

@@ -14,7 +14,7 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 				f=>f.GeoDistanceRange,
 				f=>f.GeoDistanceRange(p=>p.Origin, d=>d
 					.Location(Lat: 40, Lon: -70)
-					.Distance(From: 12, To: 200, Unit: GeoUnit.km)
+					.Distance(From: 12, To: 200, Unit: GeoUnit.Kilometers)
 					.FromExclusive()
 					.ToExclusive()
 					.DistanceType(GeoDistanceType.arc)
@@ -26,7 +26,7 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 
 			var from = (double)(geoDistanceRangeFilter.From);
 			from.Should().Be(12);
-			geoDistanceRangeFilter.Unit.Should().Be(GeoUnit.km);
+			geoDistanceRangeFilter.Unit.Should().Be(GeoUnit.Kilometers);
 			geoDistanceRangeFilter.DistanceType.Should().Be(GeoDistanceType.arc);
 		}
 

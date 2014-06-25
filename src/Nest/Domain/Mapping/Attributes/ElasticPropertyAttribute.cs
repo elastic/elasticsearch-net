@@ -35,7 +35,7 @@ namespace Nest
 		/// <summary>
 		/// Defaults to float so be sure to set this correctly!
 		/// </summary>
-		public NumericType NumericType { get; set; }
+		public NumberType NumericType { get; set; }
 		public int PrecisionStep { get; set; }
 
 		/// <summary>
@@ -47,7 +47,7 @@ namespace Nest
 		{
 			//make sure we match ES's defaults
 			this.Boost = 1;
-			this.TermVector = TermVectorOption.no;
+			this.TermVector = TermVectorOption.No;
 			this.Index = FieldIndexOption.analyzed;
 
 			this.IncludeInAll = true;

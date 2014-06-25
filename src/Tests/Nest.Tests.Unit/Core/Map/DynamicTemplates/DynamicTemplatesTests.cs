@@ -74,7 +74,7 @@ namespace Nest.Tests.Unit.Core.Map.DynamicTemplates
 						.Name("numbers")
 						.Match("nu_*")
 						.MatchMappingType("integer")
-						.Mapping(tm => tm.Number(sm => sm.Type(NumberType.integer).NullValue(4)))
+						.Mapping(tm => tm.Number(sm => sm.Type(NumberType.Integer).NullValue(4)))
 					)
 				)
 			);
