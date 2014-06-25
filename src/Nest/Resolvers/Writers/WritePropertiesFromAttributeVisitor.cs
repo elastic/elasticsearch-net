@@ -73,7 +73,7 @@ namespace Nest.Resolvers.Writers {
                 this._jsonWriter.WritePropertyName("format");
                 this._jsonWriter.WriteValue(att.DateFormat);
             }
-            if (att.Index != FieldIndexOption.analyzed)
+            if (att.Index != FieldIndexOption.Analyzed)
             {
                 this._jsonWriter.WritePropertyName("index");
                 this._jsonWriter.WriteValue(Enum.GetName(typeof (FieldIndexOption), att.Index));
@@ -144,7 +144,7 @@ namespace Nest.Resolvers.Writers {
                 if (att.SortAnalyzer.IsNullOrEmpty())
                 {
                     this._jsonWriter.WritePropertyName("index");
-                    this._jsonWriter.WriteValue(Enum.GetName(typeof(FieldIndexOption), FieldIndexOption.not_analyzed));
+                    this._jsonWriter.WriteValue(Enum.GetName(typeof(FieldIndexOption), FieldIndexOption.NotAnalyzed));
                 }
                 else
                 {

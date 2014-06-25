@@ -48,7 +48,7 @@ namespace Nest
 			//make sure we match ES's defaults
 			this.Boost = 1;
 			this.TermVector = TermVectorOption.no;
-			this.Index = FieldIndexOption.analyzed;
+			this.Index = FieldIndexOption.Analyzed;
 
 			this.IncludeInAll = true;
 			this.PrecisionStep = 4;

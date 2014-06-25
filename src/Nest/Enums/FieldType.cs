@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Nest
@@ -13,63 +14,78 @@ namespace Nest
 		/// <summary>
 		/// Default. Will be defined by the type of property return.
 		/// </summary>
-		none,
+		[EnumMember(Value = "none")]
+		None,
 		/// <summary>
 		/// Geo based points.
 		/// </summary>
-		geo_point,
+		[EnumMember(Value = "geo_point")]
+		GeoPoint,
 		/// <summary>
 		/// The attachment type allows to index different “attachment” type field (encoded as base64), for example, microsoft office formats, open document formats, ePub, HTML...
 		/// </summary>
-		attachment,
+		[EnumMember(Value = "attachment")]
+		Attachment,
 		/// <summary>
 		/// An ip mapping type allows to store ipv4 addresses in a numeric form allowing to easily sort, and range query it (using ip values).
 		/// </summary>
-		ip,
+		[EnumMember(Value = "ip")]
+		Ip,
 		/// <summary>
 		/// The binary type is a base64 representation of binary data that can be stored in the index.
 		/// </summary>
-		binary,
+		[EnumMember(Value = "binary")]
+		Binary,
 		/// <summary>
 		/// Text based string type.
 		/// </summary>
-		string_type,
+		[EnumMember(Value = "string")]
+		String,
 		/// <summary>
 		/// Integer type.
 		/// </summary>
-		integer_type,
+		[EnumMember(Value = "integer")]
+		Integer,
 		/// <summary>
 		/// Long type.
 		/// </summary>
-		long_type,
+		[EnumMember(Value = "long")]
+		Long,
 		/// <summary>
 		/// Float type.
 		/// </summary>
-		float_type,
+		[EnumMember(Value = "float")]
+		Float,
 		/// <summary>
 		/// Double type.
 		/// </summary>
-		double_type,
+		[EnumMember(Value = "double")]
+		Double,
 		/// <summary>
 		/// Date type.
 		/// </summary>
-		date_type,
+		[EnumMember(Value = "date")]
+		Date,
 		/// <summary>
 		/// Boolean type.
 		/// </summary>
-		boolean_type,
+		[EnumMember(Value = "boolean")]
+		Boolean,
 		/// <summary>
 		/// Completion type.
 		/// </summary>
-		completion,
-    /// <summary>
-    /// Nested type.
-    /// </summary>
-    nested,
+		[EnumMember(Value = "completion")]
+		Completion,
+		/// <summary>
+		/// Nested type.
+		/// </summary>
+		[EnumMember(Value = "nested")]
+		Nested,
 		/// <summary>
 		/// object type, no need to set this manually if its not a value type this will be set.
 		/// Only set this if you need to force a value type to be mapped to an elasticsearch object type.
 		/// </summary>
-		@object
+		[EnumMember(Value = "object")]
+		Object
 	}
 }

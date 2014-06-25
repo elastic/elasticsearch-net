@@ -42,9 +42,8 @@ namespace Nest
 		[JsonProperty(PropertyName = "regex")]
 		string Regex { get; set; }
 
-		[JsonConverter(typeof (StringEnumConverter))]
 		[JsonProperty(PropertyName = "regex_flags")]
-		EsRegexFlags? RegexFlags { get; set; }
+		string RegexFlags { get; set; }
 
 		[JsonProperty(PropertyName = "script")]
 		string Script { get; set; }
@@ -64,7 +63,7 @@ namespace Nest
 		public IEnumerable<string> Exclude { get; set; }
 		public string ExecutionHint { get; set; }
 		public string Regex { get; set; }
-		public EsRegexFlags? RegexFlags { get; set; }
+		public string RegexFlags { get; set; }
 		public string Script { get; set; }
 		public string ScriptField { get; set; }
 	}
@@ -92,7 +91,7 @@ namespace Nest
 
 		string ITermFacetRequest.Regex { get; set; }
 
-		EsRegexFlags? ITermFacetRequest.RegexFlags { get; set; }
+		string ITermFacetRequest.RegexFlags { get; set; }
 
 		string ITermFacetRequest.Script { get; set; }
 
@@ -147,10 +146,10 @@ namespace Nest
 			Self.AllTerms = true;
 			return this;
 		}
-		public TermFacetDescriptor<T> Regex(string regex, EsRegexFlags? Flags = null)
+		public TermFacetDescriptor<T> Regex(string regex, string flags = null)
 		{
 			Self.Regex = regex;
-			Self.RegexFlags = Flags;
+			Self.RegexFlags = flags;
 			return this;
 		}
 

@@ -84,7 +84,7 @@ namespace Nest.Tests.Unit.Search.Facets
             .Order(TermsOrder.reverse_count)
             .Exclude("term1", "term2")
             .AllTerms()
-            .Regex(@"\s+", EsRegexFlags.DOTALL)
+            .Regex(@"\s+", "DOTALL")
             .Script("term + 'aaa'")
             .ScriptField("_source.my_field")
           );
@@ -100,7 +100,7 @@ namespace Nest.Tests.Unit.Search.Facets
           .Order(TermsOrder.reverse_count)
           .Exclude("term1", "term2")
           .AllTerms()
-          .Regex(@"\s+", EsRegexFlags.DOTALL)
+          .Regex(@"\s+","DOTALL")
           .Script("term + 'aaa'")
           .ScriptField("_source.my_field")
         );

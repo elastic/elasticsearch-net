@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Nest
 {
 	public enum ChildScoreType
 	{
-		none,
-		avg,
-		sum,
-		max
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "avg")]
+		Average,
+		[EnumMember(Value = "sum")]
+		Sum,
+		[EnumMember(Value = "max")]
+		Max
 	}
 }

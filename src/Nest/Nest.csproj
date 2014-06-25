@@ -164,6 +164,7 @@
     <Compile Include="DSL\Filter\PrefixFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\RawFilter.cs" />
     <Compile Include="DSL\Query\BoolQueryExtensions.cs" />
+    <Compile Include="DSL\Query\Functions\FieldValueFactorModifier.cs" />
     <Compile Include="DSL\Query\PlainQuery.cs" />
     <Compile Include="DSL\Query\QueryContainer.cs" />
     <Compile Include="DSL\Rescore\RescoreQueryDescriptor.cs" />
@@ -326,7 +327,7 @@
     <Compile Include="DSL\Paths\DocumentPathDescriptor.cs" />
     <Compile Include="DSL\MultiGet\SimpleGetDescriptor.cs" />
     <Compile Include="DSL\_Descriptors.generated.cs" />
-    <Compile Include="Enums\ExecutionHint.cs" />
+    <Compile Include="Enums\TermsAggregationExecutionHint.cs" />
     <Compile Include="Enums\GeoDistanceType.cs" />
     <Compile Include="Enums\GeoHashPrecision.cs" />
     <Compile Include="Exception\DispatchException.cs" />
@@ -393,7 +394,6 @@
     <Compile Include="DSL\Query\SubDescriptors\IExternalFieldDeclarationDescriptor.cs" />
     <Compile Include="DSL\Query\MultiMatchQueryDescriptor.cs" />
     <Compile Include="ElasticClient-State.cs" />
-    <Compile Include="Enums\ClusterStateInfo.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Resolvers\Converters\AnalysisSettingsConverter.cs" />
     <Compile Include="Resolvers\Converters\AnalyzerCollectionConverter.cs" />
@@ -602,7 +602,6 @@
     <Compile Include="DSL\Search\SortFieldDescriptor.cs" />
     <Compile Include="DSL\Search\SortGeoDistanceDescriptor.cs" />
     <Compile Include="DSL\Search\SortScriptDescriptor.cs" />
-    <Compile Include="Enums\ComparatorType.cs" />
     <Compile Include="Enums\RewriteMultiTerm.cs" />
     <Compile Include="Enums\HealthLevel.cs" />
     <Compile Include="Enums\HealthStatus.cs" />
@@ -616,8 +615,6 @@
     <Compile Include="Enums\ScoreMode.cs" />
     <Compile Include="Enums\SearchType.cs" />
     <Compile Include="Enums\Lang.cs" />
-    <Compile Include="Enums\DateHistogramComparatorType.cs" />
-    <Compile Include="Enums\DistanceUnit.cs" />
     <Compile Include="Enums\HistogramComparatorType.cs" />
     <Compile Include="Enums\Occur.cs" />
     <Compile Include="Enums\SortOrder.cs" />
@@ -627,7 +624,6 @@
     <Compile Include="Enums\TopChildrenScore.cs" />
     <Compile Include="Enums\Operator.cs" />
     <Compile Include="Enums\GeoOptimizeBBox.cs" />
-    <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="Enums\GeoUnit.cs" />
     <Compile Include="DSL\Facets\GeoDistanceFacetDescriptor.cs" />
     <Compile Include="DSL\Facets\TermsStatsFacetDescriptor.cs" />
@@ -641,7 +637,6 @@
     <Compile Include="DSL\Facets\RangeFacetDescriptor.cs" />
     <Compile Include="DSL\Facets\FacetContainer.cs" />
     <Compile Include="DSL\Facets\TermsOrder.cs" />
-    <Compile Include="DSL\Facets\EsRegexFlags.cs" />
     <Compile Include="DSL\Filter\BoolFilterDescriptor.cs" />
     <Compile Include="Enums\GeoExecution.cs" />
     <Compile Include="DSL\Filter\GeoBoundingBoxFilterDescriptor.cs" />
@@ -755,7 +750,6 @@
     <Compile Include="Domain\Hit\ExplanationDetail.cs" />
     <Compile Include="Domain\Hit\Hit.cs" />
     <Compile Include="Domain\Hit\HitsMetaData.cs" />
-    <Compile Include="Enums\ClearCacheOptions.cs" />
     <Compile Include="Enums\StatsInfo.cs" />
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
@@ -815,7 +809,6 @@
     <Compile Include="DSL\Query\WildcardQueryDescriptor.cs" />
     <Compile Include="ElasticClient-Search.cs" />
     <Compile Include="Resolvers\ElasticContractResolver.cs" />
-    <Compile Include="Enums\Consistency.cs" />
     <Compile Include="Enums\FacetTypes.cs" />
     <Compile Include="Enums\Replication.cs" />
     <Compile Include="Exception\DslException.cs" />
