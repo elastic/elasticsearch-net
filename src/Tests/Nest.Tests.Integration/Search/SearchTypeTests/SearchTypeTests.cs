@@ -4,7 +4,7 @@ using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
-namespace Nest.Tests.Integration.Search.SearchType
+namespace Nest.Tests.Integration.Search.SearchTypeTests
 {
 	[TestFixture]
 	public class SearchTypeTests : IntegrationTests
@@ -19,7 +19,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.Size(10)
 				.MatchAll()
 				.Fields(f=>f.Name)
-				.SearchType(SearchTypeOptions.QueryAndFetch)
+				.SearchType(SearchType.QueryAndFetch)
 				
 			);
 			Assert.True(queryResults.IsValid);
@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.Size(10)
 				.MatchAll()
 				.Fields(f => f.Name)
-				.SearchType(SearchTypeOptions.QueryThenFetch)
+				.SearchType(SearchType.QueryThenFetch)
 
 			);
 			Assert.True(queryResults.IsValid);
@@ -48,7 +48,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.Size(10)
 				.MatchAll()
 				.Fields(f => f.Name)
-				.SearchType(SearchTypeOptions.DfsQueryAndFetch)
+				.SearchType(SearchType.DfsQueryAndFetch)
 
 			);
 			Assert.True(queryResults.IsValid);
@@ -62,7 +62,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.Size(10)
 				.MatchAll()
 				.Fields(f => f.Name)
-				.SearchType(SearchTypeOptions.DfsQueryThenFetch)
+				.SearchType(SearchType.DfsQueryThenFetch)
 
 			);
 			Assert.True(queryResults.IsValid);

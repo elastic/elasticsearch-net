@@ -17,7 +17,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Language("as")
 					.MaxBoost("maxboost")
 					.Query(qq=>Query1)
-					.ScoreMode(ScoreMode.avg)
+					.ScoreMode(ScoreMode.Average)
 					.Filters(ff=>ff
 						.Filter(sf=>Filter1)
 						.Boost(2.3)
@@ -29,7 +29,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				);
 			q.Lang.Should().Be("as");
 			q.MaxBoost.Should().Be("maxboost");
-			q.ScoreMode.Should().Be(ScoreMode.avg);
+			q.ScoreMode.Should().Be(ScoreMode.Average);
 			
 			AssertIsTermQuery(q.Query, Query1);
 

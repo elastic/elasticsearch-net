@@ -18,10 +18,10 @@ namespace Nest.Resolvers.Converters
 			}
 			switch (v.Value)
 			{
-				case DynamicMappingOption.strict:
+				case DynamicMappingOption.Strict:
 					writer.WriteValue("strict");
 					break;
-				case DynamicMappingOption.ignore:
+				case DynamicMappingOption.Ignore:
 					writer.WriteValue(false);
 					break;
 				default:
@@ -40,11 +40,11 @@ namespace Nest.Resolvers.Converters
 			switch (sv)
 			{
 				case "false":
-					return DynamicMappingOption.ignore;
+					return DynamicMappingOption.Ignore;
 				case "strict":
-					return DynamicMappingOption.strict;
+					return DynamicMappingOption.Strict;
 				default:
-					return DynamicMappingOption.allow;
+					return DynamicMappingOption.Allow;
 
 			}
 		}

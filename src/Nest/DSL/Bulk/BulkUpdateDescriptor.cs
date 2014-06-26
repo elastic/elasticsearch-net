@@ -168,7 +168,7 @@ namespace Nest
 		}
 
 
-		public BulkUpdateDescriptor<T, K> VersionType(VersionTypeOptions versionType)
+		public BulkUpdateDescriptor<T, K> VersionType(VersionType versionType)
 		{
 			this._VersionType = versionType.GetStringValue();
 			return this;

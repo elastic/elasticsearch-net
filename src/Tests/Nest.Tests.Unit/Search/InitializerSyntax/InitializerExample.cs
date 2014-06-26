@@ -27,7 +27,7 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 			{
 				Field = "prefix_field", 
 				Value = "prefi", 
-				Rewrite = RewriteMultiTerm.constant_score_boolean
+				Rewrite = RewriteMultiTerm.ConstantScoreBoolean
 			};
 
 			var result = _client.Search<ElasticsearchProject>(new SearchRequest
@@ -134,7 +134,7 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 						{
 							Field = Property.Path<ElasticsearchProject>(p=>p.Name),
 							Size = 10,
-							ExecutionHint = TermsAggregationExecutionHint.ordinals,
+							ExecutionHint = TermsAggregationExecutionHint.Ordinals,
 						},
 						Aggregations = new Dictionary<string, IAggregationContainer>
 						{

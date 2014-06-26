@@ -16,16 +16,16 @@ namespace Nest.Tests.Unit.Core.Bulk
 			var result = this._client.Bulk(b => b
 				.Index<ElasticsearchProject>(i => i
 					.Object(new ElasticsearchProject {Id = 2})
-					.VersionType(VersionTypeOptions.Force))
+					.VersionType(VersionType.Force))
 				.Create<ElasticsearchProject>(i => i
 					.Object(new ElasticsearchProject { Id = 3 })
-					.VersionType(VersionTypeOptions.Internal))
+					.VersionType(VersionType.Internal))
 				.Delete<ElasticsearchProject>(i => i
 					.Object(new ElasticsearchProject { Id = 4 })
-					.VersionType(VersionTypeOptions.ExternalGte))
+					.VersionType(VersionType.ExternalGte))
 				.Update<ElasticsearchProject, object>(i => i
 					.Object(new ElasticsearchProject { Id = 3 })
-					.VersionType(VersionTypeOptions.External)
+					.VersionType(VersionType.External)
 					.Document(new { name = "NEST"})
 				)
 			);

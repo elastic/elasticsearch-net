@@ -179,21 +179,7 @@ namespace Nest
 		{
 			if (descriptor._SearchType != null)
 			{
-				switch (descriptor._SearchType.Value)
-				{
-					case SearchTypeOptions.Count:
-						return "count";
-					case SearchTypeOptions.DfsQueryThenFetch:
-						return "dfs_query_then_fetch";
-					case SearchTypeOptions.DfsQueryAndFetch:
-						return "dfs_query_and_fetch";
-					case SearchTypeOptions.QueryThenFetch:
-						return "query_then_fetch";
-					case SearchTypeOptions.QueryAndFetch:
-						return "query_and_fetch";
-					case SearchTypeOptions.Scan:
-						return "scan";
-				}
+				return descriptor._SearchType.Value.GetStringValue();
 			}
 			IRequest<MultiSearchRequestParameters> request = multiSearchDescriptor;
 			return request.RequestParameters.GetQueryStringValue<string>("search_type");

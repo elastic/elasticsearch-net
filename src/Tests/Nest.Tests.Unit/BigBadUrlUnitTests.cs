@@ -98,7 +98,7 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/_template/mytemplate", c => c.GetTemplate("mytemplate"));
 			Do("GET", "/_all/_warmer/mywarmer", c => c.GetWarmer("mywarmer"));
 			Do("GET", "/mycustomindex/_warmer/mywarmer", c => c.GetWarmer("mywarmer", g => g.Index("mycustomindex")));
-			Do("GET", "/_cluster/health?level=indices", c => c.ClusterHealth(h => h.Level(LevelOptions.Indices)));
+			Do("GET", "/_cluster/health?level=indices", c => c.ClusterHealth(h => h.Level(Level.Indices)));
 			Do("GET", "/_cluster/health", c => c.ClusterHealth());
 			Do("PUT", "/mydefaultindex/doc/2", c => c.Index(new Doc { Id = "2" }));
 			Do("POST", "/mydefaultindex/doc", c => c.Index(new Doc { Name = "2" }));

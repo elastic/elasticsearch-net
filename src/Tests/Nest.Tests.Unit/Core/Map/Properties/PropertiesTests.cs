@@ -19,15 +19,15 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.Similarity("mysimilarity")
 						.IndexName("my_crazy_name_i_want_in_lucene")
 						.IncludeInAll()
-						.Index(FieldIndexOption.analyzed)
+						.Index(FieldIndexOption.Analyzed)
 						.IndexAnalyzer("standard")
-						.IndexOptions(IndexOptions.positions)
+						.IndexOptions(IndexOptions.Positions)
 						.NullValue("my_special_null_value")
 						.OmitNorms()
 						.PositionOffsetGap(1)
 						.SearchAnalyzer("standard")
 						.Store()
-						.TermVector(TermVectorOption.with_positions_offsets)
+						.TermVector(TermVectorOption.WithPositionsOffsets)
 						.Boost(1.1)
 						.CopyTo(p => p.Content, p => p.Country)
 					)
@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 					.Number(s => s
 						.Name(p => p.LOC)
 						.IndexName("lines_of_code")
-						.Type(NumberType.@integer)
+						.Type(NumberType.Integer)
 						.NullValue(0)
 						.Boost(2.0)
 						.IgnoreMalformed()
@@ -117,10 +117,10 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 				.Properties(props => props
 					.Attachment(s => s
 						.Name(p => p.MyAttachment)
-						.FileField(fs => fs.Index(FieldIndexOption.not_analyzed).Store())
-						.TitleField(fs => fs.Index(FieldIndexOption.not_analyzed).Store(false))
-						.MetadataField("contents", fs => fs.Index(FieldIndexOption.not_analyzed).Store(false))
-						.AuthorField(fs => fs.Index(FieldIndexOption.analyzed).Store(false))
+						.FileField(fs => fs.Index(FieldIndexOption.NotAnalyzed).Store())
+						.TitleField(fs => fs.Index(FieldIndexOption.NotAnalyzed).Store(false))
+						.MetadataField("contents", fs => fs.Index(FieldIndexOption.NotAnalyzed).Store(false))
+						.AuthorField(fs => fs.Index(FieldIndexOption.Analyzed).Store(false))
 						.DateField(fs => fs.Store(false).IncludeInAll())
 					)
 				)
@@ -139,7 +139,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.IncludeInAll()
 						.Path("full")
 						.Properties(pprops => pprops
-							.String(ps => ps.Name(p => p.FirstName).Index(FieldIndexOption.not_analyzed))
+							.String(ps => ps.Name(p => p.FirstName).Index(FieldIndexOption.NotAnalyzed))
 						//etcetera
 						)
 					)
@@ -161,7 +161,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.IncludeInRoot()
 						.Path("full")
 						.Properties(pprops => pprops
-							.String(ps => ps.Name(p => p.FirstName).Index(FieldIndexOption.not_analyzed))
+							.String(ps => ps.Name(p => p.FirstName).Index(FieldIndexOption.NotAnalyzed))
 						//etcetera
 						)
 					)
@@ -177,8 +177,8 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 					.MultiField(s => s
 						.Name(p => p.Name)
 						.Fields(pprops => pprops
-							.String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
-							.String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.analyzed))
+							.String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.NotAnalyzed))
+							.String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.Analyzed))
 						)
 					)
 				)
@@ -195,8 +195,8 @@ namespace Nest.Tests.Unit.Core.Map.Properties
                         .Name(p => p.Name)
                         .Path(MultiFieldMappingPath.Full)
                         .Fields(pprops => pprops
-                            .String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
-                            .String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.analyzed))
+                            .String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.NotAnalyzed))
+                            .String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.Analyzed))
                         )
                     )
                 )
@@ -213,8 +213,8 @@ namespace Nest.Tests.Unit.Core.Map.Properties
                         .Name(p => p.Name)
                         .Path(MultiFieldMappingPath.JustName)
                         .Fields(pprops => pprops
-                            .String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
-                            .String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.analyzed))
+                            .String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.NotAnalyzed))
+                            .String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.Analyzed))
                         )
                     )
                 )
@@ -280,7 +280,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 				.Properties(props => props
 					.GeoShape(s => s
 						.Name(p => p.MyGeoShape)
-						.Tree(GeoTree.geohash)
+						.Tree(GeoTree.Geohash)
 						.TreeLevels(2)
 						.DistanceErrorPercentage(0.025)
 					)
@@ -306,10 +306,10 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 				.Properties(props => props
 					.Number(nmd => nmd
 						.Name("id")
-						.Type(NumberType.integer))
+						.Type(NumberType.Integer))
 					.Number(nmd => nmd
 						.Name("value")
-						.Type(NumberType.integer)
+						.Type(NumberType.Integer)
 						.DocValues())));
 			this.JsonEquals(result2.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
 		}

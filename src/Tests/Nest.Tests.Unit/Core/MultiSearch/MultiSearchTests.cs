@@ -64,11 +64,11 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 					.MatchAll()
 					.Preference("_primary")
 					.Routing("customvalue1")
-					.SearchType(SearchTypeOptions.DfsQueryAndFetch))
+					.SearchType(SearchType.DfsQueryAndFetch))
 				.Search<Person>(s => s.MatchAll()
 					.Preference("_primary_first")
 					.Routing("customvalue2")
-					.SearchType(SearchTypeOptions.Count))
+					.SearchType(SearchType.Count))
 			);
 			var status = result.ConnectionStatus;
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);

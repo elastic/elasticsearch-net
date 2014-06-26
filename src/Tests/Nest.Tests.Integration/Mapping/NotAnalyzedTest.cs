@@ -21,7 +21,7 @@ namespace Nest.Tests.Integration.Mapping
 			var typeMapping = typeMappingResponse.Mapping;
 			var mapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(mapping);
-			Assert.AreEqual(FieldIndexOption.not_analyzed, mapping.Index);
+			Assert.AreEqual(FieldIndexOption.NotAnalyzed, mapping.Index);
 			
 			var indexResult = this._client.Index(new ElasticsearchProject
 			{
@@ -47,7 +47,7 @@ namespace Nest.Tests.Integration.Mapping
 				.AddMapping<ElasticsearchProject>(m => m
 					.MapFromAttributes()
 					.Properties(pp=>pp
-						.String(pps=>pps.Name(p=>p.Country).Index(FieldIndexOption.analyzed))
+						.String(pps=>pps.Name(p=>p.Country).Index(FieldIndexOption.Analyzed))
 					)
 				)
 			);

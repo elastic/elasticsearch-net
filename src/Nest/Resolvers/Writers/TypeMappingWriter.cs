@@ -192,7 +192,7 @@ namespace Nest.Resolvers.Writers
 				fieldType = att.Type;
 			}
 
-			if (fieldType == null || fieldType == FieldType.none)
+			if (fieldType == null || fieldType == FieldType.None)
 			{
 				fieldType = this.GetFieldTypeFromType(p.PropertyType);
 			}
@@ -209,33 +209,33 @@ namespace Nest.Resolvers.Writers
 		{
 			switch (fieldType)
 			{
-				case FieldType.geo_point:
+				case FieldType.GeoPoint:
 					return "geo_point";
-				case FieldType.attachment:
+				case FieldType.Attachment:
 					return "attachment";
-				case FieldType.ip:
+				case FieldType.Ip:
 					return "ip";
-				case FieldType.binary:
+				case FieldType.Binary:
 					return "binary";
-				case FieldType.string_type:
+				case FieldType.String:
 					return "string";
-				case FieldType.integer_type:
+				case FieldType.Integer:
 					return "integer";
-				case FieldType.long_type:
+				case FieldType.Long:
 					return "long";
-				case FieldType.float_type:
+				case FieldType.Float:
 					return "float";
-				case FieldType.double_type:
+				case FieldType.Double:
 					return "double";
-				case FieldType.date_type:
+				case FieldType.Date:
 					return "date";
-				case FieldType.boolean_type:
+				case FieldType.Boolean:
 					return "boolean";
-				case FieldType.completion:
+				case FieldType.Completion:
 					return "completion";
-        case FieldType.nested:
+        case FieldType.Nested:
           return "nested";
-				case FieldType.@object:
+				case FieldType.Object:
 					return "object";
 				default:
 					return null;
@@ -252,29 +252,29 @@ namespace Nest.Resolvers.Writers
 			propertyType = GetUnderlyingType(propertyType);
 
 			if (propertyType == typeof(string))
-				return FieldType.string_type;
+				return FieldType.String;
 
 			if (propertyType.IsValueType)
 			{
 				switch (propertyType.Name)
 				{
 					case "Int32":
-						return FieldType.integer_type;
+						return FieldType.Integer;
 					case "Int64":
-						return FieldType.long_type;
+						return FieldType.Long;
 					case "Single":
-						return FieldType.float_type;
+						return FieldType.Float;
 					case "Decimal":
 					case "Double":
-						return FieldType.double_type;
+						return FieldType.Double;
 					case "DateTime":
-						return FieldType.date_type;
+						return FieldType.Date;
 					case "Boolean":
-						return FieldType.boolean_type;
+						return FieldType.Boolean;
 				}
 			}
 			else
-				return FieldType.@object;
+				return FieldType.Object;
 			return null;
 		}
 

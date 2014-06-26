@@ -14,8 +14,7 @@ namespace Elasticsearch.Net.Connection
 	/// </summary>
 	public class ConnectionConfiguration : 
 		ConnectionConfiguration<ConnectionConfiguration>, 
-		IConnectionConfiguration<ConnectionConfiguration>, 
-		IHideObjectMembers
+		IConnectionConfiguration<ConnectionConfiguration> 
 	{
 		/// <summary>
 		/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
@@ -293,6 +292,7 @@ namespace Elasticsearch.Net.Connection
             this._connectionStatusHandler = handler;
             return (T)this;
         }
+
 	}
 }
 

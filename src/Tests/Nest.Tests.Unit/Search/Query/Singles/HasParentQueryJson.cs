@@ -16,7 +16,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					.HasParent<Person>(fz => fz
 						.Query(qq=>qq.Term(f=>f.FirstName, "john"))
 						.Scope("my_scope")
-						.Score(ParentScoreType.score)
+						.Score(ParentScoreType.Score)
                    )
             );
 			var json = TestElasticClient.Serialize(s);

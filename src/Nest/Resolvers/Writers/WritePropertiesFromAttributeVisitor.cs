@@ -32,10 +32,10 @@ namespace Nest.Resolvers.Writers {
                 this._jsonWriter.WritePropertyName(this._propertyName);
                 this._jsonWriter.WriteStartObject();
             }
-            if (att.NumericType != NumericType.Default)
+            if (att.NumericType != NumberType.Default)
             {
                 this._jsonWriter.WritePropertyName("type");
-                string numericType = Enum.GetName(typeof (NumericType), att.NumericType);
+                var numericType = att.NumericType.GetStringValue();
                 this._jsonWriter.WriteValue(numericType.ToLowerInvariant());
             }
             else
@@ -73,15 +73,15 @@ namespace Nest.Resolvers.Writers {
                 this._jsonWriter.WritePropertyName("format");
                 this._jsonWriter.WriteValue(att.DateFormat);
             }
-            if (att.Index != FieldIndexOption.analyzed)
+            if (att.Index != FieldIndexOption.Analyzed)
             {
                 this._jsonWriter.WritePropertyName("index");
-                this._jsonWriter.WriteValue(Enum.GetName(typeof (FieldIndexOption), att.Index));
+                this._jsonWriter.WriteValue(att.Index.GetStringValue());
             }
-            if (att.TermVector != TermVectorOption.no)
+            if (att.TermVector != TermVectorOption.No)
             {
                 this._jsonWriter.WritePropertyName("term_vector");
-                this._jsonWriter.WriteValue(Enum.GetName(typeof (TermVectorOption), att.TermVector));
+                this._jsonWriter.WriteValue(att.TermVector.GetStringValue());
             }
             if (att.OmitNorms)
             {
@@ -130,10 +130,10 @@ namespace Nest.Resolvers.Writers {
                 this._jsonWriter.WritePropertyName("sort");
                 this._jsonWriter.WriteStartObject();
 
-                if (att.NumericType != NumericType.Default)
+                if (att.NumericType != NumberType.Default)
                 {
                     this._jsonWriter.WritePropertyName("type");
-                    string numericType = Enum.GetName(typeof (NumericType), att.NumericType);
+                    string numericType = att.NumericType.GetStringValue();
                     this._jsonWriter.WriteValue(numericType.ToLowerInvariant());
                 }
                 else
@@ -144,7 +144,7 @@ namespace Nest.Resolvers.Writers {
                 if (att.SortAnalyzer.IsNullOrEmpty())
                 {
                     this._jsonWriter.WritePropertyName("index");
-                    this._jsonWriter.WriteValue(Enum.GetName(typeof(FieldIndexOption), FieldIndexOption.not_analyzed));
+                    this._jsonWriter.WriteValue(FieldIndexOption.NotAnalyzed.GetStringValue());
                 }
                 else
                 {

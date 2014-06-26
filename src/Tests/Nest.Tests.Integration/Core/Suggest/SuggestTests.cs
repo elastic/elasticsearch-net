@@ -18,7 +18,7 @@ namespace Nest.Tests.Integration.Core.Suggest
 
 			var suggestResults = _client.Suggest<ElasticsearchProject>(s => s
 				.Term("mySuggest", m => m
-					.SuggestMode(SuggestModeOptions.Always)
+					.SuggestMode(SuggestMode.Always)
 					.Text(wrongCountry)
 					.Size(1)
 					.OnField("country")

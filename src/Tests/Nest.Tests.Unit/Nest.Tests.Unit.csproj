@@ -374,7 +374,7 @@
     <Compile Include="Search\Query\InsideBoolCalls\InsideBoolCallsTests.cs" />
     <Compile Include="Search\ScriptFields\ScriptFieldTests.cs" />
     <Compile Include="Search\SearchOptions\SearchOptionTests.cs" />
-    <Compile Include="Search\SearchType\ScriptFieldTests.cs" />
+    <Compile Include="Search\SearchTypeTests\ScriptFieldTests.cs" />
     <Compile Include="Internals\Serialize\SerializeTests.cs" />
     <Compile Include="Search\Source\SourceTests.cs" />
     <Compile Include="Search\Sorting\FunctionScoreTests.cs" />
@@ -950,7 +950,7 @@
     <None Include="Search\Query\UpdateQuery\FilteredQueryCombinesUsingStatic.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\SearchType\SearchTypeDoesNotPolluteQueryObject.json">
+    <None Include="Search\SearchTypeTests\SearchTypeDoesNotPolluteQueryObject.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Internals\Serialize\SimpleClassUsesCamelCase.json">

@@ -18,13 +18,13 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Fuzziness(0.8)
 					.MaxExpansions(2)
 					.OnFields(p=>p.Name,p=>p.MyGeoShape)
-					.Operator(Operator.or)
+					.Operator(Operator.Or)
 					.PrefixLength(2)
 					.Query("querytext")
-					.Rewrite(RewriteMultiTerm.top_terms_N)
+					.Rewrite(RewriteMultiTerm.TopTermsN)
 					.Slop(2)
 					.TieBreaker(2.0)
-					.Type(TextQueryType.BEST_FIELDS)
+					.Type(TextQueryType.BestFields)
 					)
 				);
 			q.Analyzer.Should().Be("my-analyzer");
@@ -33,13 +33,13 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Fuzziness.Should().Be(0.8);
 			q.MaxExpansions.Should().Be(2);
 			q.Fields.Should().BeEquivalentTo(new [] { "name", "myGeoShape"});
-			q.Operator.Should().Be(Operator.or);
+			q.Operator.Should().Be(Operator.Or);
 			q.PrefixLength.Should().Be(2);
 			q.Query.Should().Be("querytext");
-			q.Rewrite.Should().Be(RewriteMultiTerm.top_terms_N);
+			q.Rewrite.Should().Be(RewriteMultiTerm.TopTermsN);
 			q.Slop.Should().Be(2);
 			q.TieBreaker.Should().Be(2.0);
-			q.Type.Should().Be(TextQueryType.BEST_FIELDS);
+			q.Type.Should().Be(TextQueryType.BestFields);
 		}
 	}
 }

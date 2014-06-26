@@ -1,15 +1,21 @@
-﻿// ReSharper disable InconsistentNaming
-// ReSharper disable CheckNamespace
+﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
 namespace Nest
 {
+	[JsonConverter(typeof(StringEnumConverter))]
     public enum TextQueryType
     {
-        BEST_FIELDS,
-        MOST_FIELDS,
-        CROSS_FIELDS,
-        PHRASE,
-        PHRASE_PREFIX
+		[EnumMember(Value = "best_fields")]
+        BestFields,
+		[EnumMember(Value = "most_fields")]
+        MostFields,
+		[EnumMember(Value = "cross_fields")]
+        CrossFields,
+		[EnumMember(Value = "phrase")]
+        Phrase,
+		[EnumMember(Value = "phrase_prefix")]
+        PhrasePrefix
     }
 }
-// ReSharper restore CheckNamespace
-// ReSharper restore InconsistentNaming

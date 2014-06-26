@@ -27,7 +27,7 @@ namespace Nest.Tests.Unit.Core.Bulk
 		{
 			var result = this._client.Bulk(b => b
 				.Refresh()
-				.Consistency(ConsistencyOptions.Quorum)
+				.Consistency(Consistency.Quorum)
 				.Index<ElasticsearchProject>(i => i.Object(new ElasticsearchProject {Id = 2}))
 				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 3 }))
 				.Delete<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 4 }))

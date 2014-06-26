@@ -58,7 +58,7 @@ namespace Nest
 					.From(0)
 					.Take(100)
 					.Query(this._reindexDescriptor._QuerySelector ?? (q=>q.MatchAll()))
-					.SearchType(SearchTypeOptions.Scan)
+					.SearchType(SearchType.Scan)
 					.Scroll(scroll)
 				);
 			if (searchResult.Total <= 0)

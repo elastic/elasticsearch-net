@@ -27,7 +27,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 				case null:
 					return "string";
 				case "enum":
-					return paramName.ToPascalCase() + "Options";
+					return paramName.ToPascalCase();
 				default:
 					return this.Type;
 			}
