@@ -10,7 +10,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		[Test]
 		public void TestTermQuery()
 		{
-			var results = this._client.Search<dynamic>(s=>s
+			var results = this.Client.Search<dynamic>(s=>s
 				.Index(ElasticsearchConfiguration.DefaultIndex)
 				.Type("elasticsearchprojects")
 				.From(0)

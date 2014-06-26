@@ -38,14 +38,14 @@ namespace Nest.Tests.Integration.Reproduce
 				var post = new Post() { Id = 12 + i, Name = "tdd" };
 				list.Add(post);
 			}
-			this._client.IndexMany(list, index, "post");
+			this.Client.IndexMany(list, index, "post");
 
 			//indexing is NRT so issueing a search 
 			//right after indexing might not return the documents just yet.
-			var refreshResult = this._client.Refresh(i=>i.Index(index));
+			var refreshResult = this.Client.Refresh(i=>i.Index(index));
 			Assert.True(refreshResult.IsValid);
 			    
-			var results = this._client.Search<Post>(s => s
+			var results = this.Client.Search<Post>(s => s
 				.Index(index)
 				//by default nest will infer the typename for Post
 				//by lowercasing it and pluralizing it

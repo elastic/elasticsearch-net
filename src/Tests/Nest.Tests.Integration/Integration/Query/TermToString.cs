@@ -23,14 +23,14 @@ namespace Nest.Tests.Integration.Integration.Query
 		{
 			_LookFor = NestTestData.Session.Single<ElasticsearchProject>().Get();
 			_LookFor.Name = "one two three four";
-			var status = this._client.Index(_LookFor, i=>i.Refresh()).ConnectionStatus;
+			var status = this.Client.Index(_LookFor, i=>i.Refresh()).ConnectionStatus;
 			Assert.True(status.Success, status.ResponseRaw.Utf8String());
 		}
 
 		[Test]
 		public void IntToStringTest()
 		{
-			var results = _client.Search<ElasticsearchProject>(s => s
+			var results = Client.Search<ElasticsearchProject>(s => s
 				.Query(q => q
 					.Term(p => p.LOC, _LookFor.LOC)
 				)
@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		[Test]
 		public void DoubleToStringTest()
 		{
-			var results = _client.Search<ElasticsearchProject>(s => s
+			var results = Client.Search<ElasticsearchProject>(s => s
 				.Query(q => q
 					.Term(p => p.DoubleValue, _LookFor.DoubleValue)
 				)
@@ -52,7 +52,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		[Test]
 		public void FloatToStringTest()
 		{
-			var results = _client.Search<ElasticsearchProject>(s => s
+			var results = Client.Search<ElasticsearchProject>(s => s
 				.Query(q => q
 					.Term(p => p.FloatValue, _LookFor.FloatValue)
 					)
@@ -63,7 +63,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		[Test]
 		public void LongToStringTest()
 		{
-			var results = _client.Search<ElasticsearchProject>(s => s
+			var results = Client.Search<ElasticsearchProject>(s => s
 				.Query(q => q
 					.Term(p => p.LongValue, _LookFor.LongValue)
 					)
@@ -74,7 +74,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		public void DateTimeToStringTest()
 		{
 			//this should serialize to ISO NOT simply datetime.tostring()!
-			var results = _client.Search<ElasticsearchProject>(s => s
+			var results = Client.Search<ElasticsearchProject>(s => s
 				.Query(q => q
 					.Term(p => p.StartedOn, _LookFor.StartedOn)
 					)
@@ -86,7 +86,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		public void BoolToStringTests()
 		{
 			//this should serialize to ISO NOT simply datetime.tostring()!
-			var results = _client.Search<ElasticsearchProject>(s => s
+			var results = Client.Search<ElasticsearchProject>(s => s
 				.Query(q => q
 					.Term(p => p.BoolValue, _LookFor.BoolValue)
 					)

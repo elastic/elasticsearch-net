@@ -13,14 +13,14 @@ namespace Nest.Tests.Integration.Core.ClearScroll
 		[Test]
 		public void ClearScroll()
 		{
-			var searchResults = this._client.Search<ElasticsearchProject>(s => s.Scroll("1m").SearchType(SearchTypeOptions.Scan));
+			var searchResults = this.Client.Search<ElasticsearchProject>(s => s.Scroll("1m").SearchType(SearchTypeOptions.Scan));
 			var validScrollId = searchResults.ScrollId;
 			validScrollId.Should().NotBeNullOrWhiteSpace();
 
-			var clearResponse = this._client.ClearScroll(cs => cs.ScrollId(validScrollId));
+			var clearResponse = this.Client.ClearScroll(cs => cs.ScrollId(validScrollId));
 			clearResponse.IsValid.Should().BeTrue();
 
-			var bogusClearResponse = this._client.ClearScroll(cs => cs.ScrollId("asdasdadasdasd"));
+			var bogusClearResponse = this.Client.ClearScroll(cs => cs.ScrollId("asdasdadasdasd"));
 			bogusClearResponse.IsValid.Should().BeFalse();
 		}
 

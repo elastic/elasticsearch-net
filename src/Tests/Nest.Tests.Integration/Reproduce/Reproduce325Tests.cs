@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Reproduce
 		public void FluentMappingReturnsResults()
 		{
 			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
-			this._client.CreateIndex(indexName, settings => settings
+			this.Client.CreateIndex(indexName, settings => settings
 				.Settings(s => s.Add("search.slowlog.threshold.fetch.warn", "1s"))
 				.Analysis(x =>
 				{

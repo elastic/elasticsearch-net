@@ -25,7 +25,7 @@ namespace Nest.Tests.Integration.Search.FieldTests
 				.Select(x => x.Name.ToCamelCase())
 				.Except(new List<string> {"followers", "contributors", "nestedFollowers", "myGeoShape"}).ToList();
 
-			var queryResults = _client.Search<ElasticsearchProject>(s =>
+			var queryResults = Client.Search<ElasticsearchProject>(s =>
 					s.Skip(0)
 					.Take(10)
 					.Fields(fields.ConvertAll(x => x.ToCamelCase()).ToArray())

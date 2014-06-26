@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void Terms()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Nested("contributors", n => n

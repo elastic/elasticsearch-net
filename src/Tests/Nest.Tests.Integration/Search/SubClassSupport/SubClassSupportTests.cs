@@ -42,12 +42,12 @@ namespace Nest.Tests.Integration.Search.SearchType
 					return o;
 				});
 
-			var result = this._client.Bulk(b => b.IndexMany(data).Refresh());
+			var result = this.Client.Bulk(b => b.IndexMany(data).Refresh());
 
 			result.IsValid.Should().BeTrue();
 			result.Items.Count().Should().Be(100);
 
-			var queryResults = this._client.Search<MyBaseClass>(s => s
+			var queryResults = this.Client.Search<MyBaseClass>(s => s
 				.From(0)
 				.Size(100)
 				.MatchAll()
@@ -75,10 +75,10 @@ namespace Nest.Tests.Integration.Search.SearchType
 					return o;
 				});
 
-			var resulta = this._client.Bulk(b => b.IndexMany(data.OfType<ClassA>()).Refresh());
-			var resultb = this._client.Bulk(b => b.IndexMany(data.OfType<ClassB>()).Refresh());
+			var resulta = this.Client.Bulk(b => b.IndexMany(data.OfType<ClassA>()).Refresh());
+			var resultb = this.Client.Bulk(b => b.IndexMany(data.OfType<ClassB>()).Refresh());
 
-			var queryResults = this._client.Search<MyBaseClass>(s => s
+			var queryResults = this.Client.Search<MyBaseClass>(s => s
 				.Types(typeof(ClassA), typeof(ClassB))
 				.From(0)
 				.Size(100)
@@ -106,10 +106,10 @@ namespace Nest.Tests.Integration.Search.SearchType
 					return o;
 				});
 
-			var resulta = this._client.Bulk(b => b.IndexMany(data.OfType<ClassA>()).Refresh());
-			var resultb = this._client.Bulk(b => b.IndexMany(data.OfType<ClassB>()).Refresh());
+			var resulta = this.Client.Bulk(b => b.IndexMany(data.OfType<ClassA>()).Refresh());
+			var resultb = this.Client.Bulk(b => b.IndexMany(data.OfType<ClassB>()).Refresh());
 
-			var queryResults = this._client.MultiSearch(ms => ms
+			var queryResults = this.Client.MultiSearch(ms => ms
 				.Search<MyBaseClass>("using_types", s => s.AllIndices()
 					.Types(typeof(ClassA), typeof(ClassB))
 					.From(0)
@@ -152,10 +152,10 @@ namespace Nest.Tests.Integration.Search.SearchType
 					return o;
 				});
 
-			var resulta = this._client.Bulk(b => b.IndexMany(data.OfType<ClassA>()).Refresh());
-			var resultb = this._client.Bulk(b => b.IndexMany(data.OfType<ClassB>()).Refresh());
+			var resulta = this.Client.Bulk(b => b.IndexMany(data.OfType<ClassA>()).Refresh());
+			var resultb = this.Client.Bulk(b => b.IndexMany(data.OfType<ClassB>()).Refresh());
 
-			var queryResults = this._client.MultiSearch(ms => ms
+			var queryResults = this.Client.MultiSearch(ms => ms
 				.Search<MyBaseClass>("using_types", s => s.AllIndices()
 					.Types(typeof(ClassA), typeof(ClassB))
 					.From(0)
@@ -204,10 +204,10 @@ namespace Nest.Tests.Integration.Search.SearchType
 					return o;
 				});
 
-			var resulta = this._client.Bulk(b => b.IndexMany(data.OfType<ClassA>()).Refresh());
-			var resultb = this._client.Bulk(b => b.IndexMany(data.OfType<ClassB>()).Refresh());
+			var resulta = this.Client.Bulk(b => b.IndexMany(data.OfType<ClassA>()).Refresh());
+			var resultb = this.Client.Bulk(b => b.IndexMany(data.OfType<ClassB>()).Refresh());
 
-			var queryResults = this._client.MultiSearch(ms => ms
+			var queryResults = this.Client.MultiSearch(ms => ms
 				.Search<MyBaseClass>("using_types", s => s.AllIndices()
 					.Types(typeof(ClassA), typeof(ClassB))
 					.From(0)

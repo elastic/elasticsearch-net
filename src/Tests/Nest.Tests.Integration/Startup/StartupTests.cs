@@ -90,8 +90,6 @@ namespace StartupTests
 
 				result.ElapsedMilliseconds.Should().BeGreaterOrEqualTo(100);
 				
-				Thread.Sleep(2000);
-
 				result = RemoteFunc.Invoke(context.Domain,
 					() => new NoWarmupRoutine(c=>c.Search<ElasticsearchProject>(s=>s.MatchAll()))
 				);
@@ -109,7 +107,78 @@ namespace StartupTests
 					() => new WarmupRoutine(c=>c.Search<object>(s=>s.MatchAll()))
 				);
 
-				result.ElapsedMilliseconds.Should().BeLessOrEqualTo(20);
+				result.ElapsedMilliseconds.Should().BeLessOrEqualTo(10);
+			}
+		}
+		
+		[Test]
+		public void Calling_Typed_Search_IsAlsoFaster_AfterWarmup()
+		{
+			using (var context = AppDomainContext.Create(_setupInfo))
+			{
+				var result = RemoteFunc.Invoke(context.Domain,
+					() => new WarmupRoutine(c=>c.Search<ElasticsearchProject>(s=>s.MatchAll()))
+				);
+
+				result.ElapsedMilliseconds.Should().BeLessOrEqualTo(50);
+				var againNoWarmup = RemoteFunc.Invoke(context.Domain,
+					() => new NoWarmupRoutine(c=>c.Search<ElasticsearchProject>(s=>s.MatchAll()))
+				);
+
+				againNoWarmup.ElapsedMilliseconds.Should().BeLessOrEqualTo(10);
+			}
+		}
+		
+		[Test]
+		public void Calling_Complex_TypedSearch_IsAlsoFaster_AfterWarmup()
+		{
+			using (var context = AppDomainContext.Create(_setupInfo))
+			{
+				var result = RemoteFunc.Invoke(context.Domain,
+					() => new WarmupRoutine(c=>c
+						.Search<ElasticsearchProject>(s => s
+							.Query(q => q.Term("field", "value") && q.Term(p => p.Name, "name"))
+							.Filter(f => f.GeoPolygon(p => p.MyGeoShape, "1.0", "2.0", "3.0"))
+							.Aggregations(a => a
+								.Terms("term_items", gh => gh
+									.Field(p => p.Content)
+									.Aggregations(gha => gha
+										.SignificantTerms("bucket_agg", m => m
+											.Field(p => p.Content)
+											.Size(2)
+											.Aggregations(ma => ma.Terms("country", t => t.Field(p => p.Country)))
+										)
+									)
+								)
+							)
+						)
+					)
+				);
+
+				result.ElapsedMilliseconds.Should().BeLessOrEqualTo(250);
+				var againNoWarmup = RemoteFunc.Invoke(context.Domain,
+					() => new NoWarmupRoutine(c=>c
+						.Search<ElasticsearchProject>(s=>s
+							.Query(q => q.Term("field", "value") && q.Term(p => p.Name, "name"))
+							.Filter(f => f.GeoPolygon(p => p.MyGeoShape, "1.0", "2.0", "3.0"))
+							.Aggregations(a => a
+								.Terms("term_items", gh => gh
+									.Field(p => p.Content)
+									.Aggregations(gha => gha
+										.SignificantTerms("bucket_agg", m => m
+											.Field(p => p.Content)
+											.Size(2)
+											.Aggregations(ma => ma.Terms("country", t => t.Field(p => p.Country)))
+										)
+									)
+								)
+							)
+					
+						)
+					)
+				);
+
+				againNoWarmup.ElapsedMilliseconds.Should().BeLessOrEqualTo(10);
 			}
 		}
 	}

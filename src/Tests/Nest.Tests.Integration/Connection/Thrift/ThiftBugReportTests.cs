@@ -16,10 +16,10 @@ namespace Nest.Tests.Integration.Core.Bulk
 		[Test]
 		public void IndexExistShouldNotThrowOn404()
 		{
-			var isValidThriftConnection = this._thriftClient.RootNodeInfo().IsValid;
+			var isValidThriftConnection = this.ThriftClient.RootNodeInfo().IsValid;
 			isValidThriftConnection.Should().BeTrue();
 
-			var unknownIndexResult = this._thriftClient.IndexExists(i=>i.Index("i-am-running-out-of-clever-index-names"));
+			var unknownIndexResult = this.ThriftClient.IndexExists(i=>i.Index("i-am-running-out-of-clever-index-names"));
 			unknownIndexResult.Should().NotBeNull();
 			unknownIndexResult.IsValid.Should().BeTrue();
 
@@ -32,10 +32,10 @@ namespace Nest.Tests.Integration.Core.Bulk
 		[Test]
 		public void EmptyResponseShouldNotThrowError()
 		{
-			var isValidThriftConnection = this._thriftClient.RootNodeInfo().IsValid;
+			var isValidThriftConnection = this.ThriftClient.RootNodeInfo().IsValid;
 			isValidThriftConnection.Should().BeTrue();
 
-			var result = this._thriftClient.Connection.HeadSync(ElasticsearchConfiguration.CreateBaseUri(9500));
+			var result = this.ThriftClient.Connection.HeadSync(ElasticsearchConfiguration.CreateBaseUri(9500));
 			result.Success.Should().BeTrue();
 			result.OriginalException.Should().BeNull();
 		}

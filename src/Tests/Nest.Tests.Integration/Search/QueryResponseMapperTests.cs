@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void BogusQuery()
 		{
-			var client = this._client;
+			var client = this.Client;
 			ISearchResponse<ElasticsearchProject> queryResults = client.Search<ElasticsearchProject>(s => s
 				.QueryRaw("here be dragons")
 			);
@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration.Search
 		{
 			//arrange
 			//pull existing example through method we know is functional based on other passing unit tests
-			var queryResults = this._client.Search<ElasticsearchProject>(s => s
+			var queryResults = this.Client.Search<ElasticsearchProject>(s => s
 				.QueryString("*")
 				//.SortAscending(p => p.Id)
 			);
@@ -62,7 +62,7 @@ namespace Nest.Tests.Integration.Search
 		{
 			//arrange
 			//pull existing example through method we know is functional based on other passing unit tests
-			var queryResults = this._client.Search<ElasticsearchProject>(s => s
+			var queryResults = this.Client.Search<ElasticsearchProject>(s => s
 				.QueryString("*")
 				.SortAscending("_score")
 				.SortDescending(p => p.Id)
@@ -75,7 +75,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void HitsSortsIsSetWithStringSort()
 		{
-			var queryResults = this._client.Search<ElasticsearchProject>(s => s
+			var queryResults = this.Client.Search<ElasticsearchProject>(s => s
 				.QueryString("*")
 				.SortAscending(p => p.Name)
 				.SortDescending(p => p.Id)
@@ -496,8 +496,8 @@ namespace Nest.Tests.Integration.Search
 			
 			var searchDescriptor = new SearchDescriptor<ElasticsearchProject>()
 				.Query(q=>q.MatchAll());
-			var request = this._client.Serializer.Serialize(searchDescriptor);
-			var result = this._client.Raw.Search(request);
+			var request = this.Client.Serializer.Serialize(searchDescriptor);
+			var result = this.Client.Raw.Search(request);
 			Assert.NotNull(result);
 			Assert.True(result.Success);
 			Assert.IsNotEmpty(result.ResponseRaw.Utf8String());

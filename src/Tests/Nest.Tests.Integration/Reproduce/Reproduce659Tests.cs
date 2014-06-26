@@ -21,7 +21,7 @@ namespace Nest.Tests.Integration.Reproduce
 		[Test]
 		public void ShouldNotThrowOnInvalidConnectionWithoutRequestConfig()
 		{
-			var searchResult = this._client.Search<ElasticsearchProject>(s => s
+			var searchResult = this.Client.Search<ElasticsearchProject>(s => s
 				.Index("this_index_does_not_exist")
 				.Size(0)
 				.Aggregations(aggs=>aggs

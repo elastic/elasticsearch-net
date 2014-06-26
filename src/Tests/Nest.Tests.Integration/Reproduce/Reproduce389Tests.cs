@@ -22,7 +22,7 @@ namespace Nest.Tests.Integration.Reproduce
 		[Test]
 		public void DoesPreferenceOnTheBodyThrowAnElasticsearchException()
 		{
-			var result = _client.Search<ElasticsearchProject>(op => op
+			var result = Client.Search<ElasticsearchProject>(op => op
 				.Query(q => 
 					q.Term(t => t.Name, "nest")
 				)

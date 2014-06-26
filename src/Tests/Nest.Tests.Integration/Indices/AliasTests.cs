@@ -16,15 +16,15 @@ namespace Nest.Tests.Integration.Indices
 			var index = ElasticsearchConfiguration.DefaultIndex;
 			var alias = ElasticsearchConfiguration.DefaultIndex + "-2";
 
-			var r = this._client.Alias(a => a.Add(o => o.Index(index).Alias(alias)));
+			var r = this.Client.Alias(a => a.Add(o => o.Index(index).Alias(alias)));
 			Assert.True(r.IsValid);
 			Assert.True(r.Acknowledged);
-			var count1 = this._client.Count<ElasticsearchProject>(c => c.Index(index).Query(q => q.MatchAll()));
-			var count2 = this._client.Count<ElasticsearchProject>(c => c.Index(alias).Query(q => q.MatchAll()));
+			var count1 = this.Client.Count<ElasticsearchProject>(c => c.Index(index).Query(q => q.MatchAll()));
+			var count2 = this.Client.Count<ElasticsearchProject>(c => c.Index(alias).Query(q => q.MatchAll()));
 			Assert.AreEqual(count1.Count, count2.Count);
-			r = this._client.Alias(a => a.Remove(o => o.Index(index).Alias(alias)));
-			count1 = this._client.Count<ElasticsearchProject>(c => c.Index(index).Query(q => q.MatchAll()));
-			count2 = this._client.Count<ElasticsearchProject>(c => c.Index(alias).Query(q => q.MatchAll()));
+			r = this.Client.Alias(a => a.Remove(o => o.Index(index).Alias(alias)));
+			count1 = this.Client.Count<ElasticsearchProject>(c => c.Index(index).Query(q => q.MatchAll()));
+			count2 = this.Client.Count<ElasticsearchProject>(c => c.Index(alias).Query(q => q.MatchAll()));
 			Assert.AreNotEqual(count1.Count, count2.Count);
 			Assert.False(count2.IsValid);
 		}
@@ -34,29 +34,29 @@ namespace Nest.Tests.Integration.Indices
 			var index = ElasticsearchConfiguration.DefaultIndex;
 			var alias = ElasticsearchConfiguration.DefaultIndex + "-2";
 
-			var r = this._client.Alias(a => a.Add(o => o.Index(index).Alias(alias)));
+			var r = this.Client.Alias(a => a.Add(o => o.Index(index).Alias(alias)));
 			Assert.True(r.IsValid);
 			Assert.True(r.Acknowledged);
-			var count1 = this._client.Count<ElasticsearchProject>(c => c.Index(index).Query(q => q.MatchAll()));
-			var count2 = this._client.Count<ElasticsearchProject>(c => c.Index(alias).Query(q => q.MatchAll()));
+			var count1 = this.Client.Count<ElasticsearchProject>(c => c.Index(index).Query(q => q.MatchAll()));
+			var count2 = this.Client.Count<ElasticsearchProject>(c => c.Index(alias).Query(q => q.MatchAll()));
 			Assert.AreEqual(count1.Count, count2.Count);
 
 			var renamed = index + "-3";
 
-			r = this._client.Alias(a => a
+			r = this.Client.Alias(a => a
 				.Remove(o => o.Index(index).Alias(alias))
 				.Add(o => o.Index(index).Alias(renamed))
 			);
-			count1 = this._client.Count<ElasticsearchProject>(c => c.Index(index).Query(q => q.MatchAll()));
-			count2 = this._client.Count<ElasticsearchProject>(c => c.Index(alias).Query(q => q.MatchAll()));
-			var count3 = this._client.Count<ElasticsearchProject>(c => c.Index(renamed).Query(q => q.MatchAll()));
+			count1 = this.Client.Count<ElasticsearchProject>(c => c.Index(index).Query(q => q.MatchAll()));
+			count2 = this.Client.Count<ElasticsearchProject>(c => c.Index(alias).Query(q => q.MatchAll()));
+			var count3 = this.Client.Count<ElasticsearchProject>(c => c.Index(renamed).Query(q => q.MatchAll()));
 			Assert.AreEqual(count1.Count, count3.Count);
 			Assert.AreNotEqual(count1.Count, count2.Count);
 			Assert.False(count2.IsValid);
 
-			r = this._client.Alias(a => a.Remove(o => o.Index(index).Alias(renamed)));
-			count1 = this._client.Count<ElasticsearchProject>(c => c.Index(index).Query(q => q.MatchAll()));
-			count3 = this._client.Count<ElasticsearchProject>(c => c.Index(renamed).Query(q => q.MatchAll()));
+			r = this.Client.Alias(a => a.Remove(o => o.Index(index).Alias(renamed)));
+			count1 = this.Client.Count<ElasticsearchProject>(c => c.Index(index).Query(q => q.MatchAll()));
+			count3 = this.Client.Count<ElasticsearchProject>(c => c.Index(renamed).Query(q => q.MatchAll()));
 			Assert.AreNotEqual(count1.Count, count3.Count);
 			Assert.False(count3.IsValid);
 		}
@@ -66,7 +66,7 @@ namespace Nest.Tests.Integration.Indices
 		{
 			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
 			var aliasName = ElasticsearchConfiguration.NewUniqueIndexName();
-			var createIndexResponse = _client.CreateIndex(indexName, c => c
+			var createIndexResponse = Client.CreateIndex(indexName, c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
 				.AddAlias(aliasName, a => a.IndexRouting("1"))
@@ -74,7 +74,7 @@ namespace Nest.Tests.Integration.Indices
 
 			createIndexResponse.IsValid.Should().BeTrue();
 
-			var aliasesResponse = _client.GetAliases(a => a.Index(indexName));
+			var aliasesResponse = Client.GetAliases(a => a.Index(indexName));
 			aliasesResponse.IsValid.Should().BeTrue();
 			aliasesResponse.Indices[indexName].Count.Should().Be(1);
 
@@ -92,7 +92,7 @@ namespace Nest.Tests.Integration.Indices
 			var aliasName1 = ElasticsearchConfiguration.NewUniqueIndexName();
 			var aliasName2 = ElasticsearchConfiguration.NewUniqueIndexName();
 			var aliasName3 = ElasticsearchConfiguration.NewUniqueIndexName();
-			var createIndexResponse = _client.CreateIndex(indexName, c => c
+			var createIndexResponse = Client.CreateIndex(indexName, c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
 				.AddAlias(aliasName1, a => a.IndexRouting("1"))
@@ -102,7 +102,7 @@ namespace Nest.Tests.Integration.Indices
 
 			createIndexResponse.IsValid.Should().BeTrue();
 
-			var aliases = _client.GetAliasesPointingToIndex(indexName);
+			var aliases = Client.GetAliasesPointingToIndex(indexName);
 			aliases.Should().NotBeNull().And.HaveCount(3);
 		}
 
@@ -113,16 +113,16 @@ namespace Nest.Tests.Integration.Indices
 			var indexName1 = ElasticsearchConfiguration.NewUniqueIndexName();
 			var indexName2 = ElasticsearchConfiguration.NewUniqueIndexName();
 			var indexName3 = ElasticsearchConfiguration.NewUniqueIndexName();
-			_client.CreateIndex(indexName1, c => c
+			Client.CreateIndex(indexName1, c => c
 				.AddAlias(aliasName, a => a.IndexRouting("1"))
 			);
-			_client.CreateIndex(indexName2, c => c
+			Client.CreateIndex(indexName2, c => c
 				.AddAlias(aliasName, a => a.IndexRouting("1"))
 			);
-			_client.CreateIndex(indexName3, c => c
+			Client.CreateIndex(indexName3, c => c
 				.AddAlias(aliasName, a => a.IndexRouting("1"))
 			);
-			var indices = _client.GetIndicesPointingToAlias(aliasName);
+			var indices = Client.GetIndicesPointingToAlias(aliasName);
 			indices.Should().NotBeNull().And.HaveCount(3);
 			indices.ShouldAllBeEquivalentTo(new[] { indexName1, indexName2, indexName3 });
 		}
@@ -131,7 +131,7 @@ namespace Nest.Tests.Integration.Indices
 		{
 			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
 			var aliasName = ElasticsearchConfiguration.NewUniqueIndexName();
-			var createIndexResponse = _client.CreateIndex(indexName, c => c
+			var createIndexResponse = Client.CreateIndex(indexName, c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
 				.AddAlias(aliasName, a => a
@@ -141,7 +141,7 @@ namespace Nest.Tests.Integration.Indices
 
 			createIndexResponse.IsValid.Should().BeTrue();
 
-			var aliases = _client.GetAliasesPointingToIndex(indexName);
+			var aliases = Client.GetAliasesPointingToIndex(indexName);
 			aliases.Should().NotBeNull().And.HaveCount(1);
 			var alias = aliases.First();
 			var filter = alias.Filter;

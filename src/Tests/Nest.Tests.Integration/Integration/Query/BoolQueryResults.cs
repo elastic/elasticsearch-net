@@ -23,14 +23,14 @@ namespace Nest.Tests.Integration.Integration.Query
 		{
 			_LookFor = NestTestData.Session.Single<ElasticsearchProject>().Get();
 			_LookFor.Name = "one two three four";
-			var status = this._client.Index(_LookFor, i=>i.Refresh()).ConnectionStatus;
+			var status = this.Client.Index(_LookFor, i=>i.Refresh()).ConnectionStatus;
 			Assert.True(status.Success, status.ResponseRaw.Utf8String());
 		}
 
 		[Test]
 		public void SingleTerm()
 		{
-			var results = _client.Search<BoolTerm>(s => s
+			var results = Client.Search<BoolTerm>(s => s
 				.Query(q => 
 					q.Term(p => p.Name1, "a1")
 				)
@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		[Test]
 		public void TwoTermsOfSingleDocument()
 		{
-			var results = _client.Search<BoolTerm>(s => s
+			var results = Client.Search<BoolTerm>(s => s
 				.Query(q =>
 					q.Term(p => p.Name1, "a1") && q.Term(p=>p.Name2, "b1")
 				)
@@ -52,7 +52,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		[Test]
 		public void TwoTermsOfNoDocument()
 		{
-			var results = _client.Search<BoolTerm>(s => s
+			var results = Client.Search<BoolTerm>(s => s
 				.Query(q =>
 					q.Term(p => p.Name1, "a1") && q.Term(p=>p.Name2, "b2")
 				)
@@ -63,7 +63,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		[Test]
 		public void ThreeTermsOfOneDocument()
 		{
-			var results = _client.Search<BoolTerm>(s => s
+			var results = Client.Search<BoolTerm>(s => s
 				.Query(q =>
 					q.Term(p => p.Name1, "a1") && (q.Term(p => p.Name2, "b2") || q.Term(p => p.Name2, "b1"))
 				)
@@ -74,7 +74,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		[Test]
 		public void TwoTermsOfTwoDocuments()
 		{
-			var results = _client.Search<BoolTerm>(s => s
+			var results = Client.Search<BoolTerm>(s => s
 				.Query(q =>
 					q.Term(p => p.Name1, "a1") || q.Term(p => p.Name2, "b2")
 				)
@@ -85,7 +85,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		[Test]
 		public void FourTermsOfTwoDocuments()
 		{
-			var results = _client.Search<BoolTerm>(s => s
+			var results = Client.Search<BoolTerm>(s => s
 				.Query(q =>
 					(q.Term(p => p.Name1, "a1") && q.Term(p => p.Name2, "b1"))
 					|| (q.Term(p => p.Name1, "a2") && q.Term(p => p.Name2, "b2"))

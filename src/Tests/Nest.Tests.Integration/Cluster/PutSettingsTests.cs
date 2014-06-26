@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Cluster
 		[Test]
 		public void PutSettings()
 		{
-			var r = this._client.ClusterSettings(p=>p
+			var r = this.Client.ClusterSettings(p=>p
 				.FlatSettings()
 				.Transient(t=>t
 					.Add("discovery.zen.minimum_master_nodes", 1)

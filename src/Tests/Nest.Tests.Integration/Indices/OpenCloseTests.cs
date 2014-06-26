@@ -11,30 +11,30 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void CloseAndOpenIndex()
 		{
-			var r = this._client.CloseIndex(ElasticsearchConfiguration.DefaultIndex);
+			var r = this.Client.CloseIndex(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
-			r = this._client.OpenIndex(ElasticsearchConfiguration.DefaultIndex);
+			r = this.Client.OpenIndex(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
 		}
 		[Test]
 		public void CloseAndOpenIndexTyped()
 		{
-			var r = this._client.CloseIndex<ElasticsearchProject>();
+			var r = this.Client.CloseIndex<ElasticsearchProject>();
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
-			r = this._client.OpenIndex<ElasticsearchProject>();
+			r = this.Client.OpenIndex<ElasticsearchProject>();
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
 		}
 		[Test]
 		public void CloseAndSearchAndOpenIndex()
 		{
-			var r = this._client.CloseIndex(ElasticsearchConfiguration.DefaultIndex);
+			var r = this.Client.CloseIndex(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.MatchAll()
 			);
 
@@ -48,7 +48,7 @@ namespace Nest.Tests.Integration.Indices
 			error.ExceptionType.Should().Be("ClusterBlockException");
 			error.Error.Should().Contain("index closed");
 
-			r = this._client.OpenIndex(ElasticsearchConfiguration.DefaultIndex);
+			r = this.Client.OpenIndex(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
 		}

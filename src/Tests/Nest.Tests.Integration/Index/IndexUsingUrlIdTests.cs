@@ -20,9 +20,9 @@ namespace Nest.Tests.Integration.Index
 				Id = id,
 				Name = "Top Product"
 			};
-			var response = this._client.Index(newProduct);
+			var response = this.Client.Index(newProduct);
 
-			var productInElasticsearch = this._client.Source<Product>(i=>i.Id(id));
+			var productInElasticsearch = this.Client.Source<Product>(i=>i.Id(id));
 			Assert.NotNull(productInElasticsearch);
 			Assert.AreEqual(productInElasticsearch.Id, id);
 			Assert.True(response.IsValid);

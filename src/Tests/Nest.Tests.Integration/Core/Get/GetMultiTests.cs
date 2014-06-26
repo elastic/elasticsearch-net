@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetMultiSimple()
 		{
-			var result = this._client.MultiGet(a => a
+			var result = this.Client.MultiGet(a => a
 				.Get<ElasticsearchProject>(g=>g.Id(NestTestData.Data[1].Id))
 				.Get<Person>(g => g.Id(NestTestData.People[1].Id))
 			);
@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration.Core.Get
 			var frank = -204;
 			var lewisId = NestTestData.People[5].Id;
 
-			var result = this._client.MultiGet(a => a
+			var result = this.Client.MultiGet(a => a
 				.Get<Person>(g => g.Id(project))
 				.Get<Person>(g => g.Id(frank))
 				.Get<Person>(g => g.Id(lewisId))
@@ -72,7 +72,7 @@ namespace Nest.Tests.Integration.Core.Get
 			var projectId = NestTestData.Data[14].Id;
 			var authorId = NestTestData.People[11].Id;
 
-			var result = this._client.MultiGet(a => a
+			var result = this.Client.MultiGet(a => a
 				.Get<ElasticsearchProject>(g => g.Id(projectId).Fields(p=>p.Id, p=>p.Followers.First().FirstName))
 				.Get<Person>(g => g.Id(authorId).Type("person").Index(ElasticsearchConfiguration.DefaultIndex).Fields(p => p.Id, p => p.FirstName))
 			);
@@ -103,7 +103,7 @@ namespace Nest.Tests.Integration.Core.Get
 			var projectId = NestTestData.Data[8].Id;
 			var authorId = NestTestData.People[5].Id;
 
-			var result = this._client.MultiGet(a => a
+			var result = this.Client.MultiGet(a => a
 				.Get<ElasticsearchProject>(g => g.Id(projectId).Fields(p => p.Id, p => p.Followers.First().FirstName))
 				.Get<Person>(g => g
 					.Id(authorId)

@@ -29,10 +29,10 @@ namespace Nest.Tests.Integration.Reproduce
 			settings.Settings.Add("index.blocks.read_only", "true");
 
 			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
-			var idxRsp = this._client.CreateIndex(indexName, i=>i.InitializeUsing(settings));
+			var idxRsp = this.Client.CreateIndex(indexName, i=>i.InitializeUsing(settings));
 			Assert.IsTrue(idxRsp.IsValid, idxRsp.ConnectionStatus.ToString());
 
-			var getSettingsResponse = this._client.GetIndexSettings(i=>i.Index(indexName));
+			var getSettingsResponse = this.Client.GetIndexSettings(i=>i.Index(indexName));
 			Assert.IsTrue(getSettingsResponse.IsValid, getSettingsResponse.ConnectionStatus.ToString());
 
 			bool readOnly = getSettingsResponse.IndexSettings._.index.blocks.read_only;

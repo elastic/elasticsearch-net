@@ -20,16 +20,16 @@ namespace Nest.Tests.Integration.Core.Exists
 				Name = "Coboles",
 				Content = "COBOL elasticsearch client"
 			};
-			var indexResponse = this._client.Index(elasticsearchProject, i=>i.Refresh().Index(tempIndex));
+			var indexResponse = this.Client.Index(elasticsearchProject, i=>i.Refresh().Index(tempIndex));
 
 			indexResponse.IsValid.Should().BeTrue();
 
-			var existsResponse = this._client.DocumentExists<ElasticsearchProject>(d => d.Object(elasticsearchProject).Index(tempIndex));
+			var existsResponse = this.Client.DocumentExists<ElasticsearchProject>(d => d.Object(elasticsearchProject).Index(tempIndex));
 			existsResponse.IsValid.Should().BeTrue();
 			existsResponse.Exists.Should().BeTrue();
 			existsResponse.ConnectionStatus.RequestMethod.Should().Be("HEAD");
 			
-			var doesNotExistsResponse = this._client.DocumentExists<ElasticsearchProject>(d => d.Object(elasticsearchProject).Index(tempIndex + "-random"));
+			var doesNotExistsResponse = this.Client.DocumentExists<ElasticsearchProject>(d => d.Object(elasticsearchProject).Index(tempIndex + "-random"));
 			doesNotExistsResponse.IsValid.Should().BeTrue();
 			doesNotExistsResponse.Exists.Should().BeFalse();
 
