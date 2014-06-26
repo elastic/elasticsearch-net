@@ -795,7 +795,6 @@
     <Compile Include="DSL\Query\WildcardQueryDescriptor.cs" />
     <Compile Include="ElasticClient-Search.cs" />
     <Compile Include="Resolvers\ElasticContractResolver.cs" />
-    <Compile Include="Enums\FacetTypes.cs" />
     <Compile Include="Exception\DslException.cs" />
     <Compile Include="Enums\FieldType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
