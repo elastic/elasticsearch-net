@@ -6,7 +6,8 @@ using Nest.Resolvers.Converters;
 namespace Nest
 {
 	[DescriptorFor("Count")]
-	public partial class CountDescriptor<T> :QueryPathDescriptorBase<CountDescriptor<T>, T, CountRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial class CountDescriptor<T> : QueryPathDescriptorBase<CountDescriptor<T>, T, CountRequestParameters>
 		where T : class
 	{
 		[JsonProperty("query")]

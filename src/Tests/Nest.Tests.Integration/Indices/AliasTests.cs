@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using FluentAssertions;
 using Nest.Tests.MockData.DataSources;
@@ -28,6 +29,54 @@ namespace Nest.Tests.Integration.Indices
 			Assert.AreNotEqual(count1.Count, count2.Count);
 			Assert.False(count2.IsValid);
 		}
+
+		[Test]
+		public void SimpleAddRemoveAlias_ObjectInitializerSyntax()
+		{
+			var index = ElasticsearchConfiguration.DefaultIndex;
+			var alias = ElasticsearchConfiguration.DefaultIndex + "-2";
+
+			var r = this._client.Alias(new AliasRequest
+			{
+				Actions = new List<IAliasAction>
+				{
+					new AliasAddAction
+					{
+						Add = new AliasAddOperation
+						{
+							Index = index,
+							Alias = alias
+						}
+					}
+				}
+			});
+			Assert.True(r.IsValid);
+			Assert.True(r.Acknowledged);
+			var count1 = this._client.Count<ElasticsearchProject>(c => c.Index(index).Query(q => q.MatchAll()));
+			var count2 = this._client.Count<ElasticsearchProject>(c => c.Index(alias).Query(q => q.MatchAll()));
+			Assert.AreEqual(count1.Count, count2.Count);
+			//r = this._client.Alias(a => a.Remove(o => o.Index(index).Alias(alias)));
+			r = this._client.Alias(new AliasRequest
+			{
+				Actions = new List<IAliasAction>
+				{
+					new AliasRemoveAction
+					{
+						Remove = new AliasRemoveOperation
+						{
+							Index = index,
+							Alias = alias
+						}
+					}
+				}
+			});
+			r = this._client.Alias(a => a.Remove(o => o.Index(index).Alias(alias)));
+			count1 = this._client.Count<ElasticsearchProject>(c => c.Index(index).Query(q => q.MatchAll()));
+			count2 = this._client.Count<ElasticsearchProject>(c => c.Index(alias).Query(q => q.MatchAll()));
+			Assert.AreNotEqual(count1.Count, count2.Count);
+			Assert.False(count2.IsValid);
+		}
+		
 		[Test]
 		public void SimpleRenameAlias()
 		{

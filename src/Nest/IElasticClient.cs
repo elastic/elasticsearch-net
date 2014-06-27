@@ -945,7 +945,29 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
 		/// </summary>
 		/// <param name="aliasSelector">A desriptor that describes the parameters for the alias operation</param>
+		IIndicesOperationResponse Alias(IAliasRequest aliasRequest);
+		
+		/// <summary>
+		/// APIs in elasticsearch accept an index name when working against a specific index, and several indices when applicable. 
+		/// <para>The index aliases API allow to alias an index with a name, with all APIs automatically converting the alias name to the 
+		/// actual index name.</para><para> An alias can also be mapped to more than one index, and when specifying it, the alias 
+		/// will automatically expand to the aliases indices.i</para><para> An alias can also be associated with a filter that will 
+		/// automatically be applied when searching, and routing values.</para>
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
+		/// </summary>
+		/// <param name="aliasSelector">A desriptor that describes the parameters for the alias operation</param>
 		Task<IIndicesOperationResponse> AliasAsync(Func<AliasDescriptor, AliasDescriptor> aliasSelector);
+		
+		/// <summary>
+		/// APIs in elasticsearch accept an index name when working against a specific index, and several indices when applicable. 
+		/// <para>The index aliases API allow to alias an index with a name, with all APIs automatically converting the alias name to the 
+		/// actual index name.</para><para> An alias can also be mapped to more than one index, and when specifying it, the alias 
+		/// will automatically expand to the aliases indices.i</para><para> An alias can also be associated with a filter that will 
+		/// automatically be applied when searching, and routing values.</para>
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
+		/// </summary>
+		/// <param name="aliasSelector">A desriptor that describes the parameters for the alias operation</param>
+		Task<IIndicesOperationResponse> AliasAsync(IAliasRequest aliasRequest);
 		
 		/// <summary>
 		/// The get index alias api allows to filter by alias name and index name. This api redirects to the master and fetches 
