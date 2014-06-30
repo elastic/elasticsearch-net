@@ -18,11 +18,6 @@ namespace Elasticsearch.Net.Connection
 			object data = null, 
 			IRequestParameters requestParameters = null);
 
-		IList<Uri> Sniff();
-		void SniffClusterState();
-		bool Ping(Uri baseUri);
-		Task<bool> PingAsync(Uri baseUri);
-
 		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(
 			string method, 
 			string path, 
@@ -30,8 +25,4 @@ namespace Elasticsearch.Net.Connection
 			IRequestParameters requestParameters = null);
 	}
 
-	public interface ITransportValues
-	{
-		IElasticsearchSerializer Serializer { get; }
-	}
 }

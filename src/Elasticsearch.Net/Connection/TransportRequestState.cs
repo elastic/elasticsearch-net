@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net.Connection.Configuration;
+using PurifyNet;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -14,7 +15,8 @@ namespace Elasticsearch.Net.Connection
 		private Stopwatch _stopwatch;
 
 		private ElasticsearchResponse<T> _result;
-		
+		private Uri _currentNode;
+
 		public IConnectionConfigurationValues ClientSettings { get; private set; }
 		
 		public IRequestParameters RequestParameters { get; private set;}
@@ -39,6 +41,28 @@ namespace Elasticsearch.Net.Connection
 
 		internal bool SniffedOnConnectionFailure { get; set; }
 
+		public int Retried { get { return Math.Max(0, this.SeenNodes.Count() - 1); } }
+		public int Pings { get; set; }
+		public int Sniffs { get; set; }
+
+		public List<Uri> SeenNodes { get; private set; }
+		public List<Uri> PingNodes { get; private set; }
+		public List<Uri> SniffNodes { get; private set; }
+
+		public Uri CurrentNode
+		{
+			get 
+			{ 
+				return this.RequestConfiguration != null && this.RequestConfiguration.ForceNode != null 
+					? this.RequestConfiguration.ForceNode 
+					: _currentNode; 
+			}
+			set
+			{
+				_currentNode = value;
+				this.SeenNodes.Add(value);
+			}
+		}
 
 		public long SerializationTime { get; private set; }
 		public long RequestEndTime { get; private set; }
@@ -51,6 +75,7 @@ namespace Elasticsearch.Net.Connection
 			string method, 
 			string path)
 		{
+			this.SeenNodes = new List<Uri>();
 			this.ClientSettings = settings;
 			this.RequestParameters = requestParameters;
 			this._traceEnabled = settings.TraceEnabled;
@@ -70,12 +95,41 @@ namespace Elasticsearch.Net.Connection
 		public void TickSerialization(byte[] postData)
 		{
 			this.PostData = postData;
-			this.SerializationTime = this._stopwatch.ElapsedMilliseconds;
+			if (this._traceEnabled)
+				this.SerializationTime = this._stopwatch.ElapsedMilliseconds;
 		}
 
+		public void RegisterSniff()
+		{
+			if (this.SniffNodes == null) this.SniffNodes = new List<Uri>();
+			this.SniffNodes.Add(this.CurrentNode);
+		}
+
+		public void RegisterPing()
+		{
+			if (this.PingNodes == null) this.PingNodes = new List<Uri>();
+			this.PingNodes.Add(this.CurrentNode);
+		}
+	
+		public Uri CreatePathOnCurrentNode(string path = null)
+		{
+			var s = this.ClientSettings;
+			path = path ?? this.Path;
+			if (s.QueryStringParameters != null)
+			{
+				var tempUri = new Uri(this.CurrentNode, path);
+				var qs = s.QueryStringParameters.ToQueryString(tempUri.Query.IsNullOrEmpty() ? "?" : "&");
+				path += qs;
+			}
+			var uri = path.IsNullOrEmpty() ? this.CurrentNode : new Uri(this.CurrentNode, path);
+			return uri.Purify();
+		}
 
 		public void SetResult(ElasticsearchResponse<T> result)
 		{
+			result.NumberOfRetries = this.Retried;
+
+
 			var objectNeedsResponseRef = result.Response as IResponseWithRequestInformation;
 			if (objectNeedsResponseRef != null) objectNeedsResponseRef.RequestInformation = result;
 			
