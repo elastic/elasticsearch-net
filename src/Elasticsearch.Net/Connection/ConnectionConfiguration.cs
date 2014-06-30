@@ -82,6 +82,13 @@ namespace Elasticsearch.Net.Connection
 #endif
 		bool IConnectionConfigurationValues.KeepRawResponse { get{ return _keepRawResponse; } }
 
+#if DEBUG
+		private bool _enableMetrics = true;
+#else
+		private bool _enableMetrics = false;
+#endif
+		bool IConnectionConfigurationValues.MetricsEnabled { get{ return _enableMetrics; } }
+
         private bool _automaticProxyDetection = true;
         bool IConnectionConfigurationValues.AutomaticProxyDetection { get { return _automaticProxyDetection; } }
 
@@ -159,6 +166,16 @@ namespace Elasticsearch.Net.Connection
 		public T EnableTrace(bool enabled = true)
 		{
 			this._traceEnabled = enabled;
+			return (T) this;
+		}
+
+		
+		/// <summary>
+		/// By enabling metrics more metadata is returned per API call about requests (ping, sniff, failover) and general stats
+		/// </summary>
+		public T EnableMetrics(bool enabled = true)
+		{
+			this._enableMetrics = enabled;
 			return (T) this;
 		}
 

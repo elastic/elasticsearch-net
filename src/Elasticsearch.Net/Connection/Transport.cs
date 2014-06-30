@@ -53,7 +53,7 @@ namespace Elasticsearch.Net.Connection
 		}
 
 
-		private bool Ping<T>(TransportRequestState<T> requestState)
+		private bool Ping(ITransportRequestState requestState)
 		{
 			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(50);
 			var requestOverrides = new RequestConfiguration
@@ -74,7 +74,7 @@ namespace Elasticsearch.Net.Connection
 				return response.Success;
 		}
 
-		private Task<bool> PingAsync<T>(TransportRequestState<T> requestState)
+		private Task<bool> PingAsync(ITransportRequestState requestState)
 		{
 			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(50);
 			var requestOverrides = new RequestConfiguration
@@ -120,7 +120,7 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		private void SniffClusterState<T>(TransportRequestState<T> requestState)
+		private void SniffClusterState(ITransportRequestState requestState)
 		{
 			if (!this._connectionPool.AcceptsUpdates)
 				return;
@@ -137,7 +137,7 @@ namespace Elasticsearch.Net.Connection
 
 		}
 
-		private void SniffIfInformationIsTooOld<T>(TransportRequestState<T> requestState)
+		private void SniffIfInformationIsTooOld(ITransportRequestState requestState)
 		{
 			if (SniffingDisabled(requestState.RequestConfiguration))
 				return;
@@ -171,15 +171,18 @@ namespace Elasticsearch.Net.Connection
 			return requestConfiguration.DisableSniff.GetValueOrDefault(false);
 		}
 
-		private bool SniffOnFaultDiscoveredMoreNodes<T>(TransportRequestState<T> requestState, int retried, ElasticsearchResponse<Stream> streamResponse)
+		private bool SniffOnFaultDiscoveredMoreNodes(ITransportRequestState requestState, int retried, ElasticsearchResponse<Stream> streamResponse)
 		{
 			if (retried != 0 || streamResponse.SuccessOrKnownError) return false;
 			SniffOnConnectionFailure(requestState);
 			return this.GetMaximumRetries(requestState.RequestConfiguration) > 0;
 		}
 
-		private void SetErrorDiagnosticsAndPatchSuccess<T>(TransportRequestState<T> requestState,
-			ElasticsearchServerError error, ElasticsearchResponse<T> typedResponse, ElasticsearchResponse<Stream> streamResponse)
+		private void SetErrorDiagnosticsAndPatchSuccess<T>(
+			ITransportRequestState requestState,
+			ElasticsearchServerError error, 
+			ElasticsearchResponse<T> typedResponse, 
+			IElasticsearchResponse streamResponse)
 		{
 			if (error != null)
 			{
@@ -199,7 +202,7 @@ namespace Elasticsearch.Net.Connection
 		/// Selects next node uri on request state
 		/// </summary>
 		/// <returns>bool hint whether the new current node needs to pinged first</returns>
-		private bool SelectNextNode<T>(TransportRequestState<T> requestState)
+		private bool SelectNextNode(ITransportRequestState requestState)
 		{
 			if (requestState.RequestConfiguration != null && requestState.RequestConfiguration.ForceNode != null)
 			{
@@ -250,7 +253,7 @@ namespace Elasticsearch.Net.Connection
 			response.Response = rawResponse;
 		}
 
-		private void SniffOnConnectionFailure<T>(TransportRequestState<T> requestState)
+		private void SniffOnConnectionFailure(ITransportRequestState requestState)
 		{
 			if (requestState.SniffedOnConnectionFailure
 				|| SniffingDisabled(requestState.RequestConfiguration)

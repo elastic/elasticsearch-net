@@ -22,6 +22,7 @@ namespace Elasticsearch.Net.Connection
 		string ProxyPassword { get; }
 
 		bool TraceEnabled { get; }
+		bool MetricsEnabled { get; }
 		bool UsesPrettyResponses { get; }
 		bool KeepRawResponse { get; }
         bool AutomaticProxyDetection { get; }
