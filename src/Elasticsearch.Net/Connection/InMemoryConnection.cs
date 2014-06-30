@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Connection.Configuration;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -27,12 +28,12 @@ namespace Elasticsearch.Net.Connection
 			_fixedResultBytes = Encoding.UTF8.GetBytes(fixedResult);
 		}
 
-		protected override ElasticsearchResponse<Stream> DoSynchronousRequest(HttpWebRequest request, byte[] data = null, IRequestConnectionConfiguration requestSpecificConfig = null)
+		protected override ElasticsearchResponse<Stream> DoSynchronousRequest(HttpWebRequest request, byte[] data = null, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.ReturnConnectionStatus(request, data, requestSpecificConfig);
 		}
 
-		private ElasticsearchResponse<Stream> ReturnConnectionStatus(HttpWebRequest request, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
+		private ElasticsearchResponse<Stream> ReturnConnectionStatus(HttpWebRequest request, byte[] data, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var method = request.Method;
 			var path = request.RequestUri.ToString();
@@ -42,7 +43,7 @@ namespace Elasticsearch.Net.Connection
 			return cs;
 		}
 
-		protected override Task<ElasticsearchResponse<Stream>> DoAsyncRequest(HttpWebRequest request, byte[] data = null, IRequestConnectionConfiguration requestSpecificConfig = null)
+		protected override Task<ElasticsearchResponse<Stream>> DoAsyncRequest(HttpWebRequest request, byte[] data = null, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return Task.Factory.StartNew(() =>
 			{

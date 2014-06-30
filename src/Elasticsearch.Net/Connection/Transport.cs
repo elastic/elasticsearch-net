@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
@@ -55,9 +56,11 @@ namespace Elasticsearch.Net.Connection
 		public virtual bool Ping(Uri baseUri)
 		{
 			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(50);
-			var requestOverrides = new RequestConnectionConfiguration()
-				.ConnectTimeout(pingTimeout)
-				.RequestTimeout(pingTimeout);
+			var requestOverrides = new RequestConfiguration
+			{
+				ConnectTimeout = pingTimeout,
+				RequestTimeout = pingTimeout
+			};
 			var response = this.Connection.HeadSync(CreateUriToPath(baseUri, ""), requestOverrides);
 			if (response.Response == null) return false;
 			using(response.Response)
@@ -67,9 +70,11 @@ namespace Elasticsearch.Net.Connection
 		public virtual Task<bool> PingAsync(Uri baseUri)
 		{
 			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(50);
-			var requestOverrides = new RequestConnectionConfiguration()
-				.ConnectTimeout(pingTimeout)
-				.RequestTimeout(pingTimeout);
+			var requestOverrides = new RequestConfiguration
+			{
+				ConnectTimeout = pingTimeout,
+				RequestTimeout = pingTimeout
+			};
 
 			return this.Connection.Head(CreateUriToPath(baseUri, ""), requestOverrides)
 				.ContinueWith(t=>
@@ -85,18 +90,20 @@ namespace Elasticsearch.Net.Connection
 		public IList<Uri> Sniff()
 		{
 			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(50);
-			var requestOverrides = new RequestConfiguration()
-				.ConnectTimeout(pingTimeout)
-				.RequestTimeout(pingTimeout)
-				.DisableSniffing();
-			var requestParameters = new FluentRequestParameters()
-				.RequestConfiguration(r => requestOverrides);
+			var requestOverrides = new RequestConfiguration
+			{
+				ConnectTimeout = pingTimeout,
+				RequestTimeout = pingTimeout,
+				DisableSniff = true //sniff call should never recurse 
+			};
+
+			var requestParameters = new RequestParameters { RequestConfiguration = requestOverrides };
 			
 			var path = "_nodes/_all/clear?timeout=" + pingTimeout;
 
 			using (var tracer = new ElasticsearchResponseTracer<Stream>(this.Settings.TraceEnabled))
 			{
-				var requestState = new TransportRequestState<Stream>(tracer, "GET", path, requestParameters: requestParameters);
+				var requestState = new TransportRequestState<Stream>(this.Settings, requestParameters, tracer, "GET", path);
 				var response = this.DoRequest(requestState);
 				if (response.Response == null) return null;
 
@@ -149,11 +156,10 @@ namespace Elasticsearch.Net.Connection
 				return true;
 			if (requestConfiguration == null)
 				return false;
-			return requestConfiguration.SniffingDisabled.GetValueOrDefault(false);
+			return requestConfiguration.DisableSniff.GetValueOrDefault(false);
 		}
 
-		private bool SniffOnFaultDiscoveredMoreNodes<T>(TransportRequestState<T> requestState, int retried,
-			ElasticsearchResponse<Stream> streamResponse)
+		private bool SniffOnFaultDiscoveredMoreNodes<T>(TransportRequestState<T> requestState, int retried, ElasticsearchResponse<Stream> streamResponse)
 		{
 			if (retried != 0 || streamResponse.SuccessOrKnownError) return false;
 			SniffOnConnectionFailure(requestState, retried);
@@ -179,15 +185,16 @@ namespace Elasticsearch.Net.Connection
 
 		private Uri GetNextBaseUri<T>(TransportRequestState<T> requestState, out int initialSeed, out bool shouldPingHint)
 		{
-			if (requestState.RequestConfiguration != null && requestState.RequestConfiguration.ForcedNode != null)
+			if (requestState.RequestConfiguration != null && requestState.RequestConfiguration.ForceNode != null)
 			{
 				initialSeed = 0; 
 				shouldPingHint = false;
-				return requestState.RequestConfiguration.ForcedNode;
+				return requestState.RequestConfiguration.ForceNode;
 			}
 			var baseUri = this._connectionPool.GetNext(requestState.Seed, out initialSeed, out shouldPingHint);
 			return baseUri;
 		}
+
 		private Uri CreateUriToPath(Uri baseUri, string path)
 		{
 			var s = this.Settings;
@@ -251,7 +258,7 @@ namespace Elasticsearch.Net.Connection
 			using (var tracer = new ElasticsearchResponseTracer<T>(this.Settings.TraceEnabled))
 			{
 				var postData = PostData(data);
-				var requestState = new TransportRequestState<T>(tracer, method, path, postData, requestParameters);
+				var requestState = new TransportRequestState<T>(this.Settings, requestParameters, tracer, method, path, postData);
 
 				var result = this.DoRequest<T>(requestState);
 				var objectNeedsResponseRef = result.Response as IResponseWithRequestInformation;
@@ -283,7 +290,7 @@ namespace Elasticsearch.Net.Connection
 				if (shouldPingHint 
 					&& !this.ConfigurationValues.DisablePings
 					&& (requestState.RequestConfiguration == null
-						|| !requestState.RequestConfiguration.PingDisabled.GetValueOrDefault(false))
+						|| !requestState.RequestConfiguration.DisablePing.GetValueOrDefault(false))
 					)
 					this.Ping(baseUri);
 
@@ -354,7 +361,7 @@ namespace Elasticsearch.Net.Connection
 			using (var tracer = new ElasticsearchResponseTracer<T>(this.Settings.TraceEnabled))
 			{
 				var postData = PostData(data);
-				var requestState = new TransportRequestState<T>(tracer, method, path, postData, requestParameters);
+				var requestState = new TransportRequestState<T>(this.Settings, requestParameters, tracer, method, path, postData);
 
 				return this.DoRequestAsync<T>(requestState)
 					.ContinueWith(t =>
@@ -520,7 +527,8 @@ namespace Elasticsearch.Net.Connection
 
 		private ElasticsearchResponse<T> StreamToTypedResponse<T>(
 			ElasticsearchResponse<Stream> streamResponse, 
-			object deserializationState)
+			Func<IElasticsearchResponse, Stream, object> deserializationState
+			)
 		{
 			//if the user explicitly wants a stream returned the undisposed stream
 			if (typeof(Stream).IsAssignableFrom(typeof(T)))
@@ -535,7 +543,8 @@ namespace Elasticsearch.Net.Connection
 
 				var type = typeof(T);
 				if (!(this.Settings.KeepRawResponse || this.TypeOfResponseCopiesDirectly<T>()))
-					return this._deserializeToResponse(streamResponse.Response, deserializationState, cs);
+					return this._deserializeToResponse(cs, streamResponse.Response, deserializationState);
+
 
 				if (streamResponse.Response != null)
 					streamResponse.Response.CopyTo(memoryStream);
@@ -552,7 +561,7 @@ namespace Elasticsearch.Net.Connection
 					this.SetByteResult(cs as ElasticsearchResponse<byte[]>, bytes);
 					return cs;
 				}
-				return this._deserializeToResponse(memoryStream, deserializationState, cs);
+				return this._deserializeToResponse(cs, memoryStream, deserializationState);
 			}
 		}
 
@@ -609,27 +618,30 @@ namespace Elasticsearch.Net.Connection
 
 		}
 		
-		private ElasticsearchResponse<T> _deserializeToResponse<T>(Stream response, object deserializationState, ElasticsearchResponse<T> cs)
+		private ElasticsearchResponse<T> _deserializeToResponse<T>(
+			ElasticsearchResponse<T> typedResponse,
+			Stream responseStream, 
+			Func<IElasticsearchResponse, Stream, object> deserializationState)
 		{
-			if (response == null
-				|| (!cs.HttpStatusCode.HasValue)
-				|| ((cs.HttpStatusCode.Value < 200 || cs.HttpStatusCode >= 300) && cs.HttpStatusCode != 404)
+			if (responseStream == null
+				|| (!typedResponse.HttpStatusCode.HasValue)
+				|| ((typedResponse.HttpStatusCode.Value < 200 || typedResponse.HttpStatusCode >= 300) && typedResponse.HttpStatusCode != 404)
 				)
-				return cs;
+				return typedResponse;
 
 			var customConverter = deserializationState as Func<IElasticsearchResponse, Stream, T>;
 			if (customConverter != null)
 			{
-				using (response)
+				using (responseStream)
 				{
-					var t = customConverter(cs, response);
-					cs.Response = t;
-					return cs;
+					var t = customConverter(typedResponse, responseStream);
+					typedResponse.Response = t;
+					return typedResponse;
 				}
 			}
-			var deserialized = this.Serializer.Deserialize<T>(response);
-			cs.Response = deserialized;
-			return cs;
+			var deserialized = this.Serializer.Deserialize<T>(responseStream);
+			typedResponse.Response = deserialized;
+			return typedResponse;
 		}
 
 		private Task<ElasticsearchResponse<T>> _deserializeAsyncToResponse<T>(Stream response, object deserializationState, ElasticsearchResponse<T> cs)

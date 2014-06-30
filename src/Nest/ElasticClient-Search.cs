@@ -24,11 +24,14 @@ namespace Nest
 		{
 			searchSelector.ThrowIfNull("searchSelector");
 			var descriptor = searchSelector(new SearchDescriptor<T>());
-			var pathInfo =
-				((IPathInfo<SearchRequestParameters>)descriptor).ToPathInfo(_connectionSettings)
-				.DeserializationState(new Func<IElasticsearchResponse, Stream, SearchResponse<TResult>>((r, s) =>
-					this.FieldsSearchDeserializer<T, TResult>(r, s, descriptor)
-				));
+
+			Func<IElasticsearchResponse, Stream, SearchResponse<TResult>> responseCreator = 
+					(r, s) => this.FieldsSearchDeserializer<T, TResult>(r, s, descriptor);
+
+			IPathInfo<SearchRequestParameters> p = descriptor;
+			var pathInfo = p
+				.ToPathInfo(_connectionSettings)
+				.DeserializationState(responseCreator);
 
 			var status = this.RawDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, descriptor);
 			return status.Success ? status.Response : CreateInvalidInstance<SearchResponse<TResult>>(status);
@@ -44,8 +47,7 @@ namespace Nest
 			where T : class
 			where TResult : class
 		{
-			var pathInfo = ((IPathInfo<SearchRequestParameters>)request).ToPathInfo(_connectionSettings);
-
+			var pathInfo = request.ToPathInfo(_connectionSettings);
 			var status = this.RawDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, request);
 			return status.Success ? status.Response : CreateInvalidInstance<SearchResponse<TResult>>(status);
 		}
@@ -77,10 +79,14 @@ namespace Nest
 		{
 			searchSelector.ThrowIfNull("searchSelector");
 			var descriptor = searchSelector(new SearchDescriptor<T>());
-			var deserializationState = this.CreateCovariantSearchSelector<T, TResult>(descriptor);
-			var pathInfo =
-				((IPathInfo<SearchRequestParameters>) descriptor).ToPathInfo(_connectionSettings)
-				.DeserializationState(deserializationState);
+			
+			Func<IElasticsearchResponse, Stream, SearchResponse<TResult>> responseCreator = 
+					(r, s) => this.FieldsSearchDeserializer<T, TResult>(r, s, descriptor);
+
+			IPathInfo<SearchRequestParameters> p = descriptor;
+			var pathInfo = p
+				.ToPathInfo(_connectionSettings)
+				.DeserializationState(responseCreator);
 
 			return this.RawDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, descriptor)
 				.ContinueWith<ISearchResponse<TResult>>(t => {

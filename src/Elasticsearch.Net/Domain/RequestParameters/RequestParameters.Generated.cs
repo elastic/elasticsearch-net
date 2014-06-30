@@ -5651,16 +5651,6 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal IEnumerable<object> _fields { get; set; }
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public UpdateRequestParameters Fields(params string[] fields)
-		{
-			this._fields = fields.Select(f=>(object)f);
-			this.AddQueryString("fields", this._fields);
-			return this;
-		}
-		
-		
 		internal string _lang { get; set; }
 		///<summary>The script language (default: mvel)</summary>
 		public UpdateRequestParameters Lang(string lang)

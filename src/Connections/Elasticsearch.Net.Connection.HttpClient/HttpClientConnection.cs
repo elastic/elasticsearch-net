@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Connection.Configuration;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -78,7 +79,7 @@ namespace Elasticsearch.Net.Connection
 		/// <param name="data">The data.</param>
 		/// <param name="requestSpecificConfig">The request specific configuration.</param>
 		/// <returns>ElasticsearchResponse&lt;Stream&gt;.</returns>
-		public ElasticsearchResponse<Stream> DoRequestSync(HttpMethod method, Uri uri, byte[] data = null, IRequestConnectionConfiguration requestSpecificConfig = null)
+		public ElasticsearchResponse<Stream> DoRequestSync(HttpMethod method, Uri uri, byte[] data = null, IRequestConfiguration requestSpecificConfig = null)
 		{
 			ThrowIfDisposed();
 
@@ -107,7 +108,7 @@ namespace Elasticsearch.Net.Connection
 		/// <param name="data">The data.</param>
 		/// <param name="requestSpecificConfig">The request specific configuration.</param>
 		/// <returns>Task&lt;ElasticsearchResponse&lt;Stream&gt;&gt;.</returns>
-		public async Task<ElasticsearchResponse<Stream>> DoRequest(HttpMethod method, Uri uri, byte[] data = null, IRequestConnectionConfiguration requestSpecificConfig = null)
+		public async Task<ElasticsearchResponse<Stream>> DoRequest(HttpMethod method, Uri uri, byte[] data = null, IRequestConfiguration requestSpecificConfig = null)
 		{
 			ThrowIfDisposed();
 
@@ -119,9 +120,9 @@ namespace Elasticsearch.Net.Connection
 				{
 					request.Content = new ByteArrayContent(data);
 
-					if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.AcceptsContentType))
+					if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.ContentType))
 					{
-						request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestSpecificConfig.AcceptsContentType));
+						request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestSpecificConfig.ContentType));
 					}
 					else if (!string.IsNullOrWhiteSpace(DefaultContentType))
 					{
@@ -151,62 +152,62 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		Task<ElasticsearchResponse<Stream>> IConnection.Get(Uri uri, IRequestConnectionConfiguration requestSpecificConfig)
+		Task<ElasticsearchResponse<Stream>> IConnection.Get(Uri uri, IRequestConfiguration requestSpecificConfig)
 		{
 			return DoRequest(HttpMethod.Get, uri, null, requestSpecificConfig);
 		}
 
-		ElasticsearchResponse<Stream> IConnection.GetSync(Uri uri, IRequestConnectionConfiguration requestSpecificConfig)
+		ElasticsearchResponse<Stream> IConnection.GetSync(Uri uri, IRequestConfiguration requestSpecificConfig)
 		{
 			return DoRequestSync(HttpMethod.Get, uri, null, requestSpecificConfig);
 		}
 
-		Task<ElasticsearchResponse<Stream>> IConnection.Head(Uri uri, IRequestConnectionConfiguration requestSpecificConfig)
+		Task<ElasticsearchResponse<Stream>> IConnection.Head(Uri uri, IRequestConfiguration requestSpecificConfig)
 		{
 			return DoRequest(HttpMethod.Head, uri, null, requestSpecificConfig);
 		}
 
-		ElasticsearchResponse<Stream> IConnection.HeadSync(Uri uri, IRequestConnectionConfiguration requestSpecificConfig)
+		ElasticsearchResponse<Stream> IConnection.HeadSync(Uri uri, IRequestConfiguration requestSpecificConfig)
 		{
 			return DoRequestSync(HttpMethod.Head, uri, null, requestSpecificConfig);
 		}
 
-		Task<ElasticsearchResponse<Stream>> IConnection.Post(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig)
+		Task<ElasticsearchResponse<Stream>> IConnection.Post(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
 			return DoRequest(HttpMethod.Post, uri, data, requestSpecificConfig);
 		}
 
-		ElasticsearchResponse<Stream> IConnection.PostSync(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig)
+		ElasticsearchResponse<Stream> IConnection.PostSync(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
 			return DoRequestSync(HttpMethod.Post, uri, data, requestSpecificConfig);
 		}
 
-		Task<ElasticsearchResponse<Stream>> IConnection.Put(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig)
+		Task<ElasticsearchResponse<Stream>> IConnection.Put(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
 			return DoRequest(HttpMethod.Put, uri, data, requestSpecificConfig);
 		}
 
-		ElasticsearchResponse<Stream> IConnection.PutSync(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig)
+		ElasticsearchResponse<Stream> IConnection.PutSync(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
 			return DoRequestSync(HttpMethod.Put, uri, data, requestSpecificConfig);
 		}
 
-		Task<ElasticsearchResponse<Stream>> IConnection.Delete(Uri uri, IRequestConnectionConfiguration requestSpecificConfig)
+		Task<ElasticsearchResponse<Stream>> IConnection.Delete(Uri uri, IRequestConfiguration requestSpecificConfig)
 		{
 			return DoRequest(HttpMethod.Delete, uri, null, requestSpecificConfig);
 		}
 
-		ElasticsearchResponse<Stream> IConnection.DeleteSync(Uri uri, IRequestConnectionConfiguration requestSpecificConfig)
+		ElasticsearchResponse<Stream> IConnection.DeleteSync(Uri uri, IRequestConfiguration requestSpecificConfig)
 		{
 			return DoRequestSync(HttpMethod.Delete, uri, null, requestSpecificConfig);
 		}
 
-		Task<ElasticsearchResponse<Stream>> IConnection.Delete(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig)
+		Task<ElasticsearchResponse<Stream>> IConnection.Delete(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
 			return DoRequest(HttpMethod.Delete, uri, data, requestSpecificConfig);
 		}
 
-		ElasticsearchResponse<Stream> IConnection.DeleteSync(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig)
+		ElasticsearchResponse<Stream> IConnection.DeleteSync(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
 			return DoRequestSync(HttpMethod.Delete, uri, data, requestSpecificConfig);
 		}

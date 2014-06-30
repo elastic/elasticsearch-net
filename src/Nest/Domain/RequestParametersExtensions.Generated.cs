@@ -305,18 +305,6 @@ namespace Nest
 			return qs;
 		}
 		
-		
-		///<summary>A comma-separated list of fields to return in the response</summary>
-			internal static UpdateRequestParameters _Fields<T>(
-				this UpdateRequestParameters qs,
-				IEnumerable<Expression<Func<T, object>>>  fields)
-			where T : class
-		{
-			var _fields = fields.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("fields", _fields);
-			return qs;
-		}
-		
 }
 }
  

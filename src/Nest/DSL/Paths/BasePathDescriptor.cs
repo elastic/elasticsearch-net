@@ -1,6 +1,7 @@
 ﻿using System;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Connection.Configuration;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -12,7 +13,7 @@ namespace Nest
 		protected IRequest<TParameters> Request { get { return this; } }
 		
 		[JsonIgnore]
-		RequestConfiguration IRequest<TParameters>.RequestConfiguration { get; set; }
+		IRequestConfiguration IRequest<TParameters>.RequestConfiguration { get; set; }
 
 		private TParameters _requestParameters = new TParameters();
 
@@ -32,7 +33,10 @@ namespace Nest
 			pathInfo.RequestParameters = queryString ?? new TParameters();
 			var config = this.Request.RequestConfiguration;
 			if (config != null)
-				pathInfo.RequestParameters.RequestConfiguration(r => config);
+			{
+				IRequestParameters p = pathInfo.RequestParameters;
+				p.RequestConfiguration = config;
+			}
 
 			SetRouteParameters(settings, pathInfo);
 
@@ -65,11 +69,10 @@ namespace Nest
 		/// <summary>
 		/// Specify settings for this request alone, handy if you need a custom timeout or want to bypass sniffing, retries
 		/// </summary>
-		public TDescriptor RequestConfiguration(Func<RequestConfiguration, RequestConfiguration> configurationSelector)
+		public TDescriptor RequestConfiguration(Func<RequestConfigurationDescriptor, IRequestConfiguration> configurationSelector)
 		{
 			configurationSelector.ThrowIfNull("configurationSelector");
-			this.Request.RequestConfiguration =
-				configurationSelector(this.Request.RequestConfiguration ?? new RequestConfiguration());
+			this.Request.RequestConfiguration = configurationSelector(new RequestConfigurationDescriptor());
 			return (TDescriptor)this;
 		}
 		

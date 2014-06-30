@@ -17,11 +17,13 @@ namespace Nest
 	{
 		private readonly IConnectionSettingsValues _settings;
 		private readonly JsonSerializerSettings _serializationSettings;
+		private readonly ElasticInferrer _infer;
 
 		public NestSerializer(IConnectionSettingsValues settings)
 		{
 			this._settings = settings;
 			this._serializationSettings = this.CreateSettings();
+			this._infer = new ElasticInferrer(this._settings);
 		}
 
 		public virtual byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented)
@@ -29,6 +31,44 @@ namespace Nest
 			var format = formatting == SerializationFormatting.None ? Formatting.None : Formatting.Indented;
 			var serialized = JsonConvert.SerializeObject(data, format, this._serializationSettings);
 			return serialized.Utf8Bytes();
+		}
+
+		public string Stringify(object valueType)
+		{
+			var s = valueType as string;
+			if (s != null)
+				return s;
+			var ss = valueType as string[];
+			if (ss != null)
+				return string.Join(",", ss);
+
+			var pns = valueType as IEnumerable<object>;
+			if (pns != null)
+				return string.Join(",", pns.Select(
+					oo =>
+					{
+						if (oo is PropertyNameMarker)
+							return this._infer.PropertyName(oo as PropertyNameMarker);
+						if (oo is PropertyPathMarker)
+							return this._infer.PropertyPath(oo as PropertyPathMarker);
+						return oo.ToString();
+					})
+				);
+
+			var e = valueType as Enum;
+			if (e != null) return KnownEnums.Resolve(e);
+			if (valueType is bool)
+				return ((bool) valueType) ? "true" : "false";
+			
+			var pn = valueType as PropertyNameMarker;
+			if (pn != null)
+				return this._infer.PropertyName(pn);
+
+			var pp = valueType as PropertyPathMarker;
+			if (pp != null)
+				return this._infer.PropertyPath(pp);
+
+			return valueType.ToString();
 		}
 
 		/// <summary>

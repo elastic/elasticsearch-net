@@ -29,7 +29,7 @@ namespace Nest
 			this.RequestParameters = new T();
 		}
 
-		public ElasticsearchPathInfo<T> DeserializationState(object customObjectCreation)
+		public ElasticsearchPathInfo<T> DeserializationState(Func<IElasticsearchResponse, Stream, object> customObjectCreation)
 		{
 			this.RequestParameters.DeserializationState(customObjectCreation);
 			return this;

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
@@ -234,7 +235,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					FakeResponse.OkAsync(config), //info 8
 					FakeResponse.OkAsync(config) //info 9
 				);
-				getCall.Invokes((Uri u, IRequestConnectionConfiguration o) => seenNodes.Add(u));
+				getCall.Invokes((Uri u, IRequestConfiguration o) => seenNodes.Add(u));
 
 				var client1 = fake.Resolve<ElasticsearchClient>();
 				await client1.InfoAsync(); //info call 1
@@ -306,7 +307,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					FakeResponse.Ok(config), //info 8
 					FakeResponse.Ok(config) //info 9
 				);
-				getCall.Invokes((Uri u, IRequestConnectionConfiguration o) => seenNodes.Add(u));
+				getCall.Invokes((Uri u, IRequestConfiguration o) => seenNodes.Add(u));
 
 				var client1 = fake.Resolve<ElasticsearchClient>();
 				client1.Info(); //info call 1

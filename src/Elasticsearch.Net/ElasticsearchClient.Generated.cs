@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Connection.Configuration;
 
 ///Generated File Please Do Not Edit Manually
 	
@@ -35,12 +36,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_bench/abort/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AbortBenchmarkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -70,12 +70,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_bench/abort/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AbortBenchmarkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -107,12 +106,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_bench/abort/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AbortBenchmarkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -144,12 +142,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_bench/abort/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AbortBenchmarkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -178,12 +175,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> Bulk<T>(object body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
 		{
 			var url = "_bulk".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -212,12 +208,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> BulkAsync<T>(object body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
 		{
 			var url = "_bulk".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -248,12 +243,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> Bulk(object body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
 		{
 			var url = "_bulk".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -284,12 +278,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> BulkAsync(object body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
 		{
 			var url = "_bulk".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -320,12 +313,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -356,12 +348,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -394,12 +385,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -432,12 +422,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -470,12 +459,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -508,12 +496,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -548,12 +535,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -588,12 +574,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -622,12 +607,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> BulkPut<T>(object body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
 		{
 			var url = "_bulk".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -656,12 +640,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(object body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
 		{
 			var url = "_bulk".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -692,12 +675,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> BulkPut(object body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
 		{
 			var url = "_bulk".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -728,12 +710,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> BulkPutAsync(object body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null)
 		{
 			var url = "_bulk".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -764,12 +745,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -800,12 +780,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -838,12 +817,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -876,12 +854,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bulk".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -914,12 +891,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -952,12 +928,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -992,12 +967,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -1032,12 +1006,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new BulkRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -1065,12 +1038,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> CatAliases<T>(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/aliases";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAliasesRequestParameters());
-			(requestParams as CatAliasesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1097,12 +1069,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatAliasesAsync<T>(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/aliases";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAliasesRequestParameters());
-			(requestParams as CatAliasesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1131,12 +1102,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<string> CatAliases(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/aliases";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAliasesRequestParameters());
-			(requestParams as CatAliasesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1165,12 +1135,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<string>> CatAliasesAsync(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/aliases";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAliasesRequestParameters());
-			(requestParams as CatAliasesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1199,12 +1168,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_cat/aliases/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAliasesRequestParameters());
-			(requestParams as CatAliasesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1233,12 +1201,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_cat/aliases/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAliasesRequestParameters());
-			(requestParams as CatAliasesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1269,12 +1236,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_cat/aliases/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAliasesRequestParameters());
-			(requestParams as CatAliasesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1305,12 +1271,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_cat/aliases/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAliasesRequestParameters());
-			(requestParams as CatAliasesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1337,12 +1302,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> CatAllocation<T>(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/allocation";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAllocationRequestParameters());
-			(requestParams as CatAllocationRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1369,12 +1333,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatAllocationAsync<T>(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/allocation";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAllocationRequestParameters());
-			(requestParams as CatAllocationRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1403,12 +1366,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<string> CatAllocation(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/allocation";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAllocationRequestParameters());
-			(requestParams as CatAllocationRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1437,12 +1399,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<string>> CatAllocationAsync(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/allocation";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAllocationRequestParameters());
-			(requestParams as CatAllocationRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1471,12 +1432,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cat/allocation/{0}".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAllocationRequestParameters());
-			(requestParams as CatAllocationRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1505,12 +1465,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cat/allocation/{0}".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAllocationRequestParameters());
-			(requestParams as CatAllocationRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1541,12 +1500,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cat/allocation/{0}".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAllocationRequestParameters());
-			(requestParams as CatAllocationRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1577,12 +1535,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cat/allocation/{0}".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatAllocationRequestParameters());
-			(requestParams as CatAllocationRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1609,12 +1566,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> CatCount<T>(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/count";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatCountRequestParameters());
-			(requestParams as CatCountRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1641,12 +1597,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatCountAsync<T>(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/count";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatCountRequestParameters());
-			(requestParams as CatCountRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1675,12 +1630,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<string> CatCount(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/count";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatCountRequestParameters());
-			(requestParams as CatCountRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1709,12 +1663,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<string>> CatCountAsync(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/count";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatCountRequestParameters());
-			(requestParams as CatCountRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1743,12 +1696,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/count/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatCountRequestParameters());
-			(requestParams as CatCountRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1777,12 +1729,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/count/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatCountRequestParameters());
-			(requestParams as CatCountRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1813,12 +1764,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/count/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatCountRequestParameters());
-			(requestParams as CatCountRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1849,12 +1799,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/count/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatCountRequestParameters());
-			(requestParams as CatCountRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1881,12 +1830,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> CatFielddata<T>(Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/fielddata";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatFielddataRequestParameters());
-			(requestParams as CatFielddataRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1913,12 +1861,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatFielddataAsync<T>(Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/fielddata";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatFielddataRequestParameters());
-			(requestParams as CatFielddataRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1947,12 +1894,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<string> CatFielddata(Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/fielddata";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatFielddataRequestParameters());
-			(requestParams as CatFielddataRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -1981,12 +1927,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<string>> CatFielddataAsync(Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/fielddata";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatFielddataRequestParameters());
-			(requestParams as CatFielddataRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2013,12 +1958,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> CatHealth<T>(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/health";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatHealthRequestParameters());
-			(requestParams as CatHealthRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2045,12 +1989,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatHealthAsync<T>(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/health";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatHealthRequestParameters());
-			(requestParams as CatHealthRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2079,12 +2022,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<string> CatHealth(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/health";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatHealthRequestParameters());
-			(requestParams as CatHealthRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2113,12 +2055,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<string>> CatHealthAsync(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/health";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatHealthRequestParameters());
-			(requestParams as CatHealthRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2145,12 +2086,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> CatHelp<T>(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null)
 		{
 			var url = "_cat";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatHelpRequestParameters());
-			(requestParams as CatHelpRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2177,12 +2117,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatHelpAsync<T>(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null)
 		{
 			var url = "_cat";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatHelpRequestParameters());
-			(requestParams as CatHelpRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2211,12 +2150,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<string> CatHelp(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null)
 		{
 			var url = "_cat";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatHelpRequestParameters());
-			(requestParams as CatHelpRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2245,12 +2183,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<string>> CatHelpAsync(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null)
 		{
 			var url = "_cat";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatHelpRequestParameters());
-			(requestParams as CatHelpRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2277,12 +2214,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> CatIndices<T>(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/indices";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatIndicesRequestParameters());
-			(requestParams as CatIndicesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2309,12 +2245,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatIndicesAsync<T>(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/indices";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatIndicesRequestParameters());
-			(requestParams as CatIndicesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2343,12 +2278,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<string> CatIndices(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/indices";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatIndicesRequestParameters());
-			(requestParams as CatIndicesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2377,12 +2311,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<string>> CatIndicesAsync(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/indices";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatIndicesRequestParameters());
-			(requestParams as CatIndicesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2411,12 +2344,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/indices/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatIndicesRequestParameters());
-			(requestParams as CatIndicesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2445,12 +2377,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/indices/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatIndicesRequestParameters());
-			(requestParams as CatIndicesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2481,12 +2412,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/indices/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatIndicesRequestParameters());
-			(requestParams as CatIndicesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2517,12 +2447,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/indices/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatIndicesRequestParameters());
-			(requestParams as CatIndicesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2549,12 +2478,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> CatMaster<T>(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/master";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatMasterRequestParameters());
-			(requestParams as CatMasterRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2581,12 +2509,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatMasterAsync<T>(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/master";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatMasterRequestParameters());
-			(requestParams as CatMasterRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2615,12 +2542,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<string> CatMaster(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/master";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatMasterRequestParameters());
-			(requestParams as CatMasterRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2649,12 +2575,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<string>> CatMasterAsync(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/master";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatMasterRequestParameters());
-			(requestParams as CatMasterRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2681,12 +2606,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> CatNodes<T>(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/nodes";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatNodesRequestParameters());
-			(requestParams as CatNodesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2713,12 +2637,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatNodesAsync<T>(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/nodes";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatNodesRequestParameters());
-			(requestParams as CatNodesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2747,12 +2670,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<string> CatNodes(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/nodes";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatNodesRequestParameters());
-			(requestParams as CatNodesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2781,12 +2703,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<string>> CatNodesAsync(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/nodes";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatNodesRequestParameters());
-			(requestParams as CatNodesRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2813,12 +2734,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> CatPendingTasks<T>(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/pending_tasks";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatPendingTasksRequestParameters());
-			(requestParams as CatPendingTasksRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2845,12 +2765,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatPendingTasksAsync<T>(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/pending_tasks";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatPendingTasksRequestParameters());
-			(requestParams as CatPendingTasksRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2879,12 +2798,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<string> CatPendingTasks(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/pending_tasks";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatPendingTasksRequestParameters());
-			(requestParams as CatPendingTasksRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2913,12 +2831,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<string>> CatPendingTasksAsync(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/pending_tasks";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatPendingTasksRequestParameters());
-			(requestParams as CatPendingTasksRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2945,12 +2862,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> CatPlugins<T>(Func<CatPluginsRequestParameters, CatPluginsRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/plugins";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatPluginsRequestParameters());
-			(requestParams as CatPluginsRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -2977,12 +2893,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatPluginsAsync<T>(Func<CatPluginsRequestParameters, CatPluginsRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/plugins";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatPluginsRequestParameters());
-			(requestParams as CatPluginsRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3011,12 +2926,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<string> CatPlugins(Func<CatPluginsRequestParameters, CatPluginsRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/plugins";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatPluginsRequestParameters());
-			(requestParams as CatPluginsRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3045,12 +2959,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<string>> CatPluginsAsync(Func<CatPluginsRequestParameters, CatPluginsRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/plugins";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatPluginsRequestParameters());
-			(requestParams as CatPluginsRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3077,12 +2990,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> CatRecovery<T>(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/recovery";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatRecoveryRequestParameters());
-			(requestParams as CatRecoveryRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3109,12 +3021,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatRecoveryAsync<T>(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/recovery";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatRecoveryRequestParameters());
-			(requestParams as CatRecoveryRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3143,12 +3054,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<string> CatRecovery(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/recovery";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatRecoveryRequestParameters());
-			(requestParams as CatRecoveryRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3177,12 +3087,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<string>> CatRecoveryAsync(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/recovery";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatRecoveryRequestParameters());
-			(requestParams as CatRecoveryRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3211,12 +3120,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/recovery/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatRecoveryRequestParameters());
-			(requestParams as CatRecoveryRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3245,12 +3153,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/recovery/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatRecoveryRequestParameters());
-			(requestParams as CatRecoveryRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3281,12 +3188,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/recovery/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatRecoveryRequestParameters());
-			(requestParams as CatRecoveryRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3317,12 +3223,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/recovery/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatRecoveryRequestParameters());
-			(requestParams as CatRecoveryRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3349,12 +3254,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> CatShards<T>(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/shards";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatShardsRequestParameters());
-			(requestParams as CatShardsRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3381,12 +3285,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatShardsAsync<T>(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/shards";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatShardsRequestParameters());
-			(requestParams as CatShardsRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3415,12 +3318,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<string> CatShards(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/shards";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatShardsRequestParameters());
-			(requestParams as CatShardsRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3449,12 +3351,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<string>> CatShardsAsync(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/shards";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatShardsRequestParameters());
-			(requestParams as CatShardsRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3483,12 +3384,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/shards/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatShardsRequestParameters());
-			(requestParams as CatShardsRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3517,12 +3417,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/shards/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatShardsRequestParameters());
-			(requestParams as CatShardsRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3553,12 +3452,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/shards/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatShardsRequestParameters());
-			(requestParams as CatShardsRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3589,12 +3487,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cat/shards/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatShardsRequestParameters());
-			(requestParams as CatShardsRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3621,12 +3518,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> CatThreadPool<T>(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/thread_pool";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatThreadPoolRequestParameters());
-			(requestParams as CatThreadPoolRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3653,12 +3549,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatThreadPoolAsync<T>(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/thread_pool";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatThreadPoolRequestParameters());
-			(requestParams as CatThreadPoolRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3687,12 +3582,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<string> CatThreadPool(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/thread_pool";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatThreadPoolRequestParameters());
-			(requestParams as CatThreadPoolRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3721,12 +3615,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<string>> CatThreadPoolAsync(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null)
 		{
 			var url = "_cat/thread_pool";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new CatThreadPoolRequestParameters());
-			(requestParams as CatThreadPoolRequestParameters).RequestConfiguration(r=>r.ContentType("text/plain"));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			
 
 
@@ -3756,12 +3649,11 @@ namespace Elasticsearch.Net
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -3792,12 +3684,11 @@ namespace Elasticsearch.Net
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -3830,12 +3721,11 @@ namespace Elasticsearch.Net
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -3868,12 +3758,11 @@ namespace Elasticsearch.Net
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -3902,12 +3791,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> ClearScroll<T>(object body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null)
 		{
 			var url = "_search/scroll".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -3936,12 +3824,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> ClearScrollAsync<T>(object body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null)
 		{
 			var url = "_search/scroll".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -3972,12 +3859,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> ClearScroll(object body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null)
 		{
 			var url = "_search/scroll".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4008,12 +3894,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> ClearScrollAsync(object body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null)
 		{
 			var url = "_search/scroll".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4041,12 +3926,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> ClusterGetSettings<T>(Func<ClusterGetSettingsRequestParameters, ClusterGetSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/settings";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterGetSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4074,12 +3958,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> ClusterGetSettingsAsync<T>(Func<ClusterGetSettingsRequestParameters, ClusterGetSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/settings";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterGetSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4109,12 +3992,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> ClusterGetSettings(Func<ClusterGetSettingsRequestParameters, ClusterGetSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/settings";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterGetSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4144,12 +4026,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterGetSettingsAsync(Func<ClusterGetSettingsRequestParameters, ClusterGetSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/settings";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterGetSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4177,12 +4058,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> ClusterHealth<T>(Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/health";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterHealthRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4210,12 +4090,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> ClusterHealthAsync<T>(Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/health";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterHealthRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4245,12 +4124,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> ClusterHealth(Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/health";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterHealthRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4280,12 +4158,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterHealthAsync(Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/health";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterHealthRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4315,12 +4192,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cluster/health/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterHealthRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4350,12 +4226,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cluster/health/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterHealthRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4387,12 +4262,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cluster/health/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterHealthRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4424,12 +4298,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cluster/health/{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterHealthRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4457,12 +4330,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> ClusterPendingTasks<T>(Func<ClusterPendingTasksRequestParameters, ClusterPendingTasksRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/pending_tasks";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterPendingTasksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4490,12 +4362,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> ClusterPendingTasksAsync<T>(Func<ClusterPendingTasksRequestParameters, ClusterPendingTasksRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/pending_tasks";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterPendingTasksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4525,12 +4396,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> ClusterPendingTasks(Func<ClusterPendingTasksRequestParameters, ClusterPendingTasksRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/pending_tasks";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterPendingTasksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4560,12 +4430,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterPendingTasksAsync(Func<ClusterPendingTasksRequestParameters, ClusterPendingTasksRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/pending_tasks";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterPendingTasksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4594,12 +4463,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> ClusterPutSettings<T>(object body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/settings".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4628,12 +4496,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(object body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/settings".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4664,12 +4531,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> ClusterPutSettings(object body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/settings".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4700,12 +4566,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterPutSettingsAsync(object body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/settings".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4734,12 +4599,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> ClusterReroute<T>(object body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/reroute".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterRerouteRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4768,12 +4632,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> ClusterRerouteAsync<T>(object body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/reroute".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterRerouteRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4804,12 +4667,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> ClusterReroute(object body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/reroute".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterRerouteRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4840,12 +4702,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterRerouteAsync(object body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/reroute".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterRerouteRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4873,12 +4734,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> ClusterState<T>(Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/state";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4906,12 +4766,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> ClusterStateAsync<T>(Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/state";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4941,12 +4800,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> ClusterState(Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/state";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -4976,12 +4834,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterStateAsync(Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/state";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5011,12 +4868,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_cluster/state/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5046,12 +4902,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_cluster/state/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5083,12 +4938,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_cluster/state/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5120,12 +4974,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_cluster/state/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5157,12 +5010,11 @@ namespace Elasticsearch.Net
 			metric.ThrowIfNullOrEmpty("metric");
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cluster/state/{0}/{1}".F(Encoded(metric), Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5194,12 +5046,11 @@ namespace Elasticsearch.Net
 			metric.ThrowIfNullOrEmpty("metric");
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cluster/state/{0}/{1}".F(Encoded(metric), Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5233,12 +5084,11 @@ namespace Elasticsearch.Net
 			metric.ThrowIfNullOrEmpty("metric");
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cluster/state/{0}/{1}".F(Encoded(metric), Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5272,12 +5122,11 @@ namespace Elasticsearch.Net
 			metric.ThrowIfNullOrEmpty("metric");
 			index.ThrowIfNullOrEmpty("index");
 			var url = "_cluster/state/{0}/{1}".F(Encoded(metric), Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5305,12 +5154,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> ClusterStats<T>(Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/stats";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5338,12 +5186,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> ClusterStatsAsync<T>(Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/stats";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5373,12 +5220,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> ClusterStats(Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/stats";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5408,12 +5254,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> ClusterStatsAsync(Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/stats";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5443,12 +5288,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/stats/nodes/{0}".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5478,12 +5322,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/stats/nodes/{0}".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5515,12 +5358,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/stats/nodes/{0}".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5552,12 +5394,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/stats/nodes/{0}".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClusterStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5586,12 +5427,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> Count<T>(object body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null)
 		{
 			var url = "_count".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5620,12 +5460,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CountAsync<T>(object body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null)
 		{
 			var url = "_count".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5656,12 +5495,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> Count(object body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null)
 		{
 			var url = "_count".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5692,12 +5530,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> CountAsync(object body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null)
 		{
 			var url = "_count".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5728,12 +5565,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5764,12 +5600,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5802,12 +5637,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5840,12 +5674,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5878,12 +5711,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5916,12 +5748,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5956,12 +5787,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -5996,12 +5826,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6029,12 +5858,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> CountGet<T>(Func<CountRequestParameters, CountRequestParameters> requestParameters = null)
 		{
 			var url = "_count";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6062,12 +5890,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CountGetAsync<T>(Func<CountRequestParameters, CountRequestParameters> requestParameters = null)
 		{
 			var url = "_count";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6097,12 +5924,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> CountGet(Func<CountRequestParameters, CountRequestParameters> requestParameters = null)
 		{
 			var url = "_count";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6132,12 +5958,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> CountGetAsync(Func<CountRequestParameters, CountRequestParameters> requestParameters = null)
 		{
 			var url = "_count";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6167,12 +5992,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6202,12 +6026,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6239,12 +6062,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6276,12 +6098,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_count".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6313,12 +6134,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6350,12 +6170,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6389,12 +6208,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6428,12 +6246,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6465,12 +6282,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6502,12 +6318,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6541,12 +6356,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6580,12 +6394,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6619,12 +6432,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6658,12 +6470,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6699,12 +6510,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6740,12 +6550,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6778,12 +6587,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6816,12 +6624,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6856,12 +6663,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6896,12 +6702,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6936,12 +6741,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -6976,12 +6780,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7018,12 +6821,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7060,12 +6862,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateCountRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7099,12 +6900,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new DeleteRequestParameters());
-			(requestParams as DeleteRequestParameters).RequestConfiguration(r=>r.AllowStatusCodes(404));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			
 
 
@@ -7137,12 +6937,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new DeleteRequestParameters());
-			(requestParams as DeleteRequestParameters).RequestConfiguration(r=>r.AllowStatusCodes(404));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			
 
 
@@ -7177,12 +6976,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new DeleteRequestParameters());
-			(requestParams as DeleteRequestParameters).RequestConfiguration(r=>r.AllowStatusCodes(404));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			
 
 
@@ -7217,12 +7015,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new DeleteRequestParameters());
-			(requestParams as DeleteRequestParameters).RequestConfiguration(r=>r.AllowStatusCodes(404));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			
 
 
@@ -7252,12 +7049,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_query".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteByQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7288,12 +7084,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_query".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteByQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7326,12 +7121,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_query".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteByQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7364,12 +7158,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_query".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteByQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7402,12 +7195,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_query".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteByQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7440,12 +7232,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_query".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteByQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7480,12 +7271,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_query".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteByQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7520,12 +7310,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_query".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteByQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7559,12 +7348,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new DocumentExistsRequestParameters());
-			(requestParams as DocumentExistsRequestParameters).RequestConfiguration(r=>r.AllowStatusCodes(404));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			
 
 
@@ -7597,12 +7385,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new DocumentExistsRequestParameters());
-			(requestParams as DocumentExistsRequestParameters).RequestConfiguration(r=>r.AllowStatusCodes(404));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			
 
 
@@ -7637,12 +7424,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new DocumentExistsRequestParameters());
-			(requestParams as DocumentExistsRequestParameters).RequestConfiguration(r=>r.AllowStatusCodes(404));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			
 
 
@@ -7677,12 +7463,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new DocumentExistsRequestParameters());
-			(requestParams as DocumentExistsRequestParameters).RequestConfiguration(r=>r.AllowStatusCodes(404));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			
 
 
@@ -7715,12 +7500,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ExplainRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7754,12 +7538,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ExplainRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7795,12 +7578,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ExplainRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7836,12 +7618,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ExplainRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7876,12 +7657,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ExplainRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7916,12 +7696,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ExplainRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -7958,12 +7737,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ExplainRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8000,12 +7778,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ExplainRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8039,12 +7816,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8078,12 +7854,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8119,12 +7894,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8160,12 +7934,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8199,12 +7972,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_source".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SourceRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8238,12 +8010,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_source".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SourceRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8279,12 +8050,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_source".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SourceRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8320,12 +8090,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_source".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SourceRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8358,12 +8127,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8396,12 +8164,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8436,12 +8203,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8476,12 +8242,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8516,12 +8281,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8556,12 +8320,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8598,12 +8361,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8640,12 +8402,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8678,12 +8439,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8716,12 +8476,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8756,12 +8515,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8796,12 +8554,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8836,12 +8593,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8876,12 +8632,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8918,12 +8673,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8960,12 +8714,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -8993,12 +8746,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesAnalyzeGetForAll<T>(Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null)
 		{
 			var url = "_analyze";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9026,12 +8778,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesAnalyzeGetForAllAsync<T>(Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null)
 		{
 			var url = "_analyze";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9061,12 +8812,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesAnalyzeGetForAll(Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null)
 		{
 			var url = "_analyze";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9096,12 +8846,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesAnalyzeGetForAllAsync(Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null)
 		{
 			var url = "_analyze";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9131,12 +8880,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9166,12 +8914,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9203,12 +8950,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9240,12 +8986,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9274,12 +9019,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesAnalyzeForAll<T>(object body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null)
 		{
 			var url = "_analyze".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9308,12 +9052,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesAnalyzeForAllAsync<T>(object body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null)
 		{
 			var url = "_analyze".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9344,12 +9087,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesAnalyzeForAll(object body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null)
 		{
 			var url = "_analyze".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9380,12 +9122,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesAnalyzeForAllAsync(object body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null)
 		{
 			var url = "_analyze".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9416,12 +9157,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9452,12 +9192,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9490,12 +9229,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9528,12 +9266,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_analyze".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AnalyzeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9561,12 +9298,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesClearCacheForAll<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null)
 		{
 			var url = "_cache/clear";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9594,12 +9330,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesClearCacheForAllAsync<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null)
 		{
 			var url = "_cache/clear";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9629,12 +9364,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesClearCacheForAll(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null)
 		{
 			var url = "_cache/clear";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9664,12 +9398,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesClearCacheForAllAsync(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null)
 		{
 			var url = "_cache/clear";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9699,12 +9432,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9734,12 +9466,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9771,12 +9502,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9808,12 +9538,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9841,12 +9570,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesClearCacheGetForAll<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null)
 		{
 			var url = "_cache/clear";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9874,12 +9602,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesClearCacheGetForAllAsync<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null)
 		{
 			var url = "_cache/clear";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9909,12 +9636,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesClearCacheGetForAll(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null)
 		{
 			var url = "_cache/clear";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9944,12 +9670,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesClearCacheGetForAllAsync(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null)
 		{
 			var url = "_cache/clear";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -9979,12 +9704,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10014,12 +9738,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10051,12 +9774,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10088,12 +9810,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_cache/clear".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ClearCacheRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10123,12 +9844,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_close".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CloseIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10158,12 +9878,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_close".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CloseIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10195,12 +9914,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_close".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CloseIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10232,12 +9950,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_close".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CloseIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10268,12 +9985,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10304,12 +10020,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10342,12 +10057,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10380,12 +10094,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10416,12 +10129,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10452,12 +10164,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10490,12 +10201,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10528,12 +10238,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10563,12 +10272,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10598,12 +10306,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10635,12 +10342,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10672,12 +10378,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10709,12 +10414,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesDeleteAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10746,12 +10450,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesDeleteAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10785,12 +10488,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesDeleteAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10824,12 +10526,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesDeleteAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10861,12 +10562,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10898,12 +10598,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10937,12 +10636,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -10976,12 +10674,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11011,12 +10708,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11046,12 +10742,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11083,12 +10778,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11120,12 +10814,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11157,12 +10850,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11194,12 +10886,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11233,12 +10924,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11272,12 +10962,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11307,12 +10996,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new IndexExistsRequestParameters());
-			(requestParams as IndexExistsRequestParameters).RequestConfiguration(r=>r.AllowStatusCodes(404));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			
 
 
@@ -11341,12 +11029,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new IndexExistsRequestParameters());
-			(requestParams as IndexExistsRequestParameters).RequestConfiguration(r=>r.AllowStatusCodes(404));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			
 
 
@@ -11377,12 +11064,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new IndexExistsRequestParameters());
-			(requestParams as IndexExistsRequestParameters).RequestConfiguration(r=>r.AllowStatusCodes(404));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			
 
 
@@ -11413,12 +11099,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
 			requestParams = requestParameters(new IndexExistsRequestParameters());
-			(requestParams as IndexExistsRequestParameters).RequestConfiguration(r=>r.AllowStatusCodes(404));
-			ToNameValueCollection(requestParams);
+			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			
 
 
@@ -11447,12 +11132,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11482,12 +11166,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11519,12 +11202,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11556,12 +11238,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11593,12 +11274,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11630,12 +11310,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11669,12 +11348,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11708,12 +11386,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11743,12 +11420,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11778,12 +11454,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11815,12 +11490,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11852,12 +11526,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11887,12 +11560,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11922,12 +11594,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11959,12 +11630,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -11996,12 +11666,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12033,12 +11702,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsTypeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12070,12 +11738,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsTypeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12109,12 +11776,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsTypeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12148,12 +11814,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesExistsTypeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12181,12 +11846,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesFlushForAll<T>(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12214,12 +11878,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesFlushForAllAsync<T>(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12249,12 +11912,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesFlushForAll(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12284,12 +11946,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushForAllAsync(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12319,12 +11980,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12354,12 +12014,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12391,12 +12050,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12428,12 +12086,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12461,12 +12118,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesFlushGetForAll<T>(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12494,12 +12150,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesFlushGetForAllAsync<T>(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12529,12 +12184,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesFlushGetForAll(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12564,12 +12218,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushGetForAllAsync(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12599,12 +12252,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12634,12 +12286,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12671,12 +12322,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12708,12 +12358,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new FlushRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12741,12 +12390,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesGetAliasForAll<T>(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			var url = "_alias";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12774,12 +12422,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesGetAliasForAllAsync<T>(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			var url = "_alias";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12809,12 +12456,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasForAll(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			var url = "_alias";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12844,12 +12490,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasForAllAsync(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			var url = "_alias";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12879,12 +12524,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12914,12 +12558,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12951,12 +12594,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -12988,12 +12630,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13025,12 +12666,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13062,12 +12702,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13101,12 +12740,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13140,12 +12778,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13175,12 +12812,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13210,12 +12846,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13247,12 +12882,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13284,12 +12918,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13317,12 +12950,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesGetAliasesForAll<T>(Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
 		{
 			var url = "_aliases";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13350,12 +12982,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesGetAliasesForAllAsync<T>(Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
 		{
 			var url = "_aliases";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13385,12 +13016,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasesForAll(Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
 		{
 			var url = "_aliases";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13420,12 +13050,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesForAllAsync(Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
 		{
 			var url = "_aliases";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13455,12 +13084,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_aliases".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13490,12 +13118,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_aliases".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13527,12 +13154,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_aliases".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13564,12 +13190,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_aliases".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13601,12 +13226,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_aliases/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13638,12 +13262,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_aliases/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13677,12 +13300,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_aliases/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13716,12 +13338,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_aliases/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13751,12 +13372,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_aliases/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13786,12 +13406,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_aliases/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13823,12 +13442,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_aliases/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13860,12 +13478,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_aliases/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13895,12 +13512,11 @@ namespace Elasticsearch.Net
 		{
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/field/{0}".F(Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13930,12 +13546,11 @@ namespace Elasticsearch.Net
 		{
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/field/{0}".F(Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -13967,12 +13582,11 @@ namespace Elasticsearch.Net
 		{
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/field/{0}".F(Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14004,12 +13618,11 @@ namespace Elasticsearch.Net
 		{
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/field/{0}".F(Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14041,12 +13654,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			field.ThrowIfNullOrEmpty("field");
 			var url = "{0}/_mapping/field/{1}".F(Encoded(index), Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14078,12 +13690,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			field.ThrowIfNullOrEmpty("field");
 			var url = "{0}/_mapping/field/{1}".F(Encoded(index), Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14117,12 +13728,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			field.ThrowIfNullOrEmpty("field");
 			var url = "{0}/_mapping/field/{1}".F(Encoded(index), Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14156,12 +13766,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			field.ThrowIfNullOrEmpty("field");
 			var url = "{0}/_mapping/field/{1}".F(Encoded(index), Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14193,12 +13802,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/{0}/field/{1}".F(Encoded(type), Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14230,12 +13838,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/{0}/field/{1}".F(Encoded(type), Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14269,12 +13876,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/{0}/field/{1}".F(Encoded(type), Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14308,12 +13914,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/{0}/field/{1}".F(Encoded(type), Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14347,12 +13952,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
 			var url = "{0}/_mapping/{1}/field/{2}".F(Encoded(index), Encoded(type), Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14386,12 +13990,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
 			var url = "{0}/_mapping/{1}/field/{2}".F(Encoded(index), Encoded(type), Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14427,12 +14030,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
 			var url = "{0}/_mapping/{1}/field/{2}".F(Encoded(index), Encoded(type), Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14468,12 +14070,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
 			var url = "{0}/_mapping/{1}/field/{2}".F(Encoded(index), Encoded(type), Encoded(field));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14501,12 +14102,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesGetMappingForAll<T>(Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null)
 		{
 			var url = "_mapping";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14534,12 +14134,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesGetMappingForAllAsync<T>(Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null)
 		{
 			var url = "_mapping";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14569,12 +14168,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesGetMappingForAll(Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null)
 		{
 			var url = "_mapping";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14604,12 +14202,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetMappingForAllAsync(Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null)
 		{
 			var url = "_mapping";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14639,12 +14236,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mapping".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14674,12 +14270,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mapping".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14711,12 +14306,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mapping".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14748,12 +14342,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mapping".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14783,12 +14376,11 @@ namespace Elasticsearch.Net
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14818,12 +14410,11 @@ namespace Elasticsearch.Net
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14855,12 +14446,11 @@ namespace Elasticsearch.Net
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14892,12 +14482,11 @@ namespace Elasticsearch.Net
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14929,12 +14518,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/_mapping/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -14966,12 +14554,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/_mapping/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15005,12 +14592,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/_mapping/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15044,12 +14630,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/_mapping/{1}".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15077,12 +14662,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesGetSettingsForAll<T>(Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_settings";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15110,12 +14694,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesGetSettingsForAllAsync<T>(Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_settings";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15145,12 +14728,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesGetSettingsForAll(Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_settings";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15180,12 +14762,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetSettingsForAllAsync(Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_settings";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15215,12 +14796,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15250,12 +14830,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15287,12 +14866,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15324,12 +14902,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15361,12 +14938,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_settings/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15398,12 +14974,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_settings/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15437,12 +15012,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_settings/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15476,12 +15050,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_settings/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15511,12 +15084,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_settings/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15546,12 +15118,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_settings/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15583,12 +15154,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_settings/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15620,12 +15190,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_settings/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetIndexSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15653,12 +15222,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
 		{
 			var url = "_template";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15686,12 +15254,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
 		{
 			var url = "_template";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15721,12 +15288,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesGetTemplateForAll(Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
 		{
 			var url = "_template";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15756,12 +15322,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetTemplateForAllAsync(Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
 		{
 			var url = "_template";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15791,12 +15356,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15826,12 +15390,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15863,12 +15426,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15900,12 +15462,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15933,12 +15494,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesGetWarmerForAll<T>(Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null)
 		{
 			var url = "_warmer";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -15966,12 +15526,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesGetWarmerForAllAsync<T>(Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null)
 		{
 			var url = "_warmer";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16001,12 +15560,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesGetWarmerForAll(Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null)
 		{
 			var url = "_warmer";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16036,12 +15594,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetWarmerForAllAsync(Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null)
 		{
 			var url = "_warmer";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16071,12 +15628,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_warmer".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16106,12 +15662,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_warmer".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16143,12 +15698,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_warmer".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16180,12 +15734,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_warmer".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16217,12 +15770,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16254,12 +15806,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16293,12 +15844,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16332,12 +15882,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16367,12 +15916,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16402,12 +15950,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16439,12 +15986,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16476,12 +16022,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16515,12 +16060,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16554,12 +16098,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16595,12 +16138,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16636,12 +16178,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16671,12 +16212,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_open".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OpenIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16706,12 +16246,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_open".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OpenIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16743,12 +16282,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_open".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OpenIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16780,12 +16318,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_open".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OpenIndexRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16813,12 +16350,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesOptimizeForAll<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null)
 		{
 			var url = "_optimize";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16846,12 +16382,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesOptimizeForAllAsync<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null)
 		{
 			var url = "_optimize";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16881,12 +16416,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesOptimizeForAll(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null)
 		{
 			var url = "_optimize";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16916,12 +16450,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesOptimizeForAllAsync(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null)
 		{
 			var url = "_optimize";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16951,12 +16484,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -16986,12 +16518,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17023,12 +16554,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17060,12 +16590,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17093,12 +16622,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesOptimizeGetForAll<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null)
 		{
 			var url = "_optimize";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17126,12 +16654,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesOptimizeGetForAllAsync<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null)
 		{
 			var url = "_optimize";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17161,12 +16688,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesOptimizeGetForAll(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null)
 		{
 			var url = "_optimize";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17196,12 +16722,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesOptimizeGetForAllAsync(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null)
 		{
 			var url = "_optimize";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17231,12 +16756,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17266,12 +16790,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17303,12 +16826,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17340,12 +16862,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_optimize".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new OptimizeRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17378,12 +16899,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17416,12 +16936,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17456,12 +16975,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17496,12 +17014,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17532,12 +17049,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17568,12 +17084,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17606,12 +17121,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17644,12 +17158,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17682,12 +17195,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17720,12 +17232,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17760,12 +17271,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17800,12 +17310,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17836,12 +17345,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17872,12 +17380,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17910,12 +17417,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17948,12 +17454,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -17986,12 +17491,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18024,12 +17528,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18064,12 +17567,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18104,12 +17606,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18140,12 +17641,11 @@ namespace Elasticsearch.Net
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18176,12 +17676,11 @@ namespace Elasticsearch.Net
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18214,12 +17713,11 @@ namespace Elasticsearch.Net
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18252,12 +17750,11 @@ namespace Elasticsearch.Net
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18290,12 +17787,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18328,12 +17824,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18368,12 +17863,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18408,12 +17902,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18444,12 +17937,11 @@ namespace Elasticsearch.Net
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18480,12 +17972,11 @@ namespace Elasticsearch.Net
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18518,12 +18009,11 @@ namespace Elasticsearch.Net
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18556,12 +18046,11 @@ namespace Elasticsearch.Net
 		{
 			type.ThrowIfNullOrEmpty("type");
 			var url = "_mapping/{0}".F(Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutMappingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18590,12 +18079,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesPutSettingsForAll<T>(object body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_settings".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new UpdateSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18624,12 +18112,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesPutSettingsForAllAsync<T>(object body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_settings".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new UpdateSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18660,12 +18147,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesPutSettingsForAll(object body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_settings".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new UpdateSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18696,12 +18182,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutSettingsForAllAsync(object body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null)
 		{
 			var url = "_settings".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new UpdateSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18732,12 +18217,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new UpdateSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18768,12 +18252,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new UpdateSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18806,12 +18289,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new UpdateSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18844,12 +18326,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_settings".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new UpdateSettingsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18880,12 +18361,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18916,12 +18396,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18954,12 +18433,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -18992,12 +18470,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19028,12 +18505,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19064,12 +18540,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19102,12 +18577,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19140,12 +18614,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_template/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19176,12 +18649,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19212,12 +18684,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19250,12 +18721,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19288,12 +18758,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19326,12 +18795,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19364,12 +18832,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19404,12 +18871,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19444,12 +18910,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19484,12 +18949,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19524,12 +18988,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19566,12 +19029,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19608,12 +19070,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19644,12 +19105,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19680,12 +19140,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19718,12 +19177,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19756,12 +19214,11 @@ namespace Elasticsearch.Net
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_warmer/{0}".F(Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19794,12 +19251,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19832,12 +19288,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19872,12 +19327,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19912,12 +19366,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19952,12 +19405,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -19992,12 +19444,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20034,12 +19485,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20076,12 +19526,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PutWarmerRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20109,12 +19558,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesRecoveryForAll<T>(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
 		{
 			var url = "_recovery";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20142,12 +19590,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesRecoveryForAllAsync<T>(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
 		{
 			var url = "_recovery";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20177,12 +19624,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesRecoveryForAll(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
 		{
 			var url = "_recovery";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20212,12 +19658,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRecoveryForAllAsync(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
 		{
 			var url = "_recovery";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20247,12 +19692,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_recovery".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20282,12 +19726,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_recovery".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20319,12 +19762,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_recovery".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20356,12 +19798,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_recovery".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20389,12 +19830,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesRefreshForAll<T>(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null)
 		{
 			var url = "_refresh";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20422,12 +19862,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesRefreshForAllAsync<T>(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null)
 		{
 			var url = "_refresh";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20457,12 +19896,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesRefreshForAll(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null)
 		{
 			var url = "_refresh";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20492,12 +19930,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRefreshForAllAsync(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null)
 		{
 			var url = "_refresh";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20527,12 +19964,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20562,12 +19998,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20599,12 +20034,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20636,12 +20070,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20669,12 +20102,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesRefreshGetForAll<T>(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null)
 		{
 			var url = "_refresh";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20702,12 +20134,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesRefreshGetForAllAsync<T>(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null)
 		{
 			var url = "_refresh";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20737,12 +20168,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesRefreshGetForAll(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null)
 		{
 			var url = "_refresh";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20772,12 +20202,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRefreshGetForAllAsync(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null)
 		{
 			var url = "_refresh";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20807,12 +20236,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20842,12 +20270,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20879,12 +20306,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20916,12 +20342,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_refresh".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RefreshRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20949,12 +20374,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesSegmentsForAll<T>(Func<SegmentsRequestParameters, SegmentsRequestParameters> requestParameters = null)
 		{
 			var url = "_segments";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SegmentsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -20982,12 +20406,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesSegmentsForAllAsync<T>(Func<SegmentsRequestParameters, SegmentsRequestParameters> requestParameters = null)
 		{
 			var url = "_segments";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SegmentsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21017,12 +20440,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesSegmentsForAll(Func<SegmentsRequestParameters, SegmentsRequestParameters> requestParameters = null)
 		{
 			var url = "_segments";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SegmentsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21052,12 +20474,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesSegmentsForAllAsync(Func<SegmentsRequestParameters, SegmentsRequestParameters> requestParameters = null)
 		{
 			var url = "_segments";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SegmentsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21087,12 +20508,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_segments".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SegmentsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21122,12 +20542,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_segments".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SegmentsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21159,12 +20578,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_segments".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SegmentsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21196,12 +20614,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_segments".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SegmentsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21229,12 +20646,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesStatsForAll<T>(Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null)
 		{
 			var url = "_stats";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21262,12 +20678,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesStatsForAllAsync<T>(Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null)
 		{
 			var url = "_stats";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21297,12 +20712,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesStatsForAll(Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null)
 		{
 			var url = "_stats";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21332,12 +20746,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesStatsForAllAsync(Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null)
 		{
 			var url = "_stats";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21367,12 +20780,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_stats/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21402,12 +20814,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_stats/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21439,12 +20850,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_stats/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21476,12 +20886,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_stats/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21511,12 +20920,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_stats".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21546,12 +20954,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_stats".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21583,12 +20990,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_stats".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21620,12 +21026,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_stats".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21657,12 +21062,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "{0}/_stats/{1}".F(Encoded(index), Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21694,12 +21098,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "{0}/_stats/{1}".F(Encoded(index), Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21733,12 +21136,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "{0}/_stats/{1}".F(Encoded(index), Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21772,12 +21174,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "{0}/_stats/{1}".F(Encoded(index), Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21805,12 +21206,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesStatusForAll<T>(Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_status";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21838,12 +21238,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesStatusForAllAsync<T>(Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_status";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21873,12 +21272,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesStatusForAll(Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_status";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21908,12 +21306,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesStatusForAllAsync(Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_status";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21943,12 +21340,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_status".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -21978,12 +21374,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_status".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22015,12 +21410,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_status".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22052,12 +21446,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_status".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new IndicesStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22086,12 +21479,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesUpdateAliasesForAll<T>(object body, Func<AliasRequestParameters, AliasRequestParameters> requestParameters = null)
 		{
 			var url = "_aliases".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22120,12 +21512,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesUpdateAliasesForAllAsync<T>(object body, Func<AliasRequestParameters, AliasRequestParameters> requestParameters = null)
 		{
 			var url = "_aliases".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22156,12 +21547,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesUpdateAliasesForAll(object body, Func<AliasRequestParameters, AliasRequestParameters> requestParameters = null)
 		{
 			var url = "_aliases".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22192,12 +21582,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesUpdateAliasesForAllAsync(object body, Func<AliasRequestParameters, AliasRequestParameters> requestParameters = null)
 		{
 			var url = "_aliases".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new AliasRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22225,12 +21614,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesValidateQueryGetForAll<T>(Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
 		{
 			var url = "_validate/query";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22258,12 +21646,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesValidateQueryGetForAllAsync<T>(Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
 		{
 			var url = "_validate/query";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22293,12 +21680,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesValidateQueryGetForAll(Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
 		{
 			var url = "_validate/query";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22328,12 +21714,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesValidateQueryGetForAllAsync(Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
 		{
 			var url = "_validate/query";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22363,12 +21748,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22398,12 +21782,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22435,12 +21818,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22472,12 +21854,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22509,12 +21890,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22546,12 +21926,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22585,12 +21964,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22624,12 +22002,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22658,12 +22035,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> IndicesValidateQueryForAll<T>(object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
 		{
 			var url = "_validate/query".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22692,12 +22068,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesValidateQueryForAllAsync<T>(object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
 		{
 			var url = "_validate/query".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22728,12 +22103,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> IndicesValidateQueryForAll(object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
 		{
 			var url = "_validate/query".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22764,12 +22138,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesValidateQueryForAllAsync(object body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null)
 		{
 			var url = "_validate/query".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22800,12 +22173,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22836,12 +22208,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22874,12 +22245,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22912,12 +22282,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_validate/query".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22950,12 +22319,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -22988,12 +22356,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23028,12 +22395,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23068,12 +22434,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ValidateQueryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23101,12 +22466,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> Info<T>(Func<InfoRequestParameters, InfoRequestParameters> requestParameters = null)
 		{
 			var url = "";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new InfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23134,12 +22498,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> InfoAsync<T>(Func<InfoRequestParameters, InfoRequestParameters> requestParameters = null)
 		{
 			var url = "";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new InfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23169,12 +22532,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> Info(Func<InfoRequestParameters, InfoRequestParameters> requestParameters = null)
 		{
 			var url = "";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new InfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23204,12 +22566,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> InfoAsync(Func<InfoRequestParameters, InfoRequestParameters> requestParameters = null)
 		{
 			var url = "";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new InfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23237,12 +22598,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> ListBenchmarks<T>(Func<ListBenchmarksRequestParameters, ListBenchmarksRequestParameters> requestParameters = null)
 		{
 			var url = "_bench";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ListBenchmarksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23270,12 +22630,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> ListBenchmarksAsync<T>(Func<ListBenchmarksRequestParameters, ListBenchmarksRequestParameters> requestParameters = null)
 		{
 			var url = "_bench";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ListBenchmarksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23305,12 +22664,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> ListBenchmarks(Func<ListBenchmarksRequestParameters, ListBenchmarksRequestParameters> requestParameters = null)
 		{
 			var url = "_bench";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ListBenchmarksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23340,12 +22698,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> ListBenchmarksAsync(Func<ListBenchmarksRequestParameters, ListBenchmarksRequestParameters> requestParameters = null)
 		{
 			var url = "_bench";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ListBenchmarksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23375,12 +22732,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bench".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ListBenchmarksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23410,12 +22766,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bench".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ListBenchmarksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23447,12 +22802,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bench".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ListBenchmarksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23484,12 +22838,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_bench".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ListBenchmarksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23521,12 +22874,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_bench".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ListBenchmarksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23558,12 +22910,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_bench".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ListBenchmarksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23597,12 +22948,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_bench".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ListBenchmarksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23636,12 +22986,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_bench".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ListBenchmarksRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23669,12 +23018,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> MgetGet<T>(Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null)
 		{
 			var url = "_mget";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23702,12 +23050,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> MgetGetAsync<T>(Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null)
 		{
 			var url = "_mget";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23737,12 +23084,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> MgetGet(Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null)
 		{
 			var url = "_mget";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23772,12 +23118,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> MgetGetAsync(Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null)
 		{
 			var url = "_mget";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23807,12 +23152,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23842,12 +23186,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23879,12 +23222,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23916,12 +23258,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23953,12 +23294,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -23990,12 +23330,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24029,12 +23368,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24068,12 +23406,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24102,12 +23439,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> Mget<T>(object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null)
 		{
 			var url = "_mget".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24136,12 +23472,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> MgetAsync<T>(object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null)
 		{
 			var url = "_mget".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24172,12 +23507,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> Mget(object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null)
 		{
 			var url = "_mget".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24208,12 +23542,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> MgetAsync(object body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null)
 		{
 			var url = "_mget".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24244,12 +23577,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24280,12 +23612,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24318,12 +23649,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24356,12 +23686,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mget".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24394,12 +23723,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24432,12 +23760,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24472,12 +23799,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24512,12 +23838,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiGetRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24551,12 +23876,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MoreLikeThisRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24590,12 +23914,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MoreLikeThisRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24631,12 +23954,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MoreLikeThisRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24672,12 +23994,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MoreLikeThisRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24712,12 +24033,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MoreLikeThisRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24752,12 +24072,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MoreLikeThisRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24794,12 +24113,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MoreLikeThisRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24836,12 +24154,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MoreLikeThisRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24869,12 +24186,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> MpercolateGet<T>(Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24902,12 +24218,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24937,12 +24252,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> MpercolateGet(Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -24972,12 +24286,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25007,12 +24320,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25042,12 +24354,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25079,12 +24390,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25116,12 +24426,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25153,12 +24462,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25190,12 +24498,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25229,12 +24536,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25268,12 +24574,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25302,12 +24607,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> Mpercolate<T>(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25336,12 +24640,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25372,12 +24675,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> Mpercolate(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25408,12 +24710,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25444,12 +24745,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25480,12 +24780,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25518,12 +24817,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25556,12 +24854,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25594,12 +24891,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25632,12 +24928,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25672,12 +24967,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25712,12 +25006,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MpercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25745,12 +25038,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> MsearchGet<T>(Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null)
 		{
 			var url = "_msearch";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25778,12 +25070,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> MsearchGetAsync<T>(Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null)
 		{
 			var url = "_msearch";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25813,12 +25104,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> MsearchGet(Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null)
 		{
 			var url = "_msearch";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25848,12 +25138,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> MsearchGetAsync(Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null)
 		{
 			var url = "_msearch";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25883,12 +25172,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25918,12 +25206,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25955,12 +25242,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -25992,12 +25278,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26029,12 +25314,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26066,12 +25350,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26105,12 +25388,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26144,12 +25426,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26178,12 +25459,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> Msearch<T>(object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null)
 		{
 			var url = "_msearch".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26212,12 +25492,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null)
 		{
 			var url = "_msearch".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26248,12 +25527,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> Msearch(object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null)
 		{
 			var url = "_msearch".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26284,12 +25562,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> MsearchAsync(object body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null)
 		{
 			var url = "_msearch".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26320,12 +25597,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26356,12 +25632,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26394,12 +25669,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26432,12 +25706,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_msearch".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26470,12 +25743,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26508,12 +25780,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26548,12 +25819,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26588,12 +25858,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiSearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26621,12 +25890,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> MtermvectorsGet<T>(Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26654,12 +25922,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26689,12 +25956,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> MtermvectorsGet(Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26724,12 +25990,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsGetAsync(Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26759,12 +26024,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26794,12 +26058,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26831,12 +26094,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26868,12 +26130,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26905,12 +26166,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26942,12 +26202,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -26981,12 +26240,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27020,12 +26278,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27054,12 +26311,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> Mtermvectors<T>(object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27088,12 +26344,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27124,12 +26379,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> Mtermvectors(object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27160,12 +26414,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> MtermvectorsAsync(object body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null)
 		{
 			var url = "_mtermvectors".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27196,12 +26449,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27232,12 +26484,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27270,12 +26521,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27308,12 +26558,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mtermvectors".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27346,12 +26595,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27384,12 +26632,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27424,12 +26671,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27464,12 +26710,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new MultiTermVectorsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27497,12 +26742,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> NodesHotThreadsForAll<T>(Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/nodes/hotthreads";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesHotThreadsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27530,12 +26774,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> NodesHotThreadsForAllAsync<T>(Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/nodes/hotthreads";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesHotThreadsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27565,12 +26808,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> NodesHotThreadsForAll(Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/nodes/hotthreads";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesHotThreadsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27600,12 +26842,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> NodesHotThreadsForAllAsync(Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> requestParameters = null)
 		{
 			var url = "_cluster/nodes/hotthreads";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesHotThreadsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27635,12 +26876,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesHotThreadsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27670,12 +26910,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesHotThreadsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27707,12 +26946,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesHotThreadsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27744,12 +26982,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesHotThreadsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27777,12 +27014,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> NodesInfoForAll<T>(Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null)
 		{
 			var url = "_nodes";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27810,12 +27046,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> NodesInfoForAllAsync<T>(Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null)
 		{
 			var url = "_nodes";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27845,12 +27080,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> NodesInfoForAll(Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null)
 		{
 			var url = "_nodes";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27880,12 +27114,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> NodesInfoForAllAsync(Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null)
 		{
 			var url = "_nodes";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27915,12 +27148,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27950,12 +27182,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -27987,12 +27218,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28024,12 +27254,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28059,12 +27288,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28094,12 +27322,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28131,12 +27358,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28168,12 +27394,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28205,12 +27430,11 @@ namespace Elasticsearch.Net
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}/{1}".F(Encoded(node_id), Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28242,12 +27466,11 @@ namespace Elasticsearch.Net
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}/{1}".F(Encoded(node_id), Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28281,12 +27504,11 @@ namespace Elasticsearch.Net
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}/{1}".F(Encoded(node_id), Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28320,12 +27542,11 @@ namespace Elasticsearch.Net
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}/{1}".F(Encoded(node_id), Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesInfoRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28353,12 +27574,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> NodesShutdownForAll<T>(Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> requestParameters = null)
 		{
 			var url = "_shutdown";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesShutdownRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28386,12 +27606,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> NodesShutdownForAllAsync<T>(Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> requestParameters = null)
 		{
 			var url = "_shutdown";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesShutdownRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28421,12 +27640,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> NodesShutdownForAll(Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> requestParameters = null)
 		{
 			var url = "_shutdown";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesShutdownRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28456,12 +27674,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> NodesShutdownForAllAsync(Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> requestParameters = null)
 		{
 			var url = "_shutdown";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesShutdownRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28491,12 +27708,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesShutdownRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28526,12 +27742,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesShutdownRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28563,12 +27778,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesShutdownRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28600,12 +27814,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesShutdownRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28633,12 +27846,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> NodesStatsForAll<T>(Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null)
 		{
 			var url = "_nodes/stats";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28666,12 +27878,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> NodesStatsForAllAsync<T>(Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null)
 		{
 			var url = "_nodes/stats";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28701,12 +27912,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> NodesStatsForAll(Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null)
 		{
 			var url = "_nodes/stats";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28736,12 +27946,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> NodesStatsForAllAsync(Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null)
 		{
 			var url = "_nodes/stats";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28771,12 +27980,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}/stats".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28806,12 +28014,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}/stats".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28843,12 +28050,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}/stats".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28880,12 +28086,11 @@ namespace Elasticsearch.Net
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			var url = "_nodes/{0}/stats".F(Encoded(node_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28915,12 +28120,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/stats/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28950,12 +28154,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/stats/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -28987,12 +28190,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/stats/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29024,12 +28226,11 @@ namespace Elasticsearch.Net
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/stats/{0}".F(Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29061,12 +28262,11 @@ namespace Elasticsearch.Net
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}/stats/{1}".F(Encoded(node_id), Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29098,12 +28298,11 @@ namespace Elasticsearch.Net
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}/stats/{1}".F(Encoded(node_id), Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29137,12 +28336,11 @@ namespace Elasticsearch.Net
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}/stats/{1}".F(Encoded(node_id), Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29176,12 +28374,11 @@ namespace Elasticsearch.Net
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
 			var url = "_nodes/{0}/stats/{1}".F(Encoded(node_id), Encoded(metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29213,12 +28410,11 @@ namespace Elasticsearch.Net
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
 			var url = "_nodes/stats/{0}/{1}".F(Encoded(metric), Encoded(index_metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29250,12 +28446,11 @@ namespace Elasticsearch.Net
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
 			var url = "_nodes/stats/{0}/{1}".F(Encoded(metric), Encoded(index_metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29289,12 +28484,11 @@ namespace Elasticsearch.Net
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
 			var url = "_nodes/stats/{0}/{1}".F(Encoded(metric), Encoded(index_metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29328,12 +28522,11 @@ namespace Elasticsearch.Net
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
 			var url = "_nodes/stats/{0}/{1}".F(Encoded(metric), Encoded(index_metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29367,12 +28560,11 @@ namespace Elasticsearch.Net
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
 			var url = "_nodes/{0}/stats/{1}/{2}".F(Encoded(node_id), Encoded(metric), Encoded(index_metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29406,12 +28598,11 @@ namespace Elasticsearch.Net
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
 			var url = "_nodes/{0}/stats/{1}/{2}".F(Encoded(node_id), Encoded(metric), Encoded(index_metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29447,12 +28638,11 @@ namespace Elasticsearch.Net
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
 			var url = "_nodes/{0}/stats/{1}/{2}".F(Encoded(node_id), Encoded(metric), Encoded(index_metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29488,12 +28678,11 @@ namespace Elasticsearch.Net
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
 			var url = "_nodes/{0}/stats/{1}/{2}".F(Encoded(node_id), Encoded(metric), Encoded(index_metric));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new NodesStatsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29525,12 +28714,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29562,12 +28750,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29601,12 +28788,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29640,12 +28826,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29679,12 +28864,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29718,12 +28902,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29759,12 +28942,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29800,12 +28982,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29838,12 +29019,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29876,12 +29056,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29916,12 +29095,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29956,12 +29134,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -29996,12 +29173,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30036,12 +29212,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30078,12 +29253,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30120,12 +29294,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PercolateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30153,12 +29326,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> Ping<T>(Func<PingRequestParameters, PingRequestParameters> requestParameters = null)
 		{
 			var url = "";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30186,12 +29358,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> PingAsync<T>(Func<PingRequestParameters, PingRequestParameters> requestParameters = null)
 		{
 			var url = "";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30221,12 +29392,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> Ping(Func<PingRequestParameters, PingRequestParameters> requestParameters = null)
 		{
 			var url = "";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30256,12 +29426,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> PingAsync(Func<PingRequestParameters, PingRequestParameters> requestParameters = null)
 		{
 			var url = "";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new PingRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30289,12 +29458,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> ScrollGet<T>(Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
 		{
 			var url = "_search/scroll";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30322,12 +29490,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> ScrollGetAsync<T>(Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
 		{
 			var url = "_search/scroll";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30357,12 +29524,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> ScrollGet(Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
 		{
 			var url = "_search/scroll";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30392,12 +29558,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> ScrollGetAsync(Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
 		{
 			var url = "_search/scroll";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30427,12 +29592,11 @@ namespace Elasticsearch.Net
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30462,12 +29626,11 @@ namespace Elasticsearch.Net
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30499,12 +29662,11 @@ namespace Elasticsearch.Net
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30536,12 +29698,11 @@ namespace Elasticsearch.Net
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30570,12 +29731,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> Scroll<T>(object body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
 		{
 			var url = "_search/scroll".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30604,12 +29764,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> ScrollAsync<T>(object body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
 		{
 			var url = "_search/scroll".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30640,12 +29799,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> Scroll(object body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
 		{
 			var url = "_search/scroll".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30676,12 +29834,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> ScrollAsync(object body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
 		{
 			var url = "_search/scroll".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30712,12 +29869,11 @@ namespace Elasticsearch.Net
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30748,12 +29904,11 @@ namespace Elasticsearch.Net
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30786,12 +29941,11 @@ namespace Elasticsearch.Net
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30824,12 +29978,11 @@ namespace Elasticsearch.Net
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new ScrollRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30857,12 +30010,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> SearchGet<T>(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
 		{
 			var url = "_search";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30890,12 +30042,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
 		{
 			var url = "_search";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30925,12 +30076,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> SearchGet(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
 		{
 			var url = "_search";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30960,12 +30110,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> SearchGetAsync(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
 		{
 			var url = "_search";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -30995,12 +30144,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31030,12 +30178,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31067,12 +30214,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31104,12 +30250,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31141,12 +30286,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31178,12 +30322,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31217,12 +30360,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31256,12 +30398,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31290,12 +30431,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> Search<T>(object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
 		{
 			var url = "_search".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31324,12 +30464,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> SearchAsync<T>(object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
 		{
 			var url = "_search".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31360,12 +30499,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> Search(object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
 		{
 			var url = "_search".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31396,12 +30534,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> SearchAsync(object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
 		{
 			var url = "_search".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31432,12 +30569,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31468,12 +30604,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31506,12 +30641,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31544,12 +30678,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31582,12 +30715,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31620,12 +30752,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31660,12 +30791,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31700,12 +30830,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31733,12 +30862,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> SearchShardsGet<T>(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null)
 		{
 			var url = "_search_shards";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31766,12 +30894,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> SearchShardsGetAsync<T>(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null)
 		{
 			var url = "_search_shards";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31801,12 +30928,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> SearchShardsGet(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null)
 		{
 			var url = "_search_shards";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31836,12 +30962,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> SearchShardsGetAsync(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null)
 		{
 			var url = "_search_shards";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31871,12 +30996,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search_shards".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31906,12 +31030,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search_shards".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31943,12 +31066,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search_shards".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -31980,12 +31102,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search_shards".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32017,12 +31138,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search_shards".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32054,12 +31174,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search_shards".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32093,12 +31212,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search_shards".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32132,12 +31250,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search_shards".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32165,12 +31282,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> SearchShards<T>(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null)
 		{
 			var url = "_search_shards";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32198,12 +31314,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> SearchShardsAsync<T>(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null)
 		{
 			var url = "_search_shards";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32233,12 +31348,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> SearchShards(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null)
 		{
 			var url = "_search_shards";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32268,12 +31382,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> SearchShardsAsync(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null)
 		{
 			var url = "_search_shards";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32303,12 +31416,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search_shards".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32338,12 +31450,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search_shards".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32375,12 +31486,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search_shards".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32412,12 +31522,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search_shards".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32449,12 +31558,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search_shards".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32486,12 +31594,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search_shards".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32525,12 +31632,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search_shards".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32564,12 +31670,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search_shards".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchShardsRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32597,12 +31702,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> SearchTemplateGet<T>(Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
 		{
 			var url = "_search/template";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32630,12 +31734,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> SearchTemplateGetAsync<T>(Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
 		{
 			var url = "_search/template";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32665,12 +31768,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> SearchTemplateGet(Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
 		{
 			var url = "_search/template";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32700,12 +31802,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> SearchTemplateGetAsync(Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
 		{
 			var url = "_search/template";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32735,12 +31836,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search/template".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32770,12 +31870,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search/template".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32807,12 +31906,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search/template".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32844,12 +31942,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search/template".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32881,12 +31978,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32918,12 +32014,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32957,12 +32052,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -32996,12 +32090,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33030,12 +32123,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> SearchTemplate<T>(object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
 		{
 			var url = "_search/template".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33064,12 +32156,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
 		{
 			var url = "_search/template".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33100,12 +32191,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> SearchTemplate(object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
 		{
 			var url = "_search/template".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33136,12 +32226,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> SearchTemplateAsync(object body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null)
 		{
 			var url = "_search/template".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33172,12 +32261,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search/template".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33208,12 +32296,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search/template".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33246,12 +32333,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search/template".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33284,12 +32370,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_search/template".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33322,12 +32407,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33360,12 +32444,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33400,12 +32483,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33440,12 +32522,11 @@ namespace Elasticsearch.Net
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}/_search/template".F(Encoded(index), Encoded(type));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SearchTemplateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33478,12 +32559,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33516,12 +32596,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33556,12 +32635,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33596,12 +32674,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33634,12 +32711,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33672,12 +32748,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33712,12 +32787,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33752,12 +32826,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33788,12 +32861,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33824,12 +32896,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33862,12 +32933,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33900,12 +32970,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33936,12 +33005,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -33972,12 +33040,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34010,12 +33077,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34048,12 +33114,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new CreateRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34085,12 +33150,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteSnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34122,12 +33186,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteSnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34161,12 +33224,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteSnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34200,12 +33262,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteSnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34235,12 +33296,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34270,12 +33330,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34307,12 +33366,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34344,12 +33402,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new DeleteRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34381,12 +33438,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetSnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34418,12 +33474,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetSnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34457,12 +33512,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetSnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34496,12 +33550,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new GetSnapshotRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34529,12 +33582,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> SnapshotGetRepository<T>(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34562,12 +33614,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34597,12 +33648,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> SnapshotGetRepository(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34632,12 +33682,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetRepositoryAsync(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34667,12 +33716,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34702,12 +33750,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34739,12 +33786,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34776,12 +33822,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34814,12 +33859,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}/_restore".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RestoreRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34852,12 +33896,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}/_restore".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RestoreRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34892,12 +33935,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}/_restore".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RestoreRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34932,12 +33974,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}/_restore".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new RestoreRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34965,12 +34006,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> SnapshotStatus<T>(Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot/_status";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -34998,12 +34038,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> SnapshotStatusAsync<T>(Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot/_status";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35033,12 +34072,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> SnapshotStatus(Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot/_status";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35068,12 +34106,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotStatusAsync(Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot/_status";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35103,12 +34140,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}/_status".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35138,12 +34174,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}/_status".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35175,12 +34210,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}/_status".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35212,12 +34246,11 @@ namespace Elasticsearch.Net
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}/_status".F(Encoded(repository));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35249,12 +34282,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}/_status".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35286,12 +34318,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}/_status".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35325,12 +34356,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}/_status".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35364,12 +34394,11 @@ namespace Elasticsearch.Net
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
 			var url = "_snapshot/{0}/{1}/_status".F(Encoded(repository), Encoded(snapshot));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SnapshotStatusRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35398,12 +34427,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> Suggest<T>(object body, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null)
 		{
 			var url = "_suggest".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35432,12 +34460,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> SuggestAsync<T>(object body, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null)
 		{
 			var url = "_suggest".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35468,12 +34495,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> Suggest(object body, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null)
 		{
 			var url = "_suggest".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35504,12 +34530,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> SuggestAsync(object body, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null)
 		{
 			var url = "_suggest".F();
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35540,12 +34565,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35576,12 +34600,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35614,12 +34637,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35652,12 +34674,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35685,12 +34706,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<T> SuggestGet<T>(Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null)
 		{
 			var url = "_suggest";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35718,12 +34738,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> SuggestGetAsync<T>(Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null)
 		{
 			var url = "_suggest";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35753,12 +34772,11 @@ namespace Elasticsearch.Net
 		public ElasticsearchResponse<DynamicDictionary> SuggestGet(Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null)
 		{
 			var url = "_suggest";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35788,12 +34806,11 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<DynamicDictionary>> SuggestGetAsync(Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null)
 		{
 			var url = "_suggest";
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35823,12 +34840,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35858,12 +34874,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35895,12 +34910,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35932,12 +34946,11 @@ namespace Elasticsearch.Net
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_suggest".F(Encoded(index));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SuggestRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -35971,12 +34984,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new TermvectorRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -36010,12 +35022,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new TermvectorRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -36051,12 +35062,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new TermvectorRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -36092,12 +35102,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new TermvectorRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -36132,12 +35141,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new TermvectorRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -36172,12 +35180,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new TermvectorRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -36214,12 +35221,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new TermvectorRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -36256,12 +35262,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new TermvectorRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -36296,12 +35301,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_update".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new UpdateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -36336,12 +35340,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_update".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new UpdateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -36378,12 +35381,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_update".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new UpdateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 
@@ -36420,12 +35422,11 @@ namespace Elasticsearch.Net
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
 			var url = "{0}/{1}/{2}/_update".F(Encoded(index), Encoded(type), Encoded(id));
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new UpdateRequestParameters());
-				ToNameValueCollection(requestParams);
 			}
 				
 

@@ -10,6 +10,7 @@ using Autofac;
 using Autofac.Core.Activators.Reflection;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
@@ -49,7 +50,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				);
 				
 				var seenNodes = new List<Uri>();
-				getCall.Invokes((Uri u, IRequestConnectionConfiguration o) => seenNodes.Add(u));
+				getCall.Invokes((Uri u, IRequestConfiguration o) => seenNodes.Add(u));
 
 				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
 				pingCall.Returns(ok);
@@ -100,7 +101,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				);
 				
 				var seenNodes = new List<Uri>();
-				getCall.Invokes((Uri u, IRequestConnectionConfiguration o) => seenNodes.Add(u));
+				getCall.Invokes((Uri u, IRequestConfiguration o) => seenNodes.Add(u));
 
 				var pingCall = FakeCalls.PingAtConnectionLevelAsync(fake);
 				pingCall.Returns(ok);

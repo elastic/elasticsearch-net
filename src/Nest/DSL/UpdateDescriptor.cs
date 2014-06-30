@@ -1,92 +1,141 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using System.Linq.Expressions;
 using Nest.Resolvers;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial class UpdateDescriptor<T,K> : DocumentPathDescriptorBase<UpdateDescriptor<T, K>, T, UpdateRequestParameters> 
-		where T : class 
-		where K : class
+	public interface IUpdateRequest<TUpsert, TDocument> : IDocumentOptionalPath<UpdateRequestParameters>
+		where TUpsert : class
+		where TDocument : class 
 	{
-
-
-
 		[JsonProperty(PropertyName = "script")]
-		internal string _Script { get; set; }
+		string Script { get; set; }
+
+		[JsonProperty(PropertyName = "lang")]
+		string Language { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> _Params { get; set; }
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		Dictionary<string, object> Params { get; set; }
 
 		[JsonProperty(PropertyName = "upsert")]
-		internal object _Upsert { get; set; }
+		TUpsert Upsert { get; set; }
 
 		[JsonProperty(PropertyName = "doc_as_upsert")]
-		internal bool? _DocAsUpsert { get; set; }
+		bool? DocAsUpsert { get; set; }
 
 		[JsonProperty(PropertyName = "doc")]
-		internal K _Document { get; set; }
+		TDocument Document { get; set; }
+	}
+
+	public class UpdateRequest<TUpsert, TDocument> : BaseRequest<UpdateRequestParameters>, IUpdateRequest<TUpsert, TDocument> 
+		where TUpsert : class
+		where TDocument : class 
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
+		{
+		}
+		public IndexNameMarker Index { get; set; }
+		public TypeNameMarker Type { get; set; }
+		public string Id { get; set; }
+
+		public string Script { get; set; }
+		public string Language { get; set; }
+		public Dictionary<string, object> Params { get; set; }
+		public TUpsert Upsert { get; set; }
+		public bool? DocAsUpsert { get; set; }
+		public TDocument Document { get; set; }
+	}
+
+
+	public partial class UpdateDescriptor<TUpsert,TDocument> 
+		: DocumentPathDescriptorBase<UpdateDescriptor<TUpsert, TDocument>, TUpsert, UpdateRequestParameters>, IUpdateRequest<TUpsert, TDocument> 
+		where TUpsert : class 
+		where TDocument : class
+	{
+
+		private IUpdateRequest<TUpsert, TDocument> Self { get { return this; } }
+
+		string IUpdateRequest<TUpsert, TDocument>.Script { get; set; }
+
+		string IUpdateRequest<TUpsert, TDocument>.Language { get; set; }
+
+		Dictionary<string, object> IUpdateRequest<TUpsert, TDocument>.Params { get; set; }
+
+		TUpsert IUpdateRequest<TUpsert, TDocument>.Upsert { get; set; }
+
+		bool? IUpdateRequest<TUpsert, TDocument>.DocAsUpsert { get; set; }
+
+		TDocument IUpdateRequest<TUpsert, TDocument>.Document { get; set; }
 
 		
-		public UpdateDescriptor<T, K> Script(string script)
+		public UpdateDescriptor<TUpsert, TDocument> Script(string script)
 		{
 			script.ThrowIfNull("script");
-			this._Script = script;
+			Self.Script = script;
 			return this;
 		}
 
-		public UpdateDescriptor<T, K> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
+		public UpdateDescriptor<TUpsert, TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
-			this._Params = paramDictionary(new FluentDictionary<string, object>());
+			Self.Params = paramDictionary(new FluentDictionary<string, object>());
 			return this;
 		}
 
 		/// <summary>
 		/// The full document to be created if an existing document does not exist for a partial merge.
 		/// </summary>
-		public UpdateDescriptor<T, K> Upsert(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> upsertValues)
-		{
-			upsertValues.ThrowIfNull("upsertValues");
-			this._Upsert = upsertValues(new FluentDictionary<string, object>());
-			return this;
-		}
-
-		/// <summary>
-		/// The full document to be created if an existing document does not exist for a partial merge.
-		/// </summary>
-		public UpdateDescriptor<T, K> Upsert(T upsertObject)
+		public UpdateDescriptor<TUpsert, TDocument> Upsert(TUpsert upsertObject)
 		{
 			upsertObject.ThrowIfNull("upsertObject");
-			this._Upsert = upsertObject;
+			Self.Upsert = upsertObject;
 			return this;
 		}
 
 		/// <summary>
 		/// The partial update document to be merged on to the existing object.
 		/// </summary>
-		public UpdateDescriptor<T, K> Document(K @object)
+		public UpdateDescriptor<TUpsert, TDocument> Document(TDocument @object)
 		{
-			this._Document = @object;
+			Self.Document = @object;
 			return this;
 		}
 
-		public UpdateDescriptor<T, K> DocAsUpsert(bool docAsUpsert = true)
+		public UpdateDescriptor<TUpsert, TDocument> DocAsUpsert(bool docAsUpsert = true)
 		{
-			this._DocAsUpsert = docAsUpsert;
+			Self.DocAsUpsert = docAsUpsert;
 			return this;
 		}
 
+		///<summary>A comma-separated list of fields to return in the response</summary>
+		public UpdateDescriptor<TUpsert,TDocument> Fields(params string[] fields)
+		{
+			this.Request.RequestParameters.AddQueryString("fields", fields);
+			return this;
+		}
+		
+			
+		///<summary>A comma-separated list of fields to return in the response</summary>
+		public UpdateDescriptor<TUpsert,TDocument> Fields(params Expression<Func<TDocument, object>>[] typedPathLookups) 
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this.Request.RequestParameters.AddQueryString("fields",typedPathLookups);
+			return this;
+		}
+			
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
 		{
-			if (this._Document != null && this._Id == null)
-				this._Id = new ElasticInferrer(settings).Id(this._Document);
+			if (Self.Document != null && Self.Id == null)
+				Self.Id = new ElasticInferrer(settings).Id(Self.Document);
 
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 		}

@@ -12,14 +12,17 @@ namespace Nest
 		where T : class
 	{
 
+		protected IDocumentOptionalPath<MultiTermVectorsRequestParameters> Self { get { return this; } }
+		
 		MultiTermVectorDocument IMultiTermVectorDocumentDescriptor.Document { get; set; }
+
 		MultiTermVectorDocument IMultiTermVectorDocumentDescriptor.GetDocument()
 		{
 			IMultiTermVectorDocumentDescriptor d = this;
 			if (d.Document == null) d.Document = new MultiTermVectorDocument();
-			d.Document.Id = this._Id;
-			d.Document.Type = this._Type;
-			d.Document.Index = this._Index;
+			d.Document.Id = Self.Id;
+			d.Document.Type = Self.Type;
+			d.Document.Index = Self.Index;
 			return d.Document;
 		}
 

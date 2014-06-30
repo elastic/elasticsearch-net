@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Connection.Configuration;
 using Nest.DSL.Search;
 using Newtonsoft.Json;
 using Nest.Resolvers.Converters;
@@ -29,7 +30,7 @@ namespace Nest
 		/// <summary>
 		/// 
 		/// </summary>
-		RequestConfiguration RequestConfiguration { get; set; }
+		IRequestConfiguration RequestConfiguration { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]

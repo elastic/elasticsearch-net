@@ -200,7 +200,7 @@ namespace CodeGeneration.LowLevelClient
 
 		public static void GenerateRequestParameters(RestApiSpec model)
 		{
-			var targetFile = _esNetFolder + @"Domain\RequestParameters.Generated.cs";
+			var targetFile = _esNetFolder + @"Domain\RequestParameters\RequestParameters.Generated.cs";
 			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"RequestParameters.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}

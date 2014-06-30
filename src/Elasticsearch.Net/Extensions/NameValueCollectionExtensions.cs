@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
+using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net
 {
@@ -20,6 +24,20 @@ namespace Elasticsearch.Net
 			if (self.AllKeys.Length == 0) return string.Empty;
 
 			return prefix + string.Join("&", Array.ConvertAll(self.AllKeys, key => string.Format("{0}={1}", Uri.EscapeDataString(key), Uri.EscapeDataString(self[key]))));
+		}
+		
+		internal static NameValueCollection ToNameValueCollection(this IDictionary<string, object> dict, IElasticsearchSerializer stringifier)
+		{
+			stringifier.ThrowIfNull("stringifier");
+			if (dict == null || dict.Count < 0)
+				return null;
+			
+			var nv = new NameValueCollection();
+			foreach (var kv in dict.Where(kv => !kv.Key.IsNullOrEmpty()))
+			{
+				nv.Add(kv.Key, stringifier.Stringify(kv.Value));
+			}
+			return nv;
 		}
 	}
 }

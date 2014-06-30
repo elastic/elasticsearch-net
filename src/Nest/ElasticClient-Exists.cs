@@ -11,7 +11,7 @@ namespace Nest
 			where T : class
 		{
 			return this.Dispatch<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters, ExistsResponse>(
-				d => existsSelector(d.RequestConfiguration(r=>r.AllowStatusCodes(404))),
+				d => existsSelector(d.RequestConfiguration(r=>r.AllowedStatusCodes(404))),
 				(p, d) => ToExistsResponse(this.RawDispatch.ExistsDispatch<VoidResponse>(p))
 			);
 		}
@@ -21,7 +21,7 @@ namespace Nest
 			where T : class
 		{
 			return this.DispatchAsync<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				d => existsSelector(d.RequestConfiguration(r=>r.AllowStatusCodes(404))),
+				d => existsSelector(d.RequestConfiguration(r=>r.AllowedStatusCodes(404))),
 				(p, d) => this.RawDispatch.ExistsDispatchAsync<ExistsResponse>(p)
 			);
 		}

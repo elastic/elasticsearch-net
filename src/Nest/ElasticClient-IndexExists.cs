@@ -13,7 +13,7 @@ namespace Nest
 		public IExistsResponse IndexExists(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector)
 		{
 			return this.Dispatch<IndexExistsDescriptor, IndexExistsRequestParameters, ExistsResponse>(
-				d => selector(d.RequestConfiguration(r=>r.AllowStatusCodes(404))),
+				d => selector(d.RequestConfiguration(r=>r.AllowedStatusCodes(404))),
 				(p, d) => this.RawDispatch.IndicesExistsDispatch<ExistsResponse>(
 					p.DeserializationState(new IndexExistConverter(DeserializeExistsResponse))
 				)
@@ -24,7 +24,7 @@ namespace Nest
 		public Task<IExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector)
 		{
 			return this.DispatchAsync<IndexExistsDescriptor, IndexExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				d => selector(d.RequestConfiguration(r=>r.AllowStatusCodes(404))),
+				d => selector(d.RequestConfiguration(r=>r.AllowedStatusCodes(404))),
 				(p, d) => this.RawDispatch.IndicesExistsDispatchAsync<ExistsResponse>(
 					p.DeserializationState(new IndexExistConverter(DeserializeExistsResponse))
 				)
