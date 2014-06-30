@@ -78,11 +78,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				getCall.Returns(FakeResponse.Ok(config));
 
 				var client1 = fake.Resolve<ElasticsearchClient>();
-				client1.Info(); //info call 1
-				client1.Info(); //info call 2
-				client1.Info(); //info call 3
-				client1.Info(); //info call 4
-				client1.Info(); //info call 5
+				var result = client1.Info(); //info call 1
+				result = client1.Info(); //info call 2
+				result = client1.Info(); //info call 3
+				result = client1.Info(); //info call 4
+				result = client1.Info(); //info call 5
 
 				sniffCall.MustHaveHappened(Repeated.Exactly.Twice);
 				nowCall.MustHaveHappened(Repeated.Exactly.Times(8));
@@ -124,11 +124,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				);
 
 				var client1 = fake.Resolve<ElasticsearchClient>();
-				client1.Info(); //info call 1
-				client1.Info(); //info call 2
-				client1.Info(); //info call 3
-				client1.Info(); //info call 4
-				client1.Info(); //info call 5
+				var result = client1.Info(); //info call 1
+				result = client1.Info(); //info call 2
+				result = client1.Info(); //info call 3
+				result = client1.Info(); //info call 4
+				result = client1.Info(); //info call 5
 
 				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
 				nowCall.MustHaveHappened(Repeated.Exactly.Times(7));

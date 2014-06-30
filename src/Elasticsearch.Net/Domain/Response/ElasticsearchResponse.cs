@@ -26,7 +26,7 @@ namespace Elasticsearch.Net
 			return responseTask
 				.ContinueWith(t =>
 				{
-					if (t.IsFaulted)
+					if (t.IsFaulted && t.Exception != null)
 						throw t.Exception.Flatten().InnerException;
 
 					return ToDynamicResponse(t.Result);
@@ -51,7 +51,8 @@ namespace Elasticsearch.Net
 				ResponseRaw = from.ResponseRaw,
 				Serializer = from.Settings.Serializer,
 				Settings = from.Settings,
-				Success = from.Success
+				Success = from.Success,
+				Metrics = from.Metrics
 			};
 			var tt = to as IResponseWithRequestInformation;
 			if (tt != null)
@@ -104,6 +105,7 @@ namespace Elasticsearch.Net
 		public byte[] Request { get; protected internal set; }
 
 		public int NumberOfRetries { get; protected internal set; }
+		public CallMetrics Metrics { get; protected internal set; }
 
 		/// <summary>
 		/// The raw byte response, only set when IncludeRawResponse() is set on Connection configuration

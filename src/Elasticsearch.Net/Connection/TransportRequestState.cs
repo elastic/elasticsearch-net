@@ -9,6 +9,54 @@ using PurifyNet;
 
 namespace Elasticsearch.Net.Connection
 {
+
+	internal class RequestTimings : IDisposable
+	{
+		private readonly Uri _node;
+		private readonly string _path;
+		private readonly List<RequestMetrics> _requestMetrics;
+		private Stopwatch _stopwatch;
+		private bool _success;
+		private int? _httpStatusCode;
+		public RequestType Type { get; private set; }
+
+		public long Elapsed { get { return _stopwatch.ElapsedMilliseconds;  } }
+
+		public DateTime StartedOn { get; set; }
+
+		public RequestTimings(RequestType type, Uri node, string path, List<RequestMetrics> requestMetrics)
+		{
+			this.StartedOn = DateTime.UtcNow;
+			_node = node;
+			_path = path;
+			_requestMetrics = requestMetrics;
+			this.Type = type;
+			this._stopwatch = Stopwatch.StartNew();
+		}
+
+		public void Finish(bool success, int? httpStatusCode)
+		{
+			this._stopwatch.Stop();
+			this._success = success;
+			this._httpStatusCode = httpStatusCode;
+		}
+
+		public void Dispose()
+		{
+			this._stopwatch.Stop();
+			this._requestMetrics.Add(new RequestMetrics
+			{
+				StartedOn = this.StartedOn,
+				Node = this._node,
+				EllapsedMilliseconds = this._stopwatch.ElapsedMilliseconds,
+				Path = this._path,
+				RequestType = this.Type,
+				Success = this._success,
+				HttpStatusCode = this._httpStatusCode
+			});
+		}
+	}
+
 	public class TransportRequestState<T> : IDisposable
 	{
 		private readonly bool _traceEnabled;
@@ -64,6 +112,8 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
+
+		public DateTime StartedOn { get; private set; }
 		public long SerializationTime { get; private set; }
 		public long RequestEndTime { get; private set; }
 		public long DeserializationTime { get; private set; }
@@ -75,6 +125,7 @@ namespace Elasticsearch.Net.Connection
 			string method, 
 			string path)
 		{
+			this.StartedOn = DateTime.UtcNow;
 			this.SeenNodes = new List<Uri>();
 			this.ClientSettings = settings;
 			this.RequestParameters = requestParameters;
@@ -97,6 +148,14 @@ namespace Elasticsearch.Net.Connection
 			this.PostData = postData;
 			if (this._traceEnabled)
 				this.SerializationTime = this._stopwatch.ElapsedMilliseconds;
+		}
+
+		private List<RequestMetrics> _requestMetrics;
+
+		internal RequestTimings InitiateRequest(RequestType requestType)
+		{
+			if (this._requestMetrics == null) this._requestMetrics = new List<RequestMetrics>();
+			return new RequestTimings(requestType, this.CurrentNode, this.Path, this._requestMetrics);
 		}
 
 		public void RegisterSniff()
@@ -129,13 +188,22 @@ namespace Elasticsearch.Net.Connection
 		{
 			result.NumberOfRetries = this.Retried;
 
+			result.Metrics = new CallMetrics
+			{
+				Path = this.Path,
+				SerializationTime = this.SerializationTime,
+				DeserializationTime = this.DeserializationTime,
+				StartedOn = this.StartedOn,
+				CompletedOn = DateTime.UtcNow,
+				Requests = this._requestMetrics
+			};
 
 			var objectNeedsResponseRef = result.Response as IResponseWithRequestInformation;
 			if (objectNeedsResponseRef != null) objectNeedsResponseRef.RequestInformation = result;
 			
 			if (this.ClientSettings.ConnectionStatusHandler != null)
 				this.ClientSettings.ConnectionStatusHandler(result);
-		
+			
 			if (!_traceEnabled) return;
 
 			this._result = result;
