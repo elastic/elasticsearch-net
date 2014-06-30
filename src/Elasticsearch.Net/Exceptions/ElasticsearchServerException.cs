@@ -1,37 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
-	internal class OneToOneServerException
-	{
-		public int status { get; set; }
-		public string error { get; set; }
-	}
-	
-	public class ElasticsearchServerError
-	{
-		public int Status { get; set; }
-		public string Error { get; set; }
-		public string ExceptionType { get; set; }
-
-		internal static ElasticsearchServerError Create(OneToOneServerException e)
-		{
-			if (e == null) return null;
-			return new ElasticsearchServerError
-			{
-				Status = e.status,
-				Error = e.error
-			};
-		}
-	}
-
 	public class ElasticsearchServerException : Exception
 	{
 		private static readonly Regex ExceptionSplitter = new Regex(@"^([^\[]*?)\[(.*)\]", RegexOptions.Singleline);

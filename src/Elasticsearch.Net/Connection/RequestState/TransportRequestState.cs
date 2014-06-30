@@ -7,84 +7,8 @@ using System.Text;
 using Elasticsearch.Net.Connection.Configuration;
 using PurifyNet;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net.Connection.RequestState
 {
-	internal interface IRequestTimings : IDisposable
-	{
-		void Finish(bool success, int? httpStatusCode);
-	}
-
-	internal class NoopRequestTimings : IRequestTimings
-	{
-		public static NoopRequestTimings Instance = new NoopRequestTimings();
-
-		public void Finish(bool success, int? httpStatusCode)
-		{
-		}
-
-		public void Dispose()
-		{
-		}
-	}
-
-	internal class RequestTimings : IRequestTimings
-	{
-		private readonly Uri _node;
-		private readonly string _path;
-		private readonly List<RequestMetrics> _requestMetrics;
-		private readonly Stopwatch _stopwatch;
-		private bool _success;
-		private int? _httpStatusCode;
-		public RequestType Type { get; private set; }
-
-		public long Elapsed { get { return _stopwatch.ElapsedMilliseconds; } }
-
-		public DateTime StartedOn { get; set; }
-
-		public RequestTimings(RequestType type, Uri node, string path, List<RequestMetrics> requestMetrics)
-		{
-			this.StartedOn = DateTime.UtcNow;
-			_node = node;
-			_path = path;
-			_requestMetrics = requestMetrics;
-			this.Type = type;
-			this._stopwatch = Stopwatch.StartNew();
-		}
-
-		public void Finish(bool success, int? httpStatusCode)
-		{
-			this._stopwatch.Stop();
-			this._success = success;
-			this._httpStatusCode = httpStatusCode;
-		}
-
-		public void Dispose()
-		{
-			this._stopwatch.Stop();
-			this._requestMetrics.Add(new RequestMetrics
-			{
-				StartedOn = this.StartedOn,
-				Node = this._node,
-				EllapsedMilliseconds = this._stopwatch.ElapsedMilliseconds,
-				Path = this._path,
-				RequestType = this.Type,
-				Success = this._success,
-				HttpStatusCode = this._httpStatusCode
-			});
-		}
-	}
-
-	internal interface ITransportRequestState
-	{
-		IRequestTimings InitiateRequest(RequestType requestType);
-		Uri CreatePathOnCurrentNode(string path);
-		IRequestConfiguration RequestConfiguration { get; }
-		int Retried { get; }
-		bool SniffedOnConnectionFailure { get; set; }
-		int? Seed { get; set; }
-		Uri CurrentNode { get; set; }
-	}
-
 	public class TransportRequestState<T> : IDisposable, ITransportRequestState
 	{
 		private readonly bool _traceEnabled;
@@ -176,7 +100,7 @@ namespace Elasticsearch.Net.Connection
 
 		private List<RequestMetrics> _requestMetrics;
 
-		internal IRequestTimings InitiateRequest(RequestType requestType)
+		public IRequestTimings InitiateRequest(RequestType requestType)
 		{
 			if (!this.ClientSettings.MetricsEnabled)
 				return NoopRequestTimings.Instance;

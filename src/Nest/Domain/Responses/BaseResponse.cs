@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Exceptions;
 using Nest.Resolvers;
 
 namespace Nest

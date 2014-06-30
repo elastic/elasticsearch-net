@@ -9,6 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection.Configuration;
+using Elasticsearch.Net.Connection.RequestState;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
@@ -19,6 +20,8 @@ namespace Elasticsearch.Net.Connection
 {
 	public class Transport : ITransport
 	{
+		const int BUFFER_SIZE = 4096;
+
 		protected static readonly string MaxRetryExceptionMessage = "Unable to perform request: '{0} {1}' on any of the nodes after retrying {2} times.";
 		protected internal readonly IConnectionConfigurationValues ConfigurationValues;
 		protected internal readonly IConnection Connection;
@@ -52,6 +55,8 @@ namespace Elasticsearch.Net.Connection
 				this.Sniff();
 		}
 
+
+		/* PING/SNIFF	*** ********************************************/
 
 		private bool Ping(ITransportRequestState requestState)
 		{
@@ -149,6 +154,19 @@ namespace Elasticsearch.Net.Connection
 				this.SniffClusterState(requestState);
 		}
 
+		private void SniffOnConnectionFailure(ITransportRequestState requestState)
+		{
+			if (requestState.SniffedOnConnectionFailure
+				|| SniffingDisabled(requestState.RequestConfiguration)
+				|| !this.ConfigurationValues.SniffsOnConnectionFault
+				|| requestState.Retried != 0) return;
+
+			this.SniffClusterState(requestState);
+			requestState.SniffedOnConnectionFailure = true;
+		}
+
+		/* REQUEST STATE *** ********************************************/
+
 		/// <summary>
 		/// Returns either the fixed maximum set on the connection configuration settings or the number of nodes
 		/// </summary>
@@ -177,26 +195,6 @@ namespace Elasticsearch.Net.Connection
 			SniffOnConnectionFailure(requestState);
 			return this.GetMaximumRetries(requestState.RequestConfiguration) > 0;
 		}
-
-		private void SetErrorDiagnosticsAndPatchSuccess<T>(
-			ITransportRequestState requestState,
-			ElasticsearchServerError error, 
-			ElasticsearchResponse<T> typedResponse, 
-			IElasticsearchResponse streamResponse)
-		{
-			if (error != null)
-			{
-				typedResponse.Success = false;
-				typedResponse.OriginalException = new ElasticsearchServerException(error);
-			}
-			if (!typedResponse.Success
-				&& requestState.RequestConfiguration != null
-				&& requestState.RequestConfiguration.AllowedStatusCodes.HasAny(i => i == streamResponse.HttpStatusCode))
-			{
-				typedResponse.Success = true;
-			}
-		}
-
 
 		/// <summary>
 		/// Selects next node uri on request state
@@ -243,29 +241,8 @@ namespace Elasticsearch.Net.Connection
 			return joined.Utf8Bytes();
 		}
 
-		private void SetStringResult(ElasticsearchResponse<string> response, byte[] rawResponse)
-		{
-			response.Response = rawResponse.Utf8String();
-		}
 
-		private void SetByteResult(ElasticsearchResponse<byte[]> response, byte[] rawResponse)
-		{
-			response.Response = rawResponse;
-		}
-
-		private void SniffOnConnectionFailure(ITransportRequestState requestState)
-		{
-			if (requestState.SniffedOnConnectionFailure
-				|| SniffingDisabled(requestState.RequestConfiguration)
-				|| !this.ConfigurationValues.SniffsOnConnectionFault
-				|| requestState.Retried != 0) return;
-
-			this.SniffClusterState(requestState);
-			requestState.SniffedOnConnectionFailure = true;
-		}
-
-		/* SYNC *** */
-
+		/* SYNC			*** ********************************************/
 
 		public ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
 		{
@@ -370,7 +347,8 @@ namespace Elasticsearch.Net.Connection
 		}
 
 
-		/* ASYNC *** */
+		/* ASYNC		*** ********************************************/
+		
 		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
 		{
 			using (var requestState = new TransportRequestState<T>(this.Settings, requestParameters, method, path))
@@ -494,6 +472,35 @@ namespace Elasticsearch.Net.Connection
 			}
 			throw new Exception("Unknown HTTP method " + requestState.Method);
 		}
+
+		private Task<MemoryStream> Iterate(IEnumerable<Task> asyncIterator, MemoryStream memoryStream)
+		{
+			var tcs = new TaskCompletionSource<MemoryStream>();
+			var enumerator = asyncIterator.GetEnumerator();
+			Action<Task> recursiveBody = null;
+			recursiveBody = completedTask =>
+			{
+				if (completedTask != null && completedTask.IsFaulted)
+				{
+					var exception = completedTask.Exception.InnerException;
+					tcs.TrySetException(exception);
+					enumerator.Dispose();
+				}
+				else if (enumerator.MoveNext())
+				{
+					enumerator.Current.ContinueWith(recursiveBody);
+				}
+				else
+				{
+					tcs.SetResult(memoryStream);
+					enumerator.Dispose();
+				}
+			};
+			recursiveBody(null);
+			return tcs.Task;
+		}
+
+		/* STREAM HANDLING	********************************************/
 
 		private ElasticsearchServerError ThrowOrGetErrorFromStreamResponse<T>(
 			TransportRequestState<T> requestState,
@@ -691,7 +698,6 @@ namespace Elasticsearch.Net.Connection
 				});
 		}
 
-		const int BUFFER_SIZE = 4096;
 		private IEnumerable<Task<MemoryStream>> ReadStreamAsync(Stream responseStream, MemoryStream memoryStream)
 		{
 			var buffer = new byte[BUFFER_SIZE];
@@ -712,32 +718,33 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		private Task<MemoryStream> Iterate(IEnumerable<Task> asyncIterator, MemoryStream memoryStream)
+		private void SetErrorDiagnosticsAndPatchSuccess<T>(
+			ITransportRequestState requestState,
+			ElasticsearchServerError error, 
+			ElasticsearchResponse<T> typedResponse, 
+			IElasticsearchResponse streamResponse)
 		{
-			var tcs = new TaskCompletionSource<MemoryStream>();
-			var enumerator = asyncIterator.GetEnumerator();
-			Action<Task> recursiveBody = null;
-			recursiveBody = completedTask =>
+			if (error != null)
 			{
-				if (completedTask != null && completedTask.IsFaulted)
-				{
-					var exception = completedTask.Exception.InnerException;
-					tcs.TrySetException(exception);
-					enumerator.Dispose();
-				}
-				else if (enumerator.MoveNext())
-				{
-					enumerator.Current.ContinueWith(recursiveBody);
-				}
-				else
-				{
-					tcs.SetResult(memoryStream);
-					enumerator.Dispose();
-				}
-			};
-			recursiveBody(null);
-			return tcs.Task;
+				typedResponse.Success = false;
+				typedResponse.OriginalException = new ElasticsearchServerException(error);
+			}
+			if (!typedResponse.Success
+				&& requestState.RequestConfiguration != null
+				&& requestState.RequestConfiguration.AllowedStatusCodes.HasAny(i => i == streamResponse.HttpStatusCode))
+			{
+				typedResponse.Success = true;
+			}
 		}
 
+		private void SetStringResult(ElasticsearchResponse<string> response, byte[] rawResponse)
+		{
+			response.Response = rawResponse.Utf8String();
+		}
+
+		private void SetByteResult(ElasticsearchResponse<byte[]> response, byte[] rawResponse)
+		{
+			response.Response = rawResponse;
+		}
 	}
 }

@@ -279,8 +279,6 @@ namespace Elasticsearch.Net.Connection
 		{
 			var timeout = this.ConnectionSettings.Timeout;
 
-			var state = new ConnectionState { Connection = request };
-
 			if (data != null)
 			{
 				var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, null);
@@ -290,7 +288,7 @@ namespace Elasticsearch.Net.Connection
 				var requestStream = getRequestStream.Result;
 				try
 				{
-					var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, data, 0, data.Length, state);
+					var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, data, 0, data.Length, null);
 					yield return writeToRequestStream;
 				}
 				finally
