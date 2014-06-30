@@ -89,7 +89,7 @@ namespace Nest.Resolvers.Converters.Filters
 						break;
 					case "type":
 						reader.Read();
-						f.GeoExecution = Enum.Parse(typeof(GeoExecution), reader.Value as string) as GeoExecution?;
+						f.GeoExecution = (reader.Value as string).ToEnum<GeoExecution>();
 						break;
 					default:
 						f.Field = property;

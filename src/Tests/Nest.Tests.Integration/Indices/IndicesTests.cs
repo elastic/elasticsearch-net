@@ -299,7 +299,7 @@ namespace Nest.Tests.Integration.Indices
 			var mapping = this._client.GetMapping<ElasticsearchProject>().Mapping;
 			var property = new StringMapping
 			{
-				Index = FieldIndexOption.not_analyzed
+				Index = FieldIndexOption.NotAnalyzed
 			};
 			mapping.Properties.Add(fieldName, property);
 
@@ -324,12 +324,12 @@ namespace Nest.Tests.Integration.Indices
 
 			var primaryField = new StringMapping()
 			{
-				Index = FieldIndexOption.not_analyzed
+				Index = FieldIndexOption.NotAnalyzed
 			};
 
 			var analyzedField = new StringMapping()
 			{
-				Index = FieldIndexOption.analyzed
+				Index = FieldIndexOption.Analyzed
 			};
 
 			property.Fields.Add("name", primaryField);

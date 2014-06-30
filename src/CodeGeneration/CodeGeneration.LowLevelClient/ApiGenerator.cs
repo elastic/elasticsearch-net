@@ -155,8 +155,25 @@ namespace CodeGeneration.LowLevelClient
 				var overrides = Activator.CreateInstance(type) as IDescriptorOverrides;
 				if (overrides == null)
 					return;
-				method.Url.Params = method.Url.Params.Where(p => !overrides.SkipQueryStringParams.Contains(p.Key))
-					.ToDictionary(k => k.Key, v => v.Value);
+
+				foreach (var kv in method.Url.Params)
+				{
+					if (overrides.SkipQueryStringParams.Contains(kv.Key))
+						method.Url.Params.Remove(kv.Key);
+
+					if (overrides.RenameQueryStringParams == null) continue;
+					
+					string newName;
+					if (!overrides.RenameQueryStringParams.TryGetValue(kv.Key, out newName))
+						continue;
+
+					method.Url.Params.Remove(kv.Key);
+					method.Url.Params.Add(newName, kv.Value);
+					
+				}
+
+				//method.Url.Params = method.Url.Params.Where(p => !overrides.SkipQueryStringParams.Contains(p.Key))
+				//	.ToDictionary(k => k.Key, v => v.Value);
 			}
 // ReSharper disable once EmptyGeneralCatchClause
 			catch 

@@ -106,7 +106,7 @@ namespace Nest
 		
 		string _Routing { get; }
 		
-		SearchTypeOptions? _SearchType { get;  }
+		SearchType? _SearchType { get;  }
 		
 		Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set;}
 		
@@ -142,9 +142,9 @@ namespace Nest
 		public IHighlightRequest Highlight { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 
-		SearchTypeOptions? ISearchRequest._SearchType
+		SearchType? ISearchRequest._SearchType
 		{
-			get { return this.QueryString.GetQueryStringValue<SearchTypeOptions?>("search_type");  }
+			get { return this.QueryString.GetQueryStringValue<SearchType?>("search_type");  }
 		}
 
 		string ISearchRequest._Preference
@@ -191,9 +191,9 @@ namespace Nest
 	{
 		private ISearchRequest Self { get { return this; } }
 
-		SearchTypeOptions? ISearchRequest._SearchType
+		SearchType? ISearchRequest._SearchType
 		{
-			get { return this.Request.RequestParameters.GetQueryStringValue<SearchTypeOptions?>("search_type");  }
+			get { return this.Request.RequestParameters.GetQueryStringValue<SearchType?>("search_type");  }
 		}
 
 		SearchRequestParameters ISearchRequest.QueryString

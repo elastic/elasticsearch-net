@@ -85,7 +85,7 @@ namespace Nest
 			return this;
 		}
 
-		public HasParentQueryDescriptor<T> Score(ParentScoreType? scoreType = ParentScoreType.score)
+		public HasParentQueryDescriptor<T> Score(ParentScoreType? scoreType = ParentScoreType.Score)
 		{
 			((IHasParentQuery)this).ScoreType = scoreType;
 			return this;

@@ -69,7 +69,7 @@ namespace Nest
 		}
 		public NestedObjectMappingDescriptor<TParent, TChild> Dynamic(bool dynamic = true)
 		{
-			return this.Dynamic(dynamic ? DynamicMappingOption.allow : DynamicMappingOption.ignore);
+			return this.Dynamic(dynamic ? DynamicMappingOption.Allow : DynamicMappingOption.Ignore);
 		}
 		public NestedObjectMappingDescriptor<TParent, TChild> Enabled(bool enabled = true)
 		{

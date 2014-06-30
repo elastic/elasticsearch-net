@@ -63,7 +63,7 @@ namespace Nest
 		}
 		public PutMappingDescriptor<T> Dynamic(bool dynamic = true)
 		{
-			return this.Dynamic(dynamic ? DynamicMappingOption.allow : DynamicMappingOption.ignore);
+			return this.Dynamic(dynamic ? DynamicMappingOption.Allow : DynamicMappingOption.Ignore);
 		}
 		public PutMappingDescriptor<T> Enabled(bool enabled = true)
 		{

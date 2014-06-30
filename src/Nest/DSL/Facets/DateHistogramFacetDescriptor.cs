@@ -117,14 +117,14 @@ namespace Nest
 		}
 		public DateHistogramFacetDescriptor<T> Interval(DateInterval interval)
 		{
-			var intervalString = Enum.GetName(typeof(DateInterval), interval).ToLowerInvariant();
+			var intervalString = interval.GetStringValue();
 			Self.Interval = intervalString;
 			return this;
 		}
 		public DateHistogramFacetDescriptor<T> Interval(DateInterval interval, DateRounding dateRounding)
 		{
-			var intervalString = Enum.GetName(typeof(DateInterval), interval).ToLowerInvariant();
-			var roundingString = Enum.GetName(typeof(DateRounding), dateRounding).ToLowerInvariant();
+			var intervalString = interval.GetStringValue();
+			var roundingString = dateRounding.GetStringValue();
 			Self.Interval = intervalString + ":" + roundingString;
 			return this;
 		}

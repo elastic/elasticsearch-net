@@ -92,7 +92,7 @@ namespace Nest
 			return this;
 		}
 
-		public BulkIndexDescriptor<T> VersionType(VersionTypeOptions versionType)
+		public BulkIndexDescriptor<T> VersionType(VersionType versionType)
 		{
 			this._VersionType = versionType.GetStringValue();
 			return this;

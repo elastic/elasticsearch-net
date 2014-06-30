@@ -42,7 +42,7 @@ namespace Nest.Tests.Unit.Search.Facets
         .QueryRaw(@"{ raw : ""query""}")
         .FacetDateHistogram(h => h
           .OnField(f => f.StartedOn)
-          .Interval(DateInterval.Day, DateRounding.Half_Floor)
+          .Interval(DateInterval.Day, DateRounding.HalfFloor)
       );
       var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
@@ -66,7 +66,7 @@ namespace Nest.Tests.Unit.Search.Facets
         .QueryRaw(@"{ raw : ""query""}")
         .FacetDateHistogram(h => h
           .OnField(f => f.StartedOn)
-          .Interval(DateInterval.Day, DateRounding.Half_Floor)
+          .Interval(DateInterval.Day, DateRounding.HalfFloor)
           .TimeZone("-2")
       );
       var json = TestElasticClient.Serialize(s);
@@ -92,7 +92,7 @@ namespace Nest.Tests.Unit.Search.Facets
         .QueryRaw(@"{ raw : ""query""}")
         .FacetDateHistogram(h => h
           .OnField(f => f.StartedOn)
-          .Interval(DateInterval.Day, DateRounding.Half_Floor)
+          .Interval(DateInterval.Day, DateRounding.HalfFloor)
           .TimeZone("-2") //should be unset because we later specify pre_zone
           .TimeZones(Pre: "-3", Post: "-4")
       );

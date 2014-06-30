@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Mapping
 			Assert.AreEqual("integer", typeMapping.Properties["loc"].Type.Name);
 			var mapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(mapping);
-			Assert.AreEqual(FieldIndexOption.not_analyzed, mapping.Index);
+			Assert.AreEqual(FieldIndexOption.NotAnalyzed, mapping.Index);
 			//Assert.AreEqual("elasticsearchprojects", typeMapping.Parent.Type);
 
 			Assert.AreEqual("geo_point", typeMapping.Properties["origin"].Type.Name);

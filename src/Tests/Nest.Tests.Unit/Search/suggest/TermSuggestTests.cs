@@ -16,7 +16,7 @@ namespace Nest.Tests.Unit.Search.Suggest
 		        .MaxInspections(17)
 		        .OnField("field1")
 		        .Size(3)
-		        .SuggestMode(SuggestModeOptions.Missing);
+		        .SuggestMode(SuggestMode.Missing);
 
             var json = TestElasticClient.Serialize(termSuggestDescriptor);
 
@@ -41,7 +41,7 @@ namespace Nest.Tests.Unit.Search.Suggest
 					.MaxInspections(17)
 					.OnField("field1")
 					.Size(3)
-					.SuggestMode(SuggestModeOptions.Missing)
+					.SuggestMode(SuggestMode.Missing)
 				)
 			);
 

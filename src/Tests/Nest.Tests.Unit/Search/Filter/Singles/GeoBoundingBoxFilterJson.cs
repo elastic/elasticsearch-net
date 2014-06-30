@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 						topLeftY: -74.1, 
 						bottomRightX: 40.717, 
 						bottomRightY: -73.99, 
-						type: GeoExecution.indexed
+						type: GeoExecution.Indexed
 					)
 				);
 

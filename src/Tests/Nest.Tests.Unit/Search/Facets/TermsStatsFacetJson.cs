@@ -40,7 +40,7 @@ namespace Nest.Tests.Unit.Search.Facets
         .FacetTermsStats("date_minute", ts => ts
           .KeyScript("doc['date'].date.minuteOfHour * factor1")
           .ValueScript("doc['num1'].value * factor2")
-          .Order(TermsStatsOrder.reverse_max)
+          .Order(TermsStatsOrder.ReverseMax)
           .Params(p=>p
             .Add("factor1", 2)
             .Add("factor2", 3)

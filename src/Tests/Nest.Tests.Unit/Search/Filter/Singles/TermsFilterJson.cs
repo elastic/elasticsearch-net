@@ -34,7 +34,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				.Size(10)
 				.Filter(ff => ff
 					.Cache(false).Name("terms_filter")
-					.Terms(f => f.Name, new [] {"elasticsearch.pm"}, Execution:TermsExecution.@bool)
+					.Terms(f => f.Name, new [] {"elasticsearch.pm"}, Execution:TermsExecution.Bool)
 				);
 
 			var json = TestElasticClient.Serialize(s);

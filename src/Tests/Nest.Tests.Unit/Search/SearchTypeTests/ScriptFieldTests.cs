@@ -3,17 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using NUnit.Framework;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
 using Nest;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
 using Nest.Tests.MockData.Domain;
-using Nest.Resolvers;
+using NUnit.Framework;
 
-namespace Nest.Tests.Unit.Search.SearchType
+namespace Nest.Tests.Unit.Search.SearchTypeTests
 {
 	[TestFixture]
 	public class SearchTypeTests : BaseJsonTests
@@ -25,7 +19,7 @@ namespace Nest.Tests.Unit.Search.SearchType
 				.From(0)
 				.Size(10)
 				.MatchAll()
-				.SearchType(SearchTypeOptions.QueryAndFetch);
+				.SearchType(SearchType.QueryAndFetch);
 			this.JsonEquals(s, System.Reflection.MethodBase.GetCurrentMethod());
 		}
 		
