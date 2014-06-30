@@ -101,9 +101,8 @@ namespace Elasticsearch.Net.Connection
 			
 			var path = "_nodes/_all/clear?timeout=" + pingTimeout;
 
-			using (var tracer = new ElasticsearchResponseTracer<Stream>(this.Settings.TraceEnabled))
+			using (var requestState = new TransportRequestState<Stream>(this.Settings, requestParameters, "GET", path))
 			{
-				var requestState = new TransportRequestState<Stream>(this.Settings, requestParameters, tracer, "GET", path);
 				var response = this.DoRequest(requestState);
 				if (response.Response == null) return null;
 
@@ -253,20 +252,18 @@ namespace Elasticsearch.Net.Connection
 		
 		/* SYNC *** */
 		
+	
 		public ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
 		{
-			using (var tracer = new ElasticsearchResponseTracer<T>(this.Settings.TraceEnabled))
+			using (var requestState = new TransportRequestState<T>(this.Settings, requestParameters, method, path))
 			{
-				var postData = PostData(data);
-				var requestState = new TransportRequestState<T>(this.Settings, requestParameters, tracer, method, path, postData);
+				var bytes = PostData(data);
+				requestState.TickSerialization(bytes);
 
 				var result = this.DoRequest<T>(requestState);
-				var objectNeedsResponseRef = result.Response as IResponseWithRequestInformation;
-				if (objectNeedsResponseRef != null)
-					objectNeedsResponseRef.RequestInformation = result;
-				tracer.SetResult(result);
-				if (this.Settings.ConnectionStatusHandler != null)
-					this.Settings.ConnectionStatusHandler(result);
+				
+				requestState.SetResult(result);
+
 				return result;
 			}
 		}
@@ -358,10 +355,10 @@ namespace Elasticsearch.Net.Connection
 		/* ASYNC *** */
 		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
 		{
-			using (var tracer = new ElasticsearchResponseTracer<T>(this.Settings.TraceEnabled))
+			using (var requestState = new TransportRequestState<T>(this.Settings, requestParameters, method, path))
 			{
-				var postData = PostData(data);
-				var requestState = new TransportRequestState<T>(this.Settings, requestParameters, tracer, method, path, postData);
+				var bytes = PostData(data);
+				requestState.TickSerialization(bytes);
 
 				return this.DoRequestAsync<T>(requestState)
 					.ContinueWith(t =>
@@ -371,15 +368,11 @@ namespace Elasticsearch.Net.Connection
 							tcs.SetException(t.Exception.Flatten());
 						else
 						{
-							var objectNeedsResponseRef = t.Result.Response as IResponseWithRequestInformation;
-							if (objectNeedsResponseRef != null)
-								objectNeedsResponseRef.RequestInformation = t.Result;
 							tcs.SetResult(t.Result);
 						}
 
-						requestState.Tracer.SetResult(t.Result);
-						if (this.Settings.ConnectionStatusHandler != null)
-							this.Settings.ConnectionStatusHandler(t.Result);
+						requestState.SetResult(t.Result);
+
 						return tcs.Task;
 					}).Unwrap();
 			}

@@ -52,7 +52,6 @@
     <Compile Include="Connection\Configuration\IRequestConfiguration.cs" />
     <Compile Include="Connection\Configuration\RequestConfiguration.cs" />
     <Compile Include="Connection\Configuration\RequestConfigurationDescriptor.cs" />
-    <Compile Include="Connection\TransportRequestState.cs" />
     <Compile Include="Domain\RequestParameters\BaseRequestParameters.cs" />
     <Compile Include="Domain\Response\IElasticsearchResponse.cs" />
     <Compile Include="Domain\IHideObjectMembers.cs" />
@@ -74,7 +73,7 @@
     <Compile Include="Connection\Transport.cs" />
     <Compile Include="Connection\ITransport.cs" />
     <Compile Include="Domain\Response\ElasticsearchResponse.cs" />
-    <Compile Include="Connection\ElasticsearchResponseTracer.cs" />
+    <Compile Include="Connection\TransportRequestState.cs" />
     <Compile Include="Connection\IConnection.cs" />
     <Compile Include="Connection\IConnectionConfigurationValues.cs" />
     <Compile Include="Connection\IConnectionConfiguration.cs" />
