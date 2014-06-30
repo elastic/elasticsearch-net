@@ -56,15 +56,41 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				pingCall.Returns(ok);
 
 				var client1 = fake.Resolve<ElasticsearchClient>();
-				client1.Info(); //info call 1
-				client1.Info(); //info call 2
-				client1.Info(); //info call 3
-				client1.Info(); //info call 4
-				client1.Info(); //info call 5
-				client1.Info(); //info call 6
-				client1.Info(); //info call 7
-				client1.Info(); //info call 8
-				client1.Info(); //info call 9
+				var result = client1.Info(); //info call 1//first time node is used so a ping is sent first
+				result.Metrics.Requests.Count.Should().Be(2);
+				result.Metrics.Requests.First().RequestType.Should().Be(RequestType.Ping);
+				result.Metrics.Requests.First().Node.Port.Should().Be(9204);
+				result.Metrics.Requests.Last().RequestType.Should().Be(RequestType.ElasticsearchCall);
+				result.Metrics.Requests.Last().Node.Port.Should().Be(9204);
+
+				result = client1.Info(); //info call 2
+				//using 9203 for the first time ping succeeds
+				result.Metrics.Requests.First().RequestType.Should().Be(RequestType.Ping);
+				result.Metrics.Requests.First().Node.Port.Should().Be(9203);
+				result.Metrics.Requests.First().Success.Should().BeTrue();
+
+				//call on 9203 fails
+				result.Metrics.Requests[1].RequestType.Should().Be(RequestType.ElasticsearchCall);
+				result.Metrics.Requests[1].Node.Port.Should().Be(9203);
+				result.Metrics.Requests[1].Success.Should().BeFalse();
+				result.Metrics.Requests[1].HttpStatusCode.Should().Be(503);
+
+				//using 9202 for the first time ping succeeds
+				result.Metrics.Requests[2].RequestType.Should().Be(RequestType.Ping);
+				result.Metrics.Requests[2].Node.Port.Should().Be(9202);
+
+				//call on 9203 fails
+				result.Metrics.Requests[3].RequestType.Should().Be(RequestType.ElasticsearchCall);
+				result.Metrics.Requests[3].Node.Port.Should().Be(9202);
+				result.Metrics.Requests[3].Success.Should().BeTrue();
+				result.Metrics.Requests[3].HttpStatusCode.Should().Be(200);
+				result = client1.Info(); //info call 3
+				result = client1.Info(); //info call 4
+				result = client1.Info(); //info call 5
+				result = client1.Info(); //info call 6
+				result = client1.Info(); //info call 7
+				result = client1.Info(); //info call 8
+				result = client1.Info(); //info call 9
 
 				AssertSeenNodesAreInExpectedOrder(seenNodes);
 
