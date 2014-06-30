@@ -16,7 +16,7 @@ namespace Nest
 	/// this version won't throw if any of the parts are inferred to be empty<para>T</para>
 	/// </summary>
 	public interface IDocumentOptionalPath<TParameters> : IRequest<TParameters>
-		where TParameters : FluentRequestParameters<TParameters>, new()
+		where TParameters : IRequestParameters, new()
 	{
 		IndexNameMarker Index { get; set; }
 		TypeNameMarker Type { get; set; }
@@ -24,7 +24,7 @@ namespace Nest
 	}
 
 	public abstract class DocumentOptionalPathBase<TParameters> : BaseRequest<TParameters>, IDocumentOptionalPath<TParameters>
-		where TParameters : FluentRequestParameters<TParameters>, new()
+		where TParameters : IRequestParameters, new()
 	{
 		public IndexNameMarker Index { get; set; }
 		public TypeNameMarker Type { get; set; }

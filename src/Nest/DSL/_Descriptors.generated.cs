@@ -1777,47 +1777,47 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public ExplainDescriptor Source(params string[] _source)
+		public ExplainDescriptor _Source(params string[] _source)
 		{
-			this.Request.RequestParameters.Source(_source);
+			this.Request.RequestParameters._Source(_source);
 			return this;
 		}
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor SourceExclude(params string[] _source_exclude)
+		public ExplainDescriptor _SourceExclude(params string[] _source_exclude)
 		{
-			this.Request.RequestParameters.SourceExclude(_source_exclude);
+			this.Request.RequestParameters._SourceExclude(_source_exclude);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public ExplainDescriptor _SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceExclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceExclude(typedPathLookups);
 			return this;
 		}
 			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor SourceInclude(params string[] _source_include)
+		public ExplainDescriptor _SourceInclude(params string[] _source_include)
 		{
-			this.Request.RequestParameters.SourceInclude(_source_include);
+			this.Request.RequestParameters._SourceInclude(_source_include);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public ExplainDescriptor _SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceInclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceInclude(typedPathLookups);
 			return this;
 		}
 			
@@ -1901,47 +1901,47 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public GetDescriptor<T> Source(params string[] _source)
+		public GetDescriptor<T> _Source(params string[] _source)
 		{
-			this.Request.RequestParameters.Source(_source);
+			this.Request.RequestParameters._Source(_source);
 			return this;
 		}
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(params string[] _source_exclude)
+		public GetDescriptor<T> _SourceExclude(params string[] _source_exclude)
 		{
-			this.Request.RequestParameters.SourceExclude(_source_exclude);
+			this.Request.RequestParameters._SourceExclude(_source_exclude);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		public GetDescriptor<T> _SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceExclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceExclude(typedPathLookups);
 			return this;
 		}
 			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(params string[] _source_include)
+		public GetDescriptor<T> _SourceInclude(params string[] _source_include)
 		{
-			this.Request.RequestParameters.SourceInclude(_source_include);
+			this.Request.RequestParameters._SourceInclude(_source_include);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		public GetDescriptor<T> _SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceInclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceInclude(typedPathLookups);
 			return this;
 		}
 			
@@ -2016,47 +2016,47 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SourceDescriptor<T> Source(params string[] _source)
+		public SourceDescriptor<T> _Source(params string[] _source)
 		{
-			this.Request.RequestParameters.Source(_source);
+			this.Request.RequestParameters._Source(_source);
 			return this;
 		}
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(params string[] _source_exclude)
+		public SourceDescriptor<T> _SourceExclude(params string[] _source_exclude)
 		{
-			this.Request.RequestParameters.SourceExclude(_source_exclude);
+			this.Request.RequestParameters._SourceExclude(_source_exclude);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		public SourceDescriptor<T> _SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceExclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceExclude(typedPathLookups);
 			return this;
 		}
 			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(params string[] _source_include)
+		public SourceDescriptor<T> _SourceInclude(params string[] _source_include)
 		{
-			this.Request.RequestParameters.SourceInclude(_source_include);
+			this.Request.RequestParameters._SourceInclude(_source_include);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		public SourceDescriptor<T> _SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceInclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceInclude(typedPathLookups);
 			return this;
 		}
 			
@@ -4023,47 +4023,47 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public MultiGetDescriptor Source(params string[] _source)
+		public MultiGetDescriptor _Source(params string[] _source)
 		{
-			this.Request.RequestParameters.Source(_source);
+			this.Request.RequestParameters._Source(_source);
 			return this;
 		}
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude(params string[] _source_exclude)
+		public MultiGetDescriptor _SourceExclude(params string[] _source_exclude)
 		{
-			this.Request.RequestParameters.SourceExclude(_source_exclude);
+			this.Request.RequestParameters._SourceExclude(_source_exclude);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public MultiGetDescriptor _SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceExclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceExclude(typedPathLookups);
 			return this;
 		}
 			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude(params string[] _source_include)
+		public MultiGetDescriptor _SourceInclude(params string[] _source_include)
 		{
-			this.Request.RequestParameters.SourceInclude(_source_include);
+			this.Request.RequestParameters._SourceInclude(_source_include);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public MultiGetDescriptor _SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceInclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceInclude(typedPathLookups);
 			return this;
 		}
 			

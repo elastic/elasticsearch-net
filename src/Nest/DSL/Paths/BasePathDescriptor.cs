@@ -8,7 +8,7 @@ namespace Nest
 {
 	
 	public abstract class BaseRequest<TParameters> : IRequest<TParameters>
-		where TParameters : FluentRequestParameters<TParameters>, new()
+		where TParameters : IRequestParameters, new()
 	{
 		protected IRequest<TParameters> Request { get { return this; } }
 		
@@ -30,7 +30,7 @@ namespace Nest
 			)
 		{
 			var pathInfo = new ElasticsearchPathInfo<TParameters>();
-			pathInfo.RequestParameters = queryString ?? new TParameters();
+			pathInfo.RequestParameters = queryString;
 			var config = this.Request.RequestConfiguration;
 			if (config != null)
 			{

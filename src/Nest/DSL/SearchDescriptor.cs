@@ -19,7 +19,7 @@ namespace Nest
 	public interface IRequest {}
 
 	public interface IRequest<TParameters> : IPathInfo<TParameters>, IRequest
-		where TParameters : FluentRequestParameters<TParameters>, new()
+		where TParameters : IRequestParameters, new()
 	{
 		/// <summary>
 		/// Used to describe request parameters not part of the body. e.q query string or 
