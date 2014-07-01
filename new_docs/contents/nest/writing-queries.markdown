@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Writing Queries
 menusection: concepts
 menuitem: writing-queries
 ---
