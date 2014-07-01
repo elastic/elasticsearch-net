@@ -1,31 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesGetAlias")]
-	public partial class GetAliasesDescriptor : IndicesOptionalPathDescriptor<GetAliasesDescriptor, GetAliasesRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IGetAliasesRequest : IIndicesOptionalPath<GetAliasesRequestParameters>
 	{
-		internal string _Alias { get; set; }
+		[JsonIgnore]
+		string Alias { get; set; }
+	}
+
+	internal static class GetAliasesPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<GetAliasesRequestParameters> pathInfo, IGetAliasesRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+			pathInfo.Name = request.Alias ?? "*";
+		}
+	}
+	
+	public partial class GetAliasesRequest : IndicesOptionalPathBase<GetAliasesRequestParameters>, IGetAliasesRequest
+	{
+		public string Alias { get; set; }
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetAliasesRequestParameters> pathInfo)
+		{
+			GetAliasesPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("IndicesGetAlias")]
+	public partial class GetAliasesDescriptor 
+		: IndicesOptionalPathDescriptor<GetAliasesDescriptor, GetAliasesRequestParameters>, IGetAliasesRequest
+	{
+
+		private IGetAliasesRequest Self { get { return this; } }
+
+		string IGetAliasesRequest.Alias { get; set; }
 
 		public GetAliasesDescriptor Alias(string alias)
 		{
-			this._Alias = alias;
+			Self.Alias = alias;
 			return this;
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetAliasesRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
-			pathInfo.Name = _Alias ?? "*";
+			GetAliasesPathInfo.Update(pathInfo, this);
 		}
 	}
 }

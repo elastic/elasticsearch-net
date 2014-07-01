@@ -38,6 +38,7 @@ namespace Nest
 				(p, d) => this.RawDispatch.IndicesUpdateAliasesDispatchAsync<IndicesOperationResponse>(p, d)
 			);
 		}
+
 		/// <inheritdoc />
 		public Task<IIndicesOperationResponse> AliasAsync(Func<AliasDescriptor, AliasDescriptor> aliasSelector)
 		{
@@ -69,6 +70,7 @@ namespace Nest
 			);
 		}
 		
+
 		/// <inheritdoc />
 		private GetAliasesResponse DeserializeGetAliasesResponse(IElasticsearchResponse connectionStatus, Stream stream)
 		{

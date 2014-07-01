@@ -40,7 +40,7 @@ namespace Nest.Tests.Integration.Core
 				Refresh = true,
 				Script = "ctx._source.loc += 10",
 			});
-			project = this._client.Source<ElasticsearchProject>(s => s.Id(1));
+			project = this._client.Source<ElasticsearchProject>(s => s.Id(2));
 			Assert.AreEqual(project.LOC, loc + 10);
 			Assert.AreNotEqual(project.Version, "1");
 		}
