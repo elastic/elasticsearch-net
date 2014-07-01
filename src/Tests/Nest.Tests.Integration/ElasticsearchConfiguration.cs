@@ -11,7 +11,7 @@ namespace Nest.Tests.Integration
 	{
 		public static readonly string DefaultIndex = Test.Default.DefaultIndex + "-" + Process.GetCurrentProcess().Id.ToString();
 
-		public static string _currentVersion;
+		private static string _currentVersion;
 		public static string CurrentVersion
 		{
 			get
