@@ -4,48 +4,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IBulkOperation
-	{
-		string Operation { get; }
-		Type ClrType { get; }
-
-		[JsonProperty(PropertyName = "_index")]
-		IndexNameMarker Index { get; set; }
-
-		[JsonProperty(PropertyName = "_type")]
-		TypeNameMarker Type { get; set; }
-
-		[JsonProperty(PropertyName = "_id")]
-		string Id { get; set; }
-
-		[JsonProperty(PropertyName = "_version")]
-		string Version { get; set; }
-
-		[JsonProperty(PropertyName = "_version_type")]
-		VersionTypeOptions? VersionType { get; set; }
-
-		[JsonProperty(PropertyName = "_routing")]
-		string Routing { get; set; }
-
-		[JsonProperty(PropertyName = "_parent")]
-		string Parent { get; set; }
-
-		[JsonProperty("_timestamp")]
-		long? Timestamp { get; set; }
-
-		[JsonProperty("_ttl")]
-		string Ttl { get; set; }
-
-		[JsonProperty("_retry_on_conflict")]
-		int? RetriesOnConflict { get; set; }
-
-		object GetBody();
-
-		string GetIdForOperation(ElasticInferrer inferrer);
-	}
-
 	public abstract class BulkOperationDescriptorBase : IBulkOperation
 	{
 		private IBulkOperation Self { get { return this; } }
@@ -56,34 +14,24 @@ namespace Nest
 		protected abstract Type _ClrType { get; }
 		Type IBulkOperation.ClrType { get { return this._ClrType;  } }
 
-		[JsonProperty(PropertyName = "_index")]
 		IndexNameMarker IBulkOperation.Index { get; set; }
 
-		[JsonProperty(PropertyName = "_type")]
 		TypeNameMarker IBulkOperation.Type { get; set; }
 
-		[JsonProperty(PropertyName = "_id")]
 		string IBulkOperation.Id { get; set; }
 
-		[JsonProperty(PropertyName = "_version")]
 		string IBulkOperation.Version { get; set; }
 
-		[JsonProperty(PropertyName = "_version_type")]
-		VersionTypeOptions? IBulkOperation.VersionType { get; set; }
+		VersionType? IBulkOperation.VersionType { get; set; }
 
-		[JsonProperty(PropertyName = "_routing")]
 		string IBulkOperation.Routing { get; set; }
 
-		[JsonProperty(PropertyName = "_parent")]
 		string IBulkOperation.Parent { get; set; }
 
-		[JsonProperty("_timestamp")]
 		long? IBulkOperation.Timestamp { get; set; }
 
-		[JsonProperty("_ttl")]
 		string IBulkOperation.Ttl { get; set; }
 
-		[JsonProperty("_retry_on_conflict")]
 		int? IBulkOperation.RetriesOnConflict { get; set; }
 
 		

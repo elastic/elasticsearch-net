@@ -195,7 +195,7 @@ namespace Nest
 		}
 
 
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> VersionType(VersionTypeOptions versionType)
+		public BulkUpdateDescriptor<TDocument, TPartialUpdate> VersionType(VersionType versionType)
 		{
 			Self.VersionType = versionType;
 			return this;

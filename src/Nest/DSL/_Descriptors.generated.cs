@@ -5437,7 +5437,7 @@ namespace Nest
 	
 
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public UpdateDescriptor<TUpsert,TDocument> Consistency(ConsistencyOptions consistency)
+		public UpdateDescriptor<TUpsert,TDocument> Consistency(Consistency consistency)
 		{
 			this.Request.RequestParameters.Consistency(consistency);
 			return this;
@@ -5469,7 +5469,7 @@ namespace Nest
 		
 
 		///<summary>Specific replication type</summary>
-		public UpdateDescriptor<TUpsert,TDocument> Replication(ReplicationOptions replication)
+		public UpdateDescriptor<TUpsert,TDocument> Replication(Replication replication)
 		{
 			this.Request.RequestParameters.Replication(replication);
 			return this;
@@ -5533,7 +5533,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public UpdateDescriptor<TUpsert,TDocument> VersionType(VersionTypeOptions version_type)
+		public UpdateDescriptor<TUpsert,TDocument> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;

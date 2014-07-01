@@ -11,7 +11,7 @@ namespace Nest
 		public TypeNameMarker Type { get; set; }
 		public string Id { get; set; }
 		public string Version { get; set; }
-		public VersionTypeOptions? VersionType { get; set; }
+		public VersionType? VersionType { get; set; }
 		public string Routing { get; set; }
 		public string Parent { get; set; }
 		public long? Timestamp { get; set; }

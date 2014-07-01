@@ -39,9 +39,9 @@ namespace Nest
 			{
 		
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public ConsistencyOptions Consistency 
+		public Consistency Consistency 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ConsistencyOptions>("consistency"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Consistency>("consistency"); } 
 			set { this.Request.RequestParameters.AddQueryString("consistency", value); }
 		}
 		
@@ -55,9 +55,9 @@ namespace Nest
 		
 		
 		///<summary>Explicitely set the replication type</summary>
-		public ReplicationOptions Replication 
+		public Replication Replication 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ReplicationOptions>("replication"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Replication>("replication"); } 
 			set { this.Request.RequestParameters.AddQueryString("replication", value); }
 		}
 		
@@ -153,9 +153,9 @@ namespace Nest
 			{
 		
 		///<summary>The unit in which to display byte values</summary>
-		public BytesOptions Bytes 
+		public Bytes Bytes 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<BytesOptions>("bytes"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Bytes>("bytes"); } 
 			set { this.Request.RequestParameters.AddQueryString("bytes", value); }
 		}
 		
@@ -273,9 +273,9 @@ namespace Nest
 			{
 		
 		///<summary>The unit in which to display byte values</summary>
-		public BytesOptions Bytes 
+		public Bytes Bytes 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<BytesOptions>("bytes"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Bytes>("bytes"); } 
 			set { this.Request.RequestParameters.AddQueryString("bytes", value); }
 		}
 		
@@ -433,9 +433,9 @@ namespace Nest
 			{
 		
 		///<summary>The unit in which to display byte values</summary>
-		public BytesOptions Bytes 
+		public Bytes Bytes 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<BytesOptions>("bytes"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Bytes>("bytes"); } 
 			set { this.Request.RequestParameters.AddQueryString("bytes", value); }
 		}
 		
@@ -729,9 +729,9 @@ namespace Nest
 			{
 		
 		///<summary>The unit in which to display byte values</summary>
-		public BytesOptions Bytes 
+		public Bytes Bytes 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<BytesOptions>("bytes"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Bytes>("bytes"); } 
 			set { this.Request.RequestParameters.AddQueryString("bytes", value); }
 		}
 		
@@ -955,9 +955,9 @@ namespace Nest
 			{
 		
 		///<summary>Specify the level of detail for returned information</summary>
-		public LevelOptions Level 
+		public Level Level 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<LevelOptions>("level"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Level>("level"); } 
 			set { this.Request.RequestParameters.AddQueryString("level", value); }
 		}
 		
@@ -1011,9 +1011,9 @@ namespace Nest
 		
 		
 		///<summary>Wait until cluster is in a specific state</summary>
-		public WaitForStatusOptions WaitForStatus 
+		public WaitForStatus WaitForStatus 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<WaitForStatusOptions>("wait_for_status"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<WaitForStatus>("wait_for_status"); } 
 			set { this.Request.RequestParameters.AddQueryString("wait_for_status", value); }
 		}
 		
@@ -1229,9 +1229,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -1317,9 +1317,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -1349,9 +1349,9 @@ namespace Nest
 		
 		
 		///<summary>Specific version type</summary>
-		public VersionTypeOptions VersionType 
+		public VersionType VersionType 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionTypeOptions>("version_type"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
@@ -1373,9 +1373,9 @@ namespace Nest
 			{
 		
 		///<summary>Specific write consistency setting for the operation</summary>
-		public ConsistencyOptions Consistency 
+		public Consistency Consistency 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ConsistencyOptions>("consistency"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Consistency>("consistency"); } 
 			set { this.Request.RequestParameters.AddQueryString("consistency", value); }
 		}
 		
@@ -1397,9 +1397,9 @@ namespace Nest
 		
 		
 		///<summary>Specific replication type</summary>
-		public ReplicationOptions Replication 
+		public Replication Replication 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ReplicationOptions>("replication"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Replication>("replication"); } 
 			set { this.Request.RequestParameters.AddQueryString("replication", value); }
 		}
 		
@@ -1429,9 +1429,9 @@ namespace Nest
 		
 		
 		///<summary>Specific version type</summary>
-		public VersionTypeOptions VersionType 
+		public VersionType VersionType 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionTypeOptions>("version_type"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
@@ -1461,17 +1461,17 @@ namespace Nest
 		
 		
 		///<summary>Specific write consistency setting for the operation</summary>
-		public ConsistencyOptions Consistency 
+		public Consistency Consistency 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ConsistencyOptions>("consistency"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Consistency>("consistency"); } 
 			set { this.Request.RequestParameters.AddQueryString("consistency", value); }
 		}
 		
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperatorOptions DefaultOperator 
+		public DefaultOperator DefaultOperator 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperatorOptions>("default_operator"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
 			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
 		}
 		
@@ -1501,17 +1501,17 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
 		
 		///<summary>Specific replication type</summary>
-		public ReplicationOptions Replication 
+		public Replication Replication 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ReplicationOptions>("replication"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Replication>("replication"); } 
 			set { this.Request.RequestParameters.AddQueryString("replication", value); }
 		}
 		
@@ -1637,9 +1637,9 @@ namespace Nest
 		
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperatorOptions DefaultOperator 
+		public DefaultOperator DefaultOperator 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperatorOptions>("default_operator"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
 			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
 		}
 		
@@ -1837,9 +1837,9 @@ namespace Nest
 		
 		
 		///<summary>Specific version type</summary>
-		public VersionTypeOptions VersionType 
+		public VersionType VersionType 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionTypeOptions>("version_type"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
@@ -1933,9 +1933,9 @@ namespace Nest
 		
 		
 		///<summary>Specific version type</summary>
-		public VersionTypeOptions VersionType 
+		public VersionType VersionType 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionTypeOptions>("version_type"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
@@ -1957,17 +1957,17 @@ namespace Nest
 			{
 		
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public ConsistencyOptions Consistency 
+		public Consistency Consistency 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ConsistencyOptions>("consistency"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Consistency>("consistency"); } 
 			set { this.Request.RequestParameters.AddQueryString("consistency", value); }
 		}
 		
 		
 		///<summary>Explicit operation type</summary>
-		public OpTypeOptions OpType 
+		public OpType OpType 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<OpTypeOptions>("op_type"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<OpType>("op_type"); } 
 			set { this.Request.RequestParameters.AddQueryString("op_type", value); }
 		}
 		
@@ -1989,9 +1989,9 @@ namespace Nest
 		
 		
 		///<summary>Specific replication type</summary>
-		public ReplicationOptions Replication 
+		public Replication Replication 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ReplicationOptions>("replication"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Replication>("replication"); } 
 			set { this.Request.RequestParameters.AddQueryString("replication", value); }
 		}
 		
@@ -2037,9 +2037,9 @@ namespace Nest
 		
 		
 		///<summary>Specific version type</summary>
-		public VersionTypeOptions VersionType 
+		public VersionType VersionType 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionTypeOptions>("version_type"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
@@ -2125,9 +2125,9 @@ namespace Nest
 		
 		
 		///<summary>Format of the output</summary>
-		public FormatOptions Format 
+		public Format Format 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<FormatOptions>("format"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Format>("format"); } 
 			set { this.Request.RequestParameters.AddQueryString("format", value); }
 		}
 		
@@ -2215,9 +2215,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -2287,9 +2287,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -2503,9 +2503,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -2551,9 +2551,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -2623,9 +2623,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -2687,9 +2687,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -2727,9 +2727,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -2809,9 +2809,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -2857,9 +2857,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -2905,9 +2905,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -2993,9 +2993,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -3057,9 +3057,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -3105,9 +3105,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -3241,9 +3241,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -3289,9 +3289,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -3385,9 +3385,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both, in the search request to warm.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -3465,9 +3465,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -3521,9 +3521,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -3601,9 +3601,9 @@ namespace Nest
 		
 		
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
-		public LevelOptions Level 
+		public Level Level 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<LevelOptions>("level"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Level>("level"); } 
 			set { this.Request.RequestParameters.AddQueryString("level", value); }
 		}
 		
@@ -3649,9 +3649,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -3755,9 +3755,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -4091,9 +4091,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -4115,9 +4115,9 @@ namespace Nest
 			{
 		
 		///<summary>Search operation type</summary>
-		public SearchTypeOptions SearchType 
+		public SearchType SearchType 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<SearchTypeOptions>("search_type"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<SearchType>("search_type"); } 
 			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
 		}
 		
@@ -4251,10 +4251,10 @@ namespace Nest
 		
 		
 		///<summary>The type to sample (default: cpu)</summary>
-		public TypeOptions TypeQueryString 
+		public ThreadType ThreadType 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<TypeOptions>("type"); } 
-			set { this.Request.RequestParameters.AddQueryString("type", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue<ThreadType>("thread_type"); } 
+			set { this.Request.RequestParameters.AddQueryString("thread_type", value); }
 		}
 		
 
@@ -4379,9 +4379,9 @@ namespace Nest
 		
 		
 		///<summary>Return indices stats aggregated at node, index or shard level</summary>
-		public LevelOptions Level 
+		public Level Level 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<LevelOptions>("level"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Level>("level"); } 
 			set { this.Request.RequestParameters.AddQueryString("level", value); }
 		}
 		
@@ -4443,9 +4443,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -4475,9 +4475,9 @@ namespace Nest
 		
 		
 		///<summary>Specific version type</summary>
-		public VersionTypeOptions VersionType 
+		public VersionType VersionType 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionTypeOptions>("version_type"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
@@ -4541,9 +4541,9 @@ namespace Nest
 		
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperatorOptions DefaultOperator 
+		public DefaultOperator DefaultOperator 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperatorOptions>("default_operator"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
 			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
 		}
 		
@@ -4573,9 +4573,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -4621,9 +4621,9 @@ namespace Nest
 		
 		
 		///<summary>Search operation type</summary>
-		public SearchTypeOptions SearchType 
+		public SearchType SearchType 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<SearchTypeOptions>("search_type"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<SearchType>("search_type"); } 
 			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
 		}
 		
@@ -4645,9 +4645,9 @@ namespace Nest
 		
 		
 		///<summary>Specify suggest mode</summary>
-		public SuggestModeOptions SuggestMode 
+		public SuggestMode SuggestMode 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<SuggestModeOptions>("suggest_mode"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<SuggestMode>("suggest_mode"); } 
 			set { this.Request.RequestParameters.AddQueryString("suggest_mode", value); }
 		}
 		
@@ -4719,9 +4719,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -4759,9 +4759,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -4791,9 +4791,9 @@ namespace Nest
 		
 		
 		///<summary>Search operation type</summary>
-		public SearchTypeOptions SearchType 
+		public SearchType SearchType 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<SearchTypeOptions>("search_type"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<SearchType>("search_type"); } 
 			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
 		}
 		
@@ -5063,9 +5063,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcardsOptions ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcardsOptions>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -5199,9 +5199,9 @@ namespace Nest
 			{
 		
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public ConsistencyOptions Consistency 
+		public Consistency Consistency 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ConsistencyOptions>("consistency"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Consistency>("consistency"); } 
 			set { this.Request.RequestParameters.AddQueryString("consistency", value); }
 		}
 		
@@ -5231,9 +5231,9 @@ namespace Nest
 		
 		
 		///<summary>Specific replication type</summary>
-		public ReplicationOptions Replication 
+		public Replication Replication 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ReplicationOptions>("replication"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Replication>("replication"); } 
 			set { this.Request.RequestParameters.AddQueryString("replication", value); }
 		}
 		
@@ -5295,9 +5295,9 @@ namespace Nest
 		
 		
 		///<summary>Specific version type</summary>
-		public VersionTypeOptions VersionType 
+		public VersionType VersionType 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionTypeOptions>("version_type"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
