@@ -14,7 +14,7 @@ One of the most important things to grasp when using Nest is how to write querie
         ///EXAMPLE HERE
     );
 
-## Raw strings
+## Raw Strings
 Although not preferred by me personally, many folks like to build their own JSON strings and just pass that along.
 
     .QueryRaw("\"match_all\" : { }")
@@ -25,7 +25,7 @@ Nest does not modify this in anyway and just writes this straight into the JSON 
 ## Query DSL
 The preferred way to write queries, since it gives you alot of cool features.
 
-### Lambda expressions
+### Lambda Expressions
     .Query(q=>q
         .Term(p=>p.Name, "NEST")
     )
@@ -44,7 +44,7 @@ Of course if you need to pass the property name as string NEST will allow you to
         .Term("followers.firstName", "martijn")
     )
 
-### Static query/filter generator. 
+### Static Query/Filter Generator
 Sometimes you'll need to resuse a filter or query often. To aid with this you can also write queries like this:
 
     var termQuery = Query<ElasticSearchProject>
@@ -61,7 +61,7 @@ Sometimes you'll need to resuse a filter or query often. To aid with this you ca
 
 Similarly `Filter<T>.[Filter]()` methods exist for filters.
 
-### Boolean queries 
+### Boolean Queries 
 As can be seen in the previous example writing out boolean queries can turn into a really tedious and verbose effort. Luckily NEST supports bitwise operators and so we can rewrite the previous as such:
 
     .Query(q=>q.MatchAll() && termQuery)
@@ -96,7 +96,7 @@ You can mix and match this to any level of complexity until it satisfies your qu
 
 Will query all php clients except 'Elastica` or where the name equals `NEST`.
 
-#### Clean output support
+#### Clean Output Support
 Normally writing three boolean must clauses looks like this (psuedo code)
 
     must
@@ -114,7 +114,7 @@ A naive implemenation of the bitwise operators would make all the queries sent t
 
 This degrades rather rapidly and makes inspecting generated queries quite a chore. NEST does it's best to detect these cases and will always write them in the first, cleaner form.
 
-## Conditionless queries
+## Conditionless Queries
 
 Writing complex boolean queries is one thing, but more often then not you'll want to make decisions on how to query based on user input. 
 
