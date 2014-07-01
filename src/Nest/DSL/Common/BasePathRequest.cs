@@ -11,8 +11,8 @@ namespace Nest
 		[JsonIgnore]
 		public IRequestConfiguration RequestConfiguration
 		{	
-			get { return base.Request.RequestConfiguration; }
-			set { base.Request.RequestConfiguration = value; }
+			get { return base._requestConfiguration; }
+			set { base._requestConfiguration = value; }
 		}
 	}
 }

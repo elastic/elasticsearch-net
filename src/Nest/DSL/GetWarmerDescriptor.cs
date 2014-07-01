@@ -12,7 +12,7 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesGetWarmer")]
-	public partial class GetWarmerDescriptor : IndicesOptionalTypesNamePathDecriptor<GetWarmerDescriptor, GetWarmerRequestParameters>
+	public partial class GetWarmerDescriptor : IndicesOptionalTypesNamePathDescriptor<GetWarmerDescriptor, GetWarmerRequestParameters>
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetWarmerRequestParameters> pathInfo)
 		{

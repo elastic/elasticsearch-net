@@ -28,7 +28,9 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			searchSelector.ThrowIfNull("searchSelector");
-			var descriptor = searchSelector(new SearchDescriptor<T>().Index(this._Index).Type(this._Type));
+			//TODO no longer needed when we have a MultiSearchRequest
+			IFixedIndexTypePath<MultiSearchRequestParameters> request = this;
+			var descriptor = searchSelector(new SearchDescriptor<T>().Index(request.Index).Type(request.Type));
 			if (descriptor == null)
 				return this;
 			descriptor.CreateCovarianceSelector<T>(_inferrer);

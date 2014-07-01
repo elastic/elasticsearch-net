@@ -140,6 +140,7 @@
     <Compile Include="Domain\Connection\IConnectionSettingsValues.cs" />
     <Compile Include="Domain\DSL\DescriptorForAttribute.cs" />
     <Compile Include="Domain\ICustomJson.cs" />
+    <Compile Include="Domain\Paths\FluentFieldList.cs" />
     <Compile Include="Domain\Property.cs" />
     <Compile Include="Domain\Marker\PropertyNameMarker.cs" />
     <Compile Include="Domain\Marker\PropertyPathMarker.cs" />
@@ -312,7 +313,7 @@
     <Compile Include="DSL\RefreshDescriptor.cs" />
     <Compile Include="DSL\OptimizeDescriptor.cs" />
     <Compile Include="DSL\OpenIndexDescriptor.cs" />
-    <Compile Include="DSL\Paths\FluentDictionary.cs" />
+    <Compile Include="Domain\FluentDictionary.cs" />
     <Compile Include="DSL\Paths\IndexPathDescriptor.cs" />
     <Compile Include="DSL\ScrollDescriptor.cs" />
     <Compile Include="DSL\UpdateSettingsDescriptor.cs" />
@@ -542,7 +543,7 @@
     <Compile Include="Domain\Responses\MultiGetResponse.cs" />
     <Compile Include="DSL\MultiGetDescriptor.cs" />
     <Compile Include="ElasticClient-Get.cs" />
-    <Compile Include="Domain\FieldSelection.cs" />
+    <Compile Include="Domain\Paths\FieldSelection.cs" />
     <Compile Include="Domain\Responses\BulkResponse.cs" />
     <Compile Include="Domain\Responses\GetResponse.cs" />
     <Compile Include="Domain\Responses\DeleteResponse.cs" />

@@ -18,7 +18,7 @@ namespace Nest
 		}
 
 		protected TParameters _requestParameters = new TParameters();
-		private IRequestConfiguration _requestConfiguration;
+		protected IRequestConfiguration _requestConfiguration;
 
 		[JsonIgnore]
 		TParameters IRequest<TParameters>.RequestParameters  

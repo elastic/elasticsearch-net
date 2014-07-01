@@ -7,6 +7,43 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	public interface IIndexNamePath<TParameters> : IRequest<TParameters>
+		where TParameters : IRequestParameters, new()
+	{
+		IndexNameMarker Index { get; set; }
+		string Name { get; set; }
+	}
+
+	internal static class IndexNamePathRouteParamaters
+	{
+		public static void SetRouteParameters<TParameters>(
+			IIndexNamePath<TParameters> path,
+			IConnectionSettingsValues settings, 
+			ElasticsearchPathInfo<TParameters> pathInfo)
+			where TParameters : IRequestParameters, new()
+		{	
+			if (path.Name == null)
+				throw new DslException("missing name route parameter");
+			var inferrer = new ElasticInferrer(settings);
+			var index = inferrer.IndexName(path.Index) ?? inferrer.DefaultIndex; 
+			pathInfo.Index = index;
+			pathInfo.Name = path.Name;
+		}
+	
+	}
+
+	public abstract class IndexNamePathBase<TParameters> : BasePathRequest<TParameters>, IIndexNamePath<TParameters>
+		where TParameters : IRequestParameters, new()
+	{
+		public IndexNameMarker Index { get; set; }
+		public string Name { get; set; }
+		
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		{	
+			IndexNamePathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+		}
+	}
+
 	/// <summary>
 	/// Provides a base for descriptors that need to describe a path in the form of 
 	/// <pre>
@@ -14,45 +51,43 @@ namespace Nest
 	/// </pre>
 	/// neither parameter is optional 
 	/// </summary>
-	public abstract class IndexNamePathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor, TParameters>
+	public abstract class IndexNamePathDescriptor<TDescriptor, TParameters> 
+		: BasePathDescriptor<TDescriptor, TParameters>, IIndexNamePath<TParameters>
 		where TDescriptor : IndexNamePathDescriptor<TDescriptor, TParameters>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-		internal IndexNameMarker _Index { get; set; }
-		internal string _Name { get; set; }
+		private IIndexNamePath<TParameters> Self { get { return this; } }
+
+		IndexNameMarker IIndexNamePath<TParameters>.Index { get; set; }
+		string IIndexNamePath<TParameters>.Name { get; set; }
 		
 		public TDescriptor Index<TAlternative>() where TAlternative : class
 		{
-			this._Index = typeof(TAlternative);
+			Self.Index = typeof(TAlternative);
 			return (TDescriptor)this;
 		}
 			
 		public TDescriptor Index(string indexType)
 		{
-			this._Index = indexType;
+			Self.Index = indexType;
 			return (TDescriptor)this;
 		}
 
 		public TDescriptor Index(Type indexType)
 		{
-			this._Index = indexType;
+			Self.Index = indexType;
 			return (TDescriptor)this;
 		}
 		
 		public TDescriptor Name(string name)
 		{
-			this._Name = name;
+			Self.Name = name;
 			return (TDescriptor)this;
 		}
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			if (this._Name == null)
-				throw new DslException("missing Repository()");
-			var inferrer = new ElasticInferrer(settings);
-			var index = inferrer.IndexName(this._Index) ?? inferrer.DefaultIndex; 
-			pathInfo.Index = index;
-			pathInfo.Name = this._Name;
+			IndexNamePathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 	}

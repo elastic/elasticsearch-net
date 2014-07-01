@@ -57,7 +57,9 @@ namespace Nest
 			putMappingDescriptor.ThrowIfNull("rootObjectMappingDescriptor");
 
 			var inferrer = new ElasticInferrer(this._connectionSettings);
-			var typeName = inferrer.TypeName(putMappingDescriptor._Type ?? typeof(T));
+			//TODO no longer needed when we have an IPutMappingRequest
+			IIndicesTypePath<PutMappingRequestParameters, T> request = putMappingDescriptor;
+			var typeName = inferrer.TypeName(request.Type ?? typeof(T));
 			if (typeName == null)
 				return this;
 			this._TemplateMapping.Mappings[typeName] = putMappingDescriptor._Mapping;
@@ -100,7 +102,9 @@ namespace Nest
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo)
 		{
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
-			pathInfo.Name = this._Name;
+			//TODO no longer needed when we have an IPutTemplateRequest
+			INamePath<PutTemplateRequestParameters> request = this;
+			pathInfo.Name = request.Name;
 		}
 
 	}

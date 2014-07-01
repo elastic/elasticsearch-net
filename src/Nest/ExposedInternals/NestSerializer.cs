@@ -150,15 +150,18 @@ namespace Nest
 			bulkDescriptor._Operations.ThrowIfEmpty("Bulk descriptor does not define any operations");
 			var sb = new StringBuilder();
 			var inferrer = new ElasticInferrer(this._settings);
+			
+			//TODO no longer needed when we have an IBulkRequest
+			IFixedIndexTypePath<BulkRequestParameters> request = bulkDescriptor;
 
 			foreach (var operation in bulkDescriptor._Operations)
 			{
 				var command = operation._Operation;
 				var index = operation._Index
-							?? inferrer.IndexName(bulkDescriptor._Index)
+							?? inferrer.IndexName(request.Index)
 							?? inferrer.IndexName(operation._ClrType);
 				var typeName = operation._Type
-							   ?? inferrer.TypeName(bulkDescriptor._Type)
+							   ?? inferrer.TypeName(request.Type)
 							   ?? inferrer.TypeName(operation._ClrType);
 
 				var id = operation.GetIdForObject(inferrer);

@@ -14,7 +14,7 @@ namespace Nest
 {
 	[DescriptorFor("IndicesPutWarmer")]
 	[JsonConverter(typeof(CustomJsonConverter))]
-	public partial class PutWarmerDescriptor : IndicesOptionalTypesNamePathDecriptor<PutWarmerDescriptor, PutWarmerRequestParameters>
+	public partial class PutWarmerDescriptor : IndicesOptionalTypesNamePathDescriptor<PutWarmerDescriptor, PutWarmerRequestParameters>
 		, ICustomJson
 	{
 		private ISearchRequest _searchDescriptor { get; set; }

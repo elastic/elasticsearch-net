@@ -1,17 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-
-using Nest.Resolvers;
 
 namespace Nest
 {
+	public interface IIndicesOptionalExplicitAllPath<TParameters> : IRequest<TParameters>
+		where TParameters : IRequestParameters, new()
+	{
+		IEnumerable<IndexNameMarker> Indices { get; set; }
+		bool? AllIndices { get; set; }
+	}
+
+	internal static class IndicesOptionalExplicitAllPathRouteParamaters
+	{
+		public static void SetRouteParameters<TParameters>(
+			IIndicesOptionalExplicitAllPath<TParameters> path,
+			IConnectionSettingsValues settings, 
+			ElasticsearchPathInfo<TParameters> pathInfo)
+			where TParameters : IRequestParameters, new()
+		{	
+			var inferrer = new ElasticInferrer(settings);
+			if (!path.AllIndices.HasValue && path.Indices == null)
+				path.Indices = new[] {(IndexNameMarker)inferrer.DefaultIndex};
+
+			string index = "_all";
+			if (!path.AllIndices.GetValueOrDefault(false))
+				index = string.Join(",", path.Indices.Select(inferrer.IndexName));
+
+			pathInfo.Index = index;
+		
+		}
+	
+	}
+
+	public abstract class IndicesOptionalExplicitAllPathBase<TParameters> : BasePathRequest<TParameters>, IIndicesOptionalExplicitAllPath<TParameters>
+		where TParameters : IRequestParameters, new()
+	{
+		public IEnumerable<IndexNameMarker> Indices { get; set; }
+		public bool? AllIndices { get; set; }
+		
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		{	
+			IndicesOptionalExplicitAllPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+		}
+	}
+
 	/// <summary>
 	/// Provides a base for descriptors that need to describe a path in the form of 
 	/// <pre>
@@ -19,17 +54,20 @@ namespace Nest
 	/// </pre>
 	/// {indices} is optional but AllIndices() needs to be explicitly called.
 	/// </summary>
-	public abstract class IndicesOptionalExplicitAllPathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor, TParameters>
+	public abstract class IndicesOptionalExplicitAllPathDescriptor<TDescriptor, TParameters> 
+		: BasePathDescriptor<TDescriptor, TParameters>, IIndicesOptionalExplicitAllPath<TParameters>
 		where TDescriptor : IndicesOptionalExplicitAllPathDescriptor<TDescriptor, TParameters>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-		internal IEnumerable<IndexNameMarker> _Indices { get; set; }
+		private IIndicesOptionalExplicitAllPath<TParameters> Self { get { return this; } }
+
+		IEnumerable<IndexNameMarker> IIndicesOptionalExplicitAllPath<TParameters>.Indices { get; set; }
 		
-		internal bool? _AllIndices { get; set; }
+		bool? IIndicesOptionalExplicitAllPath<TParameters>.AllIndices { get; set; }
 
 		public TDescriptor AllIndices(bool allIndices = true)
 		{
-			this._AllIndices = allIndices;
+			Self.AllIndices = allIndices;
 			return (TDescriptor)this;
 		}
 			
@@ -45,27 +83,19 @@ namespace Nest
 			
 		public TDescriptor Indices(params string[] indices)
 		{
-			this._Indices = indices.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indices.Select(s=>(IndexNameMarker)s);
 			return (TDescriptor)this;
 		}
 
 		public TDescriptor Indices(params Type[] indicesTypes)
 		{
-			this._Indices = indicesTypes.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indicesTypes.Select(s=>(IndexNameMarker)s);
 			return (TDescriptor)this;
 		}
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			var inferrer = new ElasticInferrer(settings);
-			if (!this._AllIndices.HasValue && this._Indices == null)
-				this._Indices = new[] {(IndexNameMarker)inferrer.DefaultIndex};
-
-			string index = "_all";
-			if (!this._AllIndices.GetValueOrDefault(false))
-				index = string.Join(",", this._Indices.Select(inferrer.IndexName));
-
-			pathInfo.Index = index;
+			IndicesOptionalExplicitAllPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 	}

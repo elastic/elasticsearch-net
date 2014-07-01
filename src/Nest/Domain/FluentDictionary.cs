@@ -1,23 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using Nest.Resolvers;
 
 namespace Nest
 {
-	public class FluentFieldList<T> : List<PropertyPathMarker> where T : class
-	{
-		public FluentFieldList<T> Add(Expression<Func<T, object>> k)
-		{
-			base.Add(k);
-			return this;
-		}
-		public FluentFieldList<T> Add(string k)
-		{
-			base.Add(k);
-			return this;
-		}
-	}
 	public class FluentDictionary<K, V> : Dictionary<K, V>
 	{
 		public FluentDictionary()

@@ -7,6 +7,52 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	public interface IDocumentOptionalPath<TParameters, T> : IRequest<TParameters>
+		where TParameters : IRequestParameters, new()
+		where T : class
+	{
+		IndexNameMarker Index { get; set; }
+		TypeNameMarker Type { get; set; }
+		string Id { get; set; }
+		T IdFrom { get; set; }
+	}
+
+	internal static class DocumentOptionalPathRouteParamaters
+	{
+		public static void SetRouteParameters<TParameters, T>(
+			IDocumentOptionalPath<TParameters, T> path,
+			IConnectionSettingsValues settings,
+			ElasticsearchPathInfo<TParameters> pathInfo)
+			where TParameters : IRequestParameters, new()
+			where T : class
+		{
+			var inferrer = new ElasticInferrer(settings);
+			var index = path.Index != null ? inferrer.IndexName(path.Index) : inferrer.IndexName<T>();
+			var type = path.Type != null ? inferrer.TypeName(path.Type) : inferrer.TypeName<T>();
+			var id = path.Id ?? inferrer.Id(path.IdFrom);
+
+			pathInfo.Index = index;
+			pathInfo.Type = type;
+			pathInfo.Id = id;
+		}
+
+	}
+	public abstract class DocumentOptionalPathBase<TParameters, T> : BasePathRequest<TParameters>, IDocumentOptionalPath<TParameters, T>
+		where TParameters : FluentRequestParameters<TParameters>, new()
+		where T : class
+	{
+		public IndexNameMarker Index { get; set; }
+		public TypeNameMarker Type { get; set; }
+		public string Id { get; set; }
+		public T IdFrom { get; set; }
+
+		protected override void SetRouteParameters(
+			IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		{
+			DocumentOptionalPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+		}
+	}
+
 	/// <summary>
 	/// Provides a base for descriptors that need to describe a path in the form of 
 	/// <pre>
@@ -15,48 +61,19 @@ namespace Nest
 	/// if one of the parameters is not explicitly specified this will fall back to the defaults for type 
 	/// this version won't throw if any of the parts are inferred to be empty<para>T</para>
 	/// </summary>
-	public interface IDocumentOptionalPath<TParameters> : IRequest<TParameters>
-		where TParameters : IRequestParameters, new()
-	{
-		IndexNameMarker Index { get; set; }
-		TypeNameMarker Type { get; set; }
-		string Id { get; set; }
-	}
-
-	public abstract class DocumentOptionalPathBase<TParameters> : BasePathRequest<TParameters>, IDocumentOptionalPath<TParameters>
-		where TParameters : IRequestParameters, new()
-	{
-		public IndexNameMarker Index { get; set; }
-		public TypeNameMarker Type { get; set; }
-		public string Id { get; set; }
-		
-		protected override void SetRouteParameters(
-			IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
-		{	
-			var inferrer = new ElasticInferrer(settings);
-			var index = inferrer.IndexName(this.Index);
-			var type = inferrer.TypeName(this.Type);
-		
-			pathInfo.Index = index;
-			pathInfo.Type = type;
-			pathInfo.Id = this.Id;
-		}
-	}
-
-
-	public abstract class DocumentOptionalPathDescriptorBase<TDescriptor, T, TParameters> 
-		: BasePathDescriptor<TDescriptor, TParameters>, IDocumentOptionalPath<TParameters>
+	public abstract class DocumentOptionalPathDescriptorBase<TDescriptor, T, TParameters>
+		: BasePathDescriptor<TDescriptor, TParameters>, IDocumentOptionalPath<TParameters, T>
 		where TDescriptor : DocumentOptionalPathDescriptorBase<TDescriptor, T, TParameters>, new()
 		where T : class
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 
-		private IDocumentOptionalPath<TParameters> Self { get { return this;  } }
+		private IDocumentOptionalPath<TParameters, T> Self { get { return this; } }
 
-		IndexNameMarker IDocumentOptionalPath<TParameters>.Index { get; set; }
-		TypeNameMarker IDocumentOptionalPath<TParameters>.Type { get; set; }
-		string IDocumentOptionalPath<TParameters>.Id { get; set; }
-		private T ObjectToInferOn { get; set; }
+		IndexNameMarker IDocumentOptionalPath<TParameters, T>.Index { get; set; }
+		TypeNameMarker IDocumentOptionalPath<TParameters, T>.Type { get; set; }
+		string IDocumentOptionalPath<TParameters, T>.Id { get; set; }
+		T IDocumentOptionalPath<TParameters, T>.IdFrom { get; set; }
 
 		public TDescriptor Index(string index)
 		{
@@ -102,21 +119,14 @@ namespace Nest
 		}
 		public TDescriptor Object(T @object)
 		{
-			this.ObjectToInferOn = @object;
+			Self.IdFrom = @object;
 			return (TDescriptor)this;
 		}
 
 		protected override void SetRouteParameters(
 			IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
-		{	
-			var inferrer = new ElasticInferrer(settings);
-			var index = Self.Index != null ? inferrer.IndexName(Self.Index) : inferrer.IndexName<T>();
-			var type = Self.Type != null ? inferrer.TypeName(Self.Type) : inferrer.TypeName<T>();
-			var id = Self.Id ?? inferrer.Id(this.ObjectToInferOn);
-		
-			pathInfo.Index = index;
-			pathInfo.Type = type;
-			pathInfo.Id = id;
+		{
+			DocumentOptionalPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
 		}
 	}
 }
