@@ -2,12 +2,26 @@
 using System.Diagnostics;
 using Elasticsearch.Net.Connection.Thrift;
 using Elasticsearch.Net;
+using System.Net;
+using Newtonsoft.Json;
 
 namespace Nest.Tests.Integration
 {
 	public static class ElasticsearchConfiguration
 	{
 		public static readonly string DefaultIndex = Test.Default.DefaultIndex + "-" + Process.GetCurrentProcess().Id.ToString();
+
+		public static string _currentVersion;
+		public static string CurrentVersion
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(_currentVersion))
+					_currentVersion = GetCurrentVersion();
+
+				return _currentVersion;
+			}
+		}
 
 		public static Uri CreateBaseUri(int? port = null)
 		{
@@ -36,5 +50,12 @@ namespace Nest.Tests.Integration
 			return DefaultIndex + "_" + Guid.NewGuid().ToString();
 		}
 
+		public static string GetCurrentVersion()
+		{
+			var uri = ElasticsearchConfiguration.CreateBaseUri();
+			var json = new WebClient().DownloadString(uri);
+			var response = JsonConvert.DeserializeObject<dynamic>(json);
+			return  response.version.number;
+		}
 	}
 }

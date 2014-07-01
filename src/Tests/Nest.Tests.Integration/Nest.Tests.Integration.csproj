@@ -92,6 +92,7 @@
     <Compile Include="Aggregations\MetricAggregationTests.cs" />
     <Compile Include="Aggregations\TermsAggregationTests.cs" />
     <Compile Include="Aggregations\ParseResponseItemsTests.cs" />
+    <Compile Include="Attributes\SkipVersionAttribute.cs" />
     <Compile Include="Cluster\GetSettingsTests.cs" />
     <Compile Include="Cluster\PutSettingsTests.cs" />
     <Compile Include="Connection\Failover\SniffTests.cs" />
