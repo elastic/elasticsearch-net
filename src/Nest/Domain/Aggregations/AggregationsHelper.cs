@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -109,7 +110,18 @@ namespace Nest
 		{
 			var bucket = this.TryGet<Bucket>(key);
 			var b = new Bucket<HistogramItem>();
-			b.Items = bucket.Items.OfType<HistogramItem>().ToList();
+
+			b.Items = bucket.Items.OfType<KeyItem>()
+				.Select(x => 
+					new HistogramItem
+						{
+							Key = long.Parse(x.Key),
+							KeyAsString = x.Key,
+							DocCount = x.DocCount
+						}
+				)
+				.ToList();
+
 			return b;
 		}
 	
