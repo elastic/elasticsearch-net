@@ -24,6 +24,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 		
 		[Test]
+		[SkipVersion("1.0", "Significant terms aggregation not introduced until 1.1")]
 		public void SignificantTerms()
 		{
 			var results = this._client.Search<ElasticsearchProject>(s => s
@@ -83,6 +84,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("1.0", "Percentiles aggregation not introduced until 1.1")]
 		public void Percentiles()
 		{
 			var results = this._client.Search<ElasticsearchProject>(s => s
@@ -106,6 +108,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 		
 		[Test]
+		[SkipVersion("1.0", "Percentiles aggregation not introduced until 1.1")]
 		public void PercentilesCustom()
 		{
 			var results = this._client.Search<ElasticsearchProject>(s => s
