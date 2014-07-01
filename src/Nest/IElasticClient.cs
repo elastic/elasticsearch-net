@@ -108,6 +108,34 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-update.html
 		/// </summary>
 		/// <typeparam name="T">The type to describe the document to be updated</typeparam>
+		/// <typeparam name="K">The type of the partial update document</typeparam>
+		/// <param name="updateSelector">a descriptor that describes the update operation</param>
+		IUpdateResponse Update<T>(IUpdateRequest<T, T> updateRequest)
+			where T : class;
+		
+		/// <summary>
+		/// The update API allows to update a document based on a script provided. 
+		/// <para>The operation gets the document (collocated with the shard) from the index, runs the script 
+		/// (with optional script language and parameters), and index back the result 
+		/// (also allows to delete, or ignore the operation). </para>
+		/// <para>It uses versioning to make sure no updates have happened during the "get" and "reindex".</para>
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-update.html
+		/// </summary>
+		/// <typeparam name="T">The type to describe the document to be updated</typeparam>
+		/// <typeparam name="K">The type of the partial update document</typeparam>
+		/// <param name="updateSelector">a descriptor that describes the update operation</param>
+		IUpdateResponse Update<T, K>(IUpdateRequest<T, K> updateRequest)
+			where T : class
+			where K : class;
+		/// <summary>
+		/// The update API allows to update a document based on a script provided. 
+		/// <para>The operation gets the document (collocated with the shard) from the index, runs the script 
+		/// (with optional script language and parameters), and index back the result 
+		/// (also allows to delete, or ignore the operation). </para>
+		/// <para>It uses versioning to make sure no updates have happened during the "get" and "reindex".</para>
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-update.html
+		/// </summary>
+		/// <typeparam name="T">The type to describe the document to be updated</typeparam>
 		/// <param name="updateSelector">a descriptor that describes the update operation</param>
 		Task<IUpdateResponse> UpdateAsync<T>(Func<UpdateDescriptor<T, T>, UpdateDescriptor<T, T>> updateSelector)
 			where T : class;

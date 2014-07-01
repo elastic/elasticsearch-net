@@ -12,19 +12,30 @@ namespace Nest
 		string Scroll { get; set; }
 	}
 
-	public class ScrollRequest : BaseRequest<ScrollRequestParameters>, IScrollRequest
+	internal static class ScrollRequestPathInfo
+	{
+		public static void UpdatePathInfo(
+			IScrollRequest request,
+			IConnectionSettingsValues settings, 
+			ElasticsearchPathInfo<ScrollRequestParameters> pathInfo)
+		{
+			// force POST scrollId can be quite big
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.ScrollId = request.ScrollId;
+			// force scroll id out of RequestParameters (potentially very large)
+			request.RequestParameters.RemoveQueryString("scroll_id");
+			request.RequestParameters.AddQueryString("scroll", request.Scroll);
+		}
+	}
+
+	public partial class ScrollRequest : BaseRequest<ScrollRequestParameters>, IScrollRequest
 	{
 		public string ScrollId { get; set; }
 		public string Scroll { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ScrollRequestParameters> pathInfo)
 		{
-			// force POST scrollId can be quite big
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			pathInfo.ScrollId = this.ScrollId ?? this.Request.RequestParameters.GetQueryStringValue<string>("scroll_id");
-			// force scroll id out of RequestParameters (potentially very large)
-			this.Request.RequestParameters.RemoveQueryString("scroll_id");
-			this.Request.RequestParameters.AddQueryString("scroll", this.Scroll);
+			ScrollRequestPathInfo.UpdatePathInfo(this, settings, pathInfo);
 		}
 	}
 
@@ -37,14 +48,24 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ScrollRequestParameters> pathInfo)
 		{
-			// force POST scrollId can be quite big
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			pathInfo.ScrollId = this.Request.RequestParameters.GetQueryStringValue<string>("scroll_id");
-			// force scroll id out of RequestParameters (potentially very large)
-			this.Request.RequestParameters.RemoveQueryString("scroll_id");
+			ScrollRequestPathInfo.UpdatePathInfo(this, settings, pathInfo);
 		}
 
 		string IScrollRequest.ScrollId { get; set; }
 		string IScrollRequest.Scroll { get; set; }
+		
+		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
+		public ScrollDescriptor<T> Scroll(string scroll)
+		{
+			Self.Scroll = scroll;
+			return this;
+		}
+		
+		///<summary>The scroll id used to continue/start the scrolled pagination</summary>
+		public ScrollDescriptor<T> ScrollId(string scrollId)
+		{
+			Self.ScrollId = scrollId;
+			return this;
+		}
 	}
 }

@@ -14,27 +14,9 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	/// <summary>
-	/// </summary>
-	public interface IRequest {}
-
-	public interface IRequest<TParameters> : IPathInfo<TParameters>, IRequest
-		where TParameters : IRequestParameters, new()
-	{
-		/// <summary>
-		/// Used to describe request parameters not part of the body. e.q query string or 
-		/// connection configuration overrides
-		/// </summary>
-		TParameters RequestParameters { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		IRequestConfiguration RequestConfiguration { get; set; }
-	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISearchRequest: IRequest<SearchRequestParameters>
+	public interface ISearchRequest : IRequest<SearchRequestParameters>
 	{
 		Type _ClrType { get; }
 
@@ -114,7 +96,7 @@ namespace Nest
 
 	}
 
-	public class SearchRequest : BaseRequest<SearchRequestParameters>, ISearchRequest
+	public partial class SearchRequest : BaseRequest<SearchRequestParameters>, ISearchRequest
 	{
 		public string Index { get; set; }
 		public string Type { get; set; }

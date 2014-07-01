@@ -141,8 +141,8 @@
     <Compile Include="Domain\DSL\DescriptorForAttribute.cs" />
     <Compile Include="Domain\ICustomJson.cs" />
     <Compile Include="Domain\Property.cs" />
-    <Compile Include="Domain\PropertyNameMarker.cs" />
-    <Compile Include="Domain\PropertyPathMarker.cs" />
+    <Compile Include="Domain\Marker\PropertyNameMarker.cs" />
+    <Compile Include="Domain\Marker\PropertyPathMarker.cs" />
     <Compile Include="Domain\Repository\Snapshot.cs" />
     <Compile Include="Domain\Repository\SnapshotRestore.cs" />
     <Compile Include="Domain\Responses\ClusterGetSettingsResponse - Copy.cs" />
@@ -154,6 +154,8 @@
     <Compile Include="Domain\Aggregations\TermsIncludeExclude.cs" />
     <Compile Include="DSL\ClusterGetSettingsDescriptor.cs" />
     <Compile Include="DSL\ClusterSettingsDescriptor.cs" />
+    <Compile Include="DSL\Common\BasePathRequest.cs" />
+    <Compile Include="DSL\Common\BaseRequest.cs" />
     <Compile Include="DSL\DeleteSnapshotDescriptor.cs" />
     <Compile Include="DSL\Facets\FacetRequest.cs" />
     <Compile Include="DSL\Filter\BoolFilterExtensions.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="DSL\Filter\PlainFilter.cs" />
     <Compile Include="DSL\Filter\PrefixFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\RawFilter.cs" />
+    <Compile Include="DSL\Common\IRequest.cs" />
     <Compile Include="DSL\Query\BoolQueryExtensions.cs" />
     <Compile Include="DSL\Query\PlainQuery.cs" />
     <Compile Include="DSL\Query\QueryContainer.cs" />
@@ -173,6 +176,7 @@
     <Compile Include="DSL\Visitor\QueryFilterWalker.cs" />
     <Compile Include="DSL\Visitor\QueryVisitor.cs" />
     <Compile Include="DSL\Visitor\VisitorScope.cs" />
+    <Compile Include="DSL\_Requests.generated.cs" />
     <Compile Include="ElasticClient-ClusterSettings.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
@@ -265,7 +269,7 @@
     <Compile Include="DSL\ClearCacheDescriptor.cs" />
     <Compile Include="DSL\Facets\Ip4Range.cs" />
     <Compile Include="DSL\Facets\DateExpressionRange.cs" />
-    <Compile Include="DSL\Paths\BasePathDescriptor.cs" />
+    <Compile Include="DSL\Common\BasePathDescriptor.cs" />
     <Compile Include="DSL\Query\GeoShapeQueryDescriptor.cs" />
     <Compile Include="DSL\Query\SimpleQueryStringQueryDescriptor.cs" />
     <Compile Include="DSL\SourceDescriptor.cs" />
@@ -803,7 +807,7 @@
     <Compile Include="Resolvers\Converters\YesNoBoolConverter.cs" />
     <Compile Include="Domain\Paths\ElasticsearchPathInfo.cs" />
     <Compile Include="Resolvers\ExpressionVisitor.cs" />
-    <Compile Include="Resolvers\IndexNameMarker.cs" />
+    <Compile Include="Domain\Marker\IndexNameMarker.cs" />
     <Compile Include="Domain\Paths\PathInfoHttpMethod.cs" />
     <Compile Include="Resolvers\IndexNameMarkerExtensions.cs" />
     <Compile Include="Resolvers\IndexNameResolver.cs" />
@@ -823,7 +827,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resolvers\PropertyNameResolver.cs" />
     <Compile Include="Resolvers\SettingsContractResolver.cs" />
-    <Compile Include="Resolvers\TypeNameMarker.cs" />
+    <Compile Include="Domain\Marker\TypeNameMarker.cs" />
     <Compile Include="Resolvers\TypeNameMarkerExtensions.cs" />
     <Compile Include="Resolvers\TypeNameResolver.cs" />
     <Compile Include="Resolvers\Writers\TypeMappingWriter.cs" />

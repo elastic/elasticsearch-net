@@ -2,7 +2,7 @@
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
-namespace Nest.Resolvers
+namespace Nest
 {
 	[JsonConverter(typeof(TypeNameMarkerConverter))]
 	public class TypeNameMarker : IEquatable<TypeNameMarker>

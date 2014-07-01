@@ -33,6 +33,8 @@ namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 					"version",
 					"q", //we dont support GET searches
 					"fields",
+					"indices_boost",
+					"source",
 					"sort",
 					"_source",
 					"_source_include",

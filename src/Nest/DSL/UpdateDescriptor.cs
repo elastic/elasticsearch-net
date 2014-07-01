@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IUpdateRequest<TUpsert, TDocument> : IDocumentOptionalPath<UpdateRequestParameters>
+	public interface IUpdateRequest<TUpsert,TDocument> : IDocumentOptionalPath<UpdateRequestParameters>
 		where TUpsert : class
 		where TDocument : class 
 	{
@@ -34,16 +34,21 @@ namespace Nest
 		TDocument Document { get; set; }
 	}
 
-	public class UpdateRequest<TUpsert, TDocument> : BaseRequest<UpdateRequestParameters>, IUpdateRequest<TUpsert, TDocument> 
+	public class UpdateRequest<TDocument> : UpdateRequest<TDocument, TDocument>
+		where TDocument : class 
+	{
+		
+	}
+
+	public partial class UpdateRequest<TUpsert, TDocument> : DocumentOptionalPathBase<UpdateRequestParameters>, IUpdateRequest<TUpsert, TDocument> 
 		where TUpsert : class
 		where TDocument : class 
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
 		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 		}
-		public IndexNameMarker Index { get; set; }
-		public TypeNameMarker Type { get; set; }
-		public string Id { get; set; }
+		
 
 		public string Script { get; set; }
 		public string Language { get; set; }
@@ -55,7 +60,8 @@ namespace Nest
 
 
 	public partial class UpdateDescriptor<TUpsert,TDocument> 
-		: DocumentPathDescriptorBase<UpdateDescriptor<TUpsert, TDocument>, TUpsert, UpdateRequestParameters>, IUpdateRequest<TUpsert, TDocument> 
+		: DocumentPathDescriptorBase<UpdateDescriptor<TUpsert, TDocument>, TUpsert, UpdateRequestParameters>
+		, IUpdateRequest<TUpsert, TDocument> 
 		where TUpsert : class 
 		where TDocument : class
 	{

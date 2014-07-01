@@ -35,6 +35,8 @@ namespace Nest
 
 		public string Stringify(object valueType)
 		{
+			if (valueType == null)
+				return null;
 			var s = valueType as string;
 			if (s != null)
 				return s;

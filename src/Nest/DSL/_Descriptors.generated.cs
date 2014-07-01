@@ -4737,22 +4737,6 @@ namespace Nest
 	{
 		
 	
-
-		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public ScrollDescriptor<T> Scroll(string scroll)
-		{
-			this.Request.RequestParameters.Scroll(scroll);
-			return this;
-		}
-		
-
-		///<summary>The scroll ID for scrolled search</summary>
-		public ScrollDescriptor<T> ScrollId(string scroll_id)
-		{
-			this.Request.RequestParameters.ScrollId(scroll_id);
-			return this;
-		}
-		
 	
 	}
 	
@@ -4823,14 +4807,6 @@ namespace Nest
 		}
 		
 
-		///<summary>Comma-separated list of index boosts</summary>
-		public SearchDescriptor<T> IndicesBoost(params string[] indices_boost)
-		{
-			this.Request.RequestParameters.IndicesBoost(indices_boost);
-			return this;
-		}
-		
-
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public SearchDescriptor<T> Lenient(bool lenient = true)
 		{
@@ -4875,14 +4851,6 @@ namespace Nest
 		public SearchDescriptor<T> SearchType(SearchTypeOptions search_type)
 		{
 			this.Request.RequestParameters.SearchType(search_type);
-			return this;
-		}
-		
-
-		///<summary>The URL-encoded request definition using the Query DSL (instead of using request body)</summary>
-		public SearchDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
 			return this;
 		}
 		

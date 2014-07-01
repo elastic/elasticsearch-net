@@ -2,7 +2,7 @@
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
-namespace Nest.Resolvers
+namespace Nest
 {
 	[JsonConverter(typeof(IndexNameMarkerConverter))]
 	public class IndexNameMarker : IEquatable<IndexNameMarker>

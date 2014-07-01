@@ -1,21 +1,24 @@
-﻿using System;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.Configuration;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	
 	public abstract class BaseRequest<TParameters> : IRequest<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		protected IRequest<TParameters> Request { get { return this; } }
-		
 		[JsonIgnore]
-		IRequestConfiguration IRequest<TParameters>.RequestConfiguration { get; set; }
+		protected IRequest<TParameters> Request { get { return this; } }
 
-		private TParameters _requestParameters = new TParameters();
+		[JsonIgnore]
+		IRequestConfiguration IRequest<TParameters>.RequestConfiguration
+		{
+			get { return _requestConfiguration; }
+			set { _requestConfiguration = value; }
+		}
+
+		protected TParameters _requestParameters = new TParameters();
+		private IRequestConfiguration _requestConfiguration;
 
 		[JsonIgnore]
 		TParameters IRequest<TParameters>.RequestParameters  
@@ -31,7 +34,7 @@ namespace Nest
 		{
 			var pathInfo = new ElasticsearchPathInfo<TParameters>();
 			pathInfo.RequestParameters = queryString;
-			var config = this.Request.RequestConfiguration;
+			var config = this._requestConfiguration;
 			if (config != null)
 			{
 				IRequestParameters p = pathInfo.RequestParameters;
@@ -58,24 +61,5 @@ namespace Nest
 			return this.ToPathInfo(settings, this.Request.RequestParameters);
 		}
 
-	}
-
-	public abstract class BasePathDescriptor<TDescriptor, TParameters> : BaseRequest<TParameters>
-		where TDescriptor : BasePathDescriptor<TDescriptor, TParameters>
-		where TParameters : FluentRequestParameters<TParameters>, new()
-	{
-
-
-		/// <summary>
-		/// Specify settings for this request alone, handy if you need a custom timeout or want to bypass sniffing, retries
-		/// </summary>
-		public TDescriptor RequestConfiguration(Func<RequestConfigurationDescriptor, IRequestConfiguration> configurationSelector)
-		{
-			configurationSelector.ThrowIfNull("configurationSelector");
-			this.Request.RequestConfiguration = configurationSelector(new RequestConfigurationDescriptor());
-			return (TDescriptor)this;
-		}
-		
-		
 	}
 }

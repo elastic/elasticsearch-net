@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Elasticsearch.Net;
 
-namespace Nest.Resolvers
+namespace Nest
 {
 	/// <summary>
 	/// Represents a typed container for object paths "field.nested.property";

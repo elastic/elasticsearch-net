@@ -23,12 +23,24 @@ namespace Nest
 		string Id { get; set; }
 	}
 
-	public abstract class DocumentOptionalPathBase<TParameters> : BaseRequest<TParameters>, IDocumentOptionalPath<TParameters>
+	public abstract class DocumentOptionalPathBase<TParameters> : BasePathRequest<TParameters>, IDocumentOptionalPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
 		public IndexNameMarker Index { get; set; }
 		public TypeNameMarker Type { get; set; }
 		public string Id { get; set; }
+		
+		protected override void SetRouteParameters(
+			IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		{	
+			var inferrer = new ElasticInferrer(settings);
+			var index = inferrer.IndexName(this.Index);
+			var type = inferrer.TypeName(this.Type);
+		
+			pathInfo.Index = index;
+			pathInfo.Type = type;
+			pathInfo.Id = this.Id;
+		}
 	}
 
 
