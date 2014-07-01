@@ -1,5 +1,7 @@
 ﻿using System.Globalization;
+using System.Linq;
 using Elasticsearch.Net;
+using Nest.Tests.MockData;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
@@ -29,7 +31,8 @@ namespace Nest.Tests.Integration.Core
 		[Test]
 		public void TestUpdate_ObjectInitializer()
 		{
-			var project = this._client.Source<ElasticsearchProject>(s => s.Id(2));
+			var id = NestTestData.Data.Last().Id;
+			var project = this._client.Source<ElasticsearchProject>(s => s.Id(id));
 			Assert.NotNull(project);
 			Assert.Greater(project.LOC, 0);
 			var loc = project.LOC;
@@ -40,7 +43,7 @@ namespace Nest.Tests.Integration.Core
 				Refresh = true,
 				Script = "ctx._source.loc += 10",
 			});
-			project = this._client.Source<ElasticsearchProject>(s => s.Id(2));
+			project = this._client.Source<ElasticsearchProject>(s => s.Id(id));
 			Assert.AreEqual(project.LOC, loc + 10);
 			Assert.AreNotEqual(project.Version, "1");
 		}

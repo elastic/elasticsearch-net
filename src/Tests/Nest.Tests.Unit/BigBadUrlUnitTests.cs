@@ -45,10 +45,10 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/_aliases", c => c.Alias(a => a));
 			Do("POST", "/_analyze", c => c.Analyze(a => a.Text("blah")));
 			Do("POST", "/myindex/_analyze", c => c.Analyze(a => a.Index("myindex").Text("blah")));
-			Do("POST", "/myindex/_bulk", c => c.Bulk(b => b.FixedPath("myindex").Index<Doc>(ib => ib.Object(new Doc { Id = "1" }))));
-			Do("POST", "/myindex/mytype/_bulk", c => c.Bulk(b => b.FixedPath("myindex", "mytype").Index<Doc>(ib => ib.Object(new Doc { Id = "1" }))));
-			Do("POST", "/myindex/_bulk", c => c.Bulk(b => b.FixedPath("myindex").Index<Doc>(ib => ib.Object(new Doc { Id = "1" }))));
-			Do("POST", "/_bulk", c => c.Bulk(b => b.Index<Doc>(ib => ib.Object(new Doc { Id = "1" }))));
+			Do("POST", "/myindex/_bulk", c => c.Bulk(b => b.FixedPath("myindex").Index<Doc>(ib => ib.Document(new Doc { Id = "1" }))));
+			Do("POST", "/myindex/mytype/_bulk", c => c.Bulk(b => b.FixedPath("myindex", "mytype").Index<Doc>(ib => ib.Document(new Doc { Id = "1" }))));
+			Do("POST", "/myindex/_bulk", c => c.Bulk(b => b.FixedPath("myindex").Index<Doc>(ib => ib.Document(new Doc { Id = "1" }))));
+			Do("POST", "/_bulk", c => c.Bulk(b => b.Index<Doc>(ib => ib.Document(new Doc { Id = "1" }))));
 			Do("POST", "/_cache/clear", c => c.ClearCache());
 			Do("POST", "/mydefaultindex/_cache/clear", c => c.ClearCache(cc => cc.Index<Doc>()));
 			Do("POST", "/mydefaultindex/_close", c => c.CloseIndex(ci => ci.Index<Doc>()));

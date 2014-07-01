@@ -15,18 +15,18 @@ namespace Nest.Tests.Unit.Core.Bulk
 		{
 			var result = this._client.Bulk(b => b
 				.Index<ElasticsearchProject>(i => i
-					.Object(new ElasticsearchProject {Id = 2})
+					.Document(new ElasticsearchProject {Id = 2})
 					.VersionType(VersionTypeOptions.Force))
 				.Create<ElasticsearchProject>(i => i
-					.Object(new ElasticsearchProject { Id = 3 })
+					.Document(new ElasticsearchProject { Id = 3 })
 					.VersionType(VersionTypeOptions.Internal))
 				.Delete<ElasticsearchProject>(i => i
-					.Object(new ElasticsearchProject { Id = 4 })
+					.Document(new ElasticsearchProject { Id = 4 })
 					.VersionType(VersionTypeOptions.ExternalGte))
 				.Update<ElasticsearchProject, object>(i => i
-					.Object(new ElasticsearchProject { Id = 3 })
+					.Document(new ElasticsearchProject { Id = 3 })
 					.VersionType(VersionTypeOptions.External)
-					.Document(new { name = "NEST"})
+					.PartialUpdate(new { name = "NEST"})
 				)
 			);
 			var status = result.ConnectionStatus;
@@ -37,16 +37,17 @@ namespace Nest.Tests.Unit.Core.Bulk
 		{
 			var result = this._client.Bulk(b => b
 				.Update<ElasticsearchProject, object>(i => i
-					.Object(new ElasticsearchProject { Id = 3 })
-					.Document(new { name = "NEST" })
+					.Document(new ElasticsearchProject { Id = 3 })
+					.PartialUpdate(new { name = "NEST" })
 					.RetriesOnConflict(4)
 				)
 				.Index<ElasticsearchProject>(i=>i
-					.Object(new ElasticsearchProject { Name = "yodawg", Id = 90})
+					.Document(new ElasticsearchProject { Name = "yodawg", Id = 90})
 					.Percolate("percolateme")
 				)
 			);
 			var status = result.ConnectionStatus;
+			//Assert.Fail(status.Request.Utf8String());
 			this.BulkJsonEquals(status.Request.Utf8String(), MethodInfo.GetCurrentMethod());
 		}
 	}

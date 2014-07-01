@@ -60,8 +60,8 @@ namespace Nest
 			var e = valueType as Enum;
 			if (e != null) return KnownEnums.Resolve(e);
 			if (valueType is bool)
-				return ((bool) valueType) ? "true" : "false";
-			
+				return ((bool)valueType) ? "true" : "false";
+
 			var pn = valueType as PropertyNameMarker;
 			if (pn != null)
 				return this._infer.PropertyName(pn);
@@ -80,7 +80,7 @@ namespace Nest
 		/// <param name="response">If the type you want is a Nest Response you have to pass a response object</param>
 		/// <param name="stream">The stream to deserialize off</param>
 		/// <param name="deserializationState">Optional deserialization state</param>
-		public virtual T Deserialize<T>(Stream stream) 
+		public virtual T Deserialize<T>(Stream stream)
 		{
 			var settings = this._serializationSettings;
 
@@ -96,17 +96,17 @@ namespace Nest
 
 			var serializer = JsonSerializer.Create(this.CreateSettings(converter));
 			var jsonTextReader = new JsonTextReader(new StreamReader(stream));
-			var t = (T) serializer.Deserialize(jsonTextReader, typeof (T));
+			var t = (T)serializer.Deserialize(jsonTextReader, typeof(T));
 			return t;
-			
+
 		}
 
-		protected internal  T _Deserialize<T>(Stream stream, JsonSerializerSettings settings = null)
+		protected internal T _Deserialize<T>(Stream stream, JsonSerializerSettings settings = null)
 		{
 			settings = settings ?? _serializationSettings;
 			var serializer = JsonSerializer.Create(settings);
 			var jsonTextReader = new JsonTextReader(new StreamReader(stream));
-			var t = (T) serializer.Deserialize(jsonTextReader, typeof (T));
+			var t = (T)serializer.Deserialize(jsonTextReader, typeof(T));
 			//var r = t as BaseResponse;
 			//if (r != null)
 			//{
@@ -125,7 +125,7 @@ namespace Nest
 			tcs.SetResult(r);
 			return tcs.Task;
 		}
-		
+
 		internal JsonSerializerSettings CreateSettings(JsonConverter piggyBackJsonConverter = null)
 		{
 			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
@@ -144,51 +144,43 @@ namespace Nest
 			return settings;
 		}
 
-		public string SerializeBulkDescriptor(BulkDescriptor bulkDescriptor)
+		public string SerializeBulkDescriptor(IBulkRequest bulkRequest)
 		{
-			bulkDescriptor.ThrowIfNull("bulkDescriptor");
-			bulkDescriptor._Operations.ThrowIfEmpty("Bulk descriptor does not define any operations");
+			bulkRequest.ThrowIfNull("bulkDescriptor");
+			bulkRequest.Operations.ThrowIfEmpty("Bulk descriptor does not define any operations");
 			var sb = new StringBuilder();
 			var inferrer = new ElasticInferrer(this._settings);
-			
-			//TODO no longer needed when we have an IBulkRequest
-			IFixedIndexTypePath<BulkRequestParameters> request = bulkDescriptor;
 
-			foreach (var operation in bulkDescriptor._Operations)
+			foreach (var operation in bulkRequest.Operations)
 			{
-				var command = operation._Operation;
-				var index = operation._Index
-							?? inferrer.IndexName(request.Index)
-							?? inferrer.IndexName(operation._ClrType);
-				var typeName = operation._Type
-							   ?? inferrer.TypeName(request.Type)
-							   ?? inferrer.TypeName(operation._ClrType);
+				var command = operation.Operation;
+				var index = operation.Index
+							?? inferrer.IndexName(operation.Index)
+							?? inferrer.IndexName(operation.ClrType);
+				var typeName = operation.Type
+							   ?? inferrer.TypeName(operation.Type)
+							   ?? inferrer.TypeName(operation.ClrType);
+			
 
-				var id = operation.GetIdForObject(inferrer);
-				operation._Index = index;
-				operation._Type = typeName;
-				operation._Id = id;
+				var id = operation.GetIdForOperation(inferrer);
+				operation.Index = index;
+				operation.Type = typeName;
+				operation.Id = id;
 
 				var opJson = this.Serialize(operation, SerializationFormatting.None).Utf8String();
 
 				var action = "{{ \"{0}\" :  {1} }}\n".F(command, opJson);
 				sb.Append(action);
-
-				if (command == "index" || command == "create")
-				{
-					var jsonCommand = this.Serialize(operation._Object, SerializationFormatting.None).Utf8String();
-					sb.Append(jsonCommand + "\n");
-				}
-				else if (command == "update")
-				{
-					var jsonCommand = this.Serialize(operation.GetBody(), SerializationFormatting.None).Utf8String();
-					sb.Append(jsonCommand + "\n");
-				}
+				var body = operation.GetBody();
+				if (body == null)
+					continue;
+				var jsonCommand = this.Serialize(body, SerializationFormatting.None).Utf8String();
+				sb.Append(jsonCommand + "\n");
 			}
 			var json = sb.ToString();
 			return json;
 		}
-	
+
 		/// <summary>
 		/// _msearch needs a specialized json format in the body
 		/// </summary>
@@ -219,7 +211,7 @@ namespace Nest
 			return json;
 		}
 
-		
+
 		protected string GetSearchType(ISearchRequest descriptor, MultiSearchDescriptor multiSearchDescriptor)
 		{
 			if (descriptor._SearchType != null)

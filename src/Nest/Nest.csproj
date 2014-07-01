@@ -153,6 +153,7 @@
     <Compile Include="Domain\Responses\RestoreResponse.cs" />
     <Compile Include="Domain\Responses\SnapshotResponse.cs" />
     <Compile Include="Domain\Aggregations\TermsIncludeExclude.cs" />
+    <Compile Include="DSL\Bulk\BulkOperationBase.cs" />
     <Compile Include="DSL\ClusterGetSettingsDescriptor.cs" />
     <Compile Include="DSL\ClusterSettingsDescriptor.cs" />
     <Compile Include="DSL\Common\BasePathRequest.cs" />
@@ -433,7 +434,7 @@
     <Compile Include="DSL\MultiSearchDescriptor.cs" />
     <Compile Include="DSL\PutTemplateDescriptor.cs" />
     <Compile Include="ElasticClient-Template.cs" />
-    <Compile Include="Domain\Bulk\BaseBulkOperation.cs" />
+    <Compile Include="Domain\Bulk\BulkOperationDescriptorBase.cs" />
     <Compile Include="DSL\Bulk\BulkCreateDescriptor.cs" />
     <Compile Include="DSL\BulkDescriptor.cs" />
     <Compile Include="DSL\Bulk\BulkIndexDescriptor.cs" />

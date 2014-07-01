@@ -39,7 +39,7 @@ namespace Nest
 			foreach (var o in @objects)
 			{
 				var o1 = o;
-				bulk.Index<T>(b => b.Object(o1));
+				bulk.Index<T>(b => b.Document(o1));
 			}
 			return Bulk(b => bulk);
 		}
@@ -53,7 +53,7 @@ namespace Nest
 			foreach (var o in @objects)
 			{
 				var o1 = o;
-				bulk.Index<T>(b => b.Object(o1));
+				bulk.Index<T>(b => b.Document(o1));
 			}
 			return BulkAsync(b => bulk);
 		}

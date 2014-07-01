@@ -35,7 +35,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html
 	///</pre>
 	///</summary>
-	public partial class BulkRequest  : BasePathRequest<BulkRequestParameters>
+	public partial class BulkRequest 
 			{
 		
 		///<summary>Explicit write consistency setting for the operation</summary>
@@ -85,12 +85,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("type", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<BulkRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
