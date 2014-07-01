@@ -2063,7 +2063,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-analyze.html
 	///</pre>
 	///</summary>
-	public partial class AnalyzeRequest  : BasePathRequest<AnalyzeRequestParameters>
+	public partial class AnalyzeRequest 
 			{
 		
 		///<summary>The name of the analyzer to use</summary>
@@ -2137,12 +2137,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("format", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<AnalyzeRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
