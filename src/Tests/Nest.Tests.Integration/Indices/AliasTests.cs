@@ -62,6 +62,7 @@ namespace Nest.Tests.Integration.Indices
 		}
 
 		[Test]
+		[SkipVersion("1.0", "Adding aliases during index creation not introduced until 1.1")]
 		public void AddAliasFromCreateIndex()
 		{
 			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
