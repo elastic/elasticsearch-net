@@ -29,8 +29,14 @@ namespace Nest
 		where TPartialUpdate : class
 	{
 		public override string Operation { get { return "update"; } } 
-		public override Type ClrType { get { return typeof(TDocument); } }
 
+		public override Type ClrType { get { return typeof(TDocument); } }
+		
+		public override string GetIdForOperation(ElasticInferrer inferrer)
+		{
+			return this.Id ?? inferrer.Id(this.Document);
+		}
+		
 		public override object GetBody()
 		{
 			return new BulkUpdateBody<TDocument, TPartialUpdate>

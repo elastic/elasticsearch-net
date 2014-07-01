@@ -844,6 +844,15 @@ namespace Nest
 			Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector) 
 			where T : class;
 
+
+		/// <summary>
+		/// The bulk API makes it possible to perform many index/delete operations in a single API call. 
+		/// This can greatly increase the indexing speed.
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
+		/// </summary>
+		/// <param name="bulkSelector">A descriptor the describe the index/create/delete operation for this bulk operation</param>
+		IBulkResponse Bulk(IBulkRequest bulkRequest);
+
 		/// <summary>
 		/// The bulk API makes it possible to perform many index/delete operations in a single API call. 
 		/// This can greatly increase the indexing speed.
@@ -851,6 +860,14 @@ namespace Nest
 		/// </summary>
 		/// <param name="bulkSelector">A descriptor the describe the index/create/delete operation for this bulk operation</param>
 		IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
+		
+		/// <summary>
+		/// The bulk API makes it possible to perform many index/delete operations in a single API call. 
+		/// This can greatly increase the indexing speed.
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
+		/// </summary>
+		/// <param name="bulkSelector">A descriptor the describe the index/create/delete operation for this bulk operation</param>
+		Task<IBulkResponse> BulkAsync(IBulkRequest bulkRequest);
 		
 		/// <summary>
 		/// The bulk API makes it possible to perform many index/delete operations in a single API call. 

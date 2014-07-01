@@ -21,7 +21,10 @@ namespace Nest
 		{
 			return this.Document;
 		}
-
+		public override string GetIdForOperation(ElasticInferrer inferrer)
+		{
+			return this.Id ?? inferrer.Id(this.Document);
+		}
 		public T Document { get; set; }
 	}
 

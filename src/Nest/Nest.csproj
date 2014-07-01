@@ -135,6 +135,7 @@
     <Compile Include="Domain\Analysis\TokenFilter\KeepWordsTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\StemmerOverrideTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\UppercaseTokenFilter.cs" />
+    <Compile Include="Domain\Bulk\IBulkOperation.cs" />
     <Compile Include="Domain\Bulk\MultiGetDoc.cs" />
     <Compile Include="Domain\Connection\ConnectionSettings.cs" />
     <Compile Include="Domain\Connection\IConnectionSettingsValues.cs" />

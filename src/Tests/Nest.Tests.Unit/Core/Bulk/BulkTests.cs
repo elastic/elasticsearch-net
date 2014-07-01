@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using Elasticsearch.Net;
 using FluentAssertions;
 using NUnit.Framework;
@@ -32,6 +34,41 @@ namespace Nest.Tests.Unit.Core.Bulk
 			var status = result.ConnectionStatus;
 			this.BulkJsonEquals(status.Request.Utf8String(), MethodInfo.GetCurrentMethod());
 		}
+		
+		[Test]
+		public void BulkOperations_ObjectInitializer()
+		{
+			var result = this._client.Bulk(new BulkRequest
+			{
+				Operations = new List<IBulkOperation>
+				{
+					{ new BulkIndexOperation<ElasticsearchProject>
+					{
+						Document = new ElasticsearchProject { Id = 2 },
+						VersionType = VersionType.Force
+					}},
+					{ new BulkCreateOperation<ElasticsearchProject>
+					{
+						Document = new ElasticsearchProject { Id = 3 },
+						VersionType = VersionType.Internal
+					}},
+					{ new BulkDeleteOperation<ElasticsearchProject>
+					{
+						Document = new ElasticsearchProject { Id = 4 },
+						VersionType = VersionType.ExternalGte
+					}},
+					{ new BulkUpdateOperation<ElasticsearchProject, object>
+					{
+						Document = new ElasticsearchProject { Id = 3 },
+						VersionType = VersionType.External,
+						PartialUpdate = new { name = "NEST"}
+					}},
+				}
+			});
+			var status = result.ConnectionStatus;
+			this.BulkJsonEquals(status.Request.Utf8String(), MethodBase.GetCurrentMethod(), "BulkOperations");
+		}
+
 		[Test]
 		public void BulkUpdateDetails()
 		{

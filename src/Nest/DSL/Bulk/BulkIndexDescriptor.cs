@@ -23,9 +23,12 @@ namespace Nest
 
 		public override object GetBody()
 		{
-			throw new NotImplementedException();
+			return this.Document;
 		}
-
+		public override string GetIdForOperation(ElasticInferrer inferrer)
+		{
+			return this.Id ?? inferrer.Id(this.Document);
+		}
 		public string Percolate { get; set; }
 
 		public T Document { get; set; }
