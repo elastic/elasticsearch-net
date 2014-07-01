@@ -194,7 +194,12 @@ namespace CodeGeneration.YamlTestsRunner
 			var url = useCache ? LocalUri("root.html") : _listingUrl;
 			var folderListingHtml = new WebClient().DownloadString(url);
 			if (!useCache)
+			{
+				if (!Directory.Exists(_cacheFolder))
+					Directory.CreateDirectory(_cacheFolder);
+
 				File.WriteAllText(_cacheFolder + "root.html", folderListingHtml);
+			}
 			
 			var folders = (from a in CQ.Create(folderListingHtml)[".js-directory-link"]
 				let folderName = a.InnerText
