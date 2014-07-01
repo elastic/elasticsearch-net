@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 {
-	public class DeleteWarmerDescriptorOverrides : IDescriptorOverrides
+	public class NodesHotThreadsDescriptorOverrides : IDescriptorOverrides
 	{
 		public IEnumerable<string> SkipQueryStringParams
 		{
@@ -13,11 +13,19 @@ namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 			{
 				return new string[]
 				{
-					"name" 
+					"fielddata"
 				};
 			}
 		}
-
-		public IDictionary<string, string> RenameQueryStringParams { get { return null; } }
+		public IDictionary<string, string> RenameQueryStringParams
+		{
+			get
+			{
+				return new Dictionary<string, string>
+				{
+					{ "type", "thread_type"}
+				};
+			}
+		}
 	}
 }

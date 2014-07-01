@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Core.ClearScroll
 		[Test]
 		public void ClearScroll()
 		{
-			var searchResults = this._client.Search<ElasticsearchProject>(s => s.Scroll("1m").SearchType(SearchTypeOptions.Scan));
+			var searchResults = this._client.Search<ElasticsearchProject>(s => s.Scroll("1m").SearchType(SearchType.Scan));
 			var validScrollId = searchResults.ScrollId;
 			validScrollId.Should().NotBeNullOrWhiteSpace();
 

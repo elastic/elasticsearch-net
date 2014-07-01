@@ -31,9 +31,9 @@ namespace Elasticsearch.Net
 	public class BulkRequestParameters : FluentRequestParameters<BulkRequestParameters> 
 	{
 		
-		internal ConsistencyOptions _consistency { get; set; }
+		internal Consistency _consistency { get; set; }
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public BulkRequestParameters Consistency(ConsistencyOptions consistency)
+		public BulkRequestParameters Consistency(Consistency consistency)
 		{
 			this._consistency = consistency;
 			this.AddQueryString("consistency", this._consistency);
@@ -51,9 +51,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ReplicationOptions _replication { get; set; }
+		internal Replication _replication { get; set; }
 		///<summary>Explicitely set the replication type</summary>
-		public BulkRequestParameters Replication(ReplicationOptions replication)
+		public BulkRequestParameters Replication(Replication replication)
 		{
 			this._replication = replication;
 			this.AddQueryString("replication", this._replication);
@@ -161,9 +161,9 @@ namespace Elasticsearch.Net
 	public class CatAllocationRequestParameters : FluentRequestParameters<CatAllocationRequestParameters> 
 	{
 		
-		internal BytesOptions _bytes { get; set; }
+		internal Bytes _bytes { get; set; }
 		///<summary>The unit in which to display byte values</summary>
-		public CatAllocationRequestParameters Bytes(BytesOptions bytes)
+		public CatAllocationRequestParameters Bytes(Bytes bytes)
 		{
 			this._bytes = bytes;
 			this.AddQueryString("bytes", this._bytes);
@@ -291,9 +291,9 @@ namespace Elasticsearch.Net
 	public class CatFielddataRequestParameters : FluentRequestParameters<CatFielddataRequestParameters> 
 	{
 		
-		internal BytesOptions _bytes { get; set; }
+		internal Bytes _bytes { get; set; }
 		///<summary>The unit in which to display byte values</summary>
-		public CatFielddataRequestParameters Bytes(BytesOptions bytes)
+		public CatFielddataRequestParameters Bytes(Bytes bytes)
 		{
 			this._bytes = bytes;
 			this.AddQueryString("bytes", this._bytes);
@@ -461,9 +461,9 @@ namespace Elasticsearch.Net
 	public class CatIndicesRequestParameters : FluentRequestParameters<CatIndicesRequestParameters> 
 	{
 		
-		internal BytesOptions _bytes { get; set; }
+		internal Bytes _bytes { get; set; }
 		///<summary>The unit in which to display byte values</summary>
-		public CatIndicesRequestParameters Bytes(BytesOptions bytes)
+		public CatIndicesRequestParameters Bytes(Bytes bytes)
 		{
 			this._bytes = bytes;
 			this.AddQueryString("bytes", this._bytes);
@@ -781,9 +781,9 @@ namespace Elasticsearch.Net
 	public class CatRecoveryRequestParameters : FluentRequestParameters<CatRecoveryRequestParameters> 
 	{
 		
-		internal BytesOptions _bytes { get; set; }
+		internal Bytes _bytes { get; set; }
 		///<summary>The unit in which to display byte values</summary>
-		public CatRecoveryRequestParameters Bytes(BytesOptions bytes)
+		public CatRecoveryRequestParameters Bytes(Bytes bytes)
 		{
 			this._bytes = bytes;
 			this.AddQueryString("bytes", this._bytes);
@@ -1021,9 +1021,9 @@ namespace Elasticsearch.Net
 	public class ClusterHealthRequestParameters : FluentRequestParameters<ClusterHealthRequestParameters> 
 	{
 		
-		internal LevelOptions _level { get; set; }
+		internal Level _level { get; set; }
 		///<summary>Specify the level of detail for returned information</summary>
-		public ClusterHealthRequestParameters Level(LevelOptions level)
+		public ClusterHealthRequestParameters Level(Level level)
 		{
 			this._level = level;
 			this.AddQueryString("level", this._level);
@@ -1091,9 +1091,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal WaitForStatusOptions _wait_for_status { get; set; }
+		internal WaitForStatus _wait_for_status { get; set; }
 		///<summary>Wait until cluster is in a specific state</summary>
-		public ClusterHealthRequestParameters WaitForStatus(WaitForStatusOptions wait_for_status)
+		public ClusterHealthRequestParameters WaitForStatus(WaitForStatus wait_for_status)
 		{
 			this._wait_for_status = wait_for_status;
 			this.AddQueryString("wait_for_status", this._wait_for_status);
@@ -1311,9 +1311,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CountRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public CountRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -1411,9 +1411,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateCountRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PercolateCountRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -1451,9 +1451,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal VersionTypeOptions _version_type { get; set; }
+		internal VersionType _version_type { get; set; }
 		///<summary>Specific version type</summary>
-		public PercolateCountRequestParameters VersionType(VersionTypeOptions version_type)
+		public PercolateCountRequestParameters VersionType(VersionType version_type)
 		{
 			this._version_type = version_type;
 			this.AddQueryString("version_type", this._version_type);
@@ -1471,9 +1471,9 @@ namespace Elasticsearch.Net
 	public class DeleteRequestParameters : FluentRequestParameters<DeleteRequestParameters> 
 	{
 		
-		internal ConsistencyOptions _consistency { get; set; }
+		internal Consistency _consistency { get; set; }
 		///<summary>Specific write consistency setting for the operation</summary>
-		public DeleteRequestParameters Consistency(ConsistencyOptions consistency)
+		public DeleteRequestParameters Consistency(Consistency consistency)
 		{
 			this._consistency = consistency;
 			this.AddQueryString("consistency", this._consistency);
@@ -1501,9 +1501,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ReplicationOptions _replication { get; set; }
+		internal Replication _replication { get; set; }
 		///<summary>Specific replication type</summary>
-		public DeleteRequestParameters Replication(ReplicationOptions replication)
+		public DeleteRequestParameters Replication(Replication replication)
 		{
 			this._replication = replication;
 			this.AddQueryString("replication", this._replication);
@@ -1541,9 +1541,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal VersionTypeOptions _version_type { get; set; }
+		internal VersionType _version_type { get; set; }
 		///<summary>Specific version type</summary>
-		public DeleteRequestParameters VersionType(VersionTypeOptions version_type)
+		public DeleteRequestParameters VersionType(VersionType version_type)
 		{
 			this._version_type = version_type;
 			this.AddQueryString("version_type", this._version_type);
@@ -1571,9 +1571,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ConsistencyOptions _consistency { get; set; }
+		internal Consistency _consistency { get; set; }
 		///<summary>Specific write consistency setting for the operation</summary>
-		public DeleteByQueryRequestParameters Consistency(ConsistencyOptions consistency)
+		public DeleteByQueryRequestParameters Consistency(Consistency consistency)
 		{
 			this._consistency = consistency;
 			this.AddQueryString("consistency", this._consistency);
@@ -1581,9 +1581,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal DefaultOperatorOptions _default_operator { get; set; }
+		internal DefaultOperator _default_operator { get; set; }
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DeleteByQueryRequestParameters DefaultOperator(DefaultOperatorOptions default_operator)
+		public DeleteByQueryRequestParameters DefaultOperator(DefaultOperator default_operator)
 		{
 			this._default_operator = default_operator;
 			this.AddQueryString("default_operator", this._default_operator);
@@ -1621,9 +1621,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public DeleteByQueryRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public DeleteByQueryRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -1631,9 +1631,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ReplicationOptions _replication { get; set; }
+		internal Replication _replication { get; set; }
 		///<summary>Specific replication type</summary>
-		public DeleteByQueryRequestParameters Replication(ReplicationOptions replication)
+		public DeleteByQueryRequestParameters Replication(Replication replication)
 		{
 			this._replication = replication;
 			this.AddQueryString("replication", this._replication);
@@ -1771,9 +1771,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal DefaultOperatorOptions _default_operator { get; set; }
+		internal DefaultOperator _default_operator { get; set; }
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ExplainRequestParameters DefaultOperator(DefaultOperatorOptions default_operator)
+		public ExplainRequestParameters DefaultOperator(DefaultOperator default_operator)
 		{
 			this._default_operator = default_operator;
 			this.AddQueryString("default_operator", this._default_operator);
@@ -2011,9 +2011,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal VersionTypeOptions _version_type { get; set; }
+		internal VersionType _version_type { get; set; }
 		///<summary>Specific version type</summary>
-		public GetRequestParameters VersionType(VersionTypeOptions version_type)
+		public GetRequestParameters VersionType(VersionType version_type)
 		{
 			this._version_type = version_type;
 			this.AddQueryString("version_type", this._version_type);
@@ -2121,9 +2121,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal VersionTypeOptions _version_type { get; set; }
+		internal VersionType _version_type { get; set; }
 		///<summary>Specific version type</summary>
-		public SourceRequestParameters VersionType(VersionTypeOptions version_type)
+		public SourceRequestParameters VersionType(VersionType version_type)
 		{
 			this._version_type = version_type;
 			this.AddQueryString("version_type", this._version_type);
@@ -2141,9 +2141,9 @@ namespace Elasticsearch.Net
 	public class IndexRequestParameters : FluentRequestParameters<IndexRequestParameters> 
 	{
 		
-		internal ConsistencyOptions _consistency { get; set; }
+		internal Consistency _consistency { get; set; }
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public IndexRequestParameters Consistency(ConsistencyOptions consistency)
+		public IndexRequestParameters Consistency(Consistency consistency)
 		{
 			this._consistency = consistency;
 			this.AddQueryString("consistency", this._consistency);
@@ -2151,9 +2151,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal OpTypeOptions _op_type { get; set; }
+		internal OpType _op_type { get; set; }
 		///<summary>Explicit operation type</summary>
-		public IndexRequestParameters OpType(OpTypeOptions op_type)
+		public IndexRequestParameters OpType(OpType op_type)
 		{
 			this._op_type = op_type;
 			this.AddQueryString("op_type", this._op_type);
@@ -2181,9 +2181,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ReplicationOptions _replication { get; set; }
+		internal Replication _replication { get; set; }
 		///<summary>Specific replication type</summary>
-		public IndexRequestParameters Replication(ReplicationOptions replication)
+		public IndexRequestParameters Replication(Replication replication)
 		{
 			this._replication = replication;
 			this.AddQueryString("replication", this._replication);
@@ -2241,9 +2241,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal VersionTypeOptions _version_type { get; set; }
+		internal VersionType _version_type { get; set; }
 		///<summary>Specific version type</summary>
-		public IndexRequestParameters VersionType(VersionTypeOptions version_type)
+		public IndexRequestParameters VersionType(VersionType version_type)
 		{
 			this._version_type = version_type;
 			this.AddQueryString("version_type", this._version_type);
@@ -2341,9 +2341,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal FormatOptions _format { get; set; }
+		internal Format _format { get; set; }
 		///<summary>Format of the output</summary>
-		public AnalyzeRequestParameters Format(FormatOptions format)
+		public AnalyzeRequestParameters Format(Format format)
 		{
 			this._format = format;
 			this.AddQueryString("format", this._format);
@@ -2451,9 +2451,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ClearCacheRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public ClearCacheRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -2531,9 +2531,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CloseIndexRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public CloseIndexRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -2731,9 +2731,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndexExistsRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndexExistsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -2781,9 +2781,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesExistsAliasRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesExistsAliasRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -2851,9 +2851,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesExistsTypeRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesExistsTypeRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -2921,9 +2921,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FlushRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public FlushRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -2961,9 +2961,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetAliasesRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetAliasesRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3051,9 +3051,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesGetFieldMappingRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesGetFieldMappingRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3101,9 +3101,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetMappingRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetMappingRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3151,9 +3151,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetIndexSettingsRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetIndexSettingsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3241,9 +3241,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetWarmerRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetWarmerRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3311,9 +3311,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public OpenIndexRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public OpenIndexRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3361,9 +3361,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public OptimizeRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public OptimizeRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3511,9 +3511,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PutMappingRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PutMappingRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3561,9 +3561,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpdateSettingsRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public UpdateSettingsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3661,9 +3661,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both, in the search request to warm.</summary>
-		public PutWarmerRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PutWarmerRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3741,9 +3741,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public RefreshRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public RefreshRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3801,9 +3801,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SegmentsRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SegmentsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3891,9 +3891,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal LevelOptions _level { get; set; }
+		internal Level _level { get; set; }
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
-		public IndicesStatsRequestParameters Level(LevelOptions level)
+		public IndicesStatsRequestParameters Level(Level level)
 		{
 			this._level = level;
 			this.AddQueryString("level", this._level);
@@ -3941,9 +3941,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesStatusRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesStatusRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -4061,9 +4061,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ValidateQueryRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public ValidateQueryRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -4431,9 +4431,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public MpercolateRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public MpercolateRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -4451,9 +4451,9 @@ namespace Elasticsearch.Net
 	public class MultiSearchRequestParameters : FluentRequestParameters<MultiSearchRequestParameters> 
 	{
 		
-		internal SearchTypeOptions _search_type { get; set; }
+		internal SearchType _search_type { get; set; }
 		///<summary>Search operation type</summary>
-		public MultiSearchRequestParameters SearchType(SearchTypeOptions search_type)
+		public MultiSearchRequestParameters SearchType(SearchType search_type)
 		{
 			this._search_type = search_type;
 			this.AddQueryString("search_type", this._search_type);
@@ -4601,12 +4601,12 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal TypeOptions _type { get; set; }
+		internal ThreadType _thread_type { get; set; }
 		///<summary>The type to sample (default: cpu)</summary>
-		public NodesHotThreadsRequestParameters Type(TypeOptions type)
+		public NodesHotThreadsRequestParameters ThreadType(ThreadType thread_type)
 		{
-			this._type = type;
-			this.AddQueryString("type", this._type);
+			this._thread_type = thread_type;
+			this.AddQueryString("thread_type", this._thread_type);
 			return this;
 		}
 		
@@ -4731,9 +4731,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal LevelOptions _level { get; set; }
+		internal Level _level { get; set; }
 		///<summary>Return indices stats aggregated at node, index or shard level</summary>
-		public NodesStatsRequestParameters Level(LevelOptions level)
+		public NodesStatsRequestParameters Level(Level level)
 		{
 			this._level = level;
 			this.AddQueryString("level", this._level);
@@ -4801,9 +4801,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PercolateRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -4841,9 +4841,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal VersionTypeOptions _version_type { get; set; }
+		internal VersionType _version_type { get; set; }
 		///<summary>Specific version type</summary>
-		public PercolateRequestParameters VersionType(VersionTypeOptions version_type)
+		public PercolateRequestParameters VersionType(VersionType version_type)
 		{
 			this._version_type = version_type;
 			this.AddQueryString("version_type", this._version_type);
@@ -4901,9 +4901,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal DefaultOperatorOptions _default_operator { get; set; }
+		internal DefaultOperator _default_operator { get; set; }
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchRequestParameters DefaultOperator(DefaultOperatorOptions default_operator)
+		public SearchRequestParameters DefaultOperator(DefaultOperator default_operator)
 		{
 			this._default_operator = default_operator;
 			this.AddQueryString("default_operator", this._default_operator);
@@ -4941,9 +4941,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SearchRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -5001,9 +5001,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal SearchTypeOptions _search_type { get; set; }
+		internal SearchType _search_type { get; set; }
 		///<summary>Search operation type</summary>
-		public SearchRequestParameters SearchType(SearchTypeOptions search_type)
+		public SearchRequestParameters SearchType(SearchType search_type)
 		{
 			this._search_type = search_type;
 			this.AddQueryString("search_type", this._search_type);
@@ -5031,9 +5031,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal SuggestModeOptions _suggest_mode { get; set; }
+		internal SuggestMode _suggest_mode { get; set; }
 		///<summary>Specify suggest mode</summary>
-		public SearchRequestParameters SuggestMode(SuggestModeOptions suggest_mode)
+		public SearchRequestParameters SuggestMode(SuggestMode suggest_mode)
 		{
 			this._suggest_mode = suggest_mode;
 			this.AddQueryString("suggest_mode", this._suggest_mode);
@@ -5121,9 +5121,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchShardsRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SearchShardsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -5161,9 +5161,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchTemplateRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SearchTemplateRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -5201,9 +5201,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal SearchTypeOptions _search_type { get; set; }
+		internal SearchType _search_type { get; set; }
 		///<summary>Search operation type</summary>
-		public SearchTemplateRequestParameters SearchType(SearchTypeOptions search_type)
+		public SearchTemplateRequestParameters SearchType(SearchType search_type)
 		{
 			this._search_type = search_type;
 			this.AddQueryString("search_type", this._search_type);
@@ -5451,9 +5451,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ExpandWildcardsOptions _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SuggestRequestParameters ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SuggestRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -5601,9 +5601,9 @@ namespace Elasticsearch.Net
 	public class UpdateRequestParameters : FluentRequestParameters<UpdateRequestParameters> 
 	{
 		
-		internal ConsistencyOptions _consistency { get; set; }
+		internal Consistency _consistency { get; set; }
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public UpdateRequestParameters Consistency(ConsistencyOptions consistency)
+		public UpdateRequestParameters Consistency(Consistency consistency)
 		{
 			this._consistency = consistency;
 			this.AddQueryString("consistency", this._consistency);
@@ -5641,9 +5641,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal ReplicationOptions _replication { get; set; }
+		internal Replication _replication { get; set; }
 		///<summary>Specific replication type</summary>
-		public UpdateRequestParameters Replication(ReplicationOptions replication)
+		public UpdateRequestParameters Replication(Replication replication)
 		{
 			this._replication = replication;
 			this.AddQueryString("replication", this._replication);
@@ -5721,9 +5721,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal VersionTypeOptions _version_type { get; set; }
+		internal VersionType _version_type { get; set; }
 		///<summary>Specific version type</summary>
-		public UpdateRequestParameters VersionType(VersionTypeOptions version_type)
+		public UpdateRequestParameters VersionType(VersionType version_type)
 		{
 			this._version_type = version_type;
 			this.AddQueryString("version_type", this._version_type);

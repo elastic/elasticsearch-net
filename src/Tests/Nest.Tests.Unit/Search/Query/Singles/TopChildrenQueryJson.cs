@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Query(q => q
 					.TopChildren<Person>(fz => fz
 						.Query(qq => qq.Term(f => f.FirstName, "john"))
-						.Score(TopChildrenScore.avg)
+						.Score(TopChildrenScore.Average)
 						.Scope("my_scope")
 						.Type("sillypeople")
 					)

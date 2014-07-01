@@ -207,8 +207,7 @@ namespace Nest
 			return this;
 		}
 
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Parent(string parent)
-		{
+		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Parent(string parent)		{
 			Self.Parent = parent; 
 			return this;
 		}

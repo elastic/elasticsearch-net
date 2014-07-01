@@ -58,11 +58,11 @@ namespace Nest
 			
 			var rewriteString = GetPropValue<string>(jo, "rewrite");
 			if (!rewriteString.IsNullOrEmpty())
-				fq.Rewrite = Enum.Parse(typeof(RewriteMultiTerm), rewriteString) as RewriteMultiTerm?;
+				fq.Rewrite = rewriteString.ToEnum<RewriteMultiTerm>();
 			
 			var operatorString = GetPropValue<string>(jo, "operator");
 			if (!rewriteString.IsNullOrEmpty())
-				fq.Operator = Enum.Parse(typeof(Operator), operatorString) as Operator?;
+				fq.Operator = operatorString.ToEnum<Operator>();
 
 			return fq;
 		}

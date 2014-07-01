@@ -17,7 +17,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "suggest_mode")]
 		[JsonConverter(typeof(StringEnumConverter))]
-		SuggestModeOptions? SuggestMode { get; set; }
+		SuggestMode? SuggestMode { get; set; }
 
 		[JsonProperty(PropertyName = "min_word_len")]
 		int? MinWordLen { get; set; }
@@ -38,7 +38,7 @@ namespace Nest
 	public class TermSuggester : Suggester, ITermSuggester
 	{
 		public int? PrefixLen { get; set; }
-		public SuggestModeOptions? SuggestMode { get; set; }
+		public SuggestMode? SuggestMode { get; set; }
 		public int? MinWordLen { get; set; }
 		public int? MaxEdits { get; set; }
 		public int? MaxInspections { get; set; }
@@ -52,7 +52,7 @@ namespace Nest
 
 		int? ITermSuggester.PrefixLen { get; set; }
 
-		SuggestModeOptions? ITermSuggester.SuggestMode { get; set; }
+		SuggestMode? ITermSuggester.SuggestMode { get; set; }
 
 		int? ITermSuggester.MinWordLen { get; set; }
 
@@ -100,7 +100,7 @@ namespace Nest
 			return this;
 		}
 
-		public TermSuggestDescriptor<T> SuggestMode(SuggestModeOptions mode)
+		public TermSuggestDescriptor<T> SuggestMode(SuggestMode mode)
 		{
 			Self.SuggestMode = mode;
 			return this;

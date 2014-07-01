@@ -4,7 +4,7 @@ using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
-namespace Nest.Tests.Integration.Search.SearchType
+namespace Nest.Tests.Integration.Search.SearchTypeTests
 {
 	[TestFixture]
 	public class SearchTypeCountTests : IntegrationTests
@@ -19,7 +19,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.Size(10)
 				.MatchAll()
 				.Fields(f=>f.Name)
-				.SearchType(SearchTypeOptions.Count)
+				.SearchType(SearchType.Count)
 			);
 			Assert.True(queryResults.IsValid);
 			Assert.False(queryResults.Documents.Any());

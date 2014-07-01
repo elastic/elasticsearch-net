@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					.QueryString(qs => qs
 						.DefaultField(f=>f.Name)
 						.Query("this that thus")
-						.DefaultOperator(Operator.and)
+						.DefaultOperator(Operator.And)
 						.Analyzer("my_analyzer")
 						.AllowLeadingWildcard(true)
 						.LowercaseExpendedTerms(true)
@@ -57,7 +57,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						.MinimumShouldMatchPercentage(20)
 						.UseDisMax(true)
 						.TieBreaker(0.7)
-						.Rewrite(RewriteMultiTerm.top_terms_N)
+						.Rewrite(RewriteMultiTerm.TopTermsN)
 					)
 			);
 

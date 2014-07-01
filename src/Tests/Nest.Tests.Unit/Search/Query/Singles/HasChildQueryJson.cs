@@ -16,7 +16,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					.HasChild<Person>(fz => fz
 						.Query(qq=>qq.Term(f=>f.FirstName, "john"))
 						.Scope("my_scope")
-						.Score(ChildScoreType.avg)
+						.Score(ChildScoreType.Average)
 					)
 				);
 			var json = TestElasticClient.Serialize(s);

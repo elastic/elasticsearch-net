@@ -125,25 +125,25 @@ namespace Nest
 
         public virtual SortFieldDescriptor<T> NestedMin()
         {
-            Self.Mode = ScoreMode.min;
+            Self.Mode = ScoreMode.Min;
             return this;
         }
 
         public virtual SortFieldDescriptor<T> NestedMax()
         {
-			Self.Mode = ScoreMode.max;
+			Self.Mode = ScoreMode.Max;
             return this;
         }
 
         public virtual SortFieldDescriptor<T> NestedSum()
         {
-            Self.Mode = ScoreMode.sum;
+            Self.Mode = ScoreMode.Sum;
             return this;
         }
 
         public virtual SortFieldDescriptor<T> NestedAvg()
         {
-			Self.Mode = ScoreMode.avg;
+			Self.Mode = ScoreMode.Average;
             return this;
         }
 

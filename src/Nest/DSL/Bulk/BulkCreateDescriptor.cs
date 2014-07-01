@@ -110,7 +110,7 @@ namespace Nest
 			return this;
 		}
 
-		public BulkCreateDescriptor<T> VersionType(VersionTypeOptions versionType)
+		public BulkCreateDescriptor<T> VersionType(VersionType versionType)
 		{
 			Self.VersionType = versionType;
 			return this;

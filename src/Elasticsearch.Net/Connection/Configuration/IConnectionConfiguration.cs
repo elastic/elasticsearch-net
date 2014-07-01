@@ -4,8 +4,7 @@ using System.Collections.Specialized;
 namespace Elasticsearch.Net.Connection
 {
 	public interface IConnectionConfiguration : 
-		IConnectionConfiguration<IConnectionConfiguration>,
-		IHideObjectMembers
+		IConnectionConfiguration<IConnectionConfiguration>
 	{
 		
 	}
