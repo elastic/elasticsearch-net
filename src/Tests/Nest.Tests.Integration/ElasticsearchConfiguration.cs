@@ -2,8 +2,6 @@
 using System.Diagnostics;
 using Elasticsearch.Net.Connection.Thrift;
 using Elasticsearch.Net;
-using System.Net;
-using Newtonsoft.Json;
 
 namespace Nest.Tests.Integration
 {
@@ -52,10 +50,8 @@ namespace Nest.Tests.Integration
 
 		public static string GetCurrentVersion()
 		{
-			var uri = ElasticsearchConfiguration.CreateBaseUri();
-			var json = new WebClient().DownloadString(uri);
-			var response = JsonConvert.DeserializeObject<dynamic>(json);
-			return  response.version.number;
+			dynamic info = Client.Raw.Info().Response;
+			return info.version.number;
 		}
 	}
 }
