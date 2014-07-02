@@ -6,20 +6,40 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IIndicesTypePath<TParameters, T> : IRequest<TParameters>
+
+	public interface IIndicesTypePath<TParameters> : IRequest<TParameters>
 		where TParameters : IRequestParameters, new()
-		where T : class
 	{
 		bool? AllIndices { get; set; }
 		IEnumerable<IndexNameMarker> Indices { get; set; }
 		TypeNameMarker Type { get; set; }
 		
 	}
-
+	
 	internal static class IndicesTypePathRouteParamaters
 	{
+		public static void SetRouteParameters<TParameters>(
+			IIndicesTypePath<TParameters> path,
+			IConnectionSettingsValues settings, 
+			ElasticsearchPathInfo<TParameters> pathInfo)
+			where TParameters : IRequestParameters, new()
+		{
+			var inferrer = new ElasticInferrer(settings);
+
+			var index = !path.Indices.HasAny()
+				? null
+				: string.Join(",", path.Indices.Select(inferrer.IndexName));
+
+			if (path.AllIndices.GetValueOrDefault(false))
+				index = "_all";
+
+			var type = inferrer.TypeName(path.Type); 
+			pathInfo.Index = index;
+			pathInfo.Type = type;
+		}
+
 		public static void SetRouteParameters<TParameters, T>(
-			IIndicesTypePath<TParameters, T> path,
+			IIndicesTypePath<TParameters> path,
 			IConnectionSettingsValues settings, 
 			ElasticsearchPathInfo<TParameters> pathInfo)
 			where TParameters : IRequestParameters, new()
@@ -35,27 +55,36 @@ namespace Nest
 			if (path.AllIndices.GetValueOrDefault(false))
 				index = "_all";
 
-			var type = new ElasticInferrer(settings).TypeName(path.Type); 
+			var type = inferrer.TypeName(path.Type); 
 			pathInfo.Index = index;
 			pathInfo.Type = type;
 		}
 	}
 
-	public abstract class IndicesTypePathBase<TParameters, T> : BasePathRequest<TParameters>, IIndicesTypePath<TParameters, T>
+	public abstract class IndicesTypePathBase<TParameters> : BasePathRequest<TParameters>, IIndicesTypePath<TParameters>
 		where TParameters : IRequestParameters, new()
-		where T : class
 	{
 		public bool? AllIndices { get; set; }
 		public IEnumerable<IndexNameMarker> Indices { get; set; }
 		public TypeNameMarker Type { get; set; }
-
+		
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{	
-			IndicesTypePathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			IndicesTypePathRouteParamaters.SetRouteParameters<TParameters>(this, settings, pathInfo);
+		}
+	}
+	
+	public abstract class IndicesTypePathBase<TParameters, T> : IndicesTypePathBase<TParameters>
+		where TParameters : IRequestParameters, new()
+		where T : class
+	{
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		{	
+			IndicesTypePathRouteParamaters.SetRouteParameters<TParameters, T>(this, settings, pathInfo);
 		}
 
 	}
-	
+
 	/// <summary>
 	/// Provides a base for descriptors that need to describe a path in the form of 
 	/// <pre>
@@ -64,16 +93,16 @@ namespace Nest
 	/// {indices} is optional and so is {type} and will fallback to default of <para>T</para>
 	/// </summary>
 	public abstract class IndicesTypePathDescriptor<TDescriptor, TParameters, T> 
-		: BasePathDescriptor<TDescriptor, TParameters>, IIndicesTypePath<TParameters, T> 
+		: BasePathDescriptor<TDescriptor, TParameters>, IIndicesTypePath<TParameters> 
 		where TDescriptor : IndicesTypePathDescriptor<TDescriptor, TParameters, T> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
 		where T : class
 	{
-		private IIndicesTypePath<TParameters, T> Self { get { return this; } }
+		private IIndicesTypePath<TParameters> Self { get { return this; } }
 
-		bool? IIndicesTypePath<TParameters, T>.AllIndices { get; set; }
-		IEnumerable<IndexNameMarker> IIndicesTypePath<TParameters, T>.Indices { get; set; }
-		TypeNameMarker IIndicesTypePath<TParameters, T>.Type { get; set; }
+		bool? IIndicesTypePath<TParameters>.AllIndices { get; set; }
+		IEnumerable<IndexNameMarker> IIndicesTypePath<TParameters>.Indices { get; set; }
+		TypeNameMarker IIndicesTypePath<TParameters>.Type { get; set; }
 		
 		public TDescriptor AllIndices(bool allIndices = true)
 		{
@@ -120,7 +149,7 @@ namespace Nest
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			IndicesTypePathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			IndicesTypePathRouteParamaters.SetRouteParameters<TParameters, T>(this, settings, pathInfo);
 		}
 
 	}

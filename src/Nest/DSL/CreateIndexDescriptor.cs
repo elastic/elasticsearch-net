@@ -119,7 +119,7 @@ namespace Nest
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
 			var d = typeMappingDescriptor(new PutMappingDescriptor<T>(this._connectionSettings));
 			//TODO no longer needed when we have an IPutMappingRequest
-			IIndicesTypePath<PutMappingRequestParameters, T> request = d;
+			IPutMappingRequest request = d;
 			var typeMapping = d._Mapping;
 
 			if (request.Type != null)
