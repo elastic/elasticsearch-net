@@ -24,6 +24,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Index8
 				_body = new {
 					settings= new {
 						index= new {
+							number_of_shards= "5",
 							number_of_replicas= "0"
 						}
 					}
