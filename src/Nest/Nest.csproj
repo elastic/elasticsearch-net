@@ -303,7 +303,6 @@
     <Compile Include="DSL\Paths\NodeIdOptionalDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexTypePathDescriptor.cs" />
     <Compile Include="DSL\Paths\IndicesTypePathDescriptor.cs" />
-    <Compile Include="DSL\Paths\IndexTypePathTypedDescriptor.cs" />
     <Compile Include="DSL\Search\SourceDescriptor.cs" />
     <Compile Include="DSL\TermVectorDescriptor.cs" />
     <Compile Include="DSL\UnregisterPercolatorDescriptor.cs" />

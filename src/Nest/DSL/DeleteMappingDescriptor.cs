@@ -26,7 +26,8 @@ namespace Nest
 		}
 	}
 	[DescriptorFor("IndicesDeleteMapping")]
-	public partial class DeleteMappingDescriptor : IndexTypePathDescriptor<DeleteMappingDescriptor, DeleteMappingRequestParameters>, IDeleteMappingRequest
+	public partial class DeleteMappingDescriptor<T> : IndexTypePathDescriptor<DeleteMappingDescriptor<T>, DeleteMappingRequestParameters, T>, IDeleteMappingRequest
+		where T : class
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteMappingRequestParameters> pathInfo)
 		{
