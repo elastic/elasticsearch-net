@@ -12,7 +12,7 @@ namespace Nest
 		string RepositoryName { get; set; }
 	}
 
-	internal static class RepositoryPathRouteParamaters
+	internal static class RepositoryPathRouteParameters
 	{
 		public static void SetRouteParameters<TParameters>(
 			IRepositoryPath<TParameters> path,
@@ -35,7 +35,7 @@ namespace Nest
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{	
-			RepositoryPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			RepositoryPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 	}
@@ -66,7 +66,7 @@ namespace Nest
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			RepositoryPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			RepositoryPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 	}

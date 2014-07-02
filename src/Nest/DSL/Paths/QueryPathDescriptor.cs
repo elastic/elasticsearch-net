@@ -16,7 +16,7 @@ namespace Nest
 		bool AllTypes { get; set; }
 	}
 
-	internal static class QueryPathRouteParamaters
+	internal static class QueryPathRouteParameters
 	{
 		public static void SetRouteParameters<TParameters, T>(
 			IQueryPath<TParameters, T> path,
@@ -56,7 +56,7 @@ namespace Nest
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			QueryPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			QueryPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 		public IEnumerable<IndexNameMarker> Indices { get; set; }
@@ -170,7 +170,7 @@ namespace Nest
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			QueryPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			QueryPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 	}

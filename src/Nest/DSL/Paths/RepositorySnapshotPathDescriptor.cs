@@ -13,7 +13,7 @@ namespace Nest
 		string Snapshot { get; set; }
 	}
 
-	internal static class RepositorySnapshotPathRouteParamaters
+	internal static class RepositorySnapshotPathRouteParameters
 	{
 		public static void SetRouteParameters<TParameters>(
 			IRepositorySnapshotPath<TParameters> path,
@@ -41,7 +41,7 @@ namespace Nest
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{	
-			RepositorySnapshotPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			RepositorySnapshotPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 	}
 	/// <summary>
@@ -79,7 +79,7 @@ namespace Nest
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			RepositorySnapshotPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			RepositorySnapshotPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 	}

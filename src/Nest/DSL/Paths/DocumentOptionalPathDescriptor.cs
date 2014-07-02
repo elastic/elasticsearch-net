@@ -17,7 +17,7 @@ namespace Nest
 		T IdFrom { get; set; }
 	}
 
-	internal static class DocumentOptionalPathRouteParamaters
+	internal static class DocumentOptionalPathRouteParameters
 	{
 		public static void SetRouteParameters<TParameters, T>(
 			IDocumentOptionalPath<TParameters, T> path,
@@ -49,7 +49,7 @@ namespace Nest
 		protected override void SetRouteParameters(
 			IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			DocumentOptionalPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			DocumentOptionalPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 	}
 
@@ -126,7 +126,7 @@ namespace Nest
 		protected override void SetRouteParameters(
 			IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			DocumentOptionalPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			DocumentOptionalPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 	}
 }

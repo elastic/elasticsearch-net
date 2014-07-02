@@ -18,7 +18,7 @@ namespace Nest
 		string Name { get; set; }
 	}
 
-	internal static class IndicesOptionalTypesNamePathRouteParamaters
+	internal static class IndicesOptionalTypesNamePathRouteParameters
 	{
 		public static void SetRouteParameters<TParameters>(
 			IIndicesOptionalTypesNamePath<TParameters> path,
@@ -60,7 +60,7 @@ namespace Nest
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{	
-			IndicesOptionalTypesNamePathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			IndicesOptionalTypesNamePathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 	}
@@ -169,7 +169,7 @@ namespace Nest
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			IndicesOptionalTypesNamePathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			IndicesOptionalTypesNamePathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 	}

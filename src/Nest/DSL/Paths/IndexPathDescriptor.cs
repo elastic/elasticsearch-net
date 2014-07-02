@@ -12,7 +12,7 @@ namespace Nest
 		IndexNameMarker Index { get; set; }
 	}
 
-	internal static class IndexPathRouteParamaters
+	internal static class IndexPathRouteParameters
 	{
 		public static void SetRouteParameters<TParameters>(
 			IIndexPath<TParameters> path,
@@ -36,7 +36,7 @@ namespace Nest
 		
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{	
-			IndexPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			IndexPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 	}
 	/// <summary>
@@ -75,7 +75,7 @@ namespace Nest
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			IndexPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			IndexPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 	}
 }

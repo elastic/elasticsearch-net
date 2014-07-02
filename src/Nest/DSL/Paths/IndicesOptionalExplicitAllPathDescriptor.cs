@@ -13,7 +13,7 @@ namespace Nest
 		bool? AllIndices { get; set; }
 	}
 
-	internal static class IndicesOptionalExplicitAllPathRouteParamaters
+	internal static class IndicesOptionalExplicitAllPathRouteParameters
 	{
 		public static void SetRouteParameters<TParameters>(
 			IIndicesOptionalExplicitAllPath<TParameters> path,
@@ -43,7 +43,7 @@ namespace Nest
 		
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{	
-			IndicesOptionalExplicitAllPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			IndicesOptionalExplicitAllPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 	}
 
@@ -95,7 +95,7 @@ namespace Nest
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			IndicesOptionalExplicitAllPathRouteParamaters.SetRouteParameters(this, settings, pathInfo);
+			IndicesOptionalExplicitAllPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 	}
