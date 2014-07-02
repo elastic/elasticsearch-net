@@ -7,7 +7,7 @@ using Nest.Resolvers.Writers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPutMappingRequest : IRequest<PutMappingRequestParameters>
+	public interface IPutMappingRequest : IIndicesTypePath<PutMappingRequestParameters>
 	{
 		RootObjectMapping Mapping { get; set; }
 	}

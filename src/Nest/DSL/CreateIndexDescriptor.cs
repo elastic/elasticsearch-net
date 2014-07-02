@@ -118,9 +118,8 @@ namespace Nest
 		{
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
 			var d = typeMappingDescriptor(new PutMappingDescriptor<T>(this._connectionSettings));
-			//TODO no longer needed when we have an IPutMappingRequest
 			IPutMappingRequest request = d;
-			var typeMapping = d._Mapping;
+			var typeMapping = request.Mapping;
 
 			if (request.Type != null)
 			{
@@ -143,10 +142,14 @@ namespace Nest
 		public CreateIndexDescriptor AddMapping<T>(RootObjectMapping rootObjectMapping, Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> typeMappingDescriptor) where T : class
 		{
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
-			var d = typeMappingDescriptor(new PutMappingDescriptor<T>(this._connectionSettings) { _Mapping = rootObjectMapping,});
-			//TODO no longer needed when we have an IPutMappingRequest
-			IIndicesTypePath<PutMappingRequestParameters, T> request = d;
-			var typeMapping = d._Mapping;
+
+			var selectorIn = new PutMappingDescriptor<T>(this._connectionSettings);
+			IPutMappingRequest selectorInRequest = selectorIn;
+			selectorInRequest.Mapping = rootObjectMapping;
+
+			var d = typeMappingDescriptor(selectorIn);
+			IPutMappingRequest request = d;
+			var typeMapping = request.Mapping;
 
 			if (request.Type != null)
 			{

@@ -57,12 +57,11 @@ namespace Nest
 			putMappingDescriptor.ThrowIfNull("rootObjectMappingDescriptor");
 
 			var inferrer = new ElasticInferrer(this._connectionSettings);
-			//TODO no longer needed when we have an IPutMappingRequest
-			IIndicesTypePath<PutMappingRequestParameters, T> request = putMappingDescriptor;
+			IPutMappingRequest request = putMappingDescriptor;
 			var typeName = inferrer.TypeName(request.Type ?? typeof(T));
 			if (typeName == null)
 				return this;
-			this._TemplateMapping.Mappings[typeName] = putMappingDescriptor._Mapping;
+			this._TemplateMapping.Mappings[typeName] = request.Mapping;
 			return this;
 		}
 
