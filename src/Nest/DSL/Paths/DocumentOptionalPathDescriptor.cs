@@ -52,7 +52,7 @@ namespace Nest
 	}
 
 	public abstract class DocumentOptionalPathBase<TParameters> : BasePathRequest<TParameters>, IDocumentOptionalPath<TParameters>
-		where TParameters : FluentRequestParameters<TParameters>, new()
+		where TParameters : IRequestParameters, new()
 	{
 		public IndexNameMarker Index { get; set; }
 		public TypeNameMarker Type { get; set; }
