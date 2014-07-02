@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
 	[DescriptorFor("Mlt")]
-	public partial class MoreLikeThisDescriptor<T> : DocumentPathDescriptor<MoreLikeThisDescriptor<T>, T, MoreLikeThisRequestParameters>
+	public partial class MoreLikeThisDescriptor<T> : DocumentPathDescriptor<MoreLikeThisDescriptor<T>, MoreLikeThisRequestParameters, T>
 		where T : class
 	{
 		internal ISearchRequest _Search { get; set; }
