@@ -12,7 +12,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[DescriptorFor("Mlt")]
-	public partial class MoreLikeThisDescriptor<T> : DocumentPathDescriptorBase<MoreLikeThisDescriptor<T>, T, MoreLikeThisRequestParameters>
+	public partial class MoreLikeThisDescriptor<T> : DocumentPathDescriptor<MoreLikeThisDescriptor<T>, T, MoreLikeThisRequestParameters>
 		where T : class
 	{
 		internal ISearchRequest _Search { get; set; }

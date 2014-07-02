@@ -6,7 +6,6 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-
 	public abstract class DocumentPathBase<TParameters, T> : DocumentOptionalPathBase<TParameters, T>
 		where TParameters : FluentRequestParameters<TParameters>, new()
 		where T : class
@@ -27,10 +26,10 @@ namespace Nest
 	/// </pre>
 	/// if one of the parameters is not explicitly specified this will fall back to the defaults for type <para>T</para>
 	/// </summary>
-	public abstract class DocumentPathDescriptorBase<TDescriptor, T, TParameters> : DocumentOptionalPathDescriptorBase<TDescriptor, T, TParameters>
-		where TDescriptor : DocumentPathDescriptorBase<TDescriptor, T, TParameters>, new()
-		where T : class
+	public abstract class DocumentPathDescriptor<TDescriptor, TParameters, T> : DocumentOptionalPathDescriptor<TDescriptor, TParameters, T>
+		where TDescriptor : DocumentPathDescriptor<TDescriptor, TParameters, T>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
+		where T : class
 	{
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{

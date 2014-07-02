@@ -35,7 +35,7 @@ namespace Nest
 		}
 	}
 	
-	public partial class IndexDescriptor<T> : DocumentOptionalPathDescriptorBase<IndexDescriptor<T>, T, IndexRequestParameters>, IIndexRequest<T>
+	public partial class IndexDescriptor<T> : DocumentOptionalPathDescriptor<IndexDescriptor<T>, IndexRequestParameters, T>, IIndexRequest<T>
 		where T : class
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)

@@ -7,12 +7,12 @@ using Nest.Resolvers;
 namespace Nest
 {
 	public class MultiTermVectorDocumentDescriptor<T> : 
-		DocumentOptionalPathDescriptorBase<MultiTermVectorDocumentDescriptor<T>, T, MultiTermVectorsRequestParameters>, 
+		DocumentOptionalPathDescriptor<MultiTermVectorDocumentDescriptor<T>, MultiTermVectorsRequestParameters, T>, 
 		IMultiTermVectorDocumentDescriptor 
 		where T : class
 	{
 
-		protected IDocumentOptionalPath<MultiTermVectorsRequestParameters, T> Self { get { return this; } }
+		protected IDocumentOptionalPath<MultiTermVectorsRequestParameters> Self { get { return this; } }
 		
 		MultiTermVectorDocument IMultiTermVectorDocumentDescriptor.Document { get; set; }
 

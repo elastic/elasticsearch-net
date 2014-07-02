@@ -33,7 +33,7 @@ namespace Nest
 		}
 	}
 	[DescriptorFor("Delete")]
-	public partial class DeleteDescriptor<T> : DocumentPathDescriptorBase<DeleteDescriptor<T>, T, DeleteRequestParameters>, IDeleteRequest<T>
+	public partial class DeleteDescriptor<T> : DocumentPathDescriptor<DeleteDescriptor<T>, T, DeleteRequestParameters>, IDeleteRequest<T>
 		where T : class
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)

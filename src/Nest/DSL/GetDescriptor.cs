@@ -32,7 +32,7 @@ namespace Nest
 		}
 	}
 	
-	public partial class GetDescriptor<T> : DocumentPathDescriptorBase<GetDescriptor<T>,T, GetRequestParameters>, IGetRequest<T>
+	public partial class GetDescriptor<T> : DocumentPathDescriptor<GetDescriptor<T>,T, GetRequestParameters>, IGetRequest<T>
 		where T : class
 	{
 

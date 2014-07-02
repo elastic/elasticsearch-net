@@ -6,7 +6,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public partial class TermvectorDescriptor<T> : DocumentPathDescriptorBase<TermvectorDescriptor<T>, T, TermvectorRequestParameters>
+	public partial class TermvectorDescriptor<T> : DocumentPathDescriptor<TermvectorDescriptor<T>, TermvectorRequestParameters, T>
 		where T : class
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<TermvectorRequestParameters> pathInfo)

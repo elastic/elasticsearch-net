@@ -34,7 +34,7 @@ namespace Nest
 
 	[DescriptorFor("Exists")]
 	public partial class DocumentExistsDescriptor<T>
-		: DocumentPathDescriptorBase<DocumentExistsDescriptor<T>, T, DocumentExistsRequestParameters>, IDocumentExistsRequest<T>
+		: DocumentPathDescriptor<DocumentExistsDescriptor<T>, T, DocumentExistsRequestParameters>, IDocumentExistsRequest<T>
 		where T : class
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo)
