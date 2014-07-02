@@ -693,7 +693,7 @@
     <Compile Include="ElasticClient-Stats.cs" />
     <Compile Include="Domain\Responses\AcknowledgedResponse.cs" />
     <Compile Include="Domain\Responses\IndexSettingsResponse.cs" />
-    <Compile Include="ElasticClient-MappingIndex.cs" />
+    <Compile Include="ElasticClient-IndexSettings.cs" />
     <Compile Include="ElasticClient-ClearCache.cs" />
     <Compile Include="Domain\Hit\AnalyzeToken.cs" />
     <Compile Include="Domain\Hit\MultiHit.cs" />
