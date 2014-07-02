@@ -28,6 +28,9 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget7
 								type= "foo"
 							}
 						}
+					},
+					settings= new {
+						number_of_shards= "5"
 					}
 				};
 				this.Do(()=> _client.IndicesCreate("test_1", _body));

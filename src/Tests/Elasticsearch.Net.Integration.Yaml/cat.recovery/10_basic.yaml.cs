@@ -11,21 +11,13 @@ namespace Elasticsearch.Net.Integration.Yaml.CatRecovery1
 {
 	public partial class CatRecovery1YamlTests
 	{	
-	
-		public class CatRecovery110BasicYamlBase : YamlTestsBase
-		{
-			public CatRecovery110BasicYamlBase() : base()
-			{	
-
-			}
-		}
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TestCatRecoveryOutput2Tests : CatRecovery110BasicYamlBase
+		public class TestCatRecoveryOutput1Tests : YamlTestsBase
 		{
 			[Test]
-			public void TestCatRecoveryOutput2Test()
+			public void TestCatRecoveryOutput1Test()
 			{	
 
 				//do cat.recovery 
@@ -52,15 +44,24 @@ namespace Elasticsearch.Net.Integration.Yaml.CatRecovery1
 				this.Do(()=> _client.CatRecovery());
 
 				//match this._status: 
-				this.IsMatch(this._status, @"/^(index1 \s+ \d+ \s+ \d+ \s+
-   (gateway|replica|snapshot|relocating) \s+
-   (init|index|start|translog|finalize|done) \s+
-   ([\w/.-])+ \s+ 
-   ([\w/.-])+ \s+ 
-   ([\w/.-])+ \s+
-   ([\w/.-])+ \s+
-   \d+ \s+ \d+\.\d+\% \s+ \d+ \s+ \d+\.\d+\% \s+ \n?)
- {1,}$/
+				this.IsMatch(this._status, @"/^
+(
+  index1      \s+
+  \d          \s+                                 # shard
+  \d+         \s+                                 # time
+  (gateway|replica|snapshot|relocating)     \s+   # type
+  (init|index|start|translog|finalize|done) \s+   # stage
+  [-\w./]+    \s+                                 # source_host
+  [-\w./]+    \s+                                 # target_host
+  [-\w./]+    \s+                                 # repository
+  [-\w./]+    \s+                                 # snapshot
+  \d+         \s+                                 # files
+  \d+\.\d+%   \s+                                 # files_percent
+  \d+         \s+                                 # bytes
+  \d+\.\d+%   \s+                                 # bytes_percent
+  \n
+)+
+$/
 ");
 
 			}

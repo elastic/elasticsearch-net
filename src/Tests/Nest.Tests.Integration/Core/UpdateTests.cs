@@ -39,6 +39,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.Greater(project.LOC, 0);
 			var loc = project.LOC;
 			this._client.Update<ElasticsearchProject, ElasticsearchProjectLocUpdate>(u => u
+				.Id(1)
 				.Document(new ElasticsearchProjectLocUpdate
 				{
 					Id = project.Id,

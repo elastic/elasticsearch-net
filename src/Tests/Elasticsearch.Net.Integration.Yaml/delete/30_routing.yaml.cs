@@ -20,6 +20,14 @@ namespace Elasticsearch.Net.Integration.Yaml.Delete6
 			public void Routing1Test()
 			{	
 
+				//do indices.create 
+				_body = new {
+					settings= new {
+						number_of_shards= "5"
+					}
+				};
+				this.Do(()=> _client.IndicesCreate("test_1", _body));
+
 				//do index 
 				_body = new {
 					foo= "bar"

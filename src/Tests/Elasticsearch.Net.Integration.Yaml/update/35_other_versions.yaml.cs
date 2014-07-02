@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 
 
-namespace Elasticsearch.Net.Integration.Yaml.Update6
+namespace Elasticsearch.Net.Integration.Yaml.Update7
 {
-	public partial class Update6YamlTests
+	public partial class Update7YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class InternalVersion1Tests : YamlTestsBase
+		public class NotSupportedVersions1Tests : YamlTestsBase
 		{
 			[Test]
-			public void InternalVersion1Test()
+			public void NotSupportedVersions1Test()
 			{	
 
 				//do update 
@@ -30,8 +30,9 @@ namespace Elasticsearch.Net.Integration.Yaml.Update6
 					}
 				};
 				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
-					.AddQueryString("version", 1)
-				), shouldCatch: @"conflict");
+					.AddQueryString("version", 2)
+					.AddQueryString("version_type", @"external")
+				), shouldCatch: @"/Validation|Invalid/");
 
 				//do update 
 				_body = new {
@@ -43,8 +44,9 @@ namespace Elasticsearch.Net.Integration.Yaml.Update6
 					}
 				};
 				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
-					.AddQueryString("version", 1)
-				), shouldCatch: @"conflict");
+					.AddQueryString("version", 2)
+					.AddQueryString("version_type", @"external_gte")
+				), shouldCatch: @"/Validation|Invalid/");
 
 			}
 		}

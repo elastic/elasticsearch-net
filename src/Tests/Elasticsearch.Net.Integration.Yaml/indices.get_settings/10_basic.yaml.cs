@@ -18,10 +18,22 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.create 
-				this.Do(()=> _client.IndicesCreate("test_1", null));
+				_body = new {
+					settings= new {
+						number_of_shards= "5",
+						number_of_replicas= "1"
+					}
+				};
+				this.Do(()=> _client.IndicesCreate("test_1", _body));
 
 				//do indices.create 
-				this.Do(()=> _client.IndicesCreate("test_2", null));
+				_body = new {
+					settings= new {
+						number_of_shards= "3",
+						number_of_replicas= "0"
+					}
+				};
+				this.Do(()=> _client.IndicesCreate("test_2", _body));
 
 			}
 		}
@@ -44,10 +56,10 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetSettings1
 				this.IsMatch(_response.test_1.settings.index.number_of_replicas, 1);
 
 				//match _response.test_2.settings.index.number_of_shards: 
-				this.IsMatch(_response.test_2.settings.index.number_of_shards, 5);
+				this.IsMatch(_response.test_2.settings.index.number_of_shards, 3);
 
 				//match _response.test_2.settings.index.number_of_replicas: 
-				this.IsMatch(_response.test_2.settings.index.number_of_replicas, 1);
+				this.IsMatch(_response.test_2.settings.index.number_of_replicas, 0);
 
 			}
 		}
@@ -198,7 +210,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetSettings1
 				this.IsMatch(_response.test_1.settings.index.number_of_shards, 5);
 
 				//match _response.test_2.settings.index.number_of_shards: 
-				this.IsMatch(_response.test_2.settings.index.number_of_shards, 5);
+				this.IsMatch(_response.test_2.settings.index.number_of_shards, 3);
 
 				//is_false _response.test_1.settings.index.number_of_replicas; 
 				this.IsFalse(_response.test_1.settings.index.number_of_replicas);
@@ -223,7 +235,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetSettings1
 				this.IsMatch(_response.test_1.settings.index.number_of_shards, 5);
 
 				//match _response.test_2.settings.index.number_of_shards: 
-				this.IsMatch(_response.test_2.settings.index.number_of_shards, 5);
+				this.IsMatch(_response.test_2.settings.index.number_of_shards, 3);
 
 				//is_false _response.test_1.settings.index.number_of_replicas; 
 				this.IsFalse(_response.test_1.settings.index.number_of_replicas);
@@ -248,7 +260,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetSettings1
 				this.IsMatch(_response.test_1.settings.index.number_of_shards, 5);
 
 				//match _response.test_2.settings.index.number_of_shards: 
-				this.IsMatch(_response.test_2.settings.index.number_of_shards, 5);
+				this.IsMatch(_response.test_2.settings.index.number_of_shards, 3);
 
 				//is_false _response.test_1.settings.index.number_of_replicas; 
 				this.IsFalse(_response.test_1.settings.index.number_of_replicas);
@@ -273,7 +285,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetSettings1
 				this.IsMatch(_response.test_1.settings.index.number_of_shards, 5);
 
 				//match _response.test_2.settings.index.number_of_shards: 
-				this.IsMatch(_response.test_2.settings.index.number_of_shards, 5);
+				this.IsMatch(_response.test_2.settings.index.number_of_shards, 3);
 
 				//is_false _response.test_1.settings.index.number_of_replicas; 
 				this.IsFalse(_response.test_1.settings.index.number_of_replicas);
@@ -295,7 +307,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetSettings1
 				this.Do(()=> _client.IndicesGetSettings("*2", "index.number_of_shards"));
 
 				//match _response.test_2.settings.index.number_of_shards: 
-				this.IsMatch(_response.test_2.settings.index.number_of_shards, 5);
+				this.IsMatch(_response.test_2.settings.index.number_of_shards, 3);
 
 				//is_false _response.test_1; 
 				this.IsFalse(_response.test_1);
