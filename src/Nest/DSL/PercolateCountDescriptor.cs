@@ -12,7 +12,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[DescriptorFor("CountPercolate")]
-	public partial class PercolateCountDescriptor<T,K> : IndexTypePathTypedDescriptor<PercolateCountDescriptor<T, K>, PercolateCountRequestParameters, T> 
+	public partial class PercolateCountDescriptor<T,K> : IndexTypePathDescriptor<PercolateCountDescriptor<T, K>, PercolateCountRequestParameters, T> 
 		where T : class
 		where K : class
 	{

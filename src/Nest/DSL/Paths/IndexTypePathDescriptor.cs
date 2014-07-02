@@ -28,13 +28,37 @@ namespace Nest
 			where TParameters : IRequestParameters, new()
 		{	
 			var inferrer = new ElasticInferrer(settings);
+
 			if (path.Index == null)
 				throw new DslException("Index() not specified");
+			
 			if (path.Type == null)
 				throw new DslException("Type() not specified");
 
 			var index = inferrer.IndexName(path.Index); 
 			var type = inferrer.TypeName(path.Type); 
+
+			pathInfo.Index = index;
+			pathInfo.Type = type;
+		}
+
+		public static void SetRouteParameters<TParameters, T>(
+			IIndexTypePath<TParameters> path,
+			IConnectionSettingsValues settings,
+			ElasticsearchPathInfo<TParameters> pathInfo)
+			where TParameters : IRequestParameters, new()
+			where T : class
+		{
+			var inferrer = new ElasticInferrer(settings);
+
+			if (path.Index == null)
+				path.Index = inferrer.IndexName<T>();
+
+			if (path.Type == null)
+				path.Type = inferrer.TypeName<T>();
+
+			var index = inferrer.IndexName(path.Index);
+			var type = inferrer.TypeName(path.Type);
 
 			pathInfo.Index = index;
 			pathInfo.Type = type;
@@ -53,6 +77,15 @@ namespace Nest
 		}
 	}
 
+	public abstract class IndexTypePathBase<TParameters, T> : IndexTypePathBase<TParameters>
+		where TParameters : IRequestParameters, new()
+		where T : class
+	{
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		{
+			IndexTypePathRouteParameters.SetRouteParameters(this, settings, pathInfo);
+		}
+	}
 	/// <summary>
 	/// Provides a base for descriptors that need to describe a path in the form of 
 	/// <pre>
@@ -60,10 +93,11 @@ namespace Nest
 	/// </pre>
 	/// Where neither parameter is optional
 	/// </summary>
-	public abstract class IndexTypePathDescriptor<TDescriptor, TParameters> 
+	public abstract class IndexTypePathDescriptor<TDescriptor, TParameters, T> 
 		: BasePathDescriptor<TDescriptor, TParameters>, IIndexTypePath<TParameters>
-		where TDescriptor : IndexTypePathDescriptor<TDescriptor, TParameters>, new()
+		where TDescriptor : IndexTypePathDescriptor<TDescriptor, TParameters, T>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
+		where T : class
 	{
 		private IIndexTypePath<TParameters> Self { get { return this;  } }
 

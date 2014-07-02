@@ -26,7 +26,8 @@ namespace Nest
 		}
 	}
 	[DescriptorFor("IndicesGetMapping")]
-	public partial class GetMappingDescriptor : IndexTypePathDescriptor<GetMappingDescriptor, GetMappingRequestParameters>, IGetMappingRequest
+	public partial class GetMappingDescriptor<T> : IndexTypePathDescriptor<GetMappingDescriptor<T>, GetMappingRequestParameters, T>, IGetMappingRequest
+		where T : class
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetMappingRequestParameters> pathInfo)
 		{

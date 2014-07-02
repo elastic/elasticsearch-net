@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[DescriptorFor("Mtermvectors")]
-	public partial class MultiTermVectorsDescriptor<T> : IndexTypePathTypedDescriptor<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, T>
+	public partial class MultiTermVectorsDescriptor<T> : IndexTypePathDescriptor<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, T>
 		where T : class
 	{
 		[JsonProperty("docs")]
