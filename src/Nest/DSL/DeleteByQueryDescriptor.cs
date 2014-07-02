@@ -4,34 +4,62 @@ using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
-	public partial class DeleteByQueryDescriptor<T> : QueryPathDescriptorBase<DeleteByQueryDescriptor<T>, T, DeleteByQueryRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IDeleteByQueryRequest<T> : IRequest<DeleteByQueryRequestParameters>
 		where T : class
 	{
 		[JsonProperty("query")]
-		internal IQueryContainer _Query { get; set; }
+		IQueryContainer Query { get; set; }
+		
+	}
+
+	internal static class DeleteByQueryPathInfo
+	{
+		public static void Update<T>(ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo, IDeleteByQueryRequest<T> request)
+			where T : class
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
+		}
+	}
+	
+	public partial class DeleteByQueryRequest<T> : QueryPathBase<DeleteByQueryRequestParameters, T>, IDeleteByQueryRequest<T>
+		where T : class
+	{
+		public IQueryContainer Query { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo)
+		{
+			DeleteByQueryPathInfo.Update(pathInfo, this);
+		}
+
+	}
+
+	public partial class DeleteByQueryDescriptor<T> 
+		: QueryPathDescriptorBase<DeleteByQueryDescriptor<T>, T, DeleteByQueryRequestParameters>, IDeleteByQueryRequest<T>
+		where T : class
+	{
+		private IDeleteByQueryRequest<T> Self { get { return this; } }
+
+		IQueryContainer IDeleteByQueryRequest<T>.Query { get; set; }
 
 		public DeleteByQueryDescriptor<T> MatchAll()
 		{
-			this._Query = new QueryDescriptor<T>().MatchAll();
+			Self.Query = new QueryDescriptor<T>().MatchAll();
 			return this;
 		}
 
 		public DeleteByQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
-			this._Query = querySelector(new QueryDescriptor<T>());
+			Self.Query = querySelector(new QueryDescriptor<T>());
 			return this;
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
+			DeleteByQueryPathInfo.Update(pathInfo, this);
 		}
 	}
 }

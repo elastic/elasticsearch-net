@@ -1,24 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
-	[DescriptorFor("Exists")]
-	public partial class DocumentExistsDescriptor<T> : DocumentPathDescriptorBase<DocumentExistsDescriptor<T>, T, DocumentExistsRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IDocumentExistsRequest<T> : IRequest<DocumentExistsRequestParameters>
+		where T : class
+	{
+		
+	}
+
+	internal static class DocumentExistsPathInfo
+	{
+		public static void Update<T>(ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo, IDocumentExistsRequest<T> request)
+			where T : class
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.HEAD;
+		}
+	}
+	
+	public partial class DocumentExistsRequest<T> : DocumentPathBase<DocumentExistsRequestParameters, T>, IDocumentExistsRequest<T>
 		where T : class
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.HEAD;
+			DocumentExistsPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("Exists")]
+	public partial class DocumentExistsDescriptor<T>
+		: DocumentPathDescriptorBase<DocumentExistsDescriptor<T>, T, DocumentExistsRequestParameters>, IDocumentExistsRequest<T>
+		where T : class
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo)
+		{
+			DocumentExistsPathInfo.Update(pathInfo, this);
 		}
 	}
 }

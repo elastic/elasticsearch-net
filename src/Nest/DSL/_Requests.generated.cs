@@ -1203,7 +1203,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html
 	///</pre>
 	///</summary>
-	public partial class CountRequest 
+	public partial class CountRequest<T> 
 			{
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1357,7 +1357,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete.html
 	///</pre>
 	///</summary>
-	public partial class DeleteRequest  : BasePathRequest<DeleteRequestParameters>
+	public partial class DeleteRequest<T> 
 			{
 		
 		///<summary>Specific write consistency setting for the operation</summary>
@@ -1423,12 +1423,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -1437,7 +1431,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete-by-query.html
 	///</pre>
 	///</summary>
-	public partial class DeleteByQueryRequest  : BasePathRequest<DeleteByQueryRequestParameters>
+	public partial class DeleteByQueryRequest<T> 
 			{
 		
 		///<summary>The analyzer to use for the query string</summary>
@@ -1535,12 +1529,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -1549,7 +1537,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
-	public partial class DocumentExistsRequest  : BasePathRequest<DocumentExistsRequestParameters>
+	public partial class DocumentExistsRequest<T> 
 			{
 		
 		///<summary>The ID of the parent document</summary>
@@ -1591,12 +1579,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("routing", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
