@@ -1,0 +1,12 @@
+﻿{
+	"settings": {
+		"index": {
+			"similarity": {
+				"my_lmdirichlet_similarity": {
+					"mu":  1000,
+					"type":  "LMDirichlet"
+				}
+			}
+		}
+	}
+}
