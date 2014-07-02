@@ -951,7 +951,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-health.html
 	///</pre>
 	///</summary>
-	public partial class ClusterHealthRequest  : BasePathRequest<ClusterHealthRequestParameters>
+	public partial class ClusterHealthRequest 
 			{
 		
 		///<summary>Specify the level of detail for returned information</summary>
@@ -1017,12 +1017,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("wait_for_status", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterHealthRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
