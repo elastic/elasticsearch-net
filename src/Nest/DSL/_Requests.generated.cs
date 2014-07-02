@@ -2139,7 +2139,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html
 	///</pre>
 	///</summary>
-	public partial class ClearCacheRequest  : BasePathRequest<ClearCacheRequestParameters>
+	public partial class ClearCacheRequest 
 			{
 		
 		///<summary>Clear field data</summary>
@@ -2237,12 +2237,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("recycler", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClearCacheRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
