@@ -62,7 +62,7 @@ namespace Nest
 		protected override void SetRouteParameters(
 			IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			DocumentOptionalPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
+			DocumentOptionalPathRouteParameters.SetRouteParameters<TParameters>(this, settings, pathInfo);
 		}
 	}
 
