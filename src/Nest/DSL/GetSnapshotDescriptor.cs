@@ -20,6 +20,8 @@ namespace Nest
 	
 	public partial class GetSnapshotRequest : RepositorySnapshotPathBase<GetSnapshotRequestParameters>, IGetSnapshotRequest
 	{
+		public GetSnapshotRequest(string repository, string snapshot) : base(repository, snapshot) { }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetSnapshotRequestParameters> pathInfo)
 		{
 			GetSnapshotPathInfo.Update(pathInfo, this);

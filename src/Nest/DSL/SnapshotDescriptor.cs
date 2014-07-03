@@ -23,21 +23,6 @@ namespace Nest
 		bool? Partial { get; set; }
     }
 
-    public interface ISnapshotRequest<T> : ISnapshotRequest where T : class
-    {
-        [JsonProperty("indices")]
-		IEnumerable<IndexNameMarker> Indices { get; set; }
-
-		[JsonProperty("ignore_unavailable")]
-		bool? IgnoreUnavailable { get; set; }
-
-		[JsonProperty("include_global_state")]
-		bool? IncludeGlobalState { get; set; }
-
-		[JsonProperty("partial")]
-		bool? Partial { get; set; }
-    }
-
     internal static class SnapshotPathInfo
     {
         public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo)
@@ -48,7 +33,9 @@ namespace Nest
 
     public partial class SnapshotRequest : RepositorySnapshotPathBase<SnapshotRequestParameters>, ISnapshotRequest
     {
-        public IEnumerable<IndexNameMarker> Indices { get; set; }
+	    public SnapshotRequest(string repository, string snapshot) : base(repository, snapshot) { }
+
+	    public IEnumerable<IndexNameMarker> Indices { get; set; }
 
         public bool? IgnoreUnavailable { get; set; }
 
@@ -62,22 +49,6 @@ namespace Nest
         }
     }
 
-    public partial class SnapshotRequest<T> : RepositorySnapshotPathBase<SnapshotRequestParameters>, ISnapshotRequest<T>
-        where T : class
-    {
-        public IEnumerable<IndexNameMarker> Indices { get; set; }
-
-        public bool? IgnoreUnavailable { get; set; }
-
-        public bool? IncludeGlobalState { get; set; }
-
-        public bool? Partial { get; set; }
-        
-        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo)
-        {
-            SnapshotPathInfo.Update(settings, pathInfo);
-        }
-    }
 
 	[DescriptorFor("SnapshotCreate")]
 	public partial class SnapshotDescriptor 

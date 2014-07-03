@@ -20,6 +20,8 @@ namespace Nest
 	
 	public partial class DeleteSnapshotRequest : RepositorySnapshotPathBase<DeleteSnapshotRequestParameters>, IDeleteSnapshotRequest
 	{
+		public DeleteSnapshotRequest(string repository, string snapshot) : base(repository, snapshot) { }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteSnapshotRequestParameters> pathInfo)
 		{
 			DeleteSnapshotPathInfo.Update(pathInfo, this);

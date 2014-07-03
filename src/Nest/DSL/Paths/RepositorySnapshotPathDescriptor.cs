@@ -39,6 +39,15 @@ namespace Nest
 
 		public string Snapshot { get; set; }
 
+		public RepositorySnapshotPathBase(string repository, string snapshot)
+		{
+			repository.ThrowIfNullOrEmpty("repository");
+			snapshot.ThrowIfNullOrEmpty("snapshot");
+			this.Repository = repository;
+			this.Snapshot = snapshot;
+		}
+
+
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{	
 			RepositorySnapshotPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
