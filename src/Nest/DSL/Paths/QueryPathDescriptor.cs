@@ -108,11 +108,11 @@ namespace Nest
 	/// </pre>
 	/// all parameters are optional and will default to the defaults for <para>T</para>
 	/// </summary>
-	public abstract class QueryPathDescriptorBase<TDescriptor, T, TParameters>
+	public abstract class QueryPathDescriptorBase<TDescriptor, TParameters, T>
 		: BasePathDescriptor<TDescriptor, TParameters>, IQueryPath<TParameters>
-		where TDescriptor : QueryPathDescriptorBase<TDescriptor, T, TParameters>, new()
-		where T : class
+		where TDescriptor : QueryPathDescriptorBase<TDescriptor, TParameters, T>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
+        where T : class
 	{
 		private IQueryPath<TParameters> Self { get { return this; } }
 

@@ -50,7 +50,7 @@ namespace Nest
 	}
 	
 	[DescriptorFor("Count")]
-	public partial class CountDescriptor<T> : QueryPathDescriptorBase<CountDescriptor<T>, T, CountRequestParameters>, ICountRequest
+	public partial class CountDescriptor<T> : QueryPathDescriptorBase<CountDescriptor<T>, CountRequestParameters, T>, ICountRequest
 		where T : class
 	{
 		private ICountRequest Self { get { return this; } }
