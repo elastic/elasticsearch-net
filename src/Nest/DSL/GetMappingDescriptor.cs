@@ -9,6 +9,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGetMappingRequest : IRequest<GetMappingRequestParameters> { }
+	public interface IGetMappingRequest<T> : IGetMappingRequest where T : class { }
 
 	internal static class GetMappingPathInfo
 	{
@@ -25,6 +26,16 @@ namespace Nest
 			GetMappingPathInfo.Update(pathInfo, this);
 		}
 	}
+	
+	public partial class GetMappingRequest<T> : IndexTypePathBase<GetMappingRequestParameters, T>, IGetMappingRequest
+		where T : class
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetMappingRequestParameters> pathInfo)
+		{
+			GetMappingPathInfo.Update(pathInfo, this);
+		}
+	}
+
 	[DescriptorFor("IndicesGetMapping")]
 	public partial class GetMappingDescriptor<T> : IndexTypePathDescriptor<GetMappingDescriptor<T>, GetMappingRequestParameters, T>, IGetMappingRequest
 		where T : class

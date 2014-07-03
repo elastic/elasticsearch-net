@@ -8,23 +8,26 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetRequest<T> : IRequest<GetRequestParameters>
-		where T : class
-	{
-		
-	}
+	public interface IGetRequest : IRequest<GetRequestParameters> { } 
+	public interface IGetRequest<T> : IGetRequest where T : class { }
 
 	internal static class GetPathInfo
 	{
-		public static void Update<T>(ElasticsearchPathInfo<GetRequestParameters> pathInfo, IGetRequest<T> request)
-			where T : class
+		public static void Update(ElasticsearchPathInfo<GetRequestParameters> pathInfo, IGetRequest request)
 		{
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 		}
 	}
 	
-	public partial class GetRequest<T> : DocumentPathBase<GetRequestParameters, T>, IGetRequest<T>
-		where T : class
+	public partial class GetRequest : DocumentPathBase<GetRequestParameters>, IGetRequest 
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetRequestParameters> pathInfo)
+		{
+			GetPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	public partial class GetRequest<T> : DocumentPathBase<GetRequestParameters, T>, IGetRequest where T : class
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetRequestParameters> pathInfo)
 		{
@@ -32,7 +35,7 @@ namespace Nest
 		}
 	}
 	
-	public partial class GetDescriptor<T> : DocumentPathDescriptor<GetDescriptor<T>,T, GetRequestParameters>, IGetRequest<T>
+	public partial class GetDescriptor<T> : DocumentPathDescriptor<GetDescriptor<T>, GetRequestParameters, T>, IGetRequest
 		where T : class
 	{
 

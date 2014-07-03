@@ -2729,7 +2729,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
 	///</pre>
 	///</summary>
-	public partial class GetMappingRequest 
+	public partial class GetMappingRequest<T> 
 			{
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2821,7 +2821,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
-	public partial class GetTemplateRequest  : BasePathRequest<GetTemplateRequestParameters>
+	public partial class GetTemplateRequest 
 			{
 		
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -2839,12 +2839,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -2853,7 +2847,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
 	///</pre>
 	///</summary>
-	public partial class GetWarmerRequest  : BasePathRequest<GetWarmerRequestParameters>
+	public partial class GetWarmerRequest 
 			{
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2887,12 +2881,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetWarmerRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -4787,7 +4775,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class GetSnapshotRequest  : BasePathRequest<GetSnapshotRequestParameters>
+	public partial class GetSnapshotRequest 
 			{
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -4797,12 +4785,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetSnapshotRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -5647,6 +5629,48 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for IndicesGetMappingForAll
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
+	///</pre>
+	///</summary>
+	public partial class GetMappingRequest 
+			{
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
+			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
+		}
+		
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
+			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
+		}
+		
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
+			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
+		}
+		
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool Local 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
+			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
 	}

@@ -12,12 +12,31 @@ using Nest.Domain;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesGetTemplate")]
-	public partial class GetTemplateDescriptor : NamePathDescriptor<GetTemplateDescriptor, GetTemplateRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IGetTemplateRequest : IRequest<GetTemplateRequestParameters> { }
+
+	internal static class GetTemplatePathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo, IGetTemplateRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+		}
+	}
+	
+	public partial class GetTemplateRequest : NamePathBase<GetTemplateRequestParameters>, IGetTemplateRequest
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+			GetTemplatePathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("IndicesGetTemplate")]
+	public partial class GetTemplateDescriptor : NamePathDescriptor<GetTemplateDescriptor, GetTemplateRequestParameters>, IGetTemplateRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo)
+		{
+			GetTemplatePathInfo.Update(pathInfo, this);
 		}
 		
 	}
