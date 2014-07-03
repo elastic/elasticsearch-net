@@ -7,42 +7,71 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	//TODO OIS Version
-
-	public partial class PercolateDescriptor<T,K> : IndexTypePathDescriptor<PercolateDescriptor<T, K>, PercolateRequestParameters, T> 
-		where T : class
-		where K : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IPercolateRequest<TDocument> : IIndexTypePath<PercolateRequestParameters>
+		where TDocument : class
 	{
 		[JsonProperty(PropertyName = "query")]
-		internal QueryContainer _Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "doc")]
-		internal K _Document { get; set; }
+		TDocument Document { get; set; }
+	}
+
+	internal static class PercolatePathInfo
+	{
+		public static void Update<T>(ElasticsearchPathInfo<PercolateRequestParameters> pathInfo, IPercolateRequest<T> request)
+			where T : class
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class PercolateRequest<TDocument> : IndexTypePathBase<PercolateRequestParameters, TDocument>, IPercolateRequest<TDocument>
+		where TDocument : class
+	{
+		public QueryContainer Query { get; set; }
+
+		public TDocument Document { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PercolateRequestParameters> pathInfo)
+		{
+			PercolatePathInfo.Update(pathInfo, this);
+		}
+
+	}
+	public partial class PercolateDescriptor<T> : IndexTypePathDescriptor<PercolateDescriptor<T>, PercolateRequestParameters, T>, IPercolateRequest<T>
+		where T : class
+	{
+		private IPercolateRequest<T> Self { get { return this; } }
+
+		QueryContainer IPercolateRequest<T>.Query { get; set; }
+
+		T IPercolateRequest<T>.Document { get; set; }
 
 		/// <summary>
 		/// The object to perculate
 		/// </summary>
-		public PercolateDescriptor<T, K> Object(K @object)
+		public PercolateDescriptor<T> Object(T @object)
 		{
-			this._Document = @object;
+			Self.Document = @object;
 			return this;
 		}
 
 		/// <summary>
 		/// Optionally specify more search options such as facets, from/to etcetera.
 		/// </summary>
-		public PercolateDescriptor<T, K> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public PercolateDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var d = querySelector(new QueryDescriptor<T>());
-			this._Query = d;
+			Self.Query = d;
 			return this;
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PercolateRequestParameters> pathInfo)
 		{
-			//.NET does not like sending data using get so we use POST
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			PercolatePathInfo.Update(pathInfo, this);
 		}
 	}
 }

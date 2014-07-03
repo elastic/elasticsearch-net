@@ -188,7 +188,7 @@ namespace Nest
 		{
 			var sb = new StringBuilder();
 			var inferrer = new ElasticInferrer(this._settings);
-			foreach (var operation in multiSearchDescriptor._Operations.Values)
+			foreach (var operation in multiSearchDescriptor._operations.Values)
 			{
 				var path = operation.ToPathInfo(this._settings);
 				var op = new
