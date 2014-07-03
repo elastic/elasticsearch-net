@@ -15,8 +15,9 @@ namespace Nest
 				mltSelector,
 				(p, d) =>
 				{
+					IMoreLikeThisRequest r = d;
 					CopySearchRequestParameters(d);
-					return this.RawDispatch.MltDispatch<SearchResponse<T>>(p, d._Search);
+					return this.RawDispatch.MltDispatch<SearchResponse<T>>(p, r.Search);
 				}
 			);
 		}
@@ -29,17 +30,17 @@ namespace Nest
 				mltSelector,
 				(p, d) =>
 				{
+					IMoreLikeThisRequest r = d;
 					CopySearchRequestParameters(d);
-					return this.RawDispatch.MltDispatchAsync<SearchResponse<T>>(p, d._Search);
+					return this.RawDispatch.MltDispatchAsync<SearchResponse<T>>(p, r.Search);
 				}
 			);
 		}
 
-		private static void CopySearchRequestParameters<T>(MoreLikeThisDescriptor<T> d) where T : class
+		private static void CopySearchRequestParameters(IMoreLikeThisRequest request) 
 		{
-			IRequest<MoreLikeThisRequestParameters> request = d;
-			if (d._Search == null) return;
-			request.RequestParameters.CopyQueryStringValuesFrom(d._Search.QueryString);
+			if (request.Search == null) return;
+			request.RequestParameters.CopyQueryStringValuesFrom(request.Search.QueryString);
 		}
 	}
 }

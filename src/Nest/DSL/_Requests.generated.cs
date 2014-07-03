@@ -3477,7 +3477,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-status.html
 	///</pre>
 	///</summary>
-	public partial class IndicesStatusRequest  : BasePathRequest<IndicesStatusRequestParameters>
+	public partial class IndicesStatusRequest 
 			{
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3535,12 +3535,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("snapshot", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatusRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -3647,14 +3641,8 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/
 	///</pre>
 	///</summary>
-	public partial class InfoRequest  : BasePathRequest<InfoRequestParameters>
+	public partial class InfoRequest 
 			{
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<InfoRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -3751,7 +3739,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-more-like-this.html
 	///</pre>
 	///</summary>
-	public partial class MoreLikeThisRequest  : BasePathRequest<MoreLikeThisRequestParameters>
+	public partial class MoreLikeThisRequest<T> 
 			{
 		
 		///<summary>The boost factor</summary>
@@ -3905,12 +3893,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("stop_words", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MoreLikeThisRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -5733,6 +5715,168 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for MltGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-more-like-this.html
+	///</pre>
+	///</summary>
+	public partial class MoreLikeThisRequest 
+			{
+		
+		///<summary>The boost factor</summary>
+		public double BoostTerms 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<double>("boost_terms"); } 
+			set { this.Request.RequestParameters.AddQueryString("boost_terms", value); }
+		}
+		
+		
+		///<summary>The word occurrence frequency as count: words with higher occurrence in the corpus will be ignored</summary>
+		public long MaxDocFreq 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<long>("max_doc_freq"); } 
+			set { this.Request.RequestParameters.AddQueryString("max_doc_freq", value); }
+		}
+		
+		
+		///<summary>The maximum query terms to be included in the generated query</summary>
+		public long MaxQueryTerms 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<long>("max_query_terms"); } 
+			set { this.Request.RequestParameters.AddQueryString("max_query_terms", value); }
+		}
+		
+		
+		///<summary>The minimum length of the word: longer words will be ignored</summary>
+		public long MaxWordLength 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<long>("max_word_length"); } 
+			set { this.Request.RequestParameters.AddQueryString("max_word_length", value); }
+		}
+		
+		
+		///<summary>The word occurrence frequency as count: words with lower occurrence in the corpus will be ignored</summary>
+		public long MinDocFreq 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<long>("min_doc_freq"); } 
+			set { this.Request.RequestParameters.AddQueryString("min_doc_freq", value); }
+		}
+		
+		
+		///<summary>The term frequency as percent: terms with lower occurence in the source document will be ignored</summary>
+		public long MinTermFreq 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<long>("min_term_freq"); } 
+			set { this.Request.RequestParameters.AddQueryString("min_term_freq", value); }
+		}
+		
+		
+		///<summary>The minimum length of the word: shorter words will be ignored</summary>
+		public long MinWordLength 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<long>("min_word_length"); } 
+			set { this.Request.RequestParameters.AddQueryString("min_word_length", value); }
+		}
+		
+		
+		///<summary>Specific fields to perform the query against</summary>
+		public IList<PropertyPathMarker> MltFields 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("mlt_fields"); } 
+			set { this.Request.RequestParameters.AddQueryString("mlt_fields", value); }
+		}
+		
+		
+		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
+		public double PercentTermsToMatch 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<double>("percent_terms_to_match"); } 
+			set { this.Request.RequestParameters.AddQueryString("percent_terms_to_match", value); }
+		}
+		
+		
+		///<summary>Specific routing value</summary>
+		public string Routing 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
+			set { this.Request.RequestParameters.AddQueryString("routing", value); }
+		}
+		
+		
+		///<summary>The offset from which to return results</summary>
+		public long SearchFrom 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<long>("search_from"); } 
+			set { this.Request.RequestParameters.AddQueryString("search_from", value); }
+		}
+		
+		
+		///<summary>A comma-separated list of indices to perform the query against (default: the index containing the document)</summary>
+		public  string[] SearchIndices 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("search_indices"); } 
+			set { this.Request.RequestParameters.AddQueryString("search_indices", value); }
+		}
+		
+		
+		///<summary>The search query hint</summary>
+		public string SearchQueryHint 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_query_hint"); } 
+			set { this.Request.RequestParameters.AddQueryString("search_query_hint", value); }
+		}
+		
+		
+		///<summary>A scroll search request definition</summary>
+		public string SearchScroll 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_scroll"); } 
+			set { this.Request.RequestParameters.AddQueryString("search_scroll", value); }
+		}
+		
+		
+		///<summary>The number of documents to return (default: 10)</summary>
+		public long SearchSize 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<long>("search_size"); } 
+			set { this.Request.RequestParameters.AddQueryString("search_size", value); }
+		}
+		
+		
+		///<summary>A specific search request definition (instead of using the request body)</summary>
+		public string SearchSource 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_source"); } 
+			set { this.Request.RequestParameters.AddQueryString("search_source", value); }
+		}
+		
+		
+		///<summary>Specific search type (eg. `dfs_then_fetch`, `count`, etc)</summary>
+		public string SearchType 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_type"); } 
+			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
+		}
+		
+		
+		///<summary>A comma-separated list of types to perform the query against (default: the same type as the document)</summary>
+		public  string[] SearchTypes 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("search_types"); } 
+			set { this.Request.RequestParameters.AddQueryString("search_types", value); }
+		}
+		
+		
+		///<summary>A list of stop words to be ignored</summary>
+		public  string[] StopWords 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("stop_words"); } 
+			set { this.Request.RequestParameters.AddQueryString("stop_words", value); }
 		}
 		
 	}
