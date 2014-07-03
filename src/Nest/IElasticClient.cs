@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
-using Nest.Domain;
 
 namespace Nest
 {
@@ -34,14 +33,12 @@ namespace Nest
 		ISearchResponse<T> Scroll<T>(IScrollRequest scrollRequest) where T : class;
 
 		///<inheritdoc />
-		/// <param name="scrollSelector">A descriptor that describes the scroll operation</param>
 		ISearchResponse<T> Scroll<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector) where T : class;
 		
 		///<inheritdoc />
 		Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest scrollRequest) where T : class;
 
 		///<inheritdoc />
-		/// <param name="scrollSelector">A descriptor that describes the scroll operation</param>
 		Task<ISearchResponse<T>> ScrollAsync<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector) where T : class;
 
 		/// <summary>
@@ -57,36 +54,24 @@ namespace Nest
 		IUpdateResponse Update<T>(Func<UpdateDescriptor<T, T>, UpdateDescriptor<T, T>> updateSelector) where T : class;
 		
 		/// <inheritdoc />
-		/// <typeparam name="K">The type of the partial update document</typeparam>
-		/// <param name="updateSelector">a descriptor that describes the update operation</param>
 		IUpdateResponse Update<T, K>(Func<UpdateDescriptor<T, K>, UpdateDescriptor<T, K>> updateSelector)
 			where T : class
 			where K : class;
 		
 		/// <inheritdoc />
-		/// <typeparam name="T">The type to describe the document to be updated</typeparam>
-		/// <typeparam name="K">The type of the partial update document</typeparam>
-		/// <param name="updateSelector">a descriptor that describes the update operation</param>
 		IUpdateResponse Update<T>(IUpdateRequest<T, T> updateRequest)
 			where T : class;
 		
 		/// <inheritdoc />
-		/// <typeparam name="T">The type to describe the document to be updated</typeparam>
-		/// <typeparam name="K">The type of the partial update document</typeparam>
-		/// <param name="updateSelector">a descriptor that describes the update operation</param>
 		IUpdateResponse Update<T, K>(IUpdateRequest<T, K> updateRequest)
 			where T : class
 			where K : class;
+
 		/// <inheritdoc />
-		/// <typeparam name="T">The type to describe the document to be updated</typeparam>
-		/// <param name="updateSelector">a descriptor that describes the update operation</param>
 		Task<IUpdateResponse> UpdateAsync<T>(Func<UpdateDescriptor<T, T>, UpdateDescriptor<T, T>> updateSelector)
 			where T : class;
 		
 		/// <inheritdoc />
-		/// <typeparam name="T">The type to describe the document to be updated</typeparam>
-		/// <typeparam name="K">The type of the partial update document</typeparam>
-		/// <param name="updateSelector">a descriptor that describes the update operation</param>
 		Task<IUpdateResponse> UpdateAsync<T, K>(Func<UpdateDescriptor<T, K>, UpdateDescriptor<T, K>> updateSelector)
 			where T : class
 			where K : class;
@@ -96,10 +81,9 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html
 		/// </summary>
 		/// <param name="updateSettingsSelector">A descriptor that strongly types all the updateable settings</param>
-		IAcknowledgedResponse UpdateSettings( Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector); 
-		
+		IAcknowledgedResponse UpdateSettings(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector); 
+
 		/// <inheritdoc />
-		/// <param name="updateSettingsSelector">A descriptor that strongly types all the updateable settings</param>
 		Task<IAcknowledgedResponse> UpdateSettingsAsync(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector);
 
 		/// <summary>
@@ -112,8 +96,6 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
-		/// <typeparam name="T">The type used to describe the query</typeparam>
-		/// <param name="querySelector">A descriptor that describes the query operation</param>
 		Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector) 
 			where T : class;
 
@@ -128,7 +110,6 @@ namespace Nest
 		IIndicesOperationResponse OpenIndex(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector);
 		
 		/// <inheritdoc />
-		/// <param name="openIndexSelector">A descriptor thata describes the open index operation</param>
 		Task<IIndicesOperationResponse> OpenIndexAsync(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector);
 		
 		/// <summary>
@@ -142,7 +123,6 @@ namespace Nest
 		IIndicesOperationResponse CloseIndex(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
 		
 		/// <inheritdoc />
-		/// <param name="closeIndexSelector">A descriptor thata describes the close index operation</param>
 		Task<IIndicesOperationResponse> CloseIndexAsync(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
 		
 		/// <summary>
@@ -154,7 +134,6 @@ namespace Nest
 		IShardsOperationResponse Refresh(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null);
 		
 		/// <inheritdoc />
-		/// <param name="refreshSelector">A descriptor that describes the parameters for the refresh operation</param>
 		Task<IShardsOperationResponse> RefreshAsync(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null);
 		
 		/// <summary>
@@ -167,7 +146,6 @@ namespace Nest
 		ISegmentsResponse Segments(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null);
 		
 		/// <inheritdoc />
-		/// <param name="segmentsSelector">A descriptor that describes the parameters for the segments operation</param>
 		Task<ISegmentsResponse> SegmentsAsync(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null);
 		
 		/// <summary>
@@ -178,7 +156,6 @@ namespace Nest
 		IClusterStateResponse ClusterState(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null);
 
 		/// <inheritdoc />
-		/// <param name="clusterStateSelector">A descriptor that describes the parameters for the cluster state operation</param>
 		Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null);
 
 		/// <summary>
@@ -192,8 +169,6 @@ namespace Nest
 		IIndicesOperationResponse PutWarmer(string name, Func<PutWarmerDescriptor, PutWarmerDescriptor> selector);
 		
 		/// <inheritdoc />
-		/// <param name="name">The name for the warmer that you want to register</param>
-		/// <param name="selector">A descriptor that further describes what the warmer should look like</param>
 		Task<IIndicesOperationResponse> PutWarmerAsync(string name, Func<PutWarmerDescriptor, PutWarmerDescriptor> selector);
 		
 		/// <summary>
@@ -205,8 +180,6 @@ namespace Nest
 		IWarmerResponse GetWarmer(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null);
 		
 		/// <inheritdoc />
-		/// <param name="name">The name of the warmer to get</param>
-		/// <param name="selector">An optional selector specifying additional parameters for the get warmer operation</param>
 		Task<IWarmerResponse> GetWarmerAsync(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null);
 
 		/// <summary>
@@ -218,8 +191,6 @@ namespace Nest
 		IIndicesOperationResponse DeleteWarmer(string name, Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector = null);
 
 		/// <inheritdoc />
-		/// <param name="name">The name of the warmer to delete</param>
-		/// <param name="selector">An optional selector specifying additional parameters for the delete warmer operation</param>
 		Task<IIndicesOperationResponse> DeleteWarmerAsync(string name, Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector = null);
 
 		/// <summary>
@@ -231,8 +202,6 @@ namespace Nest
 		ITemplateResponse GetTemplate(string name, Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null);
 		
 		/// <inheritdoc />
-		/// <param name="name">The name of the template to get</param>
-		/// <param name="getTemplateSelector">An optional selector specifying additional parameters for the get template operation</param>
 		Task<ITemplateResponse> GetTemplateAsync(string name, Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null);
 
 		/// <summary>
@@ -246,8 +215,6 @@ namespace Nest
 		IIndicesOperationResponse PutTemplate(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector);
 
 		/// <inheritdoc />
-		/// <param name="name">The name of the template to register</param>
-		/// <param name="putTemplateSelector">An optional selector specifying additional parameters for the put template operation</param>
 		Task<IIndicesOperationResponse> PutTemplateAsync(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector);
 
 		/// <summary>
@@ -259,8 +226,6 @@ namespace Nest
 		IIndicesOperationResponse DeleteTemplate(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
 		
 		/// <inheritdoc />
-		/// <param name="name">The name of the template to delete</param>
-		/// <param name="deleteTemplateSelector">An optional selector specifying additional parameters for the delete template operation</param>
 		Task<IIndicesOperationResponse> DeleteTemplateAync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
 
 		/// <summary>
@@ -272,8 +237,6 @@ namespace Nest
 		IUnregisterPercolateResponse UnregisterPercolator(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null);
 
 		/// <inheritdoc />
-		/// <param name="name">The name for the percolator</param>
-		/// <param name="selector">An optional descriptor describing the unregister percolator operation further</param>
 		Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null);
 
 		/// <summary>
@@ -287,9 +250,6 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		/// <typeparam name="T">The type to infer the index/type from, will also be used to strongly type the query</typeparam>
-		/// <param name="name">The name for the percolator</param>
-		/// <param name="percolatorSelector">An optional descriptor describing the register percolator operation further</param>
 		Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(string name, Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector)
 			where T : class;
 
@@ -304,9 +264,6 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
-		/// <param name="object">The object to percolator</param>
-		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
 		Task<IPercolateResponse> PercolateAsync<T>(T @object, Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector = null) 
 			where T : class;
 		
@@ -321,9 +278,6 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
-		/// <param name="object">The object to percolator</param>
-		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
 		Task<IPercolateCountResponse> PercolateCountAsync<T>(T @object, Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
 			where T : class;
 
@@ -337,8 +291,6 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
-		/// <typeparam name="T">The type we want to map in elasticsearch</typeparam>
-		/// <param name="mappingSelector">A descriptor to describe the mapping of our type</param>
 		Task<IIndicesResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> mappingSelector)
 			where T : class;
 
@@ -350,7 +302,6 @@ namespace Nest
 		IGetMappingResponse GetMapping<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null) where T : class;
 		
 		/// <inheritdoc />
-		/// <param name="selector">A descriptor that describes the parameters for the get mapping operation</param>
 		Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null) where T : class;
 		
 		/// <summary>
@@ -361,7 +312,6 @@ namespace Nest
 		IIndicesResponse DeleteMapping<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null) where T : class;
 		
 		/// <inheritdoc />
-		/// <param name="selector">A descriptor that describes the parameters for the delete mapping operation</param>
 		Task<IIndicesResponse> DeleteMappingAsync<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null) where T : class;
 		 
 		/// <summary>
@@ -375,7 +325,6 @@ namespace Nest
 		IShardsOperationResponse Flush(Func<FlushDescriptor, FlushDescriptor> selector);
 		
 		/// <inheritdoc />
-		/// <param name="selector">A descriptor that describes the parameters for the flush operation</param>
 		Task<IShardsOperationResponse> FlushAsync(Func<FlushDescriptor, FlushDescriptor> selector);
 		
 		/// <summary>
@@ -386,7 +335,6 @@ namespace Nest
 		IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector);
 
 		/// <inheritdoc />
-		/// <param name="selector">A descriptor that describes the parameters for the get index settings operation</param>
 		Task<IIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector);
 
 		/// <summary>
@@ -397,7 +345,6 @@ namespace Nest
 		IIndicesResponse DeleteIndex(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector);
 		
 		/// <inheritdoc />
-		/// <param name="selector">A descriptor that describes the parameters for the delete index operation</param>
 		Task<IIndicesResponse> DeleteIndexAsync(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector);
 		
 		/// <summary>
@@ -408,7 +355,6 @@ namespace Nest
 		IShardsOperationResponse ClearCache(Func<ClearCacheDescriptor, ClearCacheDescriptor> selector = null);
 		
 		/// <inheritdoc />
-		/// <param name="selector">A descriptor that describes the parameters for the clear cache operation</param>
 		Task<IShardsOperationResponse> ClearCacheAsync(Func<ClearCacheDescriptor, ClearCacheDescriptor> selector = null);
 
 		/// <summary>
@@ -420,7 +366,6 @@ namespace Nest
 		IIndicesOperationResponse CreateIndex(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
 
 		/// <inheritdoc />
-		/// <param name="createIndexSelector">A descriptor that describes the parameters for the create index operation</param>
 		Task<IIndicesOperationResponse> CreateIndexAsync(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
 		
 		/// <summary>
@@ -430,7 +375,6 @@ namespace Nest
 		IRootInfoResponse RootNodeInfo(Func<InfoDescriptor, InfoDescriptor> selector = null);
 		
 		/// <inheritdoc />
-		/// <param name="selector">A descriptor to further describe the root operation</param>
 		Task<IRootInfoResponse> RootNodeInfoAsync(Func<InfoDescriptor, InfoDescriptor> selector = null);
 
 		/// <summary>
@@ -442,7 +386,6 @@ namespace Nest
 		IGlobalStatsResponse IndicesStats(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null);
 		
 		/// <inheritdoc />
-		/// <param name="selector">Optionaly further describe the indices stats operation</param>
 		Task<IGlobalStatsResponse> IndicesStatsAsync(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null);
 		
 		/// <summary>
@@ -453,7 +396,6 @@ namespace Nest
 		INodeInfoResponse NodesInfo(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector = null);
 		
 		/// <inheritdoc />
-		/// <param name="selector">An optional descriptor to further describe the nodes info operation</param>
 		Task<INodeInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector = null);
 		
 		/// <summary>
@@ -464,7 +406,6 @@ namespace Nest
 		INodeStatsResponse NodesStats(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null);
 		
 		/// <inheritdoc />
-		/// <param name="selector">An optional descriptor to further describe the nodes stats operation</param>
 		Task<INodeStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null);
 		
 		/// <summary>
@@ -475,7 +416,6 @@ namespace Nest
 		IExistsResponse IndexExists(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
 		
 		/// <inheritdoc />
-		/// <param name="selector">A descriptor that describes the index exist operation</param>
 		Task<IExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
 
 		/// <summary>
@@ -488,7 +428,6 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		/// <param name="mltSelector">A descriptor that describes the more like this operation</param>
 		Task<ISearchResponse<T>> MoreLikeThisAsync<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
 			where T : class;
 
@@ -500,7 +439,6 @@ namespace Nest
 		IHealthResponse ClusterHealth(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null);
 		
 		/// <inheritdoc />
-		/// <param name="clusterHealthSelector">An optional descriptor to further describe the cluster health operation</param>
 		Task<IHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null);
 		
 		/// <summary>
@@ -511,7 +449,6 @@ namespace Nest
 		IAnalyzeResponse Analyze(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector);
 		
 		/// <inheritdoc />
-		/// <param name="analyzeSelector">A descriptor that describes the analyze operation</param>
 		Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector);
 
 		/// <summary>
@@ -528,8 +465,6 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		/// <typeparam name="TResult">The type used to describe the strongly typed query</typeparam>
-		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
 		ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
 			where T : class
 			where TResult : class;
@@ -550,8 +485,6 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		/// <typeparam name="TResult">The type used to describe the strongly typed query</typeparam>
-		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
 		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
 			where T : class
 			where TResult : class;
@@ -583,7 +516,6 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
-		/// <param name="countSelector">An optional descriptor to further describe the count operation</param>
 		Task<ICountResponse> CountAsync<T>(Func<CountDescriptor<T>, CountDescriptor<T>> countSelector = null) 
 			where T : class;
 
@@ -598,7 +530,6 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		/// <param name="deleteByQuerySelector">An optional descriptor to further describe the delete by query operation</param>
 		Task<IDeleteResponse> DeleteByQueryAsync<T>(
 			Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector) 
 			where T : class;
@@ -613,15 +544,12 @@ namespace Nest
 		IBulkResponse Bulk(IBulkRequest bulkRequest);
 
 		/// <inheritdoc />
-		/// <param name="bulkSelector">A descriptor the describe the index/create/delete operation for this bulk operation</param>
 		IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
 		
 		/// <inheritdoc />
-		/// <param name="bulkSelector">A descriptor the describe the index/create/delete operation for this bulk operation</param>
 		Task<IBulkResponse> BulkAsync(IBulkRequest bulkRequest);
 		
 		/// <inheritdoc />
-		/// <param name="bulkSelector">A descriptor the describe the index/create/delete operation for this bulk operation</param>
 		Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
 		
 		/// <summary>
@@ -650,7 +578,6 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		/// <param name="indexSelector">Optionally furter describe the index operation i.e override type/index/id</param>
 		Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IndexDescriptor<T>> indexSelector = null)
 			where T : class;
 
@@ -664,7 +591,6 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
-		/// <param name="deleteSelector">Describe the delete operation, i.e type/index/id</param>
 		Task<IDeleteResponse> DeleteAsync<T>(Func<DeleteDescriptor<T>, DeleteDescriptor<T>> deleteSelector) 
 			where T : class;
 		
@@ -678,7 +604,6 @@ namespace Nest
 		IMultiGetResponse MultiGet(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector);
 		
 		/// <inheritdoc />
-		/// <param name="multiGetSelector">A descriptor describing which documents should be fetched</param>
 		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector);
 		
 		/// <summary>
@@ -692,7 +617,6 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
-		/// <param name="getSelector">A descriptor that describes which document's source to fetch</param>
 		Task<T> SourceAsync<T>(Func<SourceDescriptor<T>, SourceDescriptor<T>> getSelector) 
 			where T : class;
 		
@@ -702,7 +626,6 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
-		/// <param name="getSelector">A descriptor that describes which document to fetch and how</param>
 		Task<IGetResponse<T>> GetAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) 
 			where T : class;
 		
@@ -718,15 +641,12 @@ namespace Nest
 		IIndicesOperationResponse Alias(Func<AliasDescriptor, AliasDescriptor> aliasSelector);
 		
 		/// <inheritdoc />
-		/// <param name="aliasSelector">A desriptor that describes the parameters for the alias operation</param>
 		IIndicesOperationResponse Alias(IAliasRequest aliasRequest);
 		
 		/// <inheritdoc />
-		/// <param name="aliasSelector">A desriptor that describes the parameters for the alias operation</param>
 		Task<IIndicesOperationResponse> AliasAsync(Func<AliasDescriptor, AliasDescriptor> aliasSelector);
 		
 		/// <inheritdoc />
-		/// <param name="aliasSelector">A desriptor that describes the parameters for the alias operation</param>
 		Task<IIndicesOperationResponse> AliasAsync(IAliasRequest aliasRequest);
 		
 		/// <summary>
@@ -738,7 +658,6 @@ namespace Nest
 		IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor);
 		
 		/// <inheritdoc />
-		/// <param name="getAliasesDescriptor">A descriptor that describes which aliases/indexes we are interested int</param>
 		Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor);
 		
 		/// <summary>
@@ -752,14 +671,7 @@ namespace Nest
 		IBulkResponse IndexMany<T>(IEnumerable<T> @objects, string index = null, string type = null) 
 			where T : class;
 		
-		/// <summary>
-		/// Shortcut into the <see cref="Bulk"/> call that indexes the specified objects
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
-		/// </summary>
-		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
-		/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
-		/// <param name="index">Override the inferred indexname for T</param>
-		/// <param name="type">Override the inferred typename for T</param>
+		/// <inheritdoc />
 		Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index = null, string type = null)
 			where T : class;
 		
@@ -773,7 +685,6 @@ namespace Nest
 		IShardsOperationResponse Optimize(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null);
 		
 		/// <inheritdoc />
-		/// <param name="optimizeSelector">An optional descriptor that further describes the optimize operation, i.e limit it to one index</param>
 		Task<IShardsOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null);
 		
 		/// <summary>
@@ -784,7 +695,6 @@ namespace Nest
 		IStatusResponse Status(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
 		
 		/// <inheritdoc />
-		/// <param name="selector">An optional descriptor that further describes the status operation, i.e limiting it to certain indices</param>
 		Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
 
         /// <summary>
@@ -797,7 +707,6 @@ namespace Nest
             where T : class;
 
 		/// <inheritdoc />
-        /// <param name="termVectorSelector"></param>
         Task<ITermVectorResponse> TermVectorAsync<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector) 
             where T : class;
 
@@ -811,7 +720,6 @@ namespace Nest
             where T : class;
 
 		/// <inheritdoc />
-        /// <param name="multiTermVectorsSelector">The descriptor describing the multi termvectors operation</param>
         Task<IMultiTermVectorResponse> MultiTermVectorsAsync<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
             where T : class;
 		
@@ -825,7 +733,6 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		/// <param name="selector">The suggesters to use this operation (can be multiple)</param>
 		Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, SuggestDescriptor<T>> selector)
 			where T : class;
 
@@ -837,7 +744,6 @@ namespace Nest
 		IEmptyResponse ClearScroll(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector);
 
 		/// <inheritdoc />
-		/// <param name="selector">Specify the scroll id as well as request specific configuration</param>
 		Task<IEmptyResponse> ClearScrollAsync(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector);
 
 		/// <summary>
@@ -850,7 +756,6 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		/// <param name="existsSelector">Describe what document we are looking for</param>
 		Task<IExistsResponse> DocumentExistsAsync<T>(Func<DocumentExistsDescriptor<T>, DocumentExistsDescriptor<T>> existsSelector)
 			where T : class;
 
@@ -863,7 +768,6 @@ namespace Nest
 		IAcknowledgedResponse CreateRepository(string repository, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
 
 		/// <inheritdoc />
-		/// <param name="selector">describe what the repository looks like</param>
 		Task<IAcknowledgedResponse> CreateRepositoryAsync(string repository, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
 
 		/// <summary>
@@ -875,7 +779,6 @@ namespace Nest
 		IAcknowledgedResponse DeleteRepository(string repository, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
 
 		/// <inheritdoc />
-		/// <param name="selector">Optionaly provide the delete operation with more details</param>>
 		Task<IAcknowledgedResponse> DeleteRepositoryAsync(string repository, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
 		
 		/// <summary>
@@ -888,7 +791,6 @@ namespace Nest
 		ISnapshotResponse Snapshot(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
 
 		/// <inheritdoc />
-		/// <param name="selector">Optionally provide more details about the snapshot operation</param>
 		Task<ISnapshotResponse> SnapshotAsync(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
 		
 		/// <summary>
@@ -901,7 +803,6 @@ namespace Nest
 		IAcknowledgedResponse DeleteSnapshot(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
 
 		/// <inheritdoc />
-		/// <param name="selector">Optionally further describe the delete snapshot operation</param>
 		Task<IAcknowledgedResponse> DeleteSnapshotAsync(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
 		
 		/// <summary>
@@ -914,7 +815,6 @@ namespace Nest
 		IGetSnapshotResponse GetSnapshot(string repository, string snapshotName, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
 
 		/// <inheritdoc />
-		/// <param name="selector">Optionally further describe the get snapshot operation</param>
 		Task<IGetSnapshotResponse> GetSnapshotAsync(string repository, string snapshotName, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
 		
 		/// <summary>
@@ -925,10 +825,15 @@ namespace Nest
 		/// <param name="snapshotName">The name of the snapshot that we want to restore</param>
 		/// <param name="selector">Optionally further describe the restore operation</param>
 		IRestoreResponse Restore(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
+		
+		/// <inheritdoc />
+		IRestoreResponse Restore(IRestoreRequest restoreRequest);
 
 		/// <inheritdoc />
-		/// <param name="selector">Optionally further describe the restore operation</param>
 		Task<IRestoreResponse> RestoreAsync(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IRestoreResponse> RestoreAsync(IRestoreRequest restoreRequest);
 
 		/// <summary>
 		/// Allows to update cluster wide specific settings. Settings updated can either be persistent 

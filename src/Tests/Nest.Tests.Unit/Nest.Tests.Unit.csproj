@@ -193,6 +193,7 @@
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\ConnectionSettingsTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="ObjectInitializer\InitializerExample.cs" />
     <Compile Include="QueryParsers\BaseParserTests.cs" />
     <Compile Include="QueryParsers\Filter\AndFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\BoolFilterTests.cs" />

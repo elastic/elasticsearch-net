@@ -34,6 +34,8 @@ namespace Nest
 	
 	public partial class RestoreRequest : RepositorySnapshotPathBase<RestoreRequestParameters>, IRestoreRequest
 	{
+		public RestoreRequest(string repository, string snapshot) : base(repository, snapshot) { }
+
 		public IEnumerable<IndexNameMarker> Indices { get; set; }
 		
 		public bool? IgnoreUnavailable { get; set; }
