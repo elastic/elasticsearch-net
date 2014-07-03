@@ -53,5 +53,6 @@ namespace Nest.Tests.MockData.Domain
 
 		public string MyBinaryField { get; set; }
 
+        public string[] MyStringArrayField { get; set; }
 	}
 }
