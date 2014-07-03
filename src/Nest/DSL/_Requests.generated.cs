@@ -4557,7 +4557,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotRequest<T> 
+	public partial class SnapshotRequest 
 			{
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -6085,32 +6085,6 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<string>("suggest_text"); } 
 			set { this.Request.RequestParameters.AddQueryString("suggest_text", value); }
-		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SnapshotCreate
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
-	///</pre>
-	///</summary>
-	public partial class SnapshotRequest 
-			{
-		
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
-		
-		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public bool WaitForCompletion 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("wait_for_completion"); } 
-			set { this.Request.RequestParameters.AddQueryString("wait_for_completion", value); }
 		}
 		
 	}
