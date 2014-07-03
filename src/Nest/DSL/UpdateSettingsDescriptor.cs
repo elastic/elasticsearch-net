@@ -10,6 +10,194 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+    public interface IUpdateSettingsRequest : IIndexOptionalPath<UpdateSettingsRequestParameters>
+    {
+		[JsonProperty("index.number_of_replicas")]
+		int? NumberOfReplicas { get; set; }
+
+		[JsonProperty("index.auto_expand_replicas")]
+		object AutoExpandReplicas { get; set; }
+
+		[JsonProperty("index.blocks.read_only")]
+		bool? BlocksReadOnly { get; set; }
+
+		[JsonProperty("index.blocks.read")]
+		bool?_BlocksRead { get; set; }
+
+		[JsonProperty("index.blocks.write")]
+		bool?_BlocksWrite { get; set; }
+
+		[JsonProperty("index.blocks.metadata")]
+		bool?_BlocksMetadata { get; set; }
+
+		[JsonProperty("index.refresh_interval")]
+		string RefreshInterval { get; set; }
+
+		[JsonProperty("index.index_concurrency")]
+		int? IndexConcurrency { get; set; }
+
+		[JsonProperty("index.codec")]
+		string Codec { get; set; }
+
+		[JsonProperty("index.codec.bloom.load")]
+		bool? CodecBloomLoad { get; set; }
+
+		[JsonProperty("index.fail_on_merge_failure")]
+		bool? FailOnMergeFailure { get; set; }
+
+		[JsonProperty("index.translog.flush_threshold_ops")]
+		string TranslogFlushTreshHoldOps { get; set; }
+
+		[JsonProperty("index.translog.flush_threshold_size")]
+		string TranslogFlushThresholdSize { get; set; }
+
+		[JsonProperty("index.translog.flush_threshold_period")]
+		string TranslogFlushThresholdPeriod { get; set; }
+
+		[JsonProperty("index.translog.disable_flush")]
+		bool? TranslogDisableFlush { get; set; }
+
+		[JsonProperty("index.cache.filter.max_size")]
+		string CacheFilterMaxSize { get; set; }
+
+		[JsonProperty("index.cache.filter.expire")]
+		string CacheFilterExpire { get; set; }
+
+		[JsonProperty("index.gateway.snapshot_interval")]
+		string GatewaySnapshotInterval { get; set; }
+
+		[JsonProperty("index.routing.allocation.include")]
+		IDictionary<string, object> RoutingAllocationInclude { get; set; }
+
+		[JsonProperty("index.routing.allocation.exclude")]
+		IDictionary<string, object> RoutingAllocationExclude { get; set; }
+
+		[JsonProperty("index.routing.allocation.require")]
+		IDictionary<string, object> RoutingAllocationRequire { get; set; }
+
+		[JsonProperty("index.routing.allocation.disable_allocation")]
+		bool? RoutingAllocationDisableAllication { get; set; }
+
+		[JsonProperty("index.routing.allocation.disable_new_allocation")]
+		bool? RoutingAllocationDisableNewAllocation { get; set; }
+
+		[JsonProperty("index.routing.allocation.disable_replica_allocation")]
+		bool? RoutingAllocationDisableReplicaAllocation { get; set; }
+
+		[JsonProperty("index.routing.allocation.total_shards_per_node")]
+		int? RoutingAllocationTotalShardsPerNode { get; set; }
+
+		[JsonProperty("index.recovery.initial_shards")]
+		string RecoveryInitialShards { get; set; }
+
+		[JsonProperty("index.gc_deletes")]
+		bool? GcDeletes { get; set; }
+		
+		[JsonProperty("index.ttl.disable_purge")]
+		bool? TtlDisablePurge { get; set; }
+		
+		[JsonProperty("index.translog.fs.type")]
+		string TranslogFsType { get; set; }
+
+		[JsonProperty("index.compound_format")]
+		bool? CompoundFormat { get; set; }
+
+		[JsonProperty("index.compound_on_flush")]
+		bool? CompoundOnFlush { get; set; }
+
+		[JsonProperty("index.warmer.enabled")]
+		bool? WarmersEnabled { get; set; }
+
+		[JsonProperty("analysis")]
+		AnalysisSettings Analysis { get; set; }
+    }
+
+    internal static class UpdateSettingsPathInfo
+    {
+        public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
+        {
+            pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
+        }
+    }
+
+    public partial class UpdateSettingsRequest : IndexOptionalPathBase<UpdateSettingsRequestParameters>, IUpdateSettingsRequest
+    {
+        public int? NumberOfReplicas { get; set; }
+
+        public object AutoExpandReplicas { get; set; }
+
+        public bool? BlocksReadOnly { get; set; }
+
+        public bool? _BlocksRead { get; set; }
+
+        public bool? _BlocksWrite { get; set; }
+
+        public bool? _BlocksMetadata { get; set; }
+
+        public string RefreshInterval { get; set; }
+
+        public int? IndexConcurrency { get; set; }
+
+        public string Codec { get; set; }
+
+        public bool? CodecBloomLoad { get; set; }
+
+        public bool? FailOnMergeFailure { get; set; }
+
+        public string TranslogFlushTreshHoldOps { get; set; }
+
+        public string TranslogFlushThresholdSize { get; set; }
+
+        public string TranslogFlushThresholdPeriod { get; set; }
+
+        public bool? TranslogDisableFlush { get; set; }
+
+        public string CacheFilterMaxSize { get; set; }
+
+        public string CacheFilterExpire { get; set; }
+
+        public string GatewaySnapshotInterval { get; set; }
+
+        public IDictionary<string, object> RoutingAllocationInclude { get; set; }
+
+        public IDictionary<string, object> RoutingAllocationExclude { get; set; }
+
+        public IDictionary<string, object> RoutingAllocationRequire { get; set; }
+
+        public bool? RoutingAllocationDisableAllication { get; set; }
+
+        public bool? RoutingAllocationDisableNewAllocation { get; set; }
+
+        public bool? RoutingAllocationDisableReplicaAllocation { get; set; }
+
+        public int? RoutingAllocationTotalShardsPerNode { get; set; }
+
+        public string RecoveryInitialShards { get; set; }
+
+        public bool? GcDeletes { get; set; }
+
+        public bool? TtlDisablePurge { get; set; }
+
+        public string TranslogFsType { get; set; }
+
+        public bool? CompoundFormat { get; set; }
+
+        public bool? CompoundOnFlush { get; set; }
+
+        public bool? WarmersEnabled { get; set; }
+
+        public AnalysisSettings Analysis { get; set; }
+
+        public IndexNameMarker Index { get; set; }
+
+        public bool? AllIndices { get; set; }
+
+        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
+        {
+            UpdateSettingsPathInfo.Update(settings, pathInfo);
+        }
+    }
+
 	[DescriptorFor("IndicesPutSettings")]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial class UpdateSettingsDescriptor : IndexOptionalPathDescriptorBase<UpdateSettingsDescriptor, UpdateSettingsRequestParameters>

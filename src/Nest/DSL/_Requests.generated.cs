@@ -3111,7 +3111,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-update-settings.html
 	///</pre>
 	///</summary>
-	public partial class UpdateSettingsRequest  : BasePathRequest<UpdateSettingsRequestParameters>
+	public partial class UpdateSettingsRequest 
 			{
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -3153,12 +3153,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -4297,7 +4291,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
 	///</pre>
 	///</summary>
-	public partial class SearchRequest 
+	public partial class SearchRequest<T> 
 			{
 		
 		///<summary>The analyzer to use for the query string</summary>
@@ -5883,6 +5877,160 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("stop_words"); } 
 			set { this.Request.RequestParameters.AddQueryString("stop_words", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for SearchGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
+	///</pre>
+	///</summary>
+	public partial class SearchRequest 
+			{
+		
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
+		}
+		
+		
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool AnalyzeWildcard 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
+		}
+		
+		
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator DefaultOperator 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
+			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
+		}
+		
+		
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
+			set { this.Request.RequestParameters.AddQueryString("df", value); }
+		}
+		
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
+			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
+		}
+		
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
+			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
+		}
+		
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
+			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
+		}
+		
+		
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool Lenient 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
+			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
+		}
+		
+		
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public bool LowercaseExpandedTerms 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
+			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
+		}
+		
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
+			set { this.Request.RequestParameters.AddQueryString("preference", value); }
+		}
+		
+		
+		///<summary>A comma-separated list of specific routing values</summary>
+		public  string[] Routing 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("routing"); } 
+			set { this.Request.RequestParameters.AddQueryString("routing", value); }
+		}
+		
+		
+		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
+		public string Scroll 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("scroll"); } 
+			set { this.Request.RequestParameters.AddQueryString("scroll", value); }
+		}
+		
+		
+		///<summary>Search operation type</summary>
+		public SearchType SearchType 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<SearchType>("search_type"); } 
+			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
+		}
+		
+		
+		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
+		public  string[] Stats 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("stats"); } 
+			set { this.Request.RequestParameters.AddQueryString("stats", value); }
+		}
+		
+		
+		///<summary>Specify which field to use for suggestions</summary>
+		public string SuggestField 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("suggest_field"); } 
+			set { this.Request.RequestParameters.AddQueryString("suggest_field", value); }
+		}
+		
+		
+		///<summary>Specify suggest mode</summary>
+		public SuggestMode SuggestMode 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<SuggestMode>("suggest_mode"); } 
+			set { this.Request.RequestParameters.AddQueryString("suggest_mode", value); }
+		}
+		
+		
+		///<summary>How many suggestions to return in response</summary>
+		public long SuggestSize 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<long>("suggest_size"); } 
+			set { this.Request.RequestParameters.AddQueryString("suggest_size", value); }
+		}
+		
+		
+		///<summary>The source text for which the suggestions should be returned</summary>
+		public string SuggestText 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("suggest_text"); } 
+			set { this.Request.RequestParameters.AddQueryString("suggest_text", value); }
 		}
 		
 	}
