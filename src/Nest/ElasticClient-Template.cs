@@ -43,9 +43,9 @@ namespace Nest
 		{
 			putTemplateSelector.ThrowIfNull("putTemplateSelector");
 			var descriptor = putTemplateSelector(new PutTemplateDescriptor(_connectionSettings).Name(name));
-			return this.Dispatch<PutTemplateDescriptor, PutTemplateRequestParameters, IndicesOperationResponse>(
+			return this.Dispatch<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse>(
 				descriptor,
-				(p, d) => this.RawDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>(p, d._TemplateMapping)
+				(p, d) => this.RawDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>(p, d.TemplateMapping)
 			);
 		}
 
@@ -55,10 +55,9 @@ namespace Nest
 		{
 			putTemplateSelector.ThrowIfNull("putTemplateSelector");
 			var descriptor = putTemplateSelector(new PutTemplateDescriptor(_connectionSettings).Name(name));
-			return this.DispatchAsync
-				<PutTemplateDescriptor, PutTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+			return this.DispatchAsync<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					descriptor,
-					(p, d) => this.RawDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>(p, d._TemplateMapping)
+					(p, d) => this.RawDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>(p, d.TemplateMapping)
 				);
 		}
 

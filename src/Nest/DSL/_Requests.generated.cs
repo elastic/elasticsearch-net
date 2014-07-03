@@ -2889,7 +2889,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
 	///</pre>
 	///</summary>
-	public partial class OpenIndexRequest  : BasePathRequest<OpenIndexRequestParameters>
+	public partial class OpenIndexRequest 
 			{
 		
 		///<summary>Explicit operation timeout</summary>
@@ -2931,12 +2931,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<OpenIndexRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -2945,7 +2939,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-optimize.html
 	///</pre>
 	///</summary>
-	public partial class OptimizeRequest  : BasePathRequest<OptimizeRequestParameters>
+	public partial class OptimizeRequest 
 			{
 		
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
@@ -3019,12 +3013,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("force", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<OptimizeRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -3179,7 +3167,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
-	public partial class PutTemplateRequest  : BasePathRequest<PutTemplateRequestParameters>
+	public partial class PutTemplateRequest 
 			{
 		
 		///<summary>Explicit operation timeout</summary>
@@ -3205,12 +3193,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -3219,7 +3201,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
 	///</pre>
 	///</summary>
-	public partial class PutWarmerRequest  : BasePathRequest<PutWarmerRequestParameters>
+	public partial class PutWarmerRequest 
 			{
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -3253,12 +3235,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutWarmerRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -4095,7 +4071,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html
 	///</pre>
 	///</summary>
-	public partial class NodesInfoRequest  : BasePathRequest<NodesInfoRequestParameters>
+	public partial class NodesInfoRequest 
 			{
 		
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -4113,12 +4089,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("human", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesInfoRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -4159,7 +4129,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html
 	///</pre>
 	///</summary>
-	public partial class NodesStatsRequest  : BasePathRequest<NodesStatsRequestParameters>
+	public partial class NodesStatsRequest 
 			{
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
@@ -4217,12 +4187,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("types", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesStatsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		

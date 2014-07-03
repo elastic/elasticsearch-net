@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	//TODO OIS Version
+
 	public partial class PercolateDescriptor<T,K> : IndexTypePathDescriptor<PercolateDescriptor<T, K>, PercolateRequestParameters, T> 
 		where T : class
 		where K : class

@@ -6,16 +6,16 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface INodeOptionalPath<TParameters> : IRequest<TParameters>
+	public interface INodeIdOptionalPath<TParameters> : IRequest<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
 		string NodeId { get; set; }
 	}
 
-	internal static class NodeOptionalPathRouteParameters
+	internal static class NodeIdOptionalPathRouteParameters
 	{
 		public static void SetRouteParameters<TParameters>(
-			INodeOptionalPath<TParameters> path,
+			INodeIdOptionalPath<TParameters> path,
 			IConnectionSettingsValues settings, 
 			ElasticsearchPathInfo<TParameters> pathInfo)
 			where TParameters : IRequestParameters, new()
@@ -25,13 +25,13 @@ namespace Nest
 	
 	}
 
-	public abstract class NodeOptionalPathBase<TParameters> : BasePathRequest<TParameters>, INodeOptionalPath<TParameters>
+	public abstract class NodeIdOptionalPathBase<TParameters> : BasePathRequest<TParameters>, INodeIdOptionalPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
 		
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{	
-			NodeOptionalPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
+			NodeIdOptionalPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 		public string NodeId { get; set; }
@@ -45,12 +45,12 @@ namespace Nest
 	/// node id is optional
 	/// </summary>
 	public abstract class NodeIdOptionalDescriptor<TDescriptor, TParameters>
-		: BasePathDescriptor<TDescriptor, TParameters>, INodeOptionalPath<TParameters>
+		: BasePathDescriptor<TDescriptor, TParameters>, INodeIdOptionalPath<TParameters>
 		where TDescriptor : NodeIdOptionalDescriptor<TDescriptor, TParameters> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-		private INodeOptionalPath<TParameters> Self { get { return this; } }
-		string INodeOptionalPath<TParameters>.NodeId { get; set; }
+		private INodeIdOptionalPath<TParameters> Self { get { return this; } }
+		string INodeIdOptionalPath<TParameters>.NodeId { get; set; }
 
 		/// <summary>
 		/// Specify the {name} part of the operation
@@ -63,7 +63,7 @@ namespace Nest
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			NodeOptionalPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
+			NodeIdOptionalPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 	}
