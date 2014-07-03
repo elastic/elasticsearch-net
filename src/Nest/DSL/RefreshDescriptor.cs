@@ -1,23 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
+using Newtonsoft.Json;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesRefresh")]
-	public partial class RefreshDescriptor : IndicesOptionalPathDescriptor<RefreshDescriptor, RefreshRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IRefreshRequest : IIndicesOptionalPath<RefreshRequestParameters> { }
+
+	internal static class RefreshPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<RefreshRequestParameters> pathInfo, IRefreshRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class RefreshRequest : IndicesOptionalPathBase<RefreshRequestParameters>, IRefreshRequest
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<RefreshRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			RefreshPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("IndicesRefresh")]
+	public partial class RefreshDescriptor : IndicesOptionalPathDescriptor<RefreshDescriptor, RefreshRequestParameters>, IRefreshRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<RefreshRequestParameters> pathInfo)
+		{
+			RefreshPathInfo.Update(pathInfo, this);
 		}
 	}
 }

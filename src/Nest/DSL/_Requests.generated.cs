@@ -3283,7 +3283,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html
 	///</pre>
 	///</summary>
-	public partial class RefreshRequest  : BasePathRequest<RefreshRequestParameters>
+	public partial class RefreshRequest 
 			{
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3325,12 +3325,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("operation_threading", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<RefreshRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -4751,7 +4745,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class RestoreRequest  : BasePathRequest<RestoreRequestParameters>
+	public partial class RestoreRequest 
 			{
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -4769,12 +4763,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("wait_for_completion", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<RestoreRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		

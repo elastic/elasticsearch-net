@@ -8,19 +8,59 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[DescriptorFor("SnapshotRestore")]
-	public partial class RestoreDescriptor : RepositorySnapshotPathDescriptor<RestoreDescriptor, RestoreRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IRestoreRequest : IRepositorySnapshotPath<RestoreRequestParameters>
 	{
 		[JsonProperty("indices")]
-		internal IEnumerable<IndexNameMarker> _Indices { get; set; }
+		IEnumerable<IndexNameMarker> Indices { get; set; }
 		[JsonProperty("ignore_unavailable")]
-		internal bool? _IgnoreUnavailable { get; set; }
+		bool? IgnoreUnavailable { get; set; }
 		[JsonProperty("include_global_state")]
-		internal bool? _IncludeGlobalState { get; set; }
+		bool? IncludeGlobalState { get; set; }
 		[JsonProperty("rename_pattern")]
-		internal string _RenamePattern { get; set; }
+		string RenamePattern { get; set; }
 		[JsonProperty("rename_replacement")]
-		internal string _RenameReplacement { get; set; }
+		string RenameReplacement { get; set; }
+		
+	}
+
+	internal static class RestorePathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<RestoreRequestParameters> pathInfo, IRestoreRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class RestoreRequest : RepositorySnapshotPathBase<RestoreRequestParameters>, IRestoreRequest
+	{
+		public IEnumerable<IndexNameMarker> Indices { get; set; }
+		
+		public bool? IgnoreUnavailable { get; set; }
+		
+		public bool? IncludeGlobalState { get; set; }
+		
+		public string RenamePattern { get; set; }
+		
+		public string RenameReplacement { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<RestoreRequestParameters> pathInfo)
+		{
+			RestorePathInfo.Update(pathInfo, this);
+		}
+
+	}
+
+	[DescriptorFor("SnapshotRestore")]
+	public partial class RestoreDescriptor : RepositorySnapshotPathDescriptor<RestoreDescriptor, RestoreRequestParameters>, IRestoreRequest
+	{
+		private IRestoreRequest Self { get { return this; } }
+
+		IEnumerable<IndexNameMarker> IRestoreRequest.Indices { get; set; }
+		bool? IRestoreRequest.IgnoreUnavailable { get; set; }
+		bool? IRestoreRequest.IncludeGlobalState { get; set; }
+		string IRestoreRequest.RenamePattern { get; set; }
+		string IRestoreRequest.RenameReplacement { get; set; }
 		
 		public RestoreDescriptor Index(string index)
 		{
@@ -34,39 +74,39 @@ namespace Nest
 			
 		public RestoreDescriptor Indices(params string[] indices)
 		{
-			this._Indices = indices.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indices.Select(s=>(IndexNameMarker)s);
 			return this;
 		}
 
 		public RestoreDescriptor Indices(params Type[] indicesTypes)
 		{
-			this._Indices = indicesTypes.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indicesTypes.Select(s=>(IndexNameMarker)s);
 			return this;
 		}
 		public RestoreDescriptor IgnoreUnavailable(bool ignoreUnavailable = true)
 		{
-			this._IgnoreUnavailable = ignoreUnavailable;
+			Self.IgnoreUnavailable = ignoreUnavailable;
 			return this;
 		}
 		public RestoreDescriptor IncludeGlobalstate(bool includeGlobalState = true)
 		{
-			this._IncludeGlobalState = includeGlobalState;
+			Self.IncludeGlobalState = includeGlobalState;
 			return this;
 		}
 		public RestoreDescriptor RenamePattern(string renamePattern)
 		{
-			this._RenamePattern = renamePattern;
+			Self.RenamePattern = renamePattern;
 			return this;
 		}
 		public RestoreDescriptor RenameReplacement(string renameReplacement)
 		{
-			this._RenameReplacement = renameReplacement;
+			Self.RenameReplacement = renameReplacement;
 			return this;
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<RestoreRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			RestorePathInfo.Update(pathInfo, this);
 		}
 
 	}
