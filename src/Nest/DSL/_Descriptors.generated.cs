@@ -1340,13 +1340,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
-	public partial class PercolateCountDescriptor<T,K> 
+	public partial class PercolateCountDescriptor<T> 
 	{
 		
 	
 
 		///<summary>A comma-separated list of specific routing values</summary>
-		public PercolateCountDescriptor<T,K> Routing(params string[] routing)
+		public PercolateCountDescriptor<T> Routing(params string[] routing)
 		{
 			this.Request.RequestParameters.Routing(routing);
 			return this;
@@ -1354,7 +1354,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public PercolateCountDescriptor<T,K> Preference(string preference)
+		public PercolateCountDescriptor<T> Preference(string preference)
 		{
 			this.Request.RequestParameters.Preference(preference);
 			return this;
@@ -1362,7 +1362,7 @@ namespace Nest
 		
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PercolateCountDescriptor<T,K> IgnoreUnavailable(bool ignore_unavailable = true)
+		public PercolateCountDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -1370,7 +1370,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PercolateCountDescriptor<T,K> AllowNoIndices(bool allow_no_indices = true)
+		public PercolateCountDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -1378,7 +1378,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateCountDescriptor<T,K> ExpandWildcards(ExpandWildcards expand_wildcards)
+		public PercolateCountDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -1386,7 +1386,7 @@ namespace Nest
 		
 
 		///<summary>The index to count percolate the document into. Defaults to index.</summary>
-		public PercolateCountDescriptor<T,K> PercolateIndex(string percolate_index)
+		public PercolateCountDescriptor<T> PercolateIndex(string percolate_index)
 		{
 			this.Request.RequestParameters.PercolateIndex(percolate_index);
 			return this;
@@ -1394,7 +1394,7 @@ namespace Nest
 		
 
 		///<summary>The type to count percolate document into. Defaults to type.</summary>
-		public PercolateCountDescriptor<T,K> PercolateType(string percolate_type)
+		public PercolateCountDescriptor<T> PercolateType(string percolate_type)
 		{
 			this.Request.RequestParameters.PercolateType(percolate_type);
 			return this;
@@ -1402,7 +1402,7 @@ namespace Nest
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateCountDescriptor<T,K> Version(long version)
+		public PercolateCountDescriptor<T> Version(long version)
 		{
 			this.Request.RequestParameters.Version(version);
 			return this;
@@ -1410,7 +1410,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public PercolateCountDescriptor<T,K> VersionType(VersionType version_type)
+		public PercolateCountDescriptor<T> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;
@@ -4621,13 +4621,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
-	public partial class PercolateDescriptor<T,K> 
+	public partial class PercolateDescriptor<T> 
 	{
 		
 	
 
 		///<summary>A comma-separated list of specific routing values</summary>
-		public PercolateDescriptor<T,K> Routing(params string[] routing)
+		public PercolateDescriptor<T> Routing(params string[] routing)
 		{
 			this.Request.RequestParameters.Routing(routing);
 			return this;
@@ -4635,7 +4635,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public PercolateDescriptor<T,K> Preference(string preference)
+		public PercolateDescriptor<T> Preference(string preference)
 		{
 			this.Request.RequestParameters.Preference(preference);
 			return this;
@@ -4643,7 +4643,7 @@ namespace Nest
 		
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PercolateDescriptor<T,K> IgnoreUnavailable(bool ignore_unavailable = true)
+		public PercolateDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -4651,7 +4651,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PercolateDescriptor<T,K> AllowNoIndices(bool allow_no_indices = true)
+		public PercolateDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -4659,7 +4659,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateDescriptor<T,K> ExpandWildcards(ExpandWildcards expand_wildcards)
+		public PercolateDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -4667,7 +4667,7 @@ namespace Nest
 		
 
 		///<summary>The index to percolate the document into. Defaults to index.</summary>
-		public PercolateDescriptor<T,K> PercolateIndex(string percolate_index)
+		public PercolateDescriptor<T> PercolateIndex(string percolate_index)
 		{
 			this.Request.RequestParameters.PercolateIndex(percolate_index);
 			return this;
@@ -4675,7 +4675,7 @@ namespace Nest
 		
 
 		///<summary>The type to percolate document into. Defaults to type.</summary>
-		public PercolateDescriptor<T,K> PercolateType(string percolate_type)
+		public PercolateDescriptor<T> PercolateType(string percolate_type)
 		{
 			this.Request.RequestParameters.PercolateType(percolate_type);
 			return this;
@@ -4683,7 +4683,7 @@ namespace Nest
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateDescriptor<T,K> Version(long version)
+		public PercolateDescriptor<T> Version(long version)
 		{
 			this.Request.RequestParameters.Version(version);
 			return this;
@@ -4691,7 +4691,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public PercolateDescriptor<T,K> VersionType(VersionType version_type)
+		public PercolateDescriptor<T> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;

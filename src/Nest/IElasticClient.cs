@@ -421,7 +421,7 @@ namespace Nest
 		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
 		/// <param name="object">The object to percolator</param>
 		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
-		IPercolateResponse Percolate<T>(T @object, Func<PercolateDescriptor<T, T>, PercolateDescriptor<T, T>> percolateSelector = null)
+		IPercolateResponse Percolate<T>(T @object, Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector = null)
 			where T : class;
 
 		/// <summary>
@@ -431,41 +431,17 @@ namespace Nest
 		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
 		/// <param name="object">The object to percolator</param>
 		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
-		Task<IPercolateResponse> PercolateAsync<T>(T @object, Func<PercolateDescriptor<T, T>, PercolateDescriptor<T, T>> percolateSelector = null) 
+		Task<IPercolateResponse> PercolateAsync<T>(T @object, Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector = null) 
 			where T : class;
 		
 		/// <summary>
-		/// Percolate a document
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
-		/// </summary>
-		/// <typeparam name="T">The type to infer the index/type from</typeparam>
-		/// <typeparam name="K">The type of the object that is being percolated</typeparam>
-		/// <param name="object">The object to percolator</param>
-		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
-		IPercolateResponse Percolate<T, K>(K @object, Func<PercolateDescriptor<T, K>, PercolateDescriptor<T, K>> percolateSelector = null) 
-			where T : class 
-			where K : class;
-		
-		/// <summary>
-		/// Percolate a document
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
-		/// </summary>
-		/// <typeparam name="T">The type to infer the index/type from</typeparam>
-		/// <typeparam name="K">The type of the object that is being percolated</typeparam>
-		/// <param name="object">The object to percolator</param>
-		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
-		Task<IPercolateResponse> PercolateAsync<T, K>(K @object, Func<PercolateDescriptor<T, K>, PercolateDescriptor<T, K>> percolateSelector = null) 
-			where T : class 
-			where K : class;
-
-		/// <summary>
 		/// Percolate a document but only return the number of matches not the matches itself
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
 		/// </summary>
 		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
 		/// <param name="object">The object to percolator</param>
 		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
-		IPercolateCountResponse PercolateCount<T>(T @object, Func<PercolateCountDescriptor<T, T>, PercolateCountDescriptor<T, T>> percolateSelector = null)
+		IPercolateCountResponse PercolateCount<T>(T @object, Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
 			where T : class;
 
 		/// <summary>
@@ -475,32 +451,8 @@ namespace Nest
 		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
 		/// <param name="object">The object to percolator</param>
 		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
-		Task<IPercolateCountResponse> PercolateCountAsync<T>(T @object, Func<PercolateCountDescriptor<T, T>, PercolateCountDescriptor<T, T>> percolateSelector = null)
+		Task<IPercolateCountResponse> PercolateCountAsync<T>(T @object, Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
 			where T : class;
-
-		/// <summary>
-		/// Percolate a document but only return the number of matches not the matches itself
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
-		/// </summary>
-		/// <typeparam name="T">The type to infer the index/type from</typeparam>
-		/// <typeparam name="K">The type of the object that is being percolated</typeparam>
-		/// <param name="object">The object to percolator</param>
-		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
-		IPercolateCountResponse PercolateCount<T, K>(K @object, Func<PercolateCountDescriptor<T, K>, PercolateCountDescriptor<T, K>> percolateSelector = null)
-			where T : class
-			where K : class;
-
-		/// <summary>
-		/// Percolate a document but only return the number of matches not the matches itself
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
-		/// </summary>
-		/// <typeparam name="T">The type to infer the index/type from</typeparam>
-		/// <typeparam name="K">The type of the object that is being percolated</typeparam>
-		/// <param name="object">The object to percolator</param>
-		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
-		Task<IPercolateCountResponse> PercolateCountAsync<T, K>(K @object, Func<PercolateCountDescriptor<T, K>, PercolateCountDescriptor<T, K>> percolateSelector = null)
-			where T : class
-			where K : class;
 
 		/// <summary>
 		/// The put mapping API allows to register specific mapping definition for a specific type.
