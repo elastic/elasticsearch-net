@@ -901,14 +901,8 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
 	///</pre>
 	///</summary>
-	public partial class ClearScrollRequest  : BasePathRequest<ClearScrollRequestParameters>
+	public partial class ClearScrollRequest 
 			{
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClearScrollRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -1131,7 +1125,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html
 	///</pre>
 	///</summary>
-	public partial class ClusterStateRequest  : BasePathRequest<ClusterStateRequestParameters>
+	public partial class ClusterStateRequest 
 			{
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -1157,12 +1151,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterStateRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -2203,7 +2191,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
 	///</pre>
 	///</summary>
-	public partial class CloseIndexRequest  : BasePathRequest<CloseIndexRequestParameters>
+	public partial class CloseIndexRequest 
 			{
 		
 		///<summary>Explicit operation timeout</summary>
@@ -2245,12 +2233,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CloseIndexRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -2259,7 +2241,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-create-index.html
 	///</pre>
 	///</summary>
-	public partial class CreateIndexRequest  : BasePathRequest<CreateIndexRequestParameters>
+	public partial class CreateIndexRequest 
 			{
 		
 		///<summary>Explicit operation timeout</summary>
@@ -2277,12 +2259,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -4753,7 +4729,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class CreateRepositoryRequest  : BasePathRequest<CreateRepositoryRequestParameters>
+	public partial class CreateRepositoryRequest 
 			{
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -4771,12 +4747,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateRepositoryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -5105,7 +5075,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html
 	///</pre>
 	///</summary>
-	public partial class UpdateRequest<TUpsert,TDocument> 
+	public partial class UpdateRequest 
 			{
 		
 		///<summary>Explicit write consistency setting for the operation</summary>

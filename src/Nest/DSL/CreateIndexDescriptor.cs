@@ -3,20 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesCreate")]
-	public partial class CreateIndexDescriptor : IndexPathDescriptorBase<CreateIndexDescriptor, CreateIndexRequestParameters>
-	{
-		internal IndexSettings _IndexSettings = new IndexSettings();
-		private IConnectionSettingsValues _connectionSettings;
 
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters>
+	{
+		IndexSettings IndexSettings { get; set; }
+	}
+
+	internal static class CreateIndexPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo, ICreateIndexRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class CreateIndexRequest : IndexPathBase<CreateIndexRequestParameters>, ICreateIndexRequest
+	{
+		public IndexSettings IndexSettings { get; set; }
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
+		{
+			CreateIndexPathInfo.Update(pathInfo, this);
+		}
+
+	}
+
+	[DescriptorFor("IndicesCreate")]
+	public partial class CreateIndexDescriptor : IndexPathDescriptorBase<CreateIndexDescriptor, CreateIndexRequestParameters>, ICreateIndexRequest
+	{
+		private readonly IConnectionSettingsValues _connectionSettings;
+		private IndexSettings _indexSettings = new IndexSettings();
+
+		IndexSettings ICreateIndexRequest.IndexSettings
+		{
+			get { return _indexSettings; }
+			set { _indexSettings = value; }
+		}
 
 		public CreateIndexDescriptor(IConnectionSettingsValues connectionSettings)
 		{
@@ -28,7 +55,7 @@ namespace Nest
 		/// </summary>
 		public CreateIndexDescriptor InitializeUsing(IndexSettings indexSettings)
 		{
-			this._IndexSettings = indexSettings;
+			this._indexSettings = indexSettings;
 			return this;
 		}
 
@@ -39,7 +66,7 @@ namespace Nest
 		/// <returns></returns>
 		public CreateIndexDescriptor NumberOfShards(int shards)
 		{
-			this._IndexSettings.NumberOfShards = shards;
+			this._indexSettings.NumberOfShards = shards;
 			return this;
 		}
 
@@ -50,7 +77,7 @@ namespace Nest
 		/// <returns></returns>
 		public CreateIndexDescriptor NumberOfReplicas(int replicas)
 		{
-			this._IndexSettings.NumberOfReplicas = replicas;
+			this._indexSettings.NumberOfReplicas = replicas;
 			return this;
 		}
 
@@ -64,7 +91,7 @@ namespace Nest
 			settingsSelector(dict);
 			foreach (var kv in dict)
 			{
-				this._IndexSettings.Settings.Add(kv.Key, kv.Value);
+				this._indexSettings.Settings.Add(kv.Key, kv.Value);
 			}
 			return this;
 		}
@@ -96,10 +123,10 @@ namespace Nest
 			addAliasSelector = addAliasSelector ?? (a => a);
 			var alias = addAliasSelector(new CreateAliasDescriptor());
 
-			if (this._IndexSettings.Aliases == null)
-				this._IndexSettings.Aliases = new Dictionary<string, CreateAliasDescriptor>();
+			if (this._indexSettings.Aliases == null)
+				this._indexSettings.Aliases = new Dictionary<string, CreateAliasDescriptor>();
 
-			this._IndexSettings.Aliases.Add(aliasName, alias);
+			this._indexSettings.Aliases.Add(aliasName, alias);
 
 			return this;
 		}
@@ -107,7 +134,7 @@ namespace Nest
 
 		private CreateIndexDescriptor RemoveMapping(TypeNameMarker marker)
 		{
-			this._IndexSettings.Mappings = this._IndexSettings.Mappings.Where(m => m.Type != marker).ToList();
+			this._indexSettings.Mappings = this._indexSettings.Mappings.Where(m => m.Type != marker).ToList();
 			return this;
 		}
 
@@ -130,7 +157,7 @@ namespace Nest
 				typeMapping.Name = typeof(T);
 			}
 
-			this._IndexSettings.Mappings.Add(typeMapping);
+			this._indexSettings.Mappings.Add(typeMapping);
 
 			return this;
 		}
@@ -160,7 +187,7 @@ namespace Nest
 				typeMapping.Name = typeof (T);
 			}
 
-			this._IndexSettings.Mappings.Add(typeMapping);
+			this._indexSettings.Mappings.Add(typeMapping);
 
 			return this;
 		}
@@ -171,14 +198,14 @@ namespace Nest
 			var descriptor = warmerSelector(new CreateWarmerDescriptor());
 
 			var mapping = new WarmerMapping { Name = descriptor._WarmerName, Types = descriptor._Types, Source = descriptor._SearchDescriptor };
-			this._IndexSettings.Warmers.Add(descriptor._WarmerName, mapping);
+			this._indexSettings.Warmers.Add(descriptor._WarmerName, mapping);
 
 			return this;
 		}
 
 		public CreateIndexDescriptor DeleteWarmer(string warmerName)
 		{
-			this._IndexSettings.Warmers.Remove(warmerName);
+			this._indexSettings.Warmers.Remove(warmerName);
 			return this;
 		}
 
@@ -188,15 +215,15 @@ namespace Nest
 		public CreateIndexDescriptor Analysis(Func<AnalysisDescriptor, AnalysisDescriptor> analysisSelector)
 		{
 			analysisSelector.ThrowIfNull("analysisSelector");
-			var analysis = analysisSelector(new AnalysisDescriptor(this._IndexSettings.Analysis));
-			this._IndexSettings.Analysis = analysis == null ? null : analysis._AnalysisSettings;
+			var analysis = analysisSelector(new AnalysisDescriptor(this._indexSettings.Analysis));
+			this._indexSettings.Analysis = analysis == null ? null : analysis._AnalysisSettings;
 			return this;
 		}
 
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			CreateIndexPathInfo.Update(pathInfo, this);
 		}
 
 	}

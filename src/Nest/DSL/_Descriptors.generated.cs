@@ -2546,13 +2546,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-mapping.html
 	///</pre>
 	///</summary>
-	public partial class DeleteMappingDescriptor 
+	public partial class DeleteMappingDescriptor<T> 
 	{
 		
 	
 
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteMappingDescriptor MasterTimeout(string master_timeout)
+		public DeleteMappingDescriptor<T> MasterTimeout(string master_timeout)
 		{
 			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
@@ -2983,13 +2983,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
 	///</pre>
 	///</summary>
-	public partial class GetMappingDescriptor 
+	public partial class GetMappingDescriptor<T> 
 	{
 		
 	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetMappingDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public GetMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -2997,7 +2997,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetMappingDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public GetMappingDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -3005,7 +3005,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetMappingDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3013,7 +3013,7 @@ namespace Nest
 		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetMappingDescriptor Local(bool local = true)
+		public GetMappingDescriptor<T> Local(bool local = true)
 		{
 			this.Request.RequestParameters.Local(local);
 			return this;

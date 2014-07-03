@@ -6,18 +6,18 @@ using Nest.Resolvers.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICountRequest<T> : IRequest<CountRequestParameters>
-		where T : class
+	public interface ICountRequest : IRequest<CountRequestParameters>
 	{
 		
 		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }
 	}
+	public interface ICountRequest<T> : ICountRequest
+		where T : class {}
 
 	internal static class CountPathInfo
 	{
-		public static void Update<T>(ElasticsearchPathInfo<CountRequestParameters> pathInfo, ICountRequest<T> request)
-			where T : class
+		public static void Update(ElasticsearchPathInfo<CountRequestParameters> pathInfo, ICountRequest request)
 		{
 			var source = request.RequestParameters.GetQueryStringValue<string>("source");
 			pathInfo.HttpMethod = !source.IsNullOrEmpty() 
@@ -28,7 +28,17 @@ namespace Nest
 		}
 	}
 	
-	public partial class CountRequest<T> : QueryPathBase<CountRequestParameters, T>, ICountRequest<T>
+	public partial class CountRequest : QueryPathBase<CountRequestParameters>, ICountRequest
+	{
+		public IQueryContainer Query { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
+		{
+			CountPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	public partial class CountRequest<T> : QueryPathBase<CountRequestParameters, T>, ICountRequest
 		where T : class
 	{
 		public IQueryContainer Query { get; set; }
@@ -40,12 +50,12 @@ namespace Nest
 	}
 	
 	[DescriptorFor("Count")]
-	public partial class CountDescriptor<T> : QueryPathDescriptorBase<CountDescriptor<T>, T, CountRequestParameters>, ICountRequest<T>
+	public partial class CountDescriptor<T> : QueryPathDescriptorBase<CountDescriptor<T>, T, CountRequestParameters>, ICountRequest
 		where T : class
 	{
-		private ICountRequest<T> Self { get { return this; } }
+		private ICountRequest Self { get { return this; } }
 
-		IQueryContainer ICountRequest<T>.Query { get; set; }
+		IQueryContainer ICountRequest.Query { get; set; }
 
 		public CountDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
