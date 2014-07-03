@@ -19,7 +19,7 @@ namespace Nest.Resolvers.Converters
 			public KeyValuePair<string, ISearchRequest> Descriptor { get; set; }
 		}
 
-		private readonly MultiSearchDescriptor _descriptor;
+		private readonly IMultiSearchRequest _request;
 
 		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiSearchConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
 		private readonly IConnectionSettingsValues _settings;
@@ -29,10 +29,10 @@ namespace Nest.Resolvers.Converters
 			
 		}
 
-		public MultiSearchConverter(IConnectionSettingsValues settings, MultiSearchDescriptor descriptor)
+		public MultiSearchConverter(IConnectionSettingsValues settings, IMultiSearchRequest request)
 		{
 			this._settings = settings;
-			_descriptor = descriptor;
+			_request = request;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -89,17 +89,17 @@ namespace Nest.Resolvers.Converters
 			var docsJarray = (JArray)jsonObject["responses"];
 			if (docsJarray == null)
 				return response;
-			var multiSearchDescriptor = this._descriptor;
-			if (this._descriptor == null)
+			var multiSearchDescriptor = this._request;
+			if (this._request == null)
 				return multiSearchDescriptor;
 
-			var withMeta = docsJarray.Zip(this._descriptor._Operations, (doc, desc) => new MultiHitTuple { Hit = doc, Descriptor = desc });
+			var withMeta = docsJarray.Zip(this._request.Operations, (doc, desc) => new MultiHitTuple { Hit = doc, Descriptor = desc });
 			var originalResolver = serializer.ContractResolver;
 			foreach (var m in withMeta)
 			{
 				var descriptor = m.Descriptor.Value;
 				var concreteTypeSelector = descriptor.TypeSelector;
-				var baseType = m.Descriptor.Value._ClrType;
+				var baseType = m.Descriptor.Value.ClrType;
 				
 				var generic = MakeDelegateMethodInfo.MakeGenericMethod(baseType);
 

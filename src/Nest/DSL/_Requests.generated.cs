@@ -3899,7 +3899,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-multi-search.html
 	///</pre>
 	///</summary>
-	public partial class MultiSearchRequest  : BasePathRequest<MultiSearchRequestParameters>
+	public partial class MultiSearchRequest 
 			{
 		
 		///<summary>Search operation type</summary>
@@ -3909,12 +3909,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiSearchRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		

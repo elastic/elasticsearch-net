@@ -18,7 +18,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ISearchRequest : IQueryPath<SearchRequestParameters>
 	{
-		Type _ClrType { get; }
+		Type ClrType { get; }
 
 		[JsonProperty(PropertyName = "timeout")]
 		string Timeout { get; set; }
@@ -93,13 +93,37 @@ namespace Nest
 		Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set;}
 		
 		SearchRequestParameters QueryString { get; set; }
-
 	}
 
 	public interface ISearchRequest<T> : ISearchRequest {}
 
 	internal static class SearchPathInfo
 	{
+		/// <summary>
+		/// Based on the type information present in this descriptor create method that takes
+		/// the returned _source and hit and returns the ClrType it should deserialize too.
+		/// This is so that Documents[A] can contain actual instances of subclasses B, C as well.
+		/// If you specify types using .Types(typeof(B), typeof(C)) then NEST can automagically
+		/// create a TypeSelector based on the hits _type property.
+		/// </summary>
+		public static void CloseOverAutomagicCovariantResultSelector(ElasticInferrer infer, ISearchRequest self)
+		{
+			if (infer == null || self == null) return;
+			var returnType = self.ClrType;
+
+			if (returnType == null) return;
+
+			var types = (self.Types ?? Enumerable.Empty<TypeNameMarker>()).Where(t => t.Type != null).ToList();
+			if (self.TypeSelector != null || !types.HasAny(t => t.Type != returnType))
+				return;
+			
+			var typeDictionary = types.ToDictionary(infer.TypeName, t => t.Type);
+			self.TypeSelector = (o, h) =>
+			{
+				Type t;
+				return !typeDictionary.TryGetValue(h.Type, out t) ? returnType : t;
+			};
+		}
 		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo, ISearchRequest request)
 		{
 			pathInfo.HttpMethod = request.RequestParameters.ContainsKey("source") ? PathInfoHttpMethod.GET : PathInfoHttpMethod.POST;
@@ -112,7 +136,7 @@ namespace Nest
 		public string Type { get; set; }
 
 		protected internal Type _clrType { get; set; }
-		Type ISearchRequest._ClrType { get { return _clrType; } }
+		Type ISearchRequest.ClrType { get { return _clrType; } }
 
 		public string Timeout { get; set; }
 		public int? From { get; set; }
@@ -173,7 +197,7 @@ namespace Nest
 			SearchPathInfo.Update(settings,pathInfo, this);
 		}
 
-		public Type _ClrType { get; private set; }
+		public Type ClrType { get { return typeof(T);  } }
 		public string Timeout { get; set; }
 		public int? From { get; set; }
 		public int? Size { get; set; }
@@ -236,7 +260,7 @@ namespace Nest
 			}
 		}
 
-		Type ISearchRequest._ClrType { get { return typeof(T); } }
+		Type ISearchRequest.ClrType { get { return typeof(T); } }
 
 		/// <summary>
 		/// Whether conditionless queries are allowed or not
@@ -1220,30 +1244,7 @@ namespace Nest
 			return this;
 		}
 
-		/// <summary>
-		/// Based on the type information present in this descriptor create method that takes
-		/// the returned _source and hit and returns the ClrType it should deserialize too.
-		/// This is so that Documents[A] can contain actual instances of subclasses B, C as well.
-		/// If you specify types using .Types(typeof(B), typeof(C)) then NEST can automagically
-		/// create a TypeSelector based on the hits _type property.
-		/// </summary>
-		/// <param name="infer"></param>
-		/// <returns></returns>
-		internal Func<dynamic, Hit<dynamic>, Type> CreateCovarianceSelector<TResult>(ElasticInferrer infer)
-			where TResult : class
-		{
-			var types = (Self.Types ?? Enumerable.Empty<TypeNameMarker>()).Where(t => t.Type != null).ToList();
-			if (Self.TypeSelector != null || !types.HasAny(t => t.Type != typeof(TResult)))
-				return Self.TypeSelector;
-			
-			var typeDictionary = types.ToDictionary(infer.TypeName, t => t.Type);
-			Self.TypeSelector = (o, h) =>
-			{
-				Type t;
-				return !typeDictionary.TryGetValue(h.Type, out t) ? typeof (TResult) : t;
-			};
-			return Self.TypeSelector;
-		}
+		
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo)
 		{
