@@ -8,23 +8,27 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteRequest<T> : IRequest<DeleteRequestParameters>
-		where T : class
-	{
-		
-	}
-		
+	public interface IDeleteRequest : IRequest<DeleteRequestParameters> { }
+
+	public interface IDeleteRequest<T> : IDeleteRequest where T : class {}
 
 	internal static class DeletePathInfo
 	{
-		public static void Update<T>(ElasticsearchPathInfo<DeleteRequestParameters> pathInfo, IDeleteRequest<T> request)
-			where T : class
+		public static void Update(ElasticsearchPathInfo<DeleteRequestParameters> pathInfo, IDeleteRequest request)
 		{
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
 		}
 	}
 	
-	public partial class DeleteRequest<T> : DocumentPathBase<DeleteRequestParameters, T>, IDeleteRequest<T>
+	public partial class DeleteRequest : DocumentPathBase<DeleteRequestParameters>, IDeleteRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
+		{
+			DeletePathInfo.Update(pathInfo, this);
+		}
+	}
+
+	public partial class DeleteRequest<T> : DocumentPathBase<DeleteRequestParameters, T>, IDeleteRequest
 		where T : class
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
@@ -32,8 +36,9 @@ namespace Nest
 			DeletePathInfo.Update(pathInfo, this);
 		}
 	}
+
 	[DescriptorFor("Delete")]
-	public partial class DeleteDescriptor<T> : DocumentPathDescriptor<DeleteDescriptor<T>, T, DeleteRequestParameters>, IDeleteRequest<T>
+	public partial class DeleteDescriptor<T> : DocumentPathDescriptor<DeleteDescriptor<T>, DeleteRequestParameters, T>, IDeleteRequest
 		where T : class
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)

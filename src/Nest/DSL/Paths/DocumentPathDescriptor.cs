@@ -6,6 +6,11 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public abstract class DocumentPathBase<TParameters> : DocumentOptionalPathBase<TParameters> 
+		where TParameters : FluentRequestParameters<TParameters>, new()
+	{}
+
+
 	public abstract class DocumentPathBase<TParameters, T> : DocumentOptionalPathBase<TParameters, T>
 		where TParameters : FluentRequestParameters<TParameters>, new()
 		where T : class

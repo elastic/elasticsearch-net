@@ -3,17 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
-	[DescriptorFor("SnapshotDeleteRepository")]
-	public partial class DeleteRepositoryDescriptor : RepositoryPathDescriptor<DeleteRepositoryDescriptor, DeleteRepositoryRequestParameters>
-	{
-		internal IRepository _Repository { get; private set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRepositoryRequestParameters> pathInfo)
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters> { }
+
+	internal static class DeleteRepositoryPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<DeleteRepositoryRequestParameters> pathInfo, IDeleteRepositoryRequest request)
 		{
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
+		}
+	}
+	
+	public partial class DeleteRepositoryRequest : RepositoryPathBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRepositoryRequestParameters> pathInfo)
+		{
+			DeleteRepositoryPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("SnapshotDeleteRepository")]
+	public partial class DeleteRepositoryDescriptor : RepositoryPathDescriptor<DeleteRepositoryDescriptor, DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRepositoryRequestParameters> pathInfo)
+		{
+			DeleteRepositoryPathInfo.Update(pathInfo, this);
 		}
 
 	}

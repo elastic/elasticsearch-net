@@ -8,22 +8,27 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDocumentExistsRequest<T> : IRequest<DocumentExistsRequestParameters>
-		where T : class
-	{
-		
-	}
+	public interface IDocumentExistsRequest : IRequest<DocumentExistsRequestParameters> { }
+
+	public interface IDocumentExistsRequest<T> : IDocumentExistsRequest where T : class {}
 
 	internal static class DocumentExistsPathInfo
 	{
-		public static void Update<T>(ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo, IDocumentExistsRequest<T> request)
-			where T : class
+		public static void Update(ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo, IDocumentExistsRequest request)
 		{
 			pathInfo.HttpMethod = PathInfoHttpMethod.HEAD;
 		}
 	}
 	
-	public partial class DocumentExistsRequest<T> : DocumentPathBase<DocumentExistsRequestParameters, T>, IDocumentExistsRequest<T>
+	public partial class DocumentExistsRequest : DocumentPathBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo)
+		{
+			DocumentExistsPathInfo.Update(pathInfo, this);
+		}
+	}
+	
+	public partial class DocumentExistsRequest<T> : DocumentPathBase<DocumentExistsRequestParameters, T>, IDocumentExistsRequest
 		where T : class
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo)
@@ -34,7 +39,7 @@ namespace Nest
 
 	[DescriptorFor("Exists")]
 	public partial class DocumentExistsDescriptor<T>
-		: DocumentPathDescriptor<DocumentExistsDescriptor<T>, T, DocumentExistsRequestParameters>, IDocumentExistsRequest<T>
+		: DocumentPathDescriptor<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters, T>, IDocumentExistsRequest
 		where T : class
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo)

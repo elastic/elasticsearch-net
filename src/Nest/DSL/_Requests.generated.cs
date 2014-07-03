@@ -2343,7 +2343,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
-	public partial class DeleteTemplateRequest  : BasePathRequest<DeleteTemplateRequestParameters>
+	public partial class DeleteTemplateRequest 
 			{
 		
 		///<summary>Explicit operation timeout</summary>
@@ -2361,12 +2361,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -2375,7 +2369,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
 	///</pre>
 	///</summary>
-	public partial class DeleteWarmerRequest  : BasePathRequest<DeleteWarmerRequestParameters>
+	public partial class DeleteWarmerRequest 
 			{
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -2385,12 +2379,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteWarmerRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -4755,7 +4743,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class DeleteSnapshotRequest  : BasePathRequest<DeleteSnapshotRequestParameters>
+	public partial class DeleteSnapshotRequest 
 			{
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -4765,12 +4753,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteSnapshotRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -4779,7 +4761,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class DeleteRepositoryRequest  : BasePathRequest<DeleteRepositoryRequestParameters>
+	public partial class DeleteRepositoryRequest 
 			{
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -4797,12 +4779,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRepositoryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
