@@ -1803,7 +1803,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
-	public partial class SourceRequest  : BasePathRequest<SourceRequestParameters>
+	public partial class SourceRequest<T> 
 			{
 		
 		///<summary>The ID of the parent document</summary>
@@ -1885,12 +1885,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SourceRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -3105,7 +3099,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-update-settings.html
 	///</pre>
 	///</summary>
-	public partial class UpdateSettingsRequest  : BasePathRequest<UpdateSettingsRequestParameters>
+	public partial class UpdateSettingsRequest 
 			{
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -3147,12 +3141,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -4569,7 +4557,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotRequest  : BasePathRequest<SnapshotRequestParameters>
+	public partial class SnapshotRequest<T> 
 			{
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -4587,12 +4575,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("wait_for_completion", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -4835,7 +4817,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html
 	///</pre>
 	///</summary>
-	public partial class TermvectorRequest  : BasePathRequest<TermvectorRequestParameters>
+	public partial class TermvectorRequest<T> 
 			{
 		
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
@@ -4909,12 +4891,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("parent", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<TermvectorRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -5343,6 +5319,96 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
+		
+		///<summary>The ID of the parent document</summary>
+		public string Parent 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
+			set { this.Request.RequestParameters.AddQueryString("parent", value); }
+		}
+		
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
+			set { this.Request.RequestParameters.AddQueryString("preference", value); }
+		}
+		
+		
+		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
+		public bool Realtime 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
+			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
+		}
+		
+		
+		///<summary>Refresh the shard containing the document before performing the operation</summary>
+		public bool Refresh 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("refresh"); } 
+			set { this.Request.RequestParameters.AddQueryString("refresh", value); }
+		}
+		
+		
+		///<summary>Specific routing value</summary>
+		public string Routing 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
+			set { this.Request.RequestParameters.AddQueryString("routing", value); }
+		}
+		
+		
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public  string[] _Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
+			set { this.Request.RequestParameters.AddQueryString("_source", value); }
+		}
+		
+		
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public IList<PropertyPathMarker> _SourceExclude 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_exclude"); } 
+			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
+		}
+		
+		
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public IList<PropertyPathMarker> _SourceInclude 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
+			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
+		}
+		
+		
+		///<summary>Explicit version number for concurrency control</summary>
+		public long Version 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
+			set { this.Request.RequestParameters.AddQueryString("version", value); }
+		}
+		
+		
+		///<summary>Specific version type</summary>
+		public VersionType VersionType 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
+			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for GetSource
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
+	///</pre>
+	///</summary>
+	public partial class SourceRequest 
+			{
 		
 		///<summary>The ID of the parent document</summary>
 		public string Parent 
@@ -6019,6 +6085,114 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<string>("suggest_text"); } 
 			set { this.Request.RequestParameters.AddQueryString("suggest_text", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for SnapshotCreate
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///</pre>
+	///</summary>
+	public partial class SnapshotRequest 
+			{
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public string MasterTimeout 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
+			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
+		}
+		
+		
+		///<summary>Should this request wait until the operation has completed before returning</summary>
+		public bool WaitForCompletion 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("wait_for_completion"); } 
+			set { this.Request.RequestParameters.AddQueryString("wait_for_completion", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for TermvectorGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html
+	///</pre>
+	///</summary>
+	public partial class TermvectorRequest 
+			{
+		
+		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
+		public bool TermStatistics 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("term_statistics"); } 
+			set { this.Request.RequestParameters.AddQueryString("term_statistics", value); }
+		}
+		
+		
+		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
+		public bool FieldStatistics 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("field_statistics"); } 
+			set { this.Request.RequestParameters.AddQueryString("field_statistics", value); }
+		}
+		
+		
+		///<summary>A comma-separated list of fields to return.</summary>
+		public IList<PropertyPathMarker> Fields 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			set { this.Request.RequestParameters.AddQueryString("fields", value); }
+		}
+		
+		
+		///<summary>Specifies if term offsets should be returned.</summary>
+		public bool Offsets 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("offsets"); } 
+			set { this.Request.RequestParameters.AddQueryString("offsets", value); }
+		}
+		
+		
+		///<summary>Specifies if term positions should be returned.</summary>
+		public bool Positions 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("positions"); } 
+			set { this.Request.RequestParameters.AddQueryString("positions", value); }
+		}
+		
+		
+		///<summary>Specifies if term payloads should be returned.</summary>
+		public bool Payloads 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("payloads"); } 
+			set { this.Request.RequestParameters.AddQueryString("payloads", value); }
+		}
+		
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
+		public string Preference 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
+			set { this.Request.RequestParameters.AddQueryString("preference", value); }
+		}
+		
+		
+		///<summary>Specific routing value.</summary>
+		public string Routing 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
+			set { this.Request.RequestParameters.AddQueryString("routing", value); }
+		}
+		
+		
+		///<summary>Parent id of documents.</summary>
+		public string Parent 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
+			set { this.Request.RequestParameters.AddQueryString("parent", value); }
 		}
 		
 	}
