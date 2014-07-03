@@ -3539,7 +3539,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html
 	///</pre>
 	///</summary>
-	public partial class ValidateQueryRequest  : BasePathRequest<ValidateQueryRequestParameters>
+	public partial class ValidateQueryRequest<T> 
 			{
 		
 		///<summary>Return detailed information about the error</summary>
@@ -3597,12 +3597,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("q", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -5661,6 +5655,72 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for IndicesValidateQueryGetForAll
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html
+	///</pre>
+	///</summary>
+	public partial class ValidateQueryRequest 
+			{
+		
+		///<summary>Return detailed information about the error</summary>
+		public bool Explain 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("explain"); } 
+			set { this.Request.RequestParameters.AddQueryString("explain", value); }
+		}
+		
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
+			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
+		}
+		
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
+			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
+		}
+		
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
+			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
+		}
+		
+		
+		///<summary>TODO: ?</summary>
+		public string OperationThreading 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("operation_threading"); } 
+			set { this.Request.RequestParameters.AddQueryString("operation_threading", value); }
+		}
+		
+		
+		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string Q 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
+			set { this.Request.RequestParameters.AddQueryString("q", value); }
 		}
 		
 	}
