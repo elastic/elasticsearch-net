@@ -12,9 +12,10 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetMappingResponse GetMapping<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector)
+		public IGetMappingResponse GetMapping<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null)
 			where T : class
 		{
+			selector = selector ?? (s => s);
 			return this.Dispatch<GetMappingDescriptor<T>, GetMappingRequestParameters, GetMappingResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesGetMappingDispatch<GetMappingResponse>(
@@ -24,9 +25,10 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector)
+		public Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null)
 			where T : class
 		{
+			selector = selector ?? (s => s);
 			return this.DispatchAsync<GetMappingDescriptor<T>, GetMappingRequestParameters, GetMappingResponse, IGetMappingResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesGetMappingDispatchAsync<GetMappingResponse>(
