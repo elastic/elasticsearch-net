@@ -48,7 +48,7 @@ namespace Nest
 	}
 
 	public partial class DeleteByQueryDescriptor<T> 
-		: QueryPathDescriptorBase<DeleteByQueryDescriptor<T>, T, DeleteByQueryRequestParameters>, IDeleteByQueryRequest
+		: QueryPathDescriptorBase<DeleteByQueryDescriptor<T>, DeleteByQueryRequestParameters, T>, IDeleteByQueryRequest
 		where T : class
 	{
 		private IDeleteByQueryRequest Self { get { return this; } }

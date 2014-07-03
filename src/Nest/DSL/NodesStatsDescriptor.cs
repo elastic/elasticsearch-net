@@ -60,6 +60,7 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesStatsRequestParameters> pathInfo)
 		{
+			NodesStatsPathInfo.Update(pathInfo, this);
 		}
 
 	}

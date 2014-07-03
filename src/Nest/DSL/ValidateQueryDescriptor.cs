@@ -7,7 +7,7 @@ namespace Nest
 {
 	[DescriptorFor("IndicesValidateQuery")]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial class ValidateQueryDescriptor<T> : QueryPathDescriptorBase<ValidateQueryDescriptor<T>, T, ValidateQueryRequestParameters>
+	public partial class ValidateQueryDescriptor<T> : QueryPathDescriptorBase<ValidateQueryDescriptor<T>, ValidateQueryRequestParameters, T>
 		where T : class
 	{
 		[JsonProperty("query")]

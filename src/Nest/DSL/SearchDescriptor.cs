@@ -16,7 +16,7 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISearchRequest : IRequest<SearchRequestParameters>
+	public interface ISearchRequest : IQueryPath<SearchRequestParameters>
 	{
 		Type _ClrType { get; }
 
@@ -96,7 +96,17 @@ namespace Nest
 
 	}
 
-	public partial class SearchRequest : BaseRequest<SearchRequestParameters>, ISearchRequest
+	public interface ISearchRequest<T> : ISearchRequest {}
+
+	internal static class SearchPathInfo
+	{
+		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo, ISearchRequest request)
+		{
+			pathInfo.HttpMethod = request.RequestParameters.ContainsKey("source") ? PathInfoHttpMethod.GET : PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class SearchRequest : QueryPathBase<SearchRequestParameters>, ISearchRequest
 	{
 		public string Index { get; set; }
 		public string Type { get; set; }
@@ -150,25 +160,51 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo)
 		{
-			ISearchRequest self = this;
-			pathInfo.HttpMethod = self.RequestParameters.ContainsKey("source")
-				? PathInfoHttpMethod.GET
-				: PathInfoHttpMethod.POST;
-
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			pathInfo.Index = this.Index;
-			pathInfo.Type = this.Type;
-
+			SearchPathInfo.Update(settings, pathInfo, this);
 		}
 
 	}
 
+	public partial class SearchRequest<T> : QueryPathBase<SearchRequestParameters, T>, ISearchRequest
+		where T : class
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo)
+		{
+			SearchPathInfo.Update(settings,pathInfo, this);
+		}
+
+		public Type _ClrType { get; private set; }
+		public string Timeout { get; set; }
+		public int? From { get; set; }
+		public int? Size { get; set; }
+		public bool? Explain { get; set; }
+		public bool? Version { get; set; }
+		public bool? TrackScores { get; set; }
+		public double? MinScore { get; set; }
+		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
+		public IDictionary<PropertyPathMarker, ISort> Sort { get; set; }
+		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
+		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
+		public IHighlightRequest Highlight { get; set; }
+		public IRescore Rescore { get; set; }
+		public IList<PropertyPathMarker> Fields { get; set; }
+		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
+		public ISourceFilter Source { get; set; }
+		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
+		public IQueryContainer Query { get; set; }
+		public IFilterContainer Filter { get; set; }
+		public string _Preference { get; private set; }
+		public string _Routing { get; private set; }
+		public SearchType? _SearchType { get; private set; }
+		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
+		public SearchRequestParameters QueryString { get; set; }
+	}
+
+
 	/// <summary>
 	/// A descriptor wich describes a search operation for _search and _msearch
 	/// </summary>
-	/// <remarks>Doesn't inherit from QueryPathDescriptorBase because it already needs an untyped supperclass 
-	/// that has specifics that we can push to QueryPathDescriptorBase</remarks>
-	public partial class SearchDescriptor<T> : BasePathDescriptor<SearchDescriptor<T>, SearchRequestParameters>, ISearchRequest 
+	public partial class SearchDescriptor<T> : QueryPathDescriptorBase<SearchDescriptor<T>, SearchRequestParameters, T>, ISearchRequest 
 		where T : class
 	{
 		private ISearchRequest Self { get { return this; } }
@@ -206,11 +242,6 @@ namespace Nest
 		/// Whether conditionless queries are allowed or not
 		/// </summary>
 		internal bool _Strict { get; set; }
-
-		internal IEnumerable<TypeNameMarker> _Types;
-		internal bool? _AllIndices { get; set; }
-		internal bool? _AllTypes { get; set; }
-		internal IEnumerable<IndexNameMarker> _Indices { get; set; }
 
 		string ISearchRequest.Timeout { get; set; }
 		int? ISearchRequest.From { get; set; }
@@ -270,7 +301,7 @@ namespace Nest
 		public SearchDescriptor<T> Indices(params string[] indices)
 		{
 			if (indices == null) return this;
-			this._Indices = indices.Select(s => (IndexNameMarker)s);
+			Self.Indices = indices.Select(s => (IndexNameMarker)s);
 			return this;
 		}
 		
@@ -280,7 +311,7 @@ namespace Nest
 		public SearchDescriptor<T> Indices(params Type[] indices)
 		{
 			if (indices == null) return this;
-			this._Indices = indices.Select(s => (IndexNameMarker)s);
+			Self.Indices = indices.Select(s => (IndexNameMarker)s);
 			return this;
 		}
 
@@ -296,7 +327,7 @@ namespace Nest
 		internal SearchDescriptor<T> Index(IndexNameMarker index)
 		{
 			if (index == null) return this;
-			this._Indices = new[] { index };
+			Self.Indices = new[] { index };
 			return this;
 		}
 		/// <summary>
@@ -320,7 +351,7 @@ namespace Nest
 		public SearchDescriptor<T> Types(IEnumerable<string> types)
 		{
 			if (types == null) return this;
-			this._Types = types.Select(s => (TypeNameMarker)s);
+			Self.Types = types.Select(s => (TypeNameMarker)s);
 			return this;
 		}
 		/// <summary>
@@ -338,7 +369,7 @@ namespace Nest
 		public SearchDescriptor<T> Types(IEnumerable<Type> types)
 		{
 			if (types == null) return this;
-			this._Types = types.Select(s => (TypeNameMarker)s);
+			Self.Types = types.Select(s => (TypeNameMarker)s);
 			return this;
 
 		}
@@ -357,7 +388,7 @@ namespace Nest
 		public SearchDescriptor<T> Type(string type)
 		{
 			if (type == null) return this;
-			this._Types = new[] { (TypeNameMarker)type };
+			Self.Types = new[] { (TypeNameMarker)type };
 			return this;
 		}
 		/// <summary>
@@ -367,14 +398,14 @@ namespace Nest
 		public SearchDescriptor<T> Type(Type type)
 		{
 			if (type == null) return this;
-			this._Types = new[] { (TypeNameMarker)type };
+			Self.Types = new[] { (TypeNameMarker)type };
 			return this;
 		}
 
 		internal SearchDescriptor<T> Type(TypeNameMarker type)
 		{
 			if (type == null) return this;
-			this._Types = new[] { type };
+			Self.Types = new[] { type };
 			return this;
 		}
 		/// <summary>
@@ -382,7 +413,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> AllIndices()
 		{
-			this._AllIndices = true;
+			Self.AllIndices = true;
 			return this;
 		}
 
@@ -392,7 +423,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> AllTypes()
 		{
-			this._AllTypes = true;
+			Self.AllTypes = true;
 			return this;
 		}
 
@@ -1201,7 +1232,7 @@ namespace Nest
 		internal Func<dynamic, Hit<dynamic>, Type> CreateCovarianceSelector<TResult>(ElasticInferrer infer)
 			where TResult : class
 		{
-			var types = (this._Types ?? Enumerable.Empty<TypeNameMarker>()).Where(t => t.Type != null).ToList();
+			var types = (Self.Types ?? Enumerable.Empty<TypeNameMarker>()).Where(t => t.Type != null).ToList();
 			if (Self.TypeSelector != null || !types.HasAny(t => t.Type != typeof(TResult)))
 				return Self.TypeSelector;
 			
@@ -1216,31 +1247,7 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = this.Request.RequestParameters.ContainsKey("source")
-				? PathInfoHttpMethod.GET
-				: PathInfoHttpMethod.POST;
-
-			pathInfo.RequestParameters = this.Request.RequestParameters;
-
-			var inferrer = new ElasticInferrer(settings);
-			string indices;
-			if (this._AllIndices.GetValueOrDefault(false))
-				indices = !this._AllTypes.GetValueOrDefault(false) ? "_all" : null;
-			else if (this._Indices.HasAny())
-				indices = inferrer.IndexNames(this._Indices);
-			else
-				indices = inferrer.IndexName<T>();
-
-			string types;
-			if (this._AllTypes.GetValueOrDefault(false))
-				types = null;
-			else if (this._Types.HasAny())
-				types = inferrer.TypeNames(this._Types);
-			else
-				types = inferrer.TypeName<T>();
-
-			pathInfo.Index = indices;
-			pathInfo.Type = types;
+			SearchPathInfo.Update(settings,pathInfo, this);
 		}
 
 	}
