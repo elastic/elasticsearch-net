@@ -12,6 +12,35 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+    public interface IUnregisterPercolatorRequest : IIndexNamePath<DeleteRequestParameters> { }
+
+    public interface IUnregisterPercolatorRequest<T> : IUnregisterPercolatorRequest where T : class { }
+
+    internal static class UnregisterPercolatorPathInfo
+    {
+        public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
+        {
+            pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
+        }
+    }
+
+    public partial class UnregisterPercolatorRequest : IndexNamePathBase<DeleteRequestParameters>, IUnregisterPercolatorRequest
+    {
+        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
+        {
+            UnregisterPercolatorPathInfo.Update(settings, pathInfo);
+        }
+    }
+
+    public partial class UnregisterPercolatorRequest<T> : IndexNamePathBase<DeleteRequestParameters>, IUnregisterPercolatorRequest<T>
+        where T : class
+    {
+        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
+        {
+            UnregisterPercolatorPathInfo.Update(settings, pathInfo);
+        }
+    }
+
 	public partial class UnregisterPercolatorDescriptor : IndexNamePathDescriptor<UnregisterPercolatorDescriptor, DeleteRequestParameters>
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
