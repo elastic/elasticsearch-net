@@ -134,7 +134,7 @@
     <Compile Include="Domain\Analysis\TokenFilter\StemmerOverrideTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\UppercaseTokenFilter.cs" />
     <Compile Include="Domain\Bulk\IBulkOperation.cs" />
-    <Compile Include="Domain\Bulk\MultiGetDoc.cs" />
+    <Compile Include="DSL\MultiGet\MultiGetDoc.cs" />
     <Compile Include="Domain\Connection\ConnectionSettings.cs" />
     <Compile Include="Domain\Connection\IConnectionSettingsValues.cs" />
     <Compile Include="Domain\DSL\DescriptorForAttribute.cs" />
@@ -329,10 +329,10 @@
     <Compile Include="ElasticClient-RootNodeInfo.cs" />
     <Compile Include="ElasticClient-TermVector.cs" />
     <Compile Include="ElasticClient-UpdateSettings.cs" />
-    <Compile Include="DSL\MultiGet\ISimpleGetDescriptor.cs" />
+    <Compile Include="DSL\MultiGet\IMultiGetOperation.cs" />
     <Compile Include="DSL\DeleteByQueryDescriptor.cs" />
     <Compile Include="DSL\Paths\DocumentPathDescriptor.cs" />
-    <Compile Include="DSL\MultiGet\SimpleGetDescriptor.cs" />
+    <Compile Include="DSL\MultiGet\MultiGetOperationDescriptor.cs" />
     <Compile Include="DSL\_Descriptors.generated.cs" />
     <Compile Include="Enums\TermsAggregationExecutionHint.cs" />
     <Compile Include="Enums\GeoHashPrecision.cs" />

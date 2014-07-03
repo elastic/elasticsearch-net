@@ -3667,7 +3667,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-get.html
 	///</pre>
 	///</summary>
-	public partial class MultiGetRequest  : BasePathRequest<MultiGetRequestParameters>
+	public partial class MultiGetRequest 
 			{
 		
 		///<summary>A comma-separated list of fields to return in the response</summary>
@@ -3725,12 +3725,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		

@@ -17,7 +17,7 @@ namespace Nest
 		public IMultiGetResponse MultiGet(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector)
 		{
 			multiGetSelector.ThrowIfNull("multiGetSelector");
-			var descriptor = multiGetSelector(new MultiGetDescriptor(_connectionSettings));
+			var descriptor = multiGetSelector(new MultiGetDescriptor());
 			var converter = CreateCovariantMultiGetConverter(descriptor);
 			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
 			return this.Dispatch<MultiGetDescriptor, MultiGetRequestParameters, MultiGetResponse>(
@@ -30,7 +30,7 @@ namespace Nest
 		public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector)
 		{
 			multiGetSelector.ThrowIfNull("multiGetSelector");
-			var descriptor = multiGetSelector(new MultiGetDescriptor(_connectionSettings));
+			var descriptor = multiGetSelector(new MultiGetDescriptor());
 			var converter = CreateCovariantMultiGetConverter(descriptor);
 			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
 			return this.DispatchAsync<MultiGetDescriptor, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
