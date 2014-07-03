@@ -4847,7 +4847,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html
 	///</pre>
 	///</summary>
-	public partial class TermvectorRequest  : BasePathRequest<TermvectorRequestParameters>
+	public partial class TermvectorRequest<T> 
 			{
 		
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
@@ -4921,12 +4921,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("parent", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<TermvectorRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -6031,6 +6025,88 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<string>("suggest_text"); } 
 			set { this.Request.RequestParameters.AddQueryString("suggest_text", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for TermvectorGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html
+	///</pre>
+	///</summary>
+	public partial class TermvectorRequest 
+			{
+		
+		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
+		public bool TermStatistics 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("term_statistics"); } 
+			set { this.Request.RequestParameters.AddQueryString("term_statistics", value); }
+		}
+		
+		
+		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
+		public bool FieldStatistics 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("field_statistics"); } 
+			set { this.Request.RequestParameters.AddQueryString("field_statistics", value); }
+		}
+		
+		
+		///<summary>A comma-separated list of fields to return.</summary>
+		public IList<PropertyPathMarker> Fields 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			set { this.Request.RequestParameters.AddQueryString("fields", value); }
+		}
+		
+		
+		///<summary>Specifies if term offsets should be returned.</summary>
+		public bool Offsets 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("offsets"); } 
+			set { this.Request.RequestParameters.AddQueryString("offsets", value); }
+		}
+		
+		
+		///<summary>Specifies if term positions should be returned.</summary>
+		public bool Positions 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("positions"); } 
+			set { this.Request.RequestParameters.AddQueryString("positions", value); }
+		}
+		
+		
+		///<summary>Specifies if term payloads should be returned.</summary>
+		public bool Payloads 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("payloads"); } 
+			set { this.Request.RequestParameters.AddQueryString("payloads", value); }
+		}
+		
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
+		public string Preference 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
+			set { this.Request.RequestParameters.AddQueryString("preference", value); }
+		}
+		
+		
+		///<summary>Specific routing value.</summary>
+		public string Routing 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
+			set { this.Request.RequestParameters.AddQueryString("routing", value); }
+		}
+		
+		
+		///<summary>Parent id of documents.</summary>
+		public string Parent 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
+			set { this.Request.RequestParameters.AddQueryString("parent", value); }
 		}
 		
 	}
