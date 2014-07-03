@@ -585,7 +585,7 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
+            UpdateSettingsPathInfo.Update(settings, pathInfo);
 		}
 
 	}
