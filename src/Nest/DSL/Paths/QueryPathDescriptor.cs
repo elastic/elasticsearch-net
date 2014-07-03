@@ -11,8 +11,8 @@ namespace Nest
 	{
 		IEnumerable<IndexNameMarker> Indices { get; set; }
 		IEnumerable<TypeNameMarker> Types { get; set; }
-		bool AllIndices { get; set; }
-		bool AllTypes { get; set; }
+		bool? AllIndices { get; set; }
+		bool? AllTypes { get; set; }
 	}
 	
 	public interface IQueryPath<TParameters, T> : IQueryPath<TParameters>
@@ -32,12 +32,12 @@ namespace Nest
 
 			if (path.Types.HasAny())
 				pathInfo.Type = inferrer.TypeNames(path.Types);
-			else if (path.AllTypes)
+			else if (path.AllTypes.GetValueOrDefault(false))
 				pathInfo.Type = null;
 
 			if (path.Indices.HasAny())
 				pathInfo.Index = inferrer.IndexNames(path.Indices);
-			else if (path.AllIndices && !pathInfo.Type.IsNullOrEmpty())
+			else if (path.AllIndices.GetValueOrDefault(false) && !pathInfo.Type.IsNullOrEmpty())
 				pathInfo.Index = "_all";
 
 		}
@@ -50,6 +50,28 @@ namespace Nest
 		{
 			//start out with defaults
 			var inferrer = new ElasticInferrer(settings);
+
+			//string indices;
+			//if (path.AllIndices.GetValueOrDefault(false))
+			//	indices = !path.AllTypes.GetValueOrDefault(false) ? "_all" : null;
+			//else if (path.Indices.HasAny())
+			//	indices = inferrer.IndexNames(path.Indices);
+			//else
+			//	indices = inferrer.IndexName<T>();
+
+			//string types;
+			//if (path.AllTypes.GetValueOrDefault(false))
+			//	types = null;
+			//else if (path.Types.HasAny())
+			//	types = inferrer.TypeNames(path.Types);
+			//else
+			//	types = inferrer.TypeName<T>();
+
+			//pathInfo.Index = indices;
+			//pathInfo.Type = types;
+
+
+
 			var index = inferrer.IndexName<T>();
 			var type = inferrer.TypeName<T>();
 			pathInfo.Index = index;
@@ -57,18 +79,20 @@ namespace Nest
 
 			if (path.Types.HasAny())
 				pathInfo.Type = inferrer.TypeNames(path.Types);
-			else if (path.AllTypes)
+			else if (path.AllTypes.GetValueOrDefault(false))
 				pathInfo.Type = null;
 			else pathInfo.Type = inferrer.TypeName<T>();
 
 			if (path.Indices.HasAny())
 				pathInfo.Index = inferrer.IndexNames(path.Indices);
-			else if (path.AllIndices && !pathInfo.Type.IsNullOrEmpty())
+			else if (path.AllIndices.GetValueOrDefault(false) && !pathInfo.Type.IsNullOrEmpty())
 				pathInfo.Index = "_all";
 			else
-				pathInfo.Index = path.AllIndices ? null : inferrer.IndexName<T>();
+				pathInfo.Index = path.AllIndices.GetValueOrDefault(false) ? null : inferrer.IndexName<T>();
 
 		}
+
+		
 
 	}
 
@@ -83,8 +107,8 @@ namespace Nest
 
 		public IEnumerable<IndexNameMarker> Indices { get; set; }
 		public IEnumerable<TypeNameMarker> Types { get; set; }
-		public bool AllIndices { get; set; }
-		public bool AllTypes { get; set; }
+		public bool? AllIndices { get; set; }
+		public bool? AllTypes { get; set; }
 	}
 
 
@@ -108,8 +132,8 @@ namespace Nest
 	/// </pre>
 	/// all parameters are optional and will default to the defaults for <para>T</para>
 	/// </summary>
-	public abstract class QueryPathDescriptorBase<TDescriptor, TParameters, T>
-		: BasePathDescriptor<TDescriptor, TParameters>, IQueryPath<TParameters>
+	public abstract class QueryPathDescriptorBase<TDescriptor, TParameters, T> 
+        : BasePathDescriptor<TDescriptor, TParameters>, IQueryPath<TParameters>
 		where TDescriptor : QueryPathDescriptorBase<TDescriptor, TParameters, T>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
         where T : class
@@ -118,8 +142,8 @@ namespace Nest
 
 		IEnumerable<IndexNameMarker> IQueryPath<TParameters>.Indices { get; set; }
 		IEnumerable<TypeNameMarker> IQueryPath<TParameters>.Types { get; set; }
-		bool IQueryPath<TParameters>.AllIndices { get; set; }
-		bool IQueryPath<TParameters>.AllTypes { get; set; }
+		bool? IQueryPath<TParameters>.AllIndices { get; set; }
+		bool? IQueryPath<TParameters>.AllTypes { get; set; }
 
 		public TDescriptor Indices(params Type[] indices)
 		{
