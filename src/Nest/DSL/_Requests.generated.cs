@@ -1803,7 +1803,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
-	public partial class SourceRequest  : BasePathRequest<SourceRequestParameters>
+	public partial class SourceRequest<T> 
 			{
 		
 		///<summary>The ID of the parent document</summary>
@@ -1885,12 +1885,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SourceRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -5331,6 +5325,96 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
+		
+		///<summary>The ID of the parent document</summary>
+		public string Parent 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
+			set { this.Request.RequestParameters.AddQueryString("parent", value); }
+		}
+		
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
+			set { this.Request.RequestParameters.AddQueryString("preference", value); }
+		}
+		
+		
+		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
+		public bool Realtime 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
+			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
+		}
+		
+		
+		///<summary>Refresh the shard containing the document before performing the operation</summary>
+		public bool Refresh 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("refresh"); } 
+			set { this.Request.RequestParameters.AddQueryString("refresh", value); }
+		}
+		
+		
+		///<summary>Specific routing value</summary>
+		public string Routing 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
+			set { this.Request.RequestParameters.AddQueryString("routing", value); }
+		}
+		
+		
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public  string[] _Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
+			set { this.Request.RequestParameters.AddQueryString("_source", value); }
+		}
+		
+		
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public IList<PropertyPathMarker> _SourceExclude 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_exclude"); } 
+			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
+		}
+		
+		
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public IList<PropertyPathMarker> _SourceInclude 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
+			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
+		}
+		
+		
+		///<summary>Explicit version number for concurrency control</summary>
+		public long Version 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
+			set { this.Request.RequestParameters.AddQueryString("version", value); }
+		}
+		
+		
+		///<summary>Specific version type</summary>
+		public VersionType VersionType 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
+			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for GetSource
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
+	///</pre>
+	///</summary>
+	public partial class SourceRequest 
+			{
 		
 		///<summary>The ID of the parent document</summary>
 		public string Parent 
