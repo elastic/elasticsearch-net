@@ -3900,16 +3900,6 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
-		
-		internal  string[] _types { get; set; }
-		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
-		public IndicesStatsRequestParameters Types(params string[] types)
-		{
-			this._types = types;
-			this.AddQueryString("types", this._types);
-			return this;
-		}
-		
 	}
 	
 	

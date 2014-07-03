@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Indices.Analysis.Analyzers
 			//index a doc so we can be sure a shard is available
 			this._client.Index<AnalyzerTest>(new AnalyzerTest() { Txt = text }, i=>i.Index(index).Refresh(true));
 
-			var settingsResult = this._client.GetMapping(gm=>gm.Index(index).Type<AnalyzerTest>());
+			var settingsResult = this._client.GetMapping<AnalyzerTest>(gm=>gm.Index(index));
 			var mapping = settingsResult.Mapping;
 			mapping.Should().NotBeNull();
 			mapping.Properties.Should().NotBeNull();

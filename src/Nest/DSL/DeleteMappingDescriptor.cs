@@ -9,6 +9,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IDeleteMappingRequest : IRequest<DeleteMappingRequestParameters> { }
+	public interface IDeleteMappingRequest<T> : IDeleteMappingRequest where T : class { }
 
 	internal static class DeleteMappingPathInfo
 	{
@@ -25,6 +26,15 @@ namespace Nest
 			DeleteMappingPathInfo.Update(pathInfo, this);
 		}
 	}
+	public partial class DeleteMappingRequest<T> : IndexTypePathBase<DeleteMappingRequestParameters, T>, IDeleteMappingRequest
+		where T : class
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteMappingRequestParameters> pathInfo)
+		{
+			DeleteMappingPathInfo.Update(pathInfo, this);
+		}
+	}
+
 	[DescriptorFor("IndicesDeleteMapping")]
 	public partial class DeleteMappingDescriptor<T> : IndexTypePathDescriptor<DeleteMappingDescriptor<T>, DeleteMappingRequestParameters, T>, IDeleteMappingRequest
 		where T : class

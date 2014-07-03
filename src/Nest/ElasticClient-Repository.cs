@@ -15,7 +15,7 @@ namespace Nest
 			name.ThrowIfNullOrEmpty("name");
 			return this.Dispatch<CreateRepositoryDescriptor, CreateRepositoryRequestParameters, AcknowledgedResponse>(
 				s => selector(s.Repository(name)),
-				(p, d) => this.RawDispatch.SnapshotCreateRepositoryDispatch<AcknowledgedResponse>(p, d._Repository)
+				(p, d) => this.RawDispatch.SnapshotCreateRepositoryDispatch<AcknowledgedResponse>(p, ((ICreateRepositoryRequest)d).Repository)
 			);
 		}
 
@@ -25,7 +25,7 @@ namespace Nest
 			name.ThrowIfNullOrEmpty("name");
 			return this.DispatchAsync<CreateRepositoryDescriptor, CreateRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 				s => selector(s.Repository(name)),
-				(p, d) => this.RawDispatch.SnapshotCreateRepositoryDispatchAsync<AcknowledgedResponse>(p, d._Repository)
+				(p, d) => this.RawDispatch.SnapshotCreateRepositoryDispatchAsync<AcknowledgedResponse>(p, ((ICreateRepositoryRequest)d).Repository)
 			);
 		}
 		

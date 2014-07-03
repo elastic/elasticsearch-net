@@ -79,7 +79,7 @@ namespace Nest.Tests.Unit.Cluster
 			Do("DELETE", "/a%2Cb", c => c.DeleteIndex(i => i.Indices("a", "b")));
 			Do("POST", "/_bulk", c => c.DeleteMany(Enumerable.Range(0, 10).Select(i => new Doc { Id = i.ToString() })));
 			Do("POST", "/customindex/customtype/_bulk", c => c.DeleteMany(Enumerable.Range(0, 10).Select(i => new Doc { Id = i.ToString() }), index: "customindex", type: "customtype"));
-			Do("DELETE", "/mydefaultindex/doc/_mapping", c => c.DeleteMapping(d => d.Index<Doc>().Type<Doc>()));
+			Do("DELETE", "/mydefaultindex/doc/_mapping", c => c.DeleteMapping<Doc>());
 			Do("DELETE", "/_template/myTemplate", c => c.DeleteTemplate("myTemplate"));
 			Do("DELETE", "/_all/_warmer/mywarmer", c => c.DeleteWarmer("mywarmer", w => w.AllIndices()));
 			Do("DELETE", "/_all/_warmer/mywarmer", c => c.DeleteWarmer("mywarmer"));
@@ -94,7 +94,7 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/mydefaultindex/_settings", c => c.GetIndexSettings(i => i.Index<Doc>()));
 			Do("GET", "/mydefaultindex/_mapping/doc", c => c.GetMapping<Doc>());
 			Do("GET", "/mycustomindex/_mapping/doc", c => c.GetMapping<Doc>(m => m.Index("mycustomindex")));
-			Do("GET", "/mycustomindex/_mapping/sometype", c => c.GetMapping(m => m.Index("mycustomindex").Type("sometype")));
+			Do("GET", "/mycustomindex/_mapping/sometype", c => c.GetMapping<Doc>(m => m.Index("mycustomindex").Type("sometype")));
 			Do("GET", "/_template/mytemplate", c => c.GetTemplate("mytemplate"));
 			Do("GET", "/_all/_warmer/mywarmer", c => c.GetWarmer("mywarmer"));
 			Do("GET", "/mycustomindex/_warmer/mywarmer", c => c.GetWarmer("mywarmer", g => g.Index("mycustomindex")));

@@ -3758,14 +3758,6 @@ namespace Nest
 			return this;
 		}
 		
-
-		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
-		public IndicesStatsDescriptor Types(params string[] types)
-		{
-			this.Request.RequestParameters.Types(types);
-			return this;
-		}
-		
 	
 	}
 	

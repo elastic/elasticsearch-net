@@ -17,7 +17,7 @@ namespace Nest.Tests.Integration.Mapping
 			);
 			Assert.IsTrue(x.Acknowledged, x.ConnectionStatus.ToString());
 
-			var typeMappingResponse = this._client.GetMapping(gm=>gm.Index(index).Type("elasticsearchprojects"));
+			var typeMappingResponse = this._client.GetMapping<ElasticsearchProject>(gm=>gm.Index(index).Type("elasticsearchprojects"));
 			var typeMapping = typeMappingResponse.Mapping;
 			var mapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(mapping);

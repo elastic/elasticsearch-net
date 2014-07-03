@@ -11,7 +11,7 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("GetSource")]
-	public partial class SourceDescriptor<T> : DocumentPathDescriptor<SourceDescriptor<T>,T, SourceRequestParameters>
+	public partial class SourceDescriptor<T> : DocumentPathDescriptor<SourceDescriptor<T>, SourceRequestParameters, T>
 		where T : class
 	{
 

@@ -99,8 +99,7 @@ namespace Nest
 		public PutMappingDescriptor<T> MapFromAttributes(int maxRecursion = 0)
 		{
 			//TODO no longer needed when we have an IPutMappingRequest
-			IIndicesTypePath<PutMappingRequestParameters, T> request = this;
-			var writer = new TypeMappingWriter(typeof(T), request.Type, this._connectionSettings, maxRecursion);
+			var writer = new TypeMappingWriter(typeof(T), Self.Type, this._connectionSettings, maxRecursion);
 			var mapping = writer.RootObjectMappingFromAttributes();
 			if (mapping == null)
 				return this;

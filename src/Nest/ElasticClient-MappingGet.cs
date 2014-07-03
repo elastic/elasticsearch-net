@@ -12,9 +12,10 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IGetMappingResponse GetMapping(Func<GetMappingDescriptor, GetMappingDescriptor> selector)
+		public IGetMappingResponse GetMapping<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector)
+			where T : class
 		{
-			return this.Dispatch<GetMappingDescriptor, GetMappingRequestParameters, GetMappingResponse>(
+			return this.Dispatch<GetMappingDescriptor<T>, GetMappingRequestParameters, GetMappingResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesGetMappingDispatch<GetMappingResponse>(
 					p.DeserializationState(new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, d, s)))
@@ -23,9 +24,10 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IGetMappingResponse> GetMappingAsync(Func<GetMappingDescriptor, GetMappingDescriptor> selector)
+		public Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector)
+			where T : class
 		{
-			return this.DispatchAsync<GetMappingDescriptor, GetMappingRequestParameters, GetMappingResponse, IGetMappingResponse>(
+			return this.DispatchAsync<GetMappingDescriptor<T>, GetMappingRequestParameters, GetMappingResponse, IGetMappingResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesGetMappingDispatchAsync<GetMappingResponse>(
 					p.DeserializationState(new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, d, s)))
@@ -33,8 +35,7 @@ namespace Nest
 			);
 		}
 
-		private GetMappingResponse DeserializeGetMappingResponse(IElasticsearchResponse response, GetMappingDescriptor d,
-			Stream stream)
+		private GetMappingResponse DeserializeGetMappingResponse(IElasticsearchResponse response, IGetMappingRequest d, Stream stream)
 		{
 			var dict = response.Success
 				? Serializer.Deserialize<GetRootObjectMappingWrapping>(stream)

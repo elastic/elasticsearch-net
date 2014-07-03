@@ -9,18 +9,20 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IIndicesResponse DeleteMapping(Func<DeleteMappingDescriptor, DeleteMappingDescriptor> selector)
+		public IIndicesResponse DeleteMapping<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector)
+			where T : class
 		{
-			return this.Dispatch<DeleteMappingDescriptor, DeleteMappingRequestParameters, IndicesResponse>(
+			return this.Dispatch<DeleteMappingDescriptor<T>, DeleteMappingRequestParameters, IndicesResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatch<IndicesResponse>(p)
 			);
 		}
 
 		/// <inheritdoc />
-		public Task<IIndicesResponse> DeleteMappingAsync(Func<DeleteMappingDescriptor, DeleteMappingDescriptor> selector)
+		public Task<IIndicesResponse> DeleteMappingAsync<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector)
+			where T : class
 		{
-			return this.DispatchAsync<DeleteMappingDescriptor, DeleteMappingRequestParameters, IndicesResponse, IIndicesResponse>(
+			return this.DispatchAsync<DeleteMappingDescriptor<T>, DeleteMappingRequestParameters, IndicesResponse, IIndicesResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatchAsync<IndicesResponse>(p)
 			);

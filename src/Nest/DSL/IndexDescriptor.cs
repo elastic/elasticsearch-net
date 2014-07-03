@@ -8,16 +8,12 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IIndexRequest<T> : IRequest<IndexRequestParameters>
-		where T : class
-	{
-		
-	}
+	public interface IIndexRequest : IRequest<IndexRequestParameters> { }
+	public interface IIndexRequest<T> : IIndexRequest where T : class { }
 
 	internal static class IndexPathInfo
 	{
-		public static void Update<T>(ElasticsearchPathInfo<IndexRequestParameters> pathInfo, IIndexRequest<T> request)
-			where T : class
+		public static void Update(ElasticsearchPathInfo<IndexRequestParameters> pathInfo, IIndexRequest request) 
 		{
 			pathInfo.Index.ThrowIfNull("index");
 			pathInfo.Type.ThrowIfNull("type");
@@ -26,7 +22,14 @@ namespace Nest
 		}
 	}
 	
-	public partial class IndexRequest<T> : DocumentPathBase<IndexRequestParameters, T>, IIndexRequest<T>
+	public partial class IndexRequest : DocumentPathBase<IndexRequestParameters>, IIndexRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
+		{
+			IndexPathInfo.Update(pathInfo, this);
+		}
+	}	
+	public partial class IndexRequest<T> : DocumentPathBase<IndexRequestParameters, T>, IIndexRequest
 		where T : class
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
@@ -35,7 +38,7 @@ namespace Nest
 		}
 	}
 	
-	public partial class IndexDescriptor<T> : DocumentOptionalPathDescriptor<IndexDescriptor<T>, IndexRequestParameters, T>, IIndexRequest<T>
+	public partial class IndexDescriptor<T> : DocumentOptionalPathDescriptor<IndexDescriptor<T>, IndexRequestParameters, T>, IIndexRequest
 		where T : class
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)

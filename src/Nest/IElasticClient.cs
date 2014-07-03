@@ -525,29 +525,29 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-mapping.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the get mapping operation</param>
-		IGetMappingResponse GetMapping(Func<GetMappingDescriptor, GetMappingDescriptor> selector);
+		IGetMappingResponse GetMapping<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null) where T : class;
 		
 		/// <summary>
 		/// The get mapping API allows to retrieve mapping definitions for an index or index/type.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-mapping.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the get mapping operation</param>
-		Task<IGetMappingResponse> GetMappingAsync(Func<GetMappingDescriptor, GetMappingDescriptor> selector);
+		Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null) where T : class;
 		
 		/// <summary>
 		/// Allow to delete a mapping (type) along with its data. 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-mapping.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the delete mapping operation</param>
-		IIndicesResponse DeleteMapping(Func<DeleteMappingDescriptor, DeleteMappingDescriptor> selector);
+		IIndicesResponse DeleteMapping<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null) where T : class;
 		
 		/// <summary>
 		/// Allow to delete a mapping (type) along with its data. 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-mapping.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the delete mapping operation</param>
-		Task<IIndicesResponse> DeleteMappingAsync(Func<DeleteMappingDescriptor, DeleteMappingDescriptor> selector);
-		
+		Task<IIndicesResponse> DeleteMappingAsync<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null) where T : class;
+		 
 		/// <summary>
 		/// The flush API allows to flush one or more indices through an API. The flush process of an index basically 
 		/// frees memory from the index by flushing data to the index storage and clearing the internal transaction log. 

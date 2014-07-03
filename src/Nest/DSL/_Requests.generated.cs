@@ -2325,7 +2325,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-mapping.html
 	///</pre>
 	///</summary>
-	public partial class DeleteMappingRequest 
+	public partial class DeleteMappingRequest<T> 
 			{
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -3419,7 +3419,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html
 	///</pre>
 	///</summary>
-	public partial class IndicesStatsRequest  : BasePathRequest<IndicesStatsRequestParameters>
+	public partial class IndicesStatsRequest 
 			{
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
@@ -3469,20 +3469,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("level", value); }
 		}
 		
-		
-		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
-		public  string[] Types 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("types"); } 
-			set { this.Request.RequestParameters.AddQueryString("types", value); }
-		}
-		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -5033,7 +5019,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html
 	///</pre>
 	///</summary>
-	public partial class UpdateRequest 
+	public partial class UpdateRequest<TUpsert,TDocument> 
 			{
 		
 		///<summary>Explicit write consistency setting for the operation</summary>
@@ -5629,6 +5615,24 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for IndicesDeleteMapping
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-mapping.html
+	///</pre>
+	///</summary>
+	public partial class DeleteMappingRequest 
+			{
+		
+		///<summary>Specify timeout for connection to master</summary>
+		public string MasterTimeout 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
+			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
 	}
