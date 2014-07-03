@@ -3315,7 +3315,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-segments.html
 	///</pre>
 	///</summary>
-	public partial class SegmentsRequest  : BasePathRequest<SegmentsRequestParameters>
+	public partial class SegmentsRequest 
 			{
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3357,12 +3357,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("operation_threading", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SegmentsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
