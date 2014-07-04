@@ -84,7 +84,13 @@ namespace Nest
 		IAcknowledgedResponse UpdateSettings(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector); 
 
 		/// <inheritdoc />
+		IAcknowledgedResponse UpdateSettings(IUpdateSettingsRequest updateSettingsRequest); 
+
+		/// <inheritdoc />
 		Task<IAcknowledgedResponse> UpdateSettingsAsync(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector);
+
+		/// <inheritdoc />
+		Task<IAcknowledgedResponse> UpdateSettingsAsync(IUpdateSettingsRequest updateSettingsRequest);
 
 		/// <summary>
 		/// The validate API allows a user to validate a potentially expensive query without executing it.
@@ -96,7 +102,15 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
+		IValidateResponse Validate<T>(IValidateQueryRequest validateQueryRequest) 
+			where T : class;
+		
+		/// <inheritdoc />
 		Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector) 
+			where T : class;
+
+		/// <inheritdoc />
+		Task<IValidateResponse> ValidateAsync<T>(IValidateQueryRequest validateQueryRequest) 
 			where T : class;
 
 		/// <summary>
@@ -110,7 +124,13 @@ namespace Nest
 		IIndicesOperationResponse OpenIndex(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector);
 		
 		/// <inheritdoc />
+		IIndicesOperationResponse OpenIndex(IOpenIndexRequest openIndexRequest);
+		
+		/// <inheritdoc />
 		Task<IIndicesOperationResponse> OpenIndexAsync(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector);
+		
+		/// <inheritdoc />
+		Task<IIndicesOperationResponse> OpenIndexAsync(IOpenIndexRequest openIndexRequest);
 		
 		/// <summary>
 		/// The open and close index APIs allow to close an index, and later on opening it. 
@@ -123,7 +143,13 @@ namespace Nest
 		IIndicesOperationResponse CloseIndex(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
 		
 		/// <inheritdoc />
+		IIndicesOperationResponse CloseIndex(ICloseIndexRequest closeIndexRequest);
+		
+		/// <inheritdoc />
 		Task<IIndicesOperationResponse> CloseIndexAsync(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
+		
+		/// <inheritdoc />
+		Task<IIndicesOperationResponse> CloseIndexAsync(ICloseIndexRequest closeIndexRequest);
 		
 		/// <summary>
 		/// The refresh API allows to explicitly refresh one or more index, making all operations performed since the last refresh 
@@ -134,7 +160,13 @@ namespace Nest
 		IShardsOperationResponse Refresh(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null);
 		
 		/// <inheritdoc />
+		IShardsOperationResponse Refresh(IRefreshRequest refreshRequest);
+		
+		/// <inheritdoc />
 		Task<IShardsOperationResponse> RefreshAsync(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null);
+
+		/// <inheritdoc />
+		Task<IShardsOperationResponse> RefreshAsync(IRefreshRequest refreshRequest);
 		
 		/// <summary>
 		/// Provide low level segments information that a Lucene index (shard level) is built with. 
@@ -146,7 +178,13 @@ namespace Nest
 		ISegmentsResponse Segments(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null);
 		
 		/// <inheritdoc />
+		ISegmentsResponse Segments(ISegmentsRequest segmentsRequest);
+		
+		/// <inheritdoc />
 		Task<ISegmentsResponse> SegmentsAsync(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null);
+		
+		/// <inheritdoc />
+		Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest segmentsRequest);
 		
 		/// <summary>
 		/// The cluster state API allows to get a comprehensive state information of the whole cluster.
@@ -156,7 +194,13 @@ namespace Nest
 		IClusterStateResponse ClusterState(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null);
 
 		/// <inheritdoc />
+		IClusterStateResponse ClusterState(IClusterStateRequest clusterStateRequest);
+
+		/// <inheritdoc />
 		Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null);
+
+		/// <inheritdoc />
+		Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest clusterStateRequest);
 
 		/// <summary>
 		/// Allows to put a warmup search request on a specific index (or indices), with the body composing of a regular 
@@ -169,7 +213,13 @@ namespace Nest
 		IIndicesOperationResponse PutWarmer(string name, Func<PutWarmerDescriptor, PutWarmerDescriptor> selector);
 		
 		/// <inheritdoc />
+		IIndicesOperationResponse PutWarmer(IPutWarmerRequest putWarmerRequest);
+		
+		/// <inheritdoc />
 		Task<IIndicesOperationResponse> PutWarmerAsync(string name, Func<PutWarmerDescriptor, PutWarmerDescriptor> selector);
+		
+		/// <inheritdoc />
+		Task<IIndicesOperationResponse> PutWarmerAsync(IPutWarmerRequest putWarmerRequest);
 		
 		/// <summary>
 		/// Getting a warmer for specific index (or alias, or several indices) based on its name. 
@@ -180,7 +230,13 @@ namespace Nest
 		IWarmerResponse GetWarmer(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null);
 		
 		/// <inheritdoc />
+		IWarmerResponse GetWarmer(IGetWarmerRequest getWarmerRequest);
+		
+		/// <inheritdoc />
 		Task<IWarmerResponse> GetWarmerAsync(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null);
+
+		/// <summary>
+		Task<IWarmerResponse> GetWarmerAsync(IGetWarmerRequest getWarmerRequest);
 
 		/// <summary>
 		/// Deletes a warmer
@@ -191,7 +247,13 @@ namespace Nest
 		IIndicesOperationResponse DeleteWarmer(string name, Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector = null);
 
 		/// <inheritdoc />
+		IIndicesOperationResponse DeleteWarmer(IDeleteWarmerRequest deleteWarmerRequest);
+
+		/// <inheritdoc />
 		Task<IIndicesOperationResponse> DeleteWarmerAsync(string name, Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IIndicesOperationResponse> DeleteWarmerAsync(IDeleteWarmerRequest deleteWarmerRequest);
 
 		/// <summary>
 		/// Gets an index template
@@ -202,7 +264,13 @@ namespace Nest
 		ITemplateResponse GetTemplate(string name, Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null);
 		
 		/// <inheritdoc />
+		ITemplateResponse GetTemplate(IGetTemplateRequest getTemplateRequest);
+		
+		/// <inheritdoc />
 		Task<ITemplateResponse> GetTemplateAsync(string name, Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null);
+
+		/// <inheritdoc />
+		Task<ITemplateResponse> GetTemplateAsync(IGetTemplateRequest getTemplateRequest);
 
 		/// <summary>
 		/// Index templates allow to define templates that will automatically be applied to new indices created. 
@@ -215,7 +283,13 @@ namespace Nest
 		IIndicesOperationResponse PutTemplate(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector);
 
 		/// <inheritdoc />
+		IIndicesOperationResponse PutTemplate(IPutTemplateRequest putTemplateRequest);
+
+		/// <inheritdoc />
 		Task<IIndicesOperationResponse> PutTemplateAsync(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector);
+
+		/// <inheritdoc />
+		Task<IIndicesOperationResponse> PutTemplateAsync(IPutTemplateRequest putTemplateRequest);
 
 		/// <summary>
 		/// Deletes an index template
@@ -226,7 +300,13 @@ namespace Nest
 		IIndicesOperationResponse DeleteTemplate(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
 		
 		/// <inheritdoc />
+		IIndicesOperationResponse DeleteTemplate(IDeleteTemplateRequest deleteTemplateRequest);
+		
+		/// <inheritdoc />
 		Task<IIndicesOperationResponse> DeleteTemplateAync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
+
+		/// <inheritdoc />
+		Task<IIndicesOperationResponse> DeleteTemplateAync(IDeleteTemplateRequest deleteTemplateRequest);
 
 		/// <summary>
 		/// Unregister a percolator
@@ -237,7 +317,13 @@ namespace Nest
 		IUnregisterPercolateResponse UnregisterPercolator(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null);
 
 		/// <inheritdoc />
+		IUnregisterPercolateResponse UnregisterPercolator(IUnregisterPercolatorRequest unregisterPercolatorRequest);
+
+		/// <inheritdoc />
 		Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(IUnregisterPercolatorRequest unregisterPercolatorRequest);
 
 		/// <summary>
 		/// Register a percolator
@@ -250,7 +336,15 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
+		IRegisterPercolateResponse RegisterPercolator<T>(IRegisterPercolatorRequest registerPercolatorRequest)
+			where T : class;
+
+		/// <inheritdoc />
 		Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(string name, Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(IRegisterPercolatorRequest registerPercolatorRequest)
 			where T : class;
 
 		/// <summary>
@@ -264,7 +358,15 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
+		IPercolateResponse Percolate<T>(IPercolateRequest<T> percolateRequest)
+			where T : class;
+
+		/// <inheritdoc />
 		Task<IPercolateResponse> PercolateAsync<T>(T @object, Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector = null) 
+			where T : class;
+		
+		/// <inheritdoc />
+		Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> percolateRequest) 
 			where T : class;
 		
 		/// <summary>
@@ -278,7 +380,15 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
+		IPercolateCountResponse PercolateCount<T>(IPercolateCountRequest<T> percolateCountRequest)
+			where T : class;
+
+		/// <inheritdoc />
 		Task<IPercolateCountResponse> PercolateCountAsync<T>(T @object, Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> percolateCountRequest)
 			where T : class;
 
 		/// <summary>
@@ -291,7 +401,15 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
+		IIndicesResponse Map<T>(IPutMappingRequest putMappingRequest) 
+			where T : class;
+		
+		/// <inheritdoc />
 		Task<IIndicesResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> mappingSelector)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<IIndicesResponse> MapAsync<T>(IPutMappingRequest putMappingRequest)
 			where T : class;
 
 		/// <summary>
@@ -302,7 +420,13 @@ namespace Nest
 		IGetMappingResponse GetMapping<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null) where T : class;
 		
 		/// <inheritdoc />
+		IGetMappingResponse GetMapping<T>(IGetMappingRequest getMappingRequest) where T : class;
+
+		/// <inheritdoc />
 		Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null) where T : class;
+		
+		/// <inheritdoc />
+		Task<IGetMappingResponse> GetMappingAsync<T>(IGetMappingRequest getMappingRequest) where T : class;
 		
 		/// <summary>
 		/// Allow to delete a mapping (type) along with its data. 
@@ -312,7 +436,13 @@ namespace Nest
 		IIndicesResponse DeleteMapping<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null) where T : class;
 		
 		/// <inheritdoc />
+		IIndicesResponse DeleteMapping<T>(IDeleteMappingRequest deleteMappingRequest) where T : class;
+		
+		/// <inheritdoc />
 		Task<IIndicesResponse> DeleteMappingAsync<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null) where T : class;
+		 
+		/// <inheritdoc />
+		Task<IIndicesResponse> DeleteMappingAsync<T>(IDeleteMappingRequest deleteMappingRequest) where T : class;
 		 
 		/// <summary>
 		/// The flush API allows to flush one or more indices through an API. The flush process of an index basically 
@@ -325,7 +455,13 @@ namespace Nest
 		IShardsOperationResponse Flush(Func<FlushDescriptor, FlushDescriptor> selector);
 		
 		/// <inheritdoc />
+		IShardsOperationResponse Flush(IFlushRequest flushRequest);
+		
+		/// <inheritdoc />
 		Task<IShardsOperationResponse> FlushAsync(Func<FlushDescriptor, FlushDescriptor> selector);
+		
+		/// <inheritdoc />
+		Task<IShardsOperationResponse> FlushAsync(IFlushRequest flushRequest);
 		
 		/// <summary>
 		/// The get settings API allows to retrieve settings of index/indices.
@@ -335,7 +471,13 @@ namespace Nest
 		IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector);
 
 		/// <inheritdoc />
+		IIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest getIndexSettingsRequest);
+
+		/// <inheritdoc />
 		Task<IIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector);
+
+		/// <inheritdoc />
+		Task<IIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest getIndexSettingsRequest);
 
 		/// <summary>
 		/// The delete index API allows to delete an existing index.
@@ -345,7 +487,13 @@ namespace Nest
 		IIndicesResponse DeleteIndex(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector);
 		
 		/// <inheritdoc />
+		IIndicesResponse DeleteIndex(IDeleteIndexRequest deleteIndexRequest);
+
+		/// <inheritdoc />
 		Task<IIndicesResponse> DeleteIndexAsync(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector);
+		
+		/// <inheritdoc />
+		Task<IIndicesResponse> DeleteIndexAsync(IDeleteIndexRequest deleteIndexRequest);
 		
 		/// <summary>
 		/// The clear cache API allows to clear either all caches or specific cached associated with one ore more indices.
@@ -355,7 +503,13 @@ namespace Nest
 		IShardsOperationResponse ClearCache(Func<ClearCacheDescriptor, ClearCacheDescriptor> selector = null);
 		
 		/// <inheritdoc />
+		IShardsOperationResponse ClearCache(IClearCacheRequest clearCacheRequest);
+
+		/// <inheritdoc />
 		Task<IShardsOperationResponse> ClearCacheAsync(Func<ClearCacheDescriptor, ClearCacheDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IShardsOperationResponse> ClearCacheAsync(IClearCacheRequest clearCacheRequest);
 
 		/// <summary>
 		/// The create index API allows to instantiate an index. Elasticsearch provides support for multiple indices, 
@@ -366,7 +520,13 @@ namespace Nest
 		IIndicesOperationResponse CreateIndex(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
 
 		/// <inheritdoc />
+		IIndicesOperationResponse CreateIndex(ICreateIndexRequest createIndexRequest);
+
+		/// <inheritdoc />
 		Task<IIndicesOperationResponse> CreateIndexAsync(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
+		
+		/// <inheritdoc />
+		Task<IIndicesOperationResponse> CreateIndexAsync(ICreateIndexRequest createIndexRequest);
 		
 		/// <summary>
 		/// Does a request to the root of an elasticsearch node
@@ -375,7 +535,13 @@ namespace Nest
 		IRootInfoResponse RootNodeInfo(Func<InfoDescriptor, InfoDescriptor> selector = null);
 		
 		/// <inheritdoc />
+		IRootInfoResponse RootNodeInfo(IInfoRequest infoRequest);
+
+		/// <inheritdoc />
 		Task<IRootInfoResponse> RootNodeInfoAsync(Func<InfoDescriptor, InfoDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IRootInfoResponse> RootNodeInfoAsync(IInfoRequest infoRequest);
 
 		/// <summary>
 		/// Indices level stats provide statistics on different operations happening on an index. The API provides statistics on 
@@ -386,7 +552,13 @@ namespace Nest
 		IGlobalStatsResponse IndicesStats(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null);
 		
 		/// <inheritdoc />
+		IGlobalStatsResponse IndicesStats(IIndicesStatsRequest indicesStatsRequest);
+
+		/// <inheritdoc />
 		Task<IGlobalStatsResponse> IndicesStatsAsync(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null);
+		
+		/// <inheritdoc />
+		Task<IGlobalStatsResponse> IndicesStatsAsync(IIndicesStatsRequest indicesStatsRequest);
 		
 		/// <summary>
 		/// The cluster nodes info API allows to retrieve one or more (or all) of the cluster nodes information.
@@ -396,7 +568,13 @@ namespace Nest
 		INodeInfoResponse NodesInfo(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector = null);
 		
 		/// <inheritdoc />
+		INodeInfoResponse NodesInfo(INodesInfoRequest nodesInfoRequest);
+
+		/// <inheritdoc />
 		Task<INodeInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector = null);
+		
+		/// <inheritdoc />
+		Task<INodeInfoResponse> NodesInfoAsync(INodesInfoRequest nodesInfoRequest);
 		
 		/// <summary>
 		/// The cluster nodes stats API allows to retrieve one or more (or all) of the cluster nodes statistics.
@@ -406,7 +584,13 @@ namespace Nest
 		INodeStatsResponse NodesStats(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null);
 		
 		/// <inheritdoc />
+		INodeStatsResponse NodesStats(INodesStatsRequest nodesStatsRequest);
+
+		/// <inheritdoc />
 		Task<INodeStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null);
+		
+		/// <inheritdoc />
+		Task<INodeStatsResponse> NodesStatsAsync(INodesStatsRequest nodesStatsRequest);
 		
 		/// <summary>
 		/// Used to check if the index (indices) exists or not. 
@@ -416,7 +600,13 @@ namespace Nest
 		IExistsResponse IndexExists(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
 		
 		/// <inheritdoc />
+		IExistsResponse IndexExists(IIndexExistsRequest indexExistsRequest);
+
+		/// <inheritdoc />
 		Task<IExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest indexExistsRequest);
 
 		/// <summary>
 		/// The more like this (mlt) API allows to get documents that are "like" a specified document. 
@@ -428,7 +618,15 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
+		ISearchResponse<T> MoreLikeThis<T>(IMoreLikeThisRequest moreLikeThisRequest)
+			where T : class;
+
+		/// <inheritdoc />
 		Task<ISearchResponse<T>> MoreLikeThisAsync<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<ISearchResponse<T>> MoreLikeThisAsync<T>(IMoreLikeThisRequest moreLikeThisRequest)
 			where T : class;
 
 		/// <summary>
@@ -439,7 +637,13 @@ namespace Nest
 		IHealthResponse ClusterHealth(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null);
 		
 		/// <inheritdoc />
+		IHealthResponse ClusterHealth(IClusterHealthRequest clusterHealthRequest);
+
+		/// <inheritdoc />
 		Task<IHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null);
+
+		/// <inheritdoc />
+		Task<IHealthResponse> ClusterHealthAsync(IClusterHealthRequest clusterHealthRequest);
 		
 		/// <summary>
 		/// Performs the analysis process on a text and return the tokens breakdown of the text.
@@ -449,7 +653,13 @@ namespace Nest
 		IAnalyzeResponse Analyze(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector);
 		
 		/// <inheritdoc />
+		IAnalyzeResponse Analyze(IAnalyzeRequest analyzeRequest);
+
+		/// <inheritdoc />
 		Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector);
+
+		/// <inheritdoc />
+		Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest analyzeRequest);
 
 		/// <summary>
 		/// The search API allows to execute a search query and get back search hits that match the query.
@@ -502,7 +712,13 @@ namespace Nest
 		IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector);
 		
 		/// <inheritdoc />
+		IMultiSearchResponse MultiSearch(IMultiSearchRequest multiSearchRequest);
+
+		/// <inheritdoc />
 		Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector);
+		
+		/// <inheritdoc />
+		Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest multiSearchRequest);
 		
 		/// <summary>
 		/// The count API allows to easily execute a query and get the number of matches for that query. 
@@ -516,7 +732,15 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
+		ICountResponse Count<T>(ICountRequest countRequest)
+			where T : class;
+		
+		/// <inheritdoc />
 		Task<ICountResponse> CountAsync<T>(Func<CountDescriptor<T>, CountDescriptor<T>> countSelector = null) 
+			where T : class;
+
+		/// <inheritdoc />
+		Task<ICountResponse> CountAsync<T>(ICountRequest countRequest) 
 			where T : class;
 
 		/// <summary>
@@ -530,8 +754,15 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IDeleteResponse> DeleteByQueryAsync<T>(
-			Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector) 
+		IDeleteResponse DeleteByQuery<T>(IDeleteByQueryRequest deleteByQueryRequest)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<IDeleteResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector) 
+			where T : class;
+
+		/// <inheritdoc />
+		Task<IDeleteResponse> DeleteByQueryAsync<T>(IDeleteByQueryRequest deleteByQueryRequest) 
 			where T : class;
 
 
@@ -564,7 +795,15 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
+		IBulkResponse DeleteMany<T>(IDeleteRequest deleteRequest) 
+			where T : class;
+
+		/// <inheritdoc />
 		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<T> objects, string index = null, string type = null)
+			where T : class;
+		
+		/// <inheritdoc />
+		Task<IBulkResponse> DeleteManyAsync<T>(IDeleteRequest deleteRequest)
 			where T : class;
 		
 		/// <summary>
@@ -578,7 +817,15 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
+		IIndexResponse Index<T>(IIndexRequest indexRequest)
+			where T : class;
+
+		/// <inheritdoc />
 		Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IndexDescriptor<T>> indexSelector = null)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<IIndexResponse> IndexAsync<T>(IIndexRequest indexRequest)
 			where T : class;
 
 		/// <summary>
@@ -591,7 +838,15 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
+		IDeleteResponse Delete<T>(IDeleteRequest deleteRequest) 
+			where T : class;
+		
+		/// <inheritdoc />
 		Task<IDeleteResponse> DeleteAsync<T>(Func<DeleteDescriptor<T>, DeleteDescriptor<T>> deleteSelector) 
+			where T : class;
+		
+		/// <inheritdoc />
+		Task<IDeleteResponse> DeleteAsync<T>(IDeleteRequest deleteRequest) 
 			where T : class;
 		
 		/// <summary>
@@ -604,7 +859,13 @@ namespace Nest
 		IMultiGetResponse MultiGet(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector);
 		
 		/// <inheritdoc />
+		IMultiGetResponse MultiGet(IMultiGetRequest multiGetRequest);
+
+		/// <inheritdoc />
 		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector);
+		
+		/// <inheritdoc />
+		Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest multiGetRequest);
 		
 		/// <summary>
 		/// Use the /{index}/{type}/{id}/_source endpoint to get just the _source field of the document, 
@@ -617,16 +878,36 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
+		T Source<T>(ISourceRequest sourceRequest) 
+			where T : class;
+		
+		/// <inheritdoc />
 		Task<T> SourceAsync<T>(Func<SourceDescriptor<T>, SourceDescriptor<T>> getSelector) 
 			where T : class;
 		
 		/// <inheritdoc />
-		/// <param name="getSelector">A descriptor that describes which document to fetch and how</param>
+		Task<T> SourceAsync<T>(ISourceRequest sourceRequest) 
+			where T : class;
+		
+		/// <summary>
+		/// Use the /{index}/{type}/{id} to get the document and its metadata
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html#_source
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="getSelector">A descriptor that describes which document's source to fetch</param>
 		IGetResponse<T> Get<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) 
 			where T : class;
 		
 		/// <inheritdoc />
+		IGetResponse<T> Get<T>(IGetRequest getRequest) 
+			where T : class;
+		
+		/// <inheritdoc />
 		Task<IGetResponse<T>> GetAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) 
+			where T : class;
+		
+		/// <inheritdoc />
+		Task<IGetResponse<T>> GetAsync<T>(IGetRequest getRequest) 
 			where T : class;
 		
 		/// <summary>
@@ -658,8 +939,17 @@ namespace Nest
 		IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor);
 		
 		/// <inheritdoc />
+		IGetAliasesResponse GetAliases(IGetAliasesRequest getAliasesRequest);
+
+		/// <inheritdoc />
 		Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor);
 		
+		/// <inheritdoc />
+		Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest);
+		
+
+		//TODO move indexmany to convenience extensions
+
 		/// <summary>
 		/// Shortcut into the <see cref="Bulk"/> call that indexes the specified objects
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
@@ -685,7 +975,13 @@ namespace Nest
 		IShardsOperationResponse Optimize(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null);
 		
 		/// <inheritdoc />
+		IShardsOperationResponse Optimize(IOptimizeRequest optimizeRequest);
+		
+		/// <inheritdoc />
 		Task<IShardsOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null);
+		
+		/// <inheritdoc />
+		Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest optimizeRequest);
 		
 		/// <summary>
 		/// The indices status API allows to get a comprehensive status information of one or more indices.
@@ -695,7 +991,13 @@ namespace Nest
 		IStatusResponse Status(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
 		
 		/// <inheritdoc />
+		IStatusResponse Status(IndicesStatusRequest statusRequest);
+
+		/// <inheritdoc />
 		Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IStatusResponse> StatusAsync(IIndicesStatusRequest statusRequest);
 
         /// <summary>
         /// Returns information and statistics on terms in the fields of a particular document as stored in the index.
@@ -707,7 +1009,15 @@ namespace Nest
             where T : class;
 
 		/// <inheritdoc />
+		ITermVectorResponse TermVector<T>(ITermvectorRequest termvectorRequest) 
+            where T : class;
+
+		/// <inheritdoc />
         Task<ITermVectorResponse> TermVectorAsync<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector) 
+            where T : class;
+
+		/// <inheritdoc />
+        Task<ITermVectorResponse> TermVectorAsync<T>(ITermvectorRequest termvectorRequest) 
             where T : class;
 
         /// <summary>
@@ -720,7 +1030,15 @@ namespace Nest
             where T : class;
 
 		/// <inheritdoc />
+        IMultiTermVectorResponse MultiTermVectors<T>() //TODO OIS Version
+            where T : class;
+
+		/// <inheritdoc />
         Task<IMultiTermVectorResponse> MultiTermVectorsAsync<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
+            where T : class;
+		
+		/// <inheritdoc />
+        Task<IMultiTermVectorResponse> MultiTermVectorsAsync<T>() //TODO OIS Version
             where T : class;
 		
 		/// <summary>
@@ -733,7 +1051,15 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
+		ISuggestResponse Suggest<T>() //TODO OIS Version
+			where T : class;
+
+		/// <inheritdoc />
 		Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, SuggestDescriptor<T>> selector)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<ISuggestResponse> SuggestAsync<T>() //TODO OIS Version
 			where T : class;
 
 		/// <summary>
@@ -744,7 +1070,13 @@ namespace Nest
 		IEmptyResponse ClearScroll(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector);
 
 		/// <inheritdoc />
+		IEmptyResponse ClearScroll(IClearScrollRequest clearScrollRequest);
+
+		/// <inheritdoc />
 		Task<IEmptyResponse> ClearScrollAsync(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector);
+
+		/// <inheritdoc />
+		Task<IEmptyResponse> ClearScrollAsync(IClearScrollRequest clearScrollRequest);
 
 		/// <summary>
 		/// Check if a document exists without returning its contents
