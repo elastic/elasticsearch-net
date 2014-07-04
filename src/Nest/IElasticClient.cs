@@ -17,7 +17,8 @@ namespace Nest
 		/// Helper method that allows you to reindex from one index into another using SCAN and SCROLL.
 		/// </summary>
 		/// <returns>An IObservable you can subscribe to to listen to the progress of the reindexation process</returns>
-		IObservable<IReindexResponse<T>> Reindex<T>(Func<ReindexDescriptor<T>, ReindexDescriptor<T>> reindexSelector) where T : class;
+		IObservable<IReindexResponse<T>> Reindex<T>(Func<ReindexDescriptor<T>, ReindexDescriptor<T>> reindexSelector) 
+			where T : class;
 		
 		/// <summary>
 		/// A search request can be scrolled by specifying the scroll parameter. 
@@ -30,16 +31,20 @@ namespace Nest
 		/// <typeparam name="T">The type that represents the result hits</typeparam>
 		/// <param name="scrollRequest">A descriptor that describes the scroll operation</param>
 		/// <returns>A query response holding T hits as well as the ScrollId for the next scroll operation</returns>
-		ISearchResponse<T> Scroll<T>(IScrollRequest scrollRequest) where T : class;
+		ISearchResponse<T> Scroll<T>(IScrollRequest scrollRequest) 
+			where T : class;
 
 		///<inheritdoc />
-		ISearchResponse<T> Scroll<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector) where T : class;
+		ISearchResponse<T> Scroll<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector) 
+			where T : class;
 		
 		///<inheritdoc />
-		Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest scrollRequest) where T : class;
+		Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest scrollRequest) 
+			where T : class;
 
 		///<inheritdoc />
-		Task<ISearchResponse<T>> ScrollAsync<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector) where T : class;
+		Task<ISearchResponse<T>> ScrollAsync<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector) 
+			where T : class;
 
 		/// <summary>
 		/// The update API allows to update a document based on a script provided. 
@@ -51,7 +56,8 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type to describe the document to be updated</typeparam>
 		/// <param name="updateSelector">a descriptor that describes the update operation</param>
-		IUpdateResponse Update<T>(Func<UpdateDescriptor<T, T>, UpdateDescriptor<T, T>> updateSelector) where T : class;
+		IUpdateResponse Update<T>(Func<UpdateDescriptor<T, T>, UpdateDescriptor<T, T>> updateSelector) 
+			where T : class;
 		
 		/// <inheritdoc />
 		IUpdateResponse Update<T, K>(Func<UpdateDescriptor<T, K>, UpdateDescriptor<T, K>> updateSelector)
@@ -420,29 +426,36 @@ namespace Nest
 		IGetMappingResponse GetMapping<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null) where T : class;
 		
 		/// <inheritdoc />
-		IGetMappingResponse GetMapping<T>(IGetMappingRequest getMappingRequest) where T : class;
+		IGetMappingResponse GetMapping<T>(IGetMappingRequest getMappingRequest) 
+			where T : class;
 
 		/// <inheritdoc />
-		Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null) where T : class;
+		Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null) 
+			where T : class;
 		
 		/// <inheritdoc />
-		Task<IGetMappingResponse> GetMappingAsync<T>(IGetMappingRequest getMappingRequest) where T : class;
+		Task<IGetMappingResponse> GetMappingAsync<T>(IGetMappingRequest getMappingRequest) 
+			where T : class;
 		
 		/// <summary>
 		/// Allow to delete a mapping (type) along with its data. 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-mapping.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the delete mapping operation</param>
-		IIndicesResponse DeleteMapping<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null) where T : class;
+		IIndicesResponse DeleteMapping<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null) 
+			where T : class;
 		
 		/// <inheritdoc />
-		IIndicesResponse DeleteMapping<T>(IDeleteMappingRequest deleteMappingRequest) where T : class;
+		IIndicesResponse DeleteMapping<T>(IDeleteMappingRequest deleteMappingRequest) 
+			where T : class;
 		
 		/// <inheritdoc />
-		Task<IIndicesResponse> DeleteMappingAsync<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null) where T : class;
+		Task<IIndicesResponse> DeleteMappingAsync<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null) 
+			where T : class;
 		 
 		/// <inheritdoc />
-		Task<IIndicesResponse> DeleteMappingAsync<T>(IDeleteMappingRequest deleteMappingRequest) where T : class;
+		Task<IIndicesResponse> DeleteMappingAsync<T>(IDeleteMappingRequest deleteMappingRequest) 
+			where T : class;
 		 
 		/// <summary>
 		/// The flush API allows to flush one or more indices through an API. The flush process of an index basically 
