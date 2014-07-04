@@ -756,8 +756,14 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
+		IExistsResponse DocumentExists(IDocumentExistsRequest documentExistsRequest);
+
+		/// <inheritdoc />
 		Task<IExistsResponse> DocumentExistsAsync<T>(Func<DocumentExistsDescriptor<T>, DocumentExistsDescriptor<T>> existsSelector)
 			where T : class;
+
+		/// <inheritdoc />
+		Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest documentExistsRequest);
 
 		/// <summary>
 		/// Before any snapshot or restore operation can be performed a snapshot repository should be registered in Elasticsearch. 

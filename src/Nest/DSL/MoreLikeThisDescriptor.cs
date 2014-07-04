@@ -25,6 +25,8 @@ namespace Nest
 
 	public partial class MoreLikeThisRequest : DocumentPathBase<MoreLikeThisRequestParameters>, IMoreLikeThisRequest
 	{
+		public MoreLikeThisRequest(IndexNameMarker indexName, TypeNameMarker typeName, string id) : base(indexName, typeName, id) { }
+
 		public ISearchRequest Search { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MoreLikeThisRequestParameters> pathInfo)

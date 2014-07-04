@@ -193,6 +193,7 @@
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\ConnectionSettingsTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="ObjectInitializer\Exists\DocumentExistsRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\DeleteSnapshotRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\DeleteRepositoryRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\GetSnapshotRequestTests.cs" />
@@ -536,6 +537,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Internals\Serialize\OptOutDuringMapping.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Exists\CreateRepositoryBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Snapshots\CreateRepositoryBody.json">

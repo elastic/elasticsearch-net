@@ -24,6 +24,8 @@ namespace Nest
 	
 	public partial class IndexRequest : DocumentPathBase<IndexRequestParameters>, IIndexRequest
 	{
+		public IndexRequest(IndexNameMarker indexName, TypeNameMarker typeName, string id) : base(indexName, typeName, id) { }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
 		{
 			IndexPathInfo.Update(pathInfo, this);

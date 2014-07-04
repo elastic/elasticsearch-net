@@ -20,13 +20,15 @@ namespace Nest
 
     public partial class TermvectorRequest : DocumentPathBase<TermvectorRequestParameters>, ITermvectorRequest
     {
-        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<TermvectorRequestParameters> pathInfo)
+	    public TermvectorRequest(IndexNameMarker indexName, TypeNameMarker typeName, string id) : base(indexName, typeName, id) { }
+
+	    protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<TermvectorRequestParameters> pathInfo)
         {
             TermvectorPathInfo.Update(settings, pathInfo);
         }
     }
 
-    public partial class TermvectorRequest<T> : DocumentPathBase<TermvectorRequestParameters>, ITermvectorRequest<T>
+    public partial class TermvectorRequest<T> : DocumentPathBase<TermvectorRequestParameters, T>, ITermvectorRequest<T>
         where T : class
     {
         protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<TermvectorRequestParameters> pathInfo)

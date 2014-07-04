@@ -12,13 +12,17 @@ namespace Nest
 
     public partial class SourceRequest : DocumentPathBase<SourceRequestParameters>, ISourceRequest
     {
-        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SourceRequestParameters> pathInfo)
+	    public SourceRequest(IndexNameMarker indexName, TypeNameMarker typeName, string id) : base(indexName, typeName, id)
+	    {
+	    }
+
+	    protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SourceRequestParameters> pathInfo)
         {
             SourcePathInfo.Update(settings, pathInfo);
         }
     }
 
-    public partial class SourceRequest<T> : DocumentPathBase<SourceRequestParameters>, ISourceRequest<T>
+    public partial class SourceRequest<T> : DocumentPathBase<SourceRequestParameters, T>, ISourceRequest<T>
         where T : class
     {
         protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SourceRequestParameters> pathInfo)

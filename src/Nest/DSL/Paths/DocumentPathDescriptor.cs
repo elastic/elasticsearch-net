@@ -8,7 +8,14 @@ namespace Nest
 {
 	public abstract class DocumentPathBase<TParameters> : DocumentOptionalPathBase<TParameters> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
-	{}
+	{
+		public DocumentPathBase(IndexNameMarker indexName, TypeNameMarker typeName, string id)
+		{
+			this.Index = indexName;
+			this.Type = typeName;
+			this.Id = id;
+		} 
+	}
 
 
 	public abstract class DocumentPathBase<TParameters, T> : DocumentOptionalPathBase<TParameters, T>
