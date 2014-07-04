@@ -12,9 +12,17 @@ namespace Nest
 		string Scroll { get; set; }
 	}
 
-	internal static class ScrollRequestPathInfo
+	public interface IScrollRequest<T> : IScrollRequest
+		where T : class
 	{
-		public static void UpdatePathInfo(
+		string ScrollId { get; set; }
+
+		string Scroll { get; set; }
+	}
+
+	internal static class ScrollPathInfo
+	{
+		public static void Update(
 			IScrollRequest request,
 			IConnectionSettingsValues settings, 
 			ElasticsearchPathInfo<ScrollRequestParameters> pathInfo)
@@ -35,10 +43,22 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ScrollRequestParameters> pathInfo)
 		{
-			ScrollRequestPathInfo.UpdatePathInfo(this, settings, pathInfo);
+			ScrollPathInfo.Update(this, settings, pathInfo);
 		}
 	}
 
+	public partial class ScrollRequest<T> : BaseRequest<ScrollRequestParameters>, IScrollRequest<T>
+		where T : class
+	{
+		public string ScrollId { get; set; }
+
+		public string Scroll { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ScrollRequestParameters> pathInfo)
+		{
+			ScrollPathInfo.Update(this, settings, pathInfo);
+		}
+	}
 
 	public partial class ScrollDescriptor<T> : BasePathDescriptor<ScrollDescriptor<T>, ScrollRequestParameters>, IScrollRequest,
 		IHideObjectMembers
@@ -48,7 +68,7 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ScrollRequestParameters> pathInfo)
 		{
-			ScrollRequestPathInfo.UpdatePathInfo(this, settings, pathInfo);
+			ScrollPathInfo.Update(this, settings, pathInfo);
 		}
 
 		string IScrollRequest.ScrollId { get; set; }
