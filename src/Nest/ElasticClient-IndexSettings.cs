@@ -18,8 +18,16 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IIndexSettingsResponse> GetIndexSettingsAsync(
-			Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector)
+		public IIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest getIndexSettingsRequest)
+		{
+			return this.Dispatch<IGetIndexSettingsRequest, GetIndexSettingsRequestParameters, IndexSettingsResponse>(
+				getIndexSettingsRequest,
+				(p, d) => this.RawDispatch.IndicesGetSettingsDispatch<IndexSettingsResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector)
 		{
 			return this.DispatchAsync
 				<GetIndexSettingsDescriptor, GetIndexSettingsRequestParameters, IndexSettingsResponse, IIndexSettingsResponse>(
@@ -27,5 +35,15 @@ namespace Nest
 					(p, d) => this.RawDispatch.IndicesGetSettingsDispatchAsync<IndexSettingsResponse>(p)
 				);
 		}
+
+		/// <inheritdoc />
+		public Task<IIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest getIndexSettingsRequest)
+		{
+			return this.DispatchAsync<IGetIndexSettingsRequest, GetIndexSettingsRequestParameters, IndexSettingsResponse, IIndexSettingsResponse>(
+				getIndexSettingsRequest,
+				(p, d) => this.RawDispatch.IndicesGetSettingsDispatchAsync<IndexSettingsResponse>(p)
+			);
+		}
+
 	}
 }

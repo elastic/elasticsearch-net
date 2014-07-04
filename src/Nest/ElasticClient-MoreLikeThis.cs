@@ -23,8 +23,22 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<ISearchResponse<T>> MoreLikeThisAsync<T>(
-			Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector) where T : class
+		public ISearchResponse<T> MoreLikeThis<T>(IMoreLikeThisRequest moreLikeThisRequest)
+			where T : class
+		{
+			return this.Dispatch<IMoreLikeThisRequest, MoreLikeThisRequestParameters, SearchResponse<T>>(
+				moreLikeThisRequest,
+				(p, d) =>
+				{
+					CopySearchRequestParameters(d);
+					return this.RawDispatch.MltDispatch<SearchResponse<T>>(p, d.Search);
+				}
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<ISearchResponse<T>> MoreLikeThisAsync<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector) 
+			where T : class
 		{
 			return this.DispatchAsync<MoreLikeThisDescriptor<T>, MoreLikeThisRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
 				mltSelector,
@@ -36,6 +50,21 @@ namespace Nest
 				}
 			);
 		}
+
+		/// <inheritdoc />
+		public Task<ISearchResponse<T>> MoreLikeThisAsync<T>(IMoreLikeThisRequest moreLikeThisRequest) 
+			where T : class
+		{
+			return this.DispatchAsync<IMoreLikeThisRequest, MoreLikeThisRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
+				moreLikeThisRequest,
+				(p, d) =>
+				{
+					CopySearchRequestParameters(d);
+					return this.RawDispatch.MltDispatchAsync<SearchResponse<T>>(p, d.Search);
+				}
+			);
+		}
+
 
 		private static void CopySearchRequestParameters(IMoreLikeThisRequest request) 
 		{

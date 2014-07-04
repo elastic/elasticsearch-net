@@ -184,18 +184,18 @@ namespace Nest
 		/// <summary>
 		/// _msearch needs a specialized json format in the body
 		/// </summary>
-		public string SerializeMultiSearch(MultiSearchDescriptor multiSearchDescriptor)
+		public string SerializeMultiSearch(IMultiSearchRequest multiSearchRequest)
 		{
 			var sb = new StringBuilder();
 			var inferrer = new ElasticInferrer(this._settings);
-			foreach (var operation in multiSearchDescriptor._operations.Values)
+			foreach (var operation in multiSearchRequest.Operations.Values)
 			{
 				var path = operation.ToPathInfo(this._settings);
 				var op = new
 				{
 					index = path.Index,
 					type = path.Type,
-					search_type = this.GetSearchType(operation, multiSearchDescriptor),
+					search_type = this.GetSearchType(operation, multiSearchRequest),
 					preference = operation._Preference,
 					routing = operation._Routing
 				};
@@ -212,14 +212,13 @@ namespace Nest
 		}
 
 
-		protected string GetSearchType(ISearchRequest descriptor, MultiSearchDescriptor multiSearchDescriptor)
+		protected string GetSearchType(ISearchRequest descriptor, IMultiSearchRequest multiSearchRequest)
 		{
 			if (descriptor._SearchType != null)
 			{
 				return descriptor._SearchType.Value.GetStringValue();
 			}
-			IRequest<MultiSearchRequestParameters> request = multiSearchDescriptor;
-			return request.RequestParameters.GetQueryStringValue<string>("search_type");
+			return multiSearchRequest.RequestParameters.GetQueryStringValue<string>("search_type");
 		}
 
 	}

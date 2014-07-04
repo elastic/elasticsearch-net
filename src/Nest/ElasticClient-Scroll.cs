@@ -61,6 +61,8 @@ namespace Nest
 			);
 		}
 		
+
+
 		/// <inheritdoc />
 		public IEmptyResponse ClearScroll(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector)
 		{
@@ -74,16 +76,17 @@ namespace Nest
 				);
 		}
 
-		private static string PatchClearScroll(ElasticsearchPathInfo<ClearScrollRequestParameters> p)
+		/// <inheritdoc />
+		public IEmptyResponse ClearScroll(IClearScrollRequest clearScrollRequest)
 		{
-			string body = null;
-			var scrollId = p.ScrollId;
-			if (scrollId != null && scrollId != "_all")
-			{
-				p.ScrollId = null;
-				body = scrollId;
-			}
-			return body;
+			return this.Dispatch<IClearScrollRequest, ClearScrollRequestParameters, EmptyResponse>(
+				clearScrollRequest,
+				(p, d) =>
+				{
+					var body = PatchClearScroll(p);
+					return this.RawDispatch.ClearScrollDispatch<EmptyResponse>(p, body);
+				}
+				);
 		}
 
 		/// <inheritdoc />
@@ -99,5 +102,29 @@ namespace Nest
 			);
 		}
 
+		/// <inheritdoc />
+		public Task<IEmptyResponse> ClearScrollAsync(IClearScrollRequest clearScrollRequest)
+		{
+			return this.DispatchAsync<IClearScrollRequest, ClearScrollRequestParameters, EmptyResponse, IEmptyResponse>(
+				clearScrollRequest,
+				(p, d) =>
+				{
+					var body = PatchClearScroll(p);
+					return this.RawDispatch.ClearScrollDispatchAsync<EmptyResponse>(p, body);
+				}
+			);
+		}
+
+		private static string PatchClearScroll(ElasticsearchPathInfo<ClearScrollRequestParameters> p)
+		{
+			string body = null;
+			var scrollId = p.ScrollId;
+			if (scrollId != null && scrollId != "_all")
+			{
+				p.ScrollId = null;
+				body = scrollId;
+			}
+			return body;
+		}
 	}
 }

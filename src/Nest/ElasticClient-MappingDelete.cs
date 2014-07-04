@@ -20,6 +20,16 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
+		public IIndicesResponse DeleteMapping<T>(IDeleteMappingRequest deleteMappingRequest)
+			where T : class
+		{
+			return this.Dispatch<IDeleteMappingRequest, DeleteMappingRequestParameters, IndicesResponse>(
+				deleteMappingRequest,
+				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatch<IndicesResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
 		public Task<IIndicesResponse> DeleteMappingAsync<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null)
 			where T : class
 		{
@@ -29,5 +39,16 @@ namespace Nest
 				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatchAsync<IndicesResponse>(p)
 			);
 		}
+
+		/// <inheritdoc />
+		public Task<IIndicesResponse> DeleteMappingAsync<T>(IDeleteMappingRequest deleteMappingRequest)
+			where T : class
+		{
+			return this.DispatchAsync<IDeleteMappingRequest, DeleteMappingRequestParameters, IndicesResponse, IIndicesResponse>(
+				deleteMappingRequest,
+				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatchAsync<IndicesResponse>(p)
+			);
+		}
+
 	}
 }

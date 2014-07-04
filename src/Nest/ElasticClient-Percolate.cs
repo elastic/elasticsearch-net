@@ -7,9 +7,12 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
+
+		//TODO these set allowed status codes to 404, but generated low level client also does this
+		// and seems to override connnection configuration doing so..
+
 		/// <inheritdoc />
-		public IUnregisterPercolateResponse UnregisterPercolator(string name,
-			Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null)
+		public IUnregisterPercolateResponse UnregisterPercolator(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
 			return this.Dispatch<UnregisterPercolatorDescriptor, DeleteRequestParameters, UnregisterPercolateResponse>(
@@ -19,8 +22,16 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(string name,
-			Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null)
+		public IUnregisterPercolateResponse UnregisterPercolator(IUnregisterPercolatorRequest unregisterPercolatorRequest)
+		{
+			return this.Dispatch<IUnregisterPercolatorRequest, DeleteRequestParameters, UnregisterPercolateResponse>(
+				unregisterPercolatorRequest,
+				(p, d) => this.RawDispatch.DeleteDispatch<UnregisterPercolateResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
 			return this.DispatchAsync
@@ -31,8 +42,18 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public IRegisterPercolateResponse RegisterPercolator<T>(string name,
-			Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector)
+		public Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(IUnregisterPercolatorRequest unregisterPercolatorRequest)
+		{
+			return this.DispatchAsync<IUnregisterPercolatorRequest, DeleteRequestParameters, UnregisterPercolateResponse, IUnregisterPercolateResponse>(
+					unregisterPercolatorRequest,
+					(p, d) => this.RawDispatch.DeleteDispatchAsync<UnregisterPercolateResponse>(p)
+				);
+		}
+
+
+
+		/// <inheritdoc />
+		public IRegisterPercolateResponse RegisterPercolator<T>(string name, Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector)
 			where T : class
 		{
 			percolatorSelector.ThrowIfNull("percolatorSelector");
@@ -43,8 +64,18 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(string name,
-			Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector) where T : class
+		public IRegisterPercolateResponse RegisterPercolator<T>(IRegisterPercolatorRequest registerPercolatorRequest)
+			where T : class
+		{
+			return this.Dispatch<IRegisterPercolatorRequest, IndexRequestParameters, RegisterPercolateResponse>(
+				registerPercolatorRequest,
+				(p, d) => this.RawDispatch.IndexDispatch<RegisterPercolateResponse>(p, d)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(string name, Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector) 
+			where T : class
 		{
 			percolatorSelector.ThrowIfNull("percolatorSelector");
 			return this.DispatchAsync
@@ -55,12 +86,33 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
+		public Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(IRegisterPercolatorRequest registerPercolatorRequest) 
+			where T : class
+		{
+			return this.DispatchAsync<IRegisterPercolatorRequest, IndexRequestParameters, RegisterPercolateResponse, IRegisterPercolateResponse>(
+					registerPercolatorRequest,
+					(p, d) => this.RawDispatch.IndexDispatchAsync<RegisterPercolateResponse>(p, d)
+				);
+		}
+
+
+		/// <inheritdoc />
 		public IPercolateResponse Percolate<T>(T @object, Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector = null)
 			where T : class
 		{
 			percolateSelector = percolateSelector ?? (s => s);
 			return this.Dispatch<PercolateDescriptor<T>, PercolateRequestParameters, PercolateResponse>(
 				s => percolateSelector(s.Object(@object)),
+				(p, d) => this.RawDispatch.PercolateDispatch<PercolateResponse>(p, d)
+			);
+		}
+
+		/// <inheritdoc />
+		public IPercolateResponse Percolate<T>(IPercolateRequest<T> percolateRequest)
+			where T : class
+		{
+			return this.Dispatch<IPercolateRequest<T>, PercolateRequestParameters, PercolateResponse>(
+				percolateRequest,
 				(p, d) => this.RawDispatch.PercolateDispatch<PercolateResponse>(p, d)
 			);
 		}
@@ -77,12 +129,34 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
+		public Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> percolateRequest)
+			where T : class
+		{
+			return this.DispatchAsync<IPercolateRequest<T>, PercolateRequestParameters, PercolateResponse, IPercolateResponse>(
+				percolateRequest,
+				(p, d) => this.RawDispatch.PercolateDispatchAsync<PercolateResponse>(p, d)
+			);
+		}
+
+
+
+		/// <inheritdoc />
 		public IPercolateCountResponse PercolateCount<T>(T @object, Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
 			where T : class
 		{
 			percolateSelector = percolateSelector ?? (s => s);
 			return this.Dispatch<PercolateCountDescriptor<T>, PercolateCountRequestParameters, PercolateCountResponse>(
 				s => percolateSelector(s.Object(@object)),
+				(p, d) => this.RawDispatch.CountPercolateDispatch<PercolateCountResponse>(p, d)
+			);
+		}
+
+		/// <inheritdoc />
+		public IPercolateCountResponse PercolateCount<T>(IPercolateCountRequest<T> percolateCountRequest)
+			where T : class
+		{
+			return this.Dispatch<IPercolateCountRequest<T>, PercolateCountRequestParameters, PercolateCountResponse>(
+				percolateCountRequest,
 				(p, d) => this.RawDispatch.CountPercolateDispatch<PercolateCountResponse>(p, d)
 			);
 		}
@@ -97,5 +171,16 @@ namespace Nest
 				(p, d) => this.RawDispatch.CountPercolateDispatchAsync<PercolateCountResponse>(p, d)
 			);
 		}
+
+		/// <inheritdoc />
+		public Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> percolateCountRequest)
+			where T : class
+		{
+			return this.DispatchAsync<IPercolateCountRequest<T>, PercolateCountRequestParameters, PercolateCountResponse, IPercolateCountResponse>(
+				percolateCountRequest,
+				(p, d) => this.RawDispatch.CountPercolateDispatchAsync<PercolateCountResponse>(p, d)
+			);
+		}
+
 	}
 }

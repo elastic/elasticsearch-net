@@ -20,6 +20,16 @@ namespace Nest
 		}
 
 		///<inheritdoc />
+		public ITermVectorResponse TermVector<T>(ITermvectorRequest termvectorRequest)
+			where T : class
+		{
+			return this.Dispatch<ITermvectorRequest, TermvectorRequestParameters, TermVectorResponse>(
+				termvectorRequest,
+				(p, d) => this.RawDispatch.TermvectorDispatch<TermVectorResponse>(p, d)
+			);
+		}
+
+		///<inheritdoc />
 		public Task<ITermVectorResponse> TermVectorAsync<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector)
 			where T : class
 		{
@@ -28,5 +38,16 @@ namespace Nest
 				(p, d) => this.RawDispatch.TermvectorDispatchAsync<TermVectorResponse>(p, d)
 			);
 		}
+
+		///<inheritdoc />
+		public Task<ITermVectorResponse> TermVectorAsync<T>(ITermvectorRequest termvectorRequest)
+			where T : class
+		{
+			return this.DispatchAsync<ITermvectorRequest , TermvectorRequestParameters, TermVectorResponse, ITermVectorResponse>(
+				termvectorRequest,
+				(p, d) => this.RawDispatch.TermvectorDispatchAsync<TermVectorResponse>(p, d)
+			);
+		}
+
 	}
 }

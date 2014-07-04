@@ -19,6 +19,15 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
+		public IIndicesResponse DeleteIndex(IDeleteIndexRequest deleteIndexRequest)
+		{
+			return this.Dispatch<IDeleteIndexRequest, DeleteIndexRequestParameters, IndicesResponse>(
+				deleteIndexRequest,
+				(p, d) => this.RawDispatch.IndicesDeleteDispatch<IndicesResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
 		public Task<IIndicesResponse> DeleteIndexAsync(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector)
 		{
 			return this.DispatchAsync<DeleteIndexDescriptor, DeleteIndexRequestParameters, IndicesResponse, IIndicesResponse>(
@@ -26,5 +35,15 @@ namespace Nest
 				(p, d) => this.RawDispatch.IndicesDeleteDispatchAsync<IndicesResponse>(p)
 			);
 		}
+
+		/// <inheritdoc />
+		public Task<IIndicesResponse> DeleteIndexAsync(IDeleteIndexRequest deleteIndexRequest)
+		{
+			return this.DispatchAsync<IDeleteIndexRequest, DeleteIndexRequestParameters, IndicesResponse, IIndicesResponse>(
+				deleteIndexRequest,
+				(p, d) => this.RawDispatch.IndicesDeleteDispatchAsync<IndicesResponse>(p)
+			);
+		}
+
 	}
 }

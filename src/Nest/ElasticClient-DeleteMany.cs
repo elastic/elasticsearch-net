@@ -7,6 +7,8 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
+		//TODO Move to convenience extensions
+
 		/// <inheritdoc />
 		public IBulkResponse DeleteMany<T>(IEnumerable<T> @objects, string index = null, string type = null) where T : class
 		{

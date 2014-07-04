@@ -9,12 +9,20 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IIndicesResponse Map<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> mappingSelector) where T : class
+		public IIndicesResponse Map<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> mappingSelector) 
+			where T : class
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
 			var descriptor = mappingSelector(new PutMappingDescriptor<T>(_connectionSettings));
+			return this.Map<T>(descriptor);
+		}
+
+		/// <inheritdoc />
+		public IIndicesResponse Map<T>(IPutMappingRequest putMappingRequest) 
+			where T : class
+		{
 			return this.Dispatch<IPutMappingRequest, PutMappingRequestParameters, IndicesResponse>(
-				descriptor,
+				putMappingRequest,
 				(p, d) =>
 				{
 					var o = new Dictionary<string, RootObjectMapping>
@@ -32,8 +40,15 @@ namespace Nest
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
 			var descriptor = mappingSelector(new PutMappingDescriptor<T>(_connectionSettings));
+			return this.MapAsync<T>(descriptor);
+		}
+
+		/// <inheritdoc />
+		public Task<IIndicesResponse> MapAsync<T>(IPutMappingRequest putMappingRequest)
+			where T : class
+		{
 			return this.DispatchAsync<IPutMappingRequest, PutMappingRequestParameters, IndicesResponse, IIndicesResponse>(
-				descriptor,
+				putMappingRequest,
 				(p, d) =>
 				{
 					var o = new Dictionary<string, RootObjectMapping>
@@ -44,5 +59,6 @@ namespace Nest
 				}
 			);
 		}
+
 	}
 }

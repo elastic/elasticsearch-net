@@ -78,7 +78,16 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
+		Task<IUpdateResponse> UpdateAsync<T>(IUpdateRequest<T, T> updateRequest)
+			where T : class;
+		
+		/// <inheritdoc />
 		Task<IUpdateResponse> UpdateAsync<T, K>(Func<UpdateDescriptor<T, K>, UpdateDescriptor<T, K>> updateSelector)
+			where T : class
+			where K : class;
+
+		/// <inheritdoc />
+		Task<IUpdateResponse> UpdateAsync<T, K>(IUpdateRequest<T, K> updateRequest)
 			where T : class
 			where K : class;
 
@@ -804,21 +813,19 @@ namespace Nest
 		/// <param name="objects">List of objects to delete</param>
 		/// <param name="index">Override the inferred indexname for T</param>
 		/// <param name="type">Override the inferred typename for T</param>
+		
+		//TODO move to extension methods
+		
 		IBulkResponse DeleteMany<T>(IEnumerable<T> @objects, string index = null, string type = null) 
-			where T : class;
-
-		/// <inheritdoc />
-		IBulkResponse DeleteMany<T>(IDeleteRequest deleteRequest) 
 			where T : class;
 
 		/// <inheritdoc />
 		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<T> objects, string index = null, string type = null)
 			where T : class;
 		
-		/// <inheritdoc />
-		Task<IBulkResponse> DeleteManyAsync<T>(IDeleteRequest deleteRequest)
-			where T : class;
 		
+
+
 		/// <summary>
 		/// The index API adds or updates a typed JSON document in a specific index, making it searchable. 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-index_.html
@@ -830,7 +837,7 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		IIndexResponse Index<T>(IIndexRequest indexRequest)
+		IIndexResponse Index<T>(IIndexRequest<T> indexRequest)
 			where T : class;
 
 		/// <inheritdoc />
@@ -838,7 +845,7 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IIndexResponse> IndexAsync<T>(IIndexRequest indexRequest)
+		Task<IIndexResponse> IndexAsync<T>(IIndexRequest<T> indexRequest)
 			where T : class;
 
 		/// <summary>
@@ -1004,7 +1011,7 @@ namespace Nest
 		IStatusResponse Status(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
 		
 		/// <inheritdoc />
-		IStatusResponse Status(IndicesStatusRequest statusRequest);
+		IStatusResponse Status(IIndicesStatusRequest statusRequest);
 
 		/// <inheritdoc />
 		Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
@@ -1043,17 +1050,11 @@ namespace Nest
             where T : class;
 
 		/// <inheritdoc />
-        IMultiTermVectorResponse MultiTermVectors<T>() //TODO OIS Version
-            where T : class;
-
-		/// <inheritdoc />
         Task<IMultiTermVectorResponse> MultiTermVectorsAsync<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
             where T : class;
 		
-		/// <inheritdoc />
-        Task<IMultiTermVectorResponse> MultiTermVectorsAsync<T>() //TODO OIS Version
-            where T : class;
-		
+		//TODO OIS Version MultiTermVector
+
 		/// <summary>
 		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester. 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters.html
@@ -1064,16 +1065,11 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		ISuggestResponse Suggest<T>() //TODO OIS Version
-			where T : class;
-
-		/// <inheritdoc />
 		Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, SuggestDescriptor<T>> selector)
 			where T : class;
 
-		/// <inheritdoc />
-		Task<ISuggestResponse> SuggestAsync<T>() //TODO OIS Version
-			where T : class;
+		//TODO OIS Version Suggest
+		
 
 		/// <summary>
 		/// Deletes a registered scroll request on the cluster 

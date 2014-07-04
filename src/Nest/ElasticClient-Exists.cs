@@ -44,7 +44,7 @@ namespace Nest
 			);
 		}
 
-		private ElasticsearchResponse<ExistsResponse> ToExistsResponse(ElasticsearchResponse<VoidResponse> existsDispatch)
+		private ElasticsearchResponse<ExistsResponse> ToExistsResponse(IElasticsearchResponse existsDispatch)
 		{
 			return ElasticsearchResponse.CloneFrom<ExistsResponse>(existsDispatch, new ExistsResponse(existsDispatch));
 		}

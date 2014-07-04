@@ -22,7 +22,7 @@ namespace Nest
 	{
 		string SerializeBulkDescriptor(IBulkRequest bulkRequest);
 
-		string SerializeMultiSearch(MultiSearchDescriptor multiSearchDescriptor);
+		string SerializeMultiSearch(IMultiSearchRequest multiSearchRequest);
 
 		T DeserializeInternal<T>(Stream stream, JsonConverter converter);
 	}

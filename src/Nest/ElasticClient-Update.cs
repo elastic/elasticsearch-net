@@ -48,6 +48,13 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
+		public Task<IUpdateResponse> UpdateAsync<T>(IUpdateRequest<T, T> updateRequest)
+			where T : class
+		{
+			return this.UpdateAsync<T, T>(updateRequest);
+		}
+
+		/// <inheritdoc />
 		public Task<IUpdateResponse> UpdateAsync<T, K>(Func<UpdateDescriptor<T, K>, UpdateDescriptor<T, K>> updateSelector)
 			where T : class
 			where K : class
@@ -57,5 +64,17 @@ namespace Nest
 				(p, d) => this.RawDispatch.UpdateDispatchAsync<UpdateResponse>(p, d)
 			);
 		}
+
+		/// <inheritdoc />
+		public Task<IUpdateResponse> UpdateAsync<T, K>(IUpdateRequest<T, K> updateRequest)
+			where T : class
+			where K : class
+		{
+			return this.DispatchAsync<IUpdateRequest<T, K>, UpdateRequestParameters, UpdateResponse, IUpdateResponse>(
+				updateRequest,
+				(p, d) => this.RawDispatch.UpdateDispatchAsync<UpdateResponse>(p, d)
+			);
+		}
+
 	}
 }

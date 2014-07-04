@@ -1893,7 +1893,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-index_.html
 	///</pre>
 	///</summary>
-	public partial class IndexRequest<T> 
+	public partial class IndexRequest<TDocument> 
 			{
 		
 		///<summary>Explicit write consistency setting for the operation</summary>
@@ -5465,104 +5465,6 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
-		}
-		
-		
-		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
-		
-		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
-	}
-	
-		
-	///<summary>Request parameters for Index
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-index_.html
-	///</pre>
-	///</summary>
-	public partial class IndexRequest 
-			{
-		
-		///<summary>Explicit write consistency setting for the operation</summary>
-		public Consistency Consistency 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Consistency>("consistency"); } 
-			set { this.Request.RequestParameters.AddQueryString("consistency", value); }
-		}
-		
-		
-		///<summary>Explicit operation type</summary>
-		public OpType OpType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<OpType>("op_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("op_type", value); }
-		}
-		
-		
-		///<summary>ID of the parent document</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
-		
-		///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("refresh"); } 
-			set { this.Request.RequestParameters.AddQueryString("refresh", value); }
-		}
-		
-		
-		///<summary>Specific replication type</summary>
-		public Replication Replication 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Replication>("replication"); } 
-			set { this.Request.RequestParameters.AddQueryString("replication", value); }
-		}
-		
-		
-		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
-		
-		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
-		
-		///<summary>Explicit timestamp for the document</summary>
-		public string Timestamp 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timestamp"); } 
-			set { this.Request.RequestParameters.AddQueryString("timestamp", value); }
-		}
-		
-		
-		///<summary>Expiration time for the document</summary>
-		public string Ttl 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("ttl"); } 
-			set { this.Request.RequestParameters.AddQueryString("ttl", value); }
 		}
 		
 		

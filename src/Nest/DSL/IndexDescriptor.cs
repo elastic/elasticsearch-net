@@ -8,12 +8,16 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IIndexRequest : IRequest<IndexRequestParameters> { }
-	public interface IIndexRequest<T> : IIndexRequest where T : class { }
+	public interface IIndexRequest<TDocument> : IDocumentOptionalPath<IndexRequestParameters, TDocument> 
+		where TDocument : class
+	{
+		TDocument Document { get; set;  }
+	}
 
 	internal static class IndexPathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<IndexRequestParameters> pathInfo, IIndexRequest request) 
+		public static void Update<T>(ElasticsearchPathInfo<IndexRequestParameters> pathInfo, IIndexRequest<T> request) 
+			where T : class
 		{
 			pathInfo.Index.ThrowIfNull("index");
 			pathInfo.Type.ThrowIfNull("type");
@@ -22,30 +26,27 @@ namespace Nest
 		}
 	}
 	
-	public partial class IndexRequest : DocumentPathBase<IndexRequestParameters>, IIndexRequest
+	public partial class IndexRequest<TDocument> : DocumentPathBase<IndexRequestParameters, TDocument>, IIndexRequest<TDocument>
+		where TDocument : class
 	{
-		public IndexRequest(IndexNameMarker indexName, TypeNameMarker typeName, string id) : base(indexName, typeName, id) { }
+		public TDocument Document { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
 		{
 			IndexPathInfo.Update(pathInfo, this);
 		}
-	}	
-	public partial class IndexRequest<T> : DocumentPathBase<IndexRequestParameters, T>, IIndexRequest
-		where T : class
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
-		{
-			IndexPathInfo.Update(pathInfo, this);
-		}
+
 	}
 	
-	public partial class IndexDescriptor<T> : DocumentOptionalPathDescriptor<IndexDescriptor<T>, IndexRequestParameters, T>, IIndexRequest
+	public partial class IndexDescriptor<T> : DocumentOptionalPathDescriptor<IndexDescriptor<T>, IndexRequestParameters, T>, IIndexRequest<T>
 		where T : class
 	{
+		T IIndexRequest<T>.Document { get; set; }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
 		{
 			IndexPathInfo.Update(pathInfo, this);
 		}
+
 	}
 }
