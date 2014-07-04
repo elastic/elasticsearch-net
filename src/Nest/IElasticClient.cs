@@ -768,7 +768,13 @@ namespace Nest
 		IAcknowledgedResponse CreateRepository(string repository, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
 
 		/// <inheritdoc />
+		IAcknowledgedResponse CreateRepository(ICreateRepositoryRequest createRepositoryRequest);
+
+		/// <inheritdoc />
 		Task<IAcknowledgedResponse> CreateRepositoryAsync(string repository, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
+
+		/// <inheritdoc />
+		Task<IAcknowledgedResponse> CreateRepositoryAsync(ICreateRepositoryRequest createRepositoryRequest);
 
 		/// <summary>
 		/// Delete a repository, if you have ongoing restore operations be sure to delete the indices being restored into first.
@@ -779,7 +785,13 @@ namespace Nest
 		IAcknowledgedResponse DeleteRepository(string repository, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
 
 		/// <inheritdoc />
+		IAcknowledgedResponse DeleteRepository(IDeleteRepositoryRequest deleteRepositoryRequest);
+
+		/// <inheritdoc />
 		Task<IAcknowledgedResponse> DeleteRepositoryAsync(string repository, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
+		
+		/// <inheritdoc />
+		Task<IAcknowledgedResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest deleteRepositoryRequest);
 		
 		/// <summary>
 		/// A repository can contain multiple snapshots of the same cluster. Snapshot are identified by unique names within the cluster.
@@ -791,7 +803,13 @@ namespace Nest
 		ISnapshotResponse Snapshot(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
 
 		/// <inheritdoc />
+		ISnapshotResponse Snapshot(ISnapshotRequest snapshotRequest);
+
+		/// <inheritdoc />
 		Task<ISnapshotResponse> SnapshotAsync(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
+		
+		/// <inheritdoc />
+		Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest snapshotRequest);
 		
 		/// <summary>
 		/// Delete a snapshot
@@ -803,7 +821,13 @@ namespace Nest
 		IAcknowledgedResponse DeleteSnapshot(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
 
 		/// <inheritdoc />
+		IAcknowledgedResponse DeleteSnapshot(IDeleteSnapshotRequest deleteSnapshotRequest);
+
+		/// <inheritdoc />
 		Task<IAcknowledgedResponse> DeleteSnapshotAsync(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
+		
+		/// <inheritdoc />
+		Task<IAcknowledgedResponse> DeleteSnapshotAsync(IDeleteSnapshotRequest deleteSnapshotRequest);
 		
 		/// <summary>
 		/// Gets information about one or more snapshots
@@ -815,7 +839,13 @@ namespace Nest
 		IGetSnapshotResponse GetSnapshot(string repository, string snapshotName, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
 
 		/// <inheritdoc />
+		IGetSnapshotResponse GetSnapshot(IGetSnapshotRequest getSnapshotRequest);
+
+		/// <inheritdoc />
 		Task<IGetSnapshotResponse> GetSnapshotAsync(string repository, string snapshotName, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest getSnapshotRequest);
 		
 		/// <summary>
 		/// Restore a snapshot

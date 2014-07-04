@@ -23,6 +23,8 @@ namespace Nest
 	
 	public partial class CreateRepositoryRequest : RepositoryPathBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
 	{
+		public CreateRepositoryRequest(string repositoryName) : base(repositoryName) { }
+
 		public IRepository Repository { get; set; }
 		
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateRepositoryRequestParameters> pathInfo)

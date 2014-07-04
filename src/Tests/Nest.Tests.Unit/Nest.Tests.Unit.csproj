@@ -193,6 +193,11 @@
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\ConnectionSettingsTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshots\DeleteSnapshotRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshots\DeleteRepositoryRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshots\GetSnapshotRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshots\CreateRepositoryRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshots\SnapshotRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\RestoreRequestTests.cs" />
     <Compile Include="QueryParsers\BaseParserTests.cs" />
     <Compile Include="QueryParsers\Filter\AndFilterTests.cs" />
@@ -531,6 +536,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Internals\Serialize\OptOutDuringMapping.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Snapshots\CreateRepositoryBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Snapshots\SnapshotBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Snapshots\RestoreBody.json">

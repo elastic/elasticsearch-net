@@ -123,6 +123,7 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IAliasAction>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IBulkOperation>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IMultiGetOperation>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IRepository>(type, memberSerialization, defaultProperties, lookup);
 			return defaultProperties;
 		}
 

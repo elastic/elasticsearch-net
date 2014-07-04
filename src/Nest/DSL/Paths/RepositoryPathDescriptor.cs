@@ -32,6 +32,11 @@ namespace Nest
 		where TParameters : IRequestParameters, new()
 	{
 		public string RepositoryName { get; set; }
+		
+		public RepositoryPathBase(string repositoryName)
+		{
+			this.RepositoryName = repositoryName;
+		}
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{	

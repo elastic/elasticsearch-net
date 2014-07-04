@@ -21,6 +21,8 @@ namespace Nest
 	
 	public partial class DeleteRepositoryRequest : RepositoryPathBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
 	{
+		public DeleteRepositoryRequest(string repositoryName) : base(repositoryName) { }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRepositoryRequestParameters> pathInfo)
 		{
 			DeleteRepositoryPathInfo.Update(pathInfo, this);

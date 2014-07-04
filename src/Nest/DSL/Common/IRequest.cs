@@ -1,10 +1,12 @@
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection.Configuration;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// </summary>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IRequest {}
 	public interface IRequest<TParameters> : IPathInfo<TParameters>, IRequest
 		where TParameters : IRequestParameters, new()

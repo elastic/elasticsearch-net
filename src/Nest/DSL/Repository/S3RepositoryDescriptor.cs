@@ -5,14 +5,23 @@ using System.Text;
 
 namespace Nest
 {
+	public class S3Repository : IRepository
+	{
+		string IRepository.Type { get { return "s3"; } }
+		public IDictionary<string, object> Settings { get; set; }
+	}
+
+
 	public class S3RepositoryDescriptor : IRepository
 	{
-		public string Type { get { return "s3"; } }
-		public IDictionary<string, object> Settings { get; private set; }
+		string IRepository.Type { get { return "s3"; } }
+		IDictionary<string, object> IRepository.Settings { get; set; }
+
+		private IRepository Self { get { return this; } }
 
 		public S3RepositoryDescriptor()
 		{
-			this.Settings = new Dictionary<string, object>();
+			Self.Settings = new Dictionary<string, object>();
 		}
 		/// <summary>
 		/// The name of the bucket to be used for snapshots. (Mandatory)
@@ -20,7 +29,7 @@ namespace Nest
 		/// <param name="bucket"></param>
 		public S3RepositoryDescriptor Bucket(string bucket)
 		{
-			this.Settings["bucket"] = bucket;
+			Self.Settings["bucket"] = bucket;
 			return this;
 		}
 		/// <summary>
@@ -30,7 +39,7 @@ namespace Nest
 		/// <returns></returns>
 		public S3RepositoryDescriptor Region(string region)
 		{
-			this.Settings["region"] = region;
+			Self.Settings["region"] = region;
 			return this;
 		}
 		/// <summary>
@@ -40,7 +49,7 @@ namespace Nest
 		/// <returns></returns>
 		public S3RepositoryDescriptor BasePath(string basePath)
 		{
-			this.Settings["base_path"] = basePath;
+			Self.Settings["base_path"] = basePath;
 			return this;
 		}
 		/// <summary>
@@ -50,7 +59,7 @@ namespace Nest
 		/// <returns></returns>
 		public S3RepositoryDescriptor AccessKey(string accessKey)
 		{
-			this.Settings["access_key"] = accessKey;
+			Self.Settings["access_key"] = accessKey;
 			return this;
 		}
 		/// <summary>
@@ -60,7 +69,7 @@ namespace Nest
 		/// <returns></returns>
 		public S3RepositoryDescriptor SecretKey(string secretKey)
 		{
-			this.Settings["secretKey"] = secretKey;
+			Self.Settings["secretKey"] = secretKey;
 			return this;
 		}
 		/// <summary>
@@ -70,7 +79,7 @@ namespace Nest
 		/// <param name="compress"></param>
 		public S3RepositoryDescriptor Compress(bool compress = true)
 		{
-			this.Settings["compress"] = compress;
+			Self.Settings["compress"] = compress;
 			return this;
 		}
 		/// <summary>
@@ -79,7 +88,7 @@ namespace Nest
 		/// <param name="concurrentStreams"></param>
 		public S3RepositoryDescriptor ConcurrentStreams(int concurrentStreams)
 		{
-			this.Settings["concurrent_streams"] = concurrentStreams;
+			Self.Settings["concurrent_streams"] = concurrentStreams;
 			return this;
 		}
 		/// <summary>
@@ -90,7 +99,7 @@ namespace Nest
 		/// <param name="chunkSize"></param>
 		public S3RepositoryDescriptor ChunkSize(string chunkSize)
 		{
-			this.Settings["chunk_size"] = chunkSize;
+			Self.Settings["chunk_size"] = chunkSize;
 			return this;
 		}
 
