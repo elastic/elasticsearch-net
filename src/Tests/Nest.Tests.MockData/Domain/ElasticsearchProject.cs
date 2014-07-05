@@ -53,5 +53,7 @@ namespace Nest.Tests.MockData.Domain
 
 		public string MyBinaryField { get; set; }
 
+		[ElasticProperty(Type=FieldType.Object)]
+		public Product Product { get; set; }
 	}
 }
