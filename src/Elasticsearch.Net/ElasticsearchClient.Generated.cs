@@ -1041,8 +1041,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAliasesRequestParameters());
+			var passIn = new CatAliasesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1072,8 +1074,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAliasesRequestParameters());
+			var passIn = new CatAliasesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1105,8 +1109,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAliasesRequestParameters());
+			var passIn = new CatAliasesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1138,8 +1144,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAliasesRequestParameters());
+			var passIn = new CatAliasesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1171,8 +1179,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAliasesRequestParameters());
+			var passIn = new CatAliasesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1204,8 +1214,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAliasesRequestParameters());
+			var passIn = new CatAliasesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1239,8 +1251,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAliasesRequestParameters());
+			var passIn = new CatAliasesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1274,8 +1288,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAliasesRequestParameters());
+			var passIn = new CatAliasesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1305,8 +1321,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAllocationRequestParameters());
+			var passIn = new CatAllocationRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1336,8 +1354,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAllocationRequestParameters());
+			var passIn = new CatAllocationRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1369,8 +1389,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAllocationRequestParameters());
+			var passIn = new CatAllocationRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1402,8 +1424,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAllocationRequestParameters());
+			var passIn = new CatAllocationRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1435,8 +1459,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAllocationRequestParameters());
+			var passIn = new CatAllocationRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1468,8 +1494,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAllocationRequestParameters());
+			var passIn = new CatAllocationRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1503,8 +1531,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAllocationRequestParameters());
+			var passIn = new CatAllocationRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1538,8 +1568,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatAllocationRequestParameters());
+			var passIn = new CatAllocationRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1569,8 +1601,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatCountRequestParameters());
+			var passIn = new CatCountRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1600,8 +1634,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatCountRequestParameters());
+			var passIn = new CatCountRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1633,8 +1669,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatCountRequestParameters());
+			var passIn = new CatCountRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1666,8 +1704,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatCountRequestParameters());
+			var passIn = new CatCountRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1699,8 +1739,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatCountRequestParameters());
+			var passIn = new CatCountRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1732,8 +1774,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatCountRequestParameters());
+			var passIn = new CatCountRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1767,8 +1811,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatCountRequestParameters());
+			var passIn = new CatCountRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1802,8 +1848,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatCountRequestParameters());
+			var passIn = new CatCountRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1833,8 +1881,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatFielddataRequestParameters());
+			var passIn = new CatFielddataRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1864,8 +1914,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatFielddataRequestParameters());
+			var passIn = new CatFielddataRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1897,8 +1949,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatFielddataRequestParameters());
+			var passIn = new CatFielddataRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1930,8 +1984,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatFielddataRequestParameters());
+			var passIn = new CatFielddataRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1961,8 +2017,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatHealthRequestParameters());
+			var passIn = new CatHealthRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -1992,8 +2050,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatHealthRequestParameters());
+			var passIn = new CatHealthRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2025,8 +2085,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatHealthRequestParameters());
+			var passIn = new CatHealthRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2058,8 +2120,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatHealthRequestParameters());
+			var passIn = new CatHealthRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2089,8 +2153,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatHelpRequestParameters());
+			var passIn = new CatHelpRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2120,8 +2186,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatHelpRequestParameters());
+			var passIn = new CatHelpRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2153,8 +2221,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatHelpRequestParameters());
+			var passIn = new CatHelpRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2186,8 +2256,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatHelpRequestParameters());
+			var passIn = new CatHelpRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2217,8 +2289,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatIndicesRequestParameters());
+			var passIn = new CatIndicesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2248,8 +2322,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatIndicesRequestParameters());
+			var passIn = new CatIndicesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2281,8 +2357,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatIndicesRequestParameters());
+			var passIn = new CatIndicesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2314,8 +2392,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatIndicesRequestParameters());
+			var passIn = new CatIndicesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2347,8 +2427,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatIndicesRequestParameters());
+			var passIn = new CatIndicesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2380,8 +2462,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatIndicesRequestParameters());
+			var passIn = new CatIndicesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2415,8 +2499,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatIndicesRequestParameters());
+			var passIn = new CatIndicesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2450,8 +2536,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatIndicesRequestParameters());
+			var passIn = new CatIndicesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2481,8 +2569,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatMasterRequestParameters());
+			var passIn = new CatMasterRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2512,8 +2602,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatMasterRequestParameters());
+			var passIn = new CatMasterRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2545,8 +2637,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatMasterRequestParameters());
+			var passIn = new CatMasterRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2578,8 +2672,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatMasterRequestParameters());
+			var passIn = new CatMasterRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2609,8 +2705,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatNodesRequestParameters());
+			var passIn = new CatNodesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2640,8 +2738,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatNodesRequestParameters());
+			var passIn = new CatNodesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2673,8 +2773,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatNodesRequestParameters());
+			var passIn = new CatNodesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2706,8 +2808,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatNodesRequestParameters());
+			var passIn = new CatNodesRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2737,8 +2841,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatPendingTasksRequestParameters());
+			var passIn = new CatPendingTasksRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2768,8 +2874,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatPendingTasksRequestParameters());
+			var passIn = new CatPendingTasksRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2801,8 +2909,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatPendingTasksRequestParameters());
+			var passIn = new CatPendingTasksRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2834,8 +2944,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatPendingTasksRequestParameters());
+			var passIn = new CatPendingTasksRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2865,8 +2977,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatPluginsRequestParameters());
+			var passIn = new CatPluginsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2896,8 +3010,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatPluginsRequestParameters());
+			var passIn = new CatPluginsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2929,8 +3045,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatPluginsRequestParameters());
+			var passIn = new CatPluginsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2962,8 +3080,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatPluginsRequestParameters());
+			var passIn = new CatPluginsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -2993,8 +3113,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatRecoveryRequestParameters());
+			var passIn = new CatRecoveryRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3024,8 +3146,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatRecoveryRequestParameters());
+			var passIn = new CatRecoveryRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3057,8 +3181,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatRecoveryRequestParameters());
+			var passIn = new CatRecoveryRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3090,8 +3216,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatRecoveryRequestParameters());
+			var passIn = new CatRecoveryRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3123,8 +3251,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatRecoveryRequestParameters());
+			var passIn = new CatRecoveryRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3156,8 +3286,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatRecoveryRequestParameters());
+			var passIn = new CatRecoveryRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3191,8 +3323,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatRecoveryRequestParameters());
+			var passIn = new CatRecoveryRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3226,8 +3360,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatRecoveryRequestParameters());
+			var passIn = new CatRecoveryRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3257,8 +3393,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatShardsRequestParameters());
+			var passIn = new CatShardsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3288,8 +3426,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatShardsRequestParameters());
+			var passIn = new CatShardsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3321,8 +3461,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatShardsRequestParameters());
+			var passIn = new CatShardsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3354,8 +3496,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatShardsRequestParameters());
+			var passIn = new CatShardsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3387,8 +3531,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatShardsRequestParameters());
+			var passIn = new CatShardsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3420,8 +3566,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatShardsRequestParameters());
+			var passIn = new CatShardsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3455,8 +3603,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatShardsRequestParameters());
+			var passIn = new CatShardsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3490,8 +3640,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatShardsRequestParameters());
+			var passIn = new CatShardsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3521,8 +3673,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatThreadPoolRequestParameters());
+			var passIn = new CatThreadPoolRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3552,8 +3706,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatThreadPoolRequestParameters());
+			var passIn = new CatThreadPoolRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3585,8 +3741,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatThreadPoolRequestParameters());
+			var passIn = new CatThreadPoolRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -3618,8 +3776,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new CatThreadPoolRequestParameters());
+			var passIn = new CatThreadPoolRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -6903,8 +7063,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new DeleteRequestParameters());
+			var passIn = new DeleteRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -6940,8 +7102,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new DeleteRequestParameters());
+			var passIn = new DeleteRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -6979,8 +7143,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new DeleteRequestParameters());
+			var passIn = new DeleteRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -7018,8 +7184,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new DeleteRequestParameters());
+			var passIn = new DeleteRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -7351,8 +7519,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new DocumentExistsRequestParameters());
+			var passIn = new DocumentExistsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -7388,8 +7558,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new DocumentExistsRequestParameters());
+			var passIn = new DocumentExistsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -7427,8 +7599,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new DocumentExistsRequestParameters());
+			var passIn = new DocumentExistsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -7466,8 +7640,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new DocumentExistsRequestParameters());
+			var passIn = new DocumentExistsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -10999,8 +11175,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new IndexExistsRequestParameters());
+			var passIn = new IndexExistsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -11032,8 +11210,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new IndexExistsRequestParameters());
+			var passIn = new IndexExistsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -11067,8 +11247,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new IndexExistsRequestParameters());
+			var passIn = new IndexExistsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			requestParams = requestParameters(passIn);
 			
 
 
@@ -11102,8 +11284,10 @@ namespace Elasticsearch.Net
 			IRequestParameters requestParams = null;
 				
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new IndexExistsRequestParameters());
+			var passIn = new IndexExistsRequestParameters();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			requestParams = requestParameters(passIn);
 			
 
 

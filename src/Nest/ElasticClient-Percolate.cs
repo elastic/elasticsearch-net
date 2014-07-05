@@ -8,15 +8,12 @@ namespace Nest
 	public partial class ElasticClient
 	{
 
-		//TODO these set allowed status codes to 404, but generated low level client also does this
-		// and seems to override connnection configuration doing so..
-
 		/// <inheritdoc />
 		public IUnregisterPercolateResponse UnregisterPercolator(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
 			return this.Dispatch<UnregisterPercolatorDescriptor, DeleteRequestParameters, UnregisterPercolateResponse>(
-				s => selector(s.Name(name).RequestConfiguration(r=>r.AllowedStatusCodes(404))),
+				s => selector(s.Name(name)),
 				(p, d) => this.RawDispatch.DeleteDispatch<UnregisterPercolateResponse>(p)
 			);
 		}
@@ -34,9 +31,8 @@ namespace Nest
 		public Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync
-				<UnregisterPercolatorDescriptor, DeleteRequestParameters, UnregisterPercolateResponse, IUnregisterPercolateResponse>(
-					s => selector(s.Name(name).RequestConfiguration(r=>r.AllowedStatusCodes(404))),
+			return this.DispatchAsync<UnregisterPercolatorDescriptor, DeleteRequestParameters, UnregisterPercolateResponse, IUnregisterPercolateResponse>(
+					s => selector(s.Name(name)),
 					(p, d) => this.RawDispatch.DeleteDispatchAsync<UnregisterPercolateResponse>(p)
 				);
 		}

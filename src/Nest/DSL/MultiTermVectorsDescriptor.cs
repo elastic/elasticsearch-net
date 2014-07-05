@@ -8,8 +8,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	//TODO OIS Version
-
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IMultiTermVectorsRequest : IIndexTypePath<MultiTermVectorsRequestParameters>
 	{

@@ -6,8 +6,6 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	//TODO OIS Version
-
 	public class MultiTermVectorDocumentDescriptor<T> : 
 		DocumentOptionalPathDescriptor<MultiTermVectorDocumentDescriptor<T>, MultiTermVectorsRequestParameters, T>, 
 		IMultiTermVectorDocumentDescriptor 

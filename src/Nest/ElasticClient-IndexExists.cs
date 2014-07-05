@@ -9,14 +9,12 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		//TODO descriptors set 404 but the lowlevel client should already do so 
-
 
 		/// <inheritdoc />
 		public IExistsResponse IndexExists(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector)
 		{
 			return this.Dispatch<IndexExistsDescriptor, IndexExistsRequestParameters, ExistsResponse>(
-				d => selector(d.RequestConfiguration(r=>r.AllowedStatusCodes(404))),
+				selector,
 				(p, d) => this.RawDispatch.IndicesExistsDispatch<ExistsResponse>(
 					p.DeserializationState(new IndexExistConverter(DeserializeExistsResponse))
 				)
@@ -38,7 +36,7 @@ namespace Nest
 		public Task<IExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector)
 		{
 			return this.DispatchAsync<IndexExistsDescriptor, IndexExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				d => selector(d.RequestConfiguration(r=>r.AllowedStatusCodes(404))),
+				selector,
 				(p, d) => this.RawDispatch.IndicesExistsDispatchAsync<ExistsResponse>(
 					p.DeserializationState(new IndexExistConverter(DeserializeExistsResponse))
 				)

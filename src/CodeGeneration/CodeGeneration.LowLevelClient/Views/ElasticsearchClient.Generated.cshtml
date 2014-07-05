@@ -78,8 +78,10 @@ namespace Elasticsearch.Net
 				}
 				<text>
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new @(method.QueryStringParamName)());
+			var passIn = new @(method.QueryStringParamName)();
+			requestParams = passIn;
 			requestParams.RequestConfiguration = new RequestConfiguration { @Raw(string.Join(", ", config)) };
+			requestParams = requestParameters(passIn);
 			</text>
 			}
 			else
