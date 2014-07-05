@@ -3893,7 +3893,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html
 	///</pre>
 	///</summary>
-	public partial class MultiTermVectorsRequest  : BasePathRequest<MultiTermVectorsRequestParameters>
+	public partial class MultiTermVectorsRequest 
 			{
 		
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
@@ -3967,12 +3967,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("parent", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		

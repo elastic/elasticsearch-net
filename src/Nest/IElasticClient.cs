@@ -1050,11 +1050,15 @@ namespace Nest
             where T : class;
 
 		/// <inheritdoc />
+		IMultiTermVectorResponse MultiTermVectors(IMultiTermVectorsRequest multiTermVectorsRequest);
+
+		/// <inheritdoc />
         Task<IMultiTermVectorResponse> MultiTermVectorsAsync<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
             where T : class;
 		
-		//TODO OIS Version MultiTermVector
-
+		/// <inheritdoc />
+		Task<IMultiTermVectorResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest multiTermVectorsRequest);
+		
 		/// <summary>
 		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester. 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters.html
