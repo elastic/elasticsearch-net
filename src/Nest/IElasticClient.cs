@@ -805,26 +805,6 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
 		
-		/// <summary>
-		/// Shortcut into the <see cref="Bulk"/> call that deletes the specified objects
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
-		/// </summary>
-		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
-		/// <param name="objects">List of objects to delete</param>
-		/// <param name="index">Override the inferred indexname for T</param>
-		/// <param name="type">Override the inferred typename for T</param>
-		
-		//TODO move to extension methods
-		
-		IBulkResponse DeleteMany<T>(IEnumerable<T> @objects, string index = null, string type = null) 
-			where T : class;
-
-		/// <inheritdoc />
-		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<T> objects, string index = null, string type = null)
-			where T : class;
-		
-		
-
 
 		/// <summary>
 		/// The index API adds or updates a typed JSON document in a specific index, making it searchable. 
