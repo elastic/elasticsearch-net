@@ -49,34 +49,5 @@ namespace Nest
 				(p, d) => this.RawDispatch.IndexDispatchAsync<IndexResponse>(p, indexRequest.Document));
 		}
 
-		// TODO move to convenience extensions
-
-		/// <inheritdoc />
-		public IBulkResponse IndexMany<T>(IEnumerable<T> @objects, string index = null, string type = null) 
-			where T : class
-		{
-			@objects.ThrowIfEmpty("objects");
-			var bulk = new BulkDescriptor().FixedPath(index, type);
-			foreach (var o in @objects)
-			{
-				var o1 = o;
-				bulk.Index<T>(b => b.Document(o1));
-			}
-			return Bulk(b => bulk);
-		}
-
-		/// <inheritdoc />
-		public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index = null, string type = null)
-			where T : class
-		{
-			@objects.ThrowIfEmpty("objects");
-			var bulk = new BulkDescriptor().FixedPath(index, type);
-			foreach (var o in @objects)
-			{
-				var o1 = o;
-				bulk.Index<T>(b => b.Document(o1));
-			}
-			return BulkAsync(b => bulk);
-		}
 	}
 }

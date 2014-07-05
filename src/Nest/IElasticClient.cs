@@ -948,23 +948,6 @@ namespace Nest
 		Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest);
 		
 
-		//TODO move indexmany to convenience extensions
-
-		/// <summary>
-		/// Shortcut into the <see cref="Bulk"/> call that indexes the specified objects
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
-		/// </summary>
-		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
-		/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
-		/// <param name="index">Override the inferred indexname for T</param>
-		/// <param name="type">Override the inferred typename for T</param>
-		IBulkResponse IndexMany<T>(IEnumerable<T> @objects, string index = null, string type = null) 
-			where T : class;
-		
-		/// <inheritdoc />
-		Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index = null, string type = null)
-			where T : class;
-		
 		/// <summary>
 		/// The optimize API allows to optimize one or more indices through an API. The optimize process basically optimizes 
 		/// the index for faster search operations (and relates to the number of segments a Lucene index holds within each shard).
