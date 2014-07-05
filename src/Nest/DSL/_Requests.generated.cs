@@ -4747,7 +4747,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
 	///</pre>
 	///</summary>
-	public partial class SuggestRequest  : BasePathRequest<SuggestRequestParameters>
+	public partial class SuggestRequest 
 			{
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -4797,12 +4797,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SuggestRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		

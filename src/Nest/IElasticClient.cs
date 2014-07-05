@@ -1065,10 +1065,14 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
+		ISuggestResponse Suggest(ISuggestRequest suggestRequest);
+
+		/// <inheritdoc />
 		Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, SuggestDescriptor<T>> selector)
 			where T : class;
 
-		//TODO OIS Version Suggest
+		/// <inheritdoc />
+		Task<ISuggestResponse> SuggestAsync(ISuggestRequest suggestRequest);
 		
 
 		/// <summary>
