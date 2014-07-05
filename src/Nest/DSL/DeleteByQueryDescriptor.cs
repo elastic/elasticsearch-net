@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteByQueryRequest : IRequest<DeleteByQueryRequestParameters>
+	public interface IDeleteByQueryRequest : IQueryPath<DeleteByQueryRequestParameters>
 	{
 		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }

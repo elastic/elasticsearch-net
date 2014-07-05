@@ -9,7 +9,7 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMultiGetRequest : IRequest<MultiGetRequestParameters>
+	public interface IMultiGetRequest : IFixedIndexTypePath<MultiGetRequestParameters>
 	{
 		[JsonProperty("docs")]
 		IEnumerable<IMultiGetOperation> GetOperations { get; set; }

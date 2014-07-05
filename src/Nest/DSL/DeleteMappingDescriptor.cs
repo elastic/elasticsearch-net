@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteMappingRequest : IRequest<DeleteMappingRequestParameters> { }
+	public interface IDeleteMappingRequest : IIndexTypePath<DeleteMappingRequestParameters> { }
 	public interface IDeleteMappingRequest<T> : IDeleteMappingRequest where T : class { }
 
 	internal static class DeleteMappingPathInfo

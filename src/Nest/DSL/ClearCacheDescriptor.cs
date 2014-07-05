@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IClearCacheRequest : IRequest<ClearCacheRequestParameters> { }
+	public interface IClearCacheRequest : IIndicesOptionalPath<ClearCacheRequestParameters> { }
 
 	internal static class ClearCachePathInfo
 	{

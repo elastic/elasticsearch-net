@@ -11180,8 +11180,6 @@ namespace Elasticsearch.Net
 			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			requestParams = requestParameters(passIn);
 			
-
-
 			return this.DoRequest<T>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetWarmerRequest : IRequest<GetWarmerRequestParameters> { }
+	public interface IGetWarmerRequest : IIndicesOptionalTypesNamePath<GetWarmerRequestParameters> { }
 
 	internal static class GetWarmerPathInfo
 	{

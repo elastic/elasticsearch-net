@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IClusterStateRequest : IRequest<ClusterStateRequestParameters>
+	public interface IClusterStateRequest : IIndicesOptionalPath<ClusterStateRequestParameters>
 	{
 		IEnumerable<ClusterStateMetric> Metrics { get; set; }
 	}

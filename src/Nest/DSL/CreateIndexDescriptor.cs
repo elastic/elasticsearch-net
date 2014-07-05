@@ -9,7 +9,7 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters>
+	public interface ICreateIndexRequest : IIndexPath<CreateIndexRequestParameters>
 	{
 		IndexSettings IndexSettings { get; set; }
 	}

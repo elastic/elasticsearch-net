@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IOpenIndexRequest : IRequest<OpenIndexRequestParameters> { }
+	public interface IOpenIndexRequest : IIndexPath<OpenIndexRequestParameters> { }
 
 	internal static class OpenIndexPathInfo
 	{

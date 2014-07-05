@@ -6,7 +6,7 @@ using Nest.Resolvers.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICountRequest : IRequest<CountRequestParameters>
+	public interface ICountRequest : IQueryPath<CountRequestParameters>
 	{
 		
 		[JsonProperty("query")]

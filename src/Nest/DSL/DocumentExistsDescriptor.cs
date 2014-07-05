@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDocumentExistsRequest : IRequest<DocumentExistsRequestParameters> { }
+	public interface IDocumentExistsRequest : IDocumentOptionalPath<DocumentExistsRequestParameters> { }
 
 	public interface IDocumentExistsRequest<T> : IDocumentExistsRequest where T : class {}
 

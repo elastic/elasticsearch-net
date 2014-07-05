@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IFlushRequest : IRequest<FlushRequestParameters> { }
+	public interface IFlushRequest : IIndicesOptionalExplicitAllPath<FlushRequestParameters> { }
 
 	internal static class FlushPathInfo
 	{

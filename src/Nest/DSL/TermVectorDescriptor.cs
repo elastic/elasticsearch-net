@@ -6,7 +6,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-    public interface ITermvectorRequest : IRequest<TermvectorRequestParameters> { }
+    public interface ITermvectorRequest : IDocumentOptionalPath<TermvectorRequestParameters> { }
 
     public interface ITermvectorRequest<T> : ITermvectorRequest where T : class { }
 

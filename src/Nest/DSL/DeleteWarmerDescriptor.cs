@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteWarmerRequest : IRequest<DeleteWarmerRequestParameters> { }
+	public interface IDeleteWarmerRequest : IIndicesOptionalTypesNamePath<DeleteWarmerRequestParameters> { }
 
 	internal static class DeleteWarmerPathInfo
 	{
@@ -18,7 +18,7 @@ namespace Nest
 		}
 	}
 	
-	public partial class DeleteWarmerRequest : NamePathBase<DeleteWarmerRequestParameters>, IDeleteWarmerRequest
+	public partial class DeleteWarmerRequest : IndicesOptionalTypesNamePathBase<DeleteWarmerRequestParameters>, IDeleteWarmerRequest
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteWarmerRequestParameters> pathInfo)
 		{

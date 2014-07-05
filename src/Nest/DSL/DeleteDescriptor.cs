@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteRequest : IRequest<DeleteRequestParameters> { }
+	public interface IDeleteRequest : IDocumentOptionalPath<DeleteRequestParameters> { }
 
 	public interface IDeleteRequest<T> : IDeleteRequest where T : class {}
 

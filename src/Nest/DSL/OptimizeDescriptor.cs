@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IOptimizeRequest : IRequest<OptimizeRequestParameters> { }
+	public interface IOptimizeRequest : IIndicesOptionalPath<OptimizeRequestParameters> { }
 
 	internal static class OptimizePathInfo
 	{

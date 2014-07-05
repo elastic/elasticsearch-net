@@ -4,14 +4,11 @@ using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface INodesStatsRequest : IRequest<NodesStatsRequestParameters>
+	public interface INodesStatsRequest : INodeIdOptionalPath<NodesStatsRequestParameters>
 	{
 		IEnumerable<NodesStatsMetric> Metrics { get; set; }
 		IEnumerable<NodesStatsIndexMetric> IndexMetrics { get; set; }

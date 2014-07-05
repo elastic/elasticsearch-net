@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetMappingRequest : IRequest<GetMappingRequestParameters> { }
+	public interface IGetMappingRequest : IIndexTypePath<GetMappingRequestParameters> { }
 	public interface IGetMappingRequest<T> : IGetMappingRequest where T : class { }
 
 	internal static class GetMappingPathInfo

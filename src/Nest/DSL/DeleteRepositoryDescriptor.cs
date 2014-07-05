@@ -9,7 +9,7 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters> { }
+	public interface IDeleteRepositoryRequest : IRepositoryPath<DeleteRepositoryRequestParameters> { }
 
 	internal static class DeleteRepositoryPathInfo
 	{

@@ -18,7 +18,7 @@ namespace Nest
 		}
 	}
 	
-	public partial class InfoRequest : IndicesOptionalPathBase<InfoRequestParameters>, IInfoRequest
+	public partial class InfoRequest : BasePathRequest<InfoRequestParameters>, IInfoRequest
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<InfoRequestParameters> pathInfo)
 		{

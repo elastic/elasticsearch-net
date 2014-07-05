@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetTemplateRequest : IRequest<GetTemplateRequestParameters> { }
+	public interface IGetTemplateRequest : INamePath<GetTemplateRequestParameters> { }
 
 	internal static class GetTemplatePathInfo
 	{

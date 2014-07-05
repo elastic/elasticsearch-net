@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICreateRepositoryRequest : IRequest<CreateRepositoryRequestParameters>
+	public interface ICreateRepositoryRequest : IRepositoryPath<CreateRepositoryRequestParameters>
 	{
 		IRepository Repository { get; set; }
 	}

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface INodesInfoRequest : IRequest<NodesInfoRequestParameters>
+	public interface INodesInfoRequest : INodeIdOptionalPath<NodesInfoRequestParameters>
 	{
 		IEnumerable<NodesInfoMetric> Metrics { get; set; }
 		

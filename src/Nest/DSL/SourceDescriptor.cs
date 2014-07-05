@@ -6,7 +6,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-    public interface ISourceRequest : IRequest<SourceRequestParameters> { }
+    public interface ISourceRequest : IDocumentOptionalPath<SourceRequestParameters> { }
 
     public interface ISourceRequest<T> : ISourceRequest where T : class { }
 

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetSnapshotRequest : IRequest<GetSnapshotRequestParameters> { }
+	public interface IGetSnapshotRequest : IRepositorySnapshotPath<GetSnapshotRequestParameters> { }
 
 	internal static class GetSnapshotPathInfo
 	{
