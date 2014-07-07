@@ -256,7 +256,7 @@
     <Compile Include="ObjectInitializer\Template\PutTemplateRequestTests.cs" />
     <Compile Include="ObjectInitializer\TermVector\TermVectorRequestTests.cs" />
     <Compile Include="ObjectInitializer\Update\UpdateRequestTests.cs" />
-    <Compile Include="ObjectInitializer\Update\UpdateSettingsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\UpdateSettings\UpdateSettingsRequestTests.cs" />
     <Compile Include="ObjectInitializer\Validate\ValidateQueryRequestTests.cs" />
     <Compile Include="QueryParsers\BaseParserTests.cs" />
     <Compile Include="QueryParsers\Filter\AndFilterTests.cs" />
@@ -674,7 +674,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Update\UpdateBody.json" />
-    <None Include="ObjectInitializer\Update\UpdateSettingsBody.json" />
+    <None Include="ObjectInitializer\UpdateSettings\UpdateSettingsBody.json" />
     <None Include="ObjectInitializer\Validate\ValidateQueryBody.json" />
     <None Include="packages.config" />
     <None Include="QueryParsers\Filter\GeoBoundingBox\LatLon.json">
