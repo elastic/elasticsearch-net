@@ -29,7 +29,21 @@ namespace Nest
 			pathInfo.Index = index;
 			pathInfo.Name = path.Name;
 		}
-	
+		
+		public static void SetRouteParameters<TParameters, T>(
+			IIndexNamePath<TParameters> path,
+			IConnectionSettingsValues settings, 
+			ElasticsearchPathInfo<TParameters> pathInfo)
+			where TParameters : IRequestParameters, new()
+			where T : class
+		{	
+			if (path.Name == null)
+				throw new DslException("missing name route parameter");
+			var inferrer = new ElasticInferrer(settings);
+			var index = inferrer.IndexName(path.Index) ?? inferrer.IndexName(typeof(T)) ?? inferrer.DefaultIndex; 
+			pathInfo.Index = index;
+			pathInfo.Name = path.Name;
+		}
 	}
 
 	public abstract class IndexNamePathBase<TParameters> : BasePathRequest<TParameters>, IIndexNamePath<TParameters>
@@ -38,9 +52,33 @@ namespace Nest
 		public IndexNameMarker Index { get; set; }
 		public string Name { get; set; }
 		
+		public IndexNamePathBase(IndexNameMarker index, string name)
+		{
+			this.Index = index;
+			this.Name = name;
+		}
+
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{	
 			IndexNamePathRouteParameters.SetRouteParameters(this, settings, pathInfo);
+		}
+	}
+		
+	public abstract class IndexNamePathBase<TParameters, T> : BasePathRequest<TParameters>, IIndexNamePath<TParameters>
+		where TParameters : IRequestParameters, new()
+		where T : class
+	{
+		public IndexNameMarker Index { get; set; }
+		public string Name { get; set; }
+		
+		public IndexNamePathBase(string name)
+		{
+			this.Name = name;
+		}
+
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		{	
+			IndexNamePathRouteParameters.SetRouteParameters<TParameters, T>(this, settings, pathInfo);
 		}
 	}
 
@@ -51,10 +89,10 @@ namespace Nest
 	/// </pre>
 	/// neither parameter is optional 
 	/// </summary>
-	public abstract class IndexNamePathDescriptor<TDescriptor, TParameters> 
-		: BasePathDescriptor<TDescriptor, TParameters>, IIndexNamePath<TParameters>
-		where TDescriptor : IndexNamePathDescriptor<TDescriptor, TParameters>, new()
+	public abstract class IndexNamePathDescriptor<TDescriptor, TParameters, T> : BasePathDescriptor<TDescriptor, TParameters>, IIndexNamePath<TParameters>
+		where TDescriptor : IndexNamePathDescriptor<TDescriptor, TParameters, T>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
+		where T : class
 	{
 		private IIndexNamePath<TParameters> Self { get { return this; } }
 

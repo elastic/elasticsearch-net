@@ -34,6 +34,11 @@ namespace Nest
 
 		public TDocument Document { get; set; }
 
+		public PercolateRequest(TDocument document)
+		{
+			this.Document = document;
+		}
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PercolateRequestParameters> pathInfo)
 		{
 			PercolatePathInfo.Update(pathInfo, this);

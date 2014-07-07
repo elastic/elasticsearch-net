@@ -329,13 +329,15 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">The name for the percolator</param>
 		/// <param name="selector">An optional descriptor describing the unregister percolator operation further</param>
-		IUnregisterPercolateResponse UnregisterPercolator(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null);
+		IUnregisterPercolateResponse UnregisterPercolator<T>(string name, Func<UnregisterPercolatorDescriptor<T>, UnregisterPercolatorDescriptor<T>> selector = null)
+			where T : class;
 
 		/// <inheritdoc />
 		IUnregisterPercolateResponse UnregisterPercolator(IUnregisterPercolatorRequest unregisterPercolatorRequest);
 
 		/// <inheritdoc />
-		Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null);
+		Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync<T>(string name, Func<UnregisterPercolatorDescriptor<T>, UnregisterPercolatorDescriptor<T>> selector = null)
+			where T : class;
 
 		/// <inheritdoc />
 		Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(IUnregisterPercolatorRequest unregisterPercolatorRequest);
@@ -351,16 +353,14 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		IRegisterPercolateResponse RegisterPercolator<T>(IRegisterPercolatorRequest registerPercolatorRequest)
-			where T : class;
+		IRegisterPercolateResponse RegisterPercolator(IRegisterPercolatorRequest registerPercolatorRequest);
 
 		/// <inheritdoc />
 		Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(string name, Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(IRegisterPercolatorRequest registerPercolatorRequest)
-			where T : class;
+		Task<IRegisterPercolateResponse> RegisterPercolatorAsync(IRegisterPercolatorRequest registerPercolatorRequest);
 
 		/// <summary>
 		/// Percolate a document

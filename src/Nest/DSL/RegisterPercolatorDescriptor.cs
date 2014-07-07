@@ -30,6 +30,10 @@ namespace Nest
 
 	public class RegisterPercolatorRequest : IndexNamePathBase<IndexRequestParameters>, IRegisterPercolatorRequest
 	{
+		public RegisterPercolatorRequest(IndexNameMarker index, string name) : base(index, name)
+		{
+		}
+
 		public IDictionary<string, object> MetaData { get; set; }
 		public QueryContainer Query { get; set; }
 
@@ -46,7 +50,7 @@ namespace Nest
 
 	}
 
-	public class RegisterPercolatorDescriptor<T> : IndexNamePathDescriptor<RegisterPercolatorDescriptor<T>, IndexRequestParameters>, IRegisterPercolatorRequest
+	public class RegisterPercolatorDescriptor<T> : IndexNamePathDescriptor<RegisterPercolatorDescriptor<T>, IndexRequestParameters, T>, IRegisterPercolatorRequest
 		where T : class
 	{
 		private IRegisterPercolatorRequest Self { get { return this; } }

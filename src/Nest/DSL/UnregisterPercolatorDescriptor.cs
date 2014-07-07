@@ -26,22 +26,18 @@ namespace Nest
 
     public partial class UnregisterPercolatorRequest : IndexNamePathBase<DeleteRequestParameters>, IUnregisterPercolatorRequest
     {
-        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
+	    public UnregisterPercolatorRequest(IndexNameMarker index, string name) : base(index, name)
+	    {
+	    }
+
+	    protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
         {
             UnregisterPercolatorPathInfo.Update(settings, pathInfo);
         }
     }
 
-    public partial class UnregisterPercolatorRequest<T> : IndexNamePathBase<DeleteRequestParameters>, IUnregisterPercolatorRequest<T>
-        where T : class
-    {
-        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
-        {
-            UnregisterPercolatorPathInfo.Update(settings, pathInfo);
-        }
-    }
-
-	public partial class UnregisterPercolatorDescriptor : IndexNamePathDescriptor<UnregisterPercolatorDescriptor, DeleteRequestParameters>
+	public partial class UnregisterPercolatorDescriptor<T> : IndexNamePathDescriptor<UnregisterPercolatorDescriptor<T>, DeleteRequestParameters, T>
+		where T : class
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
 		{

@@ -1,0 +1,10 @@
+  {
+  "color": "blue",
+  "query": {
+    "term": {
+      "name": {
+        "value": "NEST"
+      }
+    }
+  }
+}
