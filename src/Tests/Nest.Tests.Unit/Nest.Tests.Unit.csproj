@@ -195,6 +195,8 @@
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Source\SourceRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Get\GetRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshot\DeleteSnapshotRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshot\GetSnapshotRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshot\SnapshotRequestTests.cs" />
