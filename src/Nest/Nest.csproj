@@ -690,7 +690,7 @@
     <Compile Include="Domain\Stats\DocStats.cs" />
     <Compile Include="Domain\Stats\StatsContainer.cs" />
     <Compile Include="Domain\Stats\Stats.cs" />
-    <Compile Include="ElasticClient-Stats.cs" />
+    <Compile Include="ElasticClient-IndicesStats.cs" />
     <Compile Include="Domain\Responses\AcknowledgedResponse.cs" />
     <Compile Include="Domain\Responses\IndexSettingsResponse.cs" />
     <Compile Include="ElasticClient-IndexSettings.cs" />
