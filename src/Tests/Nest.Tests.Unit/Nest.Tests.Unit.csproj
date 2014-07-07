@@ -195,6 +195,7 @@
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Refresh\RefreshRequestTests.cs" />
     <Compile Include="ObjectInitializer\Exists\IndexExistsRequestTests.cs" />
     <Compile Include="ObjectInitializer\Index\IndexRequestTests.cs" />
     <Compile Include="ObjectInitializer\Flush\FlushRequestTests.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="ObjectInitializer\OpenClose\OpenIndexRequestTests.cs" />
     <Compile Include="ObjectInitializer\Optimize\OptimizeRequestTests.cs" />
     <Compile Include="ObjectInitializer\Percolate\PercolateRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Percolate\UnregisterPercolatorRequestTests.cs" />
     <Compile Include="ObjectInitializer\Percolate\RegisterPercolatorRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\DeleteSnapshotRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\DeleteRepositoryRequestTests.cs" />
