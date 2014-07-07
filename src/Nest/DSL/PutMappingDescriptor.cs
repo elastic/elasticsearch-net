@@ -38,12 +38,20 @@ namespace Nest
 		/// <summary>
 		/// Calls putmapping on /{indices}/{type}
 		/// </summary>
-		public PutMappingRequest(TypeNameMarker type, params IndexNameMarker[] indices)
+		public PutMappingRequest(IEnumerable<IndexNameMarker> indices, TypeNameMarker type)
 		{
 			this.Type = type;
 			this.Indices = indices;
 		}
 
+		/// <summary>
+		/// Calls putmapping on /{index}/{type}
+		/// </summary>
+		public PutMappingRequest(IndexNameMarker index, TypeNameMarker type)
+		{
+			this.Type = type;
+			this.Indices = new [] { index };
+		}
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo)
 		{
 			PutMappingPathInfo.Update(pathInfo, this);

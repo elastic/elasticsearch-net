@@ -14,12 +14,11 @@ namespace Nest
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
 			var descriptor = mappingSelector(new PutMappingDescriptor<T>(_connectionSettings));
-			return this.Map<T>(descriptor);
+			return this.Map(descriptor);
 		}
 
 		/// <inheritdoc />
-		public IIndicesResponse Map<T>(IPutMappingRequest putMappingRequest) 
-			where T : class
+		public IIndicesResponse Map(IPutMappingRequest putMappingRequest) 
 		{
 			return this.Dispatch<IPutMappingRequest, PutMappingRequestParameters, IndicesResponse>(
 				putMappingRequest,
@@ -40,12 +39,11 @@ namespace Nest
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
 			var descriptor = mappingSelector(new PutMappingDescriptor<T>(_connectionSettings));
-			return this.MapAsync<T>(descriptor);
+			return this.MapAsync(descriptor);
 		}
 
 		/// <inheritdoc />
-		public Task<IIndicesResponse> MapAsync<T>(IPutMappingRequest putMappingRequest)
-			where T : class
+		public Task<IIndicesResponse> MapAsync(IPutMappingRequest putMappingRequest)
 		{
 			return this.DispatchAsync<IPutMappingRequest, PutMappingRequestParameters, IndicesResponse, IIndicesResponse>(
 				putMappingRequest,

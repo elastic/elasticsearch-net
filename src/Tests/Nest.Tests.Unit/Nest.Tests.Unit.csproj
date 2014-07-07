@@ -212,6 +212,8 @@
     <Compile Include="ObjectInitializer\Analyze\AnalyzeRequestTests.cs" />
     <Compile Include="ObjectInitializer\Bulk\BulkRequestTests.cs" />
     <Compile Include="ObjectInitializer\Exists\DocumentExistsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Mapping\MapRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Mapping\GetMappingRequestTests.cs" />
     <Compile Include="ObjectInitializer\Mapping\DeleteMappingRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\DeleteSnapshotRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\DeleteRepositoryRequestTests.cs" />
@@ -583,6 +585,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\ClusterSettings\ClusterSettingsBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Mapping\MapBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Snapshots\CreateRepositoryBody.json">

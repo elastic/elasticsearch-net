@@ -416,16 +416,14 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
-		IIndicesResponse Map<T>(IPutMappingRequest putMappingRequest) 
-			where T : class;
+		IIndicesResponse Map(IPutMappingRequest putMappingRequest);
 		
 		/// <inheritdoc />
 		Task<IIndicesResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> mappingSelector)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IIndicesResponse> MapAsync<T>(IPutMappingRequest putMappingRequest)
-			where T : class;
+		Task<IIndicesResponse> MapAsync(IPutMappingRequest putMappingRequest);
 
 		/// <summary>
 		/// The get mapping API allows to retrieve mapping definitions for an index or index/type.
@@ -435,16 +433,14 @@ namespace Nest
 		IGetMappingResponse GetMapping<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null) where T : class;
 		
 		/// <inheritdoc />
-		IGetMappingResponse GetMapping<T>(IGetMappingRequest getMappingRequest) 
-			where T : class;
+		IGetMappingResponse GetMapping(IGetMappingRequest getMappingRequest);
 
 		/// <inheritdoc />
 		Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null) 
 			where T : class;
 		
 		/// <inheritdoc />
-		Task<IGetMappingResponse> GetMappingAsync<T>(IGetMappingRequest getMappingRequest) 
-			where T : class;
+		Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest getMappingRequest);
 		
 		/// <summary>
 		/// Allow to delete a mapping (type) along with its data. 

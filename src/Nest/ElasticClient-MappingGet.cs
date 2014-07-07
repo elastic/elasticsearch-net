@@ -25,8 +25,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public IGetMappingResponse GetMapping<T>(IGetMappingRequest getMappingRequest)
-			where T : class
+		public IGetMappingResponse GetMapping(IGetMappingRequest getMappingRequest)
 		{
 			return this.Dispatch<IGetMappingRequest, GetMappingRequestParameters, GetMappingResponse>(
 				getMappingRequest,
@@ -50,8 +49,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IGetMappingResponse> GetMappingAsync<T>(IGetMappingRequest getMappingRequest)
-			where T : class
+		public Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest getMappingRequest)
 		{
 			return this.DispatchAsync<IGetMappingRequest, GetMappingRequestParameters, GetMappingResponse, IGetMappingResponse>(
 				getMappingRequest,
