@@ -1,8 +1,0 @@
-  {
-  "settings": {
-    "bucket": "my-bucket",
-    "compress": true,
-    "concurrent_stream": 4
-  },
-  "type": "azure"
-}

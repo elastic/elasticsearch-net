@@ -1,0 +1,16 @@
+{
+  "actions": [
+    {
+      "add": {
+        "index": "myindex-2014-2-2",
+        "alias": "myindex"
+      }
+    },
+    {
+      "remove": {
+        "index": "myindex-2014-3-2",
+        "alias": "myindex"
+      }
+    }
+  ]
+}

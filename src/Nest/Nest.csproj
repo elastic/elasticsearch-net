@@ -211,7 +211,7 @@
     <Compile Include="DSL\Query\Functions\ScriptScoreFunction.cs" />
     <Compile Include="DSL\Query\SubDescriptors\ISpanSubQuery.cs" />
     <Compile Include="Domain\TermVector\MultiTermVectorDocument.cs" />
-    <Compile Include="DSL\MultiTermVectorDocumentDescriptor.cs" />
+    <Compile Include="DSL\TermVector\MultiTermVectorDocumentDescriptor.cs" />
     <Compile Include="DSL\MultiTermVectorsDescriptor.cs" />
     <Compile Include="DSL\Paths\DocumentOptionalPathDescriptor.cs" />
     <Compile Include="DSL\RestoreDescriptor.cs" />

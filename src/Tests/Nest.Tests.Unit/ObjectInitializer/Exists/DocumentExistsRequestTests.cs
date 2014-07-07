@@ -18,7 +18,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.Exists
 
 		public DocumentExistsRequestTests()
 		{
-			var request = new DocumentExistsRequest(typeof(ElasticsearchProject), "hello world", "3");
+			var request = new DocumentExistsRequest(typeof(ElasticsearchProject), "hello-world", "3");
 			var response = this._client.DocumentExists(request);
 			this._status = response.ConnectionStatus;
 		}
@@ -26,14 +26,9 @@ namespace Nest.Tests.Unit.ObjectInitializer.Exists
 		[Test]
 		public void Url()
 		{
-			this._status.RequestUrl.Should().EndWith("/_snapshot/repos");
-			this._status.RequestMethod.Should().Be("PUT");
+			this._status.RequestUrl.Should().EndWith("/nest_test_data/hello-world/3");
+			this._status.RequestMethod.Should().Be("HEAD");
 		}
-		
-		[Test]
-		public void CreateRepositoryBody()
-		{
-			this.JsonEquals(this._status.Request, MethodBase.GetCurrentMethod());
-		}
+	
 	}
 }
