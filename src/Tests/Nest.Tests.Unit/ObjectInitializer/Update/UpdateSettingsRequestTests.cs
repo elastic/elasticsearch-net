@@ -19,6 +19,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.Update
 		{
 			var request = new UpdateSettingsRequest
 				{
+					Index = "my-index",
 					NumberOfReplicas = 5,
 					AutoExpandReplicas = false,
 					BlocksReadOnly = true,
@@ -61,7 +62,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.Update
 		[Test]
 		public void Url()
 		{
-			this._status.RequestUrl.Should().EndWith("/_settings");
+			this._status.RequestUrl.Should().EndWith("/my-index/_settings");
 			this._status.RequestMethod.Should().Be("PUT");
 		}
 
