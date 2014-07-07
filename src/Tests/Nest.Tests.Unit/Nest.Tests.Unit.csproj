@@ -195,6 +195,7 @@
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Segments\SegmentsRequestTests.cs" />
     <Compile Include="ObjectInitializer\Search\SearchRequestTests.cs" />
     <Compile Include="ObjectInitializer\Scroll\ScrollRequestTests.cs" />
     <Compile Include="ObjectInitializer\Scroll\ClearScrollRequestTests.cs" />
