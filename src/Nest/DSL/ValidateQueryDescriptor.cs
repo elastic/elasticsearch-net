@@ -38,7 +38,7 @@ namespace Nest
         }
     }
 
-    public partial class ValidateQueryRequest<T> : QueryPathBase<ValidateQueryRequestParameters>, IValidateQueryRequest<T>
+    public partial class ValidateQueryRequest<T> : QueryPathBase<ValidateQueryRequestParameters, T>, IValidateQueryRequest<T>
         where T : class
     {
         public IQueryContainer Query { get; set; }

@@ -117,16 +117,14 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
-		IValidateResponse Validate<T>(IValidateQueryRequest validateQueryRequest) 
-			where T : class;
+		IValidateResponse Validate(IValidateQueryRequest validateQueryRequest);
 		
 		/// <inheritdoc />
 		Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector) 
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IValidateResponse> ValidateAsync<T>(IValidateQueryRequest validateQueryRequest) 
-			where T : class;
+		Task<IValidateResponse> ValidateAsync(IValidateQueryRequest validateQueryRequest);
 
 		/// <summary>
 		/// The open and close index APIs allow to close an index, and later on opening it. 
