@@ -22,6 +22,12 @@ namespace Nest
 	
 	public partial class AnalyzeRequest : IndicesOptionalPathBase<AnalyzeRequestParameters>, IAnalyzeRequest
 	{
+		public AnalyzeRequest(string textToAnalyze)
+		{
+			this.Text = textToAnalyze;
+		}
+
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<AnalyzeRequestParameters> pathInfo)
 		{
 			AnalyzePathInfo.Update(pathInfo, this);

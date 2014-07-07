@@ -2011,9 +2011,9 @@ namespace Nest
 		
 		
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		public string Field 
+		public PropertyPathMarker Field 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("field"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<PropertyPathMarker>("field"); } 
 			set { this.Request.RequestParameters.AddQueryString("field", value); }
 		}
 		
@@ -4371,9 +4371,9 @@ namespace Nest
 		
 		
 		///<summary>Specify which field to use for suggestions</summary>
-		public string SuggestField 
+		public PropertyPathMarker SuggestField 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("suggest_field"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<PropertyPathMarker>("suggest_field"); } 
 			set { this.Request.RequestParameters.AddQueryString("suggest_field", value); }
 		}
 		
@@ -5951,9 +5951,9 @@ namespace Nest
 		
 		
 		///<summary>Specify which field to use for suggestions</summary>
-		public string SuggestField 
+		public PropertyPathMarker SuggestField 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("suggest_field"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<PropertyPathMarker>("suggest_field"); } 
 			set { this.Request.RequestParameters.AddQueryString("suggest_field", value); }
 		}
 		

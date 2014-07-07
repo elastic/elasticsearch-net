@@ -31,6 +31,5 @@ namespace Nest.Tests.Unit.ObjectInitializer.Aliases
 			this._status.RequestUrl.Should().EndWith("/_alias/my-alias");
 			this._status.RequestMethod.Should().Be("GET");
 		}
-		
 	}
 }
