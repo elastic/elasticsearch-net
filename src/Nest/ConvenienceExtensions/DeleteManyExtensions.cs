@@ -46,7 +46,7 @@ namespace Nest
 			@objects.ThrowIfEmpty("objects");
 			var bulkRequest = new BulkRequest {Index = index, Type = type};
 			var deletes = @objects
-				.Select(o => new BulkDeleteOperation<T> {Document = o})
+				.Select(o => new BulkDeleteOperation<T>(o))
 				.Cast<IBulkOperation>()
 				.ToList();
 			bulkRequest.Operations = deletes;

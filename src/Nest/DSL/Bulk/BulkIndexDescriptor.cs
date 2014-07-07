@@ -17,6 +17,11 @@ namespace Nest
 	public class BulkIndexOperation<T> : BulkOperationBase, IIndexOperation<T>
 		where T : class
 	{
+		public BulkIndexOperation(T document)
+		{
+			this.Document = document;
+		}
+
 		public override string Operation { get { return "index"; } }
 
 		public override Type ClrType { get { return typeof(T); } }

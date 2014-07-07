@@ -42,19 +42,16 @@ namespace Nest.Tests.Unit.Core.Bulk
 			{
 				Operations = new List<IBulkOperation>
 				{
-					{ new BulkIndexOperation<ElasticsearchProject>
+					{ new BulkIndexOperation<ElasticsearchProject>(new ElasticsearchProject { Id = 2 })
 					{
-						Document = new ElasticsearchProject { Id = 2 },
 						VersionType = VersionType.Force
 					}},
-					{ new BulkCreateOperation<ElasticsearchProject>
+					{ new BulkCreateOperation<ElasticsearchProject>(new ElasticsearchProject { Id = 3 })
 					{
-						Document = new ElasticsearchProject { Id = 3 },
 						VersionType = VersionType.Internal
 					}},
-					{ new BulkDeleteOperation<ElasticsearchProject>
+					{ new BulkDeleteOperation<ElasticsearchProject>(4)
 					{
-						Document = new ElasticsearchProject { Id = 4 },
 						VersionType = VersionType.ExternalGte
 					}},
 					{ new BulkUpdateOperation<ElasticsearchProject, object>

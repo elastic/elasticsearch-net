@@ -13,6 +13,11 @@ namespace Nest
 	public class BulkCreateOperation<T> : BulkOperationBase, IBulkCreateOperation<T>
 		where T : class
 	{
+		public BulkCreateOperation(T document)
+		{
+			this.Document = document;
+		}
+
 		public override string Operation { get { return "create"; } }
 
 		public override Type ClrType { get { return typeof(T); } } 
@@ -32,7 +37,6 @@ namespace Nest
 	public class BulkCreateDescriptor<T> : BulkOperationDescriptorBase, IBulkCreateOperation<T> 
 		where T : class
 	{
-
 		private IBulkCreateOperation<T> Self { get { return this; } } 
 
 		protected override string _Operation { get { return "create"; } }

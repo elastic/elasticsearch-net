@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
 using Elasticsearch.Net;
 
 namespace Nest
@@ -28,6 +29,16 @@ namespace Nest
 		where TDocument : class
 		where TPartialUpdate : class
 	{
+
+
+		public BulkUpdateOperation() {} 
+		public BulkUpdateOperation(TDocument document, TPartialUpdate update) : this()
+		{
+			this.PartialUpdate = update;
+			this.Document = document;
+		}
+
+
 		public override string Operation { get { return "update"; } } 
 
 		public override Type ClrType { get { return typeof(TDocument); } }

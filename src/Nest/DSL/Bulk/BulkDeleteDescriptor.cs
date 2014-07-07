@@ -14,6 +14,14 @@ namespace Nest
 	public class BulkDeleteOperation<T> : BulkOperationBase, IBulkDeleteOperation<T>
 		where T : class
 	{
+		public BulkDeleteOperation(T document)
+		{
+			this.Document = document;
+		} 
+		
+		public BulkDeleteOperation(string id) { this.Id = id; }
+		public BulkDeleteOperation(double id) { this.Id = id.ToString(CultureInfo.InvariantCulture); }
+
 		public override string Operation { get { return "delete"; } }
 
 		public override Type ClrType { get { return typeof(T); } } 
