@@ -4245,7 +4245,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
 	///</pre>
 	///</summary>
-	public partial class ScrollRequest<T> 
+	public partial class ScrollRequest 
 			{
 	}
 	
@@ -5817,16 +5817,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("stop_words", value); }
 		}
 		
-	}
-	
-		
-	///<summary>Request parameters for ScrollGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
-	///</pre>
-	///</summary>
-	public partial class ScrollRequest 
-			{
 	}
 	
 		

@@ -10,7 +10,7 @@ using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Elasticsearch.Net;
 
-namespace Nest.DSL.Descriptors
+namespace Nest
 {
 	[JsonConverter(typeof(CustomJsonConverter))]
 	public interface IGeoDistanceSort : ISort, ICustomJson

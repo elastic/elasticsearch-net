@@ -123,9 +123,11 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/mycustomindex/_open", c => c.OpenIndex("mycustomindex"));
 			Do("POST", "/_optimize", c => c.Optimize());
 			Do("POST", "/mydefaultindex/_optimize", c => c.Optimize(o => o.Index<Doc>()));
-			Do("POST", "/mydefaultindex/doc/_percolate", c => c.Percolate(new Doc { Id = "1" }));
-			Do("POST", "/mydefaultindex/otherdoc/_percolate", c => c.Percolate<OtherDoc>(new OtherDoc { Name = "hello" }));
-			Do("POST", "/mycustomindex/mycustomtype/_percolate", c => c.Percolate<OtherDoc>(new OtherDoc { Name = "hello" }, p => p.Index("mycustomindex").Type("mycustomtype")));
+			Do("POST", "/mydefaultindex/doc/_percolate", c => c.Percolate<Doc>(p=>p.Document(new Doc { Id = "1" })));
+			Do("POST", "/mydefaultindex/otherdoc/_percolate", c => c.Percolate<OtherDoc>(p=>p.Document(new OtherDoc { Name = "hello" })));
+			Do("POST", "/mycustomindex/mycustomtype/_percolate", c => c.Percolate<OtherDoc>(p => p.Document(new OtherDoc { Name = "hello" }).Index("mycustomindex").Type("mycustomtype")));
+			Do("POST", "/mydefaultindex/otherdoc/my-id/_percolate", c => c.Percolate<OtherDoc>(p => p.Id("my-id")));
+
 			Do("PUT", "/_template/my-template", c => c.PutTemplate("my-template", pt => pt.Settings(s => s.Add("mysetting", true))));
 			Do("PUT", "/_all/_warmer/my-warmer", c => c.PutWarmer("my-warmer", p => p.Search<Doc>(s => s.MatchAll())));
 			Do("PUT", "/mycustomindex/_warmer/my-warmer", c => c.PutWarmer("my-warmer", p => p.Index("mycustomindex").Search<Doc>(s => s.MatchAll())));
