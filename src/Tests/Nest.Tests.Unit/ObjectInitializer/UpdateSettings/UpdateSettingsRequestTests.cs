@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nest.Tests.Unit.ObjectInitializer.Update
+namespace Nest.Tests.Unit.ObjectInitializer.UpdateSettings
 {
 	[TestFixture]
 	public class UpdateSettingsRequestTests : BaseJsonTests
