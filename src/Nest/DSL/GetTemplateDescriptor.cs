@@ -20,6 +20,10 @@ namespace Nest
 	
 	public partial class GetTemplateRequest : NamePathBase<GetTemplateRequestParameters>, IGetTemplateRequest
 	{
+		public GetTemplateRequest(string name) : base(name)
+		{
+		}
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo)
 		{
 			GetTemplatePathInfo.Update(pathInfo, this);

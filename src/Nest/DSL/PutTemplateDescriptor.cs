@@ -23,6 +23,10 @@ namespace Nest
 	
 	public partial class PutTemplateRequest : NamePathBase<PutTemplateRequestParameters>, IPutTemplateRequest
 	{
+		public PutTemplateRequest(string name) : base(name)
+		{
+		}
+
 		public TemplateMapping TemplateMapping { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo)
@@ -45,6 +49,9 @@ namespace Nest
 		{
 			_connectionSettings = connectionSettings;
 			Self.TemplateMapping = new TemplateMapping();
+			Self.TemplateMapping.Mappings = new Dictionary<string, RootObjectMapping>();
+			Self.TemplateMapping.Warmers = new Dictionary<string, WarmerMapping>();
+			Self.TemplateMapping.Settings = new FluentDictionary<string, object>();
 		}
 
 
@@ -119,7 +126,7 @@ namespace Nest
 			addAliasDescriptor = addAliasDescriptor ?? (a=>a);
 			var alias = addAliasDescriptor(new CreateAliasDescriptor());
 			if (Self.TemplateMapping.Aliases == null)
-				Self.TemplateMapping.Aliases = new Dictionary<string, CreateAliasDescriptor>();
+				Self.TemplateMapping.Aliases = new Dictionary<string, ICreateAliasOperation>();
 
 			Self.TemplateMapping.Aliases[aliasName] = alias;
 			return this;

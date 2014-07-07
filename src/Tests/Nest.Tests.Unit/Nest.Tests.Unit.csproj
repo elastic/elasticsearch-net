@@ -251,6 +251,9 @@
     <Compile Include="ObjectInitializer\Snapshots\CreateRepositoryRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\SnapshotRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\RestoreRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Template\DeleteTemplateRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Template\GetTemplateRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Template\PutTemplateRequestTests.cs" />
     <Compile Include="ObjectInitializer\Update\UpdateRequestTests.cs" />
     <Compile Include="ObjectInitializer\Update\UpdateSettingsRequestTests.cs" />
     <Compile Include="ObjectInitializer\Validate\ValidateQueryRequestTests.cs" />
@@ -666,6 +669,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Snapshots\RestoreBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Template\PutTemplateBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Update\UpdateBody.json" />

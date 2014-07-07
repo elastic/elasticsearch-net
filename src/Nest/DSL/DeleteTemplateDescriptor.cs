@@ -20,6 +20,10 @@ namespace Nest
 	
 	public partial class DeleteTemplateRequest : NamePathBase<DeleteTemplateRequestParameters>, IDeleteTemplateRequest
 	{
+		public DeleteTemplateRequest(string name) : base(name)
+		{
+		}
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo)
 		{
 			DeleteTemplatePathInfo.Update(pathInfo, this);

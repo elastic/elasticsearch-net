@@ -126,7 +126,7 @@ namespace Nest
 			var alias = addAliasSelector(new CreateAliasDescriptor());
 
 			if (this._indexSettings.Aliases == null)
-				this._indexSettings.Aliases = new Dictionary<string, CreateAliasDescriptor>();
+				this._indexSettings.Aliases = new Dictionary<string, ICreateAliasOperation>();
 
 			this._indexSettings.Aliases.Add(aliasName, alias);
 
