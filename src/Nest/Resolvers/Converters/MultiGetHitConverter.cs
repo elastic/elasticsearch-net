@@ -78,8 +78,8 @@ namespace Nest.Resolvers.Converters
 
 			var docsJarray = (JArray)jsonObject["docs"];
 			var multiGetDescriptor = this._request;
-			if (this._request == null)
-				return multiGetDescriptor;
+			if (this._request == null || docsJarray == null)
+				return response;
 
 			var withMeta = docsJarray.Zip(this._request.GetOperations, (doc, desc) => new MultiHitTuple { Hit = doc, Descriptor = desc });
 			foreach (var m in withMeta)

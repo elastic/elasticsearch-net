@@ -215,6 +215,8 @@
     <Compile Include="ObjectInitializer\Mapping\MapRequestTests.cs" />
     <Compile Include="ObjectInitializer\Mapping\GetMappingRequestTests.cs" />
     <Compile Include="ObjectInitializer\Mapping\DeleteMappingRequestTests.cs" />
+    <Compile Include="ObjectInitializer\MoreLikeThis\MoreLikeThisRequestTests.cs" />
+    <Compile Include="ObjectInitializer\MultiGet\MultiGetRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\DeleteSnapshotRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\DeleteRepositoryRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\GetSnapshotRequestTests.cs" />
@@ -588,6 +590,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Mapping\MapBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\MoreLikeThis\MoreLikeThisBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\MultiGet\MultiGetBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Snapshots\CreateRepositoryBody.json">

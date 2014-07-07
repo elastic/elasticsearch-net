@@ -7,11 +7,16 @@ using System.Linq.Expressions;
 namespace Nest
 {
 
-
-
-
 	public class MultiGetOperation<T> : IMultiGetOperation
 	{
+		public MultiGetOperation(string id)
+		{
+			this.Id = id;
+			this.Index = typeof(T);
+			this.Type = typeof(T);
+		}
+		public MultiGetOperation(long id) : this(id.ToString(CultureInfo.InvariantCulture)) {}
+		
 		Type IMultiGetOperation.ClrType { get { return typeof(T); } }
 		
 		public IndexNameMarker Index { get; set; }

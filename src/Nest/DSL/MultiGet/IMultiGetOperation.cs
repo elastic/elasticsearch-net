@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IMultiGetOperation
 	{
 		[JsonProperty(PropertyName = "_index")]
