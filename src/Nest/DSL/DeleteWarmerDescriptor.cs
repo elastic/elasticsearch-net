@@ -20,6 +20,11 @@ namespace Nest
 	
 	public partial class DeleteWarmerRequest : IndicesOptionalTypesNamePathBase<DeleteWarmerRequestParameters>, IDeleteWarmerRequest
 	{
+		public DeleteWarmerRequest(string name)
+		{
+			this.Name = name;
+		}
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteWarmerRequestParameters> pathInfo)
 		{
 			DeleteWarmerPathInfo.Update(pathInfo, this);

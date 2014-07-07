@@ -25,6 +25,11 @@ namespace Nest
 	
 	public partial class PutWarmerRequest : IndicesOptionalTypesNamePathBase<PutWarmerRequestParameters>, IPutWarmerRequest
 	{
+		public PutWarmerRequest(string name)
+		{
+			this.Name = name;
+		}
+
 		public ISearchRequest SearchDescriptor { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutWarmerRequestParameters> pathInfo)
