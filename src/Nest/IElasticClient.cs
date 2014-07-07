@@ -838,16 +838,14 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
-		IDeleteResponse Delete<T>(IDeleteRequest deleteRequest) 
-			where T : class;
+		IDeleteResponse Delete(IDeleteRequest deleteRequest);
 		
 		/// <inheritdoc />
 		Task<IDeleteResponse> DeleteAsync<T>(Func<DeleteDescriptor<T>, DeleteDescriptor<T>> deleteSelector) 
 			where T : class;
 		
 		/// <inheritdoc />
-		Task<IDeleteResponse> DeleteAsync<T>(IDeleteRequest deleteRequest) 
-			where T : class;
+		Task<IDeleteResponse> DeleteAsync(IDeleteRequest deleteRequest);
 		
 		/// <summary>
 		/// Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing). 

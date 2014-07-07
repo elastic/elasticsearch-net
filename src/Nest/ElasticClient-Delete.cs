@@ -18,8 +18,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public IDeleteResponse Delete<T>(IDeleteRequest deleteRequest) 
-			where T : class
+		public IDeleteResponse Delete(IDeleteRequest deleteRequest) 
 		{
 			return this.Dispatch<IDeleteRequest, DeleteRequestParameters, DeleteResponse>(
 				deleteRequest,
@@ -38,8 +37,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IDeleteResponse> DeleteAsync<T>(IDeleteRequest deleteRequest)
-			where T : class
+		public Task<IDeleteResponse> DeleteAsync(IDeleteRequest deleteRequest)
 		{
 			return this.DispatchAsync<IDeleteRequest, DeleteRequestParameters, DeleteResponse, IDeleteResponse>(
 				deleteRequest,

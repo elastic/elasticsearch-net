@@ -195,11 +195,12 @@
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\ClusterHealth - Copy\ClusterHealthRequestTests.cs" />
     <Compile Include="ObjectInitializer\CreateIndex\CreateIndexRequestTests.cs" />
     <Compile Include="ObjectInitializer\Count\CountRequestTests.cs" />
     <Compile Include="ObjectInitializer\ClusterSettings\ClusterSettingsRequestTests.cs" />
     <Compile Include="ObjectInitializer\ClusterSettings\ClusterGetSettingsRequestTests.cs" />
-    <Compile Include="ObjectInitializer\ClusterHealth\ClusterHealthRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Delete\DeleteRequestTests.cs" />
     <Compile Include="ObjectInitializer\ClearCache\ClearCacheRequestTests.cs" />
     <Compile Include="ObjectInitializer\Analyze\AnalyzeRequestTests.cs" />
     <Compile Include="ObjectInitializer\Bulk\BulkRequestTests.cs" />
