@@ -195,6 +195,11 @@
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Scroll\ScrollRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Scroll\ClearScrollRequestTests.cs" />
+    <Compile Include="ObjectInitializer\RootNodeInfo\RootNodeInfoRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Repository\CreateRepositoryRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Refresh\RefreshRequestTests.cs" />
     <Compile Include="ObjectInitializer\Exists\IndexExistsRequestTests.cs" />
     <Compile Include="ObjectInitializer\Index\IndexRequestTests.cs" />
     <Compile Include="ObjectInitializer\Flush\FlushRequestTests.cs" />
@@ -218,6 +223,17 @@
     <Compile Include="ObjectInitializer\MoreLikeThis\MoreLikeThisRequestTests.cs" />
     <Compile Include="ObjectInitializer\MultiSearch\MultiSearchRequestTests.cs" />
     <Compile Include="ObjectInitializer\MultiGet\MultiGetRequestTests.cs" />
+    <Compile Include="ObjectInitializer\MultiTermVectors\MultiTermVectorsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Nodes\NodeStatsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Nodes\NodesInfoRequestTests.cs" />
+    <Compile Include="ObjectInitializer\OpenClose\CloseIndexRequestTests.cs" />
+    <Compile Include="ObjectInitializer\OpenClose\OpenIndexRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Optimize\OptimizeRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Percolate\PercolateRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Percolate\UnregisterPercolatorRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Percolate\RegisterPercolatorRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Repository\DeleteRepositoryRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Restore\RestoreRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\DeleteSnapshotRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\DeleteRepositoryRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\GetSnapshotRequestTests.cs" />
@@ -601,6 +617,24 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\MultiGet\MultiGetBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\MultiTermVectors\MultiTermVectorsBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Percolate\PercolateBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Percolate\RegisterPercolatorBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Scroll\ScrollBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Repository\CreateRepositoryBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Restore\RestoreBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Snapshots\CreateRepositoryBody.json">
@@ -1076,6 +1110,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

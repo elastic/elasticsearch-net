@@ -49,14 +49,14 @@ namespace Nest.Tests.Integration.Search
 			Assert.AreEqual(r.Id, name);
 			Assert.Greater(r.Version, 0);
 
-			var re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
+			var re = c.UnregisterPercolator<ElasticsearchProject>(name);
 			Assert.True(re.IsValid);
 			Assert.True(re.Found);
 			Assert.AreEqual(re.Index, ElasticsearchConfiguration.DefaultIndex);
 			Assert.AreEqual(re.Type, ".percolator");
 			Assert.AreEqual(re.Id, name);
 			Assert.Greater(re.Version, 0);
-			re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
+			re = c.UnregisterPercolator<ElasticsearchProject>(name);
 			Assert.True(re.IsValid);
 			Assert.False(re.Found);
 		}
@@ -77,7 +77,7 @@ namespace Nest.Tests.Integration.Search
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Matches);
 			Assert.True(r.Matches.Select(m=>m.Id).Contains(name));
-			var re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
+			var re = c.UnregisterPercolator<ElasticsearchProject>(name);
 		}
 		[Test]
 		public void PercolateTypedDoc()
@@ -103,14 +103,14 @@ namespace Nest.Tests.Integration.Search
 			Assert.NotNull(percolateResponse.Matches);
 			Assert.True(percolateResponse.Matches.Select(m=>m.Id).Contains(name));
 
-			var re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
+			var re = c.UnregisterPercolator<ElasticsearchProject>(name);
 		}
 		[Test]
 		public void PercolateTypedDocWithQuery()
 		{
 			var c = this._client;
 			var name = "eclecticsearch" + ElasticsearchConfiguration.NewUniqueIndexName();
-			var re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
+			var re = c.UnregisterPercolator<ElasticsearchProject>(name);
 			var r = c.RegisterPercolator<ElasticsearchProject>(name, p => p
 				 .AddMetadata(md=>md.Add("color", "blue"))
 				 .Query(q => q
@@ -142,7 +142,7 @@ namespace Nest.Tests.Integration.Search
 			);
 			countPercolateReponse.IsValid.Should().BeTrue();
 			countPercolateReponse.Total.Should().Be(1);
-			re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
+			re = c.UnregisterPercolator<ElasticsearchProject>(name);
 
 		}
 	}

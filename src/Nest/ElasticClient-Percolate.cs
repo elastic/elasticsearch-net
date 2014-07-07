@@ -9,10 +9,11 @@ namespace Nest
 	{
 
 		/// <inheritdoc />
-		public IUnregisterPercolateResponse UnregisterPercolator(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null)
+		public IUnregisterPercolateResponse UnregisterPercolator<T>(string name, Func<UnregisterPercolatorDescriptor<T>, UnregisterPercolatorDescriptor<T>> selector = null)
+			where T : class
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<UnregisterPercolatorDescriptor, DeleteRequestParameters, UnregisterPercolateResponse>(
+			return this.Dispatch<UnregisterPercolatorDescriptor<T>, DeleteRequestParameters, UnregisterPercolateResponse>(
 				s => selector(s.Name(name)),
 				(p, d) => this.RawDispatch.DeleteDispatch<UnregisterPercolateResponse>(p)
 			);
@@ -28,10 +29,11 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null)
+		public Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync<T>(string name, Func<UnregisterPercolatorDescriptor<T>, UnregisterPercolatorDescriptor<T>> selector = null)
+			where T : class
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<UnregisterPercolatorDescriptor, DeleteRequestParameters, UnregisterPercolateResponse, IUnregisterPercolateResponse>(
+			return this.DispatchAsync<UnregisterPercolatorDescriptor<T>, DeleteRequestParameters, UnregisterPercolateResponse, IUnregisterPercolateResponse>(
 					s => selector(s.Name(name)),
 					(p, d) => this.RawDispatch.DeleteDispatchAsync<UnregisterPercolateResponse>(p)
 				);
@@ -60,8 +62,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public IRegisterPercolateResponse RegisterPercolator<T>(IRegisterPercolatorRequest registerPercolatorRequest)
-			where T : class
+		public IRegisterPercolateResponse RegisterPercolator(IRegisterPercolatorRequest registerPercolatorRequest)
 		{
 			return this.Dispatch<IRegisterPercolatorRequest, IndexRequestParameters, RegisterPercolateResponse>(
 				registerPercolatorRequest,
@@ -82,8 +83,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(IRegisterPercolatorRequest registerPercolatorRequest) 
-			where T : class
+		public Task<IRegisterPercolateResponse> RegisterPercolatorAsync(IRegisterPercolatorRequest registerPercolatorRequest) 
 		{
 			return this.DispatchAsync<IRegisterPercolatorRequest, IndexRequestParameters, RegisterPercolateResponse, IRegisterPercolateResponse>(
 					registerPercolatorRequest,

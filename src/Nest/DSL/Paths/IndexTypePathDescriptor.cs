@@ -65,7 +65,7 @@ namespace Nest
 	{
 		public IndexNameMarker Index { get; set; }
 		public TypeNameMarker Type { get; set; }
-
+		
 		public IndexTypePathBase(IndexNameMarker index, TypeNameMarker typeNameMarker)
 		{
 			this.Index = index;
