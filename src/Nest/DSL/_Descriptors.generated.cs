@@ -1301,7 +1301,7 @@ namespace Nest
 		
 
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public CountDescriptor<T> MinScore(long min_score)
+		public CountDescriptor<T> MinScore(double min_score)
 		{
 			this.Request.RequestParameters.MinScore(min_score);
 			return this;

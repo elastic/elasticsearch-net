@@ -1219,9 +1219,9 @@ namespace Nest
 		
 		
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public long MinScore 
+		public double MinScore 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("min_score"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<double>("min_score"); } 
 			set { this.Request.RequestParameters.AddQueryString("min_score", value); }
 		}
 		
@@ -5023,9 +5023,9 @@ namespace Nest
 		
 		
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public long MinScore 
+		public double MinScore 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("min_score"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<double>("min_score"); } 
 			set { this.Request.RequestParameters.AddQueryString("min_score", value); }
 		}
 		

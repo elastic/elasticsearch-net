@@ -1321,9 +1321,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal long _min_score { get; set; }
+		internal double _min_score { get; set; }
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public CountRequestParameters MinScore(long min_score)
+		public CountRequestParameters MinScore(double min_score)
 		{
 			this._min_score = min_score;
 			this.AddQueryString("min_score", this._min_score);
