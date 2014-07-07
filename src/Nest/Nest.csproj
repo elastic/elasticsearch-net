@@ -400,7 +400,7 @@
     <Compile Include="DSL\Query\SubDescriptors\ExternalFieldDeclarationDescriptor.cs" />
     <Compile Include="DSL\Query\SubDescriptors\IExternalFieldDeclarationDescriptor.cs" />
     <Compile Include="DSL\Query\MultiMatchQueryDescriptor.cs" />
-    <Compile Include="ElasticClient-State.cs" />
+    <Compile Include="ElasticClient-ClusterState.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Resolvers\Converters\AnalysisSettingsConverter.cs" />
     <Compile Include="Resolvers\Converters\AnalyzerCollectionConverter.cs" />
