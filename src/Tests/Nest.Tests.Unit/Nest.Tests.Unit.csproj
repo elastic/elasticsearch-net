@@ -195,6 +195,7 @@
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Search\SearchRequestTests.cs" />
     <Compile Include="ObjectInitializer\Scroll\ScrollRequestTests.cs" />
     <Compile Include="ObjectInitializer\Scroll\ClearScrollRequestTests.cs" />
     <Compile Include="ObjectInitializer\RootNodeInfo\RootNodeInfoRequestTests.cs" />
@@ -610,6 +611,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\MoreLikeThis\MoreLikeThisBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Search\SearchBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\MultiSearch\MultiSearchBody.json">
