@@ -70,11 +70,7 @@ namespace Nest.Tests.Integration.Search.Scroll
 				Assert.True(results.FieldSelections.Any());
 				Assert.IsNotNullOrEmpty(results.ScrollId);
 				var localResults = results;
-				results = this._client.Scroll<ElasticsearchProject>(new ScrollRequest
-				{
-					Scroll = "4s",
-					ScrollId = localResults.ScrollId
-				});
+				results = this._client.Scroll<ElasticsearchProject>(new ScrollRequest(localResults.ScrollId, "4s"));
 				scrolls++;
 			}
 			Assert.AreEqual(18, scrolls);

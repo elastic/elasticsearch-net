@@ -135,7 +135,7 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/", c => c.RootNodeInfo());
 			Do("POST", "/_search/scroll?scroll=2m", c => c.Scroll<Doc>(s => s.ScrollId("difficulthash").Scroll("2m")));
 			Do("POST", "/_search/scroll?scroll=2m", c => c.Scroll<Doc>(scrollId: "difficulthash", scrollTime: "2m"));
-			Do("POST", "/_search/scroll?scroll=2m", c => c.Scroll<Doc>(new ScrollRequest { Scroll = "2m", ScrollId = "difficulthash" }));
+			Do("POST", "/_search/scroll?scroll=2m", c => c.Scroll<Doc>(new ScrollRequest("difficulthash", "2m")));
 			Do("POST", "/mydefaultindex/doc/_search", c => c.Search<Doc>(s => s.MatchAll()));
 			Do("POST", "/_all/doc/_search", c => c.Search<Doc>(s => s.AllIndices().MatchAll()));
 			Do("POST", "/_search", c => c.Search<Doc>(s => s.AllIndices().AllTypes().MatchAll()));

@@ -195,6 +195,9 @@
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Scroll\ScrollRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Scroll\ClearScrollRequestTests.cs" />
+    <Compile Include="ObjectInitializer\RootNodeInfo\RootNodeInfoRequestTests.cs" />
     <Compile Include="ObjectInitializer\Repository\CreateRepositoryRequestTests.cs" />
     <Compile Include="ObjectInitializer\Refresh\RefreshRequestTests.cs" />
     <Compile Include="ObjectInitializer\Exists\IndexExistsRequestTests.cs" />
@@ -622,6 +625,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Percolate\RegisterPercolatorBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Scroll\ScrollBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Repository\CreateRepositoryBody.json">

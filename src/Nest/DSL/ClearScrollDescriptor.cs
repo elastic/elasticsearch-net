@@ -31,6 +31,11 @@ namespace Nest
 	{
 		public string ScrollId { get; set; }
 
+		public ClearScrollRequest(string scrollId)
+		{
+			this.ScrollId = scrollId;
+		}
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClearScrollRequestParameters> pathInfo)
 		{
 			ClearScrollPathInfo.Update(pathInfo, this);
