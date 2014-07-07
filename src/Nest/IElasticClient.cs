@@ -776,17 +776,14 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		IDeleteResponse DeleteByQuery<T>(IDeleteByQueryRequest deleteByQueryRequest)
-			where T : class;
+		IDeleteResponse DeleteByQuery(IDeleteByQueryRequest deleteByQueryRequest);
 
 		/// <inheritdoc />
 		Task<IDeleteResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector) 
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IDeleteResponse> DeleteByQueryAsync<T>(IDeleteByQueryRequest deleteByQueryRequest) 
-			where T : class;
-
+		Task<IDeleteResponse> DeleteByQueryAsync(IDeleteByQueryRequest deleteByQueryRequest);
 
 		/// <summary>
 		/// The bulk API makes it possible to perform many index/delete operations in a single API call. 

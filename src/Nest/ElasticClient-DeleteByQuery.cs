@@ -17,7 +17,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public IDeleteResponse DeleteByQuery<T>(IDeleteByQueryRequest deleteByQueryRequest) where T : class
+		public IDeleteResponse DeleteByQuery(IDeleteByQueryRequest deleteByQueryRequest) 
 		{
 			return this.Dispatch<IDeleteByQueryRequest, DeleteByQueryRequestParameters, DeleteResponse>(
 				deleteByQueryRequest,
@@ -35,7 +35,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IDeleteResponse> DeleteByQueryAsync<T>(IDeleteByQueryRequest deleteByQueryRequest) where T : class
+		public Task<IDeleteResponse> DeleteByQueryAsync(IDeleteByQueryRequest deleteByQueryRequest) 
 		{
 			return this.DispatchAsync<IDeleteByQueryRequest, DeleteByQueryRequestParameters, DeleteResponse, IDeleteResponse>(
 				deleteByQueryRequest,

@@ -51,26 +51,6 @@ namespace Nest
 			//start out with defaults
 			var inferrer = new ElasticInferrer(settings);
 
-			//string indices;
-			//if (path.AllIndices.GetValueOrDefault(false))
-			//	indices = !path.AllTypes.GetValueOrDefault(false) ? "_all" : null;
-			//else if (path.Indices.HasAny())
-			//	indices = inferrer.IndexNames(path.Indices);
-			//else
-			//	indices = inferrer.IndexName<T>();
-
-			//string types;
-			//if (path.AllTypes.GetValueOrDefault(false))
-			//	types = null;
-			//else if (path.Types.HasAny())
-			//	types = inferrer.TypeNames(path.Types);
-			//else
-			//	types = inferrer.TypeName<T>();
-
-			//pathInfo.Index = indices;
-			//pathInfo.Type = types;
-
-
 
 			var index = inferrer.IndexName<T>();
 			var type = inferrer.TypeName<T>();
@@ -91,9 +71,6 @@ namespace Nest
 				pathInfo.Index = path.AllIndices.GetValueOrDefault(false) ? null : inferrer.IndexName<T>();
 
 		}
-
-		
-
 	}
 
 	public abstract class QueryPathBase<TParameters> : BasePathRequest<TParameters>, IQueryPath<TParameters>
