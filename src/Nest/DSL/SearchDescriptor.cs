@@ -132,9 +132,6 @@ namespace Nest
 	
 	public partial class SearchRequest : QueryPathBase<SearchRequestParameters>, ISearchRequest
 	{
-		public string Index { get; set; }
-		public string Type { get; set; }
-
 		protected internal Type _clrType { get; set; }
 		Type ISearchRequest.ClrType { get { return _clrType; } }
 
@@ -160,18 +157,20 @@ namespace Nest
 
 		SearchType? ISearchRequest._SearchType
 		{
-			get { return this.QueryString.GetQueryStringValue<SearchType?>("search_type");  }
+			get { return  this.QueryString == null ? null : this.QueryString.GetQueryStringValue<SearchType?>("search_type");  }
 		}
 
 		string ISearchRequest._Preference
 		{
-			get { return this.QueryString.GetQueryStringValue<string>("preference"); }
+			get { return this.QueryString == null ? null : this.QueryString.GetQueryStringValue<string>("preference"); }
 		}
 
 		string ISearchRequest._Routing
 		{
 			get
 			{
+				if (this.QueryString == null)
+					return null;
 				var routing = this.QueryString.GetQueryStringValue<string[]>("routing");
 				return routing == null
 					? null
@@ -217,9 +216,28 @@ namespace Nest
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IFilterContainer Filter { get; set; }
-		public string _Preference { get; private set; }
-		public string _Routing { get; private set; }
-		public SearchType? _SearchType { get; private set; }
+		SearchType? ISearchRequest._SearchType
+		{
+			get { return  this.QueryString == null ? null : this.QueryString.GetQueryStringValue<SearchType?>("search_type");  }
+		}
+
+		string ISearchRequest._Preference
+		{
+			get { return this.QueryString == null ? null : this.QueryString.GetQueryStringValue<string>("preference"); }
+		}
+
+		string ISearchRequest._Routing
+		{
+			get
+			{
+				if (this.QueryString == null)
+					return null;
+				var routing = this.QueryString.GetQueryStringValue<string[]>("routing");
+				return routing == null
+					? null
+					: string.Join(",", routing);
+			}
+		}
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 		public SearchRequestParameters QueryString { get; set; }
 	}

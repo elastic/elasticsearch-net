@@ -34,8 +34,6 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 			{
 				From = 0,
 				Size = 20,
-				Index = "alternative-index",
-				Type = "alternative-type",
 				MinScore = 2.1,
 				Rescore = new Rescore
 				{
