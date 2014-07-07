@@ -35,6 +35,12 @@ namespace Nest
 	public partial class DocumentExistsRequest<T> : DocumentPathBase<DocumentExistsRequestParameters, T>, IDocumentExistsRequest
 		where T : class
 	{
+		public DocumentExistsRequest(string id) : base(id) { }
+
+		public DocumentExistsRequest(long id) : base(id) { }
+
+		public DocumentExistsRequest(T document) : base(document) { }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo)
 		{
 			DocumentExistsPathInfo.Update(pathInfo, this);

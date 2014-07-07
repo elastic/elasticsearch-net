@@ -31,7 +31,13 @@ namespace Nest
     public partial class TermvectorRequest<T> : DocumentPathBase<TermvectorRequestParameters, T>, ITermvectorRequest<T>
         where T : class
     {
-        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<TermvectorRequestParameters> pathInfo)
+	    public TermvectorRequest(string id) : base(id) { }
+
+	    public TermvectorRequest(long id) : base(id) { }
+
+	    public TermvectorRequest(T document) : base(document) { }
+
+	    protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<TermvectorRequestParameters> pathInfo)
         {
             TermvectorPathInfo.Update(settings, pathInfo);
         }

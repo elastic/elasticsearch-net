@@ -31,6 +31,12 @@ namespace Nest
 
 	public partial class GetRequest<T> : DocumentPathBase<GetRequestParameters, T>, IGetRequest where T : class
 	{
+		public GetRequest(string id) : base(id) { }
+
+		public GetRequest(long id) : base(id) { }
+
+		public GetRequest(T document) : base(document) { }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetRequestParameters> pathInfo)
 		{
 			GetPathInfo.Update(pathInfo, this);

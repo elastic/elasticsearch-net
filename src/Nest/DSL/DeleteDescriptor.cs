@@ -33,6 +33,12 @@ namespace Nest
 	public partial class DeleteRequest<T> : DocumentPathBase<DeleteRequestParameters, T>, IDeleteRequest
 		where T : class
 	{
+		public DeleteRequest(string id) : base(id) { }
+
+		public DeleteRequest(long id) : base(id) { }
+
+		public DeleteRequest(T document) : base(document) { }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
 		{
 			DeletePathInfo.Update(pathInfo, this);

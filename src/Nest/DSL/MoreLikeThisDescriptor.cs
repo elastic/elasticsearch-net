@@ -38,6 +38,12 @@ namespace Nest
 	public partial class MoreLikeThisRequest<T> : DocumentPathBase<MoreLikeThisRequestParameters, T>, IMoreLikeThisRequest<T>
 		where T : class
 	{
+		public MoreLikeThisRequest(string id) : base(id) { }
+
+		public MoreLikeThisRequest(long id) : base(id) { }
+
+		public MoreLikeThisRequest(T document) : base(document) { }
+
 		public ISearchRequest Search { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MoreLikeThisRequestParameters> pathInfo)

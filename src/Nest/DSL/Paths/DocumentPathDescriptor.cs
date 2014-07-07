@@ -9,12 +9,9 @@ namespace Nest
 	public abstract class DocumentPathBase<TParameters> : DocumentOptionalPathBase<TParameters> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-		public DocumentPathBase(IndexNameMarker indexName, TypeNameMarker typeName, string id)
+		protected DocumentPathBase(IndexNameMarker indexName, TypeNameMarker typeName, string id) : base(indexName, typeName, id)
 		{
-			this.Index = indexName;
-			this.Type = typeName;
-			this.Id = id;
-		} 
+		}
 	}
 
 
@@ -22,6 +19,12 @@ namespace Nest
 		where TParameters : FluentRequestParameters<TParameters>, new()
 		where T : class
 	{
+		protected DocumentPathBase(string id) : base(id) { }
+
+		protected DocumentPathBase(long id) : base(id) { }
+
+		protected DocumentPathBase(T document) : base(document) { }
+
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
 			base.SetRouteParameters(settings, pathInfo);

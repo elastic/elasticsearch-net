@@ -36,9 +36,8 @@ namespace Nest.Tests.Integration.Core
 			Assert.NotNull(project);
 			Assert.Greater(project.LOC, 0);
 			var loc = project.LOC;
-			this._client.Update<ElasticsearchProject>(new UpdateRequest<ElasticsearchProject>
+			this._client.Update<ElasticsearchProject>(new UpdateRequest<ElasticsearchProject>(project.Id)
 			{
-				Id = project.Id.ToString(CultureInfo.InvariantCulture),
 				RetryOnConflict = 5,
 				Refresh = true,
 				Script = "ctx._source.loc += 10",

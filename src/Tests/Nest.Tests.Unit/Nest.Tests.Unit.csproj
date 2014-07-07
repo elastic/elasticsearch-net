@@ -195,6 +195,8 @@
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Index\IndexRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Flush\FlushRequestTests.cs" />
     <Compile Include="ObjectInitializer\ClusterHealth\ClusterHealthRequestTests.cs" />
     <Compile Include="ObjectInitializer\DeleteIndex\DeleteIndexRequestTests.cs" />
     <Compile Include="ObjectInitializer\DeleteByQuery\DeleteByQueryRequestUrlTests.cs" />
@@ -558,6 +560,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Analyze\AnalyzeBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Index\IndexBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\DeleteIndex\DeleteIndexBody.json">

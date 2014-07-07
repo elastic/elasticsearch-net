@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
@@ -63,7 +64,13 @@ namespace Nest
 		public IndexNameMarker Index { get; set; }
 		public TypeNameMarker Type { get; set; }
 		public string Id { get; set; }
-
+		
+		public DocumentOptionalPathBase(IndexNameMarker indexName, TypeNameMarker typeName, string id)
+		{
+			this.Index = indexName;
+			this.Type = typeName;
+			this.Id = id;
+		}
 		protected override void SetRouteParameters(
 			IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
@@ -79,6 +86,10 @@ namespace Nest
 		public TypeNameMarker Type { get; set; }
 		public string Id { get; set; }
 		public T IdFrom { get; set; }
+
+		public DocumentOptionalPathBase(string id) { this.Id = id; }
+		public DocumentOptionalPathBase(long id) : this(id.ToString(CultureInfo.InvariantCulture)) {}
+		public DocumentOptionalPathBase(T document) { this.IdFrom = document; }
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{

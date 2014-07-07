@@ -29,7 +29,6 @@ namespace Nest
 		public DeleteIndexRequest(IndexNameMarker index)
 		{
 			this.Indices = new [] { index };
-			this.AllIndices = false;
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo)

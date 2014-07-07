@@ -37,13 +37,23 @@ namespace Nest
 	public class UpdateRequest<TDocument> : UpdateRequest<TDocument, TDocument>
 		where TDocument : class 
 	{
-		
+		public UpdateRequest(string id) : base(id) { }
+
+		public UpdateRequest(long id) : base(id) { }
+
+		public UpdateRequest(TDocument document) : base(document) { }
 	}
 
 	public partial class UpdateRequest<TUpsert, TDocument> : DocumentOptionalPathBase<UpdateRequestParameters, TUpsert>, IUpdateRequest<TUpsert, TDocument> 
 		where TUpsert : class
 		where TDocument : class 
 	{
+		public UpdateRequest(string id) : base(id) { }
+
+		public UpdateRequest(long id) : base(id) { }
+
+		public UpdateRequest(TUpsert document) : base(document) { }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
 		{
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;

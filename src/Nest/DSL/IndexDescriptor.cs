@@ -31,6 +31,11 @@ namespace Nest
 	{
 		public TDocument Document { get; set; }
 
+		public IndexRequest(TDocument document) : base(document)
+		{
+			this.Document = document;
+		}
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
 		{
 			IndexPathInfo.Update(pathInfo, this);
