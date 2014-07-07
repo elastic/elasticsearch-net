@@ -250,6 +250,7 @@
     <Compile Include="ObjectInitializer\Snapshots\CreateRepositoryRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\SnapshotRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\RestoreRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Update\UpdateRequestTests.cs" />
     <Compile Include="ObjectInitializer\Update\UpdateSettingsRequestTests.cs" />
     <Compile Include="ObjectInitializer\Validate\ValidateQueryRequestTests.cs" />
     <Compile Include="QueryParsers\BaseParserTests.cs" />
@@ -663,6 +664,7 @@
     <None Include="ObjectInitializer\Snapshots\RestoreBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="ObjectInitializer\Update\UpdateBody.json" />
     <None Include="ObjectInitializer\Update\UpdateSettingsBody.json" />
     <None Include="ObjectInitializer\Validate\ValidateQueryBody.json" />
     <None Include="packages.config" />
