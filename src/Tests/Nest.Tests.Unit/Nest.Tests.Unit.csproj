@@ -196,6 +196,9 @@
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
     <Compile Include="ObjectInitializer\ClusterHealth\ClusterHealthRequestTests.cs" />
+    <Compile Include="ObjectInitializer\DeleteIndex\DeleteIndexRequestTests.cs" />
+    <Compile Include="ObjectInitializer\DeleteByQuery\DeleteByQueryRequestUrlTests.cs" />
+    <Compile Include="ObjectInitializer\DeleteByQuery\DeleteByQueryTypedRequestUrlTests.cs" />
     <Compile Include="ObjectInitializer\DeleteByQuery\DeleteByQueryRequestTests.cs" />
     <Compile Include="ObjectInitializer\CreateIndex\CreateIndexRequestTests.cs" />
     <Compile Include="ObjectInitializer\Count\CountRequestTests.cs" />
@@ -555,6 +558,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Analyze\AnalyzeBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\DeleteIndex\DeleteIndexBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\DeleteByQuery\DeleteByQueryBody.json">
