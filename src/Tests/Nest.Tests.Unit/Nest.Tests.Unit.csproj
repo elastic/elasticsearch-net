@@ -195,6 +195,7 @@
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\CreateIndex\CreateIndexRequestTests.cs" />
     <Compile Include="ObjectInitializer\Count\CountRequestTests.cs" />
     <Compile Include="ObjectInitializer\ClusterSettings\ClusterSettingsRequestTests.cs" />
     <Compile Include="ObjectInitializer\ClusterSettings\ClusterGetSettingsRequestTests.cs" />
@@ -552,6 +553,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Analyze\AnalyzeBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\CreateIndex\CreateIndexBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Count\CountBody.json">

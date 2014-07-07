@@ -20,6 +20,8 @@ namespace Nest
 	
 	public partial class CloseIndexRequest : IndexPathBase<CloseIndexRequestParameters>, ICloseIndexRequest
 	{
+		public CloseIndexRequest(IndexNameMarker index) : base(index) { }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CloseIndexRequestParameters> pathInfo)
 		{
 			CloseIndexPathInfo.Update(pathInfo, this);

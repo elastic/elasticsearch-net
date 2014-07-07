@@ -24,6 +24,8 @@ namespace Nest
 	
 	public partial class CreateIndexRequest : IndexPathBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
+		public CreateIndexRequest(IndexNameMarker index) : base(index) { }
+
 		public IndexSettings IndexSettings { get; set; }
 		
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)

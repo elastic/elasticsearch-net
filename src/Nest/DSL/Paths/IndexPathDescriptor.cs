@@ -32,6 +32,11 @@ namespace Nest
 	public abstract class IndexPathBase<TParameters> : BasePathRequest<TParameters>, IIndexPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
+		public IndexPathBase(IndexNameMarker index)
+		{
+			this.Index = index;
+		}
+
 		public IndexNameMarker Index { get; set; }
 		
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)

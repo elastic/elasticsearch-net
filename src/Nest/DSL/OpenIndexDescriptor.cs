@@ -20,6 +20,8 @@ namespace Nest
 	
 	public partial class OpenIndexRequest : IndexPathBase<OpenIndexRequestParameters>, IOpenIndexRequest
 	{
+		public OpenIndexRequest(IndexNameMarker index) : base(index) { }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<OpenIndexRequestParameters> pathInfo)
 		{
 			OpenIndexPathInfo.Update(pathInfo, this);
