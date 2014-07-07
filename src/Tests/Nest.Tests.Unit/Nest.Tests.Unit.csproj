@@ -250,6 +250,7 @@
     <Compile Include="ObjectInitializer\Snapshots\CreateRepositoryRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\SnapshotRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\RestoreRequestTests.cs" />
+    <Compile Include="ObjectInitializer\TermVector\TermVectorRequestTests.cs" />
     <Compile Include="ObjectInitializer\Update\UpdateRequestTests.cs" />
     <Compile Include="ObjectInitializer\Update\UpdateSettingsRequestTests.cs" />
     <Compile Include="ObjectInitializer\Validate\ValidateQueryRequestTests.cs" />

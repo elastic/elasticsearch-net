@@ -18,14 +18,13 @@ namespace Nest.Tests.Unit.ObjectInitializer.Update
 		{
 			var project = new ElasticsearchProject { Id = 1 };
 
-			var request = new UpdateRequest<ElasticsearchProject, dynamic>(project)
+			var request = new UpdateRequest<ElasticsearchProject, object>(project)
 				{
 					Document = new { Name = "NEST" },
 					DocAsUpsert = true
 				};
 
 			var response = this._client.Update(request);
-			this._status = response.ConnectionStatus;
 		}
 
 		[Test]
