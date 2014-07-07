@@ -40,6 +40,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.Update
 					RoutingAllocationInclude = new Dictionary<string, object> { { "tag", "value1,value2" } },
 					RoutingAllocationExclude = new Dictionary<string, object> { { "tag", "value3" } },
 					RoutingAllocationRequire = new Dictionary<string, object> { { "group4", "aaa" } },
+					RoutingAllocationEnable = RoutingAllocationEnableOption.NewPrimaries,
 					RoutingAllocationDisableAllication = false,
 					RoutingAllocationDisableNewAllocation = false,
 					RoutingAllocationDisableReplicaAllocation = false,

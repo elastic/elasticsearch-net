@@ -26,6 +26,7 @@
   "index.routing.allocation.require": {
     "group4": "aaa"
   },
+  "index.routing.allocation.enable": "new_primaries",
   "index.routing.allocation.disable_allocation": false,
   "index.routing.allocation.disable_new_allocation": false,
   "index.routing.allocation.disable_replica_allocation": false,

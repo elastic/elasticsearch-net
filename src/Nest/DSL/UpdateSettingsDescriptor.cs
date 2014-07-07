@@ -72,6 +72,9 @@ namespace Nest
 		[JsonProperty("index.routing.allocation.require")]
 		IDictionary<string, object> RoutingAllocationRequire { get; set; }
 
+		[JsonProperty("index.routing.allocation.enable")]
+		RoutingAllocationEnableOption? RoutingAllocationEnable { get; set; }
+
 		[JsonProperty("index.routing.allocation.disable_allocation")]
 		bool? RoutingAllocationDisableAllication { get; set; }
 
@@ -161,6 +164,8 @@ namespace Nest
 
         public IDictionary<string, object> RoutingAllocationRequire { get; set; }
 
+		public RoutingAllocationEnableOption? RoutingAllocationEnable { get; set; }
+
         public bool? RoutingAllocationDisableAllication { get; set; }
 
         public bool? RoutingAllocationDisableNewAllocation { get; set; }
@@ -239,6 +244,8 @@ namespace Nest
 		IDictionary<string, object> IUpdateSettingsRequest.RoutingAllocationExclude { get; set; }
 
 		IDictionary<string, object> IUpdateSettingsRequest.RoutingAllocationRequire { get; set; }
+
+		RoutingAllocationEnableOption? IUpdateSettingsRequest.RoutingAllocationEnable { get; set; }
 
 		bool? IUpdateSettingsRequest.RoutingAllocationDisableAllication { get; set; }
 
@@ -464,6 +471,15 @@ namespace Nest
 			Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
 			this.Self.RoutingAllocationRequire  = selector(new FluentDictionary<string, object>());
+			return this;
+		}
+
+		/// <summary>
+		/// Enables shard allocation for a specific index.
+		/// </summary>
+		public UpdateSettingsDescriptor RoutingAllocationEnable(RoutingAllocationEnableOption option)
+		{
+			this.Self.RoutingAllocationEnable = option;
 			return this;
 		}
 

@@ -184,6 +184,7 @@
     <Compile Include="DSL\_Requests.generated.cs" />
     <Compile Include="ElasticClient-ClusterSettings.cs" />
     <Compile Include="ElasticClient-DeleteIndex.cs" />
+    <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
