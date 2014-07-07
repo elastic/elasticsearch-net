@@ -25,6 +25,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.Update
 				};
 
 			var response = this._client.Update(request);
+			_status = response.ConnectionStatus;
 		}
 
 		[Test]
