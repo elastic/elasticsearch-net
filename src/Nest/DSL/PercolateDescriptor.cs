@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -13,14 +14,17 @@ namespace Nest
 	public interface IPercolateRequest<TDocument> : IIndexTypePath<PercolateRequestParameters>
 		where TDocument : class
 	{
+		[JsonProperty(PropertyName = "doc")]
+		TDocument Document { get; set; }
+
+		[JsonProperty("id")]
+		string Id { get; set; }
+
 		[JsonProperty(PropertyName = "size")]
 		int? Size { get; set; }
 
 		[JsonProperty(PropertyName = "track_scores")]
 		bool? TrackScores { get; set; }
-
-		[JsonProperty(PropertyName = "doc")]
-		TDocument Document { get; set; }
 
 		[JsonProperty(PropertyName = "score")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
@@ -49,6 +53,7 @@ namespace Nest
 		public static void Update<T>(ElasticsearchPathInfo<PercolateRequestParameters> pathInfo, IPercolateRequest<T> request)
 			where T : class
 		{
+			pathInfo.Id = request.Id;
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 		}
 	}
@@ -61,6 +66,7 @@ namespace Nest
 		public FilterContainer Filter { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 
+		public string Id { get; set; }
 		public int? Size { get; set; }
 		public bool? TrackScores { get; set; }
 		public TDocument Document { get; set; }
@@ -72,6 +78,10 @@ namespace Nest
 			this.Document = document;
 		}
 
+		public PercolateRequest(string id) { this.Id = id; }
+
+		public PercolateRequest(long id) { this.Id = id.ToString(CultureInfo.InvariantCulture); }
+		
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PercolateRequestParameters> pathInfo)
 		{
 			PercolatePathInfo.Update(pathInfo, this);
@@ -87,9 +97,13 @@ namespace Nest
 		QueryContainer IPercolateRequest<T>.Query { get; set; }
 		FilterContainer IPercolateRequest<T>.Filter { get; set; }
 
+		string IPercolateRequest<T>.Id { get; set; }
 		int? IPercolateRequest<T>.Size { get; set; }
 		bool? IPercolateRequest<T>.TrackScores { get; set; }
+		
 		T IPercolateRequest<T>.Document { get; set; }
+
+
 		IDictionary<PropertyPathMarker, ISort> IPercolateRequest<T>.Sort { get; set; }
 		IDictionary<PropertyPathMarker, IFacetContainer> IPercolateRequest<T>.Facets { get; set; }
 		IDictionary<string, IAggregationContainer> IPercolateRequest<T>.Aggregations { get; set; }
@@ -97,13 +111,29 @@ namespace Nest
 		/// <summary>
 		/// The object to perculate
 		/// </summary>
-		public PercolateDescriptor<T> Object(T @object)
+		public PercolateDescriptor<T> Document(T @object)
 		{
 			Self.Document = @object;
 			return this;
 		}
 
+		/// <summary>
+		/// The object to perculate
+		/// </summary>
+		public PercolateDescriptor<T> Id(string id)
+		{
+			Self.Id = id;
+			return this;
+		}
 
+		/// <summary>
+		/// The object to perculate
+		/// </summary>
+		public PercolateDescriptor<T> Id(long id)
+		{
+			Self.Id = id.ToString(CultureInfo.InvariantCulture);
+			return this;
+		}
 		/// <summary>
 		/// Make sure we keep calculating score even if we are sorting on a field.
 		/// </summary>

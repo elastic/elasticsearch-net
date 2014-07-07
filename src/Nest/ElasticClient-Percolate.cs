@@ -93,12 +93,12 @@ namespace Nest
 
 
 		/// <inheritdoc />
-		public IPercolateResponse Percolate<T>(T @object, Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector = null)
+		public IPercolateResponse Percolate<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector)
 			where T : class
 		{
 			percolateSelector = percolateSelector ?? (s => s);
 			return this.Dispatch<PercolateDescriptor<T>, PercolateRequestParameters, PercolateResponse>(
-				s => percolateSelector(s.Object(@object)),
+				percolateSelector,
 				(p, d) => this.RawDispatch.PercolateDispatch<PercolateResponse>(p, d)
 			);
 		}
@@ -114,12 +114,12 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IPercolateResponse> PercolateAsync<T>(T @object, Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector = null)
+		public Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector)
 			where T : class
 		{
 			percolateSelector = percolateSelector ?? (s => s);
 			return this.DispatchAsync<PercolateDescriptor<T>, PercolateRequestParameters, PercolateResponse, IPercolateResponse>(
-				s => percolateSelector(s.Object(@object)),
+				percolateSelector,
 				(p, d) => this.RawDispatch.PercolateDispatchAsync<PercolateResponse>(p, d)
 			);
 		}

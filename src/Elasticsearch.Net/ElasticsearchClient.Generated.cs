@@ -7062,12 +7062,11 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			IRequestParameters requestParams = null;
 				
-			requestParameters = requestParameters ?? (s => s);
-			var passIn = new DeleteRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
-			requestParams = requestParameters(passIn);
-			
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new DeleteRequestParameters());
+			}
+				
 
 
 			return this.DoRequest<T>(
@@ -7101,12 +7100,11 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			IRequestParameters requestParams = null;
 				
-			requestParameters = requestParameters ?? (s => s);
-			var passIn = new DeleteRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
-			requestParams = requestParameters(passIn);
-			
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new DeleteRequestParameters());
+			}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -7142,12 +7140,11 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			IRequestParameters requestParams = null;
 				
-			requestParameters = requestParameters ?? (s => s);
-			var passIn = new DeleteRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
-			requestParams = requestParameters(passIn);
-			
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new DeleteRequestParameters());
+			}
+				
 
 
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
@@ -7183,12 +7180,11 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			IRequestParameters requestParams = null;
 				
-			requestParameters = requestParameters ?? (s => s);
-			var passIn = new DeleteRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
-			requestParams = requestParameters(passIn);
-			
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new DeleteRequestParameters());
+			}
+				
 
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(

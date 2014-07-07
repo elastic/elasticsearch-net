@@ -367,7 +367,7 @@ namespace Nest
 		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
 		/// <param name="object">The object to percolator</param>
 		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
-		IPercolateResponse Percolate<T>(T @object, Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector = null)
+		IPercolateResponse Percolate<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector)
 			where T : class;
 
 		/// <inheritdoc />
@@ -375,7 +375,7 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IPercolateResponse> PercolateAsync<T>(T @object, Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector = null) 
+		Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector) 
 			where T : class;
 		
 		/// <inheritdoc />
