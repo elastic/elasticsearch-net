@@ -258,6 +258,9 @@
     <Compile Include="ObjectInitializer\Update\UpdateRequestTests.cs" />
     <Compile Include="ObjectInitializer\UpdateSettings\UpdateSettingsRequestTests.cs" />
     <Compile Include="ObjectInitializer\Validate\ValidateQueryRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Warmers\DeleteWarmerRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Warmers\GetWarmerRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Warmers\PutWarmerRequestTests.cs" />
     <Compile Include="QueryParsers\BaseParserTests.cs" />
     <Compile Include="QueryParsers\Filter\AndFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\BoolFilterTests.cs" />
@@ -676,6 +679,7 @@
     <None Include="ObjectInitializer\Update\UpdateBody.json" />
     <None Include="ObjectInitializer\UpdateSettings\UpdateSettingsBody.json" />
     <None Include="ObjectInitializer\Validate\ValidateQueryBody.json" />
+    <None Include="ObjectInitializer\Warmers\PutWarmerBody.json" />
     <None Include="packages.config" />
     <None Include="QueryParsers\Filter\GeoBoundingBox\LatLon.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
