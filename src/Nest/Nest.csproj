@@ -401,7 +401,7 @@
     <Compile Include="DSL\Query\SubDescriptors\ExternalFieldDeclarationDescriptor.cs" />
     <Compile Include="DSL\Query\SubDescriptors\IExternalFieldDeclarationDescriptor.cs" />
     <Compile Include="DSL\Query\MultiMatchQueryDescriptor.cs" />
-    <Compile Include="ElasticClient-State.cs" />
+    <Compile Include="ElasticClient-ClusterState.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Resolvers\Converters\AnalysisSettingsConverter.cs" />
     <Compile Include="Resolvers\Converters\AnalyzerCollectionConverter.cs" />
@@ -691,7 +691,7 @@
     <Compile Include="Domain\Stats\DocStats.cs" />
     <Compile Include="Domain\Stats\StatsContainer.cs" />
     <Compile Include="Domain\Stats\Stats.cs" />
-    <Compile Include="ElasticClient-Stats.cs" />
+    <Compile Include="ElasticClient-IndicesStats.cs" />
     <Compile Include="Domain\Responses\AcknowledgedResponse.cs" />
     <Compile Include="Domain\Responses\IndexSettingsResponse.cs" />
     <Compile Include="ElasticClient-IndexSettings.cs" />

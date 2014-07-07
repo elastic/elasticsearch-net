@@ -5,7 +5,6 @@ using System.Text;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.Configuration;
-using Nest.DSL.Search;
 using Newtonsoft.Json;
 using Nest.Resolvers.Converters;
 using System.Linq.Expressions;

@@ -6,7 +6,7 @@ using System.Text;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 
-namespace Nest.DSL.Search
+namespace Nest
 {
 	public interface ISourceFilter
 	{

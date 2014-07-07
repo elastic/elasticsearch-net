@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Elasticsearch.Net;
-using FakeItEasy;
+using FluentAssertions;
 using Nest;
-using Nest.DSL.Descriptors;
 using Nest.Resolvers;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
-namespace Nest.Tests.Unit.Search.InitializerSyntax
+namespace Nest.Tests.Unit.ObjectInitializer.Search
 {
 	[TestFixture]
-	public class InitializerExample : BaseJsonTests
+	public class SearchRequestTests : BaseJsonTests
 	{
-		[Test]
-		public void FullExample_InitializerSyntax_Search()
+		private readonly IElasticsearchResponse _status;
+
+		public SearchRequestTests()
 		{
 			QueryContainer query = new TermQuery()
 			{
@@ -29,59 +30,36 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 				Rewrite = RewriteMultiTerm.ConstantScoreBoolean
 			};
 
-			var result = _client.Search<ElasticsearchProject>(new SearchRequest
+			var request = new SearchRequest<ElasticsearchProject>
 			{
 				From = 0,
 				Size = 20,
-				MinScore = 2.1,
-				Rescore = new Rescore
-				{
-					WindowSize = 10,
-					Query = new RescoreQuery
-					{
-						Query = new TermQuery() {}.ToContainer(),
-						QueryWeight = 1.2,
-						RescoreQueryWeight = 2.1
-					}
-				},
-				Fields = new[]
-				{
-					"field",
-					Property.Path<ElasticsearchProject>(p=>p.Name)
-				},
-				Query = query,
-				Filter = new FilterContainer(new BoolFilter
-				{
-					Cache = true,
-					Must = new FilterContainer[]
-					{
-						new TermFilter { Field = "value", Value = "asdasd"}
-					}
-				}),
-				TrackScores = true,
 				Explain = true,
+				TrackScores = true,
+				MinScore = 2.1,
 				IndicesBoost = new Dictionary<IndexNameMarker, double>
 				{
 					{ Infer.Index<ElasticsearchProject>(), 2.3 }
 				},
-				ScriptFields = new FluentDictionary<string, IScriptFilter>()
-					.Add("script_field_name", new ScriptFilter
-					{
-						Script = "doc['loc'].value * multiplier",
-						Params = new Dictionary<string, object>
-						{
-							{"multiplier", 4}
-						}
-					}),
 				Sort = new Dictionary<PropertyPathMarker, ISort>()
 				{
 					{ "field", new Sort { Order = SortOrder.Ascending, Missing = "_first"}}
 				},
-				Source = new SourceFilter
+				Facets = new Dictionary<PropertyPathMarker, IFacetContainer>()
 				{
-					Include = new PropertyPathMarker[]
+					{ "name", new FacetContainer
 					{
-						"na*"
+						Terms = new TermFacetRequest
+						{
+							Field = "field",
+							Size = 10,
+							FacetFilter = new TermFilter()
+							{
+								Field = "other_field",
+								Value = "term"
+							}.ToContainer()
+						}
+					}
 					}
 				},
 				Suggest = new Dictionary<string, ISuggestBucket>
@@ -106,21 +84,35 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 						}
 					}
 				},
-				Facets = new Dictionary<PropertyPathMarker, IFacetContainer>()
+				Rescore = new Rescore
 				{
-					{ "name", new FacetContainer
+					WindowSize = 10,
+					Query = new RescoreQuery
 					{
-						Terms = new TermFacetRequest
-						{
-							Field = "field",
-							Size = 10,
-							FacetFilter = new TermFilter()
-							{
-								Field = "other_field",
-								Value = "term"
-							}.ToContainer()
-						}
+						Query = new TermQuery() { }.ToContainer(),
+						QueryWeight = 1.2,
+						RescoreQueryWeight = 2.1
 					}
+				},
+				Fields = new[]
+				{
+					"field",
+					Property.Path<ElasticsearchProject>(p=>p.Name)
+				},
+				ScriptFields = new FluentDictionary<string, IScriptFilter>()
+					.Add("script_field_name", new ScriptFilter
+					{
+						Script = "doc['loc'].value * multiplier",
+						Params = new Dictionary<string, object>
+						{
+							{"multiplier", 4}
+						}
+					}),
+				Source = new SourceFilter
+				{
+					Include = new PropertyPathMarker[]
+					{
+						"na*"
 					}
 				},
 				Aggregations = new Dictionary<string, IAggregationContainer>
@@ -145,12 +137,32 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 							}
 						}
 					}}
-				}
-				
-			});
-			
-			var json = result.ConnectionStatus.Request.Utf8String();
-			Assert.Pass(json);
+				},
+				Query = query,
+				Filter = new FilterContainer(new BoolFilter
+				{
+					Cache = true,
+					Must = new FilterContainer[]
+					{
+						new TermFilter { Field = "value", Value = "asdasd"}
+					}
+				})
+			};
+			var response = this._client.Search<ElasticsearchProject>(request);
+			this._status = response.ConnectionStatus;
+		}
+
+		[Test]
+		public void Url()
+		{
+			this._status.RequestUrl.Should().EndWith("/nest_test_data/elasticsearchprojects/_search");
+			this._status.RequestMethod.Should().Be("POST");
+		}
+		
+		[Test]
+		public void SearchBody()
+		{
+			this.JsonEquals(this._status.Request, MethodBase.GetCurrentMethod());
 		}
 	}
 }

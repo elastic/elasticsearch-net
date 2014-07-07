@@ -40,6 +40,8 @@ namespace Elasticsearch.Net.Connection
 
 			var cs = ElasticsearchResponse<Stream>.Create(this.ConnectionSettings, 200, method, path, data);
 			cs.Response = new MemoryStream(_fixedResultBytes);
+			if (this.ConnectionSettings.ConnectionStatusHandler != null)
+				this.ConnectionSettings.ConnectionStatusHandler(cs);
 			return cs;
 		}
 
