@@ -20,6 +20,27 @@ namespace Nest
 	
 	public partial class OptimizeRequest : IndicesOptionalPathBase<OptimizeRequestParameters>, IOptimizeRequest
 	{
+		
+		/// <summary>
+		/// Does an _optimize on all indices (unless bounded by setting the Indices property).
+		/// </summary>
+		public OptimizeRequest() {}
+		
+		/// <summary>
+		/// Does an _optimize on /{index}/_optimize
+		/// </summary>
+		public OptimizeRequest(IndexNameMarker index)
+		{
+			this.Indices = new[] { index };
+		}
+		/// <summary>
+		/// Does an _optimize on /{indices}/_optimize
+		/// </summary>
+		public OptimizeRequest(IEnumerable<IndexNameMarker> indices)
+		{
+			this.Indices = indices;
+		}
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<OptimizeRequestParameters> pathInfo)
 		{
 			OptimizePathInfo.Update(pathInfo, this);
