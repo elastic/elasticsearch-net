@@ -25,7 +25,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.Index
 			};
 			var request = new IndexRequest<ElasticsearchProject>(newProject)
 			{
-				
+				Replication = Replication.Async
 			};
 			//TODO Index(request) does not work as expected
 			var response = this._client.Index<ElasticsearchProject>(request);
@@ -35,7 +35,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.Index
 		[Test]
 		public void Url()
 		{
-			this._status.RequestUrl.Should().EndWith("/nest_test_data/elasticsearchprojects/15");
+			this._status.RequestUrl.Should().EndWith("/nest_test_data/elasticsearchprojects/15?replication=async");
 			this._status.RequestMethod.Should().Be("PUT");
 		}
 		
