@@ -241,6 +241,7 @@
     <Compile Include="ObjectInitializer\Snapshots\CreateRepositoryRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\SnapshotRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\RestoreRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Validate\ValidateQueryRequestTests.cs" />
     <Compile Include="QueryParsers\BaseParserTests.cs" />
     <Compile Include="QueryParsers\Filter\AndFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\BoolFilterTests.cs" />
@@ -649,6 +650,7 @@
     <None Include="ObjectInitializer\Snapshots\RestoreBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="ObjectInitializer\Validate\ValidateQueryBody.json" />
     <None Include="packages.config" />
     <None Include="QueryParsers\Filter\GeoBoundingBox\LatLon.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

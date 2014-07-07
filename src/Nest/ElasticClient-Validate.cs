@@ -18,8 +18,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public IValidateResponse Validate<T>(IValidateQueryRequest validateQueryRequest)
-			where T : class
+		public IValidateResponse Validate(IValidateQueryRequest validateQueryRequest)
 		{
 			return this.Dispatch<IValidateQueryRequest, ValidateQueryRequestParameters, ValidateResponse>(
 				validateQueryRequest,
@@ -38,8 +37,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IValidateResponse> ValidateAsync<T>(IValidateQueryRequest validateQueryRequest)
-			where T : class
+		public Task<IValidateResponse> ValidateAsync(IValidateQueryRequest validateQueryRequest)
 		{
 			return this.DispatchAsync<IValidateQueryRequest, ValidateQueryRequestParameters, ValidateResponse, IValidateResponse>(
 				validateQueryRequest,
