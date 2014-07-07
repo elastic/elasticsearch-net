@@ -1,10 +1,6 @@
 ﻿using Nest.Tests.Unit.Core.Indices.Analysis.Tokenizers;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Nest.Tests.Unit.Core.Indices.Analysis.Analyzers
 {

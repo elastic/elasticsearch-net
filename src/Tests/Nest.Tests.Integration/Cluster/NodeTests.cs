@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Runtime.Remoting.Channels;
 using Elasticsearch.Net;
 using NUnit.Framework;
 

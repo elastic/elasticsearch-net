@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using Nest.Resolvers;
-using Nest.Resolvers.Converters;
+﻿using Nest.Resolvers;
 using Newtonsoft.Json;
 
 namespace Nest

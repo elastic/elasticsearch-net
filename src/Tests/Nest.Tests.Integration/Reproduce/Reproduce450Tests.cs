@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Channels;
-using Nest.Tests.MockData;
-using Nest.Tests.MockData.Domain;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
-using System.Diagnostics;
 using FluentAssertions;
 using Elasticsearch.Net;
 

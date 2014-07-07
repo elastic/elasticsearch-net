@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Elasticsearch.Net.Connection.Thrift;
+﻿using Elasticsearch.Net.Connection.Thrift;
 using Nest;
 
 namespace Profiling.Indexing

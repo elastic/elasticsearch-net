@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Elasticsearch.Net;
-using FakeItEasy;
-using Nest;
-using Nest.DSL.Descriptors;
 using Nest.DSL.Search;
 using Nest.Resolvers;
 using Nest.Tests.MockData.Domain;

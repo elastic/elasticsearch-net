@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using Nest.Tests.MockData;
+﻿using System.Collections.Specialized;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 

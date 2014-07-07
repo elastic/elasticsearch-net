@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Integration.Integration.Query
 {

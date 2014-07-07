@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
-using System.Runtime.Remoting;
-using System.Security;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
-using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
 

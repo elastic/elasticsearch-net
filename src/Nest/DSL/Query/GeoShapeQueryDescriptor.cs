@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using Nest.DSL.Query.Behaviour;
 using Nest.Resolvers;
 using Newtonsoft.Json;
-using Elasticsearch.Net;
 
 namespace Nest
 {

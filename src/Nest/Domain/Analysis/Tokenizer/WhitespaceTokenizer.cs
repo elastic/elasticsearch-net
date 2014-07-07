@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
 	/// <summary>
 	/// A tokenizer of type whitespace that divides text at whitespace.

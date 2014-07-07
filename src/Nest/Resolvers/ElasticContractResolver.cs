@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nest.DSL.Descriptors;
-using Nest.DSL.Search;
 using Nest.Resolvers.Converters.Aggregations;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
-
-using Newtonsoft.Json.Linq;
 using System.Linq;
-using Elasticsearch.Net;
 using System.Reflection;
-using System.Globalization;
 using System.Collections;
 using Nest.Resolvers.Converters;
 

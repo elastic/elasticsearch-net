@@ -1,6 +1,4 @@
-﻿using System;
-using Elasticsearch.Net;
-using FluentAssertions;
+﻿using Elasticsearch.Net;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 using System.Reflection;

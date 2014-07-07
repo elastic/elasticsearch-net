@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using FakeItEasy;
 using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 

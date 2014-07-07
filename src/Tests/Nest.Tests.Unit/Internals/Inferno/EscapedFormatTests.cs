@@ -1,8 +1,4 @@
 ﻿using NUnit.Framework;
-using Nest.Tests.MockData.Domain;
-using Nest.Resolvers;
-using System;
-using FluentAssertions;
 using Elasticsearch.Net;
 
 namespace Nest.Tests.Unit.Internals.Inferno

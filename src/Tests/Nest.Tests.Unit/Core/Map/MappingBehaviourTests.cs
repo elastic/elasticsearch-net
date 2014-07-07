@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using FluentAssertions;
 using NUnit.Framework;
-using Nest;
 
 namespace Nest.Tests.Unit.Core.Map
 {

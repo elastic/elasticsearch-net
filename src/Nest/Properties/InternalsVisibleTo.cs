@@ -8,11 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Reflection;
-using System.Resources;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 //[assembly: InternalsVisibleTo("Nest.Tests.Unit")]
 //[assembly: InternalsVisibleTo("Nest.Tests.Integration")]
 //[assembly: InternalsVisibleTo("Nest.Connection.Thrift")]

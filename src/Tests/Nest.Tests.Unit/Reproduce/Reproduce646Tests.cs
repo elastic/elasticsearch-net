@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Elasticsearch.Net.Connection;
+﻿using Elasticsearch.Net.Connection;
 using NUnit.Framework;
 
 namespace Nest.Tests.Unit.Reproduce

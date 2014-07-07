@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Nest.Resolvers;
-using Nest.Resolvers.Converters;
+﻿using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest

@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
 ///This file lays the base for all the descriptors based on the query string parameters in the spec for IElasticClient.

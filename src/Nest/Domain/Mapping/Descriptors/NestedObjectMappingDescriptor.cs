@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Nest.Resolvers;
-using Newtonsoft.Json;
 using Nest.Resolvers.Writers;
-using Elasticsearch.Net;
 
 namespace Nest
 {

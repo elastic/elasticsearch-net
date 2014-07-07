@@ -1,21 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using Autofac;
-using Autofac.Core.Activators.Reflection;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Exceptions;
-using Elasticsearch.Net.Providers;
 using Elasticsearch.Net.Tests.Unit.Stubs;
-using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
 
