@@ -67,8 +67,6 @@ namespace Nest
 
         string IRepositorySnapshotPath<SnapshotRequestParameters>.Snapshot { get; set; }
 
-        SnapshotRequestParameters IRequest<SnapshotRequestParameters>.RequestParameters { get; set; }
-
 		public SnapshotDescriptor Index(string index)
 		{
 			return this.Indices(index);
