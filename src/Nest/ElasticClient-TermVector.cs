@@ -20,8 +20,7 @@ namespace Nest
 		}
 
 		///<inheritdoc />
-		public ITermVectorResponse TermVector<T>(ITermvectorRequest termvectorRequest)
-			where T : class
+		public ITermVectorResponse TermVector(ITermvectorRequest termvectorRequest)
 		{
 			return this.Dispatch<ITermvectorRequest, TermvectorRequestParameters, TermVectorResponse>(
 				termvectorRequest,
@@ -40,8 +39,7 @@ namespace Nest
 		}
 
 		///<inheritdoc />
-		public Task<ITermVectorResponse> TermVectorAsync<T>(ITermvectorRequest termvectorRequest)
-			where T : class
+		public Task<ITermVectorResponse> TermVectorAsync(ITermvectorRequest termvectorRequest)
 		{
 			return this.DispatchAsync<ITermvectorRequest , TermvectorRequestParameters, TermVectorResponse, ITermVectorResponse>(
 				termvectorRequest,
