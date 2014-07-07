@@ -1,0 +1,45 @@
+ {
+  "from": 0,
+  "size": 20,
+  "explain": true,
+  "track_scores": true,
+  "sort": {
+    "field": {
+      "missing": "_first",
+      "order": "asc"
+    }
+  },
+  "filter": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "value": "asdasd"
+          }
+        }
+      ],
+      "_cache": true
+    }
+  },
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "name": {
+              "value": "value"
+            }
+          }
+        },
+        {
+          "prefix": {
+            "prefix_field": {
+              "value": "prefi",
+              "rewrite": "constant_score_boolean"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -33,6 +33,8 @@ namespace Elasticsearch.Net
 
 		public T CopyQueryStringValuesFrom(IRequestParameters requestParameters)
 		{
+			if (requestParameters == null)
+				return (T)this;
 			var from = requestParameters.QueryString;
 			foreach (var k in from.Keys)
 				Self.QueryString[k] = from[k];
