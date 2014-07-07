@@ -230,6 +230,7 @@
     <Compile Include="ObjectInitializer\Percolate\UnregisterPercolatorRequestTests.cs" />
     <Compile Include="ObjectInitializer\Percolate\RegisterPercolatorRequestTests.cs" />
     <Compile Include="ObjectInitializer\Repository\DeleteRepositoryRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Restore\RestoreRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\DeleteSnapshotRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\DeleteRepositoryRequestTests.cs" />
     <Compile Include="ObjectInitializer\Snapshots\GetSnapshotRequestTests.cs" />
@@ -624,6 +625,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Repository\CreateRepositoryBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Restore\RestoreBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Snapshots\CreateRepositoryBody.json">
