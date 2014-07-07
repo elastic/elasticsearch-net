@@ -1152,7 +1152,7 @@ namespace Nest
 
 			else if (query.IsConditionless)
 				return this;
-			((ISearchRequest)this).Query = query;
+			Self.Query = query;
 			return this;
 
 		}
@@ -1169,7 +1169,7 @@ namespace Nest
 				bq = q.MatchAll();
 			else
 				bq = q.QueryString(qs => qs.Query(userInput));
-			((ISearchRequest)this).Query = bq;
+			Self.Query = bq;
 			return this;
 		}
 
@@ -1200,7 +1200,7 @@ namespace Nest
 				return this;
 
 
-			((ISearchRequest)this).Filter = bf;
+			Self.Filter = bf;
 			return this;
 		}
 		/// <summary>
@@ -1209,7 +1209,7 @@ namespace Nest
 		public SearchDescriptor<T> Filter(FilterContainer filterDescriptor)
 		{
 			filterDescriptor.ThrowIfNull("filter");
-			((ISearchRequest)this).Filter = filterDescriptor;
+			Self.Filter = filterDescriptor;
 			return this;
 		}
 
@@ -1218,7 +1218,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> FilterRaw(string rawFilter)
 		{
-			((ISearchRequest)this).Filter = new FilterDescriptor<T>().Raw(rawFilter);
+			Self.Filter = new FilterDescriptor<T>().Raw(rawFilter);
 			return this;
 		}
 
