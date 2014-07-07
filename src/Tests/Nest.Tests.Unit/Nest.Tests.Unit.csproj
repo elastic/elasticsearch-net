@@ -195,6 +195,9 @@
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshot\DeleteSnapshotRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshot\GetSnapshotRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshot\SnapshotRequestTests.cs" />
     <Compile Include="ObjectInitializer\Segments\SegmentsRequestTests.cs" />
     <Compile Include="ObjectInitializer\Search\SearchRequestTests.cs" />
     <Compile Include="ObjectInitializer\Scroll\ScrollRequestTests.cs" />
@@ -613,6 +616,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\MoreLikeThis\MoreLikeThisBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Snapshot\SnapshotBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Search\SearchBody.json">
