@@ -24,8 +24,8 @@ namespace Nest.Tests.Unit.ObjectInitializer.Update
 					DocAsUpsert = true
 				};
 
-			var response = this._client.Update<ElasticsearchProject, object>(request);
-			this._status = response.ConnectionStatus;
+			var response = this._client.Update(request);
+			_status = response.ConnectionStatus;
 		}
 
 		[Test]

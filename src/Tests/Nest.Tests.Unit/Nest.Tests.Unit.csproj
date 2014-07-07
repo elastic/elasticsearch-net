@@ -195,7 +195,6 @@
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
-    <Compile Include="ObjectInitializer\Suggest\SuggestRequestTests.cs" />
     <Compile Include="ObjectInitializer\Status\StatusRequestTests.cs" />
     <Compile Include="ObjectInitializer\IndicesStats\IndicesStatsRequestTests.cs" />
     <Compile Include="ObjectInitializer\ClusterState\ClusterStateRequestTests.cs" />
@@ -254,6 +253,7 @@
     <Compile Include="ObjectInitializer\Template\DeleteTemplateRequestTests.cs" />
     <Compile Include="ObjectInitializer\Template\GetTemplateRequestTests.cs" />
     <Compile Include="ObjectInitializer\Template\PutTemplateRequestTests.cs" />
+    <Compile Include="ObjectInitializer\TermVector\TermVectorRequestTests.cs" />
     <Compile Include="ObjectInitializer\Update\UpdateRequestTests.cs" />
     <Compile Include="ObjectInitializer\Update\UpdateSettingsRequestTests.cs" />
     <Compile Include="ObjectInitializer\Validate\ValidateQueryRequestTests.cs" />
@@ -600,9 +600,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Analyze\AnalyzeBody.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="ObjectInitializer\Suggest\SuggestBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Index\IndexBody.json">

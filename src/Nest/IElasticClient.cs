@@ -979,16 +979,14 @@ namespace Nest
             where T : class;
 
 		/// <inheritdoc />
-		ITermVectorResponse TermVector<T>(ITermvectorRequest termvectorRequest) 
-            where T : class;
+		ITermVectorResponse TermVector(ITermvectorRequest termvectorRequest);
 
 		/// <inheritdoc />
         Task<ITermVectorResponse> TermVectorAsync<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector) 
             where T : class;
 
 		/// <inheritdoc />
-        Task<ITermVectorResponse> TermVectorAsync<T>(ITermvectorRequest termvectorRequest) 
-            where T : class;
+        Task<ITermVectorResponse> TermVectorAsync(ITermvectorRequest termvectorRequest);
 
         /// <summary>
         /// Multi termvectors API allows to get multiple termvectors based on an index, type and id.
