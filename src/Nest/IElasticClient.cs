@@ -455,16 +455,14 @@ namespace Nest
 			where T : class;
 		
 		/// <inheritdoc />
-		IIndicesResponse DeleteMapping<T>(IDeleteMappingRequest deleteMappingRequest) 
-			where T : class;
+		IIndicesResponse DeleteMapping(IDeleteMappingRequest deleteMappingRequest);
 		
 		/// <inheritdoc />
 		Task<IIndicesResponse> DeleteMappingAsync<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null) 
 			where T : class;
 		 
 		/// <inheritdoc />
-		Task<IIndicesResponse> DeleteMappingAsync<T>(IDeleteMappingRequest deleteMappingRequest) 
-			where T : class;
+		Task<IIndicesResponse> DeleteMappingAsync(IDeleteMappingRequest deleteMappingRequest);
 		 
 		/// <summary>
 		/// The flush API allows to flush one or more indices through an API. The flush process of an index basically 

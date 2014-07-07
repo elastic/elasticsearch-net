@@ -25,6 +25,10 @@ namespace Nest
 	
 	public partial class MultiTermVectorsRequest : IndexTypePathBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
 	{
+		public MultiTermVectorsRequest(IndexNameMarker index, TypeNameMarker typeNameMarker) : base(index, typeNameMarker)
+		{
+		}
+
 		public IEnumerable<MultiTermVectorDocument> Documents { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo)

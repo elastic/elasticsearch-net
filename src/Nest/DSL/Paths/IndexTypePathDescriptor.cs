@@ -65,20 +65,29 @@ namespace Nest
 	{
 		public IndexNameMarker Index { get; set; }
 		public TypeNameMarker Type { get; set; }
+
+		public IndexTypePathBase(IndexNameMarker index, TypeNameMarker typeNameMarker)
+		{
+			this.Index = index;
+			this.Type = typeNameMarker;
+		}
 		
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{	
-			IndexTypePathRouteParameters.SetRouteParameters(this, settings, pathInfo);
+			IndexTypePathRouteParameters.SetRouteParameters<TParameters>(this, settings, pathInfo);
 		}
 	}
 
-	public abstract class IndexTypePathBase<TParameters, T> : IndexTypePathBase<TParameters>
+	public abstract class IndexTypePathBase<TParameters, T> : BasePathRequest<TParameters>, IIndexTypePath<TParameters>
 		where TParameters : IRequestParameters, new()
 		where T : class
 	{
+		public IndexNameMarker Index { get; set; }
+		public TypeNameMarker Type { get; set; }
+
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			IndexTypePathRouteParameters.SetRouteParameters(this, settings, pathInfo);
+			IndexTypePathRouteParameters.SetRouteParameters<TParameters, T>(this, settings, pathInfo);
 		}
 	}
 	/// <summary>

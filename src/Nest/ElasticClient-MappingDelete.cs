@@ -20,8 +20,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public IIndicesResponse DeleteMapping<T>(IDeleteMappingRequest deleteMappingRequest)
-			where T : class
+		public IIndicesResponse DeleteMapping(IDeleteMappingRequest deleteMappingRequest)
 		{
 			return this.Dispatch<IDeleteMappingRequest, DeleteMappingRequestParameters, IndicesResponse>(
 				deleteMappingRequest,
@@ -41,8 +40,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IIndicesResponse> DeleteMappingAsync<T>(IDeleteMappingRequest deleteMappingRequest)
-			where T : class
+		public Task<IIndicesResponse> DeleteMappingAsync(IDeleteMappingRequest deleteMappingRequest)
 		{
 			return this.DispatchAsync<IDeleteMappingRequest, DeleteMappingRequestParameters, IndicesResponse, IIndicesResponse>(
 				deleteMappingRequest,

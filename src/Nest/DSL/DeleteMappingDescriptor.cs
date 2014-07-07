@@ -21,6 +21,10 @@ namespace Nest
 	
 	public partial class DeleteMappingRequest : IndexTypePathBase<DeleteMappingRequestParameters>, IDeleteMappingRequest
 	{
+		public DeleteMappingRequest(IndexNameMarker index, TypeNameMarker typeNameMarker) : base(index, typeNameMarker)
+		{
+		}
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteMappingRequestParameters> pathInfo)
 		{
 			DeleteMappingPathInfo.Update(pathInfo, this);

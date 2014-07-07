@@ -21,6 +21,10 @@ namespace Nest
 	
 	public partial class GetMappingRequest : IndexTypePathBase<GetMappingRequestParameters>, IGetMappingRequest
 	{
+		public GetMappingRequest(IndexNameMarker index, TypeNameMarker typeNameMarker) : base(index, typeNameMarker)
+		{
+		}
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetMappingRequestParameters> pathInfo)
 		{
 			GetMappingPathInfo.Update(pathInfo, this);
