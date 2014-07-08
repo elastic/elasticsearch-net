@@ -179,6 +179,9 @@ namespace Elasticsearch.Net.Connection
 				myReq.ContentType = requestSpecificConfig.ContentType;
 			}
 			var timeout = this.ConnectionSettings.Timeout;
+			if (requestSpecificConfig != null && requestSpecificConfig.RequestTimeout.HasValue)
+				timeout = requestSpecificConfig.RequestTimeout.Value;
+
 			myReq.Timeout = timeout; // 1 minute timeout.
 			myReq.ReadWriteTimeout = timeout; // 1 minute timeout.
 			myReq.Method = method;
@@ -269,20 +272,21 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		private Task<ElasticsearchResponse<Stream>> CreateIterateTask(HttpWebRequest request, byte[] data, object requestSpecificConfig, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs)
+		private Task<ElasticsearchResponse<Stream>> CreateIterateTask(HttpWebRequest request, byte[] data, IRequestConfiguration requestSpecificConfig, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs)
 		{
 			this.Iterate(request, data, this._AsyncSteps(request, tcs, data, requestSpecificConfig), tcs);
 			return tcs.Task;
 		}
 
-		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs, byte[] data, object requestSpecificConfig)
+		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
 			var timeout = this.ConnectionSettings.Timeout;
-
+			if (requestSpecificConfig != null && requestSpecificConfig.ConnectTimeout.HasValue)
+				timeout = requestSpecificConfig.ConnectTimeout.Value;
 			if (data != null)
 			{
 				var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, null);
-				//ThreadPool.RegisterWaitForSingleObject((getRequestStream as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
+				ThreadPool.RegisterWaitForSingleObject((getRequestStream as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
 				yield return getRequestStream;
 
 				var requestStream = getRequestStream.Result;
@@ -299,7 +303,7 @@ namespace Elasticsearch.Net.Connection
 
 			// Get the response
 			var getResponse = Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, null);
-			//ThreadPool.RegisterWaitForSingleObject((getResponse as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
+			ThreadPool.RegisterWaitForSingleObject((getResponse as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
 			yield return getResponse;
 
 			var path = request.RequestUri.ToString();

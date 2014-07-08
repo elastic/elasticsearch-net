@@ -74,7 +74,7 @@ namespace Elasticsearch.Net.Connection
 				rq.Finish(response.Success, response.HttpStatusCode);
 			}
 			if (response.Response == null)
-				return false;
+				return response.Success;
 			using (response.Response)
 				return response.Success;
 		}
@@ -275,7 +275,13 @@ namespace Elasticsearch.Net.Connection
 			try
 			{
 				if (nodeRequiresPinging)
-					this.Ping(requestState);
+				{
+					var pingSuccess = this.Ping(requestState);
+					if (!pingSuccess)
+					{
+						return RetryRequest<T>(requestState);
+					}
+				}
 
 				ElasticsearchResponse<Stream> streamResponse;
 				using (var rq = requestState.InitiateRequest(RequestType.ElasticsearchCall))
@@ -385,7 +391,11 @@ namespace Elasticsearch.Net.Connection
 					.ContinueWith(t =>
 					{
 						if (t.IsCompleted)
+						{
+							if (!t.Result)
+								return this.RetryRequestAsync(requestState, t.Exception);
 							return this.FinishOrRetryRequestAsync(requestState);
+						}
 						if (t.IsFaulted)
 							return this.RetryRequestAsync(requestState, t.Exception);
 						return null;
@@ -533,7 +543,7 @@ namespace Elasticsearch.Net.Connection
 					var e = this.Serializer.Deserialize<OneToOneServerException>(ms);
 					error = ElasticsearchServerError.Create(e);
 				}
-				finally {}
+				catch {}
 				ms.Position = 0;
 				streamResponse.Response = ms;
 			}

@@ -74,6 +74,9 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var connection = fake.Resolve<IConnection>();
 				var sniffCall = FakeCalls.Sniff(fake, config, uris);
 				
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
 				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.Returns(FakeResponse.Ok(config));
 
@@ -112,6 +115,10 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					.ExposeRawResponse();
 				fake.Provide<IConnectionConfigurationValues>(config);
 				var transport = FakeCalls.ProvideDefaultTransport(fake, dateTimeProvider);
+
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
 				var sniffCall = FakeCalls.Sniff(fake, config, uris);
 				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.ReturnsNextFromSequence(
@@ -162,6 +169,9 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					new Uri("http://localhost:9200"),
 					new Uri("http://localhost:9201")
 				};
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
 				var sniffCall = FakeCalls.Sniff(fake, config, sniffNewNodes);
 				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.ReturnsNextFromSequence(
