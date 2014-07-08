@@ -2,8 +2,9 @@
 
 namespace Nest
 {
-	public interface IPathInfo<K> where K : FluentRequestParameters<K>, new()
+	public interface IPathInfo<TParameters> 
+		where TParameters : IRequestParameters, new()
 	{
-		ElasticsearchPathInfo<K> ToPathInfo(IConnectionSettingsValues settings);
+		ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings);
 	}
 }

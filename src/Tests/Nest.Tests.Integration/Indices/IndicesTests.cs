@@ -75,7 +75,7 @@ namespace Nest.Tests.Integration.Indices
 					Normalization = "h1"
 				});
 
-			var typeMappingResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
+			var typeMappingResult = this._client.GetMapping<ElasticsearchProject>(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
 			var typeMapping = typeMappingResult.Mapping;
 			typeMapping.Name = index;
 			settings.Mappings.Add(typeMapping);
@@ -213,7 +213,7 @@ namespace Nest.Tests.Integration.Indices
 		public void CreateIndex()
 		{
 			var client = this._client;
-			var typeMappingResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
+			var typeMappingResult = this._client.GetMapping<ElasticsearchProject>(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
 			var typeMapping = typeMappingResult.Mapping;
 			typeMapping.Name = "mytype";
 			var settings = new IndexSettings();
@@ -228,7 +228,7 @@ namespace Nest.Tests.Integration.Indices
 			Assert.IsTrue(response.IsValid);
 			Assert.IsTrue(response.Acknowledged);
 
-			var mappingResult = this._client.GetMapping(gm=>gm.Index(indexName).Type("mytype"));
+			var mappingResult = this._client.GetMapping<ElasticsearchProject>(gm=>gm.Index(indexName).Type("mytype"));
 			mappingResult.Mapping.Should().NotBeNull();
 			var deleteResponse = client.DeleteIndex(i=>i.Index(indexName));
 
@@ -305,7 +305,7 @@ namespace Nest.Tests.Integration.Indices
 			Assert.IsTrue(response.IsValid, response.ConnectionStatus.ToString());
 			Assert.IsTrue(response.Acknowledged, response.ConnectionStatus.ToString());
 
-			mapping = this._client.GetMapping(gm => gm.Index<ElasticsearchProject>().Type<ElasticsearchProject>()).Mapping;
+			mapping = this._client.GetMapping<ElasticsearchProject>(gm => gm.Index<ElasticsearchProject>().Type<ElasticsearchProject>()).Mapping;
 			Assert.IsNotNull(mapping.Properties.ContainsKey(fieldName));
 		}
 
@@ -348,7 +348,7 @@ namespace Nest.Tests.Integration.Indices
 
 			var inferrer = new ElasticInferrer(this._settings);
 			var typeName = inferrer.PropertyName(typeMapping.Name);
-			Assert.IsNotNull(this._client.GetMapping(gm=>gm.Index(indexName).Type(typeName)));
+			Assert.IsNotNull(this._client.GetMapping<ElasticsearchProject>(gm=>gm.Index(indexName).Type(typeName)));
 
 			var deleteResponse = client.DeleteIndex(i=>i.Index(indexName));
 

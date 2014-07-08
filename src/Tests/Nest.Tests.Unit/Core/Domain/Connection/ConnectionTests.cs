@@ -48,7 +48,7 @@ namespace Nest.Tests.Unit.Domain.Connection
 			var result = client.IndexExists(ie=>ie.Index("index"));
 
 			// Assert
-			Assert.AreEqual(result.ConnectionStatus.RequestUrl, "http://localhost:9000/index?authToken=ABCDEFGHIJK");
+			Assert.AreEqual("http://localhost:9000/index?authToken=ABCDEFGHIJK", result.ConnectionStatus.RequestUrl);
 		}
 
 

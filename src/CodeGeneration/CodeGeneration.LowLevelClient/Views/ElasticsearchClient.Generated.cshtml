@@ -10,6 +10,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Connection.Configuration;
 
 ///Generated File Please Do Not Edit Manually
 @{
@@ -63,23 +64,24 @@ namespace Elasticsearch.Net
 		{
 	<text>var url = "@(url)";</text>
 		}
-			BaseRequestParameters requestParams = null;
+			IRequestParameters requestParams = null;
 			@if (url.StartsWith("_cat") || method.Allow404)
 			{
 				var config = new List<string>();
 				if (url.StartsWith("_cat"))
 				{
-					config.Add("ContentType(\"text/plain\")");
+					config.Add("ContentType = \"text/plain\"");
 				}
 				if (method.Allow404)
 				{
-					config.Add("AllowStatusCodes(404)");
+					config.Add("AllowedStatusCodes = new [] { 404 }");
 				}
 				<text>
 			requestParameters = requestParameters ?? (s => s);
-			requestParams = requestParameters(new @(method.QueryStringParamName)());
-			(requestParams as @method.QueryStringParamName).RequestConfiguration(r=>r.@Raw(string.Join(".", config)));
-			ToNameValueCollection(requestParams);
+			var passIn = new @(method.QueryStringParamName)();
+			requestParams = passIn;
+			requestParams.RequestConfiguration = new RequestConfiguration { @Raw(string.Join(", ", config)) };
+			requestParams = requestParameters(passIn);
 			</text>
 			}
 			else
@@ -88,7 +90,6 @@ namespace Elasticsearch.Net
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new @(method.QueryStringParamName)());
-				ToNameValueCollection(requestParams);
 			}
 				</text>
 			}

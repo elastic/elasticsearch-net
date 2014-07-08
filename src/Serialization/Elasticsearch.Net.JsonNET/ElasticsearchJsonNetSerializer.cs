@@ -65,5 +65,10 @@ namespace Elasticsearch.Net.JsonNet
 
 			return Encoding.UTF8.GetBytes(json);
 		}
+
+		public string Stringify(object valueType)
+		{
+			return ElasticsearchDefaultSerializer.DefaultStringify(valueType);
+		}
 	}
 }

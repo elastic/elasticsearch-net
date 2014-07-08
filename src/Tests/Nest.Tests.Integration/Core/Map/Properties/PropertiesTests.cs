@@ -108,7 +108,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		[Test]
 		public void BinaryProperty()
 		{
-			this._client.DeleteMapping(d=>d.Index<ElasticsearchProject>().Type<ElasticsearchProject>());
+			this._client.DeleteMapping<ElasticsearchProject>();
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Binary(s => s

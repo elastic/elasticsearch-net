@@ -1,0 +1,4 @@
+{"index":"my-index"}
+{"query":{"term":{"name":{"value":"NEST"}}}}
+{}
+{"query":{"term":{"contributors.lastName":{"value":"Laarman"}}}}

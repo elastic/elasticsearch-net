@@ -1,0 +1,10 @@
+  {
+  "a-type": {
+    "properties": {
+      "my_field": {
+        "type": "string",
+        "boost": 1.2
+      }
+    }
+  }
+}

@@ -18,6 +18,15 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
+		public ISegmentsResponse Segments(ISegmentsRequest segmentsRequest)
+		{
+			return this.Dispatch<ISegmentsRequest, SegmentsRequestParameters, SegmentsResponse>(
+				segmentsRequest,
+				(p, d) => this.RawDispatch.IndicesSegmentsDispatch<SegmentsResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
 		public Task<ISegmentsResponse> SegmentsAsync(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null)
 		{
 			segmentsSelector = segmentsSelector ?? (s => s);
@@ -26,5 +35,15 @@ namespace Nest
 				(p, d) => this.RawDispatch.IndicesSegmentsDispatchAsync<SegmentsResponse>(p)
 			);
 		}
+
+		/// <inheritdoc />
+		public Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest segmentsRequest)
+		{
+			return this.DispatchAsync<ISegmentsRequest, SegmentsRequestParameters, SegmentsResponse, ISegmentsResponse>(
+				segmentsRequest,
+				(p, d) => this.RawDispatch.IndicesSegmentsDispatchAsync<SegmentsResponse>(p)
+			);
+		}
+
 	}
 }

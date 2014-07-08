@@ -1,0 +1,12 @@
+{
+  "template": "nest-*",
+  "aliases": {
+    "my-alias": {
+      "filter": {
+        "term": {
+          "name": "term"
+        }
+      }
+    }
+  }
+} 

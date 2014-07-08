@@ -5,25 +5,67 @@ using Nest.Resolvers.Converters;
 
 namespace Nest
 {
-	[DescriptorFor("Count")]
-	public partial class CountDescriptor<T> : QueryPathDescriptorBase<CountDescriptor<T>, T, CountRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface ICountRequest : IQueryPath<CountRequestParameters>
+	{
+		
+		[JsonProperty("query")]
+		IQueryContainer Query { get; set; }
+	}
+	public interface ICountRequest<T> : ICountRequest
+		where T : class {}
+
+	internal static class CountPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<CountRequestParameters> pathInfo, ICountRequest request)
+		{
+			var source = request.RequestParameters.GetQueryStringValue<string>("source");
+			pathInfo.HttpMethod = !source.IsNullOrEmpty() 
+				? PathInfoHttpMethod.GET
+				: PathInfoHttpMethod.POST;
+		
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class CountRequest : QueryPathBase<CountRequestParameters>, ICountRequest
+	{
+		public IQueryContainer Query { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
+		{
+			CountPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	public partial class CountRequest<T> : QueryPathBase<CountRequestParameters, T>, ICountRequest
 		where T : class
 	{
-		[JsonProperty("query")]
-		internal IQueryContainer _Query { get; set; }
+		public IQueryContainer Query { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
+		{
+			CountPathInfo.Update(pathInfo, this);
+		}
+	}
+	
+	[DescriptorFor("Count")]
+	public partial class CountDescriptor<T> : QueryPathDescriptorBase<CountDescriptor<T>, CountRequestParameters, T>, ICountRequest
+		where T : class
+	{
+		private ICountRequest Self { get { return this; } }
+
+		IQueryContainer ICountRequest.Query { get; set; }
 
 		public CountDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
-			this._Query = querySelector(new QueryDescriptor<T>());
+			Self.Query = querySelector(new QueryDescriptor<T>());
 			return this;
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
 		{
-			var source = this.Request.RequestParameters.GetQueryStringValue<string>("source");
-			pathInfo.HttpMethod = !source.IsNullOrEmpty() 
-				? PathInfoHttpMethod.GET
-				: PathInfoHttpMethod.POST;
+			CountPathInfo.Update(pathInfo, this);
 		}
 	}
 }

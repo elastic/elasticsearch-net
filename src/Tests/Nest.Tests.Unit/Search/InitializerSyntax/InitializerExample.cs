@@ -6,7 +6,6 @@ using Elasticsearch.Net;
 using FakeItEasy;
 using Nest;
 using Nest.DSL.Descriptors;
-using Nest.DSL.Search;
 using Nest.Resolvers;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -34,8 +33,6 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 			{
 				From = 0,
 				Size = 20,
-				Index = "alternative-index",
-				Type = "alternative-type",
 				MinScore = 2.1,
 				Rescore = new Rescore
 				{
