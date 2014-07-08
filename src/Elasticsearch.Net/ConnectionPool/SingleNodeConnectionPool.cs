@@ -35,15 +35,13 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public void MarkDead(Uri uri, int? deadTimeout = null, int? maxDeadTimeout = null)
 		{
-
 		}
 
 		public void MarkAlive(Uri uri)
 		{
-			
 		}
 
-		public void UpdateNodeList(IList<Uri> newClusterState, bool fromStartupHint = false)
+		public void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null)
 		{
 		}
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Elasticsearch.Net.Connection.Configuration;
 
 namespace Elasticsearch.Net.Connection.RequestState
@@ -12,5 +13,6 @@ namespace Elasticsearch.Net.Connection.RequestState
 		bool SniffedOnConnectionFailure { get; set; }
 		int? Seed { get; set; }
 		Uri CurrentNode { get; set; }
+		List<RequestMetrics> RequestMetrics { get; set; }
 	}
 }

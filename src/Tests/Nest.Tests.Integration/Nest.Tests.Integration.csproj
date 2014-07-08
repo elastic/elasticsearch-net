@@ -110,6 +110,8 @@
     <Compile Include="DebugTests\MemoryUsageTests.cs" />
     <Compile Include="ElasticsearchConfiguration.cs" />
     <Compile Include="Core\IndexTests.cs" />
+    <Compile Include="Failover\FailoverSniffOnFaultTests.cs" />
+    <Compile Include="Failover\FailoverSniffOnStartupTests.cs" />
     <Compile Include="Failover\FailoverPingTests.cs" />
     <Compile Include="Help\AliasTests.cs" />
     <Compile Include="Index\ReindexTests.cs" />

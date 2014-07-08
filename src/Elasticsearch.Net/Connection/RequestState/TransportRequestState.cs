@@ -46,6 +46,7 @@ namespace Elasticsearch.Net.Connection.RequestState
 		public int Sniffs { get; set; }
 
 		public List<Uri> SeenNodes { get; private set; }
+		public List<RequestMetrics> RequestMetrics { get; set; }
 
 		public Uri CurrentNode
 		{
@@ -98,15 +99,14 @@ namespace Elasticsearch.Net.Connection.RequestState
 				this.SerializationTime = this._stopwatch.ElapsedMilliseconds;
 		}
 
-		private List<RequestMetrics> _requestMetrics;
 
 		public IRequestTimings InitiateRequest(RequestType requestType)
 		{
 			if (!this.ClientSettings.MetricsEnabled)
 				return NoopRequestTimings.Instance;
 
-			if (this._requestMetrics == null) this._requestMetrics = new List<RequestMetrics>();
-			return new RequestTimings(requestType, this.CurrentNode, this.Path, this._requestMetrics);
+			if (this.RequestMetrics == null) this.RequestMetrics = new List<RequestMetrics>();
+			return new RequestTimings(requestType, this.CurrentNode, this.Path, this.RequestMetrics);
 		}
 
 		public Uri CreatePathOnCurrentNode(string path = null)
@@ -134,7 +134,7 @@ namespace Elasticsearch.Net.Connection.RequestState
 					DeserializationTime = this.DeserializationTime,
 					StartedOn = this.StartedOn,
 					CompletedOn = DateTime.UtcNow,
-					Requests = this._requestMetrics
+					Requests = this.RequestMetrics
 				};
 
 			var objectNeedsResponseRef = result.Response as IResponseWithRequestInformation;
