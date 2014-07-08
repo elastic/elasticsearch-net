@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Type/Index Inference
 menusection: concepts
 menuitem: index-type-inference
 ---
@@ -40,11 +40,11 @@ As noted in the [quick start](/nest/quick-start.html) you can always pass **expl
         .Ttl("1m")
     );
 
-This will index the document using `/another-index/another-type/1-should-not-be-the-id?refresh=true&&ttl=1m` as the url. 
+This will index the document using `/another-index/another-type/1-should-not-be-the-id?refresh=true&ttl=1m` as the url. 
 
 There are a couple of places within NEST where inference comes in to play
 
-## Index name inference
+## Index Name Inference
 
 Whenever an explicit index name is not provided NEST will look to see if the type has it's own default index name on the connection settings.
 
@@ -56,12 +56,12 @@ Whenever an explicit index name is not provided NEST will look to see if the typ
      // searches in /my-type-index/mytype/_search
      client.Search<MyType>()
 
-     // searches in /my-default-index/mytype/_search
+     // searches in /my-default-index/person/_search
      client.Search<Person>()
 
 `MyType` defaults to `my-type-index` because it is explicitly configured but `Person` will default to the global fallback `my-default-index`.
 
-## Type name inference
+## Type Name Inference
 
 Whenever NEST needs a type name but is not given one explicitly it will use the given CLR type to infer it's Elasticsearch type name.
 
@@ -90,7 +90,7 @@ Prior to NEST 1.0 typenames were by default lowercased AND pluralized, if you wa
 
     settings.PluralizeTypeNames();
 
-## Property name inference
+## Property Name Inference
 In many places `NEST` allows you to pass property names and JSON paths as C# expressions i.e
 
     .Query(q=>q.Term(p=>p.Followers.First().FirstName, "martijn"))
@@ -107,7 +107,7 @@ This will leave property names untouched.
 
 Properties marked with `[ElasticAttibute(Name="")]` or `[JsonProperty(Name="")]` will pass the configured name verbatim. 
 
-## Id inference
+## Id Inference
 
 Whenever an object is passed that needs to specify an id (i.e index, bulk operations) the object is inspected to see if it has an `Id` property and if so, that value will be used.
 

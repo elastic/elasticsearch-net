@@ -1,11 +1,11 @@
 ---
 template: layout.jade
-title: Breaking changes
+title: Breaking Changes
 menusection: concepts
 menuitem: breaking-changes
 ---
 
-#Breaking changes
+#Breaking Changes
 
 ## Elasticsearch 1.0
 
@@ -13,7 +13,7 @@ Elasticsearch 1.0 comes with it's own set of breaking changes which [are all doc
 
 ## NEST 1.0
 
-### Strong named packages
+### Strong Named Packages
 
 Prior to 1.0 NEST came with a `NEST` and `NEST.Signed` nuget package. In 1.0 there is one package called `NEST` which is a signed strong named assembly. We follow the example of JSON.NET and only change our `AssemblyVersion` on major releases only update the `AssemblyFileVersion` for every release. This way you get most of the benefits of unsigned assemblies while still providing support for developers who's business guidelines mandates the usage of signed assemblies.
 
@@ -38,7 +38,7 @@ to `PutMappingDescriptor<T>`
 
 IResponse.Error.Exception no longer exists, it is inlined to IResponse.OriginalException. The Error property did not hold any information that was not available on IResponse.ConnectionStatus.
 
-### Response shortcuts
+### Response Shortcuts
 
 Prior to 1.0 some calls directly returned a bool or value instead of the full envelopped Elasticsearch response.
 
@@ -63,7 +63,7 @@ Or in a separate put mapping call:
 
     var response = this._client.Map<ElasticsearchProject>(m=>m.MapFromAttributes()......);
 
-#### Alias helpers
+#### Alias Helpers
 
 NEST 0.12.0 had some alias helpers, `SwapAlias()`, `GetIndicesPointingToAlias()` these have been removed in favor of just `Alias()` and `GetAliases()`. Especially the later could benefit from some extension methods that make the common use cases a bit easier to program with. These did not make the beta release.
 

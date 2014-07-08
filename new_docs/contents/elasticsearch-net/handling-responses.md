@@ -1,11 +1,11 @@
 ---
 template: layout.jade
-title: Handling responses
+title: Handling Responses
 menusection: 
 menuitem: esnet-handling-responses
 ---
 
-# Handling responses
+# Handling Responses
 
 Describes how to handle the the response objects from `Elasticsearch.Net`
 
@@ -34,7 +34,7 @@ A `byte[]` representation of the response from elasticsearch, only set when `Exp
 #### Response
 The deserialized `T` object representing the response.
 
-## Typed API calls
+## Typed API Calls
 
 `Elasticsearch.Net` does not provide typed objects representing the responses this is up to the developer to map. 
 
