@@ -31,8 +31,6 @@ namespace Nest.Tests.Integration.Failover
 			var rootNode = client.RootNodeInfo();
 			var metrics = rootNode.ConnectionStatus.Metrics;
 			
-			//When the connectionpool is used for the first time the sniff call should already
-			//know only 9200 is on and live, no need to ping
 			metrics.Requests.Count.Should().Be(5);
 			metrics.Requests[0].Node.Port.Should().Be(9202);
 			metrics.Requests[0].RequestType.Should().Be(RequestType.Ping);
