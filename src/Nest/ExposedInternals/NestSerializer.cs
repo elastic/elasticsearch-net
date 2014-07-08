@@ -146,8 +146,8 @@ namespace Nest
 
 		public string SerializeBulkDescriptor(IBulkRequest bulkRequest)
 		{
-			bulkRequest.ThrowIfNull("bulkDescriptor");
-			bulkRequest.Operations.ThrowIfEmpty("Bulk descriptor does not define any operations");
+			bulkRequest.ThrowIfNull("bulkRequest");
+			bulkRequest.Operations.ThrowIfEmpty("Bulk request does not define any operations");
 			var sb = new StringBuilder();
 			var inferrer = new ElasticInferrer(this._settings);
 
@@ -155,13 +155,12 @@ namespace Nest
 			{
 				var command = operation.Operation;
 				var index = operation.Index
-							?? inferrer.IndexName(operation.Index)
+							?? inferrer.IndexName(bulkRequest.Index)
 							?? inferrer.IndexName(operation.ClrType);
 				var typeName = operation.Type
-							   ?? inferrer.TypeName(operation.Type)
+							   ?? inferrer.TypeName(bulkRequest.Type)
 							   ?? inferrer.TypeName(operation.ClrType);
 			
-
 				var id = operation.GetIdForOperation(inferrer);
 				operation.Index = index;
 				operation.Type = typeName;
