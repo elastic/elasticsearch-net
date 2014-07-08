@@ -348,7 +348,7 @@ namespace Elasticsearch.Net.Connection
 
 
 		/* ASYNC		*** ********************************************/
-		
+
 		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
 		{
 			using (var requestState = new TransportRequestState<T>(this.Settings, requestParameters, method, path))
@@ -528,8 +528,12 @@ namespace Elasticsearch.Net.Connection
 				streamResponse.Response.CopyTo(ms);
 				ms.Position = 0;
 				streamResponse.ResponseRaw = this.Settings.KeepRawResponse ? ms.ToArray() : null;
-				var e = this.Serializer.Deserialize<OneToOneServerException>(ms);
-				error = ElasticsearchServerError.Create(e);
+				try
+				{
+					var e = this.Serializer.Deserialize<OneToOneServerException>(ms);
+					error = ElasticsearchServerError.Create(e);
+				}
+				finally {}
 				ms.Position = 0;
 				streamResponse.Response = ms;
 			}
@@ -720,8 +724,8 @@ namespace Elasticsearch.Net.Connection
 
 		private void SetErrorDiagnosticsAndPatchSuccess<T>(
 			ITransportRequestState requestState,
-			ElasticsearchServerError error, 
-			ElasticsearchResponse<T> typedResponse, 
+			ElasticsearchServerError error,
+			ElasticsearchResponse<T> typedResponse,
 			IElasticsearchResponse streamResponse)
 		{
 			if (error != null)
