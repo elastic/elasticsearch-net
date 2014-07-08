@@ -1,13 +1,35 @@
 ﻿using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IGetSnapshotRequest : IRepositorySnapshotPath<GetSnapshotRequestParameters> { }
+
+	internal static class GetSnapshotPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<GetSnapshotRequestParameters> pathInfo, IGetSnapshotRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+		}
+	}
+	
+	public partial class GetSnapshotRequest : RepositorySnapshotPathBase<GetSnapshotRequestParameters>, IGetSnapshotRequest
+	{
+		public GetSnapshotRequest(string repository, string snapshot) : base(repository, snapshot) { }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetSnapshotRequestParameters> pathInfo)
+		{
+			GetSnapshotPathInfo.Update(pathInfo, this);
+		}
+	}
+
 	[DescriptorFor("SnapshotGet")]
-	public partial class GetSnapshotDescriptor : RepositorySnapshotPathDescriptor<GetSnapshotDescriptor, GetSnapshotRequestParameters>
+	public partial class GetSnapshotDescriptor : RepositorySnapshotPathDescriptor<GetSnapshotDescriptor, GetSnapshotRequestParameters>, IGetSnapshotRequest
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetSnapshotRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+			GetSnapshotPathInfo.Update(pathInfo, this);
 		}
 
 	}

@@ -4,31 +4,65 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class BulkDeleteDescriptor<T> : BaseBulkOperation
-		 where T : class
+	public interface IBulkDeleteOperation<T> : IBulkOperation
+		where T : class
 	{
+		T Document { get; set; }
+	}
 
-		internal override Type _ClrType { get { return typeof(T); } }
-		internal override string _Operation { get { return "delete"; } }
-		internal override object _Object { get; set; }
-
-
-		internal override string GetIdForObject(ElasticInferrer inferrer)
+	public class BulkDeleteOperation<T> : BulkOperationBase, IBulkDeleteOperation<T>
+		where T : class
+	{
+		public BulkDeleteOperation(T document)
 		{
-			if (!this._Id.IsNullOrEmpty())
-				return this._Id;
+			this.Document = document;
+		} 
+		
+		public BulkDeleteOperation(string id) { this.Id = id; }
+		public BulkDeleteOperation(double id) { this.Id = id.ToString(CultureInfo.InvariantCulture); }
 
-			return inferrer.Id((T)_Object);
+		public override string Operation { get { return "delete"; } }
 
+		public override Type ClrType { get { return typeof(T); } } 
+		
+		public override object GetBody()
+		{
+			return null;
 		}
 
-		/// <summary>
+		public override string GetIdForOperation(ElasticInferrer inferrer)
+		{
+			return this.Id ?? inferrer.Id(this.Document);
+		}
+
+		public T Document { get; set; }
+	}
+	public class BulkDeleteDescriptor<T> : BulkOperationDescriptorBase, IBulkDeleteOperation<T>
+		where T : class
+	{
+		private IBulkDeleteOperation<T> Self { get { return this; } } 
+
+		protected override string _Operation { get { return "delete"; } }
+		protected override Type _ClrType { get { return typeof(T); } }
+		
+		T IBulkDeleteOperation<T>.Document { get; set; }
+
+		protected override object _GetBody()
+		{
+			return null;
+		}
+		
+		protected override string GetIdForOperation(ElasticInferrer inferrer)
+		{
+			return Self.Id ?? inferrer.Id(Self.Document);
+		}
+
 		/// Manually set the index, default to the default index or the fixed index set on the bulk operation
 		/// </summary>
 		public BulkDeleteDescriptor<T> Index(string index)
 		{
 			index.ThrowIfNullOrEmpty("indices");
-			this._Index = index;
+			Self.Index = index;
 			return this;
 		}
 		/// <summary>
@@ -38,7 +72,7 @@ namespace Nest
 		public BulkDeleteDescriptor<T> Type(string type)
 		{
 			type.ThrowIfNullOrEmpty("type");
-			this._Type = type;
+			Self.Type = type;
 			return this;
 		}
 
@@ -48,7 +82,7 @@ namespace Nest
 		public BulkDeleteDescriptor<T> Type(Type type)
 		{
 			type.ThrowIfNull("type");
-			this._Type = type;
+			Self.Type = type;
 			return this;
 		}
 
@@ -65,60 +99,55 @@ namespace Nest
 		/// </summary>
 		public BulkDeleteDescriptor<T> Id(string id)
 		{
-			this._Id = id;
+			Self.Id = id;
 			return this;
 		}
 
 		/// <summary>
 		/// The object to infer the id off, (if id is not passed using Id())
 		/// </summary>
-		public BulkDeleteDescriptor<T> Object(T @object)
+		public BulkDeleteDescriptor<T> Document(T @object)
 		{
-			this._Object = @object;
+			Self.Document = @object;
 			return this;
 		}
 
 
 		public BulkDeleteDescriptor<T> Version(string version)
 		{
-			this._Version = version; 
-			return this;
-		}
-
-		public BulkDeleteDescriptor<T> VersionType(string versionType)
-		{
-			this._VersionType = versionType;
+			Self.Version = version; 
 			return this;
 		}
 
 		public BulkDeleteDescriptor<T> VersionType(VersionType versionType)
 		{
-			this._VersionType = versionType.GetStringValue();
+			Self.VersionType = versionType;
 			return this;
 		}
 
 		public BulkDeleteDescriptor<T> Routing(string routing)
 		{
-			this._Routing = routing; 
+			Self.Routing = routing; 
 			return this;
 		}
 
 		public BulkDeleteDescriptor<T> Parent(string parent)
 		{
-			this._Parent = parent; 
+			Self.Parent = parent; 
 			return this;
 		}
 
 		public BulkDeleteDescriptor<T> Timestamp(long timestamp)
 		{
-			this._Timestamp = timestamp; 
+			Self.Timestamp = timestamp; 
 			return this;
 		}
 
 		public BulkDeleteDescriptor<T> Ttl(string ttl)
 		{
-			this._Ttl = ttl; 
+			Self.Ttl = ttl; 
 			return this;
 		}
+
 	}
 }

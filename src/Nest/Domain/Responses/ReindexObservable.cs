@@ -89,7 +89,7 @@ namespace Nest
 			foreach (var d in searchResult.Hits)
 			{
 				IHit<T> d1 = d;
-				bb.Index<T>(bi => bi.Object(d1.Source).Type(d1.Type).Index(toIndex).Id(d.Id));
+				bb.Index<T>(bi => bi.Document(d1.Source).Type(d1.Type).Index(toIndex).Id(d.Id));
 			}
 
 			var indexResult = this.CurrentClient.Bulk(b=>bb);

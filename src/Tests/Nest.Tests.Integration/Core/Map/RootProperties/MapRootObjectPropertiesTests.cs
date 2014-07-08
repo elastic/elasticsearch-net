@@ -39,7 +39,7 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 				.Dynamic(DynamicMappingOption.Allow)
 			);
 			this.DefaultResponseAssertations(result);
-			var getResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_allow"));
+			var getResult = this._client.GetMapping<ElasticsearchProject>(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_allow"));
 			Assert.AreEqual(getResult.Mapping.Dynamic, DynamicMappingOption.Allow);
 
 			result = this._client.Map<ElasticsearchProject>(m => m
@@ -48,7 +48,7 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 				.Dynamic(true)
 			);
 			this.DefaultResponseAssertations(result);
-			getResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_allow"));
+			getResult = this._client.GetMapping<ElasticsearchProject>(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_allow"));
 			Assert.AreEqual(getResult.Mapping.Dynamic, DynamicMappingOption.Allow);
 
 		}
@@ -62,7 +62,7 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 				.Dynamic(DynamicMappingOption.Ignore)
 			);
 			this.DefaultResponseAssertations(result);
-			var getResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_ignore"));
+			var getResult = this._client.GetMapping<ElasticsearchProject>(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_ignore"));
 			Assert.AreEqual(getResult.Mapping.Dynamic, DynamicMappingOption.Ignore);
 
 			result = this._client.Map<ElasticsearchProject>(m => m
@@ -71,7 +71,7 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 				.Dynamic(false)
 			);
 			this.DefaultResponseAssertations(result);
-			getResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_ignore2"));
+			getResult = this._client.GetMapping<ElasticsearchProject>(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_ignore2"));
 			Assert.AreEqual(getResult.Mapping.Dynamic, DynamicMappingOption.Ignore);
 
 		}
@@ -84,7 +84,7 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 				.Dynamic(DynamicMappingOption.Strict)
 			);
 			this.DefaultResponseAssertations(result);
-			var getResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_strict"));
+			var getResult = this._client.GetMapping<ElasticsearchProject>(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_strict"));
 			Assert.AreEqual(getResult.Mapping.Dynamic, DynamicMappingOption.Strict);
 
 		}

@@ -1,4 +1,6 @@
-﻿using Elasticsearch.Net.Connection;
+﻿using Elasticsearch.Net;
+using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Exceptions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 using FluentAssertions;

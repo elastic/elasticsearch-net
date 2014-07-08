@@ -12,7 +12,7 @@ namespace CodeGeneration.LowLevelClient.Overrides.Allow404
 		public static IEnumerable<string> Endpoints = new List<string>
 		{
 			"DocumentExists",
-			"Delete",
+			//"Delete",
 			"IndexExists",
 			"Exists"
 		};

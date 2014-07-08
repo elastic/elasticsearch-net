@@ -9,16 +9,13 @@ namespace Nest
 	{
 		public TemplateMapping()
 		{
-			this.Mappings = new Dictionary<string, RootObjectMapping>();
-			this.Warmers = new Dictionary<string, WarmerMapping>();
-			this.Settings = new FluentDictionary<string, object>();
 		}
 
 		[JsonProperty("template")]
 		public string Template { get; set; }
 
 		[JsonProperty("order")]
-		public int Order { get; set; }
+		public int? Order { get; set; }
 
 		[JsonProperty("settings")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
@@ -34,6 +31,6 @@ namespace Nest
 		
 		[JsonProperty("aliases")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		public Dictionary<string, CreateAliasDescriptor> Aliases { get; set; }
+		public Dictionary<string, ICreateAliasOperation> Aliases { get; set; }
 	}
 }

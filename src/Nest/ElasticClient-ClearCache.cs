@@ -17,6 +17,15 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
+		public IShardsOperationResponse ClearCache(IClearCacheRequest clearCacheRequest)
+		{
+			return this.Dispatch<IClearCacheRequest, ClearCacheRequestParameters, ShardsOperationResponse>(
+				clearCacheRequest,
+				(p, d) => this.RawDispatch.IndicesClearCacheDispatch<ShardsOperationResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
 		public Task<IShardsOperationResponse> ClearCacheAsync(Func<ClearCacheDescriptor, ClearCacheDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
@@ -25,5 +34,15 @@ namespace Nest
 				(p, d) => this.RawDispatch.IndicesClearCacheDispatchAsync<ShardsOperationResponse>(p)
 			);
 		}
+
+		/// <inheritdoc />
+		public Task<IShardsOperationResponse> ClearCacheAsync(IClearCacheRequest clearCacheRequest)
+		{
+			return this.DispatchAsync<IClearCacheRequest, ClearCacheRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
+				clearCacheRequest,
+				(p, d) => this.RawDispatch.IndicesClearCacheDispatchAsync<ShardsOperationResponse>(p)
+			);
+		}
+
 	}
 }

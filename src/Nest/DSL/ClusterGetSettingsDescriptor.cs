@@ -19,12 +19,8 @@ namespace Nest
 
 	}
 	
-	public class ClusterGetSettingsRequest : BaseRequest<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
+	public partial class ClusterGetSettingsRequest : BaseRequest<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
 	{
-		public IDictionary<string, object> Persistent { get; set; }
-
-		public IDictionary<string, object> Transient { get; set; }
-		
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterGetSettingsRequestParameters> pathInfo)
 		{
 			ClusterGetSettingsPathInfo.Update(pathInfo, this);

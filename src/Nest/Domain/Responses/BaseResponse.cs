@@ -1,5 +1,6 @@
 ﻿using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Exceptions;
 
 namespace Nest
 {

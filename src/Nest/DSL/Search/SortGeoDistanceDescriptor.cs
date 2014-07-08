@@ -6,7 +6,7 @@ using System.Globalization;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 
-namespace Nest.DSL.Descriptors
+namespace Nest
 {
 	[JsonConverter(typeof(CustomJsonConverter))]
 	public interface IGeoDistanceSort : ISort, ICustomJson

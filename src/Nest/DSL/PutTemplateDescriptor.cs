@@ -1,20 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesPutTemplate")]
-	public partial class PutTemplateDescriptor : NamePathDescriptor<PutTemplateDescriptor, PutTemplateRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IPutTemplateRequest : INamePath<PutTemplateRequestParameters>
 	{
+		TemplateMapping TemplateMapping { get; set; }
+	}
+
+	internal static class PutTemplatePathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo, IPutTemplateRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
+		}
+	}
+	
+	public partial class PutTemplateRequest : NamePathBase<PutTemplateRequestParameters>, IPutTemplateRequest
+	{
+		public PutTemplateRequest(string name) : base(name)
+		{
+		}
+
+		public TemplateMapping TemplateMapping { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo)
+		{
+			PutTemplatePathInfo.Update(pathInfo, this);
+		}
+
+	}
+
+	[DescriptorFor("IndicesPutTemplate")]
+	public partial class PutTemplateDescriptor : NamePathDescriptor<PutTemplateDescriptor, PutTemplateRequestParameters>, IPutTemplateRequest
+	{
+		private IPutTemplateRequest Self { get { return this; } }
+
 		private readonly IConnectionSettingsValues _connectionSettings;
 
-		internal TemplateMapping _TemplateMapping { get; set; }
+		TemplateMapping IPutTemplateRequest.TemplateMapping { get; set; }
 
 		public PutTemplateDescriptor(IConnectionSettingsValues connectionSettings)
 		{
 			_connectionSettings = connectionSettings;
-			this._TemplateMapping = new TemplateMapping();
+			Self.TemplateMapping = new TemplateMapping();
+			Self.TemplateMapping.Mappings = new Dictionary<string, RootObjectMapping>();
+			Self.TemplateMapping.Warmers = new Dictionary<string, WarmerMapping>();
+			Self.TemplateMapping.Settings = new FluentDictionary<string, object>();
 		}
 
 
@@ -23,27 +58,27 @@ namespace Nest
 		/// </summary>
 		public PutTemplateDescriptor InitializeUsing(TemplateMapping templateMapping)
 		{
-			this._TemplateMapping = templateMapping;
+			Self.TemplateMapping = templateMapping;
 			return this;
 		}
 
 		public PutTemplateDescriptor Order(int order)
 		{
-			this._TemplateMapping.Order = order;
+			Self.TemplateMapping.Order = order;
 			return this;
 		}
 
 		public PutTemplateDescriptor Template(string template)
 		{
 			template.ThrowIfNull("name");
-			this._TemplateMapping.Template = template;
+			Self.TemplateMapping.Template = template;
 			return this;
 		}
 
 		public PutTemplateDescriptor Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> settingsSelector)
 		{
 			settingsSelector.ThrowIfNull("settingsDescriptor");
-			this._TemplateMapping.Settings = settingsSelector(this._TemplateMapping.Settings ?? new FluentDictionary<string, object>());
+			Self.TemplateMapping.Settings = settingsSelector(Self.TemplateMapping.Settings ?? new FluentDictionary<string, object>());
 			return this;
 		}
 
@@ -55,10 +90,11 @@ namespace Nest
 			putMappingDescriptor.ThrowIfNull("rootObjectMappingDescriptor");
 
 			var inferrer = new ElasticInferrer(this._connectionSettings);
-			var typeName = inferrer.TypeName(putMappingDescriptor._Type ?? typeof(T));
+			IPutMappingRequest request = putMappingDescriptor;
+			var typeName = inferrer.TypeName(request.Type ?? typeof(T));
 			if (typeName == null)
 				return this;
-			this._TemplateMapping.Mappings[typeName] = putMappingDescriptor._Mapping;
+			Self.TemplateMapping.Mappings[typeName] = request.Mapping;
 			return this;
 		}
 
@@ -77,7 +113,7 @@ namespace Nest
 				Source = warmerDescriptor._SearchDescriptor
 			};
 
-			this._TemplateMapping.Warmers[warmerDescriptor._WarmerName] = warmer;
+			Self.TemplateMapping.Warmers[warmerDescriptor._WarmerName] = warmer;
 			return this;
 
 		}
@@ -87,18 +123,17 @@ namespace Nest
 			aliasName.ThrowIfNull("aliasName");
 			addAliasDescriptor = addAliasDescriptor ?? (a=>a);
 			var alias = addAliasDescriptor(new CreateAliasDescriptor());
-			if (this._TemplateMapping.Aliases == null)
-				this._TemplateMapping.Aliases = new Dictionary<string, CreateAliasDescriptor>();
+			if (Self.TemplateMapping.Aliases == null)
+				Self.TemplateMapping.Aliases = new Dictionary<string, ICreateAliasOperation>();
 
-			this._TemplateMapping.Aliases[aliasName] = alias;
+			Self.TemplateMapping.Aliases[aliasName] = alias;
 			return this;
 
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
-			pathInfo.Name = this._Name;
+			PutTemplatePathInfo.Update(pathInfo, this);
 		}
 
 	}

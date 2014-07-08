@@ -16,9 +16,12 @@ namespace CodeGeneration.LowLevelClient
 			ApiGenerator.GenerateClientInterface(spec);
 
 			ApiGenerator.GenerateRequestParameters(spec);
+			
 			ApiGenerator.GenerateRequestParametersExtensions(spec);
 			
 			ApiGenerator.GenerateDescriptors(spec);
+			
+			ApiGenerator.GenerateRequests(spec);
 
 			ApiGenerator.GenerateEnums(spec);
 

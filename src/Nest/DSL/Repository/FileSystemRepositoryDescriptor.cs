@@ -2,14 +2,22 @@
 
 namespace Nest
 {
+	public class FileSystemRepository : IRepository
+	{
+		string IRepository.Type { get { return "fs"; } }
+		public IDictionary<string, object> Settings { get; set; }
+	}
+
 	public class FileSystemRepositoryDescriptor : IRepository
 	{
-		public string Type { get { return "fs"; } }
-		public IDictionary<string, object> Settings { get; private set; }
+		string IRepository.Type { get { return "fs"; } }
+		IDictionary<string, object> IRepository.Settings { get; set; }
+
+		private IRepository Self { get { return this; } }
 
 		public FileSystemRepositoryDescriptor()
 		{
-			this.Settings = new Dictionary<string, object>();
+			Self.Settings = new Dictionary<string, object>();
 		}
 		/// <summary>
 		/// Location of the snapshots. Mandatory.
@@ -17,7 +25,7 @@ namespace Nest
 		/// <param name="location"></param>
 		public FileSystemRepositoryDescriptor Location(string location)
 		{
-			this.Settings["location"] = location;
+			Self.Settings["location"] = location;
 			return this;
 		}
 		/// <summary>
@@ -26,7 +34,7 @@ namespace Nest
 		/// <param name="compress"></param>
 		public FileSystemRepositoryDescriptor Compress(bool compress = true)
 		{
-			this.Settings["compress"] = compress;
+			Self.Settings["compress"] = compress;
 			return this;
 		}
 		/// <summary>
@@ -35,7 +43,7 @@ namespace Nest
 		/// <param name="concurrentStreams"></param>
 		public FileSystemRepositoryDescriptor ConcurrentStreams(int concurrentStreams)
 		{
-			this.Settings["concurrent_streams"] = concurrentStreams;
+			Self.Settings["concurrent_streams"] = concurrentStreams;
 			return this;
 		}
 		/// <summary>
@@ -46,7 +54,7 @@ namespace Nest
 		/// <param name="chunkSize"></param>
 		public FileSystemRepositoryDescriptor ChunkSize(string chunkSize)
 		{
-			this.Settings["chunk_size"] = chunkSize;
+			Self.Settings["chunk_size"] = chunkSize;
 			return this;
 		}
 		/// <summary>
@@ -55,7 +63,7 @@ namespace Nest
 		/// <param name="maximumBytesPerSecond"></param>
 		public FileSystemRepositoryDescriptor RestoreBytesPerSecondMaximum(string maximumBytesPerSecond)
 		{
-			this.Settings["max_restore_bytes_per_sec"] = maximumBytesPerSecond;
+			Self.Settings["max_restore_bytes_per_sec"] = maximumBytesPerSecond;
 			return this;
 		}
 		/// <summary>
@@ -64,7 +72,7 @@ namespace Nest
 		/// <param name="maximumBytesPerSecond"></param>
 		public FileSystemRepositoryDescriptor SnapshortBytesPerSecondMaximum(string maximumBytesPerSecond)
 		{
-			this.Settings["max_snapshot_bytes_per_sec"] = maximumBytesPerSecond;
+			Self.Settings["max_snapshot_bytes_per_sec"] = maximumBytesPerSecond;
 			return this;
 		}
 

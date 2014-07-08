@@ -1,0 +1,23 @@
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "name": {
+              "value": "value"
+            }
+          }
+        },
+        {
+          "prefix": {
+            "prefix_field": {
+              "value": "prefi",
+              "rewrite": "constant_score_boolean"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

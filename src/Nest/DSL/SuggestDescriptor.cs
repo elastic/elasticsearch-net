@@ -1,21 +1,95 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
+using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 
 namespace Nest
 {
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(CustomJsonConverter))]
+	public interface ISuggestRequest : IIndicesOptionalExplicitAllPath<SuggestRequestParameters>, ICustomJson
+	{
+		string GlobalText { get; set; }
+		IDictionary<string, ISuggester> Suggest { get; set; }
+	}
+
+	internal static class SuggestPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<SuggestRequestParameters> pathInfo, ISuggestRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+
+		public static object GetCustomJson(ISuggestRequest suggestRequest)
+		{
+			if (suggestRequest == null || (suggestRequest.GlobalText.IsNullOrEmpty() && suggestRequest.Suggest == null))
+				return null;
+
+			var dict = new Dictionary<string, object>();
+			if (!suggestRequest.GlobalText.IsNullOrEmpty())
+				dict.Add("text", suggestRequest.GlobalText);
+
+			if (suggestRequest.Suggest != null)
+			{
+				foreach (var kv in suggestRequest.Suggest)
+				{
+					var item = kv.Value;
+					var bucket = new SuggestBucket() { Text = item._Text };
+
+					var completion = item as ICompletionSuggester;
+					if (completion != null) bucket.Completion = completion;
+
+					var phrase = item as IPhraseSuggester;
+					if (phrase != null) bucket.Phrase = phrase;
+
+					var term = item as ITermSuggester;
+					if (term != null) bucket.Term = term;
+					dict.Add(kv.Key, bucket);
+				}
+			}
+			return dict;
+		}
+	}
+
+	public partial class SuggestRequest : IndicesOptionalExplicitAllPathBase<SuggestRequestParameters>, ISuggestRequest
+	{
+		public string GlobalText { get; set; }
+		public IDictionary<string, ISuggester> Suggest { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SuggestRequestParameters> pathInfo)
+		{
+			SuggestPathInfo.Update(pathInfo, this);
+		}
+
+		object ICustomJson.GetCustomJson() { return SuggestPathInfo.GetCustomJson(this); }
+
+	}
+
+
 	[DescriptorFor("Suggest")]
-	public partial class SuggestDescriptor<T> : IndicesOptionalExplicitAllPathDescriptor<SuggestDescriptor<T>, SuggestRequestParameters>
+	public partial class SuggestDescriptor<T> : IndicesOptionalExplicitAllPathDescriptor<SuggestDescriptor<T>, SuggestRequestParameters>, ISuggestRequest
 		where T : class
 	{
-		internal IDictionary<string, object> _Suggest = new Dictionary<string, object>();
+		private ISuggestRequest Self { get { return this; } }
+
+		object ICustomJson.GetCustomJson() { return SuggestPathInfo.GetCustomJson(this); }
+
+		string ISuggestRequest.GlobalText { get; set; }
+		IDictionary<string, ISuggester> ISuggestRequest.Suggest { get; set; }
+
+		public SuggestDescriptor()
+		{
+			Self.Suggest = new Dictionary<string, ISuggester>();
+		}
 
 		/// <summary>
 		/// To avoid repetition of the suggest text, it is possible to define a global text.
 		/// </summary>
 		public SuggestDescriptor<T> GlobalText(string globalSuggestText)
 		{
-			this._Suggest.Add("text", globalSuggestText);
+			Self.GlobalText = globalSuggestText;
 			return this;
 		}
 
@@ -29,9 +103,7 @@ namespace Nest
 			suggest.ThrowIfNull("suggest");
 			var desc = new TermSuggestDescriptor<T>();
 			var item = suggest(desc);
-			ITermSuggester i = item;
-			var bucket = new SuggestBucket { Text = i._Text, Term = item };
-			this._Suggest.Add(name, bucket);
+			Self.Suggest.Add(name, item);
 			return this;
 		}
 
@@ -43,14 +115,10 @@ namespace Nest
 		{
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
-			if (this._Suggest == null)
-				this._Suggest = new Dictionary<string, object>();
 
 			var desc = new PhraseSuggestDescriptor<T>();
 			var item = suggest(desc);
-			IPhraseSuggester i = item;
-			var bucket = new SuggestBucket { Text = i._Text, Phrase = item };
-			this._Suggest.Add(name, bucket);
+			Self.Suggest.Add(name, item);
 			return this;
 		}
 
@@ -62,20 +130,17 @@ namespace Nest
 		{
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
-			if (this._Suggest == null)
-				this._Suggest = new Dictionary<string, object>();
 
 			var desc = new CompletionSuggestDescriptor<T>();
 			var item = suggest(desc);
-			ICompletionSuggester i = item;
-			var bucket = new SuggestBucket { Text = i._Text, Completion = item };
-			this._Suggest.Add(name, bucket);
+			Self.Suggest.Add(name, item);
 			return this;
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SuggestRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			SuggestPathInfo.Update(pathInfo, this);
 		}
+
 	}
 }

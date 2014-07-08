@@ -1,4 +1,5 @@
 ﻿using System;
+using Nest;
 
 namespace Nest
 {

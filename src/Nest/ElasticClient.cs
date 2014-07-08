@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Connection.Configuration;
 
 namespace Nest
 {
@@ -38,13 +39,11 @@ namespace Nest
 			this.Connection = connection ?? new HttpConnection(this._connectionSettings);
 
 			this.Serializer = serializer ?? new NestSerializer(this._connectionSettings);
-			var stringifier = new NestStringifier(this._connectionSettings);
 			this.Raw = new ElasticsearchClient(
 				this._connectionSettings, 
 				this.Connection, 
 				null, //default transport
-				this.Serializer, 
-				stringifier
+				this.Serializer
 			);
 			this.RawDispatch = new RawDispatch(this.Raw);
 			this.Infer = new ElasticInferrer(this._connectionSettings);
@@ -86,7 +85,7 @@ namespace Nest
 			where D : IRequest<Q>
 			where R : BaseResponse
 		{
-			var config = descriptor.RequestConfiguration as IRequestConfiguration;
+			var config = descriptor.RequestConfiguration;
 			var statusCodeAllowed = config != null && config.AllowedStatusCodes.HasAny(i => i == c.HttpStatusCode);
 			
 			if (c.Success || statusCodeAllowed)

@@ -3,14 +3,46 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 
 namespace Nest
 {
-	
-	public partial class BulkDescriptor : FixedIndexTypePathDescriptor<BulkDescriptor, BulkRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IBulkRequest : IFixedIndexTypePath<BulkRequestParameters>
 	{
-		internal IList<BaseBulkOperation> _Operations = new SynchronizedCollection<BaseBulkOperation>();
+		[JsonIgnore]
+		IList<IBulkOperation> Operations { get; set;}
+	}
+
+	internal static class BulkPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<BulkRequestParameters> pathInfo, IBulkRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class BulkRequest : FixedIndexTypePathBase<BulkRequestParameters>, IBulkRequest
+	{
+		public IList<IBulkOperation> Operations { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<BulkRequestParameters> pathInfo)
+		{
+			BulkPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	public partial class BulkDescriptor : FixedIndexTypePathDescriptor<BulkDescriptor, BulkRequestParameters>, IBulkRequest
+	{
+		private IBulkRequest Self { get { return this; } }
+
+		IList<IBulkOperation> IBulkRequest.Operations { get; set; }
+
+		public BulkDescriptor()
+		{
+			Self.Operations = new SynchronizedCollection<IBulkOperation>();
+		}
 
 		public BulkDescriptor Create<T>(Func<BulkCreateDescriptor<T>, BulkCreateDescriptor<T>> bulkCreateSelector) where T : class
 		{
@@ -18,7 +50,7 @@ namespace Nest
 			var descriptor = bulkCreateSelector(new BulkCreateDescriptor<T>());
 			if (descriptor == null)
 				return this;
-			this._Operations.Add(descriptor);
+			Self.Operations.Add(descriptor);
 			return this;
 		}
 		
@@ -30,8 +62,8 @@ namespace Nest
 		public BulkDescriptor CreateMany<T>(IEnumerable<T> @objects, Func<BulkCreateDescriptor<T>, T, BulkCreateDescriptor<T>> bulkCreateSelector = null) where T : class
 		{
 			bulkCreateSelector = bulkCreateSelector ?? ((d, o) => d);
-			foreach (var descriptor in @objects.Select(o => bulkCreateSelector(new BulkCreateDescriptor<T>().Object(o), o)))
-				this._Operations.Add(descriptor);
+			foreach (var descriptor in @objects.Select(o => bulkCreateSelector(new BulkCreateDescriptor<T>().Document(o), o)))
+				Self.Operations.Add(descriptor);
 			return this;
 		}
 
@@ -41,7 +73,7 @@ namespace Nest
 			var descriptor = bulkIndexSelector(new BulkIndexDescriptor<T>());
 			if (descriptor == null)
 				return this;
-			this._Operations.Add(descriptor);
+			Self.Operations.Add(descriptor);
 			return this;
 		}
 
@@ -53,8 +85,8 @@ namespace Nest
 		public BulkDescriptor IndexMany<T>(IEnumerable<T> @objects, Func<BulkIndexDescriptor<T>, T, BulkIndexDescriptor<T>> bulkIndexSelector = null) where T : class
 		{
 			bulkIndexSelector = bulkIndexSelector ?? ((d, o) => d);
-			foreach (var descriptor in @objects.Select(o => bulkIndexSelector(new BulkIndexDescriptor<T>().Object(o), o)))
-				this._Operations.Add(descriptor);
+			foreach (var descriptor in @objects.Select(o => bulkIndexSelector(new BulkIndexDescriptor<T>().Document(o), o)))
+				Self.Operations.Add(descriptor);
 			return this;
 		}
 
@@ -64,7 +96,7 @@ namespace Nest
 			var descriptor = bulkDeleteSelector(new BulkDeleteDescriptor<T>());
 			if (descriptor == null)
 				return this;
-			this._Operations.Add(descriptor);
+			Self.Operations.Add(descriptor);
 			return this;
 		}
 		
@@ -76,8 +108,8 @@ namespace Nest
 		public BulkDescriptor DeleteMany<T>(IEnumerable<T> @objects, Func<BulkDeleteDescriptor<T>, T, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class
 		{
 			bulkDeleteSelector = bulkDeleteSelector ?? ((d, o)=>d);
-			foreach (var descriptor in @objects.Select(o => bulkDeleteSelector(new BulkDeleteDescriptor<T>().Object(o), o)))
-				this._Operations.Add(descriptor);
+			foreach (var descriptor in @objects.Select(o => bulkDeleteSelector(new BulkDeleteDescriptor<T>().Document(o), o)))
+				Self.Operations.Add(descriptor);
 			return this;
 		}
 		
@@ -90,7 +122,7 @@ namespace Nest
 		{
 			bulkDeleteSelector = bulkDeleteSelector ?? ((d, s)=> d);
 			foreach (var descriptor in ids.Select(o => bulkDeleteSelector(new BulkDeleteDescriptor<T>().Id(o), o)))
-				this._Operations.Add(descriptor);
+				Self.Operations.Add(descriptor);
 			return this;
 		}
 		
@@ -116,13 +148,13 @@ namespace Nest
 			var descriptor = bulkUpdateSelector(new BulkUpdateDescriptor<T, K>());
 			if (descriptor == null)
 				return this;
-			this._Operations.Add(descriptor);
+			Self.Operations.Add(descriptor);
 			return this;
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<BulkRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			BulkPathInfo.Update(pathInfo, this);
 		}
 	}
 }

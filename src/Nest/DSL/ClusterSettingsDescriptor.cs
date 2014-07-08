@@ -25,7 +25,7 @@ namespace Nest
 
 	}
 	
-	public class ClusterSettingsRequest : BaseRequest<ClusterSettingsRequestParameters>, IClusterSettingsRequest
+	public partial class ClusterSettingsRequest : BaseRequest<ClusterSettingsRequestParameters>, IClusterSettingsRequest
 	{
 		public IDictionary<string, object> Persistent { get; set; }
 

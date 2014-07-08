@@ -5,297 +5,518 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+    public interface IUpdateSettingsRequest : IIndexOptionalPath<UpdateSettingsRequestParameters>
+    {
+		[JsonProperty("index.number_of_replicas")]
+		int? NumberOfReplicas { get; set; }
+
+		[JsonProperty("index.auto_expand_replicas")]
+		object AutoExpandReplicas { get; set; }
+
+		[JsonProperty("index.blocks.read_only")]
+		bool? BlocksReadOnly { get; set; }
+
+		[JsonProperty("index.blocks.read")]
+		bool? BlocksRead { get; set; }
+
+		[JsonProperty("index.blocks.write")]
+		bool? BlocksWrite { get; set; }
+
+		[JsonProperty("index.blocks.metadata")]
+		bool? BlocksMetadata { get; set; }
+
+		[JsonProperty("index.refresh_interval")]
+		string RefreshInterval { get; set; }
+
+		[JsonProperty("index.index_concurrency")]
+		int? IndexConcurrency { get; set; }
+
+		[JsonProperty("index.codec")]
+		string Codec { get; set; }
+
+		[JsonProperty("index.codec.bloom.load")]
+		bool? CodecBloomLoad { get; set; }
+
+		[JsonProperty("index.fail_on_merge_failure")]
+		bool? FailOnMergeFailure { get; set; }
+
+		[JsonProperty("index.translog.flush_threshold_ops")]
+		string TranslogFlushTreshHoldOps { get; set; }
+
+		[JsonProperty("index.translog.flush_threshold_size")]
+		string TranslogFlushThresholdSize { get; set; }
+
+		[JsonProperty("index.translog.flush_threshold_period")]
+		string TranslogFlushThresholdPeriod { get; set; }
+
+		[JsonProperty("index.translog.disable_flush")]
+		bool? TranslogDisableFlush { get; set; }
+
+		[JsonProperty("index.cache.filter.max_size")]
+		string CacheFilterMaxSize { get; set; }
+
+		[JsonProperty("index.cache.filter.expire")]
+		string CacheFilterExpire { get; set; }
+
+		[JsonProperty("index.gateway.snapshot_interval")]
+		string GatewaySnapshotInterval { get; set; }
+
+		[JsonProperty("index.routing.allocation.include")]
+		IDictionary<string, object> RoutingAllocationInclude { get; set; }
+
+		[JsonProperty("index.routing.allocation.exclude")]
+		IDictionary<string, object> RoutingAllocationExclude { get; set; }
+
+		[JsonProperty("index.routing.allocation.require")]
+		IDictionary<string, object> RoutingAllocationRequire { get; set; }
+
+		[JsonProperty("index.routing.allocation.enable")]
+		RoutingAllocationEnableOption? RoutingAllocationEnable { get; set; }
+
+		[JsonProperty("index.routing.allocation.disable_allocation")]
+		bool? RoutingAllocationDisableAllication { get; set; }
+
+		[JsonProperty("index.routing.allocation.disable_new_allocation")]
+		bool? RoutingAllocationDisableNewAllocation { get; set; }
+
+		[JsonProperty("index.routing.allocation.disable_replica_allocation")]
+		bool? RoutingAllocationDisableReplicaAllocation { get; set; }
+
+		[JsonProperty("index.routing.allocation.total_shards_per_node")]
+		int? RoutingAllocationTotalShardsPerNode { get; set; }
+
+		[JsonProperty("index.recovery.initial_shards")]
+		string RecoveryInitialShards { get; set; }
+
+		[JsonProperty("index.gc_deletes")]
+		bool? GcDeletes { get; set; }
+		
+		[JsonProperty("index.ttl.disable_purge")]
+		bool? TtlDisablePurge { get; set; }
+		
+		[JsonProperty("index.translog.fs.type")]
+		string TranslogFsType { get; set; }
+
+		[JsonProperty("index.compound_format")]
+		bool? CompoundFormat { get; set; }
+
+		[JsonProperty("index.compound_on_flush")]
+		bool? CompoundOnFlush { get; set; }
+
+		[JsonProperty("index.warmer.enabled")]
+		bool? WarmersEnabled { get; set; }
+
+		[JsonProperty("analysis")]
+		AnalysisSettings Analysis { get; set; }
+    }
+
+    internal static class UpdateSettingsPathInfo
+    {
+        public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
+        {
+            pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
+        }
+    }
+
+    public partial class UpdateSettingsRequest : IndexOptionalPathBase<UpdateSettingsRequestParameters>, IUpdateSettingsRequest
+    {
+        public int? NumberOfReplicas { get; set; }
+
+        public object AutoExpandReplicas { get; set; }
+
+        public bool? BlocksReadOnly { get; set; }
+
+        public bool? BlocksRead { get; set; }
+
+        public bool? BlocksWrite { get; set; }
+
+        public bool? BlocksMetadata { get; set; }
+
+        public string RefreshInterval { get; set; }
+
+        public int? IndexConcurrency { get; set; }
+
+        public string Codec { get; set; }
+
+        public bool? CodecBloomLoad { get; set; }
+
+        public bool? FailOnMergeFailure { get; set; }
+
+        public string TranslogFlushTreshHoldOps { get; set; }
+
+        public string TranslogFlushThresholdSize { get; set; }
+
+        public string TranslogFlushThresholdPeriod { get; set; }
+
+        public bool? TranslogDisableFlush { get; set; }
+
+        public string CacheFilterMaxSize { get; set; }
+
+        public string CacheFilterExpire { get; set; }
+
+        public string GatewaySnapshotInterval { get; set; }
+
+        public IDictionary<string, object> RoutingAllocationInclude { get; set; }
+
+        public IDictionary<string, object> RoutingAllocationExclude { get; set; }
+
+        public IDictionary<string, object> RoutingAllocationRequire { get; set; }
+
+		public RoutingAllocationEnableOption? RoutingAllocationEnable { get; set; }
+
+        public bool? RoutingAllocationDisableAllication { get; set; }
+
+        public bool? RoutingAllocationDisableNewAllocation { get; set; }
+
+        public bool? RoutingAllocationDisableReplicaAllocation { get; set; }
+
+        public int? RoutingAllocationTotalShardsPerNode { get; set; }
+
+        public string RecoveryInitialShards { get; set; }
+
+        public bool? GcDeletes { get; set; }
+
+        public bool? TtlDisablePurge { get; set; }
+
+        public string TranslogFsType { get; set; }
+
+        public bool? CompoundFormat { get; set; }
+
+        public bool? CompoundOnFlush { get; set; }
+
+        public bool? WarmersEnabled { get; set; }
+
+        public AnalysisSettings Analysis { get; set; }
+
+        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
+        {
+            UpdateSettingsPathInfo.Update(settings, pathInfo);
+        }
+    }
+
 	[DescriptorFor("IndicesPutSettings")]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial class UpdateSettingsDescriptor : IndexOptionalPathDescriptorBase<UpdateSettingsDescriptor, UpdateSettingsRequestParameters>
+	public partial class UpdateSettingsDescriptor 
+		: IndexOptionalPathDescriptorBase<UpdateSettingsDescriptor, UpdateSettingsRequestParameters>, IUpdateSettingsRequest
 	{
-		[JsonProperty("index.number_of_replicas")]
-		internal int? _NumberOfReplicas { get; set; }
+		private IUpdateSettingsRequest Self { get { return this; } }
+
+		int? IUpdateSettingsRequest.NumberOfReplicas { get; set; }
+
+		object IUpdateSettingsRequest.AutoExpandReplicas { get; set; }
+
+		bool? IUpdateSettingsRequest.BlocksReadOnly { get; set; }
+
+		bool? IUpdateSettingsRequest.BlocksRead { get; set; }
+
+		bool? IUpdateSettingsRequest.BlocksWrite { get; set; }
+
+		bool? IUpdateSettingsRequest.BlocksMetadata { get; set; }
+
+		string IUpdateSettingsRequest.RefreshInterval { get; set; }
+
+		int? IUpdateSettingsRequest.IndexConcurrency { get; set; }
+
+		string IUpdateSettingsRequest.Codec { get; set; }
+
+		bool? IUpdateSettingsRequest.CodecBloomLoad { get; set; }
+
+		bool? IUpdateSettingsRequest.FailOnMergeFailure { get; set; }
+
+		string IUpdateSettingsRequest.TranslogFlushTreshHoldOps { get; set; }
+
+		string IUpdateSettingsRequest.TranslogFlushThresholdSize { get; set; }
+
+		string IUpdateSettingsRequest.TranslogFlushThresholdPeriod { get; set; }
+
+		bool? IUpdateSettingsRequest.TranslogDisableFlush { get; set; }
+
+		string IUpdateSettingsRequest.CacheFilterMaxSize { get; set; }
+
+		string IUpdateSettingsRequest.CacheFilterExpire { get; set; }
+
+		string IUpdateSettingsRequest.GatewaySnapshotInterval { get; set; }
+
+		IDictionary<string, object> IUpdateSettingsRequest.RoutingAllocationInclude { get; set; }
+
+		IDictionary<string, object> IUpdateSettingsRequest.RoutingAllocationExclude { get; set; }
+
+		IDictionary<string, object> IUpdateSettingsRequest.RoutingAllocationRequire { get; set; }
+
+		RoutingAllocationEnableOption? IUpdateSettingsRequest.RoutingAllocationEnable { get; set; }
+
+		bool? IUpdateSettingsRequest.RoutingAllocationDisableAllication { get; set; }
+
+		bool? IUpdateSettingsRequest.RoutingAllocationDisableNewAllocation { get; set; }
+
+		bool? IUpdateSettingsRequest.RoutingAllocationDisableReplicaAllocation { get; set; }
+
+		int? IUpdateSettingsRequest.RoutingAllocationTotalShardsPerNode { get; set; }
+
+		string IUpdateSettingsRequest.RecoveryInitialShards { get; set; }
+
+		bool? IUpdateSettingsRequest.GcDeletes { get; set; }
+
+		bool? IUpdateSettingsRequest.TtlDisablePurge { get; set; }
+
+		string IUpdateSettingsRequest.TranslogFsType { get; set; }
+
+		bool? IUpdateSettingsRequest.CompoundFormat { get; set; }
+
+		bool? IUpdateSettingsRequest.CompoundOnFlush { get; set; }
+
+		bool? IUpdateSettingsRequest.WarmersEnabled { get; set; }
+
+		AnalysisSettings IUpdateSettingsRequest.Analysis { get; set; }
+
+		IndexNameMarker IIndexOptionalPath<UpdateSettingsRequestParameters>.Index { get; set; }
+
+		bool? IIndexOptionalPath<UpdateSettingsRequestParameters>.AllIndices { get; set; }
 
 		/// <summary>
 		/// The number of replicas each shard has.
 		/// </summary>
 		public UpdateSettingsDescriptor NumberOfReplicas(int numberOfReplicas)
 		{
-			this._NumberOfReplicas = numberOfReplicas;
+			this.Self.NumberOfReplicas = numberOfReplicas;
 			return this;
 		}
 
-		[JsonProperty("index.auto_expand_replicas")]
-		internal object _AutoExpandReplicas { get; set; }
 		/// <summary>
 		/// Set to an actual value (like 0-all) or false to disable it.
 		/// </summary>
 		public UpdateSettingsDescriptor AutoExpandReplicas(bool autoExpandReplicas = true)
 		{
-			this._AutoExpandReplicas = autoExpandReplicas;
-			return this;
-		}
-		public UpdateSettingsDescriptor AutoExpandReplicas(string autoExpandReplicas)
-		{
-			this._AutoExpandReplicas = autoExpandReplicas;
+			this.Self.AutoExpandReplicas = autoExpandReplicas;
 			return this;
 		}
 
-		[JsonProperty("index.blocks.read_only")]
-		internal bool? _BlocksReadOnly { get; set; }
+		public UpdateSettingsDescriptor AutoExpandReplicas(string autoExpandReplicas)
+		{
+			this.Self.AutoExpandReplicas = autoExpandReplicas;
+			return this;
+		}
+
 		///<summary>
 		/// Set to true to have the index read only, false to allow writes and metadta changes.
 		/// </summary>
 		public UpdateSettingsDescriptor BlockReadonly(bool blocksReadonly = true)
 		{
-			this._BlocksReadOnly = blocksReadonly;
+			this.Self.BlocksReadOnly = blocksReadonly;
 			return this;
 		}
 
-		[JsonProperty("index.blocks.read")]
-		internal bool? _BlocksRead { get; set; }
 		///<summary>
 		/// Set to true to disable read operations againstthe index.
 		/// </summary>
 		public UpdateSettingsDescriptor BlocksRead(bool blocksRead = true)
 		{
-			this._BlocksRead = blocksRead;
+			this.Self.BlocksRead = blocksRead;
 			return this;
 		}
 
-		[JsonProperty("index.blocks.write")]
-		internal bool? _BlocksWrite { get; set; }
 		/// <summary>
 		///Set to true to disable write operations against the index. 
 		/// </summary>
 		public UpdateSettingsDescriptor BlocksWrite(bool blocksWrite = true)
 		{
-			this._BlocksWrite = blocksWrite;
+			this.Self.BlocksWrite = blocksWrite;
 			return this;
 		}
 
-		[JsonProperty("index.blocks.metadata")]
-		internal bool? _BlocksMetadata { get; set; }
 		///<summary>
 		/// Set to true to disable metadata operations against the index.
 		/// </summary>
 		public UpdateSettingsDescriptor BlocksMetadata(bool blocksMetaData = true)
 		{
-			this._BlocksMetadata = blocksMetaData;
+			this.Self.BlocksMetadata = blocksMetaData;
 			return this;
 		}
 
-		[JsonProperty("index.refresh_interval")]
-		internal string _RefreshInterval { get; set; }
 		/// <summary>
 		///The async refresh interval of a shard. 
 		/// </summary>
 		public UpdateSettingsDescriptor RefreshInterval(string refreshInterval)
 		{
-			this._RefreshInterval = refreshInterval;
+			this.Self.RefreshInterval = refreshInterval;
 			return this;
 		}
 
-		[JsonProperty("index.index_concurrency")]
-		internal int? _IndexConcurrency { get; set; }
 		/// <summary>
 		///Defaults to 8. 
 		/// </summary>
 		public UpdateSettingsDescriptor IndexConcurrency(int indexConcurrency)
 		{
-			this._IndexConcurrency = indexConcurrency;
+			this.Self.IndexConcurrency = indexConcurrency;
 			return this;
 		}
 
-		[JsonProperty("index.codec")]
-		internal string _Codec { get; set; }
 		/// <summary>
 		///Codec. Default to default. 
 		/// </summary>
 		public UpdateSettingsDescriptor Codec(string codec)
 		{
-			this._Codec = codec;
+			this.Self.Codec = codec;
 			return this;
 		}
 
-		[JsonProperty("index.codec.bloom.load")]
-		internal bool? _CodecBloomLoad { get; set; }
 		/// <summary>
 		/// Whether to load the bloom filter. Defaults to true. 
 		/// [coming in 0.90.9] Coming in 0.90.9.. See the section called “Bloom filter posting format”.
 		/// </summary>
 		public UpdateSettingsDescriptor CodeBloomLoad(bool codecBloomLoad = true)
 		{
-			this._CodecBloomLoad = codecBloomLoad;
+			this.Self.CodecBloomLoad = codecBloomLoad;
 			return this;
 		}
 
-		[JsonProperty("index.fail_on_merge_failure")]
-		internal bool? _FailOnMergeFailure { get; set; }
 		/// <summary>
 		/// Default to true.
 		/// </summary>
 		public UpdateSettingsDescriptor FailOnMergeFailure(bool failOnMergeFailure = true)
 		{
-			this._FailOnMergeFailure = failOnMergeFailure;
+			this.Self.FailOnMergeFailure = failOnMergeFailure;
 			return this;
 		}
 
-		[JsonProperty("index.translog.flush_threshold_ops")]
-		internal string _TranslogFlushTreshHoldOps { get; set; }
 		/// <summary>
 		///  When to flush based on operations.
 		/// </summary>
 		public UpdateSettingsDescriptor TranslogFlushThresholdOps(string translogFlushThresholdOps)
 		{
-			this._TranslogFlushTreshHoldOps = translogFlushThresholdOps;
+			this.Self.TranslogFlushTreshHoldOps = translogFlushThresholdOps;
 			return this;
 		}
 
-		[JsonProperty("index.translog.flush_threshold_size")]
-		internal string _TranslogFlushThresholdSize { get; set; }
 		/// <summary>
 		/// When to flush based on translog (bytes) size.
 		/// </summary>
 		public UpdateSettingsDescriptor TranslogFlushThresholdSize(string numberOfReplicas)
 		{
-			this._TranslogFlushThresholdSize  = numberOfReplicas;
+			this.Self.TranslogFlushThresholdSize  = numberOfReplicas;
 			return this;
 		}
 
-		[JsonProperty("index.translog.flush_threshold_period")]
-		internal string _TranslogFlushThresholdPeriod { get; set; }
 		/// <summary>
 		/// When to flush based on a period of not flushing.
 		/// </summary>
 		public UpdateSettingsDescriptor TranslogFlushThresholdPeriod(string translogFlushThresholdPeriod)
 		{
-			this._TranslogFlushThresholdPeriod  = translogFlushThresholdPeriod;
+			this.Self.TranslogFlushThresholdPeriod  = translogFlushThresholdPeriod;
 			return this;
 		}
 
-		[JsonProperty("index.translog.disable_flush")]
-		internal bool? _TranslogDisableFlush { get; set; }
 		/// <summary>
 		/// Disables flushing. Note, should be set for a short interval and then enabled. 
 		/// </summary>
 		public UpdateSettingsDescriptor TranslogDisableFlush(bool translogDisableFlush = true)
 		{
-			this._TranslogDisableFlush  = translogDisableFlush;
+			this.Self.TranslogDisableFlush  = translogDisableFlush;
 			return this;
 		}
 
-		[JsonProperty("index.cache.filter.max_size")]
-		internal string _CacheFilterMaxSize { get; set; }
 		/// <summary>
 		/// The maximum size of filter cache (per segment in shard). Set to -1 to disable.
 		///  </summary>
 		public UpdateSettingsDescriptor CacheFilterMaxSize(string cacheFilterMaxSize)
 		{
-			this._CacheFilterMaxSize  = cacheFilterMaxSize;
+			this.Self.CacheFilterMaxSize  = cacheFilterMaxSize;
 			return this;
 		}
 
-		[JsonProperty("index.cache.filter.expire")]
-		internal string _CacheFilterExpire { get; set; }
 		/// <summary>
 		/// The expire after access time for filter cache. Set to -1 to disable.
 		/// </summary>
 		public UpdateSettingsDescriptor CacheFilterExpire(string cacheFilterExpire)
 		{
-			this._CacheFilterExpire  = cacheFilterExpire;
+			this.Self.CacheFilterExpire  = cacheFilterExpire;
 			return this;
 		}
 
-		[JsonProperty("index.gateway.snapshot_interval")]
-		internal string _GatewaySnapshotInterval { get; set; }
 		/// <summary>
 		/// The gateway snapshot interval (only applies to shared gateways). Defaults to 10s.
 		/// </summary>
 		public UpdateSettingsDescriptor GatewaySnapshotInterval(string gatewaySnapshotInterval)
 		{
-			this._GatewaySnapshotInterval = gatewaySnapshotInterval;
+			this.Self.GatewaySnapshotInterval = gatewaySnapshotInterval;
 			return this;
 		}
 
-		[JsonProperty("index.routing.allocation.include")]
-		internal IDictionary<string, object> _RoutingAllocationInclude { get; set; }
 		/// <summary>
 		/// A node matching any rule will be allowed to host shards from the index.
 		/// </summary>
 		public UpdateSettingsDescriptor RoutingAllocationInclude(
 			Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
-			this._RoutingAllocationInclude  = selector(new FluentDictionary<string, object>());
+			this.Self.RoutingAllocationInclude  = selector(new FluentDictionary<string, object>());
 			return this;
 		}
 
-		[JsonProperty("index.routing.allocation.exclude")]
-		internal IDictionary<string, object> _RoutingAllocationExclude { get; set; }
 		///	<summary>
 		/// A node matching any rule will NOT be allowed to host shards from the index.
 		/// </summary>
 		public UpdateSettingsDescriptor RoutingAllocationExclude(
 			Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
-			this._RoutingAllocationExclude  = selector(new FluentDictionary<string, object>());
+			this.Self.RoutingAllocationExclude  = selector(new FluentDictionary<string, object>());
 			return this;
 		}
 
-		[JsonProperty("index.routing.allocation.require")]
-		internal IDictionary<string, object> _RoutingAllocationRequire { get; set; }
 		/// <summary> 
 		/// Only nodes matching all rules will be allowed to host shards from the index.
 		/// </summary>
 		public UpdateSettingsDescriptor RoutingAllocationRequire(
 			Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
-			this._RoutingAllocationRequire  = selector(new FluentDictionary<string, object>());
+			this.Self.RoutingAllocationRequire  = selector(new FluentDictionary<string, object>());
 			return this;
 		}
 
-		[JsonProperty("index.routing.allocation.disable_allocation")]
-		internal bool? _RoutingAllocationDisableAllication { get; set; }
+		/// <summary>
+		/// Enables shard allocation for a specific index.
+		/// </summary>
+		public UpdateSettingsDescriptor RoutingAllocationEnable(RoutingAllocationEnableOption option)
+		{
+			this.Self.RoutingAllocationEnable = option;
+			return this;
+		}
+
 		/// <summary>
 		/// Disable allocation. Defaults to false.
 		/// </summary>
 		public UpdateSettingsDescriptor RoutingAllocationDisableAllocation(bool disable = true)
 		{
-			this._RoutingAllocationDisableAllication  = disable;
+			this.Self.RoutingAllocationDisableAllication  = disable;
 			return this;
 		}
 
-		[JsonProperty("index.routing.allocation.disable_new_allocation")]
-		internal bool? _RoutingAllocationDisableNewAllocation { get; set; }
 		/// <summary>
 		/// Disable new allocation. Defaults to false.
 		/// </summary>
 		public UpdateSettingsDescriptor RoutingAllocationDisableNewAllocation(bool disable = true)
 		{
-			this._RoutingAllocationDisableNewAllocation  = disable;
+			this.Self.RoutingAllocationDisableNewAllocation  = disable;
 			return this;
 		}
 
-		[JsonProperty("index.routing.allocation.disable_replica_allocation")]
-		internal bool? _RoutingAllocationDisableReplicaAllocation { get; set; }
 		/// <summary> 
 		/// Disable replica allocation. Defaults to false.
 		/// </summary>
 		public UpdateSettingsDescriptor RoutingAllocationDisableReplicateAllocation(bool disable = true)
 		{
-			this._RoutingAllocationDisableReplicaAllocation = disable;
+			this.Self.RoutingAllocationDisableReplicaAllocation = disable;
 			return this;
 		}
 
-		[JsonProperty("index.routing.allocation.total_shards_per_node")]
-		internal int? _RoutingAllocationTotalShardsPerNode { get; set; }
 		/// <summary>
 		/// Controls the total number of shards allowed to be allocated on a single node. Defaults to unbounded (-1).
 		/// </summary>
 		public UpdateSettingsDescriptor RoutingAllocationTotalShardsPerNode(int totalShardsPerNode)
 		{
-			this._RoutingAllocationTotalShardsPerNode  = totalShardsPerNode;
+			this.Self.RoutingAllocationTotalShardsPerNode  = totalShardsPerNode;
 			return this;
 		}
 
-		[JsonProperty("index.recovery.initial_shards")]
-		internal string _RecoveryInitialShards { get; set; }
 		///<summary>
 		/// When using local gateway a particular shard is recovered only if there can be allocated quorum shards in the cluster. 
 		///It can be set to:
@@ -307,78 +528,64 @@ namespace Nest
 		///</summary>
 		public UpdateSettingsDescriptor RecoveryInitialShards(string recoveryInitialShards)
 		{
-			this._RecoveryInitialShards  = recoveryInitialShards;
+			this.Self.RecoveryInitialShards  = recoveryInitialShards;
 			return this;
 		}
 
-		[JsonProperty("index.gc_deletes")]
-		internal bool? _GcDeletes { get; set; }
 		/// <summary>
 		/// Disables temporarily the purge of expired docs.
 		/// </summary>
 		public UpdateSettingsDescriptor GcDeletes(bool gcDeletes = true)
 		{
-			this._GcDeletes  = gcDeletes;
+			this.Self.GcDeletes  = gcDeletes;
 			return this;
 		}
 		
-		[JsonProperty("index.ttl.disable_purge")]
-		internal bool? _TtlDisablePurge { get; set; }
 		/// <summary>
 		/// Disables temporarily the purge of expired docs.
 		/// </summary>
 		public UpdateSettingsDescriptor TtlDisablePurge(bool ttlDisablePurge = true)
 		{
-			this._TtlDisablePurge  = ttlDisablePurge;
+			this.Self.TtlDisablePurge  = ttlDisablePurge;
 			return this;
 		}
 		
-		[JsonProperty("index.translog.fs.type")]
-		internal string _TranslogFsType { get; set; }
 		/// <summary>
 		/// Either simple or buffered (default).
 		/// </summary>
 		public UpdateSettingsDescriptor TranslogFsType(string translogFsType)
 		{
-			this._TranslogFsType  = translogFsType;
+			this.Self.TranslogFsType  = translogFsType;
 			return this;
 		}
 
-		[JsonProperty("index.compound_format")]
-		internal bool? _CompoundFormat { get; set; }
 		///<summary>
 		/// See index.compound_format in the section called “Index Settings”. 
 		/// </summary>
 		public UpdateSettingsDescriptor CompoundFormat(bool compoundFormat = true)
 		{
-			this._CompoundFormat = compoundFormat;
+			this.Self.CompoundFormat = compoundFormat;
 			return this;
 		}
 
-		[JsonProperty("index.compound_on_flush")]
-		internal bool? _CompoundOnFlush { get; set; }
 		///<summary>
 		/// See `index.compound_on_flush in the section called “Index Settings”.
 		/// </summary>
 		public UpdateSettingsDescriptor CompoundOnFlush(bool compoundOnFlush = true)
 		{
-			this._CompoundOnFlush  = compoundOnFlush;
+			this.Self.CompoundOnFlush  = compoundOnFlush;
 			return this;
 		}
 
-		[JsonProperty("index.warmer.enabled")]
-		internal bool? _WarmersEnabled { get; set; }
 		///<summary>
 		/// See Warmers. Defaults to true. 
 		/// </summary>
 		public UpdateSettingsDescriptor WarmersEnabled(bool warmersEnabled = true)
 		{
-			this._WarmersEnabled = warmersEnabled;
+			this.Self.WarmersEnabled = warmersEnabled;
 			return this;
 		}
 
-		[JsonProperty("analysis")]
-		internal AnalysisSettings _Analysis { get; set; }
 		/// <summary>
 		/// When updating analysis settings you need to close and open the index prior and afterwards
 		/// </summary>
@@ -386,14 +593,13 @@ namespace Nest
 		{
 			analysisSelector.ThrowIfNull("analysisSelector");
 			var descriptor = analysisSelector(new AnalysisDescriptor());
-			this._Analysis = descriptor != null ? descriptor._AnalysisSettings : null;
+			this.Self.Analysis = descriptor != null ? descriptor._AnalysisSettings : null;
 			return this;
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
+            UpdateSettingsPathInfo.Update(settings, pathInfo);
 		}
-
 	}
 }

@@ -1,9 +1,49 @@
 ﻿using System;
 using Elasticsearch.Net;
-using Nest.Resolvers;
 
 namespace Nest
 {
+	public interface IIndexOptionalPath<TParameters> : IRequest<TParameters>
+		where TParameters : IRequestParameters, new()
+	{
+		IndexNameMarker Index { get; set; }
+		bool? AllIndices { get; set; }
+	}
+
+	internal static class IndexOptionalPathRouteParameters
+	{
+		public static void SetRouteParameters<TParameters>(
+			IIndexOptionalPath<TParameters> path,
+			IConnectionSettingsValues settings, 
+			ElasticsearchPathInfo<TParameters> pathInfo)
+			where TParameters : IRequestParameters, new()
+		{	
+			var inferrer = new ElasticInferrer(settings);
+			if (!path.AllIndices.HasValue && path.Index == null)
+				path.Index = inferrer.DefaultIndex;
+
+			string index = null;
+			if (!path.AllIndices.GetValueOrDefault(false))
+				index = inferrer.IndexName(path.Index);
+
+			pathInfo.Index = index;
+		}
+	
+	}
+
+	public abstract class IndexOptionalPathBase<TParameters> : BasePathRequest<TParameters>, IIndexOptionalPath<TParameters>
+		where TParameters : IRequestParameters, new()
+	{
+		public IndexNameMarker Index { get; set; }
+		public bool? AllIndices { get; set; }
+		
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		{	
+			IndexOptionalPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
+		}
+	}
+
+
 	/// <summary>
 	/// Provides a base for descriptors that need to describe a path in the form of 
 	/// <pre>
@@ -11,49 +51,44 @@ namespace Nest
 	/// </pre>
 	/// index is optional but AllIndices() needs to be explicitly specified for it to be optional
 	/// </summary>
-	public abstract class IndexOptionalPathDescriptorBase<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor, TParameters>
+	public abstract class IndexOptionalPathDescriptorBase<TDescriptor, TParameters> 
+		: BasePathDescriptor<TDescriptor, TParameters>, IIndexOptionalPath<TParameters>
 		where TDescriptor : IndexOptionalPathDescriptorBase<TDescriptor, TParameters>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-		internal IndexNameMarker _Index { get; set; }
+		public IIndexOptionalPath<TParameters> Self { get { return this;  } }
+
+		IndexNameMarker IIndexOptionalPath<TParameters>.Index { get; set; }
 		
-		internal bool? _AllIndices { get; set; }
+		bool? IIndexOptionalPath<TParameters>.AllIndices { get; set; }
 
 		public TDescriptor AllIndices(bool allIndices = true)
 		{
-			this._AllIndices = allIndices;
+			Self.AllIndices = allIndices;
 			return (TDescriptor)this;
 		}
 		
 		public TDescriptor Index<TAlternative>() where TAlternative : class
 		{
-			this._Index = typeof(TAlternative);
+			Self.Index = typeof(TAlternative);
 			return (TDescriptor)this;
 		}
 			
 		public TDescriptor Index(string indexType)
 		{
-			this._Index = indexType;
+			Self.Index = indexType;
 			return (TDescriptor)this;
 		}
 
 		public TDescriptor Index(Type indexType)
 		{
-			this._Index = indexType;
+			Self.Index = indexType;
 			return (TDescriptor)this;
 		}
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			var inferrer = new ElasticInferrer(settings);
-			if (!this._AllIndices.HasValue && this._Index == null)
-				this._Index = inferrer.DefaultIndex;
-
-			string index = null;
-			if (!this._AllIndices.GetValueOrDefault(false))
-				index = inferrer.IndexName(this._Index);
-
-			pathInfo.Index = index;
+			IndexOptionalPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 	}

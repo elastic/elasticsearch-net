@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Elasticsearch.Net;
-using Nest.DSL.Search;
 using Nest.Resolvers;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -28,8 +27,6 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 			{
 				From = 0,
 				Size = 20,
-				Index = "alternative-index",
-				Type = "alternative-type",
 				MinScore = 2.1,
 				Rescore = new Rescore
 				{

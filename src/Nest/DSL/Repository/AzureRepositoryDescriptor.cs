@@ -2,14 +2,22 @@
 
 namespace Nest
 {
+	public class AzureRepository : IRepository
+	{
+		string IRepository.Type { get { return "azure"; } }
+		public IDictionary<string, object> Settings { get; set; }
+	}
+
 	public class AzureRepositoryDescriptor : IRepository
 	{
-		public string Type { get { return "azure"; } }
-		public IDictionary<string, object> Settings { get; private set; }
+		string IRepository.Type { get { return "azure"; } }
+		IDictionary<string, object> IRepository.Settings { get; set; }
+
+		private IRepository Self { get { return this; } }
 
 		public AzureRepositoryDescriptor()
 		{
-			this.Settings = new Dictionary<string, object>();
+			Self.Settings = new Dictionary<string, object>();
 		}
 		/// <summary>
 		/// Container name. Defaults to elasticsearch-snapshots
@@ -17,7 +25,7 @@ namespace Nest
 		/// <param name="bucket"></param>
 		public AzureRepositoryDescriptor Container(string bucket)
 		{
-			this.Settings["bucket"] = bucket;
+			Self.Settings["bucket"] = bucket;
 			return this;
 		}
 		/// <summary>
@@ -27,7 +35,7 @@ namespace Nest
 		/// <returns></returns>
 		public AzureRepositoryDescriptor BasePath(string basePath)
 		{
-			this.Settings["base_path"] = basePath;
+			Self.Settings["base_path"] = basePath;
 			return this;
 		}
 		/// <summary>
@@ -37,7 +45,7 @@ namespace Nest
 		/// <param name="compress"></param>
 		public AzureRepositoryDescriptor Compress(bool compress = true)
 		{
-			this.Settings["compress"] = compress;
+			Self.Settings["compress"] = compress;
 			return this;
 		}
 		/// <summary>
@@ -46,7 +54,7 @@ namespace Nest
 		/// <param name="concurrentStreams"></param>
 		public AzureRepositoryDescriptor ConcurrentStreams(int concurrentStreams)
 		{
-			this.Settings["concurrent_streams"] = concurrentStreams;
+			Self.Settings["concurrent_streams"] = concurrentStreams;
 			return this;
 		}
 		/// <summary>
@@ -57,7 +65,7 @@ namespace Nest
 		/// <param name="chunkSize"></param>
 		public AzureRepositoryDescriptor ChunkSize(string chunkSize)
 		{
-			this.Settings["chunk_size"] = chunkSize;
+			Self.Settings["chunk_size"] = chunkSize;
 			return this;
 		}
 

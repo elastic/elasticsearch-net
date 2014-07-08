@@ -1,25 +1,62 @@
 ﻿using System;
+using System.Collections.Generic;
 using Elasticsearch.Net;
+using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 
-	public class RegisterPercolatorDescriptor<T> : IndexNamePathDescriptor<RegisterPercolatorDescriptor<T>, IndexRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(CustomJsonConverter))]
+	public interface IRegisterPercolatorRequest : IIndexNamePath<IndexRequestParameters>, ICustomJson
+	{
+		IDictionary<string, object> MetaData { get; set; }
+		QueryContainer Query { get; set; }
+	}
+
+	internal static class RegisterPercolatorPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<IndexRequestParameters> pathInfo, IRegisterPercolatorRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.Index = pathInfo.Index;
+			pathInfo.Id = pathInfo.Name;
+			pathInfo.Type = ".percolator";
+		}
+	}
+
+	public class RegisterPercolatorRequest : IndexNamePathBase<IndexRequestParameters>, IRegisterPercolatorRequest
+	{
+		public RegisterPercolatorRequest(IndexNameMarker index, string name) : base(index, name)
+		{
+		}
+
+		public IDictionary<string, object> MetaData { get; set; }
+		public QueryContainer Query { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
+		{
+			RegisterPercolatorPathInfo.Update(pathInfo, this);
+		}
+
+		public object GetCustomJson()
+		{
+			return new FluentDictionary<string, object>(this.MetaData)
+				.Add("query", this.Query);
+		}
+
+	}
+
+	public class RegisterPercolatorDescriptor<T> : IndexNamePathDescriptor<RegisterPercolatorDescriptor<T>, IndexRequestParameters, T>, IRegisterPercolatorRequest
 		where T : class
 	{
-		internal FluentDictionary<string, object> _RequestBody
-		{
-			get
-			{
-				var body = new FluentDictionary<string, object>(this._Metadata);
-				body.Add("query", this._Query);
-				return body;
-			}
-		}
-		internal QueryContainer _Query { get; set; }
+		private IRegisterPercolatorRequest Self { get { return this; } }
 
-		internal FluentDictionary<string, object> _Metadata { get; set; } 
-		
+		QueryContainer IRegisterPercolatorRequest.Query { get; set; }
+
+		IDictionary<string, object> IRegisterPercolatorRequest.MetaData { get; set; }
+
 		/// <summary>
 		/// Add metadata associated with this percolator query document
 		/// </summary>
@@ -28,7 +65,7 @@ namespace Nest
 			if (selector == null)
 				return this;
 
-			this._Metadata = selector(new FluentDictionary<string, object>());
+			Self.MetaData = selector(new FluentDictionary<string, object>());
 			return this;
 		}
 
@@ -39,20 +76,19 @@ namespace Nest
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var d = querySelector(new QueryDescriptor<T>());
-			this._Query = d;
+			Self.Query = d;
 			return this;
+		}
+
+		public object GetCustomJson()
+		{
+			return new FluentDictionary<string, object>(Self.MetaData)
+				.Add("query", Self.Query);
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
 		{
-			//registering a percolator in elasticsearch < 1.0 is actually indexing a document in a 
-			//special _percolator index where the passed index is actually a type
-			//the name is actually the id, we rectify that here
-
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			pathInfo.Index = pathInfo.Index;
-			pathInfo.Id = pathInfo.Name;
-			pathInfo.Type = ".percolator";
+			RegisterPercolatorPathInfo.Update(pathInfo, this);
 		}
 	}
 }

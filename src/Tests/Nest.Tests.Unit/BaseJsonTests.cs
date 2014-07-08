@@ -61,14 +61,13 @@ namespace Nest.Tests.Unit
 			var json = TestElasticClient.Serialize(o);
 			this.JsonEquals(json, method, fileName);
 		}
+
 		protected void JsonEquals(string json, MethodBase method, string fileName = null)
 		{
 			var file = this.GetFileFromMethod(method, fileName);
 
 			var expected = File.ReadAllText(file);
 			//Assert.AreEqual(expected, json);
-
-
 			Assert.True(json.JsonEquals(expected), this.PrettyPrint(json));
 		}
 

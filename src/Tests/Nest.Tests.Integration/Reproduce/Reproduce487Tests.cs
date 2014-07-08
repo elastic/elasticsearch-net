@@ -30,7 +30,7 @@ namespace Nest.Tests.Integration.Reproduce
 			);
 			Assert.IsTrue(x.Acknowledged, x.ConnectionStatus.ToString());
 
-			var typeMapping = this._client.GetMapping(i => i.Index(index).Type("elasticsearchprojects"));
+			var typeMapping = this._client.GetMapping<ElasticsearchProject>(i => i.Index(index).Type("elasticsearchprojects"));
 			typeMapping.Should().NotBeNull();
 			var stringMapping = typeMapping.Mapping.Properties["name"] as StringMapping;
 			stringMapping.Should().NotBeNull();

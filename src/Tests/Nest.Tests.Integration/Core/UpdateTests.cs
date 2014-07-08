@@ -1,4 +1,8 @@
-﻿using NUnit.Framework;
+﻿using System.Globalization;
+using System.Linq;
+using Elasticsearch.Net;
+using Nest.Tests.MockData;
+using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Integration.Core
@@ -24,6 +28,25 @@ namespace Nest.Tests.Integration.Core
 			Assert.AreNotEqual(project.Version, "1");
 		}
 		
+		[Test]
+		public void TestUpdate_ObjectInitializer()
+		{
+			var id = NestTestData.Data.Last().Id;
+			var project = this._client.Source<ElasticsearchProject>(s => s.Id(id));
+			Assert.NotNull(project);
+			Assert.Greater(project.LOC, 0);
+			var loc = project.LOC;
+			this._client.Update<ElasticsearchProject>(new UpdateRequest<ElasticsearchProject>(project.Id)
+			{
+				RetryOnConflict = 5,
+				Refresh = true,
+				Script = "ctx._source.loc += 10",
+			});
+			project = this._client.Source<ElasticsearchProject>(s => s.Id(id));
+			Assert.AreEqual(project.LOC, loc + 10);
+			Assert.AreNotEqual(project.Version, "1");
+		}
+
 		public class ElasticsearchProjectLocUpdate
 		{
 			public int Id { get; set; }

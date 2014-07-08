@@ -2,11 +2,67 @@
 using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
-using Nest.Resolvers;
 
 namespace Nest
 {
+	public interface IIndicesOptionalTypesNamePath<TParameters> : IRequest<TParameters>
+		where TParameters : IRequestParameters, new()
+	{
+		bool? AllIndices { get; set; }
 
+		IEnumerable<IndexNameMarker> Indices { get; set; }
+
+		IEnumerable<TypeNameMarker> Types { get; set; }
+
+		string Name { get; set; }
+	}
+
+	internal static class IndicesOptionalTypesNamePathRouteParameters
+	{
+		public static void SetRouteParameters<TParameters>(
+			IIndicesOptionalTypesNamePath<TParameters> path,
+			IConnectionSettingsValues settings, 
+			ElasticsearchPathInfo<TParameters> pathInfo)
+			where TParameters : IRequestParameters, new()
+		{	
+			var inferrer = new ElasticInferrer(settings);
+			if (!path.AllIndices.HasValue && path.Indices == null)
+				path.Indices = new[] {(IndexNameMarker)inferrer.DefaultIndex};
+			if (path.Name.IsNullOrEmpty())
+				throw new DslException("missing Repository()");
+
+			var indices = path.Indices.HasAny()
+				? inferrer.IndexNames(path.Indices)
+				: path.AllIndices.GetValueOrDefault(false)
+					? "_all"
+					: inferrer.DefaultIndex;
+
+			var types = path.Types.HasAny()
+				? inferrer.TypeNames(path.Types)
+				: null;
+
+			pathInfo.Index = indices;
+			pathInfo.Type = types;
+			pathInfo.Name = path.Name;
+		}
+	
+	}
+
+	public abstract class IndicesOptionalTypesNamePathBase<TParameters> : BasePathRequest<TParameters>, IIndicesOptionalTypesNamePath<TParameters>
+		where TParameters : IRequestParameters, new()
+	{
+		
+		public bool? AllIndices { get; set; }
+		public IEnumerable<IndexNameMarker> Indices { get; set; }
+		public IEnumerable<TypeNameMarker> Types { get; set; }
+		public string Name { get; set; }
+
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		{	
+			IndicesOptionalTypesNamePathRouteParameters.SetRouteParameters(this, settings, pathInfo);
+		}
+
+	}
 	/// <summary>
 	/// Provides a base for descriptors that need to describe a path in the form of 
 	/// <pre>
@@ -14,19 +70,21 @@ namespace Nest
 	/// </pre>
 	/// {types} is optional, {indices} is too but needs an explicit AllIndices().
 	/// </summary>
-	public abstract class IndicesOptionalTypesNamePathDecriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor, TParameters>
-		where TDescriptor : IndicesOptionalTypesNamePathDecriptor<TDescriptor, TParameters>, new()
+	public abstract class IndicesOptionalTypesNamePathDescriptor<TDescriptor, TParameters> 
+		: BasePathDescriptor<TDescriptor, TParameters>, IIndicesOptionalTypesNamePath<TParameters>
+		where TDescriptor : IndicesOptionalTypesNamePathDescriptor<TDescriptor, TParameters>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-		internal bool? _AllIndices { get; set; }
+		private IIndicesOptionalTypesNamePath<TParameters> Self { get { return this; } }
 
-		internal IEnumerable<IndexNameMarker> _Indices { get; set; }
-		internal IEnumerable<TypeNameMarker> _Types { get; set; }
-		internal string _Name { get; set; }
+		bool? IIndicesOptionalTypesNamePath<TParameters>.AllIndices { get; set; }
+		IEnumerable<IndexNameMarker> IIndicesOptionalTypesNamePath<TParameters>.Indices { get; set; }
+		IEnumerable<TypeNameMarker> IIndicesOptionalTypesNamePath<TParameters>.Types { get; set; }
+		string IIndicesOptionalTypesNamePath<TParameters>.Name { get; set; }
 
 		public TDescriptor AllIndices(bool allIndices = true)
 		{
-			this._AllIndices = allIndices;
+			Self.AllIndices = allIndices;
 			return (TDescriptor)this;
 		}
 		/// <summary>
@@ -35,7 +93,7 @@ namespace Nest
 		public TDescriptor Indices(params string[] indices)
 		{
 			indices = indices ?? new string[]{};
-			this._Indices = indices.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indices.Select(s=>(IndexNameMarker)s);
 			return (TDescriptor) this;
 		}
 
@@ -46,7 +104,7 @@ namespace Nest
 		public TDescriptor Indices(params Type[] indices)
 		{
 			indices = indices ?? new Type[] {};
-			this._Indices = indices.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indices.Select(s=>(IndexNameMarker)s);
 			return (TDescriptor) this;
 		}
 		
@@ -77,7 +135,7 @@ namespace Nest
 		public TDescriptor Types(params string[] types)
 		{
 			types = types ?? new string[]{};
-			this._Types = types.Select(t=>(TypeNameMarker)t);
+			Self.Types = types.Select(t=>(TypeNameMarker)t);
 			return (TDescriptor)this;
 		}
 		
@@ -87,7 +145,7 @@ namespace Nest
 		public TDescriptor Types(params Type[] types)
 		{
 			types = types ?? new Type[]{};
-			this._Types = types.Select(t=>(TypeNameMarker)t);
+			Self.Types = types.Select(t=>(TypeNameMarker)t);
 			return (TDescriptor)this;
 		}
 
@@ -104,31 +162,13 @@ namespace Nest
 		/// </summary>
 		public TDescriptor Name(string name)
 		{
-			this._Name = name;
+			Self.Name = name;
 			return (TDescriptor)this;
 		}
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			var inferrer = new ElasticInferrer(settings);
-			if (!this._AllIndices.HasValue && this._Indices == null)
-				this._Indices = new[] {(IndexNameMarker)inferrer.DefaultIndex};
-			if (this._Name.IsNullOrEmpty())
-				throw new DslException("missing Repository()");
-
-			var indices = this._Indices.HasAny()
-				? inferrer.IndexNames(this._Indices)
-				: this._AllIndices.GetValueOrDefault(false)
-					? "_all"
-					: inferrer.DefaultIndex;
-
-			var types = this._Types.HasAny()
-				? inferrer.TypeNames(this._Types)
-				: null;
-
-			pathInfo.Index = indices;
-			pathInfo.Type = types;
-			pathInfo.Name = this._Name;
+			IndicesOptionalTypesNamePathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 	}

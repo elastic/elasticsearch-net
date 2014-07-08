@@ -17,6 +17,15 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
+		public IShardsOperationResponse Refresh(IRefreshRequest refreshRequest)
+		{
+			return this.Dispatch<IRefreshRequest, RefreshRequestParameters, ShardsOperationResponse>(
+				refreshRequest,
+				(p, d) => this.RawDispatch.IndicesRefreshDispatch<ShardsOperationResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
 		public Task<IShardsOperationResponse> RefreshAsync(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null)
 		{
 			refreshSelector = refreshSelector ?? (s => s);
@@ -25,5 +34,15 @@ namespace Nest
 				(p, d) => this.RawDispatch.IndicesRefreshDispatchAsync<ShardsOperationResponse>(p)
 			);
 		}
+
+		/// <inheritdoc />
+		public Task<IShardsOperationResponse> RefreshAsync(IRefreshRequest refreshRequest)
+		{
+			return this.DispatchAsync<IRefreshRequest, RefreshRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
+				refreshRequest,
+				(p, d) => this.RawDispatch.IndicesRefreshDispatchAsync<ShardsOperationResponse>(p)
+			);
+		}
+
 	}
 }
