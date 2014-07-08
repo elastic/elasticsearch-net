@@ -12,7 +12,7 @@ namespace Nest
 	public interface IMultiGetRequest : IFixedIndexTypePath<MultiGetRequestParameters>
 	{
 		[JsonProperty("docs")]
-		IEnumerable<IMultiGetOperation> GetOperations { get; set; }
+		IList<IMultiGetOperation> GetOperations { get; set; }
 	}
 
 	internal static class MultiGetPathInfo
@@ -25,7 +25,7 @@ namespace Nest
 	
 	public partial class MultiGetRequest : FixedIndexTypePathBase<MultiGetRequestParameters>, IMultiGetRequest
 	{
-		public IEnumerable<IMultiGetOperation> GetOperations { get; set; }
+		public IList<IMultiGetOperation> GetOperations { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo)
 		{
@@ -36,23 +36,21 @@ namespace Nest
 	[DescriptorFor("Mget")]
 	public partial class MultiGetDescriptor : FixedIndexTypePathDescriptor<MultiGetDescriptor, MultiGetRequestParameters>, IMultiGetRequest
 	{
+		private IMultiGetRequest Self { get { return this; } }
 
-		private IList<IMultiGetOperation> _getOperations = new List<IMultiGetOperation>();
+		IList<IMultiGetOperation> IMultiGetRequest.GetOperations { get; set; }
 
-		IEnumerable<IMultiGetOperation> IMultiGetRequest.GetOperations
+		public MultiGetDescriptor()
 		{
-			get { return this._getOperations; }
-			set { this._getOperations = value == null ? null : value.ToList();  }
+			this.Self.GetOperations = new List<IMultiGetOperation>();
 		}
 
 		public MultiGetDescriptor Get<T>(Func<MultiGetOperationDescriptor<T>, MultiGetOperationDescriptor<T>> getSelector) 
 			where T : class
 		{
 			getSelector.ThrowIfNull("getSelector");
-
 			var descriptor = getSelector(new MultiGetOperationDescriptor<T>());
-
-			this._getOperations.Add(descriptor);
+			Self.GetOperations.Add(descriptor);
 			return this;
 
 		}
@@ -62,7 +60,7 @@ namespace Nest
 		{
 			getSelector = getSelector ?? ((sg, s) => sg);
 			foreach (var sg in ids.Select(id => getSelector(new MultiGetOperationDescriptor<T>().Id(id), id)))
-				this._getOperations.Add(sg);
+				this.Self.GetOperations.Add(sg);
 			return this;
 
 		}
@@ -71,7 +69,7 @@ namespace Nest
 		{
 			getSelector = getSelector ?? ((sg, s) => sg);
 			foreach (var sg in ids.Select(id => getSelector(new MultiGetOperationDescriptor<T>().Id(id), id)))
-				this._getOperations.Add(sg);
+				this.Self.GetOperations.Add(sg);
 			return this;
 
 		}
