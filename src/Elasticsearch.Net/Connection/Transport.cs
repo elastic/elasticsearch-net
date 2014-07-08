@@ -52,7 +52,7 @@ namespace Elasticsearch.Net.Connection
 
 			this.Settings.Serializer = this._serializer;
 			if (this._connectionPool.AcceptsUpdates && this.Settings.SniffsOnStartup)
-				this.Sniff();
+				this.SniffClusterState();
 		}
 
 
@@ -99,7 +99,7 @@ namespace Elasticsearch.Net.Connection
 				});
 		}
 
-		private IList<Uri> Sniff()
+		private IList<Uri> Sniff(ITransportRequestState ownerState = null)
 		{
 			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(50);
 			var requestOverrides = new RequestConfiguration
@@ -112,10 +112,21 @@ namespace Elasticsearch.Net.Connection
 			var requestParameters = new RequestParameters { RequestConfiguration = requestOverrides };
 
 			var path = "_nodes/_all/clear?timeout=" + pingTimeout;
-
+			ElasticsearchResponse<Stream> response;
 			using (var requestState = new TransportRequestState<Stream>(this.Settings, requestParameters, "GET", path))
 			{
-				var response = this.DoRequest(requestState);
+				response = this.DoRequest(requestState);
+
+				//inform the owing request state of the requests the sniffs did.
+				if (requestState.RequestMetrics != null && ownerState != null)
+				{
+					foreach (var r in requestState.RequestMetrics.Where(p=>p.RequestType == RequestType.ElasticsearchCall))
+						r.RequestType = RequestType.Sniff; 
+
+
+					if (ownerState.RequestMetrics == null) ownerState.RequestMetrics = new List<RequestMetrics>();
+					ownerState.RequestMetrics.AddRange(requestState.RequestMetrics);
+				}
 				if (response.Response == null) return null;
 
 				using (response.Response)
@@ -125,20 +136,17 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		private void SniffClusterState(ITransportRequestState requestState)
+		private void SniffClusterState(ITransportRequestState requestState = null)
 		{
 			if (!this._connectionPool.AcceptsUpdates)
 				return;
 
-			using (var rq = requestState.InitiateRequest(RequestType.Sniff))
-			{
-				var newClusterState = this.Sniff();
-				if (!newClusterState.HasAny())
-					return;
+			var newClusterState = this.Sniff(requestState);
+			if (!newClusterState.HasAny())
+				return;
 
-				this._connectionPool.UpdateNodeList(newClusterState);
-				this._lastSniff = this._dateTimeProvider.Now();
-			}
+			this._connectionPool.UpdateNodeList(newClusterState);
+			this._lastSniff = this._dateTimeProvider.Now();
 
 		}
 
@@ -543,7 +551,7 @@ namespace Elasticsearch.Net.Connection
 					var e = this.Serializer.Deserialize<OneToOneServerException>(ms);
 					error = ElasticsearchServerError.Create(e);
 				}
-				catch {}
+				catch { }
 				ms.Position = 0;
 				streamResponse.Response = ms;
 			}

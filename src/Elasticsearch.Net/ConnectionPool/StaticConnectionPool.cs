@@ -99,7 +99,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			}
 		}
 
-		public virtual void UpdateNodeList(IList<Uri> newClusterState, bool fromStartupHint = false)
+		public virtual void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null)
 		{
 		}
 
