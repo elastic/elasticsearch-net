@@ -155,6 +155,13 @@
     <Compile Include="Domain\Responses\RestoreResponse.cs" />
     <Compile Include="Domain\Responses\SnapshotResponse.cs" />
     <Compile Include="Domain\Aggregations\TermsIncludeExclude.cs" />
+    <Compile Include="Domain\Similarity\BM25Similarity.cs" />
+    <Compile Include="Domain\Similarity\DefaultSimilarity.cs" />
+    <Compile Include="Domain\Similarity\DFRSimilarity.cs" />
+    <Compile Include="Domain\Similarity\IBSimilarity.cs" />
+    <Compile Include="Domain\Similarity\LMDirichletSimilarity.cs" />
+    <Compile Include="Domain\Similarity\LMJelinekSimilarity.cs" />
+    <Compile Include="Domain\Similarity\SimilarityBase.cs" />
     <Compile Include="DSL\Bulk\BulkOperationBase.cs" />
     <Compile Include="DSL\ClusterGetSettingsDescriptor.cs" />
     <Compile Include="DSL\ClusterSettingsDescriptor.cs" />
@@ -175,6 +182,7 @@
     <Compile Include="DSL\Query\PlainQuery.cs" />
     <Compile Include="DSL\Query\QueryContainer.cs" />
     <Compile Include="DSL\Rescore\RescoreQueryDescriptor.cs" />
+    <Compile Include="DSL\SimilarityDescriptor.cs" />
     <Compile Include="DSL\Suggest\Fuzziness.cs" />
     <Compile Include="DSL\Suggest\IFuzziness.cs" />
     <Compile Include="DSL\Visitor\DslPrettyPrintVisitor.cs" />
@@ -413,7 +421,6 @@
     <Compile Include="Domain\Responses\WarmerResponse.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Domain\Settings\CustomSimilaritySettings.cs" />
     <Compile Include="DSL\Rescore\RescoreDescriptor.cs" />
     <Compile Include="DSL\Termplates\CreateWarmerDescriptor.cs" />
     <Compile Include="DSL\PutWarmerDescriptor.cs" />
@@ -430,7 +437,7 @@
     <Compile Include="Domain\Responses\BulkOperationResponseItem.cs" />
     <Compile Include="Domain\Responses\MultiSearchResponse.cs" />
     <Compile Include="Domain\Responses\IBulkResponse.cs" />
-    <Compile Include="Domain\Settings\SimilaritySettings.cs" />
+    <Compile Include="Domain\Similarity\SimilaritySettings.cs" />
     <Compile Include="ElasticClient-MultiSearch.cs" />
     <Compile Include="Domain\Mapping\Types\TemplateMapping.cs" />
     <Compile Include="Domain\Responses\TemplateResponse.cs" />
@@ -644,6 +651,7 @@
     <Compile Include="DSL\Filter\LimitFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\IdsFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\ExistsFilterDescriptor.cs" />
+    <Compile Include="Resolvers\Converters\SimilarityCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\FuzzinessConverter.cs" />
     <Compile Include="Resolvers\Converters\Filters\RangeFilterJsonReader.cs" />
     <Compile Include="Resolvers\Converters\Filters\RegexpFilterJsonReader.cs" />
@@ -752,6 +760,7 @@
     <Compile Include="Resolvers\Converters\FieldNameFilterConverter.cs" />
     <Compile Include="Resolvers\Converters\FieldNameQueryConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsResponseConverter.cs" />
+    <Compile Include="Resolvers\Converters\SimilaritySettingsConverter.cs" />
     <Compile Include="Resolvers\Converters\SuggestResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\PropertyPathMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />

@@ -9,6 +9,18 @@ namespace Nest.Tests.Integration
 	{
 		public static readonly string DefaultIndex = Test.Default.DefaultIndex + "-" + Process.GetCurrentProcess().Id.ToString();
 
+		private static string _currentVersion;
+		public static string CurrentVersion
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(_currentVersion))
+					_currentVersion = GetCurrentVersion();
+
+				return _currentVersion;
+			}
+		}
+
 		public static Uri CreateBaseUri(int? port = null)
 		{
 			var host = Test.Default.Host;
@@ -36,5 +48,10 @@ namespace Nest.Tests.Integration
 			return DefaultIndex + "_" + Guid.NewGuid().ToString();
 		}
 
+		public static string GetCurrentVersion()
+		{
+			dynamic info = Client.Raw.Info().Response;
+			return info.version.number;
+		}
 	}
 }

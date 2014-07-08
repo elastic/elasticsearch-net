@@ -52,6 +52,23 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesValidateQuery1
 				//is_false _response.valid; 
 				this.IsFalse(_response.valid);
 
+				//do indices.validate_query 
+				this.Do(()=> _client.IndicesValidateQueryGetForAll(nv=>nv
+					.AddQueryString("explain", @"true")
+				));
+
+				//is_true _response.valid; 
+				this.IsTrue(_response.valid);
+
+				//match _response._shards.failed: 
+				this.IsMatch(_response._shards.failed, 0);
+
+				//match _response.explanations[0].index: 
+				this.IsMatch(_response.explanations[0].index, @"testing");
+
+				//match _response.explanations[0].explanation: 
+				this.IsMatch(_response.explanations[0].explanation, @"ConstantScore(*:*)");
+
 			}
 		}
 	}

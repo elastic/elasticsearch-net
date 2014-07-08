@@ -22,7 +22,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get1
 
 				//do index 
 				_body = new {
-					foo= "Hello= Ã¤Â¸Â­Ã¦â€“â€¡"
+					foo= "Hello= ä¸­æ–‡"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "ä¸­æ–‡", _body));
 
@@ -40,7 +40,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get1
 
 				//match _response._source: 
 				this.IsMatch(_response._source, new {
-					foo= "Hello= Ã¤Â¸Â­Ã¦â€“â€¡"
+					foo= "Hello= ä¸­æ–‡"
 				});
 
 				//do get 
@@ -57,7 +57,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get1
 
 				//match _response._source: 
 				this.IsMatch(_response._source, new {
-					foo= "Hello= Ã¤Â¸Â­Ã¦â€“â€¡"
+					foo= "Hello= ä¸­æ–‡"
 				});
 
 			}

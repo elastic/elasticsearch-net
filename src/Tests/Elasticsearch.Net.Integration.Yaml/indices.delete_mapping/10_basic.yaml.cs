@@ -35,6 +35,11 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesDeleteMapping1
 				};
 				this.Do(()=> _client.IndicesCreate("test_index", _body));
 
+				//do cluster.health 
+				this.Do(()=> _client.ClusterHealth(nv=>nv
+					.AddQueryString("wait_for_status", @"yellow")
+				));
+
 				//do indices.exists_type 
 				this.Do(()=> _client.IndicesExistsType("test_index", "test_type"));
 

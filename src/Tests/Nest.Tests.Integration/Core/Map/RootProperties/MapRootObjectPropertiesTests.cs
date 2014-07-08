@@ -8,6 +8,7 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 	public class MapRootObjectPropertiesTests : BaseMappingTests
 	{
 		[Test]
+		[SkipVersion("1.2.0", "Fails on ES 1.2.0: https://github.com/elasticsearch/elasticsearch/pull/6353")]
 		public void RootPropertiesShouldSerialize()
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m

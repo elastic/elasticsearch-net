@@ -111,6 +111,7 @@ namespace Nest.Tests.Integration.Indices
 		}
 
 		[Test]
+		[SkipVersion("1.0", "Adding aliases during index creation not introduced until 1.1")]
 		public void AddAliasFromCreateIndex()
 		{
 			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
@@ -138,18 +139,47 @@ namespace Nest.Tests.Integration.Indices
 		public void AliasesPointingToIndex()
 		{
 			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
-			var aliasName1 = ElasticsearchConfiguration.NewUniqueIndexName();
-			var aliasName2 = ElasticsearchConfiguration.NewUniqueIndexName();
-			var aliasName3 = ElasticsearchConfiguration.NewUniqueIndexName();
+
 			var createIndexResponse = _client.CreateIndex(indexName, c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
-				.AddAlias(aliasName1, a => a.IndexRouting("1"))
-				.AddAlias(aliasName2, a => a.IndexRouting("2"))
-				.AddAlias(aliasName3, a => a.IndexRouting("3"))
 			);
 
 			createIndexResponse.IsValid.Should().BeTrue();
+
+			var aliasName1 = ElasticsearchConfiguration.NewUniqueIndexName();
+			var aliasName2 = ElasticsearchConfiguration.NewUniqueIndexName();
+			var aliasName3 = ElasticsearchConfiguration.NewUniqueIndexName();
+
+			var aliasResponse1 = _client.Alias(a => a
+				.Add(aa => aa
+					.Index(indexName)
+					.Alias(aliasName1)
+					.IndexRouting("1")
+				)
+			);
+
+			aliasResponse1.IsValid.Should().BeTrue();
+
+			var aliasResponse2 = _client.Alias(a => a
+				.Add(aa => aa
+					.Index(indexName)
+					.Alias(aliasName2)
+					.IndexRouting("2")
+				)
+			);
+
+			aliasResponse2.IsValid.Should().BeTrue();
+
+			var aliasResponse3 = _client.Alias(a => a
+				.Add(aa => aa
+					.Index(indexName)
+					.Alias(aliasName3)
+					.IndexRouting("3")
+				)
+			);
+
+			aliasResponse3.IsValid.Should().BeTrue();
 
 			var aliases = _client.GetAliasesPointingToIndex(indexName);
 			aliases.Should().NotBeNull().And.HaveCount(3);
@@ -159,19 +189,54 @@ namespace Nest.Tests.Integration.Indices
 		public void IndicesPointingToAlias()
 		{
 			var aliasName = ElasticsearchConfiguration.NewUniqueIndexName();
+
 			var indexName1 = ElasticsearchConfiguration.NewUniqueIndexName();
+			var createIndexResponse1 = _client.CreateIndex(indexName1);
+
+			createIndexResponse1.IsValid.Should().BeTrue();
+			
+			var aliasResponse1 = _client.Alias(a => a
+				.Add(aa => aa
+					.Index(indexName1)
+					.Alias(aliasName)
+					.IndexRouting("1")
+				)
+			);
+
+			aliasResponse1.IsValid.Should().BeTrue();
+
 			var indexName2 = ElasticsearchConfiguration.NewUniqueIndexName();
+			var createIndexResponse2 = _client.CreateIndex(indexName2);
+
+			createIndexResponse2.IsValid.Should().BeTrue();
+
+			var aliasResponse2 = _client.Alias(a => a
+				.Add(aa => aa
+					.Index(indexName2)
+					.Alias(aliasName)
+					.IndexRouting("1")
+				)
+			);
+
+			aliasResponse2.IsValid.Should().BeTrue();
+
 			var indexName3 = ElasticsearchConfiguration.NewUniqueIndexName();
-			_client.CreateIndex(indexName1, c => c
-				.AddAlias(aliasName, a => a.IndexRouting("1"))
+			var createIndexResponse3 = _client.CreateIndex(indexName3);
+
+			createIndexResponse3.IsValid.Should().BeTrue();
+
+			var aliasResponse3 = _client.Alias(a => a
+				.Add(aa => aa
+					.Index(indexName3)
+					.Alias(aliasName)
+					.IndexRouting("1")
+				)
 			);
-			_client.CreateIndex(indexName2, c => c
-				.AddAlias(aliasName, a => a.IndexRouting("1"))
-			);
-			_client.CreateIndex(indexName3, c => c
-				.AddAlias(aliasName, a => a.IndexRouting("1"))
-			);
+
+			aliasResponse3.IsValid.Should().BeTrue();
+			
 			var indices = _client.GetIndicesPointingToAlias(aliasName);
+
 			indices.Should().NotBeNull().And.HaveCount(3);
 			indices.ShouldAllBeEquivalentTo(new[] { indexName1, indexName2, indexName3 });
 		}
@@ -183,12 +248,20 @@ namespace Nest.Tests.Integration.Indices
 			var createIndexResponse = _client.CreateIndex(indexName, c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
-				.AddAlias(aliasName, a => a
-					.IndexRouting("1")
-					.Filter<dynamic>(f => f.Term("foo", "bar")))
 			);
 
 			createIndexResponse.IsValid.Should().BeTrue();
+
+			var aliasResponse = _client.Alias(a => a
+				.Add(aa => aa
+					.Alias(aliasName)
+					.IndexRouting("1")
+					.Filter<dynamic>(f => f.Term("foo", "bar")
+					)
+				)
+			);
+
+			aliasResponse.IsValid.Should().BeTrue();
 
 			var aliases = _client.GetAliasesPointingToIndex(indexName);
 			aliases.Should().NotBeNull().And.HaveCount(1);

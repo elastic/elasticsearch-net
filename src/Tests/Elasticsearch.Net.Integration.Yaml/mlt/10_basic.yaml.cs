@@ -20,6 +20,28 @@ namespace Elasticsearch.Net.Integration.Yaml.Mlt1
 			public void BasicMlt1Test()
 			{	
 
+				//do indices.create 
+				_body = new {
+					settings= new {
+						index= new {
+							number_of_replicas= "0"
+						}
+					},
+					mappings= new {
+						test= new {
+							properties= new {
+								foo= new {
+									type= "string"
+								},
+								title= new {
+									type= "string"
+								}
+							}
+						}
+					}
+				};
+				this.Do(()=> _client.IndicesCreate("test_1", _body));
+
 				//do index 
 				_body = new {
 					foo= "bar",
@@ -33,7 +55,6 @@ namespace Elasticsearch.Net.Integration.Yaml.Mlt1
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.AddQueryString("wait_for_status", @"green")
-					.AddQueryString("timeout", @"1s")
 				));
 
 				//do mlt 

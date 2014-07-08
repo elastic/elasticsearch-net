@@ -221,7 +221,14 @@ namespace Nest
 			this._indexSettings.Analysis = analysis == null ? null : analysis._AnalysisSettings;
 			return this;
 		}
-
+		
+		public CreateIndexDescriptor Similarity(Func<SimilarityDescriptor, SimilarityDescriptor> similaritySelector)
+		{
+			similaritySelector.ThrowIfNull("similaritySelector");
+			var similarity = similaritySelector(new SimilarityDescriptor(this._indexSettings.Similarity));
+			this._indexSettings.Similarity = similarity == null ? null : similarity._SimilaritySettings;
+			return this;
+		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
 		{

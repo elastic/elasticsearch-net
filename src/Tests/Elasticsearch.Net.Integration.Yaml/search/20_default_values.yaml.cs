@@ -54,6 +54,19 @@ namespace Elasticsearch.Net.Integration.Yaml.Search2
 				//match _response.hits.total: 
 				this.IsMatch(_response.hits.total, 2);
 
+				//do search 
+				_body = new {
+					query= new {
+						match= new {
+							foo= "bar"
+						}
+					}
+				};
+				this.Do(()=> _client.Search("test_1", "test", _body));
+
+				//match _response.hits.total: 
+				this.IsMatch(_response.hits.total, 1);
+
 				//match _response.hits.hits[0]._index: 
 				this.IsMatch(_response.hits.hits[0]._index, @"test_1");
 
@@ -63,14 +76,27 @@ namespace Elasticsearch.Net.Integration.Yaml.Search2
 				//match _response.hits.hits[0]._id: 
 				this.IsMatch(_response.hits.hits[0]._id, 1);
 
-				//match _response.hits.hits[1]._index: 
-				this.IsMatch(_response.hits.hits[1]._index, @"test_2");
+				//do search 
+				_body = new {
+					query= new {
+						match= new {
+							foo= "bar"
+						}
+					}
+				};
+				this.Do(()=> _client.Search("test_2", "test", _body));
 
-				//match _response.hits.hits[1]._type: 
-				this.IsMatch(_response.hits.hits[1]._type, @"test");
+				//match _response.hits.total: 
+				this.IsMatch(_response.hits.total, 1);
 
-				//match _response.hits.hits[1]._id: 
-				this.IsMatch(_response.hits.hits[1]._id, 42);
+				//match _response.hits.hits[0]._index: 
+				this.IsMatch(_response.hits.hits[0]._index, @"test_2");
+
+				//match _response.hits.hits[0]._type: 
+				this.IsMatch(_response.hits.hits[0]._type, @"test");
+
+				//match _response.hits.hits[0]._id: 
+				this.IsMatch(_response.hits.hits[0]._id, 42);
 
 			}
 		}

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Nest.Domain.Settings;
 using Nest.Resolvers;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
@@ -42,6 +41,7 @@ namespace Nest.Tests.Integration.Indices
 
 		[Test]
 		public void GetIndexSettingsComplex()
+
 		{
 			var index = Guid.NewGuid().ToString();
 			var settings = new IndexSettings();
@@ -61,19 +61,19 @@ namespace Nest.Tests.Integration.Indices
 			settings.Analysis.Tokenizers.Add("token1", new KeywordTokenizer());
 			settings.Analysis.Tokenizers.Add("token2", new PathHierarchyTokenizer());
 
-			settings.Similarity = new SimilaritySettings();
-			var dfr = new CustomSimilaritySettings("test1", "DFR");
-			dfr.SimilarityParameters.Add("basic_model", "g");
-			dfr.SimilarityParameters.Add("after_effect", "l");
-			dfr.SimilarityParameters.Add("normalization", "h2");
-			dfr.SimilarityParameters.Add("normalization.h2.c", 3);
-			settings.Similarity.CustomSimilarities.Add(dfr);
+			settings.Similarity.CustomSimilarities.Add("test1", new DFRSimilarity
+				{
+					BasicModel = "be",
+					AfterEffect = "l",
+					Normalization = "h2",
+				});
 
-			var ib = new CustomSimilaritySettings("test2", "IB");
-			ib.SimilarityParameters.Add("distribution", "spl");
-			ib.SimilarityParameters.Add("lambda", "ttf");
-			ib.SimilarityParameters.Add("normalization", "h1");
-			settings.Similarity.CustomSimilarities.Add(ib);
+			settings.Similarity.CustomSimilarities.Add("test2", new IBSimilarity
+				{
+					Distribution = "spl",
+					Lambda = "ttf",
+					Normalization = "h1"
+				});
 
 			var typeMappingResult = this._client.GetMapping<ElasticsearchProject>(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
 			var typeMapping = typeMappingResult.Mapping;
@@ -163,22 +163,19 @@ namespace Nest.Tests.Integration.Indices
 			Assert.NotNull(r.IndexSettings.Similarity.CustomSimilarities);
 			Assert.AreEqual(2, r.IndexSettings.Similarity.CustomSimilarities.Count);
 			{ // assert similarity
-				var similarity1 = r.IndexSettings.Similarity.CustomSimilarities.FirstOrDefault(x => x.Name.Equals("test1", StringComparison.InvariantCultureIgnoreCase));
+				var similarity1 = r.IndexSettings.Similarity.CustomSimilarities.FirstOrDefault(x => x.Key.Equals("test1", StringComparison.InvariantCultureIgnoreCase)).Value as DFRSimilarity;
 				Assert.NotNull(similarity1);
 				Assert.AreEqual("DFR", similarity1.Type);
-				Assert.AreEqual(4, similarity1.SimilarityParameters.Count);
-				Assert.True(similarity1.SimilarityParameters.Any(x => x.Key.Equals("basic_model") && x.Value.ToString().Equals("g")));
-				Assert.True(similarity1.SimilarityParameters.Any(x => x.Key.Equals("after_effect") && x.Value.ToString().Equals("l")));
-				Assert.True(similarity1.SimilarityParameters.Any(x => x.Key.Equals("normalization") && x.Value.ToString().Equals("h2")));
-				Assert.True(similarity1.SimilarityParameters.Any(x => x.Key.Equals("normalization.h2")));
+				Assert.AreEqual("be", similarity1.BasicModel);
+				Assert.AreEqual("l", similarity1.AfterEffect);
+				Assert.AreEqual("h2", similarity1.Normalization);
 
-				var similarity2 = r.IndexSettings.Similarity.CustomSimilarities.FirstOrDefault(x => x.Name.Equals("test2", StringComparison.InvariantCultureIgnoreCase));
+				var similarity2 = r.IndexSettings.Similarity.CustomSimilarities.FirstOrDefault(x => x.Key.Equals("test2", StringComparison.InvariantCultureIgnoreCase)).Value as IBSimilarity;
 				Assert.NotNull(similarity2);
 				Assert.AreEqual("IB", similarity2.Type);
-				Assert.AreEqual(3, similarity2.SimilarityParameters.Count);
-				Assert.True(similarity2.SimilarityParameters.Any(x => x.Key.Equals("distribution") && x.Value.ToString().Equals("spl")));
-				Assert.True(similarity2.SimilarityParameters.Any(x => x.Key.Equals("lambda") && x.Value.ToString().Equals("ttf")));
-				Assert.True(similarity2.SimilarityParameters.Any(x => x.Key.Equals("normalization") && x.Value.ToString().Equals("h1")));
+				Assert.AreEqual("spl", similarity2.Distribution);
+				Assert.AreEqual("ttf", similarity2.Lambda);
+				Assert.AreEqual("h1", similarity2.Normalization);
 			}
 			this._client.DeleteIndex(i=>i.Index(index));
 		}

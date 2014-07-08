@@ -22,6 +22,9 @@ namespace Elasticsearch.Net.Integration.Yaml.Delete7
 
 				//do indices.create 
 				_body = new {
+					settings= new {
+						number_of_shards= "5"
+					},
 					mappings= new {
 						test= new {
 							_parent= new {

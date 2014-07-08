@@ -16,6 +16,7 @@ namespace Nest
 		public IndexSettings()
 		{
 			this.Analysis = new AnalysisSettings();
+			this.Similarity = new SimilaritySettings();
 			this.Mappings = new List<RootObjectMapping>();
 			this.Warmers = new Dictionary<string, WarmerMapping>();
 			this.Settings = new Dictionary<string, object>();
@@ -59,7 +60,7 @@ namespace Nest
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public Dictionary<string, WarmerMapping> Warmers { get; set; }
 
-		public SimilaritySettings Similarity { get; set; }
+		public SimilaritySettings Similarity { get; internal set; }
 
 	
 	}

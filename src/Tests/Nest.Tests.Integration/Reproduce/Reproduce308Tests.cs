@@ -23,7 +23,6 @@ namespace Nest.Tests.Integration.Reproduce
 		public void ShouldBeAbleToSetIndexToReadonly()
 		{
 			var settings = new IndexSettings();
-			settings.Similarity = new SimilaritySettings();
 			settings.NumberOfReplicas = 1;
 			settings.NumberOfShards = 5;
 			settings.Settings.Add("index.blocks.read_only", "true");
