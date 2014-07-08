@@ -199,7 +199,8 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				new Uri("http://localhost:9202"),
 				new Uri("http://localhost:9201")
 			}, randomizeOnStartup: false, dateTimeProvider: dateTimeProvider);
-			var config = new ConnectionConfiguration(connectionPool);
+			var config = new ConnectionConfiguration(connectionPool)
+				.EnableMetrics();
 			return config;
 		}
 		private static IDateTimeProvider ProvideDateTimeProvider(AutoFake fake)

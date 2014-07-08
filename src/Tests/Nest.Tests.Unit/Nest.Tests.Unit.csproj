@@ -672,14 +672,24 @@
     <None Include="ObjectInitializer\Snapshots\RestoreBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="ObjectInitializer\Suggest\SuggestBody.json" />
+    <None Include="ObjectInitializer\Suggest\SuggestBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="ObjectInitializer\Template\PutTemplateBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="ObjectInitializer\Update\UpdateBody.json" />
-    <None Include="ObjectInitializer\UpdateSettings\UpdateSettingsBody.json" />
-    <None Include="ObjectInitializer\Validate\ValidateQueryBody.json" />
-    <None Include="ObjectInitializer\Warmers\PutWarmerBody.json" />
+    <None Include="ObjectInitializer\Update\UpdateBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\UpdateSettings\UpdateSettingsBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Validate\ValidateQueryBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Warmers\PutWarmerBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="QueryParsers\Filter\GeoBoundingBox\LatLon.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
