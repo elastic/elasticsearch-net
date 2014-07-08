@@ -51,7 +51,7 @@ namespace Nest
 					dict.Add(kv.Key, bucket);
 				}
 			}
-			return new { suggest = dict };
+			return dict;
 		}
 	}
 
