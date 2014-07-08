@@ -32,6 +32,11 @@ namespace Nest.Tests.Unit.ObjectInitializer.Index
 			this._status = response.ConnectionStatus;
 		}
 
+		public void SettingsTest()
+		{
+
+		}
+
 		[Test]
 		public void Url()
 		{

@@ -178,12 +178,9 @@ namespace Elasticsearch.Net.Connection
 				myReq.Accept = requestSpecificConfig.ContentType;
 				myReq.ContentType = requestSpecificConfig.ContentType;
 			}
-			var timeout = this.ConnectionSettings.Timeout;
-			if (requestSpecificConfig != null && requestSpecificConfig.RequestTimeout.HasValue)
-				timeout = requestSpecificConfig.RequestTimeout.Value;
-
-			myReq.Timeout = timeout; // 1 minute timeout.
-			myReq.ReadWriteTimeout = timeout; // 1 minute timeout.
+			var timeout = GetRequestTimeout(requestSpecificConfig);
+			myReq.Timeout = timeout;
+			myReq.ReadWriteTimeout = timeout;
 			myReq.Method = method;
 
 			//WebRequest won't send Content-Length: 0 for empty bodies
@@ -251,7 +248,7 @@ namespace Elasticsearch.Net.Connection
 			  || this._resourceLock == null)
 				return this.CreateIterateTask(request, data, requestSpecificConfig, tcs);
 
-			var timeout = this.ConnectionSettings.Timeout;
+			var timeout = GetRequestTimeout(requestSpecificConfig);
 			var path = request.RequestUri.ToString();
 			var method = request.Method;
 			if (!this._resourceLock.WaitOne(timeout))
@@ -280,9 +277,8 @@ namespace Elasticsearch.Net.Connection
 
 		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
-			var timeout = this.ConnectionSettings.Timeout;
-			if (requestSpecificConfig != null && requestSpecificConfig.ConnectTimeout.HasValue)
-				timeout = requestSpecificConfig.ConnectTimeout.Value;
+			var timeout = GetRequestTimeout(requestSpecificConfig);
+
 			if (data != null)
 			{
 				var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, null);
@@ -320,7 +316,7 @@ namespace Elasticsearch.Net.Connection
 			tcs.TrySetResult(cs);
 		}
 
-		public void Iterate(HttpWebRequest request, byte[] data, IEnumerable<Task> asyncIterator, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs)
+		private void Iterate(HttpWebRequest request, byte[] data, IEnumerable<Task> asyncIterator, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs)
 		{
 			var enumerator = asyncIterator.GetEnumerator();
 			Action<Task> recursiveBody = null;
@@ -353,7 +349,12 @@ namespace Elasticsearch.Net.Connection
 			recursiveBody(null);
 		}
 
+		private int GetRequestTimeout(IRequestConfiguration requestConfiguration)
+		{
+			if (requestConfiguration != null && requestConfiguration.ConnectTimeout.HasValue)
+				return requestConfiguration.RequestTimeout.Value;
 
-
+			return this.ConnectionSettings.Timeout;
+		}
 	}
 }
