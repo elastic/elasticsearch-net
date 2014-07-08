@@ -57,7 +57,7 @@ namespace Nest.Tests.Integration.Search
 			Assert.AreEqual(re.Id, name);
 			Assert.Greater(re.Version, 0);
 			re = c.UnregisterPercolator<ElasticsearchProject>(name);
-			Assert.False(re.IsValid);
+			Assert.True(re.IsValid);
 			Assert.False(re.Found);
 		}
 

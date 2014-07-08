@@ -7302,9 +7302,13 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new DeleteRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new DeleteRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
 			}
 				
 
@@ -7340,9 +7344,13 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new DeleteRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new DeleteRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
 			}
 				
 
@@ -7380,9 +7388,13 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new DeleteRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new DeleteRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
 			}
 				
 
@@ -7420,9 +7432,13 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new DeleteRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new DeleteRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
 			}
 				
 
