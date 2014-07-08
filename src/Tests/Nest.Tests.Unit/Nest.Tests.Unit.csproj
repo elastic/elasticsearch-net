@@ -193,6 +193,9 @@
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\ConnectionSettingsTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="ObjectInitializer\Aliases\GetAliasMoreUrlTests.cs" />
+    <Compile Include="ObjectInitializer\Aliases\GetAliasesMoreUrlTests.cs" />
+    <Compile Include="ObjectInitializer\Aliases\GetAliasRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
     <Compile Include="ObjectInitializer\Status\StatusRequestTests.cs" />
