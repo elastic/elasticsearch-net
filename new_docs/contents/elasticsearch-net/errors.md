@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Quick Start
+title: Errors
 menusection: 
 menuitem: esnet-errors
 ---
