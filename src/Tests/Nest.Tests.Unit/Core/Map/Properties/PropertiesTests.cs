@@ -24,6 +24,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.IndexOptions(IndexOptions.Positions)
 						.NullValue("my_special_null_value")
 						.OmitNorms()
+						.Norms(new NormsMapping { Enabled = true, Loading = NormsLoading.Eager})
 						.PositionOffsetGap(1)
 						.SearchAnalyzer("standard")
 						.Store()

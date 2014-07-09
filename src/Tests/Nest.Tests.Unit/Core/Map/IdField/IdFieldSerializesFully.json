@@ -3,7 +3,7 @@
     "_id": {
       "path": "myOtherId",
       "index": "not_analyzed",
-      "store": "no"
+      "store": false
     }
   }
 }

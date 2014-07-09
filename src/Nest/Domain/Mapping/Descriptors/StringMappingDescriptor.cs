@@ -83,6 +83,16 @@ namespace Nest
 			this._Mapping.SearchAnalyzer = searchAnalyzer;
 			return this;
 		}
+		public StringMappingDescriptor<T> Norms(NormsMapping normsMapping)
+		{
+			this._Mapping.Norms = normsMapping;
+			return this;
+		}
+		public StringMappingDescriptor<T> IgnoreAbove(string ignoreAbove)
+		{
+			this._Mapping.IgnoreAbove = ignoreAbove;
+			return this;
+		}
 		public StringMappingDescriptor<T> DocValues(bool docValues = true)
 		{
 			this._Mapping.DocValues = docValues;

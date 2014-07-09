@@ -4,7 +4,7 @@
       "pingIP": {
         "index_name": "ip",
         "type": "ip",
-        "store": "yes",
+        "store": true,
         "index": "no",
         "precision_step": 4,
         "boost": 0.7,
