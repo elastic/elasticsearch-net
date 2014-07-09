@@ -125,6 +125,12 @@ namespace Nest
 			return this;
 		}
 
+		public virtual SortFieldDescriptor<T> Order(SortOrder order)
+		{
+			Self.Order = order;
+			return this;
+		}
+
         public virtual SortFieldDescriptor<T> NestedMin()
         {
             Self.Mode = ScoreMode.Min;
@@ -167,15 +173,6 @@ namespace Nest
 		public SortFieldDescriptor<T> NestedPath(Expression<Func<T, object>> objectPath)
 		{
 			Self.NestedPath = objectPath;
-			return this;
-		}
-
-		/// <summary>
-		/// Pass true to sort ascending false to sort descending
-		/// </summary>
-		public virtual SortFieldDescriptor<T> ToggleSort(bool ascending)
-		{
-			Self.Order = ascending ? SortOrder.Descending : SortOrder.Ascending;
 			return this;
 		}
 	}

@@ -111,12 +111,10 @@ namespace Nest
 			Self.Order = SortOrder.Descending;
 			return this;
 		}
-		/// <summary>
-		/// Pass true to sort ascending false to sort descending
-		/// </summary>
-		public SortGeoDistanceDescriptor<T> ToggleSort(bool ascending)
+
+		public SortGeoDistanceDescriptor<T> Order(SortOrder order)
 		{
-			Self.Order = ascending ? SortOrder.Ascending : SortOrder.Descending;
+			Self.Order = order;
 			return this;
 		}
 
