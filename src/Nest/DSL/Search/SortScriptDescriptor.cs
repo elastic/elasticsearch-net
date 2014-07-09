@@ -93,12 +93,9 @@ namespace Nest.DSL.Descriptors
 			return this;
 		}
 
-		/// <summary>
-		/// Pass true to sort ascending false to sort descending
-		/// </summary>
-		public SortScriptDescriptor<T> ToggleSort(bool ascending)
+		public SortScriptDescriptor<T> Order(SortOrder order)
 		{
-			Self.Order = ascending ? SortOrder.Ascending : SortOrder.Descending;
+			Self.Order = order;
 			return this;
 		}
 	}
