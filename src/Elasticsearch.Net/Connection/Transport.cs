@@ -305,7 +305,7 @@ namespace Elasticsearch.Net.Connection
 				{
 					var error = ThrowOrGetErrorFromStreamResponse(requestState, streamResponse);
 
-					var typedResponse = this.StreamToTypedResponse<T>(streamResponse, requestState.DeserializationState);
+					var typedResponse = this.StreamToTypedResponse<T>(streamResponse, requestState);
 					this.SetErrorDiagnosticsAndPatchSuccess(requestState, error, typedResponse, streamResponse);
 					aliveResponse = typedResponse.SuccessOrKnownError;
 					return typedResponse;
@@ -438,7 +438,7 @@ namespace Elasticsearch.Net.Connection
 						rq.Finish(t.Result.Success, t.Result.HttpStatusCode);
 						rq.Dispose();
 						var error = ThrowOrGetErrorFromStreamResponse(requestState, t.Result);
-						return this.StreamToTypedResponseAsync<T>(t.Result, requestState.DeserializationState)
+						return this.StreamToTypedResponseAsync<T>(t.Result, requestState)
 							.ContinueWith(tt =>
 							{
 
@@ -524,9 +524,7 @@ namespace Elasticsearch.Net.Connection
 			TransportRequestState<T> requestState,
 			ElasticsearchResponse<Stream> streamResponse)
 		{
-			if ((streamResponse.Success || requestState.RequestConfiguration != null) &&
-				(streamResponse.Success || requestState.RequestConfiguration == null ||
-				 requestState.RequestConfiguration.AllowedStatusCodes.Any(i => i == streamResponse.HttpStatusCode)))
+			if (IsValidResponse(requestState, streamResponse))
 				return null;
 
 			ElasticsearchServerError error = null;
@@ -565,6 +563,13 @@ namespace Elasticsearch.Net.Connection
 			return error;
 		}
 
+		private static bool IsValidResponse(ITransportRequestState requestState, IElasticsearchResponse streamResponse)
+		{
+			return (streamResponse.Success || requestState.RequestConfiguration != null) &&
+			       (streamResponse.Success || requestState.RequestConfiguration == null ||
+			        requestState.RequestConfiguration.AllowedStatusCodes.Any(i => i == streamResponse.HttpStatusCode));
+		}
+
 		private bool TypeOfResponseCopiesDirectly<T>()
 		{
 			var type = typeof(T);
@@ -573,7 +578,7 @@ namespace Elasticsearch.Net.Connection
 
 		private ElasticsearchResponse<T> StreamToTypedResponse<T>(
 			ElasticsearchResponse<Stream> streamResponse,
-			Func<IElasticsearchResponse, Stream, object> deserializationState
+			ITransportRequestState requestState
 			)
 		{
 			//if the user explicitly wants a stream returned the undisposed stream
@@ -589,7 +594,7 @@ namespace Elasticsearch.Net.Connection
 
 				var type = typeof(T);
 				if (!(this.Settings.KeepRawResponse || this.TypeOfResponseCopiesDirectly<T>()))
-					return this._deserializeToResponse(cs, streamResponse.Response, deserializationState);
+					return this._deserializeToResponse(cs, streamResponse.Response, requestState);
 
 
 				if (streamResponse.Response != null)
@@ -607,11 +612,14 @@ namespace Elasticsearch.Net.Connection
 					this.SetByteResult(cs as ElasticsearchResponse<byte[]>, bytes);
 					return cs;
 				}
-				return this._deserializeToResponse(cs, memoryStream, deserializationState);
+				return this._deserializeToResponse(cs, memoryStream, requestState);
 			}
 		}
 
-		private Task<ElasticsearchResponse<T>> StreamToTypedResponseAsync<T>(ElasticsearchResponse<Stream> streamResponse, object deserializationState)
+		private Task<ElasticsearchResponse<T>> StreamToTypedResponseAsync<T>(
+			ElasticsearchResponse<Stream> streamResponse, 
+			ITransportRequestState requestState
+			)
 		{
 			var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
 
@@ -633,7 +641,7 @@ namespace Elasticsearch.Net.Connection
 			}
 
 			if (!(this.Settings.KeepRawResponse || this.TypeOfResponseCopiesDirectly<T>()))
-				return _deserializeAsyncToResponse(streamResponse.Response, deserializationState, cs);
+				return _deserializeAsyncToResponse(streamResponse.Response, requestState, cs);
 
 			var memoryStream = new MemoryStream();
 			return this.Iterate(this.ReadStreamAsync(streamResponse.Response, memoryStream), memoryStream)
@@ -658,7 +666,7 @@ namespace Elasticsearch.Net.Connection
 						return tcs.Task;
 					}
 
-					return _deserializeAsyncToResponse(readStream, deserializationState, cs);
+					return _deserializeAsyncToResponse(readStream, requestState, cs);
 				})
 				.Unwrap();
 
@@ -667,14 +675,13 @@ namespace Elasticsearch.Net.Connection
 		private ElasticsearchResponse<T> _deserializeToResponse<T>(
 			ElasticsearchResponse<T> typedResponse,
 			Stream responseStream,
-			Func<IElasticsearchResponse, Stream, object> deserializationState)
+			ITransportRequestState requestState
+			)
 		{
-			if (responseStream == null
-				|| (!typedResponse.HttpStatusCode.HasValue)
-				|| ((typedResponse.HttpStatusCode.Value < 200 || typedResponse.HttpStatusCode >= 300) && typedResponse.HttpStatusCode != 404)
-				)
+			if (!IsValidResponse(requestState, typedResponse))
 				return typedResponse;
 
+			var deserializationState = requestState.ResponseCreationOverride;
 			var customConverter = deserializationState as Func<IElasticsearchResponse, Stream, T>;
 			if (customConverter != null)
 			{
@@ -690,33 +697,35 @@ namespace Elasticsearch.Net.Connection
 			return typedResponse;
 		}
 
-		private Task<ElasticsearchResponse<T>> _deserializeAsyncToResponse<T>(Stream response, object deserializationState, ElasticsearchResponse<T> cs)
+		private Task<ElasticsearchResponse<T>> _deserializeAsyncToResponse<T>(
+			Stream response, 
+			ITransportRequestState requestState, 
+			ElasticsearchResponse<T> typedResponse
+			)
 		{
 			var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
-			if (response == null
-				|| (!cs.HttpStatusCode.HasValue)
-				|| ((cs.HttpStatusCode.Value < 200 || cs.HttpStatusCode >= 300) && cs.HttpStatusCode != 404)
-				)
+			if (!IsValidResponse(requestState, typedResponse))
 			{
-				tcs.SetResult(cs);
+				tcs.SetResult(typedResponse);
 				return tcs.Task;
 			}
-			var customConverter = deserializationState as Func<IElasticsearchResponse, Stream, T>;
+			var responseInstantiater = requestState.ResponseCreationOverride;
+			var customConverter = responseInstantiater as Func<IElasticsearchResponse, Stream, T>;
 			if (customConverter != null)
 			{
 				using (response)
 				{
-					var t = customConverter(cs, response);
-					cs.Response = t;
-					tcs.SetResult(cs);
+					var t = customConverter(typedResponse, response);
+					typedResponse.Response = t;
+					tcs.SetResult(typedResponse);
 					return tcs.Task;
 				}
 			}
 			return this.Serializer.DeserializeAsync<T>(response)
 				.ContinueWith(t =>
 				{
-					cs.Response = t.Result;
-					return cs;
+					typedResponse.Response = t.Result;
+					return typedResponse;
 				});
 		}
 

@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.Connection.RequestState
 
 		public int? Seed { get; set; }
 
-		public Func<IElasticsearchResponse, Stream, object> DeserializationState { get; private set; }
+		public Func<IElasticsearchResponse, Stream, object> ResponseCreationOverride { get; set; }
 
 		public bool SniffedOnConnectionFailure { get; set; }
 
@@ -88,7 +88,7 @@ namespace Elasticsearch.Net.Connection.RequestState
 			{
 				if (this.RequestParameters.QueryString != null)
 					this.Path += RequestParameters.QueryString.ToNameValueCollection(ClientSettings.Serializer).ToQueryString();
-				this.DeserializationState = this.RequestParameters.DeserializationState;
+				this.ResponseCreationOverride = this.RequestParameters.DeserializationState;
 			}
 		}
 

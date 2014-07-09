@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Elasticsearch.Net.Connection.Configuration;
 
 namespace Elasticsearch.Net.Connection.RequestState
@@ -14,5 +15,6 @@ namespace Elasticsearch.Net.Connection.RequestState
 		int? Seed { get; set; }
 		Uri CurrentNode { get; set; }
 		List<RequestMetrics> RequestMetrics { get; set; }
+		Func<IElasticsearchResponse, Stream, object> ResponseCreationOverride { get; set; }
 	}
 }
