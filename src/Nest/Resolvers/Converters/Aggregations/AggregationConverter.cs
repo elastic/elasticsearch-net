@@ -182,7 +182,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 
 			if (property == "key_as_string")
 			{
-				// Skip key_as_string property for backwards compatibility (< ES 1.2)
+				// Skip key_as_string property
 				reader.Read();
 				reader.Read();
 			}
