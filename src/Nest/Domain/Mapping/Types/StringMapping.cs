@@ -56,7 +56,7 @@ namespace Nest
 		public string IndexAnalyzer { get; set; }
 
 		[JsonProperty("ignore_above")]
-		public string IgnoreAbove { get; set; }
+		public int? IgnoreAbove { get; set; }
 
 		[JsonProperty("search_analyzer")]
 		public string SearchAnalyzer { get; set; }

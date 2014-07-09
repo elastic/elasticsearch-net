@@ -88,7 +88,7 @@ namespace Nest
 			this._Mapping.Norms = normsMapping;
 			return this;
 		}
-		public StringMappingDescriptor<T> IgnoreAbove(string ignoreAbove)
+		public StringMappingDescriptor<T> IgnoreAbove(int? ignoreAbove)
 		{
 			this._Mapping.IgnoreAbove = ignoreAbove;
 			return this;
