@@ -12,6 +12,7 @@ namespace Nest.Tests.Integration.Core.ClearScroll
 	{
 		[Test]
 		[SkipVersion("0 - 1.0.2", "Scroll ids were not accepted in the request body until 1.0.3 (https://github.com/elasticsearch/elasticsearch/issues/5726)")]
+		[SkipVersion("1.1.0", "Scroll ids in request body broken in 1.1.0 and fixed in 1.1.1")]
 		public void ClearScroll()
 		{
 			var searchResults = this._client.Search<ElasticsearchProject>(s => s.Scroll("1m").SearchType(SearchType.Scan));
