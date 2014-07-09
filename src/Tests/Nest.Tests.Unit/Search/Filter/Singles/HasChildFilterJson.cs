@@ -12,7 +12,6 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Filter(ff=>ff
 					.HasChild<Person>(d=>d
-						.Scope("my_scope")
 						.Query(q=>q.Term(p=>p.FirstName, "value"))
 					)
 				);
@@ -22,7 +21,6 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				filter : {
 					""has_child"": {
 					  ""type"": ""person"",
-					  ""_scope"": ""my_scope"",
 					  ""query"": {
 						""term"": {
 						  ""firstName"": {

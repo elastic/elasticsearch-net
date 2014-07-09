@@ -12,7 +12,6 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<Person>().From(0).Size(10)
 				.Filter(ff=>ff
 					.HasParent<ElasticsearchProject>(d=>d
-						.Scope("my_scope")
 						.Query(q=>q.Term(p=>p.Country, "value"))
 					)
 				);
@@ -22,7 +21,6 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				filter : {
 					""has_parent"": {
 					  ""type"": ""elasticsearchprojects"",
-					  ""_scope"": ""my_scope"",
 					  ""query"": {
 						""term"": {
 						  ""country"": {

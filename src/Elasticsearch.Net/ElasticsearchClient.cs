@@ -29,7 +29,6 @@ namespace Elasticsearch.Net
 		/// <param name="connection">Provide an alternative connection handler</param>
 		/// <param name="transport">Provide a custom transport implementation that coordinates between IConnectionPool, IConnection and ISerializer</param>
 		/// <param name="serializer">Provide a custom serializer</param>
-		/// <param name="stringifier">This interface is responsible for translating non string objects in the querystring to strings</param>
 		public ElasticsearchClient(
 			IConnectionConfigurationValues settings = null, 
 			IConnection connection = null, 
