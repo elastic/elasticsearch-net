@@ -40,7 +40,8 @@ namespace Nest
 		public ElasticClient(
 			IConnectionSettingsValues settings = null, 
 			IConnection connection = null, 
-			INestSerializer serializer = null)
+			INestSerializer serializer = null,
+			ITransport transport = null)
 		{
 			this._connectionSettings = settings ?? new ConnectionSettings();
 			this.Connection = connection ?? new HttpConnection(this._connectionSettings);
@@ -49,7 +50,7 @@ namespace Nest
 			this.Raw = new ElasticsearchClient(
 				this._connectionSettings, 
 				this.Connection, 
-				null, //default transport
+				transport, //default transport
 				this.Serializer
 			);
 			this.RawDispatch = new RawDispatch(this.Raw);
