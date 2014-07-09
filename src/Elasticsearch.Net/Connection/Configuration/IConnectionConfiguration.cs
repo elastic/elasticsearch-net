@@ -13,6 +13,12 @@ namespace Elasticsearch.Net.Connection
 		where T : IConnectionConfiguration<T>
 	{
 
+		/// <summary>
+		/// Enable compressed responses from elasticsearch (NOTE that that nodes need to be configured to allow this)
+		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html
+		/// </summary>
+		T EnableCompressedResponses(bool enabled = true);
+		
 	
 		/// <summary>
 		/// Enable Trace signals to the IConnection that it should put debug information on the Trace.

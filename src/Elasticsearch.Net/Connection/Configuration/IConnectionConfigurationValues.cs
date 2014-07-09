@@ -16,6 +16,7 @@ namespace Elasticsearch.Net.Connection
 		int? MaxDeadTimeout { get; }
 		int? MaxRetries { get; }
 		bool DisablePings { get; }
+		bool EnableCompressedResponses { get; }
 		
 		string ProxyAddress { get; }
 		string ProxyUsername { get; }

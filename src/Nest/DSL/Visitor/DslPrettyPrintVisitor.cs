@@ -25,7 +25,7 @@ namespace Nest.DSL.Visitor
 		public DslPrettyPrintVisitor(IConnectionSettingsValues settings)
 		{
 			this._sb = new StringBuilder();
-			this._infer = new ElasticInferrer(settings);
+			this._infer = settings.Inferrer;
 		}
 
 		public virtual int Depth { get; set; }
