@@ -54,7 +54,7 @@ namespace Nest
 				this.Serializer
 			);
 			this.RawDispatch = new RawDispatch(this.Raw);
-			this.Infer = new ElasticInferrer(this._connectionSettings);
+			this.Infer = this._connectionSettings.Inferrer;
 
 		}
 
