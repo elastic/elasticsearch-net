@@ -311,6 +311,10 @@ namespace Elasticsearch.Net.Connection
 					return typedResponse;
 				}
 			}
+			catch (ElasticsearchServerException)
+			{
+				throw;
+			}
 			catch (Exception e)
 			{
 				if (maxRetries == 0 && retried == 0)
