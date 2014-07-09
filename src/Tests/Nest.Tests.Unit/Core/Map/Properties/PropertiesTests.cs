@@ -31,6 +31,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.TermVector(TermVectorOption.WithPositionsOffsets)
 						.Boost(1.1)
 						.CopyTo(p => p.Content, p => p.Country)
+						.IgnoreAbove(20)
 					)
 				)
 			);
