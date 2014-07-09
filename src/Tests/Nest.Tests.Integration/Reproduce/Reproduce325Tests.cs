@@ -44,6 +44,7 @@ namespace Nest.Tests.Integration.Reproduce
 				})
 				.AddMapping<TechnicalProduct>(m => MapTechnicalProduct(m, indexName)));
 
+			var index = this._client.GetIndexSettings(i=>i.Index(indexName));
 		}
 
 

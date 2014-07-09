@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
@@ -170,9 +171,13 @@ namespace Elasticsearch.Net.Connection
 			//var url = this._CreateUriString(path);
 
 			var myReq = (HttpWebRequest)WebRequest.Create(uri);
-
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
+			if (this.ConnectionSettings.EnableCompressedResponses)
+			{
+				myReq.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+				myReq.Headers.Add("Accept-Encoding", "gzip,deflate");
+			}
 			if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.ContentType))
 			{
 				myReq.Accept = requestSpecificConfig.ContentType;
