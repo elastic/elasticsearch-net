@@ -14,12 +14,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				f=>f.Nested(nq=>nq
 					.Path(p=>p.NestedFollowers)
 					.Query(qq=>Query1)
-					.Scope("scopey")
 					.Score(NestedScore.Max)
 					)
 				);
 			q.Score.Should().Be(NestedScore.Max);
-			q.Scope.Should().Be("scopey");
 			q.Path.Should().Be("nestedFollowers");
 			AssertIsTermQuery(q.Query, Query1);
 		}

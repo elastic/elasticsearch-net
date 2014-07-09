@@ -15,7 +15,6 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Query(q => q
 					.HasParent<Person>(fz => fz
 						.Query(qq=>qq.Term(f=>f.FirstName, "john"))
-						.Scope("my_scope")
 						.Score(ParentScoreType.Score)
                    )
             );
@@ -23,7 +22,6 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, query : 
 			{ has_parent: { 
 				type: ""person"",
-				_scope: ""my_scope"",
 				score_type: ""score"",
 				query: {
 					term: {

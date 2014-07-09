@@ -851,7 +851,6 @@ namespace Nest
 			bucket.FacetFilter = f.FacetFilter;
 			f.FacetFilter = null;
 			bucket.Nested = f.Nested;
-			bucket.Scope = f.Scope;
 			fillBucket(bucket, descriptor);
 			Self.Facets.Add(key, bucket);
 
