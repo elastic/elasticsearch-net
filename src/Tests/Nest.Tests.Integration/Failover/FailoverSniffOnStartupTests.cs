@@ -15,7 +15,7 @@ namespace Nest.Tests.Integration.Failover
 	public class FailoverSniffOnStartupTests
 	{
 		[Test]
-		public void FailoverShouldOnlyPingDeadNodes()
+		public void SniffOnStartShouldOnlyHit9200_WithoutPing()
 		{
 			var seeds = new[]
 			{
@@ -48,7 +48,7 @@ namespace Nest.Tests.Integration.Failover
 		}
 
 		[Test]
-		public async void FailoverShouldOnlyPingDeadNodes_Async()
+		public async void SniffOnStartShouldOnlyHit9200_WithoutPing_Async()
 		{
 			var seeds = new[]
 			{
