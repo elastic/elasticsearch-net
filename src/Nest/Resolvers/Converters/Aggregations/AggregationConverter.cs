@@ -179,6 +179,14 @@ namespace Nest.Resolvers.Converters.Aggregations
 
 			var keyItem = new KeyItem();
 			keyItem.Key = key.ToString();
+
+			if (property == "key_as_string")
+			{
+				// Skip key_as_string property for backwards compatibility (< ES 1.2)
+				reader.Read();
+				reader.Read();
+			}
+
 			reader.Read(); //doc_count;
 			var docCount = reader.Value as long?;
 			keyItem.DocCount = docCount.GetValueOrDefault(0);
