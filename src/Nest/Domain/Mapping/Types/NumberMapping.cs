@@ -49,5 +49,8 @@ namespace Nest
 		[JsonProperty("ignore_malformed")]
 		public bool? IgnoreMalformed { get; set; }
 
+		[JsonProperty("coerce")]
+		public bool? Coerce { get; set; }
+
 	}
 }

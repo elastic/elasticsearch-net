@@ -76,6 +76,11 @@ namespace Nest
 			this._Mapping.IgnoreMalformed = ignoreMalformed;
 			return this;
 		}
+		public NumberMappingDescriptor<T> Coerce(bool coerce = true)
+		{
+			this._Mapping.Coerce = coerce;
+			return this;
+		}
 
 	}
 }
