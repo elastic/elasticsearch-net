@@ -30,7 +30,7 @@ namespace Nest.Domain
 		private ElasticInferrer Infer { get; set; }
 		public FieldSelection(IConnectionSettingsValues settings, IDictionary<string, object> valuesDictionary = null)
 		{
-			this.Infer = new ElasticInferrer(settings);
+			this.Infer = settings.Inferrer;
 			((IFieldSelection<T>)this).FieldValuesDictionary = valuesDictionary;
 		}
 
