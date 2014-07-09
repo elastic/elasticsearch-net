@@ -8,12 +8,12 @@
           "fields": {
             "{name}": {
               "type": "{dynamic_type}",
-              "store": "no",
+              "store": false,
               "index": "analyzed"
             },
             "org": {
               "type": "{dynamic_type}",
-              "store": "yes",
+              "store": true,
               "index": "not_analyzed"
             },
             "suggest": {
