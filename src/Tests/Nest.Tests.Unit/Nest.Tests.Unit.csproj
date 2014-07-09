@@ -122,7 +122,7 @@
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUrlTests.cs" />
     <Compile Include="Core\Indices\Analysis\Analyzers\AnalyzerTests.cs" />
-    <Compile Include="Core\Map\CustomMapping\DynamicTemplatesTests.cs" />
+    <Compile Include="Core\Map\CustomMapping\ImagePluginMappingTests.cs" />
     <Compile Include="Core\Map\MappingBehaviourTests.cs" />
     <None Include="Cluster\PutSettings\PutSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
