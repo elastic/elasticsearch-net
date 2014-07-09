@@ -39,7 +39,7 @@ namespace Nest.Tests.Integration
 				.ExposeRawResponse();
 		}
 
-		public static readonly ElasticClient Client = new ElasticClient(Settings());
+		public static readonly ElasticClient Client = new ElasticClient(Settings().EnableCompressedResponses());
 		public static readonly ElasticClient ClientNoRawResponse = new ElasticClient(Settings().ExposeRawResponse(false));
 		public static readonly ElasticClient ClientThatTrows = new ElasticClient(Settings().ThrowOnElasticsearchServerExceptions());
 		public static readonly ElasticClient ThriftClient = new ElasticClient(Settings(9500), new ThriftConnection(Settings(9500)));

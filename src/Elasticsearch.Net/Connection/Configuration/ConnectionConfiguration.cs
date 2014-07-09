@@ -106,6 +106,9 @@ namespace Elasticsearch.Net.Connection
 		private TimeSpan? _sniffLifeSpan;
 		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan { get{ return _sniffLifeSpan; } }
 
+		private bool _compressionEnabled;
+		bool IConnectionConfigurationValues.EnableCompressedResponses { get{ return _compressionEnabled; } }
+
 		private bool _traceEnabled;
 		bool IConnectionConfigurationValues.TraceEnabled { get{ return _traceEnabled; } }
 
@@ -157,6 +160,16 @@ namespace Elasticsearch.Net.Connection
 		{
 			this._sniffLifeSpan = sniffTimeSpan;
 			return (T)this;
+		}
+
+		/// <summary>
+		/// Enable compressed responses from elasticsearch (NOTE that that nodes need to be configured to allow this)
+		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html
+		/// </summary>
+		public T EnableCompressedResponses(bool enabled = true)
+		{
+			this._compressionEnabled = enabled;
+			return (T) this;
 		}
 
 		/// <summary>
