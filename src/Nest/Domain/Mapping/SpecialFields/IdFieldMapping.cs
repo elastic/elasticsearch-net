@@ -15,7 +15,7 @@ namespace Nest
 		[JsonProperty("index")]
 		public string Index { get; internal set; }
 
-		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
+		[JsonProperty("store")]
 		public bool? Store { get; internal set; }
 
 		public IdFieldMapping SetPath(string path)

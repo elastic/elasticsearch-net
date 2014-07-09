@@ -26,6 +26,30 @@ namespace Nest
 			return this;
 		}
 
+		public BinaryMappingDescriptor<T> DocValues(bool docValues = true)
+		{
+			this._Mapping.DocValues = docValues;
+			return this;
+		}
+
+		public BinaryMappingDescriptor<T> Store(bool store = true)
+		{
+			this._Mapping.Store = store;
+			return this;
+		}
+
+		public BinaryMappingDescriptor<T> Compress(bool compress = true )
+		{
+			this._Mapping.Compress = compress;
+			return this;
+		}
+
+		public BinaryMappingDescriptor<T> CompressThreshold(string compressThreshold)
+		{
+			this._Mapping.CompressThreshold = compressThreshold;
+			return this;
+		}
+
 		public BinaryMappingDescriptor<T> CopyTo(params string[] fields)
 		{
 			this._Mapping.CopyTo = fields.Select(f => (PropertyPathMarker)f);

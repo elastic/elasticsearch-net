@@ -136,6 +136,8 @@
     <Compile Include="Domain\Analysis\TokenFilter\StemmerOverrideTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\UppercaseTokenFilter.cs" />
     <Compile Include="Domain\Bulk\IBulkOperation.cs" />
+    <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
+    <Compile Include="DSL\GetAliasDescriptor.cs" />
     <Compile Include="DSL\TermVector\IMultiTermVectorDocumentDescriptor.cs" />
     <Compile Include="DSL\MultiGet\MultiGetDoc.cs" />
     <Compile Include="Domain\Connection\ConnectionSettings.cs" />
@@ -192,6 +194,7 @@
     <Compile Include="DSL\_Requests.generated.cs" />
     <Compile Include="ElasticClient-ClusterSettings.cs" />
     <Compile Include="ElasticClient-DeleteIndex.cs" />
+    <Compile Include="Enums\NormsLoading.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="Enums\GeoDistance.cs" />

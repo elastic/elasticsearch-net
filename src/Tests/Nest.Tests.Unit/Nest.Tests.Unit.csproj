@@ -122,6 +122,7 @@
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUrlTests.cs" />
     <Compile Include="Core\Indices\Analysis\Analyzers\AnalyzerTests.cs" />
+    <Compile Include="Core\Map\CustomMapping\ImagePluginMappingTests.cs" />
     <Compile Include="Core\Map\MappingBehaviourTests.cs" />
     <None Include="Cluster\PutSettings\PutSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -148,6 +149,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Indices\Analysis\Analyzers\PatternAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\CustomMapping\RepresentUnknowImageMappingPlugin.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Map\Properties\MultiFieldPropertyWithJustNamePath.json">
@@ -193,6 +197,9 @@
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\ConnectionSettingsTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="ObjectInitializer\Aliases\GetAliasMoreUrlTests.cs" />
+    <Compile Include="ObjectInitializer\Aliases\GetAliasesMoreUrlTests.cs" />
+    <Compile Include="ObjectInitializer\Aliases\GetAliasRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
     <Compile Include="ObjectInitializer\Status\StatusRequestTests.cs" />
@@ -672,14 +679,24 @@
     <None Include="ObjectInitializer\Snapshots\RestoreBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="ObjectInitializer\Suggest\SuggestBody.json" />
+    <None Include="ObjectInitializer\Suggest\SuggestBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="ObjectInitializer\Template\PutTemplateBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="ObjectInitializer\Update\UpdateBody.json" />
-    <None Include="ObjectInitializer\UpdateSettings\UpdateSettingsBody.json" />
-    <None Include="ObjectInitializer\Validate\ValidateQueryBody.json" />
-    <None Include="ObjectInitializer\Warmers\PutWarmerBody.json" />
+    <None Include="ObjectInitializer\Update\UpdateBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\UpdateSettings\UpdateSettingsBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Validate\ValidateQueryBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Warmers\PutWarmerBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="QueryParsers\Filter\GeoBoundingBox\LatLon.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

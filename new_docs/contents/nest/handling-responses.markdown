@@ -1,12 +1,12 @@
 ---
 template: layout.jade
-title: Connecting
+title: Handling Responses
 menusection: concepts
 menuitem: handling-responses
 ---
 
 
-# Handling responses
+# Handling Responses
 
 
 All the return objects from API calls in NEST client implement:

@@ -48,6 +48,49 @@ namespace Nest
 			);
 		}
 
+		/// <inheritdoc />
+		public IGetAliasesResponse GetAlias(Func<GetAliasDescriptor, GetAliasDescriptor> GetAliasDescriptor)
+		{
+			return this.Dispatch<GetAliasDescriptor, GetAliasRequestParameters, GetAliasesResponse>(
+				GetAliasDescriptor,
+				(p, d) => this.RawDispatch.IndicesGetAliasDispatch<GetAliasesResponse>(
+					p.DeserializationState(new GetAliasesConverter(DeserializeGetAliasesResponse))
+				)
+			);
+		}
+
+		/// <inheritdoc />
+		public IGetAliasesResponse GetAlias(IGetAliasRequest GetAliasRequest)
+		{
+			return this.Dispatch<IGetAliasRequest, GetAliasRequestParameters, GetAliasesResponse>(
+				GetAliasRequest,
+				(p, d) => this.RawDispatch.IndicesGetAliasDispatch<GetAliasesResponse>(
+					p.DeserializationState(new GetAliasesConverter(DeserializeGetAliasesResponse))
+				)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IGetAliasesResponse> GetAliasAsync(Func<GetAliasDescriptor, GetAliasDescriptor> GetAliasDescriptor)
+		{
+			return this.DispatchAsync<GetAliasDescriptor, GetAliasRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
+				GetAliasDescriptor,
+				(p, d) => this.RawDispatch.IndicesGetAliasDispatchAsync<GetAliasesResponse>(
+					p.DeserializationState(new GetAliasesConverter(DeserializeGetAliasesResponse))
+				)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest GetAliasRequest)
+		{
+			return this.DispatchAsync<IGetAliasRequest, GetAliasRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
+				GetAliasRequest,
+				(p, d) => this.RawDispatch.IndicesGetAliasDispatchAsync<GetAliasesResponse>(
+					p.DeserializationState(new GetAliasesConverter(DeserializeGetAliasesResponse))
+				)
+			);
+		}
 
 
 		/// <inheritdoc />
@@ -55,7 +98,7 @@ namespace Nest
 		{
 			return this.Dispatch<GetAliasesDescriptor, GetAliasesRequestParameters, GetAliasesResponse>(
 				getAliasesDescriptor,
-				(p, d) => this.RawDispatch.IndicesGetAliasDispatch<GetAliasesResponse>(
+				(p, d) => this.RawDispatch.IndicesGetAliasesDispatch<GetAliasesResponse>(
 					p.DeserializationState(new GetAliasesConverter(DeserializeGetAliasesResponse))
 				)
 			);
@@ -66,7 +109,7 @@ namespace Nest
 		{
 			return this.Dispatch<IGetAliasesRequest, GetAliasesRequestParameters, GetAliasesResponse>(
 				getAliasesRequest,
-				(p, d) => this.RawDispatch.IndicesGetAliasDispatch<GetAliasesResponse>(
+				(p, d) => this.RawDispatch.IndicesGetAliasesDispatch<GetAliasesResponse>(
 					p.DeserializationState(new GetAliasesConverter(DeserializeGetAliasesResponse))
 				)
 			);
@@ -77,29 +120,29 @@ namespace Nest
 		{
 			return this.DispatchAsync<GetAliasesDescriptor, GetAliasesRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
 				getAliasesDescriptor,
-				(p, d) => this.RawDispatch.IndicesGetAliasDispatchAsync<GetAliasesResponse>(
+				(p, d) => this.RawDispatch.IndicesGetAliasesDispatchAsync<GetAliasesResponse>(
 					p.DeserializationState(new GetAliasesConverter(DeserializeGetAliasesResponse))
 				)
 			);
 		}
-		
+
 		/// <inheritdoc />
 		public Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest)
 		{
 			return this.DispatchAsync<IGetAliasesRequest, GetAliasesRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
 				getAliasesRequest,
-				(p, d) => this.RawDispatch.IndicesGetAliasDispatchAsync<GetAliasesResponse>(
+				(p, d) => this.RawDispatch.IndicesGetAliasesDispatchAsync<GetAliasesResponse>(
 					p.DeserializationState(new GetAliasesConverter(DeserializeGetAliasesResponse))
 				)
 			);
 		}
-		
+
 
 		/// <inheritdoc />
 		private GetAliasesResponse DeserializeGetAliasesResponse(IElasticsearchResponse connectionStatus, Stream stream)
 		{
 			if (!connectionStatus.Success)
-				return new GetAliasesResponse() { IsValid = false};
+				return new GetAliasesResponse() { IsValid = false };
 
 			var dict = this.Serializer.Deserialize<CrazyAliasesResponse>(stream);
 

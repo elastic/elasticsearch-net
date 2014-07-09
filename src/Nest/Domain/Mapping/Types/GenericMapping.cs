@@ -28,7 +28,7 @@ namespace Nest
 		[JsonProperty("index_name")]
 		public string IndexName { get; set; }
 
-		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
+		[JsonProperty("store")]
 		public bool? Store { get; set; }
 
 		[JsonProperty("index")]

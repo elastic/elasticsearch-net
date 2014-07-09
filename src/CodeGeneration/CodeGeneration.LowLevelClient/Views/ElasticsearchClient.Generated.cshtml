@@ -79,10 +79,20 @@ namespace Elasticsearch.Net
 				<text>
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new @(method.QueryStringParamName)();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { @Raw(string.Join(", ", config)) };
 			requestParams = requestParameters(passIn);
-			</text>
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { @Raw(string.Join(", ", config)) };
+			else {
+				@if (url.StartsWith("_cat"))
+				{
+					<text>requestParams.RequestConfiguration.ContentType = "text/plain";</text>
+				}
+				@if (method.Allow404)
+				{
+					<text>requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };</text>
+				}
+			}
+				</text>
 			}
 			else
 			{

@@ -86,8 +86,10 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/mydefaultindex/doc/1", c => c.Get<Doc>(1));
 			Do("GET", "/mycustomindex/mycustomtype/1", c => c.Get<Doc>(1, index: "mycustomindex", type: "mycustomtype"));
 			Do("GET", "/mycustomindex/mycustomtype/1", c => c.Get<Doc>(g => g.Id(1).Index("mycustomindex").Type("mycustomtype")));
-			Do("GET", "/mydefaultindex/_alias/*", c => c.GetAliases(a => a.Index<Doc>()));
-			Do("GET", "/_alias/prefix-*", c => c.GetAliases(a => a.Alias("prefix-*")));
+			Do("GET", "/mydefaultindex/_alias/*", c => c.GetAlias(a => a.Index<Doc>()));
+			Do("GET", "/_alias/prefix-*", c => c.GetAlias(a => a.Alias("prefix-*")));
+			Do("GET", "/mydefaultindex/_aliases/*", c => c.GetAliases(a => a.Index<Doc>()));
+			Do("GET", "/_aliases/prefix-*", c => c.GetAliases(a => a.Alias("prefix-*")));
 			Do("GET", "/mydefaultindex/_settings", c => c.GetIndexSettings(i => i.Index<Doc>()));
 			Do("GET", "/mydefaultindex/_mapping/doc", c => c.GetMapping<Doc>());
 			Do("GET", "/mycustomindex/_mapping/doc", c => c.GetMapping<Doc>(m => m.Index("mycustomindex")));

@@ -27,7 +27,7 @@ namespace Nest
 		[JsonProperty("analyzer")]
 		public string Analyzer { get; set; }
 
-		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
+		[JsonProperty("store")]
 		public bool? Store { get; set; }
 
 		[JsonProperty("index"), JsonConverter(typeof(StringEnumConverter))]
@@ -42,6 +42,9 @@ namespace Nest
 		[JsonProperty("null_value")]
 		public string NullValue { get; set; }
 
+		[JsonProperty("norms")]
+		public NormsMapping Norms { get; set; }
+
 		[JsonProperty("omit_norms")]
 		public bool? OmitNorms { get; set; }
 
@@ -50,6 +53,9 @@ namespace Nest
 
 		[JsonProperty("index_analyzer")]
 		public string IndexAnalyzer { get; set; }
+
+		[JsonProperty("ignore_above")]
+		public int? IgnoreAbove { get; set; }
 
 		[JsonProperty("search_analyzer")]
 		public string SearchAnalyzer { get; set; }

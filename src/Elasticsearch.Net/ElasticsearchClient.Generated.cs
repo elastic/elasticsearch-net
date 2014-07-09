@@ -1042,10 +1042,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAliasesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -1075,10 +1078,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAliasesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -1110,10 +1116,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAliasesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -1145,10 +1154,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAliasesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -1180,10 +1192,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAliasesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -1215,10 +1230,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAliasesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -1252,10 +1270,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAliasesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -1289,10 +1310,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAliasesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -1322,10 +1346,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAllocationRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -1355,10 +1382,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAllocationRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -1390,10 +1420,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAllocationRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -1425,10 +1458,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAllocationRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -1460,10 +1496,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAllocationRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -1495,10 +1534,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAllocationRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -1532,10 +1574,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAllocationRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -1569,10 +1614,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatAllocationRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -1602,10 +1650,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatCountRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -1635,10 +1686,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatCountRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -1670,10 +1724,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatCountRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -1705,10 +1762,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatCountRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -1740,10 +1800,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatCountRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -1775,10 +1838,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatCountRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -1812,10 +1878,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatCountRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -1849,10 +1918,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatCountRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -1882,10 +1954,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatFielddataRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -1915,10 +1990,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatFielddataRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -1950,10 +2028,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatFielddataRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -1985,10 +2066,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatFielddataRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -2018,10 +2102,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatHealthRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -2051,10 +2138,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatHealthRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -2086,10 +2176,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatHealthRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -2121,10 +2214,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatHealthRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -2154,10 +2250,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatHelpRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -2187,10 +2286,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatHelpRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -2222,10 +2324,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatHelpRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -2257,10 +2362,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatHelpRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -2290,10 +2398,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatIndicesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -2323,10 +2434,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatIndicesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -2358,10 +2472,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatIndicesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -2393,10 +2510,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatIndicesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -2428,10 +2548,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatIndicesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -2463,10 +2586,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatIndicesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -2500,10 +2626,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatIndicesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -2537,10 +2666,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatIndicesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -2570,10 +2702,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatMasterRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -2603,10 +2738,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatMasterRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -2638,10 +2776,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatMasterRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -2673,10 +2814,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatMasterRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -2706,10 +2850,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatNodesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -2739,10 +2886,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatNodesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -2774,10 +2924,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatNodesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -2809,10 +2962,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatNodesRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -2842,10 +2998,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatPendingTasksRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -2875,10 +3034,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatPendingTasksRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -2910,10 +3072,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatPendingTasksRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -2945,10 +3110,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatPendingTasksRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -2978,10 +3146,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatPluginsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -3011,10 +3182,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatPluginsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -3046,10 +3220,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatPluginsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -3081,10 +3258,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatPluginsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -3114,10 +3294,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatRecoveryRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -3147,10 +3330,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatRecoveryRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -3182,10 +3368,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatRecoveryRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -3217,10 +3406,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatRecoveryRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -3252,10 +3444,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatRecoveryRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -3287,10 +3482,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatRecoveryRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -3324,10 +3522,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatRecoveryRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -3361,10 +3562,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatRecoveryRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -3394,10 +3598,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatShardsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -3427,10 +3634,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatShardsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -3462,10 +3672,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatShardsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -3497,10 +3710,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatShardsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -3532,10 +3748,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatShardsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -3567,10 +3786,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatShardsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -3604,10 +3826,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatShardsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -3641,10 +3866,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatShardsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -3674,10 +3902,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatThreadPoolRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<T>(
@@ -3707,10 +3938,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatThreadPoolRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -3742,10 +3976,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatThreadPoolRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequest<string>(
@@ -3777,10 +4014,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new CatThreadPoolRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
+			else {
+					requestParams.RequestConfiguration.ContentType = "text/plain";
+							}
+				
 
 
 			return this.DoRequestAsync<string>(
@@ -7062,9 +7302,13 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new DeleteRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new DeleteRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
 			}
 				
 
@@ -7100,9 +7344,13 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new DeleteRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new DeleteRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
 			}
 				
 
@@ -7140,9 +7388,13 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new DeleteRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new DeleteRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
 			}
 				
 
@@ -7180,9 +7432,13 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new DeleteRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new DeleteRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
 			}
 				
 
@@ -7516,10 +7772,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new DocumentExistsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+			}
+				
 
 
 			return this.DoRequest<T>(
@@ -7555,10 +7814,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new DocumentExistsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+			}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -7596,10 +7858,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new DocumentExistsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+			}
+				
 
 
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
@@ -7637,10 +7902,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new DocumentExistsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+			}
+				
 
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
@@ -11172,10 +11440,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new IndexExistsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+			}
+				
 
 
 			return this.DoRequest<T>(
@@ -11207,10 +11478,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new IndexExistsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+			}
+				
 
 
 			return this.DoRequestAsync<T>(
@@ -11244,10 +11518,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new IndexExistsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+			}
+				
 
 
 			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
@@ -11281,10 +11558,13 @@ namespace Elasticsearch.Net
 				
 			requestParameters = requestParameters ?? (s => s);
 			var passIn = new IndexExistsRequestParameters();
-			requestParams = passIn;
-			requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			requestParams = requestParameters(passIn);
-			
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+			}
+				
 
 
 			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
@@ -12567,14 +12847,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAliasForAll<T>(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesGetAliasForAll<T>(Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			var url = "_alias";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new GetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasRequestParameters());
 			}
 				
 
@@ -12599,14 +12879,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasForAllAsync<T>(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasForAllAsync<T>(Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			var url = "_alias";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new GetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasRequestParameters());
 			}
 				
 
@@ -12633,14 +12913,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasForAll(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasForAll(Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			var url = "_alias";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new GetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasRequestParameters());
 			}
 				
 
@@ -12667,14 +12947,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasForAllAsync(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasForAllAsync(Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			var url = "_alias";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new GetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasRequestParameters());
 			}
 				
 
@@ -12700,7 +12980,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAliasForAll<T>(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesGetAliasForAll<T>(string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
@@ -12708,7 +12988,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new GetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasRequestParameters());
 			}
 				
 
@@ -12734,7 +13014,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasForAllAsync<T>(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasForAllAsync<T>(string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
@@ -12742,7 +13022,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new GetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasRequestParameters());
 			}
 				
 
@@ -12770,7 +13050,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasForAll(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasForAll(string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
@@ -12778,7 +13058,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new GetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasRequestParameters());
 			}
 				
 
@@ -12806,7 +13086,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasForAllAsync(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasForAllAsync(string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
@@ -12814,7 +13094,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new GetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasRequestParameters());
 			}
 				
 
@@ -12841,7 +13121,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAlias<T>(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesGetAlias<T>(string index, string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -12850,7 +13130,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new GetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasRequestParameters());
 			}
 				
 
@@ -12877,7 +13157,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasAsync<T>(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasAsync<T>(string index, string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -12886,7 +13166,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new GetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasRequestParameters());
 			}
 				
 
@@ -12915,7 +13195,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAlias(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAlias(string index, string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -12924,7 +13204,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new GetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasRequestParameters());
 			}
 				
 
@@ -12953,7 +13233,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasAsync(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasAsync(string index, string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -12962,7 +13242,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new GetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasRequestParameters());
 			}
 				
 
@@ -12988,7 +13268,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAlias<T>(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesGetAlias<T>(string index, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
@@ -12996,7 +13276,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new GetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasRequestParameters());
 			}
 				
 
@@ -13022,7 +13302,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasAsync<T>(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasAsync<T>(string index, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
@@ -13030,7 +13310,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new GetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasRequestParameters());
 			}
 				
 
@@ -13058,7 +13338,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAlias(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAlias(string index, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
@@ -13066,7 +13346,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new GetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasRequestParameters());
 			}
 				
 
@@ -13094,10 +13374,142 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasAsync(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasAsync(string index, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_alias".F(Encoded(index));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new GetAliasRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /_aliases
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> IndicesGetAliasesForAll<T>(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		{
+			var url = "_aliases";
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new GetAliasesRequestParameters());
+			}
+				
+
+
+			return this.DoRequest<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_aliases
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasesForAllAsync<T>(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		{
+			var url = "_aliases";
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new GetAliasesRequestParameters());
+			}
+				
+
+
+			return this.DoRequestAsync<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_aliases
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasesForAll(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		{
+			var url = "_aliases";
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new GetAliasesRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /_aliases
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</para>	
+	    ///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesForAllAsync(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
+		{
+			var url = "_aliases";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -13113,138 +13525,6 @@ namespace Elasticsearch.Net
 			));
 		}
 		
-		///<summary>Represents a GET on /_aliases
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
-		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
-		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</para>	
-	    ///</summary>
-		///<param name="requestParameters">
-		///Optional function to specify any additional request parameters 
-		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
-		///</param>
-		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
-		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
-		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAliasesForAll<T>(Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
-		{
-			var url = "_aliases";
-			IRequestParameters requestParams = null;
-				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-			}
-				
-
-
-			return this.DoRequest<T>(
-				"GET", url, data: null, 
-				requestParameters: requestParams
-			);
-		}
-		
-		///<summary>Represents a GET on /_aliases
-		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
-		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
-		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</para>	
-	    ///</summary>
-		///<param name="requestParameters">
-		///Optional function to specify any additional request parameters 
-		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
-		///</param>
-		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
-		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
-		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasesForAllAsync<T>(Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
-		{
-			var url = "_aliases";
-			IRequestParameters requestParams = null;
-				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-			}
-				
-
-
-			return this.DoRequestAsync<T>(
-				"GET", url, data: null, 
-				requestParameters: requestParams
-			);
-		}
-		
-		///<summary>Represents a GET on /_aliases
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
-		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
-		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
-		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</para>	
-	    ///</summary>
-		///<param name="requestParameters">
-		///Optional function to specify any additional request parameters 
-		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
-		///</param>
-		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
-		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
-		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
-		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasesForAll(Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
-		{
-			var url = "_aliases";
-			IRequestParameters requestParams = null;
-				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-			}
-				
-
-
-			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
-				"GET", url, data: null, 
-				requestParameters: requestParams
-			));
-		}
-		
-		///<summary>Represents a GET on /_aliases
-		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
-		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
-		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
-		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</para>	
-	    ///</summary>
-		///<param name="requestParameters">
-		///Optional function to specify any additional request parameters 
-		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
-		///</param>
-		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
-		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
-		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
-		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesForAllAsync(Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
-		{
-			var url = "_aliases";
-			IRequestParameters requestParams = null;
-				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
-			}
-				
-
-
-			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
-				"GET", url, data: null, 
-				requestParameters: requestParams
-			));
-		}
-		
 		///<summary>Represents a GET on /{index}/_aliases
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
@@ -13260,7 +13540,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAliases<T>(string index, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesGetAliases<T>(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_aliases".F(Encoded(index));
@@ -13268,7 +13548,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasesRequestParameters());
 			}
 				
 
@@ -13294,7 +13574,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasesAsync<T>(string index, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasesAsync<T>(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_aliases".F(Encoded(index));
@@ -13302,7 +13582,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasesRequestParameters());
 			}
 				
 
@@ -13330,7 +13610,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliases(string index, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliases(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_aliases".F(Encoded(index));
@@ -13338,7 +13618,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasesRequestParameters());
 			}
 				
 
@@ -13366,7 +13646,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesAsync(string index, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesAsync(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_aliases".F(Encoded(index));
@@ -13374,7 +13654,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasesRequestParameters());
 			}
 				
 
@@ -13401,7 +13681,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAliases<T>(string index, string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesGetAliases<T>(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -13410,7 +13690,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasesRequestParameters());
 			}
 				
 
@@ -13437,7 +13717,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasesAsync<T>(string index, string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasesAsync<T>(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -13446,7 +13726,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasesRequestParameters());
 			}
 				
 
@@ -13475,7 +13755,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliases(string index, string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliases(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -13484,7 +13764,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasesRequestParameters());
 			}
 				
 
@@ -13513,7 +13793,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesAsync(string index, string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesAsync(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -13522,7 +13802,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasesRequestParameters());
 			}
 				
 
@@ -13548,7 +13828,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetAliasesForAll<T>(string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesGetAliasesForAll<T>(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_aliases/{0}".F(Encoded(name));
@@ -13556,7 +13836,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasesRequestParameters());
 			}
 				
 
@@ -13582,7 +13862,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetAliasesForAllAsync<T>(string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetAliasesForAllAsync<T>(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_aliases/{0}".F(Encoded(name));
@@ -13590,7 +13870,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasesRequestParameters());
 			}
 				
 
@@ -13618,7 +13898,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasesForAll(string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetAliasesForAll(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_aliases/{0}".F(Encoded(name));
@@ -13626,7 +13906,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasesRequestParameters());
 			}
 				
 
@@ -13654,7 +13934,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesForAllAsync(string name, Func<IndicesGetAliasesRequestParameters, IndicesGetAliasesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAliasesForAllAsync(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_aliases/{0}".F(Encoded(name));
@@ -13662,7 +13942,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetAliasesRequestParameters());
+				requestParams = requestParameters(new GetAliasesRequestParameters());
 			}
 				
 

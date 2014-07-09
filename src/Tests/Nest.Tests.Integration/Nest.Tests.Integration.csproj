@@ -110,6 +110,9 @@
     <Compile Include="DebugTests\MemoryUsageTests.cs" />
     <Compile Include="ElasticsearchConfiguration.cs" />
     <Compile Include="Core\IndexTests.cs" />
+    <Compile Include="Failover\FailoverSniffOnFaultTests.cs" />
+    <Compile Include="Failover\FailoverSniffOnStartupTests.cs" />
+    <Compile Include="Failover\FailoverPingTests.cs" />
     <Compile Include="Help\AliasTests.cs" />
     <Compile Include="Index\ReindexTests.cs" />
     <Compile Include="Index\IndexUsingUrlIdTests.cs" />
@@ -163,6 +166,7 @@
     <Compile Include="RawCalls\DynamicNullTests.cs" />
     <Compile Include="Mapping\NotAnalyzedTest.cs" />
     <Compile Include="RawCalls\ReturnTypesTest.cs" />
+    <Compile Include="Reproduce\Reproduce723Tests.cs" />
     <Compile Include="Reproduce\Reproduce643Tests.cs" />
     <Compile Include="Reproduce\Reproduce628Tests.cs" />
     <Compile Include="Reproduce\Reproduce487Tests.cs" />
@@ -176,6 +180,8 @@
     <Compile Include="Reproduce\Reproduce211Tests.cs" />
     <Compile Include="Reproduce\Reproduce654Tests.cs" />
     <Compile Include="Reproduce\Reproduce659Tests.cs" />
+    <Compile Include="Reproduce\Reproduce730Tests.cs" />
+    <Compile Include="Reproduce\Reproduce732Tests.cs" />
     <Compile Include="Reproduce\ReproduceConnectionStallsTests.cs" />
     <Compile Include="Search\FieldTests\FieldsTest.cs" />
     <Compile Include="Search\NamedFilter\NamedFilterTests.cs" />

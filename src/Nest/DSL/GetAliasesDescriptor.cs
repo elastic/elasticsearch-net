@@ -29,7 +29,7 @@ namespace Nest
 		}
 	}
 
-	[DescriptorFor("IndicesGetAlias")]
+	[DescriptorFor("IndicesGetAliases")]
 	public partial class GetAliasesDescriptor 
 		: IndicesOptionalPathDescriptor<GetAliasesDescriptor, GetAliasesRequestParameters>, IGetAliasesRequest
 	{

@@ -920,6 +920,24 @@ namespace Nest
 		/// <summary>
 		/// The get index alias api allows to filter by alias name and index name. This api redirects to the master and fetches 
 		/// the requested index aliases, if available. This api only serialises the found index aliases.
+		/// <para> Difference with GetAlias is that this call will also return indices without aliases set</para>
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-retrieving
+		/// </summary>
+		/// <param name="getAliasDescriptor">A descriptor that describes which aliases/indexes we are interested int</param>
+		IGetAliasesResponse GetAlias(Func<GetAliasDescriptor, GetAliasDescriptor> getAliasDescriptor);
+		
+		/// <inheritdoc />
+		IGetAliasesResponse GetAlias(IGetAliasRequest getAliasRequest);
+
+		/// <inheritdoc />
+		Task<IGetAliasesResponse> GetAliasAsync(Func<GetAliasDescriptor, GetAliasDescriptor> getAliasDescriptor);
+		
+		/// <inheritdoc />
+		Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest getAliasRequest);
+		
+		/// <summary>
+		/// The get index alias api allows to filter by alias name and index name. This api redirects to the master and fetches 
+		/// the requested index aliases, if available. This api only serialises the found index aliases.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-retrieving
 		/// </summary>
 		/// <param name="getAliasesDescriptor">A descriptor that describes which aliases/indexes we are interested int</param>

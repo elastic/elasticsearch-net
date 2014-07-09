@@ -22,6 +22,18 @@ namespace Nest
 		[JsonProperty("index_name")]
 		public string IndexName { get; set; }
 
+		[JsonProperty("doc_values")]
+		public bool? DocValues { get; set; }
+
+		[JsonProperty("store")]
+		public bool? Store { get; set; }
+
+		[JsonProperty("compress")]
+		public bool? Compress { get; set; }
+
+		[JsonProperty("compress_threshold")]
+		public string CompressThreshold { get; set; }
+
 		[JsonProperty("copy_to")]
 		public IEnumerable<PropertyPathMarker> CopyTo { get; set; }
 	}

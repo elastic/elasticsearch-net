@@ -12,9 +12,6 @@ namespace Nest
 		[JsonProperty("type")]
 		TypeNameMarker Type { get; set; }
 
-		[JsonProperty("_scope")]
-		string Scope { get; set; }
-
 		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }
 	}
@@ -27,7 +24,6 @@ namespace Nest
 		}
 
 		public TypeNameMarker Type { get; set; }
-		public string Scope { get; set; }
 		public IQueryContainer Query { get; set; }
 	}
 
@@ -44,7 +40,6 @@ namespace Nest
 
 		TypeNameMarker IHasChildFilter.Type { get; set; }
 
-		string IHasChildFilter.Scope { get; set;}
 		
 		IQueryContainer IHasChildFilter.Query { get; set; }
 
@@ -60,12 +55,6 @@ namespace Nest
 			return this;
 		}
 		
-		public HasChildFilterDescriptor<T> Scope(string scope)
-		{
-			((IHasChildFilter)this).Scope = scope;
-			return this;
-		}
-
 		public HasChildFilterDescriptor<T> Type(string type)
 		{
 			((IHasChildFilter)this).Type = type;

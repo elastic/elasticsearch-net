@@ -7,6 +7,12 @@ namespace Nest.Tests.Unit.Core.Map.TypeField
 	[TestFixture]
 	public class TypeFieldTests : BaseJsonTests
 	{
+
+		//Prior to Elasticsearch store took a yes/no (still supported)
+		//We now favor sending actually booleans
+		//These tests there no longer test wheter they send actual "yes" "no"
+		//strings, but are not removed for living documentation purposes.
+
 		[Test]
 		public void TypeFieldSerializesYes()
 		{

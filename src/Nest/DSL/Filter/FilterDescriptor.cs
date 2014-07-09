@@ -517,6 +517,7 @@ namespace Nest
 			ITermsFilter filter = new TermsFilterDescriptor();
 			filter.Field = fieldDescriptor;
 			filter.Terms = terms;
+		    filter.Execution = Execution;
 			return this.New(filter, f=>f.Terms = filter);
 		}
 
@@ -528,6 +529,7 @@ namespace Nest
 			ITermsFilter filter = new TermsFilterDescriptor();
 			filter.Field = field;
 			filter.Terms = terms ?? Enumerable.Empty<string>();
+            filter.Execution = Execution;
 			return this.New(filter, f=>f.Terms = filter);
 		}
 

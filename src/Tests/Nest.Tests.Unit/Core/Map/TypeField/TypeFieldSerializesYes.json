@@ -2,7 +2,7 @@
   "elasticsearchprojects": {
     "_type": {
       "index": "analyzed",
-      "store": "yes"
+      "store": true
     }
   }
 }

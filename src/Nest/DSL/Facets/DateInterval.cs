@@ -7,6 +7,8 @@ namespace Nest
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum DateInterval
 	{
+		[EnumMember(Value = "second")]
+		Second, 
 		[EnumMember(Value = "minute")]
 		Minute, 
 		[EnumMember(Value = "hour")]

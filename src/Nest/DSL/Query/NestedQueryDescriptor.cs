@@ -25,9 +25,6 @@ namespace Nest
 		[JsonProperty("path")]
 		PropertyPathMarker Path { get; set; }
 
-		[JsonProperty("_scope")]
-		string Scope { get; set; }
-
 	}
 
 	public class NestedQuery : PlainQuery, INestedQuery
@@ -42,7 +39,6 @@ namespace Nest
 		public IFilterContainer Filter { get; set; }
 		public IQueryContainer Query { get; set; }
 		public PropertyPathMarker Path { get; set; }
-		public string Scope { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -55,8 +51,6 @@ namespace Nest
 		IQueryContainer INestedQuery.Query { get; set; }
 
 		PropertyPathMarker INestedQuery.Path { get; set; }
-
-		string INestedQuery.Scope { get; set; }
 
 		bool IQuery.IsConditionless
 		{
@@ -93,11 +87,6 @@ namespace Nest
 		public NestedQueryDescriptor<T> Path(Expression<Func<T, object>> objectPath)
 		{
 			((INestedQuery)this).Path = objectPath;
-			return this;
-		}
-		public NestedQueryDescriptor<T> Scope(string scope)
-		{
-			((INestedQuery)this).Scope = scope;
 			return this;
 		}
 	}

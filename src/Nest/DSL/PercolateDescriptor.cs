@@ -218,7 +218,7 @@ namespace Nest
 		/// <para>Sort() allows you to fully describe your sort unlike the SortAscending and SortDescending aliases.
 		/// </para>
 		/// </summary>
-		public PercolateDescriptor<T> Sort(Func<SortFieldDescriptor<T>, SortFieldDescriptor<T>> sortSelector)
+		public PercolateDescriptor<T> Sort(Func<SortFieldDescriptor<T>, IFieldSort> sortSelector)
 		{
 			if (Self.Sort == null)
 				Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
@@ -233,7 +233,7 @@ namespace Nest
 		/// <para>SortGeoDistance() allows you to sort by a distance from a geo point.
 		/// </para>
 		/// </summary>
-		public PercolateDescriptor<T> SortGeoDistance(Func<SortGeoDistanceDescriptor<T>, SortGeoDistanceDescriptor<T>> sortSelector)
+		public PercolateDescriptor<T> SortGeoDistance(Func<SortGeoDistanceDescriptor<T>, IGeoDistanceSort> sortSelector)
 		{
 			if (Self.Sort == null)
 				Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
@@ -248,7 +248,7 @@ namespace Nest
 		/// <para>SortScript() allows you to sort by a distance from a geo point.
 		/// </para>
 		/// </summary>
-		public PercolateDescriptor<T> SortScript(Func<SortScriptDescriptor<T>, SortScriptDescriptor<T>> sortSelector)
+		public PercolateDescriptor<T> SortScript(Func<SortScriptDescriptor<T>, IScriptSort> sortSelector)
 		{
 			if (Self.Sort == null)
 				Self.Sort = new Dictionary<PropertyPathMarker, ISort>();

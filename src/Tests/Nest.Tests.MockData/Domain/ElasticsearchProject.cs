@@ -52,5 +52,7 @@ namespace Nest.Tests.MockData.Domain
 
 		[ElasticProperty(Type=FieldType.Object)]
 		public Product Product { get; set; }
+
+        public string[] MyStringArrayField { get; set; }
 	}
 }
