@@ -28,6 +28,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		[Test]
 		[TestCase(505, "SomeException", "Some Error Message")]
 		[TestCase(505, "", "")]
+		[TestCase(404, "", "")]
 		public void IfResponseIsKnowError_DoNotRetry_ThrowServerException(int status, string exceptionType, string exceptionMessage)
 		{
 			var response = CreateServerExceptionResponse(status, exceptionType, exceptionMessage);
@@ -67,6 +68,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		[Test]
 		[TestCase(505, "SomeException", "Some Error Message")]
 		[TestCase(505, "", "")]
+		[TestCase(404, "", "")]
 		public async void IfResponseIsKnowError_DoNotRetry_ThrowServerException_Async(int status, string exceptionType, string exceptionMessage)
 		{
 			var response = CreateServerExceptionResponse(status, exceptionType, exceptionMessage);
