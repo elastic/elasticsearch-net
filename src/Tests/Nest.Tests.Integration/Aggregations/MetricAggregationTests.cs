@@ -56,7 +56,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 		
 		[Test]
-		[SkipVersion("1.0", "Cardinality aggregation not introduced until 1.1")]
+		[SkipVersion("0 - 1.0.9", "Cardinality aggregation not introduced until 1.1")]
 		public void Cardinality()
 		{
 			var results = this._client.Search<ElasticsearchProject>(s => s

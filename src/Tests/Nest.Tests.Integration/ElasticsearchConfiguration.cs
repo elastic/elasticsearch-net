@@ -9,12 +9,12 @@ namespace Nest.Tests.Integration
 	{
 		public static readonly string DefaultIndex = Test.Default.DefaultIndex + "-" + Process.GetCurrentProcess().Id.ToString();
 
-		private static string _currentVersion;
-		public static string CurrentVersion
+		private static Version _currentVersion;
+		public static Version CurrentVersion
 		{
 			get
 			{
-				if (string.IsNullOrEmpty(_currentVersion))
+				if (_currentVersion == null)
 					_currentVersion = GetCurrentVersion();
 
 				return _currentVersion;
@@ -48,10 +48,12 @@ namespace Nest.Tests.Integration
 			return DefaultIndex + "_" + Guid.NewGuid().ToString();
 		}
 
-		public static string GetCurrentVersion()
+		public static Version GetCurrentVersion()
 		{
 			dynamic info = Client.Raw.Info().Response;
-			return info.version.number;
+			var version = Version.Parse(info.version.number);
+
+			return version;
 		}
 	}
 }
