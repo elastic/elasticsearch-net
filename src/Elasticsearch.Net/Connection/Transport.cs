@@ -22,7 +22,8 @@ namespace Elasticsearch.Net.Connection
 	{
 		const int BUFFER_SIZE = 4096;
 
-		protected static readonly string MaxRetryExceptionMessage = "Unable to perform request: '{0} {1}' on any of the nodes after retrying {2} times.";
+		protected static readonly string MaxRetryExceptionMessage = "Failed after retrying {2} times: '{0} {1}'. {3}";
+		protected static readonly string MaxRetryInnerMessage = "InnerException: {0}, InnerMessage: {1}, InnerStackTrace: {2}";
 		protected internal readonly IConnectionConfigurationValues ConfigurationValues;
 		protected internal readonly IConnection Connection;
 		private readonly IElasticsearchSerializer _serializer;
@@ -120,8 +121,8 @@ namespace Elasticsearch.Net.Connection
 				//inform the owing request state of the requests the sniffs did.
 				if (requestState.RequestMetrics != null && ownerState != null)
 				{
-					foreach (var r in requestState.RequestMetrics.Where(p=>p.RequestType == RequestType.ElasticsearchCall))
-						r.RequestType = RequestType.Sniff; 
+					foreach (var r in requestState.RequestMetrics.Where(p => p.RequestType == RequestType.ElasticsearchCall))
+						r.RequestType = RequestType.Sniff;
 
 
 					if (ownerState.RequestMetrics == null) ownerState.RequestMetrics = new List<RequestMetrics>();
@@ -311,6 +312,10 @@ namespace Elasticsearch.Net.Connection
 					return typedResponse;
 				}
 			}
+			catch (ElasticsearchServerException)
+			{
+				throw;
+			}
 			catch (Exception e)
 			{
 				if (maxRetries == 0 && retried == 0)
@@ -330,7 +335,7 @@ namespace Elasticsearch.Net.Connection
 		private ElasticsearchResponse<T> RetryRequest<T>(TransportRequestState<T> requestState, Exception e = null)
 		{
 			var maxRetries = this.GetMaximumRetries(requestState.RequestConfiguration);
-			var exceptionMessage = MaxRetryExceptionMessage.F(requestState.Method, requestState.Path.IsNullOrEmpty() ? "/" : requestState.Path, requestState.Retried);
+			var exceptionMessage = CreateMaxRetryExceptionMessage(requestState, e);
 
 			this._connectionPool.MarkDead(requestState.CurrentNode, this.ConfigurationValues.DeadTimeout, this.ConfigurationValues.MaxDeadTimeout);
 
@@ -460,7 +465,7 @@ namespace Elasticsearch.Net.Connection
 		private Task<ElasticsearchResponse<T>> RetryRequestAsync<T>(TransportRequestState<T> requestState, Exception e = null)
 		{
 			var maxRetries = this.GetMaximumRetries(requestState.RequestConfiguration);
-			var exceptionMessage = MaxRetryExceptionMessage.F(requestState.Method, requestState.Path, requestState.Retried);
+			var exceptionMessage = CreateMaxRetryExceptionMessage(requestState, e);
 
 			this._connectionPool.MarkDead(requestState.CurrentNode, this.ConfigurationValues.DeadTimeout, this.ConfigurationValues.MaxDeadTimeout);
 
@@ -470,6 +475,29 @@ namespace Elasticsearch.Net.Connection
 				throw new MaxRetryException(exceptionMessage, e);
 
 			return this.DoRequestAsync<T>(requestState);
+		}
+
+		private static string CreateMaxRetryExceptionMessage<T>(TransportRequestState<T> requestState, Exception e)
+		{
+			string innerException = null;
+			if (e != null)
+			{
+				var aggregate = e as AggregateException;
+				if (aggregate != null)
+				{
+
+					aggregate = aggregate.Flatten();
+					var innerExceptions = aggregate.InnerExceptions
+						.Select(ae => MaxRetryInnerMessage.F(ae.GetType().Name, ae.Message, ae.StackTrace))
+						.ToList();
+					innerException = string.Join("\r\n", innerExceptions);
+				}
+				else
+					innerException = MaxRetryInnerMessage.F(e.GetType().Name, e.Message, e.StackTrace);
+			}
+			var exceptionMessage = MaxRetryExceptionMessage
+				.F(requestState.Method, requestState.Path, requestState.Retried, innerException);
+			return exceptionMessage;
 		}
 
 		private Task<ElasticsearchResponse<Stream>> CallIntoConnectionAsync<T>(TransportRequestState<T> requestState)
@@ -566,8 +594,8 @@ namespace Elasticsearch.Net.Connection
 		private static bool IsValidResponse(ITransportRequestState requestState, IElasticsearchResponse streamResponse)
 		{
 			return (streamResponse.Success || requestState.RequestConfiguration != null) &&
-			       (streamResponse.Success || requestState.RequestConfiguration == null ||
-			        requestState.RequestConfiguration.AllowedStatusCodes.Any(i => i == streamResponse.HttpStatusCode));
+				   (streamResponse.Success || requestState.RequestConfiguration == null ||
+					requestState.RequestConfiguration.AllowedStatusCodes.Any(i => i == streamResponse.HttpStatusCode));
 		}
 
 		private bool TypeOfResponseCopiesDirectly<T>()
@@ -617,7 +645,7 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		private Task<ElasticsearchResponse<T>> StreamToTypedResponseAsync<T>(
-			ElasticsearchResponse<Stream> streamResponse, 
+			ElasticsearchResponse<Stream> streamResponse,
 			ITransportRequestState requestState
 			)
 		{
@@ -698,8 +726,8 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		private Task<ElasticsearchResponse<T>> _deserializeAsyncToResponse<T>(
-			Stream response, 
-			ITransportRequestState requestState, 
+			Stream response,
+			ITransportRequestState requestState,
 			ElasticsearchResponse<T> typedResponse
 			)
 		{

@@ -68,7 +68,7 @@ namespace Nest
 				var settings = this.Settings;
 				if (settings == null)
 					return null;
-				this._infer = new ElasticInferrer(settings);
+				this._infer = this.Settings.Inferrer;
 				return this._infer;
 			}
 		}

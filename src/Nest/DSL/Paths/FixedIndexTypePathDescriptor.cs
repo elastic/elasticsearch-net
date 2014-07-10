@@ -18,7 +18,7 @@ namespace Nest
 			ElasticsearchPathInfo<TParameters> pathInfo)
 			where TParameters : IRequestParameters, new()
 		{	
-			var inferrer = new ElasticInferrer(settings);
+			var inferrer = settings.Inferrer;
 			var index = inferrer.IndexName(path.Index);
 			var type = inferrer.TypeName(path.Type);
 		

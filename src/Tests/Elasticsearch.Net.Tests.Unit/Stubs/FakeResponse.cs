@@ -48,18 +48,20 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 			IConnectionConfigurationValues config, 
 			int statusCode,
 			string method = "GET",
-			string path = "/")
+			string path = "/",
+			Stream response = null)
 		{
-			return ElasticsearchResponse<Stream>.Create(config, statusCode, method, path, null);
+			return ElasticsearchResponse<Stream>.Create(config, statusCode, method, path, null, response);
 		}
 		
 		public static Task<ElasticsearchResponse<Stream>> AnyAsync(
 			IConnectionConfigurationValues config, 
 			int statusCode,
 			string method = "GET",
-			string path = "/")
+			string path = "/",
+			Stream response = null)
 		{
-			return Task.FromResult(ElasticsearchResponse<Stream>.Create(config, statusCode, method, path, null));
+			return Task.FromResult(ElasticsearchResponse<Stream>.Create(config, statusCode, method, path, null, response));
 		}
 	}
 }

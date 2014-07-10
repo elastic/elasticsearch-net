@@ -44,8 +44,8 @@ namespace Nest.Tests.Integration.Indices
 
 			var error = results.ServerError;
 			error.Should().NotBeNull();
-			error.ExceptionType.Should().Be("ClusterBlockException");
-			error.Error.Should().Contain("index closed");
+			error.ExceptionType.Should().BeOneOf("ClusterBlockException", "IndexClosedException");
+			error.Error.Should().Contain("closed");
 
 			r = this._client.OpenIndex(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.Acknowledged);

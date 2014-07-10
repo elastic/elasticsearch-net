@@ -63,6 +63,9 @@ namespace Nest
 			}
 		}
 
+		private ElasticInferrer _inferrer;
+		ElasticInferrer IConnectionSettingsValues.Inferrer { get { return _inferrer; } }
+
 		private Func<Type, string> _defaultTypeNameInferrer;
 		Func<Type, string> IConnectionSettingsValues.DefaultTypeNameInferrer { get { return _defaultTypeNameInferrer; } }
 
@@ -96,6 +99,7 @@ namespace Nest
 
 			this._modifyJsonSerializerSettings = (j) => { };
 			this._contractConverters = Enumerable.Empty<Func<Type, JsonConverter>>().ToList().AsReadOnly();
+			this._inferrer = new ElasticInferrer(this);
 		}
 		public ConnectionSettings(Uri uri, string defaultIndex) 
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")), defaultIndex)

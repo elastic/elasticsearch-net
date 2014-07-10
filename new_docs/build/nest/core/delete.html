@@ -2,15 +2,20 @@
 <script src="/scripts/html5shiv.js"></script><link rel="stylesheet" type="text/css" href="/styles/normalize.css"/><link rel="stylesheet" type="text/css" href="/styles/layout.css"/><link rel="stylesheet" type="text/css" href="/styles/pygments.css"/><link rel="stylesheet" type="text/css" href="/styles/pygments.css"/><link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"/><link href="//fonts.googleapis.com/css?family=Ubuntu+Mono|Open+Sans" rel="stylesheet" type="text/css"/><link href="/prettify/prettify.css" type="text/css" rel="stylesheet"/><link href="/prettify/sunburst.css" type="text/css" rel="stylesheet"/><script src="//code.jquery.com/jquery.min.js" type="text/javascript"></script><script type="text/javascript" src="/prettify/prettify.js"></script><script type="text/javascript" src="/prettify/fix_code_tags.js"></script></head><body><div class="wrapper"><header class="header"><div class="actions"><iframe src="//ghbtns.com/github-btn.html?user=elasticsearch&amp;repo=elasticsearch-net&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe><iframe src="//ghbtns.com/github-btn.html?user=elasticsearch&amp;repo=elasticsearch-net&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe></div><img src="/images/nest-nuget-icon.png" width="48" height="48"/><h1 class="nest">NEST</h1><p>Documentation</p></header><div class="divide"></div><div class="middle"><div class="container"><main class="content"><h1 id="deleting">Deleting</h1>
 <p>The delete API allows to delete a typed JSON document from a specific index based on its id. See also <a href="/nest/core/{{root}}/core/delete-by-query.html">deleting by query</a> for other ways to delete data.</p>
 <h2 id="by-id">By Id</h2>
-<pre><code>        this.ConnectedClient.DeleteById&lt;ElasticSearchProject&gt;(searchProject.Id);
-        this.ConnectedClient.DeleteByIdAsync&lt;ElasticSearchProject&gt;(searchProject.Id, c =&gt; /* called later */);
+<pre><code>this.ConnectedClient.Delete&lt;ElasticSearchProject&gt;(searchProject.Id);
+this.ConnectedClient.DeleteAsync&lt;ElasticSearchProject&gt;(searchProject.Id);
+</code></pre><h2 id="delete-with-custom-parameters">Delete with custom parameters</h2>
+<pre><code>_client.Delete(request.Id, s =&gt; s
+    .Type(&quot;users&quot;)
+    .Index(&quot;myindex&quot;)
+);
 </code></pre><h2 id="by-object-t-">By object (T)</h2>
 <p>Id property is inferred (can be any value type (int, string, float ...))</p>
-<pre><code>        this.ConnectedClient.Delete(searchProject);
-        this.ConnectedClient.DeleteAsync(searchProject);
+<pre><code>this.ConnectedClient.Delete(searchProject);
+this.ConnectedClient.DeleteAsync(searchProject);
 </code></pre><h2 id="by-ienumerable-t-">By IEnumerable<T></h2>
-<pre><code>        this.ConnectedClient.DeleteMany(searchProjects);
-        this.ConnectedClient.DeleteManyAsync(searchProjects);
+<pre><code>this.ConnectedClient.DeleteMany(searchProjects);
+this.ConnectedClient.DeleteManyAsync(searchProjects);
 </code></pre><h2 id="by-ienumerable-t-using-bulkparameters">By IEnumerable<T> using bulkparameters</h2>
 <p>Using bulk parameters you can control the deletion of each individual document further</p>
 <pre><code>        var bulkedProjects = searchProjects

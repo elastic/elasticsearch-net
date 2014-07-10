@@ -57,9 +57,12 @@
     <Compile Include="Connection\RequestState\NoopRequestTimings.cs" />
     <Compile Include="Connection\RequestState\RequestTimings.cs" />
     <Compile Include="Domain\RequestParameters\BaseRequestParameters.cs" />
+    <Compile Include="Domain\Response\CallMetrics.cs" />
     <Compile Include="Domain\Response\IElasticsearchResponse.cs" />
     <Compile Include="Domain\IHideObjectMembers.cs" />
     <Compile Include="Domain\RequestParameters\IRequestParameters.cs" />
+    <Compile Include="Domain\Response\RequestMetrics.cs" />
+    <Compile Include="Domain\Response\RequestType.cs" />
     <Compile Include="Domain\Response\VoidResponse.cs" />
     <Compile Include="Domain\Response\ElasticsearchServerError.cs" />
     <Compile Include="Exceptions\OneToOneServerException.cs" />
