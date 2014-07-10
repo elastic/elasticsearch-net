@@ -1,5 +1,10 @@
-﻿using Nest.Tests.MockData.Domain;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Nest.Tests.MockData;
+using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using System.Diagnostics;
 using FluentAssertions;
 
 namespace Nest.Tests.Integration.Reproduce

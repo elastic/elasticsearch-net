@@ -3,6 +3,8 @@ using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using System.Reflection;
+using Newtonsoft.Json;
 
 namespace Nest.Tests.Integration.Core.Map.Properties
 {

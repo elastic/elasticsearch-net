@@ -1,4 +1,6 @@
-﻿namespace Nest
+﻿using Newtonsoft.Json;
+
+namespace Nest
 {
 	/// <summary>
 	/// A token filter of type reverse that simply reverses the tokens.

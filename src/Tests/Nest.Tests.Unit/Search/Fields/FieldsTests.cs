@@ -1,6 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Security;
+using System.Text;
+using Elasticsearch.Net.Connection;
 using FluentAssertions;
+using Nest;
+using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
 namespace Nest.Tests.Unit.Search.Fields

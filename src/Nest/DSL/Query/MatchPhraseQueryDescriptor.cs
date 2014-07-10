@@ -1,4 +1,12 @@
-﻿namespace Nest
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.Linq.Expressions;
+
+namespace Nest
 {
 	/// <summary>
 	/// A Query that matches documents containing a particular sequence of terms. A PhraseQuery is built by QueryParser for input like "new york".

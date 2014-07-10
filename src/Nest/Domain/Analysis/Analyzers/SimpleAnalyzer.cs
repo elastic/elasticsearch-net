@@ -1,4 +1,7 @@
-﻿namespace Nest
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+
+namespace Nest
 {
 	/// <summary>
 	/// An analyzer of type simple that is built using a Lower Case Tokenizer.

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 using System.Diagnostics;
 

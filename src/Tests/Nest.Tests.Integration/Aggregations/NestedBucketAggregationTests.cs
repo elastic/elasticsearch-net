@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Security.AccessControl;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;

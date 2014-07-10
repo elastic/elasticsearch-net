@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elasticsearch.Net;
+using System.Linq;
+using System.Text;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {

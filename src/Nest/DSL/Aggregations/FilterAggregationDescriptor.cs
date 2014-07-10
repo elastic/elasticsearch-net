@@ -1,4 +1,5 @@
 using System;
+using Nest.Resolvers.Converters;
 using Nest.Resolvers.Converters.Aggregations;
 using Newtonsoft.Json;
 

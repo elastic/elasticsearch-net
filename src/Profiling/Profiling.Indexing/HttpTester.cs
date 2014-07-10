@@ -1,4 +1,7 @@
-﻿using Nest;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Nest;
 
 namespace Profiling.Indexing
 {

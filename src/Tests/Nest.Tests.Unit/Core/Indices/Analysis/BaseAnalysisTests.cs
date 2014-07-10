@@ -1,6 +1,8 @@
 ﻿using System;
 using FluentAssertions;
 using NUnit.Framework;
+using Nest.Tests.MockData.Domain;
+using System.Reflection;
 
 namespace Nest.Tests.Unit.Core.Indices.Analysis.Tokenizers
 {

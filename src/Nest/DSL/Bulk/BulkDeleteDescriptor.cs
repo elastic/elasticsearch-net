@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Nest.Resolvers;
 using Elasticsearch.Net;
 
 namespace Nest

@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using Nest.DSL.Visitor;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Nest.Resolvers.Converters;
+using Elasticsearch.Net;
+using System.Linq.Expressions;
 
 namespace Nest
 {

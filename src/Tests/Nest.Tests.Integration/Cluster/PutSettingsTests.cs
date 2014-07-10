@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Elasticsearch.Net;
+using NUnit.Framework;
 
 namespace Nest.Tests.Integration.Cluster
 {

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.ServiceModel.Channels;
 using Newtonsoft.Json;
+using System;
 using Nest.Resolvers.Converters;
 
 namespace Nest

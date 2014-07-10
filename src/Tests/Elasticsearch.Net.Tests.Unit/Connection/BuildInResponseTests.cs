@@ -1,6 +1,8 @@
 using System;
+using System.Configuration;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Tests.Unit.Stubs;

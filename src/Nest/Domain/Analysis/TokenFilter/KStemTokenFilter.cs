@@ -1,4 +1,6 @@
-﻿namespace Nest
+﻿using Newtonsoft.Json;
+
+namespace Nest
 {
     /// <summary>
 	///The kstem token filter is a high performance filter for english. 

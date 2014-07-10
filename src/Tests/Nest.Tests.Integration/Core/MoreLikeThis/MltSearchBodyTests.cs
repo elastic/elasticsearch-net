@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using System.Reflection;
 
 namespace Nest.Tests.Integration.Core.MoreLikeThis
 {

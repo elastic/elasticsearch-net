@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Linq;
 using Elasticsearch.Net.Connection.Thrift;
 using Elasticsearch.Net.ConnectionPool;
 using FluentAssertions;
 using NUnit.Framework;
+using Nest.Tests.MockData.Domain;
+using Nest.Resolvers;
+using System.Net;
 
 namespace Nest.Tests.Integration.Core.Bulk
 {

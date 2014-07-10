@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using FakeItEasy;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 

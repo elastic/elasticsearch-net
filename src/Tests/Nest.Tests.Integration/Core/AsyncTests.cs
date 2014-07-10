@@ -1,5 +1,7 @@
 ﻿using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using System.Diagnostics;
+using System.Net;
 
 namespace Nest.Tests.Integration.Core
 {

@@ -1,6 +1,9 @@
-﻿using Elasticsearch.Net.Connection;
+﻿using System;
+using System.Linq;
+using Elasticsearch.Net.Connection;
 using FluentAssertions;
 using NUnit.Framework;
+using Nest.Tests.MockData.Domain;
 using Elasticsearch.Net;
 
 namespace Nest.Tests.Integration.RawCalls

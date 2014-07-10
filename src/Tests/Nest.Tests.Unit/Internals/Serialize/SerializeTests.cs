@@ -4,6 +4,7 @@ using System.Reflection;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest.Tests.Unit.Internals.Serialize
 {

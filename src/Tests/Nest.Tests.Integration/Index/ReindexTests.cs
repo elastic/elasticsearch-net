@@ -1,4 +1,9 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Nest.Tests.MockData;
+using Nest.Tests.MockData.Domain;
+using NUnit.Framework;
 
 
 namespace Nest.Tests.Integration.Index

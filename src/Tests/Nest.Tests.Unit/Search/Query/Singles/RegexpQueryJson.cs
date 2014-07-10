@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using Elasticsearch.Net;
 
 namespace Nest.Tests.Unit.Search.Query.Singles
 {

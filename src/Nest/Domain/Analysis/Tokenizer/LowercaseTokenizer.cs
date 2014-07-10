@@ -1,4 +1,7 @@
-﻿namespace Nest
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+
+namespace Nest
 {
 	/// <summary>
 	/// A tokenizer of type lowercase that performs the function of Letter Tokenizer and Lower Case Token Filter together. 

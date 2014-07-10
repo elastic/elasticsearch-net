@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Sockets;
+using System.Runtime.Remoting.Channels;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System.Diagnostics;
 using FluentAssertions;

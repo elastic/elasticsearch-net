@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
