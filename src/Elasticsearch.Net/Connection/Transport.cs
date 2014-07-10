@@ -23,7 +23,7 @@ namespace Elasticsearch.Net.Connection
 		const int BUFFER_SIZE = 4096;
 
 		protected static readonly string MaxRetryExceptionMessage = "Failed after retrying {2} times: '{0} {1}'. {3}";
-		protected static readonly string MaxRetryInnerMessage = "InnerException: {0}, InnerMessage: {1}";
+		protected static readonly string MaxRetryInnerMessage = "InnerException: {0}, InnerMessage: {1}, InnerStackTrace: {2}";
 		protected internal readonly IConnectionConfigurationValues ConfigurationValues;
 		protected internal readonly IConnection Connection;
 		private readonly IElasticsearchSerializer _serializer;
@@ -488,12 +488,12 @@ namespace Elasticsearch.Net.Connection
 
 					aggregate = aggregate.Flatten();
 					var innerExceptions = aggregate.InnerExceptions
-						.Select(ae => MaxRetryInnerMessage.F(ae.GetType().Name, ae.Message))
+						.Select(ae => MaxRetryInnerMessage.F(ae.GetType().Name, ae.Message, ae.StackTrace))
 						.ToList();
 					innerException = string.Join("\r\n", innerExceptions);
 				}
 				else
-					innerException = MaxRetryInnerMessage.F(e.GetType().Name, e.Message);
+					innerException = MaxRetryInnerMessage.F(e.GetType().Name, e.Message, e.StackTrace);
 			}
 			var exceptionMessage = MaxRetryExceptionMessage
 				.F(requestState.Method, requestState.Path, requestState.Retried, innerException);

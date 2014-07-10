@@ -82,6 +82,8 @@ namespace Nest
 		/// <param name="deserializationState">Optional deserialization state</param>
 		public virtual T Deserialize<T>(Stream stream)
 		{
+			if (stream == null) return default(T);
+
 			var settings = this._serializationSettings;
 
 			return _Deserialize<T>(stream, settings);
@@ -92,6 +94,7 @@ namespace Nest
 		/// </summary>
 		public T DeserializeInternal<T>(Stream stream, JsonConverter converter)
 		{
+			if (stream == null) return default(T);
 			if (converter == null) return this.Deserialize<T>(stream);
 
 			var serializer = JsonSerializer.Create(this.CreateSettings(converter));
@@ -103,6 +106,7 @@ namespace Nest
 
 		protected internal T _Deserialize<T>(Stream stream, JsonSerializerSettings settings = null)
 		{
+			if (stream == null) return default(T);
 			settings = settings ?? _serializationSettings;
 			var serializer = JsonSerializer.Create(settings);
 			var jsonTextReader = new JsonTextReader(new StreamReader(stream));
@@ -121,6 +125,11 @@ namespace Nest
 			//figure out wheter reading the stream async on our own might be beneficial 
 			//over memory possible memory usage
 			var tcs = new TaskCompletionSource<T>();
+			if (stream == null)
+			{
+				tcs.SetResult(default(T));
+				return tcs.Task;
+			}
 			var r = this.Deserialize<T>(stream);
 			tcs.SetResult(r);
 			return tcs.Task;

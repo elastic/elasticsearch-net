@@ -15,11 +15,10 @@ namespace Elasticsearch.Net.Serialization
 		}
 		public T Deserialize<T>(Stream stream)
 		{
-			var ms = stream as MemoryStream;
-			//if (ms != null)
-			// return SimpleJson.DeserializeObject<T>(ms.GetBuffer().Utf8String());
+			if (stream == null)
+				return default(T);
 
-			using (ms = new MemoryStream())
+			using (var ms = new MemoryStream())
 			{
 				stream.CopyTo(ms);
 				byte[] buffer = ms.ToArray();
@@ -31,6 +30,12 @@ namespace Elasticsearch.Net.Serialization
 		public Task<T> DeserializeAsync<T>(Stream stream)
 		{
 			var tcs = new TaskCompletionSource<T>();
+			if (stream == null)
+			{
+				tcs.SetResult(default(T));
+				return tcs.Task;
+			}
+
 			using (var ms = new MemoryStream())
 			{
 				// return a task that reads the stream asynchronously 
