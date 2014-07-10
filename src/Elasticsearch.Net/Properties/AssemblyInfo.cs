@@ -8,7 +8,7 @@ using System.Reflection;
 [assembly: AssemblyConfigurationAttribute("Release")]
 [assembly: AssemblyVersionAttribute("1.0.0")]
 [assembly: AssemblyFileVersionAttribute("1.0.0")]
-[assembly: AssemblyInformationalVersionAttribute("1.0.0-ci20140710110619")]
+[assembly: AssemblyInformationalVersionAttribute("1.0.0-rc1")]
 namespace System {
     internal static class AssemblyVersionInformation {
         internal const string Version = "1.0.0";
