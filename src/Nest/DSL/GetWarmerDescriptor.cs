@@ -1,27 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesGetWarmer")]
-	public partial class GetWarmerDescriptor : 
-		IndicesOptionalTypesNamePathDecriptor<GetWarmerDescriptor, GetWarmerRequestParameters>
-		, IPathInfo<GetWarmerRequestParameters>
-	{
-		ElasticsearchPathInfo<GetWarmerRequestParameters> IPathInfo<GetWarmerRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
-		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IGetWarmerRequest : IIndicesOptionalTypesNamePath<GetWarmerRequestParameters> { }
 
-			return pathInfo;
+	internal static class GetWarmerPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<GetWarmerRequestParameters> pathInfo, IGetWarmerRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+		}
+	}
+	
+	public partial class GetWarmerRequest : IndicesOptionalTypesNamePathBase<GetWarmerRequestParameters>, IGetWarmerRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetWarmerRequestParameters> pathInfo)
+		{
+			GetWarmerPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("IndicesGetWarmer")]
+	public partial class GetWarmerDescriptor : IndicesOptionalTypesNamePathDescriptor<GetWarmerDescriptor, GetWarmerRequestParameters>, IGetWarmerRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetWarmerRequestParameters> pathInfo)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 		}
 	}
 }

@@ -12,19 +12,20 @@ namespace Nest.Tests.Unit.Core.Update
 			public string Name { get; set; }
 			public string Country { get; set; }
 		}
+		public class UpsertCount
+		{
+			public int Count { get; set; }
+		}
 
 		[Test]
 		public void UpsertUsingScript()
 		{
-			var s = new UpdateDescriptor<ElasticsearchProject, ElasticsearchProject>()
+			var s = new UpdateDescriptor<UpsertCount, UpsertCount>()
 			  .Script("ctx._source.counter += count")
 			  .Params(p => p
 				  .Add("count", 4)
 			  )
-			  .Upsert(u=>u
-				.Add("count", 1)
-			  );
-
+			  .Upsert(new UpsertCount { Count = 1 }); 
 			this.JsonEquals(s, MethodInfo.GetCurrentMethod()); 
 		}
 		[Test]

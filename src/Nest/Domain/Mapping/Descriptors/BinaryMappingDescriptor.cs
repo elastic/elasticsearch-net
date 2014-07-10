@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using Nest.Resolvers;
 
@@ -25,5 +26,40 @@ namespace Nest
 			return this;
 		}
 
+		public BinaryMappingDescriptor<T> DocValues(bool docValues = true)
+		{
+			this._Mapping.DocValues = docValues;
+			return this;
+		}
+
+		public BinaryMappingDescriptor<T> Store(bool store = true)
+		{
+			this._Mapping.Store = store;
+			return this;
+		}
+
+		public BinaryMappingDescriptor<T> Compress(bool compress = true )
+		{
+			this._Mapping.Compress = compress;
+			return this;
+		}
+
+		public BinaryMappingDescriptor<T> CompressThreshold(string compressThreshold)
+		{
+			this._Mapping.CompressThreshold = compressThreshold;
+			return this;
+		}
+
+		public BinaryMappingDescriptor<T> CopyTo(params string[] fields)
+		{
+			this._Mapping.CopyTo = fields.Select(f => (PropertyPathMarker)f);
+			return this;
+		}
+
+		public BinaryMappingDescriptor<T> CopyTo(params Expression<Func<T, object>>[] objectPaths)
+		{
+			this._Mapping.CopyTo = objectPaths.Select(e => (PropertyPathMarker)e);
+			return this;
+		}
 	}
 }

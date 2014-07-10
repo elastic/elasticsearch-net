@@ -16,11 +16,17 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-benchmark.html
 	///</pre>
 	///</summary>
-	public partial class AbortBenchmarkDescriptor
+	public partial class AbortBenchmarkDescriptor  : BaseRequest<AbortBenchmarkRequestParameters>
 	{
-		internal AbortBenchmarkRequestParameters _QueryString = new AbortBenchmarkRequestParameters(); 
-
 		
+	
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<AbortBenchmarkRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -29,15 +35,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html
 	///</pre>
 	///</summary>
-	public partial class BulkDescriptor
+	public partial class BulkDescriptor 
 	{
-		internal BulkRequestParameters _QueryString = new BulkRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public BulkDescriptor Consistency(ConsistencyOptions consistency)
+		public BulkDescriptor Consistency(Consistency consistency)
 		{
-			this._QueryString.Consistency(consistency);
+			this.Request.RequestParameters.Consistency(consistency);
 			return this;
 		}
 		
@@ -45,15 +51,15 @@ namespace Nest
 		///<summary>Refresh the index after performing the operation</summary>
 		public BulkDescriptor Refresh(bool refresh = true)
 		{
-			this._QueryString.Refresh(refresh);
+			this.Request.RequestParameters.Refresh(refresh);
 			return this;
 		}
 		
 
 		///<summary>Explicitely set the replication type</summary>
-		public BulkDescriptor Replication(ReplicationOptions replication)
+		public BulkDescriptor Replication(Replication replication)
 		{
-			this._QueryString.Replication(replication);
+			this.Request.RequestParameters.Replication(replication);
 			return this;
 		}
 		
@@ -61,7 +67,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public BulkDescriptor Routing(string routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
@@ -69,7 +75,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public BulkDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
@@ -77,11 +83,11 @@ namespace Nest
 		///<summary>Default document type for items which don&#39;t provide one</summary>
 		public BulkDescriptor TypeQueryString(string type)
 		{
-			this._QueryString.Type(type);
+			this.Request.RequestParameters.Type(type);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -90,15 +96,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-aliases.html
 	///</pre>
 	///</summary>
-	public partial class CatAliasesDescriptor
+	public partial class CatAliasesDescriptor  : BaseRequest<CatAliasesRequestParameters>
 	{
-		internal CatAliasesRequestParameters _QueryString = new CatAliasesRequestParameters(); 
-
+		
+	
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatAliasesDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -106,7 +112,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatAliasesDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -114,7 +120,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatAliasesDescriptor H(params string[] h)
 		{
-			this._QueryString.H(h);
+			this.Request.RequestParameters.H(h);
 			return this;
 		}
 		
@@ -122,7 +128,7 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatAliasesDescriptor Help(bool help = true)
 		{
-			this._QueryString.Help(help);
+			this.Request.RequestParameters.Help(help);
 			return this;
 		}
 		
@@ -130,11 +136,17 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatAliasesDescriptor V(bool v = true)
 		{
-			this._QueryString.V(v);
+			this.Request.RequestParameters.V(v);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatAliasesRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -143,15 +155,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html
 	///</pre>
 	///</summary>
-	public partial class CatAllocationDescriptor
+	public partial class CatAllocationDescriptor  : BaseRequest<CatAllocationRequestParameters>
 	{
-		internal CatAllocationRequestParameters _QueryString = new CatAllocationRequestParameters(); 
-
+		
+	
 
 		///<summary>The unit in which to display byte values</summary>
-		public CatAllocationDescriptor Bytes(BytesOptions bytes)
+		public CatAllocationDescriptor Bytes(Bytes bytes)
 		{
-			this._QueryString.Bytes(bytes);
+			this.Request.RequestParameters.Bytes(bytes);
 			return this;
 		}
 		
@@ -159,7 +171,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatAllocationDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -167,7 +179,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatAllocationDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -175,7 +187,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatAllocationDescriptor H(params string[] h)
 		{
-			this._QueryString.H(h);
+			this.Request.RequestParameters.H(h);
 			return this;
 		}
 		
@@ -183,7 +195,7 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatAllocationDescriptor Help(bool help = true)
 		{
-			this._QueryString.Help(help);
+			this.Request.RequestParameters.Help(help);
 			return this;
 		}
 		
@@ -191,11 +203,17 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatAllocationDescriptor V(bool v = true)
 		{
-			this._QueryString.V(v);
+			this.Request.RequestParameters.V(v);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatAllocationRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -204,15 +222,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html
 	///</pre>
 	///</summary>
-	public partial class CatCountDescriptor
+	public partial class CatCountDescriptor  : BaseRequest<CatCountRequestParameters>
 	{
-		internal CatCountRequestParameters _QueryString = new CatCountRequestParameters(); 
-
+		
+	
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatCountDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -220,7 +238,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatCountDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -228,7 +246,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatCountDescriptor H(params string[] h)
 		{
-			this._QueryString.H(h);
+			this.Request.RequestParameters.H(h);
 			return this;
 		}
 		
@@ -236,7 +254,7 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatCountDescriptor Help(bool help = true)
 		{
-			this._QueryString.Help(help);
+			this.Request.RequestParameters.Help(help);
 			return this;
 		}
 		
@@ -244,11 +262,17 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatCountDescriptor V(bool v = true)
 		{
-			this._QueryString.V(v);
+			this.Request.RequestParameters.V(v);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatCountRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -257,15 +281,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-fielddata.html
 	///</pre>
 	///</summary>
-	public partial class CatFielddataDescriptor
+	public partial class CatFielddataDescriptor  : BaseRequest<CatFielddataRequestParameters>
 	{
-		internal CatFielddataRequestParameters _QueryString = new CatFielddataRequestParameters(); 
-
+		
+	
 
 		///<summary>The unit in which to display byte values</summary>
-		public CatFielddataDescriptor Bytes(BytesOptions bytes)
+		public CatFielddataDescriptor Bytes(Bytes bytes)
 		{
-			this._QueryString.Bytes(bytes);
+			this.Request.RequestParameters.Bytes(bytes);
 			return this;
 		}
 		
@@ -273,7 +297,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatFielddataDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -281,7 +305,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatFielddataDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -289,7 +313,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatFielddataDescriptor H(params string[] h)
 		{
-			this._QueryString.H(h);
+			this.Request.RequestParameters.H(h);
 			return this;
 		}
 		
@@ -297,7 +321,7 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatFielddataDescriptor Help(bool help = true)
 		{
-			this._QueryString.Help(help);
+			this.Request.RequestParameters.Help(help);
 			return this;
 		}
 		
@@ -305,7 +329,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatFielddataDescriptor V(bool v = true)
 		{
-			this._QueryString.V(v);
+			this.Request.RequestParameters.V(v);
 			return this;
 		}
 		
@@ -313,7 +337,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields to return the fielddata size</summary>
 		public CatFielddataDescriptor Fields(params string[] fields)
 		{
-			this._QueryString.Fields(fields);
+			this.Request.RequestParameters.Fields(fields);
 			return this;
 		}
 		
@@ -324,11 +348,17 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._Fields(typedPathLookups);
+			this.Request.RequestParameters._Fields(typedPathLookups);
 			return this;
 		}
 			
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatFielddataRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -337,15 +367,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-health.html
 	///</pre>
 	///</summary>
-	public partial class CatHealthDescriptor
+	public partial class CatHealthDescriptor  : BaseRequest<CatHealthRequestParameters>
 	{
-		internal CatHealthRequestParameters _QueryString = new CatHealthRequestParameters(); 
-
+		
+	
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatHealthDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -353,7 +383,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatHealthDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -361,7 +391,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatHealthDescriptor H(params string[] h)
 		{
-			this._QueryString.H(h);
+			this.Request.RequestParameters.H(h);
 			return this;
 		}
 		
@@ -369,7 +399,7 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatHealthDescriptor Help(bool help = true)
 		{
-			this._QueryString.Help(help);
+			this.Request.RequestParameters.Help(help);
 			return this;
 		}
 		
@@ -377,7 +407,7 @@ namespace Nest
 		///<summary>Set to false to disable timestamping</summary>
 		public CatHealthDescriptor Ts(bool ts = true)
 		{
-			this._QueryString.Ts(ts);
+			this.Request.RequestParameters.Ts(ts);
 			return this;
 		}
 		
@@ -385,11 +415,17 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatHealthDescriptor V(bool v = true)
 		{
-			this._QueryString.V(v);
+			this.Request.RequestParameters.V(v);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatHealthRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -398,19 +434,25 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat.html
 	///</pre>
 	///</summary>
-	public partial class CatHelpDescriptor
+	public partial class CatHelpDescriptor  : BaseRequest<CatHelpRequestParameters>
 	{
-		internal CatHelpRequestParameters _QueryString = new CatHelpRequestParameters(); 
-
+		
+	
 
 		///<summary>Return help information</summary>
 		public CatHelpDescriptor Help(bool help = true)
 		{
-			this._QueryString.Help(help);
+			this.Request.RequestParameters.Help(help);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatHelpRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -419,15 +461,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html
 	///</pre>
 	///</summary>
-	public partial class CatIndicesDescriptor
+	public partial class CatIndicesDescriptor  : BaseRequest<CatIndicesRequestParameters>
 	{
-		internal CatIndicesRequestParameters _QueryString = new CatIndicesRequestParameters(); 
-
+		
+	
 
 		///<summary>The unit in which to display byte values</summary>
-		public CatIndicesDescriptor Bytes(BytesOptions bytes)
+		public CatIndicesDescriptor Bytes(Bytes bytes)
 		{
-			this._QueryString.Bytes(bytes);
+			this.Request.RequestParameters.Bytes(bytes);
 			return this;
 		}
 		
@@ -435,7 +477,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatIndicesDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -443,7 +485,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatIndicesDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -451,7 +493,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatIndicesDescriptor H(params string[] h)
 		{
-			this._QueryString.H(h);
+			this.Request.RequestParameters.H(h);
 			return this;
 		}
 		
@@ -459,7 +501,7 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatIndicesDescriptor Help(bool help = true)
 		{
-			this._QueryString.Help(help);
+			this.Request.RequestParameters.Help(help);
 			return this;
 		}
 		
@@ -467,7 +509,7 @@ namespace Nest
 		///<summary>Set to true to return stats only for primary shards</summary>
 		public CatIndicesDescriptor Pri(bool pri = true)
 		{
-			this._QueryString.Pri(pri);
+			this.Request.RequestParameters.Pri(pri);
 			return this;
 		}
 		
@@ -475,11 +517,17 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatIndicesDescriptor V(bool v = true)
 		{
-			this._QueryString.V(v);
+			this.Request.RequestParameters.V(v);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatIndicesRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -488,15 +536,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-master.html
 	///</pre>
 	///</summary>
-	public partial class CatMasterDescriptor
+	public partial class CatMasterDescriptor  : BaseRequest<CatMasterRequestParameters>
 	{
-		internal CatMasterRequestParameters _QueryString = new CatMasterRequestParameters(); 
-
+		
+	
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatMasterDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -504,7 +552,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatMasterDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -512,7 +560,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatMasterDescriptor H(params string[] h)
 		{
-			this._QueryString.H(h);
+			this.Request.RequestParameters.H(h);
 			return this;
 		}
 		
@@ -520,7 +568,7 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatMasterDescriptor Help(bool help = true)
 		{
-			this._QueryString.Help(help);
+			this.Request.RequestParameters.Help(help);
 			return this;
 		}
 		
@@ -528,11 +576,17 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatMasterDescriptor V(bool v = true)
 		{
-			this._QueryString.V(v);
+			this.Request.RequestParameters.V(v);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatMasterRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -541,15 +595,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-nodes.html
 	///</pre>
 	///</summary>
-	public partial class CatNodesDescriptor
+	public partial class CatNodesDescriptor  : BaseRequest<CatNodesRequestParameters>
 	{
-		internal CatNodesRequestParameters _QueryString = new CatNodesRequestParameters(); 
-
+		
+	
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatNodesDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -557,7 +611,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatNodesDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -565,7 +619,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatNodesDescriptor H(params string[] h)
 		{
-			this._QueryString.H(h);
+			this.Request.RequestParameters.H(h);
 			return this;
 		}
 		
@@ -573,7 +627,7 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatNodesDescriptor Help(bool help = true)
 		{
-			this._QueryString.Help(help);
+			this.Request.RequestParameters.Help(help);
 			return this;
 		}
 		
@@ -581,11 +635,17 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatNodesDescriptor V(bool v = true)
 		{
-			this._QueryString.V(v);
+			this.Request.RequestParameters.V(v);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatNodesRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -594,15 +654,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-pending-tasks.html
 	///</pre>
 	///</summary>
-	public partial class CatPendingTasksDescriptor
+	public partial class CatPendingTasksDescriptor  : BaseRequest<CatPendingTasksRequestParameters>
 	{
-		internal CatPendingTasksRequestParameters _QueryString = new CatPendingTasksRequestParameters(); 
-
+		
+	
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatPendingTasksDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -610,7 +670,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatPendingTasksDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -618,7 +678,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatPendingTasksDescriptor H(params string[] h)
 		{
-			this._QueryString.H(h);
+			this.Request.RequestParameters.H(h);
 			return this;
 		}
 		
@@ -626,7 +686,7 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatPendingTasksDescriptor Help(bool help = true)
 		{
-			this._QueryString.Help(help);
+			this.Request.RequestParameters.Help(help);
 			return this;
 		}
 		
@@ -634,11 +694,17 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatPendingTasksDescriptor V(bool v = true)
 		{
-			this._QueryString.V(v);
+			this.Request.RequestParameters.V(v);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatPendingTasksRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -647,15 +713,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-plugins.html
 	///</pre>
 	///</summary>
-	public partial class CatPluginsDescriptor
+	public partial class CatPluginsDescriptor  : BaseRequest<CatPluginsRequestParameters>
 	{
-		internal CatPluginsRequestParameters _QueryString = new CatPluginsRequestParameters(); 
-
+		
+	
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatPluginsDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -663,7 +729,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatPluginsDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -671,7 +737,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatPluginsDescriptor H(params string[] h)
 		{
-			this._QueryString.H(h);
+			this.Request.RequestParameters.H(h);
 			return this;
 		}
 		
@@ -679,7 +745,7 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatPluginsDescriptor Help(bool help = true)
 		{
-			this._QueryString.Help(help);
+			this.Request.RequestParameters.Help(help);
 			return this;
 		}
 		
@@ -687,11 +753,17 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatPluginsDescriptor V(bool v = true)
 		{
-			this._QueryString.V(v);
+			this.Request.RequestParameters.V(v);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatPluginsRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -700,15 +772,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html
 	///</pre>
 	///</summary>
-	public partial class CatRecoveryDescriptor
+	public partial class CatRecoveryDescriptor  : BaseRequest<CatRecoveryRequestParameters>
 	{
-		internal CatRecoveryRequestParameters _QueryString = new CatRecoveryRequestParameters(); 
-
+		
+	
 
 		///<summary>The unit in which to display byte values</summary>
-		public CatRecoveryDescriptor Bytes(BytesOptions bytes)
+		public CatRecoveryDescriptor Bytes(Bytes bytes)
 		{
-			this._QueryString.Bytes(bytes);
+			this.Request.RequestParameters.Bytes(bytes);
 			return this;
 		}
 		
@@ -716,7 +788,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatRecoveryDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -724,7 +796,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatRecoveryDescriptor H(params string[] h)
 		{
-			this._QueryString.H(h);
+			this.Request.RequestParameters.H(h);
 			return this;
 		}
 		
@@ -732,7 +804,7 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatRecoveryDescriptor Help(bool help = true)
 		{
-			this._QueryString.Help(help);
+			this.Request.RequestParameters.Help(help);
 			return this;
 		}
 		
@@ -740,11 +812,17 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatRecoveryDescriptor V(bool v = true)
 		{
-			this._QueryString.V(v);
+			this.Request.RequestParameters.V(v);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatRecoveryRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -753,15 +831,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html
 	///</pre>
 	///</summary>
-	public partial class CatShardsDescriptor
+	public partial class CatShardsDescriptor  : BaseRequest<CatShardsRequestParameters>
 	{
-		internal CatShardsRequestParameters _QueryString = new CatShardsRequestParameters(); 
-
+		
+	
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatShardsDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -769,7 +847,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatShardsDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -777,7 +855,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatShardsDescriptor H(params string[] h)
 		{
-			this._QueryString.H(h);
+			this.Request.RequestParameters.H(h);
 			return this;
 		}
 		
@@ -785,7 +863,7 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatShardsDescriptor Help(bool help = true)
 		{
-			this._QueryString.Help(help);
+			this.Request.RequestParameters.Help(help);
 			return this;
 		}
 		
@@ -793,11 +871,17 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatShardsDescriptor V(bool v = true)
 		{
-			this._QueryString.V(v);
+			this.Request.RequestParameters.V(v);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatShardsRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -806,15 +890,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-thread-pool.html
 	///</pre>
 	///</summary>
-	public partial class CatThreadPoolDescriptor
+	public partial class CatThreadPoolDescriptor  : BaseRequest<CatThreadPoolRequestParameters>
 	{
-		internal CatThreadPoolRequestParameters _QueryString = new CatThreadPoolRequestParameters(); 
-
+		
+	
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatThreadPoolDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -822,7 +906,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CatThreadPoolDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -830,7 +914,7 @@ namespace Nest
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatThreadPoolDescriptor H(params string[] h)
 		{
-			this._QueryString.H(h);
+			this.Request.RequestParameters.H(h);
 			return this;
 		}
 		
@@ -838,7 +922,7 @@ namespace Nest
 		///<summary>Return help information</summary>
 		public CatThreadPoolDescriptor Help(bool help = true)
 		{
-			this._QueryString.Help(help);
+			this.Request.RequestParameters.Help(help);
 			return this;
 		}
 		
@@ -846,7 +930,7 @@ namespace Nest
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatThreadPoolDescriptor V(bool v = true)
 		{
-			this._QueryString.V(v);
+			this.Request.RequestParameters.V(v);
 			return this;
 		}
 		
@@ -854,11 +938,17 @@ namespace Nest
 		///<summary>Enables displaying the complete node ids</summary>
 		public CatThreadPoolDescriptor FullId(bool full_id = true)
 		{
-			this._QueryString.FullId(full_id);
+			this.Request.RequestParameters.FullId(full_id);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatThreadPoolRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -867,11 +957,11 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
 	///</pre>
 	///</summary>
-	public partial class ClearScrollDescriptor
+	public partial class ClearScrollDescriptor 
 	{
-		internal ClearScrollRequestParameters _QueryString = new ClearScrollRequestParameters(); 
-
 		
+	
+	
 	}
 	
 	
@@ -880,15 +970,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
 	///</pre>
 	///</summary>
-	public partial class ClusterGetSettingsDescriptor
+	public partial class ClusterGetSettingsDescriptor 
 	{
-		internal ClusterGetSettingsRequestParameters _QueryString = new ClusterGetSettingsRequestParameters(); 
-
+		
+	
 
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterGetSettingsDescriptor FlatSettings(bool flat_settings = true)
 		{
-			this._QueryString.FlatSettings(flat_settings);
+			this.Request.RequestParameters.FlatSettings(flat_settings);
 			return this;
 		}
 		
@@ -896,7 +986,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public ClusterGetSettingsDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -904,11 +994,11 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public ClusterGetSettingsDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -917,15 +1007,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-health.html
 	///</pre>
 	///</summary>
-	public partial class ClusterHealthDescriptor
+	public partial class ClusterHealthDescriptor 
 	{
-		internal ClusterHealthRequestParameters _QueryString = new ClusterHealthRequestParameters(); 
-
+		
+	
 
 		///<summary>Specify the level of detail for returned information</summary>
-		public ClusterHealthDescriptor Level(LevelOptions level)
+		public ClusterHealthDescriptor Level(Level level)
 		{
-			this._QueryString.Level(level);
+			this.Request.RequestParameters.Level(level);
 			return this;
 		}
 		
@@ -933,7 +1023,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterHealthDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -941,7 +1031,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public ClusterHealthDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -949,7 +1039,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public ClusterHealthDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
@@ -957,7 +1047,7 @@ namespace Nest
 		///<summary>Wait until the specified number of shards is active</summary>
 		public ClusterHealthDescriptor WaitForActiveShards(long wait_for_active_shards)
 		{
-			this._QueryString.WaitForActiveShards(wait_for_active_shards);
+			this.Request.RequestParameters.WaitForActiveShards(wait_for_active_shards);
 			return this;
 		}
 		
@@ -965,7 +1055,7 @@ namespace Nest
 		///<summary>Wait until the specified number of nodes is available</summary>
 		public ClusterHealthDescriptor WaitForNodes(string wait_for_nodes)
 		{
-			this._QueryString.WaitForNodes(wait_for_nodes);
+			this.Request.RequestParameters.WaitForNodes(wait_for_nodes);
 			return this;
 		}
 		
@@ -973,19 +1063,19 @@ namespace Nest
 		///<summary>Wait until the specified number of relocating shards is finished</summary>
 		public ClusterHealthDescriptor WaitForRelocatingShards(long wait_for_relocating_shards)
 		{
-			this._QueryString.WaitForRelocatingShards(wait_for_relocating_shards);
+			this.Request.RequestParameters.WaitForRelocatingShards(wait_for_relocating_shards);
 			return this;
 		}
 		
 
 		///<summary>Wait until cluster is in a specific state</summary>
-		public ClusterHealthDescriptor WaitForStatus(WaitForStatusOptions wait_for_status)
+		public ClusterHealthDescriptor WaitForStatus(WaitForStatus wait_for_status)
 		{
-			this._QueryString.WaitForStatus(wait_for_status);
+			this.Request.RequestParameters.WaitForStatus(wait_for_status);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -994,15 +1084,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-pending.html
 	///</pre>
 	///</summary>
-	public partial class ClusterPendingTasksDescriptor
+	public partial class ClusterPendingTasksDescriptor  : BaseRequest<ClusterPendingTasksRequestParameters>
 	{
-		internal ClusterPendingTasksRequestParameters _QueryString = new ClusterPendingTasksRequestParameters(); 
-
+		
+	
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterPendingTasksDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -1010,11 +1100,17 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public ClusterPendingTasksDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -1023,19 +1119,19 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
 	///</pre>
 	///</summary>
-	public partial class ClusterPutSettingsDescriptor
+	public partial class ClusterSettingsDescriptor 
 	{
-		internal ClusterPutSettingsRequestParameters _QueryString = new ClusterPutSettingsRequestParameters(); 
-
+		
+	
 
 		///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterPutSettingsDescriptor FlatSettings(bool flat_settings = true)
+		public ClusterSettingsDescriptor FlatSettings(bool flat_settings = true)
 		{
-			this._QueryString.FlatSettings(flat_settings);
+			this.Request.RequestParameters.FlatSettings(flat_settings);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -1044,15 +1140,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-reroute.html
 	///</pre>
 	///</summary>
-	public partial class ClusterRerouteDescriptor
+	public partial class ClusterRerouteDescriptor  : BaseRequest<ClusterRerouteRequestParameters>
 	{
-		internal ClusterRerouteRequestParameters _QueryString = new ClusterRerouteRequestParameters(); 
-
+		
+	
 
 		///<summary>Simulate the operation only and return the resulting state</summary>
 		public ClusterRerouteDescriptor DryRun(bool dry_run = true)
 		{
-			this._QueryString.DryRun(dry_run);
+			this.Request.RequestParameters.DryRun(dry_run);
 			return this;
 		}
 		
@@ -1060,7 +1156,7 @@ namespace Nest
 		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
 		public ClusterRerouteDescriptor Explain(bool explain = true)
 		{
-			this._QueryString.Explain(explain);
+			this.Request.RequestParameters.Explain(explain);
 			return this;
 		}
 		
@@ -1068,7 +1164,7 @@ namespace Nest
 		///<summary>Don&#39;t return cluster state metadata (default: false)</summary>
 		public ClusterRerouteDescriptor FilterMetadata(bool filter_metadata = true)
 		{
-			this._QueryString.FilterMetadata(filter_metadata);
+			this.Request.RequestParameters.FilterMetadata(filter_metadata);
 			return this;
 		}
 		
@@ -1076,7 +1172,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public ClusterRerouteDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -1084,11 +1180,17 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public ClusterRerouteDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterRerouteRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -1097,15 +1199,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html
 	///</pre>
 	///</summary>
-	public partial class ClusterStateDescriptor
+	public partial class ClusterStateDescriptor 
 	{
-		internal ClusterStateRequestParameters _QueryString = new ClusterStateRequestParameters(); 
-
+		
+	
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterStateDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -1113,7 +1215,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public ClusterStateDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -1121,11 +1223,11 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterStateDescriptor FlatSettings(bool flat_settings = true)
 		{
-			this._QueryString.FlatSettings(flat_settings);
+			this.Request.RequestParameters.FlatSettings(flat_settings);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -1134,15 +1236,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-stats.html
 	///</pre>
 	///</summary>
-	public partial class ClusterStatsDescriptor
+	public partial class ClusterStatsDescriptor  : BaseRequest<ClusterStatsRequestParameters>
 	{
-		internal ClusterStatsRequestParameters _QueryString = new ClusterStatsRequestParameters(); 
-
+		
+	
 
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterStatsDescriptor FlatSettings(bool flat_settings = true)
 		{
-			this._QueryString.FlatSettings(flat_settings);
+			this.Request.RequestParameters.FlatSettings(flat_settings);
 			return this;
 		}
 		
@@ -1150,11 +1252,17 @@ namespace Nest
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public ClusterStatsDescriptor Human(bool human = true)
 		{
-			this._QueryString.Human(human);
+			this.Request.RequestParameters.Human(human);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterStatsRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -1163,15 +1271,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html
 	///</pre>
 	///</summary>
-	public partial class CountDescriptor<T>
+	public partial class CountDescriptor<T> 
 	{
-		internal CountRequestParameters _QueryString = new CountRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public CountDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -1179,23 +1287,23 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public CountDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CountDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public CountDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
 
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public CountDescriptor<T> MinScore(long min_score)
+		public CountDescriptor<T> MinScore(double min_score)
 		{
-			this._QueryString.MinScore(min_score);
+			this.Request.RequestParameters.MinScore(min_score);
 			return this;
 		}
 		
@@ -1203,7 +1311,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public CountDescriptor<T> Preference(string preference)
 		{
-			this._QueryString.Preference(preference);
+			this.Request.RequestParameters.Preference(preference);
 			return this;
 		}
 		
@@ -1211,7 +1319,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public CountDescriptor<T> Routing(string routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
@@ -1219,11 +1327,11 @@ namespace Nest
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
 		public CountDescriptor<T> Source(string source)
 		{
-			this._QueryString.Source(source);
+			this.Request.RequestParameters.Source(source);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -1232,83 +1340,83 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
-	public partial class PercolateCountDescriptor<T,K>
+	public partial class PercolateCountDescriptor<T> 
 	{
-		internal PercolateCountRequestParameters _QueryString = new PercolateCountRequestParameters(); 
-
+		
+	
 
 		///<summary>A comma-separated list of specific routing values</summary>
-		public PercolateCountDescriptor<T,K> Routing(params string[] routing)
+		public PercolateCountDescriptor<T> Routing(params string[] routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public PercolateCountDescriptor<T,K> Preference(string preference)
+		public PercolateCountDescriptor<T> Preference(string preference)
 		{
-			this._QueryString.Preference(preference);
+			this.Request.RequestParameters.Preference(preference);
 			return this;
 		}
 		
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PercolateCountDescriptor<T,K> IgnoreUnavailable(bool ignore_unavailable = true)
+		public PercolateCountDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PercolateCountDescriptor<T,K> AllowNoIndices(bool allow_no_indices = true)
+		public PercolateCountDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateCountDescriptor<T,K> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PercolateCountDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
 
 		///<summary>The index to count percolate the document into. Defaults to index.</summary>
-		public PercolateCountDescriptor<T,K> PercolateIndex(string percolate_index)
+		public PercolateCountDescriptor<T> PercolateIndex(string percolate_index)
 		{
-			this._QueryString.PercolateIndex(percolate_index);
+			this.Request.RequestParameters.PercolateIndex(percolate_index);
 			return this;
 		}
 		
 
 		///<summary>The type to count percolate document into. Defaults to type.</summary>
-		public PercolateCountDescriptor<T,K> PercolateType(string percolate_type)
+		public PercolateCountDescriptor<T> PercolateType(string percolate_type)
 		{
-			this._QueryString.PercolateType(percolate_type);
+			this.Request.RequestParameters.PercolateType(percolate_type);
 			return this;
 		}
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateCountDescriptor<T,K> Version(long version)
+		public PercolateCountDescriptor<T> Version(long version)
 		{
-			this._QueryString.Version(version);
+			this.Request.RequestParameters.Version(version);
 			return this;
 		}
 		
 
 		///<summary>Specific version type</summary>
-		public PercolateCountDescriptor<T,K> VersionType(VersionTypeOptions version_type)
+		public PercolateCountDescriptor<T> VersionType(VersionType version_type)
 		{
-			this._QueryString.VersionType(version_type);
+			this.Request.RequestParameters.VersionType(version_type);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -1317,15 +1425,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete.html
 	///</pre>
 	///</summary>
-	public partial class DeleteDescriptor<T>
+	public partial class DeleteDescriptor<T> 
 	{
-		internal DeleteRequestParameters _QueryString = new DeleteRequestParameters(); 
-
+		
+	
 
 		///<summary>Specific write consistency setting for the operation</summary>
-		public DeleteDescriptor<T> Consistency(ConsistencyOptions consistency)
+		public DeleteDescriptor<T> Consistency(Consistency consistency)
 		{
-			this._QueryString.Consistency(consistency);
+			this.Request.RequestParameters.Consistency(consistency);
 			return this;
 		}
 		
@@ -1333,7 +1441,7 @@ namespace Nest
 		///<summary>ID of parent document</summary>
 		public DeleteDescriptor<T> Parent(string parent)
 		{
-			this._QueryString.Parent(parent);
+			this.Request.RequestParameters.Parent(parent);
 			return this;
 		}
 		
@@ -1341,15 +1449,15 @@ namespace Nest
 		///<summary>Refresh the index after performing the operation</summary>
 		public DeleteDescriptor<T> Refresh(bool refresh = true)
 		{
-			this._QueryString.Refresh(refresh);
+			this.Request.RequestParameters.Refresh(refresh);
 			return this;
 		}
 		
 
 		///<summary>Specific replication type</summary>
-		public DeleteDescriptor<T> Replication(ReplicationOptions replication)
+		public DeleteDescriptor<T> Replication(Replication replication)
 		{
-			this._QueryString.Replication(replication);
+			this.Request.RequestParameters.Replication(replication);
 			return this;
 		}
 		
@@ -1357,7 +1465,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public DeleteDescriptor<T> Routing(string routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
@@ -1365,7 +1473,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public DeleteDescriptor<T> Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
@@ -1373,19 +1481,19 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public DeleteDescriptor<T> Version(long version)
 		{
-			this._QueryString.Version(version);
+			this.Request.RequestParameters.Version(version);
 			return this;
 		}
 		
 
 		///<summary>Specific version type</summary>
-		public DeleteDescriptor<T> VersionType(VersionTypeOptions version_type)
+		public DeleteDescriptor<T> VersionType(VersionType version_type)
 		{
-			this._QueryString.VersionType(version_type);
+			this.Request.RequestParameters.VersionType(version_type);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -1394,31 +1502,31 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete-by-query.html
 	///</pre>
 	///</summary>
-	public partial class DeleteByQueryDescriptor<T>
+	public partial class DeleteByQueryDescriptor<T> 
 	{
-		internal DeleteByQueryRequestParameters _QueryString = new DeleteByQueryRequestParameters(); 
-
+		
+	
 
 		///<summary>The analyzer to use for the query string</summary>
 		public DeleteByQueryDescriptor<T> Analyzer(string analyzer)
 		{
-			this._QueryString.Analyzer(analyzer);
+			this.Request.RequestParameters.Analyzer(analyzer);
 			return this;
 		}
 		
 
 		///<summary>Specific write consistency setting for the operation</summary>
-		public DeleteByQueryDescriptor<T> Consistency(ConsistencyOptions consistency)
+		public DeleteByQueryDescriptor<T> Consistency(Consistency consistency)
 		{
-			this._QueryString.Consistency(consistency);
+			this.Request.RequestParameters.Consistency(consistency);
 			return this;
 		}
 		
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperatorOptions default_operator)
+		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator)
 		{
-			this._QueryString.DefaultOperator(default_operator);
+			this.Request.RequestParameters.DefaultOperator(default_operator);
 			return this;
 		}
 		
@@ -1426,7 +1534,7 @@ namespace Nest
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public DeleteByQueryDescriptor<T> Df(string df)
 		{
-			this._QueryString.Df(df);
+			this.Request.RequestParameters.Df(df);
 			return this;
 		}
 		
@@ -1434,7 +1542,7 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public DeleteByQueryDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -1442,23 +1550,23 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public DeleteByQueryDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
 
 		///<summary>Specific replication type</summary>
-		public DeleteByQueryDescriptor<T> Replication(ReplicationOptions replication)
+		public DeleteByQueryDescriptor<T> Replication(Replication replication)
 		{
-			this._QueryString.Replication(replication);
+			this.Request.RequestParameters.Replication(replication);
 			return this;
 		}
 		
@@ -1466,7 +1574,7 @@ namespace Nest
 		///<summary>Query in the Lucene query string syntax</summary>
 		public DeleteByQueryDescriptor<T> Q(string q)
 		{
-			this._QueryString.Q(q);
+			this.Request.RequestParameters.Q(q);
 			return this;
 		}
 		
@@ -1474,7 +1582,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public DeleteByQueryDescriptor<T> Routing(string routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
@@ -1482,7 +1590,7 @@ namespace Nest
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
 		public DeleteByQueryDescriptor<T> Source(string source)
 		{
-			this._QueryString.Source(source);
+			this.Request.RequestParameters.Source(source);
 			return this;
 		}
 		
@@ -1490,11 +1598,11 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public DeleteByQueryDescriptor<T> Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -1503,15 +1611,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
-	public partial class DocumentExistsDescriptor<T>
+	public partial class DocumentExistsDescriptor<T> 
 	{
-		internal DocumentExistsRequestParameters _QueryString = new DocumentExistsRequestParameters(); 
-
+		
+	
 
 		///<summary>The ID of the parent document</summary>
 		public DocumentExistsDescriptor<T> Parent(string parent)
 		{
-			this._QueryString.Parent(parent);
+			this.Request.RequestParameters.Parent(parent);
 			return this;
 		}
 		
@@ -1519,7 +1627,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public DocumentExistsDescriptor<T> Preference(string preference)
 		{
-			this._QueryString.Preference(preference);
+			this.Request.RequestParameters.Preference(preference);
 			return this;
 		}
 		
@@ -1527,7 +1635,7 @@ namespace Nest
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public DocumentExistsDescriptor<T> Realtime(bool realtime = true)
 		{
-			this._QueryString.Realtime(realtime);
+			this.Request.RequestParameters.Realtime(realtime);
 			return this;
 		}
 		
@@ -1535,7 +1643,7 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public DocumentExistsDescriptor<T> Refresh(bool refresh = true)
 		{
-			this._QueryString.Refresh(refresh);
+			this.Request.RequestParameters.Refresh(refresh);
 			return this;
 		}
 		
@@ -1543,11 +1651,11 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public DocumentExistsDescriptor<T> Routing(string routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -1556,15 +1664,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-explain.html
 	///</pre>
 	///</summary>
-	public partial class ExplainDescriptor
+	public partial class ExplainDescriptor  : BaseRequest<ExplainRequestParameters>
 	{
-		internal ExplainRequestParameters _QueryString = new ExplainRequestParameters(); 
-
+		
+	
 
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public ExplainDescriptor AnalyzeWildcard(bool analyze_wildcard = true)
 		{
-			this._QueryString.AnalyzeWildcard(analyze_wildcard);
+			this.Request.RequestParameters.AnalyzeWildcard(analyze_wildcard);
 			return this;
 		}
 		
@@ -1572,15 +1680,15 @@ namespace Nest
 		///<summary>The analyzer for the query string query</summary>
 		public ExplainDescriptor Analyzer(string analyzer)
 		{
-			this._QueryString.Analyzer(analyzer);
+			this.Request.RequestParameters.Analyzer(analyzer);
 			return this;
 		}
 		
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ExplainDescriptor DefaultOperator(DefaultOperatorOptions default_operator)
+		public ExplainDescriptor DefaultOperator(DefaultOperator default_operator)
 		{
-			this._QueryString.DefaultOperator(default_operator);
+			this.Request.RequestParameters.DefaultOperator(default_operator);
 			return this;
 		}
 		
@@ -1588,7 +1696,7 @@ namespace Nest
 		///<summary>The default field for query string query (default: _all)</summary>
 		public ExplainDescriptor Df(string df)
 		{
-			this._QueryString.Df(df);
+			this.Request.RequestParameters.Df(df);
 			return this;
 		}
 		
@@ -1596,7 +1704,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public ExplainDescriptor Fields(params string[] fields)
 		{
-			this._QueryString.Fields(fields);
+			this.Request.RequestParameters.Fields(fields);
 			return this;
 		}
 		
@@ -1607,7 +1715,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._Fields(typedPathLookups);
+			this.Request.RequestParameters._Fields(typedPathLookups);
 			return this;
 		}
 			
@@ -1615,7 +1723,7 @@ namespace Nest
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public ExplainDescriptor Lenient(bool lenient = true)
 		{
-			this._QueryString.Lenient(lenient);
+			this.Request.RequestParameters.Lenient(lenient);
 			return this;
 		}
 		
@@ -1623,7 +1731,7 @@ namespace Nest
 		///<summary>Specify whether query terms should be lowercased</summary>
 		public ExplainDescriptor LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
 		{
-			this._QueryString.LowercaseExpandedTerms(lowercase_expanded_terms);
+			this.Request.RequestParameters.LowercaseExpandedTerms(lowercase_expanded_terms);
 			return this;
 		}
 		
@@ -1631,7 +1739,7 @@ namespace Nest
 		///<summary>The ID of the parent document</summary>
 		public ExplainDescriptor Parent(string parent)
 		{
-			this._QueryString.Parent(parent);
+			this.Request.RequestParameters.Parent(parent);
 			return this;
 		}
 		
@@ -1639,7 +1747,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public ExplainDescriptor Preference(string preference)
 		{
-			this._QueryString.Preference(preference);
+			this.Request.RequestParameters.Preference(preference);
 			return this;
 		}
 		
@@ -1647,7 +1755,7 @@ namespace Nest
 		///<summary>Query in the Lucene query string syntax</summary>
 		public ExplainDescriptor Q(string q)
 		{
-			this._QueryString.Q(q);
+			this.Request.RequestParameters.Q(q);
 			return this;
 		}
 		
@@ -1655,7 +1763,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public ExplainDescriptor Routing(string routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
@@ -1663,57 +1771,63 @@ namespace Nest
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
 		public ExplainDescriptor Source(string source)
 		{
-			this._QueryString.Source(source);
+			this.Request.RequestParameters.Source(source);
 			return this;
 		}
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public ExplainDescriptor Source(params string[] _source)
+		public ExplainDescriptor _Source(params string[] _source)
 		{
-			this._QueryString.Source(_source);
+			this.Request.RequestParameters._Source(_source);
 			return this;
 		}
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor SourceExclude(params string[] _source_exclude)
+		public ExplainDescriptor _SourceExclude(params string[] _source_exclude)
 		{
-			this._QueryString.SourceExclude(_source_exclude);
+			this.Request.RequestParameters._SourceExclude(_source_exclude);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public ExplainDescriptor _SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._SourceExclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceExclude(typedPathLookups);
 			return this;
 		}
 			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor SourceInclude(params string[] _source_include)
+		public ExplainDescriptor _SourceInclude(params string[] _source_include)
 		{
-			this._QueryString.SourceInclude(_source_include);
+			this.Request.RequestParameters._SourceInclude(_source_include);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public ExplainDescriptor _SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._SourceInclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceInclude(typedPathLookups);
 			return this;
 		}
 			
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExplainRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -1722,15 +1836,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
-	public partial class GetDescriptor<T>
+	public partial class GetDescriptor<T> 
 	{
-		internal GetRequestParameters _QueryString = new GetRequestParameters(); 
-
+		
+	
 
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public GetDescriptor<T> Fields(params string[] fields)
 		{
-			this._QueryString.Fields(fields);
+			this.Request.RequestParameters.Fields(fields);
 			return this;
 		}
 		
@@ -1741,7 +1855,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._Fields(typedPathLookups);
+			this.Request.RequestParameters._Fields(typedPathLookups);
 			return this;
 		}
 			
@@ -1749,7 +1863,7 @@ namespace Nest
 		///<summary>The ID of the parent document</summary>
 		public GetDescriptor<T> Parent(string parent)
 		{
-			this._QueryString.Parent(parent);
+			this.Request.RequestParameters.Parent(parent);
 			return this;
 		}
 		
@@ -1757,7 +1871,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public GetDescriptor<T> Preference(string preference)
 		{
-			this._QueryString.Preference(preference);
+			this.Request.RequestParameters.Preference(preference);
 			return this;
 		}
 		
@@ -1765,7 +1879,7 @@ namespace Nest
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public GetDescriptor<T> Realtime(bool realtime = true)
 		{
-			this._QueryString.Realtime(realtime);
+			this.Request.RequestParameters.Realtime(realtime);
 			return this;
 		}
 		
@@ -1773,7 +1887,7 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public GetDescriptor<T> Refresh(bool refresh = true)
 		{
-			this._QueryString.Refresh(refresh);
+			this.Request.RequestParameters.Refresh(refresh);
 			return this;
 		}
 		
@@ -1781,53 +1895,53 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public GetDescriptor<T> Routing(string routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public GetDescriptor<T> Source(params string[] _source)
+		public GetDescriptor<T> _Source(params string[] _source)
 		{
-			this._QueryString.Source(_source);
+			this.Request.RequestParameters._Source(_source);
 			return this;
 		}
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(params string[] _source_exclude)
+		public GetDescriptor<T> _SourceExclude(params string[] _source_exclude)
 		{
-			this._QueryString.SourceExclude(_source_exclude);
+			this.Request.RequestParameters._SourceExclude(_source_exclude);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		public GetDescriptor<T> _SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._SourceExclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceExclude(typedPathLookups);
 			return this;
 		}
 			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(params string[] _source_include)
+		public GetDescriptor<T> _SourceInclude(params string[] _source_include)
 		{
-			this._QueryString.SourceInclude(_source_include);
+			this.Request.RequestParameters._SourceInclude(_source_include);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		public GetDescriptor<T> _SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._SourceInclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceInclude(typedPathLookups);
 			return this;
 		}
 			
@@ -1835,19 +1949,19 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public GetDescriptor<T> Version(long version)
 		{
-			this._QueryString.Version(version);
+			this.Request.RequestParameters.Version(version);
 			return this;
 		}
 		
 
 		///<summary>Specific version type</summary>
-		public GetDescriptor<T> VersionType(VersionTypeOptions version_type)
+		public GetDescriptor<T> VersionType(VersionType version_type)
 		{
-			this._QueryString.VersionType(version_type);
+			this.Request.RequestParameters.VersionType(version_type);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -1856,15 +1970,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
-	public partial class SourceDescriptor<T>
+	public partial class SourceDescriptor<T> 
 	{
-		internal SourceRequestParameters _QueryString = new SourceRequestParameters(); 
-
+		
+	
 
 		///<summary>The ID of the parent document</summary>
 		public SourceDescriptor<T> Parent(string parent)
 		{
-			this._QueryString.Parent(parent);
+			this.Request.RequestParameters.Parent(parent);
 			return this;
 		}
 		
@@ -1872,7 +1986,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SourceDescriptor<T> Preference(string preference)
 		{
-			this._QueryString.Preference(preference);
+			this.Request.RequestParameters.Preference(preference);
 			return this;
 		}
 		
@@ -1880,7 +1994,7 @@ namespace Nest
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public SourceDescriptor<T> Realtime(bool realtime = true)
 		{
-			this._QueryString.Realtime(realtime);
+			this.Request.RequestParameters.Realtime(realtime);
 			return this;
 		}
 		
@@ -1888,7 +2002,7 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public SourceDescriptor<T> Refresh(bool refresh = true)
 		{
-			this._QueryString.Refresh(refresh);
+			this.Request.RequestParameters.Refresh(refresh);
 			return this;
 		}
 		
@@ -1896,53 +2010,53 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public SourceDescriptor<T> Routing(string routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SourceDescriptor<T> Source(params string[] _source)
+		public SourceDescriptor<T> _Source(params string[] _source)
 		{
-			this._QueryString.Source(_source);
+			this.Request.RequestParameters._Source(_source);
 			return this;
 		}
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(params string[] _source_exclude)
+		public SourceDescriptor<T> _SourceExclude(params string[] _source_exclude)
 		{
-			this._QueryString.SourceExclude(_source_exclude);
+			this.Request.RequestParameters._SourceExclude(_source_exclude);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		public SourceDescriptor<T> _SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._SourceExclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceExclude(typedPathLookups);
 			return this;
 		}
 			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(params string[] _source_include)
+		public SourceDescriptor<T> _SourceInclude(params string[] _source_include)
 		{
-			this._QueryString.SourceInclude(_source_include);
+			this.Request.RequestParameters._SourceInclude(_source_include);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		public SourceDescriptor<T> _SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._SourceInclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceInclude(typedPathLookups);
 			return this;
 		}
 			
@@ -1950,19 +2064,19 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceDescriptor<T> Version(long version)
 		{
-			this._QueryString.Version(version);
+			this.Request.RequestParameters.Version(version);
 			return this;
 		}
 		
 
 		///<summary>Specific version type</summary>
-		public SourceDescriptor<T> VersionType(VersionTypeOptions version_type)
+		public SourceDescriptor<T> VersionType(VersionType version_type)
 		{
-			this._QueryString.VersionType(version_type);
+			this.Request.RequestParameters.VersionType(version_type);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -1971,23 +2085,23 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-index_.html
 	///</pre>
 	///</summary>
-	public partial class IndexDescriptor<T>
+	public partial class IndexDescriptor<T> 
 	{
-		internal IndexRequestParameters _QueryString = new IndexRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public IndexDescriptor<T> Consistency(ConsistencyOptions consistency)
+		public IndexDescriptor<T> Consistency(Consistency consistency)
 		{
-			this._QueryString.Consistency(consistency);
+			this.Request.RequestParameters.Consistency(consistency);
 			return this;
 		}
 		
 
 		///<summary>Explicit operation type</summary>
-		public IndexDescriptor<T> OpType(OpTypeOptions op_type)
+		public IndexDescriptor<T> OpType(OpType op_type)
 		{
-			this._QueryString.OpType(op_type);
+			this.Request.RequestParameters.OpType(op_type);
 			return this;
 		}
 		
@@ -1995,7 +2109,7 @@ namespace Nest
 		///<summary>ID of the parent document</summary>
 		public IndexDescriptor<T> Parent(string parent)
 		{
-			this._QueryString.Parent(parent);
+			this.Request.RequestParameters.Parent(parent);
 			return this;
 		}
 		
@@ -2003,15 +2117,15 @@ namespace Nest
 		///<summary>Refresh the index after performing the operation</summary>
 		public IndexDescriptor<T> Refresh(bool refresh = true)
 		{
-			this._QueryString.Refresh(refresh);
+			this.Request.RequestParameters.Refresh(refresh);
 			return this;
 		}
 		
 
 		///<summary>Specific replication type</summary>
-		public IndexDescriptor<T> Replication(ReplicationOptions replication)
+		public IndexDescriptor<T> Replication(Replication replication)
 		{
-			this._QueryString.Replication(replication);
+			this.Request.RequestParameters.Replication(replication);
 			return this;
 		}
 		
@@ -2019,7 +2133,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public IndexDescriptor<T> Routing(string routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
@@ -2027,7 +2141,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public IndexDescriptor<T> Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
@@ -2035,7 +2149,7 @@ namespace Nest
 		///<summary>Explicit timestamp for the document</summary>
 		public IndexDescriptor<T> Timestamp(string timestamp)
 		{
-			this._QueryString.Timestamp(timestamp);
+			this.Request.RequestParameters.Timestamp(timestamp);
 			return this;
 		}
 		
@@ -2043,7 +2157,7 @@ namespace Nest
 		///<summary>Expiration time for the document</summary>
 		public IndexDescriptor<T> Ttl(string ttl)
 		{
-			this._QueryString.Ttl(ttl);
+			this.Request.RequestParameters.Ttl(ttl);
 			return this;
 		}
 		
@@ -2051,19 +2165,19 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public IndexDescriptor<T> Version(long version)
 		{
-			this._QueryString.Version(version);
+			this.Request.RequestParameters.Version(version);
 			return this;
 		}
 		
 
 		///<summary>Specific version type</summary>
-		public IndexDescriptor<T> VersionType(VersionTypeOptions version_type)
+		public IndexDescriptor<T> VersionType(VersionType version_type)
 		{
-			this._QueryString.VersionType(version_type);
+			this.Request.RequestParameters.VersionType(version_type);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2072,15 +2186,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-analyze.html
 	///</pre>
 	///</summary>
-	public partial class AnalyzeDescriptor
+	public partial class AnalyzeDescriptor 
 	{
-		internal AnalyzeRequestParameters _QueryString = new AnalyzeRequestParameters(); 
-
+		
+	
 
 		///<summary>The name of the analyzer to use</summary>
 		public AnalyzeDescriptor Analyzer(string analyzer)
 		{
-			this._QueryString.Analyzer(analyzer);
+			this.Request.RequestParameters.Analyzer(analyzer);
 			return this;
 		}
 		
@@ -2088,7 +2202,7 @@ namespace Nest
 		///<summary>A comma-separated list of character filters to use for the analysis</summary>
 		public AnalyzeDescriptor CharFilters(params string[] char_filters)
 		{
-			this._QueryString.CharFilters(char_filters);
+			this.Request.RequestParameters.CharFilters(char_filters);
 			return this;
 		}
 		
@@ -2096,7 +2210,7 @@ namespace Nest
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
 		public AnalyzeDescriptor Field(string field)
 		{
-			this._QueryString.Field(field);
+			this.Request.RequestParameters.Field(field);
 			return this;
 		}
 		
@@ -2105,7 +2219,7 @@ namespace Nest
 		public AnalyzeDescriptor Field<T>(Expression<Func<T, object>> typedPathLookup) where T : class
 		{
 			typedPathLookup.ThrowIfNull("typedPathLookup");
-			this._QueryString._Field(typedPathLookup);
+			this.Request.RequestParameters._Field(typedPathLookup);
 			return this;
 		}
 			
@@ -2113,7 +2227,7 @@ namespace Nest
 		///<summary>A comma-separated list of filters to use for the analysis</summary>
 		public AnalyzeDescriptor Filters(params string[] filters)
 		{
-			this._QueryString.Filters(filters);
+			this.Request.RequestParameters.Filters(filters);
 			return this;
 		}
 		
@@ -2121,7 +2235,7 @@ namespace Nest
 		///<summary>The name of the index to scope the operation</summary>
 		public AnalyzeDescriptor IndexQueryString(string index)
 		{
-			this._QueryString.Index(index);
+			this.Request.RequestParameters.Index(index);
 			return this;
 		}
 		
@@ -2129,7 +2243,7 @@ namespace Nest
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public AnalyzeDescriptor PreferLocal(bool prefer_local = true)
 		{
-			this._QueryString.PreferLocal(prefer_local);
+			this.Request.RequestParameters.PreferLocal(prefer_local);
 			return this;
 		}
 		
@@ -2137,7 +2251,7 @@ namespace Nest
 		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
 		public AnalyzeDescriptor Text(string text)
 		{
-			this._QueryString.Text(text);
+			this.Request.RequestParameters.Text(text);
 			return this;
 		}
 		
@@ -2145,19 +2259,19 @@ namespace Nest
 		///<summary>The name of the tokenizer to use for the analysis</summary>
 		public AnalyzeDescriptor Tokenizer(string tokenizer)
 		{
-			this._QueryString.Tokenizer(tokenizer);
+			this.Request.RequestParameters.Tokenizer(tokenizer);
 			return this;
 		}
 		
 
 		///<summary>Format of the output</summary>
-		public AnalyzeDescriptor Format(FormatOptions format)
+		public AnalyzeDescriptor Format(Format format)
 		{
-			this._QueryString.Format(format);
+			this.Request.RequestParameters.Format(format);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2166,15 +2280,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html
 	///</pre>
 	///</summary>
-	public partial class ClearCacheDescriptor
+	public partial class ClearCacheDescriptor 
 	{
-		internal ClearCacheRequestParameters _QueryString = new ClearCacheRequestParameters(); 
-
+		
+	
 
 		///<summary>Clear field data</summary>
 		public ClearCacheDescriptor FieldData(bool field_data = true)
 		{
-			this._QueryString.FieldData(field_data);
+			this.Request.RequestParameters.FieldData(field_data);
 			return this;
 		}
 		
@@ -2182,7 +2296,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		public ClearCacheDescriptor Fields(params string[] fields)
 		{
-			this._QueryString.Fields(fields);
+			this.Request.RequestParameters.Fields(fields);
 			return this;
 		}
 		
@@ -2193,7 +2307,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._Fields(typedPathLookups);
+			this.Request.RequestParameters._Fields(typedPathLookups);
 			return this;
 		}
 			
@@ -2201,7 +2315,7 @@ namespace Nest
 		///<summary>Clear filter caches</summary>
 		public ClearCacheDescriptor Filter(bool filter = true)
 		{
-			this._QueryString.Filter(filter);
+			this.Request.RequestParameters.Filter(filter);
 			return this;
 		}
 		
@@ -2209,7 +2323,7 @@ namespace Nest
 		///<summary>Clear filter caches</summary>
 		public ClearCacheDescriptor FilterCache(bool filter_cache = true)
 		{
-			this._QueryString.FilterCache(filter_cache);
+			this.Request.RequestParameters.FilterCache(filter_cache);
 			return this;
 		}
 		
@@ -2217,7 +2331,7 @@ namespace Nest
 		///<summary>A comma-separated list of keys to clear when using the `filter_cache` parameter (default: all)</summary>
 		public ClearCacheDescriptor FilterKeys(bool filter_keys = true)
 		{
-			this._QueryString.FilterKeys(filter_keys);
+			this.Request.RequestParameters.FilterKeys(filter_keys);
 			return this;
 		}
 		
@@ -2225,7 +2339,7 @@ namespace Nest
 		///<summary>Clear ID caches for parent/child</summary>
 		public ClearCacheDescriptor Id(bool id = true)
 		{
-			this._QueryString.Id(id);
+			this.Request.RequestParameters.Id(id);
 			return this;
 		}
 		
@@ -2233,7 +2347,7 @@ namespace Nest
 		///<summary>Clear ID caches for parent/child</summary>
 		public ClearCacheDescriptor IdCache(bool id_cache = true)
 		{
-			this._QueryString.IdCache(id_cache);
+			this.Request.RequestParameters.IdCache(id_cache);
 			return this;
 		}
 		
@@ -2241,7 +2355,7 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public ClearCacheDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -2249,15 +2363,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public ClearCacheDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ClearCacheDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public ClearCacheDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -2265,7 +2379,7 @@ namespace Nest
 		///<summary>A comma-separated list of index name to limit the operation</summary>
 		public ClearCacheDescriptor IndexQueryString(params string[] index)
 		{
-			this._QueryString.Index(index);
+			this.Request.RequestParameters.Index(index);
 			return this;
 		}
 		
@@ -2273,11 +2387,11 @@ namespace Nest
 		///<summary>Clear the recycler cache</summary>
 		public ClearCacheDescriptor Recycler(bool recycler = true)
 		{
-			this._QueryString.Recycler(recycler);
+			this.Request.RequestParameters.Recycler(recycler);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2286,15 +2400,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
 	///</pre>
 	///</summary>
-	public partial class CloseIndexDescriptor
+	public partial class CloseIndexDescriptor 
 	{
-		internal CloseIndexRequestParameters _QueryString = new CloseIndexRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit operation timeout</summary>
 		public CloseIndexDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
@@ -2302,7 +2416,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public CloseIndexDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -2310,7 +2424,7 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public CloseIndexDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -2318,19 +2432,19 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public CloseIndexDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CloseIndexDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public CloseIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2339,15 +2453,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-create-index.html
 	///</pre>
 	///</summary>
-	public partial class CreateIndexDescriptor
+	public partial class CreateIndexDescriptor 
 	{
-		internal CreateIndexRequestParameters _QueryString = new CreateIndexRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit operation timeout</summary>
 		public CreateIndexDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
@@ -2355,11 +2469,11 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public CreateIndexDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2368,15 +2482,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-index.html
 	///</pre>
 	///</summary>
-	public partial class DeleteIndexDescriptor
+	public partial class DeleteIndexDescriptor 
 	{
-		internal DeleteIndexRequestParameters _QueryString = new DeleteIndexRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit operation timeout</summary>
 		public DeleteIndexDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
@@ -2384,11 +2498,11 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteIndexDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2397,15 +2511,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public partial class IndicesDeleteAliasDescriptor
+	public partial class IndicesDeleteAliasDescriptor  : BaseRequest<IndicesDeleteAliasRequestParameters>
 	{
-		internal IndicesDeleteAliasRequestParameters _QueryString = new IndicesDeleteAliasRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit timestamp for the document</summary>
 		public IndicesDeleteAliasDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
@@ -2413,11 +2527,17 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesDeleteAliasDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesDeleteAliasRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -2426,19 +2546,19 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-mapping.html
 	///</pre>
 	///</summary>
-	public partial class DeleteMappingDescriptor
+	public partial class DeleteMappingDescriptor<T> 
 	{
-		internal DeleteMappingRequestParameters _QueryString = new DeleteMappingRequestParameters(); 
-
+		
+	
 
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteMappingDescriptor MasterTimeout(string master_timeout)
+		public DeleteMappingDescriptor<T> MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2447,15 +2567,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
-	public partial class DeleteTemplateDescriptor
+	public partial class DeleteTemplateDescriptor 
 	{
-		internal DeleteTemplateRequestParameters _QueryString = new DeleteTemplateRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit operation timeout</summary>
 		public DeleteTemplateDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
@@ -2463,11 +2583,11 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteTemplateDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2476,19 +2596,19 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
 	///</pre>
 	///</summary>
-	public partial class DeleteWarmerDescriptor
+	public partial class DeleteWarmerDescriptor 
 	{
-		internal DeleteWarmerRequestParameters _QueryString = new DeleteWarmerRequestParameters(); 
-
+		
+	
 
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteWarmerDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2497,15 +2617,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-settings.html
 	///</pre>
 	///</summary>
-	public partial class IndexExistsDescriptor
+	public partial class IndexExistsDescriptor 
 	{
-		internal IndexExistsRequestParameters _QueryString = new IndexExistsRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public IndexExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -2513,15 +2633,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public IndexExistsDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndexExistsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndexExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -2529,11 +2649,11 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public IndexExistsDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2542,15 +2662,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public partial class IndicesExistsAliasDescriptor
+	public partial class IndicesExistsAliasDescriptor  : BaseRequest<IndicesExistsAliasRequestParameters>
 	{
-		internal IndicesExistsAliasRequestParameters _QueryString = new IndicesExistsAliasRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public IndicesExistsAliasDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -2558,15 +2678,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public IndicesExistsAliasDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesExistsAliasDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesExistsAliasDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -2574,11 +2694,17 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public IndicesExistsAliasDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesExistsAliasRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -2587,19 +2713,25 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
-	public partial class IndicesExistsTemplateDescriptor
+	public partial class IndicesExistsTemplateDescriptor  : BaseRequest<IndicesExistsTemplateRequestParameters>
 	{
-		internal IndicesExistsTemplateRequestParameters _QueryString = new IndicesExistsTemplateRequestParameters(); 
-
+		
+	
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public IndicesExistsTemplateDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesExistsTemplateRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -2608,15 +2740,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-types-exists.html
 	///</pre>
 	///</summary>
-	public partial class IndicesExistsTypeDescriptor
+	public partial class IndicesExistsTypeDescriptor  : BaseRequest<IndicesExistsTypeRequestParameters>
 	{
-		internal IndicesExistsTypeRequestParameters _QueryString = new IndicesExistsTypeRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public IndicesExistsTypeDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -2624,15 +2756,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public IndicesExistsTypeDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesExistsTypeDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesExistsTypeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -2640,11 +2772,17 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public IndicesExistsTypeDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesExistsTypeRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -2653,15 +2791,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-flush.html
 	///</pre>
 	///</summary>
-	public partial class FlushDescriptor
+	public partial class FlushDescriptor 
 	{
-		internal FlushRequestParameters _QueryString = new FlushRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
 		public FlushDescriptor Force(bool force = true)
 		{
-			this._QueryString.Force(force);
+			this.Request.RequestParameters.Force(force);
 			return this;
 		}
 		
@@ -2669,7 +2807,7 @@ namespace Nest
 		///<summary>If set to true a new index writer is created and settings that have been changed related to the index writer will be refreshed. Note: if a full flush is required for a setting to take effect this will be part of the settings update process and it not required to be executed by the user. (This setting can be considered as internal)</summary>
 		public FlushDescriptor Full(bool full = true)
 		{
-			this._QueryString.Full(full);
+			this.Request.RequestParameters.Full(full);
 			return this;
 		}
 		
@@ -2677,7 +2815,7 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public FlushDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -2685,19 +2823,19 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public FlushDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FlushDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public FlushDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2706,43 +2844,43 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public partial class GetAliasesDescriptor
+	public partial class GetAliasDescriptor 
 	{
-		internal GetAliasesRequestParameters _QueryString = new GetAliasesRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetAliasesDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public GetAliasDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetAliasesDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public GetAliasDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetAliasesDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetAliasDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetAliasesDescriptor Local(bool local = true)
+		public GetAliasDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2751,27 +2889,27 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public partial class IndicesGetAliasesDescriptor
+	public partial class GetAliasesDescriptor 
 	{
-		internal IndicesGetAliasesRequestParameters _QueryString = new IndicesGetAliasesRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit operation timeout</summary>
-		public IndicesGetAliasesDescriptor Timeout(string timeout)
+		public GetAliasesDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndicesGetAliasesDescriptor Local(bool local = true)
+		public GetAliasesDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2780,15 +2918,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-field-mapping.html
 	///</pre>
 	///</summary>
-	public partial class IndicesGetFieldMappingDescriptor
+	public partial class IndicesGetFieldMappingDescriptor  : BaseRequest<IndicesGetFieldMappingRequestParameters>
 	{
-		internal IndicesGetFieldMappingRequestParameters _QueryString = new IndicesGetFieldMappingRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether the default mapping values should be returned as well</summary>
 		public IndicesGetFieldMappingDescriptor IncludeDefaults(bool include_defaults = true)
 		{
-			this._QueryString.IncludeDefaults(include_defaults);
+			this.Request.RequestParameters.IncludeDefaults(include_defaults);
 			return this;
 		}
 		
@@ -2796,7 +2934,7 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public IndicesGetFieldMappingDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -2804,15 +2942,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public IndicesGetFieldMappingDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesGetFieldMappingDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesGetFieldMappingDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -2820,11 +2958,17 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public IndicesGetFieldMappingDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesGetFieldMappingRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -2833,43 +2977,43 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
 	///</pre>
 	///</summary>
-	public partial class GetMappingDescriptor
+	public partial class GetMappingDescriptor<T> 
 	{
-		internal GetMappingRequestParameters _QueryString = new GetMappingRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetMappingDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public GetMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetMappingDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public GetMappingDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetMappingDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetMappingDescriptor Local(bool local = true)
+		public GetMappingDescriptor<T> Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2878,15 +3022,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
 	///</pre>
 	///</summary>
-	public partial class GetIndexSettingsDescriptor
+	public partial class GetIndexSettingsDescriptor 
 	{
-		internal GetIndexSettingsRequestParameters _QueryString = new GetIndexSettingsRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetIndexSettingsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -2894,15 +3038,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public GetIndexSettingsDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetIndexSettingsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -2910,7 +3054,7 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public GetIndexSettingsDescriptor FlatSettings(bool flat_settings = true)
 		{
-			this._QueryString.FlatSettings(flat_settings);
+			this.Request.RequestParameters.FlatSettings(flat_settings);
 			return this;
 		}
 		
@@ -2918,11 +3062,11 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexSettingsDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2931,15 +3075,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
-	public partial class GetTemplateDescriptor
+	public partial class GetTemplateDescriptor 
 	{
-		internal GetTemplateRequestParameters _QueryString = new GetTemplateRequestParameters(); 
-
+		
+	
 
 		///<summary>Return settings in flat format (default: false)</summary>
 		public GetTemplateDescriptor FlatSettings(bool flat_settings = true)
 		{
-			this._QueryString.FlatSettings(flat_settings);
+			this.Request.RequestParameters.FlatSettings(flat_settings);
 			return this;
 		}
 		
@@ -2947,11 +3091,11 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetTemplateDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -2960,15 +3104,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
 	///</pre>
 	///</summary>
-	public partial class GetWarmerDescriptor
+	public partial class GetWarmerDescriptor 
 	{
-		internal GetWarmerRequestParameters _QueryString = new GetWarmerRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetWarmerDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -2976,15 +3120,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public GetWarmerDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetWarmerDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetWarmerDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -2992,11 +3136,11 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetWarmerDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -3005,15 +3149,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
 	///</pre>
 	///</summary>
-	public partial class OpenIndexDescriptor
+	public partial class OpenIndexDescriptor 
 	{
-		internal OpenIndexRequestParameters _QueryString = new OpenIndexRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit operation timeout</summary>
 		public OpenIndexDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
@@ -3021,7 +3165,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public OpenIndexDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -3029,7 +3173,7 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public OpenIndexDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -3037,19 +3181,19 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public OpenIndexDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public OpenIndexDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public OpenIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -3058,15 +3202,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-optimize.html
 	///</pre>
 	///</summary>
-	public partial class OptimizeDescriptor
+	public partial class OptimizeDescriptor 
 	{
-		internal OptimizeRequestParameters _QueryString = new OptimizeRequestParameters(); 
-
+		
+	
 
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
 		public OptimizeDescriptor Flush(bool flush = true)
 		{
-			this._QueryString.Flush(flush);
+			this.Request.RequestParameters.Flush(flush);
 			return this;
 		}
 		
@@ -3074,7 +3218,7 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public OptimizeDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -3082,15 +3226,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public OptimizeDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public OptimizeDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public OptimizeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -3098,7 +3242,7 @@ namespace Nest
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
 		public OptimizeDescriptor MaxNumSegments(long max_num_segments)
 		{
-			this._QueryString.MaxNumSegments(max_num_segments);
+			this.Request.RequestParameters.MaxNumSegments(max_num_segments);
 			return this;
 		}
 		
@@ -3106,7 +3250,7 @@ namespace Nest
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
 		public OptimizeDescriptor OnlyExpungeDeletes(bool only_expunge_deletes = true)
 		{
-			this._QueryString.OnlyExpungeDeletes(only_expunge_deletes);
+			this.Request.RequestParameters.OnlyExpungeDeletes(only_expunge_deletes);
 			return this;
 		}
 		
@@ -3114,7 +3258,7 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public OptimizeDescriptor OperationThreading(string operation_threading)
 		{
-			this._QueryString.OperationThreading(operation_threading);
+			this.Request.RequestParameters.OperationThreading(operation_threading);
 			return this;
 		}
 		
@@ -3122,7 +3266,7 @@ namespace Nest
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
 		public OptimizeDescriptor WaitForMerge(bool wait_for_merge = true)
 		{
-			this._QueryString.WaitForMerge(wait_for_merge);
+			this.Request.RequestParameters.WaitForMerge(wait_for_merge);
 			return this;
 		}
 		
@@ -3130,11 +3274,11 @@ namespace Nest
 		///<summary>Force a merge operation to run, even if there is a single segment in the index (default: false)</summary>
 		public OptimizeDescriptor Force(bool force = true)
 		{
-			this._QueryString.Force(force);
+			this.Request.RequestParameters.Force(force);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -3143,15 +3287,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public partial class IndicesPutAliasDescriptor
+	public partial class IndicesPutAliasDescriptor  : BaseRequest<IndicesPutAliasRequestParameters>
 	{
-		internal IndicesPutAliasRequestParameters _QueryString = new IndicesPutAliasRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit timestamp for the document</summary>
 		public IndicesPutAliasDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
@@ -3159,11 +3303,17 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesPutAliasDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesPutAliasRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -3172,15 +3322,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-put-mapping.html
 	///</pre>
 	///</summary>
-	public partial class PutMappingDescriptor<T>
+	public partial class PutMappingDescriptor<T> 
 	{
-		internal PutMappingRequestParameters _QueryString = new PutMappingRequestParameters(); 
-
+		
+	
 
 		///<summary>Specify whether to ignore conflicts while updating the mapping (default: false)</summary>
 		public PutMappingDescriptor<T> IgnoreConflicts(bool ignore_conflicts = true)
 		{
-			this._QueryString.IgnoreConflicts(ignore_conflicts);
+			this.Request.RequestParameters.IgnoreConflicts(ignore_conflicts);
 			return this;
 		}
 		
@@ -3188,7 +3338,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public PutMappingDescriptor<T> Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
@@ -3196,7 +3346,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public PutMappingDescriptor<T> MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -3204,7 +3354,7 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public PutMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -3212,19 +3362,19 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public PutMappingDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -3233,15 +3383,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-update-settings.html
 	///</pre>
 	///</summary>
-	public partial class UpdateSettingsDescriptor
+	public partial class UpdateSettingsDescriptor 
 	{
-		internal UpdateSettingsRequestParameters _QueryString = new UpdateSettingsRequestParameters(); 
-
+		
+	
 
 		///<summary>Specify timeout for connection to master</summary>
 		public UpdateSettingsDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -3249,7 +3399,7 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public UpdateSettingsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -3257,15 +3407,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public UpdateSettingsDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpdateSettingsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public UpdateSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -3273,11 +3423,11 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public UpdateSettingsDescriptor FlatSettings(bool flat_settings = true)
 		{
-			this._QueryString.FlatSettings(flat_settings);
+			this.Request.RequestParameters.FlatSettings(flat_settings);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -3286,15 +3436,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
-	public partial class PutTemplateDescriptor
+	public partial class PutTemplateDescriptor 
 	{
-		internal PutTemplateRequestParameters _QueryString = new PutTemplateRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit operation timeout</summary>
 		public PutTemplateDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
@@ -3302,7 +3452,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public PutTemplateDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -3310,11 +3460,11 @@ namespace Nest
 		///<summary>Return settings in flat format (default: false)</summary>
 		public PutTemplateDescriptor FlatSettings(bool flat_settings = true)
 		{
-			this._QueryString.FlatSettings(flat_settings);
+			this.Request.RequestParameters.FlatSettings(flat_settings);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -3323,15 +3473,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
 	///</pre>
 	///</summary>
-	public partial class PutWarmerDescriptor
+	public partial class PutWarmerDescriptor 
 	{
-		internal PutWarmerRequestParameters _QueryString = new PutWarmerRequestParameters(); 
-
+		
+	
 
 		///<summary>Specify timeout for connection to master</summary>
 		public PutWarmerDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -3339,7 +3489,7 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed) in the search request to warm</summary>
 		public PutWarmerDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -3347,19 +3497,19 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices in the search request to warm. (This includes `_all` string or when no indices have been specified)</summary>
 		public PutWarmerDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both, in the search request to warm.</summary>
-		public PutWarmerDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PutWarmerDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -3368,15 +3518,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html
 	///</pre>
 	///</summary>
-	public partial class IndicesRecoveryDescriptor
+	public partial class IndicesRecoveryDescriptor  : BaseRequest<IndicesRecoveryRequestParameters>
 	{
-		internal IndicesRecoveryRequestParameters _QueryString = new IndicesRecoveryRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether to display detailed information about shard recovery</summary>
 		public IndicesRecoveryDescriptor Detailed(bool detailed = true)
 		{
-			this._QueryString.Detailed(detailed);
+			this.Request.RequestParameters.Detailed(detailed);
 			return this;
 		}
 		
@@ -3384,7 +3534,7 @@ namespace Nest
 		///<summary>Display only those recoveries that are currently on-going</summary>
 		public IndicesRecoveryDescriptor ActiveOnly(bool active_only = true)
 		{
-			this._QueryString.ActiveOnly(active_only);
+			this.Request.RequestParameters.ActiveOnly(active_only);
 			return this;
 		}
 		
@@ -3392,11 +3542,17 @@ namespace Nest
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public IndicesRecoveryDescriptor Human(bool human = true)
 		{
-			this._QueryString.Human(human);
+			this.Request.RequestParameters.Human(human);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesRecoveryRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -3405,15 +3561,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html
 	///</pre>
 	///</summary>
-	public partial class RefreshDescriptor
+	public partial class RefreshDescriptor 
 	{
-		internal RefreshRequestParameters _QueryString = new RefreshRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public RefreshDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -3421,15 +3577,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public RefreshDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public RefreshDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public RefreshDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -3437,7 +3593,7 @@ namespace Nest
 		///<summary>Force a refresh even if not required</summary>
 		public RefreshDescriptor Force(bool force = true)
 		{
-			this._QueryString.Force(force);
+			this.Request.RequestParameters.Force(force);
 			return this;
 		}
 		
@@ -3445,11 +3601,11 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public RefreshDescriptor OperationThreading(string operation_threading)
 		{
-			this._QueryString.OperationThreading(operation_threading);
+			this.Request.RequestParameters.OperationThreading(operation_threading);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -3458,15 +3614,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-segments.html
 	///</pre>
 	///</summary>
-	public partial class SegmentsDescriptor
+	public partial class SegmentsDescriptor 
 	{
-		internal SegmentsRequestParameters _QueryString = new SegmentsRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SegmentsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -3474,15 +3630,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SegmentsDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SegmentsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SegmentsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -3490,7 +3646,7 @@ namespace Nest
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public SegmentsDescriptor Human(bool human = true)
 		{
-			this._QueryString.Human(human);
+			this.Request.RequestParameters.Human(human);
 			return this;
 		}
 		
@@ -3498,11 +3654,11 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public SegmentsDescriptor OperationThreading(string operation_threading)
 		{
-			this._QueryString.OperationThreading(operation_threading);
+			this.Request.RequestParameters.OperationThreading(operation_threading);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -3511,15 +3667,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html
 	///</pre>
 	///</summary>
-	public partial class IndicesStatsDescriptor
+	public partial class IndicesStatsDescriptor 
 	{
-		internal IndicesStatsRequestParameters _QueryString = new IndicesStatsRequestParameters(); 
-
+		
+	
 
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields(params string[] completion_fields)
 		{
-			this._QueryString.CompletionFields(completion_fields);
+			this.Request.RequestParameters.CompletionFields(completion_fields);
 			return this;
 		}
 		
@@ -3530,7 +3686,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._CompletionFields(typedPathLookups);
+			this.Request.RequestParameters._CompletionFields(typedPathLookups);
 			return this;
 		}
 			
@@ -3538,7 +3694,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor FielddataFields(params string[] fielddata_fields)
 		{
-			this._QueryString.FielddataFields(fielddata_fields);
+			this.Request.RequestParameters.FielddataFields(fielddata_fields);
 			return this;
 		}
 		
@@ -3549,7 +3705,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._FielddataFields(typedPathLookups);
+			this.Request.RequestParameters._FielddataFields(typedPathLookups);
 			return this;
 		}
 			
@@ -3557,7 +3713,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Fields(params string[] fields)
 		{
-			this._QueryString.Fields(fields);
+			this.Request.RequestParameters.Fields(fields);
 			return this;
 		}
 		
@@ -3568,7 +3724,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._Fields(typedPathLookups);
+			this.Request.RequestParameters._Fields(typedPathLookups);
 			return this;
 		}
 			
@@ -3576,7 +3732,7 @@ namespace Nest
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public IndicesStatsDescriptor Groups(bool groups = true)
 		{
-			this._QueryString.Groups(groups);
+			this.Request.RequestParameters.Groups(groups);
 			return this;
 		}
 		
@@ -3584,27 +3740,19 @@ namespace Nest
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public IndicesStatsDescriptor Human(bool human = true)
 		{
-			this._QueryString.Human(human);
+			this.Request.RequestParameters.Human(human);
 			return this;
 		}
 		
 
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
-		public IndicesStatsDescriptor Level(LevelOptions level)
+		public IndicesStatsDescriptor Level(Level level)
 		{
-			this._QueryString.Level(level);
+			this.Request.RequestParameters.Level(level);
 			return this;
 		}
 		
-
-		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
-		public IndicesStatsDescriptor Types(params string[] types)
-		{
-			this._QueryString.Types(types);
-			return this;
-		}
-		
-		
+	
 	}
 	
 	
@@ -3613,15 +3761,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-status.html
 	///</pre>
 	///</summary>
-	public partial class IndicesStatusDescriptor
+	public partial class IndicesStatusDescriptor 
 	{
-		internal IndicesStatusRequestParameters _QueryString = new IndicesStatusRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public IndicesStatusDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -3629,15 +3777,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public IndicesStatusDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesStatusDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesStatusDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -3645,7 +3793,7 @@ namespace Nest
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public IndicesStatusDescriptor Human(bool human = true)
 		{
-			this._QueryString.Human(human);
+			this.Request.RequestParameters.Human(human);
 			return this;
 		}
 		
@@ -3653,7 +3801,7 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public IndicesStatusDescriptor OperationThreading(string operation_threading)
 		{
-			this._QueryString.OperationThreading(operation_threading);
+			this.Request.RequestParameters.OperationThreading(operation_threading);
 			return this;
 		}
 		
@@ -3661,7 +3809,7 @@ namespace Nest
 		///<summary>Return information about shard recovery</summary>
 		public IndicesStatusDescriptor Recovery(bool recovery = true)
 		{
-			this._QueryString.Recovery(recovery);
+			this.Request.RequestParameters.Recovery(recovery);
 			return this;
 		}
 		
@@ -3669,11 +3817,11 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public IndicesStatusDescriptor Snapshot(bool snapshot = true)
 		{
-			this._QueryString.Snapshot(snapshot);
+			this.Request.RequestParameters.Snapshot(snapshot);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -3682,15 +3830,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public partial class AliasDescriptor
+	public partial class AliasDescriptor 
 	{
-		internal AliasRequestParameters _QueryString = new AliasRequestParameters(); 
-
+		
+	
 
 		///<summary>Request timeout</summary>
 		public AliasDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
@@ -3698,11 +3846,11 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public AliasDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -3711,15 +3859,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html
 	///</pre>
 	///</summary>
-	public partial class ValidateQueryDescriptor<T>
+	public partial class ValidateQueryDescriptor<T> 
 	{
-		internal ValidateQueryRequestParameters _QueryString = new ValidateQueryRequestParameters(); 
-
+		
+	
 
 		///<summary>Return detailed information about the error</summary>
 		public ValidateQueryDescriptor<T> Explain(bool explain = true)
 		{
-			this._QueryString.Explain(explain);
+			this.Request.RequestParameters.Explain(explain);
 			return this;
 		}
 		
@@ -3727,7 +3875,7 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public ValidateQueryDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -3735,15 +3883,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public ValidateQueryDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -3751,7 +3899,7 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public ValidateQueryDescriptor<T> OperationThreading(string operation_threading)
 		{
-			this._QueryString.OperationThreading(operation_threading);
+			this.Request.RequestParameters.OperationThreading(operation_threading);
 			return this;
 		}
 		
@@ -3759,7 +3907,7 @@ namespace Nest
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
 		public ValidateQueryDescriptor<T> Source(string source)
 		{
-			this._QueryString.Source(source);
+			this.Request.RequestParameters.Source(source);
 			return this;
 		}
 		
@@ -3767,11 +3915,11 @@ namespace Nest
 		///<summary>Query in the Lucene query string syntax</summary>
 		public ValidateQueryDescriptor<T> Q(string q)
 		{
-			this._QueryString.Q(q);
+			this.Request.RequestParameters.Q(q);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -3780,11 +3928,11 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/
 	///</pre>
 	///</summary>
-	public partial class InfoDescriptor
+	public partial class InfoDescriptor 
 	{
-		internal InfoRequestParameters _QueryString = new InfoRequestParameters(); 
-
 		
+	
+	
 	}
 	
 	
@@ -3793,11 +3941,17 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-benchmark.html
 	///</pre>
 	///</summary>
-	public partial class ListBenchmarksDescriptor
+	public partial class ListBenchmarksDescriptor  : BaseRequest<ListBenchmarksRequestParameters>
 	{
-		internal ListBenchmarksRequestParameters _QueryString = new ListBenchmarksRequestParameters(); 
-
 		
+	
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ListBenchmarksRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -3806,15 +3960,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-get.html
 	///</pre>
 	///</summary>
-	public partial class MultiGetDescriptor
+	public partial class MultiGetDescriptor 
 	{
-		internal MultiGetRequestParameters _QueryString = new MultiGetRequestParameters(); 
-
+		
+	
 
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public MultiGetDescriptor Fields(params string[] fields)
 		{
-			this._QueryString.Fields(fields);
+			this.Request.RequestParameters.Fields(fields);
 			return this;
 		}
 		
@@ -3825,7 +3979,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._Fields(typedPathLookups);
+			this.Request.RequestParameters._Fields(typedPathLookups);
 			return this;
 		}
 			
@@ -3833,7 +3987,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public MultiGetDescriptor Preference(string preference)
 		{
-			this._QueryString.Preference(preference);
+			this.Request.RequestParameters.Preference(preference);
 			return this;
 		}
 		
@@ -3841,7 +3995,7 @@ namespace Nest
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public MultiGetDescriptor Realtime(bool realtime = true)
 		{
-			this._QueryString.Realtime(realtime);
+			this.Request.RequestParameters.Realtime(realtime);
 			return this;
 		}
 		
@@ -3849,57 +4003,57 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public MultiGetDescriptor Refresh(bool refresh = true)
 		{
-			this._QueryString.Refresh(refresh);
+			this.Request.RequestParameters.Refresh(refresh);
 			return this;
 		}
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public MultiGetDescriptor Source(params string[] _source)
+		public MultiGetDescriptor _Source(params string[] _source)
 		{
-			this._QueryString.Source(_source);
+			this.Request.RequestParameters._Source(_source);
 			return this;
 		}
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude(params string[] _source_exclude)
+		public MultiGetDescriptor _SourceExclude(params string[] _source_exclude)
 		{
-			this._QueryString.SourceExclude(_source_exclude);
+			this.Request.RequestParameters._SourceExclude(_source_exclude);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public MultiGetDescriptor _SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._SourceExclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceExclude(typedPathLookups);
 			return this;
 		}
 			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude(params string[] _source_include)
+		public MultiGetDescriptor _SourceInclude(params string[] _source_include)
 		{
-			this._QueryString.SourceInclude(_source_include);
+			this.Request.RequestParameters._SourceInclude(_source_include);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public MultiGetDescriptor _SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._SourceInclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceInclude(typedPathLookups);
 			return this;
 		}
 			
-		
+	
 	}
 	
 	
@@ -3908,15 +4062,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-more-like-this.html
 	///</pre>
 	///</summary>
-	public partial class MoreLikeThisDescriptor<T>
+	public partial class MoreLikeThisDescriptor<T> 
 	{
-		internal MoreLikeThisRequestParameters _QueryString = new MoreLikeThisRequestParameters(); 
-
+		
+	
 
 		///<summary>The boost factor</summary>
 		public MoreLikeThisDescriptor<T> BoostTerms(double boost_terms)
 		{
-			this._QueryString.BoostTerms(boost_terms);
+			this.Request.RequestParameters.BoostTerms(boost_terms);
 			return this;
 		}
 		
@@ -3924,7 +4078,7 @@ namespace Nest
 		///<summary>The word occurrence frequency as count: words with higher occurrence in the corpus will be ignored</summary>
 		public MoreLikeThisDescriptor<T> MaxDocFreq(long max_doc_freq)
 		{
-			this._QueryString.MaxDocFreq(max_doc_freq);
+			this.Request.RequestParameters.MaxDocFreq(max_doc_freq);
 			return this;
 		}
 		
@@ -3932,7 +4086,7 @@ namespace Nest
 		///<summary>The maximum query terms to be included in the generated query</summary>
 		public MoreLikeThisDescriptor<T> MaxQueryTerms(long max_query_terms)
 		{
-			this._QueryString.MaxQueryTerms(max_query_terms);
+			this.Request.RequestParameters.MaxQueryTerms(max_query_terms);
 			return this;
 		}
 		
@@ -3940,7 +4094,7 @@ namespace Nest
 		///<summary>The minimum length of the word: longer words will be ignored</summary>
 		public MoreLikeThisDescriptor<T> MaxWordLength(long max_word_length)
 		{
-			this._QueryString.MaxWordLength(max_word_length);
+			this.Request.RequestParameters.MaxWordLength(max_word_length);
 			return this;
 		}
 		
@@ -3948,7 +4102,7 @@ namespace Nest
 		///<summary>The word occurrence frequency as count: words with lower occurrence in the corpus will be ignored</summary>
 		public MoreLikeThisDescriptor<T> MinDocFreq(long min_doc_freq)
 		{
-			this._QueryString.MinDocFreq(min_doc_freq);
+			this.Request.RequestParameters.MinDocFreq(min_doc_freq);
 			return this;
 		}
 		
@@ -3956,7 +4110,7 @@ namespace Nest
 		///<summary>The term frequency as percent: terms with lower occurence in the source document will be ignored</summary>
 		public MoreLikeThisDescriptor<T> MinTermFreq(long min_term_freq)
 		{
-			this._QueryString.MinTermFreq(min_term_freq);
+			this.Request.RequestParameters.MinTermFreq(min_term_freq);
 			return this;
 		}
 		
@@ -3964,7 +4118,7 @@ namespace Nest
 		///<summary>The minimum length of the word: shorter words will be ignored</summary>
 		public MoreLikeThisDescriptor<T> MinWordLength(long min_word_length)
 		{
-			this._QueryString.MinWordLength(min_word_length);
+			this.Request.RequestParameters.MinWordLength(min_word_length);
 			return this;
 		}
 		
@@ -3972,7 +4126,7 @@ namespace Nest
 		///<summary>Specific fields to perform the query against</summary>
 		public MoreLikeThisDescriptor<T> MltFields(params string[] mlt_fields)
 		{
-			this._QueryString.MltFields(mlt_fields);
+			this.Request.RequestParameters.MltFields(mlt_fields);
 			return this;
 		}
 		
@@ -3983,7 +4137,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._MltFields(typedPathLookups);
+			this.Request.RequestParameters._MltFields(typedPathLookups);
 			return this;
 		}
 			
@@ -3991,7 +4145,7 @@ namespace Nest
 		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
 		public MoreLikeThisDescriptor<T> PercentTermsToMatch(double percent_terms_to_match)
 		{
-			this._QueryString.PercentTermsToMatch(percent_terms_to_match);
+			this.Request.RequestParameters.PercentTermsToMatch(percent_terms_to_match);
 			return this;
 		}
 		
@@ -3999,7 +4153,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public MoreLikeThisDescriptor<T> Routing(string routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
@@ -4007,7 +4161,7 @@ namespace Nest
 		///<summary>The offset from which to return results</summary>
 		public MoreLikeThisDescriptor<T> SearchFrom(long search_from)
 		{
-			this._QueryString.SearchFrom(search_from);
+			this.Request.RequestParameters.SearchFrom(search_from);
 			return this;
 		}
 		
@@ -4015,7 +4169,7 @@ namespace Nest
 		///<summary>A comma-separated list of indices to perform the query against (default: the index containing the document)</summary>
 		public MoreLikeThisDescriptor<T> SearchIndices(params string[] search_indices)
 		{
-			this._QueryString.SearchIndices(search_indices);
+			this.Request.RequestParameters.SearchIndices(search_indices);
 			return this;
 		}
 		
@@ -4023,7 +4177,7 @@ namespace Nest
 		///<summary>The search query hint</summary>
 		public MoreLikeThisDescriptor<T> SearchQueryHint(string search_query_hint)
 		{
-			this._QueryString.SearchQueryHint(search_query_hint);
+			this.Request.RequestParameters.SearchQueryHint(search_query_hint);
 			return this;
 		}
 		
@@ -4031,7 +4185,7 @@ namespace Nest
 		///<summary>A scroll search request definition</summary>
 		public MoreLikeThisDescriptor<T> SearchScroll(string search_scroll)
 		{
-			this._QueryString.SearchScroll(search_scroll);
+			this.Request.RequestParameters.SearchScroll(search_scroll);
 			return this;
 		}
 		
@@ -4039,7 +4193,7 @@ namespace Nest
 		///<summary>The number of documents to return (default: 10)</summary>
 		public MoreLikeThisDescriptor<T> SearchSize(long search_size)
 		{
-			this._QueryString.SearchSize(search_size);
+			this.Request.RequestParameters.SearchSize(search_size);
 			return this;
 		}
 		
@@ -4047,7 +4201,7 @@ namespace Nest
 		///<summary>A specific search request definition (instead of using the request body)</summary>
 		public MoreLikeThisDescriptor<T> SearchSource(string search_source)
 		{
-			this._QueryString.SearchSource(search_source);
+			this.Request.RequestParameters.SearchSource(search_source);
 			return this;
 		}
 		
@@ -4055,7 +4209,7 @@ namespace Nest
 		///<summary>Specific search type (eg. `dfs_then_fetch`, `count`, etc)</summary>
 		public MoreLikeThisDescriptor<T> SearchType(string search_type)
 		{
-			this._QueryString.SearchType(search_type);
+			this.Request.RequestParameters.SearchType(search_type);
 			return this;
 		}
 		
@@ -4063,7 +4217,7 @@ namespace Nest
 		///<summary>A comma-separated list of types to perform the query against (default: the same type as the document)</summary>
 		public MoreLikeThisDescriptor<T> SearchTypes(params string[] search_types)
 		{
-			this._QueryString.SearchTypes(search_types);
+			this.Request.RequestParameters.SearchTypes(search_types);
 			return this;
 		}
 		
@@ -4071,11 +4225,11 @@ namespace Nest
 		///<summary>A list of stop words to be ignored</summary>
 		public MoreLikeThisDescriptor<T> StopWords(params string[] stop_words)
 		{
-			this._QueryString.StopWords(stop_words);
+			this.Request.RequestParameters.StopWords(stop_words);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -4084,15 +4238,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
-	public partial class MpercolateDescriptor
+	public partial class MpercolateDescriptor  : BaseRequest<MpercolateRequestParameters>
 	{
-		internal MpercolateRequestParameters _QueryString = new MpercolateRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public MpercolateDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -4100,19 +4254,25 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public MpercolateDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public MpercolateDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public MpercolateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MpercolateRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -4121,19 +4281,19 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-multi-search.html
 	///</pre>
 	///</summary>
-	public partial class MultiSearchDescriptor
+	public partial class MultiSearchDescriptor 
 	{
-		internal MultiSearchRequestParameters _QueryString = new MultiSearchRequestParameters(); 
-
+		
+	
 
 		///<summary>Search operation type</summary>
-		public MultiSearchDescriptor SearchType(SearchTypeOptions search_type)
+		public MultiSearchDescriptor SearchType(SearchType search_type)
 		{
-			this._QueryString.SearchType(search_type);
+			this.Request.RequestParameters.SearchType(search_type);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -4142,15 +4302,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html
 	///</pre>
 	///</summary>
-	public partial class MultiTermVectorsDescriptor<T>
+	public partial class MultiTermVectorsDescriptor<T> 
 	{
-		internal MultiTermVectorsRequestParameters _QueryString = new MultiTermVectorsRequestParameters(); 
-
+		
+	
 
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor<T> TermStatistics(bool term_statistics = true)
 		{
-			this._QueryString.TermStatistics(term_statistics);
+			this.Request.RequestParameters.TermStatistics(term_statistics);
 			return this;
 		}
 		
@@ -4158,7 +4318,7 @@ namespace Nest
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor<T> FieldStatistics(bool field_statistics = true)
 		{
-			this._QueryString.FieldStatistics(field_statistics);
+			this.Request.RequestParameters.FieldStatistics(field_statistics);
 			return this;
 		}
 		
@@ -4166,7 +4326,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor<T> Fields(params string[] fields)
 		{
-			this._QueryString.Fields(fields);
+			this.Request.RequestParameters.Fields(fields);
 			return this;
 		}
 		
@@ -4177,7 +4337,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._Fields(typedPathLookups);
+			this.Request.RequestParameters._Fields(typedPathLookups);
 			return this;
 		}
 			
@@ -4185,7 +4345,7 @@ namespace Nest
 		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor<T> Offsets(bool offsets = true)
 		{
-			this._QueryString.Offsets(offsets);
+			this.Request.RequestParameters.Offsets(offsets);
 			return this;
 		}
 		
@@ -4193,7 +4353,7 @@ namespace Nest
 		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor<T> Positions(bool positions = true)
 		{
-			this._QueryString.Positions(positions);
+			this.Request.RequestParameters.Positions(positions);
 			return this;
 		}
 		
@@ -4201,7 +4361,7 @@ namespace Nest
 		///<summary>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor<T> Payloads(bool payloads = true)
 		{
-			this._QueryString.Payloads(payloads);
+			this.Request.RequestParameters.Payloads(payloads);
 			return this;
 		}
 		
@@ -4209,7 +4369,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor<T> Preference(string preference)
 		{
-			this._QueryString.Preference(preference);
+			this.Request.RequestParameters.Preference(preference);
 			return this;
 		}
 		
@@ -4217,7 +4377,7 @@ namespace Nest
 		///<summary>Specific routing value. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor<T> Routing(string routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
@@ -4225,11 +4385,11 @@ namespace Nest
 		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor<T> Parent(string parent)
 		{
-			this._QueryString.Parent(parent);
+			this.Request.RequestParameters.Parent(parent);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -4238,15 +4398,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-hot-threads.html
 	///</pre>
 	///</summary>
-	public partial class NodesHotThreadsDescriptor
+	public partial class NodesHotThreadsDescriptor  : BaseRequest<NodesHotThreadsRequestParameters>
 	{
-		internal NodesHotThreadsRequestParameters _QueryString = new NodesHotThreadsRequestParameters(); 
-
+		
+	
 
 		///<summary>The interval for the second sampling of threads</summary>
 		public NodesHotThreadsDescriptor Interval(string interval)
 		{
-			this._QueryString.Interval(interval);
+			this.Request.RequestParameters.Interval(interval);
 			return this;
 		}
 		
@@ -4254,7 +4414,7 @@ namespace Nest
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
 		public NodesHotThreadsDescriptor Snapshots(long snapshots)
 		{
-			this._QueryString.Snapshots(snapshots);
+			this.Request.RequestParameters.Snapshots(snapshots);
 			return this;
 		}
 		
@@ -4262,19 +4422,25 @@ namespace Nest
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
 		public NodesHotThreadsDescriptor Threads(long threads)
 		{
-			this._QueryString.Threads(threads);
+			this.Request.RequestParameters.Threads(threads);
 			return this;
 		}
 		
 
 		///<summary>The type to sample (default: cpu)</summary>
-		public NodesHotThreadsDescriptor TypeQueryString(TypeOptions type)
+		public NodesHotThreadsDescriptor ThreadType(ThreadType thread_type)
 		{
-			this._QueryString.Type(type);
+			this.Request.RequestParameters.ThreadType(thread_type);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesHotThreadsRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -4283,15 +4449,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html
 	///</pre>
 	///</summary>
-	public partial class NodesInfoDescriptor
+	public partial class NodesInfoDescriptor 
 	{
-		internal NodesInfoRequestParameters _QueryString = new NodesInfoRequestParameters(); 
-
+		
+	
 
 		///<summary>Return settings in flat format (default: false)</summary>
 		public NodesInfoDescriptor FlatSettings(bool flat_settings = true)
 		{
-			this._QueryString.FlatSettings(flat_settings);
+			this.Request.RequestParameters.FlatSettings(flat_settings);
 			return this;
 		}
 		
@@ -4299,11 +4465,11 @@ namespace Nest
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public NodesInfoDescriptor Human(bool human = true)
 		{
-			this._QueryString.Human(human);
+			this.Request.RequestParameters.Human(human);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -4312,15 +4478,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-shutdown.html
 	///</pre>
 	///</summary>
-	public partial class NodesShutdownDescriptor
+	public partial class NodesShutdownDescriptor  : BaseRequest<NodesShutdownRequestParameters>
 	{
-		internal NodesShutdownRequestParameters _QueryString = new NodesShutdownRequestParameters(); 
-
+		
+	
 
 		///<summary>Set the delay for the operation (default: 1s)</summary>
 		public NodesShutdownDescriptor Delay(string delay)
 		{
-			this._QueryString.Delay(delay);
+			this.Request.RequestParameters.Delay(delay);
 			return this;
 		}
 		
@@ -4328,11 +4494,17 @@ namespace Nest
 		///<summary>Exit the JVM as well (default: true)</summary>
 		public NodesShutdownDescriptor Exit(bool exit = true)
 		{
-			this._QueryString.Exit(exit);
+			this.Request.RequestParameters.Exit(exit);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesShutdownRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -4341,15 +4513,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html
 	///</pre>
 	///</summary>
-	public partial class NodesStatsDescriptor
+	public partial class NodesStatsDescriptor 
 	{
-		internal NodesStatsRequestParameters _QueryString = new NodesStatsRequestParameters(); 
-
+		
+	
 
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor CompletionFields(params string[] completion_fields)
 		{
-			this._QueryString.CompletionFields(completion_fields);
+			this.Request.RequestParameters.CompletionFields(completion_fields);
 			return this;
 		}
 		
@@ -4360,7 +4532,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._CompletionFields(typedPathLookups);
+			this.Request.RequestParameters._CompletionFields(typedPathLookups);
 			return this;
 		}
 			
@@ -4368,7 +4540,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor FielddataFields(params string[] fielddata_fields)
 		{
-			this._QueryString.FielddataFields(fielddata_fields);
+			this.Request.RequestParameters.FielddataFields(fielddata_fields);
 			return this;
 		}
 		
@@ -4379,7 +4551,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._FielddataFields(typedPathLookups);
+			this.Request.RequestParameters._FielddataFields(typedPathLookups);
 			return this;
 		}
 			
@@ -4387,7 +4559,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor Fields(params string[] fields)
 		{
-			this._QueryString.Fields(fields);
+			this.Request.RequestParameters.Fields(fields);
 			return this;
 		}
 		
@@ -4398,7 +4570,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._Fields(typedPathLookups);
+			this.Request.RequestParameters._Fields(typedPathLookups);
 			return this;
 		}
 			
@@ -4406,7 +4578,7 @@ namespace Nest
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public NodesStatsDescriptor Groups(bool groups = true)
 		{
-			this._QueryString.Groups(groups);
+			this.Request.RequestParameters.Groups(groups);
 			return this;
 		}
 		
@@ -4414,15 +4586,15 @@ namespace Nest
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public NodesStatsDescriptor Human(bool human = true)
 		{
-			this._QueryString.Human(human);
+			this.Request.RequestParameters.Human(human);
 			return this;
 		}
 		
 
 		///<summary>Return indices stats aggregated at node, index or shard level</summary>
-		public NodesStatsDescriptor Level(LevelOptions level)
+		public NodesStatsDescriptor Level(Level level)
 		{
-			this._QueryString.Level(level);
+			this.Request.RequestParameters.Level(level);
 			return this;
 		}
 		
@@ -4430,11 +4602,11 @@ namespace Nest
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
 		public NodesStatsDescriptor Types(params string[] types)
 		{
-			this._QueryString.Types(types);
+			this.Request.RequestParameters.Types(types);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -4443,83 +4615,83 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
-	public partial class PercolateDescriptor<T,K>
+	public partial class PercolateDescriptor<T> 
 	{
-		internal PercolateRequestParameters _QueryString = new PercolateRequestParameters(); 
-
+		
+	
 
 		///<summary>A comma-separated list of specific routing values</summary>
-		public PercolateDescriptor<T,K> Routing(params string[] routing)
+		public PercolateDescriptor<T> Routing(params string[] routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public PercolateDescriptor<T,K> Preference(string preference)
+		public PercolateDescriptor<T> Preference(string preference)
 		{
-			this._QueryString.Preference(preference);
+			this.Request.RequestParameters.Preference(preference);
 			return this;
 		}
 		
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PercolateDescriptor<T,K> IgnoreUnavailable(bool ignore_unavailable = true)
+		public PercolateDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PercolateDescriptor<T,K> AllowNoIndices(bool allow_no_indices = true)
+		public PercolateDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateDescriptor<T,K> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PercolateDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
 
 		///<summary>The index to percolate the document into. Defaults to index.</summary>
-		public PercolateDescriptor<T,K> PercolateIndex(string percolate_index)
+		public PercolateDescriptor<T> PercolateIndex(string percolate_index)
 		{
-			this._QueryString.PercolateIndex(percolate_index);
+			this.Request.RequestParameters.PercolateIndex(percolate_index);
 			return this;
 		}
 		
 
 		///<summary>The type to percolate document into. Defaults to type.</summary>
-		public PercolateDescriptor<T,K> PercolateType(string percolate_type)
+		public PercolateDescriptor<T> PercolateType(string percolate_type)
 		{
-			this._QueryString.PercolateType(percolate_type);
+			this.Request.RequestParameters.PercolateType(percolate_type);
 			return this;
 		}
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateDescriptor<T,K> Version(long version)
+		public PercolateDescriptor<T> Version(long version)
 		{
-			this._QueryString.Version(version);
+			this.Request.RequestParameters.Version(version);
 			return this;
 		}
 		
 
 		///<summary>Specific version type</summary>
-		public PercolateDescriptor<T,K> VersionType(VersionTypeOptions version_type)
+		public PercolateDescriptor<T> VersionType(VersionType version_type)
 		{
-			this._QueryString.VersionType(version_type);
+			this.Request.RequestParameters.VersionType(version_type);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -4528,11 +4700,17 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/
 	///</pre>
 	///</summary>
-	public partial class PingDescriptor
+	public partial class PingDescriptor  : BaseRequest<PingRequestParameters>
 	{
-		internal PingRequestParameters _QueryString = new PingRequestParameters(); 
-
 		
+	
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PingRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -4541,27 +4719,11 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
 	///</pre>
 	///</summary>
-	public partial class ScrollDescriptor<T>
+	public partial class ScrollDescriptor<T> 
 	{
-		internal ScrollRequestParameters _QueryString = new ScrollRequestParameters(); 
-
-
-		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public ScrollDescriptor<T> Scroll(string scroll)
-		{
-			this._QueryString.Scroll(scroll);
-			return this;
-		}
 		
-
-		///<summary>The scroll ID for scrolled search</summary>
-		public ScrollDescriptor<T> ScrollId(string scroll_id)
-		{
-			this._QueryString.ScrollId(scroll_id);
-			return this;
-		}
-		
-		
+	
+	
 	}
 	
 	
@@ -4570,15 +4732,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
 	///</pre>
 	///</summary>
-	public partial class SearchDescriptor<T>
+	public partial class SearchDescriptor<T> 
 	{
-		internal SearchRequestParameters _QueryString = new SearchRequestParameters(); 
-
+		
+	
 
 		///<summary>The analyzer to use for the query string</summary>
 		public SearchDescriptor<T> Analyzer(string analyzer)
 		{
-			this._QueryString.Analyzer(analyzer);
+			this.Request.RequestParameters.Analyzer(analyzer);
 			return this;
 		}
 		
@@ -4586,15 +4748,15 @@ namespace Nest
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public SearchDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true)
 		{
-			this._QueryString.AnalyzeWildcard(analyze_wildcard);
+			this.Request.RequestParameters.AnalyzeWildcard(analyze_wildcard);
 			return this;
 		}
 		
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchDescriptor<T> DefaultOperator(DefaultOperatorOptions default_operator)
+		public SearchDescriptor<T> DefaultOperator(DefaultOperator default_operator)
 		{
-			this._QueryString.DefaultOperator(default_operator);
+			this.Request.RequestParameters.DefaultOperator(default_operator);
 			return this;
 		}
 		
@@ -4602,7 +4764,7 @@ namespace Nest
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public SearchDescriptor<T> Df(string df)
 		{
-			this._QueryString.Df(df);
+			this.Request.RequestParameters.Df(df);
 			return this;
 		}
 		
@@ -4610,7 +4772,7 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -4618,23 +4780,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SearchDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SearchDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
-
-		///<summary>Comma-separated list of index boosts</summary>
-		public SearchDescriptor<T> IndicesBoost(params string[] indices_boost)
-		{
-			this._QueryString.IndicesBoost(indices_boost);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -4642,7 +4796,7 @@ namespace Nest
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public SearchDescriptor<T> Lenient(bool lenient = true)
 		{
-			this._QueryString.Lenient(lenient);
+			this.Request.RequestParameters.Lenient(lenient);
 			return this;
 		}
 		
@@ -4650,7 +4804,7 @@ namespace Nest
 		///<summary>Specify whether query terms should be lowercased</summary>
 		public SearchDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
 		{
-			this._QueryString.LowercaseExpandedTerms(lowercase_expanded_terms);
+			this.Request.RequestParameters.LowercaseExpandedTerms(lowercase_expanded_terms);
 			return this;
 		}
 		
@@ -4658,7 +4812,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchDescriptor<T> Preference(string preference)
 		{
-			this._QueryString.Preference(preference);
+			this.Request.RequestParameters.Preference(preference);
 			return this;
 		}
 		
@@ -4666,7 +4820,7 @@ namespace Nest
 		///<summary>A comma-separated list of specific routing values</summary>
 		public SearchDescriptor<T> Routing(params string[] routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
@@ -4674,23 +4828,15 @@ namespace Nest
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public SearchDescriptor<T> Scroll(string scroll)
 		{
-			this._QueryString.Scroll(scroll);
+			this.Request.RequestParameters.Scroll(scroll);
 			return this;
 		}
 		
 
 		///<summary>Search operation type</summary>
-		public SearchDescriptor<T> SearchType(SearchTypeOptions search_type)
+		public SearchDescriptor<T> SearchType(SearchType search_type)
 		{
-			this._QueryString.SearchType(search_type);
-			return this;
-		}
-		
-
-		///<summary>The URL-encoded request definition using the Query DSL (instead of using request body)</summary>
-		public SearchDescriptor<T> Source(string source)
-		{
-			this._QueryString.Source(source);
+			this.Request.RequestParameters.SearchType(search_type);
 			return this;
 		}
 		
@@ -4698,7 +4844,7 @@ namespace Nest
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
 		public SearchDescriptor<T> Stats(params string[] stats)
 		{
-			this._QueryString.Stats(stats);
+			this.Request.RequestParameters.Stats(stats);
 			return this;
 		}
 		
@@ -4706,7 +4852,7 @@ namespace Nest
 		///<summary>Specify which field to use for suggestions</summary>
 		public SearchDescriptor<T> SuggestField(string suggest_field)
 		{
-			this._QueryString.SuggestField(suggest_field);
+			this.Request.RequestParameters.SuggestField(suggest_field);
 			return this;
 		}
 		
@@ -4715,15 +4861,15 @@ namespace Nest
 		public SearchDescriptor<T> SuggestField(Expression<Func<T, object>> typedPathLookup) 
 		{
 			typedPathLookup.ThrowIfNull("typedPathLookup");
-			this._QueryString._SuggestField(typedPathLookup);
+			this.Request.RequestParameters._SuggestField(typedPathLookup);
 			return this;
 		}
 			
 
 		///<summary>Specify suggest mode</summary>
-		public SearchDescriptor<T> SuggestMode(SuggestModeOptions suggest_mode)
+		public SearchDescriptor<T> SuggestMode(SuggestMode suggest_mode)
 		{
-			this._QueryString.SuggestMode(suggest_mode);
+			this.Request.RequestParameters.SuggestMode(suggest_mode);
 			return this;
 		}
 		
@@ -4731,7 +4877,7 @@ namespace Nest
 		///<summary>How many suggestions to return in response</summary>
 		public SearchDescriptor<T> SuggestSize(long suggest_size)
 		{
-			this._QueryString.SuggestSize(suggest_size);
+			this.Request.RequestParameters.SuggestSize(suggest_size);
 			return this;
 		}
 		
@@ -4739,11 +4885,11 @@ namespace Nest
 		///<summary>The source text for which the suggestions should be returned</summary>
 		public SearchDescriptor<T> SuggestText(string suggest_text)
 		{
-			this._QueryString.SuggestText(suggest_text);
+			this.Request.RequestParameters.SuggestText(suggest_text);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -4752,15 +4898,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html
 	///</pre>
 	///</summary>
-	public partial class SearchShardsDescriptor
+	public partial class SearchShardsDescriptor  : BaseRequest<SearchShardsRequestParameters>
 	{
-		internal SearchShardsRequestParameters _QueryString = new SearchShardsRequestParameters(); 
-
+		
+	
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchShardsDescriptor Preference(string preference)
 		{
-			this._QueryString.Preference(preference);
+			this.Request.RequestParameters.Preference(preference);
 			return this;
 		}
 		
@@ -4768,7 +4914,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public SearchShardsDescriptor Routing(string routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
@@ -4776,7 +4922,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public SearchShardsDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
@@ -4784,7 +4930,7 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchShardsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -4792,19 +4938,25 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SearchShardsDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchShardsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SearchShardsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchShardsRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -4813,15 +4965,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html
 	///</pre>
 	///</summary>
-	public partial class SearchTemplateDescriptor
+	public partial class SearchTemplateDescriptor  : BaseRequest<SearchTemplateRequestParameters>
 	{
-		internal SearchTemplateRequestParameters _QueryString = new SearchTemplateRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchTemplateDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -4829,15 +4981,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SearchTemplateDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchTemplateDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SearchTemplateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -4845,7 +4997,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchTemplateDescriptor Preference(string preference)
 		{
-			this._QueryString.Preference(preference);
+			this.Request.RequestParameters.Preference(preference);
 			return this;
 		}
 		
@@ -4853,7 +5005,7 @@ namespace Nest
 		///<summary>A comma-separated list of specific routing values</summary>
 		public SearchTemplateDescriptor Routing(params string[] routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
@@ -4861,19 +5013,25 @@ namespace Nest
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public SearchTemplateDescriptor Scroll(string scroll)
 		{
-			this._QueryString.Scroll(scroll);
+			this.Request.RequestParameters.Scroll(scroll);
 			return this;
 		}
 		
 
 		///<summary>Search operation type</summary>
-		public SearchTemplateDescriptor SearchType(SearchTypeOptions search_type)
+		public SearchTemplateDescriptor SearchType(SearchType search_type)
 		{
-			this._QueryString.SearchType(search_type);
+			this.Request.RequestParameters.SearchType(search_type);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -4882,15 +5040,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotDescriptor
+	public partial class SnapshotDescriptor 
 	{
-		internal SnapshotRequestParameters _QueryString = new SnapshotRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public SnapshotDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -4898,11 +5056,11 @@ namespace Nest
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public SnapshotDescriptor WaitForCompletion(bool wait_for_completion = true)
 		{
-			this._QueryString.WaitForCompletion(wait_for_completion);
+			this.Request.RequestParameters.WaitForCompletion(wait_for_completion);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -4911,15 +5069,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class CreateRepositoryDescriptor
+	public partial class CreateRepositoryDescriptor 
 	{
-		internal CreateRepositoryRequestParameters _QueryString = new CreateRepositoryRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CreateRepositoryDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -4927,11 +5085,11 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public CreateRepositoryDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -4940,19 +5098,19 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class DeleteSnapshotDescriptor
+	public partial class DeleteSnapshotDescriptor 
 	{
-		internal DeleteSnapshotRequestParameters _QueryString = new DeleteSnapshotRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeleteSnapshotDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -4961,15 +5119,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class DeleteRepositoryDescriptor
+	public partial class DeleteRepositoryDescriptor 
 	{
-		internal DeleteRepositoryRequestParameters _QueryString = new DeleteRepositoryRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeleteRepositoryDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -4977,11 +5135,11 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public DeleteRepositoryDescriptor Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -4990,19 +5148,19 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class GetSnapshotDescriptor
+	public partial class GetSnapshotDescriptor 
 	{
-		internal GetSnapshotRequestParameters _QueryString = new GetSnapshotRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public GetSnapshotDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -5011,15 +5169,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotGetRepositoryDescriptor
+	public partial class SnapshotGetRepositoryDescriptor  : BaseRequest<SnapshotGetRepositoryRequestParameters>
 	{
-		internal SnapshotGetRepositoryRequestParameters _QueryString = new SnapshotGetRepositoryRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public SnapshotGetRepositoryDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -5027,11 +5185,17 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public SnapshotGetRepositoryDescriptor Local(bool local = true)
 		{
-			this._QueryString.Local(local);
+			this.Request.RequestParameters.Local(local);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotGetRepositoryRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -5040,15 +5204,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class RestoreDescriptor
+	public partial class RestoreDescriptor 
 	{
-		internal RestoreRequestParameters _QueryString = new RestoreRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public RestoreDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -5056,11 +5220,11 @@ namespace Nest
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public RestoreDescriptor WaitForCompletion(bool wait_for_completion = true)
 		{
-			this._QueryString.WaitForCompletion(wait_for_completion);
+			this.Request.RequestParameters.WaitForCompletion(wait_for_completion);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -5069,19 +5233,25 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotStatusDescriptor
+	public partial class SnapshotStatusDescriptor  : BaseRequest<SnapshotStatusRequestParameters>
 	{
-		internal SnapshotStatusRequestParameters _QueryString = new SnapshotStatusRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public SnapshotStatusDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.MasterTimeout(master_timeout);
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
 		}
 		
 		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotStatusRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
 	}
 	
 	
@@ -5090,15 +5260,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
 	///</pre>
 	///</summary>
-	public partial class SuggestDescriptor<T>
+	public partial class SuggestDescriptor<T> 
 	{
-		internal SuggestRequestParameters _QueryString = new SuggestRequestParameters(); 
-
+		
+	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SuggestDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
@@ -5106,15 +5276,15 @@ namespace Nest
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public SuggestDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.AllowNoIndices(allow_no_indices);
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
 		}
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SuggestDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SuggestDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
-			this._QueryString.ExpandWildcards(expand_wildcards);
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -5122,7 +5292,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SuggestDescriptor<T> Preference(string preference)
 		{
-			this._QueryString.Preference(preference);
+			this.Request.RequestParameters.Preference(preference);
 			return this;
 		}
 		
@@ -5130,7 +5300,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public SuggestDescriptor<T> Routing(string routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
@@ -5138,11 +5308,11 @@ namespace Nest
 		///<summary>The URL-encoded request definition (instead of using request body)</summary>
 		public SuggestDescriptor<T> Source(string source)
 		{
-			this._QueryString.Source(source);
+			this.Request.RequestParameters.Source(source);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -5151,15 +5321,15 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html
 	///</pre>
 	///</summary>
-	public partial class TermvectorDescriptor<T>
+	public partial class TermvectorDescriptor<T> 
 	{
-		internal TermvectorRequestParameters _QueryString = new TermvectorRequestParameters(); 
-
+		
+	
 
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public TermvectorDescriptor<T> TermStatistics(bool term_statistics = true)
 		{
-			this._QueryString.TermStatistics(term_statistics);
+			this.Request.RequestParameters.TermStatistics(term_statistics);
 			return this;
 		}
 		
@@ -5167,7 +5337,7 @@ namespace Nest
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
 		public TermvectorDescriptor<T> FieldStatistics(bool field_statistics = true)
 		{
-			this._QueryString.FieldStatistics(field_statistics);
+			this.Request.RequestParameters.FieldStatistics(field_statistics);
 			return this;
 		}
 		
@@ -5175,7 +5345,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields to return.</summary>
 		public TermvectorDescriptor<T> Fields(params string[] fields)
 		{
-			this._QueryString.Fields(fields);
+			this.Request.RequestParameters.Fields(fields);
 			return this;
 		}
 		
@@ -5186,7 +5356,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this._QueryString._Fields(typedPathLookups);
+			this.Request.RequestParameters._Fields(typedPathLookups);
 			return this;
 		}
 			
@@ -5194,7 +5364,7 @@ namespace Nest
 		///<summary>Specifies if term offsets should be returned.</summary>
 		public TermvectorDescriptor<T> Offsets(bool offsets = true)
 		{
-			this._QueryString.Offsets(offsets);
+			this.Request.RequestParameters.Offsets(offsets);
 			return this;
 		}
 		
@@ -5202,7 +5372,7 @@ namespace Nest
 		///<summary>Specifies if term positions should be returned.</summary>
 		public TermvectorDescriptor<T> Positions(bool positions = true)
 		{
-			this._QueryString.Positions(positions);
+			this.Request.RequestParameters.Positions(positions);
 			return this;
 		}
 		
@@ -5210,7 +5380,7 @@ namespace Nest
 		///<summary>Specifies if term payloads should be returned.</summary>
 		public TermvectorDescriptor<T> Payloads(bool payloads = true)
 		{
-			this._QueryString.Payloads(payloads);
+			this.Request.RequestParameters.Payloads(payloads);
 			return this;
 		}
 		
@@ -5218,7 +5388,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
 		public TermvectorDescriptor<T> Preference(string preference)
 		{
-			this._QueryString.Preference(preference);
+			this.Request.RequestParameters.Preference(preference);
 			return this;
 		}
 		
@@ -5226,7 +5396,7 @@ namespace Nest
 		///<summary>Specific routing value.</summary>
 		public TermvectorDescriptor<T> Routing(string routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
@@ -5234,11 +5404,11 @@ namespace Nest
 		///<summary>Parent id of documents.</summary>
 		public TermvectorDescriptor<T> Parent(string parent)
 		{
-			this._QueryString.Parent(parent);
+			this.Request.RequestParameters.Parent(parent);
 			return this;
 		}
 		
-		
+	
 	}
 	
 	
@@ -5247,134 +5417,115 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html
 	///</pre>
 	///</summary>
-	public partial class UpdateDescriptor<T,K>
+	public partial class UpdateDescriptor<TUpsert,TDocument> 
 	{
-		internal UpdateRequestParameters _QueryString = new UpdateRequestParameters(); 
-
+		
+	
 
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public UpdateDescriptor<T,K> Consistency(ConsistencyOptions consistency)
+		public UpdateDescriptor<TUpsert,TDocument> Consistency(Consistency consistency)
 		{
-			this._QueryString.Consistency(consistency);
+			this.Request.RequestParameters.Consistency(consistency);
 			return this;
 		}
 		
-
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public UpdateDescriptor<T,K> Fields(params string[] fields)
-		{
-			this._QueryString.Fields(fields);
-			return this;
-		}
-		
-			
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public UpdateDescriptor<T,K> Fields(params Expression<Func<T, object>>[] typedPathLookups) 
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this._QueryString._Fields(typedPathLookups);
-			return this;
-		}
-			
 
 		///<summary>The script language (default: mvel)</summary>
-		public UpdateDescriptor<T,K> Lang(string lang)
+		public UpdateDescriptor<TUpsert,TDocument> Lang(string lang)
 		{
-			this._QueryString.Lang(lang);
+			this.Request.RequestParameters.Lang(lang);
 			return this;
 		}
 		
 
 		///<summary>ID of the parent document</summary>
-		public UpdateDescriptor<T,K> Parent(string parent)
+		public UpdateDescriptor<TUpsert,TDocument> Parent(string parent)
 		{
-			this._QueryString.Parent(parent);
+			this.Request.RequestParameters.Parent(parent);
 			return this;
 		}
 		
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public UpdateDescriptor<T,K> Refresh(bool refresh = true)
+		public UpdateDescriptor<TUpsert,TDocument> Refresh(bool refresh = true)
 		{
-			this._QueryString.Refresh(refresh);
+			this.Request.RequestParameters.Refresh(refresh);
 			return this;
 		}
 		
 
 		///<summary>Specific replication type</summary>
-		public UpdateDescriptor<T,K> Replication(ReplicationOptions replication)
+		public UpdateDescriptor<TUpsert,TDocument> Replication(Replication replication)
 		{
-			this._QueryString.Replication(replication);
+			this.Request.RequestParameters.Replication(replication);
 			return this;
 		}
 		
 
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public UpdateDescriptor<T,K> RetryOnConflict(long retry_on_conflict)
+		public UpdateDescriptor<TUpsert,TDocument> RetryOnConflict(long retry_on_conflict)
 		{
-			this._QueryString.RetryOnConflict(retry_on_conflict);
+			this.Request.RequestParameters.RetryOnConflict(retry_on_conflict);
 			return this;
 		}
 		
 
 		///<summary>Specific routing value</summary>
-		public UpdateDescriptor<T,K> Routing(string routing)
+		public UpdateDescriptor<TUpsert,TDocument> Routing(string routing)
 		{
-			this._QueryString.Routing(routing);
+			this.Request.RequestParameters.Routing(routing);
 			return this;
 		}
 		
 
 		///<summary>The URL-encoded script definition (instead of using request body)</summary>
-		public UpdateDescriptor<T,K> ScriptQueryString(string script)
+		public UpdateDescriptor<TUpsert,TDocument> ScriptQueryString(string script)
 		{
-			this._QueryString.Script(script);
+			this.Request.RequestParameters.Script(script);
 			return this;
 		}
 		
 
 		///<summary>Explicit operation timeout</summary>
-		public UpdateDescriptor<T,K> Timeout(string timeout)
+		public UpdateDescriptor<TUpsert,TDocument> Timeout(string timeout)
 		{
-			this._QueryString.Timeout(timeout);
+			this.Request.RequestParameters.Timeout(timeout);
 			return this;
 		}
 		
 
 		///<summary>Explicit timestamp for the document</summary>
-		public UpdateDescriptor<T,K> Timestamp(string timestamp)
+		public UpdateDescriptor<TUpsert,TDocument> Timestamp(string timestamp)
 		{
-			this._QueryString.Timestamp(timestamp);
+			this.Request.RequestParameters.Timestamp(timestamp);
 			return this;
 		}
 		
 
 		///<summary>Expiration time for the document</summary>
-		public UpdateDescriptor<T,K> Ttl(string ttl)
+		public UpdateDescriptor<TUpsert,TDocument> Ttl(string ttl)
 		{
-			this._QueryString.Ttl(ttl);
+			this.Request.RequestParameters.Ttl(ttl);
 			return this;
 		}
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public UpdateDescriptor<T,K> Version(long version)
+		public UpdateDescriptor<TUpsert,TDocument> Version(long version)
 		{
-			this._QueryString.Version(version);
+			this.Request.RequestParameters.Version(version);
 			return this;
 		}
 		
 
 		///<summary>Specific version type</summary>
-		public UpdateDescriptor<T,K> VersionType(VersionTypeOptions version_type)
+		public UpdateDescriptor<TUpsert,TDocument> VersionType(VersionType version_type)
 		{
-			this._QueryString.VersionType(version_type);
+			this.Request.RequestParameters.VersionType(version_type);
 			return this;
 		}
 		
-		
+	
 	}
 	
 }

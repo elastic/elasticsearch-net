@@ -198,82 +198,10 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterState2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class FilteringTheClusterStateForSpecificIndexTemplatesShouldWork7Tests : ClusterState220FilteringYamlBase
+		public class FilteringTheClusterStateByIndicesShouldWorkInRoutingTableAndMetadata7Tests : ClusterState220FilteringYamlBase
 		{
 			[Test]
-			public void FilteringTheClusterStateForSpecificIndexTemplatesShouldWork7Test()
-			{	
-
-				//do indices.put_template 
-				_body = new {
-					template= "test-*",
-					settings= new {
-						number_of_shards= "1"
-					}
-				};
-				this.Do(()=> _client.IndicesPutTemplateForAll("test1", _body));
-
-				//do indices.put_template 
-				_body = new {
-					template= "test-*",
-					settings= new {
-						number_of_shards= "2"
-					}
-				};
-				this.Do(()=> _client.IndicesPutTemplateForAll("test2", _body));
-
-				//do indices.put_template 
-				_body = new {
-					template= "foo-*",
-					settings= new {
-						number_of_shards= "3"
-					}
-				};
-				this.Do(()=> _client.IndicesPutTemplateForAll("foo", _body));
-
-				//do cluster.state 
-				this.Do(()=> _client.ClusterState("metadata", nv=>nv
-					.AddQueryString("index_templates", new [] {
-						@"test1",
-						@"test2"
-					})
-				));
-
-				//is_false _response.blocks; 
-				this.IsFalse(_response.blocks);
-
-				//is_false _response.nodes; 
-				this.IsFalse(_response.nodes);
-
-				//is_true _response.metadata; 
-				this.IsTrue(_response.metadata);
-
-				//is_false _response.routing_table; 
-				this.IsFalse(_response.routing_table);
-
-				//is_false _response.routing_nodes; 
-				this.IsFalse(_response.routing_nodes);
-
-				//is_false _response.allocations; 
-				this.IsFalse(_response.allocations);
-
-				//is_true _response.metadata.templates.test1; 
-				this.IsTrue(_response.metadata.templates.test1);
-
-				//is_true _response.metadata.templates.test2; 
-				this.IsTrue(_response.metadata.templates.test2);
-
-				//is_false _response.metadata.templates.foo; 
-				this.IsFalse(_response.metadata.templates.foo);
-
-			}
-		}
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class FilteringTheClusterStateByIndicesShouldWorkInRoutingTableAndMetadata8Tests : ClusterState220FilteringYamlBase
-		{
-			[Test]
-			public void FilteringTheClusterStateByIndicesShouldWorkInRoutingTableAndMetadata8Test()
+			public void FilteringTheClusterStateByIndicesShouldWorkInRoutingTableAndMetadata7Test()
 			{	
 
 				//do index 
@@ -304,10 +232,10 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterState2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class FilteringTheClusterStateUsingAllForIndicesAndMetricsShouldWork9Tests : ClusterState220FilteringYamlBase
+		public class FilteringTheClusterStateUsingAllForIndicesAndMetricsShouldWork8Tests : ClusterState220FilteringYamlBase
 		{
 			[Test]
-			public void FilteringTheClusterStateUsingAllForIndicesAndMetricsShouldWork9Test()
+			public void FilteringTheClusterStateUsingAllForIndicesAndMetricsShouldWork8Test()
 			{	
 
 				//do cluster.state 

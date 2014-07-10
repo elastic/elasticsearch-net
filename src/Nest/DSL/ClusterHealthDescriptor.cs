@@ -1,27 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
-	public partial class ClusterHealthDescriptor : 
-		IndicesOptionalPathDescriptor<ClusterHealthDescriptor, ClusterHealthRequestParameters>
-		, IPathInfo<ClusterHealthRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IClusterHealthRequest : IIndicesOptionalPath<ClusterHealthRequestParameters> { }
+
+	internal static class ClusterHealthPathInfo
 	{
-		ElasticsearchPathInfo<ClusterHealthRequestParameters> IPathInfo<ClusterHealthRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		public static void Update(ElasticsearchPathInfo<ClusterHealthRequestParameters> pathInfo, IClusterHealthRequest request)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
-			
-			return pathInfo;
+		}
+	}
+	
+	public partial class ClusterHealthRequest : IndicesOptionalPathBase<ClusterHealthRequestParameters>, IClusterHealthRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterHealthRequestParameters> pathInfo)
+		{
+			ClusterHealthPathInfo.Update(pathInfo, this);
+		}
+	}
+	public partial class ClusterHealthDescriptor : IndicesOptionalPathDescriptor<ClusterHealthDescriptor, ClusterHealthRequestParameters>, IClusterHealthRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterHealthRequestParameters> pathInfo)
+		{
+			ClusterHealthPathInfo.Update(pathInfo, this);
 		}
 	}
 }

@@ -3,14 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
+	public interface INodeIdOptionalPath<TParameters> : IRequest<TParameters>
+		where TParameters : IRequestParameters, new()
+	{
+		string NodeId { get; set; }
+	}
+
+	internal static class NodeIdOptionalPathRouteParameters
+	{
+		public static void SetRouteParameters<TParameters>(
+			INodeIdOptionalPath<TParameters> path,
+			IConnectionSettingsValues settings, 
+			ElasticsearchPathInfo<TParameters> pathInfo)
+			where TParameters : IRequestParameters, new()
+		{	
+			pathInfo.NodeId = path.NodeId;
+		}
+	
+	}
+
+	public abstract class NodeIdOptionalPathBase<TParameters> : BasePathRequest<TParameters>, INodeIdOptionalPath<TParameters>
+		where TParameters : IRequestParameters, new()
+	{
+		
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		{	
+			NodeIdOptionalPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
+		}
+
+		public string NodeId { get; set; }
+	}
+
 	/// <summary>
 	/// Provides a base for descriptors that need to describe a path in the form of 
 	/// <pre>
@@ -18,26 +44,26 @@ namespace Nest
 	/// </pre>
 	/// node id is optional
 	/// </summary>
-	public class NodeIdOptionalDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+	public abstract class NodeIdOptionalDescriptor<TDescriptor, TParameters>
+		: BasePathDescriptor<TDescriptor, TParameters>, INodeIdOptionalPath<TParameters>
 		where TDescriptor : NodeIdOptionalDescriptor<TDescriptor, TParameters> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-		internal string _NodeId { get; set; }
+		private INodeIdOptionalPath<TParameters> Self { get { return this; } }
+		string INodeIdOptionalPath<TParameters>.NodeId { get; set; }
 
 		/// <summary>
 		/// Specify the {name} part of the operation
 		/// </summary>
 		public TDescriptor NodeId(string nodeId)
 		{
-			this._NodeId = nodeId;
+			Self.NodeId = nodeId;
 			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(queryString);
-			pathInfo.NodeId = this._NodeId;
-			return pathInfo;
+			NodeIdOptionalPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 	}

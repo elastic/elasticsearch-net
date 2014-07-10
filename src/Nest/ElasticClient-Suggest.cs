@@ -14,7 +14,16 @@ namespace Nest
 		{
 			return this.Dispatch<SuggestDescriptor<T>, SuggestRequestParameters, SuggestResponse>(
 				selector,
-				(p, d) => this.RawDispatch.SuggestDispatch<SuggestResponse>(p, d._Suggest)
+				(p, d) => this.RawDispatch.SuggestDispatch<SuggestResponse>(p, d)
+			);
+		}
+
+		/// <inheritdoc />
+		public ISuggestResponse Suggest(ISuggestRequest suggestRequest)
+		{
+			return this.Dispatch<ISuggestRequest, SuggestRequestParameters, SuggestResponse>(
+				suggestRequest,
+				(p, d) => this.RawDispatch.SuggestDispatch<SuggestResponse>(p, d)
 			);
 		}
 
@@ -24,8 +33,18 @@ namespace Nest
 		{
 			return this.DispatchAsync<SuggestDescriptor<T>, SuggestRequestParameters, SuggestResponse, ISuggestResponse>(
 				selector,
-				(p, d) => this.RawDispatch.SuggestDispatchAsync<SuggestResponse>(p, d._Suggest)
+				(p, d) => this.RawDispatch.SuggestDispatchAsync<SuggestResponse>(p, d)
 			);
 		}
+
+		/// <inheritdoc />
+		public Task<ISuggestResponse> SuggestAsync(ISuggestRequest suggestRequest)
+		{
+			return this.DispatchAsync<ISuggestRequest, SuggestRequestParameters, SuggestResponse, ISuggestResponse>(
+				suggestRequest,
+				(p, d) => this.RawDispatch.SuggestDispatchAsync<SuggestResponse>(p, d)
+			);
+		}
+
 	}
 }

@@ -1,35 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using Elasticsearch.Net;
+using Nest;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesUpdateAliases")]
-	public partial class AliasDescriptor : BasePathDescriptor<AliasDescriptor>,
-		 IPathInfo<AliasRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IAliasRequest : IRequest<AliasRequestParameters>
 	{
+		[JsonProperty("actions")]
+		IList<IAliasAction> Actions { get; set; }
+	}
+
+	internal static class AliasPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<AliasRequestParameters> pathInfo, IAliasRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class AliasRequest : BaseRequest<AliasRequestParameters>, IAliasRequest
+	{
+		public IList<IAliasAction> Actions { get; set; }
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<AliasRequestParameters> pathInfo)
+		{
+			AliasPathInfo.Update(pathInfo, this);
+		}
+	}
+
+
+	[DescriptorFor("IndicesUpdateAliases")]
+	public partial class AliasDescriptor : BasePathDescriptor<AliasDescriptor, AliasRequestParameters>, IAliasRequest
+	{
+		private IAliasRequest Self { get { return this; } }
+
 		public AliasDescriptor()
 		{
-			this._Actions = new List<IAliasAction>();
+			Self.Actions = new List<IAliasAction>();
 		}
 
-		[JsonProperty("actions")]
-		internal IList<IAliasAction> _Actions { get; set; }
+		IList<IAliasAction> IAliasRequest.Actions { get; set; }
 
 		public AliasDescriptor Add(Func<AliasAddDescriptor, AliasAddDescriptor> addSelector)
 		{
 			addSelector.ThrowIfNull("addSelector");
 			var descriptor = addSelector(new AliasAddDescriptor());
 			descriptor.ThrowIfNull("addAliasDescriptor");
-			this._Actions.Add(descriptor);
+			Self.Actions.Add(descriptor);
 			return this;
 		}
 		public AliasDescriptor Remove(Func<AliasRemoveDescriptor, AliasRemoveDescriptor> removeSelector)
@@ -37,17 +59,15 @@ namespace Nest
 			removeSelector.ThrowIfNull("removeSelector");
 			var descriptor = removeSelector(new AliasRemoveDescriptor());
 			descriptor.ThrowIfNull("removeAliasDescriptor");
-			this._Actions.Add(descriptor);
+			Self.Actions.Add(descriptor);
 			return this;
 		}
 
-		ElasticsearchPathInfo<AliasRequestParameters> IPathInfo<AliasRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
-		{
-			var pathInfo = new ElasticsearchPathInfo<AliasRequestParameters>();
-			pathInfo.RequestParameters = this._QueryString;
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 
-			return pathInfo;
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<AliasRequestParameters> pathInfo)
+		{
+			AliasPathInfo.Update(pathInfo, this);
 		}
+
 	}
 }

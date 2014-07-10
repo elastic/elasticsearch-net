@@ -4,13 +4,14 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class ElasticsearchPathInfo<T> where T : FluentRequestParameters<T>, new()
+	public class ElasticsearchPathInfo<TParameters> 
+		where TParameters : IRequestParameters, new()
 	{
 		public PathInfoHttpMethod HttpMethod { get; set; }
 		public string Index { get; set; }
 		public string Type { get; set; }
 		public string Id { get; set; }
-		public T RequestParameters { get; set; }
+		public TParameters RequestParameters { get; set; }
 		public string Name { get; set; }
 		public string Field { get; set; }
 		public string ScrollId { get; set; }
@@ -26,12 +27,12 @@ namespace Nest
 
 		public ElasticsearchPathInfo()
 		{
-			this.RequestParameters = new T();
+			this.RequestParameters = new TParameters();
 		}
 
-		public ElasticsearchPathInfo<T> DeserializationState(object customObjectCreation)
+		public ElasticsearchPathInfo<TParameters> DeserializationState(Func<IElasticsearchResponse, Stream, object> customObjectCreation)
 		{
-			this.RequestParameters.DeserializationState(customObjectCreation);
+			this.RequestParameters.DeserializationState = customObjectCreation;
 			return this;
 		}
 	}

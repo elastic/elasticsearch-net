@@ -15,14 +15,12 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				f=>f.HasParent,
 				f=>f.HasParent<Person>(hp=>hp
 					.Query(qq=>Query3)
-					.Scope("my_scope")
-					.Score(ParentScoreType.score)
+					.Score(ParentScoreType.Score)
 					)
 				);
 
 			q.Type.Should().Be("person");
-			q.Scope.Should().Be("my_scope");
-			q.ScoreType.Should().Be(ParentScoreType.score);
+			q.ScoreType.Should().Be(ParentScoreType.Score);
 			AssertIsTermQuery(q.Query, Query3);
 		}
 	}

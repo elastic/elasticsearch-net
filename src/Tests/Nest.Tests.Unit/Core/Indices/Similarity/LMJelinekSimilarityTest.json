@@ -1,0 +1,12 @@
+﻿{
+	"settings": {
+		"index": {
+			"similarity": {
+				"my_lmjelinek_similarity": {
+					"lambda": 0.5,
+					"type":  "LMJelinekMercer"
+				}
+			}
+		}
+	}
+}

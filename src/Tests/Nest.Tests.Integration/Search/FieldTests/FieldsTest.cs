@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Search.FieldTests
 			// Left in followers + contributors will cause a leaf node exception, so good test victims
 			var fields = typeof (ElasticsearchProject).GetProperties()
 				.Select(x => x.Name.ToCamelCase())
-				.Except(new List<string> {"followers", "contributors", "nestedFollowers", "myGeoShape"}).ToList();
+				.Except(new List<string> {"followers", "contributors", "product", "nestedFollowers", "myGeoShape"}).ToList();
 
 			var queryResults = _client.Search<ElasticsearchProject>(s =>
 					s.Skip(0)
@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Search.FieldTests
 
 			queryResults.Documents.Should().BeEmpty();
 			
-			foreach (var doc in queryResults.FieldSelections)
+			foreach (var doc in queryResults.FieldSelections)	
 			{
 				// "content" is a string
 				var content = doc.FieldValues(p => p.Content).First();

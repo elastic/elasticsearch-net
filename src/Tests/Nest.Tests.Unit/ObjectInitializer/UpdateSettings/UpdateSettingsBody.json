@@ -1,0 +1,41 @@
+﻿{
+  "index.number_of_replicas": 5,
+  "index.auto_expand_replicas": false,
+  "index.blocks.read_only": true,
+  "index.blocks.read": true,
+  "index.blocks.write": false,
+  "index.blocks.metadata": true,
+  "index.refresh_interval": "30s",
+  "index.index_concurrency": 5,
+  "index.codec": "default",
+  "index.codec.bloom.load": false,
+  "index.fail_on_merge_failure": false,
+  "index.translog.flush_threshold_ops": "10s",
+  "index.translog.flush_threshold_size": "2048",
+  "index.translog.flush_threshold_period": "5s",
+  "index.translog.disable_flush": true,
+  "index.cache.filter.max_size": "-1",
+  "index.cache.filter.expire": "-1",
+  "index.gateway.snapshot_interval": "5s",
+  "index.routing.allocation.include": {
+    "tag": "value1,value2"
+  },
+  "index.routing.allocation.exclude": {
+    "tag": "value3"
+  },
+  "index.routing.allocation.require": {
+    "group4": "aaa"
+  },
+  "index.routing.allocation.enable": "new_primaries",
+  "index.routing.allocation.disable_allocation": false,
+  "index.routing.allocation.disable_new_allocation": false,
+  "index.routing.allocation.disable_replica_allocation": false,
+  "index.routing.allocation.total_shards_per_node": 1,
+  "index.recovery.initial_shards": "full",
+  "index.gc_deletes": true,
+  "index.ttl.disable_purge": true,
+  "index.translog.fs.type": "simple",
+  "index.compound_format": true,
+  "index.compound_on_flush": true,
+  "index.warmer.enabled": true
+}

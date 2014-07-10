@@ -25,7 +25,7 @@ namespace Nest
 		[JsonProperty("index_name")]
 		public string IndexName { get; set; }
 
-		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
+		[JsonProperty("store")]
 		public bool? Store { get; set; }
 
 		[JsonProperty("index"), JsonConverter(typeof(StringEnumConverter))]
@@ -40,5 +40,7 @@ namespace Nest
 		[JsonProperty("include_in_all")]
 		public bool? IncludeInAll { get; set; }
 
+		[JsonProperty("copy_to")]
+		public IEnumerable<PropertyPathMarker> CopyTo { get; set; }
 	}
 }

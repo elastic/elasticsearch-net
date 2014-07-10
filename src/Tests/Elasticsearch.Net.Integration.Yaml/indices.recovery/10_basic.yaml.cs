@@ -21,7 +21,14 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesRecovery1
 			{	
 
 				//do indices.create 
-				this.Do(()=> _client.IndicesCreate("test_1", null));
+				_body = new {
+					settings= new {
+						index= new {
+							number_of_replicas= "0"
+						}
+					}
+				};
+				this.Do(()=> _client.IndicesCreate("test_1", _body));
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv

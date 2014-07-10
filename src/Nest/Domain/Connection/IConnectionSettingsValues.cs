@@ -7,6 +7,7 @@ namespace Nest
 {
 	public interface IConnectionSettingsValues : IConnectionConfigurationValues
 	{
+		ElasticInferrer Inferrer { get; }
 		FluentDictionary<Type, string> DefaultIndices { get; }
 		FluentDictionary<Type, string> DefaultTypeNames { get; }
 		string DefaultIndex { get; }

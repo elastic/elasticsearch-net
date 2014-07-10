@@ -1,0 +1,14 @@
+﻿{
+	"settings": {
+		"index": {
+			"similarity": {
+				"my_default_similarity": {
+					"discount_overlaps":  true,
+					"type":  "default",
+					"normalization":  "h2",
+					"normalization.h2.c":  "2.0"
+				}
+			}
+		}
+	}
+}

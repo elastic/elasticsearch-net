@@ -33,6 +33,8 @@ namespace Nest
 
 	public interface IFieldSort : ISort
 	{
+		PropertyPathMarker Field { get; set; }
+
 		[JsonProperty("mode")]
 		ScoreMode? Mode { get; set; }
 
@@ -48,7 +50,7 @@ namespace Nest
 
 	public class Sort : IFieldSort
 	{
-		//public PropertyPathMarker Field { get; set; }
+		public PropertyPathMarker Field { get; set; }
 		public string Missing { get; set; }
 		public SortOrder? Order { get; set; }
 		public ScoreMode? Mode { get; set; }
@@ -61,7 +63,7 @@ namespace Nest
 	{
 		private IFieldSort Self { get { return this; } }
 
-		internal PropertyPathMarker Field { get; set; }
+		PropertyPathMarker IFieldSort.Field { get; set; }
 
 		string ISort.Missing { get; set; }
 
@@ -77,13 +79,13 @@ namespace Nest
 
 		public virtual SortFieldDescriptor<T> OnField(string field)
 		{
-			this.Field = field;
+			Self.Field = field;
 			return this;
 		}
 
 		public virtual SortFieldDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			this.Field = objectPath;
+			Self.Field = objectPath;
 			return this;
 		}
 
@@ -123,27 +125,33 @@ namespace Nest
 			return this;
 		}
 
+		public virtual SortFieldDescriptor<T> Order(SortOrder order)
+		{
+			Self.Order = order;
+			return this;
+		}
+
         public virtual SortFieldDescriptor<T> NestedMin()
         {
-            Self.Mode = ScoreMode.min;
+            Self.Mode = ScoreMode.Min;
             return this;
         }
 
         public virtual SortFieldDescriptor<T> NestedMax()
         {
-			Self.Mode = ScoreMode.max;
+			Self.Mode = ScoreMode.Max;
             return this;
         }
 
         public virtual SortFieldDescriptor<T> NestedSum()
         {
-            Self.Mode = ScoreMode.sum;
+            Self.Mode = ScoreMode.Sum;
             return this;
         }
 
         public virtual SortFieldDescriptor<T> NestedAvg()
         {
-			Self.Mode = ScoreMode.avg;
+			Self.Mode = ScoreMode.Average;
             return this;
         }
 
@@ -165,15 +173,6 @@ namespace Nest
 		public SortFieldDescriptor<T> NestedPath(Expression<Func<T, object>> objectPath)
 		{
 			Self.NestedPath = objectPath;
-			return this;
-		}
-
-		/// <summary>
-		/// Pass true to sort ascending false to sort descending
-		/// </summary>
-		public virtual SortFieldDescriptor<T> ToggleSort(bool ascending)
-		{
-			Self.Order = ascending ? SortOrder.Descending : SortOrder.Ascending;
 			return this;
 		}
 	}

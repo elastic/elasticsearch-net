@@ -3,77 +3,80 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
 
-	[DescriptorFor("Mget")]
-	public partial class MultiGetDescriptor : FixedIndexTypePathDescriptor<MultiGetDescriptor, MultiGetRequestParameters>
-		, IPathInfo<MultiGetRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IMultiGetRequest : IFixedIndexTypePath<MultiGetRequestParameters>
 	{
-		internal readonly IList<ISimpleGetDescriptor> _GetOperations = new List<ISimpleGetDescriptor>();
-		private readonly IConnectionSettingsValues _settings;
-
 		[JsonProperty("docs")]
-		internal IEnumerable<MultiGetDoc> Docs
-		{
-			get
-			{
-				var inferrer = new ElasticInferrer(this._settings);
-				return this._GetOperations.Select(g => new MultiGetDoc
-				{
-					Index = g._Index == null ? inferrer.IndexName(g._ClrType) : inferrer.IndexName(g._Index),
-					Type = g._Type == null ? inferrer.TypeName(g._ClrType) : inferrer.TypeName(g._Type),
-					Fields = g._Fields,
-					Routing = g._Routing,
-					Id = g._Id
+		IList<IMultiGetOperation> GetOperations { get; set; }
+	}
 
-				});
-			}
-		} 
-
-		public MultiGetDescriptor(IConnectionSettingsValues settings)
+	internal static class MultiGetPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo, IMultiGetRequest request)
 		{
-			_settings = settings;
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class MultiGetRequest : FixedIndexTypePathBase<MultiGetRequestParameters>, IMultiGetRequest
+	{
+		public IList<IMultiGetOperation> GetOperations { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo)
+		{
+			MultiGetPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("Mget")]
+	public partial class MultiGetDescriptor : FixedIndexTypePathDescriptor<MultiGetDescriptor, MultiGetRequestParameters>, IMultiGetRequest
+	{
+		private IMultiGetRequest Self { get { return this; } }
+
+		IList<IMultiGetOperation> IMultiGetRequest.GetOperations { get; set; }
+
+		public MultiGetDescriptor()
+		{
+			this.Self.GetOperations = new List<IMultiGetOperation>();
 		}
 
-		public MultiGetDescriptor Get<K>(Func<SimpleGetDescriptor<K>, SimpleGetDescriptor<K>> getSelector) where K : class
+		public MultiGetDescriptor Get<T>(Func<MultiGetOperationDescriptor<T>, MultiGetOperationDescriptor<T>> getSelector) 
+			where T : class
 		{
 			getSelector.ThrowIfNull("getSelector");
-
-			var descriptor = getSelector(new SimpleGetDescriptor<K>());
-
-			this._GetOperations.Add(descriptor);
+			var descriptor = getSelector(new MultiGetOperationDescriptor<T>());
+			Self.GetOperations.Add(descriptor);
 			return this;
 
 		}
 
-		public MultiGetDescriptor GetMany<K>(IEnumerable<long> ids, Func<SimpleGetDescriptor<K>, long, SimpleGetDescriptor<K>> getSelector=null) where K : class
+		public MultiGetDescriptor GetMany<T>(IEnumerable<long> ids, Func<MultiGetOperationDescriptor<T>, long, MultiGetOperationDescriptor<T>> getSelector=null) 
+			where T : class
 		{
 			getSelector = getSelector ?? ((sg, s) => sg);
-			foreach (var sg in ids.Select(id => getSelector(new SimpleGetDescriptor<K>().Id(id), id)))
-				this._GetOperations.Add(sg);
+			foreach (var sg in ids.Select(id => getSelector(new MultiGetOperationDescriptor<T>().Id(id), id)))
+				this.Self.GetOperations.Add(sg);
 			return this;
 
 		}
-		public MultiGetDescriptor GetMany<K>(IEnumerable<string> ids, Func<SimpleGetDescriptor<K>, string, SimpleGetDescriptor<K>> getSelector=null) where K : class
+		public MultiGetDescriptor GetMany<T>(IEnumerable<string> ids, Func<MultiGetOperationDescriptor<T>, string, MultiGetOperationDescriptor<T>> getSelector=null)
+			where T : class
 		{
 			getSelector = getSelector ?? ((sg, s) => sg);
-			foreach (var sg in ids.Select(id => getSelector(new SimpleGetDescriptor<K>().Id(id), id)))
-				this._GetOperations.Add(sg);
+			foreach (var sg in ids.Select(id => getSelector(new MultiGetOperationDescriptor<T>().Id(id), id)))
+				this.Self.GetOperations.Add(sg);
 			return this;
 
 		}
-		ElasticsearchPathInfo<MultiGetRequestParameters> IPathInfo<MultiGetRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo)
 		{
-			var pathInfo = this.ToPathInfo(settings, this._QueryString);
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST; // no data in GETS in the .net world
-			return pathInfo;
+			MultiGetPathInfo.Update(pathInfo, this);
 		}
 	}
 }

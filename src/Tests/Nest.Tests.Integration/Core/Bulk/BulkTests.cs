@@ -15,9 +15,9 @@ namespace Nest.Tests.Integration.Core.Bulk
 		public void Bulk()
 		{
 			var result = this._client.Bulk(b => b
-				.Index<ElasticsearchProject>(i => i.Object(new ElasticsearchProject {Id = 2}))
-				.Delete<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 4 }))
-				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 123123 }))
+				.Index<ElasticsearchProject>(i => i.Document(new ElasticsearchProject {Id = 2}))
+				.Delete<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 4 }))
+				.Create<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 123123 }))
 				
 			);
 			result.Should().NotBeNull();
@@ -48,8 +48,8 @@ namespace Nest.Tests.Integration.Core.Bulk
 		public void DoubleCreateReturnsOneError()
 		{
 			var result = this._client.Bulk(b => b
-				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 12315555 }))
-				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 12315555 }))
+				.Create<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 12315555 }))
+				.Create<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 12315555 }))
 			);
 
 			result.IsValid.Should().BeFalse();
@@ -63,9 +63,9 @@ namespace Nest.Tests.Integration.Core.Bulk
 			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
 			var result = this._client.Bulk(b => b
 				.FixedPath(indexName, "mytype")
-				.Index<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 2 }))
-				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 3 }))
-				.Delete<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 4 }))
+				.Index<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 2 }))
+				.Create<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 3 }))
+				.Delete<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 4 }))
 			);
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
@@ -99,8 +99,8 @@ namespace Nest.Tests.Integration.Core.Bulk
 			var indexName3 = ElasticsearchConfiguration.NewUniqueIndexName();
 			var result = this._client.Bulk(b => b
 				.FixedPath(indexName, "mytype")
-				.Index<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 2 }).Index(indexName2))
-				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 3 }).Type("esproj"))
+				.Index<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 2 }).Index(indexName2))
+				.Create<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 3 }).Type("esproj"))
 				.Delete<ElasticsearchProject>(i => i.Id(4).Index(indexName3).Type("mytype2"))
 			);
 			result.Should().NotBeNull();
@@ -133,7 +133,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 		{
 			var descriptor = new BulkDescriptor();
 			foreach (var i in Enumerable.Range(3000, 1000))
-				descriptor.Index<ElasticsearchProject>(op => op.Object(new ElasticsearchProject {Id = i}));
+				descriptor.Index<ElasticsearchProject>(op => op.Document(new ElasticsearchProject {Id = i}));
 
 			var result = this._client.Bulk(d=>descriptor);
 			result.Should().NotBeNull();

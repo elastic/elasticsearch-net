@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Connection.Configuration;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
@@ -39,22 +40,21 @@ namespace Nest
 		public ElasticClient(
 			IConnectionSettingsValues settings = null, 
 			IConnection connection = null, 
-			INestSerializer serializer = null)
+			INestSerializer serializer = null,
+			ITransport transport = null)
 		{
 			this._connectionSettings = settings ?? new ConnectionSettings();
 			this.Connection = connection ?? new HttpConnection(this._connectionSettings);
 
 			this.Serializer = serializer ?? new NestSerializer(this._connectionSettings);
-			var stringifier = new NestStringifier(this._connectionSettings);
 			this.Raw = new ElasticsearchClient(
 				this._connectionSettings, 
 				this.Connection, 
-				null, //default transport
-				this.Serializer, 
-				stringifier
+				transport, //default transport
+				this.Serializer
 			);
 			this.RawDispatch = new RawDispatch(this.Raw);
-			this.Infer = new ElasticInferrer(this._connectionSettings);
+			this.Infer = this._connectionSettings.Inferrer;
 
 		}
 
@@ -64,7 +64,7 @@ namespace Nest
 			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
 			)
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IPathDescriptor, IPathInfo<Q>,  new()
+			where D : IRequest<Q>,  new()
 			where R : BaseResponse
 		{
 			selector.ThrowIfNull("selector");
@@ -77,7 +77,7 @@ namespace Nest
 			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
 			)
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IPathDescriptor, IPathInfo<Q>
+			where D : IRequest<Q>
 			where R : BaseResponse
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
@@ -90,10 +90,10 @@ namespace Nest
 			D descriptor
 			)
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IPathDescriptor, IPathInfo<Q>
+			where D : IRequest<Q>
 			where R : BaseResponse
 		{
-			var config = descriptor.RequestConfiguration as IRequestConfiguration;
+			var config = descriptor.RequestConfiguration;
 			var statusCodeAllowed = config != null && config.AllowedStatusCodes.HasAny(i => i == c.HttpStatusCode);
 			
 			if (c.Success || statusCodeAllowed)
@@ -126,7 +126,7 @@ namespace Nest
 			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
 			)
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IPathDescriptor, IPathInfo<Q>, new()
+			where D : IRequest<Q>, new()
 			where R : BaseResponse, I
 			where I : IResponse
 		{
@@ -140,7 +140,7 @@ namespace Nest
 			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
 			) 
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IPathDescriptor, IPathInfo<Q>
+			where D : IRequest<Q>
 			where R : BaseResponse, I 
 			where I : IResponse
 		{

@@ -48,7 +48,7 @@ namespace Elasticsearch.Net.ConnectionPool
 		/// Update the node list manually, usually done by ITransport when sniffing was needed.
 		/// </summary>
 		/// <param name="newClusterState"></param>
-		/// <param name="fromStartupHint">hint that this update came from start up</param>
-		void UpdateNodeList(IList<Uri> newClusterState, bool fromStartupHint = true);
+		/// <param name="sniffNode">hint that the node we recieved the sniff from should not be pinged</param>
+		void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null);
 	}
 }

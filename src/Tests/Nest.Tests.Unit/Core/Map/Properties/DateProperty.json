@@ -4,7 +4,7 @@
       "startedOn": {
         "type": "date",
         "index_name": "started_on_index_name",
-        "store": "yes",
+        "store": true,
         "index": "analyzed",
         "format": "dateOptionalTime",
         "precision_step": 4,

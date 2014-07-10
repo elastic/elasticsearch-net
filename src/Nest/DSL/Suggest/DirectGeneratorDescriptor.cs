@@ -23,7 +23,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "suggest_mode")]
 		[JsonConverter(typeof(StringEnumConverter))]
-		SuggestModeOptions? SuggestMode { get; set; }
+		SuggestMode? SuggestMode { get; set; }
 
 		[JsonProperty(PropertyName = "min_word_len")]
 		int? MinWordLen { get; set; }
@@ -52,7 +52,7 @@ namespace Nest
 		public PropertyPathMarker Field { get; set; }
 		public int? Size { get; set; }
 		public int? PrefixLen { get; set; }
-		public SuggestModeOptions? SuggestMode { get; set; }
+		public SuggestMode? SuggestMode { get; set; }
 		public int? MinWordLen { get; set; }
 		public int? MaxEdits { get; set; }
 		public decimal? MaxInspections { get; set; }
@@ -72,7 +72,7 @@ namespace Nest
 
 		int? IDirectGenerator.PrefixLen { get; set; }
 
-		SuggestModeOptions? IDirectGenerator.SuggestMode { get; set; }
+		SuggestMode? IDirectGenerator.SuggestMode { get; set; }
 
 		int? IDirectGenerator.MinWordLen { get; set; }
 
@@ -106,7 +106,7 @@ namespace Nest
 			return this;
 		}
 
-		public DirectGeneratorDescriptor<T> SuggestMode(SuggestModeOptions mode)
+		public DirectGeneratorDescriptor<T> SuggestMode(SuggestMode mode)
 		{
 			Self.SuggestMode = mode;
 			return this;

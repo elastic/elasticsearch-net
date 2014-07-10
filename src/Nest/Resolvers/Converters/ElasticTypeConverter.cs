@@ -21,50 +21,58 @@ namespace Nest.Resolvers.Converters
 		private IElasticType GetTypeFromJObject(JObject po, JsonSerializer serializer)
 		{
 			JToken typeToken;
+			JToken propertiesToken;
 			JToken fieldsToken;
+			var type = string.Empty;
+
+			var hasType = po.TryGetValue("type", out typeToken);
+			if (hasType)
+				type = typeToken.Value<string>().ToLowerInvariant();
+			else if (po.TryGetValue("properties", out propertiesToken))
+				type = "object";
+
+			var originalType = type;
+			var hasFields = po.TryGetValue("fields", out fieldsToken);
+			if (hasFields)
+				type = "multi_field";
+
 			serializer.TypeNameHandling = TypeNameHandling.None;
-			if (po.TryGetValue("type", out typeToken))
+
+			switch (type)
 			{
-				var type = typeToken.Value<string>().ToLowerInvariant();
-				var originalType = type;
-				var hasFields = po.TryGetValue("fields", out fieldsToken);
-				if (hasFields)
-					type = "multi_field";
-				switch (type)
-				{
-					case "string":
-						return serializer.Deserialize(po.CreateReader(), typeof(StringMapping)) as StringMapping;
-					case "float":
-					case "double":
-					case "byte":
-					case "short":
-					case "integer":
-					case "long":
-						return serializer.Deserialize(po.CreateReader(), typeof(NumberMapping)) as NumberMapping;
-					case "date":
-						return serializer.Deserialize(po.CreateReader(), typeof(DateMapping)) as DateMapping;
-					case "boolean":
-						return serializer.Deserialize(po.CreateReader(), typeof(BooleanMapping)) as BooleanMapping;
-					case "binary":
-						return serializer.Deserialize(po.CreateReader(), typeof(BinaryMapping)) as BinaryMapping;
-					case "object":
-						return serializer.Deserialize(po.CreateReader(), typeof(ObjectMapping)) as ObjectMapping;
-					case "nested":
-						return serializer.Deserialize(po.CreateReader(), typeof(NestedObjectMapping)) as NestedObjectMapping;
-					case "multi_field":
-						var m =serializer.Deserialize(po.CreateReader(), typeof(MultiFieldMapping)) as MultiFieldMapping;
-						m.Type = originalType;
-						return m;
-					case "ip":
-						return serializer.Deserialize(po.CreateReader(), typeof(IPMapping)) as IPMapping;
-					case "geo_point":
-						return serializer.Deserialize(po.CreateReader(), typeof(GeoPointMapping)) as GeoPointMapping;
-					case "geo_shape":
-						return serializer.Deserialize(po.CreateReader(), typeof(GeoShapeMapping)) as GeoShapeMapping;
-					case "attachment":
-						return serializer.Deserialize(po.CreateReader(), typeof(AttachmentMapping)) as AttachmentMapping;
-				}
+				case "string":
+					return serializer.Deserialize(po.CreateReader(), typeof(StringMapping)) as StringMapping;
+				case "float":
+				case "double":
+				case "byte":
+				case "short":
+				case "integer":
+				case "long":
+					return serializer.Deserialize(po.CreateReader(), typeof(NumberMapping)) as NumberMapping;
+				case "date":
+					return serializer.Deserialize(po.CreateReader(), typeof(DateMapping)) as DateMapping;
+				case "boolean":
+					return serializer.Deserialize(po.CreateReader(), typeof(BooleanMapping)) as BooleanMapping;
+				case "binary":
+					return serializer.Deserialize(po.CreateReader(), typeof(BinaryMapping)) as BinaryMapping;
+				case "object":
+					return serializer.Deserialize(po.CreateReader(), typeof(ObjectMapping)) as ObjectMapping;
+				case "nested":
+					return serializer.Deserialize(po.CreateReader(), typeof(NestedObjectMapping)) as NestedObjectMapping;
+				case "multi_field":
+					var m =serializer.Deserialize(po.CreateReader(), typeof(MultiFieldMapping)) as MultiFieldMapping;
+					m.Type = originalType;
+					return m;
+				case "ip":
+					return serializer.Deserialize(po.CreateReader(), typeof(IPMapping)) as IPMapping;
+				case "geo_point":
+					return serializer.Deserialize(po.CreateReader(), typeof(GeoPointMapping)) as GeoPointMapping;
+				case "geo_shape":
+					return serializer.Deserialize(po.CreateReader(), typeof(GeoShapeMapping)) as GeoShapeMapping;
+				case "attachment":
+					return serializer.Deserialize(po.CreateReader(), typeof(AttachmentMapping)) as AttachmentMapping;
 			}
+
 			return null;
 		}
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,

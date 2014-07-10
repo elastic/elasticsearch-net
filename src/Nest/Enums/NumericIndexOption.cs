@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+	[JsonConverter(typeof(StringEnumConverter))]
 	public enum NonStringIndexOption
 	{
-		no,
-		analyzed,
-		not_analyzed 
+		[EnumMember(Value = "no")]
+		No,
+		[EnumMember(Value = "analyzed")]
+		Analyzed,
+		[EnumMember(Value = "not_analyzed")]
+		NotAnalyzed 
 	}
-
-	
 }

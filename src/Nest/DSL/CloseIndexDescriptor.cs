@@ -1,27 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesClose")]
-	public partial class CloseIndexDescriptor : IndexPathDescriptorBase<CloseIndexDescriptor, CloseIndexRequestParameters>
-		, IPathInfo<CloseIndexRequestParameters>
-	{
-		ElasticsearchPathInfo<CloseIndexRequestParameters> IPathInfo<CloseIndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
-		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface ICloseIndexRequest : IIndexPath<CloseIndexRequestParameters> { }
 
-			return pathInfo;
+	internal static class CloseIndexPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<CloseIndexRequestParameters> pathInfo, ICloseIndexRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class CloseIndexRequest : IndexPathBase<CloseIndexRequestParameters>, ICloseIndexRequest
+	{
+		public CloseIndexRequest(IndexNameMarker index) : base(index) { }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CloseIndexRequestParameters> pathInfo)
+		{
+			CloseIndexPathInfo.Update(pathInfo, this);
+		}
+	}
+	[DescriptorFor("IndicesClose")]
+	public partial class CloseIndexDescriptor : IndexPathDescriptorBase<CloseIndexDescriptor, CloseIndexRequestParameters>, ICloseIndexRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CloseIndexRequestParameters> pathInfo)
+		{
+			CloseIndexPathInfo.Update(pathInfo, this);
 		}
 	}
 }

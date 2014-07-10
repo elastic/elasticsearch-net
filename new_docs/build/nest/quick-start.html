@@ -32,7 +32,7 @@ This can greatly reduce the places a magic string or constant has to be used.</p
 <p><strong>NOTE:</strong> specifying defaultIndex is optional but NEST might throw an exception later on if no index is specified. In fact a simple <code>new ElasticClient()</code> is sufficient to chat with
 <code>http://localhost:9200</code> but explicitly specifying connection settings is recommended.</p>
 <p><code>node</code> here is a <code>Uri</code> but can also be an <code>IConnectionPool</code> see the 
-<a href="http://localhost:8080/elasticsearch-net/connecting.html">Elasticsearch.net section on connecting</a></p>
+<a href="/elasticsearch-net/connecting.html">Elasticsearch.net section on connecting</a></p>
 <h2 id="indexing">Indexing</h2>
 <p>Now imagine we have a Person <a href="http://en.wikipedia.org/wiki/Plain_Old_CLR_Object">POCO</a></p>
 <pre><code>public class Person
@@ -70,7 +70,7 @@ var index = client.Index(person);
     )
 );
 </code></pre><p><code>searchResults.Documents</code> now holds the first 10 people it knows who&#39;s first name is <code>Martijn</code></p>
-<p>Please see <a href="http://localhost:8080/nest/writing-queries.html">the section on writing queries</a> for details on how NEST helps you write terse elasticsearch queries.</p>
+<p>Please see <a href="/nest/writing-queries.html">the section on writing queries</a> for details on how NEST helps you write terse elasticsearch queries.</p>
 <p>Again the same inferring rules apply as this will hit <code>/my-application/person/_search</code> and the same rule that inferring can be overridden also applies.</p>
 <pre><code>// uses /other-index/other-type/_search
 var searchResults = client.Search&lt;Person&gt;(s=&gt;s

@@ -227,7 +227,6 @@ Target "Nightly" (fun _ ->
 
 
 "Build"
-  ==> "Docs"
   ==> "Release"
 
 "DocsPreview"

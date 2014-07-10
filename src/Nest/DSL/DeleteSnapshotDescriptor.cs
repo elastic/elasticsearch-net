@@ -3,23 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Nest.Resolvers;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	[DescriptorFor("SnapshotDelete")]
-	public partial class DeleteSnapshotDescriptor :
-		RepositorySnapshotPathDescriptor<DeleteSnapshotDescriptor, DeleteSnapshotRequestParameters>
-		, IPathInfo<DeleteSnapshotRequestParameters>
-	{
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IDeleteSnapshotRequest : IRepositorySnapshotPath<DeleteSnapshotRequestParameters> { }
 
-		ElasticsearchPathInfo<DeleteSnapshotRequestParameters> IPathInfo<DeleteSnapshotRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+	internal static class DeleteSnapshotPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<DeleteSnapshotRequestParameters> pathInfo, IDeleteSnapshotRequest request)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
-			
-			return pathInfo;
+		}
+	}
+	
+	public partial class DeleteSnapshotRequest : RepositorySnapshotPathBase<DeleteSnapshotRequestParameters>, IDeleteSnapshotRequest
+	{
+		public DeleteSnapshotRequest(string repository, string snapshot) : base(repository, snapshot) { }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteSnapshotRequestParameters> pathInfo)
+		{
+			DeleteSnapshotPathInfo.Update(pathInfo, this);
+		}
+	}
+	[DescriptorFor("SnapshotDelete")]
+	public partial class DeleteSnapshotDescriptor : RepositorySnapshotPathDescriptor<DeleteSnapshotDescriptor, DeleteSnapshotRequestParameters>, IDeleteSnapshotRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteSnapshotRequestParameters> pathInfo)
+		{
+			DeleteSnapshotPathInfo.Update(pathInfo, this);
 		}
 
 	}

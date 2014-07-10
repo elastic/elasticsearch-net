@@ -40,7 +40,7 @@ namespace Nest.Tests.Unit.Core.Map
 					.Enabled() 
 					.IndexAnalyzer("nGram_analyzer")
 					.SearchAnalyzer("whitespace_analyzer")
-					.TermVector(TermVectorOption.with_positions_offsets)
+					.TermVector(TermVectorOption.WithPositionsOffsets)
 				)
 				.DisableIndexField(false)
 				.DisableSizeField(false)
@@ -126,23 +126,25 @@ namespace Nest.Tests.Unit.Core.Map
 				.Properties(props => props
 					.String(s => s
 						.Name(p => p.Name)
+						.Similarity("mysimilarity")
 						.IndexName("my_crazy_name_i_want_in_lucene")
 						.IncludeInAll()
-						.Index(FieldIndexOption.analyzed)
+						.Index(FieldIndexOption.Analyzed)
 						.IndexAnalyzer("standard")
-						.IndexOptions(IndexOptions.positions)
+						.IndexOptions(IndexOptions.Positions)
 						.NullValue("my_special_null_value")
 						.OmitNorms()
 						.PositionOffsetGap(1)
 						.SearchAnalyzer("standard")
 						.Store()
-						.TermVector(TermVectorOption.with_positions_offsets)
+						.TermVector(TermVectorOption.WithPositionsOffsets)
 						.Boost(1.1)
+						.CopyTo(p => p.Content)
 					)
 					.Number(s => s
 						.Name(p => p.LOC)
 						.IndexName("lines_of_code")
-						.Type(NumberType.@integer)
+						.Type(NumberType.Integer)
 						.NullValue(0)
 						.Boost(2.0)
 						.IgnoreMalformed()
@@ -178,8 +180,8 @@ namespace Nest.Tests.Unit.Core.Map
 					)
 					.Attachment(s => s
 						.Name(p => p.MyAttachment)
-						.FileField(fs => fs.Index(FieldIndexOption.not_analyzed).Store())
-						.AuthorField(fs => fs.Index(FieldIndexOption.analyzed).Store(false))
+						.FileField(fs => fs.Index(FieldIndexOption.NotAnalyzed).Store())
+						.AuthorField(fs => fs.Index(FieldIndexOption.Analyzed).Store(false))
 						.DateField(fs => fs.Store(false).IncludeInAll())
 					)
 					.Object<Person>(s => s
@@ -190,7 +192,7 @@ namespace Nest.Tests.Unit.Core.Map
 						.MapFromAttributes()
 						.Path("full")
 						.Properties(pprops => pprops
-							.String(ps => ps.Name(p => p.FirstName).Index(FieldIndexOption.not_analyzed))
+							.String(ps => ps.Name(p => p.FirstName).Index(FieldIndexOption.NotAnalyzed))
 						//etcetera
 						)
 					)
@@ -204,15 +206,15 @@ namespace Nest.Tests.Unit.Core.Map
 						.MapFromAttributes()
 						.Path("full")
 						.Properties(pprops => pprops
-							.String(ps => ps.Name(p => p.FirstName).Index(FieldIndexOption.not_analyzed))
+							.String(ps => ps.Name(p => p.FirstName).Index(FieldIndexOption.NotAnalyzed))
 							//etcetera
 						)
 					)
 					.MultiField(s => s
 						.Name(p => p.Name)
 						.Fields(pprops => pprops
-							.String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
-							.String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.analyzed))
+							.String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.NotAnalyzed))
+							.String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.Analyzed))
 						)
 					)
 					.IP(s=>s
@@ -233,7 +235,7 @@ namespace Nest.Tests.Unit.Core.Map
 					)
 					.GeoShape(s => s
 						.Name(p => p.MyGeoShape)
-						.Tree(GeoTree.geohash)
+						.Tree(GeoTree.Geohash)
 						.TreeLevels(2)
 						.DistanceErrorPercentage(0.025)
 					)

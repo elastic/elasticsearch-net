@@ -25,7 +25,7 @@ namespace Nest.DSL.Visitor
 		public DslPrettyPrintVisitor(IConnectionSettingsValues settings)
 		{
 			this._sb = new StringBuilder();
-			this._infer = new ElasticInferrer(settings);
+			this._infer = settings.Inferrer;
 		}
 
 		public virtual int Depth { get; set; }
@@ -61,7 +61,7 @@ namespace Nest.DSL.Visitor
 			properties = properties ?? new Dictionary<string, string>();
 			var props = string.Join(", ", properties.Select(kv => "{0}: {1}".F(kv.Key, kv.Value)));
 			var indent = new String('-',(Depth -1) * 2);
-			var scope = Enum.GetName(typeof(VisitorScope), this.Scope).ToLowerInvariant();
+			var scope = this.Scope.GetStringValue().ToLowerInvariant();
 			_sb.AppendFormat("{0}{1}: {2} ({3}){4}", indent, scope, queryType, props, Environment.NewLine);
 		}
 		private void Write(string queryType, PropertyPathMarker fieldName = null)

@@ -5,14 +5,22 @@ using System.Text;
 
 namespace Nest
 {
+	public class HfdsRepository : IRepository
+	{
+		string IRepository.Type { get { return "hdfs"; } }
+		public IDictionary<string, object> Settings { get; set; }
+	}
+
 	public class HdfsRepositoryDescriptor : IRepository
 	{
-		public string Type { get { return "hdfs"; } }
-		public IDictionary<string, object> Settings { get; private set; }
+		string IRepository.Type { get { return "hdfs"; } }
+		IDictionary<string, object> IRepository.Settings { get; set; }
+
+		private IRepository Self { get { return this; } }
 
 		public HdfsRepositoryDescriptor()
 		{
-			this.Settings = new Dictionary<string, object>();
+			Self.Settings = new Dictionary<string, object>();
 		}
 		/// <summary>
 		/// optional - Hadoop file-system URI
@@ -20,7 +28,7 @@ namespace Nest
 		/// <param name="bucket"></param>
 		public HdfsRepositoryDescriptor Uri(string hdfsUri)
 		{
-			this.Settings["uri"] = hdfsUri;
+			Self.Settings["uri"] = hdfsUri;
 			return this;
 		}
 		/// <summary>
@@ -30,7 +38,7 @@ namespace Nest
 		/// <returns></returns>
 		public HdfsRepositoryDescriptor Path(string path)
 		{
-			this.Settings["path"] = path;
+			Self.Settings["path"] = path;
 			return this;
 		}
 		/// <summary>
@@ -39,7 +47,7 @@ namespace Nest
 		/// <param name="loadDefaults"></param>
 		public HdfsRepositoryDescriptor LoadDefaults(bool loadDefaults = true)
 		{
-			this.Settings["load_defaults"] = loadDefaults;
+			Self.Settings["load_defaults"] = loadDefaults;
 			return this;
 		}
 		/// <summary>
@@ -48,7 +56,7 @@ namespace Nest
 		/// <param name="configurationLocation"></param>
 		public HdfsRepositoryDescriptor ConfigurationLocation(string configurationLocation)
 		{
-			this.Settings["conf_location"] = configurationLocation;
+			Self.Settings["conf_location"] = configurationLocation;
 			return this;
 		}
 		/// <summary>
@@ -60,7 +68,7 @@ namespace Nest
 		{
 			key.ThrowIfNullOrEmpty("key");
 			key = "conf." + key;
-			this.Settings[key] = value;
+			Self.Settings[key] = value;
 			return this;
 		}
 		/// <summary>
@@ -70,7 +78,7 @@ namespace Nest
 		/// <param name="compress"></param>
 		public HdfsRepositoryDescriptor Compress(bool compress = true)
 		{
-			this.Settings["compress"] = compress;
+			Self.Settings["compress"] = compress;
 			return this;
 		}
 		/// <summary>
@@ -79,7 +87,7 @@ namespace Nest
 		/// <param name="concurrentStreams"></param>
 		public HdfsRepositoryDescriptor ConcurrentStreams(int concurrentStreams)
 		{
-			this.Settings["concurrent_streams"] = concurrentStreams;
+			Self.Settings["concurrent_streams"] = concurrentStreams;
 			return this;
 		}
 		/// <summary>
@@ -90,7 +98,7 @@ namespace Nest
 		/// <param name="chunkSize"></param>
 		public HdfsRepositoryDescriptor ChunkSize(string chunkSize)
 		{
-			this.Settings["chunk_size"] = chunkSize;
+			Self.Settings["chunk_size"] = chunkSize;
 			return this;
 		}
 

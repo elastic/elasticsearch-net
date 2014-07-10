@@ -1,34 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
-	public partial class UnregisterPercolatorDescriptor 
-		: IndexNamePathDescriptor<UnregisterPercolatorDescriptor, DeleteRequestParameters>
-		, IPathInfo<DeleteRequestParameters>
+    public interface IUnregisterPercolatorRequest : IIndexNamePath<DeleteRequestParameters> { }
+
+    public interface IUnregisterPercolatorRequest<T> : IUnregisterPercolatorRequest where T : class { }
+
+    internal static class UnregisterPercolatorPathInfo
+    {
+        public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
+        {
+            //deleting a percolator in elasticsearch < 1.0 is actually deleting a document in a 
+            //special _percolator index where the passed index is actually a type
+            //the name is actually the id, we rectify that here
+            pathInfo.Index = pathInfo.Index;
+            pathInfo.Id = pathInfo.Name;
+            pathInfo.Type = ".percolator";
+            pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
+        }
+    }
+
+    public partial class UnregisterPercolatorRequest : IndexNamePathBase<DeleteRequestParameters>, IUnregisterPercolatorRequest
+    {
+	    public UnregisterPercolatorRequest(IndexNameMarker index, string name) : base(index, name)
+	    {
+	    }
+
+	    protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
+        {
+            UnregisterPercolatorPathInfo.Update(settings, pathInfo);
+        }
+    }
+
+	public partial class UnregisterPercolatorDescriptor<T> : IndexNamePathDescriptor<UnregisterPercolatorDescriptor<T>, DeleteRequestParameters, T>
+		where T : class
 	{
-		ElasticsearchPathInfo<DeleteRequestParameters> IPathInfo<DeleteRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
 		{
-			//deleting a percolator in elasticsearch < 1.0 is actually deleting a document in a 
-			//special _percolator index where the passed index is actually a type
-			//the name is actually the id, we rectify that here
-
-			var pathInfo = base.ToPathInfo(settings, new DeleteRequestParameters());
-			pathInfo.Index = pathInfo.Index;
-			pathInfo.Id = pathInfo.Name;
-			pathInfo.Type = ".percolator";
-			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
-
-			return pathInfo;
+            UnregisterPercolatorPathInfo.Update(settings, pathInfo);
 		}
 	}
 }

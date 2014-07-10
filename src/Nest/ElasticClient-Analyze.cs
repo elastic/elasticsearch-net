@@ -13,8 +13,25 @@ namespace Nest
 				analyzeSelector,
 				(p, d) =>
 				{
-					var text = d._QueryString.GetQueryStringValue<string>("text");
-					d._QueryString.RemoveQueryString("text");
+					IRequest<AnalyzeRequestParameters> request = d;
+					var text = request.RequestParameters.GetQueryStringValue<string>("text");
+					request.RequestParameters.RemoveQueryString("text");
+					text.ThrowIfNullOrEmpty("No text specified to analyze");
+					return this.RawDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, text);
+				}
+			);
+		}
+
+		/// <inheritdoc />
+		public IAnalyzeResponse Analyze(IAnalyzeRequest analyzeRequest)
+		{
+			return this.Dispatch<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse>(
+				analyzeRequest,
+				(p, d) =>
+				{
+					IRequest<AnalyzeRequestParameters> request = d;
+					var text = request.RequestParameters.GetQueryStringValue<string>("text");
+					request.RequestParameters.RemoveQueryString("text");
 					text.ThrowIfNullOrEmpty("No text specified to analyze");
 					return this.RawDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, text);
 				}
@@ -28,12 +45,30 @@ namespace Nest
 				analyzeSelector,
 				(p, d) =>
 				{
-					var text = d._QueryString.GetQueryStringValue<string>("text");
-					d._QueryString.RemoveQueryString("text");
+					IRequest<AnalyzeRequestParameters> request = d;
+					var text = request.RequestParameters.GetQueryStringValue<string>("text");
+					request.RequestParameters.RemoveQueryString("text");
 					text.ThrowIfNullOrEmpty("No text specified to analyze");
 					return this.RawDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, text);
 				}
 			);
 		}
+
+		/// <inheritdoc />
+		public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest analyzeRequest)
+		{
+			return this.DispatchAsync<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse, IAnalyzeResponse>(
+				analyzeRequest,
+				(p, d) =>
+				{
+					IRequest<AnalyzeRequestParameters> request = d;
+					var text = request.RequestParameters.GetQueryStringValue<string>("text");
+					request.RequestParameters.RemoveQueryString("text");
+					text.ThrowIfNullOrEmpty("No text specified to analyze");
+					return this.RawDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, text);
+				}
+			);
+		}
+
 	}
 }

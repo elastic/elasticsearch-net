@@ -8,24 +8,53 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[DescriptorFor("Mtermvectors")]
-	public partial class MultiTermVectorsDescriptor<T> : 
-		IndexTypePathTypedDescriptor<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, T>
-		, IPathInfo<MultiTermVectorsRequestParameters> where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IMultiTermVectorsRequest : IIndexTypePath<MultiTermVectorsRequestParameters>
 	{
 		[JsonProperty("docs")]
-		internal IEnumerable<MultiTermVectorDocument> _Documents { get; set;}
+		IEnumerable<MultiTermVectorDocument> Documents { get; set;}
+	}
 
+	internal static class MultiTermVectorsPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo, IMultiTermVectorsRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class MultiTermVectorsRequest : IndexTypePathBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
+	{
+		public MultiTermVectorsRequest(IndexNameMarker index, TypeNameMarker typeNameMarker) : base(index, typeNameMarker)
+		{
+		}
+
+		public IEnumerable<MultiTermVectorDocument> Documents { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo)
+		{
+			MultiTermVectorsPathInfo.Update(pathInfo, this);
+		}
+
+	}
+
+	[DescriptorFor("Mtermvectors")]
+	public partial class MultiTermVectorsDescriptor<T> : IndexTypePathDescriptor<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, T>, IMultiTermVectorsRequest
+		where T : class
+	{
+		private IMultiTermVectorsRequest Self { get { return this; } }
+
+		IEnumerable<MultiTermVectorDocument> IMultiTermVectorsRequest.Documents { get; set; }
 
 		public MultiTermVectorsDescriptor<T> Documents(params Func<MultiTermVectorDocumentDescriptor<T>, IMultiTermVectorDocumentDescriptor>[] documentSelectors)
 		{
-			this._Documents = documentSelectors.Select(s => s(new MultiTermVectorDocumentDescriptor<T>()).GetDocument()).Where(d=>d!= null).ToList();
+			Self.Documents = documentSelectors.Select(s => s(new MultiTermVectorDocumentDescriptor<T>()).GetDocument()).Where(d=>d!= null).ToList();
 			return this;
 		}
 
 		public MultiTermVectorsDescriptor<T> Documents(IEnumerable<MultiTermVectorDocument> documents)
 		{
-			this._Documents = documents;
+			Self.Documents = documents;
 			return this;
 		}
 
@@ -49,18 +78,10 @@ namespace Nest
 			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id.ToString(CultureInfo.InvariantCulture) }));
 		}
 
-		ElasticsearchPathInfo<MultiTermVectorsRequestParameters> IPathInfo<MultiTermVectorsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-
-			return pathInfo;
 		}
-	}
 
-	public interface IMultiTermVectorDocumentDescriptor
-	{
-		MultiTermVectorDocument Document { get; set; }
-		MultiTermVectorDocument GetDocument(); 
 	}
 }

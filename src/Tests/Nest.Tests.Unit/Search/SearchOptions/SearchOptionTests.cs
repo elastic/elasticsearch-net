@@ -200,7 +200,9 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 			""locScriptField"",
 			""stupidIntIWantAsLong"",
 			""myAttachment"",
-			""myBinaryField""
+			""myBinaryField"",
+			""product"",
+            ""myStringArrayField""
 		  ]
 		}";
 		  Assert.True(json.JsonEquals(expected));

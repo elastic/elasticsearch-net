@@ -13,11 +13,11 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 		{
 			var geoBoundingBox = this.SerializeThenDeserialize(cacheName, cacheKey, cache, 
 				f=>f.GeoBoundingBox,
-				f=>f.GeoBoundingBox(p=>p.Origin, 0.1, 0.2, 0.3, 0.4, GeoExecution.memory)
+				f=>f.GeoBoundingBox(p=>p.Origin, 0.1, 0.2, 0.3, 0.4, GeoExecution.Memory)
 				);
 			
 			geoBoundingBox.Field.Should().Be("origin");
-			geoBoundingBox.GeoExecution.Should().Be(GeoExecution.memory);
+			geoBoundingBox.GeoExecution.Should().Be(GeoExecution.Memory);
 			geoBoundingBox.TopLeft.Should().Be("0.1, 0.2");
 			geoBoundingBox.BottomRight.Should().Be("0.3, 0.4");
 		}
@@ -28,7 +28,7 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			//nest will always generate top_left: ""; but while parsing it will need to handle top_left: [] as well
 			var filter = this.ParseSearchDescriptorFromFile(f => f.GeoBoundingBox, MethodBase.GetCurrentMethod(), @"GeoBoundingBox\Array");
 			filter.Field.Should().Be("origin");
-			filter.GeoExecution.Should().Be(GeoExecution.memory);
+			filter.GeoExecution.Should().Be(GeoExecution.Memory);
 			filter.TopLeft.Should().Be("0.1, 0.2");
 			filter.BottomRight.Should().Be("0.3, 0.4");
 		}
@@ -39,7 +39,7 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			//nest will always generate top_left: ""; but while parsing it will need to handle top: left: right: bottom: as well
 			var filter = this.ParseSearchDescriptorFromFile(f => f.GeoBoundingBox, MethodBase.GetCurrentMethod(), @"GeoBoundingBox\Vertices");
 			filter.Field.Should().Be("origin");
-			filter.GeoExecution.Should().Be(GeoExecution.memory);
+			filter.GeoExecution.Should().Be(GeoExecution.Memory);
 			filter.TopLeft.Should().Be("-74.1, 40.73");
 			filter.BottomRight.Should().Be("-71.12, 40.01");
 		}
@@ -50,7 +50,7 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			//nest will always generate top_left: ""; but while parsing it will need to handle top: left: right: bottom: as well
 			var filter = this.ParseSearchDescriptorFromFile(f => f.GeoBoundingBox, MethodBase.GetCurrentMethod(), @"GeoBoundingBox\LatLon");
 			filter.Field.Should().Be("origin");
-			filter.GeoExecution.Should().Be(GeoExecution.memory);
+			filter.GeoExecution.Should().Be(GeoExecution.Memory);
 			filter.TopLeft.Should().Be("-74.1, 40.73");
 			filter.BottomRight.Should().Be("-71.12, 40.01");
 		}

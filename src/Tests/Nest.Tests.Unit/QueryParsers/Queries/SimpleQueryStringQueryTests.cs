@@ -13,7 +13,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				f=>f.SimpleQueryString,
 				f=>f.SimpleQueryString(sq=>sq
 					.Analyzer("my-analyzer")
-					.DefaultOperator(Operator.and)
+					.DefaultOperator(Operator.And)
 					.Flags("ASFAS")
 					.Locale("en")
 					.LowercaseExpendedTerms()
@@ -23,7 +23,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					)
 				);
 			q.Analyzer.Should().Be("my-analyzer");
-			q.DefaultOperator.Should().Be(Operator.and);
+			q.DefaultOperator.Should().Be(Operator.And);
 			q.Flags.Should().Be("ASFAS");
 			q.Locale.Should().Be("en");
 			q.LowercaseExpendedTerms.Should().BeTrue();

@@ -4,51 +4,78 @@ using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
-	[DescriptorFor("CountPercolate")]
-	public partial class PercolateCountDescriptor<T,K> : IndexTypePathTypedDescriptor<PercolateCountDescriptor<T, K>, PercolateCountRequestParameters, T> 
-		, IPathInfo<PercolateCountRequestParameters> 
-		where T : class
-		where K : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IPercolateCountRequest<TDocument> : IIndexTypePath<PercolateCountRequestParameters>
+		where TDocument : class
 	{
 		[JsonProperty(PropertyName = "query")]
-		internal IQueryContainer _Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "doc")]
-		internal K _Document { get; set; }
+		TDocument Document { get; set; }
+	}
+
+	internal static class PercolateCountPathInfo
+	{
+		public static void Update<T>(ElasticsearchPathInfo<PercolateCountRequestParameters> pathInfo, IPercolateCountRequest<T> request)
+			where T : class
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class PercolateCountRequest<TDocument> : IndexTypePathBase<PercolateCountRequestParameters, TDocument>, IPercolateCountRequest<TDocument>
+		where TDocument : class
+	{
+		public QueryContainer Query { get; set; }
+
+		public TDocument Document { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PercolateCountRequestParameters> pathInfo)
+		{
+			PercolateCountPathInfo.Update(pathInfo, this);
+		}
+
+	}
+	
+	[DescriptorFor("CountPercolate")]
+	public partial class PercolateCountDescriptor<T> : IndexTypePathDescriptor<PercolateCountDescriptor<T>, PercolateCountRequestParameters, T>
+		, IPercolateCountRequest<T>
+		where T : class
+	{
+
+		private IPercolateCountRequest<T> Self { get { return this; } }
+
+		QueryContainer IPercolateCountRequest<T>.Query { get; set; }
+
+		T IPercolateCountRequest<T>.Document { get; set; }
 
 		/// <summary>
 		/// The object to perculate
 		/// </summary>
-		public PercolateCountDescriptor<T, K> Object(K @object)
+		public PercolateCountDescriptor<T> Object(T @object)
 		{
-			this._Document = @object;
+			Self.Document = @object;
 			return this;
 		}
 
 		/// <summary>
 		/// Optionally specify more search options such as facets, from/to etcetera.
 		/// </summary>
-		public PercolateCountDescriptor<T, K> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public PercolateCountDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var d = querySelector(new QueryDescriptor<T>());
-			this._Query = d;
+			Self.Query = d;
 			return this;
 		}
 
-		ElasticsearchPathInfo<PercolateCountRequestParameters> IPathInfo<PercolateCountRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PercolateCountRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			//.NET does not like sending data using get so we use POST
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			return pathInfo;
+			PercolateCountPathInfo.Update(pathInfo, this);
 		}
 	}
 }

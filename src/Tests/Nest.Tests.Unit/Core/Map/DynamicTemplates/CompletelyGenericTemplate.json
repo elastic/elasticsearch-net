@@ -5,7 +5,7 @@
         "store_generic": {
           "match": "*",
           "mapping": {
-            "store": "yes"
+            "store": true
           }
         }
       }

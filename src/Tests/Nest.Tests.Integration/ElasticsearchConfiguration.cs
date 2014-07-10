@@ -9,6 +9,18 @@ namespace Nest.Tests.Integration
 	{
 		public static readonly string DefaultIndex = Test.Default.DefaultIndex + "-" + Process.GetCurrentProcess().Id.ToString();
 
+		private static Version _currentVersion;
+		public static Version CurrentVersion
+		{
+			get
+			{
+				if (_currentVersion == null)
+					_currentVersion = GetCurrentVersion();
+
+				return _currentVersion;
+			}
+		}
+
 		public static Uri CreateBaseUri(int? port = null)
 		{
 			var host = Test.Default.Host;
@@ -27,7 +39,7 @@ namespace Nest.Tests.Integration
 				.ExposeRawResponse();
 		}
 
-		public static readonly ElasticClient Client = new ElasticClient(Settings());
+		public static readonly ElasticClient Client = new ElasticClient(Settings().EnableCompressedResponses());
 		public static readonly ElasticClient ClientNoRawResponse = new ElasticClient(Settings().ExposeRawResponse(false));
 		public static readonly ElasticClient ClientThatTrows = new ElasticClient(Settings().ThrowOnElasticsearchServerExceptions());
 		public static readonly ElasticClient ThriftClient = new ElasticClient(Settings(9500), new ThriftConnection(Settings(9500)));
@@ -36,5 +48,12 @@ namespace Nest.Tests.Integration
 			return DefaultIndex + "_" + Guid.NewGuid().ToString();
 		}
 
+		public static Version GetCurrentVersion()
+		{
+			dynamic info = Client.Raw.Info().Response;
+			var version = Version.Parse(info.version.number);
+
+			return version;
+		}
 	}
 }

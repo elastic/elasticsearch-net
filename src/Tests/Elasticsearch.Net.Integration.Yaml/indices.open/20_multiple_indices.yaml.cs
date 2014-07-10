@@ -18,17 +18,32 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesOpen2
 			{	
 
 				//do indices.create 
-				this.Do(()=> _client.IndicesCreate("test_index1", null));
+				_body = new {
+					settings= new {
+						number_of_replicas= "0"
+					}
+				};
+				this.Do(()=> _client.IndicesCreate("test_index1", _body));
 
 				//do indices.create 
-				this.Do(()=> _client.IndicesCreate("test_index2", null));
+				_body = new {
+					settings= new {
+						number_of_replicas= "0"
+					}
+				};
+				this.Do(()=> _client.IndicesCreate("test_index2", _body));
 
 				//do indices.create 
-				this.Do(()=> _client.IndicesCreate("test_index3", null));
+				_body = new {
+					settings= new {
+						number_of_replicas= "0"
+					}
+				};
+				this.Do(()=> _client.IndicesCreate("test_index3", _body));
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.AddQueryString("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"green")
 				));
 
 			}
@@ -53,7 +68,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesOpen2
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.AddQueryString("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"green")
 				));
 
 				//do search 
@@ -80,7 +95,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesOpen2
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.AddQueryString("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"green")
 				));
 
 				//do search 
@@ -107,7 +122,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesOpen2
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.AddQueryString("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"green")
 				));
 
 				//do search 

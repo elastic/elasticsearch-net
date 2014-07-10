@@ -17,5 +17,7 @@ namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 				};
 			}
 		}
+
+		public IDictionary<string, string> RenameQueryStringParams { get { return null; } }
 	}
 }

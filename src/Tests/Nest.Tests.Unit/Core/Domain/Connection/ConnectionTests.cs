@@ -48,7 +48,7 @@ namespace Nest.Tests.Unit.Domain.Connection
 			var result = client.IndexExists(ie=>ie.Index("index"));
 
 			// Assert
-			Assert.AreEqual(result.ConnectionStatus.RequestUrl, "http://localhost:9000/index?authToken=ABCDEFGHIJK");
+			Assert.AreEqual("http://localhost:9000/index?authToken=ABCDEFGHIJK", result.ConnectionStatus.RequestUrl);
 		}
 
 
@@ -57,7 +57,7 @@ namespace Nest.Tests.Unit.Domain.Connection
 		{
 			var jsonAsString = "{ \"json_as_a_string\" : true}";
 			var result = this._client.Raw.Bulk(jsonAsString, qs => qs
-				.Replication(ReplicationOptions.Async)
+				.Replication(Replication.Async)
 				.Refresh(true)
 			);
 			StringAssert.EndsWith(":9200/_bulk?replication=async&refresh=true", result.RequestUrl);
@@ -71,7 +71,7 @@ namespace Nest.Tests.Unit.Domain.Connection
 			var result = this._client.Raw.Bulk(
 				new { json_as_a_string = true }
 				, qs => qs
-					.Replication(ReplicationOptions.Async)
+					.Replication(Replication.Async)
 					.Refresh(true)
 			);
 			StringAssert.EndsWith(":9200/_bulk?replication=async&refresh=true", result.RequestUrl);

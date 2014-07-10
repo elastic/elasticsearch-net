@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
@@ -115,13 +115,48 @@
       <Link>LinkedExtensions\TypeExtensions.cs</Link>
     </Compile>
     <Compile Include="BaseJsonTests.cs" />
+    <Compile Include="Cluster\PutSettings\PutSettingsTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
     <Compile Include="Cluster\State\StateTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUrlTests.cs" />
+    <Compile Include="Core\Indices\Analysis\Analyzers\AnalyzerTests.cs" />
+    <Compile Include="Core\Map\CustomMapping\ImagePluginMappingTests.cs" />
     <Compile Include="Core\Map\MappingBehaviourTests.cs" />
-    <Content Include="Core\Map\Properties\MultiFieldPropertyWithJustNamePath.json" />
+    <None Include="Cluster\PutSettings\PutSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\CustomAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\StopAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\LanguageAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\WhitespaceAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\StandardAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\SnowballAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\SimpleAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\PatternAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\CustomMapping\RepresentUnknowImageMappingPlugin.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\MultiFieldPropertyWithJustNamePath.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Compile Include="Core\Scroll\ScrollRequestTests.cs" />
     <Compile Include="Core\Domain\Connection\ConnectionTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
@@ -162,6 +197,77 @@
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\ConnectionSettingsTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="ObjectInitializer\Aliases\GetAliasMoreUrlTests.cs" />
+    <Compile Include="ObjectInitializer\Aliases\GetAliasesMoreUrlTests.cs" />
+    <Compile Include="ObjectInitializer\Aliases\GetAliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Status\StatusRequestTests.cs" />
+    <Compile Include="ObjectInitializer\IndicesStats\IndicesStatsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\ClusterState\ClusterStateRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Source\SourceRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Get\GetRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshot\DeleteSnapshotRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshot\GetSnapshotRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshot\SnapshotRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Segments\SegmentsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Search\SearchRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Scroll\ScrollRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Scroll\ClearScrollRequestTests.cs" />
+    <Compile Include="ObjectInitializer\RootNodeInfo\RootNodeInfoRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Repository\CreateRepositoryRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Refresh\RefreshRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Exists\IndexExistsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Index\IndexRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Flush\FlushRequestTests.cs" />
+    <Compile Include="ObjectInitializer\ClusterHealth\ClusterHealthRequestTests.cs" />
+    <Compile Include="ObjectInitializer\DeleteIndex\DeleteIndexRequestTests.cs" />
+    <Compile Include="ObjectInitializer\DeleteByQuery\DeleteByQueryRequestUrlTests.cs" />
+    <Compile Include="ObjectInitializer\DeleteByQuery\DeleteByQueryTypedRequestUrlTests.cs" />
+    <Compile Include="ObjectInitializer\DeleteByQuery\DeleteByQueryRequestTests.cs" />
+    <Compile Include="ObjectInitializer\CreateIndex\CreateIndexRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Count\CountRequestTests.cs" />
+    <Compile Include="ObjectInitializer\ClusterSettings\ClusterSettingsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\ClusterSettings\ClusterGetSettingsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Delete\DeleteRequestTests.cs" />
+    <Compile Include="ObjectInitializer\ClearCache\ClearCacheRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Analyze\AnalyzeRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Bulk\BulkRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Exists\DocumentExistsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Mapping\MapRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Mapping\GetMappingRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Mapping\DeleteMappingRequestTests.cs" />
+    <Compile Include="ObjectInitializer\MoreLikeThis\MoreLikeThisRequestTests.cs" />
+    <Compile Include="ObjectInitializer\MultiSearch\MultiSearchRequestTests.cs" />
+    <Compile Include="ObjectInitializer\MultiGet\MultiGetRequestTests.cs" />
+    <Compile Include="ObjectInitializer\MultiTermVectors\MultiTermVectorsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Nodes\NodeStatsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Nodes\NodesInfoRequestTests.cs" />
+    <Compile Include="ObjectInitializer\OpenClose\CloseIndexRequestTests.cs" />
+    <Compile Include="ObjectInitializer\OpenClose\OpenIndexRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Optimize\OptimizeRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Percolate\PercolateRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Percolate\UnregisterPercolatorRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Percolate\RegisterPercolatorRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Repository\DeleteRepositoryRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Restore\RestoreRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshots\DeleteSnapshotRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshots\DeleteRepositoryRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshots\GetSnapshotRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshots\CreateRepositoryRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshots\SnapshotRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Snapshots\RestoreRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Suggest\SuggestRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Template\DeleteTemplateRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Template\GetTemplateRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Template\PutTemplateRequestTests.cs" />
+    <Compile Include="ObjectInitializer\TermVector\TermVectorRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Update\UpdateRequestTests.cs" />
+    <Compile Include="ObjectInitializer\UpdateSettings\UpdateSettingsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Validate\ValidateQueryRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Warmers\DeleteWarmerRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Warmers\GetWarmerRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Warmers\PutWarmerRequestTests.cs" />
     <Compile Include="QueryParsers\BaseParserTests.cs" />
     <Compile Include="QueryParsers\Filter\AndFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\BoolFilterTests.cs" />
@@ -343,7 +449,7 @@
     <Compile Include="Search\Query\InsideBoolCalls\InsideBoolCallsTests.cs" />
     <Compile Include="Search\ScriptFields\ScriptFieldTests.cs" />
     <Compile Include="Search\SearchOptions\SearchOptionTests.cs" />
-    <Compile Include="Search\SearchType\ScriptFieldTests.cs" />
+    <Compile Include="Search\SearchTypeTests\ScriptFieldTests.cs" />
     <Compile Include="Internals\Serialize\SerializeTests.cs" />
     <Compile Include="Search\Source\SourceTests.cs" />
     <Compile Include="Search\Sorting\FunctionScoreTests.cs" />
@@ -499,6 +605,96 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Internals\Serialize\OptOutDuringMapping.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Aliases\AliasBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Analyze\AnalyzeBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Index\IndexBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\DeleteIndex\DeleteIndexBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\DeleteByQuery\DeleteByQueryBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\CreateIndex\CreateIndexBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Count\CountBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Bulk\BulkBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\ClusterSettings\ClusterSettingsBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Mapping\MapBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\MoreLikeThis\MoreLikeThisBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Snapshot\SnapshotBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Search\SearchBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\MultiSearch\MultiSearchBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\MultiGet\MultiGetBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\MultiTermVectors\MultiTermVectorsBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Percolate\PercolateBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Percolate\RegisterPercolatorBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Scroll\ScrollBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Repository\CreateRepositoryBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Restore\RestoreBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Snapshots\CreateRepositoryBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Snapshots\SnapshotBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Snapshots\RestoreBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Suggest\SuggestBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Template\PutTemplateBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Update\UpdateBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\UpdateSettings\UpdateSettingsBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Validate\ValidateQueryBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Warmers\PutWarmerBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
@@ -919,7 +1115,7 @@
     <None Include="Search\Query\UpdateQuery\FilteredQueryCombinesUsingStatic.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\SearchType\SearchTypeDoesNotPolluteQueryObject.json">
+    <None Include="Search\SearchTypeTests\SearchTypeDoesNotPolluteQueryObject.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Internals\Serialize\SimpleClassUsesCamelCase.json">
@@ -959,6 +1155,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Core\Indices\Analysis\Analyzers\KeywordAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,27 +6,27 @@
         "fields": {
           "myAttachment": {
             "type": "string",
-            "store": "yes",
+            "store": true,
             "index": "not_analyzed"
           },
           "title": {
             "type": "string",
-            "store": "no",
+            "store": false,
             "index": "not_analyzed"
           },
           "contents": {
             "type": "string",
-            "store": "no",
+            "store": false,
             "index": "not_analyzed"
           },
           "author": {
             "type": "string",
-            "store": "no",
+            "store": false,
             "index": "analyzed"
           },
           "date": {
             "type": "date",
-            "store": "no",
+            "store": false,
             "include_in_all": true
           }
         }

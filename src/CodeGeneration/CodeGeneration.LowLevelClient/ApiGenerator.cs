@@ -110,7 +110,16 @@ namespace CodeGeneration.LowLevelClient
 			select new { Key =  Regex.Replace(c, "<.*$", ""), Value =  Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1")})
 			.DistinctBy(v=>v.Key)
 			.ToDictionary(k => k.Key, v => v.Value);
-
+		
+		private static readonly Dictionary<string, string> KnownRequests =
+			(from f in new DirectoryInfo(_nestFolder + "/DSL").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
+			 where f.FullName.EndsWith("Descriptor.cs")
+			let contents = File.ReadAllText(f.FullName)
+			let c = Regex.Replace(contents, @"^.+interface ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
+			where c.StartsWith("I") && c.Contains("Request")
+			select new { Key =  Regex.Replace(c, "<.*$", ""), Value =  Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1")})
+			.DistinctBy(v=>v.Key)
+			.ToDictionary(k => k.Key, v => v.Value);
 
 
 		//Patches a method name for the exceptions (IndicesStats needs better unique names for all the url endpoints)
@@ -138,12 +147,21 @@ namespace CodeGeneration.LowLevelClient
 				method.QueryStringParamName = manualOverride + "RequestParameters";
 
 			method.DescriptorType = method.QueryStringParamName.Replace("RequestParameters","Descriptor");
-
+			method.RequestType = method.QueryStringParamName.Replace("RequestParameters","Request");
+			string requestGeneric;
+			if (KnownRequests.TryGetValue("I" + method.RequestType, out requestGeneric))
+				method.RequestTypeGeneric = requestGeneric;
+			else method.RequestTypeUnmapped = true;
+			
 			method.Allow404 = ApiEndpointsThatAllow404.Endpoints.Contains(method.DescriptorType.Replace("Descriptor", ""));
 			
 			string generic;
 			if (KnownDescriptors.TryGetValue(method.DescriptorType, out generic))
 				method.DescriptorTypeGeneric = generic;
+			else method.Unmapped = true;
+
+
+
 
 			try
 			{
@@ -154,8 +172,25 @@ namespace CodeGeneration.LowLevelClient
 				var overrides = Activator.CreateInstance(type) as IDescriptorOverrides;
 				if (overrides == null)
 					return;
-				method.Url.Params = method.Url.Params.Where(p => !overrides.SkipQueryStringParams.Contains(p.Key))
-					.ToDictionary(k => k.Key, v => v.Value);
+
+				foreach (var kv in method.Url.Params)
+				{
+					if (overrides.SkipQueryStringParams.Contains(kv.Key))
+						method.Url.Params.Remove(kv.Key);
+
+					if (overrides.RenameQueryStringParams == null) continue;
+					
+					string newName;
+					if (!overrides.RenameQueryStringParams.TryGetValue(kv.Key, out newName))
+						continue;
+
+					method.Url.Params.Remove(kv.Key);
+					method.Url.Params.Add(newName, kv.Value);
+					
+				}
+
+				//method.Url.Params = method.Url.Params.Where(p => !overrides.SkipQueryStringParams.Contains(p.Key))
+				//	.ToDictionary(k => k.Key, v => v.Value);
 			}
 // ReSharper disable once EmptyGeneralCatchClause
 			catch 
@@ -197,9 +232,16 @@ namespace CodeGeneration.LowLevelClient
 			File.WriteAllText(targetFile, source);
 		}
 
+		public static void GenerateRequests(RestApiSpec model)
+		{
+			var targetFile = _nestFolder + @"DSL\_Requests.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"_Requests.Generated.cshtml"), model).ToString();
+			File.WriteAllText(targetFile, source);
+		}
+
 		public static void GenerateRequestParameters(RestApiSpec model)
 		{
-			var targetFile = _esNetFolder + @"Domain\RequestParameters.Generated.cs";
+			var targetFile = _esNetFolder + @"Domain\RequestParameters\RequestParameters.Generated.cs";
 			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"RequestParameters.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}

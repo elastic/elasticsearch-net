@@ -1,43 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesPutWarmer")]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(CustomJsonConverter))]
-	public partial class PutWarmerDescriptor :
-		IndicesOptionalTypesNamePathDecriptor<PutWarmerDescriptor, PutWarmerRequestParameters>
-		, IPathInfo<PutWarmerRequestParameters>
-		, ICustomJson
+	public interface IPutWarmerRequest : IIndicesOptionalTypesNamePath<PutWarmerRequestParameters>, ICustomJson
 	{
-		private SearchDescriptorBase _searchDescriptor { get; set; }
+		ISearchRequest SearchDescriptor { get; set; }
+	}
+
+	internal static class PutWarmerPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<PutWarmerRequestParameters> pathInfo, IPutWarmerRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
+		}
+	}
+	
+	public partial class PutWarmerRequest : IndicesOptionalTypesNamePathBase<PutWarmerRequestParameters>, IPutWarmerRequest
+	{
+		public PutWarmerRequest(string name)
+		{
+			this.Name = name;
+		}
+
+		public ISearchRequest SearchDescriptor { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutWarmerRequestParameters> pathInfo)
+		{
+			PutWarmerPathInfo.Update(pathInfo, this);
+		}
+		
+		object ICustomJson.GetCustomJson() { return this.SearchDescriptor; }
+
+	}
+	[DescriptorFor("IndicesPutWarmer")]
+	public partial class PutWarmerDescriptor : IndicesOptionalTypesNamePathDescriptor<PutWarmerDescriptor, PutWarmerRequestParameters>
+		, IPutWarmerRequest
+	{
+		private IPutWarmerRequest Self { get { return this; } }
+
+		ISearchRequest IPutWarmerRequest.SearchDescriptor { get; set; }
 
 		public PutWarmerDescriptor Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> selector)
 			where T : class
 		{
-			this._searchDescriptor = selector(new SearchDescriptor<T>());
+			Self.SearchDescriptor = selector(new SearchDescriptor<T>());
 			return this;
 		}
 
-		ElasticsearchPathInfo<PutWarmerRequestParameters> IPathInfo<PutWarmerRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutWarmerRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
+			PutWarmerPathInfo.Update(pathInfo, this);
+		}
 
-			return pathInfo;
-		}
-		object ICustomJson.GetCustomJson()
-		{
-			return this._searchDescriptor;
-		}
+		object ICustomJson.GetCustomJson() { return Self.SearchDescriptor; }
 	}
 }

@@ -15,7 +15,7 @@ namespace Nest
 
 		public IEnumerable<TypeNameMarker> Types { get; internal set; }
 
-		public SearchDescriptorBase Source { get; internal set; }
+		public ISearchRequest Source { get; internal set; }
 
 	}
 }

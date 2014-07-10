@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nest.DSL.Descriptors;
-using Nest.DSL.Search;
 using Nest.Resolvers.Converters.Aggregations;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
-
-using Newtonsoft.Json.Linq;
 using System.Linq;
-using Elasticsearch.Net;
 using System.Reflection;
-using System.Globalization;
 using System.Collections;
 using Nest.Resolvers.Converters;
 
@@ -102,7 +96,8 @@ namespace Nest.Resolvers
 
 			defaultProperties = PropertiesOf<IQuery>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IQueryContainer>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<ISearchRequest>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IRequest>(type, memberSerialization, defaultProperties, lookup);
+			//defaultProperties = PropertiesOf<ISearchRequest>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IFilter>(type, memberSerialization, defaultProperties, lookup, append: true);
 			defaultProperties = PropertiesOf<IFilterContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRandomScoreFunction>(type, memberSerialization, defaultProperties, lookup);
@@ -119,7 +114,11 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<ISuggester>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IFuzzySuggester>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IDirectGenerator>(type, memberSerialization, defaultProperties, lookup);
-			//defaultProperties = PropertiesOf<ISourceFilter>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IAliasAction>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IBulkOperation>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IMultiGetOperation>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IRepository>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ICreateAliasOperation>(type, memberSerialization, defaultProperties, lookup);
 			return defaultProperties;
 		}
 
@@ -141,7 +140,7 @@ namespace Nest.Resolvers
 				}
 				return defaultProperties;
 			}
-			return jsonProperties.Concat(defaultProperties).ToList();
+			return jsonProperties.Concat(defaultProperties).GroupBy(p=>p.PropertyName).Select(g=>g.First()).ToList();
 		}
 
 		protected override string ResolvePropertyName(string propertyName)

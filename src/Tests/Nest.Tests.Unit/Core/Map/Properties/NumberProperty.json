@@ -4,7 +4,7 @@
       "loc": {
         "type": "integer",
         "index_name": "lines_of_code",
-        "store": "yes",
+        "store": true,
         "index": "analyzed",
         "precision_step": 1,
         "boost": 2.0,

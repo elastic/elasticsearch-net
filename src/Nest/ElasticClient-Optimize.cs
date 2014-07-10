@@ -18,8 +18,16 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IShardsOperationResponse> OptimizeAsync(
-			Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null)
+		public IShardsOperationResponse Optimize(IOptimizeRequest optimizeRequest)
+		{
+			return this.Dispatch<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse>(
+				optimizeRequest,
+				(p, d) => this.RawDispatch.IndicesOptimizeDispatch<ShardsOperationResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IShardsOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null)
 		{
 			optimizeSelector = optimizeSelector ?? (s => s);
 			return this.DispatchAsync<OptimizeDescriptor, OptimizeRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
@@ -27,5 +35,15 @@ namespace Nest
 				(p, d) => this.RawDispatch.IndicesOptimizeDispatchAsync<ShardsOperationResponse>(p)
 			);
 		}
+
+		/// <inheritdoc />
+		public Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest optimizeRequest)
+		{
+			return this.DispatchAsync<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
+				optimizeRequest,
+				(p, d) => this.RawDispatch.IndicesOptimizeDispatchAsync<ShardsOperationResponse>(p)
+			);
+		}
+
 	}
 }

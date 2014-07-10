@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
@@ -8,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.Providers;
 using PurifyNet;
 
@@ -42,73 +44,73 @@ namespace Elasticsearch.Net.Connection
 			this._enableTrace = settings.TraceEnabled;
 		}
 
-		public virtual ElasticsearchResponse<Stream> GetSync(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
+		public virtual ElasticsearchResponse<Stream> GetSync(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.HeaderOnlyRequest(uri, "GET", requestSpecificConfig);
 		}
-		public virtual ElasticsearchResponse<Stream> HeadSync(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
+		public virtual ElasticsearchResponse<Stream> HeadSync(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.HeaderOnlyRequest(uri, "HEAD", requestSpecificConfig);
 		}
 
-		public virtual ElasticsearchResponse<Stream> PostSync(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
+		public virtual ElasticsearchResponse<Stream> PostSync(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.BodyRequest(uri, data, "POST", requestSpecificConfig);
 		}
-		public virtual ElasticsearchResponse<Stream> PutSync(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
+		public virtual ElasticsearchResponse<Stream> PutSync(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.BodyRequest(uri, data, "PUT", requestSpecificConfig);
 		}
-		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
+		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.HeaderOnlyRequest(uri, "DELETE", requestSpecificConfig);
 		}
-		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
+		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.BodyRequest(uri, data, "DELETE", requestSpecificConfig);
 		}
 
 
-		private ElasticsearchResponse<Stream> HeaderOnlyRequest(Uri uri, string method, IRequestConnectionConfiguration requestSpecificConfig)
+		private ElasticsearchResponse<Stream> HeaderOnlyRequest(Uri uri, string method, IRequestConfiguration requestSpecificConfig)
 		{
 			var r = this.CreateHttpWebRequest(uri, method, null, requestSpecificConfig);
 			return this.DoSynchronousRequest(r, requestSpecificConfig: requestSpecificConfig);
 		}
 
-		private ElasticsearchResponse<Stream> BodyRequest(Uri uri, byte[] data, string method, IRequestConnectionConfiguration requestSpecificConfig)
+		private ElasticsearchResponse<Stream> BodyRequest(Uri uri, byte[] data, string method, IRequestConfiguration requestSpecificConfig)
 		{
 			var r = this.CreateHttpWebRequest(uri, method, data, requestSpecificConfig);
 			return this.DoSynchronousRequest(r, data, requestSpecificConfig);
 		}
 
-		public virtual Task<ElasticsearchResponse<Stream>> Get(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Get(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "GET", null, requestSpecificConfig);
 			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
 		}
-		public virtual Task<ElasticsearchResponse<Stream>> Head(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Head(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "HEAD", null, requestSpecificConfig);
 			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
 		}
-		public virtual Task<ElasticsearchResponse<Stream>> Post(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Post(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "POST", data, requestSpecificConfig);
 			return this.DoAsyncRequest(r, data, requestSpecificConfig: requestSpecificConfig);
 		}
 
-		public virtual Task<ElasticsearchResponse<Stream>> Put(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Put(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "PUT", data, requestSpecificConfig);
 			return this.DoAsyncRequest(r, data, requestSpecificConfig: requestSpecificConfig);
 		}
 
-		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "DELETE", data, requestSpecificConfig);
 			return this.DoAsyncRequest(r, data, requestSpecificConfig: requestSpecificConfig);
 		}
-		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "DELETE", null, requestSpecificConfig);
 			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
@@ -127,7 +129,7 @@ namespace Elasticsearch.Net.Connection
 		}
 
 
-		protected virtual HttpWebRequest CreateHttpWebRequest(Uri uri, string method, byte[] data, IRequestConnectionConfiguration requestSpecificConfig)
+		protected virtual HttpWebRequest CreateHttpWebRequest(Uri uri, string method, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
 			var myReq = this.CreateWebRequest(uri, method, data, requestSpecificConfig);
 			this.SetBasicAuthorizationIfNeeded(myReq);
@@ -163,23 +165,27 @@ namespace Elasticsearch.Net.Connection
 			//}
 		}
 
-		protected virtual HttpWebRequest CreateWebRequest(Uri uri, string method, byte[] data, IRequestConnectionConfiguration requestSpecificConfig)
+		protected virtual HttpWebRequest CreateWebRequest(Uri uri, string method, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
 			//TODO append global querystring
 			//var url = this._CreateUriString(path);
 
 			var myReq = (HttpWebRequest)WebRequest.Create(uri);
-
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
-			if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.AcceptsContentType))
+			if (this.ConnectionSettings.EnableCompressedResponses)
 			{
-				myReq.Accept = requestSpecificConfig.AcceptsContentType;
-				myReq.ContentType = requestSpecificConfig.AcceptsContentType;
+				myReq.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+				myReq.Headers.Add("Accept-Encoding", "gzip,deflate");
 			}
-			var timeout = this.ConnectionSettings.Timeout;
-			myReq.Timeout = timeout; // 1 minute timeout.
-			myReq.ReadWriteTimeout = timeout; // 1 minute timeout.
+			if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.ContentType))
+			{
+				myReq.Accept = requestSpecificConfig.ContentType;
+				myReq.ContentType = requestSpecificConfig.ContentType;
+			}
+			var timeout = GetRequestTimeout(requestSpecificConfig);
+			myReq.Timeout = timeout;
+			myReq.ReadWriteTimeout = timeout;
 			myReq.Method = method;
 
 			//WebRequest won't send Content-Length: 0 for empty bodies
@@ -192,7 +198,7 @@ namespace Elasticsearch.Net.Connection
 			return myReq;
 		}
 
-		protected virtual ElasticsearchResponse<Stream> DoSynchronousRequest(HttpWebRequest request, byte[] data = null, IRequestConnectionConfiguration requestSpecificConfig = null)
+		protected virtual ElasticsearchResponse<Stream> DoSynchronousRequest(HttpWebRequest request, byte[] data = null, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var path = request.RequestUri.ToString();
 			var method = request.Method;
@@ -240,14 +246,14 @@ namespace Elasticsearch.Net.Connection
 			return cs;
 		}
 
-		protected virtual Task<ElasticsearchResponse<Stream>> DoAsyncRequest(HttpWebRequest request, byte[] data = null, IRequestConnectionConfiguration requestSpecificConfig = null)
+		protected virtual Task<ElasticsearchResponse<Stream>> DoAsyncRequest(HttpWebRequest request, byte[] data = null, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var tcs = new TaskCompletionSource<ElasticsearchResponse<Stream>>();
 			if (this.ConnectionSettings.MaximumAsyncConnections <= 0
 			  || this._resourceLock == null)
 				return this.CreateIterateTask(request, data, requestSpecificConfig, tcs);
 
-			var timeout = this.ConnectionSettings.Timeout;
+			var timeout = GetRequestTimeout(requestSpecificConfig);
 			var path = request.RequestUri.ToString();
 			var method = request.Method;
 			if (!this._resourceLock.WaitOne(timeout))
@@ -268,28 +274,26 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		private Task<ElasticsearchResponse<Stream>> CreateIterateTask(HttpWebRequest request, byte[] data, object requestSpecificConfig, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs)
+		private Task<ElasticsearchResponse<Stream>> CreateIterateTask(HttpWebRequest request, byte[] data, IRequestConfiguration requestSpecificConfig, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs)
 		{
 			this.Iterate(request, data, this._AsyncSteps(request, tcs, data, requestSpecificConfig), tcs);
 			return tcs.Task;
 		}
 
-		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs, byte[] data, object requestSpecificConfig)
+		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
-			var timeout = this.ConnectionSettings.Timeout;
-
-			var state = new ConnectionState { Connection = request };
+			var timeout = GetRequestTimeout(requestSpecificConfig);
 
 			if (data != null)
 			{
 				var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, null);
-				//ThreadPool.RegisterWaitForSingleObject((getRequestStream as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
+				ThreadPool.RegisterWaitForSingleObject((getRequestStream as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
 				yield return getRequestStream;
 
 				var requestStream = getRequestStream.Result;
 				try
 				{
-					var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, data, 0, data.Length, state);
+					var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, data, 0, data.Length, null);
 					yield return writeToRequestStream;
 				}
 				finally
@@ -300,7 +304,7 @@ namespace Elasticsearch.Net.Connection
 
 			// Get the response
 			var getResponse = Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, null);
-			//ThreadPool.RegisterWaitForSingleObject((getResponse as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
+			ThreadPool.RegisterWaitForSingleObject((getResponse as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
 			yield return getResponse;
 
 			var path = request.RequestUri.ToString();
@@ -317,7 +321,7 @@ namespace Elasticsearch.Net.Connection
 			tcs.TrySetResult(cs);
 		}
 
-		public void Iterate(HttpWebRequest request, byte[] data, IEnumerable<Task> asyncIterator, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs)
+		private void Iterate(HttpWebRequest request, byte[] data, IEnumerable<Task> asyncIterator, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs)
 		{
 			var enumerator = asyncIterator.GetEnumerator();
 			Action<Task> recursiveBody = null;
@@ -350,7 +354,12 @@ namespace Elasticsearch.Net.Connection
 			recursiveBody(null);
 		}
 
+		private int GetRequestTimeout(IRequestConfiguration requestConfiguration)
+		{
+			if (requestConfiguration != null && requestConfiguration.ConnectTimeout.HasValue)
+				return requestConfiguration.RequestTimeout.Value;
 
-
+			return this.ConnectionSettings.Timeout;
+		}
 	}
 }

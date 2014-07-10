@@ -79,11 +79,16 @@
     <Compile Include="Domain\CsharpMethod.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Overrides\Allow404\ApiEndpointsThatAllow404.cs" />
+    <Compile Include="Overrides\Descriptors\IndicesStatsDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\ScrollDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\IDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\NodesHotThreadsDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\DeleteWarmerDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\PutTemplateDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\ClearCacheDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\MultiTermVectorsDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\SearchDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\UpdateDescriptorOverrides.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\RestApiSpec.cs" />
@@ -91,6 +96,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Views\_Requests.Generated.cshtml" />
     <None Include="Views\RequestParametersExtensions.Generated.cshtml" />
     <None Include="Views\_Descriptors.Generated.cshtml" />
     <None Include="Views\RawDispatch.Generated.cshtml" />

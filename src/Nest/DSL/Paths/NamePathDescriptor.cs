@@ -6,6 +6,44 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public interface INamePath<TParameters> : IRequest<TParameters>
+		where TParameters : IRequestParameters, new()
+	{
+		string Name { get; set; }
+	}
+
+	internal static class NamePathRouteParameters
+	{
+		public static void SetRouteParameters<TParameters>(
+			INamePath<TParameters> path,
+			IConnectionSettingsValues settings, 
+			ElasticsearchPathInfo<TParameters> pathInfo)
+			where TParameters : IRequestParameters, new()
+		{	
+			if (path.Name.IsNullOrEmpty())
+				throw new DslException("missing Repository()");
+
+			pathInfo.Name = path.Name;
+		}
+	
+	}
+
+	public abstract class NamePathBase<TParameters> : BasePathRequest<TParameters>, INamePath<TParameters>
+		where TParameters : IRequestParameters, new()
+	{
+		public string Name { get; set; }
+
+		public NamePathBase(string name)
+		{
+			this.Name = name;
+		}
+		
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		{	
+			NamePathRouteParameters.SetRouteParameters(this, settings, pathInfo);
+		}
+	}
+
 	/// <summary>
 	/// Provides a base for descriptors that need to describe a path in the form of 
 	/// <pre>
@@ -13,29 +51,27 @@ namespace Nest
 	/// </pre>
 	/// name is mandatory.
 	/// </summary>
-	public class NamePathDescriptor<TDescriptor, TParameters> : BasePathDescriptor<TDescriptor>
+	public abstract class NamePathDescriptor<TDescriptor, TParameters> 
+		: BasePathDescriptor<TDescriptor, TParameters>, INamePath<TParameters>
 		where TDescriptor : NamePathDescriptor<TDescriptor, TParameters> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-		internal string _Name { get; set; }
+		private INamePath<TParameters> Self { get { return this; } } 
+
+		string INamePath<TParameters>.Name { get; set; }
 
 		/// <summary>
 		/// Specify the {name} part of the operation
 		/// </summary>
 		public TDescriptor Name(string name)
 		{
-			this._Name = name;
+			Self.Name = name;
 			return (TDescriptor)this;
 		}
 
-		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(IConnectionSettingsValues settings, TParameters queryString)
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			if (this._Name.IsNullOrEmpty())
-				throw new DslException("missing Repository()");
-
-			var pathInfo = base.ToPathInfo(queryString);
-			pathInfo.Name = this._Name;
-			return pathInfo;
+			NamePathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 
 	}

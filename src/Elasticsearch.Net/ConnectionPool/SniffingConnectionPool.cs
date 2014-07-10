@@ -21,13 +21,16 @@ namespace Elasticsearch.Net.ConnectionPool
 		{
 		}
 
-		public override void UpdateNodeList(IList<Uri> newClusterState, bool fromStartupHint = false)
+		public override void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null)
 		{
 			try
 			{
 				this._readerWriter.EnterWriteLock();
 				this.NodeUris = newClusterState;
-				this.UriLookup = newClusterState.ToDictionary(k => k, v => new EndpointState());
+				this.UriLookup = newClusterState.ToDictionary(k => k, v => new EndpointState()
+				{
+					Attemps = v.Equals(sniffNode) ? 1 : 0
+				});
 			}
 			finally
 			{

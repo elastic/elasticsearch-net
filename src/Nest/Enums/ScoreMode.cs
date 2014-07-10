@@ -1,21 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
 
 namespace Nest
 {
 	[JsonConverter(typeof(StringEnumConverter))]
     public enum ScoreMode
     {
-        avg,
-        first,
-        max,
-        min,
-        multiply,
-        total,
-		sum
+		[EnumMember(Value = "avg")]
+        Average,
+		[EnumMember(Value = "first")]
+        First,
+		[EnumMember(Value = "max")]
+        Max,
+		[EnumMember(Value = "min")]
+        Min,
+		[EnumMember(Value = "multiply")]
+        Multiply,
+		[EnumMember(Value = "total")]
+        Total,
+		[EnumMember(Value = "sum")]
+		Sum
     }
 }

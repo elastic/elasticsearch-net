@@ -24,6 +24,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 		
 		[Test]
+		[SkipVersion("0 - 1.0.9", "Significant terms aggregation not introduced until 1.1")]
 		public void SignificantTerms()
 		{
 			var results = this._client.Search<ElasticsearchProject>(s => s
@@ -83,6 +84,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.0.9", "Percentiles aggregation not introduced until 1.1")]
 		public void Percentiles()
 		{
 			var results = this._client.Search<ElasticsearchProject>(s => s
@@ -106,6 +108,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 		
 		[Test]
+		[SkipVersion("0 - 1.0.9", "Percentiles aggregation not introduced until 1.1")]
 		public void PercentilesCustom()
 		{
 			var results = this._client.Search<ElasticsearchProject>(s => s
@@ -137,7 +140,7 @@ namespace Nest.Tests.Integration.Aggregations
 				.Aggregations(a => a
 					.GeoHash("bucket_agg", m => m
 						.Field(p => p.Origin)
-						.GeoHashPrecision(GeoHashPrecision.precision_2)
+						.GeoHashPrecision(GeoHashPrecision.Precision2)
 					)
 				)
 			);
@@ -209,7 +212,7 @@ namespace Nest.Tests.Integration.Aggregations
 					.GeoDistance("bucket_agg", dh => dh
 						.Field(p => p.Origin)
 						.Origin(28.0, 28.0)
-						.Unit(GeoUnit.km)
+						.Unit(GeoUnit.Kilometers)
 						.Ranges(
 							r => r.To(1),
 							r => r.From(1).To(100)

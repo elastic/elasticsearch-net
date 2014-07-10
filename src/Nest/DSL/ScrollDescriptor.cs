@@ -1,33 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Nest.Domain;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
-	public partial class ScrollDescriptor<T> : BasePathDescriptor<ScrollDescriptor<T>>,
-		IPathInfo<ScrollRequestParameters>,
+	public interface IScrollRequest : IRequest<ScrollRequestParameters>
+	{
+		string ScrollId { get; set; }
+		string Scroll { get; set; }
+	}
+
+	internal static class ScrollPathInfo
+	{
+		public static void Update(
+			IScrollRequest request,
+			IConnectionSettingsValues settings, 
+			ElasticsearchPathInfo<ScrollRequestParameters> pathInfo)
+		{
+			// force POST scrollId can be quite big
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.ScrollId = request.ScrollId;
+			// force scroll id out of RequestParameters (potentially very large)
+			request.RequestParameters.RemoveQueryString("scroll_id");
+			request.RequestParameters.AddQueryString("scroll", request.Scroll);
+		}
+	}
+
+	public partial class ScrollRequest : BaseRequest<ScrollRequestParameters>, IScrollRequest
+	{
+		public string ScrollId { get; set; }
+		public string Scroll { get; set; }
+
+		public ScrollRequest(string scrollId, string scrollTimeout)
+		{
+			this.ScrollId = scrollId;
+			this.Scroll = scrollTimeout;
+		}
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ScrollRequestParameters> pathInfo)
+		{
+			ScrollPathInfo.Update(this, settings, pathInfo);
+		}
+	}
+
+	public partial class ScrollDescriptor<T> : BasePathDescriptor<ScrollDescriptor<T>, ScrollRequestParameters>, IScrollRequest,
 		IHideObjectMembers
 		where T : class
 	{
-		ElasticsearchPathInfo<ScrollRequestParameters> IPathInfo<ScrollRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		private IScrollRequest Self { get { return this; } }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ScrollRequestParameters> pathInfo)
 		{
-			var pathInfo = new ElasticsearchPathInfo<ScrollRequestParameters>();
-			// force POST scrollId can be quite big
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			pathInfo.ScrollId = this._QueryString.GetQueryStringValue<string>("scroll_id");
-			// force scroll id out of RequestParameters (potentially very large)
-			this._QueryString.RemoveQueryString("scroll_id");
-			pathInfo.RequestParameters = this._QueryString;
-			return pathInfo;
+			ScrollPathInfo.Update(this, settings, pathInfo);
+		}
+
+		string IScrollRequest.ScrollId { get; set; }
+		string IScrollRequest.Scroll { get; set; }
+		
+		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
+		public ScrollDescriptor<T> Scroll(string scroll)
+		{
+			Self.Scroll = scroll;
+			return this;
+		}
+		
+		///<summary>The scroll id used to continue/start the scrolled pagination</summary>
+		public ScrollDescriptor<T> ScrollId(string scrollId)
+		{
+			Self.ScrollId = scrollId;
+			return this;
 		}
 	}
 }

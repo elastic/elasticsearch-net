@@ -75,13 +75,13 @@ namespace Nest.Resolvers.Converters.Filters
 						filter.Distance = jv.Value.Value<string>();
 						break;
 					case "distance_type":
-						filter.DistanceType = Enum.Parse(typeof(GeoDistanceType), jv.Value.Value<string>()) as GeoDistanceType?;
+						filter.DistanceType = jv.Value.Value<string>().ToEnum<GeoDistance>();
 						break;
 					case "optimize_bbox":
-						filter.OptimizeBoundingBox = Enum.Parse(typeof(GeoOptimizeBBox), jv.Value.Value<string>()) as GeoOptimizeBBox?;
+						filter.OptimizeBoundingBox = jv.Value.Value<string>().ToEnum<GeoOptimizeBBox>();
 						break;
 					case "unit":
-						filter.Unit = Enum.Parse(typeof(GeoUnit), jv.Value.Value<string>()) as GeoUnit?;
+						filter.Unit = jv.Value.Value<string>().ToEnum<GeoUnit>();
 						break;
 					case "_cache":
 						filter.Cache = jv.Value.Value<bool>();
