@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Nest.Tests.Unit.Core.Indices.Analysis.Analyzers
 {

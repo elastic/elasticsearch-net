@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Nest;
-using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
 namespace Nest.Tests.Unit.ObjectInitializer.MultiTermVectors

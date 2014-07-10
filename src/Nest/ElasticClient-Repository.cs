@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Deployment.Internal;
 using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
