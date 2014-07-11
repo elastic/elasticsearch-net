@@ -29,6 +29,7 @@ namespace Nest.Tests.Unit.Search.Rescoring
 					.RescoreQuery(rq=>rq
 						.QueryWeight(1.0)
 						.RescoreQueryWeight(2.0)
+						.ScoreMode(ScoreMode.Multiply)
 						.Query(q=>q.Term(p=>p.Name, "nest"))
 					)
 				);
