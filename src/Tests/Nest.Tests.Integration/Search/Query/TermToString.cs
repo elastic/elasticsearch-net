@@ -7,7 +7,7 @@ using Nest.Tests.Integration;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 
-namespace Nest.Tests.Integration.Integration.Query
+namespace Nest.Tests.Integration.Search.Query
 {
 	[TestFixture]
 	public class TermToStringJson : IntegrationTests
