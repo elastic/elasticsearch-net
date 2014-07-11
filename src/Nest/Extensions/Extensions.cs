@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -91,10 +92,12 @@ namespace Nest
 			if (value == null)
 				throw new ArgumentNullException(name);
 		}
+		
 		internal static string F(this string format, params object[] args)
 		{
+			var c = CultureInfo.InvariantCulture;
 			format.ThrowIfNull("format");
-			return string.Format(format, args);
+			return string.Format(c, format, args);
 		}
 		internal static string EscapedFormat(this string format, params object[] args)
 		{

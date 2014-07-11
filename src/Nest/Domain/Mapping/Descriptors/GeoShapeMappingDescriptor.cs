@@ -3,40 +3,37 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public class GeoPointMappingDescriptor<T>
+	public class GeoShapeMappingDescriptor<T>
 	{
-		internal GeoPointMapping _Mapping = new GeoPointMapping();
+		internal GeoShapeMapping _Mapping = new GeoShapeMapping();
 
-		public GeoPointMappingDescriptor<T> Name(string name)
+		public GeoShapeMappingDescriptor<T> Name(string name)
 		{
 			this._Mapping.Name = name;
 			return this;
 		}
-		public GeoPointMappingDescriptor<T> Name(Expression<Func<T, object>> objectPath)
+		public GeoShapeMappingDescriptor<T> Name(Expression<Func<T, object>> objectPath)
 		{
 			this._Mapping.Name = objectPath;
 			return this;
 		}
 
-
-		public GeoPointMappingDescriptor<T> IndexLatLon(bool indexLatLon = true)
+		public GeoShapeMappingDescriptor<T> Tree(GeoTree geoTree)
 		{
-			this._Mapping.IndexLatLon = indexLatLon;
+			this._Mapping.Tree = geoTree;
 			return this;
 		}
 
-		public GeoPointMappingDescriptor<T> IndexGeoHash(bool indexGeoHash = true)
+		public GeoShapeMappingDescriptor<T> TreeLevels(int treeLevels)
 		{
-			this._Mapping.IndexGeoHash = indexGeoHash;
+			this._Mapping.TreeLevels = treeLevels;
 			return this;
 		}
 
-		public GeoPointMappingDescriptor<T> GeoHashPrecision(int geoHashPrecision)
+		public GeoShapeMappingDescriptor<T> DistanceErrorPercentage(double distanceErrorPercentage)
 		{
-			this._Mapping.GeoHashPrecision = geoHashPrecision;
+			this._Mapping.DistanceErrorPercentage = distanceErrorPercentage;
 			return this;
 		}
-		
-
 	}
 }

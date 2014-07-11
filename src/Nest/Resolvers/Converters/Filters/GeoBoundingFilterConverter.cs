@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -100,6 +101,7 @@ namespace Nest.Resolvers.Converters.Filters
 		
 		private void ReadBox(IGeoBoundingBoxFilter filter, JsonReader reader)
 		{
+			var c = CultureInfo.InvariantCulture;
 			reader.Read();
 			if (reader.TokenType != JsonToken.StartObject)
 				return;
@@ -118,11 +120,11 @@ namespace Nest.Resolvers.Converters.Filters
 				else if (reader.TokenType == JsonToken.StartArray)
 				{
 					var values = JArray.Load(reader).Values<double>();
-					filter.TopLeft = string.Join(", ", values);
+					filter.TopLeft = string.Join(", ", values.Select(v=>v.ToString(c)));
 					reader.Read();
 					reader.Read();
 					values = JArray.Load(reader).Values<double>();
-					filter.BottomRight =string.Join(", ", values); 
+					filter.BottomRight =string.Join(", ", values.Select(v=>v.ToString(c))); 
 				}
 				else if (reader.TokenType == JsonToken.StartObject)
 				{
