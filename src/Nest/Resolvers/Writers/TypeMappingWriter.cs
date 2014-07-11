@@ -211,6 +211,8 @@ namespace Nest.Resolvers.Writers
 			{
 				case FieldType.GeoPoint:
 					return "geo_point";
+				case FieldType.GeoShape:
+					return "geo_shape";
 				case FieldType.Attachment:
 					return "attachment";
 				case FieldType.Ip:
