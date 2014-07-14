@@ -99,6 +99,7 @@
     <Compile Include="Cluster\GetSettingsTests.cs" />
     <Compile Include="Cluster\PutSettingsTests.cs" />
     <Compile Include="Connection\Failover\SniffTests.cs" />
+    <Compile Include="Connection\HttpClient\HttpClientTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
