@@ -24,6 +24,11 @@ namespace Nest
 		[EnumMember(Value = "geo_point")]
 		GeoPoint,
 		/// <summary>
+		/// Geo shape type.
+		/// </summary>
+		[EnumMember(Value = "geo_shape")]
+		GeoShape,
+		/// <summary>
 		/// The attachment type allows to index different “attachment” type field (encoded as base64), for example, microsoft office formats, open document formats, ePub, HTML...
 		/// </summary>
 		[EnumMember(Value = "attachment")]

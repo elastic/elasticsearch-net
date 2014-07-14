@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 using Elasticsearch.Net;
 
-namespace Nest.Tests.Integration.Integration
+namespace Nest.Tests.Integration.Search
 {
 	[TestFixture]
 	public class HighlightIntegrationTests : IntegrationTests

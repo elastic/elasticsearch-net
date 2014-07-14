@@ -4,7 +4,7 @@ using NUnit.Framework;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 
-namespace Nest.Tests.Integration.Integration.Query
+namespace Nest.Tests.Integration.Search.Query
 {
 	[TestFixture]
 	public class TermToStringJson : IntegrationTests

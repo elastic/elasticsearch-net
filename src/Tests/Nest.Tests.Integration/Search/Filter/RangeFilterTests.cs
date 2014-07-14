@@ -4,7 +4,7 @@ using NUnit.Framework;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 
-namespace Nest.Tests.Integration.Integration.Filter
+namespace Nest.Tests.Integration.Search.Filter
 {
 	/// <summary>
 	/// Integrated tests of RangeFilter with elasticsearch.
