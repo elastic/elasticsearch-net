@@ -16,7 +16,7 @@ namespace Nest
 		PropertyPathMarker Field { get; set; }
 
 		[JsonProperty("shape")]
-		GeoShapeVector Shape { get; set; }
+		GeoShape Shape { get; set; }
 	}
 
 	public class GeoShapeQuery : PlainQuery, IGeoShapeQuery
@@ -39,60 +39,51 @@ namespace Nest
 		}
 
 		public PropertyPathMarker Field { get; set; }
-		public GeoShapeVector Shape { get; set; }
+
+		public GeoShape Shape { get; set; }
 	}
 
 	public class GeoShapeQueryDescriptor<T> : IGeoShapeQuery where T : class
 	{
+		IGeoShapeQuery Self { get { return this; } }
+
 		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
 		
-		GeoShapeVector IGeoShapeQuery.Shape { get; set; }
-		
+		GeoShape IGeoShapeQuery.Shape { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((IGeoShapeQuery)this).Field.IsConditionless() || (((IGeoShapeQuery)this).Shape == null || !((IGeoShapeQuery)this).Shape.Coordinates.HasAny());
+				return this.Self.Field.IsConditionless() || this.Self.Shape == null;
 			}
 
 		}
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
-			((IGeoShapeQuery)this).Field = fieldName;
+			this.Self.Field = fieldName;
 		}
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
-			return ((IGeoShapeQuery)this).Field;
+			return this.Self.Field;
 		}
 		
 		public GeoShapeQueryDescriptor<T> OnField(string field)
 		{
-			((IGeoShapeQuery)this).Field = field;
+			this.Self.Field = field;
 			return this;
 		}
 		public GeoShapeQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((IGeoShapeQuery)this).Field = objectPath;
+			this.Self.Field = objectPath;
 			return this;
 		}
-		
 
-		public GeoShapeQueryDescriptor<T> Type(string type)
+		public GeoShapeQueryDescriptor<T> Shape<TCoordinates>(IGeometryObject<TCoordinates> shape)
 		{
-			if (((IGeoShapeQuery)this).Shape == null)
-				((IGeoShapeQuery)this).Shape = new GeoShapeVector();
-			((IGeoShapeQuery)this).Shape.Type = type;
+			shape.ThrowIfNull("shape");
+			this.Self.Shape = shape.ToGeoShape();
 			return this;
 		}
-
-		public GeoShapeQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<double>> coordinates)
-		{
-			if (((IGeoShapeQuery)this).Shape == null)
-				((IGeoShapeQuery)this).Shape = new GeoShapeVector();
-			((IGeoShapeQuery)this).Shape.Coordinates = coordinates;
-			return this;
-		}
-
 	}
-
 }

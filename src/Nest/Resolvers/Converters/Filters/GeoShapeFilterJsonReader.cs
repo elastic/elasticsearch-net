@@ -50,7 +50,7 @@ namespace Nest.Resolvers.Converters.Filters
 						if (shape != null)
 						{
 							IGeoShapeFilter f = new GeoShapeFilterDescriptor();
-							f.Shape = new GeoShapeVector();
+							f.Shape = new GeoShape();
 							var coordinates = shape["coordinates"];
 							if (coordinates != null)
 								f.Shape.Coordinates = coordinates.Values<double[]>();

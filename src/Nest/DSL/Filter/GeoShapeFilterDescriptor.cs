@@ -18,7 +18,7 @@ namespace Nest
 	public interface IGeoShapeFilter : IGeoShapeBaseFilter
 	{
 		[JsonProperty("shape")]
-		GeoShapeVector Shape { get; set; }
+		GeoShape Shape { get; set; }
 	}
 
 	public class GeoShapeFilter : PlainFilter, IGeoShapeFilter
@@ -30,38 +30,29 @@ namespace Nest
 
 		public PropertyPathMarker Field { get; set; }
 
-		public GeoShapeVector Shape { get; set; }
+		public GeoShape Shape { get; set; }
 	}
 
 	public class GeoShapeFilterDescriptor : FilterBase, IGeoShapeFilter
 	{
+		IGeoShapeFilter Self { get { return this; } }
+
 		bool IFilter.IsConditionless
 		{
 			get
 			{
-				return ((IGeoShapeFilter)this).Shape == null || !((IGeoShapeFilter)this).Shape.Coordinates.HasAny();
+				return this.Self.Shape == null;
 			}
 		}
 
 		PropertyPathMarker IFieldNameFilter.Field { get; set; }
-		GeoShapeVector IGeoShapeFilter.Shape { get; set; }
+		GeoShape IGeoShapeFilter.Shape { get; set; }
 
-		public GeoShapeFilterDescriptor Type(string type)
+		public GeoShapeFilterDescriptor Shape<TCoordinates>(IGeometryObject<TCoordinates> shape)
 		{
-			if (((IGeoShapeFilter)this).Shape == null)
-				((IGeoShapeFilter)this).Shape = new GeoShapeVector();
-			((IGeoShapeFilter)this).Shape.Type = type;
+			this.Self.Shape = shape.ToGeoShape();
 			return this;
 		}
-
-		public GeoShapeFilterDescriptor Coordinates(IEnumerable<IEnumerable<double>> coordinates)
-		{
-			if (((IGeoShapeFilter)this).Shape == null)
-				((IGeoShapeFilter)this).Shape = new GeoShapeVector();
-			((IGeoShapeFilter)this).Shape.Coordinates = coordinates;
-			return this;
-		}
-	
 	}
 
 }

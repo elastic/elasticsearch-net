@@ -352,7 +352,14 @@
     <Compile Include="Search\Query\Properties\PropertiesTests.cs" />
     <Compile Include="Search\Query\Singles\FunctionScoreQueryJson.cs" />
     <Compile Include="Search\Query\Singles\CommonTerms\CommonTermsTests.cs" />
-    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeCircleJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeEnvelopeJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeLineStringJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeMultiLineStringJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeMultiPointJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeMultiPolygonJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapePointJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapePolygonJson.cs" />
     <Compile Include="Search\Query\Singles\SimpleQueryString\SimpleQueryStringQueryJson.cs" />
     <Compile Include="Search\Query\Singles\RegexpQueryJson.cs" />
     <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
@@ -782,9 +789,16 @@
     <None Include="Search\Query\Singles\CommonTerms\CommonTermsFull.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Query\Singles\GeoShape\GeoShapeFull.json">
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeCircle.json" />
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeEnvelope.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeLineString.json" />
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeMultiPoint.json" />
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeMultiLineString.json" />
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeMultiPolygon.json" />
+    <None Include="Search\Query\Singles\GeoShape\GeoShapePoint.json" />
+    <None Include="Search\Query\Singles\GeoShape\GeoShapePolygon.json" />
     <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

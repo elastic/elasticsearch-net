@@ -136,6 +136,17 @@
     <Compile Include="Domain\Analysis\TokenFilter\StemmerOverrideTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\UppercaseTokenFilter.cs" />
     <Compile Include="Domain\Bulk\IBulkOperation.cs" />
+    <Compile Include="Domain\DSL\GeoShape.cs" />
+    <Compile Include="Domain\Geometry\Circle.cs" />
+    <Compile Include="Domain\Geometry\Envelope.cs" />
+    <Compile Include="Domain\Geometry\GeometryObject.cs" />
+    <Compile Include="Domain\Geometry\IGeometryObject.cs" />
+    <Compile Include="Domain\Geometry\LineString.cs" />
+    <Compile Include="Domain\Geometry\MultiLineString.cs" />
+    <Compile Include="Domain\Geometry\MultiPoint.cs" />
+    <Compile Include="Domain\Geometry\MultiPolygon.cs" />
+    <Compile Include="Domain\Geometry\Point.cs" />
+    <Compile Include="Domain\Geometry\Polygon.cs" />
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
     <Compile Include="DSL\GetAliasDescriptor.cs" />
     <Compile Include="DSL\TermVector\IMultiTermVectorDocumentDescriptor.cs" />
@@ -359,7 +370,6 @@
     <Compile Include="RawDispatch.generated.cs" />
     <Compile Include="RawDispatch.cs" />
     <Compile Include="Domain\DSL\GeoIndexedShapeVector.cs" />
-    <Compile Include="Domain\DSL\GeoShapeVector.cs" />
     <Compile Include="Domain\Mapping\Descriptors\CompletionMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Types\CompletionMapping.cs" />
     <Compile Include="Domain\Responses\RootVersionInfoResponse.cs" />

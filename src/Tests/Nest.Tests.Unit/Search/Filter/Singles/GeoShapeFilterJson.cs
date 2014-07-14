@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using System.Collections.Generic;
 
 namespace Nest.Tests.Unit.Search.Filter.Singles
 {
@@ -14,13 +15,12 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				.From(0)
 				.Size(10)
 				.Filter(filter => filter
-					.Cache(true) 
+					.Cache(true)
 					.Name("my_geo_filter")
-					.GeoShape(f=>f.Origin, d=>d
-						.Type("envelope")
-						.Coordinates(new[] { new[] { 13.0, 53.0 }, new[] { 14.0, 52.0 } })
-					)
-				);
+					.GeoShape(f => f.Origin, d => d
+						.Shape(new Envelope { Coordinates = new[] { new[] { 13.0, 53.0 }, new[] { 14.0, 52.0 } } })
+				)
+			);
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
@@ -40,5 +40,9 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			Assert.True(json.JsonEquals(expected), json);
 		}
 		
+		public void GeoShapeCircleFilter()
+		{
+			
+		}
 	}
 }
