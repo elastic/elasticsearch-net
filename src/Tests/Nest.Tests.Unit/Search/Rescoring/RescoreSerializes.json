@@ -12,10 +12,11 @@
         }
       },
       "query_weight": 1.0,
-      "rescore_query_weight": 2.0
+      "rescore_query_weight": 2.0,
+      "score_mode": "multiply"
     }
   },
   "query": {
-    "match_all": {}
+    "match_all": { }
   },
 }
