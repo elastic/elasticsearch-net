@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq.Expressions;
-using Nest.Resolvers;
 using Newtonsoft.Json;
 
 namespace Nest

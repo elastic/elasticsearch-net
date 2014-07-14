@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Configuration;
-using System.Text;
 using Nest.DSL.Query.Behaviour;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers;
+
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]

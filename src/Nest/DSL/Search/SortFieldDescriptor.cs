@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
-using Nest.Resolvers;
 using Newtonsoft.Json.Converters;
 
 namespace Nest

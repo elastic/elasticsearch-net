@@ -7,8 +7,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest.Resolvers.Converters
 {
-	using System.Text;
-
 	public class IndexSettingsConverter : JsonConverter
 	{
 		private void WriteSettingObject(JsonWriter writer, JObject obj)

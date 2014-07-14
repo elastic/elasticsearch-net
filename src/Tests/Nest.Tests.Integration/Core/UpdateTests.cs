@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-using System.Linq;
-using Elasticsearch.Net;
+﻿using System.Linq;
 using Nest.Tests.MockData;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
