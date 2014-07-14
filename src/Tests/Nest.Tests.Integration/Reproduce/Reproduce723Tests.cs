@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Reproduce
 		public void GetInvalidIndexShouldThrow_OnClientThatThrows()
 		{
 			const string indexName = "indexthatdoesnotexist";
-			var e = Assert.Throws<ElasticsearchServerException>(() => this.Client.Source<ElasticsearchProject>(4, indexName));
+			var e = Assert.Throws<ElasticsearchServerException>(() => this.ClientThatThrows.Source<ElasticsearchProject>(4, indexName));
 			e.ExceptionType.Should().Be("IndexMissingException");
 
 		}

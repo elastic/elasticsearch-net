@@ -18,7 +18,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 		[Test]
 		public void IndexExistShouldNotThrowOn404()
 		{
-			var host = ElasticsearchConfiguration.DefaultIndex;
+			var host = ElasticsearchConfiguration.Host;
 			if (Process.GetProcessesByName("fiddler").Any())
 				host = "ipv4.fiddler";
 			var connectionPool = new SniffingConnectionPool(new[] { new Uri("http://{0}:9200".F(host)) });
