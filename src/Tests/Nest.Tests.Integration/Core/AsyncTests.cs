@@ -14,7 +14,7 @@ namespace Nest.Tests.Integration.Core
 			{
 				Name = "COBOLES", //COBOL ES client ?
 			};
-			var t = this._client.IndexAsync<ElasticsearchProject>(newProject);
+			var t = this.Client.IndexAsync<ElasticsearchProject>(newProject);
 			t.Wait();
 			Assert.True(t.Result.IsValid);
 			Assert.True(t.IsCompleted, "task did not complete");

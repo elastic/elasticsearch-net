@@ -10,7 +10,7 @@ namespace Nest.Tests.Integration.Core.MoreLikeThis
 		[Test]
 		public void SearchBodyEndsUpInPost()
 		{
-			var result = this._client.MoreLikeThis<ElasticsearchProject>(mlt => mlt
+			var result = this.Client.MoreLikeThis<ElasticsearchProject>(mlt => mlt
 				.Id(1)
 				.MltFields(p => p.Country, p => p.Content)
 				.MinDocFreq(1)

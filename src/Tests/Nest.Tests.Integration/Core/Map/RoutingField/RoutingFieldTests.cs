@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Core.Map.RoutingField
 		[Test]
 		public void RoutingFieldUsingExpression()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.RoutingField(a => a
 					.SetPath(p => p.Name)
 					.SetRequired()
@@ -20,7 +20,7 @@ namespace Nest.Tests.Integration.Core.Map.RoutingField
 		[Test]
 		public void RoutingFieldUsingString()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.RoutingField(a => a
 					.SetPath("my_difficult_field_name")
 					.SetRequired()

@@ -57,8 +57,8 @@ namespace Nest
 		{
 			get
 			{
-				if (this._defaultIndex.IsNullOrEmpty())
-					throw new NullReferenceException("No default index set on connection!");
+				//if (this._defaultIndex.IsNullOrEmpty())
+				//	throw new NullReferenceException("No default index set on connection!");
 				return this._defaultIndex;
 			}
 		}

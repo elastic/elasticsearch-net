@@ -24,7 +24,7 @@ namespace Nest.Tests.Integration.Index
 				FloatValues = new[] { 0f },
 				BoolValue = false
 			};
-			var response = this._client.Index(newProject);
+			var response = this.Client.Index(newProject);
 			var connectionStatus = response.ConnectionStatus;
 			var request = connectionStatus.Request.Utf8String();
 			StringAssert.Contains(@"""id"": 2000", request);

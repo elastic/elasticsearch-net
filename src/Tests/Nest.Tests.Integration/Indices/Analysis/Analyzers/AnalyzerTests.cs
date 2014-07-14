@@ -16,7 +16,7 @@ namespace Nest.Tests.Integration.Indices.Analysis.Analyzers
 			)
 		{
 			var index = ElasticsearchConfiguration.NewUniqueIndexName();
-			var result = this._client.CreateIndex(index, c => c
+			var result = this.Client.CreateIndex(index, c => c
 				.NumberOfReplicas(1)
 				.NumberOfShards(1)
 				.Analysis(analysisSelector)
@@ -30,16 +30,16 @@ namespace Nest.Tests.Integration.Indices.Analysis.Analyzers
 			result.Acknowledged.Should().BeTrue();
 			
 			//index a doc so we can be sure a shard is available
-			this._client.Index<AnalyzerTest>(new AnalyzerTest() { Txt = text }, i=>i.Index(index).Refresh(true));
+			this.Client.Index<AnalyzerTest>(new AnalyzerTest() { Txt = text }, i=>i.Index(index).Refresh(true));
 
-			var settingsResult = this._client.GetMapping<AnalyzerTest>(gm=>gm.Index(index));
+			var settingsResult = this.Client.GetMapping<AnalyzerTest>(gm=>gm.Index(index));
 			var mapping = settingsResult.Mapping;
 			mapping.Should().NotBeNull();
 			mapping.Properties.Should().NotBeNull();
 			mapping.Properties["txt"].Should().NotBeNull();
 			mapping.Properties["txt"].Type.Name.Should().NotBeNullOrEmpty().And.BeEquivalentTo("string");
 
-			var validateResult = this._client.Analyze(a => a.Index(index).Field<AnalyzerTest>(p => p.Txt).Text(text));
+			var validateResult = this.Client.Analyze(a => a.Index(index).Field<AnalyzerTest>(p => p.Txt).Text(text));
 			validateResult.Should().NotBeNull();
 			validateResult.IsValid.Should().BeTrue();
 			validateResult.Tokens.Should().NotBeEmpty();

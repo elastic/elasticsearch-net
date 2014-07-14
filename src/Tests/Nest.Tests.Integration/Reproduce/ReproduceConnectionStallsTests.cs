@@ -22,7 +22,7 @@ namespace Nest.Tests.Integration.Reproduce
 			this._index = ElasticsearchConfiguration.NewUniqueIndexName();
 			var people = NestTestData.Session.List<Person>(10000).Get().ToList();
 			var lotsOfPeople = Partition(people, 1000).ToList();
-			var createIndexResult =  this._client.CreateIndex(_index, c => c
+			var createIndexResult =  this.Client.CreateIndex(_index, c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
 				.Settings(s=>s.Add("index.refresh_interval", -1))
@@ -30,10 +30,10 @@ namespace Nest.Tests.Integration.Reproduce
 			);
 			Parallel.ForEach(lotsOfPeople, (listOfPeople) =>
 			{
-				_client.IndexMany(listOfPeople, _index);
+				Client.IndexMany(listOfPeople, _index);
 			});
-			_client.UpdateSettings(u=>u.Index(_index).RefreshInterval("1s"));
-			_client.Refresh(r=>r.Index(_index));
+			Client.UpdateSettings(u=>u.Index(_index).RefreshInterval("1s"));
+			Client.Refresh(r=>r.Index(_index));
 
 		}
 
@@ -86,7 +86,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			int take = 100;
 			var stopwatch = Stopwatch.StartNew();
-			var search = this._client.Search<Person>(s => s.MatchAll().Size(take).Index(_index));
+			var search = this.Client.Search<Person>(s => s.MatchAll().Size(take).Index(_index));
 			stopwatch.Stop();
 			return new Timings()
 			{

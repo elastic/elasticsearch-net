@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Core.Map.SourceField
 		[Test]
 		public void SourceFieldSerializesFully()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.SourceField(s => s
 					.SetDisabled()
 					.SetCompression()

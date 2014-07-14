@@ -12,7 +12,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void Terms()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Terms("bucket_agg", m => m.Field(p => p.Country))
@@ -27,7 +27,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[SkipVersion("0 - 1.0.9", "Significant terms aggregation not introduced until 1.1")]
 		public void SignificantTerms()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Terms("term_items", gh=>gh
@@ -68,7 +68,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void Histogram()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Histogram("bucket_agg", m => m
@@ -87,7 +87,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[SkipVersion("0 - 1.0.9", "Percentiles aggregation not introduced until 1.1")]
 		public void Percentiles()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Percentiles("bucket_agg", m => m
@@ -111,7 +111,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[SkipVersion("0 - 1.0.9", "Percentiles aggregation not introduced until 1.1")]
 		public void PercentilesCustom()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Percentiles("bucket_agg", m => m
@@ -135,7 +135,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void GeoHash()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.GeoHash("bucket_agg", m => m
@@ -152,7 +152,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void Range()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Range("bucket_agg", m => m
@@ -171,7 +171,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void DateRange()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.DateRange("bucket_agg", m => m
@@ -190,7 +190,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void IpRange()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.IpRange("bucket_agg", dh => dh
@@ -206,7 +206,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void GeoDistance()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.GeoDistance("bucket_agg", dh => dh
@@ -227,7 +227,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void DateHistogram()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.DateHistogram("bucket_agg", dh => dh

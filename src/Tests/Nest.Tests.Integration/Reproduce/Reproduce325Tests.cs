@@ -19,7 +19,7 @@ namespace Nest.Tests.Integration.Reproduce
 		public void FluentMappingReturnsResults()
 		{
 			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
-			this._client.CreateIndex(indexName, settings => settings
+			this.Client.CreateIndex(indexName, settings => settings
 				.Settings(s => s.Add("search.slowlog.threshold.fetch.warn", "1s"))
 				.Analysis(x =>
 				{
@@ -40,7 +40,7 @@ namespace Nest.Tests.Integration.Reproduce
 				})
 				.AddMapping<TechnicalProduct>(m => MapTechnicalProduct(m, indexName)));
 
-			var index = this._client.GetIndexSettings(i=>i.Index(indexName));
+			var index = this.Client.GetIndexSettings(i=>i.Index(indexName));
 		}
 
 

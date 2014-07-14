@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Index
 		public void ReindexMinimal()
 		{
 			var toIndex = ElasticsearchConfiguration.NewUniqueIndexName();
-			var observable = this._client.Reindex<object>(r => r
+			var observable = this.Client.Reindex<object>(r => r
 				.FromIndex(ElasticsearchConfiguration.DefaultIndex)
 				.ToIndex(toIndex)
 			);
@@ -21,12 +21,12 @@ namespace Nest.Tests.Integration.Index
 				onError: (e) => Assert.Fail(e.Message),
 				completed: () =>
 				{
-					var refresh = this._client.Refresh(r=>r.Indices(toIndex, ElasticsearchConfiguration.DefaultIndex));
-					var originalIndexCount = this._client.Count(c=>c
+					var refresh = this.Client.Refresh(r=>r.Indices(toIndex, ElasticsearchConfiguration.DefaultIndex));
+					var originalIndexCount = this.Client.Count(c=>c
 						.Index(ElasticsearchConfiguration.DefaultIndex)
 						.Query(q => q.MatchAll())
 					);
-					var newIndexCount = this._client.Count(c => c
+					var newIndexCount = this.Client.Count(c => c
 						.Index(toIndex)
 						.Query(q => q.MatchAll())
 					);
@@ -42,7 +42,7 @@ namespace Nest.Tests.Integration.Index
 		public void Reindex()
 		{
 			var toIndex = ElasticsearchConfiguration.NewUniqueIndexName();
-			var observable = this._client.Reindex<object>(r => r
+			var observable = this.Client.Reindex<object>(r => r
 				.FromIndex(ElasticsearchConfiguration.DefaultIndex)
 				.ToIndex(toIndex)
 				.Query(q=>q.MatchAll())
@@ -67,13 +67,13 @@ namespace Nest.Tests.Integration.Index
 				onError: (e) => Assert.Fail(e.Message),
 				completed: () =>
 				{
-					var refresh = this._client.Refresh(r=>r.Indices(toIndex, ElasticsearchConfiguration.DefaultIndex));
+					var refresh = this.Client.Refresh(r=>r.Indices(toIndex, ElasticsearchConfiguration.DefaultIndex));
 
-					var originalIndexCount = this._client.Count(c=>c
+					var originalIndexCount = this.Client.Count(c=>c
 						.Index(ElasticsearchConfiguration.DefaultIndex)
 						.Query(q=>q.MatchAll())
 					);
-					var newIndexCount = this._client.Count(i=>i.Index(toIndex).Query(q=>q.MatchAll()));
+					var newIndexCount = this.Client.Count(i=>i.Index(toIndex).Query(q=>q.MatchAll()));
 					Assert.Greater(newIndexCount.Count, 0);
 					Assert.AreEqual(originalIndexCount.Count, newIndexCount.Count);
 				}

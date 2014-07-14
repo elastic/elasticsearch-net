@@ -8,17 +8,6 @@ namespace Nest.Tests.Unit.Domain.Connection
 {
 	using System.Net;
 
-	public class TestConnection : InMemoryConnection
-	{
-		public TestConnection(IConnectionSettingsValues settings)
-			: base(settings) { }
-
-		public HttpWebRequest GetConnection(string path, string method)
-		{
-			return base.CreateHttpWebRequest(new Uri(new Uri("http://localhost"), path), method, null, null);
-		}
-	}
-
 	[TestFixture]
 	public class ConnectionTests : BaseJsonTests
 	{
@@ -29,7 +18,7 @@ namespace Nest.Tests.Unit.Domain.Connection
 			var uri = new Uri("http://localhost");
 			var query = new NameValueCollection { { "authToken", "ABCDEFGHIJK" } };
 			var connectionSettings = new ConnectionSettings(uri, "index").SetGlobalQueryStringParameters(query);
-			var client = new ElasticClient(connectionSettings, new TestConnection(connectionSettings));
+			var client = new ElasticClient(connectionSettings, new InMemoryConnection(connectionSettings));
 			var result = client.RootNodeInfo();
 
 			// Assert
@@ -43,7 +32,7 @@ namespace Nest.Tests.Unit.Domain.Connection
 			var uri = new Uri("http://localhost:9000");
 			var query = new NameValueCollection { { "authToken", "ABCDEFGHIJK" } };
 			var connectionSettings = new ConnectionSettings(uri, "index").SetGlobalQueryStringParameters(query);
-			var client = new ElasticClient(connectionSettings, new TestConnection(connectionSettings));
+			var client = new ElasticClient(connectionSettings, new InMemoryConnection(connectionSettings));
 			var result = client.IndexExists(ie=>ie.Index("index"));
 
 			// Assert

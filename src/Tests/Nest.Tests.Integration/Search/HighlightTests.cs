@@ -11,7 +11,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void TestHighlight()
 		{
-			var result = this._client.Search<ElasticsearchProject>(s => s
+			var result = this.Client.Search<ElasticsearchProject>(s => s
 			  .From(0)
 			  .Size(10)
 			  .Query(q => q
@@ -55,7 +55,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void TestHighlightNoNullRef()
 		{
-			var result = this._client.Search<ElasticsearchProject>(s => s
+			var result = this.Client.Search<ElasticsearchProject>(s => s
 			  .From(0)
 			  .Size(10)
 			  .Query(q => q
