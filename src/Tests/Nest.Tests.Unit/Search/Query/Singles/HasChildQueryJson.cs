@@ -15,15 +15,13 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Query(q => q
 					.HasChild<Person>(fz => fz
 						.Query(qq=>qq.Term(f=>f.FirstName, "john"))
-						.Scope("my_scope")
-						.Score(ChildScoreType.avg)
+						.Score(ChildScoreType.Average)
 					)
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ has_child: { 
 				type: ""person"",
-				_scope: ""my_scope"",
 				score_type: ""avg"",
 				query: {
 					term: {
@@ -45,7 +43,6 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Query(q => q
 					.HasChild<Person>(fz => fz
 						.Query(qq => qq.Term(f => f.FirstName, "john"))
-						.Scope("my_scope")
 						.Type("sillypeople")
 					)
 				);
@@ -53,7 +50,6 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, query : 
 			{ has_child: { 
 				type: ""sillypeople"",
-				_scope: ""my_scope"",
 				query: {
 					term: {
 						firstName: {

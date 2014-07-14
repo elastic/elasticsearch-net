@@ -16,7 +16,7 @@ namespace Nest.Tests.Integration.Search
 		public void RegisterPercolateTest()
 		{
 			var name = "mypercolator";
-			var c = this.Client;
+			var c = this._client;
 			var r = c.RegisterPercolator<ElasticsearchProject>(name, p => p
 				.Query(q => q
 					.Term(f => f.Name, "elasticsearch.pm")
@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration.Search
 		public void UnregisterPercolateTest()
 		{
 			var name = "mypercolator";
-			var c = this.Client;
+			var c = this._client;
 			var r = c.RegisterPercolator<ElasticsearchProject>(name, p => p
 				.AddMetadata(md=>md.Add("color", "blue"))
 				.Query(q => q
@@ -49,14 +49,14 @@ namespace Nest.Tests.Integration.Search
 			Assert.AreEqual(r.Id, name);
 			Assert.Greater(r.Version, 0);
 
-			var re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
+			var re = c.UnregisterPercolator<ElasticsearchProject>(name);
 			Assert.True(re.IsValid);
 			Assert.True(re.Found);
 			Assert.AreEqual(re.Index, ElasticsearchConfiguration.DefaultIndex);
 			Assert.AreEqual(re.Type, ".percolator");
 			Assert.AreEqual(re.Id, name);
 			Assert.Greater(re.Version, 0);
-			re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
+			re = c.UnregisterPercolator<ElasticsearchProject>(name);
 			Assert.True(re.IsValid);
 			Assert.False(re.Found);
 		}
@@ -65,25 +65,37 @@ namespace Nest.Tests.Integration.Search
 		public void PercolateDoc()
 		{
 			this.RegisterPercolateTest(); // I feel a little dirty.
-			var c = this.Client;
+			var c = this._client;
 			var name = "mypercolator";
 
-			var r = c.Percolate<ElasticsearchProject>(new ElasticsearchProject()
+			var document = new ElasticsearchProject()
 			{
+				Id = 12,
 				Name = "elasticsearch.pm",
 				Country = "netherlands",
 				LOC = 100000, //Too many :(
-			}, p=>p.Index<ElasticsearchProject>());
+			};
+
+			var r = c.Percolate<ElasticsearchProject>(p=>p.Document(document));
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Matches);
 			Assert.True(r.Matches.Select(m=>m.Id).Contains(name));
-			var re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
+
+			var indexResult = c.Index(document);
+			
+
+			r = c.Percolate<ElasticsearchProject>(p=>p.Id(indexResult.Id));
+			Assert.True(r.IsValid);
+			Assert.NotNull(r.Matches);
+			Assert.True(r.Matches.Select(m=>m.Id).Contains(name));
+			
+			var re = c.UnregisterPercolator<ElasticsearchProject>(name);
 		}
 		[Test]
 		public void PercolateTypedDoc()
 		{
 			this.RegisterPercolateTest(); // I feel a little dirty.
-			var c = this.Client;
+			var c = this._client;
 			var name = "eclecticsearch";
 			var r = c.RegisterPercolator<ElasticsearchProject>(name, p => p
 				 .Query(q => q
@@ -98,19 +110,22 @@ namespace Nest.Tests.Integration.Search
 				Country = "netherlands",
 				LOC = 100000, //Too many :(
 			};
-			var percolateResponse = this.Client.Percolate(obj);
+			var percolateResponse = this._client.Percolate<ElasticsearchProject>(p=>p
+				.Document(obj)
+				.TrackScores(false)	
+			);
 			Assert.True(percolateResponse.IsValid);
 			Assert.NotNull(percolateResponse.Matches);
 			Assert.True(percolateResponse.Matches.Select(m=>m.Id).Contains(name));
 
-			var re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
+			var re = c.UnregisterPercolator<ElasticsearchProject>(name);
 		}
 		[Test]
 		public void PercolateTypedDocWithQuery()
 		{
-			var c = this.Client;
+			var c = this._client;
 			var name = "eclecticsearch" + ElasticsearchConfiguration.NewUniqueIndexName();
-			var re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
+			var re = c.UnregisterPercolator<ElasticsearchProject>(name);
 			var r = c.RegisterPercolator<ElasticsearchProject>(name, p => p
 				 .AddMetadata(md=>md.Add("color", "blue"))
 				 .Query(q => q
@@ -126,23 +141,30 @@ namespace Nest.Tests.Integration.Search
 				Country = "netherlands",
 				LOC = 100000, //Too many :(
 			};
-			var percolateResponse = this.Client.Percolate(obj,p => p.Query(q=>q.Match(m=>m.OnField("color").Query("blue"))));
+			var percolateResponse = this._client.Percolate<ElasticsearchProject>(p => p
+				.Document(obj)
+				.Query(q=>q.Match(m=>m.OnField("color").Query("blue")))
+			);
 			Assert.True(percolateResponse.IsValid);
 			Assert.NotNull(percolateResponse.Matches);
 			Assert.True(percolateResponse.Matches.Select(m=>m.Id).Contains(name));
 
 			//should not match since we registered with the color blue
-			percolateResponse = this.Client.Percolate(obj, p => p.Query(q => q.Term("color", "green")));
+			percolateResponse = this._client.Percolate<ElasticsearchProject>(p => p
+				.Query(q => q.Term("color", "green"))
+				.Document(obj)
+			);
+
 			Assert.True(percolateResponse.IsValid);
 			Assert.NotNull(percolateResponse.Matches);
 			Assert.False(percolateResponse.Matches.Select(m=>m.Id).Contains(name));
 
-			var countPercolateReponse = this.Client.PercolateCount(obj,p => p
+			var countPercolateReponse = this._client.PercolateCount(obj,p => p
 				.Query(q=>q.Match(m=>m.OnField("color").Query("blue")))
 			);
 			countPercolateReponse.IsValid.Should().BeTrue();
 			countPercolateReponse.Total.Should().Be(1);
-			re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
+			re = c.UnregisterPercolator<ElasticsearchProject>(name);
 
 		}
 	}

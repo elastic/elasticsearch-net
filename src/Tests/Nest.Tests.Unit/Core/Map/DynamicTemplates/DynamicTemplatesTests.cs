@@ -68,13 +68,13 @@ namespace Nest.Tests.Unit.Core.Map.DynamicTemplates
 						.Name("string")
 						.Match("str_*")
 						.MatchMappingType("string")
-						.Mapping(tm => tm.String(sm=>sm.Index(FieldIndexOption.not_analyzed)))
+						.Mapping(tm => tm.String(sm=>sm.Index(FieldIndexOption.NotAnalyzed)))
 					)
 					.Add(t => t
 						.Name("numbers")
 						.Match("nu_*")
 						.MatchMappingType("integer")
-						.Mapping(tm => tm.Number(sm => sm.Type(NumberType.integer).NullValue(4)))
+						.Mapping(tm => tm.Number(sm => sm.Type(NumberType.Integer).NullValue(4)))
 					)
 				)
 			);

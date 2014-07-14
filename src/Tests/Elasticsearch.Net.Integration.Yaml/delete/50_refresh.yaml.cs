@@ -24,6 +24,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Delete9
 				_body = new {
 					settings= new {
 						refresh_interval= "-1",
+						number_of_shards= "5",
 						number_of_replicas= "0"
 					}
 				};

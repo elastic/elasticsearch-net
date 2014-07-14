@@ -11,7 +11,16 @@ namespace Nest
 			where T : class
 		{
 			return this.Dispatch<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters, ExistsResponse>(
-				d => existsSelector(d.RequestConfiguration(r=>r.AllowStatusCodes(404))),
+				d => existsSelector(d.RequestConfiguration(r=>r.AllowedStatusCodes(404))),
+				(p, d) => ToExistsResponse(this.RawDispatch.ExistsDispatch<VoidResponse>(p))
+			);
+		}
+
+		/// <inheritdoc />
+		public IExistsResponse DocumentExists(IDocumentExistsRequest documentExistsRequest)
+		{
+			return this.Dispatch<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse>(
+				documentExistsRequest,
 				(p, d) => ToExistsResponse(this.RawDispatch.ExistsDispatch<VoidResponse>(p))
 			);
 		}
@@ -21,12 +30,21 @@ namespace Nest
 			where T : class
 		{
 			return this.DispatchAsync<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				d => existsSelector(d.RequestConfiguration(r=>r.AllowStatusCodes(404))),
+				d => existsSelector(d.RequestConfiguration(r=>r.AllowedStatusCodes(404))),
 				(p, d) => this.RawDispatch.ExistsDispatchAsync<ExistsResponse>(p)
 			);
 		}
 
-		private ElasticsearchResponse<ExistsResponse> ToExistsResponse(ElasticsearchResponse<VoidResponse> existsDispatch)
+		/// <inheritdoc />
+		public Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest documentExistsRequest)
+		{
+			return this.DispatchAsync<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse, IExistsResponse>(
+				documentExistsRequest,
+				(p, d) => this.RawDispatch.ExistsDispatchAsync<ExistsResponse>(p)
+			);
+		}
+
+		private ElasticsearchResponse<ExistsResponse> ToExistsResponse(IElasticsearchResponse existsDispatch)
 		{
 			return ElasticsearchResponse.CloneFrom<ExistsResponse>(existsDispatch, new ExistsResponse(existsDispatch));
 		}

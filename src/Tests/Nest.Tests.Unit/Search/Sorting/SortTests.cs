@@ -174,7 +174,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 					.MissingLast()
 					.Descending()
 					.PinTo(40, -70)
-					.Unit(GeoUnit.km)
+					.Unit(GeoUnit.Kilometers)
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"

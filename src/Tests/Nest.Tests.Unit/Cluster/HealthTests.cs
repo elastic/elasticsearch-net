@@ -11,7 +11,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void ClusterHealth()
 		{
-			var r = this._client.ClusterHealth(h=>h.Level(LevelOptions.Cluster));
+			var r = this._client.ClusterHealth(h=>h.Level(Level.Cluster));
 			var u = new Uri(r.ConnectionStatus.RequestUrl);
 			u.AbsolutePath.Should().StartWith("/_cluster/health");
 			u.Query.Should().Contain("level=cluster");
@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void ClusterHealthPerIndex()
 		{
-			var r = this._client.ClusterHealth(h=>h.Index(UnitTestDefaults.DefaultIndex).Level(LevelOptions.Cluster));
+			var r = this._client.ClusterHealth(h=>h.Index(UnitTestDefaults.DefaultIndex).Level(Level.Cluster));
 			var u = new Uri(r.ConnectionStatus.RequestUrl);
 			u.AbsolutePath.Should().StartWith("/_cluster/health/nest_test_data");
 			u.Query.Should().Contain("level=cluster");
@@ -27,7 +27,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void IndexHealth()
 		{
-			var r = this._client.ClusterHealth(h=>h.Level(LevelOptions.Indices));
+			var r = this._client.ClusterHealth(h=>h.Level(Level.Indices));
 			var u = new Uri(r.ConnectionStatus.RequestUrl);
 			u.AbsolutePath.Should().StartWith("/_cluster/health");
 			u.Query.Should().Contain("level=indices");
@@ -35,7 +35,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void ShardHealth()
 		{
-			var r = this._client.ClusterHealth(h=>h.Level(LevelOptions.Shards));
+			var r = this._client.ClusterHealth(h=>h.Level(Level.Shards));
 			var u = new Uri(r.ConnectionStatus.RequestUrl);
 			u.AbsolutePath.Should().StartWith("/_cluster/health");
 			u.Query.Should().Contain("level=shards");
@@ -44,11 +44,11 @@ namespace Nest.Tests.Unit.Cluster
 		public void DetailedHealth()
 		{
 			var r = this._client.ClusterHealth(h=>h
-				.Level(LevelOptions.Shards)
+				.Level(Level.Shards)
 				.Timeout("30s")
 				.WaitForNodes("1")
 				.WaitForRelocatingShards(0)
-				.WaitForStatus(WaitForStatusOptions.Green)
+				.WaitForStatus(WaitForStatus.Green)
 			);
 			var u = new Uri(r.ConnectionStatus.RequestUrl);
 			u.AbsolutePath.Should().StartWith("/_cluster/health");

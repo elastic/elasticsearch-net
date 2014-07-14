@@ -1,32 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
-	public partial class ClusterStateDescriptor : IndicesOptionalPathDescriptor<ClusterStateDescriptor, ClusterStateRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IClusterStateRequest : IIndicesOptionalPath<ClusterStateRequestParameters>
 	{
-		
-		private IEnumerable<ClusterStateMetric> _Metrics { get; set; }
+		IEnumerable<ClusterStateMetric> Metrics { get; set; }
+	}
+
+	internal static class ClusterStatePathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<ClusterStateRequestParameters> pathInfo, IClusterStateRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+			if (request.Metrics != null)
+				pathInfo.Metric = request.Metrics.Cast<Enum>().GetStringValue();
+		}
+	}
+	
+	public partial class ClusterStateRequest : IndicesOptionalPathBase<ClusterStateRequestParameters>, IClusterStateRequest
+	{
+		public IEnumerable<ClusterStateMetric> Metrics { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterStateRequestParameters> pathInfo)
+		{
+			ClusterStatePathInfo.Update(pathInfo, this);
+		}
+
+	}
+
+
+	public partial class ClusterStateDescriptor : IndicesOptionalPathDescriptor<ClusterStateDescriptor, ClusterStateRequestParameters>, IClusterStateRequest
+	{
+		private IClusterStateRequest Self { get { return this; } }
+
+		IEnumerable<ClusterStateMetric> IClusterStateRequest.Metrics { get; set; }
 		public ClusterStateDescriptor Metrics(params ClusterStateMetric[] metrics)
 		{
-			this._Metrics = metrics;
+			Self.Metrics = metrics;
 			return this;
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterStateRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
-			if (this._Metrics != null)
-				pathInfo.Metric = this._Metrics.Cast<Enum>().GetStringValue();
+			ClusterStatePathInfo.Update(pathInfo, this);
 		}
 	}
 }

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Elasticsearch.Net.Connection;
+using Elasticsearch.Net;
 using FluentAssertions;
 using NUnit.Framework;
 

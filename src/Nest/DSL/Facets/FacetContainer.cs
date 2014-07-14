@@ -17,9 +17,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "global")]
 		bool? Global { get; set; }
 
-		[JsonProperty(PropertyName = "_scope")]
-		string Scope { get; set; }
-
 		[JsonProperty(PropertyName = "nested")]
 		PropertyPathMarker Nested { get; set; }
 
@@ -58,9 +55,6 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "global")]
 		public bool? Global { get; set; }
-
-		[JsonProperty(PropertyName = "_scope")]
-		public string Scope { get; set; }
 
 		[JsonProperty(PropertyName = "nested")]
 		public PropertyPathMarker Nested { get; set; }

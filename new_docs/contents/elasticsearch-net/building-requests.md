@@ -9,7 +9,7 @@ menuitem: esnet-building-requests
 
 This section decribes how to build requests to Elasticsearch.
 
-## Calling an API endpoint
+## Calling an API Endpoint
 
 `Elasticsearch.Net` maps **all** the `Elasticsearch` API endpoints to methods. The reason it can do this is because all these methods are generated from 
 [the official client rest specification](https://github.com/elasticsearch/elasticsearch/tree/master/rest-api-spec/api). This specification documents all 
@@ -32,7 +32,7 @@ Unknown querystring parameters can still be added:
 
 The querystring parameter is always optional.
 
-## Providing request body
+## Providing Request Body
 
 Some endpoints need a request body this can be passed in a couple of ways.
 

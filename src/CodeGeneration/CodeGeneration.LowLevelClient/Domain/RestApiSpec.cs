@@ -24,7 +24,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 			get
 			{
 				var queryParamEnums = from m in this.CsharpMethodsWithQueryStringInfo.SelectMany(m => m.Url.Params)
-					where m.Value.CsharpType(m.Key).EndsWith("Options")
+					where m.Value.Type == "enum"
 					select new EnumDescription
 					{
 						Name = m.Value.CsharpType(m.Key),

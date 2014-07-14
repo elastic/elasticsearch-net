@@ -1,27 +1,57 @@
 ﻿using System;
 using System.Globalization;
-using Nest.Resolvers;
 using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class BulkCreateDescriptor<T> : BaseBulkOperation
-		 where T : class
+	public interface IBulkCreateOperation<T> : IBulkOperation
+		where T : class
 	{
+		T Document { get; set; }
+	}
 
-		internal override Type _ClrType { get { return typeof(T); } }
-		internal override string _Operation { get { return "create"; } }
-		internal override object _Object { get; set; }
-
-
-		internal override string GetIdForObject(ElasticInferrer inferrer)
+	public class BulkCreateOperation<T> : BulkOperationBase, IBulkCreateOperation<T>
+		where T : class
+	{
+		public BulkCreateOperation(T document)
 		{
-			if (!this._Id.IsNullOrEmpty())
-				return this._Id;
-
-			return inferrer.Id((T)_Object);
-
+			this.Document = document;
 		}
+
+		public override string Operation { get { return "create"; } }
+
+		public override Type ClrType { get { return typeof(T); } } 
+		
+		public override object GetBody()
+		{
+			return this.Document;
+		}
+		public override string GetIdForOperation(ElasticInferrer inferrer)
+		{
+			return this.Id ?? inferrer.Id(this.Document);
+		}
+		public T Document { get; set; }
+	}
+
+
+	public class BulkCreateDescriptor<T> : BulkOperationDescriptorBase, IBulkCreateOperation<T> 
+		where T : class
+	{
+		private IBulkCreateOperation<T> Self { get { return this; } } 
+
+		protected override string _Operation { get { return "create"; } }
+		protected override Type _ClrType { get { return typeof(T); } }
+		protected override object _GetBody()
+		{
+			return Self.Document;
+		}
+
+		protected override string GetIdForOperation(ElasticInferrer inferrer)
+		{
+			return Self.Id ?? inferrer.Id(Self.Document);
+		}
+
+		T IBulkCreateOperation<T>.Document { get; set; }
 
 		/// <summary>
 		/// Manually set the index, default to the default index or the fixed index set on the bulk operation
@@ -29,9 +59,10 @@ namespace Nest
 		public BulkCreateDescriptor<T> Index(string index)
 		{
 			index.ThrowIfNullOrEmpty("indices");
-			this._Index = index;
+			Self.Index = index;
 			return this;
 		}
+
 		/// <summary>
 		/// Manualy set the type to get the object from, default to whatever
 		/// T will be inferred to if not passed or the fixed type set on the parent bulk operation
@@ -39,7 +70,7 @@ namespace Nest
 		public BulkCreateDescriptor<T> Type(string type)
 		{
 			type.ThrowIfNullOrEmpty("type");
-			this._Type = type;
+			Self.Type = type;
 			return this;
 		}
 
@@ -49,7 +80,7 @@ namespace Nest
 		public BulkCreateDescriptor<T> Type(Type type)
 		{
 			type.ThrowIfNull("type");
-			this._Type = type;
+			Self.Type = type;
 			return this;
 		}
 
@@ -66,60 +97,55 @@ namespace Nest
 		/// </summary>
 		public BulkCreateDescriptor<T> Id(string id)
 		{
-			this._Id = id;
+			Self.Id = id;
 			return this;
 		}
 
 		/// <summary>
 		/// The object to update, if id is not manually set it will be inferred from the object
 		/// </summary>
-		public BulkCreateDescriptor<T> Object(T @object)
+		public BulkCreateDescriptor<T> Document(T @object)
 		{
-			this._Object = @object;
+			Self.Document = @object;
 			return this;
 		}
 
 
 		public BulkCreateDescriptor<T> Version(string version)
 		{
-			this._Version = version; 
+			Self.Version = version; 
 			return this;
 		}
 
-		public BulkCreateDescriptor<T> VersionType(string versionType)
+		public BulkCreateDescriptor<T> VersionType(VersionType versionType)
 		{
-			this._VersionType = versionType;
-			return this;
-		}
-
-		public BulkCreateDescriptor<T> VersionType(VersionTypeOptions versionType)
-		{
-			this._VersionType = versionType.GetStringValue();
+			Self.VersionType = versionType;
 			return this;
 		}
 
 		public BulkCreateDescriptor<T> Routing(string routing)
 		{
-			this._Routing = routing; 
+			Self.Routing = routing; 
 			return this;
 		}
 
 		public BulkCreateDescriptor<T> Parent(string parent)
 		{
-			this._Parent = parent; 
+			Self.Parent = parent; 
 			return this;
 		}
 
 		public BulkCreateDescriptor<T> Timestamp(long timestamp)
 		{
-			this._Timestamp = timestamp; 
+			Self.Timestamp = timestamp; 
 			return this;
 		}
 
 		public BulkCreateDescriptor<T> Ttl(string ttl)
 		{
-			this._Ttl = ttl; 
+			Self.Ttl = ttl; 
 			return this;
 		}
+
 	}
 }

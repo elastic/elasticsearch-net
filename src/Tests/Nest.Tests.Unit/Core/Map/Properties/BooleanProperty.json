@@ -4,7 +4,7 @@
 			"boolValue": {
 				"type": "boolean",
 				"index_name": "bool_name_in_lucene_index",
-				"store": "yes",
+				"store": true,
 				"index": "analyzed",
 				"boost": 1.4,
 				"null_value": false,

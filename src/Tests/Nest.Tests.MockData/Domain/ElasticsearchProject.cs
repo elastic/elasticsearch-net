@@ -15,23 +15,23 @@ namespace Nest.Tests.MockData.Domain
 		public string Version { get; set; }
 		[ElasticProperty(
 			OmitNorms = true, 
-			Index = FieldIndexOption.not_analyzed )]
+			Index = FieldIndexOption.NotAnalyzed )]
 		public string Country { get; set; }
 		public string Content { get; set; }
 		[ElasticProperty(Name="loc",AddSortField=true)]
 		public int LOC { get; set; }
 		public List<Person> Followers { get; set; }
 
-		[ElasticProperty(Type=FieldType.nested)]
+		[ElasticProperty(Type=FieldType.Nested)]
 		public List<Person> Contributors { get; set; }
 		
 		public List<Person> NestedFollowers { get; set; }
 
-		[ElasticProperty(Type=FieldType.geo_point)]
+		[ElasticProperty(Type=FieldType.GeoPoint)]
 		public GeoLocation Origin { get; set; }
 		public DateTime StartedOn { get; set; }
 
-		[ElasticProperty(Type=FieldType.ip)]
+		[ElasticProperty(Type=FieldType.Ip)]
 		public string PingIP { get; set; }
 
 		public GeoShape MyGeoShape { get; set; }
@@ -46,12 +46,16 @@ namespace Nest.Tests.MockData.Domain
 
 		public int LocScriptField { get; set; }
 
-		[ElasticProperty(NumericType=NumericType.Long)]
+		[ElasticProperty(NumericType=NumberType.Long)]
 		public int StupidIntIWantAsLong { get; set; }
 
 		public string MyAttachment { get; set; }
 
 		public string MyBinaryField { get; set; }
 
+		[ElasticProperty(Type=FieldType.Object)]
+		public Product Product { get; set; }
+
+        public string[] MyStringArrayField { get; set; }
 	}
 }

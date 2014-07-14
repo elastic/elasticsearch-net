@@ -41,7 +41,7 @@ namespace Nest
 	
 
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public BulkDescriptor Consistency(ConsistencyOptions consistency)
+		public BulkDescriptor Consistency(Consistency consistency)
 		{
 			this.Request.RequestParameters.Consistency(consistency);
 			return this;
@@ -57,7 +57,7 @@ namespace Nest
 		
 
 		///<summary>Explicitely set the replication type</summary>
-		public BulkDescriptor Replication(ReplicationOptions replication)
+		public BulkDescriptor Replication(Replication replication)
 		{
 			this.Request.RequestParameters.Replication(replication);
 			return this;
@@ -161,7 +161,7 @@ namespace Nest
 	
 
 		///<summary>The unit in which to display byte values</summary>
-		public CatAllocationDescriptor Bytes(BytesOptions bytes)
+		public CatAllocationDescriptor Bytes(Bytes bytes)
 		{
 			this.Request.RequestParameters.Bytes(bytes);
 			return this;
@@ -287,7 +287,7 @@ namespace Nest
 	
 
 		///<summary>The unit in which to display byte values</summary>
-		public CatFielddataDescriptor Bytes(BytesOptions bytes)
+		public CatFielddataDescriptor Bytes(Bytes bytes)
 		{
 			this.Request.RequestParameters.Bytes(bytes);
 			return this;
@@ -467,7 +467,7 @@ namespace Nest
 	
 
 		///<summary>The unit in which to display byte values</summary>
-		public CatIndicesDescriptor Bytes(BytesOptions bytes)
+		public CatIndicesDescriptor Bytes(Bytes bytes)
 		{
 			this.Request.RequestParameters.Bytes(bytes);
 			return this;
@@ -778,7 +778,7 @@ namespace Nest
 	
 
 		///<summary>The unit in which to display byte values</summary>
-		public CatRecoveryDescriptor Bytes(BytesOptions bytes)
+		public CatRecoveryDescriptor Bytes(Bytes bytes)
 		{
 			this.Request.RequestParameters.Bytes(bytes);
 			return this;
@@ -1013,7 +1013,7 @@ namespace Nest
 	
 
 		///<summary>Specify the level of detail for returned information</summary>
-		public ClusterHealthDescriptor Level(LevelOptions level)
+		public ClusterHealthDescriptor Level(Level level)
 		{
 			this.Request.RequestParameters.Level(level);
 			return this;
@@ -1069,7 +1069,7 @@ namespace Nest
 		
 
 		///<summary>Wait until cluster is in a specific state</summary>
-		public ClusterHealthDescriptor WaitForStatus(WaitForStatusOptions wait_for_status)
+		public ClusterHealthDescriptor WaitForStatus(WaitForStatus wait_for_status)
 		{
 			this.Request.RequestParameters.WaitForStatus(wait_for_status);
 			return this;
@@ -1293,7 +1293,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CountDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public CountDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -1301,7 +1301,7 @@ namespace Nest
 		
 
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public CountDescriptor<T> MinScore(long min_score)
+		public CountDescriptor<T> MinScore(double min_score)
 		{
 			this.Request.RequestParameters.MinScore(min_score);
 			return this;
@@ -1340,13 +1340,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
-	public partial class PercolateCountDescriptor<T,K> 
+	public partial class PercolateCountDescriptor<T> 
 	{
 		
 	
 
 		///<summary>A comma-separated list of specific routing values</summary>
-		public PercolateCountDescriptor<T,K> Routing(params string[] routing)
+		public PercolateCountDescriptor<T> Routing(params string[] routing)
 		{
 			this.Request.RequestParameters.Routing(routing);
 			return this;
@@ -1354,7 +1354,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public PercolateCountDescriptor<T,K> Preference(string preference)
+		public PercolateCountDescriptor<T> Preference(string preference)
 		{
 			this.Request.RequestParameters.Preference(preference);
 			return this;
@@ -1362,7 +1362,7 @@ namespace Nest
 		
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PercolateCountDescriptor<T,K> IgnoreUnavailable(bool ignore_unavailable = true)
+		public PercolateCountDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -1370,7 +1370,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PercolateCountDescriptor<T,K> AllowNoIndices(bool allow_no_indices = true)
+		public PercolateCountDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -1378,7 +1378,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateCountDescriptor<T,K> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PercolateCountDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -1386,7 +1386,7 @@ namespace Nest
 		
 
 		///<summary>The index to count percolate the document into. Defaults to index.</summary>
-		public PercolateCountDescriptor<T,K> PercolateIndex(string percolate_index)
+		public PercolateCountDescriptor<T> PercolateIndex(string percolate_index)
 		{
 			this.Request.RequestParameters.PercolateIndex(percolate_index);
 			return this;
@@ -1394,7 +1394,7 @@ namespace Nest
 		
 
 		///<summary>The type to count percolate document into. Defaults to type.</summary>
-		public PercolateCountDescriptor<T,K> PercolateType(string percolate_type)
+		public PercolateCountDescriptor<T> PercolateType(string percolate_type)
 		{
 			this.Request.RequestParameters.PercolateType(percolate_type);
 			return this;
@@ -1402,7 +1402,7 @@ namespace Nest
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateCountDescriptor<T,K> Version(long version)
+		public PercolateCountDescriptor<T> Version(long version)
 		{
 			this.Request.RequestParameters.Version(version);
 			return this;
@@ -1410,7 +1410,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public PercolateCountDescriptor<T,K> VersionType(VersionTypeOptions version_type)
+		public PercolateCountDescriptor<T> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;
@@ -1431,7 +1431,7 @@ namespace Nest
 	
 
 		///<summary>Specific write consistency setting for the operation</summary>
-		public DeleteDescriptor<T> Consistency(ConsistencyOptions consistency)
+		public DeleteDescriptor<T> Consistency(Consistency consistency)
 		{
 			this.Request.RequestParameters.Consistency(consistency);
 			return this;
@@ -1455,7 +1455,7 @@ namespace Nest
 		
 
 		///<summary>Specific replication type</summary>
-		public DeleteDescriptor<T> Replication(ReplicationOptions replication)
+		public DeleteDescriptor<T> Replication(Replication replication)
 		{
 			this.Request.RequestParameters.Replication(replication);
 			return this;
@@ -1487,7 +1487,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public DeleteDescriptor<T> VersionType(VersionTypeOptions version_type)
+		public DeleteDescriptor<T> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;
@@ -1516,7 +1516,7 @@ namespace Nest
 		
 
 		///<summary>Specific write consistency setting for the operation</summary>
-		public DeleteByQueryDescriptor<T> Consistency(ConsistencyOptions consistency)
+		public DeleteByQueryDescriptor<T> Consistency(Consistency consistency)
 		{
 			this.Request.RequestParameters.Consistency(consistency);
 			return this;
@@ -1524,7 +1524,7 @@ namespace Nest
 		
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperatorOptions default_operator)
+		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator)
 		{
 			this.Request.RequestParameters.DefaultOperator(default_operator);
 			return this;
@@ -1556,7 +1556,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -1564,7 +1564,7 @@ namespace Nest
 		
 
 		///<summary>Specific replication type</summary>
-		public DeleteByQueryDescriptor<T> Replication(ReplicationOptions replication)
+		public DeleteByQueryDescriptor<T> Replication(Replication replication)
 		{
 			this.Request.RequestParameters.Replication(replication);
 			return this;
@@ -1686,7 +1686,7 @@ namespace Nest
 		
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ExplainDescriptor DefaultOperator(DefaultOperatorOptions default_operator)
+		public ExplainDescriptor DefaultOperator(DefaultOperator default_operator)
 		{
 			this.Request.RequestParameters.DefaultOperator(default_operator);
 			return this;
@@ -1777,47 +1777,47 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public ExplainDescriptor Source(params string[] _source)
+		public ExplainDescriptor _Source(params string[] _source)
 		{
-			this.Request.RequestParameters.Source(_source);
+			this.Request.RequestParameters._Source(_source);
 			return this;
 		}
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor SourceExclude(params string[] _source_exclude)
+		public ExplainDescriptor _SourceExclude(params string[] _source_exclude)
 		{
-			this.Request.RequestParameters.SourceExclude(_source_exclude);
+			this.Request.RequestParameters._SourceExclude(_source_exclude);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public ExplainDescriptor _SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceExclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceExclude(typedPathLookups);
 			return this;
 		}
 			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor SourceInclude(params string[] _source_include)
+		public ExplainDescriptor _SourceInclude(params string[] _source_include)
 		{
-			this.Request.RequestParameters.SourceInclude(_source_include);
+			this.Request.RequestParameters._SourceInclude(_source_include);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public ExplainDescriptor _SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceInclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceInclude(typedPathLookups);
 			return this;
 		}
 			
@@ -1901,47 +1901,47 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public GetDescriptor<T> Source(params string[] _source)
+		public GetDescriptor<T> _Source(params string[] _source)
 		{
-			this.Request.RequestParameters.Source(_source);
+			this.Request.RequestParameters._Source(_source);
 			return this;
 		}
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(params string[] _source_exclude)
+		public GetDescriptor<T> _SourceExclude(params string[] _source_exclude)
 		{
-			this.Request.RequestParameters.SourceExclude(_source_exclude);
+			this.Request.RequestParameters._SourceExclude(_source_exclude);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		public GetDescriptor<T> _SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceExclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceExclude(typedPathLookups);
 			return this;
 		}
 			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(params string[] _source_include)
+		public GetDescriptor<T> _SourceInclude(params string[] _source_include)
 		{
-			this.Request.RequestParameters.SourceInclude(_source_include);
+			this.Request.RequestParameters._SourceInclude(_source_include);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		public GetDescriptor<T> _SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceInclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceInclude(typedPathLookups);
 			return this;
 		}
 			
@@ -1955,7 +1955,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public GetDescriptor<T> VersionType(VersionTypeOptions version_type)
+		public GetDescriptor<T> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;
@@ -2016,47 +2016,47 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SourceDescriptor<T> Source(params string[] _source)
+		public SourceDescriptor<T> _Source(params string[] _source)
 		{
-			this.Request.RequestParameters.Source(_source);
+			this.Request.RequestParameters._Source(_source);
 			return this;
 		}
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(params string[] _source_exclude)
+		public SourceDescriptor<T> _SourceExclude(params string[] _source_exclude)
 		{
-			this.Request.RequestParameters.SourceExclude(_source_exclude);
+			this.Request.RequestParameters._SourceExclude(_source_exclude);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		public SourceDescriptor<T> _SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceExclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceExclude(typedPathLookups);
 			return this;
 		}
 			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(params string[] _source_include)
+		public SourceDescriptor<T> _SourceInclude(params string[] _source_include)
 		{
-			this.Request.RequestParameters.SourceInclude(_source_include);
+			this.Request.RequestParameters._SourceInclude(_source_include);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		public SourceDescriptor<T> _SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceInclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceInclude(typedPathLookups);
 			return this;
 		}
 			
@@ -2070,7 +2070,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public SourceDescriptor<T> VersionType(VersionTypeOptions version_type)
+		public SourceDescriptor<T> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;
@@ -2091,7 +2091,7 @@ namespace Nest
 	
 
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public IndexDescriptor<T> Consistency(ConsistencyOptions consistency)
+		public IndexDescriptor<T> Consistency(Consistency consistency)
 		{
 			this.Request.RequestParameters.Consistency(consistency);
 			return this;
@@ -2099,7 +2099,7 @@ namespace Nest
 		
 
 		///<summary>Explicit operation type</summary>
-		public IndexDescriptor<T> OpType(OpTypeOptions op_type)
+		public IndexDescriptor<T> OpType(OpType op_type)
 		{
 			this.Request.RequestParameters.OpType(op_type);
 			return this;
@@ -2123,7 +2123,7 @@ namespace Nest
 		
 
 		///<summary>Specific replication type</summary>
-		public IndexDescriptor<T> Replication(ReplicationOptions replication)
+		public IndexDescriptor<T> Replication(Replication replication)
 		{
 			this.Request.RequestParameters.Replication(replication);
 			return this;
@@ -2171,7 +2171,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public IndexDescriptor<T> VersionType(VersionTypeOptions version_type)
+		public IndexDescriptor<T> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;
@@ -2265,7 +2265,7 @@ namespace Nest
 		
 
 		///<summary>Format of the output</summary>
-		public AnalyzeDescriptor Format(FormatOptions format)
+		public AnalyzeDescriptor Format(Format format)
 		{
 			this.Request.RequestParameters.Format(format);
 			return this;
@@ -2369,7 +2369,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ClearCacheDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public ClearCacheDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2438,7 +2438,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CloseIndexDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public CloseIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2546,13 +2546,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-mapping.html
 	///</pre>
 	///</summary>
-	public partial class DeleteMappingDescriptor 
+	public partial class DeleteMappingDescriptor<T> 
 	{
 		
 	
 
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteMappingDescriptor MasterTimeout(string master_timeout)
+		public DeleteMappingDescriptor<T> MasterTimeout(string master_timeout)
 		{
 			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
@@ -2639,7 +2639,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndexExistsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndexExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2684,7 +2684,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesExistsAliasDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesExistsAliasDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2762,7 +2762,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesExistsTypeDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesExistsTypeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2829,7 +2829,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FlushDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public FlushDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2844,13 +2844,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public partial class GetAliasesDescriptor 
+	public partial class GetAliasDescriptor 
 	{
 		
 	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetAliasesDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public GetAliasDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -2858,7 +2858,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetAliasesDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public GetAliasDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -2866,7 +2866,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetAliasesDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetAliasDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2874,7 +2874,7 @@ namespace Nest
 		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetAliasesDescriptor Local(bool local = true)
+		public GetAliasDescriptor Local(bool local = true)
 		{
 			this.Request.RequestParameters.Local(local);
 			return this;
@@ -2889,13 +2889,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public partial class IndicesGetAliasesDescriptor  : BaseRequest<IndicesGetAliasesRequestParameters>
+	public partial class GetAliasesDescriptor 
 	{
 		
 	
 
 		///<summary>Explicit operation timeout</summary>
-		public IndicesGetAliasesDescriptor Timeout(string timeout)
+		public GetAliasesDescriptor Timeout(string timeout)
 		{
 			this.Request.RequestParameters.Timeout(timeout);
 			return this;
@@ -2903,16 +2903,10 @@ namespace Nest
 		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndicesGetAliasesDescriptor Local(bool local = true)
+		public GetAliasesDescriptor Local(bool local = true)
 		{
 			this.Request.RequestParameters.Local(local);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesGetAliasesRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
@@ -2954,7 +2948,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesGetFieldMappingDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesGetFieldMappingDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2983,13 +2977,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
 	///</pre>
 	///</summary>
-	public partial class GetMappingDescriptor 
+	public partial class GetMappingDescriptor<T> 
 	{
 		
 	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetMappingDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public GetMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -2997,7 +2991,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetMappingDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public GetMappingDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -3005,7 +2999,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetMappingDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3013,7 +3007,7 @@ namespace Nest
 		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetMappingDescriptor Local(bool local = true)
+		public GetMappingDescriptor<T> Local(bool local = true)
 		{
 			this.Request.RequestParameters.Local(local);
 			return this;
@@ -3050,7 +3044,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetIndexSettingsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3132,7 +3126,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetWarmerDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public GetWarmerDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3193,7 +3187,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public OpenIndexDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public OpenIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3238,7 +3232,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public OptimizeDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public OptimizeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3374,7 +3368,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3419,7 +3413,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpdateSettingsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public UpdateSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3509,7 +3503,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both, in the search request to warm.</summary>
-		public PutWarmerDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PutWarmerDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3589,7 +3583,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public RefreshDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public RefreshDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3642,7 +3636,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SegmentsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SegmentsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3752,17 +3746,9 @@ namespace Nest
 		
 
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
-		public IndicesStatsDescriptor Level(LevelOptions level)
+		public IndicesStatsDescriptor Level(Level level)
 		{
 			this.Request.RequestParameters.Level(level);
-			return this;
-		}
-		
-
-		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
-		public IndicesStatsDescriptor Types(params string[] types)
-		{
-			this.Request.RequestParameters.Types(types);
 			return this;
 		}
 		
@@ -3797,7 +3783,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesStatusDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public IndicesStatusDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3903,7 +3889,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -4023,47 +4009,47 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public MultiGetDescriptor Source(params string[] _source)
+		public MultiGetDescriptor _Source(params string[] _source)
 		{
-			this.Request.RequestParameters.Source(_source);
+			this.Request.RequestParameters._Source(_source);
 			return this;
 		}
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude(params string[] _source_exclude)
+		public MultiGetDescriptor _SourceExclude(params string[] _source_exclude)
 		{
-			this.Request.RequestParameters.SourceExclude(_source_exclude);
+			this.Request.RequestParameters._SourceExclude(_source_exclude);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public MultiGetDescriptor _SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceExclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceExclude(typedPathLookups);
 			return this;
 		}
 			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude(params string[] _source_include)
+		public MultiGetDescriptor _SourceInclude(params string[] _source_include)
 		{
-			this.Request.RequestParameters.SourceInclude(_source_include);
+			this.Request.RequestParameters._SourceInclude(_source_include);
 			return this;
 		}
 		
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public MultiGetDescriptor _SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters._SourceInclude(typedPathLookups);
+			this.Request.RequestParameters.__SourceInclude(typedPathLookups);
 			return this;
 		}
 			
@@ -4274,7 +4260,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public MpercolateDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public MpercolateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -4301,7 +4287,7 @@ namespace Nest
 	
 
 		///<summary>Search operation type</summary>
-		public MultiSearchDescriptor SearchType(SearchTypeOptions search_type)
+		public MultiSearchDescriptor SearchType(SearchType search_type)
 		{
 			this.Request.RequestParameters.SearchType(search_type);
 			return this;
@@ -4442,9 +4428,9 @@ namespace Nest
 		
 
 		///<summary>The type to sample (default: cpu)</summary>
-		public NodesHotThreadsDescriptor TypeQueryString(TypeOptions type)
+		public NodesHotThreadsDescriptor ThreadType(ThreadType thread_type)
 		{
-			this.Request.RequestParameters.Type(type);
+			this.Request.RequestParameters.ThreadType(thread_type);
 			return this;
 		}
 		
@@ -4606,7 +4592,7 @@ namespace Nest
 		
 
 		///<summary>Return indices stats aggregated at node, index or shard level</summary>
-		public NodesStatsDescriptor Level(LevelOptions level)
+		public NodesStatsDescriptor Level(Level level)
 		{
 			this.Request.RequestParameters.Level(level);
 			return this;
@@ -4629,13 +4615,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
-	public partial class PercolateDescriptor<T,K> 
+	public partial class PercolateDescriptor<T> 
 	{
 		
 	
 
 		///<summary>A comma-separated list of specific routing values</summary>
-		public PercolateDescriptor<T,K> Routing(params string[] routing)
+		public PercolateDescriptor<T> Routing(params string[] routing)
 		{
 			this.Request.RequestParameters.Routing(routing);
 			return this;
@@ -4643,7 +4629,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public PercolateDescriptor<T,K> Preference(string preference)
+		public PercolateDescriptor<T> Preference(string preference)
 		{
 			this.Request.RequestParameters.Preference(preference);
 			return this;
@@ -4651,7 +4637,7 @@ namespace Nest
 		
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PercolateDescriptor<T,K> IgnoreUnavailable(bool ignore_unavailable = true)
+		public PercolateDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -4659,7 +4645,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PercolateDescriptor<T,K> AllowNoIndices(bool allow_no_indices = true)
+		public PercolateDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -4667,7 +4653,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateDescriptor<T,K> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public PercolateDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -4675,7 +4661,7 @@ namespace Nest
 		
 
 		///<summary>The index to percolate the document into. Defaults to index.</summary>
-		public PercolateDescriptor<T,K> PercolateIndex(string percolate_index)
+		public PercolateDescriptor<T> PercolateIndex(string percolate_index)
 		{
 			this.Request.RequestParameters.PercolateIndex(percolate_index);
 			return this;
@@ -4683,7 +4669,7 @@ namespace Nest
 		
 
 		///<summary>The type to percolate document into. Defaults to type.</summary>
-		public PercolateDescriptor<T,K> PercolateType(string percolate_type)
+		public PercolateDescriptor<T> PercolateType(string percolate_type)
 		{
 			this.Request.RequestParameters.PercolateType(percolate_type);
 			return this;
@@ -4691,7 +4677,7 @@ namespace Nest
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateDescriptor<T,K> Version(long version)
+		public PercolateDescriptor<T> Version(long version)
 		{
 			this.Request.RequestParameters.Version(version);
 			return this;
@@ -4699,7 +4685,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public PercolateDescriptor<T,K> VersionType(VersionTypeOptions version_type)
+		public PercolateDescriptor<T> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;
@@ -4737,22 +4723,6 @@ namespace Nest
 	{
 		
 	
-
-		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public ScrollDescriptor<T> Scroll(string scroll)
-		{
-			this.Request.RequestParameters.Scroll(scroll);
-			return this;
-		}
-		
-
-		///<summary>The scroll ID for scrolled search</summary>
-		public ScrollDescriptor<T> ScrollId(string scroll_id)
-		{
-			this.Request.RequestParameters.ScrollId(scroll_id);
-			return this;
-		}
-		
 	
 	}
 	
@@ -4784,7 +4754,7 @@ namespace Nest
 		
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchDescriptor<T> DefaultOperator(DefaultOperatorOptions default_operator)
+		public SearchDescriptor<T> DefaultOperator(DefaultOperator default_operator)
 		{
 			this.Request.RequestParameters.DefaultOperator(default_operator);
 			return this;
@@ -4816,17 +4786,9 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SearchDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
-
-		///<summary>Comma-separated list of index boosts</summary>
-		public SearchDescriptor<T> IndicesBoost(params string[] indices_boost)
-		{
-			this.Request.RequestParameters.IndicesBoost(indices_boost);
 			return this;
 		}
 		
@@ -4872,17 +4834,9 @@ namespace Nest
 		
 
 		///<summary>Search operation type</summary>
-		public SearchDescriptor<T> SearchType(SearchTypeOptions search_type)
+		public SearchDescriptor<T> SearchType(SearchType search_type)
 		{
 			this.Request.RequestParameters.SearchType(search_type);
-			return this;
-		}
-		
-
-		///<summary>The URL-encoded request definition using the Query DSL (instead of using request body)</summary>
-		public SearchDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
 			return this;
 		}
 		
@@ -4913,7 +4867,7 @@ namespace Nest
 			
 
 		///<summary>Specify suggest mode</summary>
-		public SearchDescriptor<T> SuggestMode(SuggestModeOptions suggest_mode)
+		public SearchDescriptor<T> SuggestMode(SuggestMode suggest_mode)
 		{
 			this.Request.RequestParameters.SuggestMode(suggest_mode);
 			return this;
@@ -4990,7 +4944,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchShardsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SearchShardsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -5033,7 +4987,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchTemplateDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SearchTemplateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -5065,7 +5019,7 @@ namespace Nest
 		
 
 		///<summary>Search operation type</summary>
-		public SearchTemplateDescriptor SearchType(SearchTypeOptions search_type)
+		public SearchTemplateDescriptor SearchType(SearchType search_type)
 		{
 			this.Request.RequestParameters.SearchType(search_type);
 			return this;
@@ -5328,7 +5282,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SuggestDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		public SuggestDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -5463,40 +5417,21 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html
 	///</pre>
 	///</summary>
-	public partial class UpdateDescriptor<T,K> 
+	public partial class UpdateDescriptor<TUpsert,TDocument> 
 	{
 		
 	
 
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public UpdateDescriptor<T,K> Consistency(ConsistencyOptions consistency)
+		public UpdateDescriptor<TUpsert,TDocument> Consistency(Consistency consistency)
 		{
 			this.Request.RequestParameters.Consistency(consistency);
 			return this;
 		}
 		
 
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public UpdateDescriptor<T,K> Fields(params string[] fields)
-		{
-			this.Request.RequestParameters.Fields(fields);
-			return this;
-		}
-		
-			
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public UpdateDescriptor<T,K> Fields(params Expression<Func<T, object>>[] typedPathLookups) 
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._Fields(typedPathLookups);
-			return this;
-		}
-			
-
 		///<summary>The script language (default: mvel)</summary>
-		public UpdateDescriptor<T,K> Lang(string lang)
+		public UpdateDescriptor<TUpsert,TDocument> Lang(string lang)
 		{
 			this.Request.RequestParameters.Lang(lang);
 			return this;
@@ -5504,7 +5439,7 @@ namespace Nest
 		
 
 		///<summary>ID of the parent document</summary>
-		public UpdateDescriptor<T,K> Parent(string parent)
+		public UpdateDescriptor<TUpsert,TDocument> Parent(string parent)
 		{
 			this.Request.RequestParameters.Parent(parent);
 			return this;
@@ -5512,7 +5447,7 @@ namespace Nest
 		
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public UpdateDescriptor<T,K> Refresh(bool refresh = true)
+		public UpdateDescriptor<TUpsert,TDocument> Refresh(bool refresh = true)
 		{
 			this.Request.RequestParameters.Refresh(refresh);
 			return this;
@@ -5520,7 +5455,7 @@ namespace Nest
 		
 
 		///<summary>Specific replication type</summary>
-		public UpdateDescriptor<T,K> Replication(ReplicationOptions replication)
+		public UpdateDescriptor<TUpsert,TDocument> Replication(Replication replication)
 		{
 			this.Request.RequestParameters.Replication(replication);
 			return this;
@@ -5528,7 +5463,7 @@ namespace Nest
 		
 
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public UpdateDescriptor<T,K> RetryOnConflict(long retry_on_conflict)
+		public UpdateDescriptor<TUpsert,TDocument> RetryOnConflict(long retry_on_conflict)
 		{
 			this.Request.RequestParameters.RetryOnConflict(retry_on_conflict);
 			return this;
@@ -5536,7 +5471,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value</summary>
-		public UpdateDescriptor<T,K> Routing(string routing)
+		public UpdateDescriptor<TUpsert,TDocument> Routing(string routing)
 		{
 			this.Request.RequestParameters.Routing(routing);
 			return this;
@@ -5544,7 +5479,7 @@ namespace Nest
 		
 
 		///<summary>The URL-encoded script definition (instead of using request body)</summary>
-		public UpdateDescriptor<T,K> ScriptQueryString(string script)
+		public UpdateDescriptor<TUpsert,TDocument> ScriptQueryString(string script)
 		{
 			this.Request.RequestParameters.Script(script);
 			return this;
@@ -5552,7 +5487,7 @@ namespace Nest
 		
 
 		///<summary>Explicit operation timeout</summary>
-		public UpdateDescriptor<T,K> Timeout(string timeout)
+		public UpdateDescriptor<TUpsert,TDocument> Timeout(string timeout)
 		{
 			this.Request.RequestParameters.Timeout(timeout);
 			return this;
@@ -5560,7 +5495,7 @@ namespace Nest
 		
 
 		///<summary>Explicit timestamp for the document</summary>
-		public UpdateDescriptor<T,K> Timestamp(string timestamp)
+		public UpdateDescriptor<TUpsert,TDocument> Timestamp(string timestamp)
 		{
 			this.Request.RequestParameters.Timestamp(timestamp);
 			return this;
@@ -5568,7 +5503,7 @@ namespace Nest
 		
 
 		///<summary>Expiration time for the document</summary>
-		public UpdateDescriptor<T,K> Ttl(string ttl)
+		public UpdateDescriptor<TUpsert,TDocument> Ttl(string ttl)
 		{
 			this.Request.RequestParameters.Ttl(ttl);
 			return this;
@@ -5576,7 +5511,7 @@ namespace Nest
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public UpdateDescriptor<T,K> Version(long version)
+		public UpdateDescriptor<TUpsert,TDocument> Version(long version)
 		{
 			this.Request.RequestParameters.Version(version);
 			return this;
@@ -5584,7 +5519,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public UpdateDescriptor<T,K> VersionType(VersionTypeOptions version_type)
+		public UpdateDescriptor<TUpsert,TDocument> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;

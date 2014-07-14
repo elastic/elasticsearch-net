@@ -91,10 +91,10 @@
     <Compile Include="ConvenienceExtensions\AliasExtensions.cs" />
     <Compile Include="ConvenienceExtensions\CountExtensions.cs" />
     <Compile Include="ConvenienceExtensions\DeleteExtensions.cs" />
-    <Compile Include="ConvenienceExtensions\DeleteMappingExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\IndexManyExtensions.cs" />
     <Compile Include="ConvenienceExtensions\GetExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\DeleteManyExtensions.cs" />
     <Compile Include="ConvenienceExtensions\GetManyExtensions.cs" />
-    <Compile Include="ConvenienceExtensions\GetMappingExtensions.cs" />
     <Compile Include="ConvenienceExtensions\CreateIndexExtensions.cs" />
     <Compile Include="ConvenienceExtensions\OpenCloseIndexExtensions.cs" />
     <Compile Include="ConvenienceExtensions\ScrollExtensions.cs" />
@@ -135,14 +135,19 @@
     <Compile Include="Domain\Analysis\TokenFilter\KeepWordsTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\StemmerOverrideTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\UppercaseTokenFilter.cs" />
-    <Compile Include="Domain\Bulk\MultiGetDoc.cs" />
+    <Compile Include="Domain\Bulk\IBulkOperation.cs" />
+    <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
+    <Compile Include="DSL\GetAliasDescriptor.cs" />
+    <Compile Include="DSL\TermVector\IMultiTermVectorDocumentDescriptor.cs" />
+    <Compile Include="DSL\MultiGet\MultiGetDoc.cs" />
     <Compile Include="Domain\Connection\ConnectionSettings.cs" />
     <Compile Include="Domain\Connection\IConnectionSettingsValues.cs" />
     <Compile Include="Domain\DSL\DescriptorForAttribute.cs" />
     <Compile Include="Domain\ICustomJson.cs" />
+    <Compile Include="Domain\Paths\FluentFieldList.cs" />
     <Compile Include="Domain\Property.cs" />
-    <Compile Include="Domain\PropertyNameMarker.cs" />
-    <Compile Include="Domain\PropertyPathMarker.cs" />
+    <Compile Include="Domain\Marker\PropertyNameMarker.cs" />
+    <Compile Include="Domain\Marker\PropertyPathMarker.cs" />
     <Compile Include="Domain\Repository\Snapshot.cs" />
     <Compile Include="Domain\Repository\SnapshotRestore.cs" />
     <Compile Include="Domain\Responses\ClusterGetSettingsResponse - Copy.cs" />
@@ -152,8 +157,18 @@
     <Compile Include="Domain\Responses\RestoreResponse.cs" />
     <Compile Include="Domain\Responses\SnapshotResponse.cs" />
     <Compile Include="Domain\Aggregations\TermsIncludeExclude.cs" />
+    <Compile Include="Domain\Similarity\BM25Similarity.cs" />
+    <Compile Include="Domain\Similarity\DefaultSimilarity.cs" />
+    <Compile Include="Domain\Similarity\DFRSimilarity.cs" />
+    <Compile Include="Domain\Similarity\IBSimilarity.cs" />
+    <Compile Include="Domain\Similarity\LMDirichletSimilarity.cs" />
+    <Compile Include="Domain\Similarity\LMJelinekSimilarity.cs" />
+    <Compile Include="Domain\Similarity\SimilarityBase.cs" />
+    <Compile Include="DSL\Bulk\BulkOperationBase.cs" />
     <Compile Include="DSL\ClusterGetSettingsDescriptor.cs" />
     <Compile Include="DSL\ClusterSettingsDescriptor.cs" />
+    <Compile Include="DSL\Common\BasePathRequest.cs" />
+    <Compile Include="DSL\Common\BaseRequest.cs" />
     <Compile Include="DSL\DeleteSnapshotDescriptor.cs" />
     <Compile Include="DSL\Facets\FacetRequest.cs" />
     <Compile Include="DSL\Filter\BoolFilterExtensions.cs" />
@@ -163,17 +178,26 @@
     <Compile Include="DSL\Filter\PlainFilter.cs" />
     <Compile Include="DSL\Filter\PrefixFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\RawFilter.cs" />
+    <Compile Include="DSL\Common\IRequest.cs" />
     <Compile Include="DSL\Query\BoolQueryExtensions.cs" />
+    <Compile Include="DSL\Query\Functions\FieldValueFactorModifier.cs" />
     <Compile Include="DSL\Query\PlainQuery.cs" />
     <Compile Include="DSL\Query\QueryContainer.cs" />
     <Compile Include="DSL\Rescore\RescoreQueryDescriptor.cs" />
+    <Compile Include="DSL\SimilarityDescriptor.cs" />
     <Compile Include="DSL\Suggest\Fuzziness.cs" />
     <Compile Include="DSL\Suggest\IFuzziness.cs" />
     <Compile Include="DSL\Visitor\DslPrettyPrintVisitor.cs" />
     <Compile Include="DSL\Visitor\QueryFilterWalker.cs" />
     <Compile Include="DSL\Visitor\QueryVisitor.cs" />
     <Compile Include="DSL\Visitor\VisitorScope.cs" />
+    <Compile Include="DSL\_Requests.generated.cs" />
     <Compile Include="ElasticClient-ClusterSettings.cs" />
+    <Compile Include="ElasticClient-DeleteIndex.cs" />
+    <Compile Include="Enums\NormsLoading.cs" />
+    <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
+    <Compile Include="ExposedInternals\NestSerializer.cs" />
+    <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\CompositeJsonConverter.cs" />
     <Compile Include="Domain\DSL\ICustomJsonReader.cs" />
@@ -199,7 +223,7 @@
     <Compile Include="DSL\Query\Functions\ScriptScoreFunction.cs" />
     <Compile Include="DSL\Query\SubDescriptors\ISpanSubQuery.cs" />
     <Compile Include="Domain\TermVector\MultiTermVectorDocument.cs" />
-    <Compile Include="DSL\MultiTermVectorDocumentDescriptor.cs" />
+    <Compile Include="DSL\TermVector\MultiTermVectorDocumentDescriptor.cs" />
     <Compile Include="DSL\MultiTermVectorsDescriptor.cs" />
     <Compile Include="DSL\Paths\DocumentOptionalPathDescriptor.cs" />
     <Compile Include="DSL\RestoreDescriptor.cs" />
@@ -264,7 +288,7 @@
     <Compile Include="DSL\ClearCacheDescriptor.cs" />
     <Compile Include="DSL\Facets\Ip4Range.cs" />
     <Compile Include="DSL\Facets\DateExpressionRange.cs" />
-    <Compile Include="DSL\Paths\BasePathDescriptor.cs" />
+    <Compile Include="DSL\Common\BasePathDescriptor.cs" />
     <Compile Include="DSL\Query\GeoShapeQueryDescriptor.cs" />
     <Compile Include="DSL\Query\SimpleQueryStringQueryDescriptor.cs" />
     <Compile Include="DSL\SourceDescriptor.cs" />
@@ -292,8 +316,7 @@
     <Compile Include="DSL\Paths\NodeIdOptionalDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexTypePathDescriptor.cs" />
     <Compile Include="DSL\Paths\IndicesTypePathDescriptor.cs" />
-    <Compile Include="DSL\Paths\IndexTypePathTypedDescriptor.cs" />
-    <Compile Include="DSL\Search\SourceDescriptor.cs" />
+    <Compile Include="DSL\Search\SearchSourceDescriptor.cs" />
     <Compile Include="DSL\TermVectorDescriptor.cs" />
     <Compile Include="DSL\UnregisterPercolatorDescriptor.cs" />
     <Compile Include="DSL\DeleteTemplateDescriptor.cs" />
@@ -307,7 +330,7 @@
     <Compile Include="DSL\RefreshDescriptor.cs" />
     <Compile Include="DSL\OptimizeDescriptor.cs" />
     <Compile Include="DSL\OpenIndexDescriptor.cs" />
-    <Compile Include="DSL\Paths\FluentDictionary.cs" />
+    <Compile Include="Domain\FluentDictionary.cs" />
     <Compile Include="DSL\Paths\IndexPathDescriptor.cs" />
     <Compile Include="DSL\ScrollDescriptor.cs" />
     <Compile Include="DSL\UpdateSettingsDescriptor.cs" />
@@ -321,18 +344,15 @@
     <Compile Include="ElasticClient-RootNodeInfo.cs" />
     <Compile Include="ElasticClient-TermVector.cs" />
     <Compile Include="ElasticClient-UpdateSettings.cs" />
-    <Compile Include="DSL\MultiGet\ISimpleGetDescriptor.cs" />
+    <Compile Include="DSL\MultiGet\IMultiGetOperation.cs" />
     <Compile Include="DSL\DeleteByQueryDescriptor.cs" />
     <Compile Include="DSL\Paths\DocumentPathDescriptor.cs" />
-    <Compile Include="DSL\MultiGet\SimpleGetDescriptor.cs" />
+    <Compile Include="DSL\MultiGet\MultiGetOperationDescriptor.cs" />
     <Compile Include="DSL\_Descriptors.generated.cs" />
-    <Compile Include="Enums\ExecutionHint.cs" />
-    <Compile Include="Enums\GeoDistanceType.cs" />
+    <Compile Include="Enums\TermsAggregationExecutionHint.cs" />
     <Compile Include="Enums\GeoHashPrecision.cs" />
     <Compile Include="Exception\DispatchException.cs" />
     <Compile Include="ExposedInternals\JsonConverterPiggyBackState.cs" />
-    <Compile Include="ExposedInternals\NestSerializer.cs" />
-    <Compile Include="ExposedInternals\Stringifier.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\SuffixExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
@@ -392,8 +412,7 @@
     <Compile Include="DSL\Query\SubDescriptors\ExternalFieldDeclarationDescriptor.cs" />
     <Compile Include="DSL\Query\SubDescriptors\IExternalFieldDeclarationDescriptor.cs" />
     <Compile Include="DSL\Query\MultiMatchQueryDescriptor.cs" />
-    <Compile Include="ElasticClient-State.cs" />
-    <Compile Include="Enums\ClusterStateInfo.cs" />
+    <Compile Include="ElasticClient-ClusterState.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Resolvers\Converters\AnalysisSettingsConverter.cs" />
     <Compile Include="Resolvers\Converters\AnalyzerCollectionConverter.cs" />
@@ -405,7 +424,6 @@
     <Compile Include="Domain\Responses\WarmerResponse.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Domain\Settings\CustomSimilaritySettings.cs" />
     <Compile Include="DSL\Rescore\RescoreDescriptor.cs" />
     <Compile Include="DSL\Termplates\CreateWarmerDescriptor.cs" />
     <Compile Include="DSL\PutWarmerDescriptor.cs" />
@@ -422,20 +440,19 @@
     <Compile Include="Domain\Responses\BulkOperationResponseItem.cs" />
     <Compile Include="Domain\Responses\MultiSearchResponse.cs" />
     <Compile Include="Domain\Responses\IBulkResponse.cs" />
-    <Compile Include="Domain\Settings\SimilaritySettings.cs" />
+    <Compile Include="Domain\Similarity\SimilaritySettings.cs" />
     <Compile Include="ElasticClient-MultiSearch.cs" />
     <Compile Include="Domain\Mapping\Types\TemplateMapping.cs" />
     <Compile Include="Domain\Responses\TemplateResponse.cs" />
     <Compile Include="DSL\MultiSearchDescriptor.cs" />
     <Compile Include="DSL\PutTemplateDescriptor.cs" />
     <Compile Include="ElasticClient-Template.cs" />
-    <Compile Include="Domain\Bulk\BaseBulkOperation.cs" />
+    <Compile Include="Domain\Bulk\BulkOperationDescriptorBase.cs" />
     <Compile Include="DSL\Bulk\BulkCreateDescriptor.cs" />
     <Compile Include="DSL\BulkDescriptor.cs" />
     <Compile Include="DSL\Bulk\BulkIndexDescriptor.cs" />
     <Compile Include="DSL\Bulk\BulkDeleteDescriptor.cs" />
     <Compile Include="ElasticClient-DeleteByQuery.cs" />
-    <Compile Include="ElasticClient-DeleteMany.cs" />
     <Compile Include="Domain\Analysis\Analyzers\Language.cs" />
     <Compile Include="Domain\Analysis\Analyzers\LanguageAnalyzer.cs" />
     <Compile Include="Domain\Analysis\Analyzers\KeywordAnalyzer.cs" />
@@ -539,7 +556,7 @@
     <Compile Include="Domain\Responses\MultiGetResponse.cs" />
     <Compile Include="DSL\MultiGetDescriptor.cs" />
     <Compile Include="ElasticClient-Get.cs" />
-    <Compile Include="Domain\FieldSelection.cs" />
+    <Compile Include="Domain\Paths\FieldSelection.cs" />
     <Compile Include="Domain\Responses\BulkResponse.cs" />
     <Compile Include="Domain\Responses\GetResponse.cs" />
     <Compile Include="Domain\Responses\DeleteResponse.cs" />
@@ -602,32 +619,16 @@
     <Compile Include="DSL\Search\SortFieldDescriptor.cs" />
     <Compile Include="DSL\Search\SortGeoDistanceDescriptor.cs" />
     <Compile Include="DSL\Search\SortScriptDescriptor.cs" />
-    <Compile Include="Enums\ComparatorType.cs" />
     <Compile Include="Enums\RewriteMultiTerm.cs" />
-    <Compile Include="Enums\HealthLevel.cs" />
-    <Compile Include="Enums\HealthStatus.cs" />
-    <Compile Include="Enums\NodesInfo.cs" />
-    <Compile Include="Enums\NodeInfoStats.cs" />
-    <Compile Include="Enums\NumberType.cs" />
     <Compile Include="Enums\GeoTree.cs" />
     <Compile Include="Enums\NumericIndexOption.cs" />
     <Compile Include="Enums\IndexOptions.cs" />
-    <Compile Include="Enums\OpType.cs" />
     <Compile Include="Enums\ScoreMode.cs" />
-    <Compile Include="Enums\SearchType.cs" />
-    <Compile Include="Enums\Lang.cs" />
-    <Compile Include="Enums\DateHistogramComparatorType.cs" />
-    <Compile Include="Enums\DistanceUnit.cs" />
-    <Compile Include="Enums\HistogramComparatorType.cs" />
-    <Compile Include="Enums\Occur.cs" />
-    <Compile Include="Enums\SortOrder.cs" />
-    <Compile Include="Enums\TermsStatsComparatorType.cs" />
     <Compile Include="Enums\TextQueryType.cs" />
     <Compile Include="Enums\NestedScore.cs" />
     <Compile Include="Enums\TopChildrenScore.cs" />
     <Compile Include="Enums\Operator.cs" />
     <Compile Include="Enums\GeoOptimizeBBox.cs" />
-    <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="Enums\GeoUnit.cs" />
     <Compile Include="DSL\Facets\GeoDistanceFacetDescriptor.cs" />
     <Compile Include="DSL\Facets\TermsStatsFacetDescriptor.cs" />
@@ -641,7 +642,6 @@
     <Compile Include="DSL\Facets\RangeFacetDescriptor.cs" />
     <Compile Include="DSL\Facets\FacetContainer.cs" />
     <Compile Include="DSL\Facets\TermsOrder.cs" />
-    <Compile Include="DSL\Facets\EsRegexFlags.cs" />
     <Compile Include="DSL\Filter\BoolFilterDescriptor.cs" />
     <Compile Include="Enums\GeoExecution.cs" />
     <Compile Include="DSL\Filter\GeoBoundingBoxFilterDescriptor.cs" />
@@ -654,6 +654,7 @@
     <Compile Include="DSL\Filter\LimitFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\IdsFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\ExistsFilterDescriptor.cs" />
+    <Compile Include="Resolvers\Converters\SimilarityCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\FuzzinessConverter.cs" />
     <Compile Include="Resolvers\Converters\Filters\RangeFilterJsonReader.cs" />
     <Compile Include="Resolvers\Converters\Filters\RegexpFilterJsonReader.cs" />
@@ -701,10 +702,10 @@
     <Compile Include="Domain\Stats\DocStats.cs" />
     <Compile Include="Domain\Stats\StatsContainer.cs" />
     <Compile Include="Domain\Stats\Stats.cs" />
-    <Compile Include="ElasticClient-Stats.cs" />
+    <Compile Include="ElasticClient-IndicesStats.cs" />
     <Compile Include="Domain\Responses\AcknowledgedResponse.cs" />
     <Compile Include="Domain\Responses\IndexSettingsResponse.cs" />
-    <Compile Include="ElasticClient-MappingIndex.cs" />
+    <Compile Include="ElasticClient-IndexSettings.cs" />
     <Compile Include="ElasticClient-ClearCache.cs" />
     <Compile Include="Domain\Hit\AnalyzeToken.cs" />
     <Compile Include="Domain\Hit\MultiHit.cs" />
@@ -755,8 +756,6 @@
     <Compile Include="Domain\Hit\ExplanationDetail.cs" />
     <Compile Include="Domain\Hit\Hit.cs" />
     <Compile Include="Domain\Hit\HitsMetaData.cs" />
-    <Compile Include="Enums\ClearCacheOptions.cs" />
-    <Compile Include="Enums\StatsInfo.cs" />
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
@@ -764,6 +763,7 @@
     <Compile Include="Resolvers\Converters\FieldNameFilterConverter.cs" />
     <Compile Include="Resolvers\Converters\FieldNameQueryConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsResponseConverter.cs" />
+    <Compile Include="Resolvers\Converters\SimilaritySettingsConverter.cs" />
     <Compile Include="Resolvers\Converters\SuggestResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\PropertyPathMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />
@@ -796,7 +796,6 @@
     <Compile Include="DSL\Query\PrefixQueryDescriptor.cs" />
     <Compile Include="Enums\TermVectorOption.cs" />
     <Compile Include="Enums\FieldIndexOption.cs" />
-    <Compile Include="Enums\StoreOption.cs" />
     <Compile Include="Enums\NumericType.cs" />
     <Compile Include="Resolvers\Converters\FacetConverter.cs" />
     <Compile Include="Resolvers\Converters\CustomJsonConverter.cs" />
@@ -804,7 +803,7 @@
     <Compile Include="Resolvers\Converters\YesNoBoolConverter.cs" />
     <Compile Include="Domain\Paths\ElasticsearchPathInfo.cs" />
     <Compile Include="Resolvers\ExpressionVisitor.cs" />
-    <Compile Include="Resolvers\IndexNameMarker.cs" />
+    <Compile Include="Domain\Marker\IndexNameMarker.cs" />
     <Compile Include="Domain\Paths\PathInfoHttpMethod.cs" />
     <Compile Include="Resolvers\IndexNameMarkerExtensions.cs" />
     <Compile Include="Resolvers\IndexNameResolver.cs" />
@@ -815,16 +814,12 @@
     <Compile Include="DSL\Query\WildcardQueryDescriptor.cs" />
     <Compile Include="ElasticClient-Search.cs" />
     <Compile Include="Resolvers\ElasticContractResolver.cs" />
-    <Compile Include="Enums\Consistency.cs" />
-    <Compile Include="Enums\FacetTypes.cs" />
-    <Compile Include="Enums\Replication.cs" />
     <Compile Include="Exception\DslException.cs" />
     <Compile Include="Enums\FieldType.cs" />
-    <Compile Include="Enums\NamingConvention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resolvers\PropertyNameResolver.cs" />
     <Compile Include="Resolvers\SettingsContractResolver.cs" />
-    <Compile Include="Resolvers\TypeNameMarker.cs" />
+    <Compile Include="Domain\Marker\TypeNameMarker.cs" />
     <Compile Include="Resolvers\TypeNameMarkerExtensions.cs" />
     <Compile Include="Resolvers\TypeNameResolver.cs" />
     <Compile Include="Resolvers\Writers\TypeMappingWriter.cs" />
@@ -860,10 +855,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Domain\Parameters\" />
-    <Folder Include="DSL\TermVector\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup>

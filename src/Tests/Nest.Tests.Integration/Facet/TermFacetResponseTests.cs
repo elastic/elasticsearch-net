@@ -107,7 +107,7 @@ namespace Nest.Tests.Integration.Facet
     {
       var results = this.Client.Search<ElasticsearchProject>(s => s
         .FacetTerm(t=>t
-          .Order(TermsOrder.count)
+          .Order(TermsOrder.Count)
           .OnField(p => p.Name)
           .Size(10)
         )

@@ -12,8 +12,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public ITemplateResponse GetTemplate(string name,
-			Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null)
+		public ITemplateResponse GetTemplate(string name, Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null)
 		{
 			getTemplateSelector = getTemplateSelector ?? (s => s);
 			return this.Dispatch<GetTemplateDescriptor, GetTemplateRequestParameters, TemplateResponse>(
@@ -25,8 +24,18 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<ITemplateResponse> GetTemplateAsync(string name,
-			Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null)
+		public ITemplateResponse GetTemplate(IGetTemplateRequest getTemplateRequest)
+		{
+			return this.Dispatch<IGetTemplateRequest, GetTemplateRequestParameters, TemplateResponse>(
+				getTemplateRequest,
+				(p, d) => RawDispatch.IndicesGetTemplateDispatch<TemplateResponse>(
+					p.DeserializationState((GetTemplateConverter) DeserializeTemplateResponse)
+				)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<ITemplateResponse> GetTemplateAsync(string name, Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null)
 		{
 			getTemplateSelector = getTemplateSelector ?? (s => s);
 			return this.DispatchAsync<GetTemplateDescriptor, GetTemplateRequestParameters, TemplateResponse, ITemplateResponse>(
@@ -38,33 +47,62 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public IIndicesOperationResponse PutTemplate(string name,
-			Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector)
+		public Task<ITemplateResponse> GetTemplateAsync(IGetTemplateRequest getTemplateRequest)
+		{
+			return this.DispatchAsync<IGetTemplateRequest, GetTemplateRequestParameters, TemplateResponse, ITemplateResponse>(
+				getTemplateRequest,
+				(p, d) => this.RawDispatch.IndicesGetTemplateDispatchAsync<TemplateResponse>(
+					p.DeserializationState((GetTemplateConverter) DeserializeTemplateResponse)
+				)
+			);
+		}
+
+
+
+		/// <inheritdoc />
+		public IIndicesOperationResponse PutTemplate(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector)
 		{
 			putTemplateSelector.ThrowIfNull("putTemplateSelector");
 			var descriptor = putTemplateSelector(new PutTemplateDescriptor(_connectionSettings).Name(name));
-			return this.Dispatch<PutTemplateDescriptor, PutTemplateRequestParameters, IndicesOperationResponse>(
+			return this.Dispatch<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse>(
 				descriptor,
-				(p, d) => this.RawDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>(p, d._TemplateMapping)
+				(p, d) => this.RawDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>(p, d.TemplateMapping)
 			);
 		}
 
 		/// <inheritdoc />
-		public Task<IIndicesOperationResponse> PutTemplateAsync(string name,
-			Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector)
+		public IIndicesOperationResponse PutTemplate(IPutTemplateRequest putTemplateRequest)
+		{
+			return this.Dispatch<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse>(
+				putTemplateRequest,
+				(p, d) => this.RawDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>(p, d.TemplateMapping)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IIndicesOperationResponse> PutTemplateAsync(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector)
 		{
 			putTemplateSelector.ThrowIfNull("putTemplateSelector");
 			var descriptor = putTemplateSelector(new PutTemplateDescriptor(_connectionSettings).Name(name));
-			return this.DispatchAsync
-				<PutTemplateDescriptor, PutTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+			return this.DispatchAsync<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					descriptor,
-					(p, d) => this.RawDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>(p, d._TemplateMapping)
+					(p, d) => this.RawDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>(p, d.TemplateMapping)
 				);
 		}
 
 		/// <inheritdoc />
-		public IIndicesOperationResponse DeleteTemplate(string name,
-			Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null)
+		public Task<IIndicesOperationResponse> PutTemplateAsync(IPutTemplateRequest putTemplateRequest)
+		{
+			return this.DispatchAsync<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+					putTemplateRequest,
+					(p, d) => this.RawDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>(p, d.TemplateMapping)
+				);
+		}
+
+
+
+		/// <inheritdoc />
+		public IIndicesOperationResponse DeleteTemplate(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null)
 		{
 			deleteTemplateSelector = deleteTemplateSelector ?? (s => s);
 			return this.Dispatch<DeleteTemplateDescriptor, DeleteTemplateRequestParameters, IndicesOperationResponse>(
@@ -74,8 +112,16 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IIndicesOperationResponse> DeleteTemplateAync(string name,
-			Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null)
+		public IIndicesOperationResponse DeleteTemplate(IDeleteTemplateRequest deleteTemplateRequest)
+		{
+			return this.Dispatch<IDeleteTemplateRequest, DeleteTemplateRequestParameters, IndicesOperationResponse>(
+				deleteTemplateRequest,
+				(p, d) => this.RawDispatch.IndicesDeleteTemplateDispatch<IndicesOperationResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IIndicesOperationResponse> DeleteTemplateAync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null)
 		{
 			deleteTemplateSelector = deleteTemplateSelector ?? (s => s);
 			return this.DispatchAsync
@@ -84,6 +130,17 @@ namespace Nest
 					(p, d) => this.RawDispatch.IndicesDeleteTemplateDispatchAsync<IndicesOperationResponse>(p)
 				);
 		}
+
+		/// <inheritdoc />
+		public Task<IIndicesOperationResponse> DeleteTemplateAync(IDeleteTemplateRequest deleteTemplateRequest)
+		{
+			return this.DispatchAsync<IDeleteTemplateRequest, DeleteTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+					deleteTemplateRequest,
+					(p, d) => this.RawDispatch.IndicesDeleteTemplateDispatchAsync<IndicesOperationResponse>(p)
+				);
+		}
+
+
 
 		private TemplateResponse DeserializeTemplateResponse(
 			IElasticsearchResponse response,

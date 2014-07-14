@@ -85,7 +85,7 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 					.MatchAll()
 					.Preference("_primary")
 					.Routing("customvalue1")
-					.SearchType(SearchTypeOptions.DfsQueryAndFetch))
+					.SearchType(SearchType.DfsQueryAndFetch))
 				.Search<Person>(s => s.Query(q=>q.Term("THIS FIELD DOES NOT EXIST", "BOOM")))
 			);
 			var status = result.ConnectionStatus;

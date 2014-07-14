@@ -44,7 +44,6 @@ namespace Nest.Tests.Unit.Search.Facets
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")
         .FacetTerm(q=>q
-          .Scope("some_nested_query")
           .OnField(f=>f.Name)
           .FacetFilter(ff=>ff.Exists(f=>f.Name))
         );
@@ -54,7 +53,6 @@ namespace Nest.Tests.Unit.Search.Facets
           facets :  {
             ""name"" :  
             {
-              _scope: ""some_nested_query"",
               terms: {
                 field: ""name""
               },

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
@@ -73,15 +74,18 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var connection = fake.Resolve<IConnection>();
 				var sniffCall = FakeCalls.Sniff(fake, config, uris);
 				
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
 				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.Returns(FakeResponse.Ok(config));
 
 				var client1 = fake.Resolve<ElasticsearchClient>();
-				client1.Info(); //info call 1
-				client1.Info(); //info call 2
-				client1.Info(); //info call 3
-				client1.Info(); //info call 4
-				client1.Info(); //info call 5
+				var result = client1.Info(); //info call 1
+				result = client1.Info(); //info call 2
+				result = client1.Info(); //info call 3
+				result = client1.Info(); //info call 4
+				result = client1.Info(); //info call 5
 
 				sniffCall.MustHaveHappened(Repeated.Exactly.Twice);
 				nowCall.MustHaveHappened(Repeated.Exactly.Times(8));
@@ -111,6 +115,10 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					.ExposeRawResponse();
 				fake.Provide<IConnectionConfigurationValues>(config);
 				var transport = FakeCalls.ProvideDefaultTransport(fake, dateTimeProvider);
+
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
 				var sniffCall = FakeCalls.Sniff(fake, config, uris);
 				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.ReturnsNextFromSequence(
@@ -123,11 +131,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				);
 
 				var client1 = fake.Resolve<ElasticsearchClient>();
-				client1.Info(); //info call 1
-				client1.Info(); //info call 2
-				client1.Info(); //info call 3
-				client1.Info(); //info call 4
-				client1.Info(); //info call 5
+				var result = client1.Info(); //info call 1
+				result = client1.Info(); //info call 2
+				result = client1.Info(); //info call 3
+				result = client1.Info(); //info call 4
+				result = client1.Info(); //info call 5
 
 				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
 				nowCall.MustHaveHappened(Repeated.Exactly.Times(7));
@@ -161,6 +169,9 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					new Uri("http://localhost:9200"),
 					new Uri("http://localhost:9201")
 				};
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
 				var sniffCall = FakeCalls.Sniff(fake, config, sniffNewNodes);
 				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.ReturnsNextFromSequence(
@@ -234,7 +245,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					FakeResponse.OkAsync(config), //info 8
 					FakeResponse.OkAsync(config) //info 9
 				);
-				getCall.Invokes((Uri u, IRequestConnectionConfiguration o) => seenNodes.Add(u));
+				getCall.Invokes((Uri u, IRequestConfiguration o) => seenNodes.Add(u));
 
 				var client1 = fake.Resolve<ElasticsearchClient>();
 				await client1.InfoAsync(); //info call 1
@@ -306,7 +317,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					FakeResponse.Ok(config), //info 8
 					FakeResponse.Ok(config) //info 9
 				);
-				getCall.Invokes((Uri u, IRequestConnectionConfiguration o) => seenNodes.Add(u));
+				getCall.Invokes((Uri u, IRequestConfiguration o) => seenNodes.Add(u));
 
 				var client1 = fake.Resolve<ElasticsearchClient>();
 				client1.Info(); //info call 1

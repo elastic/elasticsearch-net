@@ -9,6 +9,7 @@ using Autofac;
 using Autofac.Core.Activators.Reflection;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
@@ -167,15 +168,16 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				//set up our GET to / to return 4 503's followed by a 200
 				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._, A<IRequestConfiguration>._));
 				getCall.ReturnsNextFromSequence(
-					_bad,
+					_ok
+				);
+				var transport = this.ProvideTransport(fake);
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.ReturnsNextFromSequence(
 					_bad,
 					_bad,
 					_bad,
 					_ok
 				);
-				var transport = this.ProvideTransport(fake);
-				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
-				pingCall.Returns(_ok);
 				//setup client
 				var client = fake.Resolve<ElasticsearchClient>();
 				
@@ -184,7 +186,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				Assert.DoesNotThrow(()=> client.Info());
 
 				//original call + 4 retries == 5
-				getCall.MustHaveHappened(Repeated.Exactly.Times(5));
+				getCall.MustHaveHappened(Repeated.Exactly.Once);
 				//ping must have been send out 4 times to the 4 nodes being used for the first time
 				pingCall.MustHaveHappened(Repeated.Exactly.Times(4));
 
@@ -232,6 +234,8 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				
 				//Since we always get a 503 we should see an out of nodes exception
 				Assert.Throws<MaxRetryException>(()=> client.Info());
+
+				pingCall.MustHaveHappened(Repeated.Exactly.Times(4));
 
 				//The call should be tried on all the nodes
 				getCall.MustHaveHappened(Repeated.Exactly.Times(4));

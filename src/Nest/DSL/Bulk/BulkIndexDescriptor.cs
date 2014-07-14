@@ -6,32 +6,66 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class BulkIndexDescriptor<T> : BaseBulkOperation
-		 where T : class
+	public interface IIndexOperation<T> : IBulkOperation
 	{
-
-		internal override Type _ClrType { get { return typeof(T); } }
-		internal override string _Operation { get { return "index"; } }
-		internal override object _Object { get; set; }
-
 		[JsonProperty(PropertyName = "_percolate")]
-		internal string _Percolate { get; set; }
+		string Percolate { get; set; }
 
-		internal override string GetIdForObject(ElasticInferrer inferrer)
+		T Document { get; set; }
+	}
+
+	public class BulkIndexOperation<T> : BulkOperationBase, IIndexOperation<T>
+		where T : class
+	{
+		public BulkIndexOperation(T document)
 		{
-			if (!this._Id.IsNullOrEmpty())
-				return this._Id;
-			
-			return inferrer.Id((T)_Object);
-
+			this.Document = document;
 		}
 
+		public override string Operation { get { return "index"; } }
+
+		public override Type ClrType { get { return typeof(T); } }
+
+		public override object GetBody()
+		{
+			return this.Document;
+		}
+		public override string GetIdForOperation(ElasticInferrer inferrer)
+		{
+			return this.Id ?? inferrer.Id(this.Document);
+		}
+		public string Percolate { get; set; }
+
+		public T Document { get; set; }
+	}
+
+
+	public class BulkIndexDescriptor<T> : BulkOperationDescriptorBase, IIndexOperation<T> 
+		where T : class
+	{
+		private IIndexOperation<T> Self { get { return this; } } 
+
+		protected override string _Operation { get { return "index"; } }
+		protected override Type _ClrType { get { return typeof(T); } }
+		
+		string IIndexOperation<T>.Percolate { get; set; }
+		T IIndexOperation<T>.Document { get; set; }
+
+		protected override object _GetBody()
+		{
+			return Self.Document;
+		}
+
+		protected override string GetIdForOperation(ElasticInferrer inferrer)
+		{
+			return Self.Id ?? inferrer.Id(Self.Document);
+		}
 		/// <summary>
 		/// Manually set the index, default to the default index or the fixed index set on the bulk operation
 		/// </summary>
 		public BulkIndexDescriptor<T> Index(string index)
 		{
-			this._Index = index;
+			Self.Index = index;
 			return this;
 		}
 		/// <summary>
@@ -40,7 +74,7 @@ namespace Nest
 		/// </summary>
 		public BulkIndexDescriptor<T> Type(string type)
 		{
-			this._Type = type;
+			Self.Type = type;
 			return this;
 		}
 
@@ -49,7 +83,7 @@ namespace Nest
 		/// </summary>
 		public BulkIndexDescriptor<T> Type(Type type)
 		{
-			this._Type = type;
+			Self.Type = type;
 			return this;
 		}
 
@@ -66,53 +100,47 @@ namespace Nest
 		/// </summary>
 		public BulkIndexDescriptor<T> Id(string id)
 		{
-			this._Id = id;
+			Self.Id = id;
 			return this;
 		}
 
 		/// <summary>
 		/// The object to index, if id is not manually set it will be inferred from the object
 		/// </summary>
-		public BulkIndexDescriptor<T> Object(T @object)
+		public BulkIndexDescriptor<T> Document(T @object)
 		{
-			this._Object = @object;
+			Self.Document = @object;
 			return this;
 		}
 
 
 		public BulkIndexDescriptor<T> Version(string version)
 		{
-			this._Version = version; 
+			Self.Version = version; 
 			return this;
 		}
 
-		public BulkIndexDescriptor<T> VersionType(string versionType)
+		public BulkIndexDescriptor<T> VersionType(VersionType versionType)
 		{
-			this._VersionType = versionType;
-			return this;
-		}
-
-		public BulkIndexDescriptor<T> VersionType(VersionTypeOptions versionType)
-		{
-			this._VersionType = versionType.GetStringValue();
+			Self.VersionType = versionType;
 			return this;
 		}
 
 		public BulkIndexDescriptor<T> Routing(string routing)
 		{
-			this._Routing = routing; 
+			Self.Routing = routing; 
 			return this;
 		}
 
 		public BulkIndexDescriptor<T> Percolate(string percolate)
 		{
-			this._Percolate = percolate; 
+			Self.Percolate = percolate; 
 			return this;
 		}
 
 		public BulkIndexDescriptor<T> Parent(string parent)
 		{
-			this._Parent = parent;
+			Self.Parent = parent;
 			return this;
 		}
 
@@ -124,14 +152,15 @@ namespace Nest
 
 		public BulkIndexDescriptor<T> Timestamp(long timestamp)
 		{
-			this._Timestamp = timestamp; 
+			Self.Timestamp = timestamp; 
 			return this;
 		}
 
 		public BulkIndexDescriptor<T> Ttl(string ttl)
 		{
-			this._Ttl = ttl; 
+			Self.Ttl = ttl; 
 			return this;
 		}
+
 	}
 }

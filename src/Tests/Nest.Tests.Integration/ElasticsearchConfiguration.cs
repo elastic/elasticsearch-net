@@ -7,11 +7,23 @@ namespace Nest.Tests.Integration
 {
 	public static class ElasticsearchConfiguration
 	{
-		public static readonly string DefaultIndex = "nest-test-data-" + Process.GetCurrentProcess().Id.ToString();
+		public static readonly string DefaultIndex = Test.Default.DefaultIndex + "-" + Process.GetCurrentProcess().Id.ToString();
+
+		private static Version _currentVersion;
+		public static Version CurrentVersion
+		{
+			get
+			{
+				if (_currentVersion == null)
+					_currentVersion = GetCurrentVersion();
+
+				return _currentVersion;
+			}
+		}
 
 		public static Uri CreateBaseUri(int? port = null)
 		{
-			var host = "localhost";
+			var host = Test.Default.Host;
 			if (port == null && Process.GetProcessesByName("fiddler").HasAny())
 				host = "ipv4.fiddler";
 
@@ -22,41 +34,26 @@ namespace Nest.Tests.Integration
 		{
 
 			return new ConnectionSettings(hostOverride ?? CreateBaseUri(port), ElasticsearchConfiguration.DefaultIndex)
-				.SetMaximumAsyncConnections(20)
+				.SetMaximumAsyncConnections(Test.Default.MaximumAsyncConnections)
 				.UsePrettyResponses()
 				.ExposeRawResponse();
 		}
 
-
-		public static readonly Lazy<ElasticClient> _client = new Lazy<ElasticClient>(()=>new ElasticClient(Settings()));
-		public static ElasticClient Client { get { return _client.Value;  } }
-		
-		public static readonly Lazy<ElasticClient> _clientNoRawResponse = new Lazy<ElasticClient>(
-			() => new ElasticClient(Settings()
-				.ExposeRawResponse(false)
-			)
-		);
-		public static ElasticClient ClientNoRawResponse { get { return _clientNoRawResponse.Value;  } }
-		
-		public static readonly Lazy<ElasticClient> _clientThatTrows = new Lazy<ElasticClient>(
-			() => new ElasticClient(Settings()
-				.ThrowOnElasticsearchServerExceptions()
-			)
-		);
-		public static ElasticClient ClientThatThrows { get { return _clientThatTrows.Value;  } }
-		
-		public static readonly Lazy<ElasticClient> _thriftClient = new Lazy<ElasticClient>(
-			() => new ElasticClient(
-				Settings(9500), 
-				new ThriftConnection(Settings(9500))
-			)
-		);
-		public static ElasticClient ThriftClient { get { return _thriftClient.Value;  } }
-
+		public static readonly ElasticClient Client = new ElasticClient(Settings().EnableCompressedResponses());
+		public static readonly ElasticClient ClientNoRawResponse = new ElasticClient(Settings().ExposeRawResponse(false));
+		public static readonly ElasticClient ClientThatTrows = new ElasticClient(Settings().ThrowOnElasticsearchServerExceptions());
+		public static readonly ElasticClient ThriftClient = new ElasticClient(Settings(9500), new ThriftConnection(Settings(9500)));
 		public static string NewUniqueIndexName()
 		{
 			return DefaultIndex + "_" + Guid.NewGuid().ToString();
 		}
 
+		public static Version GetCurrentVersion()
+		{
+			dynamic info = Client.Raw.Info().Response;
+			var version = Version.Parse(info.version.number);
+
+			return version;
+		}
 	}
 }

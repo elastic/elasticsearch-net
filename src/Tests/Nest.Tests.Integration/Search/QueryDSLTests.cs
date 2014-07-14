@@ -92,7 +92,7 @@ namespace Nest.Tests.Integration.Search
 				.SortAscending(f => f.LOC)
 				.SortDescending(f => f.Name)
 				.Query(q => q
-					.Wildcard(f => f.Name, "elasticsearch.*", Boost: 1.0, Rewrite: RewriteMultiTerm.scoring_boolean)
+					.Wildcard(f => f.Name, "elasticsearch.*", Boost: 1.0, Rewrite: RewriteMultiTerm.ScoringBoolean)
 				)
 			);
 			Assert.NotNull(results);
@@ -143,7 +143,7 @@ namespace Nest.Tests.Integration.Search
 
 			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Query(q => q.MatchAll())
-				.SuggestTerm("mySuggest", m => m.SuggestMode(SuggestModeOptions.Always).Text(wrongCountry).Size(1).OnField("country"))
+				.SuggestTerm("mySuggest", m => m.SuggestMode(SuggestMode.Always).Text(wrongCountry).Size(1).OnField("country"))
 			);
 
 			Assert.NotNull(results);

@@ -46,9 +46,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AppDomainToolkit">
-      <HintPath>..\..\..\dep\AppDomainToolkit.1.0.4.1\lib\net\AppDomainToolkit.dll</HintPath>
-    </Reference>
     <Reference Include="AutoPoco">
       <HintPath>..\..\..\dep\AutoPoco.1.0.0.0\lib\AutoPoco.dll</HintPath>
     </Reference>
@@ -95,6 +92,7 @@
     <Compile Include="Aggregations\MetricAggregationTests.cs" />
     <Compile Include="Aggregations\TermsAggregationTests.cs" />
     <Compile Include="Aggregations\ParseResponseItemsTests.cs" />
+    <Compile Include="Attributes\SkipVersionAttribute.cs" />
     <Compile Include="Cluster\GetSettingsTests.cs" />
     <Compile Include="Cluster\PutSettingsTests.cs" />
     <Compile Include="Connection\Failover\SniffTests.cs" />
@@ -112,6 +110,9 @@
     <Compile Include="DebugTests\MemoryUsageTests.cs" />
     <Compile Include="ElasticsearchConfiguration.cs" />
     <Compile Include="Core\IndexTests.cs" />
+    <Compile Include="Failover\FailoverSniffOnFaultTests.cs" />
+    <Compile Include="Failover\FailoverSniffOnStartupTests.cs" />
+    <Compile Include="Failover\FailoverPingTests.cs" />
     <Compile Include="Help\AliasTests.cs" />
     <Compile Include="Index\ReindexTests.cs" />
     <Compile Include="Index\IndexUsingUrlIdTests.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="RawCalls\DynamicNullTests.cs" />
     <Compile Include="Mapping\NotAnalyzedTest.cs" />
     <Compile Include="RawCalls\ReturnTypesTest.cs" />
+    <Compile Include="Reproduce\Reproduce723Tests.cs" />
     <Compile Include="Reproduce\Reproduce643Tests.cs" />
     <Compile Include="Reproduce\Reproduce628Tests.cs" />
     <Compile Include="Reproduce\Reproduce487Tests.cs" />
@@ -178,6 +180,8 @@
     <Compile Include="Reproduce\Reproduce211Tests.cs" />
     <Compile Include="Reproduce\Reproduce654Tests.cs" />
     <Compile Include="Reproduce\Reproduce659Tests.cs" />
+    <Compile Include="Reproduce\Reproduce730Tests.cs" />
+    <Compile Include="Reproduce\Reproduce732Tests.cs" />
     <Compile Include="Reproduce\ReproduceConnectionStallsTests.cs" />
     <Compile Include="Search\FieldTests\FieldsTest.cs" />
     <Compile Include="Search\NamedFilter\NamedFilterTests.cs" />
@@ -206,14 +210,18 @@
     <Compile Include="Search\QueryResponseMapperTests.cs" />
     <Compile Include="Search\ScriptFields\ScriptFieldsTest.cs" />
     <Compile Include="Search\Scroll\ScrollTests.cs" />
-    <Compile Include="Search\SearchType\SearchTypeScanTests.cs" />
-    <Compile Include="Search\SearchType\SearchTypeCountTests.cs" />
-    <Compile Include="Search\SearchType\SearchTypeTests.cs" />
+    <Compile Include="Search\SearchTypeTests\SearchTypeScanTests.cs" />
+    <Compile Include="Search\SearchTypeTests\SearchTypeCountTests.cs" />
+    <Compile Include="Search\SearchTypeTests\SearchTypeTests.cs" />
     <Compile Include="Search\SubClassSupport\SubClassSupportTests.cs" />
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />
-    <Compile Include="Startup\StartupTests.cs" />
     <Compile Include="Template\TemplateTests.cs" />
+    <Compile Include="Test.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Test.settings</DependentUpon>
+    </Compile>
     <Compile Include="Warmers\IndicesWarmersTests.cs" />
     <Compile Include="Warmers\WarmersTests.cs" />
   </ItemGroup>
@@ -240,6 +248,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Test.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Test.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="LowLevel\" />

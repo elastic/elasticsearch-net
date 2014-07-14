@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -28,7 +27,7 @@ namespace Nest
 
 	}
 	
-	public class ClusterSettingsRequest : BaseRequest<ClusterSettingsRequestParameters>, IClusterSettingsRequest
+	public partial class ClusterSettingsRequest : BaseRequest<ClusterSettingsRequestParameters>, IClusterSettingsRequest
 	{
 		public IDictionary<string, object> Persistent { get; set; }
 

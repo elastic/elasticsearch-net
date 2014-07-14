@@ -11,21 +11,13 @@ namespace Elasticsearch.Net.Integration.Yaml.CatShards1
 {
 	public partial class CatShards1YamlTests
 	{	
-	
-		public class CatShards110BasicYamlBase : YamlTestsBase
-		{
-			public CatShards110BasicYamlBase() : base()
-			{	
-
-			}
-		}
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TestCatShardsOutput2Tests : CatShards110BasicYamlBase
+		public class TestCatShardsOutput1Tests : YamlTestsBase
 		{
 			[Test]
-			public void TestCatShardsOutput2Test()
+			public void TestCatShardsOutput1Test()
 			{	
 
 				//do cat.shards 
@@ -35,13 +27,14 @@ namespace Elasticsearch.Net.Integration.Yaml.CatShards1
 				this.IsMatch(this._status, @"/^$/
 ");
 
-				//do index 
+				//do indices.create 
 				_body = new {
-					foo= "bar"
+					settings= new {
+						number_of_shards= "5",
+						number_of_replicas= "1"
+					}
 				};
-				this.Do(()=> _client.Index("index1", "type1", "1", _body, nv=>nv
-					.AddQueryString("refresh", @"true")
-				));
+				this.Do(()=> _client.IndicesCreate("index1", _body));
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
@@ -58,6 +51,7 @@ namespace Elasticsearch.Net.Integration.Yaml.CatShards1
 				//do indices.create 
 				_body = new {
 					settings= new {
+						number_of_shards= "5",
 						number_of_replicas= "0"
 					}
 				};
@@ -66,6 +60,7 @@ namespace Elasticsearch.Net.Integration.Yaml.CatShards1
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.AddQueryString("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_relocating_shards", 0)
 				));
 
 				//do cat.shards 

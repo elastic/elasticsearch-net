@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Connection\BuildInResponseAsyncTests.cs" />
     <Compile Include="Connection\BuildInResponseTests.cs" />
+    <Compile Include="Connection\NoRetryOnServerExceptionTests.cs" />
     <Compile Include="Connection\ElasticsearchServerExceptions.cs" />
     <Compile Include="Connection\NoRetryTests.cs" />
     <Compile Include="Stubs\FakeCalls.cs" />

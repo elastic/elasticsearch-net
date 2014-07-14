@@ -1,22 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesDelete")]
-	public partial class DeleteIndexDescriptor : IndicesOptionalPathDescriptor<DeleteIndexDescriptor, DeleteIndexRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IDeleteIndexRequest : IIndicesOptionalExplicitAllPath<DeleteIndexRequestParameters> { }
+
+	internal static class DeleteIndexPathInfo
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo)
+		public static void Update(ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo, IDeleteIndexRequest request)
 		{
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
 		}
+	}
+	
+	public partial class DeleteIndexRequest : IndicesOptionalExplicitAllPathBase<DeleteIndexRequestParameters>, IDeleteIndexRequest
+	{
+
+		public DeleteIndexRequest(IEnumerable<IndexNameMarker> indices)
+		{
+			this.Indices = indices;
+			this.AllIndices = false;
+		}
+		public DeleteIndexRequest(IndexNameMarker index)
+		{
+			this.Indices = new [] { index };
+		}
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo)
+		{
+			DeleteIndexPathInfo.Update(pathInfo, this);
+		}
+	}
+	[DescriptorFor("IndicesDelete")]
+	public partial class DeleteIndexDescriptor : IndicesOptionalExplicitAllPathDescriptor<DeleteIndexDescriptor, DeleteIndexRequestParameters>, IDeleteIndexRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo)
+		{
+			DeleteIndexPathInfo.Update(pathInfo, this);
+		}
+
 	}
 }

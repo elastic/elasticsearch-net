@@ -17,9 +17,6 @@ namespace Nest
 		[JsonProperty("type")]
 		TypeNameMarker Type { get; set; }
 
-		[JsonProperty("_scope")]
-		string Scope { get; set; }
-
 		[JsonProperty("score_type")]
 		[JsonConverter(typeof (StringEnumConverter))]
 		ParentScoreType? ScoreType { get; set; }
@@ -39,7 +36,6 @@ namespace Nest
 
 		bool IQuery.IsConditionless { get { return false; } }
 		public TypeNameMarker Type { get; set; }
-		public string Scope { get; set; }
 		public ParentScoreType? ScoreType { get; set; }
 		public IQueryContainer Query { get; set; }
 	}
@@ -47,8 +43,6 @@ namespace Nest
 	public class HasParentQueryDescriptor<T> : IHasParentQuery where T : class
 	{
 		TypeNameMarker IHasParentQuery.Type { get; set; }
-
-		string IHasParentQuery.Scope { get; set; }
 
 		ParentScoreType? IHasParentQuery.ScoreType { get; set; }
 
@@ -74,18 +68,13 @@ namespace Nest
 			((IHasParentQuery)this).Query = querySelector(q);
 			return this;
 		}
-		public HasParentQueryDescriptor<T> Scope(string scope)
-		{
-			((IHasParentQuery)this).Scope = scope;
-			return this;
-		}
 		public HasParentQueryDescriptor<T> Type(string type)
 		{
 			((IHasParentQuery)this).Type = type;
 			return this;
 		}
 
-		public HasParentQueryDescriptor<T> Score(ParentScoreType? scoreType = ParentScoreType.score)
+		public HasParentQueryDescriptor<T> Score(ParentScoreType? scoreType = ParentScoreType.Score)
 		{
 			((IHasParentQuery)this).ScoreType = scoreType;
 			return this;

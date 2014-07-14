@@ -27,7 +27,17 @@ namespace Nest
 		public static IEnumerable<T> SourceMany<T>(this IElasticClient client, IEnumerable<string> ids, string index = null, string type = null)
 			where T : class
 		{
-			var result = client.MultiGet(s => s.GetMany<T>(ids, (gs, i) => gs.Index(index).Type(type)));
+			var result = client.MultiGet(s => s.GetMany<T>(ids, (gs, i) =>
+			{
+				if (!string.IsNullOrEmpty(index))
+					gs.Index(index);
+
+				if (!string.IsNullOrEmpty(type))
+					gs.Type(type);
+
+				return gs;
+			}));
+
 			return result.SourceMany<T>(ids);
 		}
 

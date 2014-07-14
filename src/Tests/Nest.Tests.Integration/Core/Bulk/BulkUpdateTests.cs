@@ -14,7 +14,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 			//Lets first insert some documents with id range 5000-6000
 			var descriptor = new BulkDescriptor();
 			foreach (var i in Enumerable.Range(5000, 1000))
-				descriptor.Index<ElasticsearchProject>(op => op.Object(new ElasticsearchProject { Id = i }));
+				descriptor.Index<ElasticsearchProject>(op => op.Document(new ElasticsearchProject { Id = i }));
 
 			var result = this.Client.Bulk(d=>descriptor);
 			result.Should().NotBeNull();
@@ -26,8 +26,8 @@ namespace Nest.Tests.Integration.Core.Bulk
 			{
 				int id = i;
 				descriptor.Update<ElasticsearchProject, object>(op => op
-					.Object(new ElasticsearchProject { Id = id })
-					.Document(new { name = "SufixedName-" + id})
+					.Document(new ElasticsearchProject { Id = id })
+					.PartialUpdate(new { name = "SufixedName-" + id})
 				);
 			}
 

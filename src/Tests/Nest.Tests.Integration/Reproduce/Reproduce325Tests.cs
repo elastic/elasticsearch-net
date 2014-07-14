@@ -44,6 +44,7 @@ namespace Nest.Tests.Integration.Reproduce
 				})
 				.AddMapping<TechnicalProduct>(m => MapTechnicalProduct(m, indexName)));
 
+			var index = this._client.GetIndexSettings(i=>i.Index(indexName));
 		}
 
 
@@ -63,13 +64,13 @@ namespace Nest.Tests.Integration.Reproduce
 				.Properties(o => o
 					.String(i => i
 						.Name(x => x.Name)
-						.Index(FieldIndexOption.analyzed)
+						.Index(FieldIndexOption.Analyzed)
 						.IndexAnalyzer("autocomplete")
 						.SearchAnalyzer("standard")
 					)
 					.String(i => i
 						.Name(x => x.Brand)
-						.Index(FieldIndexOption.analyzed)
+						.Index(FieldIndexOption.Analyzed)
 						.IndexAnalyzer("autocomplete")
 						.SearchAnalyzer("standard")
 					)

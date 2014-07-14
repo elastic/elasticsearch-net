@@ -17,6 +17,15 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
+		public IShardsOperationResponse Flush(IFlushRequest flushRequest)
+		{
+			return this.Dispatch<IFlushRequest, FlushRequestParameters, ShardsOperationResponse>(
+				flushRequest,
+				(p, d) => this.RawDispatch.IndicesFlushDispatch<ShardsOperationResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
 		public Task<IShardsOperationResponse> FlushAsync(Func<FlushDescriptor, FlushDescriptor> selector)
 		{
 			return this.DispatchAsync<FlushDescriptor, FlushRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
@@ -24,5 +33,15 @@ namespace Nest
 				(p, d) => this.RawDispatch.IndicesFlushDispatchAsync<ShardsOperationResponse>(p)
 			);
 		}
+
+		/// <inheritdoc />
+		public Task<IShardsOperationResponse> FlushAsync(IFlushRequest flushRequest)
+		{
+			return this.DispatchAsync<IFlushRequest, FlushRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
+				flushRequest,
+				(p, d) => this.RawDispatch.IndicesFlushDispatchAsync<ShardsOperationResponse>(p)
+			);
+		}
+
 	}
 }

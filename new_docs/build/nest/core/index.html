@@ -7,7 +7,11 @@ var status = client.Index&lt;Post&gt;(post);
 <pre><code>var status = client.Index(post);
 </code></pre><p>is sufficient. this will index post too <code>/[default index]/posts/12</code>. The typename<code>posts</code> is automatically inferred from the type.</p>
 <p>If you need more control there are plenty of overloads, i.e:</p>
-<pre><code>client.Index(post, &quot;index&quot;, &quot;type&quot;, &quot;id&quot;);
+<pre><code> _client.Index(post, i =&gt; i
+            .Index(index)
+            .Type(type)
+            .Id(post.Id)
+);
 </code></pre><h2 id="asynchronous">Asynchronous</h2>
 <p>Indexing asynchronously is as easy as:</p>
 <pre><code>//IndexAsync returns a Task&lt;ConnectionStatus&gt;

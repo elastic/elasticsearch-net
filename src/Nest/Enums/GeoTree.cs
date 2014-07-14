@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Linq.Expressions;
 
 namespace Nest
 {
+	[JsonConverter(typeof(StringEnumConverter))]
 	public enum GeoTree
 	{
-		geohash,
-		quadtree
+		[EnumMember(Value = "geohash")]
+		Geohash,
+		[EnumMember(Value = "quadtree")]
+		Quadtree
 	}
 }

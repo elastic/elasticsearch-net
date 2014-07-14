@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.MaxExpansions(4)
 					.OnField(p=>p.Name)
 					.PrefixLength(3)
-					.Rewrite(RewriteMultiTerm.constant_score_filter)
+					.Rewrite(RewriteMultiTerm.ConstantScoreFilter)
 					.Value("findme")
 					)
 				);
@@ -28,7 +28,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Fuzziness.Should().Be("2.1");
 			q.MaxExpansions.Should().Be(4);
 			q.Field.Should().Be("name");
-			q.Rewrite.Should().Be(RewriteMultiTerm.constant_score_filter);
+			q.Rewrite.Should().Be(RewriteMultiTerm.ConstantScoreFilter);
 
 			var stringFuzzy = (IStringFuzzyQuery) q;
 			stringFuzzy.PrefixLength.Should().Be(3);

@@ -14,7 +14,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			var q = this.SerializeThenDeserialize(
 				f=>f.FunctionScore,
 				f=>f.FunctionScore(fq=>fq
-					.BoostMode(FunctionBoostMode.avg)
+					.BoostMode(FunctionBoostMode.Average)
 					.Functions(
 						ff => ff.Gauss(x => x.StartedOn, d => d.Scale("42w")),
 						ff => ff.Linear(x => x.FloatValue, d => d.Scale("0.3")),
@@ -23,7 +23,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					)
 					.Query(qq=>Query1)
 					.RandomScore(1337)
-					.ScoreMode(FunctionScoreMode.first)
+					.ScoreMode(FunctionScoreMode.First)
 					.ScriptScore(s=>s
 						.Script("My complex script")
 						.Params(p=>p.Add("param", "paramvalue"))
@@ -32,10 +32,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					)
 				);
 
-			q.BoostMode.Should().Be(FunctionBoostMode.avg);
+			q.BoostMode.Should().Be(FunctionBoostMode.Average);
 			q.RandomScore.Should().NotBeNull();
 			q.RandomScore.Seed.Should().Be(1337);
-			q.ScoreMode.Should().Be(FunctionScoreMode.first);
+			q.ScoreMode.Should().Be(FunctionScoreMode.First);
 			q.ScriptScore.Should().NotBeNull();
 			q.ScriptScore.Lang.Should().Be("mvel");
 			q.ScriptScore.Script.Should().Be("My complex script");

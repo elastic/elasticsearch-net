@@ -13,15 +13,13 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			var nestedFilter = this.SerializeThenDeserialize(cacheName, cacheKey, cache, 
 				f=>f.Nested,
 				f=>f.Nested(n=>n
-					.Scope("my-scope")
-					.Score(NestedScore.max)
+					.Score(NestedScore.Max)
 					.Path(p=>p.Followers[0])
 					.Query(q=>q.Term(p=>p.Followers[0].FirstName,"elasticsearch.pm"))
 					)
 				);
 			nestedFilter.Path.Should().Be("followers");
-			nestedFilter.Scope.Should().Be("my-scope");
-			nestedFilter.Score.Should().Be(NestedScore.max);
+			nestedFilter.Score.Should().Be(NestedScore.Max);
 			var query = nestedFilter.Query;
 			query.Should().NotBeNull();
 			var termQuery = query.Term;

@@ -16,13 +16,13 @@ namespace Nest.Tests.Integration
 		public void TestSettings()
 		{
 			Assert.AreEqual(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex);
-			Assert.AreEqual(this.Settings.MaximumAsyncConnections, 20);
+			Assert.AreEqual(this._settings.MaximumAsyncConnections, Test.Default.MaximumAsyncConnections);
 		}
 		
 		[Test]
 		public void TestConnectSuccess()
 		{
-			var rootNodeInfo = Client.RootNodeInfo();
+			var rootNodeInfo = _client.RootNodeInfo();
 			Assert.True(rootNodeInfo.IsValid);
 			Assert.True(rootNodeInfo.ConnectionStatus.Success);
 		}
@@ -67,7 +67,7 @@ namespace Nest.Tests.Integration
 		[Test]
 		public void TestConnectSuccessWithUri()
 		{
-			var settings = new ConnectionSettings(ElasticsearchConfiguration.CreateBaseUri(), "index");
+			var settings = new ConnectionSettings(Test.Default.Uri, "index");
 			var client = new ElasticClient(settings);
 			var result = client.RootNodeInfo();
 
@@ -78,12 +78,12 @@ namespace Nest.Tests.Integration
 		[Test]
 		public void ConnectUsingRawClient()
 		{
-			var result = this.Client.Raw.Info();
+			var result = this._client.Raw.Info();
 			Assert.IsTrue(result.Success);
 			StringAssert.EndsWith(":9200/?pretty=true", result.RequestUrl);
 
 
-			var resultWithQueryString = this.Client.Raw.Info(qs => qs.AddQueryString("hello", "world"));
+			var resultWithQueryString = this._client.Raw.Info(qs => qs.AddQueryString("hello", "world"));
 			Assert.IsTrue(resultWithQueryString.Success);
 
 			StringAssert.EndsWith(":9200/?hello=world&pretty=true", resultWithQueryString.RequestUrl);
@@ -92,8 +92,8 @@ namespace Nest.Tests.Integration
 		[Test]
 		public void ConnectUsingRawClientComplexCall()
 		{
-			var result = this.Client.Raw.ClusterHealth(s => s
-				.Level(LevelOptions.Indices)
+			var result = this._client.Raw.ClusterHealth(s => s
+				.Level(Level.Indices)
 				.Local(true)
 				.WaitForActiveShards(1)
 			);

@@ -6,7 +6,7 @@ namespace Nest.Resolvers.Converters
 {
 	public class UnixDateTimeConverter : DateTimeConverterBase
 	{
-		private static readonly DateTime EpochUtc = new DateTime(1970, 1, 1);
+		private static readonly DateTime EpochUtc = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc) ;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{

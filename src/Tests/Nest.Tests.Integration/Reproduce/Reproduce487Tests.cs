@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Reproduce
 		public void NoSearchResults()
 		{
 			var index = ElasticsearchConfiguration.NewUniqueIndexName();
-			var x = this.Client.CreateIndex(index, s => s
+			var x = this._client.CreateIndex(index, s => s
 				.AddMapping<ElasticsearchProject>(m => m
 					.Properties(pp=>pp
 						.String(sm=>sm.Name(p=>p.Name).Store())
@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Reproduce
 			);
 			Assert.IsTrue(x.Acknowledged, x.ConnectionStatus.ToString());
 
-			var typeMapping = this.Client.GetMapping(i => i.Index(index).Type("elasticsearchprojects"));
+			var typeMapping = this._client.GetMapping<ElasticsearchProject>(i => i.Index(index).Type("elasticsearchprojects"));
 			typeMapping.Should().NotBeNull();
 			var stringMapping = typeMapping.Mapping.Properties["name"] as StringMapping;
 			stringMapping.Should().NotBeNull();

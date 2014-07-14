@@ -52,9 +52,6 @@ namespace Elasticsearch.Net.Integration.Yaml.Create12
 					.AddQueryString("fields", @"_ttl")
 				));
 
-				//lt _response.fields._ttl: 10000; 
-				this.IsLowerThan(_response.fields._ttl, 10000);
-
 				//gt _response.fields._ttl: 0; 
 				this.IsGreaterThan(_response.fields._ttl, 0);
 
@@ -75,9 +72,6 @@ namespace Elasticsearch.Net.Integration.Yaml.Create12
 					.AddQueryString("fields", @"_ttl")
 				));
 
-				//lt _response.fields._ttl: 100000; 
-				this.IsLowerThan(_response.fields._ttl, 100000);
-
 				//gt _response.fields._ttl: 0; 
 				this.IsGreaterThan(_response.fields._ttl, 0);
 
@@ -97,9 +91,6 @@ namespace Elasticsearch.Net.Integration.Yaml.Create12
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.AddQueryString("fields", @"_ttl")
 				));
-
-				//lt _response.fields._ttl: 20000; 
-				this.IsLowerThan(_response.fields._ttl, 20000);
 
 				//gt _response.fields._ttl: 0; 
 				this.IsGreaterThan(_response.fields._ttl, 0);

@@ -9,10 +9,10 @@ namespace Nest
 		[JsonProperty("index"), JsonConverter(typeof(StringEnumConverter))]
 		public NonStringIndexOption? Index { get; internal set; }
 
-		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
+		[JsonProperty("store")]
 		public bool? Store { get; internal set; }
 
-		public TypeFieldMapping SetIndexed(NonStringIndexOption index = NonStringIndexOption.analyzed)
+		public TypeFieldMapping SetIndexed(NonStringIndexOption index = NonStringIndexOption.Analyzed)
 		{
 			this.Index = index;
 			return this;

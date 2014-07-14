@@ -24,7 +24,6 @@ namespace Nest.Tests.Integration.Reproduce
 		public void CreateIndexShouldNotThrowNullReference()
 		{
 			var settings = new IndexSettings();
-			settings.Similarity = new SimilaritySettings();
 			settings.NumberOfReplicas = 1;
 			settings.NumberOfShards = 5;
 			settings.Settings.Add("index.refresh_interval", "10s");

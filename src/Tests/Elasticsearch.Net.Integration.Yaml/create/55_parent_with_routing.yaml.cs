@@ -30,6 +30,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Create9
 						}
 					},
 					settings= new {
+						number_of_shards= "5",
 						number_of_replicas= "0"
 					}
 				};

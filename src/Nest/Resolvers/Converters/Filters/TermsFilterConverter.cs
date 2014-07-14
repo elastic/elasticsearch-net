@@ -134,7 +134,7 @@ namespace Nest.Resolvers.Converters.Filters
 			}
 			if (filter == null) return null;
 			if (execution != null)
-				filter.Execution = Enum.Parse(typeof(TermsExecution), execution) as TermsExecution?;
+				filter.Execution = execution.ToEnum<TermsExecution>();
 			filter.Field = field;
 			filter.Cache = cache;
 			filter.CacheKey = cacheKey;
