@@ -369,7 +369,7 @@
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="RawDispatch.generated.cs" />
     <Compile Include="RawDispatch.cs" />
-    <Compile Include="Domain\DSL\GeoIndexedShapeVector.cs" />
+    <Compile Include="Domain\DSL\GeoIndexedShape.cs" />
     <Compile Include="Domain\Mapping\Descriptors\CompletionMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Types\CompletionMapping.cs" />
     <Compile Include="Domain\Responses\RootVersionInfoResponse.cs" />

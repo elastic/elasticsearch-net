@@ -16,7 +16,7 @@ namespace Nest
 	{
 
 		[JsonProperty("indexed_shape")]
-		GeoIndexedShapeVector IndexedShape { get; set; }
+		GeoIndexedShape IndexedShape { get; set; }
 	}
 
 	public class GeoIndexedShapeFilter : PlainFilter, IGeoIndexedShapeFilter
@@ -28,7 +28,7 @@ namespace Nest
 
 		public PropertyPathMarker Field { get; set; }
 
-		public GeoIndexedShapeVector IndexedShape { get; set; }
+		public GeoIndexedShape IndexedShape { get; set; }
 	}
 
 	public class GeoIndexedShapeFilterDescriptor : FilterBase, IGeoIndexedShapeFilter
@@ -43,7 +43,7 @@ namespace Nest
 		}
 
 		PropertyPathMarker IFieldNameFilter.Field { get; set; }
-		GeoIndexedShapeVector IGeoIndexedShapeFilter.IndexedShape { get; set; }
+		GeoIndexedShape IGeoIndexedShapeFilter.IndexedShape { get; set; }
 
 		public GeoIndexedShapeFilterDescriptor Lookup<T>(string field, string id, string index = null, string type = null)
 		{
@@ -52,7 +52,7 @@ namespace Nest
 
 		private GeoIndexedShapeFilterDescriptor _SetShape<T>(PropertyPathMarker field, string id, string index, string type)
 		{
-			((IGeoIndexedShapeFilter)this).IndexedShape = new GeoIndexedShapeVector
+			((IGeoIndexedShapeFilter)this).IndexedShape = new GeoIndexedShape
 			{
 				Field = field,
 				Id = id,

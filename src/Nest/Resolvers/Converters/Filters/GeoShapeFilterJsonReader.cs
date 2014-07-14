@@ -63,11 +63,11 @@ namespace Nest.Resolvers.Converters.Filters
 						else if (indexedShape != null)
 						{
 							IGeoIndexedShapeFilter f = new GeoIndexedShapeFilterDescriptor();
-							f.IndexedShape = new GeoIndexedShapeVector();
+							f.IndexedShape = new GeoIndexedShape();
 							var id = indexedShape["id"];
 							var index = indexedShape["index"];
 							var type = indexedShape["type"];
-							var shapeField = indexedShape["shape_field_name"];
+							var shapeField = indexedShape["path"];
 
 							if (id != null) f.IndexedShape.Id = id.Value<string>();
 							if (index != null) f.IndexedShape.Index = index.Value<string>();
