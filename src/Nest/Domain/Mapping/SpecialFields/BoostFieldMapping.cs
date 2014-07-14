@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Nest.Resolvers;
 using Newtonsoft.Json;
-using Elasticsearch.Net;
 
 namespace Nest
 {

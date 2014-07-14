@@ -1,19 +1,15 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.Connection.Thrift.Protocol;
 using Elasticsearch.Net.Connection.Thrift.Transport;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Providers;
 
 namespace Elasticsearch.Net.Connection.Thrift
 {

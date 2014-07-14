@@ -1,5 +1,4 @@
 ﻿using Nest.Resolvers;
-using Elasticsearch.Net;
 
 namespace Nest
 {

@@ -1,5 +1,3 @@
-using Nest.Resolvers;
-
 namespace Nest
 {
 	public interface IFacetRequest

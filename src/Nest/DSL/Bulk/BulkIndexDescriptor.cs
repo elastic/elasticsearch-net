@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using Nest.Resolvers;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 

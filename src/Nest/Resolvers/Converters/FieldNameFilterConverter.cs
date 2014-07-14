@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using Elasticsearch.Net;
-using Nest.DSL.Query.Behaviour;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;

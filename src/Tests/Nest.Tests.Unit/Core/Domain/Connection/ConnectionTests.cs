@@ -1,5 +1,4 @@
-﻿using System.Runtime.Remoting.Channels;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using NUnit.Framework;
 using System;

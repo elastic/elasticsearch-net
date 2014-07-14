@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using Elasticsearch.Net;
 using FluentAssertions;
 using NUnit.Framework;

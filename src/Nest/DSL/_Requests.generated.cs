@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Linq.Expressions;
 using Elasticsearch.Net;
 
 ///This file contains all the typed querystring parameters that are generated of the client spec.

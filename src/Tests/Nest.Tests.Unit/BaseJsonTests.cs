@@ -1,22 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using NUnit.Framework;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-using Nest;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using Nest.Tests.MockData.Domain;
 using System.Reflection;
 using System.IO;
-using Moq;
-using PurifyNet;
 
 namespace Nest.Tests.Unit
 {

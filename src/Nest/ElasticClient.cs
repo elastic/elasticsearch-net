@@ -2,17 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Connection.Configuration;
-using Nest.Resolvers.Converters;
-using Nest.SerializationExtensions;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Nest.Resolvers;
 
 namespace Nest
 {

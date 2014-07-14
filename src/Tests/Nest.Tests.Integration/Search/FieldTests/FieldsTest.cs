@@ -1,5 +1,4 @@
-﻿using System.Data.Common;
-using FluentAssertions;
+﻿using FluentAssertions;
 
 namespace Nest.Tests.Integration.Search.FieldTests
 {

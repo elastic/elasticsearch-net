@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
-using Nest.Resolvers;
 
 namespace Nest
 {
