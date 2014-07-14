@@ -29,13 +29,13 @@ namespace StartupTests
 			using (var context = AppDomainContext.Create(_setupInfo))
 			{
 				var result = RemoteFunc.Invoke(context.Domain,
-					() => new NoWarmupRoutine(c=>c.RootNodeInfo())
+					() => new CallRoutine(c=>c.RootNodeInfo())
 				);
 
 				result.ElapsedMilliseconds.Should().BeGreaterOrEqualTo(100);
 				
 				result = RemoteFunc.Invoke(context.Domain,
-					() => new NoWarmupRoutine(c=>c.RootNodeInfo())
+					() => new CallRoutine(c=>c.RootNodeInfo())
 				);
 
 				result.ElapsedMilliseconds.Should().BeLessOrEqualTo(5);
@@ -48,7 +48,7 @@ namespace StartupTests
 			using (var context = AppDomainContext.Create(_setupInfo))
 			{
 				var result = RemoteFunc.Invoke(context.Domain,
-					() => new NoWarmupRoutine(c=>c.RootNodeInfo())
+					() => new CallRoutine(c=>c.RootNodeInfo())
 				);
 
 				result.ElapsedMilliseconds.Should().BeGreaterOrEqualTo(100);
@@ -57,27 +57,13 @@ namespace StartupTests
 			using (var context = AppDomainContext.Create(_setupInfo))
 			{
 				var result = RemoteFunc.Invoke(context.Domain,
-					() => new NoWarmupRoutine(c=>c.RootNodeInfo())
+					() => new CallRoutine(c=>c.RootNodeInfo())
 				);
 
 				result.ElapsedMilliseconds.Should().BeGreaterOrEqualTo(100);
 			}
 		}
 
-		
-		
-		[Test]
-		public void Calling_RootNodeInfo_AfterWarmup_IsFast()
-		{
-			using (var context = AppDomainContext.Create(_setupInfo))
-			{
-				var result = RemoteFunc.Invoke(context.Domain,
-					() => new WarmupRoutine(c=>c.RootNodeInfo())
-				);
-
-				result.ElapsedMilliseconds.Should().BeLessOrEqualTo(20);
-			}
-		}
 		
 		[Test]
 		public void Calling_Search_TwiceInAppDomainIsFast()
@@ -85,13 +71,13 @@ namespace StartupTests
 			using (var context = AppDomainContext.Create(_setupInfo))
 			{
 				var result = RemoteFunc.Invoke(context.Domain,
-					() => new NoWarmupRoutine(c=>c.Search<ElasticsearchProject>(s=>s.MatchAll()))
+					() => new CallRoutine(c=>c.Search<ElasticsearchProject>(s=>s.MatchAll()))
 				);
 
 				result.ElapsedMilliseconds.Should().BeGreaterOrEqualTo(100);
 				
 				result = RemoteFunc.Invoke(context.Domain,
-					() => new NoWarmupRoutine(c=>c.Search<ElasticsearchProject>(s=>s.MatchAll()))
+					() => new CallRoutine(c=>c.Search<ElasticsearchProject>(s=>s.MatchAll()))
 				);
 
 				result.ElapsedMilliseconds.Should().BeLessOrEqualTo(10);
@@ -99,43 +85,12 @@ namespace StartupTests
 		}
 		
 		[Test]
-		public void Calling_Search_IsAlsoFaster_AfterWarmup()
+		public void Calling_Complex_TypedSearch_IsAlsoFaster_AfterBeingCalledOnce()
 		{
 			using (var context = AppDomainContext.Create(_setupInfo))
 			{
 				var result = RemoteFunc.Invoke(context.Domain,
-					() => new WarmupRoutine(c=>c.Search<object>(s=>s.MatchAll()))
-				);
-
-				result.ElapsedMilliseconds.Should().BeLessOrEqualTo(10);
-			}
-		}
-		
-		[Test]
-		public void Calling_Typed_Search_IsAlsoFaster_AfterWarmup()
-		{
-			using (var context = AppDomainContext.Create(_setupInfo))
-			{
-				var result = RemoteFunc.Invoke(context.Domain,
-					() => new WarmupRoutine(c=>c.Search<ElasticsearchProject>(s=>s.MatchAll()))
-				);
-
-				result.ElapsedMilliseconds.Should().BeLessOrEqualTo(50);
-				var againNoWarmup = RemoteFunc.Invoke(context.Domain,
-					() => new NoWarmupRoutine(c=>c.Search<ElasticsearchProject>(s=>s.MatchAll()))
-				);
-
-				againNoWarmup.ElapsedMilliseconds.Should().BeLessOrEqualTo(10);
-			}
-		}
-		
-		[Test]
-		public void Calling_Complex_TypedSearch_IsAlsoFaster_AfterWarmup()
-		{
-			using (var context = AppDomainContext.Create(_setupInfo))
-			{
-				var result = RemoteFunc.Invoke(context.Domain,
-					() => new WarmupRoutine(c=>c
+					() => new CallRoutine(c=>c
 						.Search<ElasticsearchProject>(s => s
 							.Query(q => q.Term("field", "value") && q.Term(p => p.Name, "name"))
 							.Filter(f => f.GeoPolygon(p => p.MyGeoShape, "1.0", "2.0", "3.0"))
@@ -155,9 +110,9 @@ namespace StartupTests
 					)
 				);
 
-				result.ElapsedMilliseconds.Should().BeLessOrEqualTo(250);
+				result.ElapsedMilliseconds.Should().BeGreaterOrEqualTo(200);
 				var againNoWarmup = RemoteFunc.Invoke(context.Domain,
-					() => new NoWarmupRoutine(c=>c
+					() => new CallRoutine(c=>c
 						.Search<ElasticsearchProject>(s=>s
 							.Query(q => q.Term("field", "value") && q.Term(p => p.Name, "name"))
 							.Filter(f => f.GeoPolygon(p => p.MyGeoShape, "1.0", "2.0", "3.0"))
@@ -219,11 +174,11 @@ namespace StartupTests
 
 	//This runs in a separate appdomain
 	[Serializable]
-	public class NoWarmupRoutine : BaseElasticsearchInSeparateDomain
+	public class CallRoutine : BaseElasticsearchInSeparateDomain
 	{
 		public long ElapsedMilliseconds { get; set; }
 
-		public NoWarmupRoutine(Action<IElasticClient> call)
+		public CallRoutine(Action<IElasticClient> call)
 		{
 			var sw = Stopwatch.StartNew();
 			call(_client);
@@ -232,20 +187,4 @@ namespace StartupTests
 		}
 	}
 
-	//This runs in a separate appdomain
-	[Serializable]
-	public class WarmupRoutine : BaseElasticsearchInSeparateDomain
-	{
-		public long ElapsedMilliseconds { get; set; }
-
-		public WarmupRoutine(Action<IElasticClient> call)
-		{
-			ElasticClient.Warmup();
-			var sw = Stopwatch.StartNew();
-			call(_client);
-			sw.Stop();
-			this.ElapsedMilliseconds = sw.ElapsedMilliseconds;
-		}
-
-	}
 }

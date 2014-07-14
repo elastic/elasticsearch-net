@@ -16,10 +16,10 @@ namespace Nest.Tests.Integration.Reproduce
 		public void UpdateUsingDynamicObject()
 		{
 			var id = NestTestData.Data.Last().Id;
-			var project = this._client.Source<ElasticsearchProject>(s => s.Id(id));
+			var project = this.Client.Source<ElasticsearchProject>(s => s.Id(id));
 			Assert.NotNull(project);
 			var loc = project.LOC;
-			this._client.Update<ElasticsearchProject, dynamic>(u => u
+			this.Client.Update<ElasticsearchProject, dynamic>(u => u
 				.Id(id)
 				.Document(new
 				{
@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Reproduce
 				})
 				.Refresh()
 			);
-			project = this._client.Source<ElasticsearchProject>(s => s.Id(id));
+			project = this.Client.Source<ElasticsearchProject>(s => s.Id(id));
 			Assert.AreEqual(project.LOC, loc + 10);
 			Assert.AreNotEqual(project.Version, "1");
 		}

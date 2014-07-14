@@ -63,7 +63,7 @@ namespace Nest.Tests.Integration
 		[TearDown]
 		public static void TearDown()
 		{
-            var client = ElasticsearchConfiguration.Client;
+            var client = ElasticsearchConfiguration.Client.Value;
             client.DeleteIndex(di => di.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_*"));
 		}
 	}

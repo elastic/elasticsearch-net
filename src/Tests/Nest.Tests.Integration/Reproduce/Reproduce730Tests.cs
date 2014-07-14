@@ -15,7 +15,7 @@ namespace Nest.Tests.Integration.Reproduce
 		[Test]
 		public void TermAggIntegerAsKeyProducesNullKeyItem()
 		{
-			var result = this._client.Search<ElasticsearchProject>(s => s
+			var result = this.Client.Search<ElasticsearchProject>(s => s
 				.Aggregations(a => a
 					.Terms("my_term_agg", t => t
 						.Field(o => o.DoubleValue))));

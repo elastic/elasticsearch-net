@@ -27,11 +27,11 @@ namespace Nest.Tests.Integration.Core
 			};
 
 			// Index the document
-			var indexResult = this._client.Index<ElasticsearchProject>(doc, i => i.OpType(OpType.Create));
+			var indexResult = this.Client.Index<ElasticsearchProject>(doc, i => i.OpType(OpType.Create));
 			indexResult.IsValid.Should().BeTrue();
 
 			// Grab the indexed document.
-			var foundDoc = this._client.Source<ElasticsearchProject>(doc.Id);
+			var foundDoc = this.Client.Source<ElasticsearchProject>(doc.Id);
 
 			// Check that the document was successfully indexed.
 			Assert.NotNull(foundDoc);
@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.AreEqual(doc.Name, foundDoc.Name);
 
 			// Now try to index the document again while using the Create Flag
-			var response = this._client.Index<ElasticsearchProject>(doc, i => i.OpType(OpType.Create));
+			var response = this.Client.Index<ElasticsearchProject>(doc, i => i.OpType(OpType.Create));
 
 			// Make sure the index request failed with HTTP status 409 since document with same id already exists.
 			Assert.False(response.Created);
@@ -61,11 +61,11 @@ namespace Nest.Tests.Integration.Core
 			};
 
 			// Index the document
-			var indexResult = this._clientNoRawResponse.Index<ElasticsearchProject>(doc, i => i.OpType(OpType.Create));
+			var indexResult = this.ClientNoRawResponse.Index<ElasticsearchProject>(doc, i => i.OpType(OpType.Create));
 			indexResult.IsValid.Should().BeTrue();
 
 			// Grab the indexed document.
-			var foundDoc = this._clientNoRawResponse.Source<ElasticsearchProject>(doc.Id);
+			var foundDoc = this.ClientNoRawResponse.Source<ElasticsearchProject>(doc.Id);
 
 			// Check that the document was successfully indexed.
 			Assert.NotNull(foundDoc);
@@ -75,7 +75,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.AreEqual(doc.Name, foundDoc.Name);
 
 			// Now try to index the document again while using the Create Flag
-			var response = this._clientNoRawResponse.Index<ElasticsearchProject>(doc, i => i.OpType(OpType.Create));
+			var response = this.ClientNoRawResponse.Index<ElasticsearchProject>(doc, i => i.OpType(OpType.Create));
 
 			// Make sure the index request failed with HTTP status 409 since document with same id already exists.
 			Assert.False(response.Created);

@@ -47,7 +47,7 @@ namespace Nest.Tests.Integration.Search.Scroll
 		[Test]
 		public void SearchTypeScan_ObjectInitializer()
 		{
-			var scanResults = this._client.Search<ElasticsearchProject>(s => s
+			var scanResults = this.Client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(1)
 				.MatchAll()
@@ -60,7 +60,7 @@ namespace Nest.Tests.Integration.Search.Scroll
 			Assert.IsNotNullOrEmpty(scanResults.ScrollId);
 
 			var scrolls = 0;
-			var results = this._client.Scroll<ElasticsearchProject>(s=>s
+			var results = this.Client.Scroll<ElasticsearchProject>(s=>s
 				.Scroll("4s") 
 				.ScrollId(scanResults.ScrollId)
 			);
@@ -70,7 +70,7 @@ namespace Nest.Tests.Integration.Search.Scroll
 				Assert.True(results.FieldSelections.Any());
 				Assert.IsNotNullOrEmpty(results.ScrollId);
 				var localResults = results;
-				results = this._client.Scroll<ElasticsearchProject>(new ScrollRequest(localResults.ScrollId, "4s"));
+				results = this.Client.Scroll<ElasticsearchProject>(new ScrollRequest(localResults.ScrollId, "4s"));
 				scrolls++;
 			}
 			Assert.AreEqual(18, scrolls);

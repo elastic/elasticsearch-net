@@ -27,7 +27,7 @@ namespace Nest.Resolvers
 		{
 			this.ConnectionSettings = connectionSettings;
 			this.Infer = new ElasticInferrer(this.ConnectionSettings);
-			this._wrapped = wrapped;
+			this._wrapped = wrapped ?? new DefaultContractResolver();
 		}
 
 		public JsonContract ResolveContract(Type type)

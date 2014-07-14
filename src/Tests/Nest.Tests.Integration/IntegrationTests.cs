@@ -14,10 +14,10 @@ namespace Nest.Tests.Integration
 	public class IntegrationTests
 	{
 
-		protected IElasticClient Client { get { return ElasticsearchConfiguration.Client; } }
-		protected IElasticClient ClientThatThrows { get { return ElasticsearchConfiguration.ClientThatThrows; } }
-		protected IElasticClient ClientNoRawResponse { get { return ElasticsearchConfiguration.ClientNoRawResponse; } }
-		protected ElasticClient ThriftClient { get { return ElasticsearchConfiguration.ThriftClient; } }
+		protected IElasticClient Client { get { return ElasticsearchConfiguration.Client.Value; } }
+		protected IElasticClient ClientThatThrows { get { return ElasticsearchConfiguration.ClientThatThrows.Value; } }
+		protected IElasticClient ClientNoRawResponse { get { return ElasticsearchConfiguration.ClientNoRawResponse.Value; } }
+		protected ElasticClient ThriftClient { get { return ElasticsearchConfiguration.ThriftClient.Value; } }
 
 		protected IConnectionSettingsValues Settings { get { return ElasticsearchConfiguration.Settings(); } }
 
