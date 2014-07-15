@@ -106,7 +106,7 @@ namespace Nest.Resolvers.Writers {
             if (att.Store)
             {
                 this._jsonWriter.WritePropertyName("store");
-                this._jsonWriter.WriteValue("true");
+                this._jsonWriter.WriteValue("yes");
             }
             if (att.Boost != 1)
             {
