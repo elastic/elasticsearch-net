@@ -5,8 +5,8 @@
     "geo_shape": {
       "myGeoShape": {
         "shape": {
-          "type": "point",
-          "coordinates": [ -45.0, 45.0 ]
+          "coordinates": [ -45.0, 45.0 ],
+          "type": "point"
         }
       }
     }

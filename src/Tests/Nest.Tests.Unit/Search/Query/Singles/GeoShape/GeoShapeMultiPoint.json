@@ -1,14 +1,15 @@
-﻿  {
+﻿{
   "from": 0,
   "size": 10,
   "query": {
     "geo_shape": {
       "myGeoShape": {
         "shape": {
-          "type": "multipoint",
           "coordinates": [
-            [ 13.0, 53.0 ], [ 14.0, 52.0 ]
-          ]
+            [ 13.0, 53.0 ],
+            [ 14.0, 52.0 ]
+          ],
+          "type": "multipoint"
         }
       }
     }
