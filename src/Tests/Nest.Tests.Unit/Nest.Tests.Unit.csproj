@@ -123,6 +123,7 @@
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUrlTests.cs" />
     <Compile Include="Core\Indices\Analysis\Analyzers\AnalyzerTests.cs" />
+    <Compile Include="Core\Indices\Similarity\SimilarityTests.cs" />
     <Compile Include="Core\Map\CustomMapping\ImagePluginMappingTests.cs" />
     <Compile Include="Core\Map\MappingBehaviourTests.cs" />
     <None Include="Cluster\PutSettings\PutSettings.json">
@@ -152,6 +153,14 @@
     <None Include="Core\Indices\Analysis\Analyzers\PatternAnalyzerTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Indices\Similarity\BM25SimilarityTest.json" />
+    <None Include="Core\Indices\Similarity\DefaultSimilarityTest.json" />
+    <None Include="Core\Indices\Similarity\DFRSimilarityTest.json" />
+    <None Include="Core\Indices\Similarity\IBSimilarityTest.json" />
+    <None Include="Core\Indices\Similarity\LMDirichletSimilarityTest.json" />
+    <None Include="Core\Indices\Similarity\LMJelinekSimilarityTest.json" />
+    <None Include="Core\Indices\Similarity\MultipleSimilaritiesTest.json" />
+    <None Include="Core\Indices\Similarity\SimilarityTest.json" />
     <None Include="Core\Map\CustomMapping\RepresentUnknowImageMappingPlugin.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

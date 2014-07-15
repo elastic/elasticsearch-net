@@ -36,7 +36,8 @@ namespace Nest.Tests.Unit.Core.Indices.Similarity
 						Normalization = "h2",
 						NormalizationH2C = "2.0"
 					})
-				)
+        )
+        .Default("my_default_similarity")
 			);
 
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod()); 
@@ -128,6 +129,14 @@ namespace Nest.Tests.Unit.Core.Indices.Similarity
 
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod()); 
 		}
+
+    [Test]
+    public void SimilarityTest()
+    {
+      var result = this.Similarity(s => s.Default("customsimilarity"));
+
+      this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
+    }
 
 		private IIndicesOperationResponse Similarity(Func<SimilarityDescriptor, SimilarityDescriptor> similaritySelector)
 		{
