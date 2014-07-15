@@ -60,7 +60,7 @@ namespace Nest
 		IGeoPolygonFilter GeoPolygon { get; set; }
 
 		[JsonProperty(PropertyName = "geo_shape")]
-		[JsonConverter(typeof(GeoShapeFilterJsonReader))]
+		[JsonConverter(typeof(CompositeJsonConverter<GeoShapeFilterJsonReader, FieldNameFilterConverter<GeoPolygonFilter>>))]
 		IGeoShapeBaseFilter GeoShape { get; set; }
 
 		[JsonProperty(PropertyName = "limit")]
