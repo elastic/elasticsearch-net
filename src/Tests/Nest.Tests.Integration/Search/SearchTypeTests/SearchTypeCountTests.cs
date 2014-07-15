@@ -14,7 +14,7 @@ namespace Nest.Tests.Integration.Search.SearchTypeTests
 		[Test]
 		public void SearchTypeCount()
 		{
-			var queryResults = this._client.Search<ElasticsearchProject>(s=>s
+			var queryResults = this.Client.Search<ElasticsearchProject>(s=>s
 				.From(0)
 				.Size(10)
 				.MatchAll()

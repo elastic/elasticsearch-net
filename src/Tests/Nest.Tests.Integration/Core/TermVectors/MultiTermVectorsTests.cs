@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Core.TermVectors
 		[Test]
 		public void MultiTermVectorsTest()
 		{
-			var result = _client.MultiTermVectors<ElasticsearchProject>(s => s
+			var result = Client.MultiTermVectors<ElasticsearchProject>(s => s
 				.Fields(ep => ep.Content)
 				.Ids("1", "2")
 			);
@@ -34,7 +34,7 @@ namespace Nest.Tests.Integration.Core.TermVectors
 		[Test]
 		public void MultiTermVectorsTest_DocumentsInBody()
 		{
-			var result = _client.MultiTermVectors<ElasticsearchProject>(s => s
+			var result = Client.MultiTermVectors<ElasticsearchProject>(s => s
 				.Fields(ep => ep.Content)
 				.Documents(
 					m=>m.Id(1).TermStatistics(),
@@ -58,7 +58,7 @@ namespace Nest.Tests.Integration.Core.TermVectors
 		[SkipVersion("1.2.0 - 1.2.2", "Fails against ES 1.2: https://github.com/elasticsearch/elasticsearch/issues/6451")]
 		public void MultiTermVectorsNonExistentIdTest()
 		{
-			var result = _client.MultiTermVectors<ElasticsearchProject>(s => s
+			var result = Client.MultiTermVectors<ElasticsearchProject>(s => s
 				.Ids("thisiddoesnotexist")
 			);
 

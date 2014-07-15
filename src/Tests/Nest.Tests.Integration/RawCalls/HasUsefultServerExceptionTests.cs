@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.RawCalls
 		{
 			var e = Assert.Throws<ElasticsearchServerException>(() =>
 			{
-				var result = this._clientThatThrows.Raw.Search("{ size: 10, searc}");
+				var result = this.ClientThatThrows.Raw.Search("{ size: 10, searc}");
 			});
 
 			e.Status.Should().Be(400);
@@ -24,7 +24,7 @@ namespace Nest.Tests.Integration.RawCalls
 		[Test]
 		public void ServerExceptionMakesItOnResponse_EvenIfClientIsNotConfiguredToThrow()
 		{
-			var result = this._client.Raw.Search("{ size: 10, searc}");
+			var result = this.Client.Raw.Search("{ size: 10, searc}");
 			var e = result.OriginalException as ElasticsearchServerException;
 			e.Should().NotBeNull();
 

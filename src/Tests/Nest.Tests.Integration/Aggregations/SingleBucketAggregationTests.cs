@@ -11,7 +11,7 @@ namespace Nest.Tests.Integration.Aggregations
 	    [Test]
 	    public void Missing()
 	    {
-		    var results = this._client.Search<ElasticsearchProject>(s=>s
+		    var results = this.Client.Search<ElasticsearchProject>(s=>s
 				.Size(0)
 				.Aggregations(a=>a
 					.Missing("miss_me", m=>m.Field("not_really"))
@@ -25,7 +25,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 	    public void Filter()
 	    {
-		    var results = this._client.Search<ElasticsearchProject>(s=>s
+		    var results = this.Client.Search<ElasticsearchProject>(s=>s
 				.Size(0)
 				.Aggregations(a=>a
 					.Filter("filtered_agg", m=>m
@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 	    public void Global()
 	    {
-		    var results = this._client.Search<ElasticsearchProject>(s=>s
+		    var results = this.Client.Search<ElasticsearchProject>(s=>s
 				.Size(0)
 				.Query(q=>q.Term(p=>p.Name, "There is no name like this"))
 				.Aggregations(a=>a

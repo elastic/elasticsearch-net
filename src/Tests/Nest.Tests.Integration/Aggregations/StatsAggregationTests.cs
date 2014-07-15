@@ -11,7 +11,7 @@ namespace Nest.Tests.Integration.Aggregations
         [Test]
         public void WrongFieldName()
         {
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a=>a
 					.Stats("stats_agg", t=>t
@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
         public void Average()
         {
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a=>a
 					.Stats("stats_agg", t=>t.Field(p=>p.LOC))
@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration.Aggregations
         public void ExtendedStats()
         {
 			
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a=>a
 					.ExtendedStats("stats_agg", t=>t.Field(p=>p.LOC))

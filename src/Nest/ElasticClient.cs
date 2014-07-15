@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
@@ -100,14 +101,6 @@ namespace Nest
 			return badResponse;
 		}
 
-
-		private static R CreateValidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
-		{
-			var r = (R)typeof(R).CreateInstance();
-			((IResponseWithRequestInformation)r).RequestInformation = response;
-			r.IsValid = true;
-			return r;
-		}
 		private static R CreateInvalidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
 		{
 			var r = (R)typeof(R).CreateInstance();
@@ -144,6 +137,17 @@ namespace Nest
 				.ContinueWith<I>(r => ResultsSelector<D, Q, R>(r.Result, descriptor));
 		}
 
+
+		public static void Warmup()
+		{
+			var client = new ElasticClient(connection: new InMemoryConnection());
+			var stream = new MemoryStream("{}".Utf8Bytes());
+			client.Serializer.Serialize(new SearchDescriptor<object>());
+			client.Serializer.Deserialize<SearchDescriptor<object>>(stream);
+			var connection = new HttpConnection(new ConnectionSettings());
+			client.RootNodeInfo(); 
+			client.Search<object>(s=>s.MatchAll().Index("someindex")); 
+		}
 
 	}
 }

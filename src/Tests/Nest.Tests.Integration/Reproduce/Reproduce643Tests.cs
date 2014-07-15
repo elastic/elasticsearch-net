@@ -18,7 +18,7 @@ namespace Nest.Tests.Integration.Reproduce
 		[Test]
 		public void TermsAggregationOnLongFieldShouldHaveKeysOnBucket()
 		{
-			var searchResult = this._client.Search<ElasticsearchProject>(s => s
+			var searchResult = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(aggs=>aggs
 					.Terms("numericTerms", t=>t

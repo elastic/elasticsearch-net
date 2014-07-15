@@ -10,21 +10,21 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void FlushAll()
 		{
-			var r = this._client.Flush(f=>f.AllIndices());
+			var r = this.Client.Flush(f=>f.AllIndices());
 			r.Shards.Should().NotBeNull();
 			r.Shards.Successful.Should().BeGreaterThan(0);
 		}
 		[Test]
 		public void FlushIndex()
 		{
-			var r = this._client.Flush(f=>f.Index(ElasticsearchConfiguration.DefaultIndex));
+			var r = this.Client.Flush(f=>f.Index(ElasticsearchConfiguration.DefaultIndex));
 			r.Shards.Should().NotBeNull();
 			r.Shards.Successful.Should().BeGreaterThan(0);
 		}
 		[Test]
 		public void FlushIndeces()
 		{
-			var r = this._client.Flush(f=>f
+			var r = this.Client.Flush(f=>f
 				.Indices( ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone")
 			);
 			r.Shards.Should().NotBeNull();
@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void FlushTyped()
 		{
-			var r = this._client.Flush(f=>f.Index<ElasticsearchProject>());
+			var r = this.Client.Flush(f=>f.Index<ElasticsearchProject>());
 			r.Shards.Should().NotBeNull();
 			r.Shards.Successful.Should().BeGreaterThan(0);
 		}

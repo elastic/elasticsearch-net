@@ -11,7 +11,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void MatchAll()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.Fields(f => f.Id, f => f.Country)
@@ -30,7 +30,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void MatchAllShortcut()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.Source(source=>source.Include(f => f.Id, f => f.Country))
@@ -47,7 +47,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void TestTermQuery()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.Fields(f => f.Id, f => f.Name)
@@ -65,7 +65,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void TestWildcardQuery()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.Fields(f => f.Id, f => f.Name)
@@ -83,7 +83,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void TestWildcardQueryBoostAndRewrite()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.Fields(f => f.Id, f => f.Name)
@@ -101,7 +101,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void TestPrefixQuery()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.Fields(f => f.Id, f => f.Name)
@@ -119,7 +119,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void TestTermFacet()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.Fields(f => f.Id, f => f.Name)
@@ -136,10 +136,10 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void TermSuggest()
 		{
-			var country = this._client.Search<ElasticsearchProject>(s => s.Size(1)).Documents.First().Country;
+			var country = this.Client.Search<ElasticsearchProject>(s => s.Size(1)).Documents.First().Country;
 			var wrongCountry = country + "x";
 
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Query(q => q.MatchAll())
 				.SuggestTerm("mySuggest", m => m.SuggestMode(SuggestMode.Always).Text(wrongCountry).Size(1).OnField("country"))
 			);
@@ -164,9 +164,9 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void PhraseSuggest()
 		{
-			var text = this._client.Search<ElasticsearchProject>(s => s.Size(1)).Documents.First().Content.Split(' ');
+			var text = this.Client.Search<ElasticsearchProject>(s => s.Size(1)).Documents.First().Content.Split(' ');
 			var phrase = string.Join(" ", text.Take(2)) + "x";
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Query(q => q.MatchAll())
 				.SuggestPhrase("myPhraseSuggest", m => m.Text(phrase).Size(1).OnField("content"))
 			);
