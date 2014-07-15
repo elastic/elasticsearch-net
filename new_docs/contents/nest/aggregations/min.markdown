@@ -21,4 +21,4 @@ Returns the minimum value among numeric values extracted from the aggregated doc
 
 You can then access the result.Aggregations to get the data, i.e.
 
-	var agg = result.Aggregations["min_aggregation"] as ValueMetric;
+	var agg = result.Aggs.Min("min_aggregation");

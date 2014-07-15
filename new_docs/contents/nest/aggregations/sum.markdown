@@ -21,4 +21,4 @@ A single-value metrics aggregation that sums up numeric values that are extracte
 
 You can then access the result.Aggregations to get the data, i.e.
 
-	var agg = result.Aggregations["sum_aggregation"] as ValueMetric;
+	var agg = result.Aggs.Sum("sum_aggregation");

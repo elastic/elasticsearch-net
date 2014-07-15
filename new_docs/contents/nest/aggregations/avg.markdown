@@ -21,4 +21,4 @@ A single-value metrics aggregation that computes the average of numeric values t
 
 You can then access the result.Aggregations to get the data, i.e.
 
-	var agg = result.Aggregations["avg_aggregation"] as ValueMetric;
+	var agg = result.Aggs.Average("avg_aggregation");

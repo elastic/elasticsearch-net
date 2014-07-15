@@ -19,6 +19,6 @@ Returns the maximum value among numeric values extracted from the aggregated doc
 					.Max("max_aggregation", max => max
 						.Field(data => data.IntValues))));
 
-You can then access the result.Aggregations to get the data, i.e.
+You can then access the result.Aggs to get the data, i.e.
 
-	var agg = result.Aggregations["max_aggregation"] as ValueMetric;
+	var agg = result.Aggs.Max("max_aggregation");
