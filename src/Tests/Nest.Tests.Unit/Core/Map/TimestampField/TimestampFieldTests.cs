@@ -13,7 +13,7 @@ namespace Nest.Tests.Unit.Core.Map.TimestampField
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.TimestampField(a => a
 					.Path(p => p.Name)
-					.Enabled()
+					.Enabled(false)
 				)
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod()); 

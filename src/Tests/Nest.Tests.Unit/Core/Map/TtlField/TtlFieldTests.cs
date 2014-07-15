@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Core.Map.TtlField
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.TtlField(t => t
-					.Enable(false)
+					.Enable()
 					.Default("1d")
 				)
 			);

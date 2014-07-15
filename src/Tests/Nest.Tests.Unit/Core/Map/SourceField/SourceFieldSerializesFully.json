@@ -3,7 +3,7 @@
     "_source": {
       "enabled": false,
       "compress": true,
-      "compress_treshold": "200b",
+      "compress_threshold": "200b",
       "includes": [
         "path2.*"
       ],
