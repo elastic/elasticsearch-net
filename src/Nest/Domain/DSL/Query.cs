@@ -138,9 +138,37 @@ namespace Nest
 		{
 			return new QueryDescriptor<T>().CommonTerms(selector);
 		}
-		public static QueryContainer GeoShape(Action<GeoShapeQueryDescriptor<T>> selector)
+		public static QueryContainer GeoShapeCircle(Action<GeoShapeCircleQueryDescriptor<T>> selector)
 		{
-			return new QueryDescriptor<T>().GeoShape(selector);
+			return new QueryDescriptor<T>().GeoShapeCircle(selector);
+		}
+		public static QueryContainer GeoShapeEnvelope(Action<GeoShapeEnvelopeQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().GeoShapeEnvelope(selector);
+		}
+		public static QueryContainer GeoShapeLineString(Action<GeoShapeLineStringQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().GeoShapeLineString(selector);
+		}
+		public static QueryContainer GeoShapeMultiLineString(Action<GeoShapeMultiLineStringQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().GeoShapeMultiLineString(selector);
+		}
+		public static QueryContainer GeoShapePoint(Action<GeoShapePointQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().GeoShapePoint(selector);
+		}
+		public static QueryContainer GeoShapeMultiPoint(Action<GeoShapeMultiPointQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().GeoShapeMultiPoint(selector);
+		}
+		public static QueryContainer GeoShapePolygon(Action<GeoShapePolygonQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().GeoShapePolygon(selector);
+		}
+		public static QueryContainer GeoShapeMultiPolygon(Action<GeoShapeMultiPolygonQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().GeoShapeMultiPolygon(selector);
 		}
 		public static QueryContainer QueryString(Action<QueryStringQueryDescriptor<T>> selector)
 		{

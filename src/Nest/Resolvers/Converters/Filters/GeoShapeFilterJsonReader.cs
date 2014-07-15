@@ -49,21 +49,95 @@ namespace Nest.Resolvers.Converters.Filters
 						var indexedShape = jv.Value["indexed_shape"];
 						if (shape != null)
 						{
-							IGeoShapeFilter f = new GeoShapeFilterDescriptor();
-							f.Shape = new GeoShape();
-							var coordinates = shape["coordinates"];
-							if (coordinates != null)
-								f.Shape.Coordinates = coordinates.Values<double[]>();
-							var type = shape["type"];
-							if (type != null)
-								f.Shape.Type = type.Value<string>();
-							filter = f;
-							break;
+							var shapeName = shape.Value<string>();
+							if (shapeName == "circle")
+							{
+								IGeoShapeCircleFilter f = new GeoShapeCircleFilterDescriptor();
+								f.Shape = new CircleGeoShape();
+								var radius = shape["radius"];
+								if (radius != null)
+									f.Shape.Radius = radius.Value<string>();
+								var coordinates = shape["coordinates"];
+								if (coordinates != null)
+									f.Shape.Coordinates = coordinates.Values<double>();
+								filter = f;
+								break;
+							} 
+							else if (shapeName == "envelope")
+							{
+								IGeoShapeEnvelopeFilter f = new GeoShapeEnvelopeFilterDescriptor();
+								f.Shape = new EnvelopeGeoShape();
+								var coordinates = shape["coordinates"];
+								if (coordinates != null)
+									f.Shape.Coordinates = coordinates.Values<double[]>();
+								filter = f;
+								break;
+							}
+							else if (shapeName == "linestring")
+							{
+								IGeoShapeLineStringFilter f = new GeoShapeLineStringFilterDescriptor();
+								f.Shape = new LineStringGeoShape();
+								var coordinates = shape["coordinates"];
+								if (coordinates != null)
+									f.Shape.Coordinates = coordinates.Values<double[]>();
+								filter = f;
+								break;
+							}
+							else if (shapeName == "multilinestring")
+							{
+								IGeoShapeMultiLineStringFilter f = new GeoShapeMultiLineStringFilterDescriptor();
+								f.Shape = new MultiLineStringGeoShape();
+								var coordinates = shape["coordinates"];
+								if (coordinates != null)
+									f.Shape.Coordinates = coordinates.Values<double[][]>();
+								filter = f;
+								break;
+							}
+							else if (shapeName == "point")
+							{
+								IGeoShapePointFilter f = new GeoShapePointFilterDescriptor();
+								f.Shape = new PointGeoShape();
+								var coordinates = shape["coordinates"];
+								if (coordinates != null)
+									f.Shape.Coordinates = coordinates.Values<double>();
+								filter = f;
+								break;
+							}
+							else if (shapeName == "multipoint")
+							{
+								IGeoShapeMultiPointFilter f = new GeoShapeMultiPointFilterDescriptor();
+								f.Shape = new MultiPointGeoShape();
+								var coordinates = shape["coordinates"];
+								if (coordinates != null)
+									f.Shape.Coordinates = coordinates.Values<double[]>();
+								filter = f;
+								break;
+							}
+							else if (shapeName == "polygon")
+							{
+								IGeoShapePolygonFilter f = new GeoShapePolygonFilterDescriptor();
+								f.Shape = new PolygonGeoShape();
+								var coordinates = shape["coordinates"];
+								if (coordinates != null)
+									f.Shape.Coordinates = coordinates.Values<double[][]>();
+								filter = f;
+								break;
+							}
+							else if (shapeName == "multipolygon")
+							{
+								IGeoShapeMultiPolygonFilter f = new GeoShapeMultiPolygonFilterDescriptor();
+								f.Shape = new MultiPolygonGeoShape();
+								var coordinates = shape["coordinates"];
+								if (coordinates != null)
+									f.Shape.Coordinates = coordinates.Values<double[][][]>();
+								filter = f;
+								break;
+							}
 						}
 						else if (indexedShape != null)
 						{
 							IGeoIndexedShapeFilter f = new GeoIndexedShapeFilterDescriptor();
-							f.IndexedShape = new GeoIndexedShape();
+							f.IndexedShape = new IndexedGeoShape();
 							var id = indexedShape["id"];
 							var index = indexedShape["index"];
 							var type = indexedShape["type"];

@@ -19,9 +19,10 @@ namespace Nest.Tests.Unit.Search.Query.Singles.GeoShape
 				.From(0)
 				.Size(10)
 				.Query(q => q
-					.GeoShape(qs => qs
+					.GeoShapeCircle(qs => qs
 						.OnField(p => p.MyGeoShape)
-						.Shape(new Circle { Coordinates = new[] { -45.0, 45.0 }, Radius = "100m" } )
+						.Coordinates(new[] { -45.0, 45.0 })
+						.Radius("100m")
 					)
 			);
 

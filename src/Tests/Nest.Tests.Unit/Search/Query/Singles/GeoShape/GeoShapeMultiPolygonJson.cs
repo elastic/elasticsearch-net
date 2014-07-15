@@ -19,11 +19,9 @@ namespace Nest.Tests.Unit.Search.Query.Singles.GeoShape
 				.From(0)
 				.Size(10)
 				.Query(q => q
-					.GeoShape(qs => qs
+					.GeoShapeMultiPolygon(qs => qs
 						.OnField(p => p.MyGeoShape)
-						.Shape(new MultiPolygon
-						{
-							Coordinates =
+						.Coordinates(
 								new[] {
 									new [] {
 										new [] {
@@ -39,10 +37,9 @@ namespace Nest.Tests.Unit.Search.Query.Singles.GeoShape
 										}
 									}
 								}
-							}
+							)
 						)
-					)
-				);
+					);
 
 			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
 		}

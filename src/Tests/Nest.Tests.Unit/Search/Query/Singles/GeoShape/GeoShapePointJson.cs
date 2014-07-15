@@ -19,9 +19,9 @@ namespace Nest.Tests.Unit.Search.Query.Singles.GeoShape
 				.From(0)
 				.Size(10)
 				.Query(q => q
-					.GeoShape(qs => qs
+					.GeoShapePoint(qs => qs
 						.OnField(p => p.MyGeoShape)
-						.Shape(new Point { Coordinates = new[] { -45.0, 45.0 } })
+						.Coordinates(new[] { -45.0, 45.0 })
 					)
 			);
 

@@ -14,17 +14,18 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 		{
 			var q = this.SerializeThenDeserialize(
 				f => f.GeoShape,
-				f => f.GeoShape(gq => gq
+				f => f.GeoShapeEnvelope(gq => gq
 					.OnField(p => p.MyGeoShape)
-					.Shape(new Envelope { Coordinates = new[] { new[] { 13.0, 53.0 }, new[] { 14.0, 52.0 } } })
+					.Coordinates(new[] { new[] { 13.0, 53.0 }, new[] { 14.0, 52.0 } })
 					)
 				);
 
 			q.Field.Should().Be("myGeoShape");
-			q.Shape.Should().NotBeNull();
-			q.Shape.Type.Should().Be("envelope");
-			//((Newtonsoft.Json.Linq.JArray)q.ShapeVector.Coordinates).SelectMany(c=>c).Should()
-			//	.BeEquivalentTo(new [] {13.0, 53.0, 14.0, 52.0 });
+			var envelopeQuery = q as IGeoShapeEnvelopeQuery;
+			envelopeQuery.Should().NotBeNull();
+			envelopeQuery.Shape.Type.Should().Be("envelope");
+			envelopeQuery.Shape.Coordinates.SelectMany(c=>c).Should()
+				.BeEquivalentTo(new [] {13.0, 53.0, 14.0, 52.0 });
 		}
 	}
 }

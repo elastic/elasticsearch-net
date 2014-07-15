@@ -17,8 +17,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				.Filter(filter => filter
 					.Cache(true)
 					.Name("my_geo_filter")
-					.GeoShape(f => f.Origin, d => d
-						.Shape(new Envelope { Coordinates = new[] { new[] { 13.0, 53.0 }, new[] { 14.0, 52.0 } } })
+					.GeoShapeEnvelope(f => f.Origin, d => d
+						.Coordinates(new[] { new[] { 13.0, 53.0 }, new[] { 14.0, 52.0 } })
 				)
 			);
 
@@ -28,8 +28,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 					geo_shape: {
 						origin: {
 							shape: {
-								type: ""envelope"",
-								coordinates: [[13.0, 53.0], [14.0, 52.0]]
+								coordinates: [[13.0, 53.0], [14.0, 52.0]],
+								type: ""envelope""
 							}
 						},
 						_cache: true,

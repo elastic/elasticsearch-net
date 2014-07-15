@@ -13,12 +13,13 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 		{
 			var geoBaseShapeFilter = this.SerializeThenDeserialize(cacheName, cacheKey, cache,
 				f => f.GeoShape,
-				f => f.GeoShape(p => p.Origin, d => d
-					.Shape(new Envelope { Coordinates = new[] { new[] { 13.0, 53.0 }, new[] { 14.0, 52.0 } } })
-					)
-				);
+				f => f.GeoShapeEnvelope(p => p.Origin, d => d
+					.Coordinates(new[] { new[] { 13.0, 53.0 }, new[] { 14.0, 52.0 } })
+				)
+			);
+
 			geoBaseShapeFilter.Field.Should().Be("origin");
-			var geoShapeFilter = geoBaseShapeFilter as IGeoShapeFilter;
+			var geoShapeFilter = geoBaseShapeFilter as IGeoShapeEnvelopeFilter;
 			geoShapeFilter.Should().NotBeNull();
 			geoShapeFilter.Shape.Should().NotBeNull();
 			geoShapeFilter.Shape.Type.Should().Be("envelope");

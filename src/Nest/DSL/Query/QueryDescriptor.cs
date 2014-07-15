@@ -319,13 +319,62 @@ namespace Nest
 		/// that have a shape that intersects with the query shape. 
 		/// It will also use the same PrefixTree configuration as defined for the field mapping.
 		/// </summary>
-		public QueryContainer GeoShape(Action<GeoShapeQueryDescriptor<T>> selector)
+		public QueryContainer GeoShapeEnvelope(Action<GeoShapeEnvelopeQueryDescriptor<T>> selector)
 		{
-			var query = new GeoShapeQueryDescriptor<T>();
+			var query = new GeoShapeEnvelopeQueryDescriptor<T>();
 			selector(query);
 			return this.New(query, q => q.GeoShape = query);
 		}
 		
+		public QueryContainer GeoShapeCircle(Action<GeoShapeCircleQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapeCircleQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.GeoShape = query);
+		}
+
+		public QueryContainer GeoShapeLineString(Action<GeoShapeLineStringQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapeLineStringQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.GeoShape = query);
+		}
+
+		public QueryContainer GeoShapeMultiLineString(Action<GeoShapeMultiLineStringQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapeMultiLineStringQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.GeoShape = query);
+		}
+
+		public QueryContainer GeoShapePoint(Action<GeoShapePointQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapePointQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.GeoShape = query);
+		}
+
+		public QueryContainer GeoShapeMultiPoint(Action<GeoShapeMultiPointQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapeMultiPointQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.GeoShape = query);
+		}
+
+		public QueryContainer GeoShapePolygon(Action<GeoShapePolygonQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapePolygonQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.GeoShape = query);
+		}
+
+		public QueryContainer GeoShapeMultiPolygon(Action<GeoShapeMultiPolygonQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapeMultiPolygonQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.GeoShape = query);
+		}
+
 		/// <summary>
 		/// The common terms query is a modern alternative to stopwords which improves the precision and recall 
 		/// of search results (by taking stopwords into account), without sacrificing performance.

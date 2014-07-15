@@ -15,7 +15,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.GeoShape
 		[Test]
 		public void GeoShapePolygon()
 		{
-			var polygon = new Polygon
+			var polygon = new PolygonGeoShape
 				{
 					Coordinates = new[] { 
 							new[] { new[] { 100.0, 0.0 }, new[] { 101.0, 0.0 }, new[] { 101.0, 1.0 }, new[] { 100.0, 1.0 }, new [] { 100.0, 0.0 } },
@@ -27,9 +27,9 @@ namespace Nest.Tests.Unit.Search.Query.Singles.GeoShape
 				.From(0)
 				.Size(10)
 				.Query(q => q
-					.GeoShape(qs => qs
+					.GeoShapePolygon(qs => qs
 						.OnField(p => p.MyGeoShape)
-						.Shape(polygon)
+						.Coordinates(polygon.Coordinates)
 					)
 				);
 
