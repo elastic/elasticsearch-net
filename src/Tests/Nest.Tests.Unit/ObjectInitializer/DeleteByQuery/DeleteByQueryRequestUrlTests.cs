@@ -11,8 +11,6 @@ namespace Nest.Tests.Unit.ObjectInitializer.DeleteByQuery
 	[TestFixture]
 	public class DeleteByQueryRequestUrlTests : BaseJsonTests
 	{
-		private readonly IElasticsearchResponse _status;
-
 		[Test]
 		public void Untyped_Defaults()
 		{

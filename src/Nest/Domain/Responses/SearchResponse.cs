@@ -180,7 +180,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// IDictionary of id <=> Highlight Collection for the document
+		/// IDictionary of id -Highlight Collection for the document
 		/// </summary>
 		public HighlightDocumentDictionary Highlights
 		{

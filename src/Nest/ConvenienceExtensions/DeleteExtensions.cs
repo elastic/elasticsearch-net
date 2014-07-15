@@ -13,7 +13,6 @@ namespace Nest
 		///The delete API allows to delete a typed JSON document from a specific index based on its id. 
 		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete.html
 		/// </summary>
-		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
 		/// <param name="index">The name of the index as string</param>
 		/// <param name="type">The type name of the document you wish to delete</param>
@@ -72,7 +71,6 @@ namespace Nest
 		///The delete API allows to delete a typed JSON document from a specific index based on its id. 
 		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete.html
 		/// </summary>
-		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="client"></param>
 		/// <param name="index">The name of the index as string</param>
 		/// <param name="type">The type name of the document you wish to delete</param>

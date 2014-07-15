@@ -75,9 +75,7 @@ namespace Nest
 		/// Deserialize an object 
 		/// </summary>
 		/// <typeparam name="T">The type you want to deserialize too</typeparam>
-		/// <param name="response">If the type you want is a Nest Response you have to pass a response object</param>
 		/// <param name="stream">The stream to deserialize off</param>
-		/// <param name="deserializationState">Optional deserialization state</param>
 		public virtual T Deserialize<T>(Stream stream)
 		{
 			if (stream == null) return default(T);

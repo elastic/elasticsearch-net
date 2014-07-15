@@ -42,7 +42,7 @@ namespace Nest
 		Precision7 = 7,
 
 		/// <summary>
-		// 38.2m x 19m
+		/// 38.2m x 19m
 		/// </summary>
 		Precision8 = 8,
 
@@ -52,7 +52,7 @@ namespace Nest
 		Precision9 = 9,
 
 		/// <summary>
-		// 1.2m x 59.5cm
+		/// 1.2m x 59.5cm
 		/// </summary>
 		Precision10 = 10,
 
@@ -62,7 +62,7 @@ namespace Nest
 		Precision11 = 11,
 
 		/// <summary>
-		// 3.7cm x 1.9cm
+		/// 3.7cm x 1.9cm
 		/// </summary>
 		Precision12 = 12
 	}

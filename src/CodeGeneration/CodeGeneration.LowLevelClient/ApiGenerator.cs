@@ -160,9 +160,6 @@ namespace CodeGeneration.LowLevelClient
 				method.DescriptorTypeGeneric = generic;
 			else method.Unmapped = true;
 
-
-
-
 			try
 			{
 				var typeName = "CodeGeneration.LowLevelClient.Overrides.Descriptors." + method.DescriptorType + "Overrides";
@@ -173,24 +170,30 @@ namespace CodeGeneration.LowLevelClient
 				if (overrides == null)
 					return;
 
+				var globalQueryStringRenames = new Dictionary<string, string>
+				{
+					{"__source", "_source_enabled"},
+					{"__source_include", "_source_include"},
+					{"__source_exclude", "_source_exclude"},
+				};
+				var qs = overrides.RenameQueryStringParams ?? new Dictionary<string, string>();
+				foreach (var kv in globalQueryStringRenames)
+					qs[kv.Key] = kv.Value;
+
 				foreach (var kv in method.Url.Params)
 				{
 					if (overrides.SkipQueryStringParams.Contains(kv.Key))
 						method.Url.Params.Remove(kv.Key);
-
-					if (overrides.RenameQueryStringParams == null) continue;
 					
+
 					string newName;
-					if (!overrides.RenameQueryStringParams.TryGetValue(kv.Key, out newName))
+					if (!qs.TryGetValue(kv.Key, out newName))
 						continue;
 
 					method.Url.Params.Remove(kv.Key);
 					method.Url.Params.Add(newName, kv.Value);
 					
 				}
-
-				//method.Url.Params = method.Url.Params.Where(p => !overrides.SkipQueryStringParams.Contains(p.Key))
-				//	.ToDictionary(k => k.Key, v => v.Value);
 			}
 // ReSharper disable once EmptyGeneralCatchClause
 			catch 

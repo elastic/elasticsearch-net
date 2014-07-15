@@ -248,7 +248,7 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IWarmerResponse> GetWarmerAsync(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null);
 
-		/// <summary>
+		/// <inheritdoc />
 		Task<IWarmerResponse> GetWarmerAsync(IGetWarmerRequest getWarmerRequest);
 
 		/// <summary>
@@ -365,7 +365,6 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
 		/// </summary>
 		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
-		/// <param name="object">The object to percolator</param>
 		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
 		IPercolateResponse Percolate<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector)
 			where T : class;
@@ -782,7 +781,7 @@ namespace Nest
 		/// This can greatly increase the indexing speed.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
 		/// </summary>
-		/// <param name="bulkSelector">A descriptor the describe the index/create/delete operation for this bulk operation</param>
+		/// <param name="bulkRequest">A descriptor the describe the index/create/delete operation for this bulk operation</param>
 		IBulkResponse Bulk(IBulkRequest bulkRequest);
 
 		/// <inheritdoc />
@@ -1049,7 +1048,7 @@ namespace Nest
 		/// Deletes a registered scroll request on the cluster 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html
 		/// </summary>
-		/// <param name="selector">Specify the scroll id as well as request specific configuration</param>
+		/// <param name="clearScrollSelector">Specify the scroll id as well as request specific configuration</param>
 		IEmptyResponse ClearScroll(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector);
 
 		/// <inheritdoc />

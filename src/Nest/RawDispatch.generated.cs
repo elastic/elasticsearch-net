@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
-///Generated File Please Do Not Edit Manually
+//Generated File Please Do Not Edit Manually
 
 
 namespace Nest

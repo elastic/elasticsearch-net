@@ -14,7 +14,7 @@ namespace Nest.SerializationExtensions
 		/// takes an ElasticsearchResponse
 		/// </summary>
 		/// <typeparam name="T">The type to deserialize to</typeparam>
-		/// <param name="serializer"></param>
+		/// <param name="client">the interface we are extending</param>
 		/// <param name="data">The string representation of the data to be deserialized</param>
 		public static T Deserialize<T>(this IElasticClient client, string data)
 		{

@@ -56,7 +56,8 @@ namespace Nest
 		{
 			return Self.Id ?? inferrer.Id(Self.Document);
 		}
-
+		
+		/// <summary>
 		/// Manually set the index, default to the default index or the fixed index set on the bulk operation
 		/// </summary>
 		public BulkDeleteDescriptor<T> Index(string index)

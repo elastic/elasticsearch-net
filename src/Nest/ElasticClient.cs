@@ -31,6 +31,7 @@ namespace Nest
 		/// </param>
 		/// <param name="connection">Optionally provide a different connection handler, defaults to http using HttpWebRequest</param>
 		/// <param name="serializer">Optionally provide a custom serializer responsible for taking a stream and turning into T</param>
+		/// <param name="transport">The transport coordinates requests between the client and the connection pool and the connection</param>
 		public ElasticClient(
 			IConnectionSettingsValues settings = null, 
 			IConnection connection = null, 

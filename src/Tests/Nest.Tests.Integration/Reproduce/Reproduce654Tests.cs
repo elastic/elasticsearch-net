@@ -77,7 +77,7 @@ namespace Nest.Tests.Integration.Reproduce
 		// So lets double check that calling the low level client behaves the same as NEST
 
 		[Test]
-		public async void LowLevelClientDeleteAsync_ShouldNotThrowOn404()
+		public void LowLevelClientDeleteAsync_ShouldNotThrowOn404()
 		{
 			Assert.DoesNotThrow(async () =>
 			{
@@ -108,7 +108,7 @@ namespace Nest.Tests.Integration.Reproduce
 		}
 		
 		[Test]
-		public async void LowLevelClientDeleteAsync_ShouldNotThrowOn404_OnClientThatThrows()
+		public void LowLevelClientDeleteAsync_ShouldNotThrowOn404_OnClientThatThrows()
 		{
 			Assert.DoesNotThrow(async () =>
 			{

@@ -66,7 +66,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		[TestCase(505, "SomeException", "Some Error Message")]
 		[TestCase(505, "", "")]
 		[TestCase(404, "", "")]
-		public async void IfResponseIsKnowError_DoNotRetry_ThrowServerException_Async(int status, string exceptionType, string exceptionMessage)
+		public void IfResponseIsKnowError_DoNotRetry_ThrowServerException_Async(int status, string exceptionType, string exceptionMessage)
 		{
 			var response = CreateServerExceptionResponse(status, exceptionType, exceptionMessage);
 			using (var fake = new AutoFake(callsDoNothing: true))
