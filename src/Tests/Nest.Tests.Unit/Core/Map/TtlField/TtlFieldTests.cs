@@ -12,8 +12,8 @@ namespace Nest.Tests.Unit.Core.Map.TtlField
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.TtlField(t => t
-					.SetDisabled(false)
-					.SetDefault("1d")
+					.Enable(false)
+					.Default("1d")
 				)
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod()); 

@@ -4,34 +4,46 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public class RoutingFieldMapping
+	public interface IRoutingFieldMapping : ISpecialField
 	{
-
 		[JsonProperty("required")]
-		public bool Required { get; internal set; }
+		bool? Required { get; set; }
 
 		[JsonProperty("path")]
-		public PropertyPathMarker Path { get; internal set; }
+		PropertyPathMarker Path { get; set; }
+	}
+
+	public class RoutingFieldMapping : IRoutingFieldMapping
+	{
+		public bool? Required { get; set; }
+
+		public PropertyPathMarker Path { get; set; }
 	}
 
 
-	public class RoutingFieldMapping<T> : RoutingFieldMapping
+	public class RoutingFieldMappingDescriptor<T> : IRoutingFieldMapping
 	{
-		public RoutingFieldMapping<T> SetRequired(bool required = true)
+		private IRoutingFieldMapping Self { get { return this; } }
+
+		bool? IRoutingFieldMapping.Required { get; set;}
+
+		PropertyPathMarker IRoutingFieldMapping.Path { get; set; }
+
+		public RoutingFieldMappingDescriptor<T> Required(bool required = true)
 		{
-			this.Required = required;
+			Self.Required = required;
 			return this;
 		}
-		public RoutingFieldMapping<T> SetPath(string path)
+		public RoutingFieldMappingDescriptor<T> Path(string path)
 		{
-			this.Path = path;
+			Self.Path = path;
 			return this;
 		}
-		public RoutingFieldMapping<T> SetPath(Expression<Func<T, object>> objectPath)
+		public RoutingFieldMappingDescriptor<T> Path(Expression<Func<T, object>> objectPath)
 		{
-			objectPath.ThrowIfNull("objectPath");
-			this.Path = objectPath;
+			Self.Path = objectPath;
 			return this;
 		}
+
 	}
 }

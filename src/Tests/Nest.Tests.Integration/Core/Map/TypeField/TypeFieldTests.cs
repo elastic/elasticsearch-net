@@ -11,8 +11,8 @@ namespace Nest.Tests.Integration.Core.Map.TypeField
 		{
 			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.TypeField(t => t
-					.SetIndexed()
-					.SetStored()
+					.Index()
+					.Store()
 				)
 			);
 			this.DefaultResponseAssertations(result);
@@ -22,8 +22,8 @@ namespace Nest.Tests.Integration.Core.Map.TypeField
 		{
 			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.TypeField(t => t
-					.SetIndexed(NonStringIndexOption.No)
-					.SetStored(false)
+					.Index(NonStringIndexOption.No)
+					.Store(false)
 				)
 			);
 			this.DefaultResponseAssertations(result);

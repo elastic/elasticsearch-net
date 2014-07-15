@@ -12,8 +12,8 @@ namespace Nest.Tests.Unit.Core.Map.TimestampField
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.TimestampField(a => a
-					.SetPath(p => p.Name)
-					.SetDisabled()
+					.Path(p => p.Name)
+					.Enabled()
 				)
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod()); 
@@ -23,8 +23,8 @@ namespace Nest.Tests.Unit.Core.Map.TimestampField
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.TimestampField(a => a
-					.SetPath("my_difficult_field_name")
-					.SetDisabled(false)
+					.Path("my_difficult_field_name")
+					.Enabled()
 				)
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
