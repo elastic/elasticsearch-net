@@ -2,10 +2,10 @@
 template: layout.jade
 title: Aggregations
 menusection: aggregations
-menuitem: geo-bounds
+menuitem: percentile-ranks
 ---
 
 
-# Geo Bounds aggregation
+# Percentile Ranks aggregation
 
 Not available until ElasticSearch 1.3
