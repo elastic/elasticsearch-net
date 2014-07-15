@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest.Resolvers.Converters.Filters
 {
-	public class GeoShapeFilterJsonReader : JsonConverter
+	public class GeoShapeFilterJsonReader : GeoShapeConverterBase
 	{
 		public override bool CanRead { get { return true; } }
 		public override bool CanWrite { get { return false; } }
@@ -57,12 +57,10 @@ namespace Nest.Resolvers.Converters.Filters
 								{
 									IGeoShapeCircleFilter f = new GeoShapeCircleFilterDescriptor();
 									f.Shape = new CircleGeoShape();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<double>>(shape);
 									var radius = shape["radius"];
 									if (radius != null)
 										f.Shape.Radius = radius.Value<string>();
-									var coordinates = shape["coordinates"];
-									if (coordinates != null)
-										f.Shape.Coordinates = coordinates.Values<double>();
 									filter = f;
 									break;
 								}
@@ -70,9 +68,7 @@ namespace Nest.Resolvers.Converters.Filters
 								{
 									IGeoShapeEnvelopeFilter f = new GeoShapeEnvelopeFilterDescriptor();
 									f.Shape = new EnvelopeGeoShape();
-									var coordinates = shape["coordinates"];
-									if (coordinates != null)
-										f.Shape.Coordinates = coordinates.Values<double[]>();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<IEnumerable<double>>>(shape);
 									filter = f;
 									break;
 								}
@@ -80,9 +76,7 @@ namespace Nest.Resolvers.Converters.Filters
 								{
 									IGeoShapeLineStringFilter f = new GeoShapeLineStringFilterDescriptor();
 									f.Shape = new LineStringGeoShape();
-									var coordinates = shape["coordinates"];
-									if (coordinates != null)
-										f.Shape.Coordinates = coordinates.Values<double[]>();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<IEnumerable<double>>>(shape);
 									filter = f;
 									break;
 								}
@@ -90,9 +84,7 @@ namespace Nest.Resolvers.Converters.Filters
 								{
 									IGeoShapeMultiLineStringFilter f = new GeoShapeMultiLineStringFilterDescriptor();
 									f.Shape = new MultiLineStringGeoShape();
-									var coordinates = shape["coordinates"];
-									if (coordinates != null)
-										f.Shape.Coordinates = coordinates.Values<double[][]>();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<double>>>>(shape);
 									filter = f;
 									break;
 								}
@@ -100,9 +92,7 @@ namespace Nest.Resolvers.Converters.Filters
 								{
 									IGeoShapePointFilter f = new GeoShapePointFilterDescriptor();
 									f.Shape = new PointGeoShape();
-									var coordinates = shape["coordinates"];
-									if (coordinates != null)
-										f.Shape.Coordinates = coordinates.Values<double>();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<double>>(shape);
 									filter = f;
 									break;
 								}
@@ -110,9 +100,7 @@ namespace Nest.Resolvers.Converters.Filters
 								{
 									IGeoShapeMultiPointFilter f = new GeoShapeMultiPointFilterDescriptor();
 									f.Shape = new MultiPointGeoShape();
-									var coordinates = shape["coordinates"];
-									if (coordinates != null)
-										f.Shape.Coordinates = coordinates.Values<double[]>();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<IEnumerable<double>>>(shape);
 									filter = f;
 									break;
 								}
@@ -120,9 +108,7 @@ namespace Nest.Resolvers.Converters.Filters
 								{
 									IGeoShapePolygonFilter f = new GeoShapePolygonFilterDescriptor();
 									f.Shape = new PolygonGeoShape();
-									var coordinates = shape["coordinates"];
-									if (coordinates != null)
-										f.Shape.Coordinates = coordinates.Values<double[][]>();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<double>>>>(shape);
 									filter = f;
 									break;
 								}
@@ -130,9 +116,7 @@ namespace Nest.Resolvers.Converters.Filters
 								{
 									IGeoShapeMultiPolygonFilter f = new GeoShapeMultiPolygonFilterDescriptor();
 									f.Shape = new MultiPolygonGeoShape();
-									var coordinates = shape["coordinates"];
-									if (coordinates != null)
-										f.Shape.Coordinates = coordinates.Values<double[][][]>();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<IEnumerable<double>>>>>(shape);
 									filter = f;
 									break;
 								}

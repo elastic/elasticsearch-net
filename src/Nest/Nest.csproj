@@ -676,6 +676,7 @@
     <Compile Include="DSL\Filter\LimitFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\IdsFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\ExistsFilterDescriptor.cs" />
+    <Compile Include="Resolvers\Converters\GeoShapeConverterBase.cs" />
     <Compile Include="Resolvers\Converters\Queries\GeoShapeQueryJsonReader.cs" />
     <Compile Include="Resolvers\Converters\SimilarityCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\FuzzinessConverter.cs" />

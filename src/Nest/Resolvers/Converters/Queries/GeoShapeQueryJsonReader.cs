@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Nest
 {
-	public class GeoShapeQueryJsonReader : JsonConverter
+	public class GeoShapeQueryJsonReader : GeoShapeConverterBase
 	{
 		public override bool CanConvert(Type objectType)
 		{
@@ -104,14 +105,6 @@ namespace Nest
 			if (query == null) return null;
 			query.Field = field;
 			return query;
-		}
-
-		private T GetCoordinates<T>(JToken shape)
-		{
-			var coordinates = shape["coordinates"];
-			if (coordinates != null)
-				return coordinates.ToObject<T>();
-			return default(T);
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
