@@ -51,6 +51,14 @@ namespace Nest
 			this.Self.Shape.Coordinates = coordinates;
 			return this;
 		}
+
+		public GeoShapeCircleFilterDescriptor Radius(string radius)
+		{
+			if (this.Self.Shape == null)
+				this.Self.Shape = new CircleGeoShape();
+			this.Self.Shape.Radius = radius;
+			return this;
+		}
 	}
 
 }
