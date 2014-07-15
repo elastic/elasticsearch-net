@@ -16,7 +16,7 @@ namespace Nest.Tests.Unit.Core.Map
 		public class TestMappingObject
 		{
 			public string Id { get; set; }
-			[ElasticProperty(Name="namez", Index = FieldIndexOption.Analyzed)]
+			[ElasticProperty(Name="namez", Index = FieldIndexOption.Analyzed, Store=true)]
 			public string Name { get; set; }
 		}
 
