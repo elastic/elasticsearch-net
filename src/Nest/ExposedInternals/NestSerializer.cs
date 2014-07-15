@@ -125,8 +125,6 @@ namespace Nest
 
 		internal JsonSerializerSettings CreateSettings(JsonConverter piggyBackJsonConverter = null)
 		{
-			if (piggyBackJsonConverter == null)
-				return this._serializationSettings;
 
 			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
 			var settings = new JsonSerializerSettings()

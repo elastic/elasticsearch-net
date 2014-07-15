@@ -184,6 +184,7 @@ namespace Nest
 		/// </summary>
 		public TDescriptor Index(Type index)
 		{
+			if (index == null) return (TDescriptor)this;
 			return this.Indices(index);
 		}
 
@@ -192,6 +193,7 @@ namespace Nest
 		/// </summary>
 		public TDescriptor Index(IndexNameMarker index)
 		{
+			if (index == null) return (TDescriptor)this;
 			return this.Indices(index);
 		}
 
@@ -200,6 +202,7 @@ namespace Nest
 		/// </summary>
 		public TDescriptor Index(string index)
 		{
+			if (index == null) return (TDescriptor)this;
 			return this.Indices(index);
 		}
 
@@ -262,6 +265,7 @@ namespace Nest
 		/// </summary>
 		public TDescriptor Type(TypeNameMarker type)
 		{
+			if (type == null) return (TDescriptor)this;
 			return this.Types(type);
 		}
 
@@ -271,6 +275,7 @@ namespace Nest
 		/// </summary>
 		public TDescriptor Type(string type)
 		{
+			if (type == null) return (TDescriptor)this;
 			return this.Types(type);
 		}
 
@@ -280,6 +285,7 @@ namespace Nest
 		/// </summary>
 		public TDescriptor Type(Type type)
 		{
+			if (type == null) return (TDescriptor)this;
 			return this.Types(type);
 		}
 
