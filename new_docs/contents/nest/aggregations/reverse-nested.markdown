@@ -10,11 +10,9 @@ menuitem: reverse-nested
 
 ## Description
 
-For more info, read the [docs]().
+A special single bucket aggregation that enables aggregating on parent docs from nested documents. For more info, read the [docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html).
 
 ## Usage
 
-
-
-You can then access the result.Aggregations to get the data, i.e.
+  Not supported in NEST as a typed API yet.
 
