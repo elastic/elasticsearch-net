@@ -316,7 +316,7 @@ namespace Nest
 		
 		/// <summary>
 		/// The geo_shape Filter uses the same grid square representation as the geo_shape mapping to find documents 
-		/// that have a shape that intersects with the query shape. 
+		/// that have a shape that intersects with the envelope shape. 
 		/// It will also use the same PrefixTree configuration as defined for the field mapping.
 		/// </summary>
 		public QueryContainer GeoShapeEnvelope(Action<GeoShapeEnvelopeQueryDescriptor<T>> selector)
@@ -325,7 +325,12 @@ namespace Nest
 			selector(query);
 			return this.New(query, q => q.GeoShape = query);
 		}
-		
+
+		/// <summary>
+		/// The geo_shape Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the circle shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
 		public QueryContainer GeoShapeCircle(Action<GeoShapeCircleQueryDescriptor<T>> selector)
 		{
 			var query = new GeoShapeCircleQueryDescriptor<T>();
@@ -333,6 +338,11 @@ namespace Nest
 			return this.New(query, q => q.GeoShape = query);
 		}
 
+		/// <summary>
+		/// The geo_shape Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the line string shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
 		public QueryContainer GeoShapeLineString(Action<GeoShapeLineStringQueryDescriptor<T>> selector)
 		{
 			var query = new GeoShapeLineStringQueryDescriptor<T>();
@@ -340,6 +350,11 @@ namespace Nest
 			return this.New(query, q => q.GeoShape = query);
 		}
 
+		/// <summary>
+		/// The geo_shape circle Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the multi line string shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
 		public QueryContainer GeoShapeMultiLineString(Action<GeoShapeMultiLineStringQueryDescriptor<T>> selector)
 		{
 			var query = new GeoShapeMultiLineStringQueryDescriptor<T>();
@@ -347,6 +362,11 @@ namespace Nest
 			return this.New(query, q => q.GeoShape = query);
 		}
 
+		/// <summary>
+		/// The geo_shape circle Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the point shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
 		public QueryContainer GeoShapePoint(Action<GeoShapePointQueryDescriptor<T>> selector)
 		{
 			var query = new GeoShapePointQueryDescriptor<T>();
@@ -354,6 +374,11 @@ namespace Nest
 			return this.New(query, q => q.GeoShape = query);
 		}
 
+		/// <summary>
+		/// The geo_shape circle Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the multi point shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
 		public QueryContainer GeoShapeMultiPoint(Action<GeoShapeMultiPointQueryDescriptor<T>> selector)
 		{
 			var query = new GeoShapeMultiPointQueryDescriptor<T>();
@@ -361,6 +386,11 @@ namespace Nest
 			return this.New(query, q => q.GeoShape = query);
 		}
 
+		/// <summary>
+		/// The geo_shape circle Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the polygon shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
 		public QueryContainer GeoShapePolygon(Action<GeoShapePolygonQueryDescriptor<T>> selector)
 		{
 			var query = new GeoShapePolygonQueryDescriptor<T>();
@@ -368,6 +398,11 @@ namespace Nest
 			return this.New(query, q => q.GeoShape = query);
 		}
 
+		/// <summary>
+		/// The geo_shape circle Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the multi polygon shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
 		public QueryContainer GeoShapeMultiPolygon(Action<GeoShapeMultiPolygonQueryDescriptor<T>> selector)
 		{
 			var query = new GeoShapeMultiPolygonQueryDescriptor<T>();
