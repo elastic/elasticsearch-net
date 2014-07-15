@@ -95,11 +95,11 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class MatchQueryDescriptor<T> : IMatchQuery where T : class
 	{
-		protected virtual string _type { get { return null; } }
+		protected virtual string MatchQueryType { get { return null; } }
 
 		private IMatchQuery Self { get { return this; } }
 
-		string IMatchQuery.Type { get { return _type; } }
+		string IMatchQuery.Type { get { return MatchQueryType; } }
 
 		string IMatchQuery.Query { get; set; }
 

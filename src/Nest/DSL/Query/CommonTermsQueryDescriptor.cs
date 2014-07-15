@@ -138,7 +138,7 @@ namespace Nest
 			return this;
 		}
 		
-		public CommonTermsQueryDescriptor<T> CutOffFrequency(double cutOffFrequency)
+		public CommonTermsQueryDescriptor<T> CutoffFrequency(double cutOffFrequency)
 		{
 			((ICommonTermsQuery)this).CutoffFrequency = cutOffFrequency;
 			return this;

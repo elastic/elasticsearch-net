@@ -11,106 +11,106 @@ namespace Nest
 	public interface ISignificantTermsAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		PropertyPathMarker _Field { get; set; }
+		PropertyPathMarker Field { get; set; }
 
 		[JsonProperty("size")]
-		int? _Size { get; set; }
+		int? Size { get; set; }
 
 		[JsonProperty("shard_size")]
-		int? _ShardSize { get; set; }
+		int? ShardSize { get; set; }
 
 		[JsonProperty("min_doc_count")]
-		int? _MinimumDocumentCount { get; set; }
+		int? MinimumDocumentCount { get; set; }
 
 		[JsonProperty("execution_hit")]
-		TermsAggregationExecutionHint? _ExecutionHint { get; set; }
+		TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 		[JsonProperty("include")]
-		IDictionary<string, string> _Include { get; set; }
+		IDictionary<string, string> Include { get; set; }
 
 		[JsonProperty("exclude")]
-		IDictionary<string, string> _Exclude { get; set; }
+		IDictionary<string, string> Exclude { get; set; }
 	}
 
 	public class SignificantTermsAggregator : BucketAggregator, ISignificantTermsAggregator
 	{
-		public PropertyPathMarker _Field { get; set; }
-		public int? _Size { get; set; }
-		public int? _ShardSize { get; set; }
-		public int? _MinimumDocumentCount { get; set; }
-		public TermsAggregationExecutionHint? _ExecutionHint { get; set; }
-		public IDictionary<string, string> _Include { get; set; }
-		public IDictionary<string, string> _Exclude { get; set; }
+		public PropertyPathMarker Field { get; set; }
+		public int? Size { get; set; }
+		public int? ShardSize { get; set; }
+		public int? MinimumDocumentCount { get; set; }
+		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
+		public IDictionary<string, string> Include { get; set; }
+		public IDictionary<string, string> Exclude { get; set; }
 	}
 
 	public class SignificantTermsAggregationDescriptor<T> : BucketAggregationBaseDescriptor<SignificantTermsAggregationDescriptor<T>, T>, ISignificantTermsAggregator where T : class
 	{
 		private ISignificantTermsAggregator Self { get { return this; } }
 
-		PropertyPathMarker ISignificantTermsAggregator._Field { get; set; }
+		PropertyPathMarker ISignificantTermsAggregator.Field { get; set; }
 		
-		int? ISignificantTermsAggregator._Size { get; set; }
+		int? ISignificantTermsAggregator.Size { get; set; }
 
-		int? ISignificantTermsAggregator._ShardSize { get; set; }
+		int? ISignificantTermsAggregator.ShardSize { get; set; }
 
-		int? ISignificantTermsAggregator._MinimumDocumentCount { get; set; }
+		int? ISignificantTermsAggregator.MinimumDocumentCount { get; set; }
 
-		TermsAggregationExecutionHint? ISignificantTermsAggregator._ExecutionHint { get; set; }
+		TermsAggregationExecutionHint? ISignificantTermsAggregator.ExecutionHint { get; set; }
 
-		IDictionary<string, string> ISignificantTermsAggregator._Include { get; set; }
+		IDictionary<string, string> ISignificantTermsAggregator.Include { get; set; }
 
-		IDictionary<string, string> ISignificantTermsAggregator._Exclude { get; set; }
+		IDictionary<string, string> ISignificantTermsAggregator.Exclude { get; set; }
 
 		public SignificantTermsAggregationDescriptor<T> Field(string field)
 		{
-			Self._Field = field;
+			Self.Field = field;
 			return this;
 		}
 
 		public SignificantTermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
 		{
-			Self._Field = field;
+			Self.Field = field;
 			return this;
 		}
 		
 
 		public SignificantTermsAggregationDescriptor<T> Size(int size)
 		{
-			Self._Size = size;
+			Self.Size = size;
 			return this;
 		}
 		
 		public SignificantTermsAggregationDescriptor<T> ShardSize(int shardSize)
 		{
-			Self._ShardSize = shardSize;
+			Self.ShardSize = shardSize;
 			return this;
 		}
 
 		public SignificantTermsAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount)
 		{
-			Self._MinimumDocumentCount = minimumDocumentCount;
+			Self.MinimumDocumentCount = minimumDocumentCount;
 			return this;
 		}
 		
 		public SignificantTermsAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint executionHint)
 		{
-			Self._ExecutionHint = executionHint;
+			Self.ExecutionHint = executionHint;
 			return this;
 		}
 
 		public SignificantTermsAggregationDescriptor<T> Include(string includePattern, string regexFlags = null)
 		{
-			Self._Include = new Dictionary<string, string> { {"pattern", includePattern}};
+			Self.Include = new Dictionary<string, string> { {"pattern", includePattern}};
 			if (!regexFlags.IsNullOrEmpty())
-				Self._Include.Add("pattern", regexFlags);
+				Self.Include.Add("pattern", regexFlags);
 			return this;
 		}
 		
 		public SignificantTermsAggregationDescriptor<T> Exclude(string excludePattern, string regexFlags = null)
 		{
-			Self._Exclude = new Dictionary<string, string> { {"pattern", excludePattern}};
+			Self.Exclude = new Dictionary<string, string> { {"pattern", excludePattern}};
 			if (!regexFlags.IsNullOrEmpty())
-				Self._Exclude.Add("pattern", regexFlags);
+				Self.Exclude.Add("pattern", regexFlags);
 			return this;
 		}
 	}

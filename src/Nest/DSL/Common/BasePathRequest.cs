@@ -8,11 +8,11 @@ namespace Nest
 		where TParameters : IRequestParameters, new()
 	{
 		
-		[JsonIgnore]
-		public IRequestConfiguration RequestConfiguration
-		{	
-			get { return base._requestConfiguration; }
-			set { base._requestConfiguration = value; }
-		}
+		//[JsonIgnore]
+		//public IRequestConfiguration RequestConfiguration
+		//{	
+		//	get { return base._requestConfiguration; }
+		//	set { base._requestConfiguration = value; }
+		//}
 	}
 }

@@ -47,9 +47,9 @@
 			var c = filterContainer ?? new FilterContainer();
 			IFilterContainer fc = c;
 			filter.WrapInContainer(c);
-			fc._Cache = filter.Cache;
-			fc._CacheKey = filter.CacheKey;
-			fc._FilterName = filter.FilterName;
+			fc.Cache = filter.Cache;
+			fc.CacheKey = filter.CacheKey;
+			fc.FilterName = filter.FilterName;
 			return c;
 		}
 

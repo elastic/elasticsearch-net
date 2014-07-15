@@ -7,11 +7,11 @@ namespace Nest
 	{
 		private IBulkOperation Self { get { return this; } }
 
-		protected abstract string _Operation { get; }
-		string IBulkOperation.Operation { get { return this._Operation; } }
+		protected abstract string BulkOperationType { get; }
+		string IBulkOperation.Operation { get { return this.BulkOperationType; } }
 
-		protected abstract Type _ClrType { get; }
-		Type IBulkOperation.ClrType { get { return this._ClrType;  } }
+		protected abstract Type BulkOperationClrType { get; }
+		Type IBulkOperation.ClrType { get { return this.BulkOperationClrType;  } }
 
 		IndexNameMarker IBulkOperation.Index { get; set; }
 
@@ -35,7 +35,7 @@ namespace Nest
 
 		
 
-		protected abstract object _GetBody();
+		protected abstract object GetBulkOperationBody();
 
 		/// <summary>
 		/// Only used for bulk update operations but in the future might come in handy for other complex bulk ops.
@@ -43,7 +43,7 @@ namespace Nest
 		/// <returns></returns>
 		object IBulkOperation.GetBody()
 		{
-			return this._GetBody();
+			return this.GetBulkOperationBody();
 		}
 
 		string IBulkOperation.GetIdForOperation(ElasticInferrer inferrer)
@@ -52,7 +52,7 @@ namespace Nest
 		}
 		protected virtual string GetIdForOperation(ElasticInferrer inferrer)
 		{
-			return !Self.Id.IsNullOrEmpty() ? Self.Id : inferrer.Id(this._GetBody());
+			return !Self.Id.IsNullOrEmpty() ? Self.Id : inferrer.Id(this.GetBulkOperationBody());
 		}
 	}
 }

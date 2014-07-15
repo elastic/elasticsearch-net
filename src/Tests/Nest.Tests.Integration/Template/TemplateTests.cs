@@ -79,7 +79,7 @@ namespace Nest.Tests.Integration.Template
 
 			Assert.IsTrue(mappings.ContainsKey("elasticsearchprojects"), "put-template-with-mappings template should have a `mytype` mapping");
 			Assert.NotNull(mappings["elasticsearchprojects"].AllFieldMapping, "`mytype` mapping should contain the _all field mapping");
-			Assert.AreEqual(false, mappings["elasticsearchprojects"].AllFieldMapping._Enabled, "_all { enabled } should be set to false");
+			Assert.AreEqual(false, mappings["elasticsearchprojects"].AllFieldMapping.Enabled, "_all { enabled } should be set to false");
 		}
 
 		[Test]

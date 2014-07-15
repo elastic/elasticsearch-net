@@ -16,7 +16,7 @@ namespace Nest
 		string MinimumShouldMatch { get; set; }
 		bool? DisableCoord { get; set; }
 		IEnumerable<object> Terms { get; set; }
-		IExternalFieldDeclarationDescriptor ExternalField { get; set; }
+		IExternalFieldDeclaration ExternalField { get; set; }
 		double? Boost { get; set; }
 	}
 
@@ -32,7 +32,7 @@ namespace Nest
 		public string MinimumShouldMatch { get; set; }
 		public bool? DisableCoord { get; set; }
 		public IEnumerable<object> Terms { get; set; }
-		public IExternalFieldDeclarationDescriptor ExternalField { get; set; }
+		public IExternalFieldDeclaration ExternalField { get; set; }
 		public double? Boost { get; set; }
 	}
 
@@ -48,7 +48,7 @@ namespace Nest
 		string ITermsQuery.MinimumShouldMatch { get; set; }
 		bool? ITermsQuery.DisableCoord { get; set; }
 		IEnumerable<object> ITermsQuery.Terms { get; set; }
-		IExternalFieldDeclarationDescriptor ITermsQuery.ExternalField { get; set; }
+		IExternalFieldDeclaration ITermsQuery.ExternalField { get; set; }
 		double? ITermsQuery.Boost { get; set; }
 
 		bool IQuery.IsConditionless

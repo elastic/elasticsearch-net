@@ -98,7 +98,7 @@ namespace Nest.Resolvers.Converters.Queries
 			reader.Read();
 			if (reader.TokenType == JsonToken.StartObject)
 			{
-				var ef = new ExternalFieldDeclarationDescriptor<object>();
+				var ef = new ExternalFieldDeclaration();
 				var depth = reader.Depth;
 				while (reader.Read() && reader.Depth >= depth && reader.Value != null)
 				{
@@ -107,19 +107,19 @@ namespace Nest.Resolvers.Converters.Queries
 					{
 						case "id":
 							reader.Read();
-							ef._Id = reader.Value as string;
+							ef.Id = reader.Value as string;
 							break;
 						case "index":
 							reader.Read();
-							ef._Index = reader.Value as string;
+							ef.Index = reader.Value as string;
 							break;
 						case "type":
 							reader.Read();
-							ef._Type = reader.Value as string;
+							ef.Type = reader.Value as string;
 							break;
 						case "path":
 							reader.Read();
-							ef._Path = reader.Value as string;
+							ef.Path = reader.Value as string;
 							break;
 					}
 				}

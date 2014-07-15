@@ -79,11 +79,11 @@ namespace Nest
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
 		IFilterContainer Filter { get; set; }
 
-		string _Preference { get; }
+		string Preference { get; }
 		
-		string _Routing { get; }
+		string Routing { get; }
 		
-		SearchType? _SearchType { get;  }
+		SearchType? SearchType { get;  }
 		
 		Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set;}
 		
@@ -127,7 +127,7 @@ namespace Nest
 	
 	public partial class SearchRequest : QueryPathBase<SearchRequestParameters>, ISearchRequest
 	{
-		protected internal Type _clrType { get; set; }
+		private Type _clrType { get; set; }
 		Type ISearchRequest.ClrType { get { return _clrType; } }
 
 		public string Timeout { get; set; }
@@ -150,17 +150,17 @@ namespace Nest
 		public IHighlightRequest Highlight { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 
-		SearchType? ISearchRequest._SearchType
+		SearchType? ISearchRequest.SearchType
 		{
 			get { return  this.QueryString == null ? null : this.QueryString.GetQueryStringValue<SearchType?>("search_type");  }
 		}
 
-		string ISearchRequest._Preference
+		string ISearchRequest.Preference
 		{
 			get { return this.QueryString == null ? null : this.QueryString.GetQueryStringValue<string>("preference"); }
 		}
 
-		string ISearchRequest._Routing
+		string ISearchRequest.Routing
 		{
 			get
 			{
@@ -211,17 +211,17 @@ namespace Nest
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IFilterContainer Filter { get; set; }
-		SearchType? ISearchRequest._SearchType
+		SearchType? ISearchRequest.SearchType
 		{
 			get { return  this.QueryString == null ? null : this.QueryString.GetQueryStringValue<SearchType?>("search_type");  }
 		}
 
-		string ISearchRequest._Preference
+		string ISearchRequest.Preference
 		{
 			get { return this.QueryString == null ? null : this.QueryString.GetQueryStringValue<string>("preference"); }
 		}
 
-		string ISearchRequest._Routing
+		string ISearchRequest.Routing
 		{
 			get
 			{
@@ -246,7 +246,7 @@ namespace Nest
 	{
 		private ISearchRequest Self { get { return this; } }
 
-		SearchType? ISearchRequest._SearchType
+		SearchType? ISearchRequest.SearchType
 		{
 			get { return this.Request.RequestParameters.GetQueryStringValue<SearchType?>("search_type");  }
 		}
@@ -257,12 +257,12 @@ namespace Nest
 			set { this.Request.RequestParameters = value;  }
 		}
 
-		string ISearchRequest._Preference
+		string ISearchRequest.Preference
 		{
 			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); }
 		}
 
-		string ISearchRequest._Routing
+		string ISearchRequest.Routing
 		{
 			get
 			{
@@ -924,7 +924,7 @@ namespace Nest
 			var desc = new TermSuggestDescriptor<T>();
 			var item = suggest(desc);
 			ITermSuggester i = item;
-			var bucket = new SuggestBucket { Text = i._Text, Term = item };
+			var bucket = new SuggestBucket { Text = i.Text, Term = item };
 			Self.Suggest.Add(name, bucket);
 			return this;
 		}
@@ -943,7 +943,7 @@ namespace Nest
 			var desc = new PhraseSuggestDescriptor<T>();
 			var item = suggest(desc);
 			IPhraseSuggester i = item;
-			var bucket = new SuggestBucket { Text = i._Text, Phrase = item };
+			var bucket = new SuggestBucket { Text = i.Text, Phrase = item };
 			Self.Suggest.Add(name, bucket);
 			return this;
 		}
@@ -962,7 +962,7 @@ namespace Nest
 			var desc = new CompletionSuggestDescriptor<T>();
 			var item = suggest(desc);
 			ICompletionSuggester i = item;
-			var bucket = new SuggestBucket { Text = i._Text, Completion = item };
+			var bucket = new SuggestBucket { Text = i.Text, Completion = item };
 			Self.Suggest.Add(name, bucket);
 			return this;
 		}

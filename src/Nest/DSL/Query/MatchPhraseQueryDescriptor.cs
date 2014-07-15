@@ -12,7 +12,7 @@ namespace Nest
 		where T : class
 	{
 
-		protected override string _type { get { return "phrase"; } }
+		protected override string MatchQueryType { get { return "phrase"; } }
 		
 	}
 }

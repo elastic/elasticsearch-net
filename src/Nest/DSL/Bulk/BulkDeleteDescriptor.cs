@@ -42,12 +42,12 @@ namespace Nest
 	{
 		private IBulkDeleteOperation<T> Self { get { return this; } } 
 
-		protected override string _Operation { get { return "delete"; } }
-		protected override Type _ClrType { get { return typeof(T); } }
+		protected override string BulkOperationType { get { return "delete"; } }
+		protected override Type BulkOperationClrType { get { return typeof(T); } }
 		
 		T IBulkDeleteOperation<T>.Document { get; set; }
 
-		protected override object _GetBody()
+		protected override object GetBulkOperationBody()
 		{
 			return null;
 		}

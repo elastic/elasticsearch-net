@@ -139,6 +139,7 @@
     <Compile Include="Domain\Bulk\IBulkOperation.cs" />
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
     <Compile Include="DSL\GetAliasDescriptor.cs" />
+    <Compile Include="DSL\Query\SubDescriptors\ExternalFieldDeclarationDescriptor.cs" />
     <Compile Include="DSL\TermVector\IMultiTermVectorDocumentDescriptor.cs" />
     <Compile Include="DSL\MultiGet\MultiGetDoc.cs" />
     <Compile Include="Domain\Connection\ConnectionSettings.cs" />
@@ -410,8 +411,8 @@
     <Compile Include="Domain\DSL\ParentScoreType.cs" />
     <Compile Include="DSL\RegisterPercolatorDescriptor.cs" />
     <Compile Include="DSL\PercolateDescriptor.cs" />
-    <Compile Include="DSL\Query\SubDescriptors\ExternalFieldDeclarationDescriptor.cs" />
-    <Compile Include="DSL\Query\SubDescriptors\IExternalFieldDeclarationDescriptor.cs" />
+    <Compile Include="DSL\Query\SubDescriptors\ExternalFieldDeclaration.cs" />
+    <Compile Include="DSL\Query\SubDescriptors\IExternalFieldDeclaration.cs" />
     <Compile Include="DSL\Query\MultiMatchQueryDescriptor.cs" />
     <Compile Include="ElasticClient-ClusterState.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
@@ -758,7 +759,7 @@
     <Compile Include="Domain\Hit\Hit.cs" />
     <Compile Include="Domain\Hit\HitsMetaData.cs" />
     <Compile Include="IElasticClient.cs" />
-    <Compile Include="Properties\InternalsVisibleTo.cs" />
+    <Compile Include="Properties\ClsCompiancy.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\AggregationConverter.cs" />
     <Compile Include="Resolvers\Converters\FieldNameFilterConverter.cs" />

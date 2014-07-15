@@ -39,7 +39,7 @@ namespace Nest
 		public TypeFieldMapping TypeFieldMapping { get; set; }
 
 		[JsonProperty("_all")]
-		public AllFieldMapping AllFieldMapping { get; set; }
+		public IAllFieldMapping AllFieldMapping { get; set; }
 
 		[JsonProperty("_analyzer")]
 		public AnalyzerFieldMapping AnalyzerFieldMapping { get; set; }

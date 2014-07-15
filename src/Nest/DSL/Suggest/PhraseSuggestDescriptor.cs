@@ -58,7 +58,7 @@ namespace Nest
 
 		public PhraseSuggestDescriptor<T> Text(string text)
 		{
-			Self._Text = text;
+			Self.Text = text;
 			return this;
 		}
 

@@ -91,7 +91,7 @@ namespace Nest
 			this.Self.IgnoreUnavailable = ignoreUnavailable;
 			return this;
 		}
-		public SnapshotDescriptor IncludeGlobalstate(bool includeGlobalState = true)
+		public SnapshotDescriptor IncludeGlobalState(bool includeGlobalState = true)
 		{
 			this.Self.IncludeGlobalState = includeGlobalState;
 			return this;

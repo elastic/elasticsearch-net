@@ -88,8 +88,8 @@ namespace Nest.Tests.Integration.Indices
 			Assert.AreEqual(r.IndexSettings.NumberOfReplicas, 4);
 			Assert.AreEqual(r.IndexSettings.NumberOfShards, 8);
 			//Assert.Greater(r.Setttings, 0);
-			Assert.NotNull(r.IndexSettings._.merge.policy.merge_factor);
-			Assert.AreEqual(10, r.IndexSettings._.merge.policy.merge_factor);
+			Assert.NotNull(r.IndexSettings.AsExpando.merge.policy.merge_factor);
+			Assert.AreEqual(10, r.IndexSettings.AsExpando.merge.policy.merge_factor);
 			
 			Assert.AreEqual(3, r.IndexSettings.Analysis.Analyzers.Count);
 			{ // assert analyzers

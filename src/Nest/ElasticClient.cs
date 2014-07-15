@@ -13,7 +13,7 @@ namespace Nest
 	/// </summary>
 	public partial class ElasticClient : Nest.IElasticClient
 	{
-		protected readonly IConnectionSettingsValues _connectionSettings;
+		private readonly IConnectionSettingsValues _connectionSettings;
 
 		internal RawDispatch RawDispatch { get; set; }
 

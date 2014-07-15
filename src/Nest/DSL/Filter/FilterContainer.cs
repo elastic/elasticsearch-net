@@ -10,11 +10,11 @@ namespace Nest
 	{
 		private static readonly IEnumerable<FilterContainer> Empty = Enumerable.Empty<FilterContainer>();
 
-		string IFilterContainer._FilterName { get; set; }
+		string IFilterContainer.FilterName { get; set; }
 		
-		string IFilterContainer._CacheKey { get; set; }
+		string IFilterContainer.CacheKey { get; set; }
 		
-		bool? IFilterContainer._Cache { get; set; }
+		bool? IFilterContainer.Cache { get; set; }
 		
 		string IFilterContainer.RawFilter { get; set; }
 		

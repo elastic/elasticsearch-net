@@ -82,7 +82,7 @@ namespace Nest
 
 			var settings = this._serializationSettings;
 
-			return _Deserialize<T>(stream, settings);
+			return DeserializeUsingSettings<T>(stream, settings);
 		}
 
 		/// <summary>
@@ -92,26 +92,18 @@ namespace Nest
 		{
 			if (stream == null) return default(T);
 			if (converter == null) return this.Deserialize<T>(stream);
-
-			var serializer = JsonSerializer.Create(this.CreateSettings(converter));
-			var jsonTextReader = new JsonTextReader(new StreamReader(stream));
-			var t = (T)serializer.Deserialize(jsonTextReader, typeof(T));
-			return t;
-
+			
+			var settings = this.CreateSettings(converter);
+			return DeserializeUsingSettings<T>(stream, settings);
 		}
 
-		protected internal T _Deserialize<T>(Stream stream, JsonSerializerSettings settings = null)
+		private T DeserializeUsingSettings<T>(Stream stream, JsonSerializerSettings settings = null)
 		{
 			if (stream == null) return default(T);
 			settings = settings ?? _serializationSettings;
 			var serializer = JsonSerializer.Create(settings);
 			var jsonTextReader = new JsonTextReader(new StreamReader(stream));
 			var t = (T)serializer.Deserialize(jsonTextReader, typeof(T));
-			//var r = t as BaseResponse;
-			//if (r != null)
-			//{
-			//	r.ConnectionStatus = response;
-			//}
 			return t;
 		}
 
@@ -133,6 +125,9 @@ namespace Nest
 
 		internal JsonSerializerSettings CreateSettings(JsonConverter piggyBackJsonConverter = null)
 		{
+			if (piggyBackJsonConverter == null)
+				return this._serializationSettings;
+
 			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
 			var settings = new JsonSerializerSettings()
 			{
@@ -200,8 +195,8 @@ namespace Nest
 					index = path.Index,
 					type = path.Type,
 					search_type = this.GetSearchType(operation, multiSearchRequest),
-					preference = operation._Preference,
-					routing = operation._Routing
+					preference = operation.Preference,
+					routing = operation.Routing
 				};
 				var opJson = this.Serialize(op, SerializationFormatting.None).Utf8String();
 
@@ -218,9 +213,9 @@ namespace Nest
 
 		protected string GetSearchType(ISearchRequest descriptor, IMultiSearchRequest multiSearchRequest)
 		{
-			if (descriptor._SearchType != null)
+			if (descriptor.SearchType != null)
 			{
-				return descriptor._SearchType.Value.GetStringValue();
+				return descriptor.SearchType.Value.GetStringValue();
 			}
 			return multiSearchRequest.RequestParameters.GetQueryStringValue<string>("search_type");
 		}

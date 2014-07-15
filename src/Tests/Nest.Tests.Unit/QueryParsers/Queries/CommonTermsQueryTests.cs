@@ -14,7 +14,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				f=>f.CommonTerms(ct=>ct
 					.Analyzer("my_analyzer")
 					.Boost(1.1)
-					.CutOffFrequency(2.0)
+					.CutoffFrequency(2.0)
 					.DisableCoord()
 					.HighFrequencyOperator(Operator.Or)
 					.LowFrequencyOperator(Operator.And)

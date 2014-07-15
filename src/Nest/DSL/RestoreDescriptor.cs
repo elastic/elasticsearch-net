@@ -88,7 +88,7 @@ namespace Nest
 			Self.IgnoreUnavailable = ignoreUnavailable;
 			return this;
 		}
-		public RestoreDescriptor IncludeGlobalstate(bool includeGlobalState = true)
+		public RestoreDescriptor IncludeGlobalState(bool includeGlobalState = true)
 		{
 			Self.IncludeGlobalState = includeGlobalState;
 			return this;

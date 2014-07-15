@@ -14,17 +14,17 @@ namespace Nest
 
 		public FilterDescriptor<T> Name(string name)
 		{
-			Self._FilterName = name;
+			Self.FilterName = name;
 			return this;
 		}
 		public FilterDescriptor<T> CacheKey(string cacheKey)
 		{
-			Self._CacheKey = cacheKey;
+			Self.CacheKey = cacheKey;
 			return this;
 		}
 		public FilterDescriptor<T> Cache(bool cache)
 		{
-			Self._Cache = cache;
+			Self.Cache = cache;
 			return this;
 		}
 		
@@ -717,9 +717,9 @@ namespace Nest
 
 		private void ResetCache()
 		{
-			Self._Cache = null;
-			Self._CacheKey = null;
-			Self._FilterName = null;
+			Self.Cache = null;
+			Self.CacheKey = null;
+			Self.FilterName = null;
 		}
 
 		private void SetCacheAndName(IFilter filter)
@@ -728,12 +728,12 @@ namespace Nest
 			filter.IsStrict = self.IsStrict;
 			filter.IsVerbatim = self.IsVerbatim;
 
-			if (Self._Cache.HasValue)
-				filter.Cache = Self._Cache;
-			if (!string.IsNullOrWhiteSpace(Self._FilterName))
-				filter.FilterName = Self._FilterName;
-			if (!string.IsNullOrWhiteSpace(Self._CacheKey))
-				filter.CacheKey = Self._CacheKey;
+			if (Self.Cache.HasValue)
+				filter.Cache = Self.Cache;
+			if (!string.IsNullOrWhiteSpace(Self.FilterName))
+				filter.FilterName = Self.FilterName;
+			if (!string.IsNullOrWhiteSpace(Self.CacheKey))
+				filter.CacheKey = Self.CacheKey;
 		}
 
 

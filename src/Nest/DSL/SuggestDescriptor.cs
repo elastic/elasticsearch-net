@@ -37,7 +37,7 @@ namespace Nest
 				foreach (var kv in suggestRequest.Suggest)
 				{
 					var item = kv.Value;
-					var bucket = new SuggestBucket() { Text = item._Text };
+					var bucket = new SuggestBucket() { Text = item.Text };
 
 					var completion = item as ICompletionSuggester;
 					if (completion != null) bucket.Completion = completion;

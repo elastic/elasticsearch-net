@@ -1,61 +1,90 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 
 namespace Nest
 {
-    public class AllFieldMapping
-    {
-
+	[JsonConverter(typeof(ReadAsTypeConverter<AllFieldMapping>))]
+	public interface IAllFieldMapping
+	{
 		[JsonProperty("enabled")]
-		public bool? _Enabled { get; internal set; }
-		
+		bool? Enabled { get; set; }
+
 		[JsonProperty("store")]
-		public bool? _Store { get; internal set; }
+		bool? Store { get; set; }
 
 		[JsonProperty("term_vector")]
-		public TermVectorOption?  _TermVector { get; internal set; }
+		TermVectorOption? TermVector { get; set; }
 
 		[JsonProperty("analyzer")]
-		public string _Analyzer { get; internal set; }
+		string Analyzer { get; set; }
 
 		[JsonProperty("index_analyzer")]
-		public string _IndexAnalyzer { get; internal set; }
+		string IndexAnalyzer { get; set; }
 
 		[JsonProperty("search_analyzer")]
-		public string _SearchAnalyzer { get; internal set; }
+		string SearchAnalyzer { get; set; }
+	}
 
-		public AllFieldMapping Enabled(bool enabled = true)
+	public class AllFieldMapping : IAllFieldMapping
+	{
+		public bool? Enabled { get; set; }
+		public bool? Store { get; set; }
+		public TermVectorOption? TermVector { get; set; }
+		public string Analyzer { get; set; }
+		public string IndexAnalyzer { get; set; }
+		public string SearchAnalyzer { get; set; }
+	}
+
+	public class AllFieldMappingDescriptor : IAllFieldMapping
+	{
+
+		private IAllFieldMapping Self { get { return this; } }
+
+		bool? IAllFieldMapping.Enabled { get; set; }
+		
+		bool? IAllFieldMapping.Store { get; set; }
+
+		TermVectorOption?  IAllFieldMapping.TermVector { get; set; }
+
+		string IAllFieldMapping.Analyzer { get; set; }
+
+		string IAllFieldMapping.IndexAnalyzer { get; set; }
+
+		string IAllFieldMapping.SearchAnalyzer { get; set; }
+
+		public AllFieldMappingDescriptor Enabled(bool enabled = true)
 		{
-			this._Enabled = enabled;
+			Self.Enabled = enabled;
 			return this;
 		}
 
-		public AllFieldMapping Store(bool store = true)
+		public AllFieldMappingDescriptor Store(bool store = true)
 		{
-			this._Store = store;
+			Self.Store = store;
 			return this;
 		}
 
-		public AllFieldMapping TermVector(TermVectorOption option)
+		public AllFieldMappingDescriptor TermVector(TermVectorOption option)
 		{
-			this._TermVector = option;
+			Self.TermVector = option;
 			return this;
 		}
 
-		public AllFieldMapping Analyzer(string analyzer)
+		public AllFieldMappingDescriptor Analyzer(string analyzer)
 		{
-			this._Analyzer = analyzer;
+			Self.Analyzer = analyzer;
 			return this;
 		}
 
-		public AllFieldMapping IndexAnalyzer(string analyzer)
+		public AllFieldMappingDescriptor IndexAnalyzer(string analyzer)
 		{
-			this._IndexAnalyzer = analyzer;
+			Self.IndexAnalyzer = analyzer;
 			return this;
 		}
 
-		public AllFieldMapping SearchAnalyzer(string analyzer)
+		public AllFieldMappingDescriptor SearchAnalyzer(string analyzer)
 		{
-			this._SearchAnalyzer = analyzer;
+			Self.SearchAnalyzer = analyzer;
 			return this;
 		}
     }
