@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Linq.Expressions;
 using Elasticsearch.Net;
 
 //This file contains all the typed querystring parameters that are generated of the client spec.
@@ -1667,26 +1669,26 @@ namespace Nest
 		
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] _Source 
+		public  string[] SourceEnabled 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("source_enabled"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_enabled", value); }
 		}
 		
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<PropertyPathMarker> _SourceExclude 
+		public IList<PropertyPathMarker> SourceExclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_exclude"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("source_exclude"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_exclude", value); }
 		}
 		
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<PropertyPathMarker> _SourceInclude 
+		public IList<PropertyPathMarker> SourceInclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("source_include"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_include", value); }
 		}
 		
 
@@ -1755,26 +1757,26 @@ namespace Nest
 		
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] _Source 
+		public  string[] SourceEnabled 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("source_enabled"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_enabled", value); }
 		}
 		
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<PropertyPathMarker> _SourceExclude 
+		public IList<PropertyPathMarker> SourceExclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_exclude"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("source_exclude"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_exclude", value); }
 		}
 		
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<PropertyPathMarker> _SourceInclude 
+		public IList<PropertyPathMarker> SourceInclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("source_include"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_include", value); }
 		}
 		
 		
@@ -1845,26 +1847,26 @@ namespace Nest
 		
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] _Source 
+		public  string[] SourceEnabled 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("source_enabled"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_enabled", value); }
 		}
 		
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<PropertyPathMarker> _SourceExclude 
+		public IList<PropertyPathMarker> SourceExclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_exclude"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("source_exclude"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_exclude", value); }
 		}
 		
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<PropertyPathMarker> _SourceInclude 
+		public IList<PropertyPathMarker> SourceInclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("source_include"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_include", value); }
 		}
 		
 		
@@ -3635,26 +3637,26 @@ namespace Nest
 		
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] _Source 
+		public  string[] SourceEnabled 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("source_enabled"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_enabled", value); }
 		}
 		
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<PropertyPathMarker> _SourceExclude 
+		public IList<PropertyPathMarker> SourceExclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_exclude"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("source_exclude"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_exclude", value); }
 		}
 		
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<PropertyPathMarker> _SourceInclude 
+		public IList<PropertyPathMarker> SourceInclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("source_include"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_include", value); }
 		}
 		
 	}
@@ -5335,26 +5337,26 @@ namespace Nest
 		
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] _Source 
+		public  string[] SourceEnabled 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("source_enabled"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_enabled", value); }
 		}
 		
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<PropertyPathMarker> _SourceExclude 
+		public IList<PropertyPathMarker> SourceExclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_exclude"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("source_exclude"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_exclude", value); }
 		}
 		
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<PropertyPathMarker> _SourceInclude 
+		public IList<PropertyPathMarker> SourceInclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("source_include"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_include", value); }
 		}
 		
 		
@@ -5425,26 +5427,26 @@ namespace Nest
 		
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] _Source 
+		public  string[] SourceEnabled 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("source_enabled"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_enabled", value); }
 		}
 		
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<PropertyPathMarker> _SourceExclude 
+		public IList<PropertyPathMarker> SourceExclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_exclude"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("source_exclude"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_exclude", value); }
 		}
 		
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<PropertyPathMarker> _SourceInclude 
+		public IList<PropertyPathMarker> SourceInclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("source_include"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_include", value); }
 		}
 		
 		
