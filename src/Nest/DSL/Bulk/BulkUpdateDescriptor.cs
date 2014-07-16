@@ -5,14 +5,15 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IBulkUpdateOperation<TDocument, TPartialUpdate> : IBulkOperation
+	public interface IBulkUpdateOperation<TDocument, TPartialDocument> : IBulkOperation
 		where TDocument : class
-		where TPartialUpdate : class
+		where TPartialDocument : class
 	{
-		TDocument Document { get; set; }
+		TDocument InferFrom { get; set; }
+
 		TDocument Upsert { get; set; }
 		
-		TPartialUpdate PartialUpdate { get; set; }
+		TPartialDocument Doc { get; set; }
 		
 		bool? DocAsUpsert { get; set; }
 		
@@ -23,18 +24,39 @@ namespace Nest
 		Dictionary<string, object> Params { get; set; }
 	}
 
-	public class BulkUpdateOperation<TDocument, TPartialUpdate> 
-		: BulkOperationBase, IBulkUpdateOperation<TDocument, TPartialUpdate>
+	public class BulkUpdateOperation<TDocument, TPartialDocument> : BulkOperationBase, IBulkUpdateOperation<TDocument, TPartialDocument>
 		where TDocument : class
-		where TPartialUpdate : class
+		where TPartialDocument : class
 	{
+		
 
+		public BulkUpdateOperation(string id) { this.Id = id; }
+		public BulkUpdateOperation(long id) : this(id.ToString(CultureInfo.InvariantCulture)) {}
 
-		public BulkUpdateOperation() {} 
-		public BulkUpdateOperation(TDocument document, TPartialUpdate update) : this()
+		/// <summary>
+		/// Create a new bulk operation
+		/// </summary>
+		/// <param name="idFrom">Use this document to infer the id from</param>
+		/// <param name="useIdFromAsUpsert">Use the document to infer on as the upsert document in this update operation</param>
+		public BulkUpdateOperation(TDocument idFrom, bool useIdFromAsUpsert = false) 
 		{
-			this.PartialUpdate = update;
-			this.Document = document;
+			this.InferFrom = idFrom;
+			if (useIdFromAsUpsert)
+				this.Upsert = idFrom;
+		}
+		
+		/// <summary>
+		/// Create a new Bulk Operation
+		/// </summary>
+		/// <param name="idFrom">Use this document to infer the id from</param>
+		/// <param name="update">The partial update document (doc) to send as update</param>
+		/// <param name="useIdFromAsUpsert">Use the document to infer on as the upsert document in this update operation</param>
+		public BulkUpdateOperation(TDocument idFrom, TPartialDocument update, bool useIdFromAsUpsert = false) 
+		{
+			this.InferFrom = idFrom;
+			if (useIdFromAsUpsert)
+				this.Upsert = idFrom;
+			this.Doc = update;
 		}
 
 
@@ -44,14 +66,14 @@ namespace Nest
 		
 		public override string GetIdForOperation(ElasticInferrer inferrer)
 		{
-			return this.Id ?? inferrer.Id(this.Document);
+			return this.Id ?? inferrer.Id(this.InferFrom);
 		}
 		
 		public override object GetBody()
 		{
-			return new BulkUpdateBody<TDocument, TPartialUpdate>
+			return new BulkUpdateBody<TDocument, TPartialDocument>
 			{
-				_PartialUpdate = this.PartialUpdate,
+				_PartialUpdate = this.Doc,
 				_Script = this.Script,
 				_Lang = this.Lang,
 				_Params = this.Params,
@@ -60,38 +82,43 @@ namespace Nest
 			};
 		}
 
-		public TDocument Document { get; set; }
+		public TDocument InferFrom { get; set; }
 		public TDocument Upsert { get; set; }
-		public TPartialUpdate PartialUpdate { get; set; }
+		public TPartialDocument Doc { get; set; }
 		public bool? DocAsUpsert { get; set; }
 		public string Lang { get; set; }
 		public string Script { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 	}
 
-	public class BulkUpdateDescriptor<TDocument, TPartialUpdate>
-		: BulkOperationDescriptorBase, IBulkUpdateOperation<TDocument, TPartialUpdate>
+	public class BulkUpdateDescriptor<TDocument, TPartialDocument> : BulkOperationDescriptorBase, IBulkUpdateOperation<TDocument, TPartialDocument>
 		where TDocument : class
-		where TPartialUpdate : class
+		where TPartialDocument : class
 	{
-		private IBulkUpdateOperation<TDocument, TPartialUpdate> Self { get { return this; } }
+		private IBulkUpdateOperation<TDocument, TPartialDocument> Self { get { return this; } }
 
 		protected override string BulkOperationType { get { return "update"; } }
 		protected override Type BulkOperationClrType { get { return typeof(TDocument); } }
 
-		TDocument IBulkUpdateOperation<TDocument, TPartialUpdate>.Document { get; set; }
-		TDocument IBulkUpdateOperation<TDocument, TPartialUpdate>.Upsert { get; set; }
-		TPartialUpdate IBulkUpdateOperation<TDocument, TPartialUpdate>.PartialUpdate { get; set; }
-		bool? IBulkUpdateOperation<TDocument, TPartialUpdate>.DocAsUpsert { get; set; }
-		string IBulkUpdateOperation<TDocument, TPartialUpdate>.Lang { get; set; }
-		string IBulkUpdateOperation<TDocument, TPartialUpdate>.Script { get; set; }
-		Dictionary<string, object> IBulkUpdateOperation<TDocument, TPartialUpdate>.Params { get; set; }
+		TDocument IBulkUpdateOperation<TDocument, TPartialDocument>.InferFrom { get; set; }
+
+		TDocument IBulkUpdateOperation<TDocument, TPartialDocument>.Upsert { get; set; }
+
+		TPartialDocument IBulkUpdateOperation<TDocument, TPartialDocument>.Doc { get; set; }
+
+		bool? IBulkUpdateOperation<TDocument, TPartialDocument>.DocAsUpsert { get; set; }
+
+		string IBulkUpdateOperation<TDocument, TPartialDocument>.Lang { get; set; }
+
+		string IBulkUpdateOperation<TDocument, TPartialDocument>.Script { get; set; }
+
+		Dictionary<string, object> IBulkUpdateOperation<TDocument, TPartialDocument>.Params { get; set; }
 	
 		protected override object GetBulkOperationBody()
 		{
-			return new BulkUpdateBody<TDocument, TPartialUpdate>
+			return new BulkUpdateBody<TDocument, TPartialDocument>
 			{
-				_PartialUpdate = Self.PartialUpdate,
+				_PartialUpdate = Self.Doc,
 				_Script = Self.Script,
 				_Lang = Self.Lang,
 				_Params = Self.Params,
@@ -102,13 +129,13 @@ namespace Nest
 
 		protected override string GetIdForOperation(ElasticInferrer inferrer)
 		{
-			return Self.Id ?? inferrer.Id(Self.Document);
+			return Self.Id ?? inferrer.Id(Self.InferFrom) ?? inferrer.Id(Self.Upsert);
 		}
 
 		/// <summary>
 		/// Manually set the index, default to the default index or the fixed index set on the bulk operation
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Index(string index)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Index(string index)
 		{
 			index.ThrowIfNullOrEmpty("indices");
 			Self.Index = index;
@@ -118,7 +145,7 @@ namespace Nest
 		/// Manualy set the type to get the object from, default to whatever
 		/// T will be inferred to if not passed or the fixed type set on the parent bulk operation
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Type(string type)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Type(string type)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			Self.Type = type;
@@ -128,7 +155,7 @@ namespace Nest
 		/// <summary>
 		/// Manually set the type of which a typename will be inferred
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Type(Type type)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Type(Type type)
 		{
 			type.ThrowIfNull("type");
 			Self.Type = type;
@@ -138,7 +165,7 @@ namespace Nest
 		/// <summary>
 		/// Manually set the id for the newly created object
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Id(long id)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Id(long id)
 		{
 			return this.Id(id.ToString(CultureInfo.InvariantCulture));
 		}
@@ -146,7 +173,7 @@ namespace Nest
 		/// <summary>
 		/// Manually set the id for the newly created object
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Id(string id)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Id(string id)
 		{
 			Self.Id = id;
 			return this;
@@ -156,15 +183,16 @@ namespace Nest
 		/// The object to update, if id is not manually set it will be inferred from the object.
 		/// Used ONLY to infer the ID see Document() to apply a partial object merge.
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Document(TDocument @object)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> IdFrom(TDocument @object, bool useAsUpsert = false)
 		{
-			Self.Document = @object;
+			Self.InferFrom = @object;
+			if (useAsUpsert) return this.Upsert(@object);
 			return this;
 		}
 		/// <summary>
 		/// A document to upsert when the specified document to be updated is not found
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Upsert(TDocument @object)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Upsert(TDocument @object)
 		{
 			Self.Upsert = @object;
 			return this;
@@ -172,75 +200,75 @@ namespace Nest
 		/// <summary>
 		/// The partial update document to be merged on to the existing object.
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> PartialUpdate(TPartialUpdate @object)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument @object)
 		{
-			Self.PartialUpdate = @object;
+			Self.Doc = @object;
 			return this;
 		}
 
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> DocAsUpsert(bool docAsUpsert = true)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool partialDocumentAsUpsert = true)
 		{
-			Self.DocAsUpsert = docAsUpsert;
+			Self.DocAsUpsert = partialDocumentAsUpsert;
 			return this;
 		}
 		
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Lang(string lang)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Lang(string lang)
 		{
 			Self.Lang = lang;
 			return this;
 		}
 
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Script(string script)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Script(string script)
 		{
 			script.ThrowIfNull("script");
 			Self.Script = script;
 			return this;
 		}
 
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
 			Self.Params = paramDictionary(new FluentDictionary<string, object>());
 			return this;
 		}
 
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Version(string version)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Version(string version)
 		{
 			Self.Version = version; 
 			return this;
 		}
 
 
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> VersionType(VersionType versionType)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> VersionType(VersionType versionType)
 		{
 			Self.VersionType = versionType;
 			return this;
 		}
 
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Routing(string routing)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Routing(string routing)
 		{
 			Self.Routing = routing; 
 			return this;
 		}
 
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Parent(string parent)		{
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Parent(string parent)		{
 			Self.Parent = parent; 
 			return this;
 		}
 
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Timestamp(long timestamp)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Timestamp(long timestamp)
 		{
 			Self.Timestamp = timestamp; 
 			return this;
 		}
 
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> Ttl(string ttl)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Ttl(string ttl)
 		{
 			Self.Ttl = ttl; 
 			return this;
 		}
 
-		public BulkUpdateDescriptor<TDocument, TPartialUpdate> RetriesOnConflict(int retriesOnConflict)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> RetriesOnConflict(int retriesOnConflict)
 		{
 			Self.RetriesOnConflict = retriesOnConflict;
 			return this;

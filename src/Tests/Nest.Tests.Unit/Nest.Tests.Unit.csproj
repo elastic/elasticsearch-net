@@ -207,6 +207,7 @@
     <Compile Include="Core\UpdateSettings\UpdateSettingsRequestTests.cs" />
     <Compile Include="Core\UpdateSettings\UpdateSettingsTests.cs" />
     <Compile Include="Core\Update\UpdateRequestTests.cs" />
+    <Compile Include="Core\Update\UpdateAPIConsistencyTests.cs" />
     <Compile Include="Core\Validate\ValidateRequestTests.cs" />
     <Compile Include="Core\Versioning\VersioningTests.cs" />
     <Compile Include="Core\Warmers\PutWarmerRequestTests.cs" />
