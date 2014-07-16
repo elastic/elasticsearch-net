@@ -15,9 +15,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				f=>f.FunctionScore,
 				f=>f.FunctionScore(fq=>fq
 					.BoostMode(FunctionBoostMode.Average)
+					.MaxBoost(0.95f)
 					.Functions(
 						ff => ff.Gauss(x => x.StartedOn, d => d.Scale("42w")),
-						ff => ff.Linear(x => x.FloatValue, d => d.Scale("0.3")),
+						ff => ff.Linear(x => x.FloatValue, d => d.Scale("0.3")).Filter(lff=>Filter2),
 						ff => ff.Exp(x => x.DoubleValue, d => d.Scale("0.5")),
 						ff => ff.BoostFactor(2).Filter(bff=>Filter1)
 					)
@@ -33,6 +34,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				);
 
 			q.BoostMode.Should().Be(FunctionBoostMode.Average);
+			q.MaxBoost.Should().Be(0.95f);
 			q.RandomScore.Should().NotBeNull();
 			q.RandomScore.Seed.Should().Be(1337);
 			q.ScoreMode.Should().Be(FunctionScoreMode.First);

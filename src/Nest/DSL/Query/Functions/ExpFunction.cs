@@ -21,5 +21,14 @@ namespace Nest
 			descriptorBuilder(descriptor);
 			_ExpDescriptor[objectPath] = descriptor;
 		}
+
+		public ExpFunction(string field, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+		{
+			_ExpDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>();
+
+			var descriptor = new FunctionScoreDecayFieldDescriptor();
+			descriptorBuilder(descriptor);
+			_ExpDescriptor[field] = descriptor;
+		}
 	}
 }

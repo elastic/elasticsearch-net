@@ -21,5 +21,14 @@ namespace Nest
 			descriptorBuilder(descriptor);
 			_LinearDescriptor[objectPath] = descriptor;
 		}
+
+		public LinearFunction(string field, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+		{
+			_LinearDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>();
+
+			var descriptor = new FunctionScoreDecayFieldDescriptor();
+			descriptorBuilder(descriptor);
+			_LinearDescriptor[field] = descriptor;
+		}
 	}
 }
