@@ -16,6 +16,13 @@ namespace Nest
 			this._Functions = new List<FunctionScoreFunction<T>>();
 		}
 
+		public FunctionScoreFunction<T> Gauss(string field, Action<FunctionScoreDecayFieldDescriptor> db)
+		{
+			var fn = new GaussFunction<T>(field, db);
+			this._Functions.Add(fn);
+			return fn;
+		}
+
 		public FunctionScoreFunction<T> Gauss(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> db)
 		{
 			var fn = new GaussFunction<T>(objectPath, db);
@@ -23,9 +30,23 @@ namespace Nest
 			return fn;
 		}
 
+		public FunctionScoreFunction<T> Linear(string field, Action<FunctionScoreDecayFieldDescriptor> db)
+		{
+			var fn = new LinearFunction<T>(field, db);
+			this._Functions.Add(fn);
+			return fn;
+		}
+
 		public FunctionScoreFunction<T> Linear(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> db)
 		{
 			var fn = new LinearFunction<T>(objectPath, db);
+			this._Functions.Add(fn);
+			return fn;
+		}
+
+		public FunctionScoreFunction<T> Exp(string field, Action<FunctionScoreDecayFieldDescriptor> db)
+		{
+			var fn = new ExpFunction<T>(field, db);
 			this._Functions.Add(fn);
 			return fn;
 		}

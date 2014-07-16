@@ -169,7 +169,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 			var s = new SearchDescriptor<ElasticsearchProject>().Query(
 				q => q.FunctionScore(
 					fs => fs.Functions(
-						f => f.Gauss(p => p.FloatValue, g => g.Origin("5").Scale("0.1"))
+						f => f.Gauss("floatValue", g => g.Origin("5").Scale("0.1"))
 							  .Filter(gf => gf.Term("term1", "termValue")
 							)
 						)
