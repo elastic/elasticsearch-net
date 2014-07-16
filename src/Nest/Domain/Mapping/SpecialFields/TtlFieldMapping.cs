@@ -2,28 +2,38 @@
 
 namespace Nest
 {
-    public class TtlFieldMapping
-    {
-		public TtlFieldMapping()
-		{
-			
-		}
-
+	public interface ITtlFieldMapping : ISpecialField
+	{
 		[JsonProperty("enabled")]
-		public bool Enabled { get; internal set; }
+		bool? Enabled { get; set; }
 
 		[JsonProperty("default")]
-		public string Default { get; internal set; }
+		string Default { get; set; }
+	}
 
-		public TtlFieldMapping SetDisabled(bool disabled = true)
+	public class TtlFieldMapping : ITtlFieldMapping
+	{
+		public bool? Enabled { get; set; }
+		public string Default { get; set; }
+	}
+
+	public class TtlFieldMappingDescriptor : ITtlFieldMapping
+	{
+		private ITtlFieldMapping Self { get { return this; } }
+
+		bool? ITtlFieldMapping.Enabled { get; set; }
+
+		string ITtlFieldMapping.Default { get; set; }
+
+		public TtlFieldMappingDescriptor Enable(bool enable = true)
 		{
-			this.Enabled = !disabled;
+			Self.Enabled = enable;
 			return this;
 		}
-		public TtlFieldMapping SetDefault(string defaultTtl)
+		public TtlFieldMappingDescriptor Default(string defaultTtl)
 		{
-			this.Default = defaultTtl;
+			Self.Default = defaultTtl;
 			return this;
 		}
-    }
+	}
 }

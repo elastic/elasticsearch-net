@@ -11,8 +11,8 @@ namespace Nest.Tests.Integration.Core.Map.TtlField
 		{
 			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.TtlField(t => t
-					.SetDisabled(false)
-					.SetDefault("1d")
+					.Enable(false)
+					.Default("1d")
 				)
 			);
 			this.DefaultResponseAssertations(result);

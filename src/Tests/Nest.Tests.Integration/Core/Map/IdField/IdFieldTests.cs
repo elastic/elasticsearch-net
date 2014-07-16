@@ -11,9 +11,9 @@ namespace Nest.Tests.Integration.Core.Map.IdField
 		{
 			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.IdField(i => i
-					.SetIndex("not_analyzed")
-					.SetPath("myOtherId")
-					.SetStored(false)
+					.Index("not_analyzed")
+					.Path("myOtherId")
+					.Store(false)
 				)
 			);
 			this.DefaultResponseAssertations(result);
