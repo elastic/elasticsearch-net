@@ -89,9 +89,11 @@ namespace Nest
 		/// <summary>
 		/// Filters documents where a specific field has no value in them.
 		/// </summary>
-		public FilterContainer Missing(Expression<Func<T, object>> fieldDescriptor)
+		public FilterContainer Missing(Expression<Func<T, object>> fieldDescriptor, Action<MissingFilterDescriptor> selector = null)
 		{
-			IMissingFilter filter = new MissingFilterDescriptor();
+			var mf = new MissingFilterDescriptor();
+			if (selector != null) selector(mf);
+			IMissingFilter filter = mf;
 			filter.Field = fieldDescriptor;
 			this.SetCacheAndName(filter);
 			return  this.New(filter, f => f.Missing = filter);
@@ -99,13 +101,16 @@ namespace Nest
 		/// <summary>
 		/// Filters documents where a specific field has no value in them.
 		/// </summary>
-		public FilterContainer Missing(string field)
+		public FilterContainer Missing(string field, Action<MissingFilterDescriptor> selector = null)
 		{
-			IMissingFilter filter = new MissingFilterDescriptor();
+			var mf = new MissingFilterDescriptor();
+			if (selector != null) selector(mf);
+			IMissingFilter filter = mf;
 			filter.Field = field;
 			this.SetCacheAndName(filter);
 			return  this.New(filter, f => f.Missing = filter);
 		}
+
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
 		/// Note, this filter does not require the _id field to be indexed since it works using the _uid field.
