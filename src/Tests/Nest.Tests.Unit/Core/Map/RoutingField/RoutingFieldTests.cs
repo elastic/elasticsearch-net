@@ -12,8 +12,8 @@ namespace Nest.Tests.Unit.Core.Map.RoutingField
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.RoutingField(a => a
-					.SetPath(p => p.Name)
-					.SetRequired()
+					.Path(p => p.Name)
+					.Required()
 				)
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod()); 
@@ -23,8 +23,8 @@ namespace Nest.Tests.Unit.Core.Map.RoutingField
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.RoutingField(a => a
-					.SetPath("my_difficult_field_name")
-					.SetRequired()
+					.Path("my_difficult_field_name")
+					.Required()
 				)
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());

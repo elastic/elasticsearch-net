@@ -12,8 +12,8 @@ namespace Nest.Tests.Unit.Core.Map.AnalyzerField
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.AnalyzerField(a => a
-					.SetPath(p => p.Name)
-					.SetIndexed()
+					.Path(p => p.Name)
+					.Index()
 				)
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod()); 
@@ -23,8 +23,8 @@ namespace Nest.Tests.Unit.Core.Map.AnalyzerField
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.AnalyzerField(a => a
-					.SetPath("my_difficult_field_name")
-					.SetIndexed(false)
+					.Path("my_difficult_field_name")
+					.Index(false)
 				)
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());

@@ -3,22 +3,37 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-    public class TypeFieldMapping
-    {
+	public interface ITypeFieldMapping : ISpecialField
+	{
 		[JsonProperty("index"), JsonConverter(typeof(StringEnumConverter))]
-		public NonStringIndexOption? Index { get; internal set; }
+		NonStringIndexOption? Index { get; set;  }
 
 		[JsonProperty("store")]
-		public bool? Store { get; internal set; }
+		bool? Store { get; set; }
+	}
 
-		public TypeFieldMapping SetIndexed(NonStringIndexOption index = NonStringIndexOption.Analyzed)
+	public class TypeFieldMapping : ITypeFieldMapping
+	{
+		public NonStringIndexOption? Index { get; set; }
+		public bool? Store { get; set; }
+	}
+
+	public class TypeFieldMappingDescriptor : ITypeFieldMapping
+	{
+		private ITypeFieldMapping Self { get { return this; } } 
+
+		NonStringIndexOption? ITypeFieldMapping.Index { get; set; }
+
+		bool? ITypeFieldMapping.Store { get; set; }
+
+		public TypeFieldMappingDescriptor Index(NonStringIndexOption index = NonStringIndexOption.Analyzed)
 		{
-			this.Index = index;
+			Self.Index = index;
 			return this;
 		}
-		public TypeFieldMapping SetStored(bool stored = true)
+		public TypeFieldMappingDescriptor Store(bool stored = true)
 		{
-			this.Store = stored;
+			Self.Store = stored;
 			return this;
 		}
     }

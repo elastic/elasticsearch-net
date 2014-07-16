@@ -14,9 +14,9 @@ namespace Nest.Tests.Unit.Core.Map.IdField
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.IdField(i => i
-					.SetIndex("not_analyzed")
-					.SetPath("myOtherId")
-					.SetStored(false)
+					.Index("not_analyzed")
+					.Path("myOtherId")
+					.Store(false)
 				)
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod()); 

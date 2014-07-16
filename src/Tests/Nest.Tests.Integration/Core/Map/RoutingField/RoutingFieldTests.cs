@@ -11,8 +11,8 @@ namespace Nest.Tests.Integration.Core.Map.RoutingField
 		{
 			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.RoutingField(a => a
-					.SetPath(p => p.Name)
-					.SetRequired()
+					.Path(p => p.Name)
+					.Required()
 				)
 			);
 			this.DefaultResponseAssertations(result);
@@ -22,8 +22,8 @@ namespace Nest.Tests.Integration.Core.Map.RoutingField
 		{
 			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.RoutingField(a => a
-					.SetPath("my_difficult_field_name")
-					.SetRequired()
+					.Path("my_difficult_field_name")
+					.Required()
 				)
 			);
 			this.DefaultResponseAssertations(result);
