@@ -18,8 +18,8 @@ namespace Nest.Tests.Unit.ObjectInitializer.Update
 
 			var request = new UpdateRequest<ElasticsearchProject, object>(project)
 				{
-					Document = new { Name = "NEST" },
-					DocAsUpsert = true
+					PartialDocument = new { Name = "NEST" },
+					PartialDocumentAsUpsert = true
 				};
 
 			var response = this._client.Update(request);

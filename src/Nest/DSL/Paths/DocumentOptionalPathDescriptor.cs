@@ -152,7 +152,7 @@ namespace Nest
 		}
 		public TDescriptor Id(long id)
 		{
-			return this.Id(id.ToString());
+			return this.Id(id.ToString(CultureInfo.InvariantCulture));
 		}
 		public TDescriptor Id(string id)
 		{

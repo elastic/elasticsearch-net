@@ -49,7 +49,7 @@ namespace Nest.Tests.Unit.Core.Update
 
 			var s = new UpdateDescriptor<ElasticsearchProject, PartialElasticSearchProject>()
 				.Object(originalProject) //only used to infer the id
-				.Document(partialUpdate); //the actual partial update statement;
+				.PartialDocument(partialUpdate); //the actual partial update statement;
 
 			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
 		}

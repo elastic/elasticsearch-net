@@ -61,12 +61,12 @@ namespace Nest.Tests.Integration.Core
 			var loc = project.LOC;
 			this.Client.Update<ElasticsearchProject, ElasticsearchProjectLocUpdate>(u => u
 				.Id(1)
-				.Document(new ElasticsearchProjectLocUpdate
+				.PartialDocument(new ElasticsearchProjectLocUpdate
 				{
 					Id = project.Id,
 					LOC = project.LOC + 10
 				})
-				.DocAsUpsert()
+				.PartialDocumentAsUpsert()
 				.Refresh()
 			);
 			project = this.Client.Source<ElasticsearchProject>(s => s.Id(1));

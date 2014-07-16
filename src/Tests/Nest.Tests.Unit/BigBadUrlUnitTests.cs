@@ -150,8 +150,8 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/mydefaultindex/_status", c => c.Status(s => s.Index<Doc>()));
 			Do("DELETE", "/mydefaultindex/.percolator/mypercolator", c => c.UnregisterPercolator<ElasticsearchProject>("mypercolator"));
 			Do("DELETE", "/mycustomindex/.percolator/mypercolator", c => c.UnregisterPercolator<ElasticsearchProject>("mypercolator", r => r.Index("mycustomindex")));
-			Do("POST", "/mydefaultindex/doc/1/_update", c => c.Update<Doc, OtherDoc>(u => u.Id(1).Document(new OtherDoc { Name = "asd" })));
-			Do("POST", "/mydefaultindex/customtype/1/_update", c => c.Update<Doc, OtherDoc>(u => u.Id(1).Type("customtype").Document(new OtherDoc { Name = "asd" })));
+			Do("POST", "/mydefaultindex/doc/1/_update", c => c.Update<Doc, OtherDoc>(u => u.Id(1).PartialDocument(new OtherDoc { Name = "asd" })));
+			Do("POST", "/mydefaultindex/customtype/1/_update", c => c.Update<Doc, OtherDoc>(u => u.Id(1).Type("customtype").PartialDocument(new OtherDoc { Name = "asd" })));
 			Do("PUT", "/mydefaultindex/_settings", c => c.UpdateSettings(u => u.AutoExpandReplicas(false)));
 			Do("PUT", "/mycustomindex/_settings", c => c.UpdateSettings(u => u.Index("mycustomindex").AutoExpandReplicas(false)));
 			Do("POST", "/_all/doc/_validate/query", c => c.Validate<Doc>(v => v.AllIndices()));
