@@ -25,7 +25,6 @@
 		  AssemblyProduct="NEST"
 		  AssemblyCopyright="Martijn Laarman MIT LICENSED"
 		  ComVisible="false"
-		  CLSCompliant="true"
 		  Guid="07E5CFA3-CF5F-4D17-874C-8D5CC6FA3E73"
                 
 		  AssemblyVersion="$(Version)"
@@ -38,7 +37,6 @@
 	      AssemblyProduct="Nest.Connection.Thrift"
 	      AssemblyCopyright="Martijn Laarman MIT LICENSED"
 	      ComVisible="false"
-	      CLSCompliant="true"
 	      Guid="4d165338-2060-4641-8be6-b7aacbdee52d"
       AssemblyVersion="$(Version)"
       AssemblyFileVersion="$(Version)"/>
