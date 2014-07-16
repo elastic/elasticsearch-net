@@ -129,7 +129,7 @@ namespace Nest.Tests.Integration.Core
 
 			//act
 			//now remove the item that was added
-			this.Client.Delete<ElasticsearchProject>(f=>f.Id(newDocument).Refresh());
+			this.Client.Delete<ElasticsearchProject>(f=>f.IdFrom(newDocument).Refresh());
 
 			//assert
 			//make sure getting by id returns nothing
@@ -165,7 +165,7 @@ namespace Nest.Tests.Integration.Core
 
 			//act
 			//now remove the item that was added
-			this.Client.Delete<ElasticsearchProject>(d=>d.Id(newDocument).Refresh());
+			this.Client.Delete<ElasticsearchProject>(d=>d.IdFrom(newDocument).Refresh());
 
 			//assert
 			//make sure getting by id returns nothing

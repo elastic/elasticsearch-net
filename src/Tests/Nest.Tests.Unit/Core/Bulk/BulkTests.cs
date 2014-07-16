@@ -24,9 +24,9 @@ namespace Nest.Tests.Unit.Core.Bulk
 					.Document(new ElasticsearchProject { Id = 4 })
 					.VersionType(VersionType.ExternalGte))
 				.Update<ElasticsearchProject, object>(i => i
-					.Id(new ElasticsearchProject { Id = 3 })
+					.IdFrom(new ElasticsearchProject { Id = 3 })
 					.VersionType(VersionType.External)
-					.PartialDocument(new { name = "NEST"})
+					.Doc(new { name = "NEST"})
 				)
 			);
 			var status = result.ConnectionStatus;
@@ -55,7 +55,7 @@ namespace Nest.Tests.Unit.Core.Bulk
 					{ new BulkUpdateOperation<ElasticsearchProject, object>(new ElasticsearchProject { Id = 3})
 					{
 						VersionType = VersionType.External,
-						PartialDocument = new { name = "NEST"}
+						Doc = new { name = "NEST"}
 					}},
 				}
 			});
@@ -68,8 +68,8 @@ namespace Nest.Tests.Unit.Core.Bulk
 		{
 			var result = this._client.Bulk(b => b
 				.Update<ElasticsearchProject, object>(i => i
-					.Id(new ElasticsearchProject { Id = 3 })
-					.PartialDocument(new { name = "NEST" })
+					.IdFrom(new ElasticsearchProject { Id = 3 })
+					.Doc(new { name = "NEST" })
 					.RetriesOnConflict(4)
 				)
 				.Index<ElasticsearchProject>(i=>i

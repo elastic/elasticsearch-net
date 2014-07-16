@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Reproduce
 			var loc = project.LOC;
 			this.Client.Update<ElasticsearchProject, dynamic>(u => u
 				.Id(id)
-				.PartialDocument(new
+				.Doc(new
 				{
 					Id = project.Id,
 					LOC = project.LOC + 10
@@ -89,7 +89,7 @@ namespace Nest.Tests.Integration.Reproduce
 			IBulkResponse response = Client.Bulk(b => b
 				.Update<Load, dynamic>(u => u
 					.Id(partial.Id)
-					.PartialDocument(partial)
+					.Doc(partial)
 				));
 
 			return response.IsValid;
@@ -98,7 +98,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			IUpdateResponse response = Client.Update<Load, dynamic>(u => u
 				.Id((int)partial.Id)
-				.PartialDocument((object)partial)
+				.Doc((object)partial)
 			);
 			return response.IsValid;
 		}

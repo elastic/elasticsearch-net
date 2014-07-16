@@ -22,12 +22,12 @@ namespace Nest.Tests.Integration.Core.Exists
 
 			indexResponse.IsValid.Should().BeTrue();
 
-			var existsResponse = this.Client.DocumentExists<ElasticsearchProject>(d => d.Id(elasticsearchProject).Index(tempIndex));
+			var existsResponse = this.Client.DocumentExists<ElasticsearchProject>(d => d.IdFrom(elasticsearchProject).Index(tempIndex));
 			existsResponse.IsValid.Should().BeTrue();
 			existsResponse.Exists.Should().BeTrue();
 			existsResponse.ConnectionStatus.RequestMethod.Should().Be("HEAD");
 			
-			var doesNotExistsResponse = this.Client.DocumentExists<ElasticsearchProject>(d => d.Id(elasticsearchProject).Index(tempIndex + "-random"));
+			var doesNotExistsResponse = this.Client.DocumentExists<ElasticsearchProject>(d => d.IdFrom(elasticsearchProject).Index(tempIndex + "-random"));
 			doesNotExistsResponse.IsValid.Should().BeTrue();
 			doesNotExistsResponse.Exists.Should().BeFalse();
 

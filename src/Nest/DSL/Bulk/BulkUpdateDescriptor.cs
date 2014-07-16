@@ -13,9 +13,9 @@ namespace Nest
 
 		TDocument Upsert { get; set; }
 		
-		TPartialDocument PartialDocument { get; set; }
+		TPartialDocument Doc { get; set; }
 		
-		bool? PartialDocumentAsUpsert { get; set; }
+		bool? DocAsUpsert { get; set; }
 		
 		string Lang { get; set; }
 		
@@ -29,15 +29,34 @@ namespace Nest
 		where TPartialDocument : class
 	{
 		
-		public BulkUpdateOperation(TDocument inferFrom) 
+
+		public BulkUpdateOperation(string id) { this.Id = id; }
+		public BulkUpdateOperation(long id) : this(id.ToString(CultureInfo.InvariantCulture)) {}
+
+		/// <summary>
+		/// Create a new bulk operation
+		/// </summary>
+		/// <param name="idFrom">Use this document to infer the id from</param>
+		/// <param name="useIdFromAsUpsert">Use the document to infer on as the upsert document in this update operation</param>
+		public BulkUpdateOperation(TDocument idFrom, bool useIdFromAsUpsert = false) 
 		{
-			this.InferFrom = inferFrom;
+			this.InferFrom = idFrom;
+			if (useIdFromAsUpsert)
+				this.Upsert = idFrom;
 		}
 		
-		public BulkUpdateOperation(TDocument inferFrom, TPartialDocument update) 
+		/// <summary>
+		/// Create a new Bulk Operation
+		/// </summary>
+		/// <param name="idFrom">Use this document to infer the id from</param>
+		/// <param name="update">The partial update document (doc) to send as update</param>
+		/// <param name="useIdFromAsUpsert">Use the document to infer on as the upsert document in this update operation</param>
+		public BulkUpdateOperation(TDocument idFrom, TPartialDocument update, bool useIdFromAsUpsert = false) 
 		{
-			this.InferFrom = inferFrom;
-			this.PartialDocument = update;
+			this.InferFrom = idFrom;
+			if (useIdFromAsUpsert)
+				this.Upsert = idFrom;
+			this.Doc = update;
 		}
 
 
@@ -54,19 +73,19 @@ namespace Nest
 		{
 			return new BulkUpdateBody<TDocument, TPartialDocument>
 			{
-				_PartialUpdate = this.PartialDocument,
+				_PartialUpdate = this.Doc,
 				_Script = this.Script,
 				_Lang = this.Lang,
 				_Params = this.Params,
 				_Upsert = this.Upsert,
-				_DocAsUpsert = this.PartialDocumentAsUpsert
+				_DocAsUpsert = this.DocAsUpsert
 			};
 		}
 
 		public TDocument InferFrom { get; set; }
 		public TDocument Upsert { get; set; }
-		public TPartialDocument PartialDocument { get; set; }
-		public bool? PartialDocumentAsUpsert { get; set; }
+		public TPartialDocument Doc { get; set; }
+		public bool? DocAsUpsert { get; set; }
 		public string Lang { get; set; }
 		public string Script { get; set; }
 		public Dictionary<string, object> Params { get; set; }
@@ -85,9 +104,9 @@ namespace Nest
 
 		TDocument IBulkUpdateOperation<TDocument, TPartialDocument>.Upsert { get; set; }
 
-		TPartialDocument IBulkUpdateOperation<TDocument, TPartialDocument>.PartialDocument { get; set; }
+		TPartialDocument IBulkUpdateOperation<TDocument, TPartialDocument>.Doc { get; set; }
 
-		bool? IBulkUpdateOperation<TDocument, TPartialDocument>.PartialDocumentAsUpsert { get; set; }
+		bool? IBulkUpdateOperation<TDocument, TPartialDocument>.DocAsUpsert { get; set; }
 
 		string IBulkUpdateOperation<TDocument, TPartialDocument>.Lang { get; set; }
 
@@ -99,12 +118,12 @@ namespace Nest
 		{
 			return new BulkUpdateBody<TDocument, TPartialDocument>
 			{
-				_PartialUpdate = Self.PartialDocument,
+				_PartialUpdate = Self.Doc,
 				_Script = Self.Script,
 				_Lang = Self.Lang,
 				_Params = Self.Params,
 				_Upsert = Self.Upsert,
-				_DocAsUpsert = Self.PartialDocumentAsUpsert
+				_DocAsUpsert = Self.DocAsUpsert
 			};
 		}
 
@@ -164,7 +183,7 @@ namespace Nest
 		/// The object to update, if id is not manually set it will be inferred from the object.
 		/// Used ONLY to infer the ID see Document() to apply a partial object merge.
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialDocument> Id(TDocument @object, bool useAsUpsert = false)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> IdFrom(TDocument @object, bool useAsUpsert = false)
 		{
 			Self.InferFrom = @object;
 			if (useAsUpsert) return this.Upsert(@object);
@@ -181,15 +200,15 @@ namespace Nest
 		/// <summary>
 		/// The partial update document to be merged on to the existing object.
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialDocument> PartialDocument(TPartialDocument @object)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument @object)
 		{
-			Self.PartialDocument = @object;
+			Self.Doc = @object;
 			return this;
 		}
 
-		public BulkUpdateDescriptor<TDocument, TPartialDocument> PartialDocumentAsUpsert(bool partialDocumentAsUpsert = true)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool partialDocumentAsUpsert = true)
 		{
-			Self.PartialDocumentAsUpsert = partialDocumentAsUpsert;
+			Self.DocAsUpsert = partialDocumentAsUpsert;
 			return this;
 		}
 		

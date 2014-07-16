@@ -87,7 +87,7 @@ namespace Nest
 
 		public DocumentOptionalPathBase(string id) { this.Id = id; }
 		public DocumentOptionalPathBase(long id) : this(id.ToString(CultureInfo.InvariantCulture)) {}
-		public DocumentOptionalPathBase(T document) { this.IdFrom = document; }
+		public DocumentOptionalPathBase(T idFrom) { this.IdFrom = idFrom; }
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
@@ -159,7 +159,7 @@ namespace Nest
 			Self.Id = id;
 			return (TDescriptor)this;
 		}
-		public TDescriptor Id(T @object)
+		public TDescriptor IdFrom(T @object)
 		{
 			Self.IdFrom = @object;
 			return (TDescriptor)this;

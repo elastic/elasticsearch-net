@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework.Constraints;
@@ -35,22 +36,51 @@ namespace Nest.Tests.Unit.Core.Update
 		public void UpdateAPI_IdFromDocument()
 		{
 			this._client.Update<MyDocument, MyUpdate>(u => u
-				.Id(_document)
-				.PartialDocument(_updateDocument)
-				.PartialDocumentAsUpsert()
+				.IdFrom(_document)
+				.Doc(_updateDocument)
+				.DocAsUpsert()
 			);
 		}
-
+		
 		[Test]
 		public void BulkUpdateAPI_IdFromDocument()
 		{
 			this._client.Bulk(u => u
 				.Update<MyDocument, MyUpdate>(o=>o
-					.Id(_document)
-					.PartialDocument(_updateDocument)
-					.PartialDocumentAsUpsert()
+					.IdFrom(_document)
+					.Doc(_updateDocument)
+					.DocAsUpsert()
 				)			
 			);
+		}
+		
+		[Test]
+		public void UpdateAPI_IdFromDocument_OIS()
+		{
+			this._client.Update(new UpdateRequest<MyDocument, MyUpdate>(_document)
+			{
+				Doc = _updateDocument,
+				DocAsUpsert = true
+			}
+			);
+		}
+		
+		[Test]
+		public void BulkUpdateAPI_IdFromDocument_OIS()
+		{
+			this._client.Bulk(new BulkRequest
+			{
+				Operations = new List<IBulkOperation>
+				{
+					{
+						new BulkUpdateOperation<MyDocument, MyUpdate>(_document)
+						{
+							Doc = _updateDocument,
+							DocAsUpsert = true
+						}
+					}
+				}
+			});
 		}
 		
 		[Test]
@@ -58,7 +88,7 @@ namespace Nest.Tests.Unit.Core.Update
 		{
 			this._client.Update<MyDocument, MyUpdate>(u => u
 				.Id(_document, useAsUpsert: true)
-				.PartialDocument(_updateDocument)
+				.Doc(_updateDocument)
 			);
 		}
 
@@ -67,10 +97,36 @@ namespace Nest.Tests.Unit.Core.Update
 		{
 			this._client.Bulk(u => u
 				.Update<MyDocument, MyUpdate>(o=>o
-					.Id(_document, useAsUpsert: true)
-					.PartialDocument(_updateDocument)
+					.IdFrom(_document, useAsUpsert: true)
+					.Doc(_updateDocument)
 				)			
 			);
+		}
+		
+		[Test]
+		public void UpdateAPI_IdFromDocument_PassToUpsert_OIS()
+		{
+			this._client.Update(new UpdateRequest<MyDocument, MyUpdate>(_document, useAsUpsert: true)
+			{
+				Doc = _updateDocument
+			});
+		}
+
+		[Test]
+		public void BulkUpdateAPI_IdFromDocument_PassToUpsert_OIS()
+		{
+			this._client.Bulk(new BulkRequest
+			{
+				Operations = new List<IBulkOperation>
+				{
+					{
+						new BulkUpdateOperation<MyDocument, MyUpdate>(_document, useIdFromAsUpsert: true)
+						{
+							Doc = _updateDocument,
+						}
+					}
+				}
+			});
 		}
 		
 		[Test]
@@ -78,7 +134,7 @@ namespace Nest.Tests.Unit.Core.Update
 		{
 			this._client.Update<MyDocument, MyUpdate>(u => u
 				.Id(_document.Id)
-				.PartialDocument(_updateDocument)
+				.Doc(_updateDocument)
 				.Upsert(_document)
 			);
 		}
@@ -89,7 +145,7 @@ namespace Nest.Tests.Unit.Core.Update
 			this._client.Bulk(u => u
 				.Update<MyDocument, MyUpdate>(o=>o
 					.Id(_document.Id)
-					.PartialDocument(_updateDocument)
+					.Doc(_updateDocument)
 					.Upsert(_document)
 				)
 			);

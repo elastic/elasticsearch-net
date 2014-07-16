@@ -26,10 +26,10 @@ namespace Nest
 		TDocument Upsert { get; set; }
 
 		[JsonProperty(PropertyName = "doc_as_upsert")]
-		bool? PartialDocumentAsUpsert { get; set; }
+		bool? DocAsUpsert { get; set; }
 
 		[JsonProperty(PropertyName = "doc")]
-		TPartialDocument PartialDocument { get; set; }
+		TPartialDocument Doc { get; set; }
 	}
 
 	public class UpdateRequest<TDocument> : UpdateRequest<TDocument, TDocument>
@@ -53,10 +53,10 @@ namespace Nest
 
 		public UpdateRequest(long id) : base(id) { }
 
-		public UpdateRequest(TDocument document, bool useAsUpsert = false) : base(document)
+		public UpdateRequest(TDocument idFrom, bool useAsUpsert = false) : base(idFrom)
 		{
 			if (useAsUpsert)
-				this.Upsert = document;
+				this.Upsert = idFrom;
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
@@ -69,8 +69,8 @@ namespace Nest
 		public string Language { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 		public TDocument Upsert { get; set; }
-		public bool? PartialDocumentAsUpsert { get; set; }
-		public TPartialDocument PartialDocument { get; set; }
+		public bool? DocAsUpsert { get; set; }
+		public TPartialDocument Doc { get; set; }
 	}
 
 
@@ -80,8 +80,6 @@ namespace Nest
 		where TDocument : class 
 		where TPartialDocument : class
 	{
-
-		private TDocument _inferFrom { get; set; }
 
 		private IUpdateRequest<TDocument, TPartialDocument> Self { get { return this; } }
 
@@ -93,9 +91,9 @@ namespace Nest
 
 		TDocument IUpdateRequest<TDocument, TPartialDocument>.Upsert { get; set; }
 
-		bool? IUpdateRequest<TDocument, TPartialDocument>.PartialDocumentAsUpsert { get; set; }
+		bool? IUpdateRequest<TDocument, TPartialDocument>.DocAsUpsert { get; set; }
 
-		TPartialDocument IUpdateRequest<TDocument, TPartialDocument>.PartialDocument { get; set; }
+		TPartialDocument IUpdateRequest<TDocument, TPartialDocument>.Doc { get; set; }
 
 		
 		public UpdateDescriptor<TDocument, TPartialDocument> Script(string script)
@@ -134,15 +132,15 @@ namespace Nest
 		/// <summary>
 		/// The partial update document to be merged on to the existing object.
 		/// </summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> PartialDocument(TPartialDocument @object)
+		public UpdateDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument @object)
 		{
-			Self.PartialDocument = @object;
+			Self.Doc = @object;
 			return this;
 		}
 
-		public UpdateDescriptor<TDocument, TPartialDocument> PartialDocumentAsUpsert(bool docAsUpsert = true)
+		public UpdateDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool docAsUpsert = true)
 		{
-			Self.PartialDocumentAsUpsert = docAsUpsert;
+			Self.DocAsUpsert = docAsUpsert;
 			return this;
 		}
 
