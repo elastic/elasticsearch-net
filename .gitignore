@@ -59,3 +59,5 @@ doc/Help
 *.ncrunchproject
 Cache
 YamlCache
+
+*.DS_Store
