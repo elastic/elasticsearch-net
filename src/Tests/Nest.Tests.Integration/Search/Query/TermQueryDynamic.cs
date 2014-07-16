@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Integration.Search.Query
 {
@@ -10,7 +9,7 @@ namespace Nest.Tests.Integration.Search.Query
 		[Test]
 		public void TestTermQuery()
 		{
-			var results = this._client.Search<dynamic>(s=>s
+			var results = this.Client.Search<dynamic>(s=>s
 				.Index(ElasticsearchConfiguration.DefaultIndex)
 				.Type("elasticsearchprojects")
 				.From(0)

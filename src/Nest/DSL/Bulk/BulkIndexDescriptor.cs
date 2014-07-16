@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using Nest.Resolvers;
 using Newtonsoft.Json;
 using Elasticsearch.Net;
 
@@ -45,13 +44,13 @@ namespace Nest
 	{
 		private IIndexOperation<T> Self { get { return this; } } 
 
-		protected override string _Operation { get { return "index"; } }
-		protected override Type _ClrType { get { return typeof(T); } }
+		protected override string BulkOperationType { get { return "index"; } }
+		protected override Type BulkOperationClrType { get { return typeof(T); } }
 		
 		string IIndexOperation<T>.Percolate { get; set; }
 		T IIndexOperation<T>.Document { get; set; }
 
-		protected override object _GetBody()
+		protected override object GetBulkOperationBody()
 		{
 			return Self.Document;
 		}

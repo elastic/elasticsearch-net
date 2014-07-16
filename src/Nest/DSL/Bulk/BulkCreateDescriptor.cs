@@ -39,9 +39,9 @@ namespace Nest
 	{
 		private IBulkCreateOperation<T> Self { get { return this; } } 
 
-		protected override string _Operation { get { return "create"; } }
-		protected override Type _ClrType { get { return typeof(T); } }
-		protected override object _GetBody()
+		protected override string BulkOperationType { get { return "create"; } }
+		protected override Type BulkOperationClrType { get { return typeof(T); } }
+		protected override object GetBulkOperationBody()
 		{
 			return Self.Document;
 		}

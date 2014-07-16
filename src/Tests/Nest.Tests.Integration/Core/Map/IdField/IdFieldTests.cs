@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
-using System.Reflection;
 
 namespace Nest.Tests.Integration.Core.Map.IdField
 {
@@ -10,7 +9,7 @@ namespace Nest.Tests.Integration.Core.Map.IdField
 		[Test]
 		public void IdFieldSerializesFully()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.IdField(i => i
 					.SetIndex("not_analyzed")
 					.SetPath("myOtherId")

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Nest
 {
@@ -25,7 +24,6 @@ namespace Nest
 		/// <summary>
 		/// optional - Hadoop file-system URI
 		/// </summary>
-		/// <param name="bucket"></param>
 		public HdfsRepositoryDescriptor Uri(string hdfsUri)
 		{
 			Self.Settings["uri"] = hdfsUri;
@@ -34,8 +32,6 @@ namespace Nest
 		/// <summary>
 		///required - path with the file-system where data is stored/loaded
 		/// </summary>
-		/// <param name="basePath"></param>
-		/// <returns></returns>
 		public HdfsRepositoryDescriptor Path(string path)
 		{
 			Self.Settings["path"] = path;

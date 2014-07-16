@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Collections.Concurrent;
-using System.Reflection;
-using Elasticsearch.Net;
 
 namespace Nest.Resolvers
 {
@@ -30,6 +26,9 @@ namespace Nest.Resolvers
 			if (defaultIndices == null)
 				return this._connectionSettings.DefaultIndex;
 
+			if (type == null)
+				return this._connectionSettings.DefaultIndex;
+
 			string value;
 			if (defaultIndices.TryGetValue(type, out value) && !string.IsNullOrWhiteSpace(value))
 				return value;
@@ -39,6 +38,8 @@ namespace Nest.Resolvers
 
 		internal string GetIndexForType(IndexNameMarker i)
 		{
+			if (i == null) return this.GetIndexForType((Type)null);
+
 			return i.Name ?? this.GetIndexForType(i.Type);
 		}
 	}

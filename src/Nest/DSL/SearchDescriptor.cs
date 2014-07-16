@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Connection.Configuration;
 using Newtonsoft.Json;
 using Nest.Resolvers.Converters;
 using System.Linq.Expressions;
 using Nest.DSL.Descriptors;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -83,11 +79,11 @@ namespace Nest
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
 		IFilterContainer Filter { get; set; }
 
-		string _Preference { get; }
+		string Preference { get; }
 		
-		string _Routing { get; }
+		string Routing { get; }
 		
-		SearchType? _SearchType { get;  }
+		SearchType? SearchType { get;  }
 		
 		Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set;}
 		
@@ -131,7 +127,7 @@ namespace Nest
 	
 	public partial class SearchRequest : QueryPathBase<SearchRequestParameters>, ISearchRequest
 	{
-		protected internal Type _clrType { get; set; }
+		private Type _clrType { get; set; }
 		Type ISearchRequest.ClrType { get { return _clrType; } }
 
 		public string Timeout { get; set; }
@@ -154,17 +150,17 @@ namespace Nest
 		public IHighlightRequest Highlight { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 
-		SearchType? ISearchRequest._SearchType
+		SearchType? ISearchRequest.SearchType
 		{
 			get { return  this.QueryString == null ? null : this.QueryString.GetQueryStringValue<SearchType?>("search_type");  }
 		}
 
-		string ISearchRequest._Preference
+		string ISearchRequest.Preference
 		{
 			get { return this.QueryString == null ? null : this.QueryString.GetQueryStringValue<string>("preference"); }
 		}
 
-		string ISearchRequest._Routing
+		string ISearchRequest.Routing
 		{
 			get
 			{
@@ -215,17 +211,17 @@ namespace Nest
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IFilterContainer Filter { get; set; }
-		SearchType? ISearchRequest._SearchType
+		SearchType? ISearchRequest.SearchType
 		{
 			get { return  this.QueryString == null ? null : this.QueryString.GetQueryStringValue<SearchType?>("search_type");  }
 		}
 
-		string ISearchRequest._Preference
+		string ISearchRequest.Preference
 		{
 			get { return this.QueryString == null ? null : this.QueryString.GetQueryStringValue<string>("preference"); }
 		}
 
-		string ISearchRequest._Routing
+		string ISearchRequest.Routing
 		{
 			get
 			{
@@ -250,7 +246,7 @@ namespace Nest
 	{
 		private ISearchRequest Self { get { return this; } }
 
-		SearchType? ISearchRequest._SearchType
+		SearchType? ISearchRequest.SearchType
 		{
 			get { return this.Request.RequestParameters.GetQueryStringValue<SearchType?>("search_type");  }
 		}
@@ -261,12 +257,12 @@ namespace Nest
 			set { this.Request.RequestParameters = value;  }
 		}
 
-		string ISearchRequest._Preference
+		string ISearchRequest.Preference
 		{
 			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); }
 		}
 
-		string ISearchRequest._Routing
+		string ISearchRequest.Routing
 		{
 			get
 			{
@@ -319,158 +315,8 @@ namespace Nest
 		Func<dynamic, Hit<dynamic>, Type> ISearchRequest.TypeSelector { get; set; }
 
 		/// <summary>
-		/// The indices to execute the search on. Defaults to the default index
-		/// </summary>
-		public SearchDescriptor<T> Indices(IEnumerable<string> indices)
-		{
-			if (indices == null) return this;
-			return this.Indices(indices.ToArray());
-		}
-		
-		/// <summary>
-		/// The indices to execute the search on. Defaults to the default index
-		/// </summary>
-		public SearchDescriptor<T> Indices(IEnumerable<Type> indices)
-		{
-			if (indices == null) return this;
-			return this.Indices(indices.ToArray());
-		}
-		
-		/// <summary>
-		/// The indices to execute the search on. Defaults to the default index
-		/// </summary>
-		public SearchDescriptor<T> Indices(params string[] indices)
-		{
-			if (indices == null) return this;
-			Self.Indices = indices.Select(s => (IndexNameMarker)s);
-			return this;
-		}
-		
-		/// <summary>
-		/// The indices to execute the search on. Defaults to the default index
-		/// </summary>
-		public SearchDescriptor<T> Indices(params Type[] indices)
-		{
-			if (indices == null) return this;
-			Self.Indices = indices.Select(s => (IndexNameMarker)s);
-			return this;
-		}
-
-
-		/// <summary>
-		/// The index to execute the search on. Defaults to the default index
-		/// </summary>
-		public SearchDescriptor<T> Index(string index)
-		{
-			return this.Indices(index);
-		}
-
-		internal SearchDescriptor<T> Index(IndexNameMarker index)
-		{
-			if (index == null) return this;
-			Self.Indices = new[] { index };
-			return this;
-		}
-		/// <summary>
-		/// The index to execute the search on, using the default index for typeof TAlternative. Defaults to the default index
-		/// </summary>
-		public SearchDescriptor<T> Index<TAlternative>() where TAlternative : class
-		{
-			return this.Indices(typeof(Type));
-		}
-		/// <summary>
-		/// The index to execute the search on using the inferred default for 'type'. Defaults to the default index
-		/// </summary>
-		public SearchDescriptor<T> Index(Type type)
-		{
-			return this.Indices(type);
-		}
-		/// <summary>
-		/// The types to execute the search on. Defaults to the inferred typename of T 
-		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
-		/// </summary>
-		public SearchDescriptor<T> Types(IEnumerable<string> types)
-		{
-			if (types == null) return this;
-			Self.Types = types.Select(s => (TypeNameMarker)s);
-			return this;
-		}
-		/// <summary>
-		/// The types to execute the search on. Defaults to the inferred typename of T 
-		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
-		/// </summary>
-		public SearchDescriptor<T> Types(params string[] types)
-		{
-			return this.Types((IEnumerable<string>)types);
-		}
-		/// <summary>
-		/// The types to execute the search on. Defaults to the inferred typename of T 
-		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
-		/// </summary>
-		public SearchDescriptor<T> Types(IEnumerable<Type> types)
-		{
-			if (types == null) return this;
-			Self.Types = types.Select(s => (TypeNameMarker)s);
-			return this;
-
-		}
-		/// <summary>
-		/// The types to execute the search on. Defaults to the inferred typename of T 
-		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
-		/// </summary>
-		public SearchDescriptor<T> Types(params Type[] types)
-		{
-			return this.Types((IEnumerable<Type>)types);
-		}
-		/// <summary>
-		/// The type to execute the search on. Defaults to the inferred typename of T 
-		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
-		/// </summary>
-		public SearchDescriptor<T> Type(string type)
-		{
-			if (type == null) return this;
-			Self.Types = new[] { (TypeNameMarker)type };
-			return this;
-		}
-		/// <summary>
-		/// The type to execute the search on. Defaults to the inferred typename of T 
-		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
-		/// </summary>
-		public SearchDescriptor<T> Type(Type type)
-		{
-			if (type == null) return this;
-			Self.Types = new[] { (TypeNameMarker)type };
-			return this;
-		}
-
-		internal SearchDescriptor<T> Type(TypeNameMarker type)
-		{
-			if (type == null) return this;
-			Self.Types = new[] { type };
-			return this;
-		}
-		/// <summary>
-		/// Execute search over all indices
-		/// </summary>
-		public SearchDescriptor<T> AllIndices()
-		{
-			Self.AllIndices = true;
-			return this;
-		}
-
-
-		/// <summary>
-		/// Execute search over all types
-		/// </summary>
-		public SearchDescriptor<T> AllTypes()
-		{
-			Self.AllTypes = true;
-			return this;
-		}
-
-
-		/// <summary>
 		/// When strict is set, conditionless queries are treated as an exception. 
+		/// </summary>
 		public SearchDescriptor<T> Strict(bool strict = true)
 		{
 			this._Strict = strict;
@@ -1078,7 +924,7 @@ namespace Nest
 			var desc = new TermSuggestDescriptor<T>();
 			var item = suggest(desc);
 			ITermSuggester i = item;
-			var bucket = new SuggestBucket { Text = i._Text, Term = item };
+			var bucket = new SuggestBucket { Text = i.Text, Term = item };
 			Self.Suggest.Add(name, bucket);
 			return this;
 		}
@@ -1097,7 +943,7 @@ namespace Nest
 			var desc = new PhraseSuggestDescriptor<T>();
 			var item = suggest(desc);
 			IPhraseSuggester i = item;
-			var bucket = new SuggestBucket { Text = i._Text, Phrase = item };
+			var bucket = new SuggestBucket { Text = i.Text, Phrase = item };
 			Self.Suggest.Add(name, bucket);
 			return this;
 		}
@@ -1116,7 +962,7 @@ namespace Nest
 			var desc = new CompletionSuggestDescriptor<T>();
 			var item = suggest(desc);
 			ICompletionSuggester i = item;
-			var bucket = new SuggestBucket { Text = i._Text, Completion = item };
+			var bucket = new SuggestBucket { Text = i.Text, Completion = item };
 			Self.Suggest.Add(name, bucket);
 			return this;
 		}

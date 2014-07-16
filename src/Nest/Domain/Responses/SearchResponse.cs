@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using Nest.Domain;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System;
 using System.Linq;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -182,7 +180,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// IDictionary of id <=> Highlight Collection for the document
+		/// IDictionary of id -Highlight Collection for the document
 		/// </summary>
 		public HighlightDocumentDictionary Highlights
 		{

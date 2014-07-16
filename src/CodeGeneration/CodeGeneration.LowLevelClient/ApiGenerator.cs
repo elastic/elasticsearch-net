@@ -30,7 +30,7 @@ namespace CodeGeneration.LowLevelClient
 		static ApiGenerator()
 		{
 			_razorMachine = new RazorMachine();
-			_assembly = typeof (ApiGenerator).Assembly;
+			_assembly = typeof(ApiGenerator).Assembly;
 		}
 		public static string PascalCase(string s)
 		{
@@ -44,11 +44,11 @@ namespace CodeGeneration.LowLevelClient
 			string html = string.Empty;
 			using (var client = new WebClient())
 				html = client.DownloadString(useCache ? LocalUri("root.html") : _listingUrl);
-			
+
 			var dom = CQ.Create(html);
-            if (!useCache)
-                WriteToCache("root.html", html);
-			
+			if (!useCache)
+				WriteToCache("root.html", html);
+
 			var endpoints = dom[".js-directory-link"]
 				.Select(s => s.InnerText)
 				.Where(s => !string.IsNullOrEmpty(s) && s.EndsWith(".json"))
@@ -78,11 +78,11 @@ namespace CodeGeneration.LowLevelClient
 			using (var client = new WebClient())
 			{
 				var rawFile = _rawUrlPrefix + s;
-				var fileName = rawFile.Split(new[] {'/'}).Last();
+				var fileName = rawFile.Split(new[] { '/' }).Last();
 				Console.WriteLine("Downloading {0}", rawFile);
 				var json = client.DownloadString(useCache ? LocalUri(fileName) : rawFile);
-                if (!useCache)
-                    WriteToCache(fileName, json);
+				if (!useCache)
+					WriteToCache(fileName, json);
 
 				var apiDocumentation = JsonConvert.DeserializeObject<Dictionary<string, ApiEndpoint>>(json).First();
 				apiDocumentation.Value.CsharpMethodName = CreateMethodName(
@@ -95,30 +95,30 @@ namespace CodeGeneration.LowLevelClient
 		private static readonly Dictionary<string, string> MethodNameOverrides =
 			(from f in new DirectoryInfo(_nestFolder + "/DSL").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
 			 where f.FullName.EndsWith("Descriptor.cs")
-			let contents = File.ReadAllText(f.FullName)
-			let c = Regex.Replace(contents, @"^.+\[DescriptorFor\(""([^ \r\n]+)""\)\].*$", "$1", RegexOptions.Singleline)
-			where !c.Contains(" ") //filter results that did not match
-			select new { Value = f.Name.Replace("Descriptor.cs",""), Key = c })
-			.DistinctBy(v=>v.Key)
+			 let contents = File.ReadAllText(f.FullName)
+			 let c = Regex.Replace(contents, @"^.+\[DescriptorFor\(""([^ \r\n]+)""\)\].*$", "$1", RegexOptions.Singleline)
+			 where !c.Contains(" ") //filter results that did not match
+			 select new { Value = f.Name.Replace("Descriptor.cs", ""), Key = c })
+			.DistinctBy(v => v.Key)
 			.ToDictionary(k => k.Key, v => v.Value);
 
 		private static readonly Dictionary<string, string> KnownDescriptors =
 			(from f in new DirectoryInfo(_nestFolder + "/DSL").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
 			 where f.FullName.EndsWith("Descriptor.cs")
-			let contents = File.ReadAllText(f.FullName)
-			let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
-			select new { Key =  Regex.Replace(c, "<.*$", ""), Value =  Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1")})
-			.DistinctBy(v=>v.Key)
+			 let contents = File.ReadAllText(f.FullName)
+			 let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
+			 select new { Key = Regex.Replace(c, "<.*$", ""), Value = Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1") })
+			.DistinctBy(v => v.Key)
 			.ToDictionary(k => k.Key, v => v.Value);
-		
+
 		private static readonly Dictionary<string, string> KnownRequests =
 			(from f in new DirectoryInfo(_nestFolder + "/DSL").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
 			 where f.FullName.EndsWith("Descriptor.cs")
-			let contents = File.ReadAllText(f.FullName)
-			let c = Regex.Replace(contents, @"^.+interface ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
-			where c.StartsWith("I") && c.Contains("Request")
-			select new { Key =  Regex.Replace(c, "<.*$", ""), Value =  Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1")})
-			.DistinctBy(v=>v.Key)
+			 let contents = File.ReadAllText(f.FullName)
+			 let c = Regex.Replace(contents, @"^.+interface ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
+			 where c.StartsWith("I") && c.Contains("Request")
+			 select new { Key = Regex.Replace(c, "<.*$", ""), Value = Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1") })
+			.DistinctBy(v => v.Key)
 			.ToDictionary(k => k.Key, v => v.Value);
 
 
@@ -132,10 +132,10 @@ namespace CodeGeneration.LowLevelClient
 
 			if (ms("Indices") && !pc("{index}"))
 				method.FullName = (method.FullName + "ForAll").Replace("AsyncForAll", "ForAllAsync");
-			
+
 			if (ms("Nodes") && !pc("{node_id}"))
 				method.FullName = (method.FullName + "ForAll").Replace("AsyncForAll", "ForAllAsync");
-			
+
 			//remove duplicate occurance of the HTTP method name
 			var m = method.HttpMethod.ToPascalCase();
 			method.FullName =
@@ -146,54 +146,68 @@ namespace CodeGeneration.LowLevelClient
 			if (MethodNameOverrides.TryGetValue(key, out manualOverride))
 				method.QueryStringParamName = manualOverride + "RequestParameters";
 
-			method.DescriptorType = method.QueryStringParamName.Replace("RequestParameters","Descriptor");
-			method.RequestType = method.QueryStringParamName.Replace("RequestParameters","Request");
+			method.DescriptorType = method.QueryStringParamName.Replace("RequestParameters", "Descriptor");
+			method.RequestType = method.QueryStringParamName.Replace("RequestParameters", "Request");
 			string requestGeneric;
 			if (KnownRequests.TryGetValue("I" + method.RequestType, out requestGeneric))
 				method.RequestTypeGeneric = requestGeneric;
 			else method.RequestTypeUnmapped = true;
-			
+
 			method.Allow404 = ApiEndpointsThatAllow404.Endpoints.Contains(method.DescriptorType.Replace("Descriptor", ""));
-			
+
 			string generic;
 			if (KnownDescriptors.TryGetValue(method.DescriptorType, out generic))
 				method.DescriptorTypeGeneric = generic;
 			else method.Unmapped = true;
 
-
-
-
 			try
 			{
+				IEnumerable<string> skipList = new List<string>();
+				IDictionary<string, string> renameList = new Dictionary<string, string>();
+
 				var typeName = "CodeGeneration.LowLevelClient.Overrides.Descriptors." + method.DescriptorType + "Overrides";
 				var type = _assembly.GetType(typeName);
-				if (type == null)
-					return;
-				var overrides = Activator.CreateInstance(type) as IDescriptorOverrides;
-				if (overrides == null)
-					return;
+				if (type != null)
+				{
+					var overrides = Activator.CreateInstance(type) as IDescriptorOverrides;
+					if (overrides != null)
+					{
+						skipList = overrides.SkipQueryStringParams ?? skipList;
+						renameList = overrides.RenameQueryStringParams ?? renameList;
+					}
+				}
+
+
+				var globalQueryStringRenames = new Dictionary<string, string>
+				{
+					{"_source", "source_enabled"},
+					{"_source_include", "source_include"},
+					{"_source_exclude", "source_exclude"},
+				};
+
+				foreach (var kv in globalQueryStringRenames)
+					if (!renameList.ContainsKey(kv.Key))
+						renameList[kv.Key] = kv.Value;
 
 				foreach (var kv in method.Url.Params)
 				{
-					if (overrides.SkipQueryStringParams.Contains(kv.Key))
+					if (skipList.Contains(kv.Key))
+					{
 						method.Url.Params.Remove(kv.Key);
+						continue;
+					}
 
-					if (overrides.RenameQueryStringParams == null) continue;
-					
 					string newName;
-					if (!overrides.RenameQueryStringParams.TryGetValue(kv.Key, out newName))
+					if (!renameList.TryGetValue(kv.Key, out newName))
 						continue;
 
 					method.Url.Params.Remove(kv.Key);
 					method.Url.Params.Add(newName, kv.Value);
-					
-				}
 
-				//method.Url.Params = method.Url.Params.Where(p => !overrides.SkipQueryStringParams.Contains(p.Key))
-				//	.ToDictionary(k => k.Key, v => v.Value);
+				}
 			}
-// ReSharper disable once EmptyGeneralCatchClause
-			catch 
+			// ReSharper disable once EmptyGeneralCatchClause
+			catch
 			{
 			}
 
@@ -259,12 +273,12 @@ namespace CodeGeneration.LowLevelClient
 			File.WriteAllText(targetFile, source);
 		}
 
-        private static void WriteToCache(string filename, string contents)
-        {
-            if (!Directory.Exists(_cacheFolder))
-                Directory.CreateDirectory(_cacheFolder);
+		private static void WriteToCache(string filename, string contents)
+		{
+			if (!Directory.Exists(_cacheFolder))
+				Directory.CreateDirectory(_cacheFolder);
 
-            File.WriteAllText(_cacheFolder + filename, contents);
-        }
+			File.WriteAllText(_cacheFolder + filename, contents);
+		}
 	}
 }

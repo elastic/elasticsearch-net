@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
 using Elasticsearch.Net;
 
 namespace Nest
@@ -77,8 +76,8 @@ namespace Nest
 	{
 		private IBulkUpdateOperation<TDocument, TPartialUpdate> Self { get { return this; } }
 
-		protected override string _Operation { get { return "update"; } }
-		protected override Type _ClrType { get { return typeof(TDocument); } }
+		protected override string BulkOperationType { get { return "update"; } }
+		protected override Type BulkOperationClrType { get { return typeof(TDocument); } }
 
 		TDocument IBulkUpdateOperation<TDocument, TPartialUpdate>.Document { get; set; }
 		TDocument IBulkUpdateOperation<TDocument, TPartialUpdate>.Upsert { get; set; }
@@ -88,7 +87,7 @@ namespace Nest
 		string IBulkUpdateOperation<TDocument, TPartialUpdate>.Script { get; set; }
 		Dictionary<string, object> IBulkUpdateOperation<TDocument, TPartialUpdate>.Params { get; set; }
 	
-		protected override object _GetBody()
+		protected override object GetBulkOperationBody()
 		{
 			return new BulkUpdateBody<TDocument, TPartialUpdate>
 			{

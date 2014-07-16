@@ -1,6 +1,5 @@
 using System;
 using System.Linq.Expressions;
-using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 

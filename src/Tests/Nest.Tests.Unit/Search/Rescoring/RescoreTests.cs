@@ -1,16 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using NUnit.Framework;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-using Nest;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
 using Nest.Tests.MockData.Domain;
-using Nest.Resolvers;
 
 namespace Nest.Tests.Unit.Search.Rescoring
 {
@@ -29,6 +21,7 @@ namespace Nest.Tests.Unit.Search.Rescoring
 					.RescoreQuery(rq=>rq
 						.QueryWeight(1.0)
 						.RescoreQueryWeight(2.0)
+						.ScoreMode(ScoreMode.Multiply)
 						.Query(q=>q.Term(p=>p.Name, "nest"))
 					)
 				);

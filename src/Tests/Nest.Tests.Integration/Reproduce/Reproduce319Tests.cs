@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.Resolvers;
-using Nest.Tests.MockData;
-using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
-using System.Diagnostics;
-using FluentAssertions;
 
 namespace Nest.Tests.Integration.Reproduce
 {
@@ -42,7 +37,7 @@ namespace Nest.Tests.Integration.Reproduce
 
 			Assert.DoesNotThrow(() =>
 			{
-				var idxRsp = this._client.CreateIndex(ElasticsearchConfiguration.NewUniqueIndexName(), i=>i.InitializeUsing(settings));
+				var idxRsp = this.Client.CreateIndex(ElasticsearchConfiguration.NewUniqueIndexName(), i=>i.InitializeUsing(settings));
 				Assert.IsTrue(idxRsp.IsValid, idxRsp.ConnectionStatus.ToString());			
 			});
 		}

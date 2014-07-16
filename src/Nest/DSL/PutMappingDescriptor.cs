@@ -160,9 +160,9 @@ namespace Nest
 			return this;
 		}
 
-		public PutMappingDescriptor<T> AllField(Func<AllFieldMapping, AllFieldMapping> allFieldSelector)
+		public PutMappingDescriptor<T> AllField(Func<AllFieldMappingDescriptor, AllFieldMappingDescriptor> allFieldSelector)
 		{
-			Self.Mapping.AllFieldMapping = allFieldSelector(new AllFieldMapping());
+			Self.Mapping.AllFieldMapping = allFieldSelector(new AllFieldMappingDescriptor());
 			return this;
 		}
 

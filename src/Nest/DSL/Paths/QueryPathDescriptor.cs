@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
 
 namespace Nest
@@ -122,24 +121,49 @@ namespace Nest
 		bool? IQueryPath<TParameters>.AllIndices { get; set; }
 		bool? IQueryPath<TParameters>.AllTypes { get; set; }
 
+		/// <summary>
+		/// The indices to execute the search on. Defaults to the default index
+		/// </summary>
 		public TDescriptor Indices(params Type[] indices)
 		{
 			if (indices == null) return (TDescriptor)this;
 			Self.Indices = indices.Select(s => (IndexNameMarker)s);
 			return (TDescriptor)this;
 		}
+
+		/// <summary>
+		/// The indices to execute the search on. Defaults to the default index
+		/// </summary>
+		public TDescriptor Indices(params IndexNameMarker[] indices)
+		{
+			if (indices == null) return (TDescriptor)this;
+			Self.Indices = indices;
+			return (TDescriptor)this;
+		}
+
+		/// <summary>
+		/// The indices to execute the search on. Defaults to the default index
+		/// </summary>
 		public TDescriptor Indices(params string[] indices)
 		{
 			if (indices == null) return (TDescriptor)this;
 			Self.Indices = indices.Select(s => (IndexNameMarker)s);
 			return (TDescriptor)this;
 		}
+
+		/// <summary>
+		/// The indices to execute the search on. Defaults to the default index
+		/// </summary>
 		public TDescriptor Indices(IEnumerable<Type> indices)
 		{
 			if (indices == null) return (TDescriptor)this;
 			Self.Indices = indices.Select(s => (IndexNameMarker)s);
 			return (TDescriptor)this;
 		}
+
+		/// <summary>
+		/// The indices to execute the search on. Defaults to the default index
+		/// </summary>
 		public TDescriptor Indices(IEnumerable<string> indices)
 		{
 			if (indices == null) return (TDescriptor)this;
@@ -147,58 +171,144 @@ namespace Nest
 			return (TDescriptor)this;
 		}
 
+		/// <summary>
+		/// The index to execute the search on, using the default index for typeof TAlternative. Defaults to the default index
+		/// </summary>
 		public TDescriptor Index<TAlternative>() where TAlternative : class
 		{
 			return this.Indices(typeof(TAlternative));
 		}
 
+		/// <summary>
+		/// The index to execute the search on. Defaults to the default index
+		/// </summary>
 		public TDescriptor Index(Type index)
 		{
+			if (index == null) return (TDescriptor)this;
 			return this.Indices(index);
 		}
+
+		/// <summary>
+		/// The index to execute the search on. Defaults to the default index
+		/// </summary>
+		public TDescriptor Index(IndexNameMarker index)
+		{
+			if (index == null) return (TDescriptor)this;
+			return this.Indices(index);
+		}
+
+		/// <summary>
+		/// The index to execute the search on. Defaults to the default index
+		/// </summary>
 		public TDescriptor Index(string index)
 		{
+			if (index == null) return (TDescriptor)this;
 			return this.Indices(index);
 		}
+
+		/// <summary>
+		/// The types to execute the search on. Defaults to the inferred typename of T 
+		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
+		/// </summary>
 		public TDescriptor Types(IEnumerable<string> types)
 		{
 			if (types == null) return (TDescriptor)this;
 			Self.Types = types.Select(s => (TypeNameMarker)s); ;
 			return (TDescriptor)this;
 		}
+
+		/// <summary>
+		/// The types to execute the search on. Defaults to the inferred typename of T 
+		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
+		/// </summary>
 		public TDescriptor Types(params string[] types)
 		{
 			if (types == null) return (TDescriptor)this;
 			return this.Types((IEnumerable<string>)types);
 		}
+
+		/// <summary>
+		/// The types to execute the search on. Defaults to the inferred typename of T 
+		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
+		/// </summary>
 		public TDescriptor Types(IEnumerable<Type> types)
 		{
 			if (types == null) return (TDescriptor)this;
 			Self.Types = types.Select(t => (TypeNameMarker)t);
 			return (TDescriptor)this;
 		}
+
+		/// <summary>
+		/// The types to execute the search on. Defaults to the inferred typename of T 
+		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
+		/// </summary>
+		public TDescriptor Types(params TypeNameMarker[] types)
+		{
+			if (types == null) return (TDescriptor)this;
+			Self.Types = types;
+			return (TDescriptor)this;
+		}
+		/// <summary>
+		/// The types to execute the search on. Defaults to the inferred typename of T 
+		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
+		/// </summary>
 		public TDescriptor Types(params Type[] types)
 		{
 			if (types == null) return (TDescriptor)this;
 			return this.Types((IEnumerable<Type>)types);
 		}
+
+
+		/// <summary>
+		/// The type to execute the search on. Defaults to the inferred typename of T 
+		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
+		/// </summary>
+		public TDescriptor Type(TypeNameMarker type)
+		{
+			if (type == null) return (TDescriptor)this;
+			return this.Types(type);
+		}
+
+		/// <summary>
+		/// The type to execute the search on. Defaults to the inferred typename of T 
+		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
+		/// </summary>
 		public TDescriptor Type(string type)
 		{
+			if (type == null) return (TDescriptor)this;
 			return this.Types(type);
 		}
+
+		/// <summary>
+		/// The type to execute the search on. Defaults to the inferred typename of T 
+		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
+		/// </summary>
 		public TDescriptor Type(Type type)
 		{
+			if (type == null) return (TDescriptor)this;
 			return this.Types(type);
 		}
+
+		/// <summary>
+		/// An alternative type to infer the typename from
+		/// </summary>
 		public TDescriptor Type<TAlternative>() where TAlternative : class
 		{
 			return this.Types(typeof(TAlternative));
 		}
+
+		/// <summary>
+		/// Execute search over all indices
+		/// </summary>
 		public TDescriptor AllIndices()
 		{
 			Self.AllIndices = true;
 			return (TDescriptor)this;
 		}
+
+		/// <summary>
+		/// Execute search over all types
+		/// </summary>
 		public TDescriptor AllTypes()
 		{
 			Self.AllTypes = true;

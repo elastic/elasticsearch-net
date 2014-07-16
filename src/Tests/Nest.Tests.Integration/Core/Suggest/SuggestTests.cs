@@ -2,7 +2,6 @@
 using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
-using Nest.Resolvers;
 using Elasticsearch.Net;
 
 namespace Nest.Tests.Integration.Core.Suggest
@@ -13,10 +12,10 @@ namespace Nest.Tests.Integration.Core.Suggest
 		[Test]
 		public void TestSuggest()
 		{
-			var country = this._client.Search<ElasticsearchProject>(s => s.Size(1)).Documents.First().Country;
+			var country = this.Client.Search<ElasticsearchProject>(s => s.Size(1)).Documents.First().Country;
 			var wrongCountry = country + "x";
 
-			var suggestResults = _client.Suggest<ElasticsearchProject>(s => s
+			var suggestResults = Client.Suggest<ElasticsearchProject>(s => s
 				.Term("mySuggest", m => m
 					.SuggestMode(SuggestMode.Always)
 					.Text(wrongCountry)

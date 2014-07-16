@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using Elasticsearch.Net;
 using FluentAssertions;
-using Nest;
-using Nest.Resolvers;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
@@ -15,8 +11,6 @@ namespace Nest.Tests.Unit.ObjectInitializer.DeleteByQuery
 	[TestFixture]
 	public class DeleteByQueryTypedRequestUrlTests : BaseJsonTests
 	{
-		private readonly IElasticsearchResponse _status;
-
 		[Test]
 		public void Typed_Defaults()
 		{

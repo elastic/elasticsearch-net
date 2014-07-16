@@ -2,7 +2,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.ConnectionPool;
 using Nest.Resolvers;
@@ -58,8 +57,8 @@ namespace Nest
 		{
 			get
 			{
-				if (this._defaultIndex.IsNullOrEmpty())
-					throw new NullReferenceException("No default index set on connection!");
+				//if (this._defaultIndex.IsNullOrEmpty())
+				//	throw new NullReferenceException("No default index set on connection!");
 				return this._defaultIndex;
 			}
 		}

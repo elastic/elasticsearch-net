@@ -43,7 +43,8 @@ namespace Nest
 		/// Deletes a registered scroll request on the cluster 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html
 		/// </summary>
-		/// <param name="selector">Specify the scroll id as well as request specific configuration</param>
+		/// <param name="client"></param>
+		/// <param name="scrollId">The scrollId to clear</param>
 		public static IEmptyResponse ClearScroll(this IElasticClient client, string scrollId) 
 		{
 			return client.ClearScroll(s => s.ScrollId(scrollId));
@@ -53,7 +54,8 @@ namespace Nest
 		/// Deletes a registered scroll request on the cluster 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html
 		/// </summary>
-		/// <param name="selector">Specify the scroll id as well as request specific configuration</param>
+		/// <param name="client"></param>
+		/// <param name="scrollId">The scrollId to clear</param>
 		public static Task<IEmptyResponse> ClearScrollAsync(this IElasticClient client, string scrollId) 
 		{
 			return client.ClearScrollAsync(s => s.ScrollId(scrollId));

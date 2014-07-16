@@ -7,8 +7,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest.Resolvers.Converters
 {
-	using System.Text;
-
 	public class IndexSettingsConverter : JsonConverter
 	{
 		private void WriteSettingObject(JsonWriter writer, JObject obj)
@@ -130,7 +128,7 @@ namespace Nest.Resolvers.Converters
 			var dictionary = new Dictionary<string, object>();
 			serializer.Populate(o.CreateReader(), dictionary);
 			result.Settings = dictionary;
-			result._ = DynamicDictionary.Create(dictionary);
+			result.AsExpando = DynamicDictionary.Create(dictionary);
 			foreach (var rootProperty in o.Children<JProperty>())
 			{
 				if (rootProperty.Name.Equals("analysis", StringComparison.InvariantCultureIgnoreCase))

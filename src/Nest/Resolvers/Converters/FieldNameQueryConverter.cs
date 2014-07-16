@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Globalization;
-using Elasticsearch.Net;
 using Nest.DSL.Query.Behaviour;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;

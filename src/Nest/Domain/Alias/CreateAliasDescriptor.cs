@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Elasticsearch.Net;
 
 namespace Nest
 {

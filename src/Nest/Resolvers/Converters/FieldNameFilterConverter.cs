@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using Elasticsearch.Net;
-using Nest.DSL.Query.Behaviour;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
@@ -57,15 +53,15 @@ namespace Nest
 			return filter;
 		}
 
-		private static T GetValue<T>(string name, Dictionary<string, JProperty> dict)
+		private static TValue GetValue<TValue>(string name, Dictionary<string, JProperty> dict)
 		{
 			JProperty prop;
 			if (dict.TryGetValue(name, out prop))
 			{
 				dict.Remove(name);
-				return prop.Value.Value<T>();
+				return prop.Value.Value<TValue>();
 			}
-			return default(T);
+			return default(TValue);
 		}
 
 		private static void WriteProperty(JsonWriter writer, IFilter filter, string field, object value)

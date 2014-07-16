@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ServiceModel.Channels;
 using Newtonsoft.Json;
 using System;
 using Nest.Resolvers.Converters;
@@ -45,11 +44,13 @@ namespace Nest
 		}
 
 		public IDictionary<string, object> Settings { get; set; }
+		
 		/// <summary>
 		/// Dynamic view of the settings object, useful for reading value from the settings
 		/// as it allows you to chain without nullrefs. Cannot be used to assign setting values though
 		/// </summary>
-		public dynamic _ { get; internal set; }
+		public dynamic AsExpando { get; internal set; }
+		
 		public AnalysisSettings Analysis { get; set; }
 
 		public IList<RootObjectMapping> Mappings { get; set; }

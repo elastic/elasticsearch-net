@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,9 +11,10 @@ namespace Nest
 	{
 
 		/// <summary>
-		/// Shortcut into the <see cref="Bulk"/> call that indexes the specified objects
+		/// Shortcut into the Bulk call that indexes the specified objects
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
 		/// </summary>
+		/// <param name="client"></param>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
 		/// <param name="index">Override the inferred indexname for T</param>
@@ -27,9 +27,10 @@ namespace Nest
 		
 
 		/// <summary>
-		/// Shortcut into the <see cref="Bulk"/> call that indexes the specified objects
+		/// Shortcut into the Bulk call that indexes the specified objects
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
 		/// </summary>
+		/// <param name="client"></param>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
 		/// <param name="index">Override the inferred indexname for T</param>

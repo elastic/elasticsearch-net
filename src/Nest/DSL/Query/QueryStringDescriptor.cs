@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
-using System.Globalization;
 using Newtonsoft.Json.Converters;
-using Elasticsearch.Net;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -66,7 +62,7 @@ namespace Nest
 		string MinimumShouldMatchPercentage { get; set; }
 
 		[JsonProperty(PropertyName = "use_dis_max")]
-		bool? UseDismax { get; set; }
+		bool? UseDisMax { get; set; }
 
 		[JsonProperty(PropertyName = "tie_breaker")]
 		double? TieBreaker { get; set; }
@@ -100,7 +96,7 @@ namespace Nest
 		public bool? AnalyzeWildcard { get; set; }
 		public bool? AutoGeneratePhraseQueries { get; set; }
 		public string MinimumShouldMatchPercentage { get; set; }
-		public bool? UseDismax { get; set; }
+		public bool? UseDisMax { get; set; }
 		public double? TieBreaker { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
 	}
@@ -140,7 +136,7 @@ namespace Nest
 		
 		string IQueryStringQuery.MinimumShouldMatchPercentage { get; set; }
 		
-		bool? IQueryStringQuery.UseDismax { get; set; }
+		bool? IQueryStringQuery.UseDisMax { get; set; }
 		
 		double? IQueryStringQuery.TieBreaker { get; set; }
 		
@@ -268,7 +264,7 @@ namespace Nest
 		}
 		public QueryStringQueryDescriptor<T> UseDisMax(bool useDismax = true)
 		{
-			((IQueryStringQuery)this).UseDismax = useDismax;
+			((IQueryStringQuery)this).UseDisMax = useDismax;
 			return this;
 		}
 		public QueryStringQueryDescriptor<T> TieBreaker(double tieBreaker)

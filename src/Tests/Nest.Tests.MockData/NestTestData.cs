@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoPoco.Engine;
 using AutoPoco;
 using Nest.Tests.MockData.Domain;
 using AutoPoco.DataSources;
-using AutoPoco.Configuration;
 using Nest.Tests.MockData.DataSources;
 
 namespace Nest.Tests.MockData

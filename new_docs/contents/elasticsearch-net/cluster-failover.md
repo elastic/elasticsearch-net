@@ -23,10 +23,10 @@ Configuring how the registered `IConnectionPool` should behave happens on the `I
 
 #### SniffOnConnectionFault()
 Should the connection pool resniff the cluster state everytime an operation on a node throws an exception or a faulty http status code.
-Defaults to false.
+Defaults to true.
 
 #### SniffOnStartup()
-Should the connection pool sniff the cluster state the first time its instantiated. Defaults to false.
+Should the connection pool sniff the cluster state the first time its instantiated. Defaults to true.
 
 #### SniffLifeSpan()
 When set will cause the connectionpool to resniff whenever it notices the last sniff information happened too long ago. Defaults to null.

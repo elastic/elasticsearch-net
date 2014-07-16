@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
-using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
-using System.Diagnostics;
 using FluentAssertions;
 
 namespace Nest.Tests.Integration.Reproduce
@@ -24,7 +22,7 @@ namespace Nest.Tests.Integration.Reproduce
 		public void GetInvalidIndexShouldReturnNull()
 		{
 			const string indexName = "indexthatdoesnotexist";
-			var elasticSearchProject = this._client.Source<ElasticsearchProject>(4, indexName);
+			var elasticSearchProject = this.Client.Source<ElasticsearchProject>(4, indexName);
 
 			elasticSearchProject.Should().BeNull();
 		}
@@ -33,7 +31,7 @@ namespace Nest.Tests.Integration.Reproduce
 		public void GetInvalidIndexShouldThrow_OnClientThatThrows()
 		{
 			const string indexName = "indexthatdoesnotexist";
-			var e = Assert.Throws<ElasticsearchServerException>(() => this._clientThatThrows.Source<ElasticsearchProject>(4, indexName));
+			var e = Assert.Throws<ElasticsearchServerException>(() => this.ClientThatThrows.Source<ElasticsearchProject>(4, indexName));
 			e.ExceptionType.Should().Be("IndexMissingException");
 
 		}

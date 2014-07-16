@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Elasticsearch.Net;
 using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -231,9 +227,9 @@ namespace Nest
 		}
 
 		/// <summary>
-		//The multi_match query builds further on top of the match query by allowing multiple fields to be specified. 
-		//The idea here is to allow to more easily build a concise match type query over multiple fields instead of using a 
-		//relatively more expressive query by using multiple match queries within a bool query.
+		/// The multi_match query builds further on top of the match query by allowing multiple fields to be specified. 
+		/// The idea here is to allow to more easily build a concise match type query over multiple fields instead of using a 
+		/// relatively more expressive query by using multiple match queries within a bool query.
 		/// </summary>
 		public QueryContainer MultiMatch(Action<MultiMatchQueryDescriptor<T>> selector)
 		{
@@ -553,9 +549,11 @@ namespace Nest
 
 			return this.New(query, q => q.Boosting = query);
 		}
+
 		/// <summary>
 		/// A query that matches all documents. Maps to Lucene MatchAllDocsQuery.
 		/// </summary>
+		/// <param name="Boost">An optional boost to associate with this match_all</param>
 		/// <param name="NormField">
 		/// When indexing, a boost value can either be associated on the document level, or per field. 
 		/// The match all query does not take boosting into account by default. In order to take 

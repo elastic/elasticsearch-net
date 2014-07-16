@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Elasticsearch.Net;
-using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
@@ -23,7 +22,7 @@ namespace Nest.Tests.Integration.Search.Filter
 		{
 			_LookFor = NestTestData.Session.Single<ElasticsearchProject>().Get();
 			_LookFor.Name = "mmm";
-			var status = this._client.Index(_LookFor, i=>i.Refresh()).ConnectionStatus;
+			var status = this.Client.Index(_LookFor, i=>i.Refresh()).ConnectionStatus;
 			Assert.True(status.Success, status.ResponseRaw.Utf8String());
 		}
 

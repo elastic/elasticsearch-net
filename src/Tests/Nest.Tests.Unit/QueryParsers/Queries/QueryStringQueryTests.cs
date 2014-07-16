@@ -51,7 +51,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Query.Should().Be("q");
 			q.Rewrite.Should().Be(RewriteMultiTerm.ConstantScoreDefault);
 			q.TieBreaker.Should().Be(4.1);
-			q.UseDismax.Should().BeTrue();
+			q.UseDisMax.Should().BeTrue();
 		}
 
 	}

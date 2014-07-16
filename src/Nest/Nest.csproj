@@ -56,6 +56,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Release\Nest.XML</DocumentationFile>
+    <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Generator|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -161,6 +162,7 @@
     <Compile Include="DSL\Query\GeoShapeMultiLineStringQueryDescriptor.cs" />
     <Compile Include="DSL\Query\GeoShapeLineStringQueryDescriptor.cs" />
     <Compile Include="DSL\Query\GeoShapeEnvelopeQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\SubDescriptors\ExternalFieldDeclarationDescriptor.cs" />
     <Compile Include="DSL\TermVector\IMultiTermVectorDocumentDescriptor.cs" />
     <Compile Include="DSL\MultiGet\MultiGetDoc.cs" />
     <Compile Include="Domain\Connection\ConnectionSettings.cs" />
@@ -431,8 +433,8 @@
     <Compile Include="Domain\DSL\ParentScoreType.cs" />
     <Compile Include="DSL\RegisterPercolatorDescriptor.cs" />
     <Compile Include="DSL\PercolateDescriptor.cs" />
-    <Compile Include="DSL\Query\SubDescriptors\ExternalFieldDeclarationDescriptor.cs" />
-    <Compile Include="DSL\Query\SubDescriptors\IExternalFieldDeclarationDescriptor.cs" />
+    <Compile Include="DSL\Query\SubDescriptors\ExternalFieldDeclaration.cs" />
+    <Compile Include="DSL\Query\SubDescriptors\IExternalFieldDeclaration.cs" />
     <Compile Include="DSL\Query\MultiMatchQueryDescriptor.cs" />
     <Compile Include="ElasticClient-ClusterState.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
@@ -781,7 +783,7 @@
     <Compile Include="Domain\Hit\Hit.cs" />
     <Compile Include="Domain\Hit\HitsMetaData.cs" />
     <Compile Include="IElasticClient.cs" />
-    <Compile Include="Properties\InternalsVisibleTo.cs" />
+    <Compile Include="Properties\ClsCompiancy.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\AggregationConverter.cs" />
     <Compile Include="Resolvers\Converters\FieldNameFilterConverter.cs" />

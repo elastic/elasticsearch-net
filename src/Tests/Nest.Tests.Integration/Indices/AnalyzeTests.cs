@@ -25,7 +25,7 @@ namespace Nest.Tests.Integration.Indices
 		{
 			//analyze text using default index settings
 			var text = "this is a string with some spaces and stuff";
-			var r = this._client.Analyze(a=>a.Text(text));
+			var r = this.Client.Analyze(a=>a.Text(text));
 			this._defaultAnalyzeAssertations(r);
 		}
 		[Test]
@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Indices
 		{
 			//analyze text using elasticssearchprojects content field settings
 			var text = "this is a string with some spaces and stuff";
-			var r = this._client.Analyze(a=>a.Index<ElasticsearchProject>().Field<ElasticsearchProject>(p => p.Content).Text(text));
+			var r = this.Client.Analyze(a=>a.Index<ElasticsearchProject>().Field<ElasticsearchProject>(p => p.Content).Text(text));
 			this._defaultAnalyzeAssertations(r);
 		}
 		[Test]
@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Indices
 		{
 			//analyze text using a different index and custom analyzer
 			var text = "this is a string with some spaces and stuff";
-			var r = this._client.Analyze(a=>a.Analyzer("whitespace").Text(text).Index(ElasticsearchConfiguration.DefaultIndex));
+			var r = this.Client.Analyze(a=>a.Analyzer("whitespace").Text(text).Index(ElasticsearchConfiguration.DefaultIndex));
 			this._defaultAnalyzeAssertations(r);
 		}
 		[Test]
@@ -50,7 +50,7 @@ namespace Nest.Tests.Integration.Indices
 			//analyze text using elasticssearchprojects content field but on a different index
 			var text = "this is a string with some spaces and stuff";
 			var index = ElasticsearchConfiguration.DefaultIndex;
-			var r = this._client.Analyze(a=>a.Field<ElasticsearchProject>(p => p.Content).Index(index).Text(text));
+			var r = this.Client.Analyze(a=>a.Field<ElasticsearchProject>(p => p.Content).Index(index).Text(text));
 			this._defaultAnalyzeAssertations(r);
 		}
 		[Test]
@@ -58,7 +58,7 @@ namespace Nest.Tests.Integration.Indices
 		{
 			//analyze text using a different index and custom analyzer
 			var text = "this is a string with some spaces and stuff";
-			var r = this._client.Analyze(a=>a.Field("content").Index(ElasticsearchConfiguration.DefaultIndex).Text(text));
+			var r = this.Client.Analyze(a=>a.Field("content").Index(ElasticsearchConfiguration.DefaultIndex).Text(text));
 			this._defaultAnalyzeAssertations(r);
 		}
 	}

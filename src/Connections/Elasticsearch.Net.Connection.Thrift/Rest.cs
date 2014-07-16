@@ -20,7 +20,6 @@ namespace Elasticsearch.Net.Connection.Thrift
 		{
 			protected TProtocol iprot_;
 			protected TProtocol oprot_;
-			protected int seqid_;
 
 			public Client(TProtocol prot) : this(prot, prot)
 			{
@@ -54,7 +53,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 			public void send_execute(RestRequest request)
 			{
-				oprot_.WriteMessageBegin(new TMessage("execute", TMessageType.Call, seqid_));
+				oprot_.WriteMessageBegin(new TMessage("execute", TMessageType.Call, 0));
 				var args = new execute_args();
 				args.Request = request;
 				args.Write(oprot_);

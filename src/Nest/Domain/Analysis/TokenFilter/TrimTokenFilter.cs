@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
 	/// <summary>
 	/// The trim token filter trims surrounding whitespaces around a token.

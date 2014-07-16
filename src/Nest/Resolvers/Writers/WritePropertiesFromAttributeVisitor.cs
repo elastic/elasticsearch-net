@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using Newtonsoft.Json;
-using Elasticsearch.Net;
 
 namespace Nest.Resolvers.Writers {
     public class WritePropertiesFromAttributeVisitor : IElasticPropertyVisitor

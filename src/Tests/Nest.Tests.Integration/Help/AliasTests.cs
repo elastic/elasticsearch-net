@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Indices
 		public void CustomBoosting()
 		{
 			var searchText = "myQuery";
-			_client.Search<Entry>(s=>s
+			Client.Search<Entry>(s=>s
 				.Query(q =>q
 					.Boosting(bq=>bq
 						.Positive(pq=>pq

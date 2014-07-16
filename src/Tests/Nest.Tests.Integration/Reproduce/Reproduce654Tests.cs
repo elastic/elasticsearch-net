@@ -2,12 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Exceptions;
-using Nest.Tests.MockData;
-using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
-using System.Diagnostics;
 using FluentAssertions;
 
 namespace Nest.Tests.Integration.Reproduce
@@ -26,7 +21,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			Assert.DoesNotThrow(async () =>
 			{
-				var deleteResult = await this._client.DeleteAsync("index", "type", "id");
+				var deleteResult = await this.Client.DeleteAsync("index", "type", "id");
 				deleteResult.IsValid.Should().BeTrue();
 				var e = deleteResult.ConnectionStatus.OriginalException as ElasticsearchServerException;
 				e.Should().BeNull();
@@ -39,7 +34,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			Assert.DoesNotThrow(() =>
 			{
-				var deleteResult = this._client.Delete("index", "type", "id");
+				var deleteResult = this.Client.Delete("index", "type", "id");
 				deleteResult.IsValid.Should().BeTrue();
 				var e = deleteResult.ConnectionStatus.OriginalException as ElasticsearchServerException;
 				e.Should().BeNull();
@@ -56,7 +51,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			Assert.DoesNotThrow(async () =>
 			{
-				var deleteResult = await this._clientThatThrows.DeleteAsync("index", "type", "id");
+				var deleteResult = await this.ClientThatThrows.DeleteAsync("index", "type", "id");
 				deleteResult.IsValid.Should().BeTrue();
 				var e = deleteResult.ConnectionStatus.OriginalException as ElasticsearchServerException;
 				e.Should().BeNull();
@@ -69,7 +64,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			Assert.DoesNotThrow(() =>
 			{
-				var deleteResult = this._clientThatThrows.Delete("index", "type", "id");
+				var deleteResult = this.ClientThatThrows.Delete("index", "type", "id");
 				deleteResult.IsValid.Should().BeTrue();
 				var e = deleteResult.ConnectionStatus.OriginalException as ElasticsearchServerException;
 				e.Should().BeNull();
@@ -82,11 +77,11 @@ namespace Nest.Tests.Integration.Reproduce
 		// So lets double check that calling the low level client behaves the same as NEST
 
 		[Test]
-		public async void LowLevelClientDeleteAsync_ShouldNotThrowOn404()
+		public void LowLevelClientDeleteAsync_ShouldNotThrowOn404()
 		{
 			Assert.DoesNotThrow(async () =>
 			{
-				var deleteResult = await this._client.Raw.DeleteAsync("index", "type", "id");
+				var deleteResult = await this.Client.Raw.DeleteAsync("index", "type", "id");
 				deleteResult.Success.Should().BeTrue();
 				var e = deleteResult.OriginalException as ElasticsearchServerException;
 				deleteResult.HttpStatusCode.Should().Be(404);
@@ -101,7 +96,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			Assert.DoesNotThrow(() =>
 			{
-				var deleteResult = this._client.Raw.Delete("index", "type", "id");
+				var deleteResult = this.Client.Raw.Delete("index", "type", "id");
 				deleteResult.Success.Should().BeTrue();
 				var e = deleteResult.OriginalException as ElasticsearchServerException;
 				deleteResult.HttpStatusCode.Should().Be(404);
@@ -113,11 +108,11 @@ namespace Nest.Tests.Integration.Reproduce
 		}
 		
 		[Test]
-		public async void LowLevelClientDeleteAsync_ShouldNotThrowOn404_OnClientThatThrows()
+		public void LowLevelClientDeleteAsync_ShouldNotThrowOn404_OnClientThatThrows()
 		{
 			Assert.DoesNotThrow(async () =>
 			{
-				var deleteResult = await this._clientThatThrows.Raw.DeleteAsync("index", "type", "id");
+				var deleteResult = await this.ClientThatThrows.Raw.DeleteAsync("index", "type", "id");
 				deleteResult.Success.Should().BeTrue();
 				var e = deleteResult.OriginalException as ElasticsearchServerException;
 				deleteResult.HttpStatusCode.Should().Be(404);
@@ -133,7 +128,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			Assert.DoesNotThrow(() =>
 			{
-				var deleteResult = this._clientThatThrows.Raw.Delete("index", "type", "id");
+				var deleteResult = this.ClientThatThrows.Raw.Delete("index", "type", "id");
 				deleteResult.Success.Should().BeTrue();
 				var e = deleteResult.OriginalException as ElasticsearchServerException;
 				deleteResult.HttpStatusCode.Should().Be(404);
@@ -152,7 +147,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			Assert.DoesNotThrow(async () =>
 			{
-				var searchResult = await this._client.SearchAsync<dynamic>(s=>s.QueryRaw("{ blah: blah }"));
+				var searchResult = await this.Client.SearchAsync<dynamic>(s=>s.QueryRaw("{ blah: blah }"));
 				searchResult.IsValid.Should().BeFalse();
 				searchResult.ConnectionStatus.HttpStatusCode.Should().Be(400);
 				var e = searchResult.ConnectionStatus.OriginalException as ElasticsearchServerException;
@@ -166,7 +161,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			Assert.DoesNotThrow(() =>
 			{	
-				var searchResult = this._client.Search<dynamic>(s=>s.QueryRaw("{ blah: blah }"));
+				var searchResult = this.Client.Search<dynamic>(s=>s.QueryRaw("{ blah: blah }"));
 				searchResult.IsValid.Should().BeFalse();
 				searchResult.ConnectionStatus.HttpStatusCode.Should().Be(400);
 				var e = searchResult.ConnectionStatus.OriginalException as ElasticsearchServerException;
@@ -182,7 +177,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			var e = Assert.Throws<ElasticsearchServerException>(async () =>
 			{
-				var searchResult = await this._clientThatThrows.SearchAsync<dynamic>(s=>s.QueryRaw("{ blah: blah }"));
+				var searchResult = await this.ClientThatThrows.SearchAsync<dynamic>(s=>s.QueryRaw("{ blah: blah }"));
 			});
 			e.Should().NotBeNull();
 			e.ExceptionType.Should().Be("SearchPhaseExecutionException");
@@ -193,7 +188,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			var e = Assert.Throws<ElasticsearchServerException>(() =>
 			{	
-				var searchResult = this._clientThatThrows.Search<dynamic>(s=>s.QueryRaw("{ blah: blah }"));
+				var searchResult = this.ClientThatThrows.Search<dynamic>(s=>s.QueryRaw("{ blah: blah }"));
 				searchResult.IsValid.Should().BeFalse();
 				searchResult.ConnectionStatus.HttpStatusCode.Should().Be(400);
 			});
@@ -211,7 +206,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			Assert.DoesNotThrow(async () =>
 			{
-				var searchResult = await this._client.Raw.SearchAsync("{ blah: blah }");
+				var searchResult = await this.Client.Raw.SearchAsync("{ blah: blah }");
 				searchResult.Success.Should().BeFalse();
 				searchResult.HttpStatusCode.Should().Be(400);
 				var e = searchResult.OriginalException as ElasticsearchServerException;
@@ -225,7 +220,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			Assert.DoesNotThrow(() =>
 			{	
-				var searchResult = this._client.Raw.Search("{ blah: blah }");
+				var searchResult = this.Client.Raw.Search("{ blah: blah }");
 				searchResult.Success.Should().BeFalse();
 				searchResult.HttpStatusCode.Should().Be(400);
 				var e = searchResult.OriginalException as ElasticsearchServerException;
@@ -241,7 +236,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			var e = Assert.Throws<ElasticsearchServerException>(async () =>
 			{
-				var searchResult = await this._clientThatThrows.Raw.SearchAsync("{ blah: blah }");
+				var searchResult = await this.ClientThatThrows.Raw.SearchAsync("{ blah: blah }");
 			});
 			e.Should().NotBeNull();
 			e.ExceptionType.Should().Be("SearchPhaseExecutionException");
@@ -252,7 +247,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			var e = Assert.Throws<ElasticsearchServerException>(() =>
 			{	
-				var searchResult = this._clientThatThrows.Raw.Search("{ blah: blah }");
+				var searchResult = this.ClientThatThrows.Raw.Search("{ blah: blah }");
 			});
 			e.Should().NotBeNull();
 			e.ExceptionType.Should().Be("SearchPhaseExecutionException");
@@ -265,7 +260,7 @@ namespace Nest.Tests.Integration.Reproduce
 			var seenError = false;
 			try
 			{
-				var searchResult = await this._clientThatThrows.Raw.SearchAsync("{ blah: blah }");
+				var searchResult = await this.ClientThatThrows.Raw.SearchAsync("{ blah: blah }");
 			}
 			catch (ElasticsearchServerException e)
 			{
