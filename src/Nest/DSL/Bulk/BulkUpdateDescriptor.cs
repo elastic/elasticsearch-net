@@ -33,6 +33,7 @@ namespace Nest
 		{
 			this.InferFrom = inferFrom;
 		}
+		
 		public BulkUpdateOperation(TDocument inferFrom, TPartialDocument update) 
 		{
 			this.InferFrom = inferFrom;
@@ -163,7 +164,7 @@ namespace Nest
 		/// The object to update, if id is not manually set it will be inferred from the object.
 		/// Used ONLY to infer the ID see Document() to apply a partial object merge.
 		/// </summary>
-		public BulkUpdateDescriptor<TDocument, TPartialDocument> InferFrom(TDocument @object, bool useAsUpsert = false)
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> Id(TDocument @object, bool useAsUpsert = false)
 		{
 			Self.InferFrom = @object;
 			if (useAsUpsert) return this.Upsert(@object);

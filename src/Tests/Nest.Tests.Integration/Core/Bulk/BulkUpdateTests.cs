@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 			{
 				int id = i;
 				descriptor.Update<ElasticsearchProject, object>(op => op
-					.InferFrom(new ElasticsearchProject { Id = id })
+					.Id(new ElasticsearchProject { Id = id })
 					.PartialDocument(new { name = "SufixedName-" + id})
 				);
 			}

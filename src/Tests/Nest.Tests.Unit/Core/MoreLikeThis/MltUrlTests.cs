@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.Core.MoreLikeThis
 		[Test]
 		public void MltSimpleByObject()
 		{
-			var result = this._client.MoreLikeThis<ElasticsearchProject>(mlt => mlt.Object(new ElasticsearchProject { Id = 1 }));
+			var result = this._client.MoreLikeThis<ElasticsearchProject>(mlt => mlt.Id(new ElasticsearchProject { Id = 1 }));
 			var status = result.ConnectionStatus;
 			StringAssert.EndsWith("/nest_test_data/elasticsearchprojects/1/_mlt", status.RequestUrl);
 			StringAssert.AreEqualIgnoringCase("GET", status.RequestMethod);
@@ -30,7 +30,7 @@ namespace Nest.Tests.Unit.Core.MoreLikeThis
 			var result = this._client.MoreLikeThis<ElasticsearchProject>(mlt => mlt
 				.Index("someotherindex")
 				.Type("sillytypename")
-				.Object(new ElasticsearchProject { Id = 1 })
+				.Id(new ElasticsearchProject { Id = 1 })
 			);
 			var status = result.ConnectionStatus;
 			StringAssert.EndsWith("/someotherindex/sillytypename/1/_mlt", status.RequestUrl);

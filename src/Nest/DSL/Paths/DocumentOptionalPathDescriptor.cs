@@ -159,7 +159,7 @@ namespace Nest
 			Self.Id = id;
 			return (TDescriptor)this;
 		}
-		public TDescriptor Object(T @object)
+		public TDescriptor Id(T @object)
 		{
 			Self.IdFrom = @object;
 			return (TDescriptor)this;

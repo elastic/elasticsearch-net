@@ -24,7 +24,7 @@ namespace Nest.Tests.Unit.Core.Bulk
 					.Document(new ElasticsearchProject { Id = 4 })
 					.VersionType(VersionType.ExternalGte))
 				.Update<ElasticsearchProject, object>(i => i
-					.InferFrom(new ElasticsearchProject { Id = 3 })
+					.Id(new ElasticsearchProject { Id = 3 })
 					.VersionType(VersionType.External)
 					.PartialDocument(new { name = "NEST"})
 				)
@@ -68,7 +68,7 @@ namespace Nest.Tests.Unit.Core.Bulk
 		{
 			var result = this._client.Bulk(b => b
 				.Update<ElasticsearchProject, object>(i => i
-					.InferFrom(new ElasticsearchProject { Id = 3 })
+					.Id(new ElasticsearchProject { Id = 3 })
 					.PartialDocument(new { name = "NEST" })
 					.RetriesOnConflict(4)
 				)

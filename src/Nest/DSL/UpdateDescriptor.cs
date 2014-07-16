@@ -81,6 +81,8 @@ namespace Nest
 		where TPartialDocument : class
 	{
 
+		private TDocument _inferFrom { get; set; }
+
 		private IUpdateRequest<TDocument, TPartialDocument> Self { get { return this; } }
 
 		string IUpdateRequest<TDocument, TPartialDocument>.Script { get; set; }
@@ -109,6 +111,15 @@ namespace Nest
 			Self.Params = paramDictionary(new FluentDictionary<string, object>());
 			return this;
 		}
+
+		public UpdateDescriptor<TDocument, TPartialDocument> Id(TDocument document, bool useAsUpsert)
+		{
+			((IDocumentOptionalPath<UpdateRequestParameters, TDocument>)Self).IdFrom = document;
+			if (useAsUpsert)
+				return this.Upsert(document);
+			return this;
+		}
+
 
 		/// <summary>
 		/// The full document to be created if an existing document does not exist for a partial merge.
@@ -155,8 +166,10 @@ namespace Nest
 			
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
 		{
-			if (Self.PartialDocument != null && Self.Id == null)
-				Self.Id = new ElasticInferrer(settings).Id(Self.PartialDocument);
+			if (pathInfo.Id.IsNullOrEmpty())
+			{
+				pathInfo.Id = settings.Inferrer.Id(Self.Upsert);
+			}
 
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 		}

@@ -16,7 +16,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.Greater(project.LOC, 0);
 			var loc = project.LOC;
 			this.Client.Update<ElasticsearchProject>(u => u
-			  .Object(project)
+			  .Id(project)
 			  .Script("ctx._source.loc += 10")
 			  .RetryOnConflict(5)
 			  .Refresh()

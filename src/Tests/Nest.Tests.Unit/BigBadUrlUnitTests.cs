@@ -110,7 +110,7 @@ namespace Nest.Tests.Unit.Cluster
 			Do("PUT", "/mydefaultindex/doc/_mapping", c => c.Map<Doc>(m => m.MapFromAttributes()));
 			Do("PUT", "/mycustomindex/doc/_mapping", c => c.Map<Doc>(m => m.Index("mycustomindex")));
 			Do("PUT", "/mycustomindex/customtype/_mapping", c => c.Map<Doc>(m => m.Index("mycustomindex").Type("customtype")));
-			Do("GET", "/mydefaultindex/doc/1/_mlt", c => c.MoreLikeThis<Doc>(m => m.Object(new Doc { Id = "1" })));
+			Do("GET", "/mydefaultindex/doc/1/_mlt", c => c.MoreLikeThis<Doc>(m => m.Id(new Doc { Id = "1" })));
 			Do("GET", "/mydefaultindex/doc/1/_mlt", c => c.MoreLikeThis<Doc>(m => m.Id(1)));
 			Do("GET", "/mycustomindex/mycustomtype/1/_mlt", c => c.MoreLikeThis<Doc>(m => m.Id(1).Index("mycustomindex").Type("mycustomtype")));
 			Do("POST", "/_msearch", c => c.MultiSearch(m => m.Search<Doc>(s => s.MatchAll())));
