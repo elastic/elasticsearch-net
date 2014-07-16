@@ -3,10 +3,10 @@
 namespace Nest
 {
 	/// <summary>
-	/// An object to describe a geoshape vetor
+	/// An object to describe an indexed geoshape
 	/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-filter.html
 	/// </summary>
-	public class GeoIndexedShapeVector
+	public class IndexedGeoShape
 	{
 		[JsonProperty("id")]
 		public string Id { get; set; }
@@ -17,7 +17,7 @@ namespace Nest
 		[JsonProperty("index")]
 		public IndexNameMarker Index { get; set; }
 
-		[JsonProperty("shape_field_name")]
+		[JsonProperty("path")]
 		public PropertyPathMarker Field { get; set; }
 	}
 }
