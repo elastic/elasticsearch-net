@@ -1,0 +1,15 @@
+﻿{
+	"settings": {
+		"index": {
+			"analysis": {
+				"analyzer": {
+					"snowball": {
+						"language":  "English",
+						"stopwords": "these,are,some,stopwords",
+						"type": "snowball"
+					}
+				}
+			}
+		}
+	}
+}

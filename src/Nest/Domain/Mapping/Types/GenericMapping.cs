@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -29,7 +27,7 @@ namespace Nest
 		[JsonProperty("index_name")]
 		public string IndexName { get; set; }
 
-		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
+		[JsonProperty("store")]
 		public bool? Store { get; set; }
 
 		[JsonProperty("index")]

@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
-using Nest.Resolvers.Converters;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -17,7 +13,7 @@ namespace Nest
 	/// </summary>
 	public partial class ElasticClient : Nest.IElasticClient
 	{
-		protected readonly IConnectionSettingsValues _connectionSettings;
+		private readonly IConnectionSettingsValues _connectionSettings;
 
 		internal RawDispatch RawDispatch { get; set; }
 
@@ -36,25 +32,25 @@ namespace Nest
 		/// </param>
 		/// <param name="connection">Optionally provide a different connection handler, defaults to http using HttpWebRequest</param>
 		/// <param name="serializer">Optionally provide a custom serializer responsible for taking a stream and turning into T</param>
+		/// <param name="transport">The transport coordinates requests between the client and the connection pool and the connection</param>
 		public ElasticClient(
 			IConnectionSettingsValues settings = null, 
 			IConnection connection = null, 
-			INestSerializer serializer = null)
+			INestSerializer serializer = null,
+			ITransport transport = null)
 		{
 			this._connectionSettings = settings ?? new ConnectionSettings();
 			this.Connection = connection ?? new HttpConnection(this._connectionSettings);
 
 			this.Serializer = serializer ?? new NestSerializer(this._connectionSettings);
-			var stringifier = new NestStringifier(this._connectionSettings);
 			this.Raw = new ElasticsearchClient(
 				this._connectionSettings, 
 				this.Connection, 
-				null, //default transport
-				this.Serializer, 
-				stringifier
+				transport, //default transport
+				this.Serializer
 			);
 			this.RawDispatch = new RawDispatch(this.Raw);
-			this.Infer = new ElasticInferrer(this._connectionSettings);
+			this.Infer = this._connectionSettings.Inferrer;
 
 		}
 
@@ -64,7 +60,7 @@ namespace Nest
 			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
 			)
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IPathDescriptor, IPathInfo<Q>,  new()
+			where D : IRequest<Q>,  new()
 			where R : BaseResponse
 		{
 			selector.ThrowIfNull("selector");
@@ -77,7 +73,7 @@ namespace Nest
 			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
 			)
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IPathDescriptor, IPathInfo<Q>
+			where D : IRequest<Q>
 			where R : BaseResponse
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
@@ -90,10 +86,10 @@ namespace Nest
 			D descriptor
 			)
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IPathDescriptor, IPathInfo<Q>
+			where D : IRequest<Q>
 			where R : BaseResponse
 		{
-			var config = descriptor.RequestConfiguration as IRequestConfiguration;
+			var config = descriptor.RequestConfiguration;
 			var statusCodeAllowed = config != null && config.AllowedStatusCodes.HasAny(i => i == c.HttpStatusCode);
 			
 			if (c.Success || statusCodeAllowed)
@@ -105,14 +101,6 @@ namespace Nest
 			return badResponse;
 		}
 
-
-		private static R CreateValidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
-		{
-			var r = (R)typeof(R).CreateInstance();
-			((IResponseWithRequestInformation)r).RequestInformation = response;
-			r.IsValid = true;
-			return r;
-		}
 		private static R CreateInvalidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
 		{
 			var r = (R)typeof(R).CreateInstance();
@@ -126,7 +114,7 @@ namespace Nest
 			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
 			)
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IPathDescriptor, IPathInfo<Q>, new()
+			where D : IRequest<Q>, new()
 			where R : BaseResponse, I
 			where I : IResponse
 		{
@@ -140,7 +128,7 @@ namespace Nest
 			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
 			) 
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IPathDescriptor, IPathInfo<Q>
+			where D : IRequest<Q>
 			where R : BaseResponse, I 
 			where I : IResponse
 		{
@@ -149,6 +137,17 @@ namespace Nest
 				.ContinueWith<I>(r => ResultsSelector<D, Q, R>(r.Result, descriptor));
 		}
 
+
+		public static void Warmup()
+		{
+			var client = new ElasticClient(connection: new InMemoryConnection());
+			var stream = new MemoryStream("{}".Utf8Bytes());
+			client.Serializer.Serialize(new SearchDescriptor<object>());
+			client.Serializer.Deserialize<SearchDescriptor<object>>(stream);
+			var connection = new HttpConnection(new ConnectionSettings());
+			client.RootNodeInfo(); 
+			client.Search<object>(s=>s.MatchAll().Index("someindex")); 
+		}
 
 	}
 }

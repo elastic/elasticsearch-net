@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -11,21 +8,13 @@ namespace Elasticsearch.Net.Integration.Yaml.CatCount1
 {
 	public partial class CatCount1YamlTests
 	{	
-	
-		public class CatCount110BasicYamlBase : YamlTestsBase
-		{
-			public CatCount110BasicYamlBase() : base()
-			{	
-
-			}
-		}
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TestCatCountHelp2Tests : CatCount110BasicYamlBase
+		public class TestCatCountHelp1Tests : YamlTestsBase
 		{
 			[Test]
-			public void TestCatCountHelp2Test()
+			public void TestCatCountHelp1Test()
 			{	
 
 				//do cat.count 
@@ -43,17 +32,18 @@ namespace Elasticsearch.Net.Integration.Yaml.CatCount1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TestCatCountOutput3Tests : CatCount110BasicYamlBase
+		public class TestCatCountOutput2Tests : YamlTestsBase
 		{
 			[Test]
-			public void TestCatCountOutput3Test()
+			public void TestCatCountOutput2Test()
 			{	
 
 				//do cat.count 
 				this.Do(()=> _client.CatCount());
 
 				//match this._status: 
-				this.IsMatch(this._status, @"/# epoch     timestamp              count ^  \d+   \s  \d{2}:\d{2}:\d{2}  \s  0     \s  $/
+				this.IsMatch(this._status, @"/# epoch     timestamp              count
+^  \d+   \s  \d{2}:\d{2}:\d{2}  \s  0     \s  $/
 ");
 
 				//do index 
@@ -68,7 +58,8 @@ namespace Elasticsearch.Net.Integration.Yaml.CatCount1
 				this.Do(()=> _client.CatCount());
 
 				//match this._status: 
-				this.IsMatch(this._status, @"/# epoch     timestamp              count ^  \d+   \s  \d{2}:\d{2}:\d{2}  \s  1     \s  $/
+				this.IsMatch(this._status, @"/# epoch     timestamp              count
+^  \d+   \s  \d{2}:\d{2}:\d{2}  \s  1     \s  $/
 ");
 
 				//do index 
@@ -85,14 +76,16 @@ namespace Elasticsearch.Net.Integration.Yaml.CatCount1
 				));
 
 				//match this._status: 
-				this.IsMatch(this._status, @"/# count ^  2     \s  $/
+				this.IsMatch(this._status, @"/# count
+^  2     \s  $/
 ");
 
 				//do cat.count 
 				this.Do(()=> _client.CatCount("index1"));
 
 				//match this._status: 
-				this.IsMatch(this._status, @"/# epoch     timestamp              count ^  \d+   \s  \d{2}:\d{2}:\d{2}  \s  1  \s  $/
+				this.IsMatch(this._status, @"/# epoch     timestamp              count
+^  \d+   \s  \d{2}:\d{2}:\d{2}  \s  1  \s  $/
 ");
 
 				//do cat.count 

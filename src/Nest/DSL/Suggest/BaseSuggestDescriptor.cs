@@ -1,11 +1,10 @@
-﻿using Nest.Resolvers;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
 	public interface ISuggester
 	{
-		string _Text { get; set; }
+		string Text { get; set; }
 
 		[JsonProperty(PropertyName = "field")]
 		PropertyPathMarker Field { get; set; }
@@ -22,7 +21,7 @@ namespace Nest
 
 	public abstract class Suggester : ISuggester
 	{
-		public string _Text { get; set; }
+		public string Text { get; set; }
 		public PropertyPathMarker Field { get; set; }
 		public string Analyzer { get; set; }
 		public int? Size { get; set; }
@@ -32,7 +31,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public abstract class BaseSuggestDescriptor<T> : ISuggester where T : class
 	{
-		string ISuggester._Text { get; set; }
+		string ISuggester.Text { get; set; }
 
 		PropertyPathMarker ISuggester.Field { get; set; }
 

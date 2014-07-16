@@ -1,0 +1,6 @@
+  {
+  "ignore_unavailable": true,
+  "include_global_state": true,
+  "rename_pattern": "index_(.+)",
+  "rename_replacement": "index_restored_$1"
+}

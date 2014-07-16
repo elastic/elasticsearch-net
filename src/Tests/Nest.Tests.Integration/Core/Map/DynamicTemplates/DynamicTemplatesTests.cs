@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
-using System.Reflection;
 
 namespace Nest.Tests.Integration.Core.Map.DynamicTemplates
 {
@@ -10,7 +9,7 @@ namespace Nest.Tests.Integration.Core.Map.DynamicTemplates
 		[Test]
 		public void MultiFieldWithGenericTypes()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.DynamicTemplates(d => d
 					.Add(t => t
 						.Name("template_1")
@@ -41,7 +40,7 @@ namespace Nest.Tests.Integration.Core.Map.DynamicTemplates
 		[Test]
 		public void CompletelyGenericTemplate()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.DynamicTemplates(d => d
 					.Add(t => t
 						.Name("store_generic")

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Collections.Concurrent;
 using System.Reflection;
 
@@ -49,7 +48,7 @@ namespace Nest.Resolvers
 				{
 					T obj = (T)o;
 					var v = func(obj);
-					return v.ToString();
+					return v != null ? v.ToString() : null;
 				};
 				IdDelegates.TryAdd(type, cachedLookup);
 				return cachedLookup(@object);

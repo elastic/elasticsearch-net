@@ -24,40 +24,29 @@ namespace Nest.Tests.Integration.Mapping
 			Assert.AreEqual("float", typeMapping.Properties["floatValue"].Type.Name);
 			Assert.AreEqual("integer", typeMapping.Properties["id"].Type.Name);
 			Assert.AreEqual("integer", typeMapping.Properties["loc"].Type.Name);
-			var mapping = typeMapping.Properties["country"] as StringMapping;
-			Assert.NotNull(mapping);
-			Assert.AreEqual(FieldIndexOption.not_analyzed, mapping.Index);
-			//Assert.AreEqual("elasticsearchprojects", typeMapping.Parent.Type);
-
 			Assert.AreEqual("geo_point", typeMapping.Properties["origin"].Type.Name);
+			Assert.AreEqual("object", typeMapping.Properties["product"].Type.Name);
 
-			//Assert.IsTrue(typeMapping.Properties["origin"].Dynamic);
-			//Assert.AreEqual("double", typeMapping.Properties["origin"].Properties["lat"].Type);
-			//Assert.AreEqual("double", typeMapping.Properties["origin"].Properties["lon"].Type);
+			var productMapping = typeMapping.Properties["product"] as ObjectMapping;
+			Assert.NotNull(productMapping);
+			Assert.AreEqual("string", productMapping.Properties["name"].Type.Name);
+			Assert.AreEqual("string", productMapping.Properties["id"].Type.Name);
 
-			//Assert.IsTrue(typeMapping.Properties["followers"].Dynamic);
-			//Assert.AreEqual("long", typeMapping.Properties["followers"].Properties["age"].Type);
-			//Assert.AreEqual("date", typeMapping.Properties["followers"].Properties["dateOfBirth"].Type);
-			//Assert.AreEqual("string", typeMapping.Properties["followers"].Properties["email"].Type);
-			//Assert.AreEqual("string", typeMapping.Properties["followers"].Properties["firstName"].Type);
-			//Assert.AreEqual("long", typeMapping.Properties["followers"].Properties["id"].Type);
-			//Assert.AreEqual("string", typeMapping.Properties["followers"].Properties["lastName"].Type);
-
-			//Assert.IsTrue(typeMapping.Properties["followers"].Properties["placeOfBirth"].Dynamic);
-			//Assert.AreEqual("double", typeMapping.Properties["followers"].Properties["placeOfBirth"].Properties["lat"].Type);
-			//Assert.AreEqual("double", typeMapping.Properties["followers"].Properties["placeOfBirth"].Properties["lon"].Type);
+			var countryMapping = typeMapping.Properties["country"] as StringMapping;
+			Assert.NotNull(countryMapping);
+			Assert.AreEqual(FieldIndexOption.NotAnalyzed, countryMapping.Index);
 		}
 
 		[Test]
 		public void SimpleMapByAttributes()
 		{
 			var index = ElasticsearchConfiguration.NewUniqueIndexName();
-			var x = this._client.CreateIndex(index, s => s
+			var x = this.Client.CreateIndex(index, s => s
 				.AddMapping<ElasticsearchProject>(m => m.MapFromAttributes())
 			);
 			Assert.IsTrue(x.Acknowledged, x.ConnectionStatus.ToString());
 
-			var typeMapping = this._client.GetMapping(i => i.Index(index).Type("elasticsearchprojects"));
+			var typeMapping = this.Client.GetMapping<ElasticsearchProject>(i => i.Index(index).Type("elasticsearchprojects"));
 			typeMapping.Should().NotBeNull();
 			TestMapping(typeMapping.Mapping);
 		}
@@ -67,14 +56,14 @@ namespace Nest.Tests.Integration.Mapping
 		public void SimpleMapByAttributesUsingType()
 		{
 			var index = ElasticsearchConfiguration.NewUniqueIndexName();
-			var x = this._client.CreateIndex(index, s => s
+			var x = this.Client.CreateIndex(index, s => s
 				.AddMapping<ElasticsearchProject>(a=>a.MapFromAttributes())
 			);
 			Assert.IsTrue(x.Acknowledged, x.ConnectionStatus.ToString());
-			var xx = this._client.Map<object>(m=>m.Type(typeof(ElasticsearchProject)).Index(index));
+			var xx = this.Client.Map<object>(m=>m.Type(typeof(ElasticsearchProject)).Index(index));
 			Assert.IsTrue(xx.Acknowledged);
 
-			var typeMapping = this._client.GetMapping(i => i.Index(index).Type("elasticsearchprojects"));
+			var typeMapping = this.Client.GetMapping<ElasticsearchProject>(i => i.Index(index).Type("elasticsearchprojects"));
 			typeMapping.Should().NotBeNull();
 			TestMapping(typeMapping.Mapping);
 		}
@@ -82,7 +71,7 @@ namespace Nest.Tests.Integration.Mapping
 		[Test]
 		public void GetMapping()
 		{
-			var typeMapping = this._client.GetMapping(i => i.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
+			var typeMapping = this.Client.GetMapping<ElasticsearchProject>(i => i.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
 			typeMapping.Should().NotBeNull();
 			TestMapping(typeMapping.Mapping);
 		}
@@ -92,7 +81,7 @@ namespace Nest.Tests.Integration.Mapping
 		{
 			Assert.DoesNotThrow(() =>
 			{
-				var typeMapping = this._client.GetMapping(i=>i.Index("asfasfasfasfasf").Type("asdasdasdasdasdasdasdasd"));
+				var typeMapping = this.Client.GetMapping<ElasticsearchProject>(i=>i.Index("asfasfasfasfasf").Type("asdasdasdasdasdasdasdasd"));
 				typeMapping.IsValid.Should().BeFalse();
 				Assert.Null(typeMapping.Mapping);
 			});
@@ -103,17 +92,17 @@ namespace Nest.Tests.Integration.Mapping
 		public void DynamicMap()
 		{
 			var index = ElasticsearchConfiguration.NewUniqueIndexName();
-			var x = this._client.CreateIndex(index, s => s);
+			var x = this.Client.CreateIndex(index, s => s);
 			Assert.IsTrue(x.Acknowledged, x.ConnectionStatus.ToString());
-			var typeMappingResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
+			var typeMappingResult = this.Client.GetMapping<ElasticsearchProject>();
 			typeMappingResult.IsValid.Should().BeTrue();
 			var typeMapping = typeMappingResult.Mapping;
 			var mapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(mapping);
 			mapping.Boost = 3;
-			this._client.Map<object>(m=>m.InitializeUsing(typeMapping).Index(index).Type("elasticsearchprojects2"));
+			this.Client.Map<object>(m=>m.InitializeUsing(typeMapping).Index(index).Type("elasticsearchprojects2"));
 
-			typeMapping = this._client.GetMapping(gm=>gm.Index(index).Type("elasticsearchprojects2")).Mapping;
+			typeMapping = this.Client.GetMapping<ElasticsearchProject>(gm=>gm.Index(index).Type("elasticsearchprojects2")).Mapping;
 			var countryMapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(countryMapping);
 			Assert.AreEqual(3, countryMapping.Boost);
@@ -123,7 +112,7 @@ namespace Nest.Tests.Integration.Mapping
 		public void GetMissingMap()
 		{
 			Assert.DoesNotThrow(() => {
-				var typeMapping = this._client.GetMapping(gm => gm.Index("asdasdasdsada").Type("elasticsearchprojects2")).Mapping;
+				var typeMapping = this.Client.GetMapping<ElasticsearchProject>(gm => gm.Index("asdasdasdsada").Type("elasticsearchprojects2")).Mapping;
 			});
 		}
 

@@ -11,14 +11,14 @@ namespace Nest.Tests.Integration.Template
 		[Test]
 		public void SimplePutAndGet()
 		{
-		    this._client.DeleteTemplate("put-template-with-settings");
-			var putResponse = this._client.PutTemplate("put-template-with-settings", t => t
+		    this.Client.DeleteTemplate("put-template-with-settings");
+			var putResponse = this.Client.PutTemplate("put-template-with-settings", t => t
 				.Template("donotinfluencothertests-*")
 				.Order(42)
 			);
 			Assert.IsTrue(putResponse.Acknowledged);
 
-			var templateResponse = this._client.GetTemplate("put-template-with-settings");
+			var templateResponse = this.Client.GetTemplate("put-template-with-settings");
 			templateResponse.Should().NotBeNull();
 			templateResponse.IsValid.Should().BeTrue();
 			templateResponse.TemplateMapping.Should().NotBeNull();
@@ -34,8 +34,8 @@ namespace Nest.Tests.Integration.Template
 		[Test]
 		public void PutTemplateWithSettings()
 		{
-			this._client.DeleteTemplate("put-template-with-settings");
-			var putResponse = this._client.PutTemplate("put-template-with-settings", t=>t
+			this.Client.DeleteTemplate("put-template-with-settings");
+			var putResponse = this.Client.PutTemplate("put-template-with-settings", t=>t
 				.Template("donotinfluencothertests-*")
 				.Settings(s=>s
 					.Add("index.number_of_shards", 3)
@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration.Template
 			);
 			Assert.IsTrue(putResponse.Acknowledged);
 
-			var templateResponse = this._client.GetTemplate("put-template-with-settings");
+			var templateResponse = this.Client.GetTemplate("put-template-with-settings");
 			templateResponse.Should().NotBeNull();
 			templateResponse.IsValid.Should().BeTrue();
 			templateResponse.TemplateMapping.Should().NotBeNull();
@@ -60,17 +60,16 @@ namespace Nest.Tests.Integration.Template
 		[Test]
 		public void PutTemplateWithMappings()
 		{
-			this._client.DeleteTemplate("put-template-with-mappings");
-			var putResponse = this._client.PutTemplate("put-template-with-mappings",t => t
+			this.Client.DeleteTemplate("put-template-with-mappings");
+			var putResponse = this.Client.PutTemplate("put-template-with-mappings",t => t
 				.Template("donotinfluencothertests")
-				.AddMapping<dynamic>(s=>s
-					.Type("mytype")
+				.AddMapping<ElasticsearchProject>(s=>s
 					.AllField(a=>a.Enabled(false))
 				)
 			);
 			Assert.IsTrue(putResponse.Acknowledged);
 
-			var templateResponse = this._client.GetTemplate("put-template-with-mappings");
+			var templateResponse = this.Client.GetTemplate("put-template-with-mappings");
 			templateResponse.Should().NotBeNull();
 			templateResponse.IsValid.Should().BeTrue();
 			templateResponse.TemplateMapping.Should().NotBeNull();
@@ -78,16 +77,16 @@ namespace Nest.Tests.Integration.Template
 
 			var mappings = templateResponse.TemplateMapping.Mappings;
 
-			Assert.IsTrue(mappings.ContainsKey("mytype"), "put-template-with-mappings template should have a `mytype` mapping");
-			Assert.NotNull(mappings["mytype"].AllFieldMapping, "`mytype` mapping should contain the _all field mapping");
-			Assert.AreEqual(false, mappings["mytype"].AllFieldMapping._Enabled, "_all { enabled } should be set to false");
+			Assert.IsTrue(mappings.ContainsKey("elasticsearchprojects"), "put-template-with-mappings template should have a `mytype` mapping");
+			Assert.NotNull(mappings["elasticsearchprojects"].AllFieldMapping, "`mytype` mapping should contain the _all field mapping");
+			Assert.AreEqual(false, mappings["elasticsearchprojects"].AllFieldMapping.Enabled, "_all { enabled } should be set to false");
 		}
 
 		[Test]
 		public void PutTemplateWithWarmers()
 		{
-			this._client.DeleteTemplate("put-template-with-warmers");
-			var putResponse = this._client.PutTemplate("put-template-with-warmers", t => t
+			this.Client.DeleteTemplate("put-template-with-warmers");
+			var putResponse = this.Client.PutTemplate("put-template-with-warmers", t => t
 				.Template("donotinfluencothertests2")
 				.AddWarmer<ElasticsearchProject>(w => w
 					.WarmerName("matchall")
@@ -99,7 +98,7 @@ namespace Nest.Tests.Integration.Template
 			);
 			Assert.IsTrue(putResponse.Acknowledged);
 
-			var templateResponse = this._client.GetTemplate("put-template-with-warmers"); 
+			var templateResponse = this.Client.GetTemplate("put-template-with-warmers"); 
 			templateResponse.Should().NotBeNull();
 			templateResponse.IsValid.Should().BeTrue();
 			templateResponse.TemplateMapping.Should().NotBeNull();

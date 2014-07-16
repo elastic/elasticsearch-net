@@ -1,52 +1,65 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class AliasAddDescriptor : IAliasAction
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IAliasAddAction : IAliasAction
 	{
+		[JsonProperty("add")]
+		AliasAddOperation Add { get; set; }
+	}
+
+	public class AliasAddAction : IAliasAddAction
+	{
+		public AliasAddOperation Add { get; set; }
+	}
+
+	public class AliasAddDescriptor : IAliasAddAction
+	{
+		private IAliasAddAction Self { get { return this; } }
+
 		public AliasAddDescriptor()
 		{
-			this.Add = new AliasAddOperation();
+			Self.Add = new AliasAddOperation();
 		}
 
-		[JsonProperty("add")]
-		internal AliasAddOperation Add { get; private set; }
+		AliasAddOperation IAliasAddAction.Add { get; set; }
 
 		public AliasAddDescriptor Index(string index)
 		{
-			this.Add.Index = index;
+			Self.Add.Index = index;
 			return this;
 		}
 		public AliasAddDescriptor Index(Type index)
 		{
-			this.Add.Index = index;
+			Self.Add.Index = index;
 			return this;
 		}
 		public AliasAddDescriptor Index<T>() where T : class
 		{
-			this.Add.Index = typeof(T);
+			Self.Add.Index = typeof(T);
 			return this;
 		}
 		public AliasAddDescriptor Alias(string alias)
 		{
-			this.Add.Alias = alias;
+			Self.Add.Alias = alias;
 			return this;
 		}
 		public AliasAddDescriptor Routing(string routing)
 		{
-			this.Add.Routing = routing;
+			Self.Add.Routing = routing;
 			return this;
 		}
 		public AliasAddDescriptor IndexRouting(string indexRouting)
 		{
-			this.Add.IndexRouting = indexRouting;
+			Self.Add.IndexRouting = indexRouting;
 			return this;
 		}
 		public AliasAddDescriptor SearchRouting(string searchRouting)
 		{
-			this.Add.SearchRouting = searchRouting;
+			Self.Add.SearchRouting = searchRouting;
 			return this;
 		}
 		public AliasAddDescriptor Filter<T>(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
@@ -54,7 +67,7 @@ namespace Nest
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 
-			this.Add.FilterDescriptor = filterSelector(new FilterDescriptor<T>());
+			Self.Add.FilterDescriptor = filterSelector(new FilterDescriptor<T>());
 			return this;
 		}
 	}

@@ -1,37 +1,53 @@
-﻿using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
-    public class IdFieldMapping
-    {
-		public IdFieldMapping()
-        {
-        }
-
-        [JsonProperty("path")]
-        public string Path { get; internal set; }
+	public interface IIdFieldMapping : ISpecialField
+	{
+		[JsonProperty("path")]
+		string Path { get; set; }
 
 		[JsonProperty("index")]
-		public string Index { get; internal set; }
+		string Index { get; set; }
 
-		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
-		public bool? Store { get; internal set; }
+		[JsonProperty("store")]
+		bool? Store { get; set; }
+	}
 
-		public IdFieldMapping SetPath(string path)
+	public class IdFieldMapping : IIdFieldMapping
+	{
+		public string Path { get; set; }
+
+		public string Index { get; set;}
+
+		public bool? Store { get; set;}
+	}
+
+
+	public class IdFieldMappingDescriptor : IIdFieldMapping
+	{
+		private IIdFieldMapping Self { get { return this; } }
+
+		string IIdFieldMapping.Path { get; set; }
+
+		string IIdFieldMapping.Index { get; set; }
+
+		bool? IIdFieldMapping.Store { get; set; }
+
+		public IdFieldMappingDescriptor Path(string path)
 		{
-			this.Path = path;
+			Self.Path = path;
 			return this;
 		}
-		public IdFieldMapping SetIndex(string index)
+		public IdFieldMappingDescriptor Index(string index)
 		{
-			this.Index = index;
+			Self.Index = index;
 			return this;
 		}
-		public IdFieldMapping SetStored(bool stored = true)
+		public IdFieldMappingDescriptor Store(bool stored = true)
 		{
-			this.Store = stored;
+			Self.Store = stored;
 			return this;
 		}
-    }
+	}
 }

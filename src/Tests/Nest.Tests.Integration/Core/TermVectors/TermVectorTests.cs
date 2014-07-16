@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
@@ -15,7 +13,7 @@ namespace Nest.Tests.Integration.Core.TermVectors
 		[Test]
 		public void TermVectorDefaultsTest()
 		{
-			var result = _client.TermVector<ElasticsearchProject>(s => s
+			var result = Client.TermVector<ElasticsearchProject>(s => s
 				.Id("1")
 				.Fields(ep => ep.Content));
 
@@ -40,7 +38,7 @@ namespace Nest.Tests.Integration.Core.TermVectors
 		[Test]
 		public void TermVectorDefaultsWithTermStatisticsTest()
 		{
-			var result = _client.TermVector<ElasticsearchProject>(s => s
+			var result = Client.TermVector<ElasticsearchProject>(s => s
 				.Id("1")
 				.Fields(ep => ep.Content)
 				.TermStatistics(true));
@@ -66,7 +64,7 @@ namespace Nest.Tests.Integration.Core.TermVectors
 		[Test]
 		public void TermVectorNoFieldStatisticsTest()
 		{
-			var result = _client.TermVector<ElasticsearchProject>(s => s
+			var result = Client.TermVector<ElasticsearchProject>(s => s
 				.Id("1")
 				.Fields(ep => ep.Content)
 				.FieldStatistics(false));
@@ -82,7 +80,7 @@ namespace Nest.Tests.Integration.Core.TermVectors
 		[Test]
 		public void TermVectorNonMappedFieldTest()
 		{
-			var result = _client.TermVector<ElasticsearchProject>(s => s
+			var result = Client.TermVector<ElasticsearchProject>(s => s
 				.Id("1")
 				.Fields(ep => ep.Name));
 
@@ -91,9 +89,10 @@ namespace Nest.Tests.Integration.Core.TermVectors
 		}
 
 		[Test]
+		[SkipVersion("1.2.0 - 1.2.2", "Fails against ES 1.2: https://github.com/elasticsearch/elasticsearch/issues/6451")]
 		public void TermVectorNonExistentIdTest()
 		{
-			var result = _client.TermVector<ElasticsearchProject>(s => s
+			var result = Client.TermVector<ElasticsearchProject>(s => s
 				.Id("thisiddoesnotexist")
 				.Fields(ep => ep.Name));
 

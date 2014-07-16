@@ -1,27 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesFlush")]
-	public partial class FlushDescriptor : 
-		IndicesOptionalExplicitAllPathDescriptor<FlushDescriptor, FlushRequestParameters>
-		, IPathInfo<FlushRequestParameters>
-	{
-		ElasticsearchPathInfo<FlushRequestParameters> IPathInfo<FlushRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
-		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IFlushRequest : IIndicesOptionalExplicitAllPath<FlushRequestParameters> { }
 
-			return pathInfo;
+	internal static class FlushPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<FlushRequestParameters> pathInfo, IFlushRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class FlushRequest : IndicesOptionalExplicitAllPathBase<FlushRequestParameters>, IFlushRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<FlushRequestParameters> pathInfo)
+		{
+			FlushPathInfo.Update(pathInfo, this);
+		}
+	}
+	[DescriptorFor("IndicesFlush")]
+	public partial class FlushDescriptor : IndicesOptionalExplicitAllPathDescriptor<FlushDescriptor, FlushRequestParameters>, IFlushRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<FlushRequestParameters> pathInfo)
+		{
+			FlushPathInfo.Update(pathInfo, this);
 		}
 	}
 }

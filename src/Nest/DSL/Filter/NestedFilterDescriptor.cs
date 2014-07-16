@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -28,8 +26,8 @@ namespace Nest
 		[JsonProperty("path")]
 		PropertyPathMarker Path { get; set; }
 
-		[JsonProperty("_scope")]
-		string Scope { get; set; }
+		[JsonProperty("join")]
+		bool? Join { get; set; }
 	}
 
 	public class NestedFilter : PlainFilter, INestedFilter
@@ -43,7 +41,7 @@ namespace Nest
 		public IFilterContainer Filter { get; set; }
 		public IQueryContainer Query { get; set; }
 		public PropertyPathMarker Path { get; set; }
-		public string Scope { get; set; }
+		public bool? Join { get; set; }
 	}
 
 	public class NestedFilterDescriptor<T> : FilterBase, INestedFilter where T : class
@@ -56,7 +54,7 @@ namespace Nest
 
 		PropertyPathMarker INestedFilter.Path { get; set; }
 
-		string INestedFilter.Scope { get; set; }
+		bool? INestedFilter.Join { get; set; }
 
 		bool IFilter.IsConditionless
 		{
@@ -73,6 +71,7 @@ namespace Nest
 			((INestedFilter)this).Filter = filterSelector(q);
 			return this;
 		}
+
 		public NestedFilterDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
@@ -85,19 +84,22 @@ namespace Nest
 			((INestedFilter)this).Score = score;
 			return this;
 		}
+		
 		public NestedFilterDescriptor<T> Path(string path)
 		{
 			((INestedFilter)this).Path = path;
 			return this;
 		}
+		
+		public NestedFilterDescriptor<T> Join(bool join = true)
+		{
+			((INestedFilter)this).Join = join;
+			return this;
+		}
+		
 		public NestedFilterDescriptor<T> Path(Expression<Func<T, object>> objectPath)
 		{
 			((INestedFilter)this).Path = objectPath;
-			return this;
-		}
-		public NestedFilterDescriptor<T> Scope(string scope)
-		{
-			((INestedFilter)this).Scope = scope;
 			return this;
 		}
 	}

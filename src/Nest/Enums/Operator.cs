@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+	[JsonConverter(typeof(StringEnumConverter))]
 	public enum Operator
 	{
-		and,
-		or
+		[EnumMember(Value = "and")]
+		And,
+		[EnumMember(Value = "or")]
+		Or
 	}
-
-	
 }

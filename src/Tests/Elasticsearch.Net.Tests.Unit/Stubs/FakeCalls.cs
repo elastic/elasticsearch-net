@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +8,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.Providers;
 using Elasticsearch.Net.Serialization;
 using FakeItEasy;
@@ -31,14 +31,14 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 		public static IReturnValueConfiguration<ElasticsearchResponse<Stream>> PingAtConnectionLevel(AutoFake fake)
 		{
 			return A.CallTo(() => fake.Resolve<IConnection>().HeadSync(
-				A<Uri>.That.Matches(IsRoot()), A<RequestConnectionConfiguration>._));
+				A<Uri>.That.Matches(IsRoot()), A<IRequestConfiguration>._));
 		}
 
 
 		public static IReturnValueConfiguration<Task<ElasticsearchResponse<Stream>>> PingAtConnectionLevelAsync(AutoFake fake)
 		{
 			return A.CallTo(() => fake.Resolve<IConnection>().Head(
-				A<Uri>.That.Matches(IsRoot()), A<RequestConnectionConfiguration>._));
+				A<Uri>.That.Matches(IsRoot()), A<IRequestConfiguration>._));
 		}
 		
 		public static IReturnValueConfiguration<ElasticsearchResponse<Stream>> Sniff(
@@ -48,7 +48,7 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 		{
 			var sniffCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(
 				A<Uri>.That.Matches(IsSniffUrl()), 
-				A<IRequestConnectionConfiguration>._));
+				A<IRequestConfiguration>._));
 			if (nodes == null) return sniffCall;
 			sniffCall.ReturnsLazily(()=>
 			{
@@ -82,7 +82,7 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 		{
 			var sniffCall = A.CallTo(() => fake.Resolve<IConnection>().Get(
 				A<Uri>.That.Matches(IsSniffUrl()), 
-				A<IRequestConnectionConfiguration>._));
+				A<IRequestConfiguration>._));
 			if (nodes == null) return sniffCall;
 			var stream = SniffResponse(nodes);
 			var response = FakeResponse.Ok(configurationValues, "GET", "/_nodes/_all/clear", stream);

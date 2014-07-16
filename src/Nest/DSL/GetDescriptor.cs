@@ -1,17 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-	public partial class GetDescriptor<T> : DocumentPathDescriptorBase<GetDescriptor<T>,T, GetRequestParameters>
-		, IPathInfo<GetRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IGetRequest : IDocumentOptionalPath<GetRequestParameters> { } 
+	public interface IGetRequest<T> : IGetRequest where T : class { }
+
+	internal static class GetPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<GetRequestParameters> pathInfo, IGetRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+		}
+	}
+	
+	public partial class GetRequest : DocumentPathBase<GetRequestParameters>, IGetRequest 
+	{
+		public GetRequest(IndexNameMarker indexName, TypeNameMarker typeName, string id) : base(indexName, typeName, id) { }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetRequestParameters> pathInfo)
+		{
+			GetPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	public partial class GetRequest<T> : DocumentPathBase<GetRequestParameters, T>, IGetRequest where T : class
+	{
+		public GetRequest(string id) : base(id) { }
+
+		public GetRequest(long id) : base(id) { }
+
+		public GetRequest(T document) : base(document) { }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetRequestParameters> pathInfo)
+		{
+			GetPathInfo.Update(pathInfo, this);
+		}
+	}
+	
+	public partial class GetDescriptor<T> : DocumentPathDescriptor<GetDescriptor<T>, GetRequestParameters, T>, IGetRequest
 		where T : class
 	{
 
@@ -25,13 +56,9 @@ namespace Nest
 			return this.Preference("_local");
 		}
 
-		ElasticsearchPathInfo<GetRequestParameters> IPathInfo<GetRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetRequestParameters> pathInfo)
 		{
-			var pathInfo = this.ToPathInfo(settings, this._QueryString);
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
-
-			return pathInfo;
-
+			GetPathInfo.Update(pathInfo, this);
 		}
 	}
 }

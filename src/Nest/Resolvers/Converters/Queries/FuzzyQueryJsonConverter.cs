@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Diagnostics.Eventing.Reader;
-using System.Globalization;
 using System.Linq;
-using Elasticsearch.Net;
 using Nest.DSL.Query.Behaviour;
 using Nest.Resolvers;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -58,7 +53,7 @@ namespace Nest
 			fq.Transpositions = GetPropValue<bool?>(jo, "transpositions");
 			var rewriteString = GetPropValue<string>(jo, "rewrite");
 			if (!rewriteString.IsNullOrEmpty())
-				fq.Rewrite = Enum.Parse(typeof(RewriteMultiTerm), rewriteString) as RewriteMultiTerm?;
+				fq.Rewrite = rewriteString.ToEnum<RewriteMultiTerm>();
 			
 			if (fq is IStringFuzzyQuery)
 			{

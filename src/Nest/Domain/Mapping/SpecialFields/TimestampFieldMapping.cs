@@ -1,51 +1,63 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
-using Nest.Resolvers;
-using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class	TimestampFieldMapping
+	public interface ITimestampFieldMapping : ISpecialField
 	{
-		public TimestampFieldMapping()
-		{
-
-		}
-
 		[JsonProperty("enabled")]
-		public bool Enabled { get; internal set; }
+		bool Enabled { get; set; }
 
 		[JsonProperty("path")]
-		public PropertyPathMarker Path { get; internal set; }
+		PropertyPathMarker Path { get; set; }
 
 		[JsonProperty("format")]
-		public string Format { get; internal set; }
+		string Format { get; set; }
+	}
+
+	public class TimestampFieldMapping : ITimestampFieldMapping
+	{
+		public bool Enabled { get; set; }
+
+		public PropertyPathMarker Path { get; set; }
+
+		public string Format { get; set; }
 	}
 
 
-	public class TimestampFieldMapping<T> : TimestampFieldMapping
-    {
-		public TimestampFieldMapping<T> SetDisabled(bool disabled = true)
+	public class TimestampFieldMappingDescriptor<T> : ITimestampFieldMapping
+	{
+		private ITimestampFieldMapping Self { get { return this; } }
+
+		bool ITimestampFieldMapping.Enabled { get; set;}
+
+		PropertyPathMarker ITimestampFieldMapping.Path { get; set;}
+
+		string ITimestampFieldMapping.Format { get; set; }
+
+		public TimestampFieldMappingDescriptor<T> Enabled(bool enabled = true)
 		{
-			this.Enabled = !disabled;
+			Self.Enabled = enabled;
 			return this;
 		}
-		public TimestampFieldMapping<T> SetPath(string path)
+		public TimestampFieldMappingDescriptor<T> Path(string path)
 		{
-			this.Path = path;
+			Self.Path = path;
 			return this;
 		}
-		public TimestampFieldMapping<T> SetPath(Expression<Func<T, object>> objectPath)
+		public TimestampFieldMappingDescriptor<T> Path(Expression<Func<T, object>> objectPath)
 		{
 			objectPath.ThrowIfNull("objectPath");
-			this.Path = objectPath;
-			return this;	
-		}
-		public TimestampFieldMapping<T> SetFormat(string format)
-		{
-			this.Format = format;
+			Self.Path = objectPath;
 			return this;
 		}
-    }
+		public TimestampFieldMappingDescriptor<T> Format(string format)
+		{
+			Self.Format = format;
+			return this;
+		}
+
+		
+	}
 }

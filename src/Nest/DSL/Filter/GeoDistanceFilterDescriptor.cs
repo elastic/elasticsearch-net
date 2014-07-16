@@ -1,10 +1,6 @@
 ﻿//using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Nest.Resolvers;
-using Nest.Resolvers.Converters;
-using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
 using System.Globalization;
 using System;
@@ -32,7 +28,7 @@ namespace Nest
 
 		[JsonProperty("distance_type")]
 		[JsonConverter(typeof(StringEnumConverter))]
-		GeoDistanceType? DistanceType { get; set; }
+		GeoDistance? DistanceType { get; set; }
 	}
 
 	public class GeoDistanceFilter : PlainFilter, IGeoDistanceFilter
@@ -47,7 +43,7 @@ namespace Nest
 		public object Distance { get; set; }
 		public GeoUnit? Unit { get; set; }
 		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
-		public GeoDistanceType? DistanceType { get; set; }
+		public GeoDistance? DistanceType { get; set; }
 	}
 
 	public class GeoDistanceFilterDescriptor : FilterBase, IGeoDistanceFilter
@@ -56,7 +52,7 @@ namespace Nest
 		string IGeoDistanceFilter.Location { get; set; }
 		object IGeoDistanceFilter.Distance { get; set; }
 		GeoUnit? IGeoDistanceFilter.Unit { get; set; }
-		GeoDistanceType? IGeoDistanceFilter.DistanceType { get; set; }
+		GeoDistance? IGeoDistanceFilter.DistanceType { get; set; }
 		GeoOptimizeBBox? IGeoDistanceFilter.OptimizeBoundingBox { get; set; }
 
 		bool IFilter.IsConditionless
@@ -94,7 +90,7 @@ namespace Nest
 			((IGeoDistanceFilter)this).OptimizeBoundingBox = optimize;
 			return this;
 		}
-		public GeoDistanceFilterDescriptor DistanceType(GeoDistanceType type)
+		public GeoDistanceFilterDescriptor DistanceType(GeoDistance type)
 		{
 			((IGeoDistanceFilter)this).DistanceType = type;
 			return this;

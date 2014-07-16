@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Linq.Expressions;
 
 namespace Nest
 {
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum GeoDistance
 	{
-		arc,
-		plane,
-		factor
+		[EnumMember(Value = "sloppy_arc")]
+		SloppyArc,
+		[EnumMember(Value = "arc")]
+		Arc,
+		[EnumMember(Value = "plane")]
+		Plane
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -21,7 +20,7 @@ namespace Nest
 
 		public NumberMappingDescriptor<T> Type(NumberType type)
 		{
-			var stringType = Enum.GetName(typeof (NumberType), type);
+			var stringType = type.GetStringValue();
 			this._Mapping.Type = stringType;
 			return this;
 		}
@@ -32,7 +31,7 @@ namespace Nest
 			this._Mapping.IndexName = indexName;
 			return this;
 		}
-		public NumberMappingDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.analyzed)
+		public NumberMappingDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.Analyzed)
 		{
 			this._Mapping.Index = index;
 			return this;
@@ -74,6 +73,11 @@ namespace Nest
 		public NumberMappingDescriptor<T> IgnoreMalformed(bool ignoreMalformed = true)
 		{
 			this._Mapping.IgnoreMalformed = ignoreMalformed;
+			return this;
+		}
+		public NumberMappingDescriptor<T> Coerce(bool coerce = true)
+		{
+			this._Mapping.Coerce = coerce;
 			return this;
 		}
 

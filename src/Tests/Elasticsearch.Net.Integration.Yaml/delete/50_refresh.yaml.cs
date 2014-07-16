@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -24,6 +21,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Delete9
 				_body = new {
 					settings= new {
 						refresh_interval= "-1",
+						number_of_shards= "5",
 						number_of_replicas= "0"
 					}
 				};

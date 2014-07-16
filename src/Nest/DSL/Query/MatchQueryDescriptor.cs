@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Nest.DSL.Query.Behaviour;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
-using Nest.Resolvers;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -50,6 +47,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "lenient")]
 		bool? Lenient { get; set; }
 		
+		[JsonProperty("minimum_should_match")]
+		string MinimumShouldMatch { get; set; }
+
 		[JsonProperty(PropertyName = "operator")]
 		[JsonConverter(typeof (StringEnumConverter))]
 		Operator? Operator { get; set; }
@@ -86,6 +86,7 @@ namespace Nest
 		public int? Slop { get; set; }
 		public double? Boost { get; set; }
 		public bool? Lenient { get; set; }
+		public string MinimumShouldMatch { get; set; }
 		public Operator? Operator { get; set; }
 		public PropertyPathMarker Field { get; set; }
 	}
@@ -94,13 +95,17 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class MatchQueryDescriptor<T> : IMatchQuery where T : class
 	{
-		protected virtual string _type { get { return null; } }
+		protected virtual string MatchQueryType { get { return null; } }
 
-		string IMatchQuery.Type { get { return _type; } }
+		private IMatchQuery Self { get { return this; } }
+
+		string IMatchQuery.Type { get { return MatchQueryType; } }
 
 		string IMatchQuery.Query { get; set; }
 
 		string IMatchQuery.Analyzer { get; set; }
+
+		string IMatchQuery.MinimumShouldMatch { get; set; }
 
 		RewriteMultiTerm? IMatchQuery.Rewrite { get; set; }
 
@@ -126,85 +131,101 @@ namespace Nest
 		{
 			get
 			{
-				return ((IMatchQuery)this).Field.IsConditionless() || ((IMatchQuery)this).Query.IsNullOrEmpty();
+				return Self.Field.IsConditionless() || Self.Query.IsNullOrEmpty();
 			}
 		}
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
-			((IMatchQuery)this).Field = fieldName;
+			Self.Field = fieldName;
 		}
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
-			return ((IMatchQuery)this).Field;
+			return Self.Field;
 		}
 
 		public MatchQueryDescriptor<T> OnField(string field)
 		{
-			((IMatchQuery)this).Field = field;
+			Self.Field = field;
 			return this;
 		}
+
 		public MatchQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((IMatchQuery)this).Field = objectPath;
+			Self.Field = objectPath;
 			return this;
 		}
 
 		public MatchQueryDescriptor<T> Query(string query)
 		{
-			((IMatchQuery)this).Query = query;
+			Self.Query = query;
 			return this;
 		}
+	
 		public MatchQueryDescriptor<T> Lenient(bool lenient = true)
 		{
-			((IMatchQuery)this).Lenient = lenient;
+			Self.Lenient = lenient;
 			return this;
 		}
+		
 		public MatchQueryDescriptor<T> Analyzer(string analyzer)
 		{
-			((IMatchQuery)this).Analyzer = analyzer;
+			Self.Analyzer = analyzer;
 			return this;
 		}
+		
 		public MatchQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
-			((IMatchQuery)this).Fuzziness = fuzziness;
+			Self.Fuzziness = fuzziness;
 			return this;
 		}
+		
 		public MatchQueryDescriptor<T> CutoffFrequency(double cutoffFrequency)
 		{
-			((IMatchQuery)this).CutoffFrequency = cutoffFrequency;
+			Self.CutoffFrequency = cutoffFrequency;
 			return this;
 		}
 
 		public MatchQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
 		{
-			((IMatchQuery)this).Rewrite = rewrite;
+			Self.Rewrite = rewrite;
 			return this;
 		}
 
 		public MatchQueryDescriptor<T> Boost(double boost)
 		{
-			((IMatchQuery)this).Boost = boost;
+			Self.Boost = boost;
 			return this;
 		}
+		
 		public MatchQueryDescriptor<T> PrefixLength(int prefixLength)
 		{
-			((IMatchQuery)this).PrefixLength = prefixLength;
+			Self.PrefixLength = prefixLength;
 			return this;
 		}
+		
 		public MatchQueryDescriptor<T> MaxExpansions(int maxExpansions)
 		{
-			((IMatchQuery)this).MaxExpansions = maxExpansions;
+			Self.MaxExpansions = maxExpansions;
 			return this;
 		}
+		
 		public MatchQueryDescriptor<T> Slop(int slop)
 		{
-			((IMatchQuery)this).Slop = slop;
+			Self.Slop = slop;
 			return this;
 		}
+		
+		public MatchQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch)
+		{
+			Self.MinimumShouldMatch = minimumShouldMatch;
+			return this;
+		}
+	
 		public MatchQueryDescriptor<T> Operator(Operator op)
 		{
-			((IMatchQuery)this).Operator = op;
+			Self.Operator = op;
 			return this;
 		}
+	
 	}
 }

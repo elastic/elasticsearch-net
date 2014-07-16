@@ -12,7 +12,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void WrongFieldName()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Terms("my_terms_agg", t => t
@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void ExistingFieldName()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Terms("my_terms_agg", t => t
@@ -49,7 +49,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void NestedEmptyAggregationThreeLevelDeeps()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Terms("countries", t => t

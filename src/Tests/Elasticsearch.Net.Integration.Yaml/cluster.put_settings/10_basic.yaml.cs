@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -11,13 +8,24 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterPutSettings1
 {
 	public partial class ClusterPutSettings1YamlTests
 	{	
+	
+		public class ClusterPutSettings110BasicYamlBase : YamlTestsBase
+		{
+			public ClusterPutSettings110BasicYamlBase() : base()
+			{	
+
+				//skip 0 - 999; 
+				this.Skip("0 - 999", "leaves transient metadata behind, need to fix it");
+
+			}
+		}
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TestPutSettings1Tests : YamlTestsBase
+		public class TestPutSettings2Tests : ClusterPutSettings110BasicYamlBase
 		{
 			[Test]
-			public void TestPutSettings1Test()
+			public void TestPutSettings2Test()
 			{	
 
 				//do cluster.put_settings 

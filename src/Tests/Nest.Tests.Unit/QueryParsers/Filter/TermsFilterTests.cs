@@ -33,12 +33,12 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 		{
 			var termsBaseFilter = this.SerializeThenDeserialize(cacheName, cacheKey, cache, 
 				f=>f.Terms,
-				f=>f.Terms(p => p.Name, new [] {"elasticsearch.pm"}, Execution:TermsExecution.@bool)
+				f=>f.Terms(p => p.Name, new [] {"elasticsearch.pm"}, Execution:TermsExecution.Bool)
 				);
 			termsBaseFilter.Field.Should().Be("name");
 			var termsFilter = termsBaseFilter as ITermsFilter;
 			termsFilter.Should().NotBeNull();
-			termsFilter.Execution.Should().Be(TermsExecution.@bool);
+			termsFilter.Execution.Should().Be(TermsExecution.Bool);
 			termsFilter.Terms.Should().BeEquivalentTo(new []{"elasticsearch.pm"});
 		}
 		

@@ -349,10 +349,20 @@ namespace Elasticsearch.Net.Connection.Thrift.Protocol
 		public override long ReadI64()
 		{
 			ReadAll(i64in, 0, 8);
+#pragma warning disable 0675
+			// Bitwise-or operator used on a 
+			// sign-extended operand; consider casting to a smaller unsigned type first
+			
+			//http://stackoverflow.com/questions/7328052/c-sharp-bitwise-or-operator-used-on-a-sign-extended-operand-consider-casting-to
+
+			//Opt to ignore warning since this is generated code (from apache thrift)
+			//and has not caused any bugs in the past 3 years.
+			
 			return (((long) (i64in[0] & 0xff) << 56) | ((long) (i64in[1] & 0xff) << 48) | ((long) (i64in[2] & 0xff) << 40) |
 			        ((long) (i64in[3] & 0xff) << 32) |
 			        ((long) (i64in[4] & 0xff) << 24) | ((long) (i64in[5] & 0xff) << 16) | ((long) (i64in[6] & 0xff) << 8) |
 			        ((i64in[7] & 0xff)));
+#pragma warning restore 0675
 		}
 
 		public override double ReadDouble()

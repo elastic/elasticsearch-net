@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Nest.Resolvers;
-using Elasticsearch.Net;
-using Newtonsoft.Json;
 using Nest.Resolvers.Writers;
 
 namespace Nest
@@ -67,7 +64,7 @@ namespace Nest
 		}
 		public ObjectMappingDescriptor<TParent, TChild> Dynamic(bool dynamic = true)
 		{
-			return this.Dynamic(dynamic ? DynamicMappingOption.allow : DynamicMappingOption.ignore);
+			return this.Dynamic(dynamic ? DynamicMappingOption.Allow : DynamicMappingOption.Ignore);
 		}
 		public ObjectMappingDescriptor<TParent, TChild> Enabled(bool enabled = true)
 		{

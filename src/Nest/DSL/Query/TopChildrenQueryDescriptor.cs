@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -16,9 +13,6 @@ namespace Nest
 	{
 		[JsonProperty("type")]
 		TypeNameMarker Type { get; set; }
-
-		[JsonProperty("_scope")]
-		string Scope { get; set; }
 
 		[JsonProperty("score"), JsonConverter(typeof (StringEnumConverter))]
 		TopChildrenScore? Score { get; set; }
@@ -49,7 +43,6 @@ namespace Nest
 
 		bool IQuery.IsConditionless { get { return false; } }
 		public TypeNameMarker Type { get; set; }
-		public string Scope { get; set; }
 		public TopChildrenScore? Score { get; set; }
 		public int? Factor { get; set; }
 		public int? IncrementalFactor { get; set; }
@@ -82,8 +75,6 @@ namespace Nest
 
 		TypeNameMarker ITopChildrenQuery.Type { get; set; }
 
-		string ITopChildrenQuery.Scope { get; set; }
-
 		TopChildrenScore? ITopChildrenQuery.Score { get; set; }
 
 		int? ITopChildrenQuery.Factor { get; set; }
@@ -104,17 +95,6 @@ namespace Nest
 		{
 			var q = new QueryDescriptor<T>();
 			((ITopChildrenQuery)this).Query = querySelector(q);
-			return this;
-		}
-		
-		/// <summary>
-		/// A _scope can be defined on the query allowing to run facets on the same scope name that will work 
-		/// against the child documents. 
-		/// </summary>
-		/// <param name="scope">The name of the scope</param>
-		public TopChildrenQueryDescriptor<T> Scope(string scope)
-		{
-			((ITopChildrenQuery)this).Scope = scope;
 			return this;
 		}
 		

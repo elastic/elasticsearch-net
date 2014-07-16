@@ -1,40 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Linq.Expressions;
 using Elasticsearch.Net;
-using Nest.Domain;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	[DescriptorFor("Msearch")]
-	public partial class MultiSearchDescriptor 
-		: FixedIndexTypePathDescriptor<MultiSearchDescriptor, MultiSearchRequestParameters>
-		, IPathInfo<MultiSearchRequestParameters>
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IMultiSearchRequest : IFixedIndexTypePath<MultiSearchRequestParameters>
 	{
-		private readonly ElasticInferrer _inferrer;
-
-		public MultiSearchDescriptor(ElasticInferrer inferrer)
-		{
-			_inferrer = inferrer;
-		}
-
+		
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, ISearchRequest> _Operations = new Dictionary<string, ISearchRequest>();
+		IDictionary<string, ISearchRequest> Operations { get; set;}
+
+	}
+
+	internal static class MultiSearchPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<MultiSearchRequestParameters> pathInfo, IMultiSearchRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class MultiSearchRequest : FixedIndexTypePathBase<MultiSearchRequestParameters>, IMultiSearchRequest
+	{
+		public IDictionary<string, ISearchRequest> Operations { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiSearchRequestParameters> pathInfo)
+		{
+			MultiSearchPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("Msearch")]
+	public partial class MultiSearchDescriptor : FixedIndexTypePathDescriptor<MultiSearchDescriptor, MultiSearchRequestParameters>, IMultiSearchRequest
+	{
+		private IMultiSearchRequest Self { get { return this; } }
+
+		internal IDictionary<string, ISearchRequest> _operations = new Dictionary<string, ISearchRequest>();
+
+		IDictionary<string, ISearchRequest> IMultiSearchRequest.Operations
+		{
+			get { return _operations; } 
+			set { _operations = value; }
+		}
 
 		public MultiSearchDescriptor Search<T>(string name, Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) where T : class
 		{
 			name.ThrowIfNull("name");
 			searchSelector.ThrowIfNull("searchSelector");
-			var descriptor = searchSelector(new SearchDescriptor<T>().Index(this._Index).Type(this._Type));
+			var descriptor = searchSelector(new SearchDescriptor<T>().Index(Self.Index).Type(Self.Type));
 			if (descriptor == null)
 				return this;
-			descriptor.CreateCovarianceSelector<T>(_inferrer);
-			this._Operations.Add(name, descriptor);
+			this._operations.Add(name, descriptor);
 			return this;
 		}
 
@@ -43,11 +63,10 @@ namespace Nest
 			return this.Search(Guid.NewGuid().ToString(), searchSelector);
 		}
 
-		ElasticsearchPathInfo<MultiSearchRequestParameters> IPathInfo<MultiSearchRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiSearchRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			return pathInfo;
 		}
+
 	}
 }

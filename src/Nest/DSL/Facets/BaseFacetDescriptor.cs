@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Nest.Resolvers;
 using System.Linq.Expressions;
 
 namespace Nest
@@ -31,13 +29,6 @@ namespace Nest
 			return (TFacetDescriptor) this;
 		}
 
-		string IFacetRequest.Scope { get; set;}
-		public TFacetDescriptor Scope(string scope)
-		{
-			((IFacetRequest)this).Scope = scope;
-			return (TFacetDescriptor) this;
-		}
-		
 		PropertyPathMarker IFacetRequest.Nested { get; set; }
 
 		public TFacetDescriptor Nested(string nested)

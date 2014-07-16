@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Diagnostics.Eventing.Reader;
-using System.Globalization;
 using System.Linq;
-using Elasticsearch.Net;
 using Nest.DSL.Query.Behaviour;
 using Nest.Resolvers;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -58,11 +53,11 @@ namespace Nest
 			
 			var rewriteString = GetPropValue<string>(jo, "rewrite");
 			if (!rewriteString.IsNullOrEmpty())
-				fq.Rewrite = Enum.Parse(typeof(RewriteMultiTerm), rewriteString) as RewriteMultiTerm?;
+				fq.Rewrite = rewriteString.ToEnum<RewriteMultiTerm>();
 			
 			var operatorString = GetPropValue<string>(jo, "operator");
 			if (!rewriteString.IsNullOrEmpty())
-				fq.Operator = Enum.Parse(typeof(Operator), operatorString) as Operator?;
+				fq.Operator = operatorString.ToEnum<Operator>();
 
 			return fq;
 		}

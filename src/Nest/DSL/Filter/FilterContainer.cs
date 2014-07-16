@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using Nest.DSL.Visitor;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using Elasticsearch.Net;
-using System.Linq.Expressions;
 
 namespace Nest
 {
@@ -16,11 +10,11 @@ namespace Nest
 	{
 		private static readonly IEnumerable<FilterContainer> Empty = Enumerable.Empty<FilterContainer>();
 
-		string IFilterContainer._FilterName { get; set; }
+		string IFilterContainer.FilterName { get; set; }
 		
-		string IFilterContainer._CacheKey { get; set; }
+		string IFilterContainer.CacheKey { get; set; }
 		
-		bool? IFilterContainer._Cache { get; set; }
+		bool? IFilterContainer.Cache { get; set; }
 		
 		string IFilterContainer.RawFilter { get; set; }
 		

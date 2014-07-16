@@ -30,7 +30,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 								id: ""1"",
 								type: ""elasticsearchprojects"",
 								index: ""nest_test_data"",
-								shape_field_name: ""myGeoShape""
+								path: ""myGeoShape""
 							}
 						},
 						_cache: true,

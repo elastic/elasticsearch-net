@@ -1,21 +1,29 @@
-﻿namespace Nest
+﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace Nest
 {
 	/// <summary>
 	/// Controls how elasticsearch handles dynamic mapping changes when a new document present new fields
 	/// </summary>
+	[JsonConverter(typeof(StringEnumConverter))]
 	public enum DynamicMappingOption
 	{
 		/// <summary>
 		/// Default value, allows unmapped fields to be cause a mapping update 
 		/// </summary>
-		allow,
+		[EnumMember(Value = "allow")]
+		Allow,
 		/// <summary>
 		/// New unmapped fields will be silently ignored
 		/// </summary>
-		ignore,
+		[EnumMember(Value = "ignore")]
+		Ignore,
 		/// <summary>
 		/// If new unmapped fields are passed, the whole document WON'T be added/updated
 		/// </summary>
-		strict
+		[EnumMember(Value = "strict")]
+		Strict
 	}
 }

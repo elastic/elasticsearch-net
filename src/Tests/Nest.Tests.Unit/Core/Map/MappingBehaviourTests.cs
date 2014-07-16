@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
 using FluentAssertions;
 using NUnit.Framework;
-using Nest;
 
 namespace Nest.Tests.Unit.Core.Map
 {
@@ -16,7 +14,7 @@ namespace Nest.Tests.Unit.Core.Map
 		public class TestMappingObject
 		{
 			public string Id { get; set; }
-			[ElasticProperty(Name="namez", Index = FieldIndexOption.analyzed)]
+			[ElasticProperty(Name="namez", Index = FieldIndexOption.Analyzed)]
 			public string Name { get; set; }
 		}
 
@@ -27,7 +25,7 @@ namespace Nest.Tests.Unit.Core.Map
 			var result = this._client.Map<TestMappingObject>(m => m
 				.MapFromAttributes()
 				.Properties(pp => pp
-					.String(s => s.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
+					.String(s => s.Name(p => p.Name).Index(FieldIndexOption.NotAnalyzed))
 				)
 			);
 			var request = result.ConnectionStatus.Request.Utf8String();

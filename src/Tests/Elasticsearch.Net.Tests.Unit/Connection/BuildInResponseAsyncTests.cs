@@ -1,5 +1,4 @@
 using System;
-using System.Configuration;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,7 +71,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 			public byte[] ResponseBytes { get; set; }
 
-			public async void Dispose()
+			public void Dispose()
 			{
 				if (this.Fake != null) this.Fake.Dispose();
 			}

@@ -12,7 +12,7 @@ namespace Elasticsearch.Net
 {
 	
 	
-	public enum ConsistencyOptions 
+	public enum Consistency 
 	{
 		  [EnumMember(Value = "one")]
 		One,
@@ -23,7 +23,7 @@ namespace Elasticsearch.Net
 	}
 	
 	
-	public enum ReplicationOptions 
+	public enum Replication 
 	{
 		  [EnumMember(Value = "sync")]
 		Sync,
@@ -32,7 +32,7 @@ namespace Elasticsearch.Net
 	}
 	
 	
-	public enum BytesOptions 
+	public enum Bytes 
 	{
 		  [EnumMember(Value = "b")]
 		B,
@@ -45,7 +45,7 @@ namespace Elasticsearch.Net
 	}
 	
 	
-	public enum LevelOptions 
+	public enum Level 
 	{
 		  [EnumMember(Value = "cluster")]
 		Cluster,
@@ -56,7 +56,7 @@ namespace Elasticsearch.Net
 	}
 	
 	
-	public enum WaitForStatusOptions 
+	public enum WaitForStatus 
 	{
 		  [EnumMember(Value = "green")]
 		Green,
@@ -67,7 +67,7 @@ namespace Elasticsearch.Net
 	}
 	
 	
-	public enum ExpandWildcardsOptions 
+	public enum ExpandWildcards 
 	{
 		  [EnumMember(Value = "open")]
 		Open,
@@ -76,7 +76,7 @@ namespace Elasticsearch.Net
 	}
 	
 	
-	public enum VersionTypeOptions 
+	public enum VersionType 
 	{
 		  [EnumMember(Value = "internal")]
 		Internal,
@@ -89,7 +89,7 @@ namespace Elasticsearch.Net
 	}
 	
 	
-	public enum DefaultOperatorOptions 
+	public enum DefaultOperator 
 	{
 		  [EnumMember(Value = "AND")]
 		And,
@@ -98,7 +98,7 @@ namespace Elasticsearch.Net
 	}
 	
 	
-	public enum OpTypeOptions 
+	public enum OpType 
 	{
 		  [EnumMember(Value = "index")]
 		Index,
@@ -107,7 +107,7 @@ namespace Elasticsearch.Net
 	}
 	
 	
-	public enum FormatOptions 
+	public enum Format 
 	{
 		  [EnumMember(Value = "detailed")]
 		Detailed,
@@ -116,7 +116,7 @@ namespace Elasticsearch.Net
 	}
 	
 	
-	public enum SearchTypeOptions 
+	public enum SearchType 
 	{
 		  [EnumMember(Value = "query_then_fetch")]
 		QueryThenFetch,
@@ -133,7 +133,7 @@ namespace Elasticsearch.Net
 	}
 	
 	
-	public enum TypeOptions 
+	public enum ThreadType 
 	{
 		  [EnumMember(Value = "cpu")]
 		Cpu,
@@ -144,7 +144,7 @@ namespace Elasticsearch.Net
 	}
 	
 	
-	public enum SuggestModeOptions 
+	public enum SuggestMode 
 	{
 		  [EnumMember(Value = "missing")]
 		Missing,
@@ -307,145 +307,145 @@ namespace Elasticsearch.Net
 		public static string Resolve(Enum e)
 		{
 			
-			if (e is ConsistencyOptions)
+			if (e is Consistency)
 			{
-				switch((ConsistencyOptions)e)
+				switch((Consistency)e)
 				{
-					case ConsistencyOptions.One: return "one";
-					case ConsistencyOptions.Quorum: return "quorum";
-					case ConsistencyOptions.All: return "all";
+					case Consistency.One: return "one";
+					case Consistency.Quorum: return "quorum";
+					case Consistency.All: return "all";
 				}
 			}
 			
 			
-			if (e is ReplicationOptions)
+			if (e is Replication)
 			{
-				switch((ReplicationOptions)e)
+				switch((Replication)e)
 				{
-					case ReplicationOptions.Sync: return "sync";
-					case ReplicationOptions.Async: return "async";
+					case Replication.Sync: return "sync";
+					case Replication.Async: return "async";
 				}
 			}
 			
 			
-			if (e is BytesOptions)
+			if (e is Bytes)
 			{
-				switch((BytesOptions)e)
+				switch((Bytes)e)
 				{
-					case BytesOptions.B: return "b";
-					case BytesOptions.K: return "k";
-					case BytesOptions.M: return "m";
-					case BytesOptions.G: return "g";
+					case Bytes.B: return "b";
+					case Bytes.K: return "k";
+					case Bytes.M: return "m";
+					case Bytes.G: return "g";
 				}
 			}
 			
 			
-			if (e is LevelOptions)
+			if (e is Level)
 			{
-				switch((LevelOptions)e)
+				switch((Level)e)
 				{
-					case LevelOptions.Cluster: return "cluster";
-					case LevelOptions.Indices: return "indices";
-					case LevelOptions.Shards: return "shards";
+					case Level.Cluster: return "cluster";
+					case Level.Indices: return "indices";
+					case Level.Shards: return "shards";
 				}
 			}
 			
 			
-			if (e is WaitForStatusOptions)
+			if (e is WaitForStatus)
 			{
-				switch((WaitForStatusOptions)e)
+				switch((WaitForStatus)e)
 				{
-					case WaitForStatusOptions.Green: return "green";
-					case WaitForStatusOptions.Yellow: return "yellow";
-					case WaitForStatusOptions.Red: return "red";
+					case WaitForStatus.Green: return "green";
+					case WaitForStatus.Yellow: return "yellow";
+					case WaitForStatus.Red: return "red";
 				}
 			}
 			
 			
-			if (e is ExpandWildcardsOptions)
+			if (e is ExpandWildcards)
 			{
-				switch((ExpandWildcardsOptions)e)
+				switch((ExpandWildcards)e)
 				{
-					case ExpandWildcardsOptions.Open: return "open";
-					case ExpandWildcardsOptions.Closed: return "closed";
+					case ExpandWildcards.Open: return "open";
+					case ExpandWildcards.Closed: return "closed";
 				}
 			}
 			
 			
-			if (e is VersionTypeOptions)
+			if (e is VersionType)
 			{
-				switch((VersionTypeOptions)e)
+				switch((VersionType)e)
 				{
-					case VersionTypeOptions.Internal: return "internal";
-					case VersionTypeOptions.External: return "external";
-					case VersionTypeOptions.ExternalGte: return "external_gte";
-					case VersionTypeOptions.Force: return "force";
+					case VersionType.Internal: return "internal";
+					case VersionType.External: return "external";
+					case VersionType.ExternalGte: return "external_gte";
+					case VersionType.Force: return "force";
 				}
 			}
 			
 			
-			if (e is DefaultOperatorOptions)
+			if (e is DefaultOperator)
 			{
-				switch((DefaultOperatorOptions)e)
+				switch((DefaultOperator)e)
 				{
-					case DefaultOperatorOptions.And: return "AND";
-					case DefaultOperatorOptions.Or: return "OR";
+					case DefaultOperator.And: return "AND";
+					case DefaultOperator.Or: return "OR";
 				}
 			}
 			
 			
-			if (e is OpTypeOptions)
+			if (e is OpType)
 			{
-				switch((OpTypeOptions)e)
+				switch((OpType)e)
 				{
-					case OpTypeOptions.Index: return "index";
-					case OpTypeOptions.Create: return "create";
+					case OpType.Index: return "index";
+					case OpType.Create: return "create";
 				}
 			}
 			
 			
-			if (e is FormatOptions)
+			if (e is Format)
 			{
-				switch((FormatOptions)e)
+				switch((Format)e)
 				{
-					case FormatOptions.Detailed: return "detailed";
-					case FormatOptions.Text: return "text";
+					case Format.Detailed: return "detailed";
+					case Format.Text: return "text";
 				}
 			}
 			
 			
-			if (e is SearchTypeOptions)
+			if (e is SearchType)
 			{
-				switch((SearchTypeOptions)e)
+				switch((SearchType)e)
 				{
-					case SearchTypeOptions.QueryThenFetch: return "query_then_fetch";
-					case SearchTypeOptions.QueryAndFetch: return "query_and_fetch";
-					case SearchTypeOptions.DfsQueryThenFetch: return "dfs_query_then_fetch";
-					case SearchTypeOptions.DfsQueryAndFetch: return "dfs_query_and_fetch";
-					case SearchTypeOptions.Count: return "count";
-					case SearchTypeOptions.Scan: return "scan";
+					case SearchType.QueryThenFetch: return "query_then_fetch";
+					case SearchType.QueryAndFetch: return "query_and_fetch";
+					case SearchType.DfsQueryThenFetch: return "dfs_query_then_fetch";
+					case SearchType.DfsQueryAndFetch: return "dfs_query_and_fetch";
+					case SearchType.Count: return "count";
+					case SearchType.Scan: return "scan";
 				}
 			}
 			
 			
-			if (e is TypeOptions)
+			if (e is ThreadType)
 			{
-				switch((TypeOptions)e)
+				switch((ThreadType)e)
 				{
-					case TypeOptions.Cpu: return "cpu";
-					case TypeOptions.Wait: return "wait";
-					case TypeOptions.Block: return "block";
+					case ThreadType.Cpu: return "cpu";
+					case ThreadType.Wait: return "wait";
+					case ThreadType.Block: return "block";
 				}
 			}
 			
 			
-			if (e is SuggestModeOptions)
+			if (e is SuggestMode)
 			{
-				switch((SuggestModeOptions)e)
+				switch((SuggestMode)e)
 				{
-					case SuggestModeOptions.Missing: return "missing";
-					case SuggestModeOptions.Popular: return "popular";
-					case SuggestModeOptions.Always: return "always";
+					case SuggestMode.Missing: return "missing";
+					case SuggestMode.Popular: return "popular";
+					case SuggestMode.Always: return "always";
 				}
 			}
 			

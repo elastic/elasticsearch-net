@@ -14,10 +14,10 @@ namespace Nest.Resolvers.Converters
 		private class MultiHitTuple
 		{
 			public JToken Hit { get; set; }
-			public ISimpleGetDescriptor Descriptor { get; set; }
+			public IMultiGetOperation Descriptor { get; set; }
 		}
 
-		private readonly MultiGetDescriptor _descriptor;
+		private readonly IMultiGetRequest _request;
 
 		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiGetHitConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
 		
@@ -26,9 +26,9 @@ namespace Nest.Resolvers.Converters
 			
 		}
 
-		public MultiGetHitConverter(MultiGetDescriptor descriptor)
+		public MultiGetHitConverter(IMultiGetRequest request)
 		{
-			_descriptor = descriptor;
+			_request = request;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -57,7 +57,7 @@ namespace Nest.Resolvers.Converters
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			if (this._descriptor == null)
+			if (this._request == null)
 			{
 				var elasticContractResolver = serializer.ContractResolver as SettingsContractResolver;
 				if (elasticContractResolver == null)
@@ -77,14 +77,14 @@ namespace Nest.Resolvers.Converters
 			var jsonObject = JObject.Load(reader);
 
 			var docsJarray = (JArray)jsonObject["docs"];
-			var multiGetDescriptor = this._descriptor;
-			if (this._descriptor == null)
-				return multiGetDescriptor;
+			var multiGetDescriptor = this._request;
+			if (this._request == null || docsJarray == null)
+				return response;
 
-			var withMeta = docsJarray.Zip(this._descriptor._GetOperations, (doc, desc) => new MultiHitTuple { Hit = doc, Descriptor = desc });
+			var withMeta = docsJarray.Zip(this._request.GetOperations, (doc, desc) => new MultiHitTuple { Hit = doc, Descriptor = desc });
 			foreach (var m in withMeta)
 			{
-				var generic = MakeDelegateMethodInfo.MakeGenericMethod(m.Descriptor._ClrType);
+				var generic = MakeDelegateMethodInfo.MakeGenericMethod(m.Descriptor.ClrType);
 				generic.Invoke(null, new object[] { m, serializer, response._Documents });
 			}
 

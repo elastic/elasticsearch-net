@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -50,9 +47,6 @@ namespace Elasticsearch.Net.Integration.Yaml.Index13
 					.AddQueryString("fields", @"_ttl")
 				));
 
-				//lt _response.fields._ttl: 10000; 
-				this.IsLowerThan(_response.fields._ttl, 10000);
-
 				//gt _response.fields._ttl: 0; 
 				this.IsGreaterThan(_response.fields._ttl, 0);
 
@@ -69,9 +63,6 @@ namespace Elasticsearch.Net.Integration.Yaml.Index13
 					.AddQueryString("fields", @"_ttl")
 				));
 
-				//lt _response.fields._ttl: 100000; 
-				this.IsLowerThan(_response.fields._ttl, 100000);
-
 				//gt _response.fields._ttl: 0; 
 				this.IsGreaterThan(_response.fields._ttl, 0);
 
@@ -87,9 +78,6 @@ namespace Elasticsearch.Net.Integration.Yaml.Index13
 				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.AddQueryString("fields", @"_ttl")
 				));
-
-				//lt _response.fields._ttl: 20000; 
-				this.IsLowerThan(_response.fields._ttl, 20000);
 
 				//gt _response.fields._ttl: 0; 
 				this.IsGreaterThan(_response.fields._ttl, 0);

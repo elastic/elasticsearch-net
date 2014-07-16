@@ -4,11 +4,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
-using Nest.Tests.MockData;
-using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 using System.Diagnostics;
-using FluentAssertions;
 
 namespace Nest.Tests.Integration.Reproduce
 {
@@ -40,7 +37,7 @@ namespace Nest.Tests.Integration.Reproduce
 			//process id makes it so we can run these tests concurrently using NCrunch
 			var index = ElasticsearchConfiguration.DefaultIndex + "_posts_" + Process.GetCurrentProcess().Id.ToString();
 
-			var client =  new ElasticClient(this._settings, new InMemoryConnection(this._settings));
+			var client =  new ElasticClient(this.Settings, new InMemoryConnection(this.Settings));
 
 			var streamId = new Guid("8d00cf65-bf84-4035-9adb-695b1366304c");
 			var approved = true;

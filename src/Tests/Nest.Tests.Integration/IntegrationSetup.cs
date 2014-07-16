@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Nest;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -30,11 +28,11 @@ namespace Nest.Tests.Integration
 				.AddMapping<ElasticsearchProject>(m => m
 				.MapFromAttributes()
 				.Properties(p => p
-				.String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.with_positions_offsets_payloads))))
+				.String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))))
 				.AddMapping<Person>(m => m.MapFromAttributes())
 				.AddMapping<BoolTerm>(m => m.Properties(pp=>pp
-					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.not_analyzed))
-					.String(sm => sm.Name(p => p.Name2).Index(FieldIndexOption.not_analyzed))	
+					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.NotAnalyzed))
+					.String(sm => sm.Name(p => p.Name2).Index(FieldIndexOption.NotAnalyzed))	
 				))
 			);
 
@@ -44,11 +42,11 @@ namespace Nest.Tests.Integration
 				.AddMapping<ElasticsearchProject>(m => m
 				.MapFromAttributes()
 				.Properties(p => p
-				.String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.with_positions_offsets_payloads))))
+				.String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))))
 				.AddMapping<Person>(m => m.MapFromAttributes())
 				.AddMapping<BoolTerm>(m => m.Properties(pp => pp
-					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.not_analyzed))
-					.String(sm => sm.Name(p => p.Name2).Index(FieldIndexOption.not_analyzed))
+					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.NotAnalyzed))
+					.String(sm => sm.Name(p => p.Name2).Index(FieldIndexOption.NotAnalyzed))
 				))
 			);
 
@@ -63,7 +61,7 @@ namespace Nest.Tests.Integration
 		[TearDown]
 		public static void TearDown()
 		{
-            var client = ElasticsearchConfiguration.Client;
+            var client = ElasticsearchConfiguration.Client.Value;
             client.DeleteIndex(di => di.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_*"));
 		}
 	}

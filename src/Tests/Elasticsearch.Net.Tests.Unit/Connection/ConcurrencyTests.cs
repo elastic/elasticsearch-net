@@ -2,20 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using Autofac;
-using Autofac.Core.Activators.Reflection;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Exceptions;
-using Elasticsearch.Net.Providers;
 using Elasticsearch.Net.Tests.Unit.Stubs;
-using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -132,7 +124,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 		
 
-			public override ElasticsearchResponse<Stream> GetSync(Uri uri, IRequestConnectionConfiguration requestConfigurationOverrides = null)
+			public override ElasticsearchResponse<Stream> GetSync(Uri uri, IRequestConfiguration requestConfigurationOverrides = null)
 			{
 				var statusCode = _rnd.Next(1, 9) % 3 == 0 ? 503 : 200;
 				if (uri.Port == 9202)

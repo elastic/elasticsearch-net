@@ -3,8 +3,6 @@ using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
-using System.Reflection;
-using Newtonsoft.Json;
 
 namespace Nest.Tests.Integration.Core.Map.Properties
 {
@@ -14,28 +12,28 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		[Test]
 		public void StringProperty()
 		{
-			this._client.DeleteMapping<ElasticsearchProject>();
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			this.Client.DeleteMapping<ElasticsearchProject>();
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.String(s => s
 						.Name(p => p.Name)
 						.IndexName("my_crazy_name_i_want_in_lucene")
 						.IncludeInAll()
-						.Index(FieldIndexOption.analyzed)
+						.Index(FieldIndexOption.Analyzed)
 						.IndexAnalyzer("standard")
-						.IndexOptions(IndexOptions.positions)
+						.IndexOptions(IndexOptions.Positions)
 						.NullValue("my_special_null_value")
 						.OmitNorms()
 						.PositionOffsetGap(1)
 						.SearchAnalyzer("standard")
 						.Store()
-						.TermVector(TermVectorOption.with_positions_offsets)
+						.TermVector(TermVectorOption.WithPositionsOffsets)
 						.Boost(1.1)
 					)
 				)
 			);
 			this.DefaultResponseAssertations(result);
-			var mappingResponse = this._client.GetMapping<ElasticsearchProject>();
+			var mappingResponse = this.Client.GetMapping<ElasticsearchProject>();
 			mappingResponse.Should().NotBeNull();
 			var mapping = mappingResponse.Mapping;
 			mapping.Should().NotBeNull();
@@ -48,12 +46,12 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		[Test]
 		public void NumberProperty()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Number(s => s
 						.Name(p => p.LOC)
 						.IndexName("lines_of_code")
-						.Type(NumberType.@integer)
+						.Type(NumberType.Integer)
 						.NullValue(0)
 						.Boost(2.0)
 						.IgnoreMalformed()
@@ -69,7 +67,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		[Test]
 		public void DateProperty()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Date(s => s
 						.Name(p => p.StartedOn)
@@ -90,7 +88,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		[Test]
 		public void BooleanProperty()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Boolean(s => s
 						.Name(p => p.BoolValue) //reminder .Repository(string) exists too!
@@ -108,8 +106,8 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		[Test]
 		public void BinaryProperty()
 		{
-			this._client.DeleteMapping(d=>d.Index<ElasticsearchProject>().Type<ElasticsearchProject>());
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			this.Client.DeleteMapping<ElasticsearchProject>();
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Binary(s => s
 						.Name(p => p.MyBinaryField)
@@ -123,12 +121,12 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		//needs the attachment plugin
 		public void AttachmentProperty()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Attachment(s => s
 						.Name(p => p.MyAttachment)
-						.FileField(fs => fs.Index(FieldIndexOption.not_analyzed).Store())
-						.AuthorField(fs => fs.Index(FieldIndexOption.analyzed).Store(false))
+						.FileField(fs => fs.Index(FieldIndexOption.NotAnalyzed).Store())
+						.AuthorField(fs => fs.Index(FieldIndexOption.Analyzed).Store(false))
 						.DateField(fs => fs.Store(false).IncludeInAll())
 					)
 				)
@@ -138,7 +136,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		[Test]
 		public void ObjectProperty()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Object<Person>(s => s
 						.Name(p => p.Followers.First())
@@ -148,7 +146,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 						.MapFromAttributes()
 						.Path("full")
 						.Properties(pprops => pprops
-							.String(ps => ps.Name(p => p.FirstName).Index(FieldIndexOption.not_analyzed))
+							.String(ps => ps.Name(p => p.FirstName).Index(FieldIndexOption.NotAnalyzed))
 						//etcetera
 						)
 					)
@@ -159,7 +157,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		[Test]
 		public void NestedObjectProperty()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.NestedObject<Person>(s => s
 						.Name(p => p.NestedFollowers.First())
@@ -171,7 +169,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 						.MapFromAttributes()
 						.Path("full")
 						.Properties(pprops => pprops
-							.String(ps => ps.Name(p => p.FirstName).Index(FieldIndexOption.not_analyzed))
+							.String(ps => ps.Name(p => p.FirstName).Index(FieldIndexOption.NotAnalyzed))
 						//etcetera
 						)
 					)
@@ -182,13 +180,13 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		[Test]
 		public void MultiFieldProperty()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.MultiField(s => s
 						.Name(p => p.Name)
 						.Fields(pprops => pprops
-							.String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
-							.String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.analyzed))
+							.String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.NotAnalyzed))
+							.String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.Analyzed))
 						)
 					)
 				)
@@ -199,14 +197,14 @@ namespace Nest.Tests.Integration.Core.Map.Properties
         [Test]
         public void MultiFieldPropertyWithFullNamePath()
         {
-            var result = this._client.Map<ElasticsearchProject>(m => m
+            var result = this.Client.Map<ElasticsearchProject>(m => m
                 .Properties(props => props
                     .MultiField(s => s
                         .Path(MultiFieldMappingPath.Full)
                         .Name(p => p.Name)
                         .Fields(pprops => pprops
-                            .String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
-                            .String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.analyzed))
+                            .String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.NotAnalyzed))
+                            .String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.Analyzed))
                         )
                     )
                 )
@@ -217,14 +215,14 @@ namespace Nest.Tests.Integration.Core.Map.Properties
         [Test]
         public void MultiFieldPropertyWithJustNamePath()
         {
-            var result = this._client.Map<ElasticsearchProject>(m => m
+            var result = this.Client.Map<ElasticsearchProject>(m => m
                 .Properties(props => props
                     .MultiField(s => s
                         .Path(MultiFieldMappingPath.JustName)
                         .Name(p => p.Name)
                         .Fields(pprops => pprops
-                            .String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
-                            .String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.analyzed))
+                            .String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.NotAnalyzed))
+                            .String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.Analyzed))
                         )
                     )
                 )
@@ -235,7 +233,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		[Test]
 		public void IPProperty()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.IP(s => s
 						.Name(p => p.PingIP)
@@ -254,7 +252,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		[Test]
 		public void GeoPointProperty()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.GeoPoint(s => s
 						.Name(p => p.Origin)
@@ -271,11 +269,11 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		//Need special libs in your elasticsearch folder to enable geoshape
 		public void GeoShapeProperty()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.GeoShape(s => s
 						.Name(p => p.MyGeoShape)
-						.Tree(GeoTree.geohash)
+						.Tree(GeoTree.Geohash)
 						.TreeLevels(2)
 						.DistanceErrorPercentage(0.025)
 					)

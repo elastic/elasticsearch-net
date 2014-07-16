@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -22,6 +19,9 @@ namespace Elasticsearch.Net.Integration.Yaml.Delete7
 
 				//do indices.create 
 				_body = new {
+					settings= new {
+						number_of_shards= "5"
+					},
 					mappings= new {
 						test= new {
 							_parent= new {

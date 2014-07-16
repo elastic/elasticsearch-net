@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
@@ -69,7 +70,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 				reader.Read();
 			while (reader.TokenType != JsonToken.EndObject)
 			{
-				var percentile = double.Parse(reader.Value as string);
+				var percentile = double.Parse(reader.Value as string, CultureInfo.InvariantCulture);
 				reader.Read();
 				var value = reader.Value as double?;
 				percentileItems.Add(new PercentileItem()
@@ -179,6 +180,14 @@ namespace Nest.Resolvers.Converters.Aggregations
 
 			var keyItem = new KeyItem();
 			keyItem.Key = key.ToString();
+
+			if (property == "key_as_string")
+			{
+				// Skip key_as_string property
+				reader.Read();
+				reader.Read();
+			}
+
 			reader.Read(); //doc_count;
 			var docCount = reader.Value as long?;
 			keyItem.DocCount = docCount.GetValueOrDefault(0);

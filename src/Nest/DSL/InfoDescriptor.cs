@@ -1,27 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-	[DescriptorFor("Info")]
-	public partial class InfoDescriptor : BasePathDescriptor<InfoDescriptor>,
-		 IPathInfo<InfoRequestParameters>
-	{
-		ElasticsearchPathInfo<InfoRequestParameters> IPathInfo<InfoRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
-		{
-			var pathInfo = new ElasticsearchPathInfo<InfoRequestParameters>();
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
-			pathInfo.RequestParameters = this._QueryString;
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IInfoRequest : IRequest<InfoRequestParameters> { }
 
-			return pathInfo;
+	internal static class InfoPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<InfoRequestParameters> pathInfo, IInfoRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+		}
+	}
+	
+	public partial class InfoRequest : BasePathRequest<InfoRequestParameters>, IInfoRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<InfoRequestParameters> pathInfo)
+		{
+			InfoPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("Info")]
+	public partial class InfoDescriptor : BasePathDescriptor<InfoDescriptor, InfoRequestParameters>, IInfoRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<InfoRequestParameters> pathInfo)
+		{
+			InfoPathInfo.Update(pathInfo, this);
 		}
 	}
 }

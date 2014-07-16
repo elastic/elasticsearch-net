@@ -10,7 +10,7 @@ namespace Nest.Tests.Integration.Cluster
 		[Test]
 		public void SimpleState()
 		{
-			var r = this._client.ClusterState();
+			var r = this.Client.ClusterState();
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.ClusterName);
 			Assert.NotNull(r.MasterNode);
@@ -34,25 +34,25 @@ namespace Nest.Tests.Integration.Cluster
 		[Test]
 		public void StateWithoutMetadata()
 		{
-			var r = this._client.ClusterState(cs=>cs.Metrics(ClusterStateMetric.Blocks));
+			var r = this.Client.ClusterState(cs=>cs.Metrics(ClusterStateMetric.Blocks));
 			Assert.IsNull(r.Metadata);
 		}
 		[Test]
 		public void StateWithoutNodes()
 		{
-			var r = this._client.ClusterState(cs=>cs.Metrics(ClusterStateMetric.Metadata));
+			var r = this.Client.ClusterState(cs=>cs.Metrics(ClusterStateMetric.Metadata));
 			Assert.IsNull(r.Nodes);
 		}
 		[Test]
 		public void StateWithoutRoutingTable()
 		{
-			var r = this._client.ClusterState(cs=>cs.Metrics(ClusterStateMetric.Nodes));
+			var r = this.Client.ClusterState(cs=>cs.Metrics(ClusterStateMetric.Nodes));
 			Assert.IsNull(r.RoutingTable);
 		}
 		[Test]
 		public void StateWithoutBlocks()
 		{
-			var r = this._client.ClusterState(cs=>cs.Metrics(ClusterStateMetric.Nodes));
+			var r = this.Client.ClusterState(cs=>cs.Metrics(ClusterStateMetric.Nodes));
 			Assert.IsNull(r.Blocks);
 		}
 	}

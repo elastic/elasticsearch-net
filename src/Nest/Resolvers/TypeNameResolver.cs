@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Elasticsearch.Net;
 
 namespace Nest.Resolvers
 {
@@ -42,6 +40,8 @@ namespace Nest.Resolvers
 
 		internal string GetTypeNameFor(TypeNameMarker t)
 		{
+			if (t == null) return null;
+
 			return t.Name ?? this.GetTypeNameFor(t.Type);
 		}
 	}

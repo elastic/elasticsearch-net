@@ -1,27 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesOpen")]
-	public partial class OpenIndexDescriptor : IndexPathDescriptorBase<OpenIndexDescriptor, OpenIndexRequestParameters>
-		, IPathInfo<OpenIndexRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IOpenIndexRequest : IIndexPath<OpenIndexRequestParameters> { }
+
+	internal static class OpenIndexPathInfo
 	{
-		ElasticsearchPathInfo<OpenIndexRequestParameters> IPathInfo<OpenIndexRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		public static void Update(ElasticsearchPathInfo<OpenIndexRequestParameters> pathInfo, IOpenIndexRequest request)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			
-			return pathInfo;
+		}
+	}
+	
+	public partial class OpenIndexRequest : IndexPathBase<OpenIndexRequestParameters>, IOpenIndexRequest
+	{
+		public OpenIndexRequest(IndexNameMarker index) : base(index) { }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<OpenIndexRequestParameters> pathInfo)
+		{
+			OpenIndexPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("IndicesOpen")]
+	public partial class OpenIndexDescriptor : IndexPathDescriptorBase<OpenIndexDescriptor, OpenIndexRequestParameters>, IOpenIndexRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<OpenIndexRequestParameters> pathInfo)
+		{
+			OpenIndexPathInfo.Update(pathInfo, this);
 		}
 	}
 }

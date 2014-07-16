@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
-using FakeItEasy;
-using Nest;
-using Nest.DSL.Descriptors;
-using Nest.DSL.Search;
 using Nest.Resolvers;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -27,15 +22,13 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 			{
 				Field = "prefix_field", 
 				Value = "prefi", 
-				Rewrite = RewriteMultiTerm.constant_score_boolean
+				Rewrite = RewriteMultiTerm.ConstantScoreBoolean
 			};
 
 			var result = _client.Search<ElasticsearchProject>(new SearchRequest
 			{
 				From = 0,
 				Size = 20,
-				Index = "alternative-index",
-				Type = "alternative-type",
 				MinScore = 2.1,
 				Rescore = new Rescore
 				{
@@ -134,7 +127,7 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 						{
 							Field = Property.Path<ElasticsearchProject>(p=>p.Name),
 							Size = 10,
-							ExecutionHint = TermsAggregationExecutionHint.ordinals,
+							ExecutionHint = TermsAggregationExecutionHint.Ordinals,
 						},
 						Aggregations = new Dictionary<string, IAggregationContainer>
 						{

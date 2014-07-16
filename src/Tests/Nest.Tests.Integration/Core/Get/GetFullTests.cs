@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using NUnit.Framework;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-using Nest;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
 using Nest.Tests.MockData.Domain;
 using FluentAssertions;
 namespace Nest.Tests.Integration.Core.Get
@@ -29,7 +22,7 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetSimple()
 		{
-			var result = this._client.Get<ElasticsearchProject>(1);
+			var result = this.Client.Get<ElasticsearchProject>(1);
 			this.DefaultAssertations(result);
 			
 			
@@ -37,14 +30,14 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetWithPathInfo()
 		{
-			var result = this._client.Get<ElasticsearchProject>(1, ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
+			var result = this.Client.Get<ElasticsearchProject>(1, ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
 			this.DefaultAssertations(result);
 		}
 		
 		[Test]
 		public void GetUsingDescriptorWithTypeAndFields()
 		{
-			var result = this._client.Get<ElasticsearchProject>(g => g
+			var result = this.Client.Get<ElasticsearchProject>(g => g
 				.Index(ElasticsearchConfiguration.DefaultIndex)
 				.Type("elasticsearchprojects")
 				.Id(1)
@@ -64,7 +57,7 @@ namespace Nest.Tests.Integration.Core.Get
 		public void GetMissing()
 		{
 			int doesNotExistId = 1234567;
-			var result = this._client.Get<ElasticsearchProject>(doesNotExistId);
+			var result = this.Client.Get<ElasticsearchProject>(doesNotExistId);
 			result.Found.Should().BeFalse();
 		}
 	}

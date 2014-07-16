@@ -1,28 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesDeleteTemplate")]
-	public partial class DeleteTemplateDescriptor :
-		NamePathDescriptor<DeleteTemplateDescriptor, DeleteTemplateRequestParameters>
-		, IPathInfo<DeleteTemplateRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IDeleteTemplateRequest : INamePath<DeleteTemplateRequestParameters> { }
+
+	internal static class DeleteTemplatePathInfo
 	{
-		ElasticsearchPathInfo<DeleteTemplateRequestParameters> IPathInfo<DeleteTemplateRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		public static void Update(ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo, IDeleteTemplateRequest request)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
-			
-			return pathInfo;
+		}
+	}
+	
+	public partial class DeleteTemplateRequest : NamePathBase<DeleteTemplateRequestParameters>, IDeleteTemplateRequest
+	{
+		public DeleteTemplateRequest(string name) : base(name)
+		{
+		}
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo)
+		{
+			DeleteTemplatePathInfo.Update(pathInfo, this);
+		}
+	}
+	[DescriptorFor("IndicesDeleteTemplate")]
+	public partial class DeleteTemplateDescriptor : NamePathDescriptor<DeleteTemplateDescriptor, DeleteTemplateRequestParameters>, IDeleteTemplateRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo)
+		{
+			DeleteTemplatePathInfo.Update(pathInfo, this);
 		}
 
 	}

@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Channels;
-using Nest.Tests.MockData;
-using Nest.Tests.MockData.Domain;
-using Newtonsoft.Json;
 using NUnit.Framework;
-using System.Diagnostics;
 using FluentAssertions;
 
 namespace Nest.Tests.Integration.Reproduce
@@ -53,7 +48,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			var guid = Guid.NewGuid();
 			var o = new IndexableEvent() {Id = "this-is-not-the-id", ContentGUID = guid};
-			var id = _client.Infer.Id(o);
+			var id = Client.Infer.Id(o);
 			id.Should().NotBeNullOrWhiteSpace().And.Be(o.IndexId);
 		}
 
@@ -63,7 +58,7 @@ namespace Nest.Tests.Integration.Reproduce
 			//this is just to show nest can reference GUID as alternative ids albeit with the D formatting
 			var guid = Guid.NewGuid();
 			var o = new MyOtherIndexableEvent() {Id = "this-is-not-the-id", ContentGUID = guid};
-			var id = _client.Infer.Id(o);
+			var id = Client.Infer.Id(o);
 			id.Should().NotBeNullOrWhiteSpace().And.Be(o.ContentGUID.ToString("D"));
 		}
 	}

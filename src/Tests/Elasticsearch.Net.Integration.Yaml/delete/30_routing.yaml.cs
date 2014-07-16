@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -19,6 +16,14 @@ namespace Elasticsearch.Net.Integration.Yaml.Delete6
 			[Test]
 			public void Routing1Test()
 			{	
+
+				//do indices.create 
+				_body = new {
+					settings= new {
+						number_of_shards= "5"
+					}
+				};
+				this.Do(()=> _client.IndicesCreate("test_1", _body));
 
 				//do index 
 				_body = new {

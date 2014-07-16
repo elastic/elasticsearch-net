@@ -1,0 +1,20 @@
+  {
+  "docs": [
+    {
+      "_id": "1",
+      "field_statistics": true
+    },
+    {
+      "_id": "2",
+      "field_statistics": true
+    },
+    {
+      "_id": "3",
+      "field_statistics": true
+    },
+    {
+      "_id": "4",
+      "field_statistics": true
+    }
+  ]
+}

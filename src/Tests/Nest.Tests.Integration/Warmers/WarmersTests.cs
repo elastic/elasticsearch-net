@@ -1,9 +1,6 @@
-﻿using System.Text;
-using FluentAssertions;
-using Nest.Resolvers;
+﻿using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
-using System.Net;
 using System.Linq;
 
 namespace Nest.Tests.Integration.Warmers
@@ -14,7 +11,7 @@ namespace Nest.Tests.Integration.Warmers
 		[Test]
 		public void SimplePutAndGet()
 		{
-			var putResponse = this._client.PutWarmer("warmer_simpleputandget", wd => wd
+			var putResponse = this.Client.PutWarmer("warmer_simpleputandget", wd => wd
 				.Type<ElasticsearchProject>()
 				.Search<ElasticsearchProject>(s => s
 					.Query(q => q
@@ -25,19 +22,19 @@ namespace Nest.Tests.Integration.Warmers
 			);
 			Assert.IsTrue(putResponse.Acknowledged);
 
-			var warmerResponse = this._client.GetWarmer("warmer_simpleputandget", wd => wd
+			var warmerResponse = this.Client.GetWarmer("warmer_simpleputandget", wd => wd
 				.Index<ElasticsearchProject>()
 			   );
 
 			warmerResponse.Should().NotBeNull();
 			warmerResponse.IsValid.Should().BeTrue();
 			warmerResponse.Indices.Should().NotBeNull();
-			warmerResponse.Indices.Should().ContainKey(_settings.DefaultIndex);
-			warmerResponse.Indices[_settings.DefaultIndex].Should().ContainKey("warmer_simpleputandget");
-			var warmerMapping = warmerResponse.Indices[_settings.DefaultIndex]["warmer_simpleputandget"];
+			warmerResponse.Indices.Should().ContainKey(Settings.DefaultIndex);
+			warmerResponse.Indices[Settings.DefaultIndex].Should().ContainKey("warmer_simpleputandget");
+			var warmerMapping = warmerResponse.Indices[Settings.DefaultIndex]["warmer_simpleputandget"];
 			warmerMapping.Name.Should().Be("warmer_simpleputandget");
-			var typeName = _client.Infer.TypeName<ElasticsearchProject>();
-			var typeNames = new ElasticInferrer(_settings).TypeNames(warmerMapping.Types);
+			var typeName = Client.Infer.TypeName<ElasticsearchProject>();
+			var typeNames = new ElasticInferrer(Settings).TypeNames(warmerMapping.Types);
 			typeNames.Contains(typeName).Should().Be(true);
 			//warmerMapping.Source.Should().Contain("\"strange-value\"");
 		}
@@ -46,7 +43,7 @@ namespace Nest.Tests.Integration.Warmers
 		public void PutWithEmptyTypes()
 		{
 			//this._client.DeleTemplate("put-template-with-settings");
-			var putResponse = this._client.PutWarmer("warmer_putwithemptytypes", wd => wd
+			var putResponse = this.Client.PutWarmer("warmer_putwithemptytypes", wd => wd
 				.Index<ElasticsearchProject>()
 				.Search<ElasticsearchProject>(s => s
 					.Query(q => q
@@ -57,15 +54,15 @@ namespace Nest.Tests.Integration.Warmers
 			);
 			Assert.IsTrue(putResponse.Acknowledged);
 
-			var warmerResponse = this._client.GetWarmer("warmer_putwithemptytypes", wd => wd
+			var warmerResponse = this.Client.GetWarmer("warmer_putwithemptytypes", wd => wd
 				.Index<ElasticsearchProject>()
 			);
 			warmerResponse.Should().NotBeNull();
 			warmerResponse.IsValid.Should().BeTrue();
 			warmerResponse.Indices.Should().NotBeNull();
-			warmerResponse.Indices.Should().ContainKey(_settings.DefaultIndex);
-			warmerResponse.Indices[_settings.DefaultIndex].Should().ContainKey("warmer_putwithemptytypes");
-			var warmerMapping = warmerResponse.Indices[_settings.DefaultIndex]["warmer_putwithemptytypes"];
+			warmerResponse.Indices.Should().ContainKey(Settings.DefaultIndex);
+			warmerResponse.Indices[Settings.DefaultIndex].Should().ContainKey("warmer_putwithemptytypes");
+			var warmerMapping = warmerResponse.Indices[Settings.DefaultIndex]["warmer_putwithemptytypes"];
 			warmerMapping.Name.Should().Be("warmer_putwithemptytypes");
 			warmerMapping.Types.Should().BeEmpty();
 			//warmerMapping.Source.Should().Contain("\"strange-value\"");
@@ -75,7 +72,7 @@ namespace Nest.Tests.Integration.Warmers
 		public void PutToDefaultIndex()
 		{
 			//			this._client.DeleTemplate("put-template-with-settings");
-			var putResponse = this._client.PutWarmer("warmer_puttodefaultindex", wd => wd
+			var putResponse = this.Client.PutWarmer("warmer_puttodefaultindex", wd => wd
 				.Search<ElasticsearchProject>(s => s
 					.Query(q => q
 						.Terms(p => p.Name, new [] {"strange-value"})
@@ -84,15 +81,15 @@ namespace Nest.Tests.Integration.Warmers
 			);
 			Assert.IsTrue(putResponse.Acknowledged);
 
-			var warmerResponse = this._client.GetWarmer("warmer_puttodefaultindex", wd => wd
+			var warmerResponse = this.Client.GetWarmer("warmer_puttodefaultindex", wd => wd
 				.Index<ElasticsearchProject>()
 			);
 			warmerResponse.Should().NotBeNull();
 			warmerResponse.IsValid.Should().BeTrue();
 			warmerResponse.Indices.Should().NotBeNull();
-			warmerResponse.Indices.Should().ContainKey(_settings.DefaultIndex);
-			warmerResponse.Indices[_settings.DefaultIndex].Should().ContainKey("warmer_puttodefaultindex");
-			var warmerMapping = warmerResponse.Indices[_settings.DefaultIndex]["warmer_puttodefaultindex"];
+			warmerResponse.Indices.Should().ContainKey(Settings.DefaultIndex);
+			warmerResponse.Indices[Settings.DefaultIndex].Should().ContainKey("warmer_puttodefaultindex");
+			var warmerMapping = warmerResponse.Indices[Settings.DefaultIndex]["warmer_puttodefaultindex"];
 			warmerMapping.Name.Should().Be("warmer_puttodefaultindex");
 			warmerMapping.Types.Should().BeEmpty();
 			//warmerMapping.Source.Should().Contain("\"strange-value\"");
@@ -104,7 +101,7 @@ namespace Nest.Tests.Integration.Warmers
 		public void Delete()
 		{
 			//			this._client.DeleTemplate("put-template-with-settings");
-			var putResponse = this._client.PutWarmer("warmer_delete", wd => wd
+			var putResponse = this.Client.PutWarmer("warmer_delete", wd => wd
 				.AllIndices()
 				.Search<ElasticsearchProject>(s => s
 					.Query(q => q
@@ -114,18 +111,18 @@ namespace Nest.Tests.Integration.Warmers
 			);
 			Assert.IsTrue(putResponse.Acknowledged);
 
-			var deleteResponse = this._client.DeleteWarmer("warmer_delete", wd => wd
+			var deleteResponse = this.Client.DeleteWarmer("warmer_delete", wd => wd
 				.Index<ElasticsearchProject>()
 			);
 			Assert.IsTrue(deleteResponse.Acknowledged);
 			
-			this._client.Refresh(r => r.Index(ElasticsearchConfiguration.DefaultIndex));
+			this.Client.Refresh(r => r.Index(ElasticsearchConfiguration.DefaultIndex));
 			
-			var warmerResponse = this._client.GetWarmer("warmer_delete", wd => wd
+			var warmerResponse = this.Client.GetWarmer("warmer_delete", wd => wd
 				.Index<ElasticsearchProject>()
 			);
 
-			var warmerResponse2 = this._client.GetWarmer("warmer_deleteasdkajsdkjahsdkahsdas", wd => wd
+			var warmerResponse2 = this.Client.GetWarmer("warmer_deleteasdkajsdkjahsdkahsdas", wd => wd
 				.Index<ElasticsearchProject>()
 			);
 			warmerResponse.Should().NotBeNull();

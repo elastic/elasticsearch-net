@@ -1,8 +1,6 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -134,7 +132,7 @@ namespace Nest.Resolvers.Converters.Filters
 			}
 			if (filter == null) return null;
 			if (execution != null)
-				filter.Execution = Enum.Parse(typeof(TermsExecution), execution) as TermsExecution?;
+				filter.Execution = execution.ToEnum<TermsExecution>();
 			filter.Field = field;
 			filter.Cache = cache;
 			filter.CacheKey = cacheKey;

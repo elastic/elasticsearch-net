@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System.Linq.Expressions;
 
 namespace Nest
 {
@@ -16,9 +12,6 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "global")]
 		bool? Global { get; set; }
-
-		[JsonProperty(PropertyName = "_scope")]
-		string Scope { get; set; }
 
 		[JsonProperty(PropertyName = "nested")]
 		PropertyPathMarker Nested { get; set; }
@@ -58,9 +51,6 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "global")]
 		public bool? Global { get; set; }
-
-		[JsonProperty(PropertyName = "_scope")]
-		public string Scope { get; set; }
 
 		[JsonProperty(PropertyName = "nested")]
 		public PropertyPathMarker Nested { get; set; }

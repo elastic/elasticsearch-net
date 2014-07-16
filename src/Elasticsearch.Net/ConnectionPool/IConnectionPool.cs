@@ -20,11 +20,6 @@ namespace Elasticsearch.Net.ConnectionPool
 		bool AcceptsUpdates { get; }
 		
 		/// <summary>
-		/// Signals to the ITransport that this instance has already seen a startup
-		/// </summary>
-		bool HasSeenStartup { get; }
-
-		/// <summary>
 		/// Gets the next live Uri to perform the request on
 		/// </summary>
 		/// <param name="initialSeed">pass the original seed when retrying, this guarantees that the nodes are walked in a
@@ -48,7 +43,7 @@ namespace Elasticsearch.Net.ConnectionPool
 		/// Update the node list manually, usually done by ITransport when sniffing was needed.
 		/// </summary>
 		/// <param name="newClusterState"></param>
-		/// <param name="fromStartupHint">hint that this update came from start up</param>
-		void UpdateNodeList(IList<Uri> newClusterState, bool fromStartupHint = true);
+		/// <param name="sniffNode">hint that the node we recieved the sniff from should not be pinged</param>
+		void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null);
 	}
 }

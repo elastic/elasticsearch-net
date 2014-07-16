@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -16,6 +16,12 @@ namespace Nest
 		public StringMappingDescriptor<T> Name(Expression<Func<T, object>> objectPath)
 		{
 			this._Mapping.Name = objectPath;
+			return this;
+		}
+
+		public StringMappingDescriptor<T> Similarity(string similarity)
+		{
+			this._Mapping.Similarity = similarity;
 			return this;
 		}
 
@@ -76,6 +82,16 @@ namespace Nest
 			this._Mapping.SearchAnalyzer = searchAnalyzer;
 			return this;
 		}
+		public StringMappingDescriptor<T> Norms(NormsMapping normsMapping)
+		{
+			this._Mapping.Norms = normsMapping;
+			return this;
+		}
+		public StringMappingDescriptor<T> IgnoreAbove(int? ignoreAbove)
+		{
+			this._Mapping.IgnoreAbove = ignoreAbove;
+			return this;
+		}
 		public StringMappingDescriptor<T> DocValues(bool docValues = true)
 		{
 			this._Mapping.DocValues = docValues;
@@ -92,5 +108,16 @@ namespace Nest
 			return this;
 		}
 
+		public StringMappingDescriptor<T> CopyTo(params string[] fields)
+		{
+			this._Mapping.CopyTo = fields.Select(f => (PropertyPathMarker)f);
+			return this;
+		}
+
+		public StringMappingDescriptor<T> CopyTo(params Expression<Func<T, object>>[] objectPaths)
+		{
+			this._Mapping.CopyTo = objectPaths.Select(e => (PropertyPathMarker)e);
+			return this;
+		}
 	}
 }

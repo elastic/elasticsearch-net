@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -24,7 +23,7 @@ namespace Nest
 			this._Mapping.IndexName = indexName;
 			return this;
 		}
-		public DateMappingDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.analyzed)
+		public DateMappingDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.Analyzed)
 		{
 			this._Mapping.Index = index;
 			return this;

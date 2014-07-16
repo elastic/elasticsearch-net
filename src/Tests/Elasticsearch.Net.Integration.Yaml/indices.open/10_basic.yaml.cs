@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -21,11 +18,16 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesOpen1
 			{	
 
 				//do indices.create 
-				this.Do(()=> _client.IndicesCreate("test_index", null));
+				_body = new {
+					settings= new {
+						number_of_replicas= "0"
+					}
+				};
+				this.Do(()=> _client.IndicesCreate("test_index", _body));
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.AddQueryString("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"green")
 				));
 
 				//do indices.close 
@@ -39,7 +41,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesOpen1
 
 				//do cluster.health 
 				this.Do(()=> _client.ClusterHealth(nv=>nv
-					.AddQueryString("wait_for_status", @"yellow")
+					.AddQueryString("wait_for_status", @"green")
 				));
 
 				//do search 

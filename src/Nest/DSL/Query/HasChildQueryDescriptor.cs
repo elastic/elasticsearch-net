@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -16,9 +13,6 @@ namespace Nest
 	{
 		[JsonProperty("type")]
 		TypeNameMarker Type { get; set; }
-
-		[JsonProperty("_scope")]
-		string Scope { get; set; }
 
 		[JsonProperty("score_type")]
 		[JsonConverter(typeof (StringEnumConverter))]
@@ -38,7 +32,6 @@ namespace Nest
 
 		bool IQuery.IsConditionless { get { return false; } }
 		public TypeNameMarker Type { get; set; }
-		public string Scope { get; set; }
 		public ChildScoreType? ScoreType { get; set; }
 		public IQueryContainer Query { get; set; }
 	}
@@ -47,7 +40,6 @@ namespace Nest
 	{
 		TypeNameMarker IHasChildQuery.Type { get; set; }
 
-		string IHasChildQuery.Scope { get; set; }
 
 		ChildScoreType? IHasChildQuery.ScoreType { get; set; }
 
@@ -71,11 +63,6 @@ namespace Nest
 		{
 			var q = new QueryDescriptor<T>();
 			((IHasChildQuery)this).Query = querySelector(q);
-			return this;
-		}
-		public HasChildQueryDescriptor<T> Scope(string scope)
-		{
-			((IHasChildQuery)this).Scope = scope;
 			return this;
 		}
 		public HasChildQueryDescriptor<T> Type(string type)

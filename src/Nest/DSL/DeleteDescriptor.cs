@@ -1,27 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
-	[DescriptorFor("Delete")]
-	public partial class DeleteDescriptor<T> : DocumentPathDescriptorBase<DeleteDescriptor<T>, T, DeleteRequestParameters>
-		, IPathInfo<DeleteRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IDeleteRequest : IDocumentOptionalPath<DeleteRequestParameters> { }
+
+	public interface IDeleteRequest<T> : IDeleteRequest where T : class {}
+
+	internal static class DeletePathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<DeleteRequestParameters> pathInfo, IDeleteRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
+		}
+	}
+	
+	public partial class DeleteRequest : DocumentPathBase<DeleteRequestParameters>, IDeleteRequest
+	{
+		public DeleteRequest(IndexNameMarker indexName, TypeNameMarker typeName, string id) : base(indexName, typeName, id) { }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
+		{
+			DeletePathInfo.Update(pathInfo, this);
+		}
+	}
+
+	public partial class DeleteRequest<T> : DocumentPathBase<DeleteRequestParameters, T>, IDeleteRequest
 		where T : class
 	{
-		ElasticsearchPathInfo<DeleteRequestParameters> IPathInfo<DeleteRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		public DeleteRequest(string id) : base(id) { }
+
+		public DeleteRequest(long id) : base(id) { }
+
+		public DeleteRequest(T document) : base(document) { }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
-			return pathInfo;
+			DeletePathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("Delete")]
+	public partial class DeleteDescriptor<T> : DocumentPathDescriptor<DeleteDescriptor<T>, DeleteRequestParameters, T>, IDeleteRequest
+		where T : class
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
+		{
+			DeletePathInfo.Update(pathInfo, this);
 		}
 	}
 }

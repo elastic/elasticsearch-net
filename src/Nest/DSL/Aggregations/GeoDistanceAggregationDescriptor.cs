@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
-using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -24,7 +22,7 @@ namespace Nest
 		GeoUnit? Unit { get; set; }
 
 		[JsonProperty("distance_type")]
-		GeoDistanceType? DistanceType { get; set; }
+		GeoDistance? DistanceType { get; set; }
 		
 		[JsonProperty(PropertyName = "ranges")]
 		IEnumerable<Range<double>> Ranges { get; set; }
@@ -38,7 +36,7 @@ namespace Nest
 
 		public GeoUnit? Unit { get; set; }
 
-		public GeoDistanceType? DistanceType { get; set; }
+		public GeoDistance? DistanceType { get; set; }
 
 		public IEnumerable<Range<double>> Ranges { get; set; }
 	}
@@ -53,7 +51,7 @@ namespace Nest
 	
 		GeoUnit? IGeoDistanceAggregator.Unit { get; set; }
 
-		GeoDistanceType? IGeoDistanceAggregator.DistanceType { get; set; }
+		GeoDistance? IGeoDistanceAggregator.DistanceType { get; set; }
 
 		IEnumerable<Range<double>> IGeoDistanceAggregator.Ranges { get; set; }
 
@@ -88,9 +86,9 @@ namespace Nest
 			return this;
 		}
 		
-		public GeoDistanceAggregationDescriptor<T> DistanceType(GeoDistanceType geoDistanceType)
+		public GeoDistanceAggregationDescriptor<T> DistanceType(GeoDistance geoDistance)
 		{
-			Self.DistanceType = geoDistanceType;
+			Self.DistanceType = geoDistance;
 			return this;
 		}
 

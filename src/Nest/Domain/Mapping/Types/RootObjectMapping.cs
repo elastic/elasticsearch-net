@@ -2,7 +2,6 @@
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -31,40 +30,40 @@ namespace Nest
 		//Special fields (From the documentation i cannot see that these also would apply to the base object mapping class
 
 		[JsonProperty("_id")]
-		public IdFieldMapping IdFieldMapping { get; set; }
+		public IIdFieldMapping IdFieldMappingDescriptor { get; set; }
 
 		[JsonProperty("_source")]
-		public SourceFieldMapping SourceFieldMapping { get; set; }
+		public ISourceFieldMapping SourceFieldMappingDescriptor { get; set; }
 
 		[JsonProperty("_type")]
-		public TypeFieldMapping TypeFieldMapping { get; set; }
+		public ITypeFieldMapping TypeFieldMappingDescriptor { get; set; }
 
 		[JsonProperty("_all")]
-		public AllFieldMapping AllFieldMapping { get; set; }
+		public IAllFieldMapping AllFieldMapping { get; set; }
 
 		[JsonProperty("_analyzer")]
-		public AnalyzerFieldMapping AnalyzerFieldMapping { get; set; }
+		public IAnalyzerFieldMapping AnalyzerFieldMapping { get; set; }
 
 		[JsonProperty("_boost")]
-		public BoostFieldMapping BoostFieldMapping { get; set; }
+		public IBoostFieldMapping BoostFieldMapping { get; set; }
 
 		[JsonProperty("_parent")]
 		public ParentTypeMapping Parent { get; set; }
 
 		[JsonProperty("_routing")]
-		public RoutingFieldMapping RoutingFieldMapping { get; set; }
+		public IRoutingFieldMapping RoutingFieldMapping { get; set; }
 
 		[JsonProperty("_index")]
-		public IndexFieldMapping IndexFieldMapping { get; set; }
+		public IIndexFieldMapping IndexFieldMapping { get; set; }
 
 		[JsonProperty("_size")]
-		public SizeFieldMapping SizeFieldMapping { get; set; }
+		public ISizeFieldMapping SizeFieldMapping { get; set; }
 
 		[JsonProperty("_timestamp")]
-		public TimestampFieldMapping TimestampFieldMapping { get; set; }
+		public ITimestampFieldMapping TimestampFieldMapping { get; set; }
 
 		[JsonProperty("_ttl")]
-		public TtlFieldMapping TtlFieldMapping { get; set; }
+		public ITtlFieldMapping TtlFieldMappingDescriptor { get; set; }
 
 		[JsonProperty("_meta")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]

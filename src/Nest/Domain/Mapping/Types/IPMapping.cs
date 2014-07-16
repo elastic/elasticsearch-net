@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -20,7 +19,7 @@ namespace Nest
 		[JsonProperty("similarity")]
 		public string Similarity { get; set; }
 
-		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
+		[JsonProperty("store")]
 		public bool? Store { get; set; }
 
 		[JsonProperty("index"), JsonConverter(typeof(YesNoBoolConverter))]

@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -28,6 +25,9 @@ namespace Elasticsearch.Net.Integration.Yaml.Mget7
 								type= "foo"
 							}
 						}
+					},
+					settings= new {
+						number_of_shards= "5"
 					}
 				};
 				this.Do(()=> _client.IndicesCreate("test_1", _body));

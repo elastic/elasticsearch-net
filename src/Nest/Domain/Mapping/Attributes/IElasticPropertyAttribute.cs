@@ -31,7 +31,7 @@
         /// <summary>
         /// Defaults to float so be sure to set this correctly!
         /// </summary>
-        NumericType NumericType { get; set; }
+        NumberType NumericType { get; set; }
         int PrecisionStep { get; set; }
 
         /// <summary>

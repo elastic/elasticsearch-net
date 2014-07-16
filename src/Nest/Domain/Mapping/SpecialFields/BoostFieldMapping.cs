@@ -1,38 +1,49 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Nest.Resolvers;
 using Newtonsoft.Json;
-using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class BoostFieldMapping
+	public interface IBoostFieldMapping : ISpecialField
 	{
 		[JsonProperty("name")]
-		public PropertyNameMarker Name { get; internal set; }
+		PropertyNameMarker Name { get; set; }
 
 		[JsonProperty("null_value")]
-		public double NullValue { get; internal set; }
+		double NullValue { get; set; }
+	}
+
+	public class BoostFieldMapping : IBoostFieldMapping
+	{
+		public PropertyNameMarker Name { get; set; }
+
+		public double NullValue { get; set; }
 	}
 
 
-	public class BoostFieldMapping<T> : BoostFieldMapping
+	public class BoostFieldMappingDescriptor<T> : IBoostFieldMapping
 	{
-		public BoostFieldMapping<T> SetNullValue(double boost)
+		private IBoostFieldMapping Self { get { return this; } }
+
+		PropertyNameMarker IBoostFieldMapping.Name { get; set; }
+		
+		double IBoostFieldMapping.NullValue { get; set; }
+
+		public BoostFieldMappingDescriptor<T> NullValue(double boost)
 		{
-			this.NullValue = boost;
+			Self.NullValue = boost;
 			return this;
 		}
-		public BoostFieldMapping<T> SetName(string path)
+		public BoostFieldMappingDescriptor<T> Name(string path)
 		{
-			this.Name = path;
+			Self.Name = path;
 			return this;
 		}
-		public BoostFieldMapping<T> SetName(Expression<Func<T, object>> objectPath)
+		public BoostFieldMappingDescriptor<T> Name(Expression<Func<T, object>> objectPath)
 		{
-			objectPath.ThrowIfNull("objectPath");
-			this.Name = objectPath;
+			Self.Name = objectPath;
 			return this;
 		}
+
 	}
 }

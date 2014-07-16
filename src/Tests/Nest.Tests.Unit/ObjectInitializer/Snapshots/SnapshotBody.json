@@ -1,0 +1,5 @@
+{
+  "ignore_unavailable": true,
+  "include_global_state": true,
+  "partial": true
+}

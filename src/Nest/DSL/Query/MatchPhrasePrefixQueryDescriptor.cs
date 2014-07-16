@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System.Linq.Expressions;
 
 namespace Nest
 {
@@ -15,6 +11,6 @@ namespace Nest
 	/// <typeparam name="T">Type of document</typeparam>
 	public class MatchPhrasePrefixQueryDescriptor<T> : MatchQueryDescriptor<T> where T : class
 	{
-		protected override string _type { get { return "phrase_prefix"; } }
+		protected override string MatchQueryType { get { return "phrase_prefix"; } }
 	}
 }

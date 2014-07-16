@@ -43,11 +43,11 @@ namespace Nest
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 			internal static ExplainRequestParameters _SourceExclude<T>(
 				this ExplainRequestParameters qs,
-				IEnumerable<Expression<Func<T, object>>>  _source_exclude)
+				IEnumerable<Expression<Func<T, object>>>  source_exclude)
 			where T : class
 		{
-			var __source_exclude = _source_exclude.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("_source_exclude", __source_exclude);
+			var _source_exclude = source_exclude.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("source_exclude", _source_exclude);
 			return qs;
 		}
 		
@@ -55,11 +55,11 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 			internal static ExplainRequestParameters _SourceInclude<T>(
 				this ExplainRequestParameters qs,
-				IEnumerable<Expression<Func<T, object>>>  _source_include)
+				IEnumerable<Expression<Func<T, object>>>  source_include)
 			where T : class
 		{
-			var __source_include = _source_include.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("_source_include", __source_include);
+			var _source_include = source_include.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("source_include", _source_include);
 			return qs;
 		}
 		
@@ -79,11 +79,11 @@ namespace Nest
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 			internal static GetRequestParameters _SourceExclude<T>(
 				this GetRequestParameters qs,
-				IEnumerable<Expression<Func<T, object>>>  _source_exclude)
+				IEnumerable<Expression<Func<T, object>>>  source_exclude)
 			where T : class
 		{
-			var __source_exclude = _source_exclude.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("_source_exclude", __source_exclude);
+			var _source_exclude = source_exclude.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("source_exclude", _source_exclude);
 			return qs;
 		}
 		
@@ -91,11 +91,11 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 			internal static GetRequestParameters _SourceInclude<T>(
 				this GetRequestParameters qs,
-				IEnumerable<Expression<Func<T, object>>>  _source_include)
+				IEnumerable<Expression<Func<T, object>>>  source_include)
 			where T : class
 		{
-			var __source_include = _source_include.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("_source_include", __source_include);
+			var _source_include = source_include.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("source_include", _source_include);
 			return qs;
 		}
 		
@@ -103,11 +103,11 @@ namespace Nest
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 			internal static SourceRequestParameters _SourceExclude<T>(
 				this SourceRequestParameters qs,
-				IEnumerable<Expression<Func<T, object>>>  _source_exclude)
+				IEnumerable<Expression<Func<T, object>>>  source_exclude)
 			where T : class
 		{
-			var __source_exclude = _source_exclude.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("_source_exclude", __source_exclude);
+			var _source_exclude = source_exclude.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("source_exclude", _source_exclude);
 			return qs;
 		}
 		
@@ -115,11 +115,11 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 			internal static SourceRequestParameters _SourceInclude<T>(
 				this SourceRequestParameters qs,
-				IEnumerable<Expression<Func<T, object>>>  _source_include)
+				IEnumerable<Expression<Func<T, object>>>  source_include)
 			where T : class
 		{
-			var __source_include = _source_include.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("_source_include", __source_include);
+			var _source_include = source_include.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("source_include", _source_include);
 			return qs;
 		}
 		
@@ -200,11 +200,11 @@ namespace Nest
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 			internal static MultiGetRequestParameters _SourceExclude<T>(
 				this MultiGetRequestParameters qs,
-				IEnumerable<Expression<Func<T, object>>>  _source_exclude)
+				IEnumerable<Expression<Func<T, object>>>  source_exclude)
 			where T : class
 		{
-			var __source_exclude = _source_exclude.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("_source_exclude", __source_exclude);
+			var _source_exclude = source_exclude.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("source_exclude", _source_exclude);
 			return qs;
 		}
 		
@@ -212,11 +212,11 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 			internal static MultiGetRequestParameters _SourceInclude<T>(
 				this MultiGetRequestParameters qs,
-				IEnumerable<Expression<Func<T, object>>>  _source_include)
+				IEnumerable<Expression<Func<T, object>>>  source_include)
 			where T : class
 		{
-			var __source_include = _source_include.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("_source_include", __source_include);
+			var _source_include = source_include.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("source_include", _source_include);
 			return qs;
 		}
 		
@@ -297,18 +297,6 @@ namespace Nest
 		///<summary>A comma-separated list of fields to return.</summary>
 			internal static TermvectorRequestParameters _Fields<T>(
 				this TermvectorRequestParameters qs,
-				IEnumerable<Expression<Func<T, object>>>  fields)
-			where T : class
-		{
-			var _fields = fields.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("fields", _fields);
-			return qs;
-		}
-		
-		
-		///<summary>A comma-separated list of fields to return in the response</summary>
-			internal static UpdateRequestParameters _Fields<T>(
-				this UpdateRequestParameters qs,
 				IEnumerable<Expression<Func<T, object>>>  fields)
 			where T : class
 		{

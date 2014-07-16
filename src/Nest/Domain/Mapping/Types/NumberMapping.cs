@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
 using Newtonsoft.Json.Converters;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -25,7 +23,7 @@ namespace Nest
 		[JsonProperty("index_name")]
 		public string IndexName { get; set; }
 
-		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
+		[JsonProperty("store")]
 		public bool? Store { get; set; }
 
 		[JsonProperty("index"), JsonConverter(typeof(StringEnumConverter))]
@@ -48,6 +46,9 @@ namespace Nest
 
 		[JsonProperty("ignore_malformed")]
 		public bool? IgnoreMalformed { get; set; }
+
+		[JsonProperty("coerce")]
+		public bool? Coerce { get; set; }
 
 	}
 }

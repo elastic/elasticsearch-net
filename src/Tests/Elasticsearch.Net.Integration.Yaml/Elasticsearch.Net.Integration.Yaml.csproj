@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -28,6 +28,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FluentAssertions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
@@ -75,6 +76,7 @@
     <Compile Include="cat.aliases\10_basic.yaml.cs" />
     <Compile Include="cat.allocation\10_basic.yaml.cs" />
     <Compile Include="cat.count\10_basic.yaml.cs" />
+    <Compile Include="cat.fielddata\10_basic.yaml.cs" />
     <Compile Include="cat.recovery\10_basic.yaml.cs" />
     <Compile Include="cat.shards\10_basic.yaml.cs" />
     <Compile Include="cat.thread_pool\10_basic.yaml.cs" />
@@ -125,6 +127,7 @@
     <Compile Include="get\60_realtime_refresh.yaml.cs" />
     <Compile Include="get\70_source_filtering.yaml.cs" />
     <Compile Include="get\80_missing.yaml.cs" />
+    <Compile Include="get\90_versions.yaml.cs" />
     <Compile Include="get_source\10_basic.yaml.cs" />
     <Compile Include="get_source\15_default_values.yaml.cs" />
     <Compile Include="get_source\30_parent.yaml.cs" />
@@ -221,10 +224,13 @@
     <Compile Include="ping\10_ping.yaml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="scroll\10_basic.yaml.cs" />
+    <Compile Include="scroll\11_clear.yaml.cs" />
     <Compile Include="search\10_source_filtering.yaml.cs" />
     <Compile Include="search\20_default_values.yaml.cs" />
+    <Compile Include="search\issue4895.yaml.cs" />
     <Compile Include="snapshot.get_repository\10_basic.yaml.cs" />
     <Compile Include="suggest\10_basic.yaml.cs" />
+    <Compile Include="suggest\20_context.yaml.cs" />
     <Compile Include="termvector\10_basic.yaml.cs" />
     <Compile Include="update\10_doc.yaml.cs" />
     <Compile Include="update\15_script.yaml.cs" />
@@ -233,6 +239,7 @@
     <Compile Include="update\25_script_upsert.yaml.cs" />
     <Compile Include="update\30_internal_version.yaml.cs" />
     <Compile Include="update\35_external_version.yaml.cs" />
+    <Compile Include="update\35_other_versions.yaml.cs" />
     <Compile Include="update\40_routing.yaml.cs" />
     <Compile Include="update\50_parent.yaml.cs" />
     <Compile Include="update\55_parent_with_routing.yaml.cs" />

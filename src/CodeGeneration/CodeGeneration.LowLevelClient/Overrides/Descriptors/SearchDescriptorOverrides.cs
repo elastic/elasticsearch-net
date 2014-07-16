@@ -5,19 +5,6 @@ using System.Text;
 
 namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 {
-	/// <summary>
-	/// Tweaks the generated descriptors
-	/// </summary>
-	public interface IDescriptorOverrides
-	{
-		/// <summary>
-		/// Sometimes params can be defined on the body as well as on the querystring
-		/// We favor specifying params on the body so here we can specify params we don't want on the querystring.
-		/// </summary>
-		IEnumerable<string> SkipQueryStringParams { get; }
-	}
-
-
 	public class SearchDescriptorOverrides : IDescriptorOverrides
 	{
 		public IEnumerable<string> SkipQueryStringParams
@@ -33,6 +20,8 @@ namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 					"version",
 					"q", //we dont support GET searches
 					"fields",
+					"indices_boost",
+					"source",
 					"sort",
 					"_source",
 					"_source_include",
@@ -40,5 +29,7 @@ namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 				};
 			}
 		}
+
+		public IDictionary<string, string> RenameQueryStringParams { get { return null; } }
 	}
 }

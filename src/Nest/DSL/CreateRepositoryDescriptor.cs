@@ -1,17 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
-	[DescriptorFor("SnapshotCreateRepository")]
-	public partial class CreateRepositoryDescriptor :
-		RepositoryPathDescriptor<CreateRepositoryDescriptor, CreateRepositoryRequestParameters>
-		, IPathInfo<CreateRepositoryRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface ICreateRepositoryRequest : IRepositoryPath<CreateRepositoryRequestParameters>
 	{
-		internal IRepository _Repository { get; private set; } 
+		IRepository Repository { get; set; }
+	}
+
+	internal static class CreateRepositoryPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<CreateRepositoryRequestParameters> pathInfo, ICreateRepositoryRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
+		}
+	}
+	
+	public partial class CreateRepositoryRequest : RepositoryPathBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
+	{
+		public CreateRepositoryRequest(string repositoryName) : base(repositoryName) { }
+
+		public IRepository Repository { get; set; }
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateRepositoryRequestParameters> pathInfo)
+		{
+			CreateRepositoryPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("SnapshotCreateRepository")]
+	public partial class CreateRepositoryDescriptor : RepositoryPathDescriptor<CreateRepositoryDescriptor, CreateRepositoryRequestParameters>, ICreateRepositoryRequest
+	{
+		private ICreateRepositoryRequest Self { get { return this; } }
+
+		IRepository ICreateRepositoryRequest.Repository { get; set; } 
 
 		/// <summary>
 		///	The shared file system repository ("type": "fs") is using shared file system to store snapshot. 
@@ -25,7 +51,7 @@ namespace Nest
 			location.ThrowIfNullOrEmpty("location");
 			var repos = new FileSystemRepositoryDescriptor().Location(location);
 			if (options != null) options(repos);
-			this._Repository = repos;
+			Self.Repository = repos;
 			return this;
 		}
 		
@@ -40,7 +66,7 @@ namespace Nest
 			location.ThrowIfNullOrEmpty("location");
 			var repos = new ReadOnlyUrlRepositoryDescriptor().Location(location);
 			if (options != null) options(repos);
-			this._Repository = repos;
+			Self.Repository = repos;
 			return this;
 		}
 	
@@ -51,7 +77,7 @@ namespace Nest
 		{
 			var repos = new AzureRepositoryDescriptor();
 			if (options != null) options(repos);
-			this._Repository = repos;
+			Self.Repository = repos;
 			return this;
 		}
 
@@ -65,7 +91,7 @@ namespace Nest
 			path.ThrowIfNullOrEmpty(path);
 			var repos = new HdfsRepositoryDescriptor().Path(path);
 			if (options != null) options(repos);
-			this._Repository = repos;
+			Self.Repository = repos;
 			return this;
 		}
 		
@@ -74,16 +100,13 @@ namespace Nest
 		/// </summary>
 		public CreateRepositoryDescriptor Custom(IRepository repository)
 		{
-			this._Repository = repository;
+			Self.Repository = repository;
 			return this;
 		}
 
-		ElasticsearchPathInfo<CreateRepositoryRequestParameters> IPathInfo<CreateRepositoryRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateRepositoryRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
-			
-			return pathInfo;
+			CreateRepositoryPathInfo.Update(pathInfo, this);
 		}
 
 	}

@@ -1,27 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesSegments")]
-	public partial class SegmentsDescriptor : IndicesOptionalPathDescriptor<SegmentsDescriptor, SegmentsRequestParameters>
-		, IPathInfo<SegmentsRequestParameters>
+	public interface ISegmentsRequest : IIndicesOptionalPath<SegmentsRequestParameters> { }
+
+	internal static class SegmentsPathInfo
 	{
-		ElasticsearchPathInfo<SegmentsRequestParameters> IPathInfo<SegmentsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<SegmentsRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
-			
-			return pathInfo;
+		}
+	}
+
+	public partial class SegmentsRequest : IndicesOptionalPathBase<SegmentsRequestParameters>, ISegmentsRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SegmentsRequestParameters> pathInfo)
+		{
+			SegmentsPathInfo.Update(settings, pathInfo);
+		}
+	}
+	
+	[DescriptorFor("IndicesSegments")]
+	public partial class SegmentsDescriptor 
+		: IndicesOptionalPathDescriptor<SegmentsDescriptor, SegmentsRequestParameters>, ISegmentsRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SegmentsRequestParameters> pathInfo)
+		{
+			SegmentsPathInfo.Update(settings, pathInfo);
 		}
 	}
 }

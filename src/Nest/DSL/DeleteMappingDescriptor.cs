@@ -1,27 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesDeleteMapping")]
-	public partial class DeleteMappingDescriptor : 
-		IndexTypePathDescriptor<DeleteMappingDescriptor, DeleteMappingRequestParameters>
-		, IPathInfo<DeleteMappingRequestParameters>
-	{
-		ElasticsearchPathInfo<DeleteMappingRequestParameters> IPathInfo<DeleteMappingRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
-		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IDeleteMappingRequest : IIndexTypePath<DeleteMappingRequestParameters> { }
+	public interface IDeleteMappingRequest<T> : IDeleteMappingRequest where T : class { }
 
-			return pathInfo;
+	internal static class DeleteMappingPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<DeleteMappingRequestParameters> pathInfo, IDeleteMappingRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
+		}
+	}
+	
+	public partial class DeleteMappingRequest : IndexTypePathBase<DeleteMappingRequestParameters>, IDeleteMappingRequest
+	{
+		public DeleteMappingRequest(IndexNameMarker index, TypeNameMarker typeNameMarker) : base(index, typeNameMarker)
+		{
+		}
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteMappingRequestParameters> pathInfo)
+		{
+			DeleteMappingPathInfo.Update(pathInfo, this);
+		}
+	}
+	public partial class DeleteMappingRequest<T> : IndexTypePathBase<DeleteMappingRequestParameters, T>, IDeleteMappingRequest
+		where T : class
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteMappingRequestParameters> pathInfo)
+		{
+			DeleteMappingPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("IndicesDeleteMapping")]
+	public partial class DeleteMappingDescriptor<T> : IndexTypePathDescriptor<DeleteMappingDescriptor<T>, DeleteMappingRequestParameters, T>, IDeleteMappingRequest
+		where T : class
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteMappingRequestParameters> pathInfo)
+		{
+			DeleteMappingPathInfo.Update(pathInfo, this);
 		}
 	}
 }

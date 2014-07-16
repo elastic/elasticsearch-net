@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
 using System.Globalization;
-using Nest.Resolvers;
 using Nest.Resolvers.Converters;
-using Elasticsearch.Net;
 
-namespace Nest.DSL.Descriptors
+namespace Nest
 {
 	[JsonConverter(typeof(CustomJsonConverter))]
 	public interface IGeoDistanceSort : ISort, ICustomJson
@@ -111,12 +107,10 @@ namespace Nest.DSL.Descriptors
 			Self.Order = SortOrder.Descending;
 			return this;
 		}
-		/// <summary>
-		/// Pass true to sort ascending false to sort descending
-		/// </summary>
-		public SortGeoDistanceDescriptor<T> ToggleSort(bool ascending)
+
+		public SortGeoDistanceDescriptor<T> Order(SortOrder order)
 		{
-			Self.Order = ascending ? SortOrder.Ascending : SortOrder.Descending;
+			Self.Order = order;
 			return this;
 		}
 

@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Nest.Domain.Settings;
-using Nest.Resolvers;
-using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
@@ -33,7 +30,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void GetIndexSettingsSimple()
 		{
-			var r = this._client.GetIndexSettings(i=>i.Index<ElasticsearchProject>());
+			var r = this.Client.GetIndexSettings(i=>i.Index<ElasticsearchProject>());
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.IndexSettings);
 			Assert.GreaterOrEqual(r.IndexSettings.NumberOfReplicas, 0);
@@ -42,6 +39,7 @@ namespace Nest.Tests.Integration.Indices
 
 		[Test]
 		public void GetIndexSettingsComplex()
+
 		{
 			var index = Guid.NewGuid().ToString();
 			var settings = new IndexSettings();
@@ -61,37 +59,37 @@ namespace Nest.Tests.Integration.Indices
 			settings.Analysis.Tokenizers.Add("token1", new KeywordTokenizer());
 			settings.Analysis.Tokenizers.Add("token2", new PathHierarchyTokenizer());
 
-			settings.Similarity = new SimilaritySettings();
-			var dfr = new CustomSimilaritySettings("test1", "DFR");
-			dfr.SimilarityParameters.Add("basic_model", "g");
-			dfr.SimilarityParameters.Add("after_effect", "l");
-			dfr.SimilarityParameters.Add("normalization", "h2");
-			dfr.SimilarityParameters.Add("normalization.h2.c", 3);
-			settings.Similarity.CustomSimilarities.Add(dfr);
+			settings.Similarity.CustomSimilarities.Add("test1", new DFRSimilarity
+				{
+					BasicModel = "be",
+					AfterEffect = "l",
+					Normalization = "h2",
+				});
 
-			var ib = new CustomSimilaritySettings("test2", "IB");
-			ib.SimilarityParameters.Add("distribution", "spl");
-			ib.SimilarityParameters.Add("lambda", "ttf");
-			ib.SimilarityParameters.Add("normalization", "h1");
-			settings.Similarity.CustomSimilarities.Add(ib);
+			settings.Similarity.CustomSimilarities.Add("test2", new IBSimilarity
+				{
+					Distribution = "spl",
+					Lambda = "ttf",
+					Normalization = "h1"
+				});
 
-			var typeMappingResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
+			var typeMappingResult = this.Client.GetMapping<ElasticsearchProject>(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
 			var typeMapping = typeMappingResult.Mapping;
 			typeMapping.Name = index;
 			settings.Mappings.Add(typeMapping);
 
 			settings.Settings.Add("merge.policy.merge_factor", "10");
 
-			var createResponse = this._client.CreateIndex(index, i=>i.InitializeUsing(settings));
+			var createResponse = this.Client.CreateIndex(index, i=>i.InitializeUsing(settings));
 
-			var r = this._client.GetIndexSettings(i=>i.Index(index));
+			var r = this.Client.GetIndexSettings(i=>i.Index(index));
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.IndexSettings.Settings.Count);
 			Assert.AreEqual(r.IndexSettings.NumberOfReplicas, 4);
 			Assert.AreEqual(r.IndexSettings.NumberOfShards, 8);
 			//Assert.Greater(r.Setttings, 0);
-			Assert.NotNull(r.IndexSettings._.merge.policy.merge_factor);
-			Assert.AreEqual(10, r.IndexSettings._.merge.policy.merge_factor);
+			Assert.NotNull(r.IndexSettings.AsExpando.merge.policy.merge_factor);
+			Assert.AreEqual(10, r.IndexSettings.AsExpando.merge.policy.merge_factor);
 			
 			Assert.AreEqual(3, r.IndexSettings.Analysis.Analyzers.Count);
 			{ // assert analyzers
@@ -163,30 +161,27 @@ namespace Nest.Tests.Integration.Indices
 			Assert.NotNull(r.IndexSettings.Similarity.CustomSimilarities);
 			Assert.AreEqual(2, r.IndexSettings.Similarity.CustomSimilarities.Count);
 			{ // assert similarity
-				var similarity1 = r.IndexSettings.Similarity.CustomSimilarities.FirstOrDefault(x => x.Name.Equals("test1", StringComparison.InvariantCultureIgnoreCase));
+				var similarity1 = r.IndexSettings.Similarity.CustomSimilarities.FirstOrDefault(x => x.Key.Equals("test1", StringComparison.InvariantCultureIgnoreCase)).Value as DFRSimilarity;
 				Assert.NotNull(similarity1);
 				Assert.AreEqual("DFR", similarity1.Type);
-				Assert.AreEqual(4, similarity1.SimilarityParameters.Count);
-				Assert.True(similarity1.SimilarityParameters.Any(x => x.Key.Equals("basic_model") && x.Value.ToString().Equals("g")));
-				Assert.True(similarity1.SimilarityParameters.Any(x => x.Key.Equals("after_effect") && x.Value.ToString().Equals("l")));
-				Assert.True(similarity1.SimilarityParameters.Any(x => x.Key.Equals("normalization") && x.Value.ToString().Equals("h2")));
-				Assert.True(similarity1.SimilarityParameters.Any(x => x.Key.Equals("normalization.h2")));
+				Assert.AreEqual("be", similarity1.BasicModel);
+				Assert.AreEqual("l", similarity1.AfterEffect);
+				Assert.AreEqual("h2", similarity1.Normalization);
 
-				var similarity2 = r.IndexSettings.Similarity.CustomSimilarities.FirstOrDefault(x => x.Name.Equals("test2", StringComparison.InvariantCultureIgnoreCase));
+				var similarity2 = r.IndexSettings.Similarity.CustomSimilarities.FirstOrDefault(x => x.Key.Equals("test2", StringComparison.InvariantCultureIgnoreCase)).Value as IBSimilarity;
 				Assert.NotNull(similarity2);
 				Assert.AreEqual("IB", similarity2.Type);
-				Assert.AreEqual(3, similarity2.SimilarityParameters.Count);
-				Assert.True(similarity2.SimilarityParameters.Any(x => x.Key.Equals("distribution") && x.Value.ToString().Equals("spl")));
-				Assert.True(similarity2.SimilarityParameters.Any(x => x.Key.Equals("lambda") && x.Value.ToString().Equals("ttf")));
-				Assert.True(similarity2.SimilarityParameters.Any(x => x.Key.Equals("normalization") && x.Value.ToString().Equals("h1")));
+				Assert.AreEqual("spl", similarity2.Distribution);
+				Assert.AreEqual("ttf", similarity2.Lambda);
+				Assert.AreEqual("h1", similarity2.Normalization);
 			}
-			this._client.DeleteIndex(i=>i.Index(index));
+			this.Client.DeleteIndex(i=>i.Index(index));
 		}
 		[Test]
 		public void UpdateSettingsSimple()
 		{
 			var index = Guid.NewGuid().ToString();
-			var client = this._client;
+			var client = this.Client;
 			var settings = new IndexSettings();
 			settings.NumberOfReplicas = 1;
 			settings.NumberOfShards = 5;
@@ -196,17 +191,17 @@ namespace Nest.Tests.Integration.Indices
 
 			settings.Settings["refresh_interval"] = "-1";
 
-			var r = this._client.UpdateSettings(us=>us
+			var r = this.Client.UpdateSettings(us=>us
 				.Index(index)
 				.RefreshInterval("-1")
 			);
 
 			Assert.True(r.IsValid);
 			Assert.True(r.Acknowledged);
-			var getResponse = this._client.GetIndexSettings(i=>i.Index(index));
+			var getResponse = this.Client.GetIndexSettings(i=>i.Index(index));
 			Assert.AreEqual(getResponse.IndexSettings.Settings["refresh_interval"], "-1");
 
-			this._client.DeleteIndex(i=>i.Index(index));
+			this.Client.DeleteIndex(i=>i.Index(index));
 		}
 
 
@@ -215,8 +210,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void CreateIndex()
 		{
-			var client = this._client;
-			var typeMappingResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
+			var typeMappingResult = this.Client.GetMapping<ElasticsearchProject>(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
 			var typeMapping = typeMappingResult.Mapping;
 			typeMapping.Name = "mytype";
 			var settings = new IndexSettings();
@@ -226,14 +220,14 @@ namespace Nest.Tests.Integration.Indices
 			settings.Analysis.Analyzers.Add("snowball", new SnowballAnalyzer { Language = "English" });
 
 			var indexName = Guid.NewGuid().ToString();
-			var response = client.CreateIndex(indexName, i=>i.InitializeUsing(settings));
+			var response = this.Client.CreateIndex(indexName, i=>i.InitializeUsing(settings));
 
 			Assert.IsTrue(response.IsValid);
 			Assert.IsTrue(response.Acknowledged);
 
-			var mappingResult = this._client.GetMapping(gm=>gm.Index(indexName).Type("mytype"));
+			var mappingResult = this.Client.GetMapping<ElasticsearchProject>(gm=>gm.Index(indexName).Type("mytype"));
 			mappingResult.Mapping.Should().NotBeNull();
-			var deleteResponse = client.DeleteIndex(i=>i.Index(indexName));
+			var deleteResponse = this.Client.DeleteIndex(i=>i.Index(indexName));
 
 			Assert.IsTrue(deleteResponse.IsValid);
 			Assert.IsTrue(deleteResponse.Acknowledged);
@@ -244,10 +238,10 @@ namespace Nest.Tests.Integration.Indices
 		public void CreateIndexUsingDescriptor()
 		{
 			var index = ElasticsearchConfiguration.DefaultIndex + "_clone";
-			if (this._client.IndexExists(i=>i.Index(index)).Exists)
-				_client.DeleteIndex(d=>d.Index(index));
+			if (this.Client.IndexExists(i=>i.Index(index)).Exists)
+				this.Client.DeleteIndex(d=>d.Index(index));
 
-			var result = this._client.CreateIndex(index, c => c
+			var result = this.Client.CreateIndex(index, c => c
 				.NumberOfReplicas(1)
 				.NumberOfShards(1)
 				.Settings(s => s
@@ -296,19 +290,19 @@ namespace Nest.Tests.Integration.Indices
 		public void PutMapping()
 		{
 			var fieldName = Guid.NewGuid().ToString();
-			var mapping = this._client.GetMapping<ElasticsearchProject>().Mapping;
+			var mapping = this.Client.GetMapping<ElasticsearchProject>().Mapping;
 			var property = new StringMapping
 			{
-				Index = FieldIndexOption.not_analyzed
+				Index = FieldIndexOption.NotAnalyzed
 			};
 			mapping.Properties.Add(fieldName, property);
 
-			var response = this._client.Map<ElasticsearchProject>(m=>m.InitializeUsing(mapping));
+			var response = this.Client.Map<ElasticsearchProject>(m=>m.InitializeUsing(mapping));
 
 			Assert.IsTrue(response.IsValid, response.ConnectionStatus.ToString());
 			Assert.IsTrue(response.Acknowledged, response.ConnectionStatus.ToString());
 
-			mapping = this._client.GetMapping(gm => gm.Index<ElasticsearchProject>().Type<ElasticsearchProject>()).Mapping;
+			mapping = this.Client.GetMapping<ElasticsearchProject>(gm => gm.Index<ElasticsearchProject>().Type<ElasticsearchProject>()).Mapping;
 			Assert.IsNotNull(mapping.Properties.ContainsKey(fieldName));
 		}
 
@@ -316,7 +310,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void CreateIndexMultiFieldMap()
 		{
-			var client = this._client;
+			var client = this.Client;
 
 			var typeMapping = new RootObjectMapping();
 			typeMapping.Name = Guid.NewGuid().ToString("n");
@@ -324,12 +318,12 @@ namespace Nest.Tests.Integration.Indices
 
 			var primaryField = new StringMapping()
 			{
-				Index = FieldIndexOption.not_analyzed
+				Index = FieldIndexOption.NotAnalyzed
 			};
 
 			var analyzedField = new StringMapping()
 			{
-				Index = FieldIndexOption.analyzed
+				Index = FieldIndexOption.Analyzed
 			};
 
 			property.Fields.Add("name", primaryField);
@@ -349,9 +343,9 @@ namespace Nest.Tests.Integration.Indices
 			Assert.IsTrue(response.IsValid);
 			Assert.IsTrue(response.Acknowledged);
 
-			var inferrer = new ElasticInferrer(this._settings);
+			var inferrer = new ElasticInferrer(this.Settings);
 			var typeName = inferrer.PropertyName(typeMapping.Name);
-			Assert.IsNotNull(this._client.GetMapping(gm=>gm.Index(indexName).Type(typeName)));
+			Assert.IsNotNull(this.Client.GetMapping<ElasticsearchProject>(gm=>gm.Index(indexName).Type(typeName)));
 
 			var deleteResponse = client.DeleteIndex(i=>i.Index(indexName));
 

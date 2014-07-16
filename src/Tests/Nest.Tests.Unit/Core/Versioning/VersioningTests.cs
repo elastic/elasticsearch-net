@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
 using NUnit.Framework;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-using Nest;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
 using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Unit.Core.Versioning
@@ -61,7 +54,7 @@ namespace Nest.Tests.Unit.Core.Versioning
         public void IndexOpTypeCreate()
         {
             var o = new ElasticsearchProject { Id = 1, Name = "Test" };
-            var result = this._client.Index(o, i => i.OpType(OpTypeOptions.Create));
+            var result = this._client.Index(o, i => i.OpType(OpType.Create));
             var status = result.ConnectionStatus;
             StringAssert.Contains("op_type=create", status.RequestUrl);
         }

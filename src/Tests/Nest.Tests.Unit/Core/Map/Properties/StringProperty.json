@@ -1,20 +1,27 @@
-  {
+{
   "elasticsearchprojects": {
     "properties": {
       "name": {
         "type": "string",
+        "similarity": "mysimilarity",
         "index_name": "my_crazy_name_i_want_in_lucene",
-        "store": "yes",
+        "store": true,
         "index": "analyzed",
         "term_vector": "with_positions_offsets",
         "boost": 1.1,
         "null_value": "my_special_null_value",
+        "norms": {
+          "enabled": true,
+          "loading": "eager"
+        },
         "omit_norms": true,
         "index_options": "positions",
         "index_analyzer": "standard",
+        "ignore_above": 20,
         "search_analyzer": "standard",
         "include_in_all": true,
-        "position_offset_gap": 1
+        "position_offset_gap": 1,
+        "copy_to": [ "content", "country" ]
       }
     }
   }

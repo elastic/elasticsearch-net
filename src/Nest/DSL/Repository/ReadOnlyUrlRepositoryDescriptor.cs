@@ -2,14 +2,22 @@
 
 namespace Nest
 {
+	public class ReadOnlyUrlRepository : IRepository
+	{
+		string IRepository.Type { get { return "url"; } }
+		public IDictionary<string, object> Settings { get; set; }
+	}
+
 	public class ReadOnlyUrlRepositoryDescriptor : IRepository
 	{
-		public string Type { get { return "url"; } }
-		public IDictionary<string, object> Settings { get; private set; }
+		string IRepository.Type { get { return "url"; } }
+		IDictionary<string, object> IRepository.Settings { get; set; }
+
+		private IRepository Self { get { return this; } }
 
 		public ReadOnlyUrlRepositoryDescriptor()
 		{
-			this.Settings = new Dictionary<string, object>();
+			Self.Settings = new Dictionary<string, object>();
 		}
 		/// <summary>
 		/// Location of the snapshots. Mandatory.
@@ -17,7 +25,7 @@ namespace Nest
 		/// <param name="location"></param>
 		public ReadOnlyUrlRepositoryDescriptor Location(string location)
 		{
-			this.Settings["location"] = location;
+			Self.Settings["location"] = location;
 			return this;
 		}
 		
@@ -27,7 +35,7 @@ namespace Nest
 		/// <param name="concurrentStreams"></param>
 		public ReadOnlyUrlRepositoryDescriptor ConcurrentStreams(int concurrentStreams)
 		{
-			this.Settings["concurrent_streams"] = concurrentStreams;
+			Self.Settings["concurrent_streams"] = concurrentStreams;
 			return this;
 		}
 	

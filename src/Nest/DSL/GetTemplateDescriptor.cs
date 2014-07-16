@@ -1,28 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesGetTemplate")]
-	public partial class GetTemplateDescriptor :
-		NamePathDescriptor<GetTemplateDescriptor, GetTemplateRequestParameters>
-		, IPathInfo<GetTemplateRequestParameters>
-	{
-		ElasticsearchPathInfo<GetTemplateRequestParameters> IPathInfo<GetTemplateRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
-		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IGetTemplateRequest : INamePath<GetTemplateRequestParameters> { }
 
-			return pathInfo;
+	internal static class GetTemplatePathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo, IGetTemplateRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+		}
+	}
+	
+	public partial class GetTemplateRequest : NamePathBase<GetTemplateRequestParameters>, IGetTemplateRequest
+	{
+		public GetTemplateRequest(string name) : base(name)
+		{
+		}
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo)
+		{
+			GetTemplatePathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("IndicesGetTemplate")]
+	public partial class GetTemplateDescriptor : NamePathDescriptor<GetTemplateDescriptor, GetTemplateRequestParameters>, IGetTemplateRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo)
+		{
+			GetTemplatePathInfo.Update(pathInfo, this);
 		}
 		
 	}

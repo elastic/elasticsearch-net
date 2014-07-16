@@ -1,24 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
-	[DescriptorFor("Mlt")]
-	public partial class MoreLikeThisDescriptor<T> 
-		: DocumentPathDescriptorBase<MoreLikeThisDescriptor<T>, T, MoreLikeThisRequestParameters>
-		, IPathInfo<MoreLikeThisRequestParameters> 
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IMoreLikeThisRequest : IDocumentOptionalPath<MoreLikeThisRequestParameters>
+	{
+		ISearchRequest Search { get; set; }
+	}
+
+	public interface IMoreLikeThisRequest<T> : IMoreLikeThisRequest where T : class { }
+
+	internal static class MoreLikeThisPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<MoreLikeThisRequestParameters> pathInfo, IMoreLikeThisRequest request)
+		{
+			pathInfo.HttpMethod = request.Search == null ? PathInfoHttpMethod.GET : PathInfoHttpMethod.POST;
+		}
+	}
+
+	public partial class MoreLikeThisRequest : DocumentPathBase<MoreLikeThisRequestParameters>, IMoreLikeThisRequest
+	{
+		public MoreLikeThisRequest(IndexNameMarker indexName, TypeNameMarker typeName, string id) : base(indexName, typeName, id) { }
+
+		public ISearchRequest Search { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MoreLikeThisRequestParameters> pathInfo)
+		{
+			MoreLikeThisPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	public partial class MoreLikeThisRequest<T> : DocumentPathBase<MoreLikeThisRequestParameters, T>, IMoreLikeThisRequest<T>
 		where T : class
 	{
-		internal ISearchRequest _Search { get; set; }
-		
+		public MoreLikeThisRequest(string id) : base(id) { }
+
+		public MoreLikeThisRequest(long id) : base(id) { }
+
+		public MoreLikeThisRequest(T document) : base(document) { }
+
+		public ISearchRequest Search { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MoreLikeThisRequestParameters> pathInfo)
+		{
+			MoreLikeThisPathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("Mlt")]
+	public partial class MoreLikeThisDescriptor<T> : DocumentPathDescriptor<MoreLikeThisDescriptor<T>, MoreLikeThisRequestParameters, T>
+		, IMoreLikeThisRequest
+		where T : class
+	{
+		private IMoreLikeThisRequest Self { get { return this; } }
+
+		ISearchRequest IMoreLikeThisRequest.Search { get; set; }
+
 		/// <summary>
 		/// Optionally specify more search options such as facets, from/to etcetera.
 		/// </summary>
@@ -26,16 +67,13 @@ namespace Nest
 		{
 			searchDescriptor.ThrowIfNull("searchDescriptor");
 			var d = searchDescriptor(new SearchDescriptor<T>());
-			this._Search = d;
+			Self.Search = d;
 			return this;
 		}
 
-		ElasticsearchPathInfo<MoreLikeThisRequestParameters> IPathInfo<MoreLikeThisRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MoreLikeThisRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.HttpMethod = this._Search == null ? PathInfoHttpMethod.GET : PathInfoHttpMethod.POST;
-
-			return pathInfo;
+			MoreLikeThisPathInfo.Update(pathInfo, this);
 		}
 	}
 }

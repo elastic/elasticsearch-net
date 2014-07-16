@@ -1,28 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesAnalyze")]
-	public partial class AnalyzeDescriptor : 
-		IndicesOptionalPathDescriptor<AnalyzeDescriptor, AnalyzeRequestParameters>
-		, IPathInfo<AnalyzeRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IAnalyzeRequest : IIndicesOptionalPath<AnalyzeRequestParameters>
 	{
+	}
 
-		ElasticsearchPathInfo<AnalyzeRequestParameters> IPathInfo<AnalyzeRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+	internal static class AnalyzePathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<AnalyzeRequestParameters> pathInfo, IAnalyzeRequest request)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class AnalyzeRequest : IndicesOptionalPathBase<AnalyzeRequestParameters>, IAnalyzeRequest
+	{
+		public AnalyzeRequest(string textToAnalyze)
+		{
+			this.Text = textToAnalyze;
+		}
 
-			return pathInfo;
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<AnalyzeRequestParameters> pathInfo)
+		{
+			AnalyzePathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("IndicesAnalyze")]
+	public partial class AnalyzeDescriptor : IndicesOptionalPathDescriptor<AnalyzeDescriptor, AnalyzeRequestParameters>, IAnalyzeRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<AnalyzeRequestParameters> pathInfo)
+		{
+			AnalyzePathInfo.Update(pathInfo, this);
 		}
 	}
 }

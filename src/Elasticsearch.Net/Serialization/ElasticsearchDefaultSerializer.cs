@@ -15,11 +15,10 @@ namespace Elasticsearch.Net.Serialization
 		}
 		public T Deserialize<T>(Stream stream)
 		{
-			var ms = stream as MemoryStream;
-			//if (ms != null)
-			// return SimpleJson.DeserializeObject<T>(ms.GetBuffer().Utf8String());
+			if (stream == null)
+				return default(T);
 
-			using (ms = new MemoryStream())
+			using (var ms = new MemoryStream())
 			{
 				stream.CopyTo(ms);
 				byte[] buffer = ms.ToArray();
@@ -31,6 +30,12 @@ namespace Elasticsearch.Net.Serialization
 		public Task<T> DeserializeAsync<T>(Stream stream)
 		{
 			var tcs = new TaskCompletionSource<T>();
+			if (stream == null)
+			{
+				tcs.SetResult(default(T));
+				return tcs.Task;
+			}
+
 			using (var ms = new MemoryStream())
 			{
 				// return a task that reads the stream asynchronously 
@@ -39,7 +44,6 @@ namespace Elasticsearch.Net.Serialization
 				return tcs.Task;
 					
 			}
-
 		}
 
 		public IEnumerable<Task> ReadStreamAsync<T>(Stream stream, TaskCompletionSource<T> tcs)
@@ -95,6 +99,31 @@ namespace Elasticsearch.Net.Serialization
 			if (formatting == SerializationFormatting.None)
 				serialized = RemoveNewLinesAndTabs(serialized);
 			return serialized.Utf8Bytes();
+		}
+
+		public string Stringify(object valueType)
+		{
+			return ElasticsearchDefaultSerializer.DefaultStringify(valueType);
+		}
+
+		public static string DefaultStringify(object valueType)
+		{
+			var s = valueType as string;
+			if (s != null)
+				return s;
+			var ss = valueType as string[];
+			if (ss != null)
+				return string.Join(",", ss);
+
+			var pns = valueType as IEnumerable<object>;
+			if (pns != null)
+				return string.Join(",", pns);
+
+			var e = valueType as Enum;
+			if (e != null) return KnownEnums.Resolve(e);
+			if (valueType is bool)
+				return ((bool) valueType) ? "true" : "false";
+			return valueType.ToString();
 		}
 
 		public static string RemoveNewLinesAndTabs(string input)

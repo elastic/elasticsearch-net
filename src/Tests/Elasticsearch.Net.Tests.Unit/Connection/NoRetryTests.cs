@@ -12,8 +12,6 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 	[TestFixture]
 	public class NoRetryTests
 	{
-		private static readonly int _retries = 0;
-
 		//we do not pass a Uri or IConnectionPool so this config
 		//defaults to SingleNodeConnectionPool()
 		private readonly ConnectionConfiguration _connectionConfig = new ConnectionConfiguration()

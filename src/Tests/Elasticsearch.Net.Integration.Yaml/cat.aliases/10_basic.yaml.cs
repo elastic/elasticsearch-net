@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -11,21 +8,13 @@ namespace Elasticsearch.Net.Integration.Yaml.CatAliases1
 {
 	public partial class CatAliases1YamlTests
 	{	
-	
-		public class CatAliases110BasicYamlBase : YamlTestsBase
-		{
-			public CatAliases110BasicYamlBase() : base()
-			{	
-
-			}
-		}
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Help2Tests : CatAliases110BasicYamlBase
+		public class Help1Tests : YamlTestsBase
 		{
 			[Test]
-			public void Help2Test()
+			public void Help1Test()
 			{	
 
 				//do cat.aliases 
@@ -46,27 +35,28 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class EmptyCluster3Tests : CatAliases110BasicYamlBase
+		public class EmptyCluster2Tests : YamlTestsBase
 		{
 			[Test]
-			public void EmptyCluster3Test()
+			public void EmptyCluster2Test()
 			{	
 
 				//do cat.aliases 
 				this.Do(()=> _client.CatAliases());
 
 				//match this._status: 
-				this.IsMatch(this._status, @"/^ $/
+				this.IsMatch(this._status, @"/^
+$/
 ");
 
 			}
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SimpleAlias4Tests : CatAliases110BasicYamlBase
+		public class SimpleAlias3Tests : YamlTestsBase
 		{
 			[Test]
-			public void SimpleAlias4Test()
+			public void SimpleAlias3Test()
 			{	
 
 				//do indices.create 
@@ -92,10 +82,10 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ComplexAlias5Tests : CatAliases110BasicYamlBase
+		public class ComplexAlias4Tests : YamlTestsBase
 		{
 			[Test]
-			public void ComplexAlias5Test()
+			public void ComplexAlias4Test()
 			{	
 
 				//do indices.create 
@@ -130,10 +120,10 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class AliasName6Tests : CatAliases110BasicYamlBase
+		public class AliasName5Tests : YamlTestsBase
 		{
 			[Test]
-			public void AliasName6Test()
+			public void AliasName5Test()
 			{	
 
 				//do indices.create 
@@ -170,10 +160,10 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ColumnHeaders7Tests : CatAliases110BasicYamlBase
+		public class ColumnHeaders6Tests : YamlTestsBase
 		{
 			[Test]
-			public void ColumnHeaders7Test()
+			public void ColumnHeaders6Test()
 			{	
 
 				//do indices.create 
@@ -206,10 +196,10 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SelectColumns8Tests : CatAliases110BasicYamlBase
+		public class SelectColumns7Tests : YamlTestsBase
 		{
 			[Test]
-			public void SelectColumns8Test()
+			public void SelectColumns7Test()
 			{	
 
 				//do indices.create 

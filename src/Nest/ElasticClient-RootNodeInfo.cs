@@ -18,6 +18,15 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
+		public IRootInfoResponse RootNodeInfo(IInfoRequest infoRequest)
+		{
+			return this.Dispatch<IInfoRequest, InfoRequestParameters, RootInfoResponse>(
+				infoRequest,
+				(p, d) => this.RawDispatch.InfoDispatch<RootInfoResponse>(p)
+				);
+		}
+
+		/// <inheritdoc />
 		public Task<IRootInfoResponse> RootNodeInfoAsync(Func<InfoDescriptor, InfoDescriptor> selector = null)
 		{
 			selector = selector ?? (i => i);
@@ -26,5 +35,15 @@ namespace Nest
 				(p, d) => this.RawDispatch.InfoDispatchAsync<RootInfoResponse>(p)
 			);
 		}
+
+		/// <inheritdoc />
+		public Task<IRootInfoResponse> RootNodeInfoAsync(IInfoRequest inforRequest)
+		{
+			return this.DispatchAsync<IInfoRequest, InfoRequestParameters, RootInfoResponse, IRootInfoResponse>(
+				inforRequest,
+				(p, d) => this.RawDispatch.InfoDispatchAsync<RootInfoResponse>(p)
+			);
+		}
+
 	}
 }

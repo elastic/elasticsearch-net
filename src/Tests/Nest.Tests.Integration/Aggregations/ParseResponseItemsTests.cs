@@ -15,7 +15,7 @@ namespace Nest.Tests.Integration.Aggregations
         [Test]
         public void KeyItem()
         {
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a=>a
 					.Terms("my_terms_agg", t=>t
@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Aggregations
 	    [Test]
 	    public void ValueMetric()
 	    {
-		    var results = this._client.Search<ElasticsearchProject>(s => s
+		    var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a=>a
 					.Average("my_avg", avg=>avg
@@ -60,7 +60,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 	    public void SingleBucket()
 	    {
-		    var results = this._client.Search<ElasticsearchProject>(s => s
+		    var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a=>a
 					.Filter("my_filtered_agg", ff=>ff
@@ -85,7 +85,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 	    public void DateHistogramItem()
 	    {
-		    var results = this._client.Search<ElasticsearchProject>(s => s
+		    var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a=>a
 					.DateHistogram("my_dateh", dh=>dh
@@ -107,13 +107,13 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 	    public void GeoDistanceItem()
 	    {
-		    var results = this._client.Search<ElasticsearchProject>(s => s
+		    var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a=>a
 					.GeoDistance("my_geod", dh=>dh
 						.Field(p=>p.Origin)
 						.Origin(28.0, 28.0)
-						.Unit(GeoUnit.km)
+						.Unit(GeoUnit.Kilometers)
 						.Ranges(
 							r=>r.To(1),
 							r=>r.From(1).To(100)
@@ -134,7 +134,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 	    public void RangeItem()
 	    {
-		    var results = this._client.Search<ElasticsearchProject>(s => s
+		    var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a=>a
 					.Range("my_geod", dh=>dh
@@ -160,7 +160,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 	    public void DateRangeItem()
 	    {
-		    var results = this._client.Search<ElasticsearchProject>(s => s
+		    var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a=>a
 					.DateRange("my_geod", dh=>dh
@@ -184,7 +184,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 	    public void IpRangeItem()
 	    {
-		    var results = this._client.Search<ElasticsearchProject>(s => s
+		    var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a=>a
 					.IpRange("my_ip", dh=>dh
@@ -205,7 +205,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 	    public void StatsMetric()
 	    {
-		    var results = this._client.Search<ElasticsearchProject>(s => s
+		    var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a=>a
 					.Stats("my_stats", avg=>avg
@@ -228,7 +228,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 	    public void ExtendedStatsMetric()
 	    {
-		    var results = this._client.Search<ElasticsearchProject>(s => s
+		    var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a=>a
 					.ExtendedStats("my_stats", avg=>avg

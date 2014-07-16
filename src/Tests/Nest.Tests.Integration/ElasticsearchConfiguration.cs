@@ -7,11 +7,28 @@ namespace Nest.Tests.Integration
 {
 	public static class ElasticsearchConfiguration
 	{
-		public static readonly string DefaultIndex = Test.Default.DefaultIndex + "-" + Process.GetCurrentProcess().Id.ToString();
+		public static readonly string DefaultIndexPrefix = "nest_test_data-";
+		public static readonly string Host = "localhost";
+		public static readonly int MaxConnections = 20;
+
+
+		public static readonly string DefaultIndex = DefaultIndexPrefix + Process.GetCurrentProcess().Id;
+
+		private static Version _currentVersion;
+		public static Version CurrentVersion
+		{
+			get
+			{
+				if (_currentVersion == null)
+					_currentVersion = GetCurrentVersion();
+
+				return _currentVersion;
+			}
+		}
 
 		public static Uri CreateBaseUri(int? port = null)
 		{
-			var host = Test.Default.Host;
+			var host = Host;
 			if (port == null && Process.GetProcessesByName("fiddler").HasAny())
 				host = "ipv4.fiddler";
 
@@ -22,19 +39,26 @@ namespace Nest.Tests.Integration
 		{
 
 			return new ConnectionSettings(hostOverride ?? CreateBaseUri(port), ElasticsearchConfiguration.DefaultIndex)
-				.SetMaximumAsyncConnections(Test.Default.MaximumAsyncConnections)
+				.SetMaximumAsyncConnections(MaxConnections)
 				.UsePrettyResponses()
 				.ExposeRawResponse();
 		}
 
-		public static readonly ElasticClient Client = new ElasticClient(Settings());
-		public static readonly ElasticClient ClientNoRawResponse = new ElasticClient(Settings().ExposeRawResponse(false));
-		public static readonly ElasticClient ClientThatTrows = new ElasticClient(Settings().ThrowOnElasticsearchServerExceptions());
-		public static readonly ElasticClient ThriftClient = new ElasticClient(Settings(9500), new ThriftConnection(Settings(9500)));
+		public static readonly Lazy<ElasticClient> Client = new Lazy<ElasticClient>(()=> new ElasticClient(Settings()));
+		public static readonly Lazy<ElasticClient> ClientNoRawResponse = new Lazy<ElasticClient>(()=> new ElasticClient(Settings().ExposeRawResponse(false)));
+		public static readonly Lazy<ElasticClient> ClientThatThrows = new Lazy<ElasticClient>(()=> new ElasticClient(Settings().ThrowOnElasticsearchServerExceptions()));
+		public static readonly Lazy<ElasticClient> ThriftClient = new Lazy<ElasticClient>(()=> new ElasticClient(Settings(9500), new ThriftConnection(Settings(9500))));
 		public static string NewUniqueIndexName()
 		{
 			return DefaultIndex + "_" + Guid.NewGuid().ToString();
 		}
 
+		public static Version GetCurrentVersion()
+		{
+			dynamic info = Client.Value.Raw.Info().Response;
+			var version = Version.Parse(info.version.number);
+
+			return version;
+		}
 	}
 }

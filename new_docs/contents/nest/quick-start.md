@@ -51,7 +51,7 @@ This can greatly reduce the places a magic string or constant has to be used.
 `http://localhost:9200` but explicitly specifying connection settings is recommended.
 
 `node` here is a `Uri` but can also be an `IConnectionPool` see the 
-[Elasticsearch.net section on connecting](http://localhost:8080/elasticsearch-net/connecting.html)
+[Elasticsearch.net section on connecting](/elasticsearch-net/connecting.html)
 
 ## Indexing
 
@@ -104,7 +104,7 @@ Now that we have indexed some documents we can begin to search for them.
 
 `searchResults.Documents` now holds the first 10 people it knows who's first name is `Martijn`
 
-Please see [the section on writing queries](http://localhost:8080/nest/writing-queries.html) for details on how NEST helps you write terse elasticsearch queries.
+Please see [the section on writing queries](/nest/writing-queries.html) for details on how NEST helps you write terse elasticsearch queries.
 
 Again the same inferring rules apply as this will hit `/my-application/person/_search` and the same rule that inferring can be overridden also applies.
 

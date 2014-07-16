@@ -19,8 +19,6 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public virtual bool AcceptsUpdates { get { return false; } }
 
-		public bool HasSeenStartup { get; set;}
-
 		public StaticConnectionPool(
 			IEnumerable<Uri> uris, 
 			bool randomizeOnStartup = true, 
@@ -99,7 +97,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			}
 		}
 
-		public virtual void UpdateNodeList(IList<Uri> newClusterState, bool fromStartupHint = false)
+		public virtual void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null)
 		{
 		}
 

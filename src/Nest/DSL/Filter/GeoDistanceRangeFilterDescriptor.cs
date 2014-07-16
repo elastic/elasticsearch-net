@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Nest.Resolvers;
-using Nest.Resolvers.Converters;
-using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
 using System.Globalization;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -27,7 +22,7 @@ namespace Nest
 		GeoUnit? Unit { get; set; }
 
 		[JsonProperty("distance_type")]
-		GeoDistanceType? DistanceType { get; set; }
+		GeoDistance? DistanceType { get; set; }
 
 		[JsonProperty("optimize_bbox")]
 		GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
@@ -51,7 +46,7 @@ namespace Nest
 		public object From { get; set; }
 		public object To { get; set; }
 		public GeoUnit? Unit { get; set; }
-		public GeoDistanceType? DistanceType { get; set; }
+		public GeoDistance? DistanceType { get; set; }
 		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
 		public bool? IncludeLower { get; set; }
 		public bool? IncludeUpper { get; set; }
@@ -65,7 +60,7 @@ namespace Nest
 		object IGeoDistanceRangeFilter.To { get; set; }
 		bool? IGeoDistanceRangeFilter.IncludeLower { get; set; }
 		bool? IGeoDistanceRangeFilter.IncludeUpper { get; set; }
-		GeoDistanceType? IGeoDistanceRangeFilter.DistanceType { get; set; }
+		GeoDistance? IGeoDistanceRangeFilter.DistanceType { get; set; }
 		GeoOptimizeBBox? IGeoDistanceRangeFilter.OptimizeBoundingBox { get; set; }
 		GeoUnit? IGeoDistanceRangeFilter.Unit { get; set; }
 
@@ -116,9 +111,9 @@ namespace Nest
 			return this;
 		}
 		
-		public GeoDistanceRangeFilterDescriptor DistanceType(GeoDistanceType geoDistanceType)
+		public GeoDistanceRangeFilterDescriptor DistanceType(GeoDistance geoDistance)
 		{
-			_.DistanceType = geoDistanceType;
+			_.DistanceType = geoDistance;
 			return this;
 		}
 

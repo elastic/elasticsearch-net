@@ -11,6 +11,7 @@ namespace Elasticsearch.Net.Exceptions
 	/// </summary>
 	public class MaxRetryException : Exception
 	{
+
 		public MaxRetryException(string message) : base(message)
 		{
 		}

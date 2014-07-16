@@ -10,7 +10,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void AllSegments()
 		{
-			var r = this._client.Segments();
+			var r = this.Client.Segments();
 			Assert.True(r.IsValid);
 			r.Shards.Successful.Should().BeGreaterThan(0);
 
@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void SingleSegment()
 		{
-			var r = this._client.Segments(s=>s.Index(ElasticsearchConfiguration.DefaultIndex));
+			var r = this.Client.Segments(s=>s.Index(ElasticsearchConfiguration.DefaultIndex));
 			Assert.True(r.IsValid);
 			r.Shards.Successful.Should().BeGreaterThan(0);
 
@@ -55,7 +55,7 @@ namespace Nest.Tests.Integration.Indices
 		public void MultipleSegment()
 		{
 			var indices = new [] {ElasticsearchConfiguration.DefaultIndex , ElasticsearchConfiguration.DefaultIndex + "_clone"};
-			var r = this._client.Segments(s=>s.Indices(indices));
+			var r = this.Client.Segments(s=>s.Indices(indices));
 			Assert.True(r.IsValid);
 			r.Shards.Successful.Should().BeGreaterThan(0);
 

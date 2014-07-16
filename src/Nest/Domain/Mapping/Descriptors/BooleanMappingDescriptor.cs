@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -24,7 +24,7 @@ namespace Nest
 			this._Mapping.IndexName = indexName;
 			return this;
 		}
-		public BooleanMappingDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.analyzed)
+		public BooleanMappingDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.Analyzed)
 		{
 			this._Mapping.Index = index;
 			return this;
@@ -52,6 +52,16 @@ namespace Nest
 			return this;
 		}
 
+		public BooleanMappingDescriptor<T> CopyTo(params string[] fields)
+		{
+			this._Mapping.CopyTo = fields.Select(f => (PropertyPathMarker)f);
+			return this;
+		}
 
+		public BooleanMappingDescriptor<T> CopyTo(params Expression<Func<T, object>>[] objectPaths)
+		{
+			this._Mapping.CopyTo = objectPaths.Select(e => (PropertyPathMarker)e);
+			return this;
+		}
 	}
 }

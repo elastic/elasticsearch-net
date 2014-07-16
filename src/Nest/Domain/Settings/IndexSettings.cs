@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ServiceModel.Channels;
 using Newtonsoft.Json;
 using System;
 using Nest.Resolvers.Converters;
@@ -16,6 +15,7 @@ namespace Nest
 		public IndexSettings()
 		{
 			this.Analysis = new AnalysisSettings();
+			this.Similarity = new SimilaritySettings();
 			this.Mappings = new List<RootObjectMapping>();
 			this.Warmers = new Dictionary<string, WarmerMapping>();
 			this.Settings = new Dictionary<string, object>();
@@ -43,23 +43,25 @@ namespace Nest
 			return i;
 		}
 
-		public IDictionary<string, object> Settings { get; internal set; }
+		public IDictionary<string, object> Settings { get; set; }
+		
 		/// <summary>
 		/// Dynamic view of the settings object, useful for reading value from the settings
 		/// as it allows you to chain without nullrefs. Cannot be used to assign setting values though
 		/// </summary>
-		public dynamic _ { get; internal set; }
-		public AnalysisSettings Analysis { get; internal set; }
+		public dynamic AsExpando { get; internal set; }
+		
+		public AnalysisSettings Analysis { get; set; }
 
-		public IList<RootObjectMapping> Mappings { get; internal set; }
+		public IList<RootObjectMapping> Mappings { get; set; }
 
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		protected internal Dictionary<string, CreateAliasDescriptor> Aliases { get; internal set; }
+		protected internal Dictionary<string, ICreateAliasOperation> Aliases { get; set; }
 			
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		public Dictionary<string, WarmerMapping> Warmers { get; internal set; }
+		public Dictionary<string, WarmerMapping> Warmers { get; set; }
 
-		public SimilaritySettings Similarity { get; set; }
+		public SimilaritySettings Similarity { get; internal set; }
 
 	
 	}

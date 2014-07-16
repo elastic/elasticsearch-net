@@ -9,13 +9,19 @@ namespace Nest.Tests.Unit.Core.Map.TypeField
 	[TestFixture]
 	public class TypeFieldTests : BaseJsonTests
 	{
+
+		//Prior to Elasticsearch store took a yes/no (still supported)
+		//We now favor sending actually booleans
+		//These tests there no longer test wheter they send actual "yes" "no"
+		//strings, but are not removed for living documentation purposes.
+
 		[Test]
 		public void TypeFieldSerializesYes()
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.TypeField(t => t
-					.SetIndexed()
-					.SetStored()
+					.Index()
+					.Store()
 				)
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod()); 
@@ -25,8 +31,8 @@ namespace Nest.Tests.Unit.Core.Map.TypeField
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.TypeField(t => t
-					.SetIndexed(NonStringIndexOption.no)
-					.SetStored(false)
+					.Index(NonStringIndexOption.No)
+					.Store(false)
 				)
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());

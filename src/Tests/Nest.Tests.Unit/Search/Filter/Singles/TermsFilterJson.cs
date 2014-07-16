@@ -34,7 +34,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				.Size(10)
 				.Filter(ff => ff
 					.Cache(false).Name("terms_filter")
-					.Terms(f => f.Name, new [] {"elasticsearch.pm"}, Execution:TermsExecution.@bool)
+					.Terms(f => f.Name, new [] {"elasticsearch.pm"}, Execution:TermsExecution.Bool)
 				);
 
 			var json = TestElasticClient.Serialize(s);
@@ -51,6 +51,52 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
+
+        [Test]
+        public void TermsFilter_EnumerableOfStringOverLoad_WithNonDefaultExecutionSpecified_AppliesExecution()
+        {
+            var s = new SearchDescriptor<ElasticsearchProject>()
+                .From(0)
+                .Size(10)
+                .Filter(ff => ff
+                    .Terms(f => f.MyStringArrayField, new[] { "elasticsearch.pm" }, Execution: TermsExecution.Bool)
+                );
+
+            var json = TestElasticClient.Serialize(s);
+            var expected = @"{ from: 0, size: 10, 
+				filter : {
+						terms: {
+							""myStringArrayField"": [""elasticsearch.pm""],
+							execution: ""bool""
+						}
+
+					}
+			}";
+            Assert.True(json.JsonEquals(expected), json);
+        }
+
+        [Test]
+        public void TermsFilter_NonLambdaField_WithNonDefaultExecutionSpecified_AppliesExecution()
+        {
+            var s = new SearchDescriptor<ElasticsearchProject>()
+                .From(0)
+                .Size(10)
+                .Filter(ff => ff
+                    .Terms("myStringArrayField", new[] { "elasticsearch.pm" }, Execution: TermsExecution.Bool)
+                );
+
+            var json = TestElasticClient.Serialize(s);
+            var expected = @"{ from: 0, size: 10, 
+				filter : {
+						terms: {
+							""myStringArrayField"": [""elasticsearch.pm""],
+							execution: ""bool""
+						}
+
+					}
+			}";
+            Assert.True(json.JsonEquals(expected), json);
+        }
 
 		[Test]
 		public void TermsFilterWithConditionlessQueryWithCache()

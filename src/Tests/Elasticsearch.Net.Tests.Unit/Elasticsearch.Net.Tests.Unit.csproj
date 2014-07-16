@@ -28,6 +28,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -60,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Connection\BuildInResponseAsyncTests.cs" />
     <Compile Include="Connection\BuildInResponseTests.cs" />
+    <Compile Include="Connection\NoRetryOnServerExceptionTests.cs" />
     <Compile Include="Connection\ElasticsearchServerExceptions.cs" />
     <Compile Include="Connection\NoRetryTests.cs" />
     <Compile Include="Stubs\FakeCalls.cs" />

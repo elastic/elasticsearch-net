@@ -1,10 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Runtime.Remoting.Channels;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -31,6 +27,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Exists4
 						}
 					},
 					settings= new {
+						number_of_shards= "5",
 						number_of_replicas= "0"
 					}
 				};
@@ -52,7 +49,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Exists4
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
-				
+
 				//do exists 
 				this.Do(()=> _client.Exists("test_1", "test", "1", nv=>nv
 					.AddQueryString("parent", 5)

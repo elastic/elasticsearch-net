@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Tests.Unit.Stubs;
@@ -14,8 +13,6 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 	[TestFixture]
 	public class ElasticsearchServerExceptions
 	{
-		private static readonly int _retries = 0;
-
 		//we do not pass a Uri or IConnectionPool so this config
 		//defaults to SingleNodeConnectionPool()
 		private readonly ConnectionConfiguration _connectionConfig = new ConnectionConfiguration()

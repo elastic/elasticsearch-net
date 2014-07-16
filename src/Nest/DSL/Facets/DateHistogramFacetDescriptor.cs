@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
-using Elasticsearch.Net;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -109,41 +105,54 @@ namespace Nest
 			Self.Field = field;
 			return this;
 		}
+
 		public DateHistogramFacetDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
 			objectPath.ThrowIfNull("objectPath");
 			Self.Field = objectPath;
 			return this;
 		}
+	
+		public DateHistogramFacetDescriptor<T> Interval(string interval)
+		{
+			Self.Interval = interval;
+			return this;
+		}
+		
 		public DateHistogramFacetDescriptor<T> Interval(DateInterval interval)
 		{
-			var intervalString = Enum.GetName(typeof(DateInterval), interval).ToLowerInvariant();
+			var intervalString = interval.GetStringValue();
 			Self.Interval = intervalString;
 			return this;
 		}
+		
 		public DateHistogramFacetDescriptor<T> Interval(DateInterval interval, DateRounding dateRounding)
 		{
-			var intervalString = Enum.GetName(typeof(DateInterval), interval).ToLowerInvariant();
-			var roundingString = Enum.GetName(typeof(DateRounding), dateRounding).ToLowerInvariant();
+			var intervalString = interval.GetStringValue();
+			var roundingString = dateRounding.GetStringValue();
 			Self.Interval = intervalString + ":" + roundingString;
 			return this;
 		}
+		
 		public DateHistogramFacetDescriptor<T> Factor(int factor)
 		{
 			Self.Factor = factor;
 			return this;
 		}
+		
 		public DateHistogramFacetDescriptor<T> Offset(string Pre = null, string Post = null)
 		{
 			Self.PreOffset = Pre;
 			Self.PostOffset = Post;
 			return this;
 		}
+		
 		public DateHistogramFacetDescriptor<T> TimeZone(string timeZone)
 		{
 			Self.TimeZone = timeZone;
 			return this;
 		}
+		
 		public DateHistogramFacetDescriptor<T> TimeZones(string Pre = null, string Post = null)
 		{
 			//elasticsearch actually sets timezone in pre_zone so reset timezone in case its set
@@ -153,42 +162,49 @@ namespace Nest
 			Self.PostZone = Post;
 			return this;
 		}
+		
 		public DateHistogramFacetDescriptor<T> KeyField(Expression<Func<T, object>> objectPath)
 		{
 			objectPath.ThrowIfNull("objectPath");
 			Self.KeyField = objectPath;
 			return this;
 		}
+		
 		public DateHistogramFacetDescriptor<T> KeyField(string keyField)
 		{
 			keyField.ThrowIfNull("keyField");
 			Self.KeyField = keyField;
 			return this;
 		}
+		
 		public DateHistogramFacetDescriptor<T> KeyScript(string keyScript)
 		{
 			keyScript.ThrowIfNull("keyScript");
 			Self.KeyScript = keyScript;
 			return this;
 		}
+		
 		public DateHistogramFacetDescriptor<T> ValueField(Expression<Func<T, object>> objectPath)
 		{
 			objectPath.ThrowIfNull("objectPath");
 			Self.ValueField = objectPath;
 			return this;
 		}
+		
 		public DateHistogramFacetDescriptor<T> ValueField(string valueField)
 		{
 			valueField.ThrowIfNull("valueField");
 			Self.ValueField = valueField;
 			return this;
 		}
+		
 		public DateHistogramFacetDescriptor<T> ValueScript(string valueScript)
 		{
 			valueScript.ThrowIfNull("valueScript");
 			Self.ValueScript = valueScript;
 			return this;
 		}
+		
 		public DateHistogramFacetDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");

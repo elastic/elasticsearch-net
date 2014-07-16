@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Runtime.Remoting.Channels;
 using Elasticsearch.Net;
 using NUnit.Framework;
 
@@ -11,7 +10,7 @@ namespace Nest.Tests.Integration.Cluster
 		[Test]
 		public void NodeInfo()
 		{
-			var r = this._client.NodesInfo(c=>c
+			var r = this.Client.NodesInfo(c=>c
 				.Metrics(
 					NodesInfoMetric.Transport, 
 					NodesInfoMetric.Jvm,
@@ -36,7 +35,7 @@ namespace Nest.Tests.Integration.Cluster
 		[Test]
 		public void NodeStats()
 		{
-			var r = this._client.NodesStats();
+			var r = this.Client.NodesStats();
 			Assert.True(r.IsValid);
 			Assert.IsNotNull(r.Nodes);
 			var node = r.Nodes.Values.First();

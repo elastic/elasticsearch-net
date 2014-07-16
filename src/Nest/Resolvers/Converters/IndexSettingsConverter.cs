@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
-using Nest.Domain.Settings;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Nest.Resolvers.Converters
 {
-	using System.Text;
-
 	public class IndexSettingsConverter : JsonConverter
 	{
 		private void WriteSettingObject(JsonWriter writer, JObject obj)
@@ -48,11 +45,7 @@ namespace Nest.Resolvers.Converters
 			writer.WritePropertyName("settings");
 			writer.WriteStartObject();
 			WriteIndexSettings(writer, serializer, indexSettings);
-
-			WriteSimilarityModuleSettings(writer, indexSettings);
-
 			writer.WriteEndObject();
-
 		}
 
 		private static void WriteAliases(JsonWriter writer, JsonSerializer serializer, IndexSettings indexSettings)
@@ -88,43 +81,6 @@ namespace Nest.Resolvers.Converters
 			);
 		}
 
-		private static void WriteSimilarityModuleSettings(JsonWriter writer, IndexSettings indexSettings)
-		{
-			if (indexSettings.Similarity == null) return;
-			writer.WritePropertyName("similarity");
-			writer.WriteStartObject();
-
-			if (!string.IsNullOrEmpty(indexSettings.Similarity.BaseSimilarity))
-			{
-				writer.WritePropertyName("base");
-				writer.WriteStartObject();
-				writer.WritePropertyName("type");
-				writer.WriteValue(indexSettings.Similarity.BaseSimilarity);
-				writer.WriteEndObject();
-			}
-
-			if (indexSettings.Similarity.CustomSimilarities != null)
-			{
-				foreach (var customSimilarity in indexSettings.Similarity.CustomSimilarities)
-				{
-					writer.WritePropertyName(customSimilarity.Name);
-					writer.WriteStartObject();
-					writer.WritePropertyName("type");
-					writer.WriteValue(customSimilarity.Type);
-					if (customSimilarity.SimilarityParameters.HasAny())
-					{
-						foreach (var kv in customSimilarity.SimilarityParameters)
-						{
-							writer.WritePropertyName(kv.Key);
-							writer.WriteValue(kv.Value);
-						}
-					}
-					writer.WriteEndObject();
-				}
-			}
-			writer.WriteEndObject();
-		}
-
 		private void WriteIndexSettings(JsonWriter writer, JsonSerializer serializer, IndexSettings indexSettings)
 		{
 			writer.WritePropertyName("index");
@@ -152,6 +108,15 @@ namespace Nest.Resolvers.Converters
 				serializer.Serialize(writer, indexSettings.Analysis);
 			}
 
+			if (
+				indexSettings.Similarity.CustomSimilarities.Count > 0
+				|| !string.IsNullOrEmpty(indexSettings.Similarity.Default)
+				)
+			{
+				writer.WritePropertyName("similarity");
+				serializer.Serialize(writer, indexSettings.Similarity);
+			}
+
 			writer.WriteEndObject();
 		}
 
@@ -163,7 +128,7 @@ namespace Nest.Resolvers.Converters
 			var dictionary = new Dictionary<string, object>();
 			serializer.Populate(o.CreateReader(), dictionary);
 			result.Settings = dictionary;
-			result._ = DynamicDictionary.Create(dictionary);
+			result.AsExpando = DynamicDictionary.Create(dictionary);
 			foreach (var rootProperty in o.Children<JProperty>())
 			{
 				if (rootProperty.Name.Equals("analysis", StringComparison.InvariantCultureIgnoreCase))
@@ -181,30 +146,7 @@ namespace Nest.Resolvers.Converters
 				}
 				else if (rootProperty.Name.Equals("similarity", StringComparison.InvariantCultureIgnoreCase))
 				{
-					var baseSimilarity = ((JObject)rootProperty.Value).Property("base");
-					if (baseSimilarity != null)
-					{
-						baseSimilarity.Remove();
-						result.Similarity = new SimilaritySettings(((JObject)baseSimilarity.Value).Property("type").Value.ToString());
-					}
-					else
-					{
-						result.Similarity = new SimilaritySettings();
-					}
-
-					foreach (var similarityProperty in rootProperty.Value.Children<JProperty>())
-					{
-						var typeProperty = ((JObject)similarityProperty.Value).Property("type");
-						typeProperty.Remove();
-						var customSimilarity = new CustomSimilaritySettings(similarityProperty.Name, typeProperty.Value.ToString());
-						foreach (var similaritySetting in similarityProperty.Value.Children<JProperty>())
-						{
-							customSimilarity.SimilarityParameters.Add(similaritySetting.Name, similaritySetting.Value.ToString());
-						}
-
-						result.Similarity.CustomSimilarities.RemoveAll(x => x.Name == customSimilarity.Name);
-						result.Similarity.CustomSimilarities.Add(customSimilarity);
-					}
+					result.Similarity = serializer.Deserialize<SimilaritySettings>(rootProperty.Value.CreateReader());
 					result.Settings.Remove(rootProperty.Name);
 				}
 			}

@@ -25,8 +25,8 @@ namespace CodeGeneration.YamlTestsRunner
 	using YamlTestSuite = Dictionary<string, object>;
 	public static class YamlTestsGenerator
 	{
-		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/v1.2.0/rest-api-spec/test";
-		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/v1.2.0/rest-api-spec/test/";
+		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/v1.2.1/rest-api-spec/test";
+		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/v1.2.1/rest-api-spec/test/";
 		private readonly static string _testProjectFolder = @"..\..\..\..\..\src\Tests\Elasticsearch.Net.Integration.Yaml\";
 		private readonly static string _rawClientInterface = @"..\..\..\..\..\src\Elasticsearch.Net\IElasticsearchClient.generated.cs";
 		private readonly static string _viewFolder = @"..\..\Views\";
@@ -86,12 +86,17 @@ namespace CodeGeneration.YamlTestsRunner
 		/// TODO: these tests contain object definitions that the ToAnonymous barfs on.
 		/// We skip them for now but we should fix the generator so that it generates dictionaries
 		/// in this case.
+		/// NOTE: files must be prefixed with the containing folder since they are not uniquely named
 		/// </summary>
 		private static string[] SkipTests = new string[]
 		{
-			"40_search_request_template.yaml",
-			"30_template_query_execution.yaml",
-			"19_nested.yaml",
+			"search/40_search_request_template.yaml",
+			"search/30_template_query_execution.yaml",
+			"percolate/19_nested.yaml",
+			"index/60_refresh.yaml",
+			"create/60_refresh.yaml",
+			"update/60_refresh.yaml",
+			"search_shards/10_basic.yaml"
 		};
 
 		private static IList<YamlDefinition> GetFolderFiles(string folder, bool useCache = false)
@@ -110,7 +115,8 @@ namespace CodeGeneration.YamlTestsRunner
 			foreach (var file in files)
 			{
 				++i;
-				if (SkipTests.Contains(file))
+
+				if (SkipTests.Contains(folder + "/" + file))
 					continue;
 
 				var yaml = GetYamlFile(folder, useCache, file);
@@ -194,7 +200,12 @@ namespace CodeGeneration.YamlTestsRunner
 			var url = useCache ? LocalUri("root.html") : _listingUrl;
 			var folderListingHtml = new WebClient().DownloadString(url);
 			if (!useCache)
+			{
+				if (!Directory.Exists(_cacheFolder))
+					Directory.CreateDirectory(_cacheFolder);
+
 				File.WriteAllText(_cacheFolder + "root.html", folderListingHtml);
+			}
 			
 			var folders = (from a in CQ.Create(folderListingHtml)[".js-directory-link"]
 				let folderName = a.InnerText

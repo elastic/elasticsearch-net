@@ -14,11 +14,11 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 				f=>f.GeoDistanceRange,
 				f=>f.GeoDistanceRange(p=>p.Origin, d=>d
 					.Location(Lat: 40, Lon: -70)
-					.Distance(From: 12, To: 200, Unit: GeoUnit.km)
+					.Distance(From: 12, To: 200, Unit: GeoUnit.Kilometers)
 					.FromExclusive()
 					.ToExclusive()
-					.DistanceType(GeoDistanceType.arc)
-					.Optimize(GeoOptimizeBBox.memory)
+					.DistanceType(GeoDistance.Arc)
+					.Optimize(GeoOptimizeBBox.Memory)
 					)
 				);
 
@@ -26,8 +26,8 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 
 			var from = (double)(geoDistanceRangeFilter.From);
 			from.Should().Be(12);
-			geoDistanceRangeFilter.Unit.Should().Be(GeoUnit.km);
-			geoDistanceRangeFilter.DistanceType.Should().Be(GeoDistanceType.arc);
+			geoDistanceRangeFilter.Unit.Should().Be(GeoUnit.Kilometers);
+			geoDistanceRangeFilter.DistanceType.Should().Be(GeoDistance.Arc);
 		}
 
 		[Test]
@@ -41,14 +41,14 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 					.Distance(From: "12km", To:"15km")
 					.FromExclusive()
 					.ToExclusive()
-					.DistanceType(GeoDistanceType.arc)
-					.Optimize(GeoOptimizeBBox.memory)
+					.DistanceType(GeoDistance.Arc)
+					.Optimize(GeoOptimizeBBox.Memory)
 					)
 				);
 			geoDistanceRangeFilter.Field.Should().Be("origin");
 			var from = (string)(geoDistanceRangeFilter.From);
 			from.Should().Be("12km");
-			geoDistanceRangeFilter.DistanceType.Should().Be(GeoDistanceType.arc);
+			geoDistanceRangeFilter.DistanceType.Should().Be(GeoDistance.Arc);
 		}
 		
 	}

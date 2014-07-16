@@ -1,22 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using NUnit.Framework;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-using Nest;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
-using Nest.Tests.MockData.Domain;
 using System.Reflection;
 using System.IO;
-using Moq;
-using PurifyNet;
 
 namespace Nest.Tests.Unit
 {
@@ -32,7 +23,7 @@ namespace Nest.Tests.Unit
 		/// <summary>
 		/// In memory client that never hits elasticsearch
 		/// </summary>
-		protected readonly IElasticClient _client;
+		protected IElasticClient _client;
 		protected readonly IConnection _connection;
 
 		public BaseJsonTests()
@@ -71,14 +62,13 @@ namespace Nest.Tests.Unit
 			var json = TestElasticClient.Serialize(o);
 			this.JsonEquals(json, method, fileName);
 		}
+
 		protected void JsonEquals(string json, MethodBase method, string fileName = null)
 		{
 			var file = this.GetFileFromMethod(method, fileName);
 
 			var expected = File.ReadAllText(file);
 			//Assert.AreEqual(expected, json);
-
-
 			Assert.True(json.JsonEquals(expected), this.PrettyPrint(json));
 		}
 

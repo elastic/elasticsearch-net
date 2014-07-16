@@ -1,42 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-	[DescriptorFor("NodesStats")]
-	public partial class NodesStatsDescriptor : NodeIdOptionalDescriptor<NodesStatsDescriptor, NodesStatsRequestParameters>
-		, IPathInfo<NodesStatsRequestParameters>
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface INodesStatsRequest : INodeIdOptionalPath<NodesStatsRequestParameters>
 	{
-		private IEnumerable<NodesStatsMetric> _Metrics { get; set; }
-		private IEnumerable<NodesStatsIndexMetric> _IndexMetrics { get; set; }
+		IEnumerable<NodesStatsMetric> Metrics { get; set; }
+		IEnumerable<NodesStatsIndexMetric> IndexMetrics { get; set; }
+	}
+
+	internal static class NodesStatsPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<NodesStatsRequestParameters> pathInfo, INodesStatsRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+			if (request.Metrics != null)
+				pathInfo.Metric = request.Metrics.Cast<Enum>().GetStringValue();
+			if (request.IndexMetrics != null)
+				pathInfo.IndexMetric = request.IndexMetrics.Cast<Enum>().GetStringValue();
+		}
+	}
+	
+	public partial class NodesStatsRequest : NodeIdOptionalPathBase<NodesStatsRequestParameters>, INodesStatsRequest
+	{
+		public IEnumerable<NodesStatsMetric> Metrics { get; set; }
+		public IEnumerable<NodesStatsIndexMetric> IndexMetrics { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesStatsRequestParameters> pathInfo)
+		{
+			NodesStatsPathInfo.Update(pathInfo, this);
+		}
+
+	}
+	[DescriptorFor("NodesStats")]
+	public partial class NodesStatsDescriptor : NodeIdOptionalDescriptor<NodesStatsDescriptor, NodesStatsRequestParameters>, INodesStatsRequest
+	{
+		private INodesStatsRequest Self { get { return this; } }
+		IEnumerable<NodesStatsMetric> INodesStatsRequest.Metrics { get; set; }
+		IEnumerable<NodesStatsIndexMetric> INodesStatsRequest.IndexMetrics { get; set; }
 		
 		public NodesStatsDescriptor Metrics(params NodesStatsMetric[] metrics)
 		{
-			this._Metrics = metrics;
+			Self.Metrics = metrics;
 			return this;
 		}
 		public NodesStatsDescriptor IndexMetrics(params NodesStatsIndexMetric[] metrics)
 		{
-			this._IndexMetrics = metrics;
+			Self.IndexMetrics = metrics;
 			return this;
 		}
 
-		ElasticsearchPathInfo<NodesStatsRequestParameters> IPathInfo<NodesStatsRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesStatsRequestParameters> pathInfo)
 		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
-			if (this._Metrics != null)
-				pathInfo.Metric = this._Metrics.Cast<Enum>().GetStringValue();
-			if (this._IndexMetrics != null)
-				pathInfo.IndexMetric = this._IndexMetrics.Cast<Enum>().GetStringValue();
-			return pathInfo;
+			NodesStatsPathInfo.Update(pathInfo, this);
 		}
 
 	}

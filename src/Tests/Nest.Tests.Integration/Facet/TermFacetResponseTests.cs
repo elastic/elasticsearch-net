@@ -105,9 +105,9 @@ namespace Nest.Tests.Integration.Facet
     [Test]
     public void TestWithDSL()
     {
-      var results = this._client.Search<ElasticsearchProject>(s => s
+      var results = this.Client.Search<ElasticsearchProject>(s => s
         .FacetTerm(t=>t
-          .Order(TermsOrder.count)
+          .Order(TermsOrder.Count)
           .OnField(p => p.Name)
           .Size(10)
         )

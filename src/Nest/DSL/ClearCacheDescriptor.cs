@@ -1,27 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using Nest.Resolvers;
-using Nest.Domain;
 
 namespace Nest
 {
-	[DescriptorFor("IndicesClearCache")]
-	public partial class ClearCacheDescriptor : 
-		IndicesOptionalPathDescriptor<ClearCacheDescriptor, ClearCacheRequestParameters>
-		, IPathInfo<ClearCacheRequestParameters>
-	{
-		ElasticsearchPathInfo<ClearCacheRequestParameters> IPathInfo<ClearCacheRequestParameters>.ToPathInfo(IConnectionSettingsValues settings)
-		{
-			var pathInfo = base.ToPathInfo(settings, this._QueryString);
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IClearCacheRequest : IIndicesOptionalPath<ClearCacheRequestParameters> { }
 
-			return pathInfo;
+	internal static class ClearCachePathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<ClearCacheRequestParameters> pathInfo, IClearCacheRequest request)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+	
+	public partial class ClearCacheRequest : IndicesOptionalPathBase<ClearCacheRequestParameters>, IClearCacheRequest
+	{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClearCacheRequestParameters> pathInfo)
+		{
+			ClearCachePathInfo.Update(pathInfo, this);
+		}
+	}
+
+	[DescriptorFor("IndicesClearCache")]
+	public partial class ClearCacheDescriptor : IndicesOptionalPathDescriptor<ClearCacheDescriptor, ClearCacheRequestParameters>, IClearCacheRequest
+	{
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClearCacheRequestParameters> pathInfo)
+		{
+			ClearCachePathInfo.Update(pathInfo, this);
 		}
 	}
 }

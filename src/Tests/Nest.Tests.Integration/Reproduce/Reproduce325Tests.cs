@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.Tests.MockData;
-using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
-using System.Diagnostics;
-using FluentAssertions;
 
 namespace Nest.Tests.Integration.Reproduce
 {
@@ -23,7 +19,7 @@ namespace Nest.Tests.Integration.Reproduce
 		public void FluentMappingReturnsResults()
 		{
 			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
-			this._client.CreateIndex(indexName, settings => settings
+			this.Client.CreateIndex(indexName, settings => settings
 				.Settings(s => s.Add("search.slowlog.threshold.fetch.warn", "1s"))
 				.Analysis(x =>
 				{
@@ -44,6 +40,7 @@ namespace Nest.Tests.Integration.Reproduce
 				})
 				.AddMapping<TechnicalProduct>(m => MapTechnicalProduct(m, indexName)));
 
+			var index = this.Client.GetIndexSettings(i=>i.Index(indexName));
 		}
 
 
@@ -57,19 +54,19 @@ namespace Nest.Tests.Integration.Reproduce
 				.DynamicDateFormats(new[] { "dateOptionalTime", "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z" })
 				.Dynamic(false)
 				.IdField(i => i
-					.SetIndex("not_analyzed")
-					.SetStored()
+					.Index("not_analyzed")
+					.Store()
 				)
 				.Properties(o => o
 					.String(i => i
 						.Name(x => x.Name)
-						.Index(FieldIndexOption.analyzed)
+						.Index(FieldIndexOption.Analyzed)
 						.IndexAnalyzer("autocomplete")
 						.SearchAnalyzer("standard")
 					)
 					.String(i => i
 						.Name(x => x.Brand)
-						.Index(FieldIndexOption.analyzed)
+						.Index(FieldIndexOption.Analyzed)
 						.IndexAnalyzer("autocomplete")
 						.SearchAnalyzer("standard")
 					)

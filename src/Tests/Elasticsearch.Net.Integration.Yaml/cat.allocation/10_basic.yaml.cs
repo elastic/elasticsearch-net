@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -11,21 +8,13 @@ namespace Elasticsearch.Net.Integration.Yaml.CatAllocation1
 {
 	public partial class CatAllocation1YamlTests
 	{	
-	
-		public class CatAllocation110BasicYamlBase : YamlTestsBase
-		{
-			public CatAllocation110BasicYamlBase() : base()
-			{	
-
-			}
-		}
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Help2Tests : CatAllocation110BasicYamlBase
+		public class Help1Tests : YamlTestsBase
 		{
 			[Test]
-			public void Help2Test()
+			public void Help1Test()
 			{	
 
 				//do cat.allocation 
@@ -49,10 +38,10 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class EmptyCluster3Tests : CatAllocation110BasicYamlBase
+		public class EmptyCluster2Tests : YamlTestsBase
 		{
 			[Test]
-			public void EmptyCluster3Test()
+			public void EmptyCluster2Test()
 			{	
 
 				//do cat.allocation 
@@ -60,13 +49,13 @@ $/
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/^
-  ( 0                   \s+
-    \d+(\.\d+)?[kmgt]b  \s+
-    \d+(\.\d+)?[kmgt]b  \s+
-    \d+(\.\d+)?[kmgt]b  \s+
-    \d+                 \s+
-    [-\w.]+             \s+
-    \d+(\.\d+){3}       \s+
+  ( 0                      \s+
+    \d+(\.\d+)?[kmgt]?b    \s+
+    (\d+(\.\d+)?[kmgt]b    \s+)?  #no value from client nodes
+    (\d+(\.\d+)?[kmgt]b    \s+)?  #no value from client nodes
+    (\d+                   \s+)?  #no value from client nodes
+    [-\w.]+                \s+
+    \d+(\.\d+){3}          \s+
     \w.*
     \n
   )+
@@ -77,10 +66,10 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class OneIndex4Tests : CatAllocation110BasicYamlBase
+		public class OneIndex3Tests : YamlTestsBase
 		{
 			[Test]
-			public void OneIndex4Test()
+			public void OneIndex3Test()
 			{	
 
 				//do indices.create 
@@ -97,19 +86,21 @@ $/
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/^
-  ( [1-5]               \s+
-    \d+(\.\d+)?[kmgt]b  \s+
-    \d+(\.\d+)?[kmgt]b  \s+
-    \d+(\.\d+)?[kmgt]b  \s+
-    \d+                 \s+
-    [-\w.]+             \s+
-    \d+(\.\d+){3}       \s+
+  ( \s*                          #allow leading spaces to account for right-justified text
+    \d+                    \s+
+    \d+(\.\d+)?[kmgt]?b    \s+
+    (\d+(\.\d+)?[kmgt]b   \s+)?  #no value from client nodes
+    (\d+(\.\d+)?[kmgt]b   \s+)?  #no value from client nodes
+    (\d+                  \s+)?  #no value from client nodes
+    [-\w.]+                \s+
+    \d+(\.\d+){3}          \s+
     \w.*
     \n
   )+
   (
-    \d+                 \s+
-    UNASSIGNED          \s+
+    \s*                          #allow leading spaces to account for right-justified text
+    \d+                    \s+
+    UNASSIGNED             \s+
     \n
   )?
 $/
@@ -119,10 +110,10 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class NodeId5Tests : CatAllocation110BasicYamlBase
+		public class NodeId4Tests : YamlTestsBase
 		{
 			[Test]
-			public void NodeId5Test()
+			public void NodeId4Test()
 			{	
 
 				//do cat.allocation 
@@ -130,13 +121,13 @@ $/
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/^
-  ( 0                   \s+
-    \d+(\.\d+)?[kmgt]b  \s+
-    \d+(\.\d+)?[kmgt]b  \s+
-    \d+(\.\d+)?[kmgt]b  \s+
-    \d+                 \s+
-    [-\w.]+             \s+
-    \d+(\.\d+){3}       \s+
+  ( 0                      \s+
+    \d+(\.\d+)?[kmgt]?b    \s+
+    (\d+(\.\d+)?[kmgt]b   \s+)?  #no value from client nodes
+    (\d+(\.\d+)?[kmgt]b   \s+)?  #no value from client nodes
+    (\d+                  \s+)?  #no value from client nodes
+    [-\w.]+                \s+
+    \d+(\.\d+){3}          \s+
     \w.*
     \n
   )
@@ -147,17 +138,18 @@ $/
 				this.Do(()=> _client.CatAllocation("non_existent"));
 
 				//match this._status: 
-				this.IsMatch(this._status, @"/^ $/
+				this.IsMatch(this._status, @"/^
+$/
 ");
 
 			}
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ColumnHeaders6Tests : CatAllocation110BasicYamlBase
+		public class ColumnHeaders5Tests : YamlTestsBase
 		{
 			[Test]
-			public void ColumnHeaders6Test()
+			public void ColumnHeaders5Test()
 			{	
 
 				//do cat.allocation 
@@ -166,23 +158,24 @@ $/
 				));
 
 				//match this._status: 
-				this.IsMatch(this._status, @"/^  shards               \s+
-    disk.used            \s+
-    disk.avail           \s+
-    disk.total           \s+
-    disk.percent         \s+
-    host                 \s+
-    ip                   \s+
-    node                 \s+
+				this.IsMatch(this._status, @"/^  shards                  \s+
+    disk.used               \s+
+    disk.avail              \s+
+    disk.total              \s+
+    disk.percent            \s+
+    host                    \s+
+    ip                      \s+
+    node                    \s+
     \n
 
-   ( \s+0                \s+
-     \d+(\.\d+)?[kmgt]b  \s+
-     \d+(\.\d+)?[kmgt]b  \s+
-     \d+(\.\d+)?[kmgt]b  \s+
-     \d+                 \s+
-     [-\w.]+             \s+
-     \d+(\.\d+){3}       \s+
+   ( \s*                          #allow leading spaces to account for right-justified text
+     0                      \s+
+     \d+(\.\d+)?[kmgt]?b    \s+
+     (\d+(\.\d+)?[kmgt]b   \s+)?  #no value from client nodes
+     (\d+(\.\d+)?[kmgt]b   \s+)?  #no value from client nodes
+     (\d+                  \s+)?  #no value from client nodes
+     [-\w.]+                \s+
+     \d+(\.\d+){3}          \s+
      \w.*
      \n
    )+
@@ -193,10 +186,10 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SelectColumns7Tests : CatAllocation110BasicYamlBase
+		public class SelectColumns6Tests : YamlTestsBase
 		{
 			[Test]
-			public void SelectColumns7Test()
+			public void SelectColumns6Test()
 			{	
 
 				//do cat.allocation 
@@ -209,7 +202,7 @@ $/
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/^
-  ( \d+                 \s+
+  ( \d*                 \s+
     \w.*
     \n
   )+
@@ -231,7 +224,7 @@ $/
   node                  \s+
   \n
   (
-    \s+\d+              \s+
+    \s+\d*           \s+
     \w.*
     \n
   )+
@@ -242,10 +235,10 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Bytes8Tests : CatAllocation110BasicYamlBase
+		public class Bytes7Tests : YamlTestsBase
 		{
 			[Test]
-			public void Bytes8Test()
+			public void Bytes7Test()
 			{	
 
 				//do cat.allocation 
@@ -257,9 +250,9 @@ $/
 				this.IsMatch(this._status, @"/^
   ( 0                   \s+
     \d+                 \s+
-    \d+                 \s+
-    \d+                 \s+
-    \d+                 \s+
+    (\d+                 \s+)?  #no value from client nodes
+    (\d+                 \s+)?  #no value from client nodes
+    (\d+                 \s+)?  #no value from client nodes
     [-\w.]+             \s+
     \d+(\.\d+){3}       \s+
     \w.*

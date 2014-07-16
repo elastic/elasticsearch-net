@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
-using Elasticsearch.Net;
-using Nest.Resolvers;
-using System.Collections;
 
 namespace Nest
 {
@@ -18,17 +14,17 @@ namespace Nest
 
 		public FilterDescriptor<T> Name(string name)
 		{
-			Self._FilterName = name;
+			Self.FilterName = name;
 			return this;
 		}
 		public FilterDescriptor<T> CacheKey(string cacheKey)
 		{
-			Self._CacheKey = cacheKey;
+			Self.CacheKey = cacheKey;
 			return this;
 		}
 		public FilterDescriptor<T> Cache(bool cache)
 		{
-			Self._Cache = cache;
+			Self.Cache = cache;
 			return this;
 		}
 		
@@ -261,26 +257,202 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Filter documents indexed using the geo_shape type.
+		/// Filter documents indexed using the circle geo_shape type.
 		/// </summary>
-		public FilterContainer GeoShape(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapeFilterDescriptor> filterDescriptor)
+		public FilterContainer GeoShapeCircle(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapeCircleFilterDescriptor> filterDescriptor)
 		{
-			return _GeoShape(fieldDescriptor, filterDescriptor);
+			return _GeoShapeCircle(fieldDescriptor, filterDescriptor);
 		}
 		/// <summary>
-		/// Filter documents indexed using the geo_shape type.
+		/// Filter documents indexed using the circle geo_shape type.
 		/// </summary>
-		public FilterContainer GeoShape(string field, Action<GeoShapeFilterDescriptor> filterDescriptor)
+		public FilterContainer GeoShapeCircle(string field, Action<GeoShapeCircleFilterDescriptor> filterDescriptor)
 		{
-			return _GeoShape(field, filterDescriptor);
+			return _GeoShapeCircle(field, filterDescriptor);
 		}
 
-		private FilterContainer _GeoShape(PropertyPathMarker field, Action<GeoShapeFilterDescriptor> filterDescriptor)
+		private FilterContainer _GeoShapeCircle(PropertyPathMarker field, Action<GeoShapeCircleFilterDescriptor> filterDescriptor)
 		{
-			var filter = new GeoShapeFilterDescriptor();
+			var filter = new GeoShapeCircleFilterDescriptor();
 			if (filterDescriptor != null)
 				filterDescriptor(filter);
-			((IGeoShapeFilter)filter).Field = field;
+			((IGeoShapeCircleFilter)filter).Field = field;
+			return this.New(filter, f => f.GeoShape = filter);
+		}
+
+		/// <summary>
+		/// Filter documents indexed using the envelope geo_shape type.
+		/// </summary>
+		public FilterContainer GeoShapeEnvelope(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapeEnvelopeFilterDescriptor> filterDescriptor)
+		{
+			return _GeoShapeEnvelope(fieldDescriptor, filterDescriptor);
+		}
+
+		/// <summary>
+		/// Filter documents indexed using the envelope geo_shape type.
+		/// </summary>
+		public FilterContainer GeoShapeEnvelope(string field, Action<GeoShapeEnvelopeFilterDescriptor> filterDescriptor)
+		{
+			return _GeoShapeEnvelope(field, filterDescriptor);
+		}
+
+		private FilterContainer _GeoShapeEnvelope(PropertyPathMarker field, Action<GeoShapeEnvelopeFilterDescriptor> filterDescriptor)
+		{
+			var filter = new GeoShapeEnvelopeFilterDescriptor();
+			if (filterDescriptor != null)
+				filterDescriptor(filter);
+			((IGeoShapeEnvelopeFilter)filter).Field = field;
+			return this.New(filter, f => f.GeoShape = filter);
+		}
+
+		/// <summary>
+		/// Filter documents indexed using the linestring geo_shape type.
+		/// </summary>
+		public FilterContainer GeoShapeLineString(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapeLineStringFilterDescriptor> filterDescriptor)
+		{
+			return _GeoShapeLineString(fieldDescriptor, filterDescriptor);
+		}
+
+		/// <summary>
+		/// Filter documents indexed using the linestring geo_shape type.
+		/// </summary>
+		public FilterContainer GeoShapeLineString(string field, Action<GeoShapeLineStringFilterDescriptor> filterDescriptor)
+		{
+			return _GeoShapeLineString(field, filterDescriptor);
+		}
+
+		private FilterContainer _GeoShapeLineString(PropertyPathMarker field, Action<GeoShapeLineStringFilterDescriptor> filterDescriptor)
+		{
+			var filter = new GeoShapeLineStringFilterDescriptor();
+			if (filterDescriptor != null)
+				filterDescriptor(filter);
+			((IGeoShapeLineStringFilter)filter).Field = field;
+			return this.New(filter, f => f.GeoShape = filter);
+		}
+
+		/// <summary>
+		/// Filter documents indexed using the multilinestring geo_shape type.
+		/// </summary>
+		public FilterContainer GeoShapeMultiLineString(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapeMultiLineStringFilterDescriptor> filterDescriptor)
+		{
+			return _GeoShapeMultiLineString(fieldDescriptor, filterDescriptor);
+		}
+
+		/// <summary>
+		/// Filter documents indexed using the multilinestring geo_shape type.
+		/// </summary>
+		public FilterContainer GeoShapeMultiLineString(string field, Action<GeoShapeMultiLineStringFilterDescriptor> filterDescriptor)
+		{
+			return _GeoShapeMultiLineString(field, filterDescriptor);
+		}
+
+		private FilterContainer _GeoShapeMultiLineString(PropertyPathMarker field, Action<GeoShapeMultiLineStringFilterDescriptor> filterDescriptor)
+		{
+			var filter = new GeoShapeMultiLineStringFilterDescriptor();
+			if (filterDescriptor != null)
+				filterDescriptor(filter);
+			((IGeoShapeMultiLineStringFilter)filter).Field = field;
+			return this.New(filter, f => f.GeoShape = filter);
+		}
+
+		/// <summary>
+		/// Filter documents indexed using the point geo_shape type.
+		/// </summary>
+		public FilterContainer GeoShapePoint(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapePointFilterDescriptor> filterDescriptor)
+		{
+			return _GeoShapePoint(fieldDescriptor, filterDescriptor);
+		}
+
+		/// <summary>
+		/// Filter documents indexed using the point geo_shape type.
+		/// </summary>
+		public FilterContainer GeoShapePoint(string field, Action<GeoShapePointFilterDescriptor> filterDescriptor)
+		{
+			return _GeoShapePoint(field, filterDescriptor);
+		}
+
+		private FilterContainer _GeoShapePoint(PropertyPathMarker field, Action<GeoShapePointFilterDescriptor> filterDescriptor)
+		{
+			var filter = new GeoShapePointFilterDescriptor();
+			if (filterDescriptor != null)
+				filterDescriptor(filter);
+			((IGeoShapePointFilter)filter).Field = field;
+			return this.New(filter, f => f.GeoShape = filter);
+		}
+
+		/// <summary>
+		/// Filter documents indexed using the multipoint geo_shape type.
+		/// </summary>
+		public FilterContainer GeoShapeMultiPoint(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapeMultiPointFilterDescriptor> filterDescriptor)
+		{
+			return _GeoShapeMultiPoint(fieldDescriptor, filterDescriptor);
+		}
+
+		/// <summary>
+		/// Filter documents indexed using the multipoint geo_shape type.
+		/// </summary>
+		public FilterContainer GeoShapeMultiPoint(string field, Action<GeoShapeMultiPointFilterDescriptor> filterDescriptor)
+		{
+			return _GeoShapeMultiPoint(field, filterDescriptor);
+		}
+
+		private FilterContainer _GeoShapeMultiPoint(PropertyPathMarker field, Action<GeoShapeMultiPointFilterDescriptor> filterDescriptor)
+		{
+			var filter = new GeoShapeMultiPointFilterDescriptor();
+			if (filterDescriptor != null)
+				filterDescriptor(filter);
+			((IGeoShapeMultiPointFilter)filter).Field = field;
+			return this.New(filter, f => f.GeoShape = filter);
+		}
+
+
+		/// <summary>
+		/// Filter documents indexed using the polygon geo_shape type.
+		/// </summary>
+		public FilterContainer GeoShapePolygon(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapePolygonFilterDescriptor> filterDescriptor)
+		{
+			return _GeoShapePolygon(fieldDescriptor, filterDescriptor);
+		}
+
+		/// <summary>
+		/// Filter documents indexed using the polygon geo_shape type.
+		/// </summary>
+		public FilterContainer GeoShapePolygon(string field, Action<GeoShapePolygonFilterDescriptor> filterDescriptor)
+		{
+			return _GeoShapePolygon(field, filterDescriptor);
+		}
+
+		private FilterContainer _GeoShapePolygon(PropertyPathMarker field, Action<GeoShapePolygonFilterDescriptor> filterDescriptor)
+		{
+			var filter = new GeoShapePolygonFilterDescriptor();
+			if (filterDescriptor != null)
+				filterDescriptor(filter);
+			((IGeoShapePolygonFilter)filter).Field = field;
+			return this.New(filter, f => f.GeoShape = filter);
+		}
+
+		/// <summary>
+		/// Filter documents indexed using the multipolygon geo_shape type.
+		/// </summary>
+		public FilterContainer GeoShapeMultiPolygon(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapeMultiPolygonFilterDescriptor> filterDescriptor)
+		{
+			return _GeoShapeMultiPolygon(fieldDescriptor, filterDescriptor);
+		}
+
+		/// <summary>
+		/// Filter documents indexed using the multipolygon geo_shape type.
+		/// </summary>
+		public FilterContainer GeoShapeMultiPolygon(string field, Action<GeoShapeMultiPolygonFilterDescriptor> filterDescriptor)
+		{
+			return _GeoShapeMultiPolygon(field, filterDescriptor);
+		}
+
+		private FilterContainer _GeoShapeMultiPolygon(PropertyPathMarker field, Action<GeoShapeMultiPolygonFilterDescriptor> filterDescriptor)
+		{
+			var filter = new GeoShapeMultiPolygonFilterDescriptor();
+			if (filterDescriptor != null)
+				filterDescriptor(filter);
+			((IGeoShapeMultiPolygonFilter)filter).Field = field;
 			return this.New(filter, f => f.GeoShape = filter);
 		}
 
@@ -520,6 +692,7 @@ namespace Nest
 			ITermsFilter filter = new TermsFilterDescriptor();
 			filter.Field = fieldDescriptor;
 			filter.Terms = terms;
+		    filter.Execution = Execution;
 			return this.New(filter, f=>f.Terms = filter);
 		}
 
@@ -531,6 +704,7 @@ namespace Nest
 			ITermsFilter filter = new TermsFilterDescriptor();
 			filter.Field = field;
 			filter.Terms = terms ?? Enumerable.Empty<string>();
+            filter.Execution = Execution;
 			return this.New(filter, f=>f.Terms = filter);
 		}
 
@@ -719,9 +893,9 @@ namespace Nest
 
 		private void ResetCache()
 		{
-			Self._Cache = null;
-			Self._CacheKey = null;
-			Self._FilterName = null;
+			Self.Cache = null;
+			Self.CacheKey = null;
+			Self.FilterName = null;
 		}
 
 		private void SetCacheAndName(IFilter filter)
@@ -730,12 +904,12 @@ namespace Nest
 			filter.IsStrict = self.IsStrict;
 			filter.IsVerbatim = self.IsVerbatim;
 
-			if (Self._Cache.HasValue)
-				filter.Cache = Self._Cache;
-			if (!string.IsNullOrWhiteSpace(Self._FilterName))
-				filter.FilterName = Self._FilterName;
-			if (!string.IsNullOrWhiteSpace(Self._CacheKey))
-				filter.CacheKey = Self._CacheKey;
+			if (Self.Cache.HasValue)
+				filter.Cache = Self.Cache;
+			if (!string.IsNullOrWhiteSpace(Self.FilterName))
+				filter.FilterName = Self.FilterName;
+			if (!string.IsNullOrWhiteSpace(Self.CacheKey))
+				filter.CacheKey = Self.CacheKey;
 		}
 
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace CodeGeneration.LowLevelClient
 {
@@ -11,11 +12,15 @@ namespace CodeGeneration.LowLevelClient
 		{
 			return items.GroupBy(property).Select(x => x.First());
 		}
-
+		/// <summary>
+		/// Removes _ . but not an underscore at the start of the string, unless the string is _all.
+		/// </summary>
+		private static Regex _removePunctuationExceptFirstUnderScore = new Regex(@"(?!^_(?!All$))[_\.]");
 		public static string ToPascalCase(this string s)
 		{
 			var textInfo = new CultureInfo("en-US").TextInfo;
-			return textInfo.ToTitleCase(s.ToLowerInvariant()).Replace("_", string.Empty).Replace(".", string.Empty);
+			var titleCased = textInfo.ToTitleCase(s.ToLowerInvariant());
+			return _removePunctuationExceptFirstUnderScore.Replace(titleCased, "");
 		}
 	}
 }

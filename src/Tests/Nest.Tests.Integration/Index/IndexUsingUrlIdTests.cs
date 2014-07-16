@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
@@ -20,9 +19,9 @@ namespace Nest.Tests.Integration.Index
 				Id = id,
 				Name = "Top Product"
 			};
-			var response = this._client.Index(newProduct);
+			var response = this.Client.Index(newProduct);
 
-			var productInElasticsearch = this._client.Source<Product>(i=>i.Id(id));
+			var productInElasticsearch = this.Client.Source<Product>(i=>i.Id(id));
 			Assert.NotNull(productInElasticsearch);
 			Assert.AreEqual(productInElasticsearch.Id, id);
 			Assert.True(response.IsValid);
@@ -44,9 +43,8 @@ namespace Nest.Tests.Integration.Index
 				Id = id,
 				Name = "Top Product"
 			};
-			var response = client.Index(newProduct);
 
-			client.Index("", f => f.Index("blah"));
+			var response = client.Index(newProduct);
 
 			var productInElasticsearch = client.Source<Product>(id);
 			Assert.NotNull(productInElasticsearch);
