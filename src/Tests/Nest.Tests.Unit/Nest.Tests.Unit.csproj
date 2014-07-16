@@ -790,16 +790,30 @@
     <None Include="Search\Query\Singles\CommonTerms\CommonTermsFull.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Query\Singles\GeoShape\GeoShapeCircle.json" />
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeCircle.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Query\Singles\GeoShape\GeoShapeEnvelope.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Query\Singles\GeoShape\GeoShapeLineString.json" />
-    <None Include="Search\Query\Singles\GeoShape\GeoShapeMultiPoint.json" />
-    <None Include="Search\Query\Singles\GeoShape\GeoShapeMultiLineString.json" />
-    <None Include="Search\Query\Singles\GeoShape\GeoShapeMultiPolygon.json" />
-    <None Include="Search\Query\Singles\GeoShape\GeoShapePoint.json" />
-    <None Include="Search\Query\Singles\GeoShape\GeoShapePolygon.json" />
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeLineString.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeMultiPoint.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeMultiLineString.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeMultiPolygon.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapePoint.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapePolygon.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
