@@ -239,7 +239,6 @@
     <Compile Include="DSL\Query\Functions\FunctionBoostMode.cs" />
     <Compile Include="DSL\Query\Functions\FunctionScoreDecayFieldDescriptor.cs" />
     <Compile Include="DSL\Query\Functions\FunctionScoreDecayFunction.cs" />
-    <Compile Include="DSL\Query\Functions\FunctionScoreFilteredFunction.cs" />
     <Compile Include="DSL\Query\Functions\FunctionScoreFunctionsDescriptor.cs" />
     <Compile Include="DSL\Query\Functions\FunctionScoreMode.cs" />
     <Compile Include="DSL\Query\Functions\IFunctionScoreFunction.cs" />

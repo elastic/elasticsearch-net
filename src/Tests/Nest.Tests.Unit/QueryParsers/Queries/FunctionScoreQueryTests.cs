@@ -18,7 +18,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.MaxBoost(0.95f)
 					.Functions(
 						ff => ff.Gauss(x => x.StartedOn, d => d.Scale("42w")),
-						ff => ff.Linear(x => x.FloatValue, d => d.Scale("0.3")),
+						ff => ff.Linear(x => x.FloatValue, d => d.Scale("0.3")).Filter(lff=>Filter2),
 						ff => ff.Exp(x => x.DoubleValue, d => d.Scale("0.5")),
 						ff => ff.BoostFactor(2).Filter(bff=>Filter1)
 					)
