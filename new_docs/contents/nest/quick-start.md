@@ -125,3 +125,23 @@ Again the same inferring rules apply as this will hit `/my-application/person/_s
         .AllTypes() 
     );
 
+## Custom server side security while searching
+
+Consider a scenario where you are using client side libraries like [elasticjs](https://github.com/fullscale/elastic.js) to construct to create User interfaces but want security to be provided by server side business logic, you can take this approach. You can route your queries through server side code.
+```cs
+    [RoutePrefix("api/Search")]
+    public class SearchController : ApiController
+    {
+        [ActionName("_search")]
+        public IHttpActionResult Post([FromBody]SearchDescriptor<dynamic> query)
+        {
+            var setting = new ConnectionSettings(new Uri(ConfigurationManager.AppSettings["SearchServerUri"])).SetDefaultIndex("informit");
+            var client = new ElasticClient(setting);
+    
+            //Your server side security goes here
+            var result = client.Search(q => query);
+            return Ok(result);
+        }
+    }
+```
+The fragments `[RoutePrefix("api/Search")]` and `[ActionName("_search")]` will let you change your elastic search Url from http://localhost:9200/_search to http://yourwebsite/api/Search/_search and let things work as normal. The fragment `[FromBody]SearchDescriptor<dynamic> query` will convert the JSON query into NEST SearchDescriptor. The fragment `client.Search(q => query)` will execute the query. NOTE: `client.Search(query)` will compile but will NOT work.
