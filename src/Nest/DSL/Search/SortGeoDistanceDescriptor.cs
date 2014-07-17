@@ -20,6 +20,7 @@ namespace Nest
 	{
 		public string Missing { get; set; }
 		public SortOrder? Order { get; set; }
+		public SortMode? Mode { get; set; }
 		public PropertyPathMarker Field { get; set; }
 		public string PinLocation { get; set; }
 		public GeoUnit? GeoUnit { get; set; }
@@ -30,6 +31,7 @@ namespace Nest
 			{
 				{ this.Field, this.PinLocation },
 				{ "missing", this.Missing },
+				{ "mode", this.Mode },
 				{ "order", this.Order },
 				{ "unit", this.GeoUnit }
 			};
@@ -45,6 +47,8 @@ namespace Nest
 		string ISort.Missing { get; set; }
 
 		SortOrder? ISort.Order { get; set; }
+
+		SortMode? ISort.Mode { get; set; }
 
 		string IGeoDistanceSort.PinLocation { get; set; }
 
@@ -114,12 +118,19 @@ namespace Nest
 			return this;
 		}
 
+		public SortGeoDistanceDescriptor<T> Mode(SortMode mode)
+		{
+			Self.Mode = mode;
+			return this;
+		}
+
 		object ICustomJson.GetCustomJson()
 		{
 			return new Dictionary<object, object>
 			{
 				{ Self.Field, Self.PinLocation },
 				{ "missing", Self.Missing },
+				{ "mode", Self.Mode},
 				{ "order", Self.Order },
 				{ "unit", Self.GeoUnit }
 			};

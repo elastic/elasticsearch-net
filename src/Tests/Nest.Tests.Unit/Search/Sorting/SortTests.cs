@@ -45,6 +45,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 					.OnField(e => e.Name.Suffix("sort"))
 					.MissingLast()
 					.Descending()
+					.Mode(SortMode.Min)
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"
@@ -54,7 +55,8 @@ namespace Nest.Tests.Unit.Search.Sorting
                   sort: {
                     ""name.sort"": {
                       missing: ""_last"",
-                      order: ""desc""
+                      order: ""desc"",
+					  mode: ""min""
                     }
                   }
                 }";
@@ -79,8 +81,8 @@ namespace Nest.Tests.Unit.Search.Sorting
                   size: 10,
                   sort: {
                     ""contributors.age"": {
-                        ""mode"": ""max"",
-                        ""order"": ""desc""
+						""order"": ""desc"",
+                        ""mode"": ""max""
                     }
                   }
                 }";
@@ -175,6 +177,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 					.Descending()
 					.PinTo(40, -70)
 					.Unit(GeoUnit.Kilometers)
+					.Mode(SortMode.Max)
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"
@@ -185,6 +188,7 @@ namespace Nest.Tests.Unit.Search.Sorting
                     _geo_distance: {
                       ""origin"": ""40, -70"",
                       missing: ""_last"",
+					  mode: ""max"",
                       order: ""desc"",
                       unit: ""km""
                     }
@@ -202,6 +206,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 				.SortScript(sort => sort
 					.MissingLast()
 					.Descending()
+					.Mode(SortMode.Average)
 					.Script("doc['field_name'].value * factor")
 					.Params(p => p
 						.Add("factor", 1.1)
@@ -221,7 +226,8 @@ namespace Nest.Tests.Unit.Search.Sorting
                         factor: 1.1
                       },
                       missing: ""_last"",
-                      order: ""desc""
+                      order: ""desc"",
+					  mode: ""avg""
                     }
                   }
                 }";
