@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest.Resolvers.Converters.Filters
 {
-	public class GeoShapeFilterJsonReader : JsonConverter
+	public class GeoShapeFilterJsonReader : GeoShapeConverterBase
 	{
 		public override bool CanRead { get { return true; } }
 		public override bool CanWrite { get { return false; } }
@@ -47,25 +47,87 @@ namespace Nest.Resolvers.Converters.Filters
 						var indexedShape = jv.Value["indexed_shape"];
 						if (shape != null)
 						{
-							IGeoShapeFilter f = new GeoShapeFilterDescriptor();
-							f.Shape = new GeoShapeVector();
-							var coordinates = shape["coordinates"];
-							if (coordinates != null)
-								f.Shape.Coordinates = coordinates.Values<double[]>();
 							var type = shape["type"];
 							if (type != null)
-								f.Shape.Type = type.Value<string>();
-							filter = f;
-							break;
+							{
+								var typeName = type.Value<string>();
+								if (typeName == "circle")
+								{
+									IGeoShapeCircleFilter f = new GeoShapeCircleFilterDescriptor();
+									f.Shape = new CircleGeoShape();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<double>>(shape);
+									var radius = shape["radius"];
+									if (radius != null)
+										f.Shape.Radius = radius.Value<string>();
+									filter = f;
+									break;
+								}
+								else if (typeName == "envelope")
+								{
+									IGeoShapeEnvelopeFilter f = new GeoShapeEnvelopeFilterDescriptor();
+									f.Shape = new EnvelopeGeoShape();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<IEnumerable<double>>>(shape);
+									filter = f;
+									break;
+								}
+								else if (typeName == "linestring")
+								{
+									IGeoShapeLineStringFilter f = new GeoShapeLineStringFilterDescriptor();
+									f.Shape = new LineStringGeoShape();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<IEnumerable<double>>>(shape);
+									filter = f;
+									break;
+								}
+								else if (typeName == "multilinestring")
+								{
+									IGeoShapeMultiLineStringFilter f = new GeoShapeMultiLineStringFilterDescriptor();
+									f.Shape = new MultiLineStringGeoShape();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<double>>>>(shape);
+									filter = f;
+									break;
+								}
+								else if (typeName == "point")
+								{
+									IGeoShapePointFilter f = new GeoShapePointFilterDescriptor();
+									f.Shape = new PointGeoShape();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<double>>(shape);
+									filter = f;
+									break;
+								}
+								else if (typeName == "multipoint")
+								{
+									IGeoShapeMultiPointFilter f = new GeoShapeMultiPointFilterDescriptor();
+									f.Shape = new MultiPointGeoShape();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<IEnumerable<double>>>(shape);
+									filter = f;
+									break;
+								}
+								else if (typeName == "polygon")
+								{
+									IGeoShapePolygonFilter f = new GeoShapePolygonFilterDescriptor();
+									f.Shape = new PolygonGeoShape();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<double>>>>(shape);
+									filter = f;
+									break;
+								}
+								else if (typeName == "multipolygon")
+								{
+									IGeoShapeMultiPolygonFilter f = new GeoShapeMultiPolygonFilterDescriptor();
+									f.Shape = new MultiPolygonGeoShape();
+									f.Shape.Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<IEnumerable<double>>>>>(shape);
+									filter = f;
+									break;
+								}
+							}
 						}
 						else if (indexedShape != null)
 						{
 							IGeoIndexedShapeFilter f = new GeoIndexedShapeFilterDescriptor();
-							f.IndexedShape = new GeoIndexedShapeVector();
+							f.IndexedShape = new IndexedGeoShape();
 							var id = indexedShape["id"];
 							var index = indexedShape["index"];
 							var type = indexedShape["type"];
-							var shapeField = indexedShape["shape_field_name"];
+							var shapeField = indexedShape["path"];
 
 							if (id != null) f.IndexedShape.Id = id.Value<string>();
 							if (index != null) f.IndexedShape.Index = index.Value<string>();

@@ -21,5 +21,14 @@ namespace Nest
 			descriptorBuilder(descriptor);
 			_GaussDescriptor[objectPath] = descriptor;
 		}
+
+		public GaussFunction(string field, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+		{
+			_GaussDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>();
+
+			var descriptor = new FunctionScoreDecayFieldDescriptor();
+			descriptorBuilder(descriptor);
+			_GaussDescriptor[field] = descriptor;
+		}
 	}
 }

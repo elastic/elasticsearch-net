@@ -163,5 +163,41 @@ namespace Nest.Tests.Unit.Search.Sorting
 			Assert.True(json.JsonEquals(expected), json);
 		}
 
+		[Test]
+		public void TestDecayFunctionWithFilter()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>().Query(
+				q => q.FunctionScore(
+					fs => fs.Functions(
+						f => f.Gauss("floatValue", g => g.Origin("5").Scale("0.1"))
+							  .Filter(gf => gf.Term("term1", "termValue")
+							)
+						)
+					)
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{
+							  ""query"": {
+								""function_score"": {
+								  ""functions"": [
+									{
+									  ""gauss"": {
+										""floatValue"": {
+										  ""origin"": ""5"",
+										  ""scale"": ""0.1""
+										}
+									  },
+									  ""filter"": {
+										""term"": {
+										  ""term1"": ""termValue""
+										}
+									  }
+									}
+								  ]
+								}
+							  }
+							}";
+			Assert.IsTrue(json.JsonEquals(expected), json);
+		}
 	}
 }

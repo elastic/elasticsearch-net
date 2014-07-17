@@ -12,10 +12,12 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 		{
 			var missingFilter = this.SerializeThenDeserialize(cacheName, cacheKey, cache, 
 				f=>f.Missing,
-				f=>f.Missing(p=>p.Name)
+				f=>f.Missing(p=>p.Name, m=>m.Existence(false).NullValue(true))
 				);
 
 			missingFilter.Field.Should().Be("name");
+			missingFilter.Existence.Should().Be(false);
+			missingFilter.NullValue.Should().Be(true);
 		}
 		
 	}

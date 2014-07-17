@@ -18,7 +18,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.Update
 
 			var request = new UpdateRequest<ElasticsearchProject, object>(project)
 				{
-					Document = new { Name = "NEST" },
+					Doc = new { Name = "NEST" },
 					DocAsUpsert = true
 				};
 

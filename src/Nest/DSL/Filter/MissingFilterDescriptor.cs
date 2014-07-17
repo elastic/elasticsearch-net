@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
@@ -12,6 +13,12 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "field")]
 		PropertyPathMarker Field { get; set; }
+
+		[JsonProperty(PropertyName = "existence")]
+		bool? Existence { get; set; }
+
+		[JsonProperty(PropertyName = "null_value")]
+		bool? NullValue { get; set; }
 	}
 
 	public class MissingFilter : PlainFilter, IMissingFilter
@@ -22,6 +29,10 @@ namespace Nest
 		}
 
 		public PropertyPathMarker Field { get; set; }
+
+		public bool? Existence { get; set; }
+
+		public bool? NullValue { get; set; }
 	}
 
 	public class MissingFilterDescriptor : FilterBase, IMissingFilter
@@ -35,6 +46,22 @@ namespace Nest
 
 		}
 
+		private IMissingFilter Self { get { return this; } }
+
 		PropertyPathMarker IMissingFilter.Field { get; set;}
+		bool? IMissingFilter.Existence { get; set; }
+		bool? IMissingFilter.NullValue { get; set; }
+
+		public MissingFilterDescriptor Existence(bool existence = true)
+		{
+			Self.Existence = existence;
+			return this;
+		}
+
+		public MissingFilterDescriptor NullValue(bool nullValue = true)
+		{
+			Self.NullValue = nullValue;
+			return this;
+		}
 	}
 }

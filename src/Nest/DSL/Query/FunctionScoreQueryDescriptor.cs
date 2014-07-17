@@ -27,6 +27,9 @@ namespace Nest
 		[JsonConverter(typeof (StringEnumConverter))]
 		FunctionBoostMode? BoostMode { get; set; }
 
+		[JsonProperty("max_boost")]
+		float? MaxBoost { get; set; }
+
 		[JsonProperty(PropertyName = "random_score")]
 		IRandomScoreFunction RandomScore { get; set; }
 
@@ -46,6 +49,7 @@ namespace Nest
 		public IQueryContainer Query { get; set; }
 		public FunctionScoreMode? ScoreMode { get; set; }
 		public FunctionBoostMode? BoostMode { get; set; }
+		public float? MaxBoost { get; set; }
 		public IRandomScoreFunction RandomScore { get; set; }
 		public IScriptFilter ScriptScore { get; set; }
 	}
@@ -59,6 +63,8 @@ namespace Nest
 		FunctionScoreMode? IFunctionScoreQuery.ScoreMode { get; set; }
 
 		FunctionBoostMode? IFunctionScoreQuery.BoostMode { get; set; }
+
+		float? IFunctionScoreQuery.MaxBoost { get; set; }
 
 		IRandomScoreFunction IFunctionScoreQuery.RandomScore { get; set; }
 
@@ -107,6 +113,12 @@ namespace Nest
 		public FunctionScoreQueryDescriptor<T> BoostMode(FunctionBoostMode mode)
 		{
 			((IFunctionScoreQuery)this).BoostMode = mode;
+			return this;
+		}
+
+		public FunctionScoreQueryDescriptor<T> MaxBoost(float maxBoost)
+		{
+			((IFunctionScoreQuery)this).MaxBoost = maxBoost;
 			return this;
 		}
 
