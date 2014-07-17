@@ -142,6 +142,11 @@ namespace Nest
 						var mr = r.Exception.InnerException as MaxRetryException;
 						if (mr != null)
 							throw mr;
+
+						var ae = r.Exception.Flatten();
+						if (ae.InnerException != null)
+							throw ae.InnerException;
+						throw ae;
 					}
 					return ResultsSelector<D, Q, R>(r.Result, descriptor);
 				});

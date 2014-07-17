@@ -30,7 +30,24 @@ namespace Nest.Tests.Integration.Exceptions
 				.ThrowOnElasticsearchServerExceptions());
 			var e = Assert.Throws<WebException>(() => client.RootNodeInfo());
 		}
+		
+		[Test]
+		public void ConnectionException_WithClientThatDoesNotThrow_StillThrows_Async()
+		{
+			var uri = ElasticsearchConfiguration.CreateBaseUri(9492);
+			var client = new ElasticClient(new ConnectionSettings(uri).SetTimeout(500));
+			Assert.Throws<WebException>(async () => await client.RootNodeInfoAsync());
+		}
 
+		[Test]
+		public void ConnectionException_WithThrowingClient_Async()
+		{
+			var uri = ElasticsearchConfiguration.CreateBaseUri(9494);
+			var client = new ElasticClient(new ConnectionSettings(uri)
+				.SetTimeout(500)
+				.ThrowOnElasticsearchServerExceptions());
+			Assert.Throws<WebException>(async () => await client.RootNodeInfoAsync());
+		}
 		[Test]
 		public void ServerError_Is_Set_ClientThat_DoesNotThow()
 		{
