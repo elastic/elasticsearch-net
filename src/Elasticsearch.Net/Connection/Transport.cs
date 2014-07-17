@@ -515,18 +515,29 @@ namespace Elasticsearch.Net.Connection
 			var uri = requestState.CreatePathOnCurrentNode();
 			var postData = requestState.PostData;
 			var requestConfiguration = requestState.RequestConfiguration;
-			switch (requestState.Method.ToLowerInvariant())
+			var method = requestState.Method.ToLowerInvariant();
+			try
 			{
-				case "head": return this.Connection.Head(uri, requestConfiguration);
-				case "get": return this.Connection.Get(uri, requestConfiguration);
-				case "post": return this.Connection.Post(uri, postData, requestConfiguration);
-				case "put": return this.Connection.Put(uri, postData, requestConfiguration);
-				case "delete":
-					return postData == null || postData.Length == 0
-						? this.Connection.Delete(uri, requestConfiguration)
-						: this.Connection.Delete(uri, postData, requestConfiguration);
+				switch (method)
+				{
+					case "head": return this.Connection.Head(uri, requestConfiguration);
+					case "get": return this.Connection.Get(uri, requestConfiguration);
+					case "post": return this.Connection.Post(uri, postData, requestConfiguration);
+					case "put": return this.Connection.Put(uri, postData, requestConfiguration);
+					case "delete":
+						return postData == null || postData.Length == 0
+							? this.Connection.Delete(uri, requestConfiguration)
+							: this.Connection.Delete(uri, postData, requestConfiguration);
+					default:
+						throw new Exception("Unknown HTTP method " + requestState.Method);
+				}
 			}
-			throw new Exception("Unknown HTTP method " + requestState.Method);
+			catch (Exception e)
+			{
+				var tcs = new TaskCompletionSource<ElasticsearchResponse<Stream>>();
+				tcs.SetException(e);
+				return tcs.Task;
+			}
 		}
 
 		private Task<MemoryStream> Iterate(IEnumerable<Task> asyncIterator, MemoryStream memoryStream)
