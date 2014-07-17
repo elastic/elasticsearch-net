@@ -4875,7 +4875,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html
 	///</pre>
 	///</summary>
-	public partial class UpdateRequest<TUpsert,TDocument> 
+	public partial class UpdateRequest<TDocument,TPartialDocument> 
 			{
 		
 		///<summary>Explicit write consistency setting for the operation</summary>

@@ -54,8 +54,8 @@ namespace Nest.Tests.Integration.Reproduce
 				.DynamicDateFormats(new[] { "dateOptionalTime", "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z" })
 				.Dynamic(false)
 				.IdField(i => i
-					.SetIndex("not_analyzed")
-					.SetStored()
+					.Index("not_analyzed")
+					.Store()
 				)
 				.Properties(o => o
 					.String(i => i

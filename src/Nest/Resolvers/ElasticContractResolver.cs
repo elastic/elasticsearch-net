@@ -98,7 +98,7 @@ namespace Nest.Resolvers
 			var lookup = defaultProperties.ToLookup(p => p.PropertyName);
 
 			defaultProperties = PropertiesOf<IQuery>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IAllFieldMapping>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ISpecialField>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IExternalFieldDeclaration>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IQueryContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRequest>(type, memberSerialization, defaultProperties, lookup);

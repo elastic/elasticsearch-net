@@ -27,11 +27,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D55
 		..\build.bat = ..\build.bat
 		..\build\build.fsx = ..\build\build.fsx
 		..\build\download-nuget.ps1 = ..\build\download-nuget.ps1
+		..\build\Elasticsearch.Net.Connection.HttpClient.nuspec = ..\build\Elasticsearch.Net.Connection.HttpClient.nuspec
 		..\build\Elasticsearch.Net.Connection.Thrift.nuspec = ..\build\Elasticsearch.Net.Connection.Thrift.nuspec
 		..\build\Elasticsearch.Net.nuspec = ..\build\Elasticsearch.Net.nuspec
 		..\build\InheritDoc.fsx = ..\build\InheritDoc.fsx
 		..\build\NEST.nuspec = ..\build\NEST.nuspec
-		..\build\NESTBuild.proj = ..\build\NESTBuild.proj
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Unit", "Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj", "{97408393-78AC-45DF-BE6E-4C219A2E456D}"

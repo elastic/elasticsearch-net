@@ -13,7 +13,7 @@ namespace Nest
 		{
 			@object.ThrowIfNull("object");
 			indexSelector = indexSelector ?? (s => s);
-			var descriptor = indexSelector(new IndexDescriptor<T>().Object(@object));
+			var descriptor = indexSelector(new IndexDescriptor<T>().IdFrom(@object));
 			return this.Dispatch<IndexDescriptor<T>, IndexRequestParameters, IndexResponse>(
 				descriptor,
 				(p, d) => this.RawDispatch.IndexDispatch<IndexResponse>(p, @object));
@@ -34,7 +34,7 @@ namespace Nest
 		{
 			@object.ThrowIfNull("object");
 			indexSelector = indexSelector ?? (s => s);
-			var descriptor = indexSelector(new IndexDescriptor<T>().Object(@object));
+			var descriptor = indexSelector(new IndexDescriptor<T>().IdFrom(@object));
 			return this.DispatchAsync<IndexDescriptor<T>, IndexRequestParameters, IndexResponse, IIndexResponse>(
 				descriptor,
 				(p, d) => this.RawDispatch.IndexDispatchAsync<IndexResponse>(p, @object));

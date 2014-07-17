@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Core.Update
 		public void Inferred()
 		{
 			var result = this._client.Update<ElasticsearchProject>(u => u
-				.Object(new ElasticsearchProject { Id = 2 })
+				.IdFrom(new ElasticsearchProject { Id = 2 })
 			);
 			Assert.NotNull(result, "PutWarmer result should not be null");
 			var status = result.ConnectionStatus;
@@ -25,7 +25,7 @@ namespace Nest.Tests.Unit.Core.Update
 		{
 			var result = this._client.Update<ElasticsearchProject>(u => u
 				.Index("myindex")
-				.Object(new ElasticsearchProject { Id = 2 })
+				.IdFrom(new ElasticsearchProject { Id = 2 })
 			);
 			Assert.NotNull(result, "PutWarmer result should not be null");
 			var status = result.ConnectionStatus;

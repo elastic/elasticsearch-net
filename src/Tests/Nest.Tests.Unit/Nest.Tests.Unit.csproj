@@ -153,14 +153,27 @@
     <None Include="Core\Indices\Analysis\Analyzers\PatternAnalyzerTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Core\Indices\Similarity\BM25SimilarityTest.json" />
-    <None Include="Core\Indices\Similarity\DefaultSimilarityTest.json" />
-    <None Include="Core\Indices\Similarity\DFRSimilarityTest.json" />
-    <None Include="Core\Indices\Similarity\IBSimilarityTest.json" />
-    <None Include="Core\Indices\Similarity\LMDirichletSimilarityTest.json" />
-    <None Include="Core\Indices\Similarity\LMJelinekSimilarityTest.json" />
-    <None Include="Core\Indices\Similarity\MultipleSimilaritiesTest.json" />
-    <None Include="Core\Indices\Similarity\SimilarityTest.json" />
+    <None Include="Core\Indices\Similarity\BM25SimilarityTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Similarity\DefaultSimilarityTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Similarity\DFRSimilarityTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Similarity\IBSimilarityTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Similarity\LMDirichletSimilarityTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Similarity\LMJelinekSimilarityTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Similarity\MultipleSimilaritiesTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Map\CustomMapping\RepresentUnknowImageMappingPlugin.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -194,6 +207,7 @@
     <Compile Include="Core\UpdateSettings\UpdateSettingsRequestTests.cs" />
     <Compile Include="Core\UpdateSettings\UpdateSettingsTests.cs" />
     <Compile Include="Core\Update\UpdateRequestTests.cs" />
+    <Compile Include="Core\Update\UpdateAPIConsistencyTests.cs" />
     <Compile Include="Core\Validate\ValidateRequestTests.cs" />
     <Compile Include="Core\Versioning\VersioningTests.cs" />
     <Compile Include="Core\Warmers\PutWarmerRequestTests.cs" />
@@ -362,7 +376,14 @@
     <Compile Include="Search\Query\Properties\PropertiesTests.cs" />
     <Compile Include="Search\Query\Singles\FunctionScoreQueryJson.cs" />
     <Compile Include="Search\Query\Singles\CommonTerms\CommonTermsTests.cs" />
-    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeCircleJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeEnvelopeJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeLineStringJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeMultiLineStringJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeMultiPointJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapeMultiPolygonJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapePointJson.cs" />
+    <Compile Include="Search\Query\Singles\GeoShape\GeoShapePolygonJson.cs" />
     <Compile Include="Search\Query\Singles\SimpleQueryString\SimpleQueryStringQueryJson.cs" />
     <Compile Include="Search\Query\Singles\RegexpQueryJson.cs" />
     <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
@@ -792,7 +813,28 @@
     <None Include="Search\Query\Singles\CommonTerms\CommonTermsFull.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Query\Singles\GeoShape\GeoShapeFull.json">
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeCircle.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeEnvelope.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeLineString.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeMultiPoint.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeMultiLineString.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapeMultiPolygon.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapePoint.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\GeoShape\GeoShapePolygon.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json">

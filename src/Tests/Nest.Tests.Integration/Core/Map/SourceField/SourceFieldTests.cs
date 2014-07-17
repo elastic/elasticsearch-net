@@ -11,11 +11,11 @@ namespace Nest.Tests.Integration.Core.Map.SourceField
 		{
 			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.SourceField(s => s
-					.SetDisabled()
-					.SetCompression()
-					.SetCompressionTreshold("200b")
-					.SetExcludes(new[] { "path1.*" })
-					.SetIncludes(new[] { "path2.*" })
+					.Enabled(false)
+					.Compress()
+					.CompressionThreshold("200b")
+					.Excludes(new[] { "path1.*" })
+					.Includes(new[] { "path2.*" })
 				)
 			);
 			this.DefaultResponseAssertations(result);

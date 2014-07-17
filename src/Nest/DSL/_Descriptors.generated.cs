@@ -5418,13 +5418,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html
 	///</pre>
 	///</summary>
-	public partial class UpdateDescriptor<TUpsert,TDocument> 
+	public partial class UpdateDescriptor<TDocument,TPartialDocument> 
 	{
 		
 	
 
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public UpdateDescriptor<TUpsert,TDocument> Consistency(Consistency consistency)
+		public UpdateDescriptor<TDocument,TPartialDocument> Consistency(Consistency consistency)
 		{
 			this.Request.RequestParameters.Consistency(consistency);
 			return this;
@@ -5432,7 +5432,7 @@ namespace Nest
 		
 
 		///<summary>The script language (default: mvel)</summary>
-		public UpdateDescriptor<TUpsert,TDocument> Lang(string lang)
+		public UpdateDescriptor<TDocument,TPartialDocument> Lang(string lang)
 		{
 			this.Request.RequestParameters.Lang(lang);
 			return this;
@@ -5440,7 +5440,7 @@ namespace Nest
 		
 
 		///<summary>ID of the parent document</summary>
-		public UpdateDescriptor<TUpsert,TDocument> Parent(string parent)
+		public UpdateDescriptor<TDocument,TPartialDocument> Parent(string parent)
 		{
 			this.Request.RequestParameters.Parent(parent);
 			return this;
@@ -5448,7 +5448,7 @@ namespace Nest
 		
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public UpdateDescriptor<TUpsert,TDocument> Refresh(bool refresh = true)
+		public UpdateDescriptor<TDocument,TPartialDocument> Refresh(bool refresh = true)
 		{
 			this.Request.RequestParameters.Refresh(refresh);
 			return this;
@@ -5456,7 +5456,7 @@ namespace Nest
 		
 
 		///<summary>Specific replication type</summary>
-		public UpdateDescriptor<TUpsert,TDocument> Replication(Replication replication)
+		public UpdateDescriptor<TDocument,TPartialDocument> Replication(Replication replication)
 		{
 			this.Request.RequestParameters.Replication(replication);
 			return this;
@@ -5464,7 +5464,7 @@ namespace Nest
 		
 
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public UpdateDescriptor<TUpsert,TDocument> RetryOnConflict(long retry_on_conflict)
+		public UpdateDescriptor<TDocument,TPartialDocument> RetryOnConflict(long retry_on_conflict)
 		{
 			this.Request.RequestParameters.RetryOnConflict(retry_on_conflict);
 			return this;
@@ -5472,7 +5472,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value</summary>
-		public UpdateDescriptor<TUpsert,TDocument> Routing(string routing)
+		public UpdateDescriptor<TDocument,TPartialDocument> Routing(string routing)
 		{
 			this.Request.RequestParameters.Routing(routing);
 			return this;
@@ -5480,7 +5480,7 @@ namespace Nest
 		
 
 		///<summary>The URL-encoded script definition (instead of using request body)</summary>
-		public UpdateDescriptor<TUpsert,TDocument> ScriptQueryString(string script)
+		public UpdateDescriptor<TDocument,TPartialDocument> ScriptQueryString(string script)
 		{
 			this.Request.RequestParameters.Script(script);
 			return this;
@@ -5488,7 +5488,7 @@ namespace Nest
 		
 
 		///<summary>Explicit operation timeout</summary>
-		public UpdateDescriptor<TUpsert,TDocument> Timeout(string timeout)
+		public UpdateDescriptor<TDocument,TPartialDocument> Timeout(string timeout)
 		{
 			this.Request.RequestParameters.Timeout(timeout);
 			return this;
@@ -5496,7 +5496,7 @@ namespace Nest
 		
 
 		///<summary>Explicit timestamp for the document</summary>
-		public UpdateDescriptor<TUpsert,TDocument> Timestamp(string timestamp)
+		public UpdateDescriptor<TDocument,TPartialDocument> Timestamp(string timestamp)
 		{
 			this.Request.RequestParameters.Timestamp(timestamp);
 			return this;
@@ -5504,7 +5504,7 @@ namespace Nest
 		
 
 		///<summary>Expiration time for the document</summary>
-		public UpdateDescriptor<TUpsert,TDocument> Ttl(string ttl)
+		public UpdateDescriptor<TDocument,TPartialDocument> Ttl(string ttl)
 		{
 			this.Request.RequestParameters.Ttl(ttl);
 			return this;
@@ -5512,7 +5512,7 @@ namespace Nest
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public UpdateDescriptor<TUpsert,TDocument> Version(long version)
+		public UpdateDescriptor<TDocument,TPartialDocument> Version(long version)
 		{
 			this.Request.RequestParameters.Version(version);
 			return this;
@@ -5520,7 +5520,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public UpdateDescriptor<TUpsert,TDocument> VersionType(VersionType version_type)
+		public UpdateDescriptor<TDocument,TPartialDocument> VersionType(VersionType version_type)
 		{
 			this.Request.RequestParameters.VersionType(version_type);
 			return this;

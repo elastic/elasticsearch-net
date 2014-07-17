@@ -20,8 +20,8 @@ namespace Nest.Tests.Unit.Core.Map.TypeField
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.TypeField(t => t
-					.SetIndexed()
-					.SetStored()
+					.Index()
+					.Store()
 				)
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod()); 
@@ -31,8 +31,8 @@ namespace Nest.Tests.Unit.Core.Map.TypeField
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.TypeField(t => t
-					.SetIndexed(NonStringIndexOption.No)
-					.SetStored(false)
+					.Index(NonStringIndexOption.No)
+					.Store(false)
 				)
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());

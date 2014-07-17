@@ -11,8 +11,8 @@ namespace Nest.Tests.Integration.Core.Map.AnalyzerField
 		{
 			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.AnalyzerField(a => a
-					.SetPath(p => p.Name)
-					.SetIndexed()
+					.Path(p => p.Name)
+					.Index()
 				)
 			);
 			this.DefaultResponseAssertations(result);
@@ -22,8 +22,8 @@ namespace Nest.Tests.Integration.Core.Map.AnalyzerField
 		{
 			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.AnalyzerField(a => a
-					.SetPath("my_difficult_field_name")
-					.SetIndexed(false)
+					.Path("my_difficult_field_name")
+					.Index(false)
 				)
 			);
 			this.DefaultResponseAssertations(result);

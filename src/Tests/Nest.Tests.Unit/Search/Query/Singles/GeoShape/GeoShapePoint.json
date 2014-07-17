@@ -1,0 +1,14 @@
+﻿{
+  "from": 0,
+  "size": 10,
+  "query": {
+    "geo_shape": {
+      "myGeoShape": {
+        "shape": {
+          "coordinates": [ -45.0, 45.0 ],
+          "type": "point"
+        }
+      }
+    }
+  }
+}
