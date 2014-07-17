@@ -408,7 +408,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				seenPorts.ShouldAllBeEquivalentTo(_uris.Select(u=>u.Port));
 				var ae = e.InnerException as AggregateException;
 				ae = ae.Flatten();
-				ae.InnerException.Message.Should().Be("Something bad happened");
+				ae.InnerException.Message.Should().Contain("Pinging");
 			}
 		}
 		
@@ -443,7 +443,9 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				//make sure that if a ping throws an exception it wont
 				//keep retrying to ping the same node but failover to the next
 				seenPorts.ShouldAllBeEquivalentTo(_uris.Select(u=>u.Port));
-				e.InnerException.Message.Should().Be("Something bad happened");
+				var aggregateException = e.InnerException as AggregateException;
+				aggregateException.Should().NotBeNull();
+				aggregateException.InnerExceptions.Should().Contain(ex => ex.GetType().Name == "PingException");
 			}
 		}
 	}

@@ -46,6 +46,7 @@ namespace Elasticsearch.Net.Connection.RequestState
 		public int Sniffs { get; set; }
 
 		public List<Uri> SeenNodes { get; private set; }
+		public List<Exception> SeenExceptions { get; private set; }
 		public List<RequestMetrics> RequestMetrics { get; set; }
 
 		public Uri CurrentNode
@@ -76,6 +77,7 @@ namespace Elasticsearch.Net.Connection.RequestState
 		{
 			this.StartedOn = DateTime.UtcNow;
 			this.SeenNodes = new List<Uri>();
+			this.SeenExceptions = new List<Exception>();
 			this.ClientSettings = settings;
 			this.RequestParameters = requestParameters;
 			this._traceEnabled = settings.TraceEnabled;
@@ -125,6 +127,12 @@ namespace Elasticsearch.Net.Connection.RequestState
 
 		public void SetResult(ElasticsearchResponse<T> result)
 		{
+			if (result == null)
+			{
+				if (!_traceEnabled) return;
+				this._stopwatch.Stop();
+				return;
+			}
 			result.NumberOfRetries = this.Retried;
 			if (this.ClientSettings.MetricsEnabled)
 				result.Metrics = new CallMetrics

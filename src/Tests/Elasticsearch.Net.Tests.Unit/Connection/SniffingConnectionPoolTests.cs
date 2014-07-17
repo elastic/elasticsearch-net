@@ -384,7 +384,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				
 				//make sure the sniffs actually happened on all the individual nodes
 				seenPorts.ShouldAllBeEquivalentTo(uris.Select(u=>u.Port));
-				e.InnerException.Message.Should().Be("Something bad happened");
+				e.InnerException.Message.Should().Contain("Sniffing known nodes");
 			}
 		}
 		
@@ -428,7 +428,9 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				//make sure that if a ping throws an exception it wont
 				//keep retrying to ping the same node but failover to the next
 				seenPorts.ShouldAllBeEquivalentTo(uris.Select(u=>u.Port));
-				e.InnerException.Message.Should().Be("Something bad happened");
+
+				var sniffException = e.InnerException as SniffException;
+				sniffException.Should().NotBeNull();
 			}
 		}
 	}

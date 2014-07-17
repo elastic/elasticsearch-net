@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Exceptions;
 
 namespace Nest
 {
@@ -134,7 +135,16 @@ namespace Nest
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
 			return dispatch(pathInfo, descriptor)
-				.ContinueWith<I>(r => ResultsSelector<D, Q, R>(r.Result, descriptor));
+				.ContinueWith<I>(r =>
+				{
+					if (r.IsFaulted && r.Exception != null)
+					{
+						var mr = r.Exception.InnerException as MaxRetryException;
+						if (mr != null)
+							throw mr;
+					}
+					return ResultsSelector<D, Q, R>(r.Result, descriptor);
+				});
 		}
 
 
