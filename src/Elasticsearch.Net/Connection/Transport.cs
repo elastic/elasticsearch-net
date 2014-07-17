@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection.Configuration;
@@ -89,15 +90,24 @@ namespace Elasticsearch.Net.Connection
 				RequestTimeout = pingTimeout
 			};
 			var rq = requestState.InitiateRequest(RequestType.Ping);
-			return this.Connection.Head(requestState.CreatePathOnCurrentNode(""), requestOverrides)
-				.ContinueWith(t =>
-				{
-					rq.Finish(t.Result.Success, t.Result.HttpStatusCode);
-					rq.Dispose();
-					var response = t.Result;
-					using (response.Response)
-						return response.Success;
-				});
+			try
+			{
+				return this.Connection.Head(requestState.CreatePathOnCurrentNode(""), requestOverrides)
+					.ContinueWith(t =>
+					{
+						rq.Finish(t.Result.Success, t.Result.HttpStatusCode);
+						rq.Dispose();
+						var response = t.Result;
+						using (response.Response)
+							return response.Success;
+					});
+			}
+			catch (Exception e)
+			{
+				var tcs = new TaskCompletionSource<bool>();
+				tcs.SetException(e);
+				return tcs.Task;
+			}
 		}
 
 		private IList<Uri> Sniff(ITransportRequestState ownerState = null)
@@ -403,14 +413,14 @@ namespace Elasticsearch.Net.Connection
 				return this.PingAsync(requestState)
 					.ContinueWith(t =>
 					{
+						if (t.IsFaulted)
+							return this.RetryRequestAsync(requestState, t.Exception);
 						if (t.IsCompleted)
 						{
 							if (!t.Result)
 								return this.RetryRequestAsync(requestState, t.Exception);
 							return this.FinishOrRetryRequestAsync(requestState);
 						}
-						if (t.IsFaulted)
-							return this.RetryRequestAsync(requestState, t.Exception);
 						return null;
 					}).Unwrap();
 			}

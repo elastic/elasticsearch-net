@@ -22,7 +22,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			.MaximumRetries(_retries);
 
 		[Test]
-		public void ThrowsOutOfNodesException_AndRetriesTheSpecifiedTimes()
+		public void ThrowsMaxRetryException_AndRetriesTheSpecifiedTimes()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
@@ -43,7 +43,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 
 		[Test]
-		public void ThrowsOutOfNodesException_AndRetriesTheSpecifiedTimes_Async()
+		public void ThrowsMaxRetryException_AndRetriesTheSpecifiedTimes_Async()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
@@ -179,6 +179,6 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 			}
 		}
-
+		
 	}
 }
