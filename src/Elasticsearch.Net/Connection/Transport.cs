@@ -660,6 +660,7 @@ namespace Elasticsearch.Net.Connection
 					var raw = ms.ToArray().Utf8String();
 				}
 				ms.Position = 0;
+				streamResponse.Response.Close();
 				streamResponse.Response = ms;
 			}
 			else

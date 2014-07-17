@@ -48,6 +48,7 @@ namespace Nest.Tests.Integration.Exceptions
 				.ThrowOnElasticsearchServerExceptions());
 			Assert.Throws<WebException>(async () => await client.RootNodeInfoAsync());
 		}
+
 		[Test]
 		public void ServerError_Is_Set_ClientThat_DoesNotThow()
 		{

@@ -194,6 +194,7 @@
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\UriExtensionsTests.cs" />
     <Compile Include="BigBadUrlUnitTests.cs" />
+    <Compile Include="Internals\Exceptions\BadQueryServerExceptionTests.cs" />
     <Compile Include="Internals\Inferno\EscapedFormatTests.cs" />
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
@@ -605,6 +606,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Update\UpsertUsingScript.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Internals\Exceptions\BadQuery.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Internals\Serialize\ClassWithCollectionSerializes.json">

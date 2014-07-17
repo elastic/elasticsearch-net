@@ -41,13 +41,19 @@ namespace Nest.Tests.Unit
 			//Lazy programmers for the win!
 			throw new Exception(s);
 		}
-		protected ElasticClient GetFixedReturnClient(MethodBase methodInfo, string fileName)
+		protected ElasticClient GetFixedReturnClient(
+			MethodBase methodInfo, 
+			string fileName = null,
+			int statusCode = 200,
+			Func<ConnectionSettings, ConnectionSettings> alterSettings = null
+			)
 		{
-			var settings = new ConnectionSettings(UnitTestDefaults.Uri, UnitTestDefaults.DefaultIndex)
-				.ExposeRawResponse();
+			Func<ConnectionSettings, ConnectionSettings> alter = alterSettings ?? (s => s);
+			var settings = alter(new ConnectionSettings(UnitTestDefaults.Uri, UnitTestDefaults.DefaultIndex)
+				.ExposeRawResponse());
 			var file = this.GetFileFromMethod(methodInfo, fileName);
 			var jsonResponse = File.ReadAllText(file);
-			var connection = new InMemoryConnection(this._settings, jsonResponse);
+			var connection = new InMemoryConnection(settings, jsonResponse, statusCode);
 			var client = new ElasticClient(settings, connection);
 			return client;
 		}
