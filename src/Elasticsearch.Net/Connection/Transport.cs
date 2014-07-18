@@ -64,7 +64,10 @@ namespace Elasticsearch.Net.Connection
 
 		private bool Ping(ITransportRequestState requestState)
 		{
-			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(50);
+			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(200);
+			pingTimeout = requestState.RequestConfiguration != null
+				? requestState.RequestConfiguration.ConnectTimeout.GetValueOrDefault(pingTimeout)
+				: pingTimeout;
 			var requestOverrides = new RequestConfiguration
 			{
 				ConnectTimeout = pingTimeout,
@@ -96,7 +99,10 @@ namespace Elasticsearch.Net.Connection
 
 		private Task<bool> PingAsync(ITransportRequestState requestState)
 		{
-			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(50);
+			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(200);
+			pingTimeout = requestState.RequestConfiguration != null
+				? requestState.RequestConfiguration.ConnectTimeout.GetValueOrDefault(pingTimeout)
+				: pingTimeout;
 			var requestOverrides = new RequestConfiguration
 			{
 				ConnectTimeout = pingTimeout,

@@ -121,6 +121,7 @@ namespace Nest.Tests.Integration.Exceptions
 			{
 				var result = client.Search<ElasticsearchProject>(s => s.MatchAll());
 				result.IsValid.Should().BeFalse();
+				client.RootNodeInfo(r => r.RequestConfiguration(c => c.ConnectTimeout(2000)));
 			});
 			e.Should().NotBeNull();
 		}
