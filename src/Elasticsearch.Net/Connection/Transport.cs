@@ -82,7 +82,7 @@ namespace Elasticsearch.Net.Connection
 					rq.Finish(response.Success, response.HttpStatusCode);
 				}
 				if (!response.HttpStatusCode.HasValue || response.HttpStatusCode.Value == -1)
-					throw new Exception("ping returned no status code");
+					throw new Exception("ping returned no status code", response.OriginalException);
 				if (response.Response == null)
 					return response.Success;
 

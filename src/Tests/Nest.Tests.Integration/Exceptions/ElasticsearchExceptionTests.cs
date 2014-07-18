@@ -121,7 +121,6 @@ namespace Nest.Tests.Integration.Exceptions
 			{
 				var result = client.Search<ElasticsearchProject>(s => s.MatchAll());
 				result.IsValid.Should().BeFalse();
-				client.RootNodeInfo(r => r.RequestConfiguration(c => c.ConnectTimeout(2000)));
 			});
 			e.Should().NotBeNull();
 			Assert.Pass(e.ToString());
@@ -140,7 +139,9 @@ namespace Nest.Tests.Integration.Exceptions
 			);
 			var e = Assert.Throws<MaxRetryException>(async () =>
 			{
-				var result = await client.SearchAsync<ElasticsearchProject>(s => s.MatchAll());
+				var result = await client.SearchAsync<ElasticsearchProject>(s => s
+					.MatchAll()
+				);
 				result.IsValid.Should().BeFalse();
 			});
 			e.Should().NotBeNull();

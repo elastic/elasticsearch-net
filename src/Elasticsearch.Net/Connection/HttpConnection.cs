@@ -157,7 +157,8 @@ namespace Elasticsearch.Net.Connection
 				proxy.Credentials = credentials;
 				myReq.Proxy = proxy;
 			}
-            if(!this.ConnectionSettings.AutomaticProxyDetection)
+
+            if(this.ConnectionSettings.DisableAutomaticProxyDetection)
             {
                 myReq.Proxy = null;
             }
