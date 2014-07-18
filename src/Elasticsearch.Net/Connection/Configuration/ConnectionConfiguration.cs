@@ -88,8 +88,8 @@ namespace Elasticsearch.Net.Connection
 #endif
 		bool IConnectionConfigurationValues.MetricsEnabled { get{ return _enableMetrics; } }
 
-        private bool _automaticProxyDetection = true;
-        bool IConnectionConfigurationValues.AutomaticProxyDetection { get { return _automaticProxyDetection; } }
+        private bool _disableAutomaticProxyDetection = true;
+        bool IConnectionConfigurationValues.DisableAutomaticProxyDetection { get { return _disableAutomaticProxyDetection; } }
 
 		private int _maximumAsyncConnections;
 		int IConnectionConfigurationValues.MaximumAsyncConnections { get{ return _maximumAsyncConnections; } }
@@ -181,6 +181,11 @@ namespace Elasticsearch.Net.Connection
 			return (T) this;
 		}
 
+		public T DisableAutomaticProxyDetection(bool disable = true)
+		{
+			this._disableAutomaticProxyDetection = disable;
+			return (T)this;
+		}
 		
 		/// <summary>
 		/// By enabling metrics more metadata is returned per API call about requests (ping, sniff, failover) and general stats

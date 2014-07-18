@@ -41,8 +41,8 @@ namespace Nest
 		IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
 
 		[JsonProperty(PropertyName = "sort")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<PropertyPathMarker, ISort> Sort { get; set; }
+		[JsonConverter(typeof(SortCollectionConverter))]
+		IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
 
 		[JsonProperty(PropertyName = "facets")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
@@ -140,7 +140,7 @@ namespace Nest
 		public IList<PropertyPathMarker> Fields { get; set; }
 		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
-		public IDictionary<PropertyPathMarker, ISort> Sort { get; set; }
+		public IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
 		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
 		public IFilterContainer Filter { get; set; }
 		public IQueryContainer Query { get; set; }
@@ -200,7 +200,7 @@ namespace Nest
 		public bool? TrackScores { get; set; }
 		public double? MinScore { get; set; }
 		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
-		public IDictionary<PropertyPathMarker, ISort> Sort { get; set; }
+		public IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
 		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
 		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
 		public IHighlightRequest Highlight { get; set; }
@@ -290,7 +290,7 @@ namespace Nest
 
 		IDictionary<IndexNameMarker, double> ISearchRequest.IndicesBoost { get; set; }
 
-		IDictionary<PropertyPathMarker, ISort> ISearchRequest.Sort { get; set; }
+		IList<KeyValuePair<PropertyPathMarker, ISort>> ISearchRequest.Sort { get; set; }
 
 		IDictionary<PropertyPathMarker, IFacetContainer> ISearchRequest.Facets { get; set; }
 
@@ -568,9 +568,9 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
 		{
-			if (Self.Sort == null) Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
+			if (Self.Sort == null) Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
 
-			Self.Sort.Add(objectPath, new Sort() { Order = SortOrder.Ascending});
+			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>(objectPath, new Sort() { Order = SortOrder.Ascending}));
 			return this;
 		}
 
@@ -584,9 +584,9 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
 		{
-			if (Self.Sort == null) Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
+			if (Self.Sort == null) Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
 
-			Self.Sort.Add(objectPath, new Sort() { Order = SortOrder.Descending});
+			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>(objectPath, new Sort() { Order = SortOrder.Descending }));
 			return this;
 		}
 
@@ -600,8 +600,8 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> SortAscending(string field)
 		{
-			if (Self.Sort == null) Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
-			Self.Sort.Add(field, new Sort() { Order = SortOrder.Ascending });
+			if (Self.Sort == null) Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
+			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>(field, new Sort() { Order = SortOrder.Ascending }));
 			return this;
 		}
 
@@ -616,9 +616,9 @@ namespace Nest
 		public SearchDescriptor<T> SortDescending(string field)
 		{
 			if (Self.Sort == null)
-				Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
+				Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
 
-			Self.Sort.Add(field, new Sort() { Order = SortOrder.Descending});
+			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>(field, new Sort() { Order = SortOrder.Descending}));
 			return this;
 		}
 
@@ -629,11 +629,11 @@ namespace Nest
 		public SearchDescriptor<T> Sort(Func<SortFieldDescriptor<T>, IFieldSort> sortSelector)
 		{
 			if (Self.Sort == null)
-				Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
+				Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortFieldDescriptor<T>());
-			Self.Sort.Add(descriptor.Field, descriptor);
+			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>(descriptor.Field, descriptor));
 			return this;
 		}
 
@@ -644,11 +644,11 @@ namespace Nest
 		public SearchDescriptor<T> SortGeoDistance(Func<SortGeoDistanceDescriptor<T>, IGeoDistanceSort> sortSelector)
 		{
 			if (Self.Sort == null)
-				Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
+				Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortGeoDistanceDescriptor<T>());
-			Self.Sort.Add("_geo_distance", descriptor);
+			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>("_geo_distance", descriptor));
 			return this;
 		}
 
@@ -659,11 +659,11 @@ namespace Nest
 		public SearchDescriptor<T> SortScript(Func<SortScriptDescriptor<T>, IScriptSort> sortSelector)
 		{
 			if (Self.Sort == null)
-				Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
+				Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortScriptDescriptor<T>());
-			Self.Sort.Add("_script", descriptor);
+			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>("_script", descriptor));
 			return this;
 		}
 

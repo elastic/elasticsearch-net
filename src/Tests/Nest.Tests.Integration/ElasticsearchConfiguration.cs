@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration
 		public static Uri CreateBaseUri(int? port = null)
 		{
 			var host = Host;
-			if (port == null && Process.GetProcessesByName("fiddler").HasAny())
+			if (port != 9500 && Process.GetProcessesByName("fiddler").HasAny())
 				host = "ipv4.fiddler";
 
 			var uri = new UriBuilder("http", host, port.GetValueOrDefault(9200)).Uri;

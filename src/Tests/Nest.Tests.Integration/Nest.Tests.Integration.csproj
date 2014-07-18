@@ -115,6 +115,8 @@
     <Compile Include="DebugTests\MemoryUsageTests.cs" />
     <Compile Include="ElasticsearchConfiguration.cs" />
     <Compile Include="Core\IndexTests.cs" />
+    <Compile Include="Exceptions\ElasticsearchExceptionTests.cs" />
+    <Compile Include="Exceptions\ThrowAlwaysConnection.cs" />
     <Compile Include="Failover\FailoverSniffOnFaultTests.cs" />
     <Compile Include="Failover\FailoverSniffOnStartupTests.cs" />
     <Compile Include="Failover\FailoverPingTests.cs" />

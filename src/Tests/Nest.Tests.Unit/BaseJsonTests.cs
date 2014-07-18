@@ -41,13 +41,19 @@ namespace Nest.Tests.Unit
 			//Lazy programmers for the win!
 			throw new Exception(s);
 		}
-		protected ElasticClient GetFixedReturnClient(MethodBase methodInfo, string fileName)
+		protected ElasticClient GetFixedReturnClient(
+			MethodBase methodInfo, 
+			string fileName = null,
+			int statusCode = 200,
+			Func<ConnectionSettings, ConnectionSettings> alterSettings = null
+			)
 		{
-			var settings = new ConnectionSettings(UnitTestDefaults.Uri, UnitTestDefaults.DefaultIndex)
-				.ExposeRawResponse();
+			Func<ConnectionSettings, ConnectionSettings> alter = alterSettings ?? (s => s);
+			var settings = alter(new ConnectionSettings(UnitTestDefaults.Uri, UnitTestDefaults.DefaultIndex)
+				.ExposeRawResponse());
 			var file = this.GetFileFromMethod(methodInfo, fileName);
 			var jsonResponse = File.ReadAllText(file);
-			var connection = new InMemoryConnection(this._settings, jsonResponse);
+			var connection = new InMemoryConnection(settings, jsonResponse, statusCode);
 			var client = new ElasticClient(settings, connection);
 			return client;
 		}
@@ -119,7 +125,7 @@ namespace Nest.Tests.Unit
 			var @namespace = method.DeclaringType.Namespace;
 			var folderSep = Path.DirectorySeparatorChar.ToString();
 			var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", folderSep);
-			var file = Path.Combine(folder, (fileName ?? method.Name) + ".json");
+			var file = Path.Combine(folder, (fileName ?? method.Name).Replace(@"\", folderSep) + ".json");
 			file = Path.Combine(Environment.CurrentDirectory.Replace("bin" + folderSep + "Debug", "").Replace("bin" + folderSep + "Release", ""), file);
 			return file;
 		}

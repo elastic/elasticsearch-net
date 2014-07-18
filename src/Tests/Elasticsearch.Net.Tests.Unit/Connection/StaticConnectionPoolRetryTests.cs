@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
@@ -370,6 +372,80 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				//every time a connection succeeds on a node it will be marked
 				//alive therefor the last node should be marked alive 4 times
 				markLastAlive.MustHaveHappened(Repeated.Exactly.Times(4));
+			}
+		}
+
+		[Test]
+		public void ShouldRetryOnPingConnectionException_Async()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{	
+				var connectionPool = new StaticConnectionPool(_uris, randomizeOnStartup: false);
+				var config = new ConnectionConfiguration(connectionPool);
+				
+				fake.Provide<IConnectionConfigurationValues>(config);
+				FakeCalls.ProvideDefaultTransport(fake);
+
+				var pingCall = FakeCalls.PingAtConnectionLevelAsync(fake);
+				var seenPorts = new List<int>();
+				pingCall.ReturnsLazily((Uri u, IRequestConfiguration c) =>
+				{
+					seenPorts.Add(u.Port);
+					throw new Exception("Something bad happened");
+				});
+
+				var getCall = FakeCalls.GetCall(fake);
+				getCall.Returns(FakeResponse.OkAsync(config));
+
+				var client = fake.Resolve<ElasticsearchClient>();
+
+				var e = Assert.Throws<MaxRetryException>(async () => await client.InfoAsync());
+				pingCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
+				getCall.MustNotHaveHappened();
+				
+				//make sure that if a ping throws an exception it wont
+				//keep retrying to ping the same node but failover to the next
+				seenPorts.ShouldAllBeEquivalentTo(_uris.Select(u=>u.Port));
+				var ae = e.InnerException as AggregateException;
+				ae = ae.Flatten();
+				ae.InnerException.Message.Should().Contain("Pinging");
+			}
+		}
+		
+		[Test]
+		public void ShouldRetryOnPingConnectionException()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{	
+				var connectionPool = new StaticConnectionPool(_uris, randomizeOnStartup: false);
+				var config = new ConnectionConfiguration(connectionPool);
+				
+				fake.Provide<IConnectionConfigurationValues>(config);
+				FakeCalls.ProvideDefaultTransport(fake);
+
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				var seenPorts = new List<int>();
+				pingCall.ReturnsLazily((Uri u, IRequestConfiguration c) =>
+				{
+					seenPorts.Add(u.Port);
+					throw new Exception("Something bad happened");
+				});
+
+				var getCall = FakeCalls.GetSyncCall(fake);
+				getCall.Returns(FakeResponse.Ok(config));
+
+				var client = fake.Resolve<ElasticsearchClient>();
+
+				var e = Assert.Throws<MaxRetryException>(() => client.Info());
+				pingCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
+				getCall.MustNotHaveHappened();
+				
+				//make sure that if a ping throws an exception it wont
+				//keep retrying to ping the same node but failover to the next
+				seenPorts.ShouldAllBeEquivalentTo(_uris.Select(u=>u.Port));
+				var aggregateException = e.InnerException as AggregateException;
+				aggregateException.Should().NotBeNull();
+				aggregateException.InnerExceptions.Should().Contain(ex => ex.GetType().Name == "PingException");
 			}
 		}
 	}

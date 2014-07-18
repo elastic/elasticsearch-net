@@ -335,5 +335,103 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				seenNodes[6].Port.Should().Be(9201);
 			}
 		}
+		
+		[Test]
+		public void ShouldRetryOnSniffConnectionException_Async()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{	
+				var uris = new[]
+				{
+					new Uri("http://localhost:9200"),
+					new Uri("http://localhost:9201"),
+					new Uri("http://localhost:9202")
+				};
+				var connectionPool = new SniffingConnectionPool(uris, randomizeOnStartup: false);
+				var config = new ConnectionConfiguration(connectionPool)
+					.SniffOnConnectionFault();
+				
+				fake.Provide<IConnectionConfigurationValues>(config);
+
+				var pingAsyncCall = FakeCalls.PingAtConnectionLevelAsync(fake);
+				pingAsyncCall.Returns(FakeResponse.OkAsync(config));
+
+				//sniffing is always synchronous and in turn will issue synchronous pings
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
+				var sniffCall = FakeCalls.Sniff(fake);
+				var seenPorts = new List<int>();
+				sniffCall.ReturnsLazily((Uri u, IRequestConfiguration c) =>
+				{
+					seenPorts.Add(u.Port);
+					throw new Exception("Something bad happened");
+				});
+
+				var getCall = FakeCalls.GetCall(fake);
+				getCall.Returns(FakeResponse.BadAsync(config));
+
+				FakeCalls.ProvideDefaultTransport(fake);
+				
+				var client = fake.Resolve<ElasticsearchClient>();
+
+				var e = Assert.Throws<MaxRetryException>(async () => await client.NodesHotThreadsAsync("nodex"));
+
+				//all nodes must be tried to sniff for more information
+				sniffCall.MustHaveHappened(Repeated.Exactly.Times(uris.Count()));
+				//make sure we only saw one call to hot threads (the one that failed initially)
+				getCall.MustHaveHappened(Repeated.Exactly.Once);
+				
+				//make sure the sniffs actually happened on all the individual nodes
+				seenPorts.ShouldAllBeEquivalentTo(uris.Select(u=>u.Port));
+				e.InnerException.Message.Should().Contain("Sniffing known nodes");
+			}
+		}
+		
+		[Test]
+		public void ShouldRetryOnSniffConnectionException()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{	
+				var uris = new[]
+				{
+					new Uri("http://localhost:9200"),
+					new Uri("http://localhost:9201")
+				};
+				var connectionPool = new SniffingConnectionPool(uris, randomizeOnStartup: false);
+				var config = new ConnectionConfiguration(connectionPool)
+					.SniffOnConnectionFault();
+				
+				fake.Provide<IConnectionConfigurationValues>(config);
+				FakeCalls.ProvideDefaultTransport(fake);
+
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
+				var sniffCall = FakeCalls.Sniff(fake);
+				var seenPorts = new List<int>();
+				sniffCall.ReturnsLazily((Uri u, IRequestConfiguration c) =>
+				{
+					seenPorts.Add(u.Port);
+					throw new Exception("Something bad happened");
+				});
+
+				var getCall = FakeCalls.GetSyncCall(fake);
+				getCall.Returns(FakeResponse.Bad(config));
+
+				var client = fake.Resolve<ElasticsearchClient>();
+
+				var e = Assert.Throws<MaxRetryException>(() => client.Info());
+				sniffCall.MustHaveHappened(Repeated.Exactly.Times(uris.Count()));
+				getCall.MustHaveHappened(Repeated.Exactly.Once);
+				
+				//make sure that if a ping throws an exception it wont
+				//keep retrying to ping the same node but failover to the next
+				seenPorts.ShouldAllBeEquivalentTo(uris.Select(u=>u.Port));
+
+				var sniffException = e.InnerException as SniffException;
+				sniffException.Should().NotBeNull();
+			}
+		}
 	}
 }

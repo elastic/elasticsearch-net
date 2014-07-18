@@ -11,6 +11,8 @@ namespace Elasticsearch.Net.Connection
 	public class InMemoryConnection : HttpConnection
 	{
 		private byte[] _fixedResultBytes = Encoding.UTF8.GetBytes("{ \"USING NEST IN MEMORY CONNECTION\"  : null }");
+		private int _statusCode;
+
 		public InMemoryConnection()
 			: base(new ConnectionConfiguration())
 		{
@@ -19,13 +21,14 @@ namespace Elasticsearch.Net.Connection
 		public InMemoryConnection(IConnectionConfigurationValues settings)
 			: base(settings)
 		{
-
+			_statusCode = 200;
 		}
 
-		public InMemoryConnection(IConnectionConfigurationValues settings, string fixedResult)
+		public InMemoryConnection(IConnectionConfigurationValues settings, string fixedResult, int statusCode = 200)
 			: this(settings)
 		{
 			_fixedResultBytes = Encoding.UTF8.GetBytes(fixedResult);
+			_statusCode = statusCode;
 		}
 
 		protected override ElasticsearchResponse<Stream> DoSynchronousRequest(HttpWebRequest request, byte[] data = null, IRequestConfiguration requestSpecificConfig = null)
@@ -38,7 +41,7 @@ namespace Elasticsearch.Net.Connection
 			var method = request.Method;
 			var path = request.RequestUri.ToString();
 
-			var cs = ElasticsearchResponse<Stream>.Create(this.ConnectionSettings, 200, method, path, data);
+			var cs = ElasticsearchResponse<Stream>.Create(this.ConnectionSettings, _statusCode, method, path, data);
 			cs.Response = new MemoryStream(_fixedResultBytes);
 			if (this.ConnectionSettings.ConnectionStatusHandler != null)
 				this.ConnectionSettings.ConnectionStatusHandler(cs);
