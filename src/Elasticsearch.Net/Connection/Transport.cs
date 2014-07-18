@@ -423,10 +423,6 @@ namespace Elasticsearch.Net.Connection
 						var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
 						if (t.Exception != null)
 						{
-							var mr = t.Exception.InnerException as MaxRetryException;
-							if (mr != null) 
-								throw mr;
-
 							tcs.SetException(t.Exception.Flatten());
 							requestState.SetResult(null);
 						}
@@ -435,7 +431,6 @@ namespace Elasticsearch.Net.Connection
 							tcs.SetResult(t.Result);
 							requestState.SetResult(t.Result);
 						}
-
 
 						return tcs.Task;
 					}).Unwrap()
@@ -551,12 +546,12 @@ namespace Elasticsearch.Net.Connection
 
 					aggregate = aggregate.Flatten();
 					var innerExceptions = aggregate.InnerExceptions
-						.Select(ae => MaxRetryInnerMessage.F(ae.GetType().Name, ae.Message, "" ?? ae.StackTrace))
+						.Select(ae => MaxRetryInnerMessage.F(ae.GetType().Name, ae.Message, ae.StackTrace))
 						.ToList();
 					innerException = "\r\n" + string.Join("\r\n", innerExceptions);
 				}
 				else
-					innerException = "\r\n" + MaxRetryInnerMessage.F(e.GetType().Name, e.Message, "" ?? e.StackTrace);
+					innerException = "\r\n" + MaxRetryInnerMessage.F(e.GetType().Name, e.Message, e.StackTrace);
 			}
 			var exceptionMessage = MaxRetryExceptionMessage
 				.F(requestState.Method, requestState.Path, requestState.Retried, innerException);

@@ -28,12 +28,12 @@ namespace Elasticsearch.Net.Connection
 			ServicePointManager.UseNagleAlgorithm = false;
 			ServicePointManager.Expect100Continue = false;
 			ServicePointManager.DefaultConnectionLimit = 10000;
-			ServicePointManager.SetTcpKeepAlive(true, 2000, 2000);
+			//ServicePointManager.SetTcpKeepAlive(true, 2000, 2000);
 			
 			//WebException's GetResponse is limitted to 65kb by default.
 			//Elasticsearch can be alot more chatty then that when dumping exceptions
 			//On error responses, so lets up the ante.
-			HttpWebRequest.DefaultMaximumErrorResponseLength = int.MaxValue;
+			HttpWebRequest.DefaultMaximumErrorResponseLength = -1;
 		}
 
 		public HttpConnection(IConnectionConfigurationValues settings)
