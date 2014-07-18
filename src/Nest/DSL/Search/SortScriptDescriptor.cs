@@ -26,6 +26,14 @@ namespace Nest.DSL.Descriptors
 		public string Type { get; set; }
 		public string Script { get; set; }
 		public Dictionary<string, object> Params { get; set; }
+
+		PropertyPathMarker ISort.SortKey
+		{
+			get
+			{
+				return "_script";
+			}
+		}
 	}
 
 	public class SortScriptDescriptor<T> : IScriptSort
@@ -105,6 +113,14 @@ namespace Nest.DSL.Descriptors
 		{
 			Self.Mode = mode;
 			return this;
+		}
+
+		PropertyPathMarker ISort.SortKey
+		{
+			get
+			{
+				return "_script";
+			}
 		}
 	}
 }
