@@ -32,6 +32,7 @@ namespace Elasticsearch.Net.Connection
 		private readonly IConnectionPool _connectionPool;
 		private readonly IDateTimeProvider _dateTimeProvider;
 		private DateTime? _lastSniff;
+		private bool _throwMaxRetry;
 
 		public IConnectionConfigurationValues Settings { get { return ConfigurationValues; } }
 		public IElasticsearchSerializer Serializer { get { return _serializer; } }
@@ -47,6 +48,7 @@ namespace Elasticsearch.Net.Connection
 			this.Connection = connection ?? new HttpConnection(configurationValues);
 			this._serializer = serializer ?? new ElasticsearchDefaultSerializer();
 			this._connectionPool = this.ConfigurationValues.ConnectionPool;
+			this._throwMaxRetry = !(this._connectionPool is SingleNodeConnectionPool);
 
 			this._dateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
 
@@ -362,7 +364,11 @@ namespace Elasticsearch.Net.Connection
 			{
 				requestState.SeenExceptions.Add(e);
 				if (maxRetries == 0 && retried == 0)
-					throw;
+				{
+					if (_throwMaxRetry)
+						new MaxRetryException(e);
+					else throw;
+				}
 				seenError = true;
 				return RetryRequest<T>(requestState);
 			}

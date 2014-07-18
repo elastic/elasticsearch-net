@@ -105,8 +105,44 @@ namespace Nest.Tests.Integration.Exceptions
 			var e = Assert.Throws<ElasticsearchServerException>(() => client.Search<ElasticsearchProject>(s => s.QueryRaw(@"{ ""badjson"" : {} }")));
 			e.ExceptionType.Should().Contain("SearchPhaseExecutionException");
 		}
-
-
+		
+		[Test]
+		public void ConnectionPool_SingleNode_PingExceptionThrowsMaxRetry()
+		{
+			var uris = new []
+			{
+				ElasticsearchConfiguration.CreateBaseUri(9201),
+			};
+			var connectionPool = new StaticConnectionPool(uris);
+			var client = new ElasticClient(new ConnectionSettings(connectionPool)
+				.SetTimeout(1000)
+			);
+			var e = Assert.Throws<MaxRetryException>(() =>
+			{
+				var result = client.Search<ElasticsearchProject>(s => s.MatchAll());
+				result.IsValid.Should().BeFalse();
+			});
+			e.Should().NotBeNull();
+		}
+	
+		[Test]
+		public void ConnectionPool_SingleNode_PingExceptionThrowsMaxRetry_Async()
+		{
+			var uris = new []
+			{
+				ElasticsearchConfiguration.CreateBaseUri(9201),
+			};
+			var connectionPool = new StaticConnectionPool(uris);
+			var client = new ElasticClient(new ConnectionSettings(connectionPool)
+				.SetTimeout(1000)
+			);
+			var e = Assert.Throws<MaxRetryException>(async () =>
+			{
+				var result = await client.SearchAsync<ElasticsearchProject>(s => s.MatchAll());
+				result.IsValid.Should().BeFalse();
+			});
+			e.Should().NotBeNull();
+		}
 		[Test]
 		public void ConnectionPool_DoesNotThrowOnServerExceptions_ThrowsMaxRetryException_OnDeadNodes()
 		{
