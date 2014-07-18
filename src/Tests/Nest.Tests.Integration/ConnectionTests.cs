@@ -25,7 +25,7 @@ namespace Nest.Tests.Integration
 			Assert.True(rootNodeInfo.ConnectionStatus.Success);
 		}
 		[Test]
-		public void construct_client_with_null_or_empy_settings()
+		public void Construct_Client_With_NullOrEmpty_Settings()
 		{
 			Assert.Throws<UriFormatException>(() =>
 			{
@@ -37,7 +37,7 @@ namespace Nest.Tests.Integration
 			});
 		}
 		[Test]
-		public void construct_client_with_invalid_hostname()
+		public void Construct_Client_With_Invalid_Hostname()
 		{
 			Assert.Throws<UriFormatException>(() =>
 			{
@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration
 
 		}
 		[Test]
-		public void connect_to_unknown_hostname()
+		public void Connect_To_Unknown_Hostname()
 		{
 			IRootInfoResponse result = null;
 
