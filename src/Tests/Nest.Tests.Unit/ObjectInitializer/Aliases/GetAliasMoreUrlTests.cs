@@ -17,8 +17,11 @@ namespace Nest.Tests.Unit.ObjectInitializer.Aliases
 			var response = this._client.GetAlias(request);
 			
 			var status = response.ConnectionStatus;
-		
-			status.RequestUrl.Should().EndWith("/_alias/*");
+			if (Type.GetType("Mono.Runtime") != null)
+				status.RequestUrl.Should().EndWith("/_alias/%2A");
+			else 
+				status.RequestUrl.Should().EndWith("/_alias/*");
+			
 			status.RequestMethod.Should().Be("GET");
 		}
 

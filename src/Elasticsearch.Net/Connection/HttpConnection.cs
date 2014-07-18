@@ -33,7 +33,10 @@ namespace Elasticsearch.Net.Connection
 			//WebException's GetResponse is limitted to 65kb by default.
 			//Elasticsearch can be alot more chatty then that when dumping exceptions
 			//On error responses, so lets up the ante.
-			HttpWebRequest.DefaultMaximumErrorResponseLength = -1;
+
+			//Not available under mono
+			if (Type.GetType ("Mono.Runtime") == null) 
+				HttpWebRequest.DefaultMaximumErrorResponseLength = -1;
 		}
 
 		public HttpConnection(IConnectionConfigurationValues settings)
