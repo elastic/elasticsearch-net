@@ -124,6 +124,7 @@ namespace Nest.Tests.Integration.Exceptions
 				client.RootNodeInfo(r => r.RequestConfiguration(c => c.ConnectTimeout(2000)));
 			});
 			e.Should().NotBeNull();
+			Assert.Pass(e.ToString());
 		}
 	
 		[Test]
