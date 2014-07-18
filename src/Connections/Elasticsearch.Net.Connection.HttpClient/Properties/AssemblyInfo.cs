@@ -3,12 +3,12 @@ using System.Reflection;
 
 [assembly: AssemblyTitleAttribute("Elasticsearch.Net.Connection.HttpClient")]
 [assembly: AssemblyCopyrightAttribute("Elasticsearch 2014")]
-[assembly: AssemblyDescriptionAttribute("Elasticsearch.Net.Connection.HttpClient")]
+[assembly: AssemblyDescriptionAttribute("Elasticsearc.Net.Connection.HttpClient - IConnection implementation that uses HttpClient (.NET 4.5 only)")]
 [assembly: AssemblyCompanyAttribute("Elasticsearch")]
 [assembly: AssemblyConfigurationAttribute("Release")]
 [assembly: AssemblyVersionAttribute("1.0.0")]
 [assembly: AssemblyFileVersionAttribute("1.0.0")]
-[assembly: AssemblyInformationalVersionAttribute("1.0.0-rc1")]
+[assembly: AssemblyInformationalVersionAttribute("1.0.0")]
 namespace System {
     internal static class AssemblyVersionInformation {
         internal const string Version = "1.0.0";
