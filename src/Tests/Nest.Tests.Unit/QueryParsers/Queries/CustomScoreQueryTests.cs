@@ -13,6 +13,8 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 		{
 			var q = this.SerializeThenDeserialize(
 				f=>f.CustomScore,
+#pragma warning disable 0618
+				//CustomScore is obsolete but we still need to test it.
 				f=>f.CustomScore(cs=>cs
 					.Query(qq=>Query1)
 					.Script("My complex script")
@@ -20,6 +22,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Params(p=>p.Add("param", "paramvalue"))
 					)
 				);
+#pragma warning restore 0618
 			q.Script.Should().Be("My complex script");
 			q.Lang.Should().Be("mvel");
 			q.Params.Should().NotBeEmpty().And.HaveCount(1);

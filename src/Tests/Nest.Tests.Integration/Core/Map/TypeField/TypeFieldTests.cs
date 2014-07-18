@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
-using System.Reflection;
 
 namespace Nest.Tests.Integration.Core.Map.TypeField
 {
@@ -10,10 +9,10 @@ namespace Nest.Tests.Integration.Core.Map.TypeField
 		[Test]
 		public void TypeFieldSerializesYes()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.TypeField(t => t
-					.SetIndexed()
-					.SetStored()
+					.Index()
+					.Store()
 				)
 			);
 			this.DefaultResponseAssertations(result);
@@ -21,10 +20,10 @@ namespace Nest.Tests.Integration.Core.Map.TypeField
 		[Test]
 		public void TypeFieldSerializesNo()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.TypeField(t => t
-					.SetIndexed(NonStringIndexOption.No)
-					.SetStored(false)
+					.Index(NonStringIndexOption.No)
+					.Store(false)
 				)
 			);
 			this.DefaultResponseAssertations(result);

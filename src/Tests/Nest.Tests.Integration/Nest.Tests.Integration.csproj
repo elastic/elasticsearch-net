@@ -34,6 +34,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Generator|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AppDomainToolkit">
+      <HintPath>..\..\..\dep\AppDomainToolkit.1.0.4.1\lib\net\AppDomainToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="AutoPoco">
       <HintPath>..\..\..\dep\AutoPoco.1.0.0.0\lib\AutoPoco.dll</HintPath>
     </Reference>
@@ -96,6 +100,7 @@
     <Compile Include="Cluster\GetSettingsTests.cs" />
     <Compile Include="Cluster\PutSettingsTests.cs" />
     <Compile Include="Connection\Failover\SniffTests.cs" />
+    <Compile Include="Connection\HttpClient\HttpClientTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
@@ -110,6 +115,8 @@
     <Compile Include="DebugTests\MemoryUsageTests.cs" />
     <Compile Include="ElasticsearchConfiguration.cs" />
     <Compile Include="Core\IndexTests.cs" />
+    <Compile Include="Exceptions\ElasticsearchExceptionTests.cs" />
+    <Compile Include="Exceptions\ThrowAlwaysConnection.cs" />
     <Compile Include="Failover\FailoverSniffOnFaultTests.cs" />
     <Compile Include="Failover\FailoverSniffOnStartupTests.cs" />
     <Compile Include="Failover\FailoverPingTests.cs" />
@@ -151,17 +158,18 @@
     <Compile Include="Indices\ExistsTests.cs" />
     <Compile Include="Indices\StatsTests.cs" />
     <Compile Include="Core\AsyncTests.cs" />
-    <Compile Include="Integration\Filter\AndOrNotFilterTests.cs" />
-    <Compile Include="Integration\Filter\ScriptFilterTests.cs" />
-    <Compile Include="Integration\Filter\MissingExistsFilterTests.cs" />
-    <Compile Include="Integration\Filter\PrefixFilterTests.cs" />
-    <Compile Include="Integration\Filter\RangeFilterTests.cs" />
-    <Compile Include="Integration\Query\BoolQueryResults.cs" />
-    <Compile Include="Integration\Query\TermToString.cs" />
+    <Compile Include="Reproduce\Reproduce769Tests.cs" />
+    <Compile Include="Search\Filter\AndOrNotFilterTests.cs" />
+    <Compile Include="Search\Filter\ScriptFilterTests.cs" />
+    <Compile Include="Search\Filter\MissingExistsFilterTests.cs" />
+    <Compile Include="Search\Filter\PrefixFilterTests.cs" />
+    <Compile Include="Search\Filter\RangeFilterTests.cs" />
+    <Compile Include="Search\Query\BoolQueryResults.cs" />
+    <Compile Include="Search\Query\TermToString.cs" />
     <Compile Include="Core\UpdateTests.cs" />
-    <Compile Include="Integration\Filter\BoolFilterTests.cs" />
-    <Compile Include="Integration\HighlightTests.cs" />
-    <Compile Include="Integration\Query\TermQueryDynamic.cs" />
+    <Compile Include="Search\Filter\BoolFilterTests.cs" />
+    <Compile Include="Search\HighlightTests.cs" />
+    <Compile Include="Search\Query\TermQueryDynamic.cs" />
     <Compile Include="RawCalls\HasUsefultServerExceptionTests.cs" />
     <Compile Include="RawCalls\DynamicNullTests.cs" />
     <Compile Include="Mapping\NotAnalyzedTest.cs" />
@@ -216,12 +224,8 @@
     <Compile Include="Search\SubClassSupport\SubClassSupportTests.cs" />
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />
+    <Compile Include="Startup\StartupTests.cs" />
     <Compile Include="Template\TemplateTests.cs" />
-    <Compile Include="Test.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Test.settings</DependentUpon>
-    </Compile>
     <Compile Include="Warmers\IndicesWarmersTests.cs" />
     <Compile Include="Warmers\WarmersTests.cs" />
   </ItemGroup>
@@ -248,14 +252,8 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Test.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Test.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LowLevel\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using FakeItEasy;
-using FluentAssertions;
-using Nest.DSL.Visitor;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 

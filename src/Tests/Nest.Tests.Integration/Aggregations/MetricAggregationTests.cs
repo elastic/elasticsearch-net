@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -12,7 +11,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void WrongFieldName()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Min("value_agg", t => t
@@ -29,7 +28,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void Average()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Average("value_agg", t => t.Field(p => p.LOC))
@@ -43,7 +42,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void Min()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Min("value_agg", t => t.Field(p => p.LOC))
@@ -59,7 +58,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[SkipVersion("0 - 1.0.9", "Cardinality aggregation not introduced until 1.1")]
 		public void Cardinality()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Cardinality("bucket_agg", m => m
@@ -79,7 +78,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void Max()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Max("value_agg", t => t.Field(p => p.LOC))
@@ -94,7 +93,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void Sum()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Sum("value_agg", t => t.Field(p => p.LOC))
@@ -109,7 +108,7 @@ namespace Nest.Tests.Integration.Aggregations
 		[Test]
 		public void ValueCount()
 		{
-			var results = this._client.Search<ElasticsearchProject>(s => s
+			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.ValueCount("value_agg", t => t.Field(p => p.LOC))

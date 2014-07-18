@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
-using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
-using System.Diagnostics;
 using FluentAssertions;
 
 namespace Nest.Tests.Integration.Reproduce
@@ -20,7 +18,7 @@ namespace Nest.Tests.Integration.Reproduce
 		[Test]
 		public void TermsAggregationOnLongFieldShouldHaveKeysOnBucket()
 		{
-			var searchResult = this._client.Search<ElasticsearchProject>(s => s
+			var searchResult = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(aggs=>aggs
 					.Terms("numericTerms", t=>t

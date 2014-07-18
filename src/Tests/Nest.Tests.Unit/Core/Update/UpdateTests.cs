@@ -48,8 +48,8 @@ namespace Nest.Tests.Unit.Core.Update
 			var partialUpdate = new PartialElasticSearchProject { Name = "NEST", Country = "Netherlands" };
 
 			var s = new UpdateDescriptor<ElasticsearchProject, PartialElasticSearchProject>()
-				.Object(originalProject) //only used to infer the id
-				.Document(partialUpdate); //the actual partial update statement;
+				.IdFrom(originalProject) //only used to infer the id
+				.Doc(partialUpdate); //the actual partial update statement;
 
 			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
 		}

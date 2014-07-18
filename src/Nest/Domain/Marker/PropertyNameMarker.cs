@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Elasticsearch.Net;
 
 namespace Nest
 {

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.IO;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Concurrent;
@@ -211,6 +210,8 @@ namespace Nest.Resolvers.Writers
 			{
 				case FieldType.GeoPoint:
 					return "geo_point";
+				case FieldType.GeoShape:
+					return "geo_shape";
 				case FieldType.Attachment:
 					return "attachment";
 				case FieldType.Ip:

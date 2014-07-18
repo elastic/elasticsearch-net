@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using Newtonsoft.Json;
-using Elasticsearch.Net;
 
 namespace Nest.Resolvers.Writers {
     public class WritePropertiesFromAttributeVisitor : IElasticPropertyVisitor
@@ -106,7 +105,7 @@ namespace Nest.Resolvers.Writers {
             if (att.Store)
             {
                 this._jsonWriter.WritePropertyName("store");
-                this._jsonWriter.WriteValue("yes");
+                this._jsonWriter.WriteValue("true");
             }
             if (att.Boost != 1)
             {

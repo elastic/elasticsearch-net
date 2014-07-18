@@ -2,20 +2,27 @@
 
 namespace Nest
 {
-    public class IndexFieldMapping
-    {
-		public IndexFieldMapping()
-		{
-			
-		}
-
+	public interface IIndexFieldMapping : ISpecialField
+	{
 		[JsonProperty("enabled")]
-		public bool Enabled { get; internal set; }
+		bool? Enabled { get; set; }
+	}
 
-		public IndexFieldMapping SetDisabled(bool disabled = true)
+	public class IndexFieldMapping : IIndexFieldMapping
+	{
+		public bool? Enabled { get; set; }
+	}
+
+	public class IndexFieldMappingDescriptor : IIndexFieldMapping
+	{
+		private IIndexFieldMapping Self { get { return this; } }
+
+		bool? IIndexFieldMapping.Enabled { get; set; }
+
+		public IndexFieldMappingDescriptor Enabled(bool enabled = true)
 		{
-			this.Enabled = !disabled;
+			Self.Enabled = enabled;
 			return this;
 		}
-    }
+	}
 }

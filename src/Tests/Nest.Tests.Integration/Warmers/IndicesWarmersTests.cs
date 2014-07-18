@@ -16,7 +16,7 @@ namespace Nest.Tests.Integration.Warmers
 		{
 			var index = ElasticsearchConfiguration.NewUniqueIndexName();
 
-			var result = this._client.CreateIndex(index, c => c
+			var result = this.Client.CreateIndex(index, c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
 				.AddWarmer(wd => wd
@@ -34,7 +34,7 @@ namespace Nest.Tests.Integration.Warmers
 			result.IsValid.Should().BeTrue();
 			result.ConnectionStatus.Should().NotBeNull();
 
-			var warmerResult = this._client.GetWarmer("warmer_createindexwithwarmer", w => w
+			var warmerResult = this.Client.GetWarmer("warmer_createindexwithwarmer", w => w
 				.Name("warmer_createindexwithwarmer")
 			);
 

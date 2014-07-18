@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -89,7 +87,7 @@ namespace Nest
 
 		public DocumentOptionalPathBase(string id) { this.Id = id; }
 		public DocumentOptionalPathBase(long id) : this(id.ToString(CultureInfo.InvariantCulture)) {}
-		public DocumentOptionalPathBase(T document) { this.IdFrom = document; }
+		public DocumentOptionalPathBase(T idFrom) { this.IdFrom = idFrom; }
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
@@ -154,14 +152,14 @@ namespace Nest
 		}
 		public TDescriptor Id(long id)
 		{
-			return this.Id(id.ToString());
+			return this.Id(id.ToString(CultureInfo.InvariantCulture));
 		}
 		public TDescriptor Id(string id)
 		{
 			Self.Id = id;
 			return (TDescriptor)this;
 		}
-		public TDescriptor Object(T @object)
+		public TDescriptor IdFrom(T @object)
 		{
 			Self.IdFrom = @object;
 			return (TDescriptor)this;

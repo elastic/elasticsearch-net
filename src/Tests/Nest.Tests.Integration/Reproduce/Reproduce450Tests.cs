@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Channels;
-using Nest.Tests.MockData;
-using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
-using System.Diagnostics;
 using FluentAssertions;
 using Elasticsearch.Net;
 
@@ -33,18 +29,18 @@ namespace Nest.Tests.Integration.Reproduce
 		[Test]
 		public void MultiGetDoesNotSetId()
 		{
-			_client.DeleteByQuery<MyTestType>(q => q.MatchAll());
-			_client.Refresh(i=>i.Index<MyTestType>());
+			Client.DeleteByQuery<MyTestType>(q => q.MatchAll());
+			Client.Refresh(i=>i.Index<MyTestType>());
 			var someNewObjects = new List<MyTestType>()
 			{
 				new MyTestType(){Id="1",Data="1 Data"},
 				new MyTestType(){Id="2",Data="2 Data"},
 			};
 
-			var indexResult = this._client.IndexMany(someNewObjects);
+			var indexResult = this.Client.IndexMany(someNewObjects);
 			indexResult.IsValid.Should().BeTrue();
 
-			var multiGetResult = this._client.SourceMany<MyTestType>(new[] {"1", "2"});
+			var multiGetResult = this.Client.SourceMany<MyTestType>(new[] {"1", "2"});
 			multiGetResult.Should().HaveCount(2);
 			multiGetResult.Should().OnlyContain(h => !h.Id.IsNullOrEmpty());
 

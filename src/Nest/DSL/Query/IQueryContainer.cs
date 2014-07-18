@@ -27,15 +27,15 @@ namespace Nest
 		IMatchAllQuery MatchAllQuery { get; set; }
 
 		[JsonProperty(PropertyName = "term")]
-		[JsonConverter(typeof (FieldNameQueryConverter<TermQueryDescriptor<object>>))]
+		[JsonConverter(typeof (FieldNameQueryConverter<TermQuery>))]
 		ITermQuery Term { get; set; }
 
 		[JsonProperty(PropertyName = "wildcard")]
-		[JsonConverter(typeof (FieldNameQueryConverter<WildcardQueryDescriptor<object>>))]
+		[JsonConverter(typeof (FieldNameQueryConverter<WildcardQuery>))]
 		IWildcardQuery Wildcard { get; set; }
 
 		[JsonProperty(PropertyName = "prefix")]
-		[JsonConverter(typeof (FieldNameQueryConverter<PrefixQueryDescriptor<object>>))]
+		[JsonConverter(typeof (FieldNameQueryConverter<PrefixQuery>))]
 		IPrefixQuery Prefix { get; set; }
 
 		[JsonProperty(PropertyName = "boosting")]
@@ -74,22 +74,22 @@ namespace Nest
 		IFuzzyQuery Fuzzy { get; set; }
 
 		[JsonProperty(PropertyName = "geo_shape")]
-		[JsonConverter(typeof (FieldNameQueryConverter<GeoShapeQueryDescriptor<object>>))]
+		[JsonConverter(typeof(CompositeJsonConverter<GeoShapeQueryJsonReader, FieldNameQueryConverter<EnvelopeGeoShape>>))]
 		IGeoShapeQuery GeoShape { get; set; }
 
 		[JsonProperty(PropertyName = "common_terms")]
-		[JsonConverter(typeof (FieldNameQueryConverter<CommonTermsQueryDescriptor<object>>))]
+		[JsonConverter(typeof (FieldNameQueryConverter<CommonTermsQuery>))]
 		ICommonTermsQuery CommonTerms { get; set; }
 
 		[JsonProperty(PropertyName = "terms")]
 		ITermsQuery Terms { get; set; }
 
 		[JsonProperty(PropertyName = "range")]
-		[JsonConverter(typeof (FieldNameQueryConverter<RangeQueryDescriptor<object>>))]
+		[JsonConverter(typeof (FieldNameQueryConverter<RangeQuery>))]
 		IRangeQuery Range { get; set; }
 
 		[JsonProperty(PropertyName = "regexp")]
-		[JsonConverter(typeof (FieldNameQueryConverter<RegexpQueryDescriptor<object>>))]
+		[JsonConverter(typeof (FieldNameQueryConverter<RegexpQuery>))]
 		IRegexpQuery Regexp { get; set; }
 
 		[JsonProperty(PropertyName = "has_child")]

@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System.Linq.Expressions;
 
 namespace Nest
 {
@@ -16,7 +12,7 @@ namespace Nest
 		where T : class
 	{
 
-		protected override string _type { get { return "phrase"; } }
+		protected override string MatchQueryType { get { return "phrase"; } }
 		
 	}
 }

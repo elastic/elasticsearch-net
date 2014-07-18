@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Exceptions;
 using FluentAssertions;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
@@ -17,7 +15,7 @@ namespace Nest.Tests.Integration.Search.SearchTypeTests
 		[Test]
 		public void SearchTypeScanWithoutScrollIsInvalid()
 		{
-			var queryResults = this._client.Search<ElasticsearchProject>(s=>s
+			var queryResults = this.Client.Search<ElasticsearchProject>(s=>s
 				.From(0)
 				.Size(10)
 				.MatchAll()
@@ -32,7 +30,7 @@ namespace Nest.Tests.Integration.Search.SearchTypeTests
 		[Test]
 		public void SearchTypeScan()
 		{
-			var queryResults = this._client.Search<ElasticsearchProject>(s => s
+			var queryResults = this.Client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.MatchAll()
@@ -48,7 +46,7 @@ namespace Nest.Tests.Integration.Search.SearchTypeTests
 		[Test]
 		public void SearchScrollOnly()
 		{
-			var queryResults = this._client.Search<ElasticsearchProject>(s => s
+			var queryResults = this.Client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.MatchAll()

@@ -18,7 +18,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.CommonTerms
 						.OnField(p=>p.Content)
 						.Analyzer("myAnalyzer")
 						.Boost(1.2)
-						.CutOffFrequency(0.01)
+						.CutoffFrequency(0.01)
 						.DisableCoord(false)
 						.HighFrequencyOperator(Operator.And)
 						.LowFrequencyOperator(Operator.Or)

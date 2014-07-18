@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -75,23 +74,6 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 		{
 			return u=>u.AbsolutePath == "/" || u.AbsolutePath == "";
 		}
-		public static IReturnValueConfiguration<Task<ElasticsearchResponse<Stream>>> SniffAsync(
-			AutoFake fake, 
-			IConnectionConfigurationValues configurationValues = null,
-			IList<Uri> nodes = null
-			)
-		{
-			var sniffCall = A.CallTo(() => fake.Resolve<IConnection>().Get(
-				A<Uri>.That.Matches(IsSniffUrl()), 
-				A<IRequestConfiguration>._));
-			if (nodes == null) return sniffCall;
-			var stream = SniffResponse(nodes);
-			var response = FakeResponse.Ok(configurationValues, "GET", "/_nodes/_all/clear", stream);
-			sniffCall.Returns(Task.FromResult(response));
-			return sniffCall;
-		}
-		
-		
 
 		public static ITransport ProvideDefaultTransport(AutoFake fake, IDateTimeProvider dateTimeProvider = null)
 		{

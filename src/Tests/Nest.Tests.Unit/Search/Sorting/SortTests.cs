@@ -24,13 +24,15 @@ namespace Nest.Tests.Unit.Search.Sorting
                 {
                   from: 0,
                   size: 10,
-                  sort: {
-                    country: {
-					  ignore_unmapped: true,
-                      missing: ""_last"",
-                      order: ""desc""
+                  sort: [
+                    {
+					  country: {
+					    ignore_unmapped: true,
+                        missing: ""_last"",
+                        order: ""desc""
+					  }
                     }
-                  }
+                  ]
                 }";
 			Assert.True(json.JsonEquals(expected), json);
 		}
@@ -45,18 +47,22 @@ namespace Nest.Tests.Unit.Search.Sorting
 					.OnField(e => e.Name.Suffix("sort"))
 					.MissingLast()
 					.Descending()
+					.Mode(SortMode.Min)
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"
                 {
                   from: 0,
                   size: 10,
-                  sort: {
-                    ""name.sort"": {
-                      missing: ""_last"",
-                      order: ""desc""
-                    }
-                  }
+                  sort: [
+					 {
+                      ""name.sort"": {
+                          missing: ""_last"",
+                          order: ""desc"",
+					      mode: ""min""
+                        }
+					 }
+                   ]
                 }";
 			Assert.True(json.JsonEquals(expected), json);
 		}
@@ -77,12 +83,14 @@ namespace Nest.Tests.Unit.Search.Sorting
                 {
                   from: 0,
                   size: 10,
-                  sort: {
-                    ""contributors.age"": {
-                        ""mode"": ""max"",
-                        ""order"": ""desc""
-                    }
-                  }
+                  sort: [
+                    {
+					  ""contributors.age"": {
+						  ""order"": ""desc"",
+                          ""mode"": ""max"" 
+				      }
+					}
+                  ]
                 }";
             Assert.True(json.JsonEquals(expected), json);
         }
@@ -99,9 +107,9 @@ namespace Nest.Tests.Unit.Search.Sorting
                 {
                   from: 0,
                   size: 10,
-                  sort: {
-                    country : { order: ""asc"" }
-                    }          
+                  sort: [
+					  { country : { order: ""asc"" } }
+                    ]      
                 }";
 			Assert.True(json.JsonEquals(expected), json);
 		}
@@ -118,9 +126,9 @@ namespace Nest.Tests.Unit.Search.Sorting
                 {
                   from: 0,
                   size: 10,
-                  sort: {
-                    country : { order: ""desc"" }
-                    }          
+                  sort: [
+                      { country : { order: ""desc"" } }
+                    ]      
                 }";
 			Assert.True(json.JsonEquals(expected), json);
 		}
@@ -137,9 +145,9 @@ namespace Nest.Tests.Unit.Search.Sorting
                 {
                   from: 0,
                   size: 10,
-                  sort: {
-                    ""name.sort"" : { order: ""asc"" }
-                    }          
+                  sort: [
+                      {""name.sort"" : { order: ""asc"" } }
+                    ]      
                 }";
 			Assert.True(json.JsonEquals(expected), json);
 		}
@@ -156,9 +164,9 @@ namespace Nest.Tests.Unit.Search.Sorting
                 {
                   from: 0,
                   size: 10,
-                  sort: {
-                    ""name.sort"" : { order: ""desc"" }
-                    }          
+                  sort: [
+                      { ""name.sort"" : { order: ""desc"" } }
+                    ]      
                 }";
 			Assert.True(json.JsonEquals(expected), json);
 		}
@@ -175,20 +183,24 @@ namespace Nest.Tests.Unit.Search.Sorting
 					.Descending()
 					.PinTo(40, -70)
 					.Unit(GeoUnit.Kilometers)
+					.Mode(SortMode.Max)
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"
                 {
                   from: 0,
                   size: 10,
-                  sort: {
-                    _geo_distance: {
-                      ""origin"": ""40, -70"",
-                      missing: ""_last"",
-                      order: ""desc"",
-                      unit: ""km""
-                    }
-                  }
+                  sort: [
+					{
+					  _geo_distance: {
+					   ""origin"": ""40, -70"",
+						 missing: ""_last"",
+						 mode: ""max"",
+						 order: ""desc"",
+						 unit: ""km""
+					  }
+					}
+                  ]
                 }";
 			Assert.True(json.JsonEquals(expected), json);
 		}
@@ -202,6 +214,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 				.SortScript(sort => sort
 					.MissingLast()
 					.Descending()
+					.Mode(SortMode.Average)
 					.Script("doc['field_name'].value * factor")
 					.Params(p => p
 						.Add("factor", 1.1)
@@ -213,17 +226,20 @@ namespace Nest.Tests.Unit.Search.Sorting
                 {
                   from: 0,
                   size: 10,
-                  sort: {
-                    _script: {
-                      type: ""number"",
-                      script: ""doc['field_name'].value * factor"",
-                      params: {
-                        factor: 1.1
-                      },
-                      missing: ""_last"",
-                      order: ""desc""
-                    }
-                  }
+                  sort: [
+					{
+                      _script: {
+                        type: ""number"",
+                        script: ""doc['field_name'].value * factor"",
+                        params: {
+                          factor: 1.1
+                        },
+                        missing: ""_last"",
+                        order: ""desc"",
+					    mode: ""avg""
+                      }
+					}
+                  ]
                 }";
 			Assert.True(json.JsonEquals(expected), json);
 		}
@@ -239,16 +255,18 @@ namespace Nest.Tests.Unit.Search.Sorting
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"
                 {
-                  ""sort"": {
-                    ""id"": {
+                ""sort"": [
+                    {
+					""id"": {
                       ""nested_filter"": {
                         ""term"": {
                           ""name"": ""value""
+                          }
                         }
                       }
-                    }
-                  }
-                }";
+				    }
+                   ]
+                 }";
 			Assert.True(json.JsonEquals(expected), json);
 		}
 
@@ -263,11 +281,13 @@ namespace Nest.Tests.Unit.Search.Sorting
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"
                 {
-                  ""sort"": {
-                    ""id"": {
-                      ""nested_path"": ""name""
-                    }
-                  }
+                  ""sort"": [
+                    {
+					  ""id"": {
+					    ""nested_path"": ""name""
+					  }
+					}
+                  ]
                 }";
 			Assert.True(json.JsonEquals(expected), json);
 		}
@@ -283,11 +303,13 @@ namespace Nest.Tests.Unit.Search.Sorting
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"
                 {
-                  ""sort"": {
-                    ""id"": {
-                      ""nested_path"": ""name""
-                    }
-                  }
+                  ""sort"": [
+                    {
+					  ""id"": {
+						""nested_path"": ""name""
+					  }
+					}
+                  ]
                 }";
 			Assert.True(json.JsonEquals(expected), json);
 		}

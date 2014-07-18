@@ -3,56 +3,75 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-    public class SourceFieldMapping
-    {
-        public SourceFieldMapping()
-        {
-            this.Enabled = true;
-        }
+	public interface ISourceFieldMapping : ISpecialField
+	{
+		[JsonProperty("enabled")]
+		bool? Enabled { get; set; }
 
-        [JsonProperty("enabled")]
-        public bool Enabled { get; internal set; }
-		
 		[JsonProperty("compress")]
-		public bool Compress { get; internal set; }
+		bool? Compress { get; set; }
 
-		[JsonProperty("compress_treshold")]
-		public string CompressTreshold { get; internal set; }
+		[JsonProperty("compress_threshold")]
+		string CompressThreshold { get; set; }
 
 		[JsonProperty("includes")]
-		public IEnumerable<string> Includes { get; internal set; }
+		IEnumerable<string> Includes { get; set; }
 
 		[JsonProperty("excludes")]
-		public IEnumerable<string> Excludes { get; internal set; }
+		IEnumerable<string> Excludes { get; set; }
+	}
 
-		public SourceFieldMapping SetDisabled(bool disabled = true)
+	public class SourceFieldMapping : ISourceFieldMapping
+	{
+		public bool? Enabled { get; set; }
+		public bool? Compress { get; set; }
+		public string CompressThreshold { get; set; }
+		public IEnumerable<string> Includes { get; set; }
+		public IEnumerable<string> Excludes { get; set; }
+	}
+
+	public class SourceFieldMappingDescriptor : ISourceFieldMapping
+	{
+		private ISourceFieldMapping Self { get { return this; } }
+
+        bool? ISourceFieldMapping.Enabled { get; set; }
+		
+		bool? ISourceFieldMapping.Compress { get; set; }
+
+		string ISourceFieldMapping.CompressThreshold { get; set; }
+
+		IEnumerable<string> ISourceFieldMapping.Includes { get; set; }
+
+		IEnumerable<string> ISourceFieldMapping.Excludes { get; set; }
+
+		public SourceFieldMappingDescriptor Enabled(bool enabled = true)
 		{
-			this.Enabled = !disabled;
+			Self.Enabled = enabled;
 			return this;
 		}
-		public SourceFieldMapping SetCompression(bool enabled = true)
+	
+		public SourceFieldMappingDescriptor Compress(bool compress = true)
 		{
-			this.Compress = enabled;
+			Self.Compress = compress;
 			return this;
 		}
 
-
-		public SourceFieldMapping SetCompressionTreshold(string compressionTreshold)
+		public SourceFieldMappingDescriptor CompressionThreshold(string compressionThreshold)
 		{
-			this.Compress = true;
-			this.CompressTreshold = compressionTreshold;
+			Self.Compress = true;
+			Self.CompressThreshold = compressionThreshold;
 			return this;
 		}
 
-		public SourceFieldMapping SetIncludes(IEnumerable<string> includes)
+		public SourceFieldMappingDescriptor Includes(IEnumerable<string> includes)
 		{
-			this.Includes = includes;
+			Self.Includes = includes;
 			return this;
 		}
 
-		public SourceFieldMapping SetExcludes(IEnumerable<string> excludes)
+		public SourceFieldMappingDescriptor Excludes(IEnumerable<string> excludes)
 		{
-			this.Excludes = excludes;
+			Self.Excludes = excludes;
 			return this;
 		}
     }

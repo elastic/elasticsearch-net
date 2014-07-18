@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using Nest.DSL.Visitor;
 using Nest.Resolvers.Converters;
 using Nest.Resolvers.Converters.Filters;
@@ -13,11 +12,11 @@ namespace Nest
 	public interface IFilterContainer 
 	{
 		[JsonIgnore]
-		string _FilterName { get; set; }
+		string FilterName { get; set; }
 		[JsonIgnore]
-		string _CacheKey { get; set; }
+		string CacheKey { get; set; }
 		[JsonIgnore]
-		bool? _Cache { get; set; }
+		bool? Cache { get; set; }
 
 		[JsonIgnore]
 		bool IsConditionless { get; }
@@ -60,7 +59,7 @@ namespace Nest
 		IGeoPolygonFilter GeoPolygon { get; set; }
 
 		[JsonProperty(PropertyName = "geo_shape")]
-		[JsonConverter(typeof(CompositeJsonConverter<GeoShapeFilterJsonReader,FieldNameFilterConverter<GeoShapeFilter>>))]
+		[JsonConverter(typeof(CompositeJsonConverter<GeoShapeFilterJsonReader, FieldNameFilterConverter<GeoPolygonFilter>>))]
 		IGeoShapeBaseFilter GeoShape { get; set; }
 
 		[JsonProperty(PropertyName = "limit")]

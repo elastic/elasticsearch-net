@@ -12,8 +12,8 @@ namespace Nest.Tests.Unit.Core.Map.BoostField
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.BoostField(a => a
-					.SetName(p => p.Name)
-					.SetNullValue(1.0)
+					.Name(p => p.Name)
+					.NullValue(1.0)
 				)
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod()); 
@@ -23,8 +23,8 @@ namespace Nest.Tests.Unit.Core.Map.BoostField
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.BoostField(a => a
-					.SetName("my_difficult_field_name")
-					.SetNullValue(0.9)
+					.Name("my_difficult_field_name")
+					.NullValue(0.9)
 				)
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());

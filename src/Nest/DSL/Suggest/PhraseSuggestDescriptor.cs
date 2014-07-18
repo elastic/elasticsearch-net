@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -59,7 +58,7 @@ namespace Nest
 
 		public PhraseSuggestDescriptor<T> Text(string text)
 		{
-			Self._Text = text;
+			Self.Text = text;
 			return this;
 		}
 

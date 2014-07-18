@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
     /// <summary>
     /// A token filter of type uppercase that normalizes token text to upper case.

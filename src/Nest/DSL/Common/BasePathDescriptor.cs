@@ -1,6 +1,5 @@
 ﻿using System;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.Configuration;
 
 namespace Nest

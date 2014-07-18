@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace Nest.DSL.Descriptors
@@ -23,6 +22,7 @@ namespace Nest.DSL.Descriptors
 	{
 		public string Missing { get; set; }
 		public SortOrder? Order { get; set; }
+		public SortMode? Mode { get; set; }
 		public string Type { get; set; }
 		public string Script { get; set; }
 		public Dictionary<string, object> Params { get; set; }
@@ -35,6 +35,8 @@ namespace Nest.DSL.Descriptors
 		string ISort.Missing { get; set; }
 
 		SortOrder? ISort.Order { get; set; }
+
+		SortMode? ISort.Mode { get; set; }
 
 		string IScriptSort.Type { get; set; }
 
@@ -96,6 +98,12 @@ namespace Nest.DSL.Descriptors
 		public SortScriptDescriptor<T> Order(SortOrder order)
 		{
 			Self.Order = order;
+			return this;
+		}
+
+		public SortScriptDescriptor<T> Mode(SortMode mode)
+		{
+			Self.Mode = mode;
 			return this;
 		}
 	}

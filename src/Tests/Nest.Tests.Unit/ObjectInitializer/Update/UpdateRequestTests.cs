@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nest.Tests.Unit.ObjectInitializer.Update
 {
@@ -20,7 +18,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.Update
 
 			var request = new UpdateRequest<ElasticsearchProject, object>(project)
 				{
-					Document = new { Name = "NEST" },
+					Doc = new { Name = "NEST" },
 					DocAsUpsert = true
 				};
 

@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -47,13 +44,13 @@ namespace Elasticsearch.Net.Integration.Yaml.Scroll2
 				var scroll_id1 = _response._scroll_id;
 
 				//do clear_scroll 
-				this.Do(()=> _client.ClearScroll((string)scroll_id1, null));
+				this.Do(()=> _client.ClearScroll((string)scroll_id1, new {}));
 
 				//do scroll 
 				this.Do(()=> _client.ScrollGet((string)scroll_id1), shouldCatch: @"missing");
 
 				//do clear_scroll 
-				this.Do(()=> _client.ClearScroll((string)scroll_id1, null), shouldCatch: @"missing");
+				this.Do(()=> _client.ClearScroll((string)scroll_id1, new {}), shouldCatch: @"missing");
 
 			}
 		}

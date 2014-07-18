@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
-using Nest.Resolvers;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
@@ -20,23 +18,35 @@ namespace Nest
 		Descending
 	}
 
+	[JsonConverter(typeof(StringEnumConverter))]
+	public enum SortMode
+	{
+		[EnumMember(Value = "min")]
+		Min,
+		[EnumMember(Value = "max")]
+		Max,
+		[EnumMember(Value = "sum")]
+		Sum,
+		[EnumMember(Value = "avg")]
+		Average
+	}
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ISort
 	{
-
 		[JsonProperty("missing")]
 		string Missing { get; set; }
 
 		[JsonProperty("order")]
 		SortOrder? Order { get; set; }
+
+		[JsonProperty("mode")]
+		SortMode? Mode { get; set; }
 	}
 
 	public interface IFieldSort : ISort
 	{
 		PropertyPathMarker Field { get; set; }
-
-		[JsonProperty("mode")]
-		ScoreMode? Mode { get; set; }
 
 		[JsonProperty("nested_filter")]
 		FilterContainer NestedFilter { get; set; }
@@ -53,7 +63,7 @@ namespace Nest
 		public PropertyPathMarker Field { get; set; }
 		public string Missing { get; set; }
 		public SortOrder? Order { get; set; }
-		public ScoreMode? Mode { get; set; }
+		public SortMode? Mode { get; set; }
 		public FilterContainer NestedFilter { get; set; }
 		public PropertyPathMarker NestedPath { get; set; }
 		public bool? IgnoreUnmappedFields { get; set; }
@@ -69,7 +79,7 @@ namespace Nest
 
 		SortOrder? ISort.Order { get; set; }
 
-        ScoreMode? IFieldSort.Mode { get; set; }
+        SortMode? ISort.Mode { get; set; }
 
 		FilterContainer IFieldSort.NestedFilter { get; set; }
 
@@ -131,27 +141,33 @@ namespace Nest
 			return this;
 		}
 
+		public virtual SortFieldDescriptor<T> Mode(SortMode mode)
+		{
+			Self.Mode = mode;
+			return this;
+		}
+
         public virtual SortFieldDescriptor<T> NestedMin()
         {
-            Self.Mode = ScoreMode.Min;
+            Self.Mode = SortMode.Min;
             return this;
         }
 
         public virtual SortFieldDescriptor<T> NestedMax()
         {
-			Self.Mode = ScoreMode.Max;
+			Self.Mode = SortMode.Max;
             return this;
         }
 
         public virtual SortFieldDescriptor<T> NestedSum()
         {
-            Self.Mode = ScoreMode.Sum;
+            Self.Mode = SortMode.Sum;
             return this;
         }
 
         public virtual SortFieldDescriptor<T> NestedAvg()
         {
-			Self.Mode = ScoreMode.Average;
+			Self.Mode = SortMode.Average;
             return this;
         }
 

@@ -2,7 +2,6 @@
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
-using Nest.Tests.MockData.Domain;
 using Elasticsearch.Net;
 
 namespace Nest.Tests.Integration.RawCalls
@@ -62,7 +61,7 @@ namespace Nest.Tests.Integration.RawCalls
 		[Test]
 		public async void VoidResponseReturn_Async()
 		{
-			var r = await this._client.Raw.InfoAsync<VoidResponse>();
+			var r = await this.Client.Raw.InfoAsync<VoidResponse>();
 			r.Response.Should().BeNull();
 			r.ResponseRaw.Should().BeNull();
 		}

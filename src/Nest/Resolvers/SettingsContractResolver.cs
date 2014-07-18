@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Nest.Resolvers
 {
@@ -27,7 +26,7 @@ namespace Nest.Resolvers
 		{
 			this.ConnectionSettings = connectionSettings;
 			this.Infer = new ElasticInferrer(this.ConnectionSettings);
-			this._wrapped = wrapped;
+			this._wrapped = wrapped ?? new DefaultContractResolver();
 		}
 
 		public JsonContract ResolveContract(Type type)

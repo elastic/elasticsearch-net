@@ -3,8 +3,6 @@ using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
-using Nest.Resolvers;
-using Elasticsearch.Net;
 
 namespace Nest.Tests.Integration.Core.Repository
 {
@@ -22,10 +20,10 @@ namespace Nest.Tests.Integration.Core.Repository
 				Name = "Coboles",
 				Content = "COBOL elasticsearch client"
 			};
-			_client.Index(elasticsearchProject, i=>i.Index(indexName).Refresh(true));
+			Client.Index(elasticsearchProject, i=>i.Index(indexName).Refresh(true));
 
 
-			var createReposResult = this._client.CreateRepository(repositoryName, r => r
+			var createReposResult = this.Client.CreateRepository(repositoryName, r => r
 				.FileSystem(@"local\\path", o => o
 					.Compress()
 					.ConcurrentStreams(10)
@@ -35,7 +33,7 @@ namespace Nest.Tests.Integration.Core.Repository
 			createReposResult.Acknowledged.Should().BeTrue();
 
 			var backupName = ElasticsearchConfiguration.NewUniqueIndexName();
-			var snapshotResponse = this._client.Snapshot(repositoryName, backupName, selector: f => f
+			var snapshotResponse = this.Client.Snapshot(repositoryName, backupName, selector: f => f
 				.Index(indexName)
 				.WaitForCompletion(true)
 				.IgnoreUnavailable()
@@ -47,7 +45,7 @@ namespace Nest.Tests.Integration.Core.Repository
 			snapshotResponse.Snapshot.StartTime.Should().BeAfter(DateTime.UtcNow.AddDays(-1));
 
 			var d = ElasticsearchConfiguration.DefaultIndex;
-			var restoreResponse = this._client.Restore(repositoryName, backupName, r => r
+			var restoreResponse = this.Client.Restore(repositoryName, backupName, r => r
 				.WaitForCompletion(true)
 				.RenamePattern(d + "_(.+)")
 				.RenameReplacement(d + "_restored_$1")
@@ -60,15 +58,15 @@ namespace Nest.Tests.Integration.Core.Repository
 			restoreResponse.Snapshot.Name.Should().Be(backupName);
 			restoreResponse.Snapshot.Indices.Should().Equal(new string[] { restoredIndexName });
 
-			var indexExistsResponse = this._client.IndexExists(f => f.Index(restoredIndexName));
+			var indexExistsResponse = this.Client.IndexExists(f => f.Index(restoredIndexName));
 			indexExistsResponse.Exists.Should().BeTrue();
 
-			var coboles = this._client.Source<ElasticsearchProject>(elasticsearchProject.Id, restoredIndexName);
+			var coboles = this.Client.Source<ElasticsearchProject>(elasticsearchProject.Id, restoredIndexName);
 			coboles.Should().NotBeNull();
 			coboles.Name.Should().Be(elasticsearchProject.Name);
 
 
-			var deleteReposResult = this._client.DeleteRepository(repositoryName);
+			var deleteReposResult = this.Client.DeleteRepository(repositoryName);
 			deleteReposResult.IsValid.Should().BeTrue();
 			deleteReposResult.Acknowledged.Should().BeTrue();
 		}

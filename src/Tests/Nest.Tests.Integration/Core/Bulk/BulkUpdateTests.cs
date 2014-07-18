@@ -16,7 +16,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 			foreach (var i in Enumerable.Range(5000, 1000))
 				descriptor.Index<ElasticsearchProject>(op => op.Document(new ElasticsearchProject { Id = i }));
 
-			var result = this._client.Bulk(d=>descriptor);
+			var result = this.Client.Bulk(d=>descriptor);
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
 
@@ -26,19 +26,19 @@ namespace Nest.Tests.Integration.Core.Bulk
 			{
 				int id = i;
 				descriptor.Update<ElasticsearchProject, object>(op => op
-					.Document(new ElasticsearchProject { Id = id })
-					.PartialUpdate(new { name = "SufixedName-" + id})
+					.IdFrom(new ElasticsearchProject { Id = id })
+					.Doc(new { name = "SufixedName-" + id})
 				);
 			}
 
-			result = this._client.Bulk(d=>descriptor);
+			result = this.Client.Bulk(d=>descriptor);
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
 			result.Errors.Should().BeFalse();
 			result.Items.Count().Should().Be(1000);
 			result.Items.All(i => i != null).Should().BeTrue();
 
-			var updatedObject = this._client.Source<ElasticsearchProject>(i=>i.Id(5000));
+			var updatedObject = this.Client.Source<ElasticsearchProject>(i=>i.Id(5000));
 			Assert.NotNull(updatedObject);
 			Assert.AreEqual(updatedObject.Name, "SufixedName-5000");
 

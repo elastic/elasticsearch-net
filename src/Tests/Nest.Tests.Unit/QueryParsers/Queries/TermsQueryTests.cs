@@ -41,10 +41,10 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.DisableCoord.Should().BeTrue();
 			q.MinimumShouldMatch.Should().Be("2");
 			q.ExternalField.Should().NotBeNull();
-			q.ExternalField._Id.Should().Be("1");
-			q.ExternalField._Index.Should().Be("index");
-			q.ExternalField._Type.Should().Be("type");
-			q.ExternalField._Path.Should().Be("id");
+			q.ExternalField.Id.Should().Be("1");
+			q.ExternalField.Index.Should().Be("index");
+			q.ExternalField.Type.Should().Be("type");
+			q.ExternalField.Path.Should().Be("id");
 			
 		}
 	}

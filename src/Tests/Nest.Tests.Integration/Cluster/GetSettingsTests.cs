@@ -1,5 +1,4 @@
-﻿using Elasticsearch.Net;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Nest.Tests.Integration.Cluster
 {
@@ -9,14 +8,14 @@ namespace Nest.Tests.Integration.Cluster
 		[Test]
 		public void GetSettings()
 		{
-			var putSettingsResponse = this._client.ClusterSettings(p=>p
+			var putSettingsResponse = this.Client.ClusterSettings(p=>p
 				.FlatSettings()
 				.Transient(t=>t
 					.Add("discovery.zen.minimum_master_nodes", 1)
 				)
 			);
 			
-			var r = this._client.ClusterGetSettings(p=>p
+			var r = this.Client.ClusterGetSettings(p=>p
 				.FlatSettings()
 			);
 			Assert.True(r.IsValid);

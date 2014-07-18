@@ -1,10 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Exceptions;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -19,11 +15,14 @@ namespace Nest
 		
 	public class BaseResponse : IResponse
 	{
+		private ElasticInferrer _infer;
+
+		public virtual bool IsValid { get; internal set; }
+
 		public BaseResponse()
 		{
 			this.IsValid = true;
 		}
-		public virtual bool IsValid { get; internal set; }
 		
 		IElasticsearchResponse IResponseWithRequestInformation.RequestInformation { get; set; }
 
@@ -46,8 +45,6 @@ namespace Nest
 				};
 			}
 		}
-
-		public ElasticInferrer _infer;
 		
 		protected IConnectionSettingsValues Settings
 		{
@@ -60,7 +57,6 @@ namespace Nest
 				return settings;
 			}
 		}
-
 
 		public ElasticInferrer Infer
 		{

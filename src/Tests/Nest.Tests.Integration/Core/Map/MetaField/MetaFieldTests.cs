@@ -1,7 +1,6 @@
 ﻿using Elasticsearch.Net;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
-using System.Reflection;
 
 namespace Nest.Tests.Integration.Core.Map.MetaField
 {
@@ -11,7 +10,7 @@ namespace Nest.Tests.Integration.Core.Map.MetaField
 		[Test]
 		public void MetaFieldSerializes()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.Meta(d => d
 					.Add("attr1", "value1")
 					.Add("attr2", new { attr3 = "value3" })

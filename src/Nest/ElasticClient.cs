@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Connection.Configuration;
-using Nest.Resolvers.Converters;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Nest.Resolvers;
+using Elasticsearch.Net.Exceptions;
 
 namespace Nest
 {
@@ -18,7 +14,7 @@ namespace Nest
 	/// </summary>
 	public partial class ElasticClient : Nest.IElasticClient
 	{
-		protected readonly IConnectionSettingsValues _connectionSettings;
+		private readonly IConnectionSettingsValues _connectionSettings;
 
 		internal RawDispatch RawDispatch { get; set; }
 
@@ -37,6 +33,7 @@ namespace Nest
 		/// </param>
 		/// <param name="connection">Optionally provide a different connection handler, defaults to http using HttpWebRequest</param>
 		/// <param name="serializer">Optionally provide a custom serializer responsible for taking a stream and turning into T</param>
+		/// <param name="transport">The transport coordinates requests between the client and the connection pool and the connection</param>
 		public ElasticClient(
 			IConnectionSettingsValues settings = null, 
 			IConnection connection = null, 
@@ -105,14 +102,6 @@ namespace Nest
 			return badResponse;
 		}
 
-
-		private static R CreateValidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
-		{
-			var r = (R)typeof(R).CreateInstance();
-			((IResponseWithRequestInformation)r).RequestInformation = response;
-			r.IsValid = true;
-			return r;
-		}
 		private static R CreateInvalidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
 		{
 			var r = (R)typeof(R).CreateInstance();
@@ -146,9 +135,34 @@ namespace Nest
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
 			return dispatch(pathInfo, descriptor)
-				.ContinueWith<I>(r => ResultsSelector<D, Q, R>(r.Result, descriptor));
+				.ContinueWith<I>(r =>
+				{
+					if (r.IsFaulted && r.Exception != null)
+					{
+						var mr = r.Exception.InnerException as MaxRetryException;
+						if (mr != null)
+							throw mr;
+
+						var ae = r.Exception.Flatten();
+						if (ae.InnerException != null)
+							throw ae.InnerException;
+						throw ae;
+					}
+					return ResultsSelector<D, Q, R>(r.Result, descriptor);
+				});
 		}
 
+
+		public static void Warmup()
+		{
+			var client = new ElasticClient(connection: new InMemoryConnection());
+			var stream = new MemoryStream("{}".Utf8Bytes());
+			client.Serializer.Serialize(new SearchDescriptor<object>());
+			client.Serializer.Deserialize<SearchDescriptor<object>>(stream);
+			var connection = new HttpConnection(new ConnectionSettings());
+			client.RootNodeInfo(); 
+			client.Search<object>(s=>s.MatchAll().Index("someindex")); 
+		}
 
 	}
 }

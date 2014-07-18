@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
-using System.Reflection;
 
 namespace Nest.Tests.Integration.Core.Map.RoutingField
 {
@@ -10,10 +9,10 @@ namespace Nest.Tests.Integration.Core.Map.RoutingField
 		[Test]
 		public void RoutingFieldUsingExpression()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.RoutingField(a => a
-					.SetPath(p => p.Name)
-					.SetRequired()
+					.Path(p => p.Name)
+					.Required()
 				)
 			);
 			this.DefaultResponseAssertations(result);
@@ -21,10 +20,10 @@ namespace Nest.Tests.Integration.Core.Map.RoutingField
 		[Test]
 		public void RoutingFieldUsingString()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.RoutingField(a => a
-					.SetPath("my_difficult_field_name")
-					.SetRequired()
+					.Path("my_difficult_field_name")
+					.Required()
 				)
 			);
 			this.DefaultResponseAssertations(result);

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Nest.Resolvers;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -21,6 +20,15 @@ namespace Nest
 			var descriptor = new FunctionScoreDecayFieldDescriptor();
 			descriptorBuilder(descriptor);
 			_ExpDescriptor[objectPath] = descriptor;
+		}
+
+		public ExpFunction(string field, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+		{
+			_ExpDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>();
+
+			var descriptor = new FunctionScoreDecayFieldDescriptor();
+			descriptorBuilder(descriptor);
+			_ExpDescriptor[field] = descriptor;
 		}
 	}
 }

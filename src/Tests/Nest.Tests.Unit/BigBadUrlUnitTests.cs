@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
-using System.Runtime.Remoting;
-using System.Security;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
-using FakeItEasy;
 using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -17,6 +13,10 @@ namespace Nest.Tests.Unit.Cluster
 	{
 		private void Do(string method, string expectedUrl, Action<IElasticClient> call)
 		{
+			//MONO uriencodes *, functionally equivalent so we do a 'dirty' fix here.
+			if (Type.GetType("Mono.Runtime") != null)
+				expectedUrl = expectedUrl.Replace("*", "%2A");
+
 			var settings = new ConnectionSettings(new Uri("http://localhost:9200/"), "mydefaultindex")
 				.SetConnectionStatusHandler(c =>
 				{
@@ -114,7 +114,7 @@ namespace Nest.Tests.Unit.Cluster
 			Do("PUT", "/mydefaultindex/doc/_mapping", c => c.Map<Doc>(m => m.MapFromAttributes()));
 			Do("PUT", "/mycustomindex/doc/_mapping", c => c.Map<Doc>(m => m.Index("mycustomindex")));
 			Do("PUT", "/mycustomindex/customtype/_mapping", c => c.Map<Doc>(m => m.Index("mycustomindex").Type("customtype")));
-			Do("GET", "/mydefaultindex/doc/1/_mlt", c => c.MoreLikeThis<Doc>(m => m.Object(new Doc { Id = "1" })));
+			Do("GET", "/mydefaultindex/doc/1/_mlt", c => c.MoreLikeThis<Doc>(m => m.IdFrom(new Doc { Id = "1" })));
 			Do("GET", "/mydefaultindex/doc/1/_mlt", c => c.MoreLikeThis<Doc>(m => m.Id(1)));
 			Do("GET", "/mycustomindex/mycustomtype/1/_mlt", c => c.MoreLikeThis<Doc>(m => m.Id(1).Index("mycustomindex").Type("mycustomtype")));
 			Do("POST", "/_msearch", c => c.MultiSearch(m => m.Search<Doc>(s => s.MatchAll())));
@@ -154,8 +154,8 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/mydefaultindex/_status", c => c.Status(s => s.Index<Doc>()));
 			Do("DELETE", "/mydefaultindex/.percolator/mypercolator", c => c.UnregisterPercolator<ElasticsearchProject>("mypercolator"));
 			Do("DELETE", "/mycustomindex/.percolator/mypercolator", c => c.UnregisterPercolator<ElasticsearchProject>("mypercolator", r => r.Index("mycustomindex")));
-			Do("POST", "/mydefaultindex/doc/1/_update", c => c.Update<Doc, OtherDoc>(u => u.Id(1).Document(new OtherDoc { Name = "asd" })));
-			Do("POST", "/mydefaultindex/customtype/1/_update", c => c.Update<Doc, OtherDoc>(u => u.Id(1).Type("customtype").Document(new OtherDoc { Name = "asd" })));
+			Do("POST", "/mydefaultindex/doc/1/_update", c => c.Update<Doc, OtherDoc>(u => u.Id(1).Doc(new OtherDoc { Name = "asd" })));
+			Do("POST", "/mydefaultindex/customtype/1/_update", c => c.Update<Doc, OtherDoc>(u => u.Id(1).Type("customtype").Doc(new OtherDoc { Name = "asd" })));
 			Do("PUT", "/mydefaultindex/_settings", c => c.UpdateSettings(u => u.AutoExpandReplicas(false)));
 			Do("PUT", "/mycustomindex/_settings", c => c.UpdateSettings(u => u.Index("mycustomindex").AutoExpandReplicas(false)));
 			Do("POST", "/_all/doc/_validate/query", c => c.Validate<Doc>(v => v.AllIndices()));

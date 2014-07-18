@@ -95,7 +95,7 @@ namespace Nest.Tests.Integration.Facet
 		[Test]
 		public void DateHistogramFacetCleanSyntax()
 		{
-			var queryResults = this._client.Search<ElasticsearchProject>(s => s
+			var queryResults = this.Client.Search<ElasticsearchProject>(s => s
 				.MatchAll()
 				.FacetDateHistogram(f => f
 					.OnField(ff => ff.Followers.First().DateOfBirth)

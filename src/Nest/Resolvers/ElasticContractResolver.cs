@@ -95,9 +95,10 @@ namespace Nest.Resolvers
 			var lookup = defaultProperties.ToLookup(p => p.PropertyName);
 
 			defaultProperties = PropertiesOf<IQuery>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ISpecialField>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IExternalFieldDeclaration>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IQueryContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRequest>(type, memberSerialization, defaultProperties, lookup);
-			//defaultProperties = PropertiesOf<ISearchRequest>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IFilter>(type, memberSerialization, defaultProperties, lookup, append: true);
 			defaultProperties = PropertiesOf<IFilterContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRandomScoreFunction>(type, memberSerialization, defaultProperties, lookup);

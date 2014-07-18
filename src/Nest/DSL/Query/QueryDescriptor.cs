@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Elasticsearch.Net;
 using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -231,9 +227,9 @@ namespace Nest
 		}
 
 		/// <summary>
-		//The multi_match query builds further on top of the match query by allowing multiple fields to be specified. 
-		//The idea here is to allow to more easily build a concise match type query over multiple fields instead of using a 
-		//relatively more expressive query by using multiple match queries within a bool query.
+		/// The multi_match query builds further on top of the match query by allowing multiple fields to be specified. 
+		/// The idea here is to allow to more easily build a concise match type query over multiple fields instead of using a 
+		/// relatively more expressive query by using multiple match queries within a bool query.
 		/// </summary>
 		public QueryContainer MultiMatch(Action<MultiMatchQueryDescriptor<T>> selector)
 		{
@@ -316,16 +312,100 @@ namespace Nest
 		
 		/// <summary>
 		/// The geo_shape Filter uses the same grid square representation as the geo_shape mapping to find documents 
-		/// that have a shape that intersects with the query shape. 
+		/// that have a shape that intersects with the envelope shape. 
 		/// It will also use the same PrefixTree configuration as defined for the field mapping.
 		/// </summary>
-		public QueryContainer GeoShape(Action<GeoShapeQueryDescriptor<T>> selector)
+		public QueryContainer GeoShapeEnvelope(Action<GeoShapeEnvelopeQueryDescriptor<T>> selector)
 		{
-			var query = new GeoShapeQueryDescriptor<T>();
+			var query = new GeoShapeEnvelopeQueryDescriptor<T>();
 			selector(query);
 			return this.New(query, q => q.GeoShape = query);
 		}
-		
+
+		/// <summary>
+		/// The geo_shape Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the circle shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
+		public QueryContainer GeoShapeCircle(Action<GeoShapeCircleQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapeCircleQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.GeoShape = query);
+		}
+
+		/// <summary>
+		/// The geo_shape Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the line string shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
+		public QueryContainer GeoShapeLineString(Action<GeoShapeLineStringQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapeLineStringQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.GeoShape = query);
+		}
+
+		/// <summary>
+		/// The geo_shape circle Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the multi line string shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
+		public QueryContainer GeoShapeMultiLineString(Action<GeoShapeMultiLineStringQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapeMultiLineStringQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.GeoShape = query);
+		}
+
+		/// <summary>
+		/// The geo_shape circle Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the point shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
+		public QueryContainer GeoShapePoint(Action<GeoShapePointQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapePointQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.GeoShape = query);
+		}
+
+		/// <summary>
+		/// The geo_shape circle Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the multi point shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
+		public QueryContainer GeoShapeMultiPoint(Action<GeoShapeMultiPointQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapeMultiPointQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.GeoShape = query);
+		}
+
+		/// <summary>
+		/// The geo_shape circle Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the polygon shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
+		public QueryContainer GeoShapePolygon(Action<GeoShapePolygonQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapePolygonQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.GeoShape = query);
+		}
+
+		/// <summary>
+		/// The geo_shape circle Filter uses the same grid square representation as the geo_shape mapping to find documents 
+		/// that have a shape that intersects with the multi polygon shape. 
+		/// It will also use the same PrefixTree configuration as defined for the field mapping.
+		/// </summary>
+		public QueryContainer GeoShapeMultiPolygon(Action<GeoShapeMultiPolygonQueryDescriptor<T>> selector)
+		{
+			var query = new GeoShapeMultiPolygonQueryDescriptor<T>();
+			selector(query);
+			return this.New(query, q => q.GeoShape = query);
+		}
+
 		/// <summary>
 		/// The common terms query is a modern alternative to stopwords which improves the precision and recall 
 		/// of search results (by taking stopwords into account), without sacrificing performance.
@@ -469,9 +549,11 @@ namespace Nest
 
 			return this.New(query, q => q.Boosting = query);
 		}
+
 		/// <summary>
 		/// A query that matches all documents. Maps to Lucene MatchAllDocsQuery.
 		/// </summary>
+		/// <param name="Boost">An optional boost to associate with this match_all</param>
 		/// <param name="NormField">
 		/// When indexing, a boost value can either be associated on the document level, or per field. 
 		/// The match all query does not take boosting into account by default. In order to take 

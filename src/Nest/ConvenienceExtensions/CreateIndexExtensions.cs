@@ -12,6 +12,7 @@ namespace Nest
 		/// including executing operations across several indices.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
 		/// </summary>
+		/// <param name="client"></param>
 		/// <param name="index">The name of the index to be created</param>
 		/// <param name="createIndexSelector">A descriptor that further describes the parameters for the create index operation</param>
 		public static IIndicesOperationResponse CreateIndex(this IElasticClient client, string index, 
@@ -27,6 +28,7 @@ namespace Nest
 		/// including executing operations across several indices.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
 		/// </summary>
+		/// <param name="client"></param>
 		/// <param name="index">The name of the index to be created</param>
 		/// <param name="createIndexSelector">A descriptor that further describes the parameters for the create index operation</param>
 		public static IIndicesOperationResponse CreatIndex(this IElasticClient client, string index,

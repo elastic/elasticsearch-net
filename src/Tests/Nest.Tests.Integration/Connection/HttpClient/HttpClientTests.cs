@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Connection.HttpClient
         [Test]
         public void IndexExistShouldNotThrowOn404()
         {
-            var unknownIndexResult = this._httpClientClient.IndexExists(i => i.Index("i-am-running-out-of-clever-index-names"));
+            var unknownIndexResult = this.Client.IndexExists(i => i.Index("i-am-running-out-of-clever-index-names"));
             unknownIndexResult.Should().NotBeNull();
             unknownIndexResult.IsValid.Should().BeTrue();
 
@@ -21,7 +21,7 @@ namespace Nest.Tests.Integration.Connection.HttpClient
         [Test]
         public void EmptyResponseShouldNotThrowError()
         {
-            var result = this._httpClientClient.Connection.HeadSync(ElasticsearchConfiguration.CreateBaseUri(9200));
+            var result = this.Client.Connection.HeadSync(ElasticsearchConfiguration.CreateBaseUri(9200));
             result.Success.Should().BeTrue();
             result.OriginalException.Should().BeNull();
         }

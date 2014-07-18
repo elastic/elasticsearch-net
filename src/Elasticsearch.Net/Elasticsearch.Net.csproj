@@ -31,6 +31,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Elasticsearch.Net.XML</DocumentationFile>
+    <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -101,7 +102,7 @@
     <Compile Include="Domain\Enums.Generated.cs" />
     <Compile Include="Domain\RequestParameters\FluentRequestParameters.cs" />
     <Compile Include="Domain\RequestParameters\RequestParameters.Generated.cs" />
-    <Compile Include="Properties\InternalsVisibleTo.cs" />
+    <Compile Include="Properties\ClsCompliancy.cs" />
     <Compile Include="Purify\IPurify.cs" />
     <Compile Include="Purify\PurifierDotNet.cs" />
     <Compile Include="Purify\PurifierMono.cs" />

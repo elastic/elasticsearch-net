@@ -1,15 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using NUnit.Framework;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-using Nest;
-using Newtonsoft.Json.Converters;
-using Nest.Resolvers.Converters;
 using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Unit.Core.Map
@@ -47,46 +39,46 @@ namespace Nest.Tests.Unit.Core.Map
 				.Dynamic()
 				.Enabled()
 				.SourceField(s=>s
-					.SetDisabled(false)
-					.SetExcludes(new [] {"anyfromthis.prop.*"})
+					.Enabled()
+					.Excludes(new [] {"anyfromthis.prop.*"})
 				)
 				.IncludeInAll()
 				.Path("full")
 				.IdField(i => i
-					.SetIndex("not_analyzed")
-					.SetPath("myOtherId")
-					.SetStored(false)
+					.Index("not_analyzed")
+					.Path("myOtherId")
+					.Store(false)
 				)
 				.SourceField(s => s
-					.SetDisabled()
-					.SetCompression()
-					.SetCompressionTreshold("200b")
-					.SetExcludes(new[] { "path1.*" })
-					.SetIncludes(new[] { "path2.*" })
+					.Enabled(false)
+					.Compress()
+					.CompressionThreshold("200b")
+					.Excludes(new[] { "path1.*" })
+					.Includes(new[] { "path2.*" })
 				)
 				.TypeField(t => t
-					.SetIndexed()
-					.SetStored()
+					.Index()
+					.Store()
 				)
 				.AnalyzerField(a => a
-					.SetPath(p => p.Name)
-					.SetIndexed()
+					.Path(p => p.Name)
+					.Index()
 				)
 				.BoostField(b => b
-					.SetName(p => p.LOC)
-					.SetNullValue(1.0)
+					.Name(p => p.LOC)
+					.NullValue(1.0)
 				)
 				.RoutingField(r => r
-					.SetPath(p => p.Country)
-					.SetRequired()
+					.Path(p => p.Country)
+					.Required()
 				)
 				.TimestampField(t => t
-					.SetDisabled(false)
-					.SetPath(p => p.StartedOn)
+					.Enabled()
+					.Path(p => p.StartedOn)
 				)
 				.TtlField(t => t
-					.SetDisabled(false)
-					.SetDefault("1d")
+					.Enable(false)
+					.Default("1d")
 				)
 				.Meta(d=>d
 					.Add("attr1", "value1")

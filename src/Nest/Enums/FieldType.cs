@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -24,6 +23,11 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "geo_point")]
 		GeoPoint,
+		/// <summary>
+		/// Geo shape type.
+		/// </summary>
+		[EnumMember(Value = "geo_shape")]
+		GeoShape,
 		/// <summary>
 		/// The attachment type allows to index different “attachment” type field (encoded as base64), for example, microsoft office formats, open document formats, ePub, HTML...
 		/// </summary>

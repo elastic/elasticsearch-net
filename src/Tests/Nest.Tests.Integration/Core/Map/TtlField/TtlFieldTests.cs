@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
-using System.Reflection;
 
 namespace Nest.Tests.Integration.Core.Map.TtlField
 {
@@ -10,10 +9,10 @@ namespace Nest.Tests.Integration.Core.Map.TtlField
 		[Test]
 		public void TtlFieldSerializes()
 		{
-			var result = this._client.Map<ElasticsearchProject>(m => m
+			var result = this.Client.Map<ElasticsearchProject>(m => m
 				.TtlField(t => t
-					.SetDisabled(false)
-					.SetDefault("1d")
+					.Enable(false)
+					.Default("1d")
 				)
 			);
 			this.DefaultResponseAssertations(result);

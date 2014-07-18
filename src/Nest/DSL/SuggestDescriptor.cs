@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Elasticsearch.Net;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
@@ -38,7 +37,7 @@ namespace Nest
 				foreach (var kv in suggestRequest.Suggest)
 				{
 					var item = kv.Value;
-					var bucket = new SuggestBucket() { Text = item._Text };
+					var bucket = new SuggestBucket() { Text = item.Text };
 
 					var completion = item as ICompletionSuggester;
 					if (completion != null) bucket.Completion = completion;
