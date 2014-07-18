@@ -329,5 +329,49 @@ namespace Nest.Tests.Unit.Search.Sorting
 			);
 			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
 		}
+
+		[Test]
+		public void TestSortAdd()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Sort(new Sort
+				{
+					Field = "field",
+					Order = SortOrder.Descending,
+					Mode = SortMode.Min
+				})
+				.Sort(new GeoDistanceSort()
+				{
+					Field = "geo_field",
+					PinLocation = "40, -70",
+					Mode = SortMode.Max,
+					GeoUnit = GeoUnit.Kilometers
+				})
+				;
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"
+				{
+				  from: 0,
+				  size: 10,
+				  sort: [
+					{
+					  field: {
+						order: ""desc"",
+						mode: ""min"",
+					  }
+					},
+					{
+					  _geo_distance: {
+						geo_field: ""40, -70"",
+						mode: ""max"",
+						unit: ""km""
+					  }
+					}
+				  ]
+				}";
+			Assert.True(json.JsonEquals(expected), json);
+        }
 	}
 }

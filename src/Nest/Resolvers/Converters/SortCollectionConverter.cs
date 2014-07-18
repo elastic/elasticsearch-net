@@ -10,7 +10,7 @@ namespace Nest.Resolvers.Converters
 	{
 		public override bool CanConvert(Type objectType)
 		{
-			return typeof(IList<KeyValuePair<PropertyPathMarker, ISort>>).IsAssignableFrom(objectType);
+			return typeof(IList<ISort>).IsAssignableFrom(objectType);
 		}
 
 		public override bool CanRead
@@ -26,14 +26,14 @@ namespace Nest.Resolvers.Converters
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			writer.WriteStartArray();
-			var sortItems = value as IList<KeyValuePair<PropertyPathMarker, ISort>>;
-			foreach (var item in sortItems)
+			var sorts = value as IList<ISort>;
+			foreach (var sort in sorts)
 			{
 				writer.WriteStartObject();
 				var contract = serializer.ContractResolver as SettingsContractResolver;
-				var fieldName = contract.Infer.PropertyPath(item.Key);
+				var fieldName = contract.Infer.PropertyPath(sort.SortKey);
 				writer.WritePropertyName(fieldName);
-				serializer.Serialize(writer, item.Value);
+				serializer.Serialize(writer, sort);
 				writer.WriteEndObject();
 			}
 			writer.WriteEndArray();

@@ -36,6 +36,14 @@ namespace Nest
 				{ "unit", this.GeoUnit }
 			};
 		}
+
+		PropertyPathMarker ISort.SortKey
+		{
+			get
+			{
+				return "_geo_distance";
+			}
+		}
 	}
 
 	public class SortGeoDistanceDescriptor<T> : IGeoDistanceSort where T : class
@@ -134,6 +142,14 @@ namespace Nest
 				{ "order", Self.Order },
 				{ "unit", Self.GeoUnit }
 			};
+		}
+
+		PropertyPathMarker ISort.SortKey
+		{
+			get
+			{
+				return "_geo_distance";
+			}
 		}
 	}
 }
