@@ -48,12 +48,44 @@ namespace Nest.Tests.Integration.Exceptions
 				.ThrowOnElasticsearchServerExceptions());
 			Assert.Throws<WebException>(async () => await client.RootNodeInfoAsync());
 		}
+		
+		[Test]
+		public async void ServerError_Is_Set_ClientThat_DoesNotThow_AndDoesNotExposeRawResponse_Async()
+		{
+			var uri = ElasticsearchConfiguration.CreateBaseUri();
+			var client = new ElasticClient(new ConnectionSettings(uri).ExposeRawResponse(false));
+			Assert.DoesNotThrow(async () =>
+			{
+				var result = await client.SearchAsync<ElasticsearchProject>(s => s.QueryRaw(@"{ ""badjson"": {}  }"));
+				result.IsValid.Should().BeFalse();
+				result.ConnectionStatus.HttpStatusCode.Should().Be(400);
+				var e = result.ServerError;
+				e.Should().NotBeNull();
+				e.ExceptionType.Should().Contain("SearchPhaseExecutionException");
+			});
+		}
+		
+		[Test]
+		public void ServerError_Is_Set_ClientThat_DoesNotThow_AndDoesNotExposeRawResponse()
+		{
+			var uri = ElasticsearchConfiguration.CreateBaseUri();
+			var client = new ElasticClient(new ConnectionSettings(uri).ExposeRawResponse(false));
+			Assert.DoesNotThrow(() =>
+			{
+				var result = client.Search<ElasticsearchProject>(s => s.QueryRaw(@"{ ""badjson"": {}  }"));
+				result.IsValid.Should().BeFalse();
+				result.ConnectionStatus.HttpStatusCode.Should().Be(400);
+				var e = result.ServerError;
+				e.Should().NotBeNull();
+				e.ExceptionType.Should().Contain("SearchPhaseExecutionException");
+			});
+		}
 
 		[Test]
 		public void ServerError_Is_Set_ClientThat_DoesNotThow()
 		{
 			var uri = ElasticsearchConfiguration.CreateBaseUri();
-			var client = new ElasticClient(new ConnectionSettings(uri));
+			var client = new ElasticClient(new ConnectionSettings(uri).ExposeRawResponse(true));
 			Assert.DoesNotThrow(() =>
 			{
 				var result = client.Search<ElasticsearchProject>(s => s.QueryRaw(@"{ ""badjson"": {}  }"));
