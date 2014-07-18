@@ -791,6 +791,7 @@
     <Compile Include="Resolvers\Converters\FieldNameQueryConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\SimilaritySettingsConverter.cs" />
+    <Compile Include="Resolvers\Converters\SortCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\SuggestResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\PropertyPathMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />

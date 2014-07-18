@@ -1,14 +1,16 @@
- {
+{
   "from": 0,
   "size": 20,
   "explain": true,
   "track_scores": true,
-  "sort": {
-    "field": {
-      "missing": "_first",
-      "order": "asc"
+  "sort": [
+    {
+      "field": {
+        "missing": "_first",
+        "order": "asc"
+      }
     }
-  },
+  ],
   "filter": {
     "bool": {
       "must": [

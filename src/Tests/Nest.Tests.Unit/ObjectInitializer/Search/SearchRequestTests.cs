@@ -39,9 +39,9 @@ namespace Nest.Tests.Unit.ObjectInitializer.Search
 				{
 					{ Infer.Index<ElasticsearchProject>(), 2.3 }
 				},
-				Sort = new Dictionary<PropertyPathMarker, ISort>()
+				Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>()
 				{
-					{ "field", new Sort { Order = SortOrder.Ascending, Missing = "_first"}}
+					new KeyValuePair<PropertyPathMarker, ISort>("field", new Sort { Order = SortOrder.Ascending, Missing = "_first"})
 				},
 				Facets = new Dictionary<PropertyPathMarker, IFacetContainer>()
 				{
