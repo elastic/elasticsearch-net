@@ -19,9 +19,9 @@ namespace Nest.Tests.Integration.Failover
 		{
 			var seeds = new[]
 			{
-				new Uri("http://localhost:9202"),
-				new Uri("http://localhost:9201"),
-				new Uri("http://localhost:9200"),
+				ElasticsearchConfiguration.CreateBaseUri(9202),
+				ElasticsearchConfiguration.CreateBaseUri(9201),
+				ElasticsearchConfiguration.CreateBaseUri(9200)
 			};
 			var sniffingConnectionPool = new SniffingConnectionPool(seeds, randomizeOnStartup: false);
 			var connectionSettings = new ConnectionSettings(sniffingConnectionPool)
@@ -52,9 +52,9 @@ namespace Nest.Tests.Integration.Failover
 		{
 			var seeds = new[]
 			{
-				new Uri("http://localhost:9202"),
-				new Uri("http://localhost:9201"),
-				new Uri("http://localhost:9200"),
+				ElasticsearchConfiguration.CreateBaseUri(9202),
+				ElasticsearchConfiguration.CreateBaseUri(9201),
+				ElasticsearchConfiguration.CreateBaseUri(9200)
 			};
 			var sniffingConnectionPool = new SniffingConnectionPool(seeds, randomizeOnStartup: false);
 			var connectionSettings = new ConnectionSettings(sniffingConnectionPool)

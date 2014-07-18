@@ -1,6 +1,7 @@
 ﻿using System;
 using Elasticsearch.Net;
 using Elasticsearch.Net.ConnectionPool;
+using Elasticsearch.Net.Exceptions;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -19,9 +20,9 @@ namespace Nest.Tests.Integration.Failover
 		{
 			var seeds = new[]
 			{
-				new Uri("http://localhost:9202"),
-				new Uri("http://localhost:9201"),
-				new Uri("http://localhost:9200"),
+				ElasticsearchConfiguration.CreateBaseUri(9202),
+				ElasticsearchConfiguration.CreateBaseUri(9201),
+				ElasticsearchConfiguration.CreateBaseUri(9200),
 			};
 			var sniffingConnectionPool = new SniffingConnectionPool(seeds, randomizeOnStartup: false);
 			var connectionSettings = new ConnectionSettings(sniffingConnectionPool)
@@ -49,9 +50,9 @@ namespace Nest.Tests.Integration.Failover
 			{
 				rootNode = client.RootNodeInfo();
 				metrics = rootNode.ConnectionStatus.Metrics;
-				metrics.Requests.Count.Should().Be(1);
 				metrics.Requests[0].Node.Port.Should().Be(9200);
 				metrics.Requests[0].RequestType.Should().Be(RequestType.ElasticsearchCall);
+				metrics.Requests.Count.Should().Be(1);
 			}
 
 		}
@@ -61,9 +62,9 @@ namespace Nest.Tests.Integration.Failover
 		{
 			var seeds = new[]
 			{
-				new Uri("http://localhost:9202"),
-				new Uri("http://localhost:9201"),
-				new Uri("http://localhost:9200"),
+				ElasticsearchConfiguration.CreateBaseUri(9202),
+				ElasticsearchConfiguration.CreateBaseUri(9201),
+				ElasticsearchConfiguration.CreateBaseUri(9200),
 			};
 			var sniffingConnectionPool = new SniffingConnectionPool(seeds, randomizeOnStartup: false);
 			var connectionSettings = new ConnectionSettings(sniffingConnectionPool)

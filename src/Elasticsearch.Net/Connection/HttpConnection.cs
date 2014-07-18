@@ -28,6 +28,15 @@ namespace Elasticsearch.Net.Connection
 			ServicePointManager.UseNagleAlgorithm = false;
 			ServicePointManager.Expect100Continue = false;
 			ServicePointManager.DefaultConnectionLimit = 10000;
+			//ServicePointManager.SetTcpKeepAlive(true, 2000, 2000);
+			
+			//WebException's GetResponse is limitted to 65kb by default.
+			//Elasticsearch can be alot more chatty then that when dumping exceptions
+			//On error responses, so lets up the ante.
+
+			//Not available under mono
+			if (Type.GetType ("Mono.Runtime") == null) 
+				HttpWebRequest.DefaultMaximumErrorResponseLength = -1;
 		}
 
 		public HttpConnection(IConnectionConfigurationValues settings)
@@ -173,6 +182,8 @@ namespace Elasticsearch.Net.Connection
 			var myReq = (HttpWebRequest)WebRequest.Create(uri);
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
+			myReq.MaximumResponseHeadersLength = -1;
+			//myReq.AllowWriteStreamBuffering = false;
 			if (this.ConnectionSettings.EnableCompressedResponses)
 			{
 				myReq.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
@@ -232,6 +243,8 @@ namespace Elasticsearch.Net.Connection
 			var httpEx = webException.Response as HttpWebResponse;
 			if (httpEx != null)
 			{
+				//StreamReader ms = new StreamReader(httpEx.GetResponseStream());
+				//var response = ms.ReadToEnd();
 				cs = WebToElasticsearchResponse(data, httpEx.GetResponseStream(), httpEx, method, path);
 				return cs;
 			}

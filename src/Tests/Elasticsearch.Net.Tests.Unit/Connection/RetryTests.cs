@@ -22,7 +22,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			.MaximumRetries(_retries);
 
 		[Test]
-		public void ThrowsOutOfNodesException_AndRetriesTheSpecifiedTimes()
+		public void ThrowsMaxRetryException_AndRetriesTheSpecifiedTimes()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
@@ -41,9 +41,30 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 			}
 		}
+		
+		[Test]
+		public void ThrowsMaxRetryException_AndRetriesTheSpecifiedTimes_HardIConnectionException_Async()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{
+				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
+				FakeCalls.ProvideDefaultTransport(fake);
+				var getCall = FakeCalls.GetCall(fake);
+
+				//return a started task that throws
+				getCall.Throws<Exception>();
+
+				var client = fake.Resolve<ElasticsearchClient>();
+
+				client.Settings.MaxRetries.Should().Be(_retries);
+
+				Assert.Throws<MaxRetryException>(async () => await client.InfoAsync());
+				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
+			}
+		}
 
 		[Test]
-		public void ThrowsOutOfNodesException_AndRetriesTheSpecifiedTimes_Async()
+		public void ThrowsMaxRetryException_AndRetriesTheSpecifiedTimes_Async()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
@@ -179,6 +200,6 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 			}
 		}
-
+		
 	}
 }

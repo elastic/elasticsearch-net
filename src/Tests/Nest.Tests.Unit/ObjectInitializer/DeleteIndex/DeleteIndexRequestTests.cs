@@ -26,7 +26,9 @@ namespace Nest.Tests.Unit.ObjectInitializer.DeleteIndex
 		[Test]
 		public void Url()
 		{
-			this._status.RequestUrl.Should().EndWith("/postfixed-index-*%2Cnest_test_data?timeout=2m");
+			var asterix = Type.GetType("Mono.Runtime") != null ? "%2A" : "*";
+			var expectedUrl = "/postfixed-index-{0}%2Cnest_test_data?timeout=2m".F(asterix);
+			this._status.RequestUrl.Should().EndWith(expectedUrl);
 			this._status.RequestMethod.Should().Be("DELETE");
 		}
 		

@@ -24,6 +24,7 @@ namespace StartupTests
 		};
 
 		[Test]
+		[Ignore]
 		public void Calling_RootNodeInfo_TwiceInOneAssembly_IsFast()
 		{
 			using (var context = AppDomainContext.Create(_setupInfo))
@@ -43,6 +44,7 @@ namespace StartupTests
 		}
 		
 		[Test]
+		[Ignore]
 		public void Calling_RootNodeInfo_OnceInTwoAsemblies_SlowTwice()
 		{
 			using (var context = AppDomainContext.Create(_setupInfo))
@@ -66,6 +68,7 @@ namespace StartupTests
 
 		
 		[Test]
+		[Ignore]
 		public void Calling_Search_TwiceInAppDomainIsFast()
 		{
 			using (var context = AppDomainContext.Create(_setupInfo))
@@ -85,6 +88,7 @@ namespace StartupTests
 		}
 		
 		[Test]
+		[Ignore]
 		public void Calling_Complex_TypedSearch_IsAlsoFaster_AfterBeingCalledOnce()
 		{
 			using (var context = AppDomainContext.Create(_setupInfo))
