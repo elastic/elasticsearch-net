@@ -21,7 +21,7 @@ namespace Elasticsearch.Net.Connection
 		public InMemoryConnection(IConnectionConfigurationValues settings)
 			: base(settings)
 		{
-
+			_statusCode = 200;
 		}
 
 		public InMemoryConnection(IConnectionConfigurationValues settings, string fixedResult, int statusCode = 200)

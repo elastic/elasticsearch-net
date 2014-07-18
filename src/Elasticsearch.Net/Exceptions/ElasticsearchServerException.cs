@@ -8,7 +8,7 @@ namespace Elasticsearch.Net
 {
 	public class ElasticsearchServerException : Exception
 	{
-		private static readonly Regex ExceptionSplitter = new Regex(@"^([^\[]+?)\[(.+)\]$", RegexOptions.Singleline);
+		private static readonly Regex ExceptionSplitter = new Regex(@"^([^\[]*?)\[(.*)\]", RegexOptions.Singleline);
 		private static readonly string _couldNotParseServerException = "Could not parse server exception";
 
 		public int Status { get; set; }
