@@ -62,19 +62,19 @@ namespace Nest.Resolvers
 			if (objectType == typeof(MultiSearchResponse))
 				contract.Converter = new MultiSearchConverter();
 
-			if (objectType == typeof(FluentDictionary<string, AnalyzerBase>))
-				contract.Converter = new AnalyzerCollectionConverter();
+      if (typeof(IDictionary<string, AnalyzerBase>).IsAssignableFrom(objectType))
+        contract.Converter = new AnalyzerCollectionConverter();
 
-			if (objectType == typeof(FluentDictionary<string, TokenFilterBase>))
-				contract.Converter = new TokenFilterCollectionConverter();
+      if (typeof(IDictionary<string, TokenFilterBase>).IsAssignableFrom(objectType))
+        contract.Converter = new TokenFilterCollectionConverter();
 
-			if (objectType == typeof(FluentDictionary<string, TokenizerBase>))
-				contract.Converter = new TokenizerCollectionConverter();
+      if (typeof(IDictionary<string, TokenizerBase>).IsAssignableFrom(objectType))
+        contract.Converter = new TokenizerCollectionConverter();
 
-			if (objectType == typeof(FluentDictionary<string, CharFilterBase>))
-				contract.Converter = new CharFilterCollectionConverter();
+      if (typeof(IDictionary<string, CharFilterBase>).IsAssignableFrom(objectType))
+        contract.Converter = new CharFilterCollectionConverter();
 
-      if (objectType == typeof(FluentDictionary<string, SimilarityBase>))
+      if (typeof(IDictionary<string, SimilarityBase>).IsAssignableFrom(objectType))
         contract.Converter = new SimilarityCollectionConverter();
 
 			if (this.ConnectionSettings.ContractConverters.HasAny())
