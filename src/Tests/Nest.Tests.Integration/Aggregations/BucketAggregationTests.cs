@@ -195,7 +195,7 @@ namespace Nest.Tests.Integration.Aggregations
 				.Aggregations(a => a
 					.IpRange("bucket_agg", dh => dh
 						.Field(p => p.PingIP)
-						.Ranges("10.0.0.0/25")
+						.Ranges(r=>r.Mask("10.0.0.0/25"))
 					)
 				)
 			);

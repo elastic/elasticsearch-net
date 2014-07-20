@@ -189,7 +189,7 @@ namespace Nest.Tests.Integration.Aggregations
 				.Aggregations(a=>a
 					.IpRange("my_ip", dh=>dh
 						.Field(p=>p.PingIP)
-						.Ranges("10.0.0.0/25")
+						.Ranges(r=>r.Mask("10.0.0.0/25"))
 					)
 				)
 			);
@@ -199,6 +199,28 @@ namespace Nest.Tests.Integration.Aggregations
 	        var firstAgg = results.Aggregations.First().Value as Bucket;
 		    firstAgg.Should().NotBeNull();
 		    firstAgg.Items.Should().NotBeEmpty();
+			var grams = firstAgg.Items.OfType<RangeItem>();
+			grams.Should().NotBeEmpty();
+	    }
+
+	    [Test]
+	    public void IpRangeFromToItem()
+	    {
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.IpRange("my_ip", dh => dh
+						.Field(p => p.PingIP)
+						.Ranges(r => r.From("10.0.0.0").To("10.0.0.255"))
+					)
+				)
+			);
+			var request = results.ConnectionStatus.Request.Utf8String();
+			results.IsValid.Should().BeTrue("{0}", request);
+			results.Aggregations.Should().HaveCount(1);
+			var firstAgg = results.Aggregations.First().Value as Bucket;
+			firstAgg.Should().NotBeNull();
+			firstAgg.Items.Should().NotBeEmpty();
 			var grams = firstAgg.Items.OfType<RangeItem>();
 			grams.Should().NotBeEmpty();
 	    }
