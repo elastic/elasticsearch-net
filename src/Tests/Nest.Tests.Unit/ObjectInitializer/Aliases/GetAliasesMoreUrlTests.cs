@@ -18,7 +18,11 @@ namespace Nest.Tests.Unit.ObjectInitializer.Aliases
 			
 			var status = response.ConnectionStatus;
 		
-			status.RequestUrl.Should().EndWith("/_aliases/*");
+			//MONO uriencodes *, functionally equivalent so we do a 'dirty' fix here.
+			if (Type.GetType("Mono.Runtime") != null)
+				status.RequestUrl.Should().EndWith("/_aliases/%2A");
+			else 
+				status.RequestUrl.Should().EndWith("/_aliases/*");
 			status.RequestMethod.Should().Be("GET");
 		}
 

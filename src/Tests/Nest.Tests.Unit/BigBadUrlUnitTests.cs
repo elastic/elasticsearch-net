@@ -13,6 +13,10 @@ namespace Nest.Tests.Unit.Cluster
 	{
 		private void Do(string method, string expectedUrl, Action<IElasticClient> call)
 		{
+			//MONO uriencodes *, functionally equivalent so we do a 'dirty' fix here.
+			if (Type.GetType("Mono.Runtime") != null)
+				expectedUrl = expectedUrl.Replace("*", "%2A");
+
 			var settings = new ConnectionSettings(new Uri("http://localhost:9200/"), "mydefaultindex")
 				.SetConnectionStatusHandler(c =>
 				{

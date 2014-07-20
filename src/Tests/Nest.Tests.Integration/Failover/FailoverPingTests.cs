@@ -19,9 +19,9 @@ namespace Nest.Tests.Integration.Failover
 		{
 			var seeds = new[]
 			{
-				new Uri("http://localhost:9202"),
-				new Uri("http://localhost:9201"),
-				new Uri("http://localhost:9200"),
+				ElasticsearchConfiguration.CreateBaseUri(9202),
+				ElasticsearchConfiguration.CreateBaseUri(9201),
+				ElasticsearchConfiguration.CreateBaseUri(9200)
 			};
 			var sniffingConnectionPool = new SniffingConnectionPool(seeds, randomizeOnStartup: false);
 			var connectionSettings = new ConnectionSettings(sniffingConnectionPool);
@@ -33,16 +33,16 @@ namespace Nest.Tests.Integration.Failover
 			metrics.Requests.Count.Should().Be(4);
 			metrics.Requests[0].Node.Port.Should().Be(9202);
 			metrics.Requests[0].RequestType.Should().Be(RequestType.Ping);
-			metrics.Requests[0].EllapsedMilliseconds.Should().BeLessOrEqualTo(200);
+			metrics.Requests[0].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
 			metrics.Requests[1].Node.Port.Should().Be(9201);
 			metrics.Requests[1].RequestType.Should().Be(RequestType.Ping);
-			metrics.Requests[1].EllapsedMilliseconds.Should().BeLessOrEqualTo(200);
+			metrics.Requests[1].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
 			metrics.Requests[2].Node.Port.Should().Be(9200);
 			metrics.Requests[2].RequestType.Should().Be(RequestType.Ping);
-			metrics.Requests[2].EllapsedMilliseconds.Should().BeLessOrEqualTo(200);
+			metrics.Requests[2].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
 			metrics.Requests[3].Node.Port.Should().Be(9200);
 			metrics.Requests[3].RequestType.Should().Be(RequestType.ElasticsearchCall);
-			metrics.Requests[3].EllapsedMilliseconds.Should().BeLessOrEqualTo(200);
+			metrics.Requests[3].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
 
 			rootNode = client.RootNodeInfo();
 			metrics = rootNode.ConnectionStatus.Metrics;
@@ -79,9 +79,9 @@ namespace Nest.Tests.Integration.Failover
 		{
 			var seeds = new[]
 			{
-				new Uri("http://localhost:9202"),
-				new Uri("http://localhost:9201"),
-				new Uri("http://localhost:9200"),
+				ElasticsearchConfiguration.CreateBaseUri(9202),
+				ElasticsearchConfiguration.CreateBaseUri(9201),
+				ElasticsearchConfiguration.CreateBaseUri(9200)
 			};
 			var sniffingConnectionPool = new SniffingConnectionPool(seeds, randomizeOnStartup: false);
 			var connectionSettings = new ConnectionSettings(sniffingConnectionPool);
@@ -93,16 +93,16 @@ namespace Nest.Tests.Integration.Failover
 			metrics.Requests.Count.Should().Be(4);
 			metrics.Requests[0].Node.Port.Should().Be(9202);
 			metrics.Requests[0].RequestType.Should().Be(RequestType.Ping);
-			metrics.Requests[0].EllapsedMilliseconds.Should().BeLessOrEqualTo(100);
+			metrics.Requests[0].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
 			metrics.Requests[1].Node.Port.Should().Be(9201);
 			metrics.Requests[1].RequestType.Should().Be(RequestType.Ping);
-			metrics.Requests[1].EllapsedMilliseconds.Should().BeLessOrEqualTo(100);
+			metrics.Requests[1].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
 			metrics.Requests[2].Node.Port.Should().Be(9200);
 			metrics.Requests[2].RequestType.Should().Be(RequestType.Ping);
-			metrics.Requests[2].EllapsedMilliseconds.Should().BeLessOrEqualTo(100);
+			metrics.Requests[2].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
 			metrics.Requests[3].Node.Port.Should().Be(9200);
 			metrics.Requests[3].RequestType.Should().Be(RequestType.ElasticsearchCall);
-			metrics.Requests[3].EllapsedMilliseconds.Should().BeLessOrEqualTo(100);
+			metrics.Requests[3].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
 
 			rootNode = await client.RootNodeInfoAsync();
 			metrics = rootNode.ConnectionStatus.Metrics;

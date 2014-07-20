@@ -14,6 +14,7 @@ namespace Elasticsearch.Net.ConnectionPool
 		protected IDictionary<Uri, EndpointState> UriLookup;
 		protected IList<Uri> NodeUris;
 		protected int Current = -1;
+		private Random _random;
 
 		public int MaxRetries { get { return NodeUris.Count - 1;  } }
 
@@ -24,6 +25,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			bool randomizeOnStartup = true, 
 			IDateTimeProvider dateTimeProvider = null)
 		{
+			_random = new Random(1337);
 			_dateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
 			var rnd = new Random();
 			uris.ThrowIfEmpty("uris");

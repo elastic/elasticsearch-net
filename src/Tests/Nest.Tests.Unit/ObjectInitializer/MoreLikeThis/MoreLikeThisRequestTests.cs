@@ -42,9 +42,9 @@ namespace Nest.Tests.Unit.ObjectInitializer.MoreLikeThis
 				}),
 				TrackScores = true,
 				Explain = true,
-				Sort = new Dictionary<PropertyPathMarker, ISort>()
+				Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>()
 				{
-					{ "field", new Sort { Order = SortOrder.Ascending, Missing = "_first"}}
+					new KeyValuePair<PropertyPathMarker, ISort>("field", new Sort { Order = SortOrder.Ascending, Missing = "_first"})
 				}
 			};
 			var request = new MoreLikeThisRequest("some-index", "the-type","document-id-21")

@@ -15,6 +15,7 @@ namespace Elasticsearch.Net.Connection.RequestState
 		int? Seed { get; set; }
 		Uri CurrentNode { get; set; }
 		List<RequestMetrics> RequestMetrics { get; set; }
+		List<Exception> SeenExceptions { get; }
 		Func<IElasticsearchResponse, Stream, object> ResponseCreationOverride { get; set; }
 	}
 }

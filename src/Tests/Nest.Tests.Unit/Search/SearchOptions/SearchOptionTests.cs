@@ -218,9 +218,9 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.SortAscending(e => e.LOC.Suffix("sort"));
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-					sort: {
-						""loc.sort"": { order: ""asc"" }
-					},
+					sort: [
+						{""loc.sort"": { order: ""asc"" }}
+					],
 					fields: [""id"", ""name""]
 				}";
 			Assert.True(json.JsonEquals(expected), json);
@@ -236,10 +236,10 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.SortDescending(e => e.Name.Suffix("sort"));
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-					sort: {
-						""loc.sort"": { order: ""asc"" },
-						""name.sort"": { order: ""desc"" }
-					},
+					sort: [
+						{""loc.sort"": { order: ""asc"" }},
+						{""name.sort"": { order: ""desc"" }}
+					],
 					fields: [""id"", ""name""]
 				}";
 			Assert.True(json.JsonEquals(expected), json);

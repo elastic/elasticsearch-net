@@ -1,4 +1,4 @@
-  {
+{
   "from": 0,
   "size": 20,
   "explain": true,
@@ -7,12 +7,14 @@
   "indices_boost": {
     "nest_test_data": 2.3
   },
-  "sort": {
-    "field": {
-      "missing": "_first",
-      "order": "asc"
+  "sort": [
+    {
+      "field": {
+        "missing": "_first",
+        "order": "asc"
+      }
     }
-  },
+  ],
   "facets": {
     "name": {
       "terms": {
