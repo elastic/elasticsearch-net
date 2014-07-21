@@ -69,9 +69,9 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 							{"multiplier", 4}
 						}
 					}),
-				Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>()
+				Sort = new List<ISort>()
 				{
-					new KeyValuePair<PropertyPathMarker, ISort>("field", new Sort { Order = SortOrder.Ascending, Missing = "_first"})
+					new Sort { Field="field", Order = SortOrder.Ascending, Missing = "_first"}
 				},
 				Source = new SourceFilter
 				{

@@ -34,6 +34,8 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ISort
 	{
+		PropertyPathMarker SortKey { get; }
+
 		[JsonProperty("missing")]
 		string Missing { get; set; }
 
@@ -67,6 +69,13 @@ namespace Nest
 		public FilterContainer NestedFilter { get; set; }
 		public PropertyPathMarker NestedPath { get; set; }
 		public bool? IgnoreUnmappedFields { get; set; }
+		PropertyPathMarker ISort.SortKey
+		{
+			get
+			{
+				return Field;
+			}
+		}
 	}
 
 	public class SortFieldDescriptor<T> : IFieldSort where T : class
@@ -190,6 +199,14 @@ namespace Nest
 		{
 			Self.NestedPath = objectPath;
 			return this;
+		}
+
+		PropertyPathMarker ISort.SortKey
+		{
+			get
+			{
+				return Self.Field;
+			}
 		}
 	}
 }
