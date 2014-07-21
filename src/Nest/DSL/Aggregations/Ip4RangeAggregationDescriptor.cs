@@ -52,5 +52,13 @@ namespace Nest
 			Self.Ranges = newRanges;
 			return this;
 		}
+
+		[Obsolete]
+		public Ip4RangeAggregationDescriptor<T> Ranges(params string[] ranges)
+		{
+			var newRanges = from range in ranges let r = new Ip4ExpressionRange().Mask(range) select r;
+			Self.Ranges = newRanges;
+			return this;
+		}
 	}
 }
