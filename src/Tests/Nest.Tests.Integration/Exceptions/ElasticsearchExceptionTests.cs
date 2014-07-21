@@ -50,7 +50,7 @@ namespace Nest.Tests.Integration.Exceptions
 		}
 		
 		[Test]
-		public async void ServerError_Is_Set_ClientThat_DoesNotThow_AndDoesNotExposeRawResponse_Async()
+		public void ServerError_Is_Set_ClientThat_DoesNotThow_AndDoesNotExposeRawResponse_Async()
 		{
 			var uri = ElasticsearchConfiguration.CreateBaseUri();
 			var client = new ElasticClient(new ConnectionSettings(uri).ExposeRawResponse(false));
