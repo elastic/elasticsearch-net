@@ -186,7 +186,7 @@ namespace Nest.Tests.Integration.Exceptions
 				var result = await client.SearchAsync<ElasticsearchProject>(s => s.MatchAll());
 				result.IsValid.Should().BeFalse();
 			}
-			catch (MaxRetryException e)
+			catch (MaxRetryException)
 			{
 				Assert.Pass("MaxRetryException caught");
 			}
@@ -242,7 +242,7 @@ namespace Nest.Tests.Integration.Exceptions
 				var close = await client.CloseIndexAsync(i=>i.Index(index));
 				var result = await client.SearchAsync<ElasticsearchProject>(s => s.Index(index));
 			}
-			catch (ElasticsearchServerException e)
+			catch (ElasticsearchServerException)
 			{
 				Assert.Pass("ElasticearchServerException caught");
 			}
