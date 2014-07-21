@@ -189,24 +189,6 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
-		public void IpRangeString()
-		{
-			var results = this.Client.Search<ElasticsearchProject>(s => s
-				.Size(0)
-				.Aggregations(a => a
-					.IpRange("bucket_agg", dh => dh
-						.Field(p => p.PingIP)
-						.Ranges(new[] { "10.0.0.0/25", "10.0.1.0/25" })
-					)
-				)
-			);
-
-			results.IsValid.Should().BeTrue();
-			var bucket = results.Aggs.IpRange("bucket_agg");
-			bucket.Items.Should().NotBeEmpty();
-		}
-
-		[Test]
 		public void IpRange()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
