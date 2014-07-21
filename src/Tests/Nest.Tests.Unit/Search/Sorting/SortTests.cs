@@ -219,6 +219,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 					.Params(p => p
 						.Add("factor", 1.1)
 					)
+					.Language("native")
 					.Type("number")
 				);
 			var json = TestElasticClient.Serialize(s);
@@ -227,7 +228,7 @@ namespace Nest.Tests.Unit.Search.Sorting
                   from: 0,
                   size: 10,
                   sort: [
-					{
+                   {
                       _script: {
                         type: ""number"",
                         script: ""doc['field_name'].value * factor"",
@@ -236,9 +237,10 @@ namespace Nest.Tests.Unit.Search.Sorting
                         },
                         missing: ""_last"",
                         order: ""desc"",
-					    mode: ""avg""
+                        mode: ""avg"",
+                        lang: ""native""
                       }
-					}
+                    }
                   ]
                 }";
 			Assert.True(json.JsonEquals(expected), json);
