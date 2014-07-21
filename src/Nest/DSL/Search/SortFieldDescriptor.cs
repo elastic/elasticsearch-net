@@ -44,6 +44,48 @@ namespace Nest
 		SortMode? Mode { get; set; }
 	}
 
+	public class SortBase : ISort
+	{
+		public string Missing { get; set; }
+		public SortOrder? Order { get; set; }
+		public SortMode? Mode { get; set; }
+	}
+
+	public class SortDescriptorBase<T, TDescriptor> : ISort where T : class where TDescriptor : SortDescriptorBase<T, TDescriptor>
+	{
+		private ISort Self { get { return this; } }
+
+		string ISort.Missing { get; set; }
+
+		SortOrder? ISort.Order { get; set; }
+
+		SortMode? ISort.Mode { get; set; }
+
+		public virtual TDescriptor Ascending()
+		{
+			Self.Order = SortOrder.Ascending;
+			return (TDescriptor)this;
+		}
+
+		public virtual TDescriptor Descending()
+		{
+			Self.Order = SortOrder.Descending;
+			return (TDescriptor)this;
+		}
+
+		public virtual TDescriptor Order(SortOrder order)
+		{
+			Self.Order = order;
+			return (TDescriptor)this;
+		}
+
+		public virtual TDescriptor Mode(SortMode mode)
+		{
+			Self.Mode = mode;
+			return (TDescriptor)this;
+		}
+	}
+
 	public interface IFieldSort : ISort
 	{
 		PropertyPathMarker Field { get; set; }
@@ -58,28 +100,19 @@ namespace Nest
 		bool? IgnoreUnmappedFields { get; set; }
 	}
 
-	public class Sort : IFieldSort
+	public class Sort : SortBase, IFieldSort
 	{
 		public PropertyPathMarker Field { get; set; }
-		public string Missing { get; set; }
-		public SortOrder? Order { get; set; }
-		public SortMode? Mode { get; set; }
 		public FilterContainer NestedFilter { get; set; }
 		public PropertyPathMarker NestedPath { get; set; }
 		public bool? IgnoreUnmappedFields { get; set; }
 	}
 
-	public class SortFieldDescriptor<T> : IFieldSort where T : class
+	public class SortFieldDescriptor<T> : SortDescriptorBase<T, SortFieldDescriptor<T>>, IFieldSort where T : class
 	{
 		private IFieldSort Self { get { return this; } }
 
 		PropertyPathMarker IFieldSort.Field { get; set; }
-
-		string ISort.Missing { get; set; }
-
-		SortOrder? ISort.Order { get; set; }
-
-        SortMode? ISort.Mode { get; set; }
 
 		FilterContainer IFieldSort.NestedFilter { get; set; }
 
@@ -123,29 +156,6 @@ namespace Nest
 			return this;
 		}
 
-		public virtual SortFieldDescriptor<T> Ascending()
-		{
-			Self.Order = SortOrder.Ascending;
-			return this;
-		}
-
-		public virtual SortFieldDescriptor<T> Descending()
-		{
-			Self.Order = SortOrder.Descending;
-			return this;
-		}
-
-		public virtual SortFieldDescriptor<T> Order(SortOrder order)
-		{
-			Self.Order = order;
-			return this;
-		}
-
-		public virtual SortFieldDescriptor<T> Mode(SortMode mode)
-		{
-			Self.Mode = mode;
-			return this;
-		}
 
         public virtual SortFieldDescriptor<T> NestedMin()
         {

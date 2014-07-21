@@ -18,25 +18,16 @@ namespace Nest.DSL.Descriptors
 		Dictionary<string, object> Params { get; set; }
 	}
 
-	public class ScriptSort : IScriptSort
+	public class ScriptSort : SortBase, IScriptSort
 	{
-		public string Missing { get; set; }
-		public SortOrder? Order { get; set; }
-		public SortMode? Mode { get; set; }
 		public string Type { get; set; }
 		public string Script { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 	}
 
-	public class SortScriptDescriptor<T> : IScriptSort
+	public class SortScriptDescriptor<T> : SortDescriptorBase<T, SortScriptDescriptor<T>>, IScriptSort where T : class
 	{
 		public IScriptSort Self { get { return this; } }
-
-		string ISort.Missing { get; set; }
-
-		SortOrder? ISort.Order { get; set; }
-
-		SortMode? ISort.Mode { get; set; }
 
 		string IScriptSort.Type { get; set; }
 
@@ -80,30 +71,6 @@ namespace Nest.DSL.Descriptors
 		public virtual SortScriptDescriptor<T> MissingValue(string value)
 		{
 			Self.Missing = value;
-			return this;
-		}
-
-		public virtual SortScriptDescriptor<T> Ascending()
-		{
-			Self.Order = SortOrder.Ascending;
-			return this;
-		}
-
-		public virtual SortScriptDescriptor<T> Descending()
-		{
-			Self.Order = SortOrder.Descending;
-			return this;
-		}
-
-		public SortScriptDescriptor<T> Order(SortOrder order)
-		{
-			Self.Order = order;
-			return this;
-		}
-
-		public SortScriptDescriptor<T> Mode(SortMode mode)
-		{
-			Self.Mode = mode;
 			return this;
 		}
 	}
