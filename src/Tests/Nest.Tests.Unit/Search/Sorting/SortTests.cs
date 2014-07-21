@@ -293,6 +293,56 @@ namespace Nest.Tests.Unit.Search.Sorting
 		}
 
 		[Test]
+		public void TestScriptNestedFilter()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.SortScript(sort => sort
+					.Script("script")
+					.NestedFilter(f => f.Term("name", "value"))
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"
+				{
+				  ""sort"": [
+					{
+					  ""_script"": {
+						""script"": ""script"",
+						""nested_filter"": {
+						  ""term"": {
+							""name"": ""value""
+						  }
+						}
+					  }
+					}
+				  ]
+				}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
+		public void TestScriptNestedPath()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.SortScript(sort => sort
+					.Script("script")
+					.NestedPath("name")
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"
+				{
+				  ""sort"": [
+					{
+					  ""_script"": {
+						""script"": ""script"",
+						""nested_path"": ""name""
+					  }
+					}
+				  ]
+				}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
 		public void TestNestedPathObject()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
