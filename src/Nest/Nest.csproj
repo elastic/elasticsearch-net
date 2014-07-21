@@ -148,6 +148,7 @@
     <Compile Include="Domain\Geometry\PointGeoShape.cs" />
     <Compile Include="Domain\Geometry\PolygonGeoShape.cs" />
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
+    <Compile Include="DSL\Facets\Ip4ExpressionRange.cs" />
     <Compile Include="DSL\Filter\GeoShapeCircleFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeMultiLineStringFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeMultiPointFilterDescriptor.cs" />
