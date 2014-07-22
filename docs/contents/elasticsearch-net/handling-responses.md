@@ -11,7 +11,7 @@ menuitem: esnet-handling-responses
 
 ### Success
 The call succeeded and was succesful (200 range). 
-Note that even if you get a 200 back from `Elasticsearch`, in many cases it's still recommended 
+Note that even if you get a 200 back from Elasticsearch, in many cases it's still recommended 
 to check the actual response making sure it succeeded on enough shards.
 
 ### Error
@@ -21,10 +21,10 @@ When a call succeeds but does not return a HTTP status code of 200 this property
 The HTTP status code that the call returned.
 
 ### OriginalException
-Holds the exception that occurred on the `Elasticsearch` server.  Null if no exception occurred.
+Holds the exception that occurred on the Elasticsearch server.  Null if no exception occurred.
 
 ### ServerError
-The original exception from the `Elasticsearch` server mapped as an `ElasticsearchServerError`, otherwise null.
+The original exception from the Elasticsearch server mapped as an `ElasticsearchServerError`, otherwise null.
 
 ### RequestMethod
 The HTTP method used for making the request (POST, GET, PUT, HEAD, DELETE).
@@ -33,10 +33,10 @@ The HTTP method used for making the request (POST, GET, PUT, HEAD, DELETE).
 The URL the request was sent to.
 
 ### Request 
-The `byte[]` request that was sent to `Elasticsearch`.
+The `byte[]` request that was sent to Elasticsearch.
 
 ### ResponseRaw 
-A `byte[]` representation of the response from `Elasticsearch`, only set when `ExposeRawResponses()` is set. 
+A `byte[]` representation of the response from Elasticsearch, only set when `ExposeRawResponses()` is set. 
 See the [Connecting section](/elasticearch-net/connecting.html).
 
 ### Response
@@ -54,7 +54,7 @@ The number of times the request was tried.
 
     var result = client.Search<MyType>()
 
-In this example `MyType` is a type you provide to deserialize `Elasticsearch`'s response to. 
+In this example `MyType` is a type you provide to deserialize Elasticsearch's response to. 
 
     var myTypeInstance = client.Response
 

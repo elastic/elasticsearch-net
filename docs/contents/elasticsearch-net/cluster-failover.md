@@ -7,7 +7,7 @@ menuitem: esnet-cluster-failover
 
 # Connection pooling & Cluster failover
 
-One of the major benefits of `Elasticsearch` is that it can handle dying and respawning  nodes. 
+One of the major benefits of Elasticsearch is that it can handle dying and respawning  nodes. 
 As long as enough nodes agree that the cluster is healthy, the cluster will continue to operate.
 `Elasticsearch.Net` comes with builtin support for handle falling over to a different node when the requested node failed.
 

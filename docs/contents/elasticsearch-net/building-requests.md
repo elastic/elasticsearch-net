@@ -7,7 +7,7 @@ menuitem: esnet-building-requests
 
 # Building Requests
 
-`Elasticsearch.Net` maps **all** the `Elasticsearch` API endpoints to methods. The reason it can do this is because all these methods are generated from 
+`Elasticsearch.Net` maps **all** the Elasticsearch API endpoints to methods. The reason it can do this is because all these methods are generated from 
 [the official client REST specification](https://github.com/elasticsearch/elasticsearch/tree/master/rest-api-spec/api). This specification documents all 
 the URL's (paths and querystrings) but does not map any of the API request and response bodies.
 
@@ -51,7 +51,7 @@ HTTP methods.
 
 ### IEnumerable&lt;object&gt; 
 
-Some API endpoints in `Elasticsearch` follow a strict special json format. 
+Some API endpoints in Elasticsearch follow a strict special json format. 
 
     line_of_json_with_no_enters \n
     json_payload_with_enters
@@ -74,7 +74,7 @@ Examples of such endpoints are the [bulk api](http://www.elasticsearch.org/guide
     client.Bulk(bulk);
 
 `Elasticsearch.Net` will know not to serialize the passed object as `[]` but instead serialize each seperately and joining them up with `\n`. 
-No request in `Elasticsearch` expects an array as root object for the request.
+No request in Elasticsearch expects an array as root object for the request.
 
 
 
