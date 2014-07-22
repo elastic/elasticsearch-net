@@ -19,7 +19,7 @@ Or search in the Package Manager UI for `Elasticsearch.Net` and go from there
 
 ## Connecting
 
-hit http://localhost:9200 in the browser you should see a similar response to this:
+Assumming `Elasticsearch` is already installed and running on your machine, go to http://localhost:9200 in your browser. You should see a similar response to this:
 
     {
       "status" : 200,
