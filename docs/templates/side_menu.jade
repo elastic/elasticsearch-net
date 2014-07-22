@@ -116,6 +116,42 @@ aside#menu
 				h4: a(class=(page.metadata.menuitem == 'basics')? "selected" : "", href="/nest/search/basics.html")
 					i.fa.fa-chevron-right
 					| Search
+		- if (page.metadata.menusection == 'aggregations' )
+			h4 
+				i.fa.fa-chevron-down
+				| Aggregations
+			ul
+				li: a(class=(page.metadata.menuitem == 'avg')? "selected" : "", href="/nest/aggregations/avg.html") Avg
+				li: a(class=(page.metadata.menuitem == 'cardinality')? "selected" : "", href="/nest/aggregations/cardinality.html") Cardinality
+				li: a(class=(page.metadata.menuitem == 'date-histogram')? "selected" : "", href="/nest/aggregations/date-histogram.html") Date Histogram
+				li: a(class=(page.metadata.menuitem == 'date-range')? "selected" : "", href="/nest/aggregations/date-range.html") Date Range
+				li: a(class=(page.metadata.menuitem == 'extended-stats')? "selected" : "", href="/nest/aggregations/extended-stats.html") Extended Stats
+				li: a(class=(page.metadata.menuitem == 'filter')? "selected" : "", href="/nest/aggregations/filter.html") Filter
+				li: a(class=(page.metadata.menuitem == 'geo-bounds')? "selected" : "", href="/nest/aggregations/geo-bounds.html") Geo Bounds
+				li: a(class=(page.metadata.menuitem == 'geo-distance')? "selected" : "", href="/nest/aggregations/geo-distance.html") Geo Distance
+				li: a(class=(page.metadata.menuitem == 'geohash-grid')? "selected" : "", href="/nest/aggregations/geohash-grid.html") Geohash Grid
+				li: a(class=(page.metadata.menuitem == 'global')? "selected" : "", href="/nest/aggregations/global.html") Global
+				li: a(class=(page.metadata.menuitem == 'histogram')? "selected" : "", href="/nest/aggregations/histogram.html") Histogram
+				li: a(class=(page.metadata.menuitem == 'ipv4')? "selected" : "", href="/nest/aggregations/ipv4.html") IPv4
+				li: a(class=(page.metadata.menuitem == 'max')? "selected" : "", href="/nest/aggregations/max.html") Max
+				li: a(class=(page.metadata.menuitem == 'min')? "selected" : "", href="/nest/aggregations/min.html") Min
+				li: a(class=(page.metadata.menuitem == 'missing')? "selected" : "", href="/nest/aggregations/missing.html") Missing
+				li: a(class=(page.metadata.menuitem == 'percentiles')? "selected" : "", href="/nest/aggregations/percentiles.html") Percentiles
+				li: a(class=(page.metadata.menuitem == 'percentile-ranks')? "selected" : "", href="/nest/aggregations/percentile-ranks.html") Percentiles Ranks
+				li: a(class=(page.metadata.menuitem == 'range')? "selected" : "", href="/nest/aggregations/range.html") Range
+				li: a(class=(page.metadata.menuitem == 'nested')? "selected" : "", href="/nest/aggregations/nested.html") Nested
+				li: a(class=(page.metadata.menuitem == 'reverse-nested')? "selected" : "", href="/nest/aggregations/reverse-nested.html") Reverse Nested
+				li: a(class=(page.metadata.menuitem == 'significant-terms')? "selected" : "", href="/nest/aggregations/significant-terms.html") Significant Terms
+				li: a(class=(page.metadata.menuitem == 'stats')? "selected" : "", href="/nest/aggregations/stats.html") Stats
+				li: a(class=(page.metadata.menuitem == 'sum')? "selected" : "", href="/nest/aggregations/sum.html") Sum
+				li: a(class=(page.metadata.menuitem == 'terms')? "selected" : "", href="/nest/aggregations/terms.html") Terms
+				li: a(class=(page.metadata.menuitem == 'top-hits')? "selected" : "", href="/nest/aggregations/top-hits.html") Top Hits
+				li: a(class=(page.metadata.menuitem == 'value-count')? "selected" : "", href="/nest/aggregations/value-count.html") Value Count
+		- else 
+			li 
+				h4: a(class=(page.metadata.menuitem == 'avg')? "selected" : "", href="/nest/aggregations/avg.html")
+					i.fa.fa-chevron-right
+					| Aggregations
 		- if (page.metadata.menusection == 'facets' )
 			h4 
 				i.fa.fa-chevron-down
