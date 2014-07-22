@@ -8,9 +8,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Integration", "T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Documentation", "_Documentation", "{E30CA256-C9A8-487A-94B7-D6B79D70F774}"
 	ProjectSection(SolutionItems) = preProject
-		..\new_docs\config.json = ..\new_docs\config.json
+		..\docs\config.json = ..\docs\config.json
 		..\license.txt = ..\license.txt
-		..\new_docs\package.json = ..\new_docs\package.json
+		..\docs\package.json = ..\docs\package.json
 		..\README.markdown = ..\README.markdown
 	EndProjectSection
 EndProject
@@ -67,20 +67,20 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "contents", "http://localhos
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_65293"
-		Debug.AspNetCompiler.PhysicalPath = "..\new_docs\contents\"
+		Debug.AspNetCompiler.PhysicalPath = "..\docs\contents\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_65293\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_65293"
-		Release.AspNetCompiler.PhysicalPath = "..\new_docs\contents\"
+		Release.AspNetCompiler.PhysicalPath = "..\docs\contents\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_65293\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "..\new_docs\contents\"
+		SlnRelativePath = "..\docs\contents\"
 	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "templates", "http://localhost:65311", "{DF8388A1-4778-411E-A3F5-1062CDE8621F}"
@@ -88,20 +88,20 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "templates", "http://localho
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_65311"
-		Debug.AspNetCompiler.PhysicalPath = "..\new_docs\templates\"
+		Debug.AspNetCompiler.PhysicalPath = "..\docs\templates\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_65311\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_65311"
-		Release.AspNetCompiler.PhysicalPath = "..\new_docs\templates\"
+		Release.AspNetCompiler.PhysicalPath = "..\docs\templates\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_65311\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "..\new_docs\templates\"
+		SlnRelativePath = "..\docs\templates\"
 	EndProjectSection
 EndProject
 Global
