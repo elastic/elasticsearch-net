@@ -9,7 +9,7 @@ menuitem: esnet-cluster-failover
 
 One of the major benefits of `Elasticsearch` is that it can handle dying and respawning  nodes. 
 As long as enough nodes agree that the cluster is healthy, the cluster will continue to operate.
-`Elasticsearch.net` comes with builtin support to handle falling over to a different node when the requested node failed.
+`Elasticsearch.Net` comes with builtin support for handle falling over to a different node when the requested node failed.
 
 ## Configuring 
 
@@ -21,29 +21,29 @@ Configuring how the registered `IConnectionPool` should behave happens on the `I
         .SniffOnStartup(false)
         .SniffLifeSpan(TimeSpan.FromMinutes(1));
 
-#### SniffOnConnectionFault()
+### SniffOnConnectionFault
 Should the connection pool resniff the cluster state everytime an operation on a node throws an exception or a faulty http status code.
 Defaults to true.
 
-#### SniffOnStartup()
+### SniffOnStartup
 Should the connection pool sniff the cluster state the first time its instantiated. Defaults to true.
 
-#### SniffLifeSpan()
+### SniffLifeSpan
 When set will cause the connectionpool to resniff whenever it notices the last sniff information happened too long ago. Defaults to null.
 
-#### SetDeadTimeout()
+### SetDeadTimeout
 Sets the timeout before a node is retried. The default `DateTimeProvider` will increment this timeout exponentially based on the number of attempts.
 
-#### SetMaxDeadTimeout()
+### SetMaxDeadTimeout
 Sets the maximum time a node may be marked dead.
 
-#### DisablePings()
+### DisablePing
 By default before a previously dead node is retried a short ping will be sent to the node to make sure the node will respond. 
 The reason for a separate call is that a ping will call an elasticsearch endpoint that won't stress the JVM. If a node is having issues retrying a possible heavy search operation on it might cause the request to fail later rather then asap. This setting allows you to disable these pings before retries.
 
-#### SetMaxRetries(int retries)
+### MaximumRetries
 By default an `IConnectionPool` itself will decide how many times to retry (usually all the registered nodes) if you wish to 
-limit this you can explicitly tell the connection pool to never retry more then `retries`.
+limit this you can explicitly tell the connection pool to never retry more than `retries`.
 
 ## SniffingConnectionPool
 
