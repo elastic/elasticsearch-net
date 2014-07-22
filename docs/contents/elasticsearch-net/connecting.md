@@ -43,8 +43,14 @@ Besides either passing a `Uri` or `IConnectionPool` on the constructor of `Conne
         .EnableTrace()
         .ExposeRawResponse(shouldExposeRawResponse);
 
+### DisableAutomaticProxyDetection
+Disable automatic proxy detection.  Defaults to true.
+
 ### EnableCompressedResponses
 Enable compressed responses from `Elasticsearch` (Note that nodes need to be configured to allow this.  See the [http module settings](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html) for more info).
+
+### EnableMetrics
+Enable more meta data to be returned per API call about requests (ping, sniff, failover, and general stats).
 
 ### EnableTrace
 Will cause `Elasticsearch.Net` to write connection debug information on the TRACE output of your application.
@@ -77,6 +83,9 @@ Sets proxy information on the connection.
 
 ### SetTimeout
 Sets the global maximum time a connection may take. Please note that this is the request timeout, the builtin .NET `WebRequest` has no way to set connection timeouts (see http://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.timeout(v=vs.110).aspx).
+
+### ThrowOnElasticsearchServerExceptions
+As an alternative to the C/go like error checking on `response.IsValid`, you can instead tell the client to always throw an `ElasticsearchServerException` when a call resulted in an exception on the `Elasticsearch` server. Reasons for such exceptions could be search parser errors and index missing exceptions.
 
 ### UsePrettyResponses
 Appends `pretty=true` to all the requests. Handy if you are debugging or listening to the requests with i.e fiddler. This setting can be safely used in conjuction with `SetGlobalQueryStringParameters`.
