@@ -219,6 +219,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 					.Params(p => p
 						.Add("factor", 1.1)
 					)
+					.Language("native")
 					.Type("number")
 				);
 			var json = TestElasticClient.Serialize(s);
@@ -227,7 +228,7 @@ namespace Nest.Tests.Unit.Search.Sorting
                   from: 0,
                   size: 10,
                   sort: [
-					{
+                   {
                       _script: {
                         type: ""number"",
                         script: ""doc['field_name'].value * factor"",
@@ -236,9 +237,10 @@ namespace Nest.Tests.Unit.Search.Sorting
                         },
                         missing: ""_last"",
                         order: ""desc"",
-					    mode: ""avg""
+                        mode: ""avg"",
+                        lang: ""native""
                       }
-					}
+                    }
                   ]
                 }";
 			Assert.True(json.JsonEquals(expected), json);
@@ -289,6 +291,56 @@ namespace Nest.Tests.Unit.Search.Sorting
 					}
                   ]
                 }";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
+		public void TestScriptNestedFilter()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.SortScript(sort => sort
+					.Script("script")
+					.NestedFilter(f => f.Term("name", "value"))
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"
+				{
+				  ""sort"": [
+					{
+					  ""_script"": {
+						""script"": ""script"",
+						""nested_filter"": {
+						  ""term"": {
+							""name"": ""value""
+						  }
+						}
+					  }
+					}
+				  ]
+				}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
+		public void TestScriptNestedPath()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.SortScript(sort => sort
+					.Script("script")
+					.NestedPath("name")
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"
+				{
+				  ""sort"": [
+					{
+					  ""_script"": {
+						""script"": ""script"",
+						""nested_path"": ""name""
+					  }
+					}
+				  ]
+				}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
 
