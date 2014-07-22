@@ -7,36 +7,50 @@ menuitem: esnet-handling-responses
 
 # Handling Responses
 
-Describes how to handle the the response objects from `Elasticsearch.Net`
+`ElasticsearchResponse<T>` is the container return type for all API calls. It has the following properties:
 
-#ElasticsearchResponse&lt;T&gt;
+### Success
+The call succeeded and was succesful (200 range). 
+Note that even if you get a 200 back from `Elasticsearch`, in many cases it's still recommended 
+to check the actual response making sure it succeeded on enough shards.
 
-This is the container return type for all the API calls. It has the following properties
+### Error
+When a call succeeds but does not return a HTTP status code of 200 this property will have details on the error.
+[Read more about error handling here](/elasticsearch-net/errors.html).
+### HttpStatusCode
+The HTTP status code that the call returned.
 
-#### Success
-The call succeeded and was succesfull (200 range). 
-Note that even if you get a 200 back from Elasticsearch in many cases it's still recommended 
-to check the actual response like did the call succeed on enough shards?
+### OriginalException
+Holds the exception that occurred on the `Elasticsearch` server.  Null if no exception occurred.
 
-#### Error
-When a call succeeds but does not return a http status code of 200 this property will have details on the error.
-[Read more about error handling here](/elasticsearch-net/errors.html)
-#### HttpStatusCode
-#### RequestMethod
-#### RequestUrl
-#### Request 
-The `byte[]` request that was sent to elasticsearch
+### ServerError
+The original exception from the `Elasticsearch` server mapped as an `ElasticsearchServerError`, otherwise null.
 
-#### ResponseRaw 
-A `byte[]` representation of the response from elasticsearch, only set when `ExposeRawResponses()` is set 
-[see the Connecting section](/elasticearch-net/connecting.html)
+### RequestMethod
+The HTTP method used for making the request (POST, GET, PUT, HEAD, DELETE).
 
-#### Response
+### RequestUrl
+The URL the request was sent to.
+
+### Request 
+The `byte[]` request that was sent to `Elasticsearch`.
+
+### ResponseRaw 
+A `byte[]` representation of the response from `Elasticsearch`, only set when `ExposeRawResponses()` is set. 
+[See the Connecting section](/elasticearch-net/connecting.html).
+
+### Response
 The deserialized `T` object representing the response.
+
+### Metrics
+Meta data returned on the response, if `EnableMetrics` is set, otherwise null.  See the [connection settings]() section for more info.
+
+### NumberOfRetries
+The number of times the request was tried.
 
 ## Typed API Calls
 
-`Elasticsearch.Net` does not provide typed objects representing the responses this is up to the developer to map. 
+`Elasticsearch.Net` does not provide typed objects representing the responses. This is up to the developer to map. 
 
     var result = client.Search<MyType>()
 
