@@ -7,12 +7,12 @@ menuitem: introduction
 
 # Introduction
 
-You've reached the documentation page for `Elasticsearch.Net` and `NEST`. Two .net clients to talk with Elasticsearch. So why two clients I hear you say?
+You've reached the documentation page for `Elasticsearch.Net` and `NEST`. The two official .NET clients for Elasticsearch. So why two clients I hear you say?
 
 `Elasticsearch.Net` is a very low level, dependency free, client that has no opinions how you build and represent your requests and responses. It has abstracted 
 enough so that **all** the elasticsearch API endpoints are represented as methods but not too much to get in the way of how you want to build your json/request/response objects. It also comes with builtin, configurable/overridable, cluster failover retry mechanisms. Elasticsearch is elastic so why not your client?
 
-`NEST` is a high level client that has the advantage of having mapped all the request and response objects, comes with a strongly typed query DSL that maps 1 to 1 with the elasitcsearch query dsl and takes advantage of specific .net features such as covariant results. NEST internally uses, and still exposes, the low level `Elasticsearch.Net` client
+`NEST` is a high level client that has the advantage of having mapped all the request and response objects, comes with a strongly typed query DSL that maps 1 to 1 with the elasitcsearch query DSL, and takes advantage of specific .NET features such as covariant results. NEST internally uses, and still exposes, the low level `Elasticsearch.Net` client.
 
 Please read the getting started guide for both.
 
@@ -35,9 +35,9 @@ with their [demo project](https://github.com/searchbox-io/.net-sample)
 
 ## Questions, bugs, comments, requests
 
-All of these are more then welcome on the github issues pages! I try to to at least reply within the same day.
+All of these are more then welcome on the github issues pages! We try to to at least reply within the same day.
 
-I also monitor question tagged with ['nest' on stackoverflow](http://stackoverflow.com/questions/tagged/nest) or 
+We also monitor question tagged with ['nest' on stackoverflow](http://stackoverflow.com/questions/tagged/nest) or 
 ['elasticsearch-net' on stackoverflow](http://stackoverflow.com/questions/tagged/elasticsearch-net)
 
 
