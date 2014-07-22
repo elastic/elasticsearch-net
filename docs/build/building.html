@@ -17,7 +17,7 @@
 <h3 id="build-target">Build target</h3>
 <p>Running <code>build.bat</code> will default to running the <code>Build</code> target which will create certificates in the right place if they do not exist, build the application and run all the unit tests. The resulting assemblies are placed in <code>build/output</code>.</p>
 <h3 id="docpreview-target">DocPreview target</h3>
-<p>Running <code>build.bat DocPreview</code> will serve the files under <code>new_docs</code> at <code>http://localhost:8080</code> with live-reload setup. Usefull only when you are working on documentation.</p>
+<p>Running <code>build.bat DocPreview</code> will serve the files under <code>docs</code> at <code>http://localhost:8080</code> with live-reload setup. Usefull only when you are working on documentation.</p>
 <h3 id="release-target">Release target</h3>
 <p>Running <code>build.bat Release versionnumber</code> will create nuget packages in <code>output/_packages</code>. This could be useful if you need a feature that is not yet released you can temporarily switch to local nuget packages.</p>
 <p>Release will call the build target and in addition patch the assembly files, build the documentation files. </p>

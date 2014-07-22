@@ -140,7 +140,7 @@ let buildDocs = fun action ->
     let node = @"build\tools\Node.js\node.exe"
     let wintersmith = @"..\build\tools\node_modules\wintersmith\bin\wintersmith"
     ExecProcess (fun p ->
-        p.WorkingDirectory <- "new_docs"  
+        p.WorkingDirectory <- "docs"  
         p.FileName <- node
         p.Arguments <- sprintf "\"%s\" %s" wintersmith action
       ) 

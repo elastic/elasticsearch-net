@@ -29,7 +29,7 @@ All of these will be downloaded and installed locally in your repository the fir
 Running `build.bat` will default to running the `Build` target which will create certificates in the right place if they do not exist, build the application and run all the unit tests. The resulting assemblies are placed in `build/output`.
 
 ### DocPreview target
-Running `build.bat DocPreview` will serve the files under `new_docs` at `http://localhost:8080` with live-reload setup. Usefull only when you are working on documentation.
+Running `build.bat DocPreview` will serve the files under `docs` at `http://localhost:8080` with live-reload setup. Usefull only when you are working on documentation.
 
 ### Release target
 Running `build.bat Release versionnumber` will create nuget packages in `output/_packages`. This could be useful if you need a feature that is not yet released you can temporarily switch to local nuget packages.
