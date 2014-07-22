@@ -50,7 +50,7 @@ namespace Nest
 		PropertyPathMarker NestedPath { get; set; }
 	}
 
-	public class SortBase : ISort
+	public abstract class SortBase : ISort
 	{
 		public string Missing { get; set; }
 		public SortOrder? Order { get; set; }
@@ -59,7 +59,7 @@ namespace Nest
 		public PropertyPathMarker NestedPath { get; set; }
 	}
 
-	public class SortDescriptorBase<T, TDescriptor> : ISort where T : class where TDescriptor : SortDescriptorBase<T, TDescriptor>
+	public abstract class SortDescriptorBase<T, TDescriptor> : ISort where T : class where TDescriptor : SortDescriptorBase<T, TDescriptor>
 	{
 		private ISort Self { get { return this; } }
 
