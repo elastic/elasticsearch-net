@@ -37,13 +37,13 @@ The `byte[]` request that was sent to `Elasticsearch`.
 
 ### ResponseRaw 
 A `byte[]` representation of the response from `Elasticsearch`, only set when `ExposeRawResponses()` is set. 
-[See the Connecting section](/elasticearch-net/connecting.html).
+See the [Connecting section](/elasticearch-net/connecting.html).
 
 ### Response
 The deserialized `T` object representing the response.
 
 ### Metrics
-Meta data returned on the response, if `EnableMetrics` is set, otherwise null.  See the [connection settings]() section for more info.
+Meta data returned on the response, if `EnableMetrics` is set, otherwise null.  See the [Connecting section](/elasticearch-net/connecting.html).
 
 ### NumberOfRetries
 The number of times the request was tried.
