@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
+using FluentAssertions;
 using NUnit.Framework;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
@@ -49,6 +50,16 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			{
 				return "static id ftw";
 			}
+		}
+
+		[ElasticType(Name = "test-multiple-attributes")]
+		internal class TestMultiAttributeMappingObject
+		{
+			public string Id { get; set; }
+			[ElasticProperty(Index = FieldIndexOption.NotAnalyzed)]
+			[ElasticProperty(Analyzer = "fulltext", IncludeInAll = false, MultiFieldProperyName = "fulltext", Index = FieldIndexOption.NotAnalyzed)]
+			[ElasticProperty(Analyzer = "autocomplete_analyzer", IncludeInAll = false, MultiFieldProperyName = "autocomplete", Index = FieldIndexOption.NotAnalyzed)]
+			public string Name { get; set; }
 		}
 
 		internal class UserItemData
@@ -215,6 +226,18 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			  )
 			);
 			StringAssert.DoesNotContain("createDate2", result.ConnectionStatus.Request.Utf8String());
+		}
+
+		[Test]
+		public void MutliAttributePropertyHasAllAttributes()
+		{
+			var result = this._client.Map<TestMultiAttributeMappingObject>(m => m.MapFromAttributes());
+
+			var request = result.ConnectionStatus.Request.Utf8String();
+			request.Should().Contain(@"""type"": ""multi_field""");
+			request.Should().Contain(@"""analyzer"": ""autocomplete_analyzer""");
+			request.Should().Contain(@"""analyzer"": ""fulltext""");
+
 		}
 	}
 }
