@@ -7,10 +7,13 @@ menuitem: handling
 
 
 # Faceting
-For a good overview of what facets are see the [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-) on the subject.
+For a good overview of what facets are see the [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets.html) on the subject.
 
-## Specify facets during search.
-In its simplest form you can add a facet to your query like this:
+**NOTE** Facets are deprecated and will be removed in future releases of Elasticsearch. You are encouraged to migrate to [Aggregations](/nest/aggregations/handling.html).
+
+## Specifying Facets during Search
+
+In its simplest form, you can add a facet to your query like this:
 
 	var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(s=>s
 		.From(0)
