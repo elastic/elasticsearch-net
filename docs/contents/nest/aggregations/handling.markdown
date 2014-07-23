@@ -48,11 +48,11 @@ The result of the aggregations are accessed from the `Aggs` property of the resp
 
 	var myAgg = result.Aggs.Terms("my_agg");
 
-Notice we executed a [terms aggregation](), and on the response we had to retrieve our results from the `Terms` property of `Aggs`.  All aggregations work like this in NEST.  If `my_agg` was a [percentiles aggregation]() instead, we would have to extract the results from `Percentiles`
+Notice we executed a [terms aggregation](/nest/aggregations/terms.html), and on the response we had to retrieve our results from the `Terms` property of `Aggs`.  All aggregations work like this in NEST.  If `my_agg` was a [percentiles aggregation](/nest/aggregations/percentiles.html) instead, we would have to extract the results from `Percentiles`
 
 	var myAgg = results.Aggs.Percentiles("my_agg");
 
-Or if it were a [geohash grid aggregation]() we would retrieve it from `GeoHash`
+Or if it were a [geohash grid aggregation](/nest/aggregations/geohash-grid.html) we would retrieve it from `GeoHash`
 
 	var myAgg = results.Aggs.GeoHash("my_agg")
 

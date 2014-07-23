@@ -118,11 +118,10 @@ aside#menu
 					i.fa.fa-chevron-right
 					| Search
 		- if (page.metadata.menusection == 'aggregations' )
-			h4
+			h4: a(class=(page.metadata.menuitem == 'avg')? "selected" : "", href="/nest/aggregations/handling.html")
 				i.fa.fa-chevron-down
 				| Aggregations
 			ul
-				li.sub: a(class=(page.metadata.menuitem == 'handling')? "selected" : "", href="/nest/aggregations/handling.html") Aggregation handling
 				li.sub: a(class=(page.metadata.menuitem == 'avg')? "selected" : "", href="/nest/aggregations/avg.html") Avg
 				li.sub: a(class=(page.metadata.menuitem == 'cardinality')? "selected" : "", href="/nest/aggregations/cardinality.html") Cardinality
 				li.sub: a(class=(page.metadata.menuitem == 'date-histogram')? "selected" : "", href="/nest/aggregations/date-histogram.html") Date Histogram
@@ -155,11 +154,10 @@ aside#menu
 					i.fa.fa-chevron-right
 					| Aggregations
 		- if (page.metadata.menusection == 'facets' )
-			h4
-				i.fa.fa-chevron-down
+			h4: a(class=(page.metadata.menuitem == 'handling')? "selected" : "", href="/nest/facets/handling.html")
+				i.fa.fa-chevron-right
 				| Facets
 			ul
-				li.sub: a(class=(page.metadata.menuitem == 'handling')? "selected" : "", href="/nest/facets/handling.html") Facet handling
 				li.sub: a(class=(page.metadata.menuitem == 'terms')? "selected" : "", href="/nest/facets/terms.html") Terms
 				li.sub: a(class=(page.metadata.menuitem == 'range')? "selected" : "", href="/nest/facets/range.html") Range
 				li.sub: a(class=(page.metadata.menuitem == 'histogram')? "selected" : "", href="/nest/facets/histogram.html") Histogram
