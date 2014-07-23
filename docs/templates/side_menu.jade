@@ -122,6 +122,7 @@ aside#menu
 				i.fa.fa-chevron-down
 				| Aggregations
 			ul
+				li.sub: a(class=(page.metadata.menuitem == 'handling')? "selected" : "", href="/nest/aggregations/handling.html") Aggregation handling
 				li.sub: a(class=(page.metadata.menuitem == 'avg')? "selected" : "", href="/nest/aggregations/avg.html") Avg
 				li.sub: a(class=(page.metadata.menuitem == 'cardinality')? "selected" : "", href="/nest/aggregations/cardinality.html") Cardinality
 				li.sub: a(class=(page.metadata.menuitem == 'date-histogram')? "selected" : "", href="/nest/aggregations/date-histogram.html") Date Histogram
@@ -150,7 +151,7 @@ aside#menu
 				li.sub: a(class=(page.metadata.menuitem == 'value-count')? "selected" : "", href="/nest/aggregations/value-count.html") Value Count
 		- else 
 			li 
-				h4: a(class=(page.metadata.menuitem == 'avg')? "selected" : "", href="/nest/aggregations/avg.html")
+				h4: a(class=(page.metadata.menuitem == 'avg')? "selected" : "", href="/nest/aggregations/handling.html")
 					i.fa.fa-chevron-right
 					| Aggregations
 		- if (page.metadata.menusection == 'facets' )
