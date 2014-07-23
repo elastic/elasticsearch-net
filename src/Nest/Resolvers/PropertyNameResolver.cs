@@ -27,7 +27,7 @@ namespace Nest.Resolvers
 
 			var ignoreAttrutes = info.GetCustomAttributes(typeof(JsonIgnoreAttribute), true);
 			if (ignoreAttrutes.Any())
-				return ((IEnumerable<IElasticPropertyAttribute>)new ElasticPropertyAttribute { OptOut = true });
+				return new[] {new ElasticPropertyAttribute { OptOut = true }};
 
 			return null;
 		}
