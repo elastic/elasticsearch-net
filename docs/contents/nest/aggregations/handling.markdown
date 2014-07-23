@@ -44,6 +44,8 @@ The above can also be accomplished using the object initializer syntax...
 
 	var result = client.Search<ElasticsearchProject>(searchRequest);
 
+### Getting to your aggregation
+
 The result of the aggregations are accessed from the `Aggs` property of the response using the key that was specified on the request, which in the examples above would be `my_agg`:
 
 	var myAgg = result.Aggs.Terms("my_agg");
@@ -60,7 +62,7 @@ etc...
 
 Since aggregation response structures fall into similar groups, each aggregation response in NEST is typed to a specific implementation of `IAggregationMetric`.  This can be a `ValueMetric`, `SingleBucket`, `Bucket<T>`, `BucketWithDocCount<T>`, and the list goes on.  The `Aggs.<Aggregation>` property of the response will automatically convert to the response from ES to the correct type.
 
-### Sub-aggregations
+## Sub-aggregations
 
 NEST of course also supports sub-aggregations...
 
