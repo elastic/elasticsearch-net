@@ -159,6 +159,7 @@ ul#nest h4.title {
 	background-repeat: no-repeat;
 	margin-top:20px;
 	margin-bottom:10px;
+	font-size: 1.2em;
 }
 #menu h4 {
 	font-size: 0.9em;
@@ -190,6 +191,10 @@ ul#nest h4.title {
 
 li {
 	list-style:inherit;
+}
+
+li.sub {
+	font-size: 0.8em;
 }
 
 /* responsiveness */
