@@ -20,7 +20,7 @@ Or search in the Package Manager UI for `NEST` and go from there
 
 ## Connecting
 
-hit http://localhost:9200 in the browser you should see a similar response to this:
+Assumming Elasticsearch is already installed and running on your machine, go to http://localhost:9200 in your browser. You should see a similar response to this:
 
     {
       "status" : 200,
@@ -35,19 +35,21 @@ hit http://localhost:9200 in the browser you should see a similar response to th
       "tagline" : "You Know, for Search"
     }
 
-To connect to your local node from C# simply:
+To connect to your local node using NEST, simply:
 
     var node = new Uri("http://localhost:9200");
+
     var settings = new ConnectionSettings(
         node, 
         defaultIndex: "my-application"
     );
+
     var client = new ElasticClient(settings);
 
 Here we create new a connection to our `node` and specify a `default index` to use when we don't explictly specify one. 
 This can greatly reduce the places a magic string or constant has to be used.
 
-**NOTE:** specifying defaultIndex is optional but NEST might throw an exception later on if no index is specified. In fact a simple `new ElasticClient()` is sufficient to chat with
+**NOTE:** specifying `defaultIndex` is optional but NEST might throw an exception later on if no index is specified. In fact a simple `new ElasticClient()` is sufficient to chat with
 `http://localhost:9200` but explicitly specifying connection settings is recommended.
 
 `node` here is a `Uri` but can also be an `IConnectionPool` see the 
@@ -72,11 +74,12 @@ That we would like to index in elasticsearch. Indexing is now as simple as calli
         Firstname = "Martijn",
         Lastname = "Laarman"
     };
+
     var index = client.Index(person);
 
 This will index the object to `/my-application/person/1`. `NEST` is smart enough to infer the index and typename for the `Person` CLR type. It was also able to get the id of `1` through convention,  by looking for an `Id` property on the specified object. Which property it will use for the Id can also be specified using the `ElasticType` attribute.
 
-The default index and type names are configurable per type see the [nest section on connecting](/nest/connecting.html)
+The default index and type names are configurable per type. See the [nest section on connecting](/nest/connecting.html).
 
 Image you want to override all the defaults for this one call, you should be able to do this with `NEST` and yes you can. `NEST` inferring is very powerful but if you want to pass explicit values you can **always** do so.
 
@@ -102,11 +105,11 @@ Now that we have indexed some documents we can begin to search for them.
         )
     );
 
-`searchResults.Documents` now holds the first 10 people it knows who's first name is `Martijn`
+`searchResults.Documents` now holds the first 10 people it knows whose first name is `Martijn`
 
 Please see [the section on writing queries](/nest/writing-queries.html) for details on how NEST helps you write terse elasticsearch queries.
 
-Again the same inferring rules apply as this will hit `/my-application/person/_search` and the same rule that inferring can be overridden also applies.
+Again, the same inferring rules apply as this will hit `/my-application/person/_search` and the same rule that inferring can be overridden also applies.
 
     // uses /other-index/other-type/_search
     var searchResults = client.Search<Person>(s=>s
@@ -125,23 +128,43 @@ Again the same inferring rules apply as this will hit `/my-application/person/_s
         .AllTypes() 
     );
 
-## Custom server side security while searching
+## Object Initializer Syntax
 
-Consider a scenario where you are using client side libraries like [elasticjs](https://github.com/fullscale/elastic.js) to construct to create User interfaces but want security to be provided by server side business logic, you can take this approach. You can route your queries through server side code.
-```cs
-    [RoutePrefix("api/Search")]
-    public class SearchController : ApiController
+As you can see from the previous examples, NEST provides a terse, fluent syntax for constructing API calls to Elasticsearch.  However, fear not if lambdas aren't your thing, you can now use the new object initializer syntax (OIS) introduced in 1.0.  
+
+The OIS is an alternative to the familair fluent syntax of NEST and works on all API endpoints.  Anything that can be done with the fluent syntax can now also be done using the OIS.
+
+For example, the earlier indexing example above can be re-written as:
+
+    var indexRequest = new IndexRequest<Person>(person)
     {
-        [ActionName("_search")]
-        public IHttpActionResult Post([FromBody]SearchDescriptor<dynamic> query)
-        {
-            var setting = new ConnectionSettings(new Uri(ConfigurationManager.AppSettings["SearchServerUri"])).SetDefaultIndex("informit");
-            var client = new ElasticClient(setting);
-    
-            //Your server side security goes here
-            var result = client.Search(q => query);
-            return Ok(result);
-        }
-    }
-```
-The fragments `[RoutePrefix("api/Search")]` and `[ActionName("_search")]` will let you change your elastic search Url from http://localhost:9200/_search to http://yourwebsite/api/Search/_search and let things work as normal. The fragment `[FromBody]SearchDescriptor<dynamic> query` will convert the JSON query into NEST SearchDescriptor. The fragment `client.Search(q => query)` will execute the query. NOTE: `client.Search(query)` will compile but will NOT work.
+        Index = "another-index",
+        Type = "another-type",
+        Id = "1-should-not-be-the-id",
+        Refresh = true,
+        Ttl = "1m"
+    };
+
+    var index = client.Index(indexRequest);
+
+And searching...
+
+    QueryContainer query = new TermQuery
+    {
+        Field = "firstName",
+        Value = "martijn"
+    };
+
+    var searchRequest = new SearchRequest
+    {
+        From = 0,
+        Size = 10,
+        Query = query
+    };
+
+    var searchResults = Client.Search<Person>(searchRequest);
+
+
+Many of the examples throughout this documentation will be written in both forms.
+
+
