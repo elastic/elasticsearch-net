@@ -1,9 +1,11 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
+using Nest.Resolvers.Converters;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeConverter<TimestampFieldMapping>))]
 	public interface ITimestampFieldMapping : ISpecialField
 	{
 		[JsonProperty("enabled")]

@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeConverter<AnalyzerFieldMapping>))]
 	public interface IAnalyzerFieldMapping : ISpecialField
 	{
 		[JsonProperty("index"), JsonConverter(typeof(YesNoBoolConverter))]
