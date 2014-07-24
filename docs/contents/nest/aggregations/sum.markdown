@@ -8,17 +8,41 @@ menuitem: sum
 
 # Sum aggregation
 
-## Description
-
-A single-value metrics aggregation that sums up numeric values that are extracted from the aggregated documents. For more info, read the [docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-sum-aggregation.html).
+A single-value metrics aggregation that sums up numeric values that are extracted from the aggregated documents.
 
 ## Usage
 
+### Fluent Syntax
+
 	var result = client.Search<ElasticsearchProject>(s => s
-				.Aggregations(a => a
-					.Sum("sum_aggregation", sum => sum
-					.Field("followers.age"))));
+		.Aggregations(a => a
+			.Sum("my_sum_agg", sa => sa
+				.Field(p => p.Followers.First().Age)
+			)
+		)
+	);
 
-You can then access the result.Aggregations to get the data, i.e.
+	var agg = result.Aggs.Sum("my_sum_agg");
 
-	var agg = result.Aggs.Sum("sum_aggregation");
+### Object Initializer Syntax
+
+	var request = new SearchRequest
+	{
+		Aggregations = new Dictionary<string, IAggregationContainer>
+		{
+			{ "my_sum_agg", new AggregationContainer
+				{
+					Sum = new SumAggregator
+					{
+						Field = "followers.age"
+					}
+				}
+			}
+		}
+	};
+
+	var result = client.Search<ElasticsearchProject>(request);
+
+	var agg = result.Aggs.Sum("my_sum_agg");
+
+Refer to the [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-sum-aggregation.html) for more information.

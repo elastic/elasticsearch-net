@@ -8,17 +8,41 @@ menuitem: cardinality
 
 # Cardinality aggregation
 
-## Description
-
-A single-value metrics aggregation that calculates an approximate count of distinct values. For more info, read the [docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html).
+A single-value metrics aggregation that calculates an approximate count of distinct values.
 
 ## Usage
 
+### Fluent Syntax
+
 	var result = client.Search<ElasticsearchProject>(s => s
-				.Aggregations(a => a
-					.Cardinality("cardinality_aggregation", cardinality => cardinality
-					.Field("followers.firstName"))));
+		.Aggregations(a => a
+			.Cardinality("my_cardinality_agg", c => c
+				.Field(p => p.Followers.First().FirstName)
+			)
+		)
+	);
 
-You can then access the result.Aggregations to get the data, i.e.
+	var agg = result.Aggs.Cardinality("my_cardinality_agg");
 
-	var agg = result.Aggs.Cardinality("cardinality_aggregation");
+### Object Initializer Syntax
+
+	var request = new SearchRequest
+	{
+		Aggregations = new Dictionary<string, IAggregationContainer>
+		{
+			{ "my_cardinality_agg", new AggregationContainer
+				 {
+					 Cardinality = new CardinalityAggregator
+					 {
+						 Field = "followers.firstName"
+					 }
+				 }
+			}
+		}
+	};
+
+	var result = client.Search<ElasticsearchProject>(request);
+
+	var agg = result.Aggs.Cardinality("my_cardinality_agg");
+
+Refer to the [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html) for more information.

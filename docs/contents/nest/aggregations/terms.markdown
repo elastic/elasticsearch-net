@@ -10,15 +10,41 @@ menuitem: terms
 
 ## Description
 
-A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value. For more info, read the [docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html).
+A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
 
 ## Usage
 
+### Fluent Syntax
+
 	var result = _client.Search<ElasticsearchProject>(s => s
-				.Aggregations(a => a
-					.Terms("country_count", term => term
-						.Field("country"))));
+		.Aggregations(a => a
+			.Terms("my_terms_agg", t => t
+				.Field(p => p.Country)
+			)
+		)
+	);
 
-You can then access the result.Aggregations to get the data, i.e.
+	var agg = result.Aggs.Terms("my_terms_agg");
 
-	var countryCount = result.Aggs.Terms("country_count");
+### Object Initializer Syntax
+
+	var request = new SearchRequest
+	{
+		Aggregations = new Dictionary<string, IAggregationContainer>
+		{
+			{ "my_terms_agg", new AggregationContainer
+				{
+					Terms = new TermsAggregator
+					{
+						Field = "country"
+					}
+				}
+			}
+		}
+	};
+
+	var result = client.Search<ElasticsearchProject>(request);
+	
+	var agg = result.Aggs.Terms("my_terms_agg");
+
+Refer to the [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html) for more information.

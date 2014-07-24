@@ -8,17 +8,41 @@ menuitem: max
 
 # Max aggregation
 
-## Description
-
-Returns the maximum value among numeric values extracted from the aggregated documents. For more info, read the [docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-max-aggregation.html).
+Returns the maximum value among numeric values extracted from the aggregated documents.
 
 ## Usage
 
+### Fluent Syntax
+
 	var result = client.Search<ElasticsearchProject>(s => s
-				.Aggregations(a => a
-					.Max("max_aggregation", max => max
-						.Field(data => data.IntValues))));
+		.Aggregations(a => a
+			.Max("my_max_agg", m => m
+				.Field(p => p.IntValues)
+			)
+		)
+	);
 
-You can then access the result.Aggs to get the data, i.e.
+	var agg = result.Aggs.Max("my_max_agg");
 
-	var agg = result.Aggs.Max("max_aggregation");
+### Object Initializer Syntax
+
+	var request = new SearchRequest
+	{
+		Aggregations = new Dictionary<string, IAggregationContainer>
+		{
+			{ "my_max_agg", new AggregationContainer
+				{
+					Max = new MaxAggregator
+					{
+						Field = "intValues"
+					}
+				}
+			}
+		}
+	};
+
+	var result = client.Search<ElasticsearchProject>(request);
+
+	var agg = result.Aggs.Max("my_max_agg");
+
+Refer to the [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-max-aggregation.html) for more information.

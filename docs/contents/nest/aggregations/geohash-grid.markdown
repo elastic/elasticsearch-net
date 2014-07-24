@@ -8,18 +8,43 @@ menuitem: geohash-grid
 
 # Geohash Grid aggregation
 
-## Description
-
-A multi-bucket aggregation that works on geo_point fields and groups points into buckets that represent cells in a grid. For more info, read the [docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html).
+A multi-bucket aggregation that works on [geo_point](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/mapping-geo-point-type.html) fields and groups points into buckets that represent cells in a grid.
 
 ## Usage
 
-	var result = _client.Search<ElasticsearchProject>(s => s
-				.Aggregations(a => a
-					.GeoHash("geohash", g => g
-						.Field("origin")
-						.GeoHashPrecision(GeoHashPrecision.Precision3))));
+### Fluent Syntax
 
-You can then access the result.Aggregations to get the data, i.e.
+	var result = client.Search<ElasticsearchProject>(s => s
+		.Aggregations(a => a
+			.GeoHash("my_geohash_agg", g => g
+				.Field(p => p.Origin)
+				.GeoHashPrecision(GeoHashPrecision.Precision3)
+			)
+		)
+	);
 
-	var rangeAgg = result.Aggs.GeoHash("geohash");
+	var agg = result.Aggs.GeoHash("my_geohash_agg");
+
+### Object Initializer Syntax
+
+	var request = new SearchRequest
+	{
+		Aggregations = new Dictionary<string, IAggregationContainer>
+		{
+			{ "my_geohash_agg", new AggregationContainer
+				{
+					GeoHash = new GeoHashAggregator
+					{
+						Field = "origin",
+						Precision = GeoHashPrecision.Precision3
+					}
+				}
+			}
+		}
+	};
+
+	var result = client.Search<ElasticsearchProject>(request);
+
+	var agg = result.Aggs.GeoHash("my_geohash_agg");
+
+Refer to the [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html) for more information.

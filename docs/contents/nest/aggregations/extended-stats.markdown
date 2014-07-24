@@ -8,17 +8,41 @@ menuitem: extended-stats
 
 # Extended Stats aggregation
 
-## Description
-
-A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents. For more info, read the [docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-stats-aggregation.html).
+A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
 
 ## Usage
 
+### Fluent Syntax
+
 	var result = client.Search<ElasticsearchProject>(s => s
-				.Aggregations(a => a
-					.ExtendedStats("extendedstats_aggregation", stats => stats
-					.Field("followers.age"))));
+		.Aggregations(a => a
+			.ExtendedStats("my_extendedstats_agg", stats => stats
+			.Field(p => p.Followers.First().Age)
+			)
+		)
+	);
 
-You can then access the result.Aggregations to get the data, i.e.
+	var agg = result.Aggs.ExtendedStats("my_extendedstats_agg");
 
-	var agg = result.Aggs.ExtendedStats("extendedstats_aggregation");
+### Object Initializer Syntax
+
+	var request = new SearchRequest
+	{
+		Aggregations = new Dictionary<string, IAggregationContainer>
+		{
+			{ "my_extendedstats_agg", new AggregationContainer
+				 {
+					 ExtendedStats = new ExtendedStatsAggregator
+					 {
+						 Field = "followers.age"
+					 }
+				 }
+			}
+		}
+	};
+
+	var result = client.Search<ElasticsearchProject>(request);
+
+	var agg = result.Aggs.ExtendedStats("my_extendedstats_agg");
+
+Refer to the [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-stats-aggregation.html) for more information.

@@ -6,15 +6,51 @@ menuitem: ipv4
 ---
 
 
-# IPv4 aggregation
+# IPv4 Range aggregation
 
-## Description
-
-Just like the dedicated date range aggregation, there is also a dedicated range aggregation for IPv4 typed fields. For more info, read the [docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-iprange-aggregation.html).
+Just like the dedicated date range aggregation, there is also a dedicated range aggregation for IPv4 typed fields.
 
 ## Usage
 
-Not documented yet.
+### Fluent Syntax
 
-You can then access the result.Aggregations to get the data, i.e.
+	var result = client.Search<ElasticsearchProject>(s => s
+		.Aggregations(a => a
+			.IpRange("my_iprange_agg", d => d
+				.Field(p => p.PingIP)
+				.Ranges("10.0.0.0/25", "10.0.0.127/25")
+			)
+		)
+	);
+
+	var agg = result.Aggs.IpRange("my_iprange_agg");
+
+### Object Initializer Syntax
+
+	var request = new SearchRequest
+	{
+		Aggregations = new Dictionary<string, IAggregationContainer>
+		{
+			{ "my_iprange_agg", new AggregationContainer
+				{
+					IpRange = new Ip4RangeAggregator
+					{
+						Field = "pingIp",
+						Ranges = new List<Ip4Range>
+						{
+							new Ip4Range().Mask("10.0.0.0/25"),
+							new Ip4Range().Mask("10.0.0.0/127")
+						}
+					}
+				}
+			}
+		}
+	};
+
+	var result = client.Search<ElasticsearchProject>(request);
+
+	var agg = result.Aggs.IpRange("my_iprange_agg");
+
+Refer to the [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-iprange-aggregation.html) for more information.
+
 

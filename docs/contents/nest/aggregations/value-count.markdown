@@ -8,17 +8,41 @@ menuitem: value-count
 
 # Value Count aggregation
 
-## Description
-
-A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents. For more info, read the [docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-valuecount-aggregation.html).
+A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
 
 ## Usage
 
+### Fluent Syntax
+
 	var result = client.Search<ElasticsearchProject>(s => s
-				.Aggregations(a => a
-					.ValueCount("valuecount_aggregation", value => value
-					.Field("followers.age"))));
+		.Aggregations(a => a
+			.ValueCount("my_valuecount_agg", v => v
+				.Field(p => p.Followers.First().Age)
+			)
+		)
+	);
 
-You can then access the result.Aggregations to get the data, i.e.
+	var agg = result.Aggs.ValueCount("my_valuecount_agg");
 
-	var agg = result.Aggs.ValueCount("valuecount_aggregation");
+### Object Initializer Syntax
+
+	var request = new SearchRequest
+	{
+		Aggregations = new Dictionary<string, IAggregationContainer>
+		{
+			{ "my_valuecount_agg", new AggregationContainer
+				{
+					ValueCount = new ValueCountAggregator
+					{
+						Field = "followers.age"
+					}
+				}
+			}
+		}
+	};
+
+	var result = client.Search<ElasticsearchProject>(request);
+
+	var agg = result.Aggs.ValueCount("my_valuecount_agg");
+	
+Refer to the [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-valuecount-aggregation.html) for more information.

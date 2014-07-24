@@ -8,22 +8,52 @@ menuitem: date-range
 
 # Date Range aggregation
 
-## Description
-
-A range aggregation that is dedicated for date values. For more info, read the [docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html).
+A range aggregation that is dedicated for date values.
 
 ## Usage
 
-	var result = _client.Search<ElasticsearchProject>(s => s
-				.Aggregations(a => a
-					.DateRange("date_range", date => date
-						.Field("startedOn")
-						.Format("MM-yyy")
-						.Ranges(
-							r => r.To("now-10M/M"),
-							r => r.From("now-10M/M")
-						))));
+### Fluent Syntax
 
-You can then access the result.Aggregations to get the data, i.e.
+	var result = client.Search<ElasticsearchProject>(s => s
+		.Aggregations(a => a
+			.DateRange("my_date_range_agg", d => d
+				.Field(p => p.StartedOn)
+				.Format("MM-yyy")
+				.Ranges(
+					r => r.To("now-10M/M"),
+					r => r.From("now-10M/M")
+				)
+			)
+		)
+	);
 
-	var rangeAgg = result.Aggs.DateRange("date_range");
+	var agg = result.Aggs.DateRange("my_date_range_agg");
+
+### Object Initializer Syntax
+
+	var request = new SearchRequest
+	{
+		Aggregations = new Dictionary<string, IAggregationContainer>
+		{
+			{ "my_date_range_agg", new AggregationContainer
+				 {
+					 DateRange = new DateRangeAggregator
+					 {
+						 Field = "startedOn",
+						 Format = "MM-yyy",
+						 Ranges = new List<DateExpressionRange>
+						 {
+							 new DateExpressionRange().To("now-10M/M"),
+							 new DateExpressionRange().From("now-10M/M")
+						 }
+					 }
+				 }
+			}
+		}
+	};
+
+	var result = client.Search<ElasticsearchProject>(request);
+
+	var agg = result.Aggs.DateRange("my_date_range_agg");
+
+Refer to the [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html) for more information.
