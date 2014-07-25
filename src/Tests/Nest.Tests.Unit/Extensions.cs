@@ -9,10 +9,9 @@ namespace Nest.Tests.Unit
 	{
 		internal static bool JsonEquals(this string json, string otherjson)
 		{
-			var nJson = JObject.Parse(json).ToString();
-			var nOtherJson = JObject.Parse(otherjson).ToString();
-			//Assert.AreEqual(nOtherJson, nJson);
-			return nJson == nOtherJson;
+			var nJson = JObject.Parse(json);
+			var nOtherJson = JObject.Parse(otherjson);
+			return JToken.DeepEquals(nJson, nOtherJson);
 		}
 	}
 }
