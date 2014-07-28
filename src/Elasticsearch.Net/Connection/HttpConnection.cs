@@ -190,6 +190,10 @@ namespace Elasticsearch.Net.Connection
 				myReq.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 				myReq.Headers.Add("Accept-Encoding", "gzip,deflate");
 			}
+            if (this.ConnectionSettings.ClientCertificates != null && this.ConnectionSettings.ClientCertificates.Count > 0)
+            {
+                myReq.ClientCertificates = this.ConnectionSettings.ClientCertificates;
+            }
 			if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.ContentType))
 			{
 				myReq.Accept = requestSpecificConfig.ContentType;
