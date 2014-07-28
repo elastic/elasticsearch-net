@@ -13,7 +13,6 @@ namespace Nest
 		}
 	}
 
-
 	public abstract class DocumentPathBase<TParameters, T> : DocumentOptionalPathBase<TParameters, T>
 		where TParameters : FluentRequestParameters<TParameters>, new()
 		where T : class
@@ -24,12 +23,9 @@ namespace Nest
 
 		protected DocumentPathBase(T document) : base(document) { }
 
-		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		protected override void ValidatePathInfo(ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			base.SetRouteParameters(settings, pathInfo);
-			pathInfo.Index.ThrowIfNullOrEmpty("index");
-			pathInfo.Type.ThrowIfNullOrEmpty("type");
-			pathInfo.Id.ThrowIfNullOrEmpty("id");
+			DocumentPathValidation.Validate(pathInfo);
 		}
 	}
 
@@ -45,13 +41,21 @@ namespace Nest
 		where TParameters : FluentRequestParameters<TParameters>, new()
 		where T : class
 	{
-		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		protected override void ValidatePathInfo(ElasticsearchPathInfo<TParameters> pathInfo)
 		{
-			base.SetRouteParameters(settings, pathInfo);
+			DocumentPathValidation.Validate(pathInfo);
+		}
+	}
+
+	internal static class DocumentPathValidation
+	{
+		public static void Validate<TParameters>(ElasticsearchPathInfo<TParameters> pathInfo)
+			where TParameters : FluentRequestParameters<TParameters>, new()
+		{
 			pathInfo.Index.ThrowIfNullOrEmpty("index");
 			pathInfo.Type.ThrowIfNullOrEmpty("type");
 			pathInfo.Id.ThrowIfNullOrEmpty("id");
 		}
-
 	}
+
 }
