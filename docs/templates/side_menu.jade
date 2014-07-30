@@ -34,6 +34,7 @@ aside#menu
 			ul
 				li.sub: a(class=(page.metadata.menuitem == 'index')? "selected" : "normal", href="/nest/core/") Index
 				li.sub: a(class=(page.metadata.menuitem == 'delete')? "selected" : "", href="/nest/core/delete.html") Delete
+				li.sub: a(class=(page.metadata.menuitem == 'delete-by-query')? "selected" : "", href="/nest/core/delete-by-query.html") Delete By Query
 				li.sub: a(class=(page.metadata.menuitem == 'get')? "selected" : "", href="/nest/core/get.html") Get
 				li.sub: a(class=(page.metadata.menuitem == 'multi-get')? "selected" : "", href="/nest/core/multi-get.html") Multi Get
 				li.sub: a(class=(page.metadata.menuitem == 'update')? "selected" : "", href="/nest/core/update.html") Update
@@ -42,7 +43,6 @@ aside#menu
 				li.sub: a(class=(page.metadata.menuitem == 'percolate')? "selected" : "", href="/nest/core/percolate.html") Percolate
 				li.sub: a(class=(page.metadata.menuitem == 'bulk')? "selected" : "", href="/nest/core/bulk.html") Bulk
 				li.sub: a(class=(page.metadata.menuitem == 'count')? "selected" : "", href="/nest/core/count.html") Count
-				li.sub: a(class=(page.metadata.menuitem == 'delete-by-query')? "selected" : "", href="/nest/core/delete-by-query.html") Delete By Query
 				li.sub: a(class=(page.metadata.menuitem == 'more-like-this')? "selected" : "", href="/nest/core/more-like-this.html") More Like This
 		- else 
 			li
