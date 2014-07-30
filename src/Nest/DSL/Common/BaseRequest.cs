@@ -42,8 +42,9 @@ namespace Nest
 			}
 
 			SetRouteParameters(settings, pathInfo);
-
 			UpdatePathInfo(settings, pathInfo);
+			ValidatePathInfo(pathInfo);
+
 			return pathInfo;
 		}
 
@@ -52,6 +53,10 @@ namespace Nest
 			ElasticsearchPathInfo<TParameters> pathInfo)
 		{
 			
+		}
+
+		protected virtual void ValidatePathInfo(ElasticsearchPathInfo<TParameters> pathInfo)
+		{
 		}
 
 		protected abstract void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo);

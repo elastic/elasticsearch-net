@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeConverter<SizeFieldMapping>))]
 	public interface ISizeFieldMapping : ISpecialField
 	{
 		[JsonProperty("enabled")]

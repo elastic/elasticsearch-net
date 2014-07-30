@@ -32,6 +32,27 @@ namespace Nest
 		TPartialDocument Doc { get; set; }
 	}
 
+	internal static class UpdateRequestPathInfo
+	{
+		public static void Update<TDocument, TPartialDocument>(
+			IConnectionSettingsValues settings,
+			ElasticsearchPathInfo<UpdateRequestParameters> pathInfo,
+			IUpdateRequest<TDocument, TPartialDocument> self)
+			where TDocument : class
+			where TPartialDocument : class
+		{
+			if (pathInfo.Id.IsNullOrEmpty())
+			{
+				if (self.Doc != null)
+					pathInfo.Id = settings.Inferrer.Id(self.Doc);
+				else if (self.Upsert != null)
+					pathInfo.Id = settings.Inferrer.Id(self.Upsert);
+			}
+
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
+	}
+
 	public class UpdateRequest<TDocument> : UpdateRequest<TDocument, TDocument>
 		where TDocument : class 
 	{
@@ -61,7 +82,7 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			UpdateRequestPathInfo.Update(settings, pathInfo, this);
 		}
 		
 
@@ -72,7 +93,6 @@ namespace Nest
 		public bool? DocAsUpsert { get; set; }
 		public TPartialDocument Doc { get; set; }
 	}
-
 
 	public partial class UpdateDescriptor<TDocument,TPartialDocument> 
 		: DocumentPathDescriptor<UpdateDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters, TDocument>
@@ -164,12 +184,7 @@ namespace Nest
 			
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
 		{
-			if (pathInfo.Id.IsNullOrEmpty())
-			{
-				pathInfo.Id = settings.Inferrer.Id(Self.Upsert);
-			}
-
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			UpdateRequestPathInfo.Update(settings, pathInfo, this);
 		}
 	}
 }

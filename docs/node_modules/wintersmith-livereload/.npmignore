@@ -1,0 +1,1 @@
+# empty file to un-ignore lib/ since npm will use .gitignore if .npmignore is not found

@@ -16,11 +16,8 @@ namespace Nest
 		GeoUnit? GeoUnit { get; set; }
 	}
 
-	public class GeoDistanceSort : IGeoDistanceSort
+	public class GeoDistanceSort : SortBase, IGeoDistanceSort
 	{
-		public string Missing { get; set; }
-		public SortOrder? Order { get; set; }
-		public SortMode? Mode { get; set; }
 		public PropertyPathMarker Field { get; set; }
 		public string PinLocation { get; set; }
 		public GeoUnit? GeoUnit { get; set; }
@@ -38,17 +35,11 @@ namespace Nest
 		}
 	}
 
-	public class SortGeoDistanceDescriptor<T> : IGeoDistanceSort where T : class
+	public class SortGeoDistanceDescriptor<T> : SortDescriptorBase<T, SortGeoDistanceDescriptor<T>>, IGeoDistanceSort where T : class
 	{
 		private IGeoDistanceSort Self { get { return this; } }
 
 		PropertyPathMarker IGeoDistanceSort.Field { get; set; }
-
-		string ISort.Missing { get; set; }
-
-		SortOrder? ISort.Order { get; set; }
-
-		SortMode? ISort.Mode { get; set; }
 
 		string IGeoDistanceSort.PinLocation { get; set; }
 
@@ -99,28 +90,6 @@ namespace Nest
 		public SortGeoDistanceDescriptor<T> MissingValue(string value)
 		{
 			Self.Missing = value;
-			return this;
-		}
-		public SortGeoDistanceDescriptor<T> Ascending()
-		{
-			Self.Order = SortOrder.Ascending;
-			return this;
-		}
-		public SortGeoDistanceDescriptor<T> Descending()
-		{
-			Self.Order = SortOrder.Descending;
-			return this;
-		}
-
-		public SortGeoDistanceDescriptor<T> Order(SortOrder order)
-		{
-			Self.Order = order;
-			return this;
-		}
-
-		public SortGeoDistanceDescriptor<T> Mode(SortMode mode)
-		{
-			Self.Mode = mode;
 			return this;
 		}
 
