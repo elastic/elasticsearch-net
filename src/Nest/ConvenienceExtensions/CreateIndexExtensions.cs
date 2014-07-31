@@ -31,12 +31,12 @@ namespace Nest
 		/// <param name="client"></param>
 		/// <param name="index">The name of the index to be created</param>
 		/// <param name="createIndexSelector">A descriptor that further describes the parameters for the create index operation</param>
-		public static IIndicesOperationResponse CreatIndex(this IElasticClient client, string index,
+		public static Task<IIndicesOperationResponse> CreateIndexAsync(this IElasticClient client, string index,
 			Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			createIndexSelector = createIndexSelector ?? (c => c);
-			return client.CreateIndex(c => createIndexSelector(c).Index(index));
+			return client.CreateIndexAsync(c => createIndexSelector(c).Index(index));
 		}
 		
 	}
