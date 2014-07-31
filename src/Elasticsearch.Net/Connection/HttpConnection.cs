@@ -184,6 +184,7 @@ namespace Elasticsearch.Net.Connection
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
 			myReq.MaximumResponseHeadersLength = -1;
+			myReq.Pipelined = false;
 			//myReq.AllowWriteStreamBuffering = false;
 			if (this.ConnectionSettings.EnableCompressedResponses)
 			{

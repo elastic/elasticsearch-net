@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeConverter<TtlFieldMapping>))]
 	public interface ITtlFieldMapping : ISpecialField
 	{
 		[JsonProperty("enabled")]
