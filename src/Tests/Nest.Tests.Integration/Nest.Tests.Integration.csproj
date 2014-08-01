@@ -127,6 +127,7 @@
     <Compile Include="Indices\Analysis\Analyzers\AnalyzerTestResult.cs" />
     <Compile Include="Indices\Analysis\Analyzers\AnalyzerTests.cs" />
     <Compile Include="Cluster\StateTests.cs" />
+    <Compile Include="Indices\TypeExistsTests.cs" />
     <Compile Include="Indices\StatusTests.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
@@ -155,7 +156,7 @@
     <Compile Include="Index\IndexDefaultValueTests.cs" />
     <Compile Include="Indices\ClearCacheTests.cs" />
     <Compile Include="Indices\SegmentsTests.cs" />
-    <Compile Include="Indices\ExistsTests.cs" />
+    <Compile Include="Indices\IndexExistsTests.cs" />
     <Compile Include="Indices\StatsTests.cs" />
     <Compile Include="Core\AsyncTests.cs" />
     <Compile Include="Reproduce\Reproduce769Tests.cs" />

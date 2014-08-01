@@ -6469,7 +6469,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesExistsType<T>(string index, string type, Func<IndicesExistsTypeRequestParameters, IndicesExistsTypeRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesExistsType<T>(string index, string type, Func<TypeExistsRequestParameters, TypeExistsRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a HEAD on /{index}/{type}
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -6488,7 +6488,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesExistsTypeAsync<T>(string index, string type, Func<IndicesExistsTypeRequestParameters, IndicesExistsTypeRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesExistsTypeAsync<T>(string index, string type, Func<TypeExistsRequestParameters, TypeExistsRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a HEAD on /{index}/{type}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -6509,7 +6509,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesExistsType(string index, string type, Func<IndicesExistsTypeRequestParameters, IndicesExistsTypeRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesExistsType(string index, string type, Func<TypeExistsRequestParameters, TypeExistsRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a HEAD on /{index}/{type}
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -6530,7 +6530,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsTypeAsync(string index, string type, Func<IndicesExistsTypeRequestParameters, IndicesExistsTypeRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsTypeAsync(string index, string type, Func<TypeExistsRequestParameters, TypeExistsRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_flush
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.

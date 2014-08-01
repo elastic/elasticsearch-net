@@ -1216,5 +1216,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest clusterSettingsRequest = null);
+
+		/// <inheritdoc />
+		IExistsResponse TypeExists(Func<TypeExistsDescriptor, TypeExistsDescriptor> selector);
+
+		/// <inheritdoc />
+		IExistsResponse TypeExists(ITypeExistsRequest TypeRequest);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> TypeExistsAsync(Func<TypeExistsDescriptor, TypeExistsDescriptor> selector);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest TypeRequest);
 	}
 }
