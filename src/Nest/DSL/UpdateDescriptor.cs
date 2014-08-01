@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IUpdateRequest<TDocument, TPartialDocument> : IDocumentOptionalPath<UpdateRequestParameters>
+	public interface IUpdateRequest<TDocument,TPartialDocument> : IDocumentOptionalPath<UpdateRequestParameters>
 		where TDocument : class
 		where TPartialDocument : class 
 	{
@@ -53,7 +53,7 @@ namespace Nest
 		}
 	}
 
-	public class UpdateRequest<TDocument> : UpdateRequest<TDocument, TDocument>
+	public class UpdateRequest<TDocument> : UpdateRequest<TDocument,TDocument>
 		where TDocument : class 
 	{
 		public UpdateRequest(string id) : base(id) { }
@@ -66,7 +66,7 @@ namespace Nest
 		}
 	}
 
-	public partial class UpdateRequest<TDocument, TPartialDocument> : DocumentOptionalPathBase<UpdateRequestParameters, TDocument>, IUpdateRequest<TDocument, TPartialDocument> 
+	public partial class UpdateRequest<TDocument,TPartialDocument> : DocumentOptionalPathBase<UpdateRequestParameters, TDocument>, IUpdateRequest<TDocument, TPartialDocument> 
 		where TDocument : class
 		where TPartialDocument : class 
 	{
