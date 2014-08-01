@@ -102,7 +102,12 @@ Using NEST as well? Let us know on Twitter at [@elasticsearch](https://twitter.c
 
 All of these are more than welcome on the [GitHub issues](https://github.com/elasticsearch/elasticsearch-net/issues) page!  We try to to at least reply within the same day.
 
-Many thanks to everyone who has been awesome enough to contribute back to NEST (You're listed automatically on the [documentation page](http://nest.azurewebsites.net/))
+####Many thanks to:
+* [Q42](http://www.q42.nl) for supporting the development of NEST
+* [redgate](http://www.red-gate.com) for supplying @Mpdreamz with an ANTS Memory Profiler 8 & ANTS Performance Profiler 8 licenses
+* [jetBrains](http://www.jetbrains.com) for supplying @Mpdreamz with a dotTrace profiler and Resharper license
+* [CodeBetter](http://codebetter.com) for hosting the continuous integration for NEST
+* Everyone who has been awesome enough to contribute back to NEST (You're listed automatically on the [documentation page](http://nest.azurewebsites.net))
 
 ## Copyright and License
 
