@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Delete
 menusection: core
 menuitem: delete
 ---

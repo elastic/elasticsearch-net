@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Version
 menusection: search
 menuitem: version
 ---

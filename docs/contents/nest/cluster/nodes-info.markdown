@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Nodes Info
 menusection: cluster
 menuitem: nodes-info
 ---

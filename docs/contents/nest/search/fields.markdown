@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Fields
 menusection: search
 menuitem: fields
 ---

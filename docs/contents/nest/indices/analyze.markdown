@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Analyze
 menusection: indices
 menuitem: analyze
 ---

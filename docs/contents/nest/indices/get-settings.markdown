@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Get Settings
 menusection: indices
 menuitem: get-settings
 ---

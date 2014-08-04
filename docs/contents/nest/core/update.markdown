@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Script Update
+title: Update
 menusection: core
 menuitem: update
 ---

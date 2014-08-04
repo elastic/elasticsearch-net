@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Open/Close Indices
 menusection: indices
 menuitem: open-close
 ---

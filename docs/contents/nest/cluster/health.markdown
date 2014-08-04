@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Health
 menusection: cluster
 menuitem: health
 ---

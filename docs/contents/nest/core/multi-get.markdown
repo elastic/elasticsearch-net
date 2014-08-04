@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Multi Get
 menusection: core
 menuitem: multi-get
 ---

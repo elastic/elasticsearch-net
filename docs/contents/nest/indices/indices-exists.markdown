@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Indices Exists
 menusection: indices
 menuitem: indices-exists
 ---

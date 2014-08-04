@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Get
 menusection: core
 menuitem: get
 ---

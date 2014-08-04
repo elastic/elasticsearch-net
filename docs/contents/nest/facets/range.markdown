@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Range Facet
 menusection: facets
 menuitem: range
 ---

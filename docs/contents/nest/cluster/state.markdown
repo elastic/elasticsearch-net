@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: State
 menusection: cluster
 menuitem: state
 ---

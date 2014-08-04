@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Snapshot
 menusection: indices
 menuitem: snapshot
 ---

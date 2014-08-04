@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Get Mapping
 menusection: indices
 menuitem: get-mapping
 ---

@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: MultiSearch
+title: Multi Search
 menusection: core
 menuitem: multi-search
 ---

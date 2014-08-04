@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Put Mapping
 menusection: indices
 menuitem: put-mapping
 ---

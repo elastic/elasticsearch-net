@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Percolate
 menusection: core
 menuitem: percolate
 ---

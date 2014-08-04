@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Count
 menusection: core
 menuitem: count
 ---

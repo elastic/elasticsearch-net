@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Geo Distance Facet
 menusection: facets
 menuitem: geo-distance
 ---
