@@ -8,58 +8,73 @@ menuitem: multi-get
 
 # Multi Get
 
-Get multiple documents in a single request.
+You can use `GetMany<T>` to retrieve multiple documents of a single type by simply passing a collection containing their ids:
 
-##Examples
+	var ids = new [] { 1, 2, 3 };
+	var results = client.MultiGet(m => m.GetMany<ElasticsearchProject>(ids));
 
-	var ids = new [] { hit1.Id, hit2.Id };
-	var foundDocuments = this.ConnectedClient.MultiGet<ElasticSearchProject>(ids);
+Index and type are inferred, but overloads still exists for full control:
 
-Index and type are infered but overloads exists for full control.
+	var results = client.MultiGet<ElasticsearchProject>("myalternateindex", "elasticprojs", ids);
 
-	var foundDocuments = this.ConnectedClient.MultiGet<ElasticSearchProject>("myalternateindex", "elasticprojs", ids);
+If you need to retrieve multiple documents of different types, NEST also has you covered:
 
-# Multi Get Full
-
-The previous calls are handy if you need to get many objects of a single type and don't care about the response or the metadata of the documents. If you do, NEST has you covered as well.
-
-	var result = this._client.MultiGetFull(a => a
-		.Get<ElasticSearchProject>(g => g.Id(1))
-		.Get<Person>(g => g.Id(100000))
+	var results = client.MultiGet(m => m
+		.Get<ElasticsearchProject>(g => g.Id(1))
+		.Get<Person>(g => g.Id(100))
 		.Get<Person>(g => g.Id(105))
 	);
 
-This will get 1 ElasticSearchProject document and 2 Person documents in one request. 
+This will get 1 `ElasticsearchProject` document and 2 `Person` documents in a single request.  The above could have also been written using a combination of `Get<T>` and `GetMany<T>`:
 
-These could then be pulled out of the result:
+	var results = client.MultiGet(m => m
+		.Get<ElasticsearchProject>(g => g.Id(1))
+		.GetMany<Person>(new [] { 100, 105 })
+	);
 
-	var person = result.Get<Person>(100000);
-	var personHit = result.GetWithMetaData<Person>(100000);
+## Handling a MultiGet Response
 
-`Get` returns `T` and `GetWithMetaData` returns a `MultiGetHit<T>` which also exposes the document's metadata such as `_index` and `_version`. 
+`MultiGet` in NEST returns an `IMultiGetResonse` object which, similar to the request, also exposes a `Get<T>` and `GetMany<T>` that can be used for retrieving the documents.
 
-In case the document was not found then `Get` would return a `null` but `GetWithMetaData` still returns the a `MultiGetHit<T>` but with an `.Exists` of `false` this maps to the way elasticsearch returns not found objects in a `multi_get` call.
+For example, you can pull the single `ElasticsearchProject` out of the response by using `Get<T>`:
 
-You can even get field selections for some of the documents:
+	var hit = results.Get<ElasticsearchProject>(1);
 
-	var result = this._client.MultiGetFull(a => a
-		.Get<ElasticSearchProject>(g => g.
-			Id(1)
+And since we specified multiple `Person` documents in the above request, you can pull them all out of the response using `GetMany<T>`:
+
+	var hits = results.GetMany<Person>(new[] { 100, 1005 });
+
+The result of `Get<T>` and `GetMany<T>` on the response object is an `IMultiGetHit<T>` and `IEnumerable<IMultiGetHit<T>>` respectively.
+
+`IMultiGetHit<T>` contains the original document which can be found in the `Source` property, a `FieldSelection` collection containing specific fields if they were requested, and some additional meta data from Elasticsearch.
+
+## Field Selection
+
+`MultiGet` also allows you to retrieve specific fields of a document:
+
+	var results = client.MultiGet(m => m
+		.Get<ElasticsearchProject>(g => g
+			.Id(1)
 			.Fields(p => p.Id, p => p.Followers.First().FirstName)
 		)
-		.Get<Person>(g => g.Id(100000))
+		.Get<Person>(g => g.Id(100))
 		.Get<Person>(g => g
-			.Id(100)
+			.Id(105)
 			.Type("people")
 			.Index("nest_test_data")
 			.Fields(p => p.Id, p => p.FirstName)
 		)
 	);
 
-You can then get the returned fields like so:
+Which can then be retrieved directly from the `IMultiGetResponse` object:
 
-	var fields = result.GetFieldSelection<ElasticSearchProject>(1);
-	var id = fields.FieldValue<int>(p => p.Id);
-	var firstNames = fields.FieldValue<string[]>(p => p.Followers.First().FirstName);
+	var fields = results.GetFieldSelection<ElasticSearchProject>(1);
+	var id = fields.FieldValues<int>(p => p.Id);
+	var firstNames = fields.FieldValues<string[]>(p => p.Followers.First().FirstName);
 
-Remember `p => p.Followers.First().FirstName` can be interchanged with `"followers.firstName"` if you prefer or need to reference a non-mapped field.
+Or on each individual `IMultiGetHit<T>` object of the response:
+
+	var hit = results.Get<Person>(100);
+	var fields = hit.FieldSelection.FieldValues<int>(p => p.Id);
+
+Remember expressions like `p => p.Followers.First().FirstName` can be interchanged with `"followers.firstName"` if you prefer or need to reference a non-mapped field.
