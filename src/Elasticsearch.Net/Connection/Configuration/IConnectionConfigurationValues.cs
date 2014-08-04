@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Specialized;
-using System.Security.Cryptography.X509Certificates;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Serialization;
 
@@ -66,10 +65,5 @@ namespace Elasticsearch.Net.Connection
 		/// 
 		/// </summary>
 		IElasticsearchSerializer Serializer { get; set; }
-
-        /// <summary>
-        /// If elasticSearch is secured by a reverse-proxy certificates required for access can be added here 
-        /// </summary>
-	    X509CertificateCollection ClientCertificates { get; }
 	}
 }

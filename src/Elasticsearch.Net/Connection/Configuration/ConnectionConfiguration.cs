@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Serialization;
 
@@ -124,10 +123,7 @@ namespace Elasticsearch.Net.Connection
 
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer { get; set; }
 
-	    private X509CertificateCollection _clientCertificates;
-	    public X509CertificateCollection ClientCertificates { get { return _clientCertificates ?? (_clientCertificates = new X509CertificateCollection()); } }
-
-	    public ConnectionConfiguration(IConnectionPool connectionPool)
+		public ConnectionConfiguration(IConnectionPool connectionPool)
 		{
 			this._timeout = 60*1000;
 			//this.UriSpecifiedBasicAuth = !uri.UserInfo.IsNullOrEmpty();
