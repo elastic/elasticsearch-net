@@ -124,5 +124,52 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
+
+		[Test]
+		public void TermsFilterWithNumericTerms()
+		{
+			var query = Query<ElasticsearchProject>.Filtered(filtered => filtered
+				.Filter(f =>
+					f.Terms(t => t.LongValue, new long[] { 1, 2, 3 })
+				)
+				.Query(q => q.MatchAll())
+			);
+
+			var json = TestElasticClient.Serialize(query);
+			var expected = @"{ 
+							  filtered: {
+							  query: {
+							    match_all: {}
+							  },
+							  filter: {
+								terms: {
+								  longValue: [1, 2, 3 ]
+								}
+							  }
+							}
+						  }";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
+		public void TermsFilterWithNullTerms()
+		{
+			var query = Query<ElasticsearchProject>.Filtered(filtered => filtered
+				.Filter(f =>
+					f.Terms(t => t.Name, null)
+				)
+				.Query(q => q.MatchAll())
+			);
+			var json = TestElasticClient.Serialize(query);
+			var expected = @"{ 
+							  filtered: {
+							  query: {
+							    match_all: {}
+							  },
+							  filter: {}
+							}
+						  }";
+			Assert.True(json.JsonEquals(expected), json);
+		}
 	}
 }
