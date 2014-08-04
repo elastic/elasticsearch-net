@@ -6,37 +6,45 @@ menuitem: multi-search
 ---
 
 
-# MultiSearch
+# Multi Search
 
-The multi search API allows to execute several search requests within the same API. The endpoint for it is _msearch (available from 0.19 onwards).
+The multi search API allows to execute several search requests within the same API.
 
-# Simple example
+### Fluent Syntax
 
-	var result = this._client.MultiSearch(b => b
-		.Search<ElasticSearchProject>(s => s.MatchAll())
-		.Search<ElasticSearchProject>(s => s.MatchAll())
-		.Search<Person>(s => s.MatchAll())
-	);
-
-	//elasticProjectResults = IEnumerable<QueryResponse<ElasticSearchProject>> with a Count() of 2
-	var elasticProjectResults = result.GetResponses<ElasticSearchProject>();
-
-	//personResults = IEnumerable<QueryResponse<Person>> with a Count() of 1
-	var personResults = result.GetResponses<Person>();
-
-# Named example
-
-	var result = this._client.MultiSearch(b => b
-		.Search<ElasticSearchProject>("esproj", s => s.MatchAll())
-		.Search<ElasticSearchProject>(s => s.MatchAll())
+	var result = client.MultiSearch(ms => ms
+		.Search<ElasticsearchProject>("esproj", s => s.MatchAll())
 		.Search<Person>("people", s => s.MatchAll())
 	);
 
-	//elasticProjectResult is a QueryResponse<ElasticSearchProject>>
-	var elasticProjectResult = result.GetResponse<ElasticSearchProject>("esproj");
 
-	//personResult is a QueryResponse<Person>>
-	var personResults = result.GetResponse<Person>("people");
+### Object Initializer Syntax
 
-	//will be null 
-	var invalidResult = result.GetResponse<ElasticSearchProject>("people");
+	var request = new MultiSearchRequest
+	{
+		Operations = new Dictionary<string, ISearchRequest>
+		{
+			{ "esproj", new SearchRequest 
+				{ 
+					Query = new QueryContainer(new MatchAllQuery()) 
+				} 
+			},
+			{ "people", new SearchRequest 
+				{ 
+					Query = new QueryContainer(new MatchAllQuery()) 
+				} 
+			}
+		}
+	};
+
+	var result = client.MultiSearch(request);
+
+## Handling the Multi Search Response
+
+`MultiSearch` returns an `IMultiSearchResponse` object.  Each `SearchResponse<T>` can be retrieved using the corresponding name that was specified in the request.
+
+	// returns a SearchResponse<ElasticsearchProject>>
+	var projects = result.GetResponse<ElasticsearchProject>("esproj");
+
+	// returns a SearchResponse<Person>>
+	var people = result.GetResponse<Person>("people");
