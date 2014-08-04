@@ -32,21 +32,23 @@ This will get 1 `ElasticsearchProject` document and 2 `Person` documents in a si
 		.GetMany<Person>(new [] { 100, 105 })
 	);
 
-## Handling a MultiGet Response
+## Handling the Multi Get Response
 
 `MultiGet` in NEST returns an `IMultiGetResonse` object which, similar to the request, also exposes a `Get<T>` and `GetMany<T>` that can be used for retrieving the documents.
 
-For example, you can pull the single `ElasticsearchProject` out of the response by using `Get<T>`:
+You can pull the single `ElasticsearchProject` out of the response by using `Get<T>`:
 
 	var hit = results.Get<ElasticsearchProject>(1);
 
 And since we specified multiple `Person` documents in the above request, you can pull them all out of the response using `GetMany<T>`:
 
-	var hits = results.GetMany<Person>(new[] { 100, 1005 });
+	var hits = results.GetMany<Person>(new[] { 100, 105 });
 
 The result of `Get<T>` and `GetMany<T>` on the response object is an `IMultiGetHit<T>` and `IEnumerable<IMultiGetHit<T>>` respectively.
 
 `IMultiGetHit<T>` contains the original document which can be found in the `Source` property, a `FieldSelection` collection containing specific fields if they were requested, and some additional meta data from Elasticsearch.
+
+The `IMultiGetResponse` object also contains a `Documents` property of type `IEnumerable<IMultiGetHit<object>>` which holds *all* of the retrieved documents regardless of type.
 
 ## Field Selection
 
@@ -68,13 +70,8 @@ The result of `Get<T>` and `GetMany<T>` on the response object is an `IMultiGetH
 
 Which can then be retrieved directly from the `IMultiGetResponse` object:
 
-	var fields = results.GetFieldSelection<ElasticSearchProject>(1);
+	var fields = results.GetFieldSelection<ElasticsearchProject>(1);
 	var id = fields.FieldValues<int>(p => p.Id);
 	var firstNames = fields.FieldValues<string[]>(p => p.Followers.First().FirstName);
-
-Or on each individual `IMultiGetHit<T>` object of the response:
-
-	var hit = results.Get<Person>(100);
-	var fields = hit.FieldSelection.FieldValues<int>(p => p.Id);
 
 Remember expressions like `p => p.Followers.First().FirstName` can be interchanged with `"followers.firstName"` if you prefer or need to reference a non-mapped field.
