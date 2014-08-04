@@ -684,7 +684,7 @@ namespace Nest
 		{
 			ITermsFilter filter = new TermsFilterDescriptor();
 			filter.Field = fieldDescriptor;
-			filter.Terms = terms.Cast<object>();
+			filter.Terms = (terms != null) ? terms.Cast<object>() : null;
 			filter.Execution = Execution;
 			return this.New(filter, f=>f.Terms = filter);
 		}	
