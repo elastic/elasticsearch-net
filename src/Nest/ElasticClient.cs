@@ -159,7 +159,6 @@ namespace Nest
 			var stream = new MemoryStream("{}".Utf8Bytes());
 			client.Serializer.Serialize(new SearchDescriptor<object>());
 			client.Serializer.Deserialize<SearchDescriptor<object>>(stream);
-			var connection = new HttpConnection(new ConnectionSettings());
 			client.RootNodeInfo(); 
 			client.Search<object>(s=>s.MatchAll().Index("someindex")); 
 		}
