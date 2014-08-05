@@ -149,6 +149,7 @@
     <Compile Include="Domain\Geometry\PointGeoShape.cs" />
     <Compile Include="Domain\Geometry\PolygonGeoShape.cs" />
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
+    <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="DSL\Filter\GeoShapeCircleFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeMultiLineStringFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeMultiPointFilterDescriptor.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="DSL\SimilarityDescriptor.cs" />
     <Compile Include="DSL\Suggest\Fuzziness.cs" />
     <Compile Include="DSL\Suggest\IFuzziness.cs" />
+    <Compile Include="DSL\ExplainDescriptor.cs" />
     <Compile Include="DSL\Visitor\DslPrettyPrintVisitor.cs" />
     <Compile Include="DSL\Visitor\QueryFilterWalker.cs" />
     <Compile Include="DSL\Visitor\QueryVisitor.cs" />
@@ -224,6 +226,7 @@
     <Compile Include="ElasticClient-ClusterSettings.cs" />
     <Compile Include="ElasticClient-DeleteIndex.cs" />
     <Compile Include="ElasticClient-TypeExists.cs" />
+    <Compile Include="ElasticClient-Explain.cs" />
     <Compile Include="Enums\NormsLoading.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />

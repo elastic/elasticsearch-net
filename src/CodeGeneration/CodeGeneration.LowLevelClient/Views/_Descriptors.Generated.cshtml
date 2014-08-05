@@ -29,9 +29,11 @@ namespace Nest
 	{
 		
 	</text>
-	  foreach (KeyValuePair<string, ApiQueryParameters> kv 
-				in method.Url.Params)
+	  foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	  {
+		  
+		  
+		  
 			var t = @kv.Value.CsharpType(kv.Key);
 			var tSuffix = (t == "bool") ? " = true" : "";
 			var m = kv.Key.ToPascalCase();

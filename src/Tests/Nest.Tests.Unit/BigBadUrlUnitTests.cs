@@ -130,6 +130,7 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/mydefaultindex/otherdoc/_percolate", c => c.Percolate<OtherDoc>(p=>p.Document(new OtherDoc { Name = "hello" })));
 			Do("POST", "/mycustomindex/mycustomtype/_percolate", c => c.Percolate<OtherDoc>(p => p.Document(new OtherDoc { Name = "hello" }).Index("mycustomindex").Type("mycustomtype")));
 			Do("POST", "/mydefaultindex/otherdoc/my-id/_percolate", c => c.Percolate<OtherDoc>(p => p.Id("my-id")));
+			Do("POST", "/mydefaultindex/otherdoc/my-id/_explain", c => c.Explain<OtherDoc>(p => p.Id("my-id")));
 
 			Do("PUT", "/_template/my-template", c => c.PutTemplate("my-template", pt => pt.Settings(s => s.Add("mysetting", true))));
 			Do("PUT", "/_all/_warmer/my-warmer", c => c.PutWarmer("my-warmer", p => p.Search<Doc>(s => s.MatchAll())));

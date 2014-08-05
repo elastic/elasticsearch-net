@@ -1228,5 +1228,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest TypeRequest);
+
+		/// <inheritdoc />
+		IExplainResponse Explain<T>(Func<ExplainDescriptor<T>, ExplainDescriptor<T>> querySelector)
+			where T : class;
+
+		/// <inheritdoc />
+		IExplainResponse Explain(IExplainRequest explainRequest);
+
+		/// <inheritdoc />
+		Task<IExplainResponse> ExplainAsync<T>(Func<ExplainDescriptor<T>, ExplainDescriptor<T>> querySelector)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<IExplainResponse> ExplainAsync(IExplainRequest explainRequest);
 	}
 }

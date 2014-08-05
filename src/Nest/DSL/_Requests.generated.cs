@@ -1569,7 +1569,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-explain.html
 	///</pre>
 	///</summary>
-	public partial class ExplainRequest  : BasePathRequest<ExplainRequestParameters>
+	public partial class ExplainRequest<T> 
 			{
 		
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
@@ -1691,12 +1691,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source_include", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExplainRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -5269,6 +5263,136 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
 			set { this.Request.RequestParameters.AddQueryString("routing", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for ExplainGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-explain.html
+	///</pre>
+	///</summary>
+	public partial class ExplainRequest 
+			{
+		
+		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
+		public bool AnalyzeWildcard 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
+		}
+		
+		
+		///<summary>The analyzer for the query string query</summary>
+		public string Analyzer 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
+		}
+		
+		
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator DefaultOperator 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
+			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
+		}
+		
+		
+		///<summary>The default field for query string query (default: _all)</summary>
+		public string Df 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
+			set { this.Request.RequestParameters.AddQueryString("df", value); }
+		}
+		
+		
+		///<summary>A comma-separated list of fields to return in the response</summary>
+		public IList<PropertyPathMarker> Fields 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			set { this.Request.RequestParameters.AddQueryString("fields", value); }
+		}
+		
+		
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool Lenient 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
+			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
+		}
+		
+		
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public bool LowercaseExpandedTerms 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
+			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
+		}
+		
+		
+		///<summary>The ID of the parent document</summary>
+		public string Parent 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
+			set { this.Request.RequestParameters.AddQueryString("parent", value); }
+		}
+		
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
+			set { this.Request.RequestParameters.AddQueryString("preference", value); }
+		}
+		
+		
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string Q 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
+			set { this.Request.RequestParameters.AddQueryString("q", value); }
+		}
+		
+		
+		///<summary>Specific routing value</summary>
+		public string Routing 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
+			set { this.Request.RequestParameters.AddQueryString("routing", value); }
+		}
+		
+		
+		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public  string[] SourceEnabled 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("source_enabled"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_enabled", value); }
+		}
+		
+		
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public IList<PropertyPathMarker> SourceExclude 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("source_exclude"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_exclude", value); }
+		}
+		
+		
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public IList<PropertyPathMarker> SourceInclude 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("source_include"); } 
+			set { this.Request.RequestParameters.AddQueryString("source_include", value); }
 		}
 		
 	}

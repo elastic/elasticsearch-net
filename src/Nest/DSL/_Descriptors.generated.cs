@@ -1665,13 +1665,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-explain.html
 	///</pre>
 	///</summary>
-	public partial class ExplainDescriptor  : BaseRequest<ExplainRequestParameters>
+	public partial class ExplainDescriptor<T> 
 	{
 		
 	
 
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
-		public ExplainDescriptor AnalyzeWildcard(bool analyze_wildcard = true)
+		public ExplainDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true)
 		{
 			this.Request.RequestParameters.AnalyzeWildcard(analyze_wildcard);
 			return this;
@@ -1679,7 +1679,7 @@ namespace Nest
 		
 
 		///<summary>The analyzer for the query string query</summary>
-		public ExplainDescriptor Analyzer(string analyzer)
+		public ExplainDescriptor<T> Analyzer(string analyzer)
 		{
 			this.Request.RequestParameters.Analyzer(analyzer);
 			return this;
@@ -1687,7 +1687,7 @@ namespace Nest
 		
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ExplainDescriptor DefaultOperator(DefaultOperator default_operator)
+		public ExplainDescriptor<T> DefaultOperator(DefaultOperator default_operator)
 		{
 			this.Request.RequestParameters.DefaultOperator(default_operator);
 			return this;
@@ -1695,7 +1695,7 @@ namespace Nest
 		
 
 		///<summary>The default field for query string query (default: _all)</summary>
-		public ExplainDescriptor Df(string df)
+		public ExplainDescriptor<T> Df(string df)
 		{
 			this.Request.RequestParameters.Df(df);
 			return this;
@@ -1703,7 +1703,7 @@ namespace Nest
 		
 
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public ExplainDescriptor Fields(params string[] fields)
+		public ExplainDescriptor<T> Fields(params string[] fields)
 		{
 			this.Request.RequestParameters.Fields(fields);
 			return this;
@@ -1711,7 +1711,7 @@ namespace Nest
 		
 			
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public ExplainDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public ExplainDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
@@ -1722,7 +1722,7 @@ namespace Nest
 			
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public ExplainDescriptor Lenient(bool lenient = true)
+		public ExplainDescriptor<T> Lenient(bool lenient = true)
 		{
 			this.Request.RequestParameters.Lenient(lenient);
 			return this;
@@ -1730,7 +1730,7 @@ namespace Nest
 		
 
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public ExplainDescriptor LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
+		public ExplainDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
 		{
 			this.Request.RequestParameters.LowercaseExpandedTerms(lowercase_expanded_terms);
 			return this;
@@ -1738,7 +1738,7 @@ namespace Nest
 		
 
 		///<summary>The ID of the parent document</summary>
-		public ExplainDescriptor Parent(string parent)
+		public ExplainDescriptor<T> Parent(string parent)
 		{
 			this.Request.RequestParameters.Parent(parent);
 			return this;
@@ -1746,7 +1746,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public ExplainDescriptor Preference(string preference)
+		public ExplainDescriptor<T> Preference(string preference)
 		{
 			this.Request.RequestParameters.Preference(preference);
 			return this;
@@ -1754,7 +1754,7 @@ namespace Nest
 		
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ExplainDescriptor Q(string q)
+		public ExplainDescriptor<T> Q(string q)
 		{
 			this.Request.RequestParameters.Q(q);
 			return this;
@@ -1762,7 +1762,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value</summary>
-		public ExplainDescriptor Routing(string routing)
+		public ExplainDescriptor<T> Routing(string routing)
 		{
 			this.Request.RequestParameters.Routing(routing);
 			return this;
@@ -1770,7 +1770,7 @@ namespace Nest
 		
 
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public ExplainDescriptor Source(string source)
+		public ExplainDescriptor<T> Source(string source)
 		{
 			this.Request.RequestParameters.Source(source);
 			return this;
@@ -1778,7 +1778,7 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public ExplainDescriptor SourceEnabled(params string[] source_enabled)
+		public ExplainDescriptor<T> SourceEnabled(params string[] source_enabled)
 		{
 			this.Request.RequestParameters.SourceEnabled(source_enabled);
 			return this;
@@ -1786,7 +1786,7 @@ namespace Nest
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor SourceExclude(params string[] source_exclude)
+		public ExplainDescriptor<T> SourceExclude(params string[] source_exclude)
 		{
 			this.Request.RequestParameters.SourceExclude(source_exclude);
 			return this;
@@ -1794,7 +1794,7 @@ namespace Nest
 		
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public ExplainDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
@@ -1805,7 +1805,7 @@ namespace Nest
 			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor SourceInclude(params string[] source_include)
+		public ExplainDescriptor<T> SourceInclude(params string[] source_include)
 		{
 			this.Request.RequestParameters.SourceInclude(source_include);
 			return this;
@@ -1813,7 +1813,7 @@ namespace Nest
 		
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public ExplainDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
@@ -1822,12 +1822,6 @@ namespace Nest
 			return this;
 		}
 			
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExplainRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
