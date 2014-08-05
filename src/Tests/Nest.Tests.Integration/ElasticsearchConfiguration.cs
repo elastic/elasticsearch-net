@@ -30,7 +30,7 @@ namespace Nest.Tests.Integration
 		{
 			var host = Host;
 			if (port != 9500 && Process.GetProcessesByName("fiddler").HasAny())
-				host = "ipv4.fiddler";
+				host = "localhost.fiddler";
 
 			var uri = new UriBuilder("http", host, port.GetValueOrDefault(9200)).Uri;
 			return uri;
@@ -40,6 +40,7 @@ namespace Nest.Tests.Integration
 
 			return new ConnectionSettings(hostOverride ?? CreateBaseUri(port), ElasticsearchConfiguration.DefaultIndex)
 				.SetMaximumAsyncConnections(MaxConnections)
+				.DisableAutomaticProxyDetection(false)
 				.UsePrettyResponses()
 				.ExposeRawResponse();
 		}

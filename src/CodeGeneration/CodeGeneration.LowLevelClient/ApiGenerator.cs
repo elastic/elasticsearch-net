@@ -10,6 +10,7 @@ using CodeGeneration.LowLevelClient.Domain;
 using CodeGeneration.LowLevelClient.Overrides.Allow404;
 using CodeGeneration.LowLevelClient.Overrides.Descriptors;
 using CsQuery;
+using CsQuery.ExtensionMethods.Internal;
 using Newtonsoft.Json;
 using Xipton.Razor;
 
@@ -189,22 +190,37 @@ namespace CodeGeneration.LowLevelClient
 					if (!renameList.ContainsKey(kv.Key))
 						renameList[kv.Key] = kv.Value;
 
+				var patchedParams = new Dictionary<string, ApiQueryParameters>();
 				foreach (var kv in method.Url.Params)
 				{
+					if (kv.Value.OriginalQueryStringParamName.IsNullOrEmpty())
+						kv.Value.OriginalQueryStringParamName = kv.Key;
 					if (skipList.Contains(kv.Key))
-					{
-						method.Url.Params.Remove(kv.Key);
 						continue;
-					}
 
 					string newName;
 					if (!renameList.TryGetValue(kv.Key, out newName))
+					{
+						patchedParams.Add(kv.Key, kv.Value);
 						continue;
+					}
+					
+					patchedParams.Add(newName, kv.Value);
 
-					method.Url.Params.Remove(kv.Key);
-					method.Url.Params.Add(newName, kv.Value);
-
+					if (newName == "source_enabled")
+					{
+						kv.Value.DeprecatedInFavorOf = "EnableSource";
+						patchedParams.Add("enable_source", new ApiQueryParameters
+						{
+							Description = kv.Value.Description,
+							Options = kv.Value.Options,
+							Type = "boolean",
+							OriginalQueryStringParamName = "_source"
+						});
+					}
 				}
+
+				method.Url.Params = patchedParams;
 			}
 			// ReSharper disable once EmptyGeneralCatchClause
 			catch
