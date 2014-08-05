@@ -157,6 +157,8 @@
     <Compile Include="DSL\Filter\GeoShapePolygonFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapePointFilterDescriptor.cs" />
     <Compile Include="DSL\GetAliasDescriptor.cs" />
+    <Compile Include="DSL\AliasExistsDescriptor.cs" />
+    <Compile Include="DSL\Paths\IndexOptionalNamePathDescriptor.cs" />
     <Compile Include="DSL\TypeExistsDescriptor.cs" />
     <Compile Include="DSL\Query\Functions\FieldValueFactorDescriptor.cs" />
     <Compile Include="DSL\Query\GeoShapeMultiPointQueryDescriptor.cs" />
@@ -221,6 +223,7 @@
     <Compile Include="DSL\Visitor\QueryVisitor.cs" />
     <Compile Include="DSL\Visitor\VisitorScope.cs" />
     <Compile Include="DSL\_Requests.generated.cs" />
+    <Compile Include="ElasticClient-AliasExists.cs" />
     <Compile Include="ElasticClient-ClusterSettings.cs" />
     <Compile Include="ElasticClient-DeleteIndex.cs" />
     <Compile Include="ElasticClient-TypeExists.cs" />
