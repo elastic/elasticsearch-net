@@ -1876,7 +1876,17 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters SourceEnabled(params string[] source_enabled)
 		{
 			this._source_enabled = source_enabled;
-			this.AddQueryString("source_enabled", this._source_enabled);
+			this.AddQueryString("_source", this._source_enabled);
+			return this;
+		}
+		
+		
+		internal bool _enable_source { get; set; }
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public ExplainRequestParameters EnableSource(bool enable_source)
+		{
+			this._enable_source = enable_source;
+			this.AddQueryString("_source", this._enable_source);
 			return this;
 		}
 		
@@ -1886,7 +1896,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters SourceExclude(params string[] source_exclude)
 		{
 			this._source_exclude = source_exclude.Select(f=>(object)f);
-			this.AddQueryString("source_exclude", this._source_exclude);
+			this.AddQueryString("_source_exclude", this._source_exclude);
 			return this;
 		}
 		
@@ -1896,7 +1906,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters SourceInclude(params string[] source_include)
 		{
 			this._source_include = source_include.Select(f=>(object)f);
-			this.AddQueryString("source_include", this._source_include);
+			this.AddQueryString("_source_include", this._source_include);
 			return this;
 		}
 		
@@ -1976,7 +1986,17 @@ namespace Elasticsearch.Net
 		public GetRequestParameters SourceEnabled(params string[] source_enabled)
 		{
 			this._source_enabled = source_enabled;
-			this.AddQueryString("source_enabled", this._source_enabled);
+			this.AddQueryString("_source", this._source_enabled);
+			return this;
+		}
+		
+		
+		internal bool _enable_source { get; set; }
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public GetRequestParameters EnableSource(bool enable_source)
+		{
+			this._enable_source = enable_source;
+			this.AddQueryString("_source", this._enable_source);
 			return this;
 		}
 		
@@ -1986,7 +2006,7 @@ namespace Elasticsearch.Net
 		public GetRequestParameters SourceExclude(params string[] source_exclude)
 		{
 			this._source_exclude = source_exclude.Select(f=>(object)f);
-			this.AddQueryString("source_exclude", this._source_exclude);
+			this.AddQueryString("_source_exclude", this._source_exclude);
 			return this;
 		}
 		
@@ -1996,7 +2016,7 @@ namespace Elasticsearch.Net
 		public GetRequestParameters SourceInclude(params string[] source_include)
 		{
 			this._source_include = source_include.Select(f=>(object)f);
-			this.AddQueryString("source_include", this._source_include);
+			this.AddQueryString("_source_include", this._source_include);
 			return this;
 		}
 		
@@ -2086,7 +2106,17 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters SourceEnabled(params string[] source_enabled)
 		{
 			this._source_enabled = source_enabled;
-			this.AddQueryString("source_enabled", this._source_enabled);
+			this.AddQueryString("_source", this._source_enabled);
+			return this;
+		}
+		
+		
+		internal bool _enable_source { get; set; }
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public SourceRequestParameters EnableSource(bool enable_source)
+		{
+			this._enable_source = enable_source;
+			this.AddQueryString("_source", this._enable_source);
 			return this;
 		}
 		
@@ -2096,7 +2126,7 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters SourceExclude(params string[] source_exclude)
 		{
 			this._source_exclude = source_exclude.Select(f=>(object)f);
-			this.AddQueryString("source_exclude", this._source_exclude);
+			this.AddQueryString("_source_exclude", this._source_exclude);
 			return this;
 		}
 		
@@ -2106,7 +2136,7 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters SourceInclude(params string[] source_include)
 		{
 			this._source_include = source_include.Select(f=>(object)f);
-			this.AddQueryString("source_include", this._source_include);
+			this.AddQueryString("_source_include", this._source_include);
 			return this;
 		}
 		
@@ -4166,7 +4196,17 @@ namespace Elasticsearch.Net
 		public MultiGetRequestParameters SourceEnabled(params string[] source_enabled)
 		{
 			this._source_enabled = source_enabled;
-			this.AddQueryString("source_enabled", this._source_enabled);
+			this.AddQueryString("_source", this._source_enabled);
+			return this;
+		}
+		
+		
+		internal bool _enable_source { get; set; }
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public MultiGetRequestParameters EnableSource(bool enable_source)
+		{
+			this._enable_source = enable_source;
+			this.AddQueryString("_source", this._enable_source);
 			return this;
 		}
 		
@@ -4176,7 +4216,7 @@ namespace Elasticsearch.Net
 		public MultiGetRequestParameters SourceExclude(params string[] source_exclude)
 		{
 			this._source_exclude = source_exclude.Select(f=>(object)f);
-			this.AddQueryString("source_exclude", this._source_exclude);
+			this.AddQueryString("_source_exclude", this._source_exclude);
 			return this;
 		}
 		
@@ -4186,7 +4226,7 @@ namespace Elasticsearch.Net
 		public MultiGetRequestParameters SourceInclude(params string[] source_include)
 		{
 			this._source_include = source_include.Select(f=>(object)f);
-			this.AddQueryString("source_include", this._source_include);
+			this.AddQueryString("_source_include", this._source_include);
 			return this;
 		}
 		
@@ -4596,7 +4636,7 @@ namespace Elasticsearch.Net
 		public NodesHotThreadsRequestParameters ThreadType(ThreadType thread_type)
 		{
 			this._thread_type = thread_type;
-			this.AddQueryString("thread_type", this._thread_type);
+			this.AddQueryString("type", this._thread_type);
 			return this;
 		}
 		

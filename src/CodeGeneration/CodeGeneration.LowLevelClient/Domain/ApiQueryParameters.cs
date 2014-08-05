@@ -5,6 +5,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 {
 	public class ApiQueryParameters
 	{
+		public string OriginalQueryStringParamName { get; set; }
+		public string DeprecatedInFavorOf { get; set; }
 		public string Type { get; set; }
 		public string Description { get; set; }
 		public IEnumerable<string> Options { get; set; }
