@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Filter Facet
 menusection: facets
 menuitem: filter
 ---

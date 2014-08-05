@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Highlighting
 menusection: search
 menuitem: highlighting
 ---

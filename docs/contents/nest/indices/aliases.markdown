@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Aliases
 menusection: indices
 menuitem: aliases
 ---

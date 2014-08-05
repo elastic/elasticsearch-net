@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Delete By Query
 menusection: core
 menuitem: delete-by-query
 ---

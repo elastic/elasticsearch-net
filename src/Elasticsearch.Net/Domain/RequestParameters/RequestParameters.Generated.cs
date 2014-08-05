@@ -2828,12 +2828,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-types-exists.html
 	///</pre>
 	///</summary>
-	public class IndicesExistsTypeRequestParameters : FluentRequestParameters<IndicesExistsTypeRequestParameters> 
+	public class TypeExistsRequestParameters : FluentRequestParameters<TypeExistsRequestParameters> 
 	{
 		
 		internal bool _ignore_unavailable { get; set; }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesExistsTypeRequestParameters IgnoreUnavailable(bool ignore_unavailable)
+		public TypeExistsRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
 			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
@@ -2843,7 +2843,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _allow_no_indices { get; set; }
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesExistsTypeRequestParameters AllowNoIndices(bool allow_no_indices)
+		public TypeExistsRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
 			this.AddQueryString("allow_no_indices", this._allow_no_indices);
@@ -2853,7 +2853,7 @@ namespace Elasticsearch.Net
 		
 		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesExistsTypeRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
+		public TypeExistsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -2863,7 +2863,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _local { get; set; }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndicesExistsTypeRequestParameters Local(bool local)
+		public TypeExistsRequestParameters Local(bool local)
 		{
 			this._local = local;
 			this.AddQueryString("local", this._local);

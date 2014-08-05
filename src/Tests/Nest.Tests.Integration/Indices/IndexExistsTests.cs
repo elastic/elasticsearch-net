@@ -3,7 +3,7 @@
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class ExistsTest : IntegrationTests
+	public class IndexExistsTest : IntegrationTests
 	{
 		[Test]
 		public void ShouldNotExist()

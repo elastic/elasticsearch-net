@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Cluster Settings
 menusection: cluster
 menuitem: update-settings
 ---

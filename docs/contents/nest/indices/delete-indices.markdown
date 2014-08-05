@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Delete Indices
 menusection: indices
 menuitem: delete-indices
 ---

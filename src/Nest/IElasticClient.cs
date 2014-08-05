@@ -1228,5 +1228,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest AliasRequest);
+
+		/// <inheritdoc />
+		IExistsResponse TypeExists(Func<TypeExistsDescriptor, TypeExistsDescriptor> selector);
+
+		/// <inheritdoc />
+		IExistsResponse TypeExists(ITypeExistsRequest TypeRequest);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> TypeExistsAsync(Func<TypeExistsDescriptor, TypeExistsDescriptor> selector);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest TypeRequest);
 	}
 }

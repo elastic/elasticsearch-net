@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Refresh
 menusection: indices
 menuitem: refresh
 ---

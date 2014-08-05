@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Segments
 menusection: indices
 menuitem: segments
 ---

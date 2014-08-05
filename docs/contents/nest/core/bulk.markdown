@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Bulk
 menusection: core
 menuitem: bulk
 ---

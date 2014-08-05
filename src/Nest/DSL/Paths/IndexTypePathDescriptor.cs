@@ -89,6 +89,7 @@ namespace Nest
 			IndexTypePathRouteParameters.SetRouteParameters<TParameters, T>(this, settings, pathInfo);
 		}
 	}
+
 	/// <summary>
 	/// Provides a base for descriptors that need to describe a path in the form of 
 	/// <pre>
@@ -96,11 +97,10 @@ namespace Nest
 	/// </pre>
 	/// Where neither parameter is optional
 	/// </summary>
-	public abstract class IndexTypePathDescriptor<TDescriptor, TParameters, T> 
+	public abstract class IndexTypePathDescriptor<TDescriptor, TParameters> 
 		: BasePathDescriptor<TDescriptor, TParameters>, IIndexTypePath<TParameters>
-		where TDescriptor : IndexTypePathDescriptor<TDescriptor, TParameters, T>, new()
+		where TDescriptor : IndexTypePathDescriptor<TDescriptor, TParameters>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
-		where T : class
 	{
 		private IIndexTypePath<TParameters> Self { get { return this;  } }
 
@@ -145,8 +145,32 @@ namespace Nest
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
+			IndexTypePathRouteParameters.SetRouteParameters<TParameters>(this, settings, pathInfo);
+		}
+
+	}
+
+	/// <summary>
+	/// Provides a base for descriptors that need to describe a path in the form of 
+	/// <pre>
+	///	/{index}/{type}
+	/// </pre>
+	/// Where neither parameter is optional
+	/// </summary>
+	public abstract class IndexTypePathDescriptor<TDescriptor, TParameters, T> 
+		: IndexTypePathDescriptor<TDescriptor, TParameters>
+		where TDescriptor : IndexTypePathDescriptor<TDescriptor, TParameters, T>, new()
+		where TParameters : FluentRequestParameters<TParameters>, new()
+		where T : class
+	{
+		private IIndexTypePath<TParameters> Self { get { return this;  } }
+
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		{
 			IndexTypePathRouteParameters.SetRouteParameters<TParameters, T>(this, settings, pathInfo);
 		}
 
 	}
+
 }
+

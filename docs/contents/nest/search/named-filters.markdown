@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Named Filters
 menusection: search
 menuitem: named-filters
 ---

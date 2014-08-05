@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: More Like This
 menusection: core
 menuitem: more-like-this
 ---

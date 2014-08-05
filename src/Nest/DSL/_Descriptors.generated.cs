@@ -2735,13 +2735,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-types-exists.html
 	///</pre>
 	///</summary>
-	public partial class IndicesExistsTypeDescriptor  : BaseRequest<IndicesExistsTypeRequestParameters>
+	public partial class TypeExistsDescriptor 
 	{
 		
 	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesExistsTypeDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public TypeExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -2749,7 +2749,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesExistsTypeDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public TypeExistsDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -2757,7 +2757,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesExistsTypeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		public TypeExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2765,16 +2765,10 @@ namespace Nest
 		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndicesExistsTypeDescriptor Local(bool local = true)
+		public TypeExistsDescriptor Local(bool local = true)
 		{
 			this.Request.RequestParameters.Local(local);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesExistsTypeRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

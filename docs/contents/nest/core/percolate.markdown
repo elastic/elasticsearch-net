@@ -1,54 +1,49 @@
 ---
 template: layout.jade
-title: Connecting
+title: Percolate
 menusection: core
 menuitem: percolate
 ---
 
 
 # Percolation
-The percolator allows to register queries against an index, and then send percolate requests which include a doc, and getting back the queries that match on that doc out of the set of registered queries. 
+The percolator allows to register queries against an index, then send percolate requests which include a doc, and get back the queries that match on that doc out of the set of registered queries. 
 
-Percolate is a complex but awesome Elasticsearch feature, so be sure to read the [official documentation](http://www.elasticsearch.org/guide/reference/api/percolate/)
+Percolate is a complex but awesome Elasticsearch feature, so be sure to read the [official documentation](http://www.elasticsearch.org/guide/reference/api/percolate/).
 
-# Register a percolator
+## Register a Percolator
 
-	var r = c.RegisterPercolator<ElasticSearchProject>(p => p
-		.Name(name)
+	client.RegisterPercolator<ElasticsearchProject>("my-percolator", p => p
 		.Query(q => q
-			.Term(f => f.Name, "elasticsearch.pm")
+			.Term(f => f.Name, "NEST")
 		)
 	);
 
-# Percolate a document
+## Percolate a Document
 
-	var r = c.Percolate<ElasticSearchProject>(p=>p.Object(new ElasticSearchProject()
+	var project = new ElasticsearchProject
 	{
-		Name = "elasticsearch.pm",
-		Country = "netherlands",
-		LOC = 100000,
-	}));
-	Assert.True(r.IsValid);
-	Assert.True(r.OK);
-	Assert.NotNull(r.Matches);
-	Assert.True(r.Matches.Contains(name));
+		Id = 1,
+		Name = "NEST",
+		Country = "Netherlands"
+	};
 
-# Unregister a percolator
+	var result = client.Percolate<ElasticsearchProject>(p => p.Document(project));
 
-	var re = c.UnregisterPercolator<ElasticSearchProject>(name);
+`result.Matches` will contain any percolators that matched the given document `project`.
 
-# Percolate from a bulk index action
+## Unregister a Percolator
 
-	var descriptor = new BulkDescriptor();
-	// match against any doc
-	descriptor.Index<ElasticSearchProject>(i => i
-		.Object(new ElasticSearchProject { Id = 2, Country = "netherlands" })
-		.Percolate("*") // match on any percolated docs
+	client.UnregisterPercolator<ElasticsearchProject>("my-percolator");
+
+## Percolate from a Bulk index action
+
+It's also possible to percolate while bulk indexing:
+
+	client.Bulk(b => b
+		.Index<ElasticsearchProject>(i => i
+			.Document(new ElasticsearchProject { Id = 1, Name = "NEST" })
+			.Percolate("*") // Match on any percolated docs
+		)
 	);
-
-	// no percolate requested this time
-	descriptor.Index<ElasticSearchProject>(i => i
-		.Object(new ElasticSearchProject { Id = 3, Country = "netherlands" })
-	);
-	this._client.Bulk(descriptor);
 

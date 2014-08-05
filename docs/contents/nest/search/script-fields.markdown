@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Script Fields
 menusection: search
 menuitem: script-fields
 ---

@@ -98,6 +98,7 @@
     <Compile Include="ConvenienceExtensions\GetManyExtensions.cs" />
     <Compile Include="ConvenienceExtensions\CreateIndexExtensions.cs" />
     <Compile Include="ConvenienceExtensions\OpenCloseIndexExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\ExistsExtensions.cs" />
     <Compile Include="ConvenienceExtensions\ScrollExtensions.cs" />
     <Compile Include="ConvenienceExtensions\SerializerExtensions.cs" />
     <Compile Include="ConvenienceExtensions\SourceExtensions.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="DSL\GetAliasDescriptor.cs" />
     <Compile Include="DSL\AliasExistsDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalNamePathDescriptor.cs" />
+    <Compile Include="DSL\TypeExistsDescriptor.cs" />
     <Compile Include="DSL\Query\Functions\FieldValueFactorDescriptor.cs" />
     <Compile Include="DSL\Query\GeoShapeMultiPointQueryDescriptor.cs" />
     <Compile Include="DSL\Query\GeoShapeMultiPolygonQueryDescriptor.cs" />
@@ -224,6 +226,7 @@
     <Compile Include="ElasticClient-AliasExists.cs" />
     <Compile Include="ElasticClient-ClusterSettings.cs" />
     <Compile Include="ElasticClient-DeleteIndex.cs" />
+    <Compile Include="ElasticClient-TypeExists.cs" />
     <Compile Include="Enums\NormsLoading.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />

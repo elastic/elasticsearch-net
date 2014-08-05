@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Preference
 menusection: search
 menuitem: preference
 ---

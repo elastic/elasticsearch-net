@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Search
 menusection: core
 menuitem: search
 ---

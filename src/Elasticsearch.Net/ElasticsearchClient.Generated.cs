@@ -12157,16 +12157,20 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesExistsType<T>(string index, string type, Func<IndicesExistsTypeRequestParameters, IndicesExistsTypeRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesExistsType<T>(string index, string type, Func<TypeExistsRequestParameters, TypeExistsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new IndicesExistsTypeRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new TypeExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
 			}
 				
 
@@ -12193,16 +12197,20 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesExistsTypeAsync<T>(string index, string type, Func<IndicesExistsTypeRequestParameters, IndicesExistsTypeRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesExistsTypeAsync<T>(string index, string type, Func<TypeExistsRequestParameters, TypeExistsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new IndicesExistsTypeRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new TypeExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
 			}
 				
 
@@ -12231,16 +12239,20 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesExistsType(string index, string type, Func<IndicesExistsTypeRequestParameters, IndicesExistsTypeRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesExistsType(string index, string type, Func<TypeExistsRequestParameters, TypeExistsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new IndicesExistsTypeRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new TypeExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
 			}
 				
 
@@ -12269,16 +12281,20 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsTypeAsync(string index, string type, Func<IndicesExistsTypeRequestParameters, IndicesExistsTypeRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesExistsTypeAsync(string index, string type, Func<TypeExistsRequestParameters, TypeExistsRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new IndicesExistsTypeRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new TypeExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
 			}
 				
 
