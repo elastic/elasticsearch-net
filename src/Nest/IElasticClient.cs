@@ -1218,6 +1218,18 @@ namespace Nest
 		Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest clusterSettingsRequest = null);
 
 		/// <inheritdoc />
+		IExistsResponse AliasExists(Func<AliasExistsDescriptor, AliasExistsDescriptor> selector);
+
+		/// <inheritdoc />
+		IExistsResponse AliasExists(IAliasExistsRequest AliasRequest);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> AliasExistsAsync(Func<AliasExistsDescriptor, AliasExistsDescriptor> selector);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest AliasRequest);
+
+		/// <inheritdoc />
 		IExistsResponse TypeExists(Func<TypeExistsDescriptor, TypeExistsDescriptor> selector);
 
 		/// <inheritdoc />
