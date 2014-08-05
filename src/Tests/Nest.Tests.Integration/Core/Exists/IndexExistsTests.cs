@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Nest.Tests.Integration.Indices
+namespace Nest.Tests.Integration.Core.Exists
 {
 	[TestFixture]
 	public class IndexExistsTest : IntegrationTests
