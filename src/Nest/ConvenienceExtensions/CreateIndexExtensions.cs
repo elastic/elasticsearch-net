@@ -32,7 +32,7 @@ namespace Nest
 		/// <param name="client"></param>
 		/// <param name="index">The name of the index to be created</param>
 		/// <param name="createIndexSelector">A descriptor that further describes the parameters for the create index operation</param>
-		[Obsolete]
+		[Obsolete("Scheduled to be removed in 2.0, please use CreateIndex instead.")]
 		public static IIndicesOperationResponse CreatIndex(this IElasticClient client, string index, 
 			Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector = null )
 		{
