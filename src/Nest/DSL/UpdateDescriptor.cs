@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IUpdateRequest<TDocument, TPartialDocument> : IDocumentOptionalPath<UpdateRequestParameters>
+	public interface IUpdateRequest<TDocument,TPartialDocument> : IDocumentOptionalPath<UpdateRequestParameters>
 		where TDocument : class
 		where TPartialDocument : class 
 	{
