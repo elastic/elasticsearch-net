@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Nest.Obsolete
+namespace Nest
 {
 	// THESE CLASSES HAD BEEN GENERATED ALREADY BUT NOT EXPOSED THROUGH THE CLIENT
 	// WHILE ADDING THERE RESPECTIVE API's TO THE CLIENT WE RENAMED THEM TO BETTER SUITED NAMES
@@ -32,13 +32,10 @@ namespace Nest.Obsolete
 		public IndicesExistsTypeRequest(IndexNameMarker index, TypeNameMarker typeNameMarker) : base(index, typeNameMarker) { }
 	}
 
-	//might not be a bad version of the class to keep around
-	public class ExplainRequest : ExplainRequest<object> {
-		public ExplainRequest(string id) : base(id) { }
-
-		public ExplainRequest(long id) : base(id) { }
-
-		public ExplainRequest(object document) : base(document) { }
+	
+	[Obsolete("Scheduled to be removed in 2.0, use the generic variant of this class instead")]
+	public class ExplainDescriptor : ExplainDescriptor<object>
+	{
+		
 	}
-
 }
