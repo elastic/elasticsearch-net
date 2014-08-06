@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Elasticsearch.Net.Connection.Configuration;
 
-namespace Elasticsearch.Net.Obsolete
+namespace Elasticsearch.Net
 {
 	using IndicesExistsAliasSelector = Func<IndicesExistsAliasRequestParameters, IndicesExistsAliasRequestParameters>;
 	
