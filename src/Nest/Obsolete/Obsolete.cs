@@ -38,4 +38,10 @@ namespace Nest
 	{
 		
 	}
+
+	[Obsolete("Scheduled to be removed in 2.0, use MultiPercolateDescriptor instead")]
+	public class MpercolateDescriptor : MultiPercolateDescriptor { }
+
+	[Obsolete("Scheduled to be removed in 2.0, use MultiPercolateRequest instead")]
+	public class MpercolateRequest : MultiPercolateRequest {}
 }
