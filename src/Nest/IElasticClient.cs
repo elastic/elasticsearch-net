@@ -388,7 +388,11 @@ namespace Nest
 		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
 		/// <param name="object">The object to percolator</param>
 		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
+		[Obsolete("Scheduled to be removed in 2.0 please use the overload takes a func (descriptor=>descriptor)")]
 		IPercolateCountResponse PercolateCount<T>(T @object, Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
+			where T : class;
+
+		IPercolateCountResponse PercolateCount<T>(Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector)
 			where T : class;
 
 		/// <inheritdoc />
@@ -396,7 +400,11 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
+		[Obsolete("Scheduled to be removed in 2.0 please use the overload takes a func (descriptor=>descriptor)")]
 		Task<IPercolateCountResponse> PercolateCountAsync<T>(T @object, Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
+			where T : class;
+
+		Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
 			where T : class;
 
 		/// <inheritdoc />
@@ -1256,5 +1264,17 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest explainRequest)
 			where T: class;
+
+		/// <inheritdoc />
+		IMultiPercolateResponse MultiPercolate(Func<MultiPercolateDescriptor, MultiPercolateDescriptor> multiPercolateSelector);
+
+		/// <inheritdoc />
+		IMultiPercolateResponse MultiPercolate(IMultiPercolateRequest multiRequest);
+
+		/// <inheritdoc />
+		Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, MultiPercolateDescriptor> multiPercolateSelector);
+
+		/// <inheritdoc />
+		Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest multiPercolateRequest);
 	}
 }

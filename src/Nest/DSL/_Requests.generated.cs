@@ -3847,7 +3847,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
-	public partial class MpercolateRequest  : BasePathRequest<MpercolateRequestParameters>
+	public partial class MultiPercolateRequest 
 			{
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3873,12 +3873,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MpercolateRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		

@@ -4257,13 +4257,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
-	public partial class MpercolateDescriptor  : BaseRequest<MpercolateRequestParameters>
+	public partial class MultiPercolateDescriptor 
 	{
 		
 	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public MpercolateDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public MultiPercolateDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -4271,7 +4271,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public MpercolateDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public MultiPercolateDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -4279,16 +4279,10 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public MpercolateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		public MultiPercolateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MpercolateRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

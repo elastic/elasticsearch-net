@@ -15,6 +15,8 @@ namespace Nest
 
 		string SerializeMultiSearch(IMultiSearchRequest multiSearchRequest);
 
+		string SerializeMultiPercolate(IMultiPercolateRequest multiPercolateRequest);
+
 		T DeserializeInternal<T>(Stream stream, JsonConverter converter);
 	}
 }

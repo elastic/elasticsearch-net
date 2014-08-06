@@ -1,8 +1,6 @@
-﻿using Exortech.NetReflector;
-
+﻿
 namespace Elasticsearch.Net.Connection.Thrift.Transport
 {
-	[ReflectorType("SocketSettings")]
 	public class TSocketSettings
 	{
 		protected bool Equals(TSocketSettings other)
@@ -33,19 +31,14 @@ namespace Elasticsearch.Net.Connection.Thrift.Transport
 			ConnectTimeout = 3000
 		};
 
-		[ReflectorProperty("SendBufferSize", InstanceType = typeof(int), Required = false)]
 		public int SendBufferSize { get; set; }
 
-		[ReflectorProperty("ReceiveBufferSize", InstanceType = typeof(int), Required = false)]
 		public int ReceiveBufferSize { get; set; }
 
-		[ReflectorProperty("SendTimeout", InstanceType = typeof(int), Required = false)]
 		public int SendTimeout { get; set; }
 
-		[ReflectorProperty("ReceiveTimeout", InstanceType = typeof(int), Required = false)]
 		public int ReceiveTimeout { get; set; }
 
-		[ReflectorProperty("ConnectTimeout", InstanceType = typeof(int), Required = false)]
 		public int ConnectTimeout { get; set; }
 
 		public override bool Equals(object obj)
