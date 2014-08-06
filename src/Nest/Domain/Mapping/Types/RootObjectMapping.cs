@@ -26,6 +26,9 @@ namespace Nest
 		[JsonProperty("numeric_detection")]
 		public bool? NumericDetection { get; set; }
 
+		[JsonProperty("transform")]
+		[JsonConverter(typeof(MappingTransformConverter))]
+		public IList<MappingTransform> Transform { get; set; }
 
 		//Special fields (From the documentation i cannot see that these also would apply to the base object mapping class
 

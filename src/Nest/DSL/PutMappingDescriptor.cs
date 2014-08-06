@@ -204,6 +204,17 @@ namespace Nest
 			Self.Mapping.NumericDetection = detect;
 			return this;
 		}
+
+		public PutMappingDescriptor<T> Transform(Func<MappingTransformDescriptor, MappingTransformDescriptor> mappingTransformSelector)
+		{
+			mappingTransformSelector.ThrowIfNull("mappingTransformSelector");
+			var transformDescriptor = mappingTransformSelector(new MappingTransformDescriptor());
+			if (Self.Mapping.Transform == null)
+				Self.Mapping.Transform = new List<MappingTransform>();
+			Self.Mapping.Transform.Add(transformDescriptor._mappingTransform);
+			return this;
+		}
+
 		public PutMappingDescriptor<T> IdField(Func<IdFieldMappingDescriptor, IIdFieldMapping> idMapper)
 		{
 			idMapper.ThrowIfNull("idMapper");

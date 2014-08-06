@@ -106,6 +106,7 @@
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
     <Compile Include="Core\Explain\ExplainTests.cs" />
     <Compile Include="Core\Exists\AliasExists.cs" />
+    <Compile Include="Core\Map\Mapping\MappingTransformTests.cs" />
     <Compile Include="Core\Repository\RestoreTests.cs" />
     <Compile Include="Core\Repository\CreateRepositoryTests.cs" />
     <Compile Include="Core\ClearScroll\ClearScrollTests.cs" />

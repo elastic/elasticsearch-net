@@ -181,6 +181,7 @@
     <None Include="Core\Map\Properties\MultiFieldPropertyWithJustNamePath.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Core\Map\Transform\MappingTansformTests.cs" />
     <Compile Include="Core\Scroll\ScrollRequestTests.cs" />
     <Compile Include="Core\Domain\Connection\ConnectionTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
@@ -576,6 +577,8 @@
     <None Include="Core\Map\MetaField\MetaFieldSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Map\Transform\MultipleTransforms.json" />
+    <None Include="Core\Map\Transform\SingleTransform.json" />
     <None Include="Core\Map\TtlField\TtlFieldSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
