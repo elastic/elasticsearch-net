@@ -22,6 +22,7 @@ namespace Nest
 		public static void Update<T>(ElasticsearchPathInfo<PercolateCountRequestParameters> pathInfo, IPercolateCountRequest<T> request)
 			where T : class
 		{
+			pathInfo.Id = request.Id;
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 		}
 	}

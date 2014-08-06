@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -32,7 +33,20 @@ namespace Nest
 		/// The individual error for separate requests on the _mpercolate API
 		/// </summary>
 		[JsonProperty(PropertyName = "error")]
-		public string Error { get; internal set; }
+		internal string Error { get; set; }
+
+		public override ElasticsearchServerError ServerError
+		{
+			get
+			{
+				if (this.Error.IsNullOrEmpty()) return base.ServerError;
+				return new ElasticsearchServerError
+				{
+					Error = this.Error,
+					Status = 500
+				};
+			}
+		}
 	}
 
 	[JsonObject]

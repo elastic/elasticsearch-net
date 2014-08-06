@@ -10,10 +10,10 @@ using Elasticsearch.Net;
 namespace Nest.Tests.Integration.Core.MultiPercolate
 {
 	[TestFixture]
-	public class MultiPercolateTests : IntegrationTests
+	public class PercolateTests : IntegrationTests
 	{
 		[Test]
-		public void MultiPercolate_ReturnsExpectedResults()
+		public void Percolate_ReturnsExpectedResults()
 		{
 
 			//lets start fresh using a new index
@@ -52,52 +52,41 @@ namespace Nest.Tests.Integration.Core.MultiPercolate
 			
 
 			//Now we kick of multiple percolations
-			var multiPercolateResponse = this.Client.MultiPercolate(mp => mp
 				//provding document in the percolate request 
-				.Percolate<ElasticsearchProject>(perc=>perc
+			var percolateResponse = this.Client.Percolate<ElasticsearchProject>(perc=>perc
 					.Index(indexName)
 					.Document(projects.First())
-				)
+			);
 				//providing an existing document
-				.Percolate<ElasticsearchProject>(perc=>perc
+			var existingResponse = this.Client.Percolate<ElasticsearchProject>(perc=>perc
 					.Index(indexName)
 					.Id(projects.Last().Id)
-				)
+			);
 				//do a count percolation but force it to only
 				//run on two of the 10 percolators
-				.Count<ElasticsearchProject>(cp=>cp
-					.Id(projects.Last().Id)
-					.Index(indexName)
-					.Query(ff=>
-						ff.Term("order", 3)
-						|| ff.Term("order", 4)
-					)
-				)
-				//Force an error by providing a bogus indexname
-				.Percolate<ElasticsearchProject>(perc=>perc
-					.Index(indexName + "bogus!")
-					.Id(projects.Last().Id)
+			var countResponse = this.Client.PercolateCount<ElasticsearchProject>(cp=>cp
+				.Id(projects.Last().Id)
+				.Index(indexName)
+				.Query(ff=>
+					ff.Term("order", 3)
+					|| ff.Term("order", 4)
 				)
 			);
+				//Force an error by providing a bogus indexname
+			var errorResponse = this.Client.Percolate<ElasticsearchProject>(perc => perc
+					.Index(indexName + "bogus!")
+					.Id(projects.Last().Id)
+			);
 
-			multiPercolateResponse.IsValid.Should().BeTrue();
 
-			var percolateResponses = multiPercolateResponse.Responses.ToList();
-			percolateResponses.Should().NotBeEmpty().And.HaveCount(4);
-
-			var percolateResponse = percolateResponses[0];
 			percolateResponse.Total.Should().Be(10);
 			percolateResponse.Matches.Should().HaveCount(10);
 
-			var existingResponse = percolateResponses[1];
 			existingResponse.Total.Should().Be(10);
 			existingResponse.Matches.Should().HaveCount(10);
 
-			var countResponse = percolateResponses[2];
 			countResponse.Total.Should().Be(2);
-			countResponse.Matches.Should().BeNull();
 
-			var errorResponse = percolateResponses[3];
 			errorResponse.Total.Should().Be(0);
 			errorResponse.ServerError.Error.Should().NotBeNullOrWhiteSpace();
 

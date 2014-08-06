@@ -9,7 +9,6 @@ namespace Nest
 	public interface IPercolateOperation
 	{
 
-		[JsonProperty("id")]
 		string Id { get; set; }
 
 		[JsonProperty(PropertyName = "size")]

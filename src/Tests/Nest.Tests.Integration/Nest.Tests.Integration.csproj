@@ -107,6 +107,7 @@
     <Compile Include="Core\Explain\ExplainTests.cs" />
     <Compile Include="Core\Exists\AliasExists.cs" />
     <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
+    <Compile Include="Core\Percolate\PercolateTests.cs" />
     <Compile Include="Core\Repository\RestoreTests.cs" />
     <Compile Include="Core\Repository\CreateRepositoryTests.cs" />
     <Compile Include="Core\ClearScroll\ClearScrollTests.cs" />
