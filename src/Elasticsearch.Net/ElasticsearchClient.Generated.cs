@@ -24707,14 +24707,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MpercolateGet<T>(Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> MpercolateGet<T>(Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -24739,14 +24739,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -24773,14 +24773,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MpercolateGet(Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> MpercolateGet(Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -24807,14 +24807,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -24840,7 +24840,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MpercolateGet<T>(string index, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> MpercolateGet<T>(string index, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
@@ -24848,7 +24848,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -24874,7 +24874,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
@@ -24882,7 +24882,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -24910,7 +24910,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MpercolateGet(string index, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> MpercolateGet(string index, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
@@ -24918,7 +24918,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -24946,7 +24946,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(string index, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(string index, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
@@ -24954,7 +24954,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -24981,7 +24981,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> MpercolateGet<T>(string index, string type, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> MpercolateGet<T>(string index, string type, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -24990,7 +24990,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -25017,7 +25017,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, string type, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, string type, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25026,7 +25026,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -25055,7 +25055,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> MpercolateGet(string index, string type, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> MpercolateGet(string index, string type, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25064,7 +25064,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -25093,7 +25093,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(string index, string type, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(string index, string type, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25102,7 +25102,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -25128,14 +25128,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mpercolate<T>(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Mpercolate<T>(object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate".F();
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -25161,14 +25161,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate".F();
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -25196,14 +25196,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mpercolate(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> Mpercolate(object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate".F();
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -25231,14 +25231,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			var url = "_mpercolate".F();
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -25265,7 +25265,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mpercolate<T>(string index, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Mpercolate<T>(string index, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
@@ -25273,7 +25273,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -25300,7 +25300,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
@@ -25308,7 +25308,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -25337,7 +25337,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mpercolate(string index, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> Mpercolate(string index, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
@@ -25345,7 +25345,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -25374,7 +25374,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(string index, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(string index, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_mpercolate".F(Encoded(index));
@@ -25382,7 +25382,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -25410,7 +25410,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Mpercolate<T>(string index, string type, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Mpercolate<T>(string index, string type, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25419,7 +25419,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -25447,7 +25447,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, string type, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, string type, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25456,7 +25456,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -25486,7 +25486,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Mpercolate(string index, string type, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> Mpercolate(string index, string type, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25495,7 +25495,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 
@@ -25525,7 +25525,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(string index, string type, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(string index, string type, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -25534,7 +25534,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new MpercolateRequestParameters());
+				requestParams = requestParameters(new MultiPercolateRequestParameters());
 			}
 				
 

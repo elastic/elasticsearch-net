@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -24,33 +25,8 @@ namespace Nest.Tests.Integration
 
 			try
 			{
-				var createIndexResult = client.CreateIndex(ElasticsearchConfiguration.DefaultIndex, c => c
-								.NumberOfReplicas(0)
-								.NumberOfShards(1)
-								.AddMapping<ElasticsearchProject>(m => m
-								.MapFromAttributes()
-								.Properties(p => p
-								.String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))))
-								.AddMapping<Person>(m => m.MapFromAttributes())
-								.AddMapping<BoolTerm>(m => m.Properties(pp => pp
-									.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.NotAnalyzed))
-									.String(sm => sm.Name(p => p.Name2).Index(FieldIndexOption.NotAnalyzed))
-								))
-							);
-
-				var createAntotherIndexResult = client.CreateIndex(ElasticsearchConfiguration.DefaultIndex + "_clone", c => c
-					.NumberOfReplicas(0)
-					.NumberOfShards(1)
-					.AddMapping<ElasticsearchProject>(m => m
-					.MapFromAttributes()
-					.Properties(p => p
-					.String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))))
-					.AddMapping<Person>(m => m.MapFromAttributes())
-					.AddMapping<BoolTerm>(m => m.Properties(pp => pp
-						.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.NotAnalyzed))
-						.String(sm => sm.Name(p => p.Name2).Index(FieldIndexOption.NotAnalyzed))
-					))
-				);
+				CreateTestIndex(client, ElasticsearchConfiguration.DefaultIndex);
+				CreateTestIndex(client, ElasticsearchConfiguration.DefaultIndex + "_clone");
 
 				var bulkResponse = client.Bulk(b => b
 					.IndexMany(projects)
@@ -65,6 +41,26 @@ namespace Nest.Tests.Integration
 				throw;
 			}
 
+		}
+
+		public static void CreateTestIndex(IElasticClient client, string indexName)
+		{
+			var createIndexResult = client.CreateIndex(indexName, c => c
+				.NumberOfReplicas(0)
+				.NumberOfShards(1)
+				.AddMapping<ElasticsearchProject>(m => m
+					.MapFromAttributes()
+					.Properties(p => p
+						.String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))
+					)
+				)
+				.AddMapping<Person>(m => m.MapFromAttributes())
+				.AddMapping<BoolTerm>(m => m.Properties(pp => pp
+					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.NotAnalyzed))
+					.String(sm => sm.Name(p => p.Name2).Index(FieldIndexOption.NotAnalyzed))
+					))
+			);
+			createIndexResult.IsValid.Should().BeTrue();
 		}
 
 		[TearDown]

@@ -28,7 +28,7 @@ namespace Nest
 
 		public IElasticsearchResponse ConnectionStatus { get { return ((IResponseWithRequestInformation)this).RequestInformation;  } }
 		
-		public ElasticsearchServerError ServerError
+		public virtual ElasticsearchServerError ServerError
 		{
 			get
 			{
