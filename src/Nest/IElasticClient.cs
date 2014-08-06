@@ -1256,5 +1256,17 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest explainRequest)
 			where T: class;
+
+		/// <inheritdoc />
+		IMultiPercolateResponse MultiPercolate(Func<MultiPercolateDescriptor, MultiPercolateDescriptor> multiPercolateSelector);
+
+		/// <inheritdoc />
+		IMultiPercolateResponse MultiPercolate(IMultiPercolateRequest multiRequest);
+
+		/// <inheritdoc />
+		Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, MultiPercolateDescriptor> multiPercolateSelector);
+
+		/// <inheritdoc />
+		Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest multiPercolateRequest);
 	}
 }

@@ -27,7 +27,12 @@ namespace Nest
 		public int Took { get; internal set; }
 		[JsonProperty(PropertyName = "total")]
 		public long Total { get; internal set; }
-	
+		
+		/// <summary>
+		/// The individual error for separate requests on the _mpercolate API
+		/// </summary>
+		[JsonProperty(PropertyName = "error")]
+		public string Error { get; internal set; }
 	}
 
 	[JsonObject]

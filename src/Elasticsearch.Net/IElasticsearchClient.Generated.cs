@@ -13291,7 +13291,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> MpercolateGet<T>(Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> MpercolateGet<T>(Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_mpercolate
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -13308,7 +13308,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_mpercolate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -13327,7 +13327,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> MpercolateGet(Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> MpercolateGet(Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_mpercolate
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -13346,7 +13346,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_mpercolate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -13364,7 +13364,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> MpercolateGet<T>(string index, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> MpercolateGet<T>(string index, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_mpercolate
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -13382,7 +13382,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_mpercolate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -13402,7 +13402,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> MpercolateGet(string index, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> MpercolateGet(string index, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_mpercolate
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -13422,7 +13422,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(string index, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(string index, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/{type}/_mpercolate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -13441,7 +13441,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> MpercolateGet<T>(string index, string type, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> MpercolateGet<T>(string index, string type, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/{type}/_mpercolate
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -13460,7 +13460,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, string type, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, string type, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/{type}/_mpercolate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -13481,7 +13481,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> MpercolateGet(string index, string type, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> MpercolateGet(string index, string type, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/{type}/_mpercolate
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -13502,7 +13502,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(string index, string type, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> MpercolateGetAsync(string index, string type, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_mpercolate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -13520,7 +13520,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> Mpercolate<T>(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> Mpercolate<T>(object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_mpercolate
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -13538,7 +13538,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> MpercolateAsync<T>(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> MpercolateAsync<T>(object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_mpercolate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -13558,7 +13558,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> Mpercolate(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> Mpercolate(object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_mpercolate
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -13578,7 +13578,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_mpercolate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -13597,7 +13597,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> Mpercolate<T>(string index, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> Mpercolate<T>(string index, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_mpercolate
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -13616,7 +13616,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_mpercolate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -13637,7 +13637,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> Mpercolate(string index, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> Mpercolate(string index, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_mpercolate
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -13658,7 +13658,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(string index, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(string index, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/{type}/_mpercolate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -13678,7 +13678,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> Mpercolate<T>(string index, string type, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> Mpercolate<T>(string index, string type, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/{type}/_mpercolate
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -13698,7 +13698,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, string type, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, string type, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/{type}/_mpercolate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -13720,7 +13720,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> Mpercolate(string index, string type, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> Mpercolate(string index, string type, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/{type}/_mpercolate
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -13742,7 +13742,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(string index, string type, object body, Func<MpercolateRequestParameters, MpercolateRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> MpercolateAsync(string index, string type, object body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_msearch
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
