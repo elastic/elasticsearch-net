@@ -26,7 +26,7 @@ namespace Nest.Tests.Unit.Core.Map.Transform
 		}
 
 		[Test]
-		public void MultipleTransformsTest()
+		public void MultipleTransforms()
 		{
 			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Transform(t => t
@@ -36,6 +36,7 @@ namespace Nest.Tests.Unit.Core.Map.Transform
 					.Script("ctx._source['foo'] = ctx._source['bar'];")
 				)
 			);
+			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
 		}
 	}
 }
