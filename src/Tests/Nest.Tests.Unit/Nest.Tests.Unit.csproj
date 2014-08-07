@@ -577,8 +577,12 @@
     <None Include="Core\Map\MetaField\MetaFieldSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Core\Map\Transform\MultipleTransforms.json" />
-    <None Include="Core\Map\Transform\SingleTransform.json" />
+    <None Include="Core\Map\Transform\MultipleTransforms.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Transform\SingleTransform.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Map\TtlField\TtlFieldSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
