@@ -39,7 +39,7 @@ namespace Nest
         }
     }
 
-    public partial class ExplainRequest<T> : DocumentPathBase<ExplainRequestParameters, T>, IExplainRequest<T>
+	public partial class ExplainRequest<T> : DocumentPathBase<ExplainRequestParameters, T>, IExplainRequest<T>
         where T : class
     {
 	    public ExplainRequest(string id) : base(id) { } 
