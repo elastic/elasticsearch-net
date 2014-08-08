@@ -182,6 +182,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
+    <Compile Include="Core\Map\Transform\MappingTansformTests.cs" />
     <Compile Include="Core\Scroll\ScrollRequestTests.cs" />
     <Compile Include="Core\Domain\Connection\ConnectionTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
@@ -576,6 +577,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Map\MetaField\MetaFieldSerializes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Transform\MultipleTransforms.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Transform\SingleTransform.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Map\TtlField\TtlFieldSerializes.json">

@@ -139,6 +139,7 @@
     <Compile Include="Domain\Analysis\TokenFilter\UppercaseTokenFilter.cs" />
     <Compile Include="Domain\Bulk\IBulkOperation.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\MappingTransformDescriptor.cs" />
     <Compile Include="Domain\Mapping\SpecialFields\ISpecialField.cs" />
     <Compile Include="Domain\Geometry\CircleGeoShape.cs" />
     <Compile Include="Domain\Geometry\EnvelopeGeoShape.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Domain\Geometry\PointGeoShape.cs" />
     <Compile Include="Domain\Geometry\PolygonGeoShape.cs" />
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
+    <Compile Include="Domain\Mapping\SubMappings\MappingTransform.cs" />
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
     <Compile Include="DSL\Filter\GeoShapeCircleFilterDescriptor.cs" />
@@ -695,6 +697,7 @@
     <Compile Include="DSL\Filter\IdsFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\ExistsFilterDescriptor.cs" />
     <Compile Include="Resolvers\Converters\GeoShapeConverterBase.cs" />
+    <Compile Include="Resolvers\Converters\MappingTransformConverter.cs" />
     <Compile Include="Resolvers\Converters\Queries\GeoShapeQueryJsonReader.cs" />
     <Compile Include="Resolvers\Converters\SimilarityCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\FuzzinessConverter.cs" />
