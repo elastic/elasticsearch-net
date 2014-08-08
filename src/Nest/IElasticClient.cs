@@ -1276,5 +1276,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest multiPercolateRequest);
+
+		/// <inheritdoc />
+		IGetFieldMappingResponse GetFieldMapping<T>(Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
+			where T : class;
+
+		/// <inheritdoc />
+		IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest getFieldMappingRequest);
+
+		/// <inheritdoc />
+		Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest getFieldMappingRequest);
 	}
 }

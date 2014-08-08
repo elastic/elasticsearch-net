@@ -13,7 +13,7 @@ namespace Elasticsearch.Net
 	[Obsolete("Scheduled to be removed in 2.0, renamed to AliasExistsRequestParameters")]
 	public class IndicesExistsAliasRequestParameters : AliasExistsRequestParameters { }
 
-	public static class IndicesExistsAliasClientExtensions
+	public static class IndicesGetFieldMappingClientExtensions
 	{
 		[Obsolete("Scheduled to be removed in 2.0, use the method that takes a Func of AliasExistsRequestParameters")]
 		public static ElasticsearchResponse<T> IndicesExistsAlias<T>(

@@ -14032,7 +14032,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/field/{0}".F(Encoded(field));
@@ -14040,7 +14040,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
@@ -14066,7 +14066,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/field/{0}".F(Encoded(field));
@@ -14074,7 +14074,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
@@ -14102,7 +14102,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMappingForAll(string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMappingForAll(string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/field/{0}".F(Encoded(field));
@@ -14110,7 +14110,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
@@ -14138,7 +14138,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingForAllAsync(string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingForAllAsync(string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			field.ThrowIfNullOrEmpty("field");
 			var url = "_mapping/field/{0}".F(Encoded(field));
@@ -14146,7 +14146,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
@@ -14173,7 +14173,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			field.ThrowIfNullOrEmpty("field");
@@ -14182,7 +14182,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
@@ -14209,7 +14209,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			field.ThrowIfNullOrEmpty("field");
@@ -14218,7 +14218,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
@@ -14247,7 +14247,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMapping(string index, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMapping(string index, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			field.ThrowIfNullOrEmpty("field");
@@ -14256,7 +14256,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
@@ -14285,7 +14285,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingAsync(string index, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingAsync(string index, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			field.ThrowIfNullOrEmpty("field");
@@ -14294,7 +14294,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
@@ -14321,7 +14321,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
@@ -14330,7 +14330,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
@@ -14357,7 +14357,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
@@ -14366,7 +14366,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
@@ -14395,7 +14395,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMappingForAll(string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMappingForAll(string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
@@ -14404,7 +14404,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
@@ -14433,7 +14433,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingForAllAsync(string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingForAllAsync(string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
@@ -14442,7 +14442,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
@@ -14470,7 +14470,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -14480,7 +14480,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
@@ -14508,7 +14508,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -14518,7 +14518,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
@@ -14548,7 +14548,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMapping(string index, string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetFieldMapping(string index, string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -14558,7 +14558,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
@@ -14588,7 +14588,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingAsync(string index, string type, string field, Func<IndicesGetFieldMappingRequestParameters, IndicesGetFieldMappingRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetFieldMappingAsync(string index, string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -14598,7 +14598,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetFieldMappingRequestParameters());
+				requestParams = requestParameters(new GetFieldMappingRequestParameters());
 			}
 				
 
