@@ -7,18 +7,40 @@ menuitem: more-like-this
 
 
 # More Like This
-More like this comes in two flavors, as the [_mlt query type](/query/mlt.html) and as the special `_mlt` API call endpoint. 
 
-The special API can be called from NEST as follows:
+The more like this (mlt) API allows to get documents that are "like" a specified document.
 
-	var result = this._client.MoreLikeThis<ElasticSearchProject>(mlt => mlt
+## Examples
+
+### Fluent Syntax
+
+	var result = client.MoreLikeThis<ElasticsearchProject>(mlt => mlt
 		.Id(1)
-		.Options(o => o
-			.OnFields(p => p.Country, p => p.Content)
-			.MinDocumentFrequency(1)
-		)
-		.Search(s=>s
+		.MltFields(p => p.Country, p => p.Content)
+		.MinDocFreq(1)
+		.Search(s => s
 			.From(0)
-			.Take(20)
+			.Size(20)
 		)
 	);
+
+### Object Initializer Syntax
+
+	var request = new MoreLikeThisRequest<ElasticsearchProject>(1)
+	{
+		MltFields = new PropertyPathMarker[] { "country", "content"},
+		MinDocFreq = 1,
+		Search = new SearchRequest
+		{
+			From = 0,
+			Size = 10
+		}
+	};
+
+	var result = client.MoreLikeThis<ElasticsearchProject>(request);
+
+## Handling the MLT response
+
+`.MoreLikeThis<T>` behaves just like `.Search<T>` in that it also returns an `ISearchResponse<T>`.
+
+See the [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-more-like-this.html) for more information.
