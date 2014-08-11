@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -13,23 +14,27 @@ namespace Elasticsearch.Net.Connection
 		private byte[] _fixedResultBytes = Encoding.UTF8.GetBytes("{ \"USING NEST IN MEMORY CONNECTION\"  : null }");
 		private int _statusCode;
 
-		public InMemoryConnection()
-			: base(new ConnectionConfiguration())
+		public List<Tuple<string, Uri, byte[]>> Requests = new List<Tuple<string, Uri, byte[]>>(); 
+		
+		public bool RecordRequests { get; set;}
+
+		public InMemoryConnection() : base(new ConnectionConfiguration())
 		{
 			
 		}
-		public InMemoryConnection(IConnectionConfigurationValues settings)
-			: base(settings)
+		public InMemoryConnection(IConnectionConfigurationValues settings) : base(settings)
 		{
 			_statusCode = 200;
 		}
 
-		public InMemoryConnection(IConnectionConfigurationValues settings, string fixedResult, int statusCode = 200)
-			: this(settings)
+		public InMemoryConnection(IConnectionConfigurationValues settings, string fixedResult, int statusCode = 200) : this(settings)
 		{
 			_fixedResultBytes = Encoding.UTF8.GetBytes(fixedResult);
 			_statusCode = statusCode;
 		}
+		
+		
+
 
 		protected override ElasticsearchResponse<Stream> DoSynchronousRequest(HttpWebRequest request, byte[] data = null, IRequestConfiguration requestSpecificConfig = null)
 		{
@@ -45,6 +50,12 @@ namespace Elasticsearch.Net.Connection
 			cs.Response = new MemoryStream(_fixedResultBytes);
 			if (this.ConnectionSettings.ConnectionStatusHandler != null)
 				this.ConnectionSettings.ConnectionStatusHandler(cs);
+
+			if (this.RecordRequests)
+			{
+				this.Requests.Add(Tuple.Create(method, request.RequestUri, data));
+			}
+
 			return cs;
 		}
 

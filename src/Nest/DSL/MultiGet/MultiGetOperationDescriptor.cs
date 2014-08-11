@@ -53,6 +53,7 @@ namespace Nest
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Index(string index)
 		{
+			if (index.IsNullOrEmpty()) return this;
 			Self.Index = index;
 			return this;
 		}
@@ -62,6 +63,7 @@ namespace Nest
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Type(string type)
 		{
+			if (type.IsNullOrEmpty()) return this;
 			Self.Type = type;
 			return this;
 		}
@@ -71,6 +73,7 @@ namespace Nest
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Type(Type type)
 		{
+			if (type == null) return this;
 			Self.Type = type;
 			return this;
 		}
