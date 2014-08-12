@@ -14,7 +14,10 @@ namespace Nest.Tests.Integration
 		[SetUp]
 		public static void Setup()
 		{
-			var client = new ElasticClient(ElasticsearchConfiguration.Settings(hostOverride: new Uri("http://localhost:9200")));
+			var client = new ElasticClient(
+				//ElasticsearchConfiguration.Settings(hostOverride: new Uri("http://localhost:9200"))
+				ElasticsearchConfiguration.Settings()
+			);
 
 			//uncomment the next line if you want to see the setup in fiddler too
 			//var client = ElasticsearchConfiguration.Client;
@@ -67,7 +70,7 @@ namespace Nest.Tests.Integration
 		public static void TearDown()
 		{
 			var client = ElasticsearchConfiguration.Client.Value;
-			client.DeleteIndex(di => di.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndexPrefix + "*"));
+			client.DeleteIndex(di => di.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "*"));
 		}
 	}
 }

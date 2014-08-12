@@ -68,7 +68,7 @@ namespace Nest
 		public IEnumerable<TypeNameMarker> Types { get; set; }
 		public IEnumerable<PropertyPathMarker> Fields { get; set; }
 			
-		protected IndicesOptionalTypesOptionalFieldsPathBase(params string[] fields)
+		protected IndicesOptionalTypesOptionalFieldsPathBase(params PropertyPathMarker[] fields)
 		{
 			this.Fields = fields.Select(f=>(PropertyPathMarker)f);
 		}
@@ -89,7 +89,7 @@ namespace Nest
 		public IEnumerable<PropertyPathMarker> Fields { get; set; }
 		public bool AllIndices { get; set; }
 
-		protected IndicesOptionalTypesOptionalFieldsPathBase(params string[] fields)
+		protected IndicesOptionalTypesOptionalFieldsPathBase(params PropertyPathMarker[] fields)
 		{
 			this.Fields = fields.Select(f=>(PropertyPathMarker)f);
 		}
@@ -97,12 +97,6 @@ namespace Nest
 		protected IndicesOptionalTypesOptionalFieldsPathBase(params Expression<Func<T, object>>[] fields)
 		{
 			this.Fields = fields.Select(f=>(PropertyPathMarker)f);
-		}
-
-		protected IndicesOptionalTypesOptionalFieldsPathBase(Func<FluentFieldList<T>, FluentFieldList<T>> fieldsSelector)
-		{
-			fieldsSelector.ThrowIfNull("fieldsSelector");
-			this.Fields = fieldsSelector(new FluentFieldList<T>());
 		}
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
