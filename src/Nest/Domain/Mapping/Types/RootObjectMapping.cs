@@ -51,7 +51,7 @@ namespace Nest
 		public IBoostFieldMapping BoostFieldMapping { get; set; }
 
 		[JsonProperty("_parent")]
-		public ParentTypeMapping Parent { get; set; }
+		public ParentFieldMapping Parent { get; set; }
 
 		[JsonProperty("_routing")]
 		public IRoutingFieldMapping RoutingFieldMapping { get; set; }

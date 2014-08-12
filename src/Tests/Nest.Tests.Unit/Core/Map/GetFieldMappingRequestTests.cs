@@ -15,8 +15,9 @@ namespace Nest.Tests.Unit.Core.Map
 		[Test]
 		public void Descriptor_InferredIndex_InferredType()
 		{
-			var result = this._client.GetFieldMapping<ElasticsearchProject>(m=>m.Fields(p=>p.NestedFollowers.First().LastName));
-			result.ConnectionStatus.RequestUrl.Should().EndWith("/nest_test_data/_mapping/elasticsearchprojects/field/nestedFollowers.lastName");
+			var result = this._client.GetFieldMapping<ElasticsearchProject>(m=>m.Fields(p=>p.NestedFollowers.First().LastName).ExpandWildcards(ExpandWildcards.Open));
+			result.ConnectionStatus.RequestUrl.Should()
+				.EndWith("/nest_test_data/_mapping/elasticsearchprojects/field/nestedFollowers.lastName?expand_wildcards=open");
 		}
 
 		[Test]

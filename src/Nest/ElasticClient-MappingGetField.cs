@@ -62,7 +62,7 @@ namespace Nest
 		private GetFieldMappingResponse DeserializeGetFieldMappingResponse(IElasticsearchResponse response, IGetFieldMappingRequest d, Stream stream)
 		{
 			var dict = response.Success
-				? Serializer.Deserialize<FieldMappings>(stream)
+				? Serializer.Deserialize<IndexFieldMappings>(stream)
 				: null;
 			return new GetFieldMappingResponse(response, dict);
 		}
