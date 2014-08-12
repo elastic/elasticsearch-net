@@ -125,17 +125,21 @@ namespace Nest.Resolvers.Writers
 			}
 		}
 
+		/// <summary>
+		/// Gets attributes on each property to write to the Json Mapping Writter
+		/// </summary>
+		/// <param name="jsonWriter">Existing open JsonWritter object to append results too</param>
 		internal void WriteProperties(JsonWriter jsonWriter)
 		{
 			var properties = this._type.GetProperties();
 			foreach (var p in properties)
 			{
 				var att = ElasticAttributes.Property(p);
-				if (att != null && att.OptOut)
+				if (att != null && att.Any() && att.FirstOrDefault().OptOut)
 					continue;
 
 				var propertyName = this.Infer.PropertyName(p);
-				var type = GetElasticSearchType(att, p);
+				var type = GetElasticSearchType((att != null) ? att.FirstOrDefault() : null, p);
 				
 				if (type == null) //could not get type from attribute or infer from CLR type.
 					continue;
@@ -143,33 +147,74 @@ namespace Nest.Resolvers.Writers
 				jsonWriter.WritePropertyName(propertyName);
 				jsonWriter.WriteStartObject();
 				{
-					if (att == null) //properties that follow can not be inferred from the CLR.
+					if (att != null && att.Count() > 1) //if count > 1 then multi-field property and handle as sub-object
 					{
 						jsonWriter.WritePropertyName("type");
-						jsonWriter.WriteValue(type);
-						//jsonWriter.WriteEnd();
+						jsonWriter.WriteValue("multi_field");
+						jsonWriter.WritePropertyName("fields");
+						jsonWriter.WriteStartObject();
+						{
+							foreach (ElasticPropertyAttribute elasticPropertyAttribute in att) //loop through IEnumberable<IElasticPropertyAttribute>
+							{
+								jsonWriter.WritePropertyName(elasticPropertyAttribute.MultiFieldProperyName ?? propertyName); //if a name is specified use that over the default name of the property. It's possible ot have the same type repeated, but the name is required to be unique
+								jsonWriter.WriteStartObject();
+								{
+									this.WritePropertiesFromAttribute(jsonWriter, elasticPropertyAttribute, p);
+								}
+								jsonWriter.WriteEnd();
+							}
+						}
+						jsonWriter.WriteEnd();
 					}
-					if (att != null)
-						this.WritePropertiesFromAttribute(jsonWriter, att, propertyName, type);
-					if (type == "object" || type == "nested")
-					{
-
-						var deepType = GetUnderlyingType(p.PropertyType);
-						var deepTypeName = this.Infer.TypeName(deepType);
-						var seenTypes = new ConcurrentDictionary<Type, int>(this.SeenTypes);
-						seenTypes.AddOrUpdate(deepType, 0, (t, i) => ++i);
-
-						var newTypeMappingWriter = new TypeMappingWriter(deepType, deepTypeName, this._connectionSettings, MaxRecursion, seenTypes);
-						var nestedProperties = newTypeMappingWriter.MapPropertiesFromAttributes();
-
-						jsonWriter.WritePropertyName("properties");
-						nestedProperties.WriteTo(jsonWriter);
-					}
+					else //no attributes or only 1 attribute
+						this.WritePropertiesFromAttribute(jsonWriter, (att != null) ? att.FirstOrDefault() : null, p);
 				}
 				jsonWriter.WriteEnd();
 			}
 		}
 
+		/// <summary>
+		/// Writes properties defined by each attribute
+		/// </summary>
+		/// <param name="jsonWriter">Existing open JsonWritter object to append results too</param>
+		/// <param name="att">The specific attribute being written</param>
+		/// <param name="p">The specific property being reviewed</param>
+		internal void WritePropertiesFromAttribute(JsonWriter jsonWriter, IElasticPropertyAttribute att, PropertyInfo p)
+		{
+			//get the propertyName & type for the specific attribute being written
+			var propertyName = this.Infer.PropertyName(p);
+			var type = GetElasticSearchType(att, p);
+
+			if (att == null) //properties that follow can not be inferred from the CLR. this is a basic type (string, int, etc.)
+			{
+				jsonWriter.WritePropertyName("type");
+				jsonWriter.WriteValue(type);
+			}
+			else //attributes defined 
+				this.WritePropertiesFromAttribute(jsonWriter, att, propertyName, type);
+
+			if (type == "object" || type == "nested") // the property is a complex type, call MapPropertiesFromAttributes() for child properties
+			{
+				var deepType = GetUnderlyingType(p.PropertyType);
+				var deepTypeName = this.Infer.TypeName(deepType);
+				var seenTypes = new ConcurrentDictionary<Type, int>(this.SeenTypes);
+				seenTypes.AddOrUpdate(deepType, 0, (t, i) => ++i);
+
+				var newTypeMappingWriter = new TypeMappingWriter(deepType, deepTypeName, this._connectionSettings, MaxRecursion, seenTypes);
+				var nestedProperties = newTypeMappingWriter.MapPropertiesFromAttributes();
+
+				jsonWriter.WritePropertyName("properties");
+				nestedProperties.WriteTo(jsonWriter);
+			}
+		}
+
+		/// <summary>
+		/// Takes attributes assigned to a property and handles the writing out of the attributes properties <see cref="WritePropertiesFromAttributeVisitor"/>
+		/// </summary>
+		/// <param name="jsonWriter">Existing open JsonWritter object to append results too<</param>
+		/// <param name="att">The specific attribute being written</param>
+		/// <param name="propertyName">Property Name of the current property</param>
+		/// <param name="type">Type of the current property</param>
 		private void WritePropertiesFromAttribute(JsonWriter jsonWriter, IElasticPropertyAttribute att, string propertyName, string type)
 		{
 			var visitor = new WritePropertiesFromAttributeVisitor(jsonWriter, propertyName, type);

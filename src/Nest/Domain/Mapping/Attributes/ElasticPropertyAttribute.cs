@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	[AttributeUsage(System.AttributeTargets.Property, AllowMultiple = false)]
+	[AttributeUsage(System.AttributeTargets.Property, AllowMultiple = true)]
 	public class ElasticPropertyAttribute : Attribute, IElasticPropertyAttribute
 	{
 		public bool AddSortField { get; set; }
@@ -10,6 +10,8 @@ namespace Nest
 		public bool OptOut { get; set; }
 
 		public string Name { get; set; }
+
+		public string MultiFieldProperyName { get; set; }
 
 		public FieldType Type { get; set; }
 

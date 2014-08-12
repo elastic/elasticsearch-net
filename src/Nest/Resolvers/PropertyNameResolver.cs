@@ -18,16 +18,16 @@ namespace Nest.Resolvers
 	{
 		private static readonly ConcurrentDictionary<Type, ElasticTypeAttribute> CachedTypeLookups =
 			new ConcurrentDictionary<Type, ElasticTypeAttribute>();
-		
-		public static IElasticPropertyAttribute Property(MemberInfo info)
+
+		public static IEnumerable<IElasticPropertyAttribute> Property(MemberInfo info)
 		{
 			var attributes = info.GetCustomAttributes(typeof(IElasticPropertyAttribute), true);
-			if (attributes != null && attributes.Any())
-				return ((IElasticPropertyAttribute)attributes.First());
+			if (attributes.Any())
+				return ((IEnumerable<IElasticPropertyAttribute>)attributes);
 
 			var ignoreAttrutes = info.GetCustomAttributes(typeof(JsonIgnoreAttribute), true);
-			if (ignoreAttrutes != null && ignoreAttrutes.Any())
-				return new ElasticPropertyAttribute { OptOut = true };
+			if (ignoreAttrutes.Any())
+				return new[] {new ElasticPropertyAttribute { OptOut = true }};
 
 			return null;
 		}
@@ -76,8 +76,8 @@ namespace Nest.Resolvers
 			var name = info.Name;
 			var resolvedName = _settings.DefaultPropertyNameInferrer(name);
 			var att = ElasticAttributes.Property(info);
-			if (att != null && !att.Name.IsNullOrEmpty())
-				resolvedName = att.Name;
+			if (att != null && att.Any() != null && !att.First().Name.IsNullOrEmpty())
+				resolvedName = att.First().Name;
 
 			return resolvedName;
 		}
@@ -127,14 +127,14 @@ namespace Nest.Resolvers
 				var resolvedName = this._settings.DefaultPropertyNameInferrer(name);
 
 				var att = ElasticAttributes.Property(expression.Member);
-				if (att != null)
+				if (att != null && att.Any())
 				{
-					properties.Push(att);
+					properties.Push(att.First());
 				}
-				if (att != null && !att.Name.IsNullOrEmpty())
+				if (att != null && att.Any() && !att.First().Name.IsNullOrEmpty())
 				{
 
-					resolvedName = att.Name;
+					resolvedName = att.First().Name;
 				}
 				stack.Push(resolvedName);
 			}
