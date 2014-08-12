@@ -166,6 +166,18 @@ namespace Nest
 			return this;
 		}
 
+		public PutMappingDescriptor<T> IndexField(Func<IndexFieldMappingDescriptor, IndexFieldMappingDescriptor> indexFieldSelector)
+		{
+			Self.Mapping.IndexFieldMapping = indexFieldSelector(new IndexFieldMappingDescriptor());
+			return this;
+		}
+
+		public PutMappingDescriptor<T> SizeField(Func<SizeFieldMappingDescriptor, SizeFieldMappingDescriptor> sizeFieldSelector)
+		{
+			Self.Mapping.SizeFieldMapping = sizeFieldSelector(new SizeFieldMappingDescriptor());
+			return this;
+		}
+
 		public PutMappingDescriptor<T> DisableSizeField(bool disabled = true)
 		{
 			Self.Mapping.SizeFieldMapping = new SizeFieldMapping { Enabled = !disabled };

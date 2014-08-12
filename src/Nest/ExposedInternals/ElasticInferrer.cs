@@ -63,6 +63,12 @@ namespace Nest
 			return name;
 		}
 
+		public string PropertyPaths(IEnumerable<PropertyPathMarker> fields)
+		{
+			if (!fields.HasAny() || fields.All(f=>f.IsConditionless())) return null;
+			return string.Join(",", fields.Select(PropertyPath).Where(f => !f.IsNullOrEmpty()));
+		}
+
 		public string PropertyPath(MemberInfo member)
 		{
 			return member == null ? null : this.PropertyNameResolver.Resolve(member);
@@ -78,7 +84,12 @@ namespace Nest
 					? this.PropertyNameResolver.ResolveToLastToken(marker.Expression)
 					: this.TypeName(marker.Type);
 		}
-
+		
+		public string PropertyNames(IEnumerable<PropertyNameMarker> fields)
+		{
+			if (!fields.HasAny() || fields.All(f=>f.IsConditionless())) return null;
+			return string.Join(",", fields.Select(PropertyName).Where(f => !f.IsNullOrEmpty()));
+		}
 		public string PropertyName(MemberInfo member)
 		{
 			return member == null ? null : this.PropertyNameResolver.ResolveToLastToken(member);
