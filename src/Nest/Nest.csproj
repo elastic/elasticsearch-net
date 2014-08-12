@@ -140,6 +140,7 @@
     <Compile Include="Domain\Bulk\IBulkOperation.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />
     <Compile Include="Domain\Mapping\Descriptors\MappingTransformDescriptor.cs" />
+    <Compile Include="Domain\Mapping\IFieldMapping.cs" />
     <Compile Include="Domain\Mapping\SpecialFields\ISpecialField.cs" />
     <Compile Include="Domain\Geometry\CircleGeoShape.cs" />
     <Compile Include="Domain\Geometry\EnvelopeGeoShape.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\MappingTransform.cs" />
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
+    <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
     <Compile Include="DSL\Filter\GeoShapeCircleFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeMultiLineStringFilterDescriptor.cs" />
@@ -163,9 +165,11 @@
     <Compile Include="DSL\Filter\GeoShapePointFilterDescriptor.cs" />
     <Compile Include="DSL\GetAliasDescriptor.cs" />
     <Compile Include="DSL\AliasExistsDescriptor.cs" />
+    <Compile Include="DSL\GetFieldMappingDescriptor.cs" />
     <Compile Include="DSL\MultiPercolate\IPercolateOperation.cs" />
     <Compile Include="DSL\MultiPercolateDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalNamePathDescriptor.cs" />
+    <Compile Include="DSL\Paths\IndicesOptionalTypesNamePathDecriptor.cs" />
     <Compile Include="DSL\TypeExistsDescriptor.cs" />
     <Compile Include="DSL\Query\Functions\FieldValueFactorDescriptor.cs" />
     <Compile Include="DSL\Query\GeoShapeMultiPointQueryDescriptor.cs" />
@@ -234,6 +238,7 @@
     <Compile Include="ElasticClient-AliasExists.cs" />
     <Compile Include="ElasticClient-ClusterSettings.cs" />
     <Compile Include="ElasticClient-DeleteIndex.cs" />
+    <Compile Include="ElasticClient-MappingGetField.cs" />
     <Compile Include="ElasticClient-MultiPercolate.cs" />
     <Compile Include="ElasticClient-TypeExists.cs" />
     <Compile Include="ElasticClient-Explain.cs" />
@@ -368,7 +373,7 @@
     <Compile Include="Domain\DSL\IPathInfo.cs" />
     <Compile Include="DSL\Paths\IndexNamePathDescriptor.cs" />
     <Compile Include="DSL\Paths\NamePathDescriptor.cs" />
-    <Compile Include="DSL\Paths\IndicesOptionalTypesNamePathDecriptor.cs" />
+    <Compile Include="DSL\Paths\IndicesOptionalTypesOptionalFieldPathDecriptor.cs" />
     <Compile Include="DSL\SegmentsDescriptor.cs" />
     <Compile Include="DSL\RefreshDescriptor.cs" />
     <Compile Include="DSL\OptimizeDescriptor.cs" />

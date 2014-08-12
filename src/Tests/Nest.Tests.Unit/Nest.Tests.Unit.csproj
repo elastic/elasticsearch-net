@@ -181,6 +181,7 @@
     <None Include="Core\Map\Properties\MultiFieldPropertyWithJustNamePath.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Core\Map\GetFieldMappingRequestTests.cs" />
     <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
     <Compile Include="Core\Map\Transform\MappingTansformTests.cs" />
     <Compile Include="Core\Scroll\ScrollRequestTests.cs" />
