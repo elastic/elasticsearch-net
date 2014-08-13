@@ -143,11 +143,11 @@ namespace Nest
 			var typedResponse = new NodesHotThreadsResponse();
 			var plainTextResponse = Encoding.UTF8.GetString(response.ResponseRaw);
 
-			// If the response doesn't contain :::, which is the pattern that delimits
+			// If the response doesn't start with :::, which is the pattern that delimits
 			// each node section in the response, then the response format isn't recognized.
 			// Just return an empty response object. This is especially useful when unit
 			// testing against an in-memory connection where you won't get a real response.
-			if (!plainTextResponse.Contains(":::"))
+			if (!plainTextResponse.StartsWith(":::"))
 				return typedResponse;
 
 			var sections = plainTextResponse.Split(new string[] { ":::" }, StringSplitOptions.RemoveEmptyEntries);
