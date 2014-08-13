@@ -37,6 +37,32 @@ By default NEST will use HTTP to chat with Elasticsearch, alternative implementa
 NEST comes with an Http Connection `HttpConnection`, Thrift Connection `ThriftConnection` 
 and an In-Memory Connection `InMemoryConnection`, that nevers hits Elasticsearch.
 
+You can also roll your own connection if desired by implementing the `IConnection` interface.
+
+## Subclassing existing connection implementations
+
+In addition to implementing your own `IConnection`, the existing `HttpConnection` and `ThriftConnection` are extendible and can be subclassed in order to modify or extend their behavior.
+
+For instance, a common use case is the ability to add client certificates to web requests.  You can subclass `HttpConnection` and override the `CreateHttpWebRequest` method that creates the web request, and add certificates to it like so:
+
+    public class SignedHttpConnection : HttpConnection
+    {
+        private readonly X509CertificateCollection _certificates;
+
+        public SignedHttpConnection(IConnectionConfigurationValues settings, X509CertificateCollection certificates)
+            : base(settings)
+        {
+            _certificates = certificates;
+        }
+
+        protected override HttpWebRequest CreateHttpWebRequest(Uri uri, string method, byte[] data, IRequestConfiguration requestSpecificConfig)
+        {
+            var request = base.CreateHttpWebRequest(uri, method, data, requestSpecificConfig);
+            request.ClientCertificates = _certificates;
+            return request;
+        }
+    }
+
 ## Settings
 
 The `NEST` client can be configured by passing in an `IConnectionSettingsValues` object, which is a sub-interface of 
