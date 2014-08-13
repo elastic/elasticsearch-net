@@ -612,7 +612,23 @@ namespace Nest
 		
 		/// <inheritdoc />
 		Task<INodeStatsResponse> NodesStatsAsync(INodesStatsRequest nodesStatsRequest);
-		
+
+		/// <summary>
+		/// An API allowing to get the current hot threads on each node in the cluster.
+		/// </summary>
+		/// <param name="selector"></param>
+		/// <returns>An optional descriptor to further describe the nodes hot threads operation</returns>
+		INodesHotThreadsResponse NodesHotThreads(Func<NodesHotThreadsDescriptor, NodesHotThreadsDescriptor> selector = null);
+
+		/// <inheritdoc />
+		INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest nodesHotThreadsRequest);
+
+		/// <inheritdoc />
+		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, NodesHotThreadsDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest nodesHotThreadsRequest);
+
 		/// <summary>
 		/// Used to check if the index (indices) exists or not. 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html

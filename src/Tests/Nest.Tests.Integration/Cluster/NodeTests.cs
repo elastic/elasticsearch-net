@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Elasticsearch.Net;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Nest.Tests.Integration.Cluster
@@ -49,6 +50,23 @@ namespace Nest.Tests.Integration.Cluster
 			Assert.IsNotNull(node.Network);
 			Assert.IsNotNull(node.Transport);
 			Assert.IsNotNull(node.HTTP);
+		}
+
+		[Test]
+		public void NodesHotThreads()
+		{
+			var r = this.Client.NodesHotThreads(n => n
+				.Interval("20s")
+				.Snapshots(5)
+				.Threads(5)
+				.ThreadType(ThreadType.Cpu)
+			);
+			
+			r.IsValid.Should().BeTrue();
+			r.HotThreads.Count.Should().BeGreaterOrEqualTo(1);
+			var hotThreadInfo = r.HotThreads.First();
+			hotThreadInfo.Node.Should().NotBeNullOrEmpty();
+			hotThreadInfo.Threads.Count.ShouldBeEquivalentTo(5);
 		}
 	}
 }

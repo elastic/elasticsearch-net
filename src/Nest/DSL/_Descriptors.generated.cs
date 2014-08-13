@@ -4405,7 +4405,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-hot-threads.html
 	///</pre>
 	///</summary>
-	public partial class NodesHotThreadsDescriptor  : BaseRequest<NodesHotThreadsRequestParameters>
+	public partial class NodesHotThreadsDescriptor 
 	{
 		
 	
@@ -4439,12 +4439,6 @@ namespace Nest
 		{
 			this.Request.RequestParameters.ThreadType(thread_type);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesHotThreadsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

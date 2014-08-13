@@ -181,7 +181,6 @@
     <None Include="Core\Map\Properties\MultiFieldPropertyWithJustNamePath.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Compile Include="Core\Map\GetFieldMappingRequestTests.cs" />
     <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
     <Compile Include="Core\Map\Transform\MappingTansformTests.cs" />
     <Compile Include="Core\Scroll\ScrollRequestTests.cs" />
@@ -232,6 +231,7 @@
     <Compile Include="ObjectInitializer\Aliases\GetAliasRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Nodes\NodesHotThreadsRequestTests.cs" />
     <Compile Include="ObjectInitializer\Status\StatusRequestTests.cs" />
     <Compile Include="ObjectInitializer\IndicesStats\IndicesStatsRequestTests.cs" />
     <Compile Include="ObjectInitializer\ClusterState\ClusterStateRequestTests.cs" />
