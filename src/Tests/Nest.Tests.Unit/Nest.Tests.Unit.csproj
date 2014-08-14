@@ -765,6 +765,9 @@
     <None Include="Reproduce\Issue579.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Reproduce\Issue876.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Fields\FixedCovariantSearchResult.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
