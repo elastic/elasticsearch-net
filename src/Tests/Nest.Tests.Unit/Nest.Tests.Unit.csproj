@@ -369,6 +369,7 @@
     <Compile Include="Reproduce\Reproduce579Tests.cs" />
     <Compile Include="Reproduce\Reproduce860Tests.cs" />
     <Compile Include="Reproduce\Reproduce806Tests.cs" />
+    <Compile Include="Reproduce\Reproduce876Tests.cs" />
     <Compile Include="Search\Fields\FieldsTests.cs" />
     <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
     <Compile Include="Search\Filter\Modes\FilterModesTests.cs" />
