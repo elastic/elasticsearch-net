@@ -60,8 +60,11 @@ namespace Nest
 		{
 			get
 			{
-				return ((INestedFilter)this).Query == null 
-					|| ((INestedFilter)this).Query.IsConditionless;
+				return (((INestedFilter)this).Query == null 
+					|| ((INestedFilter)this).Query.IsConditionless)
+                    && (((INestedFilter)this).Filter == null
+                    || ((INestedFilter)this).Filter.IsConditionless)
+                    ;
 			}
 		}
 
