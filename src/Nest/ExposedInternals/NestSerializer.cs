@@ -163,8 +163,16 @@ namespace Nest
 							   ?? inferrer.TypeName(operation.ClrType);
 			
 				var id = operation.GetIdForOperation(inferrer);
-				operation.Index = index;
-				operation.Type = typeName;
+				if (index.EqualsMarker(bulkRequest.Index) && typeName.EqualsMarker(bulkRequest.Type))
+				{
+					operation.Index = null;
+					operation.Type = null;
+				}
+				else
+				{
+					operation.Index = index;
+					operation.Type = typeName;
+				}
 				operation.Id = id;
 
 				var opJson = this.Serialize(operation, SerializationFormatting.None).Utf8String();

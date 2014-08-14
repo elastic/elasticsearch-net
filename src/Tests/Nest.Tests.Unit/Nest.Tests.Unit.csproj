@@ -130,6 +130,9 @@
     <None Include="Cluster\PutSettings\PutSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Bulk\BulkIndexDetailsFixedPath.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Indices\Analysis\Analyzers\CustomAnalyzerTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
