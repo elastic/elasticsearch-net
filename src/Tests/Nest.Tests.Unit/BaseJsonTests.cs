@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using NUnit.Framework;
@@ -28,6 +30,7 @@ namespace Nest.Tests.Unit
 
 		public BaseJsonTests()
 		{
+			Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-us");
 			this._settings = new ConnectionSettings(UnitTestDefaults.Uri, UnitTestDefaults.DefaultIndex)
 				.DisablePing()
 				.ExposeRawResponse();
