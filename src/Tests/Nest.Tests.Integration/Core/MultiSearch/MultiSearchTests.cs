@@ -13,7 +13,8 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 		public void SimpleSearch()
 		{
 			var result = this.Client.MultiSearch(b => b
-				.Search<ElasticsearchProject>(s=>s.MatchAll())
+				.FixedPath(this.Settings.DefaultIndex)
+				.Search<ElasticsearchProject>(s => s.MatchAll())
 			);
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
@@ -33,6 +34,7 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 		public void SimpleNamedSearch()
 		{
 			var result = this.Client.MultiSearch(b => b
+				.FixedPath(this.Settings.DefaultIndex)
 				.Search<ElasticsearchProject>("elasticsearchprojects", s => s.MatchAll())
 				.Search<Person>("persons", s => s.MatchAll())
 			);
@@ -57,6 +59,7 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 		public void MultipleComplexSearches()
 		{
 			var result = this.Client.MultiSearch(b => b
+				.FixedPath(this.Settings.DefaultIndex)
 				.Search<ElasticsearchProject>(s => s
 					.Query(q=>q.Term(p=>p.Name, "NEST"))
 					.Filter(f => f.Term(p => p.Name, "NEST"))
