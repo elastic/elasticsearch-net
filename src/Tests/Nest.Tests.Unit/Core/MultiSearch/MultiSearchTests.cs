@@ -89,8 +89,8 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 			{
 				@"{""index"":""myindex2"",""type"":""mytype2"",""search_type"":""dfs_query_and_fetch"",""preference"":""_primary"",""routing"":""customvalue1""}",
 				@"{""index"":""myindex2"",""type"":""mytype2"",""search_type"":""count"",""preference"":""_primary_first"",""routing"":""customvalue2""}",
-				@"{""search_type"":""dfs_query_and_fetch"",""preference"":""_primary"",""routing"":""customvalue1""}",
-				@"{""search_type"":""count"",""preference"":""_primary_first"",""routing"":""customvalue2""}"
+				@"{""type"":""mytype"",""search_type"":""dfs_query_and_fetch"",""preference"":""_primary"",""routing"":""customvalue1""}",
+				@"{""type"":""mytype"",""search_type"":""count"",""preference"":""_primary_first"",""routing"":""customvalue2""}"
 			};
 
 			foreach (var resultItem in results)
