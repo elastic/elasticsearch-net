@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit
 		public static readonly string DefaultIndex = "nest_test_data";
 	}
 
-	public class BaseJsonTests
+	public abstract class BaseJsonTests
 	{
 		protected readonly IConnectionSettingsValues _settings;
 		/// <summary>
