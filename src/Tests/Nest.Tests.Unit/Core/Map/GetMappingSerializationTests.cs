@@ -68,7 +68,7 @@ namespace Nest.Tests.Unit.Core.Map
 					Name = "boost",
 					NullValue = 2.0,
 				},
-				Parent = new ParentTypeMapping()
+				Parent = new ParentFieldMapping
 				{
 					Type = "type"
 				},

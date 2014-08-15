@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Delete Mapping
 menusection: indices
 menuitem: delete-mapping
 ---

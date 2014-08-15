@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public interface ISpecialField
+	public interface ISpecialField : IFieldMapping
 	{
 		
 	}

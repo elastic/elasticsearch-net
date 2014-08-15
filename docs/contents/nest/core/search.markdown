@@ -1,45 +1,41 @@
 ---
 template: layout.jade
-title: Connecting
+title: Search
 menusection: core
 menuitem: search
 ---
 
 
-# Search
+Search is **THE** call you'll probably use the most, as it exposes Elasticsearch's key functionality: search!
 
-Search is **THE** call you'll probably use the most as it exposes Elasticsearch's key functionality: search!
+### Fluent Syntax
 
-**NOTE:** be sure to also read [how to use NEST's Query DSL](/concepts/writing-queries.html)
-
-
-You can start a search like so, 
-
-    var result = this._client.Search(s => s
-        .Index("my-index")
-        .Type("my-type")
- 		.Query(q=> ....)
- 		.Filter(f=> ....)	     
+    var result = client.Search<ElasticsearchProject>(s => s
+        .From(0)
+    	.Size(50)
+        .Query(q => ....)
+        .Filter(f => ....)	     
     );
 
-This will get all the documents on the `my-index` index and `my-type` type. 
+### Object Initializer Syntax
 
-`result` is an `IQueryResponse<dynamic>` which has a `Documents` `IEnumerable<dynamic>` property that holds all the results. NOTE: remember in the absense of paging it will default to the first 10). 
+	var searchRequest = new SearchRequest
+	{
+		From = 0,
+		Size = 50,
+		Query = ...
+		Filter = ...
+	};
 
-## Typed results
+	var result = client.Search<ElasticsearchProject>(searchRequest);
 
-Dynamic may or may not be what you want but in general it pays to type your search responses. In alot of cases you already need to have the POCO classes for indexing anyway. 
+## Handling the Search response
 
-    var result = this._client.Search<ElasticSearchProject>(s => s
-        .MatchAll()
-    );
+`.Search<T>` returns an `ISearchResponse<T>` which has a `Hits` property.
 
-Now `result` is a `IQueryResponse<ElasticSearchProject>` and its Documents property will hold an `IEnumerable<ElasticSearchProject>`. 
+`Hits` is an `IEnumerable<IHit<T>>`.  `IHit<T>` contains a `Source` property which holds the original document (`T`), along with other meta deta from Elasticsearch such as `Id`, `Score`, `Version`, `Index`, `Type`, `Sorts`, `Highlights` and `Explanation`.
 
-If you are wondering why I am not specifying `Index()` and `Type()` here read the primer on [index and type name inference](/concepts/index-type-inference.html)
-
-
-
+See [the sections](/nest/search/basics.html) dedicated to Search for more information.
 
 
 

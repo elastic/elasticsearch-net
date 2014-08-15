@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Nodes Shutdown
 menusection: cluster
 menuitem: nodes-shutdown
 ---

@@ -183,8 +183,8 @@ namespace Nest.Resolvers.Converters.Aggregations
 
 			if (property == "key_as_string")
 			{
-				// Skip key_as_string property
 				reader.Read();
+				keyItem.KeyAsString = reader.Value.ToString();
 				reader.Read();
 			}
 

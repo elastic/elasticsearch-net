@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Status
 menusection: indices
 menuitem: status
 ---

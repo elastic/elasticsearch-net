@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Sort
 menusection: search
 menuitem: sort
 ---

@@ -18,7 +18,7 @@ namespace Elasticsearch.Net
 			this.QueryString = new Dictionary<string, object>();
 		}
 
-		protected TOut GetQueryStringValue<TOut>(string name)
+		public TOut GetQueryStringValue<TOut>(string name)
 		{
 			if (!this.QueryString.ContainsKey(name))
 				return default(TOut);

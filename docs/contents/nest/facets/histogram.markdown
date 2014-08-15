@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Histogram Facet
 menusection: facets
 menuitem: histogram
 ---

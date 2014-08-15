@@ -107,6 +107,9 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/mydefaultindex/doc", c => c.Index(new Doc { Name = "2" }));
 			Do("PUT", "/customindex/customtype/2?refresh=true", c => c.Index(new Doc { Id = "2" }, i => i.Index("customindex").Type("customtype").Refresh()));
 			Do("HEAD", "/mydefaultindex", c => c.IndexExists(h => h.Index<Doc>()));
+			Do("HEAD", "/mydefaultindex/_alias/myalias", c => c.AliasExists(h => h.Index<Doc>().Name("myalias")));
+			Do("HEAD", "/mydefaultindex/some-type", c => c.TypeExists(h => h.Index<Doc>().Type("some-type")));
+			Do("HEAD", "/_alias/myalias", c => c.AliasExists(new AliasExistsRequest("myalias")));
 			Do("POST", "/_bulk", c => c.IndexMany(Enumerable.Range(0, 10).Select(i => new Doc { Id = i.ToString() })));
 			Do("POST", "/customindex/customtype/_bulk", c => c.IndexMany(Enumerable.Range(0, 10).Select(i => new Doc { Id = i.ToString() }), index: "customindex", type: "customtype"));
 			Do("GET", "/_stats", c => c.IndicesStats());
@@ -129,6 +132,7 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/mydefaultindex/otherdoc/_percolate", c => c.Percolate<OtherDoc>(p=>p.Document(new OtherDoc { Name = "hello" })));
 			Do("POST", "/mycustomindex/mycustomtype/_percolate", c => c.Percolate<OtherDoc>(p => p.Document(new OtherDoc { Name = "hello" }).Index("mycustomindex").Type("mycustomtype")));
 			Do("POST", "/mydefaultindex/otherdoc/my-id/_percolate", c => c.Percolate<OtherDoc>(p => p.Id("my-id")));
+			Do("POST", "/mydefaultindex/otherdoc/my-id/_explain", c => c.Explain<OtherDoc>(p => p.Id("my-id")));
 
 			Do("PUT", "/_template/my-template", c => c.PutTemplate("my-template", pt => pt.Settings(s => s.Add("mysetting", true))));
 			Do("PUT", "/_all/_warmer/my-warmer", c => c.PutWarmer("my-warmer", p => p.Search<Doc>(s => s.MatchAll())));

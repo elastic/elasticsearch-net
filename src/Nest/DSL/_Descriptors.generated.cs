@@ -1665,13 +1665,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-explain.html
 	///</pre>
 	///</summary>
-	public partial class ExplainDescriptor  : BaseRequest<ExplainRequestParameters>
+	public partial class ExplainDescriptor<T> 
 	{
 		
 	
 
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
-		public ExplainDescriptor AnalyzeWildcard(bool analyze_wildcard = true)
+		public ExplainDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true)
 		{
 			this.Request.RequestParameters.AnalyzeWildcard(analyze_wildcard);
 			return this;
@@ -1679,7 +1679,7 @@ namespace Nest
 		
 
 		///<summary>The analyzer for the query string query</summary>
-		public ExplainDescriptor Analyzer(string analyzer)
+		public ExplainDescriptor<T> Analyzer(string analyzer)
 		{
 			this.Request.RequestParameters.Analyzer(analyzer);
 			return this;
@@ -1687,7 +1687,7 @@ namespace Nest
 		
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ExplainDescriptor DefaultOperator(DefaultOperator default_operator)
+		public ExplainDescriptor<T> DefaultOperator(DefaultOperator default_operator)
 		{
 			this.Request.RequestParameters.DefaultOperator(default_operator);
 			return this;
@@ -1695,7 +1695,7 @@ namespace Nest
 		
 
 		///<summary>The default field for query string query (default: _all)</summary>
-		public ExplainDescriptor Df(string df)
+		public ExplainDescriptor<T> Df(string df)
 		{
 			this.Request.RequestParameters.Df(df);
 			return this;
@@ -1703,7 +1703,7 @@ namespace Nest
 		
 
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public ExplainDescriptor Fields(params string[] fields)
+		public ExplainDescriptor<T> Fields(params string[] fields)
 		{
 			this.Request.RequestParameters.Fields(fields);
 			return this;
@@ -1711,7 +1711,7 @@ namespace Nest
 		
 			
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public ExplainDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public ExplainDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
@@ -1722,7 +1722,7 @@ namespace Nest
 			
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public ExplainDescriptor Lenient(bool lenient = true)
+		public ExplainDescriptor<T> Lenient(bool lenient = true)
 		{
 			this.Request.RequestParameters.Lenient(lenient);
 			return this;
@@ -1730,7 +1730,7 @@ namespace Nest
 		
 
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public ExplainDescriptor LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
+		public ExplainDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
 		{
 			this.Request.RequestParameters.LowercaseExpandedTerms(lowercase_expanded_terms);
 			return this;
@@ -1738,7 +1738,7 @@ namespace Nest
 		
 
 		///<summary>The ID of the parent document</summary>
-		public ExplainDescriptor Parent(string parent)
+		public ExplainDescriptor<T> Parent(string parent)
 		{
 			this.Request.RequestParameters.Parent(parent);
 			return this;
@@ -1746,7 +1746,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public ExplainDescriptor Preference(string preference)
+		public ExplainDescriptor<T> Preference(string preference)
 		{
 			this.Request.RequestParameters.Preference(preference);
 			return this;
@@ -1754,7 +1754,7 @@ namespace Nest
 		
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ExplainDescriptor Q(string q)
+		public ExplainDescriptor<T> Q(string q)
 		{
 			this.Request.RequestParameters.Q(q);
 			return this;
@@ -1762,7 +1762,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value</summary>
-		public ExplainDescriptor Routing(string routing)
+		public ExplainDescriptor<T> Routing(string routing)
 		{
 			this.Request.RequestParameters.Routing(routing);
 			return this;
@@ -1770,7 +1770,7 @@ namespace Nest
 		
 
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public ExplainDescriptor Source(string source)
+		public ExplainDescriptor<T> Source(string source)
 		{
 			this.Request.RequestParameters.Source(source);
 			return this;
@@ -1778,15 +1778,24 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public ExplainDescriptor SourceEnabled(params string[] source_enabled)
+		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
+		public ExplainDescriptor<T> SourceEnabled(params string[] source_enabled)
 		{
 			this.Request.RequestParameters.SourceEnabled(source_enabled);
 			return this;
 		}
 		
 
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public ExplainDescriptor<T> EnableSource(bool enable_source = true)
+		{
+			this.Request.RequestParameters.EnableSource(enable_source);
+			return this;
+		}
+		
+
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor SourceExclude(params string[] source_exclude)
+		public ExplainDescriptor<T> SourceExclude(params string[] source_exclude)
 		{
 			this.Request.RequestParameters.SourceExclude(source_exclude);
 			return this;
@@ -1794,7 +1803,7 @@ namespace Nest
 		
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public ExplainDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
@@ -1805,7 +1814,7 @@ namespace Nest
 			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor SourceInclude(params string[] source_include)
+		public ExplainDescriptor<T> SourceInclude(params string[] source_include)
 		{
 			this.Request.RequestParameters.SourceInclude(source_include);
 			return this;
@@ -1813,7 +1822,7 @@ namespace Nest
 		
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		public ExplainDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
@@ -1822,12 +1831,6 @@ namespace Nest
 			return this;
 		}
 			
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExplainRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -1902,9 +1905,18 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public GetDescriptor<T> SourceEnabled(params string[] source_enabled)
 		{
 			this.Request.RequestParameters.SourceEnabled(source_enabled);
+			return this;
+		}
+		
+
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public GetDescriptor<T> EnableSource(bool enable_source = true)
+		{
+			this.Request.RequestParameters.EnableSource(enable_source);
 			return this;
 		}
 		
@@ -2017,9 +2029,18 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public SourceDescriptor<T> SourceEnabled(params string[] source_enabled)
 		{
 			this.Request.RequestParameters.SourceEnabled(source_enabled);
+			return this;
+		}
+		
+
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public SourceDescriptor<T> EnableSource(bool enable_source = true)
+		{
+			this.Request.RequestParameters.EnableSource(enable_source);
 			return this;
 		}
 		
@@ -2663,13 +2684,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public partial class IndicesExistsAliasDescriptor  : BaseRequest<IndicesExistsAliasRequestParameters>
+	public partial class AliasExistsDescriptor 
 	{
 		
 	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesExistsAliasDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public AliasExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -2677,7 +2698,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesExistsAliasDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public AliasExistsDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -2685,7 +2706,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesExistsAliasDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		public AliasExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2693,16 +2714,10 @@ namespace Nest
 		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndicesExistsAliasDescriptor Local(bool local = true)
+		public AliasExistsDescriptor Local(bool local = true)
 		{
 			this.Request.RequestParameters.Local(local);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesExistsAliasRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
@@ -2741,13 +2756,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-types-exists.html
 	///</pre>
 	///</summary>
-	public partial class IndicesExistsTypeDescriptor  : BaseRequest<IndicesExistsTypeRequestParameters>
+	public partial class TypeExistsDescriptor 
 	{
 		
 	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesExistsTypeDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public TypeExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -2755,7 +2770,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesExistsTypeDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public TypeExistsDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -2763,7 +2778,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesExistsTypeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		public TypeExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2771,16 +2786,10 @@ namespace Nest
 		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndicesExistsTypeDescriptor Local(bool local = true)
+		public TypeExistsDescriptor Local(bool local = true)
 		{
 			this.Request.RequestParameters.Local(local);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesExistsTypeRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
@@ -2919,13 +2928,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-field-mapping.html
 	///</pre>
 	///</summary>
-	public partial class IndicesGetFieldMappingDescriptor  : BaseRequest<IndicesGetFieldMappingRequestParameters>
+	public partial class GetFieldMappingDescriptor<T> 
 	{
 		
 	
 
 		///<summary>Whether the default mapping values should be returned as well</summary>
-		public IndicesGetFieldMappingDescriptor IncludeDefaults(bool include_defaults = true)
+		public GetFieldMappingDescriptor<T> IncludeDefaults(bool include_defaults = true)
 		{
 			this.Request.RequestParameters.IncludeDefaults(include_defaults);
 			return this;
@@ -2933,7 +2942,7 @@ namespace Nest
 		
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesGetFieldMappingDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public GetFieldMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -2941,7 +2950,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesGetFieldMappingDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public GetFieldMappingDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -2949,7 +2958,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesGetFieldMappingDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		public GetFieldMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2957,16 +2966,10 @@ namespace Nest
 		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndicesGetFieldMappingDescriptor Local(bool local = true)
+		public GetFieldMappingDescriptor<T> Local(bool local = true)
 		{
 			this.Request.RequestParameters.Local(local);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesGetFieldMappingRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
@@ -4010,9 +4013,18 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public MultiGetDescriptor SourceEnabled(params string[] source_enabled)
 		{
 			this.Request.RequestParameters.SourceEnabled(source_enabled);
+			return this;
+		}
+		
+
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public MultiGetDescriptor EnableSource(bool enable_source = true)
+		{
+			this.Request.RequestParameters.EnableSource(enable_source);
 			return this;
 		}
 		
@@ -4239,13 +4251,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
-	public partial class MpercolateDescriptor  : BaseRequest<MpercolateRequestParameters>
+	public partial class MultiPercolateDescriptor 
 	{
 		
 	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public MpercolateDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public MultiPercolateDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -4253,7 +4265,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public MpercolateDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public MultiPercolateDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -4261,16 +4273,10 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public MpercolateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		public MultiPercolateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MpercolateRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

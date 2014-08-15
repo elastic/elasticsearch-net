@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Delete
 menusection: core
 menuitem: delete
 ---
@@ -13,48 +13,47 @@ The delete API allows to delete a typed JSON document from a specific index base
 
 ## By Id
 
-	this.ConnectedClient.Delete<ElasticSearchProject>(searchProject.Id);
-	this.ConnectedClient.DeleteAsync<ElasticSearchProject>(searchProject.Id);
+	client.Delete<ElasticSearchProject>(1);
+	client.DeleteAsync<ElasticSearchProject>(1);
 
 ## Delete with custom parameters
 
-	_client.Delete(request.Id, s => s
+### Fluent Syntax
+
+	client.Delete(1, d => d
 		.Type("users")
 		.Index("myindex")
 	);
+
+### Object Initializer Syntax
+
+	// Be explicit with type and index
+	client.Delete(new DeleteRequest("myindex", "users", "1"));
+
+	// Infer type and index from CLR type
+	client.Delete(new DeleteRequest<ElasticsearchProject>("1"));
 
 ## By object (T)
 
 Id property is inferred (can be any value type (int, string, float ...))
 
-	this.ConnectedClient.Delete(searchProject);
-	this.ConnectedClient.DeleteAsync(searchProject);
+	client.Delete(searchProject);
+	client.DeleteAsync(searchProject);
 
 ## By IEnumerable<T>
 
-	this.ConnectedClient.DeleteMany(searchProjects);
-	this.ConnectedClient.DeleteManyAsync(searchProjects);
-
-## By IEnumerable<T> using bulkparameters
-
-Using bulk parameters you can control the deletion of each individual document further
-
-			var bulkedProjects = searchProjects
-				.Select(d=> new BulkParameters<ElasticSearchProject>(d) 
-				{ 
-					Version = d.Version, 
-					VersionType = VersionType.External 
-				}
-			);
-            this.ConnectedClient.DeleteMany(bulkedProjects, new SimpleBulkParameters() { Refresh = true });
-
+	client.DeleteMany(searchProjects);
+	client.DeleteManyAsync(searchProjects);
 
 ## By Query
 
-Please see [deleting by query]({{root}}/core/delete-by-query.html)
+See [deleting by query]({{root}}/core/delete-by-query.html)
 
 ## Indices and Mappings
 
-Please see [delete mapping]({{root}}/indices/delete-mapping.html)
+See [delete mapping]({{root}}/indices/delete-mapping.html) and [delete index]({{root}}/indices/delete-index.html)
 
-and [delete index]({{root}}/indices/delete-index.html)
+## Bulk delete
+
+See [bulk]({{root}}/code/bulk.html)
+

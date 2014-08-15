@@ -1876,7 +1876,17 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters SourceEnabled(params string[] source_enabled)
 		{
 			this._source_enabled = source_enabled;
-			this.AddQueryString("source_enabled", this._source_enabled);
+			this.AddQueryString("_source", this._source_enabled);
+			return this;
+		}
+		
+		
+		internal bool _enable_source { get; set; }
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public ExplainRequestParameters EnableSource(bool enable_source)
+		{
+			this._enable_source = enable_source;
+			this.AddQueryString("_source", this._enable_source);
 			return this;
 		}
 		
@@ -1886,7 +1896,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters SourceExclude(params string[] source_exclude)
 		{
 			this._source_exclude = source_exclude.Select(f=>(object)f);
-			this.AddQueryString("source_exclude", this._source_exclude);
+			this.AddQueryString("_source_exclude", this._source_exclude);
 			return this;
 		}
 		
@@ -1896,7 +1906,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters SourceInclude(params string[] source_include)
 		{
 			this._source_include = source_include.Select(f=>(object)f);
-			this.AddQueryString("source_include", this._source_include);
+			this.AddQueryString("_source_include", this._source_include);
 			return this;
 		}
 		
@@ -1976,7 +1986,17 @@ namespace Elasticsearch.Net
 		public GetRequestParameters SourceEnabled(params string[] source_enabled)
 		{
 			this._source_enabled = source_enabled;
-			this.AddQueryString("source_enabled", this._source_enabled);
+			this.AddQueryString("_source", this._source_enabled);
+			return this;
+		}
+		
+		
+		internal bool _enable_source { get; set; }
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public GetRequestParameters EnableSource(bool enable_source)
+		{
+			this._enable_source = enable_source;
+			this.AddQueryString("_source", this._enable_source);
 			return this;
 		}
 		
@@ -1986,7 +2006,7 @@ namespace Elasticsearch.Net
 		public GetRequestParameters SourceExclude(params string[] source_exclude)
 		{
 			this._source_exclude = source_exclude.Select(f=>(object)f);
-			this.AddQueryString("source_exclude", this._source_exclude);
+			this.AddQueryString("_source_exclude", this._source_exclude);
 			return this;
 		}
 		
@@ -1996,7 +2016,7 @@ namespace Elasticsearch.Net
 		public GetRequestParameters SourceInclude(params string[] source_include)
 		{
 			this._source_include = source_include.Select(f=>(object)f);
-			this.AddQueryString("source_include", this._source_include);
+			this.AddQueryString("_source_include", this._source_include);
 			return this;
 		}
 		
@@ -2086,7 +2106,17 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters SourceEnabled(params string[] source_enabled)
 		{
 			this._source_enabled = source_enabled;
-			this.AddQueryString("source_enabled", this._source_enabled);
+			this.AddQueryString("_source", this._source_enabled);
+			return this;
+		}
+		
+		
+		internal bool _enable_source { get; set; }
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public SourceRequestParameters EnableSource(bool enable_source)
+		{
+			this._enable_source = enable_source;
+			this.AddQueryString("_source", this._enable_source);
 			return this;
 		}
 		
@@ -2096,7 +2126,7 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters SourceExclude(params string[] source_exclude)
 		{
 			this._source_exclude = source_exclude.Select(f=>(object)f);
-			this.AddQueryString("source_exclude", this._source_exclude);
+			this.AddQueryString("_source_exclude", this._source_exclude);
 			return this;
 		}
 		
@@ -2106,7 +2136,7 @@ namespace Elasticsearch.Net
 		public SourceRequestParameters SourceInclude(params string[] source_include)
 		{
 			this._source_include = source_include.Select(f=>(object)f);
-			this.AddQueryString("source_include", this._source_include);
+			this.AddQueryString("_source_include", this._source_include);
 			return this;
 		}
 		
@@ -2758,12 +2788,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public class IndicesExistsAliasRequestParameters : FluentRequestParameters<IndicesExistsAliasRequestParameters> 
+	public class AliasExistsRequestParameters : FluentRequestParameters<AliasExistsRequestParameters> 
 	{
 		
 		internal bool _ignore_unavailable { get; set; }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesExistsAliasRequestParameters IgnoreUnavailable(bool ignore_unavailable)
+		public AliasExistsRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
 			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
@@ -2773,7 +2803,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _allow_no_indices { get; set; }
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesExistsAliasRequestParameters AllowNoIndices(bool allow_no_indices)
+		public AliasExistsRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
 			this.AddQueryString("allow_no_indices", this._allow_no_indices);
@@ -2783,7 +2813,7 @@ namespace Elasticsearch.Net
 		
 		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesExistsAliasRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
+		public AliasExistsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -2793,7 +2823,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _local { get; set; }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndicesExistsAliasRequestParameters Local(bool local)
+		public AliasExistsRequestParameters Local(bool local)
 		{
 			this._local = local;
 			this.AddQueryString("local", this._local);
@@ -2828,12 +2858,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-types-exists.html
 	///</pre>
 	///</summary>
-	public class IndicesExistsTypeRequestParameters : FluentRequestParameters<IndicesExistsTypeRequestParameters> 
+	public class TypeExistsRequestParameters : FluentRequestParameters<TypeExistsRequestParameters> 
 	{
 		
 		internal bool _ignore_unavailable { get; set; }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesExistsTypeRequestParameters IgnoreUnavailable(bool ignore_unavailable)
+		public TypeExistsRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
 			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
@@ -2843,7 +2873,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _allow_no_indices { get; set; }
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesExistsTypeRequestParameters AllowNoIndices(bool allow_no_indices)
+		public TypeExistsRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
 			this.AddQueryString("allow_no_indices", this._allow_no_indices);
@@ -2853,7 +2883,7 @@ namespace Elasticsearch.Net
 		
 		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesExistsTypeRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
+		public TypeExistsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -2863,7 +2893,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _local { get; set; }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndicesExistsTypeRequestParameters Local(bool local)
+		public TypeExistsRequestParameters Local(bool local)
 		{
 			this._local = local;
 			this.AddQueryString("local", this._local);
@@ -3018,12 +3048,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-field-mapping.html
 	///</pre>
 	///</summary>
-	public class IndicesGetFieldMappingRequestParameters : FluentRequestParameters<IndicesGetFieldMappingRequestParameters> 
+	public class GetFieldMappingRequestParameters : FluentRequestParameters<GetFieldMappingRequestParameters> 
 	{
 		
 		internal bool _include_defaults { get; set; }
 		///<summary>Whether the default mapping values should be returned as well</summary>
-		public IndicesGetFieldMappingRequestParameters IncludeDefaults(bool include_defaults)
+		public GetFieldMappingRequestParameters IncludeDefaults(bool include_defaults)
 		{
 			this._include_defaults = include_defaults;
 			this.AddQueryString("include_defaults", this._include_defaults);
@@ -3033,7 +3063,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _ignore_unavailable { get; set; }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesGetFieldMappingRequestParameters IgnoreUnavailable(bool ignore_unavailable)
+		public GetFieldMappingRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
 			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
@@ -3043,7 +3073,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _allow_no_indices { get; set; }
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesGetFieldMappingRequestParameters AllowNoIndices(bool allow_no_indices)
+		public GetFieldMappingRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
 			this.AddQueryString("allow_no_indices", this._allow_no_indices);
@@ -3053,7 +3083,7 @@ namespace Elasticsearch.Net
 		
 		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesGetFieldMappingRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
+		public GetFieldMappingRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3063,7 +3093,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _local { get; set; }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndicesGetFieldMappingRequestParameters Local(bool local)
+		public GetFieldMappingRequestParameters Local(bool local)
 		{
 			this._local = local;
 			this.AddQueryString("local", this._local);
@@ -4166,7 +4196,17 @@ namespace Elasticsearch.Net
 		public MultiGetRequestParameters SourceEnabled(params string[] source_enabled)
 		{
 			this._source_enabled = source_enabled;
-			this.AddQueryString("source_enabled", this._source_enabled);
+			this.AddQueryString("_source", this._source_enabled);
+			return this;
+		}
+		
+		
+		internal bool _enable_source { get; set; }
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public MultiGetRequestParameters EnableSource(bool enable_source)
+		{
+			this._enable_source = enable_source;
+			this.AddQueryString("_source", this._enable_source);
 			return this;
 		}
 		
@@ -4176,7 +4216,7 @@ namespace Elasticsearch.Net
 		public MultiGetRequestParameters SourceExclude(params string[] source_exclude)
 		{
 			this._source_exclude = source_exclude.Select(f=>(object)f);
-			this.AddQueryString("source_exclude", this._source_exclude);
+			this.AddQueryString("_source_exclude", this._source_exclude);
 			return this;
 		}
 		
@@ -4186,7 +4226,7 @@ namespace Elasticsearch.Net
 		public MultiGetRequestParameters SourceInclude(params string[] source_include)
 		{
 			this._source_include = source_include.Select(f=>(object)f);
-			this.AddQueryString("source_include", this._source_include);
+			this.AddQueryString("_source_include", this._source_include);
 			return this;
 		}
 		
@@ -4398,12 +4438,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
-	public class MpercolateRequestParameters : FluentRequestParameters<MpercolateRequestParameters> 
+	public class MultiPercolateRequestParameters : FluentRequestParameters<MultiPercolateRequestParameters> 
 	{
 		
 		internal bool _ignore_unavailable { get; set; }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public MpercolateRequestParameters IgnoreUnavailable(bool ignore_unavailable)
+		public MultiPercolateRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
 			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
@@ -4413,7 +4453,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _allow_no_indices { get; set; }
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public MpercolateRequestParameters AllowNoIndices(bool allow_no_indices)
+		public MultiPercolateRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
 			this.AddQueryString("allow_no_indices", this._allow_no_indices);
@@ -4423,7 +4463,7 @@ namespace Elasticsearch.Net
 		
 		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public MpercolateRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
+		public MultiPercolateRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -4596,7 +4636,7 @@ namespace Elasticsearch.Net
 		public NodesHotThreadsRequestParameters ThreadType(ThreadType thread_type)
 		{
 			this._thread_type = thread_type;
-			this.AddQueryString("thread_type", this._thread_type);
+			this.AddQueryString("type", this._thread_type);
 			return this;
 		}
 		

@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Analyze
 menusection: indices
 menuitem: analyze
 ---
@@ -9,23 +9,26 @@ menuitem: analyze
 
 Performs the analysis process on the specified text and returns the token breakdown for the text.
 
-## Analyze using default index's default analyzer
+## Examples
 
-	var text = "this is a string with some spaces and stuff";
-	var r = this.ConnectedClient.Analyze(text);
+### Fluent Syntax
 
+	var result = client.Analyze(a => a
+		.Index("myindex")
+		.Analyzer("whitespace")
+		.Text("text to analyze")
+	);
 
-## Analyze using a fields analyzer
+### Object Initializer Syntax
 
-    var text = "this is a string with some spaces and stuff";
-    var r = this.ConnectedClient.Analyze<ElasticSearchProject>(p => p.Content, text);
+	var request = new AnalyzeRequest("text to analyze")
+	{
+		Index = "myindex",
+		Analyzer = "whitespace"
+	};
 
+	var result = client.Analyze(request);
 
-## Analyze using parameters
+## Handling the Analyze response
 
-	var analyzer = new AnalyzeParams { Analyzer = "whitespace", Index = Test.Default.DefaultIndex + "_clone" };
-	var r = this.ConnectedClient.Analyze(analyzer, text);
-
-
-
-
+`result` above is an `IAnalyzeResponse` which contains a collection of tokens found in the `Tokens` property which is an `IEnumerable<AnalyzeToken>`.

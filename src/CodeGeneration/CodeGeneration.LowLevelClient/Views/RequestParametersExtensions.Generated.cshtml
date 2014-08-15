@@ -51,7 +51,7 @@ namespace Nest
 			where T : class
 		{
 			var _@(mm) = @mm@Raw(".Select(e=>(PropertyPathMarker)e)");
-			qs.AddQueryString("@mm", _@mm);
+			qs.AddQueryString("@kv.Value.OriginalQueryStringParamName", _@mm);
 			return qs;
 		}
 		</text>

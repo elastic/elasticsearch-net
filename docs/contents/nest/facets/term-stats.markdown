@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Term Stats Facet
 menusection: facets
 menuitem: term-stats
 ---

@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Clear Cache
 menusection: indices
 menuitem: clear-cache
 ---

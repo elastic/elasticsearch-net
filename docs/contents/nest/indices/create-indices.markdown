@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Create Indices
 menusection: indices
 menuitem: create-indices
 ---

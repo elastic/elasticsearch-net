@@ -89,7 +89,7 @@ namespace Nest.Tests.Integration.Core.TermVectors
 		}
 
 		[Test]
-		[SkipVersion("1.2.0 - 1.2.2", "Fails against ES 1.2: https://github.com/elasticsearch/elasticsearch/issues/6451")]
+		[SkipVersion("1.2.0 - 1.3.1", "Fails against ES 1.2 - 1.3: https://github.com/elasticsearch/elasticsearch/issues/6451")]
 		public void TermVectorNonExistentIdTest()
 		{
 			var result = Client.TermVector<ElasticsearchProject>(s => s

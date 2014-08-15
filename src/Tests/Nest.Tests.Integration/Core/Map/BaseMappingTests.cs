@@ -7,7 +7,7 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Integration.Core.Map
 {
 	[TestFixture]
-	public class BaseMappingTests : IntegrationTests
+	public abstract class BaseMappingTests : IntegrationTests
 	{
 		[TestFixtureSetUp]
 		public void Initialize()

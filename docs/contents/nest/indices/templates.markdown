@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Templates
 menusection: indices
 menuitem: templates
 ---

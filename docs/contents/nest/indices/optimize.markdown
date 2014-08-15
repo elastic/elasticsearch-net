@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Optimize
 menusection: indices
 menuitem: optimize
 ---

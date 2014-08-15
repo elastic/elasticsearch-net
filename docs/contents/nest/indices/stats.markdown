@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Stats
 menusection: indices
 menuitem: stats
 ---

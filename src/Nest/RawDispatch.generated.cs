@@ -1480,7 +1480,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesExistsAliasDispatch<T>(ElasticsearchPathInfo<IndicesExistsAliasRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesExistsAliasDispatch<T>(ElasticsearchPathInfo<AliasExistsRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1501,7 +1501,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsAliasDispatchAsync<T>(ElasticsearchPathInfo<IndicesExistsAliasRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesExistsAliasDispatchAsync<T>(ElasticsearchPathInfo<AliasExistsRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1552,7 +1552,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesExistsTypeDispatch<T>(ElasticsearchPathInfo<IndicesExistsTypeRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesExistsTypeDispatch<T>(ElasticsearchPathInfo<TypeExistsRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1567,7 +1567,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsTypeDispatchAsync<T>(ElasticsearchPathInfo<IndicesExistsTypeRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesExistsTypeDispatchAsync<T>(ElasticsearchPathInfo<TypeExistsRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1716,7 +1716,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesGetFieldMappingDispatch<T>(ElasticsearchPathInfo<IndicesGetFieldMappingRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetFieldMappingDispatch<T>(ElasticsearchPathInfo<GetFieldMappingRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1740,7 +1740,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetFieldMappingDispatchAsync<T>(ElasticsearchPathInfo<IndicesGetFieldMappingRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetFieldMappingDispatchAsync<T>(ElasticsearchPathInfo<GetFieldMappingRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2708,7 +2708,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> MpercolateDispatch<T>(ElasticsearchPathInfo<MpercolateRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> MpercolateDispatch<T>(ElasticsearchPathInfo<MultiPercolateRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2739,7 +2739,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> MpercolateDispatchAsync<T>(ElasticsearchPathInfo<MpercolateRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> MpercolateDispatchAsync<T>(ElasticsearchPathInfo<MultiPercolateRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{

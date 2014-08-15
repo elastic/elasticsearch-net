@@ -47,7 +47,7 @@ namespace Nest
 			where T : class
 		{
 			var _source_exclude = source_exclude.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("source_exclude", _source_exclude);
+			qs.AddQueryString("_source_exclude", _source_exclude);
 			return qs;
 		}
 		
@@ -59,7 +59,7 @@ namespace Nest
 			where T : class
 		{
 			var _source_include = source_include.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("source_include", _source_include);
+			qs.AddQueryString("_source_include", _source_include);
 			return qs;
 		}
 		
@@ -83,7 +83,7 @@ namespace Nest
 			where T : class
 		{
 			var _source_exclude = source_exclude.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("source_exclude", _source_exclude);
+			qs.AddQueryString("_source_exclude", _source_exclude);
 			return qs;
 		}
 		
@@ -95,7 +95,7 @@ namespace Nest
 			where T : class
 		{
 			var _source_include = source_include.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("source_include", _source_include);
+			qs.AddQueryString("_source_include", _source_include);
 			return qs;
 		}
 		
@@ -107,7 +107,7 @@ namespace Nest
 			where T : class
 		{
 			var _source_exclude = source_exclude.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("source_exclude", _source_exclude);
+			qs.AddQueryString("_source_exclude", _source_exclude);
 			return qs;
 		}
 		
@@ -119,7 +119,7 @@ namespace Nest
 			where T : class
 		{
 			var _source_include = source_include.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("source_include", _source_include);
+			qs.AddQueryString("_source_include", _source_include);
 			return qs;
 		}
 		
@@ -204,7 +204,7 @@ namespace Nest
 			where T : class
 		{
 			var _source_exclude = source_exclude.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("source_exclude", _source_exclude);
+			qs.AddQueryString("_source_exclude", _source_exclude);
 			return qs;
 		}
 		
@@ -216,7 +216,7 @@ namespace Nest
 			where T : class
 		{
 			var _source_include = source_include.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("source_include", _source_include);
+			qs.AddQueryString("_source_include", _source_include);
 			return qs;
 		}
 		

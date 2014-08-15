@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Statistical Facet
 menusection: facets
 menuitem: statistical
 ---

@@ -3,7 +3,7 @@ using Nest.Resolvers.Writers;
 
 namespace Nest.Tests.Unit.Core.AttributeBasedMap
 {
-	public class BaseAttributeMappingTests : BaseJsonTests
+	public abstract class BaseAttributeMappingTests : BaseJsonTests
 	{
 		protected string CreateMapFor<T>() where T : class
 		{

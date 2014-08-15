@@ -39,7 +39,7 @@ namespace Nest
 			{
 	@foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
-		  var original = kv.Key;
+		  var original = kv.Value.OriginalQueryStringParamName;
 		  var cased = kv.Key.ToPascalCase();
 		  var mm = (cased != "Type" && cased != "Index" && cased != "Script") ? cased : cased + "QueryString";
 		  var fieldType = kv.Value.CsharpType(kv.Key).Replace("params", "");
@@ -54,6 +54,10 @@ namespace Nest
 		  }
 		<text>
 		///<summary>@kv.Value.Description</summary>
+		@if(!string.IsNullOrWhiteSpace(kv.Value.DeprecatedInFavorOf))
+		{
+		<text>[Obsolete("Scheduled to be removed in 2.0, use @kv.Value.DeprecatedInFavorOf instead")]</text>
+		}
 		public @Raw(fieldType) @(mm) 
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue@(Raw("<" + fieldType + ">"))("@original"); } 

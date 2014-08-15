@@ -43,7 +43,7 @@ namespace Nest
 			{
 				return ((ITermsBaseFilter)this).Field.IsConditionless()
 					   || !((ITermsFilter)this).Terms.HasAny()
-					   || ((ITermsFilter)this).Terms.OfType<string>().All(s => s.IsNullOrEmpty())
+					   || ((ITermsFilter)this).Terms.All(t => t is string && ((string)t).IsNullOrEmpty())
 					   || ((ITermsFilter)this).Terms.All(t => t == null);
 			}
 		}

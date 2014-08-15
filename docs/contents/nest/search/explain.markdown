@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Explain
 menusection: search
 menuitem: explain
 ---

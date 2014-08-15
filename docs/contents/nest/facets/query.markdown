@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Query Facet
 menusection: facets
 menuitem: query
 ---

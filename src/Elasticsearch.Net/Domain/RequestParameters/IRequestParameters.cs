@@ -26,5 +26,6 @@ namespace Elasticsearch.Net
 		/// </summary>
 		IRequestConfiguration RequestConfiguration { get; set; }
 
+		TOut GetQueryStringValue<TOut>(string name);
 	}
 }

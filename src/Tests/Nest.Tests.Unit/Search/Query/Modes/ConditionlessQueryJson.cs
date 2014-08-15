@@ -7,7 +7,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 	public class ConditionlessQueryJson
 	{
 		[Test]
-		public void Fallback()
+		public void FallbackTerm()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Query(q=>q
@@ -27,6 +27,40 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					}
 			}";
 			Assert.True(json.JsonEquals(expected), json);		
+		}
+
+		[Test]
+		public void FallbackMatch()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
+				.Query(q => q
+					.Conditionless(qs => qs
+						.Query(qcq => qcq
+							.Match(m => m
+								.OnField(p => p.Name)
+								.Query("")
+							)
+						)
+						.Fallback(qcf=>qcf
+							.Match(m => m
+								.OnField(p => p.Name)
+								.Query("do_me_instead")
+							)
+						)
+					)
+				);
+
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
+				query : {
+						match : { 
+							name : {
+								query: ""do_me_instead""
+							}
+						}
+					}
+			}";
+			Assert.True(json.JsonEquals(expected), json);
 		}
 
 		[Test]

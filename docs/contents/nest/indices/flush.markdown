@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Flush
 menusection: indices
 menuitem: flush
 ---

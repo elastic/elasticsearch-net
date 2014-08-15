@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Connecting
+title: Update Settings
 menusection: indices
 menuitem: update-settings
 ---
