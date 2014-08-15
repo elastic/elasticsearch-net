@@ -28,18 +28,6 @@ namespace Nest
 			return new QueryDescriptor<T>().ConstantScore(selector);
 		}
 
-		[Obsolete("Custom boost factor has been removed in 1.1")]
-		public static QueryContainer CustomBoostFactor(Action<CustomBoostFactorQueryDescriptor<T>> selector)
-		{
-			return new QueryDescriptor<T>().CustomBoostFactor(selector);
-		}
-
-		[Obsolete("Custom score has been removed in 1.1")]
-		public static QueryContainer CustomScore(Action<CustomScoreQueryDescriptor<T>> customScoreQuery)
-		{
-			return new QueryDescriptor<T>().CustomScore(customScoreQuery);
-		}
-
 		public static QueryContainer Conditionless(Action<ConditionlessQueryDescriptor<T>> conditionlessQuery)
 		{
 			return new QueryDescriptor<T>().Conditionless(conditionlessQuery);

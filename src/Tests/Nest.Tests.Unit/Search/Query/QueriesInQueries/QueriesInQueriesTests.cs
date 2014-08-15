@@ -172,46 +172,6 @@ namespace Nest.Tests.Unit.Search.Query.QueriesInQueries
 		}
 
 		[Test]
-		public void CustomScoreQuery()
-		{
-			var s = new SearchDescriptor<ElasticsearchProject>()
-				.From(0)
-				.Take(10)
-				.Query(q => q
-				//disabling obsolete message in this test
-				#pragma warning disable 0618
-				.CustomScore(tcq => tcq
-					.Query(qq =>
-					qq.Term(f => f.Name, "foo") || qq.Term(f => f.Name, "bar")
-					)
-				)
-				#pragma warning restore 0618
-			);
-
-			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
-		}
-
-		[Test]
-		public void CustomBoostFactorQuery()
-		{
-			var s = new SearchDescriptor<ElasticsearchProject>()
-				.From(0)
-				.Take(10)
-				.Query(q => q
-				//disabling obsolete message in this test
-				#pragma warning disable 0618
-				.CustomBoostFactor(tcq => tcq
-					.Query(qq =>
-					qq.Term(f => f.Name, "foo") || qq.Term(f => f.Name, "bar")
-					)
-				)
-				#pragma warning restore 0618
-			);
-
-			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
-		}
-
-		[Test]
 		public void ConstantScore()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()

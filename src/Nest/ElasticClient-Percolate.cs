@@ -152,7 +152,7 @@ namespace Nest
 		{
 			percolateSelector = percolateSelector ?? (s => s);
 			return this.Dispatch<PercolateCountDescriptor<T>, PercolateCountRequestParameters, PercolateCountResponse>(
-				s => percolateSelector(s.Object(@object)),
+				s => percolateSelector(s.Document(@object)),
 				(p, d) => this.RawDispatch.CountPercolateDispatch<PercolateCountResponse>(p, d)
 			);
 		}
@@ -183,7 +183,7 @@ namespace Nest
 		{
 			percolateSelector = percolateSelector ?? (s => s);
 			return this.DispatchAsync<PercolateCountDescriptor<T>, PercolateCountRequestParameters, PercolateCountResponse, IPercolateCountResponse>(
-				s => percolateSelector(s.Object(@object)),
+				s => percolateSelector(s.Document(@object)),
 				(p, d) => this.RawDispatch.CountPercolateDispatchAsync<PercolateCountResponse>(p, d)
 			);
 		}

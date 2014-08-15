@@ -159,7 +159,8 @@ namespace Nest.Tests.Integration.Search
 			Assert.NotNull(percolateResponse.Matches);
 			Assert.False(percolateResponse.Matches.Select(m=>m.Id).Contains(name));
 
-			var countPercolateReponse = this.Client.PercolateCount(obj,p => p
+			var countPercolateReponse = this.Client.PercolateCount<ElasticsearchProject>(p => p
+				.Document(obj)
 				.Query(q=>q.Match(m=>m.OnField("color").Query("blue")))
 			);
 			countPercolateReponse.IsValid.Should().BeTrue();

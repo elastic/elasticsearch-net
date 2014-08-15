@@ -151,13 +151,6 @@ namespace Nest
 			return this;
 		}
 
-		[Obsolete("execution_hint is an undocumented elasticsearch property")]
-		public TermFacetDescriptor<T> ExecutionHint(string executionHint)
-		{
-			Self.ExecutionHint = executionHint;
-			return this;
-		}
-
 		public TermFacetDescriptor<T> Script(string script)
 		{
 			Self.Script = script;

@@ -247,7 +247,6 @@
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="Enums\GeoDistance.cs" />
-    <Compile Include="Obsolete\Obsolete.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\CompositeJsonConverter.cs" />
     <Compile Include="Domain\DSL\ICustomJsonReader.cs" />
@@ -725,7 +724,7 @@
     <Compile Include="Resolvers\Converters\ReadAsTypeConverter.cs" />
     <Compile Include="DSL\Facets\TermFacetDescriptor.cs" />
     <Compile Include="Domain\Facets\FilterFacet.cs" />
-    <Compile Include="Domain\Mapping\ParentTypeMapping.cs" />
+    <Compile Include="Domain\Mapping\ParentFieldMapping.cs" />
     <Compile Include="Domain\Responses\PercolateResponse.cs" />
     <Compile Include="Domain\Responses\UnregisterPercolateResponse.cs" />
     <Compile Include="Domain\Responses\RegisterPercolateResponse.cs" />

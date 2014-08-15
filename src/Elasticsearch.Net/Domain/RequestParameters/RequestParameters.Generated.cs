@@ -1881,16 +1881,6 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal bool _enable_source { get; set; }
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public ExplainRequestParameters EnableSource(bool enable_source)
-		{
-			this._enable_source = enable_source;
-			this.AddQueryString("_source", this._enable_source);
-			return this;
-		}
-		
-		
 		internal IEnumerable<object> _source_exclude { get; set; }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public ExplainRequestParameters SourceExclude(params string[] source_exclude)
@@ -1987,16 +1977,6 @@ namespace Elasticsearch.Net
 		{
 			this._source_enabled = source_enabled;
 			this.AddQueryString("_source", this._source_enabled);
-			return this;
-		}
-		
-		
-		internal bool _enable_source { get; set; }
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public GetRequestParameters EnableSource(bool enable_source)
-		{
-			this._enable_source = enable_source;
-			this.AddQueryString("_source", this._enable_source);
 			return this;
 		}
 		
@@ -2107,16 +2087,6 @@ namespace Elasticsearch.Net
 		{
 			this._source_enabled = source_enabled;
 			this.AddQueryString("_source", this._source_enabled);
-			return this;
-		}
-		
-		
-		internal bool _enable_source { get; set; }
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SourceRequestParameters EnableSource(bool enable_source)
-		{
-			this._enable_source = enable_source;
-			this.AddQueryString("_source", this._enable_source);
 			return this;
 		}
 		
@@ -4197,16 +4167,6 @@ namespace Elasticsearch.Net
 		{
 			this._source_enabled = source_enabled;
 			this.AddQueryString("_source", this._source_enabled);
-			return this;
-		}
-		
-		
-		internal bool _enable_source { get; set; }
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public MultiGetRequestParameters EnableSource(bool enable_source)
-		{
-			this._enable_source = enable_source;
-			this.AddQueryString("_source", this._enable_source);
 			return this;
 		}
 		

@@ -150,13 +150,13 @@ namespace Nest
 
 		public PutMappingDescriptor<T> SetParent(string parentType)
 		{
-			Self.Mapping.Parent = new ParentTypeMapping() { Type = parentType };
+			Self.Mapping.Parent = new ParentFieldMapping { Type = parentType };
 			return this;
 		}
 		public PutMappingDescriptor<T> SetParent<K>() where K : class
 		{
 			var parentType = TypeNameMarker.Create<K>();
-			Self.Mapping.Parent = new ParentTypeMapping() { Type = parentType };
+			Self.Mapping.Parent = new ParentFieldMapping { Type = parentType };
 			return this;
 		}
 

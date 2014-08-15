@@ -330,9 +330,7 @@
     <Compile Include="QueryParsers\Queries\BoostingQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\CommonTermsQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\ConstantScoreQueryTests.cs" />
-    <Compile Include="QueryParsers\Queries\CustomBoostFactorQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\CustomFiltersScoreQueryTests.cs" />
-    <Compile Include="QueryParsers\Queries\CustomScoreQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\DisMaxQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\FilteredQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\FunctionScoreQueryTests.cs" />
@@ -458,8 +456,6 @@
     <Compile Include="Search\Query\Singles\BoolQueryJson.cs" />
     <Compile Include="Search\Query\Singles\BoostingQueryJson.cs" />
     <Compile Include="Search\Query\Singles\ConstantScoreQueryJson.cs" />
-    <Compile Include="Search\Query\Singles\CustomBoostFactorQueryJson.cs" />
-    <Compile Include="Search\Query\Singles\CustomScoreQueryJson.cs" />
     <Compile Include="Search\Query\Singles\DismaxQueryJson.cs" />
     <Compile Include="Search\Query\Singles\FilteredQueryJson.cs" />
     <Compile Include="Search\Query\Singles\FuzzyDateQueryJson.cs" />

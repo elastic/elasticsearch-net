@@ -25,10 +25,6 @@ namespace Nest
 		[JsonProperty("store_term_vector_payloads")]
 		bool? StoreTermVectorPayloads { get; set; }
 
-		[JsonProperty("term_vector")]
-		[Obsolete("Scheduled to be removed in 2.0, please use StoreTermVectors instead")]
-		TermVectorOption? TermVector { get; set; }
-
 		[JsonProperty("omit_norms")]
 		bool? OmitNorms { get; set; }
 
@@ -75,7 +71,6 @@ namespace Nest
 		bool? IAllFieldMapping.StoreTermVectorPositions { get; set; }
 		bool? IAllFieldMapping.StoreTermVectorPayloads { get; set; }
 
-		TermVectorOption?  IAllFieldMapping.TermVector { get; set; }
 		public bool? OmitNorms { get; set; }
 
 		string IAllFieldMapping.Analyzer { get; set; }
@@ -118,13 +113,6 @@ namespace Nest
 		public AllFieldMappingDescriptor StoreTermVectorPayloads(bool store = true)
 		{
 			Self.StoreTermVectorPayloads = store;
-			return this;
-		}
-
-		[Obsolete("Scheduled to be removed in 2.0, please use StoreTermVectors instead")]
-		public AllFieldMappingDescriptor TermVector(TermVectorOption option)
-		{
-			Self.TermVector = option;
 			return this;
 		}
 

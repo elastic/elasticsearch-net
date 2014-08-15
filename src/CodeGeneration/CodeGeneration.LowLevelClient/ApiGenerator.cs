@@ -207,17 +207,17 @@ namespace CodeGeneration.LowLevelClient
 					
 					patchedParams.Add(newName, kv.Value);
 
-					if (newName == "source_enabled")
-					{
-						kv.Value.DeprecatedInFavorOf = "EnableSource";
-						patchedParams.Add("enable_source", new ApiQueryParameters
-						{
-							Description = kv.Value.Description,
-							Options = kv.Value.Options,
-							Type = "boolean",
-							OriginalQueryStringParamName = "_source"
-						});
-					}
+					//if (newName == "source_enabled")
+					//{
+					//	kv.Value.DeprecatedInFavorOf = "EnableSource";
+					//	patchedParams.Add("enable_source", new ApiQueryParameters
+					//	{
+					//		Description = kv.Value.Description,
+					//		Options = kv.Value.Options,
+					//		Type = "boolean",
+					//		OriginalQueryStringParamName = "_source"
+					//	});
+					//}
 				}
 
 				method.Url.Params = patchedParams;

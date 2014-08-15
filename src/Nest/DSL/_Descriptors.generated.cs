@@ -1778,18 +1778,9 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public ExplainDescriptor<T> SourceEnabled(params string[] source_enabled)
 		{
 			this.Request.RequestParameters.SourceEnabled(source_enabled);
-			return this;
-		}
-		
-
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public ExplainDescriptor<T> EnableSource(bool enable_source = true)
-		{
-			this.Request.RequestParameters.EnableSource(enable_source);
 			return this;
 		}
 		
@@ -1905,18 +1896,9 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public GetDescriptor<T> SourceEnabled(params string[] source_enabled)
 		{
 			this.Request.RequestParameters.SourceEnabled(source_enabled);
-			return this;
-		}
-		
-
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public GetDescriptor<T> EnableSource(bool enable_source = true)
-		{
-			this.Request.RequestParameters.EnableSource(enable_source);
 			return this;
 		}
 		
@@ -2029,18 +2011,9 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public SourceDescriptor<T> SourceEnabled(params string[] source_enabled)
 		{
 			this.Request.RequestParameters.SourceEnabled(source_enabled);
-			return this;
-		}
-		
-
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SourceDescriptor<T> EnableSource(bool enable_source = true)
-		{
-			this.Request.RequestParameters.EnableSource(enable_source);
 			return this;
 		}
 		
@@ -4013,18 +3986,9 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public MultiGetDescriptor SourceEnabled(params string[] source_enabled)
 		{
 			this.Request.RequestParameters.SourceEnabled(source_enabled);
-			return this;
-		}
-		
-
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public MultiGetDescriptor EnableSource(bool enable_source = true)
-		{
-			this.Request.RequestParameters.EnableSource(enable_source);
 			return this;
 		}
 		

@@ -1669,18 +1669,9 @@ namespace Nest
 		
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public  string[] SourceEnabled 
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
-		}
-		
-		
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool EnableSource 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("_source"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source", value); }
 		}
 		
@@ -1760,18 +1751,9 @@ namespace Nest
 		
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public  string[] SourceEnabled 
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
-		}
-		
-		
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool EnableSource 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("_source"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source", value); }
 		}
 		
@@ -1859,18 +1841,9 @@ namespace Nest
 		
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public  string[] SourceEnabled 
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
-		}
-		
-		
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool EnableSource 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("_source"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source", value); }
 		}
 		
@@ -3640,18 +3613,9 @@ namespace Nest
 		
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public  string[] SourceEnabled 
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
-		}
-		
-		
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool EnableSource 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("_source"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source", value); }
 		}
 		
@@ -5391,18 +5355,9 @@ namespace Nest
 		
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public  string[] SourceEnabled 
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
-		}
-		
-		
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool EnableSource 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("_source"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source", value); }
 		}
 		
@@ -5482,18 +5437,9 @@ namespace Nest
 		
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public  string[] SourceEnabled 
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
-		}
-		
-		
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool EnableSource 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("_source"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source", value); }
 		}
 		
@@ -5581,18 +5527,9 @@ namespace Nest
 		
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public  string[] SourceEnabled 
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
-		}
-		
-		
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public bool EnableSource 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("_source"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source", value); }
 		}
 		
