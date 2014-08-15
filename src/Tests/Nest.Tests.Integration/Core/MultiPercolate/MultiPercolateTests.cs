@@ -53,6 +53,7 @@ namespace Nest.Tests.Integration.Core.MultiPercolate
 
 			//Now we kick of multiple percolations
 			var multiPercolateResponse = this.Client.MultiPercolate(mp => mp
+				.FixedPath(indexName)
 				//provding document in the percolate request 
 				.Percolate<ElasticsearchProject>(perc=>perc
 					.Index(indexName)
@@ -73,9 +74,10 @@ namespace Nest.Tests.Integration.Core.MultiPercolate
 						|| ff.Term("order", 4)
 					)
 				)
-				//Force an error by providing a bogus indexname
+				//Force an error by providing a bogus type-name
 				.Percolate<ElasticsearchProject>(perc=>perc
-					.Index(indexName + "bogus!")
+					.Index(indexName)
+					.Type("bogus!")
 					.Id(projects.Last().Id)
 				)
 			);

@@ -53,6 +53,7 @@ namespace Nest.Tests.Unit.Core.MultiPercolate
 			var result = this._client.MultiPercolate(b => b
 				.FixedPath("myindex", "mytype")
 				.Percolate<ElasticsearchProject>(pp=>pp
+					.Index("myindex")
 					.QueryString("hello")
 					.Aggregations(aggs=>aggs
 						.Terms("name", ta=>ta.Field(p=>p.Name))
