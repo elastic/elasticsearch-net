@@ -10,16 +10,12 @@ namespace Nest
 	/// in order to specify "{dynamic_template}" the type, or if you have some plugin that exposes a new type.
 	/// </summary>
 	[JsonObject(MemberSerialization.OptIn)]
-	public class GenericMapping : IElasticType, IElasticCoreType
+	public class GenericMapping : MultiFieldMapping, IElasticType, IElasticCoreType
 	{
-
-		public PropertyNameMarker Name { get; set; }
-
-		[JsonProperty("type")]
-		public TypeNameMarker Type { get; set; }
-
-		[JsonProperty("similarity")]
-		public string Similarity { get; set; }
+		public GenericMapping()
+		{
+			Type = string.Empty;
+		}
 
 		/// <summary>
 		/// The name of the field that will be stored in the index. Defaults to the property/field name.
@@ -38,9 +34,6 @@ namespace Nest
 
 		[JsonProperty("boost")]
 		public double? Boost { get; set; }
-
-		[JsonProperty("include_in_all")]
-		public bool? IncludeInAll { get; set; }
 
 		[JsonProperty("term_vector")]
 		public string TermVector { get; set; }
