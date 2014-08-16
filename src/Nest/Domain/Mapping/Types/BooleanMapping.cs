@@ -8,9 +8,8 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class BooleanMapping : MultiFieldMapping, IElasticType, IElasticCoreType
 	{
-		public BooleanMapping()
+		public BooleanMapping():base("boolean")
 		{
-			Type = "boolean";
 		}
 
 		/// <summary>

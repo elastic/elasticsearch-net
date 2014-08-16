@@ -8,9 +8,8 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class StringMapping : MultiFieldMapping, IElasticType, IElasticCoreType
 	{
-		public StringMapping()
+		public StringMapping():base("string")
 		{
-			Type = "string";
 		}
 
 		/// <summary>

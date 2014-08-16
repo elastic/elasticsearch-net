@@ -9,8 +9,8 @@ namespace Nest
 	public class NumberMapping : MultiFieldMapping, IElasticType, IElasticCoreType
 	{
 		public NumberMapping()
+			: base("double")
 		{
-			Type = "double";
 		}
 
 		/// <summary>

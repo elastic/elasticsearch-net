@@ -12,9 +12,8 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class GenericMapping : MultiFieldMapping, IElasticType, IElasticCoreType
 	{
-		public GenericMapping()
+		public GenericMapping():base(null)
 		{
-			Type = string.Empty;
 		}
 
 		/// <summary>

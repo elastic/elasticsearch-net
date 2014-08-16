@@ -8,9 +8,8 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class DateMapping : MultiFieldMapping, IElasticType, IElasticCoreType
 	{
-		public DateMapping()
+		public DateMapping():base("date")
 		{
-			Type = "date";
 		}
 
 		/// <summary>
