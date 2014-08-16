@@ -28,7 +28,7 @@ namespace Nest
 		[JsonProperty("include_in_all")]
 		public bool? IncludeInAll { get; set; }
 
-		[JsonProperty("fields"), JsonConverter(typeof(ElasticCoreTypeConverter))]
+		[JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore), JsonConverter(typeof(ElasticCoreTypeConverter))]
 		public IDictionary<PropertyNameMarker, IElasticCoreType> Fields { get; set; }
 
 
