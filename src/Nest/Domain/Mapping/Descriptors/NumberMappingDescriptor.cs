@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public class NumberMappingDescriptor<T>
+	public class NumberMappingDescriptor<T> where T : class
 	{
 		internal NumberMapping _Mapping = new NumberMapping();
 
@@ -81,5 +81,25 @@ namespace Nest
 			return this;
 		}
 
+		public NumberMappingDescriptor<T> Path(MultiFieldMappingPath path)
+		{
+			this._Mapping.Path = path.Value;
+			return this;
+		}
+
+		public NumberMappingDescriptor<T> Fields(Func<CorePropertiesDescriptor<T>, CorePropertiesDescriptor<T>> fieldSelector)
+		{
+			fieldSelector.ThrowIfNull("fieldSelector");
+			var properties = fieldSelector(new CorePropertiesDescriptor<T>());
+			foreach (var p in properties.Properties)
+			{
+				var value = p.Value as IElasticCoreType;
+				if (value == null)
+					continue;
+
+				_Mapping.Fields[p.Key] = value;
+			}
+			return this;
+		}
 	}
 }

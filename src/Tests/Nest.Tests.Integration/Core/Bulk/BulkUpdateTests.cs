@@ -5,7 +5,8 @@ using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Integration.Core.Bulk
 {
-	public class BulkUpdateTests : BulkTests
+	[TestFixture]
+	public class BulkUpdateTests : IntegrationTests
 	{
 
 		[Test]

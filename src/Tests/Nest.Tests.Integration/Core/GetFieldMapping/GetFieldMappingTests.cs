@@ -111,7 +111,7 @@ namespace Nest.Tests.Integration.Core.Get
 					.SearchAnalyzer("default")
 					.StoreTermVectorPositions()
 				)
-				.IndexField(i=>i.Enabled(false).Store())
+				.IndexField(i=>i.Enabled(true).Store(true))
 				.SizeField(i=>i.Enabled(false).Store(false))
 				.IdField(i => i
 					.Index("not_analyzed")
@@ -168,7 +168,8 @@ namespace Nest.Tests.Integration.Core.Get
 
 			var indexField = fieldMappingResponse.MappingFor<SpecialDto>("_index") as IndexFieldMapping;
 			indexField.Should().NotBeNull();
-			indexField.Enabled.Should().BeFalse();
+			indexField.Enabled.Should().BeTrue();
+			indexField.Store.Should().BeTrue();
 
 			var typeField = fieldMappingResponse.MappingFor<SpecialDto>("_type") as TypeFieldMapping;
 			typeField.Should().NotBeNull();

@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public class AttachmentMappingDescriptor<T>
+	public class AttachmentMappingDescriptor<T> where T : class
 	{
 		internal AttachmentMapping _Mapping = new AttachmentMapping();
 

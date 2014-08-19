@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public class GenericMappingDescriptor<T>
+	public class GenericMappingDescriptor<T> where T : class
 	{
 		internal GenericMapping _Mapping = new GenericMapping();
 
@@ -73,6 +73,27 @@ namespace Nest
 		public GenericMappingDescriptor<T> IncludeInAll(bool includeInAll = true)
 		{
 			this._Mapping.IncludeInAll = includeInAll;
+			return this;
+		}
+
+		public GenericMappingDescriptor<T> Path(MultiFieldMappingPath path)
+		{
+			this._Mapping.Path = path.Value;
+			return this;
+		}
+
+		public GenericMappingDescriptor<T> Fields(Func<CorePropertiesDescriptor<T>, CorePropertiesDescriptor<T>> fieldSelector)
+		{
+			fieldSelector.ThrowIfNull("fieldSelector");
+			var properties = fieldSelector(new CorePropertiesDescriptor<T>());
+			foreach (var p in properties.Properties)
+			{
+				var value = p.Value as IElasticCoreType;
+				if (value == null)
+					continue;
+
+				_Mapping.Fields[p.Key] = value;
+			}
 			return this;
 		}
 	}

@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public class StringMappingDescriptor<T>
+	public class StringMappingDescriptor<T> where T : class
 	{
 		internal StringMapping _Mapping = new StringMapping();
 
@@ -117,6 +117,27 @@ namespace Nest
 		public StringMappingDescriptor<T> CopyTo(params Expression<Func<T, object>>[] objectPaths)
 		{
 			this._Mapping.CopyTo = objectPaths.Select(e => (PropertyPathMarker)e);
+			return this;
+		}
+
+		public StringMappingDescriptor<T> Path(MultiFieldMappingPath path)
+		{
+			this._Mapping.Path = path.Value;
+			return this;
+		}
+
+		public StringMappingDescriptor<T> Fields(Func<CorePropertiesDescriptor<T>, CorePropertiesDescriptor<T>> fieldSelector)
+		{
+			fieldSelector.ThrowIfNull("fieldSelector");
+			var properties = fieldSelector(new CorePropertiesDescriptor<T>());
+			foreach (var p in properties.Properties)
+			{
+				var value = p.Value as IElasticCoreType;
+				if (value == null)
+					continue;
+
+				_Mapping.Fields[p.Key] = value;
+			}
 			return this;
 		}
 	}
