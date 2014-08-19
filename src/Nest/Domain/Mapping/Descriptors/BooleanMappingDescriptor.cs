@@ -4,7 +4,8 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public class BooleanMappingDescriptor<T>
+	public class BooleanMappingDescriptor<T> : CoreMappingDescriptorBase<T>
+		where T : class
 	{
 		internal BooleanMapping _Mapping = new BooleanMapping();
 
@@ -61,6 +62,12 @@ namespace Nest
 		public BooleanMappingDescriptor<T> CopyTo(params Expression<Func<T, object>>[] objectPaths)
 		{
 			this._Mapping.CopyTo = objectPaths.Select(e => (PropertyPathMarker)e);
+			return this;
+		}
+
+		public BooleanMappingDescriptor<T> Fields(Func<CorePropertiesDescriptor<T>, CorePropertiesDescriptor<T>> fieldSelector)
+		{
+			base.Fields(fieldSelector, this._Mapping);
 			return this;
 		}
 	}

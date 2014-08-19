@@ -3,7 +3,8 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public class NumberMappingDescriptor<T>
+	public class NumberMappingDescriptor<T> : CoreMappingDescriptorBase<T>
+		where T : class
 	{
 		internal NumberMapping _Mapping = new NumberMapping();
 
@@ -81,5 +82,10 @@ namespace Nest
 			return this;
 		}
 
+		public NumberMappingDescriptor<T> Fields(Func<CorePropertiesDescriptor<T>, CorePropertiesDescriptor<T>> fieldSelector)
+		{
+			base.Fields(fieldSelector, this._Mapping);
+			return this;
+		}
 	}
 }

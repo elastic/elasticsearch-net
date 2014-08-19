@@ -104,7 +104,8 @@ namespace Nest
 			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
-		
+
+		[Obsolete("Scheduled to be removed in 2.0.  Use Fields() on the core property descriptor instead.")]
 		public PropertiesDescriptor<T> MultiField(Func<MultiFieldMappingDescriptor<T>, MultiFieldMappingDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");

@@ -139,6 +139,7 @@
     <Compile Include="Domain\Analysis\TokenFilter\UppercaseTokenFilter.cs" />
     <Compile Include="Domain\Bulk\IBulkOperation.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\CoreMappingDescriptorBase.cs" />
     <Compile Include="Domain\Mapping\Descriptors\MappingTransformDescriptor.cs" />
     <Compile Include="Domain\Mapping\IFieldMapping.cs" />
     <Compile Include="Domain\Mapping\SpecialFields\ISpecialField.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Domain\Geometry\PolygonGeoShape.cs" />
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\MappingTransform.cs" />
+    <Compile Include="Domain\Mapping\Types\CoreMappingBase.cs" />
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
