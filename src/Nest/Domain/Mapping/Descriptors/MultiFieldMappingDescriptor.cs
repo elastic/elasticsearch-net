@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+	[Obsolete("Scheduled to be removed in 2.0.  Use the core property descriptor instead.")]
 	public class MultiFieldMappingDescriptor<T> where T : class
 	{
 		internal MultiFieldMapping _Mapping = new MultiFieldMapping();

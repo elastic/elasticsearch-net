@@ -4,7 +4,6 @@
       "name": {
         "type": "string",
         "similarity": "mysimilarity",
-        "index_name": "my_crazy_name_i_want_in_lucene",
         "store": true,
         "index": "analyzed",
         "term_vector": "with_positions_offsets",
@@ -21,7 +20,21 @@
         "search_analyzer": "standard",
         "include_in_all": true,
         "position_offset_gap": 1,
-        "copy_to": [ "content", "country" ]
+        "copy_to": [
+          "content",
+          "country"
+        ],
+        "index_name": "my_crazy_name_i_want_in_lucene",
+        "fields": {
+          "name-keyword": {
+            "type": "string",
+            "analyzer": "keyword"
+          },
+            "name-ngram": {
+            "type": "string",
+            "analyzer": "ngram"
+          }
+        }
       }
     }
   }

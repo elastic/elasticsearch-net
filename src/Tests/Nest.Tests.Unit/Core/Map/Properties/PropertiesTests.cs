@@ -30,6 +30,9 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.Store()
 						.TermVector(TermVectorOption.WithPositionsOffsets)
 						.Boost(1.1)
+						.Fields(fields => fields
+							.String(fs => fs.Name("name-keyword").Analyzer("keyword"))
+							.String(fs => fs.Name("name-ngram").Analyzer("ngram")))
 						.CopyTo(p => p.Content, p => p.Country)
 						.IgnoreAbove(20)
 					)

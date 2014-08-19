@@ -4,7 +4,8 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public class BinaryMappingDescriptor<T>
+	public class BinaryMappingDescriptor<T> : CoreMappingDescriptorBase<T>
+		where T : class
 	{
 		internal BinaryMapping _Mapping = new BinaryMapping();
 
@@ -58,6 +59,12 @@ namespace Nest
 		public BinaryMappingDescriptor<T> CopyTo(params Expression<Func<T, object>>[] objectPaths)
 		{
 			this._Mapping.CopyTo = objectPaths.Select(e => (PropertyPathMarker)e);
+			return this;
+		}
+
+		public BinaryMappingDescriptor<T> Fields(Func<CorePropertiesDescriptor<T>, CorePropertiesDescriptor<T>> fieldSelector)
+		{
+			base.Fields(fieldSelector, this._Mapping);
 			return this;
 		}
 	}
