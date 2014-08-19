@@ -270,6 +270,11 @@ namespace Nest
 			return new QueryDescriptor<T>().Wildcard(fieldDescriptor, value, Boost);
 		}
 
+		public static QueryContainer Wildcard(Action<WildcardQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().Wildcard(selector);
+		}
+
 		public static QueryContainer Wildcard(string field, string value, double? Boost = null)
 		{
 			return new QueryDescriptor<T>().Wildcard(field, value, Boost);
