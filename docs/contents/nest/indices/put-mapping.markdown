@@ -61,41 +61,37 @@ You can persist this mapping by simpling calling
 
 You can also create mappings on the fly:
 
-	var typeMapping = new TypeMapping(Guid.NewGuid().ToString("n"));
-	var property = new TypeMappingProperty
+	var indexDefinition = new RootObjectMapping
 	{
-		Type = "multi_field"
+		Properties = new Dictionary<PropertyNameMarker, IElasticType>(),
+		Name = indexName
 	};
 
-	var primaryField = new TypeMappingProperty
+	var property = new StringMapping
 	{
-		Type = "string", 
 		Index = "not_analyzed"
 	};
 
-	var analyzedField = new TypeMappingProperty
+	var analyzedField = new StringMapping
 	{
-		Type = "string", 
 		Index = "analyzed"
 	};
 
-	property.Fields = new Dictionary<string, TypeMappingProperty>();
-	property.Fields.Add("name", primaryField);
 	property.Fields.Add("name_analyzed", analyzedField);
+	indexDefinition.Properties.Add("name", property);
+	this.ConnectedClient.Map<object>(x => x.InitializeUsing(indexDefinition));
 
-	typeMapping.Properties.Add("name", property);
-	this.ConnectedClient.Map(typeMapping);
 
 ## Multifield Mapping
 To create multifield type you can use following example. 
 
 	var result = this._client.Map<ElasticsearchProject>(m => m
 		.Properties(props => props
-		.MultiField(s => s
+		.String(s => s
 		.Name(p => p.Name)
 		.Path(MultiFieldMappingPath.Full)
+		.Index(FieldIndexOption.not_analyzed)
 		.Fields(pprops => pprops
-			.String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
 			.String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.analyzed))
 		)
 		))
