@@ -25,6 +25,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "span_not")]
 		ISpanNotQuery SpanNot { get; set; }
+
+		[JsonProperty(PropertyName = "span_multi")]
+		ISpanMultiTermQuery SpanMultiTerm { get; set; }
 	}
 
 	public class SpanQuery : ISpanQuery
@@ -35,6 +38,7 @@ namespace Nest
 		public ISpanNearQuery SpanNear { get; set; }
 		public ISpanOrQuery SpanOr { get; set; }
 		public ISpanNotQuery SpanNot { get; set; }
+		public ISpanMultiTermQuery SpanMultiTerm { get; set; }
 	}
 
 	public class SpanQuery<T> : ISpanQuery where T : class
@@ -49,6 +53,8 @@ namespace Nest
 
 		ISpanNotQuery ISpanQuery.SpanNot { get; set; }
 
+		ISpanMultiTermQuery ISpanQuery.SpanMultiTerm { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
@@ -59,7 +65,8 @@ namespace Nest
 					((ISpanQuery)this).SpanFirst as IQuery,
 					((ISpanQuery)this).SpanNear as IQuery,
 					((ISpanQuery)this).SpanOr as IQuery,
-					((ISpanQuery)this).SpanNot as IQuery
+					((ISpanQuery)this).SpanNot as IQuery,
+					((ISpanQuery)this).SpanMultiTerm as IQuery
 				};
 				return queries.All(q => q == null || q.IsConditionless);
 			}
@@ -116,6 +123,12 @@ namespace Nest
 			selector.ThrowIfNull("selector");
 			var q = selector(new SpanNotQuery<T>());
 			return CreateQuery(q, (sq) => ((ISpanQuery)sq).SpanNot = q);
+		}
+		public SpanQuery<T> SpanMultiTerm(Func<SpanMultiTermQueryDescriptor<T>, SpanMultiTermQueryDescriptor<T>> selector)
+		{
+			selector.ThrowIfNull("selector");
+			var q= selector(new SpanMultiTermQueryDescriptor<T>());
+			return CreateQuery(q, (sq) => ((ISpanQuery)sq).SpanMultiTerm = q);
 		}
 
 		private SpanQuery<T> CreateQuery<K>(K query, Action<SpanQuery<T>> setProperty) where K : ISpanSubQuery

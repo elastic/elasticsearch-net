@@ -125,6 +125,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "span_not")]
 		ISpanNotQuery SpanNot { get; set; }
 
+		[JsonProperty(PropertyName = "span_multi")]
+		ISpanMultiTermQuery SpanMultiTerm { get; set; }
+
 		[JsonProperty(PropertyName = "top_children")]
 		ITopChildrenQuery TopChildren { get; set; }
 

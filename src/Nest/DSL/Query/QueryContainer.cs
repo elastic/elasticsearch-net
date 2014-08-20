@@ -77,6 +77,8 @@ namespace Nest
 		
 		ISpanNearQuery IQueryContainer.SpanNear { get; set; }
 
+		ISpanMultiTermQuery IQueryContainer.SpanMultiTerm { get; set; }
+
 		ITopChildrenQuery IQueryContainer.TopChildren { get; set; }
 		
 		INestedQuery IQueryContainer.Nested { get; set; }
