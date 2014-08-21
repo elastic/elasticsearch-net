@@ -10,7 +10,7 @@ From the Package Manager Console inside Visual Studio:
 
 [source,sh]
 ------------------------------------
-PM > Install Package NEST
+PM > Install-Package NEST
 ------------------------------------
 
 Or search for `NEST` in the Package Manager GUI.
