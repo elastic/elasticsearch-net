@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 		public void BulkUpdateObject()
 		{
 			//Lets first insert some documents with id range 5000-6000
-			var descriptor = new BulkDescriptor();
+			var descriptor = new BulkDescriptor().FixedPath(this.Settings.DefaultIndex);
 			foreach (var i in Enumerable.Range(5000, 1000))
 				descriptor.Index<ElasticsearchProject>(op => op.Document(new ElasticsearchProject { Id = i }));
 
@@ -22,7 +22,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 			result.IsValid.Should().BeTrue();
 
 			//Now lets update all of them giving them a name
-			descriptor = new BulkDescriptor().Refresh();
+			descriptor = new BulkDescriptor().Refresh().FixedPath(this.Settings.DefaultIndex);
 			foreach (var i in Enumerable.Range(5000, 1000))
 			{
 				int id = i;

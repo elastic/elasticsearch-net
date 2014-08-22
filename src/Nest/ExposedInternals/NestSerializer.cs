@@ -163,7 +163,15 @@ namespace Nest
 							   ?? inferrer.TypeName(operation.ClrType);
 			
 				var id = operation.GetIdForOperation(inferrer);
-				operation.Index = index;
+				if (index.EqualsMarker(bulkRequest.Index))
+				{
+					operation.Index = null;
+				}
+				else
+				{
+					operation.Index = index;
+				}
+
 				operation.Type = typeName;
 				operation.Id = id;
 
@@ -221,12 +229,20 @@ namespace Nest
 				if (count != null)
 				{
 					operation = "count";
+					if (multiPercolateRequest.Index != null && multiPercolateRequest.Index.EqualsMarker(count.Index))
+					{
+						count.Index = null;
+					}
 					op.index = count.Index;
 					op.type = count.Type;
 					op.id = p.Id;
 				}
 				else if (percolate != null)
 				{
+					if (multiPercolateRequest.Index != null && multiPercolateRequest.Index.EqualsMarker(percolate.Index))
+					{
+						percolate.Index = null;
+					}
 					op.index = percolate.Index;
 					op.type = percolate.Type;
 					op.id = p.Id;
@@ -256,9 +272,16 @@ namespace Nest
 		{
 			var sb = new StringBuilder();
 			var inferrer = new ElasticInferrer(this._settings);
+			var indexName = inferrer.IndexName(multiSearchRequest.Index);
+
 			foreach (var operation in multiSearchRequest.Operations.Values)
 			{
 				var path = operation.ToPathInfo(this._settings);
+				if (path.Index == indexName)
+				{
+					path.Index = null;
+				}
+
 				var op = new
 				{
 					index = path.Index,

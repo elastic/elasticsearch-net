@@ -32,6 +32,7 @@ namespace Nest.Tests.Integration
 				CreateTestIndex(client, ElasticsearchConfiguration.DefaultIndex + "_clone");
 
 				var bulkResponse = client.Bulk(b => b
+					.FixedPath(ElasticsearchConfiguration.DefaultIndex)
 					.IndexMany(projects)
 					.IndexMany(people)
 					.IndexMany(boolTerms)
