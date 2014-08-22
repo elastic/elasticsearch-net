@@ -820,6 +820,19 @@ namespace Nest
 		}
 
 		/// <summary>
+		/// Wrap a multi term query (one of fuzzy, prefix, term range or regexp query) 
+		/// as a span query so it can be nested.
+		/// </summary>
+		public QueryContainer SpanMultiTerm(Action<SpanMultiTermQueryDescriptor<T>> selector)
+		{
+			selector.ThrowIfNull("selector");
+			var span = new SpanMultiTermQueryDescriptor<T>();
+			selector(span);
+
+			return this.New(span, q => q.SpanMultiTerm = span);
+		}
+
+		/// <summary>
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
 		/// computation derived from other field values in the doc (numeric ones) using script or boost expression
 		/// </summary>
