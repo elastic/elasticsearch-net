@@ -104,6 +104,7 @@
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
+    <Compile Include="Core\CountTests.cs" />
     <Compile Include="Core\Explain\ExplainTests.cs" />
     <Compile Include="Core\Exists\AliasExists.cs" />
     <Compile Include="Core\GetFieldMapping\GetFieldMappingTests.cs" />
