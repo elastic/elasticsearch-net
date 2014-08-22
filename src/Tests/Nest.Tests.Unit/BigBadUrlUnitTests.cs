@@ -60,12 +60,12 @@ namespace Nest.Tests.Unit.Cluster
 				.NodesStats(cn => cn.NodeId("insert-marvel-character").Metrics(NodesStatsMetric.Jvm)));
 			Do("GET", "/_cluster/state", c => c.ClusterState());
 			Do("GET", "/_cluster/state?local=true", c => c.ClusterState(cs => cs.Local()));
-			Do("POST", "/_count", c => c.Count());
-			Do("POST", "/_all/doc/_count", c => c.Count(cc => cc.AllIndices().Type<Doc>()));
-			Do("POST", "/mydefaultindex/doc/_count", c => c.Count(cc => cc.Index<Doc>().Type<Doc>()));
-			Do("POST", "/mydefaultindex/_count", c => c.Count(cc => cc.Index<Doc>()));
-			Do("POST", "/mydefaultindex/doc/_count", c => c.Count<Doc>());
-			Do("POST", "/customindex/doc/_count", c => c.Count<Doc>(cc => cc.Index("customindex")));
+			Do("GET", "/_count", c => c.Count());
+			Do("GET", "/_all/doc/_count", c => c.Count(cc => cc.AllIndices().Type<Doc>()));
+			Do("GET", "/mydefaultindex/doc/_count", c => c.Count(cc => cc.Index<Doc>().Type<Doc>()));
+			Do("GET", "/mydefaultindex/_count", c => c.Count(cc => cc.Index<Doc>()));
+			Do("GET", "/mydefaultindex/doc/_count", c => c.Count<Doc>());
+			Do("GET", "/customindex/doc/_count", c => c.Count<Doc>(cc => cc.Index("customindex")));
 			Do("POST", "/new-index-name", c => c.CreateIndex("new-index-name"));
 			Do("DELETE", "/mydefaultindex/doc/1", c => c.Delete<Doc>(d => d.Id("1")));
 			Do("DELETE", "/mydefaultindex/doc/1", c => c.Delete<Doc>(1));

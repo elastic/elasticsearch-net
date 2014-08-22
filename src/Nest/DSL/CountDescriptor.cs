@@ -20,6 +20,7 @@ namespace Nest
 		{
 			var source = request.RequestParameters.GetQueryStringValue<string>("source");
 			pathInfo.HttpMethod = source.IsNullOrEmpty() 
+				&& (request.Query == null || request.Query.IsConditionless)
 				? PathInfoHttpMethod.GET
 				: PathInfoHttpMethod.POST;
 		}
