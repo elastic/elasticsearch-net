@@ -53,7 +53,6 @@ namespace Nest.Tests.Integration.Core.MultiPercolate
 
 			//Now we kick of multiple percolations
 			var multiPercolateResponse = this.Client.MultiPercolate(mp => mp
-				.FixedPath(indexName)
 				//provding document in the percolate request 
 				.Percolate<ElasticsearchProject>(perc=>perc
 					.Index(indexName)

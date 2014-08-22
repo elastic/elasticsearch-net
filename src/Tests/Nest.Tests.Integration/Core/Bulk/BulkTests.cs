@@ -14,7 +14,6 @@ namespace Nest.Tests.Integration.Core.Bulk
 		public void Bulk()
 		{
 			var result = this.Client.Bulk(b => b
-				.FixedPath(this.Settings.DefaultIndex)
 				.Index<ElasticsearchProject>(i => i.Document(new ElasticsearchProject {Id = 2}))
 				.Delete<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 4 }))
 				.Create<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 123123 }))
@@ -48,7 +47,6 @@ namespace Nest.Tests.Integration.Core.Bulk
 		public void DoubleCreateReturnsOneError()
 		{
 			var result = this.Client.Bulk(b => b
-				.FixedPath(this.Settings.DefaultIndex)
 				.Create<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 12315555 }))
 				.Create<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 12315555 }))
 			);
@@ -132,7 +130,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 		[Test]
 		public void BulkAlternativeWayOfWriting()
 		{
-			var descriptor = new BulkDescriptor().FixedPath(this.Settings.DefaultIndex);
+			var descriptor = new BulkDescriptor();
 			foreach (var i in Enumerable.Range(3000, 1000))
 				descriptor.Index<ElasticsearchProject>(op => op.Document(new ElasticsearchProject {Id = i}));
 

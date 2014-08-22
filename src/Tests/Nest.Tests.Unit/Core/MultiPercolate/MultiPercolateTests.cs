@@ -51,9 +51,7 @@ namespace Nest.Tests.Unit.Core.MultiPercolate
 			);
 
 			var result = this._client.MultiPercolate(b => b
-				.FixedPath("myindex", "mytype")
 				.Percolate<ElasticsearchProject>(pp=>pp
-					.Index("myindex")
 					.QueryString("hello")
 					.Aggregations(aggs=>aggs
 						.Terms("name", ta=>ta.Field(p=>p.Name))
@@ -81,7 +79,7 @@ namespace Nest.Tests.Unit.Core.MultiPercolate
 			);
 			var status = result.ConnectionStatus;
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);
-			uri.AbsolutePath.Should().Be("/myindex/mytype/_mpercolate");
+			uri.AbsolutePath.Should().Be("/_mpercolate");
 
 			var json = status.Request.Utf8String();
 			//Assert.Fail(json);
