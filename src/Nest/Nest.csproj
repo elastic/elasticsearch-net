@@ -139,6 +139,11 @@
     <Compile Include="Domain\Analysis\TokenFilter\UppercaseTokenFilter.cs" />
     <Compile Include="Domain\Bulk\IBulkOperation.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\FieldDataFilterDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\FieldDataFrequencyFilterDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\FieldDataNonStringMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\FieldDataRegexFilterDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\FieldDataStringMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\MappingTransformDescriptor.cs" />
     <Compile Include="Domain\Mapping\IFieldMapping.cs" />
     <Compile Include="Domain\Mapping\SpecialFields\ISpecialField.cs" />
@@ -151,6 +156,12 @@
     <Compile Include="Domain\Geometry\MultiPolygonGeoShape.cs" />
     <Compile Include="Domain\Geometry\PointGeoShape.cs" />
     <Compile Include="Domain\Geometry\PolygonGeoShape.cs" />
+    <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataFilter.cs" />
+    <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataFrequencyFilter.cs" />
+    <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataMapping.cs" />
+    <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataNonStringMapping.cs" />
+    <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataRegexFilter.cs" />
+    <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataStringMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\MappingTransform.cs" />
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
@@ -243,6 +254,9 @@
     <Compile Include="ElasticClient-MultiPercolate.cs" />
     <Compile Include="ElasticClient-TypeExists.cs" />
     <Compile Include="ElasticClient-Explain.cs" />
+    <Compile Include="Enums\FieldDataLoading.cs" />
+    <Compile Include="Enums\FieldDataNonStringFormat.cs" />
+    <Compile Include="Enums\FieldDataStringFormat.cs" />
     <Compile Include="Enums\NormsLoading.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />

@@ -140,5 +140,19 @@ namespace Nest
 			}
 			return this;
 		}
+
+		public StringMappingDescriptor<T> FieldData(Func<FieldDataStringMappingDescriptor, FieldDataStringMappingDescriptor> fieldDataSelector)
+		{
+			fieldDataSelector.ThrowIfNull("fieldDataSelector");
+			var selector = fieldDataSelector(new FieldDataStringMappingDescriptor());
+			this._Mapping.FieldData = selector.FieldData;
+			return this;
+		}
+
+		public StringMappingDescriptor<T> FieldData(FieldDataStringMapping fieldData)
+		{
+			this._Mapping.FieldData = fieldData;
+			return this;
+		}
 	}
 }

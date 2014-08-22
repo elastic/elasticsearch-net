@@ -23,5 +23,8 @@ namespace Nest
 
 		[JsonProperty("geohash_precision")]
 		public int? GeoHashPrecision { get; set; }
+
+		[JsonProperty("fielddata")]
+		public FieldDataNonStringMapping FieldData { get; set; }
 	}
 }

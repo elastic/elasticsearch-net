@@ -101,5 +101,19 @@ namespace Nest
 			}
 			return this;
 		}
+
+		public NumberMappingDescriptor<T> FieldData(Func<FieldDataNonStringMappingDescriptor, FieldDataNonStringMappingDescriptor> fieldDataSelector)
+		{
+			fieldDataSelector.ThrowIfNull("fieldDataSelector");
+			var selector = fieldDataSelector(new FieldDataNonStringMappingDescriptor());
+			this._Mapping.FieldData = selector.FieldData;
+			return this;
+		}
+
+		public NumberMappingDescriptor<T> FieldData(FieldDataNonStringMapping fieldData)
+		{
+			this._Mapping.FieldData = fieldData;
+			return this;
+		}
 	}
 }
