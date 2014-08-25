@@ -32,6 +32,20 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.Boost(1.1)
 						.CopyTo(p => p.Content, p => p.Country)
 						.IgnoreAbove(20)
+						.FieldData(fd => fd
+							.Format(FieldDataStringFormat.Fst)
+							.Loading(FieldDataLoading.Eager)
+							.Filter(fdf => fdf
+								.Frequency(freq => freq
+									.Min(0.001)
+									.Max(0.1)
+									.MinSegmentSize(500)
+								)
+								.Regex(rx => rx
+									.Pattern("^#.*")
+								)
+							)
+						)
 					)
 				)
 			);
@@ -53,6 +67,10 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.Index()
 						.Store()
 						.PrecisionStep(1)
+						.FieldData(fd => fd
+							.Format(FieldDataNonStringFormat.DocValues)
+							.Loading(FieldDataLoading.Eager)
+						)
 					)
 				)
 			);
@@ -269,6 +287,16 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.IndexGeoHash()
 						.IndexLatLon()
 						.GeoHashPrecision(12)
+						.FieldData(fd => fd
+							.Format(FieldDataNonStringFormat.Array)
+							.Loading(FieldDataLoading.EagerGlobalOrdinals)
+							.Filter(fdf => fdf
+								.Frequency(freq => freq
+									.Min(0.001)
+									.Max(0.1)
+								)
+							)
+						)
 					)
 				)
 			);

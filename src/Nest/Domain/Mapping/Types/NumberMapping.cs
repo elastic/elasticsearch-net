@@ -43,5 +43,7 @@ namespace Nest
 		[JsonProperty("coerce")]
 		public bool? Coerce { get; set; }
 
+		[JsonProperty("fielddata")]
+		public FieldDataNonStringMapping FieldData { get; set; }
 	}
 }
