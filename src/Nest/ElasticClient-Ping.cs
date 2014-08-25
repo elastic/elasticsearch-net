@@ -18,9 +18,14 @@ namespace Nest
 			pingSelector = pingSelector ?? (s => s);
 			return this.Dispatch<PingDescriptor, PingRequestParameters, PingResponse>(
 				pingSelector,
-				(p, d) => this.RawDispatch.PingDispatch<PingResponse>(
-					p.DeserializationState(new PingConverter(DeserializePingResponse))
-				)
+				(p, d) => 
+				{	
+					SetRequestTimeout(d);
+					return this.RawDispatch.PingDispatch<PingResponse>(
+						p.DeserializationState(new PingConverter(DeserializePingResponse))
+					);
+				}
+
 			);
 		}
 
@@ -30,9 +35,13 @@ namespace Nest
 			pingSelector = pingSelector ?? (s => s);
 			return this.DispatchAsync<PingDescriptor, PingRequestParameters, PingResponse, IPingResponse>(
 				pingSelector,
-				(p, d) => this.RawDispatch.PingDispatchAsync<PingResponse>(
-					p.DeserializationState(new PingConverter(DeserializePingResponse))
-				)
+				(p, d) =>
+				{
+					SetRequestTimeout(d);
+					return this.RawDispatch.PingDispatchAsync<PingResponse>(
+					   p.DeserializationState(new PingConverter(DeserializePingResponse))
+					);
+				}
 			);
 		}
 
@@ -41,9 +50,13 @@ namespace Nest
 		{
 			return this.Dispatch<IPingRequest, PingRequestParameters, PingResponse>(
 				pingRequest,
-				(p, d) => this.RawDispatch.PingDispatch<PingResponse>(
-					p.DeserializationState(new PingConverter(DeserializePingResponse))
-				)
+				(p, d) =>
+				{
+					SetRequestTimeout(d);
+					return this.RawDispatch.PingDispatch<PingResponse>(
+						p.DeserializationState(new PingConverter(DeserializePingResponse))
+					);
+				}
 			);
 		}
 
@@ -52,10 +65,20 @@ namespace Nest
 		{
 			return this.DispatchAsync<IPingRequest, PingRequestParameters, PingResponse, IPingResponse>(
 				pingRequest,
-				(p, d) => this.RawDispatch.PingDispatchAsync<PingResponse>(
-					p.DeserializationState(new PingConverter(DeserializePingResponse))
-				)
+				(p, d) =>
+				{
+					SetRequestTimeout(d);
+					return this.RawDispatch.PingDispatchAsync<PingResponse>(
+						p.DeserializationState(new PingConverter(DeserializePingResponse))
+					);
+				}
 			);
+		}
+
+		private void SetRequestTimeout(IRequest<PingRequestParameters> pingRequest)
+		{
+			if (this._connectionSettings.PingTimeout.HasValue)
+				pingRequest.RequestConfiguration.RequestTimeout = this._connectionSettings.PingTimeout.Value;
 		}
 
 		private PingResponse DeserializePingResponse(IElasticsearchResponse response, Stream stream)
