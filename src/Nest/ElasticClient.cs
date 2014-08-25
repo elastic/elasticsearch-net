@@ -81,7 +81,7 @@ namespace Nest
 			var response = dispatch(pathInfo, descriptor);
 			return ResultsSelector<D, Q, R>(response, descriptor);
 		}
-
+			
 		private static R ResultsSelector<D, Q, R>(
 			ElasticsearchResponse<R> c, 
 			D descriptor
@@ -95,6 +95,12 @@ namespace Nest
 			
 			if (c.Success || statusCodeAllowed)
 			{
+				if (c.Response == null)
+				{
+					var bodilessResponse = CreateBodilessInstance<R>(c);
+					return bodilessResponse;
+				}
+
 				c.Response.IsValid = true;
 				return c.Response;
 			}
@@ -106,7 +112,14 @@ namespace Nest
 		{
 			var r = (R)typeof(R).CreateInstance();
 			((IResponseWithRequestInformation)r).RequestInformation = response;
-			r.IsValid = false;
+			return r;
+		}
+
+		private static R CreateBodilessInstance<R>(IElasticsearchResponse response) where R : BaseResponse
+		{
+			var r = (R)typeof(R).CreateInstance();
+			((IResponseWithRequestInformation)r).RequestInformation = response;
+			r.IsValid = true;
 			return r;
 		}
 

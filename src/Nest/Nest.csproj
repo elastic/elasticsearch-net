@@ -168,6 +168,7 @@
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
     <Compile Include="Domain\Responses\NodesHotThreadsResponse.cs" />
+    <Compile Include="Domain\Responses\PingResponse.cs" />
     <Compile Include="DSL\Filter\GeoShapeCircleFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeMultiLineStringFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeMultiPointFilterDescriptor.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="DSL\NodesHotThreadsDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalNamePathDescriptor.cs" />
     <Compile Include="DSL\Paths\IndicesOptionalTypesNamePathDecriptor.cs" />
+    <Compile Include="DSL\PingDescriptor.cs" />
     <Compile Include="DSL\Query\SubDescriptors\MoreLikeThisQueryDocumentsDescriptor.cs" />
     <Compile Include="DSL\Query\SpanMultiTermQueryDescriptor.cs" />
     <Compile Include="DSL\TypeExistsDescriptor.cs" />
@@ -257,6 +259,7 @@
     <Compile Include="ElasticClient-DeleteIndex.cs" />
     <Compile Include="ElasticClient-MappingGetField.cs" />
     <Compile Include="ElasticClient-MultiPercolate.cs" />
+    <Compile Include="ElasticClient-Ping.cs" />
     <Compile Include="ElasticClient-TypeExists.cs" />
     <Compile Include="ElasticClient-Explain.cs" />
     <Compile Include="Enums\FieldDataLoading.cs" />

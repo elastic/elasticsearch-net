@@ -111,6 +111,7 @@
     <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
     <Compile Include="Core\Percolate\PercolateTests.cs" />
     <Compile Include="Core\Map\Mapping\MappingTransformTests.cs" />
+    <Compile Include="Core\PingTests.cs" />
     <Compile Include="Core\Repository\RestoreTests.cs" />
     <Compile Include="Core\Repository\CreateRepositoryTests.cs" />
     <Compile Include="Core\ClearScroll\ClearScrollTests.cs" />
