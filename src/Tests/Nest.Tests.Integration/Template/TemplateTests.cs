@@ -18,6 +18,7 @@ namespace Nest.Tests.Integration.Template
 			);
 			Assert.IsTrue(putResponse.Acknowledged);
 
+
 			var templateResponse = this.Client.GetTemplate("put-template-with-settings");
 			templateResponse.Should().NotBeNull();
 			templateResponse.IsValid.Should().BeTrue();
@@ -30,6 +31,27 @@ namespace Nest.Tests.Integration.Template
 			settings.Should().NotBeNull();
 		}
 
+		[Test]
+		public void TemplateExistsReturnsNoFalsePositives()
+		{
+			var name = ElasticsearchConfiguration.NewUniqueIndexName();
+			var putResponse = this.Client.PutTemplate(new PutTemplateRequest(name)
+			{
+				TemplateMapping = new TemplateMapping()
+				{
+					Order = 1377,
+					Template = name 
+				}
+			});
+			putResponse.IsValid.Should().BeTrue();
+
+			var falseExists = this.Client.TemplateExists(new TemplateExistsRequest("hello-world-blah"));
+			falseExists.IsValid.Should().BeTrue();
+			falseExists.Exists.Should().BeFalse();
+
+			var realExists = this.Client.TemplateExists(new TemplateExistsRequest(name));
+			realExists.Exists.Should().BeTrue();
+		}
 
 		[Test]
 		public void PutTemplateWithSettings()
