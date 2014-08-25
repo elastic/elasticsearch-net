@@ -233,6 +233,8 @@
     <Compile Include="DSL\Suggest\IFuzziness.cs" />
     <Compile Include="DSL\ExplainDescriptor.cs" />
     <Compile Include="DSL\Visitor\DslPrettyPrintVisitor.cs" />
+    <Compile Include="DSL\Visitor\IMappingVisitor.cs" />
+    <Compile Include="DSL\Visitor\MappingWalker.cs" />
     <Compile Include="DSL\Visitor\QueryFilterWalker.cs" />
     <Compile Include="DSL\Visitor\QueryVisitor.cs" />
     <Compile Include="DSL\Visitor\VisitorScope.cs" />
