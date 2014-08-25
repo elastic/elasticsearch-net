@@ -16,7 +16,28 @@ var settings = new ConnectionSettings(uri, defaultIndex: &quot;my-application&qu
 <pre><code>var client = new ElasticClient(settings, new ThriftConnection(settings));
 </code></pre><p>NEST comes with an Http Connection <code>HttpConnection</code>, Thrift Connection <code>ThriftConnection</code> 
 and an In-Memory Connection <code>InMemoryConnection</code>, that nevers hits Elasticsearch.</p>
-<h2 id="settings">Settings</h2>
+<p>You can also roll your own connection if desired by implementing the <code>IConnection</code> interface.</p>
+<h2 id="subclassing-existing-connection-implementations">Subclassing existing connection implementations</h2>
+<p>In addition to implementing your own <code>IConnection</code>, the existing <code>HttpConnection</code> and <code>ThriftConnection</code> are extendible and can be subclassed in order to modify or extend their behavior.</p>
+<p>For instance, a common use case is the ability to add client certificates to web requests.  You can subclass <code>HttpConnection</code> and override the <code>CreateHttpWebRequest</code> method that creates the web request, and add certificates to it like so:</p>
+<pre><code>public class SignedHttpConnection : HttpConnection
+{
+    private readonly X509CertificateCollection _certificates;
+
+    public SignedHttpConnection(IConnectionConfigurationValues settings, X509CertificateCollection certificates)
+        : base(settings)
+    {
+        _certificates = certificates;
+    }
+
+    protected override HttpWebRequest CreateHttpWebRequest(Uri uri, string method, byte[] data, IRequestConfiguration requestSpecificConfig)
+    {
+        var request = base.CreateHttpWebRequest(uri, method, data, requestSpecificConfig);
+        request.ClientCertificates = _certificates;
+        return request;
+    }
+}
+</code></pre><h2 id="settings">Settings</h2>
 <p>The <code>NEST</code> client can be configured by passing in an <code>IConnectionSettingsValues</code> object, which is a sub-interface of 
 <code>Elasticsearch.Net</code>&#39;s <code>IConnectionConfigurationValues</code>.  Therefore all of the settings that can be used to 
 <a href="/elasticsearch-net/connection.html">configure Elasticsearch.Net</a> also apply here, including the 

@@ -4,13 +4,16 @@
 <h2 id="note">Note</h2>
 <p>When adding settings strip the <code>index.</code> prefix. This applies to settings found in the <a href="http://www.elasticsearch.org/guide/reference/index-modules/">Index Module</a> documentation.</p>
 <h2 id="simple-example">Simple example</h2>
-<pre><code>var client = this.ConnectedClient;
-var settings = new IndexSettings();
+<pre><code>var settings = new IndexSettings();
 settings.NumberOfReplicas = 1;
 settings.NumberOfShards = 5;
-settings.Add(&quot;merge.policy.merge_factor&quot;,&quot;10&quot;);
-settings.Add(&quot;search.slowlog.threshold.fetch.warn&quot;, &quot;1s&quot;);
-client.CreateIndex(&quot;myindexname&quot;, settings);
+settings.Settings.Add(&quot;merge.policy.merge_factor&quot;,&quot;10&quot;);
+settings.Settings.Add(&quot;search.slowlog.threshold.fetch.warn&quot;, &quot;1s&quot;);
+
+client.CreateIndex(c =&gt; c
+    .Index(&quot;myindexname&quot;)
+    .InitializeUsing(settings)
+);
 </code></pre><h2 id="create-index-with-settings-and-mappings-in-one-go-fluently">Create index with settings and mappings in one go fluently</h2>
 <pre><code>client.CreateIndex(&quot;myindexname&quot;, c =&gt; c
     .NumberOfReplicas(0)

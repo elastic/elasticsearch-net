@@ -41,39 +41,34 @@ public class ElasticSearchProject
 <p><strong>ALSO NOTE</strong>: <code>Map&lt;T&gt;()</code> will also explicitly map string properties as strings with elasticsearch even if they do not have an attribute on them. It does this for all the value types (string, int, float, double, DateTime).</p>
 <h2 id="code-based-mapping">Code based mapping</h2>
 <p>You can also create mappings on the fly:</p>
-<pre><code>var typeMapping = new TypeMapping(Guid.NewGuid().ToString(&quot;n&quot;));
-var property = new TypeMappingProperty
+<pre><code>var indexDefinition = new RootObjectMapping
 {
-    Type = &quot;multi_field&quot;
+    Properties = new Dictionary&lt;PropertyNameMarker, IElasticType&gt;(),
+    Name = indexName
 };
 
-var primaryField = new TypeMappingProperty
+var property = new StringMapping
 {
-    Type = &quot;string&quot;, 
     Index = &quot;not_analyzed&quot;
 };
 
-var analyzedField = new TypeMappingProperty
+var analyzedField = new StringMapping
 {
-    Type = &quot;string&quot;, 
     Index = &quot;analyzed&quot;
 };
 
-property.Fields = new Dictionary&lt;string, TypeMappingProperty&gt;();
-property.Fields.Add(&quot;name&quot;, primaryField);
 property.Fields.Add(&quot;name_analyzed&quot;, analyzedField);
-
-typeMapping.Properties.Add(&quot;name&quot;, property);
-this.ConnectedClient.Map(typeMapping);
+indexDefinition.Properties.Add(&quot;name&quot;, property);
+this.ConnectedClient.Map&lt;object&gt;(x =&gt; x.InitializeUsing(indexDefinition));
 </code></pre><h2 id="multifield-mapping">Multifield Mapping</h2>
 <p>To create multifield type you can use following example. </p>
 <pre><code>var result = this._client.Map&lt;ElasticsearchProject&gt;(m =&gt; m
     .Properties(props =&gt; props
-    .MultiField(s =&gt; s
+    .String(s =&gt; s
     .Name(p =&gt; p.Name)
     .Path(MultiFieldMappingPath.Full)
+    .Index(FieldIndexOption.not_analyzed)
     .Fields(pprops =&gt; pprops
-        .String(ps =&gt; ps.Name(p =&gt; p.Name).Index(FieldIndexOption.not_analyzed))
         .String(ps =&gt; ps.Name(p =&gt; p.Name.Suffix(&quot;searchable&quot;)).Index(FieldIndexOption.analyzed))
     )
     ))
