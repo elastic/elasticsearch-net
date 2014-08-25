@@ -1,8 +1,26 @@
 ﻿{
-  "query":  {
-    "match":  {
-      "name": {
-        "query": ""
+  "testclass": {
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "nestMe": {
+        "type": "nested",
+        "properties": {
+          "nestedMultiField": {
+            "type": "multi_field",
+            "fields": {
+              "raw": {
+                "index": "not_analyzed",
+                "type": "string"
+              },
+              "nestedMultiField": {
+                "index": "analyzed",
+                "type": "string"
+              }
+            }
+          }
+        }
       }
     }
   }
