@@ -1306,5 +1306,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest getFieldMappingRequest);
+
+		/// <inheritdoc />
+		IExistsResponse TemplateExists(Func<TemplateExistsDescriptor, TemplateExistsDescriptor> selector);
+
+		/// <inheritdoc />
+		IExistsResponse TemplateExists(ITemplateExistsRequest templateRequest);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> TemplateExistsAsync(Func<TemplateExistsDescriptor, TemplateExistsDescriptor> selector);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> TemplateExistsAsync(ITemplateExistsRequest templateRequest);
 	}
 }

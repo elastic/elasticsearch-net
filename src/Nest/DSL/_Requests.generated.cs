@@ -2480,7 +2480,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
-	public partial class IndicesExistsTemplateRequest  : BasePathRequest<IndicesExistsTemplateRequestParameters>
+	public partial class TemplateExistsRequest 
 			{
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -2490,12 +2490,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesExistsTemplateRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		

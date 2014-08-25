@@ -168,6 +168,7 @@
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
     <Compile Include="Domain\Responses\NodesHotThreadsResponse.cs" />
+    <Compile Include="DSL\TemplateExistsDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeCircleFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeMultiLineStringFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeMultiPointFilterDescriptor.cs" />
@@ -252,6 +253,7 @@
     <Compile Include="DSL\Visitor\QueryVisitor.cs" />
     <Compile Include="DSL\Visitor\VisitorScope.cs" />
     <Compile Include="DSL\_Requests.generated.cs" />
+    <Compile Include="ElasticClient-TemplateExists.cs" />
     <Compile Include="ElasticClient-AliasExists.cs" />
     <Compile Include="ElasticClient-ClusterSettings.cs" />
     <Compile Include="ElasticClient-DeleteIndex.cs" />

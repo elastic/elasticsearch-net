@@ -2838,12 +2838,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
-	public class IndicesExistsTemplateRequestParameters : FluentRequestParameters<IndicesExistsTemplateRequestParameters> 
+	public class TemplateExistsRequestParameters : FluentRequestParameters<TemplateExistsRequestParameters> 
 	{
 		
 		internal bool _local { get; set; }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndicesExistsTemplateRequestParameters Local(bool local)
+		public TemplateExistsRequestParameters Local(bool local)
 		{
 			this._local = local;
 			this.AddQueryString("local", this._local);
