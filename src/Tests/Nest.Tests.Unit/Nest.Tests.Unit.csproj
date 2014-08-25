@@ -368,6 +368,7 @@
     <Compile Include="QueryParsers\Visitor\DslPrettyPrintVisitor.cs" />
     <Compile Include="QueryParsers\Visitor\VisitorDemoUseCase.cs" />
     <Compile Include="QueryParsers\Visitor\VisitorTests.cs" />
+    <Compile Include="Reproduce\Reproduce902Tests.cs" />
     <Compile Include="Reproduce\Reproduce646Tests.cs" />
     <Compile Include="Reproduce\Reproduce579Tests.cs" />
     <Compile Include="Reproduce\Reproduce860Tests.cs" />
@@ -767,6 +768,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Reproduce\Issue579.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Reproduce\Issue902.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Reproduce\Issue876.json">
