@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Elasticsearch.Net;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,9 @@ namespace Nest
 	[JsonObject]
 	public class PingResponse : BaseResponse, IPingResponse
 	{
+		public PingResponse(IElasticsearchResponse response)
+		{
+			this.IsValid = response.Success && response.HttpStatusCode == 200;
+		}
 	}
 }

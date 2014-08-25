@@ -95,12 +95,6 @@ namespace Nest
 			
 			if (c.Success || statusCodeAllowed)
 			{
-				if (c.Response == null)
-				{
-					var bodilessResponse = CreateBodilessInstance<R>(c);
-					return bodilessResponse;
-				}
-
 				c.Response.IsValid = true;
 				return c.Response;
 			}
@@ -112,14 +106,6 @@ namespace Nest
 		{
 			var r = (R)typeof(R).CreateInstance();
 			((IResponseWithRequestInformation)r).RequestInformation = response;
-			return r;
-		}
-
-		private static R CreateBodilessInstance<R>(IElasticsearchResponse response) where R : BaseResponse
-		{
-			var r = (R)typeof(R).CreateInstance();
-			((IResponseWithRequestInformation)r).RequestInformation = response;
-			r.IsValid = true;
 			return r;
 		}
 
