@@ -14,13 +14,16 @@ When adding settings strip the `index.` prefix. This applies to settings found i
 
 ## Simple example
 
-	var client = this.ConnectedClient;
 	var settings = new IndexSettings();
 	settings.NumberOfReplicas = 1;
 	settings.NumberOfShards = 5;
-	settings.Add("merge.policy.merge_factor","10");
-	settings.Add("search.slowlog.threshold.fetch.warn", "1s");
-	client.CreateIndex("myindexname", settings);
+	settings.Settings.Add("merge.policy.merge_factor","10");
+	settings.Settings.Add("search.slowlog.threshold.fetch.warn", "1s");
+
+	client.CreateIndex(c => c
+		.Index("myindexname")
+		.InitializeUsing(settings)
+	);
 
 
 ## Create index with settings and mappings in one go fluently
