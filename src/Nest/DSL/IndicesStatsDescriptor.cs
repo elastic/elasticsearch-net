@@ -65,15 +65,6 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo)
 		{
-			if (Self.Types != null)
-			{
-				var typeNameMarkers = Self.Types as TypeNameMarker[] ?? Self.Types.ToArray();
-				if (typeNameMarkers.HasAny())
-				{
-					var inferrer = new ElasticInferrer(settings);
-					pathInfo.RequestParameters.AddQueryString("types", inferrer.TypeNames(typeNameMarkers));
-				}
-			}
 			IndicesStatsPathInfo.Update(settings, pathInfo, this);
 		}
 	}
