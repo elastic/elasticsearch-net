@@ -235,6 +235,7 @@
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
     <Compile Include="ObjectInitializer\Nodes\NodesHotThreadsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Search\SearchRequestUntypedTests.cs" />
     <Compile Include="ObjectInitializer\Status\StatusRequestTests.cs" />
     <Compile Include="ObjectInitializer\IndicesStats\IndicesStatsRequestTests.cs" />
     <Compile Include="ObjectInitializer\ClusterState\ClusterStateRequestTests.cs" />

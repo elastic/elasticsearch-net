@@ -38,6 +38,8 @@ namespace Nest
 				pathInfo.Index = inferrer.IndexNames(path.Indices);
 			else if (path.AllIndices.GetValueOrDefault(false) && !pathInfo.Type.IsNullOrEmpty())
 				pathInfo.Index = "_all";
+			else if (!path.AllIndices.GetValueOrDefault(false) && pathInfo.Index.IsNullOrEmpty())
+				pathInfo.Index = inferrer.DefaultIndex;
 
 		}
 		public static void SetRouteParameters<TParameters, T>(
