@@ -99,6 +99,7 @@
     <Compile Include="Attributes\SkipVersionAttribute.cs" />
     <Compile Include="Cluster\GetSettingsTests.cs" />
     <Compile Include="Cluster\PutSettingsTests.cs" />
+    <Compile Include="Cluster\StatsTest.cs" />
     <Compile Include="Connection\Failover\SniffTests.cs" />
     <Compile Include="Connection\HttpClient\HttpClientTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
