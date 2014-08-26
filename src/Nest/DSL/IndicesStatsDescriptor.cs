@@ -53,7 +53,7 @@ namespace Nest
 		//<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Types(params TypeNameMarker[] completion_fields)
 		{
-			Self.RequestParameters.AddQueryString("types", completion_fields);
+			((IIndicesStatsRequest)this).Types = completion_fields;
 			return this;
 		}
 
@@ -65,6 +65,13 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo)
 		{
+			var types = ((IIndicesStatsRequest)this).Types;
+			var typeNameMarkers = types as TypeNameMarker[] ?? types.ToArray();
+			if (typeNameMarkers.HasAny())
+			{
+				var inferrer = new ElasticInferrer(settings);
+				pathInfo.RequestParameters.AddQueryString("types", inferrer.TypeNames(typeNameMarkers));
+			}
 			IndicesStatsPathInfo.Update(settings, pathInfo, this);
 		}
 	}
