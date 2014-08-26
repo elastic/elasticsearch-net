@@ -168,6 +168,7 @@
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
     <Compile Include="Domain\Responses\NodesHotThreadsResponse.cs" />
+    <Compile Include="Domain\Responses\NodesShutdownResponse.cs" />
     <Compile Include="DSL\Filter\GeoShapeCircleFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeMultiLineStringFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeMultiPointFilterDescriptor.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="DSL\MultiPercolate\IPercolateOperation.cs" />
     <Compile Include="DSL\MultiPercolateDescriptor.cs" />
     <Compile Include="DSL\NodesHotThreadsDescriptor.cs" />
+    <Compile Include="DSL\NodesShutdownDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalNamePathDescriptor.cs" />
     <Compile Include="DSL\Paths\IndicesOptionalTypesNamePathDecriptor.cs" />
     <Compile Include="DSL\Query\SubDescriptors\MoreLikeThisQueryDocumentsDescriptor.cs" />

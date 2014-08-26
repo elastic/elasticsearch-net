@@ -4043,7 +4043,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-shutdown.html
 	///</pre>
 	///</summary>
-	public partial class NodesShutdownRequest  : BasePathRequest<NodesShutdownRequestParameters>
+	public partial class NodesShutdownRequest 
 			{
 		
 		///<summary>Set the delay for the operation (default: 1s)</summary>
@@ -4061,12 +4061,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("exit", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesShutdownRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		

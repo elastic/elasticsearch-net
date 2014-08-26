@@ -4479,7 +4479,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-shutdown.html
 	///</pre>
 	///</summary>
-	public partial class NodesShutdownDescriptor  : BaseRequest<NodesShutdownRequestParameters>
+	public partial class NodesShutdownDescriptor 
 	{
 		
 	
@@ -4497,12 +4497,6 @@ namespace Nest
 		{
 			this.Request.RequestParameters.Exit(exit);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesShutdownRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

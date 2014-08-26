@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Elasticsearch.Net;
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Elasticsearch.Net;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace Nest
 {
 	using NodesHotThreadConverter = Func<IElasticsearchResponse, Stream, NodesHotThreadsResponse>;
-	using System.Text.RegularExpressions;
-	using System.Text;
 
 	public partial class ElasticClient
 	{
@@ -131,6 +131,44 @@ namespace Nest
 				nodesHotThreadsRequest,
 				(p, d) => this.RawDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(
 					p.DeserializationState(new NodesHotThreadConverter(DeserializeNodesHotThreadResponse)))
+			);
+		}
+
+		/// <inheritdoc />
+		public INodesShutdownResponse NodesShutdown(Func<NodesShutdownDescriptor, NodesShutdownDescriptor> nodesShutdownSelector = null)
+		{
+			nodesShutdownSelector = nodesShutdownSelector ?? (s => s);
+			return this.Dispatch<NodesShutdownDescriptor, NodesShutdownRequestParameters, NodesShutdownResponse>(
+				nodesShutdownSelector,
+				(p, d) => this.RawDispatch.NodesShutdownDispatch<NodesShutdownResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<INodesShutdownResponse> NodesShutdownAsync(Func<NodesShutdownDescriptor, NodesShutdownDescriptor> nodesShutdownSelector = null)
+		{
+			nodesShutdownSelector = nodesShutdownSelector ?? (s => s);
+			return this.DispatchAsync<NodesShutdownDescriptor, NodesShutdownRequestParameters, NodesShutdownResponse, INodesShutdownResponse>(
+				nodesShutdownSelector,
+				(p, d) => this.RawDispatch.NodesShutdownDispatchAsync<NodesShutdownResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public INodesShutdownResponse NodesShutdown(INodesShutdownRequest nodesShutdownRequest)
+		{
+			return this.Dispatch<INodesShutdownRequest, NodesShutdownRequestParameters, NodesShutdownResponse>(
+				nodesShutdownRequest,
+				(p, d) => this.RawDispatch.NodesShutdownDispatch<NodesShutdownResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<INodesShutdownResponse> NodesShutdownAsync(INodesShutdownRequest nodesShutdownRequest)
+		{
+			return this.DispatchAsync<INodesShutdownRequest, NodesShutdownRequestParameters, NodesShutdownResponse, INodesShutdownResponse>(
+				nodesShutdownRequest,
+				(p, d) => this.RawDispatch.NodesShutdownDispatchAsync<NodesShutdownResponse>(p)
 			);
 		}
 

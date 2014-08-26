@@ -630,6 +630,22 @@ namespace Nest
 		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest nodesHotThreadsRequest);
 
 		/// <summary>
+		/// Allows to shutdown one or more (or all) nodes in the cluster.
+		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-nodes-shutdown.html#cluster-nodes-shutdown
+		/// </summary>
+		/// <param name="nodesShutdownSelector">A descriptor that describes the nodes shutdown operation</param>
+		INodesShutdownResponse NodesShutdown(Func<NodesShutdownDescriptor, NodesShutdownDescriptor> nodesShutdownSelector = null);
+
+		/// <inheritdoc />
+		Task<INodesShutdownResponse> NodesShutdownAsync(Func<NodesShutdownDescriptor, NodesShutdownDescriptor> nodesShutdownSelector = null);
+
+		/// <inheritdoc />
+		INodesShutdownResponse NodesShutdown(INodesShutdownRequest nodesShutdownRequest);
+
+		/// <inheritdoc />
+		Task<INodesShutdownResponse> NodesShutdownAsync(INodesShutdownRequest nodesShutdownRequest);
+
+		/// <summary>
 		/// Used to check if the index (indices) exists or not. 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
 		/// </summary>
