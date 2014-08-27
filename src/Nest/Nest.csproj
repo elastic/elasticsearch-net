@@ -181,6 +181,7 @@
     <Compile Include="DSL\ClusterStatsDescriptor.cs" />
     <Compile Include="DSL\TemplateExistsDescriptor.cs" />
     <Compile Include="Domain\Responses\PingResponse.cs" />
+    <Compile Include="Domain\Responses\NodesShutdownResponse.cs" />
     <Compile Include="DSL\Filter\GeoShapeCircleFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeMultiLineStringFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeMultiPointFilterDescriptor.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="DSL\MultiPercolate\IPercolateOperation.cs" />
     <Compile Include="DSL\MultiPercolateDescriptor.cs" />
     <Compile Include="DSL\NodesHotThreadsDescriptor.cs" />
+    <Compile Include="DSL\NodesShutdownDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalNamePathDescriptor.cs" />
     <Compile Include="DSL\Paths\IndicesOptionalTypesNamePathDecriptor.cs" />
     <Compile Include="DSL\PingDescriptor.cs" />
