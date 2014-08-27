@@ -106,6 +106,7 @@ namespace Nest
 		{
 			var r = (R)typeof(R).CreateInstance();
 			((IResponseWithRequestInformation)r).RequestInformation = response;
+			r.IsValid = false;
 			return r;
 		}
 

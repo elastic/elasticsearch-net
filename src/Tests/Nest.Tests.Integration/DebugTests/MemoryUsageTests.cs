@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Debug
 {
 	[TestFixture]
-	public class MemoryUsageTests : IntegrationSetup
+	public class MemoryUsageTests 
 	{
 		[Test]
 		public void DeserializeOfStreamDoesNotHoldACopyOfTheResponse()

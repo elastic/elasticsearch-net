@@ -2,42 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using Nest;
+using Nest.Tests.Integration;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
-namespace Nest.Tests.Integration
-{
 	[SetUpFixture]
-	public class IntegrationSetup
+	public class SetupAndTeardownForIntegrationTests
 	{
 		[SetUp]
-		public static void Setup()
+		public void Setup()
 		{
 			var client = new ElasticClient(
 				//ElasticsearchConfiguration.Settings(hostOverride: new Uri("http://localhost:9200"))
 				ElasticsearchConfiguration.Settings()
 			);
 
-			//uncomment the next line if you want to see the setup in fiddler too
-			//var client = ElasticsearchConfiguration.Client;
-
-			var projects = NestTestData.Data;
-			var people = NestTestData.People;
-			var boolTerms = NestTestData.BoolTerms;
-
 			try
 			{
-				CreateTestIndex(client, ElasticsearchConfiguration.DefaultIndex);
-				CreateTestIndex(client, ElasticsearchConfiguration.DefaultIndex + "_clone");
+				IntegrationSetup.CreateTestIndex(client, ElasticsearchConfiguration.DefaultIndex);
+				IntegrationSetup.CreateTestIndex(client, ElasticsearchConfiguration.DefaultIndex + "_clone");
 
-				var bulkResponse = client.Bulk(b => b
-					.FixedPath(ElasticsearchConfiguration.DefaultIndex)
-					.IndexMany(projects)
-					.IndexMany(people)
-					.IndexMany(boolTerms)
-					.Refresh()
-				);
+				IntegrationSetup.IndexDemoData(client);
 			}
 			catch (Exception)
 			{
@@ -46,6 +33,42 @@ namespace Nest.Tests.Integration
 			}
 
 		}
+		[TearDown]
+		public void TearDown()
+		{
+			var client = ElasticsearchConfiguration.Client.Value;
+			client.DeleteIndex(di => di.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "*"));
+		}
+	}
+namespace Nest.Tests.Integration
+{
+	
+
+	public static class IntegrationSetup
+	{
+		public static void IndexDemoData(IElasticClient client, string index = null)
+		{
+			index = index ?? ElasticsearchConfiguration.DefaultIndex;
+			var projects = NestTestData.Data;
+			var people = NestTestData.People;
+			var boolTerms = NestTestData.BoolTerms;
+			var bulkResponse = client.Bulk(b => b
+				.FixedPath(index)
+				.IndexMany(projects)
+				.IndexMany(people)
+				.IndexMany(boolTerms)
+				.Refresh()
+				);
+		}
+
+		public static string CreateNewIndexWithData(IElasticClient client)
+		{
+			var newIndex = ElasticsearchConfiguration.NewUniqueIndexName();
+			CreateTestIndex(client, newIndex);
+			IndexDemoData(client, newIndex);
+			return newIndex;
+		}
+
 
 		public static void CreateTestIndex(IElasticClient client, string indexName)
 		{
@@ -67,11 +90,6 @@ namespace Nest.Tests.Integration
 			createIndexResult.IsValid.Should().BeTrue();
 		}
 
-		[TearDown]
-		public static void TearDown()
-		{
-			var client = ElasticsearchConfiguration.Client.Value;
-			client.DeleteIndex(di => di.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "*"));
-		}
+		
 	}
 }
