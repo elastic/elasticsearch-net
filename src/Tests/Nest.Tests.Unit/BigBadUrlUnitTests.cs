@@ -113,6 +113,9 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/_bulk", c => c.IndexMany(Enumerable.Range(0, 10).Select(i => new Doc { Id = i.ToString() })));
 			Do("POST", "/customindex/customtype/_bulk", c => c.IndexMany(Enumerable.Range(0, 10).Select(i => new Doc { Id = i.ToString() }), index: "customindex", type: "customtype"));
 			Do("GET", "/_stats", c => c.IndicesStats());
+			Do("GET", "/my_index/_stats", c => c.IndicesStats(s => s.Index("my_index")));
+			Do("GET", "/my_index/_stats?types=type1", c => c.IndicesStats(s => s.Index("my_index").Types(new TypeNameMarker[] { "type1" })));
+			Do("GET", "/my_index/_stats?types=type1%2Ctype2", c => c.IndicesStats(s => s.Index("my_index").Types(new TypeNameMarker[] { "type1", "type2" })));
 			Do("GET", "/mydefaultindex/_stats", c => c.IndicesStats(s => s.Index<Doc>()));
 			Do("PUT", "/mydefaultindex/doc/_mapping", c => c.Map<Doc>(m => m.MapFromAttributes()));
 			Do("PUT", "/mycustomindex/doc/_mapping", c => c.Map<Doc>(m => m.Index("mycustomindex")));
