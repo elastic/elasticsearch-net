@@ -116,6 +116,7 @@
       <Link>LinkedExtensions\TypeExtensions.cs</Link>
     </Compile>
     <Compile Include="BaseJsonTests.cs" />
+    <Compile Include="Cluster\PendingTasksTests.cs" />
     <Compile Include="Cluster\PutSettings\PutSettingsTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
