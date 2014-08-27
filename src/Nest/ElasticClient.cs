@@ -81,7 +81,7 @@ namespace Nest
 			var response = dispatch(pathInfo, descriptor);
 			return ResultsSelector<D, Q, R>(response, descriptor);
 		}
-
+			
 		private static R ResultsSelector<D, Q, R>(
 			ElasticsearchResponse<R> c, 
 			D descriptor
@@ -106,7 +106,6 @@ namespace Nest
 		{
 			var r = (R)typeof(R).CreateInstance();
 			((IResponseWithRequestInformation)r).RequestInformation = response;
-			r.IsValid = false;
 			return r;
 		}
 

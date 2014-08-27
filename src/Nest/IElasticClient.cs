@@ -1335,5 +1335,19 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IExistsResponse> TemplateExistsAsync(ITemplateExistsRequest templateRequest);
+
+		/// <summary>
+		/// Executes a HEAD request to the cluster to determine whether it's up or not.
+		/// </summary>
+		IPingResponse Ping(Func<PingDescriptor, PingDescriptor> pingSelector = null);
+
+		/// <inheritdoc />
+		Task<IPingResponse> PingAsync(Func<PingDescriptor, PingDescriptor> pingSelector = null);
+
+		/// <inheritdoc />
+		IPingResponse Ping(IPingRequest pingRequest);
+
+		/// <inheritdoc />
+		Task<IPingResponse> PingAsync(IPingRequest pingRequest);
 	}
 }

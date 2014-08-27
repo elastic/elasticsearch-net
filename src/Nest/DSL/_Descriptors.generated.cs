@@ -4689,16 +4689,10 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/
 	///</pre>
 	///</summary>
-	public partial class PingDescriptor  : BaseRequest<PingRequestParameters>
+	public partial class PingDescriptor 
 	{
 		
 	
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PingRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
