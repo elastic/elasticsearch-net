@@ -208,8 +208,8 @@
     <Compile Include="Domain\Marker\PropertyPathMarker.cs" />
     <Compile Include="Domain\Repository\Snapshot.cs" />
     <Compile Include="Domain\Repository\SnapshotRestore.cs" />
-    <Compile Include="Domain\Responses\ClusterGetSettingsResponse - Copy.cs" />
     <Compile Include="Domain\Responses\ClusterPutSettingsResponse.cs" />
+    <Compile Include="Domain\Responses\ClusterGetSettingsResponse.cs" />
     <Compile Include="Domain\Responses\GetSnapshotResponse.cs" />
     <Compile Include="Domain\Responses\MultiTermVectorResponse.cs" />
     <Compile Include="Domain\Responses\RestoreResponse.cs" />

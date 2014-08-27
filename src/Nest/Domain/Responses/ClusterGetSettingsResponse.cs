@@ -3,11 +3,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IClusterPutSettingsResponse : IResponse
+	public interface IClusterGetSettingsResponse : IResponse
 	{
-		[JsonProperty(PropertyName = "acknowledged")]
-		bool Acknowledged { get; }
-
 		[JsonProperty(PropertyName = "persistent")]
 		IDictionary<string, object> Persistent { get; set; }
 
@@ -15,9 +12,8 @@ namespace Nest
 		IDictionary<string, object> Transient { get; set; }
 	}
 
-	public class ClusterPutSettingsResponse : BaseResponse, IClusterPutSettingsResponse
+	public class ClusterGetSettingsResponse : BaseResponse, IClusterGetSettingsResponse
 	{
-		public bool Acknowledged { get; internal set; }
 		public IDictionary<string, object> Persistent { get; set; }
 		public IDictionary<string, object> Transient { get; set; }
 	}
