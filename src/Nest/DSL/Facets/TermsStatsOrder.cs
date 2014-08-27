@@ -8,6 +8,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonConverter(typeof(StringEnumConverter))]
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public enum TermsStatsOrder
 	{
 		[EnumMember(Value = "term")]

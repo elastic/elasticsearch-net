@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class DateRangeFacet : Facet, IFacet<DateRange>
 	{
 		[JsonProperty("ranges")]
@@ -12,6 +13,7 @@ namespace Nest
 
 	}
 	[JsonObject]
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class DateRange : FacetItem
 	{
 		[JsonProperty(PropertyName = "to_str")]

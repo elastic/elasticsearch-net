@@ -11,6 +11,7 @@ namespace Nest
 	{
 		ShardsMetaData Shards { get; }
 		HitsMetaData<T> HitsMetaData { get; }
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		IDictionary<string, Facet> Facets { get; }
 		IDictionary<string, IAggregation> Aggregations { get; }
 		AggregationsHelper Aggs { get; }
@@ -35,9 +36,13 @@ namespace Nest
 		/// </summary>
 		IEnumerable<FieldSelection<T>> FieldSelections { get; }
 		HighlightDocumentDictionary Highlights { get; }
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet;
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		F Facet<F>(string fieldName) where F : class, IFacet;
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		IEnumerable<F> FacetItems<F>(Expression<Func<T, object>> expression) where F : FacetItem;
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		IEnumerable<F> FacetItems<F>(string fieldName) where F : FacetItem;
 	}
 
@@ -59,6 +64,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "facets")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public IDictionary<string, Facet> Facets { get; internal set; }
 		
 		[JsonProperty(PropertyName = "aggregations")]
@@ -124,11 +130,13 @@ namespace Nest
 		}
 
 
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet
 		{
 			var fieldName = this.Infer.PropertyPath(expression);
 			return this.Facet<F>(fieldName);
 		}
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public F Facet<F>(string fieldName) where F : class, IFacet
 		{
 			if (this.Facets == null
@@ -141,12 +149,14 @@ namespace Nest
 			return Convert.ChangeType(facet, typeof(F)) as F;
 		}
 
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public IEnumerable<F> FacetItems<F>(Expression<Func<T, object>> expression) where F : FacetItem
 		{
 			var fieldName = this.Infer.PropertyPath(expression);
 			return this.FacetItems<F>(fieldName);
 		}
 
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public IEnumerable<F> FacetItems<F>(string fieldName) where F : FacetItem
 		{
 			if (this.Facets == null

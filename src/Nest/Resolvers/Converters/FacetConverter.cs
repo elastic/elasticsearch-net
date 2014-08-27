@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 namespace Nest.Resolvers.Converters
 {
 
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class FacetConverter : JsonConverter
 	{
 		public override bool CanWrite

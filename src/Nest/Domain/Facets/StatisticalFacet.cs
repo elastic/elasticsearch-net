@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Nest
 {
     [JsonObject]
-    public class StatisticalFacet : Facet, IFacet
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
+	public class StatisticalFacet : Facet, IFacet
     {
         //Hiding is intentional here
         private IEnumerable<FacetItem> Items { get; set; }

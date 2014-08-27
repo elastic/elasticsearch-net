@@ -1,19 +1,23 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Nest
 {
-    public interface IFacet
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
+	public interface IFacet
     {
     }
 
     [JsonObject]
-    public interface IFacet<T> : IFacet where T : FacetItem
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
+	public interface IFacet<T> : IFacet where T : FacetItem
     {
         IEnumerable<T> Items { get; }
     }
     [JsonObject]
-    public abstract class Facet : IFacet
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
+	public abstract class Facet : IFacet
     {
     }
 }

@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public interface IRangeFacetRequest<K> : IFacetRequest
 		where K : struct
 	{
@@ -32,7 +33,8 @@ namespace Nest
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		Dictionary<string, object> Params { get; set; }
 	}
-	
+
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class RangeFacetRequest<K> : FacetRequest, IRangeFacetRequest<K>
 		where K : struct
 	{
@@ -45,7 +47,9 @@ namespace Nest
 		public Dictionary<string, object> Params { get; set; }
 	}
 
-	public class RangeFacetDescriptor<T, K> : BaseFacetDescriptor<RangeFacetDescriptor<T, K>,T>, IRangeFacetRequest<K> where T : class
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
+	public class RangeFacetDescriptor<T, K> : BaseFacetDescriptor<RangeFacetDescriptor<T, K>, T>, IRangeFacetRequest<K>
+		where T : class
 		where K : struct
 	{
 		private IRangeFacetRequest<K> Self { get { return this; } }

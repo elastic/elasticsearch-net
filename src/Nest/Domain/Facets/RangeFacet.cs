@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject]
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class RangeFacet : Facet, IFacet<Range>
 	{
 		[JsonProperty("ranges")]
@@ -11,6 +13,7 @@ namespace Nest
 
 	}
 	[JsonObject]
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class Range : FacetItem
 	{
 		[JsonProperty(PropertyName = "to")]

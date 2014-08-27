@@ -9,6 +9,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<StatisticalFacetRequest>))]
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public interface IStatisticalFacetRequest : IFacetRequest
 	{
 		[JsonProperty(PropertyName = "field")]
@@ -25,6 +26,7 @@ namespace Nest
 		Dictionary<string, object> Params { get; set; }
 	}
 
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class StatisticalFacetRequest : FacetRequest, IStatisticalFacetRequest
 	{
 		public PropertyPathMarker Field { get; set; }
@@ -33,6 +35,7 @@ namespace Nest
 		public Dictionary<string, object> Params { get; set; }
 	}
 
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class StatisticalFacetDescriptor<T> : BaseFacetDescriptor<StatisticalFacetDescriptor<T>, T>, IStatisticalFacetRequest where T : class
 	{
 		protected IStatisticalFacetRequest Self { get { return this; } }

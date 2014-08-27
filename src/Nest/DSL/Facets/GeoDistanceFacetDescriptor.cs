@@ -10,6 +10,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(CustomJsonConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public interface IGeoDistanceFacetRequest : IFacetRequest, ICustomJson
 	{
 		string PinLocation { get; set; }
@@ -24,6 +25,7 @@ namespace Nest
 		Dictionary<string, object> Params { get; set; }
 	}
 
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class GeoDistanceFacetRequest : FacetRequest, IGeoDistanceFacetRequest
 	{
 		public string PinLocation { get; set; }
@@ -58,6 +60,7 @@ namespace Nest
 		}
 	}
 
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class GeoDistanceFacetDescriptor<T> : BaseFacetDescriptor<GeoDistanceFacetDescriptor<T>, T>, IGeoDistanceFacetRequest where T : class
 	{
 		protected IGeoDistanceFacetRequest Self { get { return this; } }

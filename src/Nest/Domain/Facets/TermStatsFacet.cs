@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
 {
     [JsonObject]
-    public class TermStatsFacet : Facet, IFacet<TermStats>
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
+	public class TermStatsFacet : Facet, IFacet<TermStats>
     {
         [JsonProperty("missing")]
         public long Missing { get; internal set; }
@@ -13,7 +15,8 @@ namespace Nest
         public IEnumerable<TermStats> Items { get; internal set; }
 
     }
-    public class TermStats : TermItem
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
+	public class TermStats : TermItem
     {
         [JsonProperty(PropertyName = "min")]
         public double Min { get; internal set; }

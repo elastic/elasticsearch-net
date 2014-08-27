@@ -8,6 +8,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<FacetContainer>))]
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public interface IFacetContainer
 	{
 		[JsonProperty(PropertyName = "global")]
@@ -47,6 +48,7 @@ namespace Nest
 		IFilterContainer FacetFilter { get; set; }
 	}
 
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class FacetContainer : IFacetContainer 
 	{
 		[JsonProperty(PropertyName = "global")]

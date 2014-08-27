@@ -10,6 +10,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<TermFacetRequest>))]
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public interface ITermFacetRequest : IFacetRequest
 	{
 		[JsonProperty(PropertyName = "field")]
@@ -50,6 +51,7 @@ namespace Nest
 		string ScriptField { get; set; }
 	}
 
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class TermFacetRequest : FacetRequest, ITermFacetRequest
 	{
 		public PropertyPathMarker Field { get; set; }
@@ -67,7 +69,8 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class TermFacetDescriptor<T> : BaseFacetDescriptor<TermFacetDescriptor<T>,T>, ITermFacetRequest where T : class
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
+	public class TermFacetDescriptor<T> : BaseFacetDescriptor<TermFacetDescriptor<T>, T>, ITermFacetRequest where T : class
 	{
 		protected ITermFacetRequest Self { get { return this; } }
 
