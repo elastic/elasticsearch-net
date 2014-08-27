@@ -681,6 +681,23 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IHealthResponse> ClusterHealthAsync(IClusterHealthRequest clusterHealthRequest);
+
+		/// <summary>
+		/// allows to retrieve statistics from a cluster wide perspective. The API returns basic index metrics 
+		/// (shard numbers, store size, memory usage) and information about the current nodes that form the 
+		/// cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
+		/// </summary>
+		/// <param name="clusterStatsSelector">A descriptor that describes the cluster stats operation</param>
+		IClusterStatsResponse ClusterStats(Func<ClusterStatsDescriptor, ClusterStatsDescriptor> clusterStatsSelector = null);
+
+		/// <inheritdoc />
+		Task<IClusterStatsResponse> ClusterStatsAsync(Func<ClusterStatsDescriptor, ClusterStatsDescriptor> clusterStatsSelector = null);
+
+		/// <inheritdoc />
+		IClusterStatsResponse ClusterStats(IClusterStatsRequest clusterStatsRequest);
+
+		/// <inheritdoc />
+		Task<IClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest clusterStatsRequest);
 		
 		/// <summary>
 		/// Performs the analysis process on a text and return the tokens breakdown of the text.

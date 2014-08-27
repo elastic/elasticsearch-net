@@ -1159,7 +1159,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-stats.html
 	///</pre>
 	///</summary>
-	public partial class ClusterStatsRequest  : BasePathRequest<ClusterStatsRequestParameters>
+	public partial class ClusterStatsRequest 
 			{
 		
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -1177,12 +1177,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("human", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterStatsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
