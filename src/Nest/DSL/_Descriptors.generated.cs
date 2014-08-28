@@ -97,7 +97,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-aliases.html
 	///</pre>
 	///</summary>
-	public partial class CatAliasesDescriptor  : BaseRequest<CatAliasesRequestParameters>
+	public partial class CatAliasesDescriptor 
 	{
 		
 	
@@ -139,12 +139,6 @@ namespace Nest
 		{
 			this.Request.RequestParameters.V(v);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatAliasesRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

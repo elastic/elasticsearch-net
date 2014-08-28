@@ -169,6 +169,7 @@
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
     <Compile Include="Domain\Responses\NodesHotThreadsResponse.cs" />
+    <Compile Include="Domain\Responses\CatResponse.cs" />
     <Compile Include="Domain\Stats\ClusterNodesStas.cs" />
     <Compile Include="Domain\Stats\CompletionStats.cs" />
     <Compile Include="Domain\Stats\FieldDataStats.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Domain\Stats\PluginStats.cs" />
     <Compile Include="Domain\Stats\SegmentsStats.cs" />
     <Compile Include="DSL\ClusterStatsDescriptor.cs" />
+    <Compile Include="DSL\CatAliasesDescriptor.cs" />
     <Compile Include="DSL\TemplateExistsDescriptor.cs" />
     <Compile Include="Domain\Responses\PingResponse.cs" />
     <Compile Include="Domain\Responses\NodesShutdownResponse.cs" />
@@ -268,6 +270,7 @@
     <Compile Include="DSL\Visitor\QueryVisitor.cs" />
     <Compile Include="DSL\Visitor\VisitorScope.cs" />
     <Compile Include="DSL\_Requests.generated.cs" />
+    <Compile Include="ElasticClient-Cat.cs" />
     <Compile Include="ElasticClient-TemplateExists.cs" />
     <Compile Include="ElasticClient-AliasExists.cs" />
     <Compile Include="ElasticClient-ClusterSettings.cs" />

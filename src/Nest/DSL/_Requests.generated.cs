@@ -93,7 +93,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-aliases.html
 	///</pre>
 	///</summary>
-	public partial class CatAliasesRequest  : BasePathRequest<CatAliasesRequestParameters>
+	public partial class CatAliasesRequest 
 			{
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -135,12 +135,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatAliasesRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
