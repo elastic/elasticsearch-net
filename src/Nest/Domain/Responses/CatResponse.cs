@@ -24,26 +24,4 @@ namespace Nest
 			this.IsValid = response.Success && response.HttpStatusCode == 200;
 		}
 	}
-
-	public interface ICatRecord {}
-
-	[JsonObject]
-	public class CatAliasesRecord : ICatRecord
-	{
-		[JsonProperty("alias")]
-		public string Alias { get; set; }
-
-		[JsonProperty("index")]
-		public string Index { get; set; }
-
-		[JsonProperty("filter")]
-		public string Filter { get; set; }
-
-		[JsonProperty("indexRouting")]
-		public string IndexRouting { get; set; }
-
-		[JsonProperty("searchRouting")]
-		public string SearchRouting { get; set; }
-
-	}
 }

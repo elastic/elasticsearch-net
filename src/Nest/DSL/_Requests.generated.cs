@@ -143,7 +143,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html
 	///</pre>
 	///</summary>
-	public partial class CatAllocationRequest  : BasePathRequest<CatAllocationRequestParameters>
+	public partial class CatAllocationRequest 
 			{
 		
 		///<summary>The unit in which to display byte values</summary>
@@ -193,12 +193,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatAllocationRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -207,7 +201,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html
 	///</pre>
 	///</summary>
-	public partial class CatCountRequest  : BasePathRequest<CatCountRequestParameters>
+	public partial class CatCountRequest 
 			{
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -249,12 +243,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatCountRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -263,7 +251,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-fielddata.html
 	///</pre>
 	///</summary>
-	public partial class CatFielddataRequest  : BasePathRequest<CatFielddataRequestParameters>
+	public partial class CatFielddataRequest 
 			{
 		
 		///<summary>The unit in which to display byte values</summary>
@@ -321,12 +309,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatFielddataRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -335,7 +317,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-health.html
 	///</pre>
 	///</summary>
-	public partial class CatHealthRequest  : BasePathRequest<CatHealthRequestParameters>
+	public partial class CatHealthRequest 
 			{
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -385,12 +367,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatHealthRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -423,7 +399,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html
 	///</pre>
 	///</summary>
-	public partial class CatIndicesRequest  : BasePathRequest<CatIndicesRequestParameters>
+	public partial class CatIndicesRequest 
 			{
 		
 		///<summary>The unit in which to display byte values</summary>
@@ -481,12 +457,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatIndicesRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -495,7 +465,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-master.html
 	///</pre>
 	///</summary>
-	public partial class CatMasterRequest  : BasePathRequest<CatMasterRequestParameters>
+	public partial class CatMasterRequest 
 			{
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -537,12 +507,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatMasterRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -551,7 +515,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-nodes.html
 	///</pre>
 	///</summary>
-	public partial class CatNodesRequest  : BasePathRequest<CatNodesRequestParameters>
+	public partial class CatNodesRequest 
 			{
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -593,12 +557,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatNodesRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -607,7 +565,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-pending-tasks.html
 	///</pre>
 	///</summary>
-	public partial class CatPendingTasksRequest  : BasePathRequest<CatPendingTasksRequestParameters>
+	public partial class CatPendingTasksRequest 
 			{
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -649,12 +607,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatPendingTasksRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -663,7 +615,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-plugins.html
 	///</pre>
 	///</summary>
-	public partial class CatPluginsRequest  : BasePathRequest<CatPluginsRequestParameters>
+	public partial class CatPluginsRequest 
 			{
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -705,12 +657,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatPluginsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -719,7 +665,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html
 	///</pre>
 	///</summary>
-	public partial class CatRecoveryRequest  : BasePathRequest<CatRecoveryRequestParameters>
+	public partial class CatRecoveryRequest 
 			{
 		
 		///<summary>The unit in which to display byte values</summary>
@@ -761,12 +707,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatRecoveryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -775,7 +715,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html
 	///</pre>
 	///</summary>
-	public partial class CatShardsRequest  : BasePathRequest<CatShardsRequestParameters>
+	public partial class CatShardsRequest 
 			{
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -817,12 +757,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatShardsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -831,7 +765,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-thread-pool.html
 	///</pre>
 	///</summary>
-	public partial class CatThreadPoolRequest  : BasePathRequest<CatThreadPoolRequestParameters>
+	public partial class CatThreadPoolRequest 
 			{
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -881,12 +815,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("full_id", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatThreadPoolRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
