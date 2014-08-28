@@ -5,8 +5,10 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public interface IFacetDescriptor<out T> : IFacetRequest { }
 
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class BaseFacetDescriptor<TFacetDescriptor, T> : IFacetDescriptor<T> 
 		where TFacetDescriptor : BaseFacetDescriptor<TFacetDescriptor, T> 
 		where T : class 

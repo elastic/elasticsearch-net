@@ -34,6 +34,7 @@ namespace Nest
 		public int? Size { get; set; }
 		public bool? TrackScores { get; set; }
 		public IDictionary<PropertyPathMarker, ISort> Sort { get; set; }
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
 		public IHighlightRequest Highlight { get; set; }
 		public QueryContainer Query { get; set; }
@@ -74,6 +75,7 @@ namespace Nest
 
 
 		IDictionary<PropertyPathMarker, ISort> IPercolateOperation.Sort { get; set; }
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		IDictionary<PropertyPathMarker, IFacetContainer> IPercolateOperation.Facets { get; set; }
 		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
 		

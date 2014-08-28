@@ -1,15 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Nest
 {
 	[JsonObject]
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class GeoDistanceFacet : Facet, IFacet<GeoDistanceRange>
 	{
 		[JsonProperty("ranges")]
 		public IEnumerable<GeoDistanceRange> Items { get; internal set; }
 	}
 	[JsonObject]
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class GeoDistanceRange : FacetItem
 	{
 		[JsonProperty(PropertyName = "from")]

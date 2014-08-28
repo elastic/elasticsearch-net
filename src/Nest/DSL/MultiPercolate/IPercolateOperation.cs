@@ -23,6 +23,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "facets")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
 
 		[JsonProperty(PropertyName = "highlight")]

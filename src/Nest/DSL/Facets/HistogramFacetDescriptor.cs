@@ -9,6 +9,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<HistogramFacetRequest>))]
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public interface IHistogramFacetRequest : IFacetRequest
 	{
 		[JsonProperty(PropertyName = "field")]
@@ -36,7 +37,8 @@ namespace Nest
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		Dictionary<string, object> Params { get; set; }
 	}
-	
+
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class HistogramFacetRequest : FacetRequest, IHistogramFacetRequest
 	{
 		public PropertyPathMarker Field { get; set; }
@@ -49,6 +51,7 @@ namespace Nest
 		public Dictionary<string, object> Params { get; set; }
 	}
 
+	[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 	public class HistogramFacetDescriptor<T> : BaseFacetDescriptor<HistogramFacetDescriptor<T>, T>, 
 		IHistogramFacetRequest where T : class
 	{

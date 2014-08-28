@@ -46,6 +46,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "facets")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
 
 		[JsonProperty(PropertyName = "suggest")]
@@ -145,6 +146,7 @@ namespace Nest
 		public IFilterContainer Filter { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IRescore Rescore { get; set; }
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
 		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
 		public IHighlightRequest Highlight { get; set; }
@@ -201,6 +203,7 @@ namespace Nest
 		public double? MinScore { get; set; }
 		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
 		public IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
 		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
 		public IHighlightRequest Highlight { get; set; }
@@ -292,6 +295,7 @@ namespace Nest
 
 		IList<KeyValuePair<PropertyPathMarker, ISort>> ISearchRequest.Sort { get; set; }
 
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		IDictionary<PropertyPathMarker, IFacetContainer> ISearchRequest.Facets { get; set; }
 
 		IDictionary<string, ISuggestBucket> ISearchRequest.Suggest { get; set; }
@@ -667,6 +671,7 @@ namespace Nest
 			return this;
 		}
 
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		private SearchDescriptor<T> _Facet<F, FI>(
 			string name,
 			Func<F, F> facet,
@@ -707,6 +712,7 @@ namespace Nest
 		/// <summary>
 		/// Allow to specify field facets that return the N most frequent terms.
 		/// </summary>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetTerm(string name, Func<TermFacetDescriptor<T>, TermFacetDescriptor<T>> facet)
 		{
 			return this.FacetTerm(facet, Name: name);
@@ -715,6 +721,7 @@ namespace Nest
 		/// <summary>
 		/// Allow to specify field facets that return the N most frequent terms.
 		/// </summary>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetTerm(Func<TermFacetDescriptor<T>, TermFacetDescriptor<T>> facet, string Name = null)
 		{
 			return this._Facet<TermFacetDescriptor<T>, ITermFacetRequest>(
@@ -730,6 +737,7 @@ namespace Nest
 		/// that fall within each range, and aggregated data either based on the field, or using another field
 		/// </summary>
 		/// <typeparam name="K">struct, (int, double, string, DateTime)</typeparam>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetRange<K>(string name, Func<RangeFacetDescriptor<T, K>, RangeFacetDescriptor<T, K>> facet) where K : struct
 		{
 			return this.FacetRange<K>(facet, Name: name);
@@ -739,6 +747,7 @@ namespace Nest
 		/// that fall within each range, and aggregated data either based on the field, or using another field
 		/// </summary>
 		/// <typeparam name="K">struct, (int, double, string, DateTime)</typeparam>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetRange<K>(Func<RangeFacetDescriptor<T, K>, RangeFacetDescriptor<T, K>> facet, string Name = null) where K : struct
 		{
 			return this._Facet<RangeFacetDescriptor<T, K>, IRangeFacetRequest<K>>(
@@ -753,6 +762,7 @@ namespace Nest
 		/// of the field values. Each value is “rounded” into an interval (or placed in a bucket), 
 		/// and statistics are provided per interval/bucket (count and total). 
 		/// </summary>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetHistogram(string name, Func<HistogramFacetDescriptor<T>, HistogramFacetDescriptor<T>> facet)
 		{
 			return this.FacetHistogram(facet, Name: name);
@@ -762,6 +772,7 @@ namespace Nest
 		/// of the field values. Each value is “rounded” into an interval (or placed in a bucket), 
 		/// and statistics are provided per interval/bucket (count and total). 
 		/// </summary>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetHistogram(Func<HistogramFacetDescriptor<T>, HistogramFacetDescriptor<T>> facet, string Name = null)
 		{
 			return this._Facet<HistogramFacetDescriptor<T>, IHistogramFacetRequest>(
@@ -774,6 +785,7 @@ namespace Nest
 		/// <summary>
 		/// A specific histogram facet that can work with date field types enhancing it over the regular histogram facet.
 		/// </summary>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetDateHistogram(string name, Func<DateHistogramFacetDescriptor<T>, DateHistogramFacetDescriptor<T>> facet)
 		{
 			return this.FacetDateHistogram(facet, Name: name);
@@ -781,6 +793,7 @@ namespace Nest
 		/// <summary>
 		/// A specific histogram facet that can work with date field types enhancing it over the regular histogram facet.
 		/// </summary>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetDateHistogram(Func<DateHistogramFacetDescriptor<T>, DateHistogramFacetDescriptor<T>> facet, string Name = null)
 		{
 			return this._Facet<DateHistogramFacetDescriptor<T>, IDateHistogramFacetRequest>(
@@ -796,6 +809,7 @@ namespace Nest
 		/// The statistical data include count, total, sum of squares, 
 		/// mean (average), minimum, maximum, variance, and standard deviation. 
 		/// </summary>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetStatistical(string name, Func<StatisticalFacetDescriptor<T>, StatisticalFacetDescriptor<T>> facet)
 		{
 			return this.FacetStatistical(facet, Name: name);
@@ -806,6 +820,7 @@ namespace Nest
 		/// The statistical data include count, total, sum of squares, 
 		/// mean (average), minimum, maximum, variance, and standard deviation. 
 		/// </summary>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetStatistical(Func<StatisticalFacetDescriptor<T>, StatisticalFacetDescriptor<T>> facet, string Name = null)
 		{
 			return this._Facet<StatisticalFacetDescriptor<T>, IStatisticalFacetRequest>(
@@ -820,6 +835,7 @@ namespace Nest
 		/// The terms_stats facet combines both the terms and statistical allowing 
 		/// to compute stats computed on a field, per term value driven by another field.
 		/// </summary>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetTermsStats(string name, Func<TermsStatsFacetDescriptor<T>, TermsStatsFacetDescriptor<T>> facet)
 		{
 			return this.FacetTermsStats(facet, Name: name);
@@ -829,6 +845,7 @@ namespace Nest
 		/// The terms_stats facet combines both the terms and statistical allowing 
 		/// to compute stats computed on a field, per term value driven by another field.
 		/// </summary>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetTermsStats(Func<TermsStatsFacetDescriptor<T>, TermsStatsFacetDescriptor<T>> facet, string Name = null)
 		{
 			return this._Facet<TermsStatsFacetDescriptor<T>, ITermsStatsFacetRequest>(
@@ -843,6 +860,7 @@ namespace Nest
 		/// from a provided geo_point including count of the number of hits that fall 
 		/// within each range, and aggregation information (like total).
 		/// </summary>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetGeoDistance(string name, Func<GeoDistanceFacetDescriptor<T>, GeoDistanceFacetDescriptor<T>> facet)
 		{
 			return this.FacetGeoDistance(facet, Name: name);
@@ -853,6 +871,7 @@ namespace Nest
 		/// from a provided geo_point including count of the number of hits that fall 
 		/// within each range, and aggregation information (like total).
 		/// </summary>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetGeoDistance(Func<GeoDistanceFacetDescriptor<T>, GeoDistanceFacetDescriptor<T>> facet, string Name = null)
 		{
 			return this._Facet<GeoDistanceFacetDescriptor<T>, IGeoDistanceFacetRequest>(
@@ -867,6 +886,7 @@ namespace Nest
 		/// A facet query allows to return a count of the hits matching 
 		/// the facet query. The query itself can be expressed using the Query DSL.
 		/// </summary>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetQuery(string name, Func<QueryDescriptor<T>, QueryContainer> querySelector, bool? Global = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
@@ -885,6 +905,7 @@ namespace Nest
 		/// its matching the filter. The filter itself can be expressed using the Query DSL.
 		/// Note, filter facet filters are faster than query facet when using native filters (non query wrapper ones).
 		/// </summary>
+		[Obsolete("Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.")]
 		public SearchDescriptor<T> FacetFilter(string name, Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
 			name.ThrowIfNullOrEmpty("name");
