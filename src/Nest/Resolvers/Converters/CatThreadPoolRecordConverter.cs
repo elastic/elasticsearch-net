@@ -38,8 +38,9 @@ namespace Nest.Resolvers.Converters
 			var o = new CatThreadPoolRecord();
 			while (reader.Read())
 			{
-				var prop = reader.Value as JProperty;
-				switch (prop.Name)
+				var prop = reader.Value as string;
+				if (prop == null) return o;
+				switch (prop)
 				{
 					case "id":
 					case "nodeId":
@@ -151,9 +152,9 @@ namespace Nest.Resolvers.Converters
 			}
 		}
 
-		private static Tuple<string, string> GetThreadPoolAndField(JProperty prop)
+		private static Tuple<string, string> GetThreadPoolAndField(string prop)
 		{
-			var tokens = prop.Name.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+			var tokens = prop.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
 			if (tokens.Length == 0 || tokens.Length > 2) return null;
 			if (tokens.Length == 2) return Tuple.Create(tokens[0], tokens[1]);
 			var match = _combinations.FirstOrDefault(c => c.Item1 + c.Item2 == tokens[0]);

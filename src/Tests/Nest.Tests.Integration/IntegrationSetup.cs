@@ -77,10 +77,24 @@ namespace Nest.Tests.Integration
 				.NumberOfShards(1)
 				.AddMapping<ElasticsearchProject>(m => m
 					.MapFromAttributes()
-					.Properties(p => p
-						.String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))
+					.Properties(props => props
+						.String(s=>s
+							.Name(p=>p.Name)
+							.FieldData(fd=>fd.Loading(FieldDataLoading.Eager))
+							.Fields(fields=>fields
+								.String(ss=>ss
+									.Name("sort")
+									.Index(FieldIndexOption.NotAnalyzed)
+								)
+							)
+						)
+						.String(s => s
+							.Name(ep => ep.Content)
+							.TermVector(TermVectorOption.WithPositionsOffsetsPayloads)
+						)
 					)
 				)
+				.AddAlias(indexName + "-aliased")
 				.AddMapping<Person>(m => m.MapFromAttributes())
 				.AddMapping<BoolTerm>(m => m.Properties(pp => pp
 					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.NotAnalyzed))

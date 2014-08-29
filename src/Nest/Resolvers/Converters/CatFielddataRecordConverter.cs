@@ -27,8 +27,10 @@ namespace Nest.Resolvers.Converters
 			var o = new CatFielddataRecord() { FieldSizes = new Dictionary<string, string>() };
 			while (reader.Read())
 			{
-				var prop = reader.Value as JProperty;
-				switch (prop.Name)
+				var prop = reader.Value as string;
+				if (prop == null) return o;
+
+				switch (prop)
 				{
 					case "id":
 						o.Id = reader.ReadAsString();
@@ -47,7 +49,8 @@ namespace Nest.Resolvers.Converters
 						o.Total = reader.ReadAsString();
 						continue;
 					default:
-						o.FieldSizes[prop.Name] = reader.ReadAsString();
+						var value = reader.ReadAsString();
+						o.FieldSizes[prop] = value;
 						continue;
 				}
 			}
