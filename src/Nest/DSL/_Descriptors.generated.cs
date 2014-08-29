@@ -97,7 +97,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-aliases.html
 	///</pre>
 	///</summary>
-	public partial class CatAliasesDescriptor  : BaseRequest<CatAliasesRequestParameters>
+	public partial class CatAliasesDescriptor 
 	{
 		
 	
@@ -141,12 +141,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatAliasesRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -156,7 +150,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html
 	///</pre>
 	///</summary>
-	public partial class CatAllocationDescriptor  : BaseRequest<CatAllocationRequestParameters>
+	public partial class CatAllocationDescriptor 
 	{
 		
 	
@@ -208,12 +202,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatAllocationRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -223,7 +211,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html
 	///</pre>
 	///</summary>
-	public partial class CatCountDescriptor  : BaseRequest<CatCountRequestParameters>
+	public partial class CatCountDescriptor 
 	{
 		
 	
@@ -267,12 +255,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatCountRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -282,7 +264,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-fielddata.html
 	///</pre>
 	///</summary>
-	public partial class CatFielddataDescriptor  : BaseRequest<CatFielddataRequestParameters>
+	public partial class CatFielddataDescriptor 
 	{
 		
 	
@@ -353,12 +335,6 @@ namespace Nest
 			return this;
 		}
 			
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatFielddataRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -368,7 +344,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-health.html
 	///</pre>
 	///</summary>
-	public partial class CatHealthDescriptor  : BaseRequest<CatHealthRequestParameters>
+	public partial class CatHealthDescriptor 
 	{
 		
 	
@@ -420,12 +396,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatHealthRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -462,7 +432,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html
 	///</pre>
 	///</summary>
-	public partial class CatIndicesDescriptor  : BaseRequest<CatIndicesRequestParameters>
+	public partial class CatIndicesDescriptor 
 	{
 		
 	
@@ -522,12 +492,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatIndicesRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -537,7 +501,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-master.html
 	///</pre>
 	///</summary>
-	public partial class CatMasterDescriptor  : BaseRequest<CatMasterRequestParameters>
+	public partial class CatMasterDescriptor 
 	{
 		
 	
@@ -581,12 +545,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatMasterRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -596,7 +554,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-nodes.html
 	///</pre>
 	///</summary>
-	public partial class CatNodesDescriptor  : BaseRequest<CatNodesRequestParameters>
+	public partial class CatNodesDescriptor 
 	{
 		
 	
@@ -640,12 +598,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatNodesRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -655,7 +607,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-pending-tasks.html
 	///</pre>
 	///</summary>
-	public partial class CatPendingTasksDescriptor  : BaseRequest<CatPendingTasksRequestParameters>
+	public partial class CatPendingTasksDescriptor 
 	{
 		
 	
@@ -699,12 +651,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatPendingTasksRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -714,7 +660,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-plugins.html
 	///</pre>
 	///</summary>
-	public partial class CatPluginsDescriptor  : BaseRequest<CatPluginsRequestParameters>
+	public partial class CatPluginsDescriptor 
 	{
 		
 	
@@ -758,12 +704,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatPluginsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -773,7 +713,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html
 	///</pre>
 	///</summary>
-	public partial class CatRecoveryDescriptor  : BaseRequest<CatRecoveryRequestParameters>
+	public partial class CatRecoveryDescriptor 
 	{
 		
 	
@@ -817,12 +757,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatRecoveryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -832,7 +766,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html
 	///</pre>
 	///</summary>
-	public partial class CatShardsDescriptor  : BaseRequest<CatShardsRequestParameters>
+	public partial class CatShardsDescriptor 
 	{
 		
 	
@@ -876,12 +810,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatShardsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -891,7 +819,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-thread-pool.html
 	///</pre>
 	///</summary>
-	public partial class CatThreadPoolDescriptor  : BaseRequest<CatThreadPoolRequestParameters>
+	public partial class CatThreadPoolDescriptor 
 	{
 		
 	
@@ -941,12 +869,6 @@ namespace Nest
 		{
 			this.Request.RequestParameters.FullId(full_id);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatThreadPoolRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

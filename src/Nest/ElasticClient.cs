@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.Exceptions;
 
 namespace Nest
@@ -35,8 +36,8 @@ namespace Nest
 		/// <param name="serializer">Optionally provide a custom serializer responsible for taking a stream and turning into T</param>
 		/// <param name="transport">The transport coordinates requests between the client and the connection pool and the connection</param>
 		public ElasticClient(
-			IConnectionSettingsValues settings = null, 
-			IConnection connection = null, 
+			IConnectionSettingsValues settings = null,
+			IConnection connection = null,
 			INestSerializer serializer = null,
 			ITransport transport = null)
 		{
@@ -45,8 +46,8 @@ namespace Nest
 
 			this.Serializer = serializer ?? new NestSerializer(this._connectionSettings);
 			this.Raw = new ElasticsearchClient(
-				this._connectionSettings, 
-				this.Connection, 
+				this._connectionSettings,
+				this.Connection,
 				transport, //default transport
 				this.Serializer
 			);
@@ -61,7 +62,7 @@ namespace Nest
 			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
 			)
 			where Q : FluentRequestParameters<Q>, new()
-			where D : IRequest<Q>,  new()
+			where D : IRequest<Q>, new()
 			where R : BaseResponse
 		{
 			selector.ThrowIfNull("selector");
@@ -81,9 +82,9 @@ namespace Nest
 			var response = dispatch(pathInfo, descriptor);
 			return ResultsSelector<D, Q, R>(response, descriptor);
 		}
-			
+
 		private static R ResultsSelector<D, Q, R>(
-			ElasticsearchResponse<R> c, 
+			ElasticsearchResponse<R> c,
 			D descriptor
 			)
 			where Q : FluentRequestParameters<Q>, new()
@@ -92,7 +93,7 @@ namespace Nest
 		{
 			var config = descriptor.RequestConfiguration;
 			var statusCodeAllowed = config != null && config.AllowedStatusCodes.HasAny(i => i == c.HttpStatusCode);
-			
+
 			if (c.Success || statusCodeAllowed)
 			{
 				c.Response.IsValid = true;
@@ -125,12 +126,12 @@ namespace Nest
 		}
 
 		private Task<I> DispatchAsync<D, Q, R, I>(
-			D descriptor 
+			D descriptor
 			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
-			) 
+			)
 			where Q : FluentRequestParameters<Q>, new()
 			where D : IRequest<Q>
-			where R : BaseResponse, I 
+			where R : BaseResponse, I
 			where I : IResponse
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
@@ -152,6 +153,24 @@ namespace Nest
 				});
 		}
 
+		private TRequest ForceConfiguration<TRequest>(
+			Func<TRequest, TRequest> selector, Action<IRequestConfiguration> setter
+			)
+			where TRequest : class, IRequest, new()
+		{
+			selector = selector ?? (s => s);
+			var request = selector(new TRequest());
+			return ForceConfiguration(request, setter);
+		}
+
+		private TRequest ForceConfiguration<TRequest>(TRequest request, Action<IRequestConfiguration> setter)
+			where TRequest : IRequest
+		{
+			var configuration = request.RequestConfiguration ?? new RequestConfiguration();
+			setter(configuration);
+			request.RequestConfiguration = configuration;
+			return request;
+		}
 
 		public static void Warmup()
 		{
@@ -160,8 +179,8 @@ namespace Nest
 			client.Serializer.Serialize(new SearchDescriptor<object>());
 			client.Serializer.Deserialize<SearchDescriptor<object>>(stream);
 			var connection = new HttpConnection(new ConnectionSettings());
-			client.RootNodeInfo(); 
-			client.Search<object>(s=>s.MatchAll().Index("someindex")); 
+			client.RootNodeInfo();
+			client.Search<object>(s => s.MatchAll().Index("someindex"));
 		}
 
 	}

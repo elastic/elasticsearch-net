@@ -1046,7 +1046,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1082,7 +1084,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1120,7 +1124,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1158,7 +1164,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1196,7 +1204,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1234,7 +1244,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1274,7 +1286,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1314,7 +1328,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1350,7 +1366,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1386,7 +1404,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1424,7 +1444,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1462,7 +1484,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1500,7 +1524,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1538,7 +1564,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1578,7 +1606,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1618,7 +1648,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1654,7 +1686,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1690,7 +1724,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1728,7 +1764,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1766,7 +1804,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1804,7 +1844,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1842,7 +1884,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1882,7 +1926,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1922,7 +1968,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1958,7 +2006,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1994,7 +2044,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2032,7 +2084,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2070,7 +2124,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2106,7 +2162,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2142,7 +2200,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2180,7 +2240,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2218,7 +2280,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2254,7 +2318,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2290,7 +2356,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2328,7 +2396,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2366,7 +2436,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2402,7 +2474,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2438,7 +2512,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2476,7 +2552,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2514,7 +2592,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2552,7 +2632,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2590,7 +2672,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2630,7 +2714,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2670,7 +2756,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2706,7 +2794,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2742,7 +2832,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2780,7 +2872,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2818,7 +2912,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2854,7 +2950,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2890,7 +2988,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2928,7 +3028,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2966,7 +3068,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3002,7 +3106,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3038,7 +3144,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3076,7 +3184,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3114,7 +3224,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3150,7 +3262,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3186,7 +3300,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3224,7 +3340,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3262,7 +3380,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3298,7 +3418,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3334,7 +3456,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3372,7 +3496,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3410,7 +3536,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3448,7 +3576,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3486,7 +3616,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3526,7 +3658,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3566,7 +3700,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3602,7 +3738,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3638,7 +3776,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3676,7 +3816,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3714,7 +3856,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3752,7 +3896,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3790,7 +3936,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3830,7 +3978,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3870,7 +4020,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3906,7 +4058,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3942,7 +4096,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3980,7 +4136,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -4018,7 +4176,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -7308,7 +7468,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -7350,7 +7512,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -7394,7 +7558,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -7438,7 +7604,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -7776,7 +7944,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -7818,7 +7988,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -7862,7 +8034,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -7906,7 +8080,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11444,7 +11620,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11482,7 +11660,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11522,7 +11702,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11562,7 +11744,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11600,7 +11784,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11638,7 +11824,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11678,7 +11866,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11718,7 +11908,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11758,7 +11950,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11798,7 +11992,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11840,7 +12036,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11882,7 +12080,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11920,7 +12120,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11958,7 +12160,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11998,7 +12202,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12038,7 +12244,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12076,7 +12284,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12114,7 +12324,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12154,7 +12366,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12194,7 +12408,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12234,7 +12450,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12274,7 +12492,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12316,7 +12536,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12358,7 +12580,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 

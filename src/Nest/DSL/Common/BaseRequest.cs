@@ -11,7 +11,7 @@ namespace Nest
 		protected IRequest<TParameters> Request { get { return this; } }
 
 		[JsonIgnore]
-		IRequestConfiguration IRequest<TParameters>.RequestConfiguration
+		IRequestConfiguration IRequest.RequestConfiguration
 		{
 			get { return _requestConfiguration; }
 			set { _requestConfiguration = value; }
