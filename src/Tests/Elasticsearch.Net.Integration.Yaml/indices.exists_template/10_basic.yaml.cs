@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -17,7 +20,7 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesExistsTemplate1
 				//do indices.delete_template 
 				this.Do(()=> _client.IndicesDeleteTemplateForAll("test", nv=>nv
 					.AddQueryString("ignore", new [] {
-						@"404"
+						404
 					})
 				));
 

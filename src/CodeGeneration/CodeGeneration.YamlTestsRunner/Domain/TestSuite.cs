@@ -134,6 +134,8 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 				return "this._status";
 
 			value = Regex.Replace(value, @"\.(\d+)\.?", "[$1].");
+			//make sure we escape reserverd keywords
+			value = Regex.Replace(value, @"(^|\.)(class|params|default)(\.|$)", "$1@$2$3");
 			if (value.Length > 0)
 				value = "." + value;
 			if (Regex.IsMatch(value, @"([\s\-]|\\\.)"))

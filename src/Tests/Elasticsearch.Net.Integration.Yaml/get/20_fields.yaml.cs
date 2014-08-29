@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -61,7 +64,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get3
 
 				//match _response.fields.count: 
 				this.IsMatch(_response.fields.count, new [] {
-					@"1"
+					1
 				});
 
 				//is_false _response._source; 
@@ -83,7 +86,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get3
 
 				//match _response.fields.count: 
 				this.IsMatch(_response.fields.count, new [] {
-					@"1"
+					1
 				});
 
 				//match _response._source.foo: 
