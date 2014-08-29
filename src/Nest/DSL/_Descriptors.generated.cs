@@ -1141,7 +1141,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-reroute.html
 	///</pre>
 	///</summary>
-	public partial class ClusterRerouteDescriptor  : BaseRequest<ClusterRerouteRequestParameters>
+	public partial class ClusterRerouteDescriptor 
 	{
 		
 	
@@ -1183,12 +1183,6 @@ namespace Nest
 		{
 			this.Request.RequestParameters.Timeout(timeout);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterRerouteRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

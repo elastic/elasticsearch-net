@@ -164,6 +164,7 @@
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataStringMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\MappingTransform.cs" />
+    <Compile Include="Domain\Responses\ClusterRerouteResponse.cs" />
     <Compile Include="Domain\Responses\ClusterStatsResponse.cs" />
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
@@ -178,7 +179,15 @@
     <Compile Include="Domain\Stats\PercolateStats.cs" />
     <Compile Include="Domain\Stats\PluginStats.cs" />
     <Compile Include="Domain\Stats\SegmentsStats.cs" />
+    <Compile Include="DSL\ClusterRerouteDescriptor.cs" />
     <Compile Include="DSL\ClusterStatsDescriptor.cs" />
+    <Compile Include="DSL\Cluster\AllocateClusterRerouteCommand.cs" />
+    <Compile Include="DSL\Cluster\AllocateClusterRerouteCommandDescriptor.cs" />
+    <Compile Include="DSL\Cluster\CancelClusterRerouteCommand.cs" />
+    <Compile Include="DSL\Cluster\CancelClusterRerouteCommandDescriptor.cs" />
+    <Compile Include="DSL\Cluster\IClusterRerouteCommand.cs" />
+    <Compile Include="DSL\Cluster\MoveClusterRerouteCommand.cs" />
+    <Compile Include="DSL\Cluster\MoveClusterRerouteCommandDescriptor.cs" />
     <Compile Include="DSL\TemplateExistsDescriptor.cs" />
     <Compile Include="Domain\Responses\PingResponse.cs" />
     <Compile Include="Domain\Responses\NodesShutdownResponse.cs" />
@@ -268,6 +277,7 @@
     <Compile Include="DSL\Visitor\QueryVisitor.cs" />
     <Compile Include="DSL\Visitor\VisitorScope.cs" />
     <Compile Include="DSL\_Requests.generated.cs" />
+    <Compile Include="ElasticClient-ClusterReroute.cs" />
     <Compile Include="ElasticClient-TemplateExists.cs" />
     <Compile Include="ElasticClient-AliasExists.cs" />
     <Compile Include="ElasticClient-ClusterSettings.cs" />
@@ -286,6 +296,7 @@
     <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="Obsolete\Obsolete.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
+    <Compile Include="Resolvers\Converters\ClusterRerouteCommandConverter.cs" />
     <Compile Include="Resolvers\Converters\CompositeJsonConverter.cs" />
     <Compile Include="Domain\DSL\ICustomJsonReader.cs" />
     <Compile Include="DSL\Filter\INotFilter.cs" />
