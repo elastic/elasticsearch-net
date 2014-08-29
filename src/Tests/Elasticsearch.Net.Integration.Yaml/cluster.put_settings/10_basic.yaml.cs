@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -40,7 +43,7 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterPutSettings1
 
 				//match _response.transient: 
 				this.IsMatch(_response.transient, new Dictionary<string, object> {
-					{ @"discovery.zen.minimum_master_nodes", @"1" }
+					{ @"discovery.zen.minimum_master_nodes", 1 }
 				});
 
 				//do cluster.get_settings 
@@ -50,7 +53,7 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterPutSettings1
 
 				//match _response.transient: 
 				this.IsMatch(_response.transient, new Dictionary<string, object> {
-					{ @"discovery.zen.minimum_master_nodes", @"1" }
+					{ @"discovery.zen.minimum_master_nodes", 1 }
 				});
 
 			}
