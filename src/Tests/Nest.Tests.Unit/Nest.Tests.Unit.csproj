@@ -131,7 +131,9 @@
     <None Include="Cluster\PutSettings\PutSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Cluster\Reroute\ClusterReroute.json" />
+    <None Include="Cluster\Reroute\ClusterReroute.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Bulk\BulkIndexDetailsFixedPath.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
