@@ -165,6 +165,7 @@
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\MappingTransform.cs" />
     <Compile Include="Domain\Responses\ClusterStatsResponse.cs" />
+    <Compile Include="Domain\Responses\ClusterPendingTasksResponse.cs" />
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Domain\Stats\PluginStats.cs" />
     <Compile Include="Domain\Stats\SegmentsStats.cs" />
     <Compile Include="DSL\ClusterStatsDescriptor.cs" />
+    <Compile Include="DSL\ClusterPendingTasksDescriptor.cs" />
     <Compile Include="DSL\TemplateExistsDescriptor.cs" />
     <Compile Include="Domain\Responses\PingResponse.cs" />
     <Compile Include="Domain\Responses\NodesShutdownResponse.cs" />
@@ -892,6 +894,7 @@
     <Compile Include="Resolvers\Converters\YesNoBoolConverter.cs" />
     <Compile Include="Domain\Paths\ElasticsearchPathInfo.cs" />
     <Compile Include="ElasticClient-ClusterStats.cs" />
+    <Compile Include="ElasticClient-ClusterPendingTasks.cs" />
     <Compile Include="Resolvers\ExpressionVisitor.cs" />
     <Compile Include="Domain\Marker\IndexNameMarker.cs" />
     <Compile Include="Domain\Paths\PathInfoHttpMethod.cs" />
