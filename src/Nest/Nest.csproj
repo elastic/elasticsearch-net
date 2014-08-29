@@ -138,6 +138,11 @@
     <Compile Include="Domain\Analysis\TokenFilter\StemmerOverrideTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\UppercaseTokenFilter.cs" />
     <Compile Include="Domain\Bulk\IBulkOperation.cs" />
+    <Compile Include="Domain\Cluster\ClusterRerouteDecision.cs" />
+    <Compile Include="Domain\Cluster\ClusterRerouteExplanation.cs" />
+    <Compile Include="Domain\Cluster\ClusterRerouteParameters.cs" />
+    <Compile Include="Domain\Cluster\ClusterRerouteNode.cs" />
+    <Compile Include="Domain\Cluster\ClusterRerouteState.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataFilterDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataFrequencyFilterDescriptor.cs" />
@@ -296,7 +301,7 @@
     <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="Obsolete\Obsolete.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
-    <Compile Include="Resolvers\Converters\ClusterRerouteCommandConverter.cs" />
+    <Compile Include="Resolvers\Converters\ClusterRerouteCommandCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\CompositeJsonConverter.cs" />
     <Compile Include="Domain\DSL\ICustomJsonReader.cs" />
     <Compile Include="DSL\Filter\INotFilter.cs" />

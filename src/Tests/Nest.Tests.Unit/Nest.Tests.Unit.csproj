@@ -119,7 +119,7 @@
     <Compile Include="Cluster\PutSettings\PutSettingsTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
-    <Compile Include="Cluster\RerouteTests.cs" />
+    <Compile Include="Cluster\Reroute\RerouteTests.cs" />
     <Compile Include="Cluster\State\StateTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUrlTests.cs" />
@@ -131,6 +131,7 @@
     <None Include="Cluster\PutSettings\PutSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Cluster\Reroute\ClusterReroute.json" />
     <None Include="Core\Bulk\BulkIndexDetailsFixedPath.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
