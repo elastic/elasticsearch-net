@@ -98,6 +98,7 @@
     <Compile Include="Aggregations\ParseResponseItemsTests.cs" />
     <Compile Include="Attributes\SkipVersionAttribute.cs" />
     <Compile Include="Cluster\GetSettingsTests.cs" />
+    <Compile Include="Cluster\PendingTasksTests.cs" />
     <Compile Include="Cluster\PutSettingsTests.cs" />
     <Compile Include="Cluster\StatsTest.cs" />
     <Compile Include="Connection\Failover\SniffTests.cs" />

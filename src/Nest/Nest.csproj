@@ -178,6 +178,7 @@
     <Compile Include="Domain\Cat\CatMasterRecord.cs" />
     <Compile Include="Domain\Cat\CatNodesRecord.cs" />
     <Compile Include="Domain\Responses\ClusterStatsResponse.cs" />
+    <Compile Include="Domain\Responses\ClusterPendingTasksResponse.cs" />
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Cat\ICatRecord.cs" />
@@ -923,6 +924,7 @@
     <Compile Include="Resolvers\Converters\YesNoBoolConverter.cs" />
     <Compile Include="Domain\Paths\ElasticsearchPathInfo.cs" />
     <Compile Include="ElasticClient-ClusterStats.cs" />
+    <Compile Include="ElasticClient-ClusterPendingTasks.cs" />
     <Compile Include="Resolvers\ExpressionVisitor.cs" />
     <Compile Include="Domain\Marker\IndexNameMarker.cs" />
     <Compile Include="Domain\Paths\PathInfoHttpMethod.cs" />

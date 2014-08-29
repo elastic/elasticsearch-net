@@ -1007,7 +1007,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-pending.html
 	///</pre>
 	///</summary>
-	public partial class ClusterPendingTasksDescriptor  : BaseRequest<ClusterPendingTasksRequestParameters>
+	public partial class ClusterPendingTasksDescriptor 
 	{
 		
 	
@@ -1025,12 +1025,6 @@ namespace Nest
 		{
 			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
