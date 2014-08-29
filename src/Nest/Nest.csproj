@@ -206,6 +206,7 @@
     <Compile Include="DSL\CatFielddataDescriptor.cs" />
     <Compile Include="DSL\CatCountDescriptor.cs" />
     <Compile Include="DSL\CatAllocationDescriptor.cs" />
+    <Compile Include="DSL\ClusterPendingTasksDescriptor.cs" />
     <Compile Include="DSL\ClusterStatsDescriptor.cs" />
     <Compile Include="DSL\CatAliasesDescriptor.cs" />
     <Compile Include="DSL\TemplateExistsDescriptor.cs" />
