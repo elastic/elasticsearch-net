@@ -5056,13 +5056,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotGetRepositoryDescriptor  : BaseRequest<SnapshotGetRepositoryRequestParameters>
+	public partial class GetRepositoryDescriptor 
 	{
 		
 	
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotGetRepositoryDescriptor MasterTimeout(string master_timeout)
+		public GetRepositoryDescriptor MasterTimeout(string master_timeout)
 		{
 			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
@@ -5070,16 +5070,10 @@ namespace Nest
 		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public SnapshotGetRepositoryDescriptor Local(bool local = true)
+		public GetRepositoryDescriptor Local(bool local = true)
 		{
 			this.Request.RequestParameters.Local(local);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotGetRepositoryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

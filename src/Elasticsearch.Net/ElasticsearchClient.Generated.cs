@@ -34343,14 +34343,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotGetRepository<T>(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotGetRepository<T>(Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 
@@ -34375,14 +34375,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 
@@ -34409,14 +34409,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotGetRepository(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotGetRepository(Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 
@@ -34443,14 +34443,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetRepositoryAsync(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetRepositoryAsync(Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 
@@ -34476,7 +34476,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotGetRepository<T>(string repository, Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotGetRepository<T>(string repository, Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
@@ -34484,7 +34484,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 
@@ -34510,7 +34510,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(string repository, Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(string repository, Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
@@ -34518,7 +34518,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 
@@ -34546,7 +34546,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotGetRepository(string repository, Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotGetRepository(string repository, Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
@@ -34554,7 +34554,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 
@@ -34582,7 +34582,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetRepositoryAsync(string repository, Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetRepositoryAsync(string repository, Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
@@ -34590,7 +34590,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 

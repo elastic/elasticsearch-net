@@ -1390,5 +1390,17 @@ namespace Nest
 			where T : class;
 
 		Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request);
+
+		/// <inheritdoc />
+		IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector);
+
+		/// <inheritdoc />
+		IGetRepositoryResponse GetRepository(IGetRepositoryRequest request);
+
+		/// <inheritdoc />
+		Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector);
+
+		/// <inheritdoc />
+		Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request);
 	}
 }

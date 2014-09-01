@@ -4539,7 +4539,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotGetRepositoryRequest  : BasePathRequest<SnapshotGetRepositoryRequestParameters>
+	public partial class GetRepositoryRequest 
 			{
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -4557,12 +4557,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotGetRepositoryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		

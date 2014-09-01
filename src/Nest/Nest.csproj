@@ -182,6 +182,7 @@
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Cat\ICatRecord.cs" />
+    <Compile Include="Domain\Responses\GetRepositoryResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
     <Compile Include="Domain\Responses\NodesHotThreadsResponse.cs" />
     <Compile Include="Domain\Responses\CatResponse.cs" />
@@ -210,6 +211,8 @@
     <Compile Include="DSL\ClusterPendingTasksDescriptor.cs" />
     <Compile Include="DSL\ClusterStatsDescriptor.cs" />
     <Compile Include="DSL\CatAliasesDescriptor.cs" />
+    <Compile Include="DSL\GetRepositoryDescriptor.cs" />
+    <Compile Include="DSL\Paths\RepositoryOptionalPathDescriptor.cs" />
     <Compile Include="DSL\SearchShardsDescriptor.cs" />
     <Compile Include="DSL\TemplateExistsDescriptor.cs" />
     <Compile Include="Domain\Responses\PingResponse.cs" />
@@ -776,6 +779,7 @@
     <Compile Include="DSL\Filter\ExistsFilterDescriptor.cs" />
     <Compile Include="Resolvers\Converters\CatThreadPoolRecordConverter.cs" />
     <Compile Include="Resolvers\Converters\GeoShapeConverterBase.cs" />
+    <Compile Include="Resolvers\Converters\GetRepositoryResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\MappingTransformConverter.cs" />
     <Compile Include="Resolvers\Converters\Queries\GeoShapeQueryJsonReader.cs" />
     <Compile Include="Resolvers\Converters\SimilarityCollectionConverter.cs" />
