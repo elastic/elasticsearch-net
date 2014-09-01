@@ -185,6 +185,16 @@
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
     <Compile Include="Domain\Responses\NodesHotThreadsResponse.cs" />
     <Compile Include="Domain\Responses\CatResponse.cs" />
+    <Compile Include="Domain\Recovery\RecoveryOrigin.cs" />
+    <Compile Include="Domain\Recovery\RecoveryStartStatus.cs" />
+    <Compile Include="Domain\Recovery\RecoveryBytes.cs" />
+    <Compile Include="Domain\Recovery\RecoveryFileDetails.cs" />
+    <Compile Include="Domain\Recovery\RecoveryFiles.cs" />
+    <Compile Include="Domain\Recovery\RecoveryIndexStatus.cs" />
+    <Compile Include="Domain\Recovery\RecoveryStatus.cs" />
+    <Compile Include="Domain\Responses\RecoveryStatusResponse.cs" />
+    <Compile Include="Domain\Recovery\RecoveryTranslogStatus.cs" />
+    <Compile Include="Domain\Responses\ShardRecovery.cs" />
     <Compile Include="Domain\Stats\ClusterNodesStas.cs" />
     <Compile Include="Domain\Stats\CompletionStats.cs" />
     <Compile Include="Domain\Stats\FieldDataStats.cs" />
@@ -209,6 +219,7 @@
     <Compile Include="DSL\ClusterPendingTasksDescriptor.cs" />
     <Compile Include="DSL\ClusterStatsDescriptor.cs" />
     <Compile Include="DSL\CatAliasesDescriptor.cs" />
+    <Compile Include="DSL\RecoveryStatusDescriptor.cs" />
     <Compile Include="DSL\TemplateExistsDescriptor.cs" />
     <Compile Include="Domain\Responses\PingResponse.cs" />
     <Compile Include="Domain\Responses\NodesShutdownResponse.cs" />
@@ -299,6 +310,7 @@
     <Compile Include="DSL\Visitor\VisitorScope.cs" />
     <Compile Include="DSL\_Requests.generated.cs" />
     <Compile Include="ElasticClient-Cat.cs" />
+    <Compile Include="ElasticClient-RecoveryStatus.cs" />
     <Compile Include="ElasticClient-TemplateExists.cs" />
     <Compile Include="ElasticClient-AliasExists.cs" />
     <Compile Include="ElasticClient-ClusterSettings.cs" />
