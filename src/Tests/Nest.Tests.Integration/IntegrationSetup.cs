@@ -58,7 +58,7 @@ namespace Nest.Tests.Integration
 				.IndexMany(people)
 				.IndexMany(boolTerms)
 				.Refresh()
-				);
+			);
 		}
 
 		public static string CreateNewIndexWithData(IElasticClient client)
@@ -73,8 +73,8 @@ namespace Nest.Tests.Integration
 		public static void CreateTestIndex(IElasticClient client, string indexName)
 		{
 			var createIndexResult = client.CreateIndex(indexName, c => c
-				.NumberOfReplicas(0)
-				.NumberOfShards(1)
+				.NumberOfReplicas(ElasticsearchConfiguration.NumberOfReplicas)
+				.NumberOfShards(ElasticsearchConfiguration.NumberOfShards)
 				.AddMapping<ElasticsearchProject>(m => m
 					.MapFromAttributes()
 					.Properties(props => props
