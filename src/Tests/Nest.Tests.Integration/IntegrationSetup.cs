@@ -73,8 +73,8 @@ namespace Nest.Tests.Integration
 		public static void CreateTestIndex(IElasticClient client, string indexName)
 		{
 			var createIndexResult = client.CreateIndex(indexName, c => c
-				.NumberOfReplicas(0)
-				.NumberOfShards(1)
+				.NumberOfReplicas(1)
+				.NumberOfShards(2)
 				.AddMapping<ElasticsearchProject>(m => m
 					.MapFromAttributes()
 					.Properties(props => props

@@ -4791,13 +4791,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html
 	///</pre>
 	///</summary>
-	public partial class SearchShardsDescriptor  : BaseRequest<SearchShardsRequestParameters>
+	public partial class SearchShardsDescriptor<T> 
 	{
 		
 	
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchShardsDescriptor Preference(string preference)
+		public SearchShardsDescriptor<T> Preference(string preference)
 		{
 			this.Request.RequestParameters.Preference(preference);
 			return this;
@@ -4805,7 +4805,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value</summary>
-		public SearchShardsDescriptor Routing(string routing)
+		public SearchShardsDescriptor<T> Routing(string routing)
 		{
 			this.Request.RequestParameters.Routing(routing);
 			return this;
@@ -4813,7 +4813,7 @@ namespace Nest
 		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public SearchShardsDescriptor Local(bool local = true)
+		public SearchShardsDescriptor<T> Local(bool local = true)
 		{
 			this.Request.RequestParameters.Local(local);
 			return this;
@@ -4821,7 +4821,7 @@ namespace Nest
 		
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchShardsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public SearchShardsDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -4829,7 +4829,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchShardsDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public SearchShardsDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -4837,16 +4837,10 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchShardsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		public SearchShardsDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchShardsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

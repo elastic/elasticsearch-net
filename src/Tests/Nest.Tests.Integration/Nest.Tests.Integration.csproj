@@ -110,6 +110,7 @@
     <Compile Include="Core\Cat\CatTests.cs" />
     <Compile Include="Core\Explain\ExplainTests.cs" />
     <Compile Include="Core\Exists\AliasExists.cs" />
+    <Compile Include="Core\SearchShards\SearchShardsTests.cs" />
     <Compile Include="Core\GetFieldMapping\GetFieldMappingTests.cs" />
     <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
     <Compile Include="Core\Percolate\PercolateTests.cs" />
