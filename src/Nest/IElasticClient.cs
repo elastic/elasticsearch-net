@@ -1379,5 +1379,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IPingResponse> PingAsync(IPingRequest pingRequest);
+
+		/// <inheritdoc />
+		ISearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, SearchShardsDescriptor<T>> searchSelector) where T : class;
+
+		ISearchShardsResponse SearchShards(ISearchShardsRequest request);
+
+		/// <inheritdoc />
+		Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, SearchShardsDescriptor<T>> searchSelector)
+			where T : class;
+
+		Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request);
 	}
 }

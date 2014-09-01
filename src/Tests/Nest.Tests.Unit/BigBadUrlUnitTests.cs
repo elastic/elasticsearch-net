@@ -171,6 +171,13 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/_validate/query", c => c.Validate<Doc>(v => v.AllIndices().AllTypes()));
 			Do("PUT", "/_cluster/settings", c => c.ClusterSettings(v => v.Transient(p => p)));
 			Do("GET", "/_cluster/settings", c => c.ClusterGetSettings());
+			
+			Do("GET", "/mydefaultindex/doc/_search_shards?ignore_unavailable=true", c => c.SearchShards<Doc>(s => s.IgnoreUnavailable()));
+			Do("GET", "/_all/doc/_search_shards?local=true", c => c.SearchShards<Doc>(s => s.AllIndices().Local()));
+			Do("GET", "/_search_shards?preference=nodeID", c => c.SearchShards<Doc>(s => s.AllIndices().AllTypes().Preference("nodeID")));
+			Do("GET", "/mydefaultindex/_search_shards?routing=routing-value", c => c.SearchShards<Doc>(s => s.AllTypes().Routing("routing-value")));
+			Do("GET", "/prefix-*/a%2Cb/_search_shards", c => c.SearchShards<Doc>(s => s.Index("prefix-*").Types("a", "b")));
+			
 		}
 
 	}
