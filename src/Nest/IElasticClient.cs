@@ -1391,5 +1391,16 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest getSnapshotRequest);
+
+		IRecoveryStatusResponse RecoveryStatus(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null);
+
+		/// <inheritdoc />
+		IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest statusRequest);
+
+		/// <inheritdoc />
+		Task<IRecoveryStatusResponse> RecoveryStatusAsync(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest statusRequest);
 	}
 }

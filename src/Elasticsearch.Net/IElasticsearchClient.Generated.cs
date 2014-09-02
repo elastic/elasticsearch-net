@@ -10763,7 +10763,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesRecoveryForAll<T>(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesRecoveryForAll<T>(Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_recovery
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -10780,7 +10780,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesRecoveryForAllAsync<T>(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesRecoveryForAllAsync<T>(Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_recovery
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -10799,7 +10799,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesRecoveryForAll(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesRecoveryForAll(Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_recovery
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -10818,7 +10818,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesRecoveryForAllAsync(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesRecoveryForAllAsync(Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_recovery
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -10836,7 +10836,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesRecovery<T>(string index, Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesRecovery<T>(string index, Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_recovery
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -10854,7 +10854,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesRecoveryAsync<T>(string index, Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesRecoveryAsync<T>(string index, Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_recovery
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -10874,7 +10874,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesRecovery(string index, Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesRecovery(string index, Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_recovery
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -10894,7 +10894,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesRecoveryAsync(string index, Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesRecoveryAsync(string index, Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_refresh
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
