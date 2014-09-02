@@ -3426,13 +3426,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html
 	///</pre>
 	///</summary>
-	public partial class IndicesRecoveryDescriptor  : BaseRequest<IndicesRecoveryRequestParameters>
+	public partial class RecoveryStatusDescriptor 
 	{
 		
 	
 
 		///<summary>Whether to display detailed information about shard recovery</summary>
-		public IndicesRecoveryDescriptor Detailed(bool detailed = true)
+		public RecoveryStatusDescriptor Detailed(bool detailed = true)
 		{
 			this.Request.RequestParameters.Detailed(detailed);
 			return this;
@@ -3440,7 +3440,7 @@ namespace Nest
 		
 
 		///<summary>Display only those recoveries that are currently on-going</summary>
-		public IndicesRecoveryDescriptor ActiveOnly(bool active_only = true)
+		public RecoveryStatusDescriptor ActiveOnly(bool active_only = true)
 		{
 			this.Request.RequestParameters.ActiveOnly(active_only);
 			return this;
@@ -3448,16 +3448,10 @@ namespace Nest
 		
 
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public IndicesRecoveryDescriptor Human(bool human = true)
+		public RecoveryStatusDescriptor Human(bool human = true)
 		{
 			this.Request.RequestParameters.Human(human);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesRecoveryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
