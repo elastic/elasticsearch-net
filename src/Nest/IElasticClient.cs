@@ -1381,6 +1381,17 @@ namespace Nest
 		Task<IPingResponse> PingAsync(IPingRequest pingRequest);
 
 		/// <inheritdoc />
+		ISnapshotStatusResponse SnapshotStatus(Func<SnapshotStatusDescriptor, SnapshotStatusDescriptor> selector = null);
+
+		/// <inheritdoc />
+		ISnapshotStatusResponse SnapshotStatus(ISnapshotStatusRequest getSnapshotRequest);
+
+		/// <inheritdoc />
+		Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, SnapshotStatusDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest getSnapshotRequest);
+
 		IRecoveryStatusResponse RecoveryStatus(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null);
 
 		/// <inheritdoc />

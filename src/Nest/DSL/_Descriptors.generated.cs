@@ -5120,7 +5120,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotStatusDescriptor  : BaseRequest<SnapshotStatusRequestParameters>
+	public partial class SnapshotStatusDescriptor 
 	{
 		
 	
@@ -5130,12 +5130,6 @@ namespace Nest
 		{
 			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotStatusRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

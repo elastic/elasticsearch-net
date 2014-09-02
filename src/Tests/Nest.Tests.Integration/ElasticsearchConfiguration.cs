@@ -11,6 +11,8 @@ namespace Nest.Tests.Integration
 		public static readonly string Host = "localhost";
 		public static readonly int MaxConnections = 20;
 
+		public static readonly int NumberOfShards = 2;
+		public static readonly int NumberOfReplicas = 1;
 
 		public static readonly string DefaultIndex = DefaultIndexPrefix + Process.GetCurrentProcess().Id;
 

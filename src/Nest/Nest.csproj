@@ -182,6 +182,7 @@
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Cat\ICatRecord.cs" />
+    <Compile Include="Domain\Responses\SnapshotStatusResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
     <Compile Include="Domain\Responses\NodesHotThreadsResponse.cs" />
     <Compile Include="Domain\Responses\CatResponse.cs" />
@@ -219,6 +220,8 @@
     <Compile Include="DSL\ClusterPendingTasksDescriptor.cs" />
     <Compile Include="DSL\ClusterStatsDescriptor.cs" />
     <Compile Include="DSL\CatAliasesDescriptor.cs" />
+    <Compile Include="DSL\Paths\RepositorySnapshotOptionalPathDescriptor.cs" />
+    <Compile Include="DSL\SnapshotStatusDescriptor.cs" />
     <Compile Include="DSL\RecoveryStatusDescriptor.cs" />
     <Compile Include="DSL\TemplateExistsDescriptor.cs" />
     <Compile Include="Domain\Responses\PingResponse.cs" />
