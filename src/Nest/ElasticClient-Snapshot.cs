@@ -95,6 +95,42 @@ namespace Nest
 		}
 
 
+		/// <inheritdoc />
+		public ISnapshotStatusResponse SnapshotStatus(Func<SnapshotStatusDescriptor, SnapshotStatusDescriptor> selector = null)
+		{
+			return this.Dispatch<SnapshotStatusDescriptor, SnapshotStatusRequestParameters, SnapshotStatusResponse>(
+				selector,
+				(p, d) => this.RawDispatch.SnapshotStatusDispatch<SnapshotStatusResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public ISnapshotStatusResponse SnapshotStatus(ISnapshotStatusRequest getSnapshotRequest)
+		{
+			return this.Dispatch<ISnapshotStatusRequest, SnapshotStatusRequestParameters, SnapshotStatusResponse>(
+				getSnapshotRequest,
+				(p, d) => this.RawDispatch.SnapshotStatusDispatch<SnapshotStatusResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, SnapshotStatusDescriptor> selector = null)
+		{
+			return this.DispatchAsync<SnapshotStatusDescriptor, SnapshotStatusRequestParameters, SnapshotStatusResponse, ISnapshotStatusResponse>(
+				selector,
+				(p, d) => this.RawDispatch.SnapshotStatusDispatchAsync<SnapshotStatusResponse>(p)
+			);
+		}
+		
+		/// <inheritdoc />
+		public Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest getSnapshotRequest)
+		{
+			return this.DispatchAsync<ISnapshotStatusRequest, SnapshotStatusRequestParameters, SnapshotStatusResponse, ISnapshotStatusResponse>(
+				getSnapshotRequest,
+				(p, d) => this.RawDispatch.SnapshotStatusDispatchAsync<SnapshotStatusResponse>(p)
+			);
+		}
+
 
 
 		/// <inheritdoc />

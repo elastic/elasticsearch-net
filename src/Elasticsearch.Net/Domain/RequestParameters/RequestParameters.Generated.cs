@@ -3708,12 +3708,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html
 	///</pre>
 	///</summary>
-	public class IndicesRecoveryRequestParameters : FluentRequestParameters<IndicesRecoveryRequestParameters> 
+	public class RecoveryStatusRequestParameters : FluentRequestParameters<RecoveryStatusRequestParameters> 
 	{
 		
 		internal bool _detailed { get; set; }
 		///<summary>Whether to display detailed information about shard recovery</summary>
-		public IndicesRecoveryRequestParameters Detailed(bool detailed)
+		public RecoveryStatusRequestParameters Detailed(bool detailed)
 		{
 			this._detailed = detailed;
 			this.AddQueryString("detailed", this._detailed);
@@ -3723,7 +3723,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _active_only { get; set; }
 		///<summary>Display only those recoveries that are currently on-going</summary>
-		public IndicesRecoveryRequestParameters ActiveOnly(bool active_only)
+		public RecoveryStatusRequestParameters ActiveOnly(bool active_only)
 		{
 			this._active_only = active_only;
 			this.AddQueryString("active_only", this._active_only);
@@ -3733,7 +3733,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _human { get; set; }
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public IndicesRecoveryRequestParameters Human(bool human)
+		public RecoveryStatusRequestParameters Human(bool human)
 		{
 			this._human = human;
 			this.AddQueryString("human", this._human);

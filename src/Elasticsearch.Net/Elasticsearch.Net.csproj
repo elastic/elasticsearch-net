@@ -67,6 +67,7 @@
     <Compile Include="Domain\Response\VoidResponse.cs" />
     <Compile Include="Domain\Response\ElasticsearchServerError.cs" />
     <Compile Include="Exceptions\OneToOneServerException.cs" />
+    <Compile Include="Obsolete\IndicesRecoveryStatus.cs" />
     <Compile Include="Obsolete\IndicesTemplateExists.cs" />
     <Compile Include="Obsolete\IndicesGetFieldMapping.cs" />
     <Compile Include="Obsolete\Mpercolate.cs" />

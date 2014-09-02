@@ -58,4 +58,10 @@ namespace Nest
 
 	[Obsolete("Scheduled to be removed in 2.0, use MultiPercolateRequest instead")]
 	public class MpercolateRequest : MultiPercolateRequest {}
+
+	[Obsolete("Scheduled to be removed in 2.0, use RecoveryStatusDescriptor instead")]
+	public class IndicesRecoveryDescriptor : RecoveryStatusDescriptor { }
+
+	[Obsolete("Scheduled to be removed in 2.0, use RecoveryStatusRequest instead")]
+	public class IndicesRecoveryRequest : RecoveryStatusRequest {}
 }

@@ -3126,7 +3126,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html
 	///</pre>
 	///</summary>
-	public partial class IndicesRecoveryRequest  : BasePathRequest<IndicesRecoveryRequestParameters>
+	public partial class RecoveryStatusRequest 
 			{
 		
 		///<summary>Whether to display detailed information about shard recovery</summary>
@@ -3152,12 +3152,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("human", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesRecoveryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -4591,7 +4585,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotStatusRequest  : BasePathRequest<SnapshotStatusRequestParameters>
+	public partial class SnapshotStatusRequest 
 			{
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -4601,12 +4595,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotStatusRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
