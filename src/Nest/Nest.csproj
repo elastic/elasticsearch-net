@@ -177,15 +177,17 @@
     <Compile Include="Domain\Cat\CatIndicesRecord.cs" />
     <Compile Include="Domain\Cat\CatMasterRecord.cs" />
     <Compile Include="Domain\Cat\CatNodesRecord.cs" />
+    <Compile Include="Domain\Responses\CatResponse.cs" />
     <Compile Include="Domain\Responses\ClusterStatsResponse.cs" />
     <Compile Include="Domain\Responses\ClusterPendingTasksResponse.cs" />
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Cat\ICatRecord.cs" />
-    <Compile Include="Domain\Responses\SnapshotStatusResponse.cs" />
+    <Compile Include="Domain\Responses\GetRepositoryResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
     <Compile Include="Domain\Responses\NodesHotThreadsResponse.cs" />
-    <Compile Include="Domain\Responses\CatResponse.cs" />
+    <Compile Include="Domain\Responses\SearchShardsResponse.cs" />
+    <Compile Include="Domain\Responses\SnapshotStatusResponse.cs" />
     <Compile Include="Domain\Recovery\RecoveryOrigin.cs" />
     <Compile Include="Domain\Recovery\RecoveryStartStatus.cs" />
     <Compile Include="Domain\Recovery\RecoveryBytes.cs" />
@@ -220,6 +222,9 @@
     <Compile Include="DSL\ClusterPendingTasksDescriptor.cs" />
     <Compile Include="DSL\ClusterStatsDescriptor.cs" />
     <Compile Include="DSL\CatAliasesDescriptor.cs" />
+    <Compile Include="DSL\GetRepositoryDescriptor.cs" />
+    <Compile Include="DSL\Paths\RepositoryOptionalPathDescriptor.cs" />
+    <Compile Include="DSL\SearchShardsDescriptor.cs" />
     <Compile Include="DSL\Paths\RepositorySnapshotOptionalPathDescriptor.cs" />
     <Compile Include="DSL\SnapshotStatusDescriptor.cs" />
     <Compile Include="DSL\RecoveryStatusDescriptor.cs" />
@@ -313,6 +318,7 @@
     <Compile Include="DSL\Visitor\VisitorScope.cs" />
     <Compile Include="DSL\_Requests.generated.cs" />
     <Compile Include="ElasticClient-Cat.cs" />
+    <Compile Include="ElasticClient-SearchShards.cs" />
     <Compile Include="ElasticClient-RecoveryStatus.cs" />
     <Compile Include="ElasticClient-TemplateExists.cs" />
     <Compile Include="ElasticClient-AliasExists.cs" />
@@ -788,6 +794,7 @@
     <Compile Include="DSL\Filter\ExistsFilterDescriptor.cs" />
     <Compile Include="Resolvers\Converters\CatThreadPoolRecordConverter.cs" />
     <Compile Include="Resolvers\Converters\GeoShapeConverterBase.cs" />
+    <Compile Include="Resolvers\Converters\GetRepositoryResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\MappingTransformConverter.cs" />
     <Compile Include="Resolvers\Converters\Queries\GeoShapeQueryJsonReader.cs" />
     <Compile Include="Resolvers\Converters\SimilarityCollectionConverter.cs" />

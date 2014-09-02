@@ -110,6 +110,8 @@
     <Compile Include="Core\Cat\CatTests.cs" />
     <Compile Include="Core\Explain\ExplainTests.cs" />
     <Compile Include="Core\Exists\AliasExists.cs" />
+    <Compile Include="Core\Repository\CreateRepositoryTests.cs" />
+    <Compile Include="Core\SearchShards\SearchShardsTests.cs" />
     <Compile Include="Core\GetFieldMapping\GetFieldMappingTests.cs" />
     <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
     <Compile Include="Core\Percolate\PercolateTests.cs" />
@@ -118,7 +120,7 @@
     <Compile Include="Core\Repository\SnapshotStatusTests.cs" />
     <Compile Include="Core\Repository\RestoreStatusTests.cs" />
     <Compile Include="Core\Repository\RestoreTests.cs" />
-    <Compile Include="Core\Repository\CreateRepositoryTests.cs" />
+    <Compile Include="Core\Repository\GetRepositoryTests.cs" />
     <Compile Include="Core\ClearScroll\ClearScrollTests.cs" />
     <Compile Include="Core\Exists\DocumentExistsTests.cs" />
     <Compile Include="Core\Suggest\SuggestTests.cs" />
