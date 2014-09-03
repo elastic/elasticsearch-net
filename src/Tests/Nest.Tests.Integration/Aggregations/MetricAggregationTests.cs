@@ -119,5 +119,23 @@ namespace Nest.Tests.Integration.Aggregations
 			termBucket.Should().NotBeNull();
 			termBucket.Value.Should().HaveValue();
 		}
+
+		[Test]
+		public void PercentilesRank()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.PercentileRanks("percentile_ranks_agg", pr => pr
+						.Field(p => p.LongValue)
+						.Values(new double [] { 15, 30 })
+					)
+				)
+			);
+			results.IsValid.Should().BeTrue();
+			var percentiles = results.Aggs.PercentilesRank("percentile_ranks_agg");
+			percentiles.Should().NotBeNull();
+			percentiles.Items.Count.Should().BeGreaterThan(0);
+		}
 	}
 }

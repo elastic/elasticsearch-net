@@ -75,6 +75,9 @@ namespace Nest
 		[JsonProperty("value_count")]
 		IValueCountAggregator ValueCount { get; set; }
 
+		[JsonProperty("percentile_ranks")]
+		IPercentileRanksAggregaor PercentileRanks { get; set; }
+
 		[JsonProperty("aggs")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
@@ -98,6 +101,7 @@ namespace Nest
 		private IRangeAggregator _range;
 		private ITermsAggregator _terms;
 		private ISignificantTermsAggregator _significantTerms;
+		private IPercentileRanksAggregaor _percentileRanks;
 		public IAverageAggregator Average { get; set; }
 		public IValueCountAggregator ValueCount { get; set; }
 		public IMaxAggregator Max { get; set; }
@@ -195,6 +199,12 @@ namespace Nest
 			get { return _significantTerms; }
 			set { _significantTerms = value; }
 		}
+		
+		public IPercentileRanksAggregaor PercentileRanks
+		{
+			get { return _percentileRanks; }
+			set { _percentileRanks = value; }
+		}
 
 		private void LiftAggregations(IBucketAggregator bucket)
 		{
@@ -251,6 +261,8 @@ namespace Nest
 		IValueCountAggregator IAggregationContainer.ValueCount { get; set; }
 		
 		ISignificantTermsAggregator IAggregationContainer.SignificantTerms { get; set; }
+
+		IPercentileRanksAggregaor IAggregationContainer.PercentileRanks { get;set; }
 		
 		ITermsAggregator IAggregationContainer.Terms { get; set; }
 		
@@ -269,6 +281,12 @@ namespace Nest
 			Func<PercentilesAggregationDescriptor<T>, PercentilesAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.Percentiles = d);
+		}
+
+		public AggregationDescriptor<T> PercentileRanks(string name,
+			Func<PercentileRanksAggregationDescriptor<T>, PercentileRanksAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a.PercentileRanks = d);
 		}
 
 		public AggregationDescriptor<T> DateRange(string name,

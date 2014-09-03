@@ -69,6 +69,12 @@ namespace Nest
 		{
 			return this.TryGet<PercentilesMetric>(key);
 		}
+
+		public PercentilesMetric PercentilesRank(string key)
+		{
+			return this.TryGet<PercentilesMetric>(key);
+		}
+
 		public SingleBucket Global(string key)
 		{
 			return this.TryGet<SingleBucket>(key);
