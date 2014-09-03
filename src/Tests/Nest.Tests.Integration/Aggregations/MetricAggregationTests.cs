@@ -119,5 +119,30 @@ namespace Nest.Tests.Integration.Aggregations
 			termBucket.Should().NotBeNull();
 			termBucket.Value.Should().HaveValue();
 		}
+
+		[Test]
+		public void GeoBounds()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.GeoBounds("viewport", g => g
+						.Field(p => p.Origin)
+						.WrapLongitude()
+					)
+				)
+			);
+
+			results.IsValid.Should().BeTrue();
+			var geoBoundsMetric = results.Aggs.GeoBounds("viewport");
+			geoBoundsMetric.Should().NotBeNull();
+			geoBoundsMetric.Bounds.Should().NotBeNull();
+			geoBoundsMetric.Bounds.TopLeft.Should().NotBeNull();
+			geoBoundsMetric.Bounds.TopLeft.Lat.Should().NotBe(0);
+			geoBoundsMetric.Bounds.TopLeft.Lon.Should().NotBe(0);
+			geoBoundsMetric.Bounds.BottomRight.Should().NotBeNull();
+			geoBoundsMetric.Bounds.BottomRight.Lat.Should().NotBe(0);
+			geoBoundsMetric.Bounds.BottomRight.Lon.Should().NotBe(0);
+		}
 	}
 }

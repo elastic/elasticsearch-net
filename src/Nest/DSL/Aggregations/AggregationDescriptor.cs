@@ -33,6 +33,9 @@ namespace Nest
 		[JsonProperty("geohash_grid")]
 		IGeoHashAggregator GeoHash { get; set; }
 
+		[JsonProperty("geo_bounds")]
+		IGeoBoundsAggregator GeoBounds { get; set; }
+
 		[JsonProperty("histogram")]
 		IHistogramAggregator Histogram { get; set; }
 
@@ -89,6 +92,7 @@ namespace Nest
 		private IFilterAggregator _filter;
 		private IGeoDistanceAggregator _geoDistance;
 		private IGeoHashAggregator _geoHash;
+		private IGeoBoundsAggregator _geoBounds;
 		private IHistogramAggregator _histogram;
 		private IGlobalAggregator _global;
 		private IIp4RangeAggregator _ipRange;
@@ -98,6 +102,7 @@ namespace Nest
 		private IRangeAggregator _range;
 		private ITermsAggregator _terms;
 		private ISignificantTermsAggregator _significantTerms;
+		
 		public IAverageAggregator Average { get; set; }
 		public IValueCountAggregator ValueCount { get; set; }
 		public IMaxAggregator Max { get; set; }
@@ -140,6 +145,12 @@ namespace Nest
 		{
 			get { return _geoHash; }
 			set { _geoHash = value; }
+		}
+
+		public IGeoBoundsAggregator GeoBounds
+		{
+			get { return _geoBounds; }
+			set { _geoBounds = value; }
 		}
 
 		public IHistogramAggregator Histogram
@@ -225,7 +236,9 @@ namespace Nest
 		IGeoDistanceAggregator IAggregationContainer.GeoDistance { get; set; }
 		
 		IGeoHashAggregator IAggregationContainer.GeoHash { get; set; }
-		
+
+		IGeoBoundsAggregator IAggregationContainer.GeoBounds { get; set; }
+
 		IHistogramAggregator IAggregationContainer.Histogram { get; set; }
 		
 		IGlobalAggregator IAggregationContainer.Global { get; set; }
@@ -299,6 +312,12 @@ namespace Nest
 			Func<GeoHashAggregationDescriptor<T>, GeoHashAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.GeoHash = d);
+		}
+
+		public AggregationDescriptor<T> GeoBounds(string name,
+			Func<GeoBoundsAggregationDescriptor<T>, GeoBoundsAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a.GeoBounds = d);
 		}
 
 		public AggregationDescriptor<T> Histogram(string name,
