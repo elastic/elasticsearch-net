@@ -774,6 +774,9 @@ namespace Nest
 			where T : class
 			where TResult : class;
 
+		ISearchResponse<T> SearchTemplate<T>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector)
+			where T : class;
+
 		/// <summary>
 		/// The multi search API allows to execute several search requests within the same API.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-multi-search.html

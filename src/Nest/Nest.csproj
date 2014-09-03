@@ -194,6 +194,10 @@
     <Compile Include="Domain\Stats\PercolateStats.cs" />
     <Compile Include="Domain\Stats\PluginStats.cs" />
     <Compile Include="Domain\Stats\SegmentsStats.cs" />
+    <Compile Include="Domain\Template\ITemplateSection.cs" />
+    <Compile Include="Domain\Template\TemplateBuilder.cs" />
+    <Compile Include="DSL\Template\TemplateSectionQueryContainer.cs" />
+    <Compile Include="DSL\Template\TemplateSectionSortFieldDescriptor.cs" />
     <Compile Include="DSL\CatIndicesDescriptor.cs" />
     <Compile Include="DSL\CatShardsDescriptor.cs" />
     <Compile Include="DSL\CatThreadPoolDescriptor.cs" />
@@ -209,6 +213,7 @@
     <Compile Include="DSL\ClusterPendingTasksDescriptor.cs" />
     <Compile Include="DSL\ClusterStatsDescriptor.cs" />
     <Compile Include="DSL\CatAliasesDescriptor.cs" />
+    <Compile Include="DSL\SearchTemplateDescriptor.cs" />
     <Compile Include="DSL\TemplateExistsDescriptor.cs" />
     <Compile Include="Domain\Responses\PingResponse.cs" />
     <Compile Include="Domain\Responses\NodesShutdownResponse.cs" />
@@ -299,6 +304,7 @@
     <Compile Include="DSL\Visitor\VisitorScope.cs" />
     <Compile Include="DSL\_Requests.generated.cs" />
     <Compile Include="ElasticClient-Cat.cs" />
+    <Compile Include="ElasticClient-SearchTemplate.cs" />
     <Compile Include="ElasticClient-TemplateExists.cs" />
     <Compile Include="ElasticClient-AliasExists.cs" />
     <Compile Include="ElasticClient-ClusterSettings.cs" />
@@ -542,7 +548,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DSL\Rescore\RescoreDescriptor.cs" />
-    <Compile Include="DSL\Termplates\CreateWarmerDescriptor.cs" />
+    <Compile Include="DSL\Warmers\CreateWarmerDescriptor.cs" />
     <Compile Include="DSL\PutWarmerDescriptor.cs" />
     <Compile Include="DSL\GetWarmerDescriptor.cs" />
     <Compile Include="DSL\Query\MatchPhrasePrefixQueryDescriptor.cs" />
@@ -891,6 +897,7 @@
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />
     <Compile Include="Resolvers\Converters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexNameMarkerConverter.cs" />
+    <Compile Include="Resolvers\Converters\TemplateSectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TokenFilterCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TokenizerCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TypeNameMarkerConverter.cs" />
