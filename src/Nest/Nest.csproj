@@ -207,6 +207,7 @@
     <Compile Include="Domain\Stats\PercolateStats.cs" />
     <Compile Include="Domain\Stats\PluginStats.cs" />
     <Compile Include="Domain\Stats\SegmentsStats.cs" />
+    <Compile Include="DSL\Aggregations\TopHitsAggregationDescriptor.cs" />
     <Compile Include="DSL\CatIndicesDescriptor.cs" />
     <Compile Include="DSL\CatShardsDescriptor.cs" />
     <Compile Include="DSL\CatThreadPoolDescriptor.cs" />

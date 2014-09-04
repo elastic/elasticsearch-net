@@ -119,5 +119,31 @@ namespace Nest.Tests.Integration.Aggregations
 			termBucket.Should().NotBeNull();
 			termBucket.Value.Should().HaveValue();
 		}
+
+		[Test]
+		public void TopHits()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.Terms("top-countries", t => t
+						.Field(p => p.Country)
+						.Size(3)
+						.Aggregations(aa => aa
+							.TopHits("top-country-hits", th => th
+								.Sort(sort => sort
+									.OnField(p => p.StartedOn)
+									.Order(SortOrder.Descending)
+								)
+								.Source(src => src
+									.Include(p => p.Name)
+								)
+								.Size(1)
+							)
+						)
+					)
+				)
+			);
+		}
 	}
 }
