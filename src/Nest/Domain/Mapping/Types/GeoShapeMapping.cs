@@ -10,9 +10,8 @@ namespace Nest
 	{
 		public PropertyNameMarker Name { get; set; }
 
-		private TypeNameMarker __type;
 		[JsonProperty("type")]
-		public virtual TypeNameMarker Type { get { return (TypeNameMarker)(__type ?? "point"); } set { __type = value; } }
+		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "geo_shape" }; } }
 
 		[JsonProperty("similarity")]
 		public string Similarity { get; set; }
