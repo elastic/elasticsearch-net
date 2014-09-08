@@ -3195,13 +3195,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public partial class IndicesPutAliasDescriptor  : BaseRequest<IndicesPutAliasRequestParameters>
+	public partial class PutAliasDescriptor 
 	{
 		
 	
 
 		///<summary>Explicit timestamp for the document</summary>
-		public IndicesPutAliasDescriptor Timeout(string timeout)
+		public PutAliasDescriptor Timeout(string timeout)
 		{
 			this.Request.RequestParameters.Timeout(timeout);
 			return this;
@@ -3209,16 +3209,10 @@ namespace Nest
 		
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesPutAliasDescriptor MasterTimeout(string master_timeout)
+		public PutAliasDescriptor MasterTimeout(string master_timeout)
 		{
 			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesPutAliasRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

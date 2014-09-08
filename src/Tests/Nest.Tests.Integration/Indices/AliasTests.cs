@@ -271,5 +271,33 @@ namespace Nest.Tests.Integration.Indices
 			term.Field.Should().Be("foo");
 			term.Value.Should().Be("bar");
 		}
+
+		[Test]
+		public void PutSingleAlias()
+		{
+			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
+			var aliasName = ElasticsearchConfiguration.NewUniqueIndexName();
+
+			var createIndexResponse = this.Client.CreateIndex(indexName);
+			createIndexResponse.IsValid.Should().BeTrue();
+
+			var result = this.Client.PutAlias(a => a
+				.Index(indexName)
+				.Name(aliasName)
+				.Filter<ElasticsearchProject>(f => f
+					.Term(p => p.Name, "nest")
+				)
+			);
+
+			result.IsValid.Should().BeTrue();
+
+			var aliases = this.Client.GetAliasesPointingToIndex(indexName);
+			aliases.Should().NotBeNull().And.HaveCount(1);
+			var alias = aliases.First();
+			alias.Name.ShouldAllBeEquivalentTo(aliasName);
+			alias.Filter.Should().NotBeNull();
+			alias.Filter.Term.Field.Should().Be("name");
+			alias.Filter.Term.Value.Should().Be("nest");
+		}
 	}
 }

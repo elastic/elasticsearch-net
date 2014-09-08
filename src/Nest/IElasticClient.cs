@@ -1007,7 +1007,14 @@ namespace Nest
 		
 		/// <inheritdoc />
 		Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest);
-		
+
+		IPutAliasResponse PutAlias(IPutAliasRequest putAliasRequest);
+
+		Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest putAliasRequest);
+
+		IPutAliasResponse PutAlias(Func<PutAliasDescriptor, PutAliasDescriptor> putAliasDescriptor);
+
+		Task<IPutAliasResponse> PutAliasAsync(Func<PutAliasDescriptor, PutAliasDescriptor> putAliasDescriptor);
 
 		/// <summary>
 		/// The optimize API allows to optimize one or more indices through an API. The optimize process basically optimizes 

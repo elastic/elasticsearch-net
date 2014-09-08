@@ -187,6 +187,7 @@
     <Compile Include="Domain\Responses\GetRepositoryResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
     <Compile Include="Domain\Responses\NodesHotThreadsResponse.cs" />
+    <Compile Include="Domain\Responses\PutAliasResponse.cs" />
     <Compile Include="Domain\Responses\SearchShardsResponse.cs" />
     <Compile Include="Domain\Responses\SnapshotStatusResponse.cs" />
     <Compile Include="Domain\Recovery\RecoveryOrigin.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="DSL\CatAliasesDescriptor.cs" />
     <Compile Include="DSL\GetRepositoryDescriptor.cs" />
     <Compile Include="DSL\Paths\RepositoryOptionalPathDescriptor.cs" />
+    <Compile Include="DSL\PutAliasDescriptor.cs" />
     <Compile Include="DSL\SearchShardsDescriptor.cs" />
     <Compile Include="DSL\Paths\RepositorySnapshotOptionalPathDescriptor.cs" />
     <Compile Include="DSL\SnapshotStatusDescriptor.cs" />
