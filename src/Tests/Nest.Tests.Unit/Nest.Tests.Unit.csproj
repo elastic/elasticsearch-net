@@ -123,6 +123,7 @@
     <Compile Include="Cluster\State\StateTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUrlTests.cs" />
+    <Compile Include="Core\Indices\Alias\AliasTests.cs" />
     <Compile Include="Core\Indices\Analysis\Analyzers\AnalyzerTests.cs" />
     <Compile Include="Core\Indices\Similarity\SimilarityTests.cs" />
     <Compile Include="Core\Map\CustomMapping\ImagePluginMappingTests.cs" />
@@ -132,6 +133,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Bulk\BulkIndexDetailsFixedPath.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Alias\PutAlias.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Indices\Analysis\Analyzers\CustomAnalyzerTest.json">
