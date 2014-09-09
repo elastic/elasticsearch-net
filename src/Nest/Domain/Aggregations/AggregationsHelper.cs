@@ -65,6 +65,12 @@ namespace Nest
 		{
 			return this.TryGet<ExtendedStatsMetric>(key);
 		}
+
+		public GeoBoundsMetric GeoBounds(string key)
+		{
+			return this.TryGet<GeoBoundsMetric>(key);
+		}
+
 		public PercentilesMetric Percentiles(string key)
 		{
 			return this.TryGet<PercentilesMetric>(key);
