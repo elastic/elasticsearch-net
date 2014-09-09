@@ -505,6 +505,9 @@
     <Compile Include="Search\Suggest\PhraseSuggestTests.cs" />
     <Compile Include="Search\Suggest\TermSuggestTests.cs" />
     <Compile Include="Settings\UsePrettyResponseTests.cs" />
+    <Compile Include="Template\TemplateSpikeTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TestElasticClient.cs" />
     <Compile Include="Core\Update\UpdateTests.cs" />
   </ItemGroup>
@@ -1246,6 +1249,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

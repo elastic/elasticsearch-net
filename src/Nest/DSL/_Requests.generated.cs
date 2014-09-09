@@ -4359,7 +4359,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html
 	///</pre>
 	///</summary>
-	public partial class SearchTemplateRequest  : BasePathRequest<SearchTemplateRequestParameters>
+	public partial class SearchTemplateRequest<T> 
 			{
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -4417,12 +4417,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -6062,6 +6056,72 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<string>("suggest_text"); } 
 			set { this.Request.RequestParameters.AddQueryString("suggest_text", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for SearchTemplateGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html
+	///</pre>
+	///</summary>
+	public partial class SearchTemplateRequest 
+			{
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
+			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
+		}
+		
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
+			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
+		}
+		
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
+			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
+		}
+		
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
+			set { this.Request.RequestParameters.AddQueryString("preference", value); }
+		}
+		
+		
+		///<summary>A comma-separated list of specific routing values</summary>
+		public  string[] Routing 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("routing"); } 
+			set { this.Request.RequestParameters.AddQueryString("routing", value); }
+		}
+		
+		
+		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
+		public string Scroll 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("scroll"); } 
+			set { this.Request.RequestParameters.AddQueryString("scroll", value); }
+		}
+		
+		
+		///<summary>Search operation type</summary>
+		public SearchType SearchType 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<SearchType>("search_type"); } 
+			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
 		}
 		
 	}

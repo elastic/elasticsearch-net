@@ -1,9 +1,11 @@
-﻿using System;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using FluentAssertions;
+using Nest;
+using Nest.Tests.MockData.Domain;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace Nest.Tests.Unit.Template
@@ -15,65 +17,64 @@ namespace Nest.Tests.Unit.Template
 		public void Print()
 		{
 
-			var search = this._client.Search<object>(s => s
+			var search = this._client.Search<ElasticsearchProject>(s => s
 					.Strict()
 					.Query(q =>
-						Template.If("start",
+						TemplateBuilder.Section("start",
 							q.Range(r => r
 								.OnField("fieldx")
-								.Greater(Template.Variable("start"))
-								.Lower(Template.Variable("end", "20"))
+								.Greater(TemplateBuilder.Variable("start"))
+								.Lower(TemplateBuilder.Variable("end", "20"))
 							)
 						)
-						&& Template.If("other_var", new TermQuery()
+						&& TemplateBuilder.Section("other_var", new TermQuery()
 						{
-							Field = Template.Variable("myfield"),
-							Value = Template.Variable("myval")
+							Field = TemplateBuilder.Variable("myfield"),
+							Value = TemplateBuilder.Variable("myval")
 						})
-						&& q.Terms("field", Template.Array("array"))
+						&& q.Terms("field", TemplateBuilder.Array("array"))
 					)
-					.Sort(Template.If<object>("sort", sort => sort.Ascending().OnField("{{sort}}")))
+					.Sort(TemplateBuilder.Section<ElasticsearchProject>("sort", sort => sort.Ascending().OnField("{{sort}}")))
 				);
+
 			Assert.Fail(search.ConnectionStatus.ToString());
 		}
 
-	}
-
-	interface IIfTemplate
-	{
-		object Instance { get; }
-		string Variable { get; }
-	}
-	// Define other methods and classes here
-	public static class Template
-	{
-		[JsonConverter(typeof(IfTemplateConverter))]
-		private class IfSortFieldDescriptor : SortFieldDescriptor<object>, IIfTemplate
+		[Test]
+		public void SearchTemplateByQuery()
 		{
-			private readonly IFieldSort _queryContainer;
-			private readonly string _variable;
-			object IIfTemplate.Instance { get { return _queryContainer; } }
-			string IIfTemplate.Variable { get { return _variable; } }
-			public IfSortFieldDescriptor(string variable, IFieldSort o)
-			{
-				_variable = variable;
-				_queryContainer = o;
-			}
+			var search = this._client.SearchTemplate<ElasticsearchProject>(s => s
+				.Template(t => t
+					.Query<object>(q =>
+						TemplateBuilder.Section("start", q.Match(m => m
+								.OnField(TemplateBuilder.Variable("my_field"))
+								.Query(TemplateBuilder.Variable("my_value"))
+							)
+						)
+					)
+				)
+				.Params(new Dictionary<string, object>
+					{
+						{ "my_field", "foo" },
+						{ "my_value", "bar" }
+					}
+				)
+			);
 		}
 
-
-		[JsonConverter(typeof(IfTemplateConverter))]
-		private class IfQueryContainer : QueryContainer, IIfTemplate
+		[Test]
+		public void SearchTemplateByFile()
 		{
-			private readonly QueryContainer _queryContainer;
-			private readonly string _variable;
-			object IIfTemplate.Instance { get { return _queryContainer; } }
-			string IIfTemplate.Variable { get { return _variable; } }
-			public IfQueryContainer(string variable, QueryContainer o)
-			{
-				_variable = variable;
-				_queryContainer = o;
-			}
+			var search = this._client.SearchTemplate<ElasticsearchProject>(s => s
+				.Template(t => t
+					.File("myTemplate.mustache")
+				)
+				.Params(new Dictionary<string, object>
+				{
+					{ "my_field", "foo" },
+					{ "my_value", "bar" }
+				})
+			);
 		}
 
 		public static Func<SortFieldDescriptor<T>, IFieldSort> If<T>(string variable, Func<SortFieldDescriptor<T>, IFieldSort> s)
@@ -86,11 +87,19 @@ namespace Nest.Tests.Unit.Template
 			return new IfQueryContainer(variable, o);
 		}
 
-		public static string Variable(string name, string defaultValue = null)
+		[Test]
+		public void SearchTemplateById()
 		{
-			if (!string.IsNullOrWhiteSpace(defaultValue))
-				return "{{" + name + "}}{{^" + name + "}}" + defaultValue + "{{/" + name + "}}";
-			return "{{" + name + "}}";
+			var search = this._client.SearchTemplate<ElasticsearchProject>(s => s
+				.Template(t => t
+					.Id("myTemplateName")
+				)
+				.Params(new Dictionary<string, object>
+				{
+					{ "my_field", "foo" },
+					{ "my_value", "bar" }
+				})
+			);
 		}
 		public static IEnumerable<string> Array(string name)
 		{
