@@ -378,6 +378,7 @@
     <Compile Include="Reproduce\Reproduce806Tests.cs" />
     <Compile Include="Reproduce\Reproduce876Tests.cs" />
     <Compile Include="Reproduce\Reproduce926Tests.cs" />
+    <Compile Include="Search\Failures\ShardFailureTests.cs" />
     <Compile Include="Search\Fields\FieldsTests.cs" />
     <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
     <Compile Include="Search\Filter\Modes\FilterModesTests.cs" />
@@ -778,6 +779,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Reproduce\Issue876.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Failures\ShardFailuresResult.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Fields\FixedCovariantSearchResult.json">
