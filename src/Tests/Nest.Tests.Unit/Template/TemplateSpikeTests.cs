@@ -77,15 +77,6 @@ namespace Nest.Tests.Unit.Template
 			);
 		}
 
-		public static Func<SortFieldDescriptor<T>, IFieldSort> If<T>(string variable, Func<SortFieldDescriptor<T>, IFieldSort> s)
-		where T : class
-		{
-			return new Func<SortFieldDescriptor<T>, IFieldSort>(inner => new IfSortFieldDescriptor(variable, s(inner)));
-		}
-		public static QueryContainer If(string variable, QueryContainer o)
-		{
-			return new IfQueryContainer(variable, o);
-		}
 
 		[Test]
 		public void SearchTemplateById()
@@ -108,34 +99,6 @@ namespace Nest.Tests.Unit.Template
 				"{{.}}",
 				"{{/" + name + "}"
 			};
-		}
-	}
-
-	public class IfTemplateConverter : JsonConverter
-	{
-		public override bool CanWrite { get { return true; } }
-
-		public override bool CanRead { get { return false; } }
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			var v = value as IIfTemplate;
-			if (v == null) writer.WriteNull();
-			var l = writer.Path.Split(new[] { '.' }).Length + 1;
-			writer.WriteRaw("{{#" + v.Variable + "}}");
-			serializer.Serialize(writer, v.Instance);
-			writer.WriteRaw("{{/" + v.Variable + "}}");
-
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			return null;
-		}
-
-		public override bool CanConvert(Type objectType)
-		{
-			return true;
 		}
 	}
 }
