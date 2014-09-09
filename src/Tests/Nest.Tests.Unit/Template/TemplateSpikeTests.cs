@@ -75,6 +75,7 @@ namespace Nest.Tests.Unit.Template
 				_queryContainer = o;
 			}
 		}
+
 		public static Func<SortFieldDescriptor<T>, IFieldSort> If<T>(string variable, Func<SortFieldDescriptor<T>, IFieldSort> s)
 		where T : class
 		{
@@ -94,11 +95,10 @@ namespace Nest.Tests.Unit.Template
 		public static IEnumerable<string> Array(string name)
 		{
 			return new[] {
-			"{{#"+name+"}",
-			"{{.}}",
-			"{{/" + name + "}"
-			
-		};
+				"{{#"+name+"}",
+				"{{.}}",
+				"{{/" + name + "}"
+			};
 		}
 	}
 
@@ -112,7 +112,7 @@ namespace Nest.Tests.Unit.Template
 		{
 			var v = value as IIfTemplate;
 			if (v == null) writer.WriteNull();
-
+			var l = writer.Path.Split(new[] { '.' }).Length + 1;
 			writer.WriteRaw("{{#" + v.Variable + "}}");
 			serializer.Serialize(writer, v.Instance);
 			writer.WriteRaw("{{/" + v.Variable + "}}");
