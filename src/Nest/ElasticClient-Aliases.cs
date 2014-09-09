@@ -173,6 +173,7 @@ namespace Nest
 			);
 		}
 
+		/// <inheritdoc />
 		public IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest deleteAliasRequest)
 		{
 			return this.Dispatch<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse>(
@@ -181,6 +182,7 @@ namespace Nest
 			);
 		}
 
+		/// <inheritdoc />
 		public Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest deleteAliasRequest)
 		{
 			return this.DispatchAsync<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse, IDeleteAliasResponse>(
@@ -189,6 +191,7 @@ namespace Nest
 			);
 		}
 
+		/// <inheritdoc />
 		public IDeleteAliasResponse DeleteAlias<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor)
 			where T : class
 		{
@@ -198,6 +201,7 @@ namespace Nest
 			);
 		}
 
+		/// <inheritdoc />
 		public Task<IDeleteAliasResponse> DeleteAliasAsync<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor)
 			where T : class
 		{
