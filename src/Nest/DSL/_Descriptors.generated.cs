@@ -2443,13 +2443,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public partial class IndicesDeleteAliasDescriptor  : BaseRequest<IndicesDeleteAliasRequestParameters>
+	public partial class DeleteAliasDescriptor<T> 
 	{
 		
 	
 
 		///<summary>Explicit timestamp for the document</summary>
-		public IndicesDeleteAliasDescriptor Timeout(string timeout)
+		public DeleteAliasDescriptor<T> Timeout(string timeout)
 		{
 			this.Request.RequestParameters.Timeout(timeout);
 			return this;
@@ -2457,16 +2457,10 @@ namespace Nest
 		
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesDeleteAliasDescriptor MasterTimeout(string master_timeout)
+		public DeleteAliasDescriptor<T> MasterTimeout(string master_timeout)
 		{
 			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesDeleteAliasRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

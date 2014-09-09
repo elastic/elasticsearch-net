@@ -1016,6 +1016,14 @@ namespace Nest
 
 		Task<IPutAliasResponse> PutAliasAsync(Func<PutAliasDescriptor, PutAliasDescriptor> putAliasDescriptor);
 
+		IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest deleteAliasRequest);
+
+		Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest deleteAliasRequest);
+
+		IDeleteAliasResponse DeleteAlias<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor) where T : class;
+
+		Task<IDeleteAliasResponse> DeleteAliasAsync<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor) where T : class;
+
 		/// <summary>
 		/// The optimize API allows to optimize one or more indices through an API. The optimize process basically optimizes 
 		/// the index for faster search operations (and relates to the number of segments a Lucene index holds within each shard).

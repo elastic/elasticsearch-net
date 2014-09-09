@@ -181,6 +181,7 @@
     <Compile Include="Domain\Responses\CatResponse.cs" />
     <Compile Include="Domain\Responses\ClusterStatsResponse.cs" />
     <Compile Include="Domain\Responses\ClusterPendingTasksResponse.cs" />
+    <Compile Include="Domain\Responses\DeleteAliasResponse.cs" />
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Cat\ICatRecord.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="DSL\ClusterPendingTasksDescriptor.cs" />
     <Compile Include="DSL\ClusterStatsDescriptor.cs" />
     <Compile Include="DSL\CatAliasesDescriptor.cs" />
+    <Compile Include="DSL\DeleteAliasDescriptor.cs" />
     <Compile Include="DSL\GetRepositoryDescriptor.cs" />
     <Compile Include="DSL\Paths\RepositoryOptionalPathDescriptor.cs" />
     <Compile Include="DSL\PutAliasDescriptor.cs" />

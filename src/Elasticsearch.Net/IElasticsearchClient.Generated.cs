@@ -5769,7 +5769,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesDeleteAlias<T>(string index, string name, Func<IndicesDeleteAliasRequestParameters, IndicesDeleteAliasRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesDeleteAlias<T>(string index, string name, Func<DeleteAliasRequestParameters, DeleteAliasRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a DELETE on /{index}/_alias/{name}
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -5788,7 +5788,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesDeleteAliasAsync<T>(string index, string name, Func<IndicesDeleteAliasRequestParameters, IndicesDeleteAliasRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesDeleteAliasAsync<T>(string index, string name, Func<DeleteAliasRequestParameters, DeleteAliasRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a DELETE on /{index}/_alias/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -5809,7 +5809,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesDeleteAlias(string index, string name, Func<IndicesDeleteAliasRequestParameters, IndicesDeleteAliasRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesDeleteAlias(string index, string name, Func<DeleteAliasRequestParameters, DeleteAliasRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a DELETE on /{index}/_alias/{name}
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -5830,7 +5830,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesDeleteAliasAsync(string index, string name, Func<IndicesDeleteAliasRequestParameters, IndicesDeleteAliasRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesDeleteAliasAsync(string index, string name, Func<DeleteAliasRequestParameters, DeleteAliasRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a DELETE on /{index}/{type}/_mapping
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.

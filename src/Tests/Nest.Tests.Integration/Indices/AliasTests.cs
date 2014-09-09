@@ -299,5 +299,30 @@ namespace Nest.Tests.Integration.Indices
 			alias.Filter.Term.Field.Should().Be("name");
 			alias.Filter.Term.Value.Should().Be("nest");
 		}
+
+		[Test]
+		public void DeleteSingleAlias()
+		{
+			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
+			var aliasName = ElasticsearchConfiguration.NewUniqueIndexName();
+
+			var createIndexResponse = this.Client.CreateIndex(indexName);
+			createIndexResponse.IsValid.Should().BeTrue();
+
+			var putAliasResponse = this.Client.PutAlias(a => a
+				.Index(indexName)
+				.Name(aliasName)
+			);
+			putAliasResponse.IsValid.Should().BeTrue();
+
+			var aliases = this.Client.GetAliasesPointingToIndex(indexName);
+			aliases.Should().NotBeNull().And.HaveCount(1);
+
+			var deleteAliasResponse = this.Client.DeleteAlias(new DeleteAliasRequest(indexName, aliasName));
+			deleteAliasResponse.IsValid.Should().BeTrue();
+
+			aliases = this.Client.GetAliasesPointingToIndex(indexName);
+			aliases.Should().NotBeNull().And.HaveCount(0);
+		}
 	}
 }

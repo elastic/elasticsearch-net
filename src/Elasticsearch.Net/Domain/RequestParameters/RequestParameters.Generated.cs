@@ -2638,12 +2638,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public class IndicesDeleteAliasRequestParameters : FluentRequestParameters<IndicesDeleteAliasRequestParameters> 
+	public class DeleteAliasRequestParameters : FluentRequestParameters<DeleteAliasRequestParameters> 
 	{
 		
 		internal string _timeout { get; set; }
 		///<summary>Explicit timestamp for the document</summary>
-		public IndicesDeleteAliasRequestParameters Timeout(string timeout)
+		public DeleteAliasRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
 			this.AddQueryString("timeout", this._timeout);
@@ -2653,7 +2653,7 @@ namespace Elasticsearch.Net
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesDeleteAliasRequestParameters MasterTimeout(string master_timeout)
+		public DeleteAliasRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
 			this.AddQueryString("master_timeout", this._master_timeout);
