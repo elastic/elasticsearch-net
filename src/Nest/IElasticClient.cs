@@ -1007,7 +1007,38 @@ namespace Nest
 		
 		/// <inheritdoc />
 		Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest);
-		
+
+		/// <summary>
+		/// Add a single index alias
+		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-adding
+		/// </summary>
+		/// <param name="putAliasRequest">A descriptor that describes the put alias request</param>
+		IPutAliasResponse PutAlias(IPutAliasRequest putAliasRequest);
+
+		/// <inheritdoc />
+		Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest putAliasRequest);
+
+		/// <inheritdoc />
+		IPutAliasResponse PutAlias(Func<PutAliasDescriptor, PutAliasDescriptor> putAliasDescriptor);
+
+		/// <inheritdoc />
+		Task<IPutAliasResponse> PutAliasAsync(Func<PutAliasDescriptor, PutAliasDescriptor> putAliasDescriptor);
+
+		/// <summary>
+		/// Delete an index alias
+		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#deleting
+		/// </summary>
+		/// <param name="deleteAliasRequest">A descriptor that describes the delete alias request</param>
+		IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest deleteAliasRequest);
+
+		/// <inheritdoc />
+		Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest deleteAliasRequest);
+
+		/// <inheritdoc />
+		IDeleteAliasResponse DeleteAlias<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor) where T : class;
+
+		/// <inheritdoc />
+		Task<IDeleteAliasResponse> DeleteAliasAsync<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor) where T : class;
 
 		/// <summary>
 		/// The optimize API allows to optimize one or more indices through an API. The optimize process basically optimizes 
