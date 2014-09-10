@@ -101,6 +101,11 @@ namespace Nest
 			return this.TryGet<SingleBucket>(key);
 		}
 
+		public SingleBucket ReverseNested(string key)
+		{
+			return this.TryGet<SingleBucket>(key);
+		}
+
 		public BucketWithDocCount<SignificantTermItem> SignificantTerms(string key)
 		{
 			var bucket = this.TryGet<BucketWithDocCount>(key);
