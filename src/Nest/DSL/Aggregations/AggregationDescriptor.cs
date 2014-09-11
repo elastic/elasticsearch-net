@@ -60,6 +60,9 @@ namespace Nest
 		[JsonProperty("nested")]
 		INestedAggregator Nested { get; set; }
 
+		[JsonProperty("reverse_nested")]
+		IReverseNestedAggregator ReverseNested { get; set; }
+
 		[JsonProperty("range")]
 		IRangeAggregator Range { get; set; }
 
@@ -102,6 +105,7 @@ namespace Nest
 		private ICardinalityAggregator _cardinality;
 		private IMissingAggregator _missing;
 		private INestedAggregator _nested;
+		private IReverseNestedAggregator _reverseNested;
 		private IRangeAggregator _range;
 		private ITermsAggregator _terms;
 		private ISignificantTermsAggregator _significantTerms;
@@ -193,6 +197,12 @@ namespace Nest
 			set { _nested = value; }
 		}
 
+		public IReverseNestedAggregator ReverseNested
+		{
+			get { return _reverseNested; }
+			set { _reverseNested = value; }
+		}
+
 		public IRangeAggregator Range
 		{
 			get { return _range; }
@@ -264,6 +274,8 @@ namespace Nest
 		IMissingAggregator IAggregationContainer.Missing { get; set; }
 		
 		INestedAggregator IAggregationContainer.Nested { get; set; }
+
+		IReverseNestedAggregator IAggregationContainer.ReverseNested { get; set; }
 	
 		IRangeAggregator IAggregationContainer.Range { get; set; }
 		
@@ -379,6 +391,11 @@ namespace Nest
 		public AggregationDescriptor<T> Nested(string name, Func<NestedAggregationDescriptor<T>, NestedAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.Nested = d);
+		}
+
+		public AggregationDescriptor<T> ReverseNested(string name, Func<ReverseNestedAggregationDescriptor<T>, ReverseNestedAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a.ReverseNested = d);
 		}
 
 		public AggregationDescriptor<T> Range(string name, Func<RangeAggregationDescriptor<T>, RangeAggregationDescriptor<T>> selector)
