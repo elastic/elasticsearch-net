@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -187,6 +188,21 @@ namespace Nest.Tests.Integration.Aggregations
 					)
 				)
 			);
+
+			results.IsValid.Should().BeTrue();
+
+			var topCountries = results.Aggs.Terms("top-countries").Items;
+			foreach(var topCountry in topCountries)
+			{
+				var topHits = topCountry.TopHitsMetric("top-country-hits");
+				topHits.Should().NotBeNull();
+				topHits.Total.Should().BeGreaterThan(0);
+				var hits = topHits.Hits<ElasticsearchProject>();
+				hits.Should().NotBeEmpty().And.NotContain(h=> h.Id.IsNullOrEmpty() || h.Index.IsNullOrEmpty());
+				topHits.Documents<ElasticsearchProject>().Should().NotBeEmpty();
+
+			}
+
 		}
 	}
 }

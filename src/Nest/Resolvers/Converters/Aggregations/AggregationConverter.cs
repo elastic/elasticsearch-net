@@ -59,10 +59,25 @@ namespace Nest.Resolvers.Converters.Aggregations
 					return GetSingleBucketAggregation(reader, serializer);
 				case "bounds":
 					return GetGeoBoundsMetricAggregation(reader, serializer);
+				case "hits":
+					return GetHitsAggregation(reader, serializer);
 				default:
 					return null; 
 
 			}
+		}
+
+		private IAggregation GetHitsAggregation(JsonReader reader, JsonSerializer serializer)
+		{
+			reader.Read();
+			var o = JObject.Load(reader);
+			if (o == null)
+				return null;
+
+			var total = o["total"].ToObject<long>();
+			var maxScore = o["max_score"].ToObject<double?>();
+			var hits = o["hits"].Children().OfType<JObject>().Select(s=>s);
+			return new TopHitsMetric(hits) { Total = total, MaxScore = maxScore };
 		}
 
 		private IAggregation GetGeoBoundsMetricAggregation(JsonReader reader, JsonSerializer serializer)
@@ -369,15 +384,15 @@ namespace Nest.Resolvers.Converters.Aggregations
 						break;
 				}
 			}
-				var bucket = new RangeItem
-				{
-					Key = key,
-					From = fromDouble,
-					To = toDouble,
-					DocCount = docCount.GetValueOrDefault(),
-					FromAsString = fromAsString,
-					ToAsString = toAsString
-				};
+			var bucket = new RangeItem
+			{
+				Key = key,
+				From = fromDouble,
+				To = toDouble,
+				DocCount = docCount.GetValueOrDefault(),
+				FromAsString = fromAsString,
+				ToAsString = toAsString
+			};
 			
 			bucket.Aggregations = this.GetNestedAggregations(reader, serializer);
 			return bucket;

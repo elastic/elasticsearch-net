@@ -12,7 +12,7 @@ namespace Nest
 		IFieldSelection<T> Fields { get; }
 		T Source { get; }
 		string Index { get; }
-		double Score { get; }
+		double? Score { get; }
 		string Type { get; }
 		string Version { get; }
 		string Id { get; }
@@ -36,7 +36,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "_index")]
 		public string Index { get; internal set; }
 		[JsonProperty(PropertyName = "_score")]
-		public double Score { get; internal set; }
+		public double? Score { get; internal set; }
 		[JsonProperty(PropertyName = "_type")]
 		public string Type { get; internal set; }
 		[JsonProperty(PropertyName = "_version")]
