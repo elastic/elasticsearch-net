@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Nest.DSL.Query.Behaviour;
 using Nest.Resolvers;
@@ -62,15 +63,16 @@ namespace Nest
 			return fq;
 		}
 
-		private IFuzziness GetFuzzinessValue(JObject jObject)
+		private static IFuzziness GetFuzzinessValue(IDictionary<string, JToken> jObject)
 		{
 			JToken jToken;
 
 			if (!jObject.TryGetValue("fuzziness", out jToken)) return null;
+			if (jToken.Type == JTokenType.String) return Fuzziness.Auto;
 			if (jToken.Type == JTokenType.Float) return Fuzziness.Ratio(jToken.Value<double>());
 			if (jToken.Type == JTokenType.Integer) return Fuzziness.EditDistance(jToken.Value<int>());
 
-			return Fuzziness.Auto;
+			return null;
 		}
 
 		public TReturn GetPropValue<TReturn>(JObject jObject, string propertyName)
