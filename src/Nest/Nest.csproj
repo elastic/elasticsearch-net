@@ -211,6 +211,7 @@
     <Compile Include="Domain\Stats\PluginStats.cs" />
     <Compile Include="Domain\Stats\SegmentsStats.cs" />
     <Compile Include="DSL\Aggregations\PercentileRanksAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\TopHitsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\GeoBoundsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ReverseNestedAggregationDescriptor.cs" />
     <Compile Include="DSL\CatIndicesDescriptor.cs" />

@@ -162,5 +162,31 @@ namespace Nest.Tests.Integration.Aggregations
 			geoBoundsMetric.Bounds.BottomRight.Lat.Should().NotBe(0);
 			geoBoundsMetric.Bounds.BottomRight.Lon.Should().NotBe(0);
 		}
+
+		[Test]
+		public void TopHits()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.Terms("top-countries", t => t
+						.Field(p => p.Country)
+						.Size(3)
+						.Aggregations(aa => aa
+							.TopHits("top-country-hits", th => th
+								.Sort(sort => sort
+									.OnField(p => p.StartedOn)
+									.Order(SortOrder.Descending)
+								)
+								.Source(src => src
+									.Include(p => p.Name)
+								)
+								.Size(1)
+							)
+						)
+					)
+				)
+			);
+		}
 	}
 }

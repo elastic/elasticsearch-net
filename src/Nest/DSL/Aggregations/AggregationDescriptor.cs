@@ -84,6 +84,9 @@ namespace Nest
 		[JsonProperty("percentile_ranks")]
 		IPercentileRanksAggregaor PercentileRanks { get; set; }
 
+		[JsonProperty("top_hits")]
+		ITopHitsAggregator TopHits { get; set; }
+
 		[JsonProperty("aggs")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
@@ -111,6 +114,7 @@ namespace Nest
 		private ISignificantTermsAggregator _significantTerms;
 		private IPercentileRanksAggregaor _percentileRanks;
 		
+		private ITopHitsAggregator _topHits;
 		public IAverageAggregator Average { get; set; }
 		public IValueCountAggregator ValueCount { get; set; }
 		public IMaxAggregator Max { get; set; }
@@ -118,7 +122,6 @@ namespace Nest
 		public IStatsAggregator Stats { get; set; }
 		public ISumAggregator Sum { get; set; }
 		public IExtendedStatsAggregator ExtendedStats { get; set; }
-
 		public IDateHistogramAggregator DateHistogram
 		{
 			get { return _dateHistogram; }
@@ -227,6 +230,12 @@ namespace Nest
 			set { _percentileRanks = value; }
 		}
 
+		public ITopHitsAggregator TopHits
+		{
+			get { return _topHits; }
+			set { _topHits = value; }
+		}
+
 		private void LiftAggregations(IBucketAggregator bucket)
 		{
 			if (bucket == null) return;
@@ -290,7 +299,9 @@ namespace Nest
 		IPercentileRanksAggregaor IAggregationContainer.PercentileRanks { get;set; }
 		
 		ITermsAggregator IAggregationContainer.Terms { get; set; }
-		
+
+		ITopHitsAggregator IAggregationContainer.TopHits { get; set; }
+
 		public AggregationDescriptor<T> Average(string name, Func<AverageAggregationDescriptor<T>, AverageAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.Average = d);
@@ -427,6 +438,12 @@ namespace Nest
 			Func<ValueCountAggregationDescriptor<T>, ValueCountAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.ValueCount = d);
+		}
+
+		public AggregationDescriptor<T> TopHits(string name,
+			Func<TopHitsAggregationDescriptor<T>, TopHitsAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a.TopHits = d);
 		}
 
 		private AggregationDescriptor<T> _SetInnerAggregation<TAggregation>(
