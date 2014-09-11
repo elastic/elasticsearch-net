@@ -20,6 +20,8 @@ You have an IEnumerable<TestObject> MyFilters, and you want to build a Filter ag
 
 Then you could do something like this:
 
+	IEnumerable<TestObject> MyFilters;
+
 	var descriptor = new SearchDescriptor<MySearchType>().Query(q => q.MatchAll());
 
 	descriptor.Aggregations(aggr => 
