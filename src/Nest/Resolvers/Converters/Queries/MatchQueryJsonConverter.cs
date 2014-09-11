@@ -44,7 +44,7 @@ namespace Nest
 			fq.Boost = GetPropValue<double?>(jo, "boost");
 			fq.Analyzer = GetPropValue<string>(jo, "analyzer");
 			fq.CutoffFrequency = GetPropValue<double?>(jo, "cutoff_frequency");
-			fq.Fuzziness = GetPropValue<double?>(jo, "fuzziness");
+			fq.Fuzziness = GetFuzzinessValue(jo);
 			fq.Lenient = GetPropValue<bool?>(jo, "lenient");
 			fq.MaxExpansions = GetPropValue<int?>(jo, "max_expansions");
 			fq.PrefixLength = GetPropValue<int?>(jo, "prefix_length");
@@ -60,6 +60,17 @@ namespace Nest
 				fq.Operator = operatorString.ToEnum<Operator>();
 
 			return fq;
+		}
+
+		private IFuzziness GetFuzzinessValue(JObject jObject)
+		{
+			JToken jToken;
+
+			if (!jObject.TryGetValue("fuzziness", out jToken)) return null;
+			if (jToken.Type == JTokenType.Float) return Fuzziness.Ratio(jToken.Value<double>());
+			if (jToken.Type == JTokenType.Integer) return Fuzziness.EditDistance(jToken.Value<int>());
+
+			return Fuzziness.Auto;
 		}
 
 		public TReturn GetPropValue<TReturn>(JObject jObject, string propertyName)
