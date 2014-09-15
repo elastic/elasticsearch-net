@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection;
+using FakeItEasy.ExtensionSyntax.Full;
 
 namespace Elasticsearch.Net.Tests.Unit.Stubs
 {
@@ -54,7 +56,16 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 		{
 			return ElasticsearchResponse<Stream>.Create(config, statusCode, method, path, null, response);
 		}
-		
+		public static ElasticsearchResponse<Stream> AnyWithException(
+			IConnectionConfigurationValues config, 
+			int statusCode,
+			string method = "GET",
+			string path = "/",
+			Stream response = null,
+			Exception innerException = null)
+		{
+			 return ElasticsearchResponse<Stream>.Create(config, statusCode, method, path, null, response, innerException);
+		}
 		public static Task<ElasticsearchResponse<Stream>> AnyAsync(
 			IConnectionConfigurationValues config, 
 			int statusCode,
