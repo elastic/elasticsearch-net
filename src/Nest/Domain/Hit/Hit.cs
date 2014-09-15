@@ -12,7 +12,7 @@ namespace Nest
 		IFieldSelection<T> Fields { get; }
 		T Source { get; }
 		string Index { get; }
-		double? Score { get; }
+		double Score { get; }
 		string Type { get; }
 		string Version { get; }
 		string Id { get; }
@@ -35,8 +35,12 @@ namespace Nest
 		public T Source { get; internal set; }
 		[JsonProperty(PropertyName = "_index")]
 		public string Index { get; internal set; }
+		
+		//TODO in NEST 2.0 make the property itself double?
 		[JsonProperty(PropertyName = "_score")]
-		public double? Score { get; internal set; }
+		internal double? _score { get; set; }
+		public double Score { get { return _score.GetValueOrDefault(0); } }
+
 		[JsonProperty(PropertyName = "_type")]
 		public string Type { get; internal set; }
 		[JsonProperty(PropertyName = "_version")]
