@@ -127,6 +127,12 @@ namespace Nest
 	
 	public partial class SearchRequest : QueryPathBase<SearchRequestParameters>, ISearchRequest
 	{
+		public SearchRequest() {}
+
+		public SearchRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+
+		public SearchRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+
 		private Type _clrType { get; set; }
 		Type ISearchRequest.ClrType { get { return _clrType; } }
 
@@ -186,6 +192,12 @@ namespace Nest
 	public partial class SearchRequest<T> : QueryPathBase<SearchRequestParameters, T>, ISearchRequest
 		where T : class
 	{
+		public SearchRequest() {}
+
+		public SearchRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+
+		public SearchRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo)
 		{
 			SearchPathInfo.Update(settings,pathInfo, this);
