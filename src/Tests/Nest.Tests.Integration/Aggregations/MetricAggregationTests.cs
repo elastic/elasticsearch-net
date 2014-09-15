@@ -140,6 +140,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.3.0", "Fails against 1.3: https://github.com/elasticsearch/elasticsearch/issues/7004")]
 		public void GeoBounds()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
