@@ -194,13 +194,13 @@ namespace Nest.Tests.Integration.Core.Cat
 		[Test]
 		public void CatShards()
 		{
-			TestCat(() => this._client.CatShards(), r => !r.Node.IsNullOrEmpty());
+			TestCat(() => this._client.CatShards(), r => !r.State.IsNullOrEmpty());
 		}
 
 		[Test]
 		public async void CatShardsAsync()
 		{
-			await TestCatAsync(() => this._client.CatShardsAsync(), r => !r.Docs.IsNullOrEmpty());
+			await TestCatAsync(() => this._client.CatShardsAsync(), r => !r.State.IsNullOrEmpty());
 		}
 
 	}
