@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -161,6 +162,47 @@ namespace Nest.Tests.Integration.Aggregations
 			geoBoundsMetric.Bounds.BottomRight.Should().NotBeNull();
 			geoBoundsMetric.Bounds.BottomRight.Lat.Should().NotBe(0);
 			geoBoundsMetric.Bounds.BottomRight.Lon.Should().NotBe(0);
+		}
+
+		[Test]
+		public void TopHits()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.Terms("top-countries", t => t
+						.Field(p => p.Country)
+						.Size(3)
+						.Aggregations(aa => aa
+							.TopHits("top-country-hits", th => th
+								.Sort(sort => sort
+									.OnField(p => p.StartedOn)
+									.Order(SortOrder.Descending)
+								)
+								.Source(src => src
+									.Include(p => p.Name)
+								)
+								.Size(1)
+							)
+						)
+					)
+				)
+			);
+
+			results.IsValid.Should().BeTrue();
+
+			var topCountries = results.Aggs.Terms("top-countries").Items;
+			foreach(var topCountry in topCountries)
+			{
+				var topHits = topCountry.TopHitsMetric("top-country-hits");
+				topHits.Should().NotBeNull();
+				topHits.Total.Should().BeGreaterThan(0);
+				var hits = topHits.Hits<ElasticsearchProject>();
+				hits.Should().NotBeEmpty().And.NotContain(h=> h.Id.IsNullOrEmpty() || h.Index.IsNullOrEmpty());
+				topHits.Documents<ElasticsearchProject>().Should().NotBeEmpty();
+
+			}
+
 		}
 	}
 }

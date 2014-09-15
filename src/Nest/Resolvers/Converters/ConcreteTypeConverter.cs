@@ -175,7 +175,7 @@ namespace Nest
 			hitDynamic.Fields = sel;
 			hitDynamic.Source = d._source;
 			hitDynamic.Index = d._index;
-			hitDynamic.Score = (d._score is double) ? d._score : default(double);
+			hitDynamic._score = (d._score is double) ? d._score : default(double);
 			hitDynamic.Type = d._type;
 			hitDynamic.Version = d._version;
 			hitDynamic.Id = d._id;

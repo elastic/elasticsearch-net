@@ -81,6 +81,11 @@ namespace Nest
 			return this.TryGet<PercentilesMetric>(key);
 		}
 
+		public TopHitsMetric TopHitsMetric(string key)
+		{
+			return this.TryGet<TopHitsMetric>(key);
+		}
+
 		public SingleBucket Global(string key)
 		{
 			return this.TryGet<SingleBucket>(key);
