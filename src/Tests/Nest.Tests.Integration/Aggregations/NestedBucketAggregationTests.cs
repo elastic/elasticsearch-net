@@ -46,6 +46,37 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		public void MultipleTermsInTerms()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.Nested("contributors", n => n
+						.Path(p => p.Contributors)
+						.Aggregations(na => na
+							.Terms("ids", t=>t.Field(p=>p.Contributors.First().Id))
+							.Terms("name", t=>t.Field(p=>p.Contributors.First().LastName))
+						)
+					)
+				)
+			);
+
+			//using the helper to return typed aggregation buckets
+			results.IsValid.Should().BeTrue();
+			var bucket = results.Aggs.Nested("contributors");
+			bucket.DocCount.Should().BeGreaterThan(1);
+
+			var ids = bucket.Terms("ids");
+			ids.Should().NotBeNull();
+			ids.Items.Should().NotBeEmpty();
+
+			var countryTerms = bucket.Terms("name");
+			countryTerms.Should().NotBeNull();
+			countryTerms.Items.Should().NotBeEmpty();
+
+		}
+
+		[Test]
 		public void ReverseNested()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
