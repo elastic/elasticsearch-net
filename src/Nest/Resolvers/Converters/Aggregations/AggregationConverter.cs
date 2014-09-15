@@ -110,6 +110,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 				reader.Read();
 			}
 			metric.Items = percentileItems;
+			reader.Read();
 			return metric;
 		}
 

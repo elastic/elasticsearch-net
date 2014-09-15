@@ -41,7 +41,30 @@ namespace Nest.Tests.Integration.Aggregations
 	        statsBucket.Count.Should().BeGreaterThan(1);
 	        statsBucket.Sum.Should().BeGreaterThan(1);
         }
+		
+		[Test]
+        public void StatsAllowsOtherAggsOnTheSameLevel()
+        {
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a=>a
+					.Stats("stats_agg", t=>t.Field(p=>p.LOC))
+					.Percentiles("bucket_agg", m => m
+						.Field(p => p.IntValues)
+						.Percentages(97,99,99.9)
+					)
+				)
+			);
+	        results.IsValid.Should().BeTrue();
+			var percentilesAgg = results.Aggs.Percentiles("bucket_agg");
+			percentilesAgg.Should().NotBeNull();
+			percentilesAgg.Items.Should().NotBeEmpty().And.HaveCount(3);
 
+	        var statsBucket = results.Aggs.Stats("stats_agg");
+	        statsBucket.Should().NotBeNull();
+	        statsBucket.Count.Should().BeGreaterThan(1);
+	        statsBucket.Sum.Should().BeGreaterThan(1);
+        }
 		[Test]
         public void ExtendedStats()
         {
