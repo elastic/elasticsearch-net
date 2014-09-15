@@ -42,12 +42,14 @@ namespace Nest.Tests.Integration.Core.Cat
 
 
 		[Test]
+		[SkipVersion("0 - 1.0.3", "Fails on ES < 1.1")]
 		public void CatAliases()
 		{
 			TestCat(() => this._client.CatAliases(s => s.V()), r => !r.Alias.IsNullOrEmpty());
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.0.3", "Fails on ES < 1.1")]
 		public async void CatAliasesAsync()
 		{
 			await TestCatAsync(() => this._client.CatAliasesAsync(), r => !r.Alias.IsNullOrEmpty());
@@ -159,24 +161,28 @@ namespace Nest.Tests.Integration.Core.Cat
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.1.0", "Fails on ES <= 1.1.0 (#5778)")]
 		public void CatPlugins()
 		{
 			TestCat(() => this._client.CatPlugins(), r => !r.Version.IsNullOrEmpty());
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.1.0", "Fails on ES <= 1.1.0 (#5778)")]
 		public async void CatPluginsAsync()
 		{
 			await TestCatAsync(() => this._client.CatPluginsAsync(), r => !r.Type.IsNullOrEmpty());
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.0.3", "Fails on ES < 1.1")]
 		public void CatRecovery()
 		{
 			TestCat(() => this._client.CatRecovery(), r => !r.Shard.IsNullOrEmpty());
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.0.3", "Fails on ES < 1.1")]
 		public async void CatRecoveryAsync()
 		{
 			await TestCatAsync(() => this._client.CatRecoveryAsync(), r => !r.Files.IsNullOrEmpty());
