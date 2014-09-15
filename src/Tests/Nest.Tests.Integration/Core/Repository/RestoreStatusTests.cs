@@ -10,6 +10,7 @@ namespace Nest.Tests.Integration.Core.Repository
 	public class RestoreStatusTests : IntegrationTests
 	{
 		[Test]
+		[SkipVersion("0 - 1.0.9", "Snapshot status added in 1.1.0")]
 		public void SnapshotRestore()
 		{
 			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
