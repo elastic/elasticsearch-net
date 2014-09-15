@@ -803,6 +803,7 @@
     <Compile Include="Resolvers\Converters\CatThreadPoolRecordConverter.cs" />
     <Compile Include="Resolvers\Converters\GeoShapeConverterBase.cs" />
     <Compile Include="Resolvers\Converters\GetRepositoryResponseConverter.cs" />
+    <Compile Include="Resolvers\Converters\Helpers\FuzzinessConverterHelper.cs" />
     <Compile Include="Resolvers\Converters\MappingTransformConverter.cs" />
     <Compile Include="Resolvers\Converters\Queries\GeoShapeQueryJsonReader.cs" />
     <Compile Include="Resolvers\Converters\SimilarityCollectionConverter.cs" />
