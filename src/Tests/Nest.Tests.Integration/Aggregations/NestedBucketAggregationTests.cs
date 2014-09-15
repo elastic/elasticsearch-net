@@ -77,6 +77,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.1.9", "Reverse nested agg added in 1.2.0")]
 		public void ReverseNested()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
