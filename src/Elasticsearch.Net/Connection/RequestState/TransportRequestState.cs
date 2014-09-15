@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net.Connection.Configuration;
+using Elasticsearch.Net.ConnectionPool;
 using PurifyNet;
 
 namespace Elasticsearch.Net.Connection.RequestState
@@ -26,6 +27,15 @@ namespace Elasticsearch.Net.Connection.RequestState
 			get
 			{
 				return this.RequestParameters == null ? null : this.RequestParameters.RequestConfiguration;
+			}
+		}
+
+		public bool UsingPooling
+		{
+			get
+			{
+				var pool = this.ClientSettings.ConnectionPool;
+				return pool != null && pool.GetType() != typeof(SingleNodeConnectionPool);
 			}
 		}
 

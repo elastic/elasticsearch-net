@@ -30,22 +30,22 @@ namespace Nest.Resolvers.Converters.Filters
 
 			writer.WriteStartObject();
 			{
-				WriteProperty(writer, f, field, f.Value);
-				WriteProperty(writer, f, "boost", f.Boost);
-				WriteProperty(writer, f, "_cache", f.Cache);
-				WriteProperty(writer, f, "_cache_key", f.CacheKey);
-				WriteProperty(writer, f, "_name", f.FilterName);
+				WriteProperty(writer, serializer, field, f.Value);
+				WriteProperty(writer, serializer, "boost", f.Boost);
+				WriteProperty(writer, serializer, "_cache", f.Cache);
+				WriteProperty(writer, serializer, "_cache_key", f.CacheKey);
+				WriteProperty(writer, serializer, "_name", f.FilterName);
 				
 			}
 			writer.WriteEndObject();
 		}
 
-		private static void WriteProperty(JsonWriter writer, IFilter filter, string field, object value)
+		private static void WriteProperty(JsonWriter writer, JsonSerializer serializer, string field, object value)
 		{
 			if ((field.IsNullOrEmpty() || value == null))
 				return;
 			writer.WritePropertyName(field);
-			writer.WriteValue(value);
+			serializer.Serialize(writer, value);
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

@@ -111,7 +111,7 @@ namespace Nest
 			return r;
 		}
 
-		internal Task<I> DispatchAsync<D, Q, R, I>(
+		private Task<I> DispatchAsync<D, Q, R, I>(
 			Func<D, D> selector
 			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
 			)

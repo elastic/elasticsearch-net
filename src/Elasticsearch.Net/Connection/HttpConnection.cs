@@ -141,7 +141,7 @@ namespace Elasticsearch.Net.Connection
 		protected virtual HttpWebRequest CreateHttpWebRequest(Uri uri, string method, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
 			var myReq = this.CreateWebRequest(uri, method, data, requestSpecificConfig);
-			this.SetBasicAuthorizationIfNeeded(myReq);
+			this.SetBasicAuthorizationIfNeeded(uri, myReq);
 			this.SetProxyIfNeeded(myReq);
 			return myReq;
 		}
@@ -164,15 +164,12 @@ namespace Elasticsearch.Net.Connection
             }
 		}
 
-		private void SetBasicAuthorizationIfNeeded(HttpWebRequest myReq)
+		private void SetBasicAuthorizationIfNeeded(Uri uri, HttpWebRequest myReq)
 		{
-			//TODO figure out a way to cache this;
-
-			//if (this._ConnectionSettings.UriSpecifiedBasicAuth)
-			//{
-			myReq.Headers["Authorization"] =
-				"Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myReq.RequestUri.UserInfo));
-			//}
+			if (!uri.UserInfo.IsNullOrEmpty())
+			{
+				myReq.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myReq.RequestUri.UserInfo));
+			}
 		}
 
 		protected virtual HttpWebRequest CreateWebRequest(Uri uri, string method, byte[] data, IRequestConfiguration requestSpecificConfig)
