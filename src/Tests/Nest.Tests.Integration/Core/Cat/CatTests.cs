@@ -78,6 +78,7 @@ namespace Nest.Tests.Integration.Core.Cat
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.1.9", "/_cat/fielddata endpoint added in 1.2")]
 		public void CatFielddata()
 		{
 			TestCat(() => this._client.CatFielddata(
@@ -87,6 +88,7 @@ namespace Nest.Tests.Integration.Core.Cat
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.1.9", "/_cat/fielddata endpoint added in 1.2")]
 		public async void CatFielddataAsync()
 		{
 			await TestCatAsync(() => this._client.CatFielddataAsync(v => v.Fields<ElasticsearchProject>(p => p.Name)), r => r.FieldSizes.ContainsKey("name"));
