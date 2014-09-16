@@ -34,7 +34,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 
 			var property = reader.Value as string; 
 			if (_numeric.IsMatch(property))
-				return GetPercentilesMetricAggregation(reader, serializer);
+				return GetPercentilesMetricAggregation(reader, serializer, oldFormat: true);
 
 			switch (property)
 			{
@@ -106,7 +106,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 			return geoBoundsMetric;
 		}
 
-		private IAggregation GetPercentilesMetricAggregation(JsonReader reader, JsonSerializer serializer)
+		private IAggregation GetPercentilesMetricAggregation(JsonReader reader, JsonSerializer serializer, bool oldFormat = false)
 		{
 			var metric = new PercentilesMetric();
 			var percentileItems = new List<PercentileItem>();
@@ -125,7 +125,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 				reader.Read();
 			}
 			metric.Items = percentileItems;
-			reader.Read();
+			if (!oldFormat) reader.Read();
 			return metric;
 		}
 
