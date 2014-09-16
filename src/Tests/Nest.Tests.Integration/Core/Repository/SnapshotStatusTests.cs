@@ -10,6 +10,7 @@ namespace Nest.Tests.Integration.Core.Repository
 	public class SnapshotStatusTests : IntegrationTests
 	{
 		[Test]
+		[SkipVersion("0 - 1.0.9", "Snapshot status added in 1.1.0")]
 		public void SnapshotRestoreFullPath()
 		{
 			var repositoryName = ElasticsearchConfiguration.NewUniqueIndexName();
@@ -46,6 +47,7 @@ namespace Nest.Tests.Integration.Core.Repository
 		
 		}
 		[Test]
+		[SkipVersion("0 - 1.0.9", "Snapshot status added in 1.1.0")]
 		public void SnapshotRestoreOnlyRepository()
 		{
 			var repositoryName = ElasticsearchConfiguration.NewUniqueIndexName();

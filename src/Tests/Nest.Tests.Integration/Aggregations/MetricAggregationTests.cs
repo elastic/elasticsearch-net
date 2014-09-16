@@ -122,6 +122,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.2.9", "Percentile ranks agg added in 1.3")]
 		public void PercentilesRank()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
@@ -140,6 +141,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.3.0", "Fails against 1.3: https://github.com/elasticsearch/elasticsearch/issues/7004")]
 		public void GeoBounds()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
@@ -165,6 +167,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.2.9", "Top hits agg added in 1.3")]
 		public void TopHits()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s

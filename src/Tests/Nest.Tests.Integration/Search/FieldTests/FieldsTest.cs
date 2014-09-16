@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Search.FieldTests
 					s.Skip(0)
 					.Take(10)
 					.Fields(fields.ConvertAll(x => x.ToCamelCase()).ToArray())
-					.AllTypes());
+				);
 
 			Assert.True(queryResults.IsValid);
 
