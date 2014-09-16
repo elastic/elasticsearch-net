@@ -126,8 +126,6 @@ namespace Elasticsearch.Net.Connection
 				else if (!string.IsNullOrWhiteSpace(DefaultContentType))
 					request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(DefaultContentType));
 
-				if (!string.IsNullOrWhiteSpace(DefaultContentType))
-					request.Content.Headers.ContentType = new MediaTypeHeaderValue(DefaultContentType);
 
 				if (!string.IsNullOrEmpty(uri.UserInfo))
 				{
@@ -137,6 +135,8 @@ namespace Elasticsearch.Net.Connection
 				if (method != HttpMethod.Get && method != HttpMethod.Head && data != null && data.Length > 0)
 				{
 					request.Content = new ByteArrayContent(data);
+					if (!string.IsNullOrWhiteSpace(DefaultContentType) && request.Content != null && request.Content.Headers != null)
+						request.Content.Headers.ContentType = new MediaTypeHeaderValue(DefaultContentType);
 				}
 
 				var response = await Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
