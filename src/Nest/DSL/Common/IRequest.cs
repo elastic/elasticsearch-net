@@ -7,7 +7,10 @@ namespace Nest
 	/// <summary>
 	/// </summary>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IRequest {}
+	public interface IRequest
+	{
+		IRequestConfiguration RequestConfiguration { get; set; }
+	}
 	public interface IRequest<TParameters> : IPathInfo<TParameters>, IRequest
 		where TParameters : IRequestParameters, new()
 	{
@@ -17,9 +20,5 @@ namespace Nest
 		/// </summary>
 		TParameters RequestParameters { get; set; }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		IRequestConfiguration RequestConfiguration { get; set; }
 	}
 }

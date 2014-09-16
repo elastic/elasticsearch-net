@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -43,8 +46,8 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetTemplate1
 
 				//match _response.test.settings: 
 				this.IsMatch(_response.test.settings, new Dictionary<string, object> {
-					{ @"index.number_of_shards", @"1" },
-					{ @"index.number_of_replicas", @"0" }
+					{ @"index.number_of_shards", 1 },
+					{ @"index.number_of_replicas", 0 }
 				});
 
 			}
@@ -92,6 +95,29 @@ namespace Elasticsearch.Net.Integration.Yaml.IndicesGetTemplate1
 
 				//is_true _response.test; 
 				this.IsTrue(_response.test);
+
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class GetTemplateWithNonFlatSettings5Tests : IndicesGetTemplate110BasicYamlBase
+		{
+			[Test]
+			public void GetTemplateWithNonFlatSettings5Test()
+			{	
+
+				//do indices.get_template 
+				this.Do(()=> _client.IndicesGetTemplateForAll("test", nv=>nv
+					.AddQueryString("flat_settings", @"false")
+				));
+
+				//match _response.test.settings: 
+				this.IsMatch(_response.test.settings, new {
+					index= new {
+						number_of_shards= "1",
+						number_of_replicas= "0"
+					}
+				});
 
 			}
 		}

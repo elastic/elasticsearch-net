@@ -28,6 +28,7 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 
 			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod(), "MatchAll");
 		}
+
 		private void DoNonConditionlessFilter(Func<FilterDescriptor<ElasticsearchProject>, FilterContainer> filter)
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
@@ -147,7 +148,11 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 		{
 			this.DoConditionlessFilter(f => f.Nested(nf=>nf.Query(q=>q.Term(string.Empty, string.Empty))));
 			this.DoConditionlessFilter(f => f.Nested(null));
-		}
+            this.DoConditionlessFilter(f => f.Nested(nf => nf.Filter(q => q.Term(string.Empty, string.Empty))));
+
+            this.DoNonConditionlessFilter(f => f.Nested(nf => nf.Query(q => q.Term("myfield", "myvalue"))));
+            this.DoNonConditionlessFilter(f => f.Nested(nf => nf.Filter(q => q.Term("myfield", "myvalue"))));
+        }
 
 
 		[Test]

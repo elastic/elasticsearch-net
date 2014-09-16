@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Serialization;
 
@@ -125,8 +127,12 @@ namespace Elasticsearch.Net
 		{
 			get
 			{
+				var pool = this.Settings.ConnectionPool;
+				var usingPool = pool != null && pool.GetType() != typeof(SingleNodeConnectionPool);
+
 				return this.Success ||
-					(this.HttpStatusCode.HasValue
+					(!usingPool && this.HttpStatusCode.GetValueOrDefault(1) < 0)
+					|| (this.HttpStatusCode.HasValue
 					&& this.HttpStatusCode.Value != 503 //service unavailable needs to be retried
 					&& this.HttpStatusCode.Value != 502 //bad gateway needs to be retried 
 					&& ((this.HttpStatusCode.Value >= 400 && this.HttpStatusCode.Value < 599)));
@@ -162,22 +168,26 @@ namespace Elasticsearch.Net
 			return cs;
 		}
 
-		public static ElasticsearchResponse<T> Create(IConnectionConfigurationValues settings, int statusCode, string method, string path, byte[] request)
+		public static ElasticsearchResponse<T> Create(
+			IConnectionConfigurationValues settings, int statusCode, string method, string path, byte[] request, Exception innerException = null)
 		{
 			var cs = new ElasticsearchResponse<T>(settings, statusCode);
 			cs.Request = request;
 			cs.RequestUrl = path;
 			cs.RequestMethod = method;
+			cs.OriginalException = innerException;
 			return cs;
 		}
 
-		public static ElasticsearchResponse<T> Create(IConnectionConfigurationValues settings, int statusCode, string method, string path, byte[] request, T response)
+		public static ElasticsearchResponse<T> Create(
+			IConnectionConfigurationValues settings, int statusCode, string method, string path, byte[] request, T response, Exception innerException = null)
 		{
 			var cs = new ElasticsearchResponse<T>(settings, statusCode);
 			cs.Request = request;
 			cs.RequestUrl = path;
 			cs.RequestMethod = method;
 			cs.Response = response;
+			cs.OriginalException = innerException;
 			return cs;
 		}
 

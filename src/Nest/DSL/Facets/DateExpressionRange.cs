@@ -11,6 +11,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "to")]
 		internal string _To { get; set; }
 
+        [JsonProperty(PropertyName = "key")]
+        internal string _Key { get; set; }
+
 		public DateExpressionRange From(string value)
 		{
 			this._From = value;
@@ -21,5 +24,10 @@ namespace Nest
 			this._To = value;
 			return this;
 		}
-	}
+        public DateExpressionRange Key(string key)
+        {
+            this._Key = key;
+            return this;
+        }
+    }
 }

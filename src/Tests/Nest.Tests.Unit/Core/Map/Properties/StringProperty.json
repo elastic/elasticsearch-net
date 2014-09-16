@@ -21,7 +21,21 @@
         "search_analyzer": "standard",
         "include_in_all": true,
         "position_offset_gap": 1,
-        "copy_to": [ "content", "country" ]
+        "copy_to": [ "content", "country" ],
+        "fielddata": {
+          "format": "fst",
+          "loading": "eager",
+          "filter": {
+            "frequency": {
+              "min": 0.001,
+              "max": 0.1,
+              "min_segment_size": 500
+            },
+            "regex": {
+              "pattern": "^#.*"
+            }
+          }
+        }
       }
     }
   }

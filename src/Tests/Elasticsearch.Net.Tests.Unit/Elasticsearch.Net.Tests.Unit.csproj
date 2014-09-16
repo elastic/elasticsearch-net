@@ -64,6 +64,7 @@
     <Compile Include="Connection\NoRetryOnServerExceptionTests.cs" />
     <Compile Include="Connection\ElasticsearchServerExceptions.cs" />
     <Compile Include="Connection\NoRetryTests.cs" />
+    <Compile Include="Connection\SingleNodeConnectionPoolTests.cs" />
     <Compile Include="Stubs\FakeCalls.cs" />
     <Compile Include="Stubs\FakeResponse.cs" />
     <Compile Include="Connection\SkipDeadNodesTests.cs" />

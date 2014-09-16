@@ -12,6 +12,8 @@ namespace Nest
 		[EnumMember(Value = "freqs")]
 		Freqs,
 		[EnumMember(Value = "positions")]
-		Positions
+		Positions,
+        [EnumMember(Value = "offsets")]
+        Offsets,
 	}
 }

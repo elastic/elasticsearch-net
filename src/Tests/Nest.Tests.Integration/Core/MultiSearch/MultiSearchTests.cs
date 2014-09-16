@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 		public void SimpleSearch()
 		{
 			var result = this.Client.MultiSearch(b => b
-				.Search<ElasticsearchProject>(s=>s.MatchAll())
+				.Search<ElasticsearchProject>(s => s.MatchAll())
 			);
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();

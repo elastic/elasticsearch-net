@@ -88,7 +88,7 @@ namespace Elasticsearch.Net.Connection
 #endif
 		bool IConnectionConfigurationValues.MetricsEnabled { get{ return _enableMetrics; } }
 
-        private bool _disableAutomaticProxyDetection = true;
+        private bool _disableAutomaticProxyDetection = false;
         bool IConnectionConfigurationValues.DisableAutomaticProxyDetection { get { return _disableAutomaticProxyDetection; } }
 
 		private int _maximumAsyncConnections;

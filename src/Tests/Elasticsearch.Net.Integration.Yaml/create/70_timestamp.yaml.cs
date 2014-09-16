@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -59,7 +62,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Create11
 					foo= "bar"
 				};
 				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
-					.AddQueryString("timestamp", @"1372011280000")
+					.AddQueryString("timestamp", 1372011280000)
 					.AddQueryString("op_type", @"create")
 				));
 
@@ -69,7 +72,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Create11
 				));
 
 				//match _response.fields._timestamp: 
-				this.IsMatch(_response.fields._timestamp, @"1372011280000");
+				this.IsMatch(_response.fields._timestamp, 1372011280000);
 
 				//do delete 
 				this.Do(()=> _client.Delete("test_1", "test", "1"));
@@ -89,7 +92,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Create11
 				));
 
 				//match _response.fields._timestamp: 
-				this.IsMatch(_response.fields._timestamp, @"1372011280000");
+				this.IsMatch(_response.fields._timestamp, 1372011280000);
 
 			}
 		}

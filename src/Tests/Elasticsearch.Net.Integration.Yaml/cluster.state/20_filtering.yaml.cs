@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -97,6 +100,12 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterState2
 
 				//length _response.blocks: 1; 
 				this.IsLength(_response.blocks, 1);
+
+				//do indices.put_settings 
+				_body = new Dictionary<string, object> {
+					{ @"index.blocks.read_only", @"false" }
+				};
+				this.Do(()=> _client.IndicesPutSettings("testidx", _body));
 
 			}
 		}

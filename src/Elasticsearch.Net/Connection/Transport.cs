@@ -369,7 +369,7 @@ namespace Elasticsearch.Net.Connection
 			catch (Exception e)
 			{
 				requestState.SeenExceptions.Add(e);
-				if (maxRetries == 0 && retried == 0)
+				if (!requestState.UsingPooling || maxRetries == 0 && retried == 0)
 				{
 					if (_throwMaxRetry)
 						new MaxRetryException(e);
@@ -489,8 +489,8 @@ namespace Elasticsearch.Net.Connection
 					if (t.IsFaulted)
 					{
 						rq.Dispose();
-						if (maxRetries == 0 && retried == 0) throw t.Exception;
 						requestState.SeenExceptions.Add(t.Exception);
+						if (!requestState.UsingPooling || maxRetries == 0 && retried == 0) throw t.Exception;
 						return this.RetryRequestAsync<T>(requestState);
 					}
 
@@ -633,12 +633,12 @@ namespace Elasticsearch.Net.Connection
 			TransportRequestState<T> requestState,
 			ElasticsearchResponse<Stream> streamResponse)
 		{
-			if (IsValidResponse(requestState, streamResponse))
-				return null;
-
 			if (((streamResponse.HttpStatusCode.HasValue && streamResponse.HttpStatusCode.Value <= 0)
 				|| !streamResponse.HttpStatusCode.HasValue) && streamResponse.OriginalException != null)
 				throw streamResponse.OriginalException;
+
+			if (IsValidResponse(requestState, streamResponse))
+				return null;
 
 			ElasticsearchServerError error = null;
 

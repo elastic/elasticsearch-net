@@ -35,5 +35,19 @@ namespace Nest
 			this._Mapping.GeoHashPrecision = geoHashPrecision;
 			return this;
 		}
+
+		public GeoPointMappingDescriptor<T> FieldData(Func<FieldDataNonStringMappingDescriptor, FieldDataNonStringMappingDescriptor> fieldDataSelector)
+		{
+			fieldDataSelector.ThrowIfNull("fieldDataSelector");
+			var selector = fieldDataSelector(new FieldDataNonStringMappingDescriptor());
+			this._Mapping.FieldData = selector.FieldData;
+			return this;
+		}
+
+		public GeoPointMappingDescriptor<T> FieldData(FieldDataNonStringMapping fieldData)
+		{
+			this._Mapping.FieldData = fieldData;
+			return this;
+		}
 	}
 }

@@ -193,6 +193,11 @@ namespace Nest
 			return new QueryDescriptor<T>().SpanTerm(field, value, Boost);
 		}
 
+		public static QueryContainer SpanMultiTerm(Action<SpanMultiTermQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().SpanMultiTerm(selector);
+		}
+
 		public static QueryContainer Term<K>(Expression<Func<T, K>> fieldDescriptor, K value, double? Boost = null)
 		{
 			return new QueryDescriptor<T>().Term(fieldDescriptor, value, Boost);

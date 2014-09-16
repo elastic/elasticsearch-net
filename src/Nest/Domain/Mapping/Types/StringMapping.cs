@@ -62,5 +62,8 @@ namespace Nest
 
 		[JsonProperty("copy_to")]
 		public IEnumerable<PropertyPathMarker> CopyTo { get; set; }
+
+		[JsonProperty("fielddata")]
+		public FieldDataStringMapping FieldData { get; set; }
 	}
 }

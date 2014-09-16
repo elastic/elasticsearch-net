@@ -60,12 +60,12 @@ namespace Nest.Tests.Unit.Cluster
 				.NodesStats(cn => cn.NodeId("insert-marvel-character").Metrics(NodesStatsMetric.Jvm)));
 			Do("GET", "/_cluster/state", c => c.ClusterState());
 			Do("GET", "/_cluster/state?local=true", c => c.ClusterState(cs => cs.Local()));
-			Do("POST", "/_count", c => c.Count());
-			Do("POST", "/_all/doc/_count", c => c.Count(cc => cc.AllIndices().Type<Doc>()));
-			Do("POST", "/mydefaultindex/doc/_count", c => c.Count(cc => cc.Index<Doc>().Type<Doc>()));
-			Do("POST", "/mydefaultindex/_count", c => c.Count(cc => cc.Index<Doc>()));
-			Do("POST", "/mydefaultindex/doc/_count", c => c.Count<Doc>());
-			Do("POST", "/customindex/doc/_count", c => c.Count<Doc>(cc => cc.Index("customindex")));
+			Do("GET", "/_count", c => c.Count());
+			Do("GET", "/_all/doc/_count", c => c.Count(cc => cc.AllIndices().Type<Doc>()));
+			Do("GET", "/mydefaultindex/doc/_count", c => c.Count(cc => cc.Index<Doc>().Type<Doc>()));
+			Do("GET", "/mydefaultindex/_count", c => c.Count(cc => cc.Index<Doc>()));
+			Do("GET", "/mydefaultindex/doc/_count", c => c.Count<Doc>());
+			Do("GET", "/customindex/doc/_count", c => c.Count<Doc>(cc => cc.Index("customindex")));
 			Do("POST", "/new-index-name", c => c.CreateIndex("new-index-name"));
 			Do("DELETE", "/mydefaultindex/doc/1", c => c.Delete<Doc>(d => d.Id("1")));
 			Do("DELETE", "/mydefaultindex/doc/1", c => c.Delete<Doc>(1));
@@ -113,6 +113,9 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/_bulk", c => c.IndexMany(Enumerable.Range(0, 10).Select(i => new Doc { Id = i.ToString() })));
 			Do("POST", "/customindex/customtype/_bulk", c => c.IndexMany(Enumerable.Range(0, 10).Select(i => new Doc { Id = i.ToString() }), index: "customindex", type: "customtype"));
 			Do("GET", "/_stats", c => c.IndicesStats());
+			Do("GET", "/my_index/_stats", c => c.IndicesStats(s => s.Index("my_index")));
+			Do("GET", "/my_index/_stats?types=type1", c => c.IndicesStats(s => s.Index("my_index").Types(new TypeNameMarker[] { "type1" })));
+			Do("GET", "/my_index/_stats?types=type1%2Ctype2", c => c.IndicesStats(s => s.Index("my_index").Types(new TypeNameMarker[] { "type1", "type2" })));
 			Do("GET", "/mydefaultindex/_stats", c => c.IndicesStats(s => s.Index<Doc>()));
 			Do("PUT", "/mydefaultindex/doc/_mapping", c => c.Map<Doc>(m => m.MapFromAttributes()));
 			Do("PUT", "/mycustomindex/doc/_mapping", c => c.Map<Doc>(m => m.Index("mycustomindex")));
@@ -168,6 +171,13 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/_validate/query", c => c.Validate<Doc>(v => v.AllIndices().AllTypes()));
 			Do("PUT", "/_cluster/settings", c => c.ClusterSettings(v => v.Transient(p => p)));
 			Do("GET", "/_cluster/settings", c => c.ClusterGetSettings());
+			
+			Do("GET", "/mydefaultindex/doc/_search_shards?ignore_unavailable=true", c => c.SearchShards<Doc>(s => s.IgnoreUnavailable()));
+			Do("GET", "/_all/doc/_search_shards?local=true", c => c.SearchShards<Doc>(s => s.AllIndices().Local()));
+			Do("GET", "/_search_shards?preference=nodeID", c => c.SearchShards<Doc>(s => s.AllIndices().AllTypes().Preference("nodeID")));
+			Do("GET", "/mydefaultindex/_search_shards?routing=routing-value", c => c.SearchShards<Doc>(s => s.AllTypes().Routing("routing-value")));
+			Do("GET", "/prefix-*/a%2Cb/_search_shards", c => c.SearchShards<Doc>(s => s.Index("prefix-*").Types("a", "b")));
+			
 		}
 
 	}

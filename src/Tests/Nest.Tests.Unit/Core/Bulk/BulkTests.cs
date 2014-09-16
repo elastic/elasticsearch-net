@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
+using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 using System.Reflection;
@@ -81,5 +82,29 @@ namespace Nest.Tests.Unit.Core.Bulk
 			//Assert.Fail(status.Request.Utf8String());
 			this.BulkJsonEquals(status.Request.Utf8String(), MethodInfo.GetCurrentMethod());
 		}
+
+		[Test]
+		public void BulkIndexDetailsFixedPath()
+		{
+			var result = this._client.Bulk(b => b
+				.FixedPath("myindex", "mytype")
+				.Index<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 5 }))
+				.Index<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 6 }).Index("myindex2"))
+				.Index<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 7 }).Index("myindex2").Type("mytype2"))
+				.Create<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 5 }))
+				.Create<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 6 }).Index("myindex2"))
+				.Create<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 7 }).Index("myindex2").Type("mytype2"))
+				.Delete<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 5 }))
+				.Delete<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 6 }).Index("myindex2"))
+				.Delete<ElasticsearchProject>(i => i.Document(new ElasticsearchProject { Id = 7 }).Index("myindex2").Type("mytype2"))
+			);
+			var uri = new Uri(result.ConnectionStatus.RequestUrl);
+			uri.AbsolutePath.Should().Be("/myindex/mytype/_bulk");
+
+			var status = result.ConnectionStatus;
+			//Assert.Fail(status.Request.Utf8String());
+			this.BulkJsonEquals(status.Request.Utf8String(), MethodInfo.GetCurrentMethod());
+		}
+
 	}
 }

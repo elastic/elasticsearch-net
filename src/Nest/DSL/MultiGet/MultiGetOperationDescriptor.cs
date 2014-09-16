@@ -49,6 +49,20 @@ namespace Nest
 		}
 
 		/// <summary>
+		/// when rest.action.multi.allow_explicit_index is set to false you can use this constructor to generate a multiget operation
+		/// with no index and type set
+		/// <pre>
+		/// See also: https://github.com/elasticsearch/elasticsearch/issues/3636
+		/// </pre>
+		/// </summary>
+		/// <param name="initializeEmpty"></param>
+		public MultiGetOperationDescriptor(bool allowExplicitIndex) : this()
+		{
+			if (allowExplicitIndex) return;
+			Self.Index = null;
+		}
+
+		/// <summary>
 		/// Manually set the index, default to the default index or the index set for the type on the connectionsettings.
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Index(string index)

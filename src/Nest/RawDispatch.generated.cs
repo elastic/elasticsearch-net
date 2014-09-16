@@ -1330,7 +1330,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesDeleteAliasDispatch<T>(ElasticsearchPathInfo<IndicesDeleteAliasRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesDeleteAliasDispatch<T>(ElasticsearchPathInfo<DeleteAliasRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1345,7 +1345,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteAliasDispatchAsync<T>(ElasticsearchPathInfo<IndicesDeleteAliasRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteAliasDispatchAsync<T>(ElasticsearchPathInfo<DeleteAliasRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1522,7 +1522,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesExistsTemplateDispatch<T>(ElasticsearchPathInfo<IndicesExistsTemplateRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesExistsTemplateDispatch<T>(ElasticsearchPathInfo<TemplateExistsRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1537,7 +1537,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsTemplateDispatchAsync<T>(ElasticsearchPathInfo<IndicesExistsTemplateRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesExistsTemplateDispatchAsync<T>(ElasticsearchPathInfo<TemplateExistsRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2010,7 +2010,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesPutAliasDispatch<T>(ElasticsearchPathInfo<IndicesPutAliasRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesPutAliasDispatch<T>(ElasticsearchPathInfo<PutAliasRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2037,7 +2037,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutAliasDispatchAsync<T>(ElasticsearchPathInfo<IndicesPutAliasRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutAliasDispatchAsync<T>(ElasticsearchPathInfo<PutAliasRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2262,7 +2262,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesRecoveryDispatch<T>(ElasticsearchPathInfo<IndicesRecoveryRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesRecoveryDispatch<T>(ElasticsearchPathInfo<RecoveryStatusRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2278,7 +2278,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesRecoveryDispatchAsync<T>(ElasticsearchPathInfo<IndicesRecoveryRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesRecoveryDispatchAsync<T>(ElasticsearchPathInfo<RecoveryStatusRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3544,7 +3544,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SnapshotGetRepositoryDispatch<T>(ElasticsearchPathInfo<SnapshotGetRepositoryRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> SnapshotGetRepositoryDispatch<T>(ElasticsearchPathInfo<GetRepositoryRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -3560,7 +3560,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotGetRepositoryDispatchAsync<T>(ElasticsearchPathInfo<SnapshotGetRepositoryRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SnapshotGetRepositoryDispatchAsync<T>(ElasticsearchPathInfo<GetRepositoryRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{

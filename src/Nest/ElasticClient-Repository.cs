@@ -8,6 +8,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
+		
 		/// <inheritdoc />
 		public IAcknowledgedResponse CreateRepository(string name, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector)
 		{
@@ -45,9 +46,43 @@ namespace Nest
 				(p, d) => this.RawDispatch.SnapshotCreateRepositoryDispatchAsync<AcknowledgedResponse>(p, ((ICreateRepositoryRequest)d).Repository)
 			);
 		}
+
+		/// <inheritdoc />
+		public IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector)
+		{
+			return this.Dispatch<GetRepositoryDescriptor, GetRepositoryRequestParameters, GetRepositoryResponse>(
+				selector,
+				(p, d) => this.RawDispatch.SnapshotGetRepositoryDispatch<GetRepositoryResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public IGetRepositoryResponse GetRepository(IGetRepositoryRequest request)
+		{
+			return this.Dispatch<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse>(
+				request,
+				(p, d) => this.RawDispatch.SnapshotGetRepositoryDispatch<GetRepositoryResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector)
+		{
+			return this.DispatchAsync<GetRepositoryDescriptor, GetRepositoryRequestParameters, GetRepositoryResponse, IGetRepositoryResponse>(
+				selector,
+				(p, d) => this.RawDispatch.SnapshotGetRepositoryDispatchAsync<GetRepositoryResponse>(p)
+			);
+		}
 		
-
-
+		/// <inheritdoc />
+		public Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request)
+		{
+			return this.DispatchAsync<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse, IGetRepositoryResponse>(
+				request,
+				(p, d) => this.RawDispatch.SnapshotGetRepositoryDispatchAsync<GetRepositoryResponse>(p)
+			);
+		}
+		
 		/// <inheritdoc />
 		public IAcknowledgedResponse DeleteRepository(string name, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null)
 		{

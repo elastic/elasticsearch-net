@@ -24,11 +24,11 @@ namespace Nest.Tests.Integration.Search.Scroll
 			Assert.False(scanResults.FieldSelections.Any());
 			Assert.IsNotNullOrEmpty(scanResults.ScrollId);
 
-			var scrolls = 0;
 			var results = this.Client.Scroll<ElasticsearchProject>(s=>s
 				.Scroll("4s") 
 				.ScrollId(scanResults.ScrollId)
 			);
+			var hitCount = results.Hits.Count();
 			while (results.FieldSelections.Any())
 			{
 				Assert.True(results.IsValid);
@@ -38,9 +38,9 @@ namespace Nest.Tests.Integration.Search.Scroll
 				results = this.Client.Scroll<ElasticsearchProject>(s=>s
 					.Scroll("4s")
 					.ScrollId(localResults.ScrollId));
-				scrolls++;
+				hitCount += results.Hits.Count();
 			}
-			Assert.AreEqual(18, scrolls);
+			Assert.AreEqual(scanResults.Total, hitCount);
 		}
 
 		[Test]
@@ -58,11 +58,11 @@ namespace Nest.Tests.Integration.Search.Scroll
 			Assert.False(scanResults.FieldSelections.Any());
 			Assert.IsNotNullOrEmpty(scanResults.ScrollId);
 
-			var scrolls = 0;
 			var results = this.Client.Scroll<ElasticsearchProject>(s=>s
 				.Scroll("4s") 
 				.ScrollId(scanResults.ScrollId)
 			);
+			var hitCount = results.Hits.Count();
 			while (results.FieldSelections.Any())
 			{
 				Assert.True(results.IsValid);
@@ -70,9 +70,9 @@ namespace Nest.Tests.Integration.Search.Scroll
 				Assert.IsNotNullOrEmpty(results.ScrollId);
 				var localResults = results;
 				results = this.Client.Scroll<ElasticsearchProject>(new ScrollRequest(localResults.ScrollId, "4s"));
-				scrolls++;
+				hitCount += results.Hits.Count();
 			}
-			Assert.AreEqual(18, scrolls);
+			Assert.AreEqual(scanResults.Total, hitCount);
 		}
 
 		[Test]
@@ -90,11 +90,11 @@ namespace Nest.Tests.Integration.Search.Scroll
 			Assert.False(scanResults.FieldSelections.Any());
 			Assert.IsNotNullOrEmpty(scanResults.ScrollId);
 
-			var scrolls = 0;
 			var results = this.Client.Scroll<ElasticsearchProject>(s =>s
 				.Scroll("4s")
 				.ScrollId(scanResults.ScrollId));
-			results.FieldSelections.Count().Should().Be(18);
+			results.FieldSelections.Count().Should().Be((int)scanResults.Total);
+			var hitCount = results.Hits.Count();
 			while (results.FieldSelections.Any())
 			{
 				Assert.True(results.IsValid);
@@ -104,9 +104,9 @@ namespace Nest.Tests.Integration.Search.Scroll
 				results = this.Client.Scroll<ElasticsearchProject>(s=>s
 					.Scroll("4s")
 					.ScrollId(results1.ScrollId));
-				scrolls++;
+				hitCount += results.Hits.Count();
 			}
-			Assert.AreEqual(1, scrolls);
+			Assert.AreEqual(scanResults.Total, hitCount);
 		}
 	}
 }

@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
+using Nest.DSL.Visitor;
 
 namespace Nest
 {
 	public interface IGetMappingResponse : IResponse
 	{
 		RootObjectMapping Mapping { get; }
+		void Accept(IMappingVisitor visitor);
 	}
 
 	internal class GetRootObjectMappingWrapping : Dictionary<string, Dictionary<string, Dictionary<string, RootObjectMapping>>>
@@ -45,5 +47,11 @@ namespace Nest
 		}
 
 		public RootObjectMapping Mapping { get; internal set; }
+
+		public void Accept(IMappingVisitor visitor)
+		{
+			var walker = new MappingWalker(visitor);
+			walker.Accept(this);
+		}
 	}
 }

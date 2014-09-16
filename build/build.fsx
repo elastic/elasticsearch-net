@@ -199,11 +199,13 @@ Target "Release" (fun _ ->
     nugetPack("Elasticsearch.Net")
     nugetPack("Elasticsearch.Net.Connection.Thrift")
     nugetPack("Elasticsearch.Net.Connection.HttpClient")
+    nugetPack("Elasticsearch.Net.JsonNET")
     nugetPack("Nest")
    
     validateSignedAssembly("Elasticsearch.Net")
     validateSignedAssembly("Elasticsearch.Net.Connection.Thrift")
     validateSignedAssembly("Elasticsearch.Net.Connection.HttpClient")
+    validateSignedAssembly("Elasticsearch.Net.JsonNET")
     validateSignedAssembly("Nest")
 )
 

@@ -73,9 +73,10 @@ namespace Nest.Tests.Integration.Core.MultiPercolate
 						|| ff.Term("order", 4)
 					)
 				)
-				//Force an error by providing a bogus indexname
+				//Force an error by providing a bogus type-name
 				.Percolate<ElasticsearchProject>(perc=>perc
-					.Index(indexName + "bogus!")
+					.Index(indexName)
+					.Type("bogus!")
 					.Id(projects.Last().Id)
 				)
 			);
