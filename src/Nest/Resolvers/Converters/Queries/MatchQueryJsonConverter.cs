@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Nest.DSL.Query.Behaviour;
 using Nest.Resolvers;
@@ -44,7 +45,7 @@ namespace Nest
 			fq.Boost = GetPropValue<double?>(jo, "boost");
 			fq.Analyzer = GetPropValue<string>(jo, "analyzer");
 			fq.CutoffFrequency = GetPropValue<double?>(jo, "cutoff_frequency");
-			fq.Fuzziness = GetPropValue<double?>(jo, "fuzziness");
+			fq.Fuzziness = GetFuzziness(jo);
 			fq.Lenient = GetPropValue<bool?>(jo, "lenient");
 			fq.MaxExpansions = GetPropValue<int?>(jo, "max_expansions");
 			fq.PrefixLength = GetPropValue<int?>(jo, "prefix_length");
@@ -60,6 +61,15 @@ namespace Nest
 				fq.Operator = operatorString.ToEnum<Operator>();
 
 			return fq;
+		}
+
+		private static IFuzziness GetFuzziness(IDictionary<string, JToken> jObject)
+		{
+			JToken jToken;
+			if (!jObject.TryGetValue("fuzziness", out jToken)) return null;
+
+			var tmp = jToken.ToObject<IFuzziness>();
+			return tmp;
 		}
 
 		public TReturn GetPropValue<TReturn>(JObject jObject, string propertyName)
