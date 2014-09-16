@@ -14,6 +14,9 @@ namespace CodeGeneration.LowLevelClient.Overrides.Allow404
 			"DocumentExists",
 			"Delete",
 			"IndexExists",
+			"AliasExists",
+			"TemplateExists",
+			"TypeExists",
 			"Exists"
 		};
 	}

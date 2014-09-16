@@ -1,0 +1,13 @@
+﻿{
+  "elasticsearchprojects": {
+    "transform": [
+      {
+        "script": "if (ctx._source['title']?.startsWith('t')) ctx._source['suggest'] = ctx._source['content']",
+        "params": {
+          "my-variable": "my-value"
+        },
+        "lang": "groovy"
+      }
+    ]
+  }
+}

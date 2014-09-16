@@ -17,6 +17,7 @@ namespace Nest
 	public class TypeFieldMapping : ITypeFieldMapping
 	{
 		public NonStringIndexOption? Index { get; set; }
+
 		public bool? Store { get; set; }
 	}
 

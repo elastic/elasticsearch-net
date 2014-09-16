@@ -22,7 +22,6 @@ namespace Nest.Resolvers.Converters
 		{
 			JToken typeToken;
 			JToken propertiesToken;
-			JToken fieldsToken;
 			var type = string.Empty;
 
 			var hasType = po.TryGetValue("type", out typeToken);
@@ -30,11 +29,6 @@ namespace Nest.Resolvers.Converters
 				type = typeToken.Value<string>().ToLowerInvariant();
 			else if (po.TryGetValue("properties", out propertiesToken))
 				type = "object";
-
-			var originalType = type;
-			var hasFields = po.TryGetValue("fields", out fieldsToken);
-			if (hasFields)
-				type = "multi_field";
 
 			serializer.TypeNameHandling = TypeNameHandling.None;
 
@@ -60,9 +54,7 @@ namespace Nest.Resolvers.Converters
 				case "nested":
 					return serializer.Deserialize(po.CreateReader(), typeof(NestedObjectMapping)) as NestedObjectMapping;
 				case "multi_field":
-					var m =serializer.Deserialize(po.CreateReader(), typeof(MultiFieldMapping)) as MultiFieldMapping;
-					m.Type = originalType;
-					return m;
+					return serializer.Deserialize(po.CreateReader(), typeof(MultiFieldMapping)) as MultiFieldMapping;
 				case "ip":
 					return serializer.Deserialize(po.CreateReader(), typeof(IPMapping)) as IPMapping;
 				case "geo_point":
@@ -90,10 +82,73 @@ namespace Nest.Resolvers.Converters
 		}
 
 	}
+	
 
+	public class FieldMappingConverter : JsonConverter
+	{
+		private readonly DictionaryKeysAreNotPropertyNamesJsonConverter _dictionaryConverter =
+			new DictionaryKeysAreNotPropertyNamesJsonConverter();
+
+		private readonly ElasticTypeConverter _elasticTypeConverter = new ElasticTypeConverter();
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			_dictionaryConverter.WriteJson(writer, value, serializer);
+		}
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			var r = new Dictionary<string, IFieldMapping>();
+
+			JObject o = JObject.Load(reader);
+
+			foreach (var p in o.Properties())
+			{
+				var name = p.Name;
+				var po = p.First as JObject;
+				if (po == null)
+					continue;
+
+				var mapping = _elasticTypeConverter.ReadJson(po.CreateReader(), objectType, existingValue, serializer)
+					 as IFieldMapping;
+				if (mapping == null)
+				{
+					if (name == "_all") mapping = po.ToObject<AllFieldMapping>();
+					if (name == "_id") mapping = po.ToObject<IdFieldMapping>();
+					if (name == "_type") mapping = po.ToObject<TypeFieldMapping>();
+					if (name == "_source") mapping = po.ToObject<SourceFieldMapping>();
+					if (name == "_analyzer") mapping = po.ToObject<AnalyzerFieldMapping>();
+					if (name == "_routing") mapping = po.ToObject<RoutingFieldMapping>();
+					if (name == "_index") mapping = po.ToObject<IndexFieldMapping>();
+					if (name == "_size") mapping = po.ToObject<SizeFieldMapping>();
+					if (name == "_timestamp") mapping = po.ToObject<TimestampFieldMapping>();
+					if (name == "_ttl") mapping = po.ToObject<TtlFieldMapping>();
+					if (name == "_parent") mapping = po.ToObject<ParentFieldMapping>();
+					//TODO _field_names does not seem to have a special mapping (just returns like _uid) needs CONFIRMATION
+				}
+				if (mapping == null) continue;
+
+				var esType = mapping as IElasticType;
+				if (esType != null)
+				esType.Name = name;
+
+				r.Add(name, mapping);
+
+			}
+			return r;
+		}
+
+		public override bool CanConvert(Type objectType)
+		{
+			return objectType == typeof(IDictionary<string, IFieldMapping>);
+		}
+	}
 
 	public class ElasticTypesConverter : JsonConverter
 	{
+		private readonly DictionaryKeysAreNotPropertyNamesJsonConverter _dictionaryConverter = new DictionaryKeysAreNotPropertyNamesJsonConverter();
+		private readonly ElasticTypeConverter _elasticTypeConverter = new ElasticTypeConverter();
+
 		public override bool CanWrite
 		{
 			get { return true; }
@@ -101,7 +156,7 @@ namespace Nest.Resolvers.Converters
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			new DictionaryKeysAreNotPropertyNamesJsonConverter().WriteJson(writer, value, serializer);
+			_dictionaryConverter.WriteJson(writer, value, serializer);
 		}
 
 	
@@ -119,7 +174,7 @@ namespace Nest.Resolvers.Converters
 				if (po == null)
 					continue;
 
-				var mapping = new ElasticTypeConverter().ReadJson(po.CreateReader(), objectType, existingValue, serializer)
+				var mapping = _elasticTypeConverter.ReadJson(po.CreateReader(), objectType, existingValue, serializer)
 					 as IElasticType;
 				if (mapping == null)
 					continue;

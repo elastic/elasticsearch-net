@@ -1,4 +1,4 @@
-	*.userprefs
+*.userprefs
 *.local.xml
 *.sln.docstates
 *.obj
@@ -51,8 +51,8 @@ build/tools/*
 !build/*.nuspec
 
 /dep/Newtonsoft.Json.4.0.2
-!new_docs/build
-new_docs/node_modules
+!docs/build
+docs/node_modules
 doc/Help
 
 /src/Nest.Tests.Unit/*.ncrunchproject

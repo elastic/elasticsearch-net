@@ -156,6 +156,20 @@ namespace Nest.Resolvers
 		{
 			var property = base.CreateProperty(member, memberSerialization);
 
+			// Skip serialization of empty collections that has DefaultValueHandling set to Ignore.
+			if (property.DefaultValueHandling.HasValue 
+				&& property.DefaultValueHandling.Value == DefaultValueHandling.Ignore 
+				&& !typeof(string).IsAssignableFrom(property.PropertyType) 
+				&& typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
+			{
+				Predicate<object> shouldSerialize = obj =>
+				{
+					var collection = property.ValueProvider.GetValue(obj) as ICollection;
+					return collection == null || collection.Count != 0;
+				};
+				property.ShouldSerialize = property.ShouldSerialize == null ? shouldSerialize : (o => property.ShouldSerialize(o) && shouldSerialize(o));
+			}
+
 			var attributes = member.GetCustomAttributes(typeof(IElasticPropertyAttribute), false);
 			if (attributes == null || !attributes.Any())
 				return property;

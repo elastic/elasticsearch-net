@@ -7,7 +7,7 @@ namespace Nest
 {
 	public interface IGetSnapshotResponse : IResponse
 	{
-		[JsonProperty("snapshot")]
+		[JsonProperty("snapshots")]
 		IEnumerable<Snapshot> Snapshots { get; set; }
 	}
 

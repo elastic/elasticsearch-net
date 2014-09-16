@@ -6,16 +6,11 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public class StringMapping : IElasticType, IElasticCoreType
+	public class StringMapping : MultiFieldMapping, IElasticType, IElasticCoreType
 	{
-		[JsonProperty("type")]
-		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "string" }; } }
-
-		//[JsonProperty(PropertyName = "name")]
-		public PropertyNameMarker Name { get; set; }
-
-		[JsonProperty("similarity")]
-		public string Similarity { get; set; }
+		public StringMapping():base("string")
+		{
+		}
 
 		/// <summary>
 		/// The name of the field that will be stored in the index. Defaults to the property/field name.
@@ -62,13 +57,13 @@ namespace Nest
 		[JsonProperty("doc_values")]
 		public bool? DocValues { get; set; }
 
-		[JsonProperty("include_in_all")]
-		public bool? IncludeInAll { get; set; }
-
 		[JsonProperty("position_offset_gap")]
 		public int? PositionOffsetGap { get; set; }
 
 		[JsonProperty("copy_to")]
 		public IEnumerable<PropertyPathMarker> CopyTo { get; set; }
+
+		[JsonProperty("fielddata")]
+		public FieldDataStringMapping FieldData { get; set; }
 	}
 }

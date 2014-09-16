@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Unit.QueryParsers 
 {
 	[TestFixture]
-	public class BaseParserTests : BaseJsonTests
+	public abstract class BaseParserTests : BaseJsonTests
 	{
 		public ISearchRequest GetSearchDescriptorForQuery(Func<SearchDescriptor<ElasticsearchProject>, SearchDescriptor<ElasticsearchProject>> create)
 		{

@@ -26,6 +26,88 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			}}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
+		
+		[Test]
+		public void MoreLikeThisWithIds()
+		{
+			var s = new MoreLikeThisQueryDescriptor<ElasticsearchProject>()
+				.Ids(new long[] { 1, 2, 3, 4 })
+				.OnFields(p => p.Name);
+			var json = TestElasticClient.Serialize(s);
+
+			var expected = @"{
+				fields: [ ""name""],
+				ids: [ ""1"", ""2"", ""3"", ""4""],
+			}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+		
+		[Test]
+		public void MoreLikeThisWithDocuments()
+		{
+			var s = new MoreLikeThisQueryDescriptor<ElasticsearchProject>()
+				.OnFields(p => p.Name)
+				.Documents(d=>d
+					.Get(1, g=>g.Fields(p=>p.Product.Name).Routing("routing_value"))
+					.Get<Person>("some-string-id", g=>g.Routing("routing_value").Type("people").Index("different_index"))
+				);
+			var json = TestElasticClient.Serialize(s);
+
+			var expected = @"{
+				fields: [ ""name""],
+				docs: [
+				{
+				  _index: ""nest_test_data"",
+				  _type: ""elasticsearchprojects"",
+				  _id: ""1"",
+				  fields: [
+				    ""product.name""
+				  ],
+				  _routing: ""routing_value""
+				},
+				{
+				  _index: ""different_index"",
+				  _type: ""people"",
+				  _id: ""some-string-id"",
+				  _routing: ""routing_value""
+				}]
+			}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
+		public void MoreLikeThisWithDocumentsExplicit()
+		{
+			var s = new MoreLikeThisQueryDescriptor<ElasticsearchProject>()
+				.OnFields(p => p.Name)
+				.DocumentsExplicit(d=>d
+					.Get(1, g=>g.Fields(p=>p.Product.Name).Routing("routing_value"))
+					.Get<Person>("some-string-id", g=>g.Routing("routing_value").Type("people").Index("different_index"))
+				);
+			var json = TestElasticClient.Serialize(s);
+
+			//NEST should default to not sending index but when specified explicitly it should not force it null
+			var expected = @"{
+				fields: [ ""name""],
+				docs: [
+				{
+				  _type: ""elasticsearchprojects"",
+				  _id: ""1"",
+				  fields: [
+				    ""product.name""
+				  ],
+				  _routing: ""routing_value""
+				},
+				{
+				  _index: ""different_index"",
+				  _type: ""people"",
+				  _id: ""some-string-id"",
+				  _routing: ""routing_value""
+				}]
+			}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
 		[Test]
 		public void TestMoreLikeThisAllQuery()
 		{

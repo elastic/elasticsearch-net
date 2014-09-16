@@ -32,24 +32,11 @@ namespace Nest.Resolvers
 			return null;
 		}
 
-		public static ElasticTypeAttribute Type<T>() where T : class
-		{
-			return _Type(typeof(T));
-		}
-
 		public static ElasticTypeAttribute Type(Type type)
-		{
-			return _Type(type);
-		}
-
-		private static ElasticTypeAttribute _Type(Type type)
 		{
 			ElasticTypeAttribute attr = null;
 			if (CachedTypeLookups.TryGetValue(type, out attr))
 				return attr;
-
-			if (!type.IsClass && !type.IsInterface)
-				throw new ArgumentException("Type is not a class or interface", "type");
 
 			var attributes = type.GetCustomAttributes(typeof(ElasticTypeAttribute), true);
 			if (attributes.HasAny())

@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public class DateMappingDescriptor<T>
+	public class DateMappingDescriptor<T> where T : class
 	{
 		internal DateMapping _Mapping = new DateMapping();
 
@@ -68,5 +68,25 @@ namespace Nest
 			return this;
 		}
 
+		public DateMappingDescriptor<T> Path(MultiFieldMappingPath path)
+		{
+			this._Mapping.Path = path.Value;
+			return this;
+		}
+
+		public DateMappingDescriptor<T> Fields(Func<CorePropertiesDescriptor<T>, CorePropertiesDescriptor<T>> fieldSelector)
+		{
+			fieldSelector.ThrowIfNull("fieldSelector");
+			var properties = fieldSelector(new CorePropertiesDescriptor<T>());
+			foreach (var p in properties.Properties)
+			{
+				var value = p.Value as IElasticCoreType;
+				if (value == null)
+					continue;
+
+				_Mapping.Fields[p.Key] = value;
+			}
+			return this;
+		}
 	}
 }

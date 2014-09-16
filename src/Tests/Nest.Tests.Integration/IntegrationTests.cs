@@ -17,11 +17,6 @@ namespace Nest.Tests.Integration
 
 		protected IConnectionSettingsValues Settings { get { return ElasticsearchConfiguration.Settings(); } }
 
-		protected virtual void ResetIndexes()
-		{
-
-		}
-
 		protected ISearchResponse<T> SearchRaw<T>(string query) where T : class
 		{
 			var index = this.Client.Infer.IndexName<T>();

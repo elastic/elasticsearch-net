@@ -116,18 +116,26 @@
       <Link>LinkedExtensions\TypeExtensions.cs</Link>
     </Compile>
     <Compile Include="BaseJsonTests.cs" />
+    <Compile Include="Cluster\PendingTasksTests.cs" />
     <Compile Include="Cluster\PutSettings\PutSettingsTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
     <Compile Include="Cluster\State\StateTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUrlTests.cs" />
+    <Compile Include="Core\Indices\Alias\AliasTests.cs" />
     <Compile Include="Core\Indices\Analysis\Analyzers\AnalyzerTests.cs" />
     <Compile Include="Core\Indices\Similarity\SimilarityTests.cs" />
     <Compile Include="Core\Map\CustomMapping\ImagePluginMappingTests.cs" />
     <Compile Include="Core\Map\GetMappingSerializationTests.cs" />
     <Compile Include="Core\Map\MappingBehaviourTests.cs" />
     <None Include="Cluster\PutSettings\PutSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Bulk\BulkIndexDetailsFixedPath.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Alias\PutAlias.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Indices\Analysis\Analyzers\CustomAnalyzerTest.json">
@@ -181,6 +189,8 @@
     <None Include="Core\Map\Properties\MultiFieldPropertyWithJustNamePath.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
+    <Compile Include="Core\Map\Transform\MappingTansformTests.cs" />
     <Compile Include="Core\Scroll\ScrollRequestTests.cs" />
     <Compile Include="Core\Domain\Connection\ConnectionTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
@@ -204,11 +214,13 @@
     <Compile Include="Core\Map\RootProperties\MapRootObjectPropertiesTests.cs" />
     <Compile Include="Core\MoreLikeThis\MltSearchBodyTests.cs" />
     <Compile Include="Core\MoreLikeThis\MltUrlTests.cs" />
+    <Compile Include="Core\Snapshot\SnapshotStatusRequestTests.cs" />
     <Compile Include="Core\Template\PutTemplateRequestTests.cs" />
     <Compile Include="Core\UpdateSettings\UpdateSettingsRequestTests.cs" />
     <Compile Include="Core\UpdateSettings\UpdateSettingsTests.cs" />
     <Compile Include="Core\Update\UpdateRequestTests.cs" />
     <Compile Include="Core\Update\UpdateAPIConsistencyTests.cs" />
+    <Compile Include="Core\Explain\ExplainRequestTests.cs" />
     <Compile Include="Core\Validate\ValidateRequestTests.cs" />
     <Compile Include="Core\Versioning\VersioningTests.cs" />
     <Compile Include="Core\Warmers\PutWarmerRequestTests.cs" />
@@ -223,11 +235,14 @@
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\ConnectionSettingsTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="Internals\Serialize\CustomConvertersTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasMoreUrlTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesMoreUrlTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Nodes\NodesHotThreadsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Search\SearchRequestUntypedTests.cs" />
     <Compile Include="ObjectInitializer\Status\StatusRequestTests.cs" />
     <Compile Include="ObjectInitializer\IndicesStats\IndicesStatsRequestTests.cs" />
     <Compile Include="ObjectInitializer\ClusterState\ClusterStateRequestTests.cs" />
@@ -361,10 +376,15 @@
     <Compile Include="QueryParsers\Visitor\DslPrettyPrintVisitor.cs" />
     <Compile Include="QueryParsers\Visitor\VisitorDemoUseCase.cs" />
     <Compile Include="QueryParsers\Visitor\VisitorTests.cs" />
+    <Compile Include="Reproduce\Reproduce928Tests.cs" />
+    <Compile Include="Reproduce\Reproduce902Tests.cs" />
     <Compile Include="Reproduce\Reproduce646Tests.cs" />
     <Compile Include="Reproduce\Reproduce579Tests.cs" />
     <Compile Include="Reproduce\Reproduce860Tests.cs" />
     <Compile Include="Reproduce\Reproduce806Tests.cs" />
+    <Compile Include="Reproduce\Reproduce876Tests.cs" />
+    <Compile Include="Reproduce\Reproduce926Tests.cs" />
+    <Compile Include="Search\Failures\ShardFailureTests.cs" />
     <Compile Include="Search\Fields\FieldsTests.cs" />
     <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
     <Compile Include="Search\Filter\Modes\FilterModesTests.cs" />
@@ -393,6 +413,7 @@
     <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
     <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
     <Compile Include="Search\Query\Modes\QueryModesTests.cs" />
+    <Compile Include="Search\Query\Singles\SpanMultiTermQueryJson.cs" />
     <Compile Include="Search\Query\Singles\Term\TermToStringJson.cs" />
     <Compile Include="Search\Rescoring\RescoreTests.cs" />
     <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
@@ -576,6 +597,12 @@
     <None Include="Core\Map\MetaField\MetaFieldSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Map\Transform\MultipleTransforms.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Transform\SingleTransform.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Map\TtlField\TtlFieldSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -613,6 +640,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\AttributeBasedMap\TestDeepObjectWriter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\MultiPercolate\MultiPercolateJson.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\MultiSearch\MultiSearchRespectsSearchTypePreferenceAndRouting.json">
@@ -749,6 +779,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Reproduce\Issue579.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Reproduce\Issue928.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Reproduce\Issue902.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Reproduce\Issue876.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Failures\ShardFailuresResult.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Fields\FixedCovariantSearchResult.json">

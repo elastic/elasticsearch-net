@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -43,7 +46,7 @@ namespace Elasticsearch.Net.Integration.Yaml.CatCount1
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/# epoch     timestamp              count
-^  \d+   \s  \d{2}:\d{2}:\d{2}  \s  0     \s  $/
+^  \d+   \s  \d{2}:\d{2}:\d{2}  \s  0     \s+  \n  $/
 ");
 
 				//do index 
@@ -59,7 +62,7 @@ namespace Elasticsearch.Net.Integration.Yaml.CatCount1
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/# epoch     timestamp              count
-^  \d+   \s  \d{2}:\d{2}:\d{2}  \s  1     \s  $/
+^  \d+   \s  \d{2}:\d{2}:\d{2}  \s  1     \s+  \n  $/
 ");
 
 				//do index 
@@ -77,7 +80,7 @@ namespace Elasticsearch.Net.Integration.Yaml.CatCount1
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/# count
-^  2     \s  $/
+^  2     \s+  \n  $/
 ");
 
 				//do cat.count 
@@ -85,7 +88,7 @@ namespace Elasticsearch.Net.Integration.Yaml.CatCount1
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/# epoch     timestamp              count
-^  \d+   \s  \d{2}:\d{2}:\d{2}  \s  1  \s  $/
+^  \d+   \s  \d{2}:\d{2}:\d{2}  \s  1  \s+  \n  $/
 ");
 
 				//do cat.count 

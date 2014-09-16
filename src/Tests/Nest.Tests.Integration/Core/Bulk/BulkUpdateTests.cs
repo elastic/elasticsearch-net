@@ -5,7 +5,8 @@ using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Integration.Core.Bulk
 {
-	public class BulkUpdateTests : BulkTests
+	[TestFixture]
+	public class BulkUpdateTests : IntegrationTests
 	{
 
 		[Test]
@@ -21,7 +22,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 			result.IsValid.Should().BeTrue();
 
 			//Now lets update all of them giving them a name
-			descriptor = new BulkDescriptor().Refresh();
+			descriptor = new BulkDescriptor().Refresh().FixedPath(this.Settings.DefaultIndex);
 			foreach (var i in Enumerable.Range(5000, 1000))
 			{
 				int id = i;

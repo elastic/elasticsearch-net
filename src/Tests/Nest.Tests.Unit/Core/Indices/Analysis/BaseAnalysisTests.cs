@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Unit.Core.Indices.Analysis.Tokenizers
 {
 	[TestFixture]
-	public class BaseAnalysisTests : BaseJsonTests
+	public abstract class BaseAnalysisTests : BaseJsonTests
 	{
 		public IIndicesOperationResponse Analysis(Func<AnalysisDescriptor, AnalysisDescriptor> analysisSelector)
 		{

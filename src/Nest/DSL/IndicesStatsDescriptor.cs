@@ -51,9 +51,9 @@ namespace Nest
 		IEnumerable<IndicesStatsMetric> IIndicesStatsRequest.Metrics { get; set; }
 
 		//<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor Types(params TypeNameMarker[] completion_fields)
+		public IndicesStatsDescriptor Types(params TypeNameMarker[] types)
 		{
-			Self.RequestParameters.AddQueryString("types", completion_fields);
+			Self.Types = types;
 			return this;
 		}
 

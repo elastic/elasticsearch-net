@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection.Configuration;
 
@@ -37,10 +38,14 @@ namespace Elasticsearch.Net.Connection
 
 			var innerHandler = handler ?? new WebRequestHandler();
 
+			if (settings.EnableCompressedResponses)
+				innerHandler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
 			if (innerHandler.SupportsProxy && !string.IsNullOrWhiteSpace(_settings.ProxyAddress))
 			{
 				innerHandler.Proxy = new WebProxy(_settings.ProxyAddress)
 				{
+
 					Credentials = new NetworkCredential(_settings.ProxyUsername, _settings.ProxyPassword),
 				};
 
@@ -51,6 +56,7 @@ namespace Elasticsearch.Net.Connection
 			{
 				Timeout = TimeSpan.FromMilliseconds(_settings.Timeout)
 			};
+
 		}
 
 		/// <summary>
@@ -115,24 +121,22 @@ namespace Elasticsearch.Net.Connection
 			try
 			{
 				var request = new HttpRequestMessage(method, uri);
+				if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.ContentType))
+					request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestSpecificConfig.ContentType));
+				else if (!string.IsNullOrWhiteSpace(DefaultContentType))
+					request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(DefaultContentType));
+
+				if (!string.IsNullOrWhiteSpace(DefaultContentType))
+					request.Content.Headers.ContentType = new MediaTypeHeaderValue(DefaultContentType);
+
+				if (!string.IsNullOrEmpty(uri.UserInfo))
+				{
+					request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes(uri.UserInfo)));
+				}
 
 				if (method != HttpMethod.Get && method != HttpMethod.Head && data != null && data.Length > 0)
 				{
 					request.Content = new ByteArrayContent(data);
-
-					if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.ContentType))
-					{
-						request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestSpecificConfig.ContentType));
-					}
-					else if (!string.IsNullOrWhiteSpace(DefaultContentType))
-					{
-						request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(DefaultContentType));
-					}
-
-					if (!string.IsNullOrWhiteSpace(DefaultContentType))
-					{
-						request.Content.Headers.ContentType = new MediaTypeHeaderValue(DefaultContentType);
-					}
 				}
 
 				var response = await Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);

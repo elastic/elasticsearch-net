@@ -124,7 +124,7 @@ namespace CodeGeneration.YamlTestsRunner
 				return "\t\t\t\t" + m.Value.Replace("  ", "\t");
 			}, RegexOptions.Multiline);
 			//escape c# keywords in the anon object
-			anon = anon.Replace("default=", "@default=").Replace("params=", "@params=");
+			anon = anon.Replace("default=", "@default=").Replace("params=", "@params=").Replace("class=", "@class=");
 			//docs contain different types of anon objects, quick fix by making them a dynamic[]
 			anon = anon.Replace("docs= new []", "docs= new dynamic[]");
 			//fix empty untyped arrays, default to string
@@ -145,6 +145,8 @@ namespace CodeGeneration.YamlTestsRunner
 
 		public static string SurroundWithQuotes(this string s)
 		{
+			if (Regex.IsMatch(s, @"^\d+(?:\.\d+)?$"))
+				return s;
 			return "@\"" + s.EscapeQuotes() + "\"";
 		}
 	}

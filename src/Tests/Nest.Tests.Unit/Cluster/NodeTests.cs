@@ -59,5 +59,24 @@ namespace Nest.Tests.Unit.Cluster
 			url.AbsolutePath.Should().StartWith("/_nodes/127.0.0.1/stats/network%2Chttp");
 		}
 
+		[Test]
+		public void NodesShutdown()
+		{
+			var r = this._client.NodesShutdown();
+			var status = r.ConnectionStatus;
+			status.RequestUrl.Should().EndWith("/_shutdown");
+		}
+
+		[Test]
+		public void NodesShutdownSpecificNodeWithFlags()
+		{
+			var r = this._client.NodesShutdown(n => n
+				.NodeId("mynode")
+				.Delay("10s")
+				.Exit(false)
+			);
+			var status = r.ConnectionStatus;
+			status.RequestUrl.Should().EndWith("/_cluster/nodes/mynode/_shutdown?delay=10s&exit=false");
+		}
 	}
 }

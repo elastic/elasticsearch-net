@@ -8,6 +8,19 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class MultiFieldMapping : IElasticType
 	{
+		private readonly TypeNameMarker _defaultType;
+
+		public MultiFieldMapping()
+			: this("multi_field")
+		{
+			this.Fields = new Dictionary<PropertyNameMarker, IElasticCoreType>();
+		}
+
+		protected MultiFieldMapping(TypeNameMarker defaultType)
+		{
+			_defaultType = defaultType;
+		}
+
 		public PropertyNameMarker Name { get; set; }
 
 		private TypeNameMarker _typeOverride;
@@ -15,7 +28,7 @@ namespace Nest
 		[JsonProperty("type")]
 		public virtual TypeNameMarker Type
 		{
-			get { return _typeOverride ?? new TypeNameMarker { Name = "multi_field" }; }
+			get { return _typeOverride ?? _defaultType; }
 			set { _typeOverride = value; }
 		}
 
@@ -28,14 +41,8 @@ namespace Nest
 		[JsonProperty("include_in_all")]
 		public bool? IncludeInAll { get; set; }
 
-		[JsonProperty("fields"), JsonConverter(typeof(ElasticCoreTypeConverter))]
+		[JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore), JsonConverter(typeof(ElasticCoreTypeConverter))]
 		public IDictionary<PropertyNameMarker, IElasticCoreType> Fields { get; set; }
-
-
-		public MultiFieldMapping()
-		{
-			this.Fields = new Dictionary<PropertyNameMarker, IElasticCoreType>();
-		}
 	}
 
     public class MultiFieldMappingPath

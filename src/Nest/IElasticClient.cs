@@ -388,7 +388,11 @@ namespace Nest
 		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
 		/// <param name="object">The object to percolator</param>
 		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
+		[Obsolete("Scheduled to be removed in 2.0 please use the overload takes a func (descriptor=>descriptor)")]
 		IPercolateCountResponse PercolateCount<T>(T @object, Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
+			where T : class;
+
+		IPercolateCountResponse PercolateCount<T>(Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector)
 			where T : class;
 
 		/// <inheritdoc />
@@ -396,7 +400,11 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
+		[Obsolete("Scheduled to be removed in 2.0 please use the overload takes a func (descriptor=>descriptor)")]
 		Task<IPercolateCountResponse> PercolateCountAsync<T>(T @object, Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
+			where T : class;
+
+		Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
 			where T : class;
 
 		/// <inheritdoc />
@@ -604,7 +612,39 @@ namespace Nest
 		
 		/// <inheritdoc />
 		Task<INodeStatsResponse> NodesStatsAsync(INodesStatsRequest nodesStatsRequest);
-		
+
+		/// <summary>
+		/// An API allowing to get the current hot threads on each node in the cluster.
+		/// </summary>
+		/// <param name="selector"></param>
+		/// <returns>An optional descriptor to further describe the nodes hot threads operation</returns>
+		INodesHotThreadsResponse NodesHotThreads(Func<NodesHotThreadsDescriptor, NodesHotThreadsDescriptor> selector = null);
+
+		/// <inheritdoc />
+		INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest nodesHotThreadsRequest);
+
+		/// <inheritdoc />
+		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, NodesHotThreadsDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest nodesHotThreadsRequest);
+
+		/// <summary>
+		/// Allows to shutdown one or more (or all) nodes in the cluster.
+		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-nodes-shutdown.html#cluster-nodes-shutdown
+		/// </summary>
+		/// <param name="nodesShutdownSelector">A descriptor that describes the nodes shutdown operation</param>
+		INodesShutdownResponse NodesShutdown(Func<NodesShutdownDescriptor, NodesShutdownDescriptor> nodesShutdownSelector = null);
+
+		/// <inheritdoc />
+		Task<INodesShutdownResponse> NodesShutdownAsync(Func<NodesShutdownDescriptor, NodesShutdownDescriptor> nodesShutdownSelector = null);
+
+		/// <inheritdoc />
+		INodesShutdownResponse NodesShutdown(INodesShutdownRequest nodesShutdownRequest);
+
+		/// <inheritdoc />
+		Task<INodesShutdownResponse> NodesShutdownAsync(INodesShutdownRequest nodesShutdownRequest);
+
 		/// <summary>
 		/// Used to check if the index (indices) exists or not. 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
@@ -657,6 +697,23 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IHealthResponse> ClusterHealthAsync(IClusterHealthRequest clusterHealthRequest);
+
+		/// <summary>
+		/// allows to retrieve statistics from a cluster wide perspective. The API returns basic index metrics 
+		/// (shard numbers, store size, memory usage) and information about the current nodes that form the 
+		/// cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
+		/// </summary>
+		/// <param name="clusterStatsSelector">A descriptor that describes the cluster stats operation</param>
+		IClusterStatsResponse ClusterStats(Func<ClusterStatsDescriptor, ClusterStatsDescriptor> clusterStatsSelector = null);
+
+		/// <inheritdoc />
+		Task<IClusterStatsResponse> ClusterStatsAsync(Func<ClusterStatsDescriptor, ClusterStatsDescriptor> clusterStatsSelector = null);
+
+		/// <inheritdoc />
+		IClusterStatsResponse ClusterStats(IClusterStatsRequest clusterStatsRequest);
+
+		/// <inheritdoc />
+		Task<IClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest clusterStatsRequest);
 		
 		/// <summary>
 		/// Performs the analysis process on a text and return the tokens breakdown of the text.
@@ -950,7 +1007,38 @@ namespace Nest
 		
 		/// <inheritdoc />
 		Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest);
-		
+
+		/// <summary>
+		/// Add a single index alias
+		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-adding
+		/// </summary>
+		/// <param name="putAliasRequest">A descriptor that describes the put alias request</param>
+		IPutAliasResponse PutAlias(IPutAliasRequest putAliasRequest);
+
+		/// <inheritdoc />
+		Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest putAliasRequest);
+
+		/// <inheritdoc />
+		IPutAliasResponse PutAlias(Func<PutAliasDescriptor, PutAliasDescriptor> putAliasDescriptor);
+
+		/// <inheritdoc />
+		Task<IPutAliasResponse> PutAliasAsync(Func<PutAliasDescriptor, PutAliasDescriptor> putAliasDescriptor);
+
+		/// <summary>
+		/// Delete an index alias
+		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#deleting
+		/// </summary>
+		/// <param name="deleteAliasRequest">A descriptor that describes the delete alias request</param>
+		IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest deleteAliasRequest);
+
+		/// <inheritdoc />
+		Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest deleteAliasRequest);
+
+		/// <inheritdoc />
+		IDeleteAliasResponse DeleteAlias<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor) where T : class;
+
+		/// <inheritdoc />
+		Task<IDeleteAliasResponse> DeleteAliasAsync<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor) where T : class;
 
 		/// <summary>
 		/// The optimize API allows to optimize one or more indices through an API. The optimize process basically optimizes 
@@ -1216,5 +1304,178 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest clusterSettingsRequest = null);
+
+		/// <summary>
+		/// Returns a list of any cluster-level changes (e.g. create index, update mapping, allocate or fail shard) which have not yet been executed.
+		/// </summary>
+		IClusterPendingTasksResponse ClusterPendingTasks(Func<ClusterPendingTasksDescriptor, ClusterPendingTasksDescriptor> pendingTasksSelector = null);
+
+		/// <inheritdoc />
+		Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(Func<ClusterPendingTasksDescriptor, ClusterPendingTasksDescriptor> pendingTasksSelector = null);
+
+		/// <inheritdoc />
+		IClusterPendingTasksResponse ClusterPendingTasks(IClusterPendingTasksRequest pendingTasksRequest);
+
+		/// <inheritdoc />
+		Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest pendingTasksRequest);
+
+		/// <inheritdoc />
+		IExistsResponse AliasExists(Func<AliasExistsDescriptor, AliasExistsDescriptor> selector);
+
+		/// <inheritdoc />
+		IExistsResponse AliasExists(IAliasExistsRequest AliasRequest);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> AliasExistsAsync(Func<AliasExistsDescriptor, AliasExistsDescriptor> selector);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest AliasRequest);
+
+		/// <inheritdoc />
+		IExistsResponse TypeExists(Func<TypeExistsDescriptor, TypeExistsDescriptor> selector);
+
+		/// <inheritdoc />
+		IExistsResponse TypeExists(ITypeExistsRequest TypeRequest);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> TypeExistsAsync(Func<TypeExistsDescriptor, TypeExistsDescriptor> selector);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest TypeRequest);
+
+		/// <inheritdoc />
+		IExplainResponse<T> Explain<T>(Func<ExplainDescriptor<T>, ExplainDescriptor<T>> querySelector)
+			where T : class;
+
+		/// <inheritdoc />
+		IExplainResponse<T> Explain<T>(IExplainRequest explainRequest)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<IExplainResponse<T>> ExplainAsync<T>(Func<ExplainDescriptor<T>, ExplainDescriptor<T>> querySelector)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest explainRequest)
+			where T: class;
+
+		/// <inheritdoc />
+		IMultiPercolateResponse MultiPercolate(Func<MultiPercolateDescriptor, MultiPercolateDescriptor> multiPercolateSelector);
+
+		/// <inheritdoc />
+		IMultiPercolateResponse MultiPercolate(IMultiPercolateRequest multiRequest);
+
+		/// <inheritdoc />
+		Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, MultiPercolateDescriptor> multiPercolateSelector);
+
+		/// <inheritdoc />
+		Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest multiPercolateRequest);
+
+		/// <inheritdoc />
+		IGetFieldMappingResponse GetFieldMapping<T>(Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
+			where T : class;
+
+		/// <inheritdoc />
+		IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest getFieldMappingRequest);
+
+		/// <inheritdoc />
+		Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest getFieldMappingRequest);
+
+		/// <inheritdoc />
+		IExistsResponse TemplateExists(Func<TemplateExistsDescriptor, TemplateExistsDescriptor> selector);
+
+		/// <inheritdoc />
+		IExistsResponse TemplateExists(ITemplateExistsRequest templateRequest);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> TemplateExistsAsync(Func<TemplateExistsDescriptor, TemplateExistsDescriptor> selector);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> TemplateExistsAsync(ITemplateExistsRequest templateRequest);
+
+		/// <summary>
+		/// Executes a HEAD request to the cluster to determine whether it's up or not.
+		/// </summary>
+		IPingResponse Ping(Func<PingDescriptor, PingDescriptor> pingSelector = null);
+
+		/// <inheritdoc />
+		Task<IPingResponse> PingAsync(Func<PingDescriptor, PingDescriptor> pingSelector = null);
+
+		/// <inheritdoc />
+		IPingResponse Ping(IPingRequest pingRequest);
+
+		/// <inheritdoc />
+		Task<IPingResponse> PingAsync(IPingRequest pingRequest);
+
+		/// <inheritdoc />
+		ISearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, SearchShardsDescriptor<T>> searchSelector) where T : class;
+
+		ISearchShardsResponse SearchShards(ISearchShardsRequest request);
+
+		/// <inheritdoc />
+		Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, SearchShardsDescriptor<T>> searchSelector)
+			where T : class;
+
+		Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request);
+
+		/// <inheritdoc />
+		IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector);
+
+		/// <inheritdoc />
+		IGetRepositoryResponse GetRepository(IGetRepositoryRequest request);
+
+		/// <inheritdoc />
+		Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector);
+
+		/// <inheritdoc />
+		Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request);
+
+		ISnapshotStatusResponse SnapshotStatus(Func<SnapshotStatusDescriptor, SnapshotStatusDescriptor> selector = null);
+
+		/// <inheritdoc />
+		ISnapshotStatusResponse SnapshotStatus(ISnapshotStatusRequest getSnapshotRequest);
+
+		/// <inheritdoc />
+		Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, SnapshotStatusDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest getSnapshotRequest);
+
+		IRecoveryStatusResponse RecoveryStatus(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null);
+
+		/// <inheritdoc />
+		IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest statusRequest);
+
+		/// <inheritdoc />
+		Task<IRecoveryStatusResponse> RecoveryStatusAsync(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest statusRequest);
+
+		/// <summary>
+		/// Perform any request you want over the configured IConnection synchronously while taking advantage of the cluster failover.
+		/// </summary>
+		/// <typeparam name="T">The type representing the response JSON</typeparam>
+		/// <param name="method">the HTTP Method to use</param>
+		/// <param name="path">The path of the the url that you would like to hit</param>
+		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
+		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
+		/// <returns>An ElasticsearchResponse of T where T represents the JSON response body</returns>
+		ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, IRequestParameters requestParameters = null);
+
+		/// <summary>
+		/// Perform any request you want over the configured IConnection asynchronously while taking advantage of the cluster failover.
+		/// </summary>
+		/// <typeparam name="T">The type representing the response JSON</typeparam>
+		/// <param name="method">the HTTP Method to use</param>
+		/// <param name="path">The path of the the url that you would like to hit</param>
+		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
+		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
+		/// <returns>A task of ElasticsearchResponse of T where T represents the JSON response body</returns>
+		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null);
 	}
 }

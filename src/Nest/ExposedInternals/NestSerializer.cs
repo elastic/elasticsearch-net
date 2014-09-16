@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.PerformanceData;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -85,6 +86,8 @@ namespace Nest
 			return DeserializeUsingSettings<T>(stream, settings);
 		}
 
+	
+
 		/// <summary>
 		/// Deserialize to type T bypassing checks for custom deserialization state and or BaseResponse return types.
 		/// </summary>
@@ -160,7 +163,15 @@ namespace Nest
 							   ?? inferrer.TypeName(operation.ClrType);
 			
 				var id = operation.GetIdForOperation(inferrer);
-				operation.Index = index;
+				if (index.EqualsMarker(bulkRequest.Index))
+				{
+					operation.Index = null;
+				}
+				else
+				{
+					operation.Index = index;
+				}
+
 				operation.Type = typeName;
 				operation.Id = id;
 
@@ -177,6 +188,82 @@ namespace Nest
 			var json = sb.ToString();
 			return json;
 		}
+		
+		private class PercolateHeader
+		{
+			public IndexNameMarker index { get; set; }
+			public TypeNameMarker type { get; set; }
+			public string id { get; set; }
+			public string percolate_index { get; set; }
+			public string percolate_type { get; set; }
+			public string[] routing { get; set; }
+			public string preference { get; set; }
+			public string percolate_routing { get; set; }
+			public string percolate_preference { get; set; }
+			public long? version { get; set; }
+		}
+
+		public string SerializeMultiPercolate(IMultiPercolateRequest multiPercolateRequest)
+		{
+			multiPercolateRequest.ThrowIfNull("multiPercolateRequest");
+			multiPercolateRequest.Percolations.ThrowIfEmpty("multiPercolateRequest does not define any percolations");
+			var sb = new StringBuilder();
+
+			foreach (var p in multiPercolateRequest.Percolations)
+			{
+				var operation = "percolate";
+				object body = p;
+				var op = new PercolateHeader();
+				var countParams = p.GetRequestParameters() ?? new PercolateCountRequestParameters();
+				op.percolate_index = countParams.GetQueryStringValue<string>("percolate_index");
+				op.percolate_type = countParams.GetQueryStringValue<string>("percolate_type");
+				op.routing = countParams.GetQueryStringValue<string[]>("routing");
+				op.preference = countParams.GetQueryStringValue<string>("preference");
+				op.percolate_routing = countParams.GetQueryStringValue<string>("percolate_routing");
+				op.percolate_preference = countParams.GetQueryStringValue<string>("percolate_preference");
+				op.version = countParams.GetQueryStringValue<long?>("version");
+				
+
+				var count = p as IIndexTypePath<PercolateCountRequestParameters>;
+				var percolate = p as IIndexTypePath<PercolateRequestParameters>;
+				if (count != null)
+				{
+					operation = "count";
+					if (multiPercolateRequest.Index != null && multiPercolateRequest.Index.EqualsMarker(count.Index))
+					{
+						count.Index = null;
+					}
+					op.index = count.Index;
+					op.type = count.Type;
+					op.id = p.Id;
+				}
+				else if (percolate != null)
+				{
+					if (multiPercolateRequest.Index != null && multiPercolateRequest.Index.EqualsMarker(percolate.Index))
+					{
+						percolate.Index = null;
+					}
+					op.index = percolate.Index;
+					op.type = percolate.Type;
+					op.id = p.Id;
+				}
+				else continue;
+				
+				var opJson = this.Serialize(op, SerializationFormatting.None).Utf8String();
+				var action = "{{\"{0}\":{1}}}\n".F(operation, opJson);
+				sb.Append(action);
+				if (body == null)
+				{
+					sb.Append("{}\n");
+					continue;
+				}
+				var jsonCommand = this.Serialize(body, SerializationFormatting.None).Utf8String();
+				sb.Append(jsonCommand + "\n");
+			
+
+			}
+			return sb.ToString();
+		}
 
 		/// <summary>
 		/// _msearch needs a specialized json format in the body
@@ -185,9 +272,16 @@ namespace Nest
 		{
 			var sb = new StringBuilder();
 			var inferrer = new ElasticInferrer(this._settings);
+			var indexName = inferrer.IndexName(multiSearchRequest.Index);
+
 			foreach (var operation in multiSearchRequest.Operations.Values)
 			{
 				var path = operation.ToPathInfo(this._settings);
+				if (path.Index == indexName)
+				{
+					path.Index = null;
+				}
+
 				var op = new
 				{
 					index = path.Index,

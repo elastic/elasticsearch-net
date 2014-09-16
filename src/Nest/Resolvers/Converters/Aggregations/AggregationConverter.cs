@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest.Resolvers.Converters.Aggregations
 {
@@ -33,7 +34,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 
 			var property = reader.Value as string; 
 			if (_numeric.IsMatch(property))
-				return GetPercentilesMetricAggregation(reader, serializer);
+				return GetPercentilesMetricAggregation(reader, serializer, oldFormat: true);
 
 			switch (property)
 			{
@@ -56,13 +57,56 @@ namespace Nest.Resolvers.Converters.Aggregations
 					return GetStatsAggregation(reader, serializer);
 				case "doc_count":
 					return GetSingleBucketAggregation(reader, serializer);
+				case "bounds":
+					return GetGeoBoundsMetricAggregation(reader, serializer);
+				case "hits":
+					return GetHitsAggregation(reader, serializer);
 				default:
 					return null; 
 
 			}
 		}
 
-		private IAggregation GetPercentilesMetricAggregation(JsonReader reader, JsonSerializer serializer)
+		private IAggregation GetHitsAggregation(JsonReader reader, JsonSerializer serializer)
+		{
+			reader.Read();
+			var o = JObject.Load(reader);
+			if (o == null)
+				return null;
+
+			var total = o["total"].ToObject<long>();
+			var maxScore = o["max_score"].ToObject<double?>();
+			var hits = o["hits"].Children().OfType<JObject>().Select(s=>s);
+			return new TopHitsMetric(hits) { Total = total, MaxScore = maxScore };
+		}
+
+		private IAggregation GetGeoBoundsMetricAggregation(JsonReader reader, JsonSerializer serializer)
+		{
+			reader.Read();
+			var o = JObject.Load(reader);
+			if (o == null)
+				return null;
+			var geoBoundsMetric = new GeoBoundsMetric();
+			JToken topLeftToken;
+			o.TryGetValue("top_left", out topLeftToken);
+			if (topLeftToken != null)
+			{
+				var topLeft = topLeftToken.ToObject<LatLon>();
+				if (topLeft != null)
+					geoBoundsMetric.Bounds.TopLeft = topLeft;
+			}
+			JToken bottomRightToken;
+			o.TryGetValue("bottom_right", out bottomRightToken);
+			if (bottomRightToken != null)
+			{
+				var bottomRight = bottomRightToken.ToObject<LatLon>();
+				if (bottomRight != null)
+					geoBoundsMetric.Bounds.BottomRight = bottomRight;
+			}
+			return geoBoundsMetric;
+		}
+
+		private IAggregation GetPercentilesMetricAggregation(JsonReader reader, JsonSerializer serializer, bool oldFormat = false)
 		{
 			var metric = new PercentilesMetric();
 			var percentileItems = new List<PercentileItem>();
@@ -81,6 +125,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 				reader.Read();
 			}
 			metric.Items = percentileItems;
+			if (!oldFormat) reader.Read();
 			return metric;
 		}
 
@@ -183,8 +228,8 @@ namespace Nest.Resolvers.Converters.Aggregations
 
 			if (property == "key_as_string")
 			{
-				// Skip key_as_string property
 				reader.Read();
+				keyItem.KeyAsString = reader.Value.ToString();
 				reader.Read();
 			}
 
@@ -340,15 +385,15 @@ namespace Nest.Resolvers.Converters.Aggregations
 						break;
 				}
 			}
-				var bucket = new RangeItem
-				{
-					Key = key,
-					From = fromDouble,
-					To = toDouble,
-					DocCount = docCount.GetValueOrDefault(),
-					FromAsString = fromAsString,
-					ToAsString = toAsString
-				};
+			var bucket = new RangeItem
+			{
+				Key = key,
+				From = fromDouble,
+				To = toDouble,
+				DocCount = docCount.GetValueOrDefault(),
+				FromAsString = fromAsString,
+				ToAsString = toAsString
+			};
 			
 			bucket.Aggregations = this.GetNestedAggregations(reader, serializer);
 			return bucket;

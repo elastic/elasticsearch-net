@@ -65,10 +65,27 @@ namespace Nest
 		{
 			return this.TryGet<ExtendedStatsMetric>(key);
 		}
+
+		public GeoBoundsMetric GeoBounds(string key)
+		{
+			return this.TryGet<GeoBoundsMetric>(key);
+		}
+
 		public PercentilesMetric Percentiles(string key)
 		{
 			return this.TryGet<PercentilesMetric>(key);
 		}
+
+		public PercentilesMetric PercentilesRank(string key)
+		{
+			return this.TryGet<PercentilesMetric>(key);
+		}
+
+		public TopHitsMetric TopHitsMetric(string key)
+		{
+			return this.TryGet<TopHitsMetric>(key);
+		}
+
 		public SingleBucket Global(string key)
 		{
 			return this.TryGet<SingleBucket>(key);
@@ -85,6 +102,11 @@ namespace Nest
 		}
 
 		public SingleBucket Nested(string key)
+		{
+			return this.TryGet<SingleBucket>(key);
+		}
+
+		public SingleBucket ReverseNested(string key)
 		{
 			return this.TryGet<SingleBucket>(key);
 		}

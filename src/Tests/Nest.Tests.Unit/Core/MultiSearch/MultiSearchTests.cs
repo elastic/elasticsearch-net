@@ -60,6 +60,19 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 			var result = this._client.MultiSearch(b => b
 				.FixedPath("myindex", "mytype")
 				.Search<ElasticsearchProject>(s => s
+					.Index("myindex2")
+					.Type("mytype2")
+					.MatchAll()
+					.Preference("_primary")
+					.Routing("customvalue1")
+					.SearchType(SearchType.DfsQueryAndFetch))
+				.Search<Person>(s => s.MatchAll()
+					.Index("myindex2")
+					.Type("mytype2")
+					.Preference("_primary_first")
+					.Routing("customvalue2")
+					.SearchType(SearchType.Count))
+				.Search<ElasticsearchProject>(s => s
 					.MatchAll()
 					.Preference("_primary")
 					.Routing("customvalue1")
@@ -72,12 +85,18 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 			var status = result.ConnectionStatus;
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);
 			uri.AbsolutePath.Should().Be("/myindex/mytype/_msearch");
-			const string first = @"{""index"":""myindex"",""type"":""mytype"",""search_type"":""dfs_query_and_fetch"",""preference"":""_primary"",""routing"":""customvalue1""}";
-			const string second = @"{""index"":""myindex"",""type"":""mytype"",""search_type"":""count"",""preference"":""_primary_first"",""routing"":""customvalue2""}";
+			var results = new[]
+			{
+				@"{""index"":""myindex2"",""type"":""mytype2"",""search_type"":""dfs_query_and_fetch"",""preference"":""_primary"",""routing"":""customvalue1""}",
+				@"{""index"":""myindex2"",""type"":""mytype2"",""search_type"":""count"",""preference"":""_primary_first"",""routing"":""customvalue2""}",
+				@"{""type"":""mytype"",""search_type"":""dfs_query_and_fetch"",""preference"":""_primary"",""routing"":""customvalue1""}",
+				@"{""type"":""mytype"",""search_type"":""count"",""preference"":""_primary_first"",""routing"":""customvalue2""}"
+			};
 
-			StringAssert.Contains(first, status.Request.Utf8String());
-			StringAssert.Contains(second, status.Request.Utf8String());
-
+			foreach (var resultItem in results)
+			{
+				StringAssert.Contains(resultItem, status.Request.Utf8String());
+			}
 		}
 
 	}

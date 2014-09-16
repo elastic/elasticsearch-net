@@ -10,41 +10,11 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPercolateRequest<TDocument> : IIndexTypePath<PercolateRequestParameters>
+	public interface IPercolateRequest<TDocument> : IIndexTypePath<PercolateRequestParameters>, IPercolateOperation
 		where TDocument : class
 	{
 		[JsonProperty(PropertyName = "doc")]
 		TDocument Document { get; set; }
-
-		[JsonProperty("id")]
-		string Id { get; set; }
-
-		[JsonProperty(PropertyName = "size")]
-		int? Size { get; set; }
-
-		[JsonProperty(PropertyName = "track_scores")]
-		bool? TrackScores { get; set; }
-
-		[JsonProperty(PropertyName = "score")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<PropertyPathMarker, ISort> Sort { get; set; }
-
-		[JsonProperty(PropertyName = "facets")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
-
-		[JsonProperty(PropertyName = "highlight")]
-		IHighlightRequest Highlight { get; set; }
-
-		[JsonProperty(PropertyName = "query")]
-		QueryContainer Query { get; set; }
-
-		[JsonProperty(PropertyName = "filter")]
-		FilterContainer Filter { get; set; }
-
-		[JsonProperty(PropertyName = "aggs")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 	}
 
 	internal static class PercolatePathInfo
@@ -64,6 +34,7 @@ namespace Nest
 		public QueryContainer Query { get; set; }
 		public FilterContainer Filter { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
+		
 
 		public string Id { get; set; }
 		public int? Size { get; set; }
@@ -81,6 +52,10 @@ namespace Nest
 
 		public PercolateRequest(long id) { this.Id = id.ToString(CultureInfo.InvariantCulture); }
 		
+		IRequestParameters IPercolateOperation.GetRequestParameters()
+		{
+			return this.Request.RequestParameters;
+		}
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PercolateRequestParameters> pathInfo)
 		{
 			PercolatePathInfo.Update(pathInfo, this);
@@ -92,21 +67,25 @@ namespace Nest
 	{
 		private IPercolateRequest<T> Self { get { return this; } }
 
-		IHighlightRequest IPercolateRequest<T>.Highlight { get; set; }
-		QueryContainer IPercolateRequest<T>.Query { get; set; }
-		FilterContainer IPercolateRequest<T>.Filter { get; set; }
+		IHighlightRequest IPercolateOperation.Highlight { get; set; }
+		QueryContainer IPercolateOperation.Query { get; set; }
+		FilterContainer IPercolateOperation.Filter { get; set; }
 
-		string IPercolateRequest<T>.Id { get; set; }
-		int? IPercolateRequest<T>.Size { get; set; }
-		bool? IPercolateRequest<T>.TrackScores { get; set; }
+		string IPercolateOperation.Id { get; set; }
+		int? IPercolateOperation.Size { get; set; }
+		bool? IPercolateOperation.TrackScores { get; set; }
 		
 		T IPercolateRequest<T>.Document { get; set; }
 
 
-		IDictionary<PropertyPathMarker, ISort> IPercolateRequest<T>.Sort { get; set; }
-		IDictionary<PropertyPathMarker, IFacetContainer> IPercolateRequest<T>.Facets { get; set; }
-		IDictionary<string, IAggregationContainer> IPercolateRequest<T>.Aggregations { get; set; }
-
+		IDictionary<PropertyPathMarker, ISort> IPercolateOperation.Sort { get; set; }
+		IDictionary<PropertyPathMarker, IFacetContainer> IPercolateOperation.Facets { get; set; }
+		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
+		
+		IRequestParameters IPercolateOperation.GetRequestParameters()
+		{
+			return this.Request.RequestParameters;
+		}
 		/// <summary>
 		/// The object to perculate
 		/// </summary>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -95,7 +95,6 @@
     <Compile Include="create\40_routing.yaml.cs" />
     <Compile Include="create\50_parent.yaml.cs" />
     <Compile Include="create\55_parent_with_routing.yaml.cs" />
-    <Compile Include="create\60_refresh.yaml.cs" />
     <Compile Include="create\70_timestamp.yaml.cs" />
     <Compile Include="create\75_ttl.yaml.cs" />
     <Compile Include="delete\10_basic.yaml.cs" />
@@ -146,7 +145,6 @@
     <Compile Include="index\40_routing.yaml.cs" />
     <Compile Include="index\50_parent.yaml.cs" />
     <Compile Include="index\55_parent_with_routing.yaml.cs" />
-    <Compile Include="index\60_refresh.yaml.cs" />
     <Compile Include="index\70_timestamp.yaml.cs" />
     <Compile Include="index\75_ttl.yaml.cs" />
     <Compile Include="indices.analyze\10_analyze.yaml.cs" />
@@ -192,8 +190,12 @@
     <Compile Include="indices.put_warmer\all_path_options.yaml.cs" />
     <Compile Include="indices.recovery\10_basic.yaml.cs" />
     <Compile Include="indices.segments\10_basic.yaml.cs" />
-    <Compile Include="indices.snapshot_index\10_basic.yaml.cs" />
-    <Compile Include="indices.stats\10_basic.yaml.cs" />
+    <Compile Include="indices.stats\10_index.yaml.cs" />
+    <Compile Include="indices.stats\11_metric.yaml.cs" />
+    <Compile Include="indices.stats\12_level.yaml.cs" />
+    <Compile Include="indices.stats\13_fields.yaml.cs" />
+    <Compile Include="indices.stats\14_groups.yaml.cs" />
+    <Compile Include="indices.stats\15_types.yaml.cs" />
     <Compile Include="indices.status\10_basic.yaml.cs" />
     <Compile Include="indices.update_aliases\10_basic.yaml.cs" />
     <Compile Include="indices.update_aliases\20_routing.yaml.cs" />
@@ -223,14 +225,18 @@
     <Compile Include="percolate\18_highligh_with_query.yaml.cs" />
     <Compile Include="ping\10_ping.yaml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="script\10_basic.yaml.cs" />
     <Compile Include="scroll\10_basic.yaml.cs" />
     <Compile Include="scroll\11_clear.yaml.cs" />
+    <Compile Include="search.aggregation\10_histogram.yaml.cs" />
     <Compile Include="search\10_source_filtering.yaml.cs" />
     <Compile Include="search\20_default_values.yaml.cs" />
     <Compile Include="search\issue4895.yaml.cs" />
+    <Compile Include="search\test_sig_terms.yaml.cs" />
     <Compile Include="snapshot.get_repository\10_basic.yaml.cs" />
     <Compile Include="suggest\10_basic.yaml.cs" />
     <Compile Include="suggest\20_context.yaml.cs" />
+    <Compile Include="template\20_search.yaml.cs" />
     <Compile Include="termvector\10_basic.yaml.cs" />
     <Compile Include="update\10_doc.yaml.cs" />
     <Compile Include="update\15_script.yaml.cs" />
@@ -238,12 +244,10 @@
     <Compile Include="update\22_doc_as_upsert.yaml.cs" />
     <Compile Include="update\25_script_upsert.yaml.cs" />
     <Compile Include="update\30_internal_version.yaml.cs" />
-    <Compile Include="update\35_external_version.yaml.cs" />
     <Compile Include="update\35_other_versions.yaml.cs" />
     <Compile Include="update\40_routing.yaml.cs" />
     <Compile Include="update\50_parent.yaml.cs" />
     <Compile Include="update\55_parent_with_routing.yaml.cs" />
-    <Compile Include="update\60_refresh.yaml.cs" />
     <Compile Include="update\70_timestamp.yaml.cs" />
     <Compile Include="update\75_ttl.yaml.cs" />
     <Compile Include="update\80_fields.yaml.cs" />

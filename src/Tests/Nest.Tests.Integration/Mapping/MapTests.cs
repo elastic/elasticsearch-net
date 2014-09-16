@@ -115,6 +115,44 @@ namespace Nest.Tests.Integration.Mapping
 				var typeMapping = this.Client.GetMapping<ElasticsearchProject>(gm => gm.Index("asdasdasdsada").Type("elasticsearchprojects2")).Mapping;
 			});
 		}
+		
+		[Test]
+		public void GetAndUpdateMultiFieldMap()
+		{
+			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
 
+			var indexCreateResponse = this.Client.CreateIndex(indexName);
+			Assert.IsTrue(indexCreateResponse.Acknowledged, indexCreateResponse.ConnectionStatus.ToString());
+
+			var mapResponse = this.Client.Map<ElasticsearchProject>(m => m
+				.Index(indexName)
+				.Properties(props => props
+					.MultiField(s => s
+						.Name(p => p.Name)
+						.Fields(pprops => pprops
+							.String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.NotAnalyzed))
+							.String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.Analyzed))
+						)
+					)
+				)
+				);
+			mapResponse.Should().NotBeNull();
+			Assert.IsTrue(mapResponse.IsValid, mapResponse.ConnectionStatus.ToString());
+
+			var getMapResponse = this.Client.GetMapping<ElasticsearchProject>(m => m.Index(indexName));
+			getMapResponse.Should().NotBeNull();
+			Assert.IsTrue(getMapResponse.IsValid, getMapResponse.ConnectionStatus.ToString());
+			getMapResponse.Mapping.Should().NotBeNull();
+
+			mapResponse = this.Client.Map<ElasticsearchProject>(p => p
+				.Index(indexName)
+				.InitializeUsing(getMapResponse.Mapping)
+				);
+			mapResponse.Should().NotBeNull();
+			Assert.IsTrue(mapResponse.IsValid, mapResponse.ConnectionStatus.ToString());
+
+			var indexDeleteResponse = this.Client.DeleteIndex(x => x.Index(indexName));
+			Assert.IsTrue(indexDeleteResponse.Acknowledged, indexDeleteResponse.ConnectionStatus.ToString());
+		}
 	}
 }

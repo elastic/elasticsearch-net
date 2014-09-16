@@ -19,11 +19,10 @@ namespace Nest
 		public static void Update(ElasticsearchPathInfo<CountRequestParameters> pathInfo, ICountRequest request)
 		{
 			var source = request.RequestParameters.GetQueryStringValue<string>("source");
-			pathInfo.HttpMethod = !source.IsNullOrEmpty() 
+			pathInfo.HttpMethod = source.IsNullOrEmpty() 
+				&& (request.Query == null || request.Query.IsConditionless)
 				? PathInfoHttpMethod.GET
 				: PathInfoHttpMethod.POST;
-		
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 		}
 	}
 	

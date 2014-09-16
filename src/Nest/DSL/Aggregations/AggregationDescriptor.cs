@@ -33,6 +33,9 @@ namespace Nest
 		[JsonProperty("geohash_grid")]
 		IGeoHashAggregator GeoHash { get; set; }
 
+		[JsonProperty("geo_bounds")]
+		IGeoBoundsAggregator GeoBounds { get; set; }
+
 		[JsonProperty("histogram")]
 		IHistogramAggregator Histogram { get; set; }
 
@@ -57,6 +60,9 @@ namespace Nest
 		[JsonProperty("nested")]
 		INestedAggregator Nested { get; set; }
 
+		[JsonProperty("reverse_nested")]
+		IReverseNestedAggregator ReverseNested { get; set; }
+
 		[JsonProperty("range")]
 		IRangeAggregator Range { get; set; }
 
@@ -75,6 +81,12 @@ namespace Nest
 		[JsonProperty("value_count")]
 		IValueCountAggregator ValueCount { get; set; }
 
+		[JsonProperty("percentile_ranks")]
+		IPercentileRanksAggregaor PercentileRanks { get; set; }
+
+		[JsonProperty("top_hits")]
+		ITopHitsAggregator TopHits { get; set; }
+
 		[JsonProperty("aggs")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
@@ -89,15 +101,20 @@ namespace Nest
 		private IFilterAggregator _filter;
 		private IGeoDistanceAggregator _geoDistance;
 		private IGeoHashAggregator _geoHash;
+		private IGeoBoundsAggregator _geoBounds;
 		private IHistogramAggregator _histogram;
 		private IGlobalAggregator _global;
 		private IIp4RangeAggregator _ipRange;
 		private ICardinalityAggregator _cardinality;
 		private IMissingAggregator _missing;
 		private INestedAggregator _nested;
+		private IReverseNestedAggregator _reverseNested;
 		private IRangeAggregator _range;
 		private ITermsAggregator _terms;
 		private ISignificantTermsAggregator _significantTerms;
+		private IPercentileRanksAggregaor _percentileRanks;
+		
+		private ITopHitsAggregator _topHits;
 		public IAverageAggregator Average { get; set; }
 		public IValueCountAggregator ValueCount { get; set; }
 		public IMaxAggregator Max { get; set; }
@@ -105,7 +122,6 @@ namespace Nest
 		public IStatsAggregator Stats { get; set; }
 		public ISumAggregator Sum { get; set; }
 		public IExtendedStatsAggregator ExtendedStats { get; set; }
-
 		public IDateHistogramAggregator DateHistogram
 		{
 			get { return _dateHistogram; }
@@ -140,6 +156,12 @@ namespace Nest
 		{
 			get { return _geoHash; }
 			set { _geoHash = value; }
+		}
+
+		public IGeoBoundsAggregator GeoBounds
+		{
+			get { return _geoBounds; }
+			set { _geoBounds = value; }
 		}
 
 		public IHistogramAggregator Histogram
@@ -178,6 +200,12 @@ namespace Nest
 			set { _nested = value; }
 		}
 
+		public IReverseNestedAggregator ReverseNested
+		{
+			get { return _reverseNested; }
+			set { _reverseNested = value; }
+		}
+
 		public IRangeAggregator Range
 		{
 			get { return _range; }
@@ -194,6 +222,18 @@ namespace Nest
 		{
 			get { return _significantTerms; }
 			set { _significantTerms = value; }
+		}
+		
+		public IPercentileRanksAggregaor PercentileRanks
+		{
+			get { return _percentileRanks; }
+			set { _percentileRanks = value; }
+		}
+
+		public ITopHitsAggregator TopHits
+		{
+			get { return _topHits; }
+			set { _topHits = value; }
 		}
 
 		private void LiftAggregations(IBucketAggregator bucket)
@@ -225,7 +265,9 @@ namespace Nest
 		IGeoDistanceAggregator IAggregationContainer.GeoDistance { get; set; }
 		
 		IGeoHashAggregator IAggregationContainer.GeoHash { get; set; }
-		
+
+		IGeoBoundsAggregator IAggregationContainer.GeoBounds { get; set; }
+
 		IHistogramAggregator IAggregationContainer.Histogram { get; set; }
 		
 		IGlobalAggregator IAggregationContainer.Global { get; set; }
@@ -241,6 +283,8 @@ namespace Nest
 		IMissingAggregator IAggregationContainer.Missing { get; set; }
 		
 		INestedAggregator IAggregationContainer.Nested { get; set; }
+
+		IReverseNestedAggregator IAggregationContainer.ReverseNested { get; set; }
 	
 		IRangeAggregator IAggregationContainer.Range { get; set; }
 		
@@ -251,9 +295,13 @@ namespace Nest
 		IValueCountAggregator IAggregationContainer.ValueCount { get; set; }
 		
 		ISignificantTermsAggregator IAggregationContainer.SignificantTerms { get; set; }
+
+		IPercentileRanksAggregaor IAggregationContainer.PercentileRanks { get;set; }
 		
 		ITermsAggregator IAggregationContainer.Terms { get; set; }
-		
+
+		ITopHitsAggregator IAggregationContainer.TopHits { get; set; }
+
 		public AggregationDescriptor<T> Average(string name, Func<AverageAggregationDescriptor<T>, AverageAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.Average = d);
@@ -269,6 +317,12 @@ namespace Nest
 			Func<PercentilesAggregationDescriptor<T>, PercentilesAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.Percentiles = d);
+		}
+
+		public AggregationDescriptor<T> PercentileRanks(string name,
+			Func<PercentileRanksAggregationDescriptor<T>, PercentileRanksAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a.PercentileRanks = d);
 		}
 
 		public AggregationDescriptor<T> DateRange(string name,
@@ -299,6 +353,12 @@ namespace Nest
 			Func<GeoHashAggregationDescriptor<T>, GeoHashAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.GeoHash = d);
+		}
+
+		public AggregationDescriptor<T> GeoBounds(string name,
+			Func<GeoBoundsAggregationDescriptor<T>, GeoBoundsAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a.GeoBounds = d);
 		}
 
 		public AggregationDescriptor<T> Histogram(string name,
@@ -344,6 +404,11 @@ namespace Nest
 			return _SetInnerAggregation(name, selector, (a, d) => a.Nested = d);
 		}
 
+		public AggregationDescriptor<T> ReverseNested(string name, Func<ReverseNestedAggregationDescriptor<T>, ReverseNestedAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a.ReverseNested = d);
+		}
+
 		public AggregationDescriptor<T> Range(string name, Func<RangeAggregationDescriptor<T>, RangeAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.Range = d);
@@ -373,6 +438,12 @@ namespace Nest
 			Func<ValueCountAggregationDescriptor<T>, ValueCountAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.ValueCount = d);
+		}
+
+		public AggregationDescriptor<T> TopHits(string name,
+			Func<TopHitsAggregationDescriptor<T>, TopHitsAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a.TopHits = d);
 		}
 
 		private AggregationDescriptor<T> _SetInnerAggregation<TAggregation>(
