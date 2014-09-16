@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest.Resolvers.Converters
 {
-
 	public class FuzzinessConverter : JsonConverter
 	{
 		public override bool CanWrite { get { return true; } }
@@ -26,7 +26,7 @@ namespace Nest.Resolvers.Converters
 				return Fuzziness.Auto;
 			if (reader.TokenType == JsonToken.Integer)
 			{
-				var editDistance = (reader.Value as int?).GetValueOrDefault(0);
+				var editDistance = Convert.ToInt32(reader.Value);
 				return Fuzziness.EditDistance(editDistance);
 			}
 			if (reader.TokenType == JsonToken.Float)
