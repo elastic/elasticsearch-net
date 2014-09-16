@@ -74,7 +74,6 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					.Match(t => t
 						.OnField(f => f.Name)
 						.Query("this is a test")
-						
 						.Fuzziness(1.0)
 						.Analyzer("my_analyzer")
 						.CutoffFrequency(0.3)

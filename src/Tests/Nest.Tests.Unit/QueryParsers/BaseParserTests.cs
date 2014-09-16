@@ -13,18 +13,15 @@ namespace Nest.Tests.Unit.QueryParsers
 	{
 		public ISearchRequest GetSearchDescriptorForQuery(Func<SearchDescriptor<ElasticsearchProject>, SearchDescriptor<ElasticsearchProject>> create)
 		{
-			var descriptor = create(new SearchDescriptor<ElasticsearchProject>());
-			var json = this._client.Serializer.Serialize(descriptor);
-			Console.WriteLine(json.Utf8String());
-			using (var ms = new MemoryStream(json))
-			{
-				ISearchRequest d = this._client.Serializer.Deserialize<SearchDescriptor<ElasticsearchProject>>(ms);
-				d.Should().NotBeNull();
-				d.Query.Should().NotBeNull();
-				return d;
-			}
+			return GetSearchDescriptor(create, request => request.Query.Should().NotBeNull());
 		}
+
 		public ISearchRequest GetSearchDescriptorForFilter(Func<SearchDescriptor<ElasticsearchProject>, SearchDescriptor<ElasticsearchProject>> create)
+		{
+			return GetSearchDescriptor(create, request => request.Filter.Should().NotBeNull());
+		}
+
+		private ISearchRequest GetSearchDescriptor(Func<SearchDescriptor<ElasticsearchProject>, SearchDescriptor<ElasticsearchProject>> create, Action<ISearchRequest> assertFunc )
 		{
 			var descriptor = create(new SearchDescriptor<ElasticsearchProject>());
 			var json = this._client.Serializer.Serialize(descriptor);
@@ -33,7 +30,7 @@ namespace Nest.Tests.Unit.QueryParsers
 			{
 				ISearchRequest d = this._client.Serializer.Deserialize<SearchDescriptor<ElasticsearchProject>>(ms);
 				d.Should().NotBeNull();
-				d.Filter.Should().NotBeNull();
+				assertFunc(d);
 				return d;
 			}
 		}
