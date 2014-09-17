@@ -14,7 +14,6 @@
     <description>An IConnection implementation that utilizes Apache Thrift to talk with elasticsearch</description>
     <dependencies>
       <dependency id="Elasticsearch.Net" version="1.1.1"/>
-      <dependency id="NetReflector" />
     </dependencies>
     <tags>elasticsearch elastic search lucene thrift nest</tags>
   </metadata>
