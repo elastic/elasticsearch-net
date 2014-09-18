@@ -86,6 +86,16 @@ let getFileVersion = fun _ ->
 
 let fileVersion = getFileVersion()
 
+//CI builds need to be one minor ahead of the whatever we find in our develop branch
+let patchedFileVersion = 
+    match fileVersion with
+    | f when f.Contains("-ci") ->
+        let v = regex_replace "-ci.+$" "" f
+        let prerelease = regex_replace "^.+-(ci.+)$" "$1" f
+        let version = SemVerHelper.parse v
+        sprintf "%d.%d.0-%s" version.Major (version.Minor + 1) prerelease
+    | _ -> fileVersion
+
 let validateSignedAssembly = fun name ->
     let sn = if isMono then "sn" else "build/tools/sn/sn.exe"
     let out = (ExecProcessAndReturnMessages(fun p ->
@@ -119,19 +129,19 @@ let nugetPack = fun name ->
     let package = (sprintf @"build\%s.nuspec" name)
     let packageContents = ReadFileAsString package
     let re = @"(?<start>\<version\>|""(Elasticsearch.Net|Nest)"" version="")[^""><]+(?<end>\<\/version\>|"")"
-    let replacedContents = regex_replace re (sprintf "${start}%s${end}" fileVersion) packageContents
+    let replacedContents = regex_replace re (sprintf "${start}%s${end}" patchedFileVersion) packageContents
     WriteStringToFile false package replacedContents
 
     let dir = sprintf "%s/%s/" buildDir name
     NuGetPack (fun p ->
       {p with 
-        Version = fileVersion
+        Version = patchedFileVersion
         WorkingDir = dir 
         OutputPath = dir
       })
       package
 
-    MoveFile nugetOutDir (buildDir + (sprintf "%s/%s.%s.nupkg" name name fileVersion)) 
+    MoveFile nugetOutDir (buildDir + (sprintf "%s/%s.%s.nupkg" name name patchedFileVersion)) 
 
 let buildDocs = fun action ->
     let node = @"build\tools\Node.js\node.exe"
@@ -160,15 +170,7 @@ let getAssemblyVersion = (fun _ ->
     assemblyVersion
 )
 
-//CI builds need to be one minor ahead of the whatever we find in our develop branch
-let patchedFileVersion = 
-    match fileVersion with
-    | f when f.Contains("-ci") ->
-        let v = regex_replace "-ci.+$" "" f
-        let prerelease = regex_replace "^.+-(ci.+)$" "$1" f
-        let version = SemVerHelper.parse v
-        sprintf "%d.%d.0-%s" version.Major (version.Minor + 1) prerelease
-    | _ -> fileVersion
+
     
 
 Target "Version" (fun _ ->
