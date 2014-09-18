@@ -174,7 +174,6 @@ let getAssemblyVersion = (fun _ ->
     
 
 Target "Version" (fun _ ->
-  trace fileVersion
   let assemblyVersion = getAssemblyVersion()
 
   let assemblyDescription = fun (f: string) ->
