@@ -126,9 +126,17 @@ namespace Nest
 			return this;
 		}
 
-		public SearchTemplateDescriptor<T> Params(IDictionary<string, object> parameters)
+		public SearchTemplateDescriptor<T> Params(Dictionary<string, object> paramDictionary)
 		{
-			this.Self.Params = parameters;
+			paramDictionary.ThrowIfNull("paramDictionary");
+			this.Self.Params = paramDictionary;
+			return this;
+		}
+
+		public SearchTemplateDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
+		{
+			paramDictionary.ThrowIfNull("paramDictionary");
+			this.Self.Params = paramDictionary(new FluentDictionary<string, object>());
 			return this;
 		}
 
