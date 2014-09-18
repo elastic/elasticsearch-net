@@ -144,14 +144,16 @@ let buildDocs = fun action ->
       (TimeSpan.FromMinutes (if action = "preview" then 300.0 else 5.0))
 
 let getAssemblyVersion = (fun _ ->
-    let version = SemVerHelper.parse fileVersion
+    let fv = if fileVersion.Contains("-ci") then (regex_replace "-ci.+$" "" fileVersion) else fileVersion
+    traceFAKE "patched fileVersion %s" fv
+    let version = SemVerHelper.parse fv
 
     let suffix = fun (prerelease: PreRelease) -> sprintf "-%s%i" prerelease.Name prerelease.Number.Value
     let assemblySuffix = if version.PreRelease.IsSome then suffix version.PreRelease.Value else "";
     let assemblyVersion = sprintf "%i.0.0%s" version.Major assemblySuffix
   
     match (assemblySuffix, version.Minor, version.Patch) with
-    | (s, m, p) when s <> "" && (m <> 0 || p <> 0)  -> failwithf "Cannot create prereleases for minor or major builds!"
+    | (s, m, p) when s <> "" && s <> "ci" && (m <> 0 || p <> 0)  -> failwithf "Cannot create prereleases for minor or major builds!"
     | ("", _, _) -> traceFAKE "Building fileversion %s for asssembly version %s" fileVersion assemblyVersion
     | _ -> traceFAKE "Building prerelease %s for major assembly version %s " fileVersion assemblyVersion
 
@@ -161,7 +163,7 @@ let getAssemblyVersion = (fun _ ->
 
 Target "Version" (fun _ ->
   trace fileVersion
-  let assemblyVersion = if fileVersion.Contains("-ci") then fileVersion else getAssemblyVersion()
+  let assemblyVersion = getAssemblyVersion()
 
   let assemblyDescription = fun (f: string) ->
     let name = f 
