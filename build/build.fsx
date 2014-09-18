@@ -143,12 +143,12 @@ let buildDocs = fun action ->
       ) 
       (TimeSpan.FromMinutes (if action = "preview" then 300.0 else 5.0))
 
+let suffix = fun (prerelease: PreRelease) -> sprintf "-%s%i" prerelease.Name prerelease.Number.Value
 let getAssemblyVersion = (fun _ ->
     let fv = if fileVersion.Contains("-ci") then (regex_replace "-ci.+$" "" fileVersion) else fileVersion
     traceFAKE "patched fileVersion %s" fv
     let version = SemVerHelper.parse fv
 
-    let suffix = fun (prerelease: PreRelease) -> sprintf "-%s%i" prerelease.Name prerelease.Number.Value
     let assemblySuffix = if version.PreRelease.IsSome then suffix version.PreRelease.Value else "";
     let assemblyVersion = sprintf "%i.0.0%s" version.Major assemblySuffix
   
@@ -160,6 +160,16 @@ let getAssemblyVersion = (fun _ ->
     assemblyVersion
 )
 
+//CI builds need to be one minor ahead of the whatever we find in our develop branch
+let patchedFileVersion = 
+    match fileVersion with
+    | f when f.Contains("-ci") ->
+        let v = regex_replace "-ci.+$" "" f
+        let prerelease = regex_replace "^.+-(ci.+)$" "$1" f
+        let version = SemVerHelper.parse v
+        sprintf "%d.%d.0-%s" version.Major (version.Minor + 1) prerelease
+    | _ -> fileVersion
+    
 
 Target "Version" (fun _ ->
   trace fileVersion
@@ -184,8 +194,8 @@ Target "Version" (fun _ ->
         Attribute.Company "Elasticsearch"
         Attribute.Configuration "Release"
         Attribute.Version assemblyVersion
-        Attribute.FileVersion fileVersion
-        Attribute.InformationalVersion fileVersion
+        Attribute.FileVersion patchedFileVersion
+        Attribute.InformationalVersion patchedFileVersion
       ]
     )
 )
