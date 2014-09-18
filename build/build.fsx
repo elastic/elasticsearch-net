@@ -42,9 +42,6 @@ Target "BuildApp" (fun _ ->
     //Scan for xml docs and patch them to replace <inheritdoc /> with the documentation
     //from their interfaces
     //!! "build/output/Nest/Nest.xml" |> Seq.iter(fun f -> PatchXmlDoc f)
-
-    CopyFile "build/output/Elasticsearch.Net/install.ps1" "build/elasticsearch-init.ps1"
-
 )
 
 Target "Test" (fun _ ->

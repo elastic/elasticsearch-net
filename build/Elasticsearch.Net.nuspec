@@ -20,6 +20,5 @@
     <file src="output\Elasticsearch.Net\Elasticsearch.Net.dll" target="lib"/> 
     <file src="output\Elasticsearch.Net\Elasticsearch.Net.pdb" target="lib"/> 
     <file src="output\Elasticsearch.Net\Elasticsearch.Net.XML" target="lib"/> 
-    <file src="output\Elasticsearch.Net\install.ps1" target="tools"/> 
   </files>
 </package>
