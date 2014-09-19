@@ -1,5 +1,10 @@
 Repository for both **Elasticsearch.Net** and **NEST**, the two official [elasticsearch](https://github.com/elasticsearch/elasticsearch) .NET clients.
 
+[![install from nuget](http://img.shields.io/nuget/v/NEST.svg?style=flat-square)](https://www.nuget.org/packages/NEST)[![downloads](http://img.shields.io/nuget/dt/NEST.svg?style=flat-square)](https://www.nuget.org/packages/NEST)    
+Bleeding edge package:    
+[![download](http://img.shields.io/myget/elasticsearch-net/v/NEST.svg?style=flat-square)](https://www.myget.org/gallery/elasticsearch-net)[![downloads](http://img.shields.io/myget/elasticsearch-net/dt/NEST.svg?style=flat-square)](https://www.myget.org/gallery/elasticsearch-net)    
+Builds:
+[![teamcity](http://img.shields.io/teamcity/http/teamcity.codebetter.com/e/bt993.svg?style=flat-square)](http://teamcity.codebetter.com/viewType.html?buildTypeId=bt993)[![elasticsearch-net MyGet Build Status](https://www.myget.org/BuildSource/Badge/elasticsearch-net?identifier=624cebb3-a461-466f-9bac-7026c8ba615a)](https://www.myget.org/gallery/elasticsearch-net)
 
 #[Elasticsearch.Net](src/Elasticsearch.Net)
 
@@ -22,8 +27,4 @@ Repository for both **Elasticsearch.Net** and **NEST**, the two official [elasti
 
 [Read more here](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest#nest-)
 
-###Build Statuses
 
-[![Build Status](http://teamcity.codebetter.com/app/rest/builds/buildType:%28id:bt993%29/statusIcon)](http://teamcity.codebetter.com/viewType.html?buildTypeId=bt993&guest=1)
-
-[![elasticsearch-net MyGet Build Status](https://www.myget.org/BuildSource/Badge/elasticsearch-net?identifier=624cebb3-a461-466f-9bac-7026c8ba615a)](https://www.myget.org/)
