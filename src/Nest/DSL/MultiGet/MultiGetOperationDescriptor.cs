@@ -16,7 +16,7 @@ namespace Nest
 			this.Type = typeof(T);
 		}
 		public MultiGetOperation(long id) : this(id.ToString(CultureInfo.InvariantCulture)) {}
-		
+
 		Type IMultiGetOperation.ClrType { get { return typeof(T); } }
 		
 		public IndexNameMarker Index { get; set; }
@@ -27,6 +27,8 @@ namespace Nest
 		
 		public IList<PropertyPathMarker> Fields { get; set; }
 		
+		public ISourceFilter Source { get; set; }
+
 		public string Routing { get; set; }
 	}
 
@@ -39,6 +41,7 @@ namespace Nest
 		TypeNameMarker IMultiGetOperation.Type { get; set; }
 		string IMultiGetOperation.Id { get; set; }
 		string IMultiGetOperation.Routing { get; set; }
+		ISourceFilter IMultiGetOperation.Source { get; set; }
 		IList<PropertyPathMarker> IMultiGetOperation.Fields { get; set; }
 		Type IMultiGetOperation.ClrType { get { return typeof(T); } }
 
@@ -83,23 +86,20 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Manually set the type of which a typename will be inferred
+		/// Control how the document's source is loaded
 		/// </summary>
-		public MultiGetOperationDescriptor<T> Type(Type type)
+		public MultiGetOperationDescriptor<T> Source(ISourceFilter source)
 		{
-			if (type == null) return this;
-			Self.Type = type;
+			Self.Source = source;
 			return this;
 		}
 
-		public MultiGetOperationDescriptor<T> Id(long id)
+		/// <summary>
+		/// Control how the document's source is loaded
+		/// </summary>
+		public MultiGetOperationDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> source)
 		{
-			return this.Id(id.ToString(CultureInfo.InvariantCulture));
-		}
-
-		public MultiGetOperationDescriptor<T> Id(string id)
-		{
-			Self.Id = id;
+			Self.Source = source(new SearchSourceDescriptor<T>());
 			return this;
 		}
 
