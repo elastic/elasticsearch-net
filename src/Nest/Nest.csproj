@@ -179,12 +179,15 @@
     <Compile Include="Domain\Cat\CatNodesRecord.cs" />
     <Compile Include="Domain\Responses\ClusterStatsResponse.cs" />
     <Compile Include="Domain\Responses\ClusterPendingTasksResponse.cs" />
+    <Compile Include="Domain\Responses\DeleteSearchTemplateResponse.cs" />
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Cat\ICatRecord.cs" />
+    <Compile Include="Domain\Responses\GetSearchTemplateResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
     <Compile Include="Domain\Responses\NodesHotThreadsResponse.cs" />
     <Compile Include="Domain\Responses\CatResponse.cs" />
+    <Compile Include="Domain\Responses\PutSearchTemplateResponse.cs" />
     <Compile Include="Domain\Stats\ClusterNodesStas.cs" />
     <Compile Include="Domain\Stats\CompletionStats.cs" />
     <Compile Include="Domain\Stats\FieldDataStats.cs" />
@@ -196,6 +199,9 @@
     <Compile Include="Domain\Stats\SegmentsStats.cs" />
     <Compile Include="Domain\Template\ITemplateSection.cs" />
     <Compile Include="Domain\Template\TemplateBuilder.cs" />
+    <Compile Include="DSL\PutSearchTemplateDescriptor.cs" />
+    <Compile Include="DSL\DeleteSearchTemplateDescriptor.cs" />
+    <Compile Include="DSL\GetSearchTemplateDescriptor.cs" />
     <Compile Include="DSL\Template\TemplateSectionQueryContainer.cs" />
     <Compile Include="DSL\Template\TemplateSectionSortFieldDescriptor.cs" />
     <Compile Include="DSL\CatIndicesDescriptor.cs" />
