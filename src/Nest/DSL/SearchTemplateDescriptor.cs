@@ -53,12 +53,14 @@ namespace Nest
 
 		Type ClrType { get; }
 
-		[JsonProperty(PropertyName = "sort")]
-		[JsonConverter(typeof(SortCollectionConverter))]
-		IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
-
 		[JsonProperty(PropertyName = "template")]
-		SearchTemplate Template { get; set; }
+		string Template { get; set; }
+
+		[JsonProperty("file")]
+		string File { get; set; }
+
+		[JsonProperty("id")]
+		string Id { get; set; }
 
 		Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 	}
@@ -68,11 +70,12 @@ namespace Nest
 	public partial class SearchTemplateRequest 
 		: QueryPathBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
 	{
-		public SearchTemplate Template { get; set; }
+		public string Template { get; set; }
+		public string File { get; set; }
+		public string Id { get; set; }
 		public IDictionary<string, object> Params { get; set; }
 		private Type _clrType { get; set; }
 		Type ISearchTemplateRequest.ClrType { get { return _clrType; } }
-		public IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
@@ -85,10 +88,11 @@ namespace Nest
 		: QueryPathBase<SearchTemplateRequestParameters, T>, ISearchTemplateRequest
 		where T : class
 	{
-		public SearchTemplate Template { get; set; }
+		public string Template { get; set; }
+		public string File { get; set; }
+		public string Id { get; set; }
 		public IDictionary<string, object> Params { get; set; }
 		public Type ClrType { get { return typeof(T); } }
-		public IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
@@ -110,19 +114,31 @@ namespace Nest
 		/// </summary>
 		internal bool _Strict { get; set; }
 
-		SearchTemplate ISearchTemplateRequest.Template { get; set; }
+		string ISearchTemplateRequest.Template { get; set; }
+
+		string ISearchTemplateRequest.File { get; set; }
+
+		string ISearchTemplateRequest.Id { get; set; }
 
 		IDictionary<string, object> ISearchTemplateRequest.Params { get; set; }
 
-		IList<KeyValuePair<PropertyPathMarker, ISort>> ISearchTemplateRequest.Sort { get; set; }
-
 		Func<dynamic, Hit<dynamic>, Type> ISearchTemplateRequest.TypeSelector { get; set; }
 
-		public SearchTemplateDescriptor<T> Template(Func<TemplateDescriptor, TemplateDescriptor> templateSelector)
+		public SearchTemplateDescriptor<T> Template(string template)
 		{
-			templateSelector.ThrowIfNull("templateSelector");
-			var descriptor = templateSelector(new TemplateDescriptor());
-			this.Self.Template = descriptor.Template;
+			this.Self.Template = template;
+			return this;
+		}
+
+		public SearchTemplateDescriptor<T> File(string file)
+		{
+			this.Self.File = file;
+			return this;
+		}
+
+		public SearchTemplateDescriptor<T> Id(string id)
+		{
+			this.Self.Id = id;
 			return this;
 		}
 
@@ -140,21 +156,6 @@ namespace Nest
 			return this;
 		}
 
-		/// <summary>
-		/// <para>Sort() allows you to fully describe your sort unlike the SortAscending and SortDescending aliases.
-		/// </para>
-		/// </summary>
-		public SearchTemplateDescriptor<T> Sort(Func<SortFieldDescriptor<T>, IFieldSort> sortSelector)
-		{
-			if (Self.Sort == null)
-				Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
-
-			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = sortSelector(new SortFieldDescriptor<T>());
-			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>(descriptor.Field, descriptor));
-			return this;
-		}
-
 		public SearchTemplateDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector)
 		{
 			Self.TypeSelector = typeSelector;
@@ -164,45 +165,6 @@ namespace Nest
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
 		{
 			SearchTemplatePathInfo.Update(pathInfo);
-		}
-	}
-
-	[JsonObject]
-	public class SearchTemplate
-	{
-		[JsonProperty("file")]
-		public string File { get; set; }
-
-		[JsonProperty("id")]
-		public string Id { get; set; }
-
-		[JsonProperty("query")]
-		public IQueryContainer Query { get; set; }
-	}
-
-	public class TemplateDescriptor
-	{
-		public SearchTemplate Template = new SearchTemplate();
-
-		public TemplateDescriptor File(string file)
-		{
-			Template.File = file;
-			return this;
-		}
-
-		public TemplateDescriptor Id(string id)
-		{
-			Template.Id = id;
-			return this;
-		}
-
-		public TemplateDescriptor Query<T>(Func<QueryDescriptor<T>, QueryContainer> query) where T : class
-		{
-			query.ThrowIfNull("query");
-			var q = new QueryDescriptor<T>();
-			((IQueryContainer)q).IsStrict = true;
-			Template.Query = query(q);
-			return this;
 		}
 	}
 }

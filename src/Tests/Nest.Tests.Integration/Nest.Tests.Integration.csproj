@@ -232,6 +232,7 @@
     <Compile Include="Search\QueryResponseMapperTests.cs" />
     <Compile Include="Search\ScriptFields\ScriptFieldsTest.cs" />
     <Compile Include="Search\Scroll\ScrollTests.cs" />
+    <Compile Include="Search\Template\SearchTemplateTests.cs" />
     <Compile Include="Search\SearchTypeTests\SearchTypeScanTests.cs" />
     <Compile Include="Search\SearchTypeTests\SearchTypeCountTests.cs" />
     <Compile Include="Search\SearchTypeTests\SearchTypeTests.cs" />
