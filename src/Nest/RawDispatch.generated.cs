@@ -946,6 +946,66 @@ namespace Nest
 		}
 		
 		
+		internal ElasticsearchResponse<T> DeleteScriptDispatch<T>(ElasticsearchPathInfo<DeleteScriptRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.DELETE:
+					//DELETE /_scripts/{lang}/{id}
+					if (!pathInfo.Lang.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
+						return this.Raw.DeleteScript<T>(pathInfo.Lang,pathInfo.Id,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.DeleteScript() into any of the following paths: \r\n - /_scripts/{lang}/{id}");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> DeleteScriptDispatchAsync<T>(ElasticsearchPathInfo<DeleteScriptRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.DELETE:
+					//DELETE /_scripts/{lang}/{id}
+					if (!pathInfo.Lang.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
+						return this.Raw.DeleteScriptAsync<T>(pathInfo.Lang,pathInfo.Id,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.DeleteScript() into any of the following paths: \r\n - /_scripts/{lang}/{id}");
+		}
+		
+		
+		internal ElasticsearchResponse<T> DeleteTemplateDispatch<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.DELETE:
+					//DELETE /_search/template/{id}
+					if (!pathInfo.Id.IsNullOrEmpty())
+						return this.Raw.DeleteTemplate<T>(pathInfo.Id,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.DeleteTemplate() into any of the following paths: \r\n - /_search/template/{id}");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> DeleteTemplateDispatchAsync<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.DELETE:
+					//DELETE /_search/template/{id}
+					if (!pathInfo.Id.IsNullOrEmpty())
+						return this.Raw.DeleteTemplateAsync<T>(pathInfo.Id,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.DeleteTemplate() into any of the following paths: \r\n - /_search/template/{id}");
+		}
+		
+		
 		internal ElasticsearchResponse<T> ExistsDispatch<T>(ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
@@ -1048,6 +1108,36 @@ namespace Nest
 		}
 		
 		
+		internal ElasticsearchResponse<T> GetScriptDispatch<T>(ElasticsearchPathInfo<GetScriptRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_scripts/{lang}/{id}
+					if (!pathInfo.Lang.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
+						return this.Raw.GetScript<T>(pathInfo.Lang,pathInfo.Id,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.GetScript() into any of the following paths: \r\n - /_scripts/{lang}/{id}");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> GetScriptDispatchAsync<T>(ElasticsearchPathInfo<GetScriptRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_scripts/{lang}/{id}
+					if (!pathInfo.Lang.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
+						return this.Raw.GetScriptAsync<T>(pathInfo.Lang,pathInfo.Id,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.GetScript() into any of the following paths: \r\n - /_scripts/{lang}/{id}");
+		}
+		
+		
 		internal ElasticsearchResponse<T> GetSourceDispatch<T>(ElasticsearchPathInfo<SourceRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
@@ -1075,6 +1165,36 @@ namespace Nest
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.GetSource() into any of the following paths: \r\n - /{index}/{type}/{id}/_source");
+		}
+		
+		
+		internal ElasticsearchResponse<T> GetTemplateDispatch<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_search/template/{id}
+					if (!pathInfo.Id.IsNullOrEmpty())
+						return this.Raw.GetTemplate<T>(pathInfo.Id,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.GetTemplate() into any of the following paths: \r\n - /_search/template/{id}");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> GetTemplateDispatchAsync<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_search/template/{id}
+					if (!pathInfo.Id.IsNullOrEmpty())
+						return this.Raw.GetTemplateAsync<T>(pathInfo.Id,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.GetTemplate() into any of the following paths: \r\n - /_search/template/{id}");
 		}
 		
 		
@@ -3135,6 +3255,90 @@ namespace Nest
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Ping() into any of the following paths: \r\n - /");
+		}
+		
+		
+		internal ElasticsearchResponse<T> PutScriptDispatch<T>(ElasticsearchPathInfo<PutScriptRequestParameters> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.PUT:
+					//PUT /_scripts/{lang}/{id}
+					if (!pathInfo.Lang.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
+						return this.Raw.PutScript<T>(pathInfo.Lang,pathInfo.Id,body,u => pathInfo.RequestParameters);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /_scripts/{lang}/{id}
+					if (!pathInfo.Lang.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
+						return this.Raw.PutScriptPost<T>(pathInfo.Lang,pathInfo.Id,body,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.PutScript() into any of the following paths: \r\n - /_scripts/{lang}/{id}");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> PutScriptDispatchAsync<T>(ElasticsearchPathInfo<PutScriptRequestParameters> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.PUT:
+					//PUT /_scripts/{lang}/{id}
+					if (!pathInfo.Lang.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
+						return this.Raw.PutScriptAsync<T>(pathInfo.Lang,pathInfo.Id,body,u => pathInfo.RequestParameters);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /_scripts/{lang}/{id}
+					if (!pathInfo.Lang.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
+						return this.Raw.PutScriptPostAsync<T>(pathInfo.Lang,pathInfo.Id,body,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.PutScript() into any of the following paths: \r\n - /_scripts/{lang}/{id}");
+		}
+		
+		
+		internal ElasticsearchResponse<T> PutTemplateDispatch<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.PUT:
+					//PUT /_search/template/{id}
+					if (!pathInfo.Id.IsNullOrEmpty() && body != null)
+						return this.Raw.PutTemplate<T>(pathInfo.Id,body,u => pathInfo.RequestParameters);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /_search/template/{id}
+					if (!pathInfo.Id.IsNullOrEmpty() && body != null)
+						return this.Raw.PutTemplatePost<T>(pathInfo.Id,body,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.PutTemplate() into any of the following paths: \r\n - /_search/template/{id}");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> PutTemplateDispatchAsync<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.PUT:
+					//PUT /_search/template/{id}
+					if (!pathInfo.Id.IsNullOrEmpty() && body != null)
+						return this.Raw.PutTemplateAsync<T>(pathInfo.Id,body,u => pathInfo.RequestParameters);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /_search/template/{id}
+					if (!pathInfo.Id.IsNullOrEmpty() && body != null)
+						return this.Raw.PutTemplatePostAsync<T>(pathInfo.Id,body,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.PutTemplate() into any of the following paths: \r\n - /_search/template/{id}");
 		}
 		
 		

@@ -1424,6 +1424,32 @@ namespace Nest
 	}
 	
 		
+	///<summary>Request parameters for DeleteScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public partial class DeleteScriptRequest  : BasePathRequest<DeleteScriptRequestParameters>
+			{
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteScriptRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+
+	}
+	
+		
+	///<summary>Request parameters for DeleteTemplate
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///</pre>
+	///</summary>
+	public partial class DeleteTemplateRequest 
+			{
+	}
+	
+		
 	///<summary>Request parameters for Exists
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
@@ -1720,6 +1746,22 @@ namespace Nest
 	}
 	
 		
+	///<summary>Request parameters for GetScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public partial class GetScriptRequest  : BasePathRequest<GetScriptRequestParameters>
+			{
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetScriptRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+
+	}
+	
+		
 	///<summary>Request parameters for GetSource
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
@@ -1816,6 +1858,16 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+	}
+	
+		
+	///<summary>Request parameters for GetTemplate
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///</pre>
+	///</summary>
+	public partial class GetTemplateRequest 
+			{
 	}
 	
 		
@@ -2257,32 +2309,6 @@ namespace Nest
 	}
 	
 		
-	///<summary>Request parameters for IndicesDeleteTemplateForAll
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
-	///</pre>
-	///</summary>
-	public partial class DeleteTemplateRequest 
-			{
-		
-		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
-		
-		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
-	}
-	
-		
 	///<summary>Request parameters for IndicesDeleteWarmer
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
@@ -2705,32 +2731,6 @@ namespace Nest
 	}
 	
 		
-	///<summary>Request parameters for IndicesGetTemplateForAll
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
-	///</pre>
-	///</summary>
-	public partial class GetTemplateRequest 
-			{
-		
-		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("flat_settings"); } 
-			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
-		}
-		
-		
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
-	}
-	
-		
 	///<summary>Request parameters for IndicesGetWarmerForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
@@ -3053,6 +3053,14 @@ namespace Nest
 	public partial class PutTemplateRequest 
 			{
 		
+		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		public bool Create 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("create"); } 
+			set { this.Request.RequestParameters.AddQueryString("create", value); }
+		}
+		
+		
 		///<summary>Explicit operation timeout</summary>
 		public string Timeout 
 		{ 
@@ -3294,9 +3302,9 @@ namespace Nest
 		
 		
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
-		public bool Groups 
+		public  string[] Groups 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("groups"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("groups"); } 
 			set { this.Request.RequestParameters.AddQueryString("groups", value); }
 		}
 		
@@ -4123,6 +4131,22 @@ namespace Nest
 	///</summary>
 	public partial class PingRequest 
 			{
+	}
+	
+		
+	///<summary>Request parameters for PutScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public partial class PutScriptRequest  : BasePathRequest<PutScriptRequestParameters>
+			{
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutScriptRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+
 	}
 	
 		

@@ -1517,6 +1517,38 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for DeleteScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public partial class DeleteScriptDescriptor  : BaseRequest<DeleteScriptRequestParameters>
+	{
+		
+	
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteScriptRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
+	}
+	
+	
+	///<summary>descriptor for DeleteTemplate
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///</pre>
+	///</summary>
+	public partial class DeleteTemplateDescriptor 
+	{
+		
+	
+	
+	}
+	
+	
 	///<summary>descriptor for Exists
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
@@ -1888,6 +1920,25 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for GetScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public partial class GetScriptDescriptor  : BaseRequest<GetScriptRequestParameters>
+	{
+		
+	
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetScriptRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
+	}
+	
+	
 	///<summary>descriptor for GetSource
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
@@ -2008,6 +2059,19 @@ namespace Nest
 			return this;
 		}
 		
+	
+	}
+	
+	
+	///<summary>descriptor for GetTemplate
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///</pre>
+	///</summary>
+	public partial class GetTemplateDescriptor 
+	{
+		
+	
 	
 	}
 	
@@ -2494,35 +2558,6 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesDeleteTemplateForAll
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
-	///</pre>
-	///</summary>
-	public partial class DeleteTemplateDescriptor 
-	{
-		
-	
-
-		///<summary>Explicit operation timeout</summary>
-		public DeleteTemplateDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
-
-		///<summary>Specify timeout for connection to master</summary>
-		public DeleteTemplateDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
-	
-	}
-	
-	
 	///<summary>descriptor for IndicesDeleteWarmer
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
@@ -2978,35 +3013,6 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesGetTemplateForAll
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
-	///</pre>
-	///</summary>
-	public partial class GetTemplateDescriptor 
-	{
-		
-	
-
-		///<summary>Return settings in flat format (default: false)</summary>
-		public GetTemplateDescriptor FlatSettings(bool flat_settings = true)
-		{
-			this.Request.RequestParameters.FlatSettings(flat_settings);
-			return this;
-		}
-		
-
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetTemplateDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
-	
-	}
-	
-	
 	///<summary>descriptor for IndicesGetWarmerForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
@@ -3349,6 +3355,14 @@ namespace Nest
 		
 	
 
+		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		public PutTemplateDescriptor Create(bool create = true)
+		{
+			this.Request.RequestParameters.Create(create);
+			return this;
+		}
+		
+
 		///<summary>Explicit operation timeout</summary>
 		public PutTemplateDescriptor Timeout(string timeout)
 		{
@@ -3638,7 +3652,7 @@ namespace Nest
 			
 
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
-		public IndicesStatsDescriptor Groups(bool groups = true)
+		public IndicesStatsDescriptor Groups(params string[] groups)
 		{
 			this.Request.RequestParameters.Groups(groups);
 			return this;
@@ -4603,6 +4617,25 @@ namespace Nest
 	{
 		
 	
+	
+	}
+	
+	
+	///<summary>descriptor for PutScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public partial class PutScriptDescriptor  : BaseRequest<PutScriptRequestParameters>
+	{
+		
+	
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutScriptRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
 	
 	}
 	
