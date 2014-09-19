@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration
 		{
 			var host = Host;
 			if (port != 9500 && Process.GetProcessesByName("fiddler").HasAny())
-				host = "localhost.fiddler";
+				host = "ipv4.fiddler";
 
 			var uri = new UriBuilder("http", host, port.GetValueOrDefault(9200)).Uri;
 			return uri;
