@@ -13,13 +13,13 @@ namespace Nest.Tests.Integration.Search.Template
 	[TestFixture]
 	public class SearchTemplateTests : IntegrationTests
 	{
+		private string _template = "{\"from\": \"{{my_from}}\",\"size\": \"{{my_size}}\",\"query\": { \"match\": {\"{{my_field}}\": {\"query\": \"{{my_value}}\" }}}}";
+
 		[Test]
 		public void SearchTemplateByQuery()
 		{
-			var template = "{\"from\": \"{{my_from}}\",\"size\": \"{{my_size}}\",\"query\": { \"match\": {\"{{my_field}}\": {\"query\": \"{{my_value}}\" }}}}";
-
 			var result = this.Client.SearchTemplate<ElasticsearchProject>(s => s
-				.Template(template)
+				.Template(_template)
 				.Params(p => p
 					.Add("my_from", 0)
 					.Add("my_size", 5)
@@ -27,6 +27,27 @@ namespace Nest.Tests.Integration.Search.Template
 					.Add("my_value", "em-elasticsearch")
 				)
 			);
+
+			result.IsValid.Should().BeTrue();
+			result.Hits.Count().Should().BeGreaterThan(0);
+		}
+
+		[Test]
+		public void SearchTemplateByQuery_ObjectInitializer()
+		{
+			var request = new SearchTemplateRequest
+			{
+				Template = _template,
+				Params = new Dictionary<string, object>
+				{
+					{ "my_from", 0 },
+					{ "my_size", 5 },
+					{ "my_field", "name" },
+					{ "my_value", "em-elasticsearch" }
+				}
+			};
+
+			var result = this.Client.SearchTemplate<ElasticsearchProject>(request);
 
 			result.IsValid.Should().BeTrue();
 			result.Hits.Count().Should().BeGreaterThan(0);
