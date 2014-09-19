@@ -85,6 +85,27 @@ namespace Nest
 			return this;
 		}
 
+		
+		/// <summary>
+		/// Manually set the type of which a typename will be inferred
+		/// </summary>
+		public MultiGetOperationDescriptor<T> Type(Type type)
+		{
+			if (type == null) return this;
+			Self.Type = type;
+			return this;
+		}
+
+		public MultiGetOperationDescriptor<T> Id(long id)
+		{
+			return this.Id(id.ToString(CultureInfo.InvariantCulture));
+		}
+
+		public MultiGetOperationDescriptor<T> Id(string id)
+		{
+			Self.Id = id;
+			return this;
+		}
 		/// <summary>
 		/// Control how the document's source is loaded
 		/// </summary>
