@@ -103,6 +103,108 @@ namespace Nest
 				});
 		}
 
+		public IGetSearchTemplateResponse GetSearchTemplate(Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector)
+		{
+			selector = selector ?? (s => s);
+			return this.Dispatch<GetSearchTemplateDescriptor, GetTemplateRequestParameters, GetSearchTemplateResponse>(
+				selector,
+				(p, d) => this.RawDispatch.GetTemplateDispatch<GetSearchTemplateResponse>(p, d)
+			);
+		}
+
+		public IGetSearchTemplateResponse GetSearchTemplate(IGetSearchTemplateRequest request)
+		{
+			return this.Dispatch<IGetSearchTemplateRequest, GetTemplateRequestParameters, GetSearchTemplateResponse>(
+				request,
+				(p, d) => this.RawDispatch.GetTemplateDispatch<GetSearchTemplateResponse>(p, d)
+			);
+		}
+
+		public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector)
+		{
+			selector = selector ?? (s => s);
+			return this.DispatchAsync<GetSearchTemplateDescriptor, GetTemplateRequestParameters, GetSearchTemplateResponse, IGetSearchTemplateResponse>(
+				selector,
+				(p, d) => this.RawDispatch.GetTemplateDispatchAsync<GetSearchTemplateResponse>(p, d)
+			);
+		}
+
+		public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(IGetSearchTemplateRequest request)
+		{
+			return this.DispatchAsync<IGetSearchTemplateRequest, GetTemplateRequestParameters, GetSearchTemplateResponse, IGetSearchTemplateResponse>(
+				request,
+				(p, d) => this.RawDispatch.GetTemplateDispatchAsync<GetSearchTemplateResponse>(p, d)
+			);
+		}
+
+		public IPutSearchTemplateResponse PutSearchTemplate(Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector)
+		{
+			selector = selector ?? (s => s);
+			return this.Dispatch<PutSearchTemplateDescriptor, PutTemplateRequestParameters, PutSearchTemplateResponse>(
+				selector,
+				(p, d) => this.RawDispatch.PutTemplateDispatch<PutSearchTemplateResponse>(p, d)
+			);
+		}
+
+		public IPutSearchTemplateResponse PutSearchTemplate(IPutSearchTemplateRequest request)
+		{
+			return this.Dispatch<IPutSearchTemplateRequest, PutTemplateRequestParameters, PutSearchTemplateResponse>(
+				request,
+				(p, d) => this.RawDispatch.PutTemplateDispatch<PutSearchTemplateResponse>(p, d)
+			);
+		}
+
+		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector)
+		{
+			selector = selector ?? (s => s);
+			return this.DispatchAsync<PutSearchTemplateDescriptor, PutTemplateRequestParameters, PutSearchTemplateResponse, IPutSearchTemplateResponse>(
+				selector,
+				(p, d) => this.RawDispatch.PutTemplateDispatchAsync<PutSearchTemplateResponse>(p, d)
+			);
+		}
+
+		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request)
+		{
+			return this.DispatchAsync<IPutSearchTemplateRequest, PutTemplateRequestParameters, PutSearchTemplateResponse, IPutSearchTemplateResponse>(
+				request,
+				(p, d) => this.RawDispatch.PutTemplateDispatchAsync<PutSearchTemplateResponse>(p, d)
+			);
+		}
+
+		public IDeleteSearchTemplateResponse DeleteSearchTemplate(Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector)
+		{
+			selector = selector ?? (s => s);
+			return this.Dispatch<DeleteSearchTemplateDescriptor, DeleteTemplateRequestParameters, DeleteSearchTemplateResponse>(
+				selector,
+				(p, d) => this.RawDispatch.DeleteTemplateDispatch<DeleteSearchTemplateResponse>(p)
+			);
+		}
+
+		public IDeleteSearchTemplateResponse DeleteSearchTemplate(IDeleteSearchTemplateRequest request)
+		{
+			return this.Dispatch<IDeleteSearchTemplateRequest, DeleteTemplateRequestParameters, DeleteSearchTemplateResponse>(
+				request,
+				(p, d) => this.RawDispatch.DeleteTemplateDispatch<DeleteSearchTemplateResponse>(p)
+			);
+		}
+
+		public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector)
+		{
+			selector = selector ?? (s => s);
+			return this.DispatchAsync<DeleteSearchTemplateDescriptor, DeleteTemplateRequestParameters, DeleteSearchTemplateResponse, IDeleteSearchTemplateResponse>(
+				selector,
+				(p, d) => this.RawDispatch.DeleteTemplateDispatchAsync<DeleteSearchTemplateResponse>(p)
+			);
+		}
+
+		public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request)
+		{
+			return this.DispatchAsync<IDeleteSearchTemplateRequest, DeleteTemplateRequestParameters, DeleteSearchTemplateResponse, IDeleteSearchTemplateResponse>(
+				request,
+				(p, d) => this.RawDispatch.DeleteTemplateDispatchAsync<DeleteSearchTemplateResponse>(p)
+			);
+		}
+
 		private SearchResponse<TResult> FieldsSearchDeserializer<T, TResult>(IElasticsearchResponse response, Stream stream, ISearchTemplateRequest d)
 			where T : class
 			where TResult : class
@@ -130,66 +232,6 @@ namespace Nest
 		{
 			SearchTemplatePathInfo.CloseOverAutomagicCovariantResultSelector(this.Infer, originalSearchDescriptor);
 			return originalSearchDescriptor.TypeSelector == null ? null : new ConcreteTypeConverter<TResult>(originalSearchDescriptor.TypeSelector);
-		}
-
-		public IGetSearchTemplateResponse GetSearchTemplate(Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector)
-		{
-			throw new NotImplementedException();
-		}
-
-		public IGetSearchTemplateResponse GetSearchTemplate(IGetSearchTemplateRequest request)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(IGetSearchTemplateRequest request)
-		{
-			throw new NotImplementedException();
-		}
-
-		public IPutSearchTemplateResponse PutSearchTemplate(Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector)
-		{
-			throw new NotImplementedException();
-		}
-
-		public IPutSearchTemplateResponse PutSearchTemplate(IPutSearchTemplateRequest request)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request)
-		{
-			throw new NotImplementedException();
-		}
-
-		public IDeleteSearchTemplateResponse DeleteSearchTemplate(Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector)
-		{
-			throw new NotImplementedException();
-		}
-
-		public IDeleteSearchTemplateResponse DeleteSearchTemplate(IDeleteSearchTemplateRequest request)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request)
-		{
-			throw new NotImplementedException();
 		}
 	}
 }

@@ -52,6 +52,52 @@ namespace Nest.Tests.Integration.Search.Template
 			result.IsValid.Should().BeTrue();
 			result.Hits.Count().Should().BeGreaterThan(0);
 		}
+
+		public void SearchTemplateById()
+		{
+			var templateName = "myIndexedTemplate";
+
+			var putTemplateResult = this.Client.PutSearchTemplate(t => t
+				.Name(templateName)
+				.Template(_template)
+			);
+			putTemplateResult.IsValid.Should().BeTrue();
+
+			var result = this.Client.SearchTemplate<ElasticsearchProject>(s => s
+				.Id(templateName)
+				.Params(p => p
+					.Add("my_from", 0)
+					.Add("my_size", 5)
+					.Add("my_field", "name")
+					.Add("my_value", "em-elasticsearch")
+				)
+			);
+
+			result.IsValid.Should().BeTrue();
+			result.Hits.Count().Should().BeGreaterThan(0);
+
+			var deleteTemplateResult = this.Client.DeleteSearchTemplate(t => t.Name(templateName));
+			deleteTemplateResult.IsValid.Should().BeTrue();
+		}
+
+		[Test]
+		public void PutGetAndDeleteTemplate()
+		{
+			var templateName = "myIndexedTemplate";
+
+			var putResult = this.Client.PutSearchTemplate(t => t
+					.Name(templateName)
+					.Template(_template)
+				);
+			putResult.IsValid.Should().BeTrue();
+
+			var getResult = this.Client.GetSearchTemplate(t => t.Name(templateName));
+			getResult.IsValid.Should().BeTrue();
+			getResult.Template.ShouldBeEquivalentTo(_template);
+			
+			var deleteResult = this.Client.DeleteSearchTemplate(t => t.Name(templateName));
+			deleteResult.IsValid.Should().BeTrue();
+		}
 	}
 }
 

@@ -8,37 +8,37 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteSearchTemplateRequest : INamePath<SearchTemplateRequestParameters> { }
+	public interface IDeleteSearchTemplateRequest : INamePath<DeleteTemplateRequestParameters> { }
 
 	public partial class DeleteSearchTemplateRequest 
-		: NamePathBase<SearchTemplateRequestParameters>, IDeleteSearchTemplateRequest
+		: NamePathBase<DeleteTemplateRequestParameters>, IDeleteSearchTemplateRequest
 	{
 		public DeleteSearchTemplateRequest(string templateName)
 			: base(templateName)
 		{
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo)
 		{
-			DeleteSearchTemplatePathInfo.Update(pathInfo);
+			DeleteSearchTemplatePathInfo.Update(pathInfo, this);
 		}
 	}
 
 	internal static class DeleteSearchTemplatePathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
+		public static void Update(ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo, IDeleteSearchTemplateRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+			pathInfo.Id = request.Name;
+			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
 		}
 	}
 
-	[DescriptorFor("SearchTemplateDelete")]
 	public partial class DeleteSearchTemplateDescriptor 
-		: NamePathDescriptor<DeleteSearchTemplateDescriptor, SearchTemplateRequestParameters>, IDeleteSearchTemplateRequest
+		: NamePathDescriptor<DeleteSearchTemplateDescriptor, DeleteTemplateRequestParameters>, IDeleteSearchTemplateRequest
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo)
 		{
-			DeleteSearchTemplatePathInfo.Update(pathInfo);
+			DeleteSearchTemplatePathInfo.Update(pathInfo, this);
 		}
 	}
 }

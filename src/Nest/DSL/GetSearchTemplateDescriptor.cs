@@ -8,39 +8,39 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetSearchTemplateRequest : INamePath<SearchTemplateRequestParameters>
+	public interface IGetSearchTemplateRequest : INamePath<GetTemplateRequestParameters>
 	{
 	}
 
 	public partial class GetSearchTemplateRequest 
-		: NamePathBase<SearchTemplateRequestParameters>, IGetSearchTemplateRequest
+		: NamePathBase<GetTemplateRequestParameters>, IGetSearchTemplateRequest
 	{
 		public GetSearchTemplateRequest(string templateName)
 			: base(templateName)
 		{
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo)
 		{
-			GetSearchTemplatePathInfo.Update(pathInfo);
+			GetSearchTemplatePathInfo.Update(pathInfo, this);
 		}
 	}
 
 	internal static class GetSearchTemplatePathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
+		public static void Update(ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo, IGetSearchTemplateRequest request)
 		{
+			pathInfo.Id = request.Name;
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 		}
 	}
 
-	[DescriptorFor("SearchTemplateGet")]
 	public partial class GetSearchTemplateDescriptor 
-		: NamePathDescriptor<GetSearchTemplateDescriptor, SearchTemplateRequestParameters>, IGetSearchTemplateRequest
+		: NamePathDescriptor<GetSearchTemplateDescriptor, GetTemplateRequestParameters>, IGetSearchTemplateRequest
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo)
 		{
-			GetSearchTemplatePathInfo.Update(pathInfo);
+			GetSearchTemplatePathInfo.Update(pathInfo, this);
 		}
 	}
 }
