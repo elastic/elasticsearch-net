@@ -240,7 +240,7 @@
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />
     <Compile Include="Startup\StartupTests.cs" />
-    <Compile Include="Template\TemplateTests.cs" />
+    <Compile Include="Indices\IndicesTemplateTests.cs" />
     <Compile Include="Warmers\IndicesWarmersTests.cs" />
     <Compile Include="Warmers\WarmersTests.cs" />
   </ItemGroup>
