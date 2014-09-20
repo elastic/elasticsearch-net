@@ -817,37 +817,37 @@ namespace Nest
 			where TResult : class;
 
 		/// <inheritdoc />
-		IGetSearchTemplateResponse GetSearchTemplate(Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector);
+		IGetSearchTemplateResponse GetSearchTemplate(string name, Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector = null);
 
 		/// <inheritdoc />
 		IGetSearchTemplateResponse GetSearchTemplate(IGetSearchTemplateRequest request);
 
 		/// <inheritdoc />
-		Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector);
+		Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(string name, Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector = null);
 
 		/// <inheritdoc />
 		Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(IGetSearchTemplateRequest request);
 
 		/// <inheritdoc />
-		IPutSearchTemplateResponse PutSearchTemplate(Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector);
+		IPutSearchTemplateResponse PutSearchTemplate(string name, Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector = null);
 
 		/// <inheritdoc />
 		IPutSearchTemplateResponse PutSearchTemplate(IPutSearchTemplateRequest request);
 
 		/// <inheritdoc />
-		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector);
+		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(string name, Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector = null);
 
 		/// <inheritdoc />
 		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request);
 
 		/// <inheritdoc />
-		IDeleteSearchTemplateResponse DeleteSearchTemplate(Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector);
+		IDeleteSearchTemplateResponse DeleteSearchTemplate(string name, Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector = null);
 
 		/// <inheritdoc />
 		IDeleteSearchTemplateResponse DeleteSearchTemplate(IDeleteSearchTemplateRequest request);
 
 		/// <inheritdoc />
-		Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector);
+		Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(string name, Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector = null);
 
 		/// <inheritdoc />
 		Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request);

@@ -53,14 +53,12 @@ namespace Nest.Tests.Integration.Search.Template
 			result.Hits.Count().Should().BeGreaterThan(0);
 		}
 
+		[Test]
 		public void SearchTemplateById()
 		{
 			var templateName = "myIndexedTemplate";
 
-			var putTemplateResult = this.Client.PutSearchTemplate(t => t
-				.Name(templateName)
-				.Template(_template)
-			);
+			var putTemplateResult = this.Client.PutSearchTemplate(templateName, t => t.Template(_template));
 			putTemplateResult.IsValid.Should().BeTrue();
 
 			var result = this.Client.SearchTemplate<ElasticsearchProject>(s => s
@@ -76,7 +74,7 @@ namespace Nest.Tests.Integration.Search.Template
 			result.IsValid.Should().BeTrue();
 			result.Hits.Count().Should().BeGreaterThan(0);
 
-			var deleteTemplateResult = this.Client.DeleteSearchTemplate(t => t.Name(templateName));
+			var deleteTemplateResult = this.Client.DeleteSearchTemplate(templateName);
 			deleteTemplateResult.IsValid.Should().BeTrue();
 		}
 
@@ -85,17 +83,14 @@ namespace Nest.Tests.Integration.Search.Template
 		{
 			var templateName = "myIndexedTemplate";
 
-			var putResult = this.Client.PutSearchTemplate(t => t
-					.Name(templateName)
-					.Template(_template)
-				);
+			var putResult = this.Client.PutSearchTemplate(templateName, t => t.Template(_template));
 			putResult.IsValid.Should().BeTrue();
 
-			var getResult = this.Client.GetSearchTemplate(t => t.Name(templateName));
+			var getResult = this.Client.GetSearchTemplate(templateName);
 			getResult.IsValid.Should().BeTrue();
 			getResult.Template.ShouldBeEquivalentTo(_template);
 			
-			var deleteResult = this.Client.DeleteSearchTemplate(t => t.Name(templateName));
+			var deleteResult = this.Client.DeleteSearchTemplate(templateName);
 			deleteResult.IsValid.Should().BeTrue();
 		}
 	}
