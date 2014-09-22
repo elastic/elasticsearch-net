@@ -86,6 +86,8 @@ namespace Nest
 		IIndicesQuery IQueryContainer.Indices { get; set; }
 
 		IFunctionScoreQuery IQueryContainer.FunctionScore { get; set; }
+
+		ITemplateQuery IQueryContainer.Template { get; set; }
 		
 		public QueryContainer() {}
 		

@@ -202,6 +202,7 @@
     <Compile Include="DSL\PutSearchTemplateDescriptor.cs" />
     <Compile Include="DSL\DeleteSearchTemplateDescriptor.cs" />
     <Compile Include="DSL\GetSearchTemplateDescriptor.cs" />
+    <Compile Include="DSL\Query\TemplateQueryDescriptor.cs" />
     <Compile Include="DSL\Template\TemplateSectionQueryContainer.cs" />
     <Compile Include="DSL\Template\TemplateSectionSortFieldDescriptor.cs" />
     <Compile Include="DSL\CatIndicesDescriptor.cs" />

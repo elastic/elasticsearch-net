@@ -854,5 +854,12 @@ namespace Nest
 			return this.New(query, q => q.FunctionScore = query);
 
 		}
+
+		public QueryContainer Template(Action<TemplateQueryDescriptor> selector)
+		{
+			var query = new TemplateQueryDescriptor();
+			selector(query);
+			return this.New(query, q => q.Template = query);
+		}
 	}
 }
