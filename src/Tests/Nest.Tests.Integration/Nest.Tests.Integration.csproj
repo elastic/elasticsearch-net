@@ -66,7 +66,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -111,17 +110,13 @@
     <Compile Include="Core\Cat\CatTests.cs" />
     <Compile Include="Core\Explain\ExplainTests.cs" />
     <Compile Include="Core\Exists\AliasExists.cs" />
-    <Compile Include="Core\Repository\CreateRepositoryTests.cs" />
-    <Compile Include="Core\SearchShards\SearchShardsTests.cs" />
     <Compile Include="Core\GetFieldMapping\GetFieldMappingTests.cs" />
     <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
     <Compile Include="Core\Percolate\PercolateTests.cs" />
     <Compile Include="Core\Map\Mapping\MappingTransformTests.cs" />
     <Compile Include="Core\PingTests.cs" />
-    <Compile Include="Core\Repository\SnapshotStatusTests.cs" />
-    <Compile Include="Core\Repository\RestoreStatusTests.cs" />
     <Compile Include="Core\Repository\RestoreTests.cs" />
-    <Compile Include="Core\Repository\GetRepositoryTests.cs" />
+    <Compile Include="Core\Repository\CreateRepositoryTests.cs" />
     <Compile Include="Core\ClearScroll\ClearScrollTests.cs" />
     <Compile Include="Core\Exists\DocumentExistsTests.cs" />
     <Compile Include="Core\Suggest\SuggestTests.cs" />
@@ -176,9 +171,8 @@
     <Compile Include="Indices\StatsTests.cs" />
     <Compile Include="Core\AsyncTests.cs" />
     <Compile Include="Mapping\MappingVisitorTests.cs" />
-    <Compile Include="Reproduce\Reproduce953Tests.cs" />
-    <Compile Include="Reproduce\Reproduce945Tests.cs" />
     <Compile Include="Reproduce\Reproduce769Tests.cs" />
+    <Compile Include="Reproduce\Reproduce960Tests.cs" />
     <Compile Include="Search\Filter\AndOrNotFilterTests.cs" />
     <Compile Include="Search\Filter\ScriptFilterTests.cs" />
     <Compile Include="Search\Filter\MissingExistsFilterTests.cs" />
@@ -246,15 +240,10 @@
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />
     <Compile Include="Startup\StartupTests.cs" />
-    <Compile Include="Template\TemplateTests.cs" />
     <Compile Include="Warmers\IndicesWarmersTests.cs" />
     <Compile Include="Warmers\WarmersTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj">
-      <Project>{a69322fd-b874-44ef-abe0-63f4a7b5593e}</Project>
-      <Name>Elasticsearch.Net.Connection.HttpClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj">
       <Project>{e97ccf40-0ba6-43fe-9f2d-58d454134088}</Project>
       <Name>Elasticsearch.Net</Name>
