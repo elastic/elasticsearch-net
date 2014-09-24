@@ -26,5 +26,20 @@ namespace Nest.Tests.Unit.Search.Query.Singles.MultiMatch
 				);
 			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
 		}
+
+		[Test]
+		public void TestMultiMatchOnFieldsWithBoost()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.MultiMatch(m => m
+						.OnFieldsWithBoost(f=>f.Add("field1", 1.2).Add("field2",.9))
+						.Query("this is a query")
+					)
+				);
+			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
+		}
 	}
 }
