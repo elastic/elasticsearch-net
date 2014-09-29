@@ -140,6 +140,13 @@ namespace Nest
 			((IMultiMatchQuery)this).Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
 			return this;
 		}
+		public MultiMatchQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<string, double?>> boostableSelector)
+		{
+			var d = new FluentDictionary<string, double?>();
+			boostableSelector(d);
+			((IMultiMatchQuery)this).Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
+			return this;
+		}
 
 		public MultiMatchQueryDescriptor<T> Query(string query)
 		{
