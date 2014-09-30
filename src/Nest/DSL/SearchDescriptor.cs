@@ -82,9 +82,11 @@ namespace Nest
 		string Preference { get; }
 		
 		string Routing { get; }
-		
+
 		SearchType? SearchType { get;  }
-		
+
+		bool? IgnoreUnavalable { get; }
+
 		Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set;}
 		
 		SearchRequestParameters QueryString { get; set; }
@@ -172,6 +174,12 @@ namespace Nest
 					: string.Join(",", routing);
 			}
 		}
+
+		bool? ISearchRequest.IgnoreUnavalable
+		{
+			get { return this.QueryString == null ? null : this.QueryString.GetQueryStringValue<bool?>("ignore_unavailable"); }
+		}
+
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 
 		public SearchRequestParameters QueryString { get; set; }
@@ -233,6 +241,12 @@ namespace Nest
 					: string.Join(",", routing);
 			}
 		}
+
+		bool? ISearchRequest.IgnoreUnavalable
+		{
+			get { return this.QueryString == null ? null : this.QueryString.GetQueryStringValue<bool?>("ignore_unavailable");  }
+		}
+
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 		public SearchRequestParameters QueryString { get; set; }
 	}
@@ -271,6 +285,11 @@ namespace Nest
 					? null
 					: string.Join(",", routing);
 			}
+		}
+
+		bool? ISearchRequest.IgnoreUnavalable
+		{
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable"); }
 		}
 
 		Type ISearchRequest.ClrType { get { return typeof(T); } }

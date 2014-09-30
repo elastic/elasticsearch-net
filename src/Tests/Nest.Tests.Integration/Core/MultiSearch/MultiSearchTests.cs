@@ -58,6 +58,7 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 		{
 			var result = this.Client.MultiSearch(b => b
 				.Search<ElasticsearchProject>(s => s
+					.IgnoreUnavailable()
 					.Query(q=>q.Term(p=>p.Name, "NEST"))
 					.Filter(f => f.Term(p => p.Name, "NEST"))
 					.FacetTerm(tf=>tf.OnField(p=>p.Name).Global())
