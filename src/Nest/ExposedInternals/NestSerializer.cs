@@ -288,7 +288,8 @@ namespace Nest
 					type = path.Type,
 					search_type = this.GetSearchType(operation, multiSearchRequest),
 					preference = operation.Preference,
-					routing = operation.Routing
+					routing = operation.Routing,
+					ignore_unavailable = operation.IgnoreUnavalable
 				};
 				var opJson = this.Serialize(op, SerializationFormatting.None).Utf8String();
 
