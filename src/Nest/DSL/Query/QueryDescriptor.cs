@@ -466,10 +466,10 @@ namespace Nest
 
 			var filtered = query as IFilteredQuery;
 			
-			if (filtered.Query.IsConditionless)
+			if (filtered.Query != null && filtered.Query.IsConditionless)
 				filtered.Query = null;
 			
-			if (filtered.Filter.IsConditionless)
+			if (filtered.Filter != null && filtered.Filter.IsConditionless)
 				filtered.Filter = null;
 
 			return this.New(query, q => q.Filtered = query);
