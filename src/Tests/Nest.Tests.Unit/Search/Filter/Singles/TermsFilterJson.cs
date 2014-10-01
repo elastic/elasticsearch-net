@@ -165,8 +165,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 							  filtered: {
 							  query: {
 							    match_all: {}
-							  },
-							  filter: {}
+							  }
 							}
 						  }";
 			Assert.True(json.JsonEquals(expected), json);
