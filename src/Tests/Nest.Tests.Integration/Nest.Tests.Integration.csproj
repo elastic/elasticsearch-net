@@ -180,6 +180,7 @@
     <Compile Include="Search\Filter\PrefixFilterTests.cs" />
     <Compile Include="Search\Filter\RangeFilterTests.cs" />
     <Compile Include="Search\Query\BoolQueryResults.cs" />
+    <Compile Include="Search\Query\FilteredQueryTests.cs" />
     <Compile Include="Search\Query\SpanQueryTests.cs" />
     <Compile Include="Search\Query\TermToString.cs" />
     <Compile Include="Core\UpdateTests.cs" />

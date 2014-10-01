@@ -57,6 +57,7 @@ namespace Nest
 
 			if (fillProperty != null)
 				fillProperty(q);
+
 			return q;
 		}
 
@@ -462,6 +463,14 @@ namespace Nest
 		{
 			var query = new FilteredQueryDescriptor<T>();
 			selector(query);
+
+			var filtered = query as IFilteredQuery;
+			
+			if (filtered.Query.IsConditionless)
+				filtered.Query = null;
+			
+			if (filtered.Filter.IsConditionless)
+				filtered.Filter = null;
 
 			return this.New(query, q => q.Filtered = query);
 		}
