@@ -197,14 +197,10 @@
     <Compile Include="Domain\Stats\PercolateStats.cs" />
     <Compile Include="Domain\Stats\PluginStats.cs" />
     <Compile Include="Domain\Stats\SegmentsStats.cs" />
-    <Compile Include="Domain\Template\ITemplateSection.cs" />
-    <Compile Include="Domain\Template\TemplateBuilder.cs" />
     <Compile Include="DSL\PutSearchTemplateDescriptor.cs" />
     <Compile Include="DSL\DeleteSearchTemplateDescriptor.cs" />
     <Compile Include="DSL\GetSearchTemplateDescriptor.cs" />
     <Compile Include="DSL\Query\TemplateQueryDescriptor.cs" />
-    <Compile Include="DSL\Query\TemplateSectionQueryContainer.cs" />
-    <Compile Include="DSL\Search\TemplateSectionSortFieldDescriptor.cs" />
     <Compile Include="DSL\CatIndicesDescriptor.cs" />
     <Compile Include="DSL\CatShardsDescriptor.cs" />
     <Compile Include="DSL\CatThreadPoolDescriptor.cs" />
@@ -904,7 +900,6 @@
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />
     <Compile Include="Resolvers\Converters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexNameMarkerConverter.cs" />
-    <Compile Include="Resolvers\Converters\TemplateSectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TokenFilterCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TokenizerCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TypeNameMarkerConverter.cs" />
