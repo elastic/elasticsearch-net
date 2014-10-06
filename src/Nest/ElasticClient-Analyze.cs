@@ -16,7 +16,6 @@ namespace Nest
 					IRequest<AnalyzeRequestParameters> request = d;
 					var text = request.RequestParameters.GetQueryStringValue<string>("text");
 					request.RequestParameters.RemoveQueryString("text");
-					text.ThrowIfNullOrEmpty("No text specified to analyze");
 					return this.RawDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, text);
 				}
 			);
@@ -32,7 +31,6 @@ namespace Nest
 					IRequest<AnalyzeRequestParameters> request = d;
 					var text = request.RequestParameters.GetQueryStringValue<string>("text");
 					request.RequestParameters.RemoveQueryString("text");
-					text.ThrowIfNullOrEmpty("No text specified to analyze");
 					return this.RawDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, text);
 				}
 			);
@@ -48,7 +46,6 @@ namespace Nest
 					IRequest<AnalyzeRequestParameters> request = d;
 					var text = request.RequestParameters.GetQueryStringValue<string>("text");
 					request.RequestParameters.RemoveQueryString("text");
-					text.ThrowIfNullOrEmpty("No text specified to analyze");
 					return this.RawDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, text);
 				}
 			);
@@ -64,7 +61,6 @@ namespace Nest
 					IRequest<AnalyzeRequestParameters> request = d;
 					var text = request.RequestParameters.GetQueryStringValue<string>("text");
 					request.RequestParameters.RemoveQueryString("text");
-					text.ThrowIfNullOrEmpty("No text specified to analyze");
 					return this.RawDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, text);
 				}
 			);

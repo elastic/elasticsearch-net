@@ -38,9 +38,6 @@ namespace Elasticsearch.Net.Connection
 
 			var innerHandler = handler ?? new WebRequestHandler();
 
-			if (settings.EnableCompressedResponses)
-				innerHandler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-
 			if (innerHandler.SupportsProxy && !string.IsNullOrWhiteSpace(_settings.ProxyAddress))
 			{
 				innerHandler.Proxy = new WebProxy(_settings.ProxyAddress)
@@ -56,6 +53,12 @@ namespace Elasticsearch.Net.Connection
 			{
 				Timeout = TimeSpan.FromMilliseconds(_settings.Timeout)
 			};
+			if (settings.EnableCompressedResponses && innerHandler.SupportsAutomaticDecompression)
+			{
+				innerHandler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+				Client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+				Client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
+			}
 
 		}
 
@@ -126,7 +129,6 @@ namespace Elasticsearch.Net.Connection
 				else if (!string.IsNullOrWhiteSpace(DefaultContentType))
 					request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(DefaultContentType));
 
-
 				if (!string.IsNullOrEmpty(uri.UserInfo))
 				{
 					request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes(uri.UserInfo)));
@@ -141,7 +143,7 @@ namespace Elasticsearch.Net.Connection
 
 				var response = await Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
 
-				if (method == HttpMethod.Head || response.Content == null || !response.Content.Headers.ContentLength.HasValue || response.Content.Headers.ContentLength.Value <= 0)
+				if (method == HttpMethod.Head || response.Content == null)
 				{
 					return ElasticsearchResponse<Stream>.Create(_settings, (int)response.StatusCode, method.ToString().ToLowerInvariant(), uri.ToString(), data);
 				}
