@@ -11,6 +11,8 @@ namespace Nest
 	{
 		private static readonly IEnumerable<QueryContainer> Empty = Enumerable.Empty<QueryContainer>();
 
+		private IQueryContainer Self { get { return this; } }
+
 		IBoolQuery IQueryContainer.Bool { get; set; }
 
 		string IQueryContainer.RawQuery { get; set; }
@@ -88,12 +90,18 @@ namespace Nest
 		IFunctionScoreQuery IQueryContainer.FunctionScore { get; set; }
 		
 		public QueryContainer() {}
-		
+	
 		public QueryContainer(PlainQuery query)
 		{
 			PlainQuery.ToContainer(query, this);
 		}
-		
+	
+		internal QueryContainer(Action<IQueryContainer> setter)
+		{
+			if (setter == null) return;
+			setter(this);
+		}
+
 		public static QueryContainer From(PlainQuery query)
 		{
 			return PlainQuery.ToContainer(query);
@@ -106,20 +114,17 @@ namespace Nest
 			walker.Walk(this, visitor);
 		}
 
-
-
-
 		bool IQueryContainer.IsConditionless { get; set; }
 
-		public bool IsConditionless { get { return ((IQueryContainer)this).IsConditionless; } }
+		public bool IsConditionless { get { return Self.IsConditionless; } }
 
 		bool IQueryContainer.IsStrict { get; set; }
 
-		public bool IsStrict { get { return ((IQueryContainer)this).IsStrict; } }
+		public bool IsStrict { get { return Self.IsStrict; } }
 		
 		bool IQueryContainer.IsVerbatim { get; set; }
 
-		public bool IsVerbatim { get { return ((IQueryContainer)this).IsVerbatim; } }
+		public bool IsVerbatim { get { return Self.IsVerbatim; } }
 
 		/// <summary>
 		/// AND's two BaseQueries
@@ -162,80 +167,28 @@ namespace Nest
 			var joinRight = SingleSideAndMerge(rightQuery, leftQuery);
 			return joinRight ?? defaultQuery;
 		}
-
+		
 		public static QueryContainer operator |(QueryContainer leftQuery, QueryContainer rightQuery)
 		{
-			var defaultQuery = new QueryContainer();
-			((IQueryContainer)defaultQuery).IsConditionless = true;
-			leftQuery = leftQuery ?? defaultQuery;
-			rightQuery = rightQuery ?? defaultQuery;
-			var combined = new[] { leftQuery, rightQuery };
+			var combined = new [] { leftQuery, rightQuery };
+			if (combined.Any(bf => bf == null || bf.IsConditionless))
+				return combined.FirstOrDefault(bf => bf != null && !bf.IsConditionless) ?? CreateEmptyContainer();
 
-			if (combined.Any(bf => ((IQueryContainer)bf).IsConditionless))
-				return combined.FirstOrDefault(bf => !((IQueryContainer)bf).IsConditionless) ?? defaultQuery;
-
-			var leftBoolQuery = ((IQueryContainer)leftQuery).Bool;
-			var rightBoolQuery = ((IQueryContainer)rightQuery).Bool;
-
-
-			var f = new QueryContainer();
-			var fq = new BoolBaseQueryDescriptor();
-			((IBoolQuery)fq).Should = new[] { leftQuery, rightQuery };
-			((IQueryContainer)f).Bool = fq;
-
-			var mergeLeft = !((IQueryContainer)leftQuery).IsStrict && (leftBoolQuery == null || ((IBoolQuery)leftBoolQuery).MinimumShouldMatch == null);
-			var mergeRight = !((IQueryContainer)rightQuery).IsStrict && (rightBoolQuery == null || ((IBoolQuery)rightBoolQuery).MinimumShouldMatch == null);
-
-			//if neither the left nor the right side represent a bool query join them
-			if (((IQueryContainer)leftQuery).Bool == null && ((IQueryContainer)rightQuery).Bool == null)
-			{
-				((IBoolQuery)fq).Should = leftQuery.MergeShouldQueries(rightQuery);
-				return f;
-			}
-			//if the left or right sight already is a bool query join the non bool query side of the 
-			//of the operation onto the other.
-			if (((IQueryContainer)leftQuery).Bool != null 
-				&& ((IQueryContainer)rightQuery).Bool == null
-				&& mergeLeft)
-			{
-				JoinShouldOnSide(leftQuery, rightQuery, fq);
-			}
-			else if (((IQueryContainer)rightQuery).Bool != null 
-				&& ((IQueryContainer)leftQuery).Bool == null
-				&& mergeRight)
-			{
-				JoinShouldOnSide(rightQuery, leftQuery, fq);
-			}
-			//both sides already represent a bool query
-			else
-			{
-				//both sides report that we may merge the shoulds
-				if (mergeLeft && mergeRight
-					&& leftBoolQuery.CanJoinShould()
-					&& rightBoolQuery.CanJoinShould())
-					((IBoolQuery)fq).Should = leftQuery.MergeShouldQueries(rightQuery);
-				else
-					//create a new nested bool with two separate should bool sections
-					((IBoolQuery)fq).Should = new[] { leftQuery, rightQuery };
-			}
-			return f;
+			IQueryContainer f = new QueryContainer();
+			f.Bool = new BoolBaseQueryDescriptor();
+			f.Bool.Should = leftQuery.MergeShouldQueries(rightQuery);
+			return f as QueryContainer;
 		}
 
 		public static QueryContainer operator !(QueryContainer lbq)
 		{
 			if (lbq == null || ((IQueryContainer)lbq).IsConditionless)
-			{
-				var newConditionless = new QueryContainer();
-				((IQueryContainer)newConditionless).IsConditionless = true;
-				return newConditionless;
-			}
+				return CreateEmptyContainer();
 
-			var f = new QueryContainer();
-			var fq = new BoolBaseQueryDescriptor();
-			((IBoolQuery)fq).MustNot = new[] { lbq };
-
-			((IQueryContainer)f).Bool = fq;
-			return f;
+			IQueryContainer f = new QueryContainer();
+			f.Bool = new BoolBaseQueryDescriptor();
+			f.Bool.MustNot = new[] { lbq };
+			return f as QueryContainer;
 		}
 
 		public static bool operator false(QueryContainer a)
@@ -247,10 +200,13 @@ namespace Nest
 		{
 			return false;
 		}
+		
 
-		private static void JoinShouldOnSide(QueryContainer lbq, QueryContainer rbq, BoolBaseQueryDescriptor bq)
+		private static QueryContainer CreateEmptyContainer()
 		{
-			((IBoolQuery)bq).Should = lbq.MergeShouldQueries(rbq);
+			var q = new QueryContainer();
+			((IQueryContainer)q).IsConditionless = true;
+			return q;
 		}
 
 		private static QueryContainer CombineIfNoMergeIsNecessary(
@@ -264,8 +220,8 @@ namespace Nest
 			//  or if all boolqueries are strict.
 			//  or if one side is strict and the other is null
 
-			var mergeLeft = !((IQueryContainer)leftQuery).IsStrict && (leftBoolQuery == null || ((IBoolQuery)leftBoolQuery).MinimumShouldMatch == null);
-			var mergeRight = !((IQueryContainer)rightQuery).IsStrict && (rightBoolQuery == null || ((IBoolQuery)rightBoolQuery).MinimumShouldMatch == null);
+			var mergeLeft = !((IQueryContainer)leftQuery).IsStrict && (leftBoolQuery == null || leftBoolQuery.MinimumShouldMatch == null);
+			var mergeRight = !((IQueryContainer)rightQuery).IsStrict && (rightBoolQuery == null || rightBoolQuery.MinimumShouldMatch == null);
 
 			//no merging is needed just return the combination
 			if (
@@ -289,13 +245,14 @@ namespace Nest
 
 			return CreateReturnQuery((returnQuery, returnBoolQuery) =>
 			{
-				if (((IBoolQuery)mergeBoolQuery).MustNot.HasAny())
+				if (mergeBoolQuery.MustNot.HasAny())
 				{
-					((IBoolQuery)returnBoolQuery).MustNot = ((IBoolQuery)mergeBoolQuery).MustNot;
-					((IBoolQuery)mergeBoolQuery).MustNot = null;
+					((IBoolQuery)returnBoolQuery).MustNot = mergeBoolQuery.MustNot;
+					mergeBoolQuery.MustNot = null;
 				}
 
-				((IBoolQuery)returnBoolQuery).Must = new[] { targetQuery }.Concat(((IBoolQuery)mergeBoolQuery).Must ?? Empty);
+				((IBoolQuery)returnBoolQuery).Must = new[] { targetQuery }
+					.Concat(mergeBoolQuery.Must ?? Empty);
 			});
 		}
 
@@ -315,14 +272,14 @@ namespace Nest
 					return;
 				}
 
-				((IBoolQuery)returnBoolQuery).Must = (((IBoolQuery)targetBoolQuery).Must ?? Empty)
+				((IBoolQuery)returnBoolQuery).Must = (targetBoolQuery.Must ?? Empty)
 					.Concat(mergeBoolQuery != null
-						? (((IBoolQuery)mergeBoolQuery).Must ?? Empty)
+						? (mergeBoolQuery.Must ?? Empty)
 						: new[] { mergeQuery })
 					.NullIfEmpty();
-				((IBoolQuery)returnBoolQuery).MustNot = (((IBoolQuery)targetBoolQuery).MustNot ?? Empty)
+				((IBoolQuery)returnBoolQuery).MustNot = (targetBoolQuery.MustNot ?? Empty)
 					.Concat(mergeBoolQuery != null
-						? (((IBoolQuery)mergeBoolQuery).MustNot ?? Empty)
+						? (mergeBoolQuery.MustNot ?? Empty)
 						: Empty
 					).NullIfEmpty();
 
