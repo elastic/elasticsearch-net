@@ -184,10 +184,12 @@
     <Compile Include="Domain\Responses\ClusterStatsResponse.cs" />
     <Compile Include="Domain\Responses\ClusterPendingTasksResponse.cs" />
     <Compile Include="Domain\Responses\DeleteAliasResponse.cs" />
+    <Compile Include="Domain\Responses\DeleteSearchTemplateResponse.cs" />
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Cat\ICatRecord.cs" />
     <Compile Include="Domain\Responses\GetRepositoryResponse.cs" />
+    <Compile Include="Domain\Responses\GetSearchTemplateResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
     <Compile Include="Domain\Responses\NodesHotThreadsResponse.cs" />
     <Compile Include="Domain\Responses\PutAliasResponse.cs" />
@@ -203,6 +205,7 @@
     <Compile Include="Domain\Responses\RecoveryStatusResponse.cs" />
     <Compile Include="Domain\Recovery\RecoveryTranslogStatus.cs" />
     <Compile Include="Domain\Responses\ShardRecovery.cs" />
+    <Compile Include="Domain\Responses\PutSearchTemplateResponse.cs" />
     <Compile Include="Domain\Stats\ClusterNodesStas.cs" />
     <Compile Include="Domain\Stats\CompletionStats.cs" />
     <Compile Include="Domain\Stats\FieldDataStats.cs" />
@@ -217,6 +220,10 @@
     <Compile Include="DSL\Aggregations\TopHitsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\GeoBoundsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ReverseNestedAggregationDescriptor.cs" />
+    <Compile Include="DSL\PutSearchTemplateDescriptor.cs" />
+    <Compile Include="DSL\DeleteSearchTemplateDescriptor.cs" />
+    <Compile Include="DSL\GetSearchTemplateDescriptor.cs" />
+    <Compile Include="DSL\Query\TemplateQueryDescriptor.cs" />
     <Compile Include="DSL\CatIndicesDescriptor.cs" />
     <Compile Include="DSL\CatShardsDescriptor.cs" />
     <Compile Include="DSL\CatThreadPoolDescriptor.cs" />
@@ -244,6 +251,7 @@
     <Compile Include="DSL\Suggest\Context\CategorySuggestDescriptor.cs" />
     <Compile Include="DSL\Suggest\Context\GeoLocationSuggestDescriptor.cs" />
     <Compile Include="DSL\Suggest\Context\ISuggestContext.cs" />
+    <Compile Include="DSL\SearchTemplateDescriptor.cs" />
     <Compile Include="DSL\TemplateExistsDescriptor.cs" />
     <Compile Include="Domain\Responses\PingResponse.cs" />
     <Compile Include="Domain\Responses\NodesShutdownResponse.cs" />
@@ -337,6 +345,7 @@
     <Compile Include="ElasticClient-DoRequest.cs" />
     <Compile Include="ElasticClient-SearchShards.cs" />
     <Compile Include="ElasticClient-RecoveryStatus.cs" />
+    <Compile Include="ElasticClient-SearchTemplate.cs" />
     <Compile Include="ElasticClient-TemplateExists.cs" />
     <Compile Include="ElasticClient-AliasExists.cs" />
     <Compile Include="ElasticClient-ClusterSettings.cs" />
@@ -580,7 +589,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DSL\Rescore\RescoreDescriptor.cs" />
-    <Compile Include="DSL\Termplates\CreateWarmerDescriptor.cs" />
+    <Compile Include="DSL\Warmers\CreateWarmerDescriptor.cs" />
     <Compile Include="DSL\PutWarmerDescriptor.cs" />
     <Compile Include="DSL\GetWarmerDescriptor.cs" />
     <Compile Include="DSL\Query\MatchPhrasePrefixQueryDescriptor.cs" />

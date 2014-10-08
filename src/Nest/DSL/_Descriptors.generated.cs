@@ -1517,6 +1517,38 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for DeleteScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public partial class DeleteScriptDescriptor  : BaseRequest<DeleteScriptRequestParameters>
+	{
+		
+	
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteScriptRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
+	}
+	
+	
+	///<summary>descriptor for DeleteTemplate
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///</pre>
+	///</summary>
+	public partial class DeleteTemplateDescriptor 
+	{
+		
+	
+	
+	}
+	
+	
 	///<summary>descriptor for Exists
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
@@ -1888,6 +1920,25 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for GetScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public partial class GetScriptDescriptor  : BaseRequest<GetScriptRequestParameters>
+	{
+		
+	
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetScriptRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
+	}
+	
+	
 	///<summary>descriptor for GetSource
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
@@ -2008,6 +2059,19 @@ namespace Nest
 			return this;
 		}
 		
+	
+	}
+	
+	
+	///<summary>descriptor for GetTemplate
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///</pre>
+	///</summary>
+	public partial class GetTemplateDescriptor 
+	{
+		
+	
 	
 	}
 	
@@ -2488,35 +2552,6 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesDeleteTemplateForAll
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
-	///</pre>
-	///</summary>
-	public partial class DeleteTemplateDescriptor 
-	{
-		
-	
-
-		///<summary>Explicit operation timeout</summary>
-		public DeleteTemplateDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
-
-		///<summary>Specify timeout for connection to master</summary>
-		public DeleteTemplateDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
-	
-	}
-	
-	
 	///<summary>descriptor for IndicesDeleteWarmer
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
@@ -2972,35 +3007,6 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesGetTemplateForAll
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
-	///</pre>
-	///</summary>
-	public partial class GetTemplateDescriptor 
-	{
-		
-	
-
-		///<summary>Return settings in flat format (default: false)</summary>
-		public GetTemplateDescriptor FlatSettings(bool flat_settings = true)
-		{
-			this.Request.RequestParameters.FlatSettings(flat_settings);
-			return this;
-		}
-		
-
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetTemplateDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
-	
-	}
-	
-	
 	///<summary>descriptor for IndicesGetWarmerForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
@@ -3337,6 +3343,14 @@ namespace Nest
 		
 	
 
+		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		public PutTemplateDescriptor Create(bool create = true)
+		{
+			this.Request.RequestParameters.Create(create);
+			return this;
+		}
+		
+
 		///<summary>Explicit operation timeout</summary>
 		public PutTemplateDescriptor Timeout(string timeout)
 		{
@@ -3620,7 +3634,7 @@ namespace Nest
 			
 
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
-		public IndicesStatsDescriptor Groups(bool groups = true)
+		public IndicesStatsDescriptor Groups(params string[] groups)
 		{
 			this.Request.RequestParameters.Groups(groups);
 			return this;
@@ -4589,6 +4603,25 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for PutScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public partial class PutScriptDescriptor  : BaseRequest<PutScriptRequestParameters>
+	{
+		
+	
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutScriptRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
+	}
+	
+	
 	///<summary>descriptor for ScrollGet
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
@@ -4834,13 +4867,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html
 	///</pre>
 	///</summary>
-	public partial class SearchTemplateDescriptor  : BaseRequest<SearchTemplateRequestParameters>
+	public partial class SearchTemplateDescriptor<T> 
 	{
 		
 	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchTemplateDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public SearchTemplateDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -4848,7 +4881,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchTemplateDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public SearchTemplateDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -4856,7 +4889,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchTemplateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		public SearchTemplateDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -4864,7 +4897,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchTemplateDescriptor Preference(string preference)
+		public SearchTemplateDescriptor<T> Preference(string preference)
 		{
 			this.Request.RequestParameters.Preference(preference);
 			return this;
@@ -4872,7 +4905,7 @@ namespace Nest
 		
 
 		///<summary>A comma-separated list of specific routing values</summary>
-		public SearchTemplateDescriptor Routing(params string[] routing)
+		public SearchTemplateDescriptor<T> Routing(params string[] routing)
 		{
 			this.Request.RequestParameters.Routing(routing);
 			return this;
@@ -4880,7 +4913,7 @@ namespace Nest
 		
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public SearchTemplateDescriptor Scroll(string scroll)
+		public SearchTemplateDescriptor<T> Scroll(string scroll)
 		{
 			this.Request.RequestParameters.Scroll(scroll);
 			return this;
@@ -4888,16 +4921,10 @@ namespace Nest
 		
 
 		///<summary>Search operation type</summary>
-		public SearchTemplateDescriptor SearchType(SearchType search_type)
+		public SearchTemplateDescriptor<T> SearchType(SearchType search_type)
 		{
 			this.Request.RequestParameters.SearchType(search_type);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

@@ -25,6 +25,8 @@ namespace Nest
 		public string Metric { get; set; }
 		public string IndexMetric { get; set; }
 
+		public string Lang { get; set; }
+
 		public ElasticsearchPathInfo()
 		{
 			this.RequestParameters = new TParameters();
