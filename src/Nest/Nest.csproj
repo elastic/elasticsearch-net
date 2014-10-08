@@ -153,6 +153,7 @@
     <Compile Include="Domain\Mapping\Descriptors\FieldDataRegexFilterDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataStringMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\MappingTransformDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\SuggestContextMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\IFieldMapping.cs" />
     <Compile Include="Domain\Mapping\SpecialFields\ISpecialField.cs" />
     <Compile Include="Domain\Geometry\CircleGeoShape.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Domain\Stats\PercolateStats.cs" />
     <Compile Include="Domain\Stats\PluginStats.cs" />
     <Compile Include="Domain\Stats\SegmentsStats.cs" />
+    <Compile Include="Domain\Suggest\SuggestField.cs" />
     <Compile Include="DSL\Aggregations\PercentileRanksAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\TopHitsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\GeoBoundsAggregationDescriptor.cs" />
@@ -239,6 +241,9 @@
     <Compile Include="DSL\SnapshotStatusDescriptor.cs" />
     <Compile Include="DSL\RecoveryStatusDescriptor.cs" />
     <Compile Include="DSL\Suggest\PhraseSuggestCollateDescriptor.cs" />
+    <Compile Include="DSL\Suggest\Context\CategorySuggestDescriptor.cs" />
+    <Compile Include="DSL\Suggest\Context\GeoLocationSuggestDescriptor.cs" />
+    <Compile Include="DSL\Suggest\Context\ISuggestContext.cs" />
     <Compile Include="DSL\TemplateExistsDescriptor.cs" />
     <Compile Include="Domain\Responses\PingResponse.cs" />
     <Compile Include="Domain\Responses\NodesShutdownResponse.cs" />
