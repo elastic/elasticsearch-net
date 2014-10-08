@@ -33,31 +33,14 @@ namespace Nest
 
 	public partial class DeleteByQueryRequest : QueryPathBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
+		public DeleteByQueryRequest() {}
+
+		public DeleteByQueryRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+
+		public DeleteByQueryRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+
 		public IQueryContainer Query { get; set; }
 
-		/// <summary>
-		/// Sents a delete query to _all indices
-		/// </summary>
-		public DeleteByQueryRequest()
-		{
-			this.AllIndices = true;
-			this.AllTypes = true;
-		}
-	
-		public DeleteByQueryRequest(IndexNameMarker index, TypeNameMarker type = null)
-		{
-			this.Indices = new [] { index };
-			if (type != null)
-				this.Types = new[] { type };
-			else this.AllTypes = true;
-		}
-
-		public DeleteByQueryRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null)
-		{
-			this.Indices = indices;
-			this.AllTypes = !types.HasAny();
-			this.Types = types;
-		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo)
 		{
@@ -68,6 +51,12 @@ namespace Nest
 
 	public partial class DeleteByQueryRequest<T> : QueryPathBase<DeleteByQueryRequestParameters, T>, IDeleteByQueryRequest where T : class
 	{
+		public DeleteByQueryRequest() {}
+
+		public DeleteByQueryRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+
+		public DeleteByQueryRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+
 		public IQueryContainer Query { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo)

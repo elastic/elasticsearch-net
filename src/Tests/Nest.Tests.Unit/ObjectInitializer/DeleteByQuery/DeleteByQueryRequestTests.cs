@@ -30,6 +30,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.DeleteByQuery
 
 			var request = new DeleteByQueryRequest()
 			{
+				AllIndices = true,
 				AllowNoIndices = true,
 				ExpandWildcards = ExpandWildcards.Closed,
 				Query = query,

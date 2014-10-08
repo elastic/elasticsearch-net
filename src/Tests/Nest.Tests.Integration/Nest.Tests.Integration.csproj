@@ -89,6 +89,7 @@
     <Compile Include="..\..\Elasticsearch.Net\Extensions\TypeExtensions.cs">
       <Link>LinkedExtensions\TypeExtensions.cs</Link>
     </Compile>
+    <Compile Include="Aggregations\CombinationTests.cs" />
     <Compile Include="Aggregations\NestedBucketAggregationTests.cs" />
     <Compile Include="Aggregations\BucketAggregationTests.cs" />
     <Compile Include="Aggregations\SingleBucketAggregationTests.cs" />

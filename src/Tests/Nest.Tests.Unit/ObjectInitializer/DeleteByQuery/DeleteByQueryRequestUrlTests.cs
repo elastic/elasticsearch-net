@@ -17,7 +17,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.DeleteByQuery
 			var status = this._client.DeleteByQuery(new DeleteByQueryRequest())
 				.ConnectionStatus;
 
-			status.RequestUrl.Should().EndWith("/_all/_query");
+			status.RequestUrl.Should().EndWith("/nest_test_data/_query");
 			status.RequestMethod.Should().Be("DELETE");
 		}
 	

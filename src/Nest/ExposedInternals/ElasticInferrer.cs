@@ -39,7 +39,8 @@ namespace Nest
 		{
 			get
 			{
-				return (this._connectionSettings == null) ? string.Empty : this._connectionSettings.DefaultIndex;
+				var index = (this._connectionSettings == null) ? string.Empty : this._connectionSettings.DefaultIndex;
+				return index.IsNullOrEmpty() ? "_all" : index;
 			}
 		}
 

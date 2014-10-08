@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -28,6 +29,12 @@ namespace Nest
 	
 	public partial class CountRequest : QueryPathBase<CountRequestParameters>, ICountRequest
 	{
+		public CountRequest() {}
+
+		public CountRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+
+		public CountRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+
 		public IQueryContainer Query { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
@@ -39,6 +46,12 @@ namespace Nest
 	public partial class CountRequest<T> : QueryPathBase<CountRequestParameters, T>, ICountRequest
 		where T : class
 	{
+		public CountRequest() {}
+
+		public CountRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+
+		public CountRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+
 		public IQueryContainer Query { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
