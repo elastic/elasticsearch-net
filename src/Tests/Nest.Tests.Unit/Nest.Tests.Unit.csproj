@@ -646,9 +646,6 @@
     <None Include="Core\MultiPercolate\MultiPercolateJson.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Core\MultiSearch\MultiSearchRespectsSearchTypePreferenceAndRouting.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Core\UpdateSettings\AllUpdateSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
