@@ -5,9 +5,6 @@ namespace Profiling.Indexing
 {
     public class Message
     {
-        // Already included by NEST as ID property, so don't store it again as a seperate field in the
-        // index
-        [IgnoreDataMember]
         public Guid Id { get; set; }
 
         public DateTime Timestamp { get; set; }

@@ -25,7 +25,6 @@ namespace Nest.Tests.Unit.Reproduce
 					var q = Query<ElasticsearchProject>.Term(f => f.Id, i);
 					query |= q;
 				}
-				Assert.Pass("boom");
 			});
 		}
 	}

@@ -9,6 +9,13 @@ namespace Nest.Tests.Unit.Search.Query.BoolCombinations
 	public class BoolCombinationTests : BaseJsonTests
 	{
 		[Test]
+		public void CombineTwoNots()
+		{
+			var s = !Query<ElasticsearchProject>.Term(f => f.Name, "foo")
+			 && !Query<ElasticsearchProject>.Term(f => f.Name, "bar");
+			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
+		}
+		[Test]
 		public void CombineNotAnd()
 		{
 			var s = !Query<ElasticsearchProject>.Term(f => f.Name, "foo") 

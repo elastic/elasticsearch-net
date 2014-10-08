@@ -5,47 +5,116 @@ namespace Nest
 {
 	internal static class BoolQueryExtensions
 	{
-		internal static bool CanMergeMustAndMustNots(this IBoolQuery bq)
+		internal static bool IsBoolQueryWithOnlyMustNots(this IQueryContainer container)
 		{
-			return bq == null || !bq.Should.HasAny();
+			return container != null && container.Bool != null
+				&& !container.Bool.Must.HasAny()
+				&& !container.Bool.Should.HasAny()
+				&& container.Bool.MustNot.HasAny();
 		}
 
-		internal static bool CanJoinShould(this IQueryContainer container)
+		internal static bool CanMergeMustAndMustNots(this IQueryContainer container)
 		{
-			return !container.IsStrict && container.Bool.CanJoinShould();
+			return !container.IsStrict && container.Bool.CanMergeMustAndMustNots();
 		}
 
-		internal static bool CanJoinShould(this IBoolQuery bq)
+		internal static bool CanMergeMustAndMustNots(this IBoolQuery boolQuery)
 		{
-			return bq == null 
-				   || (bq.MinimumShouldMatch == null
+			return boolQuery == null || (!boolQuery.Should.HasAny() && boolQuery.MinimumShouldMatch == null);
+		}
+
+		internal static bool CanMergeShould(this IQueryContainer container)
+		{
+			return !container.IsStrict && container.Bool.CanMergeShould();
+		}
+
+		internal static bool CanMergeShould(this IBoolQuery boolQuery)
+		{
+			return boolQuery == null 
+				   || (boolQuery.MinimumShouldMatch == null
 					&& (
-				      (bq.Should.HasAny() && !bq.Must.HasAny() && !bq.MustNot.HasAny())
-				       || !bq.Should.HasAny()
+				      (boolQuery.Should.HasAny() && !boolQuery.Must.HasAny() && !boolQuery.MustNot.HasAny())
+				       || !boolQuery.Should.HasAny()
 				       )
 				   );
 		}
 
-		internal static IEnumerable<IQueryContainer> MergeShouldQueries(this IQueryContainer lbq, IQueryContainer rbq)
+		internal static QueryContainer MergeMustQueries(this IQueryContainer leftContainer, IQueryContainer rightContainer)
 		{
-			if (!lbq.CanJoinShould() || !lbq.CanJoinShould())
-				return new[] { lbq, rbq }; 
+			if (!leftContainer.CanMergeMustAndMustNots() || !rightContainer.CanMergeMustAndMustNots())
+			{
+				if (rightContainer.IsBoolQueryWithOnlyMustNots()) 
+					return CreateMustContainer(new [] { leftContainer }, rightContainer.Bool.MustNot );
+				if (leftContainer.IsBoolQueryWithOnlyMustNots()) 
+					return CreateMustContainer(new [] { rightContainer }, leftContainer.Bool.MustNot );
+				return CreateMustContainer(new [] { leftContainer, rightContainer }, null);
+			}
+			
+			var mustNots = OrphanMustNots(leftContainer)
+				.EagerConcat(OrphanMustNots(rightContainer));
+			
+			var leftClauses = CreateMustClauses(leftContainer);
+			var rightClauses = CreateMustClauses(rightContainer);
+			
+			var mustClauses = leftClauses.EagerConcat(rightClauses);
+			var container = CreateMustContainer(mustClauses, mustNots);
+			return container;
+		}
 
-			var lBoolQuery = lbq.Bool;
-			var rBoolQuery = rbq.Bool;
+		private static IEnumerable<IQueryContainer> CreateMustClauses(IQueryContainer container)
+		{
+			var boolQuery = container.Bool;
+			var hasMustClauses = boolQuery != null && boolQuery.Must.HasAny();
+			if (hasMustClauses) return boolQuery.Must;
+			if (boolQuery != null && boolQuery.IsConditionless)
+				return Enumerable.Empty<IQueryContainer>();
+
+			return new[] {container};
+		}
+
+		private static IEnumerable<IQueryContainer> OrphanMustNots(IQueryContainer container)
+		{
+			var lBoolQuery = container.Bool;
+			if (lBoolQuery == null || !lBoolQuery.MustNot.HasAny()) return null;
+			
+			var mustNotQueries = lBoolQuery.MustNot.ToList();
+			lBoolQuery.MustNot = null;
+			return mustNotQueries;
+		}
+
+		internal static QueryContainer MergeShouldQueries(this IQueryContainer leftContainer, IQueryContainer rightContainer)
+		{
+			if (!leftContainer.CanMergeShould() || !leftContainer.CanMergeShould())
+				return CreateShouldContainer(new List<IQueryContainer> { leftContainer, rightContainer }); 
+
+			var lBoolQuery = leftContainer.Bool;
+			var rBoolQuery = rightContainer.Bool;
 
 			var lHasShouldQueries = lBoolQuery != null && lBoolQuery.Should.HasAny();
 			var rHasShouldQueries = rBoolQuery != null && rBoolQuery.Should.HasAny();
 
-			var lq = lHasShouldQueries ? lBoolQuery.Should : new[] { lbq };
-			var rq = rHasShouldQueries ? rBoolQuery.Should : new[] { rbq };
+			var lq = lHasShouldQueries ? lBoolQuery.Should : new[] { leftContainer };
+			var rq = rHasShouldQueries ? rBoolQuery.Should : new[] { rightContainer };
 
-			//originally: return lq.Concat(rq);
-			//however performance of this degraded rapidly see #974
- 			//forcing ToList() helped but manually newing a list doing addrange is 10x faster even still.
-			var x = new List<IQueryContainer>(lq);
-			x.AddRange(rq);
-			return x;
+			var shouldClauses =  lq.EagerConcat(rq);
+			return CreateShouldContainer(shouldClauses);
+		}
+
+		internal static QueryContainer CreateShouldContainer(IList<IQueryContainer> shouldClauses)
+		{
+			IQueryContainer q = new QueryContainer();
+			q.Bool = new BoolBaseQueryDescriptor();
+			q.Bool.Should = shouldClauses.NullIfEmpty();
+			return q as QueryContainer;
+		}
+		
+		internal static QueryContainer CreateMustContainer(IList<IQueryContainer> mustClauses, IEnumerable<IQueryContainer> mustNotClauses)
+		{
+			IQueryContainer q = new QueryContainer();
+			q.Bool = new BoolBaseQueryDescriptor();
+			q.Bool.Must = mustClauses.NullIfEmpty();
+			q.Bool.MustNot = mustNotClauses.NullIfEmpty();
+			return q as QueryContainer;
 		}
 	}
 }

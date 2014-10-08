@@ -19,7 +19,7 @@ namespace Nest
 		bool? Cache { get; set; }
 
 		[JsonIgnore]
-		bool IsConditionless { get; }
+		bool IsConditionless { get; set; }
 
 		[JsonIgnore]
 		string RawFilter { get; set; }
