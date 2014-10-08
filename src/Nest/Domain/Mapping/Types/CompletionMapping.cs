@@ -33,5 +33,8 @@ namespace Nest
 
 		[JsonProperty("max_input_len")]
 		public int? MaxInputLength { get; set; }
+
+		[JsonProperty("context")]
+		public IDictionary<string, ISuggestContext> Context { get ;set;}
 	}
 }
