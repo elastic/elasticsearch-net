@@ -238,6 +238,7 @@
     <Compile Include="DSL\Paths\RepositorySnapshotOptionalPathDescriptor.cs" />
     <Compile Include="DSL\SnapshotStatusDescriptor.cs" />
     <Compile Include="DSL\RecoveryStatusDescriptor.cs" />
+    <Compile Include="DSL\Suggest\PhraseSuggestCollateDescriptor.cs" />
     <Compile Include="DSL\TemplateExistsDescriptor.cs" />
     <Compile Include="Domain\Responses\PingResponse.cs" />
     <Compile Include="Domain\Responses\NodesShutdownResponse.cs" />
