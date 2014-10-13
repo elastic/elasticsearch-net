@@ -50,6 +50,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "tie_breaker")]
 		double? TieBreaker { get; set; }
 
+		[JsonProperty(PropertyName = "minimum_should_match")]
+		string MinimumShouldMatch { get; set; }
+
 		[JsonProperty(PropertyName = "operator")]
 		[JsonConverter(typeof(StringEnumConverter))]
 		Operator? Operator { get; set; }
@@ -78,6 +81,7 @@ namespace Nest
 		public double? Boost { get; set; }
 		public bool? UseDisMax { get; set; }
 		public double? TieBreaker { get; set; }
+		public string MinimumShouldMatch { get; set; }
 		public Operator? Operator { get; set; }
 		public IEnumerable<PropertyPathMarker> Fields { get; set; }
 	}
@@ -108,6 +112,8 @@ namespace Nest
 		bool? IMultiMatchQuery.UseDisMax { get; set; }
 
 		double? IMultiMatchQuery.TieBreaker { get; set; }
+
+		string IMultiMatchQuery.MinimumShouldMatch { get; set; }
 
 		Operator? IMultiMatchQuery.Operator { get; set; }
 
@@ -153,6 +159,7 @@ namespace Nest
 			((IMultiMatchQuery)this).Query = query;
 			return this;
 		}
+
 		public MultiMatchQueryDescriptor<T> Analyzer(string analyzer)
 		{
 			((IMultiMatchQuery)this).Analyzer = analyzer;
@@ -166,6 +173,12 @@ namespace Nest
 		public MultiMatchQueryDescriptor<T> CutoffFrequency(double cutoffFrequency)
 		{
 			((IMultiMatchQuery)this).CutoffFrequency = cutoffFrequency;
+			return this;
+		}
+
+		public MultiMatchQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch)
+		{
+			((IMultiMatchQuery)this).MinimumShouldMatch = minimumShouldMatch;
 			return this;
 		}
 
