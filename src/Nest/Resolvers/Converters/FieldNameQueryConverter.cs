@@ -42,7 +42,8 @@ namespace Nest
 			var depth = reader.Depth;
 			if (reader.TokenType != JsonToken.StartObject)
 				return null;
-			var fieldName = reader.ReadAsString();
+			reader.Read();
+			var fieldName = reader.Value as string;
 			reader.Read();
 			var query = this._reader.ReadJson(reader, objectType, existingValue, serializer);
 			var setter = query as IFieldNameQuery;

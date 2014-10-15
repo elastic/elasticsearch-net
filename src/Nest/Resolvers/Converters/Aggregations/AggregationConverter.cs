@@ -199,7 +199,8 @@ namespace Nest.Resolvers.Converters.Aggregations
 
 		private IAggregation GetDateHistogramAggregation(JsonReader reader, JsonSerializer serializer)
 		{
-		    var keyAsString = reader.ReadAsString();
+			reader.Read();
+			var keyAsString = reader.Value as string;
 			reader.Read(); reader.Read();
 			var key = (reader.Value as long?).GetValueOrDefault(0);
 			reader.Read(); reader.Read();
@@ -214,19 +215,21 @@ namespace Nest.Resolvers.Converters.Aggregations
 
 		private IAggregation GetKeyedBucketItem(JsonReader reader, JsonSerializer serializer)
 		{
-			var key = reader.ReadAsString();
+			reader.Read();
+			var key = reader.Value;
 			reader.Read();
 			var property = reader.Value as string;
 			if (property == "from" || property == "to")
-				return GetRangeAggregation(reader, serializer, key);
+				return GetRangeAggregation(reader, serializer, key.ToString());
 
 
 			var keyItem = new KeyItem();
-			keyItem.Key = key;
+			keyItem.Key = key.ToString();
 
 			if (property == "key_as_string")
 			{
-				keyItem.KeyAsString = reader.ReadAsString();
+				reader.Read();
+				keyItem.KeyAsString = reader.Value.ToString();
 				reader.Read();
 			}
 
@@ -358,7 +361,8 @@ namespace Nest.Resolvers.Converters.Aggregations
 						reader.Read();
 						break;
 					case "key":
-						key = reader.ReadAsString();
+						reader.Read();
+						key = reader.Value as string;
 						reader.Read();
 						break;
 					case "from_as_string":

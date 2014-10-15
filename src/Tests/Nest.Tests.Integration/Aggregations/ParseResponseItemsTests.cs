@@ -185,16 +185,16 @@ namespace Nest.Tests.Integration.Aggregations
 		    firstRange.Should().NotBeNull();
 		    firstRange.To.Should().HaveValue();
 		    firstRange.ToAsString.Should().NotBeNull();
-            var firstRangeToDateLeft = firstRange.To.Value.JavaTimeStampToDateTime();
-            var firstRangeToDateRight = DateTime.Parse(firstRange.ToAsString);
-            firstRangeToDateLeft.Should().Be(firstRangeToDateRight);
-            var lastRange = grams.LastOrDefault();
+		    var firstRangeToDateLeft = firstRange.To.Value.JavaTimeStampToDateTime();
+		    var firstRangeToDateRight = DateTime.Parse(firstRange.ToAsString);
+		    firstRangeToDateLeft.Should().Be(firstRangeToDateRight);
+		    var lastRange = grams.LastOrDefault();
             lastRange.Should().NotBeNull();
             lastRange.From.Should().HaveValue();
             lastRange.FromAsString.Should().NotBeNull();
-            var lastRangeFromDateLeft = lastRange.From.Value.JavaTimeStampToDateTime();
-            var lastRangeFromDateRight = DateTime.Parse(lastRange.FromAsString);
-            lastRangeFromDateLeft.Should().Be(lastRangeFromDateRight);
+            var LastRangeFromDateLeft = lastRange.From.Value.JavaTimeStampToDateTime();
+            var LastRangeFromDateRight = DateTime.Parse(lastRange.FromAsString);
+            LastRangeFromDateLeft.Should().Be(LastRangeFromDateRight);
 	    }
 		[Test]
 	    public void IpRangeItem()
