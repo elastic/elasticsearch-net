@@ -79,16 +79,13 @@ namespace Nest.Resolvers.Converters.Filters
 						f.Cache = reader.Value as bool?;
 						break;
 					case "_name":
-						reader.Read();
-						f.FilterName = reader.Value as string;
+						f.FilterName = reader.ReadAsString();
 						break;
 					case "_cache_key":
-						reader.Read();
-						f.CacheKey = reader.Value as string;
+						f.CacheKey = reader.ReadAsString();
 						break;
 					case "type":
-						reader.Read();
-						f.GeoExecution = (reader.Value as string).ToEnum<GeoExecution>();
+						f.GeoExecution = reader.ReadAsString().ToEnum<GeoExecution>();
 						break;
 					default:
 						f.Field = property;
