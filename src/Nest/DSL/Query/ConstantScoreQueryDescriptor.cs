@@ -22,11 +22,11 @@ namespace Nest
 		double? Boost { get; set; }
 	}
 
-	public class ConstantScoreQuery : PlainQuery, ICustomScoreQuery
+	public class ConstantScoreQuery : PlainQuery, IConstantScoreQuery
 	{
 		protected override void WrapInContainer(IQueryContainer container)
 		{
-			container.CustomScore = this;
+			container.ConstantScore = this;
 		}
 
 		public bool IsConditionless { get { return false; } }
@@ -34,6 +34,8 @@ namespace Nest
 		public string Script { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 		public IQueryContainer Query { get; set; }
+		public IFilterContainer Filter { get; set; }
+		public double? Boost { get; set; }
 	}
 
 	public class ConstantScoreQueryDescriptor<T> : IConstantScoreQuery where T : class
