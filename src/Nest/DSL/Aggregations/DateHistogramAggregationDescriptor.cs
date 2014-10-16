@@ -214,7 +214,7 @@ namespace Nest
 	
 		public DateHistogramAggregationDescriptor<T> OrderDescending(string key)
 		{
-			Self.Order = new Dictionary<string, string> { {key, "asc"}};
+			Self.Order = new Dictionary<string, string> { {key, "desc"}};
 			return this;
 		}
 
