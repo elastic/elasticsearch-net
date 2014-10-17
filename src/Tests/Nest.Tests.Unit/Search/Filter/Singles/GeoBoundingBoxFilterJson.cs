@@ -21,8 +21,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				filter : {
 					 geo_bounding_box: {
 							origin : {
-								top_left: ""40.73, -74.1"",
-								bottom_right: ""40.717, -73.99""
+								top_left: ""-74.1, 40.73"",
+								bottom_right: ""-73.99, 40.717""
 							}
 						}
 					}
@@ -52,8 +52,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				filter : {
 					 geo_bounding_box: {
 							origin : {
-								top_left: ""40.73, -74.1"",
-								bottom_right: ""40.717, -73.99""
+								top_left: ""-74.1, 40.73"",
+								bottom_right: ""-73.99, 40.717""
 							},
 							type: ""indexed"",
 							_cache : true,
