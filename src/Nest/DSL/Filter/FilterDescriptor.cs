@@ -57,7 +57,7 @@ namespace Nest
 			return (filter.FilterDescriptor == null || filter.FilterDescriptor.IsConditionless) ? filter._Fallback : filter.FilterDescriptor;
 		}
 
-		internal FilterContainer Raw(string rawJson)
+		public FilterContainer Raw(string rawJson)
 		{
 			var f = new FilterDescriptor<T>();
 			f.Self.IsStrict = Self.IsStrict;
