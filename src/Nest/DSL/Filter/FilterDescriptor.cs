@@ -57,6 +57,12 @@ namespace Nest
 			return (filter.FilterDescriptor == null || filter.FilterDescriptor.IsConditionless) ? filter._Fallback : filter.FilterDescriptor;
 		}
 
+		/// <summary>
+		/// Insert raw filter json at this position of the filter
+		/// <para>Be sure to start your json with '{'</para>
+		/// </summary>
+		/// <param name="rawJson"></param>
+		/// <returns></returns>
 		public FilterContainer Raw(string rawJson)
 		{
 			var f = new FilterDescriptor<T>();
