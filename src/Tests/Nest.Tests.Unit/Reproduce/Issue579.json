@@ -5,6 +5,13 @@
         {
           "bool": {
             "must": [
+							{
+                "term": {
+                  "locationId": {
+                    "value": "my-location"
+                  }
+                }
+              },
               {
                 "bool": {
                   "should": [
@@ -40,13 +47,6 @@
                     }
                   ],
                   "minimum_should_match": "1"
-                }
-              },
-              {
-                "term": {
-                  "locationId": {
-                    "value": "my-location"
-                  }
                 }
               }
             ]

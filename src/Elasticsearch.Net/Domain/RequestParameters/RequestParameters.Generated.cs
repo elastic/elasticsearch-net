@@ -1683,6 +1683,26 @@ namespace Elasticsearch.Net
 	}
 	
 	
+	///<summary>Request parameters descriptor for DeleteScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public class DeleteScriptRequestParameters : FluentRequestParameters<DeleteScriptRequestParameters> 
+	{
+	}
+	
+	
+	///<summary>Request parameters descriptor for DeleteTemplate
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///</pre>
+	///</summary>
+	public class DeleteTemplateRequestParameters : FluentRequestParameters<DeleteTemplateRequestParameters> 
+	{
+	}
+	
+	
 	///<summary>Request parameters descriptor for Exists
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
@@ -2043,6 +2063,16 @@ namespace Elasticsearch.Net
 	}
 	
 	
+	///<summary>Request parameters descriptor for GetScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public class GetScriptRequestParameters : FluentRequestParameters<GetScriptRequestParameters> 
+	{
+	}
+	
+	
 	///<summary>Request parameters descriptor for GetSource
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
@@ -2160,6 +2190,16 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+	}
+	
+	
+	///<summary>Request parameters descriptor for GetTemplate
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///</pre>
+	///</summary>
+	public class GetTemplateRequestParameters : FluentRequestParameters<GetTemplateRequestParameters> 
+	{
 	}
 	
 	
@@ -2638,12 +2678,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public class IndicesDeleteAliasRequestParameters : FluentRequestParameters<IndicesDeleteAliasRequestParameters> 
+	public class DeleteAliasRequestParameters : FluentRequestParameters<DeleteAliasRequestParameters> 
 	{
 		
 		internal string _timeout { get; set; }
 		///<summary>Explicit timestamp for the document</summary>
-		public IndicesDeleteAliasRequestParameters Timeout(string timeout)
+		public DeleteAliasRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
 			this.AddQueryString("timeout", this._timeout);
@@ -2653,7 +2693,7 @@ namespace Elasticsearch.Net
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesDeleteAliasRequestParameters MasterTimeout(string master_timeout)
+		public DeleteAliasRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
 			this.AddQueryString("master_timeout", this._master_timeout);
@@ -2674,36 +2714,6 @@ namespace Elasticsearch.Net
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteMappingRequestParameters MasterTimeout(string master_timeout)
-		{
-			this._master_timeout = master_timeout;
-			this.AddQueryString("master_timeout", this._master_timeout);
-			return this;
-		}
-		
-	}
-	
-	
-	///<summary>Request parameters descriptor for IndicesDeleteTemplateForAll
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
-	///</pre>
-	///</summary>
-	public class DeleteTemplateRequestParameters : FluentRequestParameters<DeleteTemplateRequestParameters> 
-	{
-		
-		internal string _timeout { get; set; }
-		///<summary>Explicit operation timeout</summary>
-		public DeleteTemplateRequestParameters Timeout(string timeout)
-		{
-			this._timeout = timeout;
-			this.AddQueryString("timeout", this._timeout);
-			return this;
-		}
-		
-		
-		internal string _master_timeout { get; set; }
-		///<summary>Specify timeout for connection to master</summary>
-		public DeleteTemplateRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
 			this.AddQueryString("master_timeout", this._master_timeout);
@@ -3213,36 +3223,6 @@ namespace Elasticsearch.Net
 	}
 	
 	
-	///<summary>Request parameters descriptor for IndicesGetTemplateForAll
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
-	///</pre>
-	///</summary>
-	public class GetTemplateRequestParameters : FluentRequestParameters<GetTemplateRequestParameters> 
-	{
-		
-		internal bool _flat_settings { get; set; }
-		///<summary>Return settings in flat format (default: false)</summary>
-		public GetTemplateRequestParameters FlatSettings(bool flat_settings)
-		{
-			this._flat_settings = flat_settings;
-			this.AddQueryString("flat_settings", this._flat_settings);
-			return this;
-		}
-		
-		
-		internal bool _local { get; set; }
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetTemplateRequestParameters Local(bool local)
-		{
-			this._local = local;
-			this.AddQueryString("local", this._local);
-			return this;
-		}
-		
-	}
-	
-	
 	///<summary>Request parameters descriptor for IndicesGetWarmerForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
@@ -3458,12 +3438,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public class IndicesPutAliasRequestParameters : FluentRequestParameters<IndicesPutAliasRequestParameters> 
+	public class PutAliasRequestParameters : FluentRequestParameters<PutAliasRequestParameters> 
 	{
 		
 		internal string _timeout { get; set; }
 		///<summary>Explicit timestamp for the document</summary>
-		public IndicesPutAliasRequestParameters Timeout(string timeout)
+		public PutAliasRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
 			this.AddQueryString("timeout", this._timeout);
@@ -3473,7 +3453,7 @@ namespace Elasticsearch.Net
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesPutAliasRequestParameters MasterTimeout(string master_timeout)
+		public PutAliasRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
 			this.AddQueryString("master_timeout", this._master_timeout);
@@ -3621,6 +3601,16 @@ namespace Elasticsearch.Net
 	public class PutTemplateRequestParameters : FluentRequestParameters<PutTemplateRequestParameters> 
 	{
 		
+		internal bool _create { get; set; }
+		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		public PutTemplateRequestParameters Create(bool create)
+		{
+			this._create = create;
+			this.AddQueryString("create", this._create);
+			return this;
+		}
+		
+		
 		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public PutTemplateRequestParameters Timeout(string timeout)
@@ -3708,12 +3698,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html
 	///</pre>
 	///</summary>
-	public class IndicesRecoveryRequestParameters : FluentRequestParameters<IndicesRecoveryRequestParameters> 
+	public class RecoveryStatusRequestParameters : FluentRequestParameters<RecoveryStatusRequestParameters> 
 	{
 		
 		internal bool _detailed { get; set; }
 		///<summary>Whether to display detailed information about shard recovery</summary>
-		public IndicesRecoveryRequestParameters Detailed(bool detailed)
+		public RecoveryStatusRequestParameters Detailed(bool detailed)
 		{
 			this._detailed = detailed;
 			this.AddQueryString("detailed", this._detailed);
@@ -3723,7 +3713,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _active_only { get; set; }
 		///<summary>Display only those recoveries that are currently on-going</summary>
-		public IndicesRecoveryRequestParameters ActiveOnly(bool active_only)
+		public RecoveryStatusRequestParameters ActiveOnly(bool active_only)
 		{
 			this._active_only = active_only;
 			this.AddQueryString("active_only", this._active_only);
@@ -3733,7 +3723,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _human { get; set; }
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public IndicesRecoveryRequestParameters Human(bool human)
+		public RecoveryStatusRequestParameters Human(bool human)
 		{
 			this._human = human;
 			this.AddQueryString("human", this._human);
@@ -3901,9 +3891,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal bool _groups { get; set; }
+		internal  string[] _groups { get; set; }
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
-		public IndicesStatsRequestParameters Groups(bool groups)
+		public IndicesStatsRequestParameters Groups(params string[] groups)
 		{
 			this._groups = groups;
 			this.AddQueryString("groups", this._groups);
@@ -4893,6 +4883,16 @@ namespace Elasticsearch.Net
 	}
 	
 	
+	///<summary>Request parameters descriptor for PutScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public class PutScriptRequestParameters : FluentRequestParameters<PutScriptRequestParameters> 
+	{
+	}
+	
+	
 	///<summary>Request parameters descriptor for ScrollGet
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
@@ -5378,12 +5378,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class SnapshotGetRepositoryRequestParameters : FluentRequestParameters<SnapshotGetRepositoryRequestParameters> 
+	public class GetRepositoryRequestParameters : FluentRequestParameters<GetRepositoryRequestParameters> 
 	{
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotGetRepositoryRequestParameters MasterTimeout(string master_timeout)
+		public GetRepositoryRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
 			this.AddQueryString("master_timeout", this._master_timeout);
@@ -5393,7 +5393,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _local { get; set; }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public SnapshotGetRepositoryRequestParameters Local(bool local)
+		public GetRepositoryRequestParameters Local(bool local)
 		{
 			this._local = local;
 			this.AddQueryString("local", this._local);

@@ -97,7 +97,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-aliases.html
 	///</pre>
 	///</summary>
-	public partial class CatAliasesDescriptor  : BaseRequest<CatAliasesRequestParameters>
+	public partial class CatAliasesDescriptor 
 	{
 		
 	
@@ -141,12 +141,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatAliasesRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -156,7 +150,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html
 	///</pre>
 	///</summary>
-	public partial class CatAllocationDescriptor  : BaseRequest<CatAllocationRequestParameters>
+	public partial class CatAllocationDescriptor 
 	{
 		
 	
@@ -208,12 +202,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatAllocationRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -223,7 +211,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html
 	///</pre>
 	///</summary>
-	public partial class CatCountDescriptor  : BaseRequest<CatCountRequestParameters>
+	public partial class CatCountDescriptor 
 	{
 		
 	
@@ -267,12 +255,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatCountRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -282,7 +264,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-fielddata.html
 	///</pre>
 	///</summary>
-	public partial class CatFielddataDescriptor  : BaseRequest<CatFielddataRequestParameters>
+	public partial class CatFielddataDescriptor 
 	{
 		
 	
@@ -353,12 +335,6 @@ namespace Nest
 			return this;
 		}
 			
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatFielddataRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -368,7 +344,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-health.html
 	///</pre>
 	///</summary>
-	public partial class CatHealthDescriptor  : BaseRequest<CatHealthRequestParameters>
+	public partial class CatHealthDescriptor 
 	{
 		
 	
@@ -420,12 +396,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatHealthRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -462,7 +432,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html
 	///</pre>
 	///</summary>
-	public partial class CatIndicesDescriptor  : BaseRequest<CatIndicesRequestParameters>
+	public partial class CatIndicesDescriptor 
 	{
 		
 	
@@ -522,12 +492,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatIndicesRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -537,7 +501,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-master.html
 	///</pre>
 	///</summary>
-	public partial class CatMasterDescriptor  : BaseRequest<CatMasterRequestParameters>
+	public partial class CatMasterDescriptor 
 	{
 		
 	
@@ -581,12 +545,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatMasterRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -596,7 +554,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-nodes.html
 	///</pre>
 	///</summary>
-	public partial class CatNodesDescriptor  : BaseRequest<CatNodesRequestParameters>
+	public partial class CatNodesDescriptor 
 	{
 		
 	
@@ -640,12 +598,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatNodesRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -655,7 +607,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-pending-tasks.html
 	///</pre>
 	///</summary>
-	public partial class CatPendingTasksDescriptor  : BaseRequest<CatPendingTasksRequestParameters>
+	public partial class CatPendingTasksDescriptor 
 	{
 		
 	
@@ -699,12 +651,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatPendingTasksRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -714,7 +660,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-plugins.html
 	///</pre>
 	///</summary>
-	public partial class CatPluginsDescriptor  : BaseRequest<CatPluginsRequestParameters>
+	public partial class CatPluginsDescriptor 
 	{
 		
 	
@@ -758,12 +704,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatPluginsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -773,7 +713,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html
 	///</pre>
 	///</summary>
-	public partial class CatRecoveryDescriptor  : BaseRequest<CatRecoveryRequestParameters>
+	public partial class CatRecoveryDescriptor 
 	{
 		
 	
@@ -817,12 +757,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatRecoveryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -832,7 +766,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html
 	///</pre>
 	///</summary>
-	public partial class CatShardsDescriptor  : BaseRequest<CatShardsRequestParameters>
+	public partial class CatShardsDescriptor 
 	{
 		
 	
@@ -876,12 +810,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatShardsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-		
 	
 	}
 	
@@ -891,7 +819,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-thread-pool.html
 	///</pre>
 	///</summary>
-	public partial class CatThreadPoolDescriptor  : BaseRequest<CatThreadPoolRequestParameters>
+	public partial class CatThreadPoolDescriptor 
 	{
 		
 	
@@ -941,12 +869,6 @@ namespace Nest
 		{
 			this.Request.RequestParameters.FullId(full_id);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatThreadPoolRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
@@ -1085,7 +1007,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-pending.html
 	///</pre>
 	///</summary>
-	public partial class ClusterPendingTasksDescriptor  : BaseRequest<ClusterPendingTasksRequestParameters>
+	public partial class ClusterPendingTasksDescriptor 
 	{
 		
 	
@@ -1103,12 +1025,6 @@ namespace Nest
 		{
 			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
@@ -1595,6 +1511,38 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for DeleteScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public partial class DeleteScriptDescriptor  : BaseRequest<DeleteScriptRequestParameters>
+	{
+		
+	
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteScriptRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
+	}
+	
+	
+	///<summary>descriptor for DeleteTemplate
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///</pre>
+	///</summary>
+	public partial class DeleteTemplateDescriptor 
+	{
+		
+	
+	
+	}
+	
+	
 	///<summary>descriptor for Exists
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
@@ -1966,6 +1914,25 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for GetScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public partial class GetScriptDescriptor  : BaseRequest<GetScriptRequestParameters>
+	{
+		
+	
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetScriptRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
+	}
+	
+	
 	///<summary>descriptor for GetSource
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
@@ -2086,6 +2053,19 @@ namespace Nest
 			return this;
 		}
 		
+	
+	}
+	
+	
+	///<summary>descriptor for GetTemplate
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///</pre>
+	///</summary>
+	public partial class GetTemplateDescriptor 
+	{
+		
+	
 	
 	}
 	
@@ -2521,13 +2501,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public partial class IndicesDeleteAliasDescriptor  : BaseRequest<IndicesDeleteAliasRequestParameters>
+	public partial class DeleteAliasDescriptor<T> 
 	{
 		
 	
 
 		///<summary>Explicit timestamp for the document</summary>
-		public IndicesDeleteAliasDescriptor Timeout(string timeout)
+		public DeleteAliasDescriptor<T> Timeout(string timeout)
 		{
 			this.Request.RequestParameters.Timeout(timeout);
 			return this;
@@ -2535,16 +2515,10 @@ namespace Nest
 		
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesDeleteAliasDescriptor MasterTimeout(string master_timeout)
+		public DeleteAliasDescriptor<T> MasterTimeout(string master_timeout)
 		{
 			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesDeleteAliasRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
@@ -2563,35 +2537,6 @@ namespace Nest
 
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteMappingDescriptor<T> MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
-	
-	}
-	
-	
-	///<summary>descriptor for IndicesDeleteTemplateForAll
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
-	///</pre>
-	///</summary>
-	public partial class DeleteTemplateDescriptor 
-	{
-		
-	
-
-		///<summary>Explicit operation timeout</summary>
-		public DeleteTemplateDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
-
-		///<summary>Specify timeout for connection to master</summary>
-		public DeleteTemplateDescriptor MasterTimeout(string master_timeout)
 		{
 			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
@@ -3056,35 +3001,6 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesGetTemplateForAll
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
-	///</pre>
-	///</summary>
-	public partial class GetTemplateDescriptor 
-	{
-		
-	
-
-		///<summary>Return settings in flat format (default: false)</summary>
-		public GetTemplateDescriptor FlatSettings(bool flat_settings = true)
-		{
-			this.Request.RequestParameters.FlatSettings(flat_settings);
-			return this;
-		}
-		
-
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetTemplateDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
-	
-	}
-	
-	
 	///<summary>descriptor for IndicesGetWarmerForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
@@ -3273,13 +3189,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
-	public partial class IndicesPutAliasDescriptor  : BaseRequest<IndicesPutAliasRequestParameters>
+	public partial class PutAliasDescriptor 
 	{
 		
 	
 
 		///<summary>Explicit timestamp for the document</summary>
-		public IndicesPutAliasDescriptor Timeout(string timeout)
+		public PutAliasDescriptor Timeout(string timeout)
 		{
 			this.Request.RequestParameters.Timeout(timeout);
 			return this;
@@ -3287,16 +3203,10 @@ namespace Nest
 		
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesPutAliasDescriptor MasterTimeout(string master_timeout)
+		public PutAliasDescriptor MasterTimeout(string master_timeout)
 		{
 			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesPutAliasRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
@@ -3427,6 +3337,14 @@ namespace Nest
 		
 	
 
+		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		public PutTemplateDescriptor Create(bool create = true)
+		{
+			this.Request.RequestParameters.Create(create);
+			return this;
+		}
+		
+
 		///<summary>Explicit operation timeout</summary>
 		public PutTemplateDescriptor Timeout(string timeout)
 		{
@@ -3504,13 +3422,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html
 	///</pre>
 	///</summary>
-	public partial class IndicesRecoveryDescriptor  : BaseRequest<IndicesRecoveryRequestParameters>
+	public partial class RecoveryStatusDescriptor 
 	{
 		
 	
 
 		///<summary>Whether to display detailed information about shard recovery</summary>
-		public IndicesRecoveryDescriptor Detailed(bool detailed = true)
+		public RecoveryStatusDescriptor Detailed(bool detailed = true)
 		{
 			this.Request.RequestParameters.Detailed(detailed);
 			return this;
@@ -3518,7 +3436,7 @@ namespace Nest
 		
 
 		///<summary>Display only those recoveries that are currently on-going</summary>
-		public IndicesRecoveryDescriptor ActiveOnly(bool active_only = true)
+		public RecoveryStatusDescriptor ActiveOnly(bool active_only = true)
 		{
 			this.Request.RequestParameters.ActiveOnly(active_only);
 			return this;
@@ -3526,16 +3444,10 @@ namespace Nest
 		
 
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public IndicesRecoveryDescriptor Human(bool human = true)
+		public RecoveryStatusDescriptor Human(bool human = true)
 		{
 			this.Request.RequestParameters.Human(human);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesRecoveryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
@@ -3716,7 +3628,7 @@ namespace Nest
 			
 
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
-		public IndicesStatsDescriptor Groups(bool groups = true)
+		public IndicesStatsDescriptor Groups(params string[] groups)
 		{
 			this.Request.RequestParameters.Groups(groups);
 			return this;
@@ -4685,6 +4597,25 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for PutScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public partial class PutScriptDescriptor  : BaseRequest<PutScriptRequestParameters>
+	{
+		
+	
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutScriptRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+		
+	
+	}
+	
+	
 	///<summary>descriptor for ScrollGet
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
@@ -4869,13 +4800,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html
 	///</pre>
 	///</summary>
-	public partial class SearchShardsDescriptor  : BaseRequest<SearchShardsRequestParameters>
+	public partial class SearchShardsDescriptor<T> 
 	{
 		
 	
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchShardsDescriptor Preference(string preference)
+		public SearchShardsDescriptor<T> Preference(string preference)
 		{
 			this.Request.RequestParameters.Preference(preference);
 			return this;
@@ -4883,7 +4814,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value</summary>
-		public SearchShardsDescriptor Routing(string routing)
+		public SearchShardsDescriptor<T> Routing(string routing)
 		{
 			this.Request.RequestParameters.Routing(routing);
 			return this;
@@ -4891,7 +4822,7 @@ namespace Nest
 		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public SearchShardsDescriptor Local(bool local = true)
+		public SearchShardsDescriptor<T> Local(bool local = true)
 		{
 			this.Request.RequestParameters.Local(local);
 			return this;
@@ -4899,7 +4830,7 @@ namespace Nest
 		
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchShardsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public SearchShardsDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -4907,7 +4838,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchShardsDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public SearchShardsDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -4915,16 +4846,10 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchShardsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		public SearchShardsDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchShardsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
@@ -4936,13 +4861,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html
 	///</pre>
 	///</summary>
-	public partial class SearchTemplateDescriptor  : BaseRequest<SearchTemplateRequestParameters>
+	public partial class SearchTemplateDescriptor<T> 
 	{
 		
 	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchTemplateDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public SearchTemplateDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -4950,7 +4875,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchTemplateDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public SearchTemplateDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -4958,7 +4883,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchTemplateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		public SearchTemplateDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -4966,7 +4891,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchTemplateDescriptor Preference(string preference)
+		public SearchTemplateDescriptor<T> Preference(string preference)
 		{
 			this.Request.RequestParameters.Preference(preference);
 			return this;
@@ -4974,7 +4899,7 @@ namespace Nest
 		
 
 		///<summary>A comma-separated list of specific routing values</summary>
-		public SearchTemplateDescriptor Routing(params string[] routing)
+		public SearchTemplateDescriptor<T> Routing(params string[] routing)
 		{
 			this.Request.RequestParameters.Routing(routing);
 			return this;
@@ -4982,7 +4907,7 @@ namespace Nest
 		
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public SearchTemplateDescriptor Scroll(string scroll)
+		public SearchTemplateDescriptor<T> Scroll(string scroll)
 		{
 			this.Request.RequestParameters.Scroll(scroll);
 			return this;
@@ -4990,16 +4915,10 @@ namespace Nest
 		
 
 		///<summary>Search operation type</summary>
-		public SearchTemplateDescriptor SearchType(SearchType search_type)
+		public SearchTemplateDescriptor<T> SearchType(SearchType search_type)
 		{
 			this.Request.RequestParameters.SearchType(search_type);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
@@ -5140,13 +5059,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotGetRepositoryDescriptor  : BaseRequest<SnapshotGetRepositoryRequestParameters>
+	public partial class GetRepositoryDescriptor 
 	{
 		
 	
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotGetRepositoryDescriptor MasterTimeout(string master_timeout)
+		public GetRepositoryDescriptor MasterTimeout(string master_timeout)
 		{
 			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
@@ -5154,16 +5073,10 @@ namespace Nest
 		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public SnapshotGetRepositoryDescriptor Local(bool local = true)
+		public GetRepositoryDescriptor Local(bool local = true)
 		{
 			this.Request.RequestParameters.Local(local);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotGetRepositoryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
@@ -5204,7 +5117,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotStatusDescriptor  : BaseRequest<SnapshotStatusRequestParameters>
+	public partial class SnapshotStatusDescriptor 
 	{
 		
 	
@@ -5214,12 +5127,6 @@ namespace Nest
 		{
 			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotStatusRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

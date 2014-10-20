@@ -8,42 +8,41 @@ using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
-	[SetUpFixture]
-	public class SetupAndTeardownForIntegrationTests
+[SetUpFixture]
+public class SetupAndTeardownForIntegrationTests
+{
+	[SetUp]
+	public void Setup()
 	{
-		[SetUp]
-		public void Setup()
+		var client = new ElasticClient(
+			//ElasticsearchConfiguration.Settings(hostOverride: new Uri("http://localhost:9200"))
+			ElasticsearchConfiguration.Settings()
+		);
+
+		try
 		{
-			var client = new ElasticClient(
-				//ElasticsearchConfiguration.Settings(hostOverride: new Uri("http://localhost:9200"))
-				ElasticsearchConfiguration.Settings()
-			);
+			IntegrationSetup.CreateTestIndex(client, ElasticsearchConfiguration.DefaultIndex);
+			IntegrationSetup.CreateTestIndex(client, ElasticsearchConfiguration.DefaultIndex + "_clone");
 
-			try
-			{
-				IntegrationSetup.CreateTestIndex(client, ElasticsearchConfiguration.DefaultIndex);
-				IntegrationSetup.CreateTestIndex(client, ElasticsearchConfiguration.DefaultIndex + "_clone");
-
-				IntegrationSetup.IndexDemoData(client);
-			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-
+			IntegrationSetup.IndexDemoData(client);
 		}
-		[TearDown]
-		public void TearDown()
+		catch (Exception)
 		{
-			var client = ElasticsearchConfiguration.Client.Value;
-			client.DeleteIndex(di => di.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "*"));
+
+			throw;
 		}
+
 	}
+	[TearDown]
+	public void TearDown()
+	{
+		var client = ElasticsearchConfiguration.Client.Value;
+		client.DeleteIndex(di => di.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "*"));
+	}
+}
+
 namespace Nest.Tests.Integration
 {
-	
-
 	public static class IntegrationSetup
 	{
 		public static void IndexDemoData(IElasticClient client, string index = null)
@@ -58,7 +57,7 @@ namespace Nest.Tests.Integration
 				.IndexMany(people)
 				.IndexMany(boolTerms)
 				.Refresh()
-				);
+			);
 		}
 
 		public static string CreateNewIndexWithData(IElasticClient client)
@@ -73,14 +72,28 @@ namespace Nest.Tests.Integration
 		public static void CreateTestIndex(IElasticClient client, string indexName)
 		{
 			var createIndexResult = client.CreateIndex(indexName, c => c
-				.NumberOfReplicas(0)
-				.NumberOfShards(1)
+				.NumberOfReplicas(ElasticsearchConfiguration.NumberOfReplicas)
+				.NumberOfShards(ElasticsearchConfiguration.NumberOfShards)
 				.AddMapping<ElasticsearchProject>(m => m
 					.MapFromAttributes()
-					.Properties(p => p
-						.String(s => s.Name(ep => ep.Content).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))
+					.Properties(props => props
+						.String(s => s
+							.Name(p => p.Name)
+							.FieldData(fd => fd.Loading(FieldDataLoading.Eager))
+							.Fields(fields => fields
+								.String(ss => ss
+									.Name("sort")
+									.Index(FieldIndexOption.NotAnalyzed)
+								)
+							)
+						)
+						.String(s => s
+							.Name(ep => ep.Content)
+							.TermVector(TermVectorOption.WithPositionsOffsetsPayloads)
+						)
 					)
 				)
+				.AddAlias(indexName + "-aliased")
 				.AddMapping<Person>(m => m.MapFromAttributes())
 				.AddMapping<BoolTerm>(m => m.Properties(pp => pp
 					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.NotAnalyzed))
@@ -90,6 +103,6 @@ namespace Nest.Tests.Integration
 			createIndexResult.IsValid.Should().BeTrue();
 		}
 
-		
+
 	}
 }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net.Connection.Configuration;
+using Elasticsearch.Net.ConnectionPool;
 using PurifyNet;
 
 namespace Elasticsearch.Net.Connection.RequestState
@@ -12,6 +13,8 @@ namespace Elasticsearch.Net.Connection.RequestState
 	public class TransportRequestState<T> : IDisposable, ITransportRequestState
 	{
 		private readonly bool _traceEnabled;
+		private readonly bool _metricsEnabled;
+
 		private Stopwatch _stopwatch;
 
 		private ElasticsearchResponse<T> _result;
@@ -26,6 +29,15 @@ namespace Elasticsearch.Net.Connection.RequestState
 			get
 			{
 				return this.RequestParameters == null ? null : this.RequestParameters.RequestConfiguration;
+			}
+		}
+
+		public bool UsingPooling
+		{
+			get
+			{
+				var pool = this.ClientSettings.ConnectionPool;
+				return pool != null && pool.GetType() != typeof(SingleNodeConnectionPool);
 			}
 		}
 
@@ -81,8 +93,9 @@ namespace Elasticsearch.Net.Connection.RequestState
 			this.ClientSettings = settings;
 			this.RequestParameters = requestParameters;
 			this._traceEnabled = settings.TraceEnabled;
-			if (this._traceEnabled)
-				this._stopwatch = Stopwatch.StartNew(); this.Method = method;
+			this._metricsEnabled = settings.MetricsEnabled;
+			if (this._metricsEnabled)
+				this._stopwatch = Stopwatch.StartNew(); 
 
 			this.Method = method;
 			this.Path = path;
@@ -97,7 +110,7 @@ namespace Elasticsearch.Net.Connection.RequestState
 		public void TickSerialization(byte[] postData)
 		{
 			this.PostData = postData;
-			if (this._traceEnabled)
+			if (this._metricsEnabled)
 				this.SerializationTime = this._stopwatch.ElapsedMilliseconds;
 		}
 
@@ -129,8 +142,7 @@ namespace Elasticsearch.Net.Connection.RequestState
 		{
 			if (result == null)
 			{
-				if (!_traceEnabled) return;
-				this._stopwatch.Stop();
+				if (this._stopwatch != null) this._stopwatch.Stop();
 				return;
 			}
 			result.NumberOfRetries = this.Retried;
@@ -150,11 +162,12 @@ namespace Elasticsearch.Net.Connection.RequestState
 
 			if (this.ClientSettings.ConnectionStatusHandler != null)
 				this.ClientSettings.ConnectionStatusHandler(result);
+			
+			if (this._stopwatch != null) this._stopwatch.Stop();
 
 			if (!_traceEnabled) return;
 
 			this._result = result;
-			this._stopwatch.Stop();
 
 		}
 

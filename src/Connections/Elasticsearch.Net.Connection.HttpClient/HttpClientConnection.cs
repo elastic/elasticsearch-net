@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection.Configuration;
 
@@ -41,6 +42,7 @@ namespace Elasticsearch.Net.Connection
 			{
 				innerHandler.Proxy = new WebProxy(_settings.ProxyAddress)
 				{
+
 					Credentials = new NetworkCredential(_settings.ProxyUsername, _settings.ProxyPassword),
 				};
 
@@ -51,6 +53,13 @@ namespace Elasticsearch.Net.Connection
 			{
 				Timeout = TimeSpan.FromMilliseconds(_settings.Timeout)
 			};
+			if (settings.EnableCompressedResponses && innerHandler.SupportsAutomaticDecompression)
+			{
+				innerHandler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+				Client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+				Client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
+			}
+
 		}
 
 		/// <summary>
@@ -115,29 +124,26 @@ namespace Elasticsearch.Net.Connection
 			try
 			{
 				var request = new HttpRequestMessage(method, uri);
+				if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.ContentType))
+					request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestSpecificConfig.ContentType));
+				else if (!string.IsNullOrWhiteSpace(DefaultContentType))
+					request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(DefaultContentType));
+
+				if (!string.IsNullOrEmpty(uri.UserInfo))
+				{
+					request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes(uri.UserInfo)));
+				}
 
 				if (method != HttpMethod.Get && method != HttpMethod.Head && data != null && data.Length > 0)
 				{
 					request.Content = new ByteArrayContent(data);
-
-					if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.ContentType))
-					{
-						request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestSpecificConfig.ContentType));
-					}
-					else if (!string.IsNullOrWhiteSpace(DefaultContentType))
-					{
-						request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(DefaultContentType));
-					}
-
-					if (!string.IsNullOrWhiteSpace(DefaultContentType))
-					{
+					if (!string.IsNullOrWhiteSpace(DefaultContentType) && request.Content != null && request.Content.Headers != null)
 						request.Content.Headers.ContentType = new MediaTypeHeaderValue(DefaultContentType);
-					}
 				}
 
 				var response = await Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
 
-				if (method == HttpMethod.Head || response.Content == null || !response.Content.Headers.ContentLength.HasValue || response.Content.Headers.ContentLength.Value <= 0)
+				if (method == HttpMethod.Head || response.Content == null)
 				{
 					return ElasticsearchResponse<Stream>.Create(_settings, (int)response.StatusCode, method.ToString().ToLowerInvariant(), uri.ToString(), data);
 				}

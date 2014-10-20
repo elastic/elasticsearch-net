@@ -22,7 +22,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			.MaximumRetries(_retries);
 
 		[Test]
-		public void ThrowsMaxRetryException_AndRetriesTheSpecifiedTimes()
+		public void OnConnectionException_WithoutPooling_DoNotRetry()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
@@ -30,20 +30,20 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				FakeCalls.ProvideDefaultTransport(fake);
 
 				var getCall = FakeCalls.GetSyncCall(fake);
-				getCall.Throws<Exception>();
+				getCall.Throws((o)=> new Exception("inner"));
 
 				var client = fake.Resolve<ElasticsearchClient>();
 
 				client.Settings.MaxRetries.Should().Be(_retries);
 
-				Assert.Throws<MaxRetryException>(() => client.Info());
-				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
-
+				var e = Assert.Throws<Exception>(() => client.Info());
+				e.Message.Should().Be("inner");
+				getCall.MustHaveHappened(Repeated.Exactly.Once);
 			}
 		}
 		
 		[Test]
-		public void ThrowsMaxRetryException_AndRetriesTheSpecifiedTimes_HardIConnectionException_Async()
+		public void Hard_IConnectionException_AsyncCall_WithoutPooling_DoesNot_Retry_AndRethrows()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
@@ -52,19 +52,20 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var getCall = FakeCalls.GetCall(fake);
 
 				//return a started task that throws
-				getCall.Throws<Exception>();
+				getCall.Throws((o)=> new Exception("inner"));
 
 				var client = fake.Resolve<ElasticsearchClient>();
 
 				client.Settings.MaxRetries.Should().Be(_retries);
 
-				Assert.Throws<MaxRetryException>(async () => await client.InfoAsync());
-				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
+				var e = Assert.Throws<Exception>(async () => await client.InfoAsync());
+				e.Message.Should().Be("inner");
+				getCall.MustHaveHappened(Repeated.Exactly.Once);
 			}
 		}
 
 		[Test]
-		public void ThrowsMaxRetryException_AndRetriesTheSpecifiedTimes_Async()
+		public void Soft_IConnectionException_AsyncCall_WithoutPooling_DoesNot_Retry_AndRethrows()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
@@ -73,7 +74,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var getCall = FakeCalls.GetCall(fake);
 
 				//return a started task that throws
-				Func<ElasticsearchResponse<Stream>> badTask = () => { throw new Exception(); };
+				Func<ElasticsearchResponse<Stream>> badTask = () => { throw new Exception("inner"); };
 				var t = new Task<ElasticsearchResponse<Stream>>(badTask);
 				t.Start();
 				getCall.Returns(t);
@@ -82,8 +83,9 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 				client.Settings.MaxRetries.Should().Be(_retries);
 
-				Assert.Throws<MaxRetryException>(async () => await client.InfoAsync());
-				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
+				var e = Assert.Throws<Exception>(async () => await client.InfoAsync());
+				e.Message.Should().Be("inner");
+				getCall.MustHaveHappened(Repeated.Exactly.Once);
 			}
 		}
 

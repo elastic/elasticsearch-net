@@ -41,16 +41,27 @@ namespace Nest
 	[Obsolete("Scheduled to be removed in 2.0, renamed to TemplateExistsDescriptor")]
 	public class IndicesExistsTemplateDescriptor : TemplateExistsDescriptor { }
 
+	[Obsolete("Scheduled to be removed in 2.0, renamed to GetRepositoryDescriptor")]
+	public class SnapshotGetRepositoryDescriptor : GetRepositoryDescriptor { }
 	
+	[Obsolete("Scheduled to be removed in 2.0, renamed to GetRepositoryRequest")]
+	public class SnapshotGetRepositoryRequest : GetRepositoryRequest {}
+
 	[Obsolete("Scheduled to be removed in 2.0, use the generic variant of this class instead")]
-	public class ExplainDescriptor : ExplainDescriptor<object>
-	{
-		
-	}
+	public class ExplainDescriptor : ExplainDescriptor<object> { }
+
+	[Obsolete("Scheduled to be removed in 2.0, use the generic variant of this class instead")]
+	public class SearchShardsDescriptor : SearchShardsDescriptor<object> {}
 
 	[Obsolete("Scheduled to be removed in 2.0, use MultiPercolateDescriptor instead")]
 	public class MpercolateDescriptor : MultiPercolateDescriptor { }
 
 	[Obsolete("Scheduled to be removed in 2.0, use MultiPercolateRequest instead")]
 	public class MpercolateRequest : MultiPercolateRequest {}
+
+	[Obsolete("Scheduled to be removed in 2.0, use RecoveryStatusDescriptor instead")]
+	public class IndicesRecoveryDescriptor : RecoveryStatusDescriptor { }
+
+	[Obsolete("Scheduled to be removed in 2.0, use RecoveryStatusRequest instead")]
+	public class IndicesRecoveryRequest : RecoveryStatusRequest {}
 }

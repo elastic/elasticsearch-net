@@ -82,9 +82,11 @@ namespace Nest
 		string Preference { get; }
 		
 		string Routing { get; }
-		
+
 		SearchType? SearchType { get;  }
-		
+
+		bool? IgnoreUnavalable { get; }
+
 		Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set;}
 		
 		SearchRequestParameters QueryString { get; set; }
@@ -127,6 +129,12 @@ namespace Nest
 	
 	public partial class SearchRequest : QueryPathBase<SearchRequestParameters>, ISearchRequest
 	{
+		public SearchRequest() {}
+
+		public SearchRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+
+		public SearchRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+
 		private Type _clrType { get; set; }
 		Type ISearchRequest.ClrType { get { return _clrType; } }
 
@@ -172,6 +180,12 @@ namespace Nest
 					: string.Join(",", routing);
 			}
 		}
+
+		bool? ISearchRequest.IgnoreUnavalable
+		{
+			get { return this.QueryString == null ? null : this.QueryString.GetQueryStringValue<bool?>("ignore_unavailable"); }
+		}
+
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 
 		public SearchRequestParameters QueryString { get; set; }
@@ -186,6 +200,12 @@ namespace Nest
 	public partial class SearchRequest<T> : QueryPathBase<SearchRequestParameters, T>, ISearchRequest
 		where T : class
 	{
+		public SearchRequest() {}
+
+		public SearchRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+
+		public SearchRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo)
 		{
 			SearchPathInfo.Update(settings,pathInfo, this);
@@ -233,6 +253,12 @@ namespace Nest
 					: string.Join(",", routing);
 			}
 		}
+
+		bool? ISearchRequest.IgnoreUnavalable
+		{
+			get { return this.QueryString == null ? null : this.QueryString.GetQueryStringValue<bool?>("ignore_unavailable");  }
+		}
+
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 		public SearchRequestParameters QueryString { get; set; }
 	}
@@ -271,6 +297,11 @@ namespace Nest
 					? null
 					: string.Join(",", routing);
 			}
+		}
+
+		bool? ISearchRequest.IgnoreUnavalable
+		{
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable"); }
 		}
 
 		Type ISearchRequest.ClrType { get { return typeof(T); } }

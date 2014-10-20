@@ -1046,7 +1046,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1082,7 +1084,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1120,7 +1124,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1158,7 +1164,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1196,7 +1204,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1234,7 +1244,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1274,7 +1286,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1314,7 +1328,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1350,7 +1366,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1386,7 +1404,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1424,7 +1444,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1462,7 +1484,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1500,7 +1524,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1538,7 +1564,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1578,7 +1606,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1618,7 +1648,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1654,7 +1686,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1690,7 +1724,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1728,7 +1764,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1766,7 +1804,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1804,7 +1844,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1842,7 +1884,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1882,7 +1926,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1922,7 +1968,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1958,7 +2006,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -1994,7 +2044,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2032,7 +2084,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2070,7 +2124,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2106,7 +2162,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2142,7 +2200,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2180,7 +2240,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2218,7 +2280,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2254,7 +2318,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2290,7 +2356,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2328,7 +2396,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2366,7 +2436,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2402,7 +2474,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2438,7 +2512,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2476,7 +2552,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2514,7 +2592,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2552,7 +2632,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2590,7 +2672,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2630,7 +2714,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2670,7 +2756,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2706,7 +2794,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2742,7 +2832,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2780,7 +2872,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2818,7 +2912,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2854,7 +2950,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2890,7 +2988,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2928,7 +3028,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -2966,7 +3068,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3002,7 +3106,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3038,7 +3144,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3076,7 +3184,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3114,7 +3224,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3150,7 +3262,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3186,7 +3300,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3224,7 +3340,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3262,7 +3380,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3298,7 +3418,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3334,7 +3456,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3372,7 +3496,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3410,7 +3536,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3448,7 +3576,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3486,7 +3616,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3526,7 +3658,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3566,7 +3700,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3602,7 +3738,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3638,7 +3776,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3676,7 +3816,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3714,7 +3856,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3752,7 +3896,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3790,7 +3936,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3830,7 +3978,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3870,7 +4020,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3906,7 +4058,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3942,7 +4096,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -3980,7 +4136,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -4018,7 +4176,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { ContentType = "text/plain" };
 			else {
-					requestParams.RequestConfiguration.ContentType = "text/plain";
+					if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}
 							}
 				
 
@@ -7308,7 +7468,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -7350,7 +7512,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -7394,7 +7558,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -7438,7 +7604,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -7745,6 +7913,294 @@ namespace Elasticsearch.Net
 			));
 		}
 		
+		///<summary>Represents a DELETE on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> DeleteScript<T>(string lang, string id, Func<DeleteScriptRequestParameters, DeleteScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new DeleteScriptRequestParameters());
+			}
+				
+
+
+			return this.DoRequest<T>(
+				"DELETE", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a DELETE on /_scripts/{lang}/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> DeleteScriptAsync<T>(string lang, string id, Func<DeleteScriptRequestParameters, DeleteScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new DeleteScriptRequestParameters());
+			}
+				
+
+
+			return this.DoRequestAsync<T>(
+				"DELETE", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a DELETE on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> DeleteScript(string lang, string id, Func<DeleteScriptRequestParameters, DeleteScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new DeleteScriptRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"DELETE", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a DELETE on /_scripts/{lang}/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> DeleteScriptAsync(string lang, string id, Func<DeleteScriptRequestParameters, DeleteScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new DeleteScriptRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"DELETE", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a DELETE on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> DeleteTemplate<T>(string id, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new DeleteTemplateRequestParameters());
+			}
+				
+
+
+			return this.DoRequest<T>(
+				"DELETE", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a DELETE on /_search/template/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> DeleteTemplateAsync<T>(string id, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new DeleteTemplateRequestParameters());
+			}
+				
+
+
+			return this.DoRequestAsync<T>(
+				"DELETE", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a DELETE on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> DeleteTemplate(string id, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new DeleteTemplateRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"DELETE", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a DELETE on /_search/template/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> DeleteTemplateAsync(string id, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new DeleteTemplateRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"DELETE", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
 		///<summary>Represents a HEAD on /{index}/{type}/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
@@ -7776,7 +8232,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -7818,7 +8276,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -7862,7 +8322,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -7906,7 +8368,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -8389,6 +8853,154 @@ namespace Elasticsearch.Net
 			));
 		}
 		
+		///<summary>Represents a GET on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> GetScript<T>(string lang, string id, Func<GetScriptRequestParameters, GetScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new GetScriptRequestParameters());
+			}
+				
+
+
+			return this.DoRequest<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_scripts/{lang}/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> GetScriptAsync<T>(string lang, string id, Func<GetScriptRequestParameters, GetScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new GetScriptRequestParameters());
+			}
+				
+
+
+			return this.DoRequestAsync<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> GetScript(string lang, string id, Func<GetScriptRequestParameters, GetScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new GetScriptRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /_scripts/{lang}/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> GetScriptAsync(string lang, string id, Func<GetScriptRequestParameters, GetScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new GetScriptRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_source
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
@@ -8535,6 +9147,146 @@ namespace Elasticsearch.Net
 			if (requestParameters != null)
 			{
 				requestParams = requestParameters(new SourceRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> GetTemplate<T>(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new GetTemplateRequestParameters());
+			}
+				
+
+
+			return this.DoRequest<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_search/template/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> GetTemplateAsync<T>(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new GetTemplateRequestParameters());
+			}
+				
+
+
+			return this.DoRequestAsync<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> GetTemplate(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new GetTemplateRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /_search/template/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> GetTemplateAsync(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new GetTemplateRequestParameters());
 			}
 				
 
@@ -10849,7 +11601,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesDeleteAlias<T>(string index, string name, Func<IndicesDeleteAliasRequestParameters, IndicesDeleteAliasRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesDeleteAlias<T>(string index, string name, Func<DeleteAliasRequestParameters, DeleteAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -10858,7 +11610,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesDeleteAliasRequestParameters());
+				requestParams = requestParameters(new DeleteAliasRequestParameters());
 			}
 				
 
@@ -10885,7 +11637,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesDeleteAliasAsync<T>(string index, string name, Func<IndicesDeleteAliasRequestParameters, IndicesDeleteAliasRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesDeleteAliasAsync<T>(string index, string name, Func<DeleteAliasRequestParameters, DeleteAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -10894,7 +11646,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesDeleteAliasRequestParameters());
+				requestParams = requestParameters(new DeleteAliasRequestParameters());
 			}
 				
 
@@ -10923,7 +11675,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesDeleteAlias(string index, string name, Func<IndicesDeleteAliasRequestParameters, IndicesDeleteAliasRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesDeleteAlias(string index, string name, Func<DeleteAliasRequestParameters, DeleteAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -10932,7 +11684,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesDeleteAliasRequestParameters());
+				requestParams = requestParameters(new DeleteAliasRequestParameters());
 			}
 				
 
@@ -10961,7 +11713,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesDeleteAliasAsync(string index, string name, Func<IndicesDeleteAliasRequestParameters, IndicesDeleteAliasRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesDeleteAliasAsync(string index, string name, Func<DeleteAliasRequestParameters, DeleteAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -10970,7 +11722,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesDeleteAliasRequestParameters());
+				requestParams = requestParameters(new DeleteAliasRequestParameters());
 			}
 				
 
@@ -11444,7 +12196,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11482,7 +12236,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11522,7 +12278,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11562,7 +12320,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11600,7 +12360,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11638,7 +12400,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11678,7 +12442,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11718,7 +12484,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11758,7 +12526,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11798,7 +12568,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11840,7 +12612,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11882,7 +12656,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11920,7 +12696,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11958,7 +12736,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -11998,7 +12778,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12038,7 +12820,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12076,7 +12860,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12114,7 +12900,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12154,7 +12942,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12194,7 +12984,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12234,7 +13026,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12274,7 +13068,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12316,7 +13112,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -12358,7 +13156,9 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) 
 					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
 			else {
-									requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -17434,7 +18234,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutAlias<T>(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutAlias<T>(string index, string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -17443,7 +18243,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -17471,7 +18271,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutAliasAsync<T>(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutAliasAsync<T>(string index, string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -17480,7 +18280,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -17510,7 +18310,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutAlias(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutAlias(string index, string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -17519,7 +18319,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -17549,7 +18349,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasAsync(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasAsync(string index, string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -17558,7 +18358,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -17585,7 +18385,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutAliasForAll<T>(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutAliasForAll<T>(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
@@ -17593,7 +18393,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -17620,7 +18420,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutAliasForAllAsync<T>(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutAliasForAllAsync<T>(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
@@ -17628,7 +18428,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -17657,7 +18457,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutAliasForAll(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutAliasForAll(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
@@ -17665,7 +18465,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -17694,7 +18494,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasForAllAsync(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasForAllAsync(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
@@ -17702,7 +18502,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -17730,7 +18530,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutAliasPost<T>(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutAliasPost<T>(string index, string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -17739,7 +18539,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -17767,7 +18567,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutAliasPostAsync<T>(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutAliasPostAsync<T>(string index, string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -17776,7 +18576,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -17806,7 +18606,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutAliasPost(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutAliasPost(string index, string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -17815,7 +18615,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -17845,7 +18645,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasPostAsync(string index, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasPostAsync(string index, string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
@@ -17854,7 +18654,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -17881,7 +18681,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesPutAliasPostForAll<T>(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutAliasPostForAll<T>(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
@@ -17889,7 +18689,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -17916,7 +18716,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesPutAliasPostForAllAsync<T>(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutAliasPostForAllAsync<T>(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
@@ -17924,7 +18724,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -17953,7 +18753,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesPutAliasPostForAll(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesPutAliasPostForAll(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
@@ -17961,7 +18761,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -17990,7 +18790,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasPostForAllAsync(string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasPostForAllAsync(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			var url = "_alias/{0}".F(Encoded(name));
@@ -17998,7 +18798,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesPutAliasRequestParameters());
+				requestParams = requestParameters(new PutAliasRequestParameters());
 			}
 				
 
@@ -20095,14 +20895,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesRecoveryForAll<T>(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesRecoveryForAll<T>(Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_recovery";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				requestParams = requestParameters(new RecoveryStatusRequestParameters());
 			}
 				
 
@@ -20127,14 +20927,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesRecoveryForAllAsync<T>(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesRecoveryForAllAsync<T>(Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_recovery";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				requestParams = requestParameters(new RecoveryStatusRequestParameters());
 			}
 				
 
@@ -20161,14 +20961,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesRecoveryForAll(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesRecoveryForAll(Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_recovery";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				requestParams = requestParameters(new RecoveryStatusRequestParameters());
 			}
 				
 
@@ -20195,14 +20995,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRecoveryForAllAsync(Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRecoveryForAllAsync(Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_recovery";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				requestParams = requestParameters(new RecoveryStatusRequestParameters());
 			}
 				
 
@@ -20228,7 +21028,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesRecovery<T>(string index, Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesRecovery<T>(string index, Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_recovery".F(Encoded(index));
@@ -20236,7 +21036,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				requestParams = requestParameters(new RecoveryStatusRequestParameters());
 			}
 				
 
@@ -20262,7 +21062,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesRecoveryAsync<T>(string index, Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesRecoveryAsync<T>(string index, Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_recovery".F(Encoded(index));
@@ -20270,7 +21070,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				requestParams = requestParameters(new RecoveryStatusRequestParameters());
 			}
 				
 
@@ -20298,7 +21098,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesRecovery(string index, Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesRecovery(string index, Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_recovery".F(Encoded(index));
@@ -20306,7 +21106,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				requestParams = requestParameters(new RecoveryStatusRequestParameters());
 			}
 				
 
@@ -20334,7 +21134,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRecoveryAsync(string index, Func<IndicesRecoveryRequestParameters, IndicesRecoveryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesRecoveryAsync(string index, Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_recovery".F(Encoded(index));
@@ -20342,7 +21142,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesRecoveryRequestParameters());
+				requestParams = requestParameters(new RecoveryStatusRequestParameters());
 			}
 				
 
@@ -29981,6 +30781,598 @@ namespace Elasticsearch.Net
 			));
 		}
 		
+		///<summary>Represents a PUT on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> PutScript<T>(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutScriptRequestParameters());
+			}
+				
+
+
+			return this.DoRequest<T>(
+				"PUT", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a PUT on /_scripts/{lang}/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> PutScriptAsync<T>(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutScriptRequestParameters());
+			}
+				
+
+
+			return this.DoRequestAsync<T>(
+				"PUT", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a PUT on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> PutScript(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutScriptRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"PUT", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a PUT on /_scripts/{lang}/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> PutScriptAsync(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutScriptRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"PUT", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a POST on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> PutScriptPost<T>(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutScriptRequestParameters());
+			}
+				
+
+
+			return this.DoRequest<T>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a POST on /_scripts/{lang}/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> PutScriptPostAsync<T>(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutScriptRequestParameters());
+			}
+				
+
+
+			return this.DoRequestAsync<T>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a POST on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> PutScriptPost(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutScriptRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a POST on /_scripts/{lang}/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+	    ///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> PutScriptPostAsync(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null)
+		{
+			lang.ThrowIfNullOrEmpty("lang");
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_scripts/{0}/{1}".F(Encoded(lang), Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutScriptRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a PUT on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> PutTemplate<T>(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutTemplateRequestParameters());
+			}
+				
+
+
+			return this.DoRequest<T>(
+				"PUT", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a PUT on /_search/template/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> PutTemplateAsync<T>(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutTemplateRequestParameters());
+			}
+				
+
+
+			return this.DoRequestAsync<T>(
+				"PUT", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a PUT on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> PutTemplate(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutTemplateRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"PUT", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a PUT on /_search/template/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> PutTemplateAsync(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutTemplateRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"PUT", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a POST on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> PutTemplatePost<T>(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutTemplateRequestParameters());
+			}
+				
+
+
+			return this.DoRequest<T>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a POST on /_search/template/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> PutTemplatePostAsync<T>(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutTemplateRequestParameters());
+			}
+				
+
+
+			return this.DoRequestAsync<T>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a POST on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> PutTemplatePost(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutTemplateRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a POST on /_search/template/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> PutTemplatePostAsync(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		{
+			id.ThrowIfNullOrEmpty("id");
+			var url = "_search/template/{0}".F(Encoded(id));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new PutTemplateRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
 		///<summary>Represents a GET on /_search/scroll
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
@@ -34119,14 +35511,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotGetRepository<T>(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotGetRepository<T>(Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 
@@ -34151,14 +35543,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 
@@ -34185,14 +35577,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotGetRepository(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotGetRepository(Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 
@@ -34219,14 +35611,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetRepositoryAsync(Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetRepositoryAsync(Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			var url = "_snapshot";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 
@@ -34252,7 +35644,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SnapshotGetRepository<T>(string repository, Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SnapshotGetRepository<T>(string repository, Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
@@ -34260,7 +35652,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 
@@ -34286,7 +35678,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(string repository, Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(string repository, Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
@@ -34294,7 +35686,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 
@@ -34322,7 +35714,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SnapshotGetRepository(string repository, Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> SnapshotGetRepository(string repository, Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
@@ -34330,7 +35722,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 
@@ -34358,7 +35750,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetRepositoryAsync(string repository, Func<SnapshotGetRepositoryRequestParameters, SnapshotGetRepositoryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> SnapshotGetRepositoryAsync(string repository, Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			var url = "_snapshot/{0}".F(Encoded(repository));
@@ -34366,7 +35758,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new SnapshotGetRepositoryRequestParameters());
+				requestParams = requestParameters(new GetRepositoryRequestParameters());
 			}
 				
 

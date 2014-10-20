@@ -4,7 +4,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class ElasticsearchPathInfo<TParameters> 
+	public class ElasticsearchPathInfo<TParameters> : IElasticsearchPathInfo
 		where TParameters : IRequestParameters, new()
 	{
 		public PathInfoHttpMethod HttpMethod { get; set; }
@@ -25,6 +25,8 @@ namespace Nest
 		public string Metric { get; set; }
 		public string IndexMetric { get; set; }
 
+		public string Lang { get; set; }
+
 		public ElasticsearchPathInfo()
 		{
 			this.RequestParameters = new TParameters();
@@ -35,5 +37,24 @@ namespace Nest
 			this.RequestParameters.DeserializationState = customObjectCreation;
 			return this;
 		}
+	}
+
+	public interface IElasticsearchPathInfo
+	{
+		PathInfoHttpMethod HttpMethod { get; set; }
+		string Index { get; set; }
+		string Type { get; set; }
+		string Id { get; set; }
+		string Name { get; set; }
+		string Field { get; set; }
+		string ScrollId { get; set; }
+		string NodeId { get; set; }
+		string Fields { get; set; }
+		string SearchGroups { get; set; }
+		string IndexingTypes { get; set; }
+		string Repository { get; set; }
+		string Snapshot { get; set; }
+		string Metric { get; set; }
+		string IndexMetric { get; set; }
 	}
 }

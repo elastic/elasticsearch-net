@@ -140,6 +140,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "function_score")]
 		IFunctionScoreQuery FunctionScore { get; set; }
 
+		[JsonProperty(PropertyName = "template")]
+		ITemplateQuery Template { get; set; }
+
 		void Accept(IQueryVisitor visitor);
 	}
 }

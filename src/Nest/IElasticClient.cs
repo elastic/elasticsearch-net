@@ -791,6 +791,84 @@ namespace Nest
 			where TResult : class;
 
 		/// <summary>
+		/// The /_search/template endpoint allows to use the mustache language to pre render search 
+		/// requests, before they are executed and fill existing templates with template parameters.
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
+		/// <param name="selector">A descriptor that describes the parameters for the search operation</param>
+		/// <returns></returns>
+		ISearchResponse<T> SearchTemplate<T>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector)
+			where T : class;
+
+		/// <inheritdoc />
+		ISearchResponse<TResult> SearchTemplate<T, TResult>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector)
+			where T : class
+			where TResult : class;
+
+		/// <inheritdoc />
+		ISearchResponse<T> SearchTemplate<T>(ISearchTemplateRequest request)
+			where T : class;
+
+		/// <inheritdoc />
+		ISearchResponse<TResult> SearchTemplate<T, TResult>(ISearchTemplateRequest request)
+			where T : class
+			where TResult : class;
+
+		/// <inheritdoc />
+		Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector)
+			where T : class
+			where TResult : class;
+
+		/// <inheritdoc />
+		Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request)
+			where T : class
+			where TResult : class;
+
+		/// <inheritdoc />
+		IGetSearchTemplateResponse GetSearchTemplate(string name, Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector = null);
+
+		/// <inheritdoc />
+		IGetSearchTemplateResponse GetSearchTemplate(IGetSearchTemplateRequest request);
+
+		/// <inheritdoc />
+		Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(string name, Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(IGetSearchTemplateRequest request);
+
+		/// <inheritdoc />
+		IPutSearchTemplateResponse PutSearchTemplate(string name, Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector = null);
+
+		/// <inheritdoc />
+		IPutSearchTemplateResponse PutSearchTemplate(IPutSearchTemplateRequest request);
+
+		/// <inheritdoc />
+		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(string name, Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request);
+
+		/// <inheritdoc />
+		IDeleteSearchTemplateResponse DeleteSearchTemplate(string name, Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector = null);
+
+		/// <inheritdoc />
+		IDeleteSearchTemplateResponse DeleteSearchTemplate(IDeleteSearchTemplateRequest request);
+
+		/// <inheritdoc />
+		Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(string name, Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request);
+
+		/// <summary>
 		/// The multi search API allows to execute several search requests within the same API.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-multi-search.html
 		/// </summary>
@@ -1023,7 +1101,38 @@ namespace Nest
 		
 		/// <inheritdoc />
 		Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest);
-		
+
+		/// <summary>
+		/// Add a single index alias
+		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-adding
+		/// </summary>
+		/// <param name="putAliasRequest">A descriptor that describes the put alias request</param>
+		IPutAliasResponse PutAlias(IPutAliasRequest putAliasRequest);
+
+		/// <inheritdoc />
+		Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest putAliasRequest);
+
+		/// <inheritdoc />
+		IPutAliasResponse PutAlias(Func<PutAliasDescriptor, PutAliasDescriptor> putAliasDescriptor);
+
+		/// <inheritdoc />
+		Task<IPutAliasResponse> PutAliasAsync(Func<PutAliasDescriptor, PutAliasDescriptor> putAliasDescriptor);
+
+		/// <summary>
+		/// Delete an index alias
+		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#deleting
+		/// </summary>
+		/// <param name="deleteAliasRequest">A descriptor that describes the delete alias request</param>
+		IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest deleteAliasRequest);
+
+		/// <inheritdoc />
+		Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest deleteAliasRequest);
+
+		/// <inheritdoc />
+		IDeleteAliasResponse DeleteAlias<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor) where T : class;
+
+		/// <inheritdoc />
+		Task<IDeleteAliasResponse> DeleteAliasAsync<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor) where T : class;
 
 		/// <summary>
 		/// The optimize API allows to optimize one or more indices through an API. The optimize process basically optimizes 
@@ -1290,6 +1399,20 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest clusterSettingsRequest = null);
 
+		/// <summary>
+		/// Returns a list of any cluster-level changes (e.g. create index, update mapping, allocate or fail shard) which have not yet been executed.
+		/// </summary>
+		IClusterPendingTasksResponse ClusterPendingTasks(Func<ClusterPendingTasksDescriptor, ClusterPendingTasksDescriptor> pendingTasksSelector = null);
+
+		/// <inheritdoc />
+		Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(Func<ClusterPendingTasksDescriptor, ClusterPendingTasksDescriptor> pendingTasksSelector = null);
+
+		/// <inheritdoc />
+		IClusterPendingTasksResponse ClusterPendingTasks(IClusterPendingTasksRequest pendingTasksRequest);
+
+		/// <inheritdoc />
+		Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest pendingTasksRequest);
+
 		/// <inheritdoc />
 		IExistsResponse AliasExists(Func<AliasExistsDescriptor, AliasExistsDescriptor> selector);
 
@@ -1381,5 +1504,72 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IPingResponse> PingAsync(IPingRequest pingRequest);
+
+		/// <inheritdoc />
+		ISearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, SearchShardsDescriptor<T>> searchSelector) where T : class;
+
+		ISearchShardsResponse SearchShards(ISearchShardsRequest request);
+
+		/// <inheritdoc />
+		Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, SearchShardsDescriptor<T>> searchSelector)
+			where T : class;
+
+		Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request);
+
+		/// <inheritdoc />
+		IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector);
+
+		/// <inheritdoc />
+		IGetRepositoryResponse GetRepository(IGetRepositoryRequest request);
+
+		/// <inheritdoc />
+		Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector);
+
+		/// <inheritdoc />
+		Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request);
+
+		ISnapshotStatusResponse SnapshotStatus(Func<SnapshotStatusDescriptor, SnapshotStatusDescriptor> selector = null);
+
+		/// <inheritdoc />
+		ISnapshotStatusResponse SnapshotStatus(ISnapshotStatusRequest getSnapshotRequest);
+
+		/// <inheritdoc />
+		Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, SnapshotStatusDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest getSnapshotRequest);
+
+		IRecoveryStatusResponse RecoveryStatus(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null);
+
+		/// <inheritdoc />
+		IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest statusRequest);
+
+		/// <inheritdoc />
+		Task<IRecoveryStatusResponse> RecoveryStatusAsync(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest statusRequest);
+
+		/// <summary>
+		/// Perform any request you want over the configured IConnection synchronously while taking advantage of the cluster failover.
+		/// </summary>
+		/// <typeparam name="T">The type representing the response JSON</typeparam>
+		/// <param name="method">the HTTP Method to use</param>
+		/// <param name="path">The path of the the url that you would like to hit</param>
+		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
+		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
+		/// <returns>An ElasticsearchResponse of T where T represents the JSON response body</returns>
+		ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, IRequestParameters requestParameters = null);
+
+		/// <summary>
+		/// Perform any request you want over the configured IConnection asynchronously while taking advantage of the cluster failover.
+		/// </summary>
+		/// <typeparam name="T">The type representing the response JSON</typeparam>
+		/// <param name="method">the HTTP Method to use</param>
+		/// <param name="path">The path of the the url that you would like to hit</param>
+		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
+		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
+		/// <returns>A task of ElasticsearchResponse of T where T represents the JSON response body</returns>
+		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null);
 	}
 }

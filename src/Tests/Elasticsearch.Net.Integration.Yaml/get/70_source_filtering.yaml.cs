@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -120,7 +123,7 @@ namespace Elasticsearch.Net.Integration.Yaml.Get8
 
 				//match _response.fields.count: 
 				this.IsMatch(_response.fields.count, new [] {
-					@"1"
+					1
 				});
 
 				//match _response._source.include.field1: 

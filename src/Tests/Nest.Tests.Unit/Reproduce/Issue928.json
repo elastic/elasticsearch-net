@@ -1,0 +1,32 @@
+﻿  {
+  "filter": {
+    "bool": {
+      "must": [
+        {
+          "fquery": {
+            "query": {
+              "term": {
+                "field1": {
+                  "value": "value"
+                }
+              }
+            },
+            "_cache": true
+          }
+        },
+        {
+          "fquery": {
+            "query": {
+              "term": {
+                "field2": {
+                  "value": "value"
+                }
+              }
+            },
+            "_cache": true
+          }
+        }
+      ]
+    }
+  }
+}

@@ -232,7 +232,7 @@ namespace Nest.Tests.Integration.Aggregations
 				.Aggregations(a => a
 					.DateHistogram("bucket_agg", dh => dh
 						.Field(p => p.StartedOn)
-						.Interval("1d")
+						.Interval(DateInterval.Day)
 					)
 				)
 			);

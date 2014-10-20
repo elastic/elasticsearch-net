@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -135,7 +136,7 @@ namespace Nest
 				var value = p.Value as IElasticCoreType;
 				if (value == null)
 					continue;
-
+				if (_Mapping.Fields == null) _Mapping.Fields = new Dictionary<PropertyNameMarker, IElasticCoreType>();
 				_Mapping.Fields[p.Key] = value;
 			}
 			return this;

@@ -25,7 +25,8 @@ namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 					"sort",
 					"_source",
 					"_source_include",
-					"_source_exclude"
+					"_source_exclude",
+					"track_scores"
 				};
 			}
 		}

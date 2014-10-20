@@ -137,6 +137,79 @@ namespace Nest
 			);
 		}
 
+		/// <inheritdoc />
+		public IPutAliasResponse PutAlias(IPutAliasRequest putAliasRequest)
+		{
+			return this.Dispatch<IPutAliasRequest, PutAliasRequestParameters, PutAliasResponse>(
+				putAliasRequest,
+				(p, d) => this.RawDispatch.IndicesPutAliasDispatch<PutAliasResponse>(p, d)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest putAliasRequest)
+		{
+			return this.DispatchAsync<IPutAliasRequest, PutAliasRequestParameters, PutAliasResponse, IPutAliasResponse>(
+				putAliasRequest,
+				(p, d) => this.RawDispatch.IndicesPutAliasDispatchAsync<PutAliasResponse>(p, d)
+			);
+		}
+
+		/// <inheritdoc />
+		public IPutAliasResponse PutAlias(Func<PutAliasDescriptor, PutAliasDescriptor> putAliasDescriptor)
+		{
+			return this.Dispatch<PutAliasDescriptor, PutAliasRequestParameters, PutAliasResponse>(
+				putAliasDescriptor,
+				(p, d) => this.RawDispatch.IndicesPutAliasDispatch<PutAliasResponse>(p, d)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IPutAliasResponse> PutAliasAsync(Func<PutAliasDescriptor, PutAliasDescriptor> putAliasDescriptor)
+		{
+			return this.DispatchAsync<PutAliasDescriptor, PutAliasRequestParameters, PutAliasResponse, IPutAliasResponse>(
+				putAliasDescriptor,
+				(p, d) => this.RawDispatch.IndicesPutAliasDispatchAsync<PutAliasResponse>(p, d)
+			);
+		}
+
+		/// <inheritdoc />
+		public IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest deleteAliasRequest)
+		{
+			return this.Dispatch<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse>(
+				deleteAliasRequest,
+				(p, d) => this.RawDispatch.IndicesDeleteAliasDispatch<DeleteAliasResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest deleteAliasRequest)
+		{
+			return this.DispatchAsync<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse, IDeleteAliasResponse>(
+				deleteAliasRequest,
+				(p, d) => this.RawDispatch.IndicesDeleteAliasDispatchAsync<DeleteAliasResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public IDeleteAliasResponse DeleteAlias<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor)
+			where T : class
+		{
+			return this.Dispatch<DeleteAliasDescriptor<T>, DeleteAliasRequestParameters, DeleteAliasResponse>(
+				deleteAliasDescriptor,
+				(p, d) => this.RawDispatch.IndicesDeleteAliasDispatch<DeleteAliasResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IDeleteAliasResponse> DeleteAliasAsync<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor)
+			where T : class
+		{
+			return this.DispatchAsync<DeleteAliasDescriptor<T>, DeleteAliasRequestParameters, DeleteAliasResponse, IDeleteAliasResponse>(
+				deleteAliasDescriptor,
+				(p, d) => this.RawDispatch.IndicesDeleteAliasDispatchAsync<DeleteAliasResponse>(p)
+			);
+		}
 
 		/// <inheritdoc />
 		private GetAliasesResponse DeserializeGetAliasesResponse(IElasticsearchResponse connectionStatus, Stream stream)

@@ -85,11 +85,15 @@ namespace Elasticsearch.Net
 			else {
 				@if (url.StartsWith("_cat"))
 				{
-					<text>requestParams.RequestConfiguration.ContentType = "text/plain";</text>
+					<text>if (string.IsNullOrWhiteSpace(requestParams.RequestConfiguration.ContentType)) {
+						requestParams.RequestConfiguration.ContentType = "text/plain";
+					}</text>
 				}
 				@if (method.Allow404)
 				{
-					<text>requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };</text>
+					<text> if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}</text>
 				}
 			}
 				</text>

@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 
@@ -261,8 +264,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Suggest2
 						input= "Hotel Marriot in Amsterdam",
 						context= new {
 							location= new {
-								lat= "52.22",
-								lon= "4.53"
+								lat= 52.22,
+								lon= 4.53
 							}
 						}
 					}
@@ -275,8 +278,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Suggest2
 						input= "Hotel Marriot in Berlin",
 						context= new {
 							location= new {
-								lat= "53.31",
-								lon= "13.24"
+								lat= 53.31,
+								lon= 13.24
 							}
 						}
 					}
@@ -297,8 +300,8 @@ namespace Elasticsearch.Net.Integration.Yaml.Suggest2
 							field= "suggest_geo",
 							context= new {
 								location= new {
-									lat= "52.22",
-									lon= "4.53"
+									lat= 52.22,
+									lon= 4.53
 								}
 							}
 						}

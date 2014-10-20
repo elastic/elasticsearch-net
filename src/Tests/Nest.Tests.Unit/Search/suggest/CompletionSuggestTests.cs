@@ -158,5 +158,72 @@ namespace Nest.Tests.Unit.Search.Suggest
 			var json = search.ConnectionStatus.Request.Utf8String();
 			Assert.True(json.JsonEquals(expected), json);
 		}
+		
+		[Test]
+		public void CompletionSuggestWithCategoryContextTest()
+		{
+			var search = this._client.Search<ElasticsearchProject>(s => s
+				.SuggestCompletion("mycompletionsuggest", ts => ts
+					.Text("m")
+					.OnField(p => p.Suggest)
+					.Size(10)
+					.Context(c => c.
+						Add("color", "red")
+					)
+				)
+			);
+
+			var expected = @"{
+				suggest: {
+					mycompletionsuggest: {
+						text: ""m"",
+						completion: {
+							field: ""suggest"",
+							size: 10,
+							context: {
+								color: ""red""
+							}
+						}
+					}
+				}
+			}";
+			var json = search.ConnectionStatus.Request.Utf8String();
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
+		public void CompletionSuggestWithGeoContextTest()
+		{
+			var search = this._client.Search<ElasticsearchProject>(s => s
+				.SuggestCompletion("mycompletionsuggest", ts => ts
+					.Text("m")
+					.OnField(p => p.Suggest)
+					.Size(10)
+					.Context(c => c.
+						Add("location", new LatLon { Lat = 0, Lon = 0})
+					)
+				)
+			);
+
+			var expected = @"{
+				suggest: {
+					mycompletionsuggest: {
+						text: ""m"",
+						completion: {
+							field: ""suggest"",
+							size: 10,
+							context: {
+								location: {
+									lat: 0.0,
+									lon: 0.0
+								}
+							}
+						}
+					}
+				}
+			}";
+			var json = search.ConnectionStatus.Request.Utf8String();
+			Assert.True(json.JsonEquals(expected), json);
+		}
 	}
 }

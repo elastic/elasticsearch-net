@@ -11,6 +11,8 @@ namespace Nest.Tests.Integration
 		public static readonly string Host = "localhost";
 		public static readonly int MaxConnections = 20;
 
+		public static readonly int NumberOfShards = 2;
+		public static readonly int NumberOfReplicas = 1;
 
 		public static readonly string DefaultIndex = DefaultIndexPrefix + Process.GetCurrentProcess().Id;
 
@@ -30,7 +32,7 @@ namespace Nest.Tests.Integration
 		{
 			var host = Host;
 			if (port != 9500 && Process.GetProcessesByName("fiddler").HasAny())
-				host = "localhost.fiddler";
+				host = "ipv4.fiddler";
 
 			var uri = new UriBuilder("http", host, port.GetValueOrDefault(9200)).Uri;
 			return uri;
