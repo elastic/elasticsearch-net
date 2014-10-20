@@ -10,12 +10,12 @@ namespace Nest
 	public class ClusterRerouteExplanation
 	{
 		[JsonProperty("command")]
-		public string Comand { get; set; }
+		public string Command { get; set; }
 		
 		[JsonProperty("parameters")]
 		public ClusterRerouteParameters Parameters { get; set; }
 
 		[JsonProperty("decisions")]
-		public IEnumerable<ClusterRerouteDecision> Descisions { get; set; }
+		public IEnumerable<ClusterRerouteDecision> Decisions { get; set; }
 	}
 }
