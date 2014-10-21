@@ -44,7 +44,7 @@ namespace Elasticsearch.Net.Connection.Configuration
 		bool? DisablePing { get; set; }
 
 		/// <summary>
-		/// Treat the folowing statuses (on top of the 200 range) NOT as error.
+		/// Treat the following statuses (on top of the 200 range) NOT as error.
 		/// </summary>
 		IEnumerable<int> AllowedStatusCodes { get; set; }
 
