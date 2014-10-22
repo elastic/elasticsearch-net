@@ -94,7 +94,7 @@ namespace Elasticsearch.Net.Connection.RequestState
 			this.RequestParameters = requestParameters;
 			this._traceEnabled = settings.TraceEnabled;
 			this._metricsEnabled = settings.MetricsEnabled;
-			if (this._metricsEnabled)
+			if (this._metricsEnabled || this._traceEnabled)
 				this._stopwatch = Stopwatch.StartNew(); 
 
 			this.Method = method;
