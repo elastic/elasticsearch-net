@@ -113,7 +113,7 @@ namespace Nest
 		}
 
 
-		public BulkIndexDescriptor<T> Version(string version)
+        public BulkIndexDescriptor<T> Version(long version)
 		{
 			Self.Version = version; 
 			return this;

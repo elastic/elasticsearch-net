@@ -19,7 +19,7 @@ namespace Nest
 
 		string IBulkOperation.Id { get; set; }
 
-		string IBulkOperation.Version { get; set; }
+        long IBulkOperation.Version { get; set; }
 
 		VersionType? IBulkOperation.VersionType { get; set; }
 
