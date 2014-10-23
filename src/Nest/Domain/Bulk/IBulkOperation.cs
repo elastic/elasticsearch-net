@@ -21,7 +21,7 @@ namespace Nest
 		string Id { get; set; }
 
 		[JsonProperty(PropertyName = "_version")]
-		string Version { get; set; }
+        long Version { get; set; }
 
 		[JsonProperty(PropertyName = "_version_type")]
 		[JsonConverter(typeof(StringEnumConverter))]

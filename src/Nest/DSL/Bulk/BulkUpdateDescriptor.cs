@@ -232,7 +232,7 @@ namespace Nest
 			return this;
 		}
 
-		public BulkUpdateDescriptor<TDocument, TPartialDocument> Version(string version)
+        public BulkUpdateDescriptor<TDocument, TPartialDocument> Version(long version)
 		{
 			Self.Version = version; 
 			return this;
