@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -17,5 +18,8 @@ namespace Nest
 
         [JsonProperty("max_gram")]
         public int? MaxGram { get; set; }
+
+		[JsonProperty("token_chars")]
+		public IList<string> TokenChars { get; set; }
     }
 }
