@@ -92,6 +92,7 @@
     <Compile Include="ConvenienceExtensions\AliasExtensions.cs" />
     <Compile Include="ConvenienceExtensions\CountExtensions.cs" />
     <Compile Include="ConvenienceExtensions\DeleteExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\DeleteIndexExtensions.cs" />
     <Compile Include="ConvenienceExtensions\IndexManyExtensions.cs" />
     <Compile Include="ConvenienceExtensions\GetExtensions.cs" />
     <Compile Include="ConvenienceExtensions\DeleteManyExtensions.cs" />
