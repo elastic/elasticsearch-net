@@ -18,8 +18,8 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			
 			geoBoundingBox.Field.Should().Be("origin");
 			geoBoundingBox.GeoExecution.Should().Be(GeoExecution.Memory);
-			geoBoundingBox.TopLeft.Should().Be("0.1, 0.2");
-			geoBoundingBox.BottomRight.Should().Be("0.3, 0.4");
+			geoBoundingBox.TopLeft.Should().Be("0.2, 0.1");
+			geoBoundingBox.BottomRight.Should().Be("0.4, 0.3");
 		}
 
 		[Test]
@@ -29,8 +29,8 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			var filter = this.ParseSearchDescriptorFromFile(f => f.GeoBoundingBox, MethodBase.GetCurrentMethod(), @"GeoBoundingBox\Array");
 			filter.Field.Should().Be("origin");
 			filter.GeoExecution.Should().Be(GeoExecution.Memory);
-			filter.TopLeft.Should().Be("0.1, 0.2");
-			filter.BottomRight.Should().Be("0.3, 0.4");
+			filter.TopLeft.Should().Be("0.2, 0.1");
+			filter.BottomRight.Should().Be("0.4, 0.3");
 		}
 		
 		[Test]

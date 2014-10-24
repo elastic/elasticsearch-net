@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -29,7 +30,13 @@ namespace Nest
 
     public partial class ValidateQueryRequest : QueryPathBase<ValidateQueryRequestParameters>, IValidateQueryRequest
     {
-        public IQueryContainer Query { get; set; }
+		public ValidateQueryRequest() {}
+
+	    public ValidateQueryRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+
+	    public ValidateQueryRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+
+	    public IQueryContainer Query { get; set; }
 
         protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo)
         {
@@ -40,7 +47,14 @@ namespace Nest
     public partial class ValidateQueryRequest<T> : QueryPathBase<ValidateQueryRequestParameters, T>, IValidateQueryRequest<T>
         where T : class
     {
-        public IQueryContainer Query { get; set; }
+
+		public ValidateQueryRequest() {}
+
+	    public ValidateQueryRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+
+	    public ValidateQueryRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+
+	    public IQueryContainer Query { get; set; }
 
         protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo)
         {

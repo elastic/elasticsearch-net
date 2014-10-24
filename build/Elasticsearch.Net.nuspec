@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Elasticsearch.Net</id>
-    <version>1.1.1</version>
+    <version>1.2.1</version>
     <title>Elasticsearch.Net - official low level elasticsearch client</title>
     <authors>Elasticsearch Inc. and contributors</authors>
     <owners>Elasticsearch Inc.</owners>
@@ -20,6 +20,5 @@
     <file src="output\Elasticsearch.Net\Elasticsearch.Net.dll" target="lib"/> 
     <file src="output\Elasticsearch.Net\Elasticsearch.Net.pdb" target="lib"/> 
     <file src="output\Elasticsearch.Net\Elasticsearch.Net.XML" target="lib"/> 
-    <file src="output\Elasticsearch.Net\install.ps1" target="tools"/> 
   </files>
 </package>

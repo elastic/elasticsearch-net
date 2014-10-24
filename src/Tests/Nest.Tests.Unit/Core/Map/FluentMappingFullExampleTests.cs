@@ -240,6 +240,17 @@ namespace Nest.Tests.Unit.Core.Map
 						.Payloads()
 						.PreservePositionIncrements()
 						.PreserveSeparators()
+						.Context(c => c
+							.Category("color", cc => cc
+								.Path(p => p.Country)
+								.Default("red", "green", "blue")
+							)
+							.GeoLocation("location", lc => lc
+								.Precision("5m")
+								.Neighbors()
+								.Default("u33")
+							)
+						)
 					)
 				)
 			);

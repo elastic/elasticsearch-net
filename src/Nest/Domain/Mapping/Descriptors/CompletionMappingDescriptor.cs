@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
     public class CompletionMappingDescriptor<T>
+		where T : class
     {
         internal CompletionMapping _Mapping = new CompletionMapping();
 
@@ -56,5 +57,23 @@ namespace Nest
             this._Mapping.MaxInputLength = maxInputLength;
             return this;
         }
+
+		public CompletionMappingDescriptor<T> Context(Func<SuggestContextMappingDescriptor<T>, SuggestContextMappingDescriptor<T>> contextDescriptor)
+		{
+			if (this._Mapping.Context == null)
+				this._Mapping.Context = new Dictionary<string, ISuggestContext>();
+
+			var selector = contextDescriptor(new SuggestContextMappingDescriptor<T>());
+			
+			foreach (var context in selector._Contexts)
+			{
+				if (this._Mapping.Context.ContainsKey(context.Key))
+					this._Mapping.Context[context.Key] = context.Value;
+				else
+					this._Mapping.Context.Add(context.Key, context.Value);
+			}
+
+			return this;
+		}
     }
 }

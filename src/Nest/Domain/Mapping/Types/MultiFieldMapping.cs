@@ -10,13 +10,13 @@ namespace Nest
 	{
 		private readonly TypeNameMarker _defaultType;
 
-		public MultiFieldMapping()
-			: this("multi_field")
+		public MultiFieldMapping() 
 		{
 			this.Fields = new Dictionary<PropertyNameMarker, IElasticCoreType>();
+			_defaultType = "multi_field";
 		}
 
-		protected MultiFieldMapping(TypeNameMarker defaultType)
+		protected MultiFieldMapping(TypeNameMarker defaultType) : this()
 		{
 			_defaultType = defaultType;
 		}

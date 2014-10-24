@@ -42,9 +42,6 @@ Target "BuildApp" (fun _ ->
     //Scan for xml docs and patch them to replace <inheritdoc /> with the documentation
     //from their interfaces
     //!! "build/output/Nest/Nest.xml" |> Seq.iter(fun f -> PatchXmlDoc f)
-
-    CopyFile "build/output/Elasticsearch.Net/install.ps1" "build/elasticsearch-init.ps1"
-
 )
 
 Target "Test" (fun _ ->
@@ -77,7 +74,7 @@ Target "CreateKeysIfAbsent" (fun _ ->
 
 let getFileVersion = fun _ ->
     let assemblyFileContents = ReadFileAsString @"src\NEST\Properties\AssemblyInfo.cs"
-    let re = @"\[assembly\: AssemblyVersionAttribute\(""([^""]+)""\)\]"
+    let re = @"\[assembly\: AssemblyFileVersionAttribute\(""([^""]+)""\)\]"
     let matches = Regex.Matches(assemblyFileContents,re)
     let defaultVersion = regex_replace re "$1" (matches.Item(0).Captures.Item(0).Value)
     let timestampedVersion = (sprintf "%s-ci%s" defaultVersion (DateTime.UtcNow.ToString("yyyyMMddHHmmss")))
@@ -88,6 +85,16 @@ let getFileVersion = fun _ ->
     fv
 
 let fileVersion = getFileVersion()
+
+//CI builds need to be one minor ahead of the whatever we find in our develop branch
+let patchedFileVersion = 
+    match fileVersion with
+    | f when f.Contains("-ci") ->
+        let v = regex_replace "-ci.+$" "" f
+        let prerelease = regex_replace "^.+-(ci.+)$" "$1" f
+        let version = SemVerHelper.parse v
+        sprintf "%d.%d.0-%s" version.Major (version.Minor + 1) prerelease
+    | _ -> fileVersion
 
 let validateSignedAssembly = fun name ->
     let sn = if isMono then "sn" else "build/tools/sn/sn.exe"
@@ -122,19 +129,19 @@ let nugetPack = fun name ->
     let package = (sprintf @"build\%s.nuspec" name)
     let packageContents = ReadFileAsString package
     let re = @"(?<start>\<version\>|""(Elasticsearch.Net|Nest)"" version="")[^""><]+(?<end>\<\/version\>|"")"
-    let replacedContents = regex_replace re (sprintf "${start}%s${end}" fileVersion) packageContents
+    let replacedContents = regex_replace re (sprintf "${start}%s${end}" patchedFileVersion) packageContents
     WriteStringToFile false package replacedContents
 
     let dir = sprintf "%s/%s/" buildDir name
     NuGetPack (fun p ->
       {p with 
-        Version = fileVersion
+        Version = patchedFileVersion
         WorkingDir = dir 
         OutputPath = dir
       })
       package
 
-    MoveFile nugetOutDir (buildDir + (sprintf "%s/%s.%s.nupkg" name name fileVersion)) 
+    MoveFile nugetOutDir (buildDir + (sprintf "%s/%s.%s.nupkg" name name patchedFileVersion)) 
 
 let buildDocs = fun action ->
     let node = @"build\tools\Node.js\node.exe"
@@ -146,15 +153,17 @@ let buildDocs = fun action ->
       ) 
       (TimeSpan.FromMinutes (if action = "preview" then 300.0 else 5.0))
 
+let suffix = fun (prerelease: PreRelease) -> sprintf "-%s%i" prerelease.Name prerelease.Number.Value
 let getAssemblyVersion = (fun _ ->
-    let version = SemVerHelper.parse fileVersion
+    let fv = if fileVersion.Contains("-ci") then (regex_replace "-ci.+$" "" fileVersion) else fileVersion
+    traceFAKE "patched fileVersion %s" fv
+    let version = SemVerHelper.parse fv
 
-    let suffix = fun (prerelease: PreRelease) -> sprintf "-%s%i" prerelease.Name prerelease.Number.Value
     let assemblySuffix = if version.PreRelease.IsSome then suffix version.PreRelease.Value else "";
     let assemblyVersion = sprintf "%i.0.0%s" version.Major assemblySuffix
   
     match (assemblySuffix, version.Minor, version.Patch) with
-    | (s, m, p) when s <> "" && (m <> 0 || p <> 0)  -> failwithf "Cannot create prereleases for minor or major builds!"
+    | (s, m, p) when s <> "" && s <> "ci" && (m <> 0 || p <> 0)  -> failwithf "Cannot create prereleases for minor or major builds!"
     | ("", _, _) -> traceFAKE "Building fileversion %s for asssembly version %s" fileVersion assemblyVersion
     | _ -> traceFAKE "Building prerelease %s for major assembly version %s " fileVersion assemblyVersion
 
@@ -162,9 +171,10 @@ let getAssemblyVersion = (fun _ ->
 )
 
 
+    
+
 Target "Version" (fun _ ->
-  trace fileVersion
-  let assemblyVersion = if fileVersion.Contains("-ci") then fileVersion else getAssemblyVersion()
+  let assemblyVersion = getAssemblyVersion()
 
   let assemblyDescription = fun (f: string) ->
     let name = f 
@@ -185,8 +195,8 @@ Target "Version" (fun _ ->
         Attribute.Company "Elasticsearch"
         Attribute.Configuration "Release"
         Attribute.Version assemblyVersion
-        Attribute.FileVersion fileVersion
-        Attribute.InformationalVersion fileVersion
+        Attribute.FileVersion patchedFileVersion
+        Attribute.InformationalVersion patchedFileVersion
       ]
     )
 )

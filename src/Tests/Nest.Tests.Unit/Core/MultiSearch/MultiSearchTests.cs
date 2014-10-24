@@ -55,11 +55,12 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 			uri.AbsolutePath.Should().Be("/myindex/mytype/_msearch");
 		}
 		[Test]
-		public void MultiSearchRespectsSearchTypePreferenceAndRouting()
+		public void MultiSearchHeaderParts()
 		{
 			var result = this._client.MultiSearch(b => b
 				.FixedPath("myindex", "mytype")
 				.Search<ElasticsearchProject>(s => s
+					.IgnoreUnavailable()
 					.Index("myindex2")
 					.Type("mytype2")
 					.MatchAll()
@@ -73,6 +74,7 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 					.Routing("customvalue2")
 					.SearchType(SearchType.Count))
 				.Search<ElasticsearchProject>(s => s
+					.IgnoreUnavailable()
 					.MatchAll()
 					.Preference("_primary")
 					.Routing("customvalue1")
@@ -87,9 +89,9 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 			uri.AbsolutePath.Should().Be("/myindex/mytype/_msearch");
 			var results = new[]
 			{
-				@"{""index"":""myindex2"",""type"":""mytype2"",""search_type"":""dfs_query_and_fetch"",""preference"":""_primary"",""routing"":""customvalue1""}",
+				@"{""index"":""myindex2"",""type"":""mytype2"",""search_type"":""dfs_query_and_fetch"",""preference"":""_primary"",""routing"":""customvalue1"",""ignore_unavailable"":true}",
 				@"{""index"":""myindex2"",""type"":""mytype2"",""search_type"":""count"",""preference"":""_primary_first"",""routing"":""customvalue2""}",
-				@"{""type"":""mytype"",""search_type"":""dfs_query_and_fetch"",""preference"":""_primary"",""routing"":""customvalue1""}",
+				@"{""type"":""mytype"",""search_type"":""dfs_query_and_fetch"",""preference"":""_primary"",""routing"":""customvalue1"",""ignore_unavailable"":true}",
 				@"{""type"":""mytype"",""search_type"":""count"",""preference"":""_primary_first"",""routing"":""customvalue2""}"
 			};
 

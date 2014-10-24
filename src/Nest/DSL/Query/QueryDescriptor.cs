@@ -57,6 +57,7 @@ namespace Nest
 
 			if (fillProperty != null)
 				fillProperty(q);
+
 			return q;
 		}
 
@@ -463,6 +464,14 @@ namespace Nest
 			var query = new FilteredQueryDescriptor<T>();
 			selector(query);
 
+			var filtered = query as IFilteredQuery;
+			
+			if (filtered.Query != null && filtered.Query.IsConditionless)
+				filtered.Query = null;
+			
+			if (filtered.Filter != null && filtered.Filter.IsConditionless)
+				filtered.Filter = null;
+
 			return this.New(query, q => q.Filtered = query);
 		}
 
@@ -512,6 +521,7 @@ namespace Nest
 			booleanQuery(query);
 			return this.New(query, q => q.Bool = query);
 		}
+
 		/// <summary>
 		/// the boosting query can be used to effectively demote results that match a given query. 
 		/// Unlike the “NOT” clause in bool query, this still selects documents that contain
@@ -829,6 +839,13 @@ namespace Nest
 			functionScoreQuery(query);
 			return this.New(query, q => q.FunctionScore = query);
 
+		}
+
+		public QueryContainer Template(Action<TemplateQueryDescriptor> selector)
+		{
+			var query = new TemplateQueryDescriptor();
+			selector(query);
+			return this.New(query, q => q.Template = query);
 		}
 	}
 }

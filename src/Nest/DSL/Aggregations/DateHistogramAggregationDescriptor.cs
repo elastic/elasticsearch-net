@@ -143,6 +143,13 @@ namespace Nest
 			Self.Interval = interval;
 			return this;
 		}
+
+		public DateHistogramAggregationDescriptor<T> Interval(DateInterval interval)
+		{
+			var intervalString = interval.GetStringValue();
+			Self.Interval = intervalString;
+			return this;
+		}
 	
 		public DateHistogramAggregationDescriptor<T> Format(string format)
 		{
@@ -207,7 +214,7 @@ namespace Nest
 	
 		public DateHistogramAggregationDescriptor<T> OrderDescending(string key)
 		{
-			Self.Order = new Dictionary<string, string> { {key, "asc"}};
+			Self.Order = new Dictionary<string, string> { {key, "desc"}};
 			return this;
 		}
 

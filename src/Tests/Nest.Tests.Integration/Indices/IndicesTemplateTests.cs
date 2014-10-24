@@ -2,10 +2,10 @@
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
-namespace Nest.Tests.Integration.Template
+namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class TemplateTests : IntegrationTests
+	public class IndicesTemplateTests : IntegrationTests
 	{
 
 		[Test]

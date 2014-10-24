@@ -188,6 +188,9 @@
     <None Include="Core\Map\CustomMapping\RepresentUnknowImageMappingPlugin.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Map\Properties\CompletionProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Map\Properties\MultiFieldPropertyWithJustNamePath.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -236,6 +239,7 @@
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\ConnectionSettingsTests.cs" />
+    <Compile Include="Internals\Serialize\NullValueHandlingTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="Internals\Serialize\CustomConvertersTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasMoreUrlTests.cs" />
@@ -376,6 +380,8 @@
     <Compile Include="QueryParsers\Visitor\DslPrettyPrintVisitor.cs" />
     <Compile Include="QueryParsers\Visitor\VisitorDemoUseCase.cs" />
     <Compile Include="QueryParsers\Visitor\VisitorTests.cs" />
+    <Compile Include="Reproduce\Reproduce990Tests.cs" />
+    <Compile Include="Reproduce\Reproduce974Tests.cs" />
     <Compile Include="Reproduce\Reproduce928Tests.cs" />
     <Compile Include="Reproduce\Reproduce902Tests.cs" />
     <Compile Include="Reproduce\Reproduce646Tests.cs" />
@@ -414,6 +420,7 @@
     <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
     <Compile Include="Search\Query\Modes\QueryModesTests.cs" />
     <Compile Include="Search\Query\Singles\SpanMultiTermQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\TemplateQueryJson.cs" />
     <Compile Include="Search\Query\Singles\Term\TermToStringJson.cs" />
     <Compile Include="Search\Rescoring\RescoreTests.cs" />
     <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
@@ -643,9 +650,6 @@
     <None Include="Core\MultiPercolate\MultiPercolateJson.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Core\MultiSearch\MultiSearchRespectsSearchTypePreferenceAndRouting.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Core\UpdateSettings\AllUpdateSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -806,6 +810,9 @@
     <None Include="Search\Filter\Modes\VerbatimDoesNotThrowOnEmptyTerm.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Search\Query\BoolCombinations\CombineTwoNots.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinMustNotIntoMustStrictQueryInverse.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -882,6 +889,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\Singles\GeoShape\GeoShapePolygon.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchOnFieldsWithBoost.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json">

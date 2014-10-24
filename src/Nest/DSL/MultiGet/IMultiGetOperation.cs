@@ -22,6 +22,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "_routing")]
 		string Routing { get; set; }
 		
+		[JsonProperty(PropertyName = "_source")]
+		ISourceFilter Source { get; set; }
+		
 		Type ClrType { get; }
 	}
 }
