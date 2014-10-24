@@ -727,7 +727,7 @@
     <Compile Include="Domain\Responses\IndexResponse.cs" />
     <Compile Include="DSL\GetDescriptor.cs" />
     <Compile Include="ElasticClient-MultiGet.cs" />
-    <Compile Include="Domain\Analysis\TokenFilter\NgramTokenFiler.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\NgramTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\SynonymTokenFilter.cs" />
     <Compile Include="ElasticClient-Nodes.cs" />
     <Compile Include="ElasticClient-Scroll.cs" />
