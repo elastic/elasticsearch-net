@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Nest
 {
@@ -23,6 +24,21 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			deleteIndexSelector = deleteIndexSelector ?? (d => d);
 			return client.DeleteIndex(d => deleteIndexSelector(d).Index(index));
+		}
+
+		/// <summary>
+		/// The delete index API allows to delete an existing index.
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-index.html
+		/// </summary>
+		/// <param name="client"></param>
+		/// <param name="index">The name of the index to be deleted</param>
+		/// <param name="deleteIndexSelector">A descriptor that further describes the parameters for the delete index operation</param>
+		public static Task<IIndicesResponse> DeleteIndexAsync(this IElasticClient client, string index,
+			Func<DeleteIndexDescriptor, DeleteIndexDescriptor> deleteIndexSelector)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			deleteIndexSelector = deleteIndexSelector ?? (d => d);
+			return client.DeleteIndexAsync(d => deleteIndexSelector(d).Index(index));
 		}
 	}
 }
