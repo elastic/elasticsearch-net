@@ -10,7 +10,7 @@ namespace Nest
 		public IndexNameMarker Index { get; set; }
 		public TypeNameMarker Type { get; set; }
 		public string Id { get; set; }
-		public string Version { get; set; }
+        public long? Version { get; set; }
 		public VersionType? VersionType { get; set; }
 		public string Routing { get; set; }
 		public string Parent { get; set; }
