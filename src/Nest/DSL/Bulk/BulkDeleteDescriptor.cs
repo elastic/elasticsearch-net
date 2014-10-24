@@ -114,7 +114,7 @@ namespace Nest
 		}
 
 
-		public BulkDeleteDescriptor<T> Version(string version)
+        public BulkDeleteDescriptor<T> Version(long? version)
 		{
 			Self.Version = version; 
 			return this;
