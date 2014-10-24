@@ -11,7 +11,7 @@ namespace Nest
 		public abstract string Index { get; internal set; }
 		public abstract string Type { get; internal set; }
 		public abstract string Id { get; internal set; }
-		public abstract string Version { get; internal set; }
+		public abstract long Version { get; internal set; }
 		public abstract int Status { get; internal set; }
 		public abstract string Error { get; internal set; }
 

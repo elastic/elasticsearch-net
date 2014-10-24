@@ -12,7 +12,7 @@ namespace Nest
 		string Index { get; }
 		string Type { get; }
 		string Id { get; }
-		string Version { get; }
+		long Version { get; }
 		T Source { get; }
 		FieldSelection<T> Fields { get; }
 	}
@@ -33,7 +33,7 @@ namespace Nest
 		public string Id { get; private set; }
 
 		[JsonProperty(PropertyName = "_version")]
-		public string Version { get; private set; }
+		public long Version { get; private set; }
 
 		[JsonProperty(PropertyName = "found")]
 		public bool Found { get; private set; }

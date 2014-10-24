@@ -7,7 +7,7 @@ namespace Nest
 		string Id { get; }
 		string Index { get; }
 		string Type { get; }
-		string Version { get; }
+		long Version { get; }
 		bool Created { get; }
 	}
 
@@ -21,7 +21,7 @@ namespace Nest
 		[JsonProperty("_id")]
 		public string Id { get; internal set; }
 		[JsonProperty("_version")]
-		public string Version { get; internal set; }
+		public long Version { get; internal set; }
 		[JsonProperty("created")]
 		public bool Created { get; internal set; }
 

@@ -8,7 +8,7 @@ namespace Nest
 		string Index { get; }
 		string Type { get; }
 		string Id { get; }
-		string Version { get; }
+		long Version { get; }
 	}
 
 	[JsonObject]
@@ -24,6 +24,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "_id")]
 		public string Id { get; private set; }
 		[JsonProperty(PropertyName = "_version")]
-		public string Version { get; private set; }
+		public long Version { get; private set; }
 	}
 }

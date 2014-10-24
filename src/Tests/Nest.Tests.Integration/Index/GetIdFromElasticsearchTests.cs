@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Index
 			Assert.IsNotNullOrEmpty(response.Id);
 			Assert.IsNotNullOrEmpty(response.Type);
 			Assert.IsNotNullOrEmpty(response.Index);
-			Assert.IsNotNullOrEmpty(response.Version);
+			Assert.IsTrue(response.Version > 0);
 		}
 		[Test]
 		public void IndexmanyWithoutIdShouldSetIdFromElasticseach()
