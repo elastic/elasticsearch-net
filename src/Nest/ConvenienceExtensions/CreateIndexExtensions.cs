@@ -56,7 +56,6 @@ namespace Nest
 	        Func<Func<CreateIndexDescriptor, CreateIndexDescriptor>, TResponse> createIndexMethod)
 	    {
             index.ThrowIfNullOrEmpty("index");
-	        index.ThrownIfNotLowercase("index");
             createIndexSelector = createIndexSelector ?? (c => c);
             return createIndexMethod(c => createIndexSelector(c).Index(index));
         }

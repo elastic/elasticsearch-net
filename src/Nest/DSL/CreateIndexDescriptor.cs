@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -15,23 +17,47 @@ namespace Nest
 
 	internal static class CreateIndexPathInfo
 	{
+		private static char[] _invalidChars = new[] { '\\', '/', '*', '?', '"', '<', '>', '|', ' ', ',', '#' };
+		private static string _invalidCharsMessage = string.Join(", ", _invalidChars);
+
 		public static void Update(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo, ICreateIndexRequest request)
 		{
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 		}
+
+		public static void Validate(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo, ICreateIndexRequest request)
+		{
+			var index = pathInfo.Index;
+			if (index.StartsWith("_"))
+				throw new DslException("indexname {0} may not start with an underscore".F(index));
+
+			if (Encoding.UTF8.GetByteCount(index) > 255)
+				throw new DslException("indexname {0} exceeds maximum index name length of 255".F(index));
+
+			if (index.Any(char.IsUpper))
+				throw new DslException("indexname {0} contains uppercase characters".F(index));
+
+			if (index.Any(c => _invalidChars.Contains(c)))
+				throw new DslException("indexname {0} contains one of {1} invalid characters".F(index, _invalidCharsMessage));
+
+		}
 	}
-	
+
 	public partial class CreateIndexRequest : IndexPathBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
 		public CreateIndexRequest(IndexNameMarker index) : base(index) { }
 
 		public IndexSettings IndexSettings { get; set; }
-		
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
 		{
 			CreateIndexPathInfo.Update(pathInfo, this);
 		}
 
+		protected override void ValidatePathInfo(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
+		{
+			CreateIndexPathInfo.Validate(pathInfo, this);
+		}
 	}
 
 	[DescriptorFor("IndicesCreate")]
@@ -131,7 +157,7 @@ namespace Nest
 
 			return this;
 		}
-			
+
 
 		private CreateIndexDescriptor RemoveMapping(TypeNameMarker marker)
 		{
@@ -185,7 +211,7 @@ namespace Nest
 			}
 			else
 			{
-				typeMapping.Name = typeof (T);
+				typeMapping.Name = typeof(T);
 			}
 
 			this._indexSettings.Mappings.Add(typeMapping);
@@ -220,7 +246,7 @@ namespace Nest
 			this._indexSettings.Analysis = analysis == null ? null : analysis._AnalysisSettings;
 			return this;
 		}
-		
+
 		public CreateIndexDescriptor Similarity(Func<SimilarityDescriptor, SimilarityDescriptor> similaritySelector)
 		{
 			similaritySelector.ThrowIfNull("similaritySelector");
@@ -232,6 +258,11 @@ namespace Nest
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
 		{
 			CreateIndexPathInfo.Update(pathInfo, this);
+		}
+
+		protected override void ValidatePathInfo(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
+		{
+			CreateIndexPathInfo.Validate(pathInfo, this);
 		}
 
 	}
