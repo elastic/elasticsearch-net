@@ -36,6 +36,13 @@ namespace Nest.Resolvers.Converters.Aggregations
 			if (_numeric.IsMatch(property))
 				return GetPercentilesMetricAggregation(reader, serializer, oldFormat: true);
 
+			if (property == "doc_count_error_upper_bound")
+			{
+				reader.Read();
+				reader.Read();
+				property = reader.Value as string;
+			}
+
 			switch (property)
 			{
 				case "values":
