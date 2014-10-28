@@ -45,6 +45,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 				case "value":
 					return GetValueMetricOrAggregation(reader, serializer);
 				case "buckets":
+				case "doc_count_error_upper_bound":
 					return GetBucketAggregation(reader, serializer);
 				case "key":
 					return GetKeyedBucketItem(reader, serializer);
@@ -292,6 +293,14 @@ namespace Nest.Resolvers.Converters.Aggregations
 		private IAggregation GetBucketAggregation(JsonReader reader, JsonSerializer serializer)
 		{
 			var bucket = new Bucket();
+			var property = reader.Value as string;
+			if (property == "doc_count_error_upper_bound")
+			{
+				reader.Read();
+				bucket.DocCountErrorUpperBound = reader.Value as long?;
+				reader.Read();
+			}
+
 			var aggregations = new List<IAggregation>();
 			reader.Read();
 			if (reader.TokenType != JsonToken.StartArray)
