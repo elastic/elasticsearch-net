@@ -17,7 +17,8 @@ namespace CodeGeneration.LowLevelClient.Overrides.Allow404
 			"AliasExists",
 			"TemplateExists",
 			"TypeExists",
-			"Exists"
+			"Exists",
+			"Get"
 		};
 	}
 }
