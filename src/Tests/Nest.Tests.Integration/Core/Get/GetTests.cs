@@ -46,5 +46,13 @@ namespace Nest.Tests.Integration.Core.Get
 			Assert.IsNotEmpty(list);
 			
 		}
+
+		[Test]
+		public void GetDocumentThatDoesntExist()
+		{
+			var result = this.Client.Get<ElasticsearchProject>("this-doc-id-doesnt-exist");
+			Assert.IsTrue(result.IsValid);
+			Assert.IsFalse(result.Found);
+		}
 	}
 }
