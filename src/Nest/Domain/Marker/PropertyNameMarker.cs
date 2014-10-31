@@ -65,7 +65,12 @@ namespace Nest
 		}
 		public bool EqualsMarker(PropertyNameMarker other)
 		{
-			return other != null && this.GetHashCode() == other.GetHashCode();
+			if (!this.Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
+				return EqualsString(other.Name);
+			if (this.Type != null && other != null && other.Type != null)
+				return this.GetHashCode() == other.GetHashCode();
+			return false;
+			
 		}
 		public bool EqualsString(string other)
 		{

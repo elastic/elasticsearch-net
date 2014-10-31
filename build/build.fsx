@@ -170,9 +170,6 @@ let getAssemblyVersion = (fun _ ->
     assemblyVersion
 )
 
-
-    
-
 Target "Version" (fun _ ->
   let assemblyVersion = getAssemblyVersion()
 
