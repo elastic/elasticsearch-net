@@ -4072,6 +4072,162 @@ namespace Elasticsearch.Net
 		
 		Task<ElasticsearchResponse<DynamicDictionary>> DeleteByQueryAsync(string index, string type, object body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null);
 		
+		///<summary>Represents a DELETE on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> DeleteScript<T>(string lang, string id, Func<DeleteScriptRequestParameters, DeleteScriptRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a DELETE on /_scripts/{lang}/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> DeleteScriptAsync<T>(string lang, string id, Func<DeleteScriptRequestParameters, DeleteScriptRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a DELETE on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> DeleteScript(string lang, string id, Func<DeleteScriptRequestParameters, DeleteScriptRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a DELETE on /_scripts/{lang}/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> DeleteScriptAsync(string lang, string id, Func<DeleteScriptRequestParameters, DeleteScriptRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a DELETE on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> DeleteTemplate<T>(string id, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a DELETE on /_search/template/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> DeleteTemplateAsync<T>(string id, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a DELETE on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> DeleteTemplate(string id, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a DELETE on /_search/template/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> DeleteTemplateAsync(string id, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null);
+		
 		///<summary>Represents a HEAD on /{index}/{type}/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
@@ -4412,6 +4568,86 @@ namespace Elasticsearch.Net
 		
 		Task<ElasticsearchResponse<DynamicDictionary>> GetAsync(string index, string type, string id, Func<GetRequestParameters, GetRequestParameters> requestParameters = null);
 		
+		///<summary>Represents a GET on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> GetScript<T>(string lang, string id, Func<GetScriptRequestParameters, GetScriptRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_scripts/{lang}/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> GetScriptAsync<T>(string lang, string id, Func<GetScriptRequestParameters, GetScriptRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> GetScript(string lang, string id, Func<GetScriptRequestParameters, GetScriptRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_scripts/{lang}/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> GetScriptAsync(string lang, string id, Func<GetScriptRequestParameters, GetScriptRequestParameters> requestParameters = null);
+		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_source
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
@@ -4495,6 +4731,82 @@ namespace Elasticsearch.Net
 		///</returns>
 		
 		Task<ElasticsearchResponse<DynamicDictionary>> GetSourceAsync(string index, string type, string id, Func<SourceRequestParameters, SourceRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> GetTemplate<T>(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_search/template/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> GetTemplateAsync<T>(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> GetTemplate(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_search/template/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> GetTemplateAsync(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/{type}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -16156,6 +16468,334 @@ namespace Elasticsearch.Net
 		
 		Task<ElasticsearchResponse<DynamicDictionary>> PingAsync(Func<PingRequestParameters, PingRequestParameters> requestParameters = null);
 		
+		///<summary>Represents a PUT on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> PutScript<T>(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a PUT on /_scripts/{lang}/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> PutScriptAsync<T>(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a PUT on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> PutScript(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a PUT on /_scripts/{lang}/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> PutScriptAsync(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> PutScriptPost<T>(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /_scripts/{lang}/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> PutScriptPostAsync<T>(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /_scripts/{lang}/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> PutScriptPost(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /_scripts/{lang}/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///</summary>
+		///<param name="lang">Script language</param>
+		///<param name="id">Script ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> PutScriptPostAsync(string lang, string id, object body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a PUT on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> PutTemplate<T>(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a PUT on /_search/template/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> PutTemplateAsync<T>(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a PUT on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> PutTemplate(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a PUT on /_search/template/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> PutTemplateAsync(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> PutTemplatePost<T>(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /_search/template/{id}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> PutTemplatePostAsync<T>(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /_search/template/{id}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> PutTemplatePost(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /_search/template/{id}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="body">The document</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> PutTemplatePostAsync(string id, object body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null);
+		
 		///<summary>Represents a GET on /_search/scroll
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
@@ -19439,7 +20079,7 @@ namespace Elasticsearch.Net
 		///</returns>
 		
 		Task<ElasticsearchResponse<DynamicDictionary>> UpdateAsync(string index, string type, string id, object body, Func<UpdateRequestParameters, UpdateRequestParameters> requestParameters = null);
-
+		
 		/// <summary>
 		/// Perform any request you want over the configured IConnection synchronously while taking advantage of the cluster failover.
 		/// </summary>
@@ -19460,6 +20100,6 @@ namespace Elasticsearch.Net
 		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
 		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
 		/// <returns>A task of ElasticsearchResponse of T where T represents the JSON response body</returns>
-		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null);
+		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null);		
 	}
 }

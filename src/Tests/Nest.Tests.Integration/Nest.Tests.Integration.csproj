@@ -90,6 +90,7 @@
     <Compile Include="..\..\Elasticsearch.Net\Extensions\TypeExtensions.cs">
       <Link>LinkedExtensions\TypeExtensions.cs</Link>
     </Compile>
+    <Compile Include="Aggregations\CombinationTests.cs" />
     <Compile Include="Aggregations\NestedBucketAggregationTests.cs" />
     <Compile Include="Aggregations\BucketAggregationTests.cs" />
     <Compile Include="Aggregations\SingleBucketAggregationTests.cs" />
@@ -112,17 +113,13 @@
     <Compile Include="Core\Cat\CatTests.cs" />
     <Compile Include="Core\Explain\ExplainTests.cs" />
     <Compile Include="Core\Exists\AliasExists.cs" />
-    <Compile Include="Core\Repository\CreateRepositoryTests.cs" />
-    <Compile Include="Core\SearchShards\SearchShardsTests.cs" />
     <Compile Include="Core\GetFieldMapping\GetFieldMappingTests.cs" />
     <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
     <Compile Include="Core\Percolate\PercolateTests.cs" />
     <Compile Include="Core\Map\Mapping\MappingTransformTests.cs" />
     <Compile Include="Core\PingTests.cs" />
-    <Compile Include="Core\Repository\SnapshotStatusTests.cs" />
-    <Compile Include="Core\Repository\RestoreStatusTests.cs" />
     <Compile Include="Core\Repository\RestoreTests.cs" />
-    <Compile Include="Core\Repository\GetRepositoryTests.cs" />
+    <Compile Include="Core\Repository\CreateRepositoryTests.cs" />
     <Compile Include="Core\ClearScroll\ClearScrollTests.cs" />
     <Compile Include="Core\Exists\DocumentExistsTests.cs" />
     <Compile Include="Core\Suggest\SuggestTests.cs" />
@@ -177,9 +174,16 @@
     <Compile Include="Indices\StatsTests.cs" />
     <Compile Include="Core\AsyncTests.cs" />
     <Compile Include="Mapping\MappingVisitorTests.cs" />
+<<<<<<< HEAD
     <Compile Include="Reproduce\Reproduce953Tests.cs" />
     <Compile Include="Reproduce\Reproduce945Tests.cs" />
+=======
+>>>>>>> 1.2.2
     <Compile Include="Reproduce\Reproduce769Tests.cs" />
+    <Compile Include="Reproduce\Reproduce945Tests.cs" />
+    <Compile Include="Reproduce\Reproduce953Tests.cs" />
+    <Compile Include="Reproduce\Reproduce986Tests.cs" />
+    <Compile Include="Reproduce\Reproduce960Tests.cs" />
     <Compile Include="Search\Filter\AndOrNotFilterTests.cs" />
     <Compile Include="Search\Filter\ScriptFilterTests.cs" />
     <Compile Include="Search\Filter\MissingExistsFilterTests.cs" />
@@ -188,6 +192,7 @@
     <Compile Include="Search\Query\BoolQueryResults.cs" />
     <Compile Include="Search\Query\FilteredQueryTests.cs" />
     <Compile Include="Search\Query\SpanQueryTests.cs" />
+    <Compile Include="Search\Query\TemplateQueryTests.cs" />
     <Compile Include="Search\Query\TermToString.cs" />
     <Compile Include="Core\UpdateTests.cs" />
     <Compile Include="Search\Filter\BoolFilterTests.cs" />
@@ -241,6 +246,7 @@
     <Compile Include="Search\QueryResponseMapperTests.cs" />
     <Compile Include="Search\ScriptFields\ScriptFieldsTest.cs" />
     <Compile Include="Search\Scroll\ScrollTests.cs" />
+    <Compile Include="Search\Template\SearchTemplateTests.cs" />
     <Compile Include="Search\SearchTypeTests\SearchTypeScanTests.cs" />
     <Compile Include="Search\SearchTypeTests\SearchTypeCountTests.cs" />
     <Compile Include="Search\SearchTypeTests\SearchTypeTests.cs" />
@@ -248,7 +254,7 @@
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />
     <Compile Include="Startup\StartupTests.cs" />
-    <Compile Include="Template\TemplateTests.cs" />
+    <Compile Include="Indices\IndicesTemplateTests.cs" />
     <Compile Include="Warmers\IndicesWarmersTests.cs" />
     <Compile Include="Warmers\WarmersTests.cs" />
   </ItemGroup>

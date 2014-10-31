@@ -77,7 +77,7 @@ namespace Nest
 		[JsonConverter(typeof(CompositeJsonConverter<GeoShapeQueryJsonReader, FieldNameQueryConverter<EnvelopeGeoShape>>))]
 		IGeoShapeQuery GeoShape { get; set; }
 
-		[JsonProperty(PropertyName = "common_terms")]
+		[JsonProperty(PropertyName = "common")]
 		[JsonConverter(typeof (FieldNameQueryConverter<CommonTermsQuery>))]
 		ICommonTermsQuery CommonTerms { get; set; }
 
@@ -139,6 +139,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "function_score")]
 		IFunctionScoreQuery FunctionScore { get; set; }
+
+		[JsonProperty(PropertyName = "template")]
+		ITemplateQuery Template { get; set; }
 
 		void Accept(IQueryVisitor visitor);
 	}

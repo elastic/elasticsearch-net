@@ -36,7 +36,7 @@ namespace Nest
 
 			foreach (DictionaryEntry entry in dictionary)
 			{
-				if (entry.Value == null)
+				if (entry.Value == null && serializer.NullValueHandling == NullValueHandling.Ignore)
 					continue;
 				string key;
 				var pp = entry.Key as PropertyPathMarker;

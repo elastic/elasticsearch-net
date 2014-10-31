@@ -55,5 +55,7 @@ namespace Nest.Tests.MockData.Domain
 		public Product Product { get; set; }
 
         public string[] MyStringArrayField { get; set; }
+
+		public string Suggest { get; set; }
 	}
 }

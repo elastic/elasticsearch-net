@@ -132,6 +132,21 @@ namespace Nest.Tests.Integration.Search
 			Assert.Greater(results.FacetItems<TermItem>(f => f.Country).Count(), 0);
 		}
 
+		[Test]
+		public void TestCommonTerms()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Query(q => q
+					.CommonTerms(t => t
+						.OnField(p => p.Name)
+						.Query("elasticsearch")
+					)
+				)
+			);
+
+			Assert.True(results.IsValid);
+			Assert.Greater(results.Hits.Count(), 0);
+		}
 
 		[Test]
 		public void TermSuggest()

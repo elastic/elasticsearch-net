@@ -77,6 +77,26 @@ namespace Nest
 	public abstract class QueryPathBase<TParameters> : BasePathRequest<TParameters>, IQueryPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
+		protected QueryPathBase()
+		{
+			this.AllTypes = true;
+		}
+
+		protected QueryPathBase(IndexNameMarker index, TypeNameMarker type = null)
+		{
+			this.Indices = new [] { index };
+			if (type != null)
+				this.Types = new[] { type };
+			else this.AllTypes = true;
+		}
+
+		protected QueryPathBase(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null)
+		{
+			this.Indices = indices;
+			this.AllTypes = !types.HasAny();
+			this.Types = types;
+		}
+
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
@@ -94,6 +114,24 @@ namespace Nest
 		where TParameters : IRequestParameters, new()
 		where T : class
 	{
+		protected QueryPathBase()
+		{
+			this.AllIndices = false;
+			this.AllTypes = false;
+		}
+		
+		protected QueryPathBase(IndexNameMarker index, TypeNameMarker type = null)
+		{
+			this.Indices = new [] { index };
+			if (type != null)
+				this.Types = new[] { type };
+		}
+
+		protected QueryPathBase(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null)
+		{
+			this.Indices = indices;
+			this.Types = types;
+		}
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{

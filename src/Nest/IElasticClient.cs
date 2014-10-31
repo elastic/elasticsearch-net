@@ -775,6 +775,84 @@ namespace Nest
 			where TResult : class;
 
 		/// <summary>
+		/// The /_search/template endpoint allows to use the mustache language to pre render search 
+		/// requests, before they are executed and fill existing templates with template parameters.
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
+		/// <param name="selector">A descriptor that describes the parameters for the search operation</param>
+		/// <returns></returns>
+		ISearchResponse<T> SearchTemplate<T>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector)
+			where T : class;
+
+		/// <inheritdoc />
+		ISearchResponse<TResult> SearchTemplate<T, TResult>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector)
+			where T : class
+			where TResult : class;
+
+		/// <inheritdoc />
+		ISearchResponse<T> SearchTemplate<T>(ISearchTemplateRequest request)
+			where T : class;
+
+		/// <inheritdoc />
+		ISearchResponse<TResult> SearchTemplate<T, TResult>(ISearchTemplateRequest request)
+			where T : class
+			where TResult : class;
+
+		/// <inheritdoc />
+		Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector)
+			where T : class
+			where TResult : class;
+
+		/// <inheritdoc />
+		Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request)
+			where T : class
+			where TResult : class;
+
+		/// <inheritdoc />
+		IGetSearchTemplateResponse GetSearchTemplate(string name, Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector = null);
+
+		/// <inheritdoc />
+		IGetSearchTemplateResponse GetSearchTemplate(IGetSearchTemplateRequest request);
+
+		/// <inheritdoc />
+		Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(string name, Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(IGetSearchTemplateRequest request);
+
+		/// <inheritdoc />
+		IPutSearchTemplateResponse PutSearchTemplate(string name, Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector = null);
+
+		/// <inheritdoc />
+		IPutSearchTemplateResponse PutSearchTemplate(IPutSearchTemplateRequest request);
+
+		/// <inheritdoc />
+		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(string name, Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request);
+
+		/// <inheritdoc />
+		IDeleteSearchTemplateResponse DeleteSearchTemplate(string name, Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector = null);
+
+		/// <inheritdoc />
+		IDeleteSearchTemplateResponse DeleteSearchTemplate(IDeleteSearchTemplateRequest request);
+
+		/// <inheritdoc />
+		Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(string name, Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request);
+
+		/// <summary>
 		/// The multi search API allows to execute several search requests within the same API.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-multi-search.html
 		/// </summary>

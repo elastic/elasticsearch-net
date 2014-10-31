@@ -11,11 +11,15 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "fuzzy")]
 		IFuzzySuggester Fuzzy { get; set; }
+
+		[JsonProperty("context")]
+		IDictionary<string, object> Context { get; set; }
 	}
 
 	public class CompletionSuggester : Suggester, ICompletionSuggester
 	{
 		public IFuzzySuggester Fuzzy { get; set; }
+		public IDictionary<string, object> Context { get; set; }
 	}
 
 	public class CompletionSuggestDescriptor<T> : BaseSuggestDescriptor<T>, ICompletionSuggester where T : class
@@ -24,6 +28,8 @@ namespace Nest
 
 		IFuzzySuggester ICompletionSuggester.Fuzzy { get; set; }
 
+		IDictionary<string, object> ICompletionSuggester.Context { get; set; }
+		
 		public CompletionSuggestDescriptor<T> Size(int size)
 		{
 			Self.Size = size;
@@ -59,6 +65,11 @@ namespace Nest
 			return this;
 		}
 
+		public CompletionSuggestDescriptor<T> Context(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> contextDictionary)
+		{
+			Self.Context = contextDictionary(new FluentDictionary<string, object>());
+			return this;
+		}
 		
 	}
 }

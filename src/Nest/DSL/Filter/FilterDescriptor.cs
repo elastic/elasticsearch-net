@@ -57,7 +57,13 @@ namespace Nest
 			return (filter.FilterDescriptor == null || filter.FilterDescriptor.IsConditionless) ? filter._Fallback : filter.FilterDescriptor;
 		}
 
-		internal FilterContainer Raw(string rawJson)
+		/// <summary>
+		/// Insert raw filter json at this position of the filter
+		/// <para>Be sure to start your json with '{'</para>
+		/// </summary>
+		/// <param name="rawJson"></param>
+		/// <returns></returns>
+		public FilterContainer Raw(string rawJson)
 		{
 			var f = new FilterDescriptor<T>();
 			f.Self.IsStrict = Self.IsStrict;
@@ -165,8 +171,8 @@ namespace Nest
 			topLeftY.ThrowIfNull("topLeftY");
 			bottomRightX.ThrowIfNull("bottomRightX");
 			bottomRightY.ThrowIfNull("bottomRightY");
-			var geoHashTopLeft = "{0}, {1}".F(topLeftX.ToString(c), topLeftY.ToString(c));
-			var geoHashBottomRight = "{0}, {1}".F(bottomRightX.ToString(c), bottomRightY.ToString(c));
+			var geoHashTopLeft = "{0}, {1}".F(topLeftY.ToString(c), topLeftX.ToString(c));
+			var geoHashBottomRight = "{0}, {1}".F(bottomRightY.ToString(c), bottomRightX.ToString(c));
 			return this.GeoBoundingBox(fieldDescriptor, geoHashTopLeft, geoHashBottomRight, type);
 		}
 		/// <summary>
@@ -179,8 +185,8 @@ namespace Nest
 			topLeftY.ThrowIfNull("topLeftY");
 			bottomRightX.ThrowIfNull("bottomRightX");
 			bottomRightY.ThrowIfNull("bottomRightY");
-			var geoHashTopLeft = "{0}, {1}".F(topLeftX.ToString(c), topLeftY.ToString(c));
-			var geoHashBottomRight = "{0}, {1}".F(bottomRightX.ToString(c), bottomRightY.ToString(c));
+			var geoHashTopLeft = "{0}, {1}".F(topLeftY.ToString(c), topLeftX.ToString(c));
+			var geoHashBottomRight = "{0}, {1}".F(bottomRightY.ToString(c), bottomRightX.ToString(c));
 			return this.GeoBoundingBox(fieldName, geoHashTopLeft, geoHashBottomRight, type);
 		}
 		/// <summary>

@@ -545,6 +545,7 @@ namespace Nest
 			booleanQuery(query);
 			return this.New(query, q => q.Bool = query);
 		}
+
 		/// <summary>
 		/// the boosting query can be used to effectively demote results that match a given query. 
 		/// Unlike the “NOT” clause in bool query, this still selects documents that contain
@@ -862,6 +863,13 @@ namespace Nest
 			functionScoreQuery(query);
 			return this.New(query, q => q.FunctionScore = query);
 
+		}
+
+		public QueryContainer Template(Action<TemplateQueryDescriptor> selector)
+		{
+			var query = new TemplateQueryDescriptor();
+			selector(query);
+			return this.New(query, q => q.Template = query);
 		}
 	}
 }

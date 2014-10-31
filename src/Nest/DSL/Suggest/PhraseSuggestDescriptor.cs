@@ -28,6 +28,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "direct_generator")]
 		IEnumerable<IDirectGenerator> DirectGenerator { get; set; }
+
+		[JsonProperty("collate")]
+		IPhraseSuggestCollate Collate { get; set; }
 	}
 
 	public class PhraseSuggester : Suggester, IPhraseSuggester
@@ -38,6 +41,8 @@ namespace Nest
 		public decimal? MaxErrors { get; set; }
 		public char? Separator { get; set; }
 		public IEnumerable<IDirectGenerator> DirectGenerator { get; set; }
+
+		public IPhraseSuggestCollate Collate { get; set; }
 	}
 
 	public class PhraseSuggestDescriptor<T> : BaseSuggestDescriptor<T>, IPhraseSuggester where T : class
@@ -55,6 +60,8 @@ namespace Nest
 		char? IPhraseSuggester.Separator { get; set; }
 
 		IEnumerable<IDirectGenerator> IPhraseSuggester.DirectGenerator { get; set; }
+
+		IPhraseSuggestCollate IPhraseSuggester.Collate { get; set; }
 
 		public PhraseSuggestDescriptor<T> Text(string text)
 		{
@@ -119,6 +126,13 @@ namespace Nest
 		public PhraseSuggestDescriptor<T> DirectGenerator(params Func<DirectGeneratorDescriptor<T>, DirectGeneratorDescriptor<T>>[] generators)
 		{
 			Self.DirectGenerator = generators.Select(g => g(new DirectGeneratorDescriptor<T>())).ToList();
+			return this;
+		}
+
+		public PhraseSuggestDescriptor<T> Collate(Func<PhraseSuggestCollateDescriptor<T>, PhraseSuggestCollateDescriptor<T>> collateDescriptor)
+		{
+			var selector = collateDescriptor(new PhraseSuggestCollateDescriptor<T>());
+			Self.Collate = selector.Collate;
 			return this;
 		}
 	}

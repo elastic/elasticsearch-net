@@ -1424,6 +1424,32 @@ namespace Nest
 	}
 	
 		
+	///<summary>Request parameters for DeleteScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public partial class DeleteScriptRequest  : BasePathRequest<DeleteScriptRequestParameters>
+			{
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteScriptRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+
+	}
+	
+		
+	///<summary>Request parameters for DeleteTemplate
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///</pre>
+	///</summary>
+	public partial class DeleteTemplateRequest 
+			{
+	}
+	
+		
 	///<summary>Request parameters for Exists
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
@@ -1720,6 +1746,22 @@ namespace Nest
 	}
 	
 		
+	///<summary>Request parameters for GetScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public partial class GetScriptRequest  : BasePathRequest<GetScriptRequestParameters>
+			{
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetScriptRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+
+	}
+	
+		
 	///<summary>Request parameters for GetSource
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
@@ -1816,6 +1858,16 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+	}
+	
+		
+	///<summary>Request parameters for GetTemplate
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///</pre>
+	///</summary>
+	public partial class GetTemplateRequest 
+			{
 	}
 	
 		
@@ -2251,32 +2303,6 @@ namespace Nest
 	}
 	
 		
-	///<summary>Request parameters for IndicesDeleteTemplateForAll
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
-	///</pre>
-	///</summary>
-	public partial class DeleteTemplateRequest 
-			{
-		
-		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
-		
-		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
-	}
-	
-		
 	///<summary>Request parameters for IndicesDeleteWarmer
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
@@ -2699,32 +2725,6 @@ namespace Nest
 	}
 	
 		
-	///<summary>Request parameters for IndicesGetTemplateForAll
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
-	///</pre>
-	///</summary>
-	public partial class GetTemplateRequest 
-			{
-		
-		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("flat_settings"); } 
-			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
-		}
-		
-		
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
-	}
-	
-		
 	///<summary>Request parameters for IndicesGetWarmerForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
@@ -3041,6 +3041,14 @@ namespace Nest
 	public partial class PutTemplateRequest 
 			{
 		
+		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		public bool Create 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("create"); } 
+			set { this.Request.RequestParameters.AddQueryString("create", value); }
+		}
+		
+		
 		///<summary>Explicit operation timeout</summary>
 		public string Timeout 
 		{ 
@@ -3276,9 +3284,9 @@ namespace Nest
 		
 		
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
-		public bool Groups 
+		public  string[] Groups 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("groups"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("groups"); } 
 			set { this.Request.RequestParameters.AddQueryString("groups", value); }
 		}
 		
@@ -4108,6 +4116,22 @@ namespace Nest
 	}
 	
 		
+	///<summary>Request parameters for PutScript
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///</pre>
+	///</summary>
+	public partial class PutScriptRequest  : BasePathRequest<PutScriptRequestParameters>
+			{
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutScriptRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+
+	}
+	
+		
 	///<summary>Request parameters for ScrollGet
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
@@ -4335,7 +4359,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html
 	///</pre>
 	///</summary>
-	public partial class SearchTemplateRequest  : BasePathRequest<SearchTemplateRequestParameters>
+	public partial class SearchTemplateRequest<T> 
 			{
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -4393,12 +4417,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -6084,6 +6102,72 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for SearchTemplateGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html
+	///</pre>
+	///</summary>
+	public partial class SearchTemplateRequest 
+			{
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
+			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
+		}
+		
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
+			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
+		}
+		
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
+			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
+		}
+		
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
+			set { this.Request.RequestParameters.AddQueryString("preference", value); }
+		}
+		
+		
+		///<summary>A comma-separated list of specific routing values</summary>
+		public  string[] Routing 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("routing"); } 
+			set { this.Request.RequestParameters.AddQueryString("routing", value); }
+		}
+		
+		
+		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
+		public string Scroll 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("scroll"); } 
+			set { this.Request.RequestParameters.AddQueryString("scroll", value); }
+		}
+		
+		
+		///<summary>Search operation type</summary>
+		public SearchType SearchType 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<SearchType>("search_type"); } 
+			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
 		}
 		
 	}

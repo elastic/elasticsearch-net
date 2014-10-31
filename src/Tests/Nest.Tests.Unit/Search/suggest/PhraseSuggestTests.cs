@@ -1,6 +1,7 @@
 ﻿using Elasticsearch.Net;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using System.Collections.Generic;
 
 namespace Nest.Tests.Unit.Search.Suggest
 {
@@ -77,6 +78,63 @@ namespace Nest.Tests.Unit.Search.Suggest
                               ""size"": 1,
 							  ""gram_size"": 2,
                               ""max_errors"": 0.5
+						}
+					}
+				}
+			}";
+			var json = search.ConnectionStatus.Request.Utf8String();
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
+		public void PhraseSuggestCollateTest()
+		{
+			var search = this._client.Search<ElasticsearchProject>(s => s
+				.SuggestPhrase("myphrasesuggest", ts => ts
+					.Text("n")
+					.Analyzer("body")
+					.OnField("bigram")
+					.Size(1)
+					.GramSize(2)
+					.MaxErrors(0.5m)
+					.Collate(c => c
+						.Query(q => q
+							.Match(m => m
+								.OnField("{{fieldname}}")
+								.Query("{{suggestion}}")
+							)
+						)
+						.Params(ps => ps
+							.Add("{{fieldname}}", "name")
+						)
+						.Preference("_primary")
+					)
+				)
+			);
+
+			var expected = @"{
+				suggest: {
+					myphrasesuggest: {
+						text: ""n"",
+						phrase: {
+                              ""field"": ""bigram"",
+                              ""analyzer"": ""body"",
+                              ""size"": 1,
+							  ""gram_size"": 2,
+                              ""max_errors"": 0.5,
+							  ""collate"": {
+									""query"": {
+										""match"": {
+											""{{fieldname}}"": {
+												""query"": ""{{suggestion}}""
+											}
+										}
+									},
+									""params"": {
+										""{{fieldname}}"": ""name""
+									},
+									""preference"": ""_primary""
+							  }
 						}
 					}
 				}
