@@ -39,7 +39,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 							}
 						}
 					},
-                    boot: 2.2
+                    boost: 2.2
 			}}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
