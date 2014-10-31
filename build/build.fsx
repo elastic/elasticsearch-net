@@ -133,15 +133,16 @@ let nugetPack = fun name ->
     WriteStringToFile false package replacedContents
 
     let dir = sprintf "%s/%s/" buildDir name
+    let nugetOutFile = buildDir + (sprintf "%s/%s.%s.nupkg" name name patchedFileVersion);
     NuGetPack (fun p ->
       {p with 
         Version = patchedFileVersion
-        WorkingDir = dir 
+        WorkingDir = "build" 
         OutputPath = dir
       })
       package
 
-    MoveFile nugetOutDir (buildDir + (sprintf "%s/%s.%s.nupkg" name name patchedFileVersion)) 
+    MoveFile nugetOutDir nugetOutFile
 
 let buildDocs = fun action ->
     let node = @"build\tools\Node.js\node.exe"
