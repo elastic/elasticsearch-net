@@ -26,7 +26,8 @@ namespace Elasticsearch.Net.Connection
 		bool MetricsEnabled { get; }
 		bool UsesPrettyResponses { get; }
 		bool KeepRawResponse { get; }
-        bool DisableAutomaticProxyDetection { get; }
+		bool DisableAutomaticProxyDetection { get; }
+		bool HttpPipeliningEnabled { get; }
 
 		/// <summary>
 		/// Instead of following a c/go like error checking on response.IsValid always throw an ElasticsearchServerException

@@ -112,6 +112,9 @@ namespace Elasticsearch.Net.Connection
 		private bool _traceEnabled;
 		bool IConnectionConfigurationValues.TraceEnabled { get{ return _traceEnabled; } }
 
+		private bool _httpPipeliningEnabled;
+		bool IConnectionConfigurationValues.HttpPipeliningEnabled { get { return _httpPipeliningEnabled; } }
+
 		private bool _throwOnServerExceptions;
 		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions { get{ return _throwOnServerExceptions; } }
 
@@ -325,9 +328,18 @@ namespace Elasticsearch.Net.Connection
         {
             handler.ThrowIfNull("handler");
             this._connectionStatusHandler = handler;
-            return (T)this;
+			return (T)this;
         }
 
+		/// <summary>
+		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
+		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
+		/// </summary>
+		public T HttpPipeliningEnabled(bool enabled = true)
+		{
+			this._httpPipeliningEnabled = enabled;
+			return (T)this;
+		}
 	}
 }
 

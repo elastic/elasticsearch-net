@@ -48,6 +48,10 @@ namespace Elasticsearch.Net.Connection.Configuration
 		/// </summary>
 		IEnumerable<int> AllowedStatusCodes { get; set; }
 
-
+		/// <summary>
+		/// Whether or not this request should be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
+		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
+		/// </summary>
+		bool EnableHttpPipelining { get; set; }
 	}
 }
