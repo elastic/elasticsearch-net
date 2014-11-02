@@ -15,6 +15,10 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "exclude")]
 		ISpanQuery Exclude { get; set; }
+
+        [JsonProperty(PropertyName = "boost")]
+        double? Boost { get; set; }
+
 	}
 
 	public class SpanNotQuery : PlainQuery, ISpanNotQuery
@@ -27,6 +31,7 @@ namespace Nest
 		bool IQuery.IsConditionless { get { return false; } }
 		public ISpanQuery Include { get; set; }
 		public ISpanQuery Exclude { get; set; }
+	    public double? Boost { get; set; }
 	}
 
 	public class SpanNotQuery<T> : ISpanNotQuery where T : class
@@ -34,8 +39,9 @@ namespace Nest
 		ISpanQuery ISpanNotQuery.Include { get; set; }
 
 		ISpanQuery ISpanNotQuery.Exclude { get; set; }
+	    double? ISpanNotQuery.Boost { get; set; }
 
-		bool IQuery.IsConditionless
+	    bool IQuery.IsConditionless
 		{
 			get
 			{
@@ -71,5 +77,11 @@ namespace Nest
 			((ISpanNotQuery)this).Exclude = q;
 			return this;
 		}
+
+        public ISpanNotQuery Boost(double boost)
+        {
+            ((ISpanNotQuery)this).Boost = boost;
+            return this;
+        }
 	}
 }
