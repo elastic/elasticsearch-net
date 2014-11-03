@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using Nest.DSL.Filter;
 using Nest.DSL.Visitor;
 using Newtonsoft.Json;
 
@@ -47,6 +46,8 @@ namespace Nest
 		IGeoDistanceFilter IFilterContainer.GeoDistance { get; set; }
 
 		IGeoDistanceRangeFilter IFilterContainer.GeoDistanceRange { get; set; }
+
+        IGeoHashCellFilter IFilterContainer.GeoHashCell { get; set; }
 
 		IGeoPolygonFilter IFilterContainer.GeoPolygon { get; set; }
 

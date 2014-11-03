@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Filter;
 
 namespace Nest.DSL.Visitor
 {
@@ -357,6 +358,11 @@ namespace Nest.DSL.Visitor
 		{
 			Write("geo_distance");
 		}
+
+        public virtual void Visit(IGeoHashCellFilter filter)
+        {
+            Write("geohash_cell");
+        }
 
 		public virtual void Visit(IGeoBoundingBoxFilter filter)
 		{

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Nest.DSL.Filter;
 
 namespace Nest
 {
@@ -52,6 +53,10 @@ namespace Nest
 		{
 			return new FilterDescriptor<T>().GeoDistance(field, filterDescriptor);
 		}
+        public static FilterContainer GeoHashCell(string field, Action<GeoHashCellFilterDescriptor> filterDescriptor)
+        {
+            return new FilterDescriptor<T>().GeoHashCell(field, filterDescriptor);
+        }
 		public static FilterContainer GeoDistanceRange(Expression<Func<T, object>> fieldDescriptor, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
 		{
 			return new FilterDescriptor<T>().GeoDistanceRange(fieldDescriptor, filterDescriptor);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Nest.DSL.Filter;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
@@ -240,6 +241,33 @@ namespace Nest
 			ff.Field = field;
 			return this.New(filter, f => f.GeoDistance = filter);
 		}
+
+        /// <summary>
+        /// By defining a geohash cell, only geopoints within this cell will match this filter
+        /// </summary>
+        public FilterContainer GeoHashCell(string field, Action<GeoHashCellFilterDescriptor> filterDescriptor)
+        {
+            return _GeoHashCell(field, filterDescriptor);
+        }
+
+        /// <summary>
+        /// By defining a geohash cell, only geopoints within this cell will match this filter
+        /// </summary>
+        public FilterContainer GeoHashCell(Expression<Func<T, object>> fieldDescriptor, Action<GeoHashCellFilterDescriptor> filterDescriptor)
+        {
+            return _GeoHashCell(fieldDescriptor, filterDescriptor);
+        }
+
+        private FilterContainer _GeoHashCell(PropertyPathMarker field, Action<GeoHashCellFilterDescriptor> filterDescriptor)
+        {
+            var filter = new GeoHashCellFilterDescriptor();
+            if (filterDescriptor != null)
+                filterDescriptor(filter);
+
+            IGeoHashCellFilter ff = filter;
+            ff.Field = field;
+            return New(filter, f => f.GeoHashCell = filter);
+        }
 
 		/// <summary>
 		/// Filters documents that exists within a range from a specific point:

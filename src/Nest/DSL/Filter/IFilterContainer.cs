@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nest.DSL.Filter;
 using Nest.DSL.Visitor;
 using Nest.Resolvers.Converters;
 using Nest.Resolvers.Converters.Filters;
@@ -49,6 +50,10 @@ namespace Nest
 		[JsonProperty(PropertyName = "geo_distance")]
 		[JsonConverter(typeof(GeoDistanceFilterConverter))]
 		IGeoDistanceFilter GeoDistance { get; set; }
+
+        [JsonProperty(PropertyName = "geohash_cell")]
+        [JsonConverter(typeof(GeoHashCellFilterConverter))]
+        IGeoHashCellFilter GeoHashCell { get; set; }
 
 		[JsonProperty(PropertyName = "geo_distance_range")]
 		[JsonConverter(typeof(GeoDistanceRangeFilterConverter))]

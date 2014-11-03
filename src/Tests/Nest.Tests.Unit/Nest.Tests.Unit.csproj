@@ -321,6 +321,7 @@
     <Compile Include="QueryParsers\Filter\GeoBoundingBoxFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\GeoDistanceFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\GeoDistanceRangeFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\GeoHashCellFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\GeoIndexShapeFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\GeoPolygonFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\GeoShapeFilterTests.cs" />
@@ -395,6 +396,7 @@
     <Compile Include="Search\Fields\FieldsTests.cs" />
     <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
     <Compile Include="Search\Filter\Modes\FilterModesTests.cs" />
+    <Compile Include="Search\Filter\Singles\GeoHashCellFilter.cs" />
     <Compile Include="Search\Filter\Singles\TermsLookupFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\GeoIndexedShapeFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\GeoShapeFilterJson.cs" />
