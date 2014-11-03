@@ -57,6 +57,7 @@
     <Compile Include="Connection\RequestState\ITransportRequestState.cs" />
     <Compile Include="Connection\RequestState\NoopRequestTimings.cs" />
     <Compile Include="Connection\RequestState\RequestTimings.cs" />
+    <Compile Include="Connection\Security\BasicAuthorizationCredentials.cs" />
     <Compile Include="Domain\RequestParameters\BaseRequestParameters.cs" />
     <Compile Include="Domain\Response\CallMetrics.cs" />
     <Compile Include="Domain\Response\IElasticsearchResponse.cs" />

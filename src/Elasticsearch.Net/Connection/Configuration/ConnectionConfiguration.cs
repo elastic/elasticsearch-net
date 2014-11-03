@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Serialization;
+using Elasticsearch.Net.Connection.Security;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -123,6 +124,9 @@ namespace Elasticsearch.Net.Connection
 
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer { get; set; }
 
+		private BasicAuthorizationCredentials _basicAuthCredentials;
+		BasicAuthorizationCredentials IConnectionConfigurationValues.BasicAuthorizationCredentials { get { return _basicAuthCredentials; } } 
+		
 		public ConnectionConfiguration(IConnectionPool connectionPool)
 		{
 			this._timeout = 60*1000;
@@ -328,6 +332,17 @@ namespace Elasticsearch.Net.Connection
             return (T)this;
         }
 
+		/// <summary>
+		/// Basic access authorization credentials to specify with all requests.
+		/// </summary>
+		public T SetBasicAuthorization(string userName, string password)
+		{
+			if (this._basicAuthCredentials == null)
+				this._basicAuthCredentials = new BasicAuthorizationCredentials();
+			this._basicAuthCredentials.UserName = userName;
+			this._basicAuthCredentials.Password = password;
+			return (T)this;
+		}
 	}
 }
 

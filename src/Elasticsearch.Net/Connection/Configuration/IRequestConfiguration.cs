@@ -1,3 +1,4 @@
+using Elasticsearch.Net.Connection.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,10 @@ namespace Elasticsearch.Net.Connection.Configuration
 		/// </summary>
 		IEnumerable<int> AllowedStatusCodes { get; set; }
 
-
+		/// <summary>
+		/// Basic access authorization credentials to specify with this request.
+		/// Overrides any credentials that are set at the global IConnectionSettings level.
+		/// </summary>
+		BasicAuthorizationCredentials BasicAuthorizationCredentials { get; set; }
 	}
 }

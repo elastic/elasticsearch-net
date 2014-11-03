@@ -141,7 +141,7 @@ namespace Elasticsearch.Net.Connection
 		protected virtual HttpWebRequest CreateHttpWebRequest(Uri uri, string method, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
 			var myReq = this.CreateWebRequest(uri, method, data, requestSpecificConfig);
-			this.SetBasicAuthorizationIfNeeded(uri, myReq);
+			this.SetBasicAuthorizationIfNeeded(uri, myReq, requestSpecificConfig);
 			this.SetProxyIfNeeded(myReq);
 			return myReq;
 		}
@@ -164,12 +164,23 @@ namespace Elasticsearch.Net.Connection
             }
 		}
 
-		private void SetBasicAuthorizationIfNeeded(Uri uri, HttpWebRequest myReq)
+		private void SetBasicAuthorizationIfNeeded(Uri uri, HttpWebRequest request, IRequestConfiguration requestSpecificConfig)
 		{
-			if (!uri.UserInfo.IsNullOrEmpty())
-			{
-				myReq.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myReq.RequestUri.UserInfo));
-			}
+			// Basic auth credentials take the following precedence (highest -> lowest):
+			// 1 - Specified on the request (highest precedence)
+ 			// 2 - Specified at the global IConnectionSettings level
+			// 3 - Specified with the URI (lowest precedence)
+
+			var userInfo = uri.UserInfo;
+			
+			if (this.ConnectionSettings.BasicAuthorizationCredentials != null)
+				userInfo = this.ConnectionSettings.BasicAuthorizationCredentials.ToString();
+
+			if (requestSpecificConfig != null && requestSpecificConfig.BasicAuthorizationCredentials != null)
+				userInfo = requestSpecificConfig.BasicAuthorizationCredentials.ToString();
+
+			if (!userInfo.IsNullOrEmpty())
+				request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
 		}
 
 		protected virtual HttpWebRequest CreateWebRequest(Uri uri, string method, byte[] data, IRequestConfiguration requestSpecificConfig)

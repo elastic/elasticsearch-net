@@ -2,6 +2,7 @@
 using System.Collections.Specialized;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Serialization;
+using Elasticsearch.Net.Connection.Security;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -65,5 +66,10 @@ namespace Elasticsearch.Net.Connection
 		/// 
 		/// </summary>
 		IElasticsearchSerializer Serializer { get; set; }
+
+		/// <summary>
+		/// Basic access authorization credentials to specify with all requests.
+		/// </summary>
+		BasicAuthorizationCredentials BasicAuthorizationCredentials { get; } 
 	}
 }
