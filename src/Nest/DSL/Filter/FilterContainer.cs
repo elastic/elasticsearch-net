@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Nest.DSL.Filter;
 using Nest.DSL.Visitor;
 using Newtonsoft.Json;
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.DSL.Filter;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;

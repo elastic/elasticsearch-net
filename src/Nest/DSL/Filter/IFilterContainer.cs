@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nest.DSL.Filter;
 using Nest.DSL.Visitor;
 using Nest.Resolvers.Converters;
 using Nest.Resolvers.Converters.Filters;
