@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.Providers;
 using PurifyNet;
@@ -168,7 +169,13 @@ namespace Elasticsearch.Net.Connection
 		{
 			if (!uri.UserInfo.IsNullOrEmpty())
 			{
-				myReq.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myReq.RequestUri.UserInfo));
+				var userInfo = myReq.RequestUri.UserInfo;
+				int length = userInfo.IndexOf(':');
+				if (length != -1)
+				{
+					userInfo = HttpUtility.UrlDecode(userInfo.Substring(0, length)) + ":" + HttpUtility.UrlDecode(userInfo.Substring(length + 1));
+				}
+				myReq.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
 			}
 		}
 
