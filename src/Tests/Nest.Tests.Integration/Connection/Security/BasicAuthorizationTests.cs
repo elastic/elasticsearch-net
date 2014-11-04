@@ -61,6 +61,15 @@ namespace Tests.Security.BasicAuthTests
 		}
 
 		[Test]
+		public void Escaped_Credentials_On_URI_Result_In_200()
+		{
+			var settings = new ConnectionSettings(new Uri("http://gmarz:p%40ssword@localhost:9200"));
+			var client = new ElasticClient(settings);
+			var response = client.RootNodeInfo();
+			response.IsValid.Should().BeTrue();
+		}
+
+		[Test]
 		public void ConnectionSettings_Overrides_URI()
 		{
 			var settings = new ConnectionSettings(new Uri("http://invalid:user@localhost:9200"))

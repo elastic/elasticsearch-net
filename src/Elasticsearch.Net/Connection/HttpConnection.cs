@@ -171,8 +171,8 @@ namespace Elasticsearch.Net.Connection
  			// 2 - Specified at the global IConnectionSettings level
 			// 3 - Specified with the URI (lowest precedence)
 
-			var userInfo = uri.UserInfo;
-			
+			var userInfo = Uri.UnescapeDataString(uri.UserInfo);
+
 			if (this.ConnectionSettings.BasicAuthorizationCredentials != null)
 				userInfo = this.ConnectionSettings.BasicAuthorizationCredentials.ToString();
 
