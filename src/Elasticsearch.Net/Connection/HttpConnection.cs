@@ -174,6 +174,10 @@ namespace Elasticsearch.Net.Connection
 				{
 					userInfo = Uri.UnescapeDataString(userInfo.Substring(0, length)) + ":" + Uri.UnescapeDataString(userInfo.Substring(length + 1));
 				}
+				else
+				{
+					userInfo = Uri.UnescapeDataString(userInfo);
+				}
 				myReq.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
 			}
 		}
