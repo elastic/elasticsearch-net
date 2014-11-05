@@ -230,7 +230,6 @@ Target "Nightly" (fun _ ->
   ==> "CreateKeysIfAbsent"
   =?> ("Version", hasBuildParam "version")
   ==> "BuildApp"
-  ==> "Test"
   ==> "Build"
 
 "CreateKeysIfAbsent"
