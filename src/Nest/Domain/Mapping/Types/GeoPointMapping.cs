@@ -21,6 +21,9 @@ namespace Nest
 		[JsonProperty("geohash")]
 		public bool? IndexGeoHash { get; set; }
 
+        [JsonProperty("geohash_prefix")]
+        public bool? GeoHashPrefix { get; set; }
+
 		[JsonProperty("geohash_precision")]
 		public int? GeoHashPrecision { get; set; }
 

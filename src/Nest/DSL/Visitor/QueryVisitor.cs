@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Nest.DSL.Visitor
+﻿namespace Nest.DSL.Visitor
 {
 	public interface IQueryVisitor
 	{
@@ -364,6 +360,10 @@ namespace Nest.DSL.Visitor
 		public virtual void Visit(IGeoDistanceFilter customFiltersScore)
 		{
 		}
+
+        public virtual void Visit(IGeoHashCellFilter filter)
+        {
+        }
 
 		public virtual void Visit(IGeoBoundingBoxFilter customFiltersScore)
 		{
