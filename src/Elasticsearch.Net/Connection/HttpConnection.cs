@@ -140,10 +140,10 @@ namespace Elasticsearch.Net.Connection
 
 		protected virtual HttpWebRequest CreateHttpWebRequest(Uri uri, string method, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
-			var myReq = this.CreateWebRequest(uri, method, data, requestSpecificConfig);
-			this.SetBasicAuthorizationIfNeeded(uri, myReq);
-			this.SetProxyIfNeeded(myReq);
-			return myReq;
+			var request = this.CreateWebRequest(uri, method, data, requestSpecificConfig);
+			this.SetBasicAuthorizationIfNeeded(uri, request);
+			this.SetProxyIfNeeded(request);
+			return request;
 		}
 
 		private void SetProxyIfNeeded(HttpWebRequest myReq)
@@ -174,38 +174,38 @@ namespace Elasticsearch.Net.Connection
 
 		protected virtual HttpWebRequest CreateWebRequest(Uri uri, string method, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
-			//TODO append global querystring
-			//var url = this._CreateUriString(path);
+			var request = (HttpWebRequest)WebRequest.Create(uri);
+			request.Accept = "application/json";
+			request.ContentType = "application/json";
+			request.MaximumResponseHeadersLength = -1;
+			request.Pipelined = this.ConnectionSettings.HttpPipeliningEnabled
+				|| (requestSpecificConfig != null && requestSpecificConfig.EnableHttpPipelining);
 
-			var myReq = (HttpWebRequest)WebRequest.Create(uri);
-			myReq.Accept = "application/json";
-			myReq.ContentType = "application/json";
-			myReq.MaximumResponseHeadersLength = -1;
-			myReq.Pipelined = false;
-			//myReq.AllowWriteStreamBuffering = false;
 			if (this.ConnectionSettings.EnableCompressedResponses)
 			{
-				myReq.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-				myReq.Headers.Add("Accept-Encoding", "gzip,deflate");
+				request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+				request.Headers.Add("Accept-Encoding", "gzip,deflate");
 			}
+
 			if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.ContentType))
 			{
-				myReq.Accept = requestSpecificConfig.ContentType;
-				myReq.ContentType = requestSpecificConfig.ContentType;
+				request.Accept = requestSpecificConfig.ContentType;
+				request.ContentType = requestSpecificConfig.ContentType;
 			}
+
 			var timeout = GetRequestTimeout(requestSpecificConfig);
-			myReq.Timeout = timeout;
-			myReq.ReadWriteTimeout = timeout;
-			myReq.Method = method;
+			request.Timeout = timeout;
+			request.ReadWriteTimeout = timeout;
+			request.Method = method;
 
 			//WebRequest won't send Content-Length: 0 for empty bodies
 			//which goes against RFC's and might break i.e IIS when used as a proxy.
 			//see: https://github.com/elasticsearch/elasticsearch-net/issues/562
 			var m = method.ToLowerInvariant();
 			if (m != "head" && m != "get" && (data == null || data.Length == 0))
-				myReq.ContentLength = 0;
+				request.ContentLength = 0;
 
-			return myReq;
+			return request;
 		}
 
 		protected virtual ElasticsearchResponse<Stream> DoSynchronousRequest(HttpWebRequest request, byte[] data = null, IRequestConfiguration requestSpecificConfig = null)

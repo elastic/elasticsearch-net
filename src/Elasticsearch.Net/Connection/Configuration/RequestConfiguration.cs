@@ -13,5 +13,6 @@ namespace Elasticsearch.Net.Connection.Configuration
 		public bool? DisableSniff { get; set; }
 		public bool? DisablePing { get; set; }
 		public IEnumerable<int> AllowedStatusCodes { get; set; }
+		public bool EnableHttpPipelining { get; set; }
 	}
 }

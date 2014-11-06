@@ -23,6 +23,8 @@ namespace Elasticsearch.Net.Connection.Configuration
 		
 		IEnumerable<int> IRequestConfiguration.AllowedStatusCodes { get; set; }
 
+		bool IRequestConfiguration.EnableHttpPipelining { get; set; }
+
 		public RequestConfigurationDescriptor RequestTimeout(int requestTimeoutInMilliseconds)
 		{
 			Self.RequestTimeout = requestTimeoutInMilliseconds;
@@ -73,6 +75,12 @@ namespace Elasticsearch.Net.Connection.Configuration
 		public RequestConfigurationDescriptor MaxRetries(int retry)
 		{
 			Self.MaxRetries = retry;
+			return this;
+		}
+
+		public RequestConfigurationDescriptor EnableHttpPipelining(bool enable = true)
+		{
+			Self.EnableHttpPipelining = enable;
 			return this;
 		}
 	}
