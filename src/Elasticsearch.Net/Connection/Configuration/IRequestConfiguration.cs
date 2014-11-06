@@ -45,7 +45,7 @@ namespace Elasticsearch.Net.Connection.Configuration
 		bool? DisablePing { get; set; }
 
 		/// <summary>
-		/// Treat the folowing statuses (on top of the 200 range) NOT as error.
+		/// Treat the following statuses (on top of the 200 range) NOT as error.
 		/// </summary>
 		IEnumerable<int> AllowedStatusCodes { get; set; }
 
@@ -54,5 +54,11 @@ namespace Elasticsearch.Net.Connection.Configuration
 		/// Overrides any credentials that are set at the global IConnectionSettings level.
 		/// </summary>
 		BasicAuthorizationCredentials BasicAuthorizationCredentials { get; set; }
+
+		/// <summary>
+		/// Whether or not this request should be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
+		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
+		/// </summary>
+		bool EnableHttpPipelining { get; set; }
 	}
 }

@@ -50,6 +50,10 @@ namespace Nest
 		[JsonConverter(typeof(GeoDistanceFilterConverter))]
 		IGeoDistanceFilter GeoDistance { get; set; }
 
+        [JsonProperty(PropertyName = "geohash_cell")]
+        [JsonConverter(typeof(GeoHashCellFilterConverter))]
+        IGeoHashCellFilter GeoHashCell { get; set; }
+
 		[JsonProperty(PropertyName = "geo_distance_range")]
 		[JsonConverter(typeof(GeoDistanceRangeFilterConverter))]
 		IGeoDistanceRangeFilter GeoDistanceRange { get; set; }

@@ -170,7 +170,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Allows you to override how type names should be reprented, the default will call .ToLowerInvariant() on the type's name.
+		/// Allows you to override how type names should be represented, the default will call .ToLowerInvariant() on the type's name.
 		/// </summary>
 		public T SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer)
 		{

@@ -15,5 +15,6 @@ namespace Elasticsearch.Net.Connection.Configuration
 		public bool? DisablePing { get; set; }
 		public IEnumerable<int> AllowedStatusCodes { get; set; }
 		public BasicAuthorizationCredentials BasicAuthorizationCredentials { get; set; }
+		public bool EnableHttpPipelining { get; set; }
 	}
 }

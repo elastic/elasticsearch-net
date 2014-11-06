@@ -26,6 +26,8 @@ namespace Elasticsearch.Net.Connection.Configuration
 
 		BasicAuthorizationCredentials IRequestConfiguration.BasicAuthorizationCredentials { get; set; }
 
+		bool IRequestConfiguration.EnableHttpPipelining { get; set; }
+
 		public RequestConfigurationDescriptor RequestTimeout(int requestTimeoutInMilliseconds)
 		{
 			Self.RequestTimeout = requestTimeoutInMilliseconds;
@@ -85,6 +87,12 @@ namespace Elasticsearch.Net.Connection.Configuration
 				Self.BasicAuthorizationCredentials = new BasicAuthorizationCredentials();
 			Self.BasicAuthorizationCredentials.UserName = userName;
 			Self.BasicAuthorizationCredentials.Password = password;
+			return this;
+		}
+
+		public RequestConfigurationDescriptor EnableHttpPipelining(bool enable = true)
+		{
+			Self.EnableHttpPipelining = enable;
 			return this;
 		}
 	}
