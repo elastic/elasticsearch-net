@@ -19,6 +19,8 @@
 				"Microsoft.CSharp": "4.0.0.0",
 				"Microsoft.CSharp": "4.0.0.0",
 				"System.Globalization": "4.0.10.0",
+				"System.Globalization.Extensions": "4.0.0.0",
+				"System.Globalization.Calendars": "4.0.0.0",
 				"System.Collections": "4.0.10-beta-22231",
 				"System.Collections.Specialized": "4.0.0.0",
 				"System.Collections.Concurrent": "4.0.0.0",
