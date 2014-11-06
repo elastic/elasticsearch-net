@@ -97,6 +97,7 @@
     <Compile Include="DataSources\DoubleSource.cs" />
     <Compile Include="DataSources\LongSource.cs" />
     <Compile Include="DataSources\FloatSource.cs" />
+    <Compile Include="DataSources\TupleDataSource.cs" />
     <Compile Include="Domain\BoolTerm.cs" />
     <Compile Include="Domain\GeoShape.cs" />
     <Compile Include="Domain\ElasticsearchProject.cs" />

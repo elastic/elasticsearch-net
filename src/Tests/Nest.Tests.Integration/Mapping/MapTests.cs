@@ -35,6 +35,11 @@ namespace Nest.Tests.Integration.Mapping
 			var countryMapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(countryMapping);
 			Assert.AreEqual(FieldIndexOption.NotAnalyzed, countryMapping.Index);
+
+            var tupleMapping = typeMapping.Properties["genericTuple"] as ObjectMapping;
+            Assert.NotNull(tupleMapping);
+            Assert.AreEqual("integer", tupleMapping.Properties["item1"].Type.Name);
+            Assert.AreEqual("integer", tupleMapping.Properties["item2"].Type.Name);
 		}
 
 		[Test]
