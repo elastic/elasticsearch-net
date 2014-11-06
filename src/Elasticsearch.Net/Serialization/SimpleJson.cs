@@ -43,10 +43,9 @@
 //#define NETFX_CORE;
 
 // If you are targetting WinStore, WP8 and NET4.5+ PCL make sure to #define SIMPLE_JSON_TYPEINFO;
-
 // original json parsing code from http://techblog.procurios.nl/k/618/news/view/14605/14863/How-do-I-write-my-own-parser-for-JSON.html
 
-#if NETFX_CORE
+#if NETFX_CORE || ASPNETCORE50
 #define SIMPLE_JSON_TYPEINFO
 #endif
 using System;

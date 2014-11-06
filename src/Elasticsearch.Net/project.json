@@ -1,0 +1,46 @@
+﻿{
+	"dependencies": {
+	},
+
+	"frameworks": {
+		"aspnet50": {
+			"dependencies": {
+				"System.Linq": "4.0.0.0",
+				"System.Runtime.Serialization": ""
+			}
+		},
+		"aspnetcore50": {
+			"dependencies": {
+				"K.CoreFx": "1.0.0-alpha4",
+				"K.CommonFx": "1.0.0-alpha4",
+				"K.IO": "1.0.0-alpha4",
+				"K.Threading": "1.0.0-alpha4",
+				"K.LeanFx": "1.0.0-alpha4",
+				"Microsoft.CSharp": "4.0.0.0",
+				"Microsoft.CSharp": "4.0.0.0",
+				"System.Globalization": "4.0.10.0",
+				"System.Collections": "4.0.10-beta-22231",
+				"System.Collections.Specialized": "4.0.0.0",
+				"System.Collections.Concurrent": "4.0.0.0",
+				"System.ComponentModel": "4.0.0.0",
+				"System.ComponentModel.Annotations": "4.0.10.0",
+				"System.Net.Primitives": "4.0.10.0",
+				"System.Net.Http": "4.0.0.0",
+				"System.Linq": "4.0.0.0",
+				"System.IO": "4.0.10.0",
+				"System.Reflection": "4.0.10.0",
+				"System.Runtime": "4.0.20.0",
+				"System.Runtime.InteropServices": "4.0.10.0",
+				"System.Threading": "4.0.0.0",
+				"System.Threading.Tasks": "4.0.0.0",
+				"System.Dynamic.Runtime": "4.0.0.0",
+				"System.Runtime.Serialization.Primitives": "4.0.0.0",
+				"System.Reflection": "4.0.10.0",
+				"System.Reflection.Primitives": "4.0.0.0",
+				"System.Reflection.TypeExtensions": "4.0.0.0",
+				"System.Reflection.Extensions": "4.0.0.0",
+				"System.Security.Cryptography.Encryption": "4.0.0.0"
+			}
+		}
+	}
+}

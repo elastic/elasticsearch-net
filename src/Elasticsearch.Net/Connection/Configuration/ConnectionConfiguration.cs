@@ -40,7 +40,6 @@ namespace Elasticsearch.Net.Connection
 	}
 
 
-	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public class ConnectionConfiguration<T> : IConnectionConfigurationValues, IHideObjectMembers
 		where T : ConnectionConfiguration<T>

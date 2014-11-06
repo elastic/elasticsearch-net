@@ -6,19 +6,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Globalization;
 
 namespace Elasticsearch.Net
 {
 	/// <summary>
 	/// A dictionary that supports dynamic access.
 	/// </summary>
-	public class DynamicDictionary : 
-		DynamicObject, 
-		IEquatable<DynamicDictionary>, 
-		IEnumerable<string>, 
+	public class DynamicDictionary :
+		DynamicObject,
+		IEquatable<DynamicDictionary>,
+		IEnumerable<string>,
 		IDictionary<string, object>
 	{
-		protected readonly IDictionary<string, dynamic> dictionary = new Dictionary<string, dynamic>(StringComparer.InvariantCultureIgnoreCase);
+		//protected readonly IDictionary<string, dynamic> dictionary = new Dictionary<string, dynamic>(StringComparer.InvariantCultureIgnoreCase);
+		protected readonly IDictionary<string, dynamic> dictionary = new Dictionary<string, dynamic>();
 
 		/// <summary>
 		/// Returns an empty dynamic dictionary.
@@ -40,7 +42,7 @@ namespace Elasticsearch.Net
 		public static DynamicDictionary Create(IDictionary<string, object> values)
 		{
 			var instance = new DynamicDictionary();
-			
+
 			foreach (var key in values.Keys)
 			{
 				instance[key] = values[key];
@@ -326,4 +328,5 @@ namespace Elasticsearch.Net
 			return key;
 		}
 	}
-}
+
+}	

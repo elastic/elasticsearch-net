@@ -334,7 +334,7 @@ namespace Elasticsearch.Net
 				{
 					binderType = binderType.GetGenericArguments()[0];
 				}
-
+				
 				var typeCode = Type.GetTypeCode(binderType);
 
 				if (typeCode == TypeCode.Object)
