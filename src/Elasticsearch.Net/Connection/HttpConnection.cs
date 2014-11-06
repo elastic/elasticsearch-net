@@ -141,7 +141,7 @@ namespace Elasticsearch.Net.Connection
 		protected virtual HttpWebRequest CreateHttpWebRequest(Uri uri, string method, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
 			var request = this.CreateWebRequest(uri, method, data, requestSpecificConfig);
-			this.SetBasicAuthorizationIfNeeded(uri, request);
+			this.SetBasicAuthorizationIfNeeded(uri, request, requestSpecificConfig);
 			this.SetProxyIfNeeded(request);
 			return request;
 		}
