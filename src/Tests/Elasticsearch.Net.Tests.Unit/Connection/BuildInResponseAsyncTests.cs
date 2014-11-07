@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,9 +63,10 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			private MemoryStream CreateServerExceptionResponse(object responseValue)
 			{
 				if (responseValue is string)
-					responseValue = string.Format(@"""{0}""", responseValue);
+					responseValue = string.Format(CultureInfo.InvariantCulture, @"""{0}""", responseValue);
 				var format = @"{{ ""value"": {0} }}";
-				this.ResponseBytes = Encoding.UTF8.GetBytes(string.Format(format, responseValue));
+				var json = string.Format(CultureInfo.InvariantCulture, format, responseValue);
+				this.ResponseBytes = Encoding.UTF8.GetBytes(json);
 				var stream = new MemoryStream(this.ResponseBytes);
 				return stream;
 			}
@@ -223,7 +225,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		[TestCase(505)]
 		[TestCase(10.2)]
 		[TestCase("hello world")]
-		public async void DynamicDictionary_Bad_DiscardResponse(object responseValue)
+		public async Task DynamicDictionary_Bad_DiscardResponse(object responseValue)
 		{
 			using (var request = new Requester<DynamicDictionary>(
 				responseValue,

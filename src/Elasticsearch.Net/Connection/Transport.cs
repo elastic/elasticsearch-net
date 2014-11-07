@@ -641,40 +641,47 @@ namespace Elasticsearch.Net.Connection
 				return null;
 
 			ElasticsearchServerError error = null;
-
+			
+			//If type is stream or voidresponse do not attempt to read error from stream this is handled by the user
 			var type = typeof(T);
-			if (typeof(Stream).IsAssignableFrom(typeof(T)) || typeof(T) == typeof(VoidResponse))
+			if (typeof(Stream).IsAssignableFrom(type) || type == typeof(VoidResponse))
 				return null;
 
-			if (streamResponse.Response != null && !(this.Settings.KeepRawResponse || this.TypeOfResponseCopiesDirectly<T>()))
-			{
-				var e = this.Serializer.Deserialize<OneToOneServerException>(streamResponse.Response);
-				error = ElasticsearchServerError.Create(e);
-			}
-			else if (streamResponse.Response != null)
+
+			var readFrom = streamResponse.Response;
+			var hasResponse = readFrom != null && readFrom.Length > 0;
+			if (hasResponse && (this.Settings.KeepRawResponse || this.TypeOfResponseCopiesDirectly<T>()))
 			{
 				var ms = new MemoryStream();
-				streamResponse.Response.CopyTo(ms);
-				ms.Position = 0;
+				readFrom.CopyTo(ms);
 				streamResponse.ResponseRaw = this.Settings.KeepRawResponse ? ms.ToArray() : null;
+				readFrom = ms;
+				readFrom.Position = 0;
+				
+			}
+			if (hasResponse) 
+			{
 				try
 				{
-					var e = this.Serializer.Deserialize<OneToOneServerException>(ms);
+					var e = this.Serializer.Deserialize<OneToOneServerException>(readFrom);
 					error = ElasticsearchServerError.Create(e);
 				}
-				catch (Exception)
-				{
-					var raw = ms.ToArray().Utf8String();
-				}
-				ms.Position = 0;
-				streamResponse.Response.Close();
-				streamResponse.Response = ms;
+				// ReSharper disable once EmptyGeneralCatchClause
+				// parsing failure of exception should not be fatal, its a best case helper.
+				catch { }
+				
+				//streamResponse.Response.Close();
+				readFrom.Position = 0;
+				streamResponse.Response = readFrom;
+
 			}
 			else
 				error = new ElasticsearchServerError
 				{
 					Status = streamResponse.HttpStatusCode.GetValueOrDefault(-1)
 				};
+			
+
 			if (this.Settings.ThrowOnElasticsearchServerExceptions)
 				throw new ElasticsearchServerException(error);
 			return error;

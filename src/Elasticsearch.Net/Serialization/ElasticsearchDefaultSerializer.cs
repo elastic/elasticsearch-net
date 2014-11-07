@@ -59,7 +59,8 @@ namespace Elasticsearch.Net.Serialization
 					if (read.Result == 0) break;
 					ms.Write(buffer, 0, read.Result);
 				}
-				var r = SimpleJson.DeserializeObject<T>(ms.ToArray().Utf8String());
+				var s = ms.ToArray().Utf8String();
+				var r = SimpleJson.DeserializeObject<T>(s);
 				tcs.SetResult(r);
 			}
 		}

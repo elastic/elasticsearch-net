@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using Autofac.Extras.FakeItEasy;
@@ -49,9 +50,9 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			private MemoryStream CreateServerExceptionResponse(object responseValue)
 			{
 				if (responseValue is string)
-					responseValue = string.Format(@"""{0}""", responseValue);
+					responseValue = string.Format(CultureInfo.InvariantCulture, @"""{0}""", responseValue);
 				var format = @"{{ ""value"": {0} }}";
-				this.ResponseBytes = Encoding.UTF8.GetBytes(string.Format(format, responseValue));
+				this.ResponseBytes = Encoding.UTF8.GetBytes(string.Format(CultureInfo.InvariantCulture, format, responseValue));
 				var stream = new MemoryStream(this.ResponseBytes);
 				return stream;
 			}
