@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Tests.Integration.Connection.Security
 {
 	[TestFixture]
-	//[Ignore]
+	[Ignore]
 	public class UnauthorizedRequestTests
 	{
 		[Test]
