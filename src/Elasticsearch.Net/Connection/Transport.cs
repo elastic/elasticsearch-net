@@ -81,15 +81,18 @@ namespace Elasticsearch.Net.Connection
 					response = this.Connection.HeadSync(requestState.CreatePathOnCurrentNode(""), requestOverrides);
 					rq.Finish(response.Success, response.HttpStatusCode);
 				}
+				
 				if (!response.HttpStatusCode.HasValue || response.HttpStatusCode.Value == -1)
-					throw new Exception("ping returned no status code", response.OriginalException);
+					throw new Exception("Ping returned no status code", response.OriginalException);
+
+				if (response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
+					return true;				
+				
 				if (response.Response == null)
 					return response.Success;
-
-
+				
 				using (response.Response)
 					return response.Success;
-
 			}
 			catch (Exception e)
 			{
