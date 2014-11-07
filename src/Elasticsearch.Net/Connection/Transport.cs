@@ -86,13 +86,17 @@ namespace Elasticsearch.Net.Connection
 					throw new Exception("Ping returned no status code", response.OriginalException);
 
 				if (response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
-					return true;				
-				
+					throw new PingUnauthorizedException(response);
+
 				if (response.Response == null)
 					return response.Success;
 				
 				using (response.Response)
 					return response.Success;
+			}
+			catch(PingUnauthorizedException)
+			{
+				throw;
 			}
 			catch (Exception e)
 			{
@@ -172,6 +176,7 @@ namespace Elasticsearch.Net.Connection
 						if (ownerState.RequestMetrics == null) ownerState.RequestMetrics = new List<RequestMetrics>();
 						ownerState.RequestMetrics.AddRange(requestState.RequestMetrics);
 					}
+
 					if (response.Response == null) return null;
 
 					using (response.Response)
@@ -368,6 +373,14 @@ namespace Elasticsearch.Net.Connection
 			catch (ElasticsearchServerException)
 			{
 				throw;
+			}
+			catch (PingUnauthorizedException pe)
+			{
+				var response = ElasticsearchResponse.CloneFrom<T>(pe.Response, default(T));
+				response.Request = requestState.PostData;
+				response.RequestUrl = requestState.Path;
+				response.RequestMethod = requestState.Method;
+				return response;
 			}
 			catch (Exception e)
 			{
