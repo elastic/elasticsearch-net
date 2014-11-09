@@ -11,6 +11,7 @@ using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
+using Elasticsearch.Net.Serialization;
 using Elasticsearch.Net.Tests.Unit.Stubs;
 using FakeItEasy;
 using FluentAssertions;
@@ -46,8 +47,10 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 		private ITransport ProvideTransport(AutoFake fake)
 		{
-			var param = new TypedParameter(typeof(IDateTimeProvider), null);
-			return fake.Provide<ITransport, Transport>(param);
+			var dateTimeParam = new TypedParameter(typeof(IDateTimeProvider), null);
+			var memoryStreamParam = new TypedParameter(typeof(IMemoryStreamProvider), null);
+			var serializerParam = new TypedParameter(typeof(IElasticsearchSerializer), null);
+			return fake.Provide<ITransport, Transport>(dateTimeParam, serializerParam, memoryStreamParam);
 		}
 
 		[Test]

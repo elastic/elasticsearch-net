@@ -53,6 +53,9 @@
     <Compile Include="Connection\Configuration\IRequestConfiguration.cs" />
     <Compile Include="Connection\Configuration\RequestConfiguration.cs" />
     <Compile Include="Connection\Configuration\RequestConfigurationDescriptor.cs" />
+    <Compile Include="Connection\RequestHandlers\RequestHandler.cs" />
+    <Compile Include="Connection\RequestHandlers\RequestHandlerAsync.cs" />
+    <Compile Include="Connection\RequestHandlers\RequestHandlerBase.cs" />
     <Compile Include="Connection\RequestState\IRequestTimings.cs" />
     <Compile Include="Connection\RequestState\ITransportRequestState.cs" />
     <Compile Include="Connection\RequestState\NoopRequestTimings.cs" />
@@ -86,6 +89,8 @@
     <Compile Include="ConnectionPool\IConnectionPool.cs" />
     <Compile Include="Providers\IDateTimeProvider.cs" />
     <Compile Include="ConnectionPool\SingleNodeConnectionPool.cs" />
+    <Compile Include="Providers\IMemoryStreamProvider.cs" />
+    <Compile Include="Providers\MemoryStreamProvider.cs" />
     <Compile Include="Providers\Sniffer.cs" />
     <Compile Include="ConnectionPool\SniffingConnectionPool.cs" />
     <Compile Include="ConnectionPool\StaticConnectionPool.cs" />

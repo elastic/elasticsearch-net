@@ -17,7 +17,6 @@ using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Serialization;
 
-
 namespace Elasticsearch.Net
 {
 	//TODO document and possibly rename some of the properties

@@ -75,11 +75,16 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 			return u=>u.AbsolutePath == "/" || u.AbsolutePath == "";
 		}
 
-		public static ITransport ProvideDefaultTransport(AutoFake fake, IDateTimeProvider dateTimeProvider = null)
+		public static ITransport ProvideDefaultTransport(
+			AutoFake fake,
+			IDateTimeProvider dateTimeProvider = null,
+			IMemoryStreamProvider memoryStreamProvider = null
+		)
 		{
-			var param = new TypedParameter(typeof(IDateTimeProvider), dateTimeProvider);
+			var dateTimeParam = new TypedParameter(typeof(IDateTimeProvider), dateTimeProvider);
+			var memoryStreamParam = new TypedParameter(typeof(IMemoryStreamProvider), memoryStreamProvider);
 			var serializerParam = new TypedParameter(typeof(IElasticsearchSerializer), null);
-			return fake.Provide<ITransport, Transport>(param, serializerParam);
+			return fake.Provide<ITransport, Transport>(dateTimeParam, serializerParam, memoryStreamParam);
 		}
 
 		private static readonly string SniffFormat = @" {{ ""cluster_name"" : ""insert_marvel_character"", ""nodes"" : {{ {0} }} }}";
