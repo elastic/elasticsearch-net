@@ -44,6 +44,7 @@ namespace Elasticsearch.Net.Connection
 		/// <returns>bool hint whether the new current node needs to pinged first</returns>
 		bool SelectNextNode(ITransportRequestState requestState);
 	}
+
 	public class Transport : ITransport, ITransportDelegator
 	{
 
