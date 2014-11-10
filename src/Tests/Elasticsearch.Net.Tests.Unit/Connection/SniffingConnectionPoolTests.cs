@@ -523,6 +523,50 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 
 		[Test]
+		public void ShouldNotRetryOnSniffConnectionFault401_Async()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{
+				var uris = new[]
+				{
+					new Uri("http://localhost:9200"),
+					new Uri("http://localhost:9201"),
+					new Uri("http://localhost:9202")
+				};
+				var connectionPool = new SniffingConnectionPool(uris, randomizeOnStartup: false);
+				var config = new ConnectionConfiguration(connectionPool)
+					.SniffOnConnectionFault();
+
+				fake.Provide<IConnectionConfigurationValues>(config);
+				FakeCalls.ProvideDefaultTransport(fake);
+
+				var pingAsyncCall = FakeCalls.PingAtConnectionLevelAsync(fake);
+				pingAsyncCall.Returns(FakeResponse.OkAsync(config));
+
+				//sniffing is always synchronous and in turn will issue synchronous pings
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
+				var sniffCall = FakeCalls.Sniff(fake);
+				var seenPorts = new List<int>();
+				sniffCall.ReturnsLazily((Uri u, IRequestConfiguration c) =>
+				{
+					seenPorts.Add(u.Port);
+					return FakeResponse.Any(config, 401);
+				});
+
+				var getCall = FakeCalls.GetCall(fake);
+				getCall.Returns(FakeResponse.BadAsync(config));
+
+				var client = fake.Resolve<ElasticsearchClient>();
+
+				Assert.DoesNotThrow(async () => await client.InfoAsync());
+				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
+				getCall.MustHaveHappened(Repeated.Exactly.Once);
+			}
+		}
+
+		[Test]
 		public void ShouldThrowAndNotRetryOnSniffStartup401()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
@@ -596,6 +640,51 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var client = fake.Resolve<ElasticsearchClient>();
 
 				var e = Assert.Throws<ElasticsearchServerException>(() => client.Info());
+				e.Status.Should().Be(401);
+				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
+				getCall.MustHaveHappened(Repeated.Exactly.Once);
+			}
+		}
+
+		[Test]
+		public void ShouldThrowElasticsearchServerExceptionWhenSniffOnConnectionFault401_Async()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{
+				var uris = new[]
+				{
+					new Uri("http://localhost:9200"),
+					new Uri("http://localhost:9201"),
+					new Uri("http://localhost:9202")
+				};
+				var connectionPool = new SniffingConnectionPool(uris, randomizeOnStartup: false);
+				var config = new ConnectionConfiguration(connectionPool)
+					.SniffOnConnectionFault()
+					.ThrowOnElasticsearchServerExceptions();
+
+				fake.Provide<IConnectionConfigurationValues>(config);
+				FakeCalls.ProvideDefaultTransport(fake);
+
+				var pingAsyncCall = FakeCalls.PingAtConnectionLevelAsync(fake);
+				pingAsyncCall.Returns(FakeResponse.OkAsync(config));
+
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
+				var sniffCall = FakeCalls.Sniff(fake);
+				var seenPorts = new List<int>();
+				sniffCall.ReturnsLazily((Uri u, IRequestConfiguration c) =>
+				{
+					seenPorts.Add(u.Port);
+					return FakeResponse.Any(config, 401);
+				});
+
+				var getCall = FakeCalls.GetCall(fake);
+				getCall.Returns(FakeResponse.BadAsync(config));
+
+				var client = fake.Resolve<ElasticsearchClient>();
+
+				var e = Assert.Throws<ElasticsearchServerException>(async () => await client.InfoAsync());
 				e.Status.Should().Be(401);
 				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
 				getCall.MustHaveHappened(Repeated.Exactly.Once);
