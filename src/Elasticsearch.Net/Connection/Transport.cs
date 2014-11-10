@@ -426,6 +426,9 @@ namespace Elasticsearch.Net.Connection
 
 		private ElasticsearchResponse<T> HandleUnauthorizedException<T>(TransportRequestState<T> requestState, UnauthorizedException exception)
 		{
+			if (requestState.ClientSettings.ThrowOnElasticsearchServerExceptions)
+				throw new ElasticsearchServerException(exception.Response.ServerError);
+
 			var response = ElasticsearchResponse.CloneFrom<T>(exception.Response, default(T));
 			response.Request = requestState.PostData;
 			response.RequestUrl = requestState.Path;

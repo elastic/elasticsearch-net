@@ -93,5 +93,16 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 
 		}
 
+		public static ITransport ProvideRealTranportInstance(AutoFake fake, IDateTimeProvider dateTimeProvider = null)
+		{
+			var connection = fake.Resolve<IConnection>();
+			var config = fake.Resolve<IConnectionConfigurationValues>();
+			var param = new TypedParameter(typeof(IDateTimeProvider), dateTimeProvider);
+			var serializerParam = new TypedParameter(typeof(IElasticsearchSerializer), null);
+			return new Transport(
+				config, connection, 
+				serializerParam.Value as IElasticsearchSerializer, 
+				param.Value as IDateTimeProvider);
+		}
 	}
 }

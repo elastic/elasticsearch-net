@@ -523,7 +523,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 
 		[Test]
-		public void ShouldNotRetryOnSniffStartup401()
+		public void ShouldThrowAndNotRetryOnSniffStartup401()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
@@ -536,6 +536,45 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var connectionPool = new SniffingConnectionPool(uris, randomizeOnStartup: false);
 				var config = new ConnectionConfiguration(connectionPool)
 					.SniffOnStartup();
+
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
+				var sniffCall = FakeCalls.Sniff(fake);
+				var seenPorts = new List<int>();
+				sniffCall.ReturnsLazily((Uri u, IRequestConfiguration c) =>
+				{
+					seenPorts.Add(u.Port);
+					return FakeResponse.Any(config, 401);
+				});
+
+				var getCall = FakeCalls.GetSyncCall(fake);
+				getCall.Returns(FakeResponse.Bad(config));
+
+				fake.Provide<IConnectionConfigurationValues>(config);
+		
+				var e = Assert.Throws<UnauthorizedException>(() => FakeCalls.ProvideRealTranportInstance(fake));
+
+				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
+				getCall.MustNotHaveHappened();
+			}
+		}
+
+		[Test]
+		public void ShouldThrowElasticsearchServerExceptionWhenSniffOnConnectionFault401()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{
+				var uris = new[]
+				{
+					new Uri("http://localhost:9200"),
+					new Uri("http://localhost:9201"),
+					new Uri("http://localhost:9202")
+				};
+				var connectionPool = new SniffingConnectionPool(uris, randomizeOnStartup: false);
+				var config = new ConnectionConfiguration(connectionPool)
+					.SniffOnConnectionFault()
+					.ThrowOnElasticsearchServerExceptions();
 
 				fake.Provide<IConnectionConfigurationValues>(config);
 				FakeCalls.ProvideDefaultTransport(fake);
@@ -556,11 +595,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 				var client = fake.Resolve<ElasticsearchClient>();
 
-				Assert.DoesNotThrow(() => client.Info());
+				var e = Assert.Throws<ElasticsearchServerException>(() => client.Info());
+				e.Status.Should().Be(401);
 				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
 				getCall.MustHaveHappened(Repeated.Exactly.Once);
 			}
 		}
-
 	}
 }

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Tests.Integration.Connection.Security
 {
 	[TestFixture]
-	[Ignore]
+	//[Ignore]
 	public class UnauthorizedRequestTests
 	{
 		[Test]
@@ -64,8 +64,8 @@ namespace Tests.Integration.Connection.Security
 			};
 			var pool = new SniffingConnectionPool(nodes);
 			var settings = new ConnectionSettings(pool)
-				.MaximumRetries(3)
-				.SniffOnStartup();
+				.MaximumRetries(3);
+
 			var client = new ElasticClient(settings);
 			var r = client.RootNodeInfo();
 			r.IsValid.Should().BeFalse();
