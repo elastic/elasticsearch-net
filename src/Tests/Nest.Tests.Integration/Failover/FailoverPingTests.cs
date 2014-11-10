@@ -44,6 +44,8 @@ namespace Nest.Tests.Integration.Failover
 			metrics.Requests[3].RequestType.Should().Be(RequestType.ElasticsearchCall);
 			metrics.Requests[3].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
 
+
+
 			rootNode = client.RootNodeInfo();
 			metrics = rootNode.ConnectionStatus.Metrics;
 			metrics.Requests.Count.Should().Be(1);
