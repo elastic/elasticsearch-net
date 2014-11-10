@@ -39,6 +39,7 @@ namespace Nest.Tests.Unit.Internals.Exceptions
 			//this always returns as if the query was malfored because we inject the returned
 			//response in the line above
 			var result = await client.SearchAsync<ElasticsearchProject>(q => q.MatchAll());
+			result.IsValid.Should().BeFalse();
 
 			var error = result.ServerError;
 

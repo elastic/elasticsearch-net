@@ -140,6 +140,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 							{
 								bytes = streamReadTask.Result.ToArray();
 								streamResponse.Response.Close();
+								streamReadTask.Result.Position = 0;
 								return streamReadTask.Result as Stream;
 							});
 					}
