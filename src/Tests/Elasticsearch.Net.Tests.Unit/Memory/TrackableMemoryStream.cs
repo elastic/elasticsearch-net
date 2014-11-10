@@ -93,6 +93,11 @@ namespace Elasticsearch.Net.Tests.Unit.Memory
 			this._memoryStream.Close();
 		}
 
+		public override byte[] ToArray()
+		{
+			return this._memoryStream.ToArray();
+		}
+
 		protected override void Dispose(bool disposing)
 		{
 			this._isDisposed = true;

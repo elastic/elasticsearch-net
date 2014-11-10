@@ -44,21 +44,19 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 		protected byte[] PostData(object data)
 		{
+			if (data == null) return null;
+
 			var bytes = data as byte[];
-			if (bytes != null)
-				return bytes;
+			if (bytes != null) return bytes;
 
 			var s = data as string;
-			if (s != null)
-				return s.Utf8Bytes();
-			if (data == null) return null;
+			if (s != null) return s.Utf8Bytes();
+
 			var ss = data as IEnumerable<string>;
-			if (ss != null)
-				return (string.Join("\n", ss) + "\n").Utf8Bytes();
+			if (ss != null) return (string.Join("\n", ss) + "\n").Utf8Bytes();
 
 			var so = data as IEnumerable<object>;
-			if (so == null)
-				return this._serializer.Serialize(data);
+			if (so == null) return this._serializer.Serialize(data);
 			var joined = string.Join("\n", so
 				.Select(soo => this._serializer.Serialize(soo, SerializationFormatting.None).Utf8String())) + "\n";
 			return joined.Utf8Bytes();
@@ -80,10 +78,8 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			return type == typeof(string) || type == typeof(byte[]) || typeof(Stream).IsAssignableFrom(typeof(T));
 		}
 
-
-		protected bool ReturnStringOrByteArray<T>(ElasticsearchResponse<T> original, byte[] bytes, out ElasticsearchResponse<T> response)
+		protected bool ReturnStringOrByteArray<T>(ElasticsearchResponse<T> original, byte[] bytes)
 		{
-			response = original;
 			var type = typeof(T);
 			if (type == typeof(string))
 			{
@@ -96,6 +92,26 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				return true;
 			}
 			return false;
+		}
+
+		/// <summary>
+		/// Determines wheter the stream response is our final stream response:
+		/// if response is success or known error
+		/// OR maxRetries is 0 and retried is 0 (maxRetries could change in between retries to 0)
+		/// AND sniff on connection fault does not find more nodes (causing maxRetry to grow)
+		/// AND maxretries is no retried
+		/// </summary>
+		protected bool DoneProcessing<T>(
+			ElasticsearchResponse<Stream> streamResponse, 
+			TransportRequestState<T> requestState, 
+			int maxRetries,
+			int retried)
+		{
+			return streamResponse.SuccessOrKnownError
+				|| (maxRetries == 0 
+					&& retried == 0 
+					&& !this._delegator.SniffOnFaultDiscoveredMoreNodes(requestState, retried, streamResponse)
+				);
 		}
 
 		protected void ThrowMaxRetryExceptionWhenNeeded<T>(TransportRequestState<T> requestState, int maxRetries)
@@ -138,8 +154,9 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			ITransportRequestState requestState,
 			ElasticsearchServerError error,
 			ElasticsearchResponse<T> typedResponse,
-			IElasticsearchResponse streamResponse)
+			ElasticsearchResponse<Stream> streamResponse)
 		{
+			if (streamResponse.Response != null && !typeof(Stream).IsAssignableFrom(typeof(T))) streamResponse.Response.Close();
 			if (error != null)
 			{
 				typedResponse.Success = false;
@@ -167,57 +184,20 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			TransportRequestState<T> requestState,
 			ElasticsearchResponse<Stream> streamResponse)
 		{
-			if (((streamResponse.HttpStatusCode.HasValue && streamResponse.HttpStatusCode.Value <= 0)
-			     || !streamResponse.HttpStatusCode.HasValue) && streamResponse.OriginalException != null)
-				throw streamResponse.OriginalException;
+			return null;
+		}
 
-			if (IsValidResponse(requestState, streamResponse))
-				return null;
-
-			ElasticsearchServerError error = null;
-
-			//If type is stream or voidresponse do not attempt to read error from stream this is handled by the user
-			var type = typeof(T);
-			if (typeof(Stream).IsAssignableFrom(type) || type == typeof(VoidResponse))
-				return null;
-
-			var readFrom = streamResponse.Response;
-			var hasResponse = readFrom != null && readFrom.Length > 0;
-			if (hasResponse && (this._settings.KeepRawResponse || this.TypeOfResponseCopiesDirectly<T>()))
+		protected ElasticsearchServerError GetErrorFromStream<T>(Stream stream)
+		{
+			try
 			{
-				var ms = this._memoryStreamProvider.New();
-				readFrom.CopyTo(ms);
-				streamResponse.ResponseRaw = this._settings.KeepRawResponse ? ms.ToArray() : null;
-				streamResponse.Response.Close();
-				readFrom = ms;
-				readFrom.Position = 0;
+				var e = this._serializer.Deserialize<OneToOneServerException>(stream);
+				return ElasticsearchServerError.Create(e);
 			}
-			if (hasResponse)
-			{
-				try
-				{
-					var e = this._serializer.Deserialize<OneToOneServerException>(readFrom);
-					error = ElasticsearchServerError.Create(e);
-				}
-					// ReSharper disable once EmptyGeneralCatchClause
-					// parsing failure of exception should not be fatal, its a best case helper.
-				catch { }
-
-				//streamResponse.Response.Close();
-				readFrom.Position = 0;
-				streamResponse.Response = readFrom;
-
-			}
-			else
-				error = new ElasticsearchServerError
-				{
-					Status = streamResponse.HttpStatusCode.GetValueOrDefault(-1)
-				};
-
-
-			if (this._settings.ThrowOnElasticsearchServerExceptions)
-				throw new ElasticsearchServerException(error);
-			return error;
+			// ReSharper disable once EmptyGeneralCatchClause
+			// parsing failure of exception should not be fatal, its a best case helper.
+			catch { }
+			return null;
 		}
 	}
 }

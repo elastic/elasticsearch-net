@@ -36,33 +36,39 @@ namespace Elasticsearch.Net.Serialization
 				return tcs.Task;
 			}
 
-			using (var ms = new MemoryStream())
-			{
-				// return a task that reads the stream asynchronously 
-				// and finally deserializes the result to T.
-				this.Iterate<T>(ReadStreamAsync(stream, tcs), tcs);
-				return tcs.Task;
-					
-			}
+			// return a task that reads the stream asynchronously 
+			// and finally deserializes the result to T.
+			this.Iterate<T>(ReadStreamAsync(stream, tcs), tcs);
+			return tcs.Task;
 		}
 
 		public IEnumerable<Task> ReadStreamAsync<T>(Stream stream, TaskCompletionSource<T> tcs)
 		{
-			using (var ms = new MemoryStream())
+			var ms = stream as MemoryStream;
+			string json = null;
+			if (ms != null && ms.Position > 0)
 			{
-				// Copy all data from the response stream
-				var buffer = new byte[BUFFER_SIZE];
-				while (stream != null)
-				{
-					var read = Task<int>.Factory.FromAsync(stream.BeginRead, stream.EndRead, buffer, 0, BUFFER_SIZE, null);
-					yield return read;
-					if (read.Result == 0) break;
-					ms.Write(buffer, 0, read.Result);
-				}
-				var s = ms.ToArray().Utf8String();
-				var r = SimpleJson.DeserializeObject<T>(s);
-				tcs.SetResult(r);
+				json = ms.ToArray().Utf8String();
+				ms.Close();
 			}
+			else
+			{
+				using (ms = new MemoryStream())
+				using (stream)
+				{
+					var buffer = new byte[BUFFER_SIZE];
+					while (stream != null)
+					{
+						var read = Task<int>.Factory.FromAsync(stream.BeginRead, stream.EndRead, buffer, 0, BUFFER_SIZE, null);
+						yield return read;
+						if (read.Result == 0) break;
+						ms.Write(buffer, 0, read.Result);
+					}
+					json = ms.ToArray().Utf8String();
+				}
+			}
+			var r = SimpleJson.DeserializeObject<T>(json);
+			tcs.SetResult(r);
 		}
 
 		const int BUFFER_SIZE = 1024;

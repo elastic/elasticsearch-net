@@ -59,7 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Memory\ResponseAsyncCodePathsMemoryTests.cs" />
     <Compile Include="Memory\ResponseCodePathsMemoryTests.cs" />
+    <Compile Include="Memory\ResponseCodePathsMemoryTestsBase.cs" />
     <Compile Include="Memory\TrackableMemoryStream.cs" />
     <Compile Include="Requesters\MemorySetup.cs" />
     <Compile Include="Requesters\StandardResponse.cs" />

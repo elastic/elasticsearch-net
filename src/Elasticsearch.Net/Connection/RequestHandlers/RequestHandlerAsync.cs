@@ -30,94 +30,165 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			requestState.TickSerialization(bytes);
 
 			return this.DoRequestAsync<T>(requestState)
-				.ContinueWith(t =>
-				{
-					var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
-					if (t.Exception != null)
-					{
-						tcs.SetException(t.Exception.Flatten());
-						requestState.SetResult(null);
-					}
-					else
-					{
-						tcs.SetResult(t.Result);
-						requestState.SetResult(t.Result);
-					}
+				.ContinueWith(t => this.SetResultOnRequestState(t, requestState))
+				.Unwrap();
+		}
 
-					return tcs.Task;
-				}).Unwrap()
-				;
+		private Task<ElasticsearchResponse<T>> SetResultOnRequestState<T>(Task<ElasticsearchResponse<T>> t, TransportRequestState<T> requestState)
+		{
+			var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
+			if (t.Exception != null)
+			{
+				tcs.SetException(t.Exception.Flatten());
+				requestState.SetResult(null);
+			}
+			else
+			{
+				tcs.SetResult(t.Result);
+				requestState.SetResult(t.Result);
+			}
+			return tcs.Task;
 		}
 
 		private Task<ElasticsearchResponse<T>> DoRequestAsync<T>(TransportRequestState<T> requestState)
 		{
+			//If connectionSettings is configured to sniff periodically, sniff when stale.
 			this._delegator.SniffIfInformationIsTooOld(requestState);
 
+			//select the next node to hit and signal wheter the selected node needs a ping
 			var uriRequiresPing = this._delegator.SelectNextNode(requestState);
 			if (uriRequiresPing)
 			{
 				return this._delegator.PingAsync(requestState)
-					.ContinueWith(t =>
-					{
-						if (t.IsFaulted)
-						{
-							requestState.SeenExceptions.Add(t.Exception.InnerException);
-							return this.RetryRequestAsync(requestState);
-						}
-						if (t.IsCompleted)
-						{
-							return this.FinishOrRetryRequestAsync(requestState);
-						}
-						return null;
-					}).Unwrap();
+					.ContinueWith(t => this.HandlePingResponse(t, requestState))
+					.Unwrap();
 			}
 
 			return FinishOrRetryRequestAsync(requestState);
+		}
+
+		private Task<ElasticsearchResponse<T>> HandlePingResponse<T>(Task<bool> t, TransportRequestState<T> requestState)
+		{
+			if (t.IsFaulted)
+			{
+				requestState.SeenExceptions.Add(t.Exception.InnerException);
+				return this.RetryRequestAsync(requestState);
+			}
+			if (t.IsCompleted)
+			{
+				return this.FinishOrRetryRequestAsync(requestState);
+			}
+			return null;
 		}
 
 		private Task<ElasticsearchResponse<T>> FinishOrRetryRequestAsync<T>(TransportRequestState<T> requestState)
 		{
 			var rq = requestState.InitiateRequest(RequestType.ElasticsearchCall);
 			return CallIntoConnectionAsync(requestState)
-				.ContinueWith(t =>
+				.ContinueWith(t => HandleStreamResponse(t, rq, requestState))
+				.Unwrap();
+		}
+
+		private Task<ElasticsearchResponse<T>> HandleStreamResponse<T>(Task<ElasticsearchResponse<Stream>> t, IRequestTimings rq, TransportRequestState<T> requestState)
+		{
+			var streamResponse = t.Result;
+			//audit the call into connection straight away
+			rq.Finish(streamResponse != null && streamResponse.Success, streamResponse == null ? -1 : streamResponse.HttpStatusCode);
+			rq.Dispose();
+
+			//figure out the maximum number of retries, this might 
+			var maxRetries = this._delegator.GetMaximumRetries(requestState.RequestConfiguration);
+
+			var retried = requestState.Retried;
+			//if (t.IsFaulted)
+			//{
+			//	requestState.SeenExceptions.Add(t.Exception);
+			//	if (!requestState.UsingPooling || maxRetries == 0 && retried == 0) throw t.Exception;
+			//	return this.RetryRequestAsync<T>(requestState);
+			//}
+
+			if (t.Status == TaskStatus.RanToCompletion && this.DoneProcessing(streamResponse, requestState, maxRetries, retried))
+			{
+				//if the response never recieved a status code and has a caught exception make sure we throw it
+				if (streamResponse.HttpStatusCode.GetValueOrDefault(-1) <= 0 && streamResponse.OriginalException != null)
+					throw streamResponse.OriginalException;
+
+				//if the user explicitly wants a stream return the undisposed stream
+				if (typeof(Stream).IsAssignableFrom(typeof(T)))
+					return this.ReturnResponseAsTask<T>(streamResponse);
+
+				byte[] bytes = null;
+				Task<ElasticsearchResponse<T>> getTypedResponse = null;
+				ElasticsearchServerError error = null;
+				if (typeof(VoidResponse).IsAssignableFrom(typeof(T)))
 				{
-					var retried = requestState.Retried;
-					if (t.IsCanceled)
-						return null;
-					var maxRetries = this._delegator.GetMaximumRetries(requestState.RequestConfiguration);
-					if (t.IsFaulted)
+					streamResponse.Response.Close();
+					var voidResponse = ElasticsearchResponse.CloneFrom<VoidResponse>(streamResponse, null);
+					getTypedResponse = this.ReturnResponseAsTask<T>(voidResponse);
+				}
+				else
+				{
+					//read to ms if needed
+					Task<Stream> getStream = null;
+					var hasResponse = streamResponse.Response != null && streamResponse.Response.Length > 0;
+					var forceRead = this._settings.KeepRawResponse || typeof(T) == typeof(string) || typeof(T) == typeof(byte[]);
+					if (hasResponse && forceRead)
 					{
-						rq.Dispose();
-						requestState.SeenExceptions.Add(t.Exception);
-						if (!requestState.UsingPooling || maxRetries == 0 && retried == 0) throw t.Exception;
-						return this.RetryRequestAsync<T>(requestState);
-					}
-
-					if (t.Result.SuccessOrKnownError
-					|| (
-						maxRetries == 0 && retried == 0 && !this._delegator.SniffOnFaultDiscoveredMoreNodes(requestState, retried, t.Result))
-					)
-					{
-						rq.Finish(t.Result.Success, t.Result.HttpStatusCode);
-						rq.Dispose();
-						var error = ThrowOrGetErrorFromStreamResponse(requestState, t.Result);
-						return this.StreamToTypedResponseAsync<T>(t.Result, requestState)
-							.ContinueWith(tt =>
+						var memoryStream = this._memoryStreamProvider.New();
+						getStream = this.Iterate(this.ReadStreamAsync(streamResponse.Response, memoryStream), memoryStream)
+							.ContinueWith(streamReadTask =>
 							{
-
-								this.SetErrorDiagnosticsAndPatchSuccess(requestState, error, tt.Result, t.Result);
-
-
-								if (tt.Result.SuccessOrKnownError)
-									this._connectionPool.MarkAlive(requestState.CurrentNode);
-								return tt;
-							}).Unwrap();
+								bytes = streamReadTask.Result.ToArray();
+								streamResponse.Response.Close();
+								return streamReadTask.Result as Stream;
+							});
 					}
-					if (t.Result != null)
-						rq.Finish(t.Result.Success, t.Result.HttpStatusCode);
-					rq.Dispose();
-					return this.RetryRequestAsync<T>(requestState);
+					else getStream = this.ReturnCompletedTaskFor(streamResponse.Response);
+					getTypedResponse = getStream.ContinueWith(gotStream =>
+					{
+						var isValidResponse = IsValidResponse(requestState, streamResponse);
+						var typedResponse = ElasticsearchResponse.CloneFrom<T>(streamResponse, default(T));
+						if (!isValidResponse)
+						{
+							error = GetErrorFromStream<T>(gotStream.Result);
+							this.ReturnStringOrByteArray(typedResponse, bytes);
+							if (gotStream.Result != null) gotStream.Result.Close();
+							return this.ReturnCompletedTaskFor(typedResponse);
+						}
+						if (this.ReturnStringOrByteArray(typedResponse, bytes))
+						{
+							if (gotStream.Result != null) gotStream.Result.Close();
+							return this.ReturnCompletedTaskFor(typedResponse);
+						}
+						return this._deserializeAsyncToResponse<T>(gotStream.Result, requestState, typedResponse);
+					}).Unwrap();
+				}
+
+				return getTypedResponse.ContinueWith(gotTypedResponse =>
+				{
+					if (this._settings.KeepRawResponse) gotTypedResponse.Result.ResponseRaw = bytes;
+					this.SetErrorDiagnosticsAndPatchSuccess(requestState, error, gotTypedResponse.Result, t.Result);
+					if (error != null && this._settings.ThrowOnElasticsearchServerExceptions)
+						throw new ElasticsearchServerException(error);
+					if (gotTypedResponse.Result.SuccessOrKnownError)
+						this._connectionPool.MarkAlive(requestState.CurrentNode);
+					return gotTypedResponse;
 				}).Unwrap();
+			}
+			return this.RetryRequestAsync<T>(requestState);
+		}
+
+		private Task<T> ReturnCompletedTaskFor<T>(T result)
+		{
+			var tcs = new TaskCompletionSource<T>();
+			tcs.SetResult(result);
+			return tcs.Task;
+		}
+		private Task<ElasticsearchResponse<T>> ReturnResponseAsTask<T>(IElasticsearchResponse response)
+		{
+			var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
+			tcs.SetResult(response as ElasticsearchResponse<T>);
+			return tcs.Task;
 		}
 
 		private Task<ElasticsearchResponse<T>> RetryRequestAsync<T>(TransportRequestState<T> requestState)
@@ -197,11 +268,6 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			)
 		{
 			var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
-			if (!IsValidResponse(requestState, typedResponse))
-			{
-				tcs.SetResult(typedResponse);
-				return tcs.Task;
-			}
 			var responseInstantiater = requestState.ResponseCreationOverride;
 			var customConverter = responseInstantiater as Func<IElasticsearchResponse, Stream, T>;
 			if (customConverter != null)
@@ -242,60 +308,5 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			}
 		}
 
-		private Task<ElasticsearchResponse<T>> StreamToTypedResponseAsync<T>(
-			ElasticsearchResponse<Stream> streamResponse,
-			ITransportRequestState requestState
-			)
-		{
-			var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
-
-			//if the user explicitly wants a stream return the undisposed stream
-			if (typeof(Stream).IsAssignableFrom(typeof(T)))
-			{
-				tcs.SetResult(streamResponse as ElasticsearchResponse<T>);
-				return tcs.Task;
-			}
-
-			var cs = ElasticsearchResponse.CloneFrom<T>(streamResponse, default(T));
-
-			if (typeof(T) == typeof(VoidResponse))
-			{
-				tcs.SetResult(cs);
-				if (streamResponse.Response != null)
-					streamResponse.Response.Dispose();
-				return tcs.Task;
-			}
-
-			if (!(this._settings.KeepRawResponse || this.TypeOfResponseCopiesDirectly<T>()))
-				return _deserializeAsyncToResponse(streamResponse.Response, requestState, cs);
-
-			var memoryStream = this._memoryStreamProvider.New();
-			return this.Iterate(this.ReadStreamAsync(streamResponse.Response, memoryStream), memoryStream)
-				.ContinueWith(t =>
-				{
-					var readStream = t.Result;
-					readStream.Position = 0;
-					var bytes = readStream.ToArray();
-					cs.ResponseRaw = this._settings.KeepRawResponse ? bytes : null;
-
-					var type = typeof(T);
-					if (type == typeof(string))
-					{
-						this.SetStringResult(cs as ElasticsearchResponse<string>, bytes);
-						tcs.SetResult(cs);
-						return tcs.Task;
-					}
-					if (type == typeof(byte[]))
-					{
-						this.SetByteResult(cs as ElasticsearchResponse<byte[]>, bytes);
-						tcs.SetResult(cs);
-						return tcs.Task;
-					}
-
-					return _deserializeAsyncToResponse(readStream, requestState, cs);
-				})
-				.Unwrap();
-
-		}
 	}
 }
