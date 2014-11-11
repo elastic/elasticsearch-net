@@ -53,6 +53,7 @@
     <Compile Include="Connection\Configuration\IRequestConfiguration.cs" />
     <Compile Include="Connection\Configuration\RequestConfiguration.cs" />
     <Compile Include="Connection\Configuration\RequestConfigurationDescriptor.cs" />
+    <Compile Include="Connection\ITransportDelegator.cs" />
     <Compile Include="Connection\RequestHandlers\RequestHandler.cs" />
     <Compile Include="Connection\RequestHandlers\RequestHandlerAsync.cs" />
     <Compile Include="Connection\RequestHandlers\RequestHandlerBase.cs" />
