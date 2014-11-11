@@ -20,7 +20,7 @@ using PurifyNet;
 
 namespace Elasticsearch.Net.Connection
 {
-	public interface ITransportDelegator
+	internal interface ITransportDelegator
 	{
 		bool Ping(ITransportRequestState requestState);
 		Task<bool> PingAsync(ITransportRequestState requestState);

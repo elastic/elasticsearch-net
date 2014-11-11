@@ -10,7 +10,7 @@ using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net.Connection.RequestHandlers
 {
-	public class RequestHandlerBase
+	internal class RequestHandlerBase
 	{
 		protected const int BUFFER_SIZE = 4096;
 		protected static readonly string MaxRetryExceptionMessage = "Failed after retrying {2} times: '{0} {1}'. {3}";

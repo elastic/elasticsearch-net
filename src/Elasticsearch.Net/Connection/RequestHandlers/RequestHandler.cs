@@ -12,7 +12,7 @@ using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net.Connection.RequestHandlers
 {
-	public class RequestHandler : RequestHandlerBase
+	internal class RequestHandler : RequestHandlerBase
 	{
 		public RequestHandler(
 			IConnectionConfigurationValues settings,

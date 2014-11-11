@@ -11,7 +11,7 @@ using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net.Connection.RequestHandlers
 {
-	public class RequestHandlerAsync : RequestHandlerBase
+	internal class RequestHandlerAsync : RequestHandlerBase
 	{
 		private class ReadResponse<T>
 		{
