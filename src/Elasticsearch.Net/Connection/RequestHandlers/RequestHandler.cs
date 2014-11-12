@@ -96,7 +96,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 					else
 					{
 						//read to ms if needed
-						var hasResponse = streamResponse.Response != null && streamResponse.Response.Length > 0;
+						var hasResponse = streamResponse.Response != null;
 						var forceRead = this._settings.KeepRawResponse || typeof(T) == typeof(string) || typeof(T) == typeof(byte[]);
 						byte[] bytes = null;
 						if (hasResponse && forceRead)

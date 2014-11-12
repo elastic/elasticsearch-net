@@ -110,7 +110,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			//read to ms if needed
 			Task<Stream> getStream = null;
 			var response = new ReadResponse<T>();
-			var hasResponse = streamResponse.Response != null && streamResponse.Response.Length > 0;
+			var hasResponse = streamResponse.Response != null;
 			var forceRead = this._settings.KeepRawResponse || typeof(T) == typeof(string) || typeof(T) == typeof(byte[]);
 			if (hasResponse && forceRead)
 			{
