@@ -81,15 +81,22 @@ namespace Elasticsearch.Net.Connection
 					response = this.Connection.HeadSync(requestState.CreatePathOnCurrentNode(""), requestOverrides);
 					rq.Finish(response.Success, response.HttpStatusCode);
 				}
+				
 				if (!response.HttpStatusCode.HasValue || response.HttpStatusCode.Value == -1)
-					throw new Exception("ping returned no status code", response.OriginalException);
+					throw new Exception("Ping returned no status code", response.OriginalException);
+
+				if (response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
+					throw new UnauthorizedException(response);
+
 				if (response.Response == null)
 					return response.Success;
-
-
+				
 				using (response.Response)
 					return response.Success;
-
+			}
+			catch(UnauthorizedException)
+			{
+				throw;
 			}
 			catch (Exception e)
 			{
@@ -125,6 +132,9 @@ namespace Elasticsearch.Net.Connection
 						var response = t.Result;
 						if (!response.HttpStatusCode.HasValue || response.HttpStatusCode.Value == -1)
 							throw new PingException(requestState.CurrentNode, t.Exception);
+
+						if (response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
+							throw new UnauthorizedException(response);
 
 						using (response.Response)
 							return response.Success;
@@ -169,6 +179,10 @@ namespace Elasticsearch.Net.Connection
 						if (ownerState.RequestMetrics == null) ownerState.RequestMetrics = new List<RequestMetrics>();
 						ownerState.RequestMetrics.AddRange(requestState.RequestMetrics);
 					}
+
+					if (response.HttpStatusCode.HasValue && response.HttpStatusCode.Value == (int)HttpStatusCode.Unauthorized)
+						throw new UnauthorizedException(response);
+
 					if (response.Response == null) return null;
 
 					using (response.Response)
@@ -176,6 +190,10 @@ namespace Elasticsearch.Net.Connection
 						return Sniffer.FromStream(response, response.Response, this.Serializer);
 					}
 				}
+			}
+			catch (UnauthorizedException)
+			{
+				throw;
 			}
 			catch (MaxRetryException e)
 			{
@@ -318,7 +336,14 @@ namespace Elasticsearch.Net.Connection
 		{
 			var retried = requestState.Retried;
 
-			this.SniffIfInformationIsTooOld(requestState);
+			try
+			{
+				this.SniffIfInformationIsTooOld(requestState);
+			}
+			catch(UnauthorizedException e)
+			{
+				return this.HandleUnauthorizedException<T>(requestState, e);
+			}
 
 			var aliveResponse = false;
 
@@ -334,7 +359,7 @@ namespace Elasticsearch.Net.Connection
 					var pingSuccess = this.Ping(requestState);
 					if (!pingSuccess)
 					{
-						return RetryRequest<T>(requestState);
+						return this.RetryRequest<T>(requestState);
 					}
 				}
 
@@ -366,6 +391,10 @@ namespace Elasticsearch.Net.Connection
 			{
 				throw;
 			}
+			catch (UnauthorizedException e)
+			{
+				return HandleUnauthorizedException<T>(requestState, e);
+			}
 			catch (Exception e)
 			{
 				requestState.SeenExceptions.Add(e);
@@ -384,7 +413,27 @@ namespace Elasticsearch.Net.Connection
 				if (!seenError && aliveResponse)
 					this._connectionPool.MarkAlive(requestState.CurrentNode);
 			}
-			return RetryRequest<T>(requestState);
+
+			try
+			{
+				return RetryRequest<T>(requestState);
+			}
+			catch(UnauthorizedException e)
+			{
+				return HandleUnauthorizedException(requestState, e);
+			}
+		}
+
+		private ElasticsearchResponse<T> HandleUnauthorizedException<T>(TransportRequestState<T> requestState, UnauthorizedException exception)
+		{
+			if (requestState.ClientSettings.ThrowOnElasticsearchServerExceptions)
+				throw new ElasticsearchServerException(exception.Response.ServerError);
+
+			var response = ElasticsearchResponse.CloneFrom<T>(exception.Response, default(T));
+			response.Request = requestState.PostData;
+			response.RequestUrl = requestState.Path;
+			response.RequestMethod = requestState.Method;
+			return response;
 		}
 
 		private ElasticsearchResponse<T> RetryRequest<T>(TransportRequestState<T> requestState)
