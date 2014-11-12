@@ -46,8 +46,17 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
 			if (t.Exception != null)
 			{
-				tcs.SetException(t.Exception.Flatten());
-				requestState.SetResult(null);
+				var authenticationException = t.Exception.InnerException as ElasticsearchAuthenticationException;
+
+				if (authenticationException != null)
+				{
+					this.SetAuthenticationExceptionOnRequestState(requestState, authenticationException, tcs);
+				}
+				else
+				{
+					tcs.SetException(t.Exception.Flatten());
+					requestState.SetResult(null);
+				}
 			}
 			else
 			{
@@ -57,10 +66,37 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			return tcs.Task;
 		}
 
+		protected void SetAuthenticationExceptionOnRequestState<T>(
+			TransportRequestState<T> requestState,
+			ElasticsearchAuthenticationException exception,
+			TaskCompletionSource<ElasticsearchResponse<T>> tcs)
+		{
+			if (requestState.ClientSettings.ThrowOnElasticsearchServerExceptions)
+			{
+				tcs.SetException(exception.ToElasticsearchServerException());
+				requestState.SetResult(null);
+			}
+			else
+			{
+				var result = this.HandleAuthenticationException(requestState, exception);
+				tcs.SetResult(result);
+				requestState.SetResult(result);
+			}
+		}
+
 		private Task<ElasticsearchResponse<T>> DoRequestAsync<T>(TransportRequestState<T> requestState)
 		{
-			//If connectionSettings is configured to sniff periodically, sniff when stale.
-			this._delegator.SniffIfInformationIsTooOld(requestState);
+			try
+			{
+				//If connectionSettings is configured to sniff periodically, sniff when stale.
+				this._delegator.SniffIfInformationIsTooOld(requestState);
+			}
+			catch(ElasticsearchAuthenticationException e)
+			{
+				var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
+				tcs.SetResult(this.HandleAuthenticationException<T>(requestState, e));
+				return tcs.Task;
+			}
 
 			//select the next node to hit and signal wheter the selected node needs a ping
 			var uriRequiresPing = this._delegator.SelectNextNode(requestState);

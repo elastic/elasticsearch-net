@@ -12,5 +12,12 @@ namespace Elasticsearch.Net.Connection
 		{
 			this.Response = response;
 		}
+
+		internal ElasticsearchServerException ToElasticsearchServerException()
+		{
+			if (this.Response == null)
+				return null;
+			return new ElasticsearchServerException(this.Response.HttpStatusCode.Value, "AuthenticationException");
+		}
 	}
 }

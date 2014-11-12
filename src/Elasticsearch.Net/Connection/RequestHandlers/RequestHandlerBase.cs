@@ -7,6 +7,7 @@ using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
 using Elasticsearch.Net.Serialization;
+using System.Threading.Tasks;
 
 namespace Elasticsearch.Net.Connection.RequestHandlers
 {
@@ -203,7 +204,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 		protected ElasticsearchResponse<T> HandleAuthenticationException<T>(TransportRequestState<T> requestState, ElasticsearchAuthenticationException exception)
 		{
 			if (requestState.ClientSettings.ThrowOnElasticsearchServerExceptions)
-				throw new ElasticsearchServerException(exception.Response.HttpStatusCode.Value, "AuthenticationException");
+				throw exception.ToElasticsearchServerException();
 
 			var response = ElasticsearchResponse.CloneFrom<T>(exception.Response, default(T));
 			response.Request = requestState.PostData;
