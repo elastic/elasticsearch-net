@@ -512,7 +512,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 				fake.Provide<IConnectionConfigurationValues>(config);
 
-				var e = Assert.Throws<UnauthorizedException>(() => FakeCalls.ProvideRealTranportInstance(fake));
+				var e = Assert.Throws<ElasticsearchAuthenticationException>(() => FakeCalls.ProvideRealTranportInstance(fake));
 
 				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
 				getCall.MustNotHaveHappened();

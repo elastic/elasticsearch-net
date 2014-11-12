@@ -91,13 +91,13 @@ namespace Elasticsearch.Net.Connection
 				if (!response.HttpStatusCode.HasValue || response.HttpStatusCode.Value == -1)
 					throw new Exception("ping returned no status code", response.OriginalException);
 				if (response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
-					throw new UnauthorizedException(response);
+					throw new ElasticsearchAuthenticationException(response);
 				if (response.Response == null)
 					return response.Success;
 				using (response.Response)
 					return response.Success;
 			}
-			catch(UnauthorizedException)
+			catch(ElasticsearchAuthenticationException)
 			{
 				throw;
 			}
@@ -136,12 +136,12 @@ namespace Elasticsearch.Net.Connection
 						if (!response.HttpStatusCode.HasValue || response.HttpStatusCode.Value == -1)
 							throw new PingException(requestState.CurrentNode, t.Exception);
 						if (response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
-							throw new UnauthorizedException(response);
+							throw new ElasticsearchAuthenticationException(response);
 						using (response.Response)
 							return response.Success;
 					});
 			}
-			catch (UnauthorizedException)
+			catch (ElasticsearchAuthenticationException)
 			{
 				throw;
 			}
@@ -185,7 +185,7 @@ namespace Elasticsearch.Net.Connection
 						ownerState.RequestMetrics.AddRange(requestState.RequestMetrics);
 					}
 					if (response.HttpStatusCode.HasValue && response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
-						throw new UnauthorizedException(response);
+						throw new ElasticsearchAuthenticationException(response);
 					if (response.Response == null) 
 						return null;
 
@@ -195,7 +195,7 @@ namespace Elasticsearch.Net.Connection
 					}
 				}
 			}
-			catch (UnauthorizedException)
+			catch (ElasticsearchAuthenticationException)
 			{
 				throw;
 			}

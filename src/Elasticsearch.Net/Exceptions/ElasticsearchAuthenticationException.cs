@@ -4,11 +4,11 @@ using System.Net;
 
 namespace Elasticsearch.Net.Connection
 {
-	public class UnauthorizedException : Exception
+	public class ElasticsearchAuthenticationException : Exception
 	{
 		public ElasticsearchResponse<Stream> Response { get; private set; }
 		
-		public UnauthorizedException(ElasticsearchResponse<Stream> response)
+		public ElasticsearchAuthenticationException(ElasticsearchResponse<Stream> response)
 		{
 			this.Response = response;
 		}

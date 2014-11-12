@@ -42,9 +42,9 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				//If connectionSettings is configured to sniff periodically, sniff when stale.
 				this._delegator.SniffIfInformationIsTooOld(requestState);
 			}
-			catch(UnauthorizedException e)
+			catch(ElasticsearchAuthenticationException e)
 			{
-				return this.HandleUnauthorizedException(requestState, e);
+				return this.HandleAuthenticationException(requestState, e);
 			}
 
 			var aliveResponse = false;
@@ -131,9 +131,9 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 				}
 			}
-			catch (UnauthorizedException e)
+			catch (ElasticsearchAuthenticationException e)
 			{
-				return this.HandleUnauthorizedException(requestState, e);
+				return this.HandleAuthenticationException(requestState, e);
 			}
 			catch (MaxRetryException)
 			{
@@ -167,9 +167,9 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			{
 				return RetryRequest<T>(requestState);
 			}
-			catch(UnauthorizedException e)
+			catch(ElasticsearchAuthenticationException e)
 			{
-				return this.HandleUnauthorizedException(requestState, e);
+				return this.HandleAuthenticationException(requestState, e);
 			}
 		}
 

@@ -200,7 +200,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			return null;
 		}
 
-		protected ElasticsearchResponse<T> HandleUnauthorizedException<T>(TransportRequestState<T> requestState, UnauthorizedException exception)
+		protected ElasticsearchResponse<T> HandleAuthenticationException<T>(TransportRequestState<T> requestState, ElasticsearchAuthenticationException exception)
 		{
 			if (requestState.ClientSettings.ThrowOnElasticsearchServerExceptions)
 				throw new ElasticsearchServerException(exception.Response.HttpStatusCode.Value, "AuthenticationException");
