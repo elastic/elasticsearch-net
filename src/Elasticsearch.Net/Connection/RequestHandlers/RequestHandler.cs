@@ -37,8 +37,15 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 		private ElasticsearchResponse<T> DoRequest<T>(TransportRequestState<T> requestState)
 		{
-			//If connectionSettings is configured to sniff periodically, sniff when stale.
-			this._delegator.SniffIfInformationIsTooOld(requestState);
+			try
+			{
+				//If connectionSettings is configured to sniff periodically, sniff when stale.
+				this._delegator.SniffIfInformationIsTooOld(requestState);
+			}
+			catch(UnauthorizedException e)
+			{
+				return this.HandleUnauthorizedException(requestState, e);
+			}
 
 			var aliveResponse = false;
 			var seenError = false;
@@ -124,6 +131,10 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 				}
 			}
+			catch (UnauthorizedException e)
+			{
+				return this.HandleUnauthorizedException(requestState, e);
+			}
 			catch (MaxRetryException)
 			{
 				//TODO ifdef ExceptionDispatchInfo.Capture(ex).Throw();
@@ -151,7 +162,15 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				if (!seenError && aliveResponse)
 					this._connectionPool.MarkAlive(requestState.CurrentNode);
 			}
-			return RetryRequest<T>(requestState);
+
+			try
+			{
+				return RetryRequest<T>(requestState);
+			}
+			catch(UnauthorizedException e)
+			{
+				return this.HandleUnauthorizedException(requestState, e);
+			}
 		}
 
 		private ElasticsearchResponse<T> RetryRequest<T>(TransportRequestState<T> requestState)

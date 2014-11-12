@@ -90,12 +90,16 @@ namespace Elasticsearch.Net.Connection
 				}
 				if (!response.HttpStatusCode.HasValue || response.HttpStatusCode.Value == -1)
 					throw new Exception("ping returned no status code", response.OriginalException);
+				if (response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
+					throw new UnauthorizedException(response);
 				if (response.Response == null)
 					return response.Success;
-
 				using (response.Response)
 					return response.Success;
-
+			}
+			catch(UnauthorizedException)
+			{
+				throw;
 			}
 			catch (Exception e)
 			{
@@ -131,10 +135,15 @@ namespace Elasticsearch.Net.Connection
 						var response = t.Result;
 						if (!response.HttpStatusCode.HasValue || response.HttpStatusCode.Value == -1)
 							throw new PingException(requestState.CurrentNode, t.Exception);
-
+						if (response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
+							throw new UnauthorizedException(response);
 						using (response.Response)
 							return response.Success;
 					});
+			}
+			catch (UnauthorizedException)
+			{
+				throw;
 			}
 			catch (Exception e)
 			{
@@ -175,13 +184,20 @@ namespace Elasticsearch.Net.Connection
 						if (ownerState.RequestMetrics == null) ownerState.RequestMetrics = new List<RequestMetrics>();
 						ownerState.RequestMetrics.AddRange(requestState.RequestMetrics);
 					}
-					if (response.Response == null) return null;
+					if (response.HttpStatusCode.HasValue && response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
+						throw new UnauthorizedException(response);
+					if (response.Response == null) 
+						return null;
 
 					using (response.Response)
 					{
 						return Sniffer.FromStream(response, response.Response, this.Serializer);
 					}
 				}
+			}
+			catch (UnauthorizedException)
+			{
+				throw;
 			}
 			catch (MaxRetryException e)
 			{
