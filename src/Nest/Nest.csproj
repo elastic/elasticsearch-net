@@ -185,15 +185,18 @@
     <Compile Include="Domain\Responses\ClusterStatsResponse.cs" />
     <Compile Include="Domain\Responses\ClusterPendingTasksResponse.cs" />
     <Compile Include="Domain\Responses\DeleteAliasResponse.cs" />
+    <Compile Include="Domain\Responses\DeleteScriptResponse.cs" />
     <Compile Include="Domain\Responses\DeleteSearchTemplateResponse.cs" />
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Cat\ICatRecord.cs" />
     <Compile Include="Domain\Responses\GetRepositoryResponse.cs" />
+    <Compile Include="Domain\Responses\GetScriptResponse.cs" />
     <Compile Include="Domain\Responses\GetSearchTemplateResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
     <Compile Include="Domain\Responses\NodesHotThreadsResponse.cs" />
     <Compile Include="Domain\Responses\PutAliasResponse.cs" />
+    <Compile Include="Domain\Responses\PutScriptResponse.cs" />
     <Compile Include="Domain\Responses\SearchShardsResponse.cs" />
     <Compile Include="Domain\Responses\SnapshotStatusResponse.cs" />
     <Compile Include="Domain\Recovery\RecoveryOrigin.cs" />
@@ -221,6 +224,9 @@
     <Compile Include="DSL\Aggregations\TopHitsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\GeoBoundsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ReverseNestedAggregationDescriptor.cs" />
+    <Compile Include="DSL\DeleteScriptDescriptor.cs" />
+    <Compile Include="DSL\GetScriptDescriptor.cs" />
+    <Compile Include="DSL\PutScriptDescriptor.cs" />
     <Compile Include="DSL\PutSearchTemplateDescriptor.cs" />
     <Compile Include="DSL\DeleteSearchTemplateDescriptor.cs" />
     <Compile Include="DSL\GetSearchTemplateDescriptor.cs" />
@@ -344,6 +350,7 @@
     <Compile Include="DSL\_Requests.generated.cs" />
     <Compile Include="ElasticClient-Cat.cs" />
     <Compile Include="ElasticClient-DoRequest.cs" />
+    <Compile Include="ElasticClient-Scripts.cs" />
     <Compile Include="ElasticClient-SearchShards.cs" />
     <Compile Include="ElasticClient-RecoveryStatus.cs" />
     <Compile Include="ElasticClient-SearchTemplate.cs" />
@@ -361,6 +368,7 @@
     <Compile Include="Enums\FieldDataStringFormat.cs" />
     <Compile Include="Enums\NormsLoading.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
+    <Compile Include="Enums\ScriptLang.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="Obsolete\Obsolete.cs" />

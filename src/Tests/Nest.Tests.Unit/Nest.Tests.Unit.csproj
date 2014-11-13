@@ -194,6 +194,9 @@
     </None>
     <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
     <Compile Include="Core\Map\Transform\MappingTansformTests.cs" />
+    <Compile Include="Core\Script\DeleteScriptRequestTests.cs" />
+    <Compile Include="Core\Script\GetScriptRequestTests.cs" />
+    <Compile Include="Core\Script\PutScriptRequestTests.cs" />
     <Compile Include="Core\Scroll\ScrollRequestTests.cs" />
     <Compile Include="Core\Domain\Connection\ConnectionTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
@@ -651,6 +654,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\MultiPercolate\MultiPercolateJson.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Script\PutScript.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\UpdateSettings\AllUpdateSettings.json">
@@ -1225,6 +1231,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\UpdateQuery\FilteredQueryCombinesUsingStatic.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\ScriptFields\TestIndexedScriptFieldWithScriptLangEnum.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\ScriptFields\TestIndexedScriptField.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\SearchTypeTests\SearchTypeDoesNotPolluteQueryObject.json">

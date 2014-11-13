@@ -70,6 +70,12 @@ namespace Nest.DSL.Query
 
 			return this;
 		}
+        public FilterScoreQueryDescriptor<T> Lang(ScriptLang lang)
+        {
+            ((IFilterScoreQuery)this).Lang = lang.GetStringValue();
+
+            return this;
+        }
 
 		public FilterScoreQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
 		{
