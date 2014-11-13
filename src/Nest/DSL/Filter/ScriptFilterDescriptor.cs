@@ -13,7 +13,9 @@ namespace Nest
 	public interface IScriptFilter : IFilter
 	{
 		[JsonProperty(PropertyName = "script")]
-		string Script { get; set; }
+        string Script { get; set; }
+        [JsonProperty(PropertyName = "script_id")]
+        string ScriptId { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
@@ -31,7 +33,8 @@ namespace Nest
 		}
 
 		public string Script { get; set; }
-		public Dictionary<string, object> Params { get; set; }
+	    public string ScriptId { get; set; }
+	    public Dictionary<string, object> Params { get; set; }
 		public string Lang { get; set; }
 	}
 
@@ -41,11 +44,13 @@ namespace Nest
 	/// </summary>
 	public class ScriptFilterDescriptor : FilterBase, IScriptFilter
 	{
-		string IScriptFilter.Script { get; set; }
+        string IScriptFilter.Script { get; set; }
+
+        string IScriptFilter.ScriptId { get; set; }
+
+        string IScriptFilter.Lang { get; set; }
 
 		Dictionary<string, object> IScriptFilter.Params { get; set; }
-
-		string IScriptFilter.Lang { get; set; }
 
 		bool IFilter.IsConditionless
 		{
@@ -65,6 +70,18 @@ namespace Nest
 			((IScriptFilter)this).Script = script;
 			return this;
 		}
+
+        /// <summary>
+        /// Indexed script can be referenced by script id
+        /// </summary>
+        /// <param name="scriptId">Indexed script id</param>
+        /// <returns>this</returns>
+	    public ScriptFilterDescriptor ScriptId(string scriptId)
+        {
+            scriptId.ThrowIfNull("scriptId");
+            ((IScriptFilter)this).ScriptId = scriptId;
+            return this;
+	    }
 
 		/// <summary>
 		/// Scripts are compiled and cached for faster execution.
