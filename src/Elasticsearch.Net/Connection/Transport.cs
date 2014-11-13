@@ -35,6 +35,8 @@ namespace Elasticsearch.Net.Connection
 
 		private DateTime? _lastSniff;
 
+		private readonly int DefaultPingTimeout = 200;
+
 		public IConnectionConfigurationValues Settings { get { return ConfigurationValues; } }
 		public IElasticsearchSerializer Serializer { get { return _serializer; } }
 
@@ -71,7 +73,7 @@ namespace Elasticsearch.Net.Connection
 
 		bool ITransportDelegator.Ping(ITransportRequestState requestState)
 		{
-			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(200);
+			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(DefaultPingTimeout);
 			pingTimeout = requestState.RequestConfiguration != null
 				? requestState.RequestConfiguration.ConnectTimeout.GetValueOrDefault(pingTimeout)
 				: pingTimeout;
@@ -109,7 +111,7 @@ namespace Elasticsearch.Net.Connection
 
 		Task<bool> ITransportDelegator.PingAsync(ITransportRequestState requestState)
 		{
-			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(200);
+			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(DefaultPingTimeout);
 			pingTimeout = requestState.RequestConfiguration != null
 				? requestState.RequestConfiguration.ConnectTimeout.GetValueOrDefault(pingTimeout)
 				: pingTimeout;
@@ -156,7 +158,7 @@ namespace Elasticsearch.Net.Connection
 
 		IList<Uri> ITransportDelegator.Sniff(ITransportRequestState ownerState = null)
 		{
-			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(50);
+			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(DefaultPingTimeout);
 			var requestOverrides = new RequestConfiguration
 			{
 				ConnectTimeout = pingTimeout,
