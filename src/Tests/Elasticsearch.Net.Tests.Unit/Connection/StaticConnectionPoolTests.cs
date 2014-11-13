@@ -20,7 +20,7 @@ using NUnit.Framework;
 namespace Elasticsearch.Net.Tests.Unit.Connection
 {
 	[TestFixture]
-	public class StaticConnectionPoolRetryTests
+	public class StaticConnectionPoolTests
 	{
 		private static Uri[] _uris = new[]
 		{
@@ -36,7 +36,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		private ElasticsearchResponse<Stream> _bad;
 
 
-		public StaticConnectionPoolRetryTests()
+		public StaticConnectionPoolTests()
 		{
 			_connectionPool = new StaticConnectionPool(_uris);
 			_config = new ConnectionConfiguration(_connectionPool);
@@ -449,6 +449,71 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var aggregateException = e.InnerException as AggregateException;
 				aggregateException.Should().NotBeNull();
 				aggregateException.InnerExceptions.Should().Contain(ex => ex.GetType().Name == "PingException");
+			}
+		}
+
+		[Test]
+		public void ShouldNotThrowAndNotRetry401()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{
+				var uris = new[]
+				{
+					new Uri("http://localhost:9200"),
+					new Uri("http://localhost:9201"),
+					new Uri("http://localhost:9202")
+				};
+				var connectionPool = new StaticConnectionPool(uris, randomizeOnStartup: false);
+				var config = new ConnectionConfiguration(connectionPool);
+
+				fake.Provide<IConnectionConfigurationValues>(config);
+				FakeCalls.ProvideDefaultTransport(fake);
+
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
+				var getCall = FakeCalls.GetSyncCall(fake);
+				getCall.Returns(FakeResponse.Any(config, 401));
+
+				var client = fake.Resolve<ElasticsearchClient>();
+
+				Assert.DoesNotThrow(() => client.Info());
+				pingCall.MustHaveHappened(Repeated.Exactly.Once);
+				getCall.MustHaveHappened(Repeated.Exactly.Once);
+			}
+		}
+
+		[Test]
+		public void ShouldNotThrowAndNotRetry401_Async()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{
+				var uris = new[]
+				{
+					new Uri("http://localhost:9200"),
+					new Uri("http://localhost:9201"),
+					new Uri("http://localhost:9202")
+				};
+				var connectionPool = new StaticConnectionPool(uris, randomizeOnStartup: false);
+				var config = new ConnectionConfiguration(connectionPool);
+
+				fake.Provide<IConnectionConfigurationValues>(config);
+				FakeCalls.ProvideDefaultTransport(fake);
+
+				var pingAsyncCall = FakeCalls.PingAtConnectionLevelAsync(fake);
+				pingAsyncCall.Returns(FakeResponse.OkAsync(config));
+
+				//sniffing is always synchronous and in turn will issue synchronous pings
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
+				var getCall = FakeCalls.GetCall(fake);
+				getCall.Returns(FakeResponse.Any(config, 401));
+
+				var client = fake.Resolve<ElasticsearchClient>();
+
+				Assert.DoesNotThrow(async () => await client.InfoAsync());
+				getCall.MustHaveHappened(Repeated.Exactly.Once);
 			}
 		}
 	}

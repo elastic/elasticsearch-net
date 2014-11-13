@@ -115,7 +115,19 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			if (t.IsFaulted)
 			{
 				requestState.SeenExceptions.Add(t.Exception.InnerException);
-				return this.RetryRequestAsync(requestState);
+
+				var authenticationException = t.Exception.InnerException as ElasticsearchAuthenticationException;
+				
+				if (authenticationException != null)
+				{
+					var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
+					this.SetAuthenticationExceptionOnRequestState(requestState, authenticationException, tcs);
+					return tcs.Task;
+				}
+				else
+				{
+					return this.RetryRequestAsync(requestState);
+				}
 			}
 			if (t.IsCompleted)
 			{
