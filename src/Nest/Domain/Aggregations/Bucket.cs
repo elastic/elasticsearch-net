@@ -11,6 +11,7 @@ namespace Nest
 	{
 		public IEnumerable<IAggregation> Items { get; set; }
 		public long? DocCountErrorUpperBound { get; set; }
+		public long? SumOtherDocCount { get; set; }
 	}
 	
 	public class BucketWithDocCount<TBucketItem> : BucketAggregationBase, IBucketWithCountAggregation
