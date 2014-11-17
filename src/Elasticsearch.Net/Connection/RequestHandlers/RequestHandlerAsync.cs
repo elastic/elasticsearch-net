@@ -33,55 +33,14 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 		public Task<ElasticsearchResponse<T>> RequestAsync<T>(TransportRequestState<T> requestState, object data = null)
 		{
+			//serialize request and inform requeststate so it can keep track of serialization times
 			var bytes = PostData(data);
 			requestState.TickSerialization(bytes);
 
 			return this.DoRequestAsync<T>(requestState)
+				//When the request returns again inform the request state so it can do its bookkeeping
 				.ContinueWith(t => this.SetResultOnRequestState(t, requestState))
 				.Unwrap();
-		}
-
-		private Task<ElasticsearchResponse<T>> SetResultOnRequestState<T>(Task<ElasticsearchResponse<T>> t, TransportRequestState<T> requestState)
-		{
-			var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
-			if (t.Exception != null)
-			{
-				var authenticationException = t.Exception.InnerException as ElasticsearchAuthenticationException;
-
-				if (authenticationException != null)
-				{
-					this.SetAuthenticationExceptionOnRequestState(requestState, authenticationException, tcs);
-				}
-				else
-				{
-					tcs.SetException(t.Exception.Flatten());
-					requestState.SetResult(null);
-				}
-			}
-			else
-			{
-				tcs.SetResult(t.Result);
-				requestState.SetResult(t.Result);
-			}
-			return tcs.Task;
-		}
-
-		protected void SetAuthenticationExceptionOnRequestState<T>(
-			TransportRequestState<T> requestState,
-			ElasticsearchAuthenticationException exception,
-			TaskCompletionSource<ElasticsearchResponse<T>> tcs)
-		{
-			if (requestState.ClientSettings.ThrowOnElasticsearchServerExceptions)
-			{
-				tcs.SetException(exception.ToElasticsearchServerException());
-				requestState.SetResult(null);
-			}
-			else
-			{
-				var result = this.HandleAuthenticationException(requestState, exception);
-				tcs.SetResult(result);
-				requestState.SetResult(result);
-			}
 		}
 
 		private Task<ElasticsearchResponse<T>> DoRequestAsync<T>(TransportRequestState<T> requestState)
@@ -93,47 +52,49 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			}
 			catch(ElasticsearchAuthenticationException e)
 			{
-				var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
-				tcs.SetResult(this.HandleAuthenticationException<T>(requestState, e));
-				return tcs.Task;
+				//if a sniff results in a 401 return early or throw
+				return this.ReturnCompletedTaskFor(this.HandleAuthenticationException<T>(requestState, e));
 			}
 
 			//select the next node to hit and signal wheter the selected node needs a ping
 			var uriRequiresPing = this._delegator.SelectNextNode(requestState);
 			if (uriRequiresPing)
 			{
+				//first branch into a ping call and then handle the ping response
 				return this._delegator.PingAsync(requestState)
+					//handle ping response will do the actual call if the ping is valid
 					.ContinueWith(t => this.HandlePingResponse(t, requestState))
 					.Unwrap();
 			}
-
+			//perform call and retry if necessary
 			return FinishOrRetryRequestAsync(requestState);
 		}
-
+		
 		private Task<ElasticsearchResponse<T>> HandlePingResponse<T>(Task<bool> t, TransportRequestState<T> requestState)
 		{
-			if (t.IsFaulted)
-			{
-				requestState.SeenExceptions.Add(t.Exception.InnerException);
+			//If ping is not faulted and completed do the actual call
+			if (!t.IsFaulted) return t.IsCompleted ? this.FinishOrRetryRequestAsync(requestState) : null;
+			
+			//ping resulted in an exception 
+			
+			if (t.Exception == null)
+				return this.RetryRequestAsync(requestState);
 
-				var authenticationException = t.Exception.InnerException as ElasticsearchAuthenticationException;
-				
-				if (authenticationException != null)
-				{
-					var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
-					this.SetAuthenticationExceptionOnRequestState(requestState, authenticationException, tcs);
-					return tcs.Task;
-				}
-				else
-				{
-					return this.RetryRequestAsync(requestState);
-				}
-			}
-			if (t.IsCompleted)
+			//keep track of the exception we just saw, t.Exception is a flattened AggregateException
+			requestState.SeenExceptions.Add(t.Exception.InnerException);
+			
+			//if the ping exception was that of an unauthorized exception, 
+			var authenticationException = t.Exception.InnerException as ElasticsearchAuthenticationException;
+			if (authenticationException != null)
 			{
-				return this.FinishOrRetryRequestAsync(requestState);
+				var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
+				this.SetAuthenticationExceptionOnRequestState(requestState, authenticationException, tcs);
+				return tcs.Task;
 			}
-			return null;
+			else
+			{
+				return this.RetryRequestAsync(requestState);
+			}
 		}
 
 		private Task<ElasticsearchResponse<T>> FinishOrRetryRequestAsync<T>(TransportRequestState<T> requestState)
@@ -151,9 +112,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			return this.ReturnCompletedTaskFor(new ReadResponse<T>() { Response = voidResponse as ElasticsearchResponse<T> });
 		}
 
-		private Task<ReadResponse<T>> ReturnTypedResponse<T>(
-			ElasticsearchResponse<Stream> streamResponse,
-			TransportRequestState<T> requestState)
+		private Task<ReadResponse<T>> ReturnTypedResponse<T>(ElasticsearchResponse<Stream> streamResponse, TransportRequestState<T> requestState)
 		{
 			//read to ms if needed
 			Task<Stream> getStream = null;
@@ -194,6 +153,42 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				return this._deserializeAsyncToResponse<T>(gotStream.Result, requestState, typedResponse, response);
 			}).Unwrap();
 		}
+
+		private Task<ElasticsearchResponse<T>> SetResultOnRequestState<T>(Task<ElasticsearchResponse<T>> t, TransportRequestState<T> requestState)
+		{
+			var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
+			if (t.Exception != null)
+			{
+				var authenticationException = t.Exception.InnerException as ElasticsearchAuthenticationException;
+
+				if (authenticationException != null)
+				{
+					this.SetAuthenticationExceptionOnRequestState(requestState, authenticationException, tcs);
+				}
+				else
+				{
+					tcs.SetException(t.Exception.Flatten());
+					requestState.SetResult(null);
+				}
+			}
+			else
+			{
+				tcs.SetResult(t.Result);
+				requestState.SetResult(t.Result);
+			}
+			return tcs.Task;
+		}
+
+		protected void SetAuthenticationExceptionOnRequestState<T>(
+			TransportRequestState<T> requestState,
+			ElasticsearchAuthenticationException exception,
+			TaskCompletionSource<ElasticsearchResponse<T>> tcs)
+		{
+			var result = this.HandleAuthenticationException(requestState, exception);
+			tcs.SetResult(result);
+			requestState.SetResult(result);
+		}
+
 
 		private Task<ElasticsearchResponse<T>> HandleStreamResponse<T>(Task<ElasticsearchResponse<Stream>> t, IRequestTimings rq, TransportRequestState<T> requestState)
 		{
@@ -329,24 +324,24 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			var tcs = new TaskCompletionSource<ReadResponse<T>>();
 			var responseInstantiater = requestState.ResponseCreationOverride;
 			var customConverter = responseInstantiater as Func<IElasticsearchResponse, Stream, T>;
-			if (customConverter != null)
+			if (customConverter == null)
 			{
-				using (response)
-				{
-					var t = customConverter(typedResponse, response);
-					typedResponse.Response = t;
-					readResponse.Response = typedResponse;
-					tcs.SetResult(readResponse);
-					return tcs.Task;
-				}
+				return this._serializer.DeserializeAsync<T>(response)
+					.ContinueWith(t =>
+					{
+						typedResponse.Response = t.Result;
+						readResponse.Response = typedResponse;
+						return readResponse;
+					});
 			}
-			return this._serializer.DeserializeAsync<T>(response)
-				.ContinueWith(t =>
-				{
-					typedResponse.Response = t.Result;
-					readResponse.Response = typedResponse;
-					return readResponse;
-				});
+			using (response)
+			{
+				var t = customConverter(typedResponse, response);
+				typedResponse.Response = t;
+				readResponse.Response = typedResponse;
+				tcs.SetResult(readResponse);
+				return tcs.Task;
+			}
 		}
 
 		private IEnumerable<Task<MemoryStream>> ReadStreamAsync(Stream responseStream, MemoryStream memoryStream)

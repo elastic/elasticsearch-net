@@ -181,13 +181,6 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			response.Response = rawResponse;
 		}
 
-		protected ElasticsearchServerError ThrowOrGetErrorFromStreamResponse<T>(
-			TransportRequestState<T> requestState,
-			ElasticsearchResponse<Stream> streamResponse)
-		{
-			return null;
-		}
-
 		protected ElasticsearchServerError GetErrorFromStream<T>(Stream stream)
 		{
 			try
