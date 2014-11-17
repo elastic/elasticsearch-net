@@ -19,6 +19,7 @@ namespace Nest
 		string ScrollId { get; }
 		long Total { get; }
 		double MaxScore { get; }
+		bool TimedOut { get; }
 		/// <summary>
 		/// Returns a view on the documents inside the hits that are returned. 
 		/// <para>NOTE: if you use Fields() on the search descriptor .Documents will be empty use 
@@ -77,6 +78,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "took")]
 		public int ElapsedMilliseconds { get; internal set; }
+
+		[JsonProperty(PropertyName = "timed_out")]
+		public bool TimedOut { get; internal set; }
 
 		/// <summary>
 		/// Only set when search type = scan and scroll specified
