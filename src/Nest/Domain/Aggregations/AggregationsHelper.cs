@@ -114,6 +114,8 @@ namespace Nest
 		public BucketWithDocCount<SignificantTermItem> SignificantTerms(string key)
 		{
 			var bucket = this.TryGet<BucketWithDocCount>(key);
+		    if (bucket == null)
+		        return null;
 			var b = new BucketWithDocCount<SignificantTermItem>();
 			b.DocCount = bucket.DocCount;
 			b.Items = bucket.Items.OfType<SignificantTermItem>().ToList();
@@ -123,6 +125,8 @@ namespace Nest
 		public Bucket<KeyItem> Terms(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
+            if (bucket == null)
+                return null;
 			var b = new Bucket<KeyItem>();
 			b.Items = bucket.Items.OfType<KeyItem>().ToList();
 			return b;
@@ -131,7 +135,9 @@ namespace Nest
 		public Bucket<HistogramItem> Histogram(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			var b = new Bucket<HistogramItem>();
+            if (bucket == null)
+                return null;
+            var b = new Bucket<HistogramItem>();
 			b.Items = bucket.Items.OfType<HistogramItem>()
 				.Concat<HistogramItem>(bucket.Items.OfType<KeyItem>()
 				.Select(x =>
@@ -150,7 +156,9 @@ namespace Nest
 		public Bucket<KeyItem> GeoHash(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			var b = new Bucket<KeyItem>();
+            if (bucket == null)
+                return null;
+            var b = new Bucket<KeyItem>();
 			b.Items = bucket.Items.OfType<KeyItem>().ToList();
 			return b;
 		}
@@ -158,7 +166,9 @@ namespace Nest
 		public Bucket<RangeItem> Range(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			var b = new Bucket<RangeItem>();
+            if (bucket == null)
+                return null;
+            var b = new Bucket<RangeItem>();
 			b.Items = bucket.Items.OfType<RangeItem>().ToList();
 			return b;
 		}
@@ -166,7 +176,9 @@ namespace Nest
 		public Bucket<RangeItem> DateRange(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			var b = new Bucket<RangeItem>();
+            if (bucket == null)
+                return null;
+            var b = new Bucket<RangeItem>();
 			b.Items = bucket.Items.OfType<RangeItem>().ToList();
 			return b;
 		}
@@ -174,7 +186,9 @@ namespace Nest
 		public Bucket<RangeItem> IpRange(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			var b = new Bucket<RangeItem>();
+            if (bucket == null)
+                return null;
+            var b = new Bucket<RangeItem>();
 			b.Items = bucket.Items.OfType<RangeItem>().ToList();
 			return b;
 		}
@@ -182,7 +196,9 @@ namespace Nest
 		public Bucket<RangeItem> GeoDistance(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			var b = new Bucket<RangeItem>();
+            if (bucket == null)
+                return null;
+            var b = new Bucket<RangeItem>();
 			b.Items = bucket.Items.OfType<RangeItem>().ToList();
 			return b;
 		}
@@ -190,7 +206,9 @@ namespace Nest
 		public Bucket<HistogramItem> DateHistogram(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			var b = new Bucket<HistogramItem>();
+            if (bucket == null)
+                return null;
+            var b = new Bucket<HistogramItem>();
 			b.Items = bucket.Items.OfType<HistogramItem>().ToList();
 			return b;
 		}
