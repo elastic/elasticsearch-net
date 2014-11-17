@@ -59,14 +59,17 @@ namespace Nest.Resolvers
 		{
 			if (info == null)
 				return null;
-
+			
 			var name = info.Name;
-			var resolvedName = _settings.DefaultPropertyNameInferrer(name);
+			string resolvedName = null;
+			if (_settings.PropertyNames.TryGetValue(info, out resolvedName))
+				return resolvedName;
+
 			var att = ElasticAttributes.Property(info);
 			if (att != null && !att.Name.IsNullOrEmpty())
-				resolvedName = att.Name;
+				return att.Name;
 
-			return resolvedName;
+			return _settings.DefaultPropertyNameInferrer(name);
 		}
 
 		public string ResolveToLastToken(MemberInfo info)
@@ -110,19 +113,7 @@ namespace Nest.Resolvers
 		{
 			if (stack != null)
 			{
-				var name = expression.Member.Name;
-				var resolvedName = this._settings.DefaultPropertyNameInferrer(name);
-
-				var att = ElasticAttributes.Property(expression.Member);
-				if (att != null)
-				{
-					properties.Push(att);
-				}
-				if (att != null && !att.Name.IsNullOrEmpty())
-				{
-
-					resolvedName = att.Name;
-				}
+				var resolvedName = this.Resolve(expression.Member);
 				stack.Push(resolvedName);
 			}
 			return base.VisitMemberAccess(expression, stack, properties);
@@ -162,11 +153,35 @@ namespace Nest.Resolvers
 			}
 			return base.VisitMethodCall(m, stack, properties);
 		}
+		
 		private static bool IsLinqOperator(MethodInfo method)
 		{
 			if (method.DeclaringType != typeof(Queryable) && method.DeclaringType != typeof(Enumerable))
 				return false;
 			return Attribute.GetCustomAttribute(method, typeof(ExtensionAttribute)) != null;
+		}
+	}
+	
+
+	/// <summary>
+	/// Resolves member infos in an expression, instance may NOT be shared.
+	/// </summary>
+	public class MemberInfoResolver : PropertyNameResolver
+	{
+		private readonly IList<MemberInfo> _members = new List<MemberInfo>();
+		public IList<MemberInfo> Members { get { return _members; } } 
+
+		public MemberInfoResolver(IConnectionSettingsValues settings, Expression expression) : base(settings)
+		{
+			var stack = new Stack<string>();
+			var properties = new Stack<IElasticPropertyAttribute>();
+			base.Visit(expression, stack, properties);
+		}
+
+		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		{
+			this._members.Add(expression.Member);
+			return base.VisitMemberAccess(expression, stack, properties);
 		}
 	}
 }
