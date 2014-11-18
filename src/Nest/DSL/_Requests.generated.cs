@@ -1429,13 +1429,8 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
 	///</pre>
 	///</summary>
-	public partial class DeleteScriptRequest  : BasePathRequest<DeleteScriptRequestParameters>
+	public partial class DeleteScriptRequest  
 			{
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteScriptRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
 
 	}
 	
@@ -1751,13 +1746,8 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
 	///</pre>
 	///</summary>
-	public partial class GetScriptRequest  : BasePathRequest<GetScriptRequestParameters>
+	public partial class GetScriptRequest  
 			{
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetScriptRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
 
 	}
 	
@@ -4121,13 +4111,8 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
 	///</pre>
 	///</summary>
-	public partial class PutScriptRequest  : BasePathRequest<PutScriptRequestParameters>
+	public partial class PutScriptRequest  
 			{
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutScriptRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
 
 	}
 	

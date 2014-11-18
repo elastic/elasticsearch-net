@@ -177,7 +177,10 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/_search_shards?preference=nodeID", c => c.SearchShards<Doc>(s => s.AllIndices().AllTypes().Preference("nodeID")));
 			Do("GET", "/mydefaultindex/_search_shards?routing=routing-value", c => c.SearchShards<Doc>(s => s.AllTypes().Routing("routing-value")));
 			Do("GET", "/prefix-*/a%2Cb/_search_shards", c => c.SearchShards<Doc>(s => s.Index("prefix-*").Types("a", "b")));
-			
+
+            Do("POST", "/_scripts/lang/id", c => c.PutScript(s => s.Lang("lang").Id("id")));
+            Do("GET", "/_scripts/lang/id", c => c.GetScript(s => s.Lang("lang").Id("id")));
+            Do("DELETE", "/_scripts/lang/id", c => c.DeleteScript(s => s.Lang("lang").Id("id")));
 		}
 
 	}
