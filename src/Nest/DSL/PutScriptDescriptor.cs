@@ -9,6 +9,10 @@ namespace Nest
     {
         [JsonProperty("script")]
         string Script { get; set; }
+        [JsonIgnore]
+        string Id { get; set; }
+        [JsonIgnore]
+        string Lang { get; set; }
     }
 
     public partial class PutScriptRequest : BasePathRequest<PutScriptRequestParameters>, IPutScriptRequest
@@ -19,16 +23,16 @@ namespace Nest
 
         protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutScriptRequestParameters> pathInfo)
         {
-            PutScriptPathInfo.Update(pathInfo, Id, Lang);
+            PutScriptPathInfo.Update(pathInfo, this);
         }
     }
 
     internal static class PutScriptPathInfo
     {
-        public static void Update(ElasticsearchPathInfo<PutScriptRequestParameters> pathInfo, string id, string lang)
+        public static void Update(ElasticsearchPathInfo<PutScriptRequestParameters> pathInfo, IPutScriptRequest putScriptRequest)
         {
-            pathInfo.Id = id;
-            pathInfo.Lang = lang;
+            pathInfo.Id = putScriptRequest.Id;
+            pathInfo.Lang = putScriptRequest.Lang;
             pathInfo.HttpMethod = PathInfoHttpMethod.POST;
         }
     }
@@ -36,29 +40,28 @@ namespace Nest
     [DescriptorFor("ScriptPut")]
     public partial class PutScriptDescriptor : BasePathDescriptor<PutScriptDescriptor, PutScriptRequestParameters>, IPutScriptRequest
     {
-        private string _id;
-        private string _lang;
-
         IPutScriptRequest Self { get { return this; } }
         string IPutScriptRequest.Script { get; set; }
+        string IPutScriptRequest.Id { get; set; }
+        string IPutScriptRequest.Lang { get; set; }
 
         public PutScriptDescriptor Id(string id)
         {
             id.ThrowIfNullOrEmpty("id");
-            this._id = id;
+            this.Self.Id = id;
             return this;
         }
 
         public PutScriptDescriptor Lang(ScriptLang lang)
         {
-            this._lang = lang.GetStringValue();
+            this.Self.Lang = lang.GetStringValue();
             return this;
         }
 
         public PutScriptDescriptor Lang(string lang)
         {
             lang.ThrowIfNullOrEmpty("lang");
-            this._lang = lang;
+            this.Self.Lang = lang;
             return this;
         }
 
@@ -70,7 +73,7 @@ namespace Nest
 
         protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutScriptRequestParameters> pathInfo)
         {
-            PutScriptPathInfo.Update(pathInfo, _id, _lang);
+            PutScriptPathInfo.Update(pathInfo, this);
         }
     }
 }
