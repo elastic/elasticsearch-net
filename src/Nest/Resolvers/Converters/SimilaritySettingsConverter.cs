@@ -32,7 +32,8 @@ namespace Nest.Resolvers.Converters
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var similarityValue = (SimilaritySettings)value;
-
+      writer.WriteStartObject();
+      
 			if(similarityValue.CustomSimilarities.Count > 0)
 			{
 				serializer.Serialize(writer, similarityValue.CustomSimilarities);
@@ -40,9 +41,13 @@ namespace Nest.Resolvers.Converters
 
 			if (!string.IsNullOrEmpty(similarityValue.Default))
 			{
-				writer.WritePropertyName("similarity.default.type");
+				writer.WritePropertyName("default");
+        writer.WriteStartObject();
+        writer.WritePropertyName("type");
 				writer.WriteValue(similarityValue.Default);
+        writer.WriteEndObject();
 			}
+      writer.WriteEndObject();
 		}
 	}
 }

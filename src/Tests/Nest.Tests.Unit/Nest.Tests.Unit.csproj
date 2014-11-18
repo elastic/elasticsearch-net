@@ -183,6 +183,9 @@
     <None Include="Core\Indices\Similarity\MultipleSimilaritiesTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Indices\Similarity\SimilarityTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Map\CustomMapping\RepresentUnknowImageMappingPlugin.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

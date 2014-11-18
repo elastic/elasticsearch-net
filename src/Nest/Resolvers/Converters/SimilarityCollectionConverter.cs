@@ -47,13 +47,11 @@ namespace Nest.Resolvers.Converters
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var items = (IDictionary<string, SimilarityBase>)value;
-			writer.WriteStartObject();
 			foreach(var item in items)
 			{
 				writer.WritePropertyName(item.Key);
 				serializer.Serialize(writer, item.Value);
 			}
-			writer.WriteEndObject();
 		}
 	}
 }

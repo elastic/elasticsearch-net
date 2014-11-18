@@ -1,0 +1,12 @@
+﻿{
+	"settings": {
+		"index": {
+			"similarity": {
+				"default":
+        {
+          "type": "customsimilarity"
+        }
+			}
+		}
+	}
+}
