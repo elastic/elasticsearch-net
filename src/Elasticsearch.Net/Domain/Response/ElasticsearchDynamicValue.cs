@@ -6,6 +6,7 @@ using System.Dynamic;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Reflection.TypeExtensions;
 using System.Runtime.CompilerServices;
 using Microsoft.CSharp.RuntimeBinder;
 using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
@@ -369,7 +370,7 @@ namespace Elasticsearch.Net
 				return false;
 			}
 
-			if (dynamicValue.value.GetType().IsValueType)
+			if (dynamicValue.value.GetType().IsValueType())
 			{
 				return (Convert.ToBoolean(dynamicValue.value));
 			}
@@ -392,7 +393,7 @@ namespace Elasticsearch.Net
 
 		public static implicit operator int(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValueType)
+			if (dynamicValue.value.GetType().IsValueType())
 			{
 				return Convert.ToInt32(dynamicValue.value);
 			}
@@ -432,7 +433,7 @@ namespace Elasticsearch.Net
 
 		public static implicit operator long(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValueType)
+			if (dynamicValue.value.GetType().IsValueType())
 			{
 				return Convert.ToInt64(dynamicValue.value);
 			}
@@ -442,7 +443,7 @@ namespace Elasticsearch.Net
 
 		public static implicit operator float(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValueType)
+			if (dynamicValue.value.GetType().IsValueType())
 			{
 				return Convert.ToSingle(dynamicValue.value);
 			}
@@ -452,7 +453,7 @@ namespace Elasticsearch.Net
 
 		public static implicit operator decimal(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValueType)
+			if (dynamicValue.value.GetType().IsValueType())
 			{
 				return Convert.ToDecimal(dynamicValue.value);
 			}
@@ -462,7 +463,7 @@ namespace Elasticsearch.Net
 
 		public static implicit operator double(ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValueType)
+			if (dynamicValue.value.GetType().IsValueType())
 			{
 				return Convert.ToDouble(dynamicValue.value);
 			}

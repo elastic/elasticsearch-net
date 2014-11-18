@@ -12,7 +12,10 @@ namespace PurifyNet
 
         static Purifier()
         {
-            isMono = typeof(Uri).GetField("m_Flags", BindingFlags.Instance | BindingFlags.NonPublic) == null;
+#if NETFX_CORE || ASPNETCORE50
+			return;
+#else
+			isMono = typeof(Uri).GetField("m_Flags", BindingFlags.Instance | BindingFlags.NonPublic) == null;
             if (isMono)
                 return;
 
@@ -46,13 +49,16 @@ namespace PurifyNet
 
             hasBrokenDotNetUri = !new Uri("http://google.com/%2F")
                 .ToString()
-                .EndsWith("%2F", StringComparison.InvariantCulture);
+                .EndsWith("%2F", StringComparison.OrdinalIgnoreCase);
+#endif
+		}
 
-        }
-
-        public static Uri Purify(this Uri uri)
+		public static Uri Purify(this Uri uri)
         {
-            if (!uri.IsAbsoluteUri)
+#if NETFX_CORE || ASPNETCORE50
+			return uri;
+#else
+			if (!uri.IsAbsoluteUri)
                 return uri;
 
             IPurifier purifier = null;
@@ -64,6 +70,7 @@ namespace PurifyNet
             
             purifier.Purify(uri);
             return uri;
+#endif
         }
     }
 }

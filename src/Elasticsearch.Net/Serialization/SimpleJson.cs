@@ -53,7 +53,6 @@ using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq.Expressions;
@@ -69,9 +68,7 @@ namespace Elasticsearch.Net.Serialization
 	/// <summary>
 	/// Represents the json array.
 	/// </summary>
-	[GeneratedCode("simple-json", "1.0.0")]
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 #if SIMPLE_JSON_OBJARRAYINTERNAL
 	internal
 #else
@@ -103,9 +100,7 @@ namespace Elasticsearch.Net.Serialization
 	/// <summary>
 	/// Represents the json object.
 	/// </summary>
-	[GeneratedCode("simple-json", "1.0.0")]
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	[SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 #if SIMPLE_JSON_OBJARRAYINTERNAL
 	internal
 #else
@@ -530,7 +525,6 @@ namespace Elasticsearch.Net.Serialization
 		/// <returns>
 		/// Returns true if successfull otherwise false.
 		/// </returns>
-		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification="Need to support .NET 2")]
 		public static bool TryDeserializeObject(string json, out object obj)
 		{
 			bool success = true;
@@ -909,7 +903,6 @@ namespace Elasticsearch.Net.Serialization
 			return NextToken(json, ref saveIndex);
 		}
 
-		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		static int NextToken(char[] json, ref int index)
 		{
 			EatWhitespace(json, ref index);
@@ -1176,7 +1169,6 @@ namespace Elasticsearch.Net.Serialization
 #endif
 	}
     
-	[GeneratedCode("simple-json", "1.0.0")]
 #if SIMPLE_JSON_INTERNAL
 	internal
 #else
@@ -1184,12 +1176,10 @@ namespace Elasticsearch.Net.Serialization
 #endif
 		interface IJsonSerializerStrategy
 	{
-		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification="Need to support .NET 2")]
 		bool TrySerializeNonPrimitiveObject(object input, out object output);
 		object DeserializeObject(object value, Type type);
 	}
 
-	[GeneratedCode("simple-json", "1.0.0")]
 #if SIMPLE_JSON_INTERNAL
 	internal
 #else
@@ -1277,7 +1267,6 @@ namespace Elasticsearch.Net.Serialization
 			return TrySerializeKnownTypes(input, out output) || TrySerializeUnknownTypes(input, out output);
 		}
 
-		[SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
 		public virtual object DeserializeObject(object value, Type type)
 		{
 			if (type == null) throw new ArgumentNullException("type");
@@ -1423,7 +1412,6 @@ namespace Elasticsearch.Net.Serialization
 			return Convert.ToDouble(p, CultureInfo.InvariantCulture);
 		}
 
-		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification="Need to support .NET 2")]
 		protected virtual bool TrySerializeKnownTypes(object input, out object output)
 		{
 			bool returnValue = true;
@@ -1448,7 +1436,6 @@ namespace Elasticsearch.Net.Serialization
 			}
 			return returnValue;
 		}
-		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification="Need to support .NET 2")]
 		protected virtual bool TrySerializeUnknownTypes(object input, out object output)
 		{
 			if (input == null) throw new ArgumentNullException("input");
