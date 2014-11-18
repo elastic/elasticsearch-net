@@ -63,6 +63,12 @@ namespace Nest
 			return this;
 		}
 
+        public CustomScoreQueryDescriptor<T> Lang(ScriptLang lang)
+        {
+            ((ICustomScoreQuery)this).Lang = lang.GetStringValue();
+            return this;
+        }
+
 		public CustomScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
