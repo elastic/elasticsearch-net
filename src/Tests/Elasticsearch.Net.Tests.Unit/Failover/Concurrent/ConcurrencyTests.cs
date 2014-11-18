@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Tests.Unit.Stubs;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Elasticsearch.Net.Tests.Unit.Connection
+namespace Elasticsearch.Net.Tests.Unit.Failover.Concurrent
 {
 	[TestFixture]
 	public class ConcurrencyTests
@@ -23,7 +20,6 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			new Uri("http://localhost:9202"),
 			new Uri("http://localhost:9203"),
 		};
-		private static readonly int _retries = _uris.Count() - 1;
 		private readonly StaticConnectionPool _connectionPool;
 		private readonly ConnectionConfiguration _config;
 
@@ -35,10 +31,13 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				.SniffOnStartup()
 				.MaximumRetries(5);
 		}
-
+		/// <summary>
+		/// This test calls a cluster which is configured to throw randomly but never on node 9202
+		/// We use 4 threads to do concurrent calls on a single client instance
+		/// Failover should always discover the live node 9202 and none of our calls should throw an exception.
+		/// </summary>
 		[Test]
-		[Ignore] //TODO Unignore
-		public void CallInfo40000TimesOnMultipleThreads()
+		public void ClusterWithOnlyOneGoodNode_MustWithstandThousandsOfConcurrentCalls()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
@@ -89,49 +88,6 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				//Sadly we can't use FakeItEasy's to ensure get is called 40.000 times
 				//because it internally uses fixed arrays that will overflow :)
 				seen.Should().Be(40000);
-			}
-		}
-		/// <summary>
-		/// This simulates a super flakey elasticsearch cluster.
-		/// - if random 1-9 is a muliple of 3 throw a 503
-		/// - never throws on node 9202 though so that all calls can be expected to always succeed. 
-		/// - Sniff can either get back the full cluster or a sufficient subset of it. 
-		/// - Our cluster have 5 nodes the recommendation is to have N/2+1 masters so we should atleast see 3 nodes
-		/// - anything less would cause a node to be unavailable which is covered in other tests 
-		/// </summary>
-		public class ConcurrencyTestConnection : InMemoryConnection
-		{
-			private static Uri[] _uris = new[]
-			{
-				new Uri("http://localhost:9200"),
-				new Uri("http://localhost:9201"),
-				new Uri("http://localhost:9202"),
-				new Uri("http://localhost:9203"),
-				new Uri("http://localhost:9206"),
-			};
-			
-			private static Uri[] _uris2 = new[]
-			{
-				new Uri("http://localhost:9202"),
-				new Uri("http://localhost:9201"),
-				new Uri("http://localhost:9206"),
-			};
-			private readonly Random _rnd = new Random();
-			public ConcurrencyTestConnection(IConnectionConfigurationValues settings) 
-				: base(settings)
-			{
-			}
-
-		
-
-			public override ElasticsearchResponse<Stream> GetSync(Uri uri, IRequestConfiguration requestConfigurationOverrides = null)
-			{
-				var statusCode = _rnd.Next(1, 9) % 3 == 0 ? 503 : 200;
-				if (uri.Port == 9202)
-					statusCode = 200;
-
-				return ElasticsearchResponse<Stream>.Create(this.ConnectionSettings, statusCode, "GET", "/", null);
-			
 			}
 		}
 

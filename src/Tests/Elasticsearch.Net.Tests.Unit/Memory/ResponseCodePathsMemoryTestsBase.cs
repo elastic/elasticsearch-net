@@ -1,5 +1,5 @@
 using System.IO;
-using Elasticsearch.Net.Tests.Unit.Requesters;
+using Elasticsearch.Net.Tests.Unit.Memory.Helpers;
 using FluentAssertions;
 
 namespace Elasticsearch.Net.Tests.Unit.Memory

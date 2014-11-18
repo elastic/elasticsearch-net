@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Text;
 using Autofac.Extras.FakeItEasy;
@@ -8,17 +7,11 @@ using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Elasticsearch.Net.Tests.Unit.Connection
+namespace Elasticsearch.Net.Tests.Unit.Exceptions
 {
 	[TestFixture]
 	public class ElasticsearchServerExceptions
 	{
-		//we do not pass a Uri or IConnectionPool so this config
-		//defaults to SingleNodeConnectionPool()
-		private readonly ConnectionConfiguration _connectionConfig = new ConnectionConfiguration()
-			.MaximumRetries(0);
-
-
 		private MemoryStream CreateServerExceptionResponse(int status, string exceptionType, string exceptionMessage)
 		{
 			var format = @"{{ ""status"": {0}, ""error"" : ""{1}[{2}]"" }}";

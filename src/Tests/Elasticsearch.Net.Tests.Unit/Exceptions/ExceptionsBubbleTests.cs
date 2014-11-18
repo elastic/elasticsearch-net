@@ -7,10 +7,10 @@ using Elasticsearch.Net.Tests.Unit.Stubs;
 using FakeItEasy;
 using NUnit.Framework;
 
-namespace Elasticsearch.Net.Tests.Unit.Connection
+namespace Elasticsearch.Net.Tests.Unit.Exceptions
 {
 	[TestFixture]
-	public class NoRetryTests
+	public class ExceptionsBubbleTests
 	{
 		//we do not pass a Uri or IConnectionPool so this config
 		//defaults to SingleNodeConnectionPool()
@@ -18,47 +18,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			.MaximumRetries(0);
 
 		[Test]
-		public void ShouldNotRetryWhenMaxRetriesIs0()
-		{
-			using (var fake = new AutoFake(callsDoNothing: true))
-			{
-				var connectionConfiguration = new ConnectionConfiguration().MaximumRetries(0);
-				fake.Provide<IConnectionConfigurationValues>(connectionConfiguration);
-				FakeCalls.ProvideDefaultTransport(fake);
-
-				var getCall = FakeCalls.GetSyncCall(fake);
-				getCall.Returns(FakeResponse.Bad(connectionConfiguration));
-
-				var client = fake.Resolve<ElasticsearchClient>();
-
-				Assert.DoesNotThrow(() => client.Info());
-				getCall.MustHaveHappened(Repeated.Exactly.Once);
-
-			}
-		}
-
-		[Test]
-		public void ShouldNotRetryWhenMaxRetriesIs0_Async()
-		{
-			using (var fake = new AutoFake(callsDoNothing: true))
-			{
-				var connectionConfiguration = new ConnectionConfiguration().MaximumRetries(0);
-				fake.Provide<IConnectionConfigurationValues>(connectionConfiguration);
-				FakeCalls.ProvideDefaultTransport(fake);
-
-				var getCall = FakeCalls.GetCall(fake);
-				getCall.Returns(FakeResponse.Bad(connectionConfiguration));
-
-				var client = fake.Resolve<ElasticsearchClient>();
-
-				Assert.DoesNotThrow(async () => await client.InfoAsync());
-				getCall.MustHaveHappened(Repeated.Exactly.Once);
-
-			}
-		}
-
-		[Test]
-		public void ThrowsException()
+		public void CallThrowsHardException_ShouldBubbleToCallee()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
@@ -77,7 +37,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 
 		[Test]
-		public void ThrowsException_Async()
+		public void Async_CallThrowsSoftException_ShouldBubbleToCallee()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{

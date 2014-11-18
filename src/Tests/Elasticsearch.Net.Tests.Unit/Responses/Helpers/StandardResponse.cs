@@ -1,4 +1,4 @@
-namespace Elasticsearch.Net.Tests.Unit.Connection
+namespace Elasticsearch.Net.Tests.Unit.Responses.Helpers
 {
 	public class StandardResponse
 	{

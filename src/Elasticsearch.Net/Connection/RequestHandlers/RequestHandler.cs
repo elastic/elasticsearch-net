@@ -89,7 +89,8 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 					ElasticsearchServerError error = null;
 					if (typeof(VoidResponse).IsAssignableFrom(typeof(T)))
 					{
-						streamResponse.Response.Close();
+						if (streamResponse.Response != null)
+							streamResponse.Response.Close();
 						var voidResponse = ElasticsearchResponse.CloneFrom<VoidResponse>(streamResponse, null);
 						typedResponse = voidResponse as ElasticsearchResponse<T>;
 					}

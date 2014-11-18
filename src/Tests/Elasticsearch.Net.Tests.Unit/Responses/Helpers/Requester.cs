@@ -8,7 +8,7 @@ using Elasticsearch.Net.Tests.Unit.Stubs;
 using FakeItEasy;
 using FakeItEasy.Configuration;
 
-namespace Elasticsearch.Net.Tests.Unit.Requesters
+namespace Elasticsearch.Net.Tests.Unit.Responses.Helpers
 {
 	public class Requester<T> : IDisposable where T : class
 	{

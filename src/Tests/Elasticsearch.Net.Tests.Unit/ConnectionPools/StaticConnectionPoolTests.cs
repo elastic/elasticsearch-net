@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
@@ -17,7 +15,7 @@ using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Elasticsearch.Net.Tests.Unit.Connection
+namespace Elasticsearch.Net.Tests.Unit.ConnectionPools
 {
 	[TestFixture]
 	public class StaticConnectionPoolTests
@@ -34,7 +32,6 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		private readonly ConnectionConfiguration _config;
 		private ElasticsearchResponse<Stream> _ok;
 		private ElasticsearchResponse<Stream> _bad;
-
 
 		public StaticConnectionPoolTests()
 		{
@@ -90,8 +87,6 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 			}
 		}
-
-		
 
 		[Test]
 		public void AllNodesMustBeTriedOnce()
@@ -153,7 +148,6 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 			}
 		}
-
 
 		[Test]
 		public void AConnectionMustBeMadeEvenIfAllNodesAreDead()
