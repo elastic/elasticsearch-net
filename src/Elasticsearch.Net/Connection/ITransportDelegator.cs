@@ -15,7 +15,7 @@ namespace Elasticsearch.Net.Connection
 		Task<bool> PingAsync(ITransportRequestState requestState);
 		IList<Uri> Sniff(ITransportRequestState ownerState = null);
 		void SniffClusterState(ITransportRequestState requestState = null);
-		void SniffIfInformationIsTooOld(ITransportRequestState requestState);
+		void SniffOnStaleClusterState(ITransportRequestState requestState);
 		void SniffOnConnectionFailure(ITransportRequestState requestState);
 
 		/// <summary>

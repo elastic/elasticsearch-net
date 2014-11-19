@@ -78,8 +78,8 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			var type = typeof(T);
 			return type == typeof(string) || type == typeof(byte[]) || typeof(Stream).IsAssignableFrom(typeof(T));
 		}
-
-		protected bool ReturnStringOrByteArray<T>(ElasticsearchResponse<T> original, byte[] bytes)
+		
+		protected bool SetStringOrByteResult<T>(ElasticsearchResponse<T> original, byte[] bytes)
 		{
 			var type = typeof(T);
 			if (type == typeof(string))
@@ -151,18 +151,22 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			return exceptionMessage;
 		}
 
-		protected void SetErrorDiagnosticsAndPatchSuccess<T>(
+		protected void OptionallyCloseResponseStreamAndSetSuccess<T>(
 			ITransportRequestState requestState,
 			ElasticsearchServerError error,
 			ElasticsearchResponse<T> typedResponse,
 			ElasticsearchResponse<Stream> streamResponse)
 		{
-			if (streamResponse.Response != null && !typeof(Stream).IsAssignableFrom(typeof(T))) streamResponse.Response.Close();
+			if (streamResponse.Response != null && !typeof(Stream).IsAssignableFrom(typeof(T))) 
+				streamResponse.Response.Close();
+			
 			if (error != null)
 			{
 				typedResponse.Success = false;
-				typedResponse.OriginalException = new ElasticsearchServerException(error);
+				if (typedResponse.OriginalException == null)
+					typedResponse.OriginalException = new ElasticsearchServerException(error);
 			}
+			//TODO UNIT TEST OR BEGONE
 			if (!typedResponse.Success
 			    && requestState.RequestConfiguration != null
 			    && requestState.RequestConfiguration.AllowedStatusCodes.HasAny(i => i == streamResponse.HttpStatusCode))
@@ -192,6 +196,24 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			// parsing failure of exception should not be fatal, its a best case helper.
 			catch { }
 			return null;
+		}
+		
+
+		/// <summary>
+		/// Sniffs when the cluster state is stale, when sniffing returns a 401 return a response for T to return directly
+		/// </summary>
+		protected ElasticsearchResponse<T> TrySniffOnStaleClusterState<T>(TransportRequestState<T> requestState)
+		{
+			try
+			{
+				//If connectionSettings is configured to sniff periodically, sniff when stale.
+				this._delegator.SniffOnStaleClusterState(requestState);
+				return null;
+			}
+			catch(ElasticsearchAuthenticationException e)
+			{
+				return this.HandleAuthenticationException(requestState, e);
+			}
 		}
 
 		protected ElasticsearchResponse<T> HandleAuthenticationException<T>(TransportRequestState<T> requestState, ElasticsearchAuthenticationException exception)

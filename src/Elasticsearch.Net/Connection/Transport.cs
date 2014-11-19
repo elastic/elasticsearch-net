@@ -221,7 +221,7 @@ namespace Elasticsearch.Net.Connection
 
 		}
 
-		void ITransportDelegator.SniffIfInformationIsTooOld(ITransportRequestState requestState)
+		void ITransportDelegator.SniffOnStaleClusterState(ITransportRequestState requestState)
 		{
 			if (Self.SniffingDisabled(requestState.RequestConfiguration))
 				return;

@@ -45,16 +45,8 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 		private Task<ElasticsearchResponse<T>> DoRequestAsync<T>(TransportRequestState<T> requestState)
 		{
-			try
-			{
-				//If connectionSettings is configured to sniff periodically, sniff when stale.
-				this._delegator.SniffIfInformationIsTooOld(requestState);
-			}
-			catch(ElasticsearchAuthenticationException e)
-			{
-				//if a sniff results in a 401 return early or throw
-				return this.ReturnCompletedTaskFor(this.HandleAuthenticationException<T>(requestState, e));
-			}
+			var sniffAuthResponse = this.TrySniffOnStaleClusterState(requestState);
+			if (sniffAuthResponse != null) return this.ReturnCompletedTaskFor(sniffAuthResponse);
 
 			//select the next node to hit and signal wheter the selected node needs a ping
 			var uriRequiresPing = this._delegator.SelectNextNode(requestState);
@@ -139,12 +131,12 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				if (!isValidResponse)
 				{
 					response.Error = GetErrorFromStream<T>(gotStream.Result);
-					this.ReturnStringOrByteArray(typedResponse, response.Bytes);
+					this.SetStringOrByteResult(typedResponse, response.Bytes);
 					if (gotStream.Result != null) gotStream.Result.Close();
 					response.Response = typedResponse;
 					return this.ReturnCompletedTaskFor(response);
 				}
-				if (this.ReturnStringOrByteArray(typedResponse, response.Bytes))
+				if (this.SetStringOrByteResult(typedResponse, response.Bytes))
 				{
 					if (gotStream.Result != null) gotStream.Result.Close();
 					response.Response = typedResponse;
@@ -222,7 +214,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			{
 				var r = gotTypedResponse.Result;
 				if (this._settings.KeepRawResponse) r.Response.ResponseRaw = r.Bytes;
-				this.SetErrorDiagnosticsAndPatchSuccess(requestState, r.Error, r.Response, t.Result);
+				this.OptionallyCloseResponseStreamAndSetSuccess(requestState, r.Error, r.Response, t.Result);
 				if (r.Error != null && this._settings.ThrowOnElasticsearchServerExceptions)
 					throw new ElasticsearchServerException(r.Error);
 				if (r.Response.SuccessOrKnownError)
