@@ -13,13 +13,13 @@ using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Elasticsearch.Net.Tests.Unit.Connection
+namespace Elasticsearch.Net.Tests.Unit.Failover.Revival
 {
 	[TestFixture]
-	public class SkipDeadNodesTests
+	public class RevivalTests
 	{
 		[Test]
-		public void DeadNodesAreNotVisited_AndPingedAppropiately()
+		public void DeadNodeIsSkipped_AndRevivedAfterTimeout()
 		{
 			using (var fake = new AutoFake())
 			{
@@ -94,9 +94,8 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			}
 		}
 
-
 		[Test]
-		public async void DeadNodesAreNotVisited_AndPingedAppropiately_Async()
+		public async void DeadNodeIsSkipped_AndRevivedAfterTimeout_Async()
 		{
 			using (var fake = new AutoFake())
 			{
@@ -197,6 +196,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				.EnableMetrics();
 			return config;
 		}
+
 		private static IDateTimeProvider ProvideDateTimeProvider(AutoFake fake)
 		{
 			var now = DateTime.UtcNow;
@@ -223,6 +223,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			fake.Provide<IDateTimeProvider>(new DateTimeProvider());
 			return dateTimeProvider;
 		}
+		
 		private static void AssertSeenNodesAreInExpectedOrder(List<Uri> seenNodes)
 		{
 			seenNodes.Should().NotBeEmpty().And.HaveCount(10);

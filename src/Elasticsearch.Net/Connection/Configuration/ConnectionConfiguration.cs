@@ -250,7 +250,7 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// This is a separate timeout for Ping() requests. A ping should fail as fast as possible.
 		/// </summary>
-		/// <param name="timeout">The ping timeout in milliseconds defaults to 50</param>
+		/// <param name="timeout">The ping timeout in milliseconds defaults to 200</param>
 		public T SetPingTimeout(int timeout)
 		{
 			this._pingTimeout = timeout;

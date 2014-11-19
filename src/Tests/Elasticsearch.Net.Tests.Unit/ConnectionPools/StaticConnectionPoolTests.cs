@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
@@ -11,15 +9,16 @@ using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
+using Elasticsearch.Net.Serialization;
 using Elasticsearch.Net.Tests.Unit.Stubs;
 using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Elasticsearch.Net.Tests.Unit.Connection
+namespace Elasticsearch.Net.Tests.Unit.ConnectionPools
 {
 	[TestFixture]
-	public class StaticConnectionPoolRetryTests
+	public class StaticConnectionPoolTests
 	{
 		private static Uri[] _uris = new[]
 		{
@@ -34,8 +33,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		private ElasticsearchResponse<Stream> _ok;
 		private ElasticsearchResponse<Stream> _bad;
 
-
-		public StaticConnectionPoolRetryTests()
+		public StaticConnectionPoolTests()
 		{
 			_connectionPool = new StaticConnectionPool(_uris);
 			_config = new ConnectionConfiguration(_connectionPool);
@@ -46,8 +44,10 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 		private ITransport ProvideTransport(AutoFake fake)
 		{
-			var param = new TypedParameter(typeof(IDateTimeProvider), null);
-			return fake.Provide<ITransport, Transport>(param);
+			var dateTimeParam = new TypedParameter(typeof(IDateTimeProvider), null);
+			var memoryStreamParam = new TypedParameter(typeof(IMemoryStreamProvider), null);
+			var serializerParam = new TypedParameter(typeof(IElasticsearchSerializer), null);
+			return fake.Provide<ITransport, Transport>(dateTimeParam, serializerParam, memoryStreamParam);
 		}
 
 		[Test]
@@ -87,8 +87,6 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 			}
 		}
-
-		
 
 		[Test]
 		public void AllNodesMustBeTriedOnce()
@@ -150,7 +148,6 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 			}
 		}
-
 
 		[Test]
 		public void AConnectionMustBeMadeEvenIfAllNodesAreDead()
@@ -446,6 +443,71 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var aggregateException = e.InnerException as AggregateException;
 				aggregateException.Should().NotBeNull();
 				aggregateException.InnerExceptions.Should().Contain(ex => ex.GetType().Name == "PingException");
+			}
+		}
+
+		[Test]
+		public void ShouldNotThrowAndNotRetry401()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{
+				var uris = new[]
+				{
+					new Uri("http://localhost:9200"),
+					new Uri("http://localhost:9201"),
+					new Uri("http://localhost:9202")
+				};
+				var connectionPool = new StaticConnectionPool(uris, randomizeOnStartup: false);
+				var config = new ConnectionConfiguration(connectionPool);
+
+				fake.Provide<IConnectionConfigurationValues>(config);
+				FakeCalls.ProvideDefaultTransport(fake);
+
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
+				var getCall = FakeCalls.GetSyncCall(fake);
+				getCall.Returns(FakeResponse.Any(config, 401));
+
+				var client = fake.Resolve<ElasticsearchClient>();
+
+				Assert.DoesNotThrow(() => client.Info());
+				pingCall.MustHaveHappened(Repeated.Exactly.Once);
+				getCall.MustHaveHappened(Repeated.Exactly.Once);
+			}
+		}
+
+		[Test]
+		public void ShouldNotThrowAndNotRetry401_Async()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{
+				var uris = new[]
+				{
+					new Uri("http://localhost:9200"),
+					new Uri("http://localhost:9201"),
+					new Uri("http://localhost:9202")
+				};
+				var connectionPool = new StaticConnectionPool(uris, randomizeOnStartup: false);
+				var config = new ConnectionConfiguration(connectionPool);
+
+				fake.Provide<IConnectionConfigurationValues>(config);
+				FakeCalls.ProvideDefaultTransport(fake);
+
+				var pingAsyncCall = FakeCalls.PingAtConnectionLevelAsync(fake);
+				pingAsyncCall.Returns(FakeResponse.OkAsync(config));
+
+				//sniffing is always synchronous and in turn will issue synchronous pings
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
+				var getCall = FakeCalls.GetCall(fake);
+				getCall.Returns(FakeResponse.Any(config, 401));
+
+				var client = fake.Resolve<ElasticsearchClient>();
+
+				Assert.DoesNotThrow(async () => await client.InfoAsync());
+				getCall.MustHaveHappened(Repeated.Exactly.Once);
 			}
 		}
 	}

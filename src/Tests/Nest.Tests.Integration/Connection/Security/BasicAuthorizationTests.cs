@@ -1,22 +1,15 @@
-﻿
+﻿using FluentAssertions;
+using Nest;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FluentAssertions;
-using Nest;
 
-// TODO: Need to figure out a better way to incorporate these tests into the normal test suite workflow.
-
-// Purposely outside of the Nest namespace in order to bypass test setup.
-namespace Tests.Security.BasicAuthTests
+namespace Tests.Integration.Security.BasicAuthTests
 {
 	[TestFixture]
-	// Ignore these tests by default and run manually (for now) by commenting out the [Ignore] attribute.
-	// A considerable amount of setup is required to run them, which will also cause the rest of the test
-	// suite to fail.
 	[Ignore]
 	public class BasicAuthorizationTests
 	{

@@ -1,87 +1,29 @@
-using System;
 using System.IO;
 using System.Text;
-using Autofac.Extras.FakeItEasy;
-using Elasticsearch.Net.Connection;
+using System.Threading.Tasks;
+using Elasticsearch.Net.Tests.Unit.Responses.Helpers;
 using Elasticsearch.Net.Tests.Unit.Stubs;
-using FakeItEasy;
-using FakeItEasy.Configuration;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Elasticsearch.Net.Tests.Unit.Connection
+namespace Elasticsearch.Net.Tests.Unit.Responses
 {
 	[TestFixture]
-	public class BuildInResponseTests
+	public class BuildInResponseAsyncTests
 	{
-		private class Requester<T> : IDisposable where T : class
-		{
-			public Requester(
-				object responseValue,
-				Func<ConnectionConfiguration, ConnectionConfiguration> configSetup,
-				Func<ConnectionConfiguration, Stream, ElasticsearchResponse<Stream>> responseSetup,
-				Func<IElasticsearchClient, ElasticsearchResponse<T>> call = null
-			)
-			{
-				var responseStream = CreateServerExceptionResponse(responseValue);
-				this.Fake = new AutoFake(callsDoNothing: true);
-				var connectionConfiguration = configSetup(new ConnectionConfiguration());
-				var response = responseSetup(connectionConfiguration, responseStream);
-				this.Fake.Provide<IConnectionConfigurationValues>(connectionConfiguration);
-				FakeCalls.ProvideDefaultTransport(this.Fake);
-
-				this.GetCall = FakeCalls.GetSyncCall(this.Fake);
-				this.GetCall.Returns(response);
-
-				var client = this.Fake.Resolve<ElasticsearchClient>();
-				this.Result = call != null ? call(client) : client.Info<T>();
-
-				this.GetCall.MustHaveHappened(Repeated.Exactly.Once);
-
-			}
-
-			public ElasticsearchResponse<T> Result { get; set; }
-
-			public IReturnValueConfiguration<ElasticsearchResponse<Stream>> GetCall { get; set; }
-
-			public AutoFake Fake { get; set; }
-
-			private MemoryStream CreateServerExceptionResponse(object responseValue)
-			{
-				if (responseValue is string)
-					responseValue = string.Format(@"""{0}""", responseValue);
-				var format = @"{{ ""value"": {0} }}";
-				this.ResponseBytes = Encoding.UTF8.GetBytes(string.Format(format, responseValue));
-				var stream = new MemoryStream(this.ResponseBytes);
-				return stream;
-			}
-
-			public byte[] ResponseBytes { get; set; }
-
-			public void Dispose()
-			{
-				if (this.Fake != null) this.Fake.Dispose();
-			}
-		}
-
-		private class Document
-		{
-			public object value { get; set; }
-		}
-
-
 		[Test]
 		[TestCase(505)]
 		[TestCase(10.2)]
 		[TestCase("hello world")]
-		public void Typed_Ok_DiscardResponse(object responseValue)
+		public async void Typed_Ok_DiscardResponse(object responseValue)
 		{
-			using (var request = new Requester<Document>(
+			using (var request = new AsyncRequester<StandardResponse>(
 				responseValue,
 				settings => settings.ExposeRawResponse(false),
 				(settings, stream) => FakeResponse.Ok(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeTrue();
 				object v = r.Response.value;
@@ -96,14 +38,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		[TestCase(505)]
 		[TestCase(10.2)]
 		[TestCase("hello world")]
-		public void Typed_Ok_KeepResponse(object responseValue)
+		public async void Typed_Ok_KeepResponse(object responseValue)
 		{
-			using (var request = new Requester<Document>(
+			using (var request = new AsyncRequester<StandardResponse>(
 				responseValue,
 				settings => settings.ExposeRawResponse(true),
 				(settings, stream) => FakeResponse.Ok(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeTrue();
 				object v = r.Response.value;
@@ -118,14 +61,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		[TestCase(505)]
 		[TestCase(10.2)]
 		[TestCase("hello world")]
-		public void Typed_Bad_DiscardResponse(object responseValue)
+		public async void Typed_Bad_DiscardResponse(object responseValue)
 		{
-			using (var request = new Requester<Document>(
+			using (var request = new AsyncRequester<StandardResponse>(
 				responseValue,
 				settings => settings.ExposeRawResponse(false),
 				(settings, stream) => FakeResponse.Bad(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeFalse();
 				Assert.IsNull(r.Response);
@@ -138,14 +82,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		[TestCase(505)]
 		[TestCase(10.2)]
 		[TestCase("hello world")]
-		public void Typed_Bad_KeepResponse(object responseValue)
+		public async void Typed_Bad_KeepResponse(object responseValue)
 		{
-			using (var request = new Requester<Document>(
+			using (var request = new AsyncRequester<StandardResponse>(
 				responseValue,
 				settings => settings.ExposeRawResponse(true),
 				(settings, stream) => FakeResponse.Bad(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeFalse();
 				Assert.IsNull(r.Response);
@@ -158,15 +103,16 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		[TestCase(505)]
 		[TestCase(10.2)]
 		[TestCase("hello world")]
-		public void DynamicDictionary_Ok_DiscardResponse(object responseValue)
+		public async void DynamicDictionary_Ok_DiscardResponse(object responseValue)
 		{
-			using (var request = new Requester<DynamicDictionary>(
+			using (var request = new AsyncRequester<DynamicDictionary>(
 				responseValue,
 				settings => settings.ExposeRawResponse(false),
 				(settings, stream) => FakeResponse.Ok(settings, response: stream),
-				client => client.Info()
+				client => client.InfoAsync()
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeTrue();
 				object v = r.Response["value"];
@@ -181,15 +127,16 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		[TestCase(505)]
 		[TestCase(10.2)]
 		[TestCase("hello world")]
-		public void DynamicDictionary_Ok_KeepResponse(object responseValue)
+		public async void DynamicDictionary_Ok_KeepResponse(object responseValue)
 		{
-			using (var request = new Requester<DynamicDictionary>(
+			using (var request = new AsyncRequester<DynamicDictionary>(
 				responseValue,
 				settings => settings.ExposeRawResponse(true),
 				(settings, stream) => FakeResponse.Ok(settings, response: stream),
-				client => client.Info()
+				client => client.InfoAsync()
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeTrue();
 				object v = r.Response["value"];
@@ -204,15 +151,16 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		[TestCase(505)]
 		[TestCase(10.2)]
 		[TestCase("hello world")]
-		public void DynamicDictionary_Bad_DiscardResponse(object responseValue)
+		public async Task DynamicDictionary_Bad_DiscardResponse(object responseValue)
 		{
-			using (var request = new Requester<DynamicDictionary>(
+			using (var request = new AsyncRequester<DynamicDictionary>(
 				responseValue,
 				settings => settings.ExposeRawResponse(false),
 				(settings, stream) => FakeResponse.Bad(settings, response: stream),
-				client => client.Info()
+				client => client.InfoAsync()
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeFalse();
 				Assert.IsNull(r.Response);
@@ -225,15 +173,16 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		[TestCase(505)]
 		[TestCase(10.2)]
 		[TestCase("hello world")]
-		public void DynamicDictionary_Bad_KeepResponse(object responseValue)
+		public async void DynamicDictionary_Bad_KeepResponse(object responseValue)
 		{
-			using (var request = new Requester<DynamicDictionary>(
+			using (var request = new AsyncRequester<DynamicDictionary>(
 				responseValue,
 				settings => settings.ExposeRawResponse(true),
 				(settings, stream) => FakeResponse.Bad(settings, response: stream),
-				client => client.Info()
+				client => client.InfoAsync()
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeFalse();
 				Assert.IsNull(r.Response);
@@ -243,14 +192,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 
 		[Test, TestCase(505123)]
-		public void ByteArray_Ok_DiscardResponse(object responseValue)
+		public async void ByteArray_Ok_DiscardResponse(object responseValue)
 		{
-			using (var request = new Requester<byte[]>(
+			using (var request = new AsyncRequester<byte[]>(
 				responseValue,
 				settings => settings.ExposeRawResponse(false),
 				(settings, stream) => FakeResponse.Ok(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeTrue();
 				r.Response.Should().NotBeNull().And.BeEquivalentTo(request.ResponseBytes);
@@ -260,14 +210,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 
 		[Test, TestCase(505123)]
-		public void ByteArray_Ok_KeepResponse(object responseValue)
+		public async void ByteArray_Ok_KeepResponse(object responseValue)
 		{
-			using (var request = new Requester<byte[]>(
+			using (var request = new AsyncRequester<byte[]>(
 				responseValue,
 				settings => settings.ExposeRawResponse(true),
 				(settings, stream) => FakeResponse.Ok(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeTrue();
 				r.Response.Should().NotBeNull().And.BeEquivalentTo(request.ResponseBytes);
@@ -278,14 +229,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 
 		[Test, TestCase(505123)]
-		public void ByteArray_Bad_DiscardResponse(object responseValue)
+		public async void ByteArray_Bad_DiscardResponse(object responseValue)
 		{
-			using (var request = new Requester<byte[]>(
+			using (var request = new AsyncRequester<byte[]>(
 				responseValue,
 				settings => settings.ExposeRawResponse(false),
 				(settings, stream) => FakeResponse.Bad(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeFalse();
 				r.Response.Should().NotBeNull().And.BeEquivalentTo(request.ResponseBytes);
@@ -295,14 +247,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 
 		[Test, TestCase(505123)]
-		public void ByteArray_Bad_KeepResponse(object responseValue)
+		public async void ByteArray_Bad_KeepResponse(object responseValue)
 		{
-			using (var request = new Requester<byte[]>(
+			using (var request = new AsyncRequester<byte[]>(
 				responseValue,
 				settings => settings.ExposeRawResponse(true),
 				(settings, stream) => FakeResponse.Bad(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeFalse();
 				r.Response.Should().NotBeNull().And.BeEquivalentTo(request.ResponseBytes);
@@ -311,14 +264,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 
 		[Test, TestCase(505123)]
-		public void String_Ok_DiscardResponse(object responseValue)
+		public async void String_Ok_DiscardResponse(object responseValue)
 		{
-			using (var request = new Requester<string>(
+			using (var request = new AsyncRequester<string>(
 				responseValue,
 				settings => settings.ExposeRawResponse(false),
 				(settings, stream) => FakeResponse.Ok(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeTrue();
 				Encoding.UTF8.GetBytes(r.Response).Should().NotBeNull().And.BeEquivalentTo(request.ResponseBytes);
@@ -328,14 +282,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 
 		[Test, TestCase(505123)]
-		public void String_Ok_KeepResponse(object responseValue)
+		public async void String_Ok_KeepResponse(object responseValue)
 		{
-			using (var request = new Requester<string>(
+			using (var request = new AsyncRequester<string>(
 				responseValue,
 				settings => settings.ExposeRawResponse(true),
 				(settings, stream) => FakeResponse.Ok(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeTrue();
 				Encoding.UTF8.GetBytes(r.Response).Should().NotBeNull().And.BeEquivalentTo(request.ResponseBytes);
@@ -346,14 +301,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 
 		[Test, TestCase(505123)]
-		public void String_Bad_DiscardResponse(object responseValue)
+		public async void String_Bad_DiscardResponse(object responseValue)
 		{
-			using (var request = new Requester<string>(
+			using (var request = new AsyncRequester<string>(
 				responseValue,
 				settings => settings.ExposeRawResponse(false),
 				(settings, stream) => FakeResponse.Bad(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeFalse();
 				Encoding.UTF8.GetBytes(r.Response).Should().NotBeNull().And.BeEquivalentTo(request.ResponseBytes);
@@ -363,14 +319,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 
 		[Test, TestCase(505123)]
-		public void String_Bad_KeepResponse(object responseValue)
+		public async void String_Bad_KeepResponse(object responseValue)
 		{
-			using (var request = new Requester<string>(
+			using (var request = new AsyncRequester<string>(
 				responseValue,
 				settings => settings.ExposeRawResponse(true),
 				(settings, stream) => FakeResponse.Bad(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeFalse();
 				Encoding.UTF8.GetBytes(r.Response).Should().NotBeNull().And.BeEquivalentTo(request.ResponseBytes);
@@ -379,14 +336,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 		
 		[Test, TestCase(505123)]
-		public void Stream_Ok_DiscardResponse(object responseValue)
+		public async void Stream_Ok_DiscardResponse(object responseValue)
 		{
-			using (var request = new Requester<Stream>(
+			using (var request = new AsyncRequester<Stream>(
 				responseValue,
 				settings => settings.ExposeRawResponse(false),
 				(settings, stream) => FakeResponse.Ok(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeTrue();
 				using (r.Response)
@@ -402,14 +360,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 
 		[Test, TestCase(505123)]
-		public void Stream_Ok_KeepResponse(object responseValue)
+		public async void Stream_Ok_KeepResponse(object responseValue)
 		{
-			using (var request = new Requester<Stream>(
+			using (var request = new AsyncRequester<Stream>(
 				responseValue,
 				settings => settings.ExposeRawResponse(true),
 				(settings, stream) => FakeResponse.Ok(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeTrue();
 				using (r.Response)
@@ -428,14 +387,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 
 		[Test, TestCase(505123)]
-		public void Stream_Bad_DiscardResponse(object responseValue)
+		public async void Stream_Bad_DiscardResponse(object responseValue)
 		{
-			using (var request = new Requester<Stream>(
+			using (var request = new AsyncRequester<Stream>(
 				responseValue,
 				settings => settings.ExposeRawResponse(false),
 				(settings, stream) => FakeResponse.Bad(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeFalse();
 				using (r.Response)
@@ -451,14 +411,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 
 		[Test, TestCase(505123)]
-		public void Stream_Bad_KeepResponse(object responseValue)
+		public async void Stream_Bad_KeepResponse(object responseValue)
 		{
-			using (var request = new Requester<Stream>(
+			using (var request = new AsyncRequester<Stream>(
 				responseValue,
 				settings => settings.ExposeRawResponse(true),
 				(settings, stream) => FakeResponse.Bad(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeFalse();
 				using (r.Response)
@@ -475,14 +436,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 		
 		[Test, TestCase(505123)]
-		public void VoidResponse_Ok_DiscardResponse(object responseValue)
+		public async void VoidResponse_Ok_DiscardResponse(object responseValue)
 		{
-			using (var request = new Requester<VoidResponse>(
+			using (var request = new AsyncRequester<VoidResponse>(
 				responseValue,
 				settings => settings.ExposeRawResponse(false),
 				(settings, stream) => FakeResponse.Ok(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeTrue();
 				//Response and rawresponse should ALWAYS be null for VoidResponse responses
@@ -493,14 +455,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 
 		[Test, TestCase(505123)]
-		public void VoidResponse_Ok_KeepResponse(object responseValue)
+		public async void VoidResponse_Ok_KeepResponse(object responseValue)
 		{
-			using (var request = new Requester<VoidResponse>(
+			using (var request = new AsyncRequester<VoidResponse>(
 				responseValue,
 				settings => settings.ExposeRawResponse(true),
 				(settings, stream) => FakeResponse.Ok(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeTrue();
 				//Response and rawresponse should ALWAYS be null for VoidResponse responses
@@ -512,14 +475,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 
 		[Test, TestCase(505123)]
-		public void VoidResponse_Bad_DiscardResponse(object responseValue)
+		public async void VoidResponse_Bad_DiscardResponse(object responseValue)
 		{
-			using (var request = new Requester<VoidResponse>(
+			using (var request = new AsyncRequester<VoidResponse>(
 				responseValue,
 				settings => settings.ExposeRawResponse(false),
 				(settings, stream) => FakeResponse.Bad(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeFalse();
 				//Response and rawresponse should ALWAYS be null for VoidResponse responses
@@ -529,14 +493,15 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 
 		[Test, TestCase(505123)]
-		public void VoidResponse_Bad_KeepResponse(object responseValue)
+		public async void VoidResponse_Bad_KeepResponse(object responseValue)
 		{
-			using (var request = new Requester<VoidResponse>(
+			using (var request = new AsyncRequester<VoidResponse>(
 				responseValue,
 				settings => settings.ExposeRawResponse(true),
 				(settings, stream) => FakeResponse.Bad(settings, response: stream)
 			))
 			{
+				await request.Init();
 				var r = request.Result;
 				r.Success.Should().BeFalse();
 				//Response and rawresponse should ALWAYS be null for VoidResponse responses

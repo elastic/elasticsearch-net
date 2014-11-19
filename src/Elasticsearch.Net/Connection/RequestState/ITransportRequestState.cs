@@ -5,7 +5,7 @@ using Elasticsearch.Net.Connection.Configuration;
 
 namespace Elasticsearch.Net.Connection.RequestState
 {
-	internal interface ITransportRequestState
+	public interface ITransportRequestState
 	{
 		IRequestTimings InitiateRequest(RequestType requestType);
 		Uri CreatePathOnCurrentNode(string path);

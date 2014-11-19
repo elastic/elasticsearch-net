@@ -9,10 +9,10 @@ using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Elasticsearch.Net.Tests.Unit.Connection
+namespace Elasticsearch.Net.Tests.Unit.Failover.Retries
 {
 	[TestFixture]
-	public class NoRetryOnServerExceptionTests
+	public class ServerExceptionRetryHandlingTests
 	{
 		private MemoryStream CreateServerExceptionResponse(int status, string exceptionType, string exceptionMessage)
 		{

@@ -75,11 +75,16 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 			return u=>u.AbsolutePath == "/" || u.AbsolutePath == "";
 		}
 
-		public static ITransport ProvideDefaultTransport(AutoFake fake, IDateTimeProvider dateTimeProvider = null)
+		public static ITransport ProvideDefaultTransport(
+			AutoFake fake,
+			IDateTimeProvider dateTimeProvider = null,
+			IMemoryStreamProvider memoryStreamProvider = null
+		)
 		{
-			var param = new TypedParameter(typeof(IDateTimeProvider), dateTimeProvider);
+			var dateTimeParam = new TypedParameter(typeof(IDateTimeProvider), dateTimeProvider);
+			var memoryStreamParam = new TypedParameter(typeof(IMemoryStreamProvider), memoryStreamProvider);
 			var serializerParam = new TypedParameter(typeof(IElasticsearchSerializer), null);
-			return fake.Provide<ITransport, Transport>(param, serializerParam);
+			return fake.Provide<ITransport, Transport>(dateTimeParam, serializerParam, memoryStreamParam);
 		}
 
 		private static readonly string SniffFormat = @" {{ ""cluster_name"" : ""insert_marvel_character"", ""nodes"" : {{ {0} }} }}";
@@ -93,5 +98,16 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 
 		}
 
+		public static ITransport ProvideRealTranportInstance(AutoFake fake, IDateTimeProvider dateTimeProvider = null)
+		{
+			var connection = fake.Resolve<IConnection>();
+			var config = fake.Resolve<IConnectionConfigurationValues>();
+			var param = new TypedParameter(typeof(IDateTimeProvider), dateTimeProvider);
+			var serializerParam = new TypedParameter(typeof(IElasticsearchSerializer), null);
+			return new Transport(
+				config, connection, 
+				serializerParam.Value as IElasticsearchSerializer, 
+				param.Value as IDateTimeProvider);
+		}
 	}
 }

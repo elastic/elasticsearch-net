@@ -83,7 +83,10 @@ namespace Nest
 
 		private PingResponse DeserializePingResponse(IElasticsearchResponse response, Stream stream)
 		{
-			return new PingResponse(response);
+			return new PingResponse
+			{
+				IsValid = response.Success && response.HttpStatusCode == 200
+			};
 		}
 	}
 }

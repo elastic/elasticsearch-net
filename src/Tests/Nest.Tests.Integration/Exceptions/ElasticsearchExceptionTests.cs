@@ -116,12 +116,10 @@ namespace Nest.Tests.Integration.Exceptions
 			var connectionPool = new StaticConnectionPool(uris);
 			var client = new ElasticClient(new ConnectionSettings(connectionPool)
 				.SetTimeout(1000)
+				.MaximumRetries(1)
 			);
-			var e = Assert.Throws<MaxRetryException>(() =>
-			{
-				var result = client.Search<ElasticsearchProject>(s => s.MatchAll());
-				result.IsValid.Should().BeFalse();
-			});
+
+			var e = Assert.Throws<MaxRetryException>(() => client.Search<ElasticsearchProject>(s => s.MatchAll()));
 			e.Should().NotBeNull();
 			Assert.Pass(e.ToString());
 		}

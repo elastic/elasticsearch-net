@@ -17,7 +17,6 @@ using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Serialization;
 
-
 namespace Elasticsearch.Net
 {
 	//TODO document and possibly rename some of the properties
@@ -201,7 +200,7 @@ namespace Elasticsearch.Net
 		{
 			var r = this;
 			var e = r.OriginalException;
-			string response = "<Response stream not captured or already read to completion by serializer>";
+			string response = "<Response stream not captured or already read to completion by serializer, set ExposeRawResponse() on connectionsettings to force it to be set on>";
 			if (typeof(T) == typeof(string))
 				response = this.Response as string;
 			else if (this.Settings.KeepRawResponse)
