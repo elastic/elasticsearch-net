@@ -60,7 +60,8 @@ namespace Nest.Tests.MockData
 						.Setup(c => c.Followers).Value(new List<Person>())
 						.Setup(c => c.Contributors).Value(new List<Person>())
 						.Setup(c => c.StartedOn).Use<DateOfBirthSource>()
-						.Setup(c => c.Content).Use<ElasticsearchProjectDescriptionSource>();
+						.Setup(c => c.Content).Use<ElasticsearchProjectDescriptionSource>()
+                        .Setup(c => c.GenericTuple).Use<TupleDataSource>();
 				});
 				_Session = factory.CreateSession();
 				return _Session;

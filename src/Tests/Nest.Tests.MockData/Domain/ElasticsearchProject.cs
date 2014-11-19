@@ -57,5 +57,7 @@ namespace Nest.Tests.MockData.Domain
         public string[] MyStringArrayField { get; set; }
 
 		public string Suggest { get; set; }
+
+        public Tuple<int, int> GenericTuple { get; set; }
 	}
 }

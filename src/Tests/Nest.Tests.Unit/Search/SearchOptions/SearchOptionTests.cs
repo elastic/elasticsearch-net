@@ -203,7 +203,8 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 			""myBinaryField"",
 			""product"",
             ""myStringArrayField"",
-			""suggest""
+			""suggest"",
+            ""genericTuple""
 		  ]
 		}";
 		  Assert.True(json.JsonEquals(expected));
