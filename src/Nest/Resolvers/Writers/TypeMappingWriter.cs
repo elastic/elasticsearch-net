@@ -284,7 +284,7 @@ namespace Nest.Resolvers.Writers
 			if (type.IsArray)
 				return type.GetElementType();
 
-            if (type.IsGenericType && type.GetGenericArguments().Length >= 1 && (type.GetInterface("IEnumerable") != null || Nullable.GetUnderlyingType(type) != null))
+            if (type.IsGenericType && type.GetGenericArguments().Length == 1 && (type.GetInterface("IEnumerable") != null || Nullable.GetUnderlyingType(type) != null))
 				return type.GetGenericArguments()[0];
 
 			return type;
