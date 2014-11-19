@@ -8,12 +8,13 @@ using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
 using Elasticsearch.Net.Serialization;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Connection.Configuration;
 
 namespace Elasticsearch.Net.Connection.RequestHandlers
 {
 	internal class RequestHandlerBase
 	{
-		protected const int BUFFER_SIZE = 4096;
+		protected const int BufferSize = 4096;
 		protected static readonly string MaxRetryExceptionMessage = "Failed after retrying {2} times: '{0} {1}'. {3}";
 		protected static readonly string MaxRetryInnerMessage = "InnerException: {0}, InnerMessage: {1}, InnerStackTrace: {2}";
 
@@ -26,7 +27,8 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 		protected readonly bool _throwMaxRetry;
 
-		protected RequestHandlerBase(IConnectionConfigurationValues settings,
+		protected RequestHandlerBase(
+			IConnectionConfigurationValues settings,
 			IConnection connection,
 			IConnectionPool connectionPool,
 			IElasticsearchSerializer serializer,
@@ -65,12 +67,16 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 		protected static bool IsValidResponse(ITransportRequestState requestState, IElasticsearchResponse streamResponse)
 		{
-			return streamResponse.Success ||
-			       (!streamResponse.Success
-			        && requestState.RequestConfiguration != null
-			        && requestState.RequestConfiguration.AllowedStatusCodes.HasAny(i => i == streamResponse.HttpStatusCode)
-				       );
+			return streamResponse.Success 
+				|| StatusCodeAllowed(requestState.RequestConfiguration, streamResponse.HttpStatusCode);
+		}
 
+		protected static bool StatusCodeAllowed(IRequestConfiguration requestConfiguration, int? statusCode)
+		{
+			if (requestConfiguration == null)
+				return false;
+
+			return requestConfiguration.AllowedStatusCodes.HasAny(i => i == statusCode);
 		}
 
 		protected bool TypeOfResponseCopiesDirectly<T>()
@@ -96,8 +102,8 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 		}
 
 		/// <summary>
-		/// Determines wheter the stream response is our final stream response:
-		/// if response is success or known error
+		/// Determines whether the stream response is our final stream response:
+		/// IF response is success or known error
 		/// OR maxRetries is 0 and retried is 0 (maxRetries could change in between retries to 0)
 		/// AND sniff on connection fault does not find more nodes (causing maxRetry to grow)
 		/// AND maxretries is no retried
@@ -136,7 +142,6 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				var aggregate = e as AggregateException;
 				if (aggregate != null)
 				{
-
 					aggregate = aggregate.Flatten();
 					var innerExceptions = aggregate.InnerExceptions
 						.Select(ae => MaxRetryInnerMessage.F(ae.GetType().Name, ae.Message, ae.StackTrace))
@@ -166,6 +171,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				if (typedResponse.OriginalException == null)
 					typedResponse.OriginalException = new ElasticsearchServerException(error);
 			}
+
 			//TODO UNIT TEST OR BEGONE
 			if (!typedResponse.Success
 			    && requestState.RequestConfiguration != null

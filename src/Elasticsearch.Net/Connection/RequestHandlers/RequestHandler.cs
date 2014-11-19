@@ -38,19 +38,19 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 		private ElasticsearchResponse<T> SelectNextNode<T>(TransportRequestState<T> requestState)
 		{
-			//select the next node to hit and signal wheter the selected node needs a ping
+			// Select the next node to hit and signal whether the selected node needs a ping
 			var nodeRequiresPinging = this._delegator.SelectNextNode(requestState);
 			if (!nodeRequiresPinging) return null;
 
 			var pingSuccess = this._delegator.Ping(requestState);
-			//if ping is not succesful retry request on the next node the connection pool selects
+			// If ping is not successful retry request on the next node the connection pool selects
 			return !pingSuccess ? RetryRequest<T>(requestState) : null;
 		}
 
 		private ElasticsearchResponse<Stream> DoElasticsearchCall<T>(TransportRequestState<T> requestState)
 		{
-			//do the actual request by calling into IConnection
-			//we wrap it in a IRequestTimings to audit the request.
+			// Do the actual request by calling into IConnection
+			// We wrap it in a IRequestTimings to audit the request
 			ElasticsearchResponse<Stream> streamResponse;
 			using (var requestAudit = requestState.InitiateRequest(RequestType.ElasticsearchCall))
 			{
@@ -63,17 +63,18 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 		private ElasticsearchResponse<T> ReturnStreamOrVoidResponse<T>(
 			TransportRequestState<T> requestState, ElasticsearchResponse<Stream> streamResponse)
 		{
-			//if the response never recieved a status code and has a caught exception make sure we throw it
+			// If the response never recieved a status code and has a caught exception make sure we throw it
 			if (streamResponse.HttpStatusCode.GetValueOrDefault(-1) <= 0 && streamResponse.OriginalException != null)
 				throw streamResponse.OriginalException;
 
-			//if the user explicitly wants a stream returned the undisposed stream
+			// If the user explicitly wants a stream returned the undisposed stream
 			if (typeof(Stream).IsAssignableFrom(typeof(T)))
 				return streamResponse as ElasticsearchResponse<T>;
 
 			if (!typeof(VoidResponse).IsAssignableFrom(typeof(T))) return null;
 
 			var voidResponse = ElasticsearchResponse.CloneFrom<VoidResponse>(streamResponse, null);
+
 			return voidResponse as ElasticsearchResponse<T>;
 		}
 
@@ -83,7 +84,8 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			out ElasticsearchServerError error)
 		{
 			error = null;
-			//read to ms if needed
+			
+			// Read to memory stream if needed
 			var hasResponse = streamResponse.Response != null;
 			var forceRead = this._settings.KeepRawResponse || typeof(T) == typeof(string) || typeof(T) == typeof(byte[]);
 			byte[] bytes = null;
@@ -96,14 +98,14 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				streamResponse.Response = ms;
 				streamResponse.Response.Position = 0;
 			}
-			//set rawresponse if needed
+			// Set rawresponse if needed
 			if (this._settings.KeepRawResponse) streamResponse.ResponseRaw = bytes;
 
 			var isValidResponse = IsValidResponse(requestState, streamResponse);
 			if (isValidResponse) 
 				return this.StreamToTypedResponse<T>(streamResponse, requestState, bytes);
 
-			//if error read error 
+			// If error read error 
 			error = GetErrorFromStream<T>(streamResponse.Response);
 			var typedResponse = ElasticsearchResponse.CloneFrom<T>(streamResponse, default(T));
 			this.SetStringOrByteResult(typedResponse, bytes);
@@ -137,9 +139,10 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			var sniffAuthResponse = this.TrySniffOnStaleClusterState(requestState);
 			if (sniffAuthResponse != null) return sniffAuthResponse;
 
-			bool aliveResponse = false, seenError = false;
-			int retried = requestState.Retried,
-				maxRetries = this._delegator.GetMaximumRetries(requestState.RequestConfiguration);
+			bool aliveResponse = false;
+			bool seenError = false;
+			int retried = requestState.Retried;
+			int maxRetries = this._delegator.GetMaximumRetries(requestState.RequestConfiguration);
 
 			try
 			{

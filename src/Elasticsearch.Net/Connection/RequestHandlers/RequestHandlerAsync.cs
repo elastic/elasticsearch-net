@@ -33,12 +33,12 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 		public Task<ElasticsearchResponse<T>> RequestAsync<T>(TransportRequestState<T> requestState, object data = null)
 		{
-			//serialize request and inform requeststate so it can keep track of serialization times
+			// Serialize request and inform requestState so it can keep track of serialization times
 			var bytes = PostData(data);
 			requestState.TickSerialization(bytes);
 
 			return this.DoRequestAsync<T>(requestState)
-				//When the request returns again inform the request state so it can do its bookkeeping
+				// When the request returns again inform the request state so it can do its bookkeeping
 				.ContinueWith(t => this.SetResultOnRequestState(t, requestState))
 				.Unwrap();
 		}
@@ -48,34 +48,33 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			var sniffAuthResponse = this.TrySniffOnStaleClusterState(requestState);
 			if (sniffAuthResponse != null) return this.ReturnCompletedTaskFor(sniffAuthResponse);
 
-			//select the next node to hit and signal wheter the selected node needs a ping
+			// Select the next node to hit and signal wheter the selected node needs a ping
 			var uriRequiresPing = this._delegator.SelectNextNode(requestState);
 			if (uriRequiresPing)
 			{
-				//first branch into a ping call and then handle the ping response
+				// First branch into a ping call and then handle the ping response
 				return this._delegator.PingAsync(requestState)
-					//handle ping response will do the actual call if the ping is valid
+					// Handle ping response will do the actual call if the ping is valid
 					.ContinueWith(t => this.HandlePingResponse(t, requestState))
 					.Unwrap();
 			}
-			//perform call and retry if necessary
+			// Perform call and retry if necessary
 			return FinishOrRetryRequestAsync(requestState);
 		}
 		
 		private Task<ElasticsearchResponse<T>> HandlePingResponse<T>(Task<bool> t, TransportRequestState<T> requestState)
 		{
-			//If ping is not faulted and completed do the actual call
+			// If ping is not faulted and completed do the actual call
 			if (!t.IsFaulted) return t.IsCompleted ? this.FinishOrRetryRequestAsync(requestState) : null;
 			
-			//ping resulted in an exception 
-			
+			// Ping resulted in an exception 
 			if (t.Exception == null)
 				return this.RetryRequestAsync(requestState);
 
-			//keep track of the exception we just saw, t.Exception is a flattened AggregateException
+			// Keep track of the exception we just saw, t.Exception is a flattened AggregateException
 			requestState.SeenExceptions.Add(t.Exception.InnerException);
 			
-			//if the ping exception was that of an unauthorized exception, 
+			// If the ping exception was that of an unauthorized exception, 
 			var authenticationException = t.Exception.InnerException as ElasticsearchAuthenticationException;
 			if (authenticationException != null)
 			{
@@ -83,10 +82,8 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				this.SetAuthenticationExceptionOnRequestState(requestState, authenticationException, tcs);
 				return tcs.Task;
 			}
-			else
-			{
-				return this.RetryRequestAsync(requestState);
-			}
+
+			return this.RetryRequestAsync(requestState);
 		}
 
 		private Task<ElasticsearchResponse<T>> FinishOrRetryRequestAsync<T>(TransportRequestState<T> requestState)
@@ -106,7 +103,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 		private Task<ReadResponse<T>> ReturnTypedResponse<T>(ElasticsearchResponse<Stream> streamResponse, TransportRequestState<T> requestState)
 		{
-			//read to ms if needed
+			// Read to memory stream if needed
 			Task<Stream> getStream = null;
 			var response = new ReadResponse<T>();
 			var hasResponse = streamResponse.Response != null;
@@ -123,7 +120,11 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 						return streamReadTask.Result as Stream;
 					});
 			}
-			else getStream = this.ReturnCompletedTaskFor(streamResponse.Response);
+			else
+			{
+				getStream = this.ReturnCompletedTaskFor(streamResponse.Response);
+			}
+
 			return getStream.ContinueWith(delegate(Task<Stream> gotStream)
 			{
 				var isValidResponse = IsValidResponse(requestState, streamResponse);
@@ -142,7 +143,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 					response.Response = typedResponse;
 					return this.ReturnCompletedTaskFor(response);
 				}
-				return this._deserializeAsyncToResponse<T>(gotStream.Result, requestState, typedResponse, response);
+				return this.DeserializeAsyncToResponse<T>(gotStream.Result, requestState, typedResponse, response);
 			}).Unwrap();
 		}
 
@@ -181,28 +182,27 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			requestState.SetResult(result);
 		}
 
-
 		private Task<ElasticsearchResponse<T>> HandleStreamResponse<T>(Task<ElasticsearchResponse<Stream>> t, IRequestTimings rq, TransportRequestState<T> requestState)
 		{
 			var streamResponse = t.Result;
-			//audit the call into connection straight away
+			// Audit the call into connection straight away
 			rq.Finish(streamResponse != null && streamResponse.Success, streamResponse == null ? -1 : streamResponse.HttpStatusCode);
 			rq.Dispose();
 
-			//figure out the maximum number of retries, this might 
+			// Figure out the maximum number of retries, this might 
 			var maxRetries = this._delegator.GetMaximumRetries(requestState.RequestConfiguration);
 
 			var retried = requestState.Retried;
 
-			//if havent recieved a successful response and we are not yet done processing the stream attempt a retry
+			// If we haven't recieved a successful response and we are not yet done processing the stream attempt a retry
 			if (t.Status != TaskStatus.RanToCompletion || !this.DoneProcessing(streamResponse, requestState, maxRetries, retried))
 				return this.RetryRequestAsync<T>(requestState);
 
-			//if the response never recieved a status code and has a caught exception make sure we throw it
+			// If the response never recieved a status code and has a caught exception make sure we throw it
 			if (streamResponse.HttpStatusCode.GetValueOrDefault(-1) <= 0 && streamResponse.OriginalException != null)
 				throw streamResponse.OriginalException;
 
-			//if the user explicitly wants a stream return the undisposed stream
+			// If the user explicitly wants a stream return the undisposed stream
 			if (typeof(Stream).IsAssignableFrom(typeof(T)))
 				return this.ReturnResponseAsTask<T>(streamResponse);
 
@@ -307,7 +307,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			return tcs.Task;
 		}
 
-		private Task<ReadResponse<T>> _deserializeAsyncToResponse<T>(
+		private Task<ReadResponse<T>> DeserializeAsyncToResponse<T>(
 			Stream response, 
 			ITransportRequestState requestState, 
 			ElasticsearchResponse<T> typedResponse, 
@@ -338,12 +338,12 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 		private IEnumerable<Task<MemoryStream>> ReadStreamAsync(Stream responseStream, MemoryStream memoryStream)
 		{
-			var buffer = new byte[BUFFER_SIZE];
+			var buffer = new byte[BufferSize];
 			try
 			{
 				while (responseStream != null)
 				{
-					var read = Task<int>.Factory.FromAsync(responseStream.BeginRead, responseStream.EndRead, buffer, 0, BUFFER_SIZE, null);
+					var read = Task<int>.Factory.FromAsync(responseStream.BeginRead, responseStream.EndRead, buffer, 0, BufferSize, null);
 					yield return read.ContinueWith(t => memoryStream);
 					if (read.Result == 0) break;
 					memoryStream.Write(buffer, 0, read.Result);
@@ -355,6 +355,5 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 					responseStream.Dispose();
 			}
 		}
-
 	}
 }
