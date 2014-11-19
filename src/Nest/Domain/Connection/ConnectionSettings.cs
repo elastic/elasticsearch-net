@@ -221,15 +221,15 @@ namespace Nest
 					throw new ArgumentException("Expression {0} does contain any member access".F(e));
 
 				var memberInfo = memberInfoResolver.Members.Last();
+				if (_propertyNames.ContainsKey(memberInfo))
+				{
+					var mappedAs = _propertyNames[memberInfo];
+					var typeName = typeof (TDocument).Name;
+					throw new ArgumentException("Property mapping '{0}' on type {3} can not be mapped to '{1}' already mapped as '{2}'"
+						.F(e, p.Value, mappedAs, typeName));
+				}
 				_propertyNames.Add(memberInfo, p.Value);
 
-				//Type paramType = e.Parameters[0].Type;  // first parameter of expression
-				//var memberExpression = e.Body as MemberExpression;
-				//if (memberExpression == null)
-					//continue;
-				//var memberInfo = paramType.GetMember(memberExpression.Member.Name);
-				//if (memberInfo.Length <= 0) 
-				//_propertyNames.Add(memberInfo[0], p.Value);
 			}
 			return (T) this;
 		}

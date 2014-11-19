@@ -112,6 +112,40 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			);
 			e.Message.Should().Contain("can only map direct properties");
 		}
+
+		[Test]
+		public void CanNotMapSamePropertyTwice()
+		{
+			var e = Assert.Throws<ArgumentException>(()=>
+				this.ClientWithPropertiesFor<MyCustomClass>(props => props
+					.Add(p=>p.MyProperty, "mahPropertah")
+					.Add(p=>p.MyProperty, "mahPropertah2")
+				)
+			);
+			e.Message.Should()
+				.Contain("on type MyCustomClass")
+				.And.Contain("can not be mapped to 'mahPropertah2'")
+				.And.Contain("already mapped as 'mahPropertah'");
+		}
+
+		[Test]
+		public void CanNotMapSamePropertyTwice_SubClasses()
+		{
+			var e = Assert.Throws<ArgumentException>(()=>
+				this.ConfigureClient(c=>c
+					.MapPropertyNamesFor<B>(props => props
+						.Add(p=>p.X, "bX")
+					)
+					.MapPropertyNamesFor<C>(props => props
+						.Add(p=>p.X, "cX")
+					)
+				)
+			);
+			e.Message.Should()
+				.Contain("on type C")
+				.And.Contain("can not be mapped to 'cX'")
+				.And.Contain("already mapped as 'bX'");
+		}
 		
 		[Test]
 		public void ResolverShouldResolveAllNestedMembers()
