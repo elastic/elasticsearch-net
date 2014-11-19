@@ -300,7 +300,13 @@ namespace Nest.Resolvers.Converters.Aggregations
 				bucket.DocCountErrorUpperBound = reader.Value as long?;
 				reader.Read();
 			}
-
+			property = reader.Value as string;
+			if (property == "sum_other_doc_count")
+			{
+				reader.Read();
+				bucket.SumOtherDocCount = reader.Value as long?;
+				reader.Read();
+			}
 			var aggregations = new List<IAggregation>();
 			reader.Read();
 			if (reader.TokenType != JsonToken.StartArray)
