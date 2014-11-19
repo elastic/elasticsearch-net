@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace Elasticsearch.Net.Tests.Unit.Exceptions
 {
 	[TestFixture]
-	public class ElasticsearchServerExceptions
+	public class ThrownElasticsearchServerExceptions
 	{
 		private MemoryStream CreateServerExceptionResponse(int status, string exceptionType, string exceptionMessage)
 		{
@@ -29,8 +29,7 @@ namespace Elasticsearch.Net.Tests.Unit.Exceptions
 			var response = CreateServerExceptionResponse(status, exceptionType, exceptionMessage);
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
-				var result = this.Call(status, exceptionType, exceptionMessage, fake, response);
-				result.ResponseRaw.Should().BeNull();
+				this.Call(status, exceptionType, exceptionMessage, fake, response);
 			}
 		}
 
@@ -42,40 +41,38 @@ namespace Elasticsearch.Net.Tests.Unit.Exceptions
 			var response = CreateServerExceptionResponse(status, exceptionType, exceptionMessage);
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
-				var result = this.Call(status, exceptionType, exceptionMessage, fake, response, exposeRawResponse: true);
-				result.ResponseRaw.Should().NotBeNull();
+				this.Call(status, exceptionType, exceptionMessage, fake, response, exposeRawResponse: true);
 			}
 		}
 
 		[Test]
 		[TestCase(505, "SomeException", "Some Error Message")]
 		[TestCase(505, "", "")]
-		public async void ServerExceptionIsCaught_DiscardResponse_Async(int status, string exceptionType, string exceptionMessage)
+		public void ServerExceptionIsCaught_DiscardResponse_Async(int status, string exceptionType, string exceptionMessage)
 		{
 			var response = CreateServerExceptionResponse(status, exceptionType, exceptionMessage);
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
-				var result = await this.CallAsync(status, exceptionType, exceptionMessage, fake, response);
-				result.ResponseRaw.Should().BeNull();
+				this.CallAsync(status, exceptionType, exceptionMessage, fake, response);
 			}
 		}
 
 		[Test]
 		[TestCase(505, "SomeException", "Some Error Message")]
 		[TestCase(505, "", "")]
-		public async void ServerExceptionIsCaught_KeepResponse_Async(int status, string exceptionType, string exceptionMessage)
+		public void ServerExceptionIsCaught_KeepResponse_Async(int status, string exceptionType, string exceptionMessage)
 		{
 			var response = CreateServerExceptionResponse(status, exceptionType, exceptionMessage);
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
-				var result = await this.CallAsync(status, exceptionType, exceptionMessage, fake, response, exposeRawResponse: true);
-				result.ResponseRaw.Should().NotBeNull();
+				this.CallAsync(status, exceptionType, exceptionMessage, fake, response, exposeRawResponse: true);
 			}
 		}
 
-		private ElasticsearchResponse<DynamicDictionary> Call(int status, string exceptionType, string exceptionMessage, AutoFake fake, MemoryStream response, bool exposeRawResponse = false)
+		private void Call(int status, string exceptionType, string exceptionMessage, AutoFake fake, MemoryStream response, bool exposeRawResponse = false)
 		{
 			var connectionConfiguration = new ConnectionConfiguration()
+				.ThrowOnElasticsearchServerExceptions()
 				.ExposeRawResponse(exposeRawResponse);
 
 			fake.Provide<IConnectionConfigurationValues>(connectionConfiguration);
@@ -85,17 +82,16 @@ namespace Elasticsearch.Net.Tests.Unit.Exceptions
 			getCall.Returns(FakeResponse.Bad(connectionConfiguration, response: response));
 
 			var client = fake.Resolve<ElasticsearchClient>();
-
-			var result = client.Info();
-			result.Success.Should().BeFalse();
-			AssertServerErrorsOnResponse(result, status, exceptionType, exceptionMessage);
+			
+			var e = Assert.Throws<ElasticsearchServerException>(()=>client.Info());
+			AssertServerErrorsException(e, status, exceptionType, exceptionMessage);
 			getCall.MustHaveHappened(Repeated.Exactly.Once);
-			return result;
 		}
 
-		private async Task<ElasticsearchResponse<DynamicDictionary>> CallAsync(int status, string exceptionType, string exceptionMessage, AutoFake fake, MemoryStream response, bool exposeRawResponse = false)
+		private void CallAsync(int status, string exceptionType, string exceptionMessage, AutoFake fake, MemoryStream response, bool exposeRawResponse = false)
 		{
 			var connectionConfiguration = new ConnectionConfiguration()
+				.ThrowOnElasticsearchServerExceptions()
 				.ExposeRawResponse(exposeRawResponse);
 
 			fake.Provide<IConnectionConfigurationValues>(connectionConfiguration);
@@ -106,27 +102,17 @@ namespace Elasticsearch.Net.Tests.Unit.Exceptions
 
 			var client = fake.Resolve<ElasticsearchClient>();
 
-			var result = await client.InfoAsync();
-			result.Success.Should().BeFalse();
-			AssertServerErrorsOnResponse(result, status, exceptionType, exceptionMessage);
+			var e = Assert.Throws<ElasticsearchServerException>(async ()=>await client.InfoAsync());
+			AssertServerErrorsException(e, status, exceptionType, exceptionMessage);
 			getCall.MustHaveHappened(Repeated.Exactly.Once);
-			return result;
 		}
 
-		private static void AssertServerErrorsOnResponse(
-			ElasticsearchResponse<DynamicDictionary> result, int status, string exceptionType, string exceptionMessage)
+		private static void AssertServerErrorsException(ElasticsearchServerException serverException, int status, string exceptionType, string exceptionMessage)
 		{
-			var serverException = result.OriginalException as ElasticsearchServerException;
 			serverException.Should().NotBeNull();
 			serverException.ExceptionType.Should().Be(exceptionType);
 			serverException.Message.Should().Be(exceptionMessage);
 			serverException.Status.Should().Be(status);
-
-			var serverError = result.ServerError;
-			serverError.Should().NotBeNull();
-			serverError.ExceptionType.Should().Be(exceptionType);
-			serverError.Error.Should().Be(exceptionMessage);
-			serverError.Status.Should().Be(status);
 
 		}
 	}

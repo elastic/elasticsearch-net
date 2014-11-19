@@ -1,6 +1,5 @@
 using System.IO;
 using System.Text;
-using Elasticsearch.Net.Tests.Unit.Connection;
 using Elasticsearch.Net.Tests.Unit.Responses.Helpers;
 using Elasticsearch.Net.Tests.Unit.Stubs;
 using FluentAssertions;

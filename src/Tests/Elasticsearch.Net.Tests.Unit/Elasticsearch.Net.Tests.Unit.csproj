@@ -59,27 +59,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\ExceptionsBubbleTests.cs" />
+    <Compile Include="Failover\Concurrent\ConcurrencyTestConnection.cs" />
+    <Compile Include="Failover\Retries\ClientExceptionRetryHandlingTests.cs" />
+    <Compile Include="Memory\Helpers\AsyncMemorySetup.cs" />
+    <Compile Include="Memory\Helpers\IMemorySetup.cs" />
     <Compile Include="Memory\ResponseAsyncCodePathsMemoryTests.cs" />
     <Compile Include="Memory\ResponseCodePathsMemoryTests.cs" />
     <Compile Include="Memory\ResponseCodePathsMemoryTestsBase.cs" />
-    <Compile Include="Memory\TrackableMemoryStream.cs" />
-    <Compile Include="Requesters\MemorySetup.cs" />
-    <Compile Include="Requesters\StandardResponse.cs" />
-    <Compile Include="Requesters\Requester.cs" />
-    <Compile Include="Requesters\AsyncRequester.cs" />
-    <Compile Include="Connection\BuildInResponseAsyncTests.cs" />
-    <Compile Include="Connection\BuildInResponseTests.cs" />
-    <Compile Include="Connection\NoRetryOnServerExceptionTests.cs" />
-    <Compile Include="Connection\ElasticsearchServerExceptions.cs" />
-    <Compile Include="Connection\NoRetryTests.cs" />
-    <Compile Include="Connection\SingleNodeConnectionPoolTests.cs" />
+    <Compile Include="Memory\Helpers\TrackableMemoryStream.cs" />
+    <Compile Include="Memory\Helpers\MemorySetup.cs" />
+    <Compile Include="Responses\Helpers\StandardResponse.cs" />
+    <Compile Include="Responses\Helpers\Requester.cs" />
+    <Compile Include="Responses\Helpers\AsyncRequester.cs" />
+    <Compile Include="Responses\BuildInResponseAsyncTests.cs" />
+    <Compile Include="Responses\BuildInResponseTests.cs" />
+    <Compile Include="Failover\Retries\ServerExceptionRetryHandlingTests.cs" />
+    <Compile Include="Exceptions\ElasticsearchServerExceptions.cs" />
+    <Compile Include="Failover\Retries\MaximumRetriesRetryHandlingTests.cs" />
+    <Compile Include="ConnectionPools\SingleNodeConnectionPoolTests.cs" />
     <Compile Include="Stubs\FakeCalls.cs" />
     <Compile Include="Stubs\FakeResponse.cs" />
-    <Compile Include="Connection\SkipDeadNodesTests.cs" />
-    <Compile Include="Connection\SniffingConnectionPoolTests.cs" />
-    <Compile Include="Connection\ConcurrencyTests.cs" />
-    <Compile Include="Connection\StaticConnectionPoolTests.cs" />
-    <Compile Include="Connection\RetryTests.cs" />
+    <Compile Include="Failover\Revival\RevivalTests.cs" />
+    <Compile Include="ConnectionPools\SniffingConnectionPoolTests.cs" />
+    <Compile Include="Failover\Concurrent\ConcurrencyTests.cs" />
+    <Compile Include="ConnectionPools\StaticConnectionPoolTests.cs" />
+    <Compile Include="Failover\Retries\StatusCodeRetryHandlingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stubs\NoopConnection.cs" />
   </ItemGroup>
@@ -92,6 +97,9 @@
       <Project>{e97ccf40-0ba6-43fe-9f2d-58d454134088}</Project>
       <Name>Elasticsearch.Net</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Exceptions\ChaosMonkey\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
