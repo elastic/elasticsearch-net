@@ -9,7 +9,7 @@ using Elasticsearch.Net.Connection;
 
 namespace Elasticsearch.Net
 {
-	internal static class TypeExtensions
+	internal static class ElasticsearchTypeExtensions
 	{
 		private static MethodInfo GetActivatorMethodInfo = typeof(TypeExtensions).GetMethod("GetActivator", BindingFlags.Static | BindingFlags.NonPublic);
 
@@ -48,6 +48,11 @@ namespace Elasticsearch.Net
 				_cachedActivators.TryAdd(key, activator);
 			}
 			return activator(args);
+		}
+
+		public static bool IsValueType(this Type type)
+		{
+			return type.GetTypeInfo().IsValueType;
 		}
 
 		private static ObjectActivator<T> GetActivator<T>(ConstructorInfo ctor)

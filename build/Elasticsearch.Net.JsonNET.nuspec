@@ -14,6 +14,7 @@
     <description>This package is only useful if you use the low level client ONLY and do not use NEST but would like to use JSON.NET as your serializer</description>
     <dependencies>
       <dependency id="Elasticsearch.Net" version="1.2.1"/>
+      <dependency id="Newtonsoft.Json" version="6.0.6" />
     </dependencies>
     <tags>elasticsearch elastic search lucene thrift nest</tags>
   </metadata>

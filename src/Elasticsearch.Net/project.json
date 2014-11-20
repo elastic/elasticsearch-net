@@ -1,0 +1,34 @@
+﻿{
+	"dependencies": {
+	},
+	"frameworks": {
+		"aspnetcore50": {
+			"dependencies": {
+				"System.Runtime": "4.0.20-beta-22231",
+				"System.Runtime.Extensions": "4.0.10-beta-22231",
+				"System.Runtime.Handles": "4.0.0-beta-22231",
+				"System.Reflection": "4.0.10-beta-22231",
+				"System.Reflection.Extensions": "4.0.0-beta-22231",
+				"System.Reflection.TypeExtensions": "4.0.0-beta-22231",
+				"System.Reflection.MetaData": "1.0.17-beta",
+				"System.Reflection.Primitives": "4.0.0-beta-22231",
+				"System.Collections.Specialized": "4.0.0-beta-22231",
+				"System.Collections.Concurrent": "4.0.0-beta-22231",
+				"System.Linq": "4.0.0-beta-22231",
+				"System.Threading": "4.0.0-beta-22231",
+				"System.IO.Compression": "4.0.0-beta-22231",
+				"System.Security.Cryptography.Encoding": "4.0.0-beta-22231",
+				"System.Net.Http": "4.0.0-beta-22231",
+				"System.Collections": "4.0.10-beta-22231",
+				"System.Dynamic.Runtime": "4.0.0-beta-22231",
+				"System.Globalization": "4.0.10-beta-22231",
+				"System.Globalization.Extensions": "4.0.10-beta-22231",
+				"System.Runtime.Serialization.Primitives": "4.0.0-beta-22231",
+				"System.Diagnostics.Contracts": "4.0.0-beta-22231",
+				"System.Text.RegularExpressions": "4.0.10-beta-22231",
+				"System.Security.Cryptography.X509Certificates": "4.0.0-beta-22231",
+				"Microsoft.CSharp": "4.0.0-beta-22231",
+			}
+		}
+	}
+}
