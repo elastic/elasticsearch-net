@@ -75,13 +75,6 @@ namespace Nest
 				throw new ArgumentException("Argument can not be an empty collection", parameterName);
 		}
 
-	    internal static void ThrownIfNotLowercase(this string @object, string parameterName)
-	    {
-            @object.ThrowIfNull(parameterName);
-	        if (@object.Any(char.IsUpper))
-                throw new ArgumentException("Argument can not have uppercase letter", parameterName);
-        }
-
         internal static IList<T> EagerConcat<T>(this IEnumerable<T> list, IEnumerable<T> other)
 		{
 			list = list.HasAny() ? list : Enumerable.Empty<T>();
