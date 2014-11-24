@@ -179,8 +179,9 @@ Target "Version" (fun _ ->
     match f.ToLowerInvariant() with
     | f when f = "elasticsearch.net" -> "Elasticsearch.Net - oficial low level elasticsearch client"
     | f when f = "nest" -> "NEST - oficial high level elasticsearch client"
-    | f when f = "elasticsearch.net.connection.thrift" -> "Elasticsearc.Net.Connection.Thrift - Add thrift support to elasticsearch."
-    | f when f = "elasticsearch.net.connection.httpclient" -> "Elasticsearc.Net.Connection.HttpClient - IConnection implementation that uses HttpClient (.NET 4.5 only)"
+    | f when f = "elasticsearch.net.connection.thrift" -> "Add thrift support to elasticsearch."
+    | f when f = "elasticsearch.net.connection.httpclient" -> "IConnection implementation that uses HttpClient (.NET 4.5 only)"
+    | f when f = "elasticsearch.net.jsonnet" -> "IElasticsearchSerializer implementation that allows you to use Json.NET with the lowlevel client"
     | _ -> sprintf "%s" name
 
   !! "src/**/AssemblyInfo.cs"

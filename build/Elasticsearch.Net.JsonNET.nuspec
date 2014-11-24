@@ -9,7 +9,7 @@
     <iconUrl>http://nest.azurewebsites.net/images/elasticsearch-net-nuget-icon.png</iconUrl>
     <licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>
     <projectUrl>https://github.com/elasticsearch/elasticsearch-net</projectUrl>
-    <summary>An IConnection implementation that utilizes Apache Thrift to talk with elasticsearch</summary>
+    <summary>IElasticsearchSerializer implementation that allows you to use Json.NET with the lowlevel client</summary>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This package is only useful if you use the low level client ONLY and do not use NEST but would like to use JSON.NET as your serializer</description>
     <dependencies>
