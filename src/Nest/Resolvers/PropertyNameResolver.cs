@@ -19,8 +19,15 @@ namespace Nest.Resolvers
 		private static readonly ConcurrentDictionary<Type, ElasticTypeAttribute> CachedTypeLookups =
 			new ConcurrentDictionary<Type, ElasticTypeAttribute>();
 		
-		public static IElasticPropertyAttribute Property(MemberInfo info)
+		public static IElasticPropertyAttribute Property(MemberInfo info, IConnectionSettingsValues settings = null)
 		{
+			if (settings != null)
+			{
+				PropertyMapping propertyMapping = null;
+				if (settings.PropertyMappings.TryGetValue(info, out propertyMapping))
+					return new ElasticPropertyAttribute {Name = propertyMapping.Name, OptOut = propertyMapping.Ignore};
+			}
+
 			var attributes = info.GetCustomAttributes(typeof(IElasticPropertyAttribute), true);
 			if (attributes != null && attributes.Any())
 				return ((IElasticPropertyAttribute)attributes.First());
@@ -61,11 +68,8 @@ namespace Nest.Resolvers
 				return null;
 			
 			var name = info.Name;
-			string resolvedName = null;
-			if (_settings.PropertyNames.TryGetValue(info, out resolvedName))
-				return resolvedName;
 
-			var att = ElasticAttributes.Property(info);
+			var att = ElasticAttributes.Property(info, _settings);
 			if (att != null && !att.Name.IsNullOrEmpty())
 				return att.Name;
 

@@ -11,7 +11,7 @@ namespace Nest
 		ElasticInferrer Inferrer { get; }
 		FluentDictionary<Type, string> DefaultIndices { get; }
 		FluentDictionary<Type, string> DefaultTypeNames { get; }
-		FluentDictionary<MemberInfo, string> PropertyNames { get; }
+		FluentDictionary<MemberInfo, PropertyMapping> PropertyMappings { get; }
 		string DefaultIndex { get; }
 		Func<string, string> DefaultPropertyNameInferrer { get; }
 		Func<Type, string> DefaultTypeNameInferrer { get; }

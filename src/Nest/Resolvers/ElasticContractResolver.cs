@@ -170,11 +170,8 @@ namespace Nest.Resolvers
 				property.ShouldSerialize = property.ShouldSerialize == null ? shouldSerialize : (o => property.ShouldSerialize(o) && shouldSerialize(o));
 			}
 
-			var attributes = member.GetCustomAttributes(typeof(IElasticPropertyAttribute), false);
-			if (attributes == null || !attributes.Any())
-				return property;
-
-			var att = attributes.First() as IElasticPropertyAttribute;
+			var att = ElasticAttributes.Property(member, this.ConnectionSettings);
+			if (att == null) return property;
 			if (!att.Name.IsNullOrEmpty())
 				property.PropertyName = att.Name;
 

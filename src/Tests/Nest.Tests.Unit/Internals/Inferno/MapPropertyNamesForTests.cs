@@ -87,9 +87,9 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			return client;
 		}
 
-		public IElasticClient ClientWithPropertiesFor<T>(Action<FluentDictionary<Expression<Func<T, object>>, string>> propertiesSelector)
+		public IElasticClient ClientWithPropertiesFor<T>(Action<FluentDictionary<Expression<Func<T, object>>, PropertyMapping>> propertiesSelector)
 		{
-			return this.ConfigureClient(c=>c.MapPropertyNamesFor<T>(propertiesSelector));
+			return this.ConfigureClient(c=>c.MapPropertiesFor<T>(propertiesSelector));
 		}
 
 		[Test]
@@ -133,10 +133,10 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		{
 			var e = Assert.Throws<ArgumentException>(()=>
 				this.ConfigureClient(c=>c
-					.MapPropertyNamesFor<B>(props => props
+					.MapPropertiesFor<B>(props => props
 						.Add(p=>p.X, "bX")
 					)
-					.MapPropertyNamesFor<C>(props => props
+					.MapPropertiesFor<C>(props => props
 						.Add(p=>p.X, "cX")
 					)
 				)
@@ -151,10 +151,10 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void ResolverShouldResolveAllNestedMembers()
 		{
 			var client = this.ConfigureClient(c=>c
-				.MapPropertyNamesFor<SomeClass>(props => props
+				.MapPropertiesFor<SomeClass>(props => props
 					.Add(p=>p.MyCustomClass, "customClazz")
 				)
-				.MapPropertyNamesFor<MyCustomClass>(props => props
+				.MapPropertiesFor<MyCustomClass>(props => props
 					.Add(p=>p.MyProperty, "mahPropertah")
 				)
 			);
@@ -166,10 +166,10 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void ResolverShouldResolveAllNestedMembers_Dictionary()
 		{
 			var client = this.ConfigureClient(c=>c
-				.MapPropertyNamesFor<SomeClass>(props => props
+				.MapPropertiesFor<SomeClass>(props => props
 					.Add(p=>p.StringDict, "map")
 				)
-				.MapPropertyNamesFor<SomeOtherClass>(props => props
+				.MapPropertiesFor<SomeOtherClass>(props => props
 					.Add(p=>p.CreateDate, "d0b")
 				)
 			);
@@ -181,7 +181,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void PropertiesOn_CInstanceTakeNamesFrom_B()
 		{
 			var client = this.ConfigureClient(c=>c
-				.MapPropertyNamesFor<B>(props => props
+				.MapPropertiesFor<B>(props => props
 					.Add(p=>p.X, "Xavier")
 				)
 			);
@@ -193,7 +193,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void PropertiesOn_BInstanceTakeNamesFrom_C()
 		{
 			var client = this.ConfigureClient(c=>c
-				.MapPropertyNamesFor<C>(props => props
+				.MapPropertiesFor<C>(props => props
 					.Add(p=>p.X, "Xavier")
 				)
 			);
@@ -205,7 +205,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void PropertiesOnCollectionExpressionsResolve()
 		{
 			var client = this.ConfigureClient(c=>c
-				.MapPropertyNamesFor<MyCustomClass>(props => props
+				.MapPropertiesFor<MyCustomClass>(props => props
 					.Add(p=>p.MyProperty, "myProp")
 				)
 			);
