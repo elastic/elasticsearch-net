@@ -313,12 +313,20 @@ namespace Nest
 		
 		/// <inheritdoc />
 		IIndicesOperationResponse DeleteTemplate(IDeleteTemplateRequest deleteTemplateRequest);
-		
+
 		/// <inheritdoc />
+		[Obsolete("Scheduled for removal in 2.0, this method name has a typo")]
 		Task<IIndicesOperationResponse> DeleteTemplateAync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
 
 		/// <inheritdoc />
+		[Obsolete("Scheduled for removal in 2.0, this method name has a typo")]
 		Task<IIndicesOperationResponse> DeleteTemplateAync(IDeleteTemplateRequest deleteTemplateRequest);
+
+		/// <inheritdoc />
+		Task<IIndicesOperationResponse> DeleteTemplateAsync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
+
+		/// <inheritdoc />
+		Task<IIndicesOperationResponse> DeleteTemplateAsync(IDeleteTemplateRequest deleteTemplateRequest);
 
 		/// <summary>
 		/// Unregister a percolator
