@@ -205,12 +205,12 @@ namespace Nest
 			return (T)this;
 		}
 
-		public T MapPropertiesFor<TDocument>(Action<FluentDictionary<Expression<Func<TDocument, object>>, PropertyMapping>> propertiesSelector)
+		public T MapPropertiesFor<TDocument>(Action<PropertyMappingDescriptor<TDocument>> propertiesSelector)
 		{
 			propertiesSelector.ThrowIfNull("propertiesSelector");
-			var properties = new FluentDictionary<Expression<Func<TDocument, object>>, PropertyMapping>();
-			propertiesSelector(properties);
-			foreach (var p in properties)
+			var mapper = new PropertyMappingDescriptor<TDocument>();
+			propertiesSelector(mapper);
+			foreach (var p in mapper.Mappings)
 			{
 				var e = p.Key;
 				var memberInfoResolver = new MemberInfoResolver(this, e);

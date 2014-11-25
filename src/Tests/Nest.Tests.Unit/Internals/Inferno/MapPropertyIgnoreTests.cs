@@ -87,7 +87,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			return client;
 		}
 
-		public IElasticClient ClientWithPropertiesFor<T>(Action<FluentDictionary<Expression<Func<T, object>>, PropertyMapping>> propertiesSelector)
+		public IElasticClient ClientWithPropertiesFor<T>(Action<PropertyMappingDescriptor<T>> propertiesSelector)
 		{
 			return this.ConfigureClient(c=>c.MapPropertiesFor<T>(propertiesSelector));
 		}
@@ -96,7 +96,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void Global_Ignore_Should_Be_Adhered()
 		{
 			var client = this.ClientWithPropertiesFor<MyCustomClass>(props => props
-				.Add(p=>p.MyProperty, PropertyMapping.Ignored)
+				.Ignore(p=>p.MyProperty)
 			);
 			var json = client.Serializer.Serialize(new MyCustomClass
 			{
@@ -111,8 +111,8 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			var e = Assert.Throws<ArgumentException>(() =>
 			{
 				this.ClientWithPropertiesFor<MyCustomClass>(props => props
-					.Add(p => p.MyProperty, PropertyMapping.Ignored)
-					.Add(p => p.MyProperty, PropertyMapping.Ignored)
+					.Ignore(p => p.MyProperty)
+					.Ignore(p => p.MyProperty)
 				);
 			});
 			e.Message.Should()
@@ -126,8 +126,8 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			var e = Assert.Throws<ArgumentException>(() =>
 			{
 				this.ClientWithPropertiesFor<MyCustomClass>(props => props
-					.Add(p => p.MyProperty, PropertyMapping.Ignored)
-					.Add(p => p.MyProperty, "mahProperty4")
+					.Ignore(p => p.MyProperty)
+					.Rename(p => p.MyProperty, "mahProperty4")
 				);
 			});
 			e.Message.Should()
@@ -141,8 +141,8 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			var e = Assert.Throws<ArgumentException>(() =>
 			{
 				this.ClientWithPropertiesFor<MyCustomClass>(props => props
-					.Add(p => p.MyProperty, "mahProperty4")
-					.Add(p => p.MyProperty, PropertyMapping.Ignored)
+					.Rename(p => p.MyProperty, "mahProperty4")
+					.Ignore(p => p.MyProperty)
 				);
 			});
 			e.Message.Should()
