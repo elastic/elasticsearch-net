@@ -90,8 +90,8 @@ namespace Nest
 		private ReadOnlyCollection<Func<Type, JsonConverter>> _contractConverters;
 		ReadOnlyCollection<Func<Type, JsonConverter>> IConnectionSettingsValues.ContractConverters { get { return _contractConverters; } }
 
-		private FluentDictionary<MemberInfo, string> _propertyNames = new FluentDictionary<MemberInfo, string>();
-		FluentDictionary<MemberInfo, string> IConnectionSettingsValues.PropertyNames { get { return _propertyNames; } }
+		private FluentDictionary<MemberInfo, PropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, PropertyMapping>();
+		FluentDictionary<MemberInfo, PropertyMapping> IConnectionSettingsValues.PropertyMappings { get { return _propertyMappings; } }
 
 		public ConnectionSettings(IConnectionPool connectionPool, string defaultIndex)
 			: base(connectionPool)
@@ -205,12 +205,12 @@ namespace Nest
 			return (T)this;
 		}
 
-		public T MapPropertyNamesFor<TDocument>(Action<FluentDictionary<Expression<Func<TDocument, object>>, string>> propertiesSelector)
+		public T MapPropertiesFor<TDocument>(Action<PropertyMappingDescriptor<TDocument>> propertiesSelector)
 		{
 			propertiesSelector.ThrowIfNull("propertiesSelector");
-			var properties = new FluentDictionary<Expression<Func<TDocument, object>>, string>();
-			propertiesSelector(properties);
-			foreach (var p in properties)
+			var mapper = new PropertyMappingDescriptor<TDocument>();
+			propertiesSelector(mapper);
+			foreach (var p in mapper.Mappings)
 			{
 				var e = p.Key;
 				var memberInfoResolver = new MemberInfoResolver(this, e);
@@ -221,14 +221,24 @@ namespace Nest
 					throw new ArgumentException("Expression {0} does contain any member access".F(e));
 
 				var memberInfo = memberInfoResolver.Members.Last();
-				if (_propertyNames.ContainsKey(memberInfo))
+				if (_propertyMappings.ContainsKey(memberInfo))
 				{
-					var mappedAs = _propertyNames[memberInfo];
+					var newName = p.Value.Name;
+					var mappedAs = _propertyMappings[memberInfo].Name;
 					var typeName = typeof (TDocument).Name;
+					if (mappedAs.IsNullOrEmpty() && newName.IsNullOrEmpty())
+						throw new ArgumentException("Property mapping '{0}' on type is already ignored"
+							.F(e, newName, mappedAs, typeName));
+					if (mappedAs.IsNullOrEmpty())
+						throw new ArgumentException("Property mapping '{0}' on type {3} can not be mapped to '{1}' it already has an ignore mapping"
+							.F(e, newName, mappedAs, typeName));
+					if (newName.IsNullOrEmpty())
+						throw new ArgumentException("Property mapping '{0}' on type {3} can not be ignored it already has a mapping to '{2}'"
+							.F(e, newName, mappedAs, typeName));
 					throw new ArgumentException("Property mapping '{0}' on type {3} can not be mapped to '{1}' already mapped as '{2}'"
-						.F(e, p.Value, mappedAs, typeName));
+						.F(e, newName, mappedAs, typeName));
 				}
-				_propertyNames.Add(memberInfo, p.Value);
+				_propertyMappings.Add(memberInfo, p.Value);
 
 			}
 			return (T) this;
