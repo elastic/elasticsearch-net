@@ -177,6 +177,7 @@
     <Compile Include="Indices\StatsTests.cs" />
     <Compile Include="Core\AsyncTests.cs" />
     <Compile Include="Mapping\MappingVisitorTests.cs" />
+    <Compile Include="Mapping\GetMultipleMappingTests.cs" />
     <Compile Include="Reproduce\Reproduce769Tests.cs" />
     <Compile Include="Reproduce\Reproduce945Tests.cs" />
     <Compile Include="Reproduce\Reproduce953Tests.cs" />
