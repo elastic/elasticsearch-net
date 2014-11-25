@@ -48,6 +48,30 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		}
 
 		[Test]
+		public void FunctionScoreQueryWithJustWeight()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
+				.Query(q => q
+					.FunctionScore(fs => fs
+						.Query(qq => qq.MatchAll())
+						.Weight(2)
+					)
+				);
+
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ 
+                from: 0, size: 10, 
+				query : {
+                    function_score : { 		
+						query : { match_all : {} },
+						weight : 2
+					}
+				}
+			}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
 		public void FunctionScoreQueryConditionless()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
