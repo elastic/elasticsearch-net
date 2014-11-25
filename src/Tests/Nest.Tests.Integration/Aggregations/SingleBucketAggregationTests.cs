@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using FluentAssertions;
+using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
@@ -24,18 +25,19 @@ namespace Nest.Tests.Integration.Aggregations
 		
 		[Test]
 	    public void Filter()
-	    {
+		{
+			var lookFor = NestTestData.Data.Select(p => p.Country).First();
 		    var results = this.Client.Search<ElasticsearchProject>(s=>s
 				.Size(0)
 				.Aggregations(a=>a
 					.Filter("filtered_agg", m=>m
-						.Filter(f=>f.Term(p=>p.Country, "Sweden"))
+						.Filter(f=>f.Term(p=>p.Country, lookFor))
 					)
 				)
 			);
 		    results.IsValid.Should().BeTrue();
 		    var filteredBucket = results.Aggs.Filter("filtered_agg");
-		    filteredBucket.DocCount.Should().BeGreaterThan(1);
+		    filteredBucket.DocCount.Should().BeGreaterThan(0);
 	    }
 		
 		[Test]

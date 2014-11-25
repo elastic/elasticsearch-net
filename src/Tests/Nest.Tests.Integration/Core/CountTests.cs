@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 using System;
@@ -24,11 +25,12 @@ namespace Nest.Tests.Integration.Core
 		[Test]
 		public void CountWithQueryTest()
 		{
+			var lookFor = NestTestData.Data.Select(p => p.Country).First();
 			var response = this.Client.Count<ElasticsearchProject>(c => c
 				.Query(q => q
 					.Match(m => m
 						.OnField(p => p.Country)
-						.Query("Sweden")
+						.Query(lookFor)
 					)
 				)
 			);
