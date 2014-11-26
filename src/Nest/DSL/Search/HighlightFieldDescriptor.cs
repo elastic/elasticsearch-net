@@ -54,6 +54,9 @@ namespace Nest
 
 		[JsonProperty("force_source")]
 		bool? ForceSource { get; set; }
+
+		[JsonProperty("matched_fields")]
+		IEnumerable<PropertyPathMarker> MatchedFields { get; set; }
 	}
 
 	public class HighlightField : IHighlightField
@@ -73,6 +76,7 @@ namespace Nest
 		public string BoundaryChars { get; set; }
 		public string Type { get; set; }
 		public bool? ForceSource { get; set; }
+		public IEnumerable<PropertyPathMarker> MatchedFields { get; set; }
 	}
 
 	public class HighlightFieldDescriptor<T> : IHighlightField where T : class
@@ -108,6 +112,8 @@ namespace Nest
 		string IHighlightField.Type { get; set; }
 
 		bool? IHighlightField.ForceSource { get; set; }
+
+		IEnumerable<PropertyPathMarker> IHighlightField.MatchedFields { get; set; }
 		
 		public HighlightFieldDescriptor<T> OnField(string field)
 		{
@@ -136,6 +142,11 @@ namespace Nest
 		public HighlightFieldDescriptor<T> Type(string type)
 		{
 			Self.Type = type;
+			return this;
+		}
+		public HighlightFieldDescriptor<T> Type(HighlighterType type)
+		{
+			Self.Type = type.GetStringValue();
 			return this;
 		}
 		public HighlightFieldDescriptor<T> PreTags(string preTags)
@@ -201,6 +212,16 @@ namespace Nest
 		public HighlightFieldDescriptor<T> BoundaryMaxSize(int boundaryMaxSize)
 		{
 			Self.BoundaryMaxSize = boundaryMaxSize;
+			return this;
+		}
+		public HighlightFieldDescriptor<T> MatchedFields(IEnumerable<string> fields)
+		{
+			Self.MatchedFields = fields.Select(f => (PropertyPathMarker)f);
+			return this;
+		}
+		public HighlightFieldDescriptor<T> MatchedFields(params Expression<Func<T, object>>[] objectPaths)
+		{
+			Self.MatchedFields = objectPaths.Select(f => (PropertyPathMarker)f);
 			return this;
 		}
 	}
