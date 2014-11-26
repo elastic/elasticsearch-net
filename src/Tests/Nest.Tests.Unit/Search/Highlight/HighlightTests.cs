@@ -13,6 +13,12 @@ namespace Nest.Tests.Unit.Search.Highlight
 				.From(0)
 				.Size(10)
 				.Highlight(h => h
+					.HighlightQuery(hq => hq
+						.Match(m => m
+							.OnField(p => p.Name)
+							.Query("nest")
+						)
+					)
 					.BoundaryCharacters(".,!? \t\n")
 					.BoundaryMaxSize(20)
 					.Encoder("html")
@@ -26,9 +32,14 @@ namespace Nest.Tests.Unit.Search.Highlight
 					.OnFields(
 					f => f
 						.OnAll()
-                        .NoMatchSize(200)
+						.NoMatchSize(200)
 						.PreTags("<em>")
 						.PostTags("</em>")
+						.Type(HighlighterType.Plain),
+					f => f
+						.OnField(p => p.Name)
+						.Type(HighlighterType.Postings)
+						.MatchedFields(mf => mf.Country, mf => mf.Content)
 					)
 				);
 			var json = TestElasticClient.Serialize(s);
@@ -48,11 +59,23 @@ namespace Nest.Tests.Unit.Search.Highlight
 			  _all: {
 				pre_tags: [""<em>""],
 				post_tags: [""</em>""],
-				no_match_size: 200
+				no_match_size: 200,
+				type: ""plain""
+			  },
+			  name: {
+				type: ""postings"",
+				matched_fields: [ ""country"", ""content"" ]
 			  }
 			},
 			require_field_match: true,
-			boundary_chars: "".,!? \t\n""
+			boundary_chars: "".,!? \t\n"",
+			highlight_query: {
+				match: {
+					name: {
+						query: ""nest""
+					}
+				}
+			}
 		  }
 		}";
 			Assert.True(json.JsonEquals(expected), json);

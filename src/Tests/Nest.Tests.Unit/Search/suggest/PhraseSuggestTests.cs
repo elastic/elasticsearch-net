@@ -97,6 +97,10 @@ namespace Nest.Tests.Unit.Search.Suggest
 					.Size(1)
 					.GramSize(2)
 					.MaxErrors(0.5m)
+					.Highlight(h => h
+						.PreTag("<em>")
+						.PostTag("</em>")
+					)
 					.Collate(c => c
 						.Query(q => q
 							.Match(m => m
@@ -122,6 +126,10 @@ namespace Nest.Tests.Unit.Search.Suggest
                               ""size"": 1,
 							  ""gram_size"": 2,
                               ""max_errors"": 0.5,
+							  ""highlight"": {
+								""pre_tag"": ""<em>"",
+								""post_tag"": ""</em>""
+							  },
 							  ""collate"": {
 									""query"": {
 										""match"": {

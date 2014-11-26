@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Serialization;
+using Elasticsearch.Net.Connection.Security;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -112,6 +113,9 @@ namespace Elasticsearch.Net.Connection
 		private bool _traceEnabled;
 		bool IConnectionConfigurationValues.TraceEnabled { get{ return _traceEnabled; } }
 
+		private bool _httpPipeliningEnabled;
+		bool IConnectionConfigurationValues.HttpPipeliningEnabled { get { return _httpPipeliningEnabled; } }
+
 		private bool _throwOnServerExceptions;
 		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions { get{ return _throwOnServerExceptions; } }
 
@@ -123,6 +127,9 @@ namespace Elasticsearch.Net.Connection
 
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer { get; set; }
 
+		private BasicAuthorizationCredentials _basicAuthCredentials;
+		BasicAuthorizationCredentials IConnectionConfigurationValues.BasicAuthorizationCredentials { get { return _basicAuthCredentials; } } 
+		
 		public ConnectionConfiguration(IConnectionPool connectionPool)
 		{
 			this._timeout = 60*1000;
@@ -243,7 +250,7 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// This is a separate timeout for Ping() requests. A ping should fail as fast as possible.
 		/// </summary>
-		/// <param name="timeout">The ping timeout in milliseconds defaults to 50</param>
+		/// <param name="timeout">The ping timeout in milliseconds defaults to 200</param>
 		public T SetPingTimeout(int timeout)
 		{
 			this._pingTimeout = timeout;
@@ -325,9 +332,30 @@ namespace Elasticsearch.Net.Connection
         {
             handler.ThrowIfNull("handler");
             this._connectionStatusHandler = handler;
-            return (T)this;
+			return (T)this;
         }
 
+		/// <summary>
+		/// Basic access authorization credentials to specify with all requests.
+		/// </summary>
+		public T SetBasicAuthorization(string userName, string password)
+		{
+			if (this._basicAuthCredentials == null)
+				this._basicAuthCredentials = new BasicAuthorizationCredentials();
+			this._basicAuthCredentials.UserName = userName;
+			this._basicAuthCredentials.Password = password;
+			return (T)this;
+		}
+
+		/// <summary>
+		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
+		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
+		/// </summary>
+		public T HttpPipeliningEnabled(bool enabled = true)
+		{
+			this._httpPipeliningEnabled = enabled;
+			return (T)this;
+		}
 	}
 }
 

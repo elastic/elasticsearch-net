@@ -16,6 +16,7 @@ namespace Nest
 		AggregationsHelper Aggs { get; }
 		IDictionary<string, Suggest[]> Suggest { get; }
 		int ElapsedMilliseconds { get; }
+		bool TimedOut { get; }
 		string ScrollId { get; }
 		long Total { get; }
 		double MaxScore { get; }
@@ -77,6 +78,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "took")]
 		public int ElapsedMilliseconds { get; internal set; }
+
+		[JsonProperty("timed_out")]
+		public bool TimedOut { get; internal set; }
 
 		/// <summary>
 		/// Only set when search type = scan and scroll specified

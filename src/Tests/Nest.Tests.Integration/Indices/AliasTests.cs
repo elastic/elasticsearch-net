@@ -246,6 +246,11 @@ namespace Nest.Tests.Integration.Indices
 			var createIndexResponse = this.Client.CreateIndex(indexName, c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
+				.AddMapping<object>(m => m
+					.Properties(p => p
+						.String(s => s.Name("foo"))
+					)
+				)
 			);
 
 			createIndexResponse.IsValid.Should().BeTrue();
@@ -253,8 +258,9 @@ namespace Nest.Tests.Integration.Indices
 			var aliasResponse = this.Client.Alias(a => a
 				.Add(aa => aa
 					.Alias(aliasName)
+					.Index(indexName)
 					.IndexRouting("1")
-					.Filter<dynamic>(f => f.Term("foo", "bar")
+					.Filter<object>(f => f.Term("foo", "bar")
 					)
 				)
 			);
@@ -278,7 +284,13 @@ namespace Nest.Tests.Integration.Indices
 			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
 			var aliasName = ElasticsearchConfiguration.NewUniqueIndexName();
 
-			var createIndexResponse = this.Client.CreateIndex(indexName);
+			var createIndexResponse = this.Client.CreateIndex(indexName, c => c
+				.AddMapping<ElasticsearchProject>(m => m
+					.Properties(p => p
+						.String(s => s.Name(n => n.Name))
+					)
+				)
+			);
 			createIndexResponse.IsValid.Should().BeTrue();
 
 			var result = this.Client.PutAlias(a => a

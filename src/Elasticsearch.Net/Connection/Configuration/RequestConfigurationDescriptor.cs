@@ -1,3 +1,4 @@
+using Elasticsearch.Net.Connection.Security;
 using System;
 using System.Collections.Generic;
 
@@ -22,6 +23,10 @@ namespace Elasticsearch.Net.Connection.Configuration
 		bool? IRequestConfiguration.DisablePing { get; set; }
 		
 		IEnumerable<int> IRequestConfiguration.AllowedStatusCodes { get; set; }
+
+		BasicAuthorizationCredentials IRequestConfiguration.BasicAuthorizationCredentials { get; set; }
+
+		bool IRequestConfiguration.EnableHttpPipelining { get; set; }
 
 		public RequestConfigurationDescriptor RequestTimeout(int requestTimeoutInMilliseconds)
 		{
@@ -73,6 +78,21 @@ namespace Elasticsearch.Net.Connection.Configuration
 		public RequestConfigurationDescriptor MaxRetries(int retry)
 		{
 			Self.MaxRetries = retry;
+			return this;
+		}
+
+		public RequestConfigurationDescriptor BasicAuthorization(string userName, string password)
+		{
+			if (Self.BasicAuthorizationCredentials == null)
+				Self.BasicAuthorizationCredentials = new BasicAuthorizationCredentials();
+			Self.BasicAuthorizationCredentials.UserName = userName;
+			Self.BasicAuthorizationCredentials.Password = password;
+			return this;
+		}
+
+		public RequestConfigurationDescriptor EnableHttpPipelining(bool enable = true)
+		{
+			Self.EnableHttpPipelining = enable;
 			return this;
 		}
 	}

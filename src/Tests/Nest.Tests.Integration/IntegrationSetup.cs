@@ -8,41 +8,41 @@ using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
-[SetUpFixture]
-public class SetupAndTeardownForIntegrationTests
-{
-	[SetUp]
-	public void Setup()
-	{
-		var client = new ElasticClient(
-			//ElasticsearchConfiguration.Settings(hostOverride: new Uri("http://localhost:9200"))
-			ElasticsearchConfiguration.Settings()
-		);
-
-		try
-		{
-			IntegrationSetup.CreateTestIndex(client, ElasticsearchConfiguration.DefaultIndex);
-			IntegrationSetup.CreateTestIndex(client, ElasticsearchConfiguration.DefaultIndex + "_clone");
-
-			IntegrationSetup.IndexDemoData(client);
-		}
-		catch (Exception)
-		{
-
-			throw;
-		}
-
-	}
-	[TearDown]
-	public void TearDown()
-	{
-		var client = ElasticsearchConfiguration.Client.Value;
-		client.DeleteIndex(di => di.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "*"));
-	}
-}
-
 namespace Nest.Tests.Integration
 {
+	[SetUpFixture]
+	public class SetupAndTeardownForIntegrationTests
+	{
+		[SetUp]
+		public void Setup()
+		{
+			var client = new ElasticClient(
+				//ElasticsearchConfiguration.Settings(hostOverride: new Uri("http://localhost:9200"))
+				ElasticsearchConfiguration.Settings()
+			);
+
+			try
+			{
+				IntegrationSetup.CreateTestIndex(client, ElasticsearchConfiguration.DefaultIndex);
+				IntegrationSetup.CreateTestIndex(client, ElasticsearchConfiguration.DefaultIndex + "_clone");
+
+				IntegrationSetup.IndexDemoData(client);
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
+
+		}
+		[TearDown]
+		public void TearDown()
+		{
+			var client = ElasticsearchConfiguration.Client.Value;
+			client.DeleteIndex(di => di.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "*"));
+		}
+	}
+
 	public static class IntegrationSetup
 	{
 		public static void IndexDemoData(IElasticClient client, string index = null)

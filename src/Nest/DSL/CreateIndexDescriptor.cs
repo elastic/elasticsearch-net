@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -20,18 +22,17 @@ namespace Nest
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 		}
 	}
-	
+
 	public partial class CreateIndexRequest : IndexPathBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
 		public CreateIndexRequest(IndexNameMarker index) : base(index) { }
 
 		public IndexSettings IndexSettings { get; set; }
-		
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
 		{
 			CreateIndexPathInfo.Update(pathInfo, this);
 		}
-
 	}
 
 	[DescriptorFor("IndicesCreate")]
@@ -131,7 +132,7 @@ namespace Nest
 
 			return this;
 		}
-			
+
 
 		private CreateIndexDescriptor RemoveMapping(TypeNameMarker marker)
 		{
@@ -185,7 +186,7 @@ namespace Nest
 			}
 			else
 			{
-				typeMapping.Name = typeof (T);
+				typeMapping.Name = typeof(T);
 			}
 
 			this._indexSettings.Mappings.Add(typeMapping);
@@ -220,7 +221,7 @@ namespace Nest
 			this._indexSettings.Analysis = analysis == null ? null : analysis._AnalysisSettings;
 			return this;
 		}
-		
+
 		public CreateIndexDescriptor Similarity(Func<SimilarityDescriptor, SimilarityDescriptor> similaritySelector)
 		{
 			similaritySelector.ThrowIfNull("similaritySelector");
@@ -233,6 +234,5 @@ namespace Nest
 		{
 			CreateIndexPathInfo.Update(pathInfo, this);
 		}
-
 	}
 }

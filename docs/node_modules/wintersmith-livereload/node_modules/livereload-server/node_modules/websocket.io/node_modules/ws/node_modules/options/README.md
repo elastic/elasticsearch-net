@@ -2,6 +2,47 @@
 
 A very light-weight in-code option parsers for node.js.
 
+## Usage ##
+
+``` js
+var Options = require("options");
+
+// Create an Options object
+function foo(options) {
+        var default_options = {
+                foo : "bar"
+        };
+        
+        // Create an option object with default value
+        var opts = new Options(default_options);
+        
+        // Merge options
+        opts = opts.merge(options);
+        
+        // Reset to default value
+        opts.reset();
+        
+        // Copy selected attributes out
+        var seled_att = opts.copy("foo");
+        
+        // Read json options from a file. 
+        opts.read("options.file"); // Sync
+        opts.read("options.file", function(err){ // Async
+                if(err){ // If error occurs
+                        console.log("File error.");
+                }else{
+                        // No error
+                }
+        });
+        
+        // Attributes defined or not
+        opts.isDefinedAndNonNull("foobar");
+        opts.isDefined("foobar");
+}
+
+```
+
+
 ## License ##
 
 (The MIT License)

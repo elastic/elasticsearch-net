@@ -35,6 +35,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "script_score")]
 		IScriptFilter ScriptScore { get; set; }
+
+		[JsonProperty(PropertyName = "weight")]
+		long? Weight { get; set; }
 	}
 
 	public class FunctionScoreQuery : PlainQuery, IFunctionScoreQuery
@@ -52,6 +55,7 @@ namespace Nest
 		public float? MaxBoost { get; set; }
 		public IRandomScoreFunction RandomScore { get; set; }
 		public IScriptFilter ScriptScore { get; set; }
+		public long? Weight { get; set; }
 	}
 
 	public class FunctionScoreQueryDescriptor<T> : IFunctionScoreQuery where T : class
@@ -69,6 +73,8 @@ namespace Nest
 		IRandomScoreFunction IFunctionScoreQuery.RandomScore { get; set; }
 
 		IScriptFilter IFunctionScoreQuery.ScriptScore { get; set; }
+		
+		long? IFunctionScoreQuery.Weight { get; set; }
 
 		bool IQuery.IsConditionless
 		{
@@ -140,6 +146,12 @@ namespace Nest
 
 			((IFunctionScoreQuery)this).ScriptScore = descriptor;
 
+			return this;
+		}
+
+		public FunctionScoreQueryDescriptor<T> Weight(long weight)
+		{
+			((IFunctionScoreQuery)this).Weight = weight;
 			return this;
 		}
 	}

@@ -24,6 +24,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						.Slop(3)
 						.CollectPayloads(false)
 						.InOrder(false)
+                        .Boost(20.2)
 					)
 				);
 			var json = TestElasticClient.Serialize(s);
@@ -55,7 +56,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					],
 					slop: 3,
 					in_order: false,
-					collect_payloads: false
+					collect_payloads: false,
+                    boost: 20.2
 			}}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}

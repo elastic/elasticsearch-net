@@ -235,6 +235,26 @@ namespace Nest.Tests.Integration.Indices
 		}
 
 		[Test]
+		public void CreateAndDeleteIndex()
+		{
+			var index = Guid.NewGuid().ToString();
+
+			var create = this.Client.CreateIndex(index);
+			create.IsValid.Should().BeTrue();
+			
+			var exists = this.Client.IndexExists(index);
+			exists.IsValid.Should().BeTrue();
+			exists.Exists.Should().BeTrue();
+			
+			var delete = this.Client.DeleteIndex(index);
+			delete.IsValid.Should().BeTrue();
+			
+			exists = this.Client.IndexExists(index);
+			exists.IsValid.Should().BeTrue();
+			exists.Exists.Should().BeFalse();
+		}
+
+		[Test]
 		public void CreateIndexUsingDescriptor()
 		{
 			var index = ElasticsearchConfiguration.DefaultIndex + "_clone";

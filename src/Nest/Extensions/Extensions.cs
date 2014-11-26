@@ -74,7 +74,8 @@ namespace Nest
 			if (!@object.Any())
 				throw new ArgumentException("Argument can not be an empty collection", parameterName);
 		}
-		internal static IList<T> EagerConcat<T>(this IEnumerable<T> list, IEnumerable<T> other)
+
+        internal static IList<T> EagerConcat<T>(this IEnumerable<T> list, IEnumerable<T> other)
 		{
 			list = list.HasAny() ? list : Enumerable.Empty<T>();
 			var l = new List<T>(list);

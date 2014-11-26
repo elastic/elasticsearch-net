@@ -1,11 +1,9 @@
-﻿namespace Nest {
-    public interface IElasticPropertyAttribute
+﻿namespace Nest 
+{
+	public interface IElasticPropertyAttribute : IPropertyMapping
     {
         bool AddSortField { get; set; }
         
-        bool OptOut { get; set; }
-        string Name { get; set; }
-
         FieldType Type { get; }
 
         TermVectorOption TermVector { get; set; }

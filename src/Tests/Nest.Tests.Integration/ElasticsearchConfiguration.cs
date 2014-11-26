@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using Elasticsearch.Net.Connection.Thrift;
 using Elasticsearch.Net;
 
@@ -44,7 +45,8 @@ namespace Nest.Tests.Integration
 				.SetMaximumAsyncConnections(MaxConnections)
 				.DisableAutomaticProxyDetection(false)
 				.UsePrettyResponses()
-				.ExposeRawResponse();
+				.ExposeRawResponse()
+				.SetBasicAuthorization("nestuser", "elastic");
 		}
 
 		public static readonly Lazy<ElasticClient> Client = new Lazy<ElasticClient>(()=> new ElasticClient(Settings()));
@@ -59,8 +61,10 @@ namespace Nest.Tests.Integration
 		public static Version GetCurrentVersion()
 		{
 			dynamic info = Client.Value.Raw.Info().Response;
-			var version = Version.Parse(info.version.number);
-
+			var versionString = (string)info.version.number;
+			if (versionString.Contains("Beta"))
+				versionString = string.Join(".", versionString.Split('.').Where(s => !s.StartsWith("Beta", StringComparison.OrdinalIgnoreCase)));
+			var version = Version.Parse(versionString);
 			return version;
 		}
 	}

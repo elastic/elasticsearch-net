@@ -16,6 +16,8 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "end")]
 		int? End { get; set; }
+        [JsonProperty(PropertyName = "boost")]
+        double? Boost { get; set; }
 	}
 
 	public class SpanFirstQuery : PlainQuery, ISpanFirstQuery
@@ -29,6 +31,7 @@ namespace Nest
 
 		public ISpanQuery Match { get; set; }
 		public int? End { get; set; }
+	    public double? Boost { get; set; }
 	}
 
 	public class SpanFirstQueryDescriptor<T> : ISpanFirstQuery where T : class
@@ -36,6 +39,7 @@ namespace Nest
 		ISpanQuery ISpanFirstQuery.Match { get; set; }
 
 		int? ISpanFirstQuery.End { get; set; }
+        double? ISpanFirstQuery.Boost { get; set; }
 
 		bool IQuery.IsConditionless
 		{
@@ -73,6 +77,12 @@ namespace Nest
 			((ISpanFirstQuery)this).End = end;
 			return this;
 		}
+
+        public SpanFirstQueryDescriptor<T> Boost(double boost)
+        {
+            ((ISpanFirstQuery)this).Boost = boost;
+            return this;
+        }
 
 	}
 }

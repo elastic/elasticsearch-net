@@ -92,6 +92,7 @@
     <Compile Include="ConvenienceExtensions\AliasExtensions.cs" />
     <Compile Include="ConvenienceExtensions\CountExtensions.cs" />
     <Compile Include="ConvenienceExtensions\DeleteExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\DeleteIndexExtensions.cs" />
     <Compile Include="ConvenienceExtensions\IndexManyExtensions.cs" />
     <Compile Include="ConvenienceExtensions\GetExtensions.cs" />
     <Compile Include="ConvenienceExtensions\DeleteManyExtensions.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Domain\Cat\CatPluginsRecord.cs" />
     <Compile Include="Domain\Cat\CatPendingTasksRecord.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />
+    <Compile Include="Domain\Mapping\PropertyMapping.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataFilterDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataFrequencyFilterDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataNonStringMappingDescriptor.cs" />
@@ -184,15 +186,18 @@
     <Compile Include="Domain\Responses\ClusterStatsResponse.cs" />
     <Compile Include="Domain\Responses\ClusterPendingTasksResponse.cs" />
     <Compile Include="Domain\Responses\DeleteAliasResponse.cs" />
+    <Compile Include="Domain\Responses\DeleteScriptResponse.cs" />
     <Compile Include="Domain\Responses\DeleteSearchTemplateResponse.cs" />
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Cat\ICatRecord.cs" />
     <Compile Include="Domain\Responses\GetRepositoryResponse.cs" />
+    <Compile Include="Domain\Responses\GetScriptResponse.cs" />
     <Compile Include="Domain\Responses\GetSearchTemplateResponse.cs" />
     <Compile Include="Domain\Responses\MultiPercolateResponse.cs" />
     <Compile Include="Domain\Responses\NodesHotThreadsResponse.cs" />
     <Compile Include="Domain\Responses\PutAliasResponse.cs" />
+    <Compile Include="Domain\Responses\PutScriptResponse.cs" />
     <Compile Include="Domain\Responses\SearchShardsResponse.cs" />
     <Compile Include="Domain\Responses\SnapshotStatusResponse.cs" />
     <Compile Include="Domain\Recovery\RecoveryOrigin.cs" />
@@ -220,6 +225,10 @@
     <Compile Include="DSL\Aggregations\TopHitsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\GeoBoundsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ReverseNestedAggregationDescriptor.cs" />
+    <Compile Include="DSL\Filter\GeoHashCellFilterDescriptor.cs" />
+    <Compile Include="DSL\DeleteScriptDescriptor.cs" />
+    <Compile Include="DSL\GetScriptDescriptor.cs" />
+    <Compile Include="DSL\PutScriptDescriptor.cs" />
     <Compile Include="DSL\PutSearchTemplateDescriptor.cs" />
     <Compile Include="DSL\DeleteSearchTemplateDescriptor.cs" />
     <Compile Include="DSL\GetSearchTemplateDescriptor.cs" />
@@ -252,6 +261,7 @@
     <Compile Include="DSL\Suggest\Context\GeoLocationSuggestDescriptor.cs" />
     <Compile Include="DSL\Suggest\Context\ISuggestContext.cs" />
     <Compile Include="DSL\SearchTemplateDescriptor.cs" />
+    <Compile Include="DSL\Suggest\PhraseSuggestHighlightDescriptor.cs" />
     <Compile Include="DSL\TemplateExistsDescriptor.cs" />
     <Compile Include="Domain\Responses\PingResponse.cs" />
     <Compile Include="Domain\Responses\NodesShutdownResponse.cs" />
@@ -343,6 +353,7 @@
     <Compile Include="DSL\_Requests.generated.cs" />
     <Compile Include="ElasticClient-Cat.cs" />
     <Compile Include="ElasticClient-DoRequest.cs" />
+    <Compile Include="ElasticClient-Scripts.cs" />
     <Compile Include="ElasticClient-SearchShards.cs" />
     <Compile Include="ElasticClient-RecoveryStatus.cs" />
     <Compile Include="ElasticClient-SearchTemplate.cs" />
@@ -358,8 +369,10 @@
     <Compile Include="Enums\FieldDataLoading.cs" />
     <Compile Include="Enums\FieldDataNonStringFormat.cs" />
     <Compile Include="Enums\FieldDataStringFormat.cs" />
+    <Compile Include="Enums\HighlighterType.cs" />
     <Compile Include="Enums\NormsLoading.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
+    <Compile Include="Enums\ScriptLang.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="Obsolete\Obsolete.cs" />
@@ -727,7 +740,7 @@
     <Compile Include="Domain\Responses\IndexResponse.cs" />
     <Compile Include="DSL\GetDescriptor.cs" />
     <Compile Include="ElasticClient-MultiGet.cs" />
-    <Compile Include="Domain\Analysis\TokenFilter\NgramTokenFiler.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\NgramTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\SynonymTokenFilter.cs" />
     <Compile Include="ElasticClient-Nodes.cs" />
     <Compile Include="ElasticClient-Scroll.cs" />
@@ -819,6 +832,7 @@
     <Compile Include="DSL\Filter\IdsFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\ExistsFilterDescriptor.cs" />
     <Compile Include="Resolvers\Converters\CatThreadPoolRecordConverter.cs" />
+    <Compile Include="Resolvers\Converters\GeoHashCellFilterConverter.cs" />
     <Compile Include="Resolvers\Converters\GeoShapeConverterBase.cs" />
     <Compile Include="Resolvers\Converters\GetRepositoryResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\MappingTransformConverter.cs" />

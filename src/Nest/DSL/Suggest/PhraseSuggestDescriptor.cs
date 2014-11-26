@@ -29,7 +29,10 @@ namespace Nest
 		[JsonProperty(PropertyName = "direct_generator")]
 		IEnumerable<IDirectGenerator> DirectGenerator { get; set; }
 
-		[JsonProperty("collate")]
+		[JsonProperty(PropertyName = "highlight")]
+		IPhraseSuggestHighlight Highlight { get; set; }
+
+		[JsonProperty(PropertyName = "collate")]
 		IPhraseSuggestCollate Collate { get; set; }
 	}
 
@@ -41,7 +44,7 @@ namespace Nest
 		public decimal? MaxErrors { get; set; }
 		public char? Separator { get; set; }
 		public IEnumerable<IDirectGenerator> DirectGenerator { get; set; }
-
+		public IPhraseSuggestHighlight Highlight { get; set; }
 		public IPhraseSuggestCollate Collate { get; set; }
 	}
 
@@ -60,6 +63,8 @@ namespace Nest
 		char? IPhraseSuggester.Separator { get; set; }
 
 		IEnumerable<IDirectGenerator> IPhraseSuggester.DirectGenerator { get; set; }
+
+		IPhraseSuggestHighlight IPhraseSuggester.Highlight { get; set; }
 
 		IPhraseSuggestCollate IPhraseSuggester.Collate { get; set; }
 
@@ -126,6 +131,13 @@ namespace Nest
 		public PhraseSuggestDescriptor<T> DirectGenerator(params Func<DirectGeneratorDescriptor<T>, DirectGeneratorDescriptor<T>>[] generators)
 		{
 			Self.DirectGenerator = generators.Select(g => g(new DirectGeneratorDescriptor<T>())).ToList();
+			return this;
+		}
+
+		public PhraseSuggestDescriptor<T> Highlight(Func<PhraseSuggestHighlightDescriptor, PhraseSuggestHighlightDescriptor> highlightDescriptor)
+		{
+			var selector = highlightDescriptor(new PhraseSuggestHighlightDescriptor());
+			Self.Highlight = selector.Highlight;
 			return this;
 		}
 

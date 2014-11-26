@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Core.Map.Mapping
 				.Index(ElasticsearchConfiguration.DefaultIndex)
 			);
 
-			getResult.Mapping.Transform.Count.Should().Be(1);
+			getResult.Mapping.Transform.Count.Should().BeGreaterOrEqualTo(1);
 		}
 
 		[Test]
