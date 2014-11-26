@@ -54,6 +54,7 @@ namespace Nest.Tests.Integration.Search.Template
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.2.9", "Put search template introduced in 1.3")]
 		public void SearchTemplateById()
 		{
 			var templateName = "myIndexedTemplate";
@@ -79,6 +80,7 @@ namespace Nest.Tests.Integration.Search.Template
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.2.9", "Put search template introduced in 1.3")]
 		public void PutGetAndDeleteTemplate()
 		{
 			var templateName = "myIndexedTemplate";
