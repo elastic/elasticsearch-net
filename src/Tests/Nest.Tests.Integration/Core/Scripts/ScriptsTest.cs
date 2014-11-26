@@ -12,6 +12,7 @@ namespace Nest.Tests.Integration.Core.Scripts
     public class ScriptsTest : IntegrationTests
     {
         [Test]
+		[SkipVersion("0 - 1.2.9", "Indexed scripts introduced in ES 1.3")]
         public void AddScriptWithNotSupportedLangParameterShouldBeInvalid()
         {
             var putScriptResponse = this.Client.PutScript(s => s.Lang("lang").Id("id").Script("1*1"));
@@ -19,6 +20,7 @@ namespace Nest.Tests.Integration.Core.Scripts
         }
 
         [Test]
+		[SkipVersion("0 - 1.2.9", "Indexed scripts introduced in ES 1.3")]
         public void AddScript()
         {
             var putScriptResponse = this.Client.PutScript(s => s.Lang(ScriptLang.Groovy).Id("id").Script("1*1"));
@@ -26,6 +28,7 @@ namespace Nest.Tests.Integration.Core.Scripts
         }
 
         [Test]
+		[SkipVersion("0 - 1.2.9", "Indexed scripts introduced in ES 1.3")]
         public void GetScriptShouldReturnScriptContent()
         {
             var script = "1*1";
@@ -38,6 +41,7 @@ namespace Nest.Tests.Integration.Core.Scripts
         }
 
         [Test]
+		[SkipVersion("0 - 1.2.9", "Indexed scripts introduced in ES 1.3")]
         public void AddAndDeleteScript()
         {
             var putScriptResponse = this.Client.PutScript(s => s.Lang(ScriptLang.Groovy).Id("id").Script("1*1"));
