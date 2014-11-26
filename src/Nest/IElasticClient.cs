@@ -1295,7 +1295,13 @@ namespace Nest
 		
 		/// <inheritdoc />
 		Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest snapshotRequest);
-		
+
+        /// <inheritdoc />
+        IObservable<ISnapshotStatusResponse> SnapshotObservable(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null);
+
+        /// <inheritdoc />
+        IObservable<ISnapshotStatusResponse> SnapshotObservable(ISnapshotRequest snapshotRequest);
+
 		/// <summary>
 		/// Delete a snapshot
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
@@ -1349,6 +1355,12 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IRestoreResponse> RestoreAsync(IRestoreRequest restoreRequest);
+
+        /// <inheritdoc />
+        IObservable<IRecoveryStatusResponse> RestoreObservable(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
+
+        /// <inheritdoc />
+        IObservable<IRecoveryStatusResponse> RestoreObservable(IRestoreRequest restoreRequest);
 
 		/// <summary>
 		/// Allows to update cluster wide specific settings. Settings updated can either be persistent 
