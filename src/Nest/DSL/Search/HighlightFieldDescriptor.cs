@@ -138,6 +138,11 @@ namespace Nest
 			Self.Type = type;
 			return this;
 		}
+		public HighlightFieldDescriptor<T> Type(HighlighterType type)
+		{
+			Self.Type = type.GetStringValue();
+			return this;
+		}
 		public HighlightFieldDescriptor<T> PreTags(string preTags)
 		{
 			Self.PreTags = new[] { preTags };

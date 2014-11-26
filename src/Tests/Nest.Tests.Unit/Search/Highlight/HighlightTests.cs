@@ -35,6 +35,7 @@ namespace Nest.Tests.Unit.Search.Highlight
                         .NoMatchSize(200)
 						.PreTags("<em>")
 						.PostTags("</em>")
+						.Type(HighlighterType.Plain)
 					)
 				);
 			var json = TestElasticClient.Serialize(s);
@@ -54,7 +55,8 @@ namespace Nest.Tests.Unit.Search.Highlight
 			  _all: {
 				pre_tags: [""<em>""],
 				post_tags: [""</em>""],
-				no_match_size: 200
+				no_match_size: 200,
+				type: ""plain""
 			  }
 			},
 			require_field_match: true,
