@@ -13,6 +13,12 @@ namespace Nest.Tests.Unit.Search.Highlight
 				.From(0)
 				.Size(10)
 				.Highlight(h => h
+					.HighlightQuery(hq => hq
+						.Match(m => m
+							.OnField(p => p.Name)
+							.Query("nest")
+						)
+					)
 					.BoundaryCharacters(".,!? \t\n")
 					.BoundaryMaxSize(20)
 					.Encoder("html")
@@ -52,7 +58,14 @@ namespace Nest.Tests.Unit.Search.Highlight
 			  }
 			},
 			require_field_match: true,
-			boundary_chars: "".,!? \t\n""
+			boundary_chars: "".,!? \t\n"",
+			highlight_query: {
+				match: {
+					name: {
+						query: ""nest""
+					}
+				}
+			}
 		  }
 		}";
 			Assert.True(json.JsonEquals(expected), json);

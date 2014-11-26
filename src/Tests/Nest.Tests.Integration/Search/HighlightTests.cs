@@ -80,5 +80,53 @@ namespace Nest.Tests.Integration.Search
 			Assert.GreaterOrEqual(result.Total, 1);
 			Assert.AreEqual(result.Highlights.Count(), 0);
 		}
+
+		[Test]
+		public void TestHighlightQuery()
+		{
+			var result = this.Client.Search<ElasticsearchProject>(s => s
+			  .From(0)
+			  .Size(10)
+			  .Query(q => q
+				.QueryString(qs => qs
+				  .Query("elasticsearch.pm")
+				)
+			  )
+			  .Highlight(h => h
+				.HighlightQuery(hq => hq
+					.Bool(b => b
+						.Must(m => m
+							.Match(mm => mm
+								.OnField(p => p.Name)
+								.Query("elasticsearch.pm")
+							)
+						)
+						.Should(sh => sh
+							.MatchPhrase(mp => mp
+								.OnField(p => p.Name)
+								.Slop(1)
+								.Boost(10)
+							)
+						)
+						.MinimumShouldMatch(0)
+					)
+				)
+				.PreTags("<b>")
+				.PostTags("</b>")
+				.OnFields(
+				  f => f
+					.OnField(e => e.Name)
+					.PreTags("<em>")
+					.PostTags("</em>")
+				)
+			  )
+			);
+
+			Assert.IsTrue(result.IsValid);
+			Assert.DoesNotThrow(() => result.Highlights.Count());
+			Assert.IsNotNull(result.Highlights);
+			Assert.GreaterOrEqual(result.Total, 2);
+			Assert.AreEqual(result.Highlights.Count(), 2);
+		}
 	}
 }
