@@ -32,10 +32,14 @@ namespace Nest.Tests.Unit.Search.Highlight
 					.OnFields(
 					f => f
 						.OnAll()
-                        .NoMatchSize(200)
+						.NoMatchSize(200)
 						.PreTags("<em>")
 						.PostTags("</em>")
-						.Type(HighlighterType.Plain)
+						.Type(HighlighterType.Plain),
+					f => f
+						.OnField(p => p.Name)
+						.Type(HighlighterType.Postings)
+						.MatchedFields(mf => mf.Country, mf => mf.Content)
 					)
 				);
 			var json = TestElasticClient.Serialize(s);
@@ -57,6 +61,10 @@ namespace Nest.Tests.Unit.Search.Highlight
 				post_tags: [""</em>""],
 				no_match_size: 200,
 				type: ""plain""
+			  },
+			  name: {
+				type: ""postings"",
+				matched_fields: [ ""country"", ""content"" ]
 			  }
 			},
 			require_field_match: true,
