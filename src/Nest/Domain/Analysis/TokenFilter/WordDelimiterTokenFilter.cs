@@ -48,7 +48,7 @@ namespace Nest
         public string ProtectedWordsPath { get; set; }
 
         [JsonProperty("type_table")]
-        public string TypeTable { get; set; }
+        public IList<string> TypeTable { get; set; }
 
         [JsonProperty("type_table_path")]
         public string TypeTablePath { get; set; }
