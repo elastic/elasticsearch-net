@@ -23,7 +23,7 @@ namespace CodeGeneration.LowLevelClient
 		private readonly static string _nestFolder = @"..\..\..\..\..\src\Nest\";
 		private readonly static string _esNetFolder = @"..\..\..\..\..\src\Elasticsearch.Net\";
 		private readonly static string _viewFolder = @"..\..\Views\";
-		private readonly static string _cacheFolder = @"..\..\Cache\";
+		private readonly static string _apiEndpointsFolder = @"..\..\ApiEndpoints\";
 		private static readonly RazorMachine _razorMachine;
 
 		private static readonly Assembly _assembly;
@@ -38,59 +38,65 @@ namespace CodeGeneration.LowLevelClient
 			var textInfo = new CultureInfo("en-US").TextInfo;
 			return textInfo.ToTitleCase(s.ToLowerInvariant()).Replace("_", string.Empty).Replace(".", string.Empty);
 		}
-		public static RestApiSpec GetRestSpec(bool useCache)
+		public static void GenerateEndpointFiles()
 		{
 			Console.WriteLine("Getting a listing of all the api endpoints from the elasticsearch-rest-api-spec repos");
 
 			string html = string.Empty;
 			using (var client = new WebClient())
-				html = client.DownloadString(useCache ? LocalUri("root.html") : _listingUrl);
+				html = client.DownloadString(_listingUrl);
 
 			var dom = CQ.Create(html);
-			if (!useCache)
-				WriteToCache("root.html", html);
 
+			WriteToEndpointsFolder("root.html", html);
+			
 			var endpoints = dom[".js-directory-link"]
 				.Select(s => s.InnerText)
 				.Where(s => !string.IsNullOrEmpty(s) && s.EndsWith(".json"))
-				.Select(s => CreateApiDocumentation(useCache, s))
-				.ToDictionary(d => d.Key, d => d.Value);
+				.ToList();
+			
+			endpoints.ForEach(s => WriteEndpointFile(s));
+		}
 
-			var restSpec = new RestApiSpec
+		public static RestApiSpec GetRestApiSpec()
+		{
+			var spec = new RestApiSpec
 			{
-				Endpoints = endpoints,
-				Commit = dom[".sha:first"].Text()
+				Commit = CQ.Create(LocalUri("root.html"))[".sha:first"].Text(),
+				Endpoints = Directory.GetFiles(_apiEndpointsFolder)
+					.Where(f => f.EndsWith(".json"))
+					.Select(f => CreateApiEndpoint(f))
+					.ToDictionary(d => d.Key, d => d.Value)
 			};
 
+			return spec;
+		}
 
-			return restSpec;
+		private static KeyValuePair<string, ApiEndpoint> CreateApiEndpoint(string jsonFile)
+		{
+			var json = File.ReadAllText(jsonFile);
+			var endpoint = JsonConvert.DeserializeObject<Dictionary<string, ApiEndpoint>>(json).First();
+			endpoint.Value.CsharpMethodName = CreateMethodName(endpoint.Key, endpoint.Value);
+			return endpoint;
 		}
 
 		private static string LocalUri(string file)
 		{
-			var basePath = Path.Combine(Assembly.GetEntryAssembly().Location, @"..\" + _cacheFolder + file);
+			var basePath = Path.Combine(Assembly.GetEntryAssembly().Location, @"..\" + _apiEndpointsFolder + file);
 			var assemblyPath = Path.GetFullPath((new Uri(basePath)).LocalPath);
 			var fileUri = new Uri(assemblyPath).AbsoluteUri;
 			return fileUri;
 		}
 
-		private static KeyValuePair<string, ApiEndpoint> CreateApiDocumentation(bool useCache, string s)
+		private static void WriteEndpointFile(string s)
 		{
 			using (var client = new WebClient())
 			{
 				var rawFile = _rawUrlPrefix + s;
 				var fileName = rawFile.Split(new[] { '/' }).Last();
 				Console.WriteLine("Downloading {0}", rawFile);
-				var json = client.DownloadString(useCache ? LocalUri(fileName) : rawFile);
-				if (!useCache)
-					WriteToCache(fileName, json);
-
-				var apiDocumentation = JsonConvert.DeserializeObject<Dictionary<string, ApiEndpoint>>(json).First();
-				apiDocumentation.Value.CsharpMethodName = CreateMethodName(
-					apiDocumentation.Key,
-					apiDocumentation.Value
-					);
-				return apiDocumentation;
+				var json = client.DownloadString(rawFile);
+				WriteToEndpointsFolder(fileName, json);
 			}
 		}
 		private static readonly Dictionary<string, string> MethodNameOverrides =
@@ -289,12 +295,12 @@ namespace CodeGeneration.LowLevelClient
 			File.WriteAllText(targetFile, source);
 		}
 
-		private static void WriteToCache(string filename, string contents)
+		private static void WriteToEndpointsFolder(string filename, string contents)
 		{
-			if (!Directory.Exists(_cacheFolder))
-				Directory.CreateDirectory(_cacheFolder);
+			if (!Directory.Exists(_apiEndpointsFolder))
+				Directory.CreateDirectory(_apiEndpointsFolder);
 
-			File.WriteAllText(_cacheFolder + filename, contents);
+			File.WriteAllText(_apiEndpointsFolder + filename, contents);
 		}
 	}
 }
