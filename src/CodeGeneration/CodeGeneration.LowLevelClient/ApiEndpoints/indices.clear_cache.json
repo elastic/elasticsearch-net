@@ -1,6 +1,6 @@
 {
   "indices.clear_cache": {
-    "documentation": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html",
+    "documentation": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html",
     "methods": ["POST", "GET"],
     "url": {
       "path": "/_cache/clear",
@@ -65,6 +65,10 @@
         "recycler": {
           "type" : "boolean",
           "description" : "Clear the recycler cache"
+        },
+        "query_cache": {
+          "type" : "boolean",
+          "description" : "Clear query cache"
         }
       }
     },

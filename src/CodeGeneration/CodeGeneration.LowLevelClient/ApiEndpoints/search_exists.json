@@ -1,10 +1,10 @@
 {
-  "count": {
-    "documentation": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html",
+  "search_exists": {
+    "documentation": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html",
     "methods": ["POST", "GET"],
     "url": {
-      "path": "/_count",
-      "paths": ["/_count", "/{index}/_count", "/{index}/{type}/_count"],
+      "path": "/_search/exists",
+      "paths": ["/_search/exists", "/{index}/_search/exists", "/{index}/{type}/_search/exists"],
       "parts": {
         "index": {
           "type" : "list",
