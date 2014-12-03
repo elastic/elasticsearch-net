@@ -114,7 +114,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			int maxRetries,
 			int retried)
 		{
-			return streamResponse.SuccessOrKnownError
+			return (streamResponse != null && streamResponse.SuccessOrKnownError)
 				|| (maxRetries == 0 
 					&& retried == 0 
 					&& !this._delegator.SniffOnFaultDiscoveredMoreNodes(requestState, retried, streamResponse)
@@ -130,6 +130,9 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				: (innerExceptions.Count() == 1)
 					? innerExceptions.First()
 					: new AggregateException(requestState.SeenExceptions);
+			if (!requestState.UsingPooling && innerException != null)
+				throw innerException;
+
 			var exceptionMessage = CreateMaxRetryExceptionMessage(requestState, innerException);
 			throw new MaxRetryException(exceptionMessage, innerException);
 		}

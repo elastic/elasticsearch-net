@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Tests.Unit.Stubs;
 using FakeItEasy;
@@ -11,8 +12,12 @@ using NUnit.Framework;
 
 namespace Elasticsearch.Net.Tests.Unit.Failover.Retries
 {
+	/// <summary>
+	/// When we are not using connection pooling and an exception happens we expect no retries to happen
+	/// and the exception that bubbles out the client should NOT be MaxRetryException
+	/// </summary>
 	[TestFixture]
-	public class ClientExceptionRetryHandlingTests
+	public class ClientExceptionsWithoutPoolingTests
 	{
 		private static readonly int _retries = 4;
 
@@ -88,5 +93,6 @@ namespace Elasticsearch.Net.Tests.Unit.Failover.Retries
 				getCall.MustHaveHappened(Repeated.Exactly.Once);
 			}
 		}
+
 	}
 }

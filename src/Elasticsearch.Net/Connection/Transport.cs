@@ -236,6 +236,7 @@ namespace Elasticsearch.Net.Connection
 		void ITransportDelegator.SniffOnConnectionFailure(ITransportRequestState requestState)
 		{
 			if (requestState.SniffedOnConnectionFailure
+				|| !requestState.UsingPooling
 				|| Self.SniffingDisabled(requestState.RequestConfiguration)
 				|| !this.ConfigurationValues.SniffsOnConnectionFault
 				|| requestState.Retried != 0) return;
@@ -269,7 +270,7 @@ namespace Elasticsearch.Net.Connection
 
 		bool ITransportDelegator.SniffOnFaultDiscoveredMoreNodes(ITransportRequestState requestState, int retried, ElasticsearchResponse<Stream> streamResponse)
 		{
-			if (retried != 0 || streamResponse.SuccessOrKnownError) return false;
+			if (!requestState.UsingPooling || retried != 0 || (streamResponse != null && streamResponse.SuccessOrKnownError)) return false;
 			Self.SniffOnConnectionFailure(requestState);
 			return Self.GetMaximumRetries(requestState.RequestConfiguration) > 0;
 		}

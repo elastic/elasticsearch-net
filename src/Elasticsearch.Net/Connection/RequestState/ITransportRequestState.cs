@@ -17,5 +17,6 @@ namespace Elasticsearch.Net.Connection.RequestState
 		List<RequestMetrics> RequestMetrics { get; set; }
 		List<Exception> SeenExceptions { get; }
 		Func<IElasticsearchResponse, Stream, object> ResponseCreationOverride { get; set; }
+		bool UsingPooling { get; }
 	}
 }
