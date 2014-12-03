@@ -28,6 +28,7 @@ namespace Elasticsearch.Net.Connection
 
 		Task<ElasticsearchResponse<Stream>> Delete(Uri uri, byte[] data, IRequestConfiguration requestConfiguration = null);
 		ElasticsearchResponse<Stream> DeleteSync(Uri uri, byte[] data, IRequestConfiguration requestConfiguration = null);
-
+		
+		
 	}
 }
