@@ -61,7 +61,8 @@
   <ItemGroup>
     <Compile Include="Exceptions\ExceptionsBubbleTests.cs" />
     <Compile Include="Failover\Concurrent\ConcurrencyTestConnection.cs" />
-    <Compile Include="Failover\Retries\ClientExceptionRetryHandlingTests.cs" />
+    <Compile Include="Failover\Retries\ClientExceptionsUsingPoolingTests.cs" />
+    <Compile Include="Failover\Retries\ClientExceptionsWithoutPoolingTests.cs" />
     <Compile Include="Memory\Helpers\AsyncMemorySetup.cs" />
     <Compile Include="Memory\Helpers\IMemorySetup.cs" />
     <Compile Include="Memory\ResponseAsyncCodePathsMemoryTests.cs" />
