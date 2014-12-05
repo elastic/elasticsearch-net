@@ -61,6 +61,9 @@ namespace Elasticsearch.Net.Connection
 		private int? _maxDeadTimeout;
 		int? IConnectionConfigurationValues.MaxDeadTimeout { get{ return _maxDeadTimeout; } }
 	
+		private TimeSpan? _maxRetryTimeout;
+		TimeSpan? IConnectionConfigurationValues.MaxRetryTimeout { get{ return _maxRetryTimeout; } }
+	
 		private string _proxyUsername;
 		string IConnectionConfigurationValues.ProxyUsername { get{ return _proxyUsername; } }
 		
@@ -278,6 +281,19 @@ namespace Elasticsearch.Net.Connection
 			this._maxDeadTimeout = timeout;
 			return (T) this;
 		}
+		
+		/// <summary>
+		/// Limits the total runtime including retries separately from <see cref="Timeout"/>
+		/// <pre>
+		/// When not specified defaults to <see cref="Timeout"/> which itself defaults to 60seconds
+		/// </pre>
+		/// </summary>
+		public T SetMaxRetryTimeout(TimeSpan maxRetryTimeout)
+		{
+			this._maxRetryTimeout = maxRetryTimeout;
+			return (T) this;
+		}
+		
 		/// <summary>
 		/// Semaphore asynchronous connections automatically by giving
 		/// it a maximum concurrent connections. 
