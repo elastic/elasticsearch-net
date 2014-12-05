@@ -11,6 +11,7 @@ namespace Elasticsearch.Net.Connection.RequestState
 		Uri CreatePathOnCurrentNode(string path);
 		IRequestConfiguration RequestConfiguration { get; }
 		int Retried { get; }
+		DateTime StartedOn { get; }
 		bool SniffedOnConnectionFailure { get; set; }
 		int? Seed { get; set; }
 		Uri CurrentNode { get; set; }
