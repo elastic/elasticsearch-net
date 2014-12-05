@@ -16,6 +16,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 	{
 		protected const int BufferSize = 4096;
 		protected static readonly string MaxRetryExceptionMessage = "Failed after retrying {2} times: '{0} {1}'. {3}";
+		protected static readonly string TookTooLongExceptionMessage = "Retry timeout {4} was hit after retrying {2} times: '{0} {1}'. {3}";
 		protected static readonly string MaxRetryInnerMessage = "InnerException: {0}, InnerMessage: {1}, InnerStackTrace: {2}";
 
 		protected readonly IConnectionConfigurationValues _settings;
@@ -123,39 +124,56 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 		protected void ThrowMaxRetryExceptionWhenNeeded<T>(TransportRequestState<T> requestState, int maxRetries)
 		{
-			if (requestState.Retried < maxRetries) return;
+			var tookToLong = this._delegator.TookTooLongToRetry(requestState);
+			
+			//not out of date and we havent depleted our retries, get the hell out of here
+			if (!tookToLong && requestState.Retried < maxRetries) return;
+
 			var innerExceptions = requestState.SeenExceptions.Where(e => e != null).ToList();
 			var innerException = !innerExceptions.HasAny()
 				? null
 				: (innerExceptions.Count() == 1)
 					? innerExceptions.First()
 					: new AggregateException(requestState.SeenExceptions);
+
+			//When we are not using pooling we forcefully rethrow the exception
+			//and never wrap it in a maxretry exception 
 			if (!requestState.UsingPooling && innerException != null)
 				throw innerException;
-
-			var exceptionMessage = CreateMaxRetryExceptionMessage(requestState, innerException);
+		
+			var exceptionMessage = tookToLong 
+				? CreateTookTooLongExceptionMessage(requestState, innerException) 
+				: CreateMaxRetryExceptionMessage(requestState, innerException);
 			throw new MaxRetryException(exceptionMessage, innerException);
+		}
+
+		protected string CreateInnerExceptionMessage<T>(TransportRequestState<T> requestState, Exception e)
+		{
+			if (e == null) return null;
+			var aggregate = e as AggregateException;
+			if (aggregate == null) 
+				return "\r\n" + MaxRetryInnerMessage.F(e.GetType().Name, e.Message, e.StackTrace);
+			aggregate = aggregate.Flatten();
+			var innerExceptions = aggregate.InnerExceptions
+				.Select(ae => MaxRetryInnerMessage.F(ae.GetType().Name, ae.Message, ae.StackTrace))
+				.ToList();
+			return "\r\n" + string.Join("\r\n", innerExceptions);
 		}
 
 		protected string CreateMaxRetryExceptionMessage<T>(TransportRequestState<T> requestState, Exception e)
 		{
-			string innerException = null;
-			if (e != null)
-			{
-				var aggregate = e as AggregateException;
-				if (aggregate != null)
-				{
-					aggregate = aggregate.Flatten();
-					var innerExceptions = aggregate.InnerExceptions
-						.Select(ae => MaxRetryInnerMessage.F(ae.GetType().Name, ae.Message, ae.StackTrace))
-						.ToList();
-					innerException = "\r\n" + string.Join("\r\n", innerExceptions);
-				}
-				else
-					innerException = "\r\n" + MaxRetryInnerMessage.F(e.GetType().Name, e.Message, e.StackTrace);
-			}
+			string innerException = CreateInnerExceptionMessage(requestState, e);
 			var exceptionMessage = MaxRetryExceptionMessage
 				.F(requestState.Method, requestState.Path, requestState.Retried, innerException);
+			return exceptionMessage;
+		}
+
+		protected string CreateTookTooLongExceptionMessage<T>(TransportRequestState<T> requestState, Exception e)
+		{
+			string innerException = CreateInnerExceptionMessage(requestState, e);
+			var timeout = this._settings.MaxRetryTimeout.GetValueOrDefault(TimeSpan.FromMilliseconds(this._settings.Timeout));
+			var exceptionMessage = TookTooLongExceptionMessage
+				.F(requestState.Method, requestState.Path, requestState.Retried, innerException, timeout);
 			return exceptionMessage;
 		}
 

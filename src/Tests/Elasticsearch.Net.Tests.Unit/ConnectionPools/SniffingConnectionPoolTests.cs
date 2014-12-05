@@ -184,7 +184,7 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionPools
 				Assert.Throws<MaxRetryException>(()=>client1.Info()); //info call 5
 
 				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
-				nowCall.MustHaveHappened(Repeated.Exactly.Times(8));
+				nowCall.MustHaveHappened(Repeated.Exactly.Times(10));
 
 			}
 		}

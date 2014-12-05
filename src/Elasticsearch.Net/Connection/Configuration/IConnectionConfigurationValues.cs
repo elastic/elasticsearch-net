@@ -6,6 +6,8 @@ using Elasticsearch.Net.Connection.Security;
 
 namespace Elasticsearch.Net.Connection
 {
+	//TODO change timeouts to TimeSpans in 2.0?
+
 	public interface IConnectionConfigurationValues
 	{
 		/// <summary>
@@ -26,7 +28,7 @@ namespace Elasticsearch.Net.Connection
 		int Timeout { get; }
 
 		/// <summary>
-		/// The timeout to use for ping calls that are issues to check whether a node is up or not.
+		/// The timeout in milliseconds to use for ping calls that are issues to check whether a node is up or not.
 		/// </summary>
 		int? PingTimeout { get; }
 		
@@ -45,6 +47,14 @@ namespace Elasticsearch.Net.Connection
 		/// amount of times we should retry the call to elasticsearch
 		/// </summary>
 		int? MaxRetries { get; }
+
+		/// <summary>
+		/// Limits the total runtime including retries separately from <see cref="Timeout"/>
+		/// <pre>
+		/// When not specified defaults to <see cref="Timeout"/> which itself defaults to 60seconds
+		/// </pre>
+		/// </summary>
+		TimeSpan? MaxRetryTimeout { get; }
 
 		/// <summary>
 		/// This signals that we do not want to send initial pings to unknown/previously dead nodes

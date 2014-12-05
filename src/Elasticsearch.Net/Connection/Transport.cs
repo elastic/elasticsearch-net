@@ -99,7 +99,7 @@ namespace Elasticsearch.Net.Connection
 				using (response.Response)
 					return response.Success;
 			}
-			catch(ElasticsearchAuthenticationException)
+			catch (ElasticsearchAuthenticationException)
 			{
 				throw;
 			}
@@ -188,7 +188,7 @@ namespace Elasticsearch.Net.Connection
 					}
 					if (response.HttpStatusCode.HasValue && response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
 						throw new ElasticsearchAuthenticationException(response);
-					if (response.Response == null) 
+					if (response.Response == null)
 						return null;
 
 					using (response.Response)
@@ -246,6 +246,26 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		/* REQUEST STATE *** ********************************************/
+
+		/// <summary>
+		/// Returns whether the current delegation over nodes took too long and we should quit.
+		/// if <see cref="ConnectionSettings.SetMaxRetryTimeout"/> is set we'll use that timeout otherwise we default to th value of 
+		/// <see cref="ConnectionSettings.SetTimeout"/> which itself defaults to 60 seconds
+		/// </summary>
+		bool ITransportDelegator.TookTooLongToRetry(ITransportRequestState requestState)
+		{
+			var timeout = this.Settings.MaxRetryTimeout.GetValueOrDefault(TimeSpan.FromMilliseconds(this.Settings.Timeout));
+			var startedOn = requestState.StartedOn;
+			var now = this._dateTimeProvider.Now();
+			
+			//we apply a soft margin so that if a request timesout at 59 seconds when the maximum is 60
+			//we also abort.
+			var margin = (timeout.TotalMilliseconds / 100.0) * 98;
+			var marginTimeSpan = TimeSpan.FromMilliseconds(margin);
+			var timespanCall = (now - startedOn);
+			var tookToLong = timespanCall >= marginTimeSpan;
+			return tookToLong;
+		}
 
 		/// <summary>
 		/// Returns either the fixed maximum set on the connection configuration settings or the number of nodes
