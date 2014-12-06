@@ -109,6 +109,13 @@ namespace Nest
 
 			return this;
 		}
+		
+		public FunctionScoreQueryDescriptor<T> Functions(FunctionScoreFunction<T>[] functions)
+	        {
+	            ((IFunctionScoreQuery)this).Functions = functions;
+	            
+	            return this;
+	        }
 
 		public FunctionScoreQueryDescriptor<T> ScoreMode(FunctionScoreMode mode)
 		{
