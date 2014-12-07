@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -53,21 +54,17 @@ namespace Nest
 		}
 
         /// <inheritdoc />
-        public IObservable<ISnapshotStatusResponse> SnapshotObservable(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null)
+        public IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null)
         {
-            repository.ThrowIfNull("repository");
-            snapshotName.ThrowIfNull("snapshotName");
             snapshotSelector.ThrowIfNull("snapshotSelector");
 
             var snapshotDescriptor = snapshotSelector(new SnapshotDescriptor());
-            snapshotDescriptor.Repository(repository);
-            snapshotDescriptor.Snapshot(snapshotName);
             var observable = new SnapshotObservable(this, snapshotDescriptor);
             return observable;
         }
 
 	    /// <inheritdoc />
-        public IObservable<ISnapshotStatusResponse> SnapshotObservable(ISnapshotRequest snapshotRequest)
+        public IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, ISnapshotRequest snapshotRequest)
 	    {
             snapshotRequest.ThrowIfNull("snapshotRequest");
 	        var observable = new SnapshotObservable(this, snapshotRequest);
@@ -201,7 +198,9 @@ namespace Nest
     {
         private readonly IElasticClient _elasticClient;
         private readonly ISnapshotRequest _snapshotRequest;
-        private TimeSpan _interval = TimeSpan.FromSeconds(10);
+        private readonly TimeSpan _interval = TimeSpan.FromSeconds(2);
+        private Timer _timer;
+        private bool _disposed;
 
         public SnapshotObservable(IElasticClient elasticClient, ISnapshotRequest snapshotRequest)
         {
@@ -212,15 +211,22 @@ namespace Nest
         public SnapshotObservable(IElasticClient elasticClient, ISnapshotRequest snapshotRequest, TimeSpan interval)
             :this(elasticClient, snapshotRequest)
         {
+            interval.ThrowIfNull("interval");
+            if (interval.Ticks < 0) throw new ArgumentOutOfRangeException("interval");
+
             _interval = interval;
         }
 
         public IDisposable Subscribe(IObserver<ISnapshotStatusResponse> observer)
         {
             observer.ThrowIfNull("observer");
+
             try
             {
-                this.Snapshot(observer);
+                _snapshotRequest.RequestParameters.WaitForCompletion(false);
+                this._elasticClient.Snapshot(_snapshotRequest);
+
+                _timer = new Timer(Snapshot, observer, _interval.Milliseconds, Timeout.Infinite);
             }
             catch (Exception exception)
             {
@@ -230,37 +236,58 @@ namespace Nest
             return this;
         }
 
-        private void Snapshot(IObserver<ISnapshotStatusResponse> observer)
+        private void Snapshot(object state)
         {
-            _snapshotRequest.RequestParameters.WaitForCompletion(false);
-            this._elasticClient.Snapshot(_snapshotRequest);
+            var observer = state as IObserver<ISnapshotStatusResponse>;
 
-            ISnapshotStatusResponse snapshotStatusResponse;
+            if(observer == null) throw new ArgumentException("state");
 
-            do
+            try
             {
-                snapshotStatusResponse = this._elasticClient.SnapshotStatus(descriptor => descriptor
+                var watch = new Stopwatch();
+                watch.Start();
+
+                var snapshotStatusResponse = this._elasticClient.SnapshotStatus(descriptor => descriptor
                     .Repository(_snapshotRequest.Repository)
                     .Snapshot(_snapshotRequest.Snapshot));
+
                 if (!snapshotStatusResponse.IsValid)
-                    throw new SnapshotException(snapshotStatusResponse.ConnectionStatus, "Can't create  snapshot");
-                
-                observer.OnNext(new SnapshotStatusResponse
+                    throw new SnapshotException(snapshotStatusResponse.ConnectionStatus, "Can't create snapshot");
+
+                if (snapshotStatusResponse.Snapshots.All(s => s.ShardsStats.Done == s.ShardsStats.Total))
                 {
-                    IsValid = true,
-                    Snapshots = snapshotStatusResponse.Snapshots
-                });
-                Thread.Sleep(_interval);
-                //TODO: change plain text to somethin else - replace to done < total?
-            } while (snapshotStatusResponse.Snapshots.All(s => s.State != "SUCCESS"));
- 
-            observer.OnCompleted();
+                    observer.OnCompleted();
+                    _timer.Change(Timeout.Infinite, Timeout.Infinite);
+                    return;
+                }
+
+                observer.OnNext(snapshotStatusResponse);
+                _timer.Change(Math.Max(0, _interval.Milliseconds - watch.ElapsedMilliseconds), Timeout.Infinite);
+            }
+            catch (Exception exception)
+            {
+                observer.OnError(exception);
+                _timer.Change(Timeout.Infinite, Timeout.Infinite);
+            }
         }
 
-        //TODO: should I do something here?
         public void Dispose()
-        { 
+        {
+            Dispose(true);
+        }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed) return;
+
+            _timer.Dispose();
+
+            _disposed = true;
+        }
+
+        ~SnapshotObservable()
+        {
+            Dispose(false);
         }
     }
 

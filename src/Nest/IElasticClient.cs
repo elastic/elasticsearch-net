@@ -1297,10 +1297,10 @@ namespace Nest
 		Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest snapshotRequest);
 
         /// <inheritdoc />
-        IObservable<ISnapshotStatusResponse> SnapshotObservable(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null);
+        IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null);
 
         /// <inheritdoc />
-        IObservable<ISnapshotStatusResponse> SnapshotObservable(ISnapshotRequest snapshotRequest);
+        IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, ISnapshotRequest snapshotRequest);
 
 		/// <summary>
 		/// Delete a snapshot
@@ -1357,10 +1357,10 @@ namespace Nest
 		Task<IRestoreResponse> RestoreAsync(IRestoreRequest restoreRequest);
 
         /// <inheritdoc />
-        IObservable<IRecoveryStatusResponse> RestoreObservable(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
+        IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
 
         /// <inheritdoc />
-        IObservable<IRecoveryStatusResponse> RestoreObservable(IRestoreRequest restoreRequest);
+        IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, IRestoreRequest restoreRequest);
 
 		/// <summary>
 		/// Allows to update cluster wide specific settings. Settings updated can either be persistent 

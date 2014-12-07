@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -51,22 +52,20 @@ namespace Nest
 			);
 		}
 
-        public IObservable<IRecoveryStatusResponse> RestoreObservable(IRestoreRequest restoreRequest)
+        /// <inheritdoc />
+        public IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, IRestoreRequest restoreRequest)
 	    {
             restoreRequest.ThrowIfNull("restoreRequest");
 	        var observable = new RestoreObservable(this, restoreRequest);
 	        return observable;
 	    }
 
-        public IObservable<IRecoveryStatusResponse> RestoreObservable(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> restoreSelector = null)
+        /// <inheritdoc />
+        public IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, Func<RestoreDescriptor, RestoreDescriptor> restoreSelector = null)
         {
-            repository.ThrowIfNull("repository");
-            snapshotName.ThrowIfNull("snapshotName");
             restoreSelector.ThrowIfNull("restoreSelector");
 
             var restoreDescriptor = restoreSelector(new RestoreDescriptor());
-            restoreDescriptor.Repository(repository);
-            restoreDescriptor.Snapshot(snapshotName);
             var observable = new RestoreObservable(this, restoreDescriptor);
             return observable;
 	    }
@@ -76,7 +75,9 @@ namespace Nest
     {
         private readonly IElasticClient _elasticClient;
         private readonly IRestoreRequest _restoreRequest;
-        private TimeSpan _interval = TimeSpan.FromSeconds(10);
+        private readonly TimeSpan _interval = TimeSpan.FromSeconds(2);
+        private Timer _timer;
+        private bool _disposed;
 
         public RestoreObservable(IElasticClient elasticClient, IRestoreRequest restoreRequest)
         {
@@ -85,8 +86,11 @@ namespace Nest
         }
 
         public RestoreObservable(IElasticClient elasticClient, IRestoreRequest restoreRequest, TimeSpan interval)
-            :this(elasticClient, restoreRequest)
+            : this(elasticClient, restoreRequest)
         {
+            interval.ThrowIfNull("interval");
+            if (interval.Ticks < 0) throw new ArgumentOutOfRangeException("interval");
+
             _interval = interval;
         }
 
@@ -96,7 +100,10 @@ namespace Nest
 
             try
             {
-                Restore(observer);
+                _restoreRequest.RequestParameters.WaitForCompletion(false);
+                this._elasticClient.Restore(_restoreRequest);
+
+                _timer = new Timer(Restore, observer, _interval.Milliseconds, Timeout.Infinite);
             }
             catch (Exception exception)
             {
@@ -106,32 +113,57 @@ namespace Nest
             return this;
         }
 
-        private void Restore(IObserver<IRecoveryStatusResponse> observer)
+        private void Restore(object state)
         {
-            _restoreRequest.RequestParameters.WaitForCompletion(false);
-            this._elasticClient.Restore(_restoreRequest);
+            var observer = state as IObserver<IRecoveryStatusResponse>;
 
-            IRecoveryStatusResponse recoveryStatusResponse = null;
+            if (observer == null) throw new ArgumentException("state");
 
-            do
+            try
             {
-                recoveryStatusResponse = _elasticClient.RecoveryStatus(new RecoveryStatusRequest()
+                var watch = new Stopwatch();
+                watch.Start();
+
+                var recoveryStatus = _elasticClient.RecoveryStatus(
+                    descriptor =>
+                        descriptor.Indices(_restoreRequest.Indices.Select(x => x.Name).ToArray())
+                        .Detailed(true)
+                        );
+
+                if (recoveryStatus.Indices.All(x => x.Value.Shards.All(s => s.Stage == "DONE")))
                 {
-                    Detailed = true,
-                    Indices = _restoreRequest.Indices
-                });
+                    _timer.Change(Timeout.Infinite, Timeout.Infinite);
+                    observer.OnCompleted();
+                    return;
+                }
 
-                observer.OnNext(recoveryStatusResponse);
-                Thread.Sleep(_interval);
-                //TODO: change this 'done' - replace with done < total?
-            } while (recoveryStatusResponse.Indices.All(x => x.Value.Shards.All(s => s.Stage != "DONE")));
-
-            observer.OnCompleted();
+               observer.OnNext(recoveryStatus);
+                _timer.Change(Math.Max(0, _interval.Milliseconds - watch.ElapsedMilliseconds), Timeout.Infinite);
+            }
+            catch (Exception exception)
+            {
+                _timer.Change(Timeout.Infinite, Timeout.Infinite);
+                observer.OnError(exception);
+            }
         }
-        //TODO: should I do something here?
+        
         public void Dispose()
         {
+            Dispose(true);
+        }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed) return;
+
+            _timer.Dispose();
+
+            _disposed = true;
+        }
+
+        ~RestoreObservable()
+        {
+            Dispose(false);
         }
     }
 }
