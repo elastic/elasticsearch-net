@@ -5858,12 +5858,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public class SnapshotVerifyRepositoryRequestParameters : FluentRequestParameters<SnapshotVerifyRepositoryRequestParameters> 
+	public class VerifyRepositoryRequestParameters : FluentRequestParameters<VerifyRepositoryRequestParameters> 
 	{
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotVerifyRepositoryRequestParameters MasterTimeout(string master_timeout)
+		public VerifyRepositoryRequestParameters MasterTimeout(string master_timeout)
 		{
 			this._master_timeout = master_timeout;
 			this.AddQueryString("master_timeout", this._master_timeout);
@@ -5873,7 +5873,7 @@ namespace Elasticsearch.Net
 		
 		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
-		public SnapshotVerifyRepositoryRequestParameters Timeout(string timeout)
+		public VerifyRepositoryRequestParameters Timeout(string timeout)
 		{
 			this._timeout = timeout;
 			this.AddQueryString("timeout", this._timeout);

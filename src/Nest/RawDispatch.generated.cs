@@ -4010,7 +4010,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> SnapshotVerifyRepositoryDispatch<T>(ElasticsearchPathInfo<SnapshotVerifyRepositoryRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> SnapshotVerifyRepositoryDispatch<T>(ElasticsearchPathInfo<VerifyRepositoryRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -4025,7 +4025,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotVerifyRepositoryDispatchAsync<T>(ElasticsearchPathInfo<SnapshotVerifyRepositoryRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SnapshotVerifyRepositoryDispatchAsync<T>(ElasticsearchPathInfo<VerifyRepositoryRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{

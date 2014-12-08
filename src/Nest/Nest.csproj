@@ -191,6 +191,7 @@
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Cat\ICatRecord.cs" />
+    <Compile Include="Domain\Responses\VerifyRepositoryResponse.cs" />
     <Compile Include="Domain\Responses\GetRepositoryResponse.cs" />
     <Compile Include="Domain\Responses\GetScriptResponse.cs" />
     <Compile Include="Domain\Responses\GetSearchTemplateResponse.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="Domain\Responses\ShardRecovery.cs" />
     <Compile Include="Domain\Responses\PutSearchTemplateResponse.cs" />
     <Compile Include="Domain\Stats\ClusterNodesStas.cs" />
+    <Compile Include="Domain\Stats\CompactNodeInfo.cs" />
     <Compile Include="Domain\Stats\CompletionStats.cs" />
     <Compile Include="Domain\Stats\FieldDataStats.cs" />
     <Compile Include="Domain\Stats\FilterCacheStats.cs" />
@@ -225,6 +227,7 @@
     <Compile Include="DSL\Aggregations\TopHitsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\GeoBoundsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ReverseNestedAggregationDescriptor.cs" />
+    <Compile Include="DSL\VerifyRepositoryDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoHashCellFilterDescriptor.cs" />
     <Compile Include="DSL\DeleteScriptDescriptor.cs" />
     <Compile Include="DSL\GetScriptDescriptor.cs" />
