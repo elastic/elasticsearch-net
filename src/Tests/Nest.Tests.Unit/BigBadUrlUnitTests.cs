@@ -182,7 +182,7 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/_scripts/lang/id", c => c.GetScript(s => s.Lang("lang").Id("id")));
 			Do("DELETE", "/_scripts/lang/id", c => c.DeleteScript(s => s.Lang("lang").Id("id")));
 
-			Do("GET", "/mydefaultindex/doc/_search/exists?q=field:term", c => c.SearchExists<Doc>(s => s.QueryString("field:term")));
+			Do("GET", "/mydefaultindex/doc/_search/exists?q=term", c => c.SearchExists<Doc>(s => s.QueryString("term")));
 			Do("GET", "/mydefaultindex/doc/_search/exists?source=%7B%7D", c => c.SearchExists<Doc>(s=>s.Source("{}")));
 			Do("GET", "/mydefaultindex/doc/_search/exists", c => c.SearchExists<Doc>(s=>s));
 			Do("POST", "/mydefaultindex/doc/_search/exists", c => c.SearchExists<Doc>(s=>s.Query(q=>q.MatchAll())));
