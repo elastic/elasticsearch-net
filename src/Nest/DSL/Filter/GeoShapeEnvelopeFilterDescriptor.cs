@@ -13,6 +13,8 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoShapeBaseFilter : IFieldNameFilter
 	{
+		[JsonProperty("relation")]
+		GeoShapeRelation? Relation { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -32,6 +34,8 @@ namespace Nest
 		public PropertyPathMarker Field { get; set; }
 
 		public IEnvelopeGeoShape Shape { get; set; }
+
+		public GeoShapeRelation? Relation { get; set; }
 	}
 
 	public class GeoShapeEnvelopeFilterDescriptor : FilterBase, IGeoShapeEnvelopeFilter
@@ -47,6 +51,7 @@ namespace Nest
 		}
 
 		PropertyPathMarker IFieldNameFilter.Field { get; set; }
+		GeoShapeRelation? IGeoShapeBaseFilter.Relation { get; set; }
 		IEnvelopeGeoShape IGeoShapeEnvelopeFilter.Shape { get; set; }
 
 		public GeoShapeEnvelopeFilterDescriptor Coordinates(IEnumerable<IEnumerable<double>> coordinates)
@@ -54,6 +59,12 @@ namespace Nest
 			if (this.Self.Shape == null)
 				this.Self.Shape = new EnvelopeGeoShape();
 			this.Self.Shape.Coordinates = coordinates;
+			return this;
+		}
+
+		public GeoShapeEnvelopeFilterDescriptor Relation(GeoShapeRelation relation)
+		{
+			this.Self.Relation = relation;
 			return this;
 		}
 	}

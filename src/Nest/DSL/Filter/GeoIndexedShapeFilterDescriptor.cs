@@ -24,6 +24,8 @@ namespace Nest
 		public PropertyPathMarker Field { get; set; }
 
 		public IndexedGeoShape IndexedShape { get; set; }
+
+		public GeoShapeRelation? Relation { get; set; }
 	}
 
 	public class GeoIndexedShapeFilterDescriptor : FilterBase, IGeoIndexedShapeFilter
@@ -38,6 +40,7 @@ namespace Nest
 		}
 
 		PropertyPathMarker IFieldNameFilter.Field { get; set; }
+		GeoShapeRelation? IGeoShapeBaseFilter.Relation { get; set; }
 		IndexedGeoShape IGeoIndexedShapeFilter.IndexedShape { get; set; }
 
 		public GeoIndexedShapeFilterDescriptor Lookup<T>(string field, string id, string index = null, string type = null)
@@ -62,6 +65,11 @@ namespace Nest
 			return _SetShape<T>(field, id, index, type);
 		}
 		
+		public GeoIndexedShapeFilterDescriptor Relation<T>(GeoShapeRelation relation)
+		{
+			((IGeoIndexedShapeFilter)this).Relation = relation;
+			return this;
+		}
 	}
 
 }
