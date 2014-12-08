@@ -5484,13 +5484,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotVerifyRepositoryDescriptor  : BaseRequest<SnapshotVerifyRepositoryRequestParameters>
+	public partial class VerifyRepositoryDescriptor 
 	{
 		
 	
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotVerifyRepositoryDescriptor MasterTimeout(string master_timeout)
+		public VerifyRepositoryDescriptor MasterTimeout(string master_timeout)
 		{
 			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
@@ -5498,16 +5498,10 @@ namespace Nest
 		
 
 		///<summary>Explicit operation timeout</summary>
-		public SnapshotVerifyRepositoryDescriptor Timeout(string timeout)
+		public VerifyRepositoryDescriptor Timeout(string timeout)
 		{
 			this.Request.RequestParameters.Timeout(timeout);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotVerifyRepositoryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

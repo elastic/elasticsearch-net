@@ -186,6 +186,8 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/mydefaultindex/doc/_search/exists?source=%7B%7D", c => c.SearchExists<Doc>(s=>s.Source("{}")));
 			Do("GET", "/mydefaultindex/doc/_search/exists", c => c.SearchExists<Doc>(s=>s));
 			Do("POST", "/mydefaultindex/doc/_search/exists", c => c.SearchExists<Doc>(s=>s.Query(q=>q.MatchAll())));
+
+			Do("POST", "/_snapshot/my_repos/_verify", c => c.VerifyRepository("my_repos"));
 		}
 
 	}

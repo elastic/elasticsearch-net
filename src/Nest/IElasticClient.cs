@@ -1594,5 +1594,17 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IExistsResponse> SearchExistsAsync(ISearchExistsRequest indexRequest);
+
+		/// <inheritdoc />
+		IVerifyRepositoryResponse VerifyRepository(string name, Func<VerifyRepositoryDescriptor, VerifyRepositoryDescriptor> selector = null);
+
+		/// <inheritdoc />
+		IVerifyRepositoryResponse VerifyRepository(IVerifyRepositoryRequest verifyRepositoryRequest);
+
+		/// <inheritdoc />
+		Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(string name, Func<VerifyRepositoryDescriptor, VerifyRepositoryDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest verifyRepositoryRequest);
 	}
 }
