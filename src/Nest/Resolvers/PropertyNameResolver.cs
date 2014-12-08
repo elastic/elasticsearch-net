@@ -59,6 +59,8 @@ namespace Nest.Resolvers
 		private readonly IConnectionSettingsValues _settings;
 		public PropertyNameResolver(IConnectionSettingsValues settings)
 		{
+			if (settings == null)
+				throw new ArgumentNullException("settings");
 			_settings = settings;
 		}
 
