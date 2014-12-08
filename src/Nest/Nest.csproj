@@ -228,6 +228,7 @@
     <Compile Include="DSL\Filter\GeoHashCellFilterDescriptor.cs" />
     <Compile Include="DSL\DeleteScriptDescriptor.cs" />
     <Compile Include="DSL\GetScriptDescriptor.cs" />
+    <Compile Include="DSL\SearchExistsDescriptor.cs" />
     <Compile Include="DSL\PutScriptDescriptor.cs" />
     <Compile Include="DSL\PutSearchTemplateDescriptor.cs" />
     <Compile Include="DSL\DeleteSearchTemplateDescriptor.cs" />
@@ -353,6 +354,7 @@
     <Compile Include="DSL\_Requests.generated.cs" />
     <Compile Include="ElasticClient-Cat.cs" />
     <Compile Include="ElasticClient-DoRequest.cs" />
+    <Compile Include="ElasticClient-SearchExists.cs" />
     <Compile Include="ElasticClient-Scripts.cs" />
     <Compile Include="ElasticClient-SearchShards.cs" />
     <Compile Include="ElasticClient-RecoveryStatus.cs" />
