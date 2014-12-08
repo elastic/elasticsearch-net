@@ -25,7 +25,7 @@ namespace Nest
 		}
 
 		public PropertyPathMarker Field { get; set; }
-
+		public GeoShapeRelation? Relation { get; set; }
 		public IPointGeoShape Shape { get; set; }
 	}
 
@@ -42,6 +42,7 @@ namespace Nest
 		}
 
 		PropertyPathMarker IFieldNameFilter.Field { get; set; }
+		GeoShapeRelation? IGeoShapeBaseFilter.Relation { get; set; }
 		IPointGeoShape IGeoShapePointFilter.Shape { get; set; }
 
 		public GeoShapePointFilterDescriptor Coordinates(IEnumerable<double> coordinates)
@@ -49,6 +50,12 @@ namespace Nest
 			if (this.Self.Shape == null)
 				this.Self.Shape = new PointGeoShape();
 			this.Self.Shape.Coordinates = coordinates;
+			return this;
+		}
+
+		public GeoShapePointFilterDescriptor Relation(GeoShapeRelation relation)
+		{
+			this.Self.Relation = relation;
 			return this;
 		}
 	}
