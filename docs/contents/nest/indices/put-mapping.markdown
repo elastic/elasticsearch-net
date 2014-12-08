@@ -1,6 +1,6 @@
 ---
 template: layout.jade
-title: Put Mapping
+title: Connecting
 menusection: indices
 menuitem: put-mapping
 ---
@@ -61,37 +61,41 @@ You can persist this mapping by simpling calling
 
 You can also create mappings on the fly:
 
-	var indexDefinition = new RootObjectMapping
+	var typeMapping = new TypeMapping(Guid.NewGuid().ToString("n"));
+	var property = new TypeMappingProperty
 	{
-		Properties = new Dictionary<PropertyNameMarker, IElasticType>(),
-		Name = indexName
+		Type = "multi_field"
 	};
 
-	var property = new StringMapping
+	var primaryField = new TypeMappingProperty
 	{
+		Type = "string", 
 		Index = "not_analyzed"
 	};
 
-	var analyzedField = new StringMapping
+	var analyzedField = new TypeMappingProperty
 	{
+		Type = "string", 
 		Index = "analyzed"
 	};
 
+	property.Fields = new Dictionary<string, TypeMappingProperty>();
+	property.Fields.Add("name", primaryField);
 	property.Fields.Add("name_analyzed", analyzedField);
-	indexDefinition.Properties.Add("name", property);
-	this.ConnectedClient.Map<object>(x => x.InitializeUsing(indexDefinition));
 
+	typeMapping.Properties.Add("name", property);
+	this.ConnectedClient.Map(typeMapping);
 
 ## Multifield Mapping
 To create multifield type you can use following example. 
 
 	var result = this._client.Map<ElasticsearchProject>(m => m
 		.Properties(props => props
-		.String(s => s
+		.MultiField(s => s
 		.Name(p => p.Name)
 		.Path(MultiFieldMappingPath.Full)
-		.Index(FieldIndexOption.not_analyzed)
 		.Fields(pprops => pprops
+			.String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
 			.String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.analyzed))
 		)
 		))
