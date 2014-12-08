@@ -131,8 +131,8 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/mycustomindex/_open", c => c.OpenIndex("mycustomindex"));
 			Do("POST", "/_optimize", c => c.Optimize());
 			Do("POST", "/mydefaultindex/_optimize", c => c.Optimize(o => o.Index<Doc>()));
-			Do("POST", "/mydefaultindex/doc/_percolate", c => c.Percolate<Doc>(p=>p.Document(new Doc { Id = "1" })));
-			Do("POST", "/mydefaultindex/otherdoc/_percolate", c => c.Percolate<OtherDoc>(p=>p.Document(new OtherDoc { Name = "hello" })));
+			Do("POST", "/mydefaultindex/doc/_percolate", c => c.Percolate<Doc>(p => p.Document(new Doc { Id = "1" })));
+			Do("POST", "/mydefaultindex/otherdoc/_percolate", c => c.Percolate<OtherDoc>(p => p.Document(new OtherDoc { Name = "hello" })));
 			Do("POST", "/mycustomindex/mycustomtype/_percolate", c => c.Percolate<OtherDoc>(p => p.Document(new OtherDoc { Name = "hello" }).Index("mycustomindex").Type("mycustomtype")));
 			Do("POST", "/mydefaultindex/otherdoc/my-id/_percolate", c => c.Percolate<OtherDoc>(p => p.Id("my-id")));
 			Do("POST", "/mydefaultindex/otherdoc/my-id/_explain", c => c.Explain<OtherDoc>(p => p.Id("my-id")));
@@ -171,16 +171,21 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/_validate/query", c => c.Validate<Doc>(v => v.AllIndices().AllTypes()));
 			Do("PUT", "/_cluster/settings", c => c.ClusterSettings(v => v.Transient(p => p)));
 			Do("GET", "/_cluster/settings", c => c.ClusterGetSettings());
-			
+
 			Do("GET", "/mydefaultindex/doc/_search_shards?ignore_unavailable=true", c => c.SearchShards<Doc>(s => s.IgnoreUnavailable()));
 			Do("GET", "/_all/doc/_search_shards?local=true", c => c.SearchShards<Doc>(s => s.AllIndices().Local()));
 			Do("GET", "/_search_shards?preference=nodeID", c => c.SearchShards<Doc>(s => s.AllIndices().AllTypes().Preference("nodeID")));
 			Do("GET", "/mydefaultindex/_search_shards?routing=routing-value", c => c.SearchShards<Doc>(s => s.AllTypes().Routing("routing-value")));
 			Do("GET", "/prefix-*/a%2Cb/_search_shards", c => c.SearchShards<Doc>(s => s.Index("prefix-*").Types("a", "b")));
 
-            Do("POST", "/_scripts/lang/id", c => c.PutScript(s => s.Lang("lang").Id("id")));
-            Do("GET", "/_scripts/lang/id", c => c.GetScript(s => s.Lang("lang").Id("id")));
-            Do("DELETE", "/_scripts/lang/id", c => c.DeleteScript(s => s.Lang("lang").Id("id")));
+			Do("POST", "/_scripts/lang/id", c => c.PutScript(s => s.Lang("lang").Id("id")));
+			Do("GET", "/_scripts/lang/id", c => c.GetScript(s => s.Lang("lang").Id("id")));
+			Do("DELETE", "/_scripts/lang/id", c => c.DeleteScript(s => s.Lang("lang").Id("id")));
+
+			Do("GET", "/mydefaultindex/doc/_search/exists?q=term", c => c.SearchExists<Doc>(s => s.QueryString("term")));
+			Do("GET", "/mydefaultindex/doc/_search/exists?source=%7B%7D", c => c.SearchExists<Doc>(s=>s.Source("{}")));
+			Do("GET", "/mydefaultindex/doc/_search/exists", c => c.SearchExists<Doc>(s=>s));
+			Do("POST", "/mydefaultindex/doc/_search/exists", c => c.SearchExists<Doc>(s=>s.Query(q=>q.MatchAll())));
 		}
 
 	}

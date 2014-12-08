@@ -1580,5 +1580,19 @@ namespace Nest
 
         /// <inheritdoc />
         Task<IDeleteScriptResponse> DeleteScriptAsync(Func<DeleteScriptDescriptor, DeleteScriptDescriptor> deleteScriptDescriptor);
+
+		/// <inheritdoc />
+		IExistsResponse SearchExists<T>(Func<SearchExistsDescriptor<T>, SearchExistsDescriptor<T>> selector)
+			where T : class;
+
+		/// <inheritdoc />
+		IExistsResponse SearchExists(ISearchExistsRequest indexRequest);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> SearchExistsAsync<T>(Func<SearchExistsDescriptor<T>, SearchExistsDescriptor<T>> selector)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<IExistsResponse> SearchExistsAsync(ISearchExistsRequest indexRequest);
 	}
 }

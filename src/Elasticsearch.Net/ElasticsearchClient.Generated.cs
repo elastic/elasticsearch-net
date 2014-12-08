@@ -33653,9 +33653,15 @@ namespace Elasticsearch.Net
 			var url = "_search/exists".F();
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -33686,9 +33692,15 @@ namespace Elasticsearch.Net
 			var url = "_search/exists".F();
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -33721,9 +33733,15 @@ namespace Elasticsearch.Net
 			var url = "_search/exists".F();
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -33756,9 +33774,15 @@ namespace Elasticsearch.Net
 			var url = "_search/exists".F();
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -33791,9 +33815,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/_search/exists".F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -33826,9 +33856,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/_search/exists".F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -33863,9 +33899,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/_search/exists".F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -33900,9 +33942,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/_search/exists".F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -33937,9 +33985,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/_search/exists".F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -33974,9 +34028,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/_search/exists".F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -34013,9 +34073,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/_search/exists".F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -34052,9 +34118,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/_search/exists".F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -34084,9 +34156,15 @@ namespace Elasticsearch.Net
 			var url = "_search/exists";
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -34116,9 +34194,15 @@ namespace Elasticsearch.Net
 			var url = "_search/exists";
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -34150,9 +34234,15 @@ namespace Elasticsearch.Net
 			var url = "_search/exists";
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -34184,9 +34274,15 @@ namespace Elasticsearch.Net
 			var url = "_search/exists";
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -34218,9 +34314,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/_search/exists".F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -34252,9 +34354,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/_search/exists".F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -34288,9 +34396,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/_search/exists".F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -34324,9 +34438,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/_search/exists".F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -34360,9 +34480,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/_search/exists".F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -34396,9 +34522,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/_search/exists".F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -34434,9 +34566,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/_search/exists".F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
@@ -34472,9 +34610,15 @@ namespace Elasticsearch.Net
 			var url = "{0}/{1}/_search/exists".F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
-			if (requestParameters != null)
-			{
-				requestParams = requestParameters(new SearchExistsRequestParameters());
+			requestParameters = requestParameters ?? (s => s);
+			var passIn = new SearchExistsRequestParameters();
+			requestParams = requestParameters(passIn);
+			if (requestParams.RequestConfiguration == null) 
+					requestParams.RequestConfiguration = new RequestConfiguration { AllowedStatusCodes = new [] { 404 } };
+			else {
+									 if (requestParams.RequestConfiguration.AllowedStatusCodes == null) {
+						requestParams.RequestConfiguration.AllowedStatusCodes =  new [] { 404 };
+					}
 			}
 				
 
