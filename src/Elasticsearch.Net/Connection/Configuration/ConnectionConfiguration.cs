@@ -352,9 +352,18 @@ namespace Elasticsearch.Net.Connection
         }
 
 		/// <summary>
-		/// Basic access authorization credentials to specify with all requests.
+		/// Basic access authentication credentials to specify with all requests.
 		/// </summary>
+		[Obsolete("Scheduled to be removed in 2.0.  Use SetBasicAuthentication() instead.")]
 		public T SetBasicAuthorization(string userName, string password)
+		{
+			return this.SetBasicAuthentication(userName, password);
+		}
+
+		/// <summary>
+		/// Basic access authentication credentials to specify with all requests.
+		/// </summary>
+		public T SetBasicAuthentication(string userName, string password)
 		{
 			if (this._basicAuthCredentials == null)
 				this._basicAuthCredentials = new BasicAuthorizationCredentials();

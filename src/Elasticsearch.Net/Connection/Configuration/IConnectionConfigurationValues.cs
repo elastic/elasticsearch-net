@@ -149,6 +149,7 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Basic access authorization credentials to specify with all requests.
 		/// </summary>
+		/// TODO: Rename to BasicAuthenticationCredentials in 2.0
 		BasicAuthorizationCredentials BasicAuthorizationCredentials { get; } 
 	}
 }
