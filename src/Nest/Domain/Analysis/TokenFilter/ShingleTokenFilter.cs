@@ -43,5 +43,11 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("token_separator")]
 		public string TokenSeparator { get; set; }
+
+        /// <summary>
+        /// The string to use as a replacement for each position at which there is no actual token in the stream. For instance this string is used if the position increment is greater than one when a stop filter is used together with the shingle filter. Defaults to "_"
+        /// </summary>
+        [JsonProperty("filler_token")]
+        public string FillerToken { get; set; }
     }
 }
