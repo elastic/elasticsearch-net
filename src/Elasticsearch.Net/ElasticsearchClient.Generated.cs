@@ -17143,14 +17143,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetUpgradeForAll<T>(Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesGetUpgradeForAll<T>(Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_upgrade";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeStatusRequestParameters());
 			}
 				
 
@@ -17175,14 +17175,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetUpgradeForAllAsync<T>(Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetUpgradeForAllAsync<T>(Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_upgrade";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeStatusRequestParameters());
 			}
 				
 
@@ -17209,14 +17209,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetUpgradeForAll(Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetUpgradeForAll(Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_upgrade";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeStatusRequestParameters());
 			}
 				
 
@@ -17243,14 +17243,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetUpgradeForAllAsync(Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetUpgradeForAllAsync(Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null)
 		{
 			var url = "_upgrade";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeStatusRequestParameters());
 			}
 				
 
@@ -17276,7 +17276,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesGetUpgrade<T>(string index, Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesGetUpgrade<T>(string index, Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_upgrade".F(Encoded(index));
@@ -17284,7 +17284,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeStatusRequestParameters());
 			}
 				
 
@@ -17310,7 +17310,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesGetUpgradeAsync<T>(string index, Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetUpgradeAsync<T>(string index, Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_upgrade".F(Encoded(index));
@@ -17318,7 +17318,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeStatusRequestParameters());
 			}
 				
 
@@ -17346,7 +17346,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesGetUpgrade(string index, Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesGetUpgrade(string index, Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_upgrade".F(Encoded(index));
@@ -17354,7 +17354,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeStatusRequestParameters());
 			}
 				
 
@@ -17382,7 +17382,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetUpgradeAsync(string index, Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetUpgradeAsync(string index, Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_upgrade".F(Encoded(index));
@@ -17390,7 +17390,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesGetUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeStatusRequestParameters());
 			}
 				
 
@@ -23535,14 +23535,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesUpgradeForAll<T>(Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesUpgradeForAll<T>(Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null)
 		{
 			var url = "_upgrade";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeRequestParameters());
 			}
 				
 
@@ -23567,14 +23567,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesUpgradeForAllAsync<T>(Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesUpgradeForAllAsync<T>(Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null)
 		{
 			var url = "_upgrade";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeRequestParameters());
 			}
 				
 
@@ -23601,14 +23601,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesUpgradeForAll(Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesUpgradeForAll(Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null)
 		{
 			var url = "_upgrade";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeRequestParameters());
 			}
 				
 
@@ -23635,14 +23635,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesUpgradeForAllAsync(Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesUpgradeForAllAsync(Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null)
 		{
 			var url = "_upgrade";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeRequestParameters());
 			}
 				
 
@@ -23668,7 +23668,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesUpgrade<T>(string index, Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesUpgrade<T>(string index, Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_upgrade".F(Encoded(index));
@@ -23676,7 +23676,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeRequestParameters());
 			}
 				
 
@@ -23702,7 +23702,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesUpgradeAsync<T>(string index, Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesUpgradeAsync<T>(string index, Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_upgrade".F(Encoded(index));
@@ -23710,7 +23710,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeRequestParameters());
 			}
 				
 
@@ -23738,7 +23738,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesUpgrade(string index, Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesUpgrade(string index, Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_upgrade".F(Encoded(index));
@@ -23746,7 +23746,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeRequestParameters());
 			}
 				
 
@@ -23774,7 +23774,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesUpgradeAsync(string index, Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesUpgradeAsync(string index, Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_upgrade".F(Encoded(index));
@@ -23782,7 +23782,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesUpgradeRequestParameters());
+				requestParams = requestParameters(new UpgradeRequestParameters());
 			}
 				
 

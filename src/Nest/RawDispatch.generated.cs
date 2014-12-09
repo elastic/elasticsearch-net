@@ -2040,7 +2040,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesGetUpgradeDispatch<T>(ElasticsearchPathInfo<IndicesGetUpgradeRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetUpgradeDispatch<T>(ElasticsearchPathInfo<UpgradeStatusRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2056,7 +2056,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetUpgradeDispatchAsync<T>(ElasticsearchPathInfo<IndicesGetUpgradeRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetUpgradeDispatchAsync<T>(ElasticsearchPathInfo<UpgradeStatusRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2666,7 +2666,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesUpgradeDispatch<T>(ElasticsearchPathInfo<IndicesUpgradeRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesUpgradeDispatch<T>(ElasticsearchPathInfo<UpgradeRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2682,7 +2682,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesUpgradeDispatchAsync<T>(ElasticsearchPathInfo<IndicesUpgradeRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesUpgradeDispatchAsync<T>(ElasticsearchPathInfo<UpgradeRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{

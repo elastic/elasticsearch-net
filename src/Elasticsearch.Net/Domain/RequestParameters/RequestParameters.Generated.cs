@@ -3378,12 +3378,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html
 	///</pre>
 	///</summary>
-	public class IndicesGetUpgradeRequestParameters : FluentRequestParameters<IndicesGetUpgradeRequestParameters> 
+	public class UpgradeStatusRequestParameters : FluentRequestParameters<UpgradeStatusRequestParameters> 
 	{
 		
 		internal bool _ignore_unavailable { get; set; }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesGetUpgradeRequestParameters IgnoreUnavailable(bool ignore_unavailable)
+		public UpgradeStatusRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
 			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
@@ -3393,7 +3393,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _allow_no_indices { get; set; }
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesGetUpgradeRequestParameters AllowNoIndices(bool allow_no_indices)
+		public UpgradeStatusRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
 			this.AddQueryString("allow_no_indices", this._allow_no_indices);
@@ -3403,7 +3403,7 @@ namespace Elasticsearch.Net
 		
 		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesGetUpgradeRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
+		public UpgradeStatusRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3413,7 +3413,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _human { get; set; }
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public IndicesGetUpgradeRequestParameters Human(bool human)
+		public UpgradeStatusRequestParameters Human(bool human)
 		{
 			this._human = human;
 			this.AddQueryString("human", this._human);
@@ -4238,12 +4238,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html
 	///</pre>
 	///</summary>
-	public class IndicesUpgradeRequestParameters : FluentRequestParameters<IndicesUpgradeRequestParameters> 
+	public class UpgradeRequestParameters : FluentRequestParameters<UpgradeRequestParameters> 
 	{
 		
 		internal bool _allow_no_indices { get; set; }
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesUpgradeRequestParameters AllowNoIndices(bool allow_no_indices)
+		public UpgradeRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
 			this.AddQueryString("allow_no_indices", this._allow_no_indices);
@@ -4253,7 +4253,7 @@ namespace Elasticsearch.Net
 		
 		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesUpgradeRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
+		public UpgradeRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -4263,7 +4263,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _ignore_unavailable { get; set; }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesUpgradeRequestParameters IgnoreUnavailable(bool ignore_unavailable)
+		public UpgradeRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
 			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
@@ -4273,7 +4273,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _wait_for_completion { get; set; }
 		///<summary>Specify whether the request should block until the all segments are upgraded (default: true)</summary>
-		public IndicesUpgradeRequestParameters WaitForCompletion(bool wait_for_completion)
+		public UpgradeRequestParameters WaitForCompletion(bool wait_for_completion)
 		{
 			this._wait_for_completion = wait_for_completion;
 			this.AddQueryString("wait_for_completion", this._wait_for_completion);
