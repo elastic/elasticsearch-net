@@ -374,6 +374,7 @@
     <Compile Include="Enums\FieldDataLoading.cs" />
     <Compile Include="Enums\FieldDataNonStringFormat.cs" />
     <Compile Include="Enums\FieldDataStringFormat.cs" />
+    <Compile Include="Enums\GeoShapeRelation.cs" />
     <Compile Include="Enums\HighlighterType.cs" />
     <Compile Include="Enums\NormsLoading.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
