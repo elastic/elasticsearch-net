@@ -147,6 +147,7 @@
     <Compile Include="Cluster\StateTests.cs" />
     <Compile Include="Core\Exists\TypeExistsTests.cs" />
     <Compile Include="Indices\StatusTests.cs" />
+    <Compile Include="Indices\UpgradeTests.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />

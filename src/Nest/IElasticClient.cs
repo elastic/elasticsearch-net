@@ -1606,5 +1606,30 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest verifyRepositoryRequest);
+
+		/// <inheritdoc />
+		IUpgradeResponse Upgrade(IUpgradeRequest upgradeRequest);
+
+		/// <inheritdoc />
+		IUpgradeResponse Upgrade(Func<UpgradeDescriptor, UpgradeDescriptor> upgradeDescriptor = null);
+		
+		/// <inheritdoc />
+		Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest upgradeRequest);
+
+		/// <inheritdoc />
+		Task<IUpgradeResponse> UpgradeAsync(Func<UpgradeDescriptor, UpgradeDescriptor> upgradeDescriptor = null);
+
+		/// <inheritdoc />
+		IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest upgradeRequest);
+
+		/// <inheritdoc />
+		IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, UpgradeStatusDescriptor> upgradeDescriptor = null);
+
+		/// <inheritdoc />
+		Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest upgradeRequest);
+
+		/// <inheritdoc />
+		Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, UpgradeStatusDescriptor> upgradeDescriptor = null);
+
 	}
 }

@@ -8995,7 +8995,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesGetUpgradeForAll<T>(Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesGetUpgradeForAll<T>(Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_upgrade
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -9012,7 +9012,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesGetUpgradeForAllAsync<T>(Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesGetUpgradeForAllAsync<T>(Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_upgrade
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -9031,7 +9031,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesGetUpgradeForAll(Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesGetUpgradeForAll(Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_upgrade
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -9050,7 +9050,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetUpgradeForAllAsync(Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetUpgradeForAllAsync(Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_upgrade
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -9068,7 +9068,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesGetUpgrade<T>(string index, Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesGetUpgrade<T>(string index, Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_upgrade
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -9086,7 +9086,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesGetUpgradeAsync<T>(string index, Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesGetUpgradeAsync<T>(string index, Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_upgrade
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -9106,7 +9106,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesGetUpgrade(string index, Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesGetUpgrade(string index, Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_upgrade
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -9126,7 +9126,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetUpgradeAsync(string index, Func<IndicesGetUpgradeRequestParameters, IndicesGetUpgradeRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetUpgradeAsync(string index, Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_warmer
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -12499,7 +12499,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesUpgradeForAll<T>(Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesUpgradeForAll<T>(Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_upgrade
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -12516,7 +12516,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesUpgradeForAllAsync<T>(Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesUpgradeForAllAsync<T>(Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_upgrade
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -12535,7 +12535,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesUpgradeForAll(Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesUpgradeForAll(Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_upgrade
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -12554,7 +12554,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesUpgradeForAllAsync(Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesUpgradeForAllAsync(Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_upgrade
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -12572,7 +12572,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesUpgrade<T>(string index, Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesUpgrade<T>(string index, Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_upgrade
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -12590,7 +12590,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesUpgradeAsync<T>(string index, Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesUpgradeAsync<T>(string index, Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_upgrade
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -12610,7 +12610,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesUpgrade(string index, Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesUpgrade(string index, Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_upgrade
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -12630,7 +12630,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesUpgradeAsync(string index, Func<IndicesUpgradeRequestParameters, IndicesUpgradeRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesUpgradeAsync(string index, Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_validate/query
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.

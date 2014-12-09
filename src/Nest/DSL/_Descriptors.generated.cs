@@ -3131,13 +3131,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html
 	///</pre>
 	///</summary>
-	public partial class IndicesGetUpgradeDescriptor  : BaseRequest<IndicesGetUpgradeRequestParameters>
+	public partial class UpgradeStatusDescriptor 
 	{
 		
 	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesGetUpgradeDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public UpgradeStatusDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -3145,7 +3145,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesGetUpgradeDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public UpgradeStatusDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -3153,7 +3153,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesGetUpgradeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		public UpgradeStatusDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3161,16 +3161,10 @@ namespace Nest
 		
 
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public IndicesGetUpgradeDescriptor Human(bool human = true)
+		public UpgradeStatusDescriptor Human(bool human = true)
 		{
 			this.Request.RequestParameters.Human(human);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesGetUpgradeRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
@@ -3933,13 +3927,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html
 	///</pre>
 	///</summary>
-	public partial class IndicesUpgradeDescriptor  : BaseRequest<IndicesUpgradeRequestParameters>
+	public partial class UpgradeDescriptor 
 	{
 		
 	
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesUpgradeDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public UpgradeDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -3947,7 +3941,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesUpgradeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		public UpgradeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -3955,7 +3949,7 @@ namespace Nest
 		
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesUpgradeDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public UpgradeDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -3963,16 +3957,10 @@ namespace Nest
 		
 
 		///<summary>Specify whether the request should block until the all segments are upgraded (default: true)</summary>
-		public IndicesUpgradeDescriptor WaitForCompletion(bool wait_for_completion = true)
+		public UpgradeDescriptor WaitForCompletion(bool wait_for_completion = true)
 		{
 			this.Request.RequestParameters.WaitForCompletion(wait_for_completion);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesUpgradeRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
