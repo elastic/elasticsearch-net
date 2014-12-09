@@ -5063,13 +5063,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html
 	///</pre>
 	///</summary>
-	public partial class SearchExistsDescriptor  : BaseRequest<SearchExistsRequestParameters>
+	public partial class SearchExistsDescriptor<T> 
 	{
 		
 	
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public SearchExistsDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -5077,7 +5077,7 @@ namespace Nest
 		
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchExistsDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public SearchExistsDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -5085,7 +5085,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		public SearchExistsDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -5093,7 +5093,7 @@ namespace Nest
 		
 
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public SearchExistsDescriptor MinScore(double min_score)
+		public SearchExistsDescriptor<T> MinScore(double min_score)
 		{
 			this.Request.RequestParameters.MinScore(min_score);
 			return this;
@@ -5101,7 +5101,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchExistsDescriptor Preference(string preference)
+		public SearchExistsDescriptor<T> Preference(string preference)
 		{
 			this.Request.RequestParameters.Preference(preference);
 			return this;
@@ -5109,7 +5109,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value</summary>
-		public SearchExistsDescriptor Routing(string routing)
+		public SearchExistsDescriptor<T> Routing(string routing)
 		{
 			this.Request.RequestParameters.Routing(routing);
 			return this;
@@ -5117,16 +5117,10 @@ namespace Nest
 		
 
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public SearchExistsDescriptor Source(string source)
+		public SearchExistsDescriptor<T> Source(string source)
 		{
 			this.Request.RequestParameters.Source(source);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
@@ -5484,13 +5478,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotVerifyRepositoryDescriptor  : BaseRequest<SnapshotVerifyRepositoryRequestParameters>
+	public partial class VerifyRepositoryDescriptor 
 	{
 		
 	
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotVerifyRepositoryDescriptor MasterTimeout(string master_timeout)
+		public VerifyRepositoryDescriptor MasterTimeout(string master_timeout)
 		{
 			this.Request.RequestParameters.MasterTimeout(master_timeout);
 			return this;
@@ -5498,16 +5492,10 @@ namespace Nest
 		
 
 		///<summary>Explicit operation timeout</summary>
-		public SnapshotVerifyRepositoryDescriptor Timeout(string timeout)
+		public VerifyRepositoryDescriptor Timeout(string timeout)
 		{
 			this.Request.RequestParameters.Timeout(timeout);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotVerifyRepositoryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

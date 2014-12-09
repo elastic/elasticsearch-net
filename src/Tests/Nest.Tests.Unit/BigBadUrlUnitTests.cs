@@ -135,8 +135,8 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/mycustomindex/_open", c => c.OpenIndex("mycustomindex"));
 			Do("POST", "/_optimize", c => c.Optimize());
 			Do("POST", "/mydefaultindex/_optimize", c => c.Optimize(o => o.Index<Doc>()));
-			Do("POST", "/mydefaultindex/doc/_percolate", c => c.Percolate<Doc>(p => p.Document(new Doc {Id = "1"})));
-			Do("POST", "/mydefaultindex/otherdoc/_percolate", c => c.Percolate<OtherDoc>(p => p.Document(new OtherDoc {Name = "hello"})));
+			Do("POST", "/mydefaultindex/doc/_percolate", c => c.Percolate<Doc>(p => p.Document(new Doc { Id = "1" })));
+			Do("POST", "/mydefaultindex/otherdoc/_percolate", c => c.Percolate<OtherDoc>(p => p.Document(new OtherDoc { Name = "hello" })));
 			Do("POST", "/mycustomindex/mycustomtype/_percolate", 
 				c => c.Percolate<OtherDoc>(p => p.Document(new OtherDoc {Name = "hello"}).Index("mycustomindex").Type("mycustomtype")));
 			Do("POST", "/mydefaultindex/otherdoc/my-id/_percolate", c => c.Percolate<OtherDoc>(p => p.Id("my-id")));
@@ -186,11 +186,16 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/_scripts/lang/id", c => c.PutScript(s => s.Lang("lang").Id("id")));
 			Do("GET", "/_scripts/lang/id", c => c.GetScript(s => s.Lang("lang").Id("id")));
 			Do("DELETE", "/_scripts/lang/id", c => c.DeleteScript(s => s.Lang("lang").Id("id")));
-
 			Do("GET", "/_all/_mappings%2C_aliases", c => c.GetIndex(d => d.AllIndices().Features(GetIndexFeature.Aliases | GetIndexFeature.Mappings)));
 			Do("GET", "/_all", c => c.GetIndex(d => d.AllIndices().Features(GetIndexFeature.All)));
 			Do("GET", "/_all", c => c.GetIndex(d => d.AllIndices()));
 
+			Do("GET", "/mydefaultindex/doc/_search/exists?q=term", c => c.SearchExists<Doc>(s => s.QueryString("term")));
+			Do("GET", "/mydefaultindex/doc/_search/exists?source=%7B%7D", c => c.SearchExists<Doc>(s=>s.Source("{}")));
+			Do("GET", "/mydefaultindex/doc/_search/exists", c => c.SearchExists<Doc>(s=>s));
+			Do("POST", "/mydefaultindex/doc/_search/exists", c => c.SearchExists<Doc>(s=>s.Query(q=>q.MatchAll())));
+
+			Do("POST", "/_snapshot/my_repos/_verify", c => c.VerifyRepository("my_repos"));
 			Do("GET", "/mydefaultindex/_settings%2C_mappings", c => c.GetIndex(d => d.Index<OtherDoc>().Features(GetIndexFeature.Settings | GetIndexFeature.Mappings)));
 			Do("GET", "/x%2Cy", c => c.GetIndex(d => d.Indices("x", "y").Features(GetIndexFeature.All)));
 			Do("GET", "/x%2Cy", c => c.GetIndex(d => d.Indices("x", "y")));

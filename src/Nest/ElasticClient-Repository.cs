@@ -122,6 +122,45 @@ namespace Nest
 				(p, d) => this.RawDispatch.SnapshotDeleteRepositoryDispatchAsync<AcknowledgedResponse>(p)
 			);
 		}
+	
+		/// <inheritdoc />
+		public IVerifyRepositoryResponse VerifyRepository(string name, Func<VerifyRepositoryDescriptor, VerifyRepositoryDescriptor> selector = null)
+		{
+			name.ThrowIfNullOrEmpty("name");
+			selector = selector ?? (s => s);
+			return this.Dispatch<VerifyRepositoryDescriptor, VerifyRepositoryRequestParameters, VerifyRepositoryResponse>(
+				s => selector(s.Repository(name)),
+				(p, d) => this.RawDispatch.SnapshotVerifyRepositoryDispatch<VerifyRepositoryResponse>(p)
+			);
+		}
 
+		/// <inheritdoc />
+		public IVerifyRepositoryResponse VerifyRepository(IVerifyRepositoryRequest verifyRepositoryRequest)
+		{
+			return this.Dispatch<IVerifyRepositoryRequest, VerifyRepositoryRequestParameters, VerifyRepositoryResponse>(
+				verifyRepositoryRequest,
+				(p, d) => this.RawDispatch.SnapshotVerifyRepositoryDispatch<VerifyRepositoryResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(string name, Func<VerifyRepositoryDescriptor, VerifyRepositoryDescriptor> selector = null)
+		{
+			name.ThrowIfNullOrEmpty("name");
+			selector = selector ?? (s => s);
+			return this.DispatchAsync<VerifyRepositoryDescriptor, VerifyRepositoryRequestParameters, VerifyRepositoryResponse, IVerifyRepositoryResponse>(
+				s => selector(s.Repository(name)),
+				(p, d) => this.RawDispatch.SnapshotVerifyRepositoryDispatchAsync<VerifyRepositoryResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest verifyRepositoryRequest)
+		{
+			return this.DispatchAsync<IVerifyRepositoryRequest, VerifyRepositoryRequestParameters, VerifyRepositoryResponse, IVerifyRepositoryResponse>(
+				verifyRepositoryRequest,
+				(p, d) => this.RawDispatch.SnapshotVerifyRepositoryDispatchAsync<VerifyRepositoryResponse>(p)
+			);
+		}
 	}
 }

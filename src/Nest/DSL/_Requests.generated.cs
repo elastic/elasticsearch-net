@@ -4549,7 +4549,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html
 	///</pre>
 	///</summary>
-	public partial class SearchExistsRequest  : BasePathRequest<SearchExistsRequestParameters>
+	public partial class SearchExistsRequest<T> 
 			{
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -4607,12 +4607,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -4937,7 +4931,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html
 	///</pre>
 	///</summary>
-	public partial class SnapshotVerifyRepositoryRequest  : BasePathRequest<SnapshotVerifyRepositoryRequestParameters>
+	public partial class VerifyRepositoryRequest 
 			{
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -4955,12 +4949,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotVerifyRepositoryRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
@@ -6420,6 +6408,72 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("query_cache"); } 
 			set { this.Request.RequestParameters.AddQueryString("query_cache", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for SearchExists
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html
+	///</pre>
+	///</summary>
+	public partial class SearchExistsRequest 
+			{
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
+			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
+		}
+		
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
+			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
+		}
+		
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
+			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
+		}
+		
+		
+		///<summary>Include only documents with a specific `_score` value in the result</summary>
+		public double MinScore 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<double>("min_score"); } 
+			set { this.Request.RequestParameters.AddQueryString("min_score", value); }
+		}
+		
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
+			set { this.Request.RequestParameters.AddQueryString("preference", value); }
+		}
+		
+		
+		///<summary>Specific routing value</summary>
+		public string Routing 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
+			set { this.Request.RequestParameters.AddQueryString("routing", value); }
+		}
+		
+		
+		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
 	}

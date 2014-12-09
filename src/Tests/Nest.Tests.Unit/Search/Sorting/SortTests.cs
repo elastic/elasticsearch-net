@@ -37,6 +37,30 @@ namespace Nest.Tests.Unit.Search.Sorting
 			Assert.True(json.JsonEquals(expected), json);
 		}
 
+	    [Test]
+	    public void TestSortWithUnmappedType()
+	    {
+            var s = new SearchDescriptor<ElasticsearchProject>()
+                .From(0)
+                .Size(10)
+                .Sort(sort => sort
+                    .OnField(e => e.DoubleValue)
+                    .UnmappedType(FieldType.Long)
+                );
+            var expected = @"
+                {
+                  from: 0,
+                  size: 10,
+                  sort: [
+                    {
+                        doubleValue : { unmapped_type : ""long"" } 
+                    }
+                  ]
+                }";
+            var json = TestElasticClient.Serialize(s);
+            Assert.True(json.JsonEquals(expected), json);
+	    }
+
 		[Test]
 		public void TestSortOnSortField()
 		{
