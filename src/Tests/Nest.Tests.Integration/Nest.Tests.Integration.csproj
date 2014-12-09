@@ -96,6 +96,7 @@
     <Compile Include="Aggregations\SingleBucketAggregationTests.cs" />
     <Compile Include="Aggregations\StatsAggregationTests.cs" />
     <Compile Include="Aggregations\MetricAggregationTests.cs" />
+    <Compile Include="Aggregations\FIltersAggregationTests.cs" />
     <Compile Include="Aggregations\TermsAggregationTests.cs" />
     <Compile Include="Aggregations\ParseResponseItemsTests.cs" />
     <Compile Include="Attributes\SkipVersionAttribute.cs" />
