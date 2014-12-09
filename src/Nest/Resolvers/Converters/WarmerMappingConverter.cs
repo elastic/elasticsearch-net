@@ -28,11 +28,13 @@ namespace Nest.Resolvers.Converters
 			var jObject = JObject.Load(reader);
 			var types = ((JArray)jObject.Property("types").Value).Values<string>().ToArray()
 				.Select(s=>(TypeNameMarker)s);
-			var source = jObject.Property("source").Value.ToString();
+
+			var source = serializer.Deserialize<SearchRequest>(jObject["source"].CreateReader());
 
 			return new WarmerMapping
 			{
 				Types = types, 
+				Source = source
 			};
 		}
 

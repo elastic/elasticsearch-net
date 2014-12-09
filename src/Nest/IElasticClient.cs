@@ -1580,5 +1580,17 @@ namespace Nest
 
         /// <inheritdoc />
         Task<IDeleteScriptResponse> DeleteScriptAsync(Func<DeleteScriptDescriptor, DeleteScriptDescriptor> deleteScriptDescriptor);
+
+		/// <inheritdoc />
+		IGetIndexResponse GetIndex(Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector);
+
+		/// <inheritdoc />
+		IGetIndexResponse GetIndex(IGetIndexRequest createIndexRequest);
+
+		/// <inheritdoc />
+		Task<IGetIndexResponse> GetIndexAsync(Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector);
+
+		/// <inheritdoc />
+		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest createIndexRequest);
 	}
 }

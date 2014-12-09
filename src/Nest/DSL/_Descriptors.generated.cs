@@ -2855,13 +2855,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-index.html
 	///</pre>
 	///</summary>
-	public partial class IndicesGetDescriptor  : BaseRequest<IndicesGetRequestParameters>
+	public partial class GetIndexDescriptor 
 	{
 		
 	
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndicesGetDescriptor Local(bool local = true)
+		public GetIndexDescriptor Local(bool local = true)
 		{
 			this.Request.RequestParameters.Local(local);
 			return this;
@@ -2869,7 +2869,7 @@ namespace Nest
 		
 
 		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public IndicesGetDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		public GetIndexDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
 			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
 			return this;
@@ -2877,7 +2877,7 @@ namespace Nest
 		
 
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
-		public IndicesGetDescriptor AllowNoIndices(bool allow_no_indices = true)
+		public GetIndexDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
 			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
 			return this;
@@ -2885,16 +2885,10 @@ namespace Nest
 		
 
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public IndicesGetDescriptor ExpandWildcards(params string[] expand_wildcards)
+		public GetIndexDescriptor ExpandWildcards(params string[] expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesGetRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

@@ -3078,12 +3078,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-index.html
 	///</pre>
 	///</summary>
-	public class IndicesGetRequestParameters : FluentRequestParameters<IndicesGetRequestParameters> 
+	public class GetIndexRequestParameters : FluentRequestParameters<GetIndexRequestParameters> 
 	{
 		
 		internal bool _local { get; set; }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndicesGetRequestParameters Local(bool local)
+		public GetIndexRequestParameters Local(bool local)
 		{
 			this._local = local;
 			this.AddQueryString("local", this._local);
@@ -3093,7 +3093,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _ignore_unavailable { get; set; }
 		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public IndicesGetRequestParameters IgnoreUnavailable(bool ignore_unavailable)
+		public GetIndexRequestParameters IgnoreUnavailable(bool ignore_unavailable)
 		{
 			this._ignore_unavailable = ignore_unavailable;
 			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
@@ -3103,7 +3103,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _allow_no_indices { get; set; }
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
-		public IndicesGetRequestParameters AllowNoIndices(bool allow_no_indices)
+		public GetIndexRequestParameters AllowNoIndices(bool allow_no_indices)
 		{
 			this._allow_no_indices = allow_no_indices;
 			this.AddQueryString("allow_no_indices", this._allow_no_indices);
@@ -3113,7 +3113,7 @@ namespace Elasticsearch.Net
 		
 		internal  string[] _expand_wildcards { get; set; }
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public IndicesGetRequestParameters ExpandWildcards(params string[] expand_wildcards)
+		public GetIndexRequestParameters ExpandWildcards(params string[] expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);

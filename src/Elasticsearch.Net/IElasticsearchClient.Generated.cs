@@ -7156,7 +7156,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesGet<T>(string index, Func<IndicesGetRequestParameters, IndicesGetRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesGet<T>(string index, Func<GetIndexRequestParameters, GetIndexRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -7174,7 +7174,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesGetAsync<T>(string index, Func<IndicesGetRequestParameters, IndicesGetRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesGetAsync<T>(string index, Func<GetIndexRequestParameters, GetIndexRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -7194,7 +7194,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesGet(string index, Func<IndicesGetRequestParameters, IndicesGetRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesGet(string index, Func<GetIndexRequestParameters, GetIndexRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -7214,7 +7214,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAsync(string index, Func<IndicesGetRequestParameters, IndicesGetRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAsync(string index, Func<GetIndexRequestParameters, GetIndexRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/{feature}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -7233,7 +7233,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesGet<T>(string index, string feature, Func<IndicesGetRequestParameters, IndicesGetRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesGet<T>(string index, string feature, Func<GetIndexRequestParameters, GetIndexRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/{feature}
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -7252,7 +7252,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesGetAsync<T>(string index, string feature, Func<IndicesGetRequestParameters, IndicesGetRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesGetAsync<T>(string index, string feature, Func<GetIndexRequestParameters, GetIndexRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/{feature}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -7273,7 +7273,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesGet(string index, string feature, Func<IndicesGetRequestParameters, IndicesGetRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesGet(string index, string feature, Func<GetIndexRequestParameters, GetIndexRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/{feature}
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -7294,7 +7294,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAsync(string index, string feature, Func<IndicesGetRequestParameters, IndicesGetRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesGetAsync(string index, string feature, Func<GetIndexRequestParameters, GetIndexRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_alias
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.

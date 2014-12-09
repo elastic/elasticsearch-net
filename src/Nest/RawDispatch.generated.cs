@@ -1748,7 +1748,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> IndicesGetDispatch<T>(ElasticsearchPathInfo<IndicesGetRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetDispatch<T>(ElasticsearchPathInfo<GetIndexRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1766,7 +1766,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetDispatchAsync<T>(ElasticsearchPathInfo<IndicesGetRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetDispatchAsync<T>(ElasticsearchPathInfo<GetIndexRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{

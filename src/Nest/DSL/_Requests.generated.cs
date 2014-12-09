@@ -2588,7 +2588,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-index.html
 	///</pre>
 	///</summary>
-	public partial class IndicesGetRequest  : BasePathRequest<IndicesGetRequestParameters>
+	public partial class GetIndexRequest 
 			{
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -2622,12 +2622,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesGetRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		

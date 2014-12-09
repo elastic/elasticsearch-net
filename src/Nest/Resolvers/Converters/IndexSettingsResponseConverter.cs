@@ -19,12 +19,10 @@ namespace Nest.Resolvers.Converters
 		}
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var dict = new Dictionary<string, Dictionary<string, Dictionary<string, IndexSettings>>>();
+			var dict = new Dictionary<string, IndexSettings>();
 			serializer.Populate(reader, dict);
 			var response = new IndexSettingsResponse();
-			if (!dict.HasAny() || !dict.First().Value.HasAny() || !dict.First().Value.First().Value.HasAny())
-				return response;
-			response.Nodes = dict.ToDictionary(k => k.Key, v => v.Value.First().Value.First().Value);
+			response.Nodes = dict;
 			return response;
 		}
 
