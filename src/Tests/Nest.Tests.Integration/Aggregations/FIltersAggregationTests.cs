@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Aggregations
 {
     [TestFixture]
-    public class FilterAggregationTests : IntegrationTests
+    public class FiltersAggregationTests : IntegrationTests
     {
         [Test]
         public void NamedFilters()
