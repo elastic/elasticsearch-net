@@ -141,7 +141,7 @@ namespace Elasticsearch.Net.Connection
 		protected virtual HttpWebRequest CreateHttpWebRequest(Uri uri, string method, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
 			var request = this.CreateWebRequest(uri, method, data, requestSpecificConfig);
-			this.SetBasicAuthorizationIfNeeded(uri, request, requestSpecificConfig);
+			this.SetBasicAuthenticationIfNeeded(uri, request, requestSpecificConfig);
 			this.SetProxyIfNeeded(request);
 			return request;
 		}
@@ -164,7 +164,7 @@ namespace Elasticsearch.Net.Connection
             }
 		}
 
-		private void SetBasicAuthorizationIfNeeded(Uri uri, HttpWebRequest request, IRequestConfiguration requestSpecificConfig)
+		private void SetBasicAuthenticationIfNeeded(Uri uri, HttpWebRequest request, IRequestConfiguration requestSpecificConfig)
 		{
 			// Basic auth credentials take the following precedence (highest -> lowest):
 			// 1 - Specified on the request (highest precedence)

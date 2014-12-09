@@ -6,16 +6,36 @@ using Elasticsearch.Net.Connection.Security;
 
 namespace Elasticsearch.Net.Connection
 {
+	//TODO change timeouts to TimeSpans in 2.0?
+
 	public interface IConnectionConfigurationValues
 	{
 		IConnectionPool ConnectionPool { get; }
 		
 		int MaximumAsyncConnections { get; }
 		int Timeout { get; }
+
+		/// <summary>
+		/// The timeout in milliseconds to use for ping calls that are issues to check whether a node is up or not.
+		/// </summary>
 		int? PingTimeout { get; }
+
 		int? DeadTimeout { get; }
 		int? MaxDeadTimeout { get; }
 		int? MaxRetries { get; }
+
+		/// <summary>
+		/// Limits the total runtime including retries separately from <see cref="Timeout"/>
+		/// <pre>
+		/// When not specified defaults to <see cref="Timeout"/> which itself defaults to 60seconds
+		/// </pre>
+		/// </summary>
+		TimeSpan? MaxRetryTimeout { get; }
+
+		/// <summary>
+		/// This signals that we do not want to send initial pings to unknown/previously dead nodes
+		/// and just send the call straightaway
+		/// </summary>
 		bool DisablePings { get; }
 		bool EnableCompressedResponses { get; }
 		
@@ -71,6 +91,7 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Basic access authorization credentials to specify with all requests.
 		/// </summary>
+		/// TODO: Rename to BasicAuthenticationCredentials in 2.0
 		BasicAuthorizationCredentials BasicAuthorizationCredentials { get; } 
 	}
 }
