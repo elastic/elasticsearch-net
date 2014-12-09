@@ -27,6 +27,9 @@ namespace Nest
 
 		[JsonProperty("order")]
 		IDictionary<string, string> Order { get; set; }
+
+		[JsonProperty("extended_bounds")]
+		IDictionary<string, object> ExtendedBounds { get; set; }
 	}
 
 	public class HistogramAggregator : BucketAggregator, IHistogramAggregator
@@ -37,6 +40,7 @@ namespace Nest
 		public double? Interval { get; set; }
 		public int? MinimumDocumentCount { get; set; }
 		public IDictionary<string, string> Order { get; set; }
+		public IDictionary<string, object> ExtendedBounds { get; set; }
 	}
 
 	public class HistogramAggregationDescriptor<T> : BucketAggregationBaseDescriptor<HistogramAggregationDescriptor<T>, T>, IHistogramAggregator 
@@ -55,6 +59,8 @@ namespace Nest
 		int? IHistogramAggregator.MinimumDocumentCount { get; set; }
 
 		IDictionary<string, string> IHistogramAggregator.Order { get; set; }
+
+		IDictionary<string, object> IHistogramAggregator.ExtendedBounds { get; set; }
 
 		public HistogramAggregationDescriptor<T> Field(string field)
 		{
@@ -101,6 +107,12 @@ namespace Nest
 		public HistogramAggregationDescriptor<T> OrderDescending(string key)
 		{
 			Self.Order = new Dictionary<string, string> { {key, "asc"}};
+			return this;
+		}
+
+		public HistogramAggregationDescriptor<T> ExtendedBounds(double min, double max)
+		{
+			Self.ExtendedBounds = new Dictionary<string, object> { { "min", min }, { "max", max } };
 			return this;
 		}
 
