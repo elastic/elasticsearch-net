@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration
 				.DisableAutomaticProxyDetection(false)
 				.UsePrettyResponses()
 				.ExposeRawResponse()
-				.SetBasicAuthorization("nestuser", "elastic");
+				.SetBasicAuthentication("nestuser", "elastic");
 		}
 
 		public static readonly Lazy<ElasticClient> Client = new Lazy<ElasticClient>(()=> new ElasticClient(Settings()));
