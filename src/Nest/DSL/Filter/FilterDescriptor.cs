@@ -921,6 +921,7 @@ namespace Nest
 			var f = new FilterDescriptor<T>();
 			f.Self.IsStrict = self.IsStrict;
 			f.Self.IsVerbatim = self.IsVerbatim;
+		    f.Self.FilterName = self.FilterName;
 
 			if (fillProperty != null)
 				fillProperty(f);

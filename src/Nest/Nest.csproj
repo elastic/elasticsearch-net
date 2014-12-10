@@ -107,6 +107,7 @@
     <Compile Include="Domain\Aggregations\AggregationsHelper.cs" />
     <Compile Include="Domain\Aggregations\Bucket.cs" />
     <Compile Include="Domain\Aggregations\BucketAggregationBase.cs" />
+    <Compile Include="Domain\Aggregations\FiltersBucket.cs" />
     <Compile Include="Domain\Aggregations\TopHitsMetric.cs" />
     <Compile Include="Domain\Aggregations\GeoBoundsMetric.cs" />
     <Compile Include="Domain\Aggregations\HistogramItem.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Domain\Stats\SegmentsStats.cs" />
     <Compile Include="Domain\Status\UpgradeStatus.cs" />
     <Compile Include="Domain\Suggest\SuggestField.cs" />
+    <Compile Include="DSL\Aggregations\FiltersAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\PercentileRanksAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\TopHitsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\GeoBoundsAggregationDescriptor.cs" />
@@ -388,6 +390,7 @@
     <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="Obsolete\Obsolete.cs" />
+    <Compile Include="Resolvers\Converters\Aggregations\FiltersAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\CatFielddataRecordConverter.cs" />
     <Compile Include="Resolvers\Converters\CompositeJsonConverter.cs" />

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -85,6 +84,19 @@ namespace Nest
 		{
 			return this.TryGet<TopHitsMetric>(key);
 		}
+
+        public FiltersBucket Filters(string key)
+        {
+            var named = this.TryGet<FiltersBucket>(key);
+            if (named != null)
+                return named;
+
+            var anonymous = this.TryGet<Bucket>(key);
+            if(anonymous != null)
+                return new FiltersBucket(anonymous.Items);
+
+            return null;
+        }
 
 		public SingleBucket Global(string key)
 		{

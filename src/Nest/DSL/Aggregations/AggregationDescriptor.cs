@@ -27,6 +27,9 @@ namespace Nest
 		[JsonProperty("filter")]
 		IFilterAggregator Filter { get; set; }
 
+        [JsonProperty("filters")]
+        IFiltersAggregator Filters { get; set; }
+
 		[JsonProperty("geo_distance")]
 		IGeoDistanceAggregator GeoDistance { get; set; }
 
@@ -113,6 +116,7 @@ namespace Nest
 		private ITermsAggregator _terms;
 		private ISignificantTermsAggregator _significantTerms;
 		private IPercentileRanksAggregaor _percentileRanks;
+	    private IFiltersAggregator _filters;
 		
 		private ITopHitsAggregator _topHits;
 		public IAverageAggregator Average { get; set; }
@@ -145,6 +149,12 @@ namespace Nest
 			get { return _filter; }
 			set { _filter = value; }
 		}
+
+        public IFiltersAggregator Filters
+        {
+            get { return _filters; }
+            set { _filters = value; }
+        }
 
 		public IGeoDistanceAggregator GeoDistance
 		{
@@ -261,6 +271,8 @@ namespace Nest
 		IExtendedStatsAggregator IAggregationContainer.ExtendedStats { get; set; }
 		
 		IFilterAggregator IAggregationContainer.Filter { get; set; }
+
+        IFiltersAggregator IAggregationContainer.Filters { get; set; }
 		
 		IGeoDistanceAggregator IAggregationContainer.GeoDistance { get; set; }
 		
@@ -342,6 +354,12 @@ namespace Nest
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.Filter = d);
 		}
+
+        public AggregationDescriptor<T> Filters(string name,
+            Func<FiltersAggregationDescriptor<T>, FiltersAggregationDescriptor<T>> selector)
+        {
+            return _SetInnerAggregation(name, selector, (a, d) => a.Filters = d);
+        }
 		
 		public AggregationDescriptor<T> GeoDistance(string name,
 			Func<GeoDistanceAggregationDescriptor<T>, GeoDistanceAggregationDescriptor<T>> selector)

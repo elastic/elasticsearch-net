@@ -309,6 +309,25 @@ namespace Nest.Resolvers.Converters.Aggregations
 			}
 			var aggregations = new List<IAggregation>();
 			reader.Read();
+
+		    if (reader.TokenType == JsonToken.StartObject)
+		    {
+		        reader.Read();
+		        var temp = new Dictionary<string, IAggregation>();
+                do
+                {
+                    var name = reader.Value.ToString();
+                    reader.Read();
+                    var innerAgg = this.ReadAggregation(reader, serializer);
+                    temp.Add(name, innerAgg);
+                    reader.Read();
+                } while (reader.TokenType != JsonToken.EndObject);
+
+		        var agg = new AggregationsHelper(temp);
+                
+		        return new FiltersBucket(agg);
+		    }
+
 			if (reader.TokenType != JsonToken.StartArray)
 				return null;
 			reader.Read(); //move from start array to start object
