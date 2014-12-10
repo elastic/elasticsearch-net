@@ -134,6 +134,7 @@
     <Compile Include="Domain\Analysis\CharFilter\PatternReplaceCharFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\DelimitedPayloadTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\CommonGramsTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\KeepTypesTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\KeywordRepeatTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\HunspellTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\LimitTokenCountTokenFilter.cs" />
