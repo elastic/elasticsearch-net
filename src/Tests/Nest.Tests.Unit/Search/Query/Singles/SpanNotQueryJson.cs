@@ -13,10 +13,13 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.From(0)
 				.Size(10)
 				.Query(q => q
-					.SpanNot(sf=>sf
-						.Include(e =>e.SpanTerm(f => f.Name, "elasticsearch.pm", 1.1))
-						.Exclude(e=>e.SpanTerm(f => f.Name, "elasticsearch.pm", 1.1))
-                        .Boost(2.2)
+					.SpanNot(sf => sf
+						.Pre(1)
+						.Post(2)
+						.Dist(3)
+						.Include(e => e.SpanTerm(f => f.Name, "elasticsearch.pm", 1.1))
+						.Exclude(e => e.SpanTerm(f => f.Name, "elasticsearch.pm", 1.1))
+						.Boost(2.2)
 					)
 				);
 			var json = TestElasticClient.Serialize(s);
@@ -39,7 +42,10 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 							}
 						}
 					},
-                    boost: 2.2
+					boost: 2.2,
+					pre: 1,
+					post: 2,
+					dist: 3
 			}}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
