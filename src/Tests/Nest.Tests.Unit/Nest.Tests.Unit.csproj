@@ -148,6 +148,9 @@
     <None Include="Core\Indices\Analysis\Analyzers\LanguageAnalyzerTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Indices\Analysis\Analyzers\KeepTypesTokenFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Indices\Analysis\Analyzers\WhitespaceAnalyzerTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
