@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using Nest.Tests.MockData;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
@@ -17,6 +18,21 @@ namespace Nest.Tests.Integration.Core.TermVectors
 				.Id("1")
 				.Fields(ep => ep.Content));
 
+			AssertContentsVectors(result);
+		}
+
+		[Test]
+		public void TermVectorDocument()
+		{
+			var document = NestTestData.Data.FirstOrDefault(d => d.Id == 1);
+			var result = Client.TermVector<ElasticsearchProject>(s => s
+				.Document(document)
+				.Fields(ep => ep.Content));
+
+			AssertContentsVectors(result);
+		}
+		private static void AssertContentsVectors(ITermVectorResponse result)
+		{
 			result.IsValid.Should().BeTrue();
 			result.Found.Should().BeTrue();
 			result.TermVectors.Count().Should().Be(1);

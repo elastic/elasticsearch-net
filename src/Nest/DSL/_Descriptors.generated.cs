@@ -4407,7 +4407,7 @@ namespace Nest
 	
 	///<summary>descriptor for MtermvectorsGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-termvectors.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html
 	///</pre>
 	///</summary>
 	public partial class MultiTermVectorsDescriptor<T> 
@@ -4494,6 +4494,14 @@ namespace Nest
 		public MultiTermVectorsDescriptor<T> Parent(string parent)
 		{
 			this.Request.RequestParameters.Parent(parent);
+			return this;
+		}
+		
+
+		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
+		public MultiTermVectorsDescriptor<T> Realtime(bool realtime = true)
+		{
+			this.Request.RequestParameters.Realtime(realtime);
 			return this;
 		}
 		
@@ -5559,7 +5567,7 @@ namespace Nest
 	
 	///<summary>descriptor for TermvectorGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-termvectors.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html
 	///</pre>
 	///</summary>
 	public partial class TermvectorDescriptor<T> 
@@ -5646,6 +5654,14 @@ namespace Nest
 		public TermvectorDescriptor<T> Parent(string parent)
 		{
 			this.Request.RequestParameters.Parent(parent);
+			return this;
+		}
+		
+
+		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
+		public TermvectorDescriptor<T> Realtime(bool realtime = true)
+		{
+			this.Request.RequestParameters.Realtime(realtime);
 			return this;
 		}
 		

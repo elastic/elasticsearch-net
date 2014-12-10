@@ -4725,7 +4725,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for MtermvectorsGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-termvectors.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html
 	///</pre>
 	///</summary>
 	public class MultiTermVectorsRequestParameters : FluentRequestParameters<MultiTermVectorsRequestParameters> 
@@ -4817,6 +4817,16 @@ namespace Elasticsearch.Net
 		{
 			this._parent = parent;
 			this.AddQueryString("parent", this._parent);
+			return this;
+		}
+		
+		
+		internal bool _realtime { get; set; }
+		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
+		public MultiTermVectorsRequestParameters Realtime(bool realtime)
+		{
+			this._realtime = realtime;
+			this.AddQueryString("realtime", this._realtime);
 			return this;
 		}
 		
@@ -5955,7 +5965,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for TermvectorGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-termvectors.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html
 	///</pre>
 	///</summary>
 	public class TermvectorRequestParameters : FluentRequestParameters<TermvectorRequestParameters> 
@@ -6047,6 +6057,16 @@ namespace Elasticsearch.Net
 		{
 			this._parent = parent;
 			this.AddQueryString("parent", this._parent);
+			return this;
+		}
+		
+		
+		internal bool _realtime { get; set; }
+		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
+		public TermvectorRequestParameters Realtime(bool realtime)
+		{
+			this._realtime = realtime;
+			this.AddQueryString("realtime", this._realtime);
 			return this;
 		}
 		
