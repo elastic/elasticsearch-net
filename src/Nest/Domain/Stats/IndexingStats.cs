@@ -22,8 +22,22 @@ namespace Nest
 		public string DeleteTime { get; set; }
 		[JsonProperty(PropertyName = "delete_time_in_millis")]
 		public double DeleteTimeInMilliseconds { get; set; }
+
 		[JsonProperty(PropertyName = "delete_current")]
 		public long DeleteCurrent { get; set; }
+		
+		[JsonProperty(PropertyName = "noop_update_total")]
+		public long NoopUpdateTotal { get; set; }
+		
+		[JsonProperty(PropertyName = "is_throttled")]
+		public bool IsThrottled { get; set; }
+		
+		[JsonProperty(PropertyName = "throttle_time_in_millis")]
+		public long ThrottleTimeInMilliseconds { get; set; }
+		
+		[JsonProperty(PropertyName = "throttle_time")]
+		public string ThrottleTime { get; set; }
+		
 		[JsonProperty(PropertyName = "types")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public Dictionary<string, TypeStats> Types { get; set; }
