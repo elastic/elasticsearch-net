@@ -15,38 +15,38 @@ namespace Nest.Resolvers.Converters.Aggregations
 		}
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-            var f = value as IFiltersAggregator;
-            if (f == null || f.Filters == null) return;
+			var f = value as IFiltersAggregator;
+			if (f == null || f.Filters == null) return;
 
-            writer.WriteStartObject();
-            writer.WritePropertyName("filters");
+			writer.WriteStartObject();
+			writer.WritePropertyName("filters");
 
-            if (!f.Filters.Any(filter => String.IsNullOrEmpty(filter.FilterName)))
-            {
-                writer.WriteStartObject();
-                foreach (var filter in f.Filters)
-                {
-                    writer.WritePropertyName(filter.FilterName);
-                    serializer.Serialize(writer, filter);
-                }
-                writer.WriteEndObject();
-            }
-            else
-            {
-                serializer.Serialize(writer, f.Filters);
-            }
+			if (!f.Filters.Any(filter => String.IsNullOrEmpty(filter.FilterName)))
+			{
+				writer.WriteStartObject();
+				foreach (var filter in f.Filters)
+				{
+					writer.WritePropertyName(filter.FilterName);
+					serializer.Serialize(writer, filter);
+				}
+				writer.WriteEndObject();
+			}
+			else
+			{
+				serializer.Serialize(writer, f.Filters);
+			}
 
-            writer.WriteEndObject();
+			writer.WriteEndObject();
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-            //todo implement
+			//todo implement
 			if (reader.TokenType != JsonToken.StartObject) return null;
 			reader.Read();
 			if (reader.TokenType != JsonToken.PropertyName) return null;
 			var prop = reader.Value;
-			if ((string) reader.Value != "filter") return null;
+			if ((string)reader.Value != "filter") return null;
 			reader.Read();
 			var agg = new FilterAggregator();
 			serializer.Populate(reader, agg);
@@ -55,4 +55,3 @@ namespace Nest.Resolvers.Converters.Aggregations
 	}
 
 }
-	
