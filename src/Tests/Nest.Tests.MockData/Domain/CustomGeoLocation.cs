@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Nest.Tests.MockData.Domain
 {
-	public class GeoLocation
+	public class CustomGeoLocation
 	{
 		public float lat { get; set; }
 		public float lon { get; set; }

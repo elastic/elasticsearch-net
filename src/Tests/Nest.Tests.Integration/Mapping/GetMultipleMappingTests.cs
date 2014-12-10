@@ -107,7 +107,7 @@ namespace Nest.Tests.Integration.Mapping
 
 			x = this.Client.CreateIndex(indices.Last(), s => s
 				.AddMapping<ElasticsearchProject>(m => m.MapFromAttributes())
-				.AddMapping<GeoLocation>(m => m.MapFromAttributes())
+				.AddMapping<MockData.Domain.CustomGeoLocation>(m => m.MapFromAttributes())
 			);
 			Assert.IsTrue(x.Acknowledged, x.ConnectionStatus.ToString());
 

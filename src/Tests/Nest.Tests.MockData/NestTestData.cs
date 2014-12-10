@@ -30,7 +30,7 @@ namespace Nest.Tests.MockData
 
 					});
 					x.AddFromAssemblyContainingType<Person>();
-					x.Include<GeoLocation>()
+					x.Include<CustomGeoLocation>()
 						.Setup(c => c.lat).Use<FloatSource>()
 						.Setup(c => c.lon).Use<FloatSource>();
 					x.Include<BoolTerm>()

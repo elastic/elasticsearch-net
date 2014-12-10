@@ -100,7 +100,7 @@
     <Compile Include="Domain\BoolTerm.cs" />
     <Compile Include="Domain\GeoShape.cs" />
     <Compile Include="Domain\ElasticsearchProject.cs" />
-    <Compile Include="Domain\GeoLocation.cs" />
+    <Compile Include="Domain\CustomGeoLocation.cs" />
     <Compile Include="Domain\Person.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="NestTestData.cs" />

@@ -16,6 +16,6 @@ namespace Nest.Tests.MockData.Domain
 		public string Email { get; set; }
 		public DateTime DateOfBirth { get; set; }
 		[ElasticProperty(Type = FieldType.GeoPoint)]
-		public GeoLocation PlaceOfBirth { get; set; }
+		public CustomGeoLocation PlaceOfBirth { get; set; }
 	}
 }
