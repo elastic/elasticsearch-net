@@ -36,6 +36,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "min_score")]
 		double? MinScore { get; set; }
 
+		[JsonProperty(PropertyName = "terminate_after")]
+		long? TerminateAfter { get; set; }
+
 		[JsonProperty(PropertyName = "indices_boost")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
@@ -145,6 +148,7 @@ namespace Nest
 		public bool? Version { get; set; }
 		public bool? TrackScores { get; set; }
 		public double? MinScore { get; set; }
+		public long? TerminateAfter { get; set; }
 		public IList<PropertyPathMarker> Fields { get; set; }
 		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
@@ -219,6 +223,7 @@ namespace Nest
 		public bool? Version { get; set; }
 		public bool? TrackScores { get; set; }
 		public double? MinScore { get; set; }
+		public long? TerminateAfter { get; set; }
 		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
 		public IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
 		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
@@ -318,6 +323,7 @@ namespace Nest
 		bool? ISearchRequest.Version { get; set; }
 		bool? ISearchRequest.TrackScores { get; set; }
 		double? ISearchRequest.MinScore { get; set; }
+		long? ISearchRequest.TerminateAfter { get; set; }
 
 		IDictionary<IndexNameMarker, double> ISearchRequest.IndicesBoost { get; set; }
 
@@ -454,6 +460,16 @@ namespace Nest
 		public SearchDescriptor<T> MinScore(double minScore)
 		{
 			Self.MinScore = minScore;
+			return this;
+		}
+
+		/// <summary>
+		/// The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early. 
+		/// If set, the response will have a boolean field terminated_early to indicate whether the query execution has actually terminated_early. 
+		/// </summary>
+		public SearchDescriptor<T> TerminateAfter(long terminateAfter)
+		{
+			Self.TerminateAfter = terminateAfter;
 			return this;
 		}
 

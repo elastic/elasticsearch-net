@@ -17,6 +17,7 @@ namespace Nest
 		IDictionary<string, Suggest[]> Suggest { get; }
 		int ElapsedMilliseconds { get; }
 		bool TimedOut { get; }
+		bool TerminatedEarly { get; }
 		string ScrollId { get; }
 		long Total { get; }
 		double MaxScore { get; }
@@ -81,6 +82,9 @@ namespace Nest
 
 		[JsonProperty("timed_out")]
 		public bool TimedOut { get; internal set; }
+
+		[JsonProperty("terminated_early")]
+		public bool TerminatedEarly { get; internal set; }
 
 		/// <summary>
 		/// Only set when search type = scan and scroll specified
