@@ -13,6 +13,7 @@ namespace Nest
 	{
 		PropertyPathMarker Field { get; set; }
 		string PinLocation { get; set; }
+		IEnumerable<string> Points { get; set; }
 		GeoUnit? GeoUnit { get; set; }
 	}
 
@@ -20,13 +21,15 @@ namespace Nest
 	{
 		public PropertyPathMarker Field { get; set; }
 		public string PinLocation { get; set; }
+		public IEnumerable<string> Points { get; set; }
 		public GeoUnit? GeoUnit { get; set; }
 		
 		object ICustomJson.GetCustomJson()
 		{
+			var sort = this.Points.HasAny() ? (object)this.Points : this.PinLocation;
 			return new Dictionary<object, object>
 			{
-				{ this.Field, this.PinLocation },
+				{ this.Field, sort },
 				{ "missing", this.Missing },
 				{ "mode", this.Mode },
 				{ "order", this.Order },
@@ -42,6 +45,7 @@ namespace Nest
 		PropertyPathMarker IGeoDistanceSort.Field { get; set; }
 
 		string IGeoDistanceSort.PinLocation { get; set; }
+		IEnumerable<string> IGeoDistanceSort.Points { get; set; }
 
 		GeoUnit? IGeoDistanceSort.GeoUnit { get; set; }
 	
@@ -51,6 +55,14 @@ namespace Nest
 			Self.PinLocation = geoLocationHash;
 			return this;
 		}
+
+		public SortGeoDistanceDescriptor<T> PinTo(IEnumerable<string> geoLocationHashes)
+		{
+			geoLocationHashes.ThrowIfEmpty("geoLocationHash");
+			Self.Points = geoLocationHashes;
+			return this;
+		}
+
 		public SortGeoDistanceDescriptor<T> PinTo(double Lat, double Lon)
 		{
 			var c = CultureInfo.InvariantCulture;
@@ -59,6 +71,14 @@ namespace Nest
 			Self.PinLocation = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
 			return this;
 		}
+		//TODO in nest 2.0 normalize all PinTo to params ?
+		public SortGeoDistanceDescriptor<T> PinTo(params GeoLocation[] geoLocationHashes)
+		{
+			geoLocationHashes.ThrowIfEmpty("geoLocationHash");
+			Self.Points = geoLocationHashes.Select(g=>g.ToString());
+			return this;
+		}
+
 		public SortGeoDistanceDescriptor<T> Unit(GeoUnit unit)
 		{
 			unit.ThrowIfNull("unit");
@@ -95,9 +115,10 @@ namespace Nest
 
 		object ICustomJson.GetCustomJson()
 		{
+			var sort = Self.Points.HasAny() ? (object)Self.Points : Self.PinLocation;
 			return new Dictionary<object, object>
 			{
-				{ Self.Field, Self.PinLocation },
+				{ Self.Field, sort },
 				{ "missing", Self.Missing },
 				{ "mode", Self.Mode},
 				{ "order", Self.Order },

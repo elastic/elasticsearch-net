@@ -134,6 +134,7 @@
     <Compile Include="Domain\Analysis\CharFilter\PatternReplaceCharFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\DelimitedPayloadTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\CommonGramsTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\KeepTypesTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\KeywordRepeatTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\HunspellTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\LimitTokenCountTokenFilter.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Domain\Cat\CatRecoveryRecord.cs" />
     <Compile Include="Domain\Cat\CatPluginsRecord.cs" />
     <Compile Include="Domain\Cat\CatPendingTasksRecord.cs" />
+    <Compile Include="Domain\Geo\GeoLocation.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />
     <Compile Include="Domain\Mapping\PropertyMapping.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataFilterDescriptor.cs" />

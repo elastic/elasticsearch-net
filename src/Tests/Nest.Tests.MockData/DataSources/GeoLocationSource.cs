@@ -6,12 +6,12 @@ using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.MockData.DataSources
 {
-	public class GeoLocationSource : DatasourceBase<GeoLocation>
+	public class GeoLocationSource : DatasourceBase<Domain.CustomGeoLocation>
 	{
 		private Random mRandom = new Random(1337);
-		public override GeoLocation Next(IGenerationSession session)
+		public override Domain.CustomGeoLocation Next(IGenerationSession session)
 		{
-			return session.Single<GeoLocation>().Get();
+			return session.Single<Domain.CustomGeoLocation>().Get();
 		}
 
 	}
