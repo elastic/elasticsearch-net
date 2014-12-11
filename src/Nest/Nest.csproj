@@ -105,6 +105,7 @@
     <Compile Include="ConvenienceExtensions\SourceExtensions.cs" />
     <Compile Include="ConvenienceExtensions\SourceManyExtensions.cs" />
     <Compile Include="Domain\Aggregations\AggregationsHelper.cs" />
+    <Compile Include="Domain\Aggregations\ISignificantTermsHeuristic.cs" />
     <Compile Include="Domain\Aggregations\Bucket.cs" />
     <Compile Include="Domain\Aggregations\BucketAggregationBase.cs" />
     <Compile Include="Domain\Aggregations\FiltersBucket.cs" />
