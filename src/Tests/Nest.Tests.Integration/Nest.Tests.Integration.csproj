@@ -253,6 +253,7 @@
     <Compile Include="Search\SearchTypeTests\SearchTypeCountTests.cs" />
     <Compile Include="Search\SearchTypeTests\SearchTypeTests.cs" />
     <Compile Include="Search\SubClassSupport\SubClassSupportTests.cs" />
+    <Compile Include="Search\TerminateAfterTests.cs" />
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />
     <Compile Include="Startup\StartupTests.cs" />
