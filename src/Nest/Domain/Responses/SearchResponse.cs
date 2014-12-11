@@ -183,6 +183,7 @@ namespace Nest
 			return Enumerable.Empty<F>();
 		}
 
+		private HighlightDocumentDictionary _highlights = null;
 		/// <summary>
 		/// IDictionary of id -Highlight Collection for the document
 		/// </summary>
@@ -190,6 +191,8 @@ namespace Nest
 		{
 			get
 			{
+				if (_highlights != null) return _highlights; 
+				
 				var dict = new HighlightDocumentDictionary();
 				if (this.HitsMetaData == null || !this.HitsMetaData.Hits.HasAny())
 					return dict;
@@ -199,10 +202,9 @@ namespace Nest
 				{
 					if (!hit.Highlights.Any())
 						continue;
-
 					dict.Add(hit.Id, hit.Highlights);
-
 				}
+				this._highlights = dict;
 				return dict;
 			}
 		}
