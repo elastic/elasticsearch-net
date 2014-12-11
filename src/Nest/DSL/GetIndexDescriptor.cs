@@ -43,11 +43,19 @@ namespace Nest
 
 	public partial class GetIndexRequest : IndicesOptionalExplicitAllPathBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
-		public GetIndexRequest() : base() { }
+		public GetIndexRequest() : base()
+		{
+			this.AllIndices = true;
+		}
 
 		public GetIndexRequest(IndexNameMarker index) : this()
 		{
 			this.Indices = new[] {index};
+		}
+
+		public GetIndexRequest(IEnumerable<IndexNameMarker> indices) : this()
+		{
+			this.Indices = indices;
 		}
 
 		/// <summary>
