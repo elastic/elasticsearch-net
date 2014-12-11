@@ -90,6 +90,9 @@ namespace Nest
 		[JsonProperty("top_hits")]
 		ITopHitsAggregator TopHits { get; set; }
 
+		[JsonProperty("children")]
+		IChildrenAggregator Children { get; set; }
+
 		[JsonProperty("aggs")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
@@ -117,8 +120,9 @@ namespace Nest
 		private ISignificantTermsAggregator _significantTerms;
 		private IPercentileRanksAggregaor _percentileRanks;
 	    private IFiltersAggregator _filters;
-		
 		private ITopHitsAggregator _topHits;
+		private IChildrenAggregator _children;
+
 		public IAverageAggregator Average { get; set; }
 		public IValueCountAggregator ValueCount { get; set; }
 		public IMaxAggregator Max { get; set; }
@@ -246,6 +250,12 @@ namespace Nest
 			set { _topHits = value; }
 		}
 
+		public IChildrenAggregator Children
+		{
+			get { return _children; }
+			set { _children = value; }
+		}
+
 		private void LiftAggregations(IBucketAggregator bucket)
 		{
 			if (bucket == null) return;
@@ -313,6 +323,8 @@ namespace Nest
 		ITermsAggregator IAggregationContainer.Terms { get; set; }
 
 		ITopHitsAggregator IAggregationContainer.TopHits { get; set; }
+
+		IChildrenAggregator IAggregationContainer.Children { get; set; }
 
 		public AggregationDescriptor<T> Average(string name, Func<AverageAggregationDescriptor<T>, AverageAggregationDescriptor<T>> selector)
 		{
@@ -462,6 +474,19 @@ namespace Nest
 			Func<TopHitsAggregationDescriptor<T>, TopHitsAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.TopHits = d);
+		}
+
+		public AggregationDescriptor<T> Children(string name,
+			Func<ChildrenAggregationDescriptor<T>, ChildrenAggregationDescriptor<T>> selector)
+		{
+			return this.Children<T>(name, selector);
+		}
+
+		public AggregationDescriptor<T> Children<K>(string name,
+			Func<ChildrenAggregationDescriptor<K>, ChildrenAggregationDescriptor<K>> selector)
+			where K : class
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a.Children = d);
 		}
 
 		private AggregationDescriptor<T> _SetInnerAggregation<TAggregation>(

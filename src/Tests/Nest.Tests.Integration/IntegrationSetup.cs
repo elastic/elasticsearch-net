@@ -51,13 +51,29 @@ namespace Nest.Tests.Integration
 			var projects = NestTestData.Data;
 			var people = NestTestData.People;
 			var boolTerms = NestTestData.BoolTerms;
-			var bulkResponse = client.Bulk(b => b
-				.FixedPath(index)
-				.IndexMany(projects)
-				.IndexMany(people)
-				.IndexMany(boolTerms)
-				.Refresh()
-			);
+			var parents = NestTestData.Parents;
+			var children = NestTestData.Children;
+
+			var bulkResponse = client.Bulk(b => {
+				b.FixedPath(index);
+
+				b.IndexMany(projects);
+				b.IndexMany(people);
+				b.IndexMany(boolTerms);
+
+				var rand = new Random();
+				foreach (var parent in parents)
+					b.Index<Parent>(i => i.Document(parent));
+				foreach (var child in children)
+					b.Index<Child>(i => i
+						.Document(child)
+						.Parent(parents[rand.Next(parents.Count)].Id)
+					);
+				
+				b.Refresh();
+				
+				return b;
+			});
 		}
 
 		public static string CreateNewIndexWithData(IElasticClient client)
@@ -74,6 +90,7 @@ namespace Nest.Tests.Integration
 			var createIndexResult = client.CreateIndex(indexName, c => c
 				.NumberOfReplicas(ElasticsearchConfiguration.NumberOfReplicas)
 				.NumberOfShards(ElasticsearchConfiguration.NumberOfShards)
+				.AddAlias(indexName + "-aliased")
 				.AddMapping<ElasticsearchProject>(m => m
 					.MapFromAttributes()
 					.Properties(props => props
@@ -93,12 +110,22 @@ namespace Nest.Tests.Integration
 						)
 					)
 				)
-				.AddAlias(indexName + "-aliased")
-				.AddMapping<Person>(m => m.MapFromAttributes())
-				.AddMapping<BoolTerm>(m => m.Properties(pp => pp
-					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.NotAnalyzed))
-					.String(sm => sm.Name(p => p.Name2).Index(FieldIndexOption.NotAnalyzed))
-					))
+				.AddMapping<Person>(m => m
+					.MapFromAttributes()
+				)
+				.AddMapping<BoolTerm>(m => m
+					.Properties(pp => pp
+						.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.NotAnalyzed))
+						.String(sm => sm.Name(p => p.Name2).Index(FieldIndexOption.NotAnalyzed))
+					)
+				)
+				.AddMapping<Parent>(m => m
+					.MapFromAttributes()
+				)
+				.AddMapping<Child>(m => m
+					.SetParent<Parent>()
+					.MapFromAttributes()
+				)
 			);
 			createIndexResult.IsValid.Should().BeTrue();
 		}

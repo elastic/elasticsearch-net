@@ -229,6 +229,7 @@
     <Compile Include="Domain\Stats\SegmentsStats.cs" />
     <Compile Include="Domain\Status\UpgradeStatus.cs" />
     <Compile Include="Domain\Suggest\SuggestField.cs" />
+    <Compile Include="DSL\Aggregations\ChildrenAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\FiltersAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\PercentileRanksAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\TopHitsAggregationDescriptor.cs" />
