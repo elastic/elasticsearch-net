@@ -11,7 +11,7 @@ namespace Nest.Tests.Integration.Indices
 	///  Tests that test whether the query response can be successfully mapped or not
 	/// </summary>
 	[TestFixture]
-	public class IndicesTest : IntegrationTests 
+	public class IndicesTest : IntegrationTests
 	{
 		protected void TestDefaultAssertions(SearchResponse<ElasticsearchProject> queryResponse)
 		{
@@ -30,7 +30,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void GetIndexSettingsSimple()
 		{
-			var r = this.Client.GetIndexSettings(i=>i.Index<ElasticsearchProject>());
+			var r = this.Client.GetIndexSettings(i => i.Index<ElasticsearchProject>());
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.IndexSettings);
 			Assert.GreaterOrEqual(r.IndexSettings.NumberOfReplicas, 0);
@@ -39,20 +39,19 @@ namespace Nest.Tests.Integration.Indices
 
 		[Test]
 		public void GetIndexSettingsComplex()
-
 		{
 			var index = Guid.NewGuid().ToString();
 			var settings = new IndexSettings();
 			settings.NumberOfReplicas = 4;
 			settings.NumberOfShards = 8;
-	
+
 			settings.Analysis.Analyzers.Add("snowball", new SnowballAnalyzer { Language = "English" });
-			settings.Analysis.Analyzers.Add("standard", new StandardAnalyzer { StopWords = new[]{"word1", "word2"}});
+			settings.Analysis.Analyzers.Add("standard", new StandardAnalyzer { StopWords = new[] { "word1", "word2" } });
 			settings.Analysis.Analyzers.Add("swedishlanguage", new LanguageAnalyzer(Language.Swedish) { StopWords = new[] { "word1", "word2" }, StemExclusionList = new[] { "stem1", "stem2" } });
 
 			settings.Analysis.CharFilters.Add("char1", new HtmlStripCharFilter());
-			settings.Analysis.CharFilters.Add("char2", new MappingCharFilter{ Mappings = new []{"ph=>f", "qu=>q"}});
-            settings.Analysis.CharFilters.Add("char3", new PatternReplaceCharFilter { Pattern = "sample(.*)", Replacement = "replacedSample $1" });
+			settings.Analysis.CharFilters.Add("char2", new MappingCharFilter { Mappings = new[] { "ph=>f", "qu=>q" } });
+			settings.Analysis.CharFilters.Add("char3", new PatternReplaceCharFilter { Pattern = "sample(.*)", Replacement = "replacedSample $1" });
 			settings.Analysis.TokenFilters.Add("tokenfilter1", new EdgeNGramTokenFilter());
 			settings.Analysis.TokenFilters.Add("tokenfilter2", new SnowballTokenFilter());
 
@@ -73,16 +72,16 @@ namespace Nest.Tests.Integration.Indices
 					Normalization = "h1"
 				});
 
-			var typeMappingResult = this.Client.GetMapping<ElasticsearchProject>(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
+			var typeMappingResult = this.Client.GetMapping<ElasticsearchProject>(gm => gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
 			var typeMapping = typeMappingResult.Mapping;
 			typeMapping.Name = index;
 			settings.Mappings.Add(typeMapping);
 
 			settings.Settings.Add("merge.policy.merge_factor", "10");
 
-			var createResponse = this.Client.CreateIndex(index, i=>i.InitializeUsing(settings));
+			var createResponse = this.Client.CreateIndex(index, i => i.InitializeUsing(settings));
 
-			var r = this.Client.GetIndexSettings(i=>i.Index(index));
+			var r = this.Client.GetIndexSettings(i => i.Index(index));
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.IndexSettings.Settings.Count);
 			Assert.AreEqual(r.IndexSettings.NumberOfReplicas, 4);
@@ -90,7 +89,7 @@ namespace Nest.Tests.Integration.Indices
 			//Assert.Greater(r.Setttings, 0);
 			Assert.NotNull(r.IndexSettings.AsExpando.merge.policy.merge_factor);
 			Assert.AreEqual(10, r.IndexSettings.AsExpando.merge.policy.merge_factor);
-			
+
 			Assert.AreEqual(3, r.IndexSettings.Analysis.Analyzers.Count);
 			{ // assert analyzers
 				Assert.True(r.IndexSettings.Analysis.Analyzers.ContainsKey("snowball"));
@@ -130,10 +129,10 @@ namespace Nest.Tests.Integration.Indices
 				Assert.AreEqual(2, filter2.Mappings.Count());
 				Assert.True(filter2.Mappings.Contains("ph=>f"));
 				Assert.True(filter2.Mappings.Contains("qu=>q"));
-                var filter3 = r.IndexSettings.Analysis.CharFilters["char3"] as PatternReplaceCharFilter;
-                Assert.NotNull(filter3);
-                Assert.AreEqual("sample(.*)", filter3.Pattern);
-                Assert.AreEqual("replacedSample $1", filter3.Replacement);
+				var filter3 = r.IndexSettings.Analysis.CharFilters["char3"] as PatternReplaceCharFilter;
+				Assert.NotNull(filter3);
+				Assert.AreEqual("sample(.*)", filter3.Pattern);
+				Assert.AreEqual("replacedSample $1", filter3.Replacement);
 			}
 
 			Assert.AreEqual(2, r.IndexSettings.Analysis.TokenFilters.Count);
@@ -175,7 +174,7 @@ namespace Nest.Tests.Integration.Indices
 				Assert.AreEqual("ttf", similarity2.Lambda);
 				Assert.AreEqual("h1", similarity2.Normalization);
 			}
-			this.Client.DeleteIndex(i=>i.Index(index));
+			this.Client.DeleteIndex(i => i.Index(index));
 		}
 		[Test]
 		public void UpdateSettingsSimple()
@@ -187,21 +186,21 @@ namespace Nest.Tests.Integration.Indices
 			settings.NumberOfShards = 5;
 			settings.Settings.Add("refresh_interval", "1s");
 			settings.Settings.Add("search.slowlog.threshold.fetch.warn", "1s");
-			client.CreateIndex(index, i=>i.InitializeUsing(settings));
+			client.CreateIndex(index, i => i.InitializeUsing(settings));
 
 			settings.Settings["refresh_interval"] = "-1";
 
-			var r = this.Client.UpdateSettings(us=>us
+			var r = this.Client.UpdateSettings(us => us
 				.Index(index)
 				.RefreshInterval("-1")
 			);
 
 			Assert.True(r.IsValid);
 			Assert.True(r.Acknowledged);
-			var getResponse = this.Client.GetIndexSettings(i=>i.Index(index));
+			var getResponse = this.Client.GetIndexSettings(i => i.Index(index));
 			Assert.AreEqual(getResponse.IndexSettings.Settings["refresh_interval"], "-1");
 
-			this.Client.DeleteIndex(i=>i.Index(index));
+			this.Client.DeleteIndex(i => i.Index(index));
 		}
 
 
@@ -210,7 +209,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void CreateIndex()
 		{
-			var typeMappingResult = this.Client.GetMapping<ElasticsearchProject>(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
+			var typeMappingResult = this.Client.GetMapping<ElasticsearchProject>(gm => gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
 			var typeMapping = typeMappingResult.Mapping;
 			typeMapping.Name = "mytype";
 			var settings = new IndexSettings();
@@ -220,14 +219,14 @@ namespace Nest.Tests.Integration.Indices
 			settings.Analysis.Analyzers.Add("snowball", new SnowballAnalyzer { Language = "English" });
 
 			var indexName = Guid.NewGuid().ToString();
-			var response = this.Client.CreateIndex(indexName, i=>i.InitializeUsing(settings));
+			var response = this.Client.CreateIndex(indexName, i => i.InitializeUsing(settings));
 
 			Assert.IsTrue(response.IsValid);
 			Assert.IsTrue(response.Acknowledged);
 
-			var mappingResult = this.Client.GetMapping<ElasticsearchProject>(gm=>gm.Index(indexName).Type("mytype"));
+			var mappingResult = this.Client.GetMapping<ElasticsearchProject>(gm => gm.Index(indexName).Type("mytype"));
 			mappingResult.Mapping.Should().NotBeNull();
-			var deleteResponse = this.Client.DeleteIndex(i=>i.Index(indexName));
+			var deleteResponse = this.Client.DeleteIndex(i => i.Index(indexName));
 
 			Assert.IsTrue(deleteResponse.IsValid);
 			Assert.IsTrue(deleteResponse.Acknowledged);
@@ -241,14 +240,14 @@ namespace Nest.Tests.Integration.Indices
 
 			var create = this.Client.CreateIndex(index);
 			create.IsValid.Should().BeTrue();
-			
+
 			var exists = this.Client.IndexExists(index);
 			exists.IsValid.Should().BeTrue();
 			exists.Exists.Should().BeTrue();
-			
+
 			var delete = this.Client.DeleteIndex(index);
 			delete.IsValid.Should().BeTrue();
-			
+
 			exists = this.Client.IndexExists(index);
 			exists.IsValid.Should().BeTrue();
 			exists.Exists.Should().BeFalse();
@@ -258,8 +257,8 @@ namespace Nest.Tests.Integration.Indices
 		public void CreateIndexUsingDescriptor()
 		{
 			var index = ElasticsearchConfiguration.DefaultIndex + "_clone";
-			if (this.Client.IndexExists(i=>i.Index(index)).Exists)
-				this.Client.DeleteIndex(d=>d.Index(index));
+			if (this.Client.IndexExists(i => i.Index(index)).Exists)
+				this.Client.DeleteIndex(d => d.Index(index));
 
 			var result = this.Client.CreateIndex(index, c => c
 				.NumberOfReplicas(1)
@@ -281,18 +280,18 @@ namespace Nest.Tests.Integration.Indices
 					.MapFromAttributes()
 					.Type("override")
 				)
-				.Analysis(a=>a
-					.Analyzers(an=>an
+				.Analysis(a => a
+					.Analyzers(an => an
 						.Add("standard", new StandardAnalyzer()
 						{
-							StopWords = new [] { "stop1", "stop2" }
+							StopWords = new[] { "stop1", "stop2" }
 						})
 					)
-					.Tokenizers(t=>t
+					.Tokenizers(t => t
 						.Add("myTokenizer", new StandardTokenizer { MaximumTokenLength = 900 })
 					)
 					.TokenFilters(t => t
-						.Add("myTokenFilter1", new StopTokenFilter { Stopwords = new [] { "stop1", "stop2" } })
+						.Add("myTokenFilter1", new StopTokenFilter { Stopwords = new[] { "stop1", "stop2" } })
 					)
 					.CharFilters(t => t
 						.Add("htmlFilter", new HtmlStripCharFilter())
@@ -317,7 +316,7 @@ namespace Nest.Tests.Integration.Indices
 			};
 			mapping.Properties.Add(fieldName, property);
 
-			var response = this.Client.Map<ElasticsearchProject>(m=>m.InitializeUsing(mapping));
+			var response = this.Client.Map<ElasticsearchProject>(m => m.InitializeUsing(mapping));
 
 			Assert.IsTrue(response.IsValid, response.ConnectionStatus.ToString());
 			Assert.IsTrue(response.Acknowledged, response.ConnectionStatus.ToString());
@@ -358,16 +357,16 @@ namespace Nest.Tests.Integration.Indices
 			settings.Analysis.Analyzers.Add("snowball", new SnowballAnalyzer { Language = "English" });
 
 			var indexName = Guid.NewGuid().ToString();
-			var response = client.CreateIndex(indexName, i=>i.InitializeUsing(settings));
+			var response = client.CreateIndex(indexName, i => i.InitializeUsing(settings));
 
 			Assert.IsTrue(response.IsValid);
 			Assert.IsTrue(response.Acknowledged);
 
 			var inferrer = new ElasticInferrer(this.Settings);
 			var typeName = inferrer.PropertyName(typeMapping.Name);
-			Assert.IsNotNull(this.Client.GetMapping<ElasticsearchProject>(gm=>gm.Index(indexName).Type(typeName)));
+			Assert.IsNotNull(this.Client.GetMapping<ElasticsearchProject>(gm => gm.Index(indexName).Type(typeName)));
 
-			var deleteResponse = client.DeleteIndex(i=>i.Index(indexName));
+			var deleteResponse = client.DeleteIndex(i => i.Index(indexName));
 
 			Assert.IsTrue(deleteResponse.IsValid);
 			Assert.IsTrue(deleteResponse.Acknowledged);

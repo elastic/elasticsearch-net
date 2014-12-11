@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using FluentAssertions;
 using Nest.Resolvers;
 using NUnit.Framework;
@@ -49,7 +50,6 @@ namespace Nest.Tests.Integration.Core.MultiPercolate
 			this.Client.IndexMany(projects, indexName);
 
 			this.Client.Refresh(r => r.Index(indexName));
-			
 
 			//Now we kick of multiple percolations
 				//provding document in the percolate request 

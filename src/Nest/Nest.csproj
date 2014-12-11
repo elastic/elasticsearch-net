@@ -189,6 +189,7 @@
     <Compile Include="Domain\Responses\ClusterStatsResponse.cs" />
     <Compile Include="Domain\Responses\ClusterPendingTasksResponse.cs" />
     <Compile Include="Domain\Responses\DeleteAliasResponse.cs" />
+    <Compile Include="Domain\Responses\GetIndexResponse.cs" />
     <Compile Include="Domain\Responses\DeleteScriptResponse.cs" />
     <Compile Include="Domain\Responses\DeleteSearchTemplateResponse.cs" />
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
@@ -237,8 +238,11 @@
     <Compile Include="DSL\UpgradeDescriptor.cs" />
     <Compile Include="DSL\UpgradeStatusDescriptor.cs" />
     <Compile Include="DSL\VerifyRepositoryDescriptor.cs" />
+    <Compile Include="DSL\GetIndexDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoHashCellFilterDescriptor.cs" />
     <Compile Include="DSL\DeleteScriptDescriptor.cs" />
+    <Compile Include="ElasticClient-GetIndex.cs" />
+    <Compile Include="Enums\GetIndexFeature.cs" />
     <Compile Include="DSL\GetScriptDescriptor.cs" />
     <Compile Include="DSL\SearchExistsDescriptor.cs" />
     <Compile Include="DSL\PutScriptDescriptor.cs" />

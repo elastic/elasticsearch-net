@@ -66,7 +66,7 @@ namespace Nest.Tests.Integration.Cluster
 			r.HotThreads.Count.Should().BeGreaterOrEqualTo(1);
 			var hotThreadInfo = r.HotThreads.First();
 			hotThreadInfo.Node.Should().NotBeNullOrEmpty();
-			hotThreadInfo.Threads.Count.ShouldBeEquivalentTo(5);
+			hotThreadInfo.Threads.Count.Should().BeGreaterThan(1);
 		}
 	}
 }
