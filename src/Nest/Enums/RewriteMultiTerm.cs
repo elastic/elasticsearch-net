@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 
 namespace Nest
 {
+	//TODO NEST 2.0 should this really be a flag enum?
 	[Flags]
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum RewriteMultiTerm

@@ -74,6 +74,8 @@ namespace Nest.Tests.Integration.Aggregations
 					.Histogram("bucket_agg", m => m
 						.Field(p => p.IntValues)
 						.Interval(10)
+						.PreOffset(5)
+						.PostOffset(5)
 					)
 
 				)

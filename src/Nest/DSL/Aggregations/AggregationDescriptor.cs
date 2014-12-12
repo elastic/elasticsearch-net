@@ -93,6 +93,9 @@ namespace Nest
 		[JsonProperty("children")]
 		IChildrenAggregator Children { get; set; }
 
+		[JsonProperty("scripted_metric")]
+		IScriptedMetricAggregator ScriptedMetric { get; set; }
+
 		[JsonProperty("aggs")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
@@ -122,6 +125,8 @@ namespace Nest
 	    private IFiltersAggregator _filters;
 		private ITopHitsAggregator _topHits;
 		private IChildrenAggregator _children;
+
+		private IScriptedMetricAggregator _scriptedMetric;
 
 		public IAverageAggregator Average { get; set; }
 		public IValueCountAggregator ValueCount { get; set; }
@@ -256,6 +261,12 @@ namespace Nest
 			set { _children = value; }
 		}
 
+		public IScriptedMetricAggregator ScriptedMetric
+		{
+			get { return _scriptedMetric; }
+			set { _scriptedMetric = value; }
+		}
+
 		private void LiftAggregations(IBucketAggregator bucket)
 		{
 			if (bucket == null) return;
@@ -326,6 +337,8 @@ namespace Nest
 
 		IChildrenAggregator IAggregationContainer.Children { get; set; }
 
+		IScriptedMetricAggregator IAggregationContainer.ScriptedMetric { get; set; }
+		
 		public AggregationDescriptor<T> Average(string name, Func<AverageAggregationDescriptor<T>, AverageAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.Average = d);
@@ -487,6 +500,12 @@ namespace Nest
 			where K : class
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.Children = d);
+		}
+
+		public AggregationDescriptor<T> ScriptedMetric(string name,
+			Func<ScriptedMetricAggregationDescriptor<T>, ScriptedMetricAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a.ScriptedMetric = d);
 		}
 
 		private AggregationDescriptor<T> _SetInnerAggregation<TAggregation>(
