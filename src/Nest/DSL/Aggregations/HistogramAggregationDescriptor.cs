@@ -30,6 +30,12 @@ namespace Nest
 
 		[JsonProperty("extended_bounds")]
 		IDictionary<string, object> ExtendedBounds { get; set; }
+
+		[JsonProperty("pre_offset")]
+		long? PreOffset { get; set; }
+
+		[JsonProperty("post_offset")]
+		long? PostOffset { get; set; }
 	}
 
 	public class HistogramAggregator : BucketAggregator, IHistogramAggregator
@@ -41,6 +47,8 @@ namespace Nest
 		public int? MinimumDocumentCount { get; set; }
 		public IDictionary<string, string> Order { get; set; }
 		public IDictionary<string, object> ExtendedBounds { get; set; }
+		public long? PreOffset { get; set; }
+		public long? PostOffset { get; set; }
 	}
 
 	public class HistogramAggregationDescriptor<T> : BucketAggregationBaseDescriptor<HistogramAggregationDescriptor<T>, T>, IHistogramAggregator 
@@ -62,6 +70,10 @@ namespace Nest
 
 		IDictionary<string, object> IHistogramAggregator.ExtendedBounds { get; set; }
 
+		long? IHistogramAggregator.PreOffset { get; set; }
+
+		long? IHistogramAggregator.PostOffset { get; set; }
+		
 		public HistogramAggregationDescriptor<T> Field(string field)
 		{
 			Self.Field = field;
@@ -116,5 +128,16 @@ namespace Nest
 			return this;
 		}
 
+		public HistogramAggregationDescriptor<T> PreOffset(long preOffset)
+		{
+			Self.PreOffset = preOffset;
+			return this;
+		}
+
+		public HistogramAggregationDescriptor<T> PostOffset(long postOffset)
+		{
+			Self.PostOffset = postOffset;
+			return this;
+		}
 	}
 }
