@@ -20,7 +20,7 @@ namespace Nest.Tests.Unit.Search.Aggregations
 				.Size(10)
 				.Aggregations(a => a
 					.ScriptedMetric("profit", sm => sm
-						.Lang("groovy")
+						.Language("groovy")
 						.InitScript("init script")
 						.MapScript("map script")
 						.CombineScript("combine script")
