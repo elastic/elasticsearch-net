@@ -19,6 +19,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 					.Name("my_geo_filter")
 					.GeoShapeEnvelope(f => f.Origin, d => d
 						.Coordinates(new[] { new[] { 13.0, 53.0 }, new[] { 14.0, 52.0 } })
+						.Relation(GeoShapeRelation.Intersects)
 				)
 			);
 
@@ -30,7 +31,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 							shape: {
 								coordinates: [[13.0, 53.0], [14.0, 52.0]],
 								type: ""envelope""
-							}
+							},
+							relation: ""intersects""
 						},
 						_cache: true,
 						_name: ""my_geo_filter""
@@ -52,6 +54,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 					.GeoShapeCircle(p => p.Origin, d => d
 						.Coordinates(new[] { -45.0, 45.0 })
 						.Radius("100m")
+						.Relation(GeoShapeRelation.Within)
 					)
 				);
 
@@ -64,7 +67,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 								coordinates: [ -45.0, 45.0 ],
 								radius: ""100m"",
 								type: ""circle""
-							}
+							},
+							relation: ""within""
 						},
 						_cache: true,
 						_name: ""my_geo_filter""
@@ -85,6 +89,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 					.Name("my_geo_filter")
 					.GeoShapeLineString(p => p.Origin, d => d
 						.Coordinates(new[] { new[] { 13.0, 53.0 }, new[] { 14.0, 52.0 } })
+						.Relation(GeoShapeRelation.Disjoint)
 					)
 				);
 
@@ -98,7 +103,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 									[ 13.0, 53.0 ], [ 14.0, 52.0 ]
 								],
 								type: ""linestring""
-							}
+							},
+							relation: ""disjoint""
 						},
 						_cache: true,
 						_name: ""my_geo_filter""
@@ -122,7 +128,9 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 								new[] { new[] { 102.0, 2.0 }, new[] { 103.0, 2.0 }, new[] { 103.0, 3.0 }, new[] { 102.0, 3.0 } },
 								new[] { new[] { 100.0, 0.0 }, new[] { 101.0, 0.0 }, new[] { 101.0, 1.0 }, new[] { 100.0, 1.0 } },
 								new[] { new[] { 100.2, 0.2 }, new[] { 100.8, 0.2 }, new[] { 100.8, 0.8 }, new[] { 100.2, 0.8 } } 
-							})
+							}
+						)
+						.Relation(GeoShapeRelation.Intersects)
 					)
 				);
 
@@ -138,7 +146,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 									[ [ 100.2, 0.2 ], [ 100.8, 0.2 ], [ 100.8, 0.8 ], [ 100.2, 0.8 ] ]
 								],
 								type: ""multilinestring""
-							}
+							},
+							relation: ""intersects""
 						},
 						_cache: true,
 						_name: ""my_geo_filter""
@@ -159,6 +168,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 					.Name("my_geo_filter")
 					.GeoShapePoint(p => p.Origin, d => d
 						.Coordinates(new [] { 1.0, 2.0 })
+						.Relation(GeoShapeRelation.Disjoint)
 					)
 				);
 
@@ -170,7 +180,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 							shape: {
 								coordinates:[ 1.0, 2.0 ],
 								type: ""point""
-							}
+							},
+							relation: ""disjoint""
 						},
 						_cache: true,
 						_name: ""my_geo_filter""
@@ -190,6 +201,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 					.Name("my_geo_filter")
 					.GeoShapeMultiPoint(p => p.Origin, d => d
 						.Coordinates(new[] { new[] { 13.0, 53.0 }, new[] { 14.0, 52.0 } })
+						.Relation(GeoShapeRelation.Within)
 					)
 				);
 
@@ -201,7 +213,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 							shape: {
 								coordinates:[ [ 13.0, 53.0 ], [ 14.0, 52.0 ] ],
 								type: ""multipoint""
-							}
+							},
+							relation: ""within""
 						},
 						_cache: true,
 						_name: ""my_geo_filter""
@@ -225,6 +238,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 							new[] { new[] { 100.0, 0.0 }, new[] { 101.0, 0.0 }, new[] { 101.0, 1.0 }, new[] { 100.0, 1.0 }, new [] { 100.0, 0.0 } },
 							new[] { new[] { 100.2, 0.2 }, new[] { 100.8, 0.2 }, new[] { 100.8, 0.8 }, new[] { 100.2, 0.8 }, new [] { 100.2, 0.2 } }
 						})
+						.Relation(GeoShapeRelation.Disjoint)
 					)
 				);
 
@@ -239,7 +253,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 									[ [ 100.2, 0.2 ], [ 100.8, 0.2 ], [ 100.8, 0.8 ], [ 100.2, 0.8 ], [ 100.2, 0.2 ] ]
 								],
 								type: ""polygon""
-							}
+							},
+							relation: ""disjoint""
 						},
 						_cache: true,
 						_name: ""my_geo_filter""
@@ -274,6 +289,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 								}
 							}
 						})
+						.Relation(GeoShapeRelation.Within)
 					)
 				);
 
@@ -291,7 +307,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 									]
 								  ],
 								type: ""multipolygon""
-							}
+							},
+							relation: ""within""
 						},
 						_cache: true,
 						_name: ""my_geo_filter""

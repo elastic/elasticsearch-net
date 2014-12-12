@@ -21,7 +21,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 									.MatchTerm(f => f.Name, "elasticsearch.pm", 1.1)
 									.End(3)
 							)
-						)
+						).Boost(2.2)
 					)
 				);
 			var json = TestElasticClient.Serialize(s);
@@ -50,7 +50,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 								end: 3
 							}
 						}
-					]
+					],
+                    boost: 2.2
 			}}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}

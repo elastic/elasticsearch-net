@@ -2,7 +2,7 @@
   "from": 0,
   "size": 10,
   "query": {
-    "common_terms": {
+    "common": {
       "content": {
         "query": "This is the most awful stopwords query ever",
         "cutoff_frequency": 0.01,

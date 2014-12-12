@@ -52,6 +52,7 @@ namespace Nest
 	[JsonObject]
 	public class PercolateResponse : PercolateCountResponse, IPercolateResponse
 	{
+
 		[JsonProperty(PropertyName = "matches")]
 		public IEnumerable<PercolatorMatch> Matches { get; internal set; }
 	}
@@ -62,5 +63,9 @@ namespace Nest
 		public string Index { get; set; }
 		[JsonProperty(PropertyName = "_id")]
 		public string Id { get; set; }
+		[JsonProperty(PropertyName = "highlight")]
+		public Dictionary<string, IList<string>> Highlight { get; set; }
+		
 	}
+
 }

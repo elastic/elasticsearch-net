@@ -19,6 +19,7 @@ namespace Nest
 			IMultiTermVectorDocumentDescriptor d = this;
 			if (d.Document == null) d.Document = new MultiTermVectorDocument();
 			d.Document.Id = Self.Id;
+			d.Document.Document = d.Document.Document;
 			d.Document.Type = Self.Type;
 			d.Document.Index = Self.Index;
 			return d.Document;
@@ -30,6 +31,12 @@ namespace Nest
 			if (d.Document == null) d.Document = new MultiTermVectorDocument();
 			setter(d);
 			return this;
+		}
+
+		public MultiTermVectorDocumentDescriptor<T> Document<TDocument>(TDocument document)
+			where TDocument : class
+		{
+			return this.SetDocValue(d => d.Document.Document = document);
 		}
 
 		public MultiTermVectorDocumentDescriptor<T> Fields(params string[] fields)

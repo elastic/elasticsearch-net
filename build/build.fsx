@@ -133,15 +133,16 @@ let nugetPack = fun name ->
     WriteStringToFile false package replacedContents
 
     let dir = sprintf "%s/%s/" buildDir name
+    let nugetOutFile = buildDir + (sprintf "%s/%s.%s.nupkg" name name patchedFileVersion);
     NuGetPack (fun p ->
       {p with 
         Version = patchedFileVersion
-        WorkingDir = dir 
+        WorkingDir = "build" 
         OutputPath = dir
       })
       package
 
-    MoveFile nugetOutDir (buildDir + (sprintf "%s/%s.%s.nupkg" name name patchedFileVersion)) 
+    MoveFile nugetOutDir nugetOutFile
 
 let buildDocs = fun action ->
     let node = @"build\tools\Node.js\node.exe"
@@ -170,9 +171,6 @@ let getAssemblyVersion = (fun _ ->
     assemblyVersion
 )
 
-
-    
-
 Target "Version" (fun _ ->
   let assemblyVersion = getAssemblyVersion()
 
@@ -181,8 +179,9 @@ Target "Version" (fun _ ->
     match f.ToLowerInvariant() with
     | f when f = "elasticsearch.net" -> "Elasticsearch.Net - oficial low level elasticsearch client"
     | f when f = "nest" -> "NEST - oficial high level elasticsearch client"
-    | f when f = "elasticsearch.net.connection.thrift" -> "Elasticsearc.Net.Connection.Thrift - Add thrift support to elasticsearch."
-    | f when f = "elasticsearch.net.connection.httpclient" -> "Elasticsearc.Net.Connection.HttpClient - IConnection implementation that uses HttpClient (.NET 4.5 only)"
+    | f when f = "elasticsearch.net.connection.thrift" -> "Add thrift support to elasticsearch."
+    | f when f = "elasticsearch.net.connection.httpclient" -> "IConnection implementation that uses HttpClient (.NET 4.5 only)"
+    | f when f = "elasticsearch.net.jsonnet" -> "IElasticsearchSerializer implementation that allows you to use Json.NET with the lowlevel client"
     | _ -> sprintf "%s" name
 
   !! "src/**/AssemblyInfo.cs"

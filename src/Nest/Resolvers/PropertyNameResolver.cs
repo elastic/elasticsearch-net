@@ -19,8 +19,15 @@ namespace Nest.Resolvers
 		private static readonly ConcurrentDictionary<Type, ElasticTypeAttribute> CachedTypeLookups =
 			new ConcurrentDictionary<Type, ElasticTypeAttribute>();
 		
-		public static IElasticPropertyAttribute Property(MemberInfo info)
+		public static IElasticPropertyAttribute Property(MemberInfo info, IConnectionSettingsValues settings = null)
 		{
+			if (settings != null)
+			{
+				PropertyMapping propertyMapping = null;
+				if (settings.PropertyMappings.TryGetValue(info, out propertyMapping))
+					return new ElasticPropertyAttribute {Name = propertyMapping.Name, OptOut = propertyMapping.Ignore};
+			}
+
 			var attributes = info.GetCustomAttributes(typeof(IElasticPropertyAttribute), true);
 			if (attributes != null && attributes.Any())
 				return ((IElasticPropertyAttribute)attributes.First());
@@ -52,6 +59,8 @@ namespace Nest.Resolvers
 		private readonly IConnectionSettingsValues _settings;
 		public PropertyNameResolver(IConnectionSettingsValues settings)
 		{
+			if (settings == null)
+				throw new ArgumentNullException("settings");
 			_settings = settings;
 		}
 
@@ -59,14 +68,14 @@ namespace Nest.Resolvers
 		{
 			if (info == null)
 				return null;
-
+			
 			var name = info.Name;
-			var resolvedName = _settings.DefaultPropertyNameInferrer(name);
-			var att = ElasticAttributes.Property(info);
-			if (att != null && !att.Name.IsNullOrEmpty())
-				resolvedName = att.Name;
 
-			return resolvedName;
+			var att = ElasticAttributes.Property(info, _settings);
+			if (att != null && !att.Name.IsNullOrEmpty())
+				return att.Name;
+
+			return _settings.DefaultPropertyNameInferrer(name);
 		}
 
 		public string ResolveToLastToken(MemberInfo info)
@@ -96,6 +105,7 @@ namespace Nest.Resolvers
 			return stack.Last();
 		}
 
+		[Obsolete("Scheduled for removal in 2.0, unused")]
 		public Stack<IElasticPropertyAttribute> ResolvePropertyAttributes(Expression expression)
 		{
 			var stack = new Stack<string>();
@@ -110,19 +120,7 @@ namespace Nest.Resolvers
 		{
 			if (stack != null)
 			{
-				var name = expression.Member.Name;
-				var resolvedName = this._settings.DefaultPropertyNameInferrer(name);
-
-				var att = ElasticAttributes.Property(expression.Member);
-				if (att != null)
-				{
-					properties.Push(att);
-				}
-				if (att != null && !att.Name.IsNullOrEmpty())
-				{
-
-					resolvedName = att.Name;
-				}
+				var resolvedName = this.Resolve(expression.Member);
 				stack.Push(resolvedName);
 			}
 			return base.VisitMemberAccess(expression, stack, properties);
@@ -135,6 +133,12 @@ namespace Nest.Resolvers
 				var constantExpression = m.Arguments.Last() as ConstantExpression;
 				if (constantExpression != null)
 					stack.Push(constantExpression.Value as string);
+			}
+			else if (m.Method.Name == "FullyQualified" && m.Arguments.Any())
+			{
+				var type = m.Method.ReturnType;
+				var typeName = this._settings.Inferrer.TypeName(type);
+				stack.Push(typeName);
 			}
 			else if (m.Method.Name == "get_Item" && m.Arguments.Any())
 			{
@@ -162,11 +166,35 @@ namespace Nest.Resolvers
 			}
 			return base.VisitMethodCall(m, stack, properties);
 		}
+		
 		private static bool IsLinqOperator(MethodInfo method)
 		{
 			if (method.DeclaringType != typeof(Queryable) && method.DeclaringType != typeof(Enumerable))
 				return false;
 			return Attribute.GetCustomAttribute(method, typeof(ExtensionAttribute)) != null;
+		}
+	}
+	
+
+	/// <summary>
+	/// Resolves member infos in an expression, instance may NOT be shared.
+	/// </summary>
+	public class MemberInfoResolver : PropertyNameResolver
+	{
+		private readonly IList<MemberInfo> _members = new List<MemberInfo>();
+		public IList<MemberInfo> Members { get { return _members; } } 
+
+		public MemberInfoResolver(IConnectionSettingsValues settings, Expression expression) : base(settings)
+		{
+			var stack = new Stack<string>();
+			var properties = new Stack<IElasticPropertyAttribute>();
+			base.Visit(expression, stack, properties);
+		}
+
+		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		{
+			this._members.Add(expression.Member);
+			return base.VisitMemberAccess(expression, stack, properties);
 		}
 	}
 }

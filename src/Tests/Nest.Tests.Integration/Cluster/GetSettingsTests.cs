@@ -14,13 +14,13 @@ namespace Nest.Tests.Integration.Cluster
 					.Add("discovery.zen.minimum_master_nodes", 1)
 				)
 			);
-			
+
 			var r = this.Client.ClusterGetSettings(p=>p
 				.FlatSettings()
 			);
 			Assert.True(r.IsValid);
 			Assert.AreEqual(r.Transient["discovery.zen.minimum_master_nodes"], "1");
 		}
-		
+
 	}
 }

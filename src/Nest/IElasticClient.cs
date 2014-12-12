@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
@@ -314,12 +313,20 @@ namespace Nest
 		
 		/// <inheritdoc />
 		IIndicesOperationResponse DeleteTemplate(IDeleteTemplateRequest deleteTemplateRequest);
-		
+
 		/// <inheritdoc />
+		[Obsolete("Scheduled for removal in 2.0, this method name has a typo")]
 		Task<IIndicesOperationResponse> DeleteTemplateAync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
 
 		/// <inheritdoc />
+		[Obsolete("Scheduled for removal in 2.0, this method name has a typo")]
 		Task<IIndicesOperationResponse> DeleteTemplateAync(IDeleteTemplateRequest deleteTemplateRequest);
+
+		/// <inheritdoc />
+		Task<IIndicesOperationResponse> DeleteTemplateAsync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
+
+		/// <inheritdoc />
+		Task<IIndicesOperationResponse> DeleteTemplateAsync(IDeleteTemplateRequest deleteTemplateRequest);
 
 		/// <summary>
 		/// Unregister a percolator
@@ -1571,5 +1578,86 @@ namespace Nest
 		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
 		/// <returns>A task of ElasticsearchResponse of T where T represents the JSON response body</returns>
 		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null);
+
+        /// <inheritdoc />
+	    IPutScriptResponse PutScript(Func<PutScriptDescriptor, PutScriptDescriptor> putScriptDescriptor);
+
+        /// <inheritdoc />
+	    Task<IPutScriptResponse> PutScriptAsync(Func<PutScriptDescriptor, PutScriptDescriptor> putScriptDescriptor);
+
+        /// <inheritdoc />
+        IGetScriptResponse GetScript(Func<GetScriptDescriptor, GetScriptDescriptor> getScriptDescriptor);
+
+        /// <inheritdoc />
+        Task<IGetScriptResponse> GetScriptAsync(Func<GetScriptDescriptor, GetScriptDescriptor> getScriptDescriptor);
+
+        /// <inheritdoc />
+        IDeleteScriptResponse DeleteScript(Func<DeleteScriptDescriptor, DeleteScriptDescriptor> deleteScriptDescriptor);
+
+        /// <inheritdoc />
+        Task<IDeleteScriptResponse> DeleteScriptAsync(Func<DeleteScriptDescriptor, DeleteScriptDescriptor> deleteScriptDescriptor);
+
+		/// <inheritdoc />
+		IGetIndexResponse GetIndex(Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector);
+
+		/// <inheritdoc />
+		IGetIndexResponse GetIndex(IGetIndexRequest createIndexRequest);
+
+		/// <inheritdoc />
+		Task<IGetIndexResponse> GetIndexAsync(Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector);
+
+		/// <inheritdoc />
+		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest createIndexRequest);
+
+		/// <inheritdoc />
+		IExistsResponse SearchExists<T>(Func<SearchExistsDescriptor<T>, SearchExistsDescriptor<T>> selector)
+			where T : class;
+
+		/// <inheritdoc />
+		IExistsResponse SearchExists(ISearchExistsRequest indexRequest);
+
+		/// <inheritdoc />
+		Task<IExistsResponse> SearchExistsAsync<T>(Func<SearchExistsDescriptor<T>, SearchExistsDescriptor<T>> selector)
+			where T : class;
+
+		/// <inheritdoc />
+		Task<IExistsResponse> SearchExistsAsync(ISearchExistsRequest indexRequest);
+
+		/// <inheritdoc />
+		IVerifyRepositoryResponse VerifyRepository(string name, Func<VerifyRepositoryDescriptor, VerifyRepositoryDescriptor> selector = null);
+
+		/// <inheritdoc />
+		IVerifyRepositoryResponse VerifyRepository(IVerifyRepositoryRequest verifyRepositoryRequest);
+
+		/// <inheritdoc />
+		Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(string name, Func<VerifyRepositoryDescriptor, VerifyRepositoryDescriptor> selector = null);
+
+		/// <inheritdoc />
+		Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest verifyRepositoryRequest);
+
+		/// <inheritdoc />
+		IUpgradeResponse Upgrade(IUpgradeRequest upgradeRequest);
+
+		/// <inheritdoc />
+		IUpgradeResponse Upgrade(Func<UpgradeDescriptor, UpgradeDescriptor> upgradeDescriptor = null);
+		
+		/// <inheritdoc />
+		Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest upgradeRequest);
+
+		/// <inheritdoc />
+		Task<IUpgradeResponse> UpgradeAsync(Func<UpgradeDescriptor, UpgradeDescriptor> upgradeDescriptor = null);
+
+		/// <inheritdoc />
+		IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest upgradeRequest);
+
+		/// <inheritdoc />
+		IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, UpgradeStatusDescriptor> upgradeDescriptor = null);
+
+		/// <inheritdoc />
+		Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest upgradeRequest);
+
+		/// <inheritdoc />
+		Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, UpgradeStatusDescriptor> upgradeDescriptor = null);
+
 	}
 }

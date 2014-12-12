@@ -16,7 +16,7 @@ namespace Nest
 	public static class RequestPameterExtensions
 	{
 		
-		///<summary>A comma-separated list of fields to return the fielddata size</summary>
+		///<summary>A comma-separated list of fields to return in the output</summary>
 			internal static CatFielddataRequestParameters _Fields<T>(
 				this CatFielddataRequestParameters qs,
 				IEnumerable<Expression<Func<T, object>>>  fields)

@@ -45,6 +45,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 				case "value":
 					return GetValueMetricOrAggregation(reader, serializer);
 				case "buckets":
+				case "doc_count_error_upper_bound":
 					return GetBucketAggregation(reader, serializer);
 				case "key":
 					return GetKeyedBucketItem(reader, serializer);
@@ -292,8 +293,41 @@ namespace Nest.Resolvers.Converters.Aggregations
 		private IAggregation GetBucketAggregation(JsonReader reader, JsonSerializer serializer)
 		{
 			var bucket = new Bucket();
+			var property = reader.Value as string;
+			if (property == "doc_count_error_upper_bound")
+			{
+				reader.Read();
+				bucket.DocCountErrorUpperBound = reader.Value as long?;
+				reader.Read();
+			}
+			property = reader.Value as string;
+			if (property == "sum_other_doc_count")
+			{
+				reader.Read();
+				bucket.SumOtherDocCount = reader.Value as long?;
+				reader.Read();
+			}
 			var aggregations = new List<IAggregation>();
 			reader.Read();
+
+		    if (reader.TokenType == JsonToken.StartObject)
+		    {
+		        reader.Read();
+		        var temp = new Dictionary<string, IAggregation>();
+                do
+                {
+                    var name = reader.Value.ToString();
+                    reader.Read();
+                    var innerAgg = this.ReadAggregation(reader, serializer);
+                    temp.Add(name, innerAgg);
+                    reader.Read();
+                } while (reader.TokenType != JsonToken.EndObject);
+
+		        var agg = new AggregationsHelper(temp);
+                
+		        return new FiltersBucket(agg);
+		    }
+
 			if (reader.TokenType != JsonToken.StartArray)
 				return null;
 			reader.Read(); //move from start array to start object
@@ -317,14 +351,25 @@ namespace Nest.Resolvers.Converters.Aggregations
 		private IAggregation GetValueMetricOrAggregation(JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
-			var metric = new ValueMetric()
+			var valueMetric = new ValueMetric()
 			{
 				Value = (reader.Value as double?)
 			};
-			if (metric.Value == null && reader.ValueType == typeof(long))
-				metric.Value = reader.Value as long?;
-			reader.Read();	
-			return metric;
+			if (valueMetric.Value == null && reader.ValueType == typeof(long))
+				valueMetric.Value = reader.Value as long?;
+
+			if (valueMetric.Value != null)
+			{
+				reader.Read();
+				return valueMetric;
+			}
+
+			var scriptedMetric = serializer.Deserialize(reader);
+
+			if (scriptedMetric != null)
+				return new ScriptedValueMetric { _Value = scriptedMetric };
+
+			return valueMetric;
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

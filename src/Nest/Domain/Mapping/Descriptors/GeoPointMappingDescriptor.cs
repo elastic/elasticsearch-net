@@ -36,6 +36,12 @@ namespace Nest
 			return this;
 		}
 
+        public GeoPointMappingDescriptor<T> GeoHashPrefix(bool geoHashPrefix = true)
+        {
+            this._Mapping.GeoHashPrefix = geoHashPrefix;
+            return this;
+        }
+
 		public GeoPointMappingDescriptor<T> FieldData(Func<FieldDataNonStringMappingDescriptor, FieldDataNonStringMappingDescriptor> fieldDataSelector)
 		{
 			fieldDataSelector.ThrowIfNull("fieldDataSelector");

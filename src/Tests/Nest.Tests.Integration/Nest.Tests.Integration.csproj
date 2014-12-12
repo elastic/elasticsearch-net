@@ -96,6 +96,7 @@
     <Compile Include="Aggregations\SingleBucketAggregationTests.cs" />
     <Compile Include="Aggregations\StatsAggregationTests.cs" />
     <Compile Include="Aggregations\MetricAggregationTests.cs" />
+    <Compile Include="Aggregations\FIltersAggregationTests.cs" />
     <Compile Include="Aggregations\TermsAggregationTests.cs" />
     <Compile Include="Aggregations\ParseResponseItemsTests.cs" />
     <Compile Include="Attributes\SkipVersionAttribute.cs" />
@@ -105,12 +106,15 @@
     <Compile Include="Cluster\StatsTest.cs" />
     <Compile Include="Connection\Failover\SniffTests.cs" />
     <Compile Include="Connection\HttpClient\HttpClientTests.cs" />
+    <Compile Include="Connection\Security\BasicAuthenticationTests.cs" />
+    <Compile Include="Connection\Security\UnauthorizedRequestTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Analyze\AnalyzeTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
     <Compile Include="Core\CountTests.cs" />
     <Compile Include="Core\Cat\CatTests.cs" />
+    <Compile Include="Core\Exists\SearchExistsTests.cs" />
     <Compile Include="Core\Explain\ExplainTests.cs" />
     <Compile Include="Core\Exists\AliasExists.cs" />
     <Compile Include="Core\GetFieldMapping\GetFieldMappingTests.cs" />
@@ -122,6 +126,7 @@
     <Compile Include="Core\Repository\CreateRepositoryTests.cs" />
     <Compile Include="Core\ClearScroll\ClearScrollTests.cs" />
     <Compile Include="Core\Exists\DocumentExistsTests.cs" />
+    <Compile Include="Core\Scripts\ScriptsTest.cs" />
     <Compile Include="Core\Suggest\SuggestTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
     <Compile Include="Core\TermVectors\MultiTermVectorsTests.cs" />
@@ -142,7 +147,9 @@
     <Compile Include="Indices\Analysis\Analyzers\AnalyzerTests.cs" />
     <Compile Include="Cluster\StateTests.cs" />
     <Compile Include="Core\Exists\TypeExistsTests.cs" />
+    <Compile Include="Indices\GetIndexTests.cs" />
     <Compile Include="Indices\StatusTests.cs" />
+    <Compile Include="Indices\UpgradeTests.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
@@ -174,6 +181,7 @@
     <Compile Include="Indices\StatsTests.cs" />
     <Compile Include="Core\AsyncTests.cs" />
     <Compile Include="Mapping\MappingVisitorTests.cs" />
+    <Compile Include="Mapping\GetMultipleMappingTests.cs" />
     <Compile Include="Reproduce\Reproduce769Tests.cs" />
     <Compile Include="Reproduce\Reproduce945Tests.cs" />
     <Compile Include="Reproduce\Reproduce953Tests.cs" />
@@ -246,6 +254,7 @@
     <Compile Include="Search\SearchTypeTests\SearchTypeCountTests.cs" />
     <Compile Include="Search\SearchTypeTests\SearchTypeTests.cs" />
     <Compile Include="Search\SubClassSupport\SubClassSupportTests.cs" />
+    <Compile Include="Search\TerminateAfterTests.cs" />
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />
     <Compile Include="Startup\StartupTests.cs" />

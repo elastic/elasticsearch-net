@@ -53,10 +53,11 @@ namespace Nest
 		
 		public AnalysisSettings Analysis { get; set; }
 
+		//TODO NEST 2.0 change this to dictionary to better reflect the actual elasticsearch structure
 		public IList<RootObjectMapping> Mappings { get; set; }
 
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		protected internal Dictionary<string, ICreateAliasOperation> Aliases { get; set; }
+		public Dictionary<string, ICreateAliasOperation> Aliases { get; set; }
 			
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public Dictionary<string, WarmerMapping> Warmers { get; set; }

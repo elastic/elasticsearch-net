@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Serialization;
+using Elasticsearch.Net.Connection.Security;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -60,6 +61,9 @@ namespace Elasticsearch.Net.Connection
 		private int? _maxDeadTimeout;
 		int? IConnectionConfigurationValues.MaxDeadTimeout { get{ return _maxDeadTimeout; } }
 	
+		private TimeSpan? _maxRetryTimeout;
+		TimeSpan? IConnectionConfigurationValues.MaxRetryTimeout { get{ return _maxRetryTimeout; } }
+	
 		private string _proxyUsername;
 		string IConnectionConfigurationValues.ProxyUsername { get{ return _proxyUsername; } }
 		
@@ -112,6 +116,9 @@ namespace Elasticsearch.Net.Connection
 		private bool _traceEnabled;
 		bool IConnectionConfigurationValues.TraceEnabled { get{ return _traceEnabled; } }
 
+		private bool _httpPipeliningEnabled;
+		bool IConnectionConfigurationValues.HttpPipeliningEnabled { get { return _httpPipeliningEnabled; } }
+
 		private bool _throwOnServerExceptions;
 		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions { get{ return _throwOnServerExceptions; } }
 
@@ -123,6 +130,9 @@ namespace Elasticsearch.Net.Connection
 
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer { get; set; }
 
+		private BasicAuthorizationCredentials _basicAuthCredentials;
+		BasicAuthorizationCredentials IConnectionConfigurationValues.BasicAuthorizationCredentials { get { return _basicAuthCredentials; } } 
+		
 		public ConnectionConfiguration(IConnectionPool connectionPool)
 		{
 			this._timeout = 60*1000;
@@ -243,7 +253,7 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// This is a separate timeout for Ping() requests. A ping should fail as fast as possible.
 		/// </summary>
-		/// <param name="timeout">The ping timeout in milliseconds defaults to 50</param>
+		/// <param name="timeout">The ping timeout in milliseconds defaults to 200</param>
 		public T SetPingTimeout(int timeout)
 		{
 			this._pingTimeout = timeout;
@@ -271,6 +281,19 @@ namespace Elasticsearch.Net.Connection
 			this._maxDeadTimeout = timeout;
 			return (T) this;
 		}
+		
+		/// <summary>
+		/// Limits the total runtime including retries separately from <see cref="Timeout"/>
+		/// <pre>
+		/// When not specified defaults to <see cref="Timeout"/> which itself defaults to 60seconds
+		/// </pre>
+		/// </summary>
+		public T SetMaxRetryTimeout(TimeSpan maxRetryTimeout)
+		{
+			this._maxRetryTimeout = maxRetryTimeout;
+			return (T) this;
+		}
+		
 		/// <summary>
 		/// Semaphore asynchronous connections automatically by giving
 		/// it a maximum concurrent connections. 
@@ -325,9 +348,39 @@ namespace Elasticsearch.Net.Connection
         {
             handler.ThrowIfNull("handler");
             this._connectionStatusHandler = handler;
-            return (T)this;
+			return (T)this;
         }
 
+		/// <summary>
+		/// Basic access authentication credentials to specify with all requests.
+		/// </summary>
+		[Obsolete("Scheduled to be removed in 2.0.  Use SetBasicAuthentication() instead.")]
+		public T SetBasicAuthorization(string userName, string password)
+		{
+			return this.SetBasicAuthentication(userName, password);
+		}
+
+		/// <summary>
+		/// Basic access authentication credentials to specify with all requests.
+		/// </summary>
+		public T SetBasicAuthentication(string userName, string password)
+		{
+			if (this._basicAuthCredentials == null)
+				this._basicAuthCredentials = new BasicAuthorizationCredentials();
+			this._basicAuthCredentials.UserName = userName;
+			this._basicAuthCredentials.Password = password;
+			return (T)this;
+		}
+
+		/// <summary>
+		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
+		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
+		/// </summary>
+		public T HttpPipeliningEnabled(bool enabled = true)
+		{
+			this._httpPipeliningEnabled = enabled;
+			return (T)this;
+		}
 	}
 }
 

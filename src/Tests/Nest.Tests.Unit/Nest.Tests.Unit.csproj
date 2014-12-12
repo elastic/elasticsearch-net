@@ -128,6 +128,7 @@
     <Compile Include="Core\Indices\Analysis\Analyzers\AnalyzerTests.cs" />
     <Compile Include="Core\Indices\Similarity\SimilarityTests.cs" />
     <Compile Include="Core\Map\CustomMapping\ImagePluginMappingTests.cs" />
+    <Compile Include="Core\Map\GenericTypes\GenericTypeMappingTests.cs" />
     <Compile Include="Core\Map\GetMappingSerializationTests.cs" />
     <Compile Include="Core\Map\MappingBehaviourTests.cs" />
     <None Include="Cluster\PutSettings\PutSettings.json">
@@ -149,6 +150,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Indices\Analysis\Analyzers\LanguageAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\KeepTypesTokenFilter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Indices\Analysis\Analyzers\WhitespaceAnalyzerTest.json">
@@ -190,6 +194,9 @@
     <None Include="Core\Map\CustomMapping\RepresentUnknowImageMappingPlugin.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Map\GenericTypes\GenericTypeMapping.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Map\Properties\CompletionProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -198,6 +205,9 @@
     </None>
     <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
     <Compile Include="Core\Map\Transform\MappingTansformTests.cs" />
+    <Compile Include="Core\Script\DeleteScriptRequestTests.cs" />
+    <Compile Include="Core\Script\GetScriptRequestTests.cs" />
+    <Compile Include="Core\Script\PutScriptRequestTests.cs" />
     <Compile Include="Core\Scroll\ScrollRequestTests.cs" />
     <Compile Include="Core\Domain\Connection\ConnectionTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
@@ -239,7 +249,9 @@
     <Compile Include="Internals\Exceptions\BadQueryServerExceptionTests.cs" />
     <Compile Include="Internals\Inferno\EscapedFormatTests.cs" />
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
+    <Compile Include="Internals\Inferno\MapPropertyIgnoreTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
+    <Compile Include="Internals\Inferno\MapPropertyNamesForTests.cs" />
     <Compile Include="Internals\Serialize\ConnectionSettingsTests.cs" />
     <Compile Include="Internals\Serialize\NullValueHandlingTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
@@ -249,7 +261,9 @@
     <Compile Include="ObjectInitializer\Aliases\GetAliasRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\MultiTermVectors\MultiTermVectorsWithDocumentRequestTests.cs" />
     <Compile Include="ObjectInitializer\Nodes\NodesHotThreadsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Repository\VerifyRepositoryRequestTests.cs" />
     <Compile Include="ObjectInitializer\Search\SearchRequestUntypedTests.cs" />
     <Compile Include="ObjectInitializer\Status\StatusRequestTests.cs" />
     <Compile Include="ObjectInitializer\IndicesStats\IndicesStatsRequestTests.cs" />
@@ -310,6 +324,7 @@
     <Compile Include="ObjectInitializer\Template\DeleteTemplateRequestTests.cs" />
     <Compile Include="ObjectInitializer\Template\GetTemplateRequestTests.cs" />
     <Compile Include="ObjectInitializer\Template\PutTemplateRequestTests.cs" />
+    <Compile Include="ObjectInitializer\TermVector\TermVectorWithDocRequestTests.cs" />
     <Compile Include="ObjectInitializer\TermVector\TermVectorRequestTests.cs" />
     <Compile Include="ObjectInitializer\Update\UpdateRequestTests.cs" />
     <Compile Include="ObjectInitializer\UpdateSettings\UpdateSettingsRequestTests.cs" />
@@ -324,6 +339,7 @@
     <Compile Include="QueryParsers\Filter\GeoBoundingBoxFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\GeoDistanceFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\GeoDistanceRangeFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\GeoHashCellFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\GeoIndexShapeFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\GeoPolygonFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\GeoShapeFilterTests.cs" />
@@ -394,10 +410,12 @@
     <Compile Include="Reproduce\Reproduce806Tests.cs" />
     <Compile Include="Reproduce\Reproduce876Tests.cs" />
     <Compile Include="Reproduce\Reproduce926Tests.cs" />
+    <Compile Include="Search\Aggregations\ScriptedMetricJson.cs" />
     <Compile Include="Search\Failures\ShardFailureTests.cs" />
     <Compile Include="Search\Fields\FieldsTests.cs" />
     <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
     <Compile Include="Search\Filter\Modes\FilterModesTests.cs" />
+    <Compile Include="Search\Filter\Singles\GeoHashCellFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\TermsLookupFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\GeoIndexedShapeFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\GeoShapeFilterJson.cs" />
@@ -656,6 +674,9 @@
     <None Include="Core\MultiPercolate\MultiPercolateJson.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Script\PutScript.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\UpdateSettings\AllUpdateSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -714,6 +735,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\MoreLikeThis\MoreLikeThisBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\MultiTermVectors\MultiTermVectorsWithDocumentBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Snapshot\SnapshotBody.json">
@@ -1230,6 +1254,12 @@
     <None Include="Search\Query\UpdateQuery\FilteredQueryCombinesUsingStatic.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Search\ScriptFields\TestIndexedScriptFieldWithScriptLangEnum.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\ScriptFields\TestIndexedScriptField.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\SearchTypeTests\SearchTypeDoesNotPolluteQueryObject.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -1275,6 +1305,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

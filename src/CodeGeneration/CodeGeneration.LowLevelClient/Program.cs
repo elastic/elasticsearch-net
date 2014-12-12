@@ -11,7 +11,10 @@ namespace CodeGeneration.LowLevelClient
 		{
 			var useCache = (args.Length > 0 && args[0] == "cache");
 
-			var spec = ApiGenerator.GetRestSpec(useCache: useCache);
+			if (!useCache)
+				ApiGenerator.GenerateEndpointFiles();
+
+			var spec = ApiGenerator.GetRestApiSpec();
 
 			ApiGenerator.GenerateClientInterface(spec);
 

@@ -144,6 +144,13 @@ namespace Elasticsearch.Net
 	}
 	
 	
+	public enum PercolateFormat 
+	{
+		  [EnumMember(Value = "ids")]
+		Ids
+	}
+	
+	
 	public enum SuggestMode 
 	{
 		  [EnumMember(Value = "missing")]
@@ -198,6 +205,8 @@ namespace Elasticsearch.Net
 		Merge,
 		[EnumMember(Value = "percolate")]
 		Percolate,
+		[EnumMember(Value = "query_cache")]
+		QueryCache,
 		[EnumMember(Value = "refresh")]
 		Refresh,
 		[EnumMember(Value = "search")]
@@ -287,6 +296,8 @@ namespace Elasticsearch.Net
 		Merge,
 		[EnumMember(Value = "percolate")]
 		Percolate,
+		[EnumMember(Value = "query_cache")]
+		QueryCache,
 		[EnumMember(Value = "refresh")]
 		Refresh,
 		[EnumMember(Value = "search")]
@@ -439,6 +450,15 @@ namespace Elasticsearch.Net
 			}
 			
 			
+			if (e is PercolateFormat)
+			{
+				switch((PercolateFormat)e)
+				{
+					case PercolateFormat.Ids: return "ids";
+				}
+			}
+			
+			
 			if (e is SuggestMode)
 			{
 				switch((SuggestMode)e)
@@ -480,6 +500,7 @@ namespace Elasticsearch.Net
 					case IndicesStatsMetric.Indexing: return "indexing";
 					case IndicesStatsMetric.Merge: return "merge";
 					case IndicesStatsMetric.Percolate: return "percolate";
+					case IndicesStatsMetric.QueryCache: return "query_cache";
 					case IndicesStatsMetric.Refresh: return "refresh";
 					case IndicesStatsMetric.Search: return "search";
 					case IndicesStatsMetric.Segments: return "segments";
@@ -541,6 +562,7 @@ namespace Elasticsearch.Net
 					case NodesStatsIndexMetric.Indexing: return "indexing";
 					case NodesStatsIndexMetric.Merge: return "merge";
 					case NodesStatsIndexMetric.Percolate: return "percolate";
+					case NodesStatsIndexMetric.QueryCache: return "query_cache";
 					case NodesStatsIndexMetric.Refresh: return "refresh";
 					case NodesStatsIndexMetric.Search: return "search";
 					case NodesStatsIndexMetric.Segments: return "segments";

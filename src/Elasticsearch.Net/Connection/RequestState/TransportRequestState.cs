@@ -94,7 +94,7 @@ namespace Elasticsearch.Net.Connection.RequestState
 			this.RequestParameters = requestParameters;
 			this._traceEnabled = settings.TraceEnabled;
 			this._metricsEnabled = settings.MetricsEnabled;
-			if (this._metricsEnabled)
+			if (this._metricsEnabled || this._traceEnabled)
 				this._stopwatch = Stopwatch.StartNew(); 
 
 			this.Method = method;
@@ -156,7 +156,8 @@ namespace Elasticsearch.Net.Connection.RequestState
 					CompletedOn = DateTime.UtcNow,
 					Requests = this.RequestMetrics
 				};
-
+			
+			//TODO this forced set is done in several places, shouldn't this be enough?
 			var objectNeedsResponseRef = result.Response as IResponseWithRequestInformation;
 			if (objectNeedsResponseRef != null) objectNeedsResponseRef.RequestInformation = result;
 
@@ -191,7 +192,7 @@ namespace Elasticsearch.Net.Connection.RequestState
 					"NEST {0} {1} ({2}):\r\n{3}"
 					, _result.RequestMethod
 					, _result.RequestUrl
-					, _stopwatch.Elapsed.ToString()
+					, _stopwatch.Elapsed
 					, _result.ToString()
 				);
 			}

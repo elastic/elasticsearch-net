@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using FluentAssertions;
 using Nest.Tests.MockData;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
@@ -41,7 +42,7 @@ namespace Nest.Tests.Integration.Core
 				Script = "ctx._source.loc += 10",
 			});
 			project = this.Client.Source<ElasticsearchProject>(s => s.Id(id));
-			Assert.AreEqual(project.LOC, loc + 10);
+			project.LOC.Should().Be(loc + 10);
 			Assert.AreNotEqual(project.Version, "1");
 		}
 
