@@ -90,6 +90,9 @@ namespace Nest
 		[JsonProperty("top_hits")]
 		ITopHitsAggregator TopHits { get; set; }
 
+		[JsonProperty("children")]
+		IChildrenAggregator Children { get; set; }
+
 		[JsonProperty("scripted_metric")]
 		IScriptedMetricAggregator ScriptedMetric { get; set; }
 
@@ -121,6 +124,8 @@ namespace Nest
 		private IPercentileRanksAggregaor _percentileRanks;
 	    private IFiltersAggregator _filters;
 		private ITopHitsAggregator _topHits;
+		private IChildrenAggregator _children;
+
 		private IScriptedMetricAggregator _scriptedMetric;
 
 		public IAverageAggregator Average { get; set; }
@@ -250,6 +255,12 @@ namespace Nest
 			set { _topHits = value; }
 		}
 
+		public IChildrenAggregator Children
+		{
+			get { return _children; }
+			set { _children = value; }
+		}
+
 		public IScriptedMetricAggregator ScriptedMetric
 		{
 			get { return _scriptedMetric; }
@@ -323,6 +334,8 @@ namespace Nest
 		ITermsAggregator IAggregationContainer.Terms { get; set; }
 
 		ITopHitsAggregator IAggregationContainer.TopHits { get; set; }
+
+		IChildrenAggregator IAggregationContainer.Children { get; set; }
 
 		IScriptedMetricAggregator IAggregationContainer.ScriptedMetric { get; set; }
 		
@@ -474,6 +487,19 @@ namespace Nest
 			Func<TopHitsAggregationDescriptor<T>, TopHitsAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.TopHits = d);
+		}
+
+		public AggregationDescriptor<T> Children(string name,
+			Func<ChildrenAggregationDescriptor<T>, ChildrenAggregationDescriptor<T>> selector)
+		{
+			return this.Children<T>(name, selector);
+		}
+
+		public AggregationDescriptor<T> Children<K>(string name,
+			Func<ChildrenAggregationDescriptor<K>, ChildrenAggregationDescriptor<K>> selector)
+			where K : class
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a.Children = d);
 		}
 
 		public AggregationDescriptor<T> ScriptedMetric(string name,
