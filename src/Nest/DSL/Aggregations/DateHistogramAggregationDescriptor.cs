@@ -109,11 +109,6 @@ namespace Nest
 
 		IDictionary<string, object> IDateHistogramAggregator.ExtendedBounds { get; set; }
 
-		public DateHistogramAggregationDescriptor()
-		{
-			this.Format("yyyy-MM-dd");
-		}
-
 		public DateHistogramAggregationDescriptor<T> Field(string field)
 		{
 			Self.Field = field;
