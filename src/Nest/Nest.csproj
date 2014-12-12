@@ -148,7 +148,6 @@
     <Compile Include="Domain\Cluster\ClusterRerouteDecision.cs" />
     <Compile Include="Domain\Cluster\ClusterRerouteExplanation.cs" />
     <Compile Include="Domain\Cluster\ClusterRerouteParameters.cs" />
-    <Compile Include="Domain\Cluster\ClusterRerouteNode.cs" />
     <Compile Include="Domain\Cluster\ClusterRerouteState.cs" />
     <Compile Include="Domain\Cat\CatShardsRecord.cs" />
     <Compile Include="Domain\Cat\CatFielddataRecord.cs" />
