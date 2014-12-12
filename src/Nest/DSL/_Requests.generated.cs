@@ -3970,7 +3970,7 @@ namespace Nest
 		
 	///<summary>Request parameters for MtermvectorsGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-termvectors.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html
 	///</pre>
 	///</summary>
 	public partial class MultiTermVectorsRequest 
@@ -4045,6 +4045,14 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
 			set { this.Request.RequestParameters.AddQueryString("parent", value); }
+		}
+		
+		
+		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
+		public bool Realtime 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
+			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
 		}
 		
 	}
@@ -5000,7 +5008,7 @@ namespace Nest
 		
 	///<summary>Request parameters for TermvectorGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-termvectors.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html
 	///</pre>
 	///</summary>
 	public partial class TermvectorRequest<T> 
@@ -5075,6 +5083,14 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
 			set { this.Request.RequestParameters.AddQueryString("parent", value); }
+		}
+		
+		
+		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
+		public bool Realtime 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
+			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
 		}
 		
 	}
@@ -6593,7 +6609,7 @@ namespace Nest
 		
 	///<summary>Request parameters for TermvectorGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-termvectors.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html
 	///</pre>
 	///</summary>
 	public partial class TermvectorRequest 
@@ -6668,6 +6684,14 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
 			set { this.Request.RequestParameters.AddQueryString("parent", value); }
+		}
+		
+		
+		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
+		public bool Realtime 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
+			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
 		}
 		
 	}
