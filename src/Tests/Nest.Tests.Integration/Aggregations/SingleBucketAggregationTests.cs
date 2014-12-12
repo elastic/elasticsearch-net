@@ -60,7 +60,7 @@ namespace Nest.Tests.Integration.Aggregations
 			var valueCount = global.ValueCount("name");
 			valueCount.Value.Should().BeGreaterThan(1);
 		}
-
+		
 		[Test]
 		public void Children()
 		{
@@ -76,6 +76,48 @@ namespace Nest.Tests.Integration.Aggregations
 								.Aggregations(aaa => aaa
 									.Terms("top-children", taa => taa
 										.Field("child.childName")
+										.Size(10)
+									)
+								)
+							)
+						)
+					)
+				)
+			);
+
+			results.IsValid.Should().BeTrue();
+			var topParents = results.Aggs.Terms("top-parents");
+			topParents.Should().NotBeNull();
+			topParents.Items.Should().NotBeEmpty();
+			foreach (var topParent in topParents.Items)
+			{
+				topParent.DocCount.Should().BeGreaterThan(0);
+				var children = topParent.Children("to-children");
+				if (children.DocCount > 0)
+				{
+					var topChildren = children.Terms("top-children");
+					topChildren.Items.Should().NotBeEmpty();
+					foreach (var topChild in topChildren.Items)
+						topChild.DocCount.Should().BeGreaterThan(0);
+				}
+			}
+		}
+
+		[Test]
+		public void Children_Typed()
+		{
+			var results = this.Client.Search<Parent>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.Terms("top-parents", ta => ta
+						.MinimumDocumentCount(1)
+						.Field(p => p.ParentName)
+						.Size(10)
+						.Aggregations(aa => aa
+							.Children<Child>("to-children", ca => ca
+								.Aggregations(aaa => aaa
+									.Terms("top-children", taa => taa
+										.Field(f=>f.FullyQualified().ChildName)
 										.Size(10)
 									)
 								)
