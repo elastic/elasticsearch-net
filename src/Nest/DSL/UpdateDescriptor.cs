@@ -130,6 +130,12 @@ namespace Nest
 			return this;
 		}
 
+		public UpdateDescriptor<TDocument, TPartialDocument> Language(string language)
+		{
+			Self.Language = language;
+			return this;
+		}
+
 		public UpdateDescriptor<TDocument, TPartialDocument> Id(TDocument document, bool useAsUpsert)
 		{
 			((IDocumentOptionalPath<UpdateRequestParameters, TDocument>)Self).IdFrom = document;

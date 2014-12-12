@@ -30,6 +30,16 @@ namespace Nest
 
 		[JsonProperty("exclude")]
 		IDictionary<string, string> Exclude { get; set; }
+
+		[JsonProperty("mutual_information")]
+		MutualInformationHeuristic MutualInformation { get; set; }
+
+		[JsonProperty("chi_square")]
+		ChiSquareHeuristic ChiSquare { get; set; }
+
+		[JsonProperty("gnd")]
+		GoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
+
 	}
 
 	public class SignificantTermsAggregator : BucketAggregator, ISignificantTermsAggregator
@@ -41,6 +51,9 @@ namespace Nest
 		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
 		public IDictionary<string, string> Include { get; set; }
 		public IDictionary<string, string> Exclude { get; set; }
+		public MutualInformationHeuristic MutualInformation { get; set; }
+		public ChiSquareHeuristic ChiSquare { get; set; }
+		public GoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
 	}
 
 	public class SignificantTermsAggregationDescriptor<T> : BucketAggregationBaseDescriptor<SignificantTermsAggregationDescriptor<T>, T>, ISignificantTermsAggregator where T : class
@@ -61,6 +74,12 @@ namespace Nest
 
 		IDictionary<string, string> ISignificantTermsAggregator.Exclude { get; set; }
 
+		MutualInformationHeuristic ISignificantTermsAggregator.MutualInformation { get; set; }
+
+		ChiSquareHeuristic ISignificantTermsAggregator.ChiSquare { get; set; }
+
+		GoogleNormalizedDistanceHeuristic ISignificantTermsAggregator.GoogleNormalizedDistance { get; set; }
+
 		public SignificantTermsAggregationDescriptor<T> Field(string field)
 		{
 			Self.Field = field;
@@ -72,7 +91,6 @@ namespace Nest
 			Self.Field = field;
 			return this;
 		}
-		
 
 		public SignificantTermsAggregationDescriptor<T> Size(int size)
 		{
@@ -113,5 +131,35 @@ namespace Nest
 				Self.Exclude.Add("pattern", regexFlags);
 			return this;
 		}
+
+		public SignificantTermsAggregationDescriptor<T> MutualInformation(bool? backgroundIsSuperSet = null, bool? includeNegatives = null)
+		{
+			Self.MutualInformation = new MutualInformationHeuristic
+			{
+				BackgroundIsSuperSet = backgroundIsSuperSet,
+				IncludeNegatives = includeNegatives
+			};
+			return this;
+		}
+
+		public SignificantTermsAggregationDescriptor<T> ChiSquare(bool? backgroundIsSuperSet = null, bool? includeNegatives = null)
+		{
+			Self.ChiSquare = new ChiSquareHeuristic
+			{
+				BackgroundIsSuperSet = backgroundIsSuperSet,
+				IncludeNegatives = includeNegatives
+			};
+			return this;
+		}
+
+		public SignificantTermsAggregationDescriptor<T> GoogleNormalizedDistance(bool? backgroundIsSuperSet = null)
+		{
+			Self.GoogleNormalizedDistance = new GoogleNormalizedDistanceHeuristic
+			{
+				BackgroundIsSuperSet = backgroundIsSuperSet,
+			};
+			return this;
+		}
+
 	}
 }

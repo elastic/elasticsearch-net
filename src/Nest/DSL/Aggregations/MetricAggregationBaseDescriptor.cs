@@ -19,6 +19,10 @@ namespace Nest
 
 		[JsonProperty("params")]
 		IDictionary<string, object> Params { get; set; }
+
+		[JsonProperty(PropertyName = "lang")]
+		string Language { get; set; }
+
 	}
 	
 	public abstract class MetricAggregator : IMetricAggregator
@@ -27,6 +31,7 @@ namespace Nest
 		public string Script { get; set; }
 		public string Lang { get; set; }
 		public IDictionary<string, object> Params { get; set; }
+		public string Language { get; set; }
 	}
 
 	public abstract class MetricAggregationBaseDescriptor<TMetricAggregation, T> : IAggregationDescriptor, IMetricAggregator 
@@ -42,6 +47,8 @@ namespace Nest
 		string IMetricAggregator.Lang { get; set; }
 		
 		IDictionary<string, object> IMetricAggregator.Params { get; set; }
+
+		string IMetricAggregator.Language { get; set; }
 
 		public TMetricAggregation Field(string field)
 		{
@@ -72,5 +79,12 @@ namespace Nest
 			Self.Params = paramSelector(new FluentDictionary<string, object>());
 			return (TMetricAggregation) this;
 		}
+
+		public TMetricAggregation Language(string language)
+		{
+			Self.Language = language;
+			return (TMetricAggregation)this;
+		}
+
 	}
 }

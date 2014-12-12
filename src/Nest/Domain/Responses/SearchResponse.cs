@@ -17,6 +17,7 @@ namespace Nest
 		IDictionary<string, Suggest[]> Suggest { get; }
 		int ElapsedMilliseconds { get; }
 		bool TimedOut { get; }
+		bool TerminatedEarly { get; }
 		string ScrollId { get; }
 		long Total { get; }
 		double MaxScore { get; }
@@ -81,6 +82,9 @@ namespace Nest
 
 		[JsonProperty("timed_out")]
 		public bool TimedOut { get; internal set; }
+
+		[JsonProperty("terminated_early")]
+		public bool TerminatedEarly { get; internal set; }
 
 		/// <summary>
 		/// Only set when search type = scan and scroll specified
@@ -183,6 +187,7 @@ namespace Nest
 			return Enumerable.Empty<F>();
 		}
 
+		private HighlightDocumentDictionary _highlights = null;
 		/// <summary>
 		/// IDictionary of id -Highlight Collection for the document
 		/// </summary>
@@ -190,6 +195,8 @@ namespace Nest
 		{
 			get
 			{
+				if (_highlights != null) return _highlights; 
+				
 				var dict = new HighlightDocumentDictionary();
 				if (this.HitsMetaData == null || !this.HitsMetaData.Hits.HasAny())
 					return dict;
@@ -199,10 +206,9 @@ namespace Nest
 				{
 					if (!hit.Highlights.Any())
 						continue;
-
 					dict.Add(hit.Id, hit.Highlights);
-
 				}
+				this._highlights = dict;
 				return dict;
 			}
 		}
