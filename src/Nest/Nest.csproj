@@ -109,6 +109,7 @@
     <Compile Include="Domain\Aggregations\Bucket.cs" />
     <Compile Include="Domain\Aggregations\BucketAggregationBase.cs" />
     <Compile Include="Domain\Aggregations\FiltersBucket.cs" />
+    <Compile Include="Domain\Aggregations\ScriptedValueMetric.cs" />
     <Compile Include="Domain\Aggregations\TopHitsMetric.cs" />
     <Compile Include="Domain\Aggregations\GeoBoundsMetric.cs" />
     <Compile Include="Domain\Aggregations\HistogramItem.cs" />
@@ -233,6 +234,7 @@
     <Compile Include="Domain\Suggest\SuggestField.cs" />
     <Compile Include="DSL\Aggregations\FiltersAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\PercentileRanksAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\ScriptedMetricAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\TopHitsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\GeoBoundsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ReverseNestedAggregationDescriptor.cs" />
