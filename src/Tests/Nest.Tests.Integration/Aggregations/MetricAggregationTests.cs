@@ -224,7 +224,7 @@ namespace Nest.Tests.Integration.Aggregations
 
 			results.IsValid.Should().BeTrue();
 			var count = results.Aggs.ScriptedMetric("project_count");
-			var value = count.ValueAs<double>();
+			var value = count.Value<double>();
 			value.Should().BeGreaterThan(0);
 		}
 
@@ -245,7 +245,7 @@ namespace Nest.Tests.Integration.Aggregations
 
 			results.IsValid.Should().BeTrue();
 			var countsPerShard = results.Aggs.ScriptedMetric("project_count_per_shard");
-			var value = countsPerShard.ValueAs<IEnumerable<double>>();
+			var value = countsPerShard.Value<IEnumerable<double>>();
 			value.Should().NotBeNull();
 			value.Count().Should().BeGreaterThan(0);
 		}
@@ -266,7 +266,7 @@ namespace Nest.Tests.Integration.Aggregations
 
 			results.IsValid.Should().BeTrue();
 			var firstName = results.Aggs.ScriptedMetric("first_name");
-			var value = firstName.ValueAs<string>();
+			var value = firstName.Value<string>();
 			value.Should().NotBeNullOrEmpty();
 		}
 
@@ -286,7 +286,7 @@ namespace Nest.Tests.Integration.Aggregations
 
 			results.IsValid.Should().BeTrue();
 			var namesOnFirstShard = results.Aggs.ScriptedMetric("names_on_first_shard");
-			var value = namesOnFirstShard.ValueAs<IEnumerable<string>>();
+			var value = namesOnFirstShard.Value<IEnumerable<string>>();
 			value.Should().NotBeNull();
 			value.Count().Should().BeGreaterThan(0);
 		}
@@ -307,7 +307,7 @@ namespace Nest.Tests.Integration.Aggregations
 
 			results.IsValid.Should().BeTrue();
 			var namesPerShard = results.Aggs.ScriptedMetric("names_per_shard");
-			var value = namesPerShard.ValueAs<IEnumerable<IEnumerable<string>>>();
+			var value = namesPerShard.Value<IEnumerable<IEnumerable<string>>>();
 			value.Should().NotBeNull();
 		}
 	}

@@ -61,7 +61,7 @@ namespace Nest
 			
 			if (valueMetric != null)
 			{
-				return new ScriptedValueMetric { Value = valueMetric.Value };
+				return new ScriptedValueMetric { _Value = valueMetric.Value };
 			}
 
 			return this.TryGet<ScriptedValueMetric>(key);

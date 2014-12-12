@@ -9,16 +9,16 @@ namespace Nest
 {
 	public class ScriptedValueMetric : IMetricAggregation
 	{
-		public object Value { get; set; }
+		internal object _Value { get; set; }
 
-		public T ValueAs<T>()
+		public T Value<T>()
 		{
-			var jToken = this.Value as JToken;
+			var jToken = this._Value as JToken;
 			
 			if (jToken != null)
 				return jToken.ToObject<T>();
 
-			return (T)this.Value;
+			return (T)this._Value;
 		}
 	}
 }

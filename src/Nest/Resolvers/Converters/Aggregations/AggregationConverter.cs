@@ -367,7 +367,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 			var scriptedMetric = serializer.Deserialize(reader);
 
 			if (scriptedMetric != null)
-				return new ScriptedValueMetric { Value = scriptedMetric };
+				return new ScriptedValueMetric { _Value = scriptedMetric };
 
 			return valueMetric;
 		}
