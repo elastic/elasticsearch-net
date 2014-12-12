@@ -55,6 +55,18 @@ namespace Nest
 			return this.TryGet<ValueMetric>(key);
 		}
 
+		public ScriptedValueMetric ScriptedMetric(string key)
+		{
+			var valueMetric = this.TryGet<ValueMetric>(key);
+			
+			if (valueMetric != null)
+			{
+				return new ScriptedValueMetric { Value = valueMetric.Value };
+			}
+
+			return this.TryGet<ScriptedValueMetric>(key);
+		}
+
 		public StatsMetric Stats(string key)
 		{
 			return this.TryGet<StatsMetric>(key);

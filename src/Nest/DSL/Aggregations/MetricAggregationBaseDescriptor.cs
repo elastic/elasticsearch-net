@@ -14,6 +14,9 @@ namespace Nest
 		[JsonProperty("script")]
 		string Script { get; set; }
 
+		[JsonProperty("lang")]
+		string Lang { get; set; }
+
 		[JsonProperty("params")]
 		IDictionary<string, object> Params { get; set; }
 	}
@@ -22,6 +25,7 @@ namespace Nest
 	{
 		public PropertyPathMarker Field { get; set; }
 		public string Script { get; set; }
+		public string Lang { get; set; }
 		public IDictionary<string, object> Params { get; set; }
 	}
 
@@ -35,6 +39,8 @@ namespace Nest
 		
 		string IMetricAggregator.Script { get; set; }
 
+		string IMetricAggregator.Lang { get; set; }
+		
 		IDictionary<string, object> IMetricAggregator.Params { get; set; }
 
 		public TMetricAggregation Field(string field)
@@ -52,6 +58,12 @@ namespace Nest
 		public TMetricAggregation Script(string script)
 		{
 			Self.Script = script;
+			return (TMetricAggregation)this;
+		}
+
+		public TMetricAggregation Lang(string lang)
+		{
+			Self.Lang = lang;
 			return (TMetricAggregation)this;
 		}
 

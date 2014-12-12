@@ -351,14 +351,25 @@ namespace Nest.Resolvers.Converters.Aggregations
 		private IAggregation GetValueMetricOrAggregation(JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
-			var metric = new ValueMetric()
+			var valueMetric = new ValueMetric()
 			{
 				Value = (reader.Value as double?)
 			};
-			if (metric.Value == null && reader.ValueType == typeof(long))
-				metric.Value = reader.Value as long?;
-			reader.Read();	
-			return metric;
+			if (valueMetric.Value == null && reader.ValueType == typeof(long))
+				valueMetric.Value = reader.Value as long?;
+
+			if (valueMetric.Value != null)
+			{
+				reader.Read();
+				return valueMetric;
+			}
+
+			var scriptedMetric = serializer.Deserialize(reader);
+
+			if (scriptedMetric != null)
+				return new ScriptedValueMetric { Value = scriptedMetric };
+
+			return valueMetric;
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

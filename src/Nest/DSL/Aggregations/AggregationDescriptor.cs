@@ -90,6 +90,9 @@ namespace Nest
 		[JsonProperty("top_hits")]
 		ITopHitsAggregator TopHits { get; set; }
 
+		[JsonProperty("scripted_metric")]
+		IScriptedMetricAggregator ScriptedMetric { get; set; }
+
 		[JsonProperty("aggs")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
@@ -117,8 +120,9 @@ namespace Nest
 		private ISignificantTermsAggregator _significantTerms;
 		private IPercentileRanksAggregaor _percentileRanks;
 	    private IFiltersAggregator _filters;
-		
 		private ITopHitsAggregator _topHits;
+		private IScriptedMetricAggregator _scriptedMetric;
+
 		public IAverageAggregator Average { get; set; }
 		public IValueCountAggregator ValueCount { get; set; }
 		public IMaxAggregator Max { get; set; }
@@ -246,6 +250,12 @@ namespace Nest
 			set { _topHits = value; }
 		}
 
+		public IScriptedMetricAggregator ScriptedMetric
+		{
+			get { return _scriptedMetric; }
+			set { _scriptedMetric = value; }
+		}
+
 		private void LiftAggregations(IBucketAggregator bucket)
 		{
 			if (bucket == null) return;
@@ -314,6 +324,8 @@ namespace Nest
 
 		ITopHitsAggregator IAggregationContainer.TopHits { get; set; }
 
+		IScriptedMetricAggregator IAggregationContainer.ScriptedMetric { get; set; }
+		
 		public AggregationDescriptor<T> Average(string name, Func<AverageAggregationDescriptor<T>, AverageAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.Average = d);
@@ -462,6 +474,12 @@ namespace Nest
 			Func<TopHitsAggregationDescriptor<T>, TopHitsAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.TopHits = d);
+		}
+
+		public AggregationDescriptor<T> ScriptedMetric(string name,
+			Func<ScriptedMetricAggregationDescriptor<T>, ScriptedMetricAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a.ScriptedMetric = d);
 		}
 
 		private AggregationDescriptor<T> _SetInnerAggregation<TAggregation>(
