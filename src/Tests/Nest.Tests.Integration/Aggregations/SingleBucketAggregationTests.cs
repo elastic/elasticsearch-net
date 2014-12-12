@@ -104,6 +104,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Children aggregation added in ES 1.4")]
 		public void Children_Typed()
 		{
 			var results = this.Client.Search<Parent>(s => s
