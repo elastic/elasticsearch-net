@@ -29,8 +29,9 @@ namespace Nest.Tests.Integration.Core.Repository
 	        _backupName = ElasticsearchConfiguration.NewUniqueIndexName();
 
 	        var descriptor = new BulkDescriptor();
+            _indexedElements = new List<ElasticsearchProject>();
 
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 var elementToIndex = new ElasticsearchProject()
                 {
