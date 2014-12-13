@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -27,7 +28,9 @@ namespace Nest.Tests.Integration.Core.Repository
 	        _repositoryName = ElasticsearchConfiguration.NewUniqueIndexName();
 	        _backupName = ElasticsearchConfiguration.NewUniqueIndexName();
 
-            for (int i = 0; i < 100; i++)
+	        var descriptor = new BulkDescriptor();
+
+            for (int i = 0; i < 1000; i++)
             {
                 var elementToIndex = new ElasticsearchProject()
                 {
@@ -35,9 +38,11 @@ namespace Nest.Tests.Integration.Core.Repository
                     Name = "Coboles",
                     Content = "COBOL elasticsearch client"
                 };
-                var indexResponse = Client.Index(elementToIndex, d => d.Index(_indexName).Refresh(true));
+                descriptor = descriptor.Index<ElasticsearchProject>(d => d.Index(_indexName).Document(elementToIndex));
                 _indexedElements.Add(elementToIndex);
             }
+
+	        var bulkResponse = this.Client.Bulk(d => descriptor);
 
 	        this.Client.CreateRepository(_repositoryName, r => r
 	            .FileSystem(@"local\\path", o => o
@@ -137,6 +142,7 @@ namespace Nest.Tests.Integration.Core.Repository
             CollectionAssert.Contains(snapshot.Indices, _indexName);
 
             var d = ElasticsearchConfiguration.DefaultIndex;
+
             var restoreObservable = this.Client.RestoreObservable(TimeSpan.FromMilliseconds(1), r => r
                 .Repository(_repositoryName)
                 .Snapshot(_backupName)

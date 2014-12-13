@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
@@ -78,6 +79,8 @@ namespace Nest
         private readonly TimeSpan _interval = TimeSpan.FromSeconds(2);
         private Timer _timer;
         private bool _disposed;
+        private string _renamePattern;
+        private string _renameReplacement;
 
         public RestoreObservable(IElasticClient elasticClient, IRestoreRequest restoreRequest)
         {
@@ -101,7 +104,10 @@ namespace Nest
             try
             {
                 _restoreRequest.RequestParameters.WaitForCompletion(false);
-                this._elasticClient.Restore(_restoreRequest);
+                var restoreResponse = this._elasticClient.Restore(_restoreRequest);
+
+                _renamePattern = _restoreRequest.RenamePattern;
+                _renameReplacement = _restoreRequest.RenameReplacement;
 
                 _timer = new Timer(Restore, observer, _interval.Milliseconds, Timeout.Infinite);
             }
@@ -126,11 +132,13 @@ namespace Nest
 
                 var recoveryStatus = _elasticClient.RecoveryStatus(
                     descriptor =>
-                        descriptor.Indices(_restoreRequest.Indices.Select(x => x.Name).ToArray())
-                        .Detailed(true)
-                        );
+                        descriptor.Indices(
+                            _restoreRequest.Indices.Select(
+                                x => Regex.Replace(x.Name, _renamePattern, _renameReplacement)).ToArray())
+                            .Detailed(true)
+                    );
 
-                if (recoveryStatus.Indices.All(x => x.Value.Shards.All(s => s.Stage == "DONE")))
+                if (recoveryStatus.Indices.All(x => x.Value.Shards.All(s => s.Index.Files.Recovered == s.Index.Files.Total)))
                 {
                     _timer.Change(Timeout.Infinite, Timeout.Infinite);
                     observer.OnCompleted();
