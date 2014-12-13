@@ -9,6 +9,7 @@ namespace Nest.Tests.Integration.Aggregations
 	public class CombinationTests : IntegrationTests
 	{
 		[Test]
+		[SkipVersion("0 - 1.0.9", "Percentiles agg added in 1.1")]
 		public void Percentiles()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
@@ -31,6 +32,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.0.9", "Percentiles agg added in 1.1")]
 		public void Terms()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
@@ -53,6 +55,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 		
 		[Test]
+		[SkipVersion("0 - 1.0.9", "Percentiles agg added in 1.1")]
 		public void Stats()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s

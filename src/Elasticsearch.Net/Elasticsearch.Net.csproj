@@ -73,6 +73,7 @@
     <Compile Include="Domain\Response\ElasticsearchServerError.cs" />
     <Compile Include="Exceptions\OneToOneServerException.cs" />
     <Compile Include="Exceptions\ElasticsearchAuthenticationException.cs" />
+    <Compile Include="IElasticsearchClient.cs" />
     <Compile Include="Obsolete\IndicesDeleteAlias.cs" />
     <Compile Include="Obsolete\IndicesPutAlias.cs" />
     <Compile Include="Obsolete\IndicesRecoveryStatus.cs" />

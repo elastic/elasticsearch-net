@@ -130,7 +130,7 @@ namespace Nest.Resolvers.Writers
 			var properties = this._type.GetProperties();
 			foreach (var p in properties)
 			{
-				var att = ElasticAttributes.Property(p);
+				var att = ElasticAttributes.Property(p, this._connectionSettings);
 				if (att != null && att.OptOut)
 					continue;
 

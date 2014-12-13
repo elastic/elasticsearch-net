@@ -43,6 +43,7 @@ namespace Nest.Tests.Integration.Aggregations
         }
 		
 		[Test]
+		[SkipVersion("0 - 1.0.9", "Percentiles agg added in 1.1")]
         public void StatsAllowsOtherAggsOnTheSameLevel()
         {
 			var results = this.Client.Search<ElasticsearchProject>(s => s

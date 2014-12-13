@@ -1168,7 +1168,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> GetTemplateDispatch<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> GetTemplateDispatch<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1183,7 +1183,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> GetTemplateDispatchAsync<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> GetTemplateDispatchAsync<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1748,6 +1748,42 @@ namespace Nest
 		}
 		
 		
+		internal ElasticsearchResponse<T> IndicesGetDispatch<T>(ElasticsearchPathInfo<GetIndexRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{feature}
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Feature.IsNullOrEmpty())
+						return this.Raw.IndicesGet<T>(pathInfo.Index,pathInfo.Feature,u => pathInfo.RequestParameters);
+					//GET /{index}
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGet() into any of the following paths: \r\n - /{index}\r\n - /{index}/{feature}");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> IndicesGetDispatchAsync<T>(ElasticsearchPathInfo<GetIndexRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{feature}
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Feature.IsNullOrEmpty())
+						return this.Raw.IndicesGetAsync<T>(pathInfo.Index,pathInfo.Feature,u => pathInfo.RequestParameters);
+					//GET /{index}
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGet() into any of the following paths: \r\n - /{index}\r\n - /{index}/{feature}");
+		}
+		
+		
 		internal ElasticsearchResponse<T> IndicesGetAliasDispatch<T>(ElasticsearchPathInfo<GetAliasRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
@@ -2001,6 +2037,38 @@ namespace Nest
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetTemplate() into any of the following paths: \r\n - /_template\r\n - /_template/{name}");
+		}
+		
+		
+		internal ElasticsearchResponse<T> IndicesGetUpgradeDispatch<T>(ElasticsearchPathInfo<UpgradeStatusRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/_upgrade
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesGetUpgrade<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_upgrade
+					return this.Raw.IndicesGetUpgradeForAll<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetUpgrade() into any of the following paths: \r\n - /_upgrade\r\n - /{index}/_upgrade");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> IndicesGetUpgradeDispatchAsync<T>(ElasticsearchPathInfo<UpgradeStatusRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/_upgrade
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesGetUpgradeAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_upgrade
+					return this.Raw.IndicesGetUpgradeForAllAsync<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetUpgrade() into any of the following paths: \r\n - /_upgrade\r\n - /{index}/_upgrade");
 		}
 		
 		
@@ -2595,6 +2663,38 @@ namespace Nest
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesUpdateAliases() into any of the following paths: \r\n - /_aliases");
+		}
+		
+		
+		internal ElasticsearchResponse<T> IndicesUpgradeDispatch<T>(ElasticsearchPathInfo<UpgradeRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/_upgrade
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesUpgrade<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//POST /_upgrade
+					return this.Raw.IndicesUpgradeForAll<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesUpgrade() into any of the following paths: \r\n - /_upgrade\r\n - /{index}/_upgrade");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> IndicesUpgradeDispatchAsync<T>(ElasticsearchPathInfo<UpgradeRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/_upgrade
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesUpgradeAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//POST /_upgrade
+					return this.Raw.IndicesUpgradeForAllAsync<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesUpgrade() into any of the following paths: \r\n - /_upgrade\r\n - /{index}/_upgrade");
 		}
 		
 		
@@ -3454,6 +3554,68 @@ namespace Nest
 		}
 		
 		
+		internal ElasticsearchResponse<T> SearchExistsDispatch<T>(ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/_search/exists
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.SearchExists<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+					//POST /{index}/_search/exists
+					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
+						return this.Raw.SearchExists<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
+					//POST /_search/exists
+					if (body != null)
+						return this.Raw.SearchExists<T>(body,u => pathInfo.RequestParameters);
+					break;
+
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/_search/exists
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.SearchExistsGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+					//GET /{index}/_search/exists
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.SearchExistsGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_search/exists
+					return this.Raw.SearchExistsGet<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SearchExists() into any of the following paths: \r\n - /_search/exists\r\n - /{index}/_search/exists\r\n - /{index}/{type}/_search/exists");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> SearchExistsDispatchAsync<T>(ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/_search/exists
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.SearchExistsAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+					//POST /{index}/_search/exists
+					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
+						return this.Raw.SearchExistsAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
+					//POST /_search/exists
+					if (body != null)
+						return this.Raw.SearchExistsAsync<T>(body,u => pathInfo.RequestParameters);
+					break;
+
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/_search/exists
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.SearchExistsGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+					//GET /{index}/_search/exists
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.SearchExistsGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_search/exists
+					return this.Raw.SearchExistsGetAsync<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SearchExists() into any of the following paths: \r\n - /_search/exists\r\n - /{index}/_search/exists\r\n - /{index}/{type}/_search/exists");
+		}
+		
+		
 		internal ElasticsearchResponse<T> SearchShardsDispatch<T>(ElasticsearchPathInfo<SearchShardsRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
@@ -3848,6 +4010,36 @@ namespace Nest
 		}
 		
 		
+		internal ElasticsearchResponse<T> SnapshotVerifyRepositoryDispatch<T>(ElasticsearchPathInfo<VerifyRepositoryRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.POST:
+					//POST /_snapshot/{repository}/_verify
+					if (!pathInfo.Repository.IsNullOrEmpty())
+						return this.Raw.SnapshotVerifyRepository<T>(pathInfo.Repository,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotVerifyRepository() into any of the following paths: \r\n - /_snapshot/{repository}/_verify");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> SnapshotVerifyRepositoryDispatchAsync<T>(ElasticsearchPathInfo<VerifyRepositoryRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.POST:
+					//POST /_snapshot/{repository}/_verify
+					if (!pathInfo.Repository.IsNullOrEmpty())
+						return this.Raw.SnapshotVerifyRepositoryAsync<T>(pathInfo.Repository,u => pathInfo.RequestParameters);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotVerifyRepository() into any of the following paths: \r\n - /_snapshot/{repository}/_verify");
+		}
+		
+		
 		internal ElasticsearchResponse<T> SuggestDispatch<T>(ElasticsearchPathInfo<SuggestRequestParameters> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
@@ -3906,16 +4098,22 @@ namespace Nest
 					//GET /{index}/{type}/{id}/_termvector
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
 						return this.Raw.TermvectorGet<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
+					//GET /{index}/{type}/_termvector
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.TermvectorGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_termvector
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
 						return this.Raw.Termvector<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
+					//POST /{index}/{type}/_termvector
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.Termvector<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.Termvector() into any of the following paths: \r\n - /{index}/{type}/{id}/_termvector");
+			throw new DispatchException("Could not dispatch IElasticClient.Termvector() into any of the following paths: \r\n - /{index}/{type}/_termvector\r\n - /{index}/{type}/{id}/_termvector");
 		}
 		
 		
@@ -3927,16 +4125,22 @@ namespace Nest
 					//GET /{index}/{type}/{id}/_termvector
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
 						return this.Raw.TermvectorGetAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
+					//GET /{index}/{type}/_termvector
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.TermvectorGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_termvector
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
 						return this.Raw.TermvectorAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
+					//POST /{index}/{type}/_termvector
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.TermvectorAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.Termvector() into any of the following paths: \r\n - /{index}/{type}/{id}/_termvector");
+			throw new DispatchException("Could not dispatch IElasticClient.Termvector() into any of the following paths: \r\n - /{index}/{type}/_termvector\r\n - /{index}/{type}/{id}/_termvector");
 		}
 		
 		

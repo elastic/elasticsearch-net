@@ -87,16 +87,16 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			return client;
 		}
 
-		public IElasticClient ClientWithPropertiesFor<T>(Action<FluentDictionary<Expression<Func<T, object>>, string>> propertiesSelector)
+		public IElasticClient ClientWithPropertiesFor<T>(Action<PropertyMappingDescriptor<T>> propertiesSelector)
 		{
-			return this.ConfigureClient(c=>c.MapPropertyNamesFor<T>(propertiesSelector));
+			return this.ConfigureClient(c=>c.MapPropertiesFor<T>(propertiesSelector));
 		}
 
 		[Test]
 		public void SettingsTakePrecedenceOverAttributes()
 		{
 			var client = this.ClientWithPropertiesFor<MyCustomClass>(props => props
-				.Add(p=>p.MyProperty, "mahPropertah")
+				.Rename(p=>p.MyProperty, "mahPropertah")
 			);
 			Expression<Func<SomeClass, object>> exp = (m) => m.MyCustomClass.MyProperty;
 			client.Infer.PropertyPath(exp).Should().Be("myCustomClass.mahPropertah");
@@ -107,7 +107,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		{
 			var e = Assert.Throws<ArgumentException>(()=>
 				this.ClientWithPropertiesFor<SomeClass>(props => props
-					.Add(p=>p.MyCustomClass.MyProperty, "mahPropertah")
+					.Rename(p=>p.MyCustomClass.MyProperty, "mahPropertah")
 				)
 			);
 			e.Message.Should().Contain("can only map direct properties");
@@ -118,8 +118,8 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		{
 			var e = Assert.Throws<ArgumentException>(()=>
 				this.ClientWithPropertiesFor<MyCustomClass>(props => props
-					.Add(p=>p.MyProperty, "mahPropertah")
-					.Add(p=>p.MyProperty, "mahPropertah2")
+					.Rename(p=>p.MyProperty, "mahPropertah")
+					.Rename(p=>p.MyProperty, "mahPropertah2")
 				)
 			);
 			e.Message.Should()
@@ -133,11 +133,11 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		{
 			var e = Assert.Throws<ArgumentException>(()=>
 				this.ConfigureClient(c=>c
-					.MapPropertyNamesFor<B>(props => props
-						.Add(p=>p.X, "bX")
+					.MapPropertiesFor<B>(props => props
+						.Rename(p=>p.X, "bX")
 					)
-					.MapPropertyNamesFor<C>(props => props
-						.Add(p=>p.X, "cX")
+					.MapPropertiesFor<C>(props => props
+						.Rename(p=>p.X, "cX")
 					)
 				)
 			);
@@ -151,11 +151,11 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void ResolverShouldResolveAllNestedMembers()
 		{
 			var client = this.ConfigureClient(c=>c
-				.MapPropertyNamesFor<SomeClass>(props => props
-					.Add(p=>p.MyCustomClass, "customClazz")
+				.MapPropertiesFor<SomeClass>(props => props
+					.Rename(p=>p.MyCustomClass, "customClazz")
 				)
-				.MapPropertyNamesFor<MyCustomClass>(props => props
-					.Add(p=>p.MyProperty, "mahPropertah")
+				.MapPropertiesFor<MyCustomClass>(props => props
+					.Rename(p=>p.MyProperty, "mahPropertah")
 				)
 			);
 			Expression<Func<SomeClass, object>> exp = (m) => m.MyCustomClass.MyProperty;
@@ -166,11 +166,11 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void ResolverShouldResolveAllNestedMembers_Dictionary()
 		{
 			var client = this.ConfigureClient(c=>c
-				.MapPropertyNamesFor<SomeClass>(props => props
-					.Add(p=>p.StringDict, "map")
+				.MapPropertiesFor<SomeClass>(props => props
+					.Rename(p=>p.StringDict, "map")
 				)
-				.MapPropertyNamesFor<SomeOtherClass>(props => props
-					.Add(p=>p.CreateDate, "d0b")
+				.MapPropertiesFor<SomeOtherClass>(props => props
+					.Rename(p=>p.CreateDate, "d0b")
 				)
 			);
 			Expression<Func<SomeClass, object>> exp = (m) => m.StringDict["path"].CreateDate;
@@ -181,8 +181,8 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void PropertiesOn_CInstanceTakeNamesFrom_B()
 		{
 			var client = this.ConfigureClient(c=>c
-				.MapPropertyNamesFor<B>(props => props
-					.Add(p=>p.X, "Xavier")
+				.MapPropertiesFor<B>(props => props
+					.Rename(p=>p.X, "Xavier")
 				)
 			);
 			Expression<Func<SomeClass, object>> exp = (m) => m.CInstance.X;
@@ -193,8 +193,8 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void PropertiesOn_BInstanceTakeNamesFrom_C()
 		{
 			var client = this.ConfigureClient(c=>c
-				.MapPropertyNamesFor<C>(props => props
-					.Add(p=>p.X, "Xavier")
+				.MapPropertiesFor<C>(props => props
+					.Rename(p=>p.X, "Xavier")
 				)
 			);
 			Expression<Func<SomeClass, object>> exp = (m) => m.BInstance.X;
@@ -205,8 +205,8 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void PropertiesOnCollectionExpressionsResolve()
 		{
 			var client = this.ConfigureClient(c=>c
-				.MapPropertyNamesFor<MyCustomClass>(props => props
-					.Add(p=>p.MyProperty, "myProp")
+				.MapPropertiesFor<MyCustomClass>(props => props
+					.Rename(p=>p.MyProperty, "myProp")
 				)
 			);
 			Expression<Func<SomeClass, object>> exp = (m) => m.ListOfCustomClasses.First().MyProperty;

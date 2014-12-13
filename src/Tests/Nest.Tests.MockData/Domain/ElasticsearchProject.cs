@@ -26,7 +26,7 @@ namespace Nest.Tests.MockData.Domain
 		public List<Person> NestedFollowers { get; set; }
 
 		[ElasticProperty(Type=FieldType.GeoPoint)]
-		public GeoLocation Origin { get; set; }
+		public CustomGeoLocation Origin { get; set; }
 		public DateTime StartedOn { get; set; }
 
 		[ElasticProperty(Type=FieldType.Ip)]

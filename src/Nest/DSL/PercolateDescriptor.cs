@@ -15,6 +15,7 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "doc")]
 		TDocument Document { get; set; }
+
 	}
 
 	internal static class PercolatePathInfo
@@ -129,6 +130,23 @@ namespace Nest
 			return this;
 		}
 
+		/// <summary>
+		/// Allow to highlight search results on one or more fields. 
+		/// </summary>
+		public PercolateDescriptor<T> Highlight(int size, Func<HighlightDescriptor<T>,HighlightDescriptor<T>> highlightDescriptor)
+		{
+			highlightDescriptor.ThrowIfNull("highlightDescriptor");
+			var d  = highlightDescriptor(new HighlightDescriptor<T>());
+			Self.Size = size;
+			Self.Highlight = d;
+			return this;
+		}
+
+		public PercolateDescriptor<T> Size(int size)
+		{
+			Self.Size = size;
+			return this;
+		}
 
 		/// <summary>
 		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.

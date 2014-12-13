@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -56,6 +55,18 @@ namespace Nest
 			return this.TryGet<ValueMetric>(key);
 		}
 
+		public ScriptedValueMetric ScriptedMetric(string key)
+		{
+			var valueMetric = this.TryGet<ValueMetric>(key);
+			
+			if (valueMetric != null)
+			{
+				return new ScriptedValueMetric { _Value = valueMetric.Value };
+			}
+
+			return this.TryGet<ScriptedValueMetric>(key);
+		}
+
 		public StatsMetric Stats(string key)
 		{
 			return this.TryGet<StatsMetric>(key);
@@ -86,6 +97,19 @@ namespace Nest
 			return this.TryGet<TopHitsMetric>(key);
 		}
 
+        public FiltersBucket Filters(string key)
+        {
+            var named = this.TryGet<FiltersBucket>(key);
+            if (named != null)
+                return named;
+
+            var anonymous = this.TryGet<Bucket>(key);
+            if(anonymous != null)
+                return new FiltersBucket(anonymous.Items);
+
+            return null;
+        }
+
 		public SingleBucket Global(string key)
 		{
 			return this.TryGet<SingleBucket>(key);
@@ -107,6 +131,11 @@ namespace Nest
 		}
 
 		public SingleBucket ReverseNested(string key)
+		{
+			return this.TryGet<SingleBucket>(key);
+		}
+
+		public SingleBucket Children(string key)
 		{
 			return this.TryGet<SingleBucket>(key);
 		}

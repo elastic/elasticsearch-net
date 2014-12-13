@@ -30,13 +30,13 @@ namespace Nest.Resolvers.Converters
 			writer.WriteStartObject();
 
 			WriteSettings(writer, serializer, indexSettings);
-			
+
 			WriteMappings(writer, serializer, indexSettings);
-			
+
 			WriteWarmers(writer, serializer, indexSettings);
-			
+
 			WriteAliases(writer, serializer, indexSettings);
-			
+
 			writer.WriteEndObject();
 		}
 
@@ -54,7 +54,7 @@ namespace Nest.Resolvers.Converters
 			writer.WritePropertyName("aliases");
 			serializer.Serialize(writer, indexSettings.Aliases);
 		}
-		
+
 		private static void WriteWarmers(JsonWriter writer, JsonSerializer serializer, IndexSettings indexSettings)
 		{
 			if (indexSettings.Warmers.Count <= 0) return;
@@ -67,7 +67,7 @@ namespace Nest.Resolvers.Converters
 			if (indexSettings.Mappings.Count <= 0) return;
 			var contract = serializer.ContractResolver as SettingsContractResolver;
 			if (contract == null || contract.ConnectionSettings == null) return;
-			
+
 			writer.WritePropertyName("mappings");
 			serializer.Serialize(
 				writer,
@@ -123,32 +123,56 @@ namespace Nest.Resolvers.Converters
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 										JsonSerializer serializer)
 		{
-			JObject o = JObject.Load(reader);
 			var result = new IndexSettings();
-			var dictionary = new Dictionary<string, object>();
-			serializer.Populate(o.CreateReader(), dictionary);
-			result.Settings = dictionary;
-			result.AsExpando = DynamicDictionary.Create(dictionary);
-			foreach (var rootProperty in o.Children<JProperty>())
+			if (reader.TokenType != JsonToken.StartObject) return result;
+
+			var jsonObject = JObject.Load(reader);
+			if (jsonObject["settings"] != null && jsonObject["settings"]["index"] != null)
 			{
-				if (rootProperty.Name.Equals("analysis", StringComparison.InvariantCultureIgnoreCase))
+				var settings = jsonObject["settings"]["index"];
+				var dictionary = new Dictionary<string, object>();
+				serializer.Populate(settings.CreateReader(), dictionary);
+				result.Settings = dictionary;
+				result.AsExpando = DynamicDictionary.Create(dictionary);
+				
+				foreach (var rootProperty in settings.Children<JProperty>())
 				{
-					result.Analysis = serializer.Deserialize<AnalysisSettings>(rootProperty.Value.CreateReader());
-					result.Settings.Remove(rootProperty.Name);
-				}
-				else if (rootProperty.Name.Equals("warmers", StringComparison.InvariantCultureIgnoreCase))
-				{
-					foreach (var jWarmer in rootProperty.Value.Children<JProperty>())
+					if (rootProperty.Name.Equals("analysis", StringComparison.InvariantCultureIgnoreCase))
 					{
-						result.Warmers[jWarmer.Name] = serializer.Deserialize<WarmerMapping>(jWarmer.Value.CreateReader());
+						result.Analysis = serializer.Deserialize<AnalysisSettings>(rootProperty.Value.CreateReader());
+						result.Settings.Remove(rootProperty.Name);
 					}
-					result.Settings.Remove(rootProperty.Name);
+					else if (rootProperty.Name.Equals("similarity", StringComparison.InvariantCultureIgnoreCase))
+					{
+						result.Similarity = serializer.Deserialize<SimilaritySettings>(rootProperty.Value.CreateReader());
+						result.Settings.Remove(rootProperty.Name);
+					}
 				}
-				else if (rootProperty.Name.Equals("similarity", StringComparison.InvariantCultureIgnoreCase))
+			}
+			if (jsonObject["aliases"] != null)
+			{
+				var a = serializer.Deserialize<Dictionary<string, CreateAliasOperation>>(jsonObject["aliases"].CreateReader());
+				result.Aliases = a.ToDictionary(kv => kv.Key, kv => kv.Value as ICreateAliasOperation);
+			}
+			if (jsonObject["mappings"] != null)
+			{
+				var mappings = serializer.Deserialize<Dictionary<string, RootObjectMapping>>(jsonObject["mappings"].CreateReader());
+				result.Mappings = mappings.Select(kv =>
 				{
-					result.Similarity = serializer.Deserialize<SimilaritySettings>(rootProperty.Value.CreateReader());
-					result.Settings.Remove(rootProperty.Name);
-				}
+					var name = kv.Key;
+					kv.Value.Name = name;
+					return kv.Value;
+				}).ToList();
+			}
+			
+			if (jsonObject["warmers"] != null)
+			{
+				var warmers = serializer.Deserialize<Dictionary<string, WarmerMapping>>(jsonObject["warmers"].CreateReader());
+				result.Warmers = warmers.ToDictionary(kv=>kv.Key, kv =>
+				{
+					kv.Value.Name = kv.Key;
+					return kv.Value;
+				});
 			}
 			return result;
 		}

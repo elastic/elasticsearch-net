@@ -14,6 +14,8 @@ namespace Nest.Tests.MockData
 		private static IList<Person> _People { get; set; }
 		private static IList<BoolTerm> _BoolTerms { get; set; }
 		private static IList<ElasticsearchProject> _Data { get; set; }
+		private static IList<Parent> _Parents { get; set; }
+		private static IList<Child> _Children { get; set; }
 		public static IGenerationSession _Session { get; set; }
 		public static IGenerationSession Session
 		{
@@ -30,7 +32,7 @@ namespace Nest.Tests.MockData
 
 					});
 					x.AddFromAssemblyContainingType<Person>();
-					x.Include<GeoLocation>()
+					x.Include<CustomGeoLocation>()
 						.Setup(c => c.lat).Use<FloatSource>()
 						.Setup(c => c.lon).Use<FloatSource>();
 					x.Include<BoolTerm>()
@@ -61,6 +63,12 @@ namespace Nest.Tests.MockData
 						.Setup(c => c.Contributors).Value(new List<Person>())
 						.Setup(c => c.StartedOn).Use<DateOfBirthSource>()
 						.Setup(c => c.Content).Use<ElasticsearchProjectDescriptionSource>();
+					x.Include<Parent>()
+						.Setup(c => c.Id).Use<IntegerIdSource>()
+						.Setup(c => c.ParentName).Use<RandomStringSource>(1, 50);
+					x.Include<Child>()
+						.Setup(c => c.Id).Use<IntegerIdSource>()
+						.Setup(c => c.ChildName).Use<RandomStringSource>(1, 50);
 				});
 				_Session = factory.CreateSession();
 				return _Session;
@@ -71,11 +79,9 @@ namespace Nest.Tests.MockData
 		{
 			get
 			{
-				if (_People != null)
-					return _People;
-				_People = Session.List<Person>(100).Get();
+				if (_People == null)
+					_People = Session.List<Person>(100).Get();
 				return _People;
-
 			}
 		}
 
@@ -83,14 +89,32 @@ namespace Nest.Tests.MockData
 		{
 			get
 			{
-				if (_BoolTerms != null)
-					return _BoolTerms;
-				_BoolTerms = Session.List<BoolTerm>(100).Get();
+				if (_BoolTerms == null)
+					_BoolTerms = Session.List<BoolTerm>(100).Get();
 				return _BoolTerms;
 
 			}
 		}
 
+		public static IList<Parent> Parents
+		{
+			get
+			{
+				if (_Parents == null)
+					_Parents = Session.List<Parent>(100).Get();
+				return _Parents;
+			}
+		}
+
+		public static IList<Child> Children
+		{
+			get
+			{
+				if (_Children == null)
+					_Children = Session.List<Child>(100).Get();
+				return _Children;
+			}
+		}
 		public static IList<ElasticsearchProject> Data
 		{
 			get

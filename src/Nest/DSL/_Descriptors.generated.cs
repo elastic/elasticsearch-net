@@ -33,7 +33,7 @@ namespace Nest
 	
 	///<summary>descriptor for Bulk
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html
 	///</pre>
 	///</summary>
 	public partial class BulkDescriptor 
@@ -94,7 +94,7 @@ namespace Nest
 	
 	///<summary>descriptor for CatAliases
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-alias.html
 	///</pre>
 	///</summary>
 	public partial class CatAliasesDescriptor 
@@ -147,7 +147,7 @@ namespace Nest
 	
 	///<summary>descriptor for CatAllocation
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-allocation.html
 	///</pre>
 	///</summary>
 	public partial class CatAllocationDescriptor 
@@ -208,7 +208,7 @@ namespace Nest
 	
 	///<summary>descriptor for CatCount
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-count.html
 	///</pre>
 	///</summary>
 	public partial class CatCountDescriptor 
@@ -317,7 +317,7 @@ namespace Nest
 		}
 		
 
-		///<summary>A comma-separated list of fields to return the fielddata size</summary>
+		///<summary>A comma-separated list of fields to return in the output</summary>
 		public CatFielddataDescriptor Fields(params string[] fields)
 		{
 			this.Request.RequestParameters.Fields(fields);
@@ -325,7 +325,7 @@ namespace Nest
 		}
 		
 			
-		///<summary>A comma-separated list of fields to return the fielddata size</summary>
+		///<summary>A comma-separated list of fields to return in the output</summary>
 		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
@@ -341,7 +341,7 @@ namespace Nest
 	
 	///<summary>descriptor for CatHealth
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-health.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-health.html
 	///</pre>
 	///</summary>
 	public partial class CatHealthDescriptor 
@@ -402,7 +402,7 @@ namespace Nest
 	
 	///<summary>descriptor for CatHelp
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat.html
 	///</pre>
 	///</summary>
 	public partial class CatHelpDescriptor  : BaseRequest<CatHelpRequestParameters>
@@ -429,7 +429,7 @@ namespace Nest
 	
 	///<summary>descriptor for CatIndices
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-indices.html
 	///</pre>
 	///</summary>
 	public partial class CatIndicesDescriptor 
@@ -498,7 +498,7 @@ namespace Nest
 	
 	///<summary>descriptor for CatMaster
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-master.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-master.html
 	///</pre>
 	///</summary>
 	public partial class CatMasterDescriptor 
@@ -551,7 +551,7 @@ namespace Nest
 	
 	///<summary>descriptor for CatNodes
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-nodes.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-nodes.html
 	///</pre>
 	///</summary>
 	public partial class CatNodesDescriptor 
@@ -604,7 +604,7 @@ namespace Nest
 	
 	///<summary>descriptor for CatPendingTasks
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-pending-tasks.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-pending-tasks.html
 	///</pre>
 	///</summary>
 	public partial class CatPendingTasksDescriptor 
@@ -710,7 +710,7 @@ namespace Nest
 	
 	///<summary>descriptor for CatRecovery
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-recovery.html
 	///</pre>
 	///</summary>
 	public partial class CatRecoveryDescriptor 
@@ -763,7 +763,7 @@ namespace Nest
 	
 	///<summary>descriptor for CatShards
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-shards.html
 	///</pre>
 	///</summary>
 	public partial class CatShardsDescriptor 
@@ -877,7 +877,7 @@ namespace Nest
 	
 	///<summary>descriptor for ClearScroll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html
 	///</pre>
 	///</summary>
 	public partial class ClearScrollDescriptor 
@@ -890,7 +890,7 @@ namespace Nest
 	
 	///<summary>descriptor for ClusterGetSettings
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-update-settings.html
 	///</pre>
 	///</summary>
 	public partial class ClusterGetSettingsDescriptor 
@@ -927,7 +927,7 @@ namespace Nest
 	
 	///<summary>descriptor for ClusterHealth
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-health.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-health.html
 	///</pre>
 	///</summary>
 	public partial class ClusterHealthDescriptor 
@@ -1004,7 +1004,7 @@ namespace Nest
 	
 	///<summary>descriptor for ClusterPendingTasks
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-pending.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-pending.html
 	///</pre>
 	///</summary>
 	public partial class ClusterPendingTasksDescriptor 
@@ -1033,7 +1033,7 @@ namespace Nest
 	
 	///<summary>descriptor for ClusterPutSettings
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-update-settings.html
 	///</pre>
 	///</summary>
 	public partial class ClusterSettingsDescriptor 
@@ -1054,7 +1054,7 @@ namespace Nest
 	
 	///<summary>descriptor for ClusterReroute
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-reroute.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-reroute.html
 	///</pre>
 	///</summary>
 	public partial class ClusterRerouteDescriptor  : BaseRequest<ClusterRerouteRequestParameters>
@@ -1078,10 +1078,10 @@ namespace Nest
 		}
 		
 
-		///<summary>Don&#39;t return cluster state metadata (default: false)</summary>
-		public ClusterRerouteDescriptor FilterMetadata(bool filter_metadata = true)
+		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
+		public ClusterRerouteDescriptor Metric(params string[] metric)
 		{
-			this.Request.RequestParameters.FilterMetadata(filter_metadata);
+			this.Request.RequestParameters.Metric(metric);
 			return this;
 		}
 		
@@ -1113,7 +1113,7 @@ namespace Nest
 	
 	///<summary>descriptor for ClusterState
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-state.html
 	///</pre>
 	///</summary>
 	public partial class ClusterStateDescriptor 
@@ -1150,7 +1150,7 @@ namespace Nest
 	
 	///<summary>descriptor for ClusterStats
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-stats.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-stats.html
 	///</pre>
 	///</summary>
 	public partial class ClusterStatsDescriptor 
@@ -1179,7 +1179,7 @@ namespace Nest
 	
 	///<summary>descriptor for Count
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html
 	///</pre>
 	///</summary>
 	public partial class CountDescriptor<T> 
@@ -1248,7 +1248,7 @@ namespace Nest
 	
 	///<summary>descriptor for CountPercolateGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html
 	///</pre>
 	///</summary>
 	public partial class PercolateCountDescriptor<T> 
@@ -1333,7 +1333,7 @@ namespace Nest
 	
 	///<summary>descriptor for Delete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete.html
 	///</pre>
 	///</summary>
 	public partial class DeleteDescriptor<T> 
@@ -1410,7 +1410,7 @@ namespace Nest
 	
 	///<summary>descriptor for DeleteByQuery
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete-by-query.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete-by-query.html
 	///</pre>
 	///</summary>
 	public partial class DeleteByQueryDescriptor<T> 
@@ -1526,6 +1526,23 @@ namespace Nest
 	{
 		
 	
+
+		///<summary>Explicit version number for concurrency control</summary>
+		public DeleteScriptDescriptor Version(long version)
+		{
+			this.Request.RequestParameters.Version(version);
+			return this;
+		}
+		
+
+		///<summary>Specific version type</summary>
+		public DeleteScriptDescriptor VersionType(VersionType version_type)
+		{
+			this.Request.RequestParameters.VersionType(version_type);
+			return this;
+		}
+		
+	
 	}
 	
 	
@@ -1538,13 +1555,29 @@ namespace Nest
 	{
 		
 	
+
+		///<summary>Explicit version number for concurrency control</summary>
+		public DeleteTemplateDescriptor Version(long version)
+		{
+			this.Request.RequestParameters.Version(version);
+			return this;
+		}
+		
+
+		///<summary>Specific version type</summary>
+		public DeleteTemplateDescriptor VersionType(VersionType version_type)
+		{
+			this.Request.RequestParameters.VersionType(version_type);
+			return this;
+		}
+		
 	
 	}
 	
 	
 	///<summary>descriptor for Exists
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class DocumentExistsDescriptor<T> 
@@ -1597,7 +1630,7 @@ namespace Nest
 	
 	///<summary>descriptor for ExplainGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-explain.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-explain.html
 	///</pre>
 	///</summary>
 	public partial class ExplainDescriptor<T> 
@@ -1772,7 +1805,7 @@ namespace Nest
 	
 	///<summary>descriptor for Get
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class GetDescriptor<T> 
@@ -1918,9 +1951,25 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
 	///</pre>
 	///</summary>
-	public partial class GetScriptDescriptor  
+	public partial class GetScriptDescriptor 
 	{
 		
+	
+
+		///<summary>Explicit version number for concurrency control</summary>
+		public GetScriptDescriptor Version(long version)
+		{
+			this.Request.RequestParameters.Version(version);
+			return this;
+		}
+		
+
+		///<summary>Specific version type</summary>
+		public GetScriptDescriptor VersionType(VersionType version_type)
+		{
+			this.Request.RequestParameters.VersionType(version_type);
+			return this;
+		}
 		
 	
 	}
@@ -1928,7 +1977,7 @@ namespace Nest
 	
 	///<summary>descriptor for GetSource
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class SourceDescriptor<T> 
@@ -2059,13 +2108,29 @@ namespace Nest
 	{
 		
 	
+
+		///<summary>Explicit version number for concurrency control</summary>
+		public GetTemplateDescriptor Version(long version)
+		{
+			this.Request.RequestParameters.Version(version);
+			return this;
+		}
+		
+
+		///<summary>Specific version type</summary>
+		public GetTemplateDescriptor VersionType(VersionType version_type)
+		{
+			this.Request.RequestParameters.VersionType(version_type);
+			return this;
+		}
+		
 	
 	}
 	
 	
 	///<summary>descriptor for Index
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-index_.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html
 	///</pre>
 	///</summary>
 	public partial class IndexDescriptor<T> 
@@ -2166,7 +2231,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesAnalyzeGetForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-analyze.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html
 	///</pre>
 	///</summary>
 	public partial class AnalyzeDescriptor 
@@ -2260,7 +2325,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesClearCacheForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html
 	///</pre>
 	///</summary>
 	public partial class ClearCacheDescriptor 
@@ -2374,13 +2439,21 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Clear query cache</summary>
+		public ClearCacheDescriptor QueryCache(bool query_cache = true)
+		{
+			this.Request.RequestParameters.QueryCache(query_cache);
+			return this;
+		}
+		
 	
 	}
 	
 	
 	///<summary>descriptor for IndicesClose
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-open-close.html
 	///</pre>
 	///</summary>
 	public partial class CloseIndexDescriptor 
@@ -2433,7 +2506,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesCreate
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-create-index.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-create-index.html
 	///</pre>
 	///</summary>
 	public partial class CreateIndexDescriptor 
@@ -2462,7 +2535,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesDelete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-index.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-delete-index.html
 	///</pre>
 	///</summary>
 	public partial class DeleteIndexDescriptor 
@@ -2491,7 +2564,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesDeleteAlias
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class DeleteAliasDescriptor<T> 
@@ -2520,7 +2593,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesDeleteMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-delete-mapping.html
 	///</pre>
 	///</summary>
 	public partial class DeleteMappingDescriptor<T> 
@@ -2541,7 +2614,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesDeleteWarmer
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html
 	///</pre>
 	///</summary>
 	public partial class DeleteWarmerDescriptor 
@@ -2562,7 +2635,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesExists
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-exists.html
 	///</pre>
 	///</summary>
 	public partial class IndexExistsDescriptor 
@@ -2607,7 +2680,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesExistsAliasForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class AliasExistsDescriptor 
@@ -2652,7 +2725,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesExistsTemplateForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html
 	///</pre>
 	///</summary>
 	public partial class TemplateExistsDescriptor 
@@ -2673,7 +2746,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesExistsType
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-types-exists.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-types-exists.html
 	///</pre>
 	///</summary>
 	public partial class TypeExistsDescriptor 
@@ -2718,7 +2791,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesFlushForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-flush.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html
 	///</pre>
 	///</summary>
 	public partial class FlushDescriptor 
@@ -2738,6 +2811,14 @@ namespace Nest
 		public FlushDescriptor Full(bool full = true)
 		{
 			this.Request.RequestParameters.Full(full);
+			return this;
+		}
+		
+
+		///<summary>If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is false and will cause an exception to be thrown on the shard level if another flush operation is already running.</summary>
+		public FlushDescriptor WaitIfOngoing(bool wait_if_ongoing = true)
+		{
+			this.Request.RequestParameters.WaitIfOngoing(wait_if_ongoing);
 			return this;
 		}
 		
@@ -2769,9 +2850,54 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for IndicesGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-index.html
+	///</pre>
+	///</summary>
+	public partial class GetIndexDescriptor 
+	{
+		
+	
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public GetIndexDescriptor Local(bool local = true)
+		{
+			this.Request.RequestParameters.Local(local);
+			return this;
+		}
+		
+
+		///<summary>Ignore unavailable indexes (default: false)</summary>
+		public GetIndexDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
+		public GetIndexDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
+		public GetIndexDescriptor ExpandWildcards(params string[] expand_wildcards)
+		{
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+	
+	}
+	
+	
 	///<summary>descriptor for IndicesGetAliasForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class GetAliasDescriptor 
@@ -2816,7 +2942,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesGetAliasesForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class GetAliasesDescriptor 
@@ -2845,7 +2971,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesGetFieldMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-field-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html
 	///</pre>
 	///</summary>
 	public partial class GetFieldMappingDescriptor<T> 
@@ -2898,7 +3024,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesGetMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html
 	///</pre>
 	///</summary>
 	public partial class GetMappingDescriptor<T> 
@@ -2923,7 +3049,7 @@ namespace Nest
 		
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
+		public GetMappingDescriptor<T> ExpandWildcards(params string[] expand_wildcards)
 		{
 			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
 			return this;
@@ -2943,7 +3069,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesGetSettingsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html
 	///</pre>
 	///</summary>
 	public partial class GetIndexSettingsDescriptor 
@@ -2994,9 +3120,54 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for IndicesGetUpgradeForAll
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html
+	///</pre>
+	///</summary>
+	public partial class UpgradeStatusDescriptor 
+	{
+		
+	
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public UpgradeStatusDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public UpgradeStatusDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public UpgradeStatusDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		{
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>Whether to return time and byte values in human-readable format.</summary>
+		public UpgradeStatusDescriptor Human(bool human = true)
+		{
+			this.Request.RequestParameters.Human(human);
+			return this;
+		}
+		
+	
+	}
+	
+	
 	///<summary>descriptor for IndicesGetWarmerForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html
 	///</pre>
 	///</summary>
 	public partial class GetWarmerDescriptor 
@@ -3041,7 +3212,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesOpen
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-open-close.html
 	///</pre>
 	///</summary>
 	public partial class OpenIndexDescriptor 
@@ -3094,7 +3265,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesOptimizeForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-optimize.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html
 	///</pre>
 	///</summary>
 	public partial class OptimizeDescriptor 
@@ -3179,7 +3350,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesPutAlias
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class PutAliasDescriptor 
@@ -3208,7 +3379,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesPutMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-put-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html
 	///</pre>
 	///</summary>
 	public partial class PutMappingDescriptor<T> 
@@ -3269,7 +3440,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesPutSettingsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-update-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-update-settings.html
 	///</pre>
 	///</summary>
 	public partial class UpdateSettingsDescriptor 
@@ -3322,7 +3493,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesPutTemplateForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html
 	///</pre>
 	///</summary>
 	public partial class PutTemplateDescriptor 
@@ -3367,7 +3538,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesPutWarmerForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html
 	///</pre>
 	///</summary>
 	public partial class PutWarmerDescriptor 
@@ -3449,7 +3620,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesRefreshForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html
 	///</pre>
 	///</summary>
 	public partial class RefreshDescriptor 
@@ -3502,7 +3673,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesSegmentsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-segments.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-segments.html
 	///</pre>
 	///</summary>
 	public partial class SegmentsDescriptor 
@@ -3555,7 +3726,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesStatsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html
 	///</pre>
 	///</summary>
 	public partial class IndicesStatsDescriptor 
@@ -3649,7 +3820,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesStatusForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-status.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-status.html
 	///</pre>
 	///</summary>
 	public partial class IndicesStatusDescriptor 
@@ -3718,7 +3889,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesUpdateAliasesForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class AliasDescriptor 
@@ -3745,9 +3916,54 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for IndicesUpgradeForAll
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html
+	///</pre>
+	///</summary>
+	public partial class UpgradeDescriptor 
+	{
+		
+	
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public UpgradeDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public UpgradeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
+		{
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public UpgradeDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Specify whether the request should block until the all segments are upgraded (default: true)</summary>
+		public UpgradeDescriptor WaitForCompletion(bool wait_for_completion = true)
+		{
+			this.Request.RequestParameters.WaitForCompletion(wait_for_completion);
+			return this;
+		}
+		
+	
+	}
+	
+	
 	///<summary>descriptor for IndicesValidateQueryGetForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html
 	///</pre>
 	///</summary>
 	public partial class ValidateQueryDescriptor<T> 
@@ -3848,7 +4064,7 @@ namespace Nest
 	
 	///<summary>descriptor for MgetGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html
 	///</pre>
 	///</summary>
 	public partial class MultiGetDescriptor 
@@ -3959,7 +4175,7 @@ namespace Nest
 	
 	///<summary>descriptor for MltGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-more-like-this.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-more-like-this.html
 	///</pre>
 	///</summary>
 	public partial class MoreLikeThisDescriptor<T> 
@@ -4074,14 +4290,6 @@ namespace Nest
 		}
 		
 
-		///<summary>The search query hint</summary>
-		public MoreLikeThisDescriptor<T> SearchQueryHint(string search_query_hint)
-		{
-			this.Request.RequestParameters.SearchQueryHint(search_query_hint);
-			return this;
-		}
-		
-
 		///<summary>A scroll search request definition</summary>
 		public MoreLikeThisDescriptor<T> SearchScroll(string search_scroll)
 		{
@@ -4135,7 +4343,7 @@ namespace Nest
 	
 	///<summary>descriptor for MpercolateGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html
 	///</pre>
 	///</summary>
 	public partial class MultiPercolateDescriptor 
@@ -4172,7 +4380,7 @@ namespace Nest
 	
 	///<summary>descriptor for MsearchGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-multi-search.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html
 	///</pre>
 	///</summary>
 	public partial class MultiSearchDescriptor 
@@ -4283,13 +4491,21 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
+		public MultiTermVectorsDescriptor<T> Realtime(bool realtime = true)
+		{
+			this.Request.RequestParameters.Realtime(realtime);
+			return this;
+		}
+		
 	
 	}
 	
 	
 	///<summary>descriptor for NodesHotThreadsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-hot-threads.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-hot-threads.html
 	///</pre>
 	///</summary>
 	public partial class NodesHotThreadsDescriptor 
@@ -4334,7 +4550,7 @@ namespace Nest
 	
 	///<summary>descriptor for NodesInfoForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html
 	///</pre>
 	///</summary>
 	public partial class NodesInfoDescriptor 
@@ -4363,7 +4579,7 @@ namespace Nest
 	
 	///<summary>descriptor for NodesShutdownForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-shutdown.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-shutdown.html
 	///</pre>
 	///</summary>
 	public partial class NodesShutdownDescriptor 
@@ -4392,7 +4608,7 @@ namespace Nest
 	
 	///<summary>descriptor for NodesStatsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html
 	///</pre>
 	///</summary>
 	public partial class NodesStatsDescriptor 
@@ -4494,7 +4710,7 @@ namespace Nest
 	
 	///<summary>descriptor for PercolateGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html
 	///</pre>
 	///</summary>
 	public partial class PercolateDescriptor<T> 
@@ -4542,6 +4758,14 @@ namespace Nest
 		}
 		
 
+		///<summary>Return an array of matching query IDs instead of objects</summary>
+		public PercolateDescriptor<T> PercolateFormat(PercolateFormat percolate_format)
+		{
+			this.Request.RequestParameters.PercolateFormat(percolate_format);
+			return this;
+		}
+		
+
 		///<summary>The index to percolate the document into. Defaults to index.</summary>
 		public PercolateDescriptor<T> PercolateIndex(string percolate_index)
 		{
@@ -4554,6 +4778,22 @@ namespace Nest
 		public PercolateDescriptor<T> PercolateType(string percolate_type)
 		{
 			this.Request.RequestParameters.PercolateType(percolate_type);
+			return this;
+		}
+		
+
+		///<summary>The routing value to use when percolating the existing document.</summary>
+		public PercolateDescriptor<T> PercolateRouting(string percolate_routing)
+		{
+			this.Request.RequestParameters.PercolateRouting(percolate_routing);
+			return this;
+		}
+		
+
+		///<summary>Which shard to prefer when executing the percolate request.</summary>
+		public PercolateDescriptor<T> PercolatePreference(string percolate_preference)
+		{
+			this.Request.RequestParameters.PercolatePreference(percolate_preference);
 			return this;
 		}
 		
@@ -4595,9 +4835,33 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
 	///</pre>
 	///</summary>
-	public partial class PutScriptDescriptor  
+	public partial class PutScriptDescriptor 
 	{
 		
+	
+
+		///<summary>Explicit operation type</summary>
+		public PutScriptDescriptor OpType(OpType op_type)
+		{
+			this.Request.RequestParameters.OpType(op_type);
+			return this;
+		}
+		
+
+		///<summary>Explicit version number for concurrency control</summary>
+		public PutScriptDescriptor Version(long version)
+		{
+			this.Request.RequestParameters.Version(version);
+			return this;
+		}
+		
+
+		///<summary>Specific version type</summary>
+		public PutScriptDescriptor VersionType(VersionType version_type)
+		{
+			this.Request.RequestParameters.VersionType(version_type);
+			return this;
+		}
 		
 	
 	}
@@ -4605,7 +4869,7 @@ namespace Nest
 	
 	///<summary>descriptor for ScrollGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html
 	///</pre>
 	///</summary>
 	public partial class ScrollDescriptor<T> 
@@ -4618,7 +4882,7 @@ namespace Nest
 	
 	///<summary>descriptor for SearchGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html
 	///</pre>
 	///</summary>
 	public partial class SearchDescriptor<T> 
@@ -4778,6 +5042,83 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Specify if query cache should be used for this request or not, defaults to index level setting</summary>
+		public SearchDescriptor<T> QueryCache(bool query_cache = true)
+		{
+			this.Request.RequestParameters.QueryCache(query_cache);
+			return this;
+		}
+		
+	
+	}
+	
+	
+	///<summary>descriptor for SearchExists
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html
+	///</pre>
+	///</summary>
+	public partial class SearchExistsDescriptor<T> 
+	{
+		
+	
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public SearchExistsDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public SearchExistsDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
+		{
+			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public SearchExistsDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
+		{
+			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>Include only documents with a specific `_score` value in the result</summary>
+		public SearchExistsDescriptor<T> MinScore(double min_score)
+		{
+			this.Request.RequestParameters.MinScore(min_score);
+			return this;
+		}
+		
+
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public SearchExistsDescriptor<T> Preference(string preference)
+		{
+			this.Request.RequestParameters.Preference(preference);
+			return this;
+		}
+		
+
+		///<summary>Specific routing value</summary>
+		public SearchExistsDescriptor<T> Routing(string routing)
+		{
+			this.Request.RequestParameters.Routing(routing);
+			return this;
+		}
+		
+
+		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
+		public SearchExistsDescriptor<T> Source(string source)
+		{
+			this.Request.RequestParameters.Source(source);
+			return this;
+		}
+		
 	
 	}
 	
@@ -4914,7 +5255,7 @@ namespace Nest
 	
 	///<summary>descriptor for SnapshotCreate
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class SnapshotDescriptor 
@@ -4943,7 +5284,7 @@ namespace Nest
 	
 	///<summary>descriptor for SnapshotCreateRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class CreateRepositoryDescriptor 
@@ -4966,13 +5307,21 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Whether to verify the repository after creation</summary>
+		public CreateRepositoryDescriptor Verify(bool verify = true)
+		{
+			this.Request.RequestParameters.Verify(verify);
+			return this;
+		}
+		
 	
 	}
 	
 	
 	///<summary>descriptor for SnapshotDelete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class DeleteSnapshotDescriptor 
@@ -4993,7 +5342,7 @@ namespace Nest
 	
 	///<summary>descriptor for SnapshotDeleteRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class DeleteRepositoryDescriptor 
@@ -5022,7 +5371,7 @@ namespace Nest
 	
 	///<summary>descriptor for SnapshotGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class GetSnapshotDescriptor 
@@ -5043,7 +5392,7 @@ namespace Nest
 	
 	///<summary>descriptor for SnapshotGetRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class GetRepositoryDescriptor 
@@ -5072,7 +5421,7 @@ namespace Nest
 	
 	///<summary>descriptor for SnapshotRestore
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class RestoreDescriptor 
@@ -5120,9 +5469,38 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for SnapshotVerifyRepository
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html
+	///</pre>
+	///</summary>
+	public partial class VerifyRepositoryDescriptor 
+	{
+		
+	
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public VerifyRepositoryDescriptor MasterTimeout(string master_timeout)
+		{
+			this.Request.RequestParameters.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout</summary>
+		public VerifyRepositoryDescriptor Timeout(string timeout)
+		{
+			this.Request.RequestParameters.Timeout(timeout);
+			return this;
+		}
+		
+	
+	}
+	
+	
 	///<summary>descriptor for Suggest
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html
 	///</pre>
 	///</summary>
 	public partial class SuggestDescriptor<T> 
@@ -5273,13 +5651,21 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
+		public TermvectorDescriptor<T> Realtime(bool realtime = true)
+		{
+			this.Request.RequestParameters.Realtime(realtime);
+			return this;
+		}
+		
 	
 	}
 	
 	
 	///<summary>descriptor for Update
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-update.html
 	///</pre>
 	///</summary>
 	public partial class UpdateDescriptor<TDocument,TPartialDocument> 
@@ -5295,7 +5681,7 @@ namespace Nest
 		}
 		
 
-		///<summary>The script language (default: mvel)</summary>
+		///<summary>The script language (default: groovy)</summary>
 		public UpdateDescriptor<TDocument,TPartialDocument> Lang(string lang)
 		{
 			this.Request.RequestParameters.Lang(lang);
@@ -5347,6 +5733,22 @@ namespace Nest
 		public UpdateDescriptor<TDocument,TPartialDocument> ScriptQueryString(string script)
 		{
 			this.Request.RequestParameters.Script(script);
+			return this;
+		}
+		
+
+		///<summary>The id of a stored script</summary>
+		public UpdateDescriptor<TDocument,TPartialDocument> ScriptId(string script_id)
+		{
+			this.Request.RequestParameters.ScriptId(script_id);
+			return this;
+		}
+		
+
+		///<summary>True if the script referenced in script or script_id should be called to perform inserts - defaults to false</summary>
+		public UpdateDescriptor<TDocument,TPartialDocument> ScriptedUpsert(bool scripted_upsert = true)
+		{
+			this.Request.RequestParameters.ScriptedUpsert(scripted_upsert);
 			return this;
 		}
 		

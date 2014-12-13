@@ -19,8 +19,15 @@ namespace Nest.Resolvers
 		private static readonly ConcurrentDictionary<Type, ElasticTypeAttribute> CachedTypeLookups =
 			new ConcurrentDictionary<Type, ElasticTypeAttribute>();
 		
-		public static IElasticPropertyAttribute Property(MemberInfo info)
+		public static IElasticPropertyAttribute Property(MemberInfo info, IConnectionSettingsValues settings = null)
 		{
+			if (settings != null)
+			{
+				PropertyMapping propertyMapping = null;
+				if (settings.PropertyMappings.TryGetValue(info, out propertyMapping))
+					return new ElasticPropertyAttribute {Name = propertyMapping.Name, OptOut = propertyMapping.Ignore};
+			}
+
 			var attributes = info.GetCustomAttributes(typeof(IElasticPropertyAttribute), true);
 			if (attributes != null && attributes.Any())
 				return ((IElasticPropertyAttribute)attributes.First());
@@ -52,6 +59,8 @@ namespace Nest.Resolvers
 		private readonly IConnectionSettingsValues _settings;
 		public PropertyNameResolver(IConnectionSettingsValues settings)
 		{
+			if (settings == null)
+				throw new ArgumentNullException("settings");
 			_settings = settings;
 		}
 
@@ -61,11 +70,8 @@ namespace Nest.Resolvers
 				return null;
 			
 			var name = info.Name;
-			string resolvedName = null;
-			if (_settings.PropertyNames.TryGetValue(info, out resolvedName))
-				return resolvedName;
 
-			var att = ElasticAttributes.Property(info);
+			var att = ElasticAttributes.Property(info, _settings);
 			if (att != null && !att.Name.IsNullOrEmpty())
 				return att.Name;
 
@@ -99,6 +105,7 @@ namespace Nest.Resolvers
 			return stack.Last();
 		}
 
+		[Obsolete("Scheduled for removal in 2.0, unused")]
 		public Stack<IElasticPropertyAttribute> ResolvePropertyAttributes(Expression expression)
 		{
 			var stack = new Stack<string>();
@@ -126,6 +133,12 @@ namespace Nest.Resolvers
 				var constantExpression = m.Arguments.Last() as ConstantExpression;
 				if (constantExpression != null)
 					stack.Push(constantExpression.Value as string);
+			}
+			else if (m.Method.Name == "FullyQualified" && m.Arguments.Any())
+			{
+				var type = m.Method.ReturnType;
+				var typeName = this._settings.Inferrer.TypeName(type);
+				stack.Push(typeName);
 			}
 			else if (m.Method.Name == "get_Item" && m.Arguments.Any())
 			{

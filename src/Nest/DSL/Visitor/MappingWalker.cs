@@ -8,16 +8,19 @@ namespace Nest.DSL.Visitor
 
 		public MappingWalker(IMappingVisitor visitor)
 		{
+			visitor.ThrowIfNull("visitor");
 			_visitor = visitor;
 		}
 
 		public void Accept(IGetMappingResponse response)
 		{
+			if (response == null) return;
 			this.Accept(response.Mapping);
 		}
 
 		public void Accept(RootObjectMapping mapping)
 		{
+			if (mapping == null) return;
 			this._visitor.Visit(mapping);
 			this.Accept(mapping.Properties);
 		}

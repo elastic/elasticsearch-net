@@ -34,13 +34,14 @@ namespace Nest.Tests.Integration.Search.ScriptFields
 		}
 
 	    [Test]
+		[SkipVersion("0 - 1.2.9", "Indexed scripts introduced in ES 1.3")]
 	    public void IndexedScript()
 	    {
 	        var script = "doc['loc'].value * multiplier";
 	        var scriptId = "test";
 	        var lang = "groovy";
 
-	        this.Client.PutScript(s => s.Lang(lang).Id(scriptId).Script(script));
+	        var putResult = this.Client.PutScript(s => s.Lang(lang).Id(scriptId).Script(script));
 
             var queryResults = this.Client.Search<ElasticsearchProject>(s => s
                 .From(0)

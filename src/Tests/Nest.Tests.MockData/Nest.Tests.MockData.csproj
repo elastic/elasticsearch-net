@@ -98,12 +98,14 @@
     <Compile Include="DataSources\LongSource.cs" />
     <Compile Include="DataSources\FloatSource.cs" />
     <Compile Include="Domain\BoolTerm.cs" />
+    <Compile Include="Domain\Child.cs" />
     <Compile Include="Domain\GeoShape.cs" />
     <Compile Include="Domain\ElasticsearchProject.cs" />
-    <Compile Include="Domain\GeoLocation.cs" />
+    <Compile Include="Domain\CustomGeoLocation.cs" />
     <Compile Include="Domain\Person.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="NestTestData.cs" />
+    <Compile Include="Domain\Parent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

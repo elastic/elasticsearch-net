@@ -148,6 +148,9 @@
     <None Include="Core\Indices\Analysis\Analyzers\LanguageAnalyzerTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Indices\Analysis\Analyzers\KeepTypesTokenFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Indices\Analysis\Analyzers\WhitespaceAnalyzerTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -242,8 +245,8 @@
     <Compile Include="Internals\Exceptions\BadQueryServerExceptionTests.cs" />
     <Compile Include="Internals\Inferno\EscapedFormatTests.cs" />
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
+    <Compile Include="Internals\Inferno\MapPropertyIgnoreTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
-    <Compile Include="Internals\Inferno\IndexNameResolverTests.cs" />
     <Compile Include="Internals\Inferno\MapPropertyNamesForTests.cs" />
     <Compile Include="Internals\Serialize\ConnectionSettingsTests.cs" />
     <Compile Include="Internals\Serialize\NullValueHandlingTests.cs" />
@@ -254,7 +257,9 @@
     <Compile Include="ObjectInitializer\Aliases\GetAliasRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\MultiTermVectors\MultiTermVectorsWithDocumentRequestTests.cs" />
     <Compile Include="ObjectInitializer\Nodes\NodesHotThreadsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Repository\VerifyRepositoryRequestTests.cs" />
     <Compile Include="ObjectInitializer\Search\SearchRequestUntypedTests.cs" />
     <Compile Include="ObjectInitializer\Status\StatusRequestTests.cs" />
     <Compile Include="ObjectInitializer\IndicesStats\IndicesStatsRequestTests.cs" />
@@ -315,6 +320,7 @@
     <Compile Include="ObjectInitializer\Template\DeleteTemplateRequestTests.cs" />
     <Compile Include="ObjectInitializer\Template\GetTemplateRequestTests.cs" />
     <Compile Include="ObjectInitializer\Template\PutTemplateRequestTests.cs" />
+    <Compile Include="ObjectInitializer\TermVector\TermVectorWithDocRequestTests.cs" />
     <Compile Include="ObjectInitializer\TermVector\TermVectorRequestTests.cs" />
     <Compile Include="ObjectInitializer\Update\UpdateRequestTests.cs" />
     <Compile Include="ObjectInitializer\UpdateSettings\UpdateSettingsRequestTests.cs" />
@@ -400,6 +406,7 @@
     <Compile Include="Reproduce\Reproduce806Tests.cs" />
     <Compile Include="Reproduce\Reproduce876Tests.cs" />
     <Compile Include="Reproduce\Reproduce926Tests.cs" />
+    <Compile Include="Search\Aggregations\ScriptedMetricJson.cs" />
     <Compile Include="Search\Failures\ShardFailureTests.cs" />
     <Compile Include="Search\Fields\FieldsTests.cs" />
     <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
@@ -724,6 +731,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\MoreLikeThis\MoreLikeThisBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\MultiTermVectors\MultiTermVectorsWithDocumentBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Snapshot\SnapshotBody.json">

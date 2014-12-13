@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Search.Template
 		private string _template = "{\"from\": \"{{my_from}}\",\"size\": \"{{my_size}}\",\"query\": { \"match\": {\"{{my_field}}\": {\"query\": \"{{my_value}}\" }}}}";
 
 		[Test]
+		[SkipVersion("0 - 1.0.9", "Search template API added in 1.1")]
 		public void SearchTemplateByQuery()
 		{
 			var result = this.Client.SearchTemplate<ElasticsearchProject>(s => s
@@ -33,6 +34,7 @@ namespace Nest.Tests.Integration.Search.Template
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.0.9", "Search template API added in 1.1")]
 		public void SearchTemplateByQuery_ObjectInitializer()
 		{
 			var request = new SearchTemplateRequest
@@ -54,6 +56,7 @@ namespace Nest.Tests.Integration.Search.Template
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.2.9", "Put search template introduced in 1.3")]
 		public void SearchTemplateById()
 		{
 			var templateName = "myIndexedTemplate";
@@ -79,6 +82,7 @@ namespace Nest.Tests.Integration.Search.Template
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.2.9", "Put search template introduced in 1.3")]
 		public void PutGetAndDeleteTemplate()
 		{
 			var templateName = "myIndexedTemplate";

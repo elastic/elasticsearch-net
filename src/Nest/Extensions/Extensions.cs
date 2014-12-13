@@ -24,7 +24,7 @@ namespace Nest
 				return string.Empty;
 		}
 
-		
+
 		public static T? ToEnum<T>(this string str) where T : struct
 		{
 			var enumType = typeof(T);
@@ -75,14 +75,7 @@ namespace Nest
 				throw new ArgumentException("Argument can not be an empty collection", parameterName);
 		}
 
-	    internal static void ThrownIfNotLowercase(this string @object, string parameterName)
-	    {
-            @object.ThrowIfNull(parameterName);
-	        if (@object.Any(char.IsUpper))
-                throw new ArgumentException("Argument can not have uppercase letter", parameterName);
-        }
-
-        internal static IList<T> EagerConcat<T>(this IEnumerable<T> list, IEnumerable<T> other)
+		internal static IList<T> EagerConcat<T>(this IEnumerable<T> list, IEnumerable<T> other)
 		{
 			list = list.HasAny() ? list : Enumerable.Empty<T>();
 			var l = new List<T>(list);
@@ -107,7 +100,7 @@ namespace Nest
 			if (value == null)
 				throw new ArgumentNullException(name);
 		}
-		
+
 		internal static string F(this string format, params object[] args)
 		{
 			var c = CultureInfo.InvariantCulture;

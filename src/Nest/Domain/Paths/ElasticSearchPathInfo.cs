@@ -22,6 +22,8 @@ namespace Nest
 		public string Repository { get; set; }
 		public string Snapshot { get; set; }
 
+		public string Feature { get; set; }
+
 		public string Metric { get; set; }
 		public string IndexMetric { get; set; }
 

@@ -17,29 +17,9 @@ namespace Nest
 
 	internal static class CreateIndexPathInfo
 	{
-		private static char[] _invalidChars = new[] { '\\', '/', '*', '?', '"', '<', '>', '|', ' ', ',', '#' };
-		private static string _invalidCharsMessage = string.Join(", ", _invalidChars);
-
 		public static void Update(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo, ICreateIndexRequest request)
 		{
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-		}
-
-		public static void Validate(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo, ICreateIndexRequest request)
-		{
-			var index = pathInfo.Index;
-			if (index.StartsWith("_"))
-				throw new DslException("indexname {0} may not start with an underscore".F(index));
-
-			if (Encoding.UTF8.GetByteCount(index) > 255)
-				throw new DslException("indexname {0} exceeds maximum index name length of 255".F(index));
-
-			if (index.Any(char.IsUpper))
-				throw new DslException("indexname {0} contains uppercase characters".F(index));
-
-			if (index.Any(c => _invalidChars.Contains(c)))
-				throw new DslException("indexname {0} contains one of {1} invalid characters".F(index, _invalidCharsMessage));
-
 		}
 	}
 
@@ -52,11 +32,6 @@ namespace Nest
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
 		{
 			CreateIndexPathInfo.Update(pathInfo, this);
-		}
-
-		protected override void ValidatePathInfo(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
-		{
-			CreateIndexPathInfo.Validate(pathInfo, this);
 		}
 	}
 
@@ -259,11 +234,5 @@ namespace Nest
 		{
 			CreateIndexPathInfo.Update(pathInfo, this);
 		}
-
-		protected override void ValidatePathInfo(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
-		{
-			CreateIndexPathInfo.Validate(pathInfo, this);
-		}
-
 	}
 }

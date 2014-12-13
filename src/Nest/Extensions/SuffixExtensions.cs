@@ -15,5 +15,10 @@ namespace Nest
 		{
 			return @object;
 		}
+		
+		public static T FullyQualified<T>(this T @object)
+		{
+			return @object;
+		}
 	}
 }

@@ -38,6 +38,30 @@ namespace Nest.Tests.Unit.Search.Sorting
 		}
 
 		[Test]
+		public void TestSortWithUnmappedType()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Sort(sort => sort
+					.OnField(e => e.DoubleValue)
+					.UnmappedType(FieldType.Long)
+				);
+			var expected = @"
+                {
+                  from: 0,
+                  size: 10,
+                  sort: [
+                    {
+                        doubleValue : { unmapped_type : ""long"" } 
+                    }
+                  ]
+                }";
+			var json = TestElasticClient.Serialize(s);
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
 		public void TestSortOnSortField()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
@@ -67,19 +91,19 @@ namespace Nest.Tests.Unit.Search.Sorting
 			Assert.True(json.JsonEquals(expected), json);
 		}
 
-        [Test]
-        public void TestSortOnNestedField()
-        {
-            var s = new SearchDescriptor<ElasticsearchProject>()
-                .From(0)
-                .Size(10)
-                .Sort(sort => sort
-                    .OnField(e => e.Contributors.Suffix("age")) // Sort projects by oldest contributor
-                    .NestedMax()
-                    .Descending()
-                );
-            var json = TestElasticClient.Serialize(s);
-            var expected = @"
+		[Test]
+		public void TestSortOnNestedField()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Sort(sort => sort
+					.OnField(e => e.Contributors.Suffix("age")) // Sort projects by oldest contributor
+					.NestedMax()
+					.Descending()
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"
                 {
                   from: 0,
                   size: 10,
@@ -92,8 +116,8 @@ namespace Nest.Tests.Unit.Search.Sorting
 					}
                   ]
                 }";
-            Assert.True(json.JsonEquals(expected), json);
-        }
+			Assert.True(json.JsonEquals(expected), json);
+		}
 
 		[Test]
 		public void TestSortAscending()
@@ -198,6 +222,40 @@ namespace Nest.Tests.Unit.Search.Sorting
 						 mode: ""max"",
 						 order: ""desc"",
 						 unit: ""km""
+					  }
+					}
+                  ]
+                }";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
+		public void TestSortGeoMultiple()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.SortGeoDistance(sort => sort
+					.OnField(e => e.Origin)
+					.MissingLast()
+					.Descending()
+					.PinTo(GeoLocation.TryCreate(40, -70),GeoLocation.TryCreate(30.21, 1.21))
+					.Unit(GeoUnit.Miles)
+					.Mode(SortMode.Average)
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"
+                {
+                  from: 0,
+                  size: 10,
+                  sort: [
+					{
+					  _geo_distance: {
+					   ""origin"": [""40,-70"",""30.21,1.21""],
+						 missing: ""_last"",
+						 mode: ""avg"",
+						 order: ""desc"",
+						 unit: ""mi""
 					  }
 					}
                   ]

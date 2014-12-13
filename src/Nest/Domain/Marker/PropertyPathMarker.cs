@@ -9,6 +9,7 @@ namespace Nest
 	public class PropertyPathMarker : IEquatable<PropertyPathMarker>
 	{
 		public string Name { get; set; }
+		//TODO rename to Expression in 2.0
 		public Expression Type { get; set; }
 
 		public double? Boost { get; set; }

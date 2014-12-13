@@ -27,6 +27,9 @@ namespace Nest
 		[JsonProperty("filter")]
 		IFilterAggregator Filter { get; set; }
 
+        [JsonProperty("filters")]
+        IFiltersAggregator Filters { get; set; }
+
 		[JsonProperty("geo_distance")]
 		IGeoDistanceAggregator GeoDistance { get; set; }
 
@@ -87,6 +90,12 @@ namespace Nest
 		[JsonProperty("top_hits")]
 		ITopHitsAggregator TopHits { get; set; }
 
+		[JsonProperty("children")]
+		IChildrenAggregator Children { get; set; }
+
+		[JsonProperty("scripted_metric")]
+		IScriptedMetricAggregator ScriptedMetric { get; set; }
+
 		[JsonProperty("aggs")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
@@ -113,8 +122,12 @@ namespace Nest
 		private ITermsAggregator _terms;
 		private ISignificantTermsAggregator _significantTerms;
 		private IPercentileRanksAggregaor _percentileRanks;
-		
+	    private IFiltersAggregator _filters;
 		private ITopHitsAggregator _topHits;
+		private IChildrenAggregator _children;
+
+		private IScriptedMetricAggregator _scriptedMetric;
+
 		public IAverageAggregator Average { get; set; }
 		public IValueCountAggregator ValueCount { get; set; }
 		public IMaxAggregator Max { get; set; }
@@ -145,6 +158,12 @@ namespace Nest
 			get { return _filter; }
 			set { _filter = value; }
 		}
+
+        public IFiltersAggregator Filters
+        {
+            get { return _filters; }
+            set { _filters = value; }
+        }
 
 		public IGeoDistanceAggregator GeoDistance
 		{
@@ -236,6 +255,18 @@ namespace Nest
 			set { _topHits = value; }
 		}
 
+		public IChildrenAggregator Children
+		{
+			get { return _children; }
+			set { _children = value; }
+		}
+
+		public IScriptedMetricAggregator ScriptedMetric
+		{
+			get { return _scriptedMetric; }
+			set { _scriptedMetric = value; }
+		}
+
 		private void LiftAggregations(IBucketAggregator bucket)
 		{
 			if (bucket == null) return;
@@ -261,6 +292,8 @@ namespace Nest
 		IExtendedStatsAggregator IAggregationContainer.ExtendedStats { get; set; }
 		
 		IFilterAggregator IAggregationContainer.Filter { get; set; }
+
+        IFiltersAggregator IAggregationContainer.Filters { get; set; }
 		
 		IGeoDistanceAggregator IAggregationContainer.GeoDistance { get; set; }
 		
@@ -302,6 +335,10 @@ namespace Nest
 
 		ITopHitsAggregator IAggregationContainer.TopHits { get; set; }
 
+		IChildrenAggregator IAggregationContainer.Children { get; set; }
+
+		IScriptedMetricAggregator IAggregationContainer.ScriptedMetric { get; set; }
+		
 		public AggregationDescriptor<T> Average(string name, Func<AverageAggregationDescriptor<T>, AverageAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.Average = d);
@@ -342,6 +379,12 @@ namespace Nest
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.Filter = d);
 		}
+
+        public AggregationDescriptor<T> Filters(string name,
+            Func<FiltersAggregationDescriptor<T>, FiltersAggregationDescriptor<T>> selector)
+        {
+            return _SetInnerAggregation(name, selector, (a, d) => a.Filters = d);
+        }
 		
 		public AggregationDescriptor<T> GeoDistance(string name,
 			Func<GeoDistanceAggregationDescriptor<T>, GeoDistanceAggregationDescriptor<T>> selector)
@@ -444,6 +487,25 @@ namespace Nest
 			Func<TopHitsAggregationDescriptor<T>, TopHitsAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a.TopHits = d);
+		}
+
+		public AggregationDescriptor<T> Children(string name,
+			Func<ChildrenAggregationDescriptor<T>, ChildrenAggregationDescriptor<T>> selector)
+		{
+			return this.Children<T>(name, selector);
+		}
+
+		public AggregationDescriptor<T> Children<K>(string name,
+			Func<ChildrenAggregationDescriptor<K>, ChildrenAggregationDescriptor<K>> selector)
+			where K : class
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a.Children = d);
+		}
+
+		public AggregationDescriptor<T> ScriptedMetric(string name,
+			Func<ScriptedMetricAggregationDescriptor<T>, ScriptedMetricAggregationDescriptor<T>> selector)
+		{
+			return _SetInnerAggregation(name, selector, (a, d) => a.ScriptedMetric = d);
 		}
 
 		private AggregationDescriptor<T> _SetInnerAggregation<TAggregation>(
