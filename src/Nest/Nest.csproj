@@ -397,6 +397,7 @@
     <Compile Include="Enums\NormsLoading.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
     <Compile Include="Enums\ScriptLang.cs" />
+    <Compile Include="Exception\RestoreException.cs" />
     <Compile Include="Exception\SnapshotException.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="Enums\GeoDistance.cs" />

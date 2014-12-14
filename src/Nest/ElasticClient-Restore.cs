@@ -106,6 +106,9 @@ namespace Nest
                 _restoreRequest.RequestParameters.WaitForCompletion(false);
                 var restoreResponse = this._elasticClient.Restore(_restoreRequest);
 
+                if (!restoreResponse.IsValid)
+                    throw new RestoreException(restoreResponse.ConnectionStatus);
+
                 _renamePattern = _restoreRequest.RenamePattern;
                 _renameReplacement = _restoreRequest.RenameReplacement;
 
@@ -137,6 +140,9 @@ namespace Nest
                                 x => Regex.Replace(x.Name, _renamePattern, _renameReplacement)).ToArray())
                             .Detailed(true)
                     );
+
+                if (!recoveryStatus.IsValid)
+                    throw new RestoreException(recoveryStatus.ConnectionStatus);
 
                 if (recoveryStatus.Indices.All(x => x.Value.Shards.All(s => s.Index.Files.Recovered == s.Index.Files.Total)))
                 {
