@@ -245,6 +245,7 @@
     <Compile Include="Internals\Exceptions\BadQueryServerExceptionTests.cs" />
     <Compile Include="Internals\Inferno\EscapedFormatTests.cs" />
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
+    <Compile Include="Internals\Inferno\MapIdPropertyForTests.cs" />
     <Compile Include="Internals\Inferno\MapPropertyIgnoreTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Inferno\MapPropertyNamesForTests.cs" />
