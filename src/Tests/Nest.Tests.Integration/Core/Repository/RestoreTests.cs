@@ -16,7 +16,7 @@ namespace Nest.Tests.Integration.Core.Repository
 	{
 	    private string _indexName;
 	    private string _repositoryName;
-	    private string _backupName;
+	    private string _snapshotName;
 	    //private ElasticsearchProject _elasticsearchProject;
 	    private List<ElasticsearchProject> _indexedElements = new List<ElasticsearchProject>();
 	    private string _restoredIndexName;
@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Core.Repository
 	    {
 	        _indexName = ElasticsearchConfiguration.NewUniqueIndexName();
 	        _repositoryName = ElasticsearchConfiguration.NewUniqueIndexName();
-	        _backupName = ElasticsearchConfiguration.NewUniqueIndexName();
+	        _snapshotName = ElasticsearchConfiguration.NewUniqueIndexName();
 
 	        var descriptor = new BulkDescriptor();
             _indexedElements = new List<ElasticsearchProject>();
@@ -62,7 +62,7 @@ namespace Nest.Tests.Integration.Core.Repository
 	    [Test]
 		public void SnapshotRestore()
 	    {
-			var snapshotResponse = this.Client.Snapshot(_repositoryName, _backupName, selector: f => f
+			var snapshotResponse = this.Client.Snapshot(_repositoryName, _snapshotName, selector: f => f
 				.Index(_indexName)
 				.WaitForCompletion(true)
 				.IgnoreUnavailable()
@@ -74,7 +74,7 @@ namespace Nest.Tests.Integration.Core.Repository
 			snapshotResponse.Snapshot.StartTime.Should().BeAfter(DateTime.UtcNow.AddDays(-1));
 
 			var d = ElasticsearchConfiguration.DefaultIndex;
-			var restoreResponse = this.Client.Restore(_repositoryName, _backupName, r => r
+			var restoreResponse = this.Client.Restore(_repositoryName, _snapshotName, r => r
 				.WaitForCompletion(true)
 				.RenamePattern(d + "_(.+)")
 				.RenameReplacement(d + "_restored_$1")
@@ -84,7 +84,7 @@ namespace Nest.Tests.Integration.Core.Repository
 			_restoredIndexName = _indexName.Replace(d +  "_", d + "_restored_");
 			restoreResponse.IsValid.Should().BeTrue();
 			restoreResponse.Snapshot.Should().NotBeNull();
-			restoreResponse.Snapshot.Name.Should().Be(_backupName);
+			restoreResponse.Snapshot.Name.Should().Be(_snapshotName);
 			restoreResponse.Snapshot.Indices.Should().Equal(new string[] { _restoredIndexName });
 
 			var indexExistsResponse = this.Client.IndexExists(f => f.Index(_restoredIndexName));
@@ -103,7 +103,7 @@ namespace Nest.Tests.Integration.Core.Repository
 	    {
 	        var snapshotObservable = this.Client.SnapshotObservable(TimeSpan.FromMilliseconds(100), descriptor => descriptor
                 .Repository(_repositoryName)
-                .Snapshot(_backupName)
+                .Snapshot(_snapshotName)
 	            .Index(_indexName));
             
 	        bool snapshotCompleted = false;
@@ -135,7 +135,7 @@ namespace Nest.Tests.Integration.Core.Repository
                 }
 	        }
 
-            var getSnapshotResponse = this.Client.GetSnapshot(_repositoryName, _backupName, descriptor => descriptor);
+            var getSnapshotResponse = this.Client.GetSnapshot(_repositoryName, _snapshotName, descriptor => descriptor);
             var snapshot = getSnapshotResponse.Snapshots.ElementAt(0);
             Assert.IsTrue(getSnapshotResponse.IsValid);
             Assert.AreEqual(1, getSnapshotResponse.Snapshots.Count());
@@ -146,7 +146,7 @@ namespace Nest.Tests.Integration.Core.Repository
 
             var restoreObservable = this.Client.RestoreObservable(TimeSpan.FromMilliseconds(1), r => r
                 .Repository(_repositoryName)
-                .Snapshot(_backupName)
+                .Snapshot(_snapshotName)
                 .RenamePattern(d + "_(.+)")
                 .RenameReplacement(d + "_restored_$1")
                 .Index(_indexName)
