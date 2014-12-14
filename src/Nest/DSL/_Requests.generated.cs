@@ -985,7 +985,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-reroute.html
 	///</pre>
 	///</summary>
-	public partial class ClusterRerouteRequest  : BasePathRequest<ClusterRerouteRequestParameters>
+	public partial class ClusterRerouteRequest 
 			{
 		
 		///<summary>Simulate the operation only and return the resulting state</summary>
@@ -1027,12 +1027,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterRerouteRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		

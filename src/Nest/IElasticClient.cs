@@ -721,6 +721,22 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest clusterStatsRequest);
+
+		/// <summary>
+		/// Allows to explicitly execute a cluster reroute allocation command including specific commands. 
+		/// For example, a shard can be moved from one node to another explicitly, an allocation can be canceled, 
+		/// or an unassigned shard can be explicitly allocated on a specific node.
+		/// </summary>
+		IClusterRerouteResponse ClusterReroute(Func<ClusterRerouteDescriptor, ClusterRerouteDescriptor> clusterRerouteSelector);
+
+		/// <inheritdoc />
+		Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, ClusterRerouteDescriptor> clusterRerouteSelector);
+
+		/// <inheritdoc />
+		IClusterRerouteResponse ClusterReroute(IClusterRerouteRequest clusterRerouteRequest);
+
+		/// <inheritdoc />
+		Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest clusterRerouteRequest);
 		
 		/// <summary>
 		/// Performs the analysis process on a text and return the tokens breakdown of the text.
