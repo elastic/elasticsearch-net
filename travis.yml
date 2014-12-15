@@ -1,3 +1,4 @@
 language: csharp
+solution: src/Elasticsearch.sln
 script: ./build.sh
 
