@@ -1,5 +1,5 @@
 // include Fake lib
-#r @"tools/FAKE/tools/FakeLib.dll"
+#r @"FakeLib.dll"
 #load @"InheritDoc.fsx"
 open Fake 
 open System
@@ -73,7 +73,7 @@ Target "CreateKeysIfAbsent" (fun _ ->
 )
 
 let getFileVersion = fun _ ->
-    let assemblyFileContents = ReadFileAsString @"src\NEST\Properties\AssemblyInfo.cs"
+    let assemblyFileContents = ReadFileAsString @"src/NEST/Properties/AssemblyInfo.cs"
     let re = @"\[assembly\: AssemblyFileVersionAttribute\(""([^""]+)""\)\]"
     let matches = Regex.Matches(assemblyFileContents,re)
     let defaultVersion = regex_replace re "$1" (matches.Item(0).Captures.Item(0).Value)
@@ -231,7 +231,7 @@ Target "Nightly" (fun _ ->
   ==> "CreateKeysIfAbsent"
   =?> ("Version", hasBuildParam "version")
   ==> "BuildApp"
-  ==> "Test"
+  =?> ("Test", (not (hasBuildParam "skiptests")))
   ==> "Build"
 
 "CreateKeysIfAbsent"

@@ -8,7 +8,7 @@ SOURCELINK="build/tools/SourceLink.Fake/SourceLink.Fake.nupkg"
 if [[ ! -f "$NUGET" ]]; then
    echo NUGET not found.. Download...
    mkdir -p build/tools/nuget
-   curl -o $NUGET http://build.nuget.org/drops/client/master/NuGet.exe
+   curl -o $NUGET https://nugetbuild.cloudapp.net/drops/client/master/NuGet.exe
 fi
 
 #we need FAKE to process our build scripts
@@ -40,6 +40,6 @@ libdir=$PWD/build/tools/FAKE/tools/
 $FSHARPI --lib:$libdir $@
 EOF
 chmod +x fsharpi
-mono --runtime=v4.0 "$FAKE" build/build.fsx $@
+mono --runtime=v4.0 "$FAKE" build/build.fsx "skiptests=1" $@
 rm fsharpi
-#"build\tools\FAKE\tools\Fake.exe" "build\build.fsx" "target=%TARGET%" "version=%VERSION%"
+#"build\tools\FAKE\tools\Fake.exe" "build\build.fsx" "target=%TARGET%" "version=%VERSION%" "skiptests=1"
