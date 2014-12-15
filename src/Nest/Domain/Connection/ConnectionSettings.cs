@@ -90,6 +90,9 @@ namespace Nest
 		private ReadOnlyCollection<Func<Type, JsonConverter>> _contractConverters;
 		ReadOnlyCollection<Func<Type, JsonConverter>> IConnectionSettingsValues.ContractConverters { get { return _contractConverters; } }
 
+		private FluentDictionary<Type, string> _idProperties = new FluentDictionary<Type, string>();
+		FluentDictionary<Type, string> IConnectionSettingsValues.IdProperties { get { return _idProperties; } }
+
 		private FluentDictionary<MemberInfo, PropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, PropertyMapping>();
 		FluentDictionary<MemberInfo, PropertyMapping> IConnectionSettingsValues.PropertyMappings { get { return _propertyMappings; } }
 
@@ -202,6 +205,27 @@ namespace Nest
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
 			mappingSelector(this._defaultTypeNames);
+			return (T)this;
+		}
+
+		public T MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
+		{
+			objectPath.ThrowIfNull("objectPath");
+
+			var memberInfo = new MemberInfoResolver(this, objectPath);
+			var propertyName = memberInfo.Members.Single().Name;
+
+			if (this._idProperties.ContainsKey(typeof(TDocument)))
+			{
+				if (this._idProperties[typeof(TDocument)].Equals(propertyName))
+					return (T)this;
+
+				throw new ArgumentException("Cannot map '{0}' as the id property for type '{1}': it already has '{2}' mapped."
+					.F(propertyName, typeof(TDocument).Name, this._idProperties[typeof(TDocument)]));
+			}
+
+			this._idProperties.Add(typeof(TDocument), propertyName);
+
 			return (T)this;
 		}
 
