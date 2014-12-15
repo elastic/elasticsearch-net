@@ -12,7 +12,7 @@ namespace Nest
 		internal object _Value { get; set; }
 
 		/// <summary>
-		/// Get the resut of the scripted metric aggregation as T
+		/// Get the result of the scripted metric aggregation as T
 		/// </summary>
 		/// <typeparam name="T">The type that best represents the result of your scripted metric aggrgation</typeparam>
 		public T Value<T>()

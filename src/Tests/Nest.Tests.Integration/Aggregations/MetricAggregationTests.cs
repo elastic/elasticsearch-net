@@ -208,6 +208,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Scripted metric aggregation added in ES 1.4")]
 		public void ScriptedMetric_SingleNumericValue()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
@@ -228,6 +229,7 @@ namespace Nest.Tests.Integration.Aggregations
 			value.Should().BeGreaterThan(0);
 		}
 
+		[SkipVersion("0 - 1.3.9", "Scripted metric aggregation added in ES 1.4")]
 		[Test]
 		public void ScriptedMetric_MultiNumericValue()
 		{
@@ -251,6 +253,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Scripted metric aggregation added in ES 1.4")]
 		public void ScriptedMetric_SingleStringValue()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
@@ -271,6 +274,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Scripted metric aggregation added in ES 1.4")]
 		public void ScriptedMetric_MultiStringValue()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
@@ -292,6 +296,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Scripted metric aggregation added in ES 1.4")]
 		public void ScriptedMetric_MultiArrayValue()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s

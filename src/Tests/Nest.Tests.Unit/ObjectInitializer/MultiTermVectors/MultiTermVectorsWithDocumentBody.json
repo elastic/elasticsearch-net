@@ -1,0 +1,18 @@
+  {
+  "docs": [
+    {
+      "doc": { "world": "doc"},
+      "field_statistics": true
+    },
+    {
+        "doc": { "world": "doc"},
+      "field_statistics": true
+    },
+    {  "doc": { "world": "doc"},
+      "field_statistics": true
+    },
+    {  "doc": { "world": "doc"},
+      "field_statistics": true
+    }
+  ]
+}

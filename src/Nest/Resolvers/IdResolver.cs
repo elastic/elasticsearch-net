@@ -24,6 +24,23 @@ namespace Nest.Resolvers
 			return t => f(t);
 		}
 
+		public string GetIdFor<T>(T @object, string idProperty)
+		{
+			try
+			{
+				var value = @object
+					.GetType()
+					.GetProperty(idProperty)
+					.GetValue(@object, null);
+
+				return value.ToString();
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
 		public string GetIdFor<T>(T @object)
 		{
 			if (@object == null)
