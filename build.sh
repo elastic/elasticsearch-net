@@ -1,5 +1,5 @@
 NUGET="build/tools/nuget/nuget.exe"
-FAKE="build/tools/FAKE/tools/Fake.exe"
+FAKE="build/tools/FAKE/tools/FAKE.exe"
 NUNIT="build/tools/NUnit.Runners/tools/nunit-console.exe"
 FSHARPCLI="build/tools/Fsharp.Formatting.CommandTool/Fsharp.Formatting.CommandTool.nupkg"
 SOURCELINK="build/tools/SourceLink.Fake/SourceLink.Fake.nupkg"
