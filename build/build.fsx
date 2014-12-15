@@ -31,7 +31,7 @@ Target "BuildApp" (fun _ ->
     //Override the prebuild event because it just calls a fake task BuildApp depends on anyways
     let msbuildProperties = [
       ("Configuration","Release"); 
-      ("PreBuildEvent","ECHO"); 
+      ("PreBuildEvent","echo"); 
     ]
 
     //Compile each csproj and output it seperately in build/output/PROJECTNAME
