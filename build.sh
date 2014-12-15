@@ -41,5 +41,8 @@ $FSHARPI --lib:$libdir $@
 EOF
 chmod +x fsharpi
 mono --runtime=v4.0 "$FAKE" build/build.fsx "skiptests=1" $@
+MONOEXIT=$?
 rm fsharpi
+#FORCE exit code to be that of calling fake not the last rm action
+exit MONOEXIT
 #"build\tools\FAKE\tools\Fake.exe" "build\build.fsx" "target=%TARGET%" "version=%VERSION%" "skiptests=1"
