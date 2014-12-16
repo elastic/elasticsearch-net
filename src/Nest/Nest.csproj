@@ -184,6 +184,7 @@
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataStringMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\MappingTransform.cs" />
+    <Compile Include="Domain\Repository\SnapshotShardFailure.cs" />
     <Compile Include="Domain\Responses\ClusterRerouteResponse.cs" />
     <Compile Include="Domain\Cat\CatAliasesRecord.cs" />
     <Compile Include="Domain\Cat\CatAllocationRecord.cs" />
