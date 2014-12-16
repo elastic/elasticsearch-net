@@ -27,7 +27,7 @@ namespace Profiling.Indexing
 
         private static string GetMessageText()
         {
-            int numWords = Rng.Next(1, 200);
+            int numWords = Rng.Next(1, 20);
 
             var sb = new StringBuilder();
 
