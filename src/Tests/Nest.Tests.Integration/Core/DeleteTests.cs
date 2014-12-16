@@ -328,5 +328,27 @@ namespace Nest.Tests.Integration.Core
 			Assert.Greater(countResult.Count, 0);
 
 		}
+
+		[Test]
+		public void DeleteByQuery()
+		{
+			var response = this.Client.DeleteByQuery<ElasticsearchProject>(d => d
+				.Query(q => q
+					.Match(m => m
+						.OnField(p => p.Name)
+						.Query("elasticsearch")
+					)
+				)
+			);
+
+			response.IsValid.Should().BeTrue();
+			response.Indices.Should().NotBeNull();
+			response.Indices.Should().ContainKey(ElasticsearchConfiguration.DefaultIndex);
+
+			var indexDetails = response.Indices[ElasticsearchConfiguration.DefaultIndex];
+			indexDetails.Should().NotBeNull();
+			indexDetails.Shards.Successful.Should().BeGreaterThan(0);
+			indexDetails.Shards.Failed.Should().Be(0);
+		}
 	}
 }
