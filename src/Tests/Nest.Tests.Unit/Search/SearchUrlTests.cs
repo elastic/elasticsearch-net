@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.Search
 			var client = new ElasticClient(settings, new InMemoryConnection());
 			var response = client.Search<ElasticsearchProject>(descriptor);
 			var uri = new Uri(response.ConnectionStatus.RequestUrl);
-			var actual = WebUtility.UrlDecode(uri.AbsolutePath).Replace(" ", "");
+			var actual = WebUtility.UrlDecode(uri.AbsolutePath);
 			actual.Should().Be(expected);
 		}
 
