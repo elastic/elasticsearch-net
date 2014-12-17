@@ -27,7 +27,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						range: {
 							""loc"": {
 								gte: ""10"",
-								lt: ""20"",
+								lt: ""20""
 							}
 						}
 
@@ -107,6 +107,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						.OnField(f => f.StartedOn)
 						.Greater(lowerBound)
 						.Lower(upperBound)
+						.TimeZone("+1:00")
 					)
 				);
 
@@ -116,7 +117,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						range: {
 							""startedOn"": {
 								gt: """ + lowerBound.ToString("yyyy-MM-dd'T'HH:mm:ss.fff") + @""",
-								lt: """ + upperBound.ToString("yyyy-MM-dd'T'HH:mm:ss.fff") + @"""
+								lt: """ + upperBound.ToString("yyyy-MM-dd'T'HH:mm:ss.fff") + @""",
+								time_zone: ""+1:00""
 							}
 						}
 

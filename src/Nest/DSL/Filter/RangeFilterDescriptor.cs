@@ -26,6 +26,9 @@ namespace Nest
 		[JsonProperty("lt")]
 		[JsonConverter(typeof(ForceStringReader))]
 		string LowerThan { get; set; }
+
+		[JsonProperty("time_zone")]
+		string TimeZone { get; set; }
 	}
 
 	public class RangeFilter : PlainFilter, IRangeFilter
@@ -38,6 +41,7 @@ namespace Nest
 		public string LowerThanOrEqualTo { get; set; }
 		public string GreaterThan { get; set; }
 		public string LowerThan { get; set; }
+		public string TimeZone { get; set; }
 		public PropertyPathMarker Field { get; set; }
 	}
 
@@ -51,73 +55,75 @@ namespace Nest
 		
 		string IRangeFilter.LowerThan { get; set; }
 
+		string IRangeFilter.TimeZone { get; set; }
+
 		PropertyPathMarker IFieldNameFilter.Field { get; set; }
 
-		private IRangeFilter _ { get { return this;  } }
+		private IRangeFilter Self { get { return this;  } }
 
 		bool IFilter.IsConditionless
 		{
 			get
 			{
-				return _.Field.IsConditionless() || 
-				(	_.GreaterThanOrEqualTo.IsNullOrEmpty() 
-					&& _.LowerThanOrEqualTo.IsNullOrEmpty()
-					&& _.LowerThan.IsNullOrEmpty()
-					&& _.GreaterThan.IsNullOrEmpty()
+				return this.Self.Field.IsConditionless() || 
+				(	this.Self.GreaterThanOrEqualTo.IsNullOrEmpty() 
+					&& this.Self.LowerThanOrEqualTo.IsNullOrEmpty()
+					&& this.Self.LowerThan.IsNullOrEmpty()
+					&& this.Self.GreaterThan.IsNullOrEmpty()
 				);
 			}
 		}
 		
 		public RangeFilterDescriptor<T> OnField(string field)
 		{
-			_.Field = field;
+			this.Self.Field = field;
 			return this;
 		}
 		public RangeFilterDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			_.Field = objectPath;
+			this.Self.Field = objectPath;
 			return this;
 		}
 
 		public RangeFilterDescriptor<T> Greater(long? from)
 		{
-			_.GreaterThan = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
+			this.Self.GreaterThan = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 	
 		public RangeFilterDescriptor<T> GreaterOrEquals(long? from)
 		{
-			_.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
+			this.Self.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 	
 		public RangeFilterDescriptor<T> Lower(long? to)
 		{
-			_.LowerThan = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
+			this.Self.LowerThan = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 
 		public RangeFilterDescriptor<T> LowerOrEquals(long? to)
 		{
-			_.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
+			this.Self.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 
 		public RangeFilterDescriptor<T> Greater(double? from)
 		{
-			_.GreaterThan = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
+			this.Self.GreaterThan = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 		
 		public RangeFilterDescriptor<T> GreaterOrEquals(double? from)
 		{
-			_.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
+			this.Self.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 		
 		public RangeFilterDescriptor<T> Lower(double? to)
 		{
-			_.LowerThan = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
+			this.Self.LowerThan = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 		/// <summary>
@@ -125,62 +131,67 @@ namespace Nest
 		/// </summary>
 		public RangeFilterDescriptor<T> LowerOrEquals(double? to)
 		{
-			_.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
+			this.Self.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 		
 
 		public RangeFilterDescriptor<T> Greater(string from)
 		{
-			_.GreaterThan = from;
+			this.Self.GreaterThan = from;
 			return this;
 		}
 
 		public RangeFilterDescriptor<T> GreaterOrEquals(string from)
 		{
-			_.GreaterThanOrEqualTo = from;
+			this.Self.GreaterThanOrEqualTo = from;
 			return this;
 		}
 
 		public RangeFilterDescriptor<T> Lower(string to)
 		{
-			_.LowerThan = to;
+			this.Self.LowerThan = to;
 			return this;
 		}
 
 		public RangeFilterDescriptor<T> LowerOrEquals(string to)
 		{
-			_.LowerThanOrEqualTo = to;
+			this.Self.LowerThanOrEqualTo = to;
 			return this;
 		}
 
 		public RangeFilterDescriptor<T> Greater(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!from.HasValue) return this;
-			_.GreaterThan = from.Value.ToString(format, CultureInfo.InvariantCulture);
+			this.Self.GreaterThan = from.Value.ToString(format, CultureInfo.InvariantCulture);
 			return this;
 		}
 		
 		public RangeFilterDescriptor<T> GreaterOrEquals(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!from.HasValue) return this;
-			_.GreaterThanOrEqualTo = from.Value.ToString(format, CultureInfo.InvariantCulture);
+			this.Self.GreaterThanOrEqualTo = from.Value.ToString(format, CultureInfo.InvariantCulture);
 			return this;
 		}
 
 		public RangeFilterDescriptor<T> Lower(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!to.HasValue) return this;
-			_.LowerThan = to.Value.ToString(format, CultureInfo.InvariantCulture);
+			this.Self.LowerThan = to.Value.ToString(format, CultureInfo.InvariantCulture);
 			return this;
 		}
 
 		public RangeFilterDescriptor<T> LowerOrEquals(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
 			if (!to.HasValue) return this;
-			_.LowerThanOrEqualTo = to.Value.ToString(format, CultureInfo.InvariantCulture);
+			this.Self.LowerThanOrEqualTo = to.Value.ToString(format, CultureInfo.InvariantCulture);
 			return this;
 		}
 	
+		public RangeFilterDescriptor<T> TimeZone(string timeZone)
+		{
+			this.Self.TimeZone = timeZone;
+			return this;
+		}
 	}
 }
