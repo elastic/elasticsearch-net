@@ -43,7 +43,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 				{
 					var host = uri.Host;
 					var port = uri.Port;
-					var tsocket = new TSocket(host, port);
+                    var tsocket = new TSocket(host, port, this._connectionSettings.Timeout);
 					var transport = new TBufferedTransport(tsocket, 1024);
 					var protocol = new TBinaryProtocol(transport);
 					var client = new Rest.Client(protocol);

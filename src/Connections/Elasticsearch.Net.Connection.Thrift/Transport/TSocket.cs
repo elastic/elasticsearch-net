@@ -118,7 +118,15 @@ namespace Elasticsearch.Net.Connection.Thrift.Transport
 				InitSocket();
 			}
 
-			client.Connect(host, port);
+            
+		    var connectionRequest = client.BeginConnect(host, port, null, null);
+            var connected = connectionRequest.AsyncWaitHandle.WaitOne(timeout);
+
+		    if (!connected)
+		    {
+                throw new TTransportException("Failed to connect");
+		    }
+
 			inputStream = client.GetStream();
 			outputStream = client.GetStream();
 		}
