@@ -39,8 +39,9 @@ namespace Nest
 
 		/// <summary>
 		/// Contains the reason for each shard failure.
-		/// For 2.0, remove this and rename ShardFailures => Failures
 		/// </summary>
+		/// For 2.0, remove this and rename ShardFailures => Failures
+		[JsonIgnore]
 		public IEnumerable<string> Failures
 		{
 			get
