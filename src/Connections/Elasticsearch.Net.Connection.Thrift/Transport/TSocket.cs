@@ -117,14 +117,14 @@ namespace Elasticsearch.Net.Connection.Thrift.Transport
 			{
 				InitSocket();
 			}
+
             
 		    var connectionRequest = client.BeginConnect(host, port, null, null);
-		    
             var connected = connectionRequest.AsyncWaitHandle.WaitOne(timeout);
 
 		    if (!connected)
 		    {
-		        throw new Exception("Failed to connect");
+                throw new TTransportException("Failed to connect");
 		    }
 
 			inputStream = client.GetStream();
