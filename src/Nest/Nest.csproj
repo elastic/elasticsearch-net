@@ -299,7 +299,7 @@
     <Compile Include="DSL\Suggest\PhraseSuggestHighlightDescriptor.cs" />
     <Compile Include="DSL\TemplateExistsDescriptor.cs" />
     <Compile Include="Domain\Responses\PingResponse.cs" />
-    <Compile Include="Domain\Responses\NodesShutdownResponse.cs" />
+    <Compile Include="Domain\Responses\NodesShutDownResponse.cs" />
     <Compile Include="DSL\Filter\GeoShapeCircleFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeMultiLineStringFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeMultiPointFilterDescriptor.cs" />
@@ -831,7 +831,7 @@
     <Compile Include="DSL\Query\RangeQueryDescriptor.cs" />
     <Compile Include="DSL\Query\CustomBoostFactorQueryDescriptor.cs" />
     <Compile Include="DSL\Query\CustomScoreQueryDescriptor.cs" />
-    <Compile Include="DSL\Query\DisMaxQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\DismaxQueryDescriptor.cs" />
     <Compile Include="DSL\Query\FilteredQueryDescriptor.cs" />
     <Compile Include="DSL\Query\IdsQueryDescriptor.cs" />
     <Compile Include="DSL\Search\SortFieldDescriptor.cs" />
@@ -941,7 +941,7 @@
     <Compile Include="Domain\Mapping\SpecialFields\IdFieldMapping.cs" />
     <Compile Include="Domain\Responses\AnalyzeResponse.cs" />
     <Compile Include="Domain\Responses\CountResponse.cs" />
-    <Compile Include="Domain\Responses\ElasticsearchVersionInfo.cs" />
+    <Compile Include="Domain\Responses\ElasticSearchVersionInfo.cs" />
     <Compile Include="Domain\Responses\IndicesOperationResponse.cs" />
     <Compile Include="Domain\Responses\IndicesResponse.cs" />
     <Compile Include="Domain\Responses\SearchResponse.cs" />
@@ -1026,7 +1026,7 @@
     <Compile Include="Resolvers\Converters\CustomJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\UnixDateTimeConverter.cs" />
     <Compile Include="Resolvers\Converters\YesNoBoolConverter.cs" />
-    <Compile Include="Domain\Paths\ElasticsearchPathInfo.cs" />
+    <Compile Include="Domain\Paths\ElasticSearchPathInfo.cs" />
     <Compile Include="ElasticClient-ClusterStats.cs" />
     <Compile Include="ElasticClient-ClusterPendingTasks.cs" />
     <Compile Include="Resolvers\ExpressionVisitor.cs" />
