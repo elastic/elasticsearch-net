@@ -131,7 +131,7 @@ namespace Nest.Tests.Unit.Core.Snapshot
             var sut = new SnapshotStatusHumbleObject(elastickClientMock.Object, new SnapshotRequest("repository", "snapshot"));
 
             sut.Next += (sender, args) => Assert.Fail();
-            sut.Completed += (sender, args) => {};
+            sut.Completed += (sender, args) => Assert.NotNull(args.SnapshotStatusResponse);
             sut.Error += (sender, args) => Assert.Fail(args.Exception.Message);
 
             sut.Check();

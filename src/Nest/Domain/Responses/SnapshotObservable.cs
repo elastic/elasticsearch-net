@@ -13,10 +13,10 @@ namespace Nest
         private readonly TimeSpan _interval = TimeSpan.FromSeconds(2);
         private Timer _timer;
         private bool _disposed;
-        private SnapshotStatusHumbleObject _snapshotStatusHumbleObject;
-        private List<EventHandler<NextEventArgs>> _nextEventHandlers = new List<EventHandler<NextEventArgs>>();
-        private List<EventHandler<EventArgs>> _completedEentHandlers = new List<EventHandler<EventArgs>>();
-        private List<EventHandler<ErrorEventArgs>> _errorEventHandlers = new List<EventHandler<ErrorEventArgs>>(); 
+        private readonly SnapshotStatusHumbleObject _snapshotStatusHumbleObject;
+        private readonly List<EventHandler<NextEventArgs>> _nextEventHandlers = new List<EventHandler<NextEventArgs>>();
+        private readonly List<EventHandler<CompletedEventArgs>> _completedEentHandlers = new List<EventHandler<CompletedEventArgs>>();
+        private readonly List<EventHandler<ErrorEventArgs>> _errorEventHandlers = new List<EventHandler<ErrorEventArgs>>(); 
 
         public SnapshotObservable(IElasticClient elasticClient, ISnapshotRequest snapshotRequest)
         {
@@ -50,7 +50,7 @@ namespace Nest
                     throw new SnapshotException(snapshotResponse.ConnectionStatus, "Can't create snapshot");
 
                 EventHandler<NextEventArgs> onNext = (sender, args) => observer.OnNext(args.SnapshotStatusResponse);
-                EventHandler<EventArgs> onCompleted = (sender, args) => observer.OnCompleted();
+                EventHandler<CompletedEventArgs> onCompleted = (sender, args) => observer.OnCompleted();
                 EventHandler<ErrorEventArgs> onError = (sender, args) => observer.OnError(args.Exception);
 
                 _nextEventHandlers.Add(onNext);
@@ -103,9 +103,9 @@ namespace Nest
             if (_disposed) return;
 
             _timer.Dispose();
-            _nextEventHandlers.ForEach(x => _snapshotStatusHumbleObject.Next -= x);
-            _completedEentHandlers.ForEach(x => _snapshotStatusHumbleObject.Completed -= x);
-            _errorEventHandlers.ForEach(x => _snapshotStatusHumbleObject.Error -= x);
+            _nextEventHandlers.Where(x => x != null).ToList().ForEach(x =>  _snapshotStatusHumbleObject.Next -= x);
+            _completedEentHandlers.Where(x => x != null).ToList().ForEach(x => _snapshotStatusHumbleObject.Completed -= x);
+            _errorEventHandlers.Where(x => x != null).ToList().ForEach(x => _snapshotStatusHumbleObject.Error -= x);
 
             _disposed = true;
         }
@@ -116,12 +116,21 @@ namespace Nest
         }
     }
 
-
     public class NextEventArgs : EventArgs
     {
         public ISnapshotStatusResponse SnapshotStatusResponse { get; private set; }
 
         public NextEventArgs(ISnapshotStatusResponse snapshotStatusResponse)
+        {
+            SnapshotStatusResponse = snapshotStatusResponse;
+        }
+    }
+
+    public class CompletedEventArgs : EventArgs
+    {
+        public ISnapshotStatusResponse SnapshotStatusResponse { get; private set; }
+
+        public CompletedEventArgs(ISnapshotStatusResponse snapshotStatusResponse)
         {
             SnapshotStatusResponse = snapshotStatusResponse;
         }
@@ -142,7 +151,7 @@ namespace Nest
         private readonly IElasticClient _elasticClient;
         private readonly ISnapshotRequest _snapshotRequest;
 
-        public event EventHandler<EventArgs> Completed;
+        public event EventHandler<CompletedEventArgs> Completed;
         public event EventHandler<ErrorEventArgs> Error;
         public event EventHandler<NextEventArgs> Next;
 
@@ -165,7 +174,7 @@ namespace Nest
 
                 if (snapshotStatusResponse.Snapshots.All(s => s.ShardsStats.Done == s.ShardsStats.Total))
                 {
-                    OnCompleted();
+                    OnCompleted(new CompletedEventArgs(snapshotStatusResponse));
                     return;
                 }
 
@@ -183,10 +192,10 @@ namespace Nest
             if (handler != null) handler(this, nextEventArgs);
         }
 
-        protected virtual void OnCompleted()
+        protected virtual void OnCompleted(CompletedEventArgs completedEventArgs)
         {
             var handler = Completed;
-            if (handler != null) handler(this, EventArgs.Empty);
+            if (handler != null) handler(this, completedEventArgs);
         }
 
         protected virtual void OnError(ErrorEventArgs errorEventArgs)

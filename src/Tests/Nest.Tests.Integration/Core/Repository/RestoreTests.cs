@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Security.Permissions;
 using System.Threading;
 using FluentAssertions;
 using NUnit.Framework;
@@ -98,89 +100,105 @@ namespace Nest.Tests.Integration.Core.Repository
 	    [Test]
 	    public void SnapshotRestoreObservable()
 	    {
-	        var snapshotObservable = this.Client.SnapshotObservable(TimeSpan.FromMilliseconds(100), descriptor => descriptor
-                .Repository(_repositoryName)
-                .Snapshot(_snapshotName)
-	            .Index(_indexName));
-            
+	        bool exceptionOccured = false;
+	        Exception occuredException = null;
+
+	        AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
+	        {
+	            exceptionOccured = true;
+	            occuredException = args.Exception;
+	        };
+
+	        var snapshotObservable = this.Client.SnapshotObservable(TimeSpan.FromMilliseconds(100),
+	            descriptor => descriptor
+	                .Repository(_repositoryName)
+	                .Snapshot(_snapshotName)
+	                .Index(_indexName));
+
 	        bool snapshotCompleted = false;
 
-            var snapshotObserver = new Observer<ISnapshotStatusResponse>(
-	                onNext: r =>
-	                {
-	                    var snapshotsCount = r.Snapshots.Count();
-                        Assert.IsTrue(r.IsValid);
-                        Assert.AreEqual(1, snapshotsCount);
-                        CollectionAssert.Contains(r.Snapshots.ElementAt(0).Indices.Keys, _indexName);
-	                },
-	                onError: e =>
-	                {
-                        Assert.Fail(e.Message);
-                        snapshotCompleted = true;
-	                },
-	                completed: () =>
-                    {
-                        snapshotCompleted = true;
-	                }
-                );
+	        var snapshotObserver = new Observer<ISnapshotStatusResponse>(
+	            onNext: r =>
+	            {
+	                var snapshotsCount = r.Snapshots.Count();
+	                Assert.IsTrue(r.IsValid);
+	                Assert.AreEqual(2, snapshotsCount);
+	                CollectionAssert.Contains(r.Snapshots.ElementAt(0).Indices.Keys, _indexName);
+	            },
+	            onError: e =>
+	            {
+	                Assert.Fail(e.Message);
+	                snapshotCompleted = true;
+	            },
+	            completed: () =>
+	            {
+	                snapshotCompleted = true;
+	            }
+	            );
 
 	        using (var observable = snapshotObservable.Subscribe(snapshotObserver))
-            {
-                while (!snapshotCompleted)
-                {
-                    Thread.Sleep(100);
-                }
+	        {
+	            while (!snapshotCompleted)
+	            {
+	                Thread.Sleep(100);
+                    if(exceptionOccured) Assert.Fail(occuredException.Message);
+	            }
 	        }
 
-            var getSnapshotResponse = this.Client.GetSnapshot(_repositoryName, _snapshotName, descriptor => descriptor);
-            var snapshot = getSnapshotResponse.Snapshots.ElementAt(0);
-            Assert.IsTrue(getSnapshotResponse.IsValid);
-            Assert.AreEqual(1, getSnapshotResponse.Snapshots.Count());
-            Assert.AreEqual("SUCCESS", snapshot.State);
-            CollectionAssert.Contains(snapshot.Indices, _indexName);
+	        var getSnapshotResponse = this.Client.GetSnapshot(_repositoryName, _snapshotName, descriptor => descriptor);
+	        var snapshot = getSnapshotResponse.Snapshots.ElementAt(0);
+	        Assert.IsTrue(getSnapshotResponse.IsValid);
+	        Assert.AreEqual(1, getSnapshotResponse.Snapshots.Count());
+	        Assert.AreEqual("SUCCESS", snapshot.State);
+	        CollectionAssert.Contains(snapshot.Indices, _indexName);
 
-            var d = ElasticsearchConfiguration.DefaultIndex;
+	        var d = ElasticsearchConfiguration.DefaultIndex;
 
-            var restoreObservable = this.Client.RestoreObservable(TimeSpan.FromMilliseconds(1), r => r
-                .Repository(_repositoryName)
-                .Snapshot(_snapshotName)
-                .RenamePattern(d + "_(.+)")
-                .RenameReplacement(d + "_restored_$1")
-                .Index(_indexName)
-                .IgnoreUnavailable(true));
+	        var restoreObservable = this.Client.RestoreObservable(TimeSpan.FromMilliseconds(1), r => r
+	            .Repository(_repositoryName)
+	            .Snapshot(_snapshotName)
+	            .RenamePattern(d + "_(.+)")
+	            .RenameReplacement(d + "_restored_$1")
+	            .Index(_indexName)
+	            .IgnoreUnavailable(true));
 
 	        bool restoreCompleted = false;
 	        var restoreObserver = new Observer<IRecoveryStatusResponse>(
 	            onNext: r =>
 	            {
 	                var index = r.Indices.FirstOrDefault();
-                    Assert.AreEqual(1, r.Indices.Count);
+	                Assert.AreEqual(1, r.Indices.Count);
 	            },
 	            onError: e =>
-                {
-                    Assert.Fail(e.Message);
-                    restoreCompleted = true;
+	            {
+	                Assert.Fail(e.Message);
+	                restoreCompleted = true;
 	            },
 	            completed: () =>
-                {
-                    restoreCompleted = true;
+	            {
+	                restoreCompleted = true;
 	            }
 	            );
 
 	        using (var observable = restoreObservable.Subscribe(restoreObserver))
 	        {
-	            while (!restoreCompleted) Thread.Sleep(100);
+	            while (!restoreCompleted)
+	            {
+                    Thread.Sleep(100);
+                    if (exceptionOccured) Assert.Fail(occuredException.Message);
+	            }
 	        }
 
-            _restoredIndexName = _indexName.Replace(d + "_", d + "_restored_");
-            var restoredIndexExistsResponse = this.Client.IndexExists(f => f.Index(_restoredIndexName));
-            restoredIndexExistsResponse.Exists.Should().BeTrue();
+	        _restoredIndexName = _indexName.Replace(d + "_", d + "_restored_");
+	        var restoredIndexExistsResponse = this.Client.IndexExists(f => f.Index(_restoredIndexName));
+	        restoredIndexExistsResponse.Exists.Should().BeTrue();
 
 	        var count = this.Client.Count<ElasticsearchProject>(descriptor => descriptor.Index(_restoredIndexName)).Count;
-            var indexContent = this.Client.SourceMany<ElasticsearchProject>(_indexedElements.Select(x => (long)x.Id), _restoredIndexName);
+	        var indexContent = this.Client.SourceMany<ElasticsearchProject>(_indexedElements.Select(x => (long) x.Id),
+	            _restoredIndexName);
 
-            count.Should().Be(_indexedElements.Count);
-            indexContent.ShouldBeEquivalentTo(_indexedElements);
+	        count.Should().Be(_indexedElements.Count);
+	        indexContent.ShouldBeEquivalentTo(_indexedElements);
 	    }
 	}
 }
