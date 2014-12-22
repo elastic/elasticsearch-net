@@ -1,6 +1,9 @@
-﻿using System.Reflection;
+﻿using FluentAssertions;
+using System.Reflection;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using System.Text;
+using System.IO;
 
 namespace Nest.Tests.Unit.Search.Sorting
 {
@@ -438,6 +441,40 @@ namespace Nest.Tests.Unit.Search.Sorting
 				.Type("number")
 			);
 			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
+		}
+
+		[Test]
+		public void SortSerializeThenDeserializeTest()
+		{
+			var d1 = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(20)
+				.MatchAll()
+				.Sort(s => s
+					.OnField(p => p.Id)
+					.Order(SortOrder.Ascending)
+				)
+				.SortGeoDistance(s => s
+					.OnField(p => p.Origin)
+					.PinTo(40, 70)
+				)
+				.SortScript(s => s
+					.Ascending()
+					.Script("(doc['_id'].stringValue + salt).hashCode()")
+					.Params(p => p
+						.Add("salt", "some_random_string")
+					)
+					.Type("number")
+				);
+
+			var s1 = this._client.Serializer.Serialize(d1);
+			var d2 = this._client.Serializer.Deserialize<SearchDescriptor<ElasticsearchProject>>(new MemoryStream(s1));
+			var s2 = this._client.Serializer.Serialize(d2);
+
+			var s1Json = Encoding.UTF8.GetString(s1);
+			var s2Json = Encoding.UTF8.GetString(s2);
+
+			s1Json.JsonEquals(s2Json).Should().BeTrue();
 		}
 	}
 }

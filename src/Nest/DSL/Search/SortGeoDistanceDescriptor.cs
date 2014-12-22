@@ -19,6 +19,13 @@ namespace Nest
 
 	public class GeoDistanceSort : SortBase, IGeoDistanceSort
 	{
+		internal static List<string> Params = new List<string> { "missing", "mode", "order", "unit" };
+
+		internal static int MissingIndex = 0;
+		internal static int ModeIndex = 1;
+		internal static int OrderIndex = 2;
+		internal static int UnitIndex = 3;
+
 		public PropertyPathMarker Field { get; set; }
 		public string PinLocation { get; set; }
 		public IEnumerable<string> Points { get; set; }
@@ -30,10 +37,10 @@ namespace Nest
 			return new Dictionary<object, object>
 			{
 				{ this.Field, sort },
-				{ "missing", this.Missing },
-				{ "mode", this.Mode },
-				{ "order", this.Order },
-				{ "unit", this.GeoUnit }
+				{ Params[MissingIndex], this.Missing },
+				{ Params[ModeIndex], this.Mode},
+				{ Params[OrderIndex], this.Order },
+				{ Params[UnitIndex], this.GeoUnit }
 			};
 		}
 	}
@@ -119,10 +126,10 @@ namespace Nest
 			return new Dictionary<object, object>
 			{
 				{ Self.Field, sort },
-				{ "missing", Self.Missing },
-				{ "mode", Self.Mode},
-				{ "order", Self.Order },
-				{ "unit", Self.GeoUnit }
+				{ GeoDistanceSort.Params[GeoDistanceSort.MissingIndex], Self.Missing },
+				{ GeoDistanceSort.Params[GeoDistanceSort.ModeIndex], Self.Mode},
+				{ GeoDistanceSort.Params[GeoDistanceSort.OrderIndex], Self.Order },
+				{ GeoDistanceSort.Params[GeoDistanceSort.UnitIndex], Self.GeoUnit }
 			};
 		}
 	}
