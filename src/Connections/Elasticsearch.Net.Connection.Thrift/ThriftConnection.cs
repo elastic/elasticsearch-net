@@ -23,7 +23,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 		private bool _disposed;
 		private readonly IConnectionConfigurationValues _connectionSettings;
 
-		public ThriftConnection(IConnectionConfigurationValues connectionSettings)
+		public ThriftConnection(IConnectionConfigurationValues connectionSettings, TProtocolFactory protocolFactory = null)
 		{
 			this._connectionSettings = connectionSettings;
 			this._timeout = connectionSettings.Timeout;
@@ -45,7 +45,8 @@ namespace Elasticsearch.Net.Connection.Thrift
 					var port = uri.Port;
                     var tsocket = new TSocket(host, port, this._connectionSettings.Timeout);
 					var transport = new TBufferedTransport(tsocket, 1024);
-					var protocol = new TBinaryProtocol(transport);
+				    var protocol = protocolFactory == null ? new TBinaryProtocol(transport) : protocolFactory.GetProtocol(transport);
+
 					var client = new Rest.Client(protocol);
 					tsocket.Timeout = this._connectionSettings.Timeout;
 					tsocket.TcpClient.SendTimeout = this._connectionSettings.Timeout;
