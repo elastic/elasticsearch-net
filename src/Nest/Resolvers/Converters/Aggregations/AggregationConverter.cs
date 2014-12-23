@@ -78,6 +78,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 			var total = o["total"].ToObject<long>();
 			var maxScore = o["max_score"].ToObject<double?>();
 			var hits = o["hits"].Children().OfType<JObject>().Select(s=>s);
+			reader.Read();
 			return new TopHitsMetric(hits) { Total = total, MaxScore = maxScore };
 		}
 
