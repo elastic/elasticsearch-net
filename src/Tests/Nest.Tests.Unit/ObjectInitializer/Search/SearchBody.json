@@ -70,7 +70,7 @@
       "terms": {
         "field": "name",
         "size": 10,
-        "execution_hit": "ordinals"
+        "execution_hint": "ordinals"
       },
       "aggs": {
         "max_count": {

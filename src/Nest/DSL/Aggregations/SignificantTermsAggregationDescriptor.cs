@@ -22,7 +22,7 @@ namespace Nest
 		[JsonProperty("min_doc_count")]
 		int? MinimumDocumentCount { get; set; }
 
-		[JsonProperty("execution_hit")]
+		[JsonProperty("execution_hint")]
 		TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 		[JsonProperty("include")]
