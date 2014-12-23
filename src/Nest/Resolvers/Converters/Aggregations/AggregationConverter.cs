@@ -79,7 +79,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 			var maxScore = o["max_score"].ToObject<double?>();
 			var hits = o["hits"].Children().OfType<JObject>().Select(s=>s);
 			reader.Read();
-			return new TopHitsMetric(hits) { Total = total, MaxScore = maxScore };
+			return new TopHitsMetric(hits, serializer) { Total = total, MaxScore = maxScore };
 		}
 
 		private IAggregation GetGeoBoundsMetricAggregation(JsonReader reader, JsonSerializer serializer)
