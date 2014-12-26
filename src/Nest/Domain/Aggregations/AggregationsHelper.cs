@@ -174,7 +174,8 @@ namespace Nest
 						{
 							Key = long.Parse(x.Key),
 							KeyAsString = x.Key,
-							DocCount = x.DocCount
+							DocCount = x.DocCount,
+							Aggregations = x.Aggregations
 						}
 					)
 				)

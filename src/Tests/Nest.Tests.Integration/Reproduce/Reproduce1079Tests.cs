@@ -18,7 +18,7 @@ namespace Nest.Tests.Integration.Reproduce
 			var response = this.Client.Search<ElasticsearchProject>(s => s
 				.Aggregations(a => a
 					.Histogram("hist", h => h
-						.Field(p => p.StartedOn)
+						.Field(p => p.LongValue)
 						.Interval(3000)
 						.Aggregations(aa => aa
 							.Sum("sizes", sa => sa
@@ -33,6 +33,7 @@ namespace Nest.Tests.Integration.Reproduce
 			foreach (var interval in hist.Items)
 			{
 				var sizes = interval.Sum("sizes");
+				sizes.Should().NotBeNull();
 			}
 		}
 	}
