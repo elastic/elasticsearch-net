@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Security.Permissions;
+using System.Text.RegularExpressions;
 using System.Threading;
 using FluentAssertions;
 using NUnit.Framework;
@@ -152,7 +153,11 @@ namespace Nest.Tests.Integration.Core.Repository
 
 	        var d = ElasticsearchConfiguration.DefaultIndex;
 
-	        var restoreObservable = this.Client.RestoreObservable(TimeSpan.FromMilliseconds(1), r => r
+            _restoredIndexName = Regex.Replace(_indexName, d + "_(.+)", d + "_restored_$1");
+            var restoredIndexExistsResponse = this.Client.IndexExists(f => f.Index(_restoredIndexName));
+            restoredIndexExistsResponse.Exists.Should().BeFalse();
+
+	        var restoreObservable = this.Client.RestoreObservable(TimeSpan.FromMilliseconds(100), r => r
 	            .Repository(_repositoryName)
 	            .Snapshot(_snapshotName)
 	            .RenamePattern(d + "_(.+)")
@@ -187,9 +192,10 @@ namespace Nest.Tests.Integration.Core.Repository
 	            }
 	        }
 
-	        _restoredIndexName = _indexName.Replace(d + "_", d + "_restored_");
-	        var restoredIndexExistsResponse = this.Client.IndexExists(f => f.Index(_restoredIndexName));
+	        restoredIndexExistsResponse = this.Client.IndexExists(f => f.Index(_restoredIndexName));
 	        restoredIndexExistsResponse.Exists.Should().BeTrue();
+
+	        var statusResponse = this.Client.Status(descriptor => descriptor.Index(_restoredIndexName));
 
 	        var count = this.Client.Count<ElasticsearchProject>(descriptor => descriptor.Index(_restoredIndexName)).Count;
 	        var indexContent = this.Client.SourceMany<ElasticsearchProject>(_indexedElements.Select(x => (long) x.Id),
@@ -199,62 +205,4 @@ namespace Nest.Tests.Integration.Core.Repository
 	        indexContent.ShouldBeEquivalentTo(_indexedElements);
 	    }
 	}
-
-    /// <summary>
-    /// http://www.peterprovost.org/blog/2004/11/03/Using-CrossThreadTestRunner/
-    /// </summary>
-    class CrossThreadTestRunner
-    {
-        private Exception lastException;
-        private readonly Thread thread;
-        private readonly ThreadStart start;
-
-        private const string RemoteStackTraceFieldName = "_remoteStackTraceString";
-        private static readonly FieldInfo RemoteStackTraceField = typeof(Exception).GetField(RemoteStackTraceFieldName, BindingFlags.Instance | BindingFlags.NonPublic);
-
-        public CrossThreadTestRunner(ThreadStart start)
-        {
-            this.start = start;
-            this.thread = new Thread(Run);
-            this.thread.SetApartmentState(ApartmentState.STA);
-        }
-
-        private void Run()
-        {
-            try
-            {
-                start.Invoke();
-            }
-            catch (Exception e)
-            {
-                lastException = e;
-            }
-        }
-
-        public void Start()
-        {
-            lastException = null;
-            thread.Start();
-        }
-
-        public void Join()
-        {
-            thread.Join();
-
-            if (lastException != null)
-            {
-                ThrowExceptionPreservingStack(lastException);
-            }
-        }
-
-        [ReflectionPermission(SecurityAction.Demand)]
-        private static void ThrowExceptionPreservingStack(Exception exception)
-        {
-            if (RemoteStackTraceField != null)
-            {
-                RemoteStackTraceField.SetValue(exception, exception.StackTrace + Environment.NewLine);
-            }
-            throw exception;
-        }
-    }
 }
