@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.ExceptionServices;
 using System.Security.Permissions;
 using System.Threading;
 using FluentAssertions;
@@ -100,14 +101,8 @@ namespace Nest.Tests.Integration.Core.Repository
 	    [Test]
 	    public void SnapshotRestoreObservable()
 	    {
-	        bool exceptionOccured = false;
-	        Exception occuredException = null;
-
-	        AppDomain.CurrentDomain.FirstChanceException += (sender, args) =>
-	        {
-	            exceptionOccured = true;
-	            occuredException = args.Exception;
-	        };
+	        var exceptionOccured = false;
+	        Exception lastException = null;
 
 	        var snapshotObservable = this.Client.SnapshotObservable(TimeSpan.FromMilliseconds(100),
 	            descriptor => descriptor
@@ -122,13 +117,13 @@ namespace Nest.Tests.Integration.Core.Repository
 	            {
 	                var snapshotsCount = r.Snapshots.Count();
 	                Assert.IsTrue(r.IsValid);
-	                Assert.AreEqual(2, snapshotsCount);
+	                Assert.AreEqual(1, snapshotsCount);
 	                CollectionAssert.Contains(r.Snapshots.ElementAt(0).Indices.Keys, _indexName);
 	            },
 	            onError: e =>
 	            {
-	                Assert.Fail(e.Message);
-	                snapshotCompleted = true;
+	                lastException = e;
+	                exceptionOccured = true;
 	            },
 	            completed: () =>
 	            {
@@ -140,10 +135,13 @@ namespace Nest.Tests.Integration.Core.Repository
 	        {
 	            while (!snapshotCompleted)
 	            {
+	                if (exceptionOccured) Assert.Fail(lastException.Message);
 	                Thread.Sleep(100);
-                    if(exceptionOccured) Assert.Fail(occuredException.Message);
 	            }
 	        }
+
+	        exceptionOccured = false;
+	        lastException = null;
 
 	        var getSnapshotResponse = this.Client.GetSnapshot(_repositoryName, _snapshotName, descriptor => descriptor);
 	        var snapshot = getSnapshotResponse.Snapshots.ElementAt(0);
@@ -170,9 +168,9 @@ namespace Nest.Tests.Integration.Core.Repository
 	                Assert.AreEqual(1, r.Indices.Count);
 	            },
 	            onError: e =>
-	            {
-	                Assert.Fail(e.Message);
-	                restoreCompleted = true;
+                {
+                    lastException = e;
+	                exceptionOccured = true;
 	            },
 	            completed: () =>
 	            {
@@ -183,9 +181,9 @@ namespace Nest.Tests.Integration.Core.Repository
 	        using (var observable = restoreObservable.Subscribe(restoreObserver))
 	        {
 	            while (!restoreCompleted)
-	            {
-                    Thread.Sleep(100);
-                    if (exceptionOccured) Assert.Fail(occuredException.Message);
+                {
+                    if (exceptionOccured) Assert.Fail(lastException.Message);
+	                Thread.Sleep(100);
 	            }
 	        }
 
@@ -201,4 +199,62 @@ namespace Nest.Tests.Integration.Core.Repository
 	        indexContent.ShouldBeEquivalentTo(_indexedElements);
 	    }
 	}
+
+    /// <summary>
+    /// http://www.peterprovost.org/blog/2004/11/03/Using-CrossThreadTestRunner/
+    /// </summary>
+    class CrossThreadTestRunner
+    {
+        private Exception lastException;
+        private readonly Thread thread;
+        private readonly ThreadStart start;
+
+        private const string RemoteStackTraceFieldName = "_remoteStackTraceString";
+        private static readonly FieldInfo RemoteStackTraceField = typeof(Exception).GetField(RemoteStackTraceFieldName, BindingFlags.Instance | BindingFlags.NonPublic);
+
+        public CrossThreadTestRunner(ThreadStart start)
+        {
+            this.start = start;
+            this.thread = new Thread(Run);
+            this.thread.SetApartmentState(ApartmentState.STA);
+        }
+
+        private void Run()
+        {
+            try
+            {
+                start.Invoke();
+            }
+            catch (Exception e)
+            {
+                lastException = e;
+            }
+        }
+
+        public void Start()
+        {
+            lastException = null;
+            thread.Start();
+        }
+
+        public void Join()
+        {
+            thread.Join();
+
+            if (lastException != null)
+            {
+                ThrowExceptionPreservingStack(lastException);
+            }
+        }
+
+        [ReflectionPermission(SecurityAction.Demand)]
+        private static void ThrowExceptionPreservingStack(Exception exception)
+        {
+            if (RemoteStackTraceField != null)
+            {
+                RemoteStackTraceField.SetValue(exception, exception.StackTrace + Environment.NewLine);
+            }
+            throw exception;
+        }
+    }
 }

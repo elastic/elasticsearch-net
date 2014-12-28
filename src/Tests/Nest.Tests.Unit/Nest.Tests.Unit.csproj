@@ -227,6 +227,7 @@
     <Compile Include="Core\Map\RootProperties\MapRootObjectPropertiesTests.cs" />
     <Compile Include="Core\MoreLikeThis\MltSearchBodyTests.cs" />
     <Compile Include="Core\MoreLikeThis\MltUrlTests.cs" />
+    <Compile Include="Core\Snapshot\RestoreObservableTests.cs" />
     <Compile Include="Core\Snapshot\SnapshotObservableTests.cs" />
     <Compile Include="Core\Snapshot\SnapshotStatusRequestTests.cs" />
     <Compile Include="Core\Template\PutTemplateRequestTests.cs" />

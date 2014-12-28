@@ -14,9 +14,9 @@ namespace Nest
         private Timer _timer;
         private bool _disposed;
         private readonly SnapshotStatusHumbleObject _snapshotStatusHumbleObject;
-        private readonly List<EventHandler<NextEventArgs>> _nextEventHandlers = new List<EventHandler<NextEventArgs>>();
-        private readonly List<EventHandler<CompletedEventArgs>> _completedEentHandlers = new List<EventHandler<CompletedEventArgs>>();
-        private readonly List<EventHandler<ErrorEventArgs>> _errorEventHandlers = new List<EventHandler<ErrorEventArgs>>(); 
+        private EventHandler<SnapshotNextEventArgs> _nextEventHandler;
+        private EventHandler<SnapshotCompletedEventArgs> _completedEentHandler;
+        private EventHandler<SnapshotErrorEventArgs> _errorEventHandler;
 
         public SnapshotObservable(IElasticClient elasticClient, ISnapshotRequest snapshotRequest)
         {
@@ -26,6 +26,8 @@ namespace Nest
             _elasticClient = elasticClient;
             _snapshotRequest = snapshotRequest;
             _snapshotStatusHumbleObject = new SnapshotStatusHumbleObject(elasticClient, snapshotRequest);
+            _snapshotStatusHumbleObject.Completed += StopTimer;
+            _snapshotStatusHumbleObject.Error += StopTimer;
         }
 
         public SnapshotObservable(IElasticClient elasticClient, ISnapshotRequest snapshotRequest, TimeSpan interval)
@@ -49,19 +51,19 @@ namespace Nest
                 if (!snapshotResponse.IsValid)
                     throw new SnapshotException(snapshotResponse.ConnectionStatus, "Can't create snapshot");
 
-                EventHandler<NextEventArgs> onNext = (sender, args) => observer.OnNext(args.SnapshotStatusResponse);
-                EventHandler<CompletedEventArgs> onCompleted = (sender, args) => observer.OnCompleted();
-                EventHandler<ErrorEventArgs> onError = (sender, args) => observer.OnError(args.Exception);
+                EventHandler<SnapshotNextEventArgs> onNext = (sender, args) => observer.OnNext(args.SnapshotStatusResponse);
+                EventHandler<SnapshotCompletedEventArgs> onCompleted = (sender, args) => observer.OnCompleted();
+                EventHandler<SnapshotErrorEventArgs> onError = (sender, args) => observer.OnError(args.Exception);
 
-                _nextEventHandlers.Add(onNext);
-                _completedEentHandlers.Add(onCompleted);
-                _errorEventHandlers.Add(onError);
+                _nextEventHandler = onNext;
+                _completedEentHandler = onCompleted;
+                _errorEventHandler = onError;
 
                 _snapshotStatusHumbleObject.Next += onNext;
                 _snapshotStatusHumbleObject.Completed += onCompleted;
                 _snapshotStatusHumbleObject.Error += onError;
 
-                _timer = new Timer(Snapshot, observer, _interval.Milliseconds, Timeout.Infinite);
+                _timer = new Timer(Snapshot, observer, (long)_interval.TotalMilliseconds, Timeout.Infinite);
             }
             catch (Exception exception)
             {
@@ -82,15 +84,20 @@ namespace Nest
                 var watch = new Stopwatch();
                 watch.Start();
 
-                _snapshotStatusHumbleObject.Check();
+                _snapshotStatusHumbleObject.CheckStatus();
 
-                _timer.Change(Math.Max(0, _interval.Milliseconds - watch.ElapsedMilliseconds), Timeout.Infinite);
+                _timer.Change(Math.Max(0, (long)_interval.TotalMilliseconds - watch.ElapsedMilliseconds), Timeout.Infinite);
             }
             catch (Exception exception)
             {
                 observer.OnError(exception);
-                _timer.Change(Timeout.Infinite, Timeout.Infinite);
+                StopTimer(null,null);
             }
+        }
+
+        private void StopTimer(object sender, EventArgs restoreCompletedEventArgs)
+        {
+            _timer.Change(Timeout.Infinite, Timeout.Infinite);
         }
 
         public void Dispose()
@@ -103,9 +110,13 @@ namespace Nest
             if (_disposed) return;
 
             _timer.Dispose();
-            _nextEventHandlers.Where(x => x != null).ToList().ForEach(x =>  _snapshotStatusHumbleObject.Next -= x);
-            _completedEentHandlers.Where(x => x != null).ToList().ForEach(x => _snapshotStatusHumbleObject.Completed -= x);
-            _errorEventHandlers.Where(x => x != null).ToList().ForEach(x => _snapshotStatusHumbleObject.Error -= x);
+
+            _snapshotStatusHumbleObject.Next -= _nextEventHandler;
+            _snapshotStatusHumbleObject.Completed -= _completedEentHandler;
+            _snapshotStatusHumbleObject.Error -= _errorEventHandler;
+
+            _snapshotStatusHumbleObject.Completed -= StopTimer;
+            _snapshotStatusHumbleObject.Error -= StopTimer;
 
             _disposed = true;
         }
@@ -116,31 +127,31 @@ namespace Nest
         }
     }
 
-    public class NextEventArgs : EventArgs
+    public class SnapshotNextEventArgs : EventArgs
     {
         public ISnapshotStatusResponse SnapshotStatusResponse { get; private set; }
 
-        public NextEventArgs(ISnapshotStatusResponse snapshotStatusResponse)
+        public SnapshotNextEventArgs(ISnapshotStatusResponse snapshotStatusResponse)
         {
             SnapshotStatusResponse = snapshotStatusResponse;
         }
     }
 
-    public class CompletedEventArgs : EventArgs
+    public class SnapshotCompletedEventArgs : EventArgs
     {
         public ISnapshotStatusResponse SnapshotStatusResponse { get; private set; }
 
-        public CompletedEventArgs(ISnapshotStatusResponse snapshotStatusResponse)
+        public SnapshotCompletedEventArgs(ISnapshotStatusResponse snapshotStatusResponse)
         {
             SnapshotStatusResponse = snapshotStatusResponse;
         }
     }
 
-    public class ErrorEventArgs : EventArgs
+    public class SnapshotErrorEventArgs : EventArgs
     {
         public Exception Exception { get; private set; }
 
-        public ErrorEventArgs(Exception exception)
+        public SnapshotErrorEventArgs(Exception exception)
         {
             Exception = exception;
         }
@@ -151,54 +162,57 @@ namespace Nest
         private readonly IElasticClient _elasticClient;
         private readonly ISnapshotRequest _snapshotRequest;
 
-        public event EventHandler<CompletedEventArgs> Completed;
-        public event EventHandler<ErrorEventArgs> Error;
-        public event EventHandler<NextEventArgs> Next;
+        public event EventHandler<SnapshotCompletedEventArgs> Completed;
+        public event EventHandler<SnapshotErrorEventArgs> Error;
+        public event EventHandler<SnapshotNextEventArgs> Next;
 
         public SnapshotStatusHumbleObject(IElasticClient elasticClient, ISnapshotRequest snapshotRequest)
         {
+            elasticClient.ThrowIfNull("elasticClient");
+            snapshotRequest.ThrowIfNull("snapshotRequest");
+
             _elasticClient = elasticClient;
             _snapshotRequest = snapshotRequest;
         }
 
-        public void Check()
+        public void CheckStatus()
         {
             try
             {
-                var snapshotStatusResponse = this._elasticClient.SnapshotStatus(descriptor => descriptor
-                            .Repository(_snapshotRequest.Repository)
-                            .Snapshot(_snapshotRequest.Snapshot));
+                var snapshotStatusResponse =
+                    _elasticClient.SnapshotStatus(new SnapshotStatusRequest(_snapshotRequest.Repository,
+                        _snapshotRequest.Snapshot));
 
                 if (!snapshotStatusResponse.IsValid)
                     throw new SnapshotException(snapshotStatusResponse.ConnectionStatus, "Can't check snapshot status");
 
                 if (snapshotStatusResponse.Snapshots.All(s => s.ShardsStats.Done == s.ShardsStats.Total))
                 {
-                    OnCompleted(new CompletedEventArgs(snapshotStatusResponse));
+                    OnCompleted(new SnapshotCompletedEventArgs(snapshotStatusResponse));
                     return;
                 }
 
-                OnNext(new NextEventArgs(snapshotStatusResponse));
+                OnNext(new SnapshotNextEventArgs(snapshotStatusResponse));
             }
             catch (Exception exception)
             {
-                OnError(new ErrorEventArgs(exception));
+                OnError(new SnapshotErrorEventArgs(exception));
             }
         }
 
-        protected virtual void OnNext(NextEventArgs nextEventArgs)
+        protected virtual void OnNext(SnapshotNextEventArgs nextEventArgs)
         {
             var handler = Next;
             if (handler != null) handler(this, nextEventArgs);
         }
 
-        protected virtual void OnCompleted(CompletedEventArgs completedEventArgs)
+        protected virtual void OnCompleted(SnapshotCompletedEventArgs completedEventArgs)
         {
             var handler = Completed;
             if (handler != null) handler(this, completedEventArgs);
         }
 
-        protected virtual void OnError(ErrorEventArgs errorEventArgs)
+        protected virtual void OnError(SnapshotErrorEventArgs errorEventArgs)
         {
             var handler = Error;
             if (handler != null) handler(this, errorEventArgs);
