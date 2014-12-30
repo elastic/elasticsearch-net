@@ -40,6 +40,9 @@ namespace Nest
 		[JsonProperty("gnd")]
 		GoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
 
+		[JsonProperty("background_filter")]
+		IFilterContainer BackgroundFilter { get; set; }
+
 	}
 
 	public class SignificantTermsAggregator : BucketAggregator, ISignificantTermsAggregator
@@ -54,6 +57,7 @@ namespace Nest
 		public MutualInformationHeuristic MutualInformation { get; set; }
 		public ChiSquareHeuristic ChiSquare { get; set; }
 		public GoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
+		public IFilterContainer BackgroundFilter { get; set; }
 	}
 
 	public class SignificantTermsAggregationDescriptor<T> : BucketAggregationBaseDescriptor<SignificantTermsAggregationDescriptor<T>, T>, ISignificantTermsAggregator where T : class
@@ -79,6 +83,8 @@ namespace Nest
 		ChiSquareHeuristic ISignificantTermsAggregator.ChiSquare { get; set; }
 
 		GoogleNormalizedDistanceHeuristic ISignificantTermsAggregator.GoogleNormalizedDistance { get; set; }
+
+		IFilterContainer ISignificantTermsAggregator.BackgroundFilter { get; set; }
 
 		public SignificantTermsAggregationDescriptor<T> Field(string field)
 		{
@@ -161,5 +167,10 @@ namespace Nest
 			return this;
 		}
 
+		public SignificantTermsAggregationDescriptor<T> BackgroundFilter(Func<FilterDescriptor<T>, FilterContainer> selector)
+		{
+			this.Self.BackgroundFilter = selector(new FilterDescriptor<T>());
+			return this;
+		}
 	}
 }

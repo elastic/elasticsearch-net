@@ -63,8 +63,27 @@ namespace Nest.Tests.Integration.Aggregations
 					sigTermTerms.Items.Should().NotBeEmpty();
 				}
 			}
-
 		}
+
+		[Test]
+		public void SignificantTermsWithBackgroundFilter()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.SignificantTerms("sig_terms", st => st
+						.Field(p => p.Content)
+						.BackgroundFilter(bf => bf
+							.Term(p => p.Name, "elasticsearch")
+						)
+					)
+				)
+			);
+			results.IsValid.Should().BeTrue();
+			var bucket = results.Aggs.SignificantTerms("sig_terms");
+			bucket.Items.Should().NotBeEmpty();
+		}
+
 		[Test]
 		public void Histogram()
 		{
