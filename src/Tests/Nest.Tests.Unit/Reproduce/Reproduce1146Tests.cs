@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Connection;
 using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using Newtonsoft.Json.Linq;
@@ -27,6 +28,21 @@ namespace Nest.Tests.Unit.Reproduce
 			status.RequestUrl.Should().EndWith("/nest_test_data/string/_query");
 			
 			response = this._client.DeleteByQuery<JObject>(s => s
+				.Query(q => q.Terms("string.ProgramId", ids))
+			);
+			status = response.ConnectionStatus;
+			status.RequestUrl.Should().EndWith("/nest_test_data/jobject/_query");
+
+			var client = new ElasticClient(new ConnectionSettings(), connection: new InMemoryConnection());
+			
+			response = client.DeleteByQuery<string>(s => s
+				.Query(q => q.Terms("string.ProgramId", ids))
+			);
+
+			status = response.ConnectionStatus;
+			status.RequestUrl.Should().EndWith("/nest_test_data/string/_query");
+			
+			response = client.DeleteByQuery<JObject>(s => s
 				.Query(q => q.Terms("string.ProgramId", ids))
 			);
 			status = response.ConnectionStatus;

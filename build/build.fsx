@@ -13,6 +13,8 @@ open System.Linq
 let buildDir = "build/output/"
 let nugetOutDir = "build/output/_packages"
 
+type Framework = { Name: string; NugetName: string; }
+
 // Default target
 Target "Build" (fun _ -> traceHeader "STARTING BUILD")
 
@@ -28,6 +30,11 @@ let gitLink = fun _ ->
     ) (TimeSpan.FromMinutes 5.0) |> ignore
  
 Target "BuildApp" (fun _ ->
+    let frameworks = [
+        { Name = "v4.0"; NugetName = "net40" };
+        { Name = "v4.5"; NugetName = "net45" };
+    ]
+
     let binDirs = !! "src/**/bin/**"
                   |> Seq.map DirectoryName
                   |> Seq.distinct
@@ -38,19 +45,19 @@ Target "BuildApp" (fun _ ->
     //Override the prebuild event because it just calls a fake task BuildApp depends on anyways
     let msbuildProperties = [
       ("Configuration","Release"); 
-      ("PreBuildEvent","echo"); 
+      ("PreBuildEvent","echo");
     ]
 
-    MSBuild null "Rebuild" msbuildProperties (seq { yield "src/Elasticsearch.sln" }) 
+    frameworks 
+      |> Seq.map(fun f -> (f, (msbuildProperties |> List.append [("OutputPathBaseDir", (sprintf "bin/%s" f.NugetName)); ("TargetFrameworkVersion", f.Name)] )))
+      |> Seq.iter(fun (f,props) -> MSBuild null "Build" props (seq { yield "src/Elasticsearch.sln" }) |> ignore)
+
     if not isMono then gitLink()
 
-    //moves all the release builds to build/output/PROJECTNAME
-    !! "src/**/*.csproj"
-      |> Seq.map(fun f -> (f, buildDir + directoryInfo(f).Name.Replace(".csproj", "")))
-      |> Seq.iter(fun (f,d) -> 
-        CreateDir d
-        CopyDir d (directoryInfo(f).Parent.FullName + @"/bin/Release") allFiles
-      )
+    //Compile each csproj and output it seperately in build/output/PROJECTNAME
+    //!! "src/**/*.csproj"
+    //  |> Seq.map(fun f -> (f, buildDir + directoryInfo(f).Name.Replace(".csproj", "")))
+    //  |> Seq.iter(fun (f,d) -> MSBuild d "Build" msbuildProperties (seq { yield f }) |> ignore)
     
     //Scan for xml docs and patch them to replace <inheritdoc /> with the documentation
     //from their interfaces
