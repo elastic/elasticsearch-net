@@ -1,6 +1,7 @@
 ﻿using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using FluentAssertions;
+using Nest;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -17,25 +18,43 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			var nodes = new Uri[]
 			{
-				new Uri("http://localhost:9300"),
-				new Uri("http://localhost:9400"),
-				new Uri("http://localhost:9500")
+				new Uri("http://invalid_host:9300"),
+				new Uri("http://invalid_host:9400"),
+				new Uri("http://invalid_host:9500")
 			};
 			var connectionPool = new StaticConnectionPool(nodes);
-			var settings = new ConnectionSettings(connectionPool);
+			var settings = new ConnectionSettings(connectionPool)
+				.DisablePing();
 			var client = new ElasticClient(settings);
 
 			var maxRetryException = Assert.Throws<MaxRetryException>(() => client.GetIndex(g => g.Index("foo")));
 			maxRetryException.InnerException.Should().NotBeNull();
+			
+			var aggregateException = maxRetryException.InnerException as AggregateException;
+			aggregateException.Should().NotBeNull();
+			aggregateException.InnerExceptions.Count.Should().Be(nodes.Count());
+		}
+
+		[Test]
+		public void MaxRetryExceptionInnerExceptionIsNullAsync()
+		{
+			var nodes = new Uri[]
+			{
+				new Uri("http://invalid_host:9300"),
+				new Uri("http://invalid_host:9400"),
+				new Uri("http://invalid_host:9500")
+			};
+			var connectionPool = new StaticConnectionPool(nodes);
+			var settings = new ConnectionSettings(connectionPool)
+				.DisablePing();
+			var client = new ElasticClient(settings);
+
+			var maxRetryException = Assert.Throws<MaxRetryException>(async () => await client.GetIndexAsync(g => g.Index("foo")));
+			maxRetryException.InnerException.Should().NotBeNull();
 
 			var aggregateException = maxRetryException.InnerException as AggregateException;
 			aggregateException.Should().NotBeNull();
-			aggregateException.InnerExceptions.Count.Should().Be(3);
-
-			foreach(var innerException in aggregateException.InnerExceptions)
-			{
-				(innerException is PingException).Should().BeTrue();
-			}
+			aggregateException.InnerExceptions.Count.Should().Be(nodes.Count());
 		}
 	}
 }

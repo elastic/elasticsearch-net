@@ -118,7 +118,10 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			if (pingRetryRequest != null) return pingRetryRequest;
 
 			var streamResponse = this.DoElasticsearchCall(requestState);
-			
+
+			if (streamResponse.OriginalException != null)
+				requestState.SeenExceptions.Add(streamResponse.OriginalException);
+
 			aliveResponse = streamResponse.SuccessOrKnownError;
 
 			if (!this.DoneProcessing(streamResponse, requestState, maxRetries, retried)) 
