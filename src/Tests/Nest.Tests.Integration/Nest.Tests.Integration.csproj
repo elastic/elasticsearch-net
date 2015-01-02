@@ -184,6 +184,7 @@
     <Compile Include="Mapping\GetMultipleMappingTests.cs" />
     <Compile Include="Reproduce\Reproduce1079Tests.cs" />
     <Compile Include="Reproduce\Reproduce1169Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1176Tests.cs" />
     <Compile Include="Reproduce\Reproduce769Tests.cs" />
     <Compile Include="Reproduce\Reproduce945Tests.cs" />
     <Compile Include="Reproduce\Reproduce953Tests.cs" />
