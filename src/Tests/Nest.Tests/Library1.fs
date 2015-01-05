@@ -40,7 +40,6 @@ type BaseTest<'i, 'descriptor, 'ois when 'descriptor : (new : unit ->  'descript
         match matches with 
         | false -> failwithf "expected:\r\n%s\r\nactual:\r\n%s" x._expected actual |> ignore
         | _ -> "" |> ignore
-        
 
     [<Fact>]
     member x.``Fluent Syntax serializes to expect json``() = x._jsonEquals x._fluentSerialized
