@@ -49,7 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LiterateTests.cs" />
+    <Compile Include="SerializationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="search-apis\request-body-search\FromAndSize.cs" />
   </ItemGroup>

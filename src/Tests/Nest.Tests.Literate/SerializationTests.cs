@@ -10,30 +10,30 @@ using Xunit;
 
 namespace Nest.Tests.Literate
 {
-	public abstract class LiterateTests<TInterface, TDescriptor, TInitializer>
+	public abstract class SerializationTests<TInterface, TDescriptor, TInitializer>
 		where TDescriptor : TInterface, new() where TInitializer : TInterface
 	{
 		protected ConnectionSettings Settings { get; private set; }
 		protected IConnection Connection { get; private set; }
 		protected IElasticClient Client { get; private set; }
 
-		public abstract object ExpectedJson { get; }
-		public abstract TInitializer InitializerExample { get; }
-		public abstract TDescriptor FluentExample(TDescriptor descriptor);
-
 		protected readonly string initializerJson;
 		protected readonly string fluentJson;
 		protected readonly string expectedJson;
 
-		public LiterateTests()
+		public SerializationTests(
+			object ExpectedJson,
+			TInitializer InitializerExample,
+			Func<TDescriptor, TDescriptor> FluentExample 
+			)
 		{
 			this.Settings = new ConnectionSettings();
 			this.Connection = new InMemoryConnection(this.Settings);
 			this.Client = new ElasticClient(this.Settings, this.Connection);
 
-			this.initializerJson = this.Serialize(this.InitializerExample);
-			this.fluentJson = this.Serialize(this.FluentExample(new TDescriptor()));
-			this.expectedJson = this.Serialize(this.ExpectedJson);
+			this.initializerJson = this.Serialize(InitializerExample);
+			this.fluentJson = this.Serialize(FluentExample(new TDescriptor()));
+			this.expectedJson = this.Serialize(ExpectedJson);
 		}
 
 		protected string Serialize<TObject>(TObject o)
