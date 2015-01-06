@@ -22,7 +22,7 @@ namespace Nest.Tests.Literate
 		public static IConnection CreateConnection(IConnectionSettingsValues connectionSettings)
 		{
 			if (RunIntegrationTests()) return new HttpConnection(connectionSettings);
-			return new HttpConnection(Settings);
+			return new InMemoryConnection(Settings);
 		}
 
 

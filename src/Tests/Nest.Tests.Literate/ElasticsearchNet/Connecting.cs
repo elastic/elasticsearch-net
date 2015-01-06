@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.ConnectionPool;
@@ -51,6 +47,13 @@ namespace Nest.Tests.Literate.ElasticsearchNet
 			var config = new ConnectionConfiguration(connectionPool);
 			var client = new ElasticsearchClient(config);
 		}
+		
+		///hello world
+		///asdasdasd
+		
+		//yellow!
+
+
 		/** 
 		 * Here instead of directly passing `node`, we pass a `SniffingConnectionPool` which will use our `node` to find out the rest of the available cluster nodes.
 		 * Be sure to read more about [Connection Pooling and Cluster Failover here](/elasticsearch-net/cluster-failover.html)
@@ -177,7 +180,6 @@ namespace Nest.Tests.Literate.ElasticsearchNet
 			/**
 			*  ...but may become tedious when using connection pooling with multiple nodes.
 			*/
-			;
 		}
 
 		public void ConfiguringSSL()

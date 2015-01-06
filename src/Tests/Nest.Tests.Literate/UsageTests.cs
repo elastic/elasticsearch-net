@@ -28,8 +28,8 @@ namespace Nest.Tests.Literate
 		where TDescriptor : TInterface, new() where TInitializer : TInterface
 		where TResponse : IResponse
 	{
-		public abstract int ExpectStatusCode();
-		public abstract bool ExpectIsValid();
+		public abstract int ExpectStatusCode { get; }
+		public abstract bool ExpectIsValid { get; }
 		public abstract void AssertUrl(string url);
 
 		protected abstract TResponse Initializer(IElasticClient client);
@@ -52,12 +52,8 @@ namespace Nest.Tests.Literate
 		}
 
 
-		[Fact]
-		protected void HandlesStatusCode()
-		{
-			var code = this.ExpectStatusCode();
-			this.Dispatch(r=>r.ConnectionStatus.HttpStatusCode.Should().Be(code));
-		}
+		[Fact] void HandlesStatusCode() =>
+			this.Dispatch(r=>r.ConnectionStatus.HttpStatusCode.Should().Be(this.ExpectStatusCode));
 
 	}
 }

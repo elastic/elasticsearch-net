@@ -7,6 +7,7 @@ using Nest;
 using Nest.Tests.Literate;
 using Ploeh.AutoFixture;
 using Xunit;
+using FluentAssertions;
 
 namespace SearchApis.RequestBody
 {
@@ -36,31 +37,24 @@ namespace SearchApis.RequestBody
 
 		public class Usage : EndpointUsageTests<ISearchRequest, SearchDescriptor<object>, SearchRequest<object>, ISearchResponse<object>>
 		{
-			public override int ExpectStatusCode() { return 200; }
+			public override int ExpectStatusCode => 200;
 
-			public override bool ExpectIsValid() { return true; }
+			public override bool ExpectIsValid => true;
 
-			public override void AssertUrl(string url)
-			{
-				throw new NotImplementedException();
-			}
+			public override void AssertUrl(string url) => url.Should().EndWith("");
 
-			protected override ISearchResponse<object> Initializer(IElasticClient client)
-			{
-				return client.Search<object>(new SearchRequest()
-				{
+			protected override ISearchResponse<object> Initializer(IElasticClient client) =>
+				client.Search<object>(new SearchRequest()
+				{ 
 					From = 10,
 					Size = 12
 				});
-			}
 
-			protected override ISearchResponse<object> Fluent(IElasticClient client)
-			{
-				return client.Search<object>(s => s
+			protected override ISearchResponse<object> Fluent(IElasticClient client) =>
+				client.Search<object>(s => s
 					.From(10)
 					.Size(12)
 				);
-			}
 		}
 	}
 }
