@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Connection;
 using FluentAssertions;
 using Newtonsoft.Json.Linq;
+using Ploeh.AutoFixture;
 using Xunit;
 
 namespace Nest.Tests.Literate
@@ -13,32 +14,39 @@ namespace Nest.Tests.Literate
 	public abstract class SerializationTests<TInterface, TDescriptor, TInitializer>
 		where TDescriptor : TInterface, new() where TInitializer : TInterface
 	{
-		protected ConnectionSettings Settings { get; private set; }
-		protected IConnection Connection { get; private set; }
-		protected IElasticClient Client { get; private set; }
+		protected readonly Fixture _fixture = new Fixture();
+		protected static readonly Fixture Fix = new Fixture();
 
+		protected static TReturn Create<TReturn>()
+		{
+			return Fix.Create<TReturn>();
+		}
+
+		private readonly object _expectedJson;
+		private readonly TInitializer _initializer;
+		private readonly TDescriptor _fluent;
 		protected readonly string initializerJson;
 		protected readonly string fluentJson;
 		protected readonly string expectedJson;
 
 		public SerializationTests(
 			object ExpectedJson,
-			TInitializer InitializerExample,
-			Func<TDescriptor, TDescriptor> FluentExample 
+			TInitializer Initializer,
+			Func<TDescriptor, TDescriptor> Fluent
 			)
 		{
-			this.Settings = new ConnectionSettings();
-			this.Connection = new InMemoryConnection(this.Settings);
-			this.Client = new ElasticClient(this.Settings, this.Connection);
+			this._expectedJson = ExpectedJson;
+			this._initializer = Initializer;
+			this._fluent = Fluent(new TDescriptor());
 
-			this.initializerJson = this.Serialize(InitializerExample);
-			this.fluentJson = this.Serialize(FluentExample(new TDescriptor()));
+			this.initializerJson = this.Serialize(Initializer);
+			this.fluentJson = this.Serialize(this._fluent);
 			this.expectedJson = this.Serialize(ExpectedJson);
 		}
 
 		protected string Serialize<TObject>(TObject o)
 		{
-			var bytes = this.Client.Serializer.Serialize(o);
+			var bytes = TestClient.Client.Serializer.Serialize(o);
 			return Encoding.UTF8.GetString(bytes);
 		}
 
@@ -64,6 +72,27 @@ namespace Nest.Tests.Literate
 			this.AssertJsonEquals(this.expectedJson, this.initializerJson);
 		}
 
+		[Fact]
+		public void fluent_syntax_serializes_to_expected_json()
+		{
+			this.AssertJsonEquals(this.expectedJson, this.fluentJson);
+		}
+
+		[Fact]
+		public void initializer_syntax_roundtrips_withoutloss()
+		{
+			var stream = new MemoryStream(Encoding.UTF8.GetBytes(this.initializerJson));
+			var deserialized = TestClient.Client.Serializer.Deserialize<TInitializer>(stream);
+			this._initializer.ShouldBeEquivalentTo(deserialized);
+		}
+
+		[Fact]
+		public void fluent_syntax_roundtrips_withoutloss()
+		{
+			var stream = new MemoryStream(Encoding.UTF8.GetBytes(this.fluentJson));
+			var deserialized = TestClient.Client.Serializer.Deserialize<TDescriptor>(stream);
+			this._fluent.ShouldBeEquivalentTo(deserialized);
+		}
 
 	}
 }

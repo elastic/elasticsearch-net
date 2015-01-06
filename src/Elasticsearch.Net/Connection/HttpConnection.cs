@@ -189,6 +189,7 @@ namespace Elasticsearch.Net.Connection
 			request.Accept = "application/json";
 			request.ContentType = "application/json";
 			request.MaximumResponseHeadersLength = -1;
+			request.ServicePoint.SetTcpKeepAlive(true, 2000, 2000);
 			request.Pipelined = this.ConnectionSettings.HttpPipeliningEnabled
 				|| (requestSpecificConfig != null && requestSpecificConfig.EnableHttpPipelining);
 
