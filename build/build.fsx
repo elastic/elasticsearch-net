@@ -42,14 +42,14 @@ Target "BuildApp" (fun _ ->
     ]
 
     MSBuild null "Rebuild" msbuildProperties (seq { yield "src/Elasticsearch.sln" }) 
-    gitLink()
+    if not isMono then gitLink()
 
     //moves all the release builds to build/output/PROJECTNAME
     !! "src/**/*.csproj"
       |> Seq.map(fun f -> (f, buildDir + directoryInfo(f).Name.Replace(".csproj", "")))
       |> Seq.iter(fun (f,d) -> 
         CreateDir d
-        CopyDir d (directoryInfo(f).Parent.FullName + @"\bin\Release") allFiles
+        CopyDir d (directoryInfo(f).Parent.FullName + @"/bin/Release") allFiles
       )
     
     //Scan for xml docs and patch them to replace <inheritdoc /> with the documentation
