@@ -1,78 +1,51 @@
-﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using System;
+﻿using Nest.Litterateur.Documentation;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Text.RegularExpressions;
 
 namespace Nest.Litterateur
 {
 	class Program
 	{
-		static Object x = 1;
-		static void Main(string[] args)
+		static void Main(string[] args) =>
+			LitUp.Go();
+
+		public static class LitUp
 		{
-			var code = File.ReadAllText(@"c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Literate\ElasticsearchNet\Connecting.cs");
-			var ast = CSharpSyntaxTree.ParseText(code);
-			var walker = new CodeGenerationWalker();
-			walker.Visit(ast.GetRoot());
+			private readonly static string _testFolder = @"..\..\..\..\..\src\Tests\Nest.Tests.Literate";
+			private readonly static string _docFolder = @"..\..\..\..\..\docs\contents\new";
+			private static readonly string[] _skipFolders = new[] { "Nest.Tests.Literate", "Debug", "Release" };
 
-		}
-	}
+			public static IEnumerable<DocumentationFile> FindAll()
+			{
+				var csfiles = Directory.GetFiles(_testFolder, "*.cs", SearchOption.AllDirectories);
+				foreach (var csfile in csfiles)
+				{
+					var dirInfo = new DirectoryInfo(csfile);
+					var fileInfo = new FileInfo(csfile);
+					if (_skipFolders.Contains(dirInfo.Parent.Name))
+						continue;
 
-	class CodeGenerationWalker : CSharpSyntaxWalker
-	{
-		public CodeGenerationWalker() : base(SyntaxWalkerDepth.StructuredTrivia) { }
+					yield return DocumentationFile.Load(csfile);
+				}
+			}
 
-		private int ClassDepth { get; set; }
-		private bool InsideMultiLineDocumentation { get; set; }
+			public static void Go()
+			{
+				var files = FindAll();
+				foreach(var file in files)
+				{
+					var path = Regex.Replace(file.FileName, @"(^.+\\Nest.Tests.Literate\\|\.cs$)", "") + ".md";
+					var docFileName = Path.GetFullPath(Path.Combine(_docFolder, path));
+					var fileInfo = new FileInfo(docFileName);
+					Directory.CreateDirectory(fileInfo.Directory.FullName);
+					File.WriteAllText(docFileName, file.Body);
+				}
 
-		public override void VisitClassDeclaration(ClassDeclarationSyntax node)
-		{
-			++ClassDepth;
-			base.VisitClassDeclaration(node);
-			--ClassDepth;
-		}
+			}
 
-		public override void VisitXmlText(XmlTextSyntax node)
-		{
-			var text = node.TextTokens.ToFullString();
-			base.VisitXmlText(node);
-		}
-
-		public override void VisitTrivia(SyntaxTrivia trivia)
-		{
-			if (trivia.CSharpKind() != SyntaxKind.MultiLineDocumentationCommentTrivia) return;
-
-			this.InsideMultiLineDocumentation = true;
-			base.VisitTrivia(trivia);
-			this.InsideMultiLineDocumentation = false;
-		}
-
-		public override void VisitTrailingTrivia(SyntaxToken token)
-		{
-			if (!this.InsideMultiLineDocumentation) return;
-			if (token.CSharpKind() != SyntaxKind.XmlTextLiteralToken) return;
-
-			base.VisitTrailingTrivia(token);
-		}
-
-		public override void VisitToken(SyntaxToken token)
-		{
-			base.VisitToken(token);
-		}
-
-		public override void DefaultVisit(SyntaxNode node)
-		{
-			base.DefaultVisit(node);
-		}
-
-		public override void Visit(SyntaxNode node)
-		{
-			base.Visit(node);
+				
 		}
 	}
 }

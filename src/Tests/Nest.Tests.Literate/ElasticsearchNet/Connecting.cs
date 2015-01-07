@@ -48,12 +48,6 @@ namespace Nest.Tests.Literate.ElasticsearchNet
 			var client = new ElasticsearchClient(config);
 		}
 		
-		///hello world
-		///asdasdasd
-		
-		//yellow!
-
-
 		/** 
 		 * Here instead of directly passing `node`, we pass a `SniffingConnectionPool` which will use our `node` to find out the rest of the available cluster nodes.
 		 * Be sure to read more about [Connection Pooling and Cluster Failover here](/elasticsearch-net/cluster-failover.html)
@@ -127,7 +121,7 @@ namespace Nest.Tests.Literate.ElasticsearchNet
 				//endhide
 				.SetConnectionStatusHandler(s => { })
 				/** 
-				* Allows you to pass a `Action<IElasticsearchResponse>` that can eaves drop every time a response (good or bad) is created. If you have complex logging needs 
+				* Allows you to pass a `Action&lt;IElasticsearchResponse&gt;` that can eaves drop every time a response (good or bad) is created. If you have complex logging needs 
 				* this is a good place to add that in.
 				*/
 
