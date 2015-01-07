@@ -23,10 +23,9 @@ Target "Clean" (fun _ ->
 let gitLink = fun _ ->
     let exe = "build/tools/gitlink/lib/net45/GitLink.exe"
     let command = if isMono then (sprintf "mono %s" exe) else exe
-    let branch = if isMono then "develop" else "develop"
     ExecProcess(fun p ->
       p.FileName <- command
-      p.Arguments <- sprintf @". -u https://github.com/elasticsearch/elasticsearch-net -b %s" branch
+      p.Arguments <- sprintf @". -u https://github.com/elasticsearch/elasticsearch-net -b develop" 
     ) (TimeSpan.FromMinutes 5.0) |> ignore
  
 Target "BuildApp" (fun _ ->
