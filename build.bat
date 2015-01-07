@@ -7,12 +7,12 @@ if not exist build\tools\nuget\nuget.exe (
 )
 
 REM we need FAKE to process our build scripts
-if not exist build\tools\gitlink\lib\net45\gitlink.exe (
+if not exist build\tools\FAKE\tools\Fake.exe (
     ECHO FAKE not found.. Installing..
     "build\tools\nuget\nuget.exe" "install" "FAKE" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
 )
 
-if not exist build\tools\Node.js\node.exe (
+if not exist build\tools\gitlink\lib\net45\gitlink.exe (
     ECHO Local node not found.. Installing..
     "build\tools\nuget\nuget.exe" "install" "gitlink" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
 )
