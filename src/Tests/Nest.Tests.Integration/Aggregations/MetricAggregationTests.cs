@@ -173,6 +173,12 @@ namespace Nest.Tests.Integration.Aggregations
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
+				.Query(q => q
+					.Match(m => m
+						.OnField(p => p.Name)
+						.Query("elasticsearch")
+					)
+				)
 				.Aggregations(a => a
 					.Terms("top-countries", t => t
 						.Field(p => p.Country)
@@ -187,6 +193,26 @@ namespace Nest.Tests.Integration.Aggregations
 									.Include(p => p.Name)
 								)
 								.Size(1)
+								.Explain(true)
+								.Version(true)
+								.Highlight(h => h
+									.PreTags("<em>")
+									.PostTags("</em>")
+									.OnFields(hf => hf
+										.OnField(p => p.Name)
+										.PreTags("<em>")
+										.PostTags("</em>")
+									)
+								)
+								.ScriptFields(sf => sf
+									.Add("locscriptfield", sff => sff
+										.Script("doc['loc'].value * multiplier")
+										.Params(sp => sp
+											.Add("multiplier", 2)
+										)
+									)
+								)
+								.FieldDataFields(p => p.Name, p => p.Country)
 							)
 						)
 					)
@@ -198,11 +224,17 @@ namespace Nest.Tests.Integration.Aggregations
 			var topCountries = results.Aggs.Terms("top-countries").Items;
 			foreach(var topCountry in topCountries)
 			{
-				var topHits = topCountry.TopHitsMetric("top-country-hits");
+				var topHits = topCountry.TopHits("top-country-hits");
 				topHits.Should().NotBeNull();
 				topHits.Total.Should().BeGreaterThan(0);
 				var hits = topHits.Hits<ElasticsearchProject>();
 				hits.Should().NotBeEmpty().And.NotContain(h=> h.Id.IsNullOrEmpty() || h.Index.IsNullOrEmpty());
+				hits.All(h => h.Explanation != null).Should().BeTrue();
+				hits.All(h => !h.Version.IsNullOrEmpty()).Should().BeTrue();
+				hits.All(h => h.Highlights.Count() > 0).Should().BeTrue();
+				hits.All(h => h.Fields.FieldValues<int[]>("locscriptfield").HasAny()).Should().BeTrue();
+				hits.All(h => h.Fields.FieldValues<string[]>("name").HasAny()).Should().BeTrue();
+				hits.All(h => h.Fields.FieldValues<string[]>("country").HasAny()).Should().BeTrue();
 				topHits.Documents<ElasticsearchProject>().Should().NotBeEmpty();
 			}
 		}
