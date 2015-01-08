@@ -12,6 +12,9 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeConverter<IndicesQueryDescriptor<object>>))]
 	public interface IIndicesQuery : IQuery
 	{
+		[JsonProperty("indices")]
+		IEnumerable<string> Indices { get; set; }
+
 		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
 		NestedScore? Score { get; set; }
 
@@ -22,9 +25,6 @@ namespace Nest
 		[JsonProperty("no_match_query")]
 		[JsonConverter(typeof(NoMatchQueryConverter))]
 		IQueryContainer NoMatchQuery { get; set; }
-
-		[JsonProperty("indices")]
-		IEnumerable<string> Indices { get; set; }
 	}
 
 	public class NoMatchQueryConverter : CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>
