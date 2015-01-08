@@ -26,7 +26,7 @@ namespace Nest
 				(p, d) => this.RawDispatch.SnapshotRestoreDispatch<RestoreResponse>(p, d)
 			);
 		}
-		
+
 		/// <inheritdoc />
 		public Task<IRestoreResponse> RestoreAsync(IRestoreRequest restoreRequest)
 		{
@@ -48,22 +48,22 @@ namespace Nest
 			);
 		}
 
-        /// <inheritdoc />
-        public IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, IRestoreRequest restoreRequest)
-	    {
-            restoreRequest.ThrowIfNull("restoreRequest");
-	        var observable = new RestoreObservable(this, restoreRequest);
-	        return observable;
-	    }
+		/// <inheritdoc />
+		public IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, IRestoreRequest restoreRequest)
+		{
+			restoreRequest.ThrowIfNull("restoreRequest");
+			var observable = new RestoreObservable(this, restoreRequest);
+			return observable;
+		}
 
-        /// <inheritdoc />
-        public IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, Func<RestoreDescriptor, RestoreDescriptor> restoreSelector = null)
-        {
-            restoreSelector.ThrowIfNull("restoreSelector");
+		/// <inheritdoc />
+		public IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, Func<RestoreDescriptor, RestoreDescriptor> restoreSelector = null)
+		{
+			restoreSelector.ThrowIfNull("restoreSelector");
 
-            var restoreDescriptor = restoreSelector(new RestoreDescriptor());
-            var observable = new RestoreObservable(this, restoreDescriptor);
-            return observable;
-	    }
+			var restoreDescriptor = restoreSelector(new RestoreDescriptor());
+			var observable = new RestoreObservable(this, restoreDescriptor);
+			return observable;
+		}
 	}
 }

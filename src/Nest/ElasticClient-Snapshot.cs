@@ -48,26 +48,26 @@ namespace Nest
 			);
 		}
 
-        /// <inheritdoc />
-        public IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null)
-        {
-            snapshotSelector.ThrowIfNull("snapshotSelector");
+		/// <inheritdoc />
+		public IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null)
+		{
+			snapshotSelector.ThrowIfNull("snapshotSelector");
 
-            var snapshotDescriptor = snapshotSelector(new SnapshotDescriptor());
-            var observable = new SnapshotObservable(this, snapshotDescriptor);
-            return observable;
-        }
+			var snapshotDescriptor = snapshotSelector(new SnapshotDescriptor());
+			var observable = new SnapshotObservable(this, snapshotDescriptor);
+			return observable;
+		}
 
-	    /// <inheritdoc />
-        public IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, ISnapshotRequest snapshotRequest)
-	    {
-            snapshotRequest.ThrowIfNull("snapshotRequest");
-	        var observable = new SnapshotObservable(this, snapshotRequest);
-	        return observable;
-	    }
+		/// <inheritdoc />
+		public IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, ISnapshotRequest snapshotRequest)
+		{
+			snapshotRequest.ThrowIfNull("snapshotRequest");
+			var observable = new SnapshotObservable(this, snapshotRequest);
+			return observable;
+		}
 
 
-	    /// <inheritdoc />
+		/// <inheritdoc />
 		public IGetSnapshotResponse GetSnapshot(string repository, string snapshotName, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null)
 		{
 			snapshotName.ThrowIfNullOrEmpty("name");
@@ -99,7 +99,7 @@ namespace Nest
 				(p, d) => this.RawDispatch.SnapshotGetDispatchAsync<GetSnapshotResponse>(p)
 			);
 		}
-		
+
 		/// <inheritdoc />
 		public Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest getSnapshotRequest)
 		{
@@ -136,7 +136,7 @@ namespace Nest
 				(p, d) => this.RawDispatch.SnapshotStatusDispatchAsync<SnapshotStatusResponse>(p)
 			);
 		}
-		
+
 		/// <inheritdoc />
 		public Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest getSnapshotRequest)
 		{

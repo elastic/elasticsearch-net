@@ -184,6 +184,8 @@
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataStringMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\MappingTransform.cs" />
+    <Compile Include="Domain\Observers\RestoreObserver.cs" />
+    <Compile Include="Domain\Observers\SnapshotObserver.cs" />
     <Compile Include="Domain\Repository\SnapshotShardFailure.cs" />
     <Compile Include="Domain\Responses\ClusterRerouteResponse.cs" />
     <Compile Include="Domain\Cat\CatAliasesRecord.cs" />
@@ -203,9 +205,9 @@
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Cat\ICatRecord.cs" />
-    <Compile Include="Domain\Responses\Observer.cs" />
-    <Compile Include="Domain\Responses\RestoreObservable.cs" />
-    <Compile Include="Domain\Responses\SnapshotObservable.cs" />
+    <Compile Include="Domain\Observers\Observer.cs" />
+    <Compile Include="Domain\Observers\RestoreObservable.cs" />
+    <Compile Include="Domain\Observers\SnapshotObservable.cs" />
     <Compile Include="Domain\Responses\UpgradeResponse.cs" />
     <Compile Include="Domain\Responses\UpgradeStatusResponse.cs" />
     <Compile Include="Domain\Responses\VerifyRepositoryResponse.cs" />
@@ -616,8 +618,8 @@
     <Compile Include="DSL\Suggest\SuggestBucket.cs" />
     <Compile Include="DSL\Suggest\TermSuggestDescriptor.cs" />
     <Compile Include="Exception\ReindexException.cs" />
-    <Compile Include="Domain\Responses\ReindexObservable.cs" />
-    <Compile Include="Domain\Responses\ReindexObserver.cs" />
+    <Compile Include="Domain\Observers\ReindexObservable.cs" />
+    <Compile Include="Domain\Observers\ReindexObserver.cs" />
     <Compile Include="Domain\Responses\ReindexResponse.cs" />
     <Compile Include="ElasticClient-Reindex.cs" />
     <Compile Include="Domain\Hit\HighlightCollection.cs" />
