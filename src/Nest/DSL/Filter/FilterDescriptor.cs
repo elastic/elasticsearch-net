@@ -606,6 +606,34 @@ namespace Nest
 			filter.Value = type;
 			return  this.New(filter, f => f.Type = filter);
 		}
+		
+		/// <summary>
+		/// The indices filter can be used when executed across multiple indices, allowing to have a 
+		/// filter that executes only when executed on an index that matches a specific list of indices, 
+		/// and another filter that executes when it is executed on an index that does not match the listed indices.
+		/// </summary>
+		public FilterContainer Indices<K>(Action<IndicesFilterDescriptor<K>> filterSelector) where K : class
+		{
+			var filter = new IndicesFilterDescriptor<K>();
+			if (filterSelector != null)
+				filterSelector(filter);
+
+			return this.New(filter, f => f.Indices = filter);
+		}
+
+		/// <summary>
+		/// The indices filter can be used when executed across multiple indices, allowing to have a 
+		/// filter that executes only when executed on an index that matches a specific list of indices, 
+		/// and another filter that executes when it is executed on an index that does not match the listed indices.
+		/// </summary>
+		public FilterContainer Indices(Action<IndicesFilterDescriptor<T>> filterSelector) 
+		{
+			var filter = new IndicesFilterDescriptor<T>();
+			if (filterSelector != null)
+				filterSelector(filter);
+
+			return this.New(filter, f => f.Indices = filter);
+		}
 
 		/// <summary>
 		/// Filters documents matching the provided document / mapping type. 

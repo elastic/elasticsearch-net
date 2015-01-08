@@ -69,6 +69,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "limit")]
 		ILimitFilter Limit { get; set; }
 
+		[JsonProperty(PropertyName = "indices")]
+		IIndicesFilter Indices { get; set; }
+
 		[JsonProperty(PropertyName = "type")]
 		ITypeFilter Type { get; set; }
 
