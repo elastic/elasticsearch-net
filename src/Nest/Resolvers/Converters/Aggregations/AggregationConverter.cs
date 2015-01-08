@@ -412,13 +412,11 @@ namespace Nest.Resolvers.Converters.Aggregations
 						reader.Read();
 						break;
 					case "from_as_string":
-						reader.Read();
-						fromAsString = reader.Value as string;
+						fromAsString = reader.ReadAsString();
 						reader.Read();
 						break;
 					case "to_as_string":
-						reader.Read();
-						toAsString = reader.Value as string;
+						toAsString = reader.ReadAsString();
 						reader.Read();
 						break;
 					case "doc_count":

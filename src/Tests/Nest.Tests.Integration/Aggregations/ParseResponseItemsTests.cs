@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest.Tests.MockData.Domain;
@@ -180,6 +181,20 @@ namespace Nest.Tests.Integration.Aggregations
 		    firstAgg.Items.Should().NotBeEmpty();
 			var grams = firstAgg.Items.OfType<RangeItem>();
 			grams.Should().NotBeEmpty();
+		    var firstRange = grams.FirstOrDefault();
+		    firstRange.Should().NotBeNull();
+		    firstRange.To.Should().HaveValue();
+		    firstRange.ToAsString.Should().NotBeNull();
+		    var firstRangeToDateLeft = firstRange.To.Value.JavaTimeStampToDateTime();
+		    var firstRangeToDateRight = DateTime.Parse(firstRange.ToAsString);
+		    firstRangeToDateLeft.Should().Be(firstRangeToDateRight);
+		    var lastRange = grams.LastOrDefault();
+            lastRange.Should().NotBeNull();
+            lastRange.From.Should().HaveValue();
+            lastRange.FromAsString.Should().NotBeNull();
+            var LastRangeFromDateLeft = lastRange.From.Value.JavaTimeStampToDateTime();
+            var LastRangeFromDateRight = DateTime.Parse(lastRange.FromAsString);
+            LastRangeFromDateLeft.Should().Be(LastRangeFromDateRight);
 	    }
 		[Test]
 	    public void IpRangeItem()
