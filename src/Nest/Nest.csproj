@@ -258,6 +258,8 @@
     <Compile Include="DSL\Aggregations\TopHitsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\GeoBoundsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ReverseNestedAggregationDescriptor.cs" />
+    <Compile Include="DSL\Filter\IndicesFilterDescriptor.cs" />
+    <Compile Include="Domain\DSL\NoMatchShortcut.cs" />
     <Compile Include="DSL\UpgradeDescriptor.cs" />
     <Compile Include="DSL\UpgradeStatusDescriptor.cs" />
     <Compile Include="DSL\VerifyRepositoryDescriptor.cs" />

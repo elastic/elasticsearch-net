@@ -56,6 +56,8 @@ namespace Nest
 
 		ITypeFilter IFilterContainer.Type { get; set; }
 
+		IIndicesFilter IFilterContainer.Indices { get; set; }
+
 		IMatchAllFilter IFilterContainer.MatchAll { get; set; }
 
 		IHasChildFilter IFilterContainer.HasChild { get; set; }
