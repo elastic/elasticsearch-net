@@ -35,7 +35,7 @@ namespace Elasticsearch.Net.Connection
 
 		private DateTime? _lastSniff;
 
-		private readonly int DefaultPingTimeout = 200;
+		private const int DefaultPingTimeout = 200;
 
 		public IConnectionConfigurationValues Settings { get { return ConfigurationValues; } }
 		public IElasticsearchSerializer Serializer { get { return _serializer; } }
@@ -193,7 +193,7 @@ namespace Elasticsearch.Net.Connection
 
 					using (response.Response)
 					{
-						return Sniffer.FromStream(response, response.Response, this.Serializer);
+						return Sniffer.FromStream(response, response.Response, this.Serializer, this.Connection.PreferedTransportOrder);
 					}
 				}
 			}

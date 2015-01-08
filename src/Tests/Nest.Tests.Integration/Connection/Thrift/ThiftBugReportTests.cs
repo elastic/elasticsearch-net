@@ -36,8 +36,38 @@ namespace Nest.Tests.Integration.Core.Bulk
 			result.Success.Should().BeTrue();
 			result.OriginalException.Should().BeNull();
 		}
-
+		
 		[Test]
+		[Ignore("Relies on having two nodes running with thrift enabled on port 9500 and 9501")]
+		public void ShouldFailoverOnThriftConnectionsUsingSniff()
+		{
+			var uris = new []
+			{
+				new Uri("http://INVALID_HOST"),
+				new Uri("http://INVALID_HOST2"),
+				new Uri("http://localhost:9500"),
+			};
+			var connectionPool = new SniffingConnectionPool(uris, randomizeOnStartup: false);
+			var settings = new ConnectionSettings(connectionPool, ElasticsearchConfiguration.DefaultIndex)
+				.SniffOnStartup()
+				.ExposeRawResponse()
+				.SetTimeout(2000);
+			var client = new ElasticClient(settings, new ThriftConnection(settings));
+
+			var results = client.Search<dynamic>(s => s.MatchAll());
+			results.IsValid.Should().BeTrue("{0}", results.ConnectionStatus.ToString());
+			results.ConnectionStatus.NumberOfRetries.Should().Be(0);
+			var u = new Uri(results.ConnectionStatus.RequestUrl);
+			u.Port.Should().Be(9500);
+
+			results = client.Search<dynamic>(s => s.MatchAll());
+			results.IsValid.Should().BeTrue("{0}", results.ConnectionStatus.ToString());
+			results.ConnectionStatus.NumberOfRetries.Should().Be(0);
+			u = new Uri(results.ConnectionStatus.RequestUrl);
+			u.Port.Should().Be(9501);
+		}
+		[Test]
+		[Ignore("Relies on having one node running with thrift enabled on port 9500")]
 		public void ShouldFailoverOnThriftConnections()
 		{
 			var uris = new []

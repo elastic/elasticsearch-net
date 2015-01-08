@@ -16,6 +16,8 @@ namespace Elasticsearch.Net.Connection
 	{
 		private readonly IConnectionConfigurationValues _settings;
 
+		public string[] PreferedTransportOrder { get { return null; } }
+
 		static HttpClientConnection()
 		{
 			// brought over from HttpClient

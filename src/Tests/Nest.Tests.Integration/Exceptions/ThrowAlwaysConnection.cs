@@ -9,6 +9,8 @@ namespace Nest.Tests.Integration.Exceptions
 {
 	public class ThrowAlwaysConnection : IConnection
 	{
+		public string[] PreferedTransportOrder { get { return null; }}
+
 		public Task<ElasticsearchResponse<Stream>> Get(Uri uri, IRequestConfiguration requestConfiguration = null)
 		{
 			throw new NotImplementedException();

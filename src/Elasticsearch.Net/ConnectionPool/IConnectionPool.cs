@@ -45,5 +45,6 @@ namespace Elasticsearch.Net.ConnectionPool
 		/// <param name="newClusterState"></param>
 		/// <param name="sniffNode">hint that the node we recieved the sniff from should not be pinged</param>
 		void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null);
+
 	}
 }

@@ -23,6 +23,10 @@ namespace Elasticsearch.Net.Connection
 		private readonly Semaphore _resourceLock;
 		private readonly bool _enableTrace;
 
+		private readonly string[] _transports;
+
+		public string[] PreferedTransportOrder { get { return _transports; } }
+
 		static HttpConnection()
 		{
 			ServicePointManager.UseNagleAlgorithm = false;
@@ -39,10 +43,12 @@ namespace Elasticsearch.Net.Connection
 				HttpWebRequest.DefaultMaximumErrorResponseLength = -1;
 		}
 
-		public HttpConnection(IConnectionConfigurationValues settings)
+		public HttpConnection(IConnectionConfigurationValues settings, bool sniffHttpsOnly = false)
 		{
 			if (settings == null)
 				throw new ArgumentNullException("settings");
+			
+			if (sniffHttpsOnly) _transports = new []{ "https "};
 
 			this.ConnectionSettings = settings;
 			if (settings.MaximumAsyncConnections > 0)
@@ -91,6 +97,7 @@ namespace Elasticsearch.Net.Connection
 			var r = this.CreateHttpWebRequest(uri, method, data, requestSpecificConfig);
 			return this.DoSynchronousRequest(r, data, requestSpecificConfig);
 		}
+
 
 		public virtual Task<ElasticsearchResponse<Stream>> Get(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{

@@ -10,6 +10,10 @@ namespace Elasticsearch.Net.Connection
 {
 	public interface IConnection
 	{
+		/// <summary>
+		/// Signals to sniff which type of adresses are valid for this connection implementation
+		/// </summary>
+		string[] PreferedTransportOrder { get; }
 
 		Task<ElasticsearchResponse<Stream>> Get(Uri uri, IRequestConfiguration requestConfiguration = null);
 		ElasticsearchResponse<Stream> GetSync(Uri uri, IRequestConfiguration requestConfiguration = null);
