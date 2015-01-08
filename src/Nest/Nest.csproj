@@ -203,6 +203,9 @@
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Cat\ICatRecord.cs" />
+    <Compile Include="Domain\Responses\Observer.cs" />
+    <Compile Include="Domain\Responses\RestoreObservable.cs" />
+    <Compile Include="Domain\Responses\SnapshotObservable.cs" />
     <Compile Include="Domain\Responses\UpgradeResponse.cs" />
     <Compile Include="Domain\Responses\UpgradeStatusResponse.cs" />
     <Compile Include="Domain\Responses\VerifyRepositoryResponse.cs" />
@@ -412,6 +415,8 @@
     <Compile Include="Enums\NormsLoading.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
     <Compile Include="Enums\ScriptLang.cs" />
+    <Compile Include="Exception\RestoreException.cs" />
+    <Compile Include="Exception\SnapshotException.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="Obsolete\Obsolete.cs" />
