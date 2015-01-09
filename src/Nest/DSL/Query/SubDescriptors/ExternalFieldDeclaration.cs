@@ -1,7 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
-
-namespace Nest
+﻿namespace Nest
 {
 	public class ExternalFieldDeclaration : IExternalFieldDeclaration
 	{

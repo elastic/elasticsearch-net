@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
-using FluentAssertions;
 using NUnit.Framework;
 using System.Linq.Expressions;
 using Newtonsoft.Json;

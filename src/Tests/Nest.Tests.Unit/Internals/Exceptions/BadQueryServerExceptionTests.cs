@@ -1,11 +1,7 @@
 ﻿using System.Reflection;
-using Elasticsearch.Net.Connection;
 using FluentAssertions;
 using Nest.Tests.MockData.Domain;
-using Newtonsoft.Json.Converters;
 using NUnit.Framework;
-using System;
-using Elasticsearch.Net;
 
 namespace Nest.Tests.Unit.Internals.Exceptions
 {

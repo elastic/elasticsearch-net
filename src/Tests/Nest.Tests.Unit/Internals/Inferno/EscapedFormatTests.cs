@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
 using Elasticsearch.Net;
 
 namespace Nest.Tests.Unit.Internals.Inferno

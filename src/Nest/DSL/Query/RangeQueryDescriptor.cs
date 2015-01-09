@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using Nest.DSL.Query.Behaviour;
 using Newtonsoft.Json;
 using System.Linq.Expressions;

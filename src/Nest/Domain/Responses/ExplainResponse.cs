@@ -1,8 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using Nest.Domain;
+﻿using Nest.Domain;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Nest
 {

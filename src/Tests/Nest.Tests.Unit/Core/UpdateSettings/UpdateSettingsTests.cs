@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 using NUnit.Framework;
 
 namespace Nest.Tests.Unit.Core.UpdateSettings
