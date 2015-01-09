@@ -8,6 +8,7 @@ using Elasticsearch.Net.Tests.Unit.Stubs;
 using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
+using Elasticsearch.Net.ConnectionPool;
 
 namespace Elasticsearch.Net.Tests.Unit.ConnectionPools
 {
@@ -73,5 +74,16 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionPools
 			}
 		}
 
+		[Test]
+		public void HttpsUri_UsingSsl_IsTrue()
+		{
+			Assert.IsTrue(new SingleNodeConnectionPool(new Uri("https://test1")).UsingSsl);
+		}
+
+		[Test]
+		public void HttpUri_UsingSsl_IsFalse()
+		{
+			Assert.IsFalse(new SingleNodeConnectionPool(new Uri("http://test1")).UsingSsl);
+		}
 	}
 }

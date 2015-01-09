@@ -510,5 +510,61 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionPools
 				getCall.MustHaveHappened(Repeated.Exactly.Once);
 			}
 		}
+
+		[Test]
+		public void AllHttpsUris_DoesNotThrow()
+		{
+			var nodes = new Uri[]
+			{
+				new Uri("https://test1"),
+				new Uri("https://test2")
+			};
+			Assert.DoesNotThrow(() => new StaticConnectionPool(nodes));
+		}
+		
+		[Test]
+		public void AllHttpsUris_UsingSsl_IsTrue()
+		{
+			var nodes = new Uri[]
+			{
+				new Uri("https://test1"),
+				new Uri("https://test2")
+			};
+			Assert.IsTrue(new StaticConnectionPool(nodes).UsingSsl);
+		}
+
+
+		[Test]
+		public void AllHttpUris_DoesNotThrow()
+		{
+			var nodes = new Uri[]
+			{
+				new Uri("http://test1"),
+				new Uri("http://test2")
+			};
+			Assert.DoesNotThrow(() => new StaticConnectionPool(nodes));
+		}
+
+		[Test]
+		public void AllHttpUris_UsingSsl_IsFalse()
+		{
+			var nodes = new Uri[]
+			{
+				new Uri("http://test1"),
+				new Uri("http://test2")
+			};
+			Assert.IsFalse(new StaticConnectionPool(nodes).UsingSsl);
+		}
+
+		[Test]
+		public void HttpAndHttpsUris_Throws()
+		{
+			var nodes = new Uri[]
+			{
+				new Uri("http://test1"),
+				new Uri("https://test2")
+			};
+			Assert.Throws<ArgumentException>(() => new StaticConnectionPool(nodes));
+		}
 	}
 }
