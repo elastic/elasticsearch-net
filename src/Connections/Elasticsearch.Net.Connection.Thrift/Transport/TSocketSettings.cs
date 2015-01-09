@@ -1,5 +1,4 @@
-﻿
-namespace Elasticsearch.Net.Connection.Thrift.Transport
+﻿namespace Elasticsearch.Net.Connection.Thrift.Transport
 {
 	public class TSocketSettings
 	{

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 
 /*
  * Taken from SolrNet https://github.com/mausch/SolrNet/blob/master/SolrNet/Location.cs

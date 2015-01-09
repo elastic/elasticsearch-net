@@ -1,4 +1,3 @@
-using System.IO;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 

@@ -5,19 +5,13 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using CodeGeneration.YamlTestsRunner.Domain;
 using CsQuery;
 using CsQuery.ExtensionMethods.Internal;
-using FubuCore.Util;
 using FubuCsProjFile;
 using ShellProgressBar;
 using Xipton.Razor;
-using YamlDotNet;
-using YamlDotNet.RepresentationModel;
 using YamlDotNet.Serialization;
 
 namespace CodeGeneration.YamlTestsRunner
@@ -25,14 +19,14 @@ namespace CodeGeneration.YamlTestsRunner
 	using YamlTestSuite = Dictionary<string, object>;
 	public static class YamlTestsGenerator
 	{
-		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/v1.3.2/rest-api-spec/test";
-		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/v1.3.2/rest-api-spec/test/";
-		private readonly static string _testProjectFolder = @"..\..\..\..\..\src\Tests\Elasticsearch.Net.Integration.Yaml\";
-		private readonly static string _rawClientInterface = @"..\..\..\..\..\src\Elasticsearch.Net\IElasticsearchClient.generated.cs";
-		private readonly static string _viewFolder = @"..\..\Views\";
-		private readonly static string _cacheFolder = @"..\..\YamlCache\";
-		
-		private static readonly RazorMachine _razorMachine;
+	    private const string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/v1.3.2/rest-api-spec/test";
+	    private const string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/v1.3.2/rest-api-spec/test/";
+	    private const string _testProjectFolder = @"..\..\..\..\..\src\Tests\Elasticsearch.Net.Integration.Yaml\";
+	    private const string _rawClientInterface = @"..\..\..\..\..\src\Elasticsearch.Net\IElasticsearchClient.generated.cs";
+	    private const string _viewFolder = @"..\..\Views\";
+	    private const string _cacheFolder = @"..\..\YamlCache\";
+
+	    private static readonly RazorMachine _razorMachine;
 		private static readonly Assembly _assembly;
 		public static IEnumerable<string> RawElasticCalls;
 

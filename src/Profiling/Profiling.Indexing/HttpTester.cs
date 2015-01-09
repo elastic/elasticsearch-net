@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Nest;
+﻿using Nest;
 
 namespace Profiling.Indexing
 {
@@ -11,8 +9,6 @@ namespace Profiling.Indexing
 			var settings = this.CreateSettings(indexName, 9200);
 			var client = new ElasticClient(settings);
 			return client;
-		}
-		
-
+		}	
 	}
 }

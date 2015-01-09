@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Nest
+﻿namespace Nest
 {
 	/// <summary>
 	/// A char filter of type html_strip stripping out HTML elements from an analyzed text.
@@ -12,7 +10,5 @@ namespace Nest
 		{
 
 		}
-
 	}
-
 }

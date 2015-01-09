@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Elasticsearch.Net.Connection;
+﻿using Elasticsearch.Net.Connection;
 using Nest;
 
 namespace Profiling.Indexing
@@ -13,7 +11,5 @@ namespace Profiling.Indexing
 			var client = new ElasticClient(settings, new HttpClientConnection(settings));
 			return client;
 		}
-		
-
 	}
 }

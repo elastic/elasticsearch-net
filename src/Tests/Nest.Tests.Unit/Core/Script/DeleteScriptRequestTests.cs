@@ -1,5 +1,4 @@
-﻿using System;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using NUnit.Framework;
 
 namespace Nest.Tests.Unit.Core.Script

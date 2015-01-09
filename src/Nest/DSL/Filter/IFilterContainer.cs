@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Nest.DSL.Visitor;
+﻿using Nest.DSL.Visitor;
 using Nest.Resolvers.Converters;
 using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;

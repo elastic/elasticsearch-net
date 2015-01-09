@@ -1,5 +1,3 @@
-using System;
-using System.Reflection;
 using Elasticsearch.Net;
 using NUnit.Framework;
 

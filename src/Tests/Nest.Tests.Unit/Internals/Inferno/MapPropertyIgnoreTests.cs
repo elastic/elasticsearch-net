@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using FluentAssertions;
 using NUnit.Framework;
-using System.Linq.Expressions;
 using Newtonsoft.Json;
 
 namespace Nest.Tests.Unit.Internals.Inferno

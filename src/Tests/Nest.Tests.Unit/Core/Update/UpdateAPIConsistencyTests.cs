@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Reflection;
 using NUnit.Framework;
-using Nest.Tests.MockData.Domain;
-using NUnit.Framework.Constraints;
 
 namespace Nest.Tests.Unit.Core.Update
 {
