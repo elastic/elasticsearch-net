@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 		}
 		
 		[Test]
-		//[Ignore("Relies on having two nodes running with thrift enabled on port 9500 and 9501 and the order they are returned")]
+		[Ignore("Relies on having two nodes running with thrift enabled on port 9500 and 9501 and the order they are returned")]
 		public void ShouldFailoverOnThriftConnectionsUsingSniff()
 		{
 			var uris = new []
@@ -58,13 +58,13 @@ namespace Nest.Tests.Integration.Core.Bulk
 			results.IsValid.Should().BeTrue("{0}", results.ConnectionStatus.ToString());
 			results.ConnectionStatus.NumberOfRetries.Should().Be(0);
 			var u = new Uri(results.ConnectionStatus.RequestUrl);
-			u.Port.Should().Be(9501);
+			u.Port.Should().Be(9500);
 
 			results = client.Search<dynamic>(s => s.MatchAll());
 			results.IsValid.Should().BeTrue("{0}", results.ConnectionStatus.ToString());
 			results.ConnectionStatus.NumberOfRetries.Should().Be(0);
 			u = new Uri(results.ConnectionStatus.RequestUrl);
-			u.Port.Should().Be(9500);
+			u.Port.Should().Be(9501);
 		}
 		[Test]
 		[Ignore("Relies on having one node running with thrift enabled on port 9500")]

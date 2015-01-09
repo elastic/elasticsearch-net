@@ -270,6 +270,8 @@ namespace Elasticsearch.Net.Connection.Thrift
 			queue.Enqueue(connection);
 		}
 
+		private object _additionLock = new object();
+
 		private Rest.Client GetClientForUri(Uri baseUri, out string errorMessage)
 		{
 			errorMessage = null;
@@ -278,12 +280,19 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 			if (!this._clients.TryGetValue(baseUri, out queue))
 			{
-				//unknown endpoint lets set up some closed connections
-				queue = new ConcurrentQueue<Rest.Client>();
-				var max = Math.Max(10, this._maximumConnections);
-				for (var i = 0; i < max; i++)
-					CreateClient(baseUri, queue);
-				this._clients.TryAdd(baseUri, queue);
+				//lock because multiple threads might evaluate to true
+				lock (_additionLock)
+				{
+					if (!this._clients.TryGetValue(baseUri, out queue))
+					{
+						//unknown endpoint lets set up some closed connections
+						queue = new ConcurrentQueue<Rest.Client>();
+						var max = Math.Max(10, this._maximumConnections);
+						for (var i = 0; i < max; i++)
+							CreateClient(baseUri, queue);
+						this._clients.TryAdd(baseUri, queue);
+					}
+				}
 			}
 			if (!queue.TryDequeue(out client))
 				errorMessage = string.Format("Could not dequeue connection for {0}", baseUri);
