@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net.Providers
@@ -19,28 +20,20 @@ namespace Elasticsearch.Net.Providers
 		private class NodeState
 		{
 			public string http_address { get; set; }
-			public string https_address { get; set; }
 			public string thrift_address { get; set; }
 
-			public Uri GetFirstAddress(IEnumerable<string> orderedBindings)
+			public Uri GetFirstAddress(TransportAddressScheme addressScheme)
 			{
-				foreach (var binding in orderedBindings)
+				switch (addressScheme)
 				{
-					switch (binding)
-					{
-						case "http": 
-							if (!http_address.IsNullOrEmpty())
-								return Parse(binding, this.http_address);
-							break;
-						case "https": 
-							if (!https_address.IsNullOrEmpty())
-								return Parse(binding, this.https_address);
-							break;
-						case "thrift": 
-							if (!thrift_address.IsNullOrEmpty())
-								return Parse("http", this.thrift_address);
-							break;
-					}
+					case TransportAddressScheme.Http:
+						if (!http_address.IsNullOrEmpty())
+							return Parse("http", this.http_address);
+						break;
+					case TransportAddressScheme.Thrift:
+						if (!thrift_address.IsNullOrEmpty())
+							return Parse("thrift", this.thrift_address);
+						break;
 				}
 				return null;
 			}
@@ -56,9 +49,9 @@ namespace Elasticsearch.Net.Providers
 			return new Uri("{0}://{1}:{2}".F(scheme, host, port));
 
 		}
-		public static IList<Uri> FromStream(IElasticsearchResponse response, Stream stream, IElasticsearchSerializer serializer, string[] preferedTransportOrder = null)
+		public static IList<Uri> FromStream(IElasticsearchResponse response, Stream stream, IElasticsearchSerializer serializer, TransportAddressScheme? preferedTransportOrder = null)
 		{
-			var order = preferedTransportOrder.HasAny() ? preferedTransportOrder : new[] {"http", "https"};
+			var order = preferedTransportOrder.GetValueOrDefault(TransportAddressScheme.Http);
 			var result = serializer.Deserialize<NodeInfoResponse>(stream);
 			return result.nodes.Values
 				.Select(kv => kv.GetFirstAddress(order))

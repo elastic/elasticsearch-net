@@ -15,8 +15,8 @@ namespace Elasticsearch.Net.Connection.Thrift
 {
 	public class ThriftConnection : IConnection, IDisposable
 	{
-		private static readonly string[] _transports = { "thrift" };
-		public string[] PreferedTransportOrder { get { return _transports; } }
+		public TransportAddressScheme? AddressScheme { get 
+		{ return Elasticsearch.Net.Connection.TransportAddressScheme.Thrift; } }
 
 		private readonly ConcurrentDictionary<Uri, ConcurrentQueue<Rest.Client>> _clients =
 			new ConcurrentDictionary<Uri, ConcurrentQueue<Rest.Client>>();

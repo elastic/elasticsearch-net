@@ -25,7 +25,7 @@ namespace Elasticsearch.Net.Connection
 
 		private readonly string[] _transports;
 
-		public string[] PreferedTransportOrder { get { return _transports; } }
+		public TransportAddressScheme? AddressScheme { get; private set; }
 
 		static HttpConnection()
 		{

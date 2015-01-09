@@ -8,12 +8,19 @@ using Elasticsearch.Net.Connection.Configuration;
 
 namespace Elasticsearch.Net.Connection
 {
+	public enum TransportAddressScheme
+	{
+		Http,
+		Thrift
+	}
+
 	public interface IConnection
 	{
 		/// <summary>
-		/// Signals to sniff which type of adresses are valid for this connection implementation
+		/// The uri scheme this connection looks for when sniffing.
+		/// if no value is set in an implementation http is assumed
 		/// </summary>
-		string[] PreferedTransportOrder { get; }
+		TransportAddressScheme? AddressScheme { get; }
 
 		Task<ElasticsearchResponse<Stream>> Get(Uri uri, IRequestConfiguration requestConfiguration = null);
 		ElasticsearchResponse<Stream> GetSync(Uri uri, IRequestConfiguration requestConfiguration = null);

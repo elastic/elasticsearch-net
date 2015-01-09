@@ -48,7 +48,7 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 		}
 
 
-		public string[] PreferedTransportOrder { get; private set; }
+		public TransportAddressScheme? AddressScheme { get; private set; }
 
 		public virtual Task<ElasticsearchResponse<Stream>> Get(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{

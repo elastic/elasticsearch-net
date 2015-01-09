@@ -193,7 +193,7 @@ namespace Elasticsearch.Net.Connection
 
 					using (response.Response)
 					{
-						return Sniffer.FromStream(response, response.Response, this.Serializer, this.Connection.PreferedTransportOrder);
+						return Sniffer.FromStream(response, response.Response, this.Serializer, this.Connection.AddressScheme);
 					}
 				}
 			}
