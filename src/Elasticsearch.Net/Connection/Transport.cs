@@ -36,6 +36,7 @@ namespace Elasticsearch.Net.Connection
 		private DateTime? _lastSniff;
 
 		private const int DefaultPingTimeout = 200;
+		private readonly int SslDefaultPingTimeout = 500;
 
 		public IConnectionConfigurationValues Settings { get { return ConfigurationValues; } }
 		public IElasticsearchSerializer Serializer { get { return _serializer; } }
@@ -158,7 +159,9 @@ namespace Elasticsearch.Net.Connection
 
 		IList<Uri> ITransportDelegator.Sniff(ITransportRequestState ownerState = null)
 		{
-			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(DefaultPingTimeout);
+			var defaultPingTimeout = this._connectionPool.UsingSsl ? SslDefaultPingTimeout : DefaultPingTimeout;
+			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(defaultPingTimeout);
+
 			var requestOverrides = new RequestConfiguration
 			{
 				ConnectTimeout = pingTimeout,

@@ -201,8 +201,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 
 		private IAggregation GetDateHistogramAggregation(JsonReader reader, JsonSerializer serializer)
 		{
-			reader.Read();
-			var keyAsString = reader.Value as string;
+			var keyAsString = reader.ReadAsString();
 			reader.Read(); reader.Read();
 			var key = (reader.Value as long?).GetValueOrDefault(0);
 			reader.Read(); reader.Read();
@@ -217,21 +216,18 @@ namespace Nest.Resolvers.Converters.Aggregations
 
 		private IAggregation GetKeyedBucketItem(JsonReader reader, JsonSerializer serializer)
 		{
-			reader.Read();
-			var key = reader.Value;
+			var key = reader.ReadAsString();
 			reader.Read();
 			var property = reader.Value as string;
 			if (property == "from" || property == "to")
-				return GetRangeAggregation(reader, serializer, key.ToString());
-
+				return GetRangeAggregation(reader, serializer, key);
 
 			var keyItem = new KeyItem();
-			keyItem.Key = key.ToString();
+			keyItem.Key = key;
 
 			if (property == "key_as_string")
 			{
-				reader.Read();
-				keyItem.KeyAsString = reader.Value.ToString();
+				keyItem.KeyAsString = reader.ReadAsString();
 				reader.Read();
 			}
 
@@ -407,18 +403,15 @@ namespace Nest.Resolvers.Converters.Aggregations
 						reader.Read();
 						break;
 					case "key":
-						reader.Read();
-						key = reader.Value as string;
+						key = reader.ReadAsString();
 						reader.Read();
 						break;
 					case "from_as_string":
-						reader.Read();
-						fromAsString = reader.Value as string;
+						fromAsString = reader.ReadAsString();
 						reader.Read();
 						break;
 					case "to_as_string":
-						reader.Read();
-						toAsString = reader.Value as string;
+						toAsString = reader.ReadAsString();
 						reader.Read();
 						break;
 					case "doc_count":

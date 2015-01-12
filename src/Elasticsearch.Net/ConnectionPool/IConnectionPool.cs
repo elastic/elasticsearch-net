@@ -18,7 +18,12 @@ namespace Elasticsearch.Net.ConnectionPool
 		/// Signals that this implemenation can accept new nodes
 		/// </summary>
 		bool AcceptsUpdates { get; }
-		
+
+		/// <summary>
+		/// Whether or not SSL is being using
+		/// </summary>
+		bool UsingSsl { get; }
+
 		/// <summary>
 		/// Gets the next live Uri to perform the request on
 		/// </summary>
