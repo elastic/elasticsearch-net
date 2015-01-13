@@ -27,8 +27,10 @@ namespace Elasticsearch.Net.Providers
 				switch (addressScheme)
 				{
 					case TransportAddressScheme.Http:
+					case TransportAddressScheme.Https:
+						var schema = addressScheme == TransportAddressScheme.Http ? "http" : "https";
 						if (!http_address.IsNullOrEmpty())
-							return Parse("http", this.http_address);
+							return Parse(schema, this.http_address);
 						break;
 					case TransportAddressScheme.Thrift:
 						if (!thrift_address.IsNullOrEmpty())

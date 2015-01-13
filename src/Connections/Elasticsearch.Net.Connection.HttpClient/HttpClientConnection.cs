@@ -36,6 +36,9 @@ namespace Elasticsearch.Net.Connection
 		public HttpClientConnection(IConnectionConfigurationValues settings, HttpClientHandler handler = null)
 		{
 			_settings = settings;
+			if (settings.ConnectionPool.UsingSsl)
+				this.AddressScheme = TransportAddressScheme.Https;
+			
 			DefaultContentType = "application/json";
 
 			var innerHandler = handler ?? new WebRequestHandler();

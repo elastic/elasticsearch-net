@@ -107,6 +107,7 @@
     <Compile Include="Connection\Failover\SniffTests.cs" />
     <Compile Include="Connection\HttpClient\HttpClientTests.cs" />
     <Compile Include="Connection\Security\BasicAuthenticationTests.cs" />
+    <Compile Include="Connection\Security\SniffingUsingSSLTests.cs" />
     <Compile Include="Connection\Security\UnauthorizedRequestTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Analyze\AnalyzeTests.cs" />

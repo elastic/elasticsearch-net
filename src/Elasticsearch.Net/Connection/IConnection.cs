@@ -11,6 +11,7 @@ namespace Elasticsearch.Net.Connection
 	public enum TransportAddressScheme
 	{
 		Http,
+		Https,
 		Thrift
 	}
 
