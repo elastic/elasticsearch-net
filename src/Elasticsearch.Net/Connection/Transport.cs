@@ -69,7 +69,6 @@ namespace Elasticsearch.Net.Connection
 				Self.SniffClusterState();
 		}
 
-
 		/* PING/SNIFF	*** ********************************************/
 
 		bool ITransportDelegator.Ping(ITransportRequestState requestState)
@@ -93,7 +92,7 @@ namespace Elasticsearch.Net.Connection
 				}
 				if (!response.HttpStatusCode.HasValue || response.HttpStatusCode.Value == -1)
 					throw new Exception("ping returned no status code", response.OriginalException);
-				if (response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
+				if (IsForbiddenOrUnauthorized(response))
 					throw new ElasticsearchAuthenticationException(response);
 				if (response.Response == null)
 					return response.Success;
@@ -138,7 +137,7 @@ namespace Elasticsearch.Net.Connection
 						var response = t.Result;
 						if (!response.HttpStatusCode.HasValue || response.HttpStatusCode.Value == -1)
 							throw new PingException(requestState.CurrentNode, t.Exception);
-						if (response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
+						if (IsForbiddenOrUnauthorized(response))
 							throw new ElasticsearchAuthenticationException(response);
 						using (response.Response)
 							return response.Success;
@@ -189,7 +188,7 @@ namespace Elasticsearch.Net.Connection
 						if (ownerState.RequestMetrics == null) ownerState.RequestMetrics = new List<RequestMetrics>();
 						ownerState.RequestMetrics.AddRange(requestState.RequestMetrics);
 					}
-					if (response.HttpStatusCode.HasValue && response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
+					if (IsForbiddenOrUnauthorized(response))
 						throw new ElasticsearchAuthenticationException(response);
 					if (response.Response == null)
 						return null;
@@ -324,6 +323,14 @@ namespace Elasticsearch.Net.Connection
 				&& (requestState.RequestConfiguration == null
 					|| !requestState.RequestConfiguration.DisablePing.GetValueOrDefault(false));
 
+		}
+
+		private bool IsForbiddenOrUnauthorized(IElasticsearchResponse response)
+		{
+			var unauthorized = response.HttpStatusCode.HasValue
+				&& response.HttpStatusCode == (int)HttpStatusCode.Forbidden
+				|| response.HttpStatusCode == (int)HttpStatusCode.Unauthorized;
+			return unauthorized;
 		}
 
 		public ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
