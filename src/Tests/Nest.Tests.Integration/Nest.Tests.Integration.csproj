@@ -182,6 +182,7 @@
     <Compile Include="Core\AsyncTests.cs" />
     <Compile Include="Mapping\MappingVisitorTests.cs" />
     <Compile Include="Mapping\GetMultipleMappingTests.cs" />
+    <Compile Include="Reproduce\Reproduce1202Tests.cs" />
     <Compile Include="Reproduce\Reproduce1079Tests.cs" />
     <Compile Include="Reproduce\Reproduce1169Tests.cs" />
     <Compile Include="Reproduce\Reproduce1176Tests.cs" />
