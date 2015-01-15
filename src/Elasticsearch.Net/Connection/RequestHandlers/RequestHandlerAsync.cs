@@ -75,7 +75,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			requestState.SeenExceptions.Add(t.Exception.InnerException);
 			
 			// If the ping exception was that of an unauthorized exception, 
-			var authenticationException = t.Exception.InnerException as ElasticsearchAuthenticationException;
+			var authenticationException = t.Exception.InnerException as ElasticsearchAuthException;
 			if (authenticationException != null)
 			{
 				var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
@@ -152,7 +152,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
 			if (t.Exception != null)
 			{
-				var authenticationException = t.Exception.InnerException as ElasticsearchAuthenticationException;
+				var authenticationException = t.Exception.InnerException as ElasticsearchAuthException;
 
 				if (authenticationException != null)
 				{
@@ -174,7 +174,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 		protected void SetAuthenticationExceptionOnRequestState<T>(
 			TransportRequestState<T> requestState,
-			ElasticsearchAuthenticationException exception,
+			ElasticsearchAuthException exception,
 			TaskCompletionSource<ElasticsearchResponse<T>> tcs)
 		{
 			var result = this.HandleAuthenticationException(requestState, exception);

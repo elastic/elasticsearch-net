@@ -237,13 +237,13 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				this._delegator.SniffOnStaleClusterState(requestState);
 				return null;
 			}
-			catch(ElasticsearchAuthenticationException e)
+			catch(ElasticsearchAuthException e)
 			{
 				return this.HandleAuthenticationException(requestState, e);
 			}
 		}
 
-		protected ElasticsearchResponse<T> HandleAuthenticationException<T>(TransportRequestState<T> requestState, ElasticsearchAuthenticationException exception)
+		protected ElasticsearchResponse<T> HandleAuthenticationException<T>(TransportRequestState<T> requestState, ElasticsearchAuthException exception)
 		{
 			if (requestState.ClientSettings.ThrowOnElasticsearchServerExceptions)
 				throw exception.ToElasticsearchServerException();

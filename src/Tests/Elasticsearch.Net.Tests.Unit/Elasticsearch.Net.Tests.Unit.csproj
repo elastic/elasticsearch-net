@@ -59,6 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectionPools\Sniffing\SniffingNotAuthenticatedTests.cs" />
+    <Compile Include="ConnectionPools\Sniffing\SniffingUnauthorizedTests.cs" />
     <Compile Include="Exceptions\ExceptionsBubbleTests.cs" />
     <Compile Include="Failover\Concurrent\ConcurrencyTestConnection.cs" />
     <Compile Include="Failover\Retries\ClientExceptionsUsingPoolingTests.cs" />
@@ -84,7 +86,7 @@
     <Compile Include="Stubs\FakeCalls.cs" />
     <Compile Include="Stubs\FakeResponse.cs" />
     <Compile Include="Failover\Revival\RevivalTests.cs" />
-    <Compile Include="ConnectionPools\SniffingConnectionPoolTests.cs" />
+    <Compile Include="ConnectionPools\Sniffing\SniffingConnectionPoolTests.cs" />
     <Compile Include="Failover\Concurrent\ConcurrencyTests.cs" />
     <Compile Include="ConnectionPools\StaticConnectionPoolTests.cs" />
     <Compile Include="Failover\Retries\StatusCodeRetryHandlingTests.cs" />

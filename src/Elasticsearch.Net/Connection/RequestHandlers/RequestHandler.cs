@@ -152,7 +152,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				var response = this.CoordinateRequest(requestState, maxRetries, retried, ref aliveResponse);
 				if (response != null) return response;
 			}
-			catch (ElasticsearchAuthenticationException e)
+			catch (ElasticsearchAuthException e)
 			{
 				return this.HandleAuthenticationException(requestState, e);
 			}
@@ -197,7 +197,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			{
 				this._delegator.SniffOnConnectionFailure(requestState);
 			}
-			catch (ElasticsearchAuthenticationException e)
+			catch (ElasticsearchAuthException e)
 			{
 				//If the sniff already returned a 401 fail/return a response as early as possible
 				return this.HandleAuthenticationException(requestState, e);

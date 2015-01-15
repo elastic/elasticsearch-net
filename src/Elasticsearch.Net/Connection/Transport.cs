@@ -93,14 +93,13 @@ namespace Elasticsearch.Net.Connection
 				}
 				if (!response.HttpStatusCode.HasValue || response.HttpStatusCode.Value == -1)
 					throw new Exception("ping returned no status code", response.OriginalException);
-				if (IsForbiddenOrUnauthorized(response))
-					throw new ElasticsearchAuthenticationException(response);
+				this.ThrowAuthExceptionWhenNeeded(response);
 				if (response.Response == null)
 					return response.Success;
 				using (response.Response)
 					return response.Success;
 			}
-			catch (ElasticsearchAuthenticationException)
+			catch (ElasticsearchAuthException)
 			{
 				throw;
 			}
@@ -139,13 +138,13 @@ namespace Elasticsearch.Net.Connection
 						var response = t.Result;
 						if (!response.HttpStatusCode.HasValue || response.HttpStatusCode.Value == -1)
 							throw new PingException(requestState.CurrentNode, t.Exception);
-						if (IsForbiddenOrUnauthorized(response))
-							throw new ElasticsearchAuthenticationException(response);
+
+						this.ThrowAuthExceptionWhenNeeded(response);
 						using (response.Response)
 							return response.Success;
 					});
 			}
-			catch (ElasticsearchAuthenticationException)
+			catch (ElasticsearchAuthException)
 			{
 				throw;
 			}
@@ -190,8 +189,9 @@ namespace Elasticsearch.Net.Connection
 						if (ownerState.RequestMetrics == null) ownerState.RequestMetrics = new List<RequestMetrics>();
 						ownerState.RequestMetrics.AddRange(requestState.RequestMetrics);
 					}
-					if (IsForbiddenOrUnauthorized(response))
-						throw new ElasticsearchAuthenticationException(response);
+
+					this.ThrowAuthExceptionWhenNeeded(response);
+
 					if (response.Response == null)
 						return null;
 
@@ -205,10 +205,6 @@ namespace Elasticsearch.Net.Connection
 						);
 					}
 				}
-			}
-			catch (ElasticsearchAuthenticationException)
-			{
-				throw;
 			}
 			catch (MaxRetryException e)
 			{
@@ -327,12 +323,14 @@ namespace Elasticsearch.Net.Connection
 
 		}
 
-		private bool IsForbiddenOrUnauthorized(IElasticsearchResponse response)
+		private void ThrowAuthExceptionWhenNeeded(ElasticsearchResponse<Stream> response)
 		{
-			var unauthorized = response.HttpStatusCode.HasValue
-				&& response.HttpStatusCode == (int)HttpStatusCode.Forbidden
-				|| response.HttpStatusCode == (int)HttpStatusCode.Unauthorized;
-			return unauthorized;
+			var statusCode = response.HttpStatusCode.GetValueOrDefault(200);
+			switch (statusCode)
+			{
+				case 401: throw new ElasticsearchAuthenticationException(response);
+				case 403: throw new ElasticsearchAuthorizationException(response);
+			}
 		}
 
 		public ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
