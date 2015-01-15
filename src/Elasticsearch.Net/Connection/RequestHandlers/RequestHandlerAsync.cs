@@ -188,7 +188,12 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			{
 				requestState.SeenExceptions.Add(t.Exception);
 			}
+
 			var streamResponse = !t.IsFaulted ? t.Result : null;
+
+			if (streamResponse != null && streamResponse.OriginalException != null)
+				requestState.SeenExceptions.Add(streamResponse.OriginalException);
+
 			//var streamResponse = t.Result;
 			// Audit the call into connection straight away
 			rq.Finish(streamResponse != null && streamResponse.Success, streamResponse == null ? -1 : streamResponse.HttpStatusCode);

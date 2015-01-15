@@ -184,6 +184,8 @@
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataStringMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\MappingTransform.cs" />
+    <Compile Include="Domain\Observers\RestoreObserver.cs" />
+    <Compile Include="Domain\Observers\SnapshotObserver.cs" />
     <Compile Include="Domain\Repository\SnapshotShardFailure.cs" />
     <Compile Include="Domain\Responses\ClusterRerouteResponse.cs" />
     <Compile Include="Domain\Cat\CatAliasesRecord.cs" />
@@ -203,6 +205,9 @@
     <Compile Include="Domain\Responses\ExplainResponse.cs" />
     <Compile Include="Domain\Responses\GetFieldMappingResponse.cs" />
     <Compile Include="Domain\Cat\ICatRecord.cs" />
+    <Compile Include="Domain\Observers\Observer.cs" />
+    <Compile Include="Domain\Observers\RestoreObservable.cs" />
+    <Compile Include="Domain\Observers\SnapshotObservable.cs" />
     <Compile Include="Domain\Responses\UpgradeResponse.cs" />
     <Compile Include="Domain\Responses\UpgradeStatusResponse.cs" />
     <Compile Include="Domain\Responses\VerifyRepositoryResponse.cs" />
@@ -253,6 +258,8 @@
     <Compile Include="DSL\Aggregations\TopHitsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\GeoBoundsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ReverseNestedAggregationDescriptor.cs" />
+    <Compile Include="DSL\Filter\IndicesFilterDescriptor.cs" />
+    <Compile Include="Domain\DSL\NoMatchShortcut.cs" />
     <Compile Include="DSL\UpgradeDescriptor.cs" />
     <Compile Include="DSL\UpgradeStatusDescriptor.cs" />
     <Compile Include="DSL\VerifyRepositoryDescriptor.cs" />
@@ -412,6 +419,8 @@
     <Compile Include="Enums\NormsLoading.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
     <Compile Include="Enums\ScriptLang.cs" />
+    <Compile Include="Exception\RestoreException.cs" />
+    <Compile Include="Exception\SnapshotException.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="Obsolete\Obsolete.cs" />
@@ -611,8 +620,8 @@
     <Compile Include="DSL\Suggest\SuggestBucket.cs" />
     <Compile Include="DSL\Suggest\TermSuggestDescriptor.cs" />
     <Compile Include="Exception\ReindexException.cs" />
-    <Compile Include="Domain\Responses\ReindexObservable.cs" />
-    <Compile Include="Domain\Responses\ReindexObserver.cs" />
+    <Compile Include="Domain\Observers\ReindexObservable.cs" />
+    <Compile Include="Domain\Observers\ReindexObserver.cs" />
     <Compile Include="Domain\Responses\ReindexResponse.cs" />
     <Compile Include="ElasticClient-Reindex.cs" />
     <Compile Include="Domain\Hit\HighlightCollection.cs" />

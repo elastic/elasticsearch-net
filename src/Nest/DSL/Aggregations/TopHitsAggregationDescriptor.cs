@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Nest
@@ -23,6 +24,22 @@ namespace Nest
 
 		[JsonProperty("_source")]
 		ISourceFilter Source { get; set; }
+
+		[JsonProperty("highlight")]
+		IHighlightRequest Highlight { get; set; }
+
+		[JsonProperty("explain")]
+		bool? Explain { get; set; }
+
+		[JsonProperty("script_fields")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<string, IScriptFilter> ScriptFields { get; set; }
+
+		[JsonProperty("fielddata_fields")]
+		IEnumerable<PropertyPathMarker> FieldDataFields { get; set; }
+
+		[JsonProperty("version")] 
+		bool? Version { get; set; }
 	}
 
 	public class TopHitsAggregator : MetricAggregator, ITopHitsAggregator
@@ -31,6 +48,11 @@ namespace Nest
 		public int? Size { get; set; }
 		public IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
 		public ISourceFilter Source { get; set; }
+		public IHighlightRequest Highlight { get; set; }
+		public bool? Explain { get; set; }
+		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
+		public IEnumerable<PropertyPathMarker> FieldDataFields { get; set; }
+		public bool? Version { get; set; }
 	}
 
 	public class TopHitsAggregationDescriptor<T> 
@@ -46,6 +68,16 @@ namespace Nest
 		IList<KeyValuePair<PropertyPathMarker, ISort>> ITopHitsAggregator.Sort { get; set; }
 
 		ISourceFilter ITopHitsAggregator.Source { get; set; }
+
+		IHighlightRequest ITopHitsAggregator.Highlight { get; set; }
+
+		bool? ITopHitsAggregator.Explain { get; set; }
+
+		IDictionary<string, IScriptFilter> ITopHitsAggregator.ScriptFields { get; set; }
+
+		IEnumerable<PropertyPathMarker> ITopHitsAggregator.FieldDataFields { get; set; }
+
+		bool? ITopHitsAggregator.Version { get; set; }
 
 		public TopHitsAggregationDescriptor<T> From(int from)
 		{
@@ -85,6 +117,58 @@ namespace Nest
 		public TopHitsAggregationDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector)
 		{
 			this.Self.Source = sourceSelector(new SearchSourceDescriptor<T>());
+			return this;
+		}
+
+		public TopHitsAggregationDescriptor<T> Highlight(Func<HighlightDescriptor<T>, HighlightDescriptor<T>> highlightDescriptor)
+		{
+			highlightDescriptor.ThrowIfNull("highlightDescriptor");
+			this.Self.Highlight = highlightDescriptor(new HighlightDescriptor<T>());
+			return this;
+		}
+
+		public TopHitsAggregationDescriptor<T> Explain(bool explain = true)
+		{
+			this.Self.Explain = explain;
+			return this;
+		}
+
+		public TopHitsAggregationDescriptor<T> ScriptFields(
+			Func<FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>,
+		 FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>> scriptFields)
+		{
+			scriptFields.ThrowIfNull("scriptFields");
+			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>());
+			if (scriptFieldDescriptors == null || scriptFieldDescriptors.All(d => d.Value == null))
+			{
+				Self.ScriptFields = null;
+				return this;
+			}
+			Self.ScriptFields = new FluentDictionary<string, IScriptFilter>();
+			foreach (var d in scriptFieldDescriptors)
+			{
+				if (d.Value == null)
+					continue;
+				Self.ScriptFields.Add(d.Key, d.Value(new ScriptFilterDescriptor()));
+			}
+			return this;
+		}
+
+		public TopHitsAggregationDescriptor<T> FieldDataFields(params PropertyPathMarker[] fields)
+		{
+			this.Self.FieldDataFields = fields;
+			return this;
+		}
+
+		public TopHitsAggregationDescriptor<T> FieldDataFields(params Expression<Func<T, object>>[] objectPaths)
+		{
+			this.Self.FieldDataFields = objectPaths.Select(e => (PropertyPathMarker)e);
+			return this;
+		}
+
+		public TopHitsAggregationDescriptor<T> Version (bool version = true)
+		{
+			this.Self.Version = version;
 			return this;
 		}
 	}

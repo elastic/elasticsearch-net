@@ -12,7 +12,10 @@ if not exist build\tools\FAKE\tools\Fake.exe (
     "build\tools\nuget\nuget.exe" "install" "FAKE" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
 )
 
-"build\tools\nuget\nuget.exe" "install" "gitlink" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
+if not exist build\tools\gitlink\lib\net45\gitlink.exe (
+    ECHO Local node not found.. Installing..
+    "build\tools\nuget\nuget.exe" "install" "gitlink" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
+)
 
 REM we need nunit-console to run our tests
 if not exist build\tools\NUnit.Runners\tools\nunit-console.exe (

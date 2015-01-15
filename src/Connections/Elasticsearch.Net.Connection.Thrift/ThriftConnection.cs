@@ -48,10 +48,11 @@ namespace Elasticsearch.Net.Connection.Thrift
 				    var protocol = protocolFactory == null ? new TBinaryProtocol(transport) : protocolFactory.GetProtocol(transport);
 
 					var client = new Rest.Client(protocol);
+					tsocket.ConnectTimeout = this._connectionSettings.PingTimeout.GetValueOrDefault(200);
 					tsocket.Timeout = this._connectionSettings.Timeout;
 					tsocket.TcpClient.SendTimeout = this._connectionSettings.Timeout;
 					tsocket.TcpClient.ReceiveTimeout = this._connectionSettings.Timeout;
-					//tsocket.TcpClient.NoDelay = true;
+					tsocket.TcpClient.NoDelay = true;
 
 					queue.Enqueue(client);
 

@@ -12,6 +12,9 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeConverter<IndicesQueryDescriptor<object>>))]
 	public interface IIndicesQuery : IQuery
 	{
+		[JsonProperty("indices")]
+		IEnumerable<string> Indices { get; set; }
+
 		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
 		NestedScore? Score { get; set; }
 
@@ -20,10 +23,35 @@ namespace Nest
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty("no_match_query")]
+		[JsonConverter(typeof(NoMatchQueryConverter))]
 		IQueryContainer NoMatchQuery { get; set; }
+	}
 
-		[JsonProperty("indices")]
-		IEnumerable<string> Indices { get; set; }
+	public class NoMatchQueryConverter : CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>
+	{
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			if (reader.TokenType == JsonToken.String)
+			{
+				var en = serializer.Deserialize<NoMatchShortcut>(reader);
+				return new NoMatchQueryContainer {Shortcut = en};
+			}
+
+			return base.ReadJson(reader, objectType, existingValue, serializer);
+		}
+	}
+
+	public class NoMatchQueryContainer : QueryContainer, ICustomJson
+	{
+		public NoMatchShortcut? Shortcut { get; set; }
+
+		object ICustomJson.GetCustomJson()
+		{
+			if (this.Shortcut.HasValue) return this.Shortcut;
+			var f = ((IQueryContainer)this);
+			if (f.RawQuery.IsNullOrEmpty()) return f;
+			return new RawJson(f.RawQuery);
+		}
 	}
 
 	public class IndicesQuery : PlainQuery, IIndicesQuery
@@ -81,6 +109,12 @@ namespace Nest
 			return this;
 		}
 		
+		public IndicesQueryDescriptor<T> NoMatchQuery(NoMatchShortcut shortcut)
+		{
+			((IIndicesQuery)this).NoMatchQuery = new NoMatchQueryContainer { Shortcut = shortcut };
+			return this;
+		}
+
 		public IndicesQueryDescriptor<T> NoMatchQuery(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var qd = new QueryDescriptor<T>();
