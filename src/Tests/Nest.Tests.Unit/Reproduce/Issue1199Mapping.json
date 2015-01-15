@@ -1,0 +1,17 @@
+﻿{
+  "settings": {
+    "index": {}
+  },
+  "mappings": {
+    "x": {
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
