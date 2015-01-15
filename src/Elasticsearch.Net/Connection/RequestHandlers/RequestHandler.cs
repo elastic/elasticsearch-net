@@ -169,7 +169,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			catch (Exception e)
 			{
 				requestState.SeenExceptions.Add(e);
-				if (!requestState.UsingPooling || maxRetries == 0 && retried == 0)
+				if (maxRetries == 0 && retried == 0)
 				{
 					//TODO ifdef ExceptionDispatchInfo.Capture(ex).Throw();
 					throw;

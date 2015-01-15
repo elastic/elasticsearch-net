@@ -199,13 +199,13 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			rq.Finish(streamResponse != null && streamResponse.Success, streamResponse == null ? -1 : streamResponse.HttpStatusCode);
 			rq.Dispose();
 
-			//If we are not using any pooling and we see an exception we rethrow
-			//regardless whether maxretry is set.
-			if (!requestState.UsingPooling && t.IsFaulted && t.Exception != null)
-				throw t.Exception;
-
 			// Figure out the maximum number of retries, this might 
 			var maxRetries = this._delegator.GetMaximumRetries(requestState.RequestConfiguration);
+
+			//If we are not using any pooling and we see an exception we rethrow
+			if (!requestState.UsingPooling && t.IsFaulted && t.Exception != null && maxRetries == 0)
+				throw t.Exception;
+
 
 			var retried = requestState.Retried;
 

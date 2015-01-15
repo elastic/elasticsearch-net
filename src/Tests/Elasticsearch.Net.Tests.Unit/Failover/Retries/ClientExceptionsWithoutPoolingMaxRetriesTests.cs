@@ -13,18 +13,19 @@ using NUnit.Framework;
 namespace Elasticsearch.Net.Tests.Unit.Failover.Retries
 {
 	/// <summary>
-	/// When making calls without connectionpooling and no maxretries set 
-	/// calls should NEVER be retried and original exceptions should bubble out the client
-	/// WITHOUT being wrapped in a MaxRetryException
+	/// Normally when you are not using connection pooling exceptions are not retried 
+	/// unless when you set maxretries in which case we DO expect a maxretryexception and 
+	/// the call to be retried the number of specified retries
 	/// </summary>
 	[TestFixture]
-	public class ClientExceptionsWithoutPoolingTests
+	public class ClientExceptionsWithoutPoolingMaxRetriesTests
 	{
 		private static readonly int _retries = 4;
 
 		//we do not pass a Uri or IConnectionPool so this config
 		//defaults to SingleNodeConnectionPool()
-		private readonly ConnectionConfiguration _connectionConfig = new ConnectionConfiguration();
+		private readonly ConnectionConfiguration _connectionConfig = new ConnectionConfiguration()
+			.MaximumRetries(_retries);
 
 		[Test]
 		public void OnConnectionException_WithoutPooling_Retires()
@@ -39,11 +40,11 @@ namespace Elasticsearch.Net.Tests.Unit.Failover.Retries
 
 				var client = fake.Resolve<ElasticsearchClient>();
 
-				client.Settings.MaxRetries.Should().NotHaveValue();
+				client.Settings.MaxRetries.Should().Be(_retries);
 
-				var e = Assert.Throws<Exception>(() => client.Info());
-				e.Message.Should().Be("inner");
-				getCall.MustHaveHappened(Repeated.Exactly.Once);
+				var e = Assert.Throws<MaxRetryException>(() => client.Info());
+				e.InnerException.InnerException.Message.Should().Be("inner");
+				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 			}
 		}
 		
@@ -61,11 +62,11 @@ namespace Elasticsearch.Net.Tests.Unit.Failover.Retries
 
 				var client = fake.Resolve<ElasticsearchClient>();
 
-				client.Settings.MaxRetries.Should().NotHaveValue();
+				client.Settings.MaxRetries.Should().Be(_retries);
 
-				var e = Assert.Throws<Exception>(async () => await client.InfoAsync());
-				e.Message.Should().Be("inner");
-				getCall.MustHaveHappened(Repeated.Exactly.Once);
+				var e = Assert.Throws<MaxRetryException>(async () => await client.InfoAsync());
+				e.InnerException.InnerException.InnerException.Message.Should().Be("inner");
+				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 			}
 		}
 
@@ -86,11 +87,11 @@ namespace Elasticsearch.Net.Tests.Unit.Failover.Retries
 
 				var client = fake.Resolve<ElasticsearchClient>();
 
-				client.Settings.MaxRetries.Should().NotHaveValue();
+				client.Settings.MaxRetries.Should().Be(_retries);
 
-				var e = Assert.Throws<Exception>(async () => await client.InfoAsync());
-				e.Message.Should().Be("inner");
-				getCall.MustHaveHappened(Repeated.Exactly.Once);
+				var e = Assert.Throws<MaxRetryException>(async () => await client.InfoAsync());
+				e.InnerException.InnerException.InnerException.Message.Should().Be("inner");
+				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 			}
 		}
 

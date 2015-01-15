@@ -137,8 +137,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 					: new AggregateException(requestState.SeenExceptions);
 
 			//When we are not using pooling we forcefully rethrow the exception
-			//and never wrap it in a maxretry exception 
-			if (!requestState.UsingPooling && innerException != null)
+			if (!requestState.UsingPooling && innerException != null && maxRetries == 0)
 				throw innerException;
 		
 			var exceptionMessage = tookToLong 
