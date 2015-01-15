@@ -107,6 +107,7 @@
     <Compile Include="Connection\Failover\SniffTests.cs" />
     <Compile Include="Connection\HttpClient\HttpClientTests.cs" />
     <Compile Include="Connection\Security\BasicAuthenticationTests.cs" />
+    <Compile Include="Connection\Security\SniffingUsingSSLTests.cs" />
     <Compile Include="Connection\Security\UnauthorizedRequestTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Analyze\AnalyzeTests.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="Reproduce\Reproduce1079Tests.cs" />
     <Compile Include="Reproduce\Reproduce1169Tests.cs" />
     <Compile Include="Reproduce\Reproduce1176Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1193Tests.cs" />
     <Compile Include="Reproduce\Reproduce769Tests.cs" />
     <Compile Include="Reproduce\Reproduce945Tests.cs" />
     <Compile Include="Reproduce\Reproduce953Tests.cs" />

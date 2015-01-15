@@ -11,6 +11,8 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public bool AcceptsUpdates { get { return false; } }
 
+		public bool UsingSsl { get { return _uri.Scheme == Uri.UriSchemeHttps; } }
+
 		public SingleNodeConnectionPool(Uri uri)
 		{
 			//this makes sure that paths stay relative i.e if the root uri is:

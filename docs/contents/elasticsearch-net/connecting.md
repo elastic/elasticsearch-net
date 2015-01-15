@@ -116,3 +116,5 @@ The bare minimum to make .NET accept self-signed SSL certs that are not in the W
     ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
 
 However, this will accept all requests from the AppDomain to untrusted SSL sites, therefore we recommend doing some minimal introspection on the passed in certificate.
+
+			

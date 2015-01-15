@@ -20,6 +20,8 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public virtual bool AcceptsUpdates { get { return false; } }
 
+		public bool UsingSsl { get; internal set; }
+
 		public StaticConnectionPool(
 			IEnumerable<Uri> uris, 
 			bool randomizeOnStartup = true, 
@@ -30,6 +32,9 @@ namespace Elasticsearch.Net.ConnectionPool
 			var rnd = new Random();
 			uris.ThrowIfEmpty("uris");
 			NodeUris = uris.Distinct().ToList();
+			if (uris.Select(u => u.Scheme).Distinct().Count() > 1)
+				throw new ArgumentException("Mixed URI schemes detected.");
+			this.UsingSsl = uris.All(uri => uri.Scheme == Uri.UriSchemeHttps);
 			if (randomizeOnStartup)
 				NodeUris = NodeUris.OrderBy((item) => rnd.Next()).ToList();
 			UriLookup = NodeUris.ToDictionary(k=>k, v=> new EndpointState());

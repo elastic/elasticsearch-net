@@ -15,6 +15,9 @@ namespace Elasticsearch.Net.Connection.Thrift
 {
 	public class ThriftConnection : IConnection, IDisposable
 	{
+		public TransportAddressScheme? AddressScheme { get 
+		{ return Elasticsearch.Net.Connection.TransportAddressScheme.Thrift; } }
+
 		private readonly ConcurrentDictionary<Uri, ConcurrentQueue<Rest.Client>> _clients =
 			new ConcurrentDictionary<Uri, ConcurrentQueue<Rest.Client>>();
 		private readonly Semaphore _resourceLock;
@@ -22,44 +25,19 @@ namespace Elasticsearch.Net.Connection.Thrift
 		private readonly int _poolSize;
 		private bool _disposed;
 		private readonly IConnectionConfigurationValues _connectionSettings;
+		private readonly TProtocolFactory _protocolFactory;
+		private readonly int _maximumConnections;
 
 		public ThriftConnection(IConnectionConfigurationValues connectionSettings, TProtocolFactory protocolFactory = null)
 		{
 			this._connectionSettings = connectionSettings;
+			this._protocolFactory = protocolFactory;
 			this._timeout = connectionSettings.Timeout;
-			var connectionPool = this._connectionSettings.ConnectionPool;
-			var maximumConnections = Math.Max(1, connectionSettings.MaximumAsyncConnections);
-			var maximumUrls = connectionPool.MaxRetries + 1;
-			this._poolSize = maximumConnections;
-			this._resourceLock = new Semaphore(_poolSize, _poolSize);
 
-			int seed; int initialSeed = 0; bool shouldPingHint;
+			this._maximumConnections = this._connectionSettings.MaximumAsyncConnections;
+			if (this._maximumConnections > 0)
+				this._resourceLock = new Semaphore(this._maximumConnections, this._maximumConnections);
 
-			for (var i = 0; i < maximumUrls; i++)
-			{
-				var uri = connectionPool.GetNext(initialSeed, out seed, out shouldPingHint);
-				var queue = new ConcurrentQueue<Rest.Client>();
-				for (var c = 0; c < maximumConnections; c++)
-				{
-					var host = uri.Host;
-					var port = uri.Port;
-                    var tsocket = new TSocket(host, port, this._connectionSettings.Timeout);
-					var transport = new TBufferedTransport(tsocket, 1024);
-				    var protocol = protocolFactory == null ? new TBinaryProtocol(transport) : protocolFactory.GetProtocol(transport);
-
-					var client = new Rest.Client(protocol);
-					tsocket.ConnectTimeout = this._connectionSettings.PingTimeout.GetValueOrDefault(200);
-					tsocket.Timeout = this._connectionSettings.Timeout;
-					tsocket.TcpClient.SendTimeout = this._connectionSettings.Timeout;
-					tsocket.TcpClient.ReceiveTimeout = this._connectionSettings.Timeout;
-					tsocket.TcpClient.NoDelay = true;
-
-					queue.Enqueue(client);
-
-					initialSeed = seed;
-				}
-				_clients.TryAdd(uri, queue);
-			}
 		}
 
 		#region IConnection Members
@@ -239,7 +217,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			if (_disposed)
 				return;
 
-			foreach (var c in this._clients.SelectMany(c=>c.Value))
+			foreach (var c in this._clients.SelectMany(c => c.Value))
 			{
 				if (c != null
 					&& c.InputProtocol != null
@@ -259,40 +237,88 @@ namespace Elasticsearch.Net.Connection.Thrift
 			Dispose(false);
 		}
 
+		private Rest.Client CreateClient(Uri uri, ConcurrentQueue<Rest.Client> queue)
+		{
+			var host = uri.Host;
+			var port = uri.Port;
+			var tsocket = new TSocket(host, port, this._connectionSettings.Timeout);
+			var transport = new TBufferedTransport(tsocket, 1024);
+			var protocol = _protocolFactory == null ? new TBinaryProtocol(transport) : _protocolFactory.GetProtocol(transport);
 
+			var client = new Rest.Client(protocol);
+			tsocket.ConnectTimeout = this._connectionSettings.PingTimeout.GetValueOrDefault(200);
+			tsocket.Timeout = this._connectionSettings.Timeout;
+			tsocket.TcpClient.SendTimeout = this._connectionSettings.Timeout;
+			tsocket.TcpClient.ReceiveTimeout = this._connectionSettings.Timeout;
+			tsocket.TcpClient.NoDelay = true;
+			queue.Enqueue(client);
+			return client;
+		}
+
+		private Uri GetBaseBaseUri(Uri uri)
+		{
+			var path = uri.ToString();
+			var baseUri = new Uri(string.Format("{0}://{1}:{2}", uri.Scheme, uri.Host, uri.Port));
+			return baseUri;
+		}
+
+		private void EnqueueClient(Uri baseUri, Rest.Client connection)
+		{
+			ConcurrentQueue<Rest.Client> queue;
+			if (!this._clients.TryGetValue(baseUri, out queue))
+				return;
+			queue.Enqueue(connection);
+		}
+
+		private object _additionLock = new object();
+
+		private Rest.Client GetClientForUri(Uri baseUri, out string errorMessage)
+		{
+			errorMessage = null;
+			ConcurrentQueue<Rest.Client> queue;
+			Rest.Client client;
+
+			if (!this._clients.TryGetValue(baseUri, out queue))
+			{
+				//lock because multiple threads might evaluate to true
+				lock (_additionLock)
+				{
+					if (!this._clients.TryGetValue(baseUri, out queue))
+					{
+						//unknown endpoint lets set up some closed connections
+						queue = new ConcurrentQueue<Rest.Client>();
+						var max = Math.Max(10, this._maximumConnections);
+						for (var i = 0; i < max; i++)
+							CreateClient(baseUri, queue);
+						this._clients.TryAdd(baseUri, queue);
+					}
+				}
+			}
+			if (!queue.TryDequeue(out client))
+				errorMessage = string.Format("Could not dequeue connection for {0}", baseUri);
+			return client;
+		}
 
 		private ElasticsearchResponse<Stream> Execute(RestRequest restRequest, object requestConfiguration)
 		{
-			//RestResponse result = GetClient().execute(restRequest);
-			//
 			var method = Enum.GetName(typeof(Method), restRequest.Method);
+			var requestData = restRequest.Body;
 			var uri = restRequest.Uri;
 			var path = uri.ToString();
-			var baseUri = new Uri(string.Format("{0}://{1}:{2}", uri.Scheme, uri.Host, uri.Port));
-			var requestData = restRequest.Body;
-			if (!this._resourceLock.WaitOne(this._timeout))
+
+			if (this._resourceLock != null && !this._resourceLock.WaitOne(this._timeout))
 			{
 				var m = "Could not start the thrift operation before the timeout of " + this._timeout + "ms completed while waiting for the semaphore";
 				return ElasticsearchResponse<Stream>.CreateError(this._connectionSettings, new TimeoutException(m), method, path, requestData);
 			}
 			try
 			{
-				ConcurrentQueue<Rest.Client> queue;
-				if (!this._clients.TryGetValue(baseUri,out queue))
-				{
-					var m = string.Format("Could dequeue a thrift client from internal socket pool of size {0}", this._poolSize);
-					var status = ElasticsearchResponse<Stream>.CreateError(this._connectionSettings, new Exception(m), method, path, requestData);
-					return status;
-				}
-
-
-				Rest.Client client;
-				if (!queue.TryDequeue(out client))
-				{
-					var m = string.Format("Could dequeue a thrift client from internal socket pool of size {0}", this._poolSize);
-					var status = ElasticsearchResponse<Stream>.CreateError(this._connectionSettings, new Exception(m), method, path, requestData);
-					return status;
-				}
+				var baseUri = this.GetBaseBaseUri(uri);
+				string errorMessage;
+				var client = this.GetClientForUri(baseUri, out errorMessage);
+				if (client == null)
+					return ElasticsearchResponse<Stream>.CreateError(
+						this._connectionSettings, new Exception(errorMessage), method, path, requestData);
 				try
 				{
 					if (!client.InputProtocol.Transport.IsOpen)
@@ -329,9 +355,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 				}
 				finally
 				{
-					//make sure we make the client available again.
-					if (queue != null && client != null)
-						queue.Enqueue(client);
+					this.EnqueueClient(baseUri, client);
 				}
 
 			}
@@ -341,7 +365,8 @@ namespace Elasticsearch.Net.Connection.Thrift
 			}
 			finally
 			{
-				this._resourceLock.Release();
+				if (this._resourceLock != null)
+					this._resourceLock.Release();
 			}
 		}
 

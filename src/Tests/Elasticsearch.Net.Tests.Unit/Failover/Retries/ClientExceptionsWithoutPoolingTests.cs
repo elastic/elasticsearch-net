@@ -13,8 +13,9 @@ using NUnit.Framework;
 namespace Elasticsearch.Net.Tests.Unit.Failover.Retries
 {
 	/// <summary>
-	/// When we are not using connection pooling and an exception happens we expect no retries to happen
-	/// and the exception that bubbles out the client should NOT be MaxRetryException
+	/// When making calls without connectionpooling and no maxretries set 
+	/// calls should NEVER be retried and original exceptions should bubble out the client
+	/// WITHOUT being wrapped in a MaxRetryException
 	/// </summary>
 	[TestFixture]
 	public class ClientExceptionsWithoutPoolingTests
@@ -23,11 +24,10 @@ namespace Elasticsearch.Net.Tests.Unit.Failover.Retries
 
 		//we do not pass a Uri or IConnectionPool so this config
 		//defaults to SingleNodeConnectionPool()
-		private readonly ConnectionConfiguration _connectionConfig = new ConnectionConfiguration()
-			.MaximumRetries(_retries);
+		private readonly ConnectionConfiguration _connectionConfig = new ConnectionConfiguration();
 
 		[Test]
-		public void OnConnectionException_WithoutPooling_DoNotRetry()
+		public void OnConnectionException_WithoutPooling_Retires()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
@@ -39,7 +39,7 @@ namespace Elasticsearch.Net.Tests.Unit.Failover.Retries
 
 				var client = fake.Resolve<ElasticsearchClient>();
 
-				client.Settings.MaxRetries.Should().Be(_retries);
+				client.Settings.MaxRetries.Should().NotHaveValue();
 
 				var e = Assert.Throws<Exception>(() => client.Info());
 				e.Message.Should().Be("inner");
@@ -48,7 +48,7 @@ namespace Elasticsearch.Net.Tests.Unit.Failover.Retries
 		}
 		
 		[Test]
-		public void Hard_IConnectionException_AsyncCall_WithoutPooling_DoesNot_Retry_AndRethrows()
+		public void Hard_IConnectionException_AsyncCall_WithoutPooling_Retries_AndThrows()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
@@ -61,7 +61,7 @@ namespace Elasticsearch.Net.Tests.Unit.Failover.Retries
 
 				var client = fake.Resolve<ElasticsearchClient>();
 
-				client.Settings.MaxRetries.Should().Be(_retries);
+				client.Settings.MaxRetries.Should().NotHaveValue();
 
 				var e = Assert.Throws<Exception>(async () => await client.InfoAsync());
 				e.Message.Should().Be("inner");
@@ -70,7 +70,7 @@ namespace Elasticsearch.Net.Tests.Unit.Failover.Retries
 		}
 
 		[Test]
-		public void Soft_IConnectionException_AsyncCall_WithoutPooling_DoesNot_Retry_AndRethrows()
+		public void Soft_IConnectionException_AsyncCall_WithoutPooling_Retries_AndThrows()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
@@ -86,7 +86,7 @@ namespace Elasticsearch.Net.Tests.Unit.Failover.Retries
 
 				var client = fake.Resolve<ElasticsearchClient>();
 
-				client.Settings.MaxRetries.Should().Be(_retries);
+				client.Settings.MaxRetries.Should().NotHaveValue();
 
 				var e = Assert.Throws<Exception>(async () => await client.InfoAsync());
 				e.Message.Should().Be("inner");

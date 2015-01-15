@@ -75,7 +75,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			requestState.SeenExceptions.Add(t.Exception.InnerException);
 			
 			// If the ping exception was that of an unauthorized exception, 
-			var authenticationException = t.Exception.InnerException as ElasticsearchAuthenticationException;
+			var authenticationException = t.Exception.InnerException as ElasticsearchAuthException;
 			if (authenticationException != null)
 			{
 				var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
@@ -152,7 +152,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
 			if (t.Exception != null)
 			{
-				var authenticationException = t.Exception.InnerException as ElasticsearchAuthenticationException;
+				var authenticationException = t.Exception.InnerException as ElasticsearchAuthException;
 
 				if (authenticationException != null)
 				{
@@ -174,7 +174,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 		protected void SetAuthenticationExceptionOnRequestState<T>(
 			TransportRequestState<T> requestState,
-			ElasticsearchAuthenticationException exception,
+			ElasticsearchAuthException exception,
 			TaskCompletionSource<ElasticsearchResponse<T>> tcs)
 		{
 			var result = this.HandleAuthenticationException(requestState, exception);
@@ -199,13 +199,13 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			rq.Finish(streamResponse != null && streamResponse.Success, streamResponse == null ? -1 : streamResponse.HttpStatusCode);
 			rq.Dispose();
 
-			//If we are not using any pooling and we see an exception we rethrow
-			//regardless whether maxretry is set.
-			if (!requestState.UsingPooling && t.IsFaulted && t.Exception != null)
-				throw t.Exception;
-
 			// Figure out the maximum number of retries, this might 
 			var maxRetries = this._delegator.GetMaximumRetries(requestState.RequestConfiguration);
+
+			//If we are not using any pooling and we see an exception we rethrow
+			if (!requestState.UsingPooling && t.IsFaulted && t.Exception != null && maxRetries == 0)
+				throw t.Exception;
+
 
 			var retried = requestState.Retried;
 

@@ -16,6 +16,8 @@ namespace Elasticsearch.Net.Connection
 	{
 		private readonly IConnectionConfigurationValues _settings;
 
+		public TransportAddressScheme? AddressScheme { get; private set; }
+
 		static HttpClientConnection()
 		{
 			// brought over from HttpClient
@@ -34,6 +36,9 @@ namespace Elasticsearch.Net.Connection
 		public HttpClientConnection(IConnectionConfigurationValues settings, HttpClientHandler handler = null)
 		{
 			_settings = settings;
+			if (settings.ConnectionPool.UsingSsl)
+				this.AddressScheme = TransportAddressScheme.Https;
+			
 			DefaultContentType = "application/json";
 
 			var innerHandler = handler ?? new WebRequestHandler();

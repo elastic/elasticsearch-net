@@ -21,21 +21,19 @@ namespace Elasticsearch.Net.Connection
 
 		protected IConnectionConfigurationValues ConnectionSettings { get; set; }
 		private readonly Semaphore _resourceLock;
-		private readonly bool _enableTrace;
+
+		public TransportAddressScheme? AddressScheme { get; private set; }
 
 		static HttpConnection()
 		{
-			ServicePointManager.UseNagleAlgorithm = false;
-			ServicePointManager.Expect100Continue = false;
-			ServicePointManager.DefaultConnectionLimit = 10000;
 			//ServicePointManager.SetTcpKeepAlive(true, 2000, 2000);
-			
+
 			//WebException's GetResponse is limitted to 65kb by default.
 			//Elasticsearch can be alot more chatty then that when dumping exceptions
 			//On error responses, so lets up the ante.
 
 			//Not available under mono
-			if (Type.GetType ("Mono.Runtime") == null) 
+			if (Type.GetType("Mono.Runtime") == null)
 				HttpWebRequest.DefaultMaximumErrorResponseLength = -1;
 		}
 
@@ -44,19 +42,22 @@ namespace Elasticsearch.Net.Connection
 			if (settings == null)
 				throw new ArgumentNullException("settings");
 
+			if (settings.ConnectionPool.UsingSsl)
+				this.AddressScheme = TransportAddressScheme.Https;
+
 			this.ConnectionSettings = settings;
 			if (settings.MaximumAsyncConnections > 0)
 			{
 				var semaphore = Math.Max(1, settings.MaximumAsyncConnections);
 				this._resourceLock = new Semaphore(semaphore, semaphore);
 			}
-			this._enableTrace = settings.TraceEnabled;
 		}
 
 		public virtual ElasticsearchResponse<Stream> GetSync(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.HeaderOnlyRequest(uri, "GET", requestSpecificConfig);
 		}
+
 		public virtual ElasticsearchResponse<Stream> HeadSync(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.HeaderOnlyRequest(uri, "HEAD", requestSpecificConfig);
@@ -91,6 +92,7 @@ namespace Elasticsearch.Net.Connection
 			var r = this.CreateHttpWebRequest(uri, method, data, requestSpecificConfig);
 			return this.DoSynchronousRequest(r, data, requestSpecificConfig);
 		}
+
 
 		public virtual Task<ElasticsearchResponse<Stream>> Get(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
@@ -137,12 +139,19 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
+		protected virtual void AlterServicePoint(ServicePoint requestServicePoint)
+		{
+			requestServicePoint.UseNagleAlgorithm = false;
+			requestServicePoint.Expect100Continue = false;
+			requestServicePoint.ConnectionLimit = 10000;
+		}
 
 		protected virtual HttpWebRequest CreateHttpWebRequest(Uri uri, string method, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
 			var request = this.CreateWebRequest(uri, method, data, requestSpecificConfig);
 			this.SetBasicAuthenticationIfNeeded(uri, request, requestSpecificConfig);
 			this.SetProxyIfNeeded(request);
+			this.AlterServicePoint(request.ServicePoint);
 			return request;
 		}
 
@@ -158,17 +167,17 @@ namespace Elasticsearch.Net.Connection
 				myReq.Proxy = proxy;
 			}
 
-            if(this.ConnectionSettings.DisableAutomaticProxyDetection)
-            {
-                myReq.Proxy = null;
-            }
+			if (this.ConnectionSettings.DisableAutomaticProxyDetection)
+			{
+				myReq.Proxy = null;
+			}
 		}
 
 		private void SetBasicAuthenticationIfNeeded(Uri uri, HttpWebRequest request, IRequestConfiguration requestSpecificConfig)
 		{
 			// Basic auth credentials take the following precedence (highest -> lowest):
 			// 1 - Specified on the request (highest precedence)
- 			// 2 - Specified at the global IConnectionSettings level
+			// 2 - Specified at the global IConnectionSettings level
 			// 3 - Specified with the URI (lowest precedence)
 
 			var userInfo = Uri.UnescapeDataString(uri.UserInfo);

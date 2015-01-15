@@ -48,6 +48,8 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 		}
 
 
+		public TransportAddressScheme? AddressScheme { get; private set; }
+
 		public virtual Task<ElasticsearchResponse<Stream>> Get(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return DoAsyncRequest(uri);
