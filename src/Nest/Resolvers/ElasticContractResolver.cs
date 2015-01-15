@@ -48,9 +48,6 @@ namespace Nest.Resolvers
 			else if (objectType == typeof(Facet))
 				contract.Converter = new FacetConverter();
 			
-			else if (objectType == typeof(Uri))
-				contract.Converter = new UriJsonConverter();
-			
 			else if (objectType == typeof(IAggregation))
 				contract.Converter = new AggregationConverter();
 			
