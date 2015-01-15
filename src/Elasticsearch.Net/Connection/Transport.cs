@@ -35,8 +35,8 @@ namespace Elasticsearch.Net.Connection
 
 		private DateTime? _lastSniff;
 
-		private const int DefaultPingTimeout = 200;
-		private readonly int SslDefaultPingTimeout = 500;
+		private const int DefaultPingTimeout = 1000;
+		private readonly int SslDefaultPingTimeout = 2000;
 
 		public IConnectionConfigurationValues Settings { get { return ConfigurationValues; } }
 		public IElasticsearchSerializer Serializer { get { return _serializer; } }
@@ -73,7 +73,8 @@ namespace Elasticsearch.Net.Connection
 
 		bool ITransportDelegator.Ping(ITransportRequestState requestState)
 		{
-			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(DefaultPingTimeout);
+			var defaultPingTimeout = this._connectionPool.UsingSsl ? SslDefaultPingTimeout : DefaultPingTimeout;
+			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(defaultPingTimeout);
 			pingTimeout = requestState.RequestConfiguration != null
 				? requestState.RequestConfiguration.ConnectTimeout.GetValueOrDefault(pingTimeout)
 				: pingTimeout;
@@ -111,7 +112,8 @@ namespace Elasticsearch.Net.Connection
 
 		Task<bool> ITransportDelegator.PingAsync(ITransportRequestState requestState)
 		{
-			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(DefaultPingTimeout);
+			var defaultPingTimeout = this._connectionPool.UsingSsl ? SslDefaultPingTimeout : DefaultPingTimeout;
+			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(defaultPingTimeout);
 			pingTimeout = requestState.RequestConfiguration != null
 				? requestState.RequestConfiguration.ConnectTimeout.GetValueOrDefault(pingTimeout)
 				: pingTimeout;
