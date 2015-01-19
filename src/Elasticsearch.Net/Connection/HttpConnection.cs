@@ -388,7 +388,7 @@ namespace Elasticsearch.Net.Connection
 
 		private int GetRequestTimeout(IRequestConfiguration requestConfiguration)
 		{
-			if (requestConfiguration != null && requestConfiguration.ConnectTimeout.HasValue)
+			if (requestConfiguration != null && requestConfiguration.RequestTimeout.HasValue)
 				return requestConfiguration.RequestTimeout.Value;
 
 			return this.ConnectionSettings.Timeout;
