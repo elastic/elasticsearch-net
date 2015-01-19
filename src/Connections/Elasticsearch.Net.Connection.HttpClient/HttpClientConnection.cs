@@ -97,12 +97,10 @@ namespace Elasticsearch.Net.Connection
 		{
 			ThrowIfDisposed();
 
-			var requestTask = DoRequest(method, uri, data, requestSpecificConfig);
-
 			try
 			{
-				requestTask.Wait();
-				return requestTask.Result;
+				return this.DoRequestInternal(method, uri, data, requestSpecificConfig, configureAwait: true)
+					.Result;
 			}
 			catch (AggregateException ex)
 			{
@@ -123,6 +121,12 @@ namespace Elasticsearch.Net.Connection
 		/// <param name="requestSpecificConfig">The request specific configuration.</param>
 		/// <returns>Task&lt;ElasticsearchResponse&lt;Stream&gt;&gt;.</returns>
 		public async Task<ElasticsearchResponse<Stream>> DoRequest(HttpMethod method, Uri uri, byte[] data = null, IRequestConfiguration requestSpecificConfig = null)
+		{
+			return await this.DoRequestInternal(method, uri, data, requestSpecificConfig, configureAwait: false);
+		}
+
+		public async Task<ElasticsearchResponse<Stream>> DoRequestInternal(
+			HttpMethod method, Uri uri, byte[] data = null, IRequestConfiguration requestSpecificConfig = null, bool configureAwait = false)
 		{
 			ThrowIfDisposed();
 
@@ -146,7 +150,10 @@ namespace Elasticsearch.Net.Connection
 						request.Content.Headers.ContentType = new MediaTypeHeaderValue(DefaultContentType);
 				}
 
-				var response = await Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+				HttpResponseMessage response;
+				if (!configureAwait)
+					response = await Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+				else response = await Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
 
 				if (method == HttpMethod.Head || response.Content == null)
 				{
