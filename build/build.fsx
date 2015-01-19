@@ -1,5 +1,6 @@
 // include Fake lib
-#r @"FakeLib.dll"
+#r @"tools/FAKE/tools/FakeLib.dll"
+//#r @"FakeLib.dll"
 #load @"InheritDoc.fsx"
 open Fake 
 open System
@@ -13,7 +14,6 @@ open System.Linq
 let buildDir = "build/output/"
 let nugetOutDir = "build/output/_packages"
 
-type Framework = { Name: string; NugetName: string; }
 
 // Default target
 Target "Build" (fun _ -> traceHeader "STARTING BUILD")
@@ -22,23 +22,54 @@ Target "Clean" (fun _ ->
     CleanDir buildDir
 )
 
-let gitLink = fun _ ->
+
+type DotNetFramework = 
+    | NET40 
+    | NET45 
+    static member all = [NET40; NET45] 
+
+type Net40Project =
+    | Nest
+    | ElasticsearchNet
+    | ElasticsearchNetJsonNet
+    | ElasticsearchNetConnectionThrift
+    static member all = [ElasticsearchNet; ElasticsearchNetJsonNet; ElasticsearchNetConnectionThrift; Nest] 
+
+type FrameworkIdentifier = { MSBuild: string; Nuget: string; Framework: DotNetFramework; }
+
+let toProjectName (p: Net40Project) =
+    match p with
+    | Nest -> "Nest"
+    | ElasticsearchNet -> "Elasticsearch.Net"
+    | ElasticsearchNetJsonNet -> "Serialization\Elasticsearch.Net.JsonNet"
+    | ElasticsearchNetConnectionThrift -> "Connections\Elasticsearch.Net.Connection.Thrift"
+
+let toTarget (f: DotNetFramework) =
+    match f with 
+    | NET45 -> "Rebuild"
+    | NET40 -> 
+        Net40Project.all
+        |> List.map (fun p -> sprintf "%s:Rebuild" (toProjectName p))
+        |> String.concat ";"
+
+let toIdentifier (f: DotNetFramework) = 
+    match f with
+    | NET40 -> { MSBuild = "v4.0"; Nuget = "net40"; Framework = f }
+    | NET45 -> { MSBuild = "v4.5"; Nuget = "net45"; Framework = f }
+
+let gitLink = fun f ->
     let exe = "build/tools/gitlink/lib/net45/GitLink.exe"
     ExecProcess(fun p ->
       p.FileName <- exe
-      p.Arguments <- sprintf @". -u https://github.com/elasticsearch/elasticsearch-net -b develop" 
+      p.Arguments <- sprintf @". -u https://github.com/elasticsearch/elasticsearch-net -b develop -c Release-%s" (toIdentifier f).Nuget
     ) (TimeSpan.FromMinutes 5.0) |> ignore
- 
+
 Target "BuildApp" (fun _ ->
-    let frameworks = [
-        //{ Name = "v4.0"; NugetName = "net40" };
-        { Name = "v4.5"; NugetName = "net45" };
-    ]
 
     let binDirs = !! "src/**/bin/**"
                   |> Seq.map DirectoryName
                   |> Seq.distinct
-                  |> Seq.filter (fun f -> (f.EndsWith("Debug") || f.EndsWith("Release")) && not (f.Contains "CodeGeneration"))
+                  |> Seq.filter (fun f -> (f.EndsWith("Debug") || f.StartsWith("Release")) && not (f.Contains "CodeGeneration"))
 
     CleanDirs binDirs
 
@@ -48,15 +79,15 @@ Target "BuildApp" (fun _ ->
       ("PreBuildEvent","echo");
     ]
 
-    frameworks 
-      |> Seq.map(fun f -> (f, (msbuildProperties |> List.append [("OutputPathBaseDir", (sprintf "bin/%s-%s" f.NugetName f.Name)); ("TargetFrameworkVersion", f.Name)] )))
-      |> Seq.iter(fun (f,props) -> 
-         MSBuild null "Build" props (seq { yield "src/Elasticsearch.sln" })
-         if not isMono then gitLink()
-         |> ignore)
-      )
+    DotNetFramework.all
+      |> Seq.map toIdentifier
+      |> Seq.map(fun f -> (f, (msbuildProperties |> List.append [("OutputPathBaseDir", (sprintf "bin/Release-%s" f.Nuget)); ("TargetFrameworkVersion", f.MSBuild)] )))
+      |> Seq.iter(fun (f,props) -> MSBuild null (toTarget f.Framework) props (seq { yield "src/Elasticsearch.sln" })|> ignore)
+      
 
-    
+    if not isMono then 
+        gitLink(NET40)
+        gitLink(NET45)
 
     //Compile each csproj and output it seperately in build/output/PROJECTNAME
     //!! "src/**/*.csproj"
