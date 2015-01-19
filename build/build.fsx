@@ -31,7 +31,7 @@ let gitLink = fun _ ->
  
 Target "BuildApp" (fun _ ->
     let frameworks = [
-        { Name = "v4.0"; NugetName = "net40" };
+        //{ Name = "v4.0"; NugetName = "net40" };
         { Name = "v4.5"; NugetName = "net45" };
     ]
 
@@ -49,10 +49,14 @@ Target "BuildApp" (fun _ ->
     ]
 
     frameworks 
-      |> Seq.map(fun f -> (f, (msbuildProperties |> List.append [("OutputPathBaseDir", (sprintf "bin/%s" f.NugetName)); ("TargetFrameworkVersion", f.Name)] )))
-      |> Seq.iter(fun (f,props) -> MSBuild null "Build" props (seq { yield "src/Elasticsearch.sln" }) |> ignore)
+      |> Seq.map(fun f -> (f, (msbuildProperties |> List.append [("OutputPathBaseDir", (sprintf "bin/%s-%s" f.NugetName f.Name)); ("TargetFrameworkVersion", f.Name)] )))
+      |> Seq.iter(fun (f,props) -> 
+         MSBuild null "Build" props (seq { yield "src/Elasticsearch.sln" })
+         if not isMono then gitLink()
+         |> ignore)
+      )
 
-    if not isMono then gitLink()
+    
 
     //Compile each csproj and output it seperately in build/output/PROJECTNAME
     //!! "src/**/*.csproj"
