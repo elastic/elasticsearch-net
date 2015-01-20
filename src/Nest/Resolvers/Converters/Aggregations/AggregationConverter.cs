@@ -321,7 +321,7 @@ namespace Nest.Resolvers.Converters.Aggregations
                 } while (reader.TokenType != JsonToken.EndObject);
 
 		        var agg = new AggregationsHelper(temp);
-                
+				reader.Read();
 		        return new FiltersBucket(agg);
 		    }
 
