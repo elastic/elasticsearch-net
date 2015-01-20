@@ -1,26 +1,31 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-  <metadata>
-    <id>Elasticsearch.Net.JsonNET</id>
-    <version>1.3.0</version>
-    <title>Elasticsearch.Net.JsonNET - Json.NET serializer for the low level elasticsearch client</title>
-    <authors>Elasticsearch Inc. and contributors</authors>
-    <owners>Elasticsearch Inc.</owners>
-    <iconUrl>http://nest.azurewebsites.net/images/elasticsearch-net-nuget-icon.png</iconUrl>
-    <licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>
-    <projectUrl>https://github.com/elasticsearch/elasticsearch-net</projectUrl>
-    <summary>IElasticsearchSerializer implementation that allows you to use Json.NET with the lowlevel client</summary>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>This package is only useful if you use the low level client ONLY and do not use NEST but would like to use JSON.NET as your serializer</description>
-    <dependencies>
-      <dependency id="Elasticsearch.Net" version="1.3.0"/>
-	  <dependency id="Newtonsoft.Json" version="6.0.1"/>
-    </dependencies>
-    <tags>elasticsearch elastic search lucene thrift nest</tags>
-  </metadata>
-  <files>
-    <file src="output\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNET.dll" target="lib"/> 
-    <file src="output\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNET.pdb" target="lib"/> 
-    <file src="output\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNET.XML" target="lib"/> 
-  </files>
+	<metadata>
+		<id>Elasticsearch.Net.JsonNET</id>
+		<version>1.3.0</version>
+		<title>Elasticsearch.Net.JsonNET - Json.NET serializer for the low level elasticsearch client</title>
+		<authors>Elasticsearch Inc. and contributors</authors>
+		<owners>Elasticsearch Inc.</owners>
+		<iconUrl>http://nest.azurewebsites.net/images/elasticsearch-net-nuget-icon.png</iconUrl>
+		<licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>
+		<projectUrl>https://github.com/elasticsearch/elasticsearch-net</projectUrl>
+		<summary>IElasticsearchSerializer implementation that allows you to use Json.NET with the lowlevel client</summary>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>This package is only useful if you use the low level client ONLY and do not use NEST but would like to use JSON.NET as your serializer</description>
+		<dependencies>
+			<dependency id="Elasticsearch.Net" version="1.3.0"/>
+			<dependency id="Newtonsoft.Json" version="6.0.1"/>
+		</dependencies>
+		<tags>elasticsearch elastic search lucene thrift nest</tags>
+	</metadata>
+	<files>
+		<file src="output\Elasticsearch.Net.JsonNET\net40\Elasticsearch.Net.JsonNET.dll" target="lib"/>
+		<file src="output\Elasticsearch.Net.JsonNET\net40\Elasticsearch.Net.JsonNET.pdb" target="lib"/>
+		<file src="output\Elasticsearch.Net.JsonNET\net40\Elasticsearch.Net.JsonNET.XML" target="lib"/>
+		
+		<file src="output\Elasticsearch.Net.JsonNET\net45\Elasticsearch.Net.JsonNET.dll" target="lib\net45"/>
+		<file src="output\Elasticsearch.Net.JsonNET\net45\Elasticsearch.Net.JsonNET.pdb" target="lib\net45"/>
+		<file src="output\Elasticsearch.Net.JsonNET\net45\Elasticsearch.Net.JsonNET.XML" target="lib\net45"/>
+		
+	</files>
 </package>
