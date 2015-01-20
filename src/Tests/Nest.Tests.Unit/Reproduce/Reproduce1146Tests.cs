@@ -33,7 +33,9 @@ namespace Nest.Tests.Unit.Reproduce
 			status = response.ConnectionStatus;
 			status.RequestUrl.Should().EndWith("/nest_test_data/jobject/_query");
 
-			var client = new ElasticClient(new ConnectionSettings(), connection: new InMemoryConnection());
+			var client = new ElasticClient(
+				new ConnectionSettings(defaultIndex: "nest_test_data"),
+				connection: new InMemoryConnection());
 			
 			response = client.DeleteByQuery<string>(s => s
 				.Query(q => q.Terms("string.ProgramId", ids))
