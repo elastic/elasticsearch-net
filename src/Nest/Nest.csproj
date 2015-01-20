@@ -1065,7 +1065,6 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
-  <Import Project="$(SolutionDir)..\build\outputpath.props" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <PropertyGroup Condition=" '$(OS)' != 'Unix' ">

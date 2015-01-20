@@ -131,7 +131,6 @@
       <Name>Elasticsearch.Net</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="$(SolutionDir)..\build\outputpath.props" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent Condition=" '$(OS)' != 'Unix' ">IF NOT EXIST "$(SolutionDir)..\build\keys\keypair.snk" (CD "$(SolutionDir).." &amp;&amp; "build.bat" CreateKeysIfAbsent &amp;&amp; CD %25~dp0)

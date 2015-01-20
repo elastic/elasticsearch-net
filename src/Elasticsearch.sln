@@ -30,13 +30,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D55
 		..\.editorconfig = ..\.editorconfig
 		..\.gitignore = ..\.gitignore
 		..\build.bat = ..\build.bat
-		..\build\build.fsx = ..\build\build.fsx
 		..\build\download-nuget.ps1 = ..\build\download-nuget.ps1
 		..\build\Elasticsearch.Net.Connection.HttpClient.nuspec = ..\build\Elasticsearch.Net.Connection.HttpClient.nuspec
 		..\build\Elasticsearch.Net.Connection.Thrift.nuspec = ..\build\Elasticsearch.Net.Connection.Thrift.nuspec
 		..\build\Elasticsearch.Net.JsonNET.nuspec = ..\build\Elasticsearch.Net.JsonNET.nuspec
 		..\build\Elasticsearch.Net.nuspec = ..\build\Elasticsearch.Net.nuspec
-		..\build\InheritDoc.fsx = ..\build\InheritDoc.fsx
 		..\build\NEST.nuspec = ..\build\NEST.nuspec
 	EndProjectSection
 EndProject
@@ -109,6 +107,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "templates", "http://localho
 		Release.AspNetCompiler.Debug = "False"
 		SlnRelativePath = "..\docs\templates\"
 	EndProjectSection
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "scripts", "..\build\scripts\scripts.fsproj", "{28328694-2598-44D3-BB25-8B6C3FBDD3EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -346,6 +346,21 @@ Global
 		{DF8388A1-4778-411E-A3F5-1062CDE8621F}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{DF8388A1-4778-411E-A3F5-1062CDE8621F}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{DF8388A1-4778-411E-A3F5-1062CDE8621F}.Release|x86.ActiveCfg = Debug|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.CodeGeneration|Any CPU.ActiveCfg = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.CodeGeneration|Mixed Platforms.Build.0 = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -365,5 +380,6 @@ Global
 		{C54FFD67-C452-4DC4-A47A-663ECA98A38F} = {C7EA82B9-4C4A-4F68-ACD1-0D1A765BA98C}
 		{E005A0A9-ADAE-49D5-9686-73686471DA9F} = {E30CA256-C9A8-487A-94B7-D6B79D70F774}
 		{DF8388A1-4778-411E-A3F5-1062CDE8621F} = {E30CA256-C9A8-487A-94B7-D6B79D70F774}
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
 	EndGlobalSection
 EndGlobal
