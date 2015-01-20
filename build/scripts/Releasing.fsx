@@ -18,8 +18,8 @@ type Release() =
         let replacedContents = regex_replace re (sprintf "${start}%s${end}" Versioning.FileVersion) packageContents
         WriteStringToFile false package replacedContents
     
-        let dir = sprintf "%s/%s/" Paths.BuildFolder name
-        let nugetOutFile = Paths.BuildFolder + (sprintf "%s/%s.%s.nupkg" name name Versioning.FileVersion);
+        let dir = sprintf "%s/%s/" Paths.BuildOutput name
+        let nugetOutFile =  Paths.Output(sprintf "%s/%s.%s.nupkg" name name Versioning.FileVersion);
         NuGetPack (fun p ->
           {p with 
             Version = Versioning.FileVersion
@@ -27,7 +27,7 @@ type Release() =
             OutputPath = dir
           })
           package
-    
+        traceFAKE "%s" dir
         MoveFile Paths.NugetOutput nugetOutFile
 
     static member PackAll() =
