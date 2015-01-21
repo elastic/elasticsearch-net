@@ -60,7 +60,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Connections", "Connections"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serialization", "Serialization", "{90F48CF5-BB0B-484D-85E7-18FE3ECA3825}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.JsonNet", "Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj", "{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.JsonNet", "Serialization\Elasticsearch.Net.JsonNet\Elasticsearch.Net.JsonNet.csproj", "{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Connection.HttpClient", "Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj", "{A69322FD-B874-44EF-ABE0-63F4A7B5593E}"
 EndProject
