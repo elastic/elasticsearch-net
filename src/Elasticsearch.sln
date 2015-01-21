@@ -349,17 +349,14 @@ Global
 		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.CodeGeneration|Any CPU.ActiveCfg = Release|Any CPU
 		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
 		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.CodeGeneration|Mixed Platforms.Build.0 = Release|Any CPU
 		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
 		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
