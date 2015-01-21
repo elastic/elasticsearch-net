@@ -4,8 +4,9 @@ open Fake
 
 type FrameworkName = { MSBuild: string; Nuget: string; }
 type ProjectName(msbuild: string) = 
-    member this.MSBuild = msbuild
     member this.Nuget = regex_replace @"^.*\\" "" msbuild
+    member this.MSBuild = if isMono then this.Nuget else msbuild
+    member this.Location = msbuild
     
     member this.NugetDescription = 
         match this.Nuget.ToLowerInvariant() with

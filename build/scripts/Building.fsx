@@ -24,7 +24,7 @@ type Build() =
     static let moveToBuildOutput (f: DotNetFramework) =
         for p in DotNetProject.All do
             let outputFolder = Paths.Output(p.ProjectName.Nuget)
-            let srcFolder = Paths.BinFolder(p.ProjectName.MSBuild)
+            let srcFolder = Paths.BinFolder(p.ProjectName.Location)
             match f with
             | NET40 ->
                 match p with
