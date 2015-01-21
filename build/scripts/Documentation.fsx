@@ -1,4 +1,5 @@
-﻿#r @"../tools/FAKE/tools/FakeLib.dll"
+﻿#I @"../tools/FAKE/tools"
+#r @"FakeLib.dll"
 #load @"Paths.fsx"
 open System
 open Fake 

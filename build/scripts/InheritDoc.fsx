@@ -1,4 +1,5 @@
-﻿#r "System.Xml.Linq.dll"
+﻿#I @"../tools/FAKE/tools"
+#r @"FakeLib.dll"
 open System.Xml
 open System.Xml.XPath
 open System.Linq

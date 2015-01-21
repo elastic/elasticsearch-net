@@ -1,4 +1,5 @@
-﻿#r @"../tools/FAKE/tools/FakeLib.dll"
+﻿#I @"../tools/FAKE/tools"
+#r @"FakeLib.dll"
 #load @"Projects.fsx"
 open System
 open System.Text.RegularExpressions
