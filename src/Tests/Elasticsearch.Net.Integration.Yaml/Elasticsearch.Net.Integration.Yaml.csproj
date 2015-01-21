@@ -250,7 +250,7 @@
       <Project>{e97ccf40-0ba6-43fe-9f2d-58d454134088}</Project>
       <Name>Elasticsearch.Net</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj">
+    <ProjectReference Include="..\..\Serialization\Elasticsearch.Net.JsonNet\Elasticsearch.Net.JsonNet.csproj">
       <Project>{dd71352d-0eb2-4a02-8ac4-82a17e2a71a8}</Project>
       <Name>Elasticsearch.Net.JsonNet</Name>
     </ProjectReference>
