@@ -40,7 +40,7 @@ and an In-Memory Connection <code>InMemoryConnection</code>, that nevers hits El
 </code></pre><h2 id="settings">Settings</h2>
 <p>The <code>NEST</code> client can be configured by passing in an <code>IConnectionSettingsValues</code> object, which is a sub-interface of 
 <code>Elasticsearch.Net</code>&#39;s <code>IConnectionConfigurationValues</code>.  Therefore all of the settings that can be used to 
-<a href="/elasticsearch-net/connection.html">configure Elasticsearch.Net</a> also apply here, including the 
+<a href="/elasticsearch-net/connecting.html">configure Elasticsearch.Net</a> also apply here, including the 
 <a href="/elasticsearch-net/cluster-failover.html">cluster failover settings</a></p>
 <p>The easiest way to pass <code>IConnectionSettingsValues</code> is to instantiate <code>ConnectionSettings</code> is:</p>
 <pre><code>var settings = new ConnectionSettings(
