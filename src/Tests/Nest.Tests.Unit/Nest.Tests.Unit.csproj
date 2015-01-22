@@ -396,6 +396,7 @@
     <Compile Include="Reproduce\Reproduce876Tests.cs" />
     <Compile Include="Reproduce\Reproduce926Tests.cs" />
     <Compile Include="Search\Aggregations\ScriptedMetricJson.cs" />
+    <Compile Include="Search\Aggregations\SingleBucketAggregationTests.cs" />
     <Compile Include="Search\Failures\ShardFailureTests.cs" />
     <Compile Include="Search\Fields\FieldsTests.cs" />
     <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
