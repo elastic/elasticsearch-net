@@ -9,7 +9,7 @@ namespace Nest
 	public interface IFunctionScoreFunction
 	{
 		FilterContainer Filter { get; set; }
-		long? Weight { get; set; }
+		float? Weight { get; set; }
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -22,7 +22,7 @@ namespace Nest
 		FilterContainer IFunctionScoreFunction.Filter { get; set; }
 
 		[JsonProperty("weight")]
-		long? IFunctionScoreFunction.Weight { get; set; }
+		float? IFunctionScoreFunction.Weight { get; set; }
 
 		public FunctionScoreFunction<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
@@ -34,7 +34,7 @@ namespace Nest
 			return this;
 		}
 
-		public FunctionScoreFunction<T> Weight(long weight)
+		public FunctionScoreFunction<T> Weight(float weight)
 		{
 			this.Self.Weight = weight;
 			return this;
