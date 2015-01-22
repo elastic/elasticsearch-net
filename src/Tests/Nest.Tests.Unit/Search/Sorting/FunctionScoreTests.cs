@@ -69,7 +69,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 								.Lang("mvel")
 							).Filter(filter => filter
 								.Term("term1", "termValue")
-							).Weight(5)
+							).Weight(0.5f)
 						)
 					)
 				);
@@ -92,7 +92,7 @@ namespace Nest.Tests.Unit.Search.Sorting
                                             ""term1"":""termValue""
                                         }
                                     },
-									weight: 5
+									weight: 0.5
                                 }
                               ]
                             }
@@ -128,7 +128,7 @@ namespace Nest.Tests.Unit.Search.Sorting
                                             ""term1"":""termValue""
                                         }
                                     },
-									weight: 5
+									weight: 5.0
                                 }
                               ]
                             }
@@ -167,7 +167,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 										  ""term1"": ""termValue""
 										}
 									  },
-									 ""weight"": 5
+									 ""weight"": 5.0
 									}
 								  ]
 								}
