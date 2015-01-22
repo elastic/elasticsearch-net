@@ -128,7 +128,7 @@ namespace Nest.Tests.Unit.Search.Sorting
                                             ""term1"":""termValue""
                                         }
                                     },
-									weight: 5
+									weight: 5.0
                                 }
                               ]
                             }
@@ -167,7 +167,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 										  ""term1"": ""termValue""
 										}
 									  },
-									 ""weight"": 5
+									 ""weight"": 5.0
 									}
 								  ]
 								}
