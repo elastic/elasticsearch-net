@@ -246,7 +246,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			var protocol = _protocolFactory == null ? new TBinaryProtocol(transport) : _protocolFactory.GetProtocol(transport);
 
 			var client = new Rest.Client(protocol);
-			tsocket.ConnectTimeout = this._connectionSettings.PingTimeout.GetValueOrDefault(200);
+			tsocket.ConnectTimeout = this._connectionSettings.ConnectTimeout.GetValueOrDefault(200);
 			tsocket.Timeout = this._connectionSettings.Timeout;
 			tsocket.TcpClient.SendTimeout = this._connectionSettings.Timeout;
 			tsocket.TcpClient.ReceiveTimeout = this._connectionSettings.Timeout;

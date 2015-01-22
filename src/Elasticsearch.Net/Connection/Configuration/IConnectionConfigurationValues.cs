@@ -23,14 +23,19 @@ namespace Elasticsearch.Net.Connection
 		int MaximumAsyncConnections { get; }
 		
 		/// <summary>
-		/// The time out for calls to elasticsearch
+		/// The timeout in milliseconds for each request to Elasticsearch
 		/// </summary>
 		int Timeout { get; }
 
 		/// <summary>
-		/// The timeout in milliseconds to use for ping calls that are issues to check whether a node is up or not.
+		/// The timeout in milliseconds to use for ping requests, which are issued to determine whether a node is alive
 		/// </summary>
 		int? PingTimeout { get; }
+
+		/// <summary>
+		/// The connect timeout in milliseconds
+		/// </summary>
+		int? ConnectTimeout { get; }
 		
 		/// <summary>
 		/// The time to put dead nodes out of rotation (this will be multiplied by the number of times they've been dead)
@@ -41,20 +46,20 @@ namespace Elasticsearch.Net.Connection
 		/// The maximum ammount of time a node is allowed to marked dead
 		/// </summary>
 		int? MaxDeadTimeout { get; }
-		
+
+		/// <summary>
+		/// Limits the total runtime including retries separately from <see cref="Timeout"/>
+		/// <pre>
+		/// When not specified defaults to <see cref="Timeout"/> which itself defaults to 60 seconds
+		/// </pre>
+		/// </summary>
+		TimeSpan? MaxRetryTimeout { get; }
+
 		/// <summary>
 		/// When a retryable exception occurs or status code is returned this controls the maximum
 		/// amount of times we should retry the call to elasticsearch
 		/// </summary>
 		int? MaxRetries { get; }
-
-		/// <summary>
-		/// Limits the total runtime including retries separately from <see cref="Timeout"/>
-		/// <pre>
-		/// When not specified defaults to <see cref="Timeout"/> which itself defaults to 60seconds
-		/// </pre>
-		/// </summary>
-		TimeSpan? MaxRetryTimeout { get; }
 
 		/// <summary>
 		/// This signals that we do not want to send initial pings to unknown/previously dead nodes
