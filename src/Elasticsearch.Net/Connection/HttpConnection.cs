@@ -67,19 +67,21 @@ namespace Elasticsearch.Net.Connection
 		{
 			return this.BodyRequest(uri, data, "POST", requestSpecificConfig);
 		}
+		
 		public virtual ElasticsearchResponse<Stream> PutSync(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.BodyRequest(uri, data, "PUT", requestSpecificConfig);
 		}
+		
 		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.HeaderOnlyRequest(uri, "DELETE", requestSpecificConfig);
 		}
+		
 		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.BodyRequest(uri, data, "DELETE", requestSpecificConfig);
 		}
-
 
 		private ElasticsearchResponse<Stream> HeaderOnlyRequest(Uri uri, string method, IRequestConfiguration requestSpecificConfig)
 		{
@@ -93,17 +95,18 @@ namespace Elasticsearch.Net.Connection
 			return this.DoSynchronousRequest(r, data, requestSpecificConfig);
 		}
 
-
 		public virtual Task<ElasticsearchResponse<Stream>> Get(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "GET", null, requestSpecificConfig);
 			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
 		}
+		
 		public virtual Task<ElasticsearchResponse<Stream>> Head(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "HEAD", null, requestSpecificConfig);
 			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
 		}
+		
 		public virtual Task<ElasticsearchResponse<Stream>> Post(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "POST", data, requestSpecificConfig);
@@ -121,6 +124,7 @@ namespace Elasticsearch.Net.Connection
 			var r = this.CreateHttpWebRequest(uri, "DELETE", data, requestSpecificConfig);
 			return this.DoAsyncRequest(r, data, requestSpecificConfig: requestSpecificConfig);
 		}
+		
 		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "DELETE", null, requestSpecificConfig);
@@ -201,10 +205,13 @@ namespace Elasticsearch.Net.Connection
 			request.Pipelined = this.ConnectionSettings.HttpPipeliningEnabled
 				|| (requestSpecificConfig != null && requestSpecificConfig.EnableHttpPipelining);
 
-			if (this.ConnectionSettings.EnableCompressedResponses)
+			if (this.ConnectionSettings.EnableCompressedResponses
+				|| this.ConnectionSettings.EnableHttpCompression)
 			{
 				request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 				request.Headers.Add("Accept-Encoding", "gzip,deflate");
+				if (this.ConnectionSettings.EnableHttpCompression)
+					request.Headers.Add("Content-Encoding", "gzip");
 			}
 
 			if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.ContentType))
@@ -235,9 +242,14 @@ namespace Elasticsearch.Net.Connection
 
 			if (data != null)
 			{
+
 				using (var r = request.GetRequestStream())
 				{
-					r.Write(data, 0, data.Length);
+					if (this.ConnectionSettings.EnableHttpCompression)
+						using (var zipStream = new GZipStream(r, CompressionMode.Compress))
+							zipStream.Write(data, 0, data.Length);
+					else 
+						r.Write(data, 0, data.Length);
 				}
 			}
 			try
@@ -325,8 +337,22 @@ namespace Elasticsearch.Net.Connection
 				var requestStream = getRequestStream.Result;
 				try
 				{
-					var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, data, 0, data.Length, null);
-					yield return writeToRequestStream;
+					if (this.ConnectionSettings.EnableHttpCompression)
+					{
+						using (var zipStream = new GZipStream(requestStream, CompressionMode.Compress))
+						{
+
+							var writeToRequestStream = Task.Factory.FromAsync(zipStream.BeginWrite, zipStream.EndWrite, data, 0,
+								data.Length, null);
+							yield return writeToRequestStream;
+						}
+					}
+					else
+					{
+						var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, data, 0,
+							data.Length, null);
+						yield return writeToRequestStream;
+					}
 				}
 				finally
 				{
