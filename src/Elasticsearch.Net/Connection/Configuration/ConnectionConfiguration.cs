@@ -113,8 +113,11 @@ namespace Elasticsearch.Net.Connection
 		private TimeSpan? _sniffLifeSpan;
 		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan { get{ return _sniffLifeSpan; } }
 
-		private bool _compressionEnabled;
-		bool IConnectionConfigurationValues.EnableCompressedResponses { get{ return _compressionEnabled; } }
+		private bool _enableCompressedResponses;
+		bool IConnectionConfigurationValues.EnableCompressedResponses { get{ return _enableCompressedResponses; } }
+
+		private bool _enableHttpCompression;
+		bool IConnectionConfigurationValues.EnableHttpCompression { get{ return _enableHttpCompression; } }
 
 		private bool _traceEnabled;
 		bool IConnectionConfigurationValues.TraceEnabled { get{ return _traceEnabled; } }
@@ -179,9 +182,20 @@ namespace Elasticsearch.Net.Connection
 		/// Enable compressed responses from elasticsearch (NOTE that that nodes need to be configured to allow this)
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html
 		/// </summary>
+		[Obsolete("Scheduled to be removed in 2.0, please use EnableHttpCompression")]
 		public T EnableCompressedResponses(bool enabled = true)
 		{
-			this._compressionEnabled = enabled;
+			this._enableCompressedResponses = enabled;
+			return (T) this;
+		}
+
+		/// <summary>
+		/// Enable gzip compressed requests and responses, do note that you need to configure elasticsearch to set this
+		/// <see cref="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html"/>
+		/// </summary>
+		public T EnableHttpCompression(bool enabled = true)
+		{
+			this._enableHttpCompression = enabled;
 			return (T) this;
 		}
 

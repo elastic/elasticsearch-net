@@ -8,17 +8,14 @@ namespace Nest.Tests.Integration.Core
 	{
 
 		[Test]
-		public void TestIndex()
+		public async void TestIndex()
 		{
 			var newProject = new ElasticsearchProject
 			{
 				Name = "COBOLES", //COBOL ES client ?
 			};
-			var t = this.Client.IndexAsync<ElasticsearchProject>(newProject);
-			t.Wait();
-			Assert.True(t.Result.IsValid);
-			Assert.True(t.IsCompleted, "task did not complete");
-			Assert.True(t.IsCompleted, "task did not complete");
+			var t = await  this.Client.IndexAsync<ElasticsearchProject>(newProject);
+			Assert.True(t.IsValid);
 		}
 		
 	}
