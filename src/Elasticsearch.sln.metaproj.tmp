@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" InitialTargets="ValidateSolutionConfiguration;ValidateToolsVersions;ValidateProjects">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\SolutionFile\ImportBefore\*" Condition="'$(ImportByWildcardBeforeSolution)' != 'false' and exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\SolutionFile\ImportBefore')" />
+  <Import Project="c:\Projects\elasticsearch-net\src\before.Elasticsearch.sln.targets" Condition="exists('c:\Projects\elasticsearch-net\src\before.Elasticsearch.sln.targets')" />
+  <PropertyGroup Condition=" '$(Configuration)' == '' ">
+    <Configuration>Debug</Configuration>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == '' ">
+    <Platform>Mixed Platforms</Platform>
+  </PropertyGroup>
+  <PropertyGroup Condition=" ('$(AspNetConfiguration)' == '') ">
+    <AspNetConfiguration>$(Configuration)</AspNetConfiguration>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SolutionDir>c:\Projects\elasticsearch-net\src\</SolutionDir>
+    <SolutionExt>.sln</SolutionExt>
+    <SolutionFileName>Elasticsearch.sln</SolutionFileName>
+    <SolutionName>Elasticsearch</SolutionName>
+    <SolutionPath>c:\Projects\elasticsearch-net\src\Elasticsearch.sln</SolutionPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == '' and '$(MSBuildToolsVersion)' == '2.0'">v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == '' and ('$(MSBuildToolsVersion)' == '3.5' or '$(MSBuildToolsVersion)' == '3.0')">v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == '' and !('$(MSBuildToolsVersion)' == '3.5' or '$(MSBuildToolsVersion)' == '3.0' or '$(MSBuildToolsVersion)' == '2.0')">v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" ('$(Configuration)' == 'CodeGeneration') and ('$(Platform)' == 'Any CPU') ">
+    <CurrentSolutionConfigurationContents>
+      <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+    </CurrentSolutionConfigurationContents>
+  </PropertyGroup>
+  <ItemGroup>
+    <SolutionConfiguration Include="CodeGeneration|Any CPU">
+      <Configuration>CodeGeneration</Configuration>
+      <Platform>Any CPU</Platform>
+      <Content>
+        <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+      </Content>
+    </SolutionConfiguration>
+    <SolutionConfiguration Include="CodeGeneration|Mixed Platforms">
+      <Configuration>CodeGeneration</Configuration>
+      <Platform>Mixed Platforms</Platform>
+      <Content>
+        <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+      </Content>
+    </SolutionConfiguration>
+    <SolutionConfiguration Include="CodeGeneration|x86">
+      <Configuration>CodeGeneration</Configuration>
+      <Platform>x86</Platform>
+      <Content>
+        <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+      </Content>
+    </SolutionConfiguration>
+    <SolutionConfiguration Include="Debug|Any CPU">
+      <Configuration>Debug</Configuration>
+      <Platform>Any CPU</Platform>
+      <Content>
+        <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+      </Content>
+    </SolutionConfiguration>
+    <SolutionConfiguration Include="Debug|Mixed Platforms">
+      <Configuration>Debug</Configuration>
+      <Platform>Mixed Platforms</Platform>
+      <Content>
+        <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+      </Content>
+    </SolutionConfiguration>
+    <SolutionConfiguration Include="Debug|x86">
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+      <Content>
+        <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+      </Content>
+    </SolutionConfiguration>
+    <SolutionConfiguration Include="Release|Any CPU">
+      <Configuration>Release</Configuration>
+      <Platform>Any CPU</Platform>
+      <Content>
+        <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+      </Content>
+    </SolutionConfiguration>
+    <SolutionConfiguration Include="Release|Mixed Platforms">
+      <Configuration>Release</Configuration>
+      <Platform>Mixed Platforms</Platform>
+      <Content>
+        <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+      </Content>
+    </SolutionConfiguration>
+    <SolutionConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+      <Content>
+        <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+      </Content>
+    </SolutionConfiguration>
+  </ItemGroup>
+  <PropertyGroup Condition=" ('$(Configuration)' == 'CodeGeneration') and ('$(Platform)' == 'Mixed Platforms') ">
+    <CurrentSolutionConfigurationContents>
+      <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+    </CurrentSolutionConfigurationContents>
+  </PropertyGroup>
+  <PropertyGroup Condition=" ('$(Configuration)' == 'CodeGeneration') and ('$(Platform)' == 'x86') ">
+    <CurrentSolutionConfigurationContents>
+      <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+    </CurrentSolutionConfigurationContents>
+  </PropertyGroup>
+  <PropertyGroup Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
+    <CurrentSolutionConfigurationContents>
+      <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+    </CurrentSolutionConfigurationContents>
+  </PropertyGroup>
+  <PropertyGroup Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Mixed Platforms') ">
+    <CurrentSolutionConfigurationContents>
+      <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+    </CurrentSolutionConfigurationContents>
+  </PropertyGroup>
+  <PropertyGroup Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'x86') ">
+    <CurrentSolutionConfigurationContents>
+      <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+    </CurrentSolutionConfigurationContents>
+  </PropertyGroup>
+  <PropertyGroup Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
+    <CurrentSolutionConfigurationContents>
+      <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+    </CurrentSolutionConfigurationContents>
+  </PropertyGroup>
+  <PropertyGroup Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Mixed Platforms') ">
+    <CurrentSolutionConfigurationContents>
+      <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="True">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+    </CurrentSolutionConfigurationContents>
+  </PropertyGroup>
+  <PropertyGroup Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'x86') ">
+    <CurrentSolutionConfigurationContents>
+      <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{072BA7DA-7B60-407D-8B6E-95E3186BE70C}" AbsolutePath="c:\Projects\elasticsearch-net\src\Nest\Nest.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{27143A05-5655-447C-ADAF-405E1CF43741}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{704EF910-C4E7-413E-B21F-296EFE732FCF}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{97408393-78AC-45DF-BE6E-4C219A2E456D}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{B9FE4875-0171-40F7-A357-064A93BE09C6}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.Indexing\Profiling.Indexing.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{56A87048-9065-459B-826D-3DF68B409845}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{733A7657-69E9-444A-8AC0-BC123127A59A}" AbsolutePath="c:\Projects\elasticsearch-net\src\Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97EEFA7-BDAB-4417-97C0-14F971044C57}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Integration.Yaml\Elasticsearch.Net.Integration.Yaml.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{04F53AA5-6346-4139-94CF-81BD8663875F}" AbsolutePath="c:\Projects\elasticsearch-net\src\CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E97CCF40-0BA6-43FE-9F2D-58D454134088}" AbsolutePath="c:\Projects\elasticsearch-net\src\Elasticsearch.Net\Elasticsearch.Net.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}" AbsolutePath="c:\Projects\elasticsearch-net\src\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A69322FD-B874-44EF-ABE0-63F4A7B5593E}" AbsolutePath="c:\Projects\elasticsearch-net\src\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{C54FFD67-C452-4DC4-A47A-663ECA98A38F}" AbsolutePath="c:\Projects\elasticsearch-net\src\Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj" BuildProjectInSolution="False">Release|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{E005A0A9-ADAE-49D5-9686-73686471DA9F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65293" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DF8388A1-4778-411E-A3F5-1062CDE8621F}" AbsolutePath="c:\Projects\elasticsearch-net\src\http://localhost:65311" BuildProjectInSolution="False">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+    </CurrentSolutionConfigurationContents>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\SolutionFile\ImportAfter\*" Condition="'$(ImportByWildcardBeforeSolution)' != 'false' and exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\SolutionFile\ImportAfter')" />
+  <Import Project="c:\Projects\elasticsearch-net\src\after.Elasticsearch.sln.targets" Condition="exists('c:\Projects\elasticsearch-net\src\after.Elasticsearch.sln.targets')" />
+  <Target Name="Build" />
+  <Target Name="Rebuild" />
+  <Target Name="Clean" />
+  <Target Name="Publish" />
+</Project>

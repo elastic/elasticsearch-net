@@ -1,26 +1,31 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-  <metadata>
-    <id>NEST</id>
-    <version>1.3.0</version>
-    <title>NEST - Elasticsearch Client</title>
-    <authors>Elasticsearch Inc. and contributors</authors>
-    <owners>Elasticsearch Inc.</owners>
-    <iconUrl>http://nest.azurewebsites.net/images/nest-nuget-icon.png</iconUrl>
-    <licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>
-    <projectUrl>https://github.com/elasticsearch/elasticsearch-net</projectUrl>
-    <summary>Strongly typed interface to Elasticsearch. Fluent request builder, mapped responses and powerful query dsl. Uses and exposes Elasticsearch.Net</summary>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Elasticsearch client, strongly typed interface to Elasticsearch. Fluent request builder, mapped responses and powerful query dsl. Uses and exposes Elasticsearch.Net</description>
-    <dependencies>
-      <dependency id="Elasticsearch.Net" version="1.3.0"/>
-      <dependency id="Newtonsoft.Json" version="6.0.1" />
-    </dependencies>
-    <tags>elasticsearch elastic search lucene nest</tags>
-  </metadata>
-  <files>
-    <file src="output\Nest\Nest.dll" target="lib"/> 
-    <file src="output\Nest\Nest.pdb" target="lib"/> 
-    <file src="output\Nest\Nest.XML" target="lib"/> 
-  </files>
+	<metadata>
+		<id>NEST</id>
+		<version>1.3.0</version>
+		<title>NEST - Elasticsearch Client</title>
+		<authors>Elasticsearch Inc. and contributors</authors>
+		<owners>Elasticsearch Inc.</owners>
+		<iconUrl>http://nest.azurewebsites.net/images/nest-nuget-icon.png</iconUrl>
+		<licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>
+		<projectUrl>https://github.com/elasticsearch/elasticsearch-net</projectUrl>
+		<summary>Strongly typed interface to Elasticsearch. Fluent request builder, mapped responses and powerful query dsl. Uses and exposes Elasticsearch.Net</summary>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Elasticsearch client, strongly typed interface to Elasticsearch. Fluent request builder, mapped responses and powerful query dsl. Uses and exposes Elasticsearch.Net</description>
+		<dependencies>
+			<dependency id="Elasticsearch.Net" version="1.3.0"/>
+			<dependency id="Newtonsoft.Json" version="6.0.1" />
+		</dependencies>
+		<tags>elasticsearch elastic search lucene nest</tags>
+	</metadata>
+	<files>
+		<file src="output\Nest\net40\Nest.dll" target="lib"/>
+		<file src="output\Nest\net40\Nest.pdb" target="lib"/>
+		<file src="output\Nest\net40\Nest.XML" target="lib"/>
+		
+		<file src="output\Nest\net45\Nest.dll" target="lib\net45"/>
+		<file src="output\Nest\net45\Nest.pdb" target="lib\net45"/>
+		<file src="output\Nest\net45\Nest.XML" target="lib\net45"/>
+		
+	</files>
 </package>
