@@ -64,7 +64,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				query : {
                     function_score : { 		
 						query : { match_all : {} },
-						weight : 2
+						weight : 2.0
 					}
 				}
 			}";
