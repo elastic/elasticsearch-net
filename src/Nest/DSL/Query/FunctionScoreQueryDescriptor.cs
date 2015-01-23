@@ -91,6 +91,7 @@ namespace Nest
 			set { Self.WeightAsDouble = value; }
 		}
 
+		// TODO: Remove in 2.0 and change Weight to double
 		double? IFunctionScoreQuery.WeightAsDouble { get; set; }
 
 		bool IQuery.IsConditionless
