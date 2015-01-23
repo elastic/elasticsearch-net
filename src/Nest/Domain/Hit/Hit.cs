@@ -16,11 +16,10 @@ namespace Nest
 		string Type { get; }
 		string Version { get; }
 		string Id { get; }
-
 		IEnumerable<object> Sorts { get; }
-
 		HighlightFieldDictionary Highlights { get; }
 		Explanation Explanation { get; }
+		IEnumerable<string> MatchedQueries { get; }
 	}
 
 	[JsonObject]
@@ -76,5 +75,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "_explanation")]
 		public Explanation Explanation { get; internal set; }
 
+		[JsonProperty(PropertyName = "matched_queries")]
+		public IEnumerable<string> MatchedQueries { get; internal set; }
 	}
 }
