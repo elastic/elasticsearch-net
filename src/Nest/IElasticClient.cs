@@ -1671,5 +1671,95 @@ namespace Nest
 		/// <inheritdoc />
 		Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, UpgradeStatusDescriptor> upgradeDescriptor = null);
 
+		/// <inheritdoc />
+		ICatResponse<CatAliasesRecord> CatAliases(Func<CatAliasesDescriptor, CatAliasesDescriptor> selector = null);
+
+		ICatResponse<CatAliasesRecord> CatAliases(ICatAliasesRequest request);
+		Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(Func<CatAliasesDescriptor, CatAliasesDescriptor> selector = null);
+		Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request);
+
+		/// <inheritdoc />
+		ICatResponse<CatAllocationRecord> CatAllocation(Func<CatAllocationDescriptor, CatAllocationDescriptor> selector = null);
+
+		ICatResponse<CatAllocationRecord> CatAllocation(ICatAllocationRequest request);
+		Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(Func<CatAllocationDescriptor, CatAllocationDescriptor> selector = null);
+		Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request);
+
+		/// <inheritdoc />
+		ICatResponse<CatCountRecord> CatCount(Func<CatCountDescriptor, CatCountDescriptor> selector = null);
+
+		ICatResponse<CatCountRecord> CatCount(ICatCountRequest request);
+		Task<ICatResponse<CatCountRecord>> CatCountAsync(Func<CatCountDescriptor, CatCountDescriptor> selector = null);
+		Task<ICatResponse<CatCountRecord>> CatCountAsync(ICatCountRequest request);
+
+		/// <inheritdoc />
+		ICatResponse<CatHealthRecord> CatHealth(Func<CatHealthDescriptor, CatHealthDescriptor> selector = null);
+
+		ICatResponse<CatHealthRecord> CatHealth(ICatHealthRequest request);
+		Task<ICatResponse<CatHealthRecord>> CatHealthAsync(Func<CatHealthDescriptor, CatHealthDescriptor> selector = null);
+		Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request);
+
+		/// <inheritdoc />
+		ICatResponse<CatIndicesRecord> CatIndices(Func<CatIndicesDescriptor, CatIndicesDescriptor> selector = null);
+
+		ICatResponse<CatIndicesRecord> CatIndices(ICatIndicesRequest request);
+		Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(Func<CatIndicesDescriptor, CatIndicesDescriptor> selector = null);
+		Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(ICatIndicesRequest request);
+
+		/// <inheritdoc />
+		ICatResponse<CatMasterRecord> CatMaster(Func<CatMasterDescriptor, CatMasterDescriptor> selector = null);
+
+		ICatResponse<CatMasterRecord> CatMaster(ICatMasterRequest request);
+		Task<ICatResponse<CatMasterRecord>> CatMasterAsync(Func<CatMasterDescriptor, CatMasterDescriptor> selector = null);
+		Task<ICatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request);
+
+		/// <inheritdoc />
+		ICatResponse<CatNodesRecord> CatNodes(Func<CatNodesDescriptor, CatNodesDescriptor> selector = null);
+
+		ICatResponse<CatNodesRecord> CatNodes(ICatNodesRequest request);
+		Task<ICatResponse<CatNodesRecord>> CatNodesAsync(Func<CatNodesDescriptor, CatNodesDescriptor> selector = null);
+		Task<ICatResponse<CatNodesRecord>> CatNodesAsync(ICatNodesRequest request);
+
+		/// <inheritdoc />
+		ICatResponse<CatPendingTasksRecord> CatPendingTasks(Func<CatPendingTasksDescriptor, CatPendingTasksDescriptor> selector = null);
+
+		ICatResponse<CatPendingTasksRecord> CatPendingTasks(ICatPendingTasksRequest request);
+		Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(Func<CatPendingTasksDescriptor, CatPendingTasksDescriptor> selector = null);
+		Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(ICatPendingTasksRequest request);
+
+		/// <inheritdoc />
+		ICatResponse<CatPluginsRecord> CatPlugins(Func<CatPluginsDescriptor, CatPluginsDescriptor> selector = null);
+
+		ICatResponse<CatPluginsRecord> CatPlugins(ICatPluginsRequest request);
+		Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(Func<CatPluginsDescriptor, CatPluginsDescriptor> selector = null);
+		Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request);
+
+		/// <inheritdoc />
+		ICatResponse<CatRecoveryRecord> CatRecovery(Func<CatRecoveryDescriptor, CatRecoveryDescriptor> selector = null);
+
+		ICatResponse<CatRecoveryRecord> CatRecovery(ICatRecoveryRequest request);
+		Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(Func<CatRecoveryDescriptor, CatRecoveryDescriptor> selector = null);
+		Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(ICatRecoveryRequest request);
+
+		/// <inheritdoc />
+		ICatResponse<CatThreadPoolRecord> CatThreadPool(Func<CatThreadPoolDescriptor, CatThreadPoolDescriptor> selector = null);
+
+		ICatResponse<CatThreadPoolRecord> CatThreadPool(ICatThreadPoolRequest request);
+		Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(Func<CatThreadPoolDescriptor, CatThreadPoolDescriptor> selector = null);
+		Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(ICatThreadPoolRequest request);
+
+		/// <inheritdoc />
+		ICatResponse<CatShardsRecord> CatShards(Func<CatShardsDescriptor, CatShardsDescriptor> selector = null);
+
+		ICatResponse<CatShardsRecord> CatShards(ICatShardsRequest request);
+		Task<ICatResponse<CatShardsRecord>> CatShardsAsync(Func<CatShardsDescriptor, CatShardsDescriptor> selector = null);
+		Task<ICatResponse<CatShardsRecord>> CatShardsAsync(ICatShardsRequest request);
+
+		/// <inheritdoc />
+		ICatResponse<CatFielddataRecord> CatFielddata(Func<CatFielddataDescriptor, CatFielddataDescriptor> selector = null);
+
+		ICatResponse<CatFielddataRecord> CatFielddata(ICatFielddataRequest request);
+		Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(Func<CatFielddataDescriptor, CatFielddataDescriptor> selector = null);
+		Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(ICatFielddataRequest request);
 	}
 }
