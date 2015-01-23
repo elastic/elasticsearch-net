@@ -128,6 +128,12 @@ namespace Nest
 			return this;
 		}
 
+		public FunctionScoreQueryDescriptor<T> Functions(IEnumerable<IFunctionScoreFunction> functions)
+		{
+			Self.Functions = functions;
+			return this;
+		}
+
 		public FunctionScoreQueryDescriptor<T> ScoreMode(FunctionScoreMode mode)
 		{
 			Self.ScoreMode = mode;
