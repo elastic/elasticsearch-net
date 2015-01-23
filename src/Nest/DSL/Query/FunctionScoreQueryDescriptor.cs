@@ -36,8 +36,10 @@ namespace Nest
 		[JsonProperty(PropertyName = "script_score")]
 		IScriptFilter ScriptScore { get; set; }
 
-		[JsonProperty(PropertyName = "weight")]
 		long? Weight { get; set; }
+
+		[JsonProperty(PropertyName = "weight")]
+		double? WeightAsDouble { get; set; }
 	}
 
 	public class FunctionScoreQuery : PlainQuery, IFunctionScoreQuery
@@ -55,11 +57,20 @@ namespace Nest
 		public float? MaxBoost { get; set; }
 		public IRandomScoreFunction RandomScore { get; set; }
 		public IScriptFilter ScriptScore { get; set; }
-		public long? Weight { get; set; }
+
+		public long? Weight
+		{
+			get { return Convert.ToInt64(this.WeightAsDouble ); }
+			set { this.WeightAsDouble = value; }
+		}
+
+		public double? WeightAsDouble { get; set; }
 	}
 
 	public class FunctionScoreQueryDescriptor<T> : IFunctionScoreQuery where T : class
 	{
+		private IFunctionScoreQuery Self { get { return this; }}
+
 		IEnumerable<IFunctionScoreFunction> IFunctionScoreQuery.Functions { get; set; }
 
 		IQueryContainer IFunctionScoreQuery.Query { get; set; }
@@ -74,16 +85,23 @@ namespace Nest
 
 		IScriptFilter IFunctionScoreQuery.ScriptScore { get; set; }
 		
-		long? IFunctionScoreQuery.Weight { get; set; }
+		long? IFunctionScoreQuery.Weight 
+		{
+			get { return Convert.ToInt64(Self.WeightAsDouble ); }
+			set { Self.WeightAsDouble = value; }
+		}
+
+		// TODO: Remove in 2.0 and change Weight to double
+		double? IFunctionScoreQuery.WeightAsDouble { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return (((IFunctionScoreQuery)this).Query == null || ((IFunctionScoreQuery)this).Query.IsConditionless) 
-					&& ((IFunctionScoreQuery)this).RandomScore == null 
-					&& ((IFunctionScoreQuery)this).ScriptScore == null 
-					&& !((IFunctionScoreQuery)this).Functions.HasAny();
+				return (Self.Query == null || Self.Query.IsConditionless)
+					&& Self.RandomScore == null 
+					&& Self.ScriptScore == null 
+					&& !Self.Functions.HasAny();
 			}
 		}
 
@@ -92,7 +110,7 @@ namespace Nest
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
-			((IFunctionScoreQuery)this).Query = q.IsConditionless ? null :q;
+			Self.Query = q.IsConditionless ? null :q;
 			return this;
 		}
 
@@ -105,35 +123,35 @@ namespace Nest
 				f(descriptor);
 			}
 
-			((IFunctionScoreQuery)this).Functions = descriptor;
+			Self.Functions = descriptor;
 
 			return this;
 		}
 
 		public FunctionScoreQueryDescriptor<T> ScoreMode(FunctionScoreMode mode)
 		{
-			((IFunctionScoreQuery)this).ScoreMode = mode;
+			Self.ScoreMode = mode;
 			return this;
 		}
 
 		public FunctionScoreQueryDescriptor<T> BoostMode(FunctionBoostMode mode)
 		{
-			((IFunctionScoreQuery)this).BoostMode = mode;
+			Self.BoostMode = mode;
 			return this;
 		}
 
 		public FunctionScoreQueryDescriptor<T> MaxBoost(float maxBoost)
 		{
-			((IFunctionScoreQuery)this).MaxBoost = maxBoost;
+			Self.MaxBoost = maxBoost;
 			return this;
 		}
 
 		public FunctionScoreQueryDescriptor<T> RandomScore(int? seed = null)
 		{
-			((IFunctionScoreQuery)this).RandomScore = new RandomScoreFunction();
+			Self.RandomScore = new RandomScoreFunction();
 			if (seed.HasValue)
 			{
-				((IFunctionScoreQuery)this).RandomScore.Seed = seed.Value;
+				Self.RandomScore.Seed = seed.Value;
 			}
 			return this;
 		}
@@ -144,14 +162,19 @@ namespace Nest
 			if (scriptSelector != null)
 				scriptSelector(descriptor);
 
-			((IFunctionScoreQuery)this).ScriptScore = descriptor;
+			Self.ScriptScore = descriptor;
 
 			return this;
 		}
 
+		public FunctionScoreQueryDescriptor<T> Weight(double weight)
+		{
+			Self.WeightAsDouble = weight;
+			return this;
+		}
 		public FunctionScoreQueryDescriptor<T> Weight(long weight)
 		{
-			((IFunctionScoreQuery)this).Weight = weight;
+			Self.Weight = weight;
 			return this;
 		}
 	}
