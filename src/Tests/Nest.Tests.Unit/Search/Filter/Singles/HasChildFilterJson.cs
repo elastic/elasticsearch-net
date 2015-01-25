@@ -12,7 +12,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Filter(ff=>ff
 					.HasChild<Person>(d=>d
-						.Query(q=>q.Term(p=>p.FirstName, "value"))
+						.Query(q => q.Term(p => p.FirstName, "value"))
+						.Filter(q => q.Term(p => p.Age, 42))
 					)
 				);
 				
@@ -26,6 +27,11 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 						  ""firstName"": {
 							""value"": ""value""
 						  }
+						}
+					  },
+					  ""filter"": {
+						""term"": {
+						  ""age"": 42
 						}
 					  }
 					}
