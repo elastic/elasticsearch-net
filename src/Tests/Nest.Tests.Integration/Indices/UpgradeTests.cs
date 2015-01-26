@@ -12,6 +12,7 @@ namespace Nest.Tests.Integration.Indices
 	public class UpgradeTests : IntegrationTests
 	{
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Upgrade api added in ES 1.4")]
 		public void UpgradeAllTest()
 		{
 			var response = this.Client.Upgrade();
@@ -26,6 +27,7 @@ namespace Nest.Tests.Integration.Indices
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Upgrade api added in ES 1.4")]
 		public void UpgradeTest()
 		{
 			var index = ElasticsearchConfiguration.DefaultIndex;
@@ -41,6 +43,7 @@ namespace Nest.Tests.Integration.Indices
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Upgrade api added in ES 1.4")]
 		public void UpgradeStatusAllTest()
 		{
 			var response = this.Client.UpgradeStatus();
@@ -53,6 +56,7 @@ namespace Nest.Tests.Integration.Indices
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Upgrade api added in ES 1.4")]
 		public void UpgradeStatusTest()
 		{
 			var index = ElasticsearchConfiguration.DefaultIndex;

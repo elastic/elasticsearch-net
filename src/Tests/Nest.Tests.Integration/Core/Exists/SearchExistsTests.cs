@@ -9,6 +9,7 @@ namespace Nest.Tests.Integration.Core.Exists
 	public class SearchExistsTests : IntegrationTests
 	{
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Search exists api added in ES 1.4")]
 		public void ShouldNotExist_WrongIndex()
 		{
 			var r = this.Client.SearchExists<ElasticsearchProject>(f=>f.Index("yadadadadadaadada"));
@@ -18,6 +19,7 @@ namespace Nest.Tests.Integration.Core.Exists
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Search exists api added in ES 1.4")]
 		public void ShouldNotExist_WrongData()
 		{
 			var lookfor = NestTestData.Data.First().Country + "blah";
@@ -28,6 +30,7 @@ namespace Nest.Tests.Integration.Core.Exists
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Search exists api added in ES 1.4")]
 		public void ShouldExist()
 		{
 			var lookfor = NestTestData.Data.First().Country;

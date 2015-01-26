@@ -13,6 +13,7 @@ namespace Nest.Tests.Integration.Reproduce
 	public class Reproduce1181Tests : IntegrationTests
 	{
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Filters aggregation added in ES 1.4")]
 		public void FiltersAggregationResponseNotReadToCompletion()
 		{
 			var result = this.Client.Search<ElasticsearchProject>(s => s

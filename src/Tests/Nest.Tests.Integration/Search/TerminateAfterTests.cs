@@ -11,6 +11,7 @@ namespace Nest.Tests.Integration.Search
 	public class TerminateAfterTests : IntegrationTests
 	{
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Terminate after added in ES 1.4")]
 		public void TerminatedEarlyIsSet()
 		{
 			var queryResults = this.Client.Search<ElasticsearchProject>(s=>s
