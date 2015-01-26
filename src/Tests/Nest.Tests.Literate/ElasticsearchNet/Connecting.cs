@@ -86,9 +86,9 @@ namespace Nest.Tests.Literate.ElasticsearchNet
 				.DisableAutomaticProxyDetection()
 				/** Disable automatic proxy detection.  Defaults to true. */
 
-				.EnableCompressedResponses()
+				.EnableHttpCompression()
 				/**
-				 * Enable compressed responses from Elasticsearch (Note that nodes need to be configured 
+				 * Enable compressed request and reesponses from Elasticsearch (Note that nodes need to be configured 
 				 * to allow this.  See the [http module settings](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html) for more info).
 				*/
 
