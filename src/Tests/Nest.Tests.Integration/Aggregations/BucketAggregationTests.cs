@@ -66,6 +66,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.1.9", "Background filter added in ES 1.2")]
 		public void SignificantTermsWithBackgroundFilter()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
