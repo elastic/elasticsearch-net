@@ -58,7 +58,7 @@ namespace Elasticsearch.Net.Connection
 			{
 				Timeout = TimeSpan.FromMilliseconds(_settings.Timeout)
 			};
-			if (settings.EnableCompressedResponses || settings.EnableHttpCompression && innerHandler.SupportsAutomaticDecompression)
+			if (settings.EnableHttpCompression && innerHandler.SupportsAutomaticDecompression)
 			{
 				innerHandler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 				Client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));

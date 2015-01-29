@@ -17,7 +17,7 @@ namespace Nest.Resolvers.Converters
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var sorts = new List<KeyValuePair<PropertyPathMarker, ISort>>();
+			var sorts = new List<ISort>();
 			while (reader.TokenType != JsonToken.EndArray)
 			{
 				reader.Read();
@@ -36,7 +36,7 @@ namespace Nest.Resolvers.Converters
 						if (sort != null)
 						{
 							LoadGeoDistanceSortLocation(sort, j);
-							sorts.Add(new KeyValuePair<PropertyPathMarker, ISort>("_geo_distance", sort));
+							sorts.Add(sort);
 						}
 					}
 				}
@@ -48,7 +48,7 @@ namespace Nest.Resolvers.Converters
 						var sort = j.ToObject<ScriptSort>(serializer);
 						if (sort != null)
 						{
-							sorts.Add(new KeyValuePair<PropertyPathMarker, ISort>("_script", sort));
+							sorts.Add(sort);
 						}
 					}
 				}
@@ -61,7 +61,7 @@ namespace Nest.Resolvers.Converters
 						if (sort != null)
 						{
 							sort.Field = field;
-							sorts.Add(new KeyValuePair<PropertyPathMarker, ISort>(sort.Field, sort));
+							sorts.Add(sort);
 						}
 					}
 				}
@@ -72,12 +72,18 @@ namespace Nest.Resolvers.Converters
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			writer.WriteStartArray();
 			var sorts = value as IList<ISort>;
+			if (sorts == null) return;
+
+			var contract = serializer.ContractResolver as SettingsContractResolver;
+			if (contract == null) 
+				throw new Exception("Can not serialize sort because the current json contract does not extend SettingsContractResolver");
+
+			writer.WriteStartArray();
 			foreach (var sort in sorts)
 			{
+
 				writer.WriteStartObject();
-				var contract = serializer.ContractResolver as SettingsContractResolver;
 				var fieldName = contract.Infer.PropertyPath(sort.SortKey);
 				writer.WritePropertyName(fieldName);
 				serializer.Serialize(writer, sort);
@@ -88,7 +94,7 @@ namespace Nest.Resolvers.Converters
 
 		private void LoadGeoDistanceSortLocation(GeoDistanceSort sort, JObject j)
 		{
-			var field = j.Properties().Where(p => !GeoDistanceSort.Params.Contains(p.Name)).FirstOrDefault();
+			var field = j.Properties().FirstOrDefault(p => !GeoDistanceSort.Params.Contains(p.Name));
 
 			if (field != null)
 			{

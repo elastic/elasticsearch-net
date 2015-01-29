@@ -315,14 +315,6 @@ namespace Nest
 		IIndicesOperationResponse DeleteTemplate(IDeleteTemplateRequest deleteTemplateRequest);
 
 		/// <inheritdoc />
-		[Obsolete("Scheduled for removal in 2.0, this method name has a typo")]
-		Task<IIndicesOperationResponse> DeleteTemplateAync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
-
-		/// <inheritdoc />
-		[Obsolete("Scheduled for removal in 2.0, this method name has a typo")]
-		Task<IIndicesOperationResponse> DeleteTemplateAync(IDeleteTemplateRequest deleteTemplateRequest);
-
-		/// <inheritdoc />
 		Task<IIndicesOperationResponse> DeleteTemplateAsync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
 
 		/// <inheritdoc />
@@ -386,17 +378,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> percolateRequest)
-			where T : class;
-
-		/// <summary>
-		/// Percolate a document but only return the number of matches not the matches itself
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
-		/// </summary>
-		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
-		/// <param name="object">The object to percolator</param>
-		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
-		[Obsolete("Scheduled to be removed in 2.0 please use the overload takes a func (descriptor=>descriptor)")]
-		IPercolateCountResponse PercolateCount<T>(T @object, Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
 			where T : class;
 
 		IPercolateCountResponse PercolateCount<T>(Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector)

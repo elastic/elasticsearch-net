@@ -20,7 +20,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 					.OnField(e => e.Country)
 					.MissingLast()
 					.Descending()
-					.IgnoreUnmappedFields(true)
+					.UnmappedType(FieldType.Attachment)
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"
@@ -30,9 +30,9 @@ namespace Nest.Tests.Unit.Search.Sorting
                   sort: [
                     {
 					  country: {
-					    ignore_unmapped: true,
                         missing: ""_last"",
-                        order: ""desc""
+                        order: ""desc"",
+                        unmapped_type: ""attachment""
 					  }
                     }
                   ]

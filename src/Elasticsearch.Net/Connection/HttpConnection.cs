@@ -205,8 +205,7 @@ namespace Elasticsearch.Net.Connection
 			request.Pipelined = this.ConnectionSettings.HttpPipeliningEnabled
 				|| (requestSpecificConfig != null && requestSpecificConfig.EnableHttpPipelining);
 
-			if (this.ConnectionSettings.EnableCompressedResponses
-				|| this.ConnectionSettings.EnableHttpCompression)
+			if (this.ConnectionSettings.EnableHttpCompression)
 			{
 				request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 				request.Headers.Add("Accept-Encoding", "gzip,deflate");

@@ -81,12 +81,6 @@ namespace Elasticsearch.Net.Connection.Configuration
 			return this;
 		}
 
-		[Obsolete("Scheduled to be removed in 2.0.  Use BasicAuthentication() instead.")]
-		public RequestConfigurationDescriptor BasicAuthorization(string userName, string password)
-		{
-			return this.BasicAuthentication(userName, password);
-		}
-
 		public RequestConfigurationDescriptor BasicAuthentication(string userName, string password)
 		{
 			if (Self.BasicAuthorizationCredentials == null)

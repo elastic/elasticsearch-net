@@ -14,10 +14,10 @@ namespace Elasticsearch.Net.Connection
 	{
 
 		/// <summary>
-		/// Enable compressed responses from elasticsearch (NOTE that that nodes need to be configured to allow this)
+		/// Enable compressed requests and responses from elasticsearch (NOTE that that nodes need to be configured to allow this)
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html
 		/// </summary>
-		T EnableCompressedResponses(bool enabled = true);
+		T EnableHttpCompression(bool enabled = true);
 		
 	
 		/// <summary>

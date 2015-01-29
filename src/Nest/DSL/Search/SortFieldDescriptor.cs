@@ -8,7 +8,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	
+
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum SortOrder
 	{
@@ -63,7 +63,9 @@ namespace Nest
 		public abstract PropertyPathMarker SortKey { get; }
 	}
 
-	public abstract class SortDescriptorBase<T, TDescriptor> : ISort where T : class where TDescriptor : SortDescriptorBase<T, TDescriptor>
+	public abstract class SortDescriptorBase<T, TDescriptor> : ISort
+		where T : class
+		where TDescriptor : SortDescriptorBase<T, TDescriptor>
 	{
 		private ISort Self { get { return this; } }
 
@@ -132,8 +134,8 @@ namespace Nest
 		[JsonProperty("ignore_unmapped")]
 		bool? IgnoreUnmappedFields { get; set; }
 
-        [JsonProperty("unmapped_type")]
-        FieldType? UnmappedType { get; set; }
+		[JsonProperty("unmapped_type")]
+		FieldType? UnmappedType { get; set; }
 	}
 
 	public class Sort : SortBase, IFieldSort
@@ -144,7 +146,7 @@ namespace Nest
 		{
 			get { return Field; }
 		}
-	    public FieldType? UnmappedType { get; set; }
+		public FieldType? UnmappedType { get; set; }
 	}
 
 	public class SortFieldDescriptor<T> : SortDescriptorBase<T, SortFieldDescriptor<T>>, IFieldSort where T : class
@@ -154,7 +156,7 @@ namespace Nest
 		PropertyPathMarker IFieldSort.Field { get; set; }
 
 		bool? IFieldSort.IgnoreUnmappedFields { get; set; }
-        FieldType? IFieldSort.UnmappedType { get; set; }
+		FieldType? IFieldSort.UnmappedType { get; set; }
 
 		PropertyPathMarker ISort.SortKey { get { return Self.Field; } }
 
@@ -187,41 +189,34 @@ namespace Nest
 			Self.Missing = value;
 			return this;
 		}
-        public virtual SortFieldDescriptor<T> UnmappedType(FieldType type)
-        {
-            Self.UnmappedType = type;
-            return this;
-        }
-
-        [Obsolete("Deprecated in 1.4.0 use UnmappedType")]
-		public virtual SortFieldDescriptor<T> IgnoreUnmappedFields(bool ignore = true)
+		public virtual SortFieldDescriptor<T> UnmappedType(FieldType type)
 		{
-			Self.IgnoreUnmappedFields = ignore;
+			Self.UnmappedType = type;
 			return this;
 		}
 
-        public virtual SortFieldDescriptor<T> NestedMin()
-        {
-            Self.Mode = SortMode.Min;
-            return this;
-        }
+		public virtual SortFieldDescriptor<T> NestedMin()
+		{
+			Self.Mode = SortMode.Min;
+			return this;
+		}
 
-        public virtual SortFieldDescriptor<T> NestedMax()
-        {
+		public virtual SortFieldDescriptor<T> NestedMax()
+		{
 			Self.Mode = SortMode.Max;
-            return this;
-        }
+			return this;
+		}
 
-        public virtual SortFieldDescriptor<T> NestedSum()
-        {
-            Self.Mode = SortMode.Sum;
-            return this;
-        }
+		public virtual SortFieldDescriptor<T> NestedSum()
+		{
+			Self.Mode = SortMode.Sum;
+			return this;
+		}
 
-        public virtual SortFieldDescriptor<T> NestedAvg()
-        {
+		public virtual SortFieldDescriptor<T> NestedAvg()
+		{
 			Self.Mode = SortMode.Average;
-            return this;
-        }
+			return this;
+		}
 	}
 }

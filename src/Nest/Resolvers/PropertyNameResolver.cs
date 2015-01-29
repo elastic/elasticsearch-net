@@ -105,17 +105,6 @@ namespace Nest.Resolvers
 			return stack.Last();
 		}
 
-		[Obsolete("Scheduled for removal in 2.0, unused")]
-		public Stack<IElasticPropertyAttribute> ResolvePropertyAttributes(Expression expression)
-		{
-			var stack = new Stack<string>();
-			var attributes = new Stack<IElasticPropertyAttribute>();
-
-			Visit(expression, stack, attributes);
-
-			return attributes;
-		}
-
 		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			if (stack != null)
