@@ -9,6 +9,7 @@ namespace Nest
 	public class PropertyPathMarker : IEquatable<PropertyPathMarker>
 	{
 		public string Name { get; set; }
+		//TODO rename to Expression in 2.0
 		public Expression Type { get; set; }
 
 		public double? Boost { get; set; }
@@ -61,7 +62,12 @@ namespace Nest
 
 		public bool EqualsMarker(PropertyPathMarker other)
 		{
-			return other != null && this.GetHashCode() == other.GetHashCode();
+			if (!this.Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
+				return EqualsString(other.Name);
+			if (this.Type != null && other != null && other.Type != null)
+				return this.GetHashCode() == other.GetHashCode();
+			return false;
+			
 		}
 		public bool EqualsString(string other)
 		{

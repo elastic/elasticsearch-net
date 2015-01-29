@@ -16,6 +16,8 @@ namespace Elasticsearch.Net.Connection
 	{
 		private readonly IConnectionConfigurationValues _settings;
 
+		public TransportAddressScheme? AddressScheme { get; private set; }
+
 		static HttpClientConnection()
 		{
 			// brought over from HttpClient
@@ -34,6 +36,9 @@ namespace Elasticsearch.Net.Connection
 		public HttpClientConnection(IConnectionConfigurationValues settings, HttpClientHandler handler = null)
 		{
 			_settings = settings;
+			if (settings.ConnectionPool.UsingSsl)
+				this.AddressScheme = TransportAddressScheme.Https;
+			
 			DefaultContentType = "application/json";
 
 			var innerHandler = handler ?? new WebRequestHandler();
@@ -53,7 +58,7 @@ namespace Elasticsearch.Net.Connection
 			{
 				Timeout = TimeSpan.FromMilliseconds(_settings.Timeout)
 			};
-			if (settings.EnableCompressedResponses && innerHandler.SupportsAutomaticDecompression)
+			if (settings.EnableCompressedResponses || settings.EnableHttpCompression && innerHandler.SupportsAutomaticDecompression)
 			{
 				innerHandler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 				Client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
@@ -92,12 +97,10 @@ namespace Elasticsearch.Net.Connection
 		{
 			ThrowIfDisposed();
 
-			var requestTask = DoRequest(method, uri, data, requestSpecificConfig);
-
 			try
 			{
-				requestTask.Wait();
-				return requestTask.Result;
+				return this.DoRequestInternal(method, uri, data, requestSpecificConfig)
+					.Result;
 			}
 			catch (AggregateException ex)
 			{
@@ -118,6 +121,12 @@ namespace Elasticsearch.Net.Connection
 		/// <param name="requestSpecificConfig">The request specific configuration.</param>
 		/// <returns>Task&lt;ElasticsearchResponse&lt;Stream&gt;&gt;.</returns>
 		public async Task<ElasticsearchResponse<Stream>> DoRequest(HttpMethod method, Uri uri, byte[] data = null, IRequestConfiguration requestSpecificConfig = null)
+		{
+			return await this.DoRequestInternal(method, uri, data, requestSpecificConfig).ConfigureAwait(false);
+		}
+
+		public async Task<ElasticsearchResponse<Stream>> DoRequestInternal(
+			HttpMethod method, Uri uri, byte[] data = null, IRequestConfiguration requestSpecificConfig = null)
 		{
 			ThrowIfDisposed();
 
@@ -141,7 +150,8 @@ namespace Elasticsearch.Net.Connection
 						request.Content.Headers.ContentType = new MediaTypeHeaderValue(DefaultContentType);
 				}
 
-				var response = await Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+				var response = await Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+					.ConfigureAwait(false);
 
 				if (method == HttpMethod.Head || response.Content == null)
 				{

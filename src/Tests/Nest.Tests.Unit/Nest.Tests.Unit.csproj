@@ -12,7 +12,6 @@
     <AssemblyName>Nest.Tests.Unit</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -69,27 +68,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoPoco">
-      <HintPath>..\..\..\dep\AutoPoco.1.0.0.0\lib\AutoPoco.dll</HintPath>
-    </Reference>
-    <Reference Include="FakeItEasy, Version=1.18.0.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\dep\FakeItEasy.1.18.0\lib\net40\FakeItEasy.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentAssertions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\dep\FluentAssertions.2.2.0.0\lib\net40\FluentAssertions.dll</HintPath>
-    </Reference>
-    <Reference Include="Moq">
-      <HintPath>..\..\..\dep\Moq.4.2.1312.1622\lib\net40\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\dep\Newtonsoft.Json.6.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\..\..\dep\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -120,6 +98,7 @@
     <Compile Include="Cluster\PutSettings\PutSettingsTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
+    <Compile Include="Cluster\Reroute\RerouteTests.cs" />
     <Compile Include="Cluster\State\StateTests.cs" />
     <Compile Include="Converters\BaseConverterTest.cs" />
     <Compile Include="Converters\FuzzinessConverterTests.cs" />
@@ -129,9 +108,13 @@
     <Compile Include="Core\Indices\Analysis\Analyzers\AnalyzerTests.cs" />
     <Compile Include="Core\Indices\Similarity\SimilarityTests.cs" />
     <Compile Include="Core\Map\CustomMapping\ImagePluginMappingTests.cs" />
+    <Compile Include="Core\Map\GenericTypes\GenericTypeMappingTests.cs" />
     <Compile Include="Core\Map\GetMappingSerializationTests.cs" />
     <Compile Include="Core\Map\MappingBehaviourTests.cs" />
     <None Include="Cluster\PutSettings\PutSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Cluster\Reroute\ClusterReroute.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Bulk\BulkIndexDetailsFixedPath.json">
@@ -147,6 +130,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Indices\Analysis\Analyzers\LanguageAnalyzerTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Analyzers\KeepTypesTokenFilter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Indices\Analysis\Analyzers\WhitespaceAnalyzerTest.json">
@@ -188,6 +174,9 @@
     <None Include="Core\Map\CustomMapping\RepresentUnknowImageMappingPlugin.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Map\GenericTypes\GenericTypeMapping.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Map\Properties\CompletionProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -196,6 +185,9 @@
     </None>
     <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
     <Compile Include="Core\Map\Transform\MappingTansformTests.cs" />
+    <Compile Include="Core\Script\DeleteScriptRequestTests.cs" />
+    <Compile Include="Core\Script\GetScriptRequestTests.cs" />
+    <Compile Include="Core\Script\PutScriptRequestTests.cs" />
     <Compile Include="Core\Scroll\ScrollRequestTests.cs" />
     <Compile Include="Core\Domain\Connection\ConnectionTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
@@ -219,6 +211,8 @@
     <Compile Include="Core\Map\RootProperties\MapRootObjectPropertiesTests.cs" />
     <Compile Include="Core\MoreLikeThis\MltSearchBodyTests.cs" />
     <Compile Include="Core\MoreLikeThis\MltUrlTests.cs" />
+    <Compile Include="Core\Snapshot\RestoreObservableTests.cs" />
+    <Compile Include="Core\Snapshot\SnapshotObservableTests.cs" />
     <Compile Include="Core\Snapshot\SnapshotStatusRequestTests.cs" />
     <Compile Include="Core\Template\PutTemplateRequestTests.cs" />
     <Compile Include="Core\UpdateSettings\UpdateSettingsRequestTests.cs" />
@@ -237,7 +231,10 @@
     <Compile Include="Internals\Exceptions\BadQueryServerExceptionTests.cs" />
     <Compile Include="Internals\Inferno\EscapedFormatTests.cs" />
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
+    <Compile Include="Internals\Inferno\MapIdPropertyForTests.cs" />
+    <Compile Include="Internals\Inferno\MapPropertyIgnoreTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
+    <Compile Include="Internals\Inferno\MapPropertyNamesForTests.cs" />
     <Compile Include="Internals\Serialize\ConnectionSettingsTests.cs" />
     <Compile Include="Internals\Serialize\NullValueHandlingTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
@@ -247,7 +244,9 @@
     <Compile Include="ObjectInitializer\Aliases\GetAliasRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\AliasRequestTests.cs" />
+    <Compile Include="ObjectInitializer\MultiTermVectors\MultiTermVectorsWithDocumentRequestTests.cs" />
     <Compile Include="ObjectInitializer\Nodes\NodesHotThreadsRequestTests.cs" />
+    <Compile Include="ObjectInitializer\Repository\VerifyRepositoryRequestTests.cs" />
     <Compile Include="ObjectInitializer\Search\SearchRequestUntypedTests.cs" />
     <Compile Include="ObjectInitializer\Status\StatusRequestTests.cs" />
     <Compile Include="ObjectInitializer\IndicesStats\IndicesStatsRequestTests.cs" />
@@ -308,6 +307,7 @@
     <Compile Include="ObjectInitializer\Template\DeleteTemplateRequestTests.cs" />
     <Compile Include="ObjectInitializer\Template\GetTemplateRequestTests.cs" />
     <Compile Include="ObjectInitializer\Template\PutTemplateRequestTests.cs" />
+    <Compile Include="ObjectInitializer\TermVector\TermVectorWithDocRequestTests.cs" />
     <Compile Include="ObjectInitializer\TermVector\TermVectorRequestTests.cs" />
     <Compile Include="ObjectInitializer\Update\UpdateRequestTests.cs" />
     <Compile Include="ObjectInitializer\UpdateSettings\UpdateSettingsRequestTests.cs" />
@@ -322,6 +322,7 @@
     <Compile Include="QueryParsers\Filter\GeoBoundingBoxFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\GeoDistanceFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\GeoDistanceRangeFilterTests.cs" />
+    <Compile Include="QueryParsers\Filter\GeoHashCellFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\GeoIndexShapeFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\GeoPolygonFilterTests.cs" />
     <Compile Include="QueryParsers\Filter\GeoShapeFilterTests.cs" />
@@ -380,6 +381,10 @@
     <Compile Include="QueryParsers\Visitor\DslPrettyPrintVisitor.cs" />
     <Compile Include="QueryParsers\Visitor\VisitorDemoUseCase.cs" />
     <Compile Include="QueryParsers\Visitor\VisitorTests.cs" />
+    <Compile Include="Reproduce\Reproduce1199Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1146Tests.cs" />
+    <Compile Include="Reproduce\Reproduce629Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1187Tests.cs" />
     <Compile Include="Reproduce\Reproduce990Tests.cs" />
     <Compile Include="Reproduce\Reproduce974Tests.cs" />
     <Compile Include="Reproduce\Reproduce928Tests.cs" />
@@ -390,10 +395,14 @@
     <Compile Include="Reproduce\Reproduce806Tests.cs" />
     <Compile Include="Reproduce\Reproduce876Tests.cs" />
     <Compile Include="Reproduce\Reproduce926Tests.cs" />
+    <Compile Include="Search\Aggregations\ScriptedMetricJson.cs" />
+    <Compile Include="Search\Aggregations\SingleBucketAggregationTests.cs" />
     <Compile Include="Search\Failures\ShardFailureTests.cs" />
     <Compile Include="Search\Fields\FieldsTests.cs" />
     <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
     <Compile Include="Search\Filter\Modes\FilterModesTests.cs" />
+    <Compile Include="Search\Filter\Singles\GeoHashCellFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\IndicesFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\TermsLookupFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\GeoIndexedShapeFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\GeoShapeFilterJson.cs" />
@@ -422,6 +431,7 @@
     <Compile Include="Search\Query\Singles\SpanMultiTermQueryJson.cs" />
     <Compile Include="Search\Query\Singles\TemplateQueryJson.cs" />
     <Compile Include="Search\Query\Singles\Term\TermToStringJson.cs" />
+    <Compile Include="Search\SearchUrlTests.cs" />
     <Compile Include="Search\Rescoring\RescoreTests.cs" />
     <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
     <Compile Include="Search\Facets\FacetJson.cs" />
@@ -515,9 +525,9 @@
     <Compile Include="Search\Source\SourceTests.cs" />
     <Compile Include="Search\Sorting\FunctionScoreTests.cs" />
     <Compile Include="Search\Sorting\SortTests.cs" />
-    <Compile Include="Search\Suggest\CompletionSuggestTests.cs" />
-    <Compile Include="Search\Suggest\PhraseSuggestTests.cs" />
-    <Compile Include="Search\Suggest\TermSuggestTests.cs" />
+    <Compile Include="Search\suggest\CompletionSuggestTests.cs" />
+    <Compile Include="Search\suggest\PhraseSuggestTests.cs" />
+    <Compile Include="Search\suggest\TermSuggestTests.cs" />
     <Compile Include="Settings\UsePrettyResponseTests.cs" />
     <Compile Include="TestElasticClient.cs" />
     <Compile Include="Core\Update\UpdateTests.cs" />
@@ -650,6 +660,9 @@
     <None Include="Core\MultiPercolate\MultiPercolateJson.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Script\PutScript.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\UpdateSettings\AllUpdateSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -710,6 +723,9 @@
     <None Include="ObjectInitializer\MoreLikeThis\MoreLikeThisBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="ObjectInitializer\MultiTermVectors\MultiTermVectorsWithDocumentBody.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="ObjectInitializer\Snapshot\SnapshotBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -767,7 +783,7 @@
     <None Include="ObjectInitializer\Warmers\PutWarmerBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
+    <None Include="paket.references" />
     <None Include="QueryParsers\Filter\GeoBoundingBox\LatLon.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -780,7 +796,13 @@
     <None Include="QueryParsers\Filter\Term.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Reproduce\Issue1199Index.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Reproduce\Issue579.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Reproduce\Issue1199Mapping.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Reproduce\Issue928.json">
@@ -1224,6 +1246,12 @@
     <None Include="Search\Query\UpdateQuery\FilteredQueryCombinesUsingStatic.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Search\ScriptFields\TestIndexedScriptFieldWithScriptLangEnum.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\ScriptFields\TestIndexedScriptField.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\SearchTypeTests\SearchTypeDoesNotPolluteQueryObject.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -1278,4 +1306,212 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="..\..\..\.paket\paket.targets" />
+  <ItemGroup>
+    <Reference Include="AutoPoco">
+      <HintPath>..\..\..\packages\AutoPoco\lib\AutoPoco.dll</HintPath>
+      <Private>True</Private>
+      <Paket>True</Paket>
+    </Reference>
+  </ItemGroup>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
+      <ItemGroup>
+        <Reference Include="FakeItEasy">
+          <HintPath>..\..\..\packages\FakeItEasy\lib\win8\FakeItEasy.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="FakeItEasy">
+          <HintPath>..\..\..\packages\FakeItEasy\lib\net35\FakeItEasy.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0'">
+      <ItemGroup>
+        <Reference Include="FakeItEasy">
+          <HintPath>..\..\..\packages\FakeItEasy\lib\sl50\FakeItEasy.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="FakeItEasy">
+          <HintPath>..\..\..\packages\FakeItEasy\lib\net40\FakeItEasy.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
+      <ItemGroup>
+        <Reference Include="FluentAssertions">
+          <HintPath>..\..\..\packages\FluentAssertions\lib\winrt45\FluentAssertions.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="FluentAssertions">
+          <HintPath>..\..\..\packages\FluentAssertions\lib\net35\FluentAssertions.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
+      <ItemGroup>
+        <Reference Include="FluentAssertions">
+          <HintPath>..\..\..\packages\FluentAssertions\lib\net40\FluentAssertions.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'Silverlight' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v5.0')">
+      <ItemGroup>
+        <Reference Include="FluentAssertions.Silverlight">
+          <HintPath>..\..\..\packages\FluentAssertions\lib\sl4\FluentAssertions.Silverlight.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight">
+          <HintPath>..\..\..\packages\FluentAssertions\lib\sl4\Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v7.1' Or $(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')">
+      <ItemGroup>
+        <Reference Include="FluentAssertions.WindowsPhone">
+          <HintPath>..\..\..\packages\FluentAssertions\lib\sl4-windowsphone71\FluentAssertions.WindowsPhone.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="FluentAssertions">
+          <HintPath>..\..\..\packages\FluentAssertions\lib\net45\FluentAssertions.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Moq">
+          <HintPath>..\..\..\packages\Moq\lib\net35\Moq.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'Silverlight' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v5.0')">
+      <ItemGroup>
+        <Reference Include="Moq.Silverlight">
+          <HintPath>..\..\..\packages\Moq\lib\sl4\Moq.Silverlight.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="Moq">
+          <HintPath>..\..\..\packages\Moq\lib\net40\Moq.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\netcore45\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net35\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v2.0' Or $(TargetFrameworkVersion) == 'v3.0')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net20\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net40\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0') Or ($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile158')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\portable-net40+sl5+wp80+win8+monotouch+monoandroid\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')) Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+      <Paket>True</Paket>
+    </Reference>
+  </ItemGroup>
 </Project>

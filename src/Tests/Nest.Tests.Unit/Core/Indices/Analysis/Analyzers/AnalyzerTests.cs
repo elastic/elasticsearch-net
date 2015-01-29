@@ -116,5 +116,17 @@ namespace Nest.Tests.Unit.Core.Indices.Analysis.Analyzers
 
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
 		}
+		
+		[Test]
+		public void KeepTypesTokenFilter()
+		{
+			var result = this.Analysis(a => a
+				.TokenFilters(tf => tf
+					.Add("keep", new KeepTypesTokenFilter {Types = new[] {"<NUM>"}})
+				)
+			);
+
+			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
+		}
 	}
 }

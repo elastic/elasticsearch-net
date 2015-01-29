@@ -3,6 +3,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Nest.Tests.Integration.Aggregations
 {
@@ -172,6 +173,12 @@ namespace Nest.Tests.Integration.Aggregations
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
+				.Query(q => q
+					.Match(m => m
+						.OnField(p => p.Name)
+						.Query("elasticsearch")
+					)
+				)
 				.Aggregations(a => a
 					.Terms("top-countries", t => t
 						.Field(p => p.Country)
@@ -186,6 +193,26 @@ namespace Nest.Tests.Integration.Aggregations
 									.Include(p => p.Name)
 								)
 								.Size(1)
+								.Explain(true)
+								.Version(true)
+								.Highlight(h => h
+									.PreTags("<em>")
+									.PostTags("</em>")
+									.OnFields(hf => hf
+										.OnField(p => p.Name)
+										.PreTags("<em>")
+										.PostTags("</em>")
+									)
+								)
+								.ScriptFields(sf => sf
+									.Add("locscriptfield", sff => sff
+										.Script("doc['loc'].value * multiplier")
+										.Params(sp => sp
+											.Add("multiplier", 2)
+										)
+									)
+								)
+								.FieldDataFields(p => p.Name, p => p.Country)
 							)
 						)
 					)
@@ -197,15 +224,128 @@ namespace Nest.Tests.Integration.Aggregations
 			var topCountries = results.Aggs.Terms("top-countries").Items;
 			foreach(var topCountry in topCountries)
 			{
-				var topHits = topCountry.TopHitsMetric("top-country-hits");
+				var topHits = topCountry.TopHits("top-country-hits");
 				topHits.Should().NotBeNull();
 				topHits.Total.Should().BeGreaterThan(0);
 				var hits = topHits.Hits<ElasticsearchProject>();
 				hits.Should().NotBeEmpty().And.NotContain(h=> h.Id.IsNullOrEmpty() || h.Index.IsNullOrEmpty());
+				hits.All(h => h.Explanation != null).Should().BeTrue();
+				hits.All(h => !h.Version.IsNullOrEmpty()).Should().BeTrue();
+				hits.All(h => h.Highlights.Count() > 0).Should().BeTrue();
+				hits.All(h => h.Fields.FieldValues<int[]>("locscriptfield").HasAny()).Should().BeTrue();
+				hits.All(h => h.Fields.FieldValues<string[]>("name").HasAny()).Should().BeTrue();
+				hits.All(h => h.Fields.FieldValues<string[]>("country").HasAny()).Should().BeTrue();
 				topHits.Documents<ElasticsearchProject>().Should().NotBeEmpty();
-
 			}
+		}
 
+		[Test]
+		[SkipVersion("0 - 1.3.9", "Scripted metric aggregation added in ES 1.4")]
+		public void ScriptedMetric_SingleNumericValue()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.ScriptedMetric("project_count", sm => sm
+						.InitScript("_agg['count'] = []")
+						.MapScript("_agg.count.add(1)")
+						.CombineScript("total = 0; for (c in _agg.count) { total += c }; return total")
+						.ReduceScript("total = 0; for (a in _aggs) { total += a }; return total")
+					)
+				)
+			);
+
+			results.IsValid.Should().BeTrue();
+			var count = results.Aggs.ScriptedMetric("project_count");
+			var value = count.Value<double>();
+			value.Should().BeGreaterThan(0);
+		}
+
+		[SkipVersion("0 - 1.3.9", "Scripted metric aggregation added in ES 1.4")]
+		[Test]
+		public void ScriptedMetric_MultiNumericValue()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.ScriptedMetric("project_count_per_shard", sm => sm
+						.InitScript("_agg['count'] = []")
+						.MapScript("_agg.count.add(1)")
+						.CombineScript("total = 0; for (c in _agg.count) { total += c }; return total")
+						.ReduceScript("return _aggs")
+					)
+				)
+			);
+
+			results.IsValid.Should().BeTrue();
+			var countsPerShard = results.Aggs.ScriptedMetric("project_count_per_shard");
+			var value = countsPerShard.Value<IEnumerable<double>>();
+			value.Should().NotBeNull();
+			value.Count().Should().BeGreaterThan(0);
+		}
+
+		[Test]
+		[SkipVersion("0 - 1.3.9", "Scripted metric aggregation added in ES 1.4")]
+		public void ScriptedMetric_SingleStringValue()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.ScriptedMetric("first_name", sm => sm
+						.InitScript("_agg['names'] = []")
+						.MapScript("_agg.names.add(doc['name'].value)")
+						.ReduceScript("return _aggs['names'][0][0]")
+					)
+				)
+			);
+
+			results.IsValid.Should().BeTrue();
+			var firstName = results.Aggs.ScriptedMetric("first_name");
+			var value = firstName.Value<string>();
+			value.Should().NotBeNullOrEmpty();
+		}
+
+		[Test]
+		[SkipVersion("0 - 1.3.9", "Scripted metric aggregation added in ES 1.4")]
+		public void ScriptedMetric_MultiStringValue()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.ScriptedMetric("names_on_first_shard", sm => sm
+						.InitScript("_agg['names'] = []")
+						.MapScript("_agg.names.add(doc['name'].value)")
+						.ReduceScript("return _aggs['names'][0]")
+					)
+				)
+			);
+
+			results.IsValid.Should().BeTrue();
+			var namesOnFirstShard = results.Aggs.ScriptedMetric("names_on_first_shard");
+			var value = namesOnFirstShard.Value<IEnumerable<string>>();
+			value.Should().NotBeNull();
+			value.Count().Should().BeGreaterThan(0);
+		}
+
+		[Test]
+		[SkipVersion("0 - 1.3.9", "Scripted metric aggregation added in ES 1.4")]
+		public void ScriptedMetric_MultiArrayValue()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.ScriptedMetric("names_per_shard", sm => sm
+						.InitScript("_agg['names'] = []")
+						.MapScript("_agg.names.add(doc['name'].value)")
+						.ReduceScript("return _aggs['names']")
+					)
+				)
+			);
+
+			results.IsValid.Should().BeTrue();
+			var namesPerShard = results.Aggs.ScriptedMetric("names_per_shard");
+			var value = namesPerShard.Value<IEnumerable<IEnumerable<string>>>();
+			value.Should().NotBeNull();
 		}
 	}
 }

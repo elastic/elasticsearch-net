@@ -12,6 +12,9 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "clauses")]
 		IEnumerable<ISpanQuery> Clauses { get; set; }
+        [JsonProperty(PropertyName = "boost")]
+        double? Boost { get; set; }
+
 	}
 
 	public class SpanOrQuery : PlainQuery, ISpanOrQuery
@@ -23,11 +26,13 @@ namespace Nest
 
 		bool IQuery.IsConditionless { get { return false; } }
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
+        public double? Boost { get; set; }
 	}
 
 	public class SpanOrQueryDescriptor<T> : ISpanOrQuery where T : class
 	{
 		IEnumerable<ISpanQuery> ISpanOrQuery.Clauses { get; set; }
+        double? ISpanOrQuery.Boost { get; set; }
 
 		bool IQuery.IsConditionless
 		{
@@ -51,5 +56,11 @@ namespace Nest
 			((ISpanOrQuery)this).Clauses = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
+
+        public ISpanOrQuery Boost(double boost)
+        {
+            ((ISpanOrQuery)this).Boost = boost;
+            return this;
+        }
 	}
 }

@@ -67,7 +67,7 @@ For instance, a common use case is the ability to add client certificates to web
 
 The `NEST` client can be configured by passing in an `IConnectionSettingsValues` object, which is a sub-interface of 
 `Elasticsearch.Net`'s `IConnectionConfigurationValues`.  Therefore all of the settings that can be used to 
-[configure Elasticsearch.Net](/elasticsearch-net/connection.html) also apply here, including the 
+[configure Elasticsearch.Net](/elasticsearch-net/connecting.html) also apply here, including the 
 [cluster failover settings](/elasticsearch-net/cluster-failover.html)
 
 The easiest way to pass `IConnectionSettingsValues` is to instantiate `ConnectionSettings` is:

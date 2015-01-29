@@ -24,7 +24,7 @@ namespace Nest
 				return string.Empty;
 		}
 
-		
+
 		public static T? ToEnum<T>(this string str) where T : struct
 		{
 			var enumType = typeof(T);
@@ -74,6 +74,7 @@ namespace Nest
 			if (!@object.Any())
 				throw new ArgumentException("Argument can not be an empty collection", parameterName);
 		}
+
 		internal static IList<T> EagerConcat<T>(this IEnumerable<T> list, IEnumerable<T> other)
 		{
 			list = list.HasAny() ? list : Enumerable.Empty<T>();
@@ -99,7 +100,7 @@ namespace Nest
 			if (value == null)
 				throw new ArgumentNullException(name);
 		}
-		
+
 		internal static string F(this string format, params object[] args)
 		{
 			var c = CultureInfo.InvariantCulture;

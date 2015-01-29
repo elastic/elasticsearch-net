@@ -27,6 +27,8 @@ namespace Nest
 		public PropertyPathMarker Field { get; set; }
 
 		public ICircleGeoShape Shape { get; set; }
+
+		public GeoShapeRelation? Relation { get; set; }
 	}
 
 	public class GeoShapeCircleFilterDescriptor : FilterBase, IGeoShapeCircleFilter
@@ -42,6 +44,7 @@ namespace Nest
 		}
 
 		PropertyPathMarker IFieldNameFilter.Field { get; set; }
+		GeoShapeRelation? IGeoShapeBaseFilter.Relation { get; set; }
 		ICircleGeoShape IGeoShapeCircleFilter.Shape { get; set; }
 
 		public GeoShapeCircleFilterDescriptor Coordinates(IEnumerable<double> coordinates)
@@ -57,6 +60,12 @@ namespace Nest
 			if (this.Self.Shape == null)
 				this.Self.Shape = new CircleGeoShape();
 			this.Self.Shape.Radius = radius;
+			return this;
+		}
+
+		public GeoShapeCircleFilterDescriptor Relation(GeoShapeRelation relation)
+		{
+			this.Self.Relation = relation;
 			return this;
 		}
 	}

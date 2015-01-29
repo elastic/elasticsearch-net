@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.ConnectionPool;
 using Nest;
 
 namespace Profiling.Indexing
@@ -100,7 +101,9 @@ namespace Profiling.Indexing
 				host = "ipv4.fiddler";
 			
 			var uri = new UriBuilder("http", host, port).Uri;
-			return new ConnectionSettings(uri, indexName)
+			var connectionPool = new SniffingConnectionPool(new[] {uri});
+			return new ConnectionSettings(connectionPool, indexName)
+				.SniffOnStartup()
 				.ThrowOnElasticsearchServerExceptions();
 		}
 

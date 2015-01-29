@@ -130,7 +130,7 @@ namespace Nest.Resolvers.Writers
 			var properties = this._type.GetProperties();
 			foreach (var p in properties)
 			{
-				var att = ElasticAttributes.Property(p);
+				var att = ElasticAttributes.Property(p, this._connectionSettings);
 				if (att != null && att.OptOut)
 					continue;
 
@@ -284,7 +284,7 @@ namespace Nest.Resolvers.Writers
 			if (type.IsArray)
 				return type.GetElementType();
 
-			if (type.IsGenericType && type.GetGenericArguments().Length >= 1)
+            if (type.IsGenericType && type.GetGenericArguments().Length == 1 && (type.GetInterface("IEnumerable") != null || Nullable.GetUnderlyingType(type) != null))
 				return type.GetGenericArguments()[0];
 
 			return type;

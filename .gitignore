@@ -34,13 +34,9 @@ _ReSharper*/
 _NCrunch*/
 [Tt]est[Rr]esult*
 
-keypair.snk
-private.snk
-*.snk
-build/keys/private.snk
-build/keys/keypair.snk
 build/*
 !build/tools
+!build/keys
 build/tools/*
 !build/tools/sn
 !build/tools/sn/*
@@ -49,6 +45,8 @@ build/tools/*
 !build/*.fsx
 !build/*.ps1
 !build/*.nuspec
+!build/scripts
+!.paket/*.exe
 
 /dep/Newtonsoft.Json.4.0.2
 !docs/build
@@ -61,3 +59,4 @@ Cache
 YamlCache
 
 *.DS_Store
+*.sln.ide

@@ -12,7 +12,6 @@
     <AssemblyName>Nest.Tests.Integration</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -47,23 +46,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AppDomainToolkit">
-      <HintPath>..\..\..\dep\AppDomainToolkit.1.0.4.1\lib\net\AppDomainToolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoPoco">
-      <HintPath>..\..\..\dep\AutoPoco.1.0.0.0\lib\AutoPoco.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentAssertions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\dep\FluentAssertions.2.2.0.0\lib\net45\FluentAssertions.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\dep\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\..\..\dep\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
@@ -96,6 +78,7 @@
     <Compile Include="Aggregations\SingleBucketAggregationTests.cs" />
     <Compile Include="Aggregations\StatsAggregationTests.cs" />
     <Compile Include="Aggregations\MetricAggregationTests.cs" />
+    <Compile Include="Aggregations\FIltersAggregationTests.cs" />
     <Compile Include="Aggregations\TermsAggregationTests.cs" />
     <Compile Include="Aggregations\ParseResponseItemsTests.cs" />
     <Compile Include="Attributes\SkipVersionAttribute.cs" />
@@ -105,12 +88,16 @@
     <Compile Include="Cluster\StatsTest.cs" />
     <Compile Include="Connection\Failover\SniffTests.cs" />
     <Compile Include="Connection\HttpClient\HttpClientTests.cs" />
+    <Compile Include="Connection\Security\BasicAuthenticationTests.cs" />
+    <Compile Include="Connection\Security\SniffingUsingSSLTests.cs" />
+    <Compile Include="Connection\Security\UnauthorizedRequestTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Analyze\AnalyzeTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
     <Compile Include="Core\CountTests.cs" />
     <Compile Include="Core\Cat\CatTests.cs" />
+    <Compile Include="Core\Exists\SearchExistsTests.cs" />
     <Compile Include="Core\Explain\ExplainTests.cs" />
     <Compile Include="Core\Exists\AliasExists.cs" />
     <Compile Include="Core\GetFieldMapping\GetFieldMappingTests.cs" />
@@ -122,6 +109,7 @@
     <Compile Include="Core\Repository\CreateRepositoryTests.cs" />
     <Compile Include="Core\ClearScroll\ClearScrollTests.cs" />
     <Compile Include="Core\Exists\DocumentExistsTests.cs" />
+    <Compile Include="Core\Scripts\ScriptsTest.cs" />
     <Compile Include="Core\Suggest\SuggestTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
     <Compile Include="Core\TermVectors\MultiTermVectorsTests.cs" />
@@ -142,7 +130,9 @@
     <Compile Include="Indices\Analysis\Analyzers\AnalyzerTests.cs" />
     <Compile Include="Cluster\StateTests.cs" />
     <Compile Include="Core\Exists\TypeExistsTests.cs" />
+    <Compile Include="Indices\GetIndexTests.cs" />
     <Compile Include="Indices\StatusTests.cs" />
+    <Compile Include="Indices\UpgradeTests.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
@@ -174,9 +164,17 @@
     <Compile Include="Indices\StatsTests.cs" />
     <Compile Include="Core\AsyncTests.cs" />
     <Compile Include="Mapping\MappingVisitorTests.cs" />
+    <Compile Include="Mapping\GetMultipleMappingTests.cs" />
+    <Compile Include="Reproduce\Reproduce1181Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1202Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1079Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1169Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1176Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1193Tests.cs" />
     <Compile Include="Reproduce\Reproduce769Tests.cs" />
     <Compile Include="Reproduce\Reproduce945Tests.cs" />
     <Compile Include="Reproduce\Reproduce953Tests.cs" />
+    <Compile Include="Reproduce\Reproduce994Tests.cs" />
     <Compile Include="Reproduce\Reproduce986Tests.cs" />
     <Compile Include="Reproduce\Reproduce960Tests.cs" />
     <Compile Include="Search\Filter\AndOrNotFilterTests.cs" />
@@ -246,6 +244,7 @@
     <Compile Include="Search\SearchTypeTests\SearchTypeCountTests.cs" />
     <Compile Include="Search\SearchTypeTests\SearchTypeTests.cs" />
     <Compile Include="Search\SubClassSupport\SubClassSupportTests.cs" />
+    <Compile Include="Search\TerminateAfterTests.cs" />
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />
     <Compile Include="Startup\StartupTests.cs" />
@@ -279,9 +278,8 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
+    <None Include="paket.references" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -291,4 +289,156 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="..\..\..\.paket\paket.targets" />
+  <Choose>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v2.0' Or $(TargetFrameworkVersion) == 'v3.0' Or $(TargetFrameworkVersion) == 'v3.5' Or $(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="AppDomainToolkit">
+          <HintPath>..\..\..\packages\AppDomainToolkit\lib\net\AppDomainToolkit.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <ItemGroup>
+    <Reference Include="AutoPoco">
+      <HintPath>..\..\..\packages\AutoPoco\lib\AutoPoco.dll</HintPath>
+      <Private>True</Private>
+      <Paket>True</Paket>
+    </Reference>
+  </ItemGroup>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
+      <ItemGroup>
+        <Reference Include="FluentAssertions">
+          <HintPath>..\..\..\packages\FluentAssertions\lib\winrt45\FluentAssertions.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="FluentAssertions">
+          <HintPath>..\..\..\packages\FluentAssertions\lib\net35\FluentAssertions.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
+      <ItemGroup>
+        <Reference Include="FluentAssertions">
+          <HintPath>..\..\..\packages\FluentAssertions\lib\net40\FluentAssertions.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'Silverlight' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v5.0')">
+      <ItemGroup>
+        <Reference Include="FluentAssertions.Silverlight">
+          <HintPath>..\..\..\packages\FluentAssertions\lib\sl4\FluentAssertions.Silverlight.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight">
+          <HintPath>..\..\..\packages\FluentAssertions\lib\sl4\Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v7.1' Or $(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')">
+      <ItemGroup>
+        <Reference Include="FluentAssertions.WindowsPhone">
+          <HintPath>..\..\..\packages\FluentAssertions\lib\sl4-windowsphone71\FluentAssertions.WindowsPhone.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="FluentAssertions">
+          <HintPath>..\..\..\packages\FluentAssertions\lib\net45\FluentAssertions.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\netcore45\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net35\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v2.0' Or $(TargetFrameworkVersion) == 'v3.0')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net20\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net40\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0') Or ($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile158')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\portable-net40+sl5+wp80+win8+monotouch+monoandroid\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')) Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+      <Paket>True</Paket>
+    </Reference>
+  </ItemGroup>
 </Project>

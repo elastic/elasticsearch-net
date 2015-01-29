@@ -44,7 +44,8 @@ namespace Elasticsearch.Net.Connection.Thrift.Transport
 			}
 		}
 
-		public TSocket(string host, int port) : this(host, port, 0)
+		public TSocket(string host, int port)
+			: this(host, port, 0)
 		{
 		}
 
@@ -56,6 +57,8 @@ namespace Elasticsearch.Net.Connection.Thrift.Transport
 
 			InitSocket();
 		}
+
+		public int ConnectTimeout { get; set; }
 
 		public int Timeout
 		{
@@ -118,7 +121,15 @@ namespace Elasticsearch.Net.Connection.Thrift.Transport
 				InitSocket();
 			}
 
-			client.Connect(host, port);
+
+			var connectionRequest = client.BeginConnect(host, port, null, null);
+			var connected = connectionRequest.AsyncWaitHandle.WaitOne(this.ConnectTimeout);
+
+			if (!connected)
+			{
+				throw new TTransportException("Failed to connect");
+			}
+
 			inputStream = client.GetStream();
 			outputStream = client.GetStream();
 		}

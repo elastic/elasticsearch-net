@@ -13,6 +13,11 @@ namespace Elasticsearch.Net
 
 		public int Status { get; set; }
 		public string ExceptionType { get; set; }
+		internal ElasticsearchServerException(int status, string exceptionType)
+		{
+			this.Status = status;
+			this.ExceptionType = exceptionType;
+		}
 		public ElasticsearchServerException(ElasticsearchServerError error) : base(ParseError(error))
 		{
 			this.Status = error.Status;

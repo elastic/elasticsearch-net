@@ -2,6 +2,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.ConnectionPool;
 using Nest.Resolvers;
@@ -25,7 +27,7 @@ namespace Nest
 		/// <para>You can also specify specific default index/alias names for types using .SetDefaultTypeIndices(</para>
 		/// <para>If you do not specify this, NEST might throw a runtime exception if an explicit indexname was not provided for a call</para>
 		/// </param>
-		public ConnectionSettings(Uri uri = null, string defaultIndex = null) 
+		public ConnectionSettings(Uri uri = null, string defaultIndex = null)
 			: base(uri, defaultIndex)
 		{
 		}
@@ -39,9 +41,10 @@ namespace Nest
 		/// <para>You can also specify specific default index/alias names for types using .SetDefaultTypeIndices(</para>
 		/// <para>If you do not specify this, NEST might throw a runtime exception if an explicit indexname was not provided for a call</para>
 		/// </param>
-		public ConnectionSettings(IConnectionPool connectionPool, string defaultIndex = null) : base(connectionPool, defaultIndex)
+		public ConnectionSettings(IConnectionPool connectionPool, string defaultIndex = null)
+			: base(connectionPool, defaultIndex)
 		{
-			
+
 		}
 	}
 	/// <summary>
@@ -49,8 +52,8 @@ namespace Nest
 	/// </summary>
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public class ConnectionSettings<T> : ConnectionConfiguration<T> , IConnectionSettingsValues 
-		where T : ConnectionSettings<T> 
+	public class ConnectionSettings<T> : ConnectionConfiguration<T>, IConnectionSettingsValues
+		where T : ConnectionSettings<T>
 	{
 		private string _defaultIndex;
 		string IConnectionSettingsValues.DefaultIndex
@@ -87,13 +90,20 @@ namespace Nest
 		private ReadOnlyCollection<Func<Type, JsonConverter>> _contractConverters;
 		ReadOnlyCollection<Func<Type, JsonConverter>> IConnectionSettingsValues.ContractConverters { get { return _contractConverters; } }
 
-		public ConnectionSettings(IConnectionPool connectionPool, string defaultIndex) : base(connectionPool)
+		private FluentDictionary<Type, string> _idProperties = new FluentDictionary<Type, string>();
+		FluentDictionary<Type, string> IConnectionSettingsValues.IdProperties { get { return _idProperties; } }
+
+		private FluentDictionary<MemberInfo, PropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, PropertyMapping>();
+		FluentDictionary<MemberInfo, PropertyMapping> IConnectionSettingsValues.PropertyMappings { get { return _propertyMappings; } }
+
+		public ConnectionSettings(IConnectionPool connectionPool, string defaultIndex)
+			: base(connectionPool)
 		{
 			if (!defaultIndex.IsNullOrEmpty())
 				this.SetDefaultIndex(defaultIndex);
-			
-			this._defaultTypeNameInferrer = (t => t.Name.ToLowerInvariant()); 
-			this._defaultPropertyNameInferrer = (p => p.ToCamelCase()); 
+
+			this._defaultTypeNameInferrer = (t => t.Name.ToLowerInvariant());
+			this._defaultPropertyNameInferrer = (p => p.ToCamelCase());
 			this._defaultIndices = new FluentDictionary<Type, string>();
 			this._defaultTypeNames = new FluentDictionary<Type, string>();
 
@@ -101,10 +111,10 @@ namespace Nest
 			this._contractConverters = Enumerable.Empty<Func<Type, JsonConverter>>().ToList().AsReadOnly();
 			this._inferrer = new ElasticInferrer(this);
 		}
-		public ConnectionSettings(Uri uri, string defaultIndex) 
+		public ConnectionSettings(Uri uri, string defaultIndex)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")), defaultIndex)
 		{
-			
+
 		}
 
 		/// <summary>
@@ -170,7 +180,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Allows you to override how type names should be reprented, the default will call .ToLowerInvariant() on the type's name.
+		/// Allows you to override how type names should be represented, the default will call .ToLowerInvariant() on the type's name.
 		/// </summary>
 		public T SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer)
 		{
@@ -196,6 +206,66 @@ namespace Nest
 			mappingSelector.ThrowIfNull("mappingSelector");
 			mappingSelector(this._defaultTypeNames);
 			return (T)this;
+		}
+
+		public T MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
+		{
+			objectPath.ThrowIfNull("objectPath");
+
+			var memberInfo = new MemberInfoResolver(this, objectPath);
+			var propertyName = memberInfo.Members.Single().Name;
+
+			if (this._idProperties.ContainsKey(typeof(TDocument)))
+			{
+				if (this._idProperties[typeof(TDocument)].Equals(propertyName))
+					return (T)this;
+
+				throw new ArgumentException("Cannot map '{0}' as the id property for type '{1}': it already has '{2}' mapped."
+					.F(propertyName, typeof(TDocument).Name, this._idProperties[typeof(TDocument)]));
+			}
+
+			this._idProperties.Add(typeof(TDocument), propertyName);
+
+			return (T)this;
+		}
+
+		public T MapPropertiesFor<TDocument>(Action<PropertyMappingDescriptor<TDocument>> propertiesSelector)
+		{
+			propertiesSelector.ThrowIfNull("propertiesSelector");
+			var mapper = new PropertyMappingDescriptor<TDocument>();
+			propertiesSelector(mapper);
+			foreach (var p in mapper.Mappings)
+			{
+				var e = p.Key;
+				var memberInfoResolver = new MemberInfoResolver(this, e);
+				if (memberInfoResolver.Members.Count > 1)
+					throw new ArgumentException("MapPropertyNameFor can only map direct properties");
+
+				if (memberInfoResolver.Members.Count < 1)
+					throw new ArgumentException("Expression {0} does contain any member access".F(e));
+
+				var memberInfo = memberInfoResolver.Members.Last();
+				if (_propertyMappings.ContainsKey(memberInfo))
+				{
+					var newName = p.Value.Name;
+					var mappedAs = _propertyMappings[memberInfo].Name;
+					var typeName = typeof (TDocument).Name;
+					if (mappedAs.IsNullOrEmpty() && newName.IsNullOrEmpty())
+						throw new ArgumentException("Property mapping '{0}' on type is already ignored"
+							.F(e, newName, mappedAs, typeName));
+					if (mappedAs.IsNullOrEmpty())
+						throw new ArgumentException("Property mapping '{0}' on type {3} can not be mapped to '{1}' it already has an ignore mapping"
+							.F(e, newName, mappedAs, typeName));
+					if (newName.IsNullOrEmpty())
+						throw new ArgumentException("Property mapping '{0}' on type {3} can not be ignored it already has a mapping to '{2}'"
+							.F(e, newName, mappedAs, typeName));
+					throw new ArgumentException("Property mapping '{0}' on type {3} can not be mapped to '{1}' already mapped as '{2}'"
+						.F(e, newName, mappedAs, typeName));
+				}
+				_propertyMappings.Add(memberInfo, p.Value);
+
+			}
+			return (T) this;
 		}
 	}
 }

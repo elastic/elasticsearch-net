@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
+using FluentAssertions;
 using NUnit.Framework;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
@@ -17,7 +18,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 			public Dictionary<string, SomeOtherClass> StringDict { get; set; }
 			public Dictionary<int, MyCustomClass> IntDict { get; set; }
-			public IList<MyCustomClass> ListOfCustomClasses { get; set; } 
+			public IList<MyCustomClass> ListOfCustomClasses { get; set; }
 		}
 		[ElasticType(IdProperty = "Guid")]
 		internal class SomeOtherClass
@@ -80,7 +81,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			var expected = "myCustomClass.MID";
 			Assert.AreEqual(expected, propertyName);
 		}
-		
+
 		[Test]
 		public void TestUsesOtherElasticProperty()
 		{
@@ -89,7 +90,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			var expected = "custom.MID";
 			Assert.AreEqual(expected, propertyName);
 		}
-		
+
 		[Test]
 		public void TestUsesOtherElasticTypePropertyIsIgnored()
 		{
@@ -98,7 +99,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			var expected = "myCustomOtherClass.MID";
 			Assert.AreEqual(expected, propertyName);
 		}
-		
+
 		[Test]
 		public void TestCreatedDate()
 		{
@@ -107,12 +108,12 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			var expected = "CreateDate";
 			Assert.AreEqual(expected, propertyName);
 		}
-		
+
 		[Test]
 		public void TestDictionaryConstStringExpression()
 		{
 			Expression<Func<SomeClass, object>> exp = (m) => m.StringDict["someValue"].CreateDate;
-			var propertyName =_client.Infer.PropertyPath(exp);
+			var propertyName = _client.Infer.PropertyPath(exp);
 			var expected = "stringDict.someValue.CreateDate";
 			Assert.AreEqual(expected, propertyName);
 		}
@@ -126,40 +127,40 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			Assert.AreEqual(expected, propertyName);
 		}
 
-        [Test]
-        public void TestDictionaryStringExpression()
-        {
-            string index = "someValue";
-            Expression<Func<SomeClass, object>> exp = (m) => m.StringDict[index].CreateDate;
-            var propertyName = _client.Infer.PropertyPath(exp);
-            var expected = "stringDict.someValue.CreateDate";
-            Assert.AreEqual(expected, propertyName);
-        }
+		[Test]
+		public void TestDictionaryStringExpression()
+		{
+			string index = "someValue";
+			Expression<Func<SomeClass, object>> exp = (m) => m.StringDict[index].CreateDate;
+			var propertyName = _client.Infer.PropertyPath(exp);
+			var expected = "stringDict.someValue.CreateDate";
+			Assert.AreEqual(expected, propertyName);
+		}
 
-        [Test]
-        public void TestDictionaryIntExpression()
-        {
-            var index = 101;
-            Expression<Func<SomeClass, object>> exp = (m) => m.IntDict[index].MyProperty;
-            var propertyName =_client.Infer.PropertyPath(exp);
-            var expected = "intDict.101.MID";
-            Assert.AreEqual(expected, propertyName);
-        }
+		[Test]
+		public void TestDictionaryIntExpression()
+		{
+			var index = 101;
+			Expression<Func<SomeClass, object>> exp = (m) => m.IntDict[index].MyProperty;
+			var propertyName = _client.Infer.PropertyPath(exp);
+			var expected = "intDict.101.MID";
+			Assert.AreEqual(expected, propertyName);
+		}
 
-        [Test]
-        public void TestDictionaryStringDiffValues()
-        {
-            string index = "someValue1";
-            Expression<Func<SomeClass, object>> exp = (m) => m.StringDict[index].CreateDate;
-            var propertyName =_client.Infer.PropertyPath(exp);
-            var expected1 = "stringDict.someValue1.CreateDate";
-            Assert.AreEqual(expected1, propertyName);
-            index = "someValue2";
-            exp = (m) => m.StringDict[index].CreateDate;
-            propertyName = _client.Infer.PropertyPath(exp);
-            var expected2 = "stringDict.someValue2.CreateDate";
-            Assert.AreEqual(expected2, propertyName);
-        }
+		[Test]
+		public void TestDictionaryStringDiffValues()
+		{
+			string index = "someValue1";
+			Expression<Func<SomeClass, object>> exp = (m) => m.StringDict[index].CreateDate;
+			var propertyName = _client.Infer.PropertyPath(exp);
+			var expected1 = "stringDict.someValue1.CreateDate";
+			Assert.AreEqual(expected1, propertyName);
+			index = "someValue2";
+			exp = (m) => m.StringDict[index].CreateDate;
+			propertyName = _client.Infer.PropertyPath(exp);
+			var expected2 = "stringDict.someValue2.CreateDate";
+			Assert.AreEqual(expected2, propertyName);
+		}
 
 		[Test]
 		public void TestCollectionIndexExpressionDoesNotEndUpInPath()
@@ -170,7 +171,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			Assert.AreEqual(expected, propertyName);
 		}
 
-		[Test] 
+		[Test]
 		public void SearchUsesTheProperResolver()
 		{
 			var result = this._client.Search<SomeOtherClass>(s => s
@@ -182,7 +183,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 					mp => mp.ConstantScore(cs => cs.Filter(filter => filter.Term(x => x.MyCustomOtherClass.MyProperty, "serverid")))
 				  )
 				)
-				&& query.Term(f=>f.CreateDate, "x")
+				&& query.Term(f => f.CreateDate, "x")
 			  )
 			);
 			var request = result.ConnectionStatus.Request.Utf8String();
@@ -191,7 +192,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			StringAssert.Contains("CreateDate", request);
 		}
 
-		[Test] 
+		[Test]
 		public void SearchDoesntLowercaseStringFieldOverload()
 		{
 			var result = this._client.Search<SomeOtherClass>(s => s
@@ -216,5 +217,6 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			);
 			StringAssert.DoesNotContain("createDate2", result.ConnectionStatus.Request.Utf8String());
 		}
+
 	}
 }

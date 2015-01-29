@@ -28,7 +28,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 						range: {
 							""loc"": {
 								gte: ""10"",
-								lt: ""20"",
+								lt: ""20""
 							}
 						}
 
@@ -140,6 +140,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 						.OnField(f => f.StartedOn)
 						.GreaterOrEquals(lowerBound, format)
 						.Lower(upperBound, format)
+						.TimeZone("+1:00")
 					)
 				);
 
@@ -150,6 +151,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 							""startedOn"": {
 								gte: """ + lowerBound.ToString(format, CultureInfo.InvariantCulture) + @""",
 								lt: """ + upperBound.ToString(format, CultureInfo.InvariantCulture) + @""",
+								time_zone: ""+1:00""
 							}
 						}
 

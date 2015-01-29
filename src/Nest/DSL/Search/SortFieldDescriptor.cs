@@ -131,6 +131,9 @@ namespace Nest
 
 		[JsonProperty("ignore_unmapped")]
 		bool? IgnoreUnmappedFields { get; set; }
+
+        [JsonProperty("unmapped_type")]
+        FieldType? UnmappedType { get; set; }
 	}
 
 	public class Sort : SortBase, IFieldSort
@@ -141,6 +144,7 @@ namespace Nest
 		{
 			get { return Field; }
 		}
+	    public FieldType? UnmappedType { get; set; }
 	}
 
 	public class SortFieldDescriptor<T> : SortDescriptorBase<T, SortFieldDescriptor<T>>, IFieldSort where T : class
@@ -150,6 +154,7 @@ namespace Nest
 		PropertyPathMarker IFieldSort.Field { get; set; }
 
 		bool? IFieldSort.IgnoreUnmappedFields { get; set; }
+        FieldType? IFieldSort.UnmappedType { get; set; }
 
 		PropertyPathMarker ISort.SortKey { get { return Self.Field; } }
 
@@ -182,7 +187,13 @@ namespace Nest
 			Self.Missing = value;
 			return this;
 		}
+        public virtual SortFieldDescriptor<T> UnmappedType(FieldType type)
+        {
+            Self.UnmappedType = type;
+            return this;
+        }
 
+        [Obsolete("Deprecated in 1.4.0 use UnmappedType")]
 		public virtual SortFieldDescriptor<T> IgnoreUnmappedFields(bool ignore = true)
 		{
 			Self.IgnoreUnmappedFields = ignore;

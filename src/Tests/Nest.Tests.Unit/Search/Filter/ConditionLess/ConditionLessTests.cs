@@ -116,6 +116,8 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 		{
 			this.DoConditionlessFilter(f => f.HasChild<Person>(null));
 			this.DoConditionlessFilter(f => f.HasChild<Person>(q=>q.Query(qq=>qq.Term(p=>p.FirstName, string.Empty))));
+			this.DoConditionlessFilter(f => f.HasChild<Person>(q=>q.Filter(qq=>qq.Term(p=>p.FirstName, string.Empty))));
+			this.DoConditionlessFilter(f => f.HasChild<Person>(q => q.Query(qq => qq.Term(p => p.FirstName, string.Empty)).Filter(qq => qq.Term(p => p.FirstName, string.Empty))));
 		}
 
 

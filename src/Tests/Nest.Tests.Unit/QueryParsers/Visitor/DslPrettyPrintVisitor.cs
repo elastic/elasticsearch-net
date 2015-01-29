@@ -364,6 +364,11 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 			Write("geo_distance");
 		}
 
+        public virtual void Visit(IGeoHashCellFilter filter)
+        {
+            Write("geohash_cell");
+        }
+
 		public virtual void Visit(IGeoBoundingBoxFilter filter)
 		{
 			Write("geo_bounding_box");

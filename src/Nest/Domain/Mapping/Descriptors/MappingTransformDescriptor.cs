@@ -27,5 +27,11 @@ namespace Nest
 			this._mappingTransform.Language = language;
 			return this;
 		}
+
+        public MappingTransformDescriptor Language(ScriptLang language)
+        {
+            this._mappingTransform.Language = language.GetStringValue();
+            return this;
+        }
 	}
 }

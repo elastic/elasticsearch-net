@@ -241,6 +241,33 @@ namespace Nest
 			return this.New(filter, f => f.GeoDistance = filter);
 		}
 
+        /// <summary>
+        /// By defining a geohash cell, only geopoints within this cell will match this filter
+        /// </summary>
+        public FilterContainer GeoHashCell(string field, Action<GeoHashCellFilterDescriptor> filterDescriptor)
+        {
+            return _GeoHashCell(field, filterDescriptor);
+        }
+
+        /// <summary>
+        /// By defining a geohash cell, only geopoints within this cell will match this filter
+        /// </summary>
+        public FilterContainer GeoHashCell(Expression<Func<T, object>> fieldDescriptor, Action<GeoHashCellFilterDescriptor> filterDescriptor)
+        {
+            return _GeoHashCell(fieldDescriptor, filterDescriptor);
+        }
+
+        private FilterContainer _GeoHashCell(PropertyPathMarker field, Action<GeoHashCellFilterDescriptor> filterDescriptor)
+        {
+            var filter = new GeoHashCellFilterDescriptor();
+            if (filterDescriptor != null)
+                filterDescriptor(filter);
+
+            IGeoHashCellFilter ff = filter;
+            ff.Field = field;
+            return New(filter, f => f.GeoHashCell = filter);
+        }
+
 		/// <summary>
 		/// Filters documents that exists within a range from a specific point:
 		/// </summary>
@@ -579,6 +606,34 @@ namespace Nest
 			filter.Value = type;
 			return  this.New(filter, f => f.Type = filter);
 		}
+		
+		/// <summary>
+		/// The indices filter can be used when executed across multiple indices, allowing to have a 
+		/// filter that executes only when executed on an index that matches a specific list of indices, 
+		/// and another filter that executes when it is executed on an index that does not match the listed indices.
+		/// </summary>
+		public FilterContainer Indices<K>(Action<IndicesFilterDescriptor<K>> filterSelector) where K : class
+		{
+			var filter = new IndicesFilterDescriptor<K>();
+			if (filterSelector != null)
+				filterSelector(filter);
+
+			return this.New(filter, f => f.Indices = filter);
+		}
+
+		/// <summary>
+		/// The indices filter can be used when executed across multiple indices, allowing to have a 
+		/// filter that executes only when executed on an index that matches a specific list of indices, 
+		/// and another filter that executes when it is executed on an index that does not match the listed indices.
+		/// </summary>
+		public FilterContainer Indices(Action<IndicesFilterDescriptor<T>> filterSelector) 
+		{
+			var filter = new IndicesFilterDescriptor<T>();
+			if (filterSelector != null)
+				filterSelector(filter);
+
+			return this.New(filter, f => f.Indices = filter);
+		}
 
 		/// <summary>
 		/// Filters documents matching the provided document / mapping type. 
@@ -894,6 +949,7 @@ namespace Nest
 			var f = new FilterDescriptor<T>();
 			f.Self.IsStrict = self.IsStrict;
 			f.Self.IsVerbatim = self.IsVerbatim;
+		    f.Self.FilterName = self.FilterName;
 
 			if (fillProperty != null)
 				fillProperty(f);

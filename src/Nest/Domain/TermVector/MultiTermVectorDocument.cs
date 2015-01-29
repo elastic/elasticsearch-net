@@ -11,6 +11,8 @@ namespace Nest
 		public TypeNameMarker Type { get; set; }
 		[JsonProperty("_id")]
 		public string Id { get; set; }
+		[JsonProperty("doc")]
+		public object Document { get; set; }
 		[JsonProperty("fields")]
 		public IEnumerable<PropertyPathMarker> Fields { get; set; }
 		[JsonProperty("offsets")]

@@ -14,6 +14,7 @@ namespace Nest.Tests.Integration.Search.Query
 	public class TemplateQueryTests : IntegrationTests
 	{
 		[Test]
+		[SkipVersion("0 - 1.0.9", "Query template added in 1.1")]
 		public void TemplateQuery()
 		{
 			var r = this.Client.Search<ElasticsearchProject>(s => s

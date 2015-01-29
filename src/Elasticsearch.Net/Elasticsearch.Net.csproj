@@ -53,10 +53,15 @@
     <Compile Include="Connection\Configuration\IRequestConfiguration.cs" />
     <Compile Include="Connection\Configuration\RequestConfiguration.cs" />
     <Compile Include="Connection\Configuration\RequestConfigurationDescriptor.cs" />
+    <Compile Include="Connection\ITransportDelegator.cs" />
+    <Compile Include="Connection\RequestHandlers\RequestHandler.cs" />
+    <Compile Include="Connection\RequestHandlers\RequestHandlerAsync.cs" />
+    <Compile Include="Connection\RequestHandlers\RequestHandlerBase.cs" />
     <Compile Include="Connection\RequestState\IRequestTimings.cs" />
     <Compile Include="Connection\RequestState\ITransportRequestState.cs" />
     <Compile Include="Connection\RequestState\NoopRequestTimings.cs" />
     <Compile Include="Connection\RequestState\RequestTimings.cs" />
+    <Compile Include="Connection\Security\BasicAuthorizationCredentials.cs" />
     <Compile Include="Domain\RequestParameters\BaseRequestParameters.cs" />
     <Compile Include="Domain\Response\CallMetrics.cs" />
     <Compile Include="Domain\Response\IElasticsearchResponse.cs" />
@@ -67,6 +72,17 @@
     <Compile Include="Domain\Response\VoidResponse.cs" />
     <Compile Include="Domain\Response\ElasticsearchServerError.cs" />
     <Compile Include="Exceptions\OneToOneServerException.cs" />
+    <Compile Include="Exceptions\ElasticsearchAuthException.cs" />
+    <Compile Include="IElasticsearchClient.cs" />
+    <Compile Include="Obsolete\IndicesDeleteAlias.cs" />
+    <Compile Include="Obsolete\IndicesPutAlias.cs" />
+    <Compile Include="Obsolete\IndicesRecoveryStatus.cs" />
+    <Compile Include="Obsolete\IndicesTemplateExists.cs" />
+    <Compile Include="Obsolete\IndicesGetFieldMapping.cs" />
+    <Compile Include="Obsolete\Mpercolate.cs" />
+    <Compile Include="Obsolete\IndicesExistsType.cs" />
+    <Compile Include="Obsolete\Obsolete.cs" />
+    <Compile Include="Obsolete\IndicesExistsAlias.cs" />
     <Compile Include="Providers\DateTimeProvider.cs" />
     <Compile Include="Connection\HttpConnection.cs" />
     <Compile Include="Exceptions\ElasticsearchServerException.cs" />
@@ -76,6 +92,8 @@
     <Compile Include="ConnectionPool\IConnectionPool.cs" />
     <Compile Include="Providers\IDateTimeProvider.cs" />
     <Compile Include="ConnectionPool\SingleNodeConnectionPool.cs" />
+    <Compile Include="Providers\IMemoryStreamProvider.cs" />
+    <Compile Include="Providers\MemoryStreamProvider.cs" />
     <Compile Include="Providers\Sniffer.cs" />
     <Compile Include="ConnectionPool\SniffingConnectionPool.cs" />
     <Compile Include="ConnectionPool\StaticConnectionPool.cs" />
@@ -114,13 +132,9 @@
     <Compile Include="Serialization\SimpleJson.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="paket.references" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent Condition=" '$(OS)' != 'Unix' ">IF NOT EXIST "$(SolutionDir)..\build\keys\keypair.snk" (CD "$(SolutionDir).." &amp;&amp; "build.bat" CreateKeysIfAbsent &amp;&amp; CD %25~dp0)
-</PreBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -128,4 +142,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="..\..\.paket\paket.targets" />
 </Project>

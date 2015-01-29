@@ -11,6 +11,8 @@ namespace Nest
 	{
 		private IEnumerable<JObject> _hits;
 
+		internal JsonSerializer _defaultSerializer;
+
 		public TopHitsMetric()
 		{
 		}
@@ -20,13 +22,22 @@ namespace Nest
 			_hits = hits;
 		}
 
+		internal TopHitsMetric(IEnumerable<JObject> hits, JsonSerializer serializer)
+		{
+			_hits = hits;
+			_defaultSerializer = serializer;
+		}
+
 		public long Total { get; set; }
 		public double? MaxScore { get; set; }
 
 		public IEnumerable<Hit<T>> Hits<T>(JsonSerializer serializer = null) where T : class
 		{
-			if (serializer != null)
-				return _hits.Select(h => h.ToObject<Hit<T>>(serializer));
+			var s = serializer ?? _defaultSerializer;
+
+			if (s != null)
+				return _hits.Select(h => h.ToObject<Hit<T>>(s));
+
 			return _hits.Select(h => h.ToObject<Hit<T>>());
 		}
 
@@ -34,8 +45,5 @@ namespace Nest
 		{
 			return this.Hits<T>(serializer).Select(h => h.Source);
 		}
-
-
 	}
-
 }

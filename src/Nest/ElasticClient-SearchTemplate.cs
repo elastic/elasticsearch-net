@@ -108,7 +108,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatch<GetSearchTemplateDescriptor, GetTemplateRequestParameters, GetSearchTemplateResponse>(
 				d => selector(d.Name(name)),
-				(p, d) => this.RawDispatch.GetTemplateDispatch<GetSearchTemplateResponse>(p, d)
+				(p, d) => this.RawDispatch.GetTemplateDispatch<GetSearchTemplateResponse>(p)
 			);
 		}
 
@@ -116,7 +116,7 @@ namespace Nest
 		{
 			return this.Dispatch<IGetSearchTemplateRequest, GetTemplateRequestParameters, GetSearchTemplateResponse>(
 				request,
-				(p, d) => this.RawDispatch.GetTemplateDispatch<GetSearchTemplateResponse>(p, d)
+				(p, d) => this.RawDispatch.GetTemplateDispatch<GetSearchTemplateResponse>(p)
 			);
 		}
 
@@ -125,7 +125,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.DispatchAsync<GetSearchTemplateDescriptor, GetTemplateRequestParameters, GetSearchTemplateResponse, IGetSearchTemplateResponse>(
 				d => selector(d.Name(name)),
-				(p, d) => this.RawDispatch.GetTemplateDispatchAsync<GetSearchTemplateResponse>(p, d)
+				(p, d) => this.RawDispatch.GetTemplateDispatchAsync<GetSearchTemplateResponse>(p)
 			);
 		}
 
@@ -133,7 +133,7 @@ namespace Nest
 		{
 			return this.DispatchAsync<IGetSearchTemplateRequest, GetTemplateRequestParameters, GetSearchTemplateResponse, IGetSearchTemplateResponse>(
 				request,
-				(p, d) => this.RawDispatch.GetTemplateDispatchAsync<GetSearchTemplateResponse>(p, d)
+				(p, d) => this.RawDispatch.GetTemplateDispatchAsync<GetSearchTemplateResponse>(p)
 			);
 		}
 

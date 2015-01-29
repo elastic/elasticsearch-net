@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Serialization;
+using Elasticsearch.Net.Connection.Security;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -52,13 +53,19 @@ namespace Elasticsearch.Net.Connection
 		int IConnectionConfigurationValues.Timeout { get { return _timeout; }}
 		
 		private int? _pingTimeout;
-		int? IConnectionConfigurationValues.PingTimeout { get{ return _pingTimeout; } }
+		int? IConnectionConfigurationValues.PingTimeout { get { return _pingTimeout; } }
+
+		private int? _connectTimeout;
+		int? IConnectionConfigurationValues.ConnectTimeout { get { return _connectTimeout; } }
 
 		private int? _deadTimeout;
 		int? IConnectionConfigurationValues.DeadTimeout { get{ return _deadTimeout; } }
 		
 		private int? _maxDeadTimeout;
 		int? IConnectionConfigurationValues.MaxDeadTimeout { get{ return _maxDeadTimeout; } }
+	
+		private TimeSpan? _maxRetryTimeout;
+		TimeSpan? IConnectionConfigurationValues.MaxRetryTimeout { get{ return _maxRetryTimeout; } }
 	
 		private string _proxyUsername;
 		string IConnectionConfigurationValues.ProxyUsername { get{ return _proxyUsername; } }
@@ -106,11 +113,17 @@ namespace Elasticsearch.Net.Connection
 		private TimeSpan? _sniffLifeSpan;
 		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan { get{ return _sniffLifeSpan; } }
 
-		private bool _compressionEnabled;
-		bool IConnectionConfigurationValues.EnableCompressedResponses { get{ return _compressionEnabled; } }
+		private bool _enableCompressedResponses;
+		bool IConnectionConfigurationValues.EnableCompressedResponses { get{ return _enableCompressedResponses; } }
+
+		private bool _enableHttpCompression;
+		bool IConnectionConfigurationValues.EnableHttpCompression { get{ return _enableHttpCompression; } }
 
 		private bool _traceEnabled;
 		bool IConnectionConfigurationValues.TraceEnabled { get{ return _traceEnabled; } }
+
+		private bool _httpPipeliningEnabled;
+		bool IConnectionConfigurationValues.HttpPipeliningEnabled { get { return _httpPipeliningEnabled; } }
 
 		private bool _throwOnServerExceptions;
 		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions { get{ return _throwOnServerExceptions; } }
@@ -123,6 +136,9 @@ namespace Elasticsearch.Net.Connection
 
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer { get; set; }
 
+		private BasicAuthorizationCredentials _basicAuthCredentials;
+		BasicAuthorizationCredentials IConnectionConfigurationValues.BasicAuthorizationCredentials { get { return _basicAuthCredentials; } } 
+		
 		public ConnectionConfiguration(IConnectionPool connectionPool)
 		{
 			this._timeout = 60*1000;
@@ -166,9 +182,20 @@ namespace Elasticsearch.Net.Connection
 		/// Enable compressed responses from elasticsearch (NOTE that that nodes need to be configured to allow this)
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html
 		/// </summary>
+		[Obsolete("Scheduled to be removed in 2.0, please use EnableHttpCompression")]
 		public T EnableCompressedResponses(bool enabled = true)
 		{
-			this._compressionEnabled = enabled;
+			this._enableCompressedResponses = enabled;
+			return (T) this;
+		}
+
+		/// <summary>
+		/// Enable gzip compressed requests and responses, do note that you need to configure elasticsearch to set this
+		/// <see cref="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html"/>
+		/// </summary>
+		public T EnableHttpCompression(bool enabled = true)
+		{
+			this._enableHttpCompression = enabled;
 			return (T) this;
 		}
 
@@ -230,8 +257,8 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		/// <summary>
-		/// Timeout in milliseconds when the .NET webrequest should abort the request, note that you can set this to a high value here,
-		/// and specify the timeout in various calls on Elasticsearch's side.
+		/// Sets the default timeout in milliseconds for each request to Elasticsearch.
+		/// NOTE: You can set this to a high value here, and specify the timeout on Elasticsearch's side.
 		/// </summary>
 		/// <param name="timeout">time out in milliseconds</param>
 		public T SetTimeout(int timeout)
@@ -241,13 +268,23 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		/// <summary>
-		/// This is a separate timeout for Ping() requests. A ping should fail as fast as possible.
+		/// Sets the default ping timeout in milliseconds for ping requests, which are used
+		/// to determine whether a node is alive. Pings should fail as fast as possible.
 		/// </summary>
-		/// <param name="timeout">The ping timeout in milliseconds defaults to 50</param>
+		/// <param name="timeout">The ping timeout in milliseconds defaults to 1000, or 2000 is using SSL.</param>
 		public T SetPingTimeout(int timeout)
 		{
 			this._pingTimeout = timeout;
 			return (T) this;
+		}
+
+		/// <summary>
+		/// Sets the default connection timeout in milliseconds.
+		/// </summary>
+		public T SetConnectTimeout(int timeout)
+		{
+			this._connectTimeout = timeout;
+			return (T)this;
 		}
 
 		/// <summary>
@@ -271,6 +308,19 @@ namespace Elasticsearch.Net.Connection
 			this._maxDeadTimeout = timeout;
 			return (T) this;
 		}
+		
+		/// <summary>
+		/// Limits the total runtime including retries separately from <see cref="Timeout"/>
+		/// <pre>
+		/// When not specified defaults to <see cref="Timeout"/> which itself defaults to 60seconds
+		/// </pre>
+		/// </summary>
+		public T SetMaxRetryTimeout(TimeSpan maxRetryTimeout)
+		{
+			this._maxRetryTimeout = maxRetryTimeout;
+			return (T) this;
+		}
+		
 		/// <summary>
 		/// Semaphore asynchronous connections automatically by giving
 		/// it a maximum concurrent connections. 
@@ -325,9 +375,39 @@ namespace Elasticsearch.Net.Connection
         {
             handler.ThrowIfNull("handler");
             this._connectionStatusHandler = handler;
-            return (T)this;
+			return (T)this;
         }
 
+		/// <summary>
+		/// Basic access authentication credentials to specify with all requests.
+		/// </summary>
+		[Obsolete("Scheduled to be removed in 2.0.  Use SetBasicAuthentication() instead.")]
+		public T SetBasicAuthorization(string userName, string password)
+		{
+			return this.SetBasicAuthentication(userName, password);
+		}
+
+		/// <summary>
+		/// Basic access authentication credentials to specify with all requests.
+		/// </summary>
+		public T SetBasicAuthentication(string userName, string password)
+		{
+			if (this._basicAuthCredentials == null)
+				this._basicAuthCredentials = new BasicAuthorizationCredentials();
+			this._basicAuthCredentials.UserName = userName;
+			this._basicAuthCredentials.Password = password;
+			return (T)this;
+		}
+
+		/// <summary>
+		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
+		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
+		/// </summary>
+		public T HttpPipeliningEnabled(bool enabled = true)
+		{
+			this._httpPipeliningEnabled = enabled;
+			return (T)this;
+		}
 	}
 }
 

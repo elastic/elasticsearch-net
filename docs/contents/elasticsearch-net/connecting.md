@@ -11,12 +11,14 @@ Connecting to Elasticsearch with `Elasticsearch.Net` is quite easy but has a few
 
 ## Choosing the right connection strategy
 
-If you simply new an `ElasticsearchClient` it will be a non-failover connection to `http://localhost:9200`
+If you simply new an `ElasticsearchClient`, it will be a non-failover connection to `http://localhost:9200`
 
     var client = new ElasticsearchClient();
 
-If your elasticsearch node does not live at `http://localhost:9200` but i.e `http://mynode.example.com:8082/apiKey` 
-you will need to pass in some `IConnectionConfigurationValues` the easiest way to do this is:
+If your Elasticsearch node does not live at `http://localhost:9200` but i.e `http://mynode.example.com:8082/apiKey`, then 
+you will need to pass in some instance of `IConnectionConfigurationValues`.
+
+The easiest way to do this is:
 
     var node = new Uri("http://mynode.example.com:8082/apiKey");
     var config = new ConnectionConfiguration(node);
@@ -24,7 +26,7 @@ you will need to pass in some `IConnectionConfigurationValues` the easiest way t
 
 This however is still a non-failover connection. Meaning if that `node` goes down the operation will not be retried on any other nodes in the cluster.
 
-To get a failover connection we have to pass an `IConnectionPool` instead of a `Uri`.
+To get a failover connection we have to pass an `IConnectionPool` instance instead of a `Uri`.
 
     var node = new Uri("http://mynode.example.com:8082/apiKey");
     var connectionPool = new SniffingConnectionPool(new[] { node });
@@ -34,14 +36,18 @@ To get a failover connection we have to pass an `IConnectionPool` instead of a `
 Here instead of directly passing `node`, we pass a `SniffingConnectionPool` which will use our `node` to find out the rest of the available cluster nodes.
 Be sure to read more about [Connection Pooling and Cluster Failover here](/elasticsearch-net/cluster-failover.html)
 
-
 ## Options
 
-Besides either passing a `Uri` or `IConnectionPool` on the constructor of `ConnectionConfiguration`, you can also fluently control many more options.
+Besides either passing a `Uri` or `IConnectionPool` to `ConnectionConfiguration`, you can also fluently control many more options. For instance:
 
     var config = new ConnectionConfiguration(connectionPool)
         .EnableTrace()
-        .ExposeRawResponse(shouldExposeRawResponse);
+        .ExposeRawResponse()
+        .SetBasicAuthentication("user", "pass")
+        .SetTimeout(5000)
+        ...
+
+The following is a list of available connection configuration options:
 
 ### DisableAutomaticProxyDetection
 Disable automatic proxy detection.  Defaults to true.
@@ -89,3 +95,26 @@ As an alternative to the C/go like error checking on `response.IsValid`, you can
 
 ### UsePrettyResponses
 Appends `pretty=true` to all the requests. Handy if you are debugging or listening to the requests with i.e fiddler. This setting can be safely used in conjuction with `SetGlobalQueryStringParameters`.
+
+### SetBasicAuthentication
+Sets the HTTP basic authentication credentials to specify with all requests.
+
+**Note:** This can alternatively be specified on the node URI directly:
+
+    var uri = new Uri("http://username:password@localhost:9200");
+    var config = new ConnectionConfiguration(uri);
+
+...but may become tedious when using connection pooling with multiple nodes.
+
+## Configuring SSL
+
+SSL must be configured outside of the client using .NET's [ServicePointManager](http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx
+) class and setting the [ServerCertificateValidationCallback](http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager.servercertificatevalidationcallback.aspx) property.
+
+The bare minimum to make .NET accept self-signed SSL certs that are not in the Window's CA store would be to have the callback simply return `true`:
+
+    ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
+
+However, this will accept all requests from the AppDomain to untrusted SSL sites, therefore we recommend doing some minimal introspection on the passed in certificate.
+
+			

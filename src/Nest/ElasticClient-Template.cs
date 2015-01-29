@@ -121,7 +121,14 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
+		[Obsolete("Scheduled for removal in 2.0, this method name has a typo")]
 		public Task<IIndicesOperationResponse> DeleteTemplateAync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null)
+		{
+			return DeleteTemplateAsync(name, deleteTemplateSelector);
+		}
+
+		/// <inheritdoc />
+		public Task<IIndicesOperationResponse> DeleteTemplateAsync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null)
 		{
 			deleteTemplateSelector = deleteTemplateSelector ?? (s => s);
 			return this.DispatchAsync
@@ -132,7 +139,14 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
+		[Obsolete("Scheduled for removal in 2.0, this method name has a typo")]
 		public Task<IIndicesOperationResponse> DeleteTemplateAync(IDeleteTemplateRequest deleteTemplateRequest)
+		{
+			return DeleteTemplateAsync(deleteTemplateRequest);
+		}
+
+		/// <inheritdoc />
+		public Task<IIndicesOperationResponse> DeleteTemplateAsync(IDeleteTemplateRequest deleteTemplateRequest)
 		{
 			return this.DispatchAsync<IDeleteTemplateRequest, DeleteTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					deleteTemplateRequest,

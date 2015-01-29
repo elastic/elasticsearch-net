@@ -12,7 +12,7 @@ namespace Nest.Tests.Integration.Failover
 	/// Tests that are written here are subject to removal at any time
 	/// </summary>
 	[TestFixture]
-	public class FailoveTests 
+	public class FailoverPingTests 
 	{
 		[Test]
 		public void FailoverShouldOnlyPingDeadNodes()
@@ -33,16 +33,18 @@ namespace Nest.Tests.Integration.Failover
 			metrics.Requests.Count.Should().Be(4);
 			metrics.Requests[0].Node.Port.Should().Be(9202);
 			metrics.Requests[0].RequestType.Should().Be(RequestType.Ping);
-			metrics.Requests[0].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
+			metrics.Requests[0].EllapsedMilliseconds.Should().BeLessOrEqualTo(1100);
 			metrics.Requests[1].Node.Port.Should().Be(9201);
 			metrics.Requests[1].RequestType.Should().Be(RequestType.Ping);
-			metrics.Requests[1].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
+			metrics.Requests[1].EllapsedMilliseconds.Should().BeLessOrEqualTo(1100);
 			metrics.Requests[2].Node.Port.Should().Be(9200);
 			metrics.Requests[2].RequestType.Should().Be(RequestType.Ping);
-			metrics.Requests[2].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
+			metrics.Requests[2].EllapsedMilliseconds.Should().BeLessOrEqualTo(1100);
 			metrics.Requests[3].Node.Port.Should().Be(9200);
 			metrics.Requests[3].RequestType.Should().Be(RequestType.ElasticsearchCall);
-			metrics.Requests[3].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
+			metrics.Requests[3].EllapsedMilliseconds.Should().BeLessOrEqualTo(1100);
+
+
 
 			rootNode = client.RootNodeInfo();
 			metrics = rootNode.ConnectionStatus.Metrics;
@@ -93,16 +95,16 @@ namespace Nest.Tests.Integration.Failover
 			metrics.Requests.Count.Should().Be(4);
 			metrics.Requests[0].Node.Port.Should().Be(9202);
 			metrics.Requests[0].RequestType.Should().Be(RequestType.Ping);
-			metrics.Requests[0].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
+			metrics.Requests[0].EllapsedMilliseconds.Should().BeLessOrEqualTo(1100);
 			metrics.Requests[1].Node.Port.Should().Be(9201);
 			metrics.Requests[1].RequestType.Should().Be(RequestType.Ping);
-			metrics.Requests[1].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
+			metrics.Requests[1].EllapsedMilliseconds.Should().BeLessOrEqualTo(1100);
 			metrics.Requests[2].Node.Port.Should().Be(9200);
 			metrics.Requests[2].RequestType.Should().Be(RequestType.Ping);
-			metrics.Requests[2].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
+			metrics.Requests[2].EllapsedMilliseconds.Should().BeLessOrEqualTo(1100);
 			metrics.Requests[3].Node.Port.Should().Be(9200);
 			metrics.Requests[3].RequestType.Should().Be(RequestType.ElasticsearchCall);
-			metrics.Requests[3].EllapsedMilliseconds.Should().BeLessOrEqualTo(300);
+			metrics.Requests[3].EllapsedMilliseconds.Should().BeLessOrEqualTo(1100);
 
 			rootNode = await client.RootNodeInfoAsync();
 			metrics = rootNode.ConnectionStatus.Metrics;

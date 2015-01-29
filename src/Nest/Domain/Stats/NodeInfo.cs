@@ -47,6 +47,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "http")]
 		public NodeInfoHTTP HTTP { get; internal set; }
+
+    [JsonProperty("plugins")]
+    public List<PluginStats> Plugins { get; internal set; }
 	}
 
 	[JsonObject]

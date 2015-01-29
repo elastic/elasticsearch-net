@@ -1,4 +1,6 @@
-﻿using Nest.Tests.MockData.Domain;
+﻿using System.Collections.Generic;
+using Nest.Resolvers;
+using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
 namespace Nest.Tests.Unit.Search.Sorting
@@ -57,34 +59,6 @@ namespace Nest.Tests.Unit.Search.Sorting
 		public void TestScriptScore()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
-				.Query(q => q.FunctionScore(
-						fs => fs.ScriptScore(ss => ss.Script("_score / pow(param1, param2)").Params(p => p.Add("param1", 1.75).Add("param2", 4)).Lang("mvel")
-						)
-					)
-				);
-			var json = TestElasticClient.Serialize(s);
-			var expected = @"{
-                          query: {
-                            function_score: {
-                              script_score: {
-                                script: ""_score / pow(param1, param2)"",
-                                params: {
-                                  param1: 1.75,
-                                  param2: 4
-                                },
-                                lang: ""mvel""
-                              }
-                            }
-                          }
-                        }";
-
-			Assert.True(json.JsonEquals(expected), json);
-		}
-
-		[Test]
-		public void TestScriptScoreWithFilter()
-		{
-			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Query(q => q
 					.FunctionScore(fs => fs
 						.Functions(func => func
@@ -97,7 +71,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 								.Lang("mvel")
 							).Filter(filter => filter
 								.Term("term1", "termValue")
-							)
+							).Weight(5)
 						)
 					)
 				);
@@ -119,7 +93,8 @@ namespace Nest.Tests.Unit.Search.Sorting
                                         term : {
                                             ""term1"":""termValue""
                                         }
-                                    }
+                                    },
+									weight: 5.0
                                 }
                               ]
                             }
@@ -130,18 +105,23 @@ namespace Nest.Tests.Unit.Search.Sorting
 		}
 
 		[Test]
-		public void TestBoostFactorWithFilter()
+		public void TestBoostFactor()
 		{
-			var s = new SearchDescriptor<ElasticsearchProject>().Query(
-				q => q.FunctionScore(
-					fs => fs.Functions(
-						f => f.BoostFactor(2)
-							.Filter(
-								filter => filter.Term("term1", "termValue")
-							)
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.Query(q => q
+					.FunctionScore(fs => fs
+						.Weight(2.0)
+						.Functions(
+							f => f
+								.BoostFactor(2)
+								.Filter(
+									filter => filter.Term("term1", "termValue")
+								)
+								.Weight(0.5)
+						)
 					)
-				)
-			);
+					
+				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{
                           query: {
@@ -153,9 +133,11 @@ namespace Nest.Tests.Unit.Search.Sorting
                                         term : {
                                             ""term1"":""termValue""
                                         }
-                                    }
+                                    },
+                                    weight: 0.5
                                 }
-                              ]
+                              ],
+                              weight: 2.0
                             }
                           }
                         }";
@@ -164,14 +146,120 @@ namespace Nest.Tests.Unit.Search.Sorting
 		}
 
 		[Test]
-		public void TestDecayFunctionWithFilter()
+		public void TestBoostFactor_WrongOverload()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.Query(q => q
+					.FunctionScore(fs => fs
+						.Weight(3)
+						.Functions(
+							f => f
+								.BoostFactor(2)
+								.Filter(
+									filter => filter.Term("term1", "termValue")
+								)
+								.Weight(2)
+						)
+					)
+					
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{
+                          query: {
+                            function_score: {
+                              functions : [
+                                {
+                                    boost_factor: 2.0,
+                                    filter:{
+                                        term : {
+                                            ""term1"":""termValue""
+                                        }
+                                    },
+                                    weight: 2.0
+                                }
+                              ],
+                              weight: 3.0
+                            }
+                          }
+                        }";
+
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
+		public void TestBoostFactor_ObjectInitializer()
+		{
+			IFunctionScoreFunction boost = new BoostFactorFunction<ElasticsearchProject>(2);
+			boost.WeightAsDouble = 0.5;
+			boost.Filter = new TermFilter {Field = Property.Path<ElasticsearchProject>(p => p.Name), Value = "termValue"};
+			QueryContainer q = new FunctionScoreQuery()
+			{
+				WeightAsDouble = 1.0,
+				Functions = new[] {boost}
+
+			};
+			var json = TestElasticClient.Serialize(q);
+			var expected = @"{
+                            function_score: {
+                              functions : [
+                                {
+                                    boost_factor: 2.0,
+                                    filter:{
+                                        term : {
+                                            ""name"":""termValue""
+                                        }
+                                    },
+                                    weight: 0.5
+                                }
+                              ],
+                              weight: 1.0
+                            }
+                        }";
+
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
+		public void TestBoostFactor_ObjectInitializer_WrongProperty()
+		{
+			IFunctionScoreFunction boost = new BoostFactorFunction<ElasticsearchProject>(2);
+			boost.Weight = 1;
+			boost.Filter = new TermFilter {Field = Property.Path<ElasticsearchProject>(p => p.Name), Value = "termValue"};
+			QueryContainer q = new FunctionScoreQuery()
+			{
+				Weight = 4,
+				Functions = new[] {boost}
+
+			};
+			var json = TestElasticClient.Serialize(q);
+			var expected = @"{
+                            function_score: {
+                              functions : [
+                                {
+                                    boost_factor: 2.0,
+                                    filter:{
+                                        term : {
+                                            ""name"":""termValue""
+                                        }
+                                    },
+                                    weight: 1.0
+                                }
+                              ],
+                              weight: 4.0
+                            }
+                        }";
+
+			Assert.True(json.JsonEquals(expected), json);
+		}
+		[Test]
+		public void TestDecayFunction()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().Query(
 				q => q.FunctionScore(
 					fs => fs.Functions(
 						f => f.Gauss("floatValue", g => g.Origin("5").Scale("0.1"))
-							  .Filter(gf => gf.Term("term1", "termValue")
-							)
+							  .Filter(gf => gf.Term("term1", "termValue"))
+							  .Weight(5)
 						)
 					)
 				);
@@ -191,7 +279,8 @@ namespace Nest.Tests.Unit.Search.Sorting
 										""term"": {
 										  ""term1"": ""termValue""
 										}
-									  }
+									  },
+									 ""weight"": 5.0
 									}
 								  ]
 								}
