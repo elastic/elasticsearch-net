@@ -42,8 +42,10 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "_type")]
 		public string Type { get; internal set; }
+
 		[JsonProperty(PropertyName = "_version")]
 		public long? Version { get; internal set; }
+
 		[JsonProperty(PropertyName = "_id")]
 		public string Id { get; internal set; }
 
