@@ -139,8 +139,6 @@ namespace Nest
 		}
 		/// <summary>
 		/// Add a custom JsonConverter to the build in json serialization by passing in a predicate for a type.
-		/// This is faster then adding them using AddJsonConverters() because this way they will be part of the cached 
-		/// Json.net contract for a type.
 		/// </summary>
 		public T AddContractJsonConverters(params Func<Type, JsonConverter>[] contractSelectors)
 		{
