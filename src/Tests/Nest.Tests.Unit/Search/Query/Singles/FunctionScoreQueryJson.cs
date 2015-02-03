@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					.FunctionScore(fs => fs
 						.Query(qq => qq.MatchAll())
 						.Functions(
+						    f => f.Weight(3.0).Filter(ff => ff.Term(p => p.Name, "elasticsearch")),
 							f => f.Gauss(x => x.StartedOn, d => d.Scale("42w")),
 							f => f.Linear(x => x.FloatValue, d => d.Scale("0.3")),
 							f => f.Exp(x => x.DoubleValue, d => d.Scale("0.5")),
@@ -32,6 +33,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				query : {
                     function_score : { 
                         functions: [
+							{weight: 3.0, filter: { term: { 'name': 'elasticsearch' }}},
                             {gauss:  { startedOn  : { scale: '42w'}}},
                             {linear: { floatValue : { scale: '0.3'}}},
                             {exp:    { doubleValue: { scale: '0.5'}}}, 
