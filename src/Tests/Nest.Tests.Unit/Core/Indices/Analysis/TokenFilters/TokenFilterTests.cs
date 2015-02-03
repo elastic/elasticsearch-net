@@ -33,7 +33,7 @@ namespace Nest.Tests.Unit.Core.Indices.Analysis.TokenFilters
 				.TokenFilters(t => t
 					.Add("my_stop", new StopTokenFilter
 					{
-						Stopwords = "_english_"
+						PredefinedStopwords = "_english_"
 					})
 				)
 			);
