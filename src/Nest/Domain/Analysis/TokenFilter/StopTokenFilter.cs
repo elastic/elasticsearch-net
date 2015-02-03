@@ -23,7 +23,7 @@ namespace Nest
         public string StopwordsPath { get; set; }
 
         [JsonProperty("stopwords")]
-        public IEnumerable<string> Stopwords { get; set; }
+        public object Stopwords { get; set; }
 
 		[JsonProperty("remove_trailing")]
 		public bool? RemoveTrailing { get; set; }

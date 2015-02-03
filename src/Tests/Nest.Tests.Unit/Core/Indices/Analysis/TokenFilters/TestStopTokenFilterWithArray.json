@@ -1,0 +1,14 @@
+﻿{
+  "settings": {
+    "index": {
+      "analysis": {
+        "filter": {
+          "my_stop": {
+            "type": "stop",
+            "stopwords": [ "and", "is", "the" ]            
+          }
+        }
+      }
+    }
+  }
+}
