@@ -25,6 +25,7 @@
 		Hindi, 
 		Hungarian, 
 		Indonesian, 
+		Irish, 
 		Italian, 
 		Norwegian, 
 		Persian, 
