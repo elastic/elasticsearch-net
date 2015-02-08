@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				f=>f.MultiMatch(mq=>mq
 					.Analyzer("my-analyzer")
 					.Boost(2.5)
+					.Lenient()
 					.CutoffFrequency(0.8)
 					.Fuzziness(0.8)
 					.MaxExpansions(2)
@@ -29,6 +30,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				);
 			q.Analyzer.Should().Be("my-analyzer");
 			q.Boost.Should().Be(2.5);
+			q.Lenient.Should().BeTrue();
 			q.CutoffFrequency.Should().Be(0.8);
 			q.Fuzziness.Should().Be(0.8);
 			q.MaxExpansions.Should().Be(2);
