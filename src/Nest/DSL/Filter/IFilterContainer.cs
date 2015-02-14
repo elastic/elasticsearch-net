@@ -85,7 +85,7 @@ namespace Nest
 		IHasParentFilter HasParent { get; set; }
 
 		[JsonProperty(PropertyName = "range")]
-		[JsonConverter(typeof(FieldNameFilterConverter<RangeFilter>))]
+		[JsonConverter(typeof(RangeFilterJsonConverter))]
 		IRangeFilter Range { get; set; }
 
 		[JsonProperty(PropertyName = "prefix")]

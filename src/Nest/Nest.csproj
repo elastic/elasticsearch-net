@@ -392,6 +392,7 @@
     <Compile Include="Enums\GeoShapeRelation.cs" />
     <Compile Include="Enums\HighlighterType.cs" />
     <Compile Include="Enums\NormsLoading.cs" />
+    <Compile Include="Enums\RangeExecution.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
     <Compile Include="Enums\ScriptLang.cs" />
     <Compile Include="Exception\RestoreException.cs" />
@@ -864,7 +865,7 @@
     <Compile Include="Resolvers\Converters\Queries\GeoShapeQueryJsonReader.cs" />
     <Compile Include="Resolvers\Converters\SimilarityCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\FuzzinessConverter.cs" />
-    <Compile Include="Resolvers\Converters\Filters\RangeFilterJsonReader.cs" />
+    <Compile Include="Resolvers\Converters\Filters\RangeFilterJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\Filters\RegexpFilterJsonReader.cs" />
     <Compile Include="Resolvers\Converters\Filters\PrefixFilterConverter.cs" />
     <Compile Include="Resolvers\Converters\Filters\TermFilterConverter.cs" />

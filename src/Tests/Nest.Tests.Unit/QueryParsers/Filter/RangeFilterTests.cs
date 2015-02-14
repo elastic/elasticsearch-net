@@ -78,5 +78,22 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			rangeFilter.LowerThanOrEqualTo.Should().Be("20.22");
 		}
 
+
+		[Test]
+		[TestCase("cacheName", "cacheKey", true)]
+		public void Range_Execution_Deserializes(string cacheName, string cacheKey, bool cache)
+		{
+			var rangeFilter = this.SerializeThenDeserialize(cacheName, cacheKey, cache,
+				f => f.Range,
+				f => f.Range(n => n
+					.OnField(p => p.LOC)
+					.GreaterOrEquals(20.1)
+					.LowerOrEquals(20.22), RangeExecution.FieldData)
+				);
+
+			rangeFilter.GreaterThanOrEqualTo.Should().Be("20.1");
+			rangeFilter.LowerThanOrEqualTo.Should().Be("20.22");
+			rangeFilter.Execution.Should().Be(RangeExecution.FieldData);
+		}
 	}
 }
