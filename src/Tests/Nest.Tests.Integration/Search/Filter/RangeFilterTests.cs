@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using Elasticsearch.Net;
-using NUnit.Framework;
+﻿using Elasticsearch.Net;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
+using NUnit.Framework;
+using System.Linq;
 
 namespace Nest.Tests.Integration.Search.Filter
 {
@@ -22,11 +22,10 @@ namespace Nest.Tests.Integration.Search.Filter
 		{
 			_LookFor = NestTestData.Session.Single<ElasticsearchProject>().Get();
 			_LookFor.Name = "mmm";
-			var status = this.Client.Index(_LookFor, i=>i.Refresh()).ConnectionStatus;
+			_LookFor.LOC = 9;
+			var status = this.Client.Index(_LookFor, i => i.Refresh()).ConnectionStatus;
 			Assert.True(status.Success, status.ResponseRaw.Utf8String());
 		}
-
-
 
 		/// <summary>
 		/// Set of filters that should not filter de documento _LookFor.
@@ -61,7 +60,23 @@ namespace Nest.Tests.Integration.Search.Filter
 			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).GreaterOrEquals(name)), _LookFor, true);
 
 			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).LowerOrEquals(name)), _LookFor, true);
+		}
 
+		/// <summary>
+		/// Set of filters that should filter de documento _LookFor.
+		/// </summary>
+		[Test]
+		public void TestNumericFiltered()
+		{
+			var name = _LookFor.Id;
+
+			this.DoFilterTest(
+				f => f.Range(range => range.OnField(e => e.LOC, FilterRangeExecutionType.FieldData).GreaterOrEquals(2)), _LookFor,
+				true);
+
+			this.DoFilterTest(
+				f => f.Range(range => range.OnField(e => e.LOC, FilterRangeExecutionType.FieldData).Lower(2)), _LookFor,
+				false);
 		}
 	}
 }

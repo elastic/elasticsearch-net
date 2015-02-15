@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using Nest.DSL.Visitor;
+﻿using Nest.DSL.Visitor;
 using Nest.Resolvers.Converters;
 using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<FilterContainer>))]
-	public interface IFilterContainer 
+	public interface IFilterContainer
 	{
 		[JsonIgnore]
 		string FilterName { get; set; }
@@ -50,9 +50,9 @@ namespace Nest
 		[JsonConverter(typeof(GeoDistanceFilterConverter))]
 		IGeoDistanceFilter GeoDistance { get; set; }
 
-        [JsonProperty(PropertyName = "geohash_cell")]
-        [JsonConverter(typeof(GeoHashCellFilterConverter))]
-        IGeoHashCellFilter GeoHashCell { get; set; }
+		[JsonProperty(PropertyName = "geohash_cell")]
+		[JsonConverter(typeof(GeoHashCellFilterConverter))]
+		IGeoHashCellFilter GeoHashCell { get; set; }
 
 		[JsonProperty(PropertyName = "geo_distance_range")]
 		[JsonConverter(typeof(GeoDistanceRangeFilterConverter))]
@@ -85,7 +85,7 @@ namespace Nest
 		IHasParentFilter HasParent { get; set; }
 
 		[JsonProperty(PropertyName = "range")]
-		[JsonConverter(typeof(FieldNameFilterConverter<RangeFilter>))]
+		[JsonConverter(typeof(RangeFilterConverter<RangeFilter>))]
 		IRangeFilter Range { get; set; }
 
 		[JsonProperty(PropertyName = "prefix")]
