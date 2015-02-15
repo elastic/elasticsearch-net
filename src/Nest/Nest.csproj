@@ -857,6 +857,7 @@
     <Compile Include="DSL\Filter\IdsFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\ExistsFilterDescriptor.cs" />
     <Compile Include="Resolvers\Converters\CatThreadPoolRecordConverter.cs" />
+    <Compile Include="Resolvers\Converters\RangeFilterConverter.cs" />
     <Compile Include="Resolvers\Converters\GeoHashCellFilterConverter.cs" />
     <Compile Include="Resolvers\Converters\GeoShapeConverterBase.cs" />
     <Compile Include="Resolvers\Converters\GetRepositoryResponseConverter.cs" />
