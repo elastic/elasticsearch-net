@@ -20,6 +20,7 @@ namespace Nest.Tests.Unit.Core.UpdateSettings
 				.BlocksWrite()
 				.CacheFilterExpire("1m")
 				.CacheFilterMaxSize("1Gb")
+				.CacheQueryEnable(true)
 				.CodeBloomLoad()
 				.Codec("default")
 				.CompoundFormat()

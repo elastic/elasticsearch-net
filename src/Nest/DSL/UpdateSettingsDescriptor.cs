@@ -442,6 +442,15 @@ namespace Nest
 		}
 
 		/// <summary>
+		/// Enable or disable the query cache.
+		/// </summary>
+		public UpdateSettingsDescriptor CacheQueryEnable(bool cacheQueryEnable)
+		{
+			this.Self.CacheQueryEnable = cacheQueryEnable;
+			return this;
+		}
+
+		/// <summary>
 		/// The gateway snapshot interval (only applies to shared gateways). Defaults to 10s.
 		/// </summary>
 		public UpdateSettingsDescriptor GatewaySnapshotInterval(string gatewaySnapshotInterval)
