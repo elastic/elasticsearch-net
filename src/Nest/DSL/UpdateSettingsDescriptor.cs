@@ -59,6 +59,9 @@ namespace Nest
 		[JsonProperty("index.cache.filter.expire")]
 		string CacheFilterExpire { get; set; }
 
+		[JsonProperty("index.cache.query.enable")]
+		bool? CacheQueryEnable { get; set; }
+
 		[JsonProperty("index.gateway.snapshot_interval")]
 		string GatewaySnapshotInterval { get; set; }
 
@@ -154,8 +157,10 @@ namespace Nest
         public string CacheFilterMaxSize { get; set; }
 
         public string CacheFilterExpire { get; set; }
+	    
+		public bool? CacheQueryEnable { get; set; }
 
-        public string GatewaySnapshotInterval { get; set; }
+	    public string GatewaySnapshotInterval { get; set; }
 
         public IDictionary<string, object> RoutingAllocationInclude { get; set; }
 
@@ -235,6 +240,8 @@ namespace Nest
 		string IUpdateSettingsRequest.CacheFilterMaxSize { get; set; }
 
 		string IUpdateSettingsRequest.CacheFilterExpire { get; set; }
+
+		bool? IUpdateSettingsRequest.CacheQueryEnable { get; set; }
 
 		string IUpdateSettingsRequest.GatewaySnapshotInterval { get; set; }
 
