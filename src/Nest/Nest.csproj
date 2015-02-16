@@ -242,6 +242,8 @@
     <Compile Include="DSL\Filter\GeoHashCellFilterDescriptor.cs" />
     <Compile Include="DSL\DeleteScriptDescriptor.cs" />
     <Compile Include="ElasticClient-GetIndex.cs" />
+    <Compile Include="Enums\GeoOrientation.cs" />
+    <Compile Include="Enums\GeoPrecision.cs" />
     <Compile Include="Enums\GetIndexFeature.cs" />
     <Compile Include="DSL\GetScriptDescriptor.cs" />
     <Compile Include="DSL\SearchExistsDescriptor.cs" />
