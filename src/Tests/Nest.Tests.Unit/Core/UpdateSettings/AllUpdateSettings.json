@@ -16,6 +16,7 @@
   "index.translog.disable_flush": true,
   "index.cache.filter.max_size": "1Gb",
   "index.cache.filter.expire": "1m",
+  "index.cache.query.enable": true,
   "index.gateway.snapshot_interval": "1h",
   "index.routing.allocation.include": {
     "_ip": "10.0.0.1"
