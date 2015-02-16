@@ -19,6 +19,9 @@ namespace Nest.DSL.Descriptors
 
 		[JsonProperty(PropertyName = "lang")]
 		string Language { get; set; }
+
+		[JsonProperty(PropertyName = "file")]
+		string File { get; set; }
 	}
 
 	public class ScriptSort : SortBase, IScriptSort
@@ -27,6 +30,7 @@ namespace Nest.DSL.Descriptors
 		public string Script { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 		public string Language { get; set; }
+		public string File { get; set; }
 	}
 
 	public class SortScriptDescriptor<T> : SortDescriptorBase<T, SortScriptDescriptor<T>>, IScriptSort where T : class
@@ -38,6 +42,8 @@ namespace Nest.DSL.Descriptors
 		string IScriptSort.Script { get; set; }
 
 		string IScriptSort.Language { get; set; }
+
+		string IScriptSort.File { get; set; }
 
 		Dictionary<string, object> IScriptSort.Params { get; set; }
 
@@ -83,6 +89,12 @@ namespace Nest.DSL.Descriptors
 		public SortScriptDescriptor<T> Language(string language)
 		{
 			Self.Language = language;
+			return this;
+		}
+
+		public SortScriptDescriptor<T> File(string file)
+		{
+			Self.File = file;
 			return this;
 		}
 	}
