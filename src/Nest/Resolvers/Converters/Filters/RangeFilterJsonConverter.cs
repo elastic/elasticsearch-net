@@ -7,6 +7,12 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest.Resolvers.Converters.Filters
 {
+	[Obsolete("Scheduled to be removed in 2.0, please use RangeFilterJsonConverter instead")]
+	public class RangeFilterJsonReader : RangeFilterJsonConverter
+	{
+		
+	}
+
 	public class RangeFilterJsonConverter : JsonConverter
 	{
 		public override bool CanRead { get { return true; } }
