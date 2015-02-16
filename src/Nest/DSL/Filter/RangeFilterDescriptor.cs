@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Nest.Resolvers.Converters;
+using Nest.Resolvers.Converters.Filters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 
 namespace Nest
 {
+	[JsonConverter(typeof(RangeFilterJsonConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IRangeFilter : IFieldNameFilter
 	{
@@ -29,6 +31,9 @@ namespace Nest
 
 		[JsonProperty("time_zone")]
 		string TimeZone { get; set; }
+
+		[JsonProperty("execution")]
+		RangeExecution? Execution { get; set; }
 	}
 
 	public class RangeFilter : PlainFilter, IRangeFilter
@@ -42,6 +47,7 @@ namespace Nest
 		public string GreaterThan { get; set; }
 		public string LowerThan { get; set; }
 		public string TimeZone { get; set; }
+		public RangeExecution? Execution { get; set; }
 		public PropertyPathMarker Field { get; set; }
 	}
 
@@ -56,6 +62,8 @@ namespace Nest
 		string IRangeFilter.LowerThan { get; set; }
 
 		string IRangeFilter.TimeZone { get; set; }
+
+		RangeExecution? IRangeFilter.Execution { get; set; }
 
 		PropertyPathMarker IFieldNameFilter.Field { get; set; }
 
@@ -73,7 +81,7 @@ namespace Nest
 				);
 			}
 		}
-		
+
 		public RangeFilterDescriptor<T> OnField(string field)
 		{
 			this.Self.Field = field;
@@ -193,5 +201,11 @@ namespace Nest
 			this.Self.TimeZone = timeZone;
 			return this;
 		}
+
+		public RangeFilterDescriptor<T> Execution(RangeExecution? execution)
+		{
+			this.Self.Execution = execution;
+			return this;
+		} 
 	}
 }
