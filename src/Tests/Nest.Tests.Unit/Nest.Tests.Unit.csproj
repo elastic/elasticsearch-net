@@ -108,7 +108,7 @@
     <Compile Include="Core\Indices\Similarity\SimilarityTests.cs" />
     <Compile Include="Core\Map\CustomMapping\ImagePluginMappingTests.cs" />
     <Compile Include="Core\Map\GenericTypes\GenericTypeMappingTests.cs" />
-    <Compile Include="Core\Map\GeoShapeMapping\GeoShapeMappingTests.cs" />
+    <Compile Include="Core\Map\GeoShape\GeoShapeMappingTests.cs" />
     <Compile Include="Core\Map\GetMappingSerializationTests.cs" />
     <Compile Include="Core\Map\MappingBehaviourTests.cs" />
     <None Include="Cluster\PutSettings\PutSettings.json">
@@ -179,7 +179,7 @@
     <None Include="Core\Map\GenericTypes\GenericTypeMapping.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Core\Map\GeoShapeMapping\PrecisionSerializesAsString.json">
+    <None Include="Core\Map\GeoShape\PrecisionSerializesAsString.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Map\Properties\CompletionProperty.json">
