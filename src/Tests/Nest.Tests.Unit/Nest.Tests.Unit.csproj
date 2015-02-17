@@ -674,6 +674,9 @@
     <None Include="Core\UpdateSettings\CanSpecifyNewAnalysisSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Update\UpdateUsingPartialWithNull.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Update\UpsertUsingScriptAndPartialObject.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
