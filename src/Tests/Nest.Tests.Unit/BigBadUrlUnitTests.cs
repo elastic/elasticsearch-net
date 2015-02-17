@@ -111,6 +111,7 @@ namespace Nest.Tests.Unit.Cluster
 			Do("HEAD", "/mydefaultindex", c => c.IndexExists(h => h.Index<Doc>()));
 			Do("HEAD", "/mydefaultindex/_alias/myalias", c => c.AliasExists(h => h.Index<Doc>().Name("myalias")));
 			Do("HEAD", "/mydefaultindex/some-type", c => c.TypeExists(h => h.Index<Doc>().Type("some-type")));
+			Do("HEAD", "/mydefaultindex/doc", c => c.TypeExists(h=>h.Type<Doc>()));
 			Do("HEAD", "/_alias/myalias", c => c.AliasExists(new AliasExistsRequest("myalias")));
 			Do("POST", "/_bulk", c => c.IndexMany(Enumerable.Range(0, 10).Select(i => new Doc {Id = i.ToString()})));
 			Do("POST", "/customindex/customtype/_bulk", c =>
