@@ -130,6 +130,7 @@
     <Compile Include="Domain\Cat\CatPluginsRecord.cs" />
     <Compile Include="Domain\Cat\CatPendingTasksRecord.cs" />
     <Compile Include="Domain\Geo\GeoLocation.cs" />
+    <Compile Include="Domain\Geo\GeoPrecision.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />
     <Compile Include="Domain\Mapping\PropertyMapping.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataFilterDescriptor.cs" />
@@ -243,7 +244,7 @@
     <Compile Include="DSL\DeleteScriptDescriptor.cs" />
     <Compile Include="ElasticClient-GetIndex.cs" />
     <Compile Include="Enums\GeoOrientation.cs" />
-    <Compile Include="Enums\GeoPrecision.cs" />
+    <Compile Include="Enums\GeoPrecisionUnit.cs" />
     <Compile Include="Enums\GetIndexFeature.cs" />
     <Compile Include="DSL\GetScriptDescriptor.cs" />
     <Compile Include="DSL\SearchExistsDescriptor.cs" />
@@ -984,6 +985,7 @@
     <Compile Include="Resolvers\Converters\TokenFilterCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TokenizerCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TypeNameMarkerConverter.cs" />
+    <Compile Include="Resolvers\Converters\GeoPrecisionConverter.cs" />
     <Compile Include="Resolvers\Converters\UriJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\WarmerMappingConverter.cs" />
     <Compile Include="Resolvers\Converters\ShardsSegmentConverter.cs" />

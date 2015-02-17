@@ -30,9 +30,9 @@ namespace Nest
 			return this;
 		}
 
-		public GeoShapeMappingDescriptor<T> Precision(GeoPrecision precision)
+		public GeoShapeMappingDescriptor<T> Precision(double precision, GeoPrecisionUnit unit)
 		{
-			this._Mapping.Precision = precision;
+			this._Mapping.Precision = new GeoPrecision(precision, unit);
 			return this;
 		}
 

@@ -20,7 +20,7 @@ namespace Nest
 		public GeoTree? Tree { get; set; }
 
 		[JsonProperty("precision")]
-		public GeoPrecision? Precision { get; set; }
+		public GeoPrecision Precision { get; set; }
 
 		[JsonProperty("orientation")]
 		public GeoOrientation? Orientation { get; set; }
