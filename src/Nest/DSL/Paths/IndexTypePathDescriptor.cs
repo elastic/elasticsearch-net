@@ -24,13 +24,18 @@ namespace Nest
 			var inferrer = new ElasticInferrer(settings);
 
 			if (path.Index == null)
-				throw new DslException("Index() not specified");
+			{
+				if (path.Type != null && path.Type.Type != null)
+					path.Index = path.Type.Type;
+				else 
+					throw new DslException("Index() not specified");
+			}
 			
 			if (path.Type == null)
 				throw new DslException("Type() not specified");
 
 			var index = inferrer.IndexName(path.Index); 
-			var type = inferrer.TypeName(path.Type); 
+			var type = inferrer.TypeName(path.Type);
 
 			pathInfo.Index = index;
 			pathInfo.Type = type;
@@ -50,6 +55,7 @@ namespace Nest
 
 			if (path.Type == null)
 				path.Type = inferrer.TypeName<T>();
+
 
 			var index = inferrer.IndexName(path.Index);
 			var type = inferrer.TypeName(path.Type);
