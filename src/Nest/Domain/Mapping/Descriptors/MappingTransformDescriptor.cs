@@ -28,10 +28,10 @@ namespace Nest
 			return this;
 		}
 
-        public MappingTransformDescriptor Language(ScriptLang language)
-        {
-            this._mappingTransform.Language = language.GetStringValue();
-            return this;
-        }
+		public MappingTransformDescriptor Language(ScriptLang language)
+		{
+			this._mappingTransform.Language = language.GetStringValue();
+			return this;
+		}
 	}
 }

@@ -19,6 +19,12 @@ namespace Nest
 		[JsonProperty("tree"), JsonConverter(typeof(StringEnumConverter))]
 		public GeoTree? Tree { get; set; }
 
+		[JsonProperty("precision")]
+		public GeoPrecision Precision { get; set; }
+
+		[JsonProperty("orientation")]
+		public GeoOrientation? Orientation { get; set; }
+
 		[JsonProperty("tree_levels")]
 		public int? TreeLevels { get; set; }
 
