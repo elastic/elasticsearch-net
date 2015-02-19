@@ -731,8 +731,6 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Term(string field, object term)
 		{
-
-
 			ITermFilter filter = new TermFilterDescriptor();
 			filter.Field = field;
 			filter.Value = term;
@@ -749,8 +747,20 @@ namespace Nest
 			filter.Terms = (terms != null) ? terms.Cast<object>() : null;
 			filter.Execution = Execution;
 			return this.New(filter, f=>f.Terms = filter);
-		}	
-		
+		}
+
+		/// <summary>
+		/// Filters documents that have fields that match any of the provided terms (not analyzed). 
+		/// </summary>
+		public FilterContainer Terms<K>(Expression<Func<T, IEnumerable<K>>> fieldDescriptor, IEnumerable<K> terms, TermsExecution? Execution = null)
+		{
+			ITermsFilter filter = new TermsFilterDescriptor();
+			filter.Field = fieldDescriptor;
+			filter.Terms = (terms != null) ? terms.Cast<object>() : null;
+			filter.Execution = Execution;
+			return this.New(filter, f => f.Terms = filter);
+		}
+
 		/// <summary>
 		/// Filters documents that have fields that match any of the provided terms (not analyzed). 
 		/// </summary>
