@@ -398,6 +398,7 @@
     <Compile Include="Enums\RangeExecution.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
     <Compile Include="Enums\ScriptLang.cs" />
+    <Compile Include="Enums\TermsAggregationCollectMode.cs" />
     <Compile Include="Exception\RestoreException.cs" />
     <Compile Include="Exception\SnapshotException.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
