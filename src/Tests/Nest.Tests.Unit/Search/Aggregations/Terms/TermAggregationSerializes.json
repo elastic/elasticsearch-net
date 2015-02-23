@@ -1,0 +1,9 @@
+{
+  "field": "country",
+  "min_doc_count": 1,
+  "execution_hint": "global_ordinals_low_cardinality",
+  "order": {
+    "_count": "asc"
+  },
+  "collect_mode": "breadth_first"
+}
