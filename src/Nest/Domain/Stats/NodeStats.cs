@@ -10,12 +10,16 @@ namespace Nest
 	{
 		[JsonProperty("timestamp")]
 		public long Timestamp { get; internal set; }
+
 		[JsonProperty("name")]
 		public string Name { get; internal set; }
+		
 		[JsonProperty("transport_address")]
 		public string TransportAddress { get; internal set; }
-		[JsonProperty("hostname")]
-		public string Hostname { get; internal set; }
+
+		// TODO: Rename to Host in 2.0
+		[JsonProperty("host")]
+		public string Hostname { get; internal set; } 
 
 		[JsonProperty("indices")]
 		public NodeStatsIndexes Indices { get; internal set; }
