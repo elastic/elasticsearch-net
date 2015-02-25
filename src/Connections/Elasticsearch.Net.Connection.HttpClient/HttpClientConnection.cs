@@ -12,6 +12,7 @@ namespace Elasticsearch.Net.Connection
 	/// <summary>
 	/// IConnection implemented using <see cref="System.Net.Http.HttpClient"/>
 	/// </summary>
+	[Obsolete("The HttpClientConnection uses HttpClient and is not currently fully tested, with Elasticsearch.NET and NEST 2.0 we'll move the default HttpConnection over the HttpClient")]
 	public class HttpClientConnection : IConnection, IDisposable
 	{
 		private readonly IConnectionConfigurationValues _settings;
