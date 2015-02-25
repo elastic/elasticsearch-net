@@ -97,6 +97,7 @@ namespace Nest.Tests.Integration.Aggregations
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.2.9", "Collection mode added in ES 1.3")]
 		public void NestedEmptyAggregationThreeLevelDeepsWithBFS()
 		{
 			var results = this.Client.Search<ElasticsearchProject>(s => s
