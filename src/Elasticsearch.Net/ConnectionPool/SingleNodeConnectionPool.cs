@@ -10,8 +10,14 @@ namespace Elasticsearch.Net.ConnectionPool
 		public int MaxRetries { get { return 0;  } }
 
 		public bool AcceptsUpdates { get { return false; } }
-
+		
 		public bool UsingSsl { get { return _uri.Scheme == Uri.UriSchemeHttps; } }
+
+		public bool SniffedOnStartup
+		{
+			get { return false; }
+			set {  }
+		}
 
 		public SingleNodeConnectionPool(Uri uri)
 		{

@@ -65,8 +65,11 @@ namespace Elasticsearch.Net.Connection
 
 			this._requestHandler = new RequestHandler(this.Settings, this._connectionPool, this.Connection, this._serializer, this._memoryStreamProvider, this);
 			this._requestHandlerAsync = new RequestHandlerAsync(this.Settings, this._connectionPool, this.Connection, this._serializer, this._memoryStreamProvider, this);
-			if (this._connectionPool.AcceptsUpdates && this.Settings.SniffsOnStartup)
+			if (this._connectionPool.AcceptsUpdates && this.Settings.SniffsOnStartup && !this._connectionPool.SniffedOnStartup)
+			{
 				Self.SniffClusterState();
+				this._connectionPool.SniffedOnStartup = true;
+			}
 		}
 
 		/* PING/SNIFF	*** ********************************************/
