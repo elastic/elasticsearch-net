@@ -25,6 +25,11 @@ namespace Elasticsearch.Net.ConnectionPool
 		bool UsingSsl { get; }
 
 		/// <summary>
+		/// Bookkeeps wheter this connectionpool has seen a sniff on startup. 
+		/// </summary>
+		bool SniffedOnStartup { get; set; }
+
+		/// <summary>
 		/// Gets the next live Uri to perform the request on
 		/// </summary>
 		/// <param name="initialSeed">pass the original seed when retrying, this guarantees that the nodes are walked in a

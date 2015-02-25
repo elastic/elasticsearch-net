@@ -109,14 +109,16 @@ namespace Nest
 		protected virtual void Dispose(bool disposing)
 		{
 			if (_disposed) return;
+			if (_timer != null) _timer.Dispose();
+			if (_restoreStatusHumbleObject != null)
+			{
+				_restoreStatusHumbleObject.Next -= _nextEventHandlers;
+				_restoreStatusHumbleObject.Completed -= _completedEentHandlers;
+				_restoreStatusHumbleObject.Error -= _errorEventHandlers;
 
-			_timer.Dispose();
-			_restoreStatusHumbleObject.Next -= _nextEventHandlers;
-			_restoreStatusHumbleObject.Completed -= _completedEentHandlers;
-			_restoreStatusHumbleObject.Error -= _errorEventHandlers;
-
-			_restoreStatusHumbleObject.Completed -= StopTimer;
-			_restoreStatusHumbleObject.Error -= StopTimer;
+				_restoreStatusHumbleObject.Completed -= StopTimer;
+				_restoreStatusHumbleObject.Error -= StopTimer;
+			}
 
 			_disposed = true;
 		}

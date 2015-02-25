@@ -22,6 +22,8 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public bool UsingSsl { get; internal set; }
 
+		public bool SniffedOnStartup { get; set; }
+
 		public StaticConnectionPool(
 			IEnumerable<Uri> uris, 
 			bool randomizeOnStartup = true, 
