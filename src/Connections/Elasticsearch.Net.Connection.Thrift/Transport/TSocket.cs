@@ -38,7 +38,7 @@ namespace Elasticsearch.Net.Connection.Thrift.Transport
 		private Exception socketexception;
 		private ManualResetEvent timeoutObject = new ManualResetEvent(false);
 
-		public TcpClient Connect(TcpClient _client)
+		public TcpClient Connect()
 		{
 			timeoutObject.Reset();
 			socketexception = null;
@@ -171,7 +171,7 @@ namespace Elasticsearch.Net.Connection.Thrift.Transport
 				InitSocket();
 			}
 
-			client = Connect(client);
+			client = Connect();
 
 			inputStream = client.GetStream();
 			outputStream = client.GetStream();
