@@ -10,15 +10,6 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 		[Test]
 		public void Match_Deserializes()
 		{
-			_client.Search<Person>(s => s
-	.Query(q =>
-		q.Term(p => p.FirstName, "martijn")
-	)
-);
-			var x = new ()
-			;
-
-
 			var q = this.SerializeThenDeserialize(
 				f => f.Match,
 				f => f.Match(m => m
