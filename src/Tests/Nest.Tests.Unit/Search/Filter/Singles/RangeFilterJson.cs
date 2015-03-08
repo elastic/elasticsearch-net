@@ -28,7 +28,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 						range: {
 							""loc"": {
 								gte: ""10"",
-								lt: ""20"",
+								lt: ""20""
 							}
 						}
 
@@ -140,6 +140,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 						.OnField(f => f.StartedOn)
 						.GreaterOrEquals(lowerBound, format)
 						.Lower(upperBound, format)
+						.TimeZone("+1:00")
 					)
 				);
 
@@ -150,11 +151,72 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 							""startedOn"": {
 								gte: """ + lowerBound.ToString(format, CultureInfo.InvariantCulture) + @""",
 								lt: """ + upperBound.ToString(format, CultureInfo.InvariantCulture) + @""",
+								time_zone: ""+1:00""
 							}
 						}
 
 					}
 			}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
+		public void Execution_FieldData()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Filter(ff => ff
+					.Cache(true)
+					.Range(n => n
+						.OnField(f => f.LOC)
+						.GreaterOrEquals(10)
+						.LowerOrEquals(20), RangeExecution.FieldData));
+
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
+				filter : {
+						range: {
+							""execution"" : ""fielddata"",
+							""loc"": {
+								gte: ""10"",
+								lte: ""20"",
+							},
+							""_cache"" : true
+						}
+					}
+			}";
+
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
+		public void Execution_Index()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Filter(ff => ff
+					.Cache(true)
+					.Range(n => n
+						.OnField(f => f.LOC)
+						.GreaterOrEquals(10)
+						.LowerOrEquals(20), RangeExecution.Index));
+
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
+				filter : {
+						range: {
+							""execution"" : ""index"",
+							""loc"": {
+								gte: ""10"",
+								lte: ""20"",
+							},
+							""_cache"" : true
+						}
+					}
+			}";
+
 			Assert.True(json.JsonEquals(expected), json);
 		}
 	}

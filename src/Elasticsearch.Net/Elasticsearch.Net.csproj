@@ -72,7 +72,7 @@
     <Compile Include="Domain\Response\VoidResponse.cs" />
     <Compile Include="Domain\Response\ElasticsearchServerError.cs" />
     <Compile Include="Exceptions\OneToOneServerException.cs" />
-    <Compile Include="Exceptions\ElasticsearchAuthenticationException.cs" />
+    <Compile Include="Exceptions\ElasticsearchAuthException.cs" />
     <Compile Include="IElasticsearchClient.cs" />
     <Compile Include="Obsolete\IndicesDeleteAlias.cs" />
     <Compile Include="Obsolete\IndicesPutAlias.cs" />
@@ -132,13 +132,9 @@
     <Compile Include="Serialization\SimpleJson.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="paket.references" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent Condition=" '$(OS)' != 'Unix' ">IF NOT EXIST "$(SolutionDir)..\build\keys\keypair.snk" (CD "$(SolutionDir).." &amp;&amp; "build.bat" CreateKeysIfAbsent &amp;&amp; CD %25~dp0)
-</PreBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -146,4 +142,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="..\..\.paket\paket.targets" />
 </Project>

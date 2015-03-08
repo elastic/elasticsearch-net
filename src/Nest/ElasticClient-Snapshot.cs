@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
@@ -50,6 +48,23 @@ namespace Nest
 			);
 		}
 
+		/// <inheritdoc />
+		public IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null)
+		{
+			snapshotSelector.ThrowIfNull("snapshotSelector");
+
+			var snapshotDescriptor = snapshotSelector(new SnapshotDescriptor());
+			var observable = new SnapshotObservable(this, snapshotDescriptor);
+			return observable;
+		}
+
+		/// <inheritdoc />
+		public IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, ISnapshotRequest snapshotRequest)
+		{
+			snapshotRequest.ThrowIfNull("snapshotRequest");
+			var observable = new SnapshotObservable(this, snapshotRequest);
+			return observable;
+		}
 
 
 		/// <inheritdoc />
@@ -84,7 +99,7 @@ namespace Nest
 				(p, d) => this.RawDispatch.SnapshotGetDispatchAsync<GetSnapshotResponse>(p)
 			);
 		}
-		
+
 		/// <inheritdoc />
 		public Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest getSnapshotRequest)
 		{
@@ -121,7 +136,7 @@ namespace Nest
 				(p, d) => this.RawDispatch.SnapshotStatusDispatchAsync<SnapshotStatusResponse>(p)
 			);
 		}
-		
+
 		/// <inheritdoc />
 		public Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest getSnapshotRequest)
 		{
@@ -130,8 +145,6 @@ namespace Nest
 				(p, d) => this.RawDispatch.SnapshotStatusDispatchAsync<SnapshotStatusResponse>(p)
 			);
 		}
-
-
 
 		/// <inheritdoc />
 		public IAcknowledgedResponse DeleteSnapshot(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null)
@@ -174,6 +187,5 @@ namespace Nest
 				(p, d) => this.RawDispatch.SnapshotDeleteDispatchAsync<AcknowledgedResponse>(p)
 			);
 		}
-
 	}
 }

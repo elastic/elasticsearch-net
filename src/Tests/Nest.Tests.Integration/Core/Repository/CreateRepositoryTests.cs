@@ -8,8 +8,10 @@ namespace Nest.Tests.Integration.Core.Repository
 	[TestFixture]
 	public class CreateRepositoryTests : IntegrationTests
 	{
+
+
 		[Test]
-		public void CreateAndDeleteRepository_ThenSnapshotWithWait()
+		public void CreateAndValidateAndDeleteRepository_ThenSnapshotWithWait()
 		{
 			var repositoryName = ElasticsearchConfiguration.NewUniqueIndexName();
 			var createReposResult = this.Client.CreateRepository(repositoryName, r => r
@@ -20,6 +22,19 @@ namespace Nest.Tests.Integration.Core.Repository
 			);
 			createReposResult.IsValid.Should().BeTrue();
 			createReposResult.Acknowledged.Should().BeTrue();
+
+			// Repository verification added in ES 1.4
+			if (ElasticsearchConfiguration.CurrentVersion > new Version("1.3.9"))
+			{
+				var validateResponse = this.Client.VerifyRepository(new VerifyRepositoryRequest(repositoryName));
+				validateResponse.IsValid.Should().BeTrue();
+
+				validateResponse.Nodes.Should().NotBeEmpty();
+				var kv = validateResponse.Nodes.First();
+				kv.Key.Should().NotBeNullOrWhiteSpace();
+				kv.Value.Should().NotBeNull();
+				kv.Value.Name.Should().NotBeNullOrWhiteSpace();
+			}
 
 			var backupName = ElasticsearchConfiguration.NewUniqueIndexName();
 			var snapshotResponse = this.Client.Snapshot(repositoryName, backupName, selector: f => f
@@ -48,7 +63,7 @@ namespace Nest.Tests.Integration.Core.Repository
 			deleteReposResult.IsValid.Should().BeTrue();
 			deleteReposResult.Acknowledged.Should().BeTrue();
 		}
-		
+
 		[Test]
 		public void CreateAndDeleteRepository_ThenSnapshotWithoutWait()
 		{

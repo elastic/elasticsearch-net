@@ -44,6 +44,9 @@ namespace Nest.Tests.Integration.Search.Filter
 
 			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).LowerOrEquals(name)), _LookFor, true);
 
+			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Id).GreaterOrEquals(1), RangeExecution.FieldData), _LookFor, true);
+
+			this.DoFilterTest(f => f.Range(range => range.OnField(e => e.Name).LowerOrEquals(name), RangeExecution.Index), _LookFor, true);
 		}
 
 		/// <summary>

@@ -35,7 +35,8 @@ namespace Elasticsearch.Net.Connection
 
 		private DateTime? _lastSniff;
 
-		private readonly int DefaultPingTimeout = 200;
+		private const int DefaultPingTimeout = 1000;
+		private readonly int SslDefaultPingTimeout = 2000;
 
 		public IConnectionConfigurationValues Settings { get { return ConfigurationValues; } }
 		public IElasticsearchSerializer Serializer { get { return _serializer; } }
@@ -64,16 +65,19 @@ namespace Elasticsearch.Net.Connection
 
 			this._requestHandler = new RequestHandler(this.Settings, this._connectionPool, this.Connection, this._serializer, this._memoryStreamProvider, this);
 			this._requestHandlerAsync = new RequestHandlerAsync(this.Settings, this._connectionPool, this.Connection, this._serializer, this._memoryStreamProvider, this);
-			if (this._connectionPool.AcceptsUpdates && this.Settings.SniffsOnStartup)
+			if (this._connectionPool.AcceptsUpdates && this.Settings.SniffsOnStartup && !this._connectionPool.SniffedOnStartup)
+			{
 				Self.SniffClusterState();
+				this._connectionPool.SniffedOnStartup = true;
+			}
 		}
-
 
 		/* PING/SNIFF	*** ********************************************/
 
 		bool ITransportDelegator.Ping(ITransportRequestState requestState)
 		{
-			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(DefaultPingTimeout);
+			var defaultPingTimeout = this._connectionPool.UsingSsl ? SslDefaultPingTimeout : DefaultPingTimeout;
+			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(defaultPingTimeout);
 			pingTimeout = requestState.RequestConfiguration != null
 				? requestState.RequestConfiguration.ConnectTimeout.GetValueOrDefault(pingTimeout)
 				: pingTimeout;
@@ -92,14 +96,13 @@ namespace Elasticsearch.Net.Connection
 				}
 				if (!response.HttpStatusCode.HasValue || response.HttpStatusCode.Value == -1)
 					throw new Exception("ping returned no status code", response.OriginalException);
-				if (response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
-					throw new ElasticsearchAuthenticationException(response);
+				this.ThrowAuthExceptionWhenNeeded(response);
 				if (response.Response == null)
 					return response.Success;
 				using (response.Response)
 					return response.Success;
 			}
-			catch (ElasticsearchAuthenticationException)
+			catch (ElasticsearchAuthException)
 			{
 				throw;
 			}
@@ -111,7 +114,8 @@ namespace Elasticsearch.Net.Connection
 
 		Task<bool> ITransportDelegator.PingAsync(ITransportRequestState requestState)
 		{
-			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(DefaultPingTimeout);
+			var defaultPingTimeout = this._connectionPool.UsingSsl ? SslDefaultPingTimeout : DefaultPingTimeout;
+			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(defaultPingTimeout);
 			pingTimeout = requestState.RequestConfiguration != null
 				? requestState.RequestConfiguration.ConnectTimeout.GetValueOrDefault(pingTimeout)
 				: pingTimeout;
@@ -137,13 +141,13 @@ namespace Elasticsearch.Net.Connection
 						var response = t.Result;
 						if (!response.HttpStatusCode.HasValue || response.HttpStatusCode.Value == -1)
 							throw new PingException(requestState.CurrentNode, t.Exception);
-						if (response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
-							throw new ElasticsearchAuthenticationException(response);
+
+						this.ThrowAuthExceptionWhenNeeded(response);
 						using (response.Response)
 							return response.Success;
 					});
 			}
-			catch (ElasticsearchAuthenticationException)
+			catch (ElasticsearchAuthException)
 			{
 				throw;
 			}
@@ -158,7 +162,9 @@ namespace Elasticsearch.Net.Connection
 
 		IList<Uri> ITransportDelegator.Sniff(ITransportRequestState ownerState = null)
 		{
-			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(DefaultPingTimeout);
+			var defaultPingTimeout = this._connectionPool.UsingSsl ? SslDefaultPingTimeout : DefaultPingTimeout;
+			var pingTimeout = this.Settings.PingTimeout.GetValueOrDefault(defaultPingTimeout);
+
 			var requestOverrides = new RequestConfiguration
 			{
 				ConnectTimeout = pingTimeout,
@@ -186,20 +192,22 @@ namespace Elasticsearch.Net.Connection
 						if (ownerState.RequestMetrics == null) ownerState.RequestMetrics = new List<RequestMetrics>();
 						ownerState.RequestMetrics.AddRange(requestState.RequestMetrics);
 					}
-					if (response.HttpStatusCode.HasValue && response.HttpStatusCode == (int)HttpStatusCode.Unauthorized)
-						throw new ElasticsearchAuthenticationException(response);
+
+					this.ThrowAuthExceptionWhenNeeded(response);
+
 					if (response.Response == null)
 						return null;
 
 					using (response.Response)
 					{
-						return Sniffer.FromStream(response, response.Response, this.Serializer);
+						return Sniffer.FromStream(
+							response, 
+							response.Response, 
+							this.Serializer, 
+							this.Connection.AddressScheme
+						);
 					}
 				}
-			}
-			catch (ElasticsearchAuthenticationException)
-			{
-				throw;
 			}
 			catch (MaxRetryException e)
 			{
@@ -236,6 +244,7 @@ namespace Elasticsearch.Net.Connection
 		void ITransportDelegator.SniffOnConnectionFailure(ITransportRequestState requestState)
 		{
 			if (requestState.SniffedOnConnectionFailure
+				|| !requestState.UsingPooling
 				|| Self.SniffingDisabled(requestState.RequestConfiguration)
 				|| !this.ConfigurationValues.SniffsOnConnectionFault
 				|| requestState.Retried != 0) return;
@@ -289,7 +298,7 @@ namespace Elasticsearch.Net.Connection
 
 		bool ITransportDelegator.SniffOnFaultDiscoveredMoreNodes(ITransportRequestState requestState, int retried, ElasticsearchResponse<Stream> streamResponse)
 		{
-			if (retried != 0 || streamResponse.SuccessOrKnownError) return false;
+			if (!requestState.UsingPooling || retried != 0 || (streamResponse != null && streamResponse.SuccessOrKnownError)) return false;
 			Self.SniffOnConnectionFailure(requestState);
 			return Self.GetMaximumRetries(requestState.RequestConfiguration) > 0;
 		}
@@ -315,6 +324,16 @@ namespace Elasticsearch.Net.Connection
 				&& (requestState.RequestConfiguration == null
 					|| !requestState.RequestConfiguration.DisablePing.GetValueOrDefault(false));
 
+		}
+
+		private void ThrowAuthExceptionWhenNeeded(ElasticsearchResponse<Stream> response)
+		{
+			var statusCode = response.HttpStatusCode.GetValueOrDefault(200);
+			switch (statusCode)
+			{
+				case 401: throw new ElasticsearchAuthenticationException(response);
+				case 403: throw new ElasticsearchAuthorizationException(response);
+			}
 		}
 
 		public ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)

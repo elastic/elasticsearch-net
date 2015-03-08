@@ -21,21 +21,19 @@ namespace Elasticsearch.Net.Connection
 
 		protected IConnectionConfigurationValues ConnectionSettings { get; set; }
 		private readonly Semaphore _resourceLock;
-		private readonly bool _enableTrace;
+
+		public TransportAddressScheme? AddressScheme { get; private set; }
 
 		static HttpConnection()
 		{
-			ServicePointManager.UseNagleAlgorithm = false;
-			ServicePointManager.Expect100Continue = false;
-			ServicePointManager.DefaultConnectionLimit = 10000;
 			//ServicePointManager.SetTcpKeepAlive(true, 2000, 2000);
-			
+
 			//WebException's GetResponse is limitted to 65kb by default.
 			//Elasticsearch can be alot more chatty then that when dumping exceptions
 			//On error responses, so lets up the ante.
 
 			//Not available under mono
-			if (Type.GetType ("Mono.Runtime") == null) 
+			if (Type.GetType("Mono.Runtime") == null)
 				HttpWebRequest.DefaultMaximumErrorResponseLength = -1;
 		}
 
@@ -44,19 +42,22 @@ namespace Elasticsearch.Net.Connection
 			if (settings == null)
 				throw new ArgumentNullException("settings");
 
+			if (settings.ConnectionPool.UsingSsl)
+				this.AddressScheme = TransportAddressScheme.Https;
+
 			this.ConnectionSettings = settings;
 			if (settings.MaximumAsyncConnections > 0)
 			{
 				var semaphore = Math.Max(1, settings.MaximumAsyncConnections);
 				this._resourceLock = new Semaphore(semaphore, semaphore);
 			}
-			this._enableTrace = settings.TraceEnabled;
 		}
 
 		public virtual ElasticsearchResponse<Stream> GetSync(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.HeaderOnlyRequest(uri, "GET", requestSpecificConfig);
 		}
+
 		public virtual ElasticsearchResponse<Stream> HeadSync(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.HeaderOnlyRequest(uri, "HEAD", requestSpecificConfig);
@@ -66,19 +67,21 @@ namespace Elasticsearch.Net.Connection
 		{
 			return this.BodyRequest(uri, data, "POST", requestSpecificConfig);
 		}
+		
 		public virtual ElasticsearchResponse<Stream> PutSync(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.BodyRequest(uri, data, "PUT", requestSpecificConfig);
 		}
+		
 		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.HeaderOnlyRequest(uri, "DELETE", requestSpecificConfig);
 		}
+		
 		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig = null)
 		{
 			return this.BodyRequest(uri, data, "DELETE", requestSpecificConfig);
 		}
-
 
 		private ElasticsearchResponse<Stream> HeaderOnlyRequest(Uri uri, string method, IRequestConfiguration requestSpecificConfig)
 		{
@@ -97,11 +100,13 @@ namespace Elasticsearch.Net.Connection
 			var r = this.CreateHttpWebRequest(uri, "GET", null, requestSpecificConfig);
 			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
 		}
+		
 		public virtual Task<ElasticsearchResponse<Stream>> Head(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "HEAD", null, requestSpecificConfig);
 			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
 		}
+		
 		public virtual Task<ElasticsearchResponse<Stream>> Post(Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "POST", data, requestSpecificConfig);
@@ -119,6 +124,7 @@ namespace Elasticsearch.Net.Connection
 			var r = this.CreateHttpWebRequest(uri, "DELETE", data, requestSpecificConfig);
 			return this.DoAsyncRequest(r, data, requestSpecificConfig: requestSpecificConfig);
 		}
+		
 		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, IRequestConfiguration requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "DELETE", null, requestSpecificConfig);
@@ -137,12 +143,24 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
+		protected virtual void AlterServicePoint(ServicePoint requestServicePoint)
+		{
+			requestServicePoint.UseNagleAlgorithm = false;
+			requestServicePoint.Expect100Continue = false;
+			requestServicePoint.ConnectionLimit = 10000;
+			//looking at http://referencesource.microsoft.com/#System/net/System/Net/ServicePoint.cs
+			//this method only sets internal values and wont actually cause timers and such to be reset
+			//So it should be idempotent if called with the same parameters
+			if (this.ConnectionSettings.KeepAliveTime.HasValue && this.ConnectionSettings.KeepAliveInterval.HasValue)
+				requestServicePoint.SetTcpKeepAlive(true, this.ConnectionSettings.KeepAliveTime.Value, this.ConnectionSettings.KeepAliveInterval.Value);
+		}
 
 		protected virtual HttpWebRequest CreateHttpWebRequest(Uri uri, string method, byte[] data, IRequestConfiguration requestSpecificConfig)
 		{
 			var request = this.CreateWebRequest(uri, method, data, requestSpecificConfig);
 			this.SetBasicAuthenticationIfNeeded(uri, request, requestSpecificConfig);
 			this.SetProxyIfNeeded(request);
+			this.AlterServicePoint(request.ServicePoint);
 			return request;
 		}
 
@@ -158,17 +176,17 @@ namespace Elasticsearch.Net.Connection
 				myReq.Proxy = proxy;
 			}
 
-            if(this.ConnectionSettings.DisableAutomaticProxyDetection)
-            {
-                myReq.Proxy = null;
-            }
+			if (this.ConnectionSettings.DisableAutomaticProxyDetection)
+			{
+				myReq.Proxy = null;
+			}
 		}
 
 		private void SetBasicAuthenticationIfNeeded(Uri uri, HttpWebRequest request, IRequestConfiguration requestSpecificConfig)
 		{
 			// Basic auth credentials take the following precedence (highest -> lowest):
 			// 1 - Specified on the request (highest precedence)
- 			// 2 - Specified at the global IConnectionSettings level
+			// 2 - Specified at the global IConnectionSettings level
 			// 3 - Specified with the URI (lowest precedence)
 
 			var userInfo = Uri.UnescapeDataString(uri.UserInfo);
@@ -192,10 +210,13 @@ namespace Elasticsearch.Net.Connection
 			request.Pipelined = this.ConnectionSettings.HttpPipeliningEnabled
 				|| (requestSpecificConfig != null && requestSpecificConfig.EnableHttpPipelining);
 
-			if (this.ConnectionSettings.EnableCompressedResponses)
+			if (this.ConnectionSettings.EnableCompressedResponses
+				|| this.ConnectionSettings.EnableHttpCompression)
 			{
 				request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 				request.Headers.Add("Accept-Encoding", "gzip,deflate");
+				if (this.ConnectionSettings.EnableHttpCompression)
+					request.Headers.Add("Content-Encoding", "gzip");
 			}
 
 			if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.ContentType))
@@ -226,9 +247,14 @@ namespace Elasticsearch.Net.Connection
 
 			if (data != null)
 			{
+
 				using (var r = request.GetRequestStream())
 				{
-					r.Write(data, 0, data.Length);
+					if (this.ConnectionSettings.EnableHttpCompression)
+						using (var zipStream = new GZipStream(r, CompressionMode.Compress))
+							zipStream.Write(data, 0, data.Length);
+					else 
+						r.Write(data, 0, data.Length);
 				}
 			}
 			try
@@ -316,8 +342,22 @@ namespace Elasticsearch.Net.Connection
 				var requestStream = getRequestStream.Result;
 				try
 				{
-					var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, data, 0, data.Length, null);
-					yield return writeToRequestStream;
+					if (this.ConnectionSettings.EnableHttpCompression)
+					{
+						using (var zipStream = new GZipStream(requestStream, CompressionMode.Compress))
+						{
+
+							var writeToRequestStream = Task.Factory.FromAsync(zipStream.BeginWrite, zipStream.EndWrite, data, 0,
+								data.Length, null);
+							yield return writeToRequestStream;
+						}
+					}
+					else
+					{
+						var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, data, 0,
+							data.Length, null);
+						yield return writeToRequestStream;
+					}
 				}
 				finally
 				{
@@ -379,7 +419,7 @@ namespace Elasticsearch.Net.Connection
 
 		private int GetRequestTimeout(IRequestConfiguration requestConfiguration)
 		{
-			if (requestConfiguration != null && requestConfiguration.ConnectTimeout.HasValue)
+			if (requestConfiguration != null && requestConfiguration.RequestTimeout.HasValue)
 				return requestConfiguration.RequestTimeout.Value;
 
 			return this.ConnectionSettings.Timeout;

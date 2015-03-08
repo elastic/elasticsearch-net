@@ -28,8 +28,8 @@ Or if using the object initializer syntax:
 ## Raw Strings
 Although not preferred, many folks like to build their own JSON strings and just pass that along:
 
-    .QueryRaw("\"match_all\" : { }")
-    .FilterRaw("\"match_all\" : { }")
+    .QueryRaw(@"{""match_all"": {} }")
+    .FilterRaw(@"{""match_all"": {} }")
 
 NEST does not modify this in anyway and just writes this straight into the JSON output. 
 

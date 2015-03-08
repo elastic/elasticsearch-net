@@ -11,7 +11,9 @@ For a good overview of what aggregations are, refer the [original Elasticsearch 
 
 ## Specifying Aggregations during Search
 
-Adding aggregations to a search request is as simple as
+Adding aggregations to a search request is as simple as:
+
+#### Fluent Syntax
 
 	var result = client.Search<ElasticsearchProject>(s => s
 			.Aggregations(a => a
@@ -23,7 +25,7 @@ Adding aggregations to a search request is as simple as
 			)
 		);
 
-The above can also be accomplished using the object initializer syntax (OIS)...
+#### Object Initializer Syntax
 
 	var searchRequest = new SearchRequest
 	{
@@ -50,7 +52,9 @@ The result of the aggregations are accessed from the `Aggs` property of the resp
 
 	var myAgg = result.Aggs.Terms("my_agg");
 
-Notice we executed a [terms aggregation](/nest/aggregations/terms.html), and on the response we had to retrieve our results from the `Terms` property of `Aggs`.  All aggregations work like this in NEST.  If `my_agg` was a [percentiles aggregation](/nest/aggregations/percentiles.html) instead, we would have to extract the results from `Aggs.Percentiles`
+Notice we executed a [terms aggregation](/nest/aggregations/terms.html), and on the response we had to retrieve our results from the `Terms` property of `Aggs`.  All aggregations work like this in NEST.
+
+If `my_agg` was a [percentiles aggregation](/nest/aggregations/percentiles.html) instead, we would have to extract the results from `Aggs.Percentiles`
 
 	var myAgg = results.Aggs.Percentiles("my_agg");
 
@@ -64,19 +68,20 @@ Since aggregation response structures all fall into similar groups, each aggrega
 
 ## Sub-aggregations
 
-NEST of course also supports sub-aggregations...
+NEST of course also supports sub-aggregations.
+
+In the following example we are executing a [terms aggregation](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html), `names`, as a top-level aggregation, and then within it a [max aggregation](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-max-aggregation.html), `max_age`, as a sub-aggregation.  This will produce a bucket per unique value of the `Name` field, and within each bucket find the max `Age` value for that particular name.
 
 #### Fluent Syntax
 
-	var result = client.Search<ElasticsearchProject>(s => s
+	var result = client.Search<Person>(s => s
 		.Aggregations(a => a
-			.Terms("my_agg", st => st
-				.Field(o => o.Content)
+			.Terms("names", st => st
+				.Field(o => o.Name)
 				.Size(10)
-				.ExecutionHint(TermsAggregationExecutionHint.Ordinals)
 				.Aggregations(aa => aa
-					.Max("my_sub_agg", m =>  m
-						.Field(o => o.LongValue)
+					.Max("max_age", m =>  m
+						.Field(o => o.Age)
 					)
 				)
 			)
@@ -89,21 +94,20 @@ NEST of course also supports sub-aggregations...
 	{
 		Aggregations = new Dictionary<string, IAggregationContainer>
 		{
-			{ "my_agg", new AggregationContainer
+			{ "names", new AggregationContainer
 						{
 							Terms = new TermsAggregator 
 							{ 
-								Field = "content",
-								Size = 10,
-								ExecutionHint = TermsAggregationExecutionHint.Ordinals
+								Field = "name",
+								Size = 10
 							},
 							Aggregations = new Dictionary<string, IAggregationContainer>
 							{
-								{ "my_sub_agg", new AggregationContainer
+								{ "max_age", new AggregationContainer
 									{
 										Max = new MaxAggregator
 										{
-											Field = "longValue"
+											Field = "age"
 										}
 									}
 								}
@@ -115,9 +119,15 @@ NEST of course also supports sub-aggregations...
 
 	var result = client.Search<ElasticsearchProject>(searchRequest);
 
-Accessing the top level aggregation and sub-aggregation is pretty straight-forward...
+To access the `max_age` sub-aggregation, we first extract the top-level terms aggregation, `names`, from the response:
 
-	var myAgg = result.Aggs.Terms("my_agg");
-	var mySubAgg = myAgg.Aggs.Max("my_sub_agg");
+	var names = result.Aggs.Terms("names");
 
-That's how NEST handles aggregations in a nutshell.  Refer to the specific section on each aggregation type for more details.
+We can then iterate over each `name` bucket and extract our `max_age` result:
+
+	foreach(var name in names.Items)
+	{
+		var maxAge = name.Aggs.Max("max_age");
+	}
+
+That's aggregations in a nutshell.  Refer to the specific section on each aggregation type for more details.

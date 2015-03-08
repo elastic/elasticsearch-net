@@ -46,18 +46,17 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/_aliases", c => c.Alias(a => a));
 			Do("POST", "/_analyze", c => c.Analyze(a => a.Text("blah")));
 			Do("POST", "/myindex/_analyze", c => c.Analyze(a => a.Index("myindex").Text("blah")));
-			Do("POST", "/myindex/_bulk", c => c.Bulk(b => b.FixedPath("myindex").Index<Doc>(ib => ib.Document(new Doc { Id = "1" }))));
-			Do("POST", "/myindex/mytype/_bulk", c => c.Bulk(b => b.FixedPath("myindex", "mytype").Index<Doc>(ib => ib.Document(new Doc { Id = "1" }))));
-			Do("POST", "/myindex/_bulk", c => c.Bulk(b => b.FixedPath("myindex").Index<Doc>(ib => ib.Document(new Doc { Id = "1" }))));
-			Do("POST", "/_bulk", c => c.Bulk(b => b.Index<Doc>(ib => ib.Document(new Doc { Id = "1" }))));
+			Do("POST", "/myindex/_bulk", c => c.Bulk(b => b.FixedPath("myindex").Index<Doc>(ib => ib.Document(new Doc {Id = "1"}))));
+			Do("POST", "/myindex/mytype/_bulk", c => c.Bulk(b => b.FixedPath("myindex", "mytype").Index<Doc>(ib => ib.Document(new Doc {Id = "1"}))));
+			Do("POST", "/myindex/_bulk", c => c.Bulk(b => b.FixedPath("myindex").Index<Doc>(ib => ib.Document(new Doc {Id = "1"}))));
+			Do("POST", "/_bulk", c => c.Bulk(b => b.Index<Doc>(ib => ib.Document(new Doc {Id = "1"}))));
 			Do("POST", "/_cache/clear", c => c.ClearCache());
 			Do("POST", "/mydefaultindex/_cache/clear", c => c.ClearCache(cc => cc.Index<Doc>()));
 			Do("POST", "/mydefaultindex/_close", c => c.CloseIndex(ci => ci.Index<Doc>()));
 			Do("GET", "/_nodes", c => c.NodesInfo());
 			Do("GET", "/_nodes/insert-marvel-character", c => c.NodesInfo(cn => cn.NodeId("insert-marvel-character")));
 			Do("GET", "/_nodes/stats", c => c.NodesStats());
-			Do("GET", "/_nodes/insert-marvel-character/stats/jvm", c => c
-				.NodesStats(cn => cn.NodeId("insert-marvel-character").Metrics(NodesStatsMetric.Jvm)));
+			Do("GET", "/_nodes/insert-marvel-character/stats/jvm", c => c .NodesStats(cn => cn.NodeId("insert-marvel-character").Metrics(NodesStatsMetric.Jvm)));
 			Do("GET", "/_cluster/state", c => c.ClusterState());
 			Do("GET", "/_cluster/state?local=true", c => c.ClusterState(cs => cs.Local()));
 			Do("GET", "/_count", c => c.Count());
@@ -78,8 +77,10 @@ namespace Nest.Tests.Unit.Cluster
 			Do("DELETE", "/custom-index/_query", c => c.DeleteByQuery<Doc>(q => q.Index("custom-index").AllTypes().MatchAll()));
 			Do("DELETE", "/mydefaultindex", c => c.DeleteIndex(i => i.Index<Doc>()));
 			Do("DELETE", "/a%2Cb", c => c.DeleteIndex(i => i.Indices("a", "b")));
-			Do("POST", "/_bulk", c => c.DeleteMany(Enumerable.Range(0, 10).Select(i => new Doc { Id = i.ToString() })));
-			Do("POST", "/customindex/customtype/_bulk", c => c.DeleteMany(Enumerable.Range(0, 10).Select(i => new Doc { Id = i.ToString() }), index: "customindex", type: "customtype"));
+			Do("POST", "/_bulk", c => c.DeleteMany(Enumerable.Range(0, 10).Select(i => new Doc {Id = i.ToString()})));
+			Do("POST", "/customindex/customtype/_bulk", c =>
+					c.DeleteMany(Enumerable.Range(0, 10).Select(i => new Doc {Id = i.ToString()}), index: "customindex",
+						type: "customtype"));
 			Do("DELETE", "/mydefaultindex/doc/_mapping", c => c.DeleteMapping<Doc>());
 			Do("DELETE", "/_template/myTemplate", c => c.DeleteTemplate("myTemplate"));
 			Do("DELETE", "/_all/_warmer/mywarmer", c => c.DeleteWarmer("mywarmer", w => w.AllIndices()));
@@ -103,24 +104,28 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/mycustomindex/_warmer/mywarmer", c => c.GetWarmer("mywarmer", g => g.Index("mycustomindex")));
 			Do("GET", "/_cluster/health?level=indices", c => c.ClusterHealth(h => h.Level(Level.Indices)));
 			Do("GET", "/_cluster/health", c => c.ClusterHealth());
-			Do("PUT", "/mydefaultindex/doc/2", c => c.Index(new Doc { Id = "2" }));
-			Do("POST", "/mydefaultindex/doc", c => c.Index(new Doc { Name = "2" }));
-			Do("PUT", "/customindex/customtype/2?refresh=true", c => c.Index(new Doc { Id = "2" }, i => i.Index("customindex").Type("customtype").Refresh()));
+			Do("PUT", "/mydefaultindex/doc/2", c => c.Index(new Doc {Id = "2"}));
+			Do("POST", "/mydefaultindex/doc", c => c.Index(new Doc {Name = "2"}));
+			Do("PUT", "/customindex/customtype/2?refresh=true",
+				c => c.Index(new Doc {Id = "2"}, i => i.Index("customindex").Type("customtype").Refresh()));
 			Do("HEAD", "/mydefaultindex", c => c.IndexExists(h => h.Index<Doc>()));
 			Do("HEAD", "/mydefaultindex/_alias/myalias", c => c.AliasExists(h => h.Index<Doc>().Name("myalias")));
 			Do("HEAD", "/mydefaultindex/some-type", c => c.TypeExists(h => h.Index<Doc>().Type("some-type")));
+			Do("HEAD", "/mydefaultindex/doc", c => c.TypeExists(h=>h.Type<Doc>()));
 			Do("HEAD", "/_alias/myalias", c => c.AliasExists(new AliasExistsRequest("myalias")));
-			Do("POST", "/_bulk", c => c.IndexMany(Enumerable.Range(0, 10).Select(i => new Doc { Id = i.ToString() })));
-			Do("POST", "/customindex/customtype/_bulk", c => c.IndexMany(Enumerable.Range(0, 10).Select(i => new Doc { Id = i.ToString() }), index: "customindex", type: "customtype"));
+			Do("POST", "/_bulk", c => c.IndexMany(Enumerable.Range(0, 10).Select(i => new Doc {Id = i.ToString()})));
+			Do("POST", "/customindex/customtype/_bulk", c =>
+					c.IndexMany(Enumerable.Range(0, 10).Select(i => new Doc {Id = i.ToString()}), index: "customindex",
+						type: "customtype"));
 			Do("GET", "/_stats", c => c.IndicesStats());
 			Do("GET", "/my_index/_stats", c => c.IndicesStats(s => s.Index("my_index")));
-			Do("GET", "/my_index/_stats?types=type1", c => c.IndicesStats(s => s.Index("my_index").Types(new TypeNameMarker[] { "type1" })));
-			Do("GET", "/my_index/_stats?types=type1%2Ctype2", c => c.IndicesStats(s => s.Index("my_index").Types(new TypeNameMarker[] { "type1", "type2" })));
+			Do("GET", "/my_index/_stats?types=type1", c => c.IndicesStats(s => s.Index("my_index").Types(new TypeNameMarker[] {"type1"})));
+			Do("GET", "/my_index/_stats?types=type1%2Ctype2", c => c.IndicesStats(s => s.Index("my_index").Types(new TypeNameMarker[] {"type1", "type2"})));
 			Do("GET", "/mydefaultindex/_stats", c => c.IndicesStats(s => s.Index<Doc>()));
 			Do("PUT", "/mydefaultindex/doc/_mapping", c => c.Map<Doc>(m => m.MapFromAttributes()));
 			Do("PUT", "/mycustomindex/doc/_mapping", c => c.Map<Doc>(m => m.Index("mycustomindex")));
 			Do("PUT", "/mycustomindex/customtype/_mapping", c => c.Map<Doc>(m => m.Index("mycustomindex").Type("customtype")));
-			Do("GET", "/mydefaultindex/doc/1/_mlt", c => c.MoreLikeThis<Doc>(m => m.IdFrom(new Doc { Id = "1" })));
+			Do("GET", "/mydefaultindex/doc/1/_mlt", c => c.MoreLikeThis<Doc>(m => m.IdFrom(new Doc {Id = "1"})));
 			Do("GET", "/mydefaultindex/doc/1/_mlt", c => c.MoreLikeThis<Doc>(m => m.Id(1)));
 			Do("GET", "/mycustomindex/mycustomtype/1/_mlt", c => c.MoreLikeThis<Doc>(m => m.Id(1).Index("mycustomindex").Type("mycustomtype")));
 			Do("POST", "/_msearch", c => c.MultiSearch(m => m.Search<Doc>(s => s.MatchAll())));
@@ -131,9 +136,10 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/mycustomindex/_open", c => c.OpenIndex("mycustomindex"));
 			Do("POST", "/_optimize", c => c.Optimize());
 			Do("POST", "/mydefaultindex/_optimize", c => c.Optimize(o => o.Index<Doc>()));
-			Do("POST", "/mydefaultindex/doc/_percolate", c => c.Percolate<Doc>(p=>p.Document(new Doc { Id = "1" })));
-			Do("POST", "/mydefaultindex/otherdoc/_percolate", c => c.Percolate<OtherDoc>(p=>p.Document(new OtherDoc { Name = "hello" })));
-			Do("POST", "/mycustomindex/mycustomtype/_percolate", c => c.Percolate<OtherDoc>(p => p.Document(new OtherDoc { Name = "hello" }).Index("mycustomindex").Type("mycustomtype")));
+			Do("POST", "/mydefaultindex/doc/_percolate", c => c.Percolate<Doc>(p => p.Document(new Doc { Id = "1" })));
+			Do("POST", "/mydefaultindex/otherdoc/_percolate", c => c.Percolate<OtherDoc>(p => p.Document(new OtherDoc { Name = "hello" })));
+			Do("POST", "/mycustomindex/mycustomtype/_percolate", 
+				c => c.Percolate<OtherDoc>(p => p.Document(new OtherDoc {Name = "hello"}).Index("mycustomindex").Type("mycustomtype")));
 			Do("POST", "/mydefaultindex/otherdoc/my-id/_percolate", c => c.Percolate<OtherDoc>(p => p.Id("my-id")));
 			Do("POST", "/mydefaultindex/otherdoc/my-id/_explain", c => c.Explain<OtherDoc>(p => p.Id("my-id")));
 
@@ -161,8 +167,8 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/mydefaultindex/_status", c => c.Status(s => s.Index<Doc>()));
 			Do("DELETE", "/mydefaultindex/.percolator/mypercolator", c => c.UnregisterPercolator<ElasticsearchProject>("mypercolator"));
 			Do("DELETE", "/mycustomindex/.percolator/mypercolator", c => c.UnregisterPercolator<ElasticsearchProject>("mypercolator", r => r.Index("mycustomindex")));
-			Do("POST", "/mydefaultindex/doc/1/_update", c => c.Update<Doc, OtherDoc>(u => u.Id(1).Doc(new OtherDoc { Name = "asd" })));
-			Do("POST", "/mydefaultindex/customtype/1/_update", c => c.Update<Doc, OtherDoc>(u => u.Id(1).Type("customtype").Doc(new OtherDoc { Name = "asd" })));
+			Do("POST", "/mydefaultindex/doc/1/_update", c => c.Update<Doc, OtherDoc>(u => u.Id(1).Doc(new OtherDoc {Name = "asd"})));
+			Do("POST", "/mydefaultindex/customtype/1/_update", c => c.Update<Doc, OtherDoc>(u => u.Id(1).Type("customtype").Doc(new OtherDoc {Name = "asd"})));
 			Do("PUT", "/mydefaultindex/_settings", c => c.UpdateSettings(u => u.AutoExpandReplicas(false)));
 			Do("PUT", "/mycustomindex/_settings", c => c.UpdateSettings(u => u.Index("mycustomindex").AutoExpandReplicas(false)));
 			Do("POST", "/_all/doc/_validate/query", c => c.Validate<Doc>(v => v.AllIndices()));
@@ -171,17 +177,30 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/_validate/query", c => c.Validate<Doc>(v => v.AllIndices().AllTypes()));
 			Do("PUT", "/_cluster/settings", c => c.ClusterSettings(v => v.Transient(p => p)));
 			Do("GET", "/_cluster/settings", c => c.ClusterGetSettings());
-			
+
 			Do("GET", "/mydefaultindex/doc/_search_shards?ignore_unavailable=true", c => c.SearchShards<Doc>(s => s.IgnoreUnavailable()));
 			Do("GET", "/_all/doc/_search_shards?local=true", c => c.SearchShards<Doc>(s => s.AllIndices().Local()));
 			Do("GET", "/_search_shards?preference=nodeID", c => c.SearchShards<Doc>(s => s.AllIndices().AllTypes().Preference("nodeID")));
 			Do("GET", "/mydefaultindex/_search_shards?routing=routing-value", c => c.SearchShards<Doc>(s => s.AllTypes().Routing("routing-value")));
 			Do("GET", "/prefix-*/a%2Cb/_search_shards", c => c.SearchShards<Doc>(s => s.Index("prefix-*").Types("a", "b")));
 
-            Do("POST", "/_scripts/lang/id", c => c.PutScript(s => s.Lang("lang").Id("id")));
-            Do("GET", "/_scripts/lang/id", c => c.GetScript(s => s.Lang("lang").Id("id")));
-            Do("DELETE", "/_scripts/lang/id", c => c.DeleteScript(s => s.Lang("lang").Id("id")));
-		}
+			Do("POST", "/_scripts/lang/id", c => c.PutScript(s => s.Lang("lang").Id("id")));
+			Do("GET", "/_scripts/lang/id", c => c.GetScript(s => s.Lang("lang").Id("id")));
+			Do("DELETE", "/_scripts/lang/id", c => c.DeleteScript(s => s.Lang("lang").Id("id")));
+			Do("GET", "/_all/_mappings%2C_aliases", c => c.GetIndex(d => d.AllIndices().Features(GetIndexFeature.Aliases | GetIndexFeature.Mappings)));
+			Do("GET", "/_all", c => c.GetIndex(d => d.AllIndices().Features(GetIndexFeature.All)));
+			Do("GET", "/_all", c => c.GetIndex(d => d.AllIndices()));
 
+			Do("GET", "/mydefaultindex/doc/_search/exists?q=term", c => c.SearchExists<Doc>(s => s.QueryString("term")));
+			Do("GET", "/mydefaultindex/doc/_search/exists?source=%7B%7D", c => c.SearchExists<Doc>(s=>s.Source("{}")));
+			Do("GET", "/mydefaultindex/doc/_search/exists", c => c.SearchExists<Doc>(s=>s));
+			Do("POST", "/mydefaultindex/doc/_search/exists", c => c.SearchExists<Doc>(s=>s.Query(q=>q.MatchAll())));
+
+			Do("POST", "/_snapshot/my_repos/_verify", c => c.VerifyRepository("my_repos"));
+			Do("GET", "/mydefaultindex/_settings%2C_mappings", c => c.GetIndex(d => d.Index<OtherDoc>().Features(GetIndexFeature.Settings | GetIndexFeature.Mappings)));
+			Do("GET", "/x%2Cy", c => c.GetIndex(d => d.Indices("x", "y").Features(GetIndexFeature.All)));
+			Do("GET", "/x%2Cy", c => c.GetIndex(d => d.Indices("x", "y")));
+
+		}
 	}
 }

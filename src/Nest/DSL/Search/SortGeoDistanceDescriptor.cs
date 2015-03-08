@@ -13,24 +13,34 @@ namespace Nest
 	{
 		PropertyPathMarker Field { get; set; }
 		string PinLocation { get; set; }
+		IEnumerable<string> Points { get; set; }
 		GeoUnit? GeoUnit { get; set; }
 	}
 
 	public class GeoDistanceSort : SortBase, IGeoDistanceSort
 	{
+		internal static List<string> Params = new List<string> { "missing", "mode", "order", "unit" };
+
+		internal static int MissingIndex = 0;
+		internal static int ModeIndex = 1;
+		internal static int OrderIndex = 2;
+		internal static int UnitIndex = 3;
+
 		public PropertyPathMarker Field { get; set; }
 		public string PinLocation { get; set; }
+		public IEnumerable<string> Points { get; set; }
 		public GeoUnit? GeoUnit { get; set; }
 		
 		object ICustomJson.GetCustomJson()
 		{
+			var sort = this.Points.HasAny() ? (object)this.Points : this.PinLocation;
 			return new Dictionary<object, object>
 			{
-				{ this.Field, this.PinLocation },
-				{ "missing", this.Missing },
-				{ "mode", this.Mode },
-				{ "order", this.Order },
-				{ "unit", this.GeoUnit }
+				{ this.Field, sort },
+				{ Params[MissingIndex], this.Missing },
+				{ Params[ModeIndex], this.Mode},
+				{ Params[OrderIndex], this.Order },
+				{ Params[UnitIndex], this.GeoUnit }
 			};
 		}
 	}
@@ -42,6 +52,7 @@ namespace Nest
 		PropertyPathMarker IGeoDistanceSort.Field { get; set; }
 
 		string IGeoDistanceSort.PinLocation { get; set; }
+		IEnumerable<string> IGeoDistanceSort.Points { get; set; }
 
 		GeoUnit? IGeoDistanceSort.GeoUnit { get; set; }
 	
@@ -51,6 +62,14 @@ namespace Nest
 			Self.PinLocation = geoLocationHash;
 			return this;
 		}
+
+		public SortGeoDistanceDescriptor<T> PinTo(IEnumerable<string> geoLocationHashes)
+		{
+			geoLocationHashes.ThrowIfEmpty("geoLocationHash");
+			Self.Points = geoLocationHashes;
+			return this;
+		}
+
 		public SortGeoDistanceDescriptor<T> PinTo(double Lat, double Lon)
 		{
 			var c = CultureInfo.InvariantCulture;
@@ -59,6 +78,14 @@ namespace Nest
 			Self.PinLocation = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
 			return this;
 		}
+		//TODO in nest 2.0 normalize all PinTo to params ?
+		public SortGeoDistanceDescriptor<T> PinTo(params GeoLocation[] geoLocationHashes)
+		{
+			geoLocationHashes.ThrowIfEmpty("geoLocationHash");
+			Self.Points = geoLocationHashes.Select(g=>g.ToString());
+			return this;
+		}
+
 		public SortGeoDistanceDescriptor<T> Unit(GeoUnit unit)
 		{
 			unit.ThrowIfNull("unit");
@@ -95,13 +122,14 @@ namespace Nest
 
 		object ICustomJson.GetCustomJson()
 		{
+			var sort = Self.Points.HasAny() ? (object)Self.Points : Self.PinLocation;
 			return new Dictionary<object, object>
 			{
-				{ Self.Field, Self.PinLocation },
-				{ "missing", Self.Missing },
-				{ "mode", Self.Mode},
-				{ "order", Self.Order },
-				{ "unit", Self.GeoUnit }
+				{ Self.Field, sort },
+				{ GeoDistanceSort.Params[GeoDistanceSort.MissingIndex], Self.Missing },
+				{ GeoDistanceSort.Params[GeoDistanceSort.ModeIndex], Self.Mode},
+				{ GeoDistanceSort.Params[GeoDistanceSort.OrderIndex], Self.Order },
+				{ GeoDistanceSort.Params[GeoDistanceSort.UnitIndex], Self.GeoUnit }
 			};
 		}
 	}

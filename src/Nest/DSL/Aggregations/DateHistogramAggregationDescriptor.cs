@@ -111,7 +111,7 @@ namespace Nest
 
 		public DateHistogramAggregationDescriptor()
 		{
-			this.Format("yyyy-MM-dd");
+			this.Self.Format = "date_optional_time";
 		}
 
 		public DateHistogramAggregationDescriptor<T> Field(string field)

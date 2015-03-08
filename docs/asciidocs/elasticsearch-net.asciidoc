@@ -10,7 +10,7 @@ From the Package Manager Console inside Visual Studio:
 
 [source,sh]
 ------------------------------------
-PM > Install Package Elasticsearch.Net
+PM > Install-Package Elasticsearch.Net
 ------------------------------------
 
 Or search for `Elasticsearch.Net` in the Package Manager GUI.

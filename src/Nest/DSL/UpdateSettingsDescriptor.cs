@@ -6,8 +6,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-    public interface IUpdateSettingsRequest : IIndexOptionalPath<UpdateSettingsRequestParameters>
-    {
+	public interface IUpdateSettingsRequest : IIndexOptionalPath<UpdateSettingsRequestParameters>
+	{
 		[JsonProperty("index.number_of_replicas")]
 		int? NumberOfReplicas { get; set; }
 
@@ -59,6 +59,9 @@ namespace Nest
 		[JsonProperty("index.cache.filter.expire")]
 		string CacheFilterExpire { get; set; }
 
+		[JsonProperty("index.cache.query.enable")]
+		bool? CacheQueryEnable { get; set; }
+
 		[JsonProperty("index.gateway.snapshot_interval")]
 		string GatewaySnapshotInterval { get; set; }
 
@@ -91,10 +94,10 @@ namespace Nest
 
 		[JsonProperty("index.gc_deletes")]
 		bool? GcDeletes { get; set; }
-		
+
 		[JsonProperty("index.ttl.disable_purge")]
 		bool? TtlDisablePurge { get; set; }
-		
+
 		[JsonProperty("index.translog.fs.type")]
 		string TranslogFsType { get; set; }
 
@@ -109,95 +112,97 @@ namespace Nest
 
 		[JsonProperty("analysis")]
 		AnalysisSettings Analysis { get; set; }
-    }
+	}
 
-    internal static class UpdateSettingsPathInfo
-    {
-        public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
-        {
-            pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
-        }
-    }
+	internal static class UpdateSettingsPathInfo
+	{
+		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
+		{
+			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
+		}
+	}
 
-    public partial class UpdateSettingsRequest : IndexOptionalPathBase<UpdateSettingsRequestParameters>, IUpdateSettingsRequest
-    {
-        public int? NumberOfReplicas { get; set; }
+	public partial class UpdateSettingsRequest : IndexOptionalPathBase<UpdateSettingsRequestParameters>, IUpdateSettingsRequest
+	{
+		public int? NumberOfReplicas { get; set; }
 
-        public object AutoExpandReplicas { get; set; }
+		public object AutoExpandReplicas { get; set; }
 
-        public bool? BlocksReadOnly { get; set; }
+		public bool? BlocksReadOnly { get; set; }
 
-        public bool? BlocksRead { get; set; }
+		public bool? BlocksRead { get; set; }
 
-        public bool? BlocksWrite { get; set; }
+		public bool? BlocksWrite { get; set; }
 
-        public bool? BlocksMetadata { get; set; }
+		public bool? BlocksMetadata { get; set; }
 
-        public string RefreshInterval { get; set; }
+		public string RefreshInterval { get; set; }
 
-        public int? IndexConcurrency { get; set; }
+		public int? IndexConcurrency { get; set; }
 
-        public string Codec { get; set; }
+		public string Codec { get; set; }
 
-        public bool? CodecBloomLoad { get; set; }
+		public bool? CodecBloomLoad { get; set; }
 
-        public bool? FailOnMergeFailure { get; set; }
+		public bool? FailOnMergeFailure { get; set; }
 
-        public string TranslogFlushTreshHoldOps { get; set; }
+		public string TranslogFlushTreshHoldOps { get; set; }
 
-        public string TranslogFlushThresholdSize { get; set; }
+		public string TranslogFlushThresholdSize { get; set; }
 
-        public string TranslogFlushThresholdPeriod { get; set; }
+		public string TranslogFlushThresholdPeriod { get; set; }
 
-        public bool? TranslogDisableFlush { get; set; }
+		public bool? TranslogDisableFlush { get; set; }
 
-        public string CacheFilterMaxSize { get; set; }
+		public string CacheFilterMaxSize { get; set; }
 
-        public string CacheFilterExpire { get; set; }
+		public string CacheFilterExpire { get; set; }
 
-        public string GatewaySnapshotInterval { get; set; }
+		public bool? CacheQueryEnable { get; set; }
 
-        public IDictionary<string, object> RoutingAllocationInclude { get; set; }
+		public string GatewaySnapshotInterval { get; set; }
 
-        public IDictionary<string, object> RoutingAllocationExclude { get; set; }
+		public IDictionary<string, object> RoutingAllocationInclude { get; set; }
 
-        public IDictionary<string, object> RoutingAllocationRequire { get; set; }
+		public IDictionary<string, object> RoutingAllocationExclude { get; set; }
+
+		public IDictionary<string, object> RoutingAllocationRequire { get; set; }
 
 		public RoutingAllocationEnableOption? RoutingAllocationEnable { get; set; }
 
-        public bool? RoutingAllocationDisableAllication { get; set; }
+		public bool? RoutingAllocationDisableAllication { get; set; }
 
-        public bool? RoutingAllocationDisableNewAllocation { get; set; }
+		public bool? RoutingAllocationDisableNewAllocation { get; set; }
 
-        public bool? RoutingAllocationDisableReplicaAllocation { get; set; }
+		public bool? RoutingAllocationDisableReplicaAllocation { get; set; }
 
-        public int? RoutingAllocationTotalShardsPerNode { get; set; }
+		public int? RoutingAllocationTotalShardsPerNode { get; set; }
 
-        public string RecoveryInitialShards { get; set; }
+		public string RecoveryInitialShards { get; set; }
 
-        public bool? GcDeletes { get; set; }
+		public bool? GcDeletes { get; set; }
 
-        public bool? TtlDisablePurge { get; set; }
+		public bool? TtlDisablePurge { get; set; }
 
-        public string TranslogFsType { get; set; }
+		public string TranslogFsType { get; set; }
 
-        public bool? CompoundFormat { get; set; }
+		public bool? CompoundFormat { get; set; }
 
-        public bool? CompoundOnFlush { get; set; }
+		public bool? CompoundOnFlush { get; set; }
 
-        public bool? WarmersEnabled { get; set; }
+		public bool? WarmersEnabled { get; set; }
 
-        public AnalysisSettings Analysis { get; set; }
+		public AnalysisSettings Analysis { get; set; }
 
-        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
-        {
-            UpdateSettingsPathInfo.Update(settings, pathInfo);
-        }
-    }
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
+		{
+			UpdateSettingsPathInfo.Update(settings, pathInfo);
+		}
+	}
 
 	[DescriptorFor("IndicesPutSettings")]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial class UpdateSettingsDescriptor 
+	public partial class UpdateSettingsDescriptor
 		: IndexOptionalPathDescriptorBase<UpdateSettingsDescriptor, UpdateSettingsRequestParameters>, IUpdateSettingsRequest
 	{
 		private IUpdateSettingsRequest Self { get { return this; } }
@@ -235,6 +240,8 @@ namespace Nest
 		string IUpdateSettingsRequest.CacheFilterMaxSize { get; set; }
 
 		string IUpdateSettingsRequest.CacheFilterExpire { get; set; }
+
+		bool? IUpdateSettingsRequest.CacheQueryEnable { get; set; }
 
 		string IUpdateSettingsRequest.GatewaySnapshotInterval { get; set; }
 
@@ -394,7 +401,7 @@ namespace Nest
 		/// </summary>
 		public UpdateSettingsDescriptor TranslogFlushThresholdSize(string numberOfReplicas)
 		{
-			this.Self.TranslogFlushThresholdSize  = numberOfReplicas;
+			this.Self.TranslogFlushThresholdSize = numberOfReplicas;
 			return this;
 		}
 
@@ -403,7 +410,7 @@ namespace Nest
 		/// </summary>
 		public UpdateSettingsDescriptor TranslogFlushThresholdPeriod(string translogFlushThresholdPeriod)
 		{
-			this.Self.TranslogFlushThresholdPeriod  = translogFlushThresholdPeriod;
+			this.Self.TranslogFlushThresholdPeriod = translogFlushThresholdPeriod;
 			return this;
 		}
 
@@ -412,7 +419,7 @@ namespace Nest
 		/// </summary>
 		public UpdateSettingsDescriptor TranslogDisableFlush(bool translogDisableFlush = true)
 		{
-			this.Self.TranslogDisableFlush  = translogDisableFlush;
+			this.Self.TranslogDisableFlush = translogDisableFlush;
 			return this;
 		}
 
@@ -421,7 +428,7 @@ namespace Nest
 		///  </summary>
 		public UpdateSettingsDescriptor CacheFilterMaxSize(string cacheFilterMaxSize)
 		{
-			this.Self.CacheFilterMaxSize  = cacheFilterMaxSize;
+			this.Self.CacheFilterMaxSize = cacheFilterMaxSize;
 			return this;
 		}
 
@@ -430,7 +437,16 @@ namespace Nest
 		/// </summary>
 		public UpdateSettingsDescriptor CacheFilterExpire(string cacheFilterExpire)
 		{
-			this.Self.CacheFilterExpire  = cacheFilterExpire;
+			this.Self.CacheFilterExpire = cacheFilterExpire;
+			return this;
+		}
+
+		/// <summary>
+		/// Enable or disable the query cache.
+		/// </summary>
+		public UpdateSettingsDescriptor CacheQueryEnable(bool cacheQueryEnable = true)
+		{
+			this.Self.CacheQueryEnable = cacheQueryEnable;
 			return this;
 		}
 
@@ -449,7 +465,7 @@ namespace Nest
 		public UpdateSettingsDescriptor RoutingAllocationInclude(
 			Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
-			this.Self.RoutingAllocationInclude  = selector(new FluentDictionary<string, object>());
+			this.Self.RoutingAllocationInclude = selector(new FluentDictionary<string, object>());
 			return this;
 		}
 
@@ -459,7 +475,7 @@ namespace Nest
 		public UpdateSettingsDescriptor RoutingAllocationExclude(
 			Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
-			this.Self.RoutingAllocationExclude  = selector(new FluentDictionary<string, object>());
+			this.Self.RoutingAllocationExclude = selector(new FluentDictionary<string, object>());
 			return this;
 		}
 
@@ -469,7 +485,7 @@ namespace Nest
 		public UpdateSettingsDescriptor RoutingAllocationRequire(
 			Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
-			this.Self.RoutingAllocationRequire  = selector(new FluentDictionary<string, object>());
+			this.Self.RoutingAllocationRequire = selector(new FluentDictionary<string, object>());
 			return this;
 		}
 
@@ -487,7 +503,7 @@ namespace Nest
 		/// </summary>
 		public UpdateSettingsDescriptor RoutingAllocationDisableAllocation(bool disable = true)
 		{
-			this.Self.RoutingAllocationDisableAllication  = disable;
+			this.Self.RoutingAllocationDisableAllication = disable;
 			return this;
 		}
 
@@ -496,7 +512,7 @@ namespace Nest
 		/// </summary>
 		public UpdateSettingsDescriptor RoutingAllocationDisableNewAllocation(bool disable = true)
 		{
-			this.Self.RoutingAllocationDisableNewAllocation  = disable;
+			this.Self.RoutingAllocationDisableNewAllocation = disable;
 			return this;
 		}
 
@@ -514,7 +530,7 @@ namespace Nest
 		/// </summary>
 		public UpdateSettingsDescriptor RoutingAllocationTotalShardsPerNode(int totalShardsPerNode)
 		{
-			this.Self.RoutingAllocationTotalShardsPerNode  = totalShardsPerNode;
+			this.Self.RoutingAllocationTotalShardsPerNode = totalShardsPerNode;
 			return this;
 		}
 
@@ -529,7 +545,7 @@ namespace Nest
 		///</summary>
 		public UpdateSettingsDescriptor RecoveryInitialShards(string recoveryInitialShards)
 		{
-			this.Self.RecoveryInitialShards  = recoveryInitialShards;
+			this.Self.RecoveryInitialShards = recoveryInitialShards;
 			return this;
 		}
 
@@ -538,25 +554,25 @@ namespace Nest
 		/// </summary>
 		public UpdateSettingsDescriptor GcDeletes(bool gcDeletes = true)
 		{
-			this.Self.GcDeletes  = gcDeletes;
+			this.Self.GcDeletes = gcDeletes;
 			return this;
 		}
-		
+
 		/// <summary>
 		/// Disables temporarily the purge of expired docs.
 		/// </summary>
 		public UpdateSettingsDescriptor TtlDisablePurge(bool ttlDisablePurge = true)
 		{
-			this.Self.TtlDisablePurge  = ttlDisablePurge;
+			this.Self.TtlDisablePurge = ttlDisablePurge;
 			return this;
 		}
-		
+
 		/// <summary>
 		/// Either simple or buffered (default).
 		/// </summary>
 		public UpdateSettingsDescriptor TranslogFsType(string translogFsType)
 		{
-			this.Self.TranslogFsType  = translogFsType;
+			this.Self.TranslogFsType = translogFsType;
 			return this;
 		}
 
@@ -574,7 +590,7 @@ namespace Nest
 		/// </summary>
 		public UpdateSettingsDescriptor CompoundOnFlush(bool compoundOnFlush = true)
 		{
-			this.Self.CompoundOnFlush  = compoundOnFlush;
+			this.Self.CompoundOnFlush = compoundOnFlush;
 			return this;
 		}
 
@@ -600,7 +616,7 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
 		{
-            UpdateSettingsPathInfo.Update(settings, pathInfo);
+			UpdateSettingsPathInfo.Update(settings, pathInfo);
 		}
 	}
 }

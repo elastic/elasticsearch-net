@@ -29,50 +29,49 @@ namespace Nest.Resolvers
 			JsonContract contract = base.CreateContract(objectType);
 
 			// this will only be called once and then cached
-			if (typeof(IDictionary).IsAssignableFrom(objectType))
-				contract.Converter = new DictionaryKeysAreNotPropertyNamesJsonConverter();
-
-			if (objectType == typeof(Facet))
-				contract.Converter = new FacetConverter();
-			
-			if (objectType == typeof(Uri))
-				contract.Converter = new UriJsonConverter();
-			
-			if (objectType == typeof(IAggregation))
-				contract.Converter = new AggregationConverter();
-			
-			if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
-				contract.Converter = new IsoDateTimeConverter();
-
-			if (typeof(IHit<object>).IsAssignableFrom(objectType))
-				contract.Converter = new DefaultHitConverter();
-
-			if (objectType == typeof(MultiGetResponse))
-				contract.Converter = new MultiGetHitConverter();
-
-			if (objectType == typeof(PropertyNameMarker))
-				contract.Converter = new PropertyNameMarkerConverter(this.ConnectionSettings);
-			
-			if (objectType == typeof(PropertyPathMarker))
-				contract.Converter = new PropertyPathMarkerConverter(this.ConnectionSettings);
-
-			if (objectType == typeof(SuggestResponse))
-				contract.Converter = new SuggestResponseConverter();
-
-			if (objectType == typeof(MultiSearchResponse))
-				contract.Converter = new MultiSearchConverter();
 
 			if (objectType == typeof(IDictionary<string, AnalyzerBase>))
 				contract.Converter = new AnalyzerCollectionConverter();
 
-			if (objectType == typeof(IDictionary<string, TokenFilterBase>))
+			else if (objectType == typeof(IDictionary<string, TokenFilterBase>))
 				contract.Converter = new TokenFilterCollectionConverter();
 
-			if (objectType == typeof(IDictionary<string, TokenizerBase>))
+			else if (objectType == typeof(IDictionary<string, TokenizerBase>))
 				contract.Converter = new TokenizerCollectionConverter();
 
-			if (objectType == typeof(IDictionary<string, CharFilterBase>))
+			else if (objectType == typeof(IDictionary<string, CharFilterBase>))
 				contract.Converter = new CharFilterCollectionConverter();
+
+			else if (typeof(IDictionary).IsAssignableFrom(objectType))
+				contract.Converter = new DictionaryKeysAreNotPropertyNamesJsonConverter();
+
+			else if (objectType == typeof(Facet))
+				contract.Converter = new FacetConverter();
+			
+			else if (objectType == typeof(IAggregation))
+				contract.Converter = new AggregationConverter();
+			
+			else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
+				contract.Converter = new IsoDateTimeConverter();
+
+			else if (typeof(IHit<object>).IsAssignableFrom(objectType))
+				contract.Converter = new DefaultHitConverter();
+
+			else if (objectType == typeof(MultiGetResponse))
+				contract.Converter = new MultiGetHitConverter();
+
+			else if (objectType == typeof(PropertyNameMarker))
+				contract.Converter = new PropertyNameMarkerConverter(this.ConnectionSettings);
+			
+			else if (objectType == typeof(PropertyPathMarker))
+				contract.Converter = new PropertyPathMarkerConverter(this.ConnectionSettings);
+
+			else if (objectType == typeof(SuggestResponse))
+				contract.Converter = new SuggestResponseConverter();
+
+			else if (objectType == typeof(MultiSearchResponse))
+				contract.Converter = new MultiSearchConverter();
+
 
 			if (this.ConnectionSettings.ContractConverters.HasAny())
 			{

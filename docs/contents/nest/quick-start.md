@@ -14,7 +14,7 @@ Requests and Responses have been mapped to CLR objects and `NEST` also comes wit
 
 From the package manager console inside visual studio 
 
-    PM > Install Package NEST -PreRelease
+    PM> Install-Package NEST
 
 Or search in the Package Manager UI for `NEST` and go from there
 

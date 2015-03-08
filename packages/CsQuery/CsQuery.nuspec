@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>CsQuery</id>
+    <version>1.3.4</version>
+    <title>CsQuery</title>
+    <authors>James Treworgy</authors>
+    <owners>James Treworgy</owners>
+    <licenseUrl>https://github.com/jamietre/CsQuery/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/jamietre/CsQuery/</projectUrl>
+    <iconUrl>http://www.outsharked.com/csquery/images/csquery-icon-large.gif</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>CsQuery is an HTML parser, CSS selector engine and jQuery port for .NET 4 and C#. It implements all CSS2 and CSS3 selectors, all the DOM manipulation methods of jQuery, and some of the utility methods.</description>
+    <summary>A complete CSS selector engine and jQuery port for .NET 4 and C#.</summary>
+    <releaseNotes>Version 1.3 is a major release. It implements a new C# port of the validator.nu HTML5 parser, a fully HTML5 compliant HTML parser.
+
+Version 1.3.2 now handles the character set encoding properly when using HTTP get methods, as well as an encoding specified in META tags. It also contains bug fixes.
+
+Complete change log:
+https://github.com/jamietre/CsQuery/blob/master/source/README.md</releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <tags>jquery html</tags>
+  </metadata>
+</package>

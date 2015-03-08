@@ -12,7 +12,6 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,30 +44,13 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CsQuery">
-      <HintPath>..\..\..\dep\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\dep\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="ShellProgressBar">
-      <HintPath>..\..\..\dep\ShellProgressBar.1.0.0.0\lib\NET4\ShellProgressBar.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\..\..\dep\RazorMachine.2.6.1\lib\net40\System.Web.Razor.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Xipton.Razor">
-      <HintPath>..\..\..\dep\RazorMachine.2.6.1\lib\net40\Xipton.Razor.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\ApiBody.cs" />
@@ -96,7 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="paket.references" />
     <None Include="Views\_Requests.Generated.cshtml" />
     <None Include="Views\RequestParametersExtensions.Generated.cshtml" />
     <None Include="Views\_Descriptors.Generated.cshtml" />
@@ -107,7 +89,9 @@
     <None Include="Views\IElasticsearchClient.Generated.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="razormachine.readme.txt" />
+    <Content Include="razormachine.readme.txt">
+      <Paket>True</Paket>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
@@ -118,4 +102,108 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="..\..\..\.paket\paket.targets" />
+  <Choose>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="CsQuery">
+          <HintPath>..\..\..\packages\CsQuery\lib\net40\CsQuery.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\netcore45\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net35\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v2.0' Or $(TargetFrameworkVersion) == 'v3.0')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net20\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net40\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0') Or ($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile158')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\portable-net40+sl5+wp80+win8+monotouch+monoandroid\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')) Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="System.Web.Razor">
+          <HintPath>..\..\..\packages\RazorMachine\lib\net40\System.Web.Razor.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="Xipton.Razor">
+          <HintPath>..\..\..\packages\RazorMachine\lib\net40\Xipton.Razor.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="ShellProgressBar">
+          <HintPath>..\..\..\packages\ShellProgressBar\lib\NET4\ShellProgressBar.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
 </Project>

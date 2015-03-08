@@ -8,6 +8,7 @@ using Elasticsearch.Net.Tests.Unit.Stubs;
 using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
+using Elasticsearch.Net.ConnectionPool;
 
 namespace Elasticsearch.Net.Tests.Unit.ConnectionPools
 {
@@ -29,49 +30,16 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionPools
 
 		}
 
-		private ITransport ProvideTransport(AutoFake fake)
+		[Test]
+		public void HttpsUri_UsingSsl_IsTrue()
 		{
-			var param = new TypedParameter(typeof(IDateTimeProvider), null);
-			return fake.Provide<ITransport, Transport>(param);
+			Assert.IsTrue(new SingleNodeConnectionPool(new Uri("https://test1")).UsingSsl);
 		}
 
 		[Test]
-		public void Should_Not_Retry_On_IConnection_Exception()
+		public void HttpUri_UsingSsl_IsFalse()
 		{
-			using (var fake = new AutoFake(callsDoNothing: true))
-			{
-				//set up connection configuration that holds a connection pool
-				//with '_uris' (see the constructor)
-				fake.Provide<IConnectionConfigurationValues>(_config);
-				//prove a real HttpTransport with its unspecified dependencies
-				//as fakes
-				this.ProvideTransport(fake);
-
-				//set up fake for a call on IConnection.GetSync so that it always throws 
-				//an exception
-				var getCall = FakeCalls.GetSyncCall(fake);
-				getCall.Returns(FakeResponse.AnyWithException(_config, -1, innerException: new Exception("inner")));
-				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
-				pingCall.Returns(_ok);
-				
-				//create a real ElasticsearchClient with it unspecified dependencies
-				//as fakes
-				var client = fake.Resolve<ElasticsearchClient>();
-
-				//our settings dictate retrying 2 times
-				client.Settings.MaxRetries.Should().Be(2);
-				
-				//the single node connection pool always reports 0 for maxretries
-				client.Settings.ConnectionPool.MaxRetries.Should().Be(0);
-
-				//
-				var exception = Assert.Throws<Exception>(()=> client.Info());
-				exception.Message.Should().Be("inner");
-				//the GetSync method must in total have been called the number of nodes times.
-				getCall.MustHaveHappened(Repeated.Exactly.Once);
-
-			}
+			Assert.IsFalse(new SingleNodeConnectionPool(new Uri("http://test1")).UsingSsl);
 		}
-
 	}
 }

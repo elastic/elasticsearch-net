@@ -606,6 +606,34 @@ namespace Nest
 			filter.Value = type;
 			return  this.New(filter, f => f.Type = filter);
 		}
+		
+		/// <summary>
+		/// The indices filter can be used when executed across multiple indices, allowing to have a 
+		/// filter that executes only when executed on an index that matches a specific list of indices, 
+		/// and another filter that executes when it is executed on an index that does not match the listed indices.
+		/// </summary>
+		public FilterContainer Indices<K>(Action<IndicesFilterDescriptor<K>> filterSelector) where K : class
+		{
+			var filter = new IndicesFilterDescriptor<K>();
+			if (filterSelector != null)
+				filterSelector(filter);
+
+			return this.New(filter, f => f.Indices = filter);
+		}
+
+		/// <summary>
+		/// The indices filter can be used when executed across multiple indices, allowing to have a 
+		/// filter that executes only when executed on an index that matches a specific list of indices, 
+		/// and another filter that executes when it is executed on an index that does not match the listed indices.
+		/// </summary>
+		public FilterContainer Indices(Action<IndicesFilterDescriptor<T>> filterSelector) 
+		{
+			var filter = new IndicesFilterDescriptor<T>();
+			if (filterSelector != null)
+				filterSelector(filter);
+
+			return this.New(filter, f => f.Indices = filter);
+		}
 
 		/// <summary>
 		/// Filters documents matching the provided document / mapping type. 
@@ -632,12 +660,13 @@ namespace Nest
 		/// Filters documents with fields that have terms within a certain range. 
 		/// Similar to range query, except that it acts as a filter. 
 		/// </summary>
-		public FilterContainer Range(Action<RangeFilterDescriptor<T>> rangeSelector)
+		public FilterContainer Range(Action<RangeFilterDescriptor<T>> rangeSelector, RangeExecution? execution = null)
 		{
 			var filter = new RangeFilterDescriptor<T>();
 			if (rangeSelector != null)
 				rangeSelector(filter);
-			
+			filter.Execution(execution);
+
 			return this.New(filter, f=>f.Range = filter);
 		}
 		/// <summary>
@@ -702,8 +731,6 @@ namespace Nest
 		/// </summary>
 		public FilterContainer Term(string field, object term)
 		{
-
-
 			ITermFilter filter = new TermFilterDescriptor();
 			filter.Field = field;
 			filter.Value = term;
@@ -720,8 +747,20 @@ namespace Nest
 			filter.Terms = (terms != null) ? terms.Cast<object>() : null;
 			filter.Execution = Execution;
 			return this.New(filter, f=>f.Terms = filter);
-		}	
-		
+		}
+
+		/// <summary>
+		/// Filters documents that have fields that match any of the provided terms (not analyzed). 
+		/// </summary>
+		public FilterContainer Terms<K>(Expression<Func<T, IEnumerable<K>>> fieldDescriptor, IEnumerable<K> terms, TermsExecution? Execution = null)
+		{
+			ITermsFilter filter = new TermsFilterDescriptor();
+			filter.Field = fieldDescriptor;
+			filter.Terms = (terms != null) ? terms.Cast<object>() : null;
+			filter.Execution = Execution;
+			return this.New(filter, f => f.Terms = filter);
+		}
+
 		/// <summary>
 		/// Filters documents that have fields that match any of the provided terms (not analyzed). 
 		/// </summary>
@@ -921,6 +960,7 @@ namespace Nest
 			var f = new FilterDescriptor<T>();
 			f.Self.IsStrict = self.IsStrict;
 			f.Self.IsVerbatim = self.IsVerbatim;
+		    f.Self.FilterName = self.FilterName;
 
 			if (fillProperty != null)
 				fillProperty(f);

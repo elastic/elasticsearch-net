@@ -118,7 +118,10 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			if (pingRetryRequest != null) return pingRetryRequest;
 
 			var streamResponse = this.DoElasticsearchCall(requestState);
-			
+
+			if (streamResponse.OriginalException != null)
+				requestState.SeenExceptions.Add(streamResponse.OriginalException);
+
 			aliveResponse = streamResponse.SuccessOrKnownError;
 
 			if (!this.DoneProcessing(streamResponse, requestState, maxRetries, retried)) 
@@ -149,7 +152,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				var response = this.CoordinateRequest(requestState, maxRetries, retried, ref aliveResponse);
 				if (response != null) return response;
 			}
-			catch (ElasticsearchAuthenticationException e)
+			catch (ElasticsearchAuthException e)
 			{
 				return this.HandleAuthenticationException(requestState, e);
 			}
@@ -166,7 +169,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			catch (Exception e)
 			{
 				requestState.SeenExceptions.Add(e);
-				if (!requestState.UsingPooling || maxRetries == 0 && retried == 0)
+				if (maxRetries == 0 && retried == 0)
 				{
 					//TODO ifdef ExceptionDispatchInfo.Capture(ex).Throw();
 					throw;
@@ -194,7 +197,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			{
 				this._delegator.SniffOnConnectionFailure(requestState);
 			}
-			catch (ElasticsearchAuthenticationException e)
+			catch (ElasticsearchAuthException e)
 			{
 				//If the sniff already returned a 401 fail/return a response as early as possible
 				return this.HandleAuthenticationException(requestState, e);

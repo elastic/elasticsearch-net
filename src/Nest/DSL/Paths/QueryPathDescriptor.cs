@@ -52,7 +52,6 @@ namespace Nest
 			//start out with defaults
 			var inferrer = new ElasticInferrer(settings);
 
-
 			var index = inferrer.IndexName<T>();
 			var type = inferrer.TypeName<T>();
 			pathInfo.Index = index;
@@ -66,11 +65,11 @@ namespace Nest
 
 			if (path.Indices.HasAny())
 				pathInfo.Index = inferrer.IndexNames(path.Indices);
-			else if (path.AllIndices.GetValueOrDefault(false) && !pathInfo.Type.IsNullOrEmpty())
-				pathInfo.Index = "_all";
 			else
 				pathInfo.Index = path.AllIndices.GetValueOrDefault(false) ? null : inferrer.IndexName<T>();
 
+			if (pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+				pathInfo.Index = "_all";
 		}
 	}
 

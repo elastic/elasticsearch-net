@@ -23,6 +23,7 @@
 
 using System;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace Elasticsearch.Net.Connection.Thrift.Transport
 {
@@ -32,6 +33,55 @@ namespace Elasticsearch.Net.Connection.Thrift.Transport
 		private readonly int port;
 		private TcpClient client;
 		private int timeout;
+
+		private bool isConnectionSuccessful = false;
+		private Exception socketexception;
+		private ManualResetEvent timeoutObject = new ManualResetEvent(false);
+
+		public TcpClient Connect()
+		{
+			timeoutObject.Reset();
+			socketexception = null;
+
+			client.BeginConnect(host, port, new AsyncCallback(CallBackMethod), client);
+
+			if (timeoutObject.WaitOne(timeout, false))
+			{
+				if (isConnectionSuccessful)
+				{
+					return client;
+				}
+
+				throw socketexception ?? new Exception("Socket exception should not be null.");
+			}
+
+			client.Close();
+			throw new TimeoutException("TimeOut Exception");
+		}
+
+		private void CallBackMethod(IAsyncResult asyncresult)
+		{
+			try
+			{
+				isConnectionSuccessful = false;
+				var tcpclient = asyncresult.AsyncState as TcpClient;
+
+				if (tcpclient != null && tcpclient.Client != null)
+				{
+					tcpclient.EndConnect(asyncresult);
+					isConnectionSuccessful = true;
+				}
+			}
+			catch (Exception ex)
+			{
+				isConnectionSuccessful = false;
+				socketexception = ex;
+			}
+			finally
+			{
+				timeoutObject.Set();
+			}
+		}
 
 		public TSocket(TcpClient client)
 		{
@@ -44,7 +94,8 @@ namespace Elasticsearch.Net.Connection.Thrift.Transport
 			}
 		}
 
-		public TSocket(string host, int port) : this(host, port, 0)
+		public TSocket(string host, int port)
+			: this(host, port, 0)
 		{
 		}
 
@@ -56,6 +107,8 @@ namespace Elasticsearch.Net.Connection.Thrift.Transport
 
 			InitSocket();
 		}
+
+		public int ConnectTimeout { get; set; }
 
 		public int Timeout
 		{
@@ -118,7 +171,8 @@ namespace Elasticsearch.Net.Connection.Thrift.Transport
 				InitSocket();
 			}
 
-			client.Connect(host, port);
+			client = Connect();
+
 			inputStream = client.GetStream();
 			outputStream = client.GetStream();
 		}

@@ -59,6 +59,8 @@ namespace Nest.Resolvers
 		private readonly IConnectionSettingsValues _settings;
 		public PropertyNameResolver(IConnectionSettingsValues settings)
 		{
+			if (settings == null)
+				throw new ArgumentNullException("settings");
 			_settings = settings;
 		}
 
@@ -103,6 +105,7 @@ namespace Nest.Resolvers
 			return stack.Last();
 		}
 
+		[Obsolete("Scheduled for removal in 2.0, unused")]
 		public Stack<IElasticPropertyAttribute> ResolvePropertyAttributes(Expression expression)
 		{
 			var stack = new Stack<string>();
@@ -130,6 +133,12 @@ namespace Nest.Resolvers
 				var constantExpression = m.Arguments.Last() as ConstantExpression;
 				if (constantExpression != null)
 					stack.Push(constantExpression.Value as string);
+			}
+			else if (m.Method.Name == "FullyQualified" && m.Arguments.Any())
+			{
+				var type = m.Method.ReturnType;
+				var typeName = this._settings.Inferrer.TypeName(type);
+				stack.Push(typeName);
 			}
 			else if (m.Method.Name == "get_Item" && m.Arguments.Any())
 			{

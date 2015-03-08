@@ -21,7 +21,7 @@ Builds:
 #[NEST](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest#nest-)
 * High-level client that internally uses the low-level **Elasticsearch.Net** client
 * Maps requests and responses to strongly typed objects with a fluent interface and object initializer syntax to build them
-* Comes with a very powerful query DSL thats maps one-to-one with Elasticsearch
+* Comes with a very powerful query DSL that maps one-to-one with Elasticsearch
 * Takes advantage of .NET features where they make sense (i.e., covariant `IEnumerable<T>` result types, type and index inference)
 * All calls have async variants
 

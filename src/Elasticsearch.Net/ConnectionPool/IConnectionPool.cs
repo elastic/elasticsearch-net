@@ -18,7 +18,17 @@ namespace Elasticsearch.Net.ConnectionPool
 		/// Signals that this implemenation can accept new nodes
 		/// </summary>
 		bool AcceptsUpdates { get; }
-		
+
+		/// <summary>
+		/// Whether or not SSL is being using
+		/// </summary>
+		bool UsingSsl { get; }
+
+		/// <summary>
+		/// Bookkeeps wheter this connectionpool has seen a sniff on startup. 
+		/// </summary>
+		bool SniffedOnStartup { get; set; }
+
 		/// <summary>
 		/// Gets the next live Uri to perform the request on
 		/// </summary>
@@ -45,5 +55,6 @@ namespace Elasticsearch.Net.ConnectionPool
 		/// <param name="newClusterState"></param>
 		/// <param name="sniffNode">hint that the node we recieved the sniff from should not be pinged</param>
 		void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null);
+
 	}
 }

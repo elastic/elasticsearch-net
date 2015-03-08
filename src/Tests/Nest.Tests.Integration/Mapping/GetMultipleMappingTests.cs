@@ -107,7 +107,7 @@ namespace Nest.Tests.Integration.Mapping
 
 			x = this.Client.CreateIndex(indices.Last(), s => s
 				.AddMapping<ElasticsearchProject>(m => m.MapFromAttributes())
-				.AddMapping<GeoLocation>(m => m.MapFromAttributes())
+				.AddMapping<MockData.Domain.CustomGeoLocation>(m => m.MapFromAttributes())
 			);
 			Assert.IsTrue(x.Acknowledged, x.ConnectionStatus.ToString());
 
@@ -122,7 +122,7 @@ namespace Nest.Tests.Integration.Mapping
 				var mappings = indexMapping.Value;
 				mappings.Should().NotBeEmpty().And.HaveCount(2);
 				mappings.Should().Contain(m => m.TypeName == "elasticsearchprojects")
-					.And.Contain(m=>m.TypeName == (indexName == indices.First() ? "person" : "geolocation"));
+					.And.Contain(m=>m.TypeName == (indexName == indices.First() ? "person" : "customgeolocation"));
 				foreach (var mapping in mappings)
 				{
 					switch (mapping.TypeName)
@@ -133,7 +133,7 @@ namespace Nest.Tests.Integration.Mapping
 						case "person":
 							TestPersonMapping(mapping.Mapping);
 							break;
-						case "geolocation":
+						case "customgeolocation":
 							break;
 						default:
 							Assert.Fail("Unexpected mapping found {0}", mapping.TypeName);

@@ -44,6 +44,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "boost")]
 		double? Boost { get; set; }
 
+		[JsonProperty(PropertyName = "lenient")]
+		bool? Lenient { get; set; }
+
 		[JsonProperty(PropertyName = "use_dis_max")]
 		bool? UseDisMax { get; set; }
 
@@ -79,6 +82,7 @@ namespace Nest
 		public int? MaxExpansions { get; set; }
 		public int? Slop { get; set; }
 		public double? Boost { get; set; }
+		public bool? Lenient { get; set; }
 		public bool? UseDisMax { get; set; }
 		public double? TieBreaker { get; set; }
 		public string MinimumShouldMatch { get; set; }
@@ -108,6 +112,8 @@ namespace Nest
 		int? IMultiMatchQuery.Slop { get; set; }
 
 		double? IMultiMatchQuery.Boost { get; set; }
+
+		bool? IMultiMatchQuery.Lenient { get; set; }
 
 		bool? IMultiMatchQuery.UseDisMax { get; set; }
 
@@ -193,6 +199,12 @@ namespace Nest
 			((IMultiMatchQuery)this).Boost = boost;
 			return this;
 		}
+
+		public MultiMatchQueryDescriptor<T> Lenient(bool lenient = true) {
+			((IMultiMatchQuery)this).Lenient = lenient;
+			return this;
+		}
+
 		public MultiMatchQueryDescriptor<T> PrefixLength(int prefixLength)
 		{
 			((IMultiMatchQuery)this).PrefixLength = prefixLength;

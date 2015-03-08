@@ -20,7 +20,8 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 						ff => ff.Gauss(x => x.StartedOn, d => d.Scale("42w")).Weight(1),
 						ff => ff.Linear(x => x.FloatValue, d => d.Scale("0.3")).Filter(lff=>Filter2).Weight(2),
 						ff => ff.Exp(x => x.DoubleValue, d => d.Scale("0.5")).Weight(3),
-						ff => ff.BoostFactor(2).Filter(bff=>Filter1)
+						ff => ff.BoostFactor(2).Filter(bff=>Filter1),
+						ff => ff.Weight(5.0).Filter(wf =>Filter1)
 					)
 					.Query(qq=>Query1)
 					.RandomScore(1337)
@@ -45,11 +46,11 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			param.Should().NotBeNull();
 			param.Key.Should().Be("param");
 			param.Value.Should().Be("paramvalue");
-			q.Functions.Should().NotBeEmpty().And.HaveCount(4);
+			q.Functions.Should().NotBeEmpty().And.HaveCount(5);
 
 			//TODO rip out state from all these function descriptors
 			var functions = q.Functions.ToList();
-			functions.Should().NotBeEmpty().And.HaveCount(4);
+			functions.Should().NotBeEmpty().And.HaveCount(5);
 
 
 		}

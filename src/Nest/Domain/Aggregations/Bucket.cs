@@ -5,6 +5,9 @@ namespace Nest
 	public class Bucket<TBucketItem> : BucketAggregationBase
 		where TBucketItem : IBucketItem
 	{
+		public Bucket() { }
+		public Bucket(IDictionary<string, IAggregation> aggregations) : base(aggregations) { }
+
 		public IList<TBucketItem> Items { get; set; }
 	}
 	public class Bucket : IAggregation
@@ -17,6 +20,9 @@ namespace Nest
 	public class BucketWithDocCount<TBucketItem> : BucketAggregationBase, IBucketWithCountAggregation
 		where TBucketItem : IBucketItem
 	{
+		public BucketWithDocCount() { }
+		public BucketWithDocCount(IDictionary<string, IAggregation> aggregations) : base(aggregations) { }
+
 		public IList<TBucketItem> Items { get; set; }
 
 		public long DocCount { get; internal set; }

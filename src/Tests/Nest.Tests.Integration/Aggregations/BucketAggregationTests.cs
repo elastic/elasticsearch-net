@@ -63,8 +63,28 @@ namespace Nest.Tests.Integration.Aggregations
 					sigTermTerms.Items.Should().NotBeEmpty();
 				}
 			}
-
 		}
+
+		[Test]
+		[SkipVersion("0 - 1.1.9", "Background filter added in ES 1.2")]
+		public void SignificantTermsWithBackgroundFilter()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.SignificantTerms("sig_terms", st => st
+						.Field(p => p.Content)
+						.BackgroundFilter(bf => bf
+							.Term(p => p.Name, "elasticsearch")
+						)
+					)
+				)
+			);
+			results.IsValid.Should().BeTrue();
+			var bucket = results.Aggs.SignificantTerms("sig_terms");
+			bucket.Items.Should().NotBeEmpty();
+		}
+
 		[Test]
 		public void Histogram()
 		{
@@ -78,6 +98,28 @@ namespace Nest.Tests.Integration.Aggregations
 
 				)
 			);
+			results.IsValid.Should().BeTrue();
+			var bucket = results.Aggs.Histogram("bucket_agg");
+			bucket.Items.Should().NotBeEmpty();
+		}
+
+		[Test]
+		[SkipVersion("0 - 1.3.9", "pre_offset and post_offset added in ES 1.4")]
+		public void HistogramWithOffsets()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.Histogram("bucket_agg", m => m
+						.Field(p => p.IntValues)
+						.Interval(10)
+						.PreOffset(5)
+						.PostOffset(5)
+					)
+
+				)
+			);
+
 			results.IsValid.Should().BeTrue();
 			var bucket = results.Aggs.Histogram("bucket_agg");
 			bucket.Items.Should().NotBeEmpty();

@@ -78,6 +78,14 @@ namespace Nest
 			this._Functions.Add(fn);
 			return fn;
 		}
+
+		public FunctionScoreFunction<T> Weight(double weight)
+		{
+			var fn = new WeightFunction<T>(weight);
+			this._Functions.Add(fn);
+			return fn;
+		}
+
 		public IEnumerator<FunctionScoreFunction<T>> GetEnumerator()
 		{
 			return _Functions.GetEnumerator();

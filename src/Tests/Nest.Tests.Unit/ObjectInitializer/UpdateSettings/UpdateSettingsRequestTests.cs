@@ -35,6 +35,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.UpdateSettings
 					TranslogDisableFlush = true,
 					CacheFilterMaxSize = "-1",
 					CacheFilterExpire = "-1",
+					CacheQueryEnable = true,
 					GatewaySnapshotInterval = "5s",
 					RoutingAllocationInclude = new Dictionary<string, object> { { "tag", "value1,value2" } },
 					RoutingAllocationExclude = new Dictionary<string, object> { { "tag", "value3" } },

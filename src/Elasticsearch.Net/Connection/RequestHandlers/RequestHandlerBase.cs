@@ -115,7 +115,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			int maxRetries,
 			int retried)
 		{
-			return streamResponse.SuccessOrKnownError
+			return (streamResponse != null && streamResponse.SuccessOrKnownError)
 				|| (maxRetries == 0 
 					&& retried == 0 
 					&& !this._delegator.SniffOnFaultDiscoveredMoreNodes(requestState, retried, streamResponse)
@@ -137,8 +137,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 					: new AggregateException(requestState.SeenExceptions);
 
 			//When we are not using pooling we forcefully rethrow the exception
-			//and never wrap it in a maxretry exception 
-			if (!requestState.UsingPooling && innerException != null)
+			if (!requestState.UsingPooling && innerException != null && maxRetries == 0)
 				throw innerException;
 		
 			var exceptionMessage = tookToLong 
@@ -237,13 +236,13 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				this._delegator.SniffOnStaleClusterState(requestState);
 				return null;
 			}
-			catch(ElasticsearchAuthenticationException e)
+			catch(ElasticsearchAuthException e)
 			{
 				return this.HandleAuthenticationException(requestState, e);
 			}
 		}
 
-		protected ElasticsearchResponse<T> HandleAuthenticationException<T>(TransportRequestState<T> requestState, ElasticsearchAuthenticationException exception)
+		protected ElasticsearchResponse<T> HandleAuthenticationException<T>(TransportRequestState<T> requestState, ElasticsearchAuthException exception)
 		{
 			if (requestState.ClientSettings.ThrowOnElasticsearchServerExceptions)
 				throw exception.ToElasticsearchServerException();

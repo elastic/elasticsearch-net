@@ -1,7 +1,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{5310B710-DE6D-4BD1-BD73-F55885B6746B}"
+	ProjectSection(SolutionItems) = preProject
+		..\paket.dependencies = ..\paket.dependencies
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest", "Nest\Nest.csproj", "{072BA7DA-7B60-407D-8B6E-95E3186BE70C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Integration", "Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj", "{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}"
@@ -25,13 +30,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D55
 		..\.editorconfig = ..\.editorconfig
 		..\.gitignore = ..\.gitignore
 		..\build.bat = ..\build.bat
-		..\build\build.fsx = ..\build\build.fsx
 		..\build\download-nuget.ps1 = ..\build\download-nuget.ps1
 		..\build\Elasticsearch.Net.Connection.HttpClient.nuspec = ..\build\Elasticsearch.Net.Connection.HttpClient.nuspec
 		..\build\Elasticsearch.Net.Connection.Thrift.nuspec = ..\build\Elasticsearch.Net.Connection.Thrift.nuspec
 		..\build\Elasticsearch.Net.JsonNET.nuspec = ..\build\Elasticsearch.Net.JsonNET.nuspec
 		..\build\Elasticsearch.Net.nuspec = ..\build\Elasticsearch.Net.nuspec
-		..\build\InheritDoc.fsx = ..\build\InheritDoc.fsx
 		..\build\NEST.nuspec = ..\build\NEST.nuspec
 	EndProjectSection
 EndProject
@@ -57,7 +60,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Connections", "Connections"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serialization", "Serialization", "{90F48CF5-BB0B-484D-85E7-18FE3ECA3825}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.JsonNet", "Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj", "{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.JsonNet", "Serialization\Elasticsearch.Net.JsonNet\Elasticsearch.Net.JsonNet.csproj", "{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Connection.HttpClient", "Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj", "{A69322FD-B874-44EF-ABE0-63F4A7B5593E}"
 EndProject
@@ -104,6 +107,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "templates", "http://localho
 		Release.AspNetCompiler.Debug = "False"
 		SlnRelativePath = "..\docs\templates\"
 	EndProjectSection
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "scripts", "..\build\scripts\scripts.fsproj", "{28328694-2598-44D3-BB25-8B6C3FBDD3EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -341,6 +346,18 @@ Global
 		{DF8388A1-4778-411E-A3F5-1062CDE8621F}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{DF8388A1-4778-411E-A3F5-1062CDE8621F}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{DF8388A1-4778-411E-A3F5-1062CDE8621F}.Release|x86.ActiveCfg = Debug|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.CodeGeneration|Any CPU.ActiveCfg = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -360,5 +377,6 @@ Global
 		{C54FFD67-C452-4DC4-A47A-663ECA98A38F} = {C7EA82B9-4C4A-4F68-ACD1-0D1A765BA98C}
 		{E005A0A9-ADAE-49D5-9686-73686471DA9F} = {E30CA256-C9A8-487A-94B7-D6B79D70F774}
 		{DF8388A1-4778-411E-A3F5-1062CDE8621F} = {E30CA256-C9A8-487A-94B7-D6B79D70F774}
+		{28328694-2598-44D3-BB25-8B6C3FBDD3EF} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
 	EndGlobalSection
 EndGlobal

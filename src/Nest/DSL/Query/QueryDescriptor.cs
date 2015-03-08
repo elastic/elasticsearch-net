@@ -126,6 +126,19 @@ namespace Nest
 				.Terms(terms)
 			);
 		}
+		
+		/// <summary>
+		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
+		/// </summary>
+		public QueryContainer Terms<K>(Expression<Func<T, IEnumerable<K>>> objectPath, IEnumerable<K> terms)
+		{
+			PropertyPathMarker field = objectPath;
+			return this.TermsDescriptor<K>(t => t
+				.OnField(field)
+				.Terms(terms)
+			);
+		}
+
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>

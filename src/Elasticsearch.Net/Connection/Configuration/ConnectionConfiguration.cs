@@ -53,7 +53,10 @@ namespace Elasticsearch.Net.Connection
 		int IConnectionConfigurationValues.Timeout { get { return _timeout; }}
 		
 		private int? _pingTimeout;
-		int? IConnectionConfigurationValues.PingTimeout { get{ return _pingTimeout; } }
+		int? IConnectionConfigurationValues.PingTimeout { get { return _pingTimeout; } }
+
+		private int? _connectTimeout;
+		int? IConnectionConfigurationValues.ConnectTimeout { get { return _connectTimeout; } }
 
 		private int? _deadTimeout;
 		int? IConnectionConfigurationValues.DeadTimeout { get{ return _deadTimeout; } }
@@ -63,6 +66,12 @@ namespace Elasticsearch.Net.Connection
 	
 		private TimeSpan? _maxRetryTimeout;
 		TimeSpan? IConnectionConfigurationValues.MaxRetryTimeout { get{ return _maxRetryTimeout; } }
+	
+		private int? _keepAliveTime;
+		int? IConnectionConfigurationValues.KeepAliveTime { get{ return _keepAliveTime; } }
+	
+		private int? _keepAliveInterval;
+		int? IConnectionConfigurationValues.KeepAliveInterval { get{ return _keepAliveInterval; } }
 	
 		private string _proxyUsername;
 		string IConnectionConfigurationValues.ProxyUsername { get{ return _proxyUsername; } }
@@ -110,8 +119,11 @@ namespace Elasticsearch.Net.Connection
 		private TimeSpan? _sniffLifeSpan;
 		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan { get{ return _sniffLifeSpan; } }
 
-		private bool _compressionEnabled;
-		bool IConnectionConfigurationValues.EnableCompressedResponses { get{ return _compressionEnabled; } }
+		private bool _enableCompressedResponses;
+		bool IConnectionConfigurationValues.EnableCompressedResponses { get{ return _enableCompressedResponses; } }
+
+		private bool _enableHttpCompression;
+		bool IConnectionConfigurationValues.EnableHttpCompression { get{ return _enableHttpCompression; } }
 
 		private bool _traceEnabled;
 		bool IConnectionConfigurationValues.TraceEnabled { get{ return _traceEnabled; } }
@@ -150,6 +162,13 @@ namespace Elasticsearch.Net.Connection
 			//this.Port = uri.Port
 		}
 
+		public T EnableTcpKeepAlive(int keepAliveTime, int keepAliveInterval)
+		{
+			this._keepAliveTime = keepAliveTime;
+			this._keepAliveInterval = keepAliveInterval;
+			return (T) this;
+		}
+
 		public T MaximumRetries(int maxRetries)
 		{
 			this._maxRetries = maxRetries;
@@ -176,9 +195,20 @@ namespace Elasticsearch.Net.Connection
 		/// Enable compressed responses from elasticsearch (NOTE that that nodes need to be configured to allow this)
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html
 		/// </summary>
+		[Obsolete("Scheduled to be removed in 2.0, please use EnableHttpCompression")]
 		public T EnableCompressedResponses(bool enabled = true)
 		{
-			this._compressionEnabled = enabled;
+			this._enableCompressedResponses = enabled;
+			return (T) this;
+		}
+
+		/// <summary>
+		/// Enable gzip compressed requests and responses, do note that you need to configure elasticsearch to set this
+		/// <see cref="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html"/>
+		/// </summary>
+		public T EnableHttpCompression(bool enabled = true)
+		{
+			this._enableHttpCompression = enabled;
 			return (T) this;
 		}
 
@@ -240,8 +270,8 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		/// <summary>
-		/// Timeout in milliseconds when the .NET webrequest should abort the request, note that you can set this to a high value here,
-		/// and specify the timeout in various calls on Elasticsearch's side.
+		/// Sets the default timeout in milliseconds for each request to Elasticsearch.
+		/// NOTE: You can set this to a high value here, and specify the timeout on Elasticsearch's side.
 		/// </summary>
 		/// <param name="timeout">time out in milliseconds</param>
 		public T SetTimeout(int timeout)
@@ -251,13 +281,23 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		/// <summary>
-		/// This is a separate timeout for Ping() requests. A ping should fail as fast as possible.
+		/// Sets the default ping timeout in milliseconds for ping requests, which are used
+		/// to determine whether a node is alive. Pings should fail as fast as possible.
 		/// </summary>
-		/// <param name="timeout">The ping timeout in milliseconds defaults to 200</param>
+		/// <param name="timeout">The ping timeout in milliseconds defaults to 1000, or 2000 is using SSL.</param>
 		public T SetPingTimeout(int timeout)
 		{
 			this._pingTimeout = timeout;
 			return (T) this;
+		}
+
+		/// <summary>
+		/// Sets the default connection timeout in milliseconds.
+		/// </summary>
+		public T SetConnectTimeout(int timeout)
+		{
+			this._connectTimeout = timeout;
+			return (T)this;
 		}
 
 		/// <summary>

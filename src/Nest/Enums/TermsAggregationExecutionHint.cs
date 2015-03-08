@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
 
 namespace Nest
 {
@@ -18,7 +19,23 @@ namespace Nest
 		/// <summary>
 		/// Order by using ordinals of the field values instead of the values themselves
 		/// </summary>
+		[Obsolete("ordinals was removed from ES in version 1.3.  Use global_ordinals instead.")]
 		[EnumMember(Value = "ordinals")]
-		Ordinals
+		Ordinals,
+		/// <summary>
+		/// Order by using ordinals of the field and preemptively allocating one bucket per ordinal value
+		/// </summary>
+		[EnumMember(Value = "global_ordinals")]
+		GlobalOrdinals,
+		/// <summary>
+		/// Order by using ordinals of the field and dynamically allocating one bucket per ordinal value
+		/// </summary>
+		[EnumMember(Value = "global_ordinals_hash")]
+		GlobalOrdinalsHash,
+		/// <summary>
+		/// Order by using per-segment ordinals to compute counts and remap these counts to global counts using global ordinals
+		/// </summary>
+		[EnumMember(Value = "global_ordinals_low_cardinality")]
+		GlobalOrdinalsLowCardinality
 	}
 }

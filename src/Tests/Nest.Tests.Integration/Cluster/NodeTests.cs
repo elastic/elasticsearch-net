@@ -39,8 +39,9 @@ namespace Nest.Tests.Integration.Cluster
 			var r = this.Client.NodesStats();
 			Assert.True(r.IsValid);
 			Assert.IsNotNull(r.Nodes);
-			var node = r.Nodes.Values.First();
 
+			var node = r.Nodes.Values.First();
+			Assert.IsNotNull(node.Hostname);
 			Assert.IsNotNull(node.Indices);
 			Assert.IsNotNull(node.FileSystem);
 			Assert.IsNotNull(node.OS);
@@ -66,7 +67,7 @@ namespace Nest.Tests.Integration.Cluster
 			r.HotThreads.Count.Should().BeGreaterOrEqualTo(1);
 			var hotThreadInfo = r.HotThreads.First();
 			hotThreadInfo.Node.Should().NotBeNullOrEmpty();
-			hotThreadInfo.Threads.Count.ShouldBeEquivalentTo(5);
+			hotThreadInfo.Threads.Count.Should().BeGreaterThan(1);
 		}
 	}
 }

@@ -25,7 +25,7 @@ namespace Nest
 		[JsonProperty("min_doc_count")]
 		int? MinimumDocumentCount { get; set; }
 
-		[JsonProperty("execution_hit")]
+		[JsonProperty("execution_hint")]
 		TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 		[JsonProperty("order")]
@@ -39,6 +39,9 @@ namespace Nest
 
 		[JsonProperty("params")]
 		IDictionary<string, object> Params { get; set; }
+
+		[JsonProperty("collect_mode")]
+		TermsAggregationCollectMode? CollectMode { get; set; }
 	}
 
 	public class TermsAggregator : BucketAggregator, ITermsAggregator
@@ -53,6 +56,7 @@ namespace Nest
 		public TermsIncludeExclude Include { get; set; }
 		public TermsIncludeExclude Exclude { get; set; }
 		public IDictionary<string, object> Params { get; set; }
+		public TermsAggregationCollectMode? CollectMode { get; set; }
 	}
 
 
@@ -80,6 +84,8 @@ namespace Nest
 
 		IDictionary<string, object> ITermsAggregator.Params { get; set; }
 
+		TermsAggregationCollectMode? ITermsAggregator.CollectMode { get; set; }
+		
 		public TermsAggregationDescriptor<T> Field(string field)
 		{
 			Self.Field = field;
@@ -150,6 +156,11 @@ namespace Nest
 		public TermsAggregationDescriptor<T> Exclude(string excludePattern, string regexFlags = null)
 		{
 			Self.Exclude = new TermsIncludeExclude() { Pattern = excludePattern, Flags = regexFlags };
+			return this;
+		}
+		public TermsAggregationDescriptor<T> CollectMode(TermsAggregationCollectMode collectMode)
+		{
+			Self.CollectMode = collectMode;
 			return this;
 		}
 	}

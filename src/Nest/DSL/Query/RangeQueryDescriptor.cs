@@ -32,6 +32,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "_name")]
 		string Name { get; set; }
 
+		[JsonProperty("time_zone")]
+		string TimeZone { get; set; }
+
 		PropertyPathMarker Field { get; set; }
 	}
 	public class RangeQuery : PlainQuery, IRangeQuery
@@ -59,11 +62,14 @@ namespace Nest
 		public double? Boost { get; set; }
 		public bool? Cache { get; set; }
 		public string Name { get; set; }
+		public string TimeZone { get; set; }
 		public PropertyPathMarker Field { get; set; }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class RangeQueryDescriptor<T> : IRangeQuery where T : class
 	{
+		IRangeQuery Self { get { return this; } }
+
 		string IRangeQuery.GreaterThanOrEqualTo { get; set; }
 	
 		string IRangeQuery.LowerThanOrEqualTo { get; set; }
@@ -78,42 +84,43 @@ namespace Nest
 		
 		string IRangeQuery.Name { get; set; }
 
+		string IRangeQuery.TimeZone { get; set; }
+
 		PropertyPathMarker IRangeQuery.Field { get; set; }
 		
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				var rangeQuery = ((IRangeQuery)this);
-				return rangeQuery.Field.IsConditionless() 
+				return this.Self.Field.IsConditionless() 
 					|| (
-						rangeQuery.GreaterThanOrEqualTo == null 
-						&& rangeQuery.LowerThanOrEqualTo == null
-						&& rangeQuery.GreaterThan == null
-						&& rangeQuery.LowerThan == null
+						this.Self.GreaterThanOrEqualTo == null
+						&& this.Self.LowerThanOrEqualTo == null
+						&& this.Self.GreaterThan == null
+						&& this.Self.LowerThan == null
 					);
 			}
 		}
 
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
-			((IRangeQuery)this).Field = fieldName;
+			this.Self.Field = fieldName;
 		}
 
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
-			return ((IRangeQuery)this).Field;
+			return this.Self.Field;
 		}
 
 		public RangeQueryDescriptor<T> OnField(string field)
 		{
-			((IRangeQuery)this).Field = field;
+			this.Self.Field = field;
 			return this;
 		}
 
 		public RangeQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((IRangeQuery)this).Field = objectPath;
+			this.Self.Field = objectPath;
 			return this;
 		}
 		
@@ -123,75 +130,80 @@ namespace Nest
 		/// <param name="boost">Boost factor</param>
 		public RangeQueryDescriptor<T> Boost(double boost)
 		{
-			((IRangeQuery)this).Boost = boost;
+			this.Self.Boost = boost;
 			return this;
 		}
 
-
 		public RangeQueryDescriptor<T> Greater(double? from)
 		{
-			((IRangeQuery)this).GreaterThan = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
+			this.Self.GreaterThan = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 		public RangeQueryDescriptor<T> GreaterOrEquals(double? from)
 		{
-			((IRangeQuery)this).GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
+			this.Self.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 		public RangeQueryDescriptor<T> Lower(double? to)
 		{
-			((IRangeQuery)this).LowerThan = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
+			this.Self.LowerThan = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 		public RangeQueryDescriptor<T> LowerOrEquals(double? to)
 		{
-			((IRangeQuery)this).LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
+			this.Self.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 
 		public RangeQueryDescriptor<T> Greater(string from)
 		{
-			((IRangeQuery)this).GreaterThan = from;
+			this.Self.GreaterThan = from;
 			return this;
 		}
 
 		public RangeQueryDescriptor<T> GreaterOrEquals(string from)
 		{
-			((IRangeQuery)this).GreaterThanOrEqualTo = from;
+			this.Self.GreaterThanOrEqualTo = from;
 			return this;
 		}
 		public RangeQueryDescriptor<T> Lower(string to)
 		{
-			((IRangeQuery)this).LowerThan = to;
+			this.Self.LowerThan = to;
 			return this;
 		}
 		public RangeQueryDescriptor<T> LowerOrEquals(string to)
 		{
-			((IRangeQuery)this).LowerThanOrEqualTo = to;
+			this.Self.LowerThanOrEqualTo = to;
 			return this;
 		}
 
 		public RangeQueryDescriptor<T> Greater(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			((IRangeQuery)this).GreaterThan = from.HasValue ? from.Value.ToString(format) : null;
+			this.Self.GreaterThan = from.HasValue ? from.Value.ToString(format) : null;
 			return this;
 		}
 
 		public RangeQueryDescriptor<T> GreaterOrEquals(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			((IRangeQuery)this).GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(format) : null;
+			this.Self.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(format) : null;
 			return this;
 		}
 
 		public RangeQueryDescriptor<T> Lower(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			((IRangeQuery)this).LowerThan = to.HasValue ? to.Value.ToString(format) : null;
+			this.Self.LowerThan = to.HasValue ? to.Value.ToString(format) : null;
 			return this;
 		}
 
 		public RangeQueryDescriptor<T> LowerOrEquals(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			((IRangeQuery)this).LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(format) : null;
+			this.Self.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(format) : null;
+			return this;
+		}
+
+		public RangeQueryDescriptor<T> TimeZone(string timeZone)
+		{
+			this.Self.TimeZone = timeZone;
 			return this;
 		}
 

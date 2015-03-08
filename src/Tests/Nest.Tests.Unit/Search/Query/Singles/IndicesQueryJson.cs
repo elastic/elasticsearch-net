@@ -67,6 +67,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
+
 		[Test]
 		public void IndicesQuery()
 		{
@@ -97,5 +98,35 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
+
+		[Test]
+		public void IndicesQueryShortcut()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.Indices(fz => fz
+						.Indices(new[] { "elasticsearchprojects", "people", "randomindex" })
+						.Query(qq => qq.Term(f => f.Name, "elasticsearch.pm"))
+						.NoMatchQuery(NoMatchShortcut.All)
+					)
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, query : 
+			{  
+				indices: {
+					query: { term : { name : {  value : ""elasticsearch.pm"" }  } },
+					no_match_query: ""all"",
+					indices: [
+						""elasticsearchprojects"",
+						""people"",
+						""randomindex""
+					]
+				}
+			}}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
 	}
 }

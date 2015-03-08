@@ -1,6 +1,9 @@
-﻿using System.Reflection;
+﻿using FluentAssertions;
+using System.Reflection;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using System.Text;
+using System.IO;
 
 namespace Nest.Tests.Unit.Search.Sorting
 {
@@ -38,6 +41,30 @@ namespace Nest.Tests.Unit.Search.Sorting
 		}
 
 		[Test]
+		public void TestSortWithUnmappedType()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Sort(sort => sort
+					.OnField(e => e.DoubleValue)
+					.UnmappedType(FieldType.Long)
+				);
+			var expected = @"
+                {
+                  from: 0,
+                  size: 10,
+                  sort: [
+                    {
+                        doubleValue : { unmapped_type : ""long"" } 
+                    }
+                  ]
+                }";
+			var json = TestElasticClient.Serialize(s);
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
 		public void TestSortOnSortField()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
@@ -67,19 +94,19 @@ namespace Nest.Tests.Unit.Search.Sorting
 			Assert.True(json.JsonEquals(expected), json);
 		}
 
-        [Test]
-        public void TestSortOnNestedField()
-        {
-            var s = new SearchDescriptor<ElasticsearchProject>()
-                .From(0)
-                .Size(10)
-                .Sort(sort => sort
-                    .OnField(e => e.Contributors.Suffix("age")) // Sort projects by oldest contributor
-                    .NestedMax()
-                    .Descending()
-                );
-            var json = TestElasticClient.Serialize(s);
-            var expected = @"
+		[Test]
+		public void TestSortOnNestedField()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Sort(sort => sort
+					.OnField(e => e.Contributors.Suffix("age")) // Sort projects by oldest contributor
+					.NestedMax()
+					.Descending()
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"
                 {
                   from: 0,
                   size: 10,
@@ -92,8 +119,8 @@ namespace Nest.Tests.Unit.Search.Sorting
 					}
                   ]
                 }";
-            Assert.True(json.JsonEquals(expected), json);
-        }
+			Assert.True(json.JsonEquals(expected), json);
+		}
 
 		[Test]
 		public void TestSortAscending()
@@ -206,6 +233,40 @@ namespace Nest.Tests.Unit.Search.Sorting
 		}
 
 		[Test]
+		public void TestSortGeoMultiple()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.SortGeoDistance(sort => sort
+					.OnField(e => e.Origin)
+					.MissingLast()
+					.Descending()
+					.PinTo(GeoLocation.TryCreate(40, -70),GeoLocation.TryCreate(30.21, 1.21))
+					.Unit(GeoUnit.Miles)
+					.Mode(SortMode.Average)
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"
+                {
+                  from: 0,
+                  size: 10,
+                  sort: [
+					{
+					  _geo_distance: {
+					   ""origin"": [""40,-70"",""30.21,1.21""],
+						 missing: ""_last"",
+						 mode: ""avg"",
+						 order: ""desc"",
+						 unit: ""mi""
+					  }
+					}
+                  ]
+                }";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
 		public void TestSortScript()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
@@ -239,6 +300,47 @@ namespace Nest.Tests.Unit.Search.Sorting
                         order: ""desc"",
                         mode: ""avg"",
                         lang: ""native""
+                      }
+                    }
+                  ]
+                }";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
+		public void TestSortScriptFile()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.SortScript(sort => sort
+					.MissingLast()
+					.Descending()
+					.Mode(SortMode.Average)
+					.File("SortScript")
+					.Params(p => p
+						.Add("factor", 1.1)
+					)
+					.Language("native")
+					.Type("number")
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"
+                {
+                  from: 0,
+                  size: 10,
+                  sort: [
+                   {
+                      _script: {
+                        type: ""number"",
+                        params: {
+                          factor: 1.1
+                        },
+                        missing: ""_last"",
+                        order: ""desc"",
+                        mode: ""avg"",
+                        lang: ""native"",
+						file: ""SortScript"",
                       }
                     }
                   ]
@@ -380,6 +482,40 @@ namespace Nest.Tests.Unit.Search.Sorting
 				.Type("number")
 			);
 			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
+		}
+
+		[Test]
+		public void SortSerializeThenDeserializeTest()
+		{
+			var d1 = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(20)
+				.MatchAll()
+				.Sort(s => s
+					.OnField(p => p.Id)
+					.Order(SortOrder.Ascending)
+				)
+				.SortGeoDistance(s => s
+					.OnField(p => p.Origin)
+					.PinTo(40, 70)
+				)
+				.SortScript(s => s
+					.Ascending()
+					.Script("(doc['_id'].stringValue + salt).hashCode()")
+					.Params(p => p
+						.Add("salt", "some_random_string")
+					)
+					.Type("number")
+				);
+
+			var s1 = this._client.Serializer.Serialize(d1);
+			var d2 = this._client.Serializer.Deserialize<SearchDescriptor<ElasticsearchProject>>(new MemoryStream(s1));
+			var s2 = this._client.Serializer.Serialize(d2);
+
+			var s1Json = Encoding.UTF8.GetString(s1);
+			var s2Json = Encoding.UTF8.GetString(s2);
+
+			s1Json.JsonEquals(s2Json).Should().BeTrue();
 		}
 	}
 }

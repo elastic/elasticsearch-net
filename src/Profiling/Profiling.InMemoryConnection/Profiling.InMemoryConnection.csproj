@@ -33,9 +33,6 @@
     <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ShellProgressBar">
-      <HintPath>..\..\..\dep\ShellProgressBar.1.0.0.0\lib\NET4\ShellProgressBar.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj">
@@ -70,4 +67,16 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="..\..\..\.paket\paket.targets" />
+  <Choose>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="ShellProgressBar">
+          <HintPath>..\..\..\packages\ShellProgressBar\lib\NET4\ShellProgressBar.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
 </Project>

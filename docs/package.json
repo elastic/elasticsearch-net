@@ -9,7 +9,8 @@
 	"author": "Martijn Laarman <Mpdreamz@gmail.com>",
 	"description": "Nest .net elasticsearch client documentation",
 	"dependencies": {
-		"wintersmith": "1.0.x",
+		"wintersmith": "2.x",
+		"wintersmith-livereload": "0.1.x",
 		"connect": "2.6.x"
 	}
 }
