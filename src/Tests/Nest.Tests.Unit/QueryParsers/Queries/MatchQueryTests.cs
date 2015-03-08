@@ -1,4 +1,5 @@
 using FluentAssertions;
+using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
 namespace Nest.Tests.Unit.QueryParsers.Queries

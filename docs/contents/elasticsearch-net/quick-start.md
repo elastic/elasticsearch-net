@@ -13,7 +13,7 @@ menuitem: esnet-quick-start
 
 From the package manager console inside visual studio 
 
-    PM > Install Package Elasticsearch.Net -PreRelease
+    PM> Install-Package Elasticsearch.Net
 
 Or search in the Package Manager UI for `Elasticsearch.Net` and go from there
 

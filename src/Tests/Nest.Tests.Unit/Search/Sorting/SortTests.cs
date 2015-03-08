@@ -308,6 +308,47 @@ namespace Nest.Tests.Unit.Search.Sorting
 		}
 
 		[Test]
+		public void TestSortScriptFile()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.SortScript(sort => sort
+					.MissingLast()
+					.Descending()
+					.Mode(SortMode.Average)
+					.File("SortScript")
+					.Params(p => p
+						.Add("factor", 1.1)
+					)
+					.Language("native")
+					.Type("number")
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"
+                {
+                  from: 0,
+                  size: 10,
+                  sort: [
+                   {
+                      _script: {
+                        type: ""number"",
+                        params: {
+                          factor: 1.1
+                        },
+                        missing: ""_last"",
+                        order: ""desc"",
+                        mode: ""avg"",
+                        lang: ""native"",
+						file: ""SortScript"",
+                      }
+                    }
+                  ]
+                }";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
 		public void TestNestedFilter()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()

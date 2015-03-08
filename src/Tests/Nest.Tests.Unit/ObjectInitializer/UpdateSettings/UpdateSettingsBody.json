@@ -16,6 +16,7 @@
   "index.translog.disable_flush": true,
   "index.cache.filter.max_size": "-1",
   "index.cache.filter.expire": "-1",
+  "index.cache.query.enable": true,
   "index.gateway.snapshot_interval": "5s",
   "index.routing.allocation.include": {
     "tag": "value1,value2"

@@ -67,6 +67,12 @@ namespace Elasticsearch.Net.Connection
 		private TimeSpan? _maxRetryTimeout;
 		TimeSpan? IConnectionConfigurationValues.MaxRetryTimeout { get { return _maxRetryTimeout; } }
 
+		private int? _keepAliveTime;
+		int? IConnectionConfigurationValues.KeepAliveTime { get{ return _keepAliveTime; } }
+	
+		private int? _keepAliveInterval;
+		int? IConnectionConfigurationValues.KeepAliveInterval { get{ return _keepAliveInterval; } }
+	
 		private string _proxyUsername;
 		string IConnectionConfigurationValues.ProxyUsername { get { return _proxyUsername; } }
 
@@ -151,6 +157,13 @@ namespace Elasticsearch.Net.Connection
 		{
 			//this.Host = uri.Host;
 			//this.Port = uri.Port
+		}
+
+		public T EnableTcpKeepAlive(int keepAliveTime, int keepAliveInterval)
+		{
+			this._keepAliveTime = keepAliveTime;
+			this._keepAliveInterval = keepAliveInterval;
+			return (T) this;
 		}
 
 		public T MaximumRetries(int maxRetries)

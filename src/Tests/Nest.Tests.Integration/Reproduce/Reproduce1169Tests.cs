@@ -13,6 +13,7 @@ namespace Nest.Tests.Integration.Reproduce
 	public class Reproduce1169Tests : IntegrationTests
 	{
 		[Test]
+		[SkipVersion("0 - 1.2.9", "Top hits agg added in 1.3")]
 		public void TopHitsReturnedFirst()
 		{
 			var response = this.Client.Search<ElasticsearchProject>(s => s
@@ -39,6 +40,7 @@ namespace Nest.Tests.Integration.Reproduce
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.2.9", "Top hits agg added in 1.3")]
 		public void TermsReturnedFirst()
 		{
 			var response = this.Client.Search<ElasticsearchProject>(s => s

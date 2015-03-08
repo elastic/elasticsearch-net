@@ -39,8 +39,9 @@ namespace Nest.Tests.Integration.Cluster
 			var r = this.Client.NodesStats();
 			Assert.True(r.IsValid);
 			Assert.IsNotNull(r.Nodes);
-			var node = r.Nodes.Values.First();
 
+			var node = r.Nodes.Values.First();
+			Assert.IsNotNull(node.Hostname);
 			Assert.IsNotNull(node.Indices);
 			Assert.IsNotNull(node.FileSystem);
 			Assert.IsNotNull(node.OS);

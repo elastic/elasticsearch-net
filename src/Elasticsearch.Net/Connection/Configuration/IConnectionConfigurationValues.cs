@@ -156,6 +156,19 @@ namespace Elasticsearch.Net.Connection
 		/// Basic access authorization credentials to specify with all requests.
 		/// </summary>
 		/// TODO: Rename to BasicAuthenticationCredentials in 2.0
-		BasicAuthorizationCredentials BasicAuthorizationCredentials { get; } 
+		BasicAuthorizationCredentials BasicAuthorizationCredentials { get; }
+		
+		/// <summary>
+		/// KeepAliveTime - specifies the timeout, in milliseconds, with no
+        /// activity until the first keep-alive packet is sent. 
+		/// </summary>
+		int? KeepAliveTime { get; }
+
+		/// <summary>
+		/// KeepAliveInterval - specifies the interval, in milliseconds, between
+        /// when successive keep-alive packets are sent if no acknowledgement is
+        /// received. 
+		/// </summary>
+		int? KeepAliveInterval { get; }
 	}
 }

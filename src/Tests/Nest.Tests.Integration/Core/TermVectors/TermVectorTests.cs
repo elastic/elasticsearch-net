@@ -22,6 +22,7 @@ namespace Nest.Tests.Integration.Core.TermVectors
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Term vector artificial documents added in ES 1.4")]
 		public void TermVectorDocument()
 		{
 			var document = NestTestData.Data.FirstOrDefault(d => d.Id == 1);
@@ -31,6 +32,7 @@ namespace Nest.Tests.Integration.Core.TermVectors
 
 			AssertContentsVectors(result);
 		}
+
 		private static void AssertContentsVectors(ITermVectorResponse result)
 		{
 			result.IsValid.Should().BeTrue();

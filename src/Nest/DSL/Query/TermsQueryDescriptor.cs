@@ -73,6 +73,12 @@ namespace Nest
 			return this;
 		}
 
+		public TermsQueryDescriptor<T, K> OnField(PropertyPathMarker field)
+		{
+			((ITermsQuery)this).Field = field;
+			return this;
+		}
+
 		public TermsQueryDescriptor<T, K> OnField(Expression<Func<T, K>> objectPath)
 		{
 			((ITermsQuery)this).Field = objectPath;

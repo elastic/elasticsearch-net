@@ -135,9 +135,9 @@ namespace Nest
 		{
 			return new FilterDescriptor<T>().Query(querySelector);
 		}
-		public static FilterContainer Range(Action<RangeFilterDescriptor<T>> rangeSelector)
+		public static FilterContainer Range(Action<RangeFilterDescriptor<T>> rangeSelector, RangeExecution? execution = null)
 		{
-			return new FilterDescriptor<T>().Range(rangeSelector);
+			return new FilterDescriptor<T>().Range(rangeSelector, execution);
 		}
 		public static FilterContainer Script(Action<ScriptFilterDescriptor> scriptSelector)
 		{

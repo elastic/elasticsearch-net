@@ -30,6 +30,18 @@ namespace Nest
 			return this;
 		}
 
+		public GeoShapeMappingDescriptor<T> Precision(double precision, GeoPrecisionUnit unit)
+		{
+			this._Mapping.Precision = new GeoPrecision(precision, unit);
+			return this;
+		}
+
+		public GeoShapeMappingDescriptor<T> Orientation(GeoOrientation orientation)
+		{
+			this._Mapping.Orientation = orientation;
+			return this;
+		}
+
 		public GeoShapeMappingDescriptor<T> DistanceErrorPercentage(double distanceErrorPercentage)
 		{
 			this._Mapping.DistanceErrorPercentage = distanceErrorPercentage;

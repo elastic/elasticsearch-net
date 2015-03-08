@@ -106,9 +106,11 @@
     <Compile Include="Core\Bulk\BulkUrlTests.cs" />
     <Compile Include="Core\Indices\Alias\AliasTests.cs" />
     <Compile Include="Core\Indices\Analysis\Analyzers\AnalyzerTests.cs" />
+    <Compile Include="Core\Indices\Analysis\TokenFilters\TokenFilterTests.cs" />
     <Compile Include="Core\Indices\Similarity\SimilarityTests.cs" />
     <Compile Include="Core\Map\CustomMapping\ImagePluginMappingTests.cs" />
     <Compile Include="Core\Map\GenericTypes\GenericTypeMappingTests.cs" />
+    <Compile Include="Core\Map\GeoShape\GeoShapeMappingTests.cs" />
     <Compile Include="Core\Map\GetMappingSerializationTests.cs" />
     <Compile Include="Core\Map\MappingBehaviourTests.cs" />
     <None Include="Cluster\PutSettings\PutSettings.json">
@@ -150,6 +152,8 @@
     <None Include="Core\Indices\Analysis\Analyzers\PatternAnalyzerTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Indices\Analysis\TokenFilters\TestStopTokenFilterWithArray.json" />
+    <None Include="Core\Indices\Analysis\TokenFilters\TestStopTokenFilterWithPredefinedLanguageList.json" />
     <None Include="Core\Indices\Similarity\BM25SimilarityTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -175,6 +179,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Map\GenericTypes\GenericTypeMapping.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\GeoShape\PrecisionSerializesAsString.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Map\Properties\CompletionProperty.json">
@@ -397,6 +404,7 @@
     <Compile Include="Reproduce\Reproduce926Tests.cs" />
     <Compile Include="Search\Aggregations\ScriptedMetricJson.cs" />
     <Compile Include="Search\Aggregations\SingleBucketAggregationTests.cs" />
+    <Compile Include="Search\Aggregations\Terms\TermAggregationTests.cs" />
     <Compile Include="Search\Failures\ShardFailureTests.cs" />
     <Compile Include="Search\Fields\FieldsTests.cs" />
     <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
@@ -669,6 +677,9 @@
     <None Include="Core\UpdateSettings\CanSpecifyNewAnalysisSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Update\UpdateUsingPartialWithNull.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Update\UpsertUsingScriptAndPartialObject.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -812,6 +823,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Reproduce\Issue876.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Aggregations\Terms\TermAggregationSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Failures\ShardFailuresResult.json">

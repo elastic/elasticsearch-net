@@ -130,6 +130,7 @@
     <Compile Include="Domain\Cat\CatPluginsRecord.cs" />
     <Compile Include="Domain\Cat\CatPendingTasksRecord.cs" />
     <Compile Include="Domain\Geo\GeoLocation.cs" />
+    <Compile Include="Domain\Geo\GeoPrecision.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />
     <Compile Include="Domain\Mapping\PropertyMapping.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataFilterDescriptor.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="DSL\Aggregations\ReverseNestedAggregationDescriptor.cs" />
     <Compile Include="DSL\Filter\IndicesFilterDescriptor.cs" />
     <Compile Include="Domain\DSL\NoMatchShortcut.cs" />
+    <Compile Include="DSL\Query\Functions\WeightFunction.cs" />
     <Compile Include="DSL\UpgradeDescriptor.cs" />
     <Compile Include="DSL\UpgradeStatusDescriptor.cs" />
     <Compile Include="DSL\VerifyRepositoryDescriptor.cs" />
@@ -242,6 +244,8 @@
     <Compile Include="DSL\Filter\GeoHashCellFilterDescriptor.cs" />
     <Compile Include="DSL\DeleteScriptDescriptor.cs" />
     <Compile Include="ElasticClient-GetIndex.cs" />
+    <Compile Include="Enums\GeoOrientation.cs" />
+    <Compile Include="Enums\GeoPrecisionUnit.cs" />
     <Compile Include="Enums\GetIndexFeature.cs" />
     <Compile Include="DSL\GetScriptDescriptor.cs" />
     <Compile Include="DSL\SearchExistsDescriptor.cs" />
@@ -392,8 +396,10 @@
     <Compile Include="Enums\GeoShapeRelation.cs" />
     <Compile Include="Enums\HighlighterType.cs" />
     <Compile Include="Enums\NormsLoading.cs" />
+    <Compile Include="Enums\RangeExecution.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
     <Compile Include="Enums\ScriptLang.cs" />
+    <Compile Include="Enums\TermsAggregationCollectMode.cs" />
     <Compile Include="Exception\RestoreException.cs" />
     <Compile Include="Exception\SnapshotException.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
@@ -863,7 +869,7 @@
     <Compile Include="Resolvers\Converters\Queries\GeoShapeQueryJsonReader.cs" />
     <Compile Include="Resolvers\Converters\SimilarityCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\FuzzinessConverter.cs" />
-    <Compile Include="Resolvers\Converters\Filters\RangeFilterJsonReader.cs" />
+    <Compile Include="Resolvers\Converters\Filters\RangeFilterJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\Filters\RegexpFilterJsonReader.cs" />
     <Compile Include="Resolvers\Converters\Filters\PrefixFilterConverter.cs" />
     <Compile Include="Resolvers\Converters\Filters\TermFilterConverter.cs" />
@@ -980,6 +986,8 @@
     <Compile Include="Resolvers\Converters\TokenFilterCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TokenizerCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TypeNameMarkerConverter.cs" />
+    <Compile Include="Resolvers\Converters\GeoPrecisionConverter.cs" />
+    <Compile Include="Resolvers\Converters\UriJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\WarmerMappingConverter.cs" />
     <Compile Include="Resolvers\Converters\ShardsSegmentConverter.cs" />
     <Compile Include="Resolvers\Converters\MultiGetHitConverter.cs" />

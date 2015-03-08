@@ -159,5 +159,65 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
+
+		[Test]
+		public void Execution_FieldData()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Filter(ff => ff
+					.Cache(true)
+					.Range(n => n
+						.OnField(f => f.LOC)
+						.GreaterOrEquals(10)
+						.LowerOrEquals(20), RangeExecution.FieldData));
+
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
+				filter : {
+						range: {
+							""execution"" : ""fielddata"",
+							""loc"": {
+								gte: ""10"",
+								lte: ""20"",
+							},
+							""_cache"" : true
+						}
+					}
+			}";
+
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
+		public void Execution_Index()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Filter(ff => ff
+					.Cache(true)
+					.Range(n => n
+						.OnField(f => f.LOC)
+						.GreaterOrEquals(10)
+						.LowerOrEquals(20), RangeExecution.Index));
+
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
+				filter : {
+						range: {
+							""execution"" : ""index"",
+							""loc"": {
+								gte: ""10"",
+								lte: ""20"",
+							},
+							""_cache"" : true
+						}
+					}
+			}";
+
+			Assert.True(json.JsonEquals(expected), json);
+		}
 	}
 }

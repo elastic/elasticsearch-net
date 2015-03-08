@@ -148,6 +148,11 @@ namespace Elasticsearch.Net.Connection
 			requestServicePoint.UseNagleAlgorithm = false;
 			requestServicePoint.Expect100Continue = false;
 			requestServicePoint.ConnectionLimit = 10000;
+			//looking at http://referencesource.microsoft.com/#System/net/System/Net/ServicePoint.cs
+			//this method only sets internal values and wont actually cause timers and such to be reset
+			//So it should be idempotent if called with the same parameters
+			if (this.ConnectionSettings.KeepAliveTime.HasValue && this.ConnectionSettings.KeepAliveInterval.HasValue)
+				requestServicePoint.SetTcpKeepAlive(true, this.ConnectionSettings.KeepAliveTime.Value, this.ConnectionSettings.KeepAliveInterval.Value);
 		}
 
 		protected virtual HttpWebRequest CreateHttpWebRequest(Uri uri, string method, byte[] data, IRequestConfiguration requestSpecificConfig)

@@ -366,6 +366,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 			if (scriptedMetric != null)
 				return new ScriptedValueMetric { _Value = scriptedMetric };
 
+			reader.Read();
 			return valueMetric;
 		}
 

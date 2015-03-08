@@ -100,6 +100,7 @@ namespace Nest.Tests.Integration.Core.Repository
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.0.9", "Requires the snapshot status api which was added in ES 1.1")]
 		public void SnapshotRestoreObservable()
 		{
 			var exceptionOccured = false;

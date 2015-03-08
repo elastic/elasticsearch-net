@@ -42,6 +42,59 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionPools.Sniffing
 		}
 
 		[Test]
+		public void SniffCalledOnceAndEachEnpointPingedOnce()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{
+				//It's recommended to only have on instance of your connection pool
+				//Be sure to register it as Singleton in your IOC
+				var uris = new[] { new Uri("http://localhost:9200"), new Uri("http://localhost:9201") };
+				var connectionPool = new SniffingConnectionPool(uris);
+				var config = new ConnectionConfiguration(connectionPool)
+					.SniffOnStartup();
+				fake.Provide<IConnectionConfigurationValues>(config);
+
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+				var sniffCall = FakeCalls.Sniff(fake, config, uris);
+				var getCall = FakeCalls.GetSyncCall(fake);
+				getCall.Returns(FakeResponse.Ok(config));
+
+				var transport1 = FakeCalls.ProvideRealTranportInstance(fake);
+				var transport2 = FakeCalls.ProvideRealTranportInstance(fake);
+				var transport3 = FakeCalls.ProvideRealTranportInstance(fake);
+				var transport4 = FakeCalls.ProvideRealTranportInstance(fake);
+
+				transport1.Should().NotBe(transport2);
+
+				var client1 = new ElasticsearchClient(config, transport: transport1);
+				client1.Info();
+				client1.Info();
+				client1.Info();
+				client1.Info();
+				var client2 = new ElasticsearchClient(config, transport: transport2); 
+				client2.Info();
+				client2.Info();
+				client2.Info();
+				client2.Info();
+				var client3 = new ElasticsearchClient(config, transport: transport3); 
+				client3.Info();
+				client3.Info();
+				client3.Info();
+				client3.Info();
+				var client4 = new ElasticsearchClient(config, transport: transport4); 
+				client4.Info();
+				client4.Info();
+				client4.Info();
+				client4.Info();
+
+				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
+				//sniff validates first node, one new node should be pinged before usage.
+				pingCall.MustHaveHappened(Repeated.Exactly.Once);
+			}
+		}
+
+		[Test]
 		public void SniffIsCalledAfterItHasGoneOutOfDate()
 		{
 			using (var fake = new AutoFake())
@@ -481,6 +534,7 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionPools.Sniffing
 				sniffException.Should().NotBeNull();
 			}
 		}
+		
 
 	}
 }

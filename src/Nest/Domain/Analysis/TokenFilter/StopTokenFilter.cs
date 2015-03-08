@@ -13,7 +13,24 @@ namespace Nest
 
         }
 
-        [JsonProperty("enable_position_increments")]
+		[JsonProperty("stopwords")]
+		internal object _Stopwords { get; set; }
+
+		[JsonIgnore]
+		public IEnumerable<string> Stopwords
+		{
+			get { return _Stopwords as IEnumerable<string>; }
+			set { _Stopwords = value; }
+		}
+
+		[JsonIgnore]
+		public string PredefinedStopwords
+		{
+			get { return _Stopwords as string; }
+			set { _Stopwords = value; }
+		}
+
+		[JsonProperty("enable_position_increments")]
 		public bool? EnablePositionIncrements { get; set; }
 
         [JsonProperty("ignore_case")]
@@ -21,9 +38,6 @@ namespace Nest
 
         [JsonProperty("stopwords_path")]
         public string StopwordsPath { get; set; }
-
-        [JsonProperty("stopwords")]
-        public IEnumerable<string> Stopwords { get; set; }
 
 		[JsonProperty("remove_trailing")]
 		public bool? RemoveTrailing { get; set; }

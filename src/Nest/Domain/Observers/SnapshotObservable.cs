@@ -109,14 +109,17 @@ namespace Nest
 		{
 			if (_disposed) return;
 
-			_timer.Dispose();
+			if (_timer != null) _timer.Dispose();
 
-			_snapshotStatusHumbleObject.Next -= _nextEventHandler;
-			_snapshotStatusHumbleObject.Completed -= _completedEentHandler;
-			_snapshotStatusHumbleObject.Error -= _errorEventHandler;
+			if (_snapshotStatusHumbleObject != null)
+			{
+				_snapshotStatusHumbleObject.Next -= _nextEventHandler;
+				_snapshotStatusHumbleObject.Completed -= _completedEentHandler;
+				_snapshotStatusHumbleObject.Error -= _errorEventHandler;
 
-			_snapshotStatusHumbleObject.Completed -= StopTimer;
-			_snapshotStatusHumbleObject.Error -= StopTimer;
+				_snapshotStatusHumbleObject.Completed -= StopTimer;
+				_snapshotStatusHumbleObject.Error -= StopTimer;
+			}
 
 			_disposed = true;
 		}
