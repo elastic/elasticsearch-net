@@ -9,9 +9,5 @@ namespace Nest
 	{
 		[EnumMember(Value = "no")]
 		No,
-		[EnumMember(Value = "analyzed")]
-		Analyzed,
-		[EnumMember(Value = "not_analyzed")]
-		NotAnalyzed 
 	}
 }
