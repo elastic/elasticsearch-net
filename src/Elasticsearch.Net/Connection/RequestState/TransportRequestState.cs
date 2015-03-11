@@ -114,11 +114,10 @@ namespace Elasticsearch.Net.Connection.RequestState
 
 			if (this._traceEnabled)
 			{
-				Trace.TraceInformation("NEST start:{0} {1} {2}:\r\n{3}"
+				Trace.TraceInformation("NEST start:{0} {1} {2}"
 					, this._requestId
 					, _result.RequestMethod
 					, _result.RequestUrl
-					, _result
 				);
 			}
 
