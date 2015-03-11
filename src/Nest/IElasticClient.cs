@@ -897,18 +897,18 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the default index and typename as well as describe the strongly
 		///  typed parts of the query</typeparam>
 		/// <param name="deleteByQuerySelector">An optional descriptor to further describe the delete by query operation</param>
-		IDeleteResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector)
+		IDeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector)
 			where T : class;
 
 		/// <inheritdoc />
-		IDeleteResponse DeleteByQuery(IDeleteByQueryRequest deleteByQueryRequest);
+		IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest deleteByQueryRequest);
 
 		/// <inheritdoc />
-		Task<IDeleteResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector)
+		Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IDeleteResponse> DeleteByQueryAsync(IDeleteByQueryRequest deleteByQueryRequest);
+		Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest deleteByQueryRequest);
 
 		/// <summary>
 		/// The bulk API makes it possible to perform many index/delete operations in a single API call. 
