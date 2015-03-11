@@ -140,7 +140,7 @@ namespace Nest.Resolvers.Writers {
                     this._jsonWriter.WritePropertyName("type");
                     this._jsonWriter.WriteValue(this._type);
                 }
-                if (att.SortAnalyzer.IsNullOrEmpty())
+                if (att.SortAnalyzer.IsNullOrEmpty() && this._type.Equals("string", StringComparison.OrdinalIgnoreCase))
                 {
                     this._jsonWriter.WritePropertyName("index");
                     this._jsonWriter.WriteValue(FieldIndexOption.NotAnalyzed.GetStringValue());

@@ -5,7 +5,7 @@
 				"type": "boolean",
 				"index_name": "bool_name_in_lucene_index",
 				"store": true,
-				"index": "analyzed",
+				"index": "no",
 				"boost": 1.4,
 				"null_value": false,
 				"include_in_all": true,
