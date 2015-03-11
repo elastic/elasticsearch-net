@@ -521,18 +521,18 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
 		/// </summary>
-		public FilterContainer GeoPolygon(Expression<Func<T, object>> fieldDescriptor, IEnumerable<Tuple<double, double>> points)
+		public FilterContainer GeoPolygon(Expression<Func<T, object>> fieldDescriptor, IEnumerable<GeoLocation> points)
 		{
 			var c = CultureInfo.InvariantCulture;
-			return this._GeoPolygon(fieldDescriptor, points.Select(p => "{0}, {1}".F(p.Item1.ToString(c), p.Item2.ToString(c))).ToArray());
+			return this._GeoPolygon(fieldDescriptor, points.Select(s=>s.ToString()).ToArray());
 		}
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
 		/// </summary>
-		public FilterContainer GeoPolygon(string field, IEnumerable<Tuple<double, double>> points)
+		public FilterContainer GeoPolygon(string field, IEnumerable<GeoLocation> points)
 		{
 			var c = CultureInfo.InvariantCulture;
-			return this.GeoPolygon(field, points.Select(p => "{0}, {1}".F(p.Item1.ToString(c), p.Item2.ToString(c))).ToArray());
+			return this.GeoPolygon(field, points.Select(p=>p.ToString()).ToArray());
 		}
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
